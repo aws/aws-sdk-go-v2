@@ -2310,6 +2310,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpResetTokenVaultKeyMaterial struct {
+}
+
+func (*validateOpResetTokenVaultKeyMaterial) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetTokenVaultKeyMaterial) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetTokenVaultKeyMaterialInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetTokenVaultKeyMaterialInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRotatePaymentConnectorCredentials struct {
 }
 
@@ -3448,6 +3468,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
+func addOpResetTokenVaultKeyMaterialValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetTokenVaultKeyMaterial{}, middleware.After)
 }
 
 func addOpRotatePaymentConnectorCredentialsValidationMiddleware(stack *middleware.Stack) error {
@@ -7864,6 +7888,21 @@ func validateOAuthCredentialProvider(v *types.OAuthCredentialProvider) error {
 	}
 }
 
+func validateOnBehalfOfAuthenticationConfig(v *types.OnBehalfOfAuthenticationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnBehalfOfAuthenticationConfig"}
+	if len(v.ClientAuthenticationMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientAuthenticationMethod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeConfigType) error {
 	if v == nil {
 		return nil
@@ -7875,6 +7914,11 @@ func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeC
 	if v.TokenExchangeGrantTypeConfig != nil {
 		if err := validateTokenExchangeGrantTypeConfigType(v.TokenExchangeGrantTypeConfig); err != nil {
 			invalidParams.AddNested("TokenExchangeGrantTypeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnBehalfOfAuthenticationConfig != nil {
+		if err := validateOnBehalfOfAuthenticationConfig(v.OnBehalfOfAuthenticationConfig); err != nil {
+			invalidParams.AddNested("OnBehalfOfAuthenticationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11756,6 +11800,21 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 	if v.Policy == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetTokenVaultKeyMaterialInput(v *ResetTokenVaultKeyMaterialInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetTokenVaultKeyMaterialInput"}
+	if v.TokenVaultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenVaultId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

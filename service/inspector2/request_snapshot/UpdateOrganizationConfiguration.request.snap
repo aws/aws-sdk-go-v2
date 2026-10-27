@@ -2,4 +2,4 @@ POST /organizationconfiguration/update
 
 Content-Type: application/json
 
-{"autoEnable":{"codeRepository":true,"ec2":true,"ecr":true,"lambda":true,"lambdaCode":true}}
+{"autoEnable":{"ami":true,"codeRepository":true,"ec2":true,"ecr":true,"lambda":true,"lambdaCode":true}}

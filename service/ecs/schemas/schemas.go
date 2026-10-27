@@ -1114,7 +1114,7 @@ var Connectivity_DISCONNECTED *smithy.Schema
 var Container = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "Container",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var Container_containerArn *smithy.Schema
 
 var Container_taskArn *smithy.Schema
@@ -1150,6 +1150,8 @@ var Container_memoryReservation *smithy.Schema
 var Container_gpuIds *smithy.Schema
 
 var Container_neuronDeviceIds *smithy.Schema
+
+var Container_gpuSharingStrategy *smithy.Schema
 
 var ContainerCondition = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -1290,7 +1292,7 @@ var _ContainerImages_member *smithy.Schema
 var ContainerInstance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ContainerInstance",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var ContainerInstance_containerInstanceArn *smithy.Schema
 
 var ContainerInstance_ec2InstanceId *smithy.Schema
@@ -1326,6 +1328,8 @@ var ContainerInstance_attachments *smithy.Schema
 var ContainerInstance_tags *smithy.Schema
 
 var ContainerInstance_healthStatus *smithy.Schema
+
+var ContainerInstance_gpuDevices *smithy.Schema
 
 var ContainerInstanceField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -3248,11 +3252,41 @@ var GatewayTestTrafficHeader_name *smithy.Schema
 
 var GatewayTestTrafficHeader_values *smithy.Schema
 
+var GpuDevice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GpuDevice",
+}, smithy.ShapeTypeStructure, 5)
+var GpuDevice_gpuId *smithy.Schema
+
+var GpuDevice_sharingMode *smithy.Schema
+
+var GpuDevice_totalMemoryInMiB *smithy.Schema
+
+var GpuDevice_remainingMemoryInMiB *smithy.Schema
+
+var GpuDevice_containerCount *smithy.Schema
+
+var _GpuDevices = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GpuDevices",
+}, smithy.ShapeTypeList, 1)
+var _GpuDevices_member *smithy.Schema
+
 var _GpuIds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "GpuIds",
 }, smithy.ShapeTypeList, 1)
 var _GpuIds_member *smithy.Schema
+
+var GpuSharingMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "GpuSharingMode",
+}, smithy.ShapeTypeEnum, 3)
+var GpuSharingMode_IDLE *smithy.Schema
+
+var GpuSharingMode_NVIDIA_MPS *smithy.Schema
+
+var GpuSharingMode_DEDICATED *smithy.Schema
 
 var HealthCheck = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -4244,6 +4278,14 @@ var NoUpdateAvailableException = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
 var NoUpdateAvailableException_message *smithy.Schema
 
+var NvidiaMpsAllocation = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "NvidiaMpsAllocation",
+}, smithy.ShapeTypeStructure, 2)
+var NvidiaMpsAllocation_memory *smithy.Schema
+
+var NvidiaMpsAllocation_maxComputePercent *smithy.Schema
+
 var OSFamily = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "OSFamily",
@@ -4512,10 +4554,12 @@ var ResourceNotFoundException_message *smithy.Schema
 var ResourceRequirement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
 	Name:      "ResourceRequirement",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var ResourceRequirement_value *smithy.Schema
 
 var ResourceRequirement_type *smithy.Schema
+
+var ResourceRequirement_sharingStrategy *smithy.Schema
 
 var _ResourceRequirements = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -5319,6 +5363,12 @@ var SettingType = smithy.NewSchema(smithy.ShapeID{
 var SettingType_USER *smithy.Schema
 
 var SettingType_AWS_MANAGED *smithy.Schema
+
+var SharingStrategy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.ecs",
+	Name:      "SharingStrategy",
+}, smithy.ShapeTypeUnion, 1)
+var SharingStrategy_nvidiaMps *smithy.Schema
 
 var SortOrder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ecs",
@@ -8582,6 +8632,12 @@ func init() {
 
 	_NeuronDeviceIds_member = _NeuronDeviceIds.AddMember("member", _String)
 
+	NvidiaMpsAllocation_memory = NvidiaMpsAllocation.AddMember("memory", _BoxedInteger)
+
+	NvidiaMpsAllocation_maxComputePercent = NvidiaMpsAllocation.AddMember("maxComputePercent", _BoxedInteger)
+
+	SharingStrategy_nvidiaMps = SharingStrategy.AddMember("nvidiaMps", NvidiaMpsAllocation)
+
 	Container_containerArn = Container.AddMember("containerArn", _String)
 
 	Container_taskArn = Container.AddMember("taskArn", _String)
@@ -8617,6 +8673,8 @@ func init() {
 	Container_gpuIds = Container.AddMember("gpuIds", _GpuIds)
 
 	Container_neuronDeviceIds = Container.AddMember("neuronDeviceIds", _NeuronDeviceIds)
+
+	Container_gpuSharingStrategy = Container.AddMember("gpuSharingStrategy", SharingStrategy)
 
 	ContainerCondition_START = ContainerCondition.AddMember("START", smithyprelude.Unit)
 
@@ -8832,6 +8890,8 @@ func init() {
 
 	ResourceRequirement_type = ResourceRequirement.AddMember("type", ResourceType)
 
+	ResourceRequirement_sharingStrategy = ResourceRequirement.AddMember("sharingStrategy", SharingStrategy)
+
 	_ResourceRequirements_member = _ResourceRequirements.AddMember("member", ResourceRequirement)
 
 	FirelensConfigurationType_FLUENTD = FirelensConfigurationType.AddMember("FLUENTD", smithyprelude.Unit)
@@ -8992,6 +9052,24 @@ func init() {
 
 	ContainerInstanceHealthStatus_details = ContainerInstanceHealthStatus.AddMember("details", _InstanceHealthCheckResultList)
 
+	GpuSharingMode_IDLE = GpuSharingMode.AddMember("IDLE", smithyprelude.Unit)
+
+	GpuSharingMode_NVIDIA_MPS = GpuSharingMode.AddMember("NVIDIA_MPS", smithyprelude.Unit)
+
+	GpuSharingMode_DEDICATED = GpuSharingMode.AddMember("DEDICATED", smithyprelude.Unit)
+
+	GpuDevice_gpuId = GpuDevice.AddMember("gpuId", _String)
+
+	GpuDevice_sharingMode = GpuDevice.AddMember("sharingMode", GpuSharingMode)
+
+	GpuDevice_totalMemoryInMiB = GpuDevice.AddMember("totalMemoryInMiB", _BoxedInteger)
+
+	GpuDevice_remainingMemoryInMiB = GpuDevice.AddMember("remainingMemoryInMiB", _BoxedInteger)
+
+	GpuDevice_containerCount = GpuDevice.AddMember("containerCount", _BoxedInteger)
+
+	_GpuDevices_member = _GpuDevices.AddMember("member", GpuDevice)
+
 	ContainerInstance_containerInstanceArn = ContainerInstance.AddMember("containerInstanceArn", _String)
 
 	ContainerInstance_ec2InstanceId = ContainerInstance.AddMember("ec2InstanceId", _String)
@@ -9027,6 +9105,8 @@ func init() {
 	ContainerInstance_tags = ContainerInstance.AddMember("tags", _Tags)
 
 	ContainerInstance_healthStatus = ContainerInstance.AddMember("healthStatus", ContainerInstanceHealthStatus)
+
+	ContainerInstance_gpuDevices = ContainerInstance.AddMember("gpuDevices", _GpuDevices)
 
 	ContainerInstanceField_TAGS = ContainerInstanceField.AddMember("TAGS", smithyprelude.Unit)
 

@@ -5958,6 +5958,55 @@ func (v *InstanceAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Describes the attributes to update on a Lightsail instance when it starts.
+type InstanceAttributeUpdates struct {
+
+	// The ID of the bundle to update the instance to.
+	//
+	// Specify one of the following values for the bundle ID:
+	//
+	//   - auto – Updates an instance that runs on a previous-generation bundle to the
+	//   newer-generation equivalent of that bundle. For example, specify auto to
+	//   update an instance that runs on small_2_0 to small_3_0 .
+	//
+	//   - Newer-generation bundle ID – Updates an instance that runs on a
+	//   previous-generation bundle to the specified bundle. For example, specify
+	//   small_3_0 to update an instance that runs on small_2_0 to small_3_0 .
+	//
+	//   - Original bundle ID – Updates an instance to the previous-generation bundle
+	//   that it ran on before an earlier update. For example, specify small_2_0 to
+	//   return an instance that runs on small_3_0 to small_2_0 .
+	//
+	// The instance must be in the stopped state to update its bundle.
+	//
+	// There is no additional cost to update an instance to a newer-generation bundle.
+	BundleId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceAttributeUpdates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceAttributeUpdates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceAttributeUpdates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.InstanceAttributeUpdates_bundleId, *v.BundleId)
+	}
+}
+func (v *InstanceAttributeUpdates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceAttributeUpdates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceAttributeUpdates_bundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.InstanceAttributeUpdates_bundleId, v.BundleId)
+		}
+		return nil
+	})
+}
+
 // Describes the Amazon Elastic Compute Cloud instance and related resources to be
 // created using the create cloud formation stack operation.
 type InstanceEntry struct {

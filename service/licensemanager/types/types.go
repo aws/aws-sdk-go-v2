@@ -657,6 +657,14 @@ type Grant struct {
 	// This member is required.
 	Version *string
 
+	// The type of the grant. Valid values:
+	//
+	//   - BuyerGrant - Grants the entitlement to use the license.
+	//
+	//   - DelegateGrant - Gives the grantee read-only visibility into the licenses and
+	//   grants distributed to buyers, with no entitlement to use them.
+	GrantType GrantType
+
 	// The options specified for the grant.
 	Options *Options
 
@@ -681,6 +689,9 @@ func (v *Grant) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.GrantStatus != "" {
 		s.WriteString(schemas.Grant_GrantStatus, string(v.GrantStatus))
+	}
+	if v.GrantType != "" {
+		s.WriteString(schemas.Grant_GrantType, string(v.GrantType))
 	}
 	serializeAllowedOperationList(s, schemas.Grant_GrantedOperations, v.GrantedOperations)
 	if v.GranteePrincipalArn != nil {
@@ -722,6 +733,13 @@ func (v *Grant) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.GrantStatus = GrantStatus(ev)
+			return nil
+		case schemas.Grant_GrantType:
+			var ev string
+			if err := d.ReadString(schemas.Grant_GrantType, &ev); err != nil {
+				return err
+			}
+			v.GrantType = GrantType(ev)
 			return nil
 		case schemas.Grant_GrantedOperations:
 			return deserializeAllowedOperationList(d, schemas.Grant_GrantedOperations, &v.GrantedOperations)
@@ -2513,17 +2531,19 @@ func (v *Metadata) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// The options you can specify when you create a new version of a grant, such as
-// activation override behavior. For more information, see [Granted licenses in License Manager]in the License Manager
-// User Guide.
+// The options you can specify when you create a grant or a new version of a
+// grant, such as activation override behavior. For more information, see [Granted licenses in License Manager]in the
+// License Manager User Guide.
 //
 // [Granted licenses in License Manager]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
 type Options struct {
 
 	// An activation option for your grant that determines the behavior of activating
 	// a grant. Activation options can only be used with granted licenses sourced from
-	// the Amazon Web Services Marketplace. Additionally, the operation must specify
-	// the value of ACTIVE for the Status parameter.
+	// the Amazon Web Services Marketplace. Additionally, the operation must activate
+	// the grant. For the CreateGrantVersion operation, specify ACTIVE for the Status
+	// parameter. For the CreateGrant operation, specify ACTIVE for the DesiredStatus
+	// option.
 	//
 	//   - As a license administrator, you can optionally specify an
 	//   ActivationOverrideBehavior when activating a grant.
@@ -2543,6 +2563,16 @@ type Options struct {
 	// will also replace their previously activated grants with this activated grant.
 	ActivationOverrideBehavior ActivationOverrideBehavior
 
+	// The status of the grant after License Manager creates it. The only supported
+	// value is ACTIVE . Specify ACTIVE to create and activate the grant in one
+	// request.
+	//
+	// You can specify this option only for the CreateGrant operation, and only when
+	// the grant principal is an organization or an organizational unit (OU). To change
+	// the status of an existing grant, use the Status parameter of the
+	// CreateGrantVersion operation.
+	DesiredStatus GrantStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -2556,6 +2586,9 @@ func (v *Options) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActivationOverrideBehavior != "" {
 		s.WriteString(schemas.Options_ActivationOverrideBehavior, string(v.ActivationOverrideBehavior))
 	}
+	if v.DesiredStatus != "" {
+		s.WriteString(schemas.Options_DesiredStatus, string(v.DesiredStatus))
+	}
 }
 func (v *Options) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Options, func(s *smithy.Schema) error {
@@ -2566,6 +2599,13 @@ func (v *Options) Deserialize(d smithy.ShapeDeserializer) error {
 				return err
 			}
 			v.ActivationOverrideBehavior = ActivationOverrideBehavior(ev)
+			return nil
+		case schemas.Options_DesiredStatus:
+			var ev string
+			if err := d.ReadString(schemas.Options_DesiredStatus, &ev); err != nil {
+				return err
+			}
+			v.DesiredStatus = GrantStatus(ev)
 			return nil
 		}
 		return nil
@@ -2857,6 +2897,14 @@ type ReceivedMetadata struct {
 	// Allowed operations.
 	AllowedOperations []AllowedOperation
 
+	// The type of the grant through which the license was received. Valid values:
+	//
+	//   - BuyerGrant - Grants you the entitlement to use the license.
+	//
+	//   - DelegateGrant - Gives you read-only visibility into the licenses and grants
+	//   distributed to buyers, with no entitlement to use them.
+	GrantType GrantType
+
 	// Received status.
 	ReceivedStatus ReceivedStatus
 
@@ -2874,6 +2922,9 @@ func (v *ReceivedMetadata) Serialize(s smithy.ShapeSerializer) {
 
 func (v *ReceivedMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeAllowedOperationList(s, schemas.ReceivedMetadata_AllowedOperations, v.AllowedOperations)
+	if v.GrantType != "" {
+		s.WriteString(schemas.ReceivedMetadata_GrantType, string(v.GrantType))
+	}
 	if v.ReceivedStatus != "" {
 		s.WriteString(schemas.ReceivedMetadata_ReceivedStatus, string(v.ReceivedStatus))
 	}
@@ -2886,6 +2937,13 @@ func (v *ReceivedMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.ReceivedMetadata_AllowedOperations:
 			return deserializeAllowedOperationList(d, schemas.ReceivedMetadata_AllowedOperations, &v.AllowedOperations)
+		case schemas.ReceivedMetadata_GrantType:
+			var ev string
+			if err := d.ReadString(schemas.ReceivedMetadata_GrantType, &ev); err != nil {
+				return err
+			}
+			v.GrantType = GrantType(ev)
+			return nil
 		case schemas.ReceivedMetadata_ReceivedStatus:
 			var ev string
 			if err := d.ReadString(schemas.ReceivedMetadata_ReceivedStatus, &ev); err != nil {

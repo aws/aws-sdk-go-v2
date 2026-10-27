@@ -40338,6 +40338,76 @@ func (m *awsEc2query_serializeOpGetImageBlockPublicAccessState) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpGetImageFindings struct {
+}
+
+func (*awsEc2query_serializeOpGetImageFindings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpGetImageFindings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetImageFindingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetImageFindings")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentGetImageFindingsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpGetInstanceMetadataDefaults struct {
 }
 
@@ -60083,6 +60153,13 @@ func awsEc2query_serializeDocumentImageCriterionRequest(v *types.ImageCriterionR
 		}
 	}
 
+	if v.ScanResultCondition != nil {
+		objectKey := object.Key("ScanResultCondition")
+		if err := awsEc2query_serializeDocumentScanResultConditionRequest(v.ScanResultCondition, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -66144,6 +66221,48 @@ func awsEc2query_serializeDocumentS3Storage(v *types.S3Storage, value query.Valu
 	if v.UploadPolicySignature != nil {
 		objectKey := object.Key("UploadPolicySignature")
 		objectKey.String(*v.UploadPolicySignature)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeDocumentScanResultConditionRequest(v *types.ScanResultConditionRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxDaysSinceCriticalFixAvailable != nil {
+		objectKey := object.Key("MaxDaysSinceCriticalFixAvailable")
+		objectKey.Integer(*v.MaxDaysSinceCriticalFixAvailable)
+	}
+
+	if v.MaxDaysSinceHighFixAvailable != nil {
+		objectKey := object.Key("MaxDaysSinceHighFixAvailable")
+		objectKey.Integer(*v.MaxDaysSinceHighFixAvailable)
+	}
+
+	if v.MaxDaysSinceInformationalFixAvailable != nil {
+		objectKey := object.Key("MaxDaysSinceInformationalFixAvailable")
+		objectKey.Integer(*v.MaxDaysSinceInformationalFixAvailable)
+	}
+
+	if v.MaxDaysSinceLastFindingScan != nil {
+		objectKey := object.Key("MaxDaysSinceLastFindingScan")
+		objectKey.Integer(*v.MaxDaysSinceLastFindingScan)
+	}
+
+	if v.MaxDaysSinceLowFixAvailable != nil {
+		objectKey := object.Key("MaxDaysSinceLowFixAvailable")
+		objectKey.Integer(*v.MaxDaysSinceLowFixAvailable)
+	}
+
+	if v.MaxDaysSinceMediumFixAvailable != nil {
+		objectKey := object.Key("MaxDaysSinceMediumFixAvailable")
+		objectKey.Integer(*v.MaxDaysSinceMediumFixAvailable)
+	}
+
+	if len(v.MaximumSeverityLabel) > 0 {
+		objectKey := object.Key("MaximumSeverityLabel")
+		objectKey.String(string(v.MaximumSeverityLabel))
 	}
 
 	return nil
@@ -87311,6 +87430,33 @@ func awsEc2query_serializeOpDocumentGetImageBlockPublicAccessStateInput(v *GetIm
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentGetImageFindingsInput(v *GetImageFindingsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
 	}
 
 	return nil

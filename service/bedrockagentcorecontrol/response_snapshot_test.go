@@ -3355,6 +3355,9 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
@@ -3429,6 +3432,9 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
@@ -7317,6 +7323,9 @@ func TestCheckResponseSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
@@ -10419,6 +10428,34 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "PutResourcePolicy.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	want := &ResetTokenVaultKeyMaterialOutput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+		KmsConfiguration: &types.KmsConfiguration{
+			KeyType:   types.KeyType("CustomerManagedKey"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResetTokenVaultKeyMaterial.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ResetTokenVaultKeyMaterial(context.Background(), &ResetTokenVaultKeyMaterialInput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ResetTokenVaultKeyMaterial.response", err)
 	}
 }
 
@@ -13575,6 +13612,9 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
@@ -13651,6 +13691,9 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),

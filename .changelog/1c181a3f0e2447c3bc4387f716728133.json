@@ -1,0 +1,8 @@
+{
+    "id": "1c181a3f-0e24-47c3-bc43-87f716728133",
+    "type": "feature",
+    "description": "Adding support for Machine Image scan",
+    "modules": [
+        "service/inspector2"
+    ]
+}

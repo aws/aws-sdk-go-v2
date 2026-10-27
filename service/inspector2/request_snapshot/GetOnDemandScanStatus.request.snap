@@ -1,0 +1,5 @@
+POST /ondemand/scan/status
+
+Content-Type: application/json
+
+{"resourceId":"__ResourceId__","resourceType":"AMI","scanId":"__ScanId__"}

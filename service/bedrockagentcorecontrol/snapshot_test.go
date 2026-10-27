@@ -1706,6 +1706,18 @@ func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetTokenVaultKeyMaterial(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ResetTokenVaultKeyMaterial")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RotatePaymentConnectorCredentials(context.Background(), nil, func(o *Options) {
@@ -3750,6 +3762,18 @@ func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
 	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ResetTokenVaultKeyMaterial(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ResetTokenVaultKeyMaterial")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

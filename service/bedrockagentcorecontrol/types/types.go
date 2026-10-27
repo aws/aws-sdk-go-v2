@@ -15918,6 +15918,46 @@ func (v *OAuthCredentialProvider) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Specifies the client authentication method to use for the on-behalf-of token
+// exchange.
+type OnBehalfOfAuthenticationConfig struct {
+
+	// The client authentication method to use during the on-behalf-of token exchange.
+	// The NO_CLIENT option omits the clientId and clientSecret during the
+	// on-behalf-of token exchange with the identity provider.
+	//
+	// This member is required.
+	ClientAuthenticationMethod OnBehalfOfClientAuthenticationMethod
+
+	noSmithyDocumentSerde
+}
+
+func (v *OnBehalfOfAuthenticationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnBehalfOfAuthenticationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnBehalfOfAuthenticationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientAuthenticationMethod != "" {
+		s.WriteString(schemas.OnBehalfOfAuthenticationConfig_clientAuthenticationMethod, string(v.ClientAuthenticationMethod))
+	}
+}
+func (v *OnBehalfOfAuthenticationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnBehalfOfAuthenticationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnBehalfOfAuthenticationConfig_clientAuthenticationMethod:
+			var ev string
+			if err := d.ReadString(schemas.OnBehalfOfAuthenticationConfig_clientAuthenticationMethod, &ev); err != nil {
+				return err
+			}
+			v.ClientAuthenticationMethod = OnBehalfOfClientAuthenticationMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for on-behalf-of token exchange.
 type OnBehalfOfTokenExchangeConfigType struct {
 
@@ -15925,6 +15965,13 @@ type OnBehalfOfTokenExchangeConfigType struct {
 	//
 	// This member is required.
 	GrantType OnBehalfOfTokenExchangeGrantTypeType
+
+	// Specify the client authentication configuration to use for the on-behalf-of
+	// token exchange. With this configuration, you override the provider level client
+	// authentication method for the on-behalf-of exchange with the identity provider.
+	// If you don't specify this configuration, we use the provider level client
+	// authentication method.
+	OnBehalfOfAuthenticationConfig *OnBehalfOfAuthenticationConfig
 
 	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693).
 	TokenExchangeGrantTypeConfig *TokenExchangeGrantTypeConfigType
@@ -15942,6 +15989,11 @@ func (v *OnBehalfOfTokenExchangeConfigType) SerializeMembers(s smithy.ShapeSeria
 	if v.GrantType != "" {
 		s.WriteString(schemas.OnBehalfOfTokenExchangeConfigType_grantType, string(v.GrantType))
 	}
+	if v.OnBehalfOfAuthenticationConfig != nil {
+		s.WriteStruct(schemas.OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig)
+		v.OnBehalfOfAuthenticationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.TokenExchangeGrantTypeConfig != nil {
 		s.WriteStruct(schemas.OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig)
 		v.TokenExchangeGrantTypeConfig.SerializeMembers(s)
@@ -15958,6 +16010,9 @@ func (v *OnBehalfOfTokenExchangeConfigType) Deserialize(d smithy.ShapeDeserializ
 			}
 			v.GrantType = OnBehalfOfTokenExchangeGrantTypeType(ev)
 			return nil
+		case schemas.OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig:
+			v.OnBehalfOfAuthenticationConfig = &OnBehalfOfAuthenticationConfig{}
+			return v.OnBehalfOfAuthenticationConfig.Deserialize(d)
 		case schemas.OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig:
 			v.TokenExchangeGrantTypeConfig = &TokenExchangeGrantTypeConfigType{}
 			return v.TokenExchangeGrantTypeConfig.Deserialize(d)

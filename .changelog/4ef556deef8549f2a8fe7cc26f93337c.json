@@ -1,0 +1,8 @@
+{
+    "id": "4ef556de-ef85-49f2-a8fe-7cc26f93337c",
+    "type": "feature",
+    "description": "Adds the ResetTokenVaultKeyMaterial API, which restores a token vault whose customer managed key was deleted by moving it to an AWS owned key. The reset permanently deletes the stored OAuth 2.0 tokens, users must consent again. Adds on-behalf-of token exchange client authentication override option.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

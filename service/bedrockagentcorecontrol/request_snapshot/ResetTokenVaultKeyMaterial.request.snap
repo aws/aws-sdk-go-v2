@@ -1,0 +1,5 @@
+POST /identities/reset-token-vault-key-material
+
+Content-Type: application/json
+
+{"tokenVaultId":"__TokenVaultId__"}

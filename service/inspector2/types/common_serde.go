@@ -603,6 +603,19 @@ func serializeAggregationResponseList(s smithy.ShapeSerializer, schema *smithy.S
 	s.CloseList()
 }
 
+func serializeAmiTagFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AmiTagFilter) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeArchitectureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Architecture) {
 	if v == nil {
 		return
@@ -1658,6 +1671,19 @@ func serializeNumberFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.CloseList()
 }
 
+func serializeOnDemandScanList(s smithy.ShapeSerializer, schema *smithy.Schema, v []OnDemandScan) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeOneAccountIdFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CisStringFilter) {
 	if v == nil {
 		return
@@ -1872,6 +1898,17 @@ func serializeResourceTagFilterList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeRuleSetCategories(s smithy.ShapeSerializer, schema *smithy.Schema, v []RuleSetCategory) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeScanSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ScanSource) {
 	if v == nil {
 		return
 	}
@@ -2314,6 +2351,28 @@ func deserializeAggregationResponseList(d smithy.ShapeDeserializer, s *smithy.Sc
 		}
 
 		if err := deserializeAggregationResponse(d, s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAmiTagFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AmiTagFilter) error {
+	*v = make([]AmiTagFilter, 0)
+	var vv AmiTagFilter
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AmiTagFilter
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AmiTagFilter{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -4167,6 +4226,28 @@ func deserializeNumberFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 	})
 }
 
+func deserializeOnDemandScanList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]OnDemandScan) error {
+	*v = make([]OnDemandScan, 0)
+	var vv OnDemandScan
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero OnDemandScan
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = OnDemandScan{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeOneAccountIdFilterList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CisStringFilter) error {
 	*v = make([]CisStringFilter, 0)
 	var vv CisStringFilter
@@ -4554,6 +4635,27 @@ func deserializeRuleSetCategories(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		*v = append(*v, RuleSetCategory(vv))
+		return nil
+	})
+}
+
+func deserializeScanSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ScanSource) error {
+	*v = make([]ScanSource, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ScanSource
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, ScanSource(vv))
 		return nil
 	})
 }

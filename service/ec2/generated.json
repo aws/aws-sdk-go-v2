@@ -587,6 +587,7 @@
         "api_op_GetHostReservationPurchasePreview.go",
         "api_op_GetImageAncestry.go",
         "api_op_GetImageBlockPublicAccessState.go",
+        "api_op_GetImageFindings.go",
         "api_op_GetInstanceMetadataDefaults.go",
         "api_op_GetInstanceTpmEkPub.go",
         "api_op_GetInstanceTypesFromInstanceRequirements.go",

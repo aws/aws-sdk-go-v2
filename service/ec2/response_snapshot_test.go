@@ -29681,6 +29681,15 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						WatermarkCreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
 				},
+				ScanResults: &types.ScanResults{
+					HighestFindingSeverityLabel:    types.SeverityLabel("informational"),
+					FindingScanDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					InformationalFixAvailableSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LowFixAvailableSince:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					MediumFixAvailableSince:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					HighFixAvailableSince:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CriticalFixAvailableSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
 				InstanceTypeSpecification: &types.InstanceTypeSpecification{
 					SupportedInstanceTypes: []types.InstanceTypeItem{
 						{
@@ -29816,6 +29825,15 @@ func TestCheckResponseSnapshot_DescribeImages(t *testing.T) {
 						SourceImageCreationTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						WatermarkCreationTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 					},
+				},
+				ScanResults: &types.ScanResults{
+					HighestFindingSeverityLabel:    types.SeverityLabel("informational"),
+					FindingScanDate:                ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					InformationalFixAvailableSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					LowFixAvailableSince:           ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					MediumFixAvailableSince:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					HighFixAvailableSince:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					CriticalFixAvailableSince:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				},
 				InstanceTypeSpecification: &types.InstanceTypeSpecification{
 					SupportedInstanceTypes: []types.InstanceTypeItem{
@@ -64615,6 +64633,15 @@ func TestCheckResponseSnapshot_GetAllowedImagesSettings(t *testing.T) {
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
 				},
+				ScanResultCondition: &types.ScanResultCondition{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
+				},
 			},
 			{
 				ImageProviders: []string{
@@ -64648,6 +64675,15 @@ func TestCheckResponseSnapshot_GetAllowedImagesSettings(t *testing.T) {
 						MaximumDaysSinceSourceImageCreated: ptr.Int32(1),
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
+				},
+				ScanResultCondition: &types.ScanResultCondition{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
 				},
 			},
 		},
@@ -65726,6 +65762,60 @@ func TestCheckResponseSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetImageBlockPublicAccessState.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetImageFindings(t *testing.T) {
+	want := &GetImageFindingsOutput{
+		ImageFindings: []types.ImageFinding{
+			{
+				FixAvailable:    ptr.Bool(true),
+				Score:           ptr.Float64(1.0),
+				FirstObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Title:           ptr.String("__Title__"),
+				Paths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SeverityLabel: types.SeverityLabel("informational"),
+				SnapshotId:    ptr.String("__SnapshotId__"),
+			},
+			{
+				FixAvailable:    ptr.Bool(true),
+				Score:           ptr.Float64(1.0),
+				FirstObservedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				Title:           ptr.String("__Title__"),
+				Paths: []string{
+					"__Member__",
+					"__Member__",
+				},
+				SeverityLabel: types.SeverityLabel("informational"),
+				SnapshotId:    ptr.String("__SnapshotId__"),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetImageFindings.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetImageFindings(context.Background(), &GetImageFindingsInput{
+		ImageId:    ptr.String("__ImageId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetImageFindings.response", err)
 	}
 }
 
@@ -83343,6 +83433,15 @@ func TestCheckResponseSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
 				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
+				},
 			},
 			{
 				ImageProviders: []string{
@@ -83376,6 +83475,15 @@ func TestCheckResponseSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 						MaximumDaysSinceSourceImageCreated: ptr.Int32(1),
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
+				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
 				},
 			},
 		},

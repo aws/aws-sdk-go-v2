@@ -11757,6 +11757,31 @@ func (ServiceType) Values() []ServiceType {
 	}
 }
 
+type SeverityLabel string
+
+// Enum values for SeverityLabel
+const (
+	SeverityLabelInformational SeverityLabel = "informational"
+	SeverityLabelLow           SeverityLabel = "low"
+	SeverityLabelMedium        SeverityLabel = "medium"
+	SeverityLabelHigh          SeverityLabel = "high"
+	SeverityLabelCritical      SeverityLabel = "critical"
+)
+
+// Values returns all known values for SeverityLabel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SeverityLabel) Values() []SeverityLabel {
+	return []SeverityLabel{
+		"informational",
+		"low",
+		"medium",
+		"high",
+		"critical",
+	}
+}
+
 type ShutdownBehavior string
 
 // Enum values for ShutdownBehavior

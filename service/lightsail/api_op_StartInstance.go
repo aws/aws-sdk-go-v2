@@ -45,6 +45,10 @@ type StartInstanceInput struct {
 	// This member is required.
 	InstanceName *string
 
+	// An object that describes the attributes to update on the instance before it
+	// starts.
+	AttributeUpdates *types.InstanceAttributeUpdates
+
 	noSmithyDocumentSerde
 }
 
@@ -55,6 +59,11 @@ func (v *StartInstanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeUpdates != nil {
+		s.WriteStruct(schemas.StartInstanceRequest_attributeUpdates)
+		v.AttributeUpdates.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.InstanceName != nil {
 		s.WriteString(schemas.StartInstanceRequest_instanceName, *v.InstanceName)
 	}

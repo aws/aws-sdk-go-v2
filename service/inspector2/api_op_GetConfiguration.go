@@ -65,6 +65,10 @@ func (v *GetConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 
 type GetConfigurationOutput struct {
 
+	// The current state of the Amazon Machine Image (AMI) scan configuration for the
+	// account.
+	AmiConfiguration *types.AmiConfigurationState
+
 	// Specifies how the Amazon EC2 automated scan mode is currently configured for
 	// your environment.
 	Ec2Configuration *types.Ec2ConfigurationState
@@ -86,6 +90,11 @@ func (v *GetConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiConfiguration != nil {
+		s.WriteStruct(schemas.GetConfigurationResponse_amiConfiguration)
+		v.AmiConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Ec2Configuration != nil {
 		s.WriteStruct(schemas.GetConfigurationResponse_ec2Configuration)
 		v.Ec2Configuration.SerializeMembers(s)
@@ -100,6 +109,9 @@ func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *GetConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConfigurationResponse, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.GetConfigurationResponse_amiConfiguration:
+			v.AmiConfiguration = &types.AmiConfigurationState{}
+			return v.AmiConfiguration.Deserialize(d)
 		case schemas.GetConfigurationResponse_ec2Configuration:
 			v.Ec2Configuration = &types.Ec2ConfigurationState{}
 			return v.Ec2Configuration.Deserialize(d)

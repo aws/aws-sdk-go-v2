@@ -6974,6 +6974,18 @@ func TestCheckSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetImageFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetImageFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetImageFindings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInstanceMetadataDefaults(context.Background(), nil, func(o *Options) {
@@ -16674,6 +16686,18 @@ func TestUpdateSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	_, err := svc.GetImageBlockPublicAccessState(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetImageBlockPublicAccessState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetImageFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetImageFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetImageFindings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -300,6 +300,11 @@ func TestCheckResponseSnapshot_BatchGetAccountStatus(t *testing.T) {
 						ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 						ErrorMessage: ptr.String("__ErrorMessage__"),
 					},
+					Ami: &types.State{
+						Status:       types.Status("ENABLING"),
+						ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
+						ErrorMessage: ptr.String("__ErrorMessage__"),
+					},
 				},
 			},
 			{
@@ -335,6 +340,11 @@ func TestCheckResponseSnapshot_BatchGetAccountStatus(t *testing.T) {
 						ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 						ErrorMessage: ptr.String("__ErrorMessage__"),
 					},
+					Ami: &types.State{
+						Status:       types.Status("ENABLING"),
+						ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
+						ErrorMessage: ptr.String("__ErrorMessage__"),
+					},
 				},
 			},
 		},
@@ -348,6 +358,7 @@ func TestCheckResponseSnapshot_BatchGetAccountStatus(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 				ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
@@ -361,6 +372,7 @@ func TestCheckResponseSnapshot_BatchGetAccountStatus(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 				ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
@@ -1551,6 +1563,46 @@ func TestCheckResponseSnapshot_CreateFilter(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -2292,6 +2344,46 @@ func TestCheckResponseSnapshot_CreateFindingsReport(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -2485,9 +2577,10 @@ func TestCheckResponseSnapshot_CreateFindingsReport(t *testing.T) {
 		},
 		ReportFormat: types.ReportFormat("CSV"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	})
 	if err != nil {
@@ -2713,9 +2806,10 @@ func TestCheckResponseSnapshot_CreateSbomExport(t *testing.T) {
 		},
 		ReportFormat: types.SbomReportFormat("CYCLONEDX_1_4"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 	})
 	if err != nil {
@@ -2847,6 +2941,7 @@ func TestCheckResponseSnapshot_DescribeOrganizationConfiguration(t *testing.T) {
 			Lambda:         ptr.Bool(true),
 			LambdaCode:     ptr.Bool(true),
 			CodeRepository: ptr.Bool(true),
+			Ami:            ptr.Bool(true),
 		},
 		MaxAccountLimitReached: ptr.Bool(true),
 	}
@@ -2879,6 +2974,7 @@ func TestCheckResponseSnapshot_Disable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 			},
 			{
@@ -2890,6 +2986,7 @@ func TestCheckResponseSnapshot_Disable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 			},
 		},
@@ -2903,6 +3000,7 @@ func TestCheckResponseSnapshot_Disable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 				ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
@@ -2916,6 +3014,7 @@ func TestCheckResponseSnapshot_Disable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 				ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
@@ -3006,6 +3105,7 @@ func TestCheckResponseSnapshot_Enable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 			},
 			{
@@ -3017,6 +3117,7 @@ func TestCheckResponseSnapshot_Enable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 			},
 		},
@@ -3030,6 +3131,7 @@ func TestCheckResponseSnapshot_Enable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 				ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
@@ -3043,6 +3145,7 @@ func TestCheckResponseSnapshot_Enable(t *testing.T) {
 					Lambda:         types.Status("ENABLING"),
 					LambdaCode:     types.Status("ENABLING"),
 					CodeRepository: types.Status("ENABLING"),
+					Ami:            types.Status("ENABLING"),
 				},
 				ErrorCode:    types.ErrorCode("ALREADY_ENABLED"),
 				ErrorMessage: ptr.String("__ErrorMessage__"),
@@ -3465,6 +3568,27 @@ func TestCheckResponseSnapshot_GetConfiguration(t *testing.T) {
 				Status:      types.VMScannerStatus("SUCCESS"),
 			},
 		},
+		AmiConfiguration: &types.AmiConfigurationState{
+			LastLaunchedWithin: types.AmiScanDuration("DAYS_180"),
+			CreatedWithin:      types.AmiScanDuration("DAYS_180"),
+			ScanModeConfiguration: &types.AmiScanModeConfiguration{
+				ScanMode: types.AmiScanMode("SCAN_ALL"),
+				Tags: []types.AmiTagFilter{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ExcludeCopiedAmis:    ptr.Bool(true),
+				ExcludeBackupDlmAmis: ptr.Bool(true),
+			},
+			Status:    types.AmiConfigurationStatus("SUCCESS"),
+			UpdatedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetConfiguration.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -3570,9 +3694,10 @@ func TestCheckResponseSnapshot_GetFindingsReportStatus(t *testing.T) {
 		ErrorCode:    types.ReportingErrorCode("INTERNAL_ERROR"),
 		ErrorMessage: ptr.String("__ErrorMessage__"),
 		Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		FilterCriteria: &types.FilterCriteria{
 			FindingArn: []types.StringFilter{
@@ -4097,6 +4222,46 @@ func TestCheckResponseSnapshot_GetFindingsReportStatus(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -4336,6 +4501,37 @@ func TestCheckResponseSnapshot_GetMember(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetOnDemandScanStatus(t *testing.T) {
+	want := &GetOnDemandScanStatusOutput{
+		ScanId:           ptr.String("__ScanId__"),
+		ResourceId:       ptr.String("__ResourceId__"),
+		ResourceType:     types.OnDemandResourceType("AMI"),
+		ScanStatus:       types.OnDemandScanStatus("IN_PROGRESS"),
+		ScanStatusReason: types.OnDemandScanStatusReason("ACCESS_DENIED"),
+		StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetOnDemandScanStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetOnDemandScanStatus(context.Background(), &GetOnDemandScanStatusInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ScanId:       ptr.String("__ScanId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetOnDemandScanStatus.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetSbomExport(t *testing.T) {
 	want := &GetSbomExportOutput{
 		ReportId:     ptr.String("__ReportId__"),
@@ -4344,9 +4540,10 @@ func TestCheckResponseSnapshot_GetSbomExport(t *testing.T) {
 		ErrorCode:    types.ReportingErrorCode("INTERNAL_ERROR"),
 		ErrorMessage: ptr.String("__ErrorMessage__"),
 		S3Destination: &types.Destination{
-			BucketName: ptr.String("__BucketName__"),
-			KeyPrefix:  ptr.String("__KeyPrefix__"),
-			KmsKeyArn:  ptr.String("__KmsKeyArn__"),
+			BucketName:          ptr.String("__BucketName__"),
+			KeyPrefix:           ptr.String("__KeyPrefix__"),
+			KmsKeyArn:           ptr.String("__KmsKeyArn__"),
+			ExpectedBucketOwner: ptr.String("__ExpectedBucketOwner__"),
 		},
 		FilterCriteria: &types.ResourceFilterCriteria{
 			AccountId: []types.ResourceStringFilter{
@@ -5680,6 +5877,12 @@ func TestCheckResponseSnapshot_ListCoverage(t *testing.T) {
 							"key0": "__Value__",
 						},
 					},
+					MachineImage: &types.MachineImageMetadata{
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						Platform: types.MachineImagePlatform("WINDOWS"),
+					},
 				},
 				LastScannedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 				ScanMode:          types.ScanMode("EC2_SSM_AGENT_BASED"),
@@ -5809,6 +6012,12 @@ func TestCheckResponseSnapshot_ListCoverage(t *testing.T) {
 						FunctionTags: map[string]string{
 							"key0": "__Value__",
 						},
+					},
+					MachineImage: &types.MachineImageMetadata{
+						Tags: map[string]string{
+							"key0": "__Value__",
+						},
+						Platform: types.MachineImagePlatform("WINDOWS"),
 					},
 				},
 				LastScannedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -5954,6 +6163,18 @@ func TestCheckResponseSnapshot_ListCoverage(t *testing.T) {
 				},
 				{
 					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
 					Value:      ptr.String("__Value__"),
 				},
 			},
@@ -6317,6 +6538,18 @@ func TestCheckResponseSnapshot_ListCoverageStatistics(t *testing.T) {
 				},
 				{
 					Comparison: types.CoverageStringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageTags: []types.CoverageMapFilter{
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.CoverageMapComparison("EQUALS"),
+					Key:        ptr.String("__Key__"),
 					Value:      ptr.String("__Value__"),
 				},
 			},
@@ -7100,6 +7333,46 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 							Value:      ptr.String("__Value__"),
 						},
 					},
+					MachineImageId: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
+					MachineImageName: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
+					MachineImageOwnerAccountId: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
+					MachineImagePlatform: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
 					CloudProvider: []types.StringFilter{
 						{
 							Comparison: types.StringComparison("EQUALS"),
@@ -7827,6 +8100,46 @@ func TestCheckResponseSnapshot_ListFilters(t *testing.T) {
 							Value:      ptr.String("__Value__"),
 						},
 					},
+					MachineImageId: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
+					MachineImageName: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
+					MachineImageOwnerAccountId: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
+					MachineImagePlatform: []types.StringFilter{
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+						{
+							Comparison: types.StringComparison("EQUALS"),
+							Value:      ptr.String("__Value__"),
+						},
+					},
 					CloudProvider: []types.StringFilter{
 						{
 							Comparison: types.StringComparison("EQUALS"),
@@ -8230,6 +8543,19 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 								IntegrationArn: ptr.String("__IntegrationArn__"),
 								ProviderType:   types.CodeRepositoryProviderType("GITHUB"),
 							},
+							MachineImage: &types.MachineImageDetails{
+								MachineImageId:     ptr.String("__MachineImageId__"),
+								Name:               ptr.String("__Name__"),
+								OwnerAccountId:     ptr.String("__OwnerAccountId__"),
+								Platform:           ptr.String("__Platform__"),
+								Architecture:       types.Architecture("X86_64"),
+								CreationDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								State:              ptr.String("__State__"),
+								IsPublic:           ptr.Bool(true),
+								RootDeviceType:     ptr.String("__RootDeviceType__"),
+								VirtualizationType: ptr.String("__VirtualizationType__"),
+								SourceResourceId:   ptr.String("__SourceResourceId__"),
+							},
 							Vm: &types.Vm{
 								Type:             ptr.String("__Type__"),
 								VmName:           ptr.String("__VmName__"),
@@ -8376,6 +8702,19 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 								ProjectName:    ptr.String("__ProjectName__"),
 								IntegrationArn: ptr.String("__IntegrationArn__"),
 								ProviderType:   types.CodeRepositoryProviderType("GITHUB"),
+							},
+							MachineImage: &types.MachineImageDetails{
+								MachineImageId:     ptr.String("__MachineImageId__"),
+								Name:               ptr.String("__Name__"),
+								OwnerAccountId:     ptr.String("__OwnerAccountId__"),
+								Platform:           ptr.String("__Platform__"),
+								Architecture:       types.Architecture("X86_64"),
+								CreationDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								State:              ptr.String("__State__"),
+								IsPublic:           ptr.Bool(true),
+								RootDeviceType:     ptr.String("__RootDeviceType__"),
+								VirtualizationType: ptr.String("__VirtualizationType__"),
+								SourceResourceId:   ptr.String("__SourceResourceId__"),
 							},
 							Vm: &types.Vm{
 								Type:             ptr.String("__Type__"),
@@ -8675,6 +9014,19 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 								IntegrationArn: ptr.String("__IntegrationArn__"),
 								ProviderType:   types.CodeRepositoryProviderType("GITHUB"),
 							},
+							MachineImage: &types.MachineImageDetails{
+								MachineImageId:     ptr.String("__MachineImageId__"),
+								Name:               ptr.String("__Name__"),
+								OwnerAccountId:     ptr.String("__OwnerAccountId__"),
+								Platform:           ptr.String("__Platform__"),
+								Architecture:       types.Architecture("X86_64"),
+								CreationDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								State:              ptr.String("__State__"),
+								IsPublic:           ptr.Bool(true),
+								RootDeviceType:     ptr.String("__RootDeviceType__"),
+								VirtualizationType: ptr.String("__VirtualizationType__"),
+								SourceResourceId:   ptr.String("__SourceResourceId__"),
+							},
 							Vm: &types.Vm{
 								Type:             ptr.String("__Type__"),
 								VmName:           ptr.String("__VmName__"),
@@ -8821,6 +9173,19 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 								ProjectName:    ptr.String("__ProjectName__"),
 								IntegrationArn: ptr.String("__IntegrationArn__"),
 								ProviderType:   types.CodeRepositoryProviderType("GITHUB"),
+							},
+							MachineImage: &types.MachineImageDetails{
+								MachineImageId:     ptr.String("__MachineImageId__"),
+								Name:               ptr.String("__Name__"),
+								OwnerAccountId:     ptr.String("__OwnerAccountId__"),
+								Platform:           ptr.String("__Platform__"),
+								Architecture:       types.Architecture("X86_64"),
+								CreationDate:       ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+								State:              ptr.String("__State__"),
+								IsPublic:           ptr.Bool(true),
+								RootDeviceType:     ptr.String("__RootDeviceType__"),
+								VirtualizationType: ptr.String("__VirtualizationType__"),
+								SourceResourceId:   ptr.String("__SourceResourceId__"),
 							},
 							Vm: &types.Vm{
 								Type:             ptr.String("__Type__"),
@@ -9563,6 +9928,46 @@ func TestCheckResponseSnapshot_ListFindings(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -9803,6 +10208,52 @@ func TestCheckResponseSnapshot_ListMembers(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListMembers.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListOnDemandScans(t *testing.T) {
+	want := &ListOnDemandScansOutput{
+		Items: []types.OnDemandScan{
+			{
+				ScanId:           ptr.String("__ScanId__"),
+				ResourceId:       ptr.String("__ResourceId__"),
+				ResourceType:     types.OnDemandResourceType("AMI"),
+				ScanStatus:       types.OnDemandScanStatus("IN_PROGRESS"),
+				ScanStatusReason: types.OnDemandScanStatusReason("ACCESS_DENIED"),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ScanId:           ptr.String("__ScanId__"),
+				ResourceId:       ptr.String("__ResourceId__"),
+				ResourceType:     types.OnDemandResourceType("AMI"),
+				ScanStatus:       types.OnDemandScanStatus("IN_PROGRESS"),
+				ScanStatusReason: types.OnDemandScanStatusReason("ACCESS_DENIED"),
+				StartedAt:        ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				CompletedAt:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListOnDemandScans.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListOnDemandScans(context.Background(), &ListOnDemandScansInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+		MaxResults:   ptr.Int32(1),
+		NextToken:    ptr.String("__NextToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListOnDemandScans.response", err)
 	}
 }
 
@@ -10181,6 +10632,31 @@ func TestCheckResponseSnapshot_StartCodeSecurityScan(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartOnDemandScan(t *testing.T) {
+	want := &StartOnDemandScanOutput{
+		ScanId: ptr.String("__ScanId__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartOnDemandScan.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartOnDemandScan(context.Background(), &StartOnDemandScanInput{
+		ResourceId:   ptr.String("__ResourceId__"),
+		ResourceType: types.OnDemandResourceType("AMI"),
+		ClientToken:  ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartOnDemandScan.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StopCisSession(t *testing.T) {
 	want := &StopCisSessionOutput{}
 	status, header, body, err := serdeRespReadSnapshot("StopCisSession.response")
@@ -10402,9 +10878,29 @@ func TestCheckResponseSnapshot_UpdateConfiguration(t *testing.T) {
 			ScanMode:          types.Ec2ScanMode("EC2_SSM_AGENT_BASED"),
 			ActivateVMScanner: ptr.Bool(true),
 		},
+		AmiConfiguration: &types.AmiConfiguration{
+			LastLaunchedWithin: types.AmiScanDuration("DAYS_180"),
+			CreatedWithin:      types.AmiScanDuration("DAYS_180"),
+			ScanModeConfiguration: &types.AmiScanModeConfiguration{
+				ScanMode: types.AmiScanMode("SCAN_ALL"),
+				Tags: []types.AmiTagFilter{
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+					{
+						Key:   ptr.String("__Key__"),
+						Value: ptr.String("__Value__"),
+					},
+				},
+				ExcludeCopiedAmis:    ptr.Bool(true),
+				ExcludeBackupDlmAmis: ptr.Bool(true),
+			},
+		},
 		UpdateConfigurationInheritance: &types.UpdateConfigurationInheritance{
 			Ec2Configuration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
 			EcrConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
+			AmiConfiguration: types.InheritanceMode("INHERIT_FROM_ADMIN"),
 		},
 	})
 	if err != nil {
@@ -11095,6 +11591,46 @@ func TestCheckResponseSnapshot_UpdateFilter(t *testing.T) {
 					Value:      ptr.String("__Value__"),
 				},
 			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
 			CloudProvider: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
@@ -11330,6 +11866,7 @@ func TestCheckResponseSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 			Lambda:         ptr.Bool(true),
 			LambdaCode:     ptr.Bool(true),
 			CodeRepository: ptr.Bool(true),
+			Ami:            ptr.Bool(true),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("UpdateOrganizationConfiguration.response")
@@ -11347,6 +11884,7 @@ func TestCheckResponseSnapshot_UpdateOrganizationConfiguration(t *testing.T) {
 			Lambda:         ptr.Bool(true),
 			LambdaCode:     ptr.Bool(true),
 			CodeRepository: ptr.Bool(true),
+			Ami:            ptr.Bool(true),
 		},
 	})
 	if err != nil {
@@ -11913,6 +12451,46 @@ func TestCheckResponseSnapshot_Error_BadRequestException(t *testing.T) {
 				},
 			},
 			CodeRepositoryProviderType: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageName: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImageOwnerAccountId: []types.StringFilter{
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+				{
+					Comparison: types.StringComparison("EQUALS"),
+					Value:      ptr.String("__Value__"),
+				},
+			},
+			MachineImagePlatform: []types.StringFilter{
 				{
 					Comparison: types.StringComparison("EQUALS"),
 					Value:      ptr.String("__Value__"),

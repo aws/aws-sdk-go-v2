@@ -11392,6 +11392,9 @@ func TestCheckResponseSnapshot_StartInstance(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StartInstance(context.Background(), &StartInstanceInput{
 		InstanceName: ptr.String("__InstanceName__"),
+		AttributeUpdates: &types.InstanceAttributeUpdates{
+			BundleId: ptr.String("__BundleId__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -1,0 +1,8 @@
+{
+    "id": "5e23dcd6-4703-4d26-adb7-162f78635b1e",
+    "type": "feature",
+    "description": "AWS License Manager now supports delegate grants for read-only visibility into license distributions. CreateGrant accepts a new GrantType (BuyerGrant or DelegateGrant) and a desired status at distribution time.",
+    "modules": [
+        "service/licensemanager"
+    ]
+}

@@ -133,6 +133,24 @@ func ExampleServiceConnectContainerConfiguration_outputUsage() {
 
 var _ types.ServiceConnectContainerLogLevel
 
+func ExampleSharingStrategy_outputUsage() {
+	var union types.SharingStrategy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SharingStrategyMemberNvidiaMps:
+		_ = v.Value // Value is types.NvidiaMpsAllocation
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.NvidiaMpsAllocation
+
 func ExampleUpdateGatewayConfiguration_outputUsage() {
 	var union types.UpdateGatewayConfiguration
 	// type switches can be used to check the union value

@@ -7130,6 +7130,26 @@ func (m *validateOpGetImageAncestry) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetImageFindings struct {
+}
+
+func (*validateOpGetImageFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetImageFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetImageFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetImageFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetInstanceTpmEkPub struct {
 }
 
@@ -12792,6 +12812,10 @@ func addOpGetHostReservationPurchasePreviewValidationMiddleware(stack *middlewar
 
 func addOpGetImageAncestryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetImageAncestry{}, middleware.After)
+}
+
+func addOpGetImageFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetImageFindings{}, middleware.After)
 }
 
 func addOpGetInstanceTpmEkPubValidationMiddleware(stack *middleware.Stack) error {
@@ -20655,6 +20679,21 @@ func validateOpGetImageAncestryInput(v *GetImageAncestryInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetImageAncestryInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetImageFindingsInput(v *GetImageFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetImageFindingsInput"}
 	if v.ImageId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
 	}

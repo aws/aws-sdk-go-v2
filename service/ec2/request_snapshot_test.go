@@ -26946,6 +26946,36 @@ func TestCheckRequestSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetImageFindings(t *testing.T) {
+	input := &GetImageFindingsInput{
+		ImageId:    ptr.String("__ImageId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetImageFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetImageFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
 	input := &GetInstanceMetadataDefaultsInput{
 		DryRun: ptr.Bool(true),
@@ -35507,6 +35537,15 @@ func TestCheckRequestSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *tes
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
 				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
+				},
 			},
 			{
 				ImageProviders: []string{
@@ -35540,6 +35579,15 @@ func TestCheckRequestSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *tes
 						MaximumDaysSinceSourceImageCreated: ptr.Int32(1),
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
+				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
 				},
 			},
 		},
@@ -66478,6 +66526,36 @@ func TestUpdateRequestSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_GetImageFindings(t *testing.T) {
+	input := &GetImageFindingsInput{
+		ImageId:    ptr.String("__ImageId__"),
+		MaxResults: ptr.Int32(1),
+		NextToken:  ptr.String("__NextToken__"),
+		DryRun:     ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetImageFindings(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetImageFindings"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_GetInstanceMetadataDefaults(t *testing.T) {
 	input := &GetInstanceMetadataDefaultsInput{
 		DryRun: ptr.Bool(true),
@@ -75039,6 +75117,15 @@ func TestUpdateRequestSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
 				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
+				},
 			},
 			{
 				ImageProviders: []string{
@@ -75072,6 +75159,15 @@ func TestUpdateRequestSnapshot_ReplaceImageCriteriaInAllowedImagesSettings(t *te
 						MaximumDaysSinceSourceImageCreated: ptr.Int32(1),
 						MaximumDaysSinceWatermarkCreated:   ptr.Int32(1),
 					},
+				},
+				ScanResultCondition: &types.ScanResultConditionRequest{
+					MaxDaysSinceLastFindingScan:           ptr.Int32(1),
+					MaximumSeverityLabel:                  types.SeverityLabel("informational"),
+					MaxDaysSinceInformationalFixAvailable: ptr.Int32(1),
+					MaxDaysSinceLowFixAvailable:           ptr.Int32(1),
+					MaxDaysSinceMediumFixAvailable:        ptr.Int32(1),
+					MaxDaysSinceHighFixAvailable:          ptr.Int32(1),
+					MaxDaysSinceCriticalFixAvailable:      ptr.Int32(1),
 				},
 			},
 		},

@@ -856,6 +856,9 @@ type AmiAggregation struct {
 	// The IDs of AMIs to aggregate findings for.
 	Amis []StringFilter
 
+	// The scan sources to filter the aggregation results by.
+	ScanSources []ScanSource
+
 	// The value to sort results by.
 	SortBy AmiSortBy
 
@@ -873,6 +876,7 @@ func (v *AmiAggregation) Serialize(s smithy.ShapeSerializer) {
 
 func (v *AmiAggregation) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeStringFilterList(s, schemas.AmiAggregation_amis, v.Amis)
+	serializeScanSourceList(s, schemas.AmiAggregation_scanSources, v.ScanSources)
 	if v.SortBy != "" {
 		s.WriteString(schemas.AmiAggregation_sortBy, string(v.SortBy))
 	}
@@ -885,6 +889,8 @@ func (v *AmiAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.AmiAggregation_amis:
 			return deserializeStringFilterList(d, schemas.AmiAggregation_amis, &v.Amis)
+		case schemas.AmiAggregation_scanSources:
+			return deserializeScanSourceList(d, schemas.AmiAggregation_scanSources, &v.ScanSources)
 		case schemas.AmiAggregation_sortBy:
 			var ev string
 			if err := d.ReadString(schemas.AmiAggregation_sortBy, &ev); err != nil {
@@ -952,6 +958,10 @@ type AmiAggregationResponse struct {
 	//   - An Azure region, such as eastus .
 	CloudRegion *string
 
+	// The source of the scan that generated the findings for the Amazon Machine Image
+	// (AMI).
+	ScanSource ScanSource
+
 	// An object that contains the count of matched findings per severity.
 	SeverityCounts *SeverityCounts
 
@@ -988,6 +998,9 @@ func (v *AmiAggregationResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.CloudRegion != nil {
 		s.WriteString(schemas.AmiAggregationResponse_cloudRegion, *v.CloudRegion)
+	}
+	if v.ScanSource != "" {
+		s.WriteString(schemas.AmiAggregationResponse_scanSource, string(v.ScanSource))
 	}
 	if v.SeverityCounts != nil {
 		s.WriteStruct(schemas.AmiAggregationResponse_severityCounts)
@@ -1026,9 +1039,271 @@ func (v *AmiAggregationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.AmiAggregationResponse_cloudRegion:
 			v.CloudRegion = new(string)
 			return d.ReadString(schemas.AmiAggregationResponse_cloudRegion, v.CloudRegion)
+		case schemas.AmiAggregationResponse_scanSource:
+			var ev string
+			if err := d.ReadString(schemas.AmiAggregationResponse_scanSource, &ev); err != nil {
+				return err
+			}
+			v.ScanSource = ScanSource(ev)
+			return nil
 		case schemas.AmiAggregationResponse_severityCounts:
 			v.SeverityCounts = &SeverityCounts{}
 			return v.SeverityCounts.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The configuration that controls how Amazon Machine Images (AMIs) are scanned
+// for an account.
+type AmiConfiguration struct {
+
+	// The scan mode configuration that determines which AMIs are scanned.
+	//
+	// This member is required.
+	ScanModeConfiguration *AmiScanModeConfiguration
+
+	// Restricts scanning to AMIs that were created within the specified duration.
+	CreatedWithin AmiScanDuration
+
+	// Restricts scanning to AMIs that were last launched within the specified
+	// duration.
+	LastLaunchedWithin AmiScanDuration
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedWithin != "" {
+		s.WriteString(schemas.AmiConfiguration_createdWithin, string(v.CreatedWithin))
+	}
+	if v.LastLaunchedWithin != "" {
+		s.WriteString(schemas.AmiConfiguration_lastLaunchedWithin, string(v.LastLaunchedWithin))
+	}
+	if v.ScanModeConfiguration != nil {
+		s.WriteStruct(schemas.AmiConfiguration_scanModeConfiguration)
+		v.ScanModeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AmiConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiConfiguration_createdWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfiguration_createdWithin, &ev); err != nil {
+				return err
+			}
+			v.CreatedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfiguration_lastLaunchedWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfiguration_lastLaunchedWithin, &ev); err != nil {
+				return err
+			}
+			v.LastLaunchedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfiguration_scanModeConfiguration:
+			v.ScanModeConfiguration = &AmiScanModeConfiguration{}
+			return v.ScanModeConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The current state of the Amazon Machine Image (AMI) scan configuration for an
+// account.
+type AmiConfigurationState struct {
+
+	// Restricts scanning to AMIs that were created within the specified duration.
+	CreatedWithin AmiScanDuration
+
+	// Restricts scanning to AMIs that were last launched within the specified
+	// duration.
+	LastLaunchedWithin AmiScanDuration
+
+	// The scan mode configuration that determines which AMIs are scanned.
+	ScanModeConfiguration *AmiScanModeConfiguration
+
+	// The status of the AMI scan configuration.
+	Status AmiConfigurationStatus
+
+	// The date and time when the AMI scan configuration was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiConfigurationState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiConfigurationState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiConfigurationState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedWithin != "" {
+		s.WriteString(schemas.AmiConfigurationState_createdWithin, string(v.CreatedWithin))
+	}
+	if v.LastLaunchedWithin != "" {
+		s.WriteString(schemas.AmiConfigurationState_lastLaunchedWithin, string(v.LastLaunchedWithin))
+	}
+	if v.ScanModeConfiguration != nil {
+		s.WriteStruct(schemas.AmiConfigurationState_scanModeConfiguration)
+		v.ScanModeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AmiConfigurationState_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AmiConfigurationState_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AmiConfigurationState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiConfigurationState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiConfigurationState_createdWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfigurationState_createdWithin, &ev); err != nil {
+				return err
+			}
+			v.CreatedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfigurationState_lastLaunchedWithin:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfigurationState_lastLaunchedWithin, &ev); err != nil {
+				return err
+			}
+			v.LastLaunchedWithin = AmiScanDuration(ev)
+			return nil
+		case schemas.AmiConfigurationState_scanModeConfiguration:
+			v.ScanModeConfiguration = &AmiScanModeConfiguration{}
+			return v.ScanModeConfiguration.Deserialize(d)
+		case schemas.AmiConfigurationState_status:
+			var ev string
+			if err := d.ReadString(schemas.AmiConfigurationState_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AmiConfigurationStatus(ev)
+			return nil
+		case schemas.AmiConfigurationState_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AmiConfigurationState_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The scan mode configuration that determines which Amazon Machine Images (AMIs)
+// are scanned.
+type AmiScanModeConfiguration struct {
+
+	// The scan mode that determines whether all AMIs are scanned or only those
+	// matching the specified tags.
+	//
+	// This member is required.
+	ScanMode AmiScanMode
+
+	// Whether to exclude AMIs created by Amazon Data Lifecycle Manager (DLM) backups
+	// from scanning.
+	ExcludeBackupDlmAmis *bool
+
+	// Whether to exclude AMIs that are copies of other AMIs from scanning.
+	ExcludeCopiedAmis *bool
+
+	// The tag filters used to select which AMIs are scanned when using targeted
+	// scanning.
+	Tags []AmiTagFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiScanModeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiScanModeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiScanModeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExcludeBackupDlmAmis != nil {
+		s.WriteBool(schemas.AmiScanModeConfiguration_excludeBackupDlmAmis, *v.ExcludeBackupDlmAmis)
+	}
+	if v.ExcludeCopiedAmis != nil {
+		s.WriteBool(schemas.AmiScanModeConfiguration_excludeCopiedAmis, *v.ExcludeCopiedAmis)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.AmiScanModeConfiguration_scanMode, string(v.ScanMode))
+	}
+	serializeAmiTagFilterList(s, schemas.AmiScanModeConfiguration_tags, v.Tags)
+}
+func (v *AmiScanModeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiScanModeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiScanModeConfiguration_excludeBackupDlmAmis:
+			v.ExcludeBackupDlmAmis = new(bool)
+			return d.ReadBool(schemas.AmiScanModeConfiguration_excludeBackupDlmAmis, v.ExcludeBackupDlmAmis)
+		case schemas.AmiScanModeConfiguration_excludeCopiedAmis:
+			v.ExcludeCopiedAmis = new(bool)
+			return d.ReadBool(schemas.AmiScanModeConfiguration_excludeCopiedAmis, v.ExcludeCopiedAmis)
+		case schemas.AmiScanModeConfiguration_scanMode:
+			var ev string
+			if err := d.ReadString(schemas.AmiScanModeConfiguration_scanMode, &ev); err != nil {
+				return err
+			}
+			v.ScanMode = AmiScanMode(ev)
+			return nil
+		case schemas.AmiScanModeConfiguration_tags:
+			return deserializeAmiTagFilterList(d, schemas.AmiScanModeConfiguration_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// A filter that matches Amazon Machine Images (AMIs) by tag key and, optionally,
+// tag value.
+type AmiTagFilter struct {
+
+	// The tag key to match against an AMI's tags.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag value to match against an AMI's tags. If omitted, the filter matches on
+	// the tag key alone.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AmiTagFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmiTagFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmiTagFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.AmiTagFilter_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.AmiTagFilter_value, *v.Value)
+	}
+}
+func (v *AmiTagFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmiTagFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmiTagFilter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.AmiTagFilter_key, v.Key)
+		case schemas.AmiTagFilter_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.AmiTagFilter_value, v.Value)
 		}
 		return nil
 	})
@@ -1147,6 +1422,10 @@ type AutoEnable struct {
 	// This member is required.
 	Ecr *bool
 
+	// Represents whether Amazon Machine Image (AMI) scans are automatically enabled
+	// for new members of your Amazon Inspector organization.
+	Ami *bool
+
 	// Represents whether code repository scans are automatically enabled for new
 	// members of your Amazon Inspector organization.
 	CodeRepository *bool
@@ -1169,6 +1448,9 @@ func (v *AutoEnable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AutoEnable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ami != nil {
+		s.WriteBool(schemas.AutoEnable_ami, *v.Ami)
+	}
 	if v.CodeRepository != nil {
 		s.WriteBool(schemas.AutoEnable_codeRepository, *v.CodeRepository)
 	}
@@ -1188,6 +1470,9 @@ func (v *AutoEnable) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *AutoEnable) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoEnable, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AutoEnable_ami:
+			v.Ami = new(bool)
+			return d.ReadBool(schemas.AutoEnable_ami, v.Ami)
 		case schemas.AutoEnable_codeRepository:
 			v.CodeRepository = new(bool)
 			return d.ReadBool(schemas.AutoEnable_codeRepository, v.CodeRepository)
@@ -5943,6 +6228,9 @@ type CoverageFilterCriteria struct {
 	// commit.
 	LastScannedCommitId []CoverageStringFilter
 
+	// The machine image tags to filter coverage results by.
+	MachineImageTags []CoverageMapFilter
+
 	// An array of Amazon Web Services resource IDs to return coverage statistics for.
 	ResourceId []CoverageStringFilter
 
@@ -6002,6 +6290,7 @@ func (v *CoverageFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_lambdaFunctionTags, v.LambdaFunctionTags)
 	serializeCoverageDateFilterList(s, schemas.CoverageFilterCriteria_lastScannedAt, v.LastScannedAt)
 	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_lastScannedCommitId, v.LastScannedCommitId)
+	serializeCoverageMapFilterList(s, schemas.CoverageFilterCriteria_machineImageTags, v.MachineImageTags)
 	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_resourceId, v.ResourceId)
 	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_resourceType, v.ResourceType)
 	serializeCoverageStringFilterList(s, schemas.CoverageFilterCriteria_scanMode, v.ScanMode)
@@ -6064,6 +6353,8 @@ func (v *CoverageFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeCoverageDateFilterList(d, schemas.CoverageFilterCriteria_lastScannedAt, &v.LastScannedAt)
 		case schemas.CoverageFilterCriteria_lastScannedCommitId:
 			return deserializeCoverageStringFilterList(d, schemas.CoverageFilterCriteria_lastScannedCommitId, &v.LastScannedCommitId)
+		case schemas.CoverageFilterCriteria_machineImageTags:
+			return deserializeCoverageMapFilterList(d, schemas.CoverageFilterCriteria_machineImageTags, &v.MachineImageTags)
 		case schemas.CoverageFilterCriteria_resourceId:
 			return deserializeCoverageStringFilterList(d, schemas.CoverageFilterCriteria_resourceId, &v.ResourceId)
 		case schemas.CoverageFilterCriteria_resourceType:
@@ -6996,6 +7287,10 @@ type Destination struct {
 	// This member is required.
 	KmsKeyArn *string
 
+	// The Amazon Web Services account ID of the expected owner of the Amazon S3
+	// bucket. If the actual bucket owner does not match, the export request fails.
+	ExpectedBucketOwner *string
+
 	// The prefix that the findings will be written under.
 	KeyPrefix *string
 
@@ -7012,6 +7307,9 @@ func (v *Destination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BucketName != nil {
 		s.WriteString(schemas.Destination_bucketName, *v.BucketName)
 	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.Destination_expectedBucketOwner, *v.ExpectedBucketOwner)
+	}
 	if v.KeyPrefix != nil {
 		s.WriteString(schemas.Destination_keyPrefix, *v.KeyPrefix)
 	}
@@ -7025,6 +7323,9 @@ func (v *Destination) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Destination_bucketName:
 			v.BucketName = new(string)
 			return d.ReadString(schemas.Destination_bucketName, v.BucketName)
+		case schemas.Destination_expectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.Destination_expectedBucketOwner, v.ExpectedBucketOwner)
 		case schemas.Destination_keyPrefix:
 			v.KeyPrefix = new(string)
 			return d.ReadString(schemas.Destination_keyPrefix, v.KeyPrefix)
@@ -8411,6 +8712,19 @@ type FilterCriteria struct {
 	// Details on the date and time a finding was last seen used to filter findings.
 	LastObservedAt []DateFilter
 
+	// The ID of the Amazon Machine Image (AMI) used to filter findings.
+	MachineImageId []StringFilter
+
+	// The name of the Amazon Machine Image (AMI) used to filter findings.
+	MachineImageName []StringFilter
+
+	// The ID of the Amazon Web Services account that owns the Amazon Machine Image
+	// (AMI) used to filter findings.
+	MachineImageOwnerAccountId []StringFilter
+
+	// The platform of the Amazon Machine Image (AMI) used to filter findings.
+	MachineImagePlatform []StringFilter
+
 	// Details on network protocol used to filter findings.
 	NetworkProtocol []StringFilter
 
@@ -8513,6 +8827,10 @@ func (v *FilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionName, v.LambdaFunctionName)
 	serializeStringFilterList(s, schemas.FilterCriteria_lambdaFunctionRuntime, v.LambdaFunctionRuntime)
 	serializeDateFilterList(s, schemas.FilterCriteria_lastObservedAt, v.LastObservedAt)
+	serializeStringFilterList(s, schemas.FilterCriteria_machineImageId, v.MachineImageId)
+	serializeStringFilterList(s, schemas.FilterCriteria_machineImageName, v.MachineImageName)
+	serializeStringFilterList(s, schemas.FilterCriteria_machineImageOwnerAccountId, v.MachineImageOwnerAccountId)
+	serializeStringFilterList(s, schemas.FilterCriteria_machineImagePlatform, v.MachineImagePlatform)
 	serializeStringFilterList(s, schemas.FilterCriteria_networkProtocol, v.NetworkProtocol)
 	serializePortRangeFilterList(s, schemas.FilterCriteria_portRange, v.PortRange)
 	serializeStringFilterList(s, schemas.FilterCriteria_relatedVulnerabilities, v.RelatedVulnerabilities)
@@ -8634,6 +8952,14 @@ func (v *FilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 			return deserializeStringFilterList(d, schemas.FilterCriteria_lambdaFunctionRuntime, &v.LambdaFunctionRuntime)
 		case schemas.FilterCriteria_lastObservedAt:
 			return deserializeDateFilterList(d, schemas.FilterCriteria_lastObservedAt, &v.LastObservedAt)
+		case schemas.FilterCriteria_machineImageId:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImageId, &v.MachineImageId)
+		case schemas.FilterCriteria_machineImageName:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImageName, &v.MachineImageName)
+		case schemas.FilterCriteria_machineImageOwnerAccountId:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImageOwnerAccountId, &v.MachineImageOwnerAccountId)
+		case schemas.FilterCriteria_machineImagePlatform:
+			return deserializeStringFilterList(d, schemas.FilterCriteria_machineImagePlatform, &v.MachineImagePlatform)
 		case schemas.FilterCriteria_networkProtocol:
 			return deserializeStringFilterList(d, schemas.FilterCriteria_networkProtocol, &v.NetworkProtocol)
 		case schemas.FilterCriteria_portRange:
@@ -10433,6 +10759,174 @@ func (v *ListCisScansFilterCriteria) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// Details about a machine image resource scanned directly by Inspector.
+type MachineImageDetails struct {
+
+	// The machine image ID (e.g., ami-0abcdef1234567890)
+	//
+	// This member is required.
+	MachineImageId *string
+
+	// CPU architecture (x86_64/arm64)
+	Architecture Architecture
+
+	// When the image was created
+	CreationDate *time.Time
+
+	// Whether the image is publicly shared
+	IsPublic *bool
+
+	// Human-readable image name
+	Name *string
+
+	// Account ID that owns the image
+	OwnerAccountId *string
+
+	// OS platform (Linux/Windows)
+	Platform *string
+
+	// Root device type (ebs/instance-store) — AWS-specific
+	RootDeviceType *string
+
+	// Source resource the image was created from (nullable)
+	SourceResourceId *string
+
+	// Image state (available/pending/deregistered)
+	State *string
+
+	// Virtualization type (hvm/paravirtual) — AWS-specific
+	VirtualizationType *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MachineImageDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineImageDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineImageDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != "" {
+		s.WriteString(schemas.MachineImageDetails_architecture, string(v.Architecture))
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.MachineImageDetails_creationDate, *v.CreationDate)
+	}
+	if v.IsPublic != nil {
+		s.WriteBool(schemas.MachineImageDetails_isPublic, *v.IsPublic)
+	}
+	if v.MachineImageId != nil {
+		s.WriteString(schemas.MachineImageDetails_machineImageId, *v.MachineImageId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MachineImageDetails_name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.MachineImageDetails_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.MachineImageDetails_platform, *v.Platform)
+	}
+	if v.RootDeviceType != nil {
+		s.WriteString(schemas.MachineImageDetails_rootDeviceType, *v.RootDeviceType)
+	}
+	if v.SourceResourceId != nil {
+		s.WriteString(schemas.MachineImageDetails_sourceResourceId, *v.SourceResourceId)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.MachineImageDetails_state, *v.State)
+	}
+	if v.VirtualizationType != nil {
+		s.WriteString(schemas.MachineImageDetails_virtualizationType, *v.VirtualizationType)
+	}
+}
+func (v *MachineImageDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineImageDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineImageDetails_architecture:
+			var ev string
+			if err := d.ReadString(schemas.MachineImageDetails_architecture, &ev); err != nil {
+				return err
+			}
+			v.Architecture = Architecture(ev)
+			return nil
+		case schemas.MachineImageDetails_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.MachineImageDetails_creationDate, v.CreationDate)
+		case schemas.MachineImageDetails_isPublic:
+			v.IsPublic = new(bool)
+			return d.ReadBool(schemas.MachineImageDetails_isPublic, v.IsPublic)
+		case schemas.MachineImageDetails_machineImageId:
+			v.MachineImageId = new(string)
+			return d.ReadString(schemas.MachineImageDetails_machineImageId, v.MachineImageId)
+		case schemas.MachineImageDetails_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MachineImageDetails_name, v.Name)
+		case schemas.MachineImageDetails_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.MachineImageDetails_ownerAccountId, v.OwnerAccountId)
+		case schemas.MachineImageDetails_platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.MachineImageDetails_platform, v.Platform)
+		case schemas.MachineImageDetails_rootDeviceType:
+			v.RootDeviceType = new(string)
+			return d.ReadString(schemas.MachineImageDetails_rootDeviceType, v.RootDeviceType)
+		case schemas.MachineImageDetails_sourceResourceId:
+			v.SourceResourceId = new(string)
+			return d.ReadString(schemas.MachineImageDetails_sourceResourceId, v.SourceResourceId)
+		case schemas.MachineImageDetails_state:
+			v.State = new(string)
+			return d.ReadString(schemas.MachineImageDetails_state, v.State)
+		case schemas.MachineImageDetails_virtualizationType:
+			v.VirtualizationType = new(string)
+			return d.ReadString(schemas.MachineImageDetails_virtualizationType, v.VirtualizationType)
+		}
+		return nil
+	})
+}
+
+// Contains metadata about a machine image associated with a covered resource.
+type MachineImageMetadata struct {
+
+	// The platform of the machine image.
+	Platform MachineImagePlatform
+
+	// The tags associated with the machine image.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MachineImageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MachineImageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MachineImageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Platform != "" {
+		s.WriteString(schemas.MachineImageMetadata_platform, string(v.Platform))
+	}
+	serializeTagMap(s, schemas.MachineImageMetadata_tags, v.Tags)
+}
+func (v *MachineImageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MachineImageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MachineImageMetadata_platform:
+			var ev string
+			if err := d.ReadString(schemas.MachineImageMetadata_platform, &ev); err != nil {
+				return err
+			}
+			v.Platform = MachineImagePlatform(ev)
+			return nil
+		case schemas.MachineImageMetadata_tags:
+			return deserializeTagMap(d, schemas.MachineImageMetadata_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // An object that describes details of a map filter.
 type MapFilter struct {
 
@@ -10835,6 +11329,114 @@ func (v *NumberFilter) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.NumberFilter_upperInclusive:
 			v.UpperInclusive = new(float64)
 			return d.ReadFloat64(schemas.NumberFilter_upperInclusive, v.UpperInclusive)
+		}
+		return nil
+	})
+}
+
+// Details of a single on-demand scan of a resource.
+type OnDemandScan struct {
+
+	// The ID of the resource that was scanned.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The type of the resource that was scanned.
+	//
+	// This member is required.
+	ResourceType OnDemandResourceType
+
+	// The unique identifier of the on-demand scan.
+	//
+	// This member is required.
+	ScanId *string
+
+	// The current status of the on-demand scan.
+	//
+	// This member is required.
+	ScanStatus OnDemandScanStatus
+
+	// The date and time, in ISO 8601 format, when the on-demand scan started.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The date and time, in ISO 8601 format, when the on-demand scan completed. This
+	// field is absent if the scan has not completed.
+	CompletedAt *time.Time
+
+	// The reason associated with the current on-demand scan status.
+	ScanStatusReason OnDemandScanStatusReason
+
+	noSmithyDocumentSerde
+}
+
+func (v *OnDemandScan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnDemandScan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnDemandScan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.OnDemandScan_completedAt, *v.CompletedAt)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.OnDemandScan_resourceId, *v.ResourceId)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.OnDemandScan_resourceType, string(v.ResourceType))
+	}
+	if v.ScanId != nil {
+		s.WriteString(schemas.OnDemandScan_scanId, *v.ScanId)
+	}
+	if v.ScanStatus != "" {
+		s.WriteString(schemas.OnDemandScan_scanStatus, string(v.ScanStatus))
+	}
+	if v.ScanStatusReason != "" {
+		s.WriteString(schemas.OnDemandScan_scanStatusReason, string(v.ScanStatusReason))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.OnDemandScan_startedAt, *v.StartedAt)
+	}
+}
+func (v *OnDemandScan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnDemandScan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnDemandScan_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.OnDemandScan_completedAt, v.CompletedAt)
+		case schemas.OnDemandScan_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.OnDemandScan_resourceId, v.ResourceId)
+		case schemas.OnDemandScan_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandScan_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = OnDemandResourceType(ev)
+			return nil
+		case schemas.OnDemandScan_scanId:
+			v.ScanId = new(string)
+			return d.ReadString(schemas.OnDemandScan_scanId, v.ScanId)
+		case schemas.OnDemandScan_scanStatus:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandScan_scanStatus, &ev); err != nil {
+				return err
+			}
+			v.ScanStatus = OnDemandScanStatus(ev)
+			return nil
+		case schemas.OnDemandScan_scanStatusReason:
+			var ev string
+			if err := d.ReadString(schemas.OnDemandScan_scanStatusReason, &ev); err != nil {
+				return err
+			}
+			v.ScanStatusReason = OnDemandScanStatusReason(ev)
+			return nil
+		case schemas.OnDemandScan_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.OnDemandScan_startedAt, v.StartedAt)
 		}
 		return nil
 	})
@@ -11982,6 +12584,9 @@ type ResourceDetails struct {
 	// An object that contains details about a container image involved in the finding.
 	Image *Image
 
+	// Details about a machine image resource scanned directly by Inspector.
+	MachineImage *MachineImageDetails
+
 	// An object that contains details about a serverless function involved in the
 	// finding.
 	ServerlessFunction *ServerlessFunction
@@ -12024,6 +12629,11 @@ func (v *ResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Image.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MachineImage != nil {
+		s.WriteStruct(schemas.ResourceDetails_machineImage)
+		v.MachineImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServerlessFunction != nil {
 		s.WriteStruct(schemas.ResourceDetails_serverlessFunction)
 		v.ServerlessFunction.SerializeMembers(s)
@@ -12053,6 +12663,9 @@ func (v *ResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceDetails_image:
 			v.Image = &Image{}
 			return v.Image.Deserialize(d)
+		case schemas.ResourceDetails_machineImage:
+			v.MachineImage = &MachineImageDetails{}
+			return v.MachineImage.Deserialize(d)
 		case schemas.ResourceDetails_serverlessFunction:
 			v.ServerlessFunction = &ServerlessFunction{}
 			return v.ServerlessFunction.Deserialize(d)
@@ -12287,6 +12900,9 @@ type ResourceScanMetadata struct {
 	// function.
 	LambdaFunction *LambdaFunctionMetadata
 
+	// The machine image metadata associated with a covered resource.
+	MachineImage *MachineImageMetadata
+
 	// The serverless function metadata associated with a covered resource.
 	ServerlessFunction *ServerlessFunctionMetadata
 
@@ -12343,6 +12959,11 @@ func (v *ResourceScanMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LambdaFunction.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.MachineImage != nil {
+		s.WriteStruct(schemas.ResourceScanMetadata_machineImage)
+		v.MachineImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ServerlessFunction != nil {
 		s.WriteStruct(schemas.ResourceScanMetadata_serverlessFunction)
 		v.ServerlessFunction.SerializeMembers(s)
@@ -12381,6 +13002,9 @@ func (v *ResourceScanMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ResourceScanMetadata_lambdaFunction:
 			v.LambdaFunction = &LambdaFunctionMetadata{}
 			return v.LambdaFunction.Deserialize(d)
+		case schemas.ResourceScanMetadata_machineImage:
+			v.MachineImage = &MachineImageMetadata{}
+			return v.MachineImage.Deserialize(d)
 		case schemas.ResourceScanMetadata_serverlessFunction:
 			v.ServerlessFunction = &ServerlessFunctionMetadata{}
 			return v.ServerlessFunction.Deserialize(d)
@@ -12409,6 +13033,9 @@ type ResourceState struct {
 	Ecr *State
 
 	// An object that described the state of Amazon Inspector scans for an account.
+	Ami *State
+
+	// An object that described the state of Amazon Inspector scans for an account.
 	CodeRepository *State
 
 	// An object that described the state of Amazon Inspector scans for an account.
@@ -12427,6 +13054,11 @@ func (v *ResourceState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ami != nil {
+		s.WriteStruct(schemas.ResourceState_ami)
+		v.Ami.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.CodeRepository != nil {
 		s.WriteStruct(schemas.ResourceState_codeRepository)
 		v.CodeRepository.SerializeMembers(s)
@@ -12456,6 +13088,9 @@ func (v *ResourceState) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceState, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceState_ami:
+			v.Ami = &State{}
+			return v.Ami.Deserialize(d)
 		case schemas.ResourceState_codeRepository:
 			v.CodeRepository = &State{}
 			return v.CodeRepository.Deserialize(d)
@@ -12490,6 +13125,9 @@ type ResourceStatus struct {
 	// This member is required.
 	Ecr Status
 
+	// The status of Amazon Machine Image (AMI) scanning for the account.
+	Ami Status
+
 	// The status of Amazon Inspector scanning for code repositories.
 	CodeRepository Status
 
@@ -12510,6 +13148,9 @@ func (v *ResourceStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ami != "" {
+		s.WriteString(schemas.ResourceStatus_ami, string(v.Ami))
+	}
 	if v.CodeRepository != "" {
 		s.WriteString(schemas.ResourceStatus_codeRepository, string(v.CodeRepository))
 	}
@@ -12529,6 +13170,13 @@ func (v *ResourceStatus) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceStatus, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceStatus_ami:
+			var ev string
+			if err := d.ReadString(schemas.ResourceStatus_ami, &ev); err != nil {
+				return err
+			}
+			v.Ami = Status(ev)
+			return nil
 		case schemas.ResourceStatus_codeRepository:
 			var ev string
 			if err := d.ReadString(schemas.ResourceStatus_codeRepository, &ev); err != nil {
@@ -12664,6 +13312,9 @@ type ScanStatus struct {
 	// INTERNAL_ERROR - Amazon Inspector has encountered an internal error for this
 	// resource. Amazon Inspector service will automatically resolve the issue and
 	// resume the scanning. No action required from the user.
+	//
+	// INVALID_ARTIFACT - Amazon Inspector couldn't scan this resource because its
+	// artifact is malformed and couldn't be safely extracted.
 	//
 	// NO_INVENTORY - Amazon Inspector couldn't find software application inventory to
 	// scan for vulnerabilities. This might be caused due to required Amazon Inspector
@@ -14432,6 +15083,13 @@ func (v *UpdateCisTargets) Deserialize(d smithy.ShapeDeserializer) error {
 // administrator.
 type UpdateConfigurationInheritance struct {
 
+	// The inheritance behavior for a scan-type configuration. Used with
+	// UpdateConfigurationInheritance to reset a member account's configuration to
+	// inherit from the delegated administrator. The only valid value is
+	// INHERIT_FROM_ADMIN , which resets the member account's configuration so that it
+	// inherits scan settings from the delegated administrator.
+	AmiConfiguration InheritanceMode
+
 	// The inheritance mode for Amazon EC2 scan configuration. Set to
 	// INHERIT_FROM_ADMIN to reset the member account's Amazon EC2 scan configuration
 	// to inherit from the delegated administrator. If omitted, the member account's
@@ -14454,6 +15112,9 @@ func (v *UpdateConfigurationInheritance) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateConfigurationInheritance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiConfiguration != "" {
+		s.WriteString(schemas.UpdateConfigurationInheritance_amiConfiguration, string(v.AmiConfiguration))
+	}
 	if v.Ec2Configuration != "" {
 		s.WriteString(schemas.UpdateConfigurationInheritance_ec2Configuration, string(v.Ec2Configuration))
 	}
@@ -14464,6 +15125,13 @@ func (v *UpdateConfigurationInheritance) SerializeMembers(s smithy.ShapeSerializ
 func (v *UpdateConfigurationInheritance) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateConfigurationInheritance, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.UpdateConfigurationInheritance_amiConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConfigurationInheritance_amiConfiguration, &ev); err != nil {
+				return err
+			}
+			v.AmiConfiguration = InheritanceMode(ev)
+			return nil
 		case schemas.UpdateConfigurationInheritance_ec2Configuration:
 			var ev string
 			if err := d.ReadString(schemas.UpdateConfigurationInheritance_ec2Configuration, &ev); err != nil {

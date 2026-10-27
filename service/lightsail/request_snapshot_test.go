@@ -4902,6 +4902,9 @@ func TestCheckRequestSnapshot_StartGUISession(t *testing.T) {
 func TestCheckRequestSnapshot_StartInstance(t *testing.T) {
 	input := &StartInstanceInput{
 		InstanceName: ptr.String("__InstanceName__"),
+		AttributeUpdates: &types.InstanceAttributeUpdates{
+			BundleId: ptr.String("__BundleId__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10391,6 +10394,9 @@ func TestUpdateRequestSnapshot_StartGUISession(t *testing.T) {
 func TestUpdateRequestSnapshot_StartInstance(t *testing.T) {
 	input := &StartInstanceInput{
 		InstanceName: ptr.String("__InstanceName__"),
+		AttributeUpdates: &types.InstanceAttributeUpdates{
+			BundleId: ptr.String("__BundleId__"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""

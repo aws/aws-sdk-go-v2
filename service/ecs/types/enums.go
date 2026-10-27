@@ -1389,6 +1389,34 @@ func (GatewayStatus) Values() []GatewayStatus {
 	}
 }
 
+type GpuSharingMode string
+
+// Enum values for GpuSharingMode
+const (
+	// No containers are assigned to the GPU, and all of its memory is available.
+	GpuSharingModeIdle GpuSharingMode = "IDLE"
+	// One or more containers share the GPU by using NVIDIA Multi-Process Service
+	// (MPS). While the GPU is in this mode, Amazon ECS assigns it only to containers
+	// that use the nvidiaMps sharing strategy.
+	GpuSharingModeNvidiaMps GpuSharingMode = "NVIDIA_MPS"
+	// One container has exclusive use of the GPU. Amazon ECS assigns GPUs this way to
+	// containers that specify value instead of sharingStrategy for the GPU resource
+	// type.
+	GpuSharingModeDedicated GpuSharingMode = "DEDICATED"
+)
+
+// Values returns all known values for GpuSharingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GpuSharingMode) Values() []GpuSharingMode {
+	return []GpuSharingMode{
+		"IDLE",
+		"NVIDIA_MPS",
+		"DEDICATED",
+	}
+}
+
 type HealthStatus string
 
 // Enum values for HealthStatus

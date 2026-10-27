@@ -967,6 +967,13 @@ var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/resourcepolicy/{resourceArn}",
 	Code: 201})
 
+var ResetTokenVaultKeyMaterial = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResetTokenVaultKeyMaterial",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/identities/reset-token-vault-key-material",
+	Code: 200})
+
 var RotatePaymentConnectorCredentials = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RotatePaymentConnectorCredentials",
@@ -6678,13 +6685,27 @@ var _OAuthScopes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _OAuthScopes_member *smithy.Schema
 
+var OnBehalfOfAuthenticationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "OnBehalfOfAuthenticationConfig",
+}, smithy.ShapeTypeStructure, 1)
+var OnBehalfOfAuthenticationConfig_clientAuthenticationMethod *smithy.Schema
+
+var OnBehalfOfClientAuthenticationMethod = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "OnBehalfOfClientAuthenticationMethod",
+}, smithy.ShapeTypeEnum, 1)
+var OnBehalfOfClientAuthenticationMethod_NO_CLIENT *smithy.Schema
+
 var OnBehalfOfTokenExchangeConfigType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "OnBehalfOfTokenExchangeConfigType",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var OnBehalfOfTokenExchangeConfigType_grantType *smithy.Schema
 
 var OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig *smithy.Schema
+
+var OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig *smithy.Schema
 
 var OnBehalfOfTokenExchangeGrantTypeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -12928,6 +12949,22 @@ var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var PutResourcePolicyResponse_policy *smithy.Schema
 
+var ResetTokenVaultKeyMaterialRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResetTokenVaultKeyMaterialRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ResetTokenVaultKeyMaterialRequest_tokenVaultId *smithy.Schema
+
+var ResetTokenVaultKeyMaterialResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResetTokenVaultKeyMaterialResponse",
+}, smithy.ShapeTypeStructure, 3)
+var ResetTokenVaultKeyMaterialResponse_tokenVaultId *smithy.Schema
+
+var ResetTokenVaultKeyMaterialResponse_kmsConfiguration *smithy.Schema
+
+var ResetTokenVaultKeyMaterialResponse_lastModifiedDate *smithy.Schema
+
 var RotatePaymentConnectorCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RotatePaymentConnectorCredentialsRequest",
@@ -15549,9 +15586,15 @@ func init() {
 
 	TokenExchangeGrantTypeConfigType_actorTokenScopes = TokenExchangeGrantTypeConfigType.AddMember("actorTokenScopes", _ScopesListType)
 
+	OnBehalfOfClientAuthenticationMethod_NO_CLIENT = OnBehalfOfClientAuthenticationMethod.AddMember("NO_CLIENT", smithyprelude.Unit)
+
+	OnBehalfOfAuthenticationConfig_clientAuthenticationMethod = OnBehalfOfAuthenticationConfig.AddMember("clientAuthenticationMethod", OnBehalfOfClientAuthenticationMethod)
+
 	OnBehalfOfTokenExchangeConfigType_grantType = OnBehalfOfTokenExchangeConfigType.AddMember("grantType", OnBehalfOfTokenExchangeGrantTypeType)
 
 	OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig = OnBehalfOfTokenExchangeConfigType.AddMember("tokenExchangeGrantTypeConfig", TokenExchangeGrantTypeConfigType)
+
+	OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig = OnBehalfOfTokenExchangeConfigType.AddMember("onBehalfOfAuthenticationConfig", OnBehalfOfAuthenticationConfig)
 
 	KmsKeySourceType_kmsKeyArn = KmsKeySourceType.AddMember("kmsKeyArn", _KmsKeyArn)
 
@@ -20266,6 +20309,14 @@ func init() {
 	PutResourcePolicyRequest_policy = PutResourcePolicyRequest.AddMember("policy", _ResourcePolicyBody)
 
 	PutResourcePolicyResponse_policy = PutResourcePolicyResponse.AddMember("policy", _ResourcePolicyBody)
+
+	ResetTokenVaultKeyMaterialRequest_tokenVaultId = ResetTokenVaultKeyMaterialRequest.AddMember("tokenVaultId", _TokenVaultIdType)
+
+	ResetTokenVaultKeyMaterialResponse_tokenVaultId = ResetTokenVaultKeyMaterialResponse.AddMember("tokenVaultId", _TokenVaultIdType)
+
+	ResetTokenVaultKeyMaterialResponse_kmsConfiguration = ResetTokenVaultKeyMaterialResponse.AddMember("kmsConfiguration", KmsConfiguration)
+
+	ResetTokenVaultKeyMaterialResponse_lastModifiedDate = ResetTokenVaultKeyMaterialResponse.AddMember("lastModifiedDate", smithyprelude.Timestamp)
 
 	RotatePaymentConnectorCredentialsRequest_paymentManagerId = RotatePaymentConnectorCredentialsRequest.AddMember("paymentManagerId", _PaymentManagerId, &smithytraits.HTTPLabel{})
 

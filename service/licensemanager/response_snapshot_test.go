@@ -324,6 +324,11 @@ func TestCheckResponseSnapshot_CreateGrant(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		GrantType: types.GrantType("BuyerGrant"),
+		Options: &types.Options{
+			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+			DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -360,6 +365,7 @@ func TestCheckResponseSnapshot_CreateGrantVersion(t *testing.T) {
 		SourceVersion: ptr.String("__SourceVersion__"),
 		Options: &types.Options{
 			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+			DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 		},
 	})
 	if err != nil {
@@ -1520,7 +1526,9 @@ func TestCheckResponseSnapshot_GetGrant(t *testing.T) {
 			},
 			Options: &types.Options{
 				ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+				DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 			},
+			GrantType: types.GrantType("BuyerGrant"),
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetGrant.response")
@@ -2556,7 +2564,9 @@ func TestCheckResponseSnapshot_ListDistributedGrants(t *testing.T) {
 				},
 				Options: &types.Options{
 					ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+					DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 				},
+				GrantType: types.GrantType("BuyerGrant"),
 			},
 			{
 				GrantArn:            ptr.String("__GrantArn__"),
@@ -2574,7 +2584,9 @@ func TestCheckResponseSnapshot_ListDistributedGrants(t *testing.T) {
 				},
 				Options: &types.Options{
 					ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+					DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 				},
+				GrantType: types.GrantType("BuyerGrant"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4750,7 +4762,9 @@ func TestCheckResponseSnapshot_ListReceivedGrants(t *testing.T) {
 				},
 				Options: &types.Options{
 					ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+					DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 				},
+				GrantType: types.GrantType("BuyerGrant"),
 			},
 			{
 				GrantArn:            ptr.String("__GrantArn__"),
@@ -4768,7 +4782,9 @@ func TestCheckResponseSnapshot_ListReceivedGrants(t *testing.T) {
 				},
 				Options: &types.Options{
 					ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+					DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 				},
+				GrantType: types.GrantType("BuyerGrant"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4832,7 +4848,9 @@ func TestCheckResponseSnapshot_ListReceivedGrantsForOrganization(t *testing.T) {
 				},
 				Options: &types.Options{
 					ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+					DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 				},
+				GrantType: types.GrantType("BuyerGrant"),
 			},
 			{
 				GrantArn:            ptr.String("__GrantArn__"),
@@ -4850,7 +4868,9 @@ func TestCheckResponseSnapshot_ListReceivedGrantsForOrganization(t *testing.T) {
 				},
 				Options: &types.Options{
 					ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+					DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 				},
+				GrantType: types.GrantType("BuyerGrant"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -4959,6 +4979,7 @@ func TestCheckResponseSnapshot_ListReceivedLicenses(t *testing.T) {
 						types.AllowedOperation("CreateGrant"),
 						types.AllowedOperation("CreateGrant"),
 					},
+					GrantType: types.GrantType("BuyerGrant"),
 				},
 			},
 			{
@@ -5025,6 +5046,7 @@ func TestCheckResponseSnapshot_ListReceivedLicenses(t *testing.T) {
 						types.AllowedOperation("CreateGrant"),
 						types.AllowedOperation("CreateGrant"),
 					},
+					GrantType: types.GrantType("BuyerGrant"),
 				},
 			},
 		},
@@ -5137,6 +5159,7 @@ func TestCheckResponseSnapshot_ListReceivedLicensesForOrganization(t *testing.T)
 						types.AllowedOperation("CreateGrant"),
 						types.AllowedOperation("CreateGrant"),
 					},
+					GrantType: types.GrantType("BuyerGrant"),
 				},
 			},
 			{
@@ -5203,6 +5226,7 @@ func TestCheckResponseSnapshot_ListReceivedLicensesForOrganization(t *testing.T)
 						types.AllowedOperation("CreateGrant"),
 						types.AllowedOperation("CreateGrant"),
 					},
+					GrantType: types.GrantType("BuyerGrant"),
 				},
 			},
 		},

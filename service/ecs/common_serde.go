@@ -77,6 +77,17 @@ func serializeServiceConnectContainerConfiguration(s smithy.ShapeSerializer, sch
 	}
 }
 
+func serializeSharingStrategy(s smithy.ShapeSerializer, schema *smithy.Schema, v types.SharingStrategy) {
+	switch vv := v.(type) {
+	case *types.SharingStrategyMemberNvidiaMps:
+		s.WriteUnion(schema, schemas.SharingStrategy_nvidiaMps)
+		s.WriteStruct(schemas.SharingStrategy_nvidiaMps)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeUpdateGatewayConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v types.UpdateGatewayConfiguration) {
 	switch vv := v.(type) {
 	case *types.UpdateGatewayConfigurationMemberHostSharedAlb:
@@ -165,6 +176,18 @@ func deserializeServiceConnectContainerConfiguration(d smithy.ShapeDeserializer,
 		switch ms {
 		case schemas.ServiceConnectContainerConfiguration_logLevel:
 			vv := &types.ServiceConnectContainerConfigurationMemberLogLevel{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+func deserializeSharingStrategy(d smithy.ShapeDeserializer, s *smithy.Schema, v *types.SharingStrategy) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.SharingStrategy_nvidiaMps:
+			vv := &types.SharingStrategyMemberNvidiaMps{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -981,6 +1004,19 @@ func serializeGatewayStatusList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeGatewaySummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewaySummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeGpuDevices(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GpuDevice) {
 	if v == nil {
 		return
 	}
@@ -3289,6 +3325,28 @@ func deserializeGatewaySummaryList(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		vv = types.GatewaySummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeGpuDevices(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.GpuDevice) error {
+	*v = make([]types.GpuDevice, 0)
+	var vv types.GpuDevice
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.GpuDevice
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.GpuDevice{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

@@ -1574,6 +1574,11 @@ type Container struct {
 	// The IDs of each GPU assigned to the container.
 	GpuIds []string
 
+	// The GPU sharing strategy that the task definition specifies for the container.
+	// This field is present only for containers whose resource requirements include
+	// sharingStrategy .
+	GpuSharingStrategy SharingStrategy
+
 	// The health status of the container. If health checks aren't configured for this
 	// container in its task definition, then it reports the health status as UNKNOWN .
 	HealthStatus HealthStatus
@@ -1638,6 +1643,7 @@ func (v *Container) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteInt32(schemas.Container_exitCode, *v.ExitCode)
 	}
 	serializeGpuIds(s, schemas.Container_gpuIds, v.GpuIds)
+	serializeSharingStrategy(s, schemas.Container_gpuSharingStrategy, v.GpuSharingStrategy)
 	if v.HealthStatus != "" {
 		s.WriteString(schemas.Container_healthStatus, string(v.HealthStatus))
 	}
@@ -1687,6 +1693,8 @@ func (v *Container) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt32(schemas.Container_exitCode, v.ExitCode)
 		case schemas.Container_gpuIds:
 			return deserializeGpuIds(d, schemas.Container_gpuIds, &v.GpuIds)
+		case schemas.Container_gpuSharingStrategy:
+			return deserializeSharingStrategy(d, schemas.Container_gpuSharingStrategy, &v.GpuSharingStrategy)
 		case schemas.Container_healthStatus:
 			var ev string
 			if err := d.ReadString(schemas.Container_healthStatus, &ev); err != nil {
@@ -2775,6 +2783,11 @@ type ContainerInstance struct {
 	// Services Systems Manager managed instance ID.
 	Ec2InstanceId *string
 
+	// The state of each GPU on the container instance, including its sharing mode and
+	// available memory. This field is present only for container instances that
+	// support GPU sharing.
+	GpuDevices []GpuDevice
+
 	// An object representing the health status of the container instance.
 	HealthStatus *ContainerInstanceHealthStatus
 
@@ -2897,6 +2910,7 @@ func (v *ContainerInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ec2InstanceId != nil {
 		s.WriteString(schemas.ContainerInstance_ec2InstanceId, *v.Ec2InstanceId)
 	}
+	serializeGpuDevices(s, schemas.ContainerInstance_gpuDevices, v.GpuDevices)
 	if v.HealthStatus != nil {
 		s.WriteStruct(schemas.ContainerInstance_healthStatus)
 		v.HealthStatus.SerializeMembers(s)
@@ -2954,6 +2968,8 @@ func (v *ContainerInstance) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ContainerInstance_ec2InstanceId:
 			v.Ec2InstanceId = new(string)
 			return d.ReadString(schemas.ContainerInstance_ec2InstanceId, v.Ec2InstanceId)
+		case schemas.ContainerInstance_gpuDevices:
+			return deserializeGpuDevices(d, schemas.ContainerInstance_gpuDevices, &v.GpuDevices)
 		case schemas.ContainerInstance_healthStatus:
 			v.HealthStatus = &ContainerInstanceHealthStatus{}
 			return v.HealthStatus.Deserialize(d)
@@ -9570,6 +9586,97 @@ func (v *GatewayTestTrafficHeader) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The state of a GPU on a container instance, including its sharing mode and the
+// memory that's available for new containers.
+type GpuDevice struct {
+
+	// The number of containers that Amazon ECS assigned to the GPU. This value is 0
+	// when the sharing mode is IDLE and 1 when the sharing mode is DEDICATED . Amazon
+	// ECS counts the containers that it assigned to the GPU, not the processes that
+	// are running on it.
+	ContainerCount *int32
+
+	// The ID of the GPU. This ID matches the GPU IDs in the gpuIds of the containers
+	// that Amazon ECS assigned to the GPU.
+	GpuId *string
+
+	// The amount of GPU memory, in MiB, that's available to allocate to new
+	// containers that use the nvidiaMps sharing strategy. Amazon ECS calculates this
+	// value from the memory that it allocated to containers on the GPU, not from the
+	// memory that the containers use.
+	RemainingMemoryInMiB *int32
+
+	// How the GPU is shared between containers.
+	//
+	// Valid values:
+	//
+	//   - IDLE - No containers are assigned to the GPU, and all of its memory is
+	//   available.
+	//
+	//   - NVIDIA_MPS - One or more containers share the GPU by using NVIDIA
+	//   Multi-Process Service (MPS).
+	//
+	//   - DEDICATED - One container has exclusive use of the GPU.
+	SharingMode GpuSharingMode
+
+	// The total amount of GPU memory, in MiB, that the Amazon ECS container agent
+	// reported for the GPU. This is the memory that's available to containers, and it
+	// can be less than the nominal memory of the GPU.
+	TotalMemoryInMiB *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *GpuDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GpuDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GpuDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerCount != nil {
+		s.WriteInt32(schemas.GpuDevice_containerCount, *v.ContainerCount)
+	}
+	if v.GpuId != nil {
+		s.WriteString(schemas.GpuDevice_gpuId, *v.GpuId)
+	}
+	if v.RemainingMemoryInMiB != nil {
+		s.WriteInt32(schemas.GpuDevice_remainingMemoryInMiB, *v.RemainingMemoryInMiB)
+	}
+	if v.SharingMode != "" {
+		s.WriteString(schemas.GpuDevice_sharingMode, string(v.SharingMode))
+	}
+	if v.TotalMemoryInMiB != nil {
+		s.WriteInt32(schemas.GpuDevice_totalMemoryInMiB, *v.TotalMemoryInMiB)
+	}
+}
+func (v *GpuDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GpuDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GpuDevice_containerCount:
+			v.ContainerCount = new(int32)
+			return d.ReadInt32(schemas.GpuDevice_containerCount, v.ContainerCount)
+		case schemas.GpuDevice_gpuId:
+			v.GpuId = new(string)
+			return d.ReadString(schemas.GpuDevice_gpuId, v.GpuId)
+		case schemas.GpuDevice_remainingMemoryInMiB:
+			v.RemainingMemoryInMiB = new(int32)
+			return d.ReadInt32(schemas.GpuDevice_remainingMemoryInMiB, v.RemainingMemoryInMiB)
+		case schemas.GpuDevice_sharingMode:
+			var ev string
+			if err := d.ReadString(schemas.GpuDevice_sharingMode, &ev); err != nil {
+				return err
+			}
+			v.SharingMode = GpuSharingMode(ev)
+			return nil
+		case schemas.GpuDevice_totalMemoryInMiB:
+			v.TotalMemoryInMiB = new(int32)
+			return d.ReadInt32(schemas.GpuDevice_totalMemoryInMiB, v.TotalMemoryInMiB)
+		}
+		return nil
+	})
+}
+
 // An object representing a container health check. Health check parameters that
 // are specified in a container definition override any Docker health checks that
 // exist in the container image (such as those specified in a parent image or from
@@ -13598,6 +13705,63 @@ func (v *NetworkInterfaceCountRequest) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// The GPU memory and compute limits for a container that shares a GPU by using
+// NVIDIA Multi-Process Service (MPS). Amazon ECS assigns the container a single
+// GPU that has enough memory available. Other containers that use MPS can share
+// the same GPU.
+type NvidiaMpsAllocation struct {
+
+	// The amount of GPU memory, in MiB, to allocate to the container. Amazon ECS
+	// assigns the container a GPU that has at least the specified amount of memory
+	// available, and sets the CUDA_MPS_PINNED_DEVICE_MEM_LIMIT environment variable
+	// in the container to limit its memory to this amount. The memory must be
+	// available on a single GPU. If more than one container in a task uses nvidiaMps ,
+	// Amazon ECS assigns them the same GPU, which must have enough memory available
+	// for all of them.
+	//
+	// This member is required.
+	Memory *int32
+
+	// The maximum percentage of the GPU's compute capacity that the container can
+	// use. Amazon ECS sets the CUDA_MPS_ACTIVE_THREAD_PERCENTAGE environment variable
+	// in the container to this value. This value is a limit, not a reservation.
+	//
+	// If you don't specify this parameter, Amazon ECS doesn't set
+	// CUDA_MPS_ACTIVE_THREAD_PERCENTAGE , and the active thread percentage of the MPS
+	// server on the container instance applies. By default, this is 100 percent.
+	MaxComputePercent *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *NvidiaMpsAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NvidiaMpsAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NvidiaMpsAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxComputePercent != nil {
+		s.WriteInt32(schemas.NvidiaMpsAllocation_maxComputePercent, *v.MaxComputePercent)
+	}
+	if v.Memory != nil {
+		s.WriteInt32(schemas.NvidiaMpsAllocation_memory, *v.Memory)
+	}
+}
+func (v *NvidiaMpsAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NvidiaMpsAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NvidiaMpsAllocation_maxComputePercent:
+			v.MaxComputePercent = new(int32)
+			return d.ReadInt32(schemas.NvidiaMpsAllocation_maxComputePercent, v.MaxComputePercent)
+		case schemas.NvidiaMpsAllocation_memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.NvidiaMpsAllocation_memory, v.Memory)
+		}
+		return nil
+	})
+}
+
 // An object representing a constraint on task placement. For more information,
 // see [Task placement constraints]in the Amazon Elastic Container Service Developer Guide.
 //
@@ -14303,7 +14467,22 @@ type ResourceRequirement struct {
 	// This member is required.
 	Type ResourceType
 
+	// The strategy that the container uses to share a GPU with other containers.
+	// Specify a sharing strategy only when the type is GPU . For a GPU resource
+	// requirement, specify either value or sharingStrategy , but not both. If you
+	// don't specify a sharing strategy, the container has exclusive use of each GPU
+	// that Amazon ECS assigns to it. The containers in a task that request GPUs must
+	// all use the same option.
+	//
+	// You can use GPU sharing with tasks that run on Amazon EC2 instances or Amazon
+	// ECS Managed Instances. Task definitions that require EXTERNAL compatibility
+	// don't support GPU sharing.
+	SharingStrategy SharingStrategy
+
 	// The value for the specified resource type.
+	//
+	// You must specify this parameter unless the type is GPU and you specify
+	// sharingStrategy .
 	//
 	// When the type is GPU , the value is the number of physical GPUs the Amazon ECS
 	// container agent reserves for the container. The number of GPUs that's reserved
@@ -14320,8 +14499,6 @@ type ResourceRequirement struct {
 	// specified in a task definition.
 	//
 	// [InferenceAccelerator]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_InferenceAccelerator.html
-	//
-	// This member is required.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -14334,6 +14511,7 @@ func (v *ResourceRequirement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceRequirement) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSharingStrategy(s, schemas.ResourceRequirement_sharingStrategy, v.SharingStrategy)
 	if v.Type != "" {
 		s.WriteString(schemas.ResourceRequirement_type, string(v.Type))
 	}
@@ -14344,6 +14522,8 @@ func (v *ResourceRequirement) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ResourceRequirement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceRequirement, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ResourceRequirement_sharingStrategy:
+			return deserializeSharingStrategy(d, schemas.ResourceRequirement_sharingStrategy, &v.SharingStrategy)
 		case schemas.ResourceRequirement_type:
 			var ev string
 			if err := d.ReadString(schemas.ResourceRequirement_type, &ev); err != nil {
@@ -17440,6 +17620,35 @@ func (v *Setting) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The strategy that a container uses to share a GPU with other containers.
+// Specify exactly one member.
+//
+// The following types satisfy this interface:
+//
+//	SharingStrategyMemberNvidiaMps
+type SharingStrategy interface {
+	isSharingStrategy()
+}
+
+// Shares a GPU between containers by using NVIDIA Multi-Process Service (MPS).
+// You specify the GPU memory to allocate to the container and, optionally, the
+// maximum percentage of the GPU's compute capacity that the container can use.
+type SharingStrategyMemberNvidiaMps struct {
+	Value NvidiaMpsAllocation
+
+	noSmithyDocumentSerde
+}
+
+func (*SharingStrategyMemberNvidiaMps) isSharingStrategy() {}
+func (v *SharingStrategyMemberNvidiaMps) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharingStrategy_nvidiaMps)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SharingStrategyMemberNvidiaMps) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // A list of namespaced kernel parameters to set in the container. This parameter
 // maps to Sysctls in the docker container create command and the --sysctl option
 // to docker run. For example, you can configure net.ipv4.tcp_keepalive_time
@@ -20414,4 +20623,5 @@ func (*UnknownUnionMember) isGatewayElbAccessLogDestination()       {}
 func (*UnknownUnionMember) isGatewayInfrastructureResources()       {}
 func (*UnknownUnionMember) isGatewayRouteResources()                {}
 func (*UnknownUnionMember) isServiceConnectContainerConfiguration() {}
+func (*UnknownUnionMember) isSharingStrategy()                      {}
 func (*UnknownUnionMember) isUpdateGatewayConfiguration()           {}

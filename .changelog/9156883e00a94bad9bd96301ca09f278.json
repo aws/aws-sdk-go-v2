@@ -1,0 +1,8 @@
+{
+    "id": "9156883e-00a9-4bad-9bd9-6301ca09f278",
+    "type": "feature",
+    "description": "Added the attributeUpdates parameter to the Lightsail StartInstance API, which allows customers to update the attributes of a stopped instance when starting it.",
+    "modules": [
+        "service/lightsail"
+    ]
+}

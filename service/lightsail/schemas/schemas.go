@@ -3046,6 +3046,12 @@ var InstanceAccessProtocol_ssh *smithy.Schema
 
 var InstanceAccessProtocol_rdp *smithy.Schema
 
+var InstanceAttributeUpdates = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceAttributeUpdates",
+}, smithy.ShapeTypeStructure, 1)
+var InstanceAttributeUpdates_bundleId *smithy.Schema
+
 var InstanceEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "InstanceEntry",
@@ -7760,8 +7766,10 @@ var StartGUISessionResult_operations *smithy.Schema
 var StartInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "StartInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var StartInstanceRequest_instanceName *smithy.Schema
+
+var StartInstanceRequest_attributeUpdates *smithy.Schema
 
 var StartInstanceResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -9796,6 +9804,8 @@ func init() {
 	InstanceAccessDetails_username = InstanceAccessDetails.AddMember("username", _string)
 
 	InstanceAccessDetails_hostKeys = InstanceAccessDetails.AddMember("hostKeys", _HostKeysList)
+
+	InstanceAttributeUpdates_bundleId = InstanceAttributeUpdates.AddMember("bundleId", _NonEmptyString)
 
 	PortInfoSourceType_Default = PortInfoSourceType.AddMember("Default", smithyprelude.Unit)
 
@@ -12000,6 +12010,8 @@ func init() {
 	StartGUISessionResult_operations = StartGUISessionResult.AddMember("operations", _OperationList)
 
 	StartInstanceRequest_instanceName = StartInstanceRequest.AddMember("instanceName", _ResourceName)
+
+	StartInstanceRequest_attributeUpdates = StartInstanceRequest.AddMember("attributeUpdates", InstanceAttributeUpdates)
 
 	StartInstanceResult_operations = StartInstanceResult.AddMember("operations", _OperationList)
 
