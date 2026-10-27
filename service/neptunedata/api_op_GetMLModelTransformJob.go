@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type GetMLModelTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLModelTransformJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLModelTransformJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLModelTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetMLModelTransformJobInput_id, *v.Id)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.GetMLModelTransformJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type GetMLModelTransformJobOutput struct {
 
 	// The base data processing job.
@@ -69,13 +86,57 @@ type GetMLModelTransformJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLModelTransformJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLModelTransformJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLModelTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseProcessingJob != nil {
+		s.WriteStruct(schemas.GetMLModelTransformJobOutput_baseProcessingJob)
+		v.BaseProcessingJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetMLModelTransformJobOutput_id, *v.Id)
+	}
+	serializeModels(s, schemas.GetMLModelTransformJobOutput_models, v.Models)
+	if v.RemoteModelTransformJob != nil {
+		s.WriteStruct(schemas.GetMLModelTransformJobOutput_remoteModelTransformJob)
+		v.RemoteModelTransformJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetMLModelTransformJobOutput_status, *v.Status)
+	}
+}
+func (v *GetMLModelTransformJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLModelTransformJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLModelTransformJobOutput_baseProcessingJob:
+			v.BaseProcessingJob = &types.MlResourceDefinition{}
+			return v.BaseProcessingJob.Deserialize(d)
+		case schemas.GetMLModelTransformJobOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMLModelTransformJobOutput_id, v.Id)
+		case schemas.GetMLModelTransformJobOutput_models:
+			return deserializeModels(d, schemas.GetMLModelTransformJobOutput_models, &v.Models)
+		case schemas.GetMLModelTransformJobOutput_remoteModelTransformJob:
+			v.RemoteModelTransformJob = &types.MlResourceDefinition{}
+			return v.RemoteModelTransformJob.Deserialize(d)
+		case schemas.GetMLModelTransformJobOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetMLModelTransformJobOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLModelTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMLModelTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLModelTransformJob, schemas.GetMLModelTransformJobInput, schemas.GetMLModelTransformJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMLModelTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLModelTransformJob, schemas.GetMLModelTransformJobInput, schemas.GetMLModelTransformJobOutput), output: &GetMLModelTransformJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

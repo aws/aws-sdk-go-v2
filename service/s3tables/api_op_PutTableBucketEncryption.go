@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,23 @@ type PutTableBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableBucketEncryptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTableBucketEncryptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableBucketEncryptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.PutTableBucketEncryptionRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.PutTableBucketEncryptionRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type PutTableBucketEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +74,26 @@ type PutTableBucketEncryptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableBucketEncryptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableBucketEncryptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutTableBucketEncryptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTableBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTableBucketEncryption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableBucketEncryption, schemas.PutTableBucketEncryptionRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTableBucketEncryption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableBucketEncryption, schemas.PutTableBucketEncryptionRequest, nil), output: &PutTableBucketEncryptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

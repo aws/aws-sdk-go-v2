@@ -5,7 +5,9 @@ package sustainability
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sustainability/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sustainability/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,36 @@ type GetEstimatedWaterAllocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEstimatedWaterAllocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEstimatedWaterAllocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEstimatedWaterAllocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWaterAllocationTypeList(s, schemas.GetEstimatedWaterAllocationRequest_AllocationTypes, v.AllocationTypes)
+	if v.FilterBy != nil {
+		s.WriteStruct(schemas.GetEstimatedWaterAllocationRequest_FilterBy)
+		v.FilterBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetEstimatedWaterAllocationRequest_Granularity, string(v.Granularity))
+	}
+	serializeDimensionList(s, schemas.GetEstimatedWaterAllocationRequest_GroupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEstimatedWaterAllocationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEstimatedWaterAllocationRequest_NextToken, *v.NextToken)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetEstimatedWaterAllocationRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetEstimatedWaterAllocationOutput struct {
 
 	// The result of the requested inputs.
@@ -82,13 +114,35 @@ type GetEstimatedWaterAllocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEstimatedWaterAllocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEstimatedWaterAllocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEstimatedWaterAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEstimatedWaterAllocationResponse_NextToken, *v.NextToken)
+	}
+	serializeEstimatedWaterAllocationList(s, schemas.GetEstimatedWaterAllocationResponse_Results, v.Results)
+}
+func (v *GetEstimatedWaterAllocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEstimatedWaterAllocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEstimatedWaterAllocationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEstimatedWaterAllocationResponse_NextToken, v.NextToken)
+		case schemas.GetEstimatedWaterAllocationResponse_Results:
+			return deserializeEstimatedWaterAllocationList(d, schemas.GetEstimatedWaterAllocationResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEstimatedWaterAllocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedWaterAllocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEstimatedWaterAllocation, schemas.GetEstimatedWaterAllocationRequest, schemas.GetEstimatedWaterAllocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEstimatedWaterAllocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEstimatedWaterAllocation, schemas.GetEstimatedWaterAllocationRequest, schemas.GetEstimatedWaterAllocationResponse), output: &GetEstimatedWaterAllocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

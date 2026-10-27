@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"datastoreId":"__DatastoreId__","imageSetId":"__ImageSetId__","imageSetState":"ACTIVE","imageSetWorkflowStatus":"CREATED","latestVersionId":"__LatestVersionId__","message":"__Message__","updatedAt":946684800}

@@ -4,6 +4,8 @@ package supplychain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type DeleteDataLakeNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteDataLakeNamespaceRequest_instanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDataLakeNamespaceRequest_name, *v.Name)
+	}
+}
+
 // The response parameters of DeleteDataLakeNamespace.
 type DeleteDataLakeNamespaceOutput struct {
 
@@ -61,13 +78,38 @@ type DeleteDataLakeNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataLakeNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataLakeNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataLakeNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteDataLakeNamespaceResponse_instanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteDataLakeNamespaceResponse_name, *v.Name)
+	}
+}
+func (v *DeleteDataLakeNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataLakeNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataLakeNamespaceResponse_instanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.DeleteDataLakeNamespaceResponse_instanceId, v.InstanceId)
+		case schemas.DeleteDataLakeNamespaceResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteDataLakeNamespaceResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataLakeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataLakeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeNamespace, schemas.DeleteDataLakeNamespaceRequest, schemas.DeleteDataLakeNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataLakeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataLakeNamespace, schemas.DeleteDataLakeNamespaceRequest, schemas.DeleteDataLakeNamespaceResponse), output: &DeleteDataLakeNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

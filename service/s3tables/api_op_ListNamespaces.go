@@ -5,7 +5,9 @@ package s3tables
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,27 @@ type ListNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamespacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContinuationToken != nil {
+		s.WriteString(schemas.ListNamespacesRequest_continuationToken, *v.ContinuationToken)
+	}
+	if v.MaxNamespaces != nil {
+		s.WriteInt32(schemas.ListNamespacesRequest_maxNamespaces, *v.MaxNamespaces)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ListNamespacesRequest_prefix, *v.Prefix)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.ListNamespacesRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type ListNamespacesOutput struct {
 
 	// A list of namespaces.
@@ -68,13 +91,35 @@ type ListNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNamespacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContinuationToken != nil {
+		s.WriteString(schemas.ListNamespacesResponse_continuationToken, *v.ContinuationToken)
+	}
+	serializeNamespaceSummaryList(s, schemas.ListNamespacesResponse_namespaces, v.Namespaces)
+}
+func (v *ListNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNamespacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNamespacesResponse_continuationToken:
+			v.ContinuationToken = new(string)
+			return d.ReadString(schemas.ListNamespacesResponse_continuationToken, v.ContinuationToken)
+		case schemas.ListNamespacesResponse_namespaces:
+			return deserializeNamespaceSummaryList(d, schemas.ListNamespacesResponse_namespaces, &v.Namespaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesRequest, schemas.ListNamespacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNamespaces, schemas.ListNamespacesRequest, schemas.ListNamespacesResponse), output: &ListNamespacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,21 @@ type ListGlobalResolversInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGlobalResolversInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGlobalResolversInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGlobalResolversInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGlobalResolversInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGlobalResolversInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListGlobalResolversOutput struct {
 
 	// Paginated list of Global Resolvers.
@@ -63,13 +80,35 @@ type ListGlobalResolversOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGlobalResolversOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGlobalResolversOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGlobalResolversOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalResolvers(s, schemas.ListGlobalResolversOutput_globalResolvers, v.GlobalResolvers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGlobalResolversOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGlobalResolversOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGlobalResolversOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGlobalResolversOutput_globalResolvers:
+			return deserializeGlobalResolvers(d, schemas.ListGlobalResolversOutput_globalResolvers, &v.GlobalResolvers)
+		case schemas.ListGlobalResolversOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGlobalResolversOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGlobalResolversMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGlobalResolvers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGlobalResolvers, schemas.ListGlobalResolversInput, schemas.ListGlobalResolversOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGlobalResolvers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGlobalResolvers, schemas.ListGlobalResolversInput, schemas.ListGlobalResolversOutput), output: &ListGlobalResolversOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accessToken":{"accessKeyId":"__AccessKeyId__","secretAccessKey":"__SecretAccessKey__","sessionToken":"__SessionToken__"},"expiresIn":1,"idToken":"__IdToken__","refreshToken":"__RefreshToken__","tokenType":"__TokenType__"}

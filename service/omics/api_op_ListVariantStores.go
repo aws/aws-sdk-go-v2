@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListVariantStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVariantStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVariantStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVariantStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListVariantStoresRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdList(s, schemas.ListVariantStoresRequest_ids, v.Ids)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVariantStoresRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVariantStoresRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListVariantStoresOutput struct {
 
 	// A pagination token that's included if more results are available.
@@ -64,13 +87,35 @@ type ListVariantStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVariantStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVariantStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVariantStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVariantStoresResponse_nextToken, *v.NextToken)
+	}
+	serializeVariantStoreItems(s, schemas.ListVariantStoresResponse_variantStores, v.VariantStores)
+}
+func (v *ListVariantStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVariantStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVariantStoresResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVariantStoresResponse_nextToken, v.NextToken)
+		case schemas.ListVariantStoresResponse_variantStores:
+			return deserializeVariantStoreItems(d, schemas.ListVariantStoresResponse_variantStores, &v.VariantStores)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVariantStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVariantStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVariantStores, schemas.ListVariantStoresRequest, schemas.ListVariantStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVariantStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVariantStores, schemas.ListVariantStoresRequest, schemas.ListVariantStoresResponse), output: &ListVariantStoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified next token is not valid.
 type InvalidNextTokenException struct {
@@ -58,6 +80,27 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextTokenException_message, *v.Message)
+	}
+}
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Parameters that must not be used together were used together in the request.
 type InvalidParameterCombinationException struct {
@@ -86,6 +129,27 @@ func (e *InvalidParameterCombinationException) ErrorCode() string {
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *InvalidParameterCombinationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterCombinationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterCombinationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterCombinationException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterCombinationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterCombinationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterCombinationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterCombinationException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified parameter value is not valid.
 type InvalidParameterValueException struct {
@@ -112,6 +176,27 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterValueException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterValueException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterValueException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterValueException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterValueException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterValueException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified domain does not exist.
 type NoSuchDomainException struct {
@@ -138,6 +223,27 @@ func (e *NoSuchDomainException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchDomainException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoSuchDomainException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoSuchDomainException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoSuchDomainException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoSuchDomainException_message, *v.Message)
+	}
+}
+func (v *NoSuchDomainException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoSuchDomainException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoSuchDomainException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoSuchDomainException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Export with specified ARN does not exist.
 type NoSuchExportException struct {
@@ -164,6 +270,27 @@ func (e *NoSuchExportException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoSuchExportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoSuchExportException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoSuchExportException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoSuchExportException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoSuchExportException_message, *v.Message)
+	}
+}
+func (v *NoSuchExportException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoSuchExportException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoSuchExportException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoSuchExportException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Cannot start export as export quota limit was exceeded
 type NumberExportsLimitExceeded struct {
@@ -190,3 +317,24 @@ func (e *NumberExportsLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NumberExportsLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NumberExportsLimitExceeded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NumberExportsLimitExceeded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NumberExportsLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NumberExportsLimitExceeded_message, *v.Message)
+	}
+}
+func (v *NumberExportsLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NumberExportsLimitExceeded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NumberExportsLimitExceeded_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NumberExportsLimitExceeded_message, v.Message)
+		}
+		return nil
+	})
+}

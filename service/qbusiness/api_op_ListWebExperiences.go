@@ -5,7 +5,9 @@ package qbusiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type ListWebExperiencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebExperiencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebExperiencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebExperiencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListWebExperiencesRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWebExperiencesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWebExperiencesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListWebExperiencesOutput struct {
 
 	// If the response is truncated, Amazon Q Business returns this token, which you
@@ -60,13 +80,35 @@ type ListWebExperiencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWebExperiencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWebExperiencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWebExperiencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWebExperiencesResponse_nextToken, *v.NextToken)
+	}
+	serializeWebExperiences(s, schemas.ListWebExperiencesResponse_webExperiences, v.WebExperiences)
+}
+func (v *ListWebExperiencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWebExperiencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWebExperiencesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWebExperiencesResponse_nextToken, v.NextToken)
+		case schemas.ListWebExperiencesResponse_webExperiences:
+			return deserializeWebExperiences(d, schemas.ListWebExperiencesResponse_webExperiences, &v.WebExperiences)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWebExperiencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWebExperiences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebExperiences, schemas.ListWebExperiencesRequest, schemas.ListWebExperiencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWebExperiences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWebExperiences, schemas.ListWebExperiencesRequest, schemas.ListWebExperiencesResponse), output: &ListWebExperiencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

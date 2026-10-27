@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIpAccessSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAccessSettingsArn != nil {
+		s.WriteString(schemas.DeleteIpAccessSettingsRequest_ipAccessSettingsArn, *v.IpAccessSettingsArn)
+	}
+}
+
 type DeleteIpAccessSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIpAccessSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIpAccessSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIpAccessSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIpAccessSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIpAccessSettings, schemas.DeleteIpAccessSettingsRequest, schemas.DeleteIpAccessSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIpAccessSettings, schemas.DeleteIpAccessSettingsRequest, schemas.DeleteIpAccessSettingsResponse), output: &DeleteIpAccessSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

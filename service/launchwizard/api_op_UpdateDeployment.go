@@ -4,7 +4,9 @@ package launchwizard
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,31 @@ type UpdateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeploymentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.UpdateDeploymentInput_deploymentId, *v.DeploymentId)
+	}
+	if v.DeploymentPatternVersionName != nil {
+		s.WriteString(schemas.UpdateDeploymentInput_deploymentPatternVersionName, *v.DeploymentPatternVersionName)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.UpdateDeploymentInput_dryRun, v.DryRun)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.UpdateDeploymentInput_force, v.Force)
+	}
+	serializeDeploymentSpecifications(s, schemas.UpdateDeploymentInput_specifications, v.Specifications)
+	if v.WorkloadVersionName != nil {
+		s.WriteString(schemas.UpdateDeploymentInput_workloadVersionName, *v.WorkloadVersionName)
+	}
+}
+
 type UpdateDeploymentOutput struct {
 
 	// The deployment.
@@ -72,13 +99,34 @@ type UpdateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDeploymentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Deployment != nil {
+		s.WriteStruct(schemas.UpdateDeploymentOutput_deployment)
+		v.Deployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDeploymentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDeploymentOutput_deployment:
+			v.Deployment = &types.DeploymentDataSummary{}
+			return v.Deployment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeployment, schemas.UpdateDeploymentInput, schemas.UpdateDeploymentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDeployment, schemas.UpdateDeploymentInput, schemas.UpdateDeploymentOutput), output: &UpdateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package marketplacediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type GetOfferSetInput struct {
 	Locale *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetOfferSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOfferSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOfferSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.GetOfferSetInput_locale, *v.Locale)
+	}
+	if v.OfferSetId != nil {
+		s.WriteString(schemas.GetOfferSetInput_offerSetId, *v.OfferSetId)
+	}
 }
 
 type GetOfferSetOutput struct {
@@ -96,13 +113,82 @@ type GetOfferSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOfferSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOfferSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOfferSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOfferSetAssociatedEntityList(s, schemas.GetOfferSetOutput_associatedEntities, v.AssociatedEntities)
+	if v.AvailableFromTime != nil {
+		s.WriteTime(schemas.GetOfferSetOutput_availableFromTime, *v.AvailableFromTime)
+	}
+	serializePurchaseOptionBadgeList(s, schemas.GetOfferSetOutput_badges, v.Badges)
+	if v.BuyerNotes != nil {
+		s.WriteString(schemas.GetOfferSetOutput_buyerNotes, *v.BuyerNotes)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetOfferSetOutput_catalog, *v.Catalog)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.GetOfferSetOutput_expirationTime, *v.ExpirationTime)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.GetOfferSetOutput_locale, *v.Locale)
+	}
+	if v.OfferSetId != nil {
+		s.WriteString(schemas.GetOfferSetOutput_offerSetId, *v.OfferSetId)
+	}
+	if v.OfferSetName != nil {
+		s.WriteString(schemas.GetOfferSetOutput_offerSetName, *v.OfferSetName)
+	}
+	if v.SellerOfRecord != nil {
+		s.WriteStruct(schemas.GetOfferSetOutput_sellerOfRecord)
+		v.SellerOfRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetOfferSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOfferSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOfferSetOutput_associatedEntities:
+			return deserializeOfferSetAssociatedEntityList(d, schemas.GetOfferSetOutput_associatedEntities, &v.AssociatedEntities)
+		case schemas.GetOfferSetOutput_availableFromTime:
+			v.AvailableFromTime = new(time.Time)
+			return d.ReadTime(schemas.GetOfferSetOutput_availableFromTime, v.AvailableFromTime)
+		case schemas.GetOfferSetOutput_badges:
+			return deserializePurchaseOptionBadgeList(d, schemas.GetOfferSetOutput_badges, &v.Badges)
+		case schemas.GetOfferSetOutput_buyerNotes:
+			v.BuyerNotes = new(string)
+			return d.ReadString(schemas.GetOfferSetOutput_buyerNotes, v.BuyerNotes)
+		case schemas.GetOfferSetOutput_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetOfferSetOutput_catalog, v.Catalog)
+		case schemas.GetOfferSetOutput_expirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetOfferSetOutput_expirationTime, v.ExpirationTime)
+		case schemas.GetOfferSetOutput_locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.GetOfferSetOutput_locale, v.Locale)
+		case schemas.GetOfferSetOutput_offerSetId:
+			v.OfferSetId = new(string)
+			return d.ReadString(schemas.GetOfferSetOutput_offerSetId, v.OfferSetId)
+		case schemas.GetOfferSetOutput_offerSetName:
+			v.OfferSetName = new(string)
+			return d.ReadString(schemas.GetOfferSetOutput_offerSetName, v.OfferSetName)
+		case schemas.GetOfferSetOutput_sellerOfRecord:
+			v.SellerOfRecord = &types.SellerInformation{}
+			return v.SellerOfRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOfferSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOfferSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferSet, schemas.GetOfferSetInput, schemas.GetOfferSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOfferSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferSet, schemas.GetOfferSetInput, schemas.GetOfferSetOutput), output: &GetOfferSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

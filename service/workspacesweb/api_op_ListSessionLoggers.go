@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListSessionLoggersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionLoggersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionLoggersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionLoggersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSessionLoggersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionLoggersRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSessionLoggersOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this
@@ -52,13 +69,35 @@ type ListSessionLoggersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionLoggersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionLoggersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionLoggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionLoggersResponse_nextToken, *v.NextToken)
+	}
+	serializeSessionLoggerList(s, schemas.ListSessionLoggersResponse_sessionLoggers, v.SessionLoggers)
+}
+func (v *ListSessionLoggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSessionLoggersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSessionLoggersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSessionLoggersResponse_nextToken, v.NextToken)
+		case schemas.ListSessionLoggersResponse_sessionLoggers:
+			return deserializeSessionLoggerList(d, schemas.ListSessionLoggersResponse_sessionLoggers, &v.SessionLoggers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSessionLoggersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSessionLoggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessionLoggers, schemas.ListSessionLoggersRequest, schemas.ListSessionLoggersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSessionLoggers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessionLoggers, schemas.ListSessionLoggersRequest, schemas.ListSessionLoggersResponse), output: &ListSessionLoggersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

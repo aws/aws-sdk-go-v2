@@ -4,7 +4,9 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,28 @@ type BatchPutDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.BatchPutDocumentRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DataSourceSyncId != nil {
+		s.WriteString(schemas.BatchPutDocumentRequest_dataSourceSyncId, *v.DataSourceSyncId)
+	}
+	serializeDocuments(s, schemas.BatchPutDocumentRequest_documents, v.Documents)
+	if v.IndexId != nil {
+		s.WriteString(schemas.BatchPutDocumentRequest_indexId, *v.IndexId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.BatchPutDocumentRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type BatchPutDocumentOutput struct {
 
 	//  A list of documents that were not added to the Amazon Q Business index because
@@ -81,13 +105,29 @@ type BatchPutDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedDocuments(s, schemas.BatchPutDocumentResponse_failedDocuments, v.FailedDocuments)
+}
+func (v *BatchPutDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutDocumentResponse_failedDocuments:
+			return deserializeFailedDocuments(d, schemas.BatchPutDocumentResponse_failedDocuments, &v.FailedDocuments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDocument, schemas.BatchPutDocumentRequest, schemas.BatchPutDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDocument, schemas.BatchPutDocumentRequest, schemas.BatchPutDocumentResponse), output: &BatchPutDocumentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

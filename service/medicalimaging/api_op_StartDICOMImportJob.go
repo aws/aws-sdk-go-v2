@@ -5,7 +5,9 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,37 @@ type StartDICOMImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDICOMImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDICOMImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDICOMImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_dataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_datastoreId, *v.DatastoreId)
+	}
+	serializeImportConfiguration(s, schemas.StartDICOMImportJobRequest_importConfiguration, v.ImportConfiguration)
+	if v.InputOwnerAccountId != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_inputOwnerAccountId, *v.InputOwnerAccountId)
+	}
+	if v.InputS3Uri != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_inputS3Uri, *v.InputS3Uri)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_jobName, *v.JobName)
+	}
+	if v.OutputS3Uri != nil {
+		s.WriteString(schemas.StartDICOMImportJobRequest_outputS3Uri, *v.OutputS3Uri)
+	}
+}
+
 type StartDICOMImportJobOutput struct {
 
 	// The data store identifier.
@@ -100,13 +133,54 @@ type StartDICOMImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDICOMImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDICOMImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDICOMImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.StartDICOMImportJobResponse_datastoreId, *v.DatastoreId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDICOMImportJobResponse_jobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StartDICOMImportJobResponse_jobStatus, string(v.JobStatus))
+	}
+	if v.SubmittedAt != nil {
+		s.WriteTime(schemas.StartDICOMImportJobResponse_submittedAt, *v.SubmittedAt)
+	}
+}
+func (v *StartDICOMImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDICOMImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDICOMImportJobResponse_datastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.StartDICOMImportJobResponse_datastoreId, v.DatastoreId)
+		case schemas.StartDICOMImportJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDICOMImportJobResponse_jobId, v.JobId)
+		case schemas.StartDICOMImportJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartDICOMImportJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.StartDICOMImportJobResponse_submittedAt:
+			v.SubmittedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDICOMImportJobResponse_submittedAt, v.SubmittedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDICOMImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDICOMImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDICOMImportJob, schemas.StartDICOMImportJobRequest, schemas.StartDICOMImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDICOMImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDICOMImportJob, schemas.StartDICOMImportJobRequest, schemas.StartDICOMImportJobResponse), output: &StartDICOMImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package workdocs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type DescribeNotificationSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationSubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeNotificationSubscriptionsRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeNotificationSubscriptionsRequest_Marker, *v.Marker)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeNotificationSubscriptionsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeNotificationSubscriptionsOutput struct {
 
 	// The marker to use when requesting the next set of results. If there are no
@@ -57,13 +77,35 @@ type DescribeNotificationSubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotificationSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotificationSubscriptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotificationSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeNotificationSubscriptionsResponse_Marker, *v.Marker)
+	}
+	serializeSubscriptionList(s, schemas.DescribeNotificationSubscriptionsResponse_Subscriptions, v.Subscriptions)
+}
+func (v *DescribeNotificationSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotificationSubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotificationSubscriptionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeNotificationSubscriptionsResponse_Marker, v.Marker)
+		case schemas.DescribeNotificationSubscriptionsResponse_Subscriptions:
+			return deserializeSubscriptionList(d, schemas.DescribeNotificationSubscriptionsResponse_Subscriptions, &v.Subscriptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotificationSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNotificationSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationSubscriptions, schemas.DescribeNotificationSubscriptionsRequest, schemas.DescribeNotificationSubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNotificationSubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotificationSubscriptions, schemas.DescribeNotificationSubscriptionsRequest, schemas.DescribeNotificationSubscriptionsResponse), output: &DescribeNotificationSubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

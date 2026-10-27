@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,28 @@ type UpdateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIpAccessSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateIpAccessSettingsRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateIpAccessSettingsRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateIpAccessSettingsRequest_displayName, *v.DisplayName)
+	}
+	if v.IpAccessSettingsArn != nil {
+		s.WriteString(schemas.UpdateIpAccessSettingsRequest_ipAccessSettingsArn, *v.IpAccessSettingsArn)
+	}
+	serializeIpRuleList(s, schemas.UpdateIpAccessSettingsRequest_ipRules, v.IpRules)
+}
+
 type UpdateIpAccessSettingsOutput struct {
 
 	// The IP access settings.
@@ -67,13 +91,34 @@ type UpdateIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIpAccessSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIpAccessSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIpAccessSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAccessSettings != nil {
+		s.WriteStruct(schemas.UpdateIpAccessSettingsResponse_ipAccessSettings)
+		v.IpAccessSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIpAccessSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIpAccessSettingsResponse_ipAccessSettings:
+			v.IpAccessSettings = &types.IpAccessSettings{}
+			return v.IpAccessSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIpAccessSettings, schemas.UpdateIpAccessSettingsRequest, schemas.UpdateIpAccessSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIpAccessSettings, schemas.UpdateIpAccessSettingsRequest, schemas.UpdateIpAccessSettingsResponse), output: &UpdateIpAccessSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package rolesanywhere
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,22 @@ type PutAttributeMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttributeMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttributeMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttributeMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateField != "" {
+		s.WriteString(schemas.PutAttributeMappingRequest_certificateField, string(v.CertificateField))
+	}
+	serializeMappingRules(s, schemas.PutAttributeMappingRequest_mappingRules, v.MappingRules)
+	if v.ProfileId != nil {
+		s.WriteString(schemas.PutAttributeMappingRequest_profileId, *v.ProfileId)
+	}
+}
+
 type PutAttributeMappingOutput struct {
 
 	// The state of the profile after a read or write operation.
@@ -59,13 +77,34 @@ type PutAttributeMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttributeMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttributeMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttributeMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.PutAttributeMappingResponse_profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutAttributeMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAttributeMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAttributeMappingResponse_profile:
+			v.Profile = &types.ProfileDetail{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAttributeMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAttributeMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttributeMapping, schemas.PutAttributeMappingRequest, schemas.PutAttributeMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAttributeMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttributeMapping, schemas.PutAttributeMappingRequest, schemas.PutAttributeMappingResponse), output: &PutAttributeMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

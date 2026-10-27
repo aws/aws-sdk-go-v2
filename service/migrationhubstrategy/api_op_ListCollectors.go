@@ -5,7 +5,9 @@ package migrationhubstrategy
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,34 @@ type ListCollectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollectorsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectorsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollectorsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollectorsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollectorsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCollectorsRequest_maxResults, v.MaxResults)
+		case schemas.ListCollectorsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollectorsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListCollectorsOutput struct {
 
 	//  The list of all the installed collectors.
@@ -55,13 +85,35 @@ type ListCollectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectors(s, schemas.ListCollectorsResponse_Collectors, v.Collectors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollectorsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollectorsResponse_Collectors:
+			return deserializeCollectors(d, schemas.ListCollectorsResponse_Collectors, &v.Collectors)
+		case schemas.ListCollectorsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollectorsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollectors, schemas.ListCollectorsRequest, schemas.ListCollectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollectors, schemas.ListCollectorsRequest, schemas.ListCollectorsResponse), output: &ListCollectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

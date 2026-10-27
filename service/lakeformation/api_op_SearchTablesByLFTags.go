@@ -5,7 +5,9 @@ package lakeformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,25 @@ type SearchTablesByLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTablesByLFTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTablesByLFTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTablesByLFTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.SearchTablesByLFTagsRequest_CatalogId, *v.CatalogId)
+	}
+	serializeExpression(s, schemas.SearchTablesByLFTagsRequest_Expression, v.Expression)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchTablesByLFTagsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTablesByLFTagsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SearchTablesByLFTagsOutput struct {
 
 	// A continuation token, present if the current list segment is not the last. On
@@ -66,13 +87,35 @@ type SearchTablesByLFTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchTablesByLFTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchTablesByLFTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchTablesByLFTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchTablesByLFTagsResponse_NextToken, *v.NextToken)
+	}
+	serializeTableLFTagsList(s, schemas.SearchTablesByLFTagsResponse_TableList, v.TableList)
+}
+func (v *SearchTablesByLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchTablesByLFTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchTablesByLFTagsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchTablesByLFTagsResponse_NextToken, v.NextToken)
+		case schemas.SearchTablesByLFTagsResponse_TableList:
+			return deserializeTableLFTagsList(d, schemas.SearchTablesByLFTagsResponse_TableList, &v.TableList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchTablesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchTablesByLFTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTablesByLFTags, schemas.SearchTablesByLFTagsRequest, schemas.SearchTablesByLFTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchTablesByLFTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchTablesByLFTags, schemas.SearchTablesByLFTagsRequest, schemas.SearchTablesByLFTagsResponse), output: &SearchTablesByLFTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

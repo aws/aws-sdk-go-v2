@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetFindingsPublicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsPublicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsPublicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsPublicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetFindingsPublicationConfigurationOutput struct {
 
 	// The configuration settings that determine which findings are published to
@@ -40,13 +51,34 @@ type GetFindingsPublicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsPublicationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsPublicationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsPublicationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityHubConfiguration != nil {
+		s.WriteStruct(schemas.GetFindingsPublicationConfigurationResponse_securityHubConfiguration)
+		v.SecurityHubConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFindingsPublicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsPublicationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsPublicationConfigurationResponse_securityHubConfiguration:
+			v.SecurityHubConfiguration = &types.SecurityHubConfiguration{}
+			return v.SecurityHubConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsPublicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsPublicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsPublicationConfiguration, schemas.GetFindingsPublicationConfigurationRequest, schemas.GetFindingsPublicationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsPublicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsPublicationConfiguration, schemas.GetFindingsPublicationConfigurationRequest, schemas.GetFindingsPublicationConfigurationResponse), output: &GetFindingsPublicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,19 @@ type ImportSecurityRequirementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSecurityRequirementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSecurityRequirementsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSecurityRequirementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportSource(s, schemas.ImportSecurityRequirementsInput_input, v.Input)
+	if v.PackId != nil {
+		s.WriteString(schemas.ImportSecurityRequirementsInput_packId, *v.PackId)
+	}
+}
+
 type ImportSecurityRequirementsOutput struct {
 
 	// The status of the import workflow.
@@ -61,13 +76,42 @@ type ImportSecurityRequirementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSecurityRequirementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSecurityRequirementsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSecurityRequirementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportStatus != "" {
+		s.WriteString(schemas.ImportSecurityRequirementsOutput_importStatus, string(v.ImportStatus))
+	}
+	if v.PackId != nil {
+		s.WriteString(schemas.ImportSecurityRequirementsOutput_packId, *v.PackId)
+	}
+}
+func (v *ImportSecurityRequirementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSecurityRequirementsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSecurityRequirementsOutput_importStatus:
+			var ev string
+			if err := d.ReadString(schemas.ImportSecurityRequirementsOutput_importStatus, &ev); err != nil {
+				return err
+			}
+			v.ImportStatus = types.SecurityRequirementPackImportStatus(ev)
+			return nil
+		case schemas.ImportSecurityRequirementsOutput_packId:
+			v.PackId = new(string)
+			return d.ReadString(schemas.ImportSecurityRequirementsOutput_packId, v.PackId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportSecurityRequirementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportSecurityRequirements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSecurityRequirements, schemas.ImportSecurityRequirementsInput, schemas.ImportSecurityRequirementsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportSecurityRequirements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSecurityRequirements, schemas.ImportSecurityRequirementsInput, schemas.ImportSecurityRequirementsOutput), output: &ImportSecurityRequirementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

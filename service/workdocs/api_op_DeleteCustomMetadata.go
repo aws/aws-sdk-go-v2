@@ -4,6 +4,8 @@ package workdocs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,28 @@ type DeleteCustomMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.DeleteCustomMetadataRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DeleteAll != false {
+		s.WriteBool(schemas.DeleteCustomMetadataRequest_DeleteAll, v.DeleteAll)
+	}
+	serializeCustomMetadataKeyList(s, schemas.DeleteCustomMetadataRequest_Keys, v.Keys)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DeleteCustomMetadataRequest_ResourceId, *v.ResourceId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DeleteCustomMetadataRequest_VersionId, *v.VersionId)
+	}
+}
+
 type DeleteCustomMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +79,26 @@ type DeleteCustomMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCustomMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCustomMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCustomMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCustomMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCustomMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCustomMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCustomMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomMetadata, schemas.DeleteCustomMetadataRequest, schemas.DeleteCustomMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCustomMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCustomMetadata, schemas.DeleteCustomMetadataRequest, schemas.DeleteCustomMetadataResponse), output: &DeleteCustomMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

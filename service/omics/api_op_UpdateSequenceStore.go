@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,36 @@ type UpdateSequenceStoreInput struct {
 	S3AccessConfig *types.S3AccessConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSequenceStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSequenceStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSequenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateSequenceStoreRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSequenceStoreRequest_description, *v.Description)
+	}
+	if v.FallbackLocation != nil {
+		s.WriteString(schemas.UpdateSequenceStoreRequest_fallbackLocation, *v.FallbackLocation)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateSequenceStoreRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSequenceStoreRequest_name, *v.Name)
+	}
+	serializePropagatedSetLevelTags(s, schemas.UpdateSequenceStoreRequest_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.S3AccessConfig != nil {
+		s.WriteStruct(schemas.UpdateSequenceStoreRequest_s3AccessConfig)
+		v.S3AccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateSequenceStoreOutput struct {
@@ -111,13 +143,113 @@ type UpdateSequenceStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSequenceStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSequenceStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSequenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateSequenceStoreResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_description, *v.Description)
+	}
+	if v.ETagAlgorithmFamily != "" {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_eTagAlgorithmFamily, string(v.ETagAlgorithmFamily))
+	}
+	if v.FallbackLocation != nil {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_fallbackLocation, *v.FallbackLocation)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_name, *v.Name)
+	}
+	serializePropagatedSetLevelTags(s, schemas.UpdateSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.S3Access != nil {
+		s.WriteStruct(schemas.UpdateSequenceStoreResponse_s3Access)
+		v.S3Access.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SseConfig != nil {
+		s.WriteStruct(schemas.UpdateSequenceStoreResponse_sseConfig)
+		v.SseConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.UpdateSequenceStoreResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.UpdateSequenceStoreResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *UpdateSequenceStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSequenceStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSequenceStoreResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateSequenceStoreResponse_arn, v.Arn)
+		case schemas.UpdateSequenceStoreResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSequenceStoreResponse_creationTime, v.CreationTime)
+		case schemas.UpdateSequenceStoreResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSequenceStoreResponse_description, v.Description)
+		case schemas.UpdateSequenceStoreResponse_eTagAlgorithmFamily:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSequenceStoreResponse_eTagAlgorithmFamily, &ev); err != nil {
+				return err
+			}
+			v.ETagAlgorithmFamily = types.ETagAlgorithmFamily(ev)
+			return nil
+		case schemas.UpdateSequenceStoreResponse_fallbackLocation:
+			v.FallbackLocation = new(string)
+			return d.ReadString(schemas.UpdateSequenceStoreResponse_fallbackLocation, v.FallbackLocation)
+		case schemas.UpdateSequenceStoreResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateSequenceStoreResponse_id, v.Id)
+		case schemas.UpdateSequenceStoreResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSequenceStoreResponse_name, v.Name)
+		case schemas.UpdateSequenceStoreResponse_propagatedSetLevelTags:
+			return deserializePropagatedSetLevelTags(d, schemas.UpdateSequenceStoreResponse_propagatedSetLevelTags, &v.PropagatedSetLevelTags)
+		case schemas.UpdateSequenceStoreResponse_s3Access:
+			v.S3Access = &types.SequenceStoreS3Access{}
+			return v.S3Access.Deserialize(d)
+		case schemas.UpdateSequenceStoreResponse_sseConfig:
+			v.SseConfig = &types.SseConfig{}
+			return v.SseConfig.Deserialize(d)
+		case schemas.UpdateSequenceStoreResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSequenceStoreResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SequenceStoreStatus(ev)
+			return nil
+		case schemas.UpdateSequenceStoreResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.UpdateSequenceStoreResponse_statusMessage, v.StatusMessage)
+		case schemas.UpdateSequenceStoreResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSequenceStoreResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSequenceStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSequenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSequenceStore, schemas.UpdateSequenceStoreRequest, schemas.UpdateSequenceStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSequenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSequenceStore, schemas.UpdateSequenceStoreRequest, schemas.UpdateSequenceStoreResponse), output: &UpdateSequenceStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appId":"__AppId__","appVersion":1,"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","initialPrompt":"__InitialPrompt__","requiredCapabilities":["FileUpload","FileUpload"],"status":"PUBLISHED","title":"__Title__","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__"}

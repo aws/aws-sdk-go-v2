@@ -4,7 +4,9 @@ package rolesanywhere
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,28 @@ type GetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalarProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ScalarProfileRequest_profileId, *v.ProfileId)
+	}
+}
+func (v *GetProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalarProfileRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalarProfileRequest_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.ScalarProfileRequest_profileId, v.ProfileId)
+		}
+		return nil
+	})
+}
+
 type GetProfileOutput struct {
 
 	// The state of the profile after a read or write operation.
@@ -47,13 +71,34 @@ type GetProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.ProfileDetailResponse_profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileDetailResponse_profile:
+			v.Profile = &types.ProfileDetail{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.ScalarProfileRequest, schemas.ProfileDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.ScalarProfileRequest, schemas.ProfileDetailResponse), output: &GetProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

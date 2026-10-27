@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attachments":[{"attachmentId":"__AttachmentId__","conversationId":"__ConversationId__","copyFrom":{"conversation":{"attachmentId":"__AttachmentId__","conversationId":"__ConversationId__"}},"createdAt":946684800,"error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"fileSize":1,"fileType":"__FileType__","md5chksum":"__Md5chksum__","name":"__Name__","status":"FAILED"},{"attachmentId":"__AttachmentId__","conversationId":"__ConversationId__","copyFrom":{"conversation":{"attachmentId":"__AttachmentId__","conversationId":"__ConversationId__"}},"createdAt":946684800,"error":{"errorCode":"InternalError","errorMessage":"__ErrorMessage__"},"fileSize":1,"fileType":"__FileType__","md5chksum":"__Md5chksum__","name":"__Name__","status":"FAILED"}],"nextToken":"__NextToken__"}

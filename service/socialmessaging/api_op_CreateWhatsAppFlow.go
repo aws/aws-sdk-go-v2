@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,34 @@ type CreateWhatsAppFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppFlowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetaFlowCategoryList(s, schemas.CreateWhatsAppFlowInput_categories, v.Categories)
+	if v.CloneFlowId != nil {
+		s.WriteString(schemas.CreateWhatsAppFlowInput_cloneFlowId, *v.CloneFlowId)
+	}
+	if v.EndpointUri != nil {
+		s.WriteString(schemas.CreateWhatsAppFlowInput_endpointUri, *v.EndpointUri)
+	}
+	if v.FlowJson != nil {
+		s.WriteBlob(schemas.CreateWhatsAppFlowInput_flowJson, v.FlowJson)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.CreateWhatsAppFlowInput_flowName, *v.FlowName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWhatsAppFlowInput_id, *v.Id)
+	}
+	if v.Publish != nil {
+		s.WriteBool(schemas.CreateWhatsAppFlowInput_publish, *v.Publish)
+	}
+}
+
 type CreateWhatsAppFlowOutput struct {
 
 	// The unique identifier assigned to the Flow by Meta.
@@ -77,13 +107,35 @@ type CreateWhatsAppFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppFlowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.CreateWhatsAppFlowOutput_flowId, *v.FlowId)
+	}
+	serializeValidationErrorList(s, schemas.CreateWhatsAppFlowOutput_validationErrors, v.ValidationErrors)
+}
+func (v *CreateWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWhatsAppFlowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWhatsAppFlowOutput_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.CreateWhatsAppFlowOutput_flowId, v.FlowId)
+		case schemas.CreateWhatsAppFlowOutput_validationErrors:
+			return deserializeValidationErrorList(d, schemas.CreateWhatsAppFlowOutput_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWhatsAppFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWhatsAppFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppFlow, schemas.CreateWhatsAppFlowInput, schemas.CreateWhatsAppFlowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWhatsAppFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppFlow, schemas.CreateWhatsAppFlowInput, schemas.CreateWhatsAppFlowOutput), output: &CreateWhatsAppFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

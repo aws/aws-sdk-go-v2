@@ -4,7 +4,9 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,20 @@ type ValidateTelemetryPipelineConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateTelemetryPipelineConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateTelemetryPipelineConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateTelemetryPipelineConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ValidateTelemetryPipelineConfigurationInput_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ValidateTelemetryPipelineConfigurationOutput struct {
 
 	// A list of validation errors found in the pipeline configuration, if any.
@@ -46,13 +62,29 @@ type ValidateTelemetryPipelineConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateTelemetryPipelineConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateTelemetryPipelineConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateTelemetryPipelineConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidationErrors(s, schemas.ValidateTelemetryPipelineConfigurationOutput_Errors, v.Errors)
+}
+func (v *ValidateTelemetryPipelineConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateTelemetryPipelineConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateTelemetryPipelineConfigurationOutput_Errors:
+			return deserializeValidationErrors(d, schemas.ValidateTelemetryPipelineConfigurationOutput_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationValidateTelemetryPipelineConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpValidateTelemetryPipelineConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateTelemetryPipelineConfiguration, schemas.ValidateTelemetryPipelineConfigurationInput, schemas.ValidateTelemetryPipelineConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpValidateTelemetryPipelineConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ValidateTelemetryPipelineConfiguration, schemas.ValidateTelemetryPipelineConfigurationInput, schemas.ValidateTelemetryPipelineConfigurationOutput), output: &ValidateTelemetryPipelineConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

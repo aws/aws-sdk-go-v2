@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ListIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationFilter(s, schemas.ListIntegrationsInput_filter, v.Filter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntegrationsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListIntegrationsOutput struct {
 
 	// The list of integration summaries.
@@ -60,13 +78,35 @@ type ListIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationSummaryList(s, schemas.ListIntegrationsOutput_integrationSummaries, v.IntegrationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntegrationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntegrationsOutput_integrationSummaries:
+			return deserializeIntegrationSummaryList(d, schemas.ListIntegrationsOutput_integrationSummaries, &v.IntegrationSummaries)
+		case schemas.ListIntegrationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntegrationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrations, schemas.ListIntegrationsInput, schemas.ListIntegrationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrations, schemas.ListIntegrationsInput, schemas.ListIntegrationsOutput), output: &ListIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

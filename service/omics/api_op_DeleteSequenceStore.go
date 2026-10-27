@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,18 @@ type DeleteSequenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSequenceStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSequenceStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSequenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteSequenceStoreRequest_id, *v.Id)
+	}
+}
+
 type DeleteSequenceStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +66,26 @@ type DeleteSequenceStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSequenceStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSequenceStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSequenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSequenceStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSequenceStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSequenceStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSequenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSequenceStore, schemas.DeleteSequenceStoreRequest, schemas.DeleteSequenceStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSequenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSequenceStore, schemas.DeleteSequenceStoreRequest, schemas.DeleteSequenceStoreResponse), output: &DeleteSequenceStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

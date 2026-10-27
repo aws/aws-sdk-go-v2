@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetBatchInput struct {
 	BatchId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchId != nil {
+		s.WriteString(schemas.GetBatchRequest_batchId, *v.BatchId)
+	}
 }
 
 type GetBatchOutput struct {
@@ -99,13 +113,123 @@ type GetBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetBatchResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetBatchResponse_creationTime, *v.CreationTime)
+	}
+	if v.DefaultRunSetting != nil {
+		s.WriteStruct(schemas.GetBatchResponse_defaultRunSetting)
+		v.DefaultRunSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedTime != nil {
+		s.WriteTime(schemas.GetBatchResponse_failedTime, *v.FailedTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetBatchResponse_failureReason, *v.FailureReason)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetBatchResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBatchResponse_name, *v.Name)
+	}
+	if v.ProcessedTime != nil {
+		s.WriteTime(schemas.GetBatchResponse_processedTime, *v.ProcessedTime)
+	}
+	if v.RunSummary != nil {
+		s.WriteStruct(schemas.GetBatchResponse_runSummary)
+		v.RunSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBatchResponse_status, string(v.Status))
+	}
+	if v.SubmissionSummary != nil {
+		s.WriteStruct(schemas.GetBatchResponse_submissionSummary)
+		v.SubmissionSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmittedTime != nil {
+		s.WriteTime(schemas.GetBatchResponse_submittedTime, *v.SubmittedTime)
+	}
+	serializeTagMap(s, schemas.GetBatchResponse_tags, v.Tags)
+	if v.TotalRuns != nil {
+		s.WriteInt32(schemas.GetBatchResponse_totalRuns, *v.TotalRuns)
+	}
+	if v.Uuid != nil {
+		s.WriteString(schemas.GetBatchResponse_uuid, *v.Uuid)
+	}
+}
+func (v *GetBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBatchResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetBatchResponse_arn, v.Arn)
+		case schemas.GetBatchResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetBatchResponse_creationTime, v.CreationTime)
+		case schemas.GetBatchResponse_defaultRunSetting:
+			v.DefaultRunSetting = &types.DefaultRunSetting{}
+			return v.DefaultRunSetting.Deserialize(d)
+		case schemas.GetBatchResponse_failedTime:
+			v.FailedTime = new(time.Time)
+			return d.ReadTime(schemas.GetBatchResponse_failedTime, v.FailedTime)
+		case schemas.GetBatchResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetBatchResponse_failureReason, v.FailureReason)
+		case schemas.GetBatchResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetBatchResponse_id, v.Id)
+		case schemas.GetBatchResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBatchResponse_name, v.Name)
+		case schemas.GetBatchResponse_processedTime:
+			v.ProcessedTime = new(time.Time)
+			return d.ReadTime(schemas.GetBatchResponse_processedTime, v.ProcessedTime)
+		case schemas.GetBatchResponse_runSummary:
+			v.RunSummary = &types.RunSummary{}
+			return v.RunSummary.Deserialize(d)
+		case schemas.GetBatchResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBatchResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchStatus(ev)
+			return nil
+		case schemas.GetBatchResponse_submissionSummary:
+			v.SubmissionSummary = &types.SubmissionSummary{}
+			return v.SubmissionSummary.Deserialize(d)
+		case schemas.GetBatchResponse_submittedTime:
+			v.SubmittedTime = new(time.Time)
+			return d.ReadTime(schemas.GetBatchResponse_submittedTime, v.SubmittedTime)
+		case schemas.GetBatchResponse_tags:
+			return deserializeTagMap(d, schemas.GetBatchResponse_tags, &v.Tags)
+		case schemas.GetBatchResponse_totalRuns:
+			v.TotalRuns = new(int32)
+			return d.ReadInt32(schemas.GetBatchResponse_totalRuns, v.TotalRuns)
+		case schemas.GetBatchResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.GetBatchResponse_uuid, v.Uuid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatch, schemas.GetBatchRequest, schemas.GetBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBatch, schemas.GetBatchRequest, schemas.GetBatchResponse), output: &GetBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

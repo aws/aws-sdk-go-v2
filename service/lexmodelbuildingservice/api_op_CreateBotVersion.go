@@ -4,7 +4,9 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -53,6 +55,21 @@ type CreateBotVersionInput struct {
 	Checksum *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateBotVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Checksum != nil {
+		s.WriteString(schemas.CreateBotVersionRequest_checksum, *v.Checksum)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBotVersionRequest_name, *v.Name)
+	}
 }
 
 type CreateBotVersionOutput struct {
@@ -147,13 +164,137 @@ type CreateBotVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbortStatement != nil {
+		s.WriteStruct(schemas.CreateBotVersionResponse_abortStatement)
+		v.AbortStatement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_checksum, *v.Checksum)
+	}
+	if v.ChildDirected != nil {
+		s.WriteBool(schemas.CreateBotVersionResponse_childDirected, *v.ChildDirected)
+	}
+	if v.ClarificationPrompt != nil {
+		s.WriteStruct(schemas.CreateBotVersionResponse_clarificationPrompt)
+		v.ClarificationPrompt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.CreateBotVersionResponse_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_description, *v.Description)
+	}
+	if v.DetectSentiment != nil {
+		s.WriteBool(schemas.CreateBotVersionResponse_detectSentiment, *v.DetectSentiment)
+	}
+	if v.EnableModelImprovements != nil {
+		s.WriteBool(schemas.CreateBotVersionResponse_enableModelImprovements, *v.EnableModelImprovements)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_failureReason, *v.FailureReason)
+	}
+	if v.IdleSessionTTLInSeconds != nil {
+		s.WriteInt32(schemas.CreateBotVersionResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
+	}
+	serializeIntentList(s, schemas.CreateBotVersionResponse_intents, v.Intents)
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.CreateBotVersionResponse_lastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.CreateBotVersionResponse_locale, string(v.Locale))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateBotVersionResponse_status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_version, *v.Version)
+	}
+	if v.VoiceId != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_voiceId, *v.VoiceId)
+	}
+}
+func (v *CreateBotVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBotVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBotVersionResponse_abortStatement:
+			v.AbortStatement = &types.Statement{}
+			return v.AbortStatement.Deserialize(d)
+		case schemas.CreateBotVersionResponse_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_checksum, v.Checksum)
+		case schemas.CreateBotVersionResponse_childDirected:
+			v.ChildDirected = new(bool)
+			return d.ReadBool(schemas.CreateBotVersionResponse_childDirected, v.ChildDirected)
+		case schemas.CreateBotVersionResponse_clarificationPrompt:
+			v.ClarificationPrompt = &types.Prompt{}
+			return v.ClarificationPrompt.Deserialize(d)
+		case schemas.CreateBotVersionResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreateBotVersionResponse_createdDate, v.CreatedDate)
+		case schemas.CreateBotVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_description, v.Description)
+		case schemas.CreateBotVersionResponse_detectSentiment:
+			v.DetectSentiment = new(bool)
+			return d.ReadBool(schemas.CreateBotVersionResponse_detectSentiment, v.DetectSentiment)
+		case schemas.CreateBotVersionResponse_enableModelImprovements:
+			v.EnableModelImprovements = new(bool)
+			return d.ReadBool(schemas.CreateBotVersionResponse_enableModelImprovements, v.EnableModelImprovements)
+		case schemas.CreateBotVersionResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_failureReason, v.FailureReason)
+		case schemas.CreateBotVersionResponse_idleSessionTTLInSeconds:
+			v.IdleSessionTTLInSeconds = new(int32)
+			return d.ReadInt32(schemas.CreateBotVersionResponse_idleSessionTTLInSeconds, v.IdleSessionTTLInSeconds)
+		case schemas.CreateBotVersionResponse_intents:
+			return deserializeIntentList(d, schemas.CreateBotVersionResponse_intents, &v.Intents)
+		case schemas.CreateBotVersionResponse_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreateBotVersionResponse_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.CreateBotVersionResponse_locale:
+			var ev string
+			if err := d.ReadString(schemas.CreateBotVersionResponse_locale, &ev); err != nil {
+				return err
+			}
+			v.Locale = types.Locale(ev)
+			return nil
+		case schemas.CreateBotVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_name, v.Name)
+		case schemas.CreateBotVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateBotVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.CreateBotVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_version, v.Version)
+		case schemas.CreateBotVersionResponse_voiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_voiceId, v.VoiceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBotVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotVersion, schemas.CreateBotVersionRequest, schemas.CreateBotVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBotVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotVersion, schemas.CreateBotVersionRequest, schemas.CreateBotVersionResponse), output: &CreateBotVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

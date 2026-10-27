@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,34 @@ type CreateRunGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRunGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRunGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRunGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxCpus != nil {
+		s.WriteInt32(schemas.CreateRunGroupRequest_maxCpus, *v.MaxCpus)
+	}
+	if v.MaxDuration != nil {
+		s.WriteInt32(schemas.CreateRunGroupRequest_maxDuration, *v.MaxDuration)
+	}
+	if v.MaxGpus != nil {
+		s.WriteInt32(schemas.CreateRunGroupRequest_maxGpus, *v.MaxGpus)
+	}
+	if v.MaxRuns != nil {
+		s.WriteInt32(schemas.CreateRunGroupRequest_maxRuns, *v.MaxRuns)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRunGroupRequest_name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateRunGroupRequest_requestId, *v.RequestId)
+	}
+	serializeTagMap(s, schemas.CreateRunGroupRequest_tags, v.Tags)
+}
+
 type CreateRunGroupOutput struct {
 
 	// The group's ARN.
@@ -75,13 +105,41 @@ type CreateRunGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRunGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRunGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRunGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateRunGroupResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateRunGroupResponse_id, *v.Id)
+	}
+	serializeTagMap(s, schemas.CreateRunGroupResponse_tags, v.Tags)
+}
+func (v *CreateRunGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRunGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRunGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateRunGroupResponse_arn, v.Arn)
+		case schemas.CreateRunGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateRunGroupResponse_id, v.Id)
+		case schemas.CreateRunGroupResponse_tags:
+			return deserializeTagMap(d, schemas.CreateRunGroupResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRunGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRunGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRunGroup, schemas.CreateRunGroupRequest, schemas.CreateRunGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRunGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRunGroup, schemas.CreateRunGroupRequest, schemas.CreateRunGroupResponse), output: &CreateRunGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

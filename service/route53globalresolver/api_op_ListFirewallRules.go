@@ -5,7 +5,9 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type ListFirewallRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsViewId != nil {
+		s.WriteString(schemas.ListFirewallRulesInput_dnsViewId, *v.DnsViewId)
+	}
+	serializeFilters(s, schemas.ListFirewallRulesInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFirewallRulesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallRulesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListFirewallRulesOutput struct {
 
 	// List of the firewall rules and information about them.
@@ -69,13 +90,35 @@ type ListFirewallRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFirewallRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFirewallRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFirewallRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFirewallRules(s, schemas.ListFirewallRulesOutput_firewallRules, v.FirewallRules)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFirewallRulesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFirewallRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFirewallRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFirewallRulesOutput_firewallRules:
+			return deserializeFirewallRules(d, schemas.ListFirewallRulesOutput_firewallRules, &v.FirewallRules)
+		case schemas.ListFirewallRulesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFirewallRulesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFirewallRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFirewallRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallRules, schemas.ListFirewallRulesInput, schemas.ListFirewallRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFirewallRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFirewallRules, schemas.ListFirewallRulesInput, schemas.ListFirewallRulesOutput), output: &ListFirewallRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

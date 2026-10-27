@@ -4,7 +4,9 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,23 @@ type PutSynchronizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSynchronizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSynchronizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSynchronizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpirationDataRuleList(s, schemas.PutSynchronizationConfigurationRequest_expirationDataRules, v.ExpirationDataRules)
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.PutSynchronizationConfigurationRequest_fileSystemId, *v.FileSystemId)
+	}
+	serializeImportDataRuleList(s, schemas.PutSynchronizationConfigurationRequest_importDataRules, v.ImportDataRules)
+	if v.LatestVersionNumber != nil {
+		s.WriteInt32(schemas.PutSynchronizationConfigurationRequest_latestVersionNumber, *v.LatestVersionNumber)
+	}
+}
+
 type PutSynchronizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,13 +81,26 @@ type PutSynchronizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSynchronizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSynchronizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSynchronizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutSynchronizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSynchronizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSynchronizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutSynchronizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSynchronizationConfiguration, schemas.PutSynchronizationConfigurationRequest, schemas.PutSynchronizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutSynchronizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSynchronizationConfiguration, schemas.PutSynchronizationConfigurationRequest, schemas.PutSynchronizationConfigurationResponse), output: &PutSynchronizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

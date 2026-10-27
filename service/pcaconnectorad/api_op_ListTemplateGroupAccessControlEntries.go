@@ -5,7 +5,9 @@ package pcaconnectorad
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,24 @@ type ListTemplateGroupAccessControlEntriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateGroupAccessControlEntriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateGroupAccessControlEntriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateGroupAccessControlEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTemplateGroupAccessControlEntriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateGroupAccessControlEntriesRequest_NextToken, *v.NextToken)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.ListTemplateGroupAccessControlEntriesRequest_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type ListTemplateGroupAccessControlEntriesOutput struct {
 
 	// An access control entry grants or denies permission to an Active Directory
@@ -65,13 +85,35 @@ type ListTemplateGroupAccessControlEntriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateGroupAccessControlEntriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateGroupAccessControlEntriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateGroupAccessControlEntriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessControlEntryList(s, schemas.ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries, v.AccessControlEntries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateGroupAccessControlEntriesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListTemplateGroupAccessControlEntriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateGroupAccessControlEntriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries:
+			return deserializeAccessControlEntryList(d, schemas.ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries, &v.AccessControlEntries)
+		case schemas.ListTemplateGroupAccessControlEntriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateGroupAccessControlEntriesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplateGroupAccessControlEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateGroupAccessControlEntries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateGroupAccessControlEntries, schemas.ListTemplateGroupAccessControlEntriesRequest, schemas.ListTemplateGroupAccessControlEntriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplateGroupAccessControlEntries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateGroupAccessControlEntries, schemas.ListTemplateGroupAccessControlEntriesRequest, schemas.ListTemplateGroupAccessControlEntriesResponse), output: &ListTemplateGroupAccessControlEntriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

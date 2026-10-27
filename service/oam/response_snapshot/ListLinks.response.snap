@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"Arn":"__Arn__","Id":"__Id__","Label":"__Label__","ResourceTypes":["__Member__","__Member__"],"SinkArn":"__SinkArn__"},{"Arn":"__Arn__","Id":"__Id__","Label":"__Label__","ResourceTypes":["__Member__","__Member__"],"SinkArn":"__SinkArn__"}],"NextToken":"__NextToken__"}

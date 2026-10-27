@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,6 +46,21 @@ type GetReadSetExportJobInput struct {
 	SequenceStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetReadSetExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReadSetExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReadSetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetReadSetExportJobRequest_id, *v.Id)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.GetReadSetExportJobRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
 }
 
 type GetReadSetExportJobOutput struct {
@@ -88,13 +105,75 @@ type GetReadSetExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReadSetExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReadSetExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReadSetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.GetReadSetExportJobResponse_completionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetReadSetExportJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.GetReadSetExportJobResponse_destination, *v.Destination)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetReadSetExportJobResponse_id, *v.Id)
+	}
+	serializeExportReadSetDetailList(s, schemas.GetReadSetExportJobResponse_readSets, v.ReadSets)
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.GetReadSetExportJobResponse_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetReadSetExportJobResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetReadSetExportJobResponse_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *GetReadSetExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReadSetExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReadSetExportJobResponse_completionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.GetReadSetExportJobResponse_completionTime, v.CompletionTime)
+		case schemas.GetReadSetExportJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetReadSetExportJobResponse_creationTime, v.CreationTime)
+		case schemas.GetReadSetExportJobResponse_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.GetReadSetExportJobResponse_destination, v.Destination)
+		case schemas.GetReadSetExportJobResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetReadSetExportJobResponse_id, v.Id)
+		case schemas.GetReadSetExportJobResponse_readSets:
+			return deserializeExportReadSetDetailList(d, schemas.GetReadSetExportJobResponse_readSets, &v.ReadSets)
+		case schemas.GetReadSetExportJobResponse_sequenceStoreId:
+			v.SequenceStoreId = new(string)
+			return d.ReadString(schemas.GetReadSetExportJobResponse_sequenceStoreId, v.SequenceStoreId)
+		case schemas.GetReadSetExportJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetReadSetExportJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReadSetExportJobStatus(ev)
+			return nil
+		case schemas.GetReadSetExportJobResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetReadSetExportJobResponse_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReadSetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReadSetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadSetExportJob, schemas.GetReadSetExportJobRequest, schemas.GetReadSetExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReadSetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReadSetExportJob, schemas.GetReadSetExportJobRequest, schemas.GetReadSetExportJobResponse), output: &GetReadSetExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Policy":"__Policy__","SinkArn":"__SinkArn__","SinkId":"__SinkId__"}

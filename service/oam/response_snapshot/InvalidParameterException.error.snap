@@ -1,0 +1,5 @@
+400
+Content-Type: application/json
+X-Amzn-Errortype: InvalidParameterException
+
+{"__type":"InvalidParameterException","message":"__Message__"}

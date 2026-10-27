@@ -5,6 +5,8 @@ package location
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,28 @@ type DeleteTrackerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrackerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrackerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrackerName != nil {
+		s.WriteString(schemas.DeleteTrackerRequest_TrackerName, *v.TrackerName)
+	}
+}
+func (v *DeleteTrackerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrackerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteTrackerRequest_TrackerName:
+			v.TrackerName = new(string)
+			return d.ReadString(schemas.DeleteTrackerRequest_TrackerName, v.TrackerName)
+		}
+		return nil
+	})
+}
+
 type DeleteTrackerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +70,26 @@ type DeleteTrackerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTrackerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTrackerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTrackerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTrackerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTrackerResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTracker, schemas.DeleteTrackerRequest, schemas.DeleteTrackerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTracker{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTracker, schemas.DeleteTrackerRequest, schemas.DeleteTrackerResponse), output: &DeleteTrackerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

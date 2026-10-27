@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,12 @@ type AreaOfInterestMemberAreaOfInterestGeometry struct {
 }
 
 func (*AreaOfInterestMemberAreaOfInterestGeometry) isAreaOfInterest() {}
+func (v *AreaOfInterestMemberAreaOfInterestGeometry) Serialize(s smithy.ShapeSerializer) {
+	serializeAreaOfInterestGeometry(s, schemas.AreaOfInterest_AreaOfInterestGeometry, v.Value)
+}
+func (v *AreaOfInterestMemberAreaOfInterestGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAreaOfInterestGeometry(d, schemas.AreaOfInterest_AreaOfInterestGeometry, &v.Value)
+}
 
 // A GeoJSON object representing the geographic extent in the coordinate space.
 //
@@ -43,6 +51,14 @@ type AreaOfInterestGeometryMemberMultiPolygonGeometry struct {
 }
 
 func (*AreaOfInterestGeometryMemberMultiPolygonGeometry) isAreaOfInterestGeometry() {}
+func (v *AreaOfInterestGeometryMemberMultiPolygonGeometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AreaOfInterestGeometry_MultiPolygonGeometry)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AreaOfInterestGeometryMemberMultiPolygonGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing Polygon Geometry.
 type AreaOfInterestGeometryMemberPolygonGeometry struct {
@@ -52,6 +68,14 @@ type AreaOfInterestGeometryMemberPolygonGeometry struct {
 }
 
 func (*AreaOfInterestGeometryMemberPolygonGeometry) isAreaOfInterestGeometry() {}
+func (v *AreaOfInterestGeometryMemberPolygonGeometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AreaOfInterestGeometry_PolygonGeometry)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AreaOfInterestGeometryMemberPolygonGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure containing the asset properties.
 type AssetValue struct {
@@ -60,6 +84,28 @@ type AssetValue struct {
 	Href *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Href != nil {
+		s.WriteString(schemas.AssetValue_Href, *v.Href)
+	}
+}
+func (v *AssetValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetValue_Href:
+			v.Href = new(string)
+			return d.ReadString(schemas.AssetValue_Href, v.Href)
+		}
+		return nil
+	})
 }
 
 // Input structure for the BandMath operation type. Defines Predefined and
@@ -76,9 +122,52 @@ type BandMathConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BandMathConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BandMathConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BandMathConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomIndices != nil {
+		s.WriteStruct(schemas.BandMathConfigInput_CustomIndices)
+		v.CustomIndices.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringListInput(s, schemas.BandMathConfigInput_PredefinedIndices, v.PredefinedIndices)
+}
+func (v *BandMathConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BandMathConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BandMathConfigInput_CustomIndices:
+			v.CustomIndices = &CustomIndicesInput{}
+			return v.CustomIndices.Deserialize(d)
+		case schemas.BandMathConfigInput_PredefinedIndices:
+			return deserializeStringListInput(d, schemas.BandMathConfigInput_PredefinedIndices, &v.PredefinedIndices)
+		}
+		return nil
+	})
+}
+
 // Input structure for CloudMasking operation type.
 type CloudMaskingConfigInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CloudMaskingConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudMaskingConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudMaskingConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CloudMaskingConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudMaskingConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Input structure for Cloud Removal Operation type
@@ -96,6 +185,41 @@ type CloudRemovalConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudRemovalConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudRemovalConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudRemovalConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmName != "" {
+		s.WriteString(schemas.CloudRemovalConfigInput_AlgorithmName, string(v.AlgorithmName))
+	}
+	if v.InterpolationValue != nil {
+		s.WriteString(schemas.CloudRemovalConfigInput_InterpolationValue, *v.InterpolationValue)
+	}
+	serializeStringListInput(s, schemas.CloudRemovalConfigInput_TargetBands, v.TargetBands)
+}
+func (v *CloudRemovalConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudRemovalConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudRemovalConfigInput_AlgorithmName:
+			var ev string
+			if err := d.ReadString(schemas.CloudRemovalConfigInput_AlgorithmName, &ev); err != nil {
+				return err
+			}
+			v.AlgorithmName = AlgorithmNameCloudRemoval(ev)
+			return nil
+		case schemas.CloudRemovalConfigInput_InterpolationValue:
+			v.InterpolationValue = new(string)
+			return d.ReadString(schemas.CloudRemovalConfigInput_InterpolationValue, v.InterpolationValue)
+		case schemas.CloudRemovalConfigInput_TargetBands:
+			return deserializeStringListInput(d, schemas.CloudRemovalConfigInput_TargetBands, &v.TargetBands)
+		}
+		return nil
+	})
+}
+
 // Input object defining the custom BandMath indices to compute.
 type CustomIndicesInput struct {
 
@@ -103,6 +227,25 @@ type CustomIndicesInput struct {
 	Operations []Operation
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomIndicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomIndicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomIndicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationsListInput(s, schemas.CustomIndicesInput_Operations, v.Operations)
+}
+func (v *CustomIndicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomIndicesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomIndicesInput_Operations:
+			return deserializeOperationsListInput(d, schemas.CustomIndicesInput_Operations, &v.Operations)
+		}
+		return nil
+	})
 }
 
 // The structure representing the errors in an EarthObservationJob.
@@ -115,6 +258,38 @@ type EarthObservationJobErrorDetails struct {
 	Type EarthObservationJobErrorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *EarthObservationJobErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EarthObservationJobErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EarthObservationJobErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EarthObservationJobErrorDetails_Message, *v.Message)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EarthObservationJobErrorDetails_Type, string(v.Type))
+	}
+}
+func (v *EarthObservationJobErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EarthObservationJobErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EarthObservationJobErrorDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EarthObservationJobErrorDetails_Message, v.Message)
+		case schemas.EarthObservationJobErrorDetails_Type:
+			var ev string
+			if err := d.ReadString(schemas.EarthObservationJobErrorDetails_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EarthObservationJobErrorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The structure representing the EoCloudCover filter.
@@ -133,6 +308,34 @@ type EoCloudCoverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EoCloudCoverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EoCloudCoverInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EoCloudCoverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LowerBound != nil {
+		s.WriteFloat32(schemas.EoCloudCoverInput_LowerBound, *v.LowerBound)
+	}
+	if v.UpperBound != nil {
+		s.WriteFloat32(schemas.EoCloudCoverInput_UpperBound, *v.UpperBound)
+	}
+}
+func (v *EoCloudCoverInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EoCloudCoverInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EoCloudCoverInput_LowerBound:
+			v.LowerBound = new(float32)
+			return d.ReadFloat32(schemas.EoCloudCoverInput_LowerBound, v.LowerBound)
+		case schemas.EoCloudCoverInput_UpperBound:
+			v.UpperBound = new(float32)
+			return d.ReadFloat32(schemas.EoCloudCoverInput_UpperBound, v.UpperBound)
+		}
+		return nil
+	})
+}
+
 // The structure for returning the export error details in a
 // GetEarthObservationJob.
 type ExportErrorDetails struct {
@@ -148,6 +351,38 @@ type ExportErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportResults != nil {
+		s.WriteStruct(schemas.ExportErrorDetails_ExportResults)
+		v.ExportResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportSourceImages != nil {
+		s.WriteStruct(schemas.ExportErrorDetails_ExportSourceImages)
+		v.ExportSourceImages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportErrorDetails_ExportResults:
+			v.ExportResults = &ExportErrorDetailsOutput{}
+			return v.ExportResults.Deserialize(d)
+		case schemas.ExportErrorDetails_ExportSourceImages:
+			v.ExportSourceImages = &ExportErrorDetailsOutput{}
+			return v.ExportSourceImages.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The structure representing the errors in an export EarthObservationJob
 // operation.
 type ExportErrorDetailsOutput struct {
@@ -160,6 +395,38 @@ type ExportErrorDetailsOutput struct {
 	Type ExportErrorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportErrorDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportErrorDetailsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportErrorDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ExportErrorDetailsOutput_Message, *v.Message)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ExportErrorDetailsOutput_Type, string(v.Type))
+	}
+}
+func (v *ExportErrorDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportErrorDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportErrorDetailsOutput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExportErrorDetailsOutput_Message, v.Message)
+		case schemas.ExportErrorDetailsOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.ExportErrorDetailsOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ExportErrorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The structure containing the Amazon S3 path to export the Earth Observation job
@@ -177,6 +444,34 @@ type ExportS3DataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportS3DataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportS3DataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportS3DataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ExportS3DataInput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.ExportS3DataInput_S3Uri, *v.S3Uri)
+	}
+}
+func (v *ExportS3DataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportS3DataInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportS3DataInput_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ExportS3DataInput_KmsKeyId, v.KmsKeyId)
+		case schemas.ExportS3DataInput_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.ExportS3DataInput_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // An object containing information about the output file.
 type ExportVectorEnrichmentJobOutputConfig struct {
 
@@ -187,6 +482,30 @@ type ExportVectorEnrichmentJobOutputConfig struct {
 	S3Data *VectorEnrichmentJobS3Data
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportVectorEnrichmentJobOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportVectorEnrichmentJobOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportVectorEnrichmentJobOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Data != nil {
+		s.WriteStruct(schemas.ExportVectorEnrichmentJobOutputConfig_S3Data)
+		v.S3Data.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportVectorEnrichmentJobOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportVectorEnrichmentJobOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportVectorEnrichmentJobOutputConfig_S3Data:
+			v.S3Data = &VectorEnrichmentJobS3Data{}
+			return v.S3Data.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The structure representing the filters supported by a RasterDataCollection.
@@ -211,6 +530,46 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Maximum != nil {
+		s.WriteFloat32(schemas.Filter_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteFloat32(schemas.Filter_Minimum, *v.Minimum)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Filter_Type, *v.Type)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Maximum:
+			v.Maximum = new(float32)
+			return d.ReadFloat32(schemas.Filter_Maximum, v.Maximum)
+		case schemas.Filter_Minimum:
+			v.Minimum = new(float32)
+			return d.ReadFloat32(schemas.Filter_Minimum, v.Minimum)
+		case schemas.Filter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_Name, v.Name)
+		case schemas.Filter_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Filter_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // The structure representing a Geometry in terms of Type and Coordinates as per
 // GeoJson spec.
 type Geometry struct {
@@ -228,6 +587,31 @@ type Geometry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Geometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Geometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinearRings(s, schemas.Geometry_Coordinates, v.Coordinates)
+	if v.Type != nil {
+		s.WriteString(schemas.Geometry_Type, *v.Type)
+	}
+}
+func (v *Geometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Geometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Geometry_Coordinates:
+			return deserializeLinearRings(d, schemas.Geometry_Coordinates, &v.Coordinates)
+		case schemas.Geometry_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Geometry_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Input configuration information for the geomosaic.
 type GeoMosaicConfigInput struct {
 
@@ -238,6 +622,35 @@ type GeoMosaicConfigInput struct {
 	TargetBands []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GeoMosaicConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeoMosaicConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeoMosaicConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmName != "" {
+		s.WriteString(schemas.GeoMosaicConfigInput_AlgorithmName, string(v.AlgorithmName))
+	}
+	serializeStringListInput(s, schemas.GeoMosaicConfigInput_TargetBands, v.TargetBands)
+}
+func (v *GeoMosaicConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeoMosaicConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeoMosaicConfigInput_AlgorithmName:
+			var ev string
+			if err := d.ReadString(schemas.GeoMosaicConfigInput_AlgorithmName, &ev); err != nil {
+				return err
+			}
+			v.AlgorithmName = AlgorithmNameGeoMosaic(ev)
+			return nil
+		case schemas.GeoMosaicConfigInput_TargetBands:
+			return deserializeStringListInput(d, schemas.GeoMosaicConfigInput_TargetBands, &v.TargetBands)
+		}
+		return nil
+	})
 }
 
 // Input configuration information.
@@ -253,6 +666,36 @@ type InputConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreviousEarthObservationJobArn != nil {
+		s.WriteString(schemas.InputConfigInput_PreviousEarthObservationJobArn, *v.PreviousEarthObservationJobArn)
+	}
+	if v.RasterDataCollectionQuery != nil {
+		s.WriteStruct(schemas.InputConfigInput_RasterDataCollectionQuery)
+		v.RasterDataCollectionQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputConfigInput_PreviousEarthObservationJobArn:
+			v.PreviousEarthObservationJobArn = new(string)
+			return d.ReadString(schemas.InputConfigInput_PreviousEarthObservationJobArn, v.PreviousEarthObservationJobArn)
+		case schemas.InputConfigInput_RasterDataCollectionQuery:
+			v.RasterDataCollectionQuery = &RasterDataCollectionQueryInput{}
+			return v.RasterDataCollectionQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The InputConfig for an EarthObservationJob response.
 type InputConfigOutput struct {
 
@@ -265,6 +708,36 @@ type InputConfigOutput struct {
 	RasterDataCollectionQuery *RasterDataCollectionQueryOutput
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreviousEarthObservationJobArn != nil {
+		s.WriteString(schemas.InputConfigOutput_PreviousEarthObservationJobArn, *v.PreviousEarthObservationJobArn)
+	}
+	if v.RasterDataCollectionQuery != nil {
+		s.WriteStruct(schemas.InputConfigOutput_RasterDataCollectionQuery)
+		v.RasterDataCollectionQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputConfigOutput_PreviousEarthObservationJobArn:
+			v.PreviousEarthObservationJobArn = new(string)
+			return d.ReadString(schemas.InputConfigOutput_PreviousEarthObservationJobArn, v.PreviousEarthObservationJobArn)
+		case schemas.InputConfigOutput_RasterDataCollectionQuery:
+			v.RasterDataCollectionQuery = &RasterDataCollectionQueryOutput{}
+			return v.RasterDataCollectionQuery.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The structure representing the items in the response for
@@ -296,6 +769,53 @@ type ItemSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ItemSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ItemSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ItemSource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetsMap(s, schemas.ItemSource_Assets, v.Assets)
+	if v.DateTime != nil {
+		s.WriteTime(schemas.ItemSource_DateTime, *v.DateTime)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.ItemSource_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ItemSource_Id, *v.Id)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.ItemSource_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ItemSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ItemSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ItemSource_Assets:
+			return deserializeAssetsMap(d, schemas.ItemSource_Assets, &v.Assets)
+		case schemas.ItemSource_DateTime:
+			v.DateTime = new(time.Time)
+			return d.ReadTime(schemas.ItemSource_DateTime, v.DateTime)
+		case schemas.ItemSource_Geometry:
+			v.Geometry = &Geometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.ItemSource_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ItemSource_Id, v.Id)
+		case schemas.ItemSource_Properties:
+			v.Properties = &Properties{}
+			return v.Properties.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The input structure for the JobConfig in an EarthObservationJob.
 //
 // The following types satisfy this interface:
@@ -321,6 +841,14 @@ type JobConfigInputMemberBandMathConfig struct {
 }
 
 func (*JobConfigInputMemberBandMathConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberBandMathConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_BandMathConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberBandMathConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for cloud masking.
 type JobConfigInputMemberCloudMaskingConfig struct {
@@ -330,6 +858,14 @@ type JobConfigInputMemberCloudMaskingConfig struct {
 }
 
 func (*JobConfigInputMemberCloudMaskingConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberCloudMaskingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_CloudMaskingConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberCloudMaskingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for cloud removal.
 type JobConfigInputMemberCloudRemovalConfig struct {
@@ -339,6 +875,14 @@ type JobConfigInputMemberCloudRemovalConfig struct {
 }
 
 func (*JobConfigInputMemberCloudRemovalConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberCloudRemovalConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_CloudRemovalConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberCloudRemovalConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for geomosaic.
 type JobConfigInputMemberGeoMosaicConfig struct {
@@ -348,6 +892,14 @@ type JobConfigInputMemberGeoMosaicConfig struct {
 }
 
 func (*JobConfigInputMemberGeoMosaicConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberGeoMosaicConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_GeoMosaicConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberGeoMosaicConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for land cover
 // segmentation.
@@ -358,6 +910,14 @@ type JobConfigInputMemberLandCoverSegmentationConfig struct {
 }
 
 func (*JobConfigInputMemberLandCoverSegmentationConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberLandCoverSegmentationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_LandCoverSegmentationConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberLandCoverSegmentationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for resampling.
 type JobConfigInputMemberResamplingConfig struct {
@@ -367,6 +927,14 @@ type JobConfigInputMemberResamplingConfig struct {
 }
 
 func (*JobConfigInputMemberResamplingConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberResamplingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_ResamplingConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberResamplingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for a Stacking
 // Earth Observation job.
@@ -377,6 +945,14 @@ type JobConfigInputMemberStackConfig struct {
 }
 
 func (*JobConfigInputMemberStackConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberStackConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_StackConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberStackConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for temporal
 // statistics.
@@ -387,6 +963,14 @@ type JobConfigInputMemberTemporalStatisticsConfig struct {
 }
 
 func (*JobConfigInputMemberTemporalStatisticsConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberTemporalStatisticsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_TemporalStatisticsConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberTemporalStatisticsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An object containing information about the job configuration for zonal
 // statistics.
@@ -397,10 +981,34 @@ type JobConfigInputMemberZonalStatisticsConfig struct {
 }
 
 func (*JobConfigInputMemberZonalStatisticsConfig) isJobConfigInput() {}
+func (v *JobConfigInputMemberZonalStatisticsConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfigInput_ZonalStatisticsConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *JobConfigInputMemberZonalStatisticsConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The input structure for Land Cover Operation type.
 type LandCoverSegmentationConfigInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *LandCoverSegmentationConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandCoverSegmentationConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandCoverSegmentationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *LandCoverSegmentationConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandCoverSegmentationConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // The structure representing Land Cloud Cover property for Landsat data
@@ -420,6 +1028,34 @@ type LandsatCloudCoverLandInput struct {
 	UpperBound *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LandsatCloudCoverLandInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandsatCloudCoverLandInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandsatCloudCoverLandInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LowerBound != nil {
+		s.WriteFloat32(schemas.LandsatCloudCoverLandInput_LowerBound, *v.LowerBound)
+	}
+	if v.UpperBound != nil {
+		s.WriteFloat32(schemas.LandsatCloudCoverLandInput_UpperBound, *v.UpperBound)
+	}
+}
+func (v *LandsatCloudCoverLandInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandsatCloudCoverLandInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandsatCloudCoverLandInput_LowerBound:
+			v.LowerBound = new(float32)
+			return d.ReadFloat32(schemas.LandsatCloudCoverLandInput_LowerBound, v.LowerBound)
+		case schemas.LandsatCloudCoverLandInput_UpperBound:
+			v.UpperBound = new(float32)
+			return d.ReadFloat32(schemas.LandsatCloudCoverLandInput_UpperBound, v.UpperBound)
+		}
+		return nil
+	})
 }
 
 // An object containing information about the output file.
@@ -461,6 +1097,65 @@ type ListEarthObservationJobOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEarthObservationJobOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEarthObservationJobOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEarthObservationJobOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListEarthObservationJobOutputConfig_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ListEarthObservationJobOutputConfig_CreationTime, *v.CreationTime)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.ListEarthObservationJobOutputConfig_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListEarthObservationJobOutputConfig_Name, *v.Name)
+	}
+	if v.OperationType != nil {
+		s.WriteString(schemas.ListEarthObservationJobOutputConfig_OperationType, *v.OperationType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListEarthObservationJobOutputConfig_Status, string(v.Status))
+	}
+	serializeTags(s, schemas.ListEarthObservationJobOutputConfig_Tags, v.Tags)
+}
+func (v *ListEarthObservationJobOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEarthObservationJobOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEarthObservationJobOutputConfig_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListEarthObservationJobOutputConfig_Arn, v.Arn)
+		case schemas.ListEarthObservationJobOutputConfig_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ListEarthObservationJobOutputConfig_CreationTime, v.CreationTime)
+		case schemas.ListEarthObservationJobOutputConfig_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.ListEarthObservationJobOutputConfig_DurationInSeconds, v.DurationInSeconds)
+		case schemas.ListEarthObservationJobOutputConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListEarthObservationJobOutputConfig_Name, v.Name)
+		case schemas.ListEarthObservationJobOutputConfig_OperationType:
+			v.OperationType = new(string)
+			return d.ReadString(schemas.ListEarthObservationJobOutputConfig_OperationType, v.OperationType)
+		case schemas.ListEarthObservationJobOutputConfig_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListEarthObservationJobOutputConfig_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EarthObservationJobStatus(ev)
+			return nil
+		case schemas.ListEarthObservationJobOutputConfig_Tags:
+			return deserializeTags(d, schemas.ListEarthObservationJobOutputConfig_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // An object containing information about the output file.
 type ListVectorEnrichmentJobOutputConfig struct {
 
@@ -500,6 +1195,69 @@ type ListVectorEnrichmentJobOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorEnrichmentJobOutputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorEnrichmentJobOutputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorEnrichmentJobOutputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListVectorEnrichmentJobOutputConfig_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ListVectorEnrichmentJobOutputConfig_CreationTime, *v.CreationTime)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.ListVectorEnrichmentJobOutputConfig_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListVectorEnrichmentJobOutputConfig_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListVectorEnrichmentJobOutputConfig_Status, string(v.Status))
+	}
+	serializeTags(s, schemas.ListVectorEnrichmentJobOutputConfig_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.ListVectorEnrichmentJobOutputConfig_Type, string(v.Type))
+	}
+}
+func (v *ListVectorEnrichmentJobOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVectorEnrichmentJobOutputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVectorEnrichmentJobOutputConfig_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListVectorEnrichmentJobOutputConfig_Arn, v.Arn)
+		case schemas.ListVectorEnrichmentJobOutputConfig_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ListVectorEnrichmentJobOutputConfig_CreationTime, v.CreationTime)
+		case schemas.ListVectorEnrichmentJobOutputConfig_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.ListVectorEnrichmentJobOutputConfig_DurationInSeconds, v.DurationInSeconds)
+		case schemas.ListVectorEnrichmentJobOutputConfig_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListVectorEnrichmentJobOutputConfig_Name, v.Name)
+		case schemas.ListVectorEnrichmentJobOutputConfig_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListVectorEnrichmentJobOutputConfig_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = VectorEnrichmentJobStatus(ev)
+			return nil
+		case schemas.ListVectorEnrichmentJobOutputConfig_Tags:
+			return deserializeTags(d, schemas.ListVectorEnrichmentJobOutputConfig_Tags, &v.Tags)
+		case schemas.ListVectorEnrichmentJobOutputConfig_Type:
+			var ev string
+			if err := d.ReadString(schemas.ListVectorEnrichmentJobOutputConfig_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = VectorEnrichmentJobType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The input structure for Map Matching operation type.
 type MapMatchingConfig struct {
 
@@ -527,6 +1285,46 @@ type MapMatchingConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapMatchingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapMatchingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapMatchingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdAttributeName != nil {
+		s.WriteString(schemas.MapMatchingConfig_IdAttributeName, *v.IdAttributeName)
+	}
+	if v.TimestampAttributeName != nil {
+		s.WriteString(schemas.MapMatchingConfig_TimestampAttributeName, *v.TimestampAttributeName)
+	}
+	if v.XAttributeName != nil {
+		s.WriteString(schemas.MapMatchingConfig_XAttributeName, *v.XAttributeName)
+	}
+	if v.YAttributeName != nil {
+		s.WriteString(schemas.MapMatchingConfig_YAttributeName, *v.YAttributeName)
+	}
+}
+func (v *MapMatchingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapMatchingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapMatchingConfig_IdAttributeName:
+			v.IdAttributeName = new(string)
+			return d.ReadString(schemas.MapMatchingConfig_IdAttributeName, v.IdAttributeName)
+		case schemas.MapMatchingConfig_TimestampAttributeName:
+			v.TimestampAttributeName = new(string)
+			return d.ReadString(schemas.MapMatchingConfig_TimestampAttributeName, v.TimestampAttributeName)
+		case schemas.MapMatchingConfig_XAttributeName:
+			v.XAttributeName = new(string)
+			return d.ReadString(schemas.MapMatchingConfig_XAttributeName, v.XAttributeName)
+		case schemas.MapMatchingConfig_YAttributeName:
+			v.YAttributeName = new(string)
+			return d.ReadString(schemas.MapMatchingConfig_YAttributeName, v.YAttributeName)
+		}
+		return nil
+	})
+}
+
 // The structure representing Polygon Geometry based on the [GeoJson spec].
 //
 // [GeoJson spec]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
@@ -538,6 +1336,25 @@ type MultiPolygonGeometryInput struct {
 	Coordinates [][][][]float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiPolygonGeometryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiPolygonGeometryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiPolygonGeometryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinearRingsList(s, schemas.MultiPolygonGeometryInput_Coordinates, v.Coordinates)
+}
+func (v *MultiPolygonGeometryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiPolygonGeometryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiPolygonGeometryInput_Coordinates:
+			return deserializeLinearRingsList(d, schemas.MultiPolygonGeometryInput_Coordinates, &v.Coordinates)
+		}
+		return nil
+	})
 }
 
 // Represents an arithmetic operation to compute spectral index.
@@ -560,6 +1377,44 @@ type Operation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Operation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Operation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Operation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Equation != nil {
+		s.WriteString(schemas.Operation_Equation, *v.Equation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Operation_Name, *v.Name)
+	}
+	if v.OutputType != "" {
+		s.WriteString(schemas.Operation_OutputType, string(v.OutputType))
+	}
+}
+func (v *Operation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Operation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Operation_Equation:
+			v.Equation = new(string)
+			return d.ReadString(schemas.Operation_Equation, v.Equation)
+		case schemas.Operation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Operation_Name, v.Name)
+		case schemas.Operation_OutputType:
+			var ev string
+			if err := d.ReadString(schemas.Operation_OutputType, &ev); err != nil {
+				return err
+			}
+			v.OutputType = OutputType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A single EarthObservationJob output band.
 type OutputBand struct {
 
@@ -576,6 +1431,38 @@ type OutputBand struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputBand) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputBand)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputBand) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BandName != nil {
+		s.WriteString(schemas.OutputBand_BandName, *v.BandName)
+	}
+	if v.OutputDataType != "" {
+		s.WriteString(schemas.OutputBand_OutputDataType, string(v.OutputDataType))
+	}
+}
+func (v *OutputBand) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputBand, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputBand_BandName:
+			v.BandName = new(string)
+			return d.ReadString(schemas.OutputBand_BandName, v.BandName)
+		case schemas.OutputBand_OutputDataType:
+			var ev string
+			if err := d.ReadString(schemas.OutputBand_OutputDataType, &ev); err != nil {
+				return err
+			}
+			v.OutputDataType = OutputType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The response structure for an OutputConfig returned by an
 // ExportEarthObservationJob.
 type OutputConfigInput struct {
@@ -586,6 +1473,30 @@ type OutputConfigInput struct {
 	S3Data *ExportS3DataInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Data != nil {
+		s.WriteStruct(schemas.OutputConfigInput_S3Data)
+		v.S3Data.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputConfigInput_S3Data:
+			v.S3Data = &ExportS3DataInput{}
+			return v.S3Data.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // OutputResolution Configuration indicating the target resolution for the output
@@ -601,6 +1512,30 @@ type OutputResolutionResamplingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputResolutionResamplingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputResolutionResamplingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputResolutionResamplingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserDefined != nil {
+		s.WriteStruct(schemas.OutputResolutionResamplingInput_UserDefined)
+		v.UserDefined.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputResolutionResamplingInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputResolutionResamplingInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputResolutionResamplingInput_UserDefined:
+			v.UserDefined = &UserDefined{}
+			return v.UserDefined.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The input structure representing Output Resolution for Stacking Operation.
 type OutputResolutionStackInput struct {
 
@@ -613,6 +1548,40 @@ type OutputResolutionStackInput struct {
 	UserDefined *UserDefined
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputResolutionStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputResolutionStackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputResolutionStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Predefined != "" {
+		s.WriteString(schemas.OutputResolutionStackInput_Predefined, string(v.Predefined))
+	}
+	if v.UserDefined != nil {
+		s.WriteStruct(schemas.OutputResolutionStackInput_UserDefined)
+		v.UserDefined.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OutputResolutionStackInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputResolutionStackInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputResolutionStackInput_Predefined:
+			var ev string
+			if err := d.ReadString(schemas.OutputResolutionStackInput_Predefined, &ev); err != nil {
+				return err
+			}
+			v.Predefined = PredefinedResolution(ev)
+			return nil
+		case schemas.OutputResolutionStackInput_UserDefined:
+			v.UserDefined = &UserDefined{}
+			return v.UserDefined.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The input structure for specifying Platform. Platform refers to the unique name
@@ -631,6 +1600,38 @@ type PlatformInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlatformInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.PlatformInput_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.PlatformInput_Value, *v.Value)
+	}
+}
+func (v *PlatformInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformInput_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.PlatformInput_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.PlatformInput_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.PlatformInput_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The structure representing Polygon Geometry based on the [GeoJson spec].
 //
 // [GeoJson spec]: https://www.rfc-editor.org/rfc/rfc7946#section-3.1.6
@@ -644,6 +1645,25 @@ type PolygonGeometryInput struct {
 	Coordinates [][][]float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolygonGeometryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolygonGeometryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolygonGeometryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinearRings(s, schemas.PolygonGeometryInput_Coordinates, v.Coordinates)
+}
+func (v *PolygonGeometryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolygonGeometryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolygonGeometryInput_Coordinates:
+			return deserializeLinearRings(d, schemas.PolygonGeometryInput_Coordinates, &v.Coordinates)
+		}
+		return nil
+	})
 }
 
 // Properties associated with the Item.
@@ -679,6 +1699,58 @@ type Properties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Properties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Properties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Properties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EoCloudCover != nil {
+		s.WriteFloat32(schemas.Properties_EoCloudCover, *v.EoCloudCover)
+	}
+	if v.LandsatCloudCoverLand != nil {
+		s.WriteFloat32(schemas.Properties_LandsatCloudCoverLand, *v.LandsatCloudCoverLand)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.Properties_Platform, *v.Platform)
+	}
+	if v.ViewOffNadir != nil {
+		s.WriteFloat32(schemas.Properties_ViewOffNadir, *v.ViewOffNadir)
+	}
+	if v.ViewSunAzimuth != nil {
+		s.WriteFloat32(schemas.Properties_ViewSunAzimuth, *v.ViewSunAzimuth)
+	}
+	if v.ViewSunElevation != nil {
+		s.WriteFloat32(schemas.Properties_ViewSunElevation, *v.ViewSunElevation)
+	}
+}
+func (v *Properties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Properties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Properties_EoCloudCover:
+			v.EoCloudCover = new(float32)
+			return d.ReadFloat32(schemas.Properties_EoCloudCover, v.EoCloudCover)
+		case schemas.Properties_LandsatCloudCoverLand:
+			v.LandsatCloudCoverLand = new(float32)
+			return d.ReadFloat32(schemas.Properties_LandsatCloudCoverLand, v.LandsatCloudCoverLand)
+		case schemas.Properties_Platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.Properties_Platform, v.Platform)
+		case schemas.Properties_ViewOffNadir:
+			v.ViewOffNadir = new(float32)
+			return d.ReadFloat32(schemas.Properties_ViewOffNadir, v.ViewOffNadir)
+		case schemas.Properties_ViewSunAzimuth:
+			v.ViewSunAzimuth = new(float32)
+			return d.ReadFloat32(schemas.Properties_ViewSunAzimuth, v.ViewSunAzimuth)
+		case schemas.Properties_ViewSunElevation:
+			v.ViewSunElevation = new(float32)
+			return d.ReadFloat32(schemas.Properties_ViewSunElevation, v.ViewSunElevation)
+		}
+		return nil
+	})
+}
+
 // Represents a single searchable property to search on.
 //
 // The following types satisfy this interface:
@@ -702,6 +1774,14 @@ type PropertyMemberEoCloudCover struct {
 }
 
 func (*PropertyMemberEoCloudCover) isProperty() {}
+func (v *PropertyMemberEoCloudCover) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Property_EoCloudCover)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PropertyMemberEoCloudCover) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing Land Cloud Cover property filter for Landsat
 // collection containing a lower bound and upper bound.
@@ -712,6 +1792,14 @@ type PropertyMemberLandsatCloudCoverLand struct {
 }
 
 func (*PropertyMemberLandsatCloudCoverLand) isProperty() {}
+func (v *PropertyMemberLandsatCloudCoverLand) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Property_LandsatCloudCoverLand)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PropertyMemberLandsatCloudCoverLand) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing Platform property filter consisting of value and
 // comparison operator.
@@ -722,6 +1810,14 @@ type PropertyMemberPlatform struct {
 }
 
 func (*PropertyMemberPlatform) isProperty() {}
+func (v *PropertyMemberPlatform) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Property_Platform)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PropertyMemberPlatform) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing ViewOffNadir property filter containing a lower
 // bound and upper bound.
@@ -732,6 +1828,14 @@ type PropertyMemberViewOffNadir struct {
 }
 
 func (*PropertyMemberViewOffNadir) isProperty() {}
+func (v *PropertyMemberViewOffNadir) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Property_ViewOffNadir)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PropertyMemberViewOffNadir) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing ViewSunAzimuth property filter containing a lower
 // bound and upper bound.
@@ -742,6 +1846,14 @@ type PropertyMemberViewSunAzimuth struct {
 }
 
 func (*PropertyMemberViewSunAzimuth) isProperty() {}
+func (v *PropertyMemberViewSunAzimuth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Property_ViewSunAzimuth)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PropertyMemberViewSunAzimuth) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing ViewSunElevation property filter containing a lower
 // bound and upper bound.
@@ -752,6 +1864,14 @@ type PropertyMemberViewSunElevation struct {
 }
 
 func (*PropertyMemberViewSunElevation) isProperty() {}
+func (v *PropertyMemberViewSunElevation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Property_ViewSunElevation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PropertyMemberViewSunElevation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The structure representing a single PropertyFilter.
 type PropertyFilter struct {
@@ -765,6 +1885,25 @@ type PropertyFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PropertyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PropertyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PropertyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProperty(s, schemas.PropertyFilter_Property, v.Property)
+}
+func (v *PropertyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PropertyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PropertyFilter_Property:
+			return deserializeProperty(d, schemas.PropertyFilter_Property, &v.Property)
+		}
+		return nil
+	})
+}
+
 // A list of PropertyFilter objects.
 type PropertyFilters struct {
 
@@ -775,6 +1914,35 @@ type PropertyFilters struct {
 	Properties []PropertyFilter
 
 	noSmithyDocumentSerde
+}
+
+func (v *PropertyFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PropertyFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PropertyFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogicalOperator != "" {
+		s.WriteString(schemas.PropertyFilters_LogicalOperator, string(v.LogicalOperator))
+	}
+	serializePropertyFiltersList(s, schemas.PropertyFilters_Properties, v.Properties)
+}
+func (v *PropertyFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PropertyFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PropertyFilters_LogicalOperator:
+			var ev string
+			if err := d.ReadString(schemas.PropertyFilters_LogicalOperator, &ev); err != nil {
+				return err
+			}
+			v.LogicalOperator = LogicalOperator(ev)
+			return nil
+		case schemas.PropertyFilters_Properties:
+			return deserializePropertyFiltersList(d, schemas.PropertyFilters_Properties, &v.Properties)
+		}
+		return nil
+	})
 }
 
 // Response object containing details for a specific RasterDataCollection.
@@ -814,6 +1982,62 @@ type RasterDataCollectionMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RasterDataCollectionMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RasterDataCollectionMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RasterDataCollectionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RasterDataCollectionMetadata_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RasterDataCollectionMetadata_Description, *v.Description)
+	}
+	if v.DescriptionPageUrl != nil {
+		s.WriteString(schemas.RasterDataCollectionMetadata_DescriptionPageUrl, *v.DescriptionPageUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RasterDataCollectionMetadata_Name, *v.Name)
+	}
+	serializeFilterList(s, schemas.RasterDataCollectionMetadata_SupportedFilters, v.SupportedFilters)
+	serializeTags(s, schemas.RasterDataCollectionMetadata_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.RasterDataCollectionMetadata_Type, string(v.Type))
+	}
+}
+func (v *RasterDataCollectionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RasterDataCollectionMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RasterDataCollectionMetadata_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RasterDataCollectionMetadata_Arn, v.Arn)
+		case schemas.RasterDataCollectionMetadata_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RasterDataCollectionMetadata_Description, v.Description)
+		case schemas.RasterDataCollectionMetadata_DescriptionPageUrl:
+			v.DescriptionPageUrl = new(string)
+			return d.ReadString(schemas.RasterDataCollectionMetadata_DescriptionPageUrl, v.DescriptionPageUrl)
+		case schemas.RasterDataCollectionMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RasterDataCollectionMetadata_Name, v.Name)
+		case schemas.RasterDataCollectionMetadata_SupportedFilters:
+			return deserializeFilterList(d, schemas.RasterDataCollectionMetadata_SupportedFilters, &v.SupportedFilters)
+		case schemas.RasterDataCollectionMetadata_Tags:
+			return deserializeTags(d, schemas.RasterDataCollectionMetadata_Tags, &v.Tags)
+		case schemas.RasterDataCollectionMetadata_Type:
+			var ev string
+			if err := d.ReadString(schemas.RasterDataCollectionMetadata_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = DataCollectionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The input structure for Raster Data Collection Query containing the Area of
 // Interest, TimeRange Filters, and Property Filters.
 type RasterDataCollectionQueryInput struct {
@@ -835,6 +2059,47 @@ type RasterDataCollectionQueryInput struct {
 	PropertyFilters *PropertyFilters
 
 	noSmithyDocumentSerde
+}
+
+func (v *RasterDataCollectionQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RasterDataCollectionQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RasterDataCollectionQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryInput_AreaOfInterest, v.AreaOfInterest)
+	if v.PropertyFilters != nil {
+		s.WriteStruct(schemas.RasterDataCollectionQueryInput_PropertyFilters)
+		v.PropertyFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RasterDataCollectionArn != nil {
+		s.WriteString(schemas.RasterDataCollectionQueryInput_RasterDataCollectionArn, *v.RasterDataCollectionArn)
+	}
+	if v.TimeRangeFilter != nil {
+		s.WriteStruct(schemas.RasterDataCollectionQueryInput_TimeRangeFilter)
+		v.TimeRangeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RasterDataCollectionQueryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RasterDataCollectionQueryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RasterDataCollectionQueryInput_AreaOfInterest:
+			return deserializeAreaOfInterest(d, schemas.RasterDataCollectionQueryInput_AreaOfInterest, &v.AreaOfInterest)
+		case schemas.RasterDataCollectionQueryInput_PropertyFilters:
+			v.PropertyFilters = &PropertyFilters{}
+			return v.PropertyFilters.Deserialize(d)
+		case schemas.RasterDataCollectionQueryInput_RasterDataCollectionArn:
+			v.RasterDataCollectionArn = new(string)
+			return d.ReadString(schemas.RasterDataCollectionQueryInput_RasterDataCollectionArn, v.RasterDataCollectionArn)
+		case schemas.RasterDataCollectionQueryInput_TimeRangeFilter:
+			v.TimeRangeFilter = &TimeRangeFilterInput{}
+			return v.TimeRangeFilter.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The output structure contains the Raster Data Collection Query input along with
@@ -865,6 +2130,53 @@ type RasterDataCollectionQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RasterDataCollectionQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RasterDataCollectionQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RasterDataCollectionQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryOutput_AreaOfInterest, v.AreaOfInterest)
+	if v.PropertyFilters != nil {
+		s.WriteStruct(schemas.RasterDataCollectionQueryOutput_PropertyFilters)
+		v.PropertyFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RasterDataCollectionArn != nil {
+		s.WriteString(schemas.RasterDataCollectionQueryOutput_RasterDataCollectionArn, *v.RasterDataCollectionArn)
+	}
+	if v.RasterDataCollectionName != nil {
+		s.WriteString(schemas.RasterDataCollectionQueryOutput_RasterDataCollectionName, *v.RasterDataCollectionName)
+	}
+	if v.TimeRangeFilter != nil {
+		s.WriteStruct(schemas.RasterDataCollectionQueryOutput_TimeRangeFilter)
+		v.TimeRangeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RasterDataCollectionQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RasterDataCollectionQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RasterDataCollectionQueryOutput_AreaOfInterest:
+			return deserializeAreaOfInterest(d, schemas.RasterDataCollectionQueryOutput_AreaOfInterest, &v.AreaOfInterest)
+		case schemas.RasterDataCollectionQueryOutput_PropertyFilters:
+			v.PropertyFilters = &PropertyFilters{}
+			return v.PropertyFilters.Deserialize(d)
+		case schemas.RasterDataCollectionQueryOutput_RasterDataCollectionArn:
+			v.RasterDataCollectionArn = new(string)
+			return d.ReadString(schemas.RasterDataCollectionQueryOutput_RasterDataCollectionArn, v.RasterDataCollectionArn)
+		case schemas.RasterDataCollectionQueryOutput_RasterDataCollectionName:
+			v.RasterDataCollectionName = new(string)
+			return d.ReadString(schemas.RasterDataCollectionQueryOutput_RasterDataCollectionName, v.RasterDataCollectionName)
+		case schemas.RasterDataCollectionQueryOutput_TimeRangeFilter:
+			v.TimeRangeFilter = &TimeRangeFilterOutput{}
+			return v.TimeRangeFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This is a RasterDataCollectionQueryInput containing AreaOfInterest, Time Range
 // filter and Property filters.
 type RasterDataCollectionQueryWithBandFilterInput struct {
@@ -886,6 +2198,44 @@ type RasterDataCollectionQueryWithBandFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RasterDataCollectionQueryWithBandFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RasterDataCollectionQueryWithBandFilterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RasterDataCollectionQueryWithBandFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest, v.AreaOfInterest)
+	serializeStringListInput(s, schemas.RasterDataCollectionQueryWithBandFilterInput_BandFilter, v.BandFilter)
+	if v.PropertyFilters != nil {
+		s.WriteStruct(schemas.RasterDataCollectionQueryWithBandFilterInput_PropertyFilters)
+		v.PropertyFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeRangeFilter != nil {
+		s.WriteStruct(schemas.RasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter)
+		v.TimeRangeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RasterDataCollectionQueryWithBandFilterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RasterDataCollectionQueryWithBandFilterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest:
+			return deserializeAreaOfInterest(d, schemas.RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest, &v.AreaOfInterest)
+		case schemas.RasterDataCollectionQueryWithBandFilterInput_BandFilter:
+			return deserializeStringListInput(d, schemas.RasterDataCollectionQueryWithBandFilterInput_BandFilter, &v.BandFilter)
+		case schemas.RasterDataCollectionQueryWithBandFilterInput_PropertyFilters:
+			v.PropertyFilters = &PropertyFilters{}
+			return v.PropertyFilters.Deserialize(d)
+		case schemas.RasterDataCollectionQueryWithBandFilterInput_TimeRangeFilter:
+			v.TimeRangeFilter = &TimeRangeFilterInput{}
+			return v.TimeRangeFilter.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The structure representing input for resampling operation.
 type ResamplingConfigInput struct {
 
@@ -903,6 +2253,43 @@ type ResamplingConfigInput struct {
 	TargetBands []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResamplingConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResamplingConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResamplingConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmName != "" {
+		s.WriteString(schemas.ResamplingConfigInput_AlgorithmName, string(v.AlgorithmName))
+	}
+	if v.OutputResolution != nil {
+		s.WriteStruct(schemas.ResamplingConfigInput_OutputResolution)
+		v.OutputResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringListInput(s, schemas.ResamplingConfigInput_TargetBands, v.TargetBands)
+}
+func (v *ResamplingConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResamplingConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResamplingConfigInput_AlgorithmName:
+			var ev string
+			if err := d.ReadString(schemas.ResamplingConfigInput_AlgorithmName, &ev); err != nil {
+				return err
+			}
+			v.AlgorithmName = AlgorithmNameResampling(ev)
+			return nil
+		case schemas.ResamplingConfigInput_OutputResolution:
+			v.OutputResolution = &OutputResolutionResamplingInput{}
+			return v.OutputResolution.Deserialize(d)
+		case schemas.ResamplingConfigInput_TargetBands:
+			return deserializeStringListInput(d, schemas.ResamplingConfigInput_TargetBands, &v.TargetBands)
+		}
+		return nil
+	})
 }
 
 // The input structure for Reverse Geocoding operation type.
@@ -923,6 +2310,34 @@ type ReverseGeocodingConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReverseGeocodingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReverseGeocodingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReverseGeocodingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.XAttributeName != nil {
+		s.WriteString(schemas.ReverseGeocodingConfig_XAttributeName, *v.XAttributeName)
+	}
+	if v.YAttributeName != nil {
+		s.WriteString(schemas.ReverseGeocodingConfig_YAttributeName, *v.YAttributeName)
+	}
+}
+func (v *ReverseGeocodingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReverseGeocodingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReverseGeocodingConfig_XAttributeName:
+			v.XAttributeName = new(string)
+			return d.ReadString(schemas.ReverseGeocodingConfig_XAttributeName, v.XAttributeName)
+		case schemas.ReverseGeocodingConfig_YAttributeName:
+			v.YAttributeName = new(string)
+			return d.ReadString(schemas.ReverseGeocodingConfig_YAttributeName, v.YAttributeName)
+		}
+		return nil
+	})
+}
+
 // The input structure for Stacking Operation.
 type StackConfigInput struct {
 
@@ -936,6 +2351,33 @@ type StackConfigInput struct {
 	TargetBands []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StackConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StackConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StackConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputResolution != nil {
+		s.WriteStruct(schemas.StackConfigInput_OutputResolution)
+		v.OutputResolution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringListInput(s, schemas.StackConfigInput_TargetBands, v.TargetBands)
+}
+func (v *StackConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StackConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StackConfigInput_OutputResolution:
+			v.OutputResolution = &OutputResolutionStackInput{}
+			return v.OutputResolution.Deserialize(d)
+		case schemas.StackConfigInput_TargetBands:
+			return deserializeStringListInput(d, schemas.StackConfigInput_TargetBands, &v.TargetBands)
+		}
+		return nil
+	})
 }
 
 // The structure representing the configuration for Temporal Statistics operation.
@@ -955,6 +2397,38 @@ type TemporalStatisticsConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemporalStatisticsConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemporalStatisticsConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemporalStatisticsConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupBy != "" {
+		s.WriteString(schemas.TemporalStatisticsConfigInput_GroupBy, string(v.GroupBy))
+	}
+	serializeTemporalStatisticsListInput(s, schemas.TemporalStatisticsConfigInput_Statistics, v.Statistics)
+	serializeStringListInput(s, schemas.TemporalStatisticsConfigInput_TargetBands, v.TargetBands)
+}
+func (v *TemporalStatisticsConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemporalStatisticsConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemporalStatisticsConfigInput_GroupBy:
+			var ev string
+			if err := d.ReadString(schemas.TemporalStatisticsConfigInput_GroupBy, &ev); err != nil {
+				return err
+			}
+			v.GroupBy = GroupBy(ev)
+			return nil
+		case schemas.TemporalStatisticsConfigInput_Statistics:
+			return deserializeTemporalStatisticsListInput(d, schemas.TemporalStatisticsConfigInput_Statistics, &v.Statistics)
+		case schemas.TemporalStatisticsConfigInput_TargetBands:
+			return deserializeStringListInput(d, schemas.TemporalStatisticsConfigInput_TargetBands, &v.TargetBands)
+		}
+		return nil
+	})
+}
+
 // The input for the time-range filter.
 type TimeRangeFilterInput struct {
 
@@ -969,6 +2443,34 @@ type TimeRangeFilterInput struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeRangeFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeRangeFilterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeRangeFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TimeRangeFilterInput_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TimeRangeFilterInput_StartTime, *v.StartTime)
+	}
+}
+func (v *TimeRangeFilterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeRangeFilterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeRangeFilterInput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TimeRangeFilterInput_EndTime, v.EndTime)
+		case schemas.TimeRangeFilterInput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TimeRangeFilterInput_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // The output structure of the time range filter.
@@ -987,6 +2489,34 @@ type TimeRangeFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeRangeFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeRangeFilterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeRangeFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TimeRangeFilterOutput_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TimeRangeFilterOutput_StartTime, *v.StartTime)
+	}
+}
+func (v *TimeRangeFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeRangeFilterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeRangeFilterOutput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TimeRangeFilterOutput_EndTime, v.EndTime)
+		case schemas.TimeRangeFilterOutput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TimeRangeFilterOutput_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The output resolution (in target georeferenced units) of the result of the
 // operation
 type UserDefined struct {
@@ -1002,6 +2532,38 @@ type UserDefined struct {
 	Value *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserDefined) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserDefined)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserDefined) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Unit != "" {
+		s.WriteString(schemas.UserDefined_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteFloat32(schemas.UserDefined_Value, *v.Value)
+	}
+}
+func (v *UserDefined) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserDefined, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserDefined_Unit:
+			var ev string
+			if err := d.ReadString(schemas.UserDefined_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = Unit(ev)
+			return nil
+		case schemas.UserDefined_Value:
+			v.Value = new(float32)
+			return d.ReadFloat32(schemas.UserDefined_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.
@@ -1022,6 +2584,14 @@ type VectorEnrichmentJobConfigMemberMapMatchingConfig struct {
 }
 
 func (*VectorEnrichmentJobConfigMemberMapMatchingConfig) isVectorEnrichmentJobConfig() {}
+func (v *VectorEnrichmentJobConfigMemberMapMatchingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobConfig_MapMatchingConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VectorEnrichmentJobConfigMemberMapMatchingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The input structure for Reverse Geocoding operation type.
 type VectorEnrichmentJobConfigMemberReverseGeocodingConfig struct {
@@ -1031,6 +2601,14 @@ type VectorEnrichmentJobConfigMemberReverseGeocodingConfig struct {
 }
 
 func (*VectorEnrichmentJobConfigMemberReverseGeocodingConfig) isVectorEnrichmentJobConfig() {}
+func (v *VectorEnrichmentJobConfigMemberReverseGeocodingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobConfig_ReverseGeocodingConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VectorEnrichmentJobConfigMemberReverseGeocodingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The input structure for the data source that represents the storage type of the
 // input data objects.
@@ -1052,6 +2630,14 @@ type VectorEnrichmentJobDataSourceConfigInputMemberS3Data struct {
 
 func (*VectorEnrichmentJobDataSourceConfigInputMemberS3Data) isVectorEnrichmentJobDataSourceConfigInput() {
 }
+func (v *VectorEnrichmentJobDataSourceConfigInputMemberS3Data) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobDataSourceConfigInput_S3Data)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *VectorEnrichmentJobDataSourceConfigInputMemberS3Data) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // VectorEnrichmentJob error details in response from GetVectorEnrichmentJob.
 type VectorEnrichmentJobErrorDetails struct {
@@ -1066,6 +2652,38 @@ type VectorEnrichmentJobErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VectorEnrichmentJobErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorEnrichmentJobErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.VectorEnrichmentJobErrorDetails_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorType != "" {
+		s.WriteString(schemas.VectorEnrichmentJobErrorDetails_ErrorType, string(v.ErrorType))
+	}
+}
+func (v *VectorEnrichmentJobErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorEnrichmentJobErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorEnrichmentJobErrorDetails_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.VectorEnrichmentJobErrorDetails_ErrorMessage, v.ErrorMessage)
+		case schemas.VectorEnrichmentJobErrorDetails_ErrorType:
+			var ev string
+			if err := d.ReadString(schemas.VectorEnrichmentJobErrorDetails_ErrorType, &ev); err != nil {
+				return err
+			}
+			v.ErrorType = VectorEnrichmentJobErrorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // VectorEnrichmentJob export error details in response from
 // GetVectorEnrichmentJob.
 type VectorEnrichmentJobExportErrorDetails struct {
@@ -1078,6 +2696,38 @@ type VectorEnrichmentJobExportErrorDetails struct {
 	Type VectorEnrichmentJobExportErrorType
 
 	noSmithyDocumentSerde
+}
+
+func (v *VectorEnrichmentJobExportErrorDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobExportErrorDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorEnrichmentJobExportErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.VectorEnrichmentJobExportErrorDetails_Message, *v.Message)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.VectorEnrichmentJobExportErrorDetails_Type, string(v.Type))
+	}
+}
+func (v *VectorEnrichmentJobExportErrorDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorEnrichmentJobExportErrorDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorEnrichmentJobExportErrorDetails_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.VectorEnrichmentJobExportErrorDetails_Message, v.Message)
+		case schemas.VectorEnrichmentJobExportErrorDetails_Type:
+			var ev string
+			if err := d.ReadString(schemas.VectorEnrichmentJobExportErrorDetails_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = VectorEnrichmentJobExportErrorType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The input structure for the InputConfig in a VectorEnrichmentJob.
@@ -1097,6 +2747,35 @@ type VectorEnrichmentJobInputConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VectorEnrichmentJobInputConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobInputConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorEnrichmentJobInputConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVectorEnrichmentJobDataSourceConfigInput(s, schemas.VectorEnrichmentJobInputConfig_DataSourceConfig, v.DataSourceConfig)
+	if v.DocumentType != "" {
+		s.WriteString(schemas.VectorEnrichmentJobInputConfig_DocumentType, string(v.DocumentType))
+	}
+}
+func (v *VectorEnrichmentJobInputConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorEnrichmentJobInputConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorEnrichmentJobInputConfig_DataSourceConfig:
+			return deserializeVectorEnrichmentJobDataSourceConfigInput(d, schemas.VectorEnrichmentJobInputConfig_DataSourceConfig, &v.DataSourceConfig)
+		case schemas.VectorEnrichmentJobInputConfig_DocumentType:
+			var ev string
+			if err := d.ReadString(schemas.VectorEnrichmentJobInputConfig_DocumentType, &ev); err != nil {
+				return err
+			}
+			v.DocumentType = VectorEnrichmentJobDocumentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Amazon S3 data for the Vector Enrichment job.
 type VectorEnrichmentJobS3Data struct {
 
@@ -1109,6 +2788,34 @@ type VectorEnrichmentJobS3Data struct {
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VectorEnrichmentJobS3Data) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorEnrichmentJobS3Data)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorEnrichmentJobS3Data) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.VectorEnrichmentJobS3Data_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.VectorEnrichmentJobS3Data_S3Uri, *v.S3Uri)
+	}
+}
+func (v *VectorEnrichmentJobS3Data) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorEnrichmentJobS3Data, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorEnrichmentJobS3Data_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.VectorEnrichmentJobS3Data_KmsKeyId, v.KmsKeyId)
+		case schemas.VectorEnrichmentJobS3Data_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.VectorEnrichmentJobS3Data_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // The input structure for specifying ViewOffNadir property filter. ViewOffNadir
@@ -1129,6 +2836,34 @@ type ViewOffNadirInput struct {
 	UpperBound *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ViewOffNadirInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViewOffNadirInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViewOffNadirInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LowerBound != nil {
+		s.WriteFloat32(schemas.ViewOffNadirInput_LowerBound, *v.LowerBound)
+	}
+	if v.UpperBound != nil {
+		s.WriteFloat32(schemas.ViewOffNadirInput_UpperBound, *v.UpperBound)
+	}
+}
+func (v *ViewOffNadirInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ViewOffNadirInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ViewOffNadirInput_LowerBound:
+			v.LowerBound = new(float32)
+			return d.ReadFloat32(schemas.ViewOffNadirInput_LowerBound, v.LowerBound)
+		case schemas.ViewOffNadirInput_UpperBound:
+			v.UpperBound = new(float32)
+			return d.ReadFloat32(schemas.ViewOffNadirInput_UpperBound, v.UpperBound)
+		}
+		return nil
+	})
 }
 
 // The input structure for specifying ViewSunAzimuth property filter.
@@ -1152,6 +2887,34 @@ type ViewSunAzimuthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ViewSunAzimuthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViewSunAzimuthInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViewSunAzimuthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LowerBound != nil {
+		s.WriteFloat32(schemas.ViewSunAzimuthInput_LowerBound, *v.LowerBound)
+	}
+	if v.UpperBound != nil {
+		s.WriteFloat32(schemas.ViewSunAzimuthInput_UpperBound, *v.UpperBound)
+	}
+}
+func (v *ViewSunAzimuthInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ViewSunAzimuthInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ViewSunAzimuthInput_LowerBound:
+			v.LowerBound = new(float32)
+			return d.ReadFloat32(schemas.ViewSunAzimuthInput_LowerBound, v.LowerBound)
+		case schemas.ViewSunAzimuthInput_UpperBound:
+			v.UpperBound = new(float32)
+			return d.ReadFloat32(schemas.ViewSunAzimuthInput_UpperBound, v.UpperBound)
+		}
+		return nil
+	})
+}
+
 // The input structure for specifying ViewSunElevation angle property filter.
 type ViewSunElevationInput struct {
 
@@ -1166,6 +2929,34 @@ type ViewSunElevationInput struct {
 	UpperBound *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ViewSunElevationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViewSunElevationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViewSunElevationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LowerBound != nil {
+		s.WriteFloat32(schemas.ViewSunElevationInput_LowerBound, *v.LowerBound)
+	}
+	if v.UpperBound != nil {
+		s.WriteFloat32(schemas.ViewSunElevationInput_UpperBound, *v.UpperBound)
+	}
+}
+func (v *ViewSunElevationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ViewSunElevationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ViewSunElevationInput_LowerBound:
+			v.LowerBound = new(float32)
+			return d.ReadFloat32(schemas.ViewSunElevationInput_LowerBound, v.LowerBound)
+		case schemas.ViewSunElevationInput_UpperBound:
+			v.UpperBound = new(float32)
+			return d.ReadFloat32(schemas.ViewSunElevationInput_UpperBound, v.UpperBound)
+		}
+		return nil
+	})
 }
 
 // The structure representing input configuration of ZonalStatistics operation.
@@ -1207,6 +2998,40 @@ type ZonalStatisticsConfigInput struct {
 	ZoneS3PathKmsKeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZonalStatisticsConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZonalStatisticsConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZonalStatisticsConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeZonalStatisticsListInput(s, schemas.ZonalStatisticsConfigInput_Statistics, v.Statistics)
+	serializeStringListInput(s, schemas.ZonalStatisticsConfigInput_TargetBands, v.TargetBands)
+	if v.ZoneS3Path != nil {
+		s.WriteString(schemas.ZonalStatisticsConfigInput_ZoneS3Path, *v.ZoneS3Path)
+	}
+	if v.ZoneS3PathKmsKeyId != nil {
+		s.WriteString(schemas.ZonalStatisticsConfigInput_ZoneS3PathKmsKeyId, *v.ZoneS3PathKmsKeyId)
+	}
+}
+func (v *ZonalStatisticsConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZonalStatisticsConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZonalStatisticsConfigInput_Statistics:
+			return deserializeZonalStatisticsListInput(d, schemas.ZonalStatisticsConfigInput_Statistics, &v.Statistics)
+		case schemas.ZonalStatisticsConfigInput_TargetBands:
+			return deserializeStringListInput(d, schemas.ZonalStatisticsConfigInput_TargetBands, &v.TargetBands)
+		case schemas.ZonalStatisticsConfigInput_ZoneS3Path:
+			v.ZoneS3Path = new(string)
+			return d.ReadString(schemas.ZonalStatisticsConfigInput_ZoneS3Path, v.ZoneS3Path)
+		case schemas.ZonalStatisticsConfigInput_ZoneS3PathKmsKeyId:
+			v.ZoneS3PathKmsKeyId = new(string)
+			return d.ReadString(schemas.ZonalStatisticsConfigInput_ZoneS3PathKmsKeyId, v.ZoneS3PathKmsKeyId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

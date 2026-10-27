@@ -4,7 +4,9 @@ package sagemakera2iruntime
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DescribeHumanLoopInput struct {
 	HumanLoopName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHumanLoopInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHumanLoopRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHumanLoopInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.DescribeHumanLoopRequest_HumanLoopName, *v.HumanLoopName)
+	}
 }
 
 type DescribeHumanLoopOutput struct {
@@ -83,13 +97,80 @@ type DescribeHumanLoopOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHumanLoopOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHumanLoopResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHumanLoopOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeHumanLoopResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.DescribeHumanLoopResponse_FailureCode, *v.FailureCode)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeHumanLoopResponse_FailureReason, *v.FailureReason)
+	}
+	if v.FlowDefinitionArn != nil {
+		s.WriteString(schemas.DescribeHumanLoopResponse_FlowDefinitionArn, *v.FlowDefinitionArn)
+	}
+	if v.HumanLoopArn != nil {
+		s.WriteString(schemas.DescribeHumanLoopResponse_HumanLoopArn, *v.HumanLoopArn)
+	}
+	if v.HumanLoopName != nil {
+		s.WriteString(schemas.DescribeHumanLoopResponse_HumanLoopName, *v.HumanLoopName)
+	}
+	if v.HumanLoopOutput != nil {
+		s.WriteStruct(schemas.DescribeHumanLoopResponse_HumanLoopOutput)
+		v.HumanLoopOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HumanLoopStatus != "" {
+		s.WriteString(schemas.DescribeHumanLoopResponse_HumanLoopStatus, string(v.HumanLoopStatus))
+	}
+}
+func (v *DescribeHumanLoopOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHumanLoopResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHumanLoopResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHumanLoopResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeHumanLoopResponse_FailureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.DescribeHumanLoopResponse_FailureCode, v.FailureCode)
+		case schemas.DescribeHumanLoopResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeHumanLoopResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeHumanLoopResponse_FlowDefinitionArn:
+			v.FlowDefinitionArn = new(string)
+			return d.ReadString(schemas.DescribeHumanLoopResponse_FlowDefinitionArn, v.FlowDefinitionArn)
+		case schemas.DescribeHumanLoopResponse_HumanLoopArn:
+			v.HumanLoopArn = new(string)
+			return d.ReadString(schemas.DescribeHumanLoopResponse_HumanLoopArn, v.HumanLoopArn)
+		case schemas.DescribeHumanLoopResponse_HumanLoopName:
+			v.HumanLoopName = new(string)
+			return d.ReadString(schemas.DescribeHumanLoopResponse_HumanLoopName, v.HumanLoopName)
+		case schemas.DescribeHumanLoopResponse_HumanLoopOutput:
+			v.HumanLoopOutput = &types.HumanLoopOutput{}
+			return v.HumanLoopOutput.Deserialize(d)
+		case schemas.DescribeHumanLoopResponse_HumanLoopStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHumanLoopResponse_HumanLoopStatus, &ev); err != nil {
+				return err
+			}
+			v.HumanLoopStatus = types.HumanLoopStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHumanLoop, schemas.DescribeHumanLoopRequest, schemas.DescribeHumanLoopResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeHumanLoop{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHumanLoop, schemas.DescribeHumanLoopRequest, schemas.DescribeHumanLoopResponse), output: &DescribeHumanLoopOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

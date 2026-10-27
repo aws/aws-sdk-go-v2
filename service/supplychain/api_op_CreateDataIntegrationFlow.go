@@ -4,7 +4,9 @@ package supplychain
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -61,6 +63,33 @@ type CreateDataIntegrationFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataIntegrationFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataIntegrationFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataIntegrationFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateDataIntegrationFlowRequest_instanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataIntegrationFlowRequest_name, *v.Name)
+	}
+	serializeDataIntegrationFlowSourceList(s, schemas.CreateDataIntegrationFlowRequest_sources, v.Sources)
+	serializeTagMap(s, schemas.CreateDataIntegrationFlowRequest_tags, v.Tags)
+	if v.Target != nil {
+		s.WriteStruct(schemas.CreateDataIntegrationFlowRequest_target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Transformation != nil {
+		s.WriteStruct(schemas.CreateDataIntegrationFlowRequest_transformation)
+		v.Transformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response parameters for CreateDataIntegrationFlow.
 type CreateDataIntegrationFlowOutput struct {
 
@@ -80,13 +109,38 @@ type CreateDataIntegrationFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataIntegrationFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataIntegrationFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataIntegrationFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateDataIntegrationFlowResponse_instanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDataIntegrationFlowResponse_name, *v.Name)
+	}
+}
+func (v *CreateDataIntegrationFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataIntegrationFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataIntegrationFlowResponse_instanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationFlowResponse_instanceId, v.InstanceId)
+		case schemas.CreateDataIntegrationFlowResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDataIntegrationFlowResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataIntegrationFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataIntegrationFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataIntegrationFlow, schemas.CreateDataIntegrationFlowRequest, schemas.CreateDataIntegrationFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataIntegrationFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataIntegrationFlow, schemas.CreateDataIntegrationFlowRequest, schemas.CreateDataIntegrationFlowResponse), output: &CreateDataIntegrationFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

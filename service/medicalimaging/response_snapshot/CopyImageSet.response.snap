@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"datastoreId":"__DatastoreId__","destinationImageSetProperties":{"createdAt":946684800,"imageSetArn":"__ImageSetArn__","imageSetId":"__ImageSetId__","imageSetState":"ACTIVE","imageSetWorkflowStatus":"CREATED","latestVersionId":"__LatestVersionId__","updatedAt":946684800},"sourceImageSetProperties":{"createdAt":946684800,"imageSetArn":"__ImageSetArn__","imageSetId":"__ImageSetId__","imageSetState":"ACTIVE","imageSetWorkflowStatus":"CREATED","latestVersionId":"__LatestVersionId__","updatedAt":946684800}}

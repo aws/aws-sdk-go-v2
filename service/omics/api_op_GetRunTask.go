@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,6 +44,21 @@ type GetRunTaskInput struct {
 	TaskId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRunTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunTaskRequest_id, *v.Id)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetRunTaskRequest_taskId, *v.TaskId)
+	}
 }
 
 type GetRunTaskOutput struct {
@@ -104,13 +121,134 @@ type GetRunTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRunTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheHit != nil {
+		s.WriteBool(schemas.GetRunTaskResponse_cacheHit, *v.CacheHit)
+	}
+	if v.CacheS3Uri != nil {
+		s.WriteString(schemas.GetRunTaskResponse_cacheS3Uri, *v.CacheS3Uri)
+	}
+	if v.Cpus != nil {
+		s.WriteInt32(schemas.GetRunTaskResponse_cpus, *v.Cpus)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetRunTaskResponse_creationTime, *v.CreationTime)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetRunTaskResponse_failureReason, *v.FailureReason)
+	}
+	if v.Gpus != nil {
+		s.WriteInt32(schemas.GetRunTaskResponse_gpus, *v.Gpus)
+	}
+	if v.ImageDetails != nil {
+		s.WriteStruct(schemas.GetRunTaskResponse_imageDetails)
+		v.ImageDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.GetRunTaskResponse_instanceType, *v.InstanceType)
+	}
+	if v.LogStream != nil {
+		s.WriteString(schemas.GetRunTaskResponse_logStream, *v.LogStream)
+	}
+	if v.Memory != nil {
+		s.WriteInt32(schemas.GetRunTaskResponse_memory, *v.Memory)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRunTaskResponse_name, *v.Name)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRunTaskResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRunTaskResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetRunTaskResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.StopTime != nil {
+		s.WriteTime(schemas.GetRunTaskResponse_stopTime, *v.StopTime)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetRunTaskResponse_taskId, *v.TaskId)
+	}
+	if v.Uuid != nil {
+		s.WriteString(schemas.GetRunTaskResponse_uuid, *v.Uuid)
+	}
+}
+func (v *GetRunTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRunTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRunTaskResponse_cacheHit:
+			v.CacheHit = new(bool)
+			return d.ReadBool(schemas.GetRunTaskResponse_cacheHit, v.CacheHit)
+		case schemas.GetRunTaskResponse_cacheS3Uri:
+			v.CacheS3Uri = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_cacheS3Uri, v.CacheS3Uri)
+		case schemas.GetRunTaskResponse_cpus:
+			v.Cpus = new(int32)
+			return d.ReadInt32(schemas.GetRunTaskResponse_cpus, v.Cpus)
+		case schemas.GetRunTaskResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunTaskResponse_creationTime, v.CreationTime)
+		case schemas.GetRunTaskResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_failureReason, v.FailureReason)
+		case schemas.GetRunTaskResponse_gpus:
+			v.Gpus = new(int32)
+			return d.ReadInt32(schemas.GetRunTaskResponse_gpus, v.Gpus)
+		case schemas.GetRunTaskResponse_imageDetails:
+			v.ImageDetails = &types.ImageDetails{}
+			return v.ImageDetails.Deserialize(d)
+		case schemas.GetRunTaskResponse_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_instanceType, v.InstanceType)
+		case schemas.GetRunTaskResponse_logStream:
+			v.LogStream = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_logStream, v.LogStream)
+		case schemas.GetRunTaskResponse_memory:
+			v.Memory = new(int32)
+			return d.ReadInt32(schemas.GetRunTaskResponse_memory, v.Memory)
+		case schemas.GetRunTaskResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_name, v.Name)
+		case schemas.GetRunTaskResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunTaskResponse_startTime, v.StartTime)
+		case schemas.GetRunTaskResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetRunTaskResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskStatus(ev)
+			return nil
+		case schemas.GetRunTaskResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_statusMessage, v.StatusMessage)
+		case schemas.GetRunTaskResponse_stopTime:
+			v.StopTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunTaskResponse_stopTime, v.StopTime)
+		case schemas.GetRunTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_taskId, v.TaskId)
+		case schemas.GetRunTaskResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.GetRunTaskResponse_uuid, v.Uuid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRunTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRunTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRunTask, schemas.GetRunTaskRequest, schemas.GetRunTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRunTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRunTask, schemas.GetRunTaskRequest, schemas.GetRunTaskResponse), output: &GetRunTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

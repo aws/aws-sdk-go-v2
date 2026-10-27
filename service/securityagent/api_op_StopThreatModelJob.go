@@ -4,6 +4,8 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type StopThreatModelJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopThreatModelJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopThreatModelJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopThreatModelJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StopThreatModelJobInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ThreatModelJobId != nil {
+		s.WriteString(schemas.StopThreatModelJobInput_threatModelJobId, *v.ThreatModelJobId)
+	}
+}
+
 // Output for the StopThreatModelJob operation.
 type StopThreatModelJobOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -47,13 +64,26 @@ type StopThreatModelJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopThreatModelJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopThreatModelJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopThreatModelJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopThreatModelJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopThreatModelJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopThreatModelJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopThreatModelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopThreatModelJob, schemas.StopThreatModelJobInput, schemas.StopThreatModelJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopThreatModelJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopThreatModelJob, schemas.StopThreatModelJobInput, schemas.StopThreatModelJobOutput), output: &StopThreatModelJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

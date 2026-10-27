@@ -4,7 +4,9 @@ package migrationhubstrategy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,35 @@ type StartRecommendationReportGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecommendationReportGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecommendationReportGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecommendationReportGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupIds(s, schemas.StartRecommendationReportGenerationRequest_groupIdFilter, v.GroupIdFilter)
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.StartRecommendationReportGenerationRequest_outputFormat, string(v.OutputFormat))
+	}
+}
+func (v *StartRecommendationReportGenerationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecommendationReportGenerationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecommendationReportGenerationRequest_groupIdFilter:
+			return deserializeGroupIds(d, schemas.StartRecommendationReportGenerationRequest_groupIdFilter, &v.GroupIdFilter)
+		case schemas.StartRecommendationReportGenerationRequest_outputFormat:
+			var ev string
+			if err := d.ReadString(schemas.StartRecommendationReportGenerationRequest_outputFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputFormat = types.OutputFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type StartRecommendationReportGenerationOutput struct {
 
 	//  The ID of the recommendation report generation task.
@@ -47,13 +78,32 @@ type StartRecommendationReportGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRecommendationReportGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRecommendationReportGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRecommendationReportGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartRecommendationReportGenerationResponse_id, *v.Id)
+	}
+}
+func (v *StartRecommendationReportGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRecommendationReportGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRecommendationReportGenerationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartRecommendationReportGenerationResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRecommendationReportGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRecommendationReportGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecommendationReportGeneration, schemas.StartRecommendationReportGenerationRequest, schemas.StartRecommendationReportGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRecommendationReportGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRecommendationReportGeneration, schemas.StartRecommendationReportGenerationRequest, schemas.StartRecommendationReportGenerationResponse), output: &StartRecommendationReportGenerationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

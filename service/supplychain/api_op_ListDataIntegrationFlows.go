@@ -5,7 +5,9 @@ package supplychain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListDataIntegrationFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIntegrationFlowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIntegrationFlowsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIntegrationFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDataIntegrationFlowsRequest_instanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataIntegrationFlowsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIntegrationFlowsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The response parameters for ListDataIntegrationFlows.
 type ListDataIntegrationFlowsOutput struct {
 
@@ -61,13 +81,35 @@ type ListDataIntegrationFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIntegrationFlowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIntegrationFlowsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIntegrationFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataIntegrationFlowList(s, schemas.ListDataIntegrationFlowsResponse_flows, v.Flows)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIntegrationFlowsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataIntegrationFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataIntegrationFlowsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataIntegrationFlowsResponse_flows:
+			return deserializeDataIntegrationFlowList(d, schemas.ListDataIntegrationFlowsResponse_flows, &v.Flows)
+		case schemas.ListDataIntegrationFlowsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataIntegrationFlowsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataIntegrationFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataIntegrationFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationFlows, schemas.ListDataIntegrationFlowsRequest, schemas.ListDataIntegrationFlowsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataIntegrationFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationFlows, schemas.ListDataIntegrationFlowsRequest, schemas.ListDataIntegrationFlowsResponse), output: &ListDataIntegrationFlowsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

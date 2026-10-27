@@ -5,7 +5,9 @@ package s3outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,21 @@ type ListEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListEndpointsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEndpointsOutput struct {
 
 	// The list of endpoints associated with the specified Outpost.
@@ -62,13 +79,35 @@ type ListEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEndpointsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpoints(s, schemas.ListEndpointsResult_Endpoints, v.Endpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEndpointsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEndpointsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEndpointsResult_Endpoints:
+			return deserializeEndpoints(d, schemas.ListEndpointsResult_Endpoints, &v.Endpoints)
+		case schemas.ListEndpointsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEndpointsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpoints, schemas.ListEndpointsRequest, schemas.ListEndpointsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEndpoints, schemas.ListEndpointsRequest, schemas.ListEndpointsResult), output: &ListEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

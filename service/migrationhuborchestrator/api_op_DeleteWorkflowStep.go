@@ -4,6 +4,8 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,40 @@ type DeleteWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkflowStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteWorkflowStepRequest_id, *v.Id)
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.DeleteWorkflowStepRequest_stepGroupId, *v.StepGroupId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.DeleteWorkflowStepRequest_workflowId, *v.WorkflowId)
+	}
+}
+func (v *DeleteWorkflowStepInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkflowStepRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteWorkflowStepRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteWorkflowStepRequest_id, v.Id)
+		case schemas.DeleteWorkflowStepRequest_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.DeleteWorkflowStepRequest_stepGroupId, v.StepGroupId)
+		case schemas.DeleteWorkflowStepRequest_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.DeleteWorkflowStepRequest_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 type DeleteWorkflowStepOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +87,26 @@ type DeleteWorkflowStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWorkflowStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteWorkflowStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWorkflowStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkflowStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflowStep, schemas.DeleteWorkflowStepRequest, schemas.DeleteWorkflowStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflowStep, schemas.DeleteWorkflowStepRequest, schemas.DeleteWorkflowStepResponse), output: &DeleteWorkflowStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

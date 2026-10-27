@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,10 +19,47 @@ type AudioEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChunk != nil {
+		s.WriteBlob(schemas.AudioEvent_AudioChunk, v.AudioChunk)
+	}
+}
+func (v *AudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioEvent_AudioChunk:
+			return d.ReadBlob(schemas.AudioEvent_AudioChunk, &v.AudioChunk)
+		}
+		return nil
+	})
+}
+
 // Indicates the end of the input stream. After sending this event, the input
 // stream will be closed and all audio will be returned.
 type CloseStreamEvent struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CloseStreamEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloseStreamEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloseStreamEvent) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CloseStreamEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloseStreamEvent, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Configuration that controls when synthesized audio data is sent on the output
@@ -32,6 +71,27 @@ type FlushStreamConfiguration struct {
 	Force bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlushStreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlushStreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlushStreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != false {
+		s.WriteBool(schemas.FlushStreamConfiguration_Force, v.Force)
+	}
+}
+func (v *FlushStreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlushStreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlushStreamConfiguration_Force:
+			return d.ReadBool(schemas.FlushStreamConfiguration_Force, &v.Force)
+		}
+		return nil
+	})
 }
 
 // Provides lexicon name and lexicon content in string format. For more
@@ -48,6 +108,34 @@ type Lexicon struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Lexicon) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Lexicon)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Lexicon) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.Lexicon_Content, *v.Content)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Lexicon_Name, *v.Name)
+	}
+}
+func (v *Lexicon) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Lexicon, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Lexicon_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.Lexicon_Content, v.Content)
+		case schemas.Lexicon_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Lexicon_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Contains metadata describing the lexicon such as the number of lexemes,
@@ -81,6 +169,60 @@ type LexiconAttributes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LexiconAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LexiconAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LexiconAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alphabet != nil {
+		s.WriteString(schemas.LexiconAttributes_Alphabet, *v.Alphabet)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.LexiconAttributes_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.LexiconAttributes_LastModified, *v.LastModified)
+	}
+	if v.LexemesCount != 0 {
+		s.WriteInt32(schemas.LexiconAttributes_LexemesCount, v.LexemesCount)
+	}
+	if v.LexiconArn != nil {
+		s.WriteString(schemas.LexiconAttributes_LexiconArn, *v.LexiconArn)
+	}
+	if v.Size != 0 {
+		s.WriteInt32(schemas.LexiconAttributes_Size, v.Size)
+	}
+}
+func (v *LexiconAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LexiconAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LexiconAttributes_Alphabet:
+			v.Alphabet = new(string)
+			return d.ReadString(schemas.LexiconAttributes_Alphabet, v.Alphabet)
+		case schemas.LexiconAttributes_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.LexiconAttributes_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.LexiconAttributes_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.LexiconAttributes_LastModified, v.LastModified)
+		case schemas.LexiconAttributes_LexemesCount:
+			return d.ReadInt32(schemas.LexiconAttributes_LexemesCount, &v.LexemesCount)
+		case schemas.LexiconAttributes_LexiconArn:
+			v.LexiconArn = new(string)
+			return d.ReadString(schemas.LexiconAttributes_LexiconArn, v.LexiconArn)
+		case schemas.LexiconAttributes_Size:
+			return d.ReadInt32(schemas.LexiconAttributes_Size, &v.Size)
+		}
+		return nil
+	})
+}
+
 // Describes the content of the lexicon.
 type LexiconDescription struct {
 
@@ -91,6 +233,36 @@ type LexiconDescription struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LexiconDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LexiconDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LexiconDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.LexiconDescription_Attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LexiconDescription_Name, *v.Name)
+	}
+}
+func (v *LexiconDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LexiconDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LexiconDescription_Attributes:
+			v.Attributes = &LexiconAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.LexiconDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LexiconDescription_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Inbound event stream for sending input and control events to manage
@@ -113,6 +285,14 @@ type StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent struct {
 
 func (*StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent) isStartSpeechSynthesisStreamActionStream() {
 }
+func (v *StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisStreamActionStream_CloseStreamEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A text event containing content to be synthesized.
 type StartSpeechSynthesisStreamActionStreamMemberTextEvent struct {
@@ -122,6 +302,14 @@ type StartSpeechSynthesisStreamActionStreamMemberTextEvent struct {
 }
 
 func (*StartSpeechSynthesisStreamActionStreamMemberTextEvent) isStartSpeechSynthesisStreamActionStream() {
+}
+func (v *StartSpeechSynthesisStreamActionStreamMemberTextEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisStreamActionStream_TextEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartSpeechSynthesisStreamActionStreamMemberTextEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Outbound event stream that contains synthesized audio data and stream status
@@ -144,6 +332,14 @@ type StartSpeechSynthesisStreamEventStreamMemberAudioEvent struct {
 
 func (*StartSpeechSynthesisStreamEventStreamMemberAudioEvent) isStartSpeechSynthesisStreamEventStream() {
 }
+func (v *StartSpeechSynthesisStreamEventStreamMemberAudioEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisStreamEventStream_AudioEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartSpeechSynthesisStreamEventStreamMemberAudioEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An event, with summary information, indicating the stream has closed.
 type StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent struct {
@@ -154,6 +350,14 @@ type StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent struct {
 
 func (*StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent) isStartSpeechSynthesisStreamEventStream() {
 }
+func (v *StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisStreamEventStream_StreamClosedEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Indicates that the synthesis stream is closed and provides summary information.
 type StreamClosedEvent struct {
@@ -162,6 +366,27 @@ type StreamClosedEvent struct {
 	RequestCharacters int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *StreamClosedEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StreamClosedEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StreamClosedEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestCharacters != 0 {
+		s.WriteInt32(schemas.StreamClosedEvent_RequestCharacters, v.RequestCharacters)
+	}
+}
+func (v *StreamClosedEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StreamClosedEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StreamClosedEvent_RequestCharacters:
+			return d.ReadInt32(schemas.StreamClosedEvent_RequestCharacters, &v.RequestCharacters)
+		}
+		return nil
+	})
 }
 
 // SynthesisTask object that provides information about a speech synthesis task.
@@ -245,6 +470,129 @@ type SynthesisTask struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SynthesisTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SynthesisTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SynthesisTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.SynthesisTask_CreationTime, *v.CreationTime)
+	}
+	if v.Engine != "" {
+		s.WriteString(schemas.SynthesisTask_Engine, string(v.Engine))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SynthesisTask_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLexiconNameList(s, schemas.SynthesisTask_LexiconNames, v.LexiconNames)
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.SynthesisTask_OutputFormat, string(v.OutputFormat))
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.SynthesisTask_OutputUri, *v.OutputUri)
+	}
+	if v.RequestCharacters != 0 {
+		s.WriteInt32(schemas.SynthesisTask_RequestCharacters, v.RequestCharacters)
+	}
+	if v.SampleRate != nil {
+		s.WriteString(schemas.SynthesisTask_SampleRate, *v.SampleRate)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.SynthesisTask_SnsTopicArn, *v.SnsTopicArn)
+	}
+	serializeSpeechMarkTypeList(s, schemas.SynthesisTask_SpeechMarkTypes, v.SpeechMarkTypes)
+	if v.TaskId != nil {
+		s.WriteString(schemas.SynthesisTask_TaskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.SynthesisTask_TaskStatus, string(v.TaskStatus))
+	}
+	if v.TaskStatusReason != nil {
+		s.WriteString(schemas.SynthesisTask_TaskStatusReason, *v.TaskStatusReason)
+	}
+	if v.TextType != "" {
+		s.WriteString(schemas.SynthesisTask_TextType, string(v.TextType))
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.SynthesisTask_VoiceId, string(v.VoiceId))
+	}
+}
+func (v *SynthesisTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SynthesisTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SynthesisTask_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.SynthesisTask_CreationTime, v.CreationTime)
+		case schemas.SynthesisTask_Engine:
+			var ev string
+			if err := d.ReadString(schemas.SynthesisTask_Engine, &ev); err != nil {
+				return err
+			}
+			v.Engine = Engine(ev)
+			return nil
+		case schemas.SynthesisTask_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.SynthesisTask_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.SynthesisTask_LexiconNames:
+			return deserializeLexiconNameList(d, schemas.SynthesisTask_LexiconNames, &v.LexiconNames)
+		case schemas.SynthesisTask_OutputFormat:
+			var ev string
+			if err := d.ReadString(schemas.SynthesisTask_OutputFormat, &ev); err != nil {
+				return err
+			}
+			v.OutputFormat = OutputFormat(ev)
+			return nil
+		case schemas.SynthesisTask_OutputUri:
+			v.OutputUri = new(string)
+			return d.ReadString(schemas.SynthesisTask_OutputUri, v.OutputUri)
+		case schemas.SynthesisTask_RequestCharacters:
+			return d.ReadInt32(schemas.SynthesisTask_RequestCharacters, &v.RequestCharacters)
+		case schemas.SynthesisTask_SampleRate:
+			v.SampleRate = new(string)
+			return d.ReadString(schemas.SynthesisTask_SampleRate, v.SampleRate)
+		case schemas.SynthesisTask_SnsTopicArn:
+			v.SnsTopicArn = new(string)
+			return d.ReadString(schemas.SynthesisTask_SnsTopicArn, v.SnsTopicArn)
+		case schemas.SynthesisTask_SpeechMarkTypes:
+			return deserializeSpeechMarkTypeList(d, schemas.SynthesisTask_SpeechMarkTypes, &v.SpeechMarkTypes)
+		case schemas.SynthesisTask_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.SynthesisTask_TaskId, v.TaskId)
+		case schemas.SynthesisTask_TaskStatus:
+			var ev string
+			if err := d.ReadString(schemas.SynthesisTask_TaskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = TaskStatus(ev)
+			return nil
+		case schemas.SynthesisTask_TaskStatusReason:
+			v.TaskStatusReason = new(string)
+			return d.ReadString(schemas.SynthesisTask_TaskStatusReason, v.TaskStatusReason)
+		case schemas.SynthesisTask_TextType:
+			var ev string
+			if err := d.ReadString(schemas.SynthesisTask_TextType, &ev); err != nil {
+				return err
+			}
+			v.TextType = TextType(ev)
+			return nil
+		case schemas.SynthesisTask_VoiceId:
+			var ev string
+			if err := d.ReadString(schemas.SynthesisTask_VoiceId, &ev); err != nil {
+				return err
+			}
+			v.VoiceId = VoiceId(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains text content to be synthesized into speech.
 type TextEvent struct {
 
@@ -264,6 +612,46 @@ type TextEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlushStreamConfiguration != nil {
+		s.WriteStruct(schemas.TextEvent_FlushStreamConfiguration)
+		v.FlushStreamConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.TextEvent_Text, *v.Text)
+	}
+	if v.TextType != "" {
+		s.WriteString(schemas.TextEvent_TextType, string(v.TextType))
+	}
+}
+func (v *TextEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextEvent_FlushStreamConfiguration:
+			v.FlushStreamConfiguration = &FlushStreamConfiguration{}
+			return v.FlushStreamConfiguration.Deserialize(d)
+		case schemas.TextEvent_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.TextEvent_Text, v.Text)
+		case schemas.TextEvent_TextType:
+			var ev string
+			if err := d.ReadString(schemas.TextEvent_TextType, &ev); err != nil {
+				return err
+			}
+			v.TextType = TextType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides information about a specific throttling reason.
 type ThrottlingReason struct {
 
@@ -274,6 +662,34 @@ type ThrottlingReason struct {
 	Resource *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ThrottlingReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != nil {
+		s.WriteString(schemas.ThrottlingReason_reason, *v.Reason)
+	}
+	if v.Resource != nil {
+		s.WriteString(schemas.ThrottlingReason_resource, *v.Resource)
+	}
+}
+func (v *ThrottlingReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingReason_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ThrottlingReason_reason, v.Reason)
+		case schemas.ThrottlingReason_resource:
+			v.Resource = new(string)
+			return d.ReadString(schemas.ThrottlingReason_resource, v.Resource)
+		}
+		return nil
+	})
 }
 
 // Information about a field that failed validation.
@@ -290,6 +706,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Description of the voice.
@@ -325,6 +769,70 @@ type Voice struct {
 	SupportedEngines []Engine
 
 	noSmithyDocumentSerde
+}
+
+func (v *Voice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Voice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Voice) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLanguageCodeList(s, schemas.Voice_AdditionalLanguageCodes, v.AdditionalLanguageCodes)
+	if v.Gender != "" {
+		s.WriteString(schemas.Voice_Gender, string(v.Gender))
+	}
+	if v.Id != "" {
+		s.WriteString(schemas.Voice_Id, string(v.Id))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.Voice_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LanguageName != nil {
+		s.WriteString(schemas.Voice_LanguageName, *v.LanguageName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Voice_Name, *v.Name)
+	}
+	serializeEngineList(s, schemas.Voice_SupportedEngines, v.SupportedEngines)
+}
+func (v *Voice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Voice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Voice_AdditionalLanguageCodes:
+			return deserializeLanguageCodeList(d, schemas.Voice_AdditionalLanguageCodes, &v.AdditionalLanguageCodes)
+		case schemas.Voice_Gender:
+			var ev string
+			if err := d.ReadString(schemas.Voice_Gender, &ev); err != nil {
+				return err
+			}
+			v.Gender = Gender(ev)
+			return nil
+		case schemas.Voice_Id:
+			var ev string
+			if err := d.ReadString(schemas.Voice_Id, &ev); err != nil {
+				return err
+			}
+			v.Id = VoiceId(ev)
+			return nil
+		case schemas.Voice_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.Voice_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.Voice_LanguageName:
+			v.LanguageName = new(string)
+			return d.ReadString(schemas.Voice_LanguageName, v.LanguageName)
+		case schemas.Voice_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Voice_Name, v.Name)
+		case schemas.Voice_SupportedEngines:
+			return deserializeEngineList(d, schemas.Voice_SupportedEngines, &v.SupportedEngines)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,29 @@ type ListReadSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListReadSetsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReadSetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadSetsRequest_nextToken, *v.NextToken)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.ListReadSetsRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+}
+
 type ListReadSetsOutput struct {
 
 	// A list of read sets.
@@ -63,13 +88,35 @@ type ListReadSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadSetsResponse_nextToken, *v.NextToken)
+	}
+	serializeReadSetList(s, schemas.ListReadSetsResponse_readSets, v.ReadSets)
+}
+func (v *ListReadSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReadSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReadSetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReadSetsResponse_nextToken, v.NextToken)
+		case schemas.ListReadSetsResponse_readSets:
+			return deserializeReadSetList(d, schemas.ListReadSetsResponse_readSets, &v.ReadSets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReadSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReadSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadSets, schemas.ListReadSetsRequest, schemas.ListReadSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReadSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadSets, schemas.ListReadSetsRequest, schemas.ListReadSetsResponse), output: &ListReadSetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

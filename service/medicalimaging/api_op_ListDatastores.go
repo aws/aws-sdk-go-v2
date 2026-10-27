@@ -5,7 +5,9 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,24 @@ type ListDatastoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatastoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatastoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatastoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreStatus != "" {
+		s.WriteString(schemas.ListDatastoresRequest_datastoreStatus, string(v.DatastoreStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatastoresRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatastoresRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDatastoresOutput struct {
 
 	// The list of summaries of data stores.
@@ -53,13 +73,35 @@ type ListDatastoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatastoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatastoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatastoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatastoreSummaries(s, schemas.ListDatastoresResponse_datastoreSummaries, v.DatastoreSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatastoresResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDatastoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatastoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatastoresResponse_datastoreSummaries:
+			return deserializeDatastoreSummaries(d, schemas.ListDatastoresResponse_datastoreSummaries, &v.DatastoreSummaries)
+		case schemas.ListDatastoresResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatastoresResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatastoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatastores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatastores, schemas.ListDatastoresRequest, schemas.ListDatastoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatastores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatastores, schemas.ListDatastoresRequest, schemas.ListDatastoresResponse), output: &ListDatastoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

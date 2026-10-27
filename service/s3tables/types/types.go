@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/s3tables/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -30,6 +33,38 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.EncryptionConfiguration_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.SseAlgorithm != "" {
+		s.WriteString(schemas.EncryptionConfiguration_sseAlgorithm, string(v.SseAlgorithm))
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyArn, v.KmsKeyArn)
+		case schemas.EncryptionConfiguration_sseAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfiguration_sseAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.SseAlgorithm = SSEAlgorithm(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about the compaction settings for an Iceberg table.
 type IcebergCompactionSettings struct {
 
@@ -41,6 +76,38 @@ type IcebergCompactionSettings struct {
 	TargetFileSizeMB *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *IcebergCompactionSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergCompactionSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergCompactionSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Strategy != "" {
+		s.WriteString(schemas.IcebergCompactionSettings_strategy, string(v.Strategy))
+	}
+	if v.TargetFileSizeMB != nil {
+		s.WriteInt32(schemas.IcebergCompactionSettings_targetFileSizeMB, *v.TargetFileSizeMB)
+	}
+}
+func (v *IcebergCompactionSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergCompactionSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergCompactionSettings_strategy:
+			var ev string
+			if err := d.ReadString(schemas.IcebergCompactionSettings_strategy, &ev); err != nil {
+				return err
+			}
+			v.Strategy = IcebergCompactionStrategy(ev)
+			return nil
+		case schemas.IcebergCompactionSettings_targetFileSizeMB:
+			v.TargetFileSizeMB = new(int32)
+			return d.ReadInt32(schemas.IcebergCompactionSettings_targetFileSizeMB, v.TargetFileSizeMB)
+		}
+		return nil
+	})
 }
 
 // Contains details about the metadata for an Iceberg table.
@@ -75,6 +142,57 @@ type IcebergMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionSpec != nil {
+		s.WriteStruct(schemas.IcebergMetadata_partitionSpec)
+		v.PartitionSpec.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTableProperties(s, schemas.IcebergMetadata_properties, v.Properties)
+	if v.Schema != nil {
+		s.WriteStruct(schemas.IcebergMetadata_schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaV2 != nil {
+		s.WriteStruct(schemas.IcebergMetadata_schemaV2)
+		v.SchemaV2.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WriteOrder != nil {
+		s.WriteStruct(schemas.IcebergMetadata_writeOrder)
+		v.WriteOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IcebergMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergMetadata_partitionSpec:
+			v.PartitionSpec = &IcebergPartitionSpec{}
+			return v.PartitionSpec.Deserialize(d)
+		case schemas.IcebergMetadata_properties:
+			return deserializeTableProperties(d, schemas.IcebergMetadata_properties, &v.Properties)
+		case schemas.IcebergMetadata_schema:
+			v.Schema = &IcebergSchema{}
+			return v.Schema.Deserialize(d)
+		case schemas.IcebergMetadata_schemaV2:
+			v.SchemaV2 = &IcebergSchemaV2{}
+			return v.SchemaV2.Deserialize(d)
+		case schemas.IcebergMetadata_writeOrder:
+			v.WriteOrder = &IcebergSortOrder{}
+			return v.WriteOrder.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines a single partition field in an Iceberg partition specification.
 type IcebergPartitionField struct {
 
@@ -106,6 +224,46 @@ type IcebergPartitionField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergPartitionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergPartitionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergPartitionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldId != nil {
+		s.WriteInt32(schemas.IcebergPartitionField_fieldId, *v.FieldId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IcebergPartitionField_name, *v.Name)
+	}
+	if v.SourceId != nil {
+		s.WriteInt32(schemas.IcebergPartitionField_sourceId, *v.SourceId)
+	}
+	if v.Transform != nil {
+		s.WriteString(schemas.IcebergPartitionField_transform, *v.Transform)
+	}
+}
+func (v *IcebergPartitionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergPartitionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergPartitionField_fieldId:
+			v.FieldId = new(int32)
+			return d.ReadInt32(schemas.IcebergPartitionField_fieldId, v.FieldId)
+		case schemas.IcebergPartitionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IcebergPartitionField_name, v.Name)
+		case schemas.IcebergPartitionField_sourceId:
+			v.SourceId = new(int32)
+			return d.ReadInt32(schemas.IcebergPartitionField_sourceId, v.SourceId)
+		case schemas.IcebergPartitionField_transform:
+			v.Transform = new(string)
+			return d.ReadString(schemas.IcebergPartitionField_transform, v.Transform)
+		}
+		return nil
+	})
+}
+
 // Defines how data in an Iceberg table is partitioned. Partitioning helps
 // optimize query performance by organizing data into separate files based on field
 // values. Each partition field specifies a transform to apply to a source field.
@@ -125,6 +283,31 @@ type IcebergPartitionSpec struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergPartitionSpec) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergPartitionSpec)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergPartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIcebergPartitionFieldList(s, schemas.IcebergPartitionSpec_fields, v.Fields)
+	if v.SpecId != nil {
+		s.WriteInt32(schemas.IcebergPartitionSpec_specId, *v.SpecId)
+	}
+}
+func (v *IcebergPartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergPartitionSpec, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergPartitionSpec_fields:
+			return deserializeIcebergPartitionFieldList(d, schemas.IcebergPartitionSpec_fields, &v.Fields)
+		case schemas.IcebergPartitionSpec_specId:
+			v.SpecId = new(int32)
+			return d.ReadInt32(schemas.IcebergPartitionSpec_specId, v.SpecId)
+		}
+		return nil
+	})
+}
+
 // Contains details about the schema for an Iceberg table.
 type IcebergSchema struct {
 
@@ -134,6 +317,25 @@ type IcebergSchema struct {
 	Fields []SchemaField
 
 	noSmithyDocumentSerde
+}
+
+func (v *IcebergSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaFieldList(s, schemas.IcebergSchema_fields, v.Fields)
+}
+func (v *IcebergSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergSchema_fields:
+			return deserializeSchemaFieldList(d, schemas.IcebergSchema_fields, &v.Fields)
+		}
+		return nil
+	})
 }
 
 // Contains details about the schema for an Iceberg table using the V2 format.
@@ -166,6 +368,44 @@ type IcebergSchemaV2 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergSchemaV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergSchemaV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergSchemaV2) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaV2FieldList(s, schemas.IcebergSchemaV2_fields, v.Fields)
+	serializeIntegerList(s, schemas.IcebergSchemaV2_identifierFieldIds, v.IdentifierFieldIds)
+	if v.SchemaId != nil {
+		s.WriteInt32(schemas.IcebergSchemaV2_schemaId, *v.SchemaId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.IcebergSchemaV2_type, string(v.Type))
+	}
+}
+func (v *IcebergSchemaV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergSchemaV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergSchemaV2_fields:
+			return deserializeSchemaV2FieldList(d, schemas.IcebergSchemaV2_fields, &v.Fields)
+		case schemas.IcebergSchemaV2_identifierFieldIds:
+			return deserializeIntegerList(d, schemas.IcebergSchemaV2_identifierFieldIds, &v.IdentifierFieldIds)
+		case schemas.IcebergSchemaV2_schemaId:
+			v.SchemaId = new(int32)
+			return d.ReadInt32(schemas.IcebergSchemaV2_schemaId, v.SchemaId)
+		case schemas.IcebergSchemaV2_type:
+			var ev string
+			if err := d.ReadString(schemas.IcebergSchemaV2_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SchemaV2FieldType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains details about the snapshot management settings for an Iceberg table.
 // The oldest snapshot expires when its age exceeds the maxSnapshotAgeHours and
 // the total number of snapshots exceeds the value for the minimum number of
@@ -179,6 +419,34 @@ type IcebergSnapshotManagementSettings struct {
 	MinSnapshotsToKeep *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *IcebergSnapshotManagementSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergSnapshotManagementSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergSnapshotManagementSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxSnapshotAgeHours != nil {
+		s.WriteInt32(schemas.IcebergSnapshotManagementSettings_maxSnapshotAgeHours, *v.MaxSnapshotAgeHours)
+	}
+	if v.MinSnapshotsToKeep != nil {
+		s.WriteInt32(schemas.IcebergSnapshotManagementSettings_minSnapshotsToKeep, *v.MinSnapshotsToKeep)
+	}
+}
+func (v *IcebergSnapshotManagementSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergSnapshotManagementSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergSnapshotManagementSettings_maxSnapshotAgeHours:
+			v.MaxSnapshotAgeHours = new(int32)
+			return d.ReadInt32(schemas.IcebergSnapshotManagementSettings_maxSnapshotAgeHours, v.MaxSnapshotAgeHours)
+		case schemas.IcebergSnapshotManagementSettings_minSnapshotsToKeep:
+			v.MinSnapshotsToKeep = new(int32)
+			return d.ReadInt32(schemas.IcebergSnapshotManagementSettings_minSnapshotsToKeep, v.MinSnapshotsToKeep)
+		}
+		return nil
+	})
 }
 
 // Defines a single sort field in an Iceberg sort order specification.
@@ -212,6 +480,54 @@ type IcebergSortField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergSortField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergSortField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergSortField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Direction != "" {
+		s.WriteString(schemas.IcebergSortField_direction, string(v.Direction))
+	}
+	if v.NullOrder != "" {
+		s.WriteString(schemas.IcebergSortField_nullOrder, string(v.NullOrder))
+	}
+	if v.SourceId != nil {
+		s.WriteInt32(schemas.IcebergSortField_sourceId, *v.SourceId)
+	}
+	if v.Transform != nil {
+		s.WriteString(schemas.IcebergSortField_transform, *v.Transform)
+	}
+}
+func (v *IcebergSortField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergSortField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergSortField_direction:
+			var ev string
+			if err := d.ReadString(schemas.IcebergSortField_direction, &ev); err != nil {
+				return err
+			}
+			v.Direction = IcebergSortDirection(ev)
+			return nil
+		case schemas.IcebergSortField_nullOrder:
+			var ev string
+			if err := d.ReadString(schemas.IcebergSortField_nullOrder, &ev); err != nil {
+				return err
+			}
+			v.NullOrder = IcebergNullOrder(ev)
+			return nil
+		case schemas.IcebergSortField_sourceId:
+			v.SourceId = new(int32)
+			return d.ReadInt32(schemas.IcebergSortField_sourceId, v.SourceId)
+		case schemas.IcebergSortField_transform:
+			v.Transform = new(string)
+			return d.ReadString(schemas.IcebergSortField_transform, v.Transform)
+		}
+		return nil
+	})
+}
+
 // Defines the sort order for data within an Iceberg table. Sorting data can
 // improve query performance by enabling more efficient data skipping.
 type IcebergSortOrder struct {
@@ -232,6 +548,31 @@ type IcebergSortOrder struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IcebergSortOrder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergSortOrder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergSortOrder) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIcebergSortFieldList(s, schemas.IcebergSortOrder_fields, v.Fields)
+	if v.OrderId != nil {
+		s.WriteInt32(schemas.IcebergSortOrder_orderId, *v.OrderId)
+	}
+}
+func (v *IcebergSortOrder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergSortOrder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergSortOrder_fields:
+			return deserializeIcebergSortFieldList(d, schemas.IcebergSortOrder_fields, &v.Fields)
+		case schemas.IcebergSortOrder_orderId:
+			v.OrderId = new(int32)
+			return d.ReadInt32(schemas.IcebergSortOrder_orderId, v.OrderId)
+		}
+		return nil
+	})
+}
+
 // Contains details about the unreferenced file removal settings for an Iceberg
 // table bucket.
 type IcebergUnreferencedFileRemovalSettings struct {
@@ -244,6 +585,34 @@ type IcebergUnreferencedFileRemovalSettings struct {
 	UnreferencedDays *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *IcebergUnreferencedFileRemovalSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IcebergUnreferencedFileRemovalSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IcebergUnreferencedFileRemovalSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NonCurrentDays != nil {
+		s.WriteInt32(schemas.IcebergUnreferencedFileRemovalSettings_nonCurrentDays, *v.NonCurrentDays)
+	}
+	if v.UnreferencedDays != nil {
+		s.WriteInt32(schemas.IcebergUnreferencedFileRemovalSettings_unreferencedDays, *v.UnreferencedDays)
+	}
+}
+func (v *IcebergUnreferencedFileRemovalSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IcebergUnreferencedFileRemovalSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IcebergUnreferencedFileRemovalSettings_nonCurrentDays:
+			v.NonCurrentDays = new(int32)
+			return d.ReadInt32(schemas.IcebergUnreferencedFileRemovalSettings_nonCurrentDays, v.NonCurrentDays)
+		case schemas.IcebergUnreferencedFileRemovalSettings_unreferencedDays:
+			v.UnreferencedDays = new(int32)
+			return d.ReadInt32(schemas.IcebergUnreferencedFileRemovalSettings_unreferencedDays, v.UnreferencedDays)
+		}
+		return nil
+	})
 }
 
 // Contains information about the most recent successful replication update to a
@@ -263,6 +632,34 @@ type LastSuccessfulReplicatedUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LastSuccessfulReplicatedUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LastSuccessfulReplicatedUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LastSuccessfulReplicatedUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataLocation != nil {
+		s.WriteString(schemas.LastSuccessfulReplicatedUpdate_metadataLocation, *v.MetadataLocation)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.LastSuccessfulReplicatedUpdate_timestamp, *v.Timestamp)
+	}
+}
+func (v *LastSuccessfulReplicatedUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LastSuccessfulReplicatedUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LastSuccessfulReplicatedUpdate_metadataLocation:
+			v.MetadataLocation = new(string)
+			return d.ReadString(schemas.LastSuccessfulReplicatedUpdate_metadataLocation, v.MetadataLocation)
+		case schemas.LastSuccessfulReplicatedUpdate_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.LastSuccessfulReplicatedUpdate_timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Contains information about tables that are managed by S3 Tables, including
 // replication information for replica tables.
 type ManagedTableInformation struct {
@@ -272,6 +669,30 @@ type ManagedTableInformation struct {
 	ReplicationInformation *ReplicationInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *ManagedTableInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedTableInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedTableInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationInformation != nil {
+		s.WriteStruct(schemas.ManagedTableInformation_replicationInformation)
+		v.ReplicationInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ManagedTableInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedTableInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedTableInformation_replicationInformation:
+			v.ReplicationInformation = &ReplicationInformation{}
+			return v.ReplicationInformation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains details about a namespace.
@@ -307,6 +728,55 @@ type NamespaceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NamespaceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NamespaceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.NamespaceSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.NamespaceSummary_createdBy, *v.CreatedBy)
+	}
+	serializeNamespaceList(s, schemas.NamespaceSummary_namespace, v.Namespace)
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.NamespaceSummary_namespaceId, *v.NamespaceId)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.NamespaceSummary_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.TableBucketId != nil {
+		s.WriteString(schemas.NamespaceSummary_tableBucketId, *v.TableBucketId)
+	}
+}
+func (v *NamespaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NamespaceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NamespaceSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.NamespaceSummary_createdAt, v.CreatedAt)
+		case schemas.NamespaceSummary_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.NamespaceSummary_createdBy, v.CreatedBy)
+		case schemas.NamespaceSummary_namespace:
+			return deserializeNamespaceList(d, schemas.NamespaceSummary_namespace, &v.Namespace)
+		case schemas.NamespaceSummary_namespaceId:
+			v.NamespaceId = new(string)
+			return d.ReadString(schemas.NamespaceSummary_namespaceId, v.NamespaceId)
+		case schemas.NamespaceSummary_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.NamespaceSummary_ownerAccountId, v.OwnerAccountId)
+		case schemas.NamespaceSummary_tableBucketId:
+			v.TableBucketId = new(string)
+			return d.ReadString(schemas.NamespaceSummary_tableBucketId, v.TableBucketId)
+		}
+		return nil
+	})
+}
+
 // Specifies a destination table bucket for replication.
 type ReplicationDestination struct {
 
@@ -317,6 +787,28 @@ type ReplicationDestination struct {
 	DestinationTableBucketARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicationDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationTableBucketARN != nil {
+		s.WriteString(schemas.ReplicationDestination_destinationTableBucketARN, *v.DestinationTableBucketARN)
+	}
+}
+func (v *ReplicationDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationDestination_destinationTableBucketARN:
+			v.DestinationTableBucketARN = new(string)
+			return d.ReadString(schemas.ReplicationDestination_destinationTableBucketARN, v.DestinationTableBucketARN)
+		}
+		return nil
+	})
 }
 
 // Contains status information for a replication destination, including the
@@ -347,6 +839,58 @@ type ReplicationDestinationStatusModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicationDestinationStatusModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationDestinationStatusModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationDestinationStatusModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationTableArn != nil {
+		s.WriteString(schemas.ReplicationDestinationStatusModel_destinationTableArn, *v.DestinationTableArn)
+	}
+	if v.DestinationTableBucketArn != nil {
+		s.WriteString(schemas.ReplicationDestinationStatusModel_destinationTableBucketArn, *v.DestinationTableBucketArn)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.ReplicationDestinationStatusModel_failureMessage, *v.FailureMessage)
+	}
+	if v.LastSuccessfulReplicatedUpdate != nil {
+		s.WriteStruct(schemas.ReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate)
+		v.LastSuccessfulReplicatedUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationStatus != "" {
+		s.WriteString(schemas.ReplicationDestinationStatusModel_replicationStatus, string(v.ReplicationStatus))
+	}
+}
+func (v *ReplicationDestinationStatusModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationDestinationStatusModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationDestinationStatusModel_destinationTableArn:
+			v.DestinationTableArn = new(string)
+			return d.ReadString(schemas.ReplicationDestinationStatusModel_destinationTableArn, v.DestinationTableArn)
+		case schemas.ReplicationDestinationStatusModel_destinationTableBucketArn:
+			v.DestinationTableBucketArn = new(string)
+			return d.ReadString(schemas.ReplicationDestinationStatusModel_destinationTableBucketArn, v.DestinationTableBucketArn)
+		case schemas.ReplicationDestinationStatusModel_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.ReplicationDestinationStatusModel_failureMessage, v.FailureMessage)
+		case schemas.ReplicationDestinationStatusModel_lastSuccessfulReplicatedUpdate:
+			v.LastSuccessfulReplicatedUpdate = &LastSuccessfulReplicatedUpdate{}
+			return v.LastSuccessfulReplicatedUpdate.Deserialize(d)
+		case schemas.ReplicationDestinationStatusModel_replicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationDestinationStatusModel_replicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ReplicationStatus = ReplicationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the source of a replicated table.
 type ReplicationInformation struct {
 
@@ -357,6 +901,28 @@ type ReplicationInformation struct {
 	SourceTableARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReplicationInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceTableARN != nil {
+		s.WriteString(schemas.ReplicationInformation_sourceTableARN, *v.SourceTableARN)
+	}
+}
+func (v *ReplicationInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationInformation_sourceTableARN:
+			v.SourceTableARN = new(string)
+			return d.ReadString(schemas.ReplicationInformation_sourceTableARN, v.SourceTableARN)
+		}
+		return nil
+	})
 }
 
 // Contains details about a schema field.
@@ -386,6 +952,45 @@ type SchemaField struct {
 	Required bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SchemaField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteInt32(schemas.SchemaField_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SchemaField_name, *v.Name)
+	}
+	if v.Required != false {
+		s.WriteBool(schemas.SchemaField_required, v.Required)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SchemaField_type, *v.Type)
+	}
+}
+func (v *SchemaField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaField_id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.SchemaField_id, v.Id)
+		case schemas.SchemaField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SchemaField_name, v.Name)
+		case schemas.SchemaField_required:
+			return d.ReadBool(schemas.SchemaField_required, &v.Required)
+		case schemas.SchemaField_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SchemaField_type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Contains details about a schema field in the V2 format. This field format
@@ -427,6 +1032,58 @@ type SchemaV2Field struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaV2Field) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaV2Field)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaV2Field) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Doc != nil {
+		s.WriteString(schemas.SchemaV2Field_doc, *v.Doc)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.SchemaV2Field_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SchemaV2Field_name, *v.Name)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.SchemaV2Field_required, *v.Required)
+	}
+	if v.Type != nil {
+		s.WriteDocument(schemas.SchemaV2Field_type, &smithydocument.Opaque{Value: v.Type})
+	}
+}
+func (v *SchemaV2Field) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaV2Field, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaV2Field_doc:
+			v.Doc = new(string)
+			return d.ReadString(schemas.SchemaV2Field_doc, v.Doc)
+		case schemas.SchemaV2Field_id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.SchemaV2Field_id, v.Id)
+		case schemas.SchemaV2Field_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SchemaV2Field_name, v.Name)
+		case schemas.SchemaV2Field_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.SchemaV2Field_required, v.Required)
+		case schemas.SchemaV2Field_type:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.SchemaV2Field_type, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Type = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration details for the storage class of tables or table buckets.
 // This allows you to optimize storage costs by selecting the appropriate storage
 // class based on your access patterns and performance requirements.
@@ -441,6 +1098,32 @@ type StorageClassConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StorageClassConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageClassConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageClassConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageClass != "" {
+		s.WriteString(schemas.StorageClassConfiguration_storageClass, string(v.StorageClass))
+	}
+}
+func (v *StorageClassConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageClassConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageClassConfiguration_storageClass:
+			var ev string
+			if err := d.ReadString(schemas.StorageClassConfiguration_storageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = StorageClass(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about the values that define the maintenance configuration for a table
 // bucket.
 type TableBucketMaintenanceConfigurationValue struct {
@@ -452,6 +1135,35 @@ type TableBucketMaintenanceConfigurationValue struct {
 	Status MaintenanceStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableBucketMaintenanceConfigurationValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketMaintenanceConfigurationValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableBucketMaintenanceConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableBucketMaintenanceSettings(s, schemas.TableBucketMaintenanceConfigurationValue_settings, v.Settings)
+	if v.Status != "" {
+		s.WriteString(schemas.TableBucketMaintenanceConfigurationValue_status, string(v.Status))
+	}
+}
+func (v *TableBucketMaintenanceConfigurationValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableBucketMaintenanceConfigurationValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableBucketMaintenanceConfigurationValue_settings:
+			return deserializeTableBucketMaintenanceSettings(d, schemas.TableBucketMaintenanceConfigurationValue_settings, &v.Settings)
+		case schemas.TableBucketMaintenanceConfigurationValue_status:
+			var ev string
+			if err := d.ReadString(schemas.TableBucketMaintenanceConfigurationValue_status, &ev); err != nil {
+				return err
+			}
+			v.Status = MaintenanceStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains details about the maintenance settings for the table bucket.
@@ -471,6 +1183,14 @@ type TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval struct {
 }
 
 func (*TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval) isTableBucketMaintenanceSettings() {
+}
+func (v *TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketMaintenanceSettings_icebergUnreferencedFileRemoval)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TableBucketMaintenanceSettingsMemberIcebergUnreferencedFileRemoval) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The replication configuration for a table bucket. This configuration defines
@@ -493,6 +1213,31 @@ type TableBucketReplicationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableBucketReplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketReplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableBucketReplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != nil {
+		s.WriteString(schemas.TableBucketReplicationConfiguration_role, *v.Role)
+	}
+	serializeTableBucketReplicationRules(s, schemas.TableBucketReplicationConfiguration_rules, v.Rules)
+}
+func (v *TableBucketReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableBucketReplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableBucketReplicationConfiguration_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.TableBucketReplicationConfiguration_role, v.Role)
+		case schemas.TableBucketReplicationConfiguration_rules:
+			return deserializeTableBucketReplicationRules(d, schemas.TableBucketReplicationConfiguration_rules, &v.Rules)
+		}
+		return nil
+	})
+}
+
 // Defines a rule for replicating tables from a source table bucket to one or more
 // destination table buckets.
 type TableBucketReplicationRule struct {
@@ -503,6 +1248,25 @@ type TableBucketReplicationRule struct {
 	Destinations []ReplicationDestination
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableBucketReplicationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketReplicationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableBucketReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReplicationDestinations(s, schemas.TableBucketReplicationRule_destinations, v.Destinations)
+}
+func (v *TableBucketReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableBucketReplicationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableBucketReplicationRule_destinations:
+			return deserializeReplicationDestinations(d, schemas.TableBucketReplicationRule_destinations, &v.Destinations)
+		}
+		return nil
+	})
 }
 
 // Contains details about a table bucket.
@@ -537,6 +1301,62 @@ type TableBucketSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableBucketSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableBucketSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableBucketSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TableBucketSummary_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TableBucketSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TableBucketSummary_name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.TableBucketSummary_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.TableBucketId != nil {
+		s.WriteString(schemas.TableBucketSummary_tableBucketId, *v.TableBucketId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TableBucketSummary_type, string(v.Type))
+	}
+}
+func (v *TableBucketSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableBucketSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableBucketSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TableBucketSummary_arn, v.Arn)
+		case schemas.TableBucketSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TableBucketSummary_createdAt, v.CreatedAt)
+		case schemas.TableBucketSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TableBucketSummary_name, v.Name)
+		case schemas.TableBucketSummary_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.TableBucketSummary_ownerAccountId, v.OwnerAccountId)
+		case schemas.TableBucketSummary_tableBucketId:
+			v.TableBucketId = new(string)
+			return d.ReadString(schemas.TableBucketSummary_tableBucketId, v.TableBucketId)
+		case schemas.TableBucketSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.TableBucketSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TableBucketType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The values that define a maintenance configuration for a table.
 type TableMaintenanceConfigurationValue struct {
 
@@ -547,6 +1367,35 @@ type TableMaintenanceConfigurationValue struct {
 	Status MaintenanceStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableMaintenanceConfigurationValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableMaintenanceConfigurationValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableMaintenanceConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableMaintenanceSettings(s, schemas.TableMaintenanceConfigurationValue_settings, v.Settings)
+	if v.Status != "" {
+		s.WriteString(schemas.TableMaintenanceConfigurationValue_status, string(v.Status))
+	}
+}
+func (v *TableMaintenanceConfigurationValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableMaintenanceConfigurationValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableMaintenanceConfigurationValue_settings:
+			return deserializeTableMaintenanceSettings(d, schemas.TableMaintenanceConfigurationValue_settings, &v.Settings)
+		case schemas.TableMaintenanceConfigurationValue_status:
+			var ev string
+			if err := d.ReadString(schemas.TableMaintenanceConfigurationValue_status, &ev); err != nil {
+				return err
+			}
+			v.Status = MaintenanceStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about the status of a maintenance job.
@@ -564,6 +1413,44 @@ type TableMaintenanceJobStatusValue struct {
 	LastRunTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableMaintenanceJobStatusValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableMaintenanceJobStatusValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableMaintenanceJobStatusValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.TableMaintenanceJobStatusValue_failureMessage, *v.FailureMessage)
+	}
+	if v.LastRunTimestamp != nil {
+		s.WriteTime(schemas.TableMaintenanceJobStatusValue_lastRunTimestamp, *v.LastRunTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TableMaintenanceJobStatusValue_status, string(v.Status))
+	}
+}
+func (v *TableMaintenanceJobStatusValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableMaintenanceJobStatusValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableMaintenanceJobStatusValue_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.TableMaintenanceJobStatusValue_failureMessage, v.FailureMessage)
+		case schemas.TableMaintenanceJobStatusValue_lastRunTimestamp:
+			v.LastRunTimestamp = new(time.Time)
+			return d.ReadTime(schemas.TableMaintenanceJobStatusValue_lastRunTimestamp, v.LastRunTimestamp)
+		case schemas.TableMaintenanceJobStatusValue_status:
+			var ev string
+			if err := d.ReadString(schemas.TableMaintenanceJobStatusValue_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains details about maintenance settings for the table.
@@ -584,6 +1471,14 @@ type TableMaintenanceSettingsMemberIcebergCompaction struct {
 }
 
 func (*TableMaintenanceSettingsMemberIcebergCompaction) isTableMaintenanceSettings() {}
+func (v *TableMaintenanceSettingsMemberIcebergCompaction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableMaintenanceSettings_icebergCompaction)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TableMaintenanceSettingsMemberIcebergCompaction) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains details about the Iceberg snapshot management settings for the table.
 type TableMaintenanceSettingsMemberIcebergSnapshotManagement struct {
@@ -593,6 +1488,14 @@ type TableMaintenanceSettingsMemberIcebergSnapshotManagement struct {
 }
 
 func (*TableMaintenanceSettingsMemberIcebergSnapshotManagement) isTableMaintenanceSettings() {}
+func (v *TableMaintenanceSettingsMemberIcebergSnapshotManagement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableMaintenanceSettings_icebergSnapshotManagement)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TableMaintenanceSettingsMemberIcebergSnapshotManagement) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains details about the table metadata.
 //
@@ -611,6 +1514,14 @@ type TableMetadataMemberIceberg struct {
 }
 
 func (*TableMetadataMemberIceberg) isTableMetadata() {}
+func (v *TableMetadataMemberIceberg) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableMetadata_iceberg)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TableMetadataMemberIceberg) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The expiration configuration settings for records in a table, and the status of
 // the configuration. If the status of the configuration is enabled, records expire
@@ -625,6 +1536,40 @@ type TableRecordExpirationConfigurationValue struct {
 	Status TableRecordExpirationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableRecordExpirationConfigurationValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableRecordExpirationConfigurationValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableRecordExpirationConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Settings != nil {
+		s.WriteStruct(schemas.TableRecordExpirationConfigurationValue_settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TableRecordExpirationConfigurationValue_status, string(v.Status))
+	}
+}
+func (v *TableRecordExpirationConfigurationValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableRecordExpirationConfigurationValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableRecordExpirationConfigurationValue_settings:
+			v.Settings = &TableRecordExpirationSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.TableRecordExpirationConfigurationValue_status:
+			var ev string
+			if err := d.ReadString(schemas.TableRecordExpirationConfigurationValue_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TableRecordExpirationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides metrics for the record expiration job that most recently ran for a
@@ -644,6 +1589,40 @@ type TableRecordExpirationJobMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableRecordExpirationJobMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableRecordExpirationJobMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableRecordExpirationJobMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletedDataFiles != nil {
+		s.WriteInt64(schemas.TableRecordExpirationJobMetrics_deletedDataFiles, *v.DeletedDataFiles)
+	}
+	if v.DeletedRecords != nil {
+		s.WriteInt64(schemas.TableRecordExpirationJobMetrics_deletedRecords, *v.DeletedRecords)
+	}
+	if v.RemovedFilesSize != nil {
+		s.WriteInt64(schemas.TableRecordExpirationJobMetrics_removedFilesSize, *v.RemovedFilesSize)
+	}
+}
+func (v *TableRecordExpirationJobMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableRecordExpirationJobMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableRecordExpirationJobMetrics_deletedDataFiles:
+			v.DeletedDataFiles = new(int64)
+			return d.ReadInt64(schemas.TableRecordExpirationJobMetrics_deletedDataFiles, v.DeletedDataFiles)
+		case schemas.TableRecordExpirationJobMetrics_deletedRecords:
+			v.DeletedRecords = new(int64)
+			return d.ReadInt64(schemas.TableRecordExpirationJobMetrics_deletedRecords, v.DeletedRecords)
+		case schemas.TableRecordExpirationJobMetrics_removedFilesSize:
+			v.RemovedFilesSize = new(int64)
+			return d.ReadInt64(schemas.TableRecordExpirationJobMetrics_removedFilesSize, v.RemovedFilesSize)
+		}
+		return nil
+	})
+}
+
 // The record expiration setting that specifies when records expire and are
 // automatically removed from a table.
 type TableRecordExpirationSettings struct {
@@ -654,6 +1633,28 @@ type TableRecordExpirationSettings struct {
 	Days *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableRecordExpirationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableRecordExpirationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableRecordExpirationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Days != nil {
+		s.WriteInt32(schemas.TableRecordExpirationSettings_days, *v.Days)
+	}
+}
+func (v *TableRecordExpirationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableRecordExpirationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableRecordExpirationSettings_days:
+			v.Days = new(int32)
+			return d.ReadInt32(schemas.TableRecordExpirationSettings_days, v.Days)
+		}
+		return nil
+	})
 }
 
 // The replication configuration for an individual table. This configuration
@@ -674,6 +1675,31 @@ type TableReplicationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableReplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableReplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableReplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != nil {
+		s.WriteString(schemas.TableReplicationConfiguration_role, *v.Role)
+	}
+	serializeTableReplicationRules(s, schemas.TableReplicationConfiguration_rules, v.Rules)
+}
+func (v *TableReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableReplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableReplicationConfiguration_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.TableReplicationConfiguration_role, v.Role)
+		case schemas.TableReplicationConfiguration_rules:
+			return deserializeTableReplicationRules(d, schemas.TableReplicationConfiguration_rules, &v.Rules)
+		}
+		return nil
+	})
+}
+
 // Defines a rule for replicating a table to one or more destination tables.
 type TableReplicationRule struct {
 
@@ -683,6 +1709,25 @@ type TableReplicationRule struct {
 	Destinations []ReplicationDestination
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableReplicationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableReplicationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReplicationDestinations(s, schemas.TableReplicationRule_destinations, v.Destinations)
+}
+func (v *TableReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableReplicationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableReplicationRule_destinations:
+			return deserializeReplicationDestinations(d, schemas.TableReplicationRule_destinations, &v.Destinations)
+		}
+		return nil
+	})
 }
 
 // Contains details about a table.
@@ -729,6 +1774,77 @@ type TableSummary struct {
 	TableBucketId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TableSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ManagedByService != nil {
+		s.WriteString(schemas.TableSummary_managedByService, *v.ManagedByService)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.TableSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TableSummary_name, *v.Name)
+	}
+	serializeNamespaceList(s, schemas.TableSummary_namespace, v.Namespace)
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.TableSummary_namespaceId, *v.NamespaceId)
+	}
+	if v.TableARN != nil {
+		s.WriteString(schemas.TableSummary_tableARN, *v.TableARN)
+	}
+	if v.TableBucketId != nil {
+		s.WriteString(schemas.TableSummary_tableBucketId, *v.TableBucketId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TableSummary_type, string(v.Type))
+	}
+}
+func (v *TableSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TableSummary_createdAt, v.CreatedAt)
+		case schemas.TableSummary_managedByService:
+			v.ManagedByService = new(string)
+			return d.ReadString(schemas.TableSummary_managedByService, v.ManagedByService)
+		case schemas.TableSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.TableSummary_modifiedAt, v.ModifiedAt)
+		case schemas.TableSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TableSummary_name, v.Name)
+		case schemas.TableSummary_namespace:
+			return deserializeNamespaceList(d, schemas.TableSummary_namespace, &v.Namespace)
+		case schemas.TableSummary_namespaceId:
+			v.NamespaceId = new(string)
+			return d.ReadString(schemas.TableSummary_namespaceId, v.NamespaceId)
+		case schemas.TableSummary_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.TableSummary_tableARN, v.TableARN)
+		case schemas.TableSummary_tableBucketId:
+			v.TableBucketId = new(string)
+			return d.ReadString(schemas.TableSummary_tableBucketId, v.TableBucketId)
+		case schemas.TableSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.TableSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TableType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

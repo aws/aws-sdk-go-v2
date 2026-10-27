@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,27 @@ func (e *EngineNotSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EngineNotSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EngineNotSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EngineNotSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EngineNotSupportedException_message, *v.Message)
+	}
+}
+func (v *EngineNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EngineNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EngineNotSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EngineNotSupportedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Polly can't find the specified lexicon. Verify that the lexicon's name
 // is spelled correctly, and then try again.
@@ -61,6 +83,27 @@ func (e *InvalidLexiconException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidLexiconException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidLexiconException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidLexiconException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidLexiconException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidLexiconException_message, *v.Message)
+	}
+}
+func (v *InvalidLexiconException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidLexiconException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidLexiconException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidLexiconException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The NextToken is invalid. Verify that it's spelled correctly, and then try
 // again.
@@ -88,6 +131,27 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextTokenException_message, *v.Message)
+	}
+}
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The provided Amazon S3 bucket name is invalid. Please check your input with S3
 // bucket naming requirements and try again.
@@ -115,6 +179,27 @@ func (e *InvalidS3BucketException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidS3BucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidS3BucketException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidS3BucketException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidS3BucketException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidS3BucketException_message, *v.Message)
+	}
+}
+func (v *InvalidS3BucketException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidS3BucketException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidS3BucketException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidS3BucketException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The provided Amazon S3 key prefix is invalid. Please provide a valid S3 object
 // key name.
@@ -142,6 +227,27 @@ func (e *InvalidS3KeyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidS3KeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidS3KeyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidS3KeyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidS3KeyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidS3KeyException_message, *v.Message)
+	}
+}
+func (v *InvalidS3KeyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidS3KeyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidS3KeyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidS3KeyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified sample rate is not valid.
 type InvalidSampleRateException struct {
@@ -168,6 +274,27 @@ func (e *InvalidSampleRateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSampleRateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSampleRateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSampleRateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSampleRateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSampleRateException_message, *v.Message)
+	}
+}
+func (v *InvalidSampleRateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSampleRateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSampleRateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSampleRateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The provided SNS topic ARN is invalid. Please provide a valid SNS topic ARN and
 // try again.
@@ -195,6 +322,27 @@ func (e *InvalidSnsTopicArnException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSnsTopicArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSnsTopicArnException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSnsTopicArnException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSnsTopicArnException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSnsTopicArnException_message, *v.Message)
+	}
+}
+func (v *InvalidSnsTopicArnException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSnsTopicArnException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSnsTopicArnException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSnsTopicArnException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The SSML you provided is invalid. Verify the SSML syntax, spelling of tags and
 // values, and then try again.
@@ -222,6 +370,27 @@ func (e *InvalidSsmlException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSsmlException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSsmlException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSsmlException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSsmlException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSsmlException_message, *v.Message)
+	}
+}
+func (v *InvalidSsmlException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSsmlException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSsmlException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSsmlException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The provided Task ID is not valid. Please provide a valid Task ID and try again.
 type InvalidTaskIdException struct {
@@ -248,6 +417,27 @@ func (e *InvalidTaskIdException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTaskIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTaskIdException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidTaskIdException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidTaskIdException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidTaskIdException_message, *v.Message)
+	}
+}
+func (v *InvalidTaskIdException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTaskIdException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTaskIdException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTaskIdException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The language specified is not currently supported by Amazon Polly in this
 // capacity.
@@ -275,6 +465,27 @@ func (e *LanguageNotSupportedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LanguageNotSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LanguageNotSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LanguageNotSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LanguageNotSupportedException_message, *v.Message)
+	}
+}
+func (v *LanguageNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LanguageNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LanguageNotSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LanguageNotSupportedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Polly can't find the specified lexicon. This could be caused by a
 // lexicon that is missing, its name is misspelled or specifying a lexicon that is
@@ -306,6 +517,27 @@ func (e *LexiconNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LexiconNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LexiconNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LexiconNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LexiconNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LexiconNotFoundException_message, *v.Message)
+	}
+}
+func (v *LexiconNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LexiconNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LexiconNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LexiconNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The maximum size of the specified lexicon would be exceeded by this operation.
 type LexiconSizeExceededException struct {
@@ -332,6 +564,27 @@ func (e *LexiconSizeExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LexiconSizeExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LexiconSizeExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LexiconSizeExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LexiconSizeExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LexiconSizeExceededException_message, *v.Message)
+	}
+}
+func (v *LexiconSizeExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LexiconSizeExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LexiconSizeExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LexiconSizeExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Speech marks are not supported for the OutputFormat selected. Speech marks are
 // only available for content in json format.
@@ -361,6 +614,27 @@ func (e *MarksNotSupportedForFormatException) ErrorCode() string {
 func (e *MarksNotSupportedForFormatException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *MarksNotSupportedForFormatException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MarksNotSupportedForFormatException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MarksNotSupportedForFormatException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MarksNotSupportedForFormatException_message, *v.Message)
+	}
+}
+func (v *MarksNotSupportedForFormatException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MarksNotSupportedForFormatException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MarksNotSupportedForFormatException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MarksNotSupportedForFormatException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The maximum size of the lexeme would be exceeded by this operation.
 type MaxLexemeLengthExceededException struct {
@@ -387,6 +661,27 @@ func (e *MaxLexemeLengthExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MaxLexemeLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MaxLexemeLengthExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MaxLexemeLengthExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MaxLexemeLengthExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MaxLexemeLengthExceededException_message, *v.Message)
+	}
+}
+func (v *MaxLexemeLengthExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MaxLexemeLengthExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MaxLexemeLengthExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MaxLexemeLengthExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The maximum number of lexicons would be exceeded by this operation.
 type MaxLexiconsNumberExceededException struct {
@@ -415,6 +710,27 @@ func (e *MaxLexiconsNumberExceededException) ErrorCode() string {
 func (e *MaxLexiconsNumberExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *MaxLexiconsNumberExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MaxLexiconsNumberExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MaxLexiconsNumberExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MaxLexiconsNumberExceededException_message, *v.Message)
+	}
+}
+func (v *MaxLexiconsNumberExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MaxLexiconsNumberExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MaxLexiconsNumberExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MaxLexiconsNumberExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An unknown condition has caused a service failure.
 type ServiceFailureException struct {
@@ -441,6 +757,27 @@ func (e *ServiceFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceFailureException_message, *v.Message)
+	}
+}
+func (v *ServiceFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceFailureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceFailureException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
@@ -470,6 +807,47 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_message, *v.Message)
+	}
+	if v.QuotaCode != "" {
+		s.WriteString(schemas.ServiceQuotaExceededException_quotaCode, string(v.QuotaCode))
+	}
+	if v.ServiceCode != "" {
+		s.WriteString(schemas.ServiceQuotaExceededException_serviceCode, string(v.ServiceCode))
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_message, v.Message)
+		case schemas.ServiceQuotaExceededException_quotaCode:
+			var ev string
+			if err := d.ReadString(schemas.ServiceQuotaExceededException_quotaCode, &ev); err != nil {
+				return err
+			}
+			v.QuotaCode = QuotaCode(ev)
+			return nil
+		case schemas.ServiceQuotaExceededException_serviceCode:
+			var ev string
+			if err := d.ReadString(schemas.ServiceQuotaExceededException_serviceCode, &ev); err != nil {
+				return err
+			}
+			v.ServiceCode = ServiceCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // SSML speech marks are not supported for plain text-type input.
 type SsmlMarksNotSupportedForTextTypeException struct {
@@ -498,6 +876,27 @@ func (e *SsmlMarksNotSupportedForTextTypeException) ErrorCode() string {
 func (e *SsmlMarksNotSupportedForTextTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *SsmlMarksNotSupportedForTextTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SsmlMarksNotSupportedForTextTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SsmlMarksNotSupportedForTextTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SsmlMarksNotSupportedForTextTypeException_message, *v.Message)
+	}
+}
+func (v *SsmlMarksNotSupportedForTextTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SsmlMarksNotSupportedForTextTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SsmlMarksNotSupportedForTextTypeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SsmlMarksNotSupportedForTextTypeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Speech Synthesis task with requested Task ID cannot be found.
 type SynthesisTaskNotFoundException struct {
@@ -524,6 +923,27 @@ func (e *SynthesisTaskNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SynthesisTaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SynthesisTaskNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SynthesisTaskNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SynthesisTaskNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SynthesisTaskNotFoundException_message, *v.Message)
+	}
+}
+func (v *SynthesisTaskNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SynthesisTaskNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SynthesisTaskNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SynthesisTaskNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The value of the "Text" parameter is longer than the accepted limits. For the
 // SynthesizeSpeech API, the limit for input text is a maximum of 6000 characters
@@ -555,6 +975,27 @@ func (e *TextLengthExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TextLengthExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextLengthExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextLengthExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TextLengthExceededException_message, *v.Message)
+	}
+}
+func (v *TextLengthExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextLengthExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextLengthExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TextLengthExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was denied because of request throttling.
 type ThrottlingException struct {
@@ -583,6 +1024,30 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_message, *v.Message)
+	}
+	serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		case schemas.ThrottlingException_throttlingReasons:
+			return deserializeThrottlingReasonList(d, schemas.ThrottlingException_throttlingReasons, &v.ThrottlingReasons)
+		}
+		return nil
+	})
+}
 
 // The alphabet specified by the lexicon is not a supported alphabet. Valid values
 // are ipa , x-sampa , x-amazon-pinyin , x-amazon-jyutping , x-amazon-pron-kana ,
@@ -612,6 +1077,27 @@ func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedPlsAlphabetException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedPlsAlphabetException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedPlsAlphabetException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedPlsAlphabetException_message, *v.Message)
+	}
+}
+func (v *UnsupportedPlsAlphabetException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedPlsAlphabetException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedPlsAlphabetException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedPlsAlphabetException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The language specified in the lexicon is unsupported. For a list of supported
 // languages, see [Lexicon Attributes].
@@ -641,6 +1127,27 @@ func (e *UnsupportedPlsLanguageException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedPlsLanguageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedPlsLanguageException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedPlsLanguageException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedPlsLanguageException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedPlsLanguageException_message, *v.Message)
+	}
+}
+func (v *UnsupportedPlsLanguageException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedPlsLanguageException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedPlsLanguageException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedPlsLanguageException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input fails to satisfy the constraints specified by the service.
 type ValidationException struct {
@@ -670,3 +1177,37 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidationExceptionFieldList(s, schemas.ValidationException_fields, v.Fields)
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.ValidationException_reason, string(v.Reason))
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_fields:
+			return deserializeValidationExceptionFieldList(d, schemas.ValidationException_fields, &v.Fields)
+		case schemas.ValidationException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_message, v.Message)
+		case schemas.ValidationException_reason:
+			var ev string
+			if err := d.ReadString(schemas.ValidationException_reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ValidationExceptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}

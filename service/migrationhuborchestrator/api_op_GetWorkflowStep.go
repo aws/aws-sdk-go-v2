@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,40 @@ type GetWorkflowStepInput struct {
 	WorkflowId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkflowStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetWorkflowStepRequest_id, *v.Id)
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.GetWorkflowStepRequest_stepGroupId, *v.StepGroupId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowStepRequest_workflowId, *v.WorkflowId)
+	}
+}
+func (v *GetWorkflowStepInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowStepRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowStepRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetWorkflowStepRequest_id, v.Id)
+		case schemas.GetWorkflowStepRequest_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepRequest_stepGroupId, v.StepGroupId)
+		case schemas.GetWorkflowStepRequest_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepRequest_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
 }
 
 type GetWorkflowStepOutput struct {
@@ -117,13 +153,154 @@ type GetWorkflowStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetWorkflowStepResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_description, *v.Description)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetWorkflowStepResponse_endTime, *v.EndTime)
+	}
+	if v.LastStartTime != nil {
+		s.WriteTime(schemas.GetWorkflowStepResponse_lastStartTime, *v.LastStartTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_name, *v.Name)
+	}
+	serializeStringList(s, schemas.GetWorkflowStepResponse_next, v.Next)
+	if v.NoOfSrvCompleted != nil {
+		s.WriteInt32(schemas.GetWorkflowStepResponse_noOfSrvCompleted, *v.NoOfSrvCompleted)
+	}
+	if v.NoOfSrvFailed != nil {
+		s.WriteInt32(schemas.GetWorkflowStepResponse_noOfSrvFailed, *v.NoOfSrvFailed)
+	}
+	serializeWorkflowStepOutputList(s, schemas.GetWorkflowStepResponse_outputs, v.Outputs)
+	if v.Owner != "" {
+		s.WriteString(schemas.GetWorkflowStepResponse_owner, string(v.Owner))
+	}
+	serializeStringList(s, schemas.GetWorkflowStepResponse_previous, v.Previous)
+	if v.ScriptOutputLocation != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_scriptOutputLocation, *v.ScriptOutputLocation)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkflowStepResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.StepActionType != "" {
+		s.WriteString(schemas.GetWorkflowStepResponse_stepActionType, string(v.StepActionType))
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_stepGroupId, *v.StepGroupId)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_stepId, *v.StepId)
+	}
+	serializeStringList(s, schemas.GetWorkflowStepResponse_stepTarget, v.StepTarget)
+	if v.TotalNoOfSrv != nil {
+		s.WriteInt32(schemas.GetWorkflowStepResponse_totalNoOfSrv, *v.TotalNoOfSrv)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetWorkflowStepResponse_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowStepAutomationConfiguration != nil {
+		s.WriteStruct(schemas.GetWorkflowStepResponse_workflowStepAutomationConfiguration)
+		v.WorkflowStepAutomationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWorkflowStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowStepResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowStepResponse_creationTime, v.CreationTime)
+		case schemas.GetWorkflowStepResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_description, v.Description)
+		case schemas.GetWorkflowStepResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowStepResponse_endTime, v.EndTime)
+		case schemas.GetWorkflowStepResponse_lastStartTime:
+			v.LastStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowStepResponse_lastStartTime, v.LastStartTime)
+		case schemas.GetWorkflowStepResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_name, v.Name)
+		case schemas.GetWorkflowStepResponse_next:
+			return deserializeStringList(d, schemas.GetWorkflowStepResponse_next, &v.Next)
+		case schemas.GetWorkflowStepResponse_noOfSrvCompleted:
+			v.NoOfSrvCompleted = new(int32)
+			return d.ReadInt32(schemas.GetWorkflowStepResponse_noOfSrvCompleted, v.NoOfSrvCompleted)
+		case schemas.GetWorkflowStepResponse_noOfSrvFailed:
+			v.NoOfSrvFailed = new(int32)
+			return d.ReadInt32(schemas.GetWorkflowStepResponse_noOfSrvFailed, v.NoOfSrvFailed)
+		case schemas.GetWorkflowStepResponse_outputs:
+			return deserializeWorkflowStepOutputList(d, schemas.GetWorkflowStepResponse_outputs, &v.Outputs)
+		case schemas.GetWorkflowStepResponse_owner:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowStepResponse_owner, &ev); err != nil {
+				return err
+			}
+			v.Owner = types.Owner(ev)
+			return nil
+		case schemas.GetWorkflowStepResponse_previous:
+			return deserializeStringList(d, schemas.GetWorkflowStepResponse_previous, &v.Previous)
+		case schemas.GetWorkflowStepResponse_scriptOutputLocation:
+			v.ScriptOutputLocation = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_scriptOutputLocation, v.ScriptOutputLocation)
+		case schemas.GetWorkflowStepResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowStepResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StepStatus(ev)
+			return nil
+		case schemas.GetWorkflowStepResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_statusMessage, v.StatusMessage)
+		case schemas.GetWorkflowStepResponse_stepActionType:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowStepResponse_stepActionType, &ev); err != nil {
+				return err
+			}
+			v.StepActionType = types.StepActionType(ev)
+			return nil
+		case schemas.GetWorkflowStepResponse_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_stepGroupId, v.StepGroupId)
+		case schemas.GetWorkflowStepResponse_stepId:
+			v.StepId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_stepId, v.StepId)
+		case schemas.GetWorkflowStepResponse_stepTarget:
+			return deserializeStringList(d, schemas.GetWorkflowStepResponse_stepTarget, &v.StepTarget)
+		case schemas.GetWorkflowStepResponse_totalNoOfSrv:
+			v.TotalNoOfSrv = new(int32)
+			return d.ReadInt32(schemas.GetWorkflowStepResponse_totalNoOfSrv, v.TotalNoOfSrv)
+		case schemas.GetWorkflowStepResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetWorkflowStepResponse_workflowId, v.WorkflowId)
+		case schemas.GetWorkflowStepResponse_workflowStepAutomationConfiguration:
+			v.WorkflowStepAutomationConfiguration = &types.WorkflowStepAutomationConfiguration{}
+			return v.WorkflowStepAutomationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowStep, schemas.GetWorkflowStepRequest, schemas.GetWorkflowStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowStep, schemas.GetWorkflowStepRequest, schemas.GetWorkflowStepResponse), output: &GetWorkflowStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

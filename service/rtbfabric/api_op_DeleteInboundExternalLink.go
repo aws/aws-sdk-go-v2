@@ -4,7 +4,9 @@ package rtbfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteInboundExternalLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInboundExternalLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInboundExternalLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInboundExternalLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DeleteInboundExternalLinkRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.DeleteInboundExternalLinkRequest_linkId, *v.LinkId)
+	}
+}
+
 type DeleteInboundExternalLinkOutput struct {
 
 	// The unique identifier of the link.
@@ -57,13 +74,42 @@ type DeleteInboundExternalLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInboundExternalLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInboundExternalLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInboundExternalLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LinkId != nil {
+		s.WriteString(schemas.DeleteInboundExternalLinkResponse_linkId, *v.LinkId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteInboundExternalLinkResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteInboundExternalLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInboundExternalLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInboundExternalLinkResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.DeleteInboundExternalLinkResponse_linkId, v.LinkId)
+		case schemas.DeleteInboundExternalLinkResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteInboundExternalLinkResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInboundExternalLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInboundExternalLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInboundExternalLink, schemas.DeleteInboundExternalLinkRequest, schemas.DeleteInboundExternalLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInboundExternalLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInboundExternalLink, schemas.DeleteInboundExternalLinkRequest, schemas.DeleteInboundExternalLinkResponse), output: &DeleteInboundExternalLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

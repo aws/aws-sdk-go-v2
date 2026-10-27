@@ -4,7 +4,9 @@ package pcaconnectorad
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,22 @@ type UpdateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTemplateDefinition(s, schemas.UpdateTemplateRequest_Definition, v.Definition)
+	if v.ReenrollAllCertificateHolders != nil {
+		s.WriteBool(schemas.UpdateTemplateRequest_ReenrollAllCertificateHolders, *v.ReenrollAllCertificateHolders)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_TemplateArn, *v.TemplateArn)
+	}
+}
+
 type UpdateTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +73,26 @@ type UpdateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, nil), output: &UpdateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

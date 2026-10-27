@@ -5,7 +5,9 @@ package supplychain
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/supplychain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supplychain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,31 @@ type CreateInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInstanceRequest_clientToken, *v.ClientToken)
+	}
+	if v.InstanceDescription != nil {
+		s.WriteString(schemas.CreateInstanceRequest_instanceDescription, *v.InstanceDescription)
+	}
+	if v.InstanceName != nil {
+		s.WriteString(schemas.CreateInstanceRequest_instanceName, *v.InstanceName)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateInstanceRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	serializeTagMap(s, schemas.CreateInstanceRequest_tags, v.Tags)
+	if v.WebAppDnsDomain != nil {
+		s.WriteString(schemas.CreateInstanceRequest_webAppDnsDomain, *v.WebAppDnsDomain)
+	}
+}
+
 // The response parameters for CreateInstance.
 type CreateInstanceOutput struct {
 
@@ -79,13 +106,34 @@ type CreateInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Instance != nil {
+		s.WriteStruct(schemas.CreateInstanceResponse_instance)
+		v.Instance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInstanceResponse_instance:
+			v.Instance = &types.Instance{}
+			return v.Instance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstance, schemas.CreateInstanceRequest, schemas.CreateInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInstance, schemas.CreateInstanceRequest, schemas.CreateInstanceResponse), output: &CreateInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

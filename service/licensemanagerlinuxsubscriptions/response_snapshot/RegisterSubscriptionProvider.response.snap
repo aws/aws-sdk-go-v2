@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SubscriptionProviderArn":"__SubscriptionProviderArn__","SubscriptionProviderSource":"RedHat","SubscriptionProviderStatus":"ACTIVE"}

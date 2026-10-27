@@ -5,7 +5,9 @@ package route53recoverycontrolconfig
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,25 @@ type CreateControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateControlPanelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateControlPanelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateControlPanelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateControlPanelRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateControlPanelRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.ControlPanelName != nil {
+		s.WriteString(schemas.CreateControlPanelRequest_ControlPanelName, *v.ControlPanelName)
+	}
+	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateControlPanelRequest_Tags, v.Tags)
+}
+
 type CreateControlPanelOutput struct {
 
 	// Information about a control panel.
@@ -63,13 +84,34 @@ type CreateControlPanelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateControlPanelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateControlPanelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateControlPanelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlPanel != nil {
+		s.WriteStruct(schemas.CreateControlPanelResponse_ControlPanel)
+		v.ControlPanel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateControlPanelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateControlPanelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateControlPanelResponse_ControlPanel:
+			v.ControlPanel = &types.ControlPanel{}
+			return v.ControlPanel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateControlPanelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateControlPanel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateControlPanel, schemas.CreateControlPanelRequest, schemas.CreateControlPanelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateControlPanel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateControlPanel, schemas.CreateControlPanelRequest, schemas.CreateControlPanelResponse), output: &CreateControlPanelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

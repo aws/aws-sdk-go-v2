@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CalculatorArn":"__CalculatorArn__","CalculatorName":"__CalculatorName__","CreateTime":"2000-01-01T00:00:00Z","DataSource":"__DataSource__","Description":"__Description__","PricingPlan":"RequestBasedUsage","Tags":{"key0":"__Value__"},"UpdateTime":"2000-01-01T00:00:00Z"}

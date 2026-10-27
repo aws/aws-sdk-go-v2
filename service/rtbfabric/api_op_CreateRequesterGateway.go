@@ -5,7 +5,9 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,27 @@ type CreateRequesterGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRequesterGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRequesterGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRequesterGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRequesterGatewayRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRequesterGatewayRequest_description, *v.Description)
+	}
+	serializeSecurityGroupIdList(s, schemas.CreateRequesterGatewayRequest_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.CreateRequesterGatewayRequest_subnetIds, v.SubnetIds)
+	serializeTagsMap(s, schemas.CreateRequesterGatewayRequest_tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateRequesterGatewayRequest_vpcId, *v.VpcId)
+	}
+}
+
 type CreateRequesterGatewayOutput struct {
 
 	// The domain name of the requester gateway.
@@ -91,13 +114,48 @@ type CreateRequesterGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRequesterGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRequesterGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRequesterGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateRequesterGatewayResponse_domainName, *v.DomainName)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.CreateRequesterGatewayResponse_gatewayId, *v.GatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateRequesterGatewayResponse_status, string(v.Status))
+	}
+}
+func (v *CreateRequesterGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRequesterGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRequesterGatewayResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CreateRequesterGatewayResponse_domainName, v.DomainName)
+		case schemas.CreateRequesterGatewayResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.CreateRequesterGatewayResponse_gatewayId, v.GatewayId)
+		case schemas.CreateRequesterGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateRequesterGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RequesterGatewayStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRequesterGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRequesterGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRequesterGateway, schemas.CreateRequesterGatewayRequest, schemas.CreateRequesterGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRequesterGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRequesterGateway, schemas.CreateRequesterGatewayRequest, schemas.CreateRequesterGatewayResponse), output: &CreateRequesterGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

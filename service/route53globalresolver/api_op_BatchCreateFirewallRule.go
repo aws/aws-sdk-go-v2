@@ -4,7 +4,9 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,16 @@ type BatchCreateFirewallRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateFirewallRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateFirewallRuleInputItems(s, schemas.BatchCreateFirewallRuleInput_firewallRules, v.FirewallRules)
+}
+
 type BatchCreateFirewallRuleOutput struct {
 
 	// High level information about the DNS Firewall rules that failed to create.
@@ -61,13 +73,32 @@ type BatchCreateFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateFirewallRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateFirewallRuleOutputItems(s, schemas.BatchCreateFirewallRuleOutput_failures, v.Failures)
+	serializeBatchCreateFirewallRuleOutputItems(s, schemas.BatchCreateFirewallRuleOutput_successes, v.Successes)
+}
+func (v *BatchCreateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateFirewallRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateFirewallRuleOutput_failures:
+			return deserializeBatchCreateFirewallRuleOutputItems(d, schemas.BatchCreateFirewallRuleOutput_failures, &v.Failures)
+		case schemas.BatchCreateFirewallRuleOutput_successes:
+			return deserializeBatchCreateFirewallRuleOutputItems(d, schemas.BatchCreateFirewallRuleOutput_successes, &v.Successes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateFirewallRule, schemas.BatchCreateFirewallRuleInput, schemas.BatchCreateFirewallRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateFirewallRule, schemas.BatchCreateFirewallRuleInput, schemas.BatchCreateFirewallRuleOutput), output: &BatchCreateFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

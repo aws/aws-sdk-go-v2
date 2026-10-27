@@ -4,7 +4,9 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -43,6 +45,21 @@ type GetDataAccessorInput struct {
 	DataAccessorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataAccessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataAccessorRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DataAccessorId != nil {
+		s.WriteString(schemas.GetDataAccessorRequest_dataAccessorId, *v.DataAccessorId)
+	}
 }
 
 type GetDataAccessorOutput struct {
@@ -88,13 +105,85 @@ type GetDataAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataAccessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataAccessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionConfigurationList(s, schemas.GetDataAccessorResponse_actionConfigurations, v.ActionConfigurations)
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataAccessorResponse_applicationId, *v.ApplicationId)
+	}
+	if v.AuthenticationDetail != nil {
+		s.WriteStruct(schemas.GetDataAccessorResponse_authenticationDetail)
+		v.AuthenticationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDataAccessorResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DataAccessorArn != nil {
+		s.WriteString(schemas.GetDataAccessorResponse_dataAccessorArn, *v.DataAccessorArn)
+	}
+	if v.DataAccessorId != nil {
+		s.WriteString(schemas.GetDataAccessorResponse_dataAccessorId, *v.DataAccessorId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetDataAccessorResponse_displayName, *v.DisplayName)
+	}
+	if v.IdcApplicationArn != nil {
+		s.WriteString(schemas.GetDataAccessorResponse_idcApplicationArn, *v.IdcApplicationArn)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.GetDataAccessorResponse_principal, *v.Principal)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetDataAccessorResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetDataAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataAccessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataAccessorResponse_actionConfigurations:
+			return deserializeActionConfigurationList(d, schemas.GetDataAccessorResponse_actionConfigurations, &v.ActionConfigurations)
+		case schemas.GetDataAccessorResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetDataAccessorResponse_applicationId, v.ApplicationId)
+		case schemas.GetDataAccessorResponse_authenticationDetail:
+			v.AuthenticationDetail = &types.DataAccessorAuthenticationDetail{}
+			return v.AuthenticationDetail.Deserialize(d)
+		case schemas.GetDataAccessorResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataAccessorResponse_createdAt, v.CreatedAt)
+		case schemas.GetDataAccessorResponse_dataAccessorArn:
+			v.DataAccessorArn = new(string)
+			return d.ReadString(schemas.GetDataAccessorResponse_dataAccessorArn, v.DataAccessorArn)
+		case schemas.GetDataAccessorResponse_dataAccessorId:
+			v.DataAccessorId = new(string)
+			return d.ReadString(schemas.GetDataAccessorResponse_dataAccessorId, v.DataAccessorId)
+		case schemas.GetDataAccessorResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetDataAccessorResponse_displayName, v.DisplayName)
+		case schemas.GetDataAccessorResponse_idcApplicationArn:
+			v.IdcApplicationArn = new(string)
+			return d.ReadString(schemas.GetDataAccessorResponse_idcApplicationArn, v.IdcApplicationArn)
+		case schemas.GetDataAccessorResponse_principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.GetDataAccessorResponse_principal, v.Principal)
+		case schemas.GetDataAccessorResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDataAccessorResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAccessor, schemas.GetDataAccessorRequest, schemas.GetDataAccessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAccessor, schemas.GetDataAccessorRequest, schemas.GetDataAccessorResponse), output: &GetDataAccessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

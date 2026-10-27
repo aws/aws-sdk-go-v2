@@ -5,7 +5,9 @@ package managedblockchainquery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -53,6 +55,26 @@ type ListAssetContractsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetContractsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetContractsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetContractsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContractFilter != nil {
+		s.WriteStruct(schemas.ListAssetContractsInput_contractFilter)
+		v.ContractFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetContractsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetContractsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAssetContractsOutput struct {
 
 	// An array of contract objects that contain the properties for each contract.
@@ -69,13 +91,35 @@ type ListAssetContractsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetContractsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetContractsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetContractsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetContractList(s, schemas.ListAssetContractsOutput_contracts, v.Contracts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetContractsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetContractsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetContractsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetContractsOutput_contracts:
+			return deserializeAssetContractList(d, schemas.ListAssetContractsOutput_contracts, &v.Contracts)
+		case schemas.ListAssetContractsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetContractsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetContractsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssetContracts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetContracts, schemas.ListAssetContractsInput, schemas.ListAssetContractsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssetContracts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetContracts, schemas.ListAssetContractsInput, schemas.ListAssetContractsOutput), output: &ListAssetContractsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

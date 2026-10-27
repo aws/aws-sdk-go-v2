@@ -4,7 +4,9 @@ package supportauthz
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supportauthz/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportauthz/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,18 @@ type DeleteSupportPermitInput struct {
 	SupportPermitIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteSupportPermitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSupportPermitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSupportPermitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SupportPermitIdentifier != nil {
+		s.WriteString(schemas.DeleteSupportPermitInput_supportPermitIdentifier, *v.SupportPermitIdentifier)
+	}
 }
 
 type DeleteSupportPermitOutput struct {
@@ -80,13 +94,77 @@ type DeleteSupportPermitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSupportPermitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSupportPermitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSupportPermitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteSupportPermitOutput_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DeleteSupportPermitOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DeleteSupportPermitOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSupportPermitOutput_name, *v.Name)
+	}
+	if v.Permit != nil {
+		s.WriteStruct(schemas.DeleteSupportPermitOutput_permit)
+		v.Permit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningKeyInfo(s, schemas.DeleteSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteSupportPermitOutput_status, string(v.Status))
+	}
+	if v.SupportCaseDisplayId != nil {
+		s.WriteString(schemas.DeleteSupportPermitOutput_supportCaseDisplayId, *v.SupportCaseDisplayId)
+	}
+}
+func (v *DeleteSupportPermitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSupportPermitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSupportPermitOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteSupportPermitOutput_arn, v.Arn)
+		case schemas.DeleteSupportPermitOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteSupportPermitOutput_createdAt, v.CreatedAt)
+		case schemas.DeleteSupportPermitOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeleteSupportPermitOutput_description, v.Description)
+		case schemas.DeleteSupportPermitOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteSupportPermitOutput_name, v.Name)
+		case schemas.DeleteSupportPermitOutput_permit:
+			v.Permit = &types.Permit{}
+			return v.Permit.Deserialize(d)
+		case schemas.DeleteSupportPermitOutput_signingKeyInfo:
+			return deserializeSigningKeyInfo(d, schemas.DeleteSupportPermitOutput_signingKeyInfo, &v.SigningKeyInfo)
+		case schemas.DeleteSupportPermitOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteSupportPermitOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SupportPermitStatus(ev)
+			return nil
+		case schemas.DeleteSupportPermitOutput_supportCaseDisplayId:
+			v.SupportCaseDisplayId = new(string)
+			return d.ReadString(schemas.DeleteSupportPermitOutput_supportCaseDisplayId, v.SupportCaseDisplayId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSupportPermitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSupportPermit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSupportPermit, schemas.DeleteSupportPermitInput, schemas.DeleteSupportPermitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSupportPermit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSupportPermit, schemas.DeleteSupportPermitInput, schemas.DeleteSupportPermitOutput), output: &DeleteSupportPermitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

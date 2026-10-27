@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","vectors":[{"data":{"float32":[1,1]},"key":"__Key__","metadata":"__Document__"},{"data":{"float32":[1,1]},"key":"__Key__","metadata":"__Document__"}]}

@@ -4,6 +4,8 @@ package rdsdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,40 @@ type RollbackTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackTransactionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackTransactionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RollbackTransactionRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.RollbackTransactionRequest_secretArn, *v.SecretArn)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.RollbackTransactionRequest_transactionId, *v.TransactionId)
+	}
+}
+func (v *RollbackTransactionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackTransactionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackTransactionRequest_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.RollbackTransactionRequest_resourceArn, v.ResourceArn)
+		case schemas.RollbackTransactionRequest_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.RollbackTransactionRequest_secretArn, v.SecretArn)
+		case schemas.RollbackTransactionRequest_transactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.RollbackTransactionRequest_transactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the output of a request to perform a rollback
 // of a transaction.
 type RollbackTransactionOutput struct {
@@ -59,13 +95,32 @@ type RollbackTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackTransactionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackTransactionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionStatus != nil {
+		s.WriteString(schemas.RollbackTransactionResponse_transactionStatus, *v.TransactionStatus)
+	}
+}
+func (v *RollbackTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackTransactionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackTransactionResponse_transactionStatus:
+			v.TransactionStatus = new(string)
+			return d.ReadString(schemas.RollbackTransactionResponse_transactionStatus, v.TransactionStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRollbackTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackTransaction, schemas.RollbackTransactionRequest, schemas.RollbackTransactionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRollbackTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackTransaction, schemas.RollbackTransactionRequest, schemas.RollbackTransactionResponse), output: &RollbackTransactionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

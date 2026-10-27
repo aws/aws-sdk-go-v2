@@ -4,7 +4,9 @@ package rtbfabric
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,21 @@ type RejectLinkInput struct {
 	LinkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RejectLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.RejectLinkRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.RejectLinkRequest_linkId, *v.LinkId)
+	}
 }
 
 type RejectLinkOutput struct {
@@ -99,13 +116,108 @@ type RejectLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.RejectLinkResponse_attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectivityType != "" {
+		s.WriteString(schemas.RejectLinkResponse_connectivityType, string(v.ConnectivityType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RejectLinkResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Direction != "" {
+		s.WriteString(schemas.RejectLinkResponse_direction, string(v.Direction))
+	}
+	serializeModuleConfigurationList(s, schemas.RejectLinkResponse_flowModules, v.FlowModules)
+	if v.GatewayId != nil {
+		s.WriteString(schemas.RejectLinkResponse_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.RejectLinkResponse_linkId, *v.LinkId)
+	}
+	if v.LogSettings != nil {
+		s.WriteStruct(schemas.RejectLinkResponse_logSettings)
+		v.LogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PeerGatewayId != nil {
+		s.WriteString(schemas.RejectLinkResponse_peerGatewayId, *v.PeerGatewayId)
+	}
+	serializeModuleConfigurationList(s, schemas.RejectLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	if v.Status != "" {
+		s.WriteString(schemas.RejectLinkResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.RejectLinkResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *RejectLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectLinkResponse_attributes:
+			v.Attributes = &types.LinkAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.RejectLinkResponse_connectivityType:
+			var ev string
+			if err := d.ReadString(schemas.RejectLinkResponse_connectivityType, &ev); err != nil {
+				return err
+			}
+			v.ConnectivityType = types.ConnectivityType(ev)
+			return nil
+		case schemas.RejectLinkResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RejectLinkResponse_createdAt, v.CreatedAt)
+		case schemas.RejectLinkResponse_direction:
+			var ev string
+			if err := d.ReadString(schemas.RejectLinkResponse_direction, &ev); err != nil {
+				return err
+			}
+			v.Direction = types.LinkDirection(ev)
+			return nil
+		case schemas.RejectLinkResponse_flowModules:
+			return deserializeModuleConfigurationList(d, schemas.RejectLinkResponse_flowModules, &v.FlowModules)
+		case schemas.RejectLinkResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.RejectLinkResponse_gatewayId, v.GatewayId)
+		case schemas.RejectLinkResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.RejectLinkResponse_linkId, v.LinkId)
+		case schemas.RejectLinkResponse_logSettings:
+			v.LogSettings = &types.LinkLogSettings{}
+			return v.LogSettings.Deserialize(d)
+		case schemas.RejectLinkResponse_peerGatewayId:
+			v.PeerGatewayId = new(string)
+			return d.ReadString(schemas.RejectLinkResponse_peerGatewayId, v.PeerGatewayId)
+		case schemas.RejectLinkResponse_pendingFlowModules:
+			return deserializeModuleConfigurationList(d, schemas.RejectLinkResponse_pendingFlowModules, &v.PendingFlowModules)
+		case schemas.RejectLinkResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.RejectLinkResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		case schemas.RejectLinkResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RejectLinkResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectLink, schemas.RejectLinkRequest, schemas.RejectLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectLink, schemas.RejectLinkRequest, schemas.RejectLinkResponse), output: &RejectLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

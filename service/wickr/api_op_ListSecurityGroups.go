@@ -5,7 +5,9 @@ package wickr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type ListSecurityGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListSecurityGroupsRequest_networkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityGroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortDirection != "" {
+		s.WriteString(schemas.ListSecurityGroupsRequest_sortDirection, string(v.SortDirection))
+	}
+	if v.SortFields != nil {
+		s.WriteString(schemas.ListSecurityGroupsRequest_sortFields, *v.SortFields)
+	}
+}
+
 type ListSecurityGroupsOutput struct {
 
 	// The token to use for retrieving the next page of results. If this is not
@@ -66,13 +92,35 @@ type ListSecurityGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityGroupsResponse_nextToken, *v.NextToken)
+	}
+	serializeSecurityGroupList(s, schemas.ListSecurityGroupsResponse_securityGroups, v.SecurityGroups)
+}
+func (v *ListSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityGroupsResponse_nextToken, v.NextToken)
+		case schemas.ListSecurityGroupsResponse_securityGroups:
+			return deserializeSecurityGroupList(d, schemas.ListSecurityGroupsResponse_securityGroups, &v.SecurityGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityGroups, schemas.ListSecurityGroupsRequest, schemas.ListSecurityGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityGroups, schemas.ListSecurityGroupsRequest, schemas.ListSecurityGroupsResponse), output: &ListSecurityGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

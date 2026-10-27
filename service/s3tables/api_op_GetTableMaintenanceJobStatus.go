@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,24 @@ type GetTableMaintenanceJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableMaintenanceJobStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableMaintenanceJobStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableMaintenanceJobStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTableMaintenanceJobStatusRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetTableMaintenanceJobStatusRequest_namespace, *v.Namespace)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableMaintenanceJobStatusRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableMaintenanceJobStatusOutput struct {
 
 	// The status of the maintenance job.
@@ -68,13 +88,35 @@ type GetTableMaintenanceJobStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableMaintenanceJobStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableMaintenanceJobStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableMaintenanceJobStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableMaintenanceJobStatus(s, schemas.GetTableMaintenanceJobStatusResponse_status, v.Status)
+	if v.TableARN != nil {
+		s.WriteString(schemas.GetTableMaintenanceJobStatusResponse_tableARN, *v.TableARN)
+	}
+}
+func (v *GetTableMaintenanceJobStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableMaintenanceJobStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableMaintenanceJobStatusResponse_status:
+			return deserializeTableMaintenanceJobStatus(d, schemas.GetTableMaintenanceJobStatusResponse_status, &v.Status)
+		case schemas.GetTableMaintenanceJobStatusResponse_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.GetTableMaintenanceJobStatusResponse_tableARN, v.TableARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableMaintenanceJobStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableMaintenanceJobStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableMaintenanceJobStatus, schemas.GetTableMaintenanceJobStatusRequest, schemas.GetTableMaintenanceJobStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableMaintenanceJobStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableMaintenanceJobStatus, schemas.GetTableMaintenanceJobStatusRequest, schemas.GetTableMaintenanceJobStatusResponse), output: &GetTableMaintenanceJobStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

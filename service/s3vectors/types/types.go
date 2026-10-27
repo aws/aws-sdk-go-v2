@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/s3vectors/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -35,6 +38,38 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.EncryptionConfiguration_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.SseType != "" {
+		s.WriteString(schemas.EncryptionConfiguration_sseType, string(v.SseType))
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_kmsKeyArn, v.KmsKeyArn)
+		case schemas.EncryptionConfiguration_sseType:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionConfiguration_sseType, &ev); err != nil {
+				return err
+			}
+			v.SseType = SseType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The attributes of a vector returned by the GetVectors operation.
 type GetOutputVector struct {
 
@@ -50,6 +85,43 @@ type GetOutputVector struct {
 	Metadata document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetOutputVector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutputVector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutputVector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVectorData(s, schemas.GetOutputVector_data, v.Data)
+	if v.Key != nil {
+		s.WriteString(schemas.GetOutputVector_key, *v.Key)
+	}
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.GetOutputVector_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+}
+func (v *GetOutputVector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutputVector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutputVector_data:
+			return deserializeVectorData(d, schemas.GetOutputVector_data, &v.Data)
+		case schemas.GetOutputVector_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GetOutputVector_key, v.Key)
+		case schemas.GetOutputVector_metadata:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetOutputVector_metadata, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Metadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // The attributes of a vector index.
@@ -110,6 +182,98 @@ type Index struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Index) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Index)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Index) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Index_creationTime, *v.CreationTime)
+	}
+	if v.DataType != "" {
+		s.WriteString(schemas.Index_dataType, string(v.DataType))
+	}
+	if v.Dimension != nil {
+		s.WriteInt32(schemas.Index_dimension, *v.Dimension)
+	}
+	if v.DistanceMetric != "" {
+		s.WriteString(schemas.Index_distanceMetric, string(v.DistanceMetric))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.Index_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexArn != nil {
+		s.WriteString(schemas.Index_indexArn, *v.IndexArn)
+	}
+	if v.IndexMode != "" {
+		s.WriteString(schemas.Index_indexMode, string(v.IndexMode))
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.Index_indexName, *v.IndexName)
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.Index_metadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.Index_vectorBucketName, *v.VectorBucketName)
+	}
+}
+func (v *Index) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Index, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Index_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Index_creationTime, v.CreationTime)
+		case schemas.Index_dataType:
+			var ev string
+			if err := d.ReadString(schemas.Index_dataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = DataType(ev)
+			return nil
+		case schemas.Index_dimension:
+			v.Dimension = new(int32)
+			return d.ReadInt32(schemas.Index_dimension, v.Dimension)
+		case schemas.Index_distanceMetric:
+			var ev string
+			if err := d.ReadString(schemas.Index_distanceMetric, &ev); err != nil {
+				return err
+			}
+			v.DistanceMetric = DistanceMetric(ev)
+			return nil
+		case schemas.Index_encryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.Index_indexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.Index_indexArn, v.IndexArn)
+		case schemas.Index_indexMode:
+			var ev string
+			if err := d.ReadString(schemas.Index_indexMode, &ev); err != nil {
+				return err
+			}
+			v.IndexMode = IndexMode(ev)
+			return nil
+		case schemas.Index_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.Index_indexName, v.IndexName)
+		case schemas.Index_metadataConfiguration:
+			v.MetadataConfiguration = &MetadataConfiguration{}
+			return v.MetadataConfiguration.Deserialize(d)
+		case schemas.Index_vectorBucketName:
+			v.VectorBucketName = new(string)
+			return d.ReadString(schemas.Index_vectorBucketName, v.VectorBucketName)
+		}
+		return nil
+	})
+}
+
 // Summary information about a vector index.
 type IndexSummary struct {
 
@@ -136,6 +300,46 @@ type IndexSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IndexSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IndexSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IndexSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.IndexSummary_creationTime, *v.CreationTime)
+	}
+	if v.IndexArn != nil {
+		s.WriteString(schemas.IndexSummary_indexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.IndexSummary_indexName, *v.IndexName)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.IndexSummary_vectorBucketName, *v.VectorBucketName)
+	}
+}
+func (v *IndexSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.IndexSummary_creationTime, v.CreationTime)
+		case schemas.IndexSummary_indexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.IndexSummary_indexArn, v.IndexArn)
+		case schemas.IndexSummary_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.IndexSummary_indexName, v.IndexName)
+		case schemas.IndexSummary_vectorBucketName:
+			v.VectorBucketName = new(string)
+			return d.ReadString(schemas.IndexSummary_vectorBucketName, v.VectorBucketName)
+		}
+		return nil
+	})
+}
+
 // The attributes of a vector returned by the ListVectors operation.
 type ListOutputVector struct {
 
@@ -151,6 +355,43 @@ type ListOutputVector struct {
 	Metadata document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListOutputVector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutputVector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutputVector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVectorData(s, schemas.ListOutputVector_data, v.Data)
+	if v.Key != nil {
+		s.WriteString(schemas.ListOutputVector_key, *v.Key)
+	}
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.ListOutputVector_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+}
+func (v *ListOutputVector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutputVector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutputVector_data:
+			return deserializeVectorData(d, schemas.ListOutputVector_data, &v.Data)
+		case schemas.ListOutputVector_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ListOutputVector_key, v.Key)
+		case schemas.ListOutputVector_metadata:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ListOutputVector_metadata, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Metadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // The metadata configuration for a vector index.
@@ -170,6 +411,25 @@ type MetadataConfiguration struct {
 	NonFilterableMetadataKeys []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetadataConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetadataConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetadataConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNonFilterableMetadataKeys(s, schemas.MetadataConfiguration_nonFilterableMetadataKeys, v.NonFilterableMetadataKeys)
+}
+func (v *MetadataConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetadataConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetadataConfiguration_nonFilterableMetadataKeys:
+			return deserializeNonFilterableMetadataKeys(d, schemas.MetadataConfiguration_nonFilterableMetadataKeys, &v.NonFilterableMetadataKeys)
+		}
+		return nil
+	})
 }
 
 // The attributes of a vector to add to a vector index.
@@ -203,6 +463,43 @@ type PutInputVector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInputVector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInputVector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInputVector) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVectorData(s, schemas.PutInputVector_data, v.Data)
+	if v.Key != nil {
+		s.WriteString(schemas.PutInputVector_key, *v.Key)
+	}
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.PutInputVector_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+}
+func (v *PutInputVector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutInputVector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutInputVector_data:
+			return deserializeVectorData(d, schemas.PutInputVector_data, &v.Data)
+		case schemas.PutInputVector_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.PutInputVector_key, v.Key)
+		case schemas.PutInputVector_metadata:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.PutInputVector_metadata, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Metadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // The attributes of a vector in the approximate nearest neighbor search.
 type QueryOutputVector struct {
 
@@ -221,6 +518,46 @@ type QueryOutputVector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryOutputVector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryOutputVector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryOutputVector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distance != nil {
+		s.WriteFloat32(schemas.QueryOutputVector_distance, *v.Distance)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.QueryOutputVector_key, *v.Key)
+	}
+	if v.Metadata != nil {
+		s.WriteDocument(schemas.QueryOutputVector_metadata, &smithydocument.Opaque{Value: v.Metadata})
+	}
+}
+func (v *QueryOutputVector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryOutputVector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryOutputVector_distance:
+			v.Distance = new(float32)
+			return d.ReadFloat32(schemas.QueryOutputVector_distance, v.Distance)
+		case schemas.QueryOutputVector_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.QueryOutputVector_key, v.Key)
+		case schemas.QueryOutputVector_metadata:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.QueryOutputVector_metadata, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Metadata = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about a validation exception.
 type ValidationExceptionField struct {
 
@@ -235,6 +572,34 @@ type ValidationExceptionField struct {
 	Path *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ValidationExceptionField_path, *v.Path)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_path, v.Path)
+		}
+		return nil
+	})
 }
 
 // The attributes of a vector bucket.
@@ -265,6 +630,58 @@ type VectorBucket struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VectorBucket) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorBucket)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorBucket) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.VectorBucket_creationTime, *v.CreationTime)
+	}
+	if v.DefaultIndexMode != "" {
+		s.WriteString(schemas.VectorBucket_defaultIndexMode, string(v.DefaultIndexMode))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.VectorBucket_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.VectorBucket_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.VectorBucket_vectorBucketName, *v.VectorBucketName)
+	}
+}
+func (v *VectorBucket) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorBucket, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorBucket_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.VectorBucket_creationTime, v.CreationTime)
+		case schemas.VectorBucket_defaultIndexMode:
+			var ev string
+			if err := d.ReadString(schemas.VectorBucket_defaultIndexMode, &ev); err != nil {
+				return err
+			}
+			v.DefaultIndexMode = IndexMode(ev)
+			return nil
+		case schemas.VectorBucket_encryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.VectorBucket_vectorBucketArn:
+			v.VectorBucketArn = new(string)
+			return d.ReadString(schemas.VectorBucket_vectorBucketArn, v.VectorBucketArn)
+		case schemas.VectorBucket_vectorBucketName:
+			v.VectorBucketName = new(string)
+			return d.ReadString(schemas.VectorBucket_vectorBucketName, v.VectorBucketName)
+		}
+		return nil
+	})
+}
+
 // Summary information about a vector bucket.
 type VectorBucketSummary struct {
 
@@ -286,6 +703,40 @@ type VectorBucketSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VectorBucketSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VectorBucketSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VectorBucketSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.VectorBucketSummary_creationTime, *v.CreationTime)
+	}
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.VectorBucketSummary_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.VectorBucketSummary_vectorBucketName, *v.VectorBucketName)
+	}
+}
+func (v *VectorBucketSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VectorBucketSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VectorBucketSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.VectorBucketSummary_creationTime, v.CreationTime)
+		case schemas.VectorBucketSummary_vectorBucketArn:
+			v.VectorBucketArn = new(string)
+			return d.ReadString(schemas.VectorBucketSummary_vectorBucketArn, v.VectorBucketArn)
+		case schemas.VectorBucketSummary_vectorBucketName:
+			v.VectorBucketName = new(string)
+			return d.ReadString(schemas.VectorBucketSummary_vectorBucketName, v.VectorBucketName)
+		}
+		return nil
+	})
+}
+
 // The vector data in different formats.
 //
 // The following types satisfy this interface:
@@ -305,6 +756,12 @@ type VectorDataMemberFloat32 struct {
 }
 
 func (*VectorDataMemberFloat32) isVectorData() {}
+func (v *VectorDataMemberFloat32) Serialize(s smithy.ShapeSerializer) {
+	serializeFloat32VectorData(s, schemas.VectorData_float32, v.Value)
+}
+func (v *VectorDataMemberFloat32) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeFloat32VectorData(d, schemas.VectorData_float32, &v.Value)
+}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

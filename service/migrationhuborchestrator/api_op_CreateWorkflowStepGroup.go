@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -49,6 +51,46 @@ type CreateWorkflowStepGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowStepGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowStepGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowStepGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupRequest_name, *v.Name)
+	}
+	serializeStringList(s, schemas.CreateWorkflowStepGroupRequest_next, v.Next)
+	serializeStringList(s, schemas.CreateWorkflowStepGroupRequest_previous, v.Previous)
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupRequest_workflowId, *v.WorkflowId)
+	}
+}
+func (v *CreateWorkflowStepGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowStepGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowStepGroupRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupRequest_description, v.Description)
+		case schemas.CreateWorkflowStepGroupRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupRequest_name, v.Name)
+		case schemas.CreateWorkflowStepGroupRequest_next:
+			return deserializeStringList(d, schemas.CreateWorkflowStepGroupRequest_next, &v.Next)
+		case schemas.CreateWorkflowStepGroupRequest_previous:
+			return deserializeStringList(d, schemas.CreateWorkflowStepGroupRequest_previous, &v.Previous)
+		case schemas.CreateWorkflowStepGroupRequest_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupRequest_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 type CreateWorkflowStepGroupOutput struct {
 
 	// The time at which the step group is created.
@@ -81,13 +123,65 @@ type CreateWorkflowStepGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowStepGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowStepGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowStepGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateWorkflowStepGroupResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupResponse_name, *v.Name)
+	}
+	serializeStringList(s, schemas.CreateWorkflowStepGroupResponse_next, v.Next)
+	serializeStringList(s, schemas.CreateWorkflowStepGroupResponse_previous, v.Previous)
+	serializeToolsList(s, schemas.CreateWorkflowStepGroupResponse_tools, v.Tools)
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateWorkflowStepGroupResponse_workflowId, *v.WorkflowId)
+	}
+}
+func (v *CreateWorkflowStepGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowStepGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowStepGroupResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateWorkflowStepGroupResponse_creationTime, v.CreationTime)
+		case schemas.CreateWorkflowStepGroupResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupResponse_description, v.Description)
+		case schemas.CreateWorkflowStepGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupResponse_id, v.Id)
+		case schemas.CreateWorkflowStepGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupResponse_name, v.Name)
+		case schemas.CreateWorkflowStepGroupResponse_next:
+			return deserializeStringList(d, schemas.CreateWorkflowStepGroupResponse_next, &v.Next)
+		case schemas.CreateWorkflowStepGroupResponse_previous:
+			return deserializeStringList(d, schemas.CreateWorkflowStepGroupResponse_previous, &v.Previous)
+		case schemas.CreateWorkflowStepGroupResponse_tools:
+			return deserializeToolsList(d, schemas.CreateWorkflowStepGroupResponse_tools, &v.Tools)
+		case schemas.CreateWorkflowStepGroupResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepGroupResponse_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowStepGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflowStepGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowStepGroup, schemas.CreateWorkflowStepGroupRequest, schemas.CreateWorkflowStepGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflowStepGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowStepGroup, schemas.CreateWorkflowStepGroupRequest, schemas.CreateWorkflowStepGroupResponse), output: &CreateWorkflowStepGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

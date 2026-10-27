@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -182,6 +184,75 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerators != "" {
+		s.WriteString(schemas.CreateWorkflowRequest_accelerators, string(v.Accelerators))
+	}
+	if v.ContainerRegistryMap != nil {
+		s.WriteStruct(schemas.CreateWorkflowRequest_containerRegistryMap)
+		v.ContainerRegistryMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerRegistryMapUri != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_containerRegistryMapUri, *v.ContainerRegistryMapUri)
+	}
+	if v.DefinitionRepository != nil {
+		s.WriteStruct(schemas.CreateWorkflowRequest_definitionRepository)
+		v.DefinitionRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefinitionUri != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_definitionUri, *v.DefinitionUri)
+	}
+	if v.DefinitionZip != nil {
+		s.WriteBlob(schemas.CreateWorkflowRequest_definitionZip, v.DefinitionZip)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_description, *v.Description)
+	}
+	if v.Engine != "" {
+		s.WriteString(schemas.CreateWorkflowRequest_engine, string(v.Engine))
+	}
+	if v.Main != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_main, *v.Main)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_name, *v.Name)
+	}
+	serializeWorkflowParameterTemplate(s, schemas.CreateWorkflowRequest_parameterTemplate, v.ParameterTemplate)
+	if v.ParameterTemplatePath != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_parameterTemplatePath, *v.ParameterTemplatePath)
+	}
+	if v.ReadmeMarkdown != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_readmeMarkdown, *v.ReadmeMarkdown)
+	}
+	if v.ReadmePath != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_readmePath, *v.ReadmePath)
+	}
+	if v.ReadmeUri != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_readmeUri, *v.ReadmeUri)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_requestId, *v.RequestId)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.CreateWorkflowRequest_storageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.CreateWorkflowRequest_storageType, string(v.StorageType))
+	}
+	serializeTagMap(s, schemas.CreateWorkflowRequest_tags, v.Tags)
+	if v.WorkflowBucketOwnerId != nil {
+		s.WriteString(schemas.CreateWorkflowRequest_workflowBucketOwnerId, *v.WorkflowBucketOwnerId)
+	}
+}
+
 type CreateWorkflowOutput struct {
 
 	// The workflow's ARN.
@@ -205,13 +276,57 @@ type CreateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateWorkflowResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateWorkflowResponse_tags, v.Tags)
+	if v.Uuid != nil {
+		s.WriteString(schemas.CreateWorkflowResponse_uuid, *v.Uuid)
+	}
+}
+func (v *CreateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_arn, v.Arn)
+		case schemas.CreateWorkflowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_id, v.Id)
+		case schemas.CreateWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowStatus(ev)
+			return nil
+		case schemas.CreateWorkflowResponse_tags:
+			return deserializeTagMap(d, schemas.CreateWorkflowResponse_tags, &v.Tags)
+		case schemas.CreateWorkflowResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.CreateWorkflowResponse_uuid, v.Uuid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateWorkflowRequest, schemas.CreateWorkflowResponse), output: &CreateWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

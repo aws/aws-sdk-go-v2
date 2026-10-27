@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,28 @@ type PostWhatsAppMessageMediaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostWhatsAppMessageMediaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostWhatsAppMessageMediaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostWhatsAppMessageMediaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginationPhoneNumberId != nil {
+		s.WriteString(schemas.PostWhatsAppMessageMediaInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
+	}
+	if v.SourceS3File != nil {
+		s.WriteStruct(schemas.PostWhatsAppMessageMediaInput_sourceS3File)
+		v.SourceS3File.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceS3PresignedUrl != nil {
+		s.WriteStruct(schemas.PostWhatsAppMessageMediaInput_sourceS3PresignedUrl)
+		v.SourceS3PresignedUrl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PostWhatsAppMessageMediaOutput struct {
 
 	// The unique identifier of the posted WhatsApp message.
@@ -61,13 +85,32 @@ type PostWhatsAppMessageMediaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostWhatsAppMessageMediaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostWhatsAppMessageMediaOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostWhatsAppMessageMediaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaId != nil {
+		s.WriteString(schemas.PostWhatsAppMessageMediaOutput_mediaId, *v.MediaId)
+	}
+}
+func (v *PostWhatsAppMessageMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostWhatsAppMessageMediaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostWhatsAppMessageMediaOutput_mediaId:
+			v.MediaId = new(string)
+			return d.ReadString(schemas.PostWhatsAppMessageMediaOutput_mediaId, v.MediaId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPostWhatsAppMessageMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPostWhatsAppMessageMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostWhatsAppMessageMedia, schemas.PostWhatsAppMessageMediaInput, schemas.PostWhatsAppMessageMediaOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPostWhatsAppMessageMedia{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PostWhatsAppMessageMedia, schemas.PostWhatsAppMessageMediaInput, schemas.PostWhatsAppMessageMediaOutput), output: &PostWhatsAppMessageMediaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

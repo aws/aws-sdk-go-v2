@@ -5,7 +5,9 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,39 @@ type ListTemplateStepGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateStepGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateStepGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateStepGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListTemplateStepGroupsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateStepGroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.ListTemplateStepGroupsRequest_templateId, *v.TemplateId)
+	}
+}
+func (v *ListTemplateStepGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateStepGroupsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateStepGroupsRequest_maxResults:
+			return d.ReadInt32(schemas.ListTemplateStepGroupsRequest_maxResults, &v.MaxResults)
+		case schemas.ListTemplateStepGroupsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateStepGroupsRequest_nextToken, v.NextToken)
+		case schemas.ListTemplateStepGroupsRequest_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.ListTemplateStepGroupsRequest_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 type ListTemplateStepGroupsOutput struct {
 
 	// The summary of the step group in the template.
@@ -57,13 +92,35 @@ type ListTemplateStepGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateStepGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateStepGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateStepGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateStepGroupsResponse_nextToken, *v.NextToken)
+	}
+	serializeTemplateStepGroupSummaryList(s, schemas.ListTemplateStepGroupsResponse_templateStepGroupSummary, v.TemplateStepGroupSummary)
+}
+func (v *ListTemplateStepGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateStepGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateStepGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateStepGroupsResponse_nextToken, v.NextToken)
+		case schemas.ListTemplateStepGroupsResponse_templateStepGroupSummary:
+			return deserializeTemplateStepGroupSummaryList(d, schemas.ListTemplateStepGroupsResponse_templateStepGroupSummary, &v.TemplateStepGroupSummary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplateStepGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateStepGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateStepGroups, schemas.ListTemplateStepGroupsRequest, schemas.ListTemplateStepGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplateStepGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateStepGroups, schemas.ListTemplateStepGroupsRequest, schemas.ListTemplateStepGroupsResponse), output: &ListTemplateStepGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

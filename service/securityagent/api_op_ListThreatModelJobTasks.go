@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListThreatModelJobTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThreatModelJobTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThreatModelJobTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThreatModelJobTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListThreatModelJobTasksInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThreatModelJobTasksInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThreatModelJobTasksInput_nextToken, *v.NextToken)
+	}
+	if v.ThreatModelJobId != nil {
+		s.WriteString(schemas.ListThreatModelJobTasksInput_threatModelJobId, *v.ThreatModelJobId)
+	}
+}
+
 // Output for the ListThreatModelJobTasks operation.
 type ListThreatModelJobTasksOutput struct {
 
@@ -62,13 +85,35 @@ type ListThreatModelJobTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThreatModelJobTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThreatModelJobTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThreatModelJobTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThreatModelJobTasksOutput_nextToken, *v.NextToken)
+	}
+	serializeThreatModelJobTaskSummaryList(s, schemas.ListThreatModelJobTasksOutput_threatModelJobTaskSummaries, v.ThreatModelJobTaskSummaries)
+}
+func (v *ListThreatModelJobTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThreatModelJobTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThreatModelJobTasksOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThreatModelJobTasksOutput_nextToken, v.NextToken)
+		case schemas.ListThreatModelJobTasksOutput_threatModelJobTaskSummaries:
+			return deserializeThreatModelJobTaskSummaryList(d, schemas.ListThreatModelJobTasksOutput_threatModelJobTaskSummaries, &v.ThreatModelJobTaskSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThreatModelJobTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThreatModelJobTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThreatModelJobTasks, schemas.ListThreatModelJobTasksInput, schemas.ListThreatModelJobTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThreatModelJobTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThreatModelJobTasks, schemas.ListThreatModelJobTasksInput, schemas.ListThreatModelJobTasksOutput), output: &ListThreatModelJobTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

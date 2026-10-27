@@ -5,7 +5,9 @@ package s3files
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListAccessPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.ListAccessPointsRequest_fileSystemId, *v.FileSystemId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessPointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPointsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAccessPointsOutput struct {
 
 	// An array of access point descriptions.
@@ -60,13 +80,35 @@ type ListAccessPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessPointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessPoints(s, schemas.ListAccessPointsResponse_accessPoints, v.AccessPoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessPointsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessPointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessPointsResponse_accessPoints:
+			return deserializeAccessPoints(d, schemas.ListAccessPointsResponse_accessPoints, &v.AccessPoints)
+		case schemas.ListAccessPointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessPointsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPoints, schemas.ListAccessPointsRequest, schemas.ListAccessPointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessPoints, schemas.ListAccessPointsRequest, schemas.ListAccessPointsResponse), output: &ListAccessPointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

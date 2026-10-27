@@ -6,7 +6,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/omics/document"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -232,6 +235,85 @@ type StartRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheBehavior != "" {
+		s.WriteString(schemas.StartRunRequest_cacheBehavior, string(v.CacheBehavior))
+	}
+	if v.CacheId != nil {
+		s.WriteString(schemas.StartRunRequest_cacheId, *v.CacheId)
+	}
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.StartRunRequest_configurationName, *v.ConfigurationName)
+	}
+	if v.EngineSettings != nil {
+		s.WriteDocument(schemas.StartRunRequest_engineSettings, &smithydocument.Opaque{Value: v.EngineSettings})
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.StartRunRequest_logLevel, string(v.LogLevel))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartRunRequest_name, *v.Name)
+	}
+	if v.NetworkingMode != "" {
+		s.WriteString(schemas.StartRunRequest_networkingMode, string(v.NetworkingMode))
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.StartRunRequest_outputUri, *v.OutputUri)
+	}
+	if v.Parameters != nil {
+		s.WriteDocument(schemas.StartRunRequest_parameters, &smithydocument.Opaque{Value: v.Parameters})
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.StartRunRequest_priority, *v.Priority)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartRunRequest_requestId, *v.RequestId)
+	}
+	if v.RetentionMode != "" {
+		s.WriteString(schemas.StartRunRequest_retentionMode, string(v.RetentionMode))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartRunRequest_roleArn, *v.RoleArn)
+	}
+	if v.RunGroupId != nil {
+		s.WriteString(schemas.StartRunRequest_runGroupId, *v.RunGroupId)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.StartRunRequest_runId, *v.RunId)
+	}
+	if v.ScratchStorageMode != "" {
+		s.WriteString(schemas.StartRunRequest_scratchStorageMode, string(v.ScratchStorageMode))
+	}
+	if v.SessionPolicy != nil {
+		s.WriteString(schemas.StartRunRequest_sessionPolicy, *v.SessionPolicy)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.StartRunRequest_storageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.StartRunRequest_storageType, string(v.StorageType))
+	}
+	serializeTagMap(s, schemas.StartRunRequest_tags, v.Tags)
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.StartRunRequest_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowOwnerId != nil {
+		s.WriteString(schemas.StartRunRequest_workflowOwnerId, *v.WorkflowOwnerId)
+	}
+	if v.WorkflowType != "" {
+		s.WriteString(schemas.StartRunRequest_workflowType, string(v.WorkflowType))
+	}
+	if v.WorkflowVersionName != nil {
+		s.WriteString(schemas.StartRunRequest_workflowVersionName, *v.WorkflowVersionName)
+	}
+}
+
 type StartRunOutput struct {
 
 	// Unique resource identifier for the run.
@@ -264,13 +346,77 @@ type StartRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartRunResponse_arn, *v.Arn)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.StartRunResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartRunResponse_id, *v.Id)
+	}
+	if v.NetworkingMode != nil {
+		s.WriteString(schemas.StartRunResponse_networkingMode, *v.NetworkingMode)
+	}
+	if v.RunOutputUri != nil {
+		s.WriteString(schemas.StartRunResponse_runOutputUri, *v.RunOutputUri)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartRunResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.StartRunResponse_tags, v.Tags)
+	if v.Uuid != nil {
+		s.WriteString(schemas.StartRunResponse_uuid, *v.Uuid)
+	}
+}
+func (v *StartRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRunResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartRunResponse_arn, v.Arn)
+		case schemas.StartRunResponse_configuration:
+			v.Configuration = &types.ConfigurationDetails{}
+			return v.Configuration.Deserialize(d)
+		case schemas.StartRunResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartRunResponse_id, v.Id)
+		case schemas.StartRunResponse_networkingMode:
+			v.NetworkingMode = new(string)
+			return d.ReadString(schemas.StartRunResponse_networkingMode, v.NetworkingMode)
+		case schemas.StartRunResponse_runOutputUri:
+			v.RunOutputUri = new(string)
+			return d.ReadString(schemas.StartRunResponse_runOutputUri, v.RunOutputUri)
+		case schemas.StartRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RunStatus(ev)
+			return nil
+		case schemas.StartRunResponse_tags:
+			return deserializeTagMap(d, schemas.StartRunResponse_tags, &v.Tags)
+		case schemas.StartRunResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.StartRunResponse_uuid, v.Uuid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRun, schemas.StartRunRequest, schemas.StartRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRun, schemas.StartRunRequest, schemas.StartRunResponse), output: &StartRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

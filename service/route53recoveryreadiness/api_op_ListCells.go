@@ -5,7 +5,9 @@ package route53recoveryreadiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListCellsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCellsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCellsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCellsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCellsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCellsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCellsOutput struct {
 
 	// A list of cells.
@@ -50,13 +67,35 @@ type ListCellsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCellsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCellsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCellsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCellOutput(s, schemas.ListCellsResponse_Cells, v.Cells)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCellsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCellsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCellsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCellsResponse_Cells:
+			return deserialize__listOfCellOutput(d, schemas.ListCellsResponse_Cells, &v.Cells)
+		case schemas.ListCellsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCellsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCellsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCells{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCells, schemas.ListCellsRequest, schemas.ListCellsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCells{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCells, schemas.ListCellsRequest, schemas.ListCellsResponse), output: &ListCellsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

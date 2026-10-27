@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"cacheHit":true,"cacheS3Uri":"__CacheS3Uri__","cpus":1,"creationTime":"2000-01-01T00:00:00Z","failureReason":"__FailureReason__","gpus":1,"imageDetails":{"image":"__Image__","imageDigest":"__ImageDigest__","sourceImage":"__SourceImage__"},"instanceType":"__InstanceType__","logStream":"__LogStream__","memory":1,"name":"__Name__","startTime":"2000-01-01T00:00:00Z","status":"PENDING","statusMessage":"__StatusMessage__","stopTime":"2000-01-01T00:00:00Z","taskId":"__TaskId__","uuid":"__Uuid__"}

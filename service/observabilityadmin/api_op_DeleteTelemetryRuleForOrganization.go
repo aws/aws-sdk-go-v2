@@ -4,6 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type DeleteTelemetryRuleForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTelemetryRuleForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTelemetryRuleForOrganizationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTelemetryRuleForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.DeleteTelemetryRuleForOrganizationInput_RuleIdentifier, *v.RuleIdentifier)
+	}
+}
+
 type DeleteTelemetryRuleForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,13 +56,26 @@ type DeleteTelemetryRuleForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTelemetryRuleForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTelemetryRuleForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTelemetryRuleForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTelemetryRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTelemetryRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTelemetryRuleForOrganization, schemas.DeleteTelemetryRuleForOrganizationInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTelemetryRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTelemetryRuleForOrganization, schemas.DeleteTelemetryRuleForOrganizationInput, nil), output: &DeleteTelemetryRuleForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -119,6 +121,28 @@ type UpdateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateIdentityProviderRequest_clientToken, *v.ClientToken)
+	}
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.UpdateIdentityProviderRequest_identityProviderArn, *v.IdentityProviderArn)
+	}
+	serializeIdentityProviderDetails(s, schemas.UpdateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
+	if v.IdentityProviderName != nil {
+		s.WriteString(schemas.UpdateIdentityProviderRequest_identityProviderName, *v.IdentityProviderName)
+	}
+	if v.IdentityProviderType != "" {
+		s.WriteString(schemas.UpdateIdentityProviderRequest_identityProviderType, string(v.IdentityProviderType))
+	}
+}
+
 type UpdateIdentityProviderOutput struct {
 
 	// The identity provider.
@@ -132,13 +156,34 @@ type UpdateIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProvider != nil {
+		s.WriteStruct(schemas.UpdateIdentityProviderResponse_identityProvider)
+		v.IdentityProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdentityProviderResponse_identityProvider:
+			v.IdentityProvider = &types.IdentityProvider{}
+			return v.IdentityProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityProvider, schemas.UpdateIdentityProviderRequest, schemas.UpdateIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityProvider, schemas.UpdateIdentityProviderRequest, schemas.UpdateIdentityProviderResponse), output: &UpdateIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

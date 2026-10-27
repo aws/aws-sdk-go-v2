@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type StartTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTransactionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTransactionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionType != "" {
+		s.WriteString(schemas.StartTransactionRequest_TransactionType, string(v.TransactionType))
+	}
+}
+
 type StartTransactionOutput struct {
 
 	// An opaque identifier for the transaction.
@@ -46,13 +60,32 @@ type StartTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTransactionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTransactionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionId != nil {
+		s.WriteString(schemas.StartTransactionResponse_TransactionId, *v.TransactionId)
+	}
+}
+func (v *StartTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTransactionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTransactionResponse_TransactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.StartTransactionResponse_TransactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTransaction, schemas.StartTransactionRequest, schemas.StartTransactionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTransaction, schemas.StartTransactionRequest, schemas.StartTransactionResponse), output: &StartTransactionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

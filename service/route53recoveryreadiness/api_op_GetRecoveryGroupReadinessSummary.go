@@ -5,7 +5,9 @@ package route53recoveryreadiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type GetRecoveryGroupReadinessSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecoveryGroupReadinessSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecoveryGroupReadinessSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecoveryGroupReadinessSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRecoveryGroupReadinessSummaryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryRequest_NextToken, *v.NextToken)
+	}
+	if v.RecoveryGroupName != nil {
+		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryRequest_RecoveryGroupName, *v.RecoveryGroupName)
+	}
+}
+
 type GetRecoveryGroupReadinessSummaryOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -60,13 +80,45 @@ type GetRecoveryGroupReadinessSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecoveryGroupReadinessSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecoveryGroupReadinessSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecoveryGroupReadinessSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryResponse_NextToken, *v.NextToken)
+	}
+	if v.Readiness != "" {
+		s.WriteString(schemas.GetRecoveryGroupReadinessSummaryResponse_Readiness, string(v.Readiness))
+	}
+	serialize__listOfReadinessCheckSummary(s, schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks, v.ReadinessChecks)
+}
+func (v *GetRecoveryGroupReadinessSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecoveryGroupReadinessSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecoveryGroupReadinessSummaryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRecoveryGroupReadinessSummaryResponse_NextToken, v.NextToken)
+		case schemas.GetRecoveryGroupReadinessSummaryResponse_Readiness:
+			var ev string
+			if err := d.ReadString(schemas.GetRecoveryGroupReadinessSummaryResponse_Readiness, &ev); err != nil {
+				return err
+			}
+			v.Readiness = types.Readiness(ev)
+			return nil
+		case schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks:
+			return deserialize__listOfReadinessCheckSummary(d, schemas.GetRecoveryGroupReadinessSummaryResponse_ReadinessChecks, &v.ReadinessChecks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecoveryGroupReadinessSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecoveryGroupReadinessSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryGroupReadinessSummary, schemas.GetRecoveryGroupReadinessSummaryRequest, schemas.GetRecoveryGroupReadinessSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecoveryGroupReadinessSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecoveryGroupReadinessSummary, schemas.GetRecoveryGroupReadinessSummaryRequest, schemas.GetRecoveryGroupReadinessSummaryResponse), output: &GetRecoveryGroupReadinessSummaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lexmodelbuildingservice
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -57,6 +59,24 @@ type GetIntentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntentVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntentVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntentVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetIntentVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetIntentVersionsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIntentVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetIntentVersionsOutput struct {
 
 	// An array of IntentMetadata objects, one for each numbered version of the intent
@@ -75,13 +95,35 @@ type GetIntentVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntentVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntentMetadataList(s, schemas.GetIntentVersionsResponse_intents, v.Intents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIntentVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetIntentVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntentVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntentVersionsResponse_intents:
+			return deserializeIntentMetadataList(d, schemas.GetIntentVersionsResponse_intents, &v.Intents)
+		case schemas.GetIntentVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetIntentVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntentVersions, schemas.GetIntentVersionsRequest, schemas.GetIntentVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntentVersions, schemas.GetIntentVersionsRequest, schemas.GetIntentVersionsResponse), output: &GetIntentVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

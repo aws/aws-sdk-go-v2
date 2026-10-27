@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,31 @@ type GetVectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVectorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.GetVectorsInput_indexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetVectorsInput_indexName, *v.IndexName)
+	}
+	serializeGetVectorsInputList(s, schemas.GetVectorsInput_keys, v.Keys)
+	if v.ReturnData != false {
+		s.WriteBool(schemas.GetVectorsInput_returnData, v.ReturnData)
+	}
+	if v.ReturnMetadata != false {
+		s.WriteBool(schemas.GetVectorsInput_returnMetadata, v.ReturnMetadata)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.GetVectorsInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type GetVectorsOutput struct {
 
 	// The attributes of the vectors.
@@ -69,13 +96,29 @@ type GetVectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVectorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetVectorsOutputList(s, schemas.GetVectorsOutput_vectors, v.Vectors)
+}
+func (v *GetVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVectorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVectorsOutput_vectors:
+			return deserializeGetVectorsOutputList(d, schemas.GetVectorsOutput_vectors, &v.Vectors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVectors, schemas.GetVectorsInput, schemas.GetVectorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVectors, schemas.GetVectorsInput, schemas.GetVectorsOutput), output: &GetVectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

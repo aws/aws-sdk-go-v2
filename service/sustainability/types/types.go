@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sustainability/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,38 @@ type DimensionEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Dimension != "" {
+		s.WriteString(schemas.DimensionEntry_Dimension, string(v.Dimension))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.DimensionEntry_Value, *v.Value)
+	}
+}
+func (v *DimensionEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionEntry_Dimension:
+			var ev string
+			if err := d.ReadString(schemas.DimensionEntry_Dimension, &ev); err != nil {
+				return err
+			}
+			v.Dimension = Dimension(ev)
+			return nil
+		case schemas.DimensionEntry_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.DimensionEntry_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents a carbon emissions quantity with its value and unit of measurement.
 type Emissions struct {
 
@@ -39,6 +73,38 @@ type Emissions struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Emissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Emissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Emissions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Unit != "" {
+		s.WriteString(schemas.Emissions_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.Emissions_Value, *v.Value)
+	}
+}
+func (v *Emissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Emissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Emissions_Unit:
+			var ev string
+			if err := d.ReadString(schemas.Emissions_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = EmissionsUnit(ev)
+			return nil
+		case schemas.Emissions_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.Emissions_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains estimated carbon emissions data for a specific time period and
@@ -76,6 +142,42 @@ type EstimatedCarbonEmissions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EstimatedCarbonEmissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimatedCarbonEmissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimatedCarbonEmissions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionsMap(s, schemas.EstimatedCarbonEmissions_DimensionsValues, v.DimensionsValues)
+	serializeEmissionsMap(s, schemas.EstimatedCarbonEmissions_EmissionsValues, v.EmissionsValues)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.EstimatedCarbonEmissions_ModelVersion, *v.ModelVersion)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.EstimatedCarbonEmissions_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EstimatedCarbonEmissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstimatedCarbonEmissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstimatedCarbonEmissions_DimensionsValues:
+			return deserializeDimensionsMap(d, schemas.EstimatedCarbonEmissions_DimensionsValues, &v.DimensionsValues)
+		case schemas.EstimatedCarbonEmissions_EmissionsValues:
+			return deserializeEmissionsMap(d, schemas.EstimatedCarbonEmissions_EmissionsValues, &v.EmissionsValues)
+		case schemas.EstimatedCarbonEmissions_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.EstimatedCarbonEmissions_ModelVersion, v.ModelVersion)
+		case schemas.EstimatedCarbonEmissions_TimePeriod:
+			v.TimePeriod = &TimePeriod{}
+			return v.TimePeriod.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains estimated water allocation data for a specific time period and
 // dimension grouping.
 type EstimatedWaterAllocation struct {
@@ -108,6 +210,42 @@ type EstimatedWaterAllocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EstimatedWaterAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimatedWaterAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimatedWaterAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWaterAllocationMap(s, schemas.EstimatedWaterAllocation_AllocationValues, v.AllocationValues)
+	serializeDimensionsMap(s, schemas.EstimatedWaterAllocation_DimensionsValues, v.DimensionsValues)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.EstimatedWaterAllocation_ModelVersion, *v.ModelVersion)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.EstimatedWaterAllocation_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EstimatedWaterAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstimatedWaterAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstimatedWaterAllocation_AllocationValues:
+			return deserializeWaterAllocationMap(d, schemas.EstimatedWaterAllocation_AllocationValues, &v.AllocationValues)
+		case schemas.EstimatedWaterAllocation_DimensionsValues:
+			return deserializeDimensionsMap(d, schemas.EstimatedWaterAllocation_DimensionsValues, &v.DimensionsValues)
+		case schemas.EstimatedWaterAllocation_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.EstimatedWaterAllocation_ModelVersion, v.ModelVersion)
+		case schemas.EstimatedWaterAllocation_TimePeriod:
+			v.TimePeriod = &TimePeriod{}
+			return v.TimePeriod.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Filters environmental impact values by specific dimension values.
 type FilterExpression struct {
 
@@ -115,6 +253,25 @@ type FilterExpression struct {
 	Dimensions map[string][]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterExpression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterExpression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterExpression) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionListMap(s, schemas.FilterExpression_Dimensions, v.Dimensions)
+}
+func (v *FilterExpression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterExpression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterExpression_Dimensions:
+			return deserializeDimensionListMap(d, schemas.FilterExpression_Dimensions, &v.Dimensions)
+		}
+		return nil
+	})
 }
 
 //	Contains configuration for the fiscal year granularities (e.g., YEARLY_FISCAL ,
@@ -127,6 +284,28 @@ type GranularityConfiguration struct {
 	FiscalYearStartMonth *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GranularityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GranularityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GranularityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FiscalYearStartMonth != nil {
+		s.WriteInt32(schemas.GranularityConfiguration_FiscalYearStartMonth, *v.FiscalYearStartMonth)
+	}
+}
+func (v *GranularityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GranularityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GranularityConfiguration_FiscalYearStartMonth:
+			v.FiscalYearStartMonth = new(int32)
+			return d.ReadInt32(schemas.GranularityConfiguration_FiscalYearStartMonth, v.FiscalYearStartMonth)
+		}
+		return nil
+	})
 }
 
 // Represents a duration of time defined by start and end timestamps.
@@ -147,6 +326,34 @@ type TimePeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimePeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimePeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimePeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.End != nil {
+		s.WriteTime(schemas.TimePeriod_End, *v.End)
+	}
+	if v.Start != nil {
+		s.WriteTime(schemas.TimePeriod_Start, *v.Start)
+	}
+}
+func (v *TimePeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimePeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimePeriod_End:
+			v.End = new(time.Time)
+			return d.ReadTime(schemas.TimePeriod_End, v.End)
+		case schemas.TimePeriod_Start:
+			v.Start = new(time.Time)
+			return d.ReadTime(schemas.TimePeriod_Start, v.Start)
+		}
+		return nil
+	})
+}
+
 // Represents a water allocation quantity with its value and unit of measurement.
 type WaterAllocation struct {
 
@@ -161,6 +368,38 @@ type WaterAllocation struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *WaterAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WaterAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WaterAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Unit != "" {
+		s.WriteString(schemas.WaterAllocation_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.WaterAllocation_Value, *v.Value)
+	}
+}
+func (v *WaterAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WaterAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WaterAllocation_Unit:
+			var ev string
+			if err := d.ReadString(schemas.WaterAllocation_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = WaterAllocationUnit(ev)
+			return nil
+		case schemas.WaterAllocation_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.WaterAllocation_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

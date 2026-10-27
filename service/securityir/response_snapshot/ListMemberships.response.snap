@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"accountId":"__AccountId__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","membershipStatus":"Active","region":"af-south-1"},{"accountId":"__AccountId__","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","membershipStatus":"Active","region":"af-south-1"}],"nextToken":"__NextToken__"}

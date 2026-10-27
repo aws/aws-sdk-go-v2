@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchRevokePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRevokePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRevokePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRevokePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.BatchRevokePermissionsRequest_CatalogId, *v.CatalogId)
+	}
+	serializeBatchPermissionsRequestEntryList(s, schemas.BatchRevokePermissionsRequest_Entries, v.Entries)
+}
+
 type BatchRevokePermissionsOutput struct {
 
 	// A list of failures to revoke permissions to the resources.
@@ -52,13 +67,29 @@ type BatchRevokePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchRevokePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchRevokePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchRevokePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPermissionsFailureList(s, schemas.BatchRevokePermissionsResponse_Failures, v.Failures)
+}
+func (v *BatchRevokePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchRevokePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchRevokePermissionsResponse_Failures:
+			return deserializeBatchPermissionsFailureList(d, schemas.BatchRevokePermissionsResponse_Failures, &v.Failures)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchRevokePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRevokePermissions, schemas.BatchRevokePermissionsRequest, schemas.BatchRevokePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchRevokePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRevokePermissions, schemas.BatchRevokePermissionsRequest, schemas.BatchRevokePermissionsResponse), output: &BatchRevokePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

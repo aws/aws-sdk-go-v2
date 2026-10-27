@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -62,6 +64,46 @@ type UpdateThreatModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThreatModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThreatModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThreatModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateThreatModelInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.UpdateThreatModelInput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateThreatModelInput_description, *v.Description)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateThreatModelInput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.UpdateThreatModelInput_reportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentList(s, schemas.UpdateThreatModelInput_scopeDocs, v.ScopeDocs)
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateThreatModelInput_serviceRole, *v.ServiceRole)
+	}
+	if v.ThreatModelId != nil {
+		s.WriteString(schemas.UpdateThreatModelInput_threatModelId, *v.ThreatModelId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateThreatModelInput_title, *v.Title)
+	}
+}
+
 // Output for the UpdateThreatModel operation.
 type UpdateThreatModelOutput struct {
 
@@ -106,13 +148,95 @@ type UpdateThreatModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateThreatModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateThreatModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateThreatModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateThreatModelOutput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.UpdateThreatModelOutput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateThreatModelOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateThreatModelOutput_description, *v.Description)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateThreatModelOutput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.UpdateThreatModelOutput_reportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentList(s, schemas.UpdateThreatModelOutput_scopeDocs, v.ScopeDocs)
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateThreatModelOutput_serviceRole, *v.ServiceRole)
+	}
+	if v.ThreatModelId != nil {
+		s.WriteString(schemas.UpdateThreatModelOutput_threatModelId, *v.ThreatModelId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateThreatModelOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateThreatModelOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateThreatModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateThreatModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateThreatModelOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.UpdateThreatModelOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.UpdateThreatModelOutput_assets:
+			v.Assets = &types.Assets{}
+			return v.Assets.Deserialize(d)
+		case schemas.UpdateThreatModelOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateThreatModelOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateThreatModelOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateThreatModelOutput_description, v.Description)
+		case schemas.UpdateThreatModelOutput_logConfig:
+			v.LogConfig = &types.CloudWatchLog{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.UpdateThreatModelOutput_reportDestination:
+			v.ReportDestination = &types.ReportDestination{}
+			return v.ReportDestination.Deserialize(d)
+		case schemas.UpdateThreatModelOutput_scopeDocs:
+			return deserializeDocumentList(d, schemas.UpdateThreatModelOutput_scopeDocs, &v.ScopeDocs)
+		case schemas.UpdateThreatModelOutput_serviceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.UpdateThreatModelOutput_serviceRole, v.ServiceRole)
+		case schemas.UpdateThreatModelOutput_threatModelId:
+			v.ThreatModelId = new(string)
+			return d.ReadString(schemas.UpdateThreatModelOutput_threatModelId, v.ThreatModelId)
+		case schemas.UpdateThreatModelOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.UpdateThreatModelOutput_title, v.Title)
+		case schemas.UpdateThreatModelOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateThreatModelOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateThreatModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateThreatModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThreatModel, schemas.UpdateThreatModelInput, schemas.UpdateThreatModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateThreatModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateThreatModel, schemas.UpdateThreatModelInput, schemas.UpdateThreatModelOutput), output: &UpdateThreatModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

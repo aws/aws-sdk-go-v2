@@ -4,7 +4,9 @@ package licensemanagerusersubscriptions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type CreateLicenseServerEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseServerEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseServerEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseServerEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.CreateLicenseServerEndpointRequest_IdentityProviderArn, *v.IdentityProviderArn)
+	}
+	if v.LicenseServerSettings != nil {
+		s.WriteStruct(schemas.CreateLicenseServerEndpointRequest_LicenseServerSettings)
+		v.LicenseServerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateLicenseServerEndpointRequest_Tags, v.Tags)
+}
+
 type CreateLicenseServerEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) of the identity provider specified in the
@@ -62,13 +82,38 @@ type CreateLicenseServerEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseServerEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseServerEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseServerEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.CreateLicenseServerEndpointResponse_IdentityProviderArn, *v.IdentityProviderArn)
+	}
+	if v.LicenseServerEndpointArn != nil {
+		s.WriteString(schemas.CreateLicenseServerEndpointResponse_LicenseServerEndpointArn, *v.LicenseServerEndpointArn)
+	}
+}
+func (v *CreateLicenseServerEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseServerEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseServerEndpointResponse_IdentityProviderArn:
+			v.IdentityProviderArn = new(string)
+			return d.ReadString(schemas.CreateLicenseServerEndpointResponse_IdentityProviderArn, v.IdentityProviderArn)
+		case schemas.CreateLicenseServerEndpointResponse_LicenseServerEndpointArn:
+			v.LicenseServerEndpointArn = new(string)
+			return d.ReadString(schemas.CreateLicenseServerEndpointResponse_LicenseServerEndpointArn, v.LicenseServerEndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseServerEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLicenseServerEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseServerEndpoint, schemas.CreateLicenseServerEndpointRequest, schemas.CreateLicenseServerEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLicenseServerEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseServerEndpoint, schemas.CreateLicenseServerEndpointRequest, schemas.CreateLicenseServerEndpointResponse), output: &CreateLicenseServerEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

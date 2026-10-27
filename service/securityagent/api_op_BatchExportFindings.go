@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,30 @@ type BatchExportFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExportFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExportFindingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExportFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchExportFindingsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CodeReviewJobId != nil {
+		s.WriteString(schemas.BatchExportFindingsInput_codeReviewJobId, *v.CodeReviewJobId)
+	}
+	serializeFindingIdList(s, schemas.BatchExportFindingsInput_findingIds, v.FindingIds)
+	if v.IssueDestination != nil {
+		s.WriteStruct(schemas.BatchExportFindingsInput_issueDestination)
+		v.IssueDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PentestJobId != nil {
+		s.WriteString(schemas.BatchExportFindingsInput_pentestJobId, *v.PentestJobId)
+	}
+}
+
 // The output for the BatchExportFindings operation.
 type BatchExportFindingsOutput struct {
 
@@ -75,13 +101,32 @@ type BatchExportFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchExportFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchExportFindingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchExportFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchExportFindingErrorList(s, schemas.BatchExportFindingsOutput_errors, v.Errors)
+	serializeBatchExportFindingResultList(s, schemas.BatchExportFindingsOutput_results, v.Results)
+}
+func (v *BatchExportFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchExportFindingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchExportFindingsOutput_errors:
+			return deserializeBatchExportFindingErrorList(d, schemas.BatchExportFindingsOutput_errors, &v.Errors)
+		case schemas.BatchExportFindingsOutput_results:
+			return deserializeBatchExportFindingResultList(d, schemas.BatchExportFindingsOutput_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchExportFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchExportFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExportFindings, schemas.BatchExportFindingsInput, schemas.BatchExportFindingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchExportFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchExportFindings, schemas.BatchExportFindingsInput, schemas.BatchExportFindingsOutput), output: &BatchExportFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

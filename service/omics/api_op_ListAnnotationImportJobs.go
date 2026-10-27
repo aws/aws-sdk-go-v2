@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListAnnotationImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnnotationImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnnotationImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnnotationImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListAnnotationImportJobsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdList(s, schemas.ListAnnotationImportJobsRequest_ids, v.Ids)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnnotationImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnnotationImportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAnnotationImportJobsOutput struct {
 
 	// A list of jobs.
@@ -65,13 +88,35 @@ type ListAnnotationImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnnotationImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnnotationImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnnotationImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationImportJobItems(s, schemas.ListAnnotationImportJobsResponse_annotationImportJobs, v.AnnotationImportJobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnnotationImportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAnnotationImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnnotationImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnnotationImportJobsResponse_annotationImportJobs:
+			return deserializeAnnotationImportJobItems(d, schemas.ListAnnotationImportJobsResponse_annotationImportJobs, &v.AnnotationImportJobs)
+		case schemas.ListAnnotationImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnnotationImportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnnotationImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnnotationImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnnotationImportJobs, schemas.ListAnnotationImportJobsRequest, schemas.ListAnnotationImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnnotationImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnnotationImportJobs, schemas.ListAnnotationImportJobsRequest, schemas.ListAnnotationImportJobsResponse), output: &ListAnnotationImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

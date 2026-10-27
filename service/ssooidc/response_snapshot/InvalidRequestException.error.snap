@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidRequestException","error":"__Error___","error_description":"__Error_description__","reason":"KMS_NotFoundException"}

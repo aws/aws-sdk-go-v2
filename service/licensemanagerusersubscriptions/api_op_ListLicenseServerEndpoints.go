@@ -5,7 +5,9 @@ package licensemanagerusersubscriptions
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,22 @@ type ListLicenseServerEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLicenseServerEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLicenseServerEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLicenseServerEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListLicenseServerEndpointsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLicenseServerEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLicenseServerEndpointsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLicenseServerEndpointsOutput struct {
 
 	// An array of LicenseServerEndpoint resources that contain detailed information
@@ -59,13 +77,35 @@ type ListLicenseServerEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLicenseServerEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLicenseServerEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLicenseServerEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseServerEndpointList(s, schemas.ListLicenseServerEndpointsResponse_LicenseServerEndpoints, v.LicenseServerEndpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLicenseServerEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLicenseServerEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLicenseServerEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLicenseServerEndpointsResponse_LicenseServerEndpoints:
+			return deserializeLicenseServerEndpointList(d, schemas.ListLicenseServerEndpointsResponse_LicenseServerEndpoints, &v.LicenseServerEndpoints)
+		case schemas.ListLicenseServerEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLicenseServerEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLicenseServerEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLicenseServerEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLicenseServerEndpoints, schemas.ListLicenseServerEndpointsRequest, schemas.ListLicenseServerEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLicenseServerEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLicenseServerEndpoints, schemas.ListLicenseServerEndpointsRequest, schemas.ListLicenseServerEndpointsResponse), output: &ListLicenseServerEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

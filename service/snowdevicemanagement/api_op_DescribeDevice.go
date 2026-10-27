@@ -4,7 +4,9 @@ package snowdevicemanagement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -34,6 +36,28 @@ type DescribeDeviceInput struct {
 	ManagedDeviceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedDeviceId != nil {
+		s.WriteString(schemas.DescribeDeviceInput_managedDeviceId, *v.ManagedDeviceId)
+	}
+}
+func (v *DescribeDeviceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceInput_managedDeviceId:
+			v.ManagedDeviceId = new(string)
+			return d.ReadString(schemas.DescribeDeviceInput_managedDeviceId, v.ManagedDeviceId)
+		}
+		return nil
+	})
 }
 
 type DescribeDeviceOutput struct {
@@ -80,13 +104,89 @@ type DescribeDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDeviceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedWithJob != nil {
+		s.WriteString(schemas.DescribeDeviceOutput_associatedWithJob, *v.AssociatedWithJob)
+	}
+	serializeCapacityList(s, schemas.DescribeDeviceOutput_deviceCapacities, v.DeviceCapacities)
+	if v.DeviceState != "" {
+		s.WriteString(schemas.DescribeDeviceOutput_deviceState, string(v.DeviceState))
+	}
+	if v.DeviceType != nil {
+		s.WriteString(schemas.DescribeDeviceOutput_deviceType, *v.DeviceType)
+	}
+	if v.LastReachedOutAt != nil {
+		s.WriteTime(schemas.DescribeDeviceOutput_lastReachedOutAt, *v.LastReachedOutAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DescribeDeviceOutput_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ManagedDeviceArn != nil {
+		s.WriteString(schemas.DescribeDeviceOutput_managedDeviceArn, *v.ManagedDeviceArn)
+	}
+	if v.ManagedDeviceId != nil {
+		s.WriteString(schemas.DescribeDeviceOutput_managedDeviceId, *v.ManagedDeviceId)
+	}
+	serializePhysicalNetworkInterfaceList(s, schemas.DescribeDeviceOutput_physicalNetworkInterfaces, v.PhysicalNetworkInterfaces)
+	if v.Software != nil {
+		s.WriteStruct(schemas.DescribeDeviceOutput_software)
+		v.Software.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DescribeDeviceOutput_tags, v.Tags)
+}
+func (v *DescribeDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDeviceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDeviceOutput_associatedWithJob:
+			v.AssociatedWithJob = new(string)
+			return d.ReadString(schemas.DescribeDeviceOutput_associatedWithJob, v.AssociatedWithJob)
+		case schemas.DescribeDeviceOutput_deviceCapacities:
+			return deserializeCapacityList(d, schemas.DescribeDeviceOutput_deviceCapacities, &v.DeviceCapacities)
+		case schemas.DescribeDeviceOutput_deviceState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDeviceOutput_deviceState, &ev); err != nil {
+				return err
+			}
+			v.DeviceState = types.UnlockState(ev)
+			return nil
+		case schemas.DescribeDeviceOutput_deviceType:
+			v.DeviceType = new(string)
+			return d.ReadString(schemas.DescribeDeviceOutput_deviceType, v.DeviceType)
+		case schemas.DescribeDeviceOutput_lastReachedOutAt:
+			v.LastReachedOutAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceOutput_lastReachedOutAt, v.LastReachedOutAt)
+		case schemas.DescribeDeviceOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDeviceOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DescribeDeviceOutput_managedDeviceArn:
+			v.ManagedDeviceArn = new(string)
+			return d.ReadString(schemas.DescribeDeviceOutput_managedDeviceArn, v.ManagedDeviceArn)
+		case schemas.DescribeDeviceOutput_managedDeviceId:
+			v.ManagedDeviceId = new(string)
+			return d.ReadString(schemas.DescribeDeviceOutput_managedDeviceId, v.ManagedDeviceId)
+		case schemas.DescribeDeviceOutput_physicalNetworkInterfaces:
+			return deserializePhysicalNetworkInterfaceList(d, schemas.DescribeDeviceOutput_physicalNetworkInterfaces, &v.PhysicalNetworkInterfaces)
+		case schemas.DescribeDeviceOutput_software:
+			v.Software = &types.SoftwareInformation{}
+			return v.Software.Deserialize(d)
+		case schemas.DescribeDeviceOutput_tags:
+			return deserializeTagMap(d, schemas.DescribeDeviceOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceInput, schemas.DescribeDeviceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDevice, schemas.DescribeDeviceInput, schemas.DescribeDeviceOutput), output: &DescribeDeviceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchGetThreatModelJobTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetThreatModelJobTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetThreatModelJobTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetThreatModelJobTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchGetThreatModelJobTasksInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeTaskIdList(s, schemas.BatchGetThreatModelJobTasksInput_threatModelJobTaskIds, v.ThreatModelJobTaskIds)
+}
+
 // Output for the BatchGetThreatModelJobTasks operation.
 type BatchGetThreatModelJobTasksOutput struct {
 
@@ -55,13 +70,32 @@ type BatchGetThreatModelJobTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetThreatModelJobTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetThreatModelJobTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetThreatModelJobTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaskIdList(s, schemas.BatchGetThreatModelJobTasksOutput_notFound, v.NotFound)
+	serializeThreatModelJobTaskList(s, schemas.BatchGetThreatModelJobTasksOutput_threatModelJobTasks, v.ThreatModelJobTasks)
+}
+func (v *BatchGetThreatModelJobTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetThreatModelJobTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetThreatModelJobTasksOutput_notFound:
+			return deserializeTaskIdList(d, schemas.BatchGetThreatModelJobTasksOutput_notFound, &v.NotFound)
+		case schemas.BatchGetThreatModelJobTasksOutput_threatModelJobTasks:
+			return deserializeThreatModelJobTaskList(d, schemas.BatchGetThreatModelJobTasksOutput_threatModelJobTasks, &v.ThreatModelJobTasks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetThreatModelJobTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetThreatModelJobTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetThreatModelJobTasks, schemas.BatchGetThreatModelJobTasksInput, schemas.BatchGetThreatModelJobTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetThreatModelJobTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetThreatModelJobTasks, schemas.BatchGetThreatModelJobTasksInput, schemas.BatchGetThreatModelJobTasksOutput), output: &BatchGetThreatModelJobTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

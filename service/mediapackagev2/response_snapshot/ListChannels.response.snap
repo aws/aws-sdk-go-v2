@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Items":[{"Arn":"__Arn__","AttachedMultiviewChannels":["__Member__","__Member__"],"ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","CreatedAt":946684800,"Description":"__Description__","InputType":"HLS","ModifiedAt":946684800,"MultiviewConfiguration":{"AvailableLayouts":["LAYOUT_2EH","LAYOUT_2EH"],"AvailableSources":["__Member__","__Member__"]},"OutputLockingMode":"EPOCH_LOCKED"},{"Arn":"__Arn__","AttachedMultiviewChannels":["__Member__","__Member__"],"ChannelGroupName":"__ChannelGroupName__","ChannelName":"__ChannelName__","CreatedAt":946684800,"Description":"__Description__","InputType":"HLS","ModifiedAt":946684800,"MultiviewConfiguration":{"AvailableLayouts":["LAYOUT_2EH","LAYOUT_2EH"],"AvailableSources":["__Member__","__Member__"]},"OutputLockingMode":"EPOCH_LOCKED"}],"NextToken":"__NextToken__"}

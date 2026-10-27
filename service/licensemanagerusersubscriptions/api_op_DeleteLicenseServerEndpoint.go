@@ -4,7 +4,9 @@ package licensemanagerusersubscriptions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DeleteLicenseServerEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseServerEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseServerEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseServerEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseServerEndpointArn != nil {
+		s.WriteString(schemas.DeleteLicenseServerEndpointRequest_LicenseServerEndpointArn, *v.LicenseServerEndpointArn)
+	}
+	if v.ServerType != "" {
+		s.WriteString(schemas.DeleteLicenseServerEndpointRequest_ServerType, string(v.ServerType))
+	}
+}
+
 type DeleteLicenseServerEndpointOutput struct {
 
 	// Shows details from the LicenseServerEndpoint resource that was deleted.
@@ -51,13 +68,34 @@ type DeleteLicenseServerEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLicenseServerEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLicenseServerEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLicenseServerEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseServerEndpoint != nil {
+		s.WriteStruct(schemas.DeleteLicenseServerEndpointResponse_LicenseServerEndpoint)
+		v.LicenseServerEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteLicenseServerEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLicenseServerEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLicenseServerEndpointResponse_LicenseServerEndpoint:
+			v.LicenseServerEndpoint = &types.LicenseServerEndpoint{}
+			return v.LicenseServerEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLicenseServerEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLicenseServerEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseServerEndpoint, schemas.DeleteLicenseServerEndpointRequest, schemas.DeleteLicenseServerEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLicenseServerEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLicenseServerEndpoint, schemas.DeleteLicenseServerEndpointRequest, schemas.DeleteLicenseServerEndpointResponse), output: &DeleteLicenseServerEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

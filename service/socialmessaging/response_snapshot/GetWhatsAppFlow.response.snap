@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"application":{"id":"__Id__","link":"__Link__","name":"__Name__"},"categories":["SIGN_UP","SIGN_UP"],"dataApiVersion":"__DataApiVersion__","endpointUri":"__EndpointUri__","flowId":"__FlowId__","flowName":"__FlowName__","flowStatus":"__FlowStatus__","healthStatus":{"canSendMessage":"__CanSendMessage__","entities":[{"canSendMessage":"__CanSendMessage__","entityType":"__EntityType__","id":"__Id__"},{"canSendMessage":"__CanSendMessage__","entityType":"__EntityType__","id":"__Id__"}]},"jsonVersion":"__JsonVersion__","preview":{"expiresAt":"__ExpiresAt__","previewUrl":"__PreviewUrl__"},"validationErrors":["__Member__","__Member__"],"whatsAppBusinessAccount":{"currency":"__Currency__","id":"__Id__","messageTemplateNamespace":"__MessageTemplateNamespace__","name":"__Name__","timezoneId":"__TimezoneId__"}}

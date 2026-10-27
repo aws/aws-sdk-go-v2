@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,22 @@ type StartCodeReviewJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCodeReviewJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCodeReviewJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCodeReviewJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StartCodeReviewJobInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CodeReviewId != nil {
+		s.WriteString(schemas.StartCodeReviewJobInput_codeReviewId, *v.CodeReviewId)
+	}
+	serializeDiffSource(s, schemas.StartCodeReviewJobInput_diffSource, v.DiffSource)
+}
+
 // Output for the StartCodeReviewJob operation.
 type StartCodeReviewJobOutput struct {
 
@@ -80,13 +98,72 @@ type StartCodeReviewJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCodeReviewJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCodeReviewJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCodeReviewJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StartCodeReviewJobOutput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CodeReviewId != nil {
+		s.WriteString(schemas.StartCodeReviewJobOutput_codeReviewId, *v.CodeReviewId)
+	}
+	if v.CodeReviewJobId != nil {
+		s.WriteString(schemas.StartCodeReviewJobOutput_codeReviewJobId, *v.CodeReviewJobId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartCodeReviewJobOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartCodeReviewJobOutput_status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.StartCodeReviewJobOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.StartCodeReviewJobOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *StartCodeReviewJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCodeReviewJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCodeReviewJobOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.StartCodeReviewJobOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.StartCodeReviewJobOutput_codeReviewId:
+			v.CodeReviewId = new(string)
+			return d.ReadString(schemas.StartCodeReviewJobOutput_codeReviewId, v.CodeReviewId)
+		case schemas.StartCodeReviewJobOutput_codeReviewJobId:
+			v.CodeReviewJobId = new(string)
+			return d.ReadString(schemas.StartCodeReviewJobOutput_codeReviewJobId, v.CodeReviewJobId)
+		case schemas.StartCodeReviewJobOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartCodeReviewJobOutput_createdAt, v.CreatedAt)
+		case schemas.StartCodeReviewJobOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartCodeReviewJobOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		case schemas.StartCodeReviewJobOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.StartCodeReviewJobOutput_title, v.Title)
+		case schemas.StartCodeReviewJobOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartCodeReviewJobOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCodeReviewJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCodeReviewJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCodeReviewJob, schemas.StartCodeReviewJobInput, schemas.StartCodeReviewJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCodeReviewJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCodeReviewJob, schemas.StartCodeReviewJobInput, schemas.StartCodeReviewJobOutput), output: &StartCodeReviewJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

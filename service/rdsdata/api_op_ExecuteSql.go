@@ -4,7 +4,9 @@ package rdsdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,52 @@ type ExecuteSqlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteSqlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteSqlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteSqlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsSecretStoreArn != nil {
+		s.WriteString(schemas.ExecuteSqlRequest_awsSecretStoreArn, *v.AwsSecretStoreArn)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.ExecuteSqlRequest_database, *v.Database)
+	}
+	if v.DbClusterOrInstanceArn != nil {
+		s.WriteString(schemas.ExecuteSqlRequest_dbClusterOrInstanceArn, *v.DbClusterOrInstanceArn)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.ExecuteSqlRequest_schema, *v.Schema)
+	}
+	if v.SqlStatements != nil {
+		s.WriteString(schemas.ExecuteSqlRequest_sqlStatements, *v.SqlStatements)
+	}
+}
+func (v *ExecuteSqlInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteSqlRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteSqlRequest_awsSecretStoreArn:
+			v.AwsSecretStoreArn = new(string)
+			return d.ReadString(schemas.ExecuteSqlRequest_awsSecretStoreArn, v.AwsSecretStoreArn)
+		case schemas.ExecuteSqlRequest_database:
+			v.Database = new(string)
+			return d.ReadString(schemas.ExecuteSqlRequest_database, v.Database)
+		case schemas.ExecuteSqlRequest_dbClusterOrInstanceArn:
+			v.DbClusterOrInstanceArn = new(string)
+			return d.ReadString(schemas.ExecuteSqlRequest_dbClusterOrInstanceArn, v.DbClusterOrInstanceArn)
+		case schemas.ExecuteSqlRequest_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.ExecuteSqlRequest_schema, v.Schema)
+		case schemas.ExecuteSqlRequest_sqlStatements:
+			v.SqlStatements = new(string)
+			return d.ReadString(schemas.ExecuteSqlRequest_sqlStatements, v.SqlStatements)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the output of a request to run one or more SQL
 // statements.
 type ExecuteSqlOutput struct {
@@ -81,13 +129,29 @@ type ExecuteSqlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteSqlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteSqlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteSqlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSqlStatementResults(s, schemas.ExecuteSqlResponse_sqlStatementResults, v.SqlStatementResults)
+}
+func (v *ExecuteSqlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteSqlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteSqlResponse_sqlStatementResults:
+			return deserializeSqlStatementResults(d, schemas.ExecuteSqlResponse_sqlStatementResults, &v.SqlStatementResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteSqlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExecuteSql{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteSql, schemas.ExecuteSqlRequest, schemas.ExecuteSqlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExecuteSql{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteSql, schemas.ExecuteSqlRequest, schemas.ExecuteSqlResponse), output: &ExecuteSqlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

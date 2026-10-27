@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,27 @@ type UpdateIndexModeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexModeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexModeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexModeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.UpdateIndexModeInput_indexArn, *v.IndexArn)
+	}
+	if v.IndexMode != "" {
+		s.WriteString(schemas.UpdateIndexModeInput_indexMode, string(v.IndexMode))
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.UpdateIndexModeInput_indexName, *v.IndexName)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.UpdateIndexModeInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type UpdateIndexModeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,13 +89,26 @@ type UpdateIndexModeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexModeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexModeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexModeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateIndexModeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexModeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIndexModeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndexMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexMode, schemas.UpdateIndexModeInput, schemas.UpdateIndexModeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIndexMode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexMode, schemas.UpdateIndexModeInput, schemas.UpdateIndexModeOutput), output: &UpdateIndexModeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

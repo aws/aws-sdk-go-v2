@@ -4,7 +4,9 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,23 @@ type UpdateNetworkSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateNetworkSettingsRequest_networkId, *v.NetworkId)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.UpdateNetworkSettingsRequest_settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateNetworkSettingsOutput struct {
 
 	// A list of the updated network settings, showing the new values for each
@@ -55,13 +74,29 @@ type UpdateNetworkSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSettingsList(s, schemas.UpdateNetworkSettingsResponse_settings, v.Settings)
+}
+func (v *UpdateNetworkSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNetworkSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNetworkSettingsResponse_settings:
+			return deserializeSettingsList(d, schemas.UpdateNetworkSettingsResponse_settings, &v.Settings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNetworkSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkSettings, schemas.UpdateNetworkSettingsRequest, schemas.UpdateNetworkSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNetworkSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkSettings, schemas.UpdateNetworkSettingsRequest, schemas.UpdateNetworkSettingsResponse), output: &UpdateNetworkSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

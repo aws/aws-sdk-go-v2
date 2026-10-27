@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -70,6 +72,56 @@ type UpdateCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeReviewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewInput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeRemediationStrategy != "" {
+		s.WriteString(schemas.UpdateCodeReviewInput_codeRemediationStrategy, string(v.CodeRemediationStrategy))
+	}
+	if v.CodeReviewId != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_codeReviewId, *v.CodeReviewId)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewInput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxTaskHours != nil {
+		s.WriteFloat64(schemas.UpdateCodeReviewInput_maxTaskHours, *v.MaxTaskHours)
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewInput_reportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportFilters != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewInput_reportFilters)
+		v.ReportFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_serviceRole, *v.ServiceRole)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_title, *v.Title)
+	}
+	if v.ValidationMode != "" {
+		s.WriteString(schemas.UpdateCodeReviewInput_validationMode, string(v.ValidationMode))
+	}
+}
+
 // Output for the UpdateCodeReview operation.
 type UpdateCodeReviewOutput struct {
 
@@ -121,13 +173,120 @@ type UpdateCodeReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeReviewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateCodeReviewOutput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewOutput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeRemediationStrategy != "" {
+		s.WriteString(schemas.UpdateCodeReviewOutput_codeRemediationStrategy, string(v.CodeRemediationStrategy))
+	}
+	if v.CodeReviewId != nil {
+		s.WriteString(schemas.UpdateCodeReviewOutput_codeReviewId, *v.CodeReviewId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateCodeReviewOutput_createdAt, *v.CreatedAt)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewOutput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxTaskHours != nil {
+		s.WriteFloat64(schemas.UpdateCodeReviewOutput_maxTaskHours, *v.MaxTaskHours)
+	}
+	if v.ReportDestination != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewOutput_reportDestination)
+		v.ReportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportFilters != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewOutput_reportFilters)
+		v.ReportFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateCodeReviewOutput_serviceRole, *v.ServiceRole)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateCodeReviewOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateCodeReviewOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.ValidationMode != "" {
+		s.WriteString(schemas.UpdateCodeReviewOutput_validationMode, string(v.ValidationMode))
+	}
+}
+func (v *UpdateCodeReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCodeReviewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCodeReviewOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.UpdateCodeReviewOutput_assets:
+			v.Assets = &types.Assets{}
+			return v.Assets.Deserialize(d)
+		case schemas.UpdateCodeReviewOutput_codeRemediationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCodeReviewOutput_codeRemediationStrategy, &ev); err != nil {
+				return err
+			}
+			v.CodeRemediationStrategy = types.CodeRemediationStrategy(ev)
+			return nil
+		case schemas.UpdateCodeReviewOutput_codeReviewId:
+			v.CodeReviewId = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_codeReviewId, v.CodeReviewId)
+		case schemas.UpdateCodeReviewOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCodeReviewOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateCodeReviewOutput_logConfig:
+			v.LogConfig = &types.CloudWatchLog{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.UpdateCodeReviewOutput_maxTaskHours:
+			v.MaxTaskHours = new(float64)
+			return d.ReadFloat64(schemas.UpdateCodeReviewOutput_maxTaskHours, v.MaxTaskHours)
+		case schemas.UpdateCodeReviewOutput_reportDestination:
+			v.ReportDestination = &types.ReportDestination{}
+			return v.ReportDestination.Deserialize(d)
+		case schemas.UpdateCodeReviewOutput_reportFilters:
+			v.ReportFilters = &types.ReportFilters{}
+			return v.ReportFilters.Deserialize(d)
+		case schemas.UpdateCodeReviewOutput_serviceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_serviceRole, v.ServiceRole)
+		case schemas.UpdateCodeReviewOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_title, v.Title)
+		case schemas.UpdateCodeReviewOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCodeReviewOutput_updatedAt, v.UpdatedAt)
+		case schemas.UpdateCodeReviewOutput_validationMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCodeReviewOutput_validationMode, &ev); err != nil {
+				return err
+			}
+			v.ValidationMode = types.ValidationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeReview, schemas.UpdateCodeReviewInput, schemas.UpdateCodeReviewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeReview, schemas.UpdateCodeReviewInput, schemas.UpdateCodeReviewOutput), output: &UpdateCodeReviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

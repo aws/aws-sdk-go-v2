@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,26 @@ type ListSequenceStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSequenceStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSequenceStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSequenceStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListSequenceStoresRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSequenceStoresRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSequenceStoresRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSequenceStoresOutput struct {
 
 	// A list of sequence stores.
@@ -61,13 +83,35 @@ type ListSequenceStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSequenceStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSequenceStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSequenceStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSequenceStoresResponse_nextToken, *v.NextToken)
+	}
+	serializeSequenceStoreDetailList(s, schemas.ListSequenceStoresResponse_sequenceStores, v.SequenceStores)
+}
+func (v *ListSequenceStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSequenceStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSequenceStoresResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSequenceStoresResponse_nextToken, v.NextToken)
+		case schemas.ListSequenceStoresResponse_sequenceStores:
+			return deserializeSequenceStoreDetailList(d, schemas.ListSequenceStoresResponse_sequenceStores, &v.SequenceStores)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSequenceStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSequenceStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSequenceStores, schemas.ListSequenceStoresRequest, schemas.ListSequenceStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSequenceStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSequenceStores, schemas.ListSequenceStoresRequest, schemas.ListSequenceStoresResponse), output: &ListSequenceStoresOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

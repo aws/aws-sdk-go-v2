@@ -4,7 +4,9 @@ package migrationhubstrategy
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,28 @@ type GetServerStrategiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServerStrategiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServerStrategiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServerStrategiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.GetServerStrategiesRequest_serverId, *v.ServerId)
+	}
+}
+func (v *GetServerStrategiesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServerStrategiesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServerStrategiesRequest_serverId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.GetServerStrategiesRequest_serverId, v.ServerId)
+		}
+		return nil
+	})
+}
+
 type GetServerStrategiesOutput struct {
 
 	//  A list of strategy recommendations for the server.
@@ -45,13 +69,29 @@ type GetServerStrategiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServerStrategiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServerStrategiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServerStrategiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServerStrategies(s, schemas.GetServerStrategiesResponse_serverStrategies, v.ServerStrategies)
+}
+func (v *GetServerStrategiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServerStrategiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServerStrategiesResponse_serverStrategies:
+			return deserializeServerStrategies(d, schemas.GetServerStrategiesResponse_serverStrategies, &v.ServerStrategies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServerStrategiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServerStrategies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServerStrategies, schemas.GetServerStrategiesRequest, schemas.GetServerStrategiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServerStrategies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServerStrategies, schemas.GetServerStrategiesRequest, schemas.GetServerStrategiesResponse), output: &GetServerStrategiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

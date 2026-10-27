@@ -5,7 +5,9 @@ package workdocs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,33 @@ type DescribeDocumentVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.DescribeDocumentVersionsRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.DescribeDocumentVersionsRequest_DocumentId, *v.DocumentId)
+	}
+	if v.Fields != nil {
+		s.WriteString(schemas.DescribeDocumentVersionsRequest_Fields, *v.Fields)
+	}
+	if v.Include != nil {
+		s.WriteString(schemas.DescribeDocumentVersionsRequest_Include, *v.Include)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeDocumentVersionsRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDocumentVersionsRequest_Marker, *v.Marker)
+	}
+}
+
 type DescribeDocumentVersionsOutput struct {
 
 	// The document versions.
@@ -71,13 +100,35 @@ type DescribeDocumentVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentVersionMetadataList(s, schemas.DescribeDocumentVersionsResponse_DocumentVersions, v.DocumentVersions)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDocumentVersionsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeDocumentVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDocumentVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDocumentVersionsResponse_DocumentVersions:
+			return deserializeDocumentVersionMetadataList(d, schemas.DescribeDocumentVersionsResponse_DocumentVersions, &v.DocumentVersions)
+		case schemas.DescribeDocumentVersionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeDocumentVersionsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDocumentVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDocumentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentVersions, schemas.DescribeDocumentVersionsRequest, schemas.DescribeDocumentVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDocumentVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentVersions, schemas.DescribeDocumentVersionsRequest, schemas.DescribeDocumentVersionsResponse), output: &DescribeDocumentVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

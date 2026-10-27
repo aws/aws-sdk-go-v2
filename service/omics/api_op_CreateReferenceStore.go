@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -58,6 +60,30 @@ type CreateReferenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReferenceStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReferenceStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReferenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateReferenceStoreRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateReferenceStoreRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateReferenceStoreRequest_name, *v.Name)
+	}
+	if v.SseConfig != nil {
+		s.WriteStruct(schemas.CreateReferenceStoreRequest_sseConfig)
+		v.SseConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateReferenceStoreRequest_tags, v.Tags)
+}
+
 type CreateReferenceStoreOutput struct {
 
 	// The store's ARN.
@@ -90,13 +116,64 @@ type CreateReferenceStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReferenceStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReferenceStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReferenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateReferenceStoreResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateReferenceStoreResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateReferenceStoreResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateReferenceStoreResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateReferenceStoreResponse_name, *v.Name)
+	}
+	if v.SseConfig != nil {
+		s.WriteStruct(schemas.CreateReferenceStoreResponse_sseConfig)
+		v.SseConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateReferenceStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReferenceStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReferenceStoreResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateReferenceStoreResponse_arn, v.Arn)
+		case schemas.CreateReferenceStoreResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateReferenceStoreResponse_creationTime, v.CreationTime)
+		case schemas.CreateReferenceStoreResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateReferenceStoreResponse_description, v.Description)
+		case schemas.CreateReferenceStoreResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateReferenceStoreResponse_id, v.Id)
+		case schemas.CreateReferenceStoreResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateReferenceStoreResponse_name, v.Name)
+		case schemas.CreateReferenceStoreResponse_sseConfig:
+			v.SseConfig = &types.SseConfig{}
+			return v.SseConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReferenceStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReferenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReferenceStore, schemas.CreateReferenceStoreRequest, schemas.CreateReferenceStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReferenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReferenceStore, schemas.CreateReferenceStoreRequest, schemas.CreateReferenceStoreResponse), output: &CreateReferenceStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

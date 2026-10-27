@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,28 @@ type DeleteWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMigrationWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteMigrationWorkflowRequest_id, *v.Id)
+	}
+}
+func (v *DeleteWorkflowInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMigrationWorkflowRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMigrationWorkflowRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteMigrationWorkflowRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type DeleteWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the migration workflow.
@@ -52,13 +76,48 @@ type DeleteWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMigrationWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteMigrationWorkflowResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteMigrationWorkflowResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteMigrationWorkflowResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMigrationWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMigrationWorkflowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteMigrationWorkflowResponse_arn, v.Arn)
+		case schemas.DeleteMigrationWorkflowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteMigrationWorkflowResponse_id, v.Id)
+		case schemas.DeleteMigrationWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteMigrationWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MigrationWorkflowStatusEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflow, schemas.DeleteMigrationWorkflowRequest, schemas.DeleteMigrationWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWorkflow, schemas.DeleteMigrationWorkflowRequest, schemas.DeleteMigrationWorkflowResponse), output: &DeleteWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -83,6 +85,57 @@ type CreateThreatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateThreatInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Anchor != nil {
+		s.WriteStruct(schemas.CreateThreatInput_anchor)
+		v.Anchor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Comments != nil {
+		s.WriteString(schemas.CreateThreatInput_comments, *v.Comments)
+	}
+	serializeThreatEvidenceList(s, schemas.CreateThreatInput_evidence, v.Evidence)
+	serializeStringList(s, schemas.CreateThreatInput_impactedAssets, v.ImpactedAssets)
+	serializeStringList(s, schemas.CreateThreatInput_impactedGoal, v.ImpactedGoal)
+	if v.Prerequisites != nil {
+		s.WriteString(schemas.CreateThreatInput_prerequisites, *v.Prerequisites)
+	}
+	if v.Recommendation != nil {
+		s.WriteString(schemas.CreateThreatInput_recommendation, *v.Recommendation)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.CreateThreatInput_severity, string(v.Severity))
+	}
+	if v.Statement != nil {
+		s.WriteString(schemas.CreateThreatInput_statement, *v.Statement)
+	}
+	serializeStrideCategoryList(s, schemas.CreateThreatInput_stride, v.Stride)
+	if v.ThreatAction != nil {
+		s.WriteString(schemas.CreateThreatInput_threatAction, *v.ThreatAction)
+	}
+	if v.ThreatImpact != nil {
+		s.WriteString(schemas.CreateThreatInput_threatImpact, *v.ThreatImpact)
+	}
+	if v.ThreatJobId != nil {
+		s.WriteString(schemas.CreateThreatInput_threatJobId, *v.ThreatJobId)
+	}
+	if v.ThreatSource != nil {
+		s.WriteString(schemas.CreateThreatInput_threatSource, *v.ThreatSource)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateThreatInput_title, *v.Title)
+	}
+}
+
 // Output for the CreateThreat operation.
 type CreateThreatOutput struct {
 
@@ -159,13 +212,158 @@ type CreateThreatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThreatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThreatOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThreatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Anchor != nil {
+		s.WriteStruct(schemas.CreateThreatOutput_anchor)
+		v.Anchor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Comments != nil {
+		s.WriteString(schemas.CreateThreatOutput_comments, *v.Comments)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateThreatOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != "" {
+		s.WriteString(schemas.CreateThreatOutput_createdBy, string(v.CreatedBy))
+	}
+	serializeThreatEvidenceList(s, schemas.CreateThreatOutput_evidence, v.Evidence)
+	serializeStringList(s, schemas.CreateThreatOutput_impactedAssets, v.ImpactedAssets)
+	serializeStringList(s, schemas.CreateThreatOutput_impactedGoal, v.ImpactedGoal)
+	if v.Prerequisites != nil {
+		s.WriteString(schemas.CreateThreatOutput_prerequisites, *v.Prerequisites)
+	}
+	if v.Recommendation != nil {
+		s.WriteString(schemas.CreateThreatOutput_recommendation, *v.Recommendation)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.CreateThreatOutput_severity, string(v.Severity))
+	}
+	if v.Statement != nil {
+		s.WriteString(schemas.CreateThreatOutput_statement, *v.Statement)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateThreatOutput_status, string(v.Status))
+	}
+	serializeStrideCategoryList(s, schemas.CreateThreatOutput_stride, v.Stride)
+	if v.ThreatAction != nil {
+		s.WriteString(schemas.CreateThreatOutput_threatAction, *v.ThreatAction)
+	}
+	if v.ThreatId != nil {
+		s.WriteString(schemas.CreateThreatOutput_threatId, *v.ThreatId)
+	}
+	if v.ThreatImpact != nil {
+		s.WriteString(schemas.CreateThreatOutput_threatImpact, *v.ThreatImpact)
+	}
+	if v.ThreatJobId != nil {
+		s.WriteString(schemas.CreateThreatOutput_threatJobId, *v.ThreatJobId)
+	}
+	if v.ThreatSource != nil {
+		s.WriteString(schemas.CreateThreatOutput_threatSource, *v.ThreatSource)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateThreatOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateThreatOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != "" {
+		s.WriteString(schemas.CreateThreatOutput_updatedBy, string(v.UpdatedBy))
+	}
+}
+func (v *CreateThreatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThreatOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThreatOutput_anchor:
+			v.Anchor = &types.ThreatAnchorShape{}
+			return v.Anchor.Deserialize(d)
+		case schemas.CreateThreatOutput_comments:
+			v.Comments = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_comments, v.Comments)
+		case schemas.CreateThreatOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateThreatOutput_createdAt, v.CreatedAt)
+		case schemas.CreateThreatOutput_createdBy:
+			var ev string
+			if err := d.ReadString(schemas.CreateThreatOutput_createdBy, &ev); err != nil {
+				return err
+			}
+			v.CreatedBy = types.ThreatActor(ev)
+			return nil
+		case schemas.CreateThreatOutput_evidence:
+			return deserializeThreatEvidenceList(d, schemas.CreateThreatOutput_evidence, &v.Evidence)
+		case schemas.CreateThreatOutput_impactedAssets:
+			return deserializeStringList(d, schemas.CreateThreatOutput_impactedAssets, &v.ImpactedAssets)
+		case schemas.CreateThreatOutput_impactedGoal:
+			return deserializeStringList(d, schemas.CreateThreatOutput_impactedGoal, &v.ImpactedGoal)
+		case schemas.CreateThreatOutput_prerequisites:
+			v.Prerequisites = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_prerequisites, v.Prerequisites)
+		case schemas.CreateThreatOutput_recommendation:
+			v.Recommendation = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_recommendation, v.Recommendation)
+		case schemas.CreateThreatOutput_severity:
+			var ev string
+			if err := d.ReadString(schemas.CreateThreatOutput_severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = types.ThreatSeverity(ev)
+			return nil
+		case schemas.CreateThreatOutput_statement:
+			v.Statement = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_statement, v.Statement)
+		case schemas.CreateThreatOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateThreatOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ThreatStatus(ev)
+			return nil
+		case schemas.CreateThreatOutput_stride:
+			return deserializeStrideCategoryList(d, schemas.CreateThreatOutput_stride, &v.Stride)
+		case schemas.CreateThreatOutput_threatAction:
+			v.ThreatAction = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_threatAction, v.ThreatAction)
+		case schemas.CreateThreatOutput_threatId:
+			v.ThreatId = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_threatId, v.ThreatId)
+		case schemas.CreateThreatOutput_threatImpact:
+			v.ThreatImpact = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_threatImpact, v.ThreatImpact)
+		case schemas.CreateThreatOutput_threatJobId:
+			v.ThreatJobId = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_threatJobId, v.ThreatJobId)
+		case schemas.CreateThreatOutput_threatSource:
+			v.ThreatSource = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_threatSource, v.ThreatSource)
+		case schemas.CreateThreatOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CreateThreatOutput_title, v.Title)
+		case schemas.CreateThreatOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateThreatOutput_updatedAt, v.UpdatedAt)
+		case schemas.CreateThreatOutput_updatedBy:
+			var ev string
+			if err := d.ReadString(schemas.CreateThreatOutput_updatedBy, &ev); err != nil {
+				return err
+			}
+			v.UpdatedBy = types.ThreatActor(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThreatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThreat{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreat, schemas.CreateThreatInput, schemas.CreateThreatOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThreat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThreat, schemas.CreateThreatInput, schemas.CreateThreatOutput), output: &CreateThreatOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

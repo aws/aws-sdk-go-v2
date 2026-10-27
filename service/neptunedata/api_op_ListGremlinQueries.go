@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,18 @@ type ListGremlinQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGremlinQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGremlinQueriesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGremlinQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeWaiting != nil {
+		s.WriteBool(schemas.ListGremlinQueriesInput_includeWaiting, *v.IncludeWaiting)
+	}
+}
+
 type ListGremlinQueriesOutput struct {
 
 	// The number of queries that have been accepted but not yet completed, including
@@ -63,13 +77,41 @@ type ListGremlinQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGremlinQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGremlinQueriesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGremlinQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptedQueryCount != nil {
+		s.WriteInt32(schemas.ListGremlinQueriesOutput_acceptedQueryCount, *v.AcceptedQueryCount)
+	}
+	serializeGremlinQueries(s, schemas.ListGremlinQueriesOutput_queries, v.Queries)
+	if v.RunningQueryCount != nil {
+		s.WriteInt32(schemas.ListGremlinQueriesOutput_runningQueryCount, *v.RunningQueryCount)
+	}
+}
+func (v *ListGremlinQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGremlinQueriesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGremlinQueriesOutput_acceptedQueryCount:
+			v.AcceptedQueryCount = new(int32)
+			return d.ReadInt32(schemas.ListGremlinQueriesOutput_acceptedQueryCount, v.AcceptedQueryCount)
+		case schemas.ListGremlinQueriesOutput_queries:
+			return deserializeGremlinQueries(d, schemas.ListGremlinQueriesOutput_queries, &v.Queries)
+		case schemas.ListGremlinQueriesOutput_runningQueryCount:
+			v.RunningQueryCount = new(int32)
+			return d.ReadInt32(schemas.ListGremlinQueriesOutput_runningQueryCount, v.RunningQueryCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGremlinQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGremlinQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGremlinQueries, schemas.ListGremlinQueriesInput, schemas.ListGremlinQueriesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGremlinQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGremlinQueries, schemas.ListGremlinQueriesInput, schemas.ListGremlinQueriesOutput), output: &ListGremlinQueriesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

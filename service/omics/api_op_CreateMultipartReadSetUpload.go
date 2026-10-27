@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -97,6 +99,43 @@ type CreateMultipartReadSetUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultipartReadSetUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultipartReadSetUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultipartReadSetUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_description, *v.Description)
+	}
+	if v.GeneratedFrom != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_generatedFrom, *v.GeneratedFrom)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_name, *v.Name)
+	}
+	if v.ReferenceArn != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_referenceArn, *v.ReferenceArn)
+	}
+	if v.SampleId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_sampleId, *v.SampleId)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.SourceFileType != "" {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_sourceFileType, string(v.SourceFileType))
+	}
+	if v.SubjectId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadRequest_subjectId, *v.SubjectId)
+	}
+	serializeTagMap(s, schemas.CreateMultipartReadSetUploadRequest_tags, v.Tags)
+}
+
 type CreateMultipartReadSetUploadOutput struct {
 
 	// The creation time of the multipart upload.
@@ -152,13 +191,93 @@ type CreateMultipartReadSetUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultipartReadSetUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultipartReadSetUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultipartReadSetUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateMultipartReadSetUploadResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_description, *v.Description)
+	}
+	if v.GeneratedFrom != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_generatedFrom, *v.GeneratedFrom)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_name, *v.Name)
+	}
+	if v.ReferenceArn != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_referenceArn, *v.ReferenceArn)
+	}
+	if v.SampleId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_sampleId, *v.SampleId)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.SourceFileType != "" {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_sourceFileType, string(v.SourceFileType))
+	}
+	if v.SubjectId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_subjectId, *v.SubjectId)
+	}
+	serializeTagMap(s, schemas.CreateMultipartReadSetUploadResponse_tags, v.Tags)
+	if v.UploadId != nil {
+		s.WriteString(schemas.CreateMultipartReadSetUploadResponse_uploadId, *v.UploadId)
+	}
+}
+func (v *CreateMultipartReadSetUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMultipartReadSetUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMultipartReadSetUploadResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateMultipartReadSetUploadResponse_creationTime, v.CreationTime)
+		case schemas.CreateMultipartReadSetUploadResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_description, v.Description)
+		case schemas.CreateMultipartReadSetUploadResponse_generatedFrom:
+			v.GeneratedFrom = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_generatedFrom, v.GeneratedFrom)
+		case schemas.CreateMultipartReadSetUploadResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_name, v.Name)
+		case schemas.CreateMultipartReadSetUploadResponse_referenceArn:
+			v.ReferenceArn = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_referenceArn, v.ReferenceArn)
+		case schemas.CreateMultipartReadSetUploadResponse_sampleId:
+			v.SampleId = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_sampleId, v.SampleId)
+		case schemas.CreateMultipartReadSetUploadResponse_sequenceStoreId:
+			v.SequenceStoreId = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_sequenceStoreId, v.SequenceStoreId)
+		case schemas.CreateMultipartReadSetUploadResponse_sourceFileType:
+			var ev string
+			if err := d.ReadString(schemas.CreateMultipartReadSetUploadResponse_sourceFileType, &ev); err != nil {
+				return err
+			}
+			v.SourceFileType = types.FileType(ev)
+			return nil
+		case schemas.CreateMultipartReadSetUploadResponse_subjectId:
+			v.SubjectId = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_subjectId, v.SubjectId)
+		case schemas.CreateMultipartReadSetUploadResponse_tags:
+			return deserializeTagMap(d, schemas.CreateMultipartReadSetUploadResponse_tags, &v.Tags)
+		case schemas.CreateMultipartReadSetUploadResponse_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.CreateMultipartReadSetUploadResponse_uploadId, v.UploadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMultipartReadSetUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMultipartReadSetUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultipartReadSetUpload, schemas.CreateMultipartReadSetUploadRequest, schemas.CreateMultipartReadSetUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMultipartReadSetUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultipartReadSetUpload, schemas.CreateMultipartReadSetUploadRequest, schemas.CreateMultipartReadSetUploadResponse), output: &CreateMultipartReadSetUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

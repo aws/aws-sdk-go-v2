@@ -5,7 +5,9 @@ package s3outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -52,6 +54,24 @@ type ListSharedEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListSharedEndpointsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedEndpointsRequest_NextToken, *v.NextToken)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.ListSharedEndpointsRequest_OutpostId, *v.OutpostId)
+	}
+}
+
 type ListSharedEndpointsOutput struct {
 
 	// The list of endpoints associated with the specified Outpost that have been
@@ -69,13 +89,35 @@ type ListSharedEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSharedEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSharedEndpointsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSharedEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpoints(s, schemas.ListSharedEndpointsResult_Endpoints, v.Endpoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSharedEndpointsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSharedEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSharedEndpointsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSharedEndpointsResult_Endpoints:
+			return deserializeEndpoints(d, schemas.ListSharedEndpointsResult_Endpoints, &v.Endpoints)
+		case schemas.ListSharedEndpointsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSharedEndpointsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSharedEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSharedEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedEndpoints, schemas.ListSharedEndpointsRequest, schemas.ListSharedEndpointsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSharedEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSharedEndpoints, schemas.ListSharedEndpointsRequest, schemas.ListSharedEndpointsResult), output: &ListSharedEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

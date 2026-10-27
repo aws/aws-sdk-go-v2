@@ -5,7 +5,9 @@ package route53recoveryreadiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListRecoveryGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecoveryGroupsOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -50,13 +67,35 @@ type ListRecoveryGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryGroupsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfRecoveryGroupOutput(s, schemas.ListRecoveryGroupsResponse_RecoveryGroups, v.RecoveryGroups)
+}
+func (v *ListRecoveryGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListRecoveryGroupsResponse_RecoveryGroups:
+			return deserialize__listOfRecoveryGroupOutput(d, schemas.ListRecoveryGroupsResponse_RecoveryGroups, &v.RecoveryGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryGroups, schemas.ListRecoveryGroupsRequest, schemas.ListRecoveryGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecoveryGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryGroups, schemas.ListRecoveryGroupsRequest, schemas.ListRecoveryGroupsResponse), output: &ListRecoveryGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

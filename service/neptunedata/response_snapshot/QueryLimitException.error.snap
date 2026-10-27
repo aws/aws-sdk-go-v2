@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"QueryLimitException","code":"QueryLimitException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

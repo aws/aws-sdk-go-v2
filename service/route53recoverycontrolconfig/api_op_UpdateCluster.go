@@ -4,7 +4,9 @@ package route53recoverycontrolconfig
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type UpdateClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateClusterRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.UpdateClusterRequest_NetworkType, string(v.NetworkType))
+	}
+}
+
 type UpdateClusterOutput struct {
 
 	// The cluster that was updated.
@@ -52,13 +69,34 @@ type UpdateClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteStruct(schemas.UpdateClusterResponse_Cluster)
+		v.Cluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateClusterResponse_Cluster:
+			v.Cluster = &types.Cluster{}
+			return v.Cluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCluster, schemas.UpdateClusterRequest, schemas.UpdateClusterResponse), output: &UpdateClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

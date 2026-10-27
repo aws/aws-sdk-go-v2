@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetVectorBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVectorBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVectorBucketInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVectorBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.GetVectorBucketInput_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.GetVectorBucketInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type GetVectorBucketOutput struct {
 
 	// The attributes of the vector bucket.
@@ -52,13 +69,34 @@ type GetVectorBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVectorBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVectorBucketOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVectorBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VectorBucket != nil {
+		s.WriteStruct(schemas.GetVectorBucketOutput_vectorBucket)
+		v.VectorBucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVectorBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVectorBucketOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVectorBucketOutput_vectorBucket:
+			v.VectorBucket = &types.VectorBucket{}
+			return v.VectorBucket.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVectorBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVectorBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVectorBucket, schemas.GetVectorBucketInput, schemas.GetVectorBucketOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVectorBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVectorBucket, schemas.GetVectorBucketInput, schemas.GetVectorBucketOutput), output: &GetVectorBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

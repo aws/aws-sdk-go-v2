@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+	if v.AmznErrorType != nil {
+		s.WriteString(schemas.ConflictException_amznErrorType, *v.AmznErrorType)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		case schemas.ConflictException_amznErrorType:
+			v.AmznErrorType = new(string)
+			return d.ReadString(schemas.ConflictException_amznErrorType, v.AmznErrorType)
+		}
+		return nil
+	})
+}
 
 // Unexpected error while processing the request. Retry the request.
 type InternalServiceFault struct {
@@ -62,6 +90,33 @@ func (e *InternalServiceFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceFault_Message, *v.Message)
+	}
+	if v.AmznErrorType != nil {
+		s.WriteString(schemas.InternalServiceFault_amznErrorType, *v.AmznErrorType)
+	}
+}
+func (v *InternalServiceFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceFault_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceFault_Message, v.Message)
+		case schemas.InternalServiceFault_amznErrorType:
+			v.AmznErrorType = new(string)
+			return d.ReadString(schemas.InternalServiceFault_amznErrorType, v.AmznErrorType)
+		}
+		return nil
+	})
+}
 
 // A parameter is specified incorrectly.
 type InvalidParameterException struct {
@@ -90,6 +145,33 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznErrorType != nil {
+		s.WriteString(schemas.InvalidParameterException_amznErrorType, *v.AmznErrorType)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_amznErrorType:
+			v.AmznErrorType = new(string)
+			return d.ReadString(schemas.InvalidParameterException_amznErrorType, v.AmznErrorType)
+		case schemas.InvalidParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A required parameter is missing from the request.
 type MissingRequiredParameterException struct {
@@ -118,6 +200,33 @@ func (e *MissingRequiredParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingRequiredParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingRequiredParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingRequiredParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznErrorType != nil {
+		s.WriteString(schemas.MissingRequiredParameterException_amznErrorType, *v.AmznErrorType)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.MissingRequiredParameterException_message, *v.Message)
+	}
+}
+func (v *MissingRequiredParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingRequiredParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingRequiredParameterException_amznErrorType:
+			v.AmznErrorType = new(string)
+			return d.ReadString(schemas.MissingRequiredParameterException_amznErrorType, v.AmznErrorType)
+		case schemas.MissingRequiredParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingRequiredParameterException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request references a resource that does not exist.
 type ResourceNotFoundException struct {
@@ -146,6 +255,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.AmznErrorType != nil {
+		s.WriteString(schemas.ResourceNotFoundException_amznErrorType, *v.AmznErrorType)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_amznErrorType:
+			v.AmznErrorType = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_amznErrorType, v.AmznErrorType)
+		}
+		return nil
+	})
+}
 
 // The request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
@@ -174,6 +310,33 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+	if v.AmznErrorType != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_amznErrorType, *v.AmznErrorType)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		case schemas.ServiceQuotaExceededException_amznErrorType:
+			v.AmznErrorType = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_amznErrorType, v.AmznErrorType)
+		}
+		return nil
+	})
+}
 
 // A resource can have no more than 50 tags.
 type TooManyTagsException struct {
@@ -200,6 +363,27 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_Message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The value of a parameter in the request caused an error.
 type ValidationException struct {
@@ -226,3 +410,24 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

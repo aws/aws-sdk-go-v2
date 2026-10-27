@@ -4,7 +4,9 @@ package managedblockchainquery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,16 @@ type BatchGetTokenBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTokenBalanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTokenBalanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTokenBalanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetTokenBalanceInputList(s, schemas.BatchGetTokenBalanceInput_getTokenBalanceInputs, v.GetTokenBalanceInputs)
+}
+
 type BatchGetTokenBalanceOutput struct {
 
 	// An array of BatchGetTokenBalanceErrorItem objects returned from the request.
@@ -55,13 +67,32 @@ type BatchGetTokenBalanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetTokenBalanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetTokenBalanceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetTokenBalanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetTokenBalanceErrors(s, schemas.BatchGetTokenBalanceOutput_errors, v.Errors)
+	serializeBatchGetTokenBalanceOutputList(s, schemas.BatchGetTokenBalanceOutput_tokenBalances, v.TokenBalances)
+}
+func (v *BatchGetTokenBalanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetTokenBalanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetTokenBalanceOutput_errors:
+			return deserializeBatchGetTokenBalanceErrors(d, schemas.BatchGetTokenBalanceOutput_errors, &v.Errors)
+		case schemas.BatchGetTokenBalanceOutput_tokenBalances:
+			return deserializeBatchGetTokenBalanceOutputList(d, schemas.BatchGetTokenBalanceOutput_tokenBalances, &v.TokenBalances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetTokenBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetTokenBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTokenBalance, schemas.BatchGetTokenBalanceInput, schemas.BatchGetTokenBalanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetTokenBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetTokenBalance, schemas.BatchGetTokenBalanceInput, schemas.BatchGetTokenBalanceOutput), output: &BatchGetTokenBalanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

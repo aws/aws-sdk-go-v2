@@ -4,6 +4,8 @@ package lexruntimeservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type DeleteSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAlias != nil {
+		s.WriteString(schemas.DeleteSessionRequest_botAlias, *v.BotAlias)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.DeleteSessionRequest_botName, *v.BotName)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeleteSessionRequest_userId, *v.UserId)
+	}
+}
+
 type DeleteSessionOutput struct {
 
 	// The alias in use for the bot associated with the session data.
@@ -63,13 +83,50 @@ type DeleteSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAlias != nil {
+		s.WriteString(schemas.DeleteSessionResponse_botAlias, *v.BotAlias)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.DeleteSessionResponse_botName, *v.BotName)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.DeleteSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeleteSessionResponse_userId, *v.UserId)
+	}
+}
+func (v *DeleteSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSessionResponse_botAlias:
+			v.BotAlias = new(string)
+			return d.ReadString(schemas.DeleteSessionResponse_botAlias, v.BotAlias)
+		case schemas.DeleteSessionResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.DeleteSessionResponse_botName, v.BotName)
+		case schemas.DeleteSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.DeleteSessionResponse_sessionId, v.SessionId)
+		case schemas.DeleteSessionResponse_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.DeleteSessionResponse_userId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSession, schemas.DeleteSessionRequest, schemas.DeleteSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSession, schemas.DeleteSessionRequest, schemas.DeleteSessionResponse), output: &DeleteSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetTelemetryRuleInput struct {
 	RuleIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTelemetryRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.GetTelemetryRuleInput_RuleIdentifier, *v.RuleIdentifier)
+	}
 }
 
 type GetTelemetryRuleOutput struct {
@@ -74,13 +88,73 @@ type GetTelemetryRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTelemetryRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimeStamp != nil {
+		s.WriteInt64(schemas.GetTelemetryRuleOutput_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.GetTelemetryRuleOutput_HomeRegion, *v.HomeRegion)
+	}
+	if v.IsReplicated != nil {
+		s.WriteBool(schemas.GetTelemetryRuleOutput_IsReplicated, *v.IsReplicated)
+	}
+	if v.LastUpdateTimeStamp != nil {
+		s.WriteInt64(schemas.GetTelemetryRuleOutput_LastUpdateTimeStamp, *v.LastUpdateTimeStamp)
+	}
+	serializeRegionStatuses(s, schemas.GetTelemetryRuleOutput_RegionStatuses, v.RegionStatuses)
+	if v.RuleArn != nil {
+		s.WriteString(schemas.GetTelemetryRuleOutput_RuleArn, *v.RuleArn)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.GetTelemetryRuleOutput_RuleName, *v.RuleName)
+	}
+	if v.TelemetryRule != nil {
+		s.WriteStruct(schemas.GetTelemetryRuleOutput_TelemetryRule)
+		v.TelemetryRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTelemetryRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTelemetryRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTelemetryRuleOutput_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(int64)
+			return d.ReadInt64(schemas.GetTelemetryRuleOutput_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.GetTelemetryRuleOutput_HomeRegion:
+			v.HomeRegion = new(string)
+			return d.ReadString(schemas.GetTelemetryRuleOutput_HomeRegion, v.HomeRegion)
+		case schemas.GetTelemetryRuleOutput_IsReplicated:
+			v.IsReplicated = new(bool)
+			return d.ReadBool(schemas.GetTelemetryRuleOutput_IsReplicated, v.IsReplicated)
+		case schemas.GetTelemetryRuleOutput_LastUpdateTimeStamp:
+			v.LastUpdateTimeStamp = new(int64)
+			return d.ReadInt64(schemas.GetTelemetryRuleOutput_LastUpdateTimeStamp, v.LastUpdateTimeStamp)
+		case schemas.GetTelemetryRuleOutput_RegionStatuses:
+			return deserializeRegionStatuses(d, schemas.GetTelemetryRuleOutput_RegionStatuses, &v.RegionStatuses)
+		case schemas.GetTelemetryRuleOutput_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.GetTelemetryRuleOutput_RuleArn, v.RuleArn)
+		case schemas.GetTelemetryRuleOutput_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.GetTelemetryRuleOutput_RuleName, v.RuleName)
+		case schemas.GetTelemetryRuleOutput_TelemetryRule:
+			v.TelemetryRule = &types.TelemetryRule{}
+			return v.TelemetryRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTelemetryRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTelemetryRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryRule, schemas.GetTelemetryRuleInput, schemas.GetTelemetryRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTelemetryRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryRule, schemas.GetTelemetryRuleInput, schemas.GetTelemetryRuleOutput), output: &GetTelemetryRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

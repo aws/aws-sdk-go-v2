@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetTableReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTableReplicationRequest_tableArn, *v.TableArn)
+	}
+}
+
 type GetTableReplicationOutput struct {
 
 	// The replication configuration for the table, including the IAM role and
@@ -58,13 +72,40 @@ type GetTableReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetTableReplicationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.GetTableReplicationResponse_versionToken, *v.VersionToken)
+	}
+}
+func (v *GetTableReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableReplicationResponse_configuration:
+			v.Configuration = &types.TableReplicationConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetTableReplicationResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.GetTableReplicationResponse_versionToken, v.VersionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableReplication, schemas.GetTableReplicationRequest, schemas.GetTableReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableReplication, schemas.GetTableReplicationRequest, schemas.GetTableReplicationResponse), output: &GetTableReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

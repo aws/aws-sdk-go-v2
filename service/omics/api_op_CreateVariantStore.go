@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -55,6 +57,28 @@ type CreateVariantStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVariantStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVariantStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVariantStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateVariantStoreRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVariantStoreRequest_name, *v.Name)
+	}
+	serializeReferenceItem(s, schemas.CreateVariantStoreRequest_reference, v.Reference)
+	if v.SseConfig != nil {
+		s.WriteStruct(schemas.CreateVariantStoreRequest_sseConfig)
+		v.SseConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateVariantStoreRequest_tags, v.Tags)
+}
+
 type CreateVariantStoreOutput struct {
 
 	// When the store was created.
@@ -86,13 +110,57 @@ type CreateVariantStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVariantStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVariantStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVariantStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateVariantStoreResponse_creationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateVariantStoreResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVariantStoreResponse_name, *v.Name)
+	}
+	serializeReferenceItem(s, schemas.CreateVariantStoreResponse_reference, v.Reference)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateVariantStoreResponse_status, string(v.Status))
+	}
+}
+func (v *CreateVariantStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVariantStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVariantStoreResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateVariantStoreResponse_creationTime, v.CreationTime)
+		case schemas.CreateVariantStoreResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateVariantStoreResponse_id, v.Id)
+		case schemas.CreateVariantStoreResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateVariantStoreResponse_name, v.Name)
+		case schemas.CreateVariantStoreResponse_reference:
+			return deserializeReferenceItem(d, schemas.CreateVariantStoreResponse_reference, &v.Reference)
+		case schemas.CreateVariantStoreResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateVariantStoreResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StoreStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVariantStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVariantStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVariantStore, schemas.CreateVariantStoreRequest, schemas.CreateVariantStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVariantStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVariantStore, schemas.CreateVariantStoreRequest, schemas.CreateVariantStoreResponse), output: &CreateVariantStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

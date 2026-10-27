@@ -4,7 +4,9 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,21 @@ type GetWebExperienceInput struct {
 	WebExperienceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWebExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetWebExperienceRequest_applicationId, *v.ApplicationId)
+	}
+	if v.WebExperienceId != nil {
+		s.WriteString(schemas.GetWebExperienceRequest_webExperienceId, *v.WebExperienceId)
+	}
 }
 
 type GetWebExperienceOutput struct {
@@ -120,13 +137,139 @@ type GetWebExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebExperienceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebExperienceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_applicationId, *v.ApplicationId)
+	}
+	serializeWebExperienceAuthConfiguration(s, schemas.GetWebExperienceResponse_authenticationConfiguration, v.AuthenticationConfiguration)
+	if v.BrowserExtensionConfiguration != nil {
+		s.WriteStruct(schemas.GetWebExperienceResponse_browserExtensionConfiguration)
+		v.BrowserExtensionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetWebExperienceResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomizationConfiguration != nil {
+		s.WriteStruct(schemas.GetWebExperienceResponse_customizationConfiguration)
+		v.CustomizationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultEndpoint != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_defaultEndpoint, *v.DefaultEndpoint)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetWebExperienceResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdentityProviderConfiguration(s, schemas.GetWebExperienceResponse_identityProviderConfiguration, v.IdentityProviderConfiguration)
+	serializeWebExperienceOrigins(s, schemas.GetWebExperienceResponse_origins, v.Origins)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_roleArn, *v.RoleArn)
+	}
+	if v.SamplePromptsControlMode != "" {
+		s.WriteString(schemas.GetWebExperienceResponse_samplePromptsControlMode, string(v.SamplePromptsControlMode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWebExperienceResponse_status, string(v.Status))
+	}
+	if v.Subtitle != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_subtitle, *v.Subtitle)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetWebExperienceResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.WebExperienceArn != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_webExperienceArn, *v.WebExperienceArn)
+	}
+	if v.WebExperienceId != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_webExperienceId, *v.WebExperienceId)
+	}
+	if v.WelcomeMessage != nil {
+		s.WriteString(schemas.GetWebExperienceResponse_welcomeMessage, *v.WelcomeMessage)
+	}
+}
+func (v *GetWebExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWebExperienceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWebExperienceResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_applicationId, v.ApplicationId)
+		case schemas.GetWebExperienceResponse_authenticationConfiguration:
+			return deserializeWebExperienceAuthConfiguration(d, schemas.GetWebExperienceResponse_authenticationConfiguration, &v.AuthenticationConfiguration)
+		case schemas.GetWebExperienceResponse_browserExtensionConfiguration:
+			v.BrowserExtensionConfiguration = &types.BrowserExtensionConfiguration{}
+			return v.BrowserExtensionConfiguration.Deserialize(d)
+		case schemas.GetWebExperienceResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWebExperienceResponse_createdAt, v.CreatedAt)
+		case schemas.GetWebExperienceResponse_customizationConfiguration:
+			v.CustomizationConfiguration = &types.CustomizationConfiguration{}
+			return v.CustomizationConfiguration.Deserialize(d)
+		case schemas.GetWebExperienceResponse_defaultEndpoint:
+			v.DefaultEndpoint = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_defaultEndpoint, v.DefaultEndpoint)
+		case schemas.GetWebExperienceResponse_error:
+			v.Error = &types.ErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.GetWebExperienceResponse_identityProviderConfiguration:
+			return deserializeIdentityProviderConfiguration(d, schemas.GetWebExperienceResponse_identityProviderConfiguration, &v.IdentityProviderConfiguration)
+		case schemas.GetWebExperienceResponse_origins:
+			return deserializeWebExperienceOrigins(d, schemas.GetWebExperienceResponse_origins, &v.Origins)
+		case schemas.GetWebExperienceResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_roleArn, v.RoleArn)
+		case schemas.GetWebExperienceResponse_samplePromptsControlMode:
+			var ev string
+			if err := d.ReadString(schemas.GetWebExperienceResponse_samplePromptsControlMode, &ev); err != nil {
+				return err
+			}
+			v.SamplePromptsControlMode = types.WebExperienceSamplePromptsControlMode(ev)
+			return nil
+		case schemas.GetWebExperienceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWebExperienceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WebExperienceStatus(ev)
+			return nil
+		case schemas.GetWebExperienceResponse_subtitle:
+			v.Subtitle = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_subtitle, v.Subtitle)
+		case schemas.GetWebExperienceResponse_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_title, v.Title)
+		case schemas.GetWebExperienceResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWebExperienceResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetWebExperienceResponse_webExperienceArn:
+			v.WebExperienceArn = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_webExperienceArn, v.WebExperienceArn)
+		case schemas.GetWebExperienceResponse_webExperienceId:
+			v.WebExperienceId = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_webExperienceId, v.WebExperienceId)
+		case schemas.GetWebExperienceResponse_welcomeMessage:
+			v.WelcomeMessage = new(string)
+			return d.ReadString(schemas.GetWebExperienceResponse_welcomeMessage, v.WelcomeMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWebExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWebExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebExperience, schemas.GetWebExperienceRequest, schemas.GetWebExperienceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWebExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebExperience, schemas.GetWebExperienceRequest, schemas.GetWebExperienceResponse), output: &GetWebExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

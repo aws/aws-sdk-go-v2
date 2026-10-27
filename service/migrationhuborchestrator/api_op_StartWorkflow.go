@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -35,6 +37,28 @@ type StartWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMigrationWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.StartMigrationWorkflowRequest_id, *v.Id)
+	}
+}
+func (v *StartWorkflowInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMigrationWorkflowRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMigrationWorkflowRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartMigrationWorkflowRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type StartWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the migration workflow.
@@ -58,13 +82,60 @@ type StartWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMigrationWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartMigrationWorkflowResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartMigrationWorkflowResponse_id, *v.Id)
+	}
+	if v.LastStartTime != nil {
+		s.WriteTime(schemas.StartMigrationWorkflowResponse_lastStartTime, *v.LastStartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartMigrationWorkflowResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.StartMigrationWorkflowResponse_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *StartWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMigrationWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMigrationWorkflowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartMigrationWorkflowResponse_arn, v.Arn)
+		case schemas.StartMigrationWorkflowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartMigrationWorkflowResponse_id, v.Id)
+		case schemas.StartMigrationWorkflowResponse_lastStartTime:
+			v.LastStartTime = new(time.Time)
+			return d.ReadTime(schemas.StartMigrationWorkflowResponse_lastStartTime, v.LastStartTime)
+		case schemas.StartMigrationWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartMigrationWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MigrationWorkflowStatusEnum(ev)
+			return nil
+		case schemas.StartMigrationWorkflowResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.StartMigrationWorkflowResponse_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflow, schemas.StartMigrationWorkflowRequest, schemas.StartMigrationWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflow, schemas.StartMigrationWorkflowRequest, schemas.StartMigrationWorkflowResponse), output: &StartWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

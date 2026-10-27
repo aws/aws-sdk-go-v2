@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,19 @@ type BatchDeleteThreatModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteThreatModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteThreatModelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteThreatModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchDeleteThreatModelsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeThreatModelIdList(s, schemas.BatchDeleteThreatModelsInput_threatModelIds, v.ThreatModelIds)
+}
+
 // Output for the BatchDeleteThreatModels operation.
 type BatchDeleteThreatModelsOutput struct {
 
@@ -57,13 +72,32 @@ type BatchDeleteThreatModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteThreatModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteThreatModelsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteThreatModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThreatModelIdList(s, schemas.BatchDeleteThreatModelsOutput_deleted, v.Deleted)
+	serializeDeleteThreatModelFailureList(s, schemas.BatchDeleteThreatModelsOutput_failed, v.Failed)
+}
+func (v *BatchDeleteThreatModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteThreatModelsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteThreatModelsOutput_deleted:
+			return deserializeThreatModelIdList(d, schemas.BatchDeleteThreatModelsOutput_deleted, &v.Deleted)
+		case schemas.BatchDeleteThreatModelsOutput_failed:
+			return deserializeDeleteThreatModelFailureList(d, schemas.BatchDeleteThreatModelsOutput_failed, &v.Failed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteThreatModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteThreatModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteThreatModels, schemas.BatchDeleteThreatModelsInput, schemas.BatchDeleteThreatModelsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteThreatModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteThreatModels, schemas.BatchDeleteThreatModelsInput, schemas.BatchDeleteThreatModelsOutput), output: &BatchDeleteThreatModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

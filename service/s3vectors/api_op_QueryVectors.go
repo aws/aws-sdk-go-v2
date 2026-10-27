@@ -6,7 +6,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/document"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -103,6 +106,43 @@ type QueryVectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryVectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryVectorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteDocument(schemas.QueryVectorsInput_filter, &smithydocument.Opaque{Value: v.Filter})
+	}
+	if v.IndexArn != nil {
+		s.WriteString(schemas.QueryVectorsInput_indexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.QueryVectorsInput_indexName, *v.IndexName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryVectorsInput_nextToken, *v.NextToken)
+	}
+	if v.QueryMode != "" {
+		s.WriteString(schemas.QueryVectorsInput_queryMode, string(v.QueryMode))
+	}
+	serializeVectorData(s, schemas.QueryVectorsInput_queryVector, v.QueryVector)
+	if v.ReturnDistance != false {
+		s.WriteBool(schemas.QueryVectorsInput_returnDistance, v.ReturnDistance)
+	}
+	if v.ReturnMetadata != false {
+		s.WriteBool(schemas.QueryVectorsInput_returnMetadata, v.ReturnMetadata)
+	}
+	if v.TopK != nil {
+		s.WriteInt32(schemas.QueryVectorsInput_topK, *v.TopK)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.QueryVectorsInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type QueryVectorsOutput struct {
 
 	// The distance metric that was used for the similarity search calculation. This
@@ -127,13 +167,45 @@ type QueryVectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryVectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryVectorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DistanceMetric != "" {
+		s.WriteString(schemas.QueryVectorsOutput_distanceMetric, string(v.DistanceMetric))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryVectorsOutput_nextToken, *v.NextToken)
+	}
+	serializeQueryVectorsOutputList(s, schemas.QueryVectorsOutput_vectors, v.Vectors)
+}
+func (v *QueryVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryVectorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryVectorsOutput_distanceMetric:
+			var ev string
+			if err := d.ReadString(schemas.QueryVectorsOutput_distanceMetric, &ev); err != nil {
+				return err
+			}
+			v.DistanceMetric = types.DistanceMetric(ev)
+			return nil
+		case schemas.QueryVectorsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.QueryVectorsOutput_nextToken, v.NextToken)
+		case schemas.QueryVectorsOutput_vectors:
+			return deserializeQueryVectorsOutputList(d, schemas.QueryVectorsOutput_vectors, &v.Vectors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryVectors, schemas.QueryVectorsInput, schemas.QueryVectorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpQueryVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryVectors, schemas.QueryVectorsInput, schemas.QueryVectorsOutput), output: &QueryVectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

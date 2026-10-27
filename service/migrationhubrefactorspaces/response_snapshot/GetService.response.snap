@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","CreatedByAccountId":"__CreatedByAccountId__","CreatedTime":946684800,"Description":"__Description__","EndpointType":"LAMBDA","EnvironmentId":"__EnvironmentId__","Error":{"AccountId":"__AccountId__","AdditionalDetails":{"key0":"__Value__"},"Code":"INVALID_RESOURCE_STATE","Message":"__Message__","ResourceIdentifier":"__ResourceIdentifier__","ResourceType":"ENVIRONMENT"},"LambdaEndpoint":{"Arn":"__Arn__"},"LastUpdatedTime":946684800,"Name":"__Name__","OwnerAccountId":"__OwnerAccountId__","ServiceId":"__ServiceId__","State":"CREATING","Tags":{"key0":"__Value__"},"UrlEndpoint":{"HealthUrl":"__HealthUrl__","Url":"__Url__"},"VpcId":"__VpcId__"}

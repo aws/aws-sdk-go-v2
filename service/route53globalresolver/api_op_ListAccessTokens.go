@@ -5,7 +5,9 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,25 @@ type ListAccessTokensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessTokensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessTokensInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsViewId != nil {
+		s.WriteString(schemas.ListAccessTokensInput_dnsViewId, *v.DnsViewId)
+	}
+	serializeFilters(s, schemas.ListAccessTokensInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccessTokensInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessTokensInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAccessTokensOutput struct {
 
 	// List of the tokens.
@@ -67,13 +88,35 @@ type ListAccessTokensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccessTokensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccessTokensOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccessTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessTokens(s, schemas.ListAccessTokensOutput_accessTokens, v.AccessTokens)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccessTokensOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAccessTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccessTokensOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccessTokensOutput_accessTokens:
+			return deserializeAccessTokens(d, schemas.ListAccessTokensOutput_accessTokens, &v.AccessTokens)
+		case schemas.ListAccessTokensOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccessTokensOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccessTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccessTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessTokens, schemas.ListAccessTokensInput, schemas.ListAccessTokensOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccessTokens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccessTokens, schemas.ListAccessTokensInput, schemas.ListAccessTokensOutput), output: &ListAccessTokensOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

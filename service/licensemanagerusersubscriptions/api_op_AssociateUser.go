@@ -4,7 +4,9 @@ package licensemanagerusersubscriptions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,26 @@ type AssociateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.AssociateUserRequest_Domain, *v.Domain)
+	}
+	serializeIdentityProvider(s, schemas.AssociateUserRequest_IdentityProvider, v.IdentityProvider)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateUserRequest_InstanceId, *v.InstanceId)
+	}
+	serializeTags(s, schemas.AssociateUserRequest_Tags, v.Tags)
+	if v.Username != nil {
+		s.WriteString(schemas.AssociateUserRequest_Username, *v.Username)
+	}
+}
+
 type AssociateUserOutput struct {
 
 	// Metadata that describes the associate user operation.
@@ -71,13 +93,34 @@ type AssociateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceUserSummary != nil {
+		s.WriteStruct(schemas.AssociateUserResponse_InstanceUserSummary)
+		v.InstanceUserSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateUserResponse_InstanceUserSummary:
+			v.InstanceUserSummary = &types.InstanceUserSummary{}
+			return v.InstanceUserSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUser, schemas.AssociateUserRequest, schemas.AssociateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUser, schemas.AssociateUserRequest, schemas.AssociateUserResponse), output: &AssociateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

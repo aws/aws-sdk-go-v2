@@ -4,6 +4,8 @@ package supportapp
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -30,6 +32,22 @@ type DeleteAccountAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccountAliasInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountAliasRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DeleteAccountAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -37,13 +55,26 @@ type DeleteAccountAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountAliasResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAccountAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountAliasResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAccountAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountAlias, schemas.DeleteAccountAliasRequest, schemas.DeleteAccountAliasResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAccountAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountAlias, schemas.DeleteAccountAliasRequest, schemas.DeleteAccountAliasResult), output: &DeleteAccountAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetIntegrationInput struct {
 	IntegrationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.GetIntegrationInput_integrationId, *v.IntegrationId)
+	}
 }
 
 type GetIntegrationOutput struct {
@@ -85,13 +99,94 @@ type GetIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetIntegrationOutput_displayName, *v.DisplayName)
+	}
+	if v.InstallationId != nil {
+		s.WriteString(schemas.GetIntegrationOutput_installationId, *v.InstallationId)
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.GetIntegrationOutput_integrationId, *v.IntegrationId)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.GetIntegrationOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.PrivateConnectionName != nil {
+		s.WriteString(schemas.GetIntegrationOutput_privateConnectionName, *v.PrivateConnectionName)
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.GetIntegrationOutput_provider, string(v.Provider))
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.GetIntegrationOutput_providerType, string(v.ProviderType))
+	}
+	if v.SiteUrl != nil {
+		s.WriteString(schemas.GetIntegrationOutput_siteUrl, *v.SiteUrl)
+	}
+	if v.TargetUrl != nil {
+		s.WriteString(schemas.GetIntegrationOutput_targetUrl, *v.TargetUrl)
+	}
+	if v.WebhookUrl != nil {
+		s.WriteString(schemas.GetIntegrationOutput_webhookUrl, *v.WebhookUrl)
+	}
+}
+func (v *GetIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntegrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntegrationOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_displayName, v.DisplayName)
+		case schemas.GetIntegrationOutput_installationId:
+			v.InstallationId = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_installationId, v.InstallationId)
+		case schemas.GetIntegrationOutput_integrationId:
+			v.IntegrationId = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_integrationId, v.IntegrationId)
+		case schemas.GetIntegrationOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.GetIntegrationOutput_privateConnectionName:
+			v.PrivateConnectionName = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_privateConnectionName, v.PrivateConnectionName)
+		case schemas.GetIntegrationOutput_provider:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationOutput_provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = types.Provider(ev)
+			return nil
+		case schemas.GetIntegrationOutput_providerType:
+			var ev string
+			if err := d.ReadString(schemas.GetIntegrationOutput_providerType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = types.ProviderType(ev)
+			return nil
+		case schemas.GetIntegrationOutput_siteUrl:
+			v.SiteUrl = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_siteUrl, v.SiteUrl)
+		case schemas.GetIntegrationOutput_targetUrl:
+			v.TargetUrl = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_targetUrl, v.TargetUrl)
+		case schemas.GetIntegrationOutput_webhookUrl:
+			v.WebhookUrl = new(string)
+			return d.ReadString(schemas.GetIntegrationOutput_webhookUrl, v.WebhookUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationInput, schemas.GetIntegrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationInput, schemas.GetIntegrationOutput), output: &GetIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package qapps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,30 @@ type CreateQAppInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateQAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppDefinition != nil {
+		s.WriteStruct(schemas.CreateQAppInput_appDefinition)
+		v.AppDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQAppInput_description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateQAppInput_instanceId, *v.InstanceId)
+	}
+	serializeTagMap(s, schemas.CreateQAppInput_tags, v.Tags)
+	if v.Title != nil {
+		s.WriteString(schemas.CreateQAppInput_title, *v.Title)
+	}
 }
 
 type CreateQAppOutput struct {
@@ -117,13 +143,99 @@ type CreateQAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQAppOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.CreateQAppOutput_appArn, *v.AppArn)
+	}
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateQAppOutput_appId, *v.AppId)
+	}
+	if v.AppVersion != nil {
+		s.WriteInt32(schemas.CreateQAppOutput_appVersion, *v.AppVersion)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateQAppOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.CreateQAppOutput_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQAppOutput_description, *v.Description)
+	}
+	if v.InitialPrompt != nil {
+		s.WriteString(schemas.CreateQAppOutput_initialPrompt, *v.InitialPrompt)
+	}
+	serializeAppRequiredCapabilities(s, schemas.CreateQAppOutput_requiredCapabilities, v.RequiredCapabilities)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateQAppOutput_status, string(v.Status))
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateQAppOutput_title, *v.Title)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateQAppOutput_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.CreateQAppOutput_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *CreateQAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQAppOutput_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_appArn, v.AppArn)
+		case schemas.CreateQAppOutput_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_appId, v.AppId)
+		case schemas.CreateQAppOutput_appVersion:
+			v.AppVersion = new(int32)
+			return d.ReadInt32(schemas.CreateQAppOutput_appVersion, v.AppVersion)
+		case schemas.CreateQAppOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateQAppOutput_createdAt, v.CreatedAt)
+		case schemas.CreateQAppOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_createdBy, v.CreatedBy)
+		case schemas.CreateQAppOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_description, v.Description)
+		case schemas.CreateQAppOutput_initialPrompt:
+			v.InitialPrompt = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_initialPrompt, v.InitialPrompt)
+		case schemas.CreateQAppOutput_requiredCapabilities:
+			return deserializeAppRequiredCapabilities(d, schemas.CreateQAppOutput_requiredCapabilities, &v.RequiredCapabilities)
+		case schemas.CreateQAppOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateQAppOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AppStatus(ev)
+			return nil
+		case schemas.CreateQAppOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_title, v.Title)
+		case schemas.CreateQAppOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateQAppOutput_updatedAt, v.UpdatedAt)
+		case schemas.CreateQAppOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.CreateQAppOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQApp, schemas.CreateQAppInput, schemas.CreateQAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQApp, schemas.CreateQAppInput, schemas.CreateQAppOutput), output: &CreateQAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

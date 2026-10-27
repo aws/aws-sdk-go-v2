@@ -4,6 +4,8 @@ package securityir
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,24 @@ type UpdateCaseCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCaseCommentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCaseCommentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCaseCommentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.UpdateCaseCommentRequest_body, *v.Body)
+	}
+	if v.CaseId != nil {
+		s.WriteString(schemas.UpdateCaseCommentRequest_caseId, *v.CaseId)
+	}
+	if v.CommentId != nil {
+		s.WriteString(schemas.UpdateCaseCommentRequest_commentId, *v.CommentId)
+	}
+}
+
 type UpdateCaseCommentOutput struct {
 
 	// Response element for UpdateCaseComment providing the updated comment ID.
@@ -61,13 +81,38 @@ type UpdateCaseCommentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCaseCommentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCaseCommentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCaseCommentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.UpdateCaseCommentResponse_body, *v.Body)
+	}
+	if v.CommentId != nil {
+		s.WriteString(schemas.UpdateCaseCommentResponse_commentId, *v.CommentId)
+	}
+}
+func (v *UpdateCaseCommentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCaseCommentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCaseCommentResponse_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.UpdateCaseCommentResponse_body, v.Body)
+		case schemas.UpdateCaseCommentResponse_commentId:
+			v.CommentId = new(string)
+			return d.ReadString(schemas.UpdateCaseCommentResponse_commentId, v.CommentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCaseCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCaseComment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCaseComment, schemas.UpdateCaseCommentRequest, schemas.UpdateCaseCommentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCaseComment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCaseComment, schemas.UpdateCaseCommentRequest, schemas.UpdateCaseCommentResponse), output: &UpdateCaseCommentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

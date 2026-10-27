@@ -4,7 +4,9 @@ package medicalimaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type DeleteDatastoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDatastoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDatastoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDatastoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DeleteDatastoreRequest_datastoreId, *v.DatastoreId)
+	}
+}
+
 type DeleteDatastoreOutput struct {
 
 	// The data store identifier.
@@ -55,13 +69,42 @@ type DeleteDatastoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDatastoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDatastoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDatastoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DeleteDatastoreResponse_datastoreId, *v.DatastoreId)
+	}
+	if v.DatastoreStatus != "" {
+		s.WriteString(schemas.DeleteDatastoreResponse_datastoreStatus, string(v.DatastoreStatus))
+	}
+}
+func (v *DeleteDatastoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDatastoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDatastoreResponse_datastoreId:
+			v.DatastoreId = new(string)
+			return d.ReadString(schemas.DeleteDatastoreResponse_datastoreId, v.DatastoreId)
+		case schemas.DeleteDatastoreResponse_datastoreStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteDatastoreResponse_datastoreStatus, &ev); err != nil {
+				return err
+			}
+			v.DatastoreStatus = types.DatastoreStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDatastore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatastore, schemas.DeleteDatastoreRequest, schemas.DeleteDatastoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDatastore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDatastore, schemas.DeleteDatastoreRequest, schemas.DeleteDatastoreResponse), output: &DeleteDatastoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

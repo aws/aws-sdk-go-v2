@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -46,6 +48,27 @@ type GetTableInput struct {
 	TableBucketARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetTableRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetTableRequest_namespace, *v.Namespace)
+	}
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTableRequest_tableArn, *v.TableArn)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableRequest_tableBucketARN, *v.TableBucketARN)
+	}
 }
 
 type GetTableOutput struct {
@@ -132,13 +155,135 @@ type GetTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTableResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetTableResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetTableResponse_format, string(v.Format))
+	}
+	if v.ManagedByService != nil {
+		s.WriteString(schemas.GetTableResponse_managedByService, *v.ManagedByService)
+	}
+	if v.ManagedTableInformation != nil {
+		s.WriteStruct(schemas.GetTableResponse_managedTableInformation)
+		v.ManagedTableInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataLocation != nil {
+		s.WriteString(schemas.GetTableResponse_metadataLocation, *v.MetadataLocation)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetTableResponse_modifiedAt, *v.ModifiedAt)
+	}
+	if v.ModifiedBy != nil {
+		s.WriteString(schemas.GetTableResponse_modifiedBy, *v.ModifiedBy)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTableResponse_name, *v.Name)
+	}
+	serializeNamespaceList(s, schemas.GetTableResponse_namespace, v.Namespace)
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.GetTableResponse_namespaceId, *v.NamespaceId)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.GetTableResponse_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.TableARN != nil {
+		s.WriteString(schemas.GetTableResponse_tableARN, *v.TableARN)
+	}
+	if v.TableBucketId != nil {
+		s.WriteString(schemas.GetTableResponse_tableBucketId, *v.TableBucketId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetTableResponse_type, string(v.Type))
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.GetTableResponse_versionToken, *v.VersionToken)
+	}
+	if v.WarehouseLocation != nil {
+		s.WriteString(schemas.GetTableResponse_warehouseLocation, *v.WarehouseLocation)
+	}
+}
+func (v *GetTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTableResponse_createdAt, v.CreatedAt)
+		case schemas.GetTableResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetTableResponse_createdBy, v.CreatedBy)
+		case schemas.GetTableResponse_format:
+			var ev string
+			if err := d.ReadString(schemas.GetTableResponse_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.OpenTableFormat(ev)
+			return nil
+		case schemas.GetTableResponse_managedByService:
+			v.ManagedByService = new(string)
+			return d.ReadString(schemas.GetTableResponse_managedByService, v.ManagedByService)
+		case schemas.GetTableResponse_managedTableInformation:
+			v.ManagedTableInformation = &types.ManagedTableInformation{}
+			return v.ManagedTableInformation.Deserialize(d)
+		case schemas.GetTableResponse_metadataLocation:
+			v.MetadataLocation = new(string)
+			return d.ReadString(schemas.GetTableResponse_metadataLocation, v.MetadataLocation)
+		case schemas.GetTableResponse_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTableResponse_modifiedAt, v.ModifiedAt)
+		case schemas.GetTableResponse_modifiedBy:
+			v.ModifiedBy = new(string)
+			return d.ReadString(schemas.GetTableResponse_modifiedBy, v.ModifiedBy)
+		case schemas.GetTableResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTableResponse_name, v.Name)
+		case schemas.GetTableResponse_namespace:
+			return deserializeNamespaceList(d, schemas.GetTableResponse_namespace, &v.Namespace)
+		case schemas.GetTableResponse_namespaceId:
+			v.NamespaceId = new(string)
+			return d.ReadString(schemas.GetTableResponse_namespaceId, v.NamespaceId)
+		case schemas.GetTableResponse_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.GetTableResponse_ownerAccountId, v.OwnerAccountId)
+		case schemas.GetTableResponse_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.GetTableResponse_tableARN, v.TableARN)
+		case schemas.GetTableResponse_tableBucketId:
+			v.TableBucketId = new(string)
+			return d.ReadString(schemas.GetTableResponse_tableBucketId, v.TableBucketId)
+		case schemas.GetTableResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetTableResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TableType(ev)
+			return nil
+		case schemas.GetTableResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.GetTableResponse_versionToken, v.VersionToken)
+		case schemas.GetTableResponse_warehouseLocation:
+			v.WarehouseLocation = new(string)
+			return d.ReadString(schemas.GetTableResponse_warehouseLocation, v.WarehouseLocation)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableRequest, schemas.GetTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableRequest, schemas.GetTableResponse), output: &GetTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

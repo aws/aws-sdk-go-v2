@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Groups":[{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__"},{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__"}],"NextToken":"__NextToken__"}

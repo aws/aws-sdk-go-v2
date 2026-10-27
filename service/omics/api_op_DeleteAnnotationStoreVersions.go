@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,22 @@ type DeleteAnnotationStoreVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnnotationStoreVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnnotationStoreVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnnotationStoreVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteAnnotationStoreVersionsRequest_force, v.Force)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteAnnotationStoreVersionsRequest_name, *v.Name)
+	}
+	serializeVersionList(s, schemas.DeleteAnnotationStoreVersionsRequest_versions, v.Versions)
+}
+
 type DeleteAnnotationStoreVersionsOutput struct {
 
 	//  Any errors that occur when attempting to delete an annotation store version.
@@ -56,13 +74,29 @@ type DeleteAnnotationStoreVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnnotationStoreVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnnotationStoreVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnnotationStoreVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVersionDeleteErrorList(s, schemas.DeleteAnnotationStoreVersionsResponse_errors, v.Errors)
+}
+func (v *DeleteAnnotationStoreVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnnotationStoreVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAnnotationStoreVersionsResponse_errors:
+			return deserializeVersionDeleteErrorList(d, schemas.DeleteAnnotationStoreVersionsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnnotationStoreVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAnnotationStoreVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnnotationStoreVersions, schemas.DeleteAnnotationStoreVersionsRequest, schemas.DeleteAnnotationStoreVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAnnotationStoreVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnnotationStoreVersions, schemas.DeleteAnnotationStoreVersionsRequest, schemas.DeleteAnnotationStoreVersionsResponse), output: &DeleteAnnotationStoreVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

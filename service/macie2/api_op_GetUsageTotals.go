@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type GetUsageTotalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageTotalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageTotalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageTotalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeRange != nil {
+		s.WriteString(schemas.GetUsageTotalsRequest_timeRange, *v.TimeRange)
+	}
+}
+
 type GetUsageTotalsOutput struct {
 
 	// The inclusive time period that the usage data applies to. Possible values are:
@@ -52,13 +66,39 @@ type GetUsageTotalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageTotalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageTotalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageTotalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeRange != "" {
+		s.WriteString(schemas.GetUsageTotalsResponse_timeRange, string(v.TimeRange))
+	}
+	serialize__listOfUsageTotal(s, schemas.GetUsageTotalsResponse_usageTotals, v.UsageTotals)
+}
+func (v *GetUsageTotalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageTotalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageTotalsResponse_timeRange:
+			var ev string
+			if err := d.ReadString(schemas.GetUsageTotalsResponse_timeRange, &ev); err != nil {
+				return err
+			}
+			v.TimeRange = types.TimeRange(ev)
+			return nil
+		case schemas.GetUsageTotalsResponse_usageTotals:
+			return deserialize__listOfUsageTotal(d, schemas.GetUsageTotalsResponse_usageTotals, &v.UsageTotals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageTotalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsageTotals{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageTotals, schemas.GetUsageTotalsRequest, schemas.GetUsageTotalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsageTotals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageTotals, schemas.GetUsageTotalsRequest, schemas.GetUsageTotalsResponse), output: &GetUsageTotalsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

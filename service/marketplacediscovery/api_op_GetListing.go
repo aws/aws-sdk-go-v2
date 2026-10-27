@@ -4,7 +4,9 @@ package marketplacediscovery
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type GetListingInput struct {
 	Locale *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetListingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListingId != nil {
+		s.WriteString(schemas.GetListingInput_listingId, *v.ListingId)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.GetListingInput_locale, *v.Locale)
+	}
 }
 
 type GetListingOutput struct {
@@ -162,13 +179,123 @@ type GetListingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetListingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListingAssociatedEntityList(s, schemas.GetListingOutput_associatedEntities, v.AssociatedEntities)
+	serializeListingBadgeList(s, schemas.GetListingOutput_badges, v.Badges)
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetListingOutput_catalog, *v.Catalog)
+	}
+	serializeCategoryList(s, schemas.GetListingOutput_categories, v.Categories)
+	serializeFulfillmentOptionSummaryList(s, schemas.GetListingOutput_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
+	serializeHighlightList(s, schemas.GetListingOutput_highlights, v.Highlights)
+	if v.IntegrationGuide != nil {
+		s.WriteString(schemas.GetListingOutput_integrationGuide, *v.IntegrationGuide)
+	}
+	if v.ListingId != nil {
+		s.WriteString(schemas.GetListingOutput_listingId, *v.ListingId)
+	}
+	if v.ListingName != nil {
+		s.WriteString(schemas.GetListingOutput_listingName, *v.ListingName)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.GetListingOutput_locale, *v.Locale)
+	}
+	if v.LogoThumbnailUrl != nil {
+		s.WriteString(schemas.GetListingOutput_logoThumbnailUrl, *v.LogoThumbnailUrl)
+	}
+	if v.LongDescription != nil {
+		s.WriteString(schemas.GetListingOutput_longDescription, *v.LongDescription)
+	}
+	serializePricingModelList(s, schemas.GetListingOutput_pricingModels, v.PricingModels)
+	serializePricingUnitList(s, schemas.GetListingOutput_pricingUnits, v.PricingUnits)
+	serializePromotionalMediaList(s, schemas.GetListingOutput_promotionalMedia, v.PromotionalMedia)
+	if v.Publisher != nil {
+		s.WriteStruct(schemas.GetListingOutput_publisher)
+		v.Publisher.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceList(s, schemas.GetListingOutput_resources, v.Resources)
+	if v.ReviewSummary != nil {
+		s.WriteStruct(schemas.GetListingOutput_reviewSummary)
+		v.ReviewSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSellerEngagementList(s, schemas.GetListingOutput_sellerEngagements, v.SellerEngagements)
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.GetListingOutput_shortDescription, *v.ShortDescription)
+	}
+	serializeUseCaseList(s, schemas.GetListingOutput_useCases, v.UseCases)
+}
+func (v *GetListingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetListingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetListingOutput_associatedEntities:
+			return deserializeListingAssociatedEntityList(d, schemas.GetListingOutput_associatedEntities, &v.AssociatedEntities)
+		case schemas.GetListingOutput_badges:
+			return deserializeListingBadgeList(d, schemas.GetListingOutput_badges, &v.Badges)
+		case schemas.GetListingOutput_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetListingOutput_catalog, v.Catalog)
+		case schemas.GetListingOutput_categories:
+			return deserializeCategoryList(d, schemas.GetListingOutput_categories, &v.Categories)
+		case schemas.GetListingOutput_fulfillmentOptionSummaries:
+			return deserializeFulfillmentOptionSummaryList(d, schemas.GetListingOutput_fulfillmentOptionSummaries, &v.FulfillmentOptionSummaries)
+		case schemas.GetListingOutput_highlights:
+			return deserializeHighlightList(d, schemas.GetListingOutput_highlights, &v.Highlights)
+		case schemas.GetListingOutput_integrationGuide:
+			v.IntegrationGuide = new(string)
+			return d.ReadString(schemas.GetListingOutput_integrationGuide, v.IntegrationGuide)
+		case schemas.GetListingOutput_listingId:
+			v.ListingId = new(string)
+			return d.ReadString(schemas.GetListingOutput_listingId, v.ListingId)
+		case schemas.GetListingOutput_listingName:
+			v.ListingName = new(string)
+			return d.ReadString(schemas.GetListingOutput_listingName, v.ListingName)
+		case schemas.GetListingOutput_locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.GetListingOutput_locale, v.Locale)
+		case schemas.GetListingOutput_logoThumbnailUrl:
+			v.LogoThumbnailUrl = new(string)
+			return d.ReadString(schemas.GetListingOutput_logoThumbnailUrl, v.LogoThumbnailUrl)
+		case schemas.GetListingOutput_longDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.GetListingOutput_longDescription, v.LongDescription)
+		case schemas.GetListingOutput_pricingModels:
+			return deserializePricingModelList(d, schemas.GetListingOutput_pricingModels, &v.PricingModels)
+		case schemas.GetListingOutput_pricingUnits:
+			return deserializePricingUnitList(d, schemas.GetListingOutput_pricingUnits, &v.PricingUnits)
+		case schemas.GetListingOutput_promotionalMedia:
+			return deserializePromotionalMediaList(d, schemas.GetListingOutput_promotionalMedia, &v.PromotionalMedia)
+		case schemas.GetListingOutput_publisher:
+			v.Publisher = &types.SellerInformation{}
+			return v.Publisher.Deserialize(d)
+		case schemas.GetListingOutput_resources:
+			return deserializeResourceList(d, schemas.GetListingOutput_resources, &v.Resources)
+		case schemas.GetListingOutput_reviewSummary:
+			v.ReviewSummary = &types.ReviewSummary{}
+			return v.ReviewSummary.Deserialize(d)
+		case schemas.GetListingOutput_sellerEngagements:
+			return deserializeSellerEngagementList(d, schemas.GetListingOutput_sellerEngagements, &v.SellerEngagements)
+		case schemas.GetListingOutput_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.GetListingOutput_shortDescription, v.ShortDescription)
+		case schemas.GetListingOutput_useCases:
+			return deserializeUseCaseList(d, schemas.GetListingOutput_useCases, &v.UseCases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetListing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListing, schemas.GetListingInput, schemas.GetListingOutput), output: &GetListingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

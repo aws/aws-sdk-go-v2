@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"contracts":[{"contractIdentifier":{"contractAddress":"__ContractAddress__","network":"ETHEREUM_MAINNET"},"deployerAddress":"__DeployerAddress__","tokenStandard":"ERC20"},{"contractIdentifier":{"contractAddress":"__ContractAddress__","network":"ETHEREUM_MAINNET"},"deployerAddress":"__DeployerAddress__","tokenStandard":"ERC20"}],"nextToken":"__NextToken__"}

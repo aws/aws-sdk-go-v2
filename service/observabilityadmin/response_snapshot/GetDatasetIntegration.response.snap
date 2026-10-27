@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreatedAt":946684800,"RoleArn":"__RoleArn__","UpdatedAt":946684800}

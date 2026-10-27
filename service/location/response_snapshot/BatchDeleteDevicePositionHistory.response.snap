@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Errors":[{"DeviceId":"__DeviceId__","Error":{"Code":"AccessDeniedError","Message":"__Message__"}},{"DeviceId":"__DeviceId__","Error":{"Code":"AccessDeniedError","Message":"__Message__"}}]}

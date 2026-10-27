@@ -5,6 +5,8 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,27 @@ type UpdateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_clientToken, *v.ClientToken)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_id, *v.Id)
+	}
+	if v.TemplateDescription != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_templateDescription, *v.TemplateDescription)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_templateName, *v.TemplateName)
+	}
+}
+
 type UpdateTemplateOutput struct {
 
 	// The tags added to the migration workflow template.
@@ -66,13 +89,41 @@ type UpdateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.UpdateTemplateResponse_tags, v.Tags)
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.UpdateTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplateResponse_templateId, *v.TemplateId)
+	}
+}
+func (v *UpdateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplateResponse_tags:
+			return deserializeStringMap(d, schemas.UpdateTemplateResponse_tags, &v.Tags)
+		case schemas.UpdateTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.UpdateTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.UpdateTemplateResponse_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.UpdateTemplateResponse_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, schemas.UpdateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, schemas.UpdateTemplateResponse), output: &UpdateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

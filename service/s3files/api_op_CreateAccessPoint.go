@@ -5,7 +5,9 @@ package s3files
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,32 @@ type CreateAccessPointInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAccessPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessPointRequest_clientToken, *v.ClientToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.CreateAccessPointRequest_fileSystemId, *v.FileSystemId)
+	}
+	if v.PosixUser != nil {
+		s.WriteStruct(schemas.CreateAccessPointRequest_posixUser)
+		v.PosixUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootDirectory != nil {
+		s.WriteStruct(schemas.CreateAccessPointRequest_rootDirectory)
+		v.RootDirectory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAccessPointRequest_tags, v.Tags)
 }
 
 type CreateAccessPointOutput struct {
@@ -103,13 +131,91 @@ type CreateAccessPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointArn != nil {
+		s.WriteString(schemas.CreateAccessPointResponse_accessPointArn, *v.AccessPointArn)
+	}
+	if v.AccessPointId != nil {
+		s.WriteString(schemas.CreateAccessPointResponse_accessPointId, *v.AccessPointId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessPointResponse_clientToken, *v.ClientToken)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.CreateAccessPointResponse_fileSystemId, *v.FileSystemId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAccessPointResponse_name, *v.Name)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.CreateAccessPointResponse_ownerId, *v.OwnerId)
+	}
+	if v.PosixUser != nil {
+		s.WriteStruct(schemas.CreateAccessPointResponse_posixUser)
+		v.PosixUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RootDirectory != nil {
+		s.WriteStruct(schemas.CreateAccessPointResponse_rootDirectory)
+		v.RootDirectory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateAccessPointResponse_status, string(v.Status))
+	}
+	serializeTagList(s, schemas.CreateAccessPointResponse_tags, v.Tags)
+}
+func (v *CreateAccessPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPointResponse_accessPointArn:
+			v.AccessPointArn = new(string)
+			return d.ReadString(schemas.CreateAccessPointResponse_accessPointArn, v.AccessPointArn)
+		case schemas.CreateAccessPointResponse_accessPointId:
+			v.AccessPointId = new(string)
+			return d.ReadString(schemas.CreateAccessPointResponse_accessPointId, v.AccessPointId)
+		case schemas.CreateAccessPointResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAccessPointResponse_clientToken, v.ClientToken)
+		case schemas.CreateAccessPointResponse_fileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.CreateAccessPointResponse_fileSystemId, v.FileSystemId)
+		case schemas.CreateAccessPointResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAccessPointResponse_name, v.Name)
+		case schemas.CreateAccessPointResponse_ownerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.CreateAccessPointResponse_ownerId, v.OwnerId)
+		case schemas.CreateAccessPointResponse_posixUser:
+			v.PosixUser = &types.PosixUser{}
+			return v.PosixUser.Deserialize(d)
+		case schemas.CreateAccessPointResponse_rootDirectory:
+			v.RootDirectory = &types.RootDirectory{}
+			return v.RootDirectory.Deserialize(d)
+		case schemas.CreateAccessPointResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateAccessPointResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LifeCycleState(ev)
+			return nil
+		case schemas.CreateAccessPointResponse_tags:
+			return deserializeTagList(d, schemas.CreateAccessPointResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPoint, schemas.CreateAccessPointRequest, schemas.CreateAccessPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPoint, schemas.CreateAccessPointRequest, schemas.CreateAccessPointResponse), output: &CreateAccessPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

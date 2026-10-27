@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type GetWhatsAppFlowPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppFlowPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppFlowPreviewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppFlowPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetWhatsAppFlowPreviewInput_flowId, *v.FlowId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetWhatsAppFlowPreviewInput_id, *v.Id)
+	}
+	if v.Invalidate != nil {
+		s.WriteBool(schemas.GetWhatsAppFlowPreviewInput_invalidate, *v.Invalidate)
+	}
+}
+
 type GetWhatsAppFlowPreviewOutput struct {
 
 	// The unique identifier of the Flow.
@@ -62,13 +82,40 @@ type GetWhatsAppFlowPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppFlowPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppFlowPreviewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppFlowPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetWhatsAppFlowPreviewOutput_flowId, *v.FlowId)
+	}
+	if v.Preview != nil {
+		s.WriteStruct(schemas.GetWhatsAppFlowPreviewOutput_preview)
+		v.Preview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWhatsAppFlowPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWhatsAppFlowPreviewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWhatsAppFlowPreviewOutput_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowPreviewOutput_flowId, v.FlowId)
+		case schemas.GetWhatsAppFlowPreviewOutput_preview:
+			v.Preview = &types.MetaFlowPreviewInfo{}
+			return v.Preview.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWhatsAppFlowPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWhatsAppFlowPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppFlowPreview, schemas.GetWhatsAppFlowPreviewInput, schemas.GetWhatsAppFlowPreviewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWhatsAppFlowPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppFlowPreview, schemas.GetWhatsAppFlowPreviewInput, schemas.GetWhatsAppFlowPreviewOutput), output: &GetWhatsAppFlowPreviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

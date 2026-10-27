@@ -5,7 +5,9 @@ package location
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,6 +58,26 @@ type VerifyDevicePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyDevicePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyDevicePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyDevicePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceState != nil {
+		s.WriteStruct(schemas.VerifyDevicePositionRequest_DeviceState)
+		v.DeviceState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DistanceUnit != "" {
+		s.WriteString(schemas.VerifyDevicePositionRequest_DistanceUnit, string(v.DistanceUnit))
+	}
+	if v.TrackerName != nil {
+		s.WriteString(schemas.VerifyDevicePositionRequest_TrackerName, *v.TrackerName)
+	}
+}
+
 type VerifyDevicePositionOutput struct {
 
 	// The device identifier.
@@ -96,13 +118,62 @@ type VerifyDevicePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyDevicePositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyDevicePositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyDevicePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.VerifyDevicePositionResponse_DeviceId, *v.DeviceId)
+	}
+	if v.DistanceUnit != "" {
+		s.WriteString(schemas.VerifyDevicePositionResponse_DistanceUnit, string(v.DistanceUnit))
+	}
+	if v.InferredState != nil {
+		s.WriteStruct(schemas.VerifyDevicePositionResponse_InferredState)
+		v.InferredState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReceivedTime != nil {
+		s.WriteTime(schemas.VerifyDevicePositionResponse_ReceivedTime, *v.ReceivedTime)
+	}
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.VerifyDevicePositionResponse_SampleTime, *v.SampleTime)
+	}
+}
+func (v *VerifyDevicePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyDevicePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyDevicePositionResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.VerifyDevicePositionResponse_DeviceId, v.DeviceId)
+		case schemas.VerifyDevicePositionResponse_DistanceUnit:
+			var ev string
+			if err := d.ReadString(schemas.VerifyDevicePositionResponse_DistanceUnit, &ev); err != nil {
+				return err
+			}
+			v.DistanceUnit = types.DistanceUnit(ev)
+			return nil
+		case schemas.VerifyDevicePositionResponse_InferredState:
+			v.InferredState = &types.InferredState{}
+			return v.InferredState.Deserialize(d)
+		case schemas.VerifyDevicePositionResponse_ReceivedTime:
+			v.ReceivedTime = new(time.Time)
+			return d.ReadTime(schemas.VerifyDevicePositionResponse_ReceivedTime, v.ReceivedTime)
+		case schemas.VerifyDevicePositionResponse_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.VerifyDevicePositionResponse_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyDevicePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyDevicePosition, schemas.VerifyDevicePositionRequest, schemas.VerifyDevicePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyDevicePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyDevicePosition, schemas.VerifyDevicePositionRequest, schemas.VerifyDevicePositionResponse), output: &VerifyDevicePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

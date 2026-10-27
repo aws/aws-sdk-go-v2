@@ -4,6 +4,8 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -35,6 +37,18 @@ type CreateCrossAccountAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCrossAccountAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCrossAccountAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCrossAccountAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAuthorization != nil {
+		s.WriteString(schemas.CreateCrossAccountAuthorizationRequest_CrossAccountAuthorization, *v.CrossAccountAuthorization)
+	}
+}
+
 type CreateCrossAccountAuthorizationOutput struct {
 
 	// The cross-account authorization.
@@ -46,13 +60,32 @@ type CreateCrossAccountAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCrossAccountAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCrossAccountAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCrossAccountAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAuthorization != nil {
+		s.WriteString(schemas.CreateCrossAccountAuthorizationResponse_CrossAccountAuthorization, *v.CrossAccountAuthorization)
+	}
+}
+func (v *CreateCrossAccountAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCrossAccountAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCrossAccountAuthorizationResponse_CrossAccountAuthorization:
+			v.CrossAccountAuthorization = new(string)
+			return d.ReadString(schemas.CreateCrossAccountAuthorizationResponse_CrossAccountAuthorization, v.CrossAccountAuthorization)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCrossAccountAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCrossAccountAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCrossAccountAuthorization, schemas.CreateCrossAccountAuthorizationRequest, schemas.CreateCrossAccountAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCrossAccountAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCrossAccountAuthorization, schemas.CreateCrossAccountAuthorizationRequest, schemas.CreateCrossAccountAuthorizationResponse), output: &CreateCrossAccountAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

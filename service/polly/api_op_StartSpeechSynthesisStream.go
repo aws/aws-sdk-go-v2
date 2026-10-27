@@ -5,8 +5,9 @@ package polly
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -80,6 +81,31 @@ type StartSpeechSynthesisStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSpeechSynthesisStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeechSynthesisStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != "" {
+		s.WriteString(schemas.StartSpeechSynthesisStreamInput_Engine, string(v.Engine))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartSpeechSynthesisStreamInput_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLexiconNameList(s, schemas.StartSpeechSynthesisStreamInput_LexiconNames, v.LexiconNames)
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.StartSpeechSynthesisStreamInput_OutputFormat, string(v.OutputFormat))
+	}
+	if v.SampleRate != nil {
+		s.WriteString(schemas.StartSpeechSynthesisStreamInput_SampleRate, *v.SampleRate)
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.StartSpeechSynthesisStreamInput_VoiceId, string(v.VoiceId))
+	}
+}
+
 type StartSpeechSynthesisStreamOutput struct {
 	eventStream *StartSpeechSynthesisStreamEventStream
 
@@ -88,6 +114,22 @@ type StartSpeechSynthesisStreamOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartSpeechSynthesisStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSpeechSynthesisStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSpeechSynthesisStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StartSpeechSynthesisStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSpeechSynthesisStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -107,21 +149,19 @@ func (o *StartSpeechSynthesisStreamOutput) GetInitialReply() <-chan StartSpeechS
 }
 
 func (c *Client) addOperationStartSpeechSynthesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSpeechSynthesisStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeechSynthesisStream, schemas.StartSpeechSynthesisStreamInput, schemas.StartSpeechSynthesisStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSpeechSynthesisStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSpeechSynthesisStream, schemas.StartSpeechSynthesisStreamInput, schemas.StartSpeechSynthesisStreamOutput), output: &StartSpeechSynthesisStreamOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamStartSpeechSynthesisStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 
-	if err = addEventStreamStartSpeechSynthesisStreamMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opStartSpeechSynthesisStreamMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,9 +175,6 @@ func (c *Client) addOperationStartSpeechSynthesisStreamMiddlewares(stack *middle
 		return err
 	}
 	if err = addRecordResponseTiming(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

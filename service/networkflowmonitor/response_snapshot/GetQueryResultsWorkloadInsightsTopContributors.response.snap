@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","topContributors":[{"accountId":"__AccountId__","localAz":"__LocalAz__","localRegion":"__LocalRegion__","localSubnetArn":"__LocalSubnetArn__","localSubnetId":"__LocalSubnetId__","localVpcArn":"__LocalVpcArn__","localVpcId":"__LocalVpcId__","remoteIdentifier":"__RemoteIdentifier__","value":1},{"accountId":"__AccountId__","localAz":"__LocalAz__","localRegion":"__LocalRegion__","localSubnetArn":"__LocalSubnetArn__","localSubnetId":"__LocalSubnetId__","localVpcArn":"__LocalVpcArn__","localVpcId":"__LocalVpcId__","remoteIdentifier":"__RemoteIdentifier__","value":1}]}

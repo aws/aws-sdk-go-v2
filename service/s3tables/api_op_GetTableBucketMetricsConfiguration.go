@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetTableBucketMetricsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketMetricsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketMetricsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketMetricsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketMetricsConfigurationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableBucketMetricsConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the table bucket.
@@ -52,13 +66,38 @@ type GetTableBucketMetricsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketMetricsConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketMetricsConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketMetricsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetTableBucketMetricsConfigurationResponse_id, *v.Id)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketMetricsConfigurationResponse_tableBucketARN, *v.TableBucketARN)
+	}
+}
+func (v *GetTableBucketMetricsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableBucketMetricsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableBucketMetricsConfigurationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetTableBucketMetricsConfigurationResponse_id, v.Id)
+		case schemas.GetTableBucketMetricsConfigurationResponse_tableBucketARN:
+			v.TableBucketARN = new(string)
+			return d.ReadString(schemas.GetTableBucketMetricsConfigurationResponse_tableBucketARN, v.TableBucketARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableBucketMetricsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableBucketMetricsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketMetricsConfiguration, schemas.GetTableBucketMetricsConfigurationRequest, schemas.GetTableBucketMetricsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableBucketMetricsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketMetricsConfiguration, schemas.GetTableBucketMetricsConfigurationRequest, schemas.GetTableBucketMetricsConfigurationResponse), output: &GetTableBucketMetricsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

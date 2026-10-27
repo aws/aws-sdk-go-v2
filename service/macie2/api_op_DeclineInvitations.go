@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,16 @@ type DeclineInvitationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeclineInvitationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeclineInvitationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeclineInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.DeclineInvitationsRequest_accountIds, v.AccountIds)
+}
+
 type DeclineInvitationsOutput struct {
 
 	// An array of objects, one for each account whose invitation hasn't been
@@ -49,13 +61,29 @@ type DeclineInvitationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeclineInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeclineInvitationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeclineInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfUnprocessedAccount(s, schemas.DeclineInvitationsResponse_unprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *DeclineInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeclineInvitationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeclineInvitationsResponse_unprocessedAccounts:
+			return deserialize__listOfUnprocessedAccount(d, schemas.DeclineInvitationsResponse_unprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeclineInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeclineInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeclineInvitations, schemas.DeclineInvitationsRequest, schemas.DeclineInvitationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeclineInvitations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeclineInvitations, schemas.DeclineInvitationsRequest, schemas.DeclineInvitationsResponse), output: &DeclineInvitationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package licensemanagerusersubscriptions
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,27 @@ type UpdateIdentityProviderSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityProviderSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentityProviderSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityProviderSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityProvider(s, schemas.UpdateIdentityProviderSettingsRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.UpdateIdentityProviderSettingsRequest_IdentityProviderArn, *v.IdentityProviderArn)
+	}
+	if v.Product != nil {
+		s.WriteString(schemas.UpdateIdentityProviderSettingsRequest_Product, *v.Product)
+	}
+	if v.UpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateIdentityProviderSettingsRequest_UpdateSettings)
+		v.UpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateIdentityProviderSettingsOutput struct {
 
 	// Describes an identity provider.
@@ -68,13 +91,34 @@ type UpdateIdentityProviderSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIdentityProviderSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIdentityProviderSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIdentityProviderSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProviderSummary != nil {
+		s.WriteStruct(schemas.UpdateIdentityProviderSettingsResponse_IdentityProviderSummary)
+		v.IdentityProviderSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateIdentityProviderSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIdentityProviderSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIdentityProviderSettingsResponse_IdentityProviderSummary:
+			v.IdentityProviderSummary = &types.IdentityProviderSummary{}
+			return v.IdentityProviderSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIdentityProviderSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIdentityProviderSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityProviderSettings, schemas.UpdateIdentityProviderSettingsRequest, schemas.UpdateIdentityProviderSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIdentityProviderSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIdentityProviderSettings, schemas.UpdateIdentityProviderSettingsRequest, schemas.UpdateIdentityProviderSettingsResponse), output: &UpdateIdentityProviderSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

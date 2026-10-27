@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -58,6 +60,30 @@ type GetReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.File != "" {
+		s.WriteString(schemas.GetReferenceRequest_file, string(v.File))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetReferenceRequest_id, *v.Id)
+	}
+	if v.PartNumber != nil {
+		s.WriteInt32(schemas.GetReferenceRequest_partNumber, *v.PartNumber)
+	}
+	if v.Range != nil {
+		s.WriteString(schemas.GetReferenceRequest_range, *v.Range)
+	}
+	if v.ReferenceStoreId != nil {
+		s.WriteString(schemas.GetReferenceRequest_referenceStoreId, *v.ReferenceStoreId)
+	}
+}
+
 type GetReferenceOutput struct {
 
 	// The reference file payload.
@@ -69,13 +95,34 @@ type GetReferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetReferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+func (v *GetReferenceOutput) GetPayloadStream() io.Reader { return v.Payload }
+
+var _ smithy.StreamingInput = (*GetReferenceOutput)(nil)
+
+func (v *GetReferenceOutput) SetPayloadStream(r io.ReadCloser) { v.Payload = r }
+
+var _ smithy.StreamingOutput = (*GetReferenceOutput)(nil)
+
 func (c *Client) addOperationGetReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReference, schemas.GetReferenceRequest, schemas.GetReferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReference, schemas.GetReferenceRequest, schemas.GetReferenceResponse), output: &GetReferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

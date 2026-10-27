@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"hpoJob":{"arn":"__Arn__","cloudwatchLogUrl":"__CloudwatchLogUrl__","failureReason":"__FailureReason__","name":"__Name__","outputLocation":"__OutputLocation__","status":"__Status__"},"id":"__Id__","mlModels":[{"arn":"__Arn__","name":"__Name__"},{"arn":"__Arn__","name":"__Name__"}],"modelTransformJob":{"arn":"__Arn__","cloudwatchLogUrl":"__CloudwatchLogUrl__","failureReason":"__FailureReason__","name":"__Name__","outputLocation":"__OutputLocation__","status":"__Status__"},"processingJob":{"arn":"__Arn__","cloudwatchLogUrl":"__CloudwatchLogUrl__","failureReason":"__FailureReason__","name":"__Name__","outputLocation":"__OutputLocation__","status":"__Status__"},"status":"__Status__"}

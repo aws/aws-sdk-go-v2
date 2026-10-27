@@ -4,6 +4,8 @@ package securityir
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CancelMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipId != nil {
+		s.WriteString(schemas.CancelMembershipRequest_membershipId, *v.MembershipId)
+	}
+}
+
 type CancelMembershipOutput struct {
 
 	// The response element providing responses for requests to
@@ -48,13 +62,32 @@ type CancelMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipId != nil {
+		s.WriteString(schemas.CancelMembershipResponse_membershipId, *v.MembershipId)
+	}
+}
+func (v *CancelMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMembershipResponse_membershipId:
+			v.MembershipId = new(string)
+			return d.ReadString(schemas.CancelMembershipResponse_membershipId, v.MembershipId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMembership, schemas.CancelMembershipRequest, schemas.CancelMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMembership, schemas.CancelMembershipRequest, schemas.CancelMembershipResponse), output: &CancelMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

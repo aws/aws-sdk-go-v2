@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"actionIdentifier":"__ActionIdentifier__","description":"__Description__","displayName":"__DisplayName__","instructionExample":"__InstructionExample__"},{"actionIdentifier":"__ActionIdentifier__","description":"__Description__","displayName":"__DisplayName__","instructionExample":"__InstructionExample__"}],"nextToken":"__NextToken__"}

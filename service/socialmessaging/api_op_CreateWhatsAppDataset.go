@@ -4,6 +4,8 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type CreateWhatsAppDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppDatasetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWhatsAppDatasetInput_id, *v.Id)
+	}
+}
+
 type CreateWhatsAppDatasetOutput struct {
 
 	// The Meta-generated dataset ID, a numeric string of 10 to 20 digits.
@@ -47,13 +61,32 @@ type CreateWhatsAppDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppDatasetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.CreateWhatsAppDatasetOutput_datasetId, *v.DatasetId)
+	}
+}
+func (v *CreateWhatsAppDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWhatsAppDatasetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWhatsAppDatasetOutput_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.CreateWhatsAppDatasetOutput_datasetId, v.DatasetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWhatsAppDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWhatsAppDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppDataset, schemas.CreateWhatsAppDatasetInput, schemas.CreateWhatsAppDatasetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWhatsAppDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppDataset, schemas.CreateWhatsAppDatasetInput, schemas.CreateWhatsAppDatasetOutput), output: &CreateWhatsAppDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

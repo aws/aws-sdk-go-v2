@@ -5,7 +5,9 @@ package launchwizard
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListWorkloadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListWorkloadsOutput struct {
 
 	// The token to include in another request to get the next page of items. This
@@ -56,13 +73,35 @@ type ListWorkloadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadsOutput_nextToken, *v.NextToken)
+	}
+	serializeWorkloadDataSummaryList(s, schemas.ListWorkloadsOutput_workloads, v.Workloads)
+}
+func (v *ListWorkloadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadsOutput_nextToken, v.NextToken)
+		case schemas.ListWorkloadsOutput_workloads:
+			return deserializeWorkloadDataSummaryList(d, schemas.ListWorkloadsOutput_workloads, &v.Workloads)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloads{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloads, schemas.ListWorkloadsInput, schemas.ListWorkloadsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkloads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloads, schemas.ListWorkloadsInput, schemas.ListWorkloadsOutput), output: &ListWorkloadsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

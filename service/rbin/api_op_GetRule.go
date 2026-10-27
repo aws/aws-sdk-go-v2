@@ -4,7 +4,9 @@ package rbin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rbin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rbin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetRuleInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetRuleRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetRuleOutput struct {
@@ -96,13 +110,102 @@ type GetRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetRuleResponse_Description, *v.Description)
+	}
+	serializeExcludeResourceTags(s, schemas.GetRuleResponse_ExcludeResourceTags, v.ExcludeResourceTags)
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetRuleResponse_Identifier, *v.Identifier)
+	}
+	if v.LockConfiguration != nil {
+		s.WriteStruct(schemas.GetRuleResponse_LockConfiguration)
+		v.LockConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LockEndTime != nil {
+		s.WriteTime(schemas.GetRuleResponse_LockEndTime, *v.LockEndTime)
+	}
+	if v.LockState != "" {
+		s.WriteString(schemas.GetRuleResponse_LockState, string(v.LockState))
+	}
+	serializeResourceTags(s, schemas.GetRuleResponse_ResourceTags, v.ResourceTags)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetRuleResponse_ResourceType, string(v.ResourceType))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.GetRuleResponse_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleArn != nil {
+		s.WriteString(schemas.GetRuleResponse_RuleArn, *v.RuleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRuleResponse_Status, string(v.Status))
+	}
+}
+func (v *GetRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuleResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRuleResponse_Description, v.Description)
+		case schemas.GetRuleResponse_ExcludeResourceTags:
+			return deserializeExcludeResourceTags(d, schemas.GetRuleResponse_ExcludeResourceTags, &v.ExcludeResourceTags)
+		case schemas.GetRuleResponse_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.GetRuleResponse_Identifier, v.Identifier)
+		case schemas.GetRuleResponse_LockConfiguration:
+			v.LockConfiguration = &types.LockConfiguration{}
+			return v.LockConfiguration.Deserialize(d)
+		case schemas.GetRuleResponse_LockEndTime:
+			v.LockEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetRuleResponse_LockEndTime, v.LockEndTime)
+		case schemas.GetRuleResponse_LockState:
+			var ev string
+			if err := d.ReadString(schemas.GetRuleResponse_LockState, &ev); err != nil {
+				return err
+			}
+			v.LockState = types.LockState(ev)
+			return nil
+		case schemas.GetRuleResponse_ResourceTags:
+			return deserializeResourceTags(d, schemas.GetRuleResponse_ResourceTags, &v.ResourceTags)
+		case schemas.GetRuleResponse_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetRuleResponse_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetRuleResponse_RetentionPeriod:
+			v.RetentionPeriod = &types.RetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.GetRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.GetRuleResponse_RuleArn, v.RuleArn)
+		case schemas.GetRuleResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetRuleResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleRequest, schemas.GetRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRule, schemas.GetRuleRequest, schemas.GetRuleResponse), output: &GetRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

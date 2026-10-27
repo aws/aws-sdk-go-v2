@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"datastoreSummaries":[{"createdAt":946684800,"datastoreArn":"__DatastoreArn__","datastoreId":"__DatastoreId__","datastoreName":"__DatastoreName__","datastoreStatus":"CREATING","updatedAt":946684800},{"createdAt":946684800,"datastoreArn":"__DatastoreArn__","datastoreId":"__DatastoreId__","datastoreName":"__DatastoreName__","datastoreStatus":"CREATING","updatedAt":946684800}],"nextToken":"__NextToken__"}

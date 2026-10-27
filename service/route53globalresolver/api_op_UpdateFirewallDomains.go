@@ -4,7 +4,9 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type UpdateFirewallDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallDomainsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomains(s, schemas.UpdateFirewallDomainsInput_domains, v.Domains)
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.UpdateFirewallDomainsInput_firewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.UpdateFirewallDomainsInput_operation, *v.Operation)
+	}
+}
+
 type UpdateFirewallDomainsOutput struct {
 
 	// The ID of the DNS Firewall domain list.
@@ -74,13 +92,48 @@ type UpdateFirewallDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallDomainsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateFirewallDomainsOutput_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFirewallDomainsOutput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateFirewallDomainsOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateFirewallDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFirewallDomainsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFirewallDomainsOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateFirewallDomainsOutput_id, v.Id)
+		case schemas.UpdateFirewallDomainsOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFirewallDomainsOutput_name, v.Name)
+		case schemas.UpdateFirewallDomainsOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateFirewallDomainsOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFirewallDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallDomains, schemas.UpdateFirewallDomainsInput, schemas.UpdateFirewallDomainsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFirewallDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallDomains, schemas.UpdateFirewallDomainsInput, schemas.UpdateFirewallDomainsOutput), output: &UpdateFirewallDomainsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

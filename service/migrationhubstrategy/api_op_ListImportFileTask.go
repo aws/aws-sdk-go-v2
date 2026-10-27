@@ -5,7 +5,9 @@ package migrationhubstrategy
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,34 @@ type ListImportFileTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFileTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFileTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFileTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportFileTaskRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFileTaskRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportFileTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportFileTaskRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportFileTaskRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListImportFileTaskRequest_maxResults, v.MaxResults)
+		case schemas.ListImportFileTaskRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportFileTaskRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListImportFileTaskOutput struct {
 
 	//  The token you use to retrieve the next set of results, or null if there are no
@@ -54,13 +84,35 @@ type ListImportFileTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFileTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFileTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFileTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFileTaskResponse_nextToken, *v.NextToken)
+	}
+	serializeListImportFileTaskInformation(s, schemas.ListImportFileTaskResponse_taskInfos, v.TaskInfos)
+}
+func (v *ListImportFileTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportFileTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportFileTaskResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportFileTaskResponse_nextToken, v.NextToken)
+		case schemas.ListImportFileTaskResponse_taskInfos:
+			return deserializeListImportFileTaskInformation(d, schemas.ListImportFileTaskResponse_taskInfos, &v.TaskInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportFileTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImportFileTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFileTask, schemas.ListImportFileTaskRequest, schemas.ListImportFileTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImportFileTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFileTask, schemas.ListImportFileTaskRequest, schemas.ListImportFileTaskResponse), output: &ListImportFileTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

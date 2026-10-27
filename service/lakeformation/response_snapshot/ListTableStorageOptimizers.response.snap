@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","StorageOptimizerList":[{"Config":{"key0":"__Value__"},"ErrorMessage":"__ErrorMessage__","LastRunDetails":"__LastRunDetails__","StorageOptimizerType":"COMPACTION","Warnings":"__Warnings__"},{"Config":{"key0":"__Value__"},"ErrorMessage":"__ErrorMessage__","LastRunDetails":"__LastRunDetails__","StorageOptimizerType":"COMPACTION","Warnings":"__Warnings__"}]}

@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type GetDataLakeSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetDataLakeSettingsRequest_CatalogId, *v.CatalogId)
+	}
+}
+
 type GetDataLakeSettingsOutput struct {
 
 	// A structure representing a list of Lake Formation principals designated as data
@@ -48,13 +62,34 @@ type GetDataLakeSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLakeSettings != nil {
+		s.WriteStruct(schemas.GetDataLakeSettingsResponse_DataLakeSettings)
+		v.DataLakeSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDataLakeSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataLakeSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataLakeSettingsResponse_DataLakeSettings:
+			v.DataLakeSettings = &types.DataLakeSettings{}
+			return v.DataLakeSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataLakeSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeSettings, schemas.GetDataLakeSettingsRequest, schemas.GetDataLakeSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeSettings, schemas.GetDataLakeSettingsRequest, schemas.GetDataLakeSettingsResponse), output: &GetDataLakeSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

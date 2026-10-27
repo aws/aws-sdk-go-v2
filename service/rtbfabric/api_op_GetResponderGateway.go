@@ -6,7 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -37,6 +39,18 @@ type GetResponderGatewayInput struct {
 	GatewayId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetResponderGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResponderGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResponderGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GetResponderGatewayRequest_gatewayId, *v.GatewayId)
+	}
 }
 
 type GetResponderGatewayOutput struct {
@@ -133,13 +147,160 @@ type GetResponderGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResponderGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResponderGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResponderGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveLinksCount != nil {
+		s.WriteInt32(schemas.GetResponderGatewayResponse_activeLinksCount, *v.ActiveLinksCount)
+	}
+	if v.ClientRoutingPolicy != "" {
+		s.WriteString(schemas.GetResponderGatewayResponse_clientRoutingPolicy, string(v.ClientRoutingPolicy))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetResponderGatewayResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetResponderGatewayResponse_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetResponderGatewayResponse_domainName, *v.DomainName)
+	}
+	if v.ExternalInboundEndpoint != nil {
+		s.WriteString(schemas.GetResponderGatewayResponse_externalInboundEndpoint, *v.ExternalInboundEndpoint)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GetResponderGatewayResponse_gatewayId, *v.GatewayId)
+	}
+	if v.GatewayType != "" {
+		s.WriteString(schemas.GetResponderGatewayResponse_gatewayType, string(v.GatewayType))
+	}
+	if v.LinksRequestedCount != nil {
+		s.WriteInt32(schemas.GetResponderGatewayResponse_linksRequestedCount, *v.LinksRequestedCount)
+	}
+	if v.ListenerConfig != nil {
+		s.WriteStruct(schemas.GetResponderGatewayResponse_listenerConfig)
+		v.ListenerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeManagedEndpointConfiguration(s, schemas.GetResponderGatewayResponse_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
+	if v.Port != nil {
+		s.WriteInt32(schemas.GetResponderGatewayResponse_port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.GetResponderGatewayResponse_protocol, string(v.Protocol))
+	}
+	serializeSecurityGroupIdList(s, schemas.GetResponderGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.Status != "" {
+		s.WriteString(schemas.GetResponderGatewayResponse_status, string(v.Status))
+	}
+	serializeSubnetIdList(s, schemas.GetResponderGatewayResponse_subnetIds, v.SubnetIds)
+	serializeTagsMap(s, schemas.GetResponderGatewayResponse_tags, v.Tags)
+	if v.TotalLinksCount != nil {
+		s.WriteInt32(schemas.GetResponderGatewayResponse_totalLinksCount, *v.TotalLinksCount)
+	}
+	if v.TrustStoreConfiguration != nil {
+		s.WriteStruct(schemas.GetResponderGatewayResponse_trustStoreConfiguration)
+		v.TrustStoreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetResponderGatewayResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.GetResponderGatewayResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *GetResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResponderGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResponderGatewayResponse_activeLinksCount:
+			v.ActiveLinksCount = new(int32)
+			return d.ReadInt32(schemas.GetResponderGatewayResponse_activeLinksCount, v.ActiveLinksCount)
+		case schemas.GetResponderGatewayResponse_clientRoutingPolicy:
+			var ev string
+			if err := d.ReadString(schemas.GetResponderGatewayResponse_clientRoutingPolicy, &ev); err != nil {
+				return err
+			}
+			v.ClientRoutingPolicy = types.ClientRoutingPolicy(ev)
+			return nil
+		case schemas.GetResponderGatewayResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetResponderGatewayResponse_createdAt, v.CreatedAt)
+		case schemas.GetResponderGatewayResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetResponderGatewayResponse_description, v.Description)
+		case schemas.GetResponderGatewayResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetResponderGatewayResponse_domainName, v.DomainName)
+		case schemas.GetResponderGatewayResponse_externalInboundEndpoint:
+			v.ExternalInboundEndpoint = new(string)
+			return d.ReadString(schemas.GetResponderGatewayResponse_externalInboundEndpoint, v.ExternalInboundEndpoint)
+		case schemas.GetResponderGatewayResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.GetResponderGatewayResponse_gatewayId, v.GatewayId)
+		case schemas.GetResponderGatewayResponse_gatewayType:
+			var ev string
+			if err := d.ReadString(schemas.GetResponderGatewayResponse_gatewayType, &ev); err != nil {
+				return err
+			}
+			v.GatewayType = types.GatewayType(ev)
+			return nil
+		case schemas.GetResponderGatewayResponse_linksRequestedCount:
+			v.LinksRequestedCount = new(int32)
+			return d.ReadInt32(schemas.GetResponderGatewayResponse_linksRequestedCount, v.LinksRequestedCount)
+		case schemas.GetResponderGatewayResponse_listenerConfig:
+			v.ListenerConfig = &types.ListenerConfig{}
+			return v.ListenerConfig.Deserialize(d)
+		case schemas.GetResponderGatewayResponse_managedEndpointConfiguration:
+			return deserializeManagedEndpointConfiguration(d, schemas.GetResponderGatewayResponse_managedEndpointConfiguration, &v.ManagedEndpointConfiguration)
+		case schemas.GetResponderGatewayResponse_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GetResponderGatewayResponse_port, v.Port)
+		case schemas.GetResponderGatewayResponse_protocol:
+			var ev string
+			if err := d.ReadString(schemas.GetResponderGatewayResponse_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.Protocol(ev)
+			return nil
+		case schemas.GetResponderGatewayResponse_securityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.GetResponderGatewayResponse_securityGroupIds, &v.SecurityGroupIds)
+		case schemas.GetResponderGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetResponderGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResponderGatewayStatus(ev)
+			return nil
+		case schemas.GetResponderGatewayResponse_subnetIds:
+			return deserializeSubnetIdList(d, schemas.GetResponderGatewayResponse_subnetIds, &v.SubnetIds)
+		case schemas.GetResponderGatewayResponse_tags:
+			return deserializeTagsMap(d, schemas.GetResponderGatewayResponse_tags, &v.Tags)
+		case schemas.GetResponderGatewayResponse_totalLinksCount:
+			v.TotalLinksCount = new(int32)
+			return d.ReadInt32(schemas.GetResponderGatewayResponse_totalLinksCount, v.TotalLinksCount)
+		case schemas.GetResponderGatewayResponse_trustStoreConfiguration:
+			v.TrustStoreConfiguration = &types.TrustStoreConfiguration{}
+			return v.TrustStoreConfiguration.Deserialize(d)
+		case schemas.GetResponderGatewayResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetResponderGatewayResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetResponderGatewayResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.GetResponderGatewayResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResponderGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResponderGateway, schemas.GetResponderGatewayRequest, schemas.GetResponderGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResponderGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResponderGateway, schemas.GetResponderGatewayRequest, schemas.GetResponderGatewayResponse), output: &GetResponderGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

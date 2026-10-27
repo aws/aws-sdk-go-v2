@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"incidentRecord":{"arn":"__Arn__","automationExecutions":[{"ssmExecutionArn":"__AutomationExecutionMemberSsmExecutionArn__"},{"ssmExecutionArn":"__AutomationExecutionMemberSsmExecutionArn__"}],"chatChannel":{"empty":{}},"creationTime":946684800,"dedupeString":"__DedupeString__","impact":1,"incidentRecordSource":{"createdBy":"__CreatedBy__","invokedBy":"__InvokedBy__","resourceArn":"__ResourceArn__","source":"__Source__"},"lastModifiedBy":"__LastModifiedBy__","lastModifiedTime":946684800,"notificationTargets":[{"snsTopicArn":"__NotificationTargetItemMemberSnsTopicArn__"},{"snsTopicArn":"__NotificationTargetItemMemberSnsTopicArn__"}],"resolvedTime":946684800,"status":"OPEN","summary":"__Summary__","title":"__Title__"}}

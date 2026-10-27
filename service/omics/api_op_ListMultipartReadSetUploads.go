@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListMultipartReadSetUploadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultipartReadSetUploadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultipartReadSetUploadsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultipartReadSetUploadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMultipartReadSetUploadsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultipartReadSetUploadsRequest_nextToken, *v.NextToken)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.ListMultipartReadSetUploadsRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+}
+
 type ListMultipartReadSetUploadsOutput struct {
 
 	// Next token returned in the response of a previous ListMultipartReadSetUploads
@@ -61,13 +81,35 @@ type ListMultipartReadSetUploadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMultipartReadSetUploadsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMultipartReadSetUploadsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMultipartReadSetUploadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMultipartReadSetUploadsResponse_nextToken, *v.NextToken)
+	}
+	serializeMultipartReadSetUploadList(s, schemas.ListMultipartReadSetUploadsResponse_uploads, v.Uploads)
+}
+func (v *ListMultipartReadSetUploadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMultipartReadSetUploadsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMultipartReadSetUploadsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMultipartReadSetUploadsResponse_nextToken, v.NextToken)
+		case schemas.ListMultipartReadSetUploadsResponse_uploads:
+			return deserializeMultipartReadSetUploadList(d, schemas.ListMultipartReadSetUploadsResponse_uploads, &v.Uploads)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMultipartReadSetUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMultipartReadSetUploads{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultipartReadSetUploads, schemas.ListMultipartReadSetUploadsRequest, schemas.ListMultipartReadSetUploadsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMultipartReadSetUploads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMultipartReadSetUploads, schemas.ListMultipartReadSetUploadsRequest, schemas.ListMultipartReadSetUploadsResponse), output: &ListMultipartReadSetUploadsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 
