@@ -342,6 +342,13 @@ func TestS3Protocol_GetBucketLocation_Response(t *testing.T) {
 				LocationConstraint: types.BucketLocationConstraintUsWest2,
 			},
 		},
+		"GetBucketLocationUnwrappedEmptyOutput": {
+			Response: &http.Response{
+				StatusCode: 200,
+				Body:       io.NopCloser(strings.NewReader("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<LocationConstraint xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"/>")),
+			},
+			Expect: &GetBucketLocationOutput{},
+		},
 	} {
 		t.Run(name, func(t *testing.T) {
 			svc := New(Options{
