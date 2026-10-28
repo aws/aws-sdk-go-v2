@@ -459,6 +459,23 @@ func validate__listOfPlugin(v []types.Plugin) error {
 	}
 }
 
+func validate__listOfPluginUpdate(v []types.PluginUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfPluginUpdate"}
+	for i := range v {
+		if err := validatePluginUpdate(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateApacheKafkaCluster(v *types.ApacheKafkaCluster) error {
 	if v == nil {
 		return nil
@@ -619,6 +636,24 @@ func validateCustomPluginLocation(v *types.CustomPluginLocation) error {
 	}
 }
 
+func validateCustomPluginUpdate(v *types.CustomPluginUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPluginUpdate"}
+	if v.CustomPluginArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPluginArn"))
+	}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFirehoseLogDelivery(v *types.FirehoseLogDelivery) error {
 	if v == nil {
 		return nil
@@ -708,6 +743,25 @@ func validatePlugin(v *types.Plugin) error {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomPlugin"))
 	} else if v.CustomPlugin != nil {
 		if err := validateCustomPlugin(v.CustomPlugin); err != nil {
+			invalidParams.AddNested("CustomPlugin", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePluginUpdate(v *types.PluginUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PluginUpdate"}
+	if v.CustomPlugin == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomPlugin"))
+	} else if v.CustomPlugin != nil {
+		if err := validateCustomPluginUpdate(v.CustomPlugin); err != nil {
 			invalidParams.AddNested("CustomPlugin", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -840,6 +894,24 @@ func validateWorkerConfiguration(v *types.WorkerConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WorkerConfiguration"}
+	if v.WorkerConfigurationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkerConfigurationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkerConfigurationUpdate(v *types.WorkerConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkerConfigurationUpdate"}
+	if v.Revision == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Revision"))
+	}
 	if v.WorkerConfigurationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkerConfigurationArn"))
 	}
@@ -1220,6 +1292,16 @@ func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
 	}
 	if v.CurrentVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.Plugins != nil {
+		if err := validate__listOfPluginUpdate(v.Plugins); err != nil {
+			invalidParams.AddNested("Plugins", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WorkerConfiguration != nil {
+		if err := validateWorkerConfigurationUpdate(v.WorkerConfiguration); err != nil {
+			invalidParams.AddNested("WorkerConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

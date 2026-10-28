@@ -2038,16 +2038,22 @@ var ImportPlaybackKeyPairResponse_keyPair *smithy.Schema
 var InsertAdBreakRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "InsertAdBreakRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var InsertAdBreakRequest_channelArn *smithy.Schema
 
 var InsertAdBreakRequest_durationSeconds *smithy.Schema
 
+var InsertAdBreakRequest_adBreakId *smithy.Schema
+
+var InsertAdBreakRequest_targetStartAt *smithy.Schema
+
 var InsertAdBreakResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
 	Name:      "InsertAdBreakResponse",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var InsertAdBreakResponse_adBreakId *smithy.Schema
+
+var InsertAdBreakResponse_targetStartAt *smithy.Schema
 
 var ListAdConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.ivs",
@@ -3212,7 +3218,13 @@ func init() {
 
 	InsertAdBreakRequest_durationSeconds = InsertAdBreakRequest.AddMember("durationSeconds", _AdDurationSeconds)
 
+	InsertAdBreakRequest_adBreakId = InsertAdBreakRequest.AddMember("adBreakId", _AdBreakId)
+
+	InsertAdBreakRequest_targetStartAt = InsertAdBreakRequest.AddMember("targetStartAt", _Time)
+
 	InsertAdBreakResponse_adBreakId = InsertAdBreakResponse.AddMember("adBreakId", _AdBreakId)
+
+	InsertAdBreakResponse_targetStartAt = InsertAdBreakResponse.AddMember("targetStartAt", _Time)
 
 	ListAdConfigurationsRequest_nextToken = ListAdConfigurationsRequest.AddMember("nextToken", _PaginationToken)
 

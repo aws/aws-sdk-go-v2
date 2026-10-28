@@ -15490,6 +15490,12 @@ var TaskTemplateConstraints_ReadOnlyFields *smithy.Schema
 
 var TaskTemplateConstraints_InvisibleFields *smithy.Schema
 
+var TaskTemplateContactHooks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "TaskTemplateContactHooks",
+}, smithy.ShapeTypeStructure, 1)
+var TaskTemplateContactHooks_WrapUpFlowId *smithy.Schema
+
 var TaskTemplateDefaultFieldValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "TaskTemplateDefaultFieldValue",
@@ -18720,7 +18726,7 @@ var CreateSecurityProfileResponse_SecurityProfileArn *smithy.Schema
 var CreateTaskTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateTaskTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateTaskTemplateRequest_InstanceId *smithy.Schema
 
 var CreateTaskTemplateRequest_Name *smithy.Schema
@@ -18730,6 +18736,8 @@ var CreateTaskTemplateRequest_Description *smithy.Schema
 var CreateTaskTemplateRequest_ContactFlowId *smithy.Schema
 
 var CreateTaskTemplateRequest_SelfAssignFlowId *smithy.Schema
+
+var CreateTaskTemplateRequest_ContactHooks *smithy.Schema
 
 var CreateTaskTemplateRequest_Constraints *smithy.Schema
 
@@ -20616,7 +20624,7 @@ var GetTaskTemplateRequest_SnapshotVersion *smithy.Schema
 var GetTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetTaskTemplateResponse",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var GetTaskTemplateResponse_InstanceId *smithy.Schema
 
 var GetTaskTemplateResponse_Id *smithy.Schema
@@ -20630,6 +20638,8 @@ var GetTaskTemplateResponse_Description *smithy.Schema
 var GetTaskTemplateResponse_ContactFlowId *smithy.Schema
 
 var GetTaskTemplateResponse_SelfAssignFlowId *smithy.Schema
+
+var GetTaskTemplateResponse_ContactHooks *smithy.Schema
 
 var GetTaskTemplateResponse_Constraints *smithy.Schema
 
@@ -24689,7 +24699,7 @@ var UpdateSecurityProfileRequest_GranularAccessControlConfiguration *smithy.Sche
 var UpdateTaskTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateTaskTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateTaskTemplateRequest_TaskTemplateId *smithy.Schema
 
 var UpdateTaskTemplateRequest_InstanceId *smithy.Schema
@@ -24702,6 +24712,8 @@ var UpdateTaskTemplateRequest_ContactFlowId *smithy.Schema
 
 var UpdateTaskTemplateRequest_SelfAssignFlowId *smithy.Schema
 
+var UpdateTaskTemplateRequest_ContactHooks *smithy.Schema
+
 var UpdateTaskTemplateRequest_Constraints *smithy.Schema
 
 var UpdateTaskTemplateRequest_Defaults *smithy.Schema
@@ -24713,7 +24725,7 @@ var UpdateTaskTemplateRequest_Fields *smithy.Schema
 var UpdateTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateTaskTemplateResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateTaskTemplateResponse_InstanceId *smithy.Schema
 
 var UpdateTaskTemplateResponse_Id *smithy.Schema
@@ -24727,6 +24739,8 @@ var UpdateTaskTemplateResponse_Description *smithy.Schema
 var UpdateTaskTemplateResponse_ContactFlowId *smithy.Schema
 
 var UpdateTaskTemplateResponse_SelfAssignFlowId *smithy.Schema
+
+var UpdateTaskTemplateResponse_ContactHooks *smithy.Schema
 
 var UpdateTaskTemplateResponse_Constraints *smithy.Schema
 
@@ -31627,6 +31641,8 @@ func init() {
 
 	TaskTemplateConstraints_InvisibleFields = TaskTemplateConstraints.AddMember("InvisibleFields", _InvisibleTaskTemplateFields)
 
+	TaskTemplateContactHooks_WrapUpFlowId = TaskTemplateContactHooks.AddMember("WrapUpFlowId", _ContactFlowModuleId)
+
 	TaskTemplateDefaultFieldValue_Id = TaskTemplateDefaultFieldValue.AddMember("Id", TaskTemplateFieldIdentifier)
 
 	TaskTemplateDefaultFieldValue_DefaultValue = TaskTemplateDefaultFieldValue.AddMember("DefaultValue", _TaskTemplateFieldValue)
@@ -33229,6 +33245,8 @@ func init() {
 
 	CreateTaskTemplateRequest_SelfAssignFlowId = CreateTaskTemplateRequest.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	CreateTaskTemplateRequest_ContactHooks = CreateTaskTemplateRequest.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	CreateTaskTemplateRequest_Constraints = CreateTaskTemplateRequest.AddMember("Constraints", TaskTemplateConstraints)
 
 	CreateTaskTemplateRequest_Defaults = CreateTaskTemplateRequest.AddMember("Defaults", TaskTemplateDefaults)
@@ -34232,6 +34250,8 @@ func init() {
 	GetTaskTemplateResponse_ContactFlowId = GetTaskTemplateResponse.AddMember("ContactFlowId", _ContactFlowId)
 
 	GetTaskTemplateResponse_SelfAssignFlowId = GetTaskTemplateResponse.AddMember("SelfAssignFlowId", _ContactFlowId)
+
+	GetTaskTemplateResponse_ContactHooks = GetTaskTemplateResponse.AddMember("ContactHooks", TaskTemplateContactHooks)
 
 	GetTaskTemplateResponse_Constraints = GetTaskTemplateResponse.AddMember("Constraints", TaskTemplateConstraints)
 
@@ -36783,6 +36803,8 @@ func init() {
 
 	UpdateTaskTemplateRequest_SelfAssignFlowId = UpdateTaskTemplateRequest.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	UpdateTaskTemplateRequest_ContactHooks = UpdateTaskTemplateRequest.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	UpdateTaskTemplateRequest_Constraints = UpdateTaskTemplateRequest.AddMember("Constraints", TaskTemplateConstraints)
 
 	UpdateTaskTemplateRequest_Defaults = UpdateTaskTemplateRequest.AddMember("Defaults", TaskTemplateDefaults)
@@ -36804,6 +36826,8 @@ func init() {
 	UpdateTaskTemplateResponse_ContactFlowId = UpdateTaskTemplateResponse.AddMember("ContactFlowId", _ContactFlowId)
 
 	UpdateTaskTemplateResponse_SelfAssignFlowId = UpdateTaskTemplateResponse.AddMember("SelfAssignFlowId", _ContactFlowId)
+
+	UpdateTaskTemplateResponse_ContactHooks = UpdateTaskTemplateResponse.AddMember("ContactHooks", TaskTemplateContactHooks)
 
 	UpdateTaskTemplateResponse_Constraints = UpdateTaskTemplateResponse.AddMember("Constraints", TaskTemplateConstraints)
 

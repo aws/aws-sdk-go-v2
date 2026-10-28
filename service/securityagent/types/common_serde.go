@@ -700,6 +700,30 @@ func serializeCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 	s.CloseList()
 }
 
+func serializeClientCertificateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ClientCertificate) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeClientCertificateOriginList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeCodeLocationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CodeLocation) {
 	if v == nil {
 		return
@@ -2155,6 +2179,49 @@ func deserializeCategoryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 
 		vv = Category{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClientCertificateList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ClientCertificate) error {
+	*v = make([]ClientCertificate, 0)
+	var vv ClientCertificate
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ClientCertificate
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = ClientCertificate{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeClientCertificateOriginList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

@@ -283,9 +283,10 @@ func TestCheckResponseSnapshot_GetAttachment(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetAttachment(context.Background(), &GetAttachmentInput{
-		AttachmentId:       ptr.String("__AttachmentId__"),
-		ConnectionToken:    ptr.String("__ConnectionToken__"),
-		UrlExpiryInSeconds: ptr.Int32(1),
+		AttachmentId:          ptr.String("__AttachmentId__"),
+		ConnectionToken:       ptr.String("__ConnectionToken__"),
+		UrlExpiryInSeconds:    ptr.Int32(1),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	})
 	if err != nil {
 		t.Fatal(err)

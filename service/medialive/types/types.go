@@ -17741,6 +17741,14 @@ type MulticastSource struct {
 	// This member is required.
 	Url *string
 
+	// This represents the ip address of the device sending the secondary multicast
+	// stream.
+	SecondarySourceIp *string
+
+	// This represents the customer's secondary source URL where the redundant
+	// multicast stream (SMPTE 2022-7) is pulled from.
+	SecondaryUrl *string
+
 	// This represents the ip address of the device sending the multicast stream.
 	SourceIp *string
 
@@ -17754,6 +17762,12 @@ func (v *MulticastSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecondarySourceIp != nil {
+		s.WriteString(schemas.MulticastSource_SecondarySourceIp, *v.SecondarySourceIp)
+	}
+	if v.SecondaryUrl != nil {
+		s.WriteString(schemas.MulticastSource_SecondaryUrl, *v.SecondaryUrl)
+	}
 	if v.SourceIp != nil {
 		s.WriteString(schemas.MulticastSource_SourceIp, *v.SourceIp)
 	}
@@ -17764,6 +17778,12 @@ func (v *MulticastSource) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *MulticastSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSource, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MulticastSource_SecondarySourceIp:
+			v.SecondarySourceIp = new(string)
+			return d.ReadString(schemas.MulticastSource_SecondarySourceIp, v.SecondarySourceIp)
+		case schemas.MulticastSource_SecondaryUrl:
+			v.SecondaryUrl = new(string)
+			return d.ReadString(schemas.MulticastSource_SecondaryUrl, v.SecondaryUrl)
 		case schemas.MulticastSource_SourceIp:
 			v.SourceIp = new(string)
 			return d.ReadString(schemas.MulticastSource_SourceIp, v.SourceIp)
@@ -17784,6 +17804,14 @@ type MulticastSourceCreateRequest struct {
 	// This member is required.
 	Url *string
 
+	// This represents the ip address of the device sending the secondary multicast
+	// stream.
+	SecondarySourceIp *string
+
+	// This represents the customer's secondary source URL where the redundant
+	// multicast stream (SMPTE 2022-7) is pulled from.
+	SecondaryUrl *string
+
 	// This represents the ip address of the device sending the multicast stream.
 	SourceIp *string
 
@@ -17797,6 +17825,12 @@ func (v *MulticastSourceCreateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSourceCreateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecondarySourceIp != nil {
+		s.WriteString(schemas.MulticastSourceCreateRequest_SecondarySourceIp, *v.SecondarySourceIp)
+	}
+	if v.SecondaryUrl != nil {
+		s.WriteString(schemas.MulticastSourceCreateRequest_SecondaryUrl, *v.SecondaryUrl)
+	}
 	if v.SourceIp != nil {
 		s.WriteString(schemas.MulticastSourceCreateRequest_SourceIp, *v.SourceIp)
 	}
@@ -17807,6 +17841,12 @@ func (v *MulticastSourceCreateRequest) SerializeMembers(s smithy.ShapeSerializer
 func (v *MulticastSourceCreateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSourceCreateRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MulticastSourceCreateRequest_SecondarySourceIp:
+			v.SecondarySourceIp = new(string)
+			return d.ReadString(schemas.MulticastSourceCreateRequest_SecondarySourceIp, v.SecondarySourceIp)
+		case schemas.MulticastSourceCreateRequest_SecondaryUrl:
+			v.SecondaryUrl = new(string)
+			return d.ReadString(schemas.MulticastSourceCreateRequest_SecondaryUrl, v.SecondaryUrl)
 		case schemas.MulticastSourceCreateRequest_SourceIp:
 			v.SourceIp = new(string)
 			return d.ReadString(schemas.MulticastSourceCreateRequest_SourceIp, v.SourceIp)
@@ -17827,6 +17867,14 @@ type MulticastSourceUpdateRequest struct {
 	// This member is required.
 	Url *string
 
+	// This represents the ip address of the device sending the secondary multicast
+	// stream.
+	SecondarySourceIp *string
+
+	// This represents the customer's secondary source URL where the redundant
+	// multicast stream (SMPTE 2022-7) is pulled from.
+	SecondaryUrl *string
+
 	// This represents the ip address of the device sending the multicast stream.
 	SourceIp *string
 
@@ -17840,6 +17888,12 @@ func (v *MulticastSourceUpdateRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MulticastSourceUpdateRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecondarySourceIp != nil {
+		s.WriteString(schemas.MulticastSourceUpdateRequest_SecondarySourceIp, *v.SecondarySourceIp)
+	}
+	if v.SecondaryUrl != nil {
+		s.WriteString(schemas.MulticastSourceUpdateRequest_SecondaryUrl, *v.SecondaryUrl)
+	}
 	if v.SourceIp != nil {
 		s.WriteString(schemas.MulticastSourceUpdateRequest_SourceIp, *v.SourceIp)
 	}
@@ -17850,6 +17904,12 @@ func (v *MulticastSourceUpdateRequest) SerializeMembers(s smithy.ShapeSerializer
 func (v *MulticastSourceUpdateRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MulticastSourceUpdateRequest, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.MulticastSourceUpdateRequest_SecondarySourceIp:
+			v.SecondarySourceIp = new(string)
+			return d.ReadString(schemas.MulticastSourceUpdateRequest_SecondarySourceIp, v.SecondarySourceIp)
+		case schemas.MulticastSourceUpdateRequest_SecondaryUrl:
+			v.SecondaryUrl = new(string)
+			return d.ReadString(schemas.MulticastSourceUpdateRequest_SecondaryUrl, v.SecondaryUrl)
 		case schemas.MulticastSourceUpdateRequest_SourceIp:
 			v.SourceIp = new(string)
 			return d.ReadString(schemas.MulticastSourceUpdateRequest_SourceIp, v.SourceIp)

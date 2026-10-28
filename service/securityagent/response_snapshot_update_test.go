@@ -355,6 +355,24 @@ func TestUpdateResponseSnapshot_BatchDeletePentests(t *testing.T) {
 							},
 						},
 					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				ExcludeRiskTypes: []types.RiskType{
 					types.RiskType("CROSS_SITE_SCRIPTING"),
@@ -540,6 +558,24 @@ func TestUpdateResponseSnapshot_BatchDeletePentests(t *testing.T) {
 						{
 							Source: &types.CaCertificateSourceMemberInlinePem{
 								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
 							},
 						},
 					},
@@ -1424,6 +1460,24 @@ func TestUpdateResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 							},
 						},
 					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				ServiceRole: ptr.String("__ServiceRole__"),
 				LogConfig: &types.CloudWatchLog{
@@ -1560,6 +1614,24 @@ func TestUpdateResponseSnapshot_BatchGetCodeReviews(t *testing.T) {
 						{
 							Source: &types.CaCertificateSourceMemberInlinePem{
 								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
 							},
 						},
 					},
@@ -2114,6 +2186,24 @@ func TestUpdateResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 						},
 					},
 				},
+				ClientCertificates: []types.ClientCertificate{
+					{
+						Name:      ptr.String("__Name__"),
+						SecretArn: ptr.String("__SecretArn__"),
+						Origins: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						SecretArn: ptr.String("__SecretArn__"),
+						Origins: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				CleanUpStrategy:         types.CleanUpStrategy("BEST_EFFORT_DELETE"),
 				DisableManagedSkills: []types.SkillType{
@@ -2346,6 +2436,24 @@ func TestUpdateResponseSnapshot_BatchGetPentestJobs(t *testing.T) {
 						},
 					},
 				},
+				ClientCertificates: []types.ClientCertificate{
+					{
+						Name:      ptr.String("__Name__"),
+						SecretArn: ptr.String("__SecretArn__"),
+						Origins: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						Name:      ptr.String("__Name__"),
+						SecretArn: ptr.String("__SecretArn__"),
+						Origins: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 				CodeRemediationStrategy: types.CodeRemediationStrategy("AUTOMATIC"),
 				CleanUpStrategy:         types.CleanUpStrategy("BEST_EFFORT_DELETE"),
 				DisableManagedSkills: []types.SkillType{
@@ -2513,6 +2621,24 @@ func TestUpdateResponseSnapshot_BatchGetPentests(t *testing.T) {
 						{
 							Source: &types.CaCertificateSourceMemberInlinePem{
 								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
 							},
 						},
 					},
@@ -2701,6 +2827,24 @@ func TestUpdateResponseSnapshot_BatchGetPentests(t *testing.T) {
 						{
 							Source: &types.CaCertificateSourceMemberInlinePem{
 								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
 							},
 						},
 					},
@@ -3298,6 +3442,24 @@ func TestUpdateResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 							},
 						},
 					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				ScopeDocs: []types.DocumentInfo{
 					{
@@ -3422,6 +3584,24 @@ func TestUpdateResponseSnapshot_BatchGetThreatModels(t *testing.T) {
 						{
 							Source: &types.CaCertificateSourceMemberInlinePem{
 								Value: "__CaCertificateSourceMemberInlinePem__",
+							},
+						},
+					},
+					ClientCertificates: []types.ClientCertificate{
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							Name:      ptr.String("__Name__"),
+							SecretArn: ptr.String("__SecretArn__"),
+							Origins: []string{
+								"__Member__",
+								"__Member__",
 							},
 						},
 					},
@@ -3844,6 +4024,24 @@ func TestUpdateResponseSnapshot_CreateCodeReview(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -4047,6 +4245,24 @@ func TestUpdateResponseSnapshot_CreatePentest(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -4383,6 +4599,24 @@ func TestUpdateResponseSnapshot_CreateThreatModel(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -6455,6 +6689,24 @@ func TestUpdateResponseSnapshot_UpdateCodeReview(t *testing.T) {
 					},
 				},
 			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+			},
 		},
 		ServiceRole: ptr.String("__ServiceRole__"),
 		LogConfig: &types.CloudWatchLog{
@@ -6682,6 +6934,24 @@ func TestUpdateResponseSnapshot_UpdatePentest(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},
@@ -7019,6 +7289,24 @@ func TestUpdateResponseSnapshot_UpdateThreatModel(t *testing.T) {
 				{
 					Source: &types.CaCertificateSourceMemberInlinePem{
 						Value: "__CaCertificateSourceMemberInlinePem__",
+					},
+				},
+			},
+			ClientCertificates: []types.ClientCertificate{
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
+					},
+				},
+				{
+					Name:      ptr.String("__Name__"),
+					SecretArn: ptr.String("__SecretArn__"),
+					Origins: []string{
+						"__Member__",
+						"__Member__",
 					},
 				},
 			},

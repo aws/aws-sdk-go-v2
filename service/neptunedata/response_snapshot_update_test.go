@@ -166,6 +166,32 @@ func TestUpdateResponseSnapshot_CancelGremlinQuery(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CancelIndexRebuild(t *testing.T) {
+	want := &CancelIndexRebuildOutput{
+		Status:          types.RebuildStatus("PREPARING"),
+		Concurrency:     ptr.Int32(1),
+		WriteBufferSize: types.WriteBufferSize("LOW"),
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.CancelIndexRebuildOutput, schemas.CancelIndexRebuildOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelIndexRebuild.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_CancelLoaderJob(t *testing.T) {
 	want := &CancelLoaderJobOutput{
 		Status: ptr.String("__Status__"),
@@ -624,6 +650,38 @@ func TestUpdateResponseSnapshot_GetGremlinQueryStatus(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetGremlinQueryStatus.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetIndexRebuildStatus(t *testing.T) {
+	want := &GetIndexRebuildStatusOutput{
+		Status:             types.RebuildStatus("PREPARING"),
+		Scope:              types.Scope("ALL"),
+		Concurrency:        ptr.Int32(1),
+		WriteBufferSize:    types.WriteBufferSize("LOW"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProgressPercentage: ptr.Int32(1),
+		EstimatedEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:      ptr.String("__FailureReason__"),
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.GetIndexRebuildStatus, schemas.GetIndexRebuildStatusOutput, schemas.GetIndexRebuildStatusOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetIndexRebuildStatus.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1216,6 +1274,106 @@ func TestUpdateResponseSnapshot_GetSparqlStream(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_GetStorageInfo(t *testing.T) {
+	want := &GetStorageInfoOutput{
+		TotalStorageBytesUsed: ptr.Int64(1),
+		Quads: &types.QuadsIndexesInfo{
+			RDF: &types.QuadsInfo{
+				SPOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				POGS: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				GPSO: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				OSGP: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				PZSOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+			},
+			PG: &types.QuadsInfo{
+				SPOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				POGS: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				GPSO: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				OSGP: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				PZSOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+			},
+		},
+		Dictionaries: &types.DictionariesInfo{
+			Total: &types.StorageMetrics{
+				SizeInBytes: ptr.Int64(1),
+				Count:       ptr.Int64(1),
+			},
+			Blobs: &types.StorageMetrics{
+				SizeInBytes: ptr.Int64(1),
+				Count:       ptr.Int64(1),
+			},
+		},
+		UndoLogs: &types.UndoLogsMetrics{
+			SizeInBytes: ptr.Int64(1),
+			ListSize:    ptr.Int64(1),
+		},
+		Streams: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+		DfeStatistics: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+		Schema: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+		Internals: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.GetStorageInfo, schemas.GetStorageOutput, schemas.GetStorageOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetStorageInfo.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListGremlinQueries(t *testing.T) {
 	want := &ListGremlinQueriesOutput{
 		AcceptedQueryCount: ptr.Int32(1),
@@ -1259,6 +1417,33 @@ func TestUpdateResponseSnapshot_ListGremlinQueries(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("ListGremlinQueries.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListIndexRebuilds(t *testing.T) {
+	want := &ListIndexRebuildsOutput{
+		RebuildIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.ListIndexRebuilds, schemas.ListIndexRebuildsOutput, schemas.ListIndexRebuildsOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListIndexRebuilds.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1502,6 +1687,34 @@ func TestUpdateResponseSnapshot_ManageSparqlStatistics(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_StartIndexRebuild(t *testing.T) {
+	want := &StartIndexRebuildOutput{
+		Status:          types.RebuildStatus("PREPARING"),
+		RebuildId:       ptr.String("__RebuildId__"),
+		Scope:           types.Scope("ALL"),
+		Concurrency:     ptr.Int32(1),
+		WriteBufferSize: types.WriteBufferSize("LOW"),
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.StartIndexRebuild, schemas.StartIndexRebuildOutput, schemas.StartIndexRebuildOutput)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("StartIndexRebuild.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_StartLoaderJob(t *testing.T) {
 	want := &StartLoaderJobOutput{
 		Status: ptr.String("__Status__"),
@@ -1614,7 +1827,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Code:            ptr.String("AccessDeniedException"),
 	}
 	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
-	opSchema := smithy.NewOperationSchema(schemas.DeletePropertygraphStatistics, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1688,6 +1901,33 @@ func TestUpdateResponseSnapshot_Error_BulkLoadIdNotFoundException(t *testing.T) 
 	}
 }
 
+func TestUpdateResponseSnapshot_Error_CancelledByMaintenanceException(t *testing.T) {
+	want := &types.CancelledByMaintenanceException{
+		DetailedMessage: ptr.String("__DetailedMessage__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Code:            ptr.String("CancelledByMaintenanceException"),
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.CancelledByMaintenanceException, schemas.CancelledByMaintenanceException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("CancelledByMaintenanceException.error", 500, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_Error_CancelledByUserException(t *testing.T) {
 	want := &types.CancelledByUserException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
@@ -1695,7 +1935,7 @@ func TestUpdateResponseSnapshot_Error_CancelledByUserException(t *testing.T) {
 		Code:            ptr.String("CancelledByUserException"),
 	}
 	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
-	opSchema := smithy.NewOperationSchema(schemas.ExecuteGremlinExplainQuery, schemas.CancelledByUserException, schemas.CancelledByUserException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.CancelledByUserException, schemas.CancelledByUserException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1884,7 +2124,7 @@ func TestUpdateResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		Code:            ptr.String("InternalFailureException"),
 	}
 	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
-	opSchema := smithy.NewOperationSchema(schemas.CancelLoaderJob, schemas.InternalFailureException, schemas.InternalFailureException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.InternalFailureException, schemas.InternalFailureException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2100,7 +2340,7 @@ func TestUpdateResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		Code:            ptr.String("MethodNotAllowedException"),
 	}
 	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
-	opSchema := smithy.NewOperationSchema(schemas.ExecuteFastReset, schemas.MethodNotAllowedException, schemas.MethodNotAllowedException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.MethodNotAllowedException, schemas.MethodNotAllowedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2289,7 +2529,7 @@ func TestUpdateResponseSnapshot_Error_ReadOnlyViolationException(t *testing.T) {
 		Code:            ptr.String("ReadOnlyViolationException"),
 	}
 	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
-	opSchema := smithy.NewOperationSchema(schemas.DeletePropertygraphStatistics, schemas.ReadOnlyViolationException, schemas.ReadOnlyViolationException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.ReadOnlyViolationException, schemas.ReadOnlyViolationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2305,6 +2545,33 @@ func TestUpdateResponseSnapshot_Error_ReadOnlyViolationException(t *testing.T) {
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("ReadOnlyViolationException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
+	want := &types.ResourceNotFoundException{
+		DetailedMessage: ptr.String("__DetailedMessage__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Code:            ptr.String("ResourceNotFoundException"),
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.StartIndexRebuild, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ResourceNotFoundException.error", 404, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2343,7 +2610,7 @@ func TestUpdateResponseSnapshot_Error_ServerShutdownException(t *testing.T) {
 		Code:            ptr.String("ServerShutdownException"),
 	}
 	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
-	opSchema := smithy.NewOperationSchema(schemas.ExecuteFastReset, schemas.ServerShutdownException, schemas.ServerShutdownException)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.ServerShutdownException, schemas.ServerShutdownException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -2521,6 +2788,33 @@ func TestUpdateResponseSnapshot_Error_UnsupportedOperationException(t *testing.T
 	}
 	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
 	if err := serdeRespWriteSnapshot("UnsupportedOperationException.error", 400, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		DetailedMessage: ptr.String("__DetailedMessage__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Code:            ptr.String("ValidationException"),
+	}
+	proto := restjson1.New(schemas.AmazonNeptuneDataplane)
+	opSchema := smithy.NewOperationSchema(schemas.CancelIndexRebuild, schemas.ValidationException, schemas.ValidationException)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	body = serdeRespSpliceJSONType(t, body, want.ErrorCode())
+	if err := serdeRespWriteSnapshot("ValidationException.error", 400, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }

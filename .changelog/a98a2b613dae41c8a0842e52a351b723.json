@@ -1,0 +1,8 @@
+{
+    "id": "a98a2b61-3dae-41c8-a084-2e52a351b723",
+    "type": "feature",
+    "description": "Update support mode for Assurance Assistance",
+    "modules": [
+        "service/artifact"
+    ]
+}

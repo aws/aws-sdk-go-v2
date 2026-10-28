@@ -31777,6 +31777,39 @@ func (v *TaskTemplateConstraints) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// The event hooks that are set on tasks created by using this template.
+type TaskTemplateContactHooks struct {
+
+	// The identifier of the flow module that runs when an agent attempts to
+	// disconnect from a task created by referencing this template. If no agent ever
+	// connects to the task, the flow module runs when the task is terminated.
+	WrapUpFlowId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *TaskTemplateContactHooks) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaskTemplateContactHooks)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaskTemplateContactHooks) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WrapUpFlowId != nil {
+		s.WriteString(schemas.TaskTemplateContactHooks_WrapUpFlowId, *v.WrapUpFlowId)
+	}
+}
+func (v *TaskTemplateContactHooks) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaskTemplateContactHooks, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaskTemplateContactHooks_WrapUpFlowId:
+			v.WrapUpFlowId = new(string)
+			return d.ReadString(schemas.TaskTemplateContactHooks_WrapUpFlowId, v.WrapUpFlowId)
+		}
+		return nil
+	})
+}
+
 // Describes a default field and its corresponding value.
 type TaskTemplateDefaultFieldValue struct {
 

@@ -1,0 +1,8 @@
+{
+    "id": "5452d481-ca75-4689-9704-cb6c9137ec92",
+    "type": "feature",
+    "description": "AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol in the AWS GovCloud (US-East) and AWS GovCloud (US-West) Regions.",
+    "modules": [
+        "service/acm"
+    ]
+}

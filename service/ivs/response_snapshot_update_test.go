@@ -1282,7 +1282,8 @@ func TestUpdateResponseSnapshot_ImportPlaybackKeyPair(t *testing.T) {
 
 func TestUpdateResponseSnapshot_InsertAdBreak(t *testing.T) {
 	want := &InsertAdBreakOutput{
-		AdBreakId: ptr.String("__AdBreakId__"),
+		AdBreakId:     ptr.String("__AdBreakId__"),
+		TargetStartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	proto := restjson1.New(schemas.AmazonInteractiveVideoService)
 	opSchema := smithy.NewOperationSchema(schemas.InsertAdBreak, schemas.InsertAdBreakResponse, schemas.InsertAdBreakResponse)

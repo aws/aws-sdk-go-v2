@@ -8027,26 +8027,38 @@ var MulticastSettingsUpdateRequest_Sources *smithy.Schema
 var MulticastSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "MulticastSource",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var MulticastSource_SourceIp *smithy.Schema
 
 var MulticastSource_Url *smithy.Schema
 
+var MulticastSource_SecondarySourceIp *smithy.Schema
+
+var MulticastSource_SecondaryUrl *smithy.Schema
+
 var MulticastSourceCreateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "MulticastSourceCreateRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var MulticastSourceCreateRequest_SourceIp *smithy.Schema
 
 var MulticastSourceCreateRequest_Url *smithy.Schema
 
+var MulticastSourceCreateRequest_SecondarySourceIp *smithy.Schema
+
+var MulticastSourceCreateRequest_SecondaryUrl *smithy.Schema
+
 var MulticastSourceUpdateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
 	Name:      "MulticastSourceUpdateRequest",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var MulticastSourceUpdateRequest_SourceIp *smithy.Schema
 
 var MulticastSourceUpdateRequest_Url *smithy.Schema
+
+var MulticastSourceUpdateRequest_SecondarySourceIp *smithy.Schema
+
+var MulticastSourceUpdateRequest_SecondaryUrl *smithy.Schema
 
 var Multiplex = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.medialive",
@@ -15745,6 +15757,10 @@ func init() {
 
 	MulticastSource_Url = MulticastSource.AddMember("Url", ___string, &smithytraits.JSONName{Name: "url"})
 
+	MulticastSource_SecondarySourceIp = MulticastSource.AddMember("SecondarySourceIp", ___string, &smithytraits.JSONName{Name: "secondarySourceIp"})
+
+	MulticastSource_SecondaryUrl = MulticastSource.AddMember("SecondaryUrl", ___string, &smithytraits.JSONName{Name: "secondaryUrl"})
+
 	___listOfMulticastSource_member = ___listOfMulticastSource.AddMember("member", MulticastSource)
 
 	MulticastSettings_Sources = MulticastSettings.AddMember("Sources", ___listOfMulticastSource, &smithytraits.JSONName{Name: "sources"})
@@ -16119,11 +16135,19 @@ func init() {
 
 	MulticastSourceCreateRequest_Url = MulticastSourceCreateRequest.AddMember("Url", ___string, &smithytraits.JSONName{Name: "url"})
 
+	MulticastSourceCreateRequest_SecondarySourceIp = MulticastSourceCreateRequest.AddMember("SecondarySourceIp", ___string, &smithytraits.JSONName{Name: "secondarySourceIp"})
+
+	MulticastSourceCreateRequest_SecondaryUrl = MulticastSourceCreateRequest.AddMember("SecondaryUrl", ___string, &smithytraits.JSONName{Name: "secondaryUrl"})
+
 	___listOfMulticastSourceCreateRequest_member = ___listOfMulticastSourceCreateRequest.AddMember("member", MulticastSourceCreateRequest)
 
 	MulticastSourceUpdateRequest_SourceIp = MulticastSourceUpdateRequest.AddMember("SourceIp", ___string, &smithytraits.JSONName{Name: "sourceIp"})
 
 	MulticastSourceUpdateRequest_Url = MulticastSourceUpdateRequest.AddMember("Url", ___string, &smithytraits.JSONName{Name: "url"})
+
+	MulticastSourceUpdateRequest_SecondarySourceIp = MulticastSourceUpdateRequest.AddMember("SecondarySourceIp", ___string, &smithytraits.JSONName{Name: "secondarySourceIp"})
+
+	MulticastSourceUpdateRequest_SecondaryUrl = MulticastSourceUpdateRequest.AddMember("SecondaryUrl", ___string, &smithytraits.JSONName{Name: "secondaryUrl"})
 
 	___listOfMulticastSourceUpdateRequest_member = ___listOfMulticastSourceUpdateRequest.AddMember("member", MulticastSourceUpdateRequest)
 

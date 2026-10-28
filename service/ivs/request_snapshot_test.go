@@ -23,6 +23,7 @@ import (
 	"slices"
 	"strings"
 	"testing"
+	"time"
 )
 
 const serdeSSPrefix = "request_snapshot"
@@ -1012,6 +1013,8 @@ func TestCheckRequestSnapshot_InsertAdBreak(t *testing.T) {
 	input := &InsertAdBreakInput{
 		ChannelArn:      ptr.String("__ChannelArn__"),
 		DurationSeconds: ptr.Int32(1),
+		AdBreakId:       ptr.String("__AdBreakId__"),
+		TargetStartAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2427,6 +2430,8 @@ func TestUpdateRequestSnapshot_InsertAdBreak(t *testing.T) {
 	input := &InsertAdBreakInput{
 		ChannelArn:      ptr.String("__ChannelArn__"),
 		DurationSeconds: ptr.Int32(1),
+		AdBreakId:       ptr.String("__AdBreakId__"),
+		TargetStartAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -98,6 +98,18 @@ func TestCheckSnapshot_AddDirectQueryDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AddReplicationPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddReplicationPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddReplicationPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AddTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTags(context.Background(), nil, func(o *Options) {
@@ -175,6 +187,18 @@ func TestCheckSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 	_, err := svc.CancelServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CancelServiceSoftwareUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CompareDomainConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompareDomainConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CompareDomainConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -458,6 +482,18 @@ func TestCheckSnapshot_DescribeDomainNodes(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDomainReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDomainReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDomainReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomains(context.Background(), nil, func(o *Options) {
@@ -607,6 +643,18 @@ func TestCheckSnapshot_DissociatePackages(t *testing.T) {
 	_, err := svc.DissociatePackages(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DissociatePackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_FailoverReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.FailoverReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "FailoverReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1022,6 +1070,18 @@ func TestCheckSnapshot_RejectInboundConnection(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RemoveReplicationPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveReplicationPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RemoveReplicationPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RemoveTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RemoveTags(context.Background(), nil, func(o *Options) {
@@ -1087,6 +1147,18 @@ func TestCheckSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 	_, err := svc.StartServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartServiceSoftwareUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SwitchoverReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SwitchoverReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SwitchoverReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1249,6 +1321,18 @@ func TestUpdateSnapshot_AddDirectQueryDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AddReplicationPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddReplicationPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddReplicationPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AddTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddTags(context.Background(), nil, func(o *Options) {
@@ -1326,6 +1410,18 @@ func TestUpdateSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 	_, err := svc.CancelServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CancelServiceSoftwareUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CompareDomainConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CompareDomainConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CompareDomainConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1609,6 +1705,18 @@ func TestUpdateSnapshot_DescribeDomainNodes(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDomainReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDomainReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDomainReplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomains(context.Background(), nil, func(o *Options) {
@@ -1758,6 +1866,18 @@ func TestUpdateSnapshot_DissociatePackages(t *testing.T) {
 	_, err := svc.DissociatePackages(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DissociatePackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_FailoverReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.FailoverReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "FailoverReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2173,6 +2293,18 @@ func TestUpdateSnapshot_RejectInboundConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RemoveReplicationPeer(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RemoveReplicationPeer(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RemoveReplicationPeer")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RemoveTags(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RemoveTags(context.Background(), nil, func(o *Options) {
@@ -2238,6 +2370,18 @@ func TestUpdateSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 	_, err := svc.StartServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartServiceSoftwareUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SwitchoverReplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SwitchoverReplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SwitchoverReplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

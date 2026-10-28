@@ -1,0 +1,4 @@
+404
+Content-Type: application/json
+
+{"__type":"ResourceNotFoundException","code":"ResourceNotFoundException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

@@ -563,6 +563,11 @@ type Assets struct {
 	// The list of actors used during penetration testing.
 	Actors []Actor
 
+	// The client certificates for mutual TLS (mTLS) authentication to target hosts.
+	// Each certificate is stored in Secrets Manager and scoped to specific target
+	// origins.
+	ClientCertificates []ClientCertificate
+
 	// The list of documents that provide context for the pentest.
 	Documents []DocumentInfo
 
@@ -591,6 +596,7 @@ func (v *Assets) Serialize(s smithy.ShapeSerializer) {
 
 func (v *Assets) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeActorList(s, schemas.Assets_actors, v.Actors)
+	serializeClientCertificateList(s, schemas.Assets_clientCertificates, v.ClientCertificates)
 	serializeDocumentList(s, schemas.Assets_documents, v.Documents)
 	serializeEndpointList(s, schemas.Assets_endpoints, v.Endpoints)
 	serializeIntegratedRepositoryList(s, schemas.Assets_integratedRepositories, v.IntegratedRepositories)
@@ -602,6 +608,8 @@ func (v *Assets) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.Assets_actors:
 			return deserializeActorList(d, schemas.Assets_actors, &v.Actors)
+		case schemas.Assets_clientCertificates:
+			return deserializeClientCertificateList(d, schemas.Assets_clientCertificates, &v.ClientCertificates)
 		case schemas.Assets_documents:
 			return deserializeDocumentList(d, schemas.Assets_documents, &v.Documents)
 		case schemas.Assets_endpoints:
@@ -1820,6 +1828,61 @@ func (v *CiCdConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CiCdConfiguration_enabled:
 			v.Enabled = new(bool)
 			return d.ReadBool(schemas.CiCdConfiguration_enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
+// A client certificate for mutual TLS (mTLS) authentication to target hosts.
+type ClientCertificate struct {
+
+	// A customer-chosen name for this client certificate, used in error messages and
+	// console display.
+	//
+	// This member is required.
+	Name *string
+
+	// The origins (scheme://host[:port]) this certificate applies to. Paths are not
+	// supported. Each hostname can have at most one client certificate.
+	//
+	// This member is required.
+	Origins []string
+
+	// The ARN of the Secrets Manager secret containing the certificate and private
+	// key.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ClientCertificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientCertificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientCertificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ClientCertificate_name, *v.Name)
+	}
+	serializeClientCertificateOriginList(s, schemas.ClientCertificate_origins, v.Origins)
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ClientCertificate_secretArn, *v.SecretArn)
+	}
+}
+func (v *ClientCertificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientCertificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientCertificate_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ClientCertificate_name, v.Name)
+		case schemas.ClientCertificate_origins:
+			return deserializeClientCertificateOriginList(d, schemas.ClientCertificate_origins, &v.Origins)
+		case schemas.ClientCertificate_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.ClientCertificate_secretArn, v.SecretArn)
 		}
 		return nil
 	})
@@ -6333,6 +6396,10 @@ type PentestJob struct {
 	// Strategy for cleaning up resources after pentest job completion.
 	CleanUpStrategy CleanUpStrategy
 
+	// The client certificates for mutual TLS (mTLS) authentication to target hosts
+	// during the pentest job.
+	ClientCertificates []ClientCertificate
+
 	// The code remediation strategy for the pentest job.
 	CodeRemediationStrategy CodeRemediationStrategy
 
@@ -6452,6 +6519,7 @@ func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CleanUpStrategy != "" {
 		s.WriteString(schemas.PentestJob_cleanUpStrategy, string(v.CleanUpStrategy))
 	}
+	serializeClientCertificateList(s, schemas.PentestJob_clientCertificates, v.ClientCertificates)
 	if v.CodeRemediationStrategy != "" {
 		s.WriteString(schemas.PentestJob_codeRemediationStrategy, string(v.CodeRemediationStrategy))
 	}
@@ -6553,6 +6621,8 @@ func (v *PentestJob) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.CleanUpStrategy = CleanUpStrategy(ev)
 			return nil
+		case schemas.PentestJob_clientCertificates:
+			return deserializeClientCertificateList(d, schemas.PentestJob_clientCertificates, &v.ClientCertificates)
 		case schemas.PentestJob_codeRemediationStrategy:
 			var ev string
 			if err := d.ReadString(schemas.PentestJob_codeRemediationStrategy, &ev); err != nil {

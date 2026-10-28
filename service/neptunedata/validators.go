@@ -30,6 +30,26 @@ func (m *validateOpCancelGremlinQuery) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelIndexRebuild struct {
+}
+
+func (*validateOpCancelIndexRebuild) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelIndexRebuild) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelIndexRebuildInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelIndexRebuildInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelLoaderJob struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpGetGremlinQueryStatus) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetIndexRebuildStatus struct {
+}
+
+func (*validateOpGetIndexRebuildStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetIndexRebuildStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetIndexRebuildStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetIndexRebuildStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLoaderJobStatus struct {
 }
 
@@ -494,6 +534,10 @@ func addOpCancelGremlinQueryValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCancelGremlinQuery{}, middleware.After)
 }
 
+func addOpCancelIndexRebuildValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelIndexRebuild{}, middleware.After)
+}
+
 func addOpCancelLoaderJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelLoaderJob{}, middleware.After)
 }
@@ -544,6 +588,10 @@ func addOpExecuteOpenCypherQueryValidationMiddleware(stack *middleware.Stack) er
 
 func addOpGetGremlinQueryStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGremlinQueryStatus{}, middleware.After)
+}
+
+func addOpGetIndexRebuildStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetIndexRebuildStatus{}, middleware.After)
 }
 
 func addOpGetLoaderJobStatusValidationMiddleware(stack *middleware.Stack) error {
@@ -623,6 +671,21 @@ func validateOpCancelGremlinQueryInput(v *CancelGremlinQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CancelGremlinQueryInput"}
 	if v.QueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelIndexRebuildInput(v *CancelIndexRebuildInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelIndexRebuildInput"}
+	if v.RebuildId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RebuildId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -821,6 +884,21 @@ func validateOpGetGremlinQueryStatusInput(v *GetGremlinQueryStatusInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetGremlinQueryStatusInput"}
 	if v.QueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetIndexRebuildStatusInput(v *GetIndexRebuildStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetIndexRebuildStatusInput"}
+	if v.RebuildId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RebuildId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

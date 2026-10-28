@@ -172,6 +172,39 @@ func (Parallelism) Values() []Parallelism {
 	}
 }
 
+type RebuildStatus string
+
+// Enum values for RebuildStatus
+const (
+	// The rebuild operation is being prepared.
+	RebuildStatusPreparing RebuildStatus = "PREPARING"
+	// The rebuild operation is actively rebuilding indexes.
+	RebuildStatusRebuilding RebuildStatus = "REBUILDING"
+	// The rebuild operation has completed successfully.
+	RebuildStatusCompleted RebuildStatus = "COMPLETED"
+	// The rebuild operation has failed (completely or partially).
+	RebuildStatusFailed RebuildStatus = "FAILED"
+	// The rebuild operation was cancelled by the user.
+	RebuildStatusCancelled RebuildStatus = "CANCELLED"
+	// The rebuild operation was cancelled by the user and is in cancelling phase.
+	RebuildStatusCancelling RebuildStatus = "CANCELLING"
+)
+
+// Values returns all known values for RebuildStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RebuildStatus) Values() []RebuildStatus {
+	return []RebuildStatus{
+		"PREPARING",
+		"REBUILDING",
+		"COMPLETED",
+		"FAILED",
+		"CANCELLED",
+		"CANCELLING",
+	}
+}
+
 type S3BucketRegion string
 
 // Enum values for S3BucketRegion
@@ -259,6 +292,30 @@ func (S3BucketRegion) Values() []S3BucketRegion {
 	}
 }
 
+type Scope string
+
+// Enum values for Scope
+const (
+	// Rebuild all (quads and dictionaries). This is the default option.
+	ScopeAll Scope = "ALL"
+	// Rebuild only the quad indexes.
+	ScopeQuads Scope = "QUADS"
+	// Rebuild only the dictionaries.
+	ScopeDictionaries Scope = "DICTIONARIES"
+)
+
+// Values returns all known values for Scope. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Scope) Values() []Scope {
+	return []Scope{
+		"ALL",
+		"QUADS",
+		"DICTIONARIES",
+	}
+}
+
 type StatisticsAutoGenerationMode string
 
 // Enum values for StatisticsAutoGenerationMode
@@ -278,5 +335,31 @@ func (StatisticsAutoGenerationMode) Values() []StatisticsAutoGenerationMode {
 		"disableAutoCompute",
 		"enableAutoCompute",
 		"refresh",
+	}
+}
+
+type WriteBufferSize string
+
+// Enum values for WriteBufferSize
+const (
+	// Suitable for databases with light to moderate write activity. This is the
+	// default.
+	WriteBufferSizeLow WriteBufferSize = "LOW"
+	// Recommended for databases with sustained write traffic or bulk loading.
+	WriteBufferSizeMedium WriteBufferSize = "MEDIUM"
+	// Use when rebuilding indexes during heavy write workloads or continuous bulk
+	// data ingestion.
+	WriteBufferSizeHigh WriteBufferSize = "HIGH"
+)
+
+// Values returns all known values for WriteBufferSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WriteBufferSize) Values() []WriteBufferSize {
+	return []WriteBufferSize{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
 	}
 }

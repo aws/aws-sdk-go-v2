@@ -915,7 +915,7 @@ var ArtifactType_YAML *smithy.Schema
 var Assets = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "Assets",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var Assets_endpoints *smithy.Schema
 
 var Assets_actors *smithy.Schema
@@ -927,6 +927,8 @@ var Assets_sourceCode *smithy.Schema
 var Assets_integratedRepositories *smithy.Schema
 
 var Assets_trustedCaCertificates *smithy.Schema
+
+var Assets_clientCertificates *smithy.Schema
 
 var _AuthCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -1243,6 +1245,33 @@ var CleanUpStrategy = smithy.NewSchema(smithy.ShapeID{
 var CleanUpStrategy_BEST_EFFORT_DELETE *smithy.Schema
 
 var CleanUpStrategy_RETAIN_ALL *smithy.Schema
+
+var ClientCertificate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ClientCertificate",
+}, smithy.ShapeTypeStructure, 3)
+var ClientCertificate_name *smithy.Schema
+
+var ClientCertificate_secretArn *smithy.Schema
+
+var ClientCertificate_origins *smithy.Schema
+
+var _ClientCertificateList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ClientCertificateList",
+}, smithy.ShapeTypeList, 1)
+var _ClientCertificateList_member *smithy.Schema
+
+var _ClientCertificateName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ClientCertificateName",
+}, smithy.ShapeTypeString, 0)
+
+var _ClientCertificateOriginList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.securityagent",
+	Name:      "ClientCertificateOriginList",
+}, smithy.ShapeTypeList, 1)
+var _ClientCertificateOriginList_member *smithy.Schema
 
 var _ClientId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
@@ -2587,7 +2616,7 @@ var _PentestIdList_member *smithy.Schema
 var PentestJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.securityagent",
 	Name:      "PentestJob",
-}, smithy.ShapeTypeStructure, 35)
+}, smithy.ShapeTypeStructure, 36)
 var PentestJob_pentestJobId *smithy.Schema
 
 var PentestJob_pentestId *smithy.Schema
@@ -2629,6 +2658,8 @@ var PentestJob_errorInformation *smithy.Schema
 var PentestJob_integratedRepositories *smithy.Schema
 
 var PentestJob_trustedCaCertificates *smithy.Schema
+
+var PentestJob_clientCertificates *smithy.Schema
 
 var PentestJob_codeRemediationStrategy *smithy.Schema
 
@@ -6677,6 +6708,16 @@ func init() {
 
 	_TrustedCaCertificateList_member = _TrustedCaCertificateList.AddMember("member", TrustedCaCertificate)
 
+	_ClientCertificateOriginList_member = _ClientCertificateOriginList.AddMember("member", smithyprelude.String)
+
+	ClientCertificate_name = ClientCertificate.AddMember("name", _ClientCertificateName)
+
+	ClientCertificate_secretArn = ClientCertificate.AddMember("secretArn", smithyprelude.String)
+
+	ClientCertificate_origins = ClientCertificate.AddMember("origins", _ClientCertificateOriginList)
+
+	_ClientCertificateList_member = _ClientCertificateList.AddMember("member", ClientCertificate)
+
 	Assets_endpoints = Assets.AddMember("endpoints", _EndpointList)
 
 	Assets_actors = Assets.AddMember("actors", _ActorList)
@@ -6688,6 +6729,8 @@ func init() {
 	Assets_integratedRepositories = Assets.AddMember("integratedRepositories", _IntegratedRepositoryList)
 
 	Assets_trustedCaCertificates = Assets.AddMember("trustedCaCertificates", _TrustedCaCertificateList)
+
+	Assets_clientCertificates = Assets.AddMember("clientCertificates", _ClientCertificateList)
 
 	AzureDevOpsIntegrationInput_code = AzureDevOpsIntegrationInput.AddMember("code", _AuthCode)
 
@@ -7898,6 +7941,8 @@ func init() {
 	PentestJob_integratedRepositories = PentestJob.AddMember("integratedRepositories", _IntegratedRepositoryList)
 
 	PentestJob_trustedCaCertificates = PentestJob.AddMember("trustedCaCertificates", _TrustedCaCertificateList)
+
+	PentestJob_clientCertificates = PentestJob.AddMember("clientCertificates", _ClientCertificateList)
 
 	PentestJob_codeRemediationStrategy = PentestJob.AddMember("codeRemediationStrategy", CodeRemediationStrategy)
 

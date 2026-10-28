@@ -223,6 +223,12 @@ var ___listOfPluginDescription = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var ___listOfPluginDescription_member *smithy.Schema
 
+var ___listOfPluginUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "__listOfPluginUpdate",
+}, smithy.ShapeTypeList, 1)
+var ___listOfPluginUpdate_member *smithy.Schema
+
 var ___listOfWorkerConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "__listOfWorkerConfigurationSummary",
@@ -559,6 +565,14 @@ var CustomPluginSummary_latestRevision *smithy.Schema
 
 var CustomPluginSummary_name *smithy.Schema
 
+var CustomPluginUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "CustomPluginUpdate",
+}, smithy.ShapeTypeStructure, 2)
+var CustomPluginUpdate_customPluginArn *smithy.Schema
+
+var CustomPluginUpdate_revision *smithy.Schema
+
 var FirehoseLogDelivery = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "FirehoseLogDelivery",
@@ -675,6 +689,12 @@ var PluginDescription = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PluginDescription",
 }, smithy.ShapeTypeStructure, 1)
 var PluginDescription_customPlugin *smithy.Schema
+
+var PluginUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "PluginUpdate",
+}, smithy.ShapeTypeStructure, 1)
+var PluginUpdate_customPlugin *smithy.Schema
 
 var ProvisionedCapacity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
@@ -904,6 +924,14 @@ var WorkerConfigurationSummary_workerConfigurationArn *smithy.Schema
 
 var WorkerConfigurationSummary_workerConfigurationState *smithy.Schema
 
+var WorkerConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.kafkaconnect",
+	Name:      "WorkerConfigurationUpdate",
+}, smithy.ShapeTypeStructure, 2)
+var WorkerConfigurationUpdate_revision *smithy.Schema
+
+var WorkerConfigurationUpdate_workerConfigurationArn *smithy.Schema
+
 var WorkerLogDelivery = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "WorkerLogDelivery",
@@ -927,8 +955,14 @@ var WorkerLogDeliveryDescription_s3 *smithy.Schema
 var WorkerSetting = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "WorkerSetting",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 4)
 var WorkerSetting_capacity *smithy.Schema
+
+var WorkerSetting_plugins *smithy.Schema
+
+var WorkerSetting_workerConfiguration *smithy.Schema
+
+var WorkerSetting_useDefaultWorkerConfiguration *smithy.Schema
 
 var CreateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
@@ -1351,7 +1385,7 @@ var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
 	Name:      "UpdateConnectorRequest",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
 var UpdateConnectorRequest_capacity *smithy.Schema
 
 var UpdateConnectorRequest_connectorConfiguration *smithy.Schema
@@ -1361,6 +1395,12 @@ var UpdateConnectorRequest_skipHealthValidation *smithy.Schema
 var UpdateConnectorRequest_connectorArn *smithy.Schema
 
 var UpdateConnectorRequest_currentVersion *smithy.Schema
+
+var UpdateConnectorRequest_plugins *smithy.Schema
+
+var UpdateConnectorRequest_workerConfiguration *smithy.Schema
+
+var UpdateConnectorRequest_useDefaultWorkerConfiguration *smithy.Schema
 
 var UpdateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.kafkaconnect",
@@ -1547,6 +1587,14 @@ func init() {
 
 	___listOfPlugin_member = ___listOfPlugin.AddMember("member", Plugin)
 
+	CustomPluginUpdate_customPluginArn = CustomPluginUpdate.AddMember("customPluginArn", ___string)
+
+	CustomPluginUpdate_revision = CustomPluginUpdate.AddMember("revision", ___longMin1)
+
+	PluginUpdate_customPlugin = PluginUpdate.AddMember("customPlugin", CustomPluginUpdate)
+
+	___listOfPluginUpdate_member = ___listOfPluginUpdate.AddMember("member", PluginUpdate)
+
 	WorkerConfigurationRevisionSummary_creationTime = WorkerConfigurationRevisionSummary.AddMember("creationTime", ___timestampIso8601)
 
 	WorkerConfigurationRevisionSummary_description = WorkerConfigurationRevisionSummary.AddMember("description", ___string)
@@ -1705,7 +1753,17 @@ func init() {
 
 	WorkerConfigurationRevisionDescription_revision = WorkerConfigurationRevisionDescription.AddMember("revision", ___long)
 
+	WorkerConfigurationUpdate_revision = WorkerConfigurationUpdate.AddMember("revision", ___longMin1)
+
+	WorkerConfigurationUpdate_workerConfigurationArn = WorkerConfigurationUpdate.AddMember("workerConfigurationArn", ___string)
+
 	WorkerSetting_capacity = WorkerSetting.AddMember("capacity", CapacityDescription)
+
+	WorkerSetting_plugins = WorkerSetting.AddMember("plugins", ___listOfPluginDescription)
+
+	WorkerSetting_workerConfiguration = WorkerSetting.AddMember("workerConfiguration", WorkerConfigurationDescription)
+
+	WorkerSetting_useDefaultWorkerConfiguration = WorkerSetting.AddMember("useDefaultWorkerConfiguration", ___boolean)
 
 	CreateConnectorRequest_capacity = CreateConnectorRequest.AddMember("capacity", Capacity)
 
@@ -1972,6 +2030,12 @@ func init() {
 	UpdateConnectorRequest_connectorArn = UpdateConnectorRequest.AddMember("connectorArn", ___string, &smithytraits.HTTPLabel{})
 
 	UpdateConnectorRequest_currentVersion = UpdateConnectorRequest.AddMember("currentVersion", ___string, &smithytraits.HTTPQuery{Name: "currentVersion"})
+
+	UpdateConnectorRequest_plugins = UpdateConnectorRequest.AddMember("plugins", ___listOfPluginUpdate)
+
+	UpdateConnectorRequest_workerConfiguration = UpdateConnectorRequest.AddMember("workerConfiguration", WorkerConfigurationUpdate)
+
+	UpdateConnectorRequest_useDefaultWorkerConfiguration = UpdateConnectorRequest.AddMember("useDefaultWorkerConfiguration", ___boolean)
 
 	UpdateConnectorResponse_connectorArn = UpdateConnectorResponse.AddMember("connectorArn", ___string)
 

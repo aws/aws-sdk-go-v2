@@ -162,6 +162,52 @@ func (v *DeleteStatisticsValueMap) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// Contains dictionary storage metrics for the Neptune database, including total
+// dictionary size and entry count, and the size and count for blob (large value)
+// entries.
+type DictionariesInfo struct {
+
+	// The size and entry count for the blob (large value) dictionary entries.
+	Blobs *StorageMetrics
+
+	// The total size and entry count across all dictionary entries.
+	Total *StorageMetrics
+
+	noSmithyDocumentSerde
+}
+
+func (v *DictionariesInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DictionariesInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DictionariesInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blobs != nil {
+		s.WriteStruct(schemas.DictionariesInfo_blobs)
+		v.Blobs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Total != nil {
+		s.WriteStruct(schemas.DictionariesInfo_total)
+		v.Total.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DictionariesInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DictionariesInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DictionariesInfo_blobs:
+			v.Blobs = &StorageMetrics{}
+			return v.Blobs.Deserialize(d)
+		case schemas.DictionariesInfo_total:
+			v.Total = &StorageMetrics{}
+			return v.Total.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An edge structure.
 type EdgeStructure struct {
 
@@ -894,6 +940,132 @@ func (v *PropertygraphSummaryValueMap) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// Contains storage information about quad indexes for both RDF and Property Graph
+// data models.
+type QuadsIndexesInfo struct {
+
+	// Contains quad index information for the Property Graph (Gremlin/openCypher)
+	// data model.
+	PG *QuadsInfo
+
+	// Contains quad index information for the RDF (SPARQL) data model.
+	RDF *QuadsInfo
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuadsIndexesInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuadsIndexesInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuadsIndexesInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PG != nil {
+		s.WriteStruct(schemas.QuadsIndexesInfo_PG)
+		v.PG.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RDF != nil {
+		s.WriteStruct(schemas.QuadsIndexesInfo_RDF)
+		v.RDF.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QuadsIndexesInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuadsIndexesInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuadsIndexesInfo_PG:
+			v.PG = &QuadsInfo{}
+			return v.PG.Deserialize(d)
+		case schemas.QuadsIndexesInfo_RDF:
+			v.RDF = &QuadsInfo{}
+			return v.RDF.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Contains storage information about quad indexes.
+type QuadsInfo struct {
+
+	// Size and count information for the GPSO quad index.
+	GPSO *StorageMetrics
+
+	// Size and count information for the OSGP quad index. This index is optional. For
+	// details on how to enable it and evaluate the benefits and costs, see [Neptune Data Model].
+	//
+	// [Neptune Data Model]: https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-data-model.html
+	OSGP *StorageMetrics
+
+	// Size and count information for the POGS quad index.
+	POGS *StorageMetrics
+
+	// Size and count information for the PZSOG quad index.
+	PZSOG *StorageMetrics
+
+	// Size and count information for the SPOG quad index.
+	SPOG *StorageMetrics
+
+	noSmithyDocumentSerde
+}
+
+func (v *QuadsInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuadsInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuadsInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GPSO != nil {
+		s.WriteStruct(schemas.QuadsInfo_GPSO)
+		v.GPSO.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OSGP != nil {
+		s.WriteStruct(schemas.QuadsInfo_OSGP)
+		v.OSGP.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.POGS != nil {
+		s.WriteStruct(schemas.QuadsInfo_POGS)
+		v.POGS.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PZSOG != nil {
+		s.WriteStruct(schemas.QuadsInfo_PZSOG)
+		v.PZSOG.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SPOG != nil {
+		s.WriteStruct(schemas.QuadsInfo_SPOG)
+		v.SPOG.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QuadsInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuadsInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuadsInfo_GPSO:
+			v.GPSO = &StorageMetrics{}
+			return v.GPSO.Deserialize(d)
+		case schemas.QuadsInfo_OSGP:
+			v.OSGP = &StorageMetrics{}
+			return v.OSGP.Deserialize(d)
+		case schemas.QuadsInfo_POGS:
+			v.POGS = &StorageMetrics{}
+			return v.POGS.Deserialize(d)
+		case schemas.QuadsInfo_PZSOG:
+			v.PZSOG = &StorageMetrics{}
+			return v.PZSOG.Deserialize(d)
+		case schemas.QuadsInfo_SPOG:
+			v.SPOG = &StorageMetrics{}
+			return v.SPOG.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Structure to capture query statistics such as how many queries are running,
 // accepted or waiting and their details.
 type QueryEvalStats struct {
@@ -1416,6 +1588,50 @@ func (v *StatisticsSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Contains storage size and entry count metrics.
+type StorageMetrics struct {
+
+	// The number of entries.
+	//
+	// This member is required.
+	Count *int64
+
+	// Storage size in bytes.
+	//
+	// This member is required.
+	SizeInBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *StorageMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.StorageMetrics_count, *v.Count)
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.StorageMetrics_sizeInBytes, *v.SizeInBytes)
+	}
+}
+func (v *StorageMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageMetrics_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.StorageMetrics_count, v.Count)
+		case schemas.StorageMetrics_sizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.StorageMetrics_sizeInBytes, v.SizeInBytes)
+		}
+		return nil
+	})
+}
+
 // A subject structure.
 type SubjectStructure struct {
 
@@ -1448,6 +1664,51 @@ func (v *SubjectStructure) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadInt64(schemas.SubjectStructure_count, v.Count)
 		case schemas.SubjectStructure_predicates:
 			return deserializePredicates(d, schemas.SubjectStructure_predicates, &v.Predicates)
+		}
+		return nil
+	})
+}
+
+// Contains storage metrics for the Neptune undo logs, including the total size in
+// bytes and the number of entries in the undo log list.
+type UndoLogsMetrics struct {
+
+	// The number of entries in the undo log list.
+	//
+	// This member is required.
+	ListSize *int64
+
+	// The total size of the undo logs in bytes.
+	//
+	// This member is required.
+	SizeInBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *UndoLogsMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UndoLogsMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UndoLogsMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListSize != nil {
+		s.WriteInt64(schemas.UndoLogsMetrics_listSize, *v.ListSize)
+	}
+	if v.SizeInBytes != nil {
+		s.WriteInt64(schemas.UndoLogsMetrics_sizeInBytes, *v.SizeInBytes)
+	}
+}
+func (v *UndoLogsMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UndoLogsMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UndoLogsMetrics_listSize:
+			v.ListSize = new(int64)
+			return d.ReadInt64(schemas.UndoLogsMetrics_listSize, v.ListSize)
+		case schemas.UndoLogsMetrics_sizeInBytes:
+			v.SizeInBytes = new(int64)
+			return d.ReadInt64(schemas.UndoLogsMetrics_sizeInBytes, v.SizeInBytes)
 		}
 		return nil
 	})

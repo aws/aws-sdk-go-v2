@@ -15,6 +15,13 @@ var CancelGremlinQuery = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/gremlin/status/{queryId}",
 	Code: 200})
 
+var CancelIndexRebuild = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "CancelIndexRebuild",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/storage/indexes/rebuilds/{rebuildId}/cancel",
+	Code: 200})
+
 var CancelLoaderJob = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "CancelLoaderJob",
@@ -134,6 +141,13 @@ var GetGremlinQueryStatus = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/gremlin/status/{queryId}",
 	Code: 200})
 
+var GetIndexRebuildStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "GetIndexRebuildStatus",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/storage/indexes/rebuilds/{rebuildId}",
+	Code: 200})
+
 var GetLoaderJobStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "GetLoaderJobStatus",
@@ -218,11 +232,25 @@ var GetSparqlStream = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/sparql/stream",
 	Code: 200})
 
+var GetStorageInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "GetStorageInfo",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/storage/info",
+	Code: 200})
+
 var ListGremlinQueries = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "ListGremlinQueries",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/gremlin/status",
+	Code: 200})
+
+var ListIndexRebuilds = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "ListIndexRebuilds",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/storage/indexes/rebuilds",
 	Code: 200})
 
 var ListLoaderJobs = smithy.NewSchema(smithy.ShapeID{
@@ -279,6 +307,13 @@ var ManageSparqlStatistics = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ManageSparqlStatistics",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sparql/statistics",
+	Code: 200})
+
+var StartIndexRebuild = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "StartIndexRebuild",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/storage/indexes/rebuilds",
 	Code: 200})
 
 var StartLoaderJob = smithy.NewSchema(smithy.ShapeID{
@@ -357,6 +392,17 @@ var BulkLoadIdNotFoundException_requestId *smithy.Schema
 
 var BulkLoadIdNotFoundException_code *smithy.Schema
 
+var CancelledByMaintenanceException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "CancelledByMaintenanceException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
+	&smithytraits.HTTPError{Code: 500})
+var CancelledByMaintenanceException_detailedMessage *smithy.Schema
+
+var CancelledByMaintenanceException_requestId *smithy.Schema
+
+var CancelledByMaintenanceException_code *smithy.Schema
+
 var CancelledByUserException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "CancelledByUserException",
@@ -432,6 +478,14 @@ var DeleteStatisticsValueMap = smithy.NewSchema(smithy.ShapeID{
 var DeleteStatisticsValueMap_active *smithy.Schema
 
 var DeleteStatisticsValueMap_statisticsId *smithy.Schema
+
+var DictionariesInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "DictionariesInfo",
+}, smithy.ShapeTypeStructure, 2)
+var DictionariesInfo_total *smithy.Schema
+
+var DictionariesInfo_blobs *smithy.Schema
 
 var _DocumentValuedMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
@@ -923,6 +977,28 @@ var PropertygraphSummaryValueMap_lastStatisticsComputationTime *smithy.Schema
 
 var PropertygraphSummaryValueMap_graphSummary *smithy.Schema
 
+var QuadsIndexesInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "QuadsIndexesInfo",
+}, smithy.ShapeTypeStructure, 2)
+var QuadsIndexesInfo_RDF *smithy.Schema
+
+var QuadsIndexesInfo_PG *smithy.Schema
+
+var QuadsInfo = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "QuadsInfo",
+}, smithy.ShapeTypeStructure, 5)
+var QuadsInfo_SPOG *smithy.Schema
+
+var QuadsInfo_POGS *smithy.Schema
+
+var QuadsInfo_GPSO *smithy.Schema
+
+var QuadsInfo_OSGP *smithy.Schema
+
+var QuadsInfo_PZSOG *smithy.Schema
+
 var QueryEvalStats = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "QueryEvalStats",
@@ -1013,6 +1089,33 @@ var ReadOnlyViolationException_requestId *smithy.Schema
 
 var ReadOnlyViolationException_code *smithy.Schema
 
+var _RebuildConcurrency = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "RebuildConcurrency",
+}, smithy.ShapeTypeInteger, 0)
+
+var _RebuildIdList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "RebuildIdList",
+}, smithy.ShapeTypeList, 1)
+var _RebuildIdList_member *smithy.Schema
+
+var RebuildStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "RebuildStatus",
+}, smithy.ShapeTypeEnum, 6)
+var RebuildStatus_PREPARING *smithy.Schema
+
+var RebuildStatus_REBUILDING *smithy.Schema
+
+var RebuildStatus_COMPLETED *smithy.Schema
+
+var RebuildStatus_FAILED *smithy.Schema
+
+var RebuildStatus_CANCELLED *smithy.Schema
+
+var RebuildStatus_CANCELLING *smithy.Schema
+
 var RefreshStatisticsIdMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "RefreshStatisticsIdMap",
@@ -1023,6 +1126,17 @@ var _ReportAsText = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "ReportAsText",
 }, smithy.ShapeTypeBlob, 0, &smithytraits.MediaType{Type: "text/plain"})
+
+var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "ResourceNotFoundException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 404})
+var ResourceNotFoundException_detailedMessage *smithy.Schema
+
+var ResourceNotFoundException_requestId *smithy.Schema
+
+var ResourceNotFoundException_code *smithy.Schema
 
 var S3BucketRegion = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
@@ -1111,6 +1225,16 @@ var S3Exception_requestId *smithy.Schema
 
 var S3Exception_code *smithy.Schema
 
+var Scope = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "Scope",
+}, smithy.ShapeTypeEnum, 3)
+var Scope_ALL *smithy.Schema
+
+var Scope_QUADS *smithy.Schema
+
+var Scope_DICTIONARIES *smithy.Schema
+
 var ServerShutdownException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "ServerShutdownException",
@@ -1195,6 +1319,14 @@ var StatisticsSummary_instanceCount *smithy.Schema
 
 var StatisticsSummary_predicateCount *smithy.Schema
 
+var StorageMetrics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "StorageMetrics",
+}, smithy.ShapeTypeStructure, 2)
+var StorageMetrics_sizeInBytes *smithy.Schema
+
+var StorageMetrics_count *smithy.Schema
+
 var StreamRecordsNotFoundException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "StreamRecordsNotFoundException",
@@ -1267,6 +1399,14 @@ var TooManyRequestsException_requestId *smithy.Schema
 
 var TooManyRequestsException_code *smithy.Schema
 
+var UndoLogsMetrics = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "UndoLogsMetrics",
+}, smithy.ShapeTypeStructure, 2)
+var UndoLogsMetrics_sizeInBytes *smithy.Schema
+
+var UndoLogsMetrics_listSize *smithy.Schema
+
 var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "UnsupportedOperationException",
@@ -1277,6 +1417,27 @@ var UnsupportedOperationException_detailedMessage *smithy.Schema
 var UnsupportedOperationException_requestId *smithy.Schema
 
 var UnsupportedOperationException_code *smithy.Schema
+
+var ValidationException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "ValidationException",
+}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 400})
+var ValidationException_detailedMessage *smithy.Schema
+
+var ValidationException_requestId *smithy.Schema
+
+var ValidationException_code *smithy.Schema
+
+var WriteBufferSize = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "WriteBufferSize",
+}, smithy.ShapeTypeEnum, 3)
+var WriteBufferSize_LOW *smithy.Schema
+
+var WriteBufferSize_MEDIUM *smithy.Schema
+
+var WriteBufferSize_HIGH *smithy.Schema
 
 var CancelGremlinQueryInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
@@ -1289,6 +1450,22 @@ var CancelGremlinQueryOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CancelGremlinQueryOutput",
 }, smithy.ShapeTypeStructure, 1)
 var CancelGremlinQueryOutput_status *smithy.Schema
+
+var CancelIndexRebuildInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "CancelIndexRebuildInput",
+}, smithy.ShapeTypeStructure, 1)
+var CancelIndexRebuildInput_rebuildId *smithy.Schema
+
+var CancelIndexRebuildOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "CancelIndexRebuildOutput",
+}, smithy.ShapeTypeStructure, 3)
+var CancelIndexRebuildOutput_status *smithy.Schema
+
+var CancelIndexRebuildOutput_concurrency *smithy.Schema
+
+var CancelIndexRebuildOutput_writeBufferSize *smithy.Schema
 
 var CancelLoaderJobInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
@@ -1578,6 +1755,34 @@ var GetGremlinQueryStatusOutput_queryString *smithy.Schema
 
 var GetGremlinQueryStatusOutput_queryEvalStats *smithy.Schema
 
+var GetIndexRebuildStatusInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "GetIndexRebuildStatusInput",
+}, smithy.ShapeTypeStructure, 1)
+var GetIndexRebuildStatusInput_rebuildId *smithy.Schema
+
+var GetIndexRebuildStatusOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "GetIndexRebuildStatusOutput",
+}, smithy.ShapeTypeStructure, 9)
+var GetIndexRebuildStatusOutput_status *smithy.Schema
+
+var GetIndexRebuildStatusOutput_scope *smithy.Schema
+
+var GetIndexRebuildStatusOutput_concurrency *smithy.Schema
+
+var GetIndexRebuildStatusOutput_writeBufferSize *smithy.Schema
+
+var GetIndexRebuildStatusOutput_startTime *smithy.Schema
+
+var GetIndexRebuildStatusOutput_progressPercentage *smithy.Schema
+
+var GetIndexRebuildStatusOutput_estimatedEndTime *smithy.Schema
+
+var GetIndexRebuildStatusOutput_endTime *smithy.Schema
+
+var GetIndexRebuildStatusOutput_failureReason *smithy.Schema
+
 var GetLoaderJobStatusInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "GetLoaderJobStatusInput",
@@ -1800,6 +2005,26 @@ var GetSparqlStreamOutput_records *smithy.Schema
 
 var GetSparqlStreamOutput_totalRecords *smithy.Schema
 
+var GetStorageOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "GetStorageOutput",
+}, smithy.ShapeTypeStructure, 8)
+var GetStorageOutput_totalStorageBytesUsed *smithy.Schema
+
+var GetStorageOutput_quads *smithy.Schema
+
+var GetStorageOutput_dictionaries *smithy.Schema
+
+var GetStorageOutput_undoLogs *smithy.Schema
+
+var GetStorageOutput_streams *smithy.Schema
+
+var GetStorageOutput_dfeStatistics *smithy.Schema
+
+var GetStorageOutput_schema *smithy.Schema
+
+var GetStorageOutput_internals *smithy.Schema
+
 var ListGremlinQueriesInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
 	Name:      "ListGremlinQueriesInput",
@@ -1815,6 +2040,12 @@ var ListGremlinQueriesOutput_acceptedQueryCount *smithy.Schema
 var ListGremlinQueriesOutput_runningQueryCount *smithy.Schema
 
 var ListGremlinQueriesOutput_queries *smithy.Schema
+
+var ListIndexRebuildsOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "ListIndexRebuildsOutput",
+}, smithy.ShapeTypeStructure, 1)
+var ListIndexRebuildsOutput_rebuildIds *smithy.Schema
 
 var ListLoaderJobsInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
@@ -1931,6 +2162,32 @@ var ManageSparqlStatisticsOutput = smithy.NewSchema(smithy.ShapeID{
 var ManageSparqlStatisticsOutput_status *smithy.Schema
 
 var ManageSparqlStatisticsOutput_payload *smithy.Schema
+
+var StartIndexRebuildInput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "StartIndexRebuildInput",
+}, smithy.ShapeTypeStructure, 4)
+var StartIndexRebuildInput_scope *smithy.Schema
+
+var StartIndexRebuildInput_concurrency *smithy.Schema
+
+var StartIndexRebuildInput_writeBufferSize *smithy.Schema
+
+var StartIndexRebuildInput_clientToken *smithy.Schema
+
+var StartIndexRebuildOutput = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.neptunedata",
+	Name:      "StartIndexRebuildOutput",
+}, smithy.ShapeTypeStructure, 5)
+var StartIndexRebuildOutput_status *smithy.Schema
+
+var StartIndexRebuildOutput_rebuildId *smithy.Schema
+
+var StartIndexRebuildOutput_scope *smithy.Schema
+
+var StartIndexRebuildOutput_concurrency *smithy.Schema
+
+var StartIndexRebuildOutput_writeBufferSize *smithy.Schema
 
 var StartLoaderJobInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.neptunedata",
@@ -2131,6 +2388,12 @@ func init() {
 
 	BulkLoadIdNotFoundException_code = BulkLoadIdNotFoundException.AddMember("code", smithyprelude.String)
 
+	CancelledByMaintenanceException_detailedMessage = CancelledByMaintenanceException.AddMember("detailedMessage", smithyprelude.String)
+
+	CancelledByMaintenanceException_requestId = CancelledByMaintenanceException.AddMember("requestId", smithyprelude.String)
+
+	CancelledByMaintenanceException_code = CancelledByMaintenanceException.AddMember("code", smithyprelude.String)
+
 	CancelledByUserException_detailedMessage = CancelledByUserException.AddMember("detailedMessage", smithyprelude.String)
 
 	CancelledByUserException_requestId = CancelledByUserException.AddMember("requestId", smithyprelude.String)
@@ -2170,6 +2433,14 @@ func init() {
 	DeleteStatisticsValueMap_active = DeleteStatisticsValueMap.AddMember("active", smithyprelude.Boolean)
 
 	DeleteStatisticsValueMap_statisticsId = DeleteStatisticsValueMap.AddMember("statisticsId", smithyprelude.String)
+
+	StorageMetrics_sizeInBytes = StorageMetrics.AddMember("sizeInBytes", smithyprelude.Long)
+
+	StorageMetrics_count = StorageMetrics.AddMember("count", smithyprelude.Long)
+
+	DictionariesInfo_total = DictionariesInfo.AddMember("total", StorageMetrics)
+
+	DictionariesInfo_blobs = DictionariesInfo.AddMember("blobs", StorageMetrics)
 
 	_DocumentValuedMap_key = _DocumentValuedMap.AddMember("key", smithyprelude.String)
 
@@ -2455,6 +2726,20 @@ func init() {
 
 	PropertygraphSummaryValueMap_graphSummary = PropertygraphSummaryValueMap.AddMember("graphSummary", PropertygraphSummary)
 
+	QuadsInfo_SPOG = QuadsInfo.AddMember("SPOG", StorageMetrics)
+
+	QuadsInfo_POGS = QuadsInfo.AddMember("POGS", StorageMetrics)
+
+	QuadsInfo_GPSO = QuadsInfo.AddMember("GPSO", StorageMetrics)
+
+	QuadsInfo_OSGP = QuadsInfo.AddMember("OSGP", StorageMetrics)
+
+	QuadsInfo_PZSOG = QuadsInfo.AddMember("PZSOG", StorageMetrics)
+
+	QuadsIndexesInfo_RDF = QuadsIndexesInfo.AddMember("RDF", QuadsInfo)
+
+	QuadsIndexesInfo_PG = QuadsIndexesInfo.AddMember("PG", QuadsInfo)
+
 	QueryLanguageVersion_version = QueryLanguageVersion.AddMember("version", smithyprelude.String)
 
 	QueryLimitExceededException_detailedMessage = QueryLimitExceededException.AddMember("detailedMessage", smithyprelude.String)
@@ -2507,7 +2792,27 @@ func init() {
 
 	ReadOnlyViolationException_code = ReadOnlyViolationException.AddMember("code", smithyprelude.String)
 
+	_RebuildIdList_member = _RebuildIdList.AddMember("member", smithyprelude.String)
+
+	RebuildStatus_PREPARING = RebuildStatus.AddMember("PREPARING", smithyprelude.Unit)
+
+	RebuildStatus_REBUILDING = RebuildStatus.AddMember("REBUILDING", smithyprelude.Unit)
+
+	RebuildStatus_COMPLETED = RebuildStatus.AddMember("COMPLETED", smithyprelude.Unit)
+
+	RebuildStatus_FAILED = RebuildStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	RebuildStatus_CANCELLED = RebuildStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	RebuildStatus_CANCELLING = RebuildStatus.AddMember("CANCELLING", smithyprelude.Unit)
+
 	RefreshStatisticsIdMap_statisticsId = RefreshStatisticsIdMap.AddMember("statisticsId", smithyprelude.String)
+
+	ResourceNotFoundException_detailedMessage = ResourceNotFoundException.AddMember("detailedMessage", smithyprelude.String)
+
+	ResourceNotFoundException_requestId = ResourceNotFoundException.AddMember("requestId", smithyprelude.String)
+
+	ResourceNotFoundException_code = ResourceNotFoundException.AddMember("code", smithyprelude.String)
 
 	S3BucketRegion_US_EAST_1 = S3BucketRegion.AddMember("US_EAST_1", smithyprelude.Unit)
 
@@ -2587,6 +2892,12 @@ func init() {
 
 	S3Exception_code = S3Exception.AddMember("code", smithyprelude.String)
 
+	Scope_ALL = Scope.AddMember("ALL", smithyprelude.Unit)
+
+	Scope_QUADS = Scope.AddMember("QUADS", smithyprelude.Unit)
+
+	Scope_DICTIONARIES = Scope.AddMember("DICTIONARIES", smithyprelude.Unit)
+
 	ServerShutdownException_detailedMessage = ServerShutdownException.AddMember("detailedMessage", smithyprelude.String)
 
 	ServerShutdownException_requestId = ServerShutdownException.AddMember("requestId", smithyprelude.String)
@@ -2661,15 +2972,39 @@ func init() {
 
 	TooManyRequestsException_code = TooManyRequestsException.AddMember("code", smithyprelude.String)
 
+	UndoLogsMetrics_sizeInBytes = UndoLogsMetrics.AddMember("sizeInBytes", smithyprelude.Long)
+
+	UndoLogsMetrics_listSize = UndoLogsMetrics.AddMember("listSize", smithyprelude.Long)
+
 	UnsupportedOperationException_detailedMessage = UnsupportedOperationException.AddMember("detailedMessage", smithyprelude.String)
 
 	UnsupportedOperationException_requestId = UnsupportedOperationException.AddMember("requestId", smithyprelude.String)
 
 	UnsupportedOperationException_code = UnsupportedOperationException.AddMember("code", smithyprelude.String)
 
+	ValidationException_detailedMessage = ValidationException.AddMember("detailedMessage", smithyprelude.String)
+
+	ValidationException_requestId = ValidationException.AddMember("requestId", smithyprelude.String)
+
+	ValidationException_code = ValidationException.AddMember("code", smithyprelude.String)
+
+	WriteBufferSize_LOW = WriteBufferSize.AddMember("LOW", smithyprelude.Unit)
+
+	WriteBufferSize_MEDIUM = WriteBufferSize.AddMember("MEDIUM", smithyprelude.Unit)
+
+	WriteBufferSize_HIGH = WriteBufferSize.AddMember("HIGH", smithyprelude.Unit)
+
 	CancelGremlinQueryInput_queryId = CancelGremlinQueryInput.AddMember("queryId", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	CancelGremlinQueryOutput_status = CancelGremlinQueryOutput.AddMember("status", smithyprelude.String)
+
+	CancelIndexRebuildInput_rebuildId = CancelIndexRebuildInput.AddMember("rebuildId", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	CancelIndexRebuildOutput_status = CancelIndexRebuildOutput.AddMember("status", RebuildStatus)
+
+	CancelIndexRebuildOutput_concurrency = CancelIndexRebuildOutput.AddMember("concurrency", _RebuildConcurrency)
+
+	CancelIndexRebuildOutput_writeBufferSize = CancelIndexRebuildOutput.AddMember("writeBufferSize", WriteBufferSize)
 
 	CancelLoaderJobInput_loadId = CancelLoaderJobInput.AddMember("loadId", smithyprelude.String, &smithytraits.HTTPLabel{})
 
@@ -2835,6 +3170,26 @@ func init() {
 
 	GetGremlinQueryStatusOutput_queryEvalStats = GetGremlinQueryStatusOutput.AddMember("queryEvalStats", QueryEvalStats)
 
+	GetIndexRebuildStatusInput_rebuildId = GetIndexRebuildStatusInput.AddMember("rebuildId", smithyprelude.String, &smithytraits.HTTPLabel{})
+
+	GetIndexRebuildStatusOutput_status = GetIndexRebuildStatusOutput.AddMember("status", RebuildStatus)
+
+	GetIndexRebuildStatusOutput_scope = GetIndexRebuildStatusOutput.AddMember("scope", Scope)
+
+	GetIndexRebuildStatusOutput_concurrency = GetIndexRebuildStatusOutput.AddMember("concurrency", _RebuildConcurrency)
+
+	GetIndexRebuildStatusOutput_writeBufferSize = GetIndexRebuildStatusOutput.AddMember("writeBufferSize", WriteBufferSize)
+
+	GetIndexRebuildStatusOutput_startTime = GetIndexRebuildStatusOutput.AddMember("startTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetIndexRebuildStatusOutput_progressPercentage = GetIndexRebuildStatusOutput.AddMember("progressPercentage", smithyprelude.Integer)
+
+	GetIndexRebuildStatusOutput_estimatedEndTime = GetIndexRebuildStatusOutput.AddMember("estimatedEndTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetIndexRebuildStatusOutput_endTime = GetIndexRebuildStatusOutput.AddMember("endTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
+
+	GetIndexRebuildStatusOutput_failureReason = GetIndexRebuildStatusOutput.AddMember("failureReason", smithyprelude.String)
+
 	GetLoaderJobStatusInput_loadId = GetLoaderJobStatusInput.AddMember("loadId", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	GetLoaderJobStatusInput_details = GetLoaderJobStatusInput.AddMember("details", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "details"})
@@ -2969,6 +3324,22 @@ func init() {
 
 	GetSparqlStreamOutput_totalRecords = GetSparqlStreamOutput.AddMember("totalRecords", smithyprelude.Integer)
 
+	GetStorageOutput_totalStorageBytesUsed = GetStorageOutput.AddMember("totalStorageBytesUsed", smithyprelude.Long)
+
+	GetStorageOutput_quads = GetStorageOutput.AddMember("quads", QuadsIndexesInfo)
+
+	GetStorageOutput_dictionaries = GetStorageOutput.AddMember("dictionaries", DictionariesInfo)
+
+	GetStorageOutput_undoLogs = GetStorageOutput.AddMember("undoLogs", UndoLogsMetrics)
+
+	GetStorageOutput_streams = GetStorageOutput.AddMember("streams", StorageMetrics)
+
+	GetStorageOutput_dfeStatistics = GetStorageOutput.AddMember("dfeStatistics", StorageMetrics)
+
+	GetStorageOutput_schema = GetStorageOutput.AddMember("schema", StorageMetrics)
+
+	GetStorageOutput_internals = GetStorageOutput.AddMember("internals", StorageMetrics)
+
 	ListGremlinQueriesInput_includeWaiting = ListGremlinQueriesInput.AddMember("includeWaiting", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "includeWaiting"})
 
 	ListGremlinQueriesOutput_acceptedQueryCount = ListGremlinQueriesOutput.AddMember("acceptedQueryCount", smithyprelude.Integer)
@@ -2976,6 +3347,8 @@ func init() {
 	ListGremlinQueriesOutput_runningQueryCount = ListGremlinQueriesOutput.AddMember("runningQueryCount", smithyprelude.Integer)
 
 	ListGremlinQueriesOutput_queries = ListGremlinQueriesOutput.AddMember("queries", _GremlinQueries)
+
+	ListIndexRebuildsOutput_rebuildIds = ListIndexRebuildsOutput.AddMember("rebuildIds", _RebuildIdList)
 
 	ListLoaderJobsInput_limit = ListLoaderJobsInput.AddMember("limit", _PositiveInteger, &smithytraits.HTTPQuery{Name: "limit"})
 
@@ -3028,6 +3401,24 @@ func init() {
 	ManageSparqlStatisticsOutput_status = ManageSparqlStatisticsOutput.AddMember("status", smithyprelude.String)
 
 	ManageSparqlStatisticsOutput_payload = ManageSparqlStatisticsOutput.AddMember("payload", RefreshStatisticsIdMap)
+
+	StartIndexRebuildInput_scope = StartIndexRebuildInput.AddMember("scope", Scope, &smithytraits.HTTPQuery{Name: "scope"})
+
+	StartIndexRebuildInput_concurrency = StartIndexRebuildInput.AddMember("concurrency", _RebuildConcurrency, &smithytraits.HTTPQuery{Name: "concurrency"})
+
+	StartIndexRebuildInput_writeBufferSize = StartIndexRebuildInput.AddMember("writeBufferSize", WriteBufferSize, &smithytraits.HTTPQuery{Name: "writeBufferSize"})
+
+	StartIndexRebuildInput_clientToken = StartIndexRebuildInput.AddMember("clientToken", smithyprelude.String)
+
+	StartIndexRebuildOutput_status = StartIndexRebuildOutput.AddMember("status", RebuildStatus)
+
+	StartIndexRebuildOutput_rebuildId = StartIndexRebuildOutput.AddMember("rebuildId", smithyprelude.String)
+
+	StartIndexRebuildOutput_scope = StartIndexRebuildOutput.AddMember("scope", Scope)
+
+	StartIndexRebuildOutput_concurrency = StartIndexRebuildOutput.AddMember("concurrency", _RebuildConcurrency)
+
+	StartIndexRebuildOutput_writeBufferSize = StartIndexRebuildOutput.AddMember("writeBufferSize", WriteBufferSize)
 
 	StartLoaderJobInput_source = StartLoaderJobInput.AddMember("source", smithyprelude.String)
 

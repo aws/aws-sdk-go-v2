@@ -29,15 +29,14 @@ func (c *Client) CreateFailoverSlateConfiguration(ctx context.Context, params *C
 type CreateFailoverSlateConfigurationInput struct {
 
 	// Number of seconds of ingest interruption before the failover slate activates.
-	// Minimum: 3 . Maximum: 5 . Default: 3 .
+	// Default: 3 .
 	ActivationThresholdSeconds *int32
 
-	// Maximum number of seconds that the failover slate displays. Minimum: 60 .
-	// Maximum: 180 . Default: 60 .
+	// Maximum number of seconds that the failover slate displays. Default: 60 .
 	MaxSlateDisplaySeconds *int32
 
 	// Minimum number of seconds that the failover slate displays after activation.
-	// Minimum: 3 . Maximum: 10 . Default: 3 .
+	// Default: 3 .
 	MinSlateDisplaySeconds *int32
 
 	// Failover-slate-configuration name. The value does not need to be unique.

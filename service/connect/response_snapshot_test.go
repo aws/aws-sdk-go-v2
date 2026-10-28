@@ -3988,6 +3988,9 @@ func TestCheckResponseSnapshot_CreateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -11489,6 +11492,9 @@ func TestCheckResponseSnapshot_GetTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -24482,6 +24488,9 @@ func TestCheckResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -24579,6 +24588,9 @@ func TestCheckResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -26197,6 +26209,9 @@ func TestCheckResponseSnapshot_Error_PropertyValidationException(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{

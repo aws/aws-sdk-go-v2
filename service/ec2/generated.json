@@ -572,6 +572,7 @@
         "api_op_GetCapacityManagerMetricData.go",
         "api_op_GetCapacityManagerMetricDimensions.go",
         "api_op_GetCapacityManagerMonitoredTagKeys.go",
+        "api_op_GetCapacityManagerSupportabilityScores.go",
         "api_op_GetCapacityReservationUsage.go",
         "api_op_GetClientVpnEndpointAuthorizationPolicy.go",
         "api_op_GetCoipPoolUsage.go",

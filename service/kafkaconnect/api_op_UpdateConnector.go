@@ -10,8 +10,11 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the specified connector. For request body, specify only one parameter:
-// either capacity or connectorConfiguration .
+// Updates the specified connector. In the request body, you can update either the
+// connector's worker setting or its connector configuration, but not both in the
+// same request. To update the worker setting, specify one or more of capacity ,
+// plugins , workerConfiguration , or useDefaultWorkerConfiguration . To update the
+// connector configuration, specify only connectorConfiguration .
 func (c *Client) UpdateConnector(ctx context.Context, params *UpdateConnectorInput, optFns ...func(*Options)) (*UpdateConnectorOutput, error) {
 	if params == nil {
 		params = &UpdateConnectorInput{}
@@ -45,6 +48,15 @@ type UpdateConnectorInput struct {
 	// A map of keys to values that represent the configuration for the connector.
 	ConnectorConfiguration map[string]string
 
+	// Amazon MSK Connect does not currently support specifying multiple plugins as a
+	// list. To use more than one plugin for your connector, you can create a single
+	// custom plugin using a ZIP file that bundles multiple plugins together.
+	//
+	// Specifies which plugin to use for the connector. You must specify a
+	// single-element list containing one customPlugin object. If you don't specify
+	// this parameter, the connector keeps its current plugin.
+	Plugins []types.PluginUpdate
+
 	// Specifies whether the update bypasses connector-level and task-level health
 	// checks. If true , the update skips the health checks. The update stays in effect
 	// even if the connector or its tasks are unhealthy, and Amazon MSK Connect doesn't
@@ -53,6 +65,21 @@ type UpdateConnectorInput struct {
 	// configuration, and the update doesn't take effect. To update a connector that is
 	// in the PAUSED state, you must set this parameter to true .
 	SkipHealthValidation bool
+
+	// Specifies whether to switch the connector to the default worker configuration
+	// that Amazon MSK Connect provides. If true , the connector stops using its custom
+	// worker configuration and uses the default worker configuration instead. If false
+	// or not specified, the connector keeps its current worker configuration. You
+	// can't specify both useDefaultWorkerConfiguration and workerConfiguration in the
+	// same request.
+	UseDefaultWorkerConfiguration bool
+
+	// The worker configuration to use with the connector. Specify the Amazon Resource
+	// Name (ARN) and the revision of the worker configuration. You can't specify both
+	// workerConfiguration and useDefaultWorkerConfiguration in the same request. If
+	// you specify neither parameter, the connector keeps its current worker
+	// configuration.
+	WorkerConfiguration *types.WorkerConfigurationUpdate
 
 	noSmithyDocumentSerde
 }
@@ -76,8 +103,17 @@ func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrentVersion != nil {
 		s.WriteString(schemas.UpdateConnectorRequest_currentVersion, *v.CurrentVersion)
 	}
+	serialize__listOfPluginUpdate(s, schemas.UpdateConnectorRequest_plugins, v.Plugins)
 	if v.SkipHealthValidation != false {
 		s.WriteBool(schemas.UpdateConnectorRequest_skipHealthValidation, v.SkipHealthValidation)
+	}
+	if v.UseDefaultWorkerConfiguration != false {
+		s.WriteBool(schemas.UpdateConnectorRequest_useDefaultWorkerConfiguration, v.UseDefaultWorkerConfiguration)
+	}
+	if v.WorkerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateConnectorRequest_workerConfiguration)
+		v.WorkerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 }
 

@@ -197,6 +197,72 @@ func (v *BulkLoadIdNotFoundException) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// Raised when a request is cancelled because the storage layer entered
+// maintenance mode. This typically happens during a customer-initiated operation
+// such as an index rebuild. It should be treated like
+// ConcurrentModificationException .
+type CancelledByMaintenanceException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	DetailedMessage *string
+	RequestId       *string
+	Code            *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CancelledByMaintenanceException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CancelledByMaintenanceException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CancelledByMaintenanceException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CancelledByMaintenanceException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CancelledByMaintenanceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *CancelledByMaintenanceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelledByMaintenanceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelledByMaintenanceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.CancelledByMaintenanceException_code, *v.Code)
+	}
+	if v.DetailedMessage != nil {
+		s.WriteString(schemas.CancelledByMaintenanceException_detailedMessage, *v.DetailedMessage)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CancelledByMaintenanceException_requestId, *v.RequestId)
+	}
+}
+func (v *CancelledByMaintenanceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelledByMaintenanceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelledByMaintenanceException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.CancelledByMaintenanceException_code, v.Code)
+		case schemas.CancelledByMaintenanceException_detailedMessage:
+			v.DetailedMessage = new(string)
+			return d.ReadString(schemas.CancelledByMaintenanceException_detailedMessage, v.DetailedMessage)
+		case schemas.CancelledByMaintenanceException_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CancelledByMaintenanceException_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
+
 // Raised when a user cancelled a request.
 type CancelledByUserException struct {
 	Message *string
@@ -1651,6 +1717,70 @@ func (v *ReadOnlyViolationException) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// Raised when the specified resource could not be found. The resource might have
+// been deleted or the identifier might be incorrect.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	DetailedMessage *string
+	RequestId       *string
+	Code            *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ResourceNotFoundException_code, *v.Code)
+	}
+	if v.DetailedMessage != nil {
+		s.WriteString(schemas.ResourceNotFoundException_detailedMessage, *v.DetailedMessage)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ResourceNotFoundException_requestId, *v.RequestId)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_code, v.Code)
+		case schemas.ResourceNotFoundException_detailedMessage:
+			v.DetailedMessage = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_detailedMessage, v.DetailedMessage)
+		case schemas.ResourceNotFoundException_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
+
 // Raised when there is a problem accessing Amazon S3.
 type S3Exception struct {
 	Message *string
@@ -2151,6 +2281,69 @@ func (v *UnsupportedOperationException) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.UnsupportedOperationException_requestId:
 			v.RequestId = new(string)
 			return d.ReadString(schemas.UnsupportedOperationException_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
+
+// Raised when a parameter value is not valid or is malformed.
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	DetailedMessage *string
+	RequestId       *string
+	Code            *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ValidationException_code, *v.Code)
+	}
+	if v.DetailedMessage != nil {
+		s.WriteString(schemas.ValidationException_detailedMessage, *v.DetailedMessage)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ValidationException_requestId, *v.RequestId)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ValidationException_code, v.Code)
+		case schemas.ValidationException_detailedMessage:
+			v.DetailedMessage = new(string)
+			return d.ReadString(schemas.ValidationException_detailedMessage, v.DetailedMessage)
+		case schemas.ValidationException_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ValidationException_requestId, v.RequestId)
 		}
 		return nil
 	})

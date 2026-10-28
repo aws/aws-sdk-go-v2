@@ -6910,6 +6910,26 @@ func (m *validateOpGetCapacityManagerMetricDimensions) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCapacityManagerSupportabilityScores struct {
+}
+
+func (*validateOpGetCapacityManagerSupportabilityScores) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCapacityManagerSupportabilityScores) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCapacityManagerSupportabilityScoresInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCapacityManagerSupportabilityScoresInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCapacityReservationUsage struct {
 }
 
@@ -12770,6 +12790,10 @@ func addOpGetCapacityManagerMetricDimensionsValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpGetCapacityManagerMetricDimensions{}, middleware.After)
 }
 
+func addOpGetCapacityManagerSupportabilityScoresValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCapacityManagerSupportabilityScores{}, middleware.After)
+}
+
 func addOpGetCapacityReservationUsageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCapacityReservationUsage{}, middleware.After)
 }
@@ -15816,6 +15840,11 @@ func validateOpCreateCapacityReservationFleetInput(v *CreateCapacityReservationF
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCapacityReservationFleetInput"}
+	if v.InstanceRequirements != nil {
+		if err := validateInstanceRequirementsRequest(v.InstanceRequirements); err != nil {
+			invalidParams.AddNested("InstanceRequirements", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.TotalTargetCapacity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TotalTargetCapacity"))
 	}
@@ -20503,6 +20532,35 @@ func validateOpGetCapacityManagerMetricDimensionsInput(v *GetCapacityManagerMetr
 	}
 	if v.MetricNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCapacityManagerSupportabilityScoresInput(v *GetCapacityManagerSupportabilityScoresInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCapacityManagerSupportabilityScoresInput"}
+	if len(v.MarketType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MarketType"))
+	}
+	if v.CapacityAmount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityAmount"))
+	}
+	if len(v.CapacityUnit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityUnit"))
+	}
+	if v.CapacityAvailabilityZoneIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapacityAvailabilityZoneIds"))
+	}
+	if v.InstanceRequirementsWithMetadata != nil {
+		if err := validateInstanceRequirementsWithMetadataRequest(v.InstanceRequirementsWithMetadata); err != nil {
+			invalidParams.AddNested("InstanceRequirementsWithMetadata", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

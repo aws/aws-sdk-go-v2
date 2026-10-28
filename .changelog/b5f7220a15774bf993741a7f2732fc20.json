@@ -1,0 +1,8 @@
+{
+    "id": "b5f7220a-1577-4bf9-9374-1a7f2732fc20",
+    "type": "feature",
+    "description": "InsertAdBreak now allows setting a customized adBreakId on a request and also adds a new field targetStartAt for a delayed ad insertion",
+    "modules": [
+        "service/ivs"
+    ]
+}

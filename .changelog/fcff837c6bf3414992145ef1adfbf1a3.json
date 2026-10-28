@@ -1,0 +1,8 @@
+{
+    "id": "fcff837c-6bf3-4149-9214-5ef1adfbf1a3",
+    "type": "feature",
+    "description": "Adds support for attaching client certificates for mutual TLS (mTLS) authentication to penetration test target endpoints via the new ClientCertificates field on Assets, enabling pentesting of endpoints that require client certificate authentication.",
+    "modules": [
+        "service/securityagent"
+    ]
+}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"concurrency":1,"endTime":"2000-01-01T00:00:00Z","estimatedEndTime":"2000-01-01T00:00:00Z","failureReason":"__FailureReason__","progressPercentage":1,"scope":"ALL","startTime":"2000-01-01T00:00:00Z","status":"PREPARING","writeBufferSize":"LOW"}

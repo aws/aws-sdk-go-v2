@@ -382,6 +382,17 @@ func serializeDescribePackagesFilterValues(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeDiffItemNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeDirectQueryDataSourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DirectQueryDataSource) {
 	if v == nil {
 		return
@@ -402,6 +413,32 @@ func serializeDirectQueryOpenSearchARNList(s smithy.ShapeSerializer, schema *smi
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeDivergentFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DivergentField) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeDivergentItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DivergentItem) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -604,6 +641,17 @@ func serializeLimitValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	s.CloseList()
 }
 
+func serializeMetadataCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeMigrationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MigrationSummary) {
 	if v == nil {
 		return
@@ -737,6 +785,19 @@ func serializeRegionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeReplicationPeerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ReplicationPeer) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -1379,6 +1440,27 @@ func deserializeDescribePackagesFilterValues(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializeDiffItemNameList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeDirectQueryDataSourceList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DirectQueryDataSource) error {
 	*v = make([]types.DirectQueryDataSource, 0)
 	var vv types.DirectQueryDataSource
@@ -1414,6 +1496,50 @@ func deserializeDirectQueryOpenSearchARNList(d smithy.ShapeDeserializer, s *smit
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDivergentFieldList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DivergentField) error {
+	*v = make([]types.DivergentField, 0)
+	var vv types.DivergentField
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DivergentField
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.DivergentField{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeDivergentItemList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.DivergentItem) error {
+	*v = make([]types.DivergentItem, 0)
+	var vv types.DivergentItem
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.DivergentItem
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.DivergentItem{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -1769,6 +1895,27 @@ func deserializeLimitValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 	})
 }
 
+func deserializeMetadataCategoryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeMigrationSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.MigrationSummary) error {
 	*v = make([]types.MigrationSummary, 0)
 	var vv types.MigrationSummary
@@ -2000,6 +2147,28 @@ func deserializeRegionsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeReplicationPeerList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.ReplicationPeer) error {
+	*v = make([]types.ReplicationPeer, 0)
+	var vv types.ReplicationPeer
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ReplicationPeer
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.ReplicationPeer{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 
@@ -2411,6 +2580,20 @@ func serializeAdvancedOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v
 	s.CloseMap()
 }
 
+func serializeCompareDomainConfigurationCategoryMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.CategoryDiffResult) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeEndpointsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	if v == nil {
 		return
@@ -2464,6 +2647,28 @@ func deserializeAdvancedOptions(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 		}
 
 		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeCompareDomainConfigurationCategoryMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.CategoryDiffResult) error {
+	*v = make(map[string]types.CategoryDiffResult)
+	var vv types.CategoryDiffResult
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.CategoryDiffResult
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.CategoryDiffResult{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

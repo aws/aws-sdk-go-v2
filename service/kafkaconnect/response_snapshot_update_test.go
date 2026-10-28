@@ -449,6 +449,25 @@ func TestUpdateResponseSnapshot_DescribeConnectorOperation(t *testing.T) {
 					WorkerCount: 1,
 				},
 			},
+			Plugins: []types.PluginDescription{
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+			},
+			WorkerConfiguration: &types.WorkerConfigurationDescription{
+				Revision:               1,
+				WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+			},
+			UseDefaultWorkerConfiguration: true,
 		},
 		OriginConnectorConfiguration: map[string]string{
 			"key0": "__Value__",
@@ -472,6 +491,25 @@ func TestUpdateResponseSnapshot_DescribeConnectorOperation(t *testing.T) {
 					WorkerCount: 1,
 				},
 			},
+			Plugins: []types.PluginDescription{
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+			},
+			WorkerConfiguration: &types.WorkerConfigurationDescription{
+				Revision:               1,
+				WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+			},
+			UseDefaultWorkerConfiguration: true,
 		},
 		TargetConnectorConfiguration: map[string]string{
 			"key0": "__Value__",

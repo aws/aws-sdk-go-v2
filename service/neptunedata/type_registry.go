@@ -23,6 +23,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.BulkLoadIdNotFoundException,
 			New:    func() any { return &types.BulkLoadIdNotFoundException{} },
 		},
+		"com.amazonaws.neptunedata#CancelledByMaintenanceException": {
+			Schema: schemas.CancelledByMaintenanceException,
+			New:    func() any { return &types.CancelledByMaintenanceException{} },
+		},
 		"com.amazonaws.neptunedata#CancelledByUserException": {
 			Schema: schemas.CancelledByUserException,
 			New:    func() any { return &types.CancelledByUserException{} },
@@ -115,6 +119,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.ReadOnlyViolationException,
 			New:    func() any { return &types.ReadOnlyViolationException{} },
 		},
+		"com.amazonaws.neptunedata#ResourceNotFoundException": {
+			Schema: schemas.ResourceNotFoundException,
+			New:    func() any { return &types.ResourceNotFoundException{} },
+		},
 		"com.amazonaws.neptunedata#S3Exception": {
 			Schema: schemas.S3Exception,
 			New:    func() any { return &types.S3Exception{} },
@@ -146,6 +154,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 		"com.amazonaws.neptunedata#UnsupportedOperationException": {
 			Schema: schemas.UnsupportedOperationException,
 			New:    func() any { return &types.UnsupportedOperationException{} },
+		},
+		"com.amazonaws.neptunedata#ValidationException": {
+			Schema: schemas.ValidationException,
+			New:    func() any { return &types.ValidationException{} },
 		},
 	},
 }

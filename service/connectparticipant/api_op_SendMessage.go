@@ -43,16 +43,14 @@ type SendMessageInput struct {
 	// This member is required.
 	ConnectionToken *string
 
-	// The content of the message.
+	// The content of the message. Maximum of 16,384 bytes for all content types (
+	// text/plain , text/markdown , application/json , and
+	// application/vnd.amazonaws.connect.message.interactive.response ).
 	//
-	//   - For text/plain and text/markdown , the Length Constraints are Minimum of 1,
-	//   Maximum of 1024.
+	// Some messaging channels enforce lower limits. For channel-specific message size
+	// limits, see [Chat message size limits by channel]in the Amazon Connect Customer Administrator Guide.
 	//
-	//   - For application/json , the Length Constraints are Minimum of 1, Maximum of
-	//   12000.
-	//
-	//   - For application/vnd.amazonaws.connect.message.interactive.response , the
-	//   Length Constraints are Minimum of 1, Maximum of 12288.
+	// [Chat message size limits by channel]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html#chat-message-size-limits
 	//
 	// This member is required.
 	Content *string

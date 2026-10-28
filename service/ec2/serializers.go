@@ -39288,6 +39288,76 @@ func (m *awsEc2query_serializeOpGetCapacityManagerMonitoredTagKeys) HandleSerial
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsEc2query_serializeOpGetCapacityManagerSupportabilityScores struct {
+}
+
+func (*awsEc2query_serializeOpGetCapacityManagerSupportabilityScores) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsEc2query_serializeOpGetCapacityManagerSupportabilityScores) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCapacityManagerSupportabilityScoresInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetCapacityManagerSupportabilityScores")
+	body.Key("Version").String("2016-11-15")
+
+	if err := awsEc2query_serializeOpDocumentGetCapacityManagerSupportabilityScoresInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsEc2query_serializeOpGetCapacityReservationUsage struct {
 }
 
@@ -57378,6 +57448,19 @@ func awsEc2query_serializeDocumentBundleIdStringList(v []string, value query.Val
 	return nil
 }
 
+func awsEc2query_serializeDocumentCapacityAvailabilityZoneIdList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentCapacityBlockIds(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -67630,6 +67713,19 @@ func awsEc2query_serializeDocumentSubnetIdStringList(v []string, value query.Val
 	return nil
 }
 
+func awsEc2query_serializeDocumentSupportabilityInstanceTypeList(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("Item")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsEc2query_serializeDocumentSupportedInstanceTypeRequestSet(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -71558,6 +71654,16 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationFleetInput(v *Creat
 		objectKey.String(*v.AllocationStrategy)
 	}
 
+	if v.AvailabilityZone != nil {
+		objectKey := object.Key("AvailabilityZone")
+		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.AvailabilityZoneId != nil {
+		objectKey := object.Key("AvailabilityZoneId")
+		objectKey.String(*v.AvailabilityZoneId)
+	}
+
 	if v.ClientToken != nil {
 		objectKey := object.Key("ClientToken")
 		objectKey.String(*v.ClientToken)
@@ -71576,6 +71682,13 @@ func awsEc2query_serializeOpDocumentCreateCapacityReservationFleetInput(v *Creat
 	if len(v.InstanceMatchCriteria) > 0 {
 		objectKey := object.Key("InstanceMatchCriteria")
 		objectKey.String(string(v.InstanceMatchCriteria))
+	}
+
+	if v.InstanceRequirements != nil {
+		objectKey := object.Key("InstanceRequirements")
+		if err := awsEc2query_serializeDocumentInstanceRequirementsRequest(v.InstanceRequirements, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.InstanceTypeSpecifications != nil {
@@ -87134,6 +87247,54 @@ func awsEc2query_serializeOpDocumentGetCapacityManagerMonitoredTagKeysInput(v *G
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsEc2query_serializeOpDocumentGetCapacityManagerSupportabilityScoresInput(v *GetCapacityManagerSupportabilityScoresInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CapacityAmount != nil {
+		objectKey := object.Key("CapacityAmount")
+		objectKey.Integer(*v.CapacityAmount)
+	}
+
+	if v.CapacityAvailabilityZoneIds != nil {
+		objectKey := object.FlatKey("CapacityAvailabilityZoneId")
+		if err := awsEc2query_serializeDocumentCapacityAvailabilityZoneIdList(v.CapacityAvailabilityZoneIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.CapacityUnit) > 0 {
+		objectKey := object.Key("CapacityUnit")
+		objectKey.String(string(v.CapacityUnit))
+	}
+
+	if v.DryRun != nil {
+		objectKey := object.Key("DryRun")
+		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.InstanceRequirementsWithMetadata != nil {
+		objectKey := object.Key("InstanceRequirementsWithMetadata")
+		if err := awsEc2query_serializeDocumentInstanceRequirementsWithMetadataRequest(v.InstanceRequirementsWithMetadata, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceTypes != nil {
+		objectKey := object.FlatKey("InstanceType")
+		if err := awsEc2query_serializeDocumentSupportabilityInstanceTypeList(v.InstanceTypes, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.MarketType) > 0 {
+		objectKey := object.Key("MarketType")
+		objectKey.String(string(v.MarketType))
 	}
 
 	return nil

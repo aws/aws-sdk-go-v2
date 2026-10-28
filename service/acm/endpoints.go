@@ -303,8 +303,8 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 
 const bddRoot int32 = 2
 
-var bddNodes = [30]int32{
-	-1, 1, -1, 0, 100000001, 3, 1, 4, 100000010, 2, 9, 5, 4, 7, 6, 5, 100000008, 100000009, 5, 100000005, 8, 6, 100000006, 100000007, 3, 10, 100000004, 4, 100000002, 100000003}
+var bddNodes = [39]int32{
+	-1, 1, -1, 0, 100000001, 3, 1, 4, 100000010, 2, 9, 5, 3, 7, 6, 5, 100000008, 100000009, 5, 100000005, 8, 6, 100000006, 100000007, 3, 12, 10, 4, 100000003, 11, 6, 100000003, 100000004, 4, 100000002, 13, 6, 100000002, 100000004}
 
 type conditionContext struct {
 	PartitionResult *awsrulesfn.PartitionConfig
@@ -323,9 +323,9 @@ func evalCondition(idx int, params *EndpointParameters, c *conditionContext) boo
 	case 2:
 		return *params.ServiceType == "ACM-ACME"
 	case 3:
-		return c.PartitionResult.Name == "aws"
-	case 4:
 		return *params.UseFIPS == true
+	case 4:
+		return c.PartitionResult.Name == "aws"
 	case 5:
 		return *params.UseDualStack == true
 	case 6:
@@ -368,7 +368,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 			Headers: http.Header{},
 		}, nil
 	case 4:
-		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "ACME operations are only available in commercial AWS partitions")
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "ACME operations are only available in the aws and aws-us-gov partitions")
 	case 5:
 		uriString := func() string {
 			var out strings.Builder

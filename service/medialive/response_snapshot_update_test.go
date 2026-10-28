@@ -5132,12 +5132,16 @@ func TestUpdateResponseSnapshot_CreateInput(t *testing.T) {
 			MulticastSettings: &types.MulticastSettings{
 				Sources: []types.MulticastSource{
 					{
-						SourceIp: ptr.String("__SourceIp__"),
-						Url:      ptr.String("__Url__"),
+						SourceIp:          ptr.String("__SourceIp__"),
+						Url:               ptr.String("__Url__"),
+						SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+						SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 					},
 					{
-						SourceIp: ptr.String("__SourceIp__"),
-						Url:      ptr.String("__Url__"),
+						SourceIp:          ptr.String("__SourceIp__"),
+						Url:               ptr.String("__Url__"),
+						SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+						SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 					},
 				},
 			},
@@ -5703,12 +5707,16 @@ func TestUpdateResponseSnapshot_CreatePartnerInput(t *testing.T) {
 			MulticastSettings: &types.MulticastSettings{
 				Sources: []types.MulticastSource{
 					{
-						SourceIp: ptr.String("__SourceIp__"),
-						Url:      ptr.String("__Url__"),
+						SourceIp:          ptr.String("__SourceIp__"),
+						Url:               ptr.String("__Url__"),
+						SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+						SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 					},
 					{
-						SourceIp: ptr.String("__SourceIp__"),
-						Url:      ptr.String("__Url__"),
+						SourceIp:          ptr.String("__SourceIp__"),
+						Url:               ptr.String("__Url__"),
+						SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+						SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 					},
 				},
 			},
@@ -14120,12 +14128,16 @@ func TestUpdateResponseSnapshot_DescribeInput(t *testing.T) {
 		MulticastSettings: &types.MulticastSettings{
 			Sources: []types.MulticastSource{
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 				{
-					SourceIp: ptr.String("__SourceIp__"),
-					Url:      ptr.String("__Url__"),
+					SourceIp:          ptr.String("__SourceIp__"),
+					Url:               ptr.String("__Url__"),
+					SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+					SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 				},
 			},
 		},
@@ -16656,12 +16668,16 @@ func TestUpdateResponseSnapshot_ListInputs(t *testing.T) {
 				MulticastSettings: &types.MulticastSettings{
 					Sources: []types.MulticastSource{
 						{
-							SourceIp: ptr.String("__SourceIp__"),
-							Url:      ptr.String("__Url__"),
+							SourceIp:          ptr.String("__SourceIp__"),
+							Url:               ptr.String("__Url__"),
+							SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+							SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 						},
 						{
-							SourceIp: ptr.String("__SourceIp__"),
-							Url:      ptr.String("__Url__"),
+							SourceIp:          ptr.String("__SourceIp__"),
+							Url:               ptr.String("__Url__"),
+							SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+							SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 						},
 					},
 				},
@@ -16874,12 +16890,16 @@ func TestUpdateResponseSnapshot_ListInputs(t *testing.T) {
 				MulticastSettings: &types.MulticastSettings{
 					Sources: []types.MulticastSource{
 						{
-							SourceIp: ptr.String("__SourceIp__"),
-							Url:      ptr.String("__Url__"),
+							SourceIp:          ptr.String("__SourceIp__"),
+							Url:               ptr.String("__Url__"),
+							SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+							SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 						},
 						{
-							SourceIp: ptr.String("__SourceIp__"),
-							Url:      ptr.String("__Url__"),
+							SourceIp:          ptr.String("__SourceIp__"),
+							Url:               ptr.String("__Url__"),
+							SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+							SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 						},
 					},
 				},
@@ -36849,12 +36869,16 @@ func TestUpdateResponseSnapshot_UpdateInput(t *testing.T) {
 			MulticastSettings: &types.MulticastSettings{
 				Sources: []types.MulticastSource{
 					{
-						SourceIp: ptr.String("__SourceIp__"),
-						Url:      ptr.String("__Url__"),
+						SourceIp:          ptr.String("__SourceIp__"),
+						Url:               ptr.String("__Url__"),
+						SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+						SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 					},
 					{
-						SourceIp: ptr.String("__SourceIp__"),
-						Url:      ptr.String("__Url__"),
+						SourceIp:          ptr.String("__SourceIp__"),
+						Url:               ptr.String("__Url__"),
+						SecondarySourceIp: ptr.String("__SecondarySourceIp__"),
+						SecondaryUrl:      ptr.String("__SecondaryUrl__"),
 					},
 				},
 			},

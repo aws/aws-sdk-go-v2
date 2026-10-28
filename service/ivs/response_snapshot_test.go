@@ -1323,7 +1323,8 @@ func TestCheckResponseSnapshot_ImportPlaybackKeyPair(t *testing.T) {
 
 func TestCheckResponseSnapshot_InsertAdBreak(t *testing.T) {
 	want := &InsertAdBreakOutput{
-		AdBreakId: ptr.String("__AdBreakId__"),
+		AdBreakId:     ptr.String("__AdBreakId__"),
+		TargetStartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	}
 	status, header, body, err := serdeRespReadSnapshot("InsertAdBreak.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -1336,6 +1337,8 @@ func TestCheckResponseSnapshot_InsertAdBreak(t *testing.T) {
 	got, err := svc.InsertAdBreak(context.Background(), &InsertAdBreakInput{
 		ChannelArn:      ptr.String("__ChannelArn__"),
 		DurationSeconds: ptr.Int32(1),
+		AdBreakId:       ptr.String("__AdBreakId__"),
+		TargetStartAt:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -3212,6 +3212,98 @@ func TestCheckRequestSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 				Priority:           ptr.Int32(1),
 			},
 		},
+		InstanceRequirements: &types.InstanceRequirementsRequest{
+			VCpuCount: &types.VCpuCountRangeRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			MemoryMiB: &types.MemoryMiBRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			CpuManufacturers: []types.CpuManufacturer{
+				types.CpuManufacturer("intel"),
+				types.CpuManufacturer("intel"),
+			},
+			MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			ExcludedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InstanceGenerations: []types.InstanceGeneration{
+				types.InstanceGeneration("current"),
+				types.InstanceGeneration("current"),
+			},
+			SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+			OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+			BareMetal:               types.BareMetal("included"),
+			BurstablePerformance:    types.BurstablePerformance("included"),
+			RequireHibernateSupport: ptr.Bool(true),
+			NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			LocalStorage: types.LocalStorage("included"),
+			LocalStorageTypes: []types.LocalStorageType{
+				types.LocalStorageType("hdd"),
+				types.LocalStorageType("hdd"),
+			},
+			TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			AcceleratorTypes: []types.AcceleratorType{
+				types.AcceleratorType("gpu"),
+				types.AcceleratorType("gpu"),
+			},
+			AcceleratorCount: &types.AcceleratorCountRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			AcceleratorManufacturers: []types.AcceleratorManufacturer{
+				types.AcceleratorManufacturer("amazon-web-services"),
+				types.AcceleratorManufacturer("amazon-web-services"),
+			},
+			AcceleratorNames: []types.AcceleratorName{
+				types.AcceleratorName("a100"),
+				types.AcceleratorName("a100"),
+			},
+			AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			AllowedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+			BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+				Cpu: &types.CpuPerformanceFactorRequest{
+					References: []types.PerformanceFactorReferenceRequest{
+						{
+							InstanceFamily: ptr.String("__InstanceFamily__"),
+						},
+						{
+							InstanceFamily: ptr.String("__InstanceFamily__"),
+						},
+					},
+				},
+			},
+			RequireEncryptionInTransit: ptr.Bool(true),
+		},
+		AvailabilityZone:      ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:    ptr.String("__AvailabilityZoneId__"),
 		Tenancy:               types.FleetCapacityReservationTenancy("default"),
 		TotalTargetCapacity:   ptr.Int32(1),
 		EndDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -26486,6 +26578,144 @@ func TestCheckRequestSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_GetCapacityManagerSupportabilityScores(t *testing.T) {
+	input := &GetCapacityManagerSupportabilityScoresInput{
+		MarketType:     types.SupportabilityMarketType("on-demand"),
+		CapacityAmount: ptr.Int32(1),
+		CapacityUnit:   types.CapacityUnit("vcpus"),
+		CapacityAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceRequirementsWithMetadata: &types.InstanceRequirementsWithMetadataRequest{
+			ArchitectureTypes: []types.ArchitectureType{
+				types.ArchitectureType("i386"),
+				types.ArchitectureType("i386"),
+			},
+			VirtualizationTypes: []types.VirtualizationType{
+				types.VirtualizationType("hvm"),
+				types.VirtualizationType("hvm"),
+			},
+			InstanceRequirements: &types.InstanceRequirementsRequest{
+				VCpuCount: &types.VCpuCountRangeRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				MemoryMiB: &types.MemoryMiBRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				CpuManufacturers: []types.CpuManufacturer{
+					types.CpuManufacturer("intel"),
+					types.CpuManufacturer("intel"),
+				},
+				MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				ExcludedInstanceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InstanceGenerations: []types.InstanceGeneration{
+					types.InstanceGeneration("current"),
+					types.InstanceGeneration("current"),
+				},
+				SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+				OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+				BareMetal:               types.BareMetal("included"),
+				BurstablePerformance:    types.BurstablePerformance("included"),
+				RequireHibernateSupport: ptr.Bool(true),
+				NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				LocalStorage: types.LocalStorage("included"),
+				LocalStorageTypes: []types.LocalStorageType{
+					types.LocalStorageType("hdd"),
+					types.LocalStorageType("hdd"),
+				},
+				TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				AcceleratorTypes: []types.AcceleratorType{
+					types.AcceleratorType("gpu"),
+					types.AcceleratorType("gpu"),
+				},
+				AcceleratorCount: &types.AcceleratorCountRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				AcceleratorManufacturers: []types.AcceleratorManufacturer{
+					types.AcceleratorManufacturer("amazon-web-services"),
+					types.AcceleratorManufacturer("amazon-web-services"),
+				},
+				AcceleratorNames: []types.AcceleratorName{
+					types.AcceleratorName("a100"),
+					types.AcceleratorName("a100"),
+				},
+				AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				AllowedInstanceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+					Cpu: &types.CpuPerformanceFactorRequest{
+						References: []types.PerformanceFactorReferenceRequest{
+							{
+								InstanceFamily: ptr.String("__InstanceFamily__"),
+							},
+							{
+								InstanceFamily: ptr.String("__InstanceFamily__"),
+							},
+						},
+					},
+				},
+				RequireEncryptionInTransit: ptr.Bool(true),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCapacityManagerSupportabilityScores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCapacityManagerSupportabilityScores"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	input := &GetCapacityReservationUsageInput{
 		CapacityReservationId: ptr.String("__CapacityReservationId__"),
@@ -42792,6 +43022,98 @@ func TestUpdateRequestSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 				Priority:           ptr.Int32(1),
 			},
 		},
+		InstanceRequirements: &types.InstanceRequirementsRequest{
+			VCpuCount: &types.VCpuCountRangeRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			MemoryMiB: &types.MemoryMiBRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			CpuManufacturers: []types.CpuManufacturer{
+				types.CpuManufacturer("intel"),
+				types.CpuManufacturer("intel"),
+			},
+			MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			ExcludedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			InstanceGenerations: []types.InstanceGeneration{
+				types.InstanceGeneration("current"),
+				types.InstanceGeneration("current"),
+			},
+			SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+			OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+			BareMetal:               types.BareMetal("included"),
+			BurstablePerformance:    types.BurstablePerformance("included"),
+			RequireHibernateSupport: ptr.Bool(true),
+			NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			LocalStorage: types.LocalStorage("included"),
+			LocalStorageTypes: []types.LocalStorageType{
+				types.LocalStorageType("hdd"),
+				types.LocalStorageType("hdd"),
+			},
+			TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			AcceleratorTypes: []types.AcceleratorType{
+				types.AcceleratorType("gpu"),
+				types.AcceleratorType("gpu"),
+			},
+			AcceleratorCount: &types.AcceleratorCountRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			AcceleratorManufacturers: []types.AcceleratorManufacturer{
+				types.AcceleratorManufacturer("amazon-web-services"),
+				types.AcceleratorManufacturer("amazon-web-services"),
+			},
+			AcceleratorNames: []types.AcceleratorName{
+				types.AcceleratorName("a100"),
+				types.AcceleratorName("a100"),
+			},
+			AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+				Min: ptr.Int32(1),
+				Max: ptr.Int32(1),
+			},
+			NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+				Min: ptr.Float64(1.0),
+				Max: ptr.Float64(1.0),
+			},
+			AllowedInstanceTypes: []string{
+				"__Member__",
+				"__Member__",
+			},
+			MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+			BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+				Cpu: &types.CpuPerformanceFactorRequest{
+					References: []types.PerformanceFactorReferenceRequest{
+						{
+							InstanceFamily: ptr.String("__InstanceFamily__"),
+						},
+						{
+							InstanceFamily: ptr.String("__InstanceFamily__"),
+						},
+					},
+				},
+			},
+			RequireEncryptionInTransit: ptr.Bool(true),
+		},
+		AvailabilityZone:      ptr.String("__AvailabilityZone__"),
+		AvailabilityZoneId:    ptr.String("__AvailabilityZoneId__"),
 		Tenancy:               types.FleetCapacityReservationTenancy("default"),
 		TotalTargetCapacity:   ptr.Int32(1),
 		EndDate:               ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
@@ -66062,6 +66384,144 @@ func TestUpdateRequestSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) 
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCapacityManagerMonitoredTagKeys"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetCapacityManagerSupportabilityScores(t *testing.T) {
+	input := &GetCapacityManagerSupportabilityScoresInput{
+		MarketType:     types.SupportabilityMarketType("on-demand"),
+		CapacityAmount: ptr.Int32(1),
+		CapacityUnit:   types.CapacityUnit("vcpus"),
+		CapacityAvailabilityZoneIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceTypes: []string{
+			"__Member__",
+			"__Member__",
+		},
+		InstanceRequirementsWithMetadata: &types.InstanceRequirementsWithMetadataRequest{
+			ArchitectureTypes: []types.ArchitectureType{
+				types.ArchitectureType("i386"),
+				types.ArchitectureType("i386"),
+			},
+			VirtualizationTypes: []types.VirtualizationType{
+				types.VirtualizationType("hvm"),
+				types.VirtualizationType("hvm"),
+			},
+			InstanceRequirements: &types.InstanceRequirementsRequest{
+				VCpuCount: &types.VCpuCountRangeRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				MemoryMiB: &types.MemoryMiBRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				CpuManufacturers: []types.CpuManufacturer{
+					types.CpuManufacturer("intel"),
+					types.CpuManufacturer("intel"),
+				},
+				MemoryGiBPerVCpu: &types.MemoryGiBPerVCpuRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				ExcludedInstanceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InstanceGenerations: []types.InstanceGeneration{
+					types.InstanceGeneration("current"),
+					types.InstanceGeneration("current"),
+				},
+				SpotMaxPricePercentageOverLowestPrice:     ptr.Int32(1),
+				OnDemandMaxPricePercentageOverLowestPrice: ptr.Int32(1),
+				BareMetal:               types.BareMetal("included"),
+				BurstablePerformance:    types.BurstablePerformance("included"),
+				RequireHibernateSupport: ptr.Bool(true),
+				NetworkInterfaceCount: &types.NetworkInterfaceCountRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				LocalStorage: types.LocalStorage("included"),
+				LocalStorageTypes: []types.LocalStorageType{
+					types.LocalStorageType("hdd"),
+					types.LocalStorageType("hdd"),
+				},
+				TotalLocalStorageGB: &types.TotalLocalStorageGBRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				BaselineEbsBandwidthMbps: &types.BaselineEbsBandwidthMbpsRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				AcceleratorTypes: []types.AcceleratorType{
+					types.AcceleratorType("gpu"),
+					types.AcceleratorType("gpu"),
+				},
+				AcceleratorCount: &types.AcceleratorCountRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				AcceleratorManufacturers: []types.AcceleratorManufacturer{
+					types.AcceleratorManufacturer("amazon-web-services"),
+					types.AcceleratorManufacturer("amazon-web-services"),
+				},
+				AcceleratorNames: []types.AcceleratorName{
+					types.AcceleratorName("a100"),
+					types.AcceleratorName("a100"),
+				},
+				AcceleratorTotalMemoryMiB: &types.AcceleratorTotalMemoryMiBRequest{
+					Min: ptr.Int32(1),
+					Max: ptr.Int32(1),
+				},
+				NetworkBandwidthGbps: &types.NetworkBandwidthGbpsRequest{
+					Min: ptr.Float64(1.0),
+					Max: ptr.Float64(1.0),
+				},
+				AllowedInstanceTypes: []string{
+					"__Member__",
+					"__Member__",
+				},
+				MaxSpotPriceAsPercentageOfOptimalOnDemandPrice: ptr.Int32(1),
+				BaselinePerformanceFactors: &types.BaselinePerformanceFactorsRequest{
+					Cpu: &types.CpuPerformanceFactorRequest{
+						References: []types.PerformanceFactorReferenceRequest{
+							{
+								InstanceFamily: ptr.String("__InstanceFamily__"),
+							},
+							{
+								InstanceFamily: ptr.String("__InstanceFamily__"),
+							},
+						},
+					},
+				},
+				RequireEncryptionInTransit: ptr.Bool(true),
+			},
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetCapacityManagerSupportabilityScores(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetCapacityManagerSupportabilityScores"); err != nil {
 		t.Fatal(err)
 	}
 }

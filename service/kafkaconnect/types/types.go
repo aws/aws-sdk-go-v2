@@ -1216,6 +1216,51 @@ func (v *CustomPluginSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Details about a custom plugin to use when you update a connector via
+// UpdateConnector .
+type CustomPluginUpdate struct {
+
+	// The Amazon Resource Name (ARN) of the custom plugin.
+	//
+	// This member is required.
+	CustomPluginArn *string
+
+	// The revision of the custom plugin.
+	//
+	// This member is required.
+	Revision *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *CustomPluginUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomPluginUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomPluginUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomPluginArn != nil {
+		s.WriteString(schemas.CustomPluginUpdate_customPluginArn, *v.CustomPluginArn)
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.CustomPluginUpdate_revision, *v.Revision)
+	}
+}
+func (v *CustomPluginUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomPluginUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomPluginUpdate_customPluginArn:
+			v.CustomPluginArn = new(string)
+			return d.ReadString(schemas.CustomPluginUpdate_customPluginArn, v.CustomPluginArn)
+		case schemas.CustomPluginUpdate_revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.CustomPluginUpdate_revision, v.Revision)
+		}
+		return nil
+	})
+}
+
 // The settings for delivering logs to Amazon Kinesis Data Firehose.
 type FirehoseLogDelivery struct {
 
@@ -1646,6 +1691,41 @@ func (v *PluginDescription) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.PluginDescription_customPlugin:
 			v.CustomPlugin = &CustomPluginDescription{}
+			return v.CustomPlugin.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A custom plugin to use when you update a connector via UpdateConnector .
+type PluginUpdate struct {
+
+	// The custom plugin to use for the connector.
+	//
+	// This member is required.
+	CustomPlugin *CustomPluginUpdate
+
+	noSmithyDocumentSerde
+}
+
+func (v *PluginUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PluginUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PluginUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomPlugin != nil {
+		s.WriteStruct(schemas.PluginUpdate_customPlugin)
+		v.CustomPlugin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PluginUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PluginUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PluginUpdate_customPlugin:
+			v.CustomPlugin = &CustomPluginUpdate{}
 			return v.CustomPlugin.Deserialize(d)
 		}
 		return nil
@@ -2533,6 +2613,50 @@ func (v *WorkerConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// The worker configuration to use when you update a connector via UpdateConnector .
+type WorkerConfigurationUpdate struct {
+
+	// The revision of the worker configuration.
+	//
+	// This member is required.
+	Revision *int64
+
+	// The Amazon Resource Name (ARN) of the worker configuration.
+	//
+	// This member is required.
+	WorkerConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *WorkerConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkerConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkerConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Revision != nil {
+		s.WriteInt64(schemas.WorkerConfigurationUpdate_revision, *v.Revision)
+	}
+	if v.WorkerConfigurationArn != nil {
+		s.WriteString(schemas.WorkerConfigurationUpdate_workerConfigurationArn, *v.WorkerConfigurationArn)
+	}
+}
+func (v *WorkerConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkerConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkerConfigurationUpdate_revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.WorkerConfigurationUpdate_revision, v.Revision)
+		case schemas.WorkerConfigurationUpdate_workerConfigurationArn:
+			v.WorkerConfigurationArn = new(string)
+			return d.ReadString(schemas.WorkerConfigurationUpdate_workerConfigurationArn, v.WorkerConfigurationArn)
+		}
+		return nil
+	})
+}
+
 // Workers can send worker logs to different destination types. This configuration
 // specifies the details of these destinations.
 type WorkerLogDelivery struct {
@@ -2648,8 +2772,18 @@ func (v *WorkerLogDeliveryDescription) Deserialize(d smithy.ShapeDeserializer) e
 // Details about worker setting of a connector
 type WorkerSetting struct {
 
-	// A description of the connector's capacity.
+	// Specifies the compute capacity settings of the connector.
 	Capacity *CapacityDescription
+
+	// Specifies which plugins the connector uses.
+	Plugins []PluginDescription
+
+	// Specifies whether the connector uses the default worker configuration instead
+	// of a custom worker configuration.
+	UseDefaultWorkerConfiguration bool
+
+	// Specifies which worker configuration the connector uses.
+	WorkerConfiguration *WorkerConfigurationDescription
 
 	noSmithyDocumentSerde
 }
@@ -2666,6 +2800,15 @@ func (v *WorkerSetting) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Capacity.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	serialize__listOfPluginDescription(s, schemas.WorkerSetting_plugins, v.Plugins)
+	if v.UseDefaultWorkerConfiguration != false {
+		s.WriteBool(schemas.WorkerSetting_useDefaultWorkerConfiguration, v.UseDefaultWorkerConfiguration)
+	}
+	if v.WorkerConfiguration != nil {
+		s.WriteStruct(schemas.WorkerSetting_workerConfiguration)
+		v.WorkerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *WorkerSetting) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkerSetting, func(s *smithy.Schema) error {
@@ -2673,6 +2816,13 @@ func (v *WorkerSetting) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.WorkerSetting_capacity:
 			v.Capacity = &CapacityDescription{}
 			return v.Capacity.Deserialize(d)
+		case schemas.WorkerSetting_plugins:
+			return deserialize__listOfPluginDescription(d, schemas.WorkerSetting_plugins, &v.Plugins)
+		case schemas.WorkerSetting_useDefaultWorkerConfiguration:
+			return d.ReadBool(schemas.WorkerSetting_useDefaultWorkerConfiguration, &v.UseDefaultWorkerConfiguration)
+		case schemas.WorkerSetting_workerConfiguration:
+			v.WorkerConfiguration = &WorkerConfigurationDescription{}
+			return v.WorkerConfiguration.Deserialize(d)
 		}
 		return nil
 	})
