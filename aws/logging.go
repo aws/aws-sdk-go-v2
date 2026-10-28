@@ -13,6 +13,12 @@ package aws
 // Example: Adding an additional log mode to an existing ClientLogMode value
 //
 //	clientLogMode |= aws.LogResponse
+//
+// Log modes toggle what is logged, not how entries are labeled. To have the
+// entries the SDK logs for an in-flight operation prefixed with the identifiers
+// available for it, e.g. the invocation id that ties a logged response to the
+// request it belongs to, wrap the configured logger with the
+// NewCorrelatedLogger function of the aws/middleware package.
 type ClientLogMode uint64
 
 // Supported ClientLogMode bits that can be configured to toggle logging of specific SDK events.
