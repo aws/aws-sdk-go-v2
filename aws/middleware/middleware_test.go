@@ -39,6 +39,11 @@ func TestClientRequestID(t *testing.T) {
 			t.Errorf("expect %v, got %v", expected, value)
 		}
 
+		// the same id is recorded on the context for correlation aware loggers
+		if v := middleware.GetInvocationID(ctx); v != expected {
+			t.Errorf("expect invocation id %v on context, got %v", expected, v)
+		}
+
 		return out, metadata, err
 	}))
 	if err != nil {
