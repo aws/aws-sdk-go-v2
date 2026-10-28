@@ -1,3 +1,29 @@
+# Release (2026-10-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.51.0](service/acm/CHANGELOG.md#v1510-2026-10-28)
+  * **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol in the AWS GovCloud (US-East) and AWS GovCloud (US-West) Regions.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.30.0](service/artifact/CHANGELOG.md#v1300-2026-10-28)
+  * **Feature**: Update support mode for Assurance Assistance
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.210.0](service/connect/CHANGELOG.md#v12100-2026-10-28)
+  * **Feature**: Amazon Connect APIs - CreateTaskTemplate and UpdateTaskTemplate accept a new ContactHooks parameter called WrapUpFlowId to identify the flow module that runs when an agent attempts to disconnect from a task created with the template. Use this to verify an agent's work or update external case repos.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.46.0](service/connectparticipant/CHANGELOG.md#v1460-2026-10-28)
+  * **Feature**: Amazon Connect Participant Service now supports the optional UrlContentDisposition parameter on GetAttachment, which returns a pre-signed URL that renders a chat attachment inline in the browser instead of forcing a download.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.343.0](service/ec2/CHANGELOG.md#v13430-2026-10-28)
+  * **Feature**: Amazon EC2 Capacity Manager adds supportability checks and capacity fulfillment metrics. Use GetCapacityManagerSupportabilityScores to score how well instance types and Availability Zones can support a capacity request, and GetCapacityManagerMetricData to retrieve fulfillment metrics.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.63.0](service/ivs/CHANGELOG.md#v1630-2026-10-28)
+  * **Feature**: InsertAdBreak now allows setting a customized adBreakId on a request and also adds a new field targetStartAt for a delayed ad insertion
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.42.0](service/kafkaconnect/CHANGELOG.md#v1420-2026-10-28)
+  * **Feature**: Amazon MSK Connect now supports updating a connector's custom plugin and worker configuration via the UpdateConnector API. MSK Connect checks connector and task health after the update and rolls back on failure. Each call returns an operation ARN to track with DescribeConnectorOperation.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.114.0](service/medialive/CHANGELOG.md#v11140-2026-10-28)
+  * **Feature**: AWS Elemental MediaLive now supports SMPTE 2022-7 seamless protection switching for multicast inputs on MediaLive Anywhere. Support for MulticastSettings sources to add a redundant copy of the stream received on a second network interface.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.27.0](service/neptunedata/CHANGELOG.md#v1270-2026-10-28)
+  * **Feature**: Get Storage API analyzes storage usage to identify database bloat and your storage footprint. Index Rebuild API triggers on-demand index reconstruction to eliminate bloat and restore query performance.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.87.0](service/opensearch/CHANGELOG.md#v1870-2026-10-28)
+  * **Feature**: This release adds APIs to simplify setting up a replication relationship between OpenSearch clusters. The APIs include new Switchover and Failover actions for planned switchovers and unplanned failovers to ensure high availability for OpenSearch in the event of disaster in a single region.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.27.0](service/securityagent/CHANGELOG.md#v1270-2026-10-28)
+  * **Feature**: Adds support for attaching client certificates for mutual TLS (mTLS) authentication to penetration test target endpoints via the new ClientCertificates field on Assets, enabling pentesting of endpoints that require client certificate authentication.
+
 # Release (2026-10-27)
 
 ## General Highlights

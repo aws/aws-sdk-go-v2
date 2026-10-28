@@ -1,3 +1,7 @@
+# v1.46.0 (2026-10-28)
+
+* **Feature**: Amazon Connect Participant Service now supports the optional UrlContentDisposition parameter on GetAttachment, which returns a pre-signed URL that renders a chat attachment inline in the browser instead of forcing a download.
+
 # v1.45.7 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

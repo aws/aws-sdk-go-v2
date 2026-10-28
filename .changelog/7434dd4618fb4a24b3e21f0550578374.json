@@ -1,8 +1,0 @@
-{
-    "id": "7434dd46-18fb-4a24-b3e2-1f0550578374",
-    "type": "feature",
-    "description": "Get Storage API analyzes storage usage to identify database bloat and your storage footprint. Index Rebuild API triggers on-demand index reconstruction to eliminate bloat and restore query performance.",
-    "modules": [
-        "service/neptunedata"
-    ]
-}

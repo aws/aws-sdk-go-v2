@@ -1,3 +1,7 @@
+# v1.114.0 (2026-10-28)
+
+* **Feature**: AWS Elemental MediaLive now supports SMPTE 2022-7 seamless protection switching for multicast inputs on MediaLive Anywhere. Support for MulticastSettings sources to add a redundant copy of the stream received on a second network interface.
+
 # v1.113.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

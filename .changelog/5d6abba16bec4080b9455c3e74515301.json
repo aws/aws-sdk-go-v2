@@ -1,8 +1,0 @@
-{
-    "id": "5d6abba1-6bec-4080-b945-5c3e74515301",
-    "type": "feature",
-    "description": "Amazon Connect Participant Service now supports the optional UrlContentDisposition parameter on GetAttachment, which returns a pre-signed URL that renders a chat attachment inline in the browser instead of forcing a download.",
-    "modules": [
-        "service/connectparticipant"
-    ]
-}

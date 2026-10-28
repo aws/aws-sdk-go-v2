@@ -1,3 +1,7 @@
+# v1.27.0 (2026-10-28)
+
+* **Feature**: Adds support for attaching client certificates for mutual TLS (mTLS) authentication to penetration test target endpoints via the new ClientCertificates field on Assets, enabling pentesting of endpoints that require client certificate authentication.
+
 # v1.26.0 (2026-10-27)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

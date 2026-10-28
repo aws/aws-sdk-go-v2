@@ -1,3 +1,7 @@
+# v1.30.0 (2026-10-28)
+
+* **Feature**: Update support mode for Assurance Assistance
+
 # v1.29.4 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

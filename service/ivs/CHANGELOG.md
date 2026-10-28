@@ -1,3 +1,7 @@
+# v1.63.0 (2026-10-28)
+
+* **Feature**: InsertAdBreak now allows setting a customized adBreakId on a request and also adds a new field targetStartAt for a delayed ad insertion
+
 # v1.62.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

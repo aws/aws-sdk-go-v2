@@ -1,3 +1,7 @@
+# v1.210.0 (2026-10-28)
+
+* **Feature**: Amazon Connect APIs - CreateTaskTemplate and UpdateTaskTemplate accept a new ContactHooks parameter called WrapUpFlowId to identify the flow module that runs when an agent attempts to disconnect from a task created with the template. Use this to verify an agent's work or update external case repos.
+
 # v1.209.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

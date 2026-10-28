@@ -1,3 +1,7 @@
+# v1.27.0 (2026-10-28)
+
+* **Feature**: Get Storage API analyzes storage usage to identify database bloat and your storage footprint. Index Rebuild API triggers on-demand index reconstruction to eliminate bloat and restore query performance.
+
 # v1.26.0 (2026-10-27)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

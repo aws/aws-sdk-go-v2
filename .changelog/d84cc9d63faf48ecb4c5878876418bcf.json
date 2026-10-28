@@ -1,8 +1,0 @@
-{
-    "id": "d84cc9d6-3faf-48ec-b4c5-878876418bcf",
-    "type": "feature",
-    "description": "AWS Elemental MediaLive now supports SMPTE 2022-7 seamless protection switching for multicast inputs on MediaLive Anywhere. Support for MulticastSettings sources to add a redundant copy of the stream received on a second network interface.",
-    "modules": [
-        "service/medialive"
-    ]
-}
