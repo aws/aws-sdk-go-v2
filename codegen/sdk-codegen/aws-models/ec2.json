@@ -4366,6 +4366,9 @@
                     "target": "com.amazonaws.ec2#GetCapacityManagerMonitoredTagKeys"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetCapacityManagerSupportabilityScores"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetCapacityReservationUsage"
                 },
                 {
@@ -13487,6 +13490,29 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CapacityAmount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityAvailabilityZoneIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.ec2#CapacityBlock": {
             "type": "structure",
             "members": {
@@ -14577,6 +14603,47 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CapacityManagerSupportabilityScore": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceType",
+                        "smithy.api#documentation": "<p>\nThe instance type.\n</p>",
+                        "smithy.api#xmlName": "instanceType"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>\nThe ID of the Availability Zone.\n</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.ec2#SupportabilityScore",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Score",
+                        "smithy.api#documentation": "<p>\nHow well the combination can support the requested capacity right now. <code>high</code> means that the combination holds several times the requested amount. \n<code>medium</code> means that it can cover the request with little to spare. <code>low</code> means that it holds less than the requested amount.\n</p>",
+                        "smithy.api#xmlName": "score"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe supportability score for a single instance type and Availability Zone combination.\n</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityManagerSupportabilityScoreSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityManagerSupportabilityScore",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#CapacityManagerTagDimension": {
             "type": "structure",
             "members": {
@@ -15378,6 +15445,30 @@
                         "aws.protocols#ec2QueryName": "InstanceTypeSpecificationSet",
                         "smithy.api#documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
                         "smithy.api#xmlName": "instanceTypeSpecificationSet"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceRequirements",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
+                        "smithy.api#xmlName": "instanceRequirements"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZone",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
+                        "smithy.api#xmlName": "availabilityZone"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
                     }
                 },
                 "Tags": {
@@ -16264,6 +16355,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "dedicated"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityUnit": {
+            "type": "enum",
+            "members": {
+                "VCPUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vcpus"
+                    }
+                },
+                "INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instances"
                     }
                 }
             }
@@ -19882,6 +19990,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
                         "smithy.api#xmlName": "InstanceTypeSpecification"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
                     }
                 },
                 "Tenancy": {
@@ -68392,6 +68518,102 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#GetCapacityManagerSupportabilityScores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nScores how well each instance type and Availability Zone combination can support a capacity request, based on current Amazon EC2 capacity. \nThe response includes a score for each combination and an aggregate score for all combinations in the request. \nThis action doesn't launch or reserve instances, and a score doesn't guarantee that a later launch will succeed.\n</p>\n         <p>\nCall this action in the Region where you turned on Capacity Manager. A single request can include Availability Zones in any Region. \nReal-time supportability checks are available only to Amazon Web Services Support customers on the Unified Operations plan.\n</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-manager-supportability.html\">Check supportability</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresRequest": {
+            "type": "structure",
+            "members": {
+                "MarketType": {
+                    "target": "com.amazonaws.ec2#SupportabilityMarketType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe capacity market to score.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityAmount": {
+                    "target": "com.amazonaws.ec2#CapacityAmount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe amount of capacity that you need, in the unit that you specify for <code>CapacityUnit</code>. Each score is relative to this amount.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityUnit": {
+                    "target": "com.amazonaws.ec2#CapacityUnit",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe unit for <code>CapacityAmount</code>.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityAvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#CapacityAvailabilityZoneIdList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe IDs of the Availability Zones to score, such as <code>use1-az1</code>. You can specify Availability Zones in different Regions. \nYou can specify up to 10 Availability Zones.\n</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CapacityAvailabilityZoneId"
+                    }
+                },
+                "InstanceTypes": {
+                    "target": "com.amazonaws.ec2#SupportabilityInstanceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe instance types to score. You can specify up to 50 instance types.\n</p>\n         <p>\nSpecify either <code>InstanceTypes</code> or <code>InstanceRequirementsWithMetadata</code>, but not both.\n</p>",
+                        "smithy.api#xmlName": "InstanceType"
+                    }
+                },
+                "InstanceRequirementsWithMetadata": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsWithMetadataRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe attributes that the instance types must have, such as vCPU and memory ranges. Capacity Manager resolves the attributes into matching instance types and scores each one.\n</p>\n         <p>\nSpecify either <code>InstanceTypes</code> or <code>InstanceRequirementsWithMetadata</code>, but not both.\n</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nChecks whether you have the required permissions for the action, without actually making the request, and provides an error response. \nIf you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresResult": {
+            "type": "structure",
+            "members": {
+                "AggregateScore": {
+                    "target": "com.amazonaws.ec2#SupportabilityScore",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AggregateScore",
+                        "smithy.api#documentation": "<p>\nThe score for all instance type and Availability Zone combinations in the request together. \nA <code>high</code> aggregate score with lower individual scores means that no single combination can support the full request, but the combinations together can.\n</p>",
+                        "smithy.api#xmlName": "aggregateScore"
+                    }
+                },
+                "CapacityManagerSupportabilityScores": {
+                    "target": "com.amazonaws.ec2#CapacityManagerSupportabilityScoreSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityManagerSupportabilityScoreSet",
+                        "smithy.api#documentation": "<p>\nThe score for each instance type and Availability Zone combination in the request.\n</p>",
+                        "smithy.api#xmlName": "capacityManagerSupportabilityScoreSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#GetCapacityReservationUsage": {
             "type": "operation",
             "input": {
@@ -103517,6 +103739,66 @@
                     "traits": {
                         "smithy.api#enumValue": "spot-interruption-rate-vcpu"
                     }
+                },
+                "CAPACITY_TOTAL_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-total-requested-vcpu"
+                    }
+                },
+                "CAPACITY_TOTAL_FULFILLED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-total-fulfilled-vcpu"
+                    }
+                },
+                "SPOT_CAPACITY_TOTAL_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-capacity-total-requested-vcpu"
+                    }
+                },
+                "SPOT_CAPACITY_TOTAL_FULFILLED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-capacity-total-fulfilled-vcpu"
+                    }
+                },
+                "CAPACITY_REQUEST_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-request-fulfillment-rate"
+                    }
+                },
+                "AVG_INST_AZ_COUNT_PER_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "avg-inst-az-count-per-requested-vcpu"
+                    }
+                },
+                "INST_AZ_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inst-az-fulfillment-rate"
+                    }
+                },
+                "SPOT_CAPACITY_REQUEST_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-capacity-request-fulfillment-rate"
+                    }
+                },
+                "SPOT_AVG_INST_AZ_COUNT_PER_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-avg-inst-az-count-per-requested-vcpu"
+                    }
+                },
+                "SPOT_INST_AZ_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-inst-az-fulfillment-rate"
+                    }
                 }
             }
         },
@@ -134935,6 +135217,61 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "initializing"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#SupportabilityInstanceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#SupportabilityMarketType": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand"
+                    }
+                },
+                "SPOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#SupportabilityScore": {
+            "type": "enum",
+            "members": {
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "high"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "medium"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "low"
                     }
                 }
             }

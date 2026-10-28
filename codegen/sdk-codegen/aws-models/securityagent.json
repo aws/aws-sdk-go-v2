@@ -768,6 +768,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The trust anchors used to validate target endpoint TLS certificates. Provide these for endpoints served by a private or internal certificate authority (CA), an intermediate CA, or a self-signed certificate.</p>"
                     }
+                },
+                "clientCertificates": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client certificates for mutual TLS (mTLS) authentication to target hosts. Each certificate is stored in Secrets Manager and scoped to specific target origins.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3065,6 +3071,71 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Strategy for handling resources created during a pentest.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificate": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen name for this client certificate, used in error messages and console display.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Secrets Manager secret containing the certificate and private key.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "origins": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateOriginList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origins (scheme://host[:port]) this certificate applies to. Paths are not supported. Each hostname can have at most one client certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A client certificate for mutual TLS (mTLS) authentication to target hosts.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#ClientCertificate"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of client certificates for mTLS authentication.</p>",
+                "smithy.api#length": {
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificateName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>A customer-chosen name for a client certificate, used in error messages and console display.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-_]*$"
+            }
+        },
+        "com.amazonaws.securityagent#ClientCertificateOriginList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of origins that a client certificate applies to.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.securityagent#ClientId": {
@@ -11224,6 +11295,12 @@
                     "target": "com.amazonaws.securityagent#TrustedCaCertificateList",
                     "traits": {
                         "smithy.api#documentation": "<p>The trust anchors used to validate target endpoint TLS certificates during the pentest job.</p>"
+                    }
+                },
+                "clientCertificates": {
+                    "target": "com.amazonaws.securityagent#ClientCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client certificates for mutual TLS (mTLS) authentication to target hosts during the pentest job.</p>"
                     }
                 },
                 "codeRemediationStrategy": {

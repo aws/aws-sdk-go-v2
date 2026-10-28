@@ -14964,6 +14964,12 @@
                         "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a self-assigned task.</p>"
                     }
                 },
+                "ContactHooks": {
+                    "target": "com.amazonaws.connect#TaskTemplateContactHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hooks that are set on tasks created by using this template.</p>"
+                    }
+                },
                 "Constraints": {
                     "target": "com.amazonaws.connect#TaskTemplateConstraints",
                     "traits": {
@@ -31915,6 +31921,12 @@
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a self-assigned task.</p>"
+                    }
+                },
+                "ContactHooks": {
+                    "target": "com.amazonaws.connect#TaskTemplateContactHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hooks that are set on tasks created by using this template.</p>"
                     }
                 },
                 "Constraints": {
@@ -61249,6 +61261,20 @@
                 "smithy.api#documentation": "<p>Describes constraints that apply to the template fields.</p>"
             }
         },
+        "com.amazonaws.connect#TaskTemplateContactHooks": {
+            "type": "structure",
+            "members": {
+                "WrapUpFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowModuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow module that runs when an agent attempts to disconnect from a task created by referencing this template.\nIf no agent ever connects to the task, the flow module runs when the task is terminated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The event hooks that are set on tasks created by using this template.</p>"
+            }
+        },
         "com.amazonaws.connect#TaskTemplateDefaultFieldValue": {
             "type": "structure",
             "members": {
@@ -67484,6 +67510,12 @@
                         "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a self-assigned task.</p>"
                     }
                 },
+                "ContactHooks": {
+                    "target": "com.amazonaws.connect#TaskTemplateContactHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hooks that are set on tasks created by using this template.</p>"
+                    }
+                },
                 "Constraints": {
                     "target": "com.amazonaws.connect#TaskTemplateConstraints",
                     "traits": {
@@ -67556,6 +67588,12 @@
                     "target": "com.amazonaws.connect#ContactFlowId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ContactFlowId for the flow that will be run if this template is used to create a self-assigned task.</p>"
+                    }
+                },
+                "ContactHooks": {
+                    "target": "com.amazonaws.connect#TaskTemplateContactHooks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event hooks that are set on tasks created by using this template.</p>"
                     }
                 },
                 "Constraints": {

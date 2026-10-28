@@ -29283,6 +29283,20 @@
                         "smithy.api#jsonName": "url",
                         "smithy.api#required": {}
                     }
+                },
+                "SecondarySourceIp": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This represents the ip address of the device sending the secondary multicast stream.",
+                        "smithy.api#jsonName": "secondarySourceIp"
+                    }
+                },
+                "SecondaryUrl": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This represents the customer's secondary source URL where the redundant multicast stream (SMPTE 2022-7) is pulled from.",
+                        "smithy.api#jsonName": "secondaryUrl"
+                    }
                 }
             },
             "traits": {
@@ -29307,6 +29321,20 @@
                         "smithy.api#jsonName": "url",
                         "smithy.api#required": {}
                     }
+                },
+                "SecondarySourceIp": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This represents the ip address of the device sending the secondary multicast stream.",
+                        "smithy.api#jsonName": "secondarySourceIp"
+                    }
+                },
+                "SecondaryUrl": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This represents the customer's secondary source URL where the redundant multicast stream (SMPTE 2022-7) is pulled from.",
+                        "smithy.api#jsonName": "secondaryUrl"
+                    }
                 }
             },
             "traits": {
@@ -29330,6 +29358,20 @@
                         "smithy.api#documentation": "This represents the customer's source URL where multicast stream is pulled from.",
                         "smithy.api#jsonName": "url",
                         "smithy.api#required": {}
+                    }
+                },
+                "SecondarySourceIp": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This represents the ip address of the device sending the secondary multicast stream.",
+                        "smithy.api#jsonName": "secondarySourceIp"
+                    }
+                },
+                "SecondaryUrl": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "This represents the customer's secondary source URL where the redundant multicast stream (SMPTE 2022-7) is pulled from.",
+                        "smithy.api#jsonName": "secondaryUrl"
                     }
                 }
             },
