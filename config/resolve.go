@@ -10,6 +10,7 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/smithy-go/logging"
@@ -331,6 +332,26 @@ func resolveClientLogMode(ctx context.Context, cfg *aws.Config, configs configs)
 	}
 
 	cfg.ClientLogMode = mode
+
+	return nil
+}
+
+// resolveInvocationContextLogging honors the LogInvocationContext logging mode
+// bit. Unlike the other bits, which are toggled by generated client code where
+// the log mode is read per operation, this one changes how the entries of the
+// configured logger are labeled, so it is applied where the logger and the log
+// mode are known together.
+//
+// Generated client code and per-call option functions take the logger as given,
+// so a client built with s3.New, or one whose logger is overridden for a single
+// call, needs the logger wrapped with awsmiddleware.NewCorrelatedLogger to get
+// the same labeling.
+func resolveInvocationContextLogging(ctx context.Context, cfg *aws.Config, configs configs) error {
+	if !cfg.ClientLogMode.IsInvocationContext() || cfg.Logger == nil {
+		return nil
+	}
+
+	cfg.Logger = awsmiddleware.NewCorrelatedLogger(cfg.Logger)
 
 	return nil
 }

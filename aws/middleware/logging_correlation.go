@@ -27,6 +27,13 @@ import (
 //	cfg, err := config.LoadDefaultConfig(ctx,
 //		config.WithLogger(awsmiddleware.NewCorrelatedLogger(myLogger)))
 //
+// When the logger and the log mode are loaded together, the config package can
+// do the decoration instead, by setting the aws.LogInvocationContext bit:
+//
+//	cfg, err := config.LoadDefaultConfig(ctx,
+//		config.WithLogger(myLogger),
+//		config.WithClientLogMode(aws.LogRequest|aws.LogResponse|aws.LogInvocationContext))
+//
 // Only entries whose logger is resolved from the context of the invocation
 // that produced them are decorated, i.e. loggers obtained with smithy's
 // middleware.GetLogger(ctx) or logging.WithContext(ctx, logger) at the log
