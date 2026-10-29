@@ -298,7 +298,7 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 	}
 
 	b, _ := io.ReadAll(resp.Body)
-	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
+	if e, a := testData.ExpectBody, b; !bytes.Equal(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
 
