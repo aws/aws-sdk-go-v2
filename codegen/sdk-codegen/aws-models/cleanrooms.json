@@ -1418,6 +1418,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PYSPARK_1_0"
                     }
+                },
+                "PYSPARK_2_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PYSPARK_2_0"
+                    }
                 }
             }
         },
@@ -18066,6 +18072,12 @@
         "com.amazonaws.cleanrooms#ProtectedJobS3OutputConfigurationInput": {
             "type": "structure",
             "members": {
+                "resultFormat": {
+                    "target": "com.amazonaws.cleanrooms#ResultFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format of the protected job results. If you don't specify a format, results are written as CSV.</p>"
+                    }
+                },
                 "bucket": {
                     "target": "smithy.api#String",
                     "traits": {

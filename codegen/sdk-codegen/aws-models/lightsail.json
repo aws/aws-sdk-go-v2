@@ -11762,6 +11762,12 @@
                         "smithy.api#documentation": "<p>The name of the instance.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "includeHealthStatus": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include the instance health status checks in the response of your\n      request.</p>\n         <p>When set to <code>true</code>, the response includes the <code>instanceStatus</code> and\n        <code>systemStatus</code> of the instance. When omitted or set to <code>false</code>, the\n      response doesn't include them.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12053,6 +12059,12 @@
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to advance to the next page of results from your request.</p>\n         <p>To get a page token, perform an initial <code>GetInstances</code> request. If your results\n      are paginated, the response will return a next page token that you can specify as the page\n      token in a subsequent request.</p>"
+                    }
+                },
+                "includeHealthStatus": {
+                    "target": "com.amazonaws.lightsail#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to include the instance health status checks of each instance in the\n      response of your request.</p>\n         <p>When set to <code>true</code>, the response includes the <code>instanceStatus</code> and\n        <code>systemStatus</code> of each instance. When omitted or set to <code>false</code>, the\n      response doesn't include them.</p>"
                     }
                 }
             },
@@ -14778,6 +14790,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The metadata options for the Amazon Lightsail instance.</p>"
                     }
+                },
+                "instanceStatus": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reports impaired functionality that stems from issues internal to the instance, such as\n      impaired reachability.</p>\n         <p>This value is returned only when you set <code>includeHealthStatus</code> to\n        <code>true</code> in your request.</p>"
+                    }
+                },
+                "systemStatus": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reports impaired functionality that stems from issues related to the systems that\n      support an instance, such as hardware failures and network connectivity problems.</p>\n         <p>This value is returned only when you set <code>includeHealthStatus</code> to\n        <code>true</code> in your request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15071,6 +15095,133 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "unavailable"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatus": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>\n         <p>The following values are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ok</code> - All checks are passing. The instance is reachable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>impaired</code> - One or more checks have failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>initializing</code> - The instance was recently started, and the checks are in\n          progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>insufficient-data</code> - There isn't enough data yet to determine the\n          result.</p>\n            </li>\n            <li>\n               <p>\n                  <code>not-applicable</code> - The check doesn't apply because the instance isn't\n          running.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system instance health or instance health.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the status of an Amazon Lightsail instance.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetail": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusDetailName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of instance status. The only possible value is\n      <code>reachability</code>.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.lightsail#InstanceHealthStatusDetailValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status.</p>\n         <p>The following values are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>passed</code> - The check passed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code> - The check failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>initializing</code> - The check is in progress.</p>\n            </li>\n            <li>\n               <p>\n                  <code>insufficient-data</code> - There isn't enough data yet to determine the\n          result.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "impairedSince": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when a status check failed. For an instance that was launched and impaired,\n      this is the time when the instance was launched.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the instance status.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lightsail#InstanceHealthStatusDetail"
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetailName": {
+            "type": "enum",
+            "members": {
+                "REACHABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reachability"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusDetailValue": {
+            "type": "enum",
+            "members": {
+                "PASSED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "passed"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initializing"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lightsail#InstanceHealthStatusValue": {
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ok"
+                    }
+                },
+                "IMPAIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "impaired"
+                    }
+                },
+                "INITIALIZING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "initializing"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "insufficient-data"
+                    }
+                },
+                "NOT_APPLICABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "not-applicable"
                     }
                 }
             }

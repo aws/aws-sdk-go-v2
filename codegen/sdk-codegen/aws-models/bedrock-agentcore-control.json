@@ -771,6 +771,40 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AllowedPort": {
+            "type": "union",
+            "members": {
+                "port": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single port that is reachable through the runtime's session URL.</p>"
+                    }
+                },
+                "portRange": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#PortRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An inclusive range of ports that are reachable through the runtime's session URL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A port or port range that is reachable through the runtime's session URL. Specify exactly one of <code>port</code> or <code>portRange</code>.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AllowedPorts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPort"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. The list can contain up to five non-overlapping entries.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AllowedQueryParameters": {
             "type": "list",
             "member": {
@@ -5218,7 +5252,10 @@
                     }
                 },
                 "protocolConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
+                    }
                 },
                 "lifecycleConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
@@ -5254,6 +5291,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the runtime platform to use for the AgentCore Runtime.</p>"
+                    }
+                },
+                "allowedPorts": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
                     }
                 }
             },
@@ -16271,7 +16314,10 @@
                     }
                 },
                 "protocolConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
+                    }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#EnvironmentVariablesMap",
@@ -16313,6 +16359,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the runtime platform used by the AgentCore Runtime.</p>"
+                    }
+                },
+                "allowedPorts": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL.</p>"
                     }
                 }
             },
@@ -32281,6 +32333,38 @@
                 "smithy.api#default": "FAIL_ON_ANY_FINDINGS"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#Port": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
+                "smithy.api#range": {
+                    "min": 8000,
+                    "max": 12000
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#PortRange": {
+            "type": "structure",
+            "members": {
+                "from": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first port in the inclusive range.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "to": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Port",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last port in the inclusive range.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An inclusive range of ports. The value of <code>from</code> must be less than or equal to the value of <code>to</code>.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#PortalUrlType": {
             "type": "string",
             "traits": {
@@ -32442,6 +32526,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The server protocol for the agent runtime. This field specifies which protocol the agent runtime uses to communicate with clients.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "port": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServerPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port on which the agent server listens. The port must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>. When this field is omitted, the default is <code>8080</code> for <code>HTTP</code> and <code>AGUI</code>, <code>8000</code> for <code>MCP</code>, and <code>9000</code> for <code>A2A</code>.</p>"
+                    }
+                },
+                "path": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServerPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path on which the agent server accepts requests. The path must begin with <code>/</code>. When this field is omitted, the default is <code>/invocations</code> for <code>HTTP</code> and <code>AGUI</code>, <code>/mcp</code> for <code>MCP</code>, and <code>/</code> for <code>A2A</code>.</p>"
                     }
                 }
             },
@@ -34767,6 +34863,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The server definition for an MCP descriptor. Contains the schema version and inline content for the MCP server configuration.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ServerPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The path on which the agent server accepts requests. The path must begin with <code>/</code> and can contain up to 2,048 characters.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^/[A-Za-z0-9\\-._~/%]*$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ServerPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
+                "smithy.api#range": {
+                    "min": 8000,
+                    "max": 12000
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ServerProtocol": {
@@ -37471,7 +37588,10 @@
                     }
                 },
                 "protocolConfiguration": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ProtocolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
+                    }
                 },
                 "lifecycleConfiguration": {
                     "target": "com.amazonaws.bedrockagentcorecontrol#LifecycleConfiguration",
@@ -37507,6 +37627,12 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#PlatformVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated version of the runtime platform to use for the AgentCore Runtime.</p>"
+                    }
+                },
+                "allowedPorts": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AllowedPorts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
                     }
                 },
                 "clientToken": {

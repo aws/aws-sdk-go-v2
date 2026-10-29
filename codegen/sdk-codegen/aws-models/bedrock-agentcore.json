@@ -11281,6 +11281,17 @@
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id"
                     }
                 },
+                "sessionEndpointUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS endpoint that addresses this runtime session directly. This value is returned only when the agent runtime is configured with allowed ports and direct runtime access is available for the session. If this value is not present, use <code>InvokeAgentRuntime</code> to communicate with the session.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Runtime-Session-Endpoint-Url",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        }
+                    }
+                },
                 "mcpSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#SessionId",
                     "traits": {
