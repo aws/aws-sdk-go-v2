@@ -1,3 +1,7 @@
+# v1.56.0 (2026-10-29)
+
+* **Feature**: Adds AgentCore Runtime session endpoint support, including sessionEndpointUrl on the InvokeAgentRuntime response
+
 # v1.55.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

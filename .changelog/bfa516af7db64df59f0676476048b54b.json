@@ -1,8 +1,0 @@
-{
-    "id": "bfa516af-7db6-4df5-9f06-76476048b54b",
-    "type": "feature",
-    "description": "AWS WAF customers using Targeted Bot Control, ATP, or ACFP managed rule groups can now enable automatic Challenge JavaScript SDK injection. When enabled, Amazon CloudFront injects the script tag into HTML responses on your behalf, removing the need for manual integration.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

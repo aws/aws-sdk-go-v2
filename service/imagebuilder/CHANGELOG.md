@@ -1,3 +1,7 @@
+# v1.68.0 (2026-10-29)
+
+* **Feature**: This release adds support for on-demand AMI scanning with Amazon Inspector.
+
 # v1.67.3 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

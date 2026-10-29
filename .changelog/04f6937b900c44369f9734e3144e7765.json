@@ -1,8 +1,0 @@
-{
-    "id": "04f6937b-900c-4436-9f97-34e3144e7765",
-    "type": "feature",
-    "description": "Adds Session Endpoint Feature on AgentCore Runtime",
-    "modules": [
-        "service/bedrockagentcorecontrol"
-    ]
-}

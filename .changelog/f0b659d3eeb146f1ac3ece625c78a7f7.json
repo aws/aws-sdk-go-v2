@@ -1,8 +1,0 @@
-{
-    "id": "f0b659d3-eeb1-46f1-ac3e-ce625c78a7f7",
-    "type": "feature",
-    "description": "This release adds support for instance health status checks and system status checks.",
-    "modules": [
-        "service/lightsail"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.84.0 (2026-10-29)
+
+* **Feature**: AWS WAF customers using Targeted Bot Control, ATP, or ACFP managed rule groups can now enable automatic Challenge JavaScript SDK injection. When enabled, Amazon CloudFront injects the script tag into HTML responses on your behalf, removing the need for manual integration.
+
 # v1.83.7 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

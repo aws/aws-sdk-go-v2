@@ -1,8 +1,0 @@
-{
-    "id": "c900d94e-88c4-4943-9e3e-4b666fe0df46",
-    "type": "feature",
-    "description": "This release adds support for on-demand AMI scanning with Amazon Inspector.",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

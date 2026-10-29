@@ -1,3 +1,7 @@
+# v1.77.0 (2026-10-29)
+
+* **Feature**: Adds Session Endpoint Feature on AgentCore Runtime
+
 # v1.76.0 (2026-10-27)
 
 * **Feature**: Adds the ResetTokenVaultKeyMaterial API, which restores a token vault whose customer managed key was deleted by moving it to an AWS owned key. The reset permanently deletes the stored OAuth 2.0 tokens, users must consent again. Adds on-behalf-of token exchange client authentication override option.

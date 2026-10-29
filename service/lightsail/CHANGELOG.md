@@ -1,3 +1,7 @@
+# v1.70.0 (2026-10-29)
+
+* **Feature**: This release adds support for instance health status checks and system status checks.
+
 # v1.69.0 (2026-10-27)
 
 * **Feature**: Added the attributeUpdates parameter to the Lightsail StartInstance API, which allows customers to update the attributes of a stopped instance when starting it.

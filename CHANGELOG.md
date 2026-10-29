@@ -1,3 +1,19 @@
+# Release (2026-10-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.56.0](service/bedrockagentcore/CHANGELOG.md#v1560-2026-10-29)
+  * **Feature**: Adds AgentCore Runtime session endpoint support, including sessionEndpointUrl on the InvokeAgentRuntime response
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.77.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1770-2026-10-29)
+  * **Feature**: Adds Session Endpoint Feature on AgentCore Runtime
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.59.0](service/cleanrooms/CHANGELOG.md#v1590-2026-10-29)
+  * **Feature**: Adds support for the PySpark 2.0 analysis template format and for choosing the file format (CSV or Parquet) of protected job results written to Amazon S3, including in a membership's default job result configuration.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.68.0](service/imagebuilder/CHANGELOG.md#v1680-2026-10-29)
+  * **Feature**: This release adds support for on-demand AMI scanning with Amazon Inspector.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.70.0](service/lightsail/CHANGELOG.md#v1700-2026-10-29)
+  * **Feature**: This release adds support for instance health status checks and system status checks.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.84.0](service/wafv2/CHANGELOG.md#v1840-2026-10-29)
+  * **Feature**: AWS WAF customers using Targeted Bot Control, ATP, or ACFP managed rule groups can now enable automatic Challenge JavaScript SDK injection. When enabled, Amazon CloudFront injects the script tag into HTML responses on your behalf, removing the need for manual integration.
+
 # Release (2026-10-28)
 
 ## Module Highlights
