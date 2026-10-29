@@ -80,6 +80,10 @@ type LoadOptions struct {
 	// configured logger. This can be used to configure the logging of signing,
 	// retries, request, and responses of the SDK clients.
 	//
+	// LogInvocationContext additionally labels the entries of the configured
+	// logger with the identifiers of the operation invocation that produced
+	// them, and is applied to Logger as part of loading the configuration.
+	//
 	// See the ClientLogMode type documentation for the complete set of logging
 	// modes and available configuration.
 	ClientLogMode *aws.ClientLogMode
