@@ -544,6 +544,8 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -571,6 +573,14 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 			"key0": "__Value__",
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -6340,6 +6350,8 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -6367,7 +6379,15 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9023,6 +9043,8 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -9050,6 +9072,14 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 			"key0": "__Value__",
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -14819,6 +14849,8 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -14846,7 +14878,15 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

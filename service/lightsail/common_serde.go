@@ -622,6 +622,19 @@ func serializeInstanceEntryList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeInstanceHealthStatusDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstanceHealthStatusDetail) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeInstanceHealthSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InstanceHealthSummary) {
 	if v == nil {
 		return
@@ -2216,6 +2229,28 @@ func deserializeInstanceEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 		}
 
 		vv = types.InstanceEntry{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeInstanceHealthStatusDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.InstanceHealthStatusDetail) error {
+	*v = make([]types.InstanceHealthStatusDetail, 0)
+	var vv types.InstanceHealthStatusDetail
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.InstanceHealthStatusDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.InstanceHealthStatusDetail{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

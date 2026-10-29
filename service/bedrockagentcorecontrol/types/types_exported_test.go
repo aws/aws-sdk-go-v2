@@ -51,6 +51,28 @@ func ExampleAgentRuntimeArtifact_outputUsage() {
 var _ *types.ContainerConfiguration
 var _ *types.CodeConfiguration
 
+func ExampleAllowedPort_outputUsage() {
+	var union types.AllowedPort
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AllowedPortMemberPort:
+		_ = v.Value // Value is int32
+
+	case *types.AllowedPortMemberPortRange:
+		_ = v.Value // Value is types.PortRange
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PortRange
+var _ *int32
+
 func ExampleApiSchemaConfiguration_outputUsage() {
 	var union types.ApiSchemaConfiguration
 	// type switches can be used to check the union value

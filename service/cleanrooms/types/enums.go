@@ -148,6 +148,7 @@ type AnalysisFormat string
 const (
 	AnalysisFormatSql       AnalysisFormat = "SQL"
 	AnalysisFormatPyspark10 AnalysisFormat = "PYSPARK_1_0"
+	AnalysisFormatPyspark20 AnalysisFormat = "PYSPARK_2_0"
 )
 
 // Values returns all known values for AnalysisFormat. Note that this can be
@@ -158,6 +159,7 @@ func (AnalysisFormat) Values() []AnalysisFormat {
 	return []AnalysisFormat{
 		"SQL",
 		"PYSPARK_1_0",
+		"PYSPARK_2_0",
 	}
 }
 

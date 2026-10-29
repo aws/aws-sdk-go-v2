@@ -3256,6 +3256,7 @@ func TestCheckResponseSnapshot_IngestData(t *testing.T) {
 func TestCheckResponseSnapshot_InvokeAgentRuntime(t *testing.T) {
 	want := &InvokeAgentRuntimeOutput{
 		RuntimeSessionId:   ptr.String("__RuntimeSessionId__"),
+		SessionEndpointUrl: ptr.String("__SessionEndpointUrl__"),
 		McpSessionId:       ptr.String("__McpSessionId__"),
 		McpProtocolVersion: ptr.String("__McpProtocolVersion__"),
 		TraceId:            ptr.String("__TraceId__"),

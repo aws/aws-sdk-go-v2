@@ -212,6 +212,12 @@ type InvokeAgentRuntimeOutput struct {
 	// The identifier of the runtime session.
 	RuntimeSessionId *string
 
+	// The HTTPS endpoint that addresses this runtime session directly. This value is
+	// returned only when the agent runtime is configured with allowed ports and direct
+	// runtime access is available for the session. If this value is not present, use
+	// InvokeAgentRuntime to communicate with the session.
+	SessionEndpointUrl *string
+
 	// The HTTP status code of the response. A status code of 200 indicates a
 	// successful operation. Other status codes indicate various error conditions.
 	StatusCode *int32
@@ -253,6 +259,9 @@ func (v *InvokeAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuntimeSessionId != nil {
 		s.WriteString(schemas.InvokeAgentRuntimeResponse_runtimeSessionId, *v.RuntimeSessionId)
 	}
+	if v.SessionEndpointUrl != nil {
+		s.WriteString(schemas.InvokeAgentRuntimeResponse_sessionEndpointUrl, *v.SessionEndpointUrl)
+	}
 	if v.StatusCode != nil {
 		s.WriteInt32(schemas.InvokeAgentRuntimeResponse_statusCode, *v.StatusCode)
 	}
@@ -284,6 +293,9 @@ func (v *InvokeAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.InvokeAgentRuntimeResponse_runtimeSessionId:
 			v.RuntimeSessionId = new(string)
 			return d.ReadString(schemas.InvokeAgentRuntimeResponse_runtimeSessionId, v.RuntimeSessionId)
+		case schemas.InvokeAgentRuntimeResponse_sessionEndpointUrl:
+			v.SessionEndpointUrl = new(string)
+			return d.ReadString(schemas.InvokeAgentRuntimeResponse_sessionEndpointUrl, v.SessionEndpointUrl)
 		case schemas.InvokeAgentRuntimeResponse_statusCode:
 			v.StatusCode = new(int32)
 			return d.ReadInt32(schemas.InvokeAgentRuntimeResponse_statusCode, v.StatusCode)

@@ -1705,6 +1705,23 @@ func validateFastLaunchConfigurationList(v []types.FastLaunchConfiguration) erro
 	}
 }
 
+func validateImageScanningConfiguration(v *types.ImageScanningConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImageScanningConfiguration"}
+	if v.ScanResultCondition != nil {
+		if err := validateScanResultCondition(v.ScanResultCondition); err != nil {
+			invalidParams.AddNested("ScanResultCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLaunchTemplateConfiguration(v *types.LaunchTemplateConfiguration) error {
 	if v == nil {
 		return nil
@@ -1971,6 +1988,21 @@ func validateS3ExportConfiguration(v *types.S3ExportConfiguration) error {
 	}
 	if v.S3Bucket == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScanResultCondition(v *types.ScanResultCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScanResultCondition"}
+	if len(v.MaximumSeverityLabel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumSeverityLabel"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2268,6 +2300,11 @@ func validateOpCreateImageInput(v *CreateImageInput) error {
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
+	if v.ImageScanningConfiguration != nil {
+		if err := validateImageScanningConfiguration(v.ImageScanningConfiguration); err != nil {
+			invalidParams.AddNested("ImageScanningConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Workflows != nil {
 		if err := validateWorkflowConfigurationList(v.Workflows); err != nil {
 			invalidParams.AddNested("Workflows", err.(smithy.InvalidParamsError))
@@ -2298,6 +2335,11 @@ func validateOpCreateImagePipelineInput(v *CreateImagePipelineInput) error {
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.ImageScanningConfiguration != nil {
+		if err := validateImageScanningConfiguration(v.ImageScanningConfiguration); err != nil {
+			invalidParams.AddNested("ImageScanningConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Workflows != nil {
 		if err := validateWorkflowConfigurationList(v.Workflows); err != nil {
@@ -3282,6 +3324,11 @@ func validateOpUpdateImagePipelineInput(v *UpdateImagePipelineInput) error {
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.ImageScanningConfiguration != nil {
+		if err := validateImageScanningConfiguration(v.ImageScanningConfiguration); err != nil {
+			invalidParams.AddNested("ImageScanningConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Workflows != nil {
 		if err := validateWorkflowConfigurationList(v.Workflows); err != nil {

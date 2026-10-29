@@ -29,6 +29,13 @@ func (c *Client) GetInstances(ctx context.Context, params *GetInstancesInput, op
 
 type GetInstancesInput struct {
 
+	// Specifies whether to include the instance health status checks of each instance
+	// in the response of your request.
+	//
+	// When set to true , the response includes the instanceStatus and systemStatus of
+	// each instance. When omitted or set to false , the response doesn't include them.
+	IncludeHealthStatus *bool
+
 	// The token to advance to the next page of results from your request.
 	//
 	// To get a page token, perform an initial GetInstances request. If your results
@@ -46,6 +53,9 @@ func (v *GetInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeHealthStatus != nil {
+		s.WriteBool(schemas.GetInstancesRequest_includeHealthStatus, *v.IncludeHealthStatus)
+	}
 	if v.PageToken != nil {
 		s.WriteString(schemas.GetInstancesRequest_pageToken, *v.PageToken)
 	}

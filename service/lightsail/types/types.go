@@ -5605,6 +5605,13 @@ type Instance struct {
 	// The size of the vCPU and the amount of RAM for the instance.
 	Hardware *InstanceHardware
 
+	// Reports impaired functionality that stems from issues internal to the instance,
+	// such as impaired reachability.
+	//
+	// This value is returned only when you set includeHealthStatus to true in your
+	// request.
+	InstanceStatus *InstanceHealthStatus
+
 	// The IP address type of the instance.
 	//
 	// The possible values are ipv4 for IPv4 only, ipv6 for IPv6 only, and dualstack
@@ -5651,6 +5658,14 @@ type Instance struct {
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
+	// Reports impaired functionality that stems from issues related to the systems
+	// that support an instance, such as hardware failures and network connectivity
+	// problems.
+	//
+	// This value is returned only when you set includeHealthStatus to true in your
+	// request.
+	SystemStatus *InstanceHealthStatus
+
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the [Amazon Lightsail Developer Guide].
 	//
@@ -5689,6 +5704,11 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Hardware != nil {
 		s.WriteStruct(schemas.Instance_hardware)
 		v.Hardware.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceStatus != nil {
+		s.WriteStruct(schemas.Instance_instanceStatus)
+		v.InstanceStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
 	if v.IpAddressType != "" {
@@ -5736,6 +5756,11 @@ func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportCode != nil {
 		s.WriteString(schemas.Instance_supportCode, *v.SupportCode)
 	}
+	if v.SystemStatus != nil {
+		s.WriteStruct(schemas.Instance_systemStatus)
+		v.SystemStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	serializeTagList(s, schemas.Instance_tags, v.Tags)
 	if v.Username != nil {
 		s.WriteString(schemas.Instance_username, *v.Username)
@@ -5764,6 +5789,9 @@ func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Instance_hardware:
 			v.Hardware = &InstanceHardware{}
 			return v.Hardware.Deserialize(d)
+		case schemas.Instance_instanceStatus:
+			v.InstanceStatus = &InstanceHealthStatus{}
+			return v.InstanceStatus.Deserialize(d)
 		case schemas.Instance_ipAddressType:
 			var ev string
 			if err := d.ReadString(schemas.Instance_ipAddressType, &ev); err != nil {
@@ -5810,6 +5838,9 @@ func (v *Instance) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Instance_supportCode:
 			v.SupportCode = new(string)
 			return d.ReadString(schemas.Instance_supportCode, v.SupportCode)
+		case schemas.Instance_systemStatus:
+			v.SystemStatus = &InstanceHealthStatus{}
+			return v.SystemStatus.Deserialize(d)
 		case schemas.Instance_tags:
 			return deserializeTagList(d, schemas.Instance_tags, &v.Tags)
 		case schemas.Instance_username:
@@ -6163,6 +6194,128 @@ func (v *InstanceHardware) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InstanceHardware_ramSizeInGb:
 			v.RamSizeInGb = new(float32)
 			return d.ReadFloat32(schemas.InstanceHardware_ramSizeInGb, v.RamSizeInGb)
+		}
+		return nil
+	})
+}
+
+// Describes the status of an Amazon Lightsail instance.
+type InstanceHealthStatus struct {
+
+	// The system instance health or instance health.
+	Details []InstanceHealthStatusDetail
+
+	// The status.
+	//
+	// The following values are possible:
+	//
+	//   - ok - All checks are passing. The instance is reachable.
+	//
+	//   - impaired - One or more checks have failed.
+	//
+	//   - initializing - The instance was recently started, and the checks are in
+	//   progress.
+	//
+	//   - insufficient-data - There isn't enough data yet to determine the result.
+	//
+	//   - not-applicable - The check doesn't apply because the instance isn't running.
+	Status InstanceHealthStatusValue
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceHealthStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceHealthStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceHealthStatusDetailList(s, schemas.InstanceHealthStatus_details, v.Details)
+	if v.Status != "" {
+		s.WriteString(schemas.InstanceHealthStatus_status, string(v.Status))
+	}
+}
+func (v *InstanceHealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceHealthStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceHealthStatus_details:
+			return deserializeInstanceHealthStatusDetailList(d, schemas.InstanceHealthStatus_details, &v.Details)
+		case schemas.InstanceHealthStatus_status:
+			var ev string
+			if err := d.ReadString(schemas.InstanceHealthStatus_status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstanceHealthStatusValue(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Describes the instance status.
+type InstanceHealthStatusDetail struct {
+
+	// The time when a status check failed. For an instance that was launched and
+	// impaired, this is the time when the instance was launched.
+	ImpairedSince *time.Time
+
+	// The type of instance status. The only possible value is reachability .
+	Name InstanceHealthStatusDetailName
+
+	// The status.
+	//
+	// The following values are possible:
+	//
+	//   - passed - The check passed.
+	//
+	//   - failed - The check failed.
+	//
+	//   - initializing - The check is in progress.
+	//
+	//   - insufficient-data - There isn't enough data yet to determine the result.
+	Status InstanceHealthStatusDetailValue
+
+	noSmithyDocumentSerde
+}
+
+func (v *InstanceHealthStatusDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceHealthStatusDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceHealthStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpairedSince != nil {
+		s.WriteTime(schemas.InstanceHealthStatusDetail_impairedSince, *v.ImpairedSince)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.InstanceHealthStatusDetail_name, string(v.Name))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.InstanceHealthStatusDetail_status, string(v.Status))
+	}
+}
+func (v *InstanceHealthStatusDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceHealthStatusDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceHealthStatusDetail_impairedSince:
+			v.ImpairedSince = new(time.Time)
+			return d.ReadTime(schemas.InstanceHealthStatusDetail_impairedSince, v.ImpairedSince)
+		case schemas.InstanceHealthStatusDetail_name:
+			var ev string
+			if err := d.ReadString(schemas.InstanceHealthStatusDetail_name, &ev); err != nil {
+				return err
+			}
+			v.Name = InstanceHealthStatusDetailName(ev)
+			return nil
+		case schemas.InstanceHealthStatusDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.InstanceHealthStatusDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = InstanceHealthStatusDetailValue(ev)
+			return nil
 		}
 		return nil
 	})

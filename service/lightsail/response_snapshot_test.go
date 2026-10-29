@@ -7608,6 +7608,36 @@ func TestCheckResponseSnapshot_GetInstance(t *testing.T) {
 				HttpPutResponseHopLimit: ptr.Int32(1),
 				HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 			},
+			InstanceStatus: &types.InstanceHealthStatus{
+				Status: types.InstanceHealthStatusValue("ok"),
+				Details: []types.InstanceHealthStatusDetail{
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			SystemStatus: &types.InstanceHealthStatus{
+				Status: types.InstanceHealthStatusValue("ok"),
+				Details: []types.InstanceHealthStatusDetail{
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetInstance.response")
@@ -7619,7 +7649,8 @@ func TestCheckResponseSnapshot_GetInstance(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetInstance(context.Background(), &GetInstanceInput{
-		InstanceName: ptr.String("__InstanceName__"),
+		InstanceName:        ptr.String("__InstanceName__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -8480,6 +8511,36 @@ func TestCheckResponseSnapshot_GetInstances(t *testing.T) {
 					HttpPutResponseHopLimit: ptr.Int32(1),
 					HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 				},
+				InstanceStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				SystemStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -8696,6 +8757,36 @@ func TestCheckResponseSnapshot_GetInstances(t *testing.T) {
 					HttpPutResponseHopLimit: ptr.Int32(1),
 					HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 				},
+				InstanceStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				SystemStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
 			},
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
@@ -8709,7 +8800,8 @@ func TestCheckResponseSnapshot_GetInstances(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetInstances(context.Background(), &GetInstancesInput{
-		PageToken: ptr.String("__PageToken__"),
+		PageToken:           ptr.String("__PageToken__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)

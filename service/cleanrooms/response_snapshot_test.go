@@ -2197,8 +2197,9 @@ func TestCheckResponseSnapshot_CreateMembership(t *testing.T) {
 			DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 				OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 					Value: types.ProtectedJobS3OutputConfigurationInput{
-						Bucket:    ptr.String("__Bucket__"),
-						KeyPrefix: ptr.String("__KeyPrefix__"),
+						ResultFormat: types.ResultFormat("CSV"),
+						Bucket:       ptr.String("__Bucket__"),
+						KeyPrefix:    ptr.String("__KeyPrefix__"),
 					},
 				},
 				RoleArn: ptr.String("__RoleArn__"),
@@ -2254,8 +2255,9 @@ func TestCheckResponseSnapshot_CreateMembership(t *testing.T) {
 		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 				Value: types.ProtectedJobS3OutputConfigurationInput{
-					Bucket:    ptr.String("__Bucket__"),
-					KeyPrefix: ptr.String("__KeyPrefix__"),
+					ResultFormat: types.ResultFormat("CSV"),
+					Bucket:       ptr.String("__Bucket__"),
+					KeyPrefix:    ptr.String("__KeyPrefix__"),
 				},
 			},
 			RoleArn: ptr.String("__RoleArn__"),
@@ -3970,8 +3972,9 @@ func TestCheckResponseSnapshot_GetMembership(t *testing.T) {
 			DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 				OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 					Value: types.ProtectedJobS3OutputConfigurationInput{
-						Bucket:    ptr.String("__Bucket__"),
-						KeyPrefix: ptr.String("__KeyPrefix__"),
+						ResultFormat: types.ResultFormat("CSV"),
+						Bucket:       ptr.String("__Bucket__"),
+						KeyPrefix:    ptr.String("__KeyPrefix__"),
 					},
 				},
 				RoleArn: ptr.String("__RoleArn__"),
@@ -7750,8 +7753,9 @@ func TestCheckResponseSnapshot_UpdateMembership(t *testing.T) {
 			DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 				OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 					Value: types.ProtectedJobS3OutputConfigurationInput{
-						Bucket:    ptr.String("__Bucket__"),
-						KeyPrefix: ptr.String("__KeyPrefix__"),
+						ResultFormat: types.ResultFormat("CSV"),
+						Bucket:       ptr.String("__Bucket__"),
+						KeyPrefix:    ptr.String("__KeyPrefix__"),
 					},
 				},
 				RoleArn: ptr.String("__RoleArn__"),
@@ -7804,8 +7808,9 @@ func TestCheckResponseSnapshot_UpdateMembership(t *testing.T) {
 		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 				Value: types.ProtectedJobS3OutputConfigurationInput{
-					Bucket:    ptr.String("__Bucket__"),
-					KeyPrefix: ptr.String("__KeyPrefix__"),
+					ResultFormat: types.ResultFormat("CSV"),
+					Bucket:       ptr.String("__Bucket__"),
+					KeyPrefix:    ptr.String("__KeyPrefix__"),
 				},
 			},
 			RoleArn: ptr.String("__RoleArn__"),

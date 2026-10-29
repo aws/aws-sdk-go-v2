@@ -45,6 +45,12 @@ type UpdateAgentRuntimeInput struct {
 	// This member is required.
 	RoleArn *string
 
+	// The updated additional ports on the AgentCore Runtime that are reachable
+	// through the runtime's session URL. Specify one to five non-overlapping entries,
+	// each containing either a single port or an inclusive port range. Ports must be
+	// between 8000 and 12000 , excluding the reserved port 8443 .
+	AllowedPorts []types.AllowedPort
+
 	// The updated authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
@@ -76,8 +82,8 @@ type UpdateAgentRuntimeInput struct {
 	// The updated version of the runtime platform to use for the AgentCore Runtime.
 	PlatformVersion *string
 
-	// The protocol configuration for an agent runtime. This structure defines how the
-	// agent runtime communicates with clients.
+	// The updated protocol configuration for the AgentCore Runtime, including the
+	// protocol, port, and path on which the agent server is available.
 	ProtocolConfiguration *types.ProtocolConfiguration
 
 	// The updated configuration for HTTP request headers that will be passed through
@@ -98,6 +104,7 @@ func (v *UpdateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentRuntimeId != nil {
 		s.WriteString(schemas.UpdateAgentRuntimeRequest_agentRuntimeId, *v.AgentRuntimeId)
 	}
+	serializeAllowedPorts(s, schemas.UpdateAgentRuntimeRequest_allowedPorts, v.AllowedPorts)
 	serializeAuthorizerConfiguration(s, schemas.UpdateAgentRuntimeRequest_authorizerConfiguration, v.AuthorizerConfiguration)
 	if v.CapacityProviderConfiguration != nil {
 		s.WriteStruct(schemas.UpdateAgentRuntimeRequest_capacityProviderConfiguration)

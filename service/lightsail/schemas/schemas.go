@@ -2967,7 +2967,7 @@ var InputOrigin_ipAddressType *smithy.Schema
 var Instance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 24)
 var Instance_name *smithy.Schema
 
 var Instance_arn *smithy.Schema
@@ -3011,6 +3011,10 @@ var Instance_username *smithy.Schema
 var Instance_sshKeyName *smithy.Schema
 
 var Instance_metadataOptions *smithy.Schema
+
+var Instance_instanceStatus *smithy.Schema
+
+var Instance_systemStatus *smithy.Schema
 
 var InstanceAccessDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -3123,6 +3127,62 @@ var InstanceHealthState_Unused *smithy.Schema
 var InstanceHealthState_Draining *smithy.Schema
 
 var InstanceHealthState_Unavailable *smithy.Schema
+
+var InstanceHealthStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatus",
+}, smithy.ShapeTypeStructure, 2)
+var InstanceHealthStatus_status *smithy.Schema
+
+var InstanceHealthStatus_details *smithy.Schema
+
+var InstanceHealthStatusDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetail",
+}, smithy.ShapeTypeStructure, 3)
+var InstanceHealthStatusDetail_name *smithy.Schema
+
+var InstanceHealthStatusDetail_status *smithy.Schema
+
+var InstanceHealthStatusDetail_impairedSince *smithy.Schema
+
+var _InstanceHealthStatusDetailList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetailList",
+}, smithy.ShapeTypeList, 1)
+var _InstanceHealthStatusDetailList_member *smithy.Schema
+
+var InstanceHealthStatusDetailName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetailName",
+}, smithy.ShapeTypeEnum, 1)
+var InstanceHealthStatusDetailName_REACHABILITY *smithy.Schema
+
+var InstanceHealthStatusDetailValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetailValue",
+}, smithy.ShapeTypeEnum, 4)
+var InstanceHealthStatusDetailValue_PASSED *smithy.Schema
+
+var InstanceHealthStatusDetailValue_FAILED *smithy.Schema
+
+var InstanceHealthStatusDetailValue_INSUFFICIENT_DATA *smithy.Schema
+
+var InstanceHealthStatusDetailValue_INITIALIZING *smithy.Schema
+
+var InstanceHealthStatusValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusValue",
+}, smithy.ShapeTypeEnum, 5)
+var InstanceHealthStatusValue_OK *smithy.Schema
+
+var InstanceHealthStatusValue_IMPAIRED *smithy.Schema
+
+var InstanceHealthStatusValue_INITIALIZING *smithy.Schema
+
+var InstanceHealthStatusValue_INSUFFICIENT_DATA *smithy.Schema
+
+var InstanceHealthStatusValue_NOT_APPLICABLE *smithy.Schema
 
 var InstanceHealthSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7007,8 +7067,10 @@ var GetInstanceAccessDetailsResult_accessDetails *smithy.Schema
 var GetInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "GetInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetInstanceRequest_instanceName *smithy.Schema
+
+var GetInstanceRequest_includeHealthStatus *smithy.Schema
 
 var GetInstanceMetricDataRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7057,8 +7119,10 @@ var GetInstancePortStatesResult_portStates *smithy.Schema
 var GetInstancesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "GetInstancesRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetInstancesRequest_pageToken *smithy.Schema
+
+var GetInstancesRequest_includeHealthStatus *smithy.Schema
 
 var GetInstanceSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -9731,6 +9795,38 @@ func init() {
 
 	InstanceMetadataOptions_httpProtocolIpv6 = InstanceMetadataOptions.AddMember("httpProtocolIpv6", HttpProtocolIpv6)
 
+	InstanceHealthStatusValue_OK = InstanceHealthStatusValue.AddMember("OK", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_IMPAIRED = InstanceHealthStatusValue.AddMember("IMPAIRED", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_INITIALIZING = InstanceHealthStatusValue.AddMember("INITIALIZING", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_INSUFFICIENT_DATA = InstanceHealthStatusValue.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_NOT_APPLICABLE = InstanceHealthStatusValue.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailName_REACHABILITY = InstanceHealthStatusDetailName.AddMember("REACHABILITY", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_PASSED = InstanceHealthStatusDetailValue.AddMember("PASSED", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_FAILED = InstanceHealthStatusDetailValue.AddMember("FAILED", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_INSUFFICIENT_DATA = InstanceHealthStatusDetailValue.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_INITIALIZING = InstanceHealthStatusDetailValue.AddMember("INITIALIZING", smithyprelude.Unit)
+
+	InstanceHealthStatusDetail_name = InstanceHealthStatusDetail.AddMember("name", InstanceHealthStatusDetailName)
+
+	InstanceHealthStatusDetail_status = InstanceHealthStatusDetail.AddMember("status", InstanceHealthStatusDetailValue)
+
+	InstanceHealthStatusDetail_impairedSince = InstanceHealthStatusDetail.AddMember("impairedSince", _IsoDate)
+
+	_InstanceHealthStatusDetailList_member = _InstanceHealthStatusDetailList.AddMember("member", InstanceHealthStatusDetail)
+
+	InstanceHealthStatus_status = InstanceHealthStatus.AddMember("status", InstanceHealthStatusValue)
+
+	InstanceHealthStatus_details = InstanceHealthStatus.AddMember("details", _InstanceHealthStatusDetailList)
+
 	Instance_name = Instance.AddMember("name", _ResourceName)
 
 	Instance_arn = Instance.AddMember("arn", _NonEmptyString)
@@ -9774,6 +9870,10 @@ func init() {
 	Instance_sshKeyName = Instance.AddMember("sshKeyName", _ResourceName)
 
 	Instance_metadataOptions = Instance.AddMember("metadataOptions", InstanceMetadataOptions)
+
+	Instance_instanceStatus = Instance.AddMember("instanceStatus", InstanceHealthStatus)
+
+	Instance_systemStatus = Instance.AddMember("systemStatus", InstanceHealthStatus)
 
 	PasswordData_ciphertext = PasswordData.AddMember("ciphertext", _string)
 
@@ -11655,6 +11755,8 @@ func init() {
 
 	GetInstanceRequest_instanceName = GetInstanceRequest.AddMember("instanceName", _ResourceName)
 
+	GetInstanceRequest_includeHealthStatus = GetInstanceRequest.AddMember("includeHealthStatus", _boolean)
+
 	GetInstanceMetricDataRequest_instanceName = GetInstanceMetricDataRequest.AddMember("instanceName", _ResourceName)
 
 	GetInstanceMetricDataRequest_metricName = GetInstanceMetricDataRequest.AddMember("metricName", InstanceMetricName)
@@ -11680,6 +11782,8 @@ func init() {
 	GetInstancePortStatesResult_portStates = GetInstancePortStatesResult.AddMember("portStates", _InstancePortStateList)
 
 	GetInstancesRequest_pageToken = GetInstancesRequest.AddMember("pageToken", _string)
+
+	GetInstancesRequest_includeHealthStatus = GetInstancesRequest.AddMember("includeHealthStatus", _boolean)
 
 	GetInstanceSnapshotRequest_instanceSnapshotName = GetInstanceSnapshotRequest.AddMember("instanceSnapshotName", _ResourceName)
 

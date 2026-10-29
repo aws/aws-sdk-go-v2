@@ -13270,6 +13270,10 @@ type ProtectedJobS3OutputConfigurationInput struct {
 	// The S3 prefix to unload the protected job results.
 	KeyPrefix *string
 
+	// The file format of the protected job results. If you don't specify a format,
+	// results are written as CSV.
+	ResultFormat ResultFormat
+
 	noSmithyDocumentSerde
 }
 
@@ -13286,6 +13290,9 @@ func (v *ProtectedJobS3OutputConfigurationInput) SerializeMembers(s smithy.Shape
 	if v.KeyPrefix != nil {
 		s.WriteString(schemas.ProtectedJobS3OutputConfigurationInput_keyPrefix, *v.KeyPrefix)
 	}
+	if v.ResultFormat != "" {
+		s.WriteString(schemas.ProtectedJobS3OutputConfigurationInput_resultFormat, string(v.ResultFormat))
+	}
 }
 func (v *ProtectedJobS3OutputConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobS3OutputConfigurationInput, func(s *smithy.Schema) error {
@@ -13296,6 +13303,13 @@ func (v *ProtectedJobS3OutputConfigurationInput) Deserialize(d smithy.ShapeDeser
 		case schemas.ProtectedJobS3OutputConfigurationInput_keyPrefix:
 			v.KeyPrefix = new(string)
 			return d.ReadString(schemas.ProtectedJobS3OutputConfigurationInput_keyPrefix, v.KeyPrefix)
+		case schemas.ProtectedJobS3OutputConfigurationInput_resultFormat:
+			var ev string
+			if err := d.ReadString(schemas.ProtectedJobS3OutputConfigurationInput_resultFormat, &ev); err != nil {
+				return err
+			}
+			v.ResultFormat = ResultFormat(ev)
+			return nil
 		}
 		return nil
 	})

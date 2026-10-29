@@ -34,6 +34,13 @@ type GetInstanceInput struct {
 	// This member is required.
 	InstanceName *string
 
+	// Specifies whether to include the instance health status checks in the response
+	// of your request.
+	//
+	// When set to true , the response includes the instanceStatus and systemStatus of
+	// the instance. When omitted or set to false , the response doesn't include them.
+	IncludeHealthStatus *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -44,6 +51,9 @@ func (v *GetInstanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeHealthStatus != nil {
+		s.WriteBool(schemas.GetInstanceRequest_includeHealthStatus, *v.IncludeHealthStatus)
+	}
 	if v.InstanceName != nil {
 		s.WriteString(schemas.GetInstanceRequest_instanceName, *v.InstanceName)
 	}

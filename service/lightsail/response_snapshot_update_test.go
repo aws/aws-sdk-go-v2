@@ -7031,6 +7031,36 @@ func TestUpdateResponseSnapshot_GetInstance(t *testing.T) {
 				HttpPutResponseHopLimit: ptr.Int32(1),
 				HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 			},
+			InstanceStatus: &types.InstanceHealthStatus{
+				Status: types.InstanceHealthStatusValue("ok"),
+				Details: []types.InstanceHealthStatusDetail{
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			SystemStatus: &types.InstanceHealthStatus{
+				Status: types.InstanceHealthStatusValue("ok"),
+				Details: []types.InstanceHealthStatusDetail{
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.Lightsail_20161128)
@@ -7900,6 +7930,36 @@ func TestUpdateResponseSnapshot_GetInstances(t *testing.T) {
 					HttpPutResponseHopLimit: ptr.Int32(1),
 					HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 				},
+				InstanceStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				SystemStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -8115,6 +8175,36 @@ func TestUpdateResponseSnapshot_GetInstances(t *testing.T) {
 					HttpEndpoint:            types.HttpEndpoint("disabled"),
 					HttpPutResponseHopLimit: ptr.Int32(1),
 					HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
+				},
+				InstanceStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				SystemStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
 				},
 			},
 		},

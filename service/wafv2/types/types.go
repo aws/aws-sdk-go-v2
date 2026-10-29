@@ -427,8 +427,47 @@ func (v *AsnMatchStatement) Deserialize(d smithy.ShapeDeserializer) error {
 // For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
 // bytes).
 //
+// You can also use this to have your CloudFront distributions insert the WAF
+// challenge JavaScript SDK into the HTML responses that they return. For more
+// information, see the ChallengeJavascriptSdkInjection setting.
+//
 // [WAF Pricing]: http://aws.amazon.com/waf/pricing/
 type AssociationConfig struct {
+
+	// Specifies the CloudFront distributions that insert the WAF challenge JavaScript
+	// SDK into the HTML responses that they return. When you enable this setting for a
+	// distribution, you do not add the SDK to your web pages yourself.
+	//
+	// You can configure this setting only for CloudFront distributions, using the
+	// CLOUDFRONT map key. WAF rejects any other resource type, and the setting is not
+	// available for regional resources. To configure it, use the CloudFront scope.
+	//
+	// Your web ACL must also contain at least one of the following qualifying managed
+	// rule groups. WAF Bot Control qualifies only at the TARGETED inspection level,
+	// not at COMMON :
+	//
+	//   - The WAF Bot Control managed rule group AWSManagedRulesBotControlRuleSet ,
+	//   with the inspection level set to TARGETED .
+	//
+	//   - The WAF Fraud Control account takeover prevention (ATP) managed rule group
+	//   AWSManagedRulesATPRuleSet .
+	//
+	//   - The WAF Fraud Control account creation fraud prevention (ACFP) managed rule
+	//   group AWSManagedRulesACFPRuleSet .
+	//
+	// If you remove the last qualifying managed rule group from the web ACL, or lower
+	// the WAF Bot Control inspection level from TARGETED to COMMON , you must remove
+	// this setting in the same update. Otherwise, WAF rejects the update.
+	//
+	// Example JSON:  { "CLOUDFRONT": {} }
+	//
+	// If you omit this setting, CloudFront does not insert the SDK. When you omit it
+	// from a web ACL that previously used it, cached HTML that already contains the
+	// SDK is still served until it expires, or until you invalidate the cache for that
+	// distribution. For more information, see [Automatic SDK integration for CloudFront distributions]in the WAF Developer Guide.
+	//
+	// [Automatic SDK integration for CloudFront distributions]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-challenge-javascript-sdk-injection.html
+	ChallengeJavascriptSdkInjection map[string]ChallengeJavascriptSdkInjectionConfig
 
 	// Customizes the maximum size of the request body that your protected CloudFront,
 	// API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward
@@ -456,11 +495,14 @@ func (v *AssociationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChallengeJavascriptSdkInjection(s, schemas.AssociationConfig_ChallengeJavascriptSdkInjection, v.ChallengeJavascriptSdkInjection)
 	serializeRequestBody(s, schemas.AssociationConfig_RequestBody, v.RequestBody)
 }
 func (v *AssociationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociationConfig, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AssociationConfig_ChallengeJavascriptSdkInjection:
+			return deserializeChallengeJavascriptSdkInjection(d, schemas.AssociationConfig_ChallengeJavascriptSdkInjection, &v.ChallengeJavascriptSdkInjection)
 		case schemas.AssociationConfig_RequestBody:
 			return deserializeRequestBody(d, schemas.AssociationConfig_RequestBody, &v.RequestBody)
 		}
@@ -1424,6 +1466,35 @@ func (v *ChallengeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ChallengeConfig_ImmunityTimeProperty:
 			v.ImmunityTimeProperty = &ImmunityTimeProperty{}
 			return v.ImmunityTimeProperty.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Specifies whether the associated CloudFront distribution inserts the WAF
+// challenge JavaScript SDK into the HTML responses that it returns. The structure
+// is empty: including it turns insertion on, and removing it turns insertion off.
+//
+// This is used in the ChallengeJavascriptSdkInjection map of the AssociationConfig
+// of the web ACL. The map key identifies the resource type and must be CLOUDFRONT
+// .
+//
+// JSON specification: "CLOUDFRONT": {}
+type ChallengeJavascriptSdkInjectionConfig struct {
+	noSmithyDocumentSerde
+}
+
+func (v *ChallengeJavascriptSdkInjectionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChallengeJavascriptSdkInjectionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChallengeJavascriptSdkInjectionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ChallengeJavascriptSdkInjectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChallengeJavascriptSdkInjectionConfig, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -11177,6 +11248,10 @@ type WebACL struct {
 	//
 	// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
 	// bytes).
+	//
+	// You can also use this to have your CloudFront distributions insert the WAF
+	// challenge JavaScript SDK into the HTML responses that they return. For more
+	// information, see the ChallengeJavascriptSdkInjection setting.
 	//
 	// [WAF Pricing]: http://aws.amazon.com/waf/pricing/
 	AssociationConfig *AssociationConfig

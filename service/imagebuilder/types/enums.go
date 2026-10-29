@@ -191,6 +191,25 @@ func (ImageConfigurationStep) Values() []ImageConfigurationStep {
 	}
 }
 
+type ImageScanningType string
+
+// Enum values for ImageScanningType
+const (
+	ImageScanningTypeTestInstanceCve ImageScanningType = "TEST_INSTANCE_CVE"
+	ImageScanningTypeOnDemandAmiCve  ImageScanningType = "ON_DEMAND_AMI_CVE"
+)
+
+// Values returns all known values for ImageScanningType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ImageScanningType) Values() []ImageScanningType {
+	return []ImageScanningType{
+		"TEST_INSTANCE_CVE",
+		"ON_DEMAND_AMI_CVE",
+	}
+}
+
 type ImageScanStatus string
 
 // Enum values for ImageScanStatus
@@ -495,6 +514,29 @@ func (MarketplaceResourceType) Values() []MarketplaceResourceType {
 	return []MarketplaceResourceType{
 		"COMPONENT_DATA",
 		"COMPONENT_ARTIFACT",
+	}
+}
+
+type MaximumSeverityLabel string
+
+// Enum values for MaximumSeverityLabel
+const (
+	MaximumSeverityLabelInformational MaximumSeverityLabel = "INFORMATIONAL"
+	MaximumSeverityLabelLow           MaximumSeverityLabel = "LOW"
+	MaximumSeverityLabelMedium        MaximumSeverityLabel = "MEDIUM"
+	MaximumSeverityLabelHigh          MaximumSeverityLabel = "HIGH"
+)
+
+// Values returns all known values for MaximumSeverityLabel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaximumSeverityLabel) Values() []MaximumSeverityLabel {
+	return []MaximumSeverityLabel{
+		"INFORMATIONAL",
+		"LOW",
+		"MEDIUM",
+		"HIGH",
 	}
 }
 

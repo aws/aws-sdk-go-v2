@@ -90,6 +90,10 @@ type CreateWebACLInput struct {
 	// For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192
 	// bytes).
 	//
+	// You can also use this to have your CloudFront distributions insert the WAF
+	// challenge JavaScript SDK into the HTML responses that they return. For more
+	// information, see the ChallengeJavascriptSdkInjection setting.
+	//
 	// [WAF Pricing]: http://aws.amazon.com/waf/pricing/
 	AssociationConfig *types.AssociationConfig
 

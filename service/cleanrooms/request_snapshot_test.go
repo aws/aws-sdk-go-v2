@@ -1092,8 +1092,9 @@ func TestCheckRequestSnapshot_CreateMembership(t *testing.T) {
 		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 				Value: types.ProtectedJobS3OutputConfigurationInput{
-					Bucket:    ptr.String("__Bucket__"),
-					KeyPrefix: ptr.String("__KeyPrefix__"),
+					ResultFormat: types.ResultFormat("CSV"),
+					Bucket:       ptr.String("__Bucket__"),
+					KeyPrefix:    ptr.String("__KeyPrefix__"),
 				},
 			},
 			RoleArn: ptr.String("__RoleArn__"),
@@ -3782,8 +3783,9 @@ func TestCheckRequestSnapshot_UpdateMembership(t *testing.T) {
 		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 				Value: types.ProtectedJobS3OutputConfigurationInput{
-					Bucket:    ptr.String("__Bucket__"),
-					KeyPrefix: ptr.String("__KeyPrefix__"),
+					ResultFormat: types.ResultFormat("CSV"),
+					Bucket:       ptr.String("__Bucket__"),
+					KeyPrefix:    ptr.String("__KeyPrefix__"),
 				},
 			},
 			RoleArn: ptr.String("__RoleArn__"),
@@ -4810,8 +4812,9 @@ func TestUpdateRequestSnapshot_CreateMembership(t *testing.T) {
 		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 				Value: types.ProtectedJobS3OutputConfigurationInput{
-					Bucket:    ptr.String("__Bucket__"),
-					KeyPrefix: ptr.String("__KeyPrefix__"),
+					ResultFormat: types.ResultFormat("CSV"),
+					Bucket:       ptr.String("__Bucket__"),
+					KeyPrefix:    ptr.String("__KeyPrefix__"),
 				},
 			},
 			RoleArn: ptr.String("__RoleArn__"),
@@ -7500,8 +7503,9 @@ func TestUpdateRequestSnapshot_UpdateMembership(t *testing.T) {
 		DefaultJobResultConfiguration: &types.MembershipProtectedJobResultConfiguration{
 			OutputConfiguration: &types.MembershipProtectedJobOutputConfigurationMemberS3{
 				Value: types.ProtectedJobS3OutputConfigurationInput{
-					Bucket:    ptr.String("__Bucket__"),
-					KeyPrefix: ptr.String("__KeyPrefix__"),
+					ResultFormat: types.ResultFormat("CSV"),
+					Bucket:       ptr.String("__Bucket__"),
+					KeyPrefix:    ptr.String("__KeyPrefix__"),
 				},
 			},
 			RoleArn: ptr.String("__RoleArn__"),

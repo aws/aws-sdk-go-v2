@@ -3395,7 +3395,8 @@ func TestCheckRequestSnapshot_GetExportSnapshotRecords(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetInstance(t *testing.T) {
 	input := &GetInstanceInput{
-		InstanceName: ptr.String("__InstanceName__"),
+		InstanceName:        ptr.String("__InstanceName__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3513,7 +3514,8 @@ func TestCheckRequestSnapshot_GetInstancePortStates(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetInstances(t *testing.T) {
 	input := &GetInstancesInput{
-		PageToken: ptr.String("__PageToken__"),
+		PageToken:           ptr.String("__PageToken__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -8887,7 +8889,8 @@ func TestUpdateRequestSnapshot_GetExportSnapshotRecords(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetInstance(t *testing.T) {
 	input := &GetInstanceInput{
-		InstanceName: ptr.String("__InstanceName__"),
+		InstanceName:        ptr.String("__InstanceName__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -9005,7 +9008,8 @@ func TestUpdateRequestSnapshot_GetInstancePortStates(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetInstances(t *testing.T) {
 	input := &GetInstancesInput{
-		PageToken: ptr.String("__PageToken__"),
+		PageToken:           ptr.String("__PageToken__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	}
 	body := &bytes.Buffer{}
 	method := ""

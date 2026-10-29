@@ -912,6 +912,73 @@ func (InstanceHealthState) Values() []InstanceHealthState {
 	}
 }
 
+type InstanceHealthStatusDetailName string
+
+// Enum values for InstanceHealthStatusDetailName
+const (
+	InstanceHealthStatusDetailNameReachability InstanceHealthStatusDetailName = "reachability"
+)
+
+// Values returns all known values for InstanceHealthStatusDetailName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthStatusDetailName) Values() []InstanceHealthStatusDetailName {
+	return []InstanceHealthStatusDetailName{
+		"reachability",
+	}
+}
+
+type InstanceHealthStatusDetailValue string
+
+// Enum values for InstanceHealthStatusDetailValue
+const (
+	InstanceHealthStatusDetailValuePassed           InstanceHealthStatusDetailValue = "passed"
+	InstanceHealthStatusDetailValueFailed           InstanceHealthStatusDetailValue = "failed"
+	InstanceHealthStatusDetailValueInsufficientData InstanceHealthStatusDetailValue = "insufficient-data"
+	InstanceHealthStatusDetailValueInitializing     InstanceHealthStatusDetailValue = "initializing"
+)
+
+// Values returns all known values for InstanceHealthStatusDetailValue. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthStatusDetailValue) Values() []InstanceHealthStatusDetailValue {
+	return []InstanceHealthStatusDetailValue{
+		"passed",
+		"failed",
+		"insufficient-data",
+		"initializing",
+	}
+}
+
+type InstanceHealthStatusValue string
+
+// Enum values for InstanceHealthStatusValue
+const (
+	InstanceHealthStatusValueOk               InstanceHealthStatusValue = "ok"
+	InstanceHealthStatusValueImpaired         InstanceHealthStatusValue = "impaired"
+	InstanceHealthStatusValueInitializing     InstanceHealthStatusValue = "initializing"
+	InstanceHealthStatusValueInsufficientData InstanceHealthStatusValue = "insufficient-data"
+	InstanceHealthStatusValueNotApplicable    InstanceHealthStatusValue = "not-applicable"
+)
+
+// Values returns all known values for InstanceHealthStatusValue. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceHealthStatusValue) Values() []InstanceHealthStatusValue {
+	return []InstanceHealthStatusValue{
+		"ok",
+		"impaired",
+		"initializing",
+		"insufficient-data",
+		"not-applicable",
+	}
+}
+
 type InstanceMetadataState string
 
 // Enum values for InstanceMetadataState

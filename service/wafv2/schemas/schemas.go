@@ -465,8 +465,10 @@ var AssociatedResourceType_AGENTCORE_GATEWAY *smithy.Schema
 var AssociationConfig = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "AssociationConfig",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var AssociationConfig_RequestBody *smithy.Schema
+
+var AssociationConfig_ChallengeJavascriptSdkInjection *smithy.Schema
 
 var _AttributeName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -633,6 +635,19 @@ var ChallengeConfig = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ChallengeConfig",
 }, smithy.ShapeTypeStructure, 1)
 var ChallengeConfig_ImmunityTimeProperty *smithy.Schema
+
+var _ChallengeJavascriptSdkInjection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ChallengeJavascriptSdkInjection",
+}, smithy.ShapeTypeMap, 2)
+var _ChallengeJavascriptSdkInjection_key *smithy.Schema
+
+var _ChallengeJavascriptSdkInjection_value *smithy.Schema
+
+var ChallengeJavascriptSdkInjectionConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wafv2",
+	Name:      "ChallengeJavascriptSdkInjectionConfig",
+}, smithy.ShapeTypeStructure, 0)
 
 var ChallengeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -2377,7 +2392,7 @@ var _PaginationLimit = smithy.NewSchema(smithy.ShapeID{
 var ParameterExceptionField = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
 	Name:      "ParameterExceptionField",
-}, smithy.ShapeTypeEnum, 77)
+}, smithy.ShapeTypeEnum, 78)
 var ParameterExceptionField_WEB_ACL *smithy.Schema
 
 var ParameterExceptionField_RULE_GROUP *smithy.Schema
@@ -2531,6 +2546,8 @@ var ParameterExceptionField_PRICE_AMOUNT *smithy.Schema
 var ParameterExceptionField_PAYMENT_NETWORK *smithy.Schema
 
 var ParameterExceptionField_PRE_PARSE_TEXT_TRANSFORMATION *smithy.Schema
+
+var ParameterExceptionField_CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG *smithy.Schema
 
 var _ParameterExceptionParameter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wafv2",
@@ -6518,7 +6535,13 @@ func init() {
 
 	_RequestBody_value = _RequestBody.AddMember("value", RequestBodyAssociatedResourceTypeConfig)
 
+	_ChallengeJavascriptSdkInjection_key = _ChallengeJavascriptSdkInjection.AddMember("key", AssociatedResourceType)
+
+	_ChallengeJavascriptSdkInjection_value = _ChallengeJavascriptSdkInjection.AddMember("value", ChallengeJavascriptSdkInjectionConfig)
+
 	AssociationConfig_RequestBody = AssociationConfig.AddMember("RequestBody", _RequestBody)
+
+	AssociationConfig_ChallengeJavascriptSdkInjection = AssociationConfig.AddMember("ChallengeJavascriptSdkInjection", _ChallengeJavascriptSdkInjection)
 
 	BlockchainChain_BASE = BlockchainChain.AddMember("BASE", smithyprelude.Unit)
 
@@ -7085,6 +7108,8 @@ func init() {
 	ParameterExceptionField_PAYMENT_NETWORK = ParameterExceptionField.AddMember("PAYMENT_NETWORK", smithyprelude.Unit)
 
 	ParameterExceptionField_PRE_PARSE_TEXT_TRANSFORMATION = ParameterExceptionField.AddMember("PRE_PARSE_TEXT_TRANSFORMATION", smithyprelude.Unit)
+
+	ParameterExceptionField_CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG = ParameterExceptionField.AddMember("CHALLENGE_JAVASCRIPT_SDK_INJECTION_CONFIG", smithyprelude.Unit)
 
 	PathStatistics_Source = PathStatistics.AddMember("Source", FilterSource)
 

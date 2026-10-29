@@ -1866,6 +1866,14 @@ func TestUpdateResponseSnapshot_GetImage(t *testing.T) {
 						"__Member__",
 					},
 				},
+				ImageScanningTypes: []types.ImageScanningType{
+					types.ImageScanningType("TEST_INSTANCE_CVE"),
+					types.ImageScanningType("TEST_INSTANCE_CVE"),
+				},
+				ScanResultCondition: &types.ScanResultCondition{
+					MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+					FixAvailable:         ptr.Bool(true),
+				},
 			},
 			DeprecationTime:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 			LifecycleExecutionId: ptr.String("__LifecycleExecutionId__"),
@@ -1987,6 +1995,14 @@ func TestUpdateResponseSnapshot_GetImagePipeline(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+				},
+				ImageScanningTypes: []types.ImageScanningType{
+					types.ImageScanningType("TEST_INSTANCE_CVE"),
+					types.ImageScanningType("TEST_INSTANCE_CVE"),
+				},
+				ScanResultCondition: &types.ScanResultCondition{
+					MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+					FixAvailable:         ptr.Bool(true),
 				},
 			},
 			ImageTags: map[string]string{
@@ -3788,6 +3804,14 @@ func TestUpdateResponseSnapshot_ListImagePipelines(t *testing.T) {
 							"__Member__",
 						},
 					},
+					ImageScanningTypes: []types.ImageScanningType{
+						types.ImageScanningType("TEST_INSTANCE_CVE"),
+						types.ImageScanningType("TEST_INSTANCE_CVE"),
+					},
+					ScanResultCondition: &types.ScanResultCondition{
+						MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+						FixAvailable:         ptr.Bool(true),
+					},
 				},
 				ImageTags: map[string]string{
 					"key0": "__Value__",
@@ -3882,6 +3906,14 @@ func TestUpdateResponseSnapshot_ListImagePipelines(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					ImageScanningTypes: []types.ImageScanningType{
+						types.ImageScanningType("TEST_INSTANCE_CVE"),
+						types.ImageScanningType("TEST_INSTANCE_CVE"),
+					},
+					ScanResultCondition: &types.ScanResultCondition{
+						MaximumSeverityLabel: types.MaximumSeverityLabel("INFORMATIONAL"),
+						FixAvailable:         ptr.Bool(true),
 					},
 				},
 				ImageTags: map[string]string{

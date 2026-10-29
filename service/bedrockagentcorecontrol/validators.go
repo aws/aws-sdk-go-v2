@@ -3675,6 +3675,42 @@ func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
 	}
 }
 
+func validateAllowedPort(v types.AllowedPort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedPort"}
+	switch uv := v.(type) {
+	case *types.AllowedPortMemberPortRange:
+		if err := validatePortRange(&uv.Value); err != nil {
+			invalidParams.AddNested("[portRange]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedPorts(v []types.AllowedPort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedPorts"}
+	for i := range v {
+		if err := validateAllowedPort(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAllowedWorkloadConfiguration(v *types.AllowedWorkloadConfiguration) error {
 	if v == nil {
 		return nil
@@ -8102,6 +8138,24 @@ func validatePolicyStatement(v *types.PolicyStatement) error {
 	}
 }
 
+func validatePortRange(v *types.PortRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PortRange"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.To == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("To"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePrivateEndpoint(v types.PrivateEndpoint) error {
 	if v == nil {
 		return nil
@@ -9701,6 +9755,11 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 	if v.CapacityProviderConfiguration != nil {
 		if err := validateCapacityProviderConfiguration(v.CapacityProviderConfiguration); err != nil {
 			invalidParams.AddNested("CapacityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowedPorts != nil {
+		if err := validateAllowedPorts(v.AllowedPorts); err != nil {
+			invalidParams.AddNested("AllowedPorts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12027,6 +12086,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 	if v.CapacityProviderConfiguration != nil {
 		if err := validateCapacityProviderConfiguration(v.CapacityProviderConfiguration); err != nil {
 			invalidParams.AddNested("CapacityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowedPorts != nil {
+		if err := validateAllowedPorts(v.AllowedPorts); err != nil {
+			invalidParams.AddNested("AllowedPorts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

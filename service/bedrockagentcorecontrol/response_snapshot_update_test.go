@@ -3434,6 +3434,8 @@ func TestUpdateResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
@@ -3542,6 +3544,14 @@ func TestUpdateResponseSnapshot_GetAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentCoreControl)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgentRuntime, schemas.GetAgentRuntimeResponse, schemas.GetAgentRuntimeResponse)

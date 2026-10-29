@@ -1,0 +1,8 @@
+{
+    "id": "a96b3eb1-5390-4b68-88c8-f315fa2f0567",
+    "type": "feature",
+    "description": "Adds AgentCore Runtime session endpoint support, including sessionEndpointUrl on the InvokeAgentRuntime response",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}
