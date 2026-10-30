@@ -23,8 +23,8 @@ type ExponentialJitterBackoff struct {
 	// delay is 1s regardless of the configured baseDelay.
 	throttle IsErrorThrottle
 
-	// When true, applies MAX_BACKOFF before jitter and uses throttle-aware
-	// base delay.
+	// When true, uses the Retry Behavior 2.1 formula: applies MAX_BACKOFF
+	// before jitter and uses throttle-aware base delay.
 	retries2026 bool
 
 	randFloat64 func() (float64, error)
@@ -83,7 +83,14 @@ func (j *ExponentialJitterBackoff) BackoffDelay(attempt int, err error) (time.Du
 
 // backoffDelayLegacy preserves the original backoff formula: b * 2^i, capped
 // at maxBackoff.
+//
+// The retry middleware passes the 0-based retry index, but the legacy formula
+// was defined on the 1-based attempt number. The index is shifted by one so a
+// legacy backoff keeps the delays it had before the middleware change.
 func (j *ExponentialJitterBackoff) backoffDelayLegacy(attempt int, err error) (time.Duration, error) {
+	if attempt < math.MaxInt {
+		attempt++
+	}
 	if attempt > int(j.maxBackoffAttempts) {
 		return j.maxBackoff, nil
 	}

@@ -262,13 +262,16 @@ func TestClientRetryerBackoff(t *testing.T) {
 		DisableDefaultMaxBackoff bool
 		ExpectErr                string
 		ExpectRetryDelay         time.Duration
+		// When set, the backoff is jittered, and the delay must be no more
+		// than this value.
+		ExpectMaxRetryDelay time.Duration
 	}{
 		"default 1-second backoff": {
 			ExpectRetryDelay: 1 * time.Second,
 		},
 		"disable default backoff and use standard retryer backoff": {
 			DisableDefaultMaxBackoff: true,
-			ExpectRetryDelay:         20 * time.Second,
+			ExpectMaxRetryDelay:      20 * time.Second,
 		},
 		"disable default backoff and use customize retryer": {
 			Retryer: retry.NewStandard(func(o *retry.StandardOptions) {
@@ -310,6 +313,13 @@ func TestClientRetryerBackoff(t *testing.T) {
 			}
 
 			if c.ExpectErr != "" {
+				return
+			}
+
+			if c.ExpectMaxRetryDelay != 0 {
+				if delay < 0 || delay > c.ExpectMaxRetryDelay {
+					t.Fatalf("expect retry delay within [0, %v], got %v", c.ExpectMaxRetryDelay, delay)
+				}
 				return
 			}
 

@@ -34,7 +34,6 @@ import (
 	"net"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 	"sync/atomic"
 	"time"
@@ -667,16 +666,14 @@ func resolveRetryer(o *Options) {
 			so.MaxAttempts = v
 		})
 	}
-	if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
-		// DynamoDB uses a shorter base backoff (25ms) and one additional
-		// retry attempt (4 total) by default.
-		standardOptions = append(standardOptions, func(so *retry.StandardOptions) {
-			if o.RetryMaxAttempts == 0 {
-				so.MaxAttempts = 4
-			}
-			so.BaseDelay = 25 * time.Millisecond
-		})
-	}
+	// DynamoDB uses a shorter base backoff (25ms) and one additional
+	// retry attempt (4 total) by default.
+	standardOptions = append(standardOptions, func(so *retry.StandardOptions) {
+		if o.RetryMaxAttempts == 0 {
+			so.MaxAttempts = 4
+		}
+		so.BaseDelay = 25 * time.Millisecond
+	})
 
 	switch o.RetryMode {
 	case aws.RetryModeAdaptive:

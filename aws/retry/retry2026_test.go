@@ -14,6 +14,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +33,15 @@ type retryTestResponse struct {
 	statusCode int
 	errorCode  string
 	headers    map[string]string
+	// When set, the error explicitly reports if it is retryable through
+	// RetryableError() bool.
+	retryable *bool
+	// When set with errorCode, the response deserializes to a modeled error
+	// type instead of *smithy.GenericAPIError.
+	modeled bool
+	// When set with errorCode, the response deserializes to
+	// *smithy.GenericAPIError.
+	generic bool
 }
 
 type retryTestExpected struct {
@@ -108,6 +118,25 @@ func newRetry2026Retryer(tc retryTestCase) (aws.RetryerV2, *ratelimit.TokenRateL
 }
 
 func newRetry2026Error(resp retryTestResponse) error {
+	err := newRetry2026ResponseError(resp)
+	if resp.retryable != nil {
+		return &mockExplicitRetryableError{err: err, retryable: *resp.retryable}
+	}
+	return err
+}
+
+type mockExplicitRetryableError struct {
+	err       error
+	retryable bool
+}
+
+func (e *mockExplicitRetryableError) RetryableError() bool { return e.retryable }
+func (e *mockExplicitRetryableError) Error() string        { return e.err.Error() }
+func (e *mockExplicitRetryableError) Unwrap() error        { return e.err }
+
+func boolPtr(v bool) *bool { return &v }
+
+func newRetry2026ResponseError(resp retryTestResponse) error {
 	httpResp := &http.Response{
 		StatusCode: resp.statusCode,
 		Header:     http.Header{},
@@ -115,6 +144,20 @@ func newRetry2026Error(resp retryTestResponse) error {
 	}
 	for k, v := range resp.headers {
 		httpResp.Header.Set(k, v)
+	}
+
+	if resp.errorCode != "" && resp.modeled {
+		return &smithyhttp.ResponseError{
+			Response: &smithyhttp.Response{Response: httpResp},
+			Err:      &mockModeledAPIError{code: resp.errorCode},
+		}
+	}
+
+	if resp.errorCode != "" && resp.generic {
+		return &smithyhttp.ResponseError{
+			Response: &smithyhttp.Response{Response: httpResp},
+			Err:      &smithy.GenericAPIError{Code: resp.errorCode, Message: resp.errorCode},
+		}
 	}
 
 	if resp.errorCode != "" {
@@ -145,7 +188,6 @@ func (e *mockAPIError) Error() string {
 func (e *mockAPIError) Unwrap() error { return e.ResponseError }
 
 func TestRetry2026StandardMode(t *testing.T) {
-	t.Setenv("AWS_NEW_RETRIES_2026", "true")
 	cases := []retryTestCase{
 		{
 			name:            "retry eventually succeeds",
@@ -323,6 +365,82 @@ func TestRetry2026StandardMode(t *testing.T) {
 			},
 		},
 		{
+			name:            "429 without error code is a throttling error",
+			exponentialBase: 1,
+			steps: []retryTestStep{
+				{
+					response: retryTestResponse{statusCode: 429},
+					expected: retryTestExpected{outcome: retryOutcomeRetryRequest, retryQuota: uintPtr(495), delay: 1 * time.Second},
+				},
+				{
+					response: retryTestResponse{statusCode: 200},
+					expected: retryTestExpected{outcome: retryOutcomeSuccess, retryQuota: uintPtr(500)},
+				},
+			},
+		},
+		{
+			name:            "429 with unknown error code is a throttling error",
+			exponentialBase: 1,
+			steps: []retryTestStep{
+				{
+					response: retryTestResponse{statusCode: 429, errorCode: "SomeUnmodeledError"},
+					expected: retryTestExpected{outcome: retryOutcomeRetryRequest, retryQuota: uintPtr(495), delay: 1 * time.Second},
+				},
+				{
+					response: retryTestResponse{statusCode: 200},
+					expected: retryTestExpected{outcome: retryOutcomeSuccess, retryQuota: uintPtr(500)},
+				},
+			},
+		},
+		{
+			name:            "429 with generic API error is a throttling error",
+			exponentialBase: 1,
+			steps: []retryTestStep{
+				{
+					response: retryTestResponse{statusCode: 429, errorCode: "SomeUnmodeledError", generic: true},
+					expected: retryTestExpected{outcome: retryOutcomeRetryRequest, retryQuota: uintPtr(495), delay: 1 * time.Second},
+				},
+				{
+					response: retryTestResponse{statusCode: 200},
+					expected: retryTestExpected{outcome: retryOutcomeSuccess, retryQuota: uintPtr(500)},
+				},
+			},
+		},
+		{
+			name:            "429 with modeled error that is not retryable is not retried",
+			exponentialBase: 1,
+			steps: []retryTestStep{
+				{
+					response: retryTestResponse{statusCode: 429, errorCode: "ConcurrentResourcesLimitExceededException", modeled: true},
+					expected: retryTestExpected{outcome: retryOutcomeFailRequest, retryQuota: uintPtr(500)},
+				},
+			},
+		},
+		{
+			name:            "429 with modeled throttling error is a throttling error",
+			exponentialBase: 1,
+			steps: []retryTestStep{
+				{
+					response: retryTestResponse{statusCode: 429, errorCode: "ThrottlingException", modeled: true},
+					expected: retryTestExpected{outcome: retryOutcomeRetryRequest, retryQuota: uintPtr(495), delay: 1 * time.Second},
+				},
+				{
+					response: retryTestResponse{statusCode: 200},
+					expected: retryTestExpected{outcome: retryOutcomeSuccess, retryQuota: uintPtr(500)},
+				},
+			},
+		},
+		{
+			name:            "429 explicitly not retryable is not retried",
+			exponentialBase: 1,
+			steps: []retryTestStep{
+				{
+					response: retryTestResponse{statusCode: 429, retryable: boolPtr(false)},
+					expected: retryTestExpected{outcome: retryOutcomeFailRequest, retryQuota: uintPtr(500)},
+				},
+			},
+		},
+		{
 			name:            "dynamodb base backoff and increased retries",
 			service:         "dynamodb",
 			exponentialBase: 1,
@@ -367,7 +485,7 @@ func TestRetry2026StandardMode(t *testing.T) {
 			steps: []retryTestStep{
 				{
 					response: retryTestResponse{statusCode: 400, errorCode: "Throttling"},
-					expected: retryTestExpected{outcome: retryOutcomeRetryQuotaExceeded, retryQuota: uintPtr(0), delay: 50 * time.Millisecond},
+					expected: retryTestExpected{outcome: retryOutcomeRetryQuotaExceeded, retryQuota: uintPtr(0), delay: 1 * time.Second},
 				},
 			},
 		},
@@ -497,7 +615,8 @@ func TestRetry2026StandardMode(t *testing.T) {
 			for i, step := range tc.steps {
 				attemptNum++
 
-				attemptToken, err := retryer.GetAttemptToken(context.Background())
+				ctx := setRetryMetadata(context.Background(), retryMetadata{AttemptNum: attemptNum})
+				attemptToken, err := retryer.GetAttemptToken(ctx)
 				if err != nil {
 					t.Fatalf("step %d: failed to get attempt token: %v", i, err)
 				}
@@ -512,11 +631,10 @@ func TestRetry2026StandardMode(t *testing.T) {
 				}
 				retryToken = nopRelease
 
-				// NoRetryIncrement only applies to the initial attempt.
-				if attemptNum == 1 {
-					if err := attemptToken(opErr); err != nil {
-						t.Fatalf("step %d: failed to release attempt token: %v", i, err)
-					}
+				// The retryer applies NoRetryIncrement only to the initial
+				// attempt, from the attempt number in the context.
+				if err := attemptToken(opErr); err != nil {
+					t.Fatalf("step %d: failed to release attempt token: %v", i, err)
 				}
 
 				switch step.expected.outcome {
@@ -533,7 +651,7 @@ func TestRetry2026StandardMode(t *testing.T) {
 						t.Fatalf("step %d: expected retry but max attempts reached", i)
 					}
 
-					retryToken, err = retryer.GetRetryToken(context.Background(), opErr)
+					retryToken, err = retryer.GetRetryToken(ctx, opErr)
 					if err != nil {
 						t.Fatalf("step %d: expected retry token, got error: %v", i, err)
 					}
@@ -559,7 +677,7 @@ func TestRetry2026StandardMode(t *testing.T) {
 					if !retryer.IsErrorRetryable(opErr) {
 						t.Fatalf("step %d: expected retryable error", i)
 					}
-					_, getTokenErr := retryer.GetRetryToken(context.Background(), opErr)
+					_, getTokenErr := retryer.GetRetryToken(ctx, opErr)
 					if getTokenErr == nil {
 						t.Fatalf("step %d: expected retry quota exceeded error", i)
 					}
@@ -567,10 +685,8 @@ func TestRetry2026StandardMode(t *testing.T) {
 					if step.expected.delay != 0 && tc.longPolling {
 						// Mirrors the middleware quota-exceeded path:
 						// - attemptNum-1: backoff exponent is 0-based (first failure = 2^0).
-						// - nil error: forces non-throttle base delay (50ms), even if the
-						//   actual error was a throttle. The real error is still passed to
-						//   adjustForRetryAfterHeader to honor the response header.
-						delay, delayErr := retryer.RetryDelay(attemptNum-1, nil)
+						// - opErr: a throttling error uses the 1s throttle base delay.
+						delay, delayErr := retryer.RetryDelay(attemptNum-1, opErr)
 						if delayErr != nil {
 							t.Fatalf("step %d: unexpected delay error: %v", i, delayErr)
 						}
@@ -630,12 +746,14 @@ func TestLongPollingContextBackoff(t *testing.T) {
 	//       sleep(ExponentialBackoff(attempts - 1))
 	//     return response
 	//
-	t.Setenv("AWS_NEW_RETRIES_2026", "true")
-
+	// The backoff depends on the last failure, so a throttling error uses
+	// the 1s throttle base delay.
 	var slept atomic.Bool
+	var sleptFor atomic.Int64
 	origSleep := sdk.SleepWithContext
 	sdk.SleepWithContext = func(ctx context.Context, d time.Duration) error {
 		slept.Store(true)
+		sleptFor.Store(int64(d))
 		return nil
 	}
 	defer func() { sdk.SleepWithContext = origSleep }()
@@ -643,10 +761,9 @@ func TestLongPollingContextBackoff(t *testing.T) {
 	retryer := NewStandard(func(o *StandardOptions) {
 		o.MaxAttempts = 3
 		o.RateLimiter = ratelimit.NewTokenRateLimit(0)
-		o.Backoff = BackoffDelayerFunc(func(attempt int, err error) (time.Duration, error) {
-			return 50 * time.Millisecond, nil
-		})
 	})
+	backoff := retryer.backoff.(*ExponentialJitterBackoff)
+	backoff.randFloat64 = func() (float64, error) { return 1, nil }
 
 	m := NewAttemptMiddleware(retryer, func(i interface{}) interface{} { return i })
 
@@ -656,12 +773,10 @@ func TestLongPollingContextBackoff(t *testing.T) {
 		func(ctx context.Context, in middleware.FinalizeInput) (
 			out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
 		) {
-			return out, metadata, &smithyhttp.ResponseError{
-				Response: &smithyhttp.Response{Response: &http.Response{
-					StatusCode: 500,
-					Header:     http.Header{},
-				}},
-			}
+			return out, metadata, newRetry2026Error(retryTestResponse{
+				statusCode: 400,
+				errorCode:  "Throttling",
+			})
 		})
 
 	_, _, err := m.HandleFinalize(ctx, middleware.FinalizeInput{
@@ -673,5 +788,8 @@ func TestLongPollingContextBackoff(t *testing.T) {
 	}
 	if !slept.Load() {
 		t.Fatal("expected backoff sleep for long-polling operation when quota exhausted, but no sleep occurred")
+	}
+	if e, a := 1*time.Second, time.Duration(sleptFor.Load()); e != a {
+		t.Errorf("expect long-polling backoff %v, got %v", e, a)
 	}
 }

@@ -30,7 +30,6 @@ import (
 	"github.com/aws/smithy-go/transport/http/protocol/awsjson"
 	"net"
 	"net/http"
-	"os"
 	"sync/atomic"
 	"time"
 )
@@ -840,9 +839,6 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 }
 
 func addSetLongPollingContext(stack *middleware.Stack, options Options) error {
-	if os.Getenv("AWS_NEW_RETRIES_2026") != "true" {
-		return nil
-	}
 	return stack.Initialize.Add(&setLongPollingContextMiddleware{}, middleware.Before)
 }
 

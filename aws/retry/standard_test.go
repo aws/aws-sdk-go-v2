@@ -3,6 +3,7 @@ package retry
 import (
 	"bytes"
 	"context"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -199,62 +200,74 @@ func TestStandard_RetryDelay(t *testing.T) {
 }
 
 func TestStandard_retryEventuallySucceeds(t *testing.T) {
-	t.Setenv("AWS_NEW_RETRIES_2026", "false")
 	ratelimiter := ratelimit.NewTokenRateLimit(500)
 	retryer := NewStandard(func(o *StandardOptions) {
 		o.MaxAttempts = 3
 		o.RateLimiter = ratelimiter
-		backoff := NewExponentialJitterBackoff(20 * time.Second)
-		backoff.randFloat64 = func() (float64, error) {
-			return 0.5, nil
-		}
-		o.Backoff = backoff
 	})
+	// Use the default backoff, with a fixed jitter.
+	retryer.backoff.(*ExponentialJitterBackoff).randFloat64 = func() (float64, error) {
+		return 0.5, nil
+	}
 
 	attempts := []struct {
+		attemptNum       int
 		responseErr      error
 		expectRetryable  bool
 		expectRetryQuota uint
 		expectDelay      time.Duration
 	}{
 		{
+			attemptNum:       1,
 			responseErr:      newStubResponseError(500),
 			expectRetryable:  true,
-			expectRetryQuota: 495,
-			expectDelay:      1 * time.Second,
+			expectRetryQuota: 486,
+			expectDelay:      25 * time.Millisecond,
 		},
 		{
+			attemptNum:       2,
 			responseErr:      newStubResponseError(500),
 			expectRetryable:  true,
-			expectRetryQuota: 490,
-			expectDelay:      2 * time.Second,
+			expectRetryQuota: 472,
+			expectDelay:      50 * time.Millisecond,
 		},
 		{
-			expectRetryQuota: 496,
-			// Refill 5 cost of retry + 1 successful response
+			attemptNum:       3,
+			expectRetryQuota: 486,
+			// Refund 14 cost of retry, no increment for a retry's success
 		},
 		{
+			attemptNum:       1,
 			responseErr:      newStubResponseError(500),
 			expectRetryable:  true,
-			expectRetryQuota: 491,
-			expectDelay:      8 * time.Second,
+			expectRetryQuota: 472,
+			expectDelay:      25 * time.Millisecond,
 		},
 		{
+			attemptNum:       2,
 			responseErr:      newStubTimeoutError(),
 			expectRetryable:  true,
-			expectRetryQuota: 481,
-			expectDelay:      20 * time.Second,
+			expectRetryQuota: 458,
+			expectDelay:      50 * time.Millisecond,
+			// Timeouts cost the same as other errors
 		},
 		{
-			expectRetryQuota: 492,
-			// Refill 10 cost of retry + 1 successful response
+			attemptNum:       3,
+			expectRetryQuota: 472,
+			// Refund 14 cost of retry
+		},
+		{
+			attemptNum:       1,
+			expectRetryQuota: 473,
+			// Increment 1 for a first attempt success
 		},
 	}
 
 	retryToken := nopRelease
 	for i, attempt := range attempts {
 		t.Run(strconv.Itoa(i+1), func(t *testing.T) {
-			attemptToken, err := retryer.GetAttemptToken(context.Background())
+			ctx := setRetryMetadata(context.Background(), retryMetadata{AttemptNum: attempt.attemptNum})
+			attemptToken, err := retryer.GetAttemptToken(ctx)
 			if err != nil {
 				t.Fatalf("failed to get attempt token, %v", err)
 			}
@@ -266,21 +279,21 @@ func TestStandard_retryEventuallySucceeds(t *testing.T) {
 				t.Fatalf("expect release attempt token not to fail, %v", err)
 			}
 
+			retryToken = nopRelease
 			if attempt.responseErr != nil {
 				isRetryable := retryer.IsErrorRetryable(attempt.responseErr)
 				if e, a := attempt.expectRetryable, isRetryable; e != a {
 					t.Errorf("expect %v retryable, got %v", e, a)
 				}
 
-				retryToken = nopRelease
 				if isRetryable {
-					retryToken, err = retryer.GetRetryToken(context.Background(), attempt.responseErr)
+					retryToken, err = retryer.GetRetryToken(ctx, attempt.responseErr)
 					if err != nil {
 						t.Fatalf("expect get retry token not to fail, %v", err)
 					}
 				}
 
-				retryDelay, err := retryer.RetryDelay(i+1, attempt.responseErr)
+				retryDelay, err := retryer.RetryDelay(attempt.attemptNum-1, attempt.responseErr)
 				if err != nil {
 					t.Fatalf("expect no retry delay error, got %v", err)
 				}
@@ -294,7 +307,98 @@ func TestStandard_retryEventuallySucceeds(t *testing.T) {
 			}
 		})
 	}
+}
 
+func TestStandard_defaultRetryQuota(t *testing.T) {
+	r := NewStandard()
+	opErr := fmt.Errorf("generic error")
+
+	var count int
+	for i := 0; i < 1000; i++ {
+		if _, err := r.GetRetryToken(context.Background(), opErr); err != nil {
+			var qe ratelimit.QuotaExceededError
+			if !errors.As(err, &qe) {
+				t.Fatalf("expect QuotaExceededError, got %v", err)
+			}
+			break
+		}
+		count++
+	}
+
+	// 500 tokens at 14 per retry.
+	if e, a := 35, count; e != a {
+		t.Errorf("expect %v retry tokens granted, got %v", e, a)
+	}
+}
+
+func TestStandard_defaultRetryCosts(t *testing.T) {
+	cases := map[string]struct {
+		Err        error
+		ExpectCost uint
+	}{
+		"generic":   {Err: fmt.Errorf("generic error"), ExpectCost: 14},
+		"timeout":   {Err: newStubTimeoutError(), ExpectCost: 14},
+		"5xx":       {Err: newStubResponseError(500), ExpectCost: 14},
+		"429":       {Err: newStubResponseError(429), ExpectCost: 5},
+		"throttle":  {Err: &mockErrorCodeError{code: "ThrottlingException"}, ExpectCost: 5},
+		"throttle2": {Err: &mockErrorCodeError{code: "SlowDown"}, ExpectCost: 5},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			rl := ratelimit.NewTokenRateLimit(500)
+			r := NewStandard(func(o *StandardOptions) {
+				o.RateLimiter = rl
+			})
+			release, err := r.GetRetryToken(context.Background(), c.Err)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := 500-c.ExpectCost, rl.Remaining(); e != a {
+				t.Errorf("expect %v remaining tokens, got %v", e, a)
+			}
+			if err := release(nil); err != nil {
+				t.Fatalf("expect no release error, got %v", err)
+			}
+			if e, a := uint(500), rl.Remaining(); e != a {
+				t.Errorf("expect %v remaining tokens after refund, got %v", e, a)
+			}
+		})
+	}
+}
+
+func TestStandard_GetAttemptToken_retryAttemptNoIncrement(t *testing.T) {
+	rl := ratelimit.NewTokenRateLimit(500)
+	if _, err := rl.GetToken(context.Background(), 10); err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	r := NewStandard(func(o *StandardOptions) {
+		o.RateLimiter = rl
+	})
+
+	ctx := setRetryMetadata(context.Background(), retryMetadata{AttemptNum: 2})
+	release, err := r.GetAttemptToken(ctx)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if err := release(nil); err != nil {
+		t.Fatalf("expect no release error, got %v", err)
+	}
+	if e, a := uint(490), rl.Remaining(); e != a {
+		t.Errorf("expect %v remaining tokens, got %v", e, a)
+	}
+
+	ctx = setRetryMetadata(context.Background(), retryMetadata{AttemptNum: 1})
+	release, err = r.GetAttemptToken(ctx)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	if err := release(nil); err != nil {
+		t.Fatalf("expect no release error, got %v", err)
+	}
+	if e, a := uint(491), rl.Remaining(); e != a {
+		t.Errorf("expect %v remaining tokens, got %v", e, a)
+	}
 }
 
 func newStubResponseError(statusCode int) *smithyhttp.ResponseError {

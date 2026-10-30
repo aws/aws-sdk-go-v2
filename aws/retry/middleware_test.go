@@ -12,6 +12,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddle "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -622,10 +623,10 @@ func observedSkewMetadata(t *testing.T, skew time.Duration) middleware.Metadata 
 	return md
 }
 
-// TestLegacyRetryDelayAttemptValue verifies that when the new retries flag is
-// NOT set, the attempt value passed to RetryDelay is unchanged from legacy
-// behavior (1-based: first retry passes 1, second passes 2, etc.).
-func TestLegacyRetryDelayAttemptValue(t *testing.T) {
+// TestRetryDelayAttemptValue verifies that the attempt value passed to
+// RetryDelay is the 0-based retry index: the first retry passes 0, the second
+// passes 1, etc.
+func TestRetryDelayAttemptValue(t *testing.T) {
 	restoreSleep := sdk.TestingUseNopSleep()
 	defer restoreSleep()
 
@@ -659,11 +660,11 @@ func TestLegacyRetryDelayAttemptValue(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 
-	// Legacy behavior: attemptNum is passed directly (1-based).
-	// After attempt 1 fails, RetryDelay is called with attemptNum=1.
-	// After attempt 2 fails, RetryDelay is called with attemptNum=2.
-	// After attempt 3 fails, RetryDelay is called with attemptNum=3.
-	expected := []int{1, 2, 3}
+	// The retry index is 0-based.
+	// After attempt 1 fails, RetryDelay is called with attempt=0.
+	// After attempt 2 fails, RetryDelay is called with attempt=1.
+	// After attempt 3 fails, RetryDelay is called with attempt=2.
+	expected := []int{0, 1, 2}
 	if len(recordedAttempts) != len(expected) {
 		t.Fatalf("expected %d RetryDelay calls, got %d", len(expected), len(recordedAttempts))
 	}
@@ -687,4 +688,91 @@ func cmpDiff(e, a interface{}) string {
 		return fmt.Sprintf("%v != %v", e, a)
 	}
 	return ""
+}
+
+// TestAttemptMiddleware_adaptiveMode verifies that with the adaptive retryer
+// the client rate limiter is updated after every attempt, and that the retry
+// quota only gets the no-retry increment when the first attempt succeeds.
+func TestAttemptMiddleware_adaptiveMode(t *testing.T) {
+	throttleErr := func() error {
+		return newRetry2026Error(retryTestResponse{statusCode: 400, errorCode: "Throttling"})
+	}
+
+	cases := map[string]struct {
+		drainTokens   uint
+		responses     []error
+		expectUpdates int64
+		expectQuota   uint
+	}{
+		"throttle, throttle, success": {
+			responses:     []error{throttleErr(), throttleErr(), nil},
+			expectUpdates: 3,
+			// -5 -5, then the success refunds only the last retry token.
+			expectQuota: 495,
+		},
+		"first attempt success": {
+			drainTokens:   14,
+			responses:     []error{nil},
+			expectUpdates: 1,
+			// +1 for the first attempt success.
+			expectQuota: 487,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			restoreSleep := sdk.TestingUseNopSleep()
+			defer restoreSleep()
+
+			rl := ratelimit.NewTokenRateLimit(500)
+			if c.drainTokens > 0 {
+				if _, err := rl.GetToken(context.Background(), c.drainTokens); err != nil {
+					t.Fatalf("expect no error, got %v", err)
+				}
+			}
+
+			var updates atomic.Int64
+			retryer := NewAdaptiveMode(func(o *AdaptiveModeOptions) {
+				// Count limiter updates. Reports unknown so the limiter
+				// does not start to rate limit the test's attempts.
+				o.Throttles = []IsErrorThrottle{
+					IsErrorThrottleFunc(func(error) aws.Ternary {
+						updates.Add(1)
+						return aws.UnknownTernary
+					}),
+				}
+				o.StandardOptions = append(o.StandardOptions, func(so *StandardOptions) {
+					so.RateLimiter = rl
+				})
+			})
+
+			am := NewAttemptMiddleware(retryer, func(i interface{}) interface{} {
+				return i
+			})
+
+			var num int
+			handler := middleware.FinalizeHandlerFunc(
+				func(ctx context.Context, in middleware.FinalizeInput) (
+					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+				) {
+					err = c.responses[num]
+					num++
+					return out, metadata, err
+				})
+
+			_, _, err := am.HandleFinalize(context.Background(), middleware.FinalizeInput{}, handler)
+			if err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+			if e, a := len(c.responses), num; e != a {
+				t.Errorf("expect %v attempts, got %v", e, a)
+			}
+			if e, a := c.expectUpdates, updates.Load(); e != a {
+				t.Errorf("expect %v rate limiter updates, got %v", e, a)
+			}
+			if e, a := c.expectQuota, rl.Remaining(); e != a {
+				t.Errorf("expect %v remaining retry tokens, got %v", e, a)
+			}
+		})
+	}
 }
