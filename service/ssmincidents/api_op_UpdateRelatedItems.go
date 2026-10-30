@@ -60,7 +60,9 @@ func (v *UpdateRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncidentRecordArn != nil {
 		s.WriteString(schemas.UpdateRelatedItemsInput_incidentRecordArn, *v.IncidentRecordArn)
 	}
-	serializeRelatedItemsUpdate(s, schemas.UpdateRelatedItemsInput_relatedItemsUpdate, v.RelatedItemsUpdate)
+	if v.RelatedItemsUpdate != nil {
+		serializeRelatedItemsUpdate(s, schemas.UpdateRelatedItemsInput_relatedItemsUpdate, v.RelatedItemsUpdate)
+	}
 }
 func (v *UpdateRelatedItemsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRelatedItemsInput, func(s *smithy.Schema) error {

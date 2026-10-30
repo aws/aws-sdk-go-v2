@@ -68,7 +68,9 @@ func (v *BatchPutGatewayRateLimitsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.GatewayIdentifier != nil {
 		s.WriteString(schemas.BatchPutGatewayRateLimitsRequest_gatewayIdentifier, *v.GatewayIdentifier)
 	}
-	serializeBatchPutLimitEntries(s, schemas.BatchPutGatewayRateLimitsRequest_rateLimits, v.RateLimits)
+	if v.RateLimits != nil {
+		serializeBatchPutLimitEntries(s, schemas.BatchPutGatewayRateLimitsRequest_rateLimits, v.RateLimits)
+	}
 }
 
 type BatchPutGatewayRateLimitsOutput struct {
@@ -91,7 +93,9 @@ func (v *BatchPutGatewayRateLimitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutGatewayRateLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewayRateLimits(s, schemas.BatchPutGatewayRateLimitsResponse_rateLimits, v.RateLimits)
+	if v.RateLimits != nil {
+		serializeGatewayRateLimits(s, schemas.BatchPutGatewayRateLimitsResponse_rateLimits, v.RateLimits)
+	}
 }
 func (v *BatchPutGatewayRateLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutGatewayRateLimitsResponse, func(s *smithy.Schema) error {

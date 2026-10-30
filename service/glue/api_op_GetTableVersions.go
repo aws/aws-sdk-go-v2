@@ -111,7 +111,9 @@ func (v *GetTableVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTableVersionsResponse_NextToken, *v.NextToken)
 	}
-	serializeGetTableVersionsList(s, schemas.GetTableVersionsResponse_TableVersions, v.TableVersions)
+	if v.TableVersions != nil {
+		serializeGetTableVersionsList(s, schemas.GetTableVersionsResponse_TableVersions, v.TableVersions)
+	}
 }
 func (v *GetTableVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTableVersionsResponse, func(s *smithy.Schema) error {

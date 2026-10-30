@@ -71,7 +71,9 @@ func (v *UpdateConfigurationDefinitionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ManagerArn != nil {
 		s.WriteString(schemas.UpdateConfigurationDefinitionInput_ManagerArn, *v.ManagerArn)
 	}
-	serializeConfigurationParametersMap(s, schemas.UpdateConfigurationDefinitionInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeConfigurationParametersMap(s, schemas.UpdateConfigurationDefinitionInput_Parameters, v.Parameters)
+	}
 	if v.TypeVersion != nil {
 		s.WriteString(schemas.UpdateConfigurationDefinitionInput_TypeVersion, *v.TypeVersion)
 	}

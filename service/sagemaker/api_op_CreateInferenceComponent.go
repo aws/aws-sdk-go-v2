@@ -95,8 +95,12 @@ func (v *CreateInferenceComponentInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Specification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInferenceComponentSpecificationList(s, schemas.CreateInferenceComponentInput_Specifications, v.Specifications)
-	serializeTagList(s, schemas.CreateInferenceComponentInput_Tags, v.Tags)
+	if v.Specifications != nil {
+		serializeInferenceComponentSpecificationList(s, schemas.CreateInferenceComponentInput_Specifications, v.Specifications)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInferenceComponentInput_Tags, v.Tags)
+	}
 	if v.VariantName != nil {
 		s.WriteString(schemas.CreateInferenceComponentInput_VariantName, *v.VariantName)
 	}

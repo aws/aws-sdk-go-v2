@@ -91,7 +91,9 @@ func (v *ListMeteredProductsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMeteredProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMeteredProductSummaryList(s, schemas.ListMeteredProductsResponse_meteredProducts, v.MeteredProducts)
+	if v.MeteredProducts != nil {
+		serializeMeteredProductSummaryList(s, schemas.ListMeteredProductsResponse_meteredProducts, v.MeteredProducts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMeteredProductsResponse_nextToken, *v.NextToken)
 	}

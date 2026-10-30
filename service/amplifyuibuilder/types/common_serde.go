@@ -140,9 +140,6 @@ func deserializeFormStyleConfig(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 }
 
 func serializeAssociatedFieldsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -151,9 +148,6 @@ func serializeAssociatedFieldsList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeCodegenDependencies(s smithy.ShapeSerializer, schema *smithy.Schema, v []CodegenDependency) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -164,9 +158,6 @@ func serializeCodegenDependencies(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeCodegenGenericDataEnumValuesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -175,9 +166,6 @@ func serializeCodegenGenericDataEnumValuesList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeCodegenJobSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CodegenJobSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -188,9 +176,6 @@ func serializeCodegenJobSummaryList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeCodegenPrimaryKeysList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -199,9 +184,6 @@ func serializeCodegenPrimaryKeysList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeComponentChildList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ComponentChild) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -212,9 +194,6 @@ func serializeComponentChildList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Component) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -225,9 +204,6 @@ func serializeComponentList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeComponentPropertyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ComponentProperty) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -238,9 +214,6 @@ func serializeComponentPropertyList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeComponentSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ComponentSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -251,9 +224,6 @@ func serializeComponentSummaryList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeComponentVariants(s smithy.ShapeSerializer, schema *smithy.Schema, v []ComponentVariant) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -264,9 +234,6 @@ func serializeComponentVariants(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeFormInputValuePropertyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FormInputValueProperty) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -277,9 +244,6 @@ func serializeFormInputValuePropertyList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeFormList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Form) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -290,9 +254,6 @@ func serializeFormList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Form
 }
 
 func serializeFormSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FormSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -303,9 +264,6 @@ func serializeFormSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -314,9 +272,6 @@ func serializeIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeNumValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt32(schema.ListMember(), int32(vv))
@@ -325,9 +280,6 @@ func serializeNumValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []int
 }
 
 func serializePredicateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Predicate) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -338,9 +290,6 @@ func serializePredicateList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeRelatedModelFieldsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -349,9 +298,6 @@ func serializeRelatedModelFieldsList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeSortPropertyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SortProperty) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -362,9 +308,6 @@ func serializeSortPropertyList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeStrValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -373,9 +316,6 @@ func serializeStrValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -384,9 +324,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeThemeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Theme) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -397,9 +334,6 @@ func serializeThemeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []The
 }
 
 func serializeThemeSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ThemeSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -410,9 +344,6 @@ func serializeThemeSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeThemeValuesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ThemeValues) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -423,9 +354,6 @@ func serializeThemeValuesList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeValidationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []FieldValidationConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -436,9 +364,6 @@ func serializeValidationsList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeValueMappingList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValueMapping) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -991,9 +916,6 @@ func deserializeValueMappingList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 }
 
 func serializeCodegenGenericDataEnums(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CodegenGenericDataEnum) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1005,9 +927,6 @@ func serializeCodegenGenericDataEnums(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeCodegenGenericDataFields(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CodegenGenericDataField) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1019,9 +938,6 @@ func serializeCodegenGenericDataFields(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeCodegenGenericDataModels(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CodegenGenericDataModel) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1033,9 +949,6 @@ func serializeCodegenGenericDataModels(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeCodegenGenericDataNonModelFields(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CodegenGenericDataField) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1047,9 +960,6 @@ func serializeCodegenGenericDataNonModelFields(s smithy.ShapeSerializer, schema 
 }
 
 func serializeCodegenGenericDataNonModels(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]CodegenGenericDataNonModel) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1061,9 +971,6 @@ func serializeCodegenGenericDataNonModels(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeComponentBindingProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ComponentBindingPropertiesValue) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1075,9 +982,6 @@ func serializeComponentBindingProperties(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeComponentCollectionProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ComponentDataConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1089,9 +993,6 @@ func serializeComponentCollectionProperties(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeComponentEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ComponentEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1103,9 +1004,6 @@ func serializeComponentEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeComponentOverrides(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1115,9 +1013,6 @@ func serializeComponentOverrides(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeComponentOverridesValue(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1127,9 +1022,6 @@ func serializeComponentOverridesValue(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeComponentProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]ComponentProperty) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1141,9 +1033,6 @@ func serializeComponentProperties(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeComponentVariantValues(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1153,9 +1042,6 @@ func serializeComponentVariantValues(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeFeaturesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1165,9 +1051,6 @@ func serializeFeaturesMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map
 }
 
 func serializeFieldsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]FieldConfig) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1179,9 +1062,6 @@ func serializeFieldsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[s
 }
 
 func serializeFormBindings(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]FormBindingElement) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1193,9 +1073,6 @@ func serializeFormBindings(s smithy.ShapeSerializer, schema *smithy.Schema, v ma
 }
 
 func serializeFormInputBindingProperties(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]FormInputBindingPropertiesValue) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1207,9 +1084,6 @@ func serializeFormInputBindingProperties(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeReactCodegenDependencies(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1219,9 +1093,6 @@ func serializeReactCodegenDependencies(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeSectionalElementMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]SectionalElement) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -1233,9 +1104,6 @@ func serializeSectionalElementMap(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

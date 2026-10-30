@@ -147,7 +147,9 @@ func (v *CreateAutoMLJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GenerateCandidateDefinitionsOnly != nil {
 		s.WriteBool(schemas.CreateAutoMLJobRequest_GenerateCandidateDefinitionsOnly, *v.GenerateCandidateDefinitionsOnly)
 	}
-	serializeAutoMLInputDataConfig(s, schemas.CreateAutoMLJobRequest_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeAutoMLInputDataConfig(s, schemas.CreateAutoMLJobRequest_InputDataConfig, v.InputDataConfig)
+	}
 	if v.ModelDeployConfig != nil {
 		s.WriteStruct(schemas.CreateAutoMLJobRequest_ModelDeployConfig)
 		v.ModelDeployConfig.SerializeMembers(s)
@@ -164,7 +166,9 @@ func (v *CreateAutoMLJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateAutoMLJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateAutoMLJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAutoMLJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAutoMLJobOutput struct {

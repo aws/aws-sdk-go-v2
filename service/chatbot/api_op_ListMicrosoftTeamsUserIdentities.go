@@ -90,7 +90,9 @@ func (v *ListMicrosoftTeamsUserIdentitiesOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMicrosoftTeamsUserIdentitiesResult_NextToken, *v.NextToken)
 	}
-	serializeTeamsUserIdentitiesList(s, schemas.ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities, v.TeamsUserIdentities)
+	if v.TeamsUserIdentities != nil {
+		serializeTeamsUserIdentitiesList(s, schemas.ListMicrosoftTeamsUserIdentitiesResult_TeamsUserIdentities, v.TeamsUserIdentities)
+	}
 }
 func (v *ListMicrosoftTeamsUserIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMicrosoftTeamsUserIdentitiesResult, func(s *smithy.Schema) error {

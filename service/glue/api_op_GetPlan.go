@@ -68,7 +68,9 @@ func (v *GetPlanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalPlanOptionsMap(s, schemas.GetPlanRequest_AdditionalPlanOptionsMap, v.AdditionalPlanOptionsMap)
+	if v.AdditionalPlanOptionsMap != nil {
+		serializeAdditionalPlanOptionsMap(s, schemas.GetPlanRequest_AdditionalPlanOptionsMap, v.AdditionalPlanOptionsMap)
+	}
 	if v.Language != "" {
 		s.WriteString(schemas.GetPlanRequest_Language, string(v.Language))
 	}
@@ -77,8 +79,12 @@ func (v *GetPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMappingList(s, schemas.GetPlanRequest_Mapping, v.Mapping)
-	serializeCatalogEntries(s, schemas.GetPlanRequest_Sinks, v.Sinks)
+	if v.Mapping != nil {
+		serializeMappingList(s, schemas.GetPlanRequest_Mapping, v.Mapping)
+	}
+	if v.Sinks != nil {
+		serializeCatalogEntries(s, schemas.GetPlanRequest_Sinks, v.Sinks)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.GetPlanRequest_Source)
 		v.Source.SerializeMembers(s)

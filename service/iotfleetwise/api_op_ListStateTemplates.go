@@ -93,7 +93,9 @@ func (v *ListStateTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStateTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serializeStateTemplateSummaries(s, schemas.ListStateTemplatesResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeStateTemplateSummaries(s, schemas.ListStateTemplatesResponse_summaries, v.Summaries)
+	}
 }
 func (v *ListStateTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStateTemplatesResponse, func(s *smithy.Schema) error {

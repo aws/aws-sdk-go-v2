@@ -94,7 +94,9 @@ func (v *ListLensesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLensesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLensSummaries(s, schemas.ListLensesOutput_LensSummaries, v.LensSummaries)
+	if v.LensSummaries != nil {
+		serializeLensSummaries(s, schemas.ListLensesOutput_LensSummaries, v.LensSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLensesOutput_NextToken, *v.NextToken)
 	}

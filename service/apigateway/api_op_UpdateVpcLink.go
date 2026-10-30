@@ -50,7 +50,9 @@ func (v *UpdateVpcLinkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateVpcLinkRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateVpcLinkRequest_patchOperations, v.PatchOperations)
+	}
 	if v.VpcLinkId != nil {
 		s.WriteString(schemas.UpdateVpcLinkRequest_vpcLinkId, *v.VpcLinkId)
 	}
@@ -114,8 +116,12 @@ func (v *UpdateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.VpcLink_statusMessage, *v.StatusMessage)
 	}
-	serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
-	serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
+	}
+	if v.TargetArns != nil {
+		serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+	}
 }
 func (v *UpdateVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcLink, func(s *smithy.Schema) error {

@@ -78,7 +78,9 @@ func (v *GetRestApisOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRestApisOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfRestApi(s, schemas.RestApis_items, v.Items)
+	if v.Items != nil {
+		serializeListOfRestApi(s, schemas.RestApis_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.RestApis_position, *v.Position)
 	}

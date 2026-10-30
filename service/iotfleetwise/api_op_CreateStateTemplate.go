@@ -88,19 +88,27 @@ func (v *CreateStateTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateStateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.CreateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.DataExtraDimensions != nil {
+		serializeStateTemplateDataExtraDimensionNodePathList(s, schemas.CreateStateTemplateRequest_dataExtraDimensions, v.DataExtraDimensions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateStateTemplateRequest_description, *v.Description)
 	}
-	serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.CreateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
+	if v.MetadataExtraDimensions != nil {
+		serializeStateTemplateMetadataExtraDimensionNodePathList(s, schemas.CreateStateTemplateRequest_metadataExtraDimensions, v.MetadataExtraDimensions)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateStateTemplateRequest_name, *v.Name)
 	}
 	if v.SignalCatalogArn != nil {
 		s.WriteString(schemas.CreateStateTemplateRequest_signalCatalogArn, *v.SignalCatalogArn)
 	}
-	serializeStateTemplateProperties(s, schemas.CreateStateTemplateRequest_stateTemplateProperties, v.StateTemplateProperties)
-	serializeTagList(s, schemas.CreateStateTemplateRequest_tags, v.Tags)
+	if v.StateTemplateProperties != nil {
+		serializeStateTemplateProperties(s, schemas.CreateStateTemplateRequest_stateTemplateProperties, v.StateTemplateProperties)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateStateTemplateRequest_tags, v.Tags)
+	}
 }
 
 type CreateStateTemplateOutput struct {

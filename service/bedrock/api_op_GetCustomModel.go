@@ -145,14 +145,18 @@ func (v *GetCustomModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.GetCustomModelResponse_creationTime, *v.CreationTime)
 	}
-	serializeCustomizationConfig(s, schemas.GetCustomModelResponse_customizationConfig, v.CustomizationConfig)
+	if v.CustomizationConfig != nil {
+		serializeCustomizationConfig(s, schemas.GetCustomModelResponse_customizationConfig, v.CustomizationConfig)
+	}
 	if v.CustomizationType != "" {
 		s.WriteString(schemas.GetCustomModelResponse_customizationType, string(v.CustomizationType))
 	}
 	if v.FailureMessage != nil {
 		s.WriteString(schemas.GetCustomModelResponse_failureMessage, *v.FailureMessage)
 	}
-	serializeModelCustomizationHyperParameters(s, schemas.GetCustomModelResponse_hyperParameters, v.HyperParameters)
+	if v.HyperParameters != nil {
+		serializeModelCustomizationHyperParameters(s, schemas.GetCustomModelResponse_hyperParameters, v.HyperParameters)
+	}
 	if v.JobArn != nil {
 		s.WriteString(schemas.GetCustomModelResponse_jobArn, *v.JobArn)
 	}
@@ -191,7 +195,9 @@ func (v *GetCustomModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ValidationDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeValidationMetrics(s, schemas.GetCustomModelResponse_validationMetrics, v.ValidationMetrics)
+	if v.ValidationMetrics != nil {
+		serializeValidationMetrics(s, schemas.GetCustomModelResponse_validationMetrics, v.ValidationMetrics)
+	}
 }
 func (v *GetCustomModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCustomModelResponse, func(s *smithy.Schema) error {

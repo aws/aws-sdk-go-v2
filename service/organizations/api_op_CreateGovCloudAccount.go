@@ -269,7 +269,9 @@ func (v *CreateGovCloudAccountInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RoleName != nil {
 		s.WriteString(schemas.CreateGovCloudAccountRequest_RoleName, *v.RoleName)
 	}
-	serializeTags(s, schemas.CreateGovCloudAccountRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateGovCloudAccountRequest_Tags, v.Tags)
+	}
 }
 
 type CreateGovCloudAccountOutput struct {

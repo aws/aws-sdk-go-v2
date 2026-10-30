@@ -79,7 +79,9 @@ func (v *CreateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaName != nil {
 		s.WriteString(schemas.CreateSchemaRequest_SchemaName, *v.SchemaName)
 	}
-	serializeTags(s, schemas.CreateSchemaRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSchemaRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateSchemaRequest_Type, string(v.Type))
 	}
@@ -139,7 +141,9 @@ func (v *CreateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaVersion != nil {
 		s.WriteString(schemas.CreateSchemaResponse_SchemaVersion, *v.SchemaVersion)
 	}
-	serializeTags(s, schemas.CreateSchemaResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSchemaResponse_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateSchemaResponse_Type, *v.Type)
 	}

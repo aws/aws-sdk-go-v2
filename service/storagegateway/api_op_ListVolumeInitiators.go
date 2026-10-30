@@ -71,7 +71,9 @@ func (v *ListVolumeInitiatorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVolumeInitiatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInitiators(s, schemas.ListVolumeInitiatorsOutput_Initiators, v.Initiators)
+	if v.Initiators != nil {
+		serializeInitiators(s, schemas.ListVolumeInitiatorsOutput_Initiators, v.Initiators)
+	}
 }
 func (v *ListVolumeInitiatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVolumeInitiatorsOutput, func(s *smithy.Schema) error {

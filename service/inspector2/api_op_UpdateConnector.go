@@ -56,7 +56,9 @@ func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateConnectorRequest_description, *v.Description)
 	}
-	serializeProviderDetailUpdate(s, schemas.UpdateConnectorRequest_providerDetail, v.ProviderDetail)
+	if v.ProviderDetail != nil {
+		serializeProviderDetailUpdate(s, schemas.UpdateConnectorRequest_providerDetail, v.ProviderDetail)
+	}
 }
 
 type UpdateConnectorOutput struct {

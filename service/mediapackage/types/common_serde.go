@@ -7,9 +7,6 @@ import (
 )
 
 func serialize__listOf__PeriodTriggersElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []PeriodTriggersElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serialize__listOf__PeriodTriggersElement(s smithy.ShapeSerializer, schema *
 }
 
 func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serialize__listOfChannel(s smithy.ShapeSerializer, schema *smithy.Schema, v []Channel) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -42,9 +33,6 @@ func serialize__listOfChannel(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serialize__listOfHarvestJob(s smithy.ShapeSerializer, schema *smithy.Schema, v []HarvestJob) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -55,9 +43,6 @@ func serialize__listOfHarvestJob(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serialize__listOfHlsManifest(s smithy.ShapeSerializer, schema *smithy.Schema, v []HlsManifest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -68,9 +53,6 @@ func serialize__listOfHlsManifest(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serialize__listOfHlsManifestCreateOrUpdateParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v []HlsManifestCreateOrUpdateParameters) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -81,9 +63,6 @@ func serialize__listOfHlsManifestCreateOrUpdateParameters(s smithy.ShapeSerializ
 }
 
 func serialize__listOfIngestEndpoint(s smithy.ShapeSerializer, schema *smithy.Schema, v []IngestEndpoint) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serialize__listOfIngestEndpoint(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serialize__listOfOriginEndpoint(s smithy.ShapeSerializer, schema *smithy.Schema, v []OriginEndpoint) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serialize__listOfOriginEndpoint(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeAdTriggers(s smithy.ShapeSerializer, schema *smithy.Schema, v []AdTriggersElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -313,9 +286,6 @@ func deserializeAdTriggers(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Ad
 }
 
 func serialize__mapOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -325,9 +295,6 @@ func serialize__mapOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

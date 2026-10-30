@@ -78,8 +78,12 @@ func (v *CreateDataProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Engine != nil {
 		s.WriteString(schemas.CreateDataProviderMessage_Engine, *v.Engine)
 	}
-	serializeDataProviderSettings(s, schemas.CreateDataProviderMessage_Settings, v.Settings)
-	serializeTagList(s, schemas.CreateDataProviderMessage_Tags, v.Tags)
+	if v.Settings != nil {
+		serializeDataProviderSettings(s, schemas.CreateDataProviderMessage_Settings, v.Settings)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataProviderMessage_Tags, v.Tags)
+	}
 	if v.Virtual != nil {
 		s.WriteBool(schemas.CreateDataProviderMessage_Virtual, *v.Virtual)
 	}

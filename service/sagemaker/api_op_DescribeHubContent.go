@@ -184,7 +184,9 @@ func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubContentArn != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentArn, *v.HubContentArn)
 	}
-	serializeHubContentDependencyList(s, schemas.DescribeHubContentResponse_HubContentDependencies, v.HubContentDependencies)
+	if v.HubContentDependencies != nil {
+		serializeHubContentDependencyList(s, schemas.DescribeHubContentResponse_HubContentDependencies, v.HubContentDependencies)
+	}
 	if v.HubContentDescription != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentDescription, *v.HubContentDescription)
 	}
@@ -200,7 +202,9 @@ func (v *DescribeHubContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubContentName != nil {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentName, *v.HubContentName)
 	}
-	serializeHubContentSearchKeywordList(s, schemas.DescribeHubContentResponse_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentSearchKeywords != nil {
+		serializeHubContentSearchKeywordList(s, schemas.DescribeHubContentResponse_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	}
 	if v.HubContentStatus != "" {
 		s.WriteString(schemas.DescribeHubContentResponse_HubContentStatus, string(v.HubContentStatus))
 	}

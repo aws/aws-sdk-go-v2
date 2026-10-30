@@ -128,7 +128,9 @@ func (v *ListApplicationAssignmentsForPrincipalOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListApplicationAssignmentsForPrincipalOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationAssignmentListForPrincipal(s, schemas.ListApplicationAssignmentsForPrincipalResponse_ApplicationAssignments, v.ApplicationAssignments)
+	if v.ApplicationAssignments != nil {
+		serializeApplicationAssignmentListForPrincipal(s, schemas.ListApplicationAssignmentsForPrincipalResponse_ApplicationAssignments, v.ApplicationAssignments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationAssignmentsForPrincipalResponse_NextToken, *v.NextToken)
 	}

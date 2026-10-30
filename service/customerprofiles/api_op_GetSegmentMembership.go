@@ -57,7 +57,9 @@ func (v *GetSegmentMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.GetSegmentMembershipRequest_DomainName, *v.DomainName)
 	}
-	serializeProfileIds(s, schemas.GetSegmentMembershipRequest_ProfileIds, v.ProfileIds)
+	if v.ProfileIds != nil {
+		serializeProfileIds(s, schemas.GetSegmentMembershipRequest_ProfileIds, v.ProfileIds)
+	}
 	if v.SegmentDefinitionName != nil {
 		s.WriteString(schemas.GetSegmentMembershipRequest_SegmentDefinitionName, *v.SegmentDefinitionName)
 	}
@@ -92,11 +94,15 @@ func (v *GetSegmentMembershipOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSegmentMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.GetSegmentMembershipResponse_Failures, v.Failures)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.GetSegmentMembershipResponse_Failures, v.Failures)
+	}
 	if v.LastComputedAt != nil {
 		s.WriteTime(schemas.GetSegmentMembershipResponse_LastComputedAt, *v.LastComputedAt)
 	}
-	serializeProfiles(s, schemas.GetSegmentMembershipResponse_Profiles, v.Profiles)
+	if v.Profiles != nil {
+		serializeProfiles(s, schemas.GetSegmentMembershipResponse_Profiles, v.Profiles)
+	}
 	if v.SegmentDefinitionName != nil {
 		s.WriteString(schemas.GetSegmentMembershipResponse_SegmentDefinitionName, *v.SegmentDefinitionName)
 	}

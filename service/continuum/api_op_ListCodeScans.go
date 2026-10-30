@@ -87,7 +87,9 @@ func (v *ListCodeScansOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeScansOutput_nextToken, *v.NextToken)
 	}
-	serializeCodeScanSummaries(s, schemas.ListCodeScansOutput_scans, v.Scans)
+	if v.Scans != nil {
+		serializeCodeScanSummaries(s, schemas.ListCodeScansOutput_scans, v.Scans)
+	}
 }
 func (v *ListCodeScansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCodeScansOutput, func(s *smithy.Schema) error {

@@ -137,7 +137,9 @@ func (v *DescribeLocationFsxWindowsOutput) SerializeMembers(s smithy.ShapeSerial
 		v.ManagedSecretConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxWindowsResponse_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxWindowsResponse_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.DescribeLocationFsxWindowsResponse_User, *v.User)
 	}

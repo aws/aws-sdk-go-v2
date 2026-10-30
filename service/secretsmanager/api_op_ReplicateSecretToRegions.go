@@ -67,7 +67,9 @@ func (v *ReplicateSecretToRegionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicateSecretToRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddReplicaRegionListType(s, schemas.ReplicateSecretToRegionsRequest_AddReplicaRegions, v.AddReplicaRegions)
+	if v.AddReplicaRegions != nil {
+		serializeAddReplicaRegionListType(s, schemas.ReplicateSecretToRegionsRequest_AddReplicaRegions, v.AddReplicaRegions)
+	}
 	if v.ForceOverwriteReplicaSecret != false {
 		s.WriteBool(schemas.ReplicateSecretToRegionsRequest_ForceOverwriteReplicaSecret, v.ForceOverwriteReplicaSecret)
 	}
@@ -100,7 +102,9 @@ func (v *ReplicateSecretToRegionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ARN != nil {
 		s.WriteString(schemas.ReplicateSecretToRegionsResponse_ARN, *v.ARN)
 	}
-	serializeReplicationStatusListType(s, schemas.ReplicateSecretToRegionsResponse_ReplicationStatus, v.ReplicationStatus)
+	if v.ReplicationStatus != nil {
+		serializeReplicationStatusListType(s, schemas.ReplicateSecretToRegionsResponse_ReplicationStatus, v.ReplicationStatus)
+	}
 }
 func (v *ReplicateSecretToRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplicateSecretToRegionsResponse, func(s *smithy.Schema) error {

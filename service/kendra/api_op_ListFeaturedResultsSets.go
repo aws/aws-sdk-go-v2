@@ -86,7 +86,9 @@ func (v *ListFeaturedResultsSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFeaturedResultsSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeaturedResultsSetSummaryItems(s, schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems, v.FeaturedResultsSetSummaryItems)
+	if v.FeaturedResultsSetSummaryItems != nil {
+		serializeFeaturedResultsSetSummaryItems(s, schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems, v.FeaturedResultsSetSummaryItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFeaturedResultsSetsResponse_NextToken, *v.NextToken)
 	}

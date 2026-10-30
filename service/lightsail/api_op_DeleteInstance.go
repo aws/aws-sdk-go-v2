@@ -80,7 +80,9 @@ func (v *DeleteInstanceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteInstanceResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteInstanceResult_operations, v.Operations)
+	}
 }
 func (v *DeleteInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteInstanceResult, func(s *smithy.Schema) error {

@@ -67,7 +67,9 @@ func (v *UpdateDimensionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDimensionRequest_name, *v.Name)
 	}
-	serializeDimensionStringValues(s, schemas.UpdateDimensionRequest_stringValues, v.StringValues)
+	if v.StringValues != nil {
+		serializeDimensionStringValues(s, schemas.UpdateDimensionRequest_stringValues, v.StringValues)
+	}
 }
 
 type UpdateDimensionOutput struct {
@@ -118,7 +120,9 @@ func (v *UpdateDimensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDimensionResponse_name, *v.Name)
 	}
-	serializeDimensionStringValues(s, schemas.UpdateDimensionResponse_stringValues, v.StringValues)
+	if v.StringValues != nil {
+		serializeDimensionStringValues(s, schemas.UpdateDimensionResponse_stringValues, v.StringValues)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateDimensionResponse_type, string(v.Type))
 	}

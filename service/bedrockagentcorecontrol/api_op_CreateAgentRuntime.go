@@ -105,12 +105,18 @@ func (v *CreateAgentRuntimeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentRuntimeArtifact(s, schemas.CreateAgentRuntimeRequest_agentRuntimeArtifact, v.AgentRuntimeArtifact)
+	if v.AgentRuntimeArtifact != nil {
+		serializeAgentRuntimeArtifact(s, schemas.CreateAgentRuntimeRequest_agentRuntimeArtifact, v.AgentRuntimeArtifact)
+	}
 	if v.AgentRuntimeName != nil {
 		s.WriteString(schemas.CreateAgentRuntimeRequest_agentRuntimeName, *v.AgentRuntimeName)
 	}
-	serializeAllowedPorts(s, schemas.CreateAgentRuntimeRequest_allowedPorts, v.AllowedPorts)
-	serializeAuthorizerConfiguration(s, schemas.CreateAgentRuntimeRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AllowedPorts != nil {
+		serializeAllowedPorts(s, schemas.CreateAgentRuntimeRequest_allowedPorts, v.AllowedPorts)
+	}
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.CreateAgentRuntimeRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.CapacityProviderConfiguration != nil {
 		s.WriteStruct(schemas.CreateAgentRuntimeRequest_capacityProviderConfiguration)
 		v.CapacityProviderConfiguration.SerializeMembers(s)
@@ -122,8 +128,12 @@ func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAgentRuntimeRequest_description, *v.Description)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.CreateAgentRuntimeRequest_environmentVariables, v.EnvironmentVariables)
-	serializeFilesystemConfigurations(s, schemas.CreateAgentRuntimeRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.CreateAgentRuntimeRequest_environmentVariables, v.EnvironmentVariables)
+	}
+	if v.FilesystemConfigurations != nil {
+		serializeFilesystemConfigurations(s, schemas.CreateAgentRuntimeRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.LifecycleConfiguration != nil {
 		s.WriteStruct(schemas.CreateAgentRuntimeRequest_lifecycleConfiguration)
 		v.LifecycleConfiguration.SerializeMembers(s)
@@ -142,11 +152,15 @@ func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProtocolConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestHeaderConfiguration(s, schemas.CreateAgentRuntimeRequest_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	if v.RequestHeaderConfiguration != nil {
+		serializeRequestHeaderConfiguration(s, schemas.CreateAgentRuntimeRequest_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateAgentRuntimeRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagsMap(s, schemas.CreateAgentRuntimeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateAgentRuntimeRequest_tags, v.Tags)
+	}
 }
 
 type CreateAgentRuntimeOutput struct {

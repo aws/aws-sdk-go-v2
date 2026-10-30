@@ -83,7 +83,9 @@ func (v *ListGraphsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGraphsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGraphList(s, schemas.ListGraphsResponse_GraphList, v.GraphList)
+	if v.GraphList != nil {
+		serializeGraphList(s, schemas.ListGraphsResponse_GraphList, v.GraphList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGraphsResponse_NextToken, *v.NextToken)
 	}

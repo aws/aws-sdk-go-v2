@@ -107,7 +107,9 @@ func (v *CreateEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EmailIdentity != nil {
 		s.WriteString(schemas.CreateEmailIdentityRequest_EmailIdentity, *v.EmailIdentity)
 	}
-	serializeTagList(s, schemas.CreateEmailIdentityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEmailIdentityRequest_Tags, v.Tags)
+	}
 }
 
 // If the email identity is a domain, this object contains information about the

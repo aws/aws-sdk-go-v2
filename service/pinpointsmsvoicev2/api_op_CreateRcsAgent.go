@@ -67,7 +67,9 @@ func (v *CreateRcsAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.CreateRcsAgentRequest_OptOutListName, *v.OptOutListName)
 	}
-	serializeTagList(s, schemas.CreateRcsAgentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRcsAgentRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRcsAgentOutput struct {
@@ -170,7 +172,9 @@ func (v *CreateRcsAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateRcsAgentResult_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateRcsAgentResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRcsAgentResult_Tags, v.Tags)
+	}
 	if v.TwoWayChannelArn != nil {
 		s.WriteString(schemas.CreateRcsAgentResult_TwoWayChannelArn, *v.TwoWayChannelArn)
 	}
@@ -187,7 +191,9 @@ func (v *CreateRcsAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TwoWayMediaS3Role != nil {
 		s.WriteString(schemas.CreateRcsAgentResult_TwoWayMediaS3Role, *v.TwoWayMediaS3Role)
 	}
-	serializeRcsEventTypeList(s, schemas.CreateRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	if v.TwoWayRcsEventsEnabled != nil {
+		serializeRcsEventTypeList(s, schemas.CreateRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	}
 }
 func (v *CreateRcsAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRcsAgentResult, func(s *smithy.Schema) error {

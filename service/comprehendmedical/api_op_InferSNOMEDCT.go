@@ -96,7 +96,9 @@ func (v *InferSNOMEDCTOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Characters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSNOMEDCTEntityList(s, schemas.InferSNOMEDCTResponse_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeSNOMEDCTEntityList(s, schemas.InferSNOMEDCTResponse_Entities, v.Entities)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.InferSNOMEDCTResponse_ModelVersion, *v.ModelVersion)
 	}

@@ -43,7 +43,9 @@ func (v *BatchGetMembershipDatasourcesInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchGetMembershipDatasourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGraphArnList(s, schemas.BatchGetMembershipDatasourcesRequest_GraphArns, v.GraphArns)
+	if v.GraphArns != nil {
+		serializeGraphArnList(s, schemas.BatchGetMembershipDatasourcesRequest_GraphArns, v.GraphArns)
+	}
 }
 
 type BatchGetMembershipDatasourcesOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetMembershipDatasourcesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchGetMembershipDatasourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMembershipDatasourcesList(s, schemas.BatchGetMembershipDatasourcesResponse_MembershipDatasources, v.MembershipDatasources)
-	serializeUnprocessedGraphList(s, schemas.BatchGetMembershipDatasourcesResponse_UnprocessedGraphs, v.UnprocessedGraphs)
+	if v.MembershipDatasources != nil {
+		serializeMembershipDatasourcesList(s, schemas.BatchGetMembershipDatasourcesResponse_MembershipDatasources, v.MembershipDatasources)
+	}
+	if v.UnprocessedGraphs != nil {
+		serializeUnprocessedGraphList(s, schemas.BatchGetMembershipDatasourcesResponse_UnprocessedGraphs, v.UnprocessedGraphs)
+	}
 }
 func (v *BatchGetMembershipDatasourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetMembershipDatasourcesResponse, func(s *smithy.Schema) error {

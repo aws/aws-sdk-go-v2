@@ -98,7 +98,9 @@ func (v *ListInvoiceSummariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInvoiceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvoiceSummaries(s, schemas.ListInvoiceSummariesResponse_InvoiceSummaries, v.InvoiceSummaries)
+	if v.InvoiceSummaries != nil {
+		serializeInvoiceSummaries(s, schemas.ListInvoiceSummariesResponse_InvoiceSummaries, v.InvoiceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInvoiceSummariesResponse_NextToken, *v.NextToken)
 	}

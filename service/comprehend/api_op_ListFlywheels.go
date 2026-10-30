@@ -85,7 +85,9 @@ func (v *ListFlywheelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlywheelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlywheelSummaryList(s, schemas.ListFlywheelsResponse_FlywheelSummaryList, v.FlywheelSummaryList)
+	if v.FlywheelSummaryList != nil {
+		serializeFlywheelSummaryList(s, schemas.ListFlywheelsResponse_FlywheelSummaryList, v.FlywheelSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlywheelsResponse_NextToken, *v.NextToken)
 	}

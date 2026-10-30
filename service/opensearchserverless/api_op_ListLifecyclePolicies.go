@@ -66,7 +66,9 @@ func (v *ListLifecyclePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLifecyclePoliciesRequest_nextToken, *v.NextToken)
 	}
-	serializeLifecycleResourceFilter(s, schemas.ListLifecyclePoliciesRequest_resources, v.Resources)
+	if v.Resources != nil {
+		serializeLifecycleResourceFilter(s, schemas.ListLifecyclePoliciesRequest_resources, v.Resources)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ListLifecyclePoliciesRequest_type, string(v.Type))
 	}
@@ -95,7 +97,9 @@ func (v *ListLifecyclePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLifecyclePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecyclePolicySummaries(s, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries, v.LifecyclePolicySummaries)
+	if v.LifecyclePolicySummaries != nil {
+		serializeLifecyclePolicySummaries(s, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries, v.LifecyclePolicySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLifecyclePoliciesResponse_nextToken, *v.NextToken)
 	}

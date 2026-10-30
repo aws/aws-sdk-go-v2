@@ -75,8 +75,12 @@ func (v *DescribeDataRepositoryAssociationsInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeDataRepositoryAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataRepositoryAssociationIds(s, schemas.DescribeDataRepositoryAssociationsRequest_AssociationIds, v.AssociationIds)
-	serializeFilters(s, schemas.DescribeDataRepositoryAssociationsRequest_Filters, v.Filters)
+	if v.AssociationIds != nil {
+		serializeDataRepositoryAssociationIds(s, schemas.DescribeDataRepositoryAssociationsRequest_AssociationIds, v.AssociationIds)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.DescribeDataRepositoryAssociationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeDataRepositoryAssociationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -108,7 +112,9 @@ func (v *DescribeDataRepositoryAssociationsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeDataRepositoryAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataRepositoryAssociations(s, schemas.DescribeDataRepositoryAssociationsResponse_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeDataRepositoryAssociations(s, schemas.DescribeDataRepositoryAssociationsResponse_Associations, v.Associations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDataRepositoryAssociationsResponse_NextToken, *v.NextToken)
 	}

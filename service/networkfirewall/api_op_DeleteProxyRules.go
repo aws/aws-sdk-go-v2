@@ -60,7 +60,9 @@ func (v *DeleteProxyRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProxyRuleGroupName != nil {
 		s.WriteString(schemas.DeleteProxyRulesRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
 	}
-	serializeResourceNameList(s, schemas.DeleteProxyRulesRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeResourceNameList(s, schemas.DeleteProxyRulesRequest_Rules, v.Rules)
+	}
 }
 
 type DeleteProxyRulesOutput struct {

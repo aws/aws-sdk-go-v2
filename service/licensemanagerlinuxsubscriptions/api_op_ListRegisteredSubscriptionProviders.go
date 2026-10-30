@@ -57,7 +57,9 @@ func (v *ListRegisteredSubscriptionProvidersInput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegisteredSubscriptionProvidersRequest_NextToken, *v.NextToken)
 	}
-	serializeSubscriptionProviderSourceList(s, schemas.ListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources, v.SubscriptionProviderSources)
+	if v.SubscriptionProviderSources != nil {
+		serializeSubscriptionProviderSourceList(s, schemas.ListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources, v.SubscriptionProviderSources)
+	}
 }
 
 type ListRegisteredSubscriptionProvidersOutput struct {
@@ -87,7 +89,9 @@ func (v *ListRegisteredSubscriptionProvidersOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegisteredSubscriptionProvidersResponse_NextToken, *v.NextToken)
 	}
-	serializeRegisteredSubscriptionProviderList(s, schemas.ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders, v.RegisteredSubscriptionProviders)
+	if v.RegisteredSubscriptionProviders != nil {
+		serializeRegisteredSubscriptionProviderList(s, schemas.ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders, v.RegisteredSubscriptionProviders)
+	}
 }
 func (v *ListRegisteredSubscriptionProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegisteredSubscriptionProvidersResponse, func(s *smithy.Schema) error {

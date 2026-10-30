@@ -99,7 +99,9 @@ func (v *CreateFlowDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateFlowDefinitionRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateFlowDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFlowDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFlowDefinitionOutput struct {

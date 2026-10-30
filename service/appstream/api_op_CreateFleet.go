@@ -380,8 +380,12 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamView != "" {
 		s.WriteString(schemas.CreateFleetRequest_StreamView, string(v.StreamView))
 	}
-	serializeTags(s, schemas.CreateFleetRequest_Tags, v.Tags)
-	serializeUsbDeviceFilterStrings(s, schemas.CreateFleetRequest_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFleetRequest_Tags, v.Tags)
+	}
+	if v.UsbDeviceFilterStrings != nil {
+		serializeUsbDeviceFilterStrings(s, schemas.CreateFleetRequest_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateFleetRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

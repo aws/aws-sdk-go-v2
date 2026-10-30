@@ -67,7 +67,9 @@ func (v *GetRelationalDatabaseLogStreamsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetRelationalDatabaseLogStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GetRelationalDatabaseLogStreamsResult_logStreams, v.LogStreams)
+	if v.LogStreams != nil {
+		serializeStringList(s, schemas.GetRelationalDatabaseLogStreamsResult_logStreams, v.LogStreams)
+	}
 }
 func (v *GetRelationalDatabaseLogStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseLogStreamsResult, func(s *smithy.Schema) error {

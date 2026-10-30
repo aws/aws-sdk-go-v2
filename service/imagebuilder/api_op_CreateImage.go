@@ -149,8 +149,12 @@ func (v *CreateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LoggingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateImageRequest_tags, v.Tags)
-	serializeWorkflowConfigurationList(s, schemas.CreateImageRequest_workflows, v.Workflows)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateImageRequest_tags, v.Tags)
+	}
+	if v.Workflows != nil {
+		serializeWorkflowConfigurationList(s, schemas.CreateImageRequest_workflows, v.Workflows)
+	}
 }
 
 type CreateImageOutput struct {

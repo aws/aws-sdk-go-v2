@@ -65,7 +65,9 @@ func (v *ListDomainsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterConditions(s, schemas.ListDomainsRequest_FilterConditions, v.FilterConditions)
+	if v.FilterConditions != nil {
+		serializeFilterConditions(s, schemas.ListDomainsRequest_FilterConditions, v.FilterConditions)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListDomainsRequest_Marker, *v.Marker)
 	}
@@ -103,7 +105,9 @@ func (v *ListDomainsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainSummaryList(s, schemas.ListDomainsResponse_Domains, v.Domains)
+	if v.Domains != nil {
+		serializeDomainSummaryList(s, schemas.ListDomainsResponse_Domains, v.Domains)
+	}
 	if v.NextPageMarker != nil {
 		s.WriteString(schemas.ListDomainsResponse_NextPageMarker, *v.NextPageMarker)
 	}

@@ -115,7 +115,9 @@ func (v *GetQueryResultsWorkloadInsightsTopContributorsOutput) SerializeMembers(
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_nextToken, *v.NextToken)
 	}
-	serializeWorkloadInsightsTopContributorsRowList(s, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors, v.TopContributors)
+	if v.TopContributors != nil {
+		serializeWorkloadInsightsTopContributorsRowList(s, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput_topContributors, v.TopContributors)
+	}
 }
 func (v *GetQueryResultsWorkloadInsightsTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetQueryResultsWorkloadInsightsTopContributorsOutput, func(s *smithy.Schema) error {

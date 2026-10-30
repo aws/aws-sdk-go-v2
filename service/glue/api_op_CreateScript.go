@@ -47,8 +47,12 @@ func (v *CreateScriptInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDagEdges(s, schemas.CreateScriptRequest_DagEdges, v.DagEdges)
-	serializeDagNodes(s, schemas.CreateScriptRequest_DagNodes, v.DagNodes)
+	if v.DagEdges != nil {
+		serializeDagEdges(s, schemas.CreateScriptRequest_DagEdges, v.DagEdges)
+	}
+	if v.DagNodes != nil {
+		serializeDagNodes(s, schemas.CreateScriptRequest_DagNodes, v.DagNodes)
+	}
 	if v.Language != "" {
 		s.WriteString(schemas.CreateScriptRequest_Language, string(v.Language))
 	}

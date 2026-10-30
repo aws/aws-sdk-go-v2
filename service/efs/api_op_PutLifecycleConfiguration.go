@@ -128,7 +128,9 @@ func (v *PutLifecycleConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.FileSystemId != nil {
 		s.WriteString(schemas.PutLifecycleConfigurationRequest_FileSystemId, *v.FileSystemId)
 	}
-	serializeLifecyclePolicies(s, schemas.PutLifecycleConfigurationRequest_LifecyclePolicies, v.LifecyclePolicies)
+	if v.LifecyclePolicies != nil {
+		serializeLifecyclePolicies(s, schemas.PutLifecycleConfigurationRequest_LifecyclePolicies, v.LifecyclePolicies)
+	}
 }
 
 type PutLifecycleConfigurationOutput struct {
@@ -150,7 +152,9 @@ func (v *PutLifecycleConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutLifecycleConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecyclePolicies(s, schemas.LifecycleConfigurationDescription_LifecyclePolicies, v.LifecyclePolicies)
+	if v.LifecyclePolicies != nil {
+		serializeLifecyclePolicies(s, schemas.LifecycleConfigurationDescription_LifecyclePolicies, v.LifecyclePolicies)
+	}
 }
 func (v *PutLifecycleConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecycleConfigurationDescription, func(s *smithy.Schema) error {

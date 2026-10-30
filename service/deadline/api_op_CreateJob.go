@@ -140,7 +140,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NameOverride != nil {
 		s.WriteString(schemas.CreateJobRequest_nameOverride, *v.NameOverride)
 	}
-	serializeJobParameters(s, schemas.CreateJobRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeJobParameters(s, schemas.CreateJobRequest_parameters, v.Parameters)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.CreateJobRequest_priority, *v.Priority)
 	}
@@ -153,7 +155,9 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageProfileId != nil {
 		s.WriteString(schemas.CreateJobRequest_storageProfileId, *v.StorageProfileId)
 	}
-	serializeTags(s, schemas.CreateJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateJobRequest_tags, v.Tags)
+	}
 	if v.TargetTaskRunStatus != "" {
 		s.WriteString(schemas.CreateJobRequest_targetTaskRunStatus, string(v.TargetTaskRunStatus))
 	}

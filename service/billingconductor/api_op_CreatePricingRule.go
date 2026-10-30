@@ -126,7 +126,9 @@ func (v *CreatePricingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Service != nil {
 		s.WriteString(schemas.CreatePricingRuleInput_Service, *v.Service)
 	}
-	serializeTagMap(s, schemas.CreatePricingRuleInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePricingRuleInput_Tags, v.Tags)
+	}
 	if v.Tiering != nil {
 		s.WriteStruct(schemas.CreatePricingRuleInput_Tiering)
 		v.Tiering.SerializeMembers(s)

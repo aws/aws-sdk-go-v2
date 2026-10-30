@@ -79,7 +79,9 @@ func (v *PutAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PutAssetRequest_Description, *v.Description)
 	}
-	serializeAssetFormMap(s, schemas.PutAssetRequest_Forms, v.Forms)
+	if v.Forms != nil {
+		serializeAssetFormMap(s, schemas.PutAssetRequest_Forms, v.Forms)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.PutAssetRequest_Identifier, *v.Identifier)
 	}
@@ -128,7 +130,9 @@ func (v *PutAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PutAssetResponse_Description, *v.Description)
 	}
-	serializeAssetFormMap(s, schemas.PutAssetResponse_Forms, v.Forms)
+	if v.Forms != nil {
+		serializeAssetFormMap(s, schemas.PutAssetResponse_Forms, v.Forms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.PutAssetResponse_Id, *v.Id)
 	}

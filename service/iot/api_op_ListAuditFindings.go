@@ -124,7 +124,9 @@ func (v *ListAuditFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAuditFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditFindings(s, schemas.ListAuditFindingsResponse_findings, v.Findings)
+	if v.Findings != nil {
+		serializeAuditFindings(s, schemas.ListAuditFindingsResponse_findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAuditFindingsResponse_nextToken, *v.NextToken)
 	}

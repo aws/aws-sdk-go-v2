@@ -83,7 +83,9 @@ func (v *ListAttachmentNatConfigurationsInput) SerializeMembers(s smithy.ShapeSe
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.ListAttachmentNatConfigurationsRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
-	serializeFilterMap(s, schemas.ListAttachmentNatConfigurationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterMap(s, schemas.ListAttachmentNatConfigurationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAttachmentNatConfigurationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -115,7 +117,9 @@ func (v *ListAttachmentNatConfigurationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAttachmentNatConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentNatConfigurationList(s, schemas.ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations, v.AttachmentNatConfigurations)
+	if v.AttachmentNatConfigurations != nil {
+		serializeAttachmentNatConfigurationList(s, schemas.ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations, v.AttachmentNatConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachmentNatConfigurationsResponse_NextToken, *v.NextToken)
 	}

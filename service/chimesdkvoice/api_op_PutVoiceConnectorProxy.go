@@ -77,7 +77,9 @@ func (v *PutVoiceConnectorProxyInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FallBackPhoneNumber != nil {
 		s.WriteString(schemas.PutVoiceConnectorProxyRequest_FallBackPhoneNumber, *v.FallBackPhoneNumber)
 	}
-	serializeCountryList(s, schemas.PutVoiceConnectorProxyRequest_PhoneNumberPoolCountries, v.PhoneNumberPoolCountries)
+	if v.PhoneNumberPoolCountries != nil {
+		serializeCountryList(s, schemas.PutVoiceConnectorProxyRequest_PhoneNumberPoolCountries, v.PhoneNumberPoolCountries)
+	}
 	if v.VoiceConnectorId != nil {
 		s.WriteString(schemas.PutVoiceConnectorProxyRequest_VoiceConnectorId, *v.VoiceConnectorId)
 	}

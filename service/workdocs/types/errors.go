@@ -389,7 +389,9 @@ func (v *EntityNotExistsException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EntityNotExistsException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityIdList(s, schemas.EntityNotExistsException_EntityIds, v.EntityIds)
+	if v.EntityIds != nil {
+		serializeEntityIdList(s, schemas.EntityNotExistsException_EntityIds, v.EntityIds)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.EntityNotExistsException_Message, *v.Message)
 	}

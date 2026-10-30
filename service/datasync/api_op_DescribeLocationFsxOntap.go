@@ -109,7 +109,9 @@ func (v *DescribeLocationFsxOntapOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.Protocol.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxOntapResponse_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxOntapResponse_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.StorageVirtualMachineArn != nil {
 		s.WriteString(schemas.DescribeLocationFsxOntapResponse_StorageVirtualMachineArn, *v.StorageVirtualMachineArn)
 	}

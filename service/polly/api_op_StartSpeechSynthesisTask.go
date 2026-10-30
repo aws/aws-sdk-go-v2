@@ -125,7 +125,9 @@ func (v *StartSpeechSynthesisTaskInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.StartSpeechSynthesisTaskInput_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLexiconNameList(s, schemas.StartSpeechSynthesisTaskInput_LexiconNames, v.LexiconNames)
+	if v.LexiconNames != nil {
+		serializeLexiconNameList(s, schemas.StartSpeechSynthesisTaskInput_LexiconNames, v.LexiconNames)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.StartSpeechSynthesisTaskInput_OutputFormat, string(v.OutputFormat))
 	}
@@ -141,7 +143,9 @@ func (v *StartSpeechSynthesisTaskInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.StartSpeechSynthesisTaskInput_SnsTopicArn, *v.SnsTopicArn)
 	}
-	serializeSpeechMarkTypeList(s, schemas.StartSpeechSynthesisTaskInput_SpeechMarkTypes, v.SpeechMarkTypes)
+	if v.SpeechMarkTypes != nil {
+		serializeSpeechMarkTypeList(s, schemas.StartSpeechSynthesisTaskInput_SpeechMarkTypes, v.SpeechMarkTypes)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.StartSpeechSynthesisTaskInput_Text, *v.Text)
 	}

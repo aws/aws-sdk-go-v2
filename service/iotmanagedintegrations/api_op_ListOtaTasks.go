@@ -77,7 +77,9 @@ func (v *ListOtaTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOtaTasksResponse_NextToken, *v.NextToken)
 	}
-	serializeOtaTaskListDefinition(s, schemas.ListOtaTasksResponse_Tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeOtaTaskListDefinition(s, schemas.ListOtaTasksResponse_Tasks, v.Tasks)
+	}
 }
 func (v *ListOtaTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOtaTasksResponse, func(s *smithy.Schema) error {

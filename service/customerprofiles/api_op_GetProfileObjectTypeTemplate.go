@@ -96,8 +96,12 @@ func (v *GetProfileObjectTypeTemplateOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.AllowProfileCreation != false {
 		s.WriteBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, v.AllowProfileCreation)
 	}
-	serializeFieldMap(s, schemas.GetProfileObjectTypeTemplateResponse_Fields, v.Fields)
-	serializeKeyMap(s, schemas.GetProfileObjectTypeTemplateResponse_Keys, v.Keys)
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.GetProfileObjectTypeTemplateResponse_Fields, v.Fields)
+	}
+	if v.Keys != nil {
+		serializeKeyMap(s, schemas.GetProfileObjectTypeTemplateResponse_Keys, v.Keys)
+	}
 	if v.SourceLastUpdatedTimestampFormat != nil {
 		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceLastUpdatedTimestampFormat, *v.SourceLastUpdatedTimestampFormat)
 	}

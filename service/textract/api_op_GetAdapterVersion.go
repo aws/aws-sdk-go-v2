@@ -147,8 +147,12 @@ func (v *GetAdapterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DatasetConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAdapterVersionEvaluationMetrics(s, schemas.GetAdapterVersionResponse_EvaluationMetrics, v.EvaluationMetrics)
-	serializeFeatureTypes(s, schemas.GetAdapterVersionResponse_FeatureTypes, v.FeatureTypes)
+	if v.EvaluationMetrics != nil {
+		serializeAdapterVersionEvaluationMetrics(s, schemas.GetAdapterVersionResponse_EvaluationMetrics, v.EvaluationMetrics)
+	}
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.GetAdapterVersionResponse_FeatureTypes, v.FeatureTypes)
+	}
 	if v.KMSKeyId != nil {
 		s.WriteString(schemas.GetAdapterVersionResponse_KMSKeyId, *v.KMSKeyId)
 	}
@@ -163,7 +167,9 @@ func (v *GetAdapterVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetAdapterVersionResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeTagMap(s, schemas.GetAdapterVersionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetAdapterVersionResponse_Tags, v.Tags)
+	}
 }
 func (v *GetAdapterVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAdapterVersionResponse, func(s *smithy.Schema) error {

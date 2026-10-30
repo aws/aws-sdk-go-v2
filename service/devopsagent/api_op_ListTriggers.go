@@ -93,7 +93,9 @@ func (v *ListTriggersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerList(s, schemas.ListTriggersResponse_items, v.Items)
+	if v.Items != nil {
+		serializeTriggerList(s, schemas.ListTriggersResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTriggersResponse_nextToken, *v.NextToken)
 	}

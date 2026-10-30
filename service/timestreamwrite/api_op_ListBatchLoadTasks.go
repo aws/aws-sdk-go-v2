@@ -89,7 +89,9 @@ func (v *ListBatchLoadTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchLoadTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchLoadTaskList(s, schemas.ListBatchLoadTasksResponse_BatchLoadTasks, v.BatchLoadTasks)
+	if v.BatchLoadTasks != nil {
+		serializeBatchLoadTaskList(s, schemas.ListBatchLoadTasksResponse_BatchLoadTasks, v.BatchLoadTasks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchLoadTasksResponse_NextToken, *v.NextToken)
 	}

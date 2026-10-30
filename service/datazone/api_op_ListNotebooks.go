@@ -127,7 +127,9 @@ func (v *ListNotebooksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNotebooksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotebookSummaryList(s, schemas.ListNotebooksOutput_items, v.Items)
+	if v.Items != nil {
+		serializeNotebookSummaryList(s, schemas.ListNotebooksOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotebooksOutput_nextToken, *v.NextToken)
 	}

@@ -84,7 +84,9 @@ func (v *ListKeyPhrasesDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListKeyPhrasesDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeyPhrasesDetectionJobPropertiesList(s, schemas.ListKeyPhrasesDetectionJobsResponse_KeyPhrasesDetectionJobPropertiesList, v.KeyPhrasesDetectionJobPropertiesList)
+	if v.KeyPhrasesDetectionJobPropertiesList != nil {
+		serializeKeyPhrasesDetectionJobPropertiesList(s, schemas.ListKeyPhrasesDetectionJobsResponse_KeyPhrasesDetectionJobPropertiesList, v.KeyPhrasesDetectionJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKeyPhrasesDetectionJobsResponse_NextToken, *v.NextToken)
 	}

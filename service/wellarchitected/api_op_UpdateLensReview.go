@@ -88,7 +88,9 @@ func (v *UpdateLensReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LensNotes != nil {
 		s.WriteString(schemas.UpdateLensReviewInput_LensNotes, *v.LensNotes)
 	}
-	serializePillarNotes(s, schemas.UpdateLensReviewInput_PillarNotes, v.PillarNotes)
+	if v.PillarNotes != nil {
+		serializePillarNotes(s, schemas.UpdateLensReviewInput_PillarNotes, v.PillarNotes)
+	}
 	if v.WorkloadId != nil {
 		s.WriteString(schemas.UpdateLensReviewInput_WorkloadId, *v.WorkloadId)
 	}

@@ -108,7 +108,9 @@ func (v *CreateBatchSegmentJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SolutionVersionArn != nil {
 		s.WriteString(schemas.CreateBatchSegmentJobRequest_solutionVersionArn, *v.SolutionVersionArn)
 	}
-	serializeTags(s, schemas.CreateBatchSegmentJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateBatchSegmentJobRequest_tags, v.Tags)
+	}
 }
 
 type CreateBatchSegmentJobOutput struct {

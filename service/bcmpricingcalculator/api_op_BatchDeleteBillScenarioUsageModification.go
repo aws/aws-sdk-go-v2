@@ -61,7 +61,9 @@ func (v *BatchDeleteBillScenarioUsageModificationInput) SerializeMembers(s smith
 	if v.BillScenarioId != nil {
 		s.WriteString(schemas.BatchDeleteBillScenarioUsageModificationRequest_billScenarioId, *v.BillScenarioId)
 	}
-	serializeBatchDeleteBillScenarioUsageModificationEntries(s, schemas.BatchDeleteBillScenarioUsageModificationRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeBatchDeleteBillScenarioUsageModificationEntries(s, schemas.BatchDeleteBillScenarioUsageModificationRequest_ids, v.Ids)
+	}
 }
 
 type BatchDeleteBillScenarioUsageModificationOutput struct {
@@ -83,7 +85,9 @@ func (v *BatchDeleteBillScenarioUsageModificationOutput) Serialize(s smithy.Shap
 }
 
 func (v *BatchDeleteBillScenarioUsageModificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteBillScenarioUsageModificationErrors(s, schemas.BatchDeleteBillScenarioUsageModificationResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteBillScenarioUsageModificationErrors(s, schemas.BatchDeleteBillScenarioUsageModificationResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteBillScenarioUsageModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteBillScenarioUsageModificationResponse, func(s *smithy.Schema) error {

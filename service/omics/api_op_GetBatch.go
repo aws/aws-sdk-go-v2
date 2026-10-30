@@ -162,7 +162,9 @@ func (v *GetBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubmittedTime != nil {
 		s.WriteTime(schemas.GetBatchResponse_submittedTime, *v.SubmittedTime)
 	}
-	serializeTagMap(s, schemas.GetBatchResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetBatchResponse_tags, v.Tags)
+	}
 	if v.TotalRuns != nil {
 		s.WriteInt32(schemas.GetBatchResponse_totalRuns, *v.TotalRuns)
 	}

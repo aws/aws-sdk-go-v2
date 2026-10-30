@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAllowedWindows(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeAllowedWindows(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeAutoshiftsInResource(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AutoshiftInResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeAutoshiftsInResource(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeAutoshiftSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AutoshiftSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +36,6 @@ func serializeAutoshiftSummaries(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeAvailabilityZones(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -56,9 +44,6 @@ func serializeAvailabilityZones(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeBlockedDates(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -67,9 +52,6 @@ func serializeBlockedDates(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeBlockedWindows(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -78,9 +60,6 @@ func serializeBlockedWindows(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeBlockingAlarms(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ControlCondition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -91,9 +70,6 @@ func serializeBlockingAlarms(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeManagedResourceSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ManagedResourceSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -104,9 +80,6 @@ func serializeManagedResourceSummaries(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeOutcomeAlarms(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ControlCondition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -117,9 +90,6 @@ func serializeOutcomeAlarms(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeZonalShiftsInResource(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ZonalShiftInResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -130,9 +100,6 @@ func serializeZonalShiftsInResource(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeZonalShiftSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ZonalShiftSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -381,9 +348,6 @@ func deserializeZonalShiftSummaries(d smithy.ShapeDeserializer, s *smithy.Schema
 }
 
 func serializeAppliedWeights(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]float32) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

@@ -183,7 +183,9 @@ func (v *DescribeAssetBundleExportJobOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.DownloadUrl != nil {
 		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_DownloadUrl, *v.DownloadUrl)
 	}
-	serializeAssetBundleExportJobErrorList(s, schemas.DescribeAssetBundleExportJobResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeAssetBundleExportJobErrorList(s, schemas.DescribeAssetBundleExportJobResponse_Errors, v.Errors)
+	}
 	if v.ExportFormat != "" {
 		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_ExportFormat, string(v.ExportFormat))
 	}
@@ -208,7 +210,9 @@ func (v *DescribeAssetBundleExportJobOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeAssetBundleExportJobResponse_RequestId, *v.RequestId)
 	}
-	serializeAssetBundleResourceArns(s, schemas.DescribeAssetBundleExportJobResponse_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeAssetBundleResourceArns(s, schemas.DescribeAssetBundleExportJobResponse_ResourceArns, v.ResourceArns)
+	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.DescribeAssetBundleExportJobResponse_Status, v.Status)
 	}
@@ -217,7 +221,9 @@ func (v *DescribeAssetBundleExportJobOutput) SerializeMembers(s smithy.ShapeSeri
 		v.ValidationStrategy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssetBundleExportJobWarningList(s, schemas.DescribeAssetBundleExportJobResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeAssetBundleExportJobWarningList(s, schemas.DescribeAssetBundleExportJobResponse_Warnings, v.Warnings)
+	}
 }
 func (v *DescribeAssetBundleExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAssetBundleExportJobResponse, func(s *smithy.Schema) error {

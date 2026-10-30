@@ -80,7 +80,9 @@ func (v *GetTileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTileAdditionalFeatureList(s, schemas.GetTileRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AdditionalFeatures != nil {
+		serializeTileAdditionalFeatureList(s, schemas.GetTileRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.GetTileRequest_Key, *v.Key)
 	}

@@ -54,7 +54,9 @@ func (v *TestRepositoryTriggersInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.TestRepositoryTriggersInput_repositoryName, *v.RepositoryName)
 	}
-	serializeRepositoryTriggersList(s, schemas.TestRepositoryTriggersInput_triggers, v.Triggers)
+	if v.Triggers != nil {
+		serializeRepositoryTriggersList(s, schemas.TestRepositoryTriggersInput_triggers, v.Triggers)
+	}
 }
 
 // Represents the output of a test repository triggers operation.
@@ -81,8 +83,12 @@ func (v *TestRepositoryTriggersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestRepositoryTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositoryTriggerExecutionFailureList(s, schemas.TestRepositoryTriggersOutput_failedExecutions, v.FailedExecutions)
-	serializeRepositoryTriggerNameList(s, schemas.TestRepositoryTriggersOutput_successfulExecutions, v.SuccessfulExecutions)
+	if v.FailedExecutions != nil {
+		serializeRepositoryTriggerExecutionFailureList(s, schemas.TestRepositoryTriggersOutput_failedExecutions, v.FailedExecutions)
+	}
+	if v.SuccessfulExecutions != nil {
+		serializeRepositoryTriggerNameList(s, schemas.TestRepositoryTriggersOutput_successfulExecutions, v.SuccessfulExecutions)
+	}
 }
 func (v *TestRepositoryTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestRepositoryTriggersOutput, func(s *smithy.Schema) error {

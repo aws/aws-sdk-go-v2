@@ -130,7 +130,9 @@ func (v *GetSensitiveDataOccurrencesAvailabilityOutput) SerializeMembers(s smith
 	if v.Code != "" {
 		s.WriteString(schemas.GetSensitiveDataOccurrencesAvailabilityResponse_code, string(v.Code))
 	}
-	serialize__listOfUnavailabilityReasonCode(s, schemas.GetSensitiveDataOccurrencesAvailabilityResponse_reasons, v.Reasons)
+	if v.Reasons != nil {
+		serialize__listOfUnavailabilityReasonCode(s, schemas.GetSensitiveDataOccurrencesAvailabilityResponse_reasons, v.Reasons)
+	}
 }
 func (v *GetSensitiveDataOccurrencesAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSensitiveDataOccurrencesAvailabilityResponse, func(s *smithy.Schema) error {

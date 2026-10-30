@@ -124,7 +124,9 @@ func (v *ListPricingRulesAssociatedToPricingPlanOutput) SerializeMembers(s smith
 	if v.PricingPlanArn != nil {
 		s.WriteString(schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingPlanArn, *v.PricingPlanArn)
 	}
-	serializePricingRuleArns(s, schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns, v.PricingRuleArns)
+	if v.PricingRuleArns != nil {
+		serializePricingRuleArns(s, schemas.ListPricingRulesAssociatedToPricingPlanOutput_PricingRuleArns, v.PricingRuleArns)
+	}
 }
 func (v *ListPricingRulesAssociatedToPricingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPricingRulesAssociatedToPricingPlanOutput, func(s *smithy.Schema) error {

@@ -72,8 +72,12 @@ func (v *CreateAcmeDomainValidationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateAcmeDomainValidationRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializePrevalidationOptions(s, schemas.CreateAcmeDomainValidationRequest_PrevalidationOptions, v.PrevalidationOptions)
-	serializeTagList(s, schemas.CreateAcmeDomainValidationRequest_Tags, v.Tags)
+	if v.PrevalidationOptions != nil {
+		serializePrevalidationOptions(s, schemas.CreateAcmeDomainValidationRequest_PrevalidationOptions, v.PrevalidationOptions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAcmeDomainValidationRequest_Tags, v.Tags)
+	}
 }
 func (in *CreateAcmeDomainValidationInput) bindEndpointParams(p *EndpointParameters) {
 

@@ -104,7 +104,9 @@ func (v *GetAccessControlEffectOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Effect != "" {
 		s.WriteString(schemas.GetAccessControlEffectResponse_Effect, string(v.Effect))
 	}
-	serializeAccessControlRuleNameList(s, schemas.GetAccessControlEffectResponse_MatchedRules, v.MatchedRules)
+	if v.MatchedRules != nil {
+		serializeAccessControlRuleNameList(s, schemas.GetAccessControlEffectResponse_MatchedRules, v.MatchedRules)
+	}
 }
 func (v *GetAccessControlEffectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAccessControlEffectResponse, func(s *smithy.Schema) error {

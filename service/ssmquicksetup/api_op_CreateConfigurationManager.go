@@ -55,14 +55,18 @@ func (v *CreateConfigurationManagerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateConfigurationManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationDefinitionsInputList(s, schemas.CreateConfigurationManagerInput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	if v.ConfigurationDefinitions != nil {
+		serializeConfigurationDefinitionsInputList(s, schemas.CreateConfigurationManagerInput_ConfigurationDefinitions, v.ConfigurationDefinitions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateConfigurationManagerInput_Description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConfigurationManagerInput_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateConfigurationManagerInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateConfigurationManagerInput_Tags, v.Tags)
+	}
 }
 
 type CreateConfigurationManagerOutput struct {

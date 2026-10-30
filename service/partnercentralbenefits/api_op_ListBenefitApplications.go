@@ -74,22 +74,36 @@ func (v *ListBenefitApplicationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBenefitApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArns(s, schemas.ListBenefitApplicationsInput_AssociatedResourceArns, v.AssociatedResourceArns)
-	serializeAssociatedResources(s, schemas.ListBenefitApplicationsInput_AssociatedResources, v.AssociatedResources)
-	serializeBenefitIdentifiers(s, schemas.ListBenefitApplicationsInput_BenefitIdentifiers, v.BenefitIdentifiers)
+	if v.AssociatedResourceArns != nil {
+		serializeArns(s, schemas.ListBenefitApplicationsInput_AssociatedResourceArns, v.AssociatedResourceArns)
+	}
+	if v.AssociatedResources != nil {
+		serializeAssociatedResources(s, schemas.ListBenefitApplicationsInput_AssociatedResources, v.AssociatedResources)
+	}
+	if v.BenefitIdentifiers != nil {
+		serializeBenefitIdentifiers(s, schemas.ListBenefitApplicationsInput_BenefitIdentifiers, v.BenefitIdentifiers)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListBenefitApplicationsInput_Catalog, *v.Catalog)
 	}
-	serializeFulfillmentTypes(s, schemas.ListBenefitApplicationsInput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.ListBenefitApplicationsInput_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListBenefitApplicationsInput_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBenefitApplicationsInput_NextToken, *v.NextToken)
 	}
-	serializePrograms(s, schemas.ListBenefitApplicationsInput_Programs, v.Programs)
-	serializeStages(s, schemas.ListBenefitApplicationsInput_Stages, v.Stages)
-	serializeStatuses(s, schemas.ListBenefitApplicationsInput_Status, v.Status)
+	if v.Programs != nil {
+		serializePrograms(s, schemas.ListBenefitApplicationsInput_Programs, v.Programs)
+	}
+	if v.Stages != nil {
+		serializeStages(s, schemas.ListBenefitApplicationsInput_Stages, v.Stages)
+	}
+	if v.Status != nil {
+		serializeStatuses(s, schemas.ListBenefitApplicationsInput_Status, v.Status)
+	}
 }
 
 type ListBenefitApplicationsOutput struct {
@@ -114,7 +128,9 @@ func (v *ListBenefitApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBenefitApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBenefitApplicationSummaries(s, schemas.ListBenefitApplicationsOutput_BenefitApplicationSummaries, v.BenefitApplicationSummaries)
+	if v.BenefitApplicationSummaries != nil {
+		serializeBenefitApplicationSummaries(s, schemas.ListBenefitApplicationsOutput_BenefitApplicationSummaries, v.BenefitApplicationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBenefitApplicationsOutput_NextToken, *v.NextToken)
 	}

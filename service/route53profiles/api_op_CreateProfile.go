@@ -63,7 +63,9 @@ func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateProfileRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProfileOutput struct {

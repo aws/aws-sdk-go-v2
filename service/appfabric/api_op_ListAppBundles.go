@@ -88,7 +88,9 @@ func (v *ListAppBundlesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppBundleSummaryList(s, schemas.ListAppBundlesResponse_appBundleSummaryList, v.AppBundleSummaryList)
+	if v.AppBundleSummaryList != nil {
+		serializeAppBundleSummaryList(s, schemas.ListAppBundlesResponse_appBundleSummaryList, v.AppBundleSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppBundlesResponse_nextToken, *v.NextToken)
 	}

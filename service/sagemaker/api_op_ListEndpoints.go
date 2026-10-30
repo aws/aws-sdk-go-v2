@@ -134,7 +134,9 @@ func (v *ListEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointSummaryList(s, schemas.ListEndpointsOutput_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpointSummaryList(s, schemas.ListEndpointsOutput_Endpoints, v.Endpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEndpointsOutput_NextToken, *v.NextToken)
 	}

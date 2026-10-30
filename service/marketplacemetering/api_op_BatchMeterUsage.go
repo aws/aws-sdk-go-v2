@@ -130,7 +130,9 @@ func (v *BatchMeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProductCode != nil {
 		s.WriteString(schemas.BatchMeterUsageRequest_ProductCode, *v.ProductCode)
 	}
-	serializeUsageRecordList(s, schemas.BatchMeterUsageRequest_UsageRecords, v.UsageRecords)
+	if v.UsageRecords != nil {
+		serializeUsageRecordList(s, schemas.BatchMeterUsageRequest_UsageRecords, v.UsageRecords)
+	}
 }
 
 // Contains the UsageRecords processed by BatchMeterUsage and any records that
@@ -160,8 +162,12 @@ func (v *BatchMeterUsageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchMeterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUsageRecordResultList(s, schemas.BatchMeterUsageResult_Results, v.Results)
-	serializeUsageRecordList(s, schemas.BatchMeterUsageResult_UnprocessedRecords, v.UnprocessedRecords)
+	if v.Results != nil {
+		serializeUsageRecordResultList(s, schemas.BatchMeterUsageResult_Results, v.Results)
+	}
+	if v.UnprocessedRecords != nil {
+		serializeUsageRecordList(s, schemas.BatchMeterUsageResult_UnprocessedRecords, v.UnprocessedRecords)
+	}
 }
 func (v *BatchMeterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchMeterUsageResult, func(s *smithy.Schema) error {

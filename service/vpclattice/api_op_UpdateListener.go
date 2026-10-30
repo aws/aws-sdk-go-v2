@@ -53,7 +53,9 @@ func (v *UpdateListenerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAction(s, schemas.UpdateListenerRequest_defaultAction, v.DefaultAction)
+	if v.DefaultAction != nil {
+		serializeRuleAction(s, schemas.UpdateListenerRequest_defaultAction, v.DefaultAction)
+	}
 	if v.ListenerIdentifier != nil {
 		s.WriteString(schemas.UpdateListenerRequest_listenerIdentifier, *v.ListenerIdentifier)
 	}
@@ -119,7 +121,9 @@ func (v *UpdateListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateListenerResponse_arn, *v.Arn)
 	}
-	serializeRuleAction(s, schemas.UpdateListenerResponse_defaultAction, v.DefaultAction)
+	if v.DefaultAction != nil {
+		serializeRuleAction(s, schemas.UpdateListenerResponse_defaultAction, v.DefaultAction)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateListenerResponse_id, *v.Id)
 	}

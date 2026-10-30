@@ -94,7 +94,9 @@ func (v *ListResourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceAssociationsOutput_nextToken, *v.NextToken)
 	}
-	serializeResourceAssociationList(s, schemas.ListResourceAssociationsOutput_resourceAssociations, v.ResourceAssociations)
+	if v.ResourceAssociations != nil {
+		serializeResourceAssociationList(s, schemas.ListResourceAssociationsOutput_resourceAssociations, v.ResourceAssociations)
+	}
 }
 func (v *ListResourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceAssociationsOutput, func(s *smithy.Schema) error {

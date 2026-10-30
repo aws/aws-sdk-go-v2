@@ -121,7 +121,9 @@ func (v *CreateMlflowTrackingServerInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.S3BucketOwnerVerification != nil {
 		s.WriteBool(schemas.CreateMlflowTrackingServerRequest_S3BucketOwnerVerification, *v.S3BucketOwnerVerification)
 	}
-	serializeTagList(s, schemas.CreateMlflowTrackingServerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMlflowTrackingServerRequest_Tags, v.Tags)
+	}
 	if v.TrackingServerName != nil {
 		s.WriteString(schemas.CreateMlflowTrackingServerRequest_TrackingServerName, *v.TrackingServerName)
 	}

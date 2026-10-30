@@ -94,7 +94,9 @@ func (v *AdditionalLimit) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LimitName != nil {
 		s.WriteString(schemas.AdditionalLimit_LimitName, *v.LimitName)
 	}
-	serializeLimitValueList(s, schemas.AdditionalLimit_LimitValues, v.LimitValues)
+	if v.LimitValues != nil {
+		serializeLimitValueList(s, schemas.AdditionalLimit_LimitValues, v.LimitValues)
+	}
 }
 func (v *AdditionalLimit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdditionalLimit, func(s *smithy.Schema) error {
@@ -147,7 +149,9 @@ func (v *AdvancedOptionsStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdvancedOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedOptions(s, schemas.AdvancedOptionsStatus_Options, v.Options)
+	if v.Options != nil {
+		serializeAdvancedOptions(s, schemas.AdvancedOptionsStatus_Options, v.Options)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.AdvancedOptionsStatus_Status)
 		v.Status.SerializeMembers(s)
@@ -757,7 +761,9 @@ func (v *AutoTuneOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesiredState != "" {
 		s.WriteString(schemas.AutoTuneOptions_DesiredState, string(v.DesiredState))
 	}
-	serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptions_MaintenanceSchedules, v.MaintenanceSchedules)
+	if v.MaintenanceSchedules != nil {
+		serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptions_MaintenanceSchedules, v.MaintenanceSchedules)
+	}
 	if v.RollbackOnDisable != "" {
 		s.WriteString(schemas.AutoTuneOptions_RollbackOnDisable, string(v.RollbackOnDisable))
 	}
@@ -811,7 +817,9 @@ func (v *AutoTuneOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesiredState != "" {
 		s.WriteString(schemas.AutoTuneOptionsInput_DesiredState, string(v.DesiredState))
 	}
-	serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptionsInput_MaintenanceSchedules, v.MaintenanceSchedules)
+	if v.MaintenanceSchedules != nil {
+		serializeAutoTuneMaintenanceScheduleList(s, schemas.AutoTuneOptionsInput_MaintenanceSchedules, v.MaintenanceSchedules)
+	}
 }
 func (v *AutoTuneOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoTuneOptionsInput, func(s *smithy.Schema) error {
@@ -1252,8 +1260,12 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ChangeId != nil {
 		s.WriteString(schemas.ChangeProgressStatusDetails_ChangeId, *v.ChangeId)
 	}
-	serializeChangeProgressStageList(s, schemas.ChangeProgressStatusDetails_ChangeProgressStages, v.ChangeProgressStages)
-	serializeStringList(s, schemas.ChangeProgressStatusDetails_CompletedProperties, v.CompletedProperties)
+	if v.ChangeProgressStages != nil {
+		serializeChangeProgressStageList(s, schemas.ChangeProgressStatusDetails_ChangeProgressStages, v.ChangeProgressStages)
+	}
+	if v.CompletedProperties != nil {
+		serializeStringList(s, schemas.ChangeProgressStatusDetails_CompletedProperties, v.CompletedProperties)
+	}
 	if v.ConfigChangeStatus != "" {
 		s.WriteString(schemas.ChangeProgressStatusDetails_ConfigChangeStatus, string(v.ConfigChangeStatus))
 	}
@@ -1263,7 +1275,9 @@ func (v *ChangeProgressStatusDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.ChangeProgressStatusDetails_LastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeStringList(s, schemas.ChangeProgressStatusDetails_PendingProperties, v.PendingProperties)
+	if v.PendingProperties != nil {
+		serializeStringList(s, schemas.ChangeProgressStatusDetails_PendingProperties, v.PendingProperties)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ChangeProgressStatusDetails_StartTime, *v.StartTime)
 	}
@@ -1486,7 +1500,9 @@ func (v *CompatibleVersionsMap) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceVersion != nil {
 		s.WriteString(schemas.CompatibleVersionsMap_SourceVersion, *v.SourceVersion)
 	}
-	serializeElasticsearchVersionList(s, schemas.CompatibleVersionsMap_TargetVersions, v.TargetVersions)
+	if v.TargetVersions != nil {
+		serializeElasticsearchVersionList(s, schemas.CompatibleVersionsMap_TargetVersions, v.TargetVersions)
+	}
 }
 func (v *CompatibleVersionsMap) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompatibleVersionsMap, func(s *smithy.Schema) error {
@@ -1611,7 +1627,9 @@ func (v *DescribePackagesFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.DescribePackagesFilter_Name, string(v.Name))
 	}
-	serializeDescribePackagesFilterValues(s, schemas.DescribePackagesFilter_Value, v.Value)
+	if v.Value != nil {
+		serializeDescribePackagesFilterValues(s, schemas.DescribePackagesFilter_Value, v.Value)
+	}
 }
 func (v *DescribePackagesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePackagesFilter, func(s *smithy.Schema) error {
@@ -2539,7 +2557,9 @@ func (v *ElasticsearchDomainConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogPublishingOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeModifyingPropertiesList(s, schemas.ElasticsearchDomainConfig_ModifyingProperties, v.ModifyingProperties)
+	if v.ModifyingProperties != nil {
+		serializeModifyingPropertiesList(s, schemas.ElasticsearchDomainConfig_ModifyingProperties, v.ModifyingProperties)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.ElasticsearchDomainConfig_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
@@ -2771,7 +2791,9 @@ func (v *ElasticsearchDomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.ElasticsearchDomainStatus_AccessPolicies, *v.AccessPolicies)
 	}
-	serializeAdvancedOptions(s, schemas.ElasticsearchDomainStatus_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.ElasticsearchDomainStatus_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.AdvancedSecurityOptions != nil {
 		s.WriteStruct(schemas.ElasticsearchDomainStatus_AdvancedSecurityOptions)
 		v.AdvancedSecurityOptions.SerializeMembers(s)
@@ -2843,12 +2865,18 @@ func (v *ElasticsearchDomainStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Endpoint != nil {
 		s.WriteString(schemas.ElasticsearchDomainStatus_Endpoint, *v.Endpoint)
 	}
-	serializeEndpointsMap(s, schemas.ElasticsearchDomainStatus_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpointsMap(s, schemas.ElasticsearchDomainStatus_Endpoints, v.Endpoints)
+	}
 	if v.EngineMode != "" {
 		s.WriteString(schemas.ElasticsearchDomainStatus_EngineMode, string(v.EngineMode))
 	}
-	serializeLogPublishingOptions(s, schemas.ElasticsearchDomainStatus_LogPublishingOptions, v.LogPublishingOptions)
-	serializeModifyingPropertiesList(s, schemas.ElasticsearchDomainStatus_ModifyingProperties, v.ModifyingProperties)
+	if v.LogPublishingOptions != nil {
+		serializeLogPublishingOptions(s, schemas.ElasticsearchDomainStatus_LogPublishingOptions, v.LogPublishingOptions)
+	}
+	if v.ModifyingProperties != nil {
+		serializeModifyingPropertiesList(s, schemas.ElasticsearchDomainStatus_ModifyingProperties, v.ModifyingProperties)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.ElasticsearchDomainStatus_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
@@ -3241,7 +3269,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_Name, *v.Name)
 	}
-	serializeValueStringList(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeValueStringList(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -3475,13 +3505,17 @@ func (v *Limits) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Limits) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalLimitList(s, schemas.Limits_AdditionalLimits, v.AdditionalLimits)
+	if v.AdditionalLimits != nil {
+		serializeAdditionalLimitList(s, schemas.Limits_AdditionalLimits, v.AdditionalLimits)
+	}
 	if v.InstanceLimits != nil {
 		s.WriteStruct(schemas.Limits_InstanceLimits)
 		v.InstanceLimits.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStorageTypeList(s, schemas.Limits_StorageTypes, v.StorageTypes)
+	if v.StorageTypes != nil {
+		serializeStorageTypeList(s, schemas.Limits_StorageTypes, v.StorageTypes)
+	}
 }
 func (v *Limits) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Limits, func(s *smithy.Schema) error {
@@ -3564,7 +3598,9 @@ func (v *LogPublishingOptionsStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogPublishingOptionsStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogPublishingOptions(s, schemas.LogPublishingOptionsStatus_Options, v.Options)
+	if v.Options != nil {
+		serializeLogPublishingOptions(s, schemas.LogPublishingOptionsStatus_Options, v.Options)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.LogPublishingOptionsStatus_Status)
 		v.Status.SerializeMembers(s)
@@ -4303,7 +4339,9 @@ func (v *ReservedElasticsearchInstance) SerializeMembers(s smithy.ShapeSerialize
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.ReservedElasticsearchInstance_PaymentOption, string(v.PaymentOption))
 	}
-	serializeRecurringChargeList(s, schemas.ReservedElasticsearchInstance_RecurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringChargeList(s, schemas.ReservedElasticsearchInstance_RecurringCharges, v.RecurringCharges)
+	}
 	if v.ReservationName != nil {
 		s.WriteString(schemas.ReservedElasticsearchInstance_ReservationName, *v.ReservationName)
 	}
@@ -4431,7 +4469,9 @@ func (v *ReservedElasticsearchInstanceOffering) SerializeMembers(s smithy.ShapeS
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.ReservedElasticsearchInstanceOffering_PaymentOption, string(v.PaymentOption))
 	}
-	serializeRecurringChargeList(s, schemas.ReservedElasticsearchInstanceOffering_RecurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringChargeList(s, schemas.ReservedElasticsearchInstanceOffering_RecurringCharges, v.RecurringCharges)
+	}
 	if v.ReservedElasticsearchInstanceOfferingId != nil {
 		s.WriteString(schemas.ReservedElasticsearchInstanceOffering_ReservedElasticsearchInstanceOfferingId, *v.ReservedElasticsearchInstanceOfferingId)
 	}
@@ -4970,7 +5010,9 @@ func (v *StorageType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageSubTypeName != nil {
 		s.WriteString(schemas.StorageType_StorageSubTypeName, *v.StorageSubTypeName)
 	}
-	serializeStorageTypeLimitList(s, schemas.StorageType_StorageTypeLimits, v.StorageTypeLimits)
+	if v.StorageTypeLimits != nil {
+		serializeStorageTypeLimitList(s, schemas.StorageType_StorageTypeLimits, v.StorageTypeLimits)
+	}
 	if v.StorageTypeName != nil {
 		s.WriteString(schemas.StorageType_StorageTypeName, *v.StorageTypeName)
 	}
@@ -5027,7 +5069,9 @@ func (v *StorageTypeLimit) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LimitName != nil {
 		s.WriteString(schemas.StorageTypeLimit_LimitName, *v.LimitName)
 	}
-	serializeLimitValueList(s, schemas.StorageTypeLimit_LimitValues, v.LimitValues)
+	if v.LimitValues != nil {
+		serializeLimitValueList(s, schemas.StorageTypeLimit_LimitValues, v.LimitValues)
+	}
 }
 func (v *StorageTypeLimit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StorageTypeLimit, func(s *smithy.Schema) error {
@@ -5126,7 +5170,9 @@ func (v *UpgradeHistory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTimestamp != nil {
 		s.WriteTime(schemas.UpgradeHistory_StartTimestamp, *v.StartTimestamp)
 	}
-	serializeUpgradeStepsList(s, schemas.UpgradeHistory_StepsList, v.StepsList)
+	if v.StepsList != nil {
+		serializeUpgradeStepsList(s, schemas.UpgradeHistory_StepsList, v.StepsList)
+	}
 	if v.UpgradeName != nil {
 		s.WriteString(schemas.UpgradeHistory_UpgradeName, *v.UpgradeName)
 	}
@@ -5194,7 +5240,9 @@ func (v *UpgradeStepItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpgradeStepItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIssues(s, schemas.UpgradeStepItem_Issues, v.Issues)
+	if v.Issues != nil {
+		serializeIssues(s, schemas.UpgradeStepItem_Issues, v.Issues)
+	}
 	if v.ProgressPercent != nil {
 		s.WriteFloat64(schemas.UpgradeStepItem_ProgressPercent, *v.ProgressPercent)
 	}
@@ -5312,9 +5360,15 @@ func (v *VPCDerivedInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VPCDerivedInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.VPCDerivedInfo_AvailabilityZones, v.AvailabilityZones)
-	serializeStringList(s, schemas.VPCDerivedInfo_SecurityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.VPCDerivedInfo_SubnetIds, v.SubnetIds)
+	if v.AvailabilityZones != nil {
+		serializeStringList(s, schemas.VPCDerivedInfo_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.VPCDerivedInfo_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.VPCDerivedInfo_SubnetIds, v.SubnetIds)
+	}
 	if v.VPCId != nil {
 		s.WriteString(schemas.VPCDerivedInfo_VPCId, *v.VPCId)
 	}
@@ -5606,8 +5660,12 @@ func (v *VPCOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VPCOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.VPCOptions_SecurityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.VPCOptions_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.VPCOptions_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.VPCOptions_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VPCOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VPCOptions, func(s *smithy.Schema) error {

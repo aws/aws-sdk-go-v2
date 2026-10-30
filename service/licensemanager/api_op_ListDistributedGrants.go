@@ -60,8 +60,12 @@ func (v *ListDistributedGrantsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDistributedGrantsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListDistributedGrantsRequest_Filters, v.Filters)
-	serializeArnList(s, schemas.ListDistributedGrantsRequest_GrantArns, v.GrantArns)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListDistributedGrantsRequest_Filters, v.Filters)
+	}
+	if v.GrantArns != nil {
+		serializeArnList(s, schemas.ListDistributedGrantsRequest_GrantArns, v.GrantArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDistributedGrantsRequest_MaxResults, *v.MaxResults)
 	}
@@ -91,7 +95,9 @@ func (v *ListDistributedGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDistributedGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrantList(s, schemas.ListDistributedGrantsResponse_Grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.ListDistributedGrantsResponse_Grants, v.Grants)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDistributedGrantsResponse_NextToken, *v.NextToken)
 	}

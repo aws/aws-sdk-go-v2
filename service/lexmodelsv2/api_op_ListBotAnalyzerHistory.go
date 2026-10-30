@@ -112,7 +112,9 @@ func (v *ListBotAnalyzerHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBotAnalyzerHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotAnalyzerHistoryList(s, schemas.ListBotAnalyzerHistoryResponse_botAnalyzerHistoryList, v.BotAnalyzerHistoryList)
+	if v.BotAnalyzerHistoryList != nil {
+		serializeBotAnalyzerHistoryList(s, schemas.ListBotAnalyzerHistoryResponse_botAnalyzerHistoryList, v.BotAnalyzerHistoryList)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.ListBotAnalyzerHistoryResponse_botId, *v.BotId)
 	}

@@ -80,7 +80,9 @@ func (v *ListWebhooksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebhooksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWebhooksList(s, schemas.ListWebhooksOutput_webhooks, v.Webhooks)
+	if v.Webhooks != nil {
+		serializeWebhooksList(s, schemas.ListWebhooksOutput_webhooks, v.Webhooks)
+	}
 }
 func (v *ListWebhooksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWebhooksOutput, func(s *smithy.Schema) error {

@@ -66,7 +66,9 @@ func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.RemoveTagsInput_ResourceId, *v.ResourceId)
 	}
-	serializeStringList(s, schemas.RemoveTagsInput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeStringList(s, schemas.RemoveTagsInput_TagKeys, v.TagKeys)
+	}
 }
 
 // This output indicates the result of removing tags from the resource.

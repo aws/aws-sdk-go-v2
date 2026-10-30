@@ -177,7 +177,9 @@ func (v *ListRecoveryPointsByBackupVaultOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecoveryPointsByBackupVaultOutput_NextToken, *v.NextToken)
 	}
-	serializeRecoveryPointByBackupVaultList(s, schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints, v.RecoveryPoints)
+	if v.RecoveryPoints != nil {
+		serializeRecoveryPointByBackupVaultList(s, schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints, v.RecoveryPoints)
+	}
 }
 func (v *ListRecoveryPointsByBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecoveryPointsByBackupVaultOutput, func(s *smithy.Schema) error {

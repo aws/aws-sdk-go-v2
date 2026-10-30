@@ -75,7 +75,9 @@ func (v *SubmitContainerStateChangeInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ExitCode != nil {
 		s.WriteInt32(schemas.SubmitContainerStateChangeRequest_exitCode, *v.ExitCode)
 	}
-	serializeNetworkBindings(s, schemas.SubmitContainerStateChangeRequest_networkBindings, v.NetworkBindings)
+	if v.NetworkBindings != nil {
+		serializeNetworkBindings(s, schemas.SubmitContainerStateChangeRequest_networkBindings, v.NetworkBindings)
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.SubmitContainerStateChangeRequest_reason, *v.Reason)
 	}

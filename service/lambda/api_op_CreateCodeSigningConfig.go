@@ -70,7 +70,9 @@ func (v *CreateCodeSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCodeSigningConfigRequest_Description, *v.Description)
 	}
-	serializeTags(s, schemas.CreateCodeSigningConfigRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCodeSigningConfigRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCodeSigningConfigOutput struct {

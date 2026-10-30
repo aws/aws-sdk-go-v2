@@ -56,7 +56,9 @@ func (v *UpdateScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CronExpression != nil {
 		s.WriteString(schemas.UpdateScheduleRequest_CronExpression, *v.CronExpression)
 	}
-	serializeJobNameList(s, schemas.UpdateScheduleRequest_JobNames, v.JobNames)
+	if v.JobNames != nil {
+		serializeJobNameList(s, schemas.UpdateScheduleRequest_JobNames, v.JobNames)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateScheduleRequest_Name, *v.Name)
 	}

@@ -73,7 +73,9 @@ func (v *TagCertificateAuthorityInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CertificateAuthorityArn != nil {
 		s.WriteString(schemas.TagCertificateAuthorityRequest_CertificateAuthorityArn, *v.CertificateAuthorityArn)
 	}
-	serializeTagList(s, schemas.TagCertificateAuthorityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.TagCertificateAuthorityRequest_Tags, v.Tags)
+	}
 }
 
 type TagCertificateAuthorityOutput struct {

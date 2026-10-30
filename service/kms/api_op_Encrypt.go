@@ -204,8 +204,12 @@ func (v *EncryptInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionAlgorithm != "" {
 		s.WriteString(schemas.EncryptRequest_EncryptionAlgorithm, string(v.EncryptionAlgorithm))
 	}
-	serializeEncryptionContextType(s, schemas.EncryptRequest_EncryptionContext, v.EncryptionContext)
-	serializeGrantTokenList(s, schemas.EncryptRequest_GrantTokens, v.GrantTokens)
+	if v.EncryptionContext != nil {
+		serializeEncryptionContextType(s, schemas.EncryptRequest_EncryptionContext, v.EncryptionContext)
+	}
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.EncryptRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.EncryptRequest_KeyId, *v.KeyId)
 	}

@@ -88,18 +88,24 @@ func (v *UpdateJobQueueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateJobQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeEnvironmentOrders(s, schemas.UpdateJobQueueRequest_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	if v.ComputeEnvironmentOrder != nil {
+		serializeComputeEnvironmentOrders(s, schemas.UpdateJobQueueRequest_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	}
 	if v.JobQueue != nil {
 		s.WriteString(schemas.UpdateJobQueueRequest_jobQueue, *v.JobQueue)
 	}
-	serializeJobStateTimeLimitActions(s, schemas.UpdateJobQueueRequest_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	if v.JobStateTimeLimitActions != nil {
+		serializeJobStateTimeLimitActions(s, schemas.UpdateJobQueueRequest_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.UpdateJobQueueRequest_priority, *v.Priority)
 	}
 	if v.SchedulingPolicyArn != nil {
 		s.WriteString(schemas.UpdateJobQueueRequest_schedulingPolicyArn, *v.SchedulingPolicyArn)
 	}
-	serializeServiceEnvironmentOrders(s, schemas.UpdateJobQueueRequest_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	if v.ServiceEnvironmentOrder != nil {
+		serializeServiceEnvironmentOrders(s, schemas.UpdateJobQueueRequest_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.UpdateJobQueueRequest_state, string(v.State))
 	}

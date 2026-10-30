@@ -131,7 +131,9 @@ func (v *CreateDomainUnitOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDomainUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainUnitIds(s, schemas.CreateDomainUnitOutput_ancestorDomainUnitIds, v.AncestorDomainUnitIds)
+	if v.AncestorDomainUnitIds != nil {
+		serializeDomainUnitIds(s, schemas.CreateDomainUnitOutput_ancestorDomainUnitIds, v.AncestorDomainUnitIds)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateDomainUnitOutput_createdAt, *v.CreatedAt)
 	}
@@ -150,7 +152,9 @@ func (v *CreateDomainUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDomainUnitOutput_name, *v.Name)
 	}
-	serializeDomainUnitOwners(s, schemas.CreateDomainUnitOutput_owners, v.Owners)
+	if v.Owners != nil {
+		serializeDomainUnitOwners(s, schemas.CreateDomainUnitOutput_owners, v.Owners)
+	}
 	if v.ParentDomainUnitId != nil {
 		s.WriteString(schemas.CreateDomainUnitOutput_parentDomainUnitId, *v.ParentDomainUnitId)
 	}

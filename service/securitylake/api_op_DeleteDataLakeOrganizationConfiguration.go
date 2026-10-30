@@ -46,7 +46,9 @@ func (v *DeleteDataLakeOrganizationConfigurationInput) Serialize(s smithy.ShapeS
 }
 
 func (v *DeleteDataLakeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.DeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount, v.AutoEnableNewAccount)
+	if v.AutoEnableNewAccount != nil {
+		serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.DeleteDataLakeOrganizationConfigurationRequest_autoEnableNewAccount, v.AutoEnableNewAccount)
+	}
 }
 
 type DeleteDataLakeOrganizationConfigurationOutput struct {

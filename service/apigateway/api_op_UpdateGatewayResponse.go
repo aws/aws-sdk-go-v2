@@ -54,7 +54,9 @@ func (v *UpdateGatewayResponseInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGatewayResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateGatewayResponseRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateGatewayResponseRequest_patchOperations, v.PatchOperations)
+	}
 	if v.ResponseType != "" {
 		s.WriteString(schemas.UpdateGatewayResponseRequest_responseType, string(v.ResponseType))
 	}
@@ -102,8 +104,12 @@ func (v *UpdateGatewayResponseOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DefaultResponse != false {
 		s.WriteBool(schemas.GatewayResponse_defaultResponse, v.DefaultResponse)
 	}
-	serializeMapOfStringToString(s, schemas.GatewayResponse_responseParameters, v.ResponseParameters)
-	serializeMapOfStringToString(s, schemas.GatewayResponse_responseTemplates, v.ResponseTemplates)
+	if v.ResponseParameters != nil {
+		serializeMapOfStringToString(s, schemas.GatewayResponse_responseParameters, v.ResponseParameters)
+	}
+	if v.ResponseTemplates != nil {
+		serializeMapOfStringToString(s, schemas.GatewayResponse_responseTemplates, v.ResponseTemplates)
+	}
 	if v.ResponseType != "" {
 		s.WriteString(schemas.GatewayResponse_responseType, string(v.ResponseType))
 	}

@@ -58,7 +58,9 @@ func (v *ListCuratedEnvironmentImagesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListCuratedEnvironmentImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentPlatforms(s, schemas.ListCuratedEnvironmentImagesOutput_platforms, v.Platforms)
+	if v.Platforms != nil {
+		serializeEnvironmentPlatforms(s, schemas.ListCuratedEnvironmentImagesOutput_platforms, v.Platforms)
+	}
 }
 func (v *ListCuratedEnvironmentImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCuratedEnvironmentImagesOutput, func(s *smithy.Schema) error {

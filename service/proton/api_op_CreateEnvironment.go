@@ -171,7 +171,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Spec != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_spec, *v.Spec)
 	}
-	serializeTagList(s, schemas.CreateEnvironmentInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEnvironmentInput_tags, v.Tags)
+	}
 	if v.TemplateMajorVersion != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_templateMajorVersion, *v.TemplateMajorVersion)
 	}

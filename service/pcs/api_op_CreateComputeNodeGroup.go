@@ -158,7 +158,9 @@ func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.IamInstanceProfileArn != nil {
 		s.WriteString(schemas.CreateComputeNodeGroupRequest_iamInstanceProfileArn, *v.IamInstanceProfileArn)
 	}
-	serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
+	if v.InstanceConfigs != nil {
+		serializeInstanceList(s, schemas.CreateComputeNodeGroupRequest_instanceConfigs, v.InstanceConfigs)
+	}
 	if v.NodeLifecycleActions != nil {
 		s.WriteStruct(schemas.CreateComputeNodeGroupRequest_nodeLifecycleActions)
 		v.NodeLifecycleActions.SerializeMembers(s)
@@ -182,8 +184,12 @@ func (v *CreateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SpotOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CreateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
-	serializeRequestTagMap(s, schemas.CreateComputeNodeGroupRequest_tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.CreateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateComputeNodeGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateComputeNodeGroupOutput struct {

@@ -2026,8 +2026,12 @@ func (v *GetMetricDataV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GetMetricDataV2Request_EndTime, *v.EndTime)
 	}
-	serializeFiltersV2List(s, schemas.GetMetricDataV2Request_Filters, v.Filters)
-	serializeGroupingsV2(s, schemas.GetMetricDataV2Request_Groupings, v.Groupings)
+	if v.Filters != nil {
+		serializeFiltersV2List(s, schemas.GetMetricDataV2Request_Filters, v.Filters)
+	}
+	if v.Groupings != nil {
+		serializeGroupingsV2(s, schemas.GetMetricDataV2Request_Groupings, v.Groupings)
+	}
 	if v.Interval != nil {
 		s.WriteStruct(schemas.GetMetricDataV2Request_Interval)
 		v.Interval.SerializeMembers(s)
@@ -2036,7 +2040,9 @@ func (v *GetMetricDataV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetMetricDataV2Request_MaxResults, *v.MaxResults)
 	}
-	serializeMetricsV2(s, schemas.GetMetricDataV2Request_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricsV2(s, schemas.GetMetricDataV2Request_Metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMetricDataV2Request_NextToken, *v.NextToken)
 	}
@@ -2070,7 +2076,9 @@ func (v *GetMetricDataV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMetricDataV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricResultsV2(s, schemas.GetMetricDataV2Response_MetricResults, v.MetricResults)
+	if v.MetricResults != nil {
+		serializeMetricResultsV2(s, schemas.GetMetricDataV2Response_MetricResults, v.MetricResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMetricDataV2Response_NextToken, *v.NextToken)
 	}

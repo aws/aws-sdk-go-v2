@@ -136,8 +136,12 @@ func (v *UpdateBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MaintenanceWindowStartTime.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.UpdateBrokerRequest_ResourceShareArns, v.ResourceShareArns)
-	serialize__listOf__string(s, schemas.UpdateBrokerRequest_SecurityGroups, v.SecurityGroups)
+	if v.ResourceShareArns != nil {
+		serialize__listOf__string(s, schemas.UpdateBrokerRequest_ResourceShareArns, v.ResourceShareArns)
+	}
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.UpdateBrokerRequest_SecurityGroups, v.SecurityGroups)
+	}
 	if v.StorageSize != nil {
 		s.WriteInt32(schemas.UpdateBrokerRequest_StorageSize, *v.StorageSize)
 	}
@@ -272,8 +276,12 @@ func (v *UpdateBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PendingDataReplicationMode != "" {
 		s.WriteString(schemas.UpdateBrokerResponse_PendingDataReplicationMode, string(v.PendingDataReplicationMode))
 	}
-	serialize__listOf__string(s, schemas.UpdateBrokerResponse_ResourceShareArns, v.ResourceShareArns)
-	serialize__listOf__string(s, schemas.UpdateBrokerResponse_SecurityGroups, v.SecurityGroups)
+	if v.ResourceShareArns != nil {
+		serialize__listOf__string(s, schemas.UpdateBrokerResponse_ResourceShareArns, v.ResourceShareArns)
+	}
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.UpdateBrokerResponse_SecurityGroups, v.SecurityGroups)
+	}
 	if v.StorageSize != nil {
 		s.WriteInt32(schemas.UpdateBrokerResponse_StorageSize, *v.StorageSize)
 	}

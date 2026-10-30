@@ -86,7 +86,9 @@ func (v *ExportSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.ExportSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.ExportSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *ExportSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportSnapshotResult, func(s *smithy.Schema) error {

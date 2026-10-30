@@ -163,7 +163,9 @@ func (v *Operator) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.Operator_type, string(v.Type))
 	}
-	serializestringList(s, schemas.Operator_values, v.Values)
+	if v.Values != nil {
+		serializestringList(s, schemas.Operator_values, v.Values)
+	}
 }
 func (v *Operator) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Operator, func(s *smithy.Schema) error {
@@ -249,7 +251,9 @@ func (v *ParameterObject) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParameterObject) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterAttributeList(s, schemas.ParameterObject_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeParameterAttributeList(s, schemas.ParameterObject_attributes, v.Attributes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ParameterObject_id, *v.Id)
 	}
@@ -353,14 +357,18 @@ func (v *PipelineDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PipelineDescription_description, *v.Description)
 	}
-	serializefieldList(s, schemas.PipelineDescription_fields, v.Fields)
+	if v.Fields != nil {
+		serializefieldList(s, schemas.PipelineDescription_fields, v.Fields)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.PipelineDescription_name, *v.Name)
 	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.PipelineDescription_pipelineId, *v.PipelineId)
 	}
-	serializetagList(s, schemas.PipelineDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.PipelineDescription_tags, v.Tags)
+	}
 }
 func (v *PipelineDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineDescription, func(s *smithy.Schema) error {
@@ -454,7 +462,9 @@ func (v *PipelineObject) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipelineObject) SerializeMembers(s smithy.ShapeSerializer) {
-	serializefieldList(s, schemas.PipelineObject_fields, v.Fields)
+	if v.Fields != nil {
+		serializefieldList(s, schemas.PipelineObject_fields, v.Fields)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.PipelineObject_id, *v.Id)
 	}
@@ -495,7 +505,9 @@ func (v *Query) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Query) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSelectorList(s, schemas.Query_selectors, v.Selectors)
+	if v.Selectors != nil {
+		serializeSelectorList(s, schemas.Query_selectors, v.Selectors)
+	}
 }
 func (v *Query) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Query, func(s *smithy.Schema) error {
@@ -638,7 +650,9 @@ func (v *TaskObject) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttemptId != nil {
 		s.WriteString(schemas.TaskObject_attemptId, *v.AttemptId)
 	}
-	serializePipelineObjectMap(s, schemas.TaskObject_objects, v.Objects)
+	if v.Objects != nil {
+		serializePipelineObjectMap(s, schemas.TaskObject_objects, v.Objects)
+	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.TaskObject_pipelineId, *v.PipelineId)
 	}
@@ -685,7 +699,9 @@ func (v *ValidationError) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationError) SerializeMembers(s smithy.ShapeSerializer) {
-	serializevalidationMessages(s, schemas.ValidationError_errors, v.Errors)
+	if v.Errors != nil {
+		serializevalidationMessages(s, schemas.ValidationError_errors, v.Errors)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ValidationError_id, *v.Id)
 	}
@@ -727,7 +743,9 @@ func (v *ValidationWarning) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ValidationWarning_id, *v.Id)
 	}
-	serializevalidationMessages(s, schemas.ValidationWarning_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializevalidationMessages(s, schemas.ValidationWarning_warnings, v.Warnings)
+	}
 }
 func (v *ValidationWarning) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationWarning, func(s *smithy.Schema) error {

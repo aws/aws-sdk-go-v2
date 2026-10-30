@@ -105,7 +105,9 @@ func (v *ListPullRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPullRequestsOutput_nextToken, *v.NextToken)
 	}
-	serializePullRequestIdList(s, schemas.ListPullRequestsOutput_pullRequestIds, v.PullRequestIds)
+	if v.PullRequestIds != nil {
+		serializePullRequestIdList(s, schemas.ListPullRequestsOutput_pullRequestIds, v.PullRequestIds)
+	}
 }
 func (v *ListPullRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPullRequestsOutput, func(s *smithy.Schema) error {

@@ -7,9 +7,6 @@ import (
 )
 
 func serializeBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []Block) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []Block)
 }
 
 func serializeChangedBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v []ChangedBlock) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeChangedBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

@@ -106,7 +106,9 @@ func (v *ListQueueFleetAssociationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueueFleetAssociationsResponse_nextToken, *v.NextToken)
 	}
-	serializeQueueFleetAssociationSummaries(s, schemas.ListQueueFleetAssociationsResponse_queueFleetAssociations, v.QueueFleetAssociations)
+	if v.QueueFleetAssociations != nil {
+		serializeQueueFleetAssociationSummaries(s, schemas.ListQueueFleetAssociationsResponse_queueFleetAssociations, v.QueueFleetAssociations)
+	}
 }
 func (v *ListQueueFleetAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueueFleetAssociationsResponse, func(s *smithy.Schema) error {

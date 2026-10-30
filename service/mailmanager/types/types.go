@@ -478,7 +478,9 @@ func (v *ArchiveBooleanExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ArchiveBooleanExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchiveBooleanToEvaluate(s, schemas.ArchiveBooleanExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeArchiveBooleanToEvaluate(s, schemas.ArchiveBooleanExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.ArchiveBooleanExpression_Operator, string(v.Operator))
 	}
@@ -593,8 +595,12 @@ func (v *ArchiveFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ArchiveFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchiveFilterConditions(s, schemas.ArchiveFilters_Include, v.Include)
-	serializeArchiveFilterConditions(s, schemas.ArchiveFilters_Unless, v.Unless)
+	if v.Include != nil {
+		serializeArchiveFilterConditions(s, schemas.ArchiveFilters_Include, v.Include)
+	}
+	if v.Unless != nil {
+		serializeArchiveFilterConditions(s, schemas.ArchiveFilters_Unless, v.Unless)
+	}
 }
 func (v *ArchiveFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ArchiveFilters, func(s *smithy.Schema) error {
@@ -667,11 +673,15 @@ func (v *ArchiveStringExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ArchiveStringExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchiveStringToEvaluate(s, schemas.ArchiveStringExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeArchiveStringToEvaluate(s, schemas.ArchiveStringExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.ArchiveStringExpression_Operator, string(v.Operator))
 	}
-	serializeStringValueList(s, schemas.ArchiveStringExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeStringValueList(s, schemas.ArchiveStringExpression_Values, v.Values)
+	}
 }
 func (v *ArchiveStringExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ArchiveStringExpression, func(s *smithy.Schema) error {
@@ -1011,7 +1021,9 @@ func (v *Envelope) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Helo != nil {
 		s.WriteString(schemas.Envelope_Helo, *v.Helo)
 	}
-	serializeStringList(s, schemas.Envelope_To, v.To)
+	if v.To != nil {
+		serializeStringList(s, schemas.Envelope_To, v.To)
+	}
 }
 func (v *Envelope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Envelope, func(s *smithy.Schema) error {
@@ -1418,7 +1430,9 @@ func (v *IngressBooleanExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngressBooleanExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressBooleanToEvaluate(s, schemas.IngressBooleanExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeIngressBooleanToEvaluate(s, schemas.IngressBooleanExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.IngressBooleanExpression_Operator, string(v.Operator))
 	}
@@ -1545,11 +1559,15 @@ func (v *IngressIpv4Expression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngressIpv4Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressIpToEvaluate(s, schemas.IngressIpv4Expression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeIngressIpToEvaluate(s, schemas.IngressIpv4Expression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.IngressIpv4Expression_Operator, string(v.Operator))
 	}
-	serializeIpv4Cidrs(s, schemas.IngressIpv4Expression_Values, v.Values)
+	if v.Values != nil {
+		serializeIpv4Cidrs(s, schemas.IngressIpv4Expression_Values, v.Values)
+	}
 }
 func (v *IngressIpv4Expression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IngressIpv4Expression, func(s *smithy.Schema) error {
@@ -1599,11 +1617,15 @@ func (v *IngressIpv6Expression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngressIpv6Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressIpv6ToEvaluate(s, schemas.IngressIpv6Expression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeIngressIpv6ToEvaluate(s, schemas.IngressIpv6Expression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.IngressIpv6Expression_Operator, string(v.Operator))
 	}
-	serializeIpv6Cidrs(s, schemas.IngressIpv6Expression_Values, v.Values)
+	if v.Values != nil {
+		serializeIpv6Cidrs(s, schemas.IngressIpv6Expression_Values, v.Values)
+	}
 }
 func (v *IngressIpv6Expression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IngressIpv6Expression, func(s *smithy.Schema) error {
@@ -1678,7 +1700,9 @@ func (v *IngressIsInAddressList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngressIsInAddressList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressAddressListArnList(s, schemas.IngressIsInAddressList_AddressLists, v.AddressLists)
+	if v.AddressLists != nil {
+		serializeIngressAddressListArnList(s, schemas.IngressIsInAddressList_AddressLists, v.AddressLists)
+	}
 	if v.Attribute != "" {
 		s.WriteString(schemas.IngressIsInAddressList_Attribute, string(v.Attribute))
 	}
@@ -1973,11 +1997,15 @@ func (v *IngressStringExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngressStringExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressStringToEvaluate(s, schemas.IngressStringExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeIngressStringToEvaluate(s, schemas.IngressStringExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.IngressStringExpression_Operator, string(v.Operator))
 	}
-	serializeStringList(s, schemas.IngressStringExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeStringList(s, schemas.IngressStringExpression_Values, v.Values)
+	}
 }
 func (v *IngressStringExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IngressStringExpression, func(s *smithy.Schema) error {
@@ -2075,7 +2103,9 @@ func (v *IngressTlsProtocolExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngressTlsProtocolExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressTlsProtocolToEvaluate(s, schemas.IngressTlsProtocolExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeIngressTlsProtocolToEvaluate(s, schemas.IngressTlsProtocolExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.IngressTlsProtocolExpression_Operator, string(v.Operator))
 	}
@@ -2623,7 +2653,9 @@ func (v *PolicyStatement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != "" {
 		s.WriteString(schemas.PolicyStatement_Action, string(v.Action))
 	}
-	serializePolicyConditions(s, schemas.PolicyStatement_Conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializePolicyConditions(s, schemas.PolicyStatement_Conditions, v.Conditions)
+	}
 }
 func (v *PolicyStatement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyStatement, func(s *smithy.Schema) error {
@@ -2891,7 +2923,9 @@ func (v *ReplaceRecipientAction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplaceRecipientAction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecipients(s, schemas.ReplaceRecipientAction_ReplaceWith, v.ReplaceWith)
+	if v.ReplaceWith != nil {
+		serializeRecipients(s, schemas.ReplaceRecipientAction_ReplaceWith, v.ReplaceWith)
+	}
 }
 func (v *ReplaceRecipientAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplaceRecipientAction, func(s *smithy.Schema) error {
@@ -3007,7 +3041,9 @@ func (v *Row) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MessageId != nil {
 		s.WriteString(schemas.Row_MessageId, *v.MessageId)
 	}
-	serializeEmailReceivedHeadersList(s, schemas.Row_ReceivedHeaders, v.ReceivedHeaders)
+	if v.ReceivedHeaders != nil {
+		serializeEmailReceivedHeadersList(s, schemas.Row_ReceivedHeaders, v.ReceivedHeaders)
+	}
 	if v.ReceivedTimestamp != nil {
 		s.WriteTime(schemas.Row_ReceivedTimestamp, *v.ReceivedTimestamp)
 	}
@@ -3137,12 +3173,18 @@ func (v *Rule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleActions(s, schemas.Rule_Actions, v.Actions)
-	serializeRuleConditions(s, schemas.Rule_Conditions, v.Conditions)
+	if v.Actions != nil {
+		serializeRuleActions(s, schemas.Rule_Actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serializeRuleConditions(s, schemas.Rule_Conditions, v.Conditions)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Rule_Name, *v.Name)
 	}
-	serializeRuleConditions(s, schemas.Rule_Unless, v.Unless)
+	if v.Unless != nil {
+		serializeRuleConditions(s, schemas.Rule_Unless, v.Unless)
+	}
 }
 func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
@@ -3411,7 +3453,9 @@ func (v *RuleBooleanExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleBooleanExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleBooleanToEvaluate(s, schemas.RuleBooleanExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeRuleBooleanToEvaluate(s, schemas.RuleBooleanExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.RuleBooleanExpression_Operator, string(v.Operator))
 	}
@@ -3650,7 +3694,9 @@ func (v *RuleDmarcExpression) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.RuleDmarcExpression_Operator, string(v.Operator))
 	}
-	serializeRuleDmarcValueList(s, schemas.RuleDmarcExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeRuleDmarcValueList(s, schemas.RuleDmarcExpression_Values, v.Values)
+	}
 }
 func (v *RuleDmarcExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleDmarcExpression, func(s *smithy.Schema) error {
@@ -3703,11 +3749,15 @@ func (v *RuleIpExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleIpExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleIpToEvaluate(s, schemas.RuleIpExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeRuleIpToEvaluate(s, schemas.RuleIpExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.RuleIpExpression_Operator, string(v.Operator))
 	}
-	serializeRuleIpValueList(s, schemas.RuleIpExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeRuleIpValueList(s, schemas.RuleIpExpression_Values, v.Values)
+	}
 }
 func (v *RuleIpExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleIpExpression, func(s *smithy.Schema) error {
@@ -3781,7 +3831,9 @@ func (v *RuleIsInAddressList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleIsInAddressList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAddressListArnList(s, schemas.RuleIsInAddressList_AddressLists, v.AddressLists)
+	if v.AddressLists != nil {
+		serializeRuleAddressListArnList(s, schemas.RuleIsInAddressList_AddressLists, v.AddressLists)
+	}
 	if v.Attribute != "" {
 		s.WriteString(schemas.RuleIsInAddressList_Attribute, string(v.Attribute))
 	}
@@ -3832,7 +3884,9 @@ func (v *RuleNumberExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleNumberExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleNumberToEvaluate(s, schemas.RuleNumberExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeRuleNumberToEvaluate(s, schemas.RuleNumberExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.RuleNumberExpression_Operator, string(v.Operator))
 	}
@@ -3972,11 +4026,15 @@ func (v *RuleStringExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleStringExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleStringToEvaluate(s, schemas.RuleStringExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeRuleStringToEvaluate(s, schemas.RuleStringExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.RuleStringExpression_Operator, string(v.Operator))
 	}
-	serializeRuleStringList(s, schemas.RuleStringExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeRuleStringList(s, schemas.RuleStringExpression_Values, v.Values)
+	}
 }
 func (v *RuleStringExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleStringExpression, func(s *smithy.Schema) error {
@@ -4114,11 +4172,15 @@ func (v *RuleVerdictExpression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleVerdictExpression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleVerdictToEvaluate(s, schemas.RuleVerdictExpression_Evaluate, v.Evaluate)
+	if v.Evaluate != nil {
+		serializeRuleVerdictToEvaluate(s, schemas.RuleVerdictExpression_Evaluate, v.Evaluate)
+	}
 	if v.Operator != "" {
 		s.WriteString(schemas.RuleVerdictExpression_Operator, string(v.Operator))
 	}
-	serializeRuleVerdictValueList(s, schemas.RuleVerdictExpression_Values, v.Values)
+	if v.Values != nil {
+		serializeRuleVerdictValueList(s, schemas.RuleVerdictExpression_Values, v.Values)
+	}
 }
 func (v *RuleVerdictExpression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleVerdictExpression, func(s *smithy.Schema) error {

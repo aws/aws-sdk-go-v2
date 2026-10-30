@@ -78,7 +78,9 @@ func (v *ListConsentPortalsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConsentPortalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsentPortalSummaries(s, schemas.ListConsentPortalsResponse_consentPortals, v.ConsentPortals)
+	if v.ConsentPortals != nil {
+		serializeConsentPortalSummaries(s, schemas.ListConsentPortalsResponse_consentPortals, v.ConsentPortals)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConsentPortalsResponse_nextToken, *v.NextToken)
 	}

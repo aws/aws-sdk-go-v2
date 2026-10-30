@@ -120,7 +120,9 @@ func (v *ListBotRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.BotId != nil {
 		s.WriteString(schemas.ListBotRecommendationsResponse_botId, *v.BotId)
 	}
-	serializeBotRecommendationSummaryList(s, schemas.ListBotRecommendationsResponse_botRecommendationSummaries, v.BotRecommendationSummaries)
+	if v.BotRecommendationSummaries != nil {
+		serializeBotRecommendationSummaryList(s, schemas.ListBotRecommendationsResponse_botRecommendationSummaries, v.BotRecommendationSummaries)
+	}
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListBotRecommendationsResponse_botVersion, *v.BotVersion)
 	}

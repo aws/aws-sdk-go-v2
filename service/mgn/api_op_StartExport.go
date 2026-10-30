@@ -64,7 +64,9 @@ func (v *StartExportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3Key != nil {
 		s.WriteString(schemas.StartExportRequest_s3Key, *v.S3Key)
 	}
-	serializeTagsMap(s, schemas.StartExportRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartExportRequest_tags, v.Tags)
+	}
 }
 func (v *StartExportInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartExportRequest, func(s *smithy.Schema) error {

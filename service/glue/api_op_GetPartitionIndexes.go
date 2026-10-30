@@ -95,7 +95,9 @@ func (v *GetPartitionIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetPartitionIndexesResponse_NextToken, *v.NextToken)
 	}
-	serializePartitionIndexDescriptorList(s, schemas.GetPartitionIndexesResponse_PartitionIndexDescriptorList, v.PartitionIndexDescriptorList)
+	if v.PartitionIndexDescriptorList != nil {
+		serializePartitionIndexDescriptorList(s, schemas.GetPartitionIndexesResponse_PartitionIndexDescriptorList, v.PartitionIndexDescriptorList)
+	}
 }
 func (v *GetPartitionIndexesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPartitionIndexesResponse, func(s *smithy.Schema) error {

@@ -88,7 +88,9 @@ func (v *ListLifecycleExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLifecycleExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecycleExecutionsList(s, schemas.ListLifecycleExecutionsResponse_lifecycleExecutions, v.LifecycleExecutions)
+	if v.LifecycleExecutions != nil {
+		serializeLifecycleExecutionsList(s, schemas.ListLifecycleExecutionsResponse_lifecycleExecutions, v.LifecycleExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLifecycleExecutionsResponse_nextToken, *v.NextToken)
 	}

@@ -82,7 +82,9 @@ func (v *ListVpcConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVpcConnectionsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfVpcConnection(s, schemas.ListVpcConnectionsResponse_VpcConnections, v.VpcConnections)
+	if v.VpcConnections != nil {
+		serialize__listOfVpcConnection(s, schemas.ListVpcConnectionsResponse_VpcConnections, v.VpcConnections)
+	}
 }
 func (v *ListVpcConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVpcConnectionsResponse, func(s *smithy.Schema) error {

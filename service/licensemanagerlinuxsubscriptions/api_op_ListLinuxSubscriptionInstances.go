@@ -85,7 +85,9 @@ func (v *ListLinuxSubscriptionInstancesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListLinuxSubscriptionInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListLinuxSubscriptionInstancesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListLinuxSubscriptionInstancesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLinuxSubscriptionInstancesRequest_MaxResults, *v.MaxResults)
 	}
@@ -132,7 +134,9 @@ func (v *ListLinuxSubscriptionInstancesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListLinuxSubscriptionInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceList(s, schemas.ListLinuxSubscriptionInstancesResponse_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.ListLinuxSubscriptionInstancesResponse_Instances, v.Instances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLinuxSubscriptionInstancesResponse_NextToken, *v.NextToken)
 	}

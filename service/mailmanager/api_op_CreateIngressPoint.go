@@ -85,15 +85,21 @@ func (v *CreateIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIngressPointRequest_ClientToken, *v.ClientToken)
 	}
-	serializeIngressPointConfiguration(s, schemas.CreateIngressPointRequest_IngressPointConfiguration, v.IngressPointConfiguration)
+	if v.IngressPointConfiguration != nil {
+		serializeIngressPointConfiguration(s, schemas.CreateIngressPointRequest_IngressPointConfiguration, v.IngressPointConfiguration)
+	}
 	if v.IngressPointName != nil {
 		s.WriteString(schemas.CreateIngressPointRequest_IngressPointName, *v.IngressPointName)
 	}
-	serializeNetworkConfiguration(s, schemas.CreateIngressPointRequest_NetworkConfiguration, v.NetworkConfiguration)
+	if v.NetworkConfiguration != nil {
+		serializeNetworkConfiguration(s, schemas.CreateIngressPointRequest_NetworkConfiguration, v.NetworkConfiguration)
+	}
 	if v.RuleSetId != nil {
 		s.WriteString(schemas.CreateIngressPointRequest_RuleSetId, *v.RuleSetId)
 	}
-	serializeTagList(s, schemas.CreateIngressPointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIngressPointRequest_Tags, v.Tags)
+	}
 	if v.TlsPolicy != "" {
 		s.WriteString(schemas.CreateIngressPointRequest_TlsPolicy, string(v.TlsPolicy))
 	}

@@ -129,7 +129,9 @@ func (v *GetInferenceProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InferenceProfileName != nil {
 		s.WriteString(schemas.GetInferenceProfileResponse_inferenceProfileName, *v.InferenceProfileName)
 	}
-	serializeInferenceProfileModels(s, schemas.GetInferenceProfileResponse_models, v.Models)
+	if v.Models != nil {
+		serializeInferenceProfileModels(s, schemas.GetInferenceProfileResponse_models, v.Models)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetInferenceProfileResponse_status, string(v.Status))
 	}

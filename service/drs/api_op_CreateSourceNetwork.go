@@ -61,7 +61,9 @@ func (v *CreateSourceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OriginRegion != nil {
 		s.WriteString(schemas.CreateSourceNetworkRequest_originRegion, *v.OriginRegion)
 	}
-	serializeTagsMap(s, schemas.CreateSourceNetworkRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateSourceNetworkRequest_tags, v.Tags)
+	}
 	if v.VpcID != nil {
 		s.WriteString(schemas.CreateSourceNetworkRequest_vpcID, *v.VpcID)
 	}

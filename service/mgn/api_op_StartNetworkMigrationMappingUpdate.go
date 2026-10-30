@@ -55,14 +55,18 @@ func (v *StartNetworkMigrationMappingUpdateInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *StartNetworkMigrationMappingUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStartNetworkMigrationMappingUpdateConstructs(s, schemas.StartNetworkMigrationMappingUpdateRequest_constructs, v.Constructs)
+	if v.Constructs != nil {
+		serializeStartNetworkMigrationMappingUpdateConstructs(s, schemas.StartNetworkMigrationMappingUpdateRequest_constructs, v.Constructs)
+	}
 	if v.NetworkMigrationDefinitionID != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
 	}
 	if v.NetworkMigrationExecutionID != nil {
 		s.WriteString(schemas.StartNetworkMigrationMappingUpdateRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
 	}
-	serializeStartNetworkMigrationMappingUpdateSegments(s, schemas.StartNetworkMigrationMappingUpdateRequest_segments, v.Segments)
+	if v.Segments != nil {
+		serializeStartNetworkMigrationMappingUpdateSegments(s, schemas.StartNetworkMigrationMappingUpdateRequest_segments, v.Segments)
+	}
 }
 
 type StartNetworkMigrationMappingUpdateOutput struct {

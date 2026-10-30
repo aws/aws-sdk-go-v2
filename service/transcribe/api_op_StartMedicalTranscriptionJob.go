@@ -230,7 +230,9 @@ func (v *StartMedicalTranscriptionJobInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ContentIdentificationType != "" {
 		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_ContentIdentificationType, string(v.ContentIdentificationType))
 	}
-	serializeKMSEncryptionContextMap(s, schemas.StartMedicalTranscriptionJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.KMSEncryptionContext != nil {
+		serializeKMSEncryptionContextMap(s, schemas.StartMedicalTranscriptionJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_LanguageCode, string(v.LanguageCode))
 	}
@@ -265,7 +267,9 @@ func (v *StartMedicalTranscriptionJobInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Specialty != "" {
 		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_Specialty, string(v.Specialty))
 	}
-	serializeTagList(s, schemas.StartMedicalTranscriptionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartMedicalTranscriptionJobRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.StartMedicalTranscriptionJobRequest_Type, string(v.Type))
 	}

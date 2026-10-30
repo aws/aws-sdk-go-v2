@@ -292,7 +292,9 @@ func (v *GetCodeFindingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAffectedPackageList(s, schemas.GetCodeFindingOutput_affectedPackages, v.AffectedPackages)
+	if v.AffectedPackages != nil {
+		serializeAffectedPackageList(s, schemas.GetCodeFindingOutput_affectedPackages, v.AffectedPackages)
+	}
 	if v.Category != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_category, *v.Category)
 	}
@@ -311,7 +313,9 @@ func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CvssBaseScore != nil {
 		s.WriteFloat64(schemas.GetCodeFindingOutput_cvssBaseScore, *v.CvssBaseScore)
 	}
-	serializeCweIdList(s, schemas.GetCodeFindingOutput_cweIds, v.CweIds)
+	if v.CweIds != nil {
+		serializeCweIdList(s, schemas.GetCodeFindingOutput_cweIds, v.CweIds)
+	}
 	if v.DetailedDescription != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_detailedDescription, *v.DetailedDescription)
 	}
@@ -339,7 +343,9 @@ func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FindingId != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_findingId, *v.FindingId)
 	}
-	serializeFindingStringList(s, schemas.GetCodeFindingOutput_findingTypes, v.FindingTypes)
+	if v.FindingTypes != nil {
+		serializeFindingStringList(s, schemas.GetCodeFindingOutput_findingTypes, v.FindingTypes)
+	}
 	if v.FirstSeenAt != nil {
 		s.WriteTime(schemas.GetCodeFindingOutput_firstSeenAt, *v.FirstSeenAt)
 	}
@@ -349,7 +355,9 @@ func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Mitigation != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_mitigation, *v.Mitigation)
 	}
-	serializeFindingStringList(s, schemas.GetCodeFindingOutput_mitreTechniques, v.MitreTechniques)
+	if v.MitreTechniques != nil {
+		serializeFindingStringList(s, schemas.GetCodeFindingOutput_mitreTechniques, v.MitreTechniques)
+	}
 	if v.OcsfClass != "" {
 		s.WriteString(schemas.GetCodeFindingOutput_ocsfClass, string(v.OcsfClass))
 	}
@@ -373,12 +381,18 @@ func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProductVersion != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_productVersion, *v.ProductVersion)
 	}
-	serializeFindingStringList(s, schemas.GetCodeFindingOutput_relevantInputs, v.RelevantInputs)
-	serializeFindingStringList(s, schemas.GetCodeFindingOutput_remediationReferences, v.RemediationReferences)
+	if v.RelevantInputs != nil {
+		serializeFindingStringList(s, schemas.GetCodeFindingOutput_relevantInputs, v.RelevantInputs)
+	}
+	if v.RemediationReferences != nil {
+		serializeFindingStringList(s, schemas.GetCodeFindingOutput_remediationReferences, v.RemediationReferences)
+	}
 	if v.ReportedAt != nil {
 		s.WriteTime(schemas.GetCodeFindingOutput_reportedAt, *v.ReportedAt)
 	}
-	serializeFindingResourceList(s, schemas.GetCodeFindingOutput_resources, v.Resources)
+	if v.Resources != nil {
+		serializeFindingResourceList(s, schemas.GetCodeFindingOutput_resources, v.Resources)
+	}
 	if v.ScanRunId != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_scanRunId, *v.ScanRunId)
 	}
@@ -406,7 +420,9 @@ func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusUpdatedAt != nil {
 		s.WriteTime(schemas.GetCodeFindingOutput_statusUpdatedAt, *v.StatusUpdatedAt)
 	}
-	serializeFindingStringList(s, schemas.GetCodeFindingOutput_stepsToReproduce, v.StepsToReproduce)
+	if v.StepsToReproduce != nil {
+		serializeFindingStringList(s, schemas.GetCodeFindingOutput_stepsToReproduce, v.StepsToReproduce)
+	}
 	if v.SubCategory != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_subCategory, *v.SubCategory)
 	}
@@ -424,7 +440,9 @@ func (v *GetCodeFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Validation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFindingVulnerabilityList(s, schemas.GetCodeFindingOutput_vulnerabilities, v.Vulnerabilities)
+	if v.Vulnerabilities != nil {
+		serializeFindingVulnerabilityList(s, schemas.GetCodeFindingOutput_vulnerabilities, v.Vulnerabilities)
+	}
 	if v.VulnerableCode != nil {
 		s.WriteString(schemas.GetCodeFindingOutput_vulnerableCode, *v.VulnerableCode)
 	}

@@ -85,7 +85,9 @@ func (v *ListAssessmentFrameworkShareRequestsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListAssessmentFrameworkShareRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentFrameworkShareRequestList(s, schemas.ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests, v.AssessmentFrameworkShareRequests)
+	if v.AssessmentFrameworkShareRequests != nil {
+		serializeAssessmentFrameworkShareRequestList(s, schemas.ListAssessmentFrameworkShareRequestsResponse_assessmentFrameworkShareRequests, v.AssessmentFrameworkShareRequests)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentFrameworkShareRequestsResponse_nextToken, *v.NextToken)
 	}

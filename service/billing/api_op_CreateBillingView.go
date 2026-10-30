@@ -83,8 +83,12 @@ func (v *CreateBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBillingViewRequest_name, *v.Name)
 	}
-	serializeResourceTagList(s, schemas.CreateBillingViewRequest_resourceTags, v.ResourceTags)
-	serializeBillingViewSourceViewsList(s, schemas.CreateBillingViewRequest_sourceViews, v.SourceViews)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateBillingViewRequest_resourceTags, v.ResourceTags)
+	}
+	if v.SourceViews != nil {
+		serializeBillingViewSourceViewsList(s, schemas.CreateBillingViewRequest_sourceViews, v.SourceViews)
+	}
 }
 
 type CreateBillingViewOutput struct {

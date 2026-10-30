@@ -76,7 +76,9 @@ func (v *UpdatePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PartitionInput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundedPartitionValueList(s, schemas.UpdatePartitionRequest_PartitionValueList, v.PartitionValueList)
+	if v.PartitionValueList != nil {
+		serializeBoundedPartitionValueList(s, schemas.UpdatePartitionRequest_PartitionValueList, v.PartitionValueList)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.UpdatePartitionRequest_TableName, *v.TableName)
 	}

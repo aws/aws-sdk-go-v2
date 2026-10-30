@@ -92,7 +92,9 @@ func (v *ListProxyRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProxyRuleGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeProxyRuleGroups(s, schemas.ListProxyRuleGroupsResponse_ProxyRuleGroups, v.ProxyRuleGroups)
+	if v.ProxyRuleGroups != nil {
+		serializeProxyRuleGroups(s, schemas.ListProxyRuleGroupsResponse_ProxyRuleGroups, v.ProxyRuleGroups)
+	}
 }
 func (v *ListProxyRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProxyRuleGroupsResponse, func(s *smithy.Schema) error {

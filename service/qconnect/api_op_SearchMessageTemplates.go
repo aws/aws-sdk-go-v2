@@ -100,7 +100,9 @@ func (v *SearchMessageTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchMessageTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serializeMessageTemplateSearchResultsList(s, schemas.SearchMessageTemplatesResponse_results, v.Results)
+	if v.Results != nil {
+		serializeMessageTemplateSearchResultsList(s, schemas.SearchMessageTemplatesResponse_results, v.Results)
+	}
 }
 func (v *SearchMessageTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchMessageTemplatesResponse, func(s *smithy.Schema) error {

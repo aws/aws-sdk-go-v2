@@ -165,7 +165,9 @@ func (v *CreateSnapshotScheduleActionParameters) SerializeMembers(s smithy.Shape
 	if v.SnapshotNamePrefix != nil {
 		s.WriteString(schemas.CreateSnapshotScheduleActionParameters_snapshotNamePrefix, *v.SnapshotNamePrefix)
 	}
-	serializeTagList(s, schemas.CreateSnapshotScheduleActionParameters_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSnapshotScheduleActionParameters_tags, v.Tags)
+	}
 }
 func (v *CreateSnapshotScheduleActionParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSnapshotScheduleActionParameters, func(s *smithy.Schema) error {
@@ -214,7 +216,9 @@ func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Port != nil {
 		s.WriteInt32(schemas.Endpoint_port, *v.Port)
 	}
-	serializeVpcEndpointList(s, schemas.Endpoint_vpcEndpoints, v.VpcEndpoints)
+	if v.VpcEndpoints != nil {
+		serializeVpcEndpointList(s, schemas.Endpoint_vpcEndpoints, v.VpcEndpoints)
+	}
 }
 func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
@@ -295,13 +299,17 @@ func (v *EndpointAccess) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Port != nil {
 		s.WriteInt32(schemas.EndpointAccess_port, *v.Port)
 	}
-	serializeSubnetIdList(s, schemas.EndpointAccess_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.EndpointAccess_subnetIds, v.SubnetIds)
+	}
 	if v.VpcEndpoint != nil {
 		s.WriteStruct(schemas.EndpointAccess_vpcEndpoint)
 		v.VpcEndpoint.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcSecurityGroupMembershipList(s, schemas.EndpointAccess_vpcSecurityGroups, v.VpcSecurityGroups)
+	if v.VpcSecurityGroups != nil {
+		serializeVpcSecurityGroupMembershipList(s, schemas.EndpointAccess_vpcSecurityGroups, v.VpcSecurityGroups)
+	}
 	if v.WorkgroupName != nil {
 		s.WriteString(schemas.EndpointAccess_workgroupName, *v.WorkgroupName)
 	}
@@ -510,14 +518,18 @@ func (v *Namespace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultIamRoleArn != nil {
 		s.WriteString(schemas.Namespace_defaultIamRoleArn, *v.DefaultIamRoleArn)
 	}
-	serializeIamRoleArnList(s, schemas.Namespace_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleArnList(s, schemas.Namespace_iamRoles, v.IamRoles)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.Namespace_kmsKeyId, *v.KmsKeyId)
 	}
 	if v.LakehouseRegistrationStatus != nil {
 		s.WriteString(schemas.Namespace_lakehouseRegistrationStatus, *v.LakehouseRegistrationStatus)
 	}
-	serializeLogExportList(s, schemas.Namespace_logExports, v.LogExports)
+	if v.LogExports != nil {
+		serializeLogExportList(s, schemas.Namespace_logExports, v.LogExports)
+	}
 	if v.NamespaceArn != nil {
 		s.WriteString(schemas.Namespace_namespaceArn, *v.NamespaceArn)
 	}
@@ -1042,14 +1054,18 @@ func (v *S3TablePublishStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnabledAll != nil {
 		s.WriteBool(schemas.S3TablePublishStatus_enabledAll, *v.EnabledAll)
 	}
-	serializeS3TableLastIngestionTimeMap(s, schemas.S3TablePublishStatus_lastIngestionTimes, v.LastIngestionTimes)
+	if v.LastIngestionTimes != nil {
+		serializeS3TableLastIngestionTimeMap(s, schemas.S3TablePublishStatus_lastIngestionTimes, v.LastIngestionTimes)
+	}
 	if v.S3TableGranularity != "" {
 		s.WriteString(schemas.S3TablePublishStatus_s3TableGranularity, string(v.S3TableGranularity))
 	}
 	if v.S3TableNamespace != nil {
 		s.WriteString(schemas.S3TablePublishStatus_s3TableNamespace, *v.S3TableNamespace)
 	}
-	serializeS3TableNameList(s, schemas.S3TablePublishStatus_s3Tables, v.S3Tables)
+	if v.S3Tables != nil {
+		serializeS3TableNameList(s, schemas.S3TablePublishStatus_s3Tables, v.S3Tables)
+	}
 }
 func (v *S3TablePublishStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3TablePublishStatus, func(s *smithy.Schema) error {
@@ -1242,11 +1258,15 @@ func (v *ScheduledActionResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NamespaceName != nil {
 		s.WriteString(schemas.ScheduledActionResponse_namespaceName, *v.NamespaceName)
 	}
-	serializeNextInvocationsList(s, schemas.ScheduledActionResponse_nextInvocations, v.NextInvocations)
+	if v.NextInvocations != nil {
+		serializeNextInvocationsList(s, schemas.ScheduledActionResponse_nextInvocations, v.NextInvocations)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.ScheduledActionResponse_roleArn, *v.RoleArn)
 	}
-	serializeSchedule(s, schemas.ScheduledActionResponse_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeSchedule(s, schemas.ScheduledActionResponse_schedule, v.Schedule)
+	}
 	if v.ScheduledActionDescription != nil {
 		s.WriteString(schemas.ScheduledActionResponse_scheduledActionDescription, *v.ScheduledActionDescription)
 	}
@@ -1262,7 +1282,9 @@ func (v *ScheduledActionResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.ScheduledActionResponse_state, string(v.State))
 	}
-	serializeTargetAction(s, schemas.ScheduledActionResponse_targetAction, v.TargetAction)
+	if v.TargetAction != nil {
+		serializeTargetAction(s, schemas.ScheduledActionResponse_targetAction, v.TargetAction)
+	}
 }
 func (v *ScheduledActionResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScheduledActionResponse, func(s *smithy.Schema) error {
@@ -1334,7 +1356,9 @@ func (v *ServerlessTrack) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TrackName != nil {
 		s.WriteString(schemas.ServerlessTrack_trackName, *v.TrackName)
 	}
-	serializeUpdateTargetsList(s, schemas.ServerlessTrack_updateTargets, v.UpdateTargets)
+	if v.UpdateTargets != nil {
+		serializeUpdateTargetsList(s, schemas.ServerlessTrack_updateTargets, v.UpdateTargets)
+	}
 	if v.WorkgroupVersion != nil {
 		s.WriteString(schemas.ServerlessTrack_workgroupVersion, *v.WorkgroupVersion)
 	}
@@ -1438,8 +1462,12 @@ func (v *Snapshot) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Snapshot) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.Snapshot_accountsWithProvisionedRestoreAccess, v.AccountsWithProvisionedRestoreAccess)
-	serializeAccountIdList(s, schemas.Snapshot_accountsWithRestoreAccess, v.AccountsWithRestoreAccess)
+	if v.AccountsWithProvisionedRestoreAccess != nil {
+		serializeAccountIdList(s, schemas.Snapshot_accountsWithProvisionedRestoreAccess, v.AccountsWithProvisionedRestoreAccess)
+	}
+	if v.AccountsWithRestoreAccess != nil {
+		serializeAccountIdList(s, schemas.Snapshot_accountsWithRestoreAccess, v.AccountsWithRestoreAccess)
+	}
 	if v.ActualIncrementalBackupSizeInMegaBytes != nil {
 		s.WriteFloat64(schemas.Snapshot_actualIncrementalBackupSizeInMegaBytes, *v.ActualIncrementalBackupSizeInMegaBytes)
 	}
@@ -2069,7 +2097,9 @@ func (v *VpcEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkInterfaceList(s, schemas.VpcEndpoint_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaceList(s, schemas.VpcEndpoint_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.VpcEndpoint_vpcEndpointId, *v.VpcEndpointId)
 	}
@@ -2259,11 +2289,15 @@ func (v *Workgroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseCapacity != nil {
 		s.WriteInt32(schemas.Workgroup_baseCapacity, *v.BaseCapacity)
 	}
-	serializeConfigParameterList(s, schemas.Workgroup_configParameters, v.ConfigParameters)
+	if v.ConfigParameters != nil {
+		serializeConfigParameterList(s, schemas.Workgroup_configParameters, v.ConfigParameters)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.Workgroup_creationDate, *v.CreationDate)
 	}
-	serializeVpcIds(s, schemas.Workgroup_crossAccountVpcs, v.CrossAccountVpcs)
+	if v.CrossAccountVpcs != nil {
+		serializeVpcIds(s, schemas.Workgroup_crossAccountVpcs, v.CrossAccountVpcs)
+	}
 	if v.CustomDomainCertificateArn != nil {
 		s.WriteString(schemas.Workgroup_customDomainCertificateArn, *v.CustomDomainCertificateArn)
 	}
@@ -2310,11 +2344,15 @@ func (v *Workgroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.Workgroup_publiclyAccessible, *v.PubliclyAccessible)
 	}
-	serializeSecurityGroupIdList(s, schemas.Workgroup_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.Workgroup_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Workgroup_status, string(v.Status))
 	}
-	serializeSubnetIdList(s, schemas.Workgroup_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.Workgroup_subnetIds, v.SubnetIds)
+	}
 	if v.TrackName != nil {
 		s.WriteString(schemas.Workgroup_trackName, *v.TrackName)
 	}

@@ -53,7 +53,9 @@ func (v *ListBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBlueprintsRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListBlueprintsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListBlueprintsRequest_Tags, v.Tags)
+	}
 }
 
 type ListBlueprintsOutput struct {
@@ -77,7 +79,9 @@ func (v *ListBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintNames(s, schemas.ListBlueprintsResponse_Blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeBlueprintNames(s, schemas.ListBlueprintsResponse_Blueprints, v.Blueprints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBlueprintsResponse_NextToken, *v.NextToken)
 	}

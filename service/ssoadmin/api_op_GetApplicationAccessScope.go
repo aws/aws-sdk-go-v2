@@ -81,7 +81,9 @@ func (v *GetApplicationAccessScopeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApplicationAccessScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScopeTargets(s, schemas.GetApplicationAccessScopeResponse_AuthorizedTargets, v.AuthorizedTargets)
+	if v.AuthorizedTargets != nil {
+		serializeScopeTargets(s, schemas.GetApplicationAccessScopeResponse_AuthorizedTargets, v.AuthorizedTargets)
+	}
 	if v.Scope != nil {
 		s.WriteString(schemas.GetApplicationAccessScopeResponse_Scope, *v.Scope)
 	}

@@ -67,8 +67,12 @@ func (v *SearchEntitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityTypes(s, schemas.SearchEntitiesRequest_entityTypes, v.EntityTypes)
-	serializeEntityFilters(s, schemas.SearchEntitiesRequest_filters, v.Filters)
+	if v.EntityTypes != nil {
+		serializeEntityTypes(s, schemas.SearchEntitiesRequest_entityTypes, v.EntityTypes)
+	}
+	if v.Filters != nil {
+		serializeEntityFilters(s, schemas.SearchEntitiesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchEntitiesRequest_maxResults, *v.MaxResults)
 	}
@@ -101,7 +105,9 @@ func (v *SearchEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityDescriptions(s, schemas.SearchEntitiesResponse_descriptions, v.Descriptions)
+	if v.Descriptions != nil {
+		serializeEntityDescriptions(s, schemas.SearchEntitiesResponse_descriptions, v.Descriptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchEntitiesResponse_nextToken, *v.NextToken)
 	}

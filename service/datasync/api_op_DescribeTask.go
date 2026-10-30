@@ -179,15 +179,21 @@ func (v *DescribeTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationLocationArn != nil {
 		s.WriteString(schemas.DescribeTaskResponse_DestinationLocationArn, *v.DestinationLocationArn)
 	}
-	serializeDestinationNetworkInterfaceArns(s, schemas.DescribeTaskResponse_DestinationNetworkInterfaceArns, v.DestinationNetworkInterfaceArns)
+	if v.DestinationNetworkInterfaceArns != nil {
+		serializeDestinationNetworkInterfaceArns(s, schemas.DescribeTaskResponse_DestinationNetworkInterfaceArns, v.DestinationNetworkInterfaceArns)
+	}
 	if v.ErrorCode != nil {
 		s.WriteString(schemas.DescribeTaskResponse_ErrorCode, *v.ErrorCode)
 	}
 	if v.ErrorDetail != nil {
 		s.WriteString(schemas.DescribeTaskResponse_ErrorDetail, *v.ErrorDetail)
 	}
-	serializeFilterList(s, schemas.DescribeTaskResponse_Excludes, v.Excludes)
-	serializeFilterList(s, schemas.DescribeTaskResponse_Includes, v.Includes)
+	if v.Excludes != nil {
+		serializeFilterList(s, schemas.DescribeTaskResponse_Excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeFilterList(s, schemas.DescribeTaskResponse_Includes, v.Includes)
+	}
 	if v.ManifestConfig != nil {
 		s.WriteStruct(schemas.DescribeTaskResponse_ManifestConfig)
 		v.ManifestConfig.SerializeMembers(s)
@@ -214,7 +220,9 @@ func (v *DescribeTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationArn != nil {
 		s.WriteString(schemas.DescribeTaskResponse_SourceLocationArn, *v.SourceLocationArn)
 	}
-	serializeSourceNetworkInterfaceArns(s, schemas.DescribeTaskResponse_SourceNetworkInterfaceArns, v.SourceNetworkInterfaceArns)
+	if v.SourceNetworkInterfaceArns != nil {
+		serializeSourceNetworkInterfaceArns(s, schemas.DescribeTaskResponse_SourceNetworkInterfaceArns, v.SourceNetworkInterfaceArns)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeTaskResponse_Status, string(v.Status))
 	}

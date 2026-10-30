@@ -113,7 +113,9 @@ func (v *ListReadSetUploadPartsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReadSetUploadPartsResponse_nextToken, *v.NextToken)
 	}
-	serializeReadSetUploadPartList(s, schemas.ListReadSetUploadPartsResponse_parts, v.Parts)
+	if v.Parts != nil {
+		serializeReadSetUploadPartList(s, schemas.ListReadSetUploadPartsResponse_parts, v.Parts)
+	}
 }
 func (v *ListReadSetUploadPartsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReadSetUploadPartsResponse, func(s *smithy.Schema) error {

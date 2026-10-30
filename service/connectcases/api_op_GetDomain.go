@@ -118,7 +118,9 @@ func (v *GetDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetDomainResponse_name, *v.Name)
 	}
-	serializeTags(s, schemas.GetDomainResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetDomainResponse_tags, v.Tags)
+	}
 }
 func (v *GetDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDomainResponse, func(s *smithy.Schema) error {

@@ -63,7 +63,9 @@ func (v *CreateDirectConnectGatewayAssociationProposalInput) Serialize(s smithy.
 }
 
 func (v *CreateDirectConnectGatewayAssociationProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	if v.AddAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	}
 	if v.DirectConnectGatewayId != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
 	}
@@ -73,7 +75,9 @@ func (v *CreateDirectConnectGatewayAssociationProposalInput) SerializeMembers(s 
 	if v.GatewayId != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayAssociationProposalRequest_gatewayId, *v.GatewayId)
 	}
-	serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway, v.RemoveAllowedPrefixesToDirectConnectGateway)
+	if v.RemoveAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway, v.RemoveAllowedPrefixesToDirectConnectGateway)
+	}
 }
 
 type CreateDirectConnectGatewayAssociationProposalOutput struct {

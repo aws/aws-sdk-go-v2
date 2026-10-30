@@ -121,8 +121,12 @@ func (v *CreateResolverRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleType != "" {
 		s.WriteString(schemas.CreateResolverRuleRequest_RuleType, string(v.RuleType))
 	}
-	serializeTagList(s, schemas.CreateResolverRuleRequest_Tags, v.Tags)
-	serializeTargetList(s, schemas.CreateResolverRuleRequest_TargetIps, v.TargetIps)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResolverRuleRequest_Tags, v.Tags)
+	}
+	if v.TargetIps != nil {
+		serializeTargetList(s, schemas.CreateResolverRuleRequest_TargetIps, v.TargetIps)
+	}
 }
 
 type CreateResolverRuleOutput struct {

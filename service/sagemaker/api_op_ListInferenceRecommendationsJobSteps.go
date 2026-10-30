@@ -105,7 +105,9 @@ func (v *ListInferenceRecommendationsJobStepsOutput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceRecommendationsJobStepsResponse_NextToken, *v.NextToken)
 	}
-	serializeInferenceRecommendationsJobSteps(s, schemas.ListInferenceRecommendationsJobStepsResponse_Steps, v.Steps)
+	if v.Steps != nil {
+		serializeInferenceRecommendationsJobSteps(s, schemas.ListInferenceRecommendationsJobStepsResponse_Steps, v.Steps)
+	}
 }
 func (v *ListInferenceRecommendationsJobStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListInferenceRecommendationsJobStepsResponse, func(s *smithy.Schema) error {

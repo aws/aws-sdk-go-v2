@@ -268,7 +268,9 @@ func (v *CreatePredictorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForecastHorizon != nil {
 		s.WriteInt32(schemas.CreatePredictorRequest_ForecastHorizon, *v.ForecastHorizon)
 	}
-	serializeForecastTypes(s, schemas.CreatePredictorRequest_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.CreatePredictorRequest_ForecastTypes, v.ForecastTypes)
+	}
 	if v.HPOConfig != nil {
 		s.WriteStruct(schemas.CreatePredictorRequest_HPOConfig)
 		v.HPOConfig.SerializeMembers(s)
@@ -291,8 +293,12 @@ func (v *CreatePredictorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PredictorName != nil {
 		s.WriteString(schemas.CreatePredictorRequest_PredictorName, *v.PredictorName)
 	}
-	serializeTags(s, schemas.CreatePredictorRequest_Tags, v.Tags)
-	serializeTrainingParameters(s, schemas.CreatePredictorRequest_TrainingParameters, v.TrainingParameters)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePredictorRequest_Tags, v.Tags)
+	}
+	if v.TrainingParameters != nil {
+		serializeTrainingParameters(s, schemas.CreatePredictorRequest_TrainingParameters, v.TrainingParameters)
+	}
 }
 
 type CreatePredictorOutput struct {

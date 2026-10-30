@@ -115,7 +115,9 @@ func (v *UpdateLocationHdfsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.UpdateLocationHdfsRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.UpdateLocationHdfsRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.UpdateLocationHdfsRequest_AuthenticationType, string(v.AuthenticationType))
 	}
@@ -147,7 +149,9 @@ func (v *UpdateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocationArn != nil {
 		s.WriteString(schemas.UpdateLocationHdfsRequest_LocationArn, *v.LocationArn)
 	}
-	serializeHdfsNameNodeList(s, schemas.UpdateLocationHdfsRequest_NameNodes, v.NameNodes)
+	if v.NameNodes != nil {
+		serializeHdfsNameNodeList(s, schemas.UpdateLocationHdfsRequest_NameNodes, v.NameNodes)
+	}
 	if v.QopConfiguration != nil {
 		s.WriteStruct(schemas.UpdateLocationHdfsRequest_QopConfiguration)
 		v.QopConfiguration.SerializeMembers(s)

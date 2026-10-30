@@ -76,7 +76,9 @@ func (v *ListS3TableIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListS3TableIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationSummaries(s, schemas.ListS3TableIntegrationsOutput_IntegrationSummaries, v.IntegrationSummaries)
+	if v.IntegrationSummaries != nil {
+		serializeIntegrationSummaries(s, schemas.ListS3TableIntegrationsOutput_IntegrationSummaries, v.IntegrationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListS3TableIntegrationsOutput_NextToken, *v.NextToken)
 	}

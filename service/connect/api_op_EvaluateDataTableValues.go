@@ -88,7 +88,9 @@ func (v *EvaluateDataTableValuesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.TimeZone != nil {
 		s.WriteString(schemas.EvaluateDataTableValuesRequest_TimeZone, *v.TimeZone)
 	}
-	serializeDataTableValueEvaluationSetList(s, schemas.EvaluateDataTableValuesRequest_Values, v.Values)
+	if v.Values != nil {
+		serializeDataTableValueEvaluationSetList(s, schemas.EvaluateDataTableValuesRequest_Values, v.Values)
+	}
 }
 
 type EvaluateDataTableValuesOutput struct {
@@ -119,7 +121,9 @@ func (v *EvaluateDataTableValuesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.EvaluateDataTableValuesResponse_NextToken, *v.NextToken)
 	}
-	serializeDataTableEvaluatedValueList(s, schemas.EvaluateDataTableValuesResponse_Values, v.Values)
+	if v.Values != nil {
+		serializeDataTableEvaluatedValueList(s, schemas.EvaluateDataTableValuesResponse_Values, v.Values)
+	}
 }
 func (v *EvaluateDataTableValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluateDataTableValuesResponse, func(s *smithy.Schema) error {

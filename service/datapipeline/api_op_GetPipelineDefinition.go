@@ -105,9 +105,15 @@ func (v *GetPipelineDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPipelineDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterObjectList(s, schemas.GetPipelineDefinitionOutput_parameterObjects, v.ParameterObjects)
-	serializeParameterValueList(s, schemas.GetPipelineDefinitionOutput_parameterValues, v.ParameterValues)
-	serializePipelineObjectList(s, schemas.GetPipelineDefinitionOutput_pipelineObjects, v.PipelineObjects)
+	if v.ParameterObjects != nil {
+		serializeParameterObjectList(s, schemas.GetPipelineDefinitionOutput_parameterObjects, v.ParameterObjects)
+	}
+	if v.ParameterValues != nil {
+		serializeParameterValueList(s, schemas.GetPipelineDefinitionOutput_parameterValues, v.ParameterValues)
+	}
+	if v.PipelineObjects != nil {
+		serializePipelineObjectList(s, schemas.GetPipelineDefinitionOutput_pipelineObjects, v.PipelineObjects)
+	}
 }
 func (v *GetPipelineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPipelineDefinitionOutput, func(s *smithy.Schema) error {

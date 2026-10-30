@@ -279,7 +279,9 @@ func (v *GetEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_FunctionArn, *v.FunctionArn)
 	}
-	serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.FunctionResponseTypes != nil {
+		serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	}
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_KMSKeyArn, *v.KMSKeyArn)
 	}
@@ -316,7 +318,9 @@ func (v *GetEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ProvisionedPollerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	if v.Queues != nil {
+		serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.EventSourceMappingConfiguration_ScalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -332,7 +336,9 @@ func (v *GetEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.SourceAccessConfigurations != nil {
+		serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	}
 	if v.StartingPosition != "" {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StartingPosition, string(v.StartingPosition))
 	}
@@ -345,7 +351,9 @@ func (v *GetEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StateTransitionReason != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StateTransitionReason, *v.StateTransitionReason)
 	}
-	serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	if v.Topics != nil {
+		serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	}
 	if v.TumblingWindowInSeconds != nil {
 		s.WriteInt32(schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
 	}

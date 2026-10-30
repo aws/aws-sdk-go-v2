@@ -112,7 +112,9 @@ func (v *ListReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReportsOutput_nextToken, *v.NextToken)
 	}
-	serializeReportArns(s, schemas.ListReportsOutput_reports, v.Reports)
+	if v.Reports != nil {
+		serializeReportArns(s, schemas.ListReportsOutput_reports, v.Reports)
+	}
 }
 func (v *ListReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReportsOutput, func(s *smithy.Schema) error {

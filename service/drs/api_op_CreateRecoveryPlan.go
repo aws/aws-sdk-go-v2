@@ -62,7 +62,9 @@ func (v *CreateRecoveryPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRecoveryPlanRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateRecoveryPlanRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRecoveryPlanRequest_tags, v.Tags)
+	}
 }
 
 type CreateRecoveryPlanOutput struct {

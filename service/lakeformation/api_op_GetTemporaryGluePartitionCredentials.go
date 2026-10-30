@@ -81,8 +81,12 @@ func (v *GetTemporaryGluePartitionCredentialsInput) SerializeMembers(s smithy.Sh
 		v.Partition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePermissionList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_Permissions, v.Permissions)
-	serializePermissionTypeList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_Permissions, v.Permissions)
+	}
+	if v.SupportedPermissionTypes != nil {
+		serializePermissionTypeList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	}
 	if v.TableArn != nil {
 		s.WriteString(schemas.GetTemporaryGluePartitionCredentialsRequest_TableArn, *v.TableArn)
 	}

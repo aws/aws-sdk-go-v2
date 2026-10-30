@@ -88,7 +88,9 @@ func (v *ListPagesByEngagementOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPagesByEngagementResult_NextToken, *v.NextToken)
 	}
-	serializePagesList(s, schemas.ListPagesByEngagementResult_Pages, v.Pages)
+	if v.Pages != nil {
+		serializePagesList(s, schemas.ListPagesByEngagementResult_Pages, v.Pages)
+	}
 }
 func (v *ListPagesByEngagementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPagesByEngagementResult, func(s *smithy.Schema) error {

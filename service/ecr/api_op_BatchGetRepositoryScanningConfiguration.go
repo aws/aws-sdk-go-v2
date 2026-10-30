@@ -43,7 +43,9 @@ func (v *BatchGetRepositoryScanningConfigurationInput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchGetRepositoryScanningConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScanningConfigurationRepositoryNameList(s, schemas.BatchGetRepositoryScanningConfigurationRequest_repositoryNames, v.RepositoryNames)
+	if v.RepositoryNames != nil {
+		serializeScanningConfigurationRepositoryNameList(s, schemas.BatchGetRepositoryScanningConfigurationRequest_repositoryNames, v.RepositoryNames)
+	}
 }
 
 type BatchGetRepositoryScanningConfigurationOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetRepositoryScanningConfigurationOutput) Serialize(s smithy.Shape
 }
 
 func (v *BatchGetRepositoryScanningConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositoryScanningConfigurationFailureList(s, schemas.BatchGetRepositoryScanningConfigurationResponse_failures, v.Failures)
-	serializeRepositoryScanningConfigurationList(s, schemas.BatchGetRepositoryScanningConfigurationResponse_scanningConfigurations, v.ScanningConfigurations)
+	if v.Failures != nil {
+		serializeRepositoryScanningConfigurationFailureList(s, schemas.BatchGetRepositoryScanningConfigurationResponse_failures, v.Failures)
+	}
+	if v.ScanningConfigurations != nil {
+		serializeRepositoryScanningConfigurationList(s, schemas.BatchGetRepositoryScanningConfigurationResponse_scanningConfigurations, v.ScanningConfigurations)
+	}
 }
 func (v *BatchGetRepositoryScanningConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetRepositoryScanningConfigurationResponse, func(s *smithy.Schema) error {

@@ -71,8 +71,12 @@ func (v *CreateVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVpcLinkRequest_name, *v.Name)
 	}
-	serializeMapOfStringToString(s, schemas.CreateVpcLinkRequest_tags, v.Tags)
-	serializeListOfString(s, schemas.CreateVpcLinkRequest_targetArns, v.TargetArns)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.CreateVpcLinkRequest_tags, v.Tags)
+	}
+	if v.TargetArns != nil {
+		serializeListOfString(s, schemas.CreateVpcLinkRequest_targetArns, v.TargetArns)
+	}
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -133,8 +137,12 @@ func (v *CreateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.VpcLink_statusMessage, *v.StatusMessage)
 	}
-	serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
-	serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.VpcLink_tags, v.Tags)
+	}
+	if v.TargetArns != nil {
+		serializeListOfString(s, schemas.VpcLink_targetArns, v.TargetArns)
+	}
 }
 func (v *CreateVpcLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcLink, func(s *smithy.Schema) error {

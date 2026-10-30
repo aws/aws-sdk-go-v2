@@ -99,7 +99,9 @@ func (v *GetEventIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetEventIntegrationResponse_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.GetEventIntegrationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetEventIntegrationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetEventIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEventIntegrationResponse, func(s *smithy.Schema) error {

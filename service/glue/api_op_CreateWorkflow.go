@@ -63,7 +63,9 @@ func (v *CreateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowRunProperties(s, schemas.CreateWorkflowRequest_DefaultRunProperties, v.DefaultRunProperties)
+	if v.DefaultRunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.CreateWorkflowRequest_DefaultRunProperties, v.DefaultRunProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_Description, *v.Description)
 	}
@@ -73,7 +75,9 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
+	}
 }
 
 type CreateWorkflowOutput struct {

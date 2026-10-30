@@ -92,7 +92,9 @@ func (v *StartContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.InstanceId != nil {
 		s.WriteString(schemas.StartContactEvaluationRequest_InstanceId, *v.InstanceId)
 	}
-	serializeTagMap(s, schemas.StartContactEvaluationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartContactEvaluationRequest_Tags, v.Tags)
+	}
 }
 
 type StartContactEvaluationOutput struct {

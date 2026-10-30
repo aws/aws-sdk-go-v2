@@ -250,7 +250,9 @@ func (v *UpdateMaintenanceWindowTaskInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ServiceRoleArn != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTaskRequest_ServiceRoleArn, *v.ServiceRoleArn)
 	}
-	serializeTargets(s, schemas.UpdateMaintenanceWindowTaskRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.UpdateMaintenanceWindowTaskRequest_Targets, v.Targets)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTaskRequest_TaskArn, *v.TaskArn)
 	}
@@ -259,7 +261,9 @@ func (v *UpdateMaintenanceWindowTaskInput) SerializeMembers(s smithy.ShapeSerial
 		v.TaskInvocationParameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMaintenanceWindowTaskParameters(s, schemas.UpdateMaintenanceWindowTaskRequest_TaskParameters, v.TaskParameters)
+	if v.TaskParameters != nil {
+		serializeMaintenanceWindowTaskParameters(s, schemas.UpdateMaintenanceWindowTaskRequest_TaskParameters, v.TaskParameters)
+	}
 	if v.WindowId != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTaskRequest_WindowId, *v.WindowId)
 	}
@@ -384,7 +388,9 @@ func (v *UpdateMaintenanceWindowTaskOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.ServiceRoleArn != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTaskResult_ServiceRoleArn, *v.ServiceRoleArn)
 	}
-	serializeTargets(s, schemas.UpdateMaintenanceWindowTaskResult_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.UpdateMaintenanceWindowTaskResult_Targets, v.Targets)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTaskResult_TaskArn, *v.TaskArn)
 	}
@@ -393,7 +399,9 @@ func (v *UpdateMaintenanceWindowTaskOutput) SerializeMembers(s smithy.ShapeSeria
 		v.TaskInvocationParameters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMaintenanceWindowTaskParameters(s, schemas.UpdateMaintenanceWindowTaskResult_TaskParameters, v.TaskParameters)
+	if v.TaskParameters != nil {
+		serializeMaintenanceWindowTaskParameters(s, schemas.UpdateMaintenanceWindowTaskResult_TaskParameters, v.TaskParameters)
+	}
 	if v.WindowId != nil {
 		s.WriteString(schemas.UpdateMaintenanceWindowTaskResult_WindowId, *v.WindowId)
 	}

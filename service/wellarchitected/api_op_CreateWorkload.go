@@ -215,12 +215,18 @@ func (v *CreateWorkloadInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkloadAccountIds(s, schemas.CreateWorkloadInput_AccountIds, v.AccountIds)
-	serializeWorkloadApplications(s, schemas.CreateWorkloadInput_Applications, v.Applications)
+	if v.AccountIds != nil {
+		serializeWorkloadAccountIds(s, schemas.CreateWorkloadInput_AccountIds, v.AccountIds)
+	}
+	if v.Applications != nil {
+		serializeWorkloadApplications(s, schemas.CreateWorkloadInput_Applications, v.Applications)
+	}
 	if v.ArchitecturalDesign != nil {
 		s.WriteString(schemas.CreateWorkloadInput_ArchitecturalDesign, *v.ArchitecturalDesign)
 	}
-	serializeWorkloadAwsRegions(s, schemas.CreateWorkloadInput_AwsRegions, v.AwsRegions)
+	if v.AwsRegions != nil {
+		serializeWorkloadAwsRegions(s, schemas.CreateWorkloadInput_AwsRegions, v.AwsRegions)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateWorkloadInput_ClientRequestToken, *v.ClientRequestToken)
 	}
@@ -246,18 +252,30 @@ func (v *CreateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.JiraConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWorkloadLenses(s, schemas.CreateWorkloadInput_Lenses, v.Lenses)
-	serializeWorkloadNonAwsRegions(s, schemas.CreateWorkloadInput_NonAwsRegions, v.NonAwsRegions)
+	if v.Lenses != nil {
+		serializeWorkloadLenses(s, schemas.CreateWorkloadInput_Lenses, v.Lenses)
+	}
+	if v.NonAwsRegions != nil {
+		serializeWorkloadNonAwsRegions(s, schemas.CreateWorkloadInput_NonAwsRegions, v.NonAwsRegions)
+	}
 	if v.Notes != nil {
 		s.WriteString(schemas.CreateWorkloadInput_Notes, *v.Notes)
 	}
-	serializeWorkloadPillarPriorities(s, schemas.CreateWorkloadInput_PillarPriorities, v.PillarPriorities)
-	serializeWorkloadProfileArns(s, schemas.CreateWorkloadInput_ProfileArns, v.ProfileArns)
+	if v.PillarPriorities != nil {
+		serializeWorkloadPillarPriorities(s, schemas.CreateWorkloadInput_PillarPriorities, v.PillarPriorities)
+	}
+	if v.ProfileArns != nil {
+		serializeWorkloadProfileArns(s, schemas.CreateWorkloadInput_ProfileArns, v.ProfileArns)
+	}
 	if v.ReviewOwner != nil {
 		s.WriteString(schemas.CreateWorkloadInput_ReviewOwner, *v.ReviewOwner)
 	}
-	serializeReviewTemplateArns(s, schemas.CreateWorkloadInput_ReviewTemplateArns, v.ReviewTemplateArns)
-	serializeTagMap(s, schemas.CreateWorkloadInput_Tags, v.Tags)
+	if v.ReviewTemplateArns != nil {
+		serializeReviewTemplateArns(s, schemas.CreateWorkloadInput_ReviewTemplateArns, v.ReviewTemplateArns)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkloadInput_Tags, v.Tags)
+	}
 	if v.WorkloadName != nil {
 		s.WriteString(schemas.CreateWorkloadInput_WorkloadName, *v.WorkloadName)
 	}

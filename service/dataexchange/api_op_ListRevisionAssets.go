@@ -111,7 +111,9 @@ func (v *ListRevisionAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRevisionAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAssetEntry(s, schemas.ListRevisionAssetsResponse_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeListOfAssetEntry(s, schemas.ListRevisionAssetsResponse_Assets, v.Assets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRevisionAssetsResponse_NextToken, *v.NextToken)
 	}

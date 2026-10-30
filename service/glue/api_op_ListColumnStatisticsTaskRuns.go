@@ -73,7 +73,9 @@ func (v *ListColumnStatisticsTaskRunsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListColumnStatisticsTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnStatisticsTaskRunIdList(s, schemas.ListColumnStatisticsTaskRunsResponse_ColumnStatisticsTaskRunIds, v.ColumnStatisticsTaskRunIds)
+	if v.ColumnStatisticsTaskRunIds != nil {
+		serializeColumnStatisticsTaskRunIdList(s, schemas.ListColumnStatisticsTaskRunsResponse_ColumnStatisticsTaskRunIds, v.ColumnStatisticsTaskRunIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListColumnStatisticsTaskRunsResponse_NextToken, *v.NextToken)
 	}

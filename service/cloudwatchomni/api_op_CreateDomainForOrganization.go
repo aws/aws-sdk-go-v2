@@ -80,11 +80,15 @@ func (v *CreateDomainForOrganizationInput) SerializeMembers(s smithy.ShapeSerial
 		v.IdentityProviderConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityProviderList(s, schemas.CreateDomainForOrganizationInput_identityProviders, v.IdentityProviders)
+	if v.IdentityProviders != nil {
+		serializeIdentityProviderList(s, schemas.CreateDomainForOrganizationInput_identityProviders, v.IdentityProviders)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDomainForOrganizationInput_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateDomainForOrganizationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainForOrganizationInput_tags, v.Tags)
+	}
 }
 
 type CreateDomainForOrganizationOutput struct {

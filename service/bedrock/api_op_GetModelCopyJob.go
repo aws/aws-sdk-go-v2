@@ -144,7 +144,9 @@ func (v *GetModelCopyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetModelName != nil {
 		s.WriteString(schemas.GetModelCopyJobResponse_targetModelName, *v.TargetModelName)
 	}
-	serializeTagList(s, schemas.GetModelCopyJobResponse_targetModelTags, v.TargetModelTags)
+	if v.TargetModelTags != nil {
+		serializeTagList(s, schemas.GetModelCopyJobResponse_targetModelTags, v.TargetModelTags)
+	}
 }
 func (v *GetModelCopyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetModelCopyJobResponse, func(s *smithy.Schema) error {

@@ -83,7 +83,9 @@ func (v *DescribeLagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLagList(s, schemas.Lags_lags, v.Lags)
+	if v.Lags != nil {
+		serializeLagList(s, schemas.Lags_lags, v.Lags)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.Lags_nextToken, *v.NextToken)
 	}

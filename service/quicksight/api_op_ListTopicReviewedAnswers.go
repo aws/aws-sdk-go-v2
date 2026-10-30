@@ -91,7 +91,9 @@ func (v *ListTopicReviewedAnswersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTopicReviewedAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTopicReviewedAnswers(s, schemas.ListTopicReviewedAnswersResponse_Answers, v.Answers)
+	if v.Answers != nil {
+		serializeTopicReviewedAnswers(s, schemas.ListTopicReviewedAnswersResponse_Answers, v.Answers)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListTopicReviewedAnswersResponse_RequestId, *v.RequestId)
 	}

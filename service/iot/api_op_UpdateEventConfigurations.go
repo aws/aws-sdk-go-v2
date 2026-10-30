@@ -45,7 +45,9 @@ func (v *UpdateEventConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEventConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventConfigurations(s, schemas.UpdateEventConfigurationsRequest_eventConfigurations, v.EventConfigurations)
+	if v.EventConfigurations != nil {
+		serializeEventConfigurations(s, schemas.UpdateEventConfigurationsRequest_eventConfigurations, v.EventConfigurations)
+	}
 }
 
 type UpdateEventConfigurationsOutput struct {

@@ -79,7 +79,9 @@ func (v *GetEstimatedCarbonEmissionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEstimatedCarbonEmissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmissionsTypeList(s, schemas.GetEstimatedCarbonEmissionsRequest_EmissionsTypes, v.EmissionsTypes)
+	if v.EmissionsTypes != nil {
+		serializeEmissionsTypeList(s, schemas.GetEstimatedCarbonEmissionsRequest_EmissionsTypes, v.EmissionsTypes)
+	}
 	if v.FilterBy != nil {
 		s.WriteStruct(schemas.GetEstimatedCarbonEmissionsRequest_FilterBy)
 		v.FilterBy.SerializeMembers(s)
@@ -93,7 +95,9 @@ func (v *GetEstimatedCarbonEmissionsInput) SerializeMembers(s smithy.ShapeSerial
 		v.GranularityConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDimensionList(s, schemas.GetEstimatedCarbonEmissionsRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeDimensionList(s, schemas.GetEstimatedCarbonEmissionsRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetEstimatedCarbonEmissionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -134,7 +138,9 @@ func (v *GetEstimatedCarbonEmissionsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetEstimatedCarbonEmissionsResponse_NextToken, *v.NextToken)
 	}
-	serializeEstimatedCarbonEmissionsList(s, schemas.GetEstimatedCarbonEmissionsResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeEstimatedCarbonEmissionsList(s, schemas.GetEstimatedCarbonEmissionsResponse_Results, v.Results)
+	}
 }
 func (v *GetEstimatedCarbonEmissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEstimatedCarbonEmissionsResponse, func(s *smithy.Schema) error {

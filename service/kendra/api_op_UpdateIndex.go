@@ -100,7 +100,9 @@ func (v *UpdateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateIndexRequest_Description, *v.Description)
 	}
-	serializeDocumentMetadataConfigurationList(s, schemas.UpdateIndexRequest_DocumentMetadataConfigurationUpdates, v.DocumentMetadataConfigurationUpdates)
+	if v.DocumentMetadataConfigurationUpdates != nil {
+		serializeDocumentMetadataConfigurationList(s, schemas.UpdateIndexRequest_DocumentMetadataConfigurationUpdates, v.DocumentMetadataConfigurationUpdates)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateIndexRequest_Id, *v.Id)
 	}
@@ -118,7 +120,9 @@ func (v *UpdateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.UserGroupResolutionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserTokenConfigurationList(s, schemas.UpdateIndexRequest_UserTokenConfigurations, v.UserTokenConfigurations)
+	if v.UserTokenConfigurations != nil {
+		serializeUserTokenConfigurationList(s, schemas.UpdateIndexRequest_UserTokenConfigurations, v.UserTokenConfigurations)
+	}
 }
 
 type UpdateIndexOutput struct {

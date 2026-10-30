@@ -100,8 +100,12 @@ func (v *DescribeDocumentPermissionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDocumentPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeDocumentPermissionResponse_AccountIds, v.AccountIds)
-	serializeAccountSharingInfoList(s, schemas.DescribeDocumentPermissionResponse_AccountSharingInfoList, v.AccountSharingInfoList)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DescribeDocumentPermissionResponse_AccountIds, v.AccountIds)
+	}
+	if v.AccountSharingInfoList != nil {
+		serializeAccountSharingInfoList(s, schemas.DescribeDocumentPermissionResponse_AccountSharingInfoList, v.AccountSharingInfoList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDocumentPermissionResponse_NextToken, *v.NextToken)
 	}

@@ -99,7 +99,9 @@ func (v *ListWorkforcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkforcesResponse_NextToken, *v.NextToken)
 	}
-	serializeWorkforces(s, schemas.ListWorkforcesResponse_Workforces, v.Workforces)
+	if v.Workforces != nil {
+		serializeWorkforces(s, schemas.ListWorkforcesResponse_Workforces, v.Workforces)
+	}
 }
 func (v *ListWorkforcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkforcesResponse, func(s *smithy.Schema) error {

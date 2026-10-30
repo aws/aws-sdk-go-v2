@@ -120,7 +120,9 @@ func (v *CreateHarvestJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScheduleConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateHarvestJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateHarvestJobRequest_Tags, v.Tags)
+	}
 }
 
 // The response object returned after creating a harvest job.
@@ -257,7 +259,9 @@ func (v *CreateHarvestJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateHarvestJobResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateHarvestJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateHarvestJobResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateHarvestJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateHarvestJobResponse, func(s *smithy.Schema) error {

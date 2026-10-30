@@ -62,7 +62,9 @@ func (v *ResolveComponentCandidatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResolveComponentCandidatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentCandidateList(s, schemas.ResolveComponentCandidatesRequest_componentCandidates, v.ComponentCandidates)
+	if v.ComponentCandidates != nil {
+		serializeComponentCandidateList(s, schemas.ResolveComponentCandidatesRequest_componentCandidates, v.ComponentCandidates)
+	}
 	if v.Platform != nil {
 		s.WriteStruct(schemas.ResolveComponentCandidatesRequest_platform)
 		v.Platform.SerializeMembers(s)
@@ -90,7 +92,9 @@ func (v *ResolveComponentCandidatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResolveComponentCandidatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResolvedComponentVersionsList(s, schemas.ResolveComponentCandidatesResponse_resolvedComponentVersions, v.ResolvedComponentVersions)
+	if v.ResolvedComponentVersions != nil {
+		serializeResolvedComponentVersionsList(s, schemas.ResolveComponentCandidatesResponse_resolvedComponentVersions, v.ResolvedComponentVersions)
+	}
 }
 func (v *ResolveComponentCandidatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResolveComponentCandidatesResponse, func(s *smithy.Schema) error {

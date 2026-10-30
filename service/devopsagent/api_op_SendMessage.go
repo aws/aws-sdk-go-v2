@@ -79,7 +79,9 @@ func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.SendMessageRequest_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeAssetIdList(s, schemas.SendMessageRequest_assetIds, v.AssetIds)
+	if v.AssetIds != nil {
+		serializeAssetIdList(s, schemas.SendMessageRequest_assetIds, v.AssetIds)
+	}
 	if v.Content != nil {
 		s.WriteString(schemas.SendMessageRequest_content, *v.Content)
 	}

@@ -111,7 +111,9 @@ func (v *DeleteRegistrationFieldValueOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.DeleteRegistrationFieldValueResult_RegistrationId, *v.RegistrationId)
 	}
-	serializeSelectChoiceList(s, schemas.DeleteRegistrationFieldValueResult_SelectChoices, v.SelectChoices)
+	if v.SelectChoices != nil {
+		serializeSelectChoiceList(s, schemas.DeleteRegistrationFieldValueResult_SelectChoices, v.SelectChoices)
+	}
 	if v.TextValue != nil {
 		s.WriteString(schemas.DeleteRegistrationFieldValueResult_TextValue, *v.TextValue)
 	}

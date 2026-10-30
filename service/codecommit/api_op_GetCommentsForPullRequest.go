@@ -114,7 +114,9 @@ func (v *GetCommentsForPullRequestOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCommentsForPullRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommentsForPullRequestData(s, schemas.GetCommentsForPullRequestOutput_commentsForPullRequestData, v.CommentsForPullRequestData)
+	if v.CommentsForPullRequestData != nil {
+		serializeCommentsForPullRequestData(s, schemas.GetCommentsForPullRequestOutput_commentsForPullRequestData, v.CommentsForPullRequestData)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCommentsForPullRequestOutput_nextToken, *v.NextToken)
 	}

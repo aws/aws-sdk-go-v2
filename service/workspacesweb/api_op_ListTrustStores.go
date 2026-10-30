@@ -79,7 +79,9 @@ func (v *ListTrustStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrustStoresResponse_nextToken, *v.NextToken)
 	}
-	serializeTrustStoreSummaryList(s, schemas.ListTrustStoresResponse_trustStores, v.TrustStores)
+	if v.TrustStores != nil {
+		serializeTrustStoreSummaryList(s, schemas.ListTrustStoresResponse_trustStores, v.TrustStores)
+	}
 }
 func (v *ListTrustStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrustStoresResponse, func(s *smithy.Schema) error {

@@ -94,7 +94,9 @@ func (v *StartSpeechSynthesisStreamInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.StartSpeechSynthesisStreamInput_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLexiconNameList(s, schemas.StartSpeechSynthesisStreamInput_LexiconNames, v.LexiconNames)
+	if v.LexiconNames != nil {
+		serializeLexiconNameList(s, schemas.StartSpeechSynthesisStreamInput_LexiconNames, v.LexiconNames)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.StartSpeechSynthesisStreamInput_OutputFormat, string(v.OutputFormat))
 	}

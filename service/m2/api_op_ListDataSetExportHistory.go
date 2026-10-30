@@ -87,7 +87,9 @@ func (v *ListDataSetExportHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataSetExportHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSetExportTaskList(s, schemas.ListDataSetExportHistoryResponse_dataSetExportTasks, v.DataSetExportTasks)
+	if v.DataSetExportTasks != nil {
+		serializeDataSetExportTaskList(s, schemas.ListDataSetExportHistoryResponse_dataSetExportTasks, v.DataSetExportTasks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSetExportHistoryResponse_nextToken, *v.NextToken)
 	}

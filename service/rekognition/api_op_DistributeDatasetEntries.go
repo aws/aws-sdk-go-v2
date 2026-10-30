@@ -62,7 +62,9 @@ func (v *DistributeDatasetEntriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DistributeDatasetEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistributeDatasetMetadataList(s, schemas.DistributeDatasetEntriesRequest_Datasets, v.Datasets)
+	if v.Datasets != nil {
+		serializeDistributeDatasetMetadataList(s, schemas.DistributeDatasetEntriesRequest_Datasets, v.Datasets)
+	}
 }
 
 type DistributeDatasetEntriesOutput struct {

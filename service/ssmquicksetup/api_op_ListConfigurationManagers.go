@@ -49,7 +49,9 @@ func (v *ListConfigurationManagersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationManagersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFiltersList(s, schemas.ListConfigurationManagersInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFiltersList(s, schemas.ListConfigurationManagersInput_Filters, v.Filters)
+	}
 	if v.MaxItems != nil {
 		s.WriteInt32(schemas.ListConfigurationManagersInput_MaxItems, *v.MaxItems)
 	}
@@ -80,7 +82,9 @@ func (v *ListConfigurationManagersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationManagersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationManagerList(s, schemas.ListConfigurationManagersOutput_ConfigurationManagersList, v.ConfigurationManagersList)
+	if v.ConfigurationManagersList != nil {
+		serializeConfigurationManagerList(s, schemas.ListConfigurationManagersOutput_ConfigurationManagersList, v.ConfigurationManagersList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationManagersOutput_NextToken, *v.NextToken)
 	}

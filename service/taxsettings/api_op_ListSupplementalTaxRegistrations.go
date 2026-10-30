@@ -79,7 +79,9 @@ func (v *ListSupplementalTaxRegistrationsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSupplementalTaxRegistrationsResponse_nextToken, *v.NextToken)
 	}
-	serializeSupplementalTaxRegistrationList(s, schemas.ListSupplementalTaxRegistrationsResponse_taxRegistrations, v.TaxRegistrations)
+	if v.TaxRegistrations != nil {
+		serializeSupplementalTaxRegistrationList(s, schemas.ListSupplementalTaxRegistrationsResponse_taxRegistrations, v.TaxRegistrations)
+	}
 }
 func (v *ListSupplementalTaxRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSupplementalTaxRegistrationsResponse, func(s *smithy.Schema) error {

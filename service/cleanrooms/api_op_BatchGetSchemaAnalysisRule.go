@@ -52,7 +52,9 @@ func (v *BatchGetSchemaAnalysisRuleInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.CollaborationIdentifier != nil {
 		s.WriteString(schemas.BatchGetSchemaAnalysisRuleInput_collaborationIdentifier, *v.CollaborationIdentifier)
 	}
-	serializeSchemaAnalysisRuleRequestList(s, schemas.BatchGetSchemaAnalysisRuleInput_schemaAnalysisRuleRequests, v.SchemaAnalysisRuleRequests)
+	if v.SchemaAnalysisRuleRequests != nil {
+		serializeSchemaAnalysisRuleRequestList(s, schemas.BatchGetSchemaAnalysisRuleInput_schemaAnalysisRuleRequests, v.SchemaAnalysisRuleRequests)
+	}
 }
 
 type BatchGetSchemaAnalysisRuleOutput struct {
@@ -81,8 +83,12 @@ func (v *BatchGetSchemaAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSchemaAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaAnalysisRuleList(s, schemas.BatchGetSchemaAnalysisRuleOutput_analysisRules, v.AnalysisRules)
-	serializeBatchGetSchemaAnalysisRuleErrorList(s, schemas.BatchGetSchemaAnalysisRuleOutput_errors, v.Errors)
+	if v.AnalysisRules != nil {
+		serializeSchemaAnalysisRuleList(s, schemas.BatchGetSchemaAnalysisRuleOutput_analysisRules, v.AnalysisRules)
+	}
+	if v.Errors != nil {
+		serializeBatchGetSchemaAnalysisRuleErrorList(s, schemas.BatchGetSchemaAnalysisRuleOutput_errors, v.Errors)
+	}
 }
 func (v *BatchGetSchemaAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSchemaAnalysisRuleOutput, func(s *smithy.Schema) error {

@@ -62,7 +62,9 @@ func (v *UpdateSessionDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantId != nil {
 		s.WriteString(schemas.UpdateSessionDataRequest_assistantId, *v.AssistantId)
 	}
-	serializeRuntimeSessionDataList(s, schemas.UpdateSessionDataRequest_data, v.Data)
+	if v.Data != nil {
+		serializeRuntimeSessionDataList(s, schemas.UpdateSessionDataRequest_data, v.Data)
+	}
 	if v.Namespace != "" {
 		s.WriteString(schemas.UpdateSessionDataRequest_namespace, string(v.Namespace))
 	}
@@ -107,7 +109,9 @@ func (v *UpdateSessionDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSessionDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuntimeSessionDataList(s, schemas.UpdateSessionDataResponse_data, v.Data)
+	if v.Data != nil {
+		serializeRuntimeSessionDataList(s, schemas.UpdateSessionDataResponse_data, v.Data)
+	}
 	if v.Namespace != "" {
 		s.WriteString(schemas.UpdateSessionDataResponse_namespace, string(v.Namespace))
 	}

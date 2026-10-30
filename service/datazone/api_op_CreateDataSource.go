@@ -101,11 +101,15 @@ func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormInputList(s, schemas.CreateDataSourceInput_assetFormsInput, v.AssetFormsInput)
+	if v.AssetFormsInput != nil {
+		serializeFormInputList(s, schemas.CreateDataSourceInput_assetFormsInput, v.AssetFormsInput)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDataSourceInput_clientToken, *v.ClientToken)
 	}
-	serializeDataSourceConfigurationInput(s, schemas.CreateDataSourceInput_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeDataSourceConfigurationInput(s, schemas.CreateDataSourceInput_configuration, v.Configuration)
+	}
 	if v.ConnectionIdentifier != nil {
 		s.WriteString(schemas.CreateDataSourceInput_connectionIdentifier, *v.ConnectionIdentifier)
 	}
@@ -237,8 +241,12 @@ func (v *CreateDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormOutputList(s, schemas.CreateDataSourceOutput_assetFormsOutput, v.AssetFormsOutput)
-	serializeDataSourceConfigurationOutput(s, schemas.CreateDataSourceOutput_configuration, v.Configuration)
+	if v.AssetFormsOutput != nil {
+		serializeFormOutputList(s, schemas.CreateDataSourceOutput_assetFormsOutput, v.AssetFormsOutput)
+	}
+	if v.Configuration != nil {
+		serializeDataSourceConfigurationOutput(s, schemas.CreateDataSourceOutput_configuration, v.Configuration)
+	}
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.CreateDataSourceOutput_connectionId, *v.ConnectionId)
 	}

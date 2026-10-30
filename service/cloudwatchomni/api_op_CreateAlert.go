@@ -93,18 +93,24 @@ func (v *CreateAlertInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAlertInput_name, *v.Name)
 	}
-	serializeNotificationRuleList(s, schemas.CreateAlertInput_notificationRules, v.NotificationRules)
+	if v.NotificationRules != nil {
+		serializeNotificationRuleList(s, schemas.CreateAlertInput_notificationRules, v.NotificationRules)
+	}
 	if v.NotificationsEnabled != nil {
 		s.WriteBool(schemas.CreateAlertInput_notificationsEnabled, *v.NotificationsEnabled)
 	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.CreateAlertInput_profileId, *v.ProfileId)
 	}
-	serializeRule(s, schemas.CreateAlertInput_rule, v.Rule)
+	if v.Rule != nil {
+		serializeRule(s, schemas.CreateAlertInput_rule, v.Rule)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.CreateAlertInput_spaceId, *v.SpaceId)
 	}
-	serializeTagMap(s, schemas.CreateAlertInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAlertInput_tags, v.Tags)
+	}
 }
 
 type CreateAlertOutput struct {

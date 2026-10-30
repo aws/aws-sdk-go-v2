@@ -49,7 +49,9 @@ func (v *ListIntegrationTablePropertiesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListIntegrationTablePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationTablePropertiesFilterList(s, schemas.ListIntegrationTablePropertiesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeIntegrationTablePropertiesFilterList(s, schemas.ListIntegrationTablePropertiesRequest_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListIntegrationTablePropertiesRequest_Marker, *v.Marker)
 	}
@@ -80,7 +82,9 @@ func (v *ListIntegrationTablePropertiesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListIntegrationTablePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationTablePropertiesList(s, schemas.ListIntegrationTablePropertiesResponse_IntegrationTablePropertiesList, v.IntegrationTablePropertiesList)
+	if v.IntegrationTablePropertiesList != nil {
+		serializeIntegrationTablePropertiesList(s, schemas.ListIntegrationTablePropertiesResponse_IntegrationTablePropertiesList, v.IntegrationTablePropertiesList)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListIntegrationTablePropertiesResponse_Marker, *v.Marker)
 	}

@@ -90,7 +90,9 @@ func (v *DescribeComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApplicationComponent.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceList(s, schemas.DescribeComponentResponse_ResourceList, v.ResourceList)
+	if v.ResourceList != nil {
+		serializeResourceList(s, schemas.DescribeComponentResponse_ResourceList, v.ResourceList)
+	}
 }
 func (v *DescribeComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeComponentResponse, func(s *smithy.Schema) error {

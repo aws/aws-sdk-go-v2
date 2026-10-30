@@ -93,7 +93,9 @@ func (v *ListVirtualClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualClustersRequest_nextToken, *v.NextToken)
 	}
-	serializeVirtualClusterStates(s, schemas.ListVirtualClustersRequest_states, v.States)
+	if v.States != nil {
+		serializeVirtualClusterStates(s, schemas.ListVirtualClustersRequest_states, v.States)
+	}
 }
 
 type ListVirtualClustersOutput struct {
@@ -120,7 +122,9 @@ func (v *ListVirtualClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualClustersResponse_nextToken, *v.NextToken)
 	}
-	serializeVirtualClusters(s, schemas.ListVirtualClustersResponse_virtualClusters, v.VirtualClusters)
+	if v.VirtualClusters != nil {
+		serializeVirtualClusters(s, schemas.ListVirtualClustersResponse_virtualClusters, v.VirtualClusters)
+	}
 }
 func (v *ListVirtualClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVirtualClustersResponse, func(s *smithy.Schema) error {

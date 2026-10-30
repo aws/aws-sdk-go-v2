@@ -61,7 +61,9 @@ func (v *BatchGetAssetPropertyValueHistoryInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *BatchGetAssetPropertyValueHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyValueHistoryEntries(s, schemas.BatchGetAssetPropertyValueHistoryRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchGetAssetPropertyValueHistoryEntries(s, schemas.BatchGetAssetPropertyValueHistoryRequest_entries, v.Entries)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.BatchGetAssetPropertyValueHistoryRequest_maxResults, *v.MaxResults)
 	}
@@ -109,12 +111,18 @@ func (v *BatchGetAssetPropertyValueHistoryOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *BatchGetAssetPropertyValueHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyValueHistoryErrorEntries(s, schemas.BatchGetAssetPropertyValueHistoryResponse_errorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeBatchGetAssetPropertyValueHistoryErrorEntries(s, schemas.BatchGetAssetPropertyValueHistoryResponse_errorEntries, v.ErrorEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyValueHistoryResponse_nextToken, *v.NextToken)
 	}
-	serializeBatchGetAssetPropertyValueHistorySkippedEntries(s, schemas.BatchGetAssetPropertyValueHistoryResponse_skippedEntries, v.SkippedEntries)
-	serializeBatchGetAssetPropertyValueHistorySuccessEntries(s, schemas.BatchGetAssetPropertyValueHistoryResponse_successEntries, v.SuccessEntries)
+	if v.SkippedEntries != nil {
+		serializeBatchGetAssetPropertyValueHistorySkippedEntries(s, schemas.BatchGetAssetPropertyValueHistoryResponse_skippedEntries, v.SkippedEntries)
+	}
+	if v.SuccessEntries != nil {
+		serializeBatchGetAssetPropertyValueHistorySuccessEntries(s, schemas.BatchGetAssetPropertyValueHistoryResponse_successEntries, v.SuccessEntries)
+	}
 }
 func (v *BatchGetAssetPropertyValueHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAssetPropertyValueHistoryResponse, func(s *smithy.Schema) error {

@@ -122,7 +122,9 @@ func (v *SearchRoutingProfilesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchRoutingProfilesResponse_NextToken, *v.NextToken)
 	}
-	serializeRoutingProfileList(s, schemas.SearchRoutingProfilesResponse_RoutingProfiles, v.RoutingProfiles)
+	if v.RoutingProfiles != nil {
+		serializeRoutingProfileList(s, schemas.SearchRoutingProfilesResponse_RoutingProfiles, v.RoutingProfiles)
+	}
 }
 func (v *SearchRoutingProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchRoutingProfilesResponse, func(s *smithy.Schema) error {

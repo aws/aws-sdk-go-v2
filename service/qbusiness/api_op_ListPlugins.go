@@ -89,7 +89,9 @@ func (v *ListPluginsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPluginsResponse_nextToken, *v.NextToken)
 	}
-	serializePlugins(s, schemas.ListPluginsResponse_plugins, v.Plugins)
+	if v.Plugins != nil {
+		serializePlugins(s, schemas.ListPluginsResponse_plugins, v.Plugins)
+	}
 }
 func (v *ListPluginsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPluginsResponse, func(s *smithy.Schema) error {

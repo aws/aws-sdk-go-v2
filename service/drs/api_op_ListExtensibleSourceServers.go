@@ -101,7 +101,9 @@ func (v *ListExtensibleSourceServersOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListExtensibleSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStagingSourceServersList(s, schemas.ListExtensibleSourceServersResponse_items, v.Items)
+	if v.Items != nil {
+		serializeStagingSourceServersList(s, schemas.ListExtensibleSourceServersResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExtensibleSourceServersResponse_nextToken, *v.NextToken)
 	}

@@ -88,7 +88,9 @@ func (v *ListSourceViewsForBillingViewOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceViewsForBillingViewResponse_nextToken, *v.NextToken)
 	}
-	serializeBillingViewSourceViewsList(s, schemas.ListSourceViewsForBillingViewResponse_sourceViews, v.SourceViews)
+	if v.SourceViews != nil {
+		serializeBillingViewSourceViewsList(s, schemas.ListSourceViewsForBillingViewResponse_sourceViews, v.SourceViews)
+	}
 }
 func (v *ListSourceViewsForBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSourceViewsForBillingViewResponse, func(s *smithy.Schema) error {

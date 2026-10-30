@@ -110,7 +110,9 @@ func (v *ListPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPropertiesResponse_nextToken, *v.NextToken)
 	}
-	serializePropertySummaries(s, schemas.ListPropertiesResponse_propertySummaries, v.PropertySummaries)
+	if v.PropertySummaries != nil {
+		serializePropertySummaries(s, schemas.ListPropertiesResponse_propertySummaries, v.PropertySummaries)
+	}
 }
 func (v *ListPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPropertiesResponse, func(s *smithy.Schema) error {

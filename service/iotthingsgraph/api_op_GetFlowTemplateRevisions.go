@@ -95,7 +95,9 @@ func (v *GetFlowTemplateRevisionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFlowTemplateRevisionsResponse_nextToken, *v.NextToken)
 	}
-	serializeFlowTemplateSummaries(s, schemas.GetFlowTemplateRevisionsResponse_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeFlowTemplateSummaries(s, schemas.GetFlowTemplateRevisionsResponse_summaries, v.Summaries)
+	}
 }
 func (v *GetFlowTemplateRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFlowTemplateRevisionsResponse, func(s *smithy.Schema) error {

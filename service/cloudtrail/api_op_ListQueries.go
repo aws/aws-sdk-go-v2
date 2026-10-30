@@ -121,7 +121,9 @@ func (v *ListQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueriesResponse_NextToken, *v.NextToken)
 	}
-	serializeQueries(s, schemas.ListQueriesResponse_Queries, v.Queries)
+	if v.Queries != nil {
+		serializeQueries(s, schemas.ListQueriesResponse_Queries, v.Queries)
+	}
 }
 func (v *ListQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueriesResponse, func(s *smithy.Schema) error {

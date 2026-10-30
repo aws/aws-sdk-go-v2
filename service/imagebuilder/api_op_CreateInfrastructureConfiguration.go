@@ -175,7 +175,9 @@ func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 	if v.InstanceProfileName != nil {
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_instanceProfileName, *v.InstanceProfileName)
 	}
-	serializeInstanceTypeList(s, schemas.CreateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeInstanceTypeList(s, schemas.CreateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	}
 	if v.KeyPair != nil {
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_keyPair, *v.KeyPair)
 	}
@@ -197,15 +199,21 @@ func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.Shape
 		v.Placement.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTagMap(s, schemas.CreateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
-	serializeSecurityGroupIds(s, schemas.CreateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.ResourceTags != nil {
+		serializeResourceTagMap(s, schemas.CreateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_snsTopicArn, *v.SnsTopicArn)
 	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_subnetId, *v.SubnetId)
 	}
-	serializeTagMap(s, schemas.CreateInfrastructureConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateInfrastructureConfigurationRequest_tags, v.Tags)
+	}
 	if v.TerminateInstanceOnCompletion != nil {
 		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_terminateInstanceOnCompletion, *v.TerminateInstanceOnCompletion)
 	}

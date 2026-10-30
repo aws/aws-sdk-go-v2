@@ -73,7 +73,9 @@ func (v *DeleteKnowledgeBaseDocumentsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.DataSourceId != nil {
 		s.WriteString(schemas.DeleteKnowledgeBaseDocumentsRequest_dataSourceId, *v.DataSourceId)
 	}
-	serializeDocumentIdentifiers(s, schemas.DeleteKnowledgeBaseDocumentsRequest_documentIdentifiers, v.DocumentIdentifiers)
+	if v.DocumentIdentifiers != nil {
+		serializeDocumentIdentifiers(s, schemas.DeleteKnowledgeBaseDocumentsRequest_documentIdentifiers, v.DocumentIdentifiers)
+	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.DeleteKnowledgeBaseDocumentsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
@@ -98,7 +100,9 @@ func (v *DeleteKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DeleteKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKnowledgeBaseDocumentDetails(s, schemas.DeleteKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+	if v.DocumentDetails != nil {
+		serializeKnowledgeBaseDocumentDetails(s, schemas.DeleteKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+	}
 }
 func (v *DeleteKnowledgeBaseDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteKnowledgeBaseDocumentsResponse, func(s *smithy.Schema) error {

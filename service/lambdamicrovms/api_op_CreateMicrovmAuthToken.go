@@ -56,7 +56,9 @@ func (v *CreateMicrovmAuthTokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMicrovmAuthTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPortSpecification(s, schemas.CreateMicrovmAuthTokenRequest_allowedPorts, v.AllowedPorts)
+	if v.AllowedPorts != nil {
+		serializeListOfPortSpecification(s, schemas.CreateMicrovmAuthTokenRequest_allowedPorts, v.AllowedPorts)
+	}
 	if v.ExpirationInMinutes != nil {
 		s.WriteInt32(schemas.CreateMicrovmAuthTokenRequest_expirationInMinutes, *v.ExpirationInMinutes)
 	}
@@ -86,7 +88,9 @@ func (v *CreateMicrovmAuthTokenOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateMicrovmAuthTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTokenParts(s, schemas.CreateMicrovmAuthTokenResponse_authToken, v.AuthToken)
+	if v.AuthToken != nil {
+		serializeTokenParts(s, schemas.CreateMicrovmAuthTokenResponse_authToken, v.AuthToken)
+	}
 }
 func (v *CreateMicrovmAuthTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMicrovmAuthTokenResponse, func(s *smithy.Schema) error {

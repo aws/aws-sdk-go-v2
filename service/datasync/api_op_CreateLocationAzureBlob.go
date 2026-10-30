@@ -142,7 +142,9 @@ func (v *CreateLocationAzureBlobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AccessTier != "" {
 		s.WriteString(schemas.CreateLocationAzureBlobRequest_AccessTier, string(v.AccessTier))
 	}
-	serializeAgentArnList(s, schemas.CreateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.CreateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.CreateLocationAzureBlobRequest_AuthenticationType, string(v.AuthenticationType))
 	}
@@ -170,7 +172,9 @@ func (v *CreateLocationAzureBlobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationAzureBlobRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationAzureBlobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationAzureBlobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLocationAzureBlobOutput struct {

@@ -117,11 +117,15 @@ func (v *GetResourceSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceOwner != "" {
 		s.WriteString(schemas.GetResourceSharesRequest_resourceOwner, string(v.ResourceOwner))
 	}
-	serializeResourceShareArnList(s, schemas.GetResourceSharesRequest_resourceShareArns, v.ResourceShareArns)
+	if v.ResourceShareArns != nil {
+		serializeResourceShareArnList(s, schemas.GetResourceSharesRequest_resourceShareArns, v.ResourceShareArns)
+	}
 	if v.ResourceShareStatus != "" {
 		s.WriteString(schemas.GetResourceSharesRequest_resourceShareStatus, string(v.ResourceShareStatus))
 	}
-	serializeTagFilters(s, schemas.GetResourceSharesRequest_tagFilters, v.TagFilters)
+	if v.TagFilters != nil {
+		serializeTagFilters(s, schemas.GetResourceSharesRequest_tagFilters, v.TagFilters)
+	}
 }
 
 type GetResourceSharesOutput struct {
@@ -152,7 +156,9 @@ func (v *GetResourceSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceSharesResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceShareList(s, schemas.GetResourceSharesResponse_resourceShares, v.ResourceShares)
+	if v.ResourceShares != nil {
+		serializeResourceShareList(s, schemas.GetResourceSharesResponse_resourceShares, v.ResourceShares)
+	}
 }
 func (v *GetResourceSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceSharesResponse, func(s *smithy.Schema) error {

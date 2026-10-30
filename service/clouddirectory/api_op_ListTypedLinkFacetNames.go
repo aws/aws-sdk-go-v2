@@ -85,7 +85,9 @@ func (v *ListTypedLinkFacetNamesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTypedLinkFacetNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkNameList(s, schemas.ListTypedLinkFacetNamesResponse_FacetNames, v.FacetNames)
+	if v.FacetNames != nil {
+		serializeTypedLinkNameList(s, schemas.ListTypedLinkFacetNamesResponse_FacetNames, v.FacetNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTypedLinkFacetNamesResponse_NextToken, *v.NextToken)
 	}

@@ -56,7 +56,9 @@ func (v *DeleteProjectMembershipInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.DeleteProjectMembershipInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeMember(s, schemas.DeleteProjectMembershipInput_member, v.Member)
+	if v.Member != nil {
+		serializeMember(s, schemas.DeleteProjectMembershipInput_member, v.Member)
+	}
 	if v.ProjectIdentifier != nil {
 		s.WriteString(schemas.DeleteProjectMembershipInput_projectIdentifier, *v.ProjectIdentifier)
 	}

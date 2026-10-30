@@ -51,7 +51,9 @@ func (v *AddBridgeOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BridgeArn != nil {
 		s.WriteString(schemas.AddBridgeOutputsRequest_BridgeArn, *v.BridgeArn)
 	}
-	serialize__listOfAddBridgeOutputRequest(s, schemas.AddBridgeOutputsRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfAddBridgeOutputRequest(s, schemas.AddBridgeOutputsRequest_Outputs, v.Outputs)
+	}
 }
 
 type AddBridgeOutputsOutput struct {
@@ -78,7 +80,9 @@ func (v *AddBridgeOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BridgeArn != nil {
 		s.WriteString(schemas.AddBridgeOutputsResponse_BridgeArn, *v.BridgeArn)
 	}
-	serialize__listOfBridgeOutput(s, schemas.AddBridgeOutputsResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfBridgeOutput(s, schemas.AddBridgeOutputsResponse_Outputs, v.Outputs)
+	}
 }
 func (v *AddBridgeOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddBridgeOutputsResponse, func(s *smithy.Schema) error {

@@ -122,7 +122,9 @@ func (v *ReverseGeocodeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReverseGeocodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReverseGeocodeAdditionalFeatureList(s, schemas.ReverseGeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AdditionalFeatures != nil {
+		serializeReverseGeocodeAdditionalFeatureList(s, schemas.ReverseGeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
 	if v.AddressNamesMode != "" {
 		s.WriteString(schemas.ReverseGeocodeRequest_AddressNamesMode, string(v.AddressNamesMode))
 	}
@@ -149,7 +151,9 @@ func (v *ReverseGeocodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.ReverseGeocodeRequest_PoliticalView, *v.PoliticalView)
 	}
-	serializePosition(s, schemas.ReverseGeocodeRequest_QueryPosition, v.QueryPosition)
+	if v.QueryPosition != nil {
+		serializePosition(s, schemas.ReverseGeocodeRequest_QueryPosition, v.QueryPosition)
+	}
 	if v.QueryRadius != nil {
 		s.WriteInt64(schemas.ReverseGeocodeRequest_QueryRadius, *v.QueryRadius)
 	}
@@ -185,7 +189,9 @@ func (v *ReverseGeocodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.ReverseGeocodeResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeReverseGeocodeResultItemList(s, schemas.ReverseGeocodeResponse_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeReverseGeocodeResultItemList(s, schemas.ReverseGeocodeResponse_ResultItems, v.ResultItems)
+	}
 }
 func (v *ReverseGeocodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReverseGeocodeResponse, func(s *smithy.Schema) error {

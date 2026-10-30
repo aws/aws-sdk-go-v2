@@ -43,7 +43,9 @@ func (v *BatchGetAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdSet(s, schemas.BatchGetAccountStatusRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdSet(s, schemas.BatchGetAccountStatusRequest_accountIds, v.AccountIds)
+	}
 }
 func (v *BatchGetAccountStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAccountStatusRequest, func(s *smithy.Schema) error {
@@ -80,8 +82,12 @@ func (v *BatchGetAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountStateList(s, schemas.BatchGetAccountStatusResponse_accounts, v.Accounts)
-	serializeFailedAccountList(s, schemas.BatchGetAccountStatusResponse_failedAccounts, v.FailedAccounts)
+	if v.Accounts != nil {
+		serializeAccountStateList(s, schemas.BatchGetAccountStatusResponse_accounts, v.Accounts)
+	}
+	if v.FailedAccounts != nil {
+		serializeFailedAccountList(s, schemas.BatchGetAccountStatusResponse_failedAccounts, v.FailedAccounts)
+	}
 }
 func (v *BatchGetAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAccountStatusResponse, func(s *smithy.Schema) error {

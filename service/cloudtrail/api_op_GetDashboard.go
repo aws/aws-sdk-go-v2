@@ -129,7 +129,9 @@ func (v *GetDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetDashboardResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
 	}
-	serializeWidgetList(s, schemas.GetDashboardResponse_Widgets, v.Widgets)
+	if v.Widgets != nil {
+		serializeWidgetList(s, schemas.GetDashboardResponse_Widgets, v.Widgets)
+	}
 }
 func (v *GetDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDashboardResponse, func(s *smithy.Schema) error {

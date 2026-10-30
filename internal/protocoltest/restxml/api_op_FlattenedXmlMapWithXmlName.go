@@ -38,7 +38,9 @@ func (v *FlattenedXmlMapWithXmlNameInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlattenedXmlMapWithXmlNameInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlattenedXmlMapWithXmlNameInputOutputMap(s, schemas.FlattenedXmlMapWithXmlNameRequest_myMap, v.MyMap)
+	if v.MyMap != nil {
+		serializeFlattenedXmlMapWithXmlNameInputOutputMap(s, schemas.FlattenedXmlMapWithXmlNameRequest_myMap, v.MyMap)
+	}
 }
 
 type FlattenedXmlMapWithXmlNameOutput struct {
@@ -57,7 +59,9 @@ func (v *FlattenedXmlMapWithXmlNameOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlattenedXmlMapWithXmlNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlattenedXmlMapWithXmlNameInputOutputMap(s, schemas.FlattenedXmlMapWithXmlNameResponse_myMap, v.MyMap)
+	if v.MyMap != nil {
+		serializeFlattenedXmlMapWithXmlNameInputOutputMap(s, schemas.FlattenedXmlMapWithXmlNameResponse_myMap, v.MyMap)
+	}
 }
 func (v *FlattenedXmlMapWithXmlNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FlattenedXmlMapWithXmlNameResponse, func(s *smithy.Schema) error {

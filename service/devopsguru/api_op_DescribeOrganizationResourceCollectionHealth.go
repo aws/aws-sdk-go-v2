@@ -66,7 +66,9 @@ func (v *DescribeOrganizationResourceCollectionHealthInput) Serialize(s smithy.S
 }
 
 func (v *DescribeOrganizationResourceCollectionHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeOrganizationResourceCollectionHealthRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DescribeOrganizationResourceCollectionHealthRequest_AccountIds, v.AccountIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeOrganizationResourceCollectionHealthRequest_MaxResults, *v.MaxResults)
 	}
@@ -76,7 +78,9 @@ func (v *DescribeOrganizationResourceCollectionHealthInput) SerializeMembers(s s
 	if v.OrganizationResourceCollectionType != "" {
 		s.WriteString(schemas.DescribeOrganizationResourceCollectionHealthRequest_OrganizationResourceCollectionType, string(v.OrganizationResourceCollectionType))
 	}
-	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationResourceCollectionHealthRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationResourceCollectionHealthRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	}
 }
 
 type DescribeOrganizationResourceCollectionHealthOutput struct {
@@ -140,13 +144,21 @@ func (v *DescribeOrganizationResourceCollectionHealthOutput) Serialize(s smithy.
 }
 
 func (v *DescribeOrganizationResourceCollectionHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_Account, v.Account)
-	serializeCloudFormationHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_CloudFormation, v.CloudFormation)
+	if v.Account != nil {
+		serializeAccountHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_Account, v.Account)
+	}
+	if v.CloudFormation != nil {
+		serializeCloudFormationHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_CloudFormation, v.CloudFormation)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOrganizationResourceCollectionHealthResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_Service, v.Service)
-	serializeTagHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_Tags, v.Tags)
+	if v.Service != nil {
+		serializeServiceHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_Service, v.Service)
+	}
+	if v.Tags != nil {
+		serializeTagHealths(s, schemas.DescribeOrganizationResourceCollectionHealthResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeOrganizationResourceCollectionHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOrganizationResourceCollectionHealthResponse, func(s *smithy.Schema) error {

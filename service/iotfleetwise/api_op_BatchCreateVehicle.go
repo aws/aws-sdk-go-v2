@@ -52,7 +52,9 @@ func (v *BatchCreateVehicleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializecreateVehicleRequestItems(s, schemas.BatchCreateVehicleRequest_vehicles, v.Vehicles)
+	if v.Vehicles != nil {
+		serializecreateVehicleRequestItems(s, schemas.BatchCreateVehicleRequest_vehicles, v.Vehicles)
+	}
 }
 func (v *BatchCreateVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateVehicleRequest, func(s *smithy.Schema) error {
@@ -87,8 +89,12 @@ func (v *BatchCreateVehicleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializecreateVehicleErrors(s, schemas.BatchCreateVehicleResponse_errors, v.Errors)
-	serializecreateVehicleResponses(s, schemas.BatchCreateVehicleResponse_vehicles, v.Vehicles)
+	if v.Errors != nil {
+		serializecreateVehicleErrors(s, schemas.BatchCreateVehicleResponse_errors, v.Errors)
+	}
+	if v.Vehicles != nil {
+		serializecreateVehicleResponses(s, schemas.BatchCreateVehicleResponse_vehicles, v.Vehicles)
+	}
 }
 func (v *BatchCreateVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateVehicleResponse, func(s *smithy.Schema) error {

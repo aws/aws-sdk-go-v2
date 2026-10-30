@@ -86,7 +86,9 @@ func (v *PutPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionGroup != "" {
 		s.WriteString(schemas.PutPermissionRequest_actionGroup, string(v.ActionGroup))
 	}
-	serializePrincipals(s, schemas.PutPermissionRequest_principals, v.Principals)
+	if v.Principals != nil {
+		serializePrincipals(s, schemas.PutPermissionRequest_principals, v.Principals)
+	}
 	if v.ProfilingGroupName != nil {
 		s.WriteString(schemas.PutPermissionRequest_profilingGroupName, *v.ProfilingGroupName)
 	}

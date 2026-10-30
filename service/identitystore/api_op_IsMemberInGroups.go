@@ -67,11 +67,15 @@ func (v *IsMemberInGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsMemberInGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupIds(s, schemas.IsMemberInGroupsRequest_GroupIds, v.GroupIds)
+	if v.GroupIds != nil {
+		serializeGroupIds(s, schemas.IsMemberInGroupsRequest_GroupIds, v.GroupIds)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.IsMemberInGroupsRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
-	serializeMemberId(s, schemas.IsMemberInGroupsRequest_MemberId, v.MemberId)
+	if v.MemberId != nil {
+		serializeMemberId(s, schemas.IsMemberInGroupsRequest_MemberId, v.MemberId)
+	}
 }
 
 type IsMemberInGroupsOutput struct {
@@ -94,7 +98,9 @@ func (v *IsMemberInGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsMemberInGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupMembershipExistenceResults(s, schemas.IsMemberInGroupsResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeGroupMembershipExistenceResults(s, schemas.IsMemberInGroupsResponse_Results, v.Results)
+	}
 }
 func (v *IsMemberInGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IsMemberInGroupsResponse, func(s *smithy.Schema) error {

@@ -69,7 +69,9 @@ func (v *CreateEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVisibility != "" {
 		s.WriteString(schemas.CreateEntitlementRequest_AppVisibility, string(v.AppVisibility))
 	}
-	serializeEntitlementAttributeList(s, schemas.CreateEntitlementRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeEntitlementAttributeList(s, schemas.CreateEntitlementRequest_Attributes, v.Attributes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEntitlementRequest_Description, *v.Description)
 	}

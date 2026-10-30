@@ -125,7 +125,9 @@ func (v *UpdateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.UpdateVocabularyRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializePhrases(s, schemas.UpdateVocabularyRequest_Phrases, v.Phrases)
+	if v.Phrases != nil {
+		serializePhrases(s, schemas.UpdateVocabularyRequest_Phrases, v.Phrases)
+	}
 	if v.VocabularyFileUri != nil {
 		s.WriteString(schemas.UpdateVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
 	}

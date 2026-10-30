@@ -43,7 +43,9 @@ func (v *BatchGetDataQualityResultInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDataQualityResultInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataQualityResultIds(s, schemas.BatchGetDataQualityResultRequest_ResultIds, v.ResultIds)
+	if v.ResultIds != nil {
+		serializeDataQualityResultIds(s, schemas.BatchGetDataQualityResultRequest_ResultIds, v.ResultIds)
+	}
 }
 
 type BatchGetDataQualityResultOutput struct {
@@ -69,8 +71,12 @@ func (v *BatchGetDataQualityResultOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataQualityResultsList(s, schemas.BatchGetDataQualityResultResponse_Results, v.Results)
-	serializeDataQualityResultIds(s, schemas.BatchGetDataQualityResultResponse_ResultsNotFound, v.ResultsNotFound)
+	if v.Results != nil {
+		serializeDataQualityResultsList(s, schemas.BatchGetDataQualityResultResponse_Results, v.Results)
+	}
+	if v.ResultsNotFound != nil {
+		serializeDataQualityResultIds(s, schemas.BatchGetDataQualityResultResponse_ResultsNotFound, v.ResultsNotFound)
+	}
 }
 func (v *BatchGetDataQualityResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDataQualityResultResponse, func(s *smithy.Schema) error {

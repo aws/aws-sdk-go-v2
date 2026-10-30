@@ -59,11 +59,15 @@ func (v *CreateLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationConfiguration(s, schemas.CreateLoggingConfigurationRequest_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.CreateLoggingConfigurationRequest_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateLoggingConfigurationRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateLoggingConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLoggingConfigurationRequest_tags, v.Tags)
+	}
 }
 func (v *CreateLoggingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateLoggingConfigurationRequest, func(s *smithy.Schema) error {
@@ -133,7 +137,9 @@ func (v *CreateLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.CreateLoggingConfigurationResponse_createTime, *v.CreateTime)
 	}
-	serializeDestinationConfiguration(s, schemas.CreateLoggingConfigurationResponse_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.CreateLoggingConfigurationResponse_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateLoggingConfigurationResponse_id, *v.Id)
 	}
@@ -143,7 +149,9 @@ func (v *CreateLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.State != "" {
 		s.WriteString(schemas.CreateLoggingConfigurationResponse_state, string(v.State))
 	}
-	serializeTags(s, schemas.CreateLoggingConfigurationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLoggingConfigurationResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.CreateLoggingConfigurationResponse_updateTime, *v.UpdateTime)
 	}

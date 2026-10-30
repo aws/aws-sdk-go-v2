@@ -107,11 +107,15 @@ func (v *PutClusterCapacityProvidersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutClusterCapacityProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.PutClusterCapacityProvidersRequest_capacityProviders, v.CapacityProviders)
+	if v.CapacityProviders != nil {
+		serializeStringList(s, schemas.PutClusterCapacityProvidersRequest_capacityProviders, v.CapacityProviders)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.PutClusterCapacityProvidersRequest_cluster, *v.Cluster)
 	}
-	serializeCapacityProviderStrategy(s, schemas.PutClusterCapacityProvidersRequest_defaultCapacityProviderStrategy, v.DefaultCapacityProviderStrategy)
+	if v.DefaultCapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.PutClusterCapacityProvidersRequest_defaultCapacityProviderStrategy, v.DefaultCapacityProviderStrategy)
+	}
 }
 
 type PutClusterCapacityProvidersOutput struct {

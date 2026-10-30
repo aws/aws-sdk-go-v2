@@ -81,7 +81,9 @@ func (v *ListDataIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataIntegrationsList(s, schemas.ListDataIntegrationsResponse_DataIntegrations, v.DataIntegrations)
+	if v.DataIntegrations != nil {
+		serializeDataIntegrationsList(s, schemas.ListDataIntegrationsResponse_DataIntegrations, v.DataIntegrations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataIntegrationsResponse_NextToken, *v.NextToken)
 	}

@@ -71,7 +71,9 @@ func (v *ListFieldOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFieldOptionsRequest_nextToken, *v.NextToken)
 	}
-	serializeValuesList(s, schemas.ListFieldOptionsRequest_values, v.Values)
+	if v.Values != nil {
+		serializeValuesList(s, schemas.ListFieldOptionsRequest_values, v.Values)
+	}
 }
 func (v *ListFieldOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFieldOptionsRequest, func(s *smithy.Schema) error {
@@ -122,7 +124,9 @@ func (v *ListFieldOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFieldOptionsResponse_nextToken, *v.NextToken)
 	}
-	serializeFieldOptionsList(s, schemas.ListFieldOptionsResponse_options, v.Options)
+	if v.Options != nil {
+		serializeFieldOptionsList(s, schemas.ListFieldOptionsResponse_options, v.Options)
+	}
 }
 func (v *ListFieldOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFieldOptionsResponse, func(s *smithy.Schema) error {

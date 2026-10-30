@@ -88,7 +88,9 @@ func (v *ListResourceProfileDetectionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListResourceProfileDetectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDetection(s, schemas.ListResourceProfileDetectionsResponse_detections, v.Detections)
+	if v.Detections != nil {
+		serialize__listOfDetection(s, schemas.ListResourceProfileDetectionsResponse_detections, v.Detections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceProfileDetectionsResponse_nextToken, *v.NextToken)
 	}

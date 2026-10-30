@@ -59,7 +59,9 @@ func (v *ListRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListRecommendationsFilter(s, schemas.ListRecommendationsRequest_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeListRecommendationsFilter(s, schemas.ListRecommendationsRequest_Filter, v.Filter)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendationsRequest_NextToken, *v.NextToken)
 	}
@@ -97,7 +99,9 @@ func (v *ListRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendationsResponse_NextToken, *v.NextToken)
 	}
-	serializeRecommendationsList(s, schemas.ListRecommendationsResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendationsList(s, schemas.ListRecommendationsResponse_Recommendations, v.Recommendations)
+	}
 }
 func (v *ListRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendationsResponse, func(s *smithy.Schema) error {

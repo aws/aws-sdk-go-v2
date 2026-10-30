@@ -47,7 +47,9 @@ func (v *UpdateWorkloadIdentityInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkloadIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceOauth2ReturnUrlListType(s, schemas.UpdateWorkloadIdentityRequest_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
+	if v.AllowedResourceOauth2ReturnUrls != nil {
+		serializeResourceOauth2ReturnUrlListType(s, schemas.UpdateWorkloadIdentityRequest_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateWorkloadIdentityRequest_name, *v.Name)
 	}
@@ -92,7 +94,9 @@ func (v *UpdateWorkloadIdentityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkloadIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceOauth2ReturnUrlListType(s, schemas.UpdateWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
+	if v.AllowedResourceOauth2ReturnUrls != nil {
+		serializeResourceOauth2ReturnUrlListType(s, schemas.UpdateWorkloadIdentityResponse_allowedResourceOauth2ReturnUrls, v.AllowedResourceOauth2ReturnUrls)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.UpdateWorkloadIdentityResponse_createdTime, *v.CreatedTime)
 	}

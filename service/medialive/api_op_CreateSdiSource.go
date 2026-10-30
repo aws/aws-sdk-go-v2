@@ -73,7 +73,9 @@ func (v *CreateSdiSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateSdiSourceRequest_RequestId, *v.RequestId)
 	}
-	serializeTags(s, schemas.CreateSdiSourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSdiSourceRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateSdiSourceRequest_Type, string(v.Type))
 	}

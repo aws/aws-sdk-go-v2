@@ -51,7 +51,9 @@ func (v *BatchDeleteCategoryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteCategoryInputList(s, schemas.BatchDeleteCategoryInput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeDeleteCategoryInputList(s, schemas.BatchDeleteCategoryInput_categories, v.Categories)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchDeleteCategoryInput_instanceId, *v.InstanceId)
 	}

@@ -74,7 +74,9 @@ func (v *ListDocumentClassifierSummariesOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListDocumentClassifierSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentClassifierSummariesList(s, schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList, v.DocumentClassifierSummariesList)
+	if v.DocumentClassifierSummariesList != nil {
+		serializeDocumentClassifierSummariesList(s, schemas.ListDocumentClassifierSummariesResponse_DocumentClassifierSummariesList, v.DocumentClassifierSummariesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDocumentClassifierSummariesResponse_NextToken, *v.NextToken)
 	}

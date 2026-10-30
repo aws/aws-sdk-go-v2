@@ -144,11 +144,15 @@ func (v *AlarmRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppComponentName != nil {
 		s.WriteString(schemas.AlarmRecommendation_appComponentName, *v.AppComponentName)
 	}
-	serializeAppComponentNameList(s, schemas.AlarmRecommendation_appComponentNames, v.AppComponentNames)
+	if v.AppComponentNames != nil {
+		serializeAppComponentNameList(s, schemas.AlarmRecommendation_appComponentNames, v.AppComponentNames)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AlarmRecommendation_description, *v.Description)
 	}
-	serializeRecommendationItemList(s, schemas.AlarmRecommendation_items, v.Items)
+	if v.Items != nil {
+		serializeRecommendationItemList(s, schemas.AlarmRecommendation_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AlarmRecommendation_name, *v.Name)
 	}
@@ -328,7 +332,9 @@ func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DriftStatus != "" {
 		s.WriteString(schemas.App_driftStatus, string(v.DriftStatus))
 	}
-	serializeEventSubscriptionList(s, schemas.App_eventSubscriptions, v.EventSubscriptions)
+	if v.EventSubscriptions != nil {
+		serializeEventSubscriptionList(s, schemas.App_eventSubscriptions, v.EventSubscriptions)
+	}
 	if v.LastAppComplianceEvaluationTime != nil {
 		s.WriteTime(schemas.App_lastAppComplianceEvaluationTime, *v.LastAppComplianceEvaluationTime)
 	}
@@ -361,7 +367,9 @@ func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.App_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.App_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.App_tags, v.Tags)
+	}
 }
 func (v *App) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.App, func(s *smithy.Schema) error {
@@ -547,7 +555,9 @@ func (v *AppAssessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentStatus != "" {
 		s.WriteString(schemas.AppAssessment_assessmentStatus, string(v.AssessmentStatus))
 	}
-	serializeAssessmentCompliance(s, schemas.AppAssessment_compliance, v.Compliance)
+	if v.Compliance != nil {
+		serializeAssessmentCompliance(s, schemas.AppAssessment_compliance, v.Compliance)
+	}
 	if v.ComplianceStatus != "" {
 		s.WriteString(schemas.AppAssessment_complianceStatus, string(v.ComplianceStatus))
 	}
@@ -591,7 +601,9 @@ func (v *AppAssessment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Summary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.AppAssessment_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AppAssessment_tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.AppAssessment_versionName, *v.VersionName)
 	}
@@ -894,7 +906,9 @@ func (v *AppComponent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AppComponent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInfoMap(s, schemas.AppComponent_additionalInfo, v.AdditionalInfo)
+	if v.AdditionalInfo != nil {
+		serializeAdditionalInfoMap(s, schemas.AppComponent_additionalInfo, v.AdditionalInfo)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AppComponent_id, *v.Id)
 	}
@@ -959,7 +973,9 @@ func (v *AppComponentCompliance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppComponentName != nil {
 		s.WriteString(schemas.AppComponentCompliance_appComponentName, *v.AppComponentName)
 	}
-	serializeAssessmentCompliance(s, schemas.AppComponentCompliance_compliance, v.Compliance)
+	if v.Compliance != nil {
+		serializeAssessmentCompliance(s, schemas.AppComponentCompliance_compliance, v.Compliance)
+	}
 	if v.Cost != nil {
 		s.WriteStruct(schemas.AppComponentCompliance_cost)
 		v.Cost.SerializeMembers(s)
@@ -1365,7 +1381,9 @@ func (v *AssessmentRiskRecommendation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssessmentRiskRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppComponentNameList(s, schemas.AssessmentRiskRecommendation_appComponents, v.AppComponents)
+	if v.AppComponents != nil {
+		serializeAppComponentNameList(s, schemas.AssessmentRiskRecommendation_appComponents, v.AppComponents)
+	}
 	if v.Recommendation != nil {
 		s.WriteString(schemas.AssessmentRiskRecommendation_recommendation, *v.Recommendation)
 	}
@@ -1418,7 +1436,9 @@ func (v *AssessmentSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssessmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentRiskRecommendationList(s, schemas.AssessmentSummary_riskRecommendations, v.RiskRecommendations)
+	if v.RiskRecommendations != nil {
+		serializeAssessmentRiskRecommendationList(s, schemas.AssessmentSummary_riskRecommendations, v.RiskRecommendations)
+	}
 	if v.Summary != nil {
 		s.WriteString(schemas.AssessmentSummary_summary, *v.Summary)
 	}
@@ -1628,7 +1648,9 @@ func (v *ComplianceDrift) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActualReferenceId != nil {
 		s.WriteString(schemas.ComplianceDrift_actualReferenceId, *v.ActualReferenceId)
 	}
-	serializeAssessmentCompliance(s, schemas.ComplianceDrift_actualValue, v.ActualValue)
+	if v.ActualValue != nil {
+		serializeAssessmentCompliance(s, schemas.ComplianceDrift_actualValue, v.ActualValue)
+	}
 	if v.AppId != nil {
 		s.WriteString(schemas.ComplianceDrift_appId, *v.AppId)
 	}
@@ -1650,7 +1672,9 @@ func (v *ComplianceDrift) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpectedReferenceId != nil {
 		s.WriteString(schemas.ComplianceDrift_expectedReferenceId, *v.ExpectedReferenceId)
 	}
-	serializeAssessmentCompliance(s, schemas.ComplianceDrift_expectedValue, v.ExpectedValue)
+	if v.ExpectedValue != nil {
+		serializeAssessmentCompliance(s, schemas.ComplianceDrift_expectedValue, v.ExpectedValue)
+	}
 }
 func (v *ComplianceDrift) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComplianceDrift, func(s *smithy.Schema) error {
@@ -1729,7 +1753,9 @@ func (v *ComponentRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppComponentName != nil {
 		s.WriteString(schemas.ComponentRecommendation_appComponentName, *v.AppComponentName)
 	}
-	serializeConfigRecommendationList(s, schemas.ComponentRecommendation_configRecommendations, v.ConfigRecommendations)
+	if v.ConfigRecommendations != nil {
+		serializeConfigRecommendationList(s, schemas.ComponentRecommendation_configRecommendations, v.ConfigRecommendations)
+	}
 	if v.RecommendationStatus != "" {
 		s.WriteString(schemas.ComponentRecommendation_recommendationStatus, string(v.RecommendationStatus))
 	}
@@ -1866,7 +1892,9 @@ func (v *ConfigRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppComponentName != nil {
 		s.WriteString(schemas.ConfigRecommendation_appComponentName, *v.AppComponentName)
 	}
-	serializeAssessmentCompliance(s, schemas.ConfigRecommendation_compliance, v.Compliance)
+	if v.Compliance != nil {
+		serializeAssessmentCompliance(s, schemas.ConfigRecommendation_compliance, v.Compliance)
+	}
 	if v.Cost != nil {
 		s.WriteStruct(schemas.ConfigRecommendation_cost)
 		v.Cost.SerializeMembers(s)
@@ -1884,11 +1912,15 @@ func (v *ConfigRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizationType != "" {
 		s.WriteString(schemas.ConfigRecommendation_optimizationType, string(v.OptimizationType))
 	}
-	serializeRecommendationCompliance(s, schemas.ConfigRecommendation_recommendationCompliance, v.RecommendationCompliance)
+	if v.RecommendationCompliance != nil {
+		serializeRecommendationCompliance(s, schemas.ConfigRecommendation_recommendationCompliance, v.RecommendationCompliance)
+	}
 	if v.ReferenceId != nil {
 		s.WriteString(schemas.ConfigRecommendation_referenceId, *v.ReferenceId)
 	}
-	serializeSuggestedChangesList(s, schemas.ConfigRecommendation_suggestedChanges, v.SuggestedChanges)
+	if v.SuggestedChanges != nil {
+		serializeSuggestedChangesList(s, schemas.ConfigRecommendation_suggestedChanges, v.SuggestedChanges)
+	}
 }
 func (v *ConfigRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigRecommendation, func(s *smithy.Schema) error {
@@ -2135,7 +2167,9 @@ func (v *EksSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EksClusterArn != nil {
 		s.WriteString(schemas.EksSource_eksClusterArn, *v.EksClusterArn)
 	}
-	serializeEksNamespaceList(s, schemas.EksSource_namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeEksNamespaceList(s, schemas.EksSource_namespaces, v.Namespaces)
+	}
 }
 func (v *EksSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EksSource, func(s *smithy.Schema) error {
@@ -2593,11 +2627,15 @@ func (v *GroupingRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupingRecommendationId != nil {
 		s.WriteString(schemas.GroupingRecommendation_groupingRecommendationId, *v.GroupingRecommendationId)
 	}
-	serializeString255List(s, schemas.GroupingRecommendation_recommendationReasons, v.RecommendationReasons)
+	if v.RecommendationReasons != nil {
+		serializeString255List(s, schemas.GroupingRecommendation_recommendationReasons, v.RecommendationReasons)
+	}
 	if v.RejectionReason != "" {
 		s.WriteString(schemas.GroupingRecommendation_rejectionReason, string(v.RejectionReason))
 	}
-	serializeGroupingResourceList(s, schemas.GroupingRecommendation_resources, v.Resources)
+	if v.Resources != nil {
+		serializeGroupingResourceList(s, schemas.GroupingRecommendation_resources, v.Resources)
+	}
 	s.WriteFloat64(schemas.GroupingRecommendation_score, v.Score)
 	if v.Status != "" {
 		s.WriteString(schemas.GroupingRecommendation_status, string(v.Status))
@@ -2703,7 +2741,9 @@ func (v *GroupingResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != nil {
 		s.WriteString(schemas.GroupingResource_resourceType, *v.ResourceType)
 	}
-	serializeString255List(s, schemas.GroupingResource_sourceAppComponentIds, v.SourceAppComponentIds)
+	if v.SourceAppComponentIds != nil {
+		serializeString255List(s, schemas.GroupingResource_sourceAppComponentIds, v.SourceAppComponentIds)
+	}
 }
 func (v *GroupingResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GroupingResource, func(s *smithy.Schema) error {
@@ -2847,7 +2887,9 @@ func (v *PermissionModel) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PermissionModel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIamRoleArnList(s, schemas.PermissionModel_crossAccountRoleArns, v.CrossAccountRoleArns)
+	if v.CrossAccountRoleArns != nil {
+		serializeIamRoleArnList(s, schemas.PermissionModel_crossAccountRoleArns, v.CrossAccountRoleArns)
+	}
 	if v.InvokerRoleName != nil {
 		s.WriteString(schemas.PermissionModel_invokerRoleName, *v.InvokerRoleName)
 	}
@@ -2934,8 +2976,12 @@ func (v *PhysicalResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PhysicalResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInfoMap(s, schemas.PhysicalResource_additionalInfo, v.AdditionalInfo)
-	serializeAppComponentList(s, schemas.PhysicalResource_appComponents, v.AppComponents)
+	if v.AdditionalInfo != nil {
+		serializeAdditionalInfoMap(s, schemas.PhysicalResource_additionalInfo, v.AdditionalInfo)
+	}
+	if v.AppComponents != nil {
+		serializeAppComponentList(s, schemas.PhysicalResource_appComponents, v.AppComponents)
+	}
 	if v.Excluded != nil {
 		s.WriteBool(schemas.PhysicalResource_excluded, *v.Excluded)
 	}
@@ -3405,18 +3451,24 @@ func (v *RecommendationTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NeedsReplacements != nil {
 		s.WriteBool(schemas.RecommendationTemplate_needsReplacements, *v.NeedsReplacements)
 	}
-	serializeRecommendationIdList(s, schemas.RecommendationTemplate_recommendationIds, v.RecommendationIds)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.RecommendationTemplate_recommendationIds, v.RecommendationIds)
+	}
 	if v.RecommendationTemplateArn != nil {
 		s.WriteString(schemas.RecommendationTemplate_recommendationTemplateArn, *v.RecommendationTemplateArn)
 	}
-	serializeRenderRecommendationTypeList(s, schemas.RecommendationTemplate_recommendationTypes, v.RecommendationTypes)
+	if v.RecommendationTypes != nil {
+		serializeRenderRecommendationTypeList(s, schemas.RecommendationTemplate_recommendationTypes, v.RecommendationTypes)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.RecommendationTemplate_startTime, *v.StartTime)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.RecommendationTemplate_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.RecommendationTemplate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RecommendationTemplate_tags, v.Tags)
+	}
 	if v.TemplatesLocation != nil {
 		s.WriteStruct(schemas.RecommendationTemplate_templatesLocation)
 		v.TemplatesLocation.SerializeMembers(s)
@@ -3588,7 +3640,9 @@ func (v *ResiliencyPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EstimatedCostTier != "" {
 		s.WriteString(schemas.ResiliencyPolicy_estimatedCostTier, string(v.EstimatedCostTier))
 	}
-	serializeDisruptionPolicy(s, schemas.ResiliencyPolicy_policy, v.Policy)
+	if v.Policy != nil {
+		serializeDisruptionPolicy(s, schemas.ResiliencyPolicy_policy, v.Policy)
+	}
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.ResiliencyPolicy_policyArn, *v.PolicyArn)
 	}
@@ -3598,7 +3652,9 @@ func (v *ResiliencyPolicy) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyName != nil {
 		s.WriteString(schemas.ResiliencyPolicy_policyName, *v.PolicyName)
 	}
-	serializeTagMap(s, schemas.ResiliencyPolicy_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ResiliencyPolicy_tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.ResiliencyPolicy_tier, string(v.Tier))
 	}
@@ -3679,8 +3735,12 @@ func (v *ResiliencyScore) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResiliencyScore) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScoringComponentResiliencyScores(s, schemas.ResiliencyScore_componentScore, v.ComponentScore)
-	serializeDisruptionResiliencyScore(s, schemas.ResiliencyScore_disruptionScore, v.DisruptionScore)
+	if v.ComponentScore != nil {
+		serializeScoringComponentResiliencyScores(s, schemas.ResiliencyScore_componentScore, v.ComponentScore)
+	}
+	if v.DisruptionScore != nil {
+		serializeDisruptionResiliencyScore(s, schemas.ResiliencyScore_disruptionScore, v.DisruptionScore)
+	}
 	s.WriteFloat64(schemas.ResiliencyScore_score, v.Score)
 }
 func (v *ResiliencyScore) Deserialize(d smithy.ShapeDeserializer) error {
@@ -3846,7 +3906,9 @@ func (v *ResourceErrorsDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HasMoreErrors != nil {
 		s.WriteBool(schemas.ResourceErrorsDetails_hasMoreErrors, *v.HasMoreErrors)
 	}
-	serializeResourceErrorList(s, schemas.ResourceErrorsDetails_resourceErrors, v.ResourceErrors)
+	if v.ResourceErrors != nil {
+		serializeResourceErrorList(s, schemas.ResourceErrorsDetails_resourceErrors, v.ResourceErrors)
+	}
 }
 func (v *ResourceErrorsDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceErrorsDetails, func(s *smithy.Schema) error {
@@ -4180,7 +4242,9 @@ func (v *SopRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.SopRecommendation_description, *v.Description)
 	}
-	serializeRecommendationItemList(s, schemas.SopRecommendation_items, v.Items)
+	if v.Items != nil {
+		serializeRecommendationItemList(s, schemas.SopRecommendation_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SopRecommendation_name, *v.Name)
 	}
@@ -4381,14 +4445,18 @@ func (v *TestRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppComponentName != nil {
 		s.WriteString(schemas.TestRecommendation_appComponentName, *v.AppComponentName)
 	}
-	serializeAlarmReferenceIdList(s, schemas.TestRecommendation_dependsOnAlarms, v.DependsOnAlarms)
+	if v.DependsOnAlarms != nil {
+		serializeAlarmReferenceIdList(s, schemas.TestRecommendation_dependsOnAlarms, v.DependsOnAlarms)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.TestRecommendation_description, *v.Description)
 	}
 	if v.Intent != nil {
 		s.WriteString(schemas.TestRecommendation_intent, *v.Intent)
 	}
-	serializeRecommendationItemList(s, schemas.TestRecommendation_items, v.Items)
+	if v.Items != nil {
+		serializeRecommendationItemList(s, schemas.TestRecommendation_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TestRecommendation_name, *v.Name)
 	}

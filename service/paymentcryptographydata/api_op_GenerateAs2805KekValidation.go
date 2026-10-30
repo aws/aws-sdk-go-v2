@@ -93,7 +93,9 @@ func (v *GenerateAs2805KekValidationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateAs2805KekValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAs2805KekValidationType(s, schemas.GenerateAs2805KekValidationInput_KekValidationType, v.KekValidationType)
+	if v.KekValidationType != nil {
+		serializeAs2805KekValidationType(s, schemas.GenerateAs2805KekValidationInput_KekValidationType, v.KekValidationType)
+	}
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.GenerateAs2805KekValidationInput_KeyIdentifier, *v.KeyIdentifier)
 	}

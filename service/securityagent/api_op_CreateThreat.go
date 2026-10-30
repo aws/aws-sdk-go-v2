@@ -103,9 +103,15 @@ func (v *CreateThreatInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Comments != nil {
 		s.WriteString(schemas.CreateThreatInput_comments, *v.Comments)
 	}
-	serializeThreatEvidenceList(s, schemas.CreateThreatInput_evidence, v.Evidence)
-	serializeStringList(s, schemas.CreateThreatInput_impactedAssets, v.ImpactedAssets)
-	serializeStringList(s, schemas.CreateThreatInput_impactedGoal, v.ImpactedGoal)
+	if v.Evidence != nil {
+		serializeThreatEvidenceList(s, schemas.CreateThreatInput_evidence, v.Evidence)
+	}
+	if v.ImpactedAssets != nil {
+		serializeStringList(s, schemas.CreateThreatInput_impactedAssets, v.ImpactedAssets)
+	}
+	if v.ImpactedGoal != nil {
+		serializeStringList(s, schemas.CreateThreatInput_impactedGoal, v.ImpactedGoal)
+	}
 	if v.Prerequisites != nil {
 		s.WriteString(schemas.CreateThreatInput_prerequisites, *v.Prerequisites)
 	}
@@ -118,7 +124,9 @@ func (v *CreateThreatInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Statement != nil {
 		s.WriteString(schemas.CreateThreatInput_statement, *v.Statement)
 	}
-	serializeStrideCategoryList(s, schemas.CreateThreatInput_stride, v.Stride)
+	if v.Stride != nil {
+		serializeStrideCategoryList(s, schemas.CreateThreatInput_stride, v.Stride)
+	}
 	if v.ThreatAction != nil {
 		s.WriteString(schemas.CreateThreatInput_threatAction, *v.ThreatAction)
 	}
@@ -233,9 +241,15 @@ func (v *CreateThreatOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != "" {
 		s.WriteString(schemas.CreateThreatOutput_createdBy, string(v.CreatedBy))
 	}
-	serializeThreatEvidenceList(s, schemas.CreateThreatOutput_evidence, v.Evidence)
-	serializeStringList(s, schemas.CreateThreatOutput_impactedAssets, v.ImpactedAssets)
-	serializeStringList(s, schemas.CreateThreatOutput_impactedGoal, v.ImpactedGoal)
+	if v.Evidence != nil {
+		serializeThreatEvidenceList(s, schemas.CreateThreatOutput_evidence, v.Evidence)
+	}
+	if v.ImpactedAssets != nil {
+		serializeStringList(s, schemas.CreateThreatOutput_impactedAssets, v.ImpactedAssets)
+	}
+	if v.ImpactedGoal != nil {
+		serializeStringList(s, schemas.CreateThreatOutput_impactedGoal, v.ImpactedGoal)
+	}
 	if v.Prerequisites != nil {
 		s.WriteString(schemas.CreateThreatOutput_prerequisites, *v.Prerequisites)
 	}
@@ -251,7 +265,9 @@ func (v *CreateThreatOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateThreatOutput_status, string(v.Status))
 	}
-	serializeStrideCategoryList(s, schemas.CreateThreatOutput_stride, v.Stride)
+	if v.Stride != nil {
+		serializeStrideCategoryList(s, schemas.CreateThreatOutput_stride, v.Stride)
+	}
 	if v.ThreatAction != nil {
 		s.WriteString(schemas.CreateThreatOutput_threatAction, *v.ThreatAction)
 	}

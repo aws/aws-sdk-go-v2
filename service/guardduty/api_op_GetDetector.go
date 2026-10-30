@@ -112,7 +112,9 @@ func (v *GetDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataSources.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDetectorFeatureConfigurationsResults(s, schemas.GetDetectorResponse_Features, v.Features)
+	if v.Features != nil {
+		serializeDetectorFeatureConfigurationsResults(s, schemas.GetDetectorResponse_Features, v.Features)
+	}
 	if v.FindingPublishingFrequency != "" {
 		s.WriteString(schemas.GetDetectorResponse_FindingPublishingFrequency, string(v.FindingPublishingFrequency))
 	}
@@ -122,7 +124,9 @@ func (v *GetDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetDetectorResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetDetectorResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDetectorResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteString(schemas.GetDetectorResponse_UpdatedAt, *v.UpdatedAt)
 	}

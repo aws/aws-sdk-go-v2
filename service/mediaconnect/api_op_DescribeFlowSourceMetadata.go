@@ -89,7 +89,9 @@ func (v *DescribeFlowSourceMetadataOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.FlowArn != nil {
 		s.WriteString(schemas.DescribeFlowSourceMetadataResponse_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfMessageDetail(s, schemas.DescribeFlowSourceMetadataResponse_Messages, v.Messages)
+	if v.Messages != nil {
+		serialize__listOfMessageDetail(s, schemas.DescribeFlowSourceMetadataResponse_Messages, v.Messages)
+	}
 	if v.NdiInfo != nil {
 		s.WriteStruct(schemas.DescribeFlowSourceMetadataResponse_NdiInfo)
 		v.NdiInfo.SerializeMembers(s)

@@ -175,15 +175,23 @@ func (v *DetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfBlocks(s, schemas.DetectEntitiesResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeListOfBlocks(s, schemas.DetectEntitiesResponse_Blocks, v.Blocks)
+	}
 	if v.DocumentMetadata != nil {
 		s.WriteStruct(schemas.DetectEntitiesResponse_DocumentMetadata)
 		v.DocumentMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfDocumentType(s, schemas.DetectEntitiesResponse_DocumentType, v.DocumentType)
-	serializeListOfEntities(s, schemas.DetectEntitiesResponse_Entities, v.Entities)
-	serializeListOfErrors(s, schemas.DetectEntitiesResponse_Errors, v.Errors)
+	if v.DocumentType != nil {
+		serializeListOfDocumentType(s, schemas.DetectEntitiesResponse_DocumentType, v.DocumentType)
+	}
+	if v.Entities != nil {
+		serializeListOfEntities(s, schemas.DetectEntitiesResponse_Entities, v.Entities)
+	}
+	if v.Errors != nil {
+		serializeListOfErrors(s, schemas.DetectEntitiesResponse_Errors, v.Errors)
+	}
 }
 func (v *DetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectEntitiesResponse, func(s *smithy.Schema) error {

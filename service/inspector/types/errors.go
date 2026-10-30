@@ -113,7 +113,9 @@ func (v *AgentsAlreadyRunningAssessmentException) Serialize(s smithy.ShapeSerial
 }
 
 func (v *AgentsAlreadyRunningAssessmentException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentAlreadyRunningAssessmentList(s, schemas.AgentsAlreadyRunningAssessmentException_agents, v.Agents)
+	if v.Agents != nil {
+		serializeAgentAlreadyRunningAssessmentList(s, schemas.AgentsAlreadyRunningAssessmentException_agents, v.Agents)
+	}
 	if v.AgentsTruncated != nil {
 		s.WriteBool(schemas.AgentsAlreadyRunningAssessmentException_agentsTruncated, *v.AgentsTruncated)
 	}
@@ -180,7 +182,9 @@ func (v *AssessmentRunInProgressException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssessmentRunInProgressException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentRunInProgressArnList(s, schemas.AssessmentRunInProgressException_assessmentRunArns, v.AssessmentRunArns)
+	if v.AssessmentRunArns != nil {
+		serializeAssessmentRunInProgressArnList(s, schemas.AssessmentRunInProgressException_assessmentRunArns, v.AssessmentRunArns)
+	}
 	if v.AssessmentRunArnsTruncated != nil {
 		s.WriteBool(schemas.AssessmentRunInProgressException_assessmentRunArnsTruncated, *v.AssessmentRunArnsTruncated)
 	}

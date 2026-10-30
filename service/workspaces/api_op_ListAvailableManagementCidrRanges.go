@@ -95,7 +95,9 @@ func (v *ListAvailableManagementCidrRangesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListAvailableManagementCidrRangesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDedicatedTenancyCidrRangeList(s, schemas.ListAvailableManagementCidrRangesResult_ManagementCidrRanges, v.ManagementCidrRanges)
+	if v.ManagementCidrRanges != nil {
+		serializeDedicatedTenancyCidrRangeList(s, schemas.ListAvailableManagementCidrRangesResult_ManagementCidrRanges, v.ManagementCidrRanges)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAvailableManagementCidrRangesResult_NextToken, *v.NextToken)
 	}

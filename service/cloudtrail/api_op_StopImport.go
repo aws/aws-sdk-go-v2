@@ -102,7 +102,9 @@ func (v *StopImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.StopImportResponse_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeImportDestinations(s, schemas.StopImportResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeImportDestinations(s, schemas.StopImportResponse_Destinations, v.Destinations)
+	}
 	if v.EndEventTime != nil {
 		s.WriteTime(schemas.StopImportResponse_EndEventTime, *v.EndEventTime)
 	}

@@ -60,7 +60,9 @@ func (v *AddFacetToObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.AddFacetToObjectRequest_DirectoryArn, *v.DirectoryArn)
 	}
-	serializeAttributeKeyAndValueList(s, schemas.AddFacetToObjectRequest_ObjectAttributeList, v.ObjectAttributeList)
+	if v.ObjectAttributeList != nil {
+		serializeAttributeKeyAndValueList(s, schemas.AddFacetToObjectRequest_ObjectAttributeList, v.ObjectAttributeList)
+	}
 	if v.ObjectReference != nil {
 		s.WriteStruct(schemas.AddFacetToObjectRequest_ObjectReference)
 		v.ObjectReference.SerializeMembers(s)

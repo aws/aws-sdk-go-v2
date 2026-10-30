@@ -74,7 +74,9 @@ func (v *ListOtaTaskConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOtaTaskConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOtaTaskConfigurationListDefinition(s, schemas.ListOtaTaskConfigurationsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeOtaTaskConfigurationListDefinition(s, schemas.ListOtaTaskConfigurationsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOtaTaskConfigurationsResponse_NextToken, *v.NextToken)
 	}

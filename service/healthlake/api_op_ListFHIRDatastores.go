@@ -86,7 +86,9 @@ func (v *ListFHIRDatastoresOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFHIRDatastoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatastorePropertiesList(s, schemas.ListFHIRDatastoresResponse_DatastorePropertiesList, v.DatastorePropertiesList)
+	if v.DatastorePropertiesList != nil {
+		serializeDatastorePropertiesList(s, schemas.ListFHIRDatastoresResponse_DatastorePropertiesList, v.DatastorePropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFHIRDatastoresResponse_NextToken, *v.NextToken)
 	}

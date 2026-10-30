@@ -82,7 +82,9 @@ func (v *StopFleetActionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopFleetActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetActionList(s, schemas.StopFleetActionsInput_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeFleetActionList(s, schemas.StopFleetActionsInput_Actions, v.Actions)
+	}
 	if v.FleetId != nil {
 		s.WriteString(schemas.StopFleetActionsInput_FleetId, *v.FleetId)
 	}

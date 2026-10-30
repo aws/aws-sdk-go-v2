@@ -144,8 +144,12 @@ func (v *DeleteNotifyConfigurationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DisplayName != nil {
 		s.WriteString(schemas.DeleteNotifyConfigurationResult_DisplayName, *v.DisplayName)
 	}
-	serializeNotifyEnabledChannelsList(s, schemas.DeleteNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
-	serializeIsoCountryCodeList(s, schemas.DeleteNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	if v.EnabledChannels != nil {
+		serializeNotifyEnabledChannelsList(s, schemas.DeleteNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
+	}
+	if v.EnabledCountries != nil {
+		serializeIsoCountryCodeList(s, schemas.DeleteNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	}
 	if v.NotifyConfigurationArn != nil {
 		s.WriteString(schemas.DeleteNotifyConfigurationResult_NotifyConfigurationArn, *v.NotifyConfigurationArn)
 	}

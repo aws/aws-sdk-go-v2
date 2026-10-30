@@ -76,7 +76,9 @@ func (v *CreateWebFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RevisionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateWebFunctionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWebFunctionRequest_tags, v.Tags)
+	}
 }
 
 // Contains details about the created web function.
@@ -159,7 +161,9 @@ func (v *CreateWebFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StateReason != nil {
 		s.WriteString(schemas.CreateWebFunctionResponse_stateReason, *v.StateReason)
 	}
-	serializeTags(s, schemas.CreateWebFunctionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWebFunctionResponse_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateWebFunctionResponse_updatedAt, *v.UpdatedAt)
 	}

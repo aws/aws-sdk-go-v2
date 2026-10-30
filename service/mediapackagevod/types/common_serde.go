@@ -7,9 +7,6 @@ import (
 )
 
 func serialize__listOf__PeriodTriggersElement(s smithy.ShapeSerializer, schema *smithy.Schema, v []PeriodTriggersElement) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serialize__listOf__PeriodTriggersElement(s smithy.ShapeSerializer, schema *
 }
 
 func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serialize__listOfAssetShallow(s smithy.ShapeSerializer, schema *smithy.Schema, v []AssetShallow) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -42,9 +33,6 @@ func serialize__listOfAssetShallow(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serialize__listOfDashManifest(s smithy.ShapeSerializer, schema *smithy.Schema, v []DashManifest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -55,9 +43,6 @@ func serialize__listOfDashManifest(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serialize__listOfEgressEndpoint(s smithy.ShapeSerializer, schema *smithy.Schema, v []EgressEndpoint) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -68,9 +53,6 @@ func serialize__listOfEgressEndpoint(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serialize__listOfHlsManifest(s smithy.ShapeSerializer, schema *smithy.Schema, v []HlsManifest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -81,9 +63,6 @@ func serialize__listOfHlsManifest(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serialize__listOfMssManifest(s smithy.ShapeSerializer, schema *smithy.Schema, v []MssManifest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serialize__listOfMssManifest(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serialize__listOfPackagingConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v []PackagingConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serialize__listOfPackagingConfiguration(s smithy.ShapeSerializer, schema *s
 }
 
 func serialize__listOfPackagingGroup(s smithy.ShapeSerializer, schema *smithy.Schema, v []PackagingGroup) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -316,9 +289,6 @@ func deserialize__listOfPackagingGroup(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func serialize__mapOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -328,9 +298,6 @@ func serialize__mapOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

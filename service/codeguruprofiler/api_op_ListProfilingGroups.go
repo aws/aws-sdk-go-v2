@@ -136,8 +136,12 @@ func (v *ListProfilingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfilingGroupsResponse_nextToken, *v.NextToken)
 	}
-	serializeProfilingGroupNames(s, schemas.ListProfilingGroupsResponse_profilingGroupNames, v.ProfilingGroupNames)
-	serializeProfilingGroupDescriptions(s, schemas.ListProfilingGroupsResponse_profilingGroups, v.ProfilingGroups)
+	if v.ProfilingGroupNames != nil {
+		serializeProfilingGroupNames(s, schemas.ListProfilingGroupsResponse_profilingGroupNames, v.ProfilingGroupNames)
+	}
+	if v.ProfilingGroups != nil {
+		serializeProfilingGroupDescriptions(s, schemas.ListProfilingGroupsResponse_profilingGroups, v.ProfilingGroups)
+	}
 }
 func (v *ListProfilingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfilingGroupsResponse, func(s *smithy.Schema) error {

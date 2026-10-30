@@ -187,11 +187,15 @@ func (v *GetMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProcessingStatusInfo != nil {
 		s.WriteString(schemas.GetMonitorOutput_ProcessingStatusInfo, *v.ProcessingStatusInfo)
 	}
-	serializeSetOfARNs(s, schemas.GetMonitorOutput_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeSetOfARNs(s, schemas.GetMonitorOutput_Resources, v.Resources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetMonitorOutput_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetMonitorOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetMonitorOutput_Tags, v.Tags)
+	}
 	if v.TrafficPercentageToMonitor != nil {
 		s.WriteInt32(schemas.GetMonitorOutput_TrafficPercentageToMonitor, *v.TrafficPercentageToMonitor)
 	}

@@ -161,11 +161,15 @@ func (v *PutMetricStreamInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutMetricStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricStreamFilters(s, schemas.PutMetricStreamInput_ExcludeFilters, v.ExcludeFilters)
+	if v.ExcludeFilters != nil {
+		serializeMetricStreamFilters(s, schemas.PutMetricStreamInput_ExcludeFilters, v.ExcludeFilters)
+	}
 	if v.FirehoseArn != nil {
 		s.WriteString(schemas.PutMetricStreamInput_FirehoseArn, *v.FirehoseArn)
 	}
-	serializeMetricStreamFilters(s, schemas.PutMetricStreamInput_IncludeFilters, v.IncludeFilters)
+	if v.IncludeFilters != nil {
+		serializeMetricStreamFilters(s, schemas.PutMetricStreamInput_IncludeFilters, v.IncludeFilters)
+	}
 	if v.IncludeLinkedAccountsMetrics != nil {
 		s.WriteBool(schemas.PutMetricStreamInput_IncludeLinkedAccountsMetrics, *v.IncludeLinkedAccountsMetrics)
 	}
@@ -178,8 +182,12 @@ func (v *PutMetricStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PutMetricStreamInput_RoleArn, *v.RoleArn)
 	}
-	serializeMetricStreamStatisticsConfigurations(s, schemas.PutMetricStreamInput_StatisticsConfigurations, v.StatisticsConfigurations)
-	serializeTagList(s, schemas.PutMetricStreamInput_Tags, v.Tags)
+	if v.StatisticsConfigurations != nil {
+		serializeMetricStreamStatisticsConfigurations(s, schemas.PutMetricStreamInput_StatisticsConfigurations, v.StatisticsConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutMetricStreamInput_Tags, v.Tags)
+	}
 }
 
 type PutMetricStreamOutput struct {

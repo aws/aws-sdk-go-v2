@@ -65,7 +65,9 @@ func (v *UpdateArchiveRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateArchiveRuleRequest_clientToken, *v.ClientToken)
 	}
-	serializeFilterCriteriaMap(s, schemas.UpdateArchiveRuleRequest_filter, v.Filter)
+	if v.Filter != nil {
+		serializeFilterCriteriaMap(s, schemas.UpdateArchiveRuleRequest_filter, v.Filter)
+	}
 	if v.RuleName != nil {
 		s.WriteString(schemas.UpdateArchiveRuleRequest_ruleName, *v.RuleName)
 	}

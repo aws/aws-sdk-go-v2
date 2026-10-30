@@ -170,7 +170,9 @@ func (v *UpdateConsentPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalUrl != nil {
 		s.WriteString(schemas.UpdateConsentPortalResponse_portalUrl, *v.PortalUrl)
 	}
-	serializeConsentPortalSources(s, schemas.UpdateConsentPortalResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeConsentPortalSources(s, schemas.UpdateConsentPortalResponse_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateConsentPortalResponse_status, string(v.Status))
 	}

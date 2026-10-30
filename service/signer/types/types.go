@@ -67,7 +67,9 @@ func (v *EncryptionAlgorithmOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncryptionAlgorithmOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionAlgorithms(s, schemas.EncryptionAlgorithmOptions_allowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializeEncryptionAlgorithms(s, schemas.EncryptionAlgorithmOptions_allowedValues, v.AllowedValues)
+	}
 	if v.DefaultValue != "" {
 		s.WriteString(schemas.EncryptionAlgorithmOptions_defaultValue, string(v.DefaultValue))
 	}
@@ -112,7 +114,9 @@ func (v *HashAlgorithmOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HashAlgorithmOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHashAlgorithms(s, schemas.HashAlgorithmOptions_allowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serializeHashAlgorithms(s, schemas.HashAlgorithmOptions_allowedValues, v.AllowedValues)
+	}
 	if v.DefaultValue != "" {
 		s.WriteString(schemas.HashAlgorithmOptions_defaultValue, string(v.DefaultValue))
 	}
@@ -531,7 +535,9 @@ func (v *SigningImageFormat) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultFormat != "" {
 		s.WriteString(schemas.SigningImageFormat_defaultFormat, string(v.DefaultFormat))
 	}
-	serializeImageFormats(s, schemas.SigningImageFormat_supportedFormats, v.SupportedFormats)
+	if v.SupportedFormats != nil {
+		serializeImageFormats(s, schemas.SigningImageFormat_supportedFormats, v.SupportedFormats)
+	}
 }
 func (v *SigningImageFormat) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SigningImageFormat, func(s *smithy.Schema) error {
@@ -1030,11 +1036,15 @@ func (v *SigningProfile) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SigningMaterial.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningParameters(s, schemas.SigningProfile_signingParameters, v.SigningParameters)
+	if v.SigningParameters != nil {
+		serializeSigningParameters(s, schemas.SigningProfile_signingParameters, v.SigningParameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.SigningProfile_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.SigningProfile_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.SigningProfile_tags, v.Tags)
+	}
 }
 func (v *SigningProfile) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SigningProfile, func(s *smithy.Schema) error {

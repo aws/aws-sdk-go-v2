@@ -87,7 +87,9 @@ func (v *DescribeNotificationSubscriptionsOutput) SerializeMembers(s smithy.Shap
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeNotificationSubscriptionsResponse_Marker, *v.Marker)
 	}
-	serializeSubscriptionList(s, schemas.DescribeNotificationSubscriptionsResponse_Subscriptions, v.Subscriptions)
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.DescribeNotificationSubscriptionsResponse_Subscriptions, v.Subscriptions)
+	}
 }
 func (v *DescribeNotificationSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNotificationSubscriptionsResponse, func(s *smithy.Schema) error {

@@ -76,7 +76,9 @@ func (v *CreateMitigationActionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateMitigationActionRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateMitigationActionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMitigationActionRequest_tags, v.Tags)
+	}
 }
 
 type CreateMitigationActionOutput struct {

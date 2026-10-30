@@ -71,7 +71,9 @@ func (v *GetPartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.GetPartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeValueStringList(s, schemas.GetPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializeValueStringList(s, schemas.GetPartitionRequest_PartitionValues, v.PartitionValues)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.GetPartitionRequest_TableName, *v.TableName)
 	}

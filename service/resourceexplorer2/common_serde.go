@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAccountIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeAccountIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeBatchGetViewErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchGetViewError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeBatchGetViewErrors(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeCFNResourceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeCFNResourceTypeList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeIncludedPropertyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IncludedProperty) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeIncludedPropertyList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeIndexList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Index) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -69,9 +54,6 @@ func serializeIndexList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeManagedViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -80,9 +62,6 @@ func serializeManagedViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeMemberIndexList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MemberIndex) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -93,9 +72,6 @@ func serializeMemberIndexList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -104,9 +80,6 @@ func serializeRegionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeRegionStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RegionStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -117,9 +90,6 @@ func serializeRegionStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Resource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -130,9 +100,6 @@ func serializeResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeResourcePropertyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceProperty) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -143,9 +110,6 @@ func serializeResourcePropertyList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeResourceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SupportedResourceType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -156,9 +120,6 @@ func serializeResourceTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeServiceViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -167,9 +128,6 @@ func serializeServiceViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeStreamingAccessDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.StreamingAccessDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -180,9 +138,6 @@ func serializeStreamingAccessDetailsList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -191,9 +146,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -204,9 +156,6 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -215,9 +164,6 @@ func serializeViewArnList(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 }
 
 func serializeViewList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.View) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -617,9 +563,6 @@ func deserializeViewList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]type
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

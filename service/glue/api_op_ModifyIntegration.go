@@ -159,7 +159,9 @@ func (v *ModifyIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModifyIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationAdditionalEncryptionContextMap(s, schemas.ModifyIntegrationResponse_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeIntegrationAdditionalEncryptionContextMap(s, schemas.ModifyIntegrationResponse_AdditionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.ModifyIntegrationResponse_CreateTime, *v.CreateTime)
 	}
@@ -169,7 +171,9 @@ func (v *ModifyIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ModifyIntegrationResponse_Description, *v.Description)
 	}
-	serializeIntegrationErrorList(s, schemas.ModifyIntegrationResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeIntegrationErrorList(s, schemas.ModifyIntegrationResponse_Errors, v.Errors)
+	}
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.ModifyIntegrationResponse_IntegrationArn, *v.IntegrationArn)
 	}
@@ -190,7 +194,9 @@ func (v *ModifyIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ModifyIntegrationResponse_Status, string(v.Status))
 	}
-	serializeIntegrationTagsList(s, schemas.ModifyIntegrationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeIntegrationTagsList(s, schemas.ModifyIntegrationResponse_Tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.ModifyIntegrationResponse_TargetArn, *v.TargetArn)
 	}

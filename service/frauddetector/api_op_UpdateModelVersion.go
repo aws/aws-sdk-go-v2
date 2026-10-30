@@ -87,7 +87,9 @@ func (v *UpdateModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelType != "" {
 		s.WriteString(schemas.UpdateModelVersionRequest_modelType, string(v.ModelType))
 	}
-	serializetagList(s, schemas.UpdateModelVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.UpdateModelVersionRequest_tags, v.Tags)
+	}
 }
 
 type UpdateModelVersionOutput struct {

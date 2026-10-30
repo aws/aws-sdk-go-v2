@@ -47,7 +47,9 @@ func (v *DescribeExclusionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeExclusionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeExclusionsArnList(s, schemas.DescribeExclusionsRequest_exclusionArns, v.ExclusionArns)
+	if v.ExclusionArns != nil {
+		serializeBatchDescribeExclusionsArnList(s, schemas.DescribeExclusionsRequest_exclusionArns, v.ExclusionArns)
+	}
 	if v.Locale != "" {
 		s.WriteString(schemas.DescribeExclusionsRequest_locale, string(v.Locale))
 	}
@@ -79,8 +81,12 @@ func (v *DescribeExclusionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeExclusionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionMap(s, schemas.DescribeExclusionsResponse_exclusions, v.Exclusions)
-	serializeFailedItems(s, schemas.DescribeExclusionsResponse_failedItems, v.FailedItems)
+	if v.Exclusions != nil {
+		serializeExclusionMap(s, schemas.DescribeExclusionsResponse_exclusions, v.Exclusions)
+	}
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.DescribeExclusionsResponse_failedItems, v.FailedItems)
+	}
 }
 func (v *DescribeExclusionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeExclusionsResponse, func(s *smithy.Schema) error {

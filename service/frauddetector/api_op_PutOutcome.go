@@ -55,7 +55,9 @@ func (v *PutOutcomeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutOutcomeRequest_name, *v.Name)
 	}
-	serializetagList(s, schemas.PutOutcomeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.PutOutcomeRequest_tags, v.Tags)
+	}
 }
 
 type PutOutcomeOutput struct {

@@ -77,14 +77,18 @@ func (v *UpdateNotificationRuleInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DetailType != "" {
 		s.WriteString(schemas.UpdateNotificationRuleRequest_DetailType, string(v.DetailType))
 	}
-	serializeEventTypeIds(s, schemas.UpdateNotificationRuleRequest_EventTypeIds, v.EventTypeIds)
+	if v.EventTypeIds != nil {
+		serializeEventTypeIds(s, schemas.UpdateNotificationRuleRequest_EventTypeIds, v.EventTypeIds)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateNotificationRuleRequest_Name, *v.Name)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateNotificationRuleRequest_Status, string(v.Status))
 	}
-	serializeTargets(s, schemas.UpdateNotificationRuleRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.UpdateNotificationRuleRequest_Targets, v.Targets)
+	}
 }
 
 type UpdateNotificationRuleOutput struct {

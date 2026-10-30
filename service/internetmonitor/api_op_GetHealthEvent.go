@@ -182,7 +182,9 @@ func (v *GetHealthEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImpactType != "" {
 		s.WriteString(schemas.GetHealthEventOutput_ImpactType, string(v.ImpactType))
 	}
-	serializeImpactedLocationsList(s, schemas.GetHealthEventOutput_ImpactedLocations, v.ImpactedLocations)
+	if v.ImpactedLocations != nil {
+		serializeImpactedLocationsList(s, schemas.GetHealthEventOutput_ImpactedLocations, v.ImpactedLocations)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetHealthEventOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}

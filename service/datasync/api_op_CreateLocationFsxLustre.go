@@ -77,11 +77,15 @@ func (v *CreateLocationFsxLustreInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FsxFilesystemArn != nil {
 		s.WriteString(schemas.CreateLocationFsxLustreRequest_FsxFilesystemArn, *v.FsxFilesystemArn)
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxLustreRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxLustreRequest_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationFsxLustreRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationFsxLustreRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationFsxLustreRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLocationFsxLustreOutput struct {

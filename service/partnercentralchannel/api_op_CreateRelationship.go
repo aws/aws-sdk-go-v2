@@ -99,14 +99,18 @@ func (v *CreateRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProgramManagementAccountIdentifier != nil {
 		s.WriteString(schemas.CreateRelationshipRequest_programManagementAccountIdentifier, *v.ProgramManagementAccountIdentifier)
 	}
-	serializeSupportPlan(s, schemas.CreateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
+	if v.RequestedSupportPlan != nil {
+		serializeSupportPlan(s, schemas.CreateRelationshipRequest_requestedSupportPlan, v.RequestedSupportPlan)
+	}
 	if v.ResaleAccountModel != "" {
 		s.WriteString(schemas.CreateRelationshipRequest_resaleAccountModel, string(v.ResaleAccountModel))
 	}
 	if v.Sector != "" {
 		s.WriteString(schemas.CreateRelationshipRequest_sector, string(v.Sector))
 	}
-	serializeTagList(s, schemas.CreateRelationshipRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRelationshipRequest_tags, v.Tags)
+	}
 }
 
 type CreateRelationshipOutput struct {

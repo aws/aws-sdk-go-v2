@@ -151,11 +151,15 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateJobRequest_description, *v.Description)
 	}
-	serializeDestinationPackageVersions(s, schemas.CreateJobRequest_destinationPackageVersions, v.DestinationPackageVersions)
+	if v.DestinationPackageVersions != nil {
+		serializeDestinationPackageVersions(s, schemas.CreateJobRequest_destinationPackageVersions, v.DestinationPackageVersions)
+	}
 	if v.Document != nil {
 		s.WriteString(schemas.CreateJobRequest_document, *v.Document)
 	}
-	serializeParameterMap(s, schemas.CreateJobRequest_documentParameters, v.DocumentParameters)
+	if v.DocumentParameters != nil {
+		serializeParameterMap(s, schemas.CreateJobRequest_documentParameters, v.DocumentParameters)
+	}
 	if v.DocumentSource != nil {
 		s.WriteString(schemas.CreateJobRequest_documentSource, *v.DocumentSource)
 	}
@@ -188,11 +192,15 @@ func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SchedulingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateJobRequest_tags, v.Tags)
+	}
 	if v.TargetSelection != "" {
 		s.WriteString(schemas.CreateJobRequest_targetSelection, string(v.TargetSelection))
 	}
-	serializeJobTargets(s, schemas.CreateJobRequest_targets, v.Targets)
+	if v.Targets != nil {
+		serializeJobTargets(s, schemas.CreateJobRequest_targets, v.Targets)
+	}
 	if v.TimeoutConfig != nil {
 		s.WriteStruct(schemas.CreateJobRequest_timeoutConfig)
 		v.TimeoutConfig.SerializeMembers(s)

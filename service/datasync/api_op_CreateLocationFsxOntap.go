@@ -94,14 +94,18 @@ func (v *CreateLocationFsxOntapInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.Protocol.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOntapRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOntapRequest_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.StorageVirtualMachineArn != nil {
 		s.WriteString(schemas.CreateLocationFsxOntapRequest_StorageVirtualMachineArn, *v.StorageVirtualMachineArn)
 	}
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationFsxOntapRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationFsxOntapRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationFsxOntapRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLocationFsxOntapOutput struct {

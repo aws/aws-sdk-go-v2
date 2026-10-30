@@ -169,7 +169,9 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.GetApplicationResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.GetApplicationResponse_VpcId, *v.VpcId)
 	}

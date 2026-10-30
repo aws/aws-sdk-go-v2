@@ -151,7 +151,9 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsVerifiedAuthor != nil {
 		s.WriteBool(schemas.GetApplicationResponse_IsVerifiedAuthor, *v.IsVerifiedAuthor)
 	}
-	serialize__listOf__string(s, schemas.GetApplicationResponse_Labels, v.Labels)
+	if v.Labels != nil {
+		serialize__listOf__string(s, schemas.GetApplicationResponse_Labels, v.Labels)
+	}
 	if v.LicenseUrl != nil {
 		s.WriteString(schemas.GetApplicationResponse_LicenseUrl, *v.LicenseUrl)
 	}

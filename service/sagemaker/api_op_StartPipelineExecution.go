@@ -92,7 +92,9 @@ func (v *StartPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PipelineName != nil {
 		s.WriteString(schemas.StartPipelineExecutionRequest_PipelineName, *v.PipelineName)
 	}
-	serializeParameterList(s, schemas.StartPipelineExecutionRequest_PipelineParameters, v.PipelineParameters)
+	if v.PipelineParameters != nil {
+		serializeParameterList(s, schemas.StartPipelineExecutionRequest_PipelineParameters, v.PipelineParameters)
+	}
 	if v.PipelineVersionId != nil {
 		s.WriteInt64(schemas.StartPipelineExecutionRequest_PipelineVersionId, *v.PipelineVersionId)
 	}

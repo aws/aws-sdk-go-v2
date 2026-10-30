@@ -69,11 +69,15 @@ func (v *CreateLabelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateLabelGroupRequest_ClientToken, *v.ClientToken)
 	}
-	serializeFaultCodes(s, schemas.CreateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	if v.FaultCodes != nil {
+		serializeFaultCodes(s, schemas.CreateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	}
 	if v.LabelGroupName != nil {
 		s.WriteString(schemas.CreateLabelGroupRequest_LabelGroupName, *v.LabelGroupName)
 	}
-	serializeTagList(s, schemas.CreateLabelGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLabelGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLabelGroupOutput struct {

@@ -98,7 +98,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SingleSignOn.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateDomainInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDomainInput_tags, v.Tags)
+	}
 }
 
 type CreateDomainOutput struct {
@@ -198,7 +200,9 @@ func (v *CreateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateDomainOutput_status, string(v.Status))
 	}
-	serializeTags(s, schemas.CreateDomainOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDomainOutput_tags, v.Tags)
+	}
 }
 func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDomainOutput, func(s *smithy.Schema) error {

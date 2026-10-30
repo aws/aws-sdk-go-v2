@@ -87,7 +87,9 @@ func (v *CreateTrafficDistributionGroupInput) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTrafficDistributionGroupRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateTrafficDistributionGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTrafficDistributionGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTrafficDistributionGroupOutput struct {

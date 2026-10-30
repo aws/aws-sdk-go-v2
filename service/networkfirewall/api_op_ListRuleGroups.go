@@ -120,7 +120,9 @@ func (v *ListRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRuleGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeRuleGroups(s, schemas.ListRuleGroupsResponse_RuleGroups, v.RuleGroups)
+	if v.RuleGroups != nil {
+		serializeRuleGroups(s, schemas.ListRuleGroupsResponse_RuleGroups, v.RuleGroups)
+	}
 }
 func (v *ListRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRuleGroupsResponse, func(s *smithy.Schema) error {

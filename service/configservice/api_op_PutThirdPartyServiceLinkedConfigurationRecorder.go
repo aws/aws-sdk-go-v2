@@ -94,7 +94,9 @@ func (v *PutThirdPartyServiceLinkedConfigurationRecorderInput) SerializeMembers(
 	if v.ServicePrincipal != nil {
 		s.WriteString(schemas.PutThirdPartyServiceLinkedConfigurationRecorderRequest_ServicePrincipal, *v.ServicePrincipal)
 	}
-	serializeTagsList(s, schemas.PutThirdPartyServiceLinkedConfigurationRecorderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutThirdPartyServiceLinkedConfigurationRecorderRequest_Tags, v.Tags)
+	}
 }
 
 type PutThirdPartyServiceLinkedConfigurationRecorderOutput struct {

@@ -76,7 +76,9 @@ func (v *CreateTenantInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SuppressionAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTenantRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTenantRequest_Tags, v.Tags)
+	}
 	if v.TenantName != nil {
 		s.WriteString(schemas.CreateTenantRequest_TenantName, *v.TenantName)
 	}
@@ -131,7 +133,9 @@ func (v *CreateTenantOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SuppressionAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTenantResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTenantResponse_Tags, v.Tags)
+	}
 	if v.TenantArn != nil {
 		s.WriteString(schemas.CreateTenantResponse_TenantArn, *v.TenantArn)
 	}

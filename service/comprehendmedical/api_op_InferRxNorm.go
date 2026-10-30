@@ -82,7 +82,9 @@ func (v *InferRxNormOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InferRxNormOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRxNormEntityList(s, schemas.InferRxNormResponse_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeRxNormEntityList(s, schemas.InferRxNormResponse_Entities, v.Entities)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.InferRxNormResponse_ModelVersion, *v.ModelVersion)
 	}

@@ -341,7 +341,9 @@ func (v *ValidationError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationError_message, *v.Message)
 	}
-	serializeErrorDetailList(s, schemas.ValidationError_reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeErrorDetailList(s, schemas.ValidationError_reasons, v.Reasons)
+	}
 }
 func (v *ValidationError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidationError, func(s *smithy.Schema) error {

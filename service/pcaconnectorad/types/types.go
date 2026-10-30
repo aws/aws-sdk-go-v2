@@ -257,7 +257,9 @@ func (v *ApplicationPolicies) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Critical != nil {
 		s.WriteBool(schemas.ApplicationPolicies_Critical, *v.Critical)
 	}
-	serializeApplicationPolicyList(s, schemas.ApplicationPolicies_Policies, v.Policies)
+	if v.Policies != nil {
+		serializeApplicationPolicyList(s, schemas.ApplicationPolicies_Policies, v.Policies)
+	}
 }
 func (v *ApplicationPolicies) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationPolicies, func(s *smithy.Schema) error {
@@ -1521,7 +1523,9 @@ func (v *PrivateKeyAttributesV2) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrivateKeyAttributesV2) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV2_CryptoProviders, v.CryptoProviders)
+	if v.CryptoProviders != nil {
+		serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV2_CryptoProviders, v.CryptoProviders)
+	}
 	if v.KeySpec != "" {
 		s.WriteString(schemas.PrivateKeyAttributesV2_KeySpec, string(v.KeySpec))
 	}
@@ -1591,11 +1595,15 @@ func (v *PrivateKeyAttributesV3) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Algorithm != "" {
 		s.WriteString(schemas.PrivateKeyAttributesV3_Algorithm, string(v.Algorithm))
 	}
-	serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV3_CryptoProviders, v.CryptoProviders)
+	if v.CryptoProviders != nil {
+		serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV3_CryptoProviders, v.CryptoProviders)
+	}
 	if v.KeySpec != "" {
 		s.WriteString(schemas.PrivateKeyAttributesV3_KeySpec, string(v.KeySpec))
 	}
-	serializeKeyUsageProperty(s, schemas.PrivateKeyAttributesV3_KeyUsageProperty, v.KeyUsageProperty)
+	if v.KeyUsageProperty != nil {
+		serializeKeyUsageProperty(s, schemas.PrivateKeyAttributesV3_KeyUsageProperty, v.KeyUsageProperty)
+	}
 	if v.MinimalKeyLength != nil {
 		s.WriteInt32(schemas.PrivateKeyAttributesV3_MinimalKeyLength, *v.MinimalKeyLength)
 	}
@@ -1667,11 +1675,15 @@ func (v *PrivateKeyAttributesV4) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Algorithm != "" {
 		s.WriteString(schemas.PrivateKeyAttributesV4_Algorithm, string(v.Algorithm))
 	}
-	serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV4_CryptoProviders, v.CryptoProviders)
+	if v.CryptoProviders != nil {
+		serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV4_CryptoProviders, v.CryptoProviders)
+	}
 	if v.KeySpec != "" {
 		s.WriteString(schemas.PrivateKeyAttributesV4_KeySpec, string(v.KeySpec))
 	}
-	serializeKeyUsageProperty(s, schemas.PrivateKeyAttributesV4_KeyUsageProperty, v.KeyUsageProperty)
+	if v.KeyUsageProperty != nil {
+		serializeKeyUsageProperty(s, schemas.PrivateKeyAttributesV4_KeyUsageProperty, v.KeyUsageProperty)
+	}
 	if v.MinimalKeyLength != nil {
 		s.WriteInt32(schemas.PrivateKeyAttributesV4_MinimalKeyLength, *v.MinimalKeyLength)
 	}
@@ -2518,7 +2530,9 @@ func (v *Template) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Template_CreatedAt, *v.CreatedAt)
 	}
-	serializeTemplateDefinition(s, schemas.Template_Definition, v.Definition)
+	if v.Definition != nil {
+		serializeTemplateDefinition(s, schemas.Template_Definition, v.Definition)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Template_Name, *v.Name)
 	}
@@ -2767,7 +2781,9 @@ func (v *TemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.TemplateSummary_CreatedAt, *v.CreatedAt)
 	}
-	serializeTemplateDefinition(s, schemas.TemplateSummary_Definition, v.Definition)
+	if v.Definition != nil {
+		serializeTemplateDefinition(s, schemas.TemplateSummary_Definition, v.Definition)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TemplateSummary_Name, *v.Name)
 	}
@@ -2925,7 +2941,9 @@ func (v *TemplateV2) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SubjectNameFlags.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTemplateNameList(s, schemas.TemplateV2_SupersededTemplates, v.SupersededTemplates)
+	if v.SupersededTemplates != nil {
+		serializeTemplateNameList(s, schemas.TemplateV2_SupersededTemplates, v.SupersededTemplates)
+	}
 }
 func (v *TemplateV2) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemplateV2, func(s *smithy.Schema) error {
@@ -3062,7 +3080,9 @@ func (v *TemplateV3) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SubjectNameFlags.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTemplateNameList(s, schemas.TemplateV3_SupersededTemplates, v.SupersededTemplates)
+	if v.SupersededTemplates != nil {
+		serializeTemplateNameList(s, schemas.TemplateV3_SupersededTemplates, v.SupersededTemplates)
+	}
 }
 func (v *TemplateV3) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemplateV3, func(s *smithy.Schema) error {
@@ -3208,7 +3228,9 @@ func (v *TemplateV4) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SubjectNameFlags.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTemplateNameList(s, schemas.TemplateV4_SupersededTemplates, v.SupersededTemplates)
+	if v.SupersededTemplates != nil {
+		serializeTemplateNameList(s, schemas.TemplateV4_SupersededTemplates, v.SupersededTemplates)
+	}
 }
 func (v *TemplateV4) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemplateV4, func(s *smithy.Schema) error {
@@ -3329,7 +3351,9 @@ func (v *VpcInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.VpcInformation_IpAddressType, string(v.IpAddressType))
 	}
-	serializeSecurityGroupIdList(s, schemas.VpcInformation_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcInformation_SecurityGroupIds, v.SecurityGroupIds)
+	}
 }
 func (v *VpcInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcInformation, func(s *smithy.Schema) error {

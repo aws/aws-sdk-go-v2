@@ -104,11 +104,15 @@ func (v *DiscoverInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NamespaceName != nil {
 		s.WriteString(schemas.DiscoverInstancesRequest_NamespaceName, *v.NamespaceName)
 	}
-	serializeAttributes(s, schemas.DiscoverInstancesRequest_OptionalParameters, v.OptionalParameters)
+	if v.OptionalParameters != nil {
+		serializeAttributes(s, schemas.DiscoverInstancesRequest_OptionalParameters, v.OptionalParameters)
+	}
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.DiscoverInstancesRequest_OwnerAccount, *v.OwnerAccount)
 	}
-	serializeAttributes(s, schemas.DiscoverInstancesRequest_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeAttributes(s, schemas.DiscoverInstancesRequest_QueryParameters, v.QueryParameters)
+	}
 	if v.ServiceName != nil {
 		s.WriteString(schemas.DiscoverInstancesRequest_ServiceName, *v.ServiceName)
 	}
@@ -138,7 +142,9 @@ func (v *DiscoverInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DiscoverInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHttpInstanceSummaryList(s, schemas.DiscoverInstancesResponse_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeHttpInstanceSummaryList(s, schemas.DiscoverInstancesResponse_Instances, v.Instances)
+	}
 	if v.InstancesRevision != nil {
 		s.WriteInt64(schemas.DiscoverInstancesResponse_InstancesRevision, *v.InstancesRevision)
 	}

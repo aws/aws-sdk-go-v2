@@ -95,7 +95,9 @@ func (v *CreateDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateDestinationRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateDestinationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDestinationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDestinationOutput struct {

@@ -72,7 +72,9 @@ func (v *DescribeOptedOutNumbersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeOptedOutNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOptedOutFilterList(s, schemas.DescribeOptedOutNumbersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeOptedOutFilterList(s, schemas.DescribeOptedOutNumbersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeOptedOutNumbersRequest_MaxResults, *v.MaxResults)
 	}
@@ -82,7 +84,9 @@ func (v *DescribeOptedOutNumbersInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.DescribeOptedOutNumbersRequest_OptOutListName, *v.OptOutListName)
 	}
-	serializeOptedOutNumberList(s, schemas.DescribeOptedOutNumbersRequest_OptedOutNumbers, v.OptedOutNumbers)
+	if v.OptedOutNumbers != nil {
+		serializeOptedOutNumberList(s, schemas.DescribeOptedOutNumbersRequest_OptedOutNumbers, v.OptedOutNumbers)
+	}
 }
 
 type DescribeOptedOutNumbersOutput struct {
@@ -123,7 +127,9 @@ func (v *DescribeOptedOutNumbersOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.DescribeOptedOutNumbersResult_OptOutListName, *v.OptOutListName)
 	}
-	serializeOptedOutNumberInformationList(s, schemas.DescribeOptedOutNumbersResult_OptedOutNumbers, v.OptedOutNumbers)
+	if v.OptedOutNumbers != nil {
+		serializeOptedOutNumberInformationList(s, schemas.DescribeOptedOutNumbersResult_OptedOutNumbers, v.OptedOutNumbers)
+	}
 }
 func (v *DescribeOptedOutNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOptedOutNumbersResult, func(s *smithy.Schema) error {

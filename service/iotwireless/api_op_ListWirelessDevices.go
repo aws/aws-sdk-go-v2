@@ -115,7 +115,9 @@ func (v *ListWirelessDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWirelessDevicesResponse_NextToken, *v.NextToken)
 	}
-	serializeWirelessDeviceStatisticsList(s, schemas.ListWirelessDevicesResponse_WirelessDeviceList, v.WirelessDeviceList)
+	if v.WirelessDeviceList != nil {
+		serializeWirelessDeviceStatisticsList(s, schemas.ListWirelessDevicesResponse_WirelessDeviceList, v.WirelessDeviceList)
+	}
 }
 func (v *ListWirelessDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWirelessDevicesResponse, func(s *smithy.Schema) error {

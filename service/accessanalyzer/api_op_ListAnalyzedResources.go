@@ -118,7 +118,9 @@ func (v *ListAnalyzedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnalyzedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyzedResourcesList(s, schemas.ListAnalyzedResourcesResponse_analyzedResources, v.AnalyzedResources)
+	if v.AnalyzedResources != nil {
+		serializeAnalyzedResourcesList(s, schemas.ListAnalyzedResourcesResponse_analyzedResources, v.AnalyzedResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnalyzedResourcesResponse_nextToken, *v.NextToken)
 	}

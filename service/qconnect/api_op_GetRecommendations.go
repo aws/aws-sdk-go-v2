@@ -154,8 +154,12 @@ func (v *GetRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationList(s, schemas.GetRecommendationsResponse_recommendations, v.Recommendations)
-	serializeRecommendationTriggerList(s, schemas.GetRecommendationsResponse_triggers, v.Triggers)
+	if v.Recommendations != nil {
+		serializeRecommendationList(s, schemas.GetRecommendationsResponse_recommendations, v.Recommendations)
+	}
+	if v.Triggers != nil {
+		serializeRecommendationTriggerList(s, schemas.GetRecommendationsResponse_triggers, v.Triggers)
+	}
 }
 func (v *GetRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommendationsResponse, func(s *smithy.Schema) error {

@@ -113,7 +113,9 @@ func (v *CreateCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.CreateCrawlerRequest_CatalogId, *v.CatalogId)
 	}
-	serializeClassifierNameList(s, schemas.CreateCrawlerRequest_Classifiers, v.Classifiers)
+	if v.Classifiers != nil {
+		serializeClassifierNameList(s, schemas.CreateCrawlerRequest_Classifiers, v.Classifiers)
+	}
 	if v.Configuration != nil {
 		s.WriteString(schemas.CreateCrawlerRequest_Configuration, *v.Configuration)
 	}
@@ -158,7 +160,9 @@ func (v *CreateCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TablePrefix != nil {
 		s.WriteString(schemas.CreateCrawlerRequest_TablePrefix, *v.TablePrefix)
 	}
-	serializeTagsMap(s, schemas.CreateCrawlerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateCrawlerRequest_Tags, v.Tags)
+	}
 	if v.Targets != nil {
 		s.WriteStruct(schemas.CreateCrawlerRequest_Targets)
 		v.Targets.SerializeMembers(s)

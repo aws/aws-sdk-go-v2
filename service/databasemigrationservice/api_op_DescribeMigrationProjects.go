@@ -74,7 +74,9 @@ func (v *DescribeMigrationProjectsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeMigrationProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeMigrationProjectsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeMigrationProjectsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeMigrationProjectsMessage_Marker, *v.Marker)
 	}
@@ -114,7 +116,9 @@ func (v *DescribeMigrationProjectsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeMigrationProjectsResponse_Marker, *v.Marker)
 	}
-	serializeMigrationProjectList(s, schemas.DescribeMigrationProjectsResponse_MigrationProjects, v.MigrationProjects)
+	if v.MigrationProjects != nil {
+		serializeMigrationProjectList(s, schemas.DescribeMigrationProjectsResponse_MigrationProjects, v.MigrationProjects)
+	}
 }
 func (v *DescribeMigrationProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMigrationProjectsResponse, func(s *smithy.Schema) error {

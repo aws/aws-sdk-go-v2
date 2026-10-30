@@ -147,7 +147,9 @@ func (v *ListUsersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchedAttributeNamesListType(s, schemas.ListUsersRequest_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeSearchedAttributeNamesListType(s, schemas.ListUsersRequest_AttributesToGet, v.AttributesToGet)
+	}
 	if v.Filter != nil {
 		s.WriteString(schemas.ListUsersRequest_Filter, *v.Filter)
 	}
@@ -194,7 +196,9 @@ func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.ListUsersResponse_PaginationToken, *v.PaginationToken)
 	}
-	serializeUsersListType(s, schemas.ListUsersResponse_Users, v.Users)
+	if v.Users != nil {
+		serializeUsersListType(s, schemas.ListUsersResponse_Users, v.Users)
+	}
 }
 func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {

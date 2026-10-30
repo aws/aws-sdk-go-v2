@@ -76,7 +76,9 @@ func (v *AssertionRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssertionRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.AssertionRule_AssertedControls, v.AssertedControls)
+	if v.AssertedControls != nil {
+		serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.AssertionRule_AssertedControls, v.AssertedControls)
+	}
 	if v.ControlPanelArn != nil {
 		s.WriteString(schemas.AssertionRule_ControlPanelArn, *v.ControlPanelArn)
 	}
@@ -238,7 +240,9 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.Cluster_ClusterArn, *v.ClusterArn)
 	}
-	serialize__listOfClusterEndpoint(s, schemas.Cluster_ClusterEndpoints, v.ClusterEndpoints)
+	if v.ClusterEndpoints != nil {
+		serialize__listOfClusterEndpoint(s, schemas.Cluster_ClusterEndpoints, v.ClusterEndpoints)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Cluster_Name, *v.Name)
 	}
@@ -508,7 +512,9 @@ func (v *GatingRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlPanelArn != nil {
 		s.WriteString(schemas.GatingRule_ControlPanelArn, *v.ControlPanelArn)
 	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.GatingRule_GatingControls, v.GatingControls)
+	if v.GatingControls != nil {
+		serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.GatingRule_GatingControls, v.GatingControls)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GatingRule_Name, *v.Name)
 	}
@@ -526,7 +532,9 @@ func (v *GatingRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GatingRule_Status, string(v.Status))
 	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.GatingRule_TargetControls, v.TargetControls)
+	if v.TargetControls != nil {
+		serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.GatingRule_TargetControls, v.TargetControls)
+	}
 	if v.WaitPeriodMs != nil {
 		s.WriteInt32(schemas.GatingRule_WaitPeriodMs, *v.WaitPeriodMs)
 	}
@@ -676,7 +684,9 @@ func (v *NewAssertionRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NewAssertionRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewAssertionRule_AssertedControls, v.AssertedControls)
+	if v.AssertedControls != nil {
+		serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewAssertionRule_AssertedControls, v.AssertedControls)
+	}
 	if v.ControlPanelArn != nil {
 		s.WriteString(schemas.NewAssertionRule_ControlPanelArn, *v.ControlPanelArn)
 	}
@@ -774,7 +784,9 @@ func (v *NewGatingRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlPanelArn != nil {
 		s.WriteString(schemas.NewGatingRule_ControlPanelArn, *v.ControlPanelArn)
 	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewGatingRule_GatingControls, v.GatingControls)
+	if v.GatingControls != nil {
+		serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewGatingRule_GatingControls, v.GatingControls)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.NewGatingRule_Name, *v.Name)
 	}
@@ -783,7 +795,9 @@ func (v *NewGatingRule) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RuleConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewGatingRule_TargetControls, v.TargetControls)
+	if v.TargetControls != nil {
+		serialize__listOf__stringMin1Max256PatternAZaZ09(s, schemas.NewGatingRule_TargetControls, v.TargetControls)
+	}
 	if v.WaitPeriodMs != nil {
 		s.WriteInt32(schemas.NewGatingRule_WaitPeriodMs, *v.WaitPeriodMs)
 	}

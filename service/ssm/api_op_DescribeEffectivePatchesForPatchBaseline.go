@@ -85,7 +85,9 @@ func (v *DescribeEffectivePatchesForPatchBaselineOutput) Serialize(s smithy.Shap
 }
 
 func (v *DescribeEffectivePatchesForPatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEffectivePatchList(s, schemas.DescribeEffectivePatchesForPatchBaselineResult_EffectivePatches, v.EffectivePatches)
+	if v.EffectivePatches != nil {
+		serializeEffectivePatchList(s, schemas.DescribeEffectivePatchesForPatchBaselineResult_EffectivePatches, v.EffectivePatches)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEffectivePatchesForPatchBaselineResult_NextToken, *v.NextToken)
 	}

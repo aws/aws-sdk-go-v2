@@ -121,8 +121,12 @@ func (v *CreateBudgetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationType != "" {
 		s.WriteString(schemas.CreateBudgetActionRequest_NotificationType, string(v.NotificationType))
 	}
-	serializeResourceTagList(s, schemas.CreateBudgetActionRequest_ResourceTags, v.ResourceTags)
-	serializeSubscribers(s, schemas.CreateBudgetActionRequest_Subscribers, v.Subscribers)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateBudgetActionRequest_ResourceTags, v.ResourceTags)
+	}
+	if v.Subscribers != nil {
+		serializeSubscribers(s, schemas.CreateBudgetActionRequest_Subscribers, v.Subscribers)
+	}
 }
 
 type CreateBudgetActionOutput struct {

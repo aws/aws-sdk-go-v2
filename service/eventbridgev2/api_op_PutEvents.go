@@ -56,7 +56,9 @@ func (v *PutEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeduplicationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePutEventsRequestEntryList(s, schemas.PutEventsRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializePutEventsRequestEntryList(s, schemas.PutEventsRequest_Entries, v.Entries)
+	}
 	if v.EventBusArn != nil {
 		s.WriteString(schemas.PutEventsRequest_EventBusArn, *v.EventBusArn)
 	}
@@ -88,7 +90,9 @@ func (v *PutEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePutEventsResultEntryList(s, schemas.PutEventsResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializePutEventsResultEntryList(s, schemas.PutEventsResponse_Entries, v.Entries)
+	}
 	if v.FailedEntryCount != 0 {
 		s.WriteInt32(schemas.PutEventsResponse_FailedEntryCount, v.FailedEntryCount)
 	}

@@ -89,7 +89,9 @@ func (v *ListGiVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGiVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGiVersionList(s, schemas.ListGiVersionsOutput_giVersions, v.GiVersions)
+	if v.GiVersions != nil {
+		serializeGiVersionList(s, schemas.ListGiVersionsOutput_giVersions, v.GiVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGiVersionsOutput_nextToken, *v.NextToken)
 	}

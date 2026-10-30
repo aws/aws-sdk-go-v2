@@ -87,7 +87,9 @@ func (v *ListGremlinQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptedQueryCount != nil {
 		s.WriteInt32(schemas.ListGremlinQueriesOutput_acceptedQueryCount, *v.AcceptedQueryCount)
 	}
-	serializeGremlinQueries(s, schemas.ListGremlinQueriesOutput_queries, v.Queries)
+	if v.Queries != nil {
+		serializeGremlinQueries(s, schemas.ListGremlinQueriesOutput_queries, v.Queries)
+	}
 	if v.RunningQueryCount != nil {
 		s.WriteInt32(schemas.ListGremlinQueriesOutput_runningQueryCount, *v.RunningQueryCount)
 	}

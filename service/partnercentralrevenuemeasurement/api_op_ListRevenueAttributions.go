@@ -79,7 +79,9 @@ func (v *ListRevenueAttributionsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CreatedBefore != nil {
 		s.WriteTime(schemas.ListRevenueAttributionsInput_CreatedBefore, *v.CreatedBefore)
 	}
-	serializeRevenueAttributionIdentifierList(s, schemas.ListRevenueAttributionsInput_Identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeRevenueAttributionIdentifierList(s, schemas.ListRevenueAttributionsInput_Identifiers, v.Identifiers)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRevenueAttributionsInput_MaxResults, *v.MaxResults)
 	}
@@ -118,7 +120,9 @@ func (v *ListRevenueAttributionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRevenueAttributionsOutput_NextToken, *v.NextToken)
 	}
-	serializeRevenueAttributionSummaries(s, schemas.ListRevenueAttributionsOutput_RevenueAttributionSummaries, v.RevenueAttributionSummaries)
+	if v.RevenueAttributionSummaries != nil {
+		serializeRevenueAttributionSummaries(s, schemas.ListRevenueAttributionsOutput_RevenueAttributionSummaries, v.RevenueAttributionSummaries)
+	}
 }
 func (v *ListRevenueAttributionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRevenueAttributionsOutput, func(s *smithy.Schema) error {

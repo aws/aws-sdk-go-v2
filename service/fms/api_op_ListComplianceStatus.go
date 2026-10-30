@@ -100,7 +100,9 @@ func (v *ListComplianceStatusOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComplianceStatusResponse_NextToken, *v.NextToken)
 	}
-	serializePolicyComplianceStatusList(s, schemas.ListComplianceStatusResponse_PolicyComplianceStatusList, v.PolicyComplianceStatusList)
+	if v.PolicyComplianceStatusList != nil {
+		serializePolicyComplianceStatusList(s, schemas.ListComplianceStatusResponse_PolicyComplianceStatusList, v.PolicyComplianceStatusList)
+	}
 }
 func (v *ListComplianceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListComplianceStatusResponse, func(s *smithy.Schema) error {

@@ -88,7 +88,9 @@ func (v *ListCostCategoryResourceAssociationsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListCostCategoryResourceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostCategoryResourceAssociations(s, schemas.ListCostCategoryResourceAssociationsResponse_CostCategoryResourceAssociations, v.CostCategoryResourceAssociations)
+	if v.CostCategoryResourceAssociations != nil {
+		serializeCostCategoryResourceAssociations(s, schemas.ListCostCategoryResourceAssociationsResponse_CostCategoryResourceAssociations, v.CostCategoryResourceAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCostCategoryResourceAssociationsResponse_NextToken, *v.NextToken)
 	}

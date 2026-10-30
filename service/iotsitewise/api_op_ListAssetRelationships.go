@@ -105,7 +105,9 @@ func (v *ListAssetRelationshipsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetRelationshipSummaries(s, schemas.ListAssetRelationshipsResponse_assetRelationshipSummaries, v.AssetRelationshipSummaries)
+	if v.AssetRelationshipSummaries != nil {
+		serializeAssetRelationshipSummaries(s, schemas.ListAssetRelationshipsResponse_assetRelationshipSummaries, v.AssetRelationshipSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetRelationshipsResponse_nextToken, *v.NextToken)
 	}

@@ -97,7 +97,9 @@ func (v *ListTransactionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTransactionsResponse_NextToken, *v.NextToken)
 	}
-	serializeTransactionDescriptionList(s, schemas.ListTransactionsResponse_Transactions, v.Transactions)
+	if v.Transactions != nil {
+		serializeTransactionDescriptionList(s, schemas.ListTransactionsResponse_Transactions, v.Transactions)
+	}
 }
 func (v *ListTransactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTransactionsResponse, func(s *smithy.Schema) error {

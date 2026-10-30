@@ -121,7 +121,9 @@ func (v *CreateSequenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSequenceStoreRequest_name, *v.Name)
 	}
-	serializePropagatedSetLevelTags(s, schemas.CreateSequenceStoreRequest_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.PropagatedSetLevelTags != nil {
+		serializePropagatedSetLevelTags(s, schemas.CreateSequenceStoreRequest_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	}
 	if v.S3AccessConfig != nil {
 		s.WriteStruct(schemas.CreateSequenceStoreRequest_s3AccessConfig)
 		v.S3AccessConfig.SerializeMembers(s)
@@ -132,7 +134,9 @@ func (v *CreateSequenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SseConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateSequenceStoreRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSequenceStoreRequest_tags, v.Tags)
+	}
 }
 
 type CreateSequenceStoreOutput struct {
@@ -215,7 +219,9 @@ func (v *CreateSequenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSequenceStoreResponse_name, *v.Name)
 	}
-	serializePropagatedSetLevelTags(s, schemas.CreateSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.PropagatedSetLevelTags != nil {
+		serializePropagatedSetLevelTags(s, schemas.CreateSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	}
 	if v.S3Access != nil {
 		s.WriteStruct(schemas.CreateSequenceStoreResponse_s3Access)
 		v.S3Access.SerializeMembers(s)

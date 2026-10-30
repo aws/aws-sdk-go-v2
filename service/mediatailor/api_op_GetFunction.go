@@ -147,7 +147,9 @@ func (v *GetFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SequentialExecutorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	}
 	if v.VastRequestConfiguration != nil {
 		s.WriteStruct(schemas.GetFunctionResponse_VastRequestConfiguration)
 		v.VastRequestConfiguration.SerializeMembers(s)

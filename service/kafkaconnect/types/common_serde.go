@@ -7,9 +7,6 @@ import (
 )
 
 func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serialize__listOfConnectorOperationStep(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConnectorOperationStep) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serialize__listOfConnectorOperationStep(s smithy.ShapeSerializer, schema *s
 }
 
 func serialize__listOfConnectorOperationSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConnectorOperationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -44,9 +35,6 @@ func serialize__listOfConnectorOperationSummary(s smithy.ShapeSerializer, schema
 }
 
 func serialize__listOfConnectorSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConnectorSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serialize__listOfConnectorSummary(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serialize__listOfCustomPluginSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []CustomPluginSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serialize__listOfCustomPluginSummary(s smithy.ShapeSerializer, schema *smit
 }
 
 func serialize__listOfPlugin(s smithy.ShapeSerializer, schema *smithy.Schema, v []Plugin) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -83,9 +65,6 @@ func serialize__listOfPlugin(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serialize__listOfPluginDescription(s smithy.ShapeSerializer, schema *smithy.Schema, v []PluginDescription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -96,9 +75,6 @@ func serialize__listOfPluginDescription(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serialize__listOfPluginUpdate(s smithy.ShapeSerializer, schema *smithy.Schema, v []PluginUpdate) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -109,9 +85,6 @@ func serialize__listOfPluginUpdate(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serialize__listOfWorkerConfigurationSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []WorkerConfigurationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -122,9 +95,6 @@ func serialize__listOfWorkerConfigurationSummary(s smithy.ShapeSerializer, schem
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -351,9 +321,6 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeConnectorConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -363,9 +330,6 @@ func serializeConnectorConfiguration(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeConnectorConfigurationUpdate(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -375,9 +339,6 @@ func serializeConnectorConfigurationUpdate(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

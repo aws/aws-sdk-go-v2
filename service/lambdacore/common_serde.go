@@ -32,9 +32,6 @@ func deserializeNetworkConnectorConfiguration(d smithy.ShapeDeserializer, s *smi
 }
 
 func serializeAssociatedComputeResourceTypesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ComputeResourceType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +40,6 @@ func serializeAssociatedComputeResourceTypesList(s smithy.ShapeSerializer, schem
 }
 
 func serializeNetworkConnectorSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -54,9 +48,6 @@ func serializeNetworkConnectorSecurityGroupIds(s smithy.ShapeSerializer, schema 
 }
 
 func serializeNetworkConnectorsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.NetworkConnectorSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -67,9 +58,6 @@ func serializeNetworkConnectorsList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeNetworkConnectorSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -78,9 +66,6 @@ func serializeNetworkConnectorSubnetIds(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeNetworkConnectorVersionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.NetworkConnectorVersionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -198,9 +183,6 @@ func deserializeNetworkConnectorVersionsList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeNetworkConnectorTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

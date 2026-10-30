@@ -43,7 +43,9 @@ func (v *BatchGetViewInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetViewInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeViewArnList(s, schemas.BatchGetViewInput_ViewArns, v.ViewArns)
+	if v.ViewArns != nil {
+		serializeViewArnList(s, schemas.BatchGetViewInput_ViewArns, v.ViewArns)
+	}
 }
 func (v *BatchGetViewInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetViewInput, func(s *smithy.Schema) error {
@@ -77,8 +79,12 @@ func (v *BatchGetViewOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetViewErrors(s, schemas.BatchGetViewOutput_Errors, v.Errors)
-	serializeViewList(s, schemas.BatchGetViewOutput_Views, v.Views)
+	if v.Errors != nil {
+		serializeBatchGetViewErrors(s, schemas.BatchGetViewOutput_Errors, v.Errors)
+	}
+	if v.Views != nil {
+		serializeViewList(s, schemas.BatchGetViewOutput_Views, v.Views)
+	}
 }
 func (v *BatchGetViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetViewOutput, func(s *smithy.Schema) error {

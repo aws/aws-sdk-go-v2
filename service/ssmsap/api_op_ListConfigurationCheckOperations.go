@@ -68,7 +68,9 @@ func (v *ListConfigurationCheckOperationsInput) SerializeMembers(s smithy.ShapeS
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.ListConfigurationCheckOperationsInput_ApplicationId, *v.ApplicationId)
 	}
-	serializeFilterList(s, schemas.ListConfigurationCheckOperationsInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListConfigurationCheckOperationsInput_Filters, v.Filters)
+	}
 	if v.ListMode != "" {
 		s.WriteString(schemas.ListConfigurationCheckOperationsInput_ListMode, string(v.ListMode))
 	}
@@ -102,7 +104,9 @@ func (v *ListConfigurationCheckOperationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListConfigurationCheckOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationCheckOperationList(s, schemas.ListConfigurationCheckOperationsOutput_ConfigurationCheckOperations, v.ConfigurationCheckOperations)
+	if v.ConfigurationCheckOperations != nil {
+		serializeConfigurationCheckOperationList(s, schemas.ListConfigurationCheckOperationsOutput_ConfigurationCheckOperations, v.ConfigurationCheckOperations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationCheckOperationsOutput_NextToken, *v.NextToken)
 	}

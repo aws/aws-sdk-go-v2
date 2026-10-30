@@ -94,7 +94,9 @@ func (v *ListSuggestedResiliencyPoliciesOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSuggestedResiliencyPoliciesResponse_nextToken, *v.NextToken)
 	}
-	serializeResiliencyPolicies(s, schemas.ListSuggestedResiliencyPoliciesResponse_resiliencyPolicies, v.ResiliencyPolicies)
+	if v.ResiliencyPolicies != nil {
+		serializeResiliencyPolicies(s, schemas.ListSuggestedResiliencyPoliciesResponse_resiliencyPolicies, v.ResiliencyPolicies)
+	}
 }
 func (v *ListSuggestedResiliencyPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSuggestedResiliencyPoliciesResponse, func(s *smithy.Schema) error {

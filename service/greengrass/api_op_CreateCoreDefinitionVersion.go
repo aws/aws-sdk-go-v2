@@ -56,7 +56,9 @@ func (v *CreateCoreDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CoreDefinitionId != nil {
 		s.WriteString(schemas.CreateCoreDefinitionVersionRequest_CoreDefinitionId, *v.CoreDefinitionId)
 	}
-	serialize__listOfCore(s, schemas.CreateCoreDefinitionVersionRequest_Cores, v.Cores)
+	if v.Cores != nil {
+		serialize__listOfCore(s, schemas.CreateCoreDefinitionVersionRequest_Cores, v.Cores)
+	}
 }
 
 type CreateCoreDefinitionVersionOutput struct {

@@ -7,9 +7,6 @@ import (
 )
 
 func serializeBatchGetRecordErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchGetRecordError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeBatchGetRecordErrors(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeBatchGetRecordIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchGetRecordIdentifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeBatchGetRecordIdentifiers(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeBatchGetRecordResultDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchGetRecordResultDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeBatchGetRecordResultDetails(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeBatchWriteRecordEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchWriteRecordEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeBatchWriteRecordEntries(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeBatchWriteRecordErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchWriteRecordError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeBatchWriteRecordErrors(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeFeatureNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -83,9 +65,6 @@ func serializeFeatureNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeRecord(s smithy.ShapeSerializer, schema *smithy.Schema, v []FeatureValue) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -96,9 +75,6 @@ func serializeRecord(s smithy.ShapeSerializer, schema *smithy.Schema, v []Featur
 }
 
 func serializeRecordIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -107,9 +83,6 @@ func serializeRecordIdentifierList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeRecordIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -118,9 +91,6 @@ func serializeRecordIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTargetStores(s smithy.ShapeSerializer, schema *smithy.Schema, v []TargetStore) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -129,9 +99,6 @@ func serializeTargetStores(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeUnprocessedBatchWriteRecordEntries(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchWriteRecordEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -142,9 +109,6 @@ func serializeUnprocessedBatchWriteRecordEntries(s smithy.ShapeSerializer, schem
 }
 
 func serializeUnprocessedIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []BatchGetRecordIdentifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -155,9 +119,6 @@ func serializeUnprocessedIdentifiers(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeValueAsStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))

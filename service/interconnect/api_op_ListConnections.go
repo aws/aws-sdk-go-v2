@@ -70,7 +70,9 @@ func (v *ListConnectionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachPoint(s, schemas.ListConnectionsRequest_attachPoint, v.AttachPoint)
+	if v.AttachPoint != nil {
+		serializeAttachPoint(s, schemas.ListConnectionsRequest_attachPoint, v.AttachPoint)
+	}
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.ListConnectionsRequest_environmentId, *v.EnvironmentId)
 	}
@@ -80,7 +82,9 @@ func (v *ListConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectionsRequest_nextToken, *v.NextToken)
 	}
-	serializeProvider(s, schemas.ListConnectionsRequest_provider, v.Provider)
+	if v.Provider != nil {
+		serializeProvider(s, schemas.ListConnectionsRequest_provider, v.Provider)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.ListConnectionsRequest_state, string(v.State))
 	}
@@ -108,7 +112,9 @@ func (v *ListConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionSummariesList(s, schemas.ListConnectionsResponse_connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionSummariesList(s, schemas.ListConnectionsResponse_connections, v.Connections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectionsResponse_nextToken, *v.NextToken)
 	}

@@ -77,7 +77,9 @@ func (v *DescribeCustomerMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCustomerMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementList(s, schemas.DescribeCustomerMetadataResponse_agreements, v.Agreements)
+	if v.Agreements != nil {
+		serializeAgreementList(s, schemas.DescribeCustomerMetadataResponse_agreements, v.Agreements)
+	}
 	if v.NniPartnerType != "" {
 		s.WriteString(schemas.DescribeCustomerMetadataResponse_nniPartnerType, string(v.NniPartnerType))
 	}

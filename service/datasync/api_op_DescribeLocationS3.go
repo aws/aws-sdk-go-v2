@@ -101,7 +101,9 @@ func (v *DescribeLocationS3Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLocationS3Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.DescribeLocationS3Response_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.DescribeLocationS3Response_AgentArns, v.AgentArns)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeLocationS3Response_CreationTime, *v.CreationTime)
 	}

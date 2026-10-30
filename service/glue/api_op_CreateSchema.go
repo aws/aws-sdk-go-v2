@@ -141,7 +141,9 @@ func (v *CreateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaName != nil {
 		s.WriteString(schemas.CreateSchemaInput_SchemaName, *v.SchemaName)
 	}
-	serializeTagsMap(s, schemas.CreateSchemaInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateSchemaInput_Tags, v.Tags)
+	}
 }
 
 type CreateSchemaOutput struct {
@@ -242,7 +244,9 @@ func (v *CreateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaVersionStatus != "" {
 		s.WriteString(schemas.CreateSchemaResponse_SchemaVersionStatus, string(v.SchemaVersionStatus))
 	}
-	serializeTagsMap(s, schemas.CreateSchemaResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateSchemaResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSchemaResponse, func(s *smithy.Schema) error {

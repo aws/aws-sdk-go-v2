@@ -67,8 +67,12 @@ func (v *CreateCustomDetectionRuleOrgConfigurationInput) SerializeMembers(s smit
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateCustomDetectionRuleOrgConfigurationRequest_ClientToken, *v.ClientToken)
 	}
-	serializeDetectionRuleAccountIds(s, schemas.CreateCustomDetectionRuleOrgConfigurationRequest_ExcludeAccountIds, v.ExcludeAccountIds)
-	serializeDetectionRuleAccountIds(s, schemas.CreateCustomDetectionRuleOrgConfigurationRequest_IncludeAccountIds, v.IncludeAccountIds)
+	if v.ExcludeAccountIds != nil {
+		serializeDetectionRuleAccountIds(s, schemas.CreateCustomDetectionRuleOrgConfigurationRequest_ExcludeAccountIds, v.ExcludeAccountIds)
+	}
+	if v.IncludeAccountIds != nil {
+		serializeDetectionRuleAccountIds(s, schemas.CreateCustomDetectionRuleOrgConfigurationRequest_IncludeAccountIds, v.IncludeAccountIds)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.CreateCustomDetectionRuleOrgConfigurationRequest_Mode, string(v.Mode))
 	}

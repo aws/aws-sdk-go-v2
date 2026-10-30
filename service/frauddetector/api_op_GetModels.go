@@ -96,7 +96,9 @@ func (v *GetModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializemodelList(s, schemas.GetModelsResult_models, v.Models)
+	if v.Models != nil {
+		serializemodelList(s, schemas.GetModelsResult_models, v.Models)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetModelsResult_nextToken, *v.NextToken)
 	}

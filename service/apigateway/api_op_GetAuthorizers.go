@@ -84,7 +84,9 @@ func (v *GetAuthorizersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAuthorizersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAuthorizer(s, schemas.Authorizers_items, v.Items)
+	if v.Items != nil {
+		serializeListOfAuthorizer(s, schemas.Authorizers_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.Authorizers_position, *v.Position)
 	}

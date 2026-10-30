@@ -105,7 +105,9 @@ func (v *ListCisScansOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCisScansResponse_nextToken, *v.NextToken)
 	}
-	serializeCisScanList(s, schemas.ListCisScansResponse_scans, v.Scans)
+	if v.Scans != nil {
+		serializeCisScanList(s, schemas.ListCisScansResponse_scans, v.Scans)
+	}
 }
 func (v *ListCisScansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCisScansResponse, func(s *smithy.Schema) error {

@@ -64,7 +64,9 @@ func (v *CreateDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RetentionDays != nil {
 		s.WriteInt32(schemas.CreateDbBackupInput_retentionDays, *v.RetentionDays)
 	}
-	serializeRequestTagMap(s, schemas.CreateDbBackupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateDbBackupInput_tags, v.Tags)
+	}
 }
 
 type CreateDbBackupOutput struct {
@@ -237,8 +239,12 @@ func (v *CreateDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDbBackupOutput_type, string(v.Type))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.CreateDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *CreateDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDbBackupOutput, func(s *smithy.Schema) error {

@@ -99,7 +99,9 @@ func (v *ListTrustedEntitySetsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrustedEntitySetsResponse_NextToken, *v.NextToken)
 	}
-	serializeTrustedEntitySetIds(s, schemas.ListTrustedEntitySetsResponse_TrustedEntitySetIds, v.TrustedEntitySetIds)
+	if v.TrustedEntitySetIds != nil {
+		serializeTrustedEntitySetIds(s, schemas.ListTrustedEntitySetsResponse_TrustedEntitySetIds, v.TrustedEntitySetIds)
+	}
 }
 func (v *ListTrustedEntitySetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrustedEntitySetsResponse, func(s *smithy.Schema) error {

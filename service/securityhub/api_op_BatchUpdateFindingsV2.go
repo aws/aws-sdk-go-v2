@@ -84,8 +84,12 @@ func (v *BatchUpdateFindingsV2Input) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Comment != nil {
 		s.WriteString(schemas.BatchUpdateFindingsV2Request_Comment, *v.Comment)
 	}
-	serializeOcsfFindingIdentifierList(s, schemas.BatchUpdateFindingsV2Request_FindingIdentifiers, v.FindingIdentifiers)
-	serializeMetadataUidList(s, schemas.BatchUpdateFindingsV2Request_MetadataUids, v.MetadataUids)
+	if v.FindingIdentifiers != nil {
+		serializeOcsfFindingIdentifierList(s, schemas.BatchUpdateFindingsV2Request_FindingIdentifiers, v.FindingIdentifiers)
+	}
+	if v.MetadataUids != nil {
+		serializeMetadataUidList(s, schemas.BatchUpdateFindingsV2Request_MetadataUids, v.MetadataUids)
+	}
 	if v.SeverityId != nil {
 		s.WriteInt32(schemas.BatchUpdateFindingsV2Request_SeverityId, *v.SeverityId)
 	}
@@ -119,8 +123,12 @@ func (v *BatchUpdateFindingsV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateFindingsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateFindingsV2ProcessedFindingsList(s, schemas.BatchUpdateFindingsV2Response_ProcessedFindings, v.ProcessedFindings)
-	serializeBatchUpdateFindingsV2UnprocessedFindingsList(s, schemas.BatchUpdateFindingsV2Response_UnprocessedFindings, v.UnprocessedFindings)
+	if v.ProcessedFindings != nil {
+		serializeBatchUpdateFindingsV2ProcessedFindingsList(s, schemas.BatchUpdateFindingsV2Response_ProcessedFindings, v.ProcessedFindings)
+	}
+	if v.UnprocessedFindings != nil {
+		serializeBatchUpdateFindingsV2UnprocessedFindingsList(s, schemas.BatchUpdateFindingsV2Response_UnprocessedFindings, v.UnprocessedFindings)
+	}
 }
 func (v *BatchUpdateFindingsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateFindingsV2Response, func(s *smithy.Schema) error {

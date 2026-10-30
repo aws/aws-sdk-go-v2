@@ -97,7 +97,9 @@ func (v *SearchSchemasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchSchemasResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfSearchSchemaSummary(s, schemas.SearchSchemasResponse_Schemas, v.Schemas)
+	if v.Schemas != nil {
+		serialize__listOfSearchSchemaSummary(s, schemas.SearchSchemasResponse_Schemas, v.Schemas)
+	}
 }
 func (v *SearchSchemasOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchSchemasResponse, func(s *smithy.Schema) error {

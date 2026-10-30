@@ -93,7 +93,9 @@ func (v *ListComponentBuildVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComponentBuildVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentSummaryList(s, schemas.ListComponentBuildVersionsResponse_componentSummaryList, v.ComponentSummaryList)
+	if v.ComponentSummaryList != nil {
+		serializeComponentSummaryList(s, schemas.ListComponentBuildVersionsResponse_componentSummaryList, v.ComponentSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComponentBuildVersionsResponse_nextToken, *v.NextToken)
 	}

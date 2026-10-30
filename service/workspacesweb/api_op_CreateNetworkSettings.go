@@ -75,9 +75,15 @@ func (v *CreateNetworkSettingsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateNetworkSettingsRequest_clientToken, *v.ClientToken)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateNetworkSettingsRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateNetworkSettingsRequest_subnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateNetworkSettingsRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateNetworkSettingsRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateNetworkSettingsRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNetworkSettingsRequest_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateNetworkSettingsRequest_vpcId, *v.VpcId)
 	}

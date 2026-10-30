@@ -55,7 +55,9 @@ func (v *DescribeDirectoryConfigsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDirectoryConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryNameList(s, schemas.DescribeDirectoryConfigsRequest_DirectoryNames, v.DirectoryNames)
+	if v.DirectoryNames != nil {
+		serializeDirectoryNameList(s, schemas.DescribeDirectoryConfigsRequest_DirectoryNames, v.DirectoryNames)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeDirectoryConfigsRequest_MaxResults, *v.MaxResults)
 	}
@@ -88,7 +90,9 @@ func (v *DescribeDirectoryConfigsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDirectoryConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryConfigList(s, schemas.DescribeDirectoryConfigsResult_DirectoryConfigs, v.DirectoryConfigs)
+	if v.DirectoryConfigs != nil {
+		serializeDirectoryConfigList(s, schemas.DescribeDirectoryConfigsResult_DirectoryConfigs, v.DirectoryConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDirectoryConfigsResult_NextToken, *v.NextToken)
 	}

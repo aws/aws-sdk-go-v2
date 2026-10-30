@@ -180,7 +180,9 @@ func (v *UpdateFlowSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxSyncBuffer != nil {
 		s.WriteInt32(schemas.UpdateFlowSourceRequest_MaxSyncBuffer, *v.MaxSyncBuffer)
 	}
-	serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.UpdateFlowSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	if v.MediaStreamSourceConfigurations != nil {
+		serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.UpdateFlowSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.UpdateFlowSourceRequest_MinLatency, *v.MinLatency)
 	}

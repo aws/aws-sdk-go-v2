@@ -91,7 +91,9 @@ func (v *ListCollaborationChangeRequestsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListCollaborationChangeRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationChangeRequestSummaryList(s, schemas.ListCollaborationChangeRequestsOutput_collaborationChangeRequestSummaries, v.CollaborationChangeRequestSummaries)
+	if v.CollaborationChangeRequestSummaries != nil {
+		serializeCollaborationChangeRequestSummaryList(s, schemas.ListCollaborationChangeRequestsOutput_collaborationChangeRequestSummaries, v.CollaborationChangeRequestSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationChangeRequestsOutput_nextToken, *v.NextToken)
 	}

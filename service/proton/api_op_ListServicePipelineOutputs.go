@@ -107,7 +107,9 @@ func (v *ListServicePipelineOutputsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServicePipelineOutputsOutput_nextToken, *v.NextToken)
 	}
-	serializeOutputsList(s, schemas.ListServicePipelineOutputsOutput_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputsList(s, schemas.ListServicePipelineOutputsOutput_outputs, v.Outputs)
+	}
 }
 func (v *ListServicePipelineOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServicePipelineOutputsOutput, func(s *smithy.Schema) error {

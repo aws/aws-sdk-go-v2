@@ -176,9 +176,15 @@ func (v *Permit) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Permit) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionSet(s, schemas.Permit_actions, v.Actions)
-	serializeConditions(s, schemas.Permit_conditions, v.Conditions)
-	serializeResourceSet(s, schemas.Permit_resources, v.Resources)
+	if v.Actions != nil {
+		serializeActionSet(s, schemas.Permit_actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.Permit_conditions, v.Conditions)
+	}
+	if v.Resources != nil {
+		serializeResourceSet(s, schemas.Permit_resources, v.Resources)
+	}
 }
 func (v *Permit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Permit, func(s *smithy.Schema) error {
@@ -417,7 +423,9 @@ func (v *SupportPermitSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Permit.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningKeyInfo(s, schemas.SupportPermitSummary_signingKeyInfo, v.SigningKeyInfo)
+	if v.SigningKeyInfo != nil {
+		serializeSigningKeyInfo(s, schemas.SupportPermitSummary_signingKeyInfo, v.SigningKeyInfo)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.SupportPermitSummary_status, string(v.Status))
 	}

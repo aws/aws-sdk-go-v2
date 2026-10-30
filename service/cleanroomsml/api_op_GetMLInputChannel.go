@@ -192,7 +192,9 @@ func (v *GetMLInputChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollaborationIdentifier != nil {
 		s.WriteString(schemas.GetMLInputChannelResponse_collaborationIdentifier, *v.CollaborationIdentifier)
 	}
-	serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.GetMLInputChannelResponse_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	if v.ConfiguredModelAlgorithmAssociations != nil {
+		serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.GetMLInputChannelResponse_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.GetMLInputChannelResponse_createTime, *v.CreateTime)
 	}
@@ -227,7 +229,9 @@ func (v *GetMLInputChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PayerConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrivacyBudgets(s, schemas.GetMLInputChannelResponse_privacyBudgets, v.PrivacyBudgets)
+	if v.PrivacyBudgets != nil {
+		serializePrivacyBudgets(s, schemas.GetMLInputChannelResponse_privacyBudgets, v.PrivacyBudgets)
+	}
 	if v.ProtectedQueryIdentifier != nil {
 		s.WriteString(schemas.GetMLInputChannelResponse_protectedQueryIdentifier, *v.ProtectedQueryIdentifier)
 	}
@@ -250,7 +254,9 @@ func (v *GetMLInputChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SyntheticDataConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetMLInputChannelResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetMLInputChannelResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetMLInputChannelResponse_updateTime, *v.UpdateTime)
 	}

@@ -114,7 +114,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SlurmConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

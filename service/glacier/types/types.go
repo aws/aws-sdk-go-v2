@@ -183,7 +183,9 @@ func (v *DataRetrievalPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataRetrievalPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataRetrievalRulesList(s, schemas.DataRetrievalPolicy_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeDataRetrievalRulesList(s, schemas.DataRetrievalPolicy_Rules, v.Rules)
+	}
 }
 func (v *DataRetrievalPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataRetrievalPolicy, func(s *smithy.Schema) error {
@@ -1276,7 +1278,9 @@ func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlPolicyList(s, schemas.S3Location_AccessControlList, v.AccessControlList)
+	if v.AccessControlList != nil {
+		serializeAccessControlPolicyList(s, schemas.S3Location_AccessControlList, v.AccessControlList)
+	}
 	if v.BucketName != nil {
 		s.WriteString(schemas.S3Location_BucketName, *v.BucketName)
 	}
@@ -1294,8 +1298,12 @@ func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageClass != "" {
 		s.WriteString(schemas.S3Location_StorageClass, string(v.StorageClass))
 	}
-	serializehashmap(s, schemas.S3Location_Tagging, v.Tagging)
-	serializehashmap(s, schemas.S3Location_UserMetadata, v.UserMetadata)
+	if v.Tagging != nil {
+		serializehashmap(s, schemas.S3Location_Tagging, v.Tagging)
+	}
+	if v.UserMetadata != nil {
+		serializehashmap(s, schemas.S3Location_UserMetadata, v.UserMetadata)
+	}
 }
 func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
@@ -1552,7 +1560,9 @@ func (v *VaultNotificationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VaultNotificationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationEventList(s, schemas.VaultNotificationConfig_Events, v.Events)
+	if v.Events != nil {
+		serializeNotificationEventList(s, schemas.VaultNotificationConfig_Events, v.Events)
+	}
 	if v.SNSTopic != nil {
 		s.WriteString(schemas.VaultNotificationConfig_SNSTopic, *v.SNSTopic)
 	}

@@ -104,7 +104,9 @@ func (v *ListLaunchPathsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLaunchPathsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLaunchPathSummaries(s, schemas.ListLaunchPathsOutput_LaunchPathSummaries, v.LaunchPathSummaries)
+	if v.LaunchPathSummaries != nil {
+		serializeLaunchPathSummaries(s, schemas.ListLaunchPathsOutput_LaunchPathSummaries, v.LaunchPathSummaries)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListLaunchPathsOutput_NextPageToken, *v.NextPageToken)
 	}

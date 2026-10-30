@@ -101,7 +101,9 @@ func (v *ListServiceDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Service != nil {
 		s.WriteString(schemas.ListServiceDeploymentsRequest_service, *v.Service)
 	}
-	serializeServiceDeploymentStatusList(s, schemas.ListServiceDeploymentsRequest_status, v.Status)
+	if v.Status != nil {
+		serializeServiceDeploymentStatusList(s, schemas.ListServiceDeploymentsRequest_status, v.Status)
+	}
 }
 
 type ListServiceDeploymentsOutput struct {
@@ -147,7 +149,9 @@ func (v *ListServiceDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceDeploymentsResponse_nextToken, *v.NextToken)
 	}
-	serializeServiceDeploymentsBrief(s, schemas.ListServiceDeploymentsResponse_serviceDeployments, v.ServiceDeployments)
+	if v.ServiceDeployments != nil {
+		serializeServiceDeploymentsBrief(s, schemas.ListServiceDeploymentsResponse_serviceDeployments, v.ServiceDeployments)
+	}
 }
 func (v *ListServiceDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceDeploymentsResponse, func(s *smithy.Schema) error {

@@ -111,7 +111,9 @@ func (v *AgentInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentId != nil {
 		s.WriteString(schemas.AgentInfo_agentId, *v.AgentId)
 	}
-	serializeAgentNetworkInfoList(s, schemas.AgentInfo_agentNetworkInfoList, v.AgentNetworkInfoList)
+	if v.AgentNetworkInfoList != nil {
+		serializeAgentNetworkInfoList(s, schemas.AgentInfo_agentNetworkInfoList, v.AgentNetworkInfoList)
+	}
 	if v.AgentType != nil {
 		s.WriteString(schemas.AgentInfo_agentType, *v.AgentType)
 	}
@@ -329,13 +331,21 @@ func (v *BatchDeleteConfigurationTask) SerializeMembers(s smithy.ShapeSerializer
 	if v.ConfigurationType != "" {
 		s.WriteString(schemas.BatchDeleteConfigurationTask_configurationType, string(v.ConfigurationType))
 	}
-	serializeConfigurationIdList(s, schemas.BatchDeleteConfigurationTask_deletedConfigurations, v.DeletedConfigurations)
-	serializeDeletionWarningsList(s, schemas.BatchDeleteConfigurationTask_deletionWarnings, v.DeletionWarnings)
+	if v.DeletedConfigurations != nil {
+		serializeConfigurationIdList(s, schemas.BatchDeleteConfigurationTask_deletedConfigurations, v.DeletedConfigurations)
+	}
+	if v.DeletionWarnings != nil {
+		serializeDeletionWarningsList(s, schemas.BatchDeleteConfigurationTask_deletionWarnings, v.DeletionWarnings)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.BatchDeleteConfigurationTask_endTime, *v.EndTime)
 	}
-	serializeFailedConfigurationList(s, schemas.BatchDeleteConfigurationTask_failedConfigurations, v.FailedConfigurations)
-	serializeConfigurationIdList(s, schemas.BatchDeleteConfigurationTask_requestedConfigurations, v.RequestedConfigurations)
+	if v.FailedConfigurations != nil {
+		serializeFailedConfigurationList(s, schemas.BatchDeleteConfigurationTask_failedConfigurations, v.FailedConfigurations)
+	}
+	if v.RequestedConfigurations != nil {
+		serializeConfigurationIdList(s, schemas.BatchDeleteConfigurationTask_requestedConfigurations, v.RequestedConfigurations)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.BatchDeleteConfigurationTask_startTime, *v.StartTime)
 	}
@@ -645,7 +655,9 @@ func (v *ContinuousExportDescription) SerializeMembers(s smithy.ShapeSerializer)
 	if v.S3Bucket != nil {
 		s.WriteString(schemas.ContinuousExportDescription_s3Bucket, *v.S3Bucket)
 	}
-	serializeSchemaStorageConfig(s, schemas.ContinuousExportDescription_schemaStorageConfig, v.SchemaStorageConfig)
+	if v.SchemaStorageConfig != nil {
+		serializeSchemaStorageConfig(s, schemas.ContinuousExportDescription_schemaStorageConfig, v.SchemaStorageConfig)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ContinuousExportDescription_startTime, *v.StartTime)
 	}
@@ -1158,7 +1170,9 @@ func (v *Ec2RecommendationsExportPreferences) SerializeMembers(s smithy.ShapeSer
 	if v.Enabled != false {
 		s.WriteBool(schemas.Ec2RecommendationsExportPreferences_enabled, v.Enabled)
 	}
-	serializeExcludedInstanceTypes(s, schemas.Ec2RecommendationsExportPreferences_excludedInstanceTypes, v.ExcludedInstanceTypes)
+	if v.ExcludedInstanceTypes != nil {
+		serializeExcludedInstanceTypes(s, schemas.Ec2RecommendationsExportPreferences_excludedInstanceTypes, v.ExcludedInstanceTypes)
+	}
 	if v.PreferredRegion != nil {
 		s.WriteString(schemas.Ec2RecommendationsExportPreferences_preferredRegion, *v.PreferredRegion)
 	}
@@ -1247,7 +1261,9 @@ func (v *ExportFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ExportFilter_name, *v.Name)
 	}
-	serializeFilterValues(s, schemas.ExportFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.ExportFilter_values, v.Values)
+	}
 }
 func (v *ExportFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportFilter, func(s *smithy.Schema) error {
@@ -1503,7 +1519,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_name, *v.Name)
 	}
-	serializeFilterValues(s, schemas.Filter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -1728,7 +1746,9 @@ func (v *ImportTaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ImportTaskFilter_name, string(v.Name))
 	}
-	serializeImportTaskFilterValueList(s, schemas.ImportTaskFilter_values, v.Values)
+	if v.Values != nil {
+		serializeImportTaskFilterValueList(s, schemas.ImportTaskFilter_values, v.Values)
+	}
 }
 func (v *ImportTaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportTaskFilter, func(s *smithy.Schema) error {
@@ -2003,7 +2023,9 @@ func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TagFilter_name, *v.Name)
 	}
-	serializeFilterValues(s, schemas.TagFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.TagFilter_values, v.Values)
+	}
 }
 func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {

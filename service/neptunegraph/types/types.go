@@ -31,7 +31,9 @@ func (v *EdgeStructure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != nil {
 		s.WriteInt64(schemas.EdgeStructure_count, *v.Count)
 	}
-	serializeEdgeProperties(s, schemas.EdgeStructure_edgeProperties, v.EdgeProperties)
+	if v.EdgeProperties != nil {
+		serializeEdgeProperties(s, schemas.EdgeStructure_edgeProperties, v.EdgeProperties)
+	}
 }
 func (v *EdgeStructure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EdgeStructure, func(s *smithy.Schema) error {
@@ -70,8 +72,12 @@ func (v *ExportFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportFilterPerLabelMap(s, schemas.ExportFilter_edgeFilter, v.EdgeFilter)
-	serializeExportFilterPerLabelMap(s, schemas.ExportFilter_vertexFilter, v.VertexFilter)
+	if v.EdgeFilter != nil {
+		serializeExportFilterPerLabelMap(s, schemas.ExportFilter_edgeFilter, v.EdgeFilter)
+	}
+	if v.VertexFilter != nil {
+		serializeExportFilterPerLabelMap(s, schemas.ExportFilter_vertexFilter, v.VertexFilter)
+	}
 }
 func (v *ExportFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportFilter, func(s *smithy.Schema) error {
@@ -102,7 +108,9 @@ func (v *ExportFilterElement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportFilterElement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportFilterPropertyMap(s, schemas.ExportFilterElement_properties, v.Properties)
+	if v.Properties != nil {
+		serializeExportFilterPropertyMap(s, schemas.ExportFilterElement_properties, v.Properties)
+	}
 }
 func (v *ExportFilterElement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportFilterElement, func(s *smithy.Schema) error {
@@ -438,12 +446,24 @@ func (v *GraphDataSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GraphDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeLabels(s, schemas.GraphDataSummary_edgeLabels, v.EdgeLabels)
-	serializeLongValuedMapList(s, schemas.GraphDataSummary_edgeProperties, v.EdgeProperties)
-	serializeEdgeStructures(s, schemas.GraphDataSummary_edgeStructures, v.EdgeStructures)
-	serializeNodeLabels(s, schemas.GraphDataSummary_nodeLabels, v.NodeLabels)
-	serializeLongValuedMapList(s, schemas.GraphDataSummary_nodeProperties, v.NodeProperties)
-	serializeNodeStructures(s, schemas.GraphDataSummary_nodeStructures, v.NodeStructures)
+	if v.EdgeLabels != nil {
+		serializeEdgeLabels(s, schemas.GraphDataSummary_edgeLabels, v.EdgeLabels)
+	}
+	if v.EdgeProperties != nil {
+		serializeLongValuedMapList(s, schemas.GraphDataSummary_edgeProperties, v.EdgeProperties)
+	}
+	if v.EdgeStructures != nil {
+		serializeEdgeStructures(s, schemas.GraphDataSummary_edgeStructures, v.EdgeStructures)
+	}
+	if v.NodeLabels != nil {
+		serializeNodeLabels(s, schemas.GraphDataSummary_nodeLabels, v.NodeLabels)
+	}
+	if v.NodeProperties != nil {
+		serializeLongValuedMapList(s, schemas.GraphDataSummary_nodeProperties, v.NodeProperties)
+	}
+	if v.NodeStructures != nil {
+		serializeNodeStructures(s, schemas.GraphDataSummary_nodeStructures, v.NodeStructures)
+	}
 	if v.NumEdgeLabels != nil {
 		s.WriteInt64(schemas.GraphDataSummary_numEdgeLabels, *v.NumEdgeLabels)
 	}
@@ -1077,8 +1097,12 @@ func (v *NodeStructure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != nil {
 		s.WriteInt64(schemas.NodeStructure_count, *v.Count)
 	}
-	serializeOutgoingEdgeLabels(s, schemas.NodeStructure_distinctOutgoingEdgeLabels, v.DistinctOutgoingEdgeLabels)
-	serializeNodeProperties(s, schemas.NodeStructure_nodeProperties, v.NodeProperties)
+	if v.DistinctOutgoingEdgeLabels != nil {
+		serializeOutgoingEdgeLabels(s, schemas.NodeStructure_distinctOutgoingEdgeLabels, v.DistinctOutgoingEdgeLabels)
+	}
+	if v.NodeProperties != nil {
+		serializeNodeProperties(s, schemas.NodeStructure_nodeProperties, v.NodeProperties)
+	}
 }
 func (v *NodeStructure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NodeStructure, func(s *smithy.Schema) error {
@@ -1129,7 +1153,9 @@ func (v *PrivateGraphEndpointSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != "" {
 		s.WriteString(schemas.PrivateGraphEndpointSummary_status, string(v.Status))
 	}
-	serializeSubnetIds(s, schemas.PrivateGraphEndpointSummary_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.PrivateGraphEndpointSummary_subnetIds, v.SubnetIds)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.PrivateGraphEndpointSummary_vpcEndpointId, *v.VpcEndpointId)
 	}

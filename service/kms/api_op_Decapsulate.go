@@ -150,7 +150,9 @@ func (v *DecapsulateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncapsulationAlgorithm != "" {
 		s.WriteString(schemas.DecapsulateRequest_EncapsulationAlgorithm, string(v.EncapsulationAlgorithm))
 	}
-	serializeGrantTokenList(s, schemas.DecapsulateRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.DecapsulateRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.DecapsulateRequest_KeyId, *v.KeyId)
 	}

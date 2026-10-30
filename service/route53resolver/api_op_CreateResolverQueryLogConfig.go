@@ -101,7 +101,9 @@ func (v *CreateResolverQueryLogConfigInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateResolverQueryLogConfigRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateResolverQueryLogConfigRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResolverQueryLogConfigRequest_Tags, v.Tags)
+	}
 }
 
 type CreateResolverQueryLogConfigOutput struct {

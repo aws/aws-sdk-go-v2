@@ -163,7 +163,9 @@ func (v *SearchAgreementsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.SearchAgreementsInput_catalog, *v.Catalog)
 	}
-	serializeFilterList(s, schemas.SearchAgreementsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.SearchAgreementsInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchAgreementsInput_maxResults, *v.MaxResults)
 	}
@@ -199,7 +201,9 @@ func (v *SearchAgreementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchAgreementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementViewSummaryList(s, schemas.SearchAgreementsOutput_agreementViewSummaries, v.AgreementViewSummaries)
+	if v.AgreementViewSummaries != nil {
+		serializeAgreementViewSummaryList(s, schemas.SearchAgreementsOutput_agreementViewSummaries, v.AgreementViewSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAgreementsOutput_nextToken, *v.NextToken)
 	}

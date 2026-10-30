@@ -175,7 +175,9 @@ func (v *InvokeInlineAgentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvokeInlineAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentActionGroups(s, schemas.InvokeInlineAgentRequest_actionGroups, v.ActionGroups)
+	if v.ActionGroups != nil {
+		serializeAgentActionGroups(s, schemas.InvokeInlineAgentRequest_actionGroups, v.ActionGroups)
+	}
 	if v.AgentCollaboration != "" {
 		s.WriteString(schemas.InvokeInlineAgentRequest_agentCollaboration, string(v.AgentCollaboration))
 	}
@@ -187,8 +189,12 @@ func (v *InvokeInlineAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BedrockModelConfigurations.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCollaboratorConfigurations(s, schemas.InvokeInlineAgentRequest_collaboratorConfigurations, v.CollaboratorConfigurations)
-	serializeCollaborators(s, schemas.InvokeInlineAgentRequest_collaborators, v.Collaborators)
+	if v.CollaboratorConfigurations != nil {
+		serializeCollaboratorConfigurations(s, schemas.InvokeInlineAgentRequest_collaboratorConfigurations, v.CollaboratorConfigurations)
+	}
+	if v.Collaborators != nil {
+		serializeCollaborators(s, schemas.InvokeInlineAgentRequest_collaborators, v.Collaborators)
+	}
 	if v.CustomOrchestration != nil {
 		s.WriteStruct(schemas.InvokeInlineAgentRequest_customOrchestration)
 		v.CustomOrchestration.SerializeMembers(s)
@@ -225,7 +231,9 @@ func (v *InvokeInlineAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Instruction != nil {
 		s.WriteString(schemas.InvokeInlineAgentRequest_instruction, *v.Instruction)
 	}
-	serializeKnowledgeBases(s, schemas.InvokeInlineAgentRequest_knowledgeBases, v.KnowledgeBases)
+	if v.KnowledgeBases != nil {
+		serializeKnowledgeBases(s, schemas.InvokeInlineAgentRequest_knowledgeBases, v.KnowledgeBases)
+	}
 	if v.OrchestrationType != "" {
 		s.WriteString(schemas.InvokeInlineAgentRequest_orchestrationType, string(v.OrchestrationType))
 	}

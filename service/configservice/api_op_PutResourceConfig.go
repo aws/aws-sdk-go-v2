@@ -104,7 +104,9 @@ func (v *PutResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SchemaVersionId != nil {
 		s.WriteString(schemas.PutResourceConfigRequest_SchemaVersionId, *v.SchemaVersionId)
 	}
-	serializeTags(s, schemas.PutResourceConfigRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PutResourceConfigRequest_Tags, v.Tags)
+	}
 }
 
 type PutResourceConfigOutput struct {

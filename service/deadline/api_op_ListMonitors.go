@@ -84,7 +84,9 @@ func (v *ListMonitorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitorSummaries(s, schemas.ListMonitorsResponse_monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorSummaries(s, schemas.ListMonitorsResponse_monitors, v.Monitors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitorsResponse_nextToken, *v.NextToken)
 	}

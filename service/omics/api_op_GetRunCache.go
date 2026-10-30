@@ -127,7 +127,9 @@ func (v *GetRunCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetRunCacheResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetRunCacheResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetRunCacheResponse_tags, v.Tags)
+	}
 }
 func (v *GetRunCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRunCacheResponse, func(s *smithy.Schema) error {

@@ -81,7 +81,9 @@ func (v *EnableEnhancedMonitoringInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableEnhancedMonitoringInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricsNameList(s, schemas.EnableEnhancedMonitoringInput_ShardLevelMetrics, v.ShardLevelMetrics)
+	if v.ShardLevelMetrics != nil {
+		serializeMetricsNameList(s, schemas.EnableEnhancedMonitoringInput_ShardLevelMetrics, v.ShardLevelMetrics)
+	}
 	if v.StreamARN != nil {
 		s.WriteString(schemas.EnableEnhancedMonitoringInput_StreamARN, *v.StreamARN)
 	}
@@ -129,8 +131,12 @@ func (v *EnableEnhancedMonitoringOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableEnhancedMonitoringOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics, v.CurrentShardLevelMetrics)
-	serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics, v.DesiredShardLevelMetrics)
+	if v.CurrentShardLevelMetrics != nil {
+		serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_CurrentShardLevelMetrics, v.CurrentShardLevelMetrics)
+	}
+	if v.DesiredShardLevelMetrics != nil {
+		serializeMetricsNameList(s, schemas.EnhancedMonitoringOutput_DesiredShardLevelMetrics, v.DesiredShardLevelMetrics)
+	}
 	if v.StreamARN != nil {
 		s.WriteString(schemas.EnhancedMonitoringOutput_StreamARN, *v.StreamARN)
 	}

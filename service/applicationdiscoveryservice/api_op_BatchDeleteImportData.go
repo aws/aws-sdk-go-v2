@@ -57,7 +57,9 @@ func (v *BatchDeleteImportDataInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DeleteHistory != false {
 		s.WriteBool(schemas.BatchDeleteImportDataRequest_deleteHistory, v.DeleteHistory)
 	}
-	serializeToDeleteIdentifierList(s, schemas.BatchDeleteImportDataRequest_importTaskIds, v.ImportTaskIds)
+	if v.ImportTaskIds != nil {
+		serializeToDeleteIdentifierList(s, schemas.BatchDeleteImportDataRequest_importTaskIds, v.ImportTaskIds)
+	}
 }
 
 type BatchDeleteImportDataOutput struct {
@@ -79,7 +81,9 @@ func (v *BatchDeleteImportDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteImportDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteImportDataErrorList(s, schemas.BatchDeleteImportDataResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteImportDataErrorList(s, schemas.BatchDeleteImportDataResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteImportDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteImportDataResponse, func(s *smithy.Schema) error {

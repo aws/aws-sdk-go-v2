@@ -88,8 +88,12 @@ func (v *ListCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectionIdList(s, schemas.ListCollectionsResponse_CollectionIds, v.CollectionIds)
-	serializeFaceModelVersionList(s, schemas.ListCollectionsResponse_FaceModelVersions, v.FaceModelVersions)
+	if v.CollectionIds != nil {
+		serializeCollectionIdList(s, schemas.ListCollectionsResponse_CollectionIds, v.CollectionIds)
+	}
+	if v.FaceModelVersions != nil {
+		serializeFaceModelVersionList(s, schemas.ListCollectionsResponse_FaceModelVersions, v.FaceModelVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollectionsResponse_NextToken, *v.NextToken)
 	}

@@ -100,7 +100,9 @@ func (v *GetBuiltinIntentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBuiltinIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuiltinIntentMetadataList(s, schemas.GetBuiltinIntentsResponse_intents, v.Intents)
+	if v.Intents != nil {
+		serializeBuiltinIntentMetadataList(s, schemas.GetBuiltinIntentsResponse_intents, v.Intents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBuiltinIntentsResponse_nextToken, *v.NextToken)
 	}

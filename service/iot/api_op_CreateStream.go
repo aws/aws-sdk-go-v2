@@ -68,14 +68,18 @@ func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateStreamRequest_description, *v.Description)
 	}
-	serializeStreamFiles(s, schemas.CreateStreamRequest_files, v.Files)
+	if v.Files != nil {
+		serializeStreamFiles(s, schemas.CreateStreamRequest_files, v.Files)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateStreamRequest_roleArn, *v.RoleArn)
 	}
 	if v.StreamId != nil {
 		s.WriteString(schemas.CreateStreamRequest_streamId, *v.StreamId)
 	}
-	serializeTagList(s, schemas.CreateStreamRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateStreamRequest_tags, v.Tags)
+	}
 }
 
 type CreateStreamOutput struct {

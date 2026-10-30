@@ -96,7 +96,9 @@ func (v *ListReviewableHITsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListReviewableHITsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHITList(s, schemas.ListReviewableHITsResponse_HITs, v.HITs)
+	if v.HITs != nil {
+		serializeHITList(s, schemas.ListReviewableHITsResponse_HITs, v.HITs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReviewableHITsResponse_NextToken, *v.NextToken)
 	}

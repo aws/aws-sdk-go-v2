@@ -149,8 +149,12 @@ func (v *GetProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EnvironmentDeploymentDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFailureReasons(s, schemas.GetProjectOutput_failureReasons, v.FailureReasons)
-	serializeGlossaryTerms(s, schemas.GetProjectOutput_glossaryTerms, v.GlossaryTerms)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.GetProjectOutput_failureReasons, v.FailureReasons)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.GetProjectOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetProjectOutput_id, *v.Id)
 	}
@@ -169,8 +173,12 @@ func (v *GetProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectStatus != "" {
 		s.WriteString(schemas.GetProjectOutput_projectStatus, string(v.ProjectStatus))
 	}
-	serializeResourceTags(s, schemas.GetProjectOutput_resourceTags, v.ResourceTags)
-	serializeEnvironmentConfigurationUserParametersList(s, schemas.GetProjectOutput_userParameters, v.UserParameters)
+	if v.ResourceTags != nil {
+		serializeResourceTags(s, schemas.GetProjectOutput_resourceTags, v.ResourceTags)
+	}
+	if v.UserParameters != nil {
+		serializeEnvironmentConfigurationUserParametersList(s, schemas.GetProjectOutput_userParameters, v.UserParameters)
+	}
 }
 func (v *GetProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetProjectOutput, func(s *smithy.Schema) error {

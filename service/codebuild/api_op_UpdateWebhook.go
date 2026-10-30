@@ -83,7 +83,9 @@ func (v *UpdateWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BuildType != "" {
 		s.WriteString(schemas.UpdateWebhookInput_buildType, string(v.BuildType))
 	}
-	serializeFilterGroups(s, schemas.UpdateWebhookInput_filterGroups, v.FilterGroups)
+	if v.FilterGroups != nil {
+		serializeFilterGroups(s, schemas.UpdateWebhookInput_filterGroups, v.FilterGroups)
+	}
 	if v.ProjectName != nil {
 		s.WriteString(schemas.UpdateWebhookInput_projectName, *v.ProjectName)
 	}

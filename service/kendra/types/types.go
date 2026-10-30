@@ -318,17 +318,27 @@ func (v *AlfrescoConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AlfrescoConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceToIndexFieldMappingList(s, schemas.AlfrescoConfiguration_BlogFieldMappings, v.BlogFieldMappings)
+	if v.BlogFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.AlfrescoConfiguration_BlogFieldMappings, v.BlogFieldMappings)
+	}
 	if v.CrawlComments != false {
 		s.WriteBool(schemas.AlfrescoConfiguration_CrawlComments, v.CrawlComments)
 	}
 	if v.CrawlSystemFolders != false {
 		s.WriteBool(schemas.AlfrescoConfiguration_CrawlSystemFolders, v.CrawlSystemFolders)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.AlfrescoConfiguration_DocumentLibraryFieldMappings, v.DocumentLibraryFieldMappings)
-	serializeEntityFilter(s, schemas.AlfrescoConfiguration_EntityFilter, v.EntityFilter)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.AlfrescoConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.AlfrescoConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.DocumentLibraryFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.AlfrescoConfiguration_DocumentLibraryFieldMappings, v.DocumentLibraryFieldMappings)
+	}
+	if v.EntityFilter != nil {
+		serializeEntityFilter(s, schemas.AlfrescoConfiguration_EntityFilter, v.EntityFilter)
+	}
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.AlfrescoConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.AlfrescoConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.AlfrescoConfiguration_SecretArn, *v.SecretArn)
 	}
@@ -348,7 +358,9 @@ func (v *AlfrescoConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VpcConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.AlfrescoConfiguration_WikiFieldMappings, v.WikiFieldMappings)
+	if v.WikiFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.AlfrescoConfiguration_WikiFieldMappings, v.WikiFieldMappings)
+	}
 }
 func (v *AlfrescoConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AlfrescoConfiguration, func(s *smithy.Schema) error {
@@ -482,7 +494,9 @@ func (v *AttributeFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeFilterList(s, schemas.AttributeFilter_AndAllFilters, v.AndAllFilters)
+	if v.AndAllFilters != nil {
+		serializeAttributeFilterList(s, schemas.AttributeFilter_AndAllFilters, v.AndAllFilters)
+	}
 	if v.ContainsAll != nil {
 		s.WriteStruct(schemas.AttributeFilter_ContainsAll)
 		v.ContainsAll.SerializeMembers(s)
@@ -523,7 +537,9 @@ func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NotFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributeFilterList(s, schemas.AttributeFilter_OrAllFilters, v.OrAllFilters)
+	if v.OrAllFilters != nil {
+		serializeAttributeFilterList(s, schemas.AttributeFilter_OrAllFilters, v.OrAllFilters)
+	}
 }
 func (v *AttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeFilter, func(s *smithy.Schema) error {
@@ -594,7 +610,9 @@ func (v *AttributeSuggestionsDescribeConfig) SerializeMembers(s smithy.ShapeSeri
 	if v.AttributeSuggestionsMode != "" {
 		s.WriteString(schemas.AttributeSuggestionsDescribeConfig_AttributeSuggestionsMode, string(v.AttributeSuggestionsMode))
 	}
-	serializeSuggestableConfigList(s, schemas.AttributeSuggestionsDescribeConfig_SuggestableConfigList, v.SuggestableConfigList)
+	if v.SuggestableConfigList != nil {
+		serializeSuggestableConfigList(s, schemas.AttributeSuggestionsDescribeConfig_SuggestableConfigList, v.SuggestableConfigList)
+	}
 }
 func (v *AttributeSuggestionsDescribeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeSuggestionsDescribeConfig, func(s *smithy.Schema) error {
@@ -644,13 +662,17 @@ func (v *AttributeSuggestionsGetConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttributeSuggestionsGetConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentAttributeKeyList(s, schemas.AttributeSuggestionsGetConfig_AdditionalResponseAttributes, v.AdditionalResponseAttributes)
+	if v.AdditionalResponseAttributes != nil {
+		serializeDocumentAttributeKeyList(s, schemas.AttributeSuggestionsGetConfig_AdditionalResponseAttributes, v.AdditionalResponseAttributes)
+	}
 	if v.AttributeFilter != nil {
 		s.WriteStruct(schemas.AttributeSuggestionsGetConfig_AttributeFilter)
 		v.AttributeFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentAttributeKeyList(s, schemas.AttributeSuggestionsGetConfig_SuggestionAttributes, v.SuggestionAttributes)
+	if v.SuggestionAttributes != nil {
+		serializeDocumentAttributeKeyList(s, schemas.AttributeSuggestionsGetConfig_SuggestionAttributes, v.SuggestionAttributes)
+	}
 	if v.UserContext != nil {
 		s.WriteStruct(schemas.AttributeSuggestionsGetConfig_UserContext)
 		v.UserContext.SerializeMembers(s)
@@ -715,7 +737,9 @@ func (v *AttributeSuggestionsUpdateConfig) SerializeMembers(s smithy.ShapeSerial
 	if v.AttributeSuggestionsMode != "" {
 		s.WriteString(schemas.AttributeSuggestionsUpdateConfig_AttributeSuggestionsMode, string(v.AttributeSuggestionsMode))
 	}
-	serializeSuggestableConfigList(s, schemas.AttributeSuggestionsUpdateConfig_SuggestableConfigList, v.SuggestableConfigList)
+	if v.SuggestableConfigList != nil {
+		serializeSuggestableConfigList(s, schemas.AttributeSuggestionsUpdateConfig_SuggestableConfigList, v.SuggestableConfigList)
+	}
 }
 func (v *AttributeSuggestionsUpdateConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeSuggestionsUpdateConfig, func(s *smithy.Schema) error {
@@ -754,7 +778,9 @@ func (v *AuthenticationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthenticationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBasicAuthenticationConfigurationList(s, schemas.AuthenticationConfiguration_BasicAuthentication, v.BasicAuthentication)
+	if v.BasicAuthentication != nil {
+		serializeBasicAuthenticationConfigurationList(s, schemas.AuthenticationConfiguration_BasicAuthentication, v.BasicAuthentication)
+	}
 }
 func (v *AuthenticationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuthenticationConfiguration, func(s *smithy.Schema) error {
@@ -1204,7 +1230,9 @@ func (v *BoxConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BoxConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_CommentFieldMappings, v.CommentFieldMappings)
+	if v.CommentFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_CommentFieldMappings, v.CommentFieldMappings)
+	}
 	if v.CrawlComments != false {
 		s.WriteBool(schemas.BoxConfiguration_CrawlComments, v.CrawlComments)
 	}
@@ -1217,13 +1245,21 @@ func (v *BoxConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnterpriseId != nil {
 		s.WriteString(schemas.BoxConfiguration_EnterpriseId, *v.EnterpriseId)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.BoxConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_FileFieldMappings, v.FileFieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.BoxConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.BoxConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FileFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_FileFieldMappings, v.FileFieldMappings)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.BoxConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.BoxConfiguration_SecretArn, *v.SecretArn)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_TaskFieldMappings, v.TaskFieldMappings)
+	if v.TaskFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_TaskFieldMappings, v.TaskFieldMappings)
+	}
 	if v.UseChangeLog != false {
 		s.WriteBool(schemas.BoxConfiguration_UseChangeLog, v.UseChangeLog)
 	}
@@ -1232,7 +1268,9 @@ func (v *BoxConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VpcConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_WebLinkFieldMappings, v.WebLinkFieldMappings)
+	if v.WebLinkFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.BoxConfiguration_WebLinkFieldMappings, v.WebLinkFieldMappings)
+	}
 }
 func (v *BoxConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BoxConfiguration, func(s *smithy.Schema) error {
@@ -1437,7 +1475,9 @@ func (v *CollapseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MissingAttributeKeyStrategy != "" {
 		s.WriteString(schemas.CollapseConfiguration_MissingAttributeKeyStrategy, string(v.MissingAttributeKeyStrategy))
 	}
-	serializeSortingConfigurationList(s, schemas.CollapseConfiguration_SortingConfigurations, v.SortingConfigurations)
+	if v.SortingConfigurations != nil {
+		serializeSortingConfigurationList(s, schemas.CollapseConfiguration_SortingConfigurations, v.SortingConfigurations)
+	}
 }
 func (v *CollapseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CollapseConfiguration, func(s *smithy.Schema) error {
@@ -1490,7 +1530,9 @@ func (v *CollapsedResultDetail) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DocumentAttribute.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpandedResultList(s, schemas.CollapsedResultDetail_ExpandedResults, v.ExpandedResults)
+	if v.ExpandedResults != nil {
+		serializeExpandedResultList(s, schemas.CollapsedResultDetail_ExpandedResults, v.ExpandedResults)
+	}
 }
 func (v *CollapsedResultDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CollapsedResultDetail, func(s *smithy.Schema) error {
@@ -1542,7 +1584,9 @@ func (v *ColumnConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ColumnConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeDetectingColumns(s, schemas.ColumnConfiguration_ChangeDetectingColumns, v.ChangeDetectingColumns)
+	if v.ChangeDetectingColumns != nil {
+		serializeChangeDetectingColumns(s, schemas.ColumnConfiguration_ChangeDetectingColumns, v.ChangeDetectingColumns)
+	}
 	if v.DocumentDataColumnName != nil {
 		s.WriteString(schemas.ColumnConfiguration_DocumentDataColumnName, *v.DocumentDataColumnName)
 	}
@@ -1552,7 +1596,9 @@ func (v *ColumnConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentTitleColumnName != nil {
 		s.WriteString(schemas.ColumnConfiguration_DocumentTitleColumnName, *v.DocumentTitleColumnName)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.ColumnConfiguration_FieldMappings, v.FieldMappings)
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.ColumnConfiguration_FieldMappings, v.FieldMappings)
+	}
 }
 func (v *ColumnConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ColumnConfiguration, func(s *smithy.Schema) error {
@@ -1656,7 +1702,9 @@ func (v *ConfluenceAttachmentConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ConfluenceAttachmentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfluenceAttachmentFieldMappingsList(s, schemas.ConfluenceAttachmentConfiguration_AttachmentFieldMappings, v.AttachmentFieldMappings)
+	if v.AttachmentFieldMappings != nil {
+		serializeConfluenceAttachmentFieldMappingsList(s, schemas.ConfluenceAttachmentConfiguration_AttachmentFieldMappings, v.AttachmentFieldMappings)
+	}
 	if v.CrawlAttachments != false {
 		s.WriteBool(schemas.ConfluenceAttachmentConfiguration_CrawlAttachments, v.CrawlAttachments)
 	}
@@ -1762,7 +1810,9 @@ func (v *ConfluenceBlogConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfluenceBlogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfluenceBlogFieldMappingsList(s, schemas.ConfluenceBlogConfiguration_BlogFieldMappings, v.BlogFieldMappings)
+	if v.BlogFieldMappings != nil {
+		serializeConfluenceBlogFieldMappingsList(s, schemas.ConfluenceBlogConfiguration_BlogFieldMappings, v.BlogFieldMappings)
+	}
 }
 func (v *ConfluenceBlogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfluenceBlogConfiguration, func(s *smithy.Schema) error {
@@ -1943,8 +1993,12 @@ func (v *ConfluenceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BlogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.ConfluenceConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.ConfluenceConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.ConfluenceConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.ConfluenceConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.PageConfiguration != nil {
 		s.WriteStruct(schemas.ConfluenceConfiguration_PageConfiguration)
 		v.PageConfiguration.SerializeMembers(s)
@@ -2049,7 +2103,9 @@ func (v *ConfluencePageConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfluencePageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfluencePageFieldMappingsList(s, schemas.ConfluencePageConfiguration_PageFieldMappings, v.PageFieldMappings)
+	if v.PageFieldMappings != nil {
+		serializeConfluencePageFieldMappingsList(s, schemas.ConfluencePageConfiguration_PageFieldMappings, v.PageFieldMappings)
+	}
 }
 func (v *ConfluencePageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfluencePageConfiguration, func(s *smithy.Schema) error {
@@ -2175,9 +2231,15 @@ func (v *ConfluenceSpaceConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.CrawlPersonalSpaces != false {
 		s.WriteBool(schemas.ConfluenceSpaceConfiguration_CrawlPersonalSpaces, v.CrawlPersonalSpaces)
 	}
-	serializeConfluenceSpaceList(s, schemas.ConfluenceSpaceConfiguration_ExcludeSpaces, v.ExcludeSpaces)
-	serializeConfluenceSpaceList(s, schemas.ConfluenceSpaceConfiguration_IncludeSpaces, v.IncludeSpaces)
-	serializeConfluenceSpaceFieldMappingsList(s, schemas.ConfluenceSpaceConfiguration_SpaceFieldMappings, v.SpaceFieldMappings)
+	if v.ExcludeSpaces != nil {
+		serializeConfluenceSpaceList(s, schemas.ConfluenceSpaceConfiguration_ExcludeSpaces, v.ExcludeSpaces)
+	}
+	if v.IncludeSpaces != nil {
+		serializeConfluenceSpaceList(s, schemas.ConfluenceSpaceConfiguration_IncludeSpaces, v.IncludeSpaces)
+	}
+	if v.SpaceFieldMappings != nil {
+		serializeConfluenceSpaceFieldMappingsList(s, schemas.ConfluenceSpaceConfiguration_SpaceFieldMappings, v.SpaceFieldMappings)
+	}
 }
 func (v *ConfluenceSpaceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfluenceSpaceConfiguration, func(s *smithy.Schema) error {
@@ -2369,11 +2431,15 @@ func (v *ContentSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContentSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceIdList(s, schemas.ContentSourceConfiguration_DataSourceIds, v.DataSourceIds)
+	if v.DataSourceIds != nil {
+		serializeDataSourceIdList(s, schemas.ContentSourceConfiguration_DataSourceIds, v.DataSourceIds)
+	}
 	if v.DirectPutContent != false {
 		s.WriteBool(schemas.ContentSourceConfiguration_DirectPutContent, v.DirectPutContent)
 	}
-	serializeFaqIdsList(s, schemas.ContentSourceConfiguration_FaqIds, v.FaqIds)
+	if v.FaqIds != nil {
+		serializeFaqIdsList(s, schemas.ContentSourceConfiguration_FaqIds, v.FaqIds)
+	}
 }
 func (v *ContentSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContentSourceConfiguration, func(s *smithy.Schema) error {
@@ -2495,7 +2561,9 @@ func (v *CustomDocumentEnrichmentConfiguration) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CustomDocumentEnrichmentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInlineCustomDocumentEnrichmentConfigurationList(s, schemas.CustomDocumentEnrichmentConfiguration_InlineConfigurations, v.InlineConfigurations)
+	if v.InlineConfigurations != nil {
+		serializeInlineCustomDocumentEnrichmentConfigurationList(s, schemas.CustomDocumentEnrichmentConfiguration_InlineConfigurations, v.InlineConfigurations)
+	}
 	if v.PostExtractionHookConfiguration != nil {
 		s.WriteStruct(schemas.CustomDocumentEnrichmentConfiguration_PostExtractionHookConfiguration)
 		v.PostExtractionHookConfiguration.SerializeMembers(s)
@@ -3404,8 +3472,12 @@ func (v *DataSourceVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataSourceVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.DataSourceVpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.DataSourceVpcConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.DataSourceVpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.DataSourceVpcConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *DataSourceVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataSourceVpcConfiguration, func(s *smithy.Schema) error {
@@ -3493,15 +3565,21 @@ func (v *Document) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessControlConfigurationId != nil {
 		s.WriteString(schemas.Document_AccessControlConfigurationId, *v.AccessControlConfigurationId)
 	}
-	serializePrincipalList(s, schemas.Document_AccessControlList, v.AccessControlList)
-	serializeDocumentAttributeList(s, schemas.Document_Attributes, v.Attributes)
+	if v.AccessControlList != nil {
+		serializePrincipalList(s, schemas.Document_AccessControlList, v.AccessControlList)
+	}
+	if v.Attributes != nil {
+		serializeDocumentAttributeList(s, schemas.Document_Attributes, v.Attributes)
+	}
 	if v.Blob != nil {
 		s.WriteBlob(schemas.Document_Blob, v.Blob)
 	}
 	if v.ContentType != "" {
 		s.WriteString(schemas.Document_ContentType, string(v.ContentType))
 	}
-	serializeHierarchicalPrincipalList(s, schemas.Document_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	if v.HierarchicalAccessControlList != nil {
+		serializeHierarchicalPrincipalList(s, schemas.Document_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Document_Id, *v.Id)
 	}
@@ -3792,7 +3870,9 @@ func (v *DocumentAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LongValue != nil {
 		s.WriteInt64(schemas.DocumentAttributeValue_LongValue, *v.LongValue)
 	}
-	serializeDocumentAttributeStringListValue(s, schemas.DocumentAttributeValue_StringListValue, v.StringListValue)
+	if v.StringListValue != nil {
+		serializeDocumentAttributeStringListValue(s, schemas.DocumentAttributeValue_StringListValue, v.StringListValue)
+	}
 	if v.StringValue != nil {
 		s.WriteString(schemas.DocumentAttributeValue_StringValue, *v.StringValue)
 	}
@@ -3857,7 +3937,9 @@ func (v *DocumentAttributeValueCountPair) SerializeMembers(s smithy.ShapeSeriali
 		v.DocumentAttributeValue.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFacetResultList(s, schemas.DocumentAttributeValueCountPair_FacetResults, v.FacetResults)
+	if v.FacetResults != nil {
+		serializeFacetResultList(s, schemas.DocumentAttributeValueCountPair_FacetResults, v.FacetResults)
+	}
 }
 func (v *DocumentAttributeValueCountPair) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentAttributeValueCountPair, func(s *smithy.Schema) error {
@@ -3913,7 +3995,9 @@ func (v *DocumentInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DocumentInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentAttributeList(s, schemas.DocumentInfo_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeDocumentAttributeList(s, schemas.DocumentInfo_Attributes, v.Attributes)
+	}
 	if v.DocumentId != nil {
 		s.WriteString(schemas.DocumentInfo_DocumentId, *v.DocumentId)
 	}
@@ -4342,7 +4426,9 @@ func (v *ExpandedResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExpandedResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentAttributeList(s, schemas.ExpandedResultItem_DocumentAttributes, v.DocumentAttributes)
+	if v.DocumentAttributes != nil {
+		serializeDocumentAttributeList(s, schemas.ExpandedResultItem_DocumentAttributes, v.DocumentAttributes)
+	}
 	if v.DocumentExcerpt != nil {
 		s.WriteStruct(schemas.ExpandedResultItem_DocumentExcerpt)
 		v.DocumentExcerpt.SerializeMembers(s)
@@ -4581,7 +4667,9 @@ func (v *ExperiencesSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ExperiencesSummary_CreatedAt, *v.CreatedAt)
 	}
-	serializeExperienceEndpoints(s, schemas.ExperiencesSummary_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeExperienceEndpoints(s, schemas.ExperiencesSummary_Endpoints, v.Endpoints)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ExperiencesSummary_Id, *v.Id)
 	}
@@ -4670,7 +4758,9 @@ func (v *Facet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentAttributeKey != nil {
 		s.WriteString(schemas.Facet_DocumentAttributeKey, *v.DocumentAttributeKey)
 	}
-	serializeFacetList(s, schemas.Facet_Facets, v.Facets)
+	if v.Facets != nil {
+		serializeFacetList(s, schemas.Facet_Facets, v.Facets)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.Facet_MaxResults, v.MaxResults)
 	}
@@ -4718,7 +4808,9 @@ func (v *FacetResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentAttributeKey != nil {
 		s.WriteString(schemas.FacetResult_DocumentAttributeKey, *v.DocumentAttributeKey)
 	}
-	serializeDocumentAttributeValueCountPairList(s, schemas.FacetResult_DocumentAttributeValueCountPairs, v.DocumentAttributeValueCountPairs)
+	if v.DocumentAttributeValueCountPairs != nil {
+		serializeDocumentAttributeValueCountPairList(s, schemas.FacetResult_DocumentAttributeValueCountPairs, v.DocumentAttributeValueCountPairs)
+	}
 	if v.DocumentAttributeValueType != "" {
 		s.WriteString(schemas.FacetResult_DocumentAttributeValueType, string(v.DocumentAttributeValueType))
 	}
@@ -5096,8 +5188,12 @@ func (v *FeaturedResultsItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FeaturedResultsItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalResultAttributeList(s, schemas.FeaturedResultsItem_AdditionalAttributes, v.AdditionalAttributes)
-	serializeDocumentAttributeList(s, schemas.FeaturedResultsItem_DocumentAttributes, v.DocumentAttributes)
+	if v.AdditionalAttributes != nil {
+		serializeAdditionalResultAttributeList(s, schemas.FeaturedResultsItem_AdditionalAttributes, v.AdditionalAttributes)
+	}
+	if v.DocumentAttributes != nil {
+		serializeDocumentAttributeList(s, schemas.FeaturedResultsItem_DocumentAttributes, v.DocumentAttributes)
+	}
 	if v.DocumentExcerpt != nil {
 		s.WriteStruct(schemas.FeaturedResultsItem_DocumentExcerpt)
 		v.DocumentExcerpt.SerializeMembers(s)
@@ -5236,7 +5332,9 @@ func (v *FeaturedResultsSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.FeaturedResultsSet_Description, *v.Description)
 	}
-	serializeFeaturedDocumentList(s, schemas.FeaturedResultsSet_FeaturedDocuments, v.FeaturedDocuments)
+	if v.FeaturedDocuments != nil {
+		serializeFeaturedDocumentList(s, schemas.FeaturedResultsSet_FeaturedDocuments, v.FeaturedDocuments)
+	}
 	if v.FeaturedResultsSetId != nil {
 		s.WriteString(schemas.FeaturedResultsSet_FeaturedResultsSetId, *v.FeaturedResultsSetId)
 	}
@@ -5246,7 +5344,9 @@ func (v *FeaturedResultsSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteInt64(schemas.FeaturedResultsSet_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeQueryTextList(s, schemas.FeaturedResultsSet_QueryTexts, v.QueryTexts)
+	if v.QueryTexts != nil {
+		serializeQueryTextList(s, schemas.FeaturedResultsSet_QueryTexts, v.QueryTexts)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.FeaturedResultsSet_Status, string(v.Status))
 	}
@@ -5453,15 +5553,21 @@ func (v *FsxConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FsxConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.FsxConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.FsxConfiguration_FieldMappings, v.FieldMappings)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.FsxConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.FsxConfiguration_FieldMappings, v.FieldMappings)
+	}
 	if v.FileSystemId != nil {
 		s.WriteString(schemas.FsxConfiguration_FileSystemId, *v.FileSystemId)
 	}
 	if v.FileSystemType != "" {
 		s.WriteString(schemas.FsxConfiguration_FileSystemType, string(v.FileSystemType))
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.FsxConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.FsxConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.FsxConfiguration_SecretArn, *v.SecretArn)
 	}
@@ -5686,31 +5792,61 @@ func (v *GitHubConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GitHubConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GitHubConfiguration_ExclusionFileNamePatterns, v.ExclusionFileNamePatterns)
-	serializeStringList(s, schemas.GitHubConfiguration_ExclusionFileTypePatterns, v.ExclusionFileTypePatterns)
-	serializeStringList(s, schemas.GitHubConfiguration_ExclusionFolderNamePatterns, v.ExclusionFolderNamePatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubCommitConfigurationFieldMappings, v.GitHubCommitConfigurationFieldMappings)
+	if v.ExclusionFileNamePatterns != nil {
+		serializeStringList(s, schemas.GitHubConfiguration_ExclusionFileNamePatterns, v.ExclusionFileNamePatterns)
+	}
+	if v.ExclusionFileTypePatterns != nil {
+		serializeStringList(s, schemas.GitHubConfiguration_ExclusionFileTypePatterns, v.ExclusionFileTypePatterns)
+	}
+	if v.ExclusionFolderNamePatterns != nil {
+		serializeStringList(s, schemas.GitHubConfiguration_ExclusionFolderNamePatterns, v.ExclusionFolderNamePatterns)
+	}
+	if v.GitHubCommitConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubCommitConfigurationFieldMappings, v.GitHubCommitConfigurationFieldMappings)
+	}
 	if v.GitHubDocumentCrawlProperties != nil {
 		s.WriteStruct(schemas.GitHubConfiguration_GitHubDocumentCrawlProperties)
 		v.GitHubDocumentCrawlProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubIssueAttachmentConfigurationFieldMappings, v.GitHubIssueAttachmentConfigurationFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubIssueCommentConfigurationFieldMappings, v.GitHubIssueCommentConfigurationFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubIssueDocumentConfigurationFieldMappings, v.GitHubIssueDocumentConfigurationFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubPullRequestCommentConfigurationFieldMappings, v.GitHubPullRequestCommentConfigurationFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubPullRequestDocumentAttachmentConfigurationFieldMappings, v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubPullRequestDocumentConfigurationFieldMappings, v.GitHubPullRequestDocumentConfigurationFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubRepositoryConfigurationFieldMappings, v.GitHubRepositoryConfigurationFieldMappings)
-	serializeStringList(s, schemas.GitHubConfiguration_InclusionFileNamePatterns, v.InclusionFileNamePatterns)
-	serializeStringList(s, schemas.GitHubConfiguration_InclusionFileTypePatterns, v.InclusionFileTypePatterns)
-	serializeStringList(s, schemas.GitHubConfiguration_InclusionFolderNamePatterns, v.InclusionFolderNamePatterns)
+	if v.GitHubIssueAttachmentConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubIssueAttachmentConfigurationFieldMappings, v.GitHubIssueAttachmentConfigurationFieldMappings)
+	}
+	if v.GitHubIssueCommentConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubIssueCommentConfigurationFieldMappings, v.GitHubIssueCommentConfigurationFieldMappings)
+	}
+	if v.GitHubIssueDocumentConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubIssueDocumentConfigurationFieldMappings, v.GitHubIssueDocumentConfigurationFieldMappings)
+	}
+	if v.GitHubPullRequestCommentConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubPullRequestCommentConfigurationFieldMappings, v.GitHubPullRequestCommentConfigurationFieldMappings)
+	}
+	if v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubPullRequestDocumentAttachmentConfigurationFieldMappings, v.GitHubPullRequestDocumentAttachmentConfigurationFieldMappings)
+	}
+	if v.GitHubPullRequestDocumentConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubPullRequestDocumentConfigurationFieldMappings, v.GitHubPullRequestDocumentConfigurationFieldMappings)
+	}
+	if v.GitHubRepositoryConfigurationFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GitHubConfiguration_GitHubRepositoryConfigurationFieldMappings, v.GitHubRepositoryConfigurationFieldMappings)
+	}
+	if v.InclusionFileNamePatterns != nil {
+		serializeStringList(s, schemas.GitHubConfiguration_InclusionFileNamePatterns, v.InclusionFileNamePatterns)
+	}
+	if v.InclusionFileTypePatterns != nil {
+		serializeStringList(s, schemas.GitHubConfiguration_InclusionFileTypePatterns, v.InclusionFileTypePatterns)
+	}
+	if v.InclusionFolderNamePatterns != nil {
+		serializeStringList(s, schemas.GitHubConfiguration_InclusionFolderNamePatterns, v.InclusionFolderNamePatterns)
+	}
 	if v.OnPremiseConfiguration != nil {
 		s.WriteStruct(schemas.GitHubConfiguration_OnPremiseConfiguration)
 		v.OnPremiseConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRepositoryNames(s, schemas.GitHubConfiguration_RepositoryFilter, v.RepositoryFilter)
+	if v.RepositoryFilter != nil {
+		serializeRepositoryNames(s, schemas.GitHubConfiguration_RepositoryFilter, v.RepositoryFilter)
+	}
 	if v.SaaSConfiguration != nil {
 		s.WriteStruct(schemas.GitHubConfiguration_SaaSConfiguration)
 		v.SaaSConfiguration.SerializeMembers(s)
@@ -5936,12 +6072,24 @@ func (v *GoogleDriveConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GoogleDriveConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExcludeMimeTypesList(s, schemas.GoogleDriveConfiguration_ExcludeMimeTypes, v.ExcludeMimeTypes)
-	serializeExcludeSharedDrivesList(s, schemas.GoogleDriveConfiguration_ExcludeSharedDrives, v.ExcludeSharedDrives)
-	serializeExcludeUserAccountsList(s, schemas.GoogleDriveConfiguration_ExcludeUserAccounts, v.ExcludeUserAccounts)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.GoogleDriveConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.GoogleDriveConfiguration_FieldMappings, v.FieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.GoogleDriveConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExcludeMimeTypes != nil {
+		serializeExcludeMimeTypesList(s, schemas.GoogleDriveConfiguration_ExcludeMimeTypes, v.ExcludeMimeTypes)
+	}
+	if v.ExcludeSharedDrives != nil {
+		serializeExcludeSharedDrivesList(s, schemas.GoogleDriveConfiguration_ExcludeSharedDrives, v.ExcludeSharedDrives)
+	}
+	if v.ExcludeUserAccounts != nil {
+		serializeExcludeUserAccountsList(s, schemas.GoogleDriveConfiguration_ExcludeUserAccounts, v.ExcludeUserAccounts)
+	}
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.GoogleDriveConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.GoogleDriveConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.GoogleDriveConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.GoogleDriveConfiguration_SecretArn, *v.SecretArn)
 	}
@@ -6005,8 +6153,12 @@ func (v *GroupMembers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GroupMembers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberGroups(s, schemas.GroupMembers_MemberGroups, v.MemberGroups)
-	serializeMemberUsers(s, schemas.GroupMembers_MemberUsers, v.MemberUsers)
+	if v.MemberGroups != nil {
+		serializeMemberGroups(s, schemas.GroupMembers_MemberGroups, v.MemberGroups)
+	}
+	if v.MemberUsers != nil {
+		serializeMemberUsers(s, schemas.GroupMembers_MemberUsers, v.MemberUsers)
+	}
 	if v.S3PathforGroupMembers != nil {
 		s.WriteStruct(schemas.GroupMembers_S3PathforGroupMembers)
 		v.S3PathforGroupMembers.SerializeMembers(s)
@@ -6169,7 +6321,9 @@ func (v *HierarchicalPrincipal) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HierarchicalPrincipal) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipalList(s, schemas.HierarchicalPrincipal_PrincipalList, v.PrincipalList)
+	if v.PrincipalList != nil {
+		serializePrincipalList(s, schemas.HierarchicalPrincipal_PrincipalList, v.PrincipalList)
+	}
 }
 func (v *HierarchicalPrincipal) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HierarchicalPrincipal, func(s *smithy.Schema) error {
@@ -6645,22 +6799,42 @@ func (v *JiraConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JiraConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_AttachmentFieldMappings, v.AttachmentFieldMappings)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_CommentFieldMappings, v.CommentFieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.JiraConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.JiraConfiguration_InclusionPatterns, v.InclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_IssueFieldMappings, v.IssueFieldMappings)
-	serializeIssueSubEntityFilter(s, schemas.JiraConfiguration_IssueSubEntityFilter, v.IssueSubEntityFilter)
-	serializeIssueType(s, schemas.JiraConfiguration_IssueType, v.IssueType)
+	if v.AttachmentFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_AttachmentFieldMappings, v.AttachmentFieldMappings)
+	}
+	if v.CommentFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_CommentFieldMappings, v.CommentFieldMappings)
+	}
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.JiraConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.JiraConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
+	if v.IssueFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_IssueFieldMappings, v.IssueFieldMappings)
+	}
+	if v.IssueSubEntityFilter != nil {
+		serializeIssueSubEntityFilter(s, schemas.JiraConfiguration_IssueSubEntityFilter, v.IssueSubEntityFilter)
+	}
+	if v.IssueType != nil {
+		serializeIssueType(s, schemas.JiraConfiguration_IssueType, v.IssueType)
+	}
 	if v.JiraAccountUrl != nil {
 		s.WriteString(schemas.JiraConfiguration_JiraAccountUrl, *v.JiraAccountUrl)
 	}
-	serializeProject(s, schemas.JiraConfiguration_Project, v.Project)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_ProjectFieldMappings, v.ProjectFieldMappings)
+	if v.Project != nil {
+		serializeProject(s, schemas.JiraConfiguration_Project, v.Project)
+	}
+	if v.ProjectFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_ProjectFieldMappings, v.ProjectFieldMappings)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.JiraConfiguration_SecretArn, *v.SecretArn)
 	}
-	serializeJiraStatus(s, schemas.JiraConfiguration_Status, v.Status)
+	if v.Status != nil {
+		serializeJiraStatus(s, schemas.JiraConfiguration_Status, v.Status)
+	}
 	if v.UseChangeLog != false {
 		s.WriteBool(schemas.JiraConfiguration_UseChangeLog, v.UseChangeLog)
 	}
@@ -6669,7 +6843,9 @@ func (v *JiraConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VpcConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_WorkLogFieldMappings, v.WorkLogFieldMappings)
+	if v.WorkLogFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.JiraConfiguration_WorkLogFieldMappings, v.WorkLogFieldMappings)
+	}
 }
 func (v *JiraConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JiraConfiguration, func(s *smithy.Schema) error {
@@ -6987,9 +7163,15 @@ func (v *OneDriveConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisableLocalGroups != false {
 		s.WriteBool(schemas.OneDriveConfiguration_DisableLocalGroups, v.DisableLocalGroups)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.OneDriveConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.OneDriveConfiguration_FieldMappings, v.FieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.OneDriveConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.OneDriveConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.OneDriveConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.OneDriveConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.OneDriveUsers != nil {
 		s.WriteStruct(schemas.OneDriveConfiguration_OneDriveUsers)
 		v.OneDriveUsers.SerializeMembers(s)
@@ -7050,7 +7232,9 @@ func (v *OneDriveUsers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OneDriveUsers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOneDriveUserList(s, schemas.OneDriveUsers_OneDriveUserList, v.OneDriveUserList)
+	if v.OneDriveUserList != nil {
+		serializeOneDriveUserList(s, schemas.OneDriveUsers_OneDriveUserList, v.OneDriveUserList)
+	}
 	if v.OneDriveUserS3Path != nil {
 		s.WriteStruct(schemas.OneDriveUsers_OneDriveUserS3Path)
 		v.OneDriveUserS3Path.SerializeMembers(s)
@@ -7431,13 +7615,17 @@ func (v *QueryResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalResultAttributeList(s, schemas.QueryResultItem_AdditionalAttributes, v.AdditionalAttributes)
+	if v.AdditionalAttributes != nil {
+		serializeAdditionalResultAttributeList(s, schemas.QueryResultItem_AdditionalAttributes, v.AdditionalAttributes)
+	}
 	if v.CollapsedResultDetail != nil {
 		s.WriteStruct(schemas.QueryResultItem_CollapsedResultDetail)
 		v.CollapsedResultDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentAttributeList(s, schemas.QueryResultItem_DocumentAttributes, v.DocumentAttributes)
+	if v.DocumentAttributes != nil {
+		serializeDocumentAttributeList(s, schemas.QueryResultItem_DocumentAttributes, v.DocumentAttributes)
+	}
 	if v.DocumentExcerpt != nil {
 		s.WriteStruct(schemas.QueryResultItem_DocumentExcerpt)
 		v.DocumentExcerpt.SerializeMembers(s)
@@ -7707,7 +7895,9 @@ func (v *QuipConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuipConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceToIndexFieldMappingList(s, schemas.QuipConfiguration_AttachmentFieldMappings, v.AttachmentFieldMappings)
+	if v.AttachmentFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.QuipConfiguration_AttachmentFieldMappings, v.AttachmentFieldMappings)
+	}
 	if v.CrawlAttachments != false {
 		s.WriteBool(schemas.QuipConfiguration_CrawlAttachments, v.CrawlAttachments)
 	}
@@ -7720,14 +7910,24 @@ func (v *QuipConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.QuipConfiguration_Domain, *v.Domain)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.QuipConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeFolderIdList(s, schemas.QuipConfiguration_FolderIds, v.FolderIds)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.QuipConfiguration_InclusionPatterns, v.InclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.QuipConfiguration_MessageFieldMappings, v.MessageFieldMappings)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.QuipConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FolderIds != nil {
+		serializeFolderIdList(s, schemas.QuipConfiguration_FolderIds, v.FolderIds)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.QuipConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
+	if v.MessageFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.QuipConfiguration_MessageFieldMappings, v.MessageFieldMappings)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.QuipConfiguration_SecretArn, *v.SecretArn)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.QuipConfiguration_ThreadFieldMappings, v.ThreadFieldMappings)
+	if v.ThreadFieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.QuipConfiguration_ThreadFieldMappings, v.ThreadFieldMappings)
+	}
 	if v.VpcConfiguration != nil {
 		s.WriteStruct(schemas.QuipConfiguration_VpcConfiguration)
 		v.VpcConfiguration.SerializeMembers(s)
@@ -7841,7 +8041,9 @@ func (v *Relevance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RankOrder != "" {
 		s.WriteString(schemas.Relevance_RankOrder, string(v.RankOrder))
 	}
-	serializeValueImportanceMap(s, schemas.Relevance_ValueImportanceMap, v.ValueImportanceMap)
+	if v.ValueImportanceMap != nil {
+		serializeValueImportanceMap(s, schemas.Relevance_ValueImportanceMap, v.ValueImportanceMap)
+	}
 }
 func (v *Relevance) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Relevance, func(s *smithy.Schema) error {
@@ -7960,7 +8162,9 @@ func (v *RetrieveResultItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Content != nil {
 		s.WriteString(schemas.RetrieveResultItem_Content, *v.Content)
 	}
-	serializeDocumentAttributeList(s, schemas.RetrieveResultItem_DocumentAttributes, v.DocumentAttributes)
+	if v.DocumentAttributes != nil {
+		serializeDocumentAttributeList(s, schemas.RetrieveResultItem_DocumentAttributes, v.DocumentAttributes)
+	}
 	if v.DocumentId != nil {
 		s.WriteString(schemas.RetrieveResultItem_DocumentId, *v.DocumentId)
 	}
@@ -8130,9 +8334,15 @@ func (v *S3DataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DocumentsMetadataConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.S3DataSourceConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.S3DataSourceConfiguration_InclusionPatterns, v.InclusionPatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.S3DataSourceConfiguration_InclusionPrefixes, v.InclusionPrefixes)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.S3DataSourceConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.S3DataSourceConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
+	if v.InclusionPrefixes != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.S3DataSourceConfiguration_InclusionPrefixes, v.InclusionPrefixes)
+	}
 }
 func (v *S3DataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3DataSourceConfiguration, func(s *smithy.Schema) error {
@@ -8287,8 +8497,12 @@ func (v *SalesforceChatterFeedConfiguration) SerializeMembers(s smithy.ShapeSeri
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.SalesforceChatterFeedConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceChatterFeedConfiguration_FieldMappings, v.FieldMappings)
-	serializeSalesforceChatterFeedIncludeFilterTypes(s, schemas.SalesforceChatterFeedConfiguration_IncludeFilterTypes, v.IncludeFilterTypes)
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceChatterFeedConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.IncludeFilterTypes != nil {
+		serializeSalesforceChatterFeedIncludeFilterTypes(s, schemas.SalesforceChatterFeedConfiguration_IncludeFilterTypes, v.IncludeFilterTypes)
+	}
 }
 func (v *SalesforceChatterFeedConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SalesforceChatterFeedConfiguration, func(s *smithy.Schema) error {
@@ -8396,8 +8610,12 @@ func (v *SalesforceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CrawlAttachments != false {
 		s.WriteBool(schemas.SalesforceConfiguration_CrawlAttachments, v.CrawlAttachments)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.SalesforceConfiguration_ExcludeAttachmentFilePatterns, v.ExcludeAttachmentFilePatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.SalesforceConfiguration_IncludeAttachmentFilePatterns, v.IncludeAttachmentFilePatterns)
+	if v.ExcludeAttachmentFilePatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.SalesforceConfiguration_ExcludeAttachmentFilePatterns, v.ExcludeAttachmentFilePatterns)
+	}
+	if v.IncludeAttachmentFilePatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.SalesforceConfiguration_IncludeAttachmentFilePatterns, v.IncludeAttachmentFilePatterns)
+	}
 	if v.KnowledgeArticleConfiguration != nil {
 		s.WriteStruct(schemas.SalesforceConfiguration_KnowledgeArticleConfiguration)
 		v.KnowledgeArticleConfiguration.SerializeMembers(s)
@@ -8414,7 +8632,9 @@ func (v *SalesforceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StandardObjectAttachmentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSalesforceStandardObjectConfigurationList(s, schemas.SalesforceConfiguration_StandardObjectConfigurations, v.StandardObjectConfigurations)
+	if v.StandardObjectConfigurations != nil {
+		serializeSalesforceStandardObjectConfigurationList(s, schemas.SalesforceConfiguration_StandardObjectConfigurations, v.StandardObjectConfigurations)
+	}
 }
 func (v *SalesforceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SalesforceConfiguration, func(s *smithy.Schema) error {
@@ -8489,7 +8709,9 @@ func (v *SalesforceCustomKnowledgeArticleTypeConfiguration) SerializeMembers(s s
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.SalesforceCustomKnowledgeArticleTypeConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceCustomKnowledgeArticleTypeConfiguration_FieldMappings, v.FieldMappings)
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceCustomKnowledgeArticleTypeConfiguration_FieldMappings, v.FieldMappings)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SalesforceCustomKnowledgeArticleTypeConfiguration_Name, *v.Name)
 	}
@@ -8541,8 +8763,12 @@ func (v *SalesforceKnowledgeArticleConfiguration) Serialize(s smithy.ShapeSerial
 }
 
 func (v *SalesforceKnowledgeArticleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSalesforceCustomKnowledgeArticleTypeConfigurationList(s, schemas.SalesforceKnowledgeArticleConfiguration_CustomKnowledgeArticleTypeConfigurations, v.CustomKnowledgeArticleTypeConfigurations)
-	serializeSalesforceKnowledgeArticleStateList(s, schemas.SalesforceKnowledgeArticleConfiguration_IncludedStates, v.IncludedStates)
+	if v.CustomKnowledgeArticleTypeConfigurations != nil {
+		serializeSalesforceCustomKnowledgeArticleTypeConfigurationList(s, schemas.SalesforceKnowledgeArticleConfiguration_CustomKnowledgeArticleTypeConfigurations, v.CustomKnowledgeArticleTypeConfigurations)
+	}
+	if v.IncludedStates != nil {
+		serializeSalesforceKnowledgeArticleStateList(s, schemas.SalesforceKnowledgeArticleConfiguration_IncludedStates, v.IncludedStates)
+	}
 	if v.StandardKnowledgeArticleTypeConfiguration != nil {
 		s.WriteStruct(schemas.SalesforceKnowledgeArticleConfiguration_StandardKnowledgeArticleTypeConfiguration)
 		v.StandardKnowledgeArticleTypeConfiguration.SerializeMembers(s)
@@ -8600,7 +8826,9 @@ func (v *SalesforceStandardKnowledgeArticleTypeConfiguration) SerializeMembers(s
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.SalesforceStandardKnowledgeArticleTypeConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceStandardKnowledgeArticleTypeConfiguration_FieldMappings, v.FieldMappings)
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceStandardKnowledgeArticleTypeConfiguration_FieldMappings, v.FieldMappings)
+	}
 }
 func (v *SalesforceStandardKnowledgeArticleTypeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SalesforceStandardKnowledgeArticleTypeConfiguration, func(s *smithy.Schema) error {
@@ -8642,7 +8870,9 @@ func (v *SalesforceStandardObjectAttachmentConfiguration) SerializeMembers(s smi
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.SalesforceStandardObjectAttachmentConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceStandardObjectAttachmentConfiguration_FieldMappings, v.FieldMappings)
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceStandardObjectAttachmentConfiguration_FieldMappings, v.FieldMappings)
+	}
 }
 func (v *SalesforceStandardObjectAttachmentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SalesforceStandardObjectAttachmentConfiguration, func(s *smithy.Schema) error {
@@ -8699,7 +8929,9 @@ func (v *SalesforceStandardObjectConfiguration) SerializeMembers(s smithy.ShapeS
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.SalesforceStandardObjectConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceStandardObjectConfiguration_FieldMappings, v.FieldMappings)
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SalesforceStandardObjectConfiguration_FieldMappings, v.FieldMappings)
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.SalesforceStandardObjectConfiguration_Name, string(v.Name))
 	}
@@ -8867,7 +9099,9 @@ func (v *SeedUrlConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SeedUrlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSeedUrlList(s, schemas.SeedUrlConfiguration_SeedUrls, v.SeedUrls)
+	if v.SeedUrls != nil {
+		serializeSeedUrlList(s, schemas.SeedUrlConfiguration_SeedUrls, v.SeedUrls)
+	}
 	if v.WebCrawlerMode != "" {
 		s.WriteString(schemas.SeedUrlConfiguration_WebCrawlerMode, string(v.WebCrawlerMode))
 	}
@@ -9101,12 +9335,18 @@ func (v *ServiceNowKnowledgeArticleConfiguration) SerializeMembers(s smithy.Shap
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.ServiceNowKnowledgeArticleConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowKnowledgeArticleConfiguration_ExcludeAttachmentFilePatterns, v.ExcludeAttachmentFilePatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.ServiceNowKnowledgeArticleConfiguration_FieldMappings, v.FieldMappings)
+	if v.ExcludeAttachmentFilePatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowKnowledgeArticleConfiguration_ExcludeAttachmentFilePatterns, v.ExcludeAttachmentFilePatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.ServiceNowKnowledgeArticleConfiguration_FieldMappings, v.FieldMappings)
+	}
 	if v.FilterQuery != nil {
 		s.WriteString(schemas.ServiceNowKnowledgeArticleConfiguration_FilterQuery, *v.FilterQuery)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowKnowledgeArticleConfiguration_IncludeAttachmentFilePatterns, v.IncludeAttachmentFilePatterns)
+	if v.IncludeAttachmentFilePatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowKnowledgeArticleConfiguration_IncludeAttachmentFilePatterns, v.IncludeAttachmentFilePatterns)
+	}
 }
 func (v *ServiceNowKnowledgeArticleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceNowKnowledgeArticleConfiguration, func(s *smithy.Schema) error {
@@ -9195,9 +9435,15 @@ func (v *ServiceNowServiceCatalogConfiguration) SerializeMembers(s smithy.ShapeS
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.ServiceNowServiceCatalogConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowServiceCatalogConfiguration_ExcludeAttachmentFilePatterns, v.ExcludeAttachmentFilePatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.ServiceNowServiceCatalogConfiguration_FieldMappings, v.FieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowServiceCatalogConfiguration_IncludeAttachmentFilePatterns, v.IncludeAttachmentFilePatterns)
+	if v.ExcludeAttachmentFilePatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowServiceCatalogConfiguration_ExcludeAttachmentFilePatterns, v.ExcludeAttachmentFilePatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.ServiceNowServiceCatalogConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.IncludeAttachmentFilePatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.ServiceNowServiceCatalogConfiguration_IncludeAttachmentFilePatterns, v.IncludeAttachmentFilePatterns)
+	}
 }
 func (v *ServiceNowServiceCatalogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceNowServiceCatalogConfiguration, func(s *smithy.Schema) error {
@@ -9348,9 +9594,15 @@ func (v *SharePointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentTitleFieldName != nil {
 		s.WriteString(schemas.SharePointConfiguration_DocumentTitleFieldName, *v.DocumentTitleFieldName)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.SharePointConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SharePointConfiguration_FieldMappings, v.FieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.SharePointConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.SharePointConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SharePointConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.SharePointConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.ProxyConfiguration != nil {
 		s.WriteStruct(schemas.SharePointConfiguration_ProxyConfiguration)
 		v.ProxyConfiguration.SerializeMembers(s)
@@ -9367,7 +9619,9 @@ func (v *SharePointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SslCertificateS3Path.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSharePointUrlList(s, schemas.SharePointConfiguration_Urls, v.Urls)
+	if v.Urls != nil {
+		serializeSharePointUrlList(s, schemas.SharePointConfiguration_Urls, v.Urls)
+	}
 	if v.UseChangeLog != false {
 		s.WriteBool(schemas.SharePointConfiguration_UseChangeLog, v.UseChangeLog)
 	}
@@ -9454,7 +9708,9 @@ func (v *SiteMapsConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SiteMapsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSiteMapsList(s, schemas.SiteMapsConfiguration_SiteMaps, v.SiteMaps)
+	if v.SiteMaps != nil {
+		serializeSiteMapsList(s, schemas.SiteMapsConfiguration_SiteMaps, v.SiteMaps)
+	}
 }
 func (v *SiteMapsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SiteMapsConfiguration, func(s *smithy.Schema) error {
@@ -9594,21 +9850,33 @@ func (v *SlackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExcludeArchived != false {
 		s.WriteBool(schemas.SlackConfiguration_ExcludeArchived, v.ExcludeArchived)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.SlackConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.SlackConfiguration_FieldMappings, v.FieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.SlackConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.SlackConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.SlackConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.SlackConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.LookBackPeriod != nil {
 		s.WriteInt32(schemas.SlackConfiguration_LookBackPeriod, *v.LookBackPeriod)
 	}
-	serializePrivateChannelFilter(s, schemas.SlackConfiguration_PrivateChannelFilter, v.PrivateChannelFilter)
-	serializePublicChannelFilter(s, schemas.SlackConfiguration_PublicChannelFilter, v.PublicChannelFilter)
+	if v.PrivateChannelFilter != nil {
+		serializePrivateChannelFilter(s, schemas.SlackConfiguration_PrivateChannelFilter, v.PrivateChannelFilter)
+	}
+	if v.PublicChannelFilter != nil {
+		serializePublicChannelFilter(s, schemas.SlackConfiguration_PublicChannelFilter, v.PublicChannelFilter)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.SlackConfiguration_SecretArn, *v.SecretArn)
 	}
 	if v.SinceCrawlDate != nil {
 		s.WriteString(schemas.SlackConfiguration_SinceCrawlDate, *v.SinceCrawlDate)
 	}
-	serializeSlackEntityList(s, schemas.SlackConfiguration_SlackEntityList, v.SlackEntityList)
+	if v.SlackEntityList != nil {
+		serializeSlackEntityList(s, schemas.SlackConfiguration_SlackEntityList, v.SlackEntityList)
+	}
 	if v.TeamId != nil {
 		s.WriteString(schemas.SlackConfiguration_TeamId, *v.TeamId)
 	}
@@ -9763,11 +10031,15 @@ func (v *SourceDocument) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceDocument) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentAttributeList(s, schemas.SourceDocument_AdditionalAttributes, v.AdditionalAttributes)
+	if v.AdditionalAttributes != nil {
+		serializeDocumentAttributeList(s, schemas.SourceDocument_AdditionalAttributes, v.AdditionalAttributes)
+	}
 	if v.DocumentId != nil {
 		s.WriteString(schemas.SourceDocument_DocumentId, *v.DocumentId)
 	}
-	serializeDocumentAttributeKeyList(s, schemas.SourceDocument_SuggestionAttributes, v.SuggestionAttributes)
+	if v.SuggestionAttributes != nil {
+		serializeDocumentAttributeKeyList(s, schemas.SourceDocument_SuggestionAttributes, v.SuggestionAttributes)
+	}
 }
 func (v *SourceDocument) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SourceDocument, func(s *smithy.Schema) error {
@@ -9803,7 +10075,9 @@ func (v *SpellCorrectedQuery) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SpellCorrectedQuery) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCorrectionList(s, schemas.SpellCorrectedQuery_Corrections, v.Corrections)
+	if v.Corrections != nil {
+		serializeCorrectionList(s, schemas.SpellCorrectedQuery_Corrections, v.Corrections)
+	}
 	if v.SuggestedQueryText != nil {
 		s.WriteString(schemas.SpellCorrectedQuery_SuggestedQueryText, *v.SuggestedQueryText)
 	}
@@ -10044,7 +10318,9 @@ func (v *Suggestion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Suggestion_Id, *v.Id)
 	}
-	serializeSourceDocuments(s, schemas.Suggestion_SourceDocuments, v.SourceDocuments)
+	if v.SourceDocuments != nil {
+		serializeSourceDocuments(s, schemas.Suggestion_SourceDocuments, v.SourceDocuments)
+	}
 	if v.Value != nil {
 		s.WriteStruct(schemas.Suggestion_Value)
 		v.Value.SerializeMembers(s)
@@ -10127,7 +10403,9 @@ func (v *SuggestionTextWithHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuggestionTextWithHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSuggestionHighlightList(s, schemas.SuggestionTextWithHighlights_Highlights, v.Highlights)
+	if v.Highlights != nil {
+		serializeSuggestionHighlightList(s, schemas.SuggestionTextWithHighlights_Highlights, v.Highlights)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.SuggestionTextWithHighlights_Text, *v.Text)
 	}
@@ -10261,7 +10539,9 @@ func (v *TableExcerpt) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableExcerpt) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableRowList(s, schemas.TableExcerpt_Rows, v.Rows)
+	if v.Rows != nil {
+		serializeTableRowList(s, schemas.TableExcerpt_Rows, v.Rows)
+	}
 	if v.TotalNumberOfRows != nil {
 		s.WriteInt32(schemas.TableExcerpt_TotalNumberOfRows, *v.TotalNumberOfRows)
 	}
@@ -10295,7 +10575,9 @@ func (v *TableRow) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableRow) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableCellList(s, schemas.TableRow_Cells, v.Cells)
+	if v.Cells != nil {
+		serializeTableCellList(s, schemas.TableRow_Cells, v.Cells)
+	}
 }
 func (v *TableRow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableRow, func(s *smithy.Schema) error {
@@ -10455,7 +10737,9 @@ func (v *TextWithHighlights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TextWithHighlights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHighlightList(s, schemas.TextWithHighlights_Highlights, v.Highlights)
+	if v.Highlights != nil {
+		serializeHighlightList(s, schemas.TextWithHighlights_Highlights, v.Highlights)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.TextWithHighlights_Text, *v.Text)
 	}
@@ -10702,8 +10986,12 @@ func (v *UserContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserContext) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceGroups(s, schemas.UserContext_DataSourceGroups, v.DataSourceGroups)
-	serializeGroups(s, schemas.UserContext_Groups, v.Groups)
+	if v.DataSourceGroups != nil {
+		serializeDataSourceGroups(s, schemas.UserContext_DataSourceGroups, v.DataSourceGroups)
+	}
+	if v.Groups != nil {
+		serializeGroups(s, schemas.UserContext_Groups, v.Groups)
+	}
 	if v.Token != nil {
 		s.WriteString(schemas.UserContext_Token, *v.Token)
 	}
@@ -11040,8 +11328,12 @@ func (v *WebCrawlerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProxyConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.WebCrawlerConfiguration_UrlExclusionPatterns, v.UrlExclusionPatterns)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.WebCrawlerConfiguration_UrlInclusionPatterns, v.UrlInclusionPatterns)
+	if v.UrlExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.WebCrawlerConfiguration_UrlExclusionPatterns, v.UrlExclusionPatterns)
+	}
+	if v.UrlInclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.WebCrawlerConfiguration_UrlInclusionPatterns, v.UrlInclusionPatterns)
+	}
 	if v.Urls != nil {
 		s.WriteStruct(schemas.WebCrawlerConfiguration_Urls)
 		v.Urls.SerializeMembers(s)
@@ -11148,9 +11440,15 @@ func (v *WorkDocsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CrawlComments != false {
 		s.WriteBool(schemas.WorkDocsConfiguration_CrawlComments, v.CrawlComments)
 	}
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.WorkDocsConfiguration_ExclusionPatterns, v.ExclusionPatterns)
-	serializeDataSourceToIndexFieldMappingList(s, schemas.WorkDocsConfiguration_FieldMappings, v.FieldMappings)
-	serializeDataSourceInclusionsExclusionsStrings(s, schemas.WorkDocsConfiguration_InclusionPatterns, v.InclusionPatterns)
+	if v.ExclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.WorkDocsConfiguration_ExclusionPatterns, v.ExclusionPatterns)
+	}
+	if v.FieldMappings != nil {
+		serializeDataSourceToIndexFieldMappingList(s, schemas.WorkDocsConfiguration_FieldMappings, v.FieldMappings)
+	}
+	if v.InclusionPatterns != nil {
+		serializeDataSourceInclusionsExclusionsStrings(s, schemas.WorkDocsConfiguration_InclusionPatterns, v.InclusionPatterns)
+	}
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.WorkDocsConfiguration_OrganizationId, *v.OrganizationId)
 	}

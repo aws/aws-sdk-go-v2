@@ -85,7 +85,9 @@ func (v *GetExternalModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetExternalModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExternalModelList(s, schemas.GetExternalModelsResult_externalModels, v.ExternalModels)
+	if v.ExternalModels != nil {
+		serializeExternalModelList(s, schemas.GetExternalModelsResult_externalModels, v.ExternalModels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetExternalModelsResult_nextToken, *v.NextToken)
 	}

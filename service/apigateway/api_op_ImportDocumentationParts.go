@@ -96,8 +96,12 @@ func (v *ImportDocumentationPartsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportDocumentationPartsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfString(s, schemas.DocumentationPartIds_ids, v.Ids)
-	serializeListOfString(s, schemas.DocumentationPartIds_warnings, v.Warnings)
+	if v.Ids != nil {
+		serializeListOfString(s, schemas.DocumentationPartIds_ids, v.Ids)
+	}
+	if v.Warnings != nil {
+		serializeListOfString(s, schemas.DocumentationPartIds_warnings, v.Warnings)
+	}
 }
 func (v *ImportDocumentationPartsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentationPartIds, func(s *smithy.Schema) error {

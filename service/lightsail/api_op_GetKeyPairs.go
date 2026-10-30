@@ -83,7 +83,9 @@ func (v *GetKeyPairsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetKeyPairsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeyPairList(s, schemas.GetKeyPairsResult_keyPairs, v.KeyPairs)
+	if v.KeyPairs != nil {
+		serializeKeyPairList(s, schemas.GetKeyPairsResult_keyPairs, v.KeyPairs)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetKeyPairsResult_nextPageToken, *v.NextPageToken)
 	}

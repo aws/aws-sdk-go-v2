@@ -82,7 +82,9 @@ func (v *ListGlossaryTermsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGlossaryTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlossaryTermItemList(s, schemas.ListGlossaryTermsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeGlossaryTermItemList(s, schemas.ListGlossaryTermsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGlossaryTermsResponse_NextToken, *v.NextToken)
 	}

@@ -74,11 +74,15 @@ func (v *PutDomainObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionKey != nil {
 		s.WriteString(schemas.PutDomainObjectTypeRequest_EncryptionKey, *v.EncryptionKey)
 	}
-	serializeDomainObjectTypeFields(s, schemas.PutDomainObjectTypeRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeDomainObjectTypeFields(s, schemas.PutDomainObjectTypeRequest_Fields, v.Fields)
+	}
 	if v.ObjectTypeName != nil {
 		s.WriteString(schemas.PutDomainObjectTypeRequest_ObjectTypeName, *v.ObjectTypeName)
 	}
-	serializeTagMap(s, schemas.PutDomainObjectTypeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutDomainObjectTypeRequest_Tags, v.Tags)
+	}
 }
 
 type PutDomainObjectTypeOutput struct {
@@ -127,14 +131,18 @@ func (v *PutDomainObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionKey != nil {
 		s.WriteString(schemas.PutDomainObjectTypeResponse_EncryptionKey, *v.EncryptionKey)
 	}
-	serializeDomainObjectTypeFields(s, schemas.PutDomainObjectTypeResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeDomainObjectTypeFields(s, schemas.PutDomainObjectTypeResponse_Fields, v.Fields)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.PutDomainObjectTypeResponse_LastUpdatedAt, *v.LastUpdatedAt)
 	}
 	if v.ObjectTypeName != nil {
 		s.WriteString(schemas.PutDomainObjectTypeResponse_ObjectTypeName, *v.ObjectTypeName)
 	}
-	serializeTagMap(s, schemas.PutDomainObjectTypeResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PutDomainObjectTypeResponse_Tags, v.Tags)
+	}
 }
 func (v *PutDomainObjectTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutDomainObjectTypeResponse, func(s *smithy.Schema) error {

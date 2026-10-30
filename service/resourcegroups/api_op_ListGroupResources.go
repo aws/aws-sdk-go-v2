@@ -102,7 +102,9 @@ func (v *ListGroupResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroupResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceFilterList(s, schemas.ListGroupResourcesInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeResourceFilterList(s, schemas.ListGroupResourcesInput_Filters, v.Filters)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.ListGroupResourcesInput_Group, *v.Group)
 	}
@@ -157,9 +159,15 @@ func (v *ListGroupResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupResourcesOutput_NextToken, *v.NextToken)
 	}
-	serializeQueryErrorList(s, schemas.ListGroupResourcesOutput_QueryErrors, v.QueryErrors)
-	serializeResourceIdentifierList(s, schemas.ListGroupResourcesOutput_ResourceIdentifiers, v.ResourceIdentifiers)
-	serializeListGroupResourcesItemList(s, schemas.ListGroupResourcesOutput_Resources, v.Resources)
+	if v.QueryErrors != nil {
+		serializeQueryErrorList(s, schemas.ListGroupResourcesOutput_QueryErrors, v.QueryErrors)
+	}
+	if v.ResourceIdentifiers != nil {
+		serializeResourceIdentifierList(s, schemas.ListGroupResourcesOutput_ResourceIdentifiers, v.ResourceIdentifiers)
+	}
+	if v.Resources != nil {
+		serializeListGroupResourcesItemList(s, schemas.ListGroupResourcesOutput_Resources, v.Resources)
+	}
 }
 func (v *ListGroupResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGroupResourcesOutput, func(s *smithy.Schema) error {

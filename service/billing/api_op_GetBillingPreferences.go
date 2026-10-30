@@ -60,8 +60,12 @@ func (v *GetBillingPreferencesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBillingPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingFeatures(s, schemas.GetBillingPreferencesRequest_features, v.Features)
-	serializeBillingFeatureFilters(s, schemas.GetBillingPreferencesRequest_filters, v.Filters)
+	if v.Features != nil {
+		serializeBillingFeatures(s, schemas.GetBillingPreferencesRequest_features, v.Features)
+	}
+	if v.Filters != nil {
+		serializeBillingFeatureFilters(s, schemas.GetBillingPreferencesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetBillingPreferencesRequest_maxResults, *v.MaxResults)
 	}
@@ -94,7 +98,9 @@ func (v *GetBillingPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBillingPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingPreferences(s, schemas.GetBillingPreferencesResponse_billingPreferences, v.BillingPreferences)
+	if v.BillingPreferences != nil {
+		serializeBillingPreferences(s, schemas.GetBillingPreferencesResponse_billingPreferences, v.BillingPreferences)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBillingPreferencesResponse_nextToken, *v.NextToken)
 	}

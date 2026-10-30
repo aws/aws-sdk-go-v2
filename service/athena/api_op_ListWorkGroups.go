@@ -82,7 +82,9 @@ func (v *ListWorkGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkGroupsOutput_NextToken, *v.NextToken)
 	}
-	serializeWorkGroupsList(s, schemas.ListWorkGroupsOutput_WorkGroups, v.WorkGroups)
+	if v.WorkGroups != nil {
+		serializeWorkGroupsList(s, schemas.ListWorkGroupsOutput_WorkGroups, v.WorkGroups)
+	}
 }
 func (v *ListWorkGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkGroupsOutput, func(s *smithy.Schema) error {

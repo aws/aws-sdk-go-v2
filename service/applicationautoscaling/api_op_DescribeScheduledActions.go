@@ -238,7 +238,9 @@ func (v *DescribeScheduledActionsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ScalableDimension != "" {
 		s.WriteString(schemas.DescribeScheduledActionsRequest_ScalableDimension, string(v.ScalableDimension))
 	}
-	serializeResourceIdsMaxLen1600(s, schemas.DescribeScheduledActionsRequest_ScheduledActionNames, v.ScheduledActionNames)
+	if v.ScheduledActionNames != nil {
+		serializeResourceIdsMaxLen1600(s, schemas.DescribeScheduledActionsRequest_ScheduledActionNames, v.ScheduledActionNames)
+	}
 	if v.ServiceNamespace != "" {
 		s.WriteString(schemas.DescribeScheduledActionsRequest_ServiceNamespace, string(v.ServiceNamespace))
 	}
@@ -269,7 +271,9 @@ func (v *DescribeScheduledActionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScheduledActionsResponse_NextToken, *v.NextToken)
 	}
-	serializeScheduledActions(s, schemas.DescribeScheduledActionsResponse_ScheduledActions, v.ScheduledActions)
+	if v.ScheduledActions != nil {
+		serializeScheduledActions(s, schemas.DescribeScheduledActionsResponse_ScheduledActions, v.ScheduledActions)
+	}
 }
 func (v *DescribeScheduledActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScheduledActionsResponse, func(s *smithy.Schema) error {

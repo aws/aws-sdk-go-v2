@@ -87,8 +87,12 @@ func (v *CreateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateTaskRequest_description, *v.Description)
 	}
-	serializeTagMap(s, schemas.CreateTaskRequest_tags, v.Tags)
-	serializeTaskConfiguration(s, schemas.CreateTaskRequest_taskConfiguration, v.TaskConfiguration)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTaskRequest_tags, v.Tags)
+	}
+	if v.TaskConfiguration != nil {
+		serializeTaskConfiguration(s, schemas.CreateTaskRequest_taskConfiguration, v.TaskConfiguration)
+	}
 	if v.TaskName != nil {
 		s.WriteString(schemas.CreateTaskRequest_taskName, *v.TaskName)
 	}

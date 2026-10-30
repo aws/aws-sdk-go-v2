@@ -164,7 +164,9 @@ func (v *ListNotebookInstancesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotebookInstancesOutput_NextToken, *v.NextToken)
 	}
-	serializeNotebookInstanceSummaryList(s, schemas.ListNotebookInstancesOutput_NotebookInstances, v.NotebookInstances)
+	if v.NotebookInstances != nil {
+		serializeNotebookInstanceSummaryList(s, schemas.ListNotebookInstancesOutput_NotebookInstances, v.NotebookInstances)
+	}
 }
 func (v *ListNotebookInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotebookInstancesOutput, func(s *smithy.Schema) error {

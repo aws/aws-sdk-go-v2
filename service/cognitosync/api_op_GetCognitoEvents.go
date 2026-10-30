@@ -71,7 +71,9 @@ func (v *GetCognitoEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCognitoEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvents(s, schemas.GetCognitoEventsResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEvents(s, schemas.GetCognitoEventsResponse_Events, v.Events)
+	}
 }
 func (v *GetCognitoEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCognitoEventsResponse, func(s *smithy.Schema) error {

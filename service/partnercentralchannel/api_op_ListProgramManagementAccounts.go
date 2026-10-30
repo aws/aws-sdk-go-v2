@@ -65,24 +65,32 @@ func (v *ListProgramManagementAccountsInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListProgramManagementAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ListProgramManagementAccountsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.ListProgramManagementAccountsRequest_accountIds, v.AccountIds)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListProgramManagementAccountsRequest_catalog, *v.Catalog)
 	}
-	serializeProgramManagementAccountDisplayNameList(s, schemas.ListProgramManagementAccountsRequest_displayNames, v.DisplayNames)
+	if v.DisplayNames != nil {
+		serializeProgramManagementAccountDisplayNameList(s, schemas.ListProgramManagementAccountsRequest_displayNames, v.DisplayNames)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListProgramManagementAccountsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProgramManagementAccountsRequest_nextToken, *v.NextToken)
 	}
-	serializeProgramList(s, schemas.ListProgramManagementAccountsRequest_programs, v.Programs)
+	if v.Programs != nil {
+		serializeProgramList(s, schemas.ListProgramManagementAccountsRequest_programs, v.Programs)
+	}
 	if v.Sort != nil {
 		s.WriteStruct(schemas.ListProgramManagementAccountsRequest_sort)
 		v.Sort.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProgramManagementAccountStatusList(s, schemas.ListProgramManagementAccountsRequest_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeProgramManagementAccountStatusList(s, schemas.ListProgramManagementAccountsRequest_statuses, v.Statuses)
+	}
 }
 
 type ListProgramManagementAccountsOutput struct {
@@ -106,7 +114,9 @@ func (v *ListProgramManagementAccountsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListProgramManagementAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProgramManagementAccountSummaries(s, schemas.ListProgramManagementAccountsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeProgramManagementAccountSummaries(s, schemas.ListProgramManagementAccountsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProgramManagementAccountsResponse_nextToken, *v.NextToken)
 	}

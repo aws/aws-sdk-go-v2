@@ -78,7 +78,9 @@ func (v *ListAddonSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAddonSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddonSubscriptions(s, schemas.ListAddonSubscriptionsResponse_AddonSubscriptions, v.AddonSubscriptions)
+	if v.AddonSubscriptions != nil {
+		serializeAddonSubscriptions(s, schemas.ListAddonSubscriptionsResponse_AddonSubscriptions, v.AddonSubscriptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAddonSubscriptionsResponse_NextToken, *v.NextToken)
 	}

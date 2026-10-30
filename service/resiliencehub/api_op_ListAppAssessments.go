@@ -79,7 +79,9 @@ func (v *ListAppAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentName != nil {
 		s.WriteString(schemas.ListAppAssessmentsRequest_assessmentName, *v.AssessmentName)
 	}
-	serializeAssessmentStatusList(s, schemas.ListAppAssessmentsRequest_assessmentStatus, v.AssessmentStatus)
+	if v.AssessmentStatus != nil {
+		serializeAssessmentStatusList(s, schemas.ListAppAssessmentsRequest_assessmentStatus, v.AssessmentStatus)
+	}
 	if v.ComplianceStatus != "" {
 		s.WriteString(schemas.ListAppAssessmentsRequest_complianceStatus, string(v.ComplianceStatus))
 	}
@@ -160,7 +162,9 @@ func (v *ListAppAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppAssessmentSummaryList(s, schemas.ListAppAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	if v.AssessmentSummaries != nil {
+		serializeAppAssessmentSummaryList(s, schemas.ListAppAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppAssessmentsResponse_nextToken, *v.NextToken)
 	}

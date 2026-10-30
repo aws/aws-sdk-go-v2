@@ -92,9 +92,15 @@ func (v *ListResourceTelemetryInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResourceIdentifierPrefix != nil {
 		s.WriteString(schemas.ListResourceTelemetryInput_ResourceIdentifierPrefix, *v.ResourceIdentifierPrefix)
 	}
-	serializeTagMapInput(s, schemas.ListResourceTelemetryInput_ResourceTags, v.ResourceTags)
-	serializeResourceTypes(s, schemas.ListResourceTelemetryInput_ResourceTypes, v.ResourceTypes)
-	serializeTelemetryConfigurationState(s, schemas.ListResourceTelemetryInput_TelemetryConfigurationState, v.TelemetryConfigurationState)
+	if v.ResourceTags != nil {
+		serializeTagMapInput(s, schemas.ListResourceTelemetryInput_ResourceTags, v.ResourceTags)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.ListResourceTelemetryInput_ResourceTypes, v.ResourceTypes)
+	}
+	if v.TelemetryConfigurationState != nil {
+		serializeTelemetryConfigurationState(s, schemas.ListResourceTelemetryInput_TelemetryConfigurationState, v.TelemetryConfigurationState)
+	}
 }
 
 type ListResourceTelemetryOutput struct {
@@ -123,7 +129,9 @@ func (v *ListResourceTelemetryOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceTelemetryOutput_NextToken, *v.NextToken)
 	}
-	serializeTelemetryConfigurations(s, schemas.ListResourceTelemetryOutput_TelemetryConfigurations, v.TelemetryConfigurations)
+	if v.TelemetryConfigurations != nil {
+		serializeTelemetryConfigurations(s, schemas.ListResourceTelemetryOutput_TelemetryConfigurations, v.TelemetryConfigurations)
+	}
 }
 func (v *ListResourceTelemetryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceTelemetryOutput, func(s *smithy.Schema) error {

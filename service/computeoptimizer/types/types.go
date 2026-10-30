@@ -138,7 +138,9 @@ func (v *AutoScalingGroupConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.MinSize != 0 {
 		s.WriteInt32(schemas.AutoScalingGroupConfiguration_minSize, v.MinSize)
 	}
-	serializeMixedInstanceTypes(s, schemas.AutoScalingGroupConfiguration_mixedInstanceTypes, v.MixedInstanceTypes)
+	if v.MixedInstanceTypes != nil {
+		serializeMixedInstanceTypes(s, schemas.AutoScalingGroupConfiguration_mixedInstanceTypes, v.MixedInstanceTypes)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AutoScalingGroupConfiguration_type, string(v.Type))
 	}
@@ -350,15 +352,21 @@ func (v *AutoScalingGroupRecommendation) SerializeMembers(s smithy.ShapeSerializ
 	if v.Finding != "" {
 		s.WriteString(schemas.AutoScalingGroupRecommendation_finding, string(v.Finding))
 	}
-	serializeInferredWorkloadTypes(s, schemas.AutoScalingGroupRecommendation_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	if v.InferredWorkloadTypes != nil {
+		serializeInferredWorkloadTypes(s, schemas.AutoScalingGroupRecommendation_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	}
 	if v.LastRefreshTimestamp != nil {
 		s.WriteTime(schemas.AutoScalingGroupRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
 	}
 	if v.LookBackPeriodInDays != 0 {
 		s.WriteFloat64(schemas.AutoScalingGroupRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
 	}
-	serializeAutoScalingGroupRecommendationOptions(s, schemas.AutoScalingGroupRecommendation_recommendationOptions, v.RecommendationOptions)
-	serializeUtilizationMetrics(s, schemas.AutoScalingGroupRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.RecommendationOptions != nil {
+		serializeAutoScalingGroupRecommendationOptions(s, schemas.AutoScalingGroupRecommendation_recommendationOptions, v.RecommendationOptions)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeUtilizationMetrics(s, schemas.AutoScalingGroupRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 }
 func (v *AutoScalingGroupRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoScalingGroupRecommendation, func(s *smithy.Schema) error {
@@ -501,7 +509,9 @@ func (v *AutoScalingGroupRecommendationOption) SerializeMembers(s smithy.ShapeSe
 	if v.PerformanceRisk != 0 {
 		s.WriteFloat64(schemas.AutoScalingGroupRecommendationOption_performanceRisk, v.PerformanceRisk)
 	}
-	serializeProjectedUtilizationMetrics(s, schemas.AutoScalingGroupRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.ProjectedUtilizationMetrics != nil {
+		serializeProjectedUtilizationMetrics(s, schemas.AutoScalingGroupRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	}
 	if v.Rank != 0 {
 		s.WriteInt32(schemas.AutoScalingGroupRecommendationOption_rank, v.Rank)
 	}
@@ -1028,7 +1038,9 @@ func (v *EBSFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.EBSFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.EBSFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.EBSFilter_values, v.Values)
+	}
 }
 func (v *EBSFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EBSFilter, func(s *smithy.Schema) error {
@@ -1461,12 +1473,18 @@ func (v *ECSServiceProjectedMetric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ECSServiceProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricValues(s, schemas.ECSServiceProjectedMetric_lowerBoundValues, v.LowerBoundValues)
+	if v.LowerBoundValues != nil {
+		serializeMetricValues(s, schemas.ECSServiceProjectedMetric_lowerBoundValues, v.LowerBoundValues)
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.ECSServiceProjectedMetric_name, string(v.Name))
 	}
-	serializeTimestamps(s, schemas.ECSServiceProjectedMetric_timestamps, v.Timestamps)
-	serializeMetricValues(s, schemas.ECSServiceProjectedMetric_upperBoundValues, v.UpperBoundValues)
+	if v.Timestamps != nil {
+		serializeTimestamps(s, schemas.ECSServiceProjectedMetric_timestamps, v.Timestamps)
+	}
+	if v.UpperBoundValues != nil {
+		serializeMetricValues(s, schemas.ECSServiceProjectedMetric_upperBoundValues, v.UpperBoundValues)
+	}
 }
 func (v *ECSServiceProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ECSServiceProjectedMetric, func(s *smithy.Schema) error {
@@ -1695,7 +1713,9 @@ func (v *ECSServiceRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Finding != "" {
 		s.WriteString(schemas.ECSServiceRecommendation_finding, string(v.Finding))
 	}
-	serializeECSServiceRecommendationFindingReasonCodes(s, schemas.ECSServiceRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.FindingReasonCodes != nil {
+		serializeECSServiceRecommendationFindingReasonCodes(s, schemas.ECSServiceRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	}
 	if v.LastRefreshTimestamp != nil {
 		s.WriteTime(schemas.ECSServiceRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
 	}
@@ -1708,9 +1728,15 @@ func (v *ECSServiceRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.ECSServiceRecommendation_serviceArn, *v.ServiceArn)
 	}
-	serializeECSServiceRecommendationOptions(s, schemas.ECSServiceRecommendation_serviceRecommendationOptions, v.ServiceRecommendationOptions)
-	serializeTags(s, schemas.ECSServiceRecommendation_tags, v.Tags)
-	serializeECSServiceUtilizationMetrics(s, schemas.ECSServiceRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.ServiceRecommendationOptions != nil {
+		serializeECSServiceRecommendationOptions(s, schemas.ECSServiceRecommendation_serviceRecommendationOptions, v.ServiceRecommendationOptions)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.ECSServiceRecommendation_tags, v.Tags)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeECSServiceUtilizationMetrics(s, schemas.ECSServiceRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 }
 func (v *ECSServiceRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ECSServiceRecommendation, func(s *smithy.Schema) error {
@@ -1820,7 +1846,9 @@ func (v *ECSServiceRecommendationFilter) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != "" {
 		s.WriteString(schemas.ECSServiceRecommendationFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.ECSServiceRecommendationFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.ECSServiceRecommendationFilter_values, v.Values)
+	}
 }
 func (v *ECSServiceRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ECSServiceRecommendationFilter, func(s *smithy.Schema) error {
@@ -1893,14 +1921,18 @@ func (v *ECSServiceRecommendationOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ECSServiceRecommendationOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerRecommendations(s, schemas.ECSServiceRecommendationOption_containerRecommendations, v.ContainerRecommendations)
+	if v.ContainerRecommendations != nil {
+		serializeContainerRecommendations(s, schemas.ECSServiceRecommendationOption_containerRecommendations, v.ContainerRecommendations)
+	}
 	if v.Cpu != nil {
 		s.WriteInt32(schemas.ECSServiceRecommendationOption_cpu, *v.Cpu)
 	}
 	if v.Memory != nil {
 		s.WriteInt32(schemas.ECSServiceRecommendationOption_memory, *v.Memory)
 	}
-	serializeECSServiceProjectedUtilizationMetrics(s, schemas.ECSServiceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.ProjectedUtilizationMetrics != nil {
+		serializeECSServiceProjectedUtilizationMetrics(s, schemas.ECSServiceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	}
 	if v.SavingsOpportunity != nil {
 		s.WriteStruct(schemas.ECSServiceRecommendationOption_savingsOpportunity)
 		v.SavingsOpportunity.SerializeMembers(s)
@@ -1964,7 +1996,9 @@ func (v *ECSServiceRecommendedOptionProjectedMetric) Serialize(s smithy.ShapeSer
 }
 
 func (v *ECSServiceRecommendedOptionProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeECSServiceProjectedMetrics(s, schemas.ECSServiceRecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	if v.ProjectedMetrics != nil {
+		serializeECSServiceProjectedMetrics(s, schemas.ECSServiceRecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	}
 	if v.RecommendedCpuUnits != 0 {
 		s.WriteInt32(schemas.ECSServiceRecommendedOptionProjectedMetric_recommendedCpuUnits, v.RecommendedCpuUnits)
 	}
@@ -2096,9 +2130,15 @@ func (v *EffectivePreferredResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EffectivePreferredResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePreferredResourceValues(s, schemas.EffectivePreferredResource_effectiveIncludeList, v.EffectiveIncludeList)
-	serializePreferredResourceValues(s, schemas.EffectivePreferredResource_excludeList, v.ExcludeList)
-	serializePreferredResourceValues(s, schemas.EffectivePreferredResource_includeList, v.IncludeList)
+	if v.EffectiveIncludeList != nil {
+		serializePreferredResourceValues(s, schemas.EffectivePreferredResource_effectiveIncludeList, v.EffectiveIncludeList)
+	}
+	if v.ExcludeList != nil {
+		serializePreferredResourceValues(s, schemas.EffectivePreferredResource_excludeList, v.ExcludeList)
+	}
+	if v.IncludeList != nil {
+		serializePreferredResourceValues(s, schemas.EffectivePreferredResource_includeList, v.IncludeList)
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.EffectivePreferredResource_name, string(v.Name))
 	}
@@ -2197,7 +2237,9 @@ func (v *EffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *EffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCpuVendorArchitectures(s, schemas.EffectiveRecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	if v.CpuVendorArchitectures != nil {
+		serializeCpuVendorArchitectures(s, schemas.EffectiveRecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	}
 	if v.EnhancedInfrastructureMetrics != "" {
 		s.WriteString(schemas.EffectiveRecommendationPreferences_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
 	}
@@ -2212,13 +2254,17 @@ func (v *EffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSeri
 	if v.LookBackPeriod != "" {
 		s.WriteString(schemas.EffectiveRecommendationPreferences_lookBackPeriod, string(v.LookBackPeriod))
 	}
-	serializeEffectivePreferredResources(s, schemas.EffectiveRecommendationPreferences_preferredResources, v.PreferredResources)
+	if v.PreferredResources != nil {
+		serializeEffectivePreferredResources(s, schemas.EffectiveRecommendationPreferences_preferredResources, v.PreferredResources)
+	}
 	if v.SavingsEstimationMode != nil {
 		s.WriteStruct(schemas.EffectiveRecommendationPreferences_savingsEstimationMode)
 		v.SavingsEstimationMode.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUtilizationPreferences(s, schemas.EffectiveRecommendationPreferences_utilizationPreferences, v.UtilizationPreferences)
+	if v.UtilizationPreferences != nil {
+		serializeUtilizationPreferences(s, schemas.EffectiveRecommendationPreferences_utilizationPreferences, v.UtilizationPreferences)
+	}
 }
 func (v *EffectiveRecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EffectiveRecommendationPreferences, func(s *smithy.Schema) error {
@@ -2289,7 +2335,9 @@ func (v *EnrollmentFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.EnrollmentFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.EnrollmentFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.EnrollmentFilter_values, v.Values)
+	}
 }
 func (v *EnrollmentFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnrollmentFilter, func(s *smithy.Schema) error {
@@ -2608,7 +2656,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.Filter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.Filter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.Filter_values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -2735,7 +2785,9 @@ func (v *GpuInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GpuInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGpus(s, schemas.GpuInfo_gpus, v.Gpus)
+	if v.Gpus != nil {
+		serializeGpus(s, schemas.GpuInfo_gpus, v.Gpus)
+	}
 }
 func (v *GpuInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GpuInfo, func(s *smithy.Schema) error {
@@ -2769,7 +2821,9 @@ func (v *IdleDimension) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.IdleDimension_key, *v.Key)
 	}
-	serializeIdleDimensionValues(s, schemas.IdleDimension_values, v.Values)
+	if v.Values != nil {
+		serializeIdleDimensionValues(s, schemas.IdleDimension_values, v.Values)
+	}
 }
 func (v *IdleDimension) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdleDimension, func(s *smithy.Schema) error {
@@ -2911,8 +2965,12 @@ func (v *IdleRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SavingsOpportunityAfterDiscounts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.IdleRecommendation_tags, v.Tags)
-	serializeIdleUtilizationMetrics(s, schemas.IdleRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.Tags != nil {
+		serializeTags(s, schemas.IdleRecommendation_tags, v.Tags)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeIdleUtilizationMetrics(s, schemas.IdleRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 }
 func (v *IdleRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdleRecommendation, func(s *smithy.Schema) error {
@@ -3065,7 +3123,9 @@ func (v *IdleRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.IdleRecommendationFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.IdleRecommendationFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.IdleRecommendationFilter_values, v.Values)
+	}
 }
 func (v *IdleRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdleRecommendationFilter, func(s *smithy.Schema) error {
@@ -3257,7 +3317,9 @@ func (v *IdleUtilizationMetric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdleUtilizationMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdleDimensions(s, schemas.IdleUtilizationMetric_dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeIdleDimensions(s, schemas.IdleUtilizationMetric_dimensions, v.Dimensions)
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.IdleUtilizationMetric_name, string(v.Name))
 	}
@@ -3348,7 +3410,9 @@ func (v *InferredWorkloadSaving) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EstimatedMonthlySavings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInferredWorkloadTypes(s, schemas.InferredWorkloadSaving_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	if v.InferredWorkloadTypes != nil {
+		serializeInferredWorkloadTypes(s, schemas.InferredWorkloadSaving_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	}
 }
 func (v *InferredWorkloadSaving) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InferredWorkloadSaving, func(s *smithy.Schema) error {
@@ -3662,11 +3726,15 @@ func (v *InstanceRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Finding != "" {
 		s.WriteString(schemas.InstanceRecommendation_finding, string(v.Finding))
 	}
-	serializeInstanceRecommendationFindingReasonCodes(s, schemas.InstanceRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.FindingReasonCodes != nil {
+		serializeInstanceRecommendationFindingReasonCodes(s, schemas.InstanceRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	}
 	if v.Idle != "" {
 		s.WriteString(schemas.InstanceRecommendation_idle, string(v.Idle))
 	}
-	serializeInferredWorkloadTypes(s, schemas.InstanceRecommendation_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	if v.InferredWorkloadTypes != nil {
+		serializeInferredWorkloadTypes(s, schemas.InstanceRecommendation_inferredWorkloadTypes, v.InferredWorkloadTypes)
+	}
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.InstanceRecommendation_instanceArn, *v.InstanceArn)
 	}
@@ -3682,10 +3750,18 @@ func (v *InstanceRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LookBackPeriodInDays != 0 {
 		s.WriteFloat64(schemas.InstanceRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
 	}
-	serializeRecommendationOptions(s, schemas.InstanceRecommendation_recommendationOptions, v.RecommendationOptions)
-	serializeRecommendationSources(s, schemas.InstanceRecommendation_recommendationSources, v.RecommendationSources)
-	serializeTags(s, schemas.InstanceRecommendation_tags, v.Tags)
-	serializeUtilizationMetrics(s, schemas.InstanceRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.RecommendationOptions != nil {
+		serializeRecommendationOptions(s, schemas.InstanceRecommendation_recommendationOptions, v.RecommendationOptions)
+	}
+	if v.RecommendationSources != nil {
+		serializeRecommendationSources(s, schemas.InstanceRecommendation_recommendationSources, v.RecommendationSources)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.InstanceRecommendation_tags, v.Tags)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeUtilizationMetrics(s, schemas.InstanceRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 }
 func (v *InstanceRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceRecommendation, func(s *smithy.Schema) error {
@@ -3917,8 +3993,12 @@ func (v *InstanceRecommendationOption) SerializeMembers(s smithy.ShapeSerializer
 	if v.PerformanceRisk != 0 {
 		s.WriteFloat64(schemas.InstanceRecommendationOption_performanceRisk, v.PerformanceRisk)
 	}
-	serializePlatformDifferences(s, schemas.InstanceRecommendationOption_platformDifferences, v.PlatformDifferences)
-	serializeProjectedUtilizationMetrics(s, schemas.InstanceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.PlatformDifferences != nil {
+		serializePlatformDifferences(s, schemas.InstanceRecommendationOption_platformDifferences, v.PlatformDifferences)
+	}
+	if v.ProjectedUtilizationMetrics != nil {
+		serializeProjectedUtilizationMetrics(s, schemas.InstanceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	}
 	if v.Rank != 0 {
 		s.WriteInt32(schemas.InstanceRecommendationOption_rank, v.Rank)
 	}
@@ -4097,7 +4177,9 @@ func (v *JobFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.JobFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.JobFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.JobFilter_values, v.Values)
+	}
 }
 func (v *JobFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobFilter, func(s *smithy.Schema) error {
@@ -4291,7 +4373,9 @@ func (v *LambdaFunctionMemoryRecommendationOption) SerializeMembers(s smithy.Sha
 	if v.MemorySize != 0 {
 		s.WriteInt32(schemas.LambdaFunctionMemoryRecommendationOption_memorySize, v.MemorySize)
 	}
-	serializeLambdaFunctionMemoryProjectedMetrics(s, schemas.LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.ProjectedUtilizationMetrics != nil {
+		serializeLambdaFunctionMemoryProjectedMetrics(s, schemas.LambdaFunctionMemoryRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	}
 	if v.Rank != 0 {
 		s.WriteInt32(schemas.LambdaFunctionMemoryRecommendationOption_rank, v.Rank)
 	}
@@ -4453,7 +4537,9 @@ func (v *LambdaFunctionRecommendation) SerializeMembers(s smithy.ShapeSerializer
 	if v.Finding != "" {
 		s.WriteString(schemas.LambdaFunctionRecommendation_finding, string(v.Finding))
 	}
-	serializeLambdaFunctionRecommendationFindingReasonCodes(s, schemas.LambdaFunctionRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.FindingReasonCodes != nil {
+		serializeLambdaFunctionRecommendationFindingReasonCodes(s, schemas.LambdaFunctionRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	}
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.LambdaFunctionRecommendation_functionArn, *v.FunctionArn)
 	}
@@ -4466,12 +4552,18 @@ func (v *LambdaFunctionRecommendation) SerializeMembers(s smithy.ShapeSerializer
 	if v.LookbackPeriodInDays != 0 {
 		s.WriteFloat64(schemas.LambdaFunctionRecommendation_lookbackPeriodInDays, v.LookbackPeriodInDays)
 	}
-	serializeLambdaFunctionMemoryRecommendationOptions(s, schemas.LambdaFunctionRecommendation_memorySizeRecommendationOptions, v.MemorySizeRecommendationOptions)
+	if v.MemorySizeRecommendationOptions != nil {
+		serializeLambdaFunctionMemoryRecommendationOptions(s, schemas.LambdaFunctionRecommendation_memorySizeRecommendationOptions, v.MemorySizeRecommendationOptions)
+	}
 	if v.NumberOfInvocations != 0 {
 		s.WriteInt64(schemas.LambdaFunctionRecommendation_numberOfInvocations, v.NumberOfInvocations)
 	}
-	serializeTags(s, schemas.LambdaFunctionRecommendation_tags, v.Tags)
-	serializeLambdaFunctionUtilizationMetrics(s, schemas.LambdaFunctionRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.Tags != nil {
+		serializeTags(s, schemas.LambdaFunctionRecommendation_tags, v.Tags)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeLambdaFunctionUtilizationMetrics(s, schemas.LambdaFunctionRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 }
 func (v *LambdaFunctionRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LambdaFunctionRecommendation, func(s *smithy.Schema) error {
@@ -4579,7 +4671,9 @@ func (v *LambdaFunctionRecommendationFilter) SerializeMembers(s smithy.ShapeSeri
 	if v.Name != "" {
 		s.WriteString(schemas.LambdaFunctionRecommendationFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.LambdaFunctionRecommendationFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.LambdaFunctionRecommendationFilter_values, v.Values)
+	}
 }
 func (v *LambdaFunctionRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LambdaFunctionRecommendationFilter, func(s *smithy.Schema) error {
@@ -4815,7 +4909,9 @@ func (v *LicenseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseVersion != nil {
 		s.WriteString(schemas.LicenseConfiguration_licenseVersion, *v.LicenseVersion)
 	}
-	serializeMetricsSource(s, schemas.LicenseConfiguration_metricsSource, v.MetricsSource)
+	if v.MetricsSource != nil {
+		serializeMetricsSource(s, schemas.LicenseConfiguration_metricsSource, v.MetricsSource)
+	}
 	if v.NumberOfCores != 0 {
 		s.WriteInt32(schemas.LicenseConfiguration_numberOfCores, v.NumberOfCores)
 	}
@@ -4946,18 +5042,24 @@ func (v *LicenseRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Finding != "" {
 		s.WriteString(schemas.LicenseRecommendation_finding, string(v.Finding))
 	}
-	serializeLicenseFindingReasonCodes(s, schemas.LicenseRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	if v.FindingReasonCodes != nil {
+		serializeLicenseFindingReasonCodes(s, schemas.LicenseRecommendation_findingReasonCodes, v.FindingReasonCodes)
+	}
 	if v.LastRefreshTimestamp != nil {
 		s.WriteTime(schemas.LicenseRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
 	}
-	serializeLicenseRecommendationOptions(s, schemas.LicenseRecommendation_licenseRecommendationOptions, v.LicenseRecommendationOptions)
+	if v.LicenseRecommendationOptions != nil {
+		serializeLicenseRecommendationOptions(s, schemas.LicenseRecommendation_licenseRecommendationOptions, v.LicenseRecommendationOptions)
+	}
 	if v.LookbackPeriodInDays != 0 {
 		s.WriteFloat64(schemas.LicenseRecommendation_lookbackPeriodInDays, v.LookbackPeriodInDays)
 	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.LicenseRecommendation_resourceArn, *v.ResourceArn)
 	}
-	serializeTags(s, schemas.LicenseRecommendation_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.LicenseRecommendation_tags, v.Tags)
+	}
 }
 func (v *LicenseRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LicenseRecommendation, func(s *smithy.Schema) error {
@@ -5048,7 +5150,9 @@ func (v *LicenseRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != "" {
 		s.WriteString(schemas.LicenseRecommendationFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.LicenseRecommendationFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.LicenseRecommendationFilter_values, v.Values)
+	}
 }
 func (v *LicenseRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LicenseRecommendationFilter, func(s *smithy.Schema) error {
@@ -5338,8 +5442,12 @@ func (v *PreferredResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PreferredResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePreferredResourceValues(s, schemas.PreferredResource_excludeList, v.ExcludeList)
-	serializePreferredResourceValues(s, schemas.PreferredResource_includeList, v.IncludeList)
+	if v.ExcludeList != nil {
+		serializePreferredResourceValues(s, schemas.PreferredResource_excludeList, v.ExcludeList)
+	}
+	if v.IncludeList != nil {
+		serializePreferredResourceValues(s, schemas.PreferredResource_includeList, v.IncludeList)
+	}
 	if v.Name != "" {
 		s.WriteString(schemas.PreferredResource_name, string(v.Name))
 	}
@@ -5435,8 +5543,12 @@ func (v *ProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ProjectedMetric_name, string(v.Name))
 	}
-	serializeTimestamps(s, schemas.ProjectedMetric_timestamps, v.Timestamps)
-	serializeMetricValues(s, schemas.ProjectedMetric_values, v.Values)
+	if v.Timestamps != nil {
+		serializeTimestamps(s, schemas.ProjectedMetric_timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializeMetricValues(s, schemas.ProjectedMetric_values, v.Values)
+	}
 }
 func (v *ProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectedMetric, func(s *smithy.Schema) error {
@@ -5488,8 +5600,12 @@ func (v *RDSDatabaseProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != "" {
 		s.WriteString(schemas.RDSDatabaseProjectedMetric_name, string(v.Name))
 	}
-	serializeTimestamps(s, schemas.RDSDatabaseProjectedMetric_timestamps, v.Timestamps)
-	serializeMetricValues(s, schemas.RDSDatabaseProjectedMetric_values, v.Values)
+	if v.Timestamps != nil {
+		serializeTimestamps(s, schemas.RDSDatabaseProjectedMetric_timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializeMetricValues(s, schemas.RDSDatabaseProjectedMetric_values, v.Values)
+	}
 }
 func (v *RDSDatabaseProjectedMetric) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RDSDatabaseProjectedMetric, func(s *smithy.Schema) error {
@@ -5539,7 +5655,9 @@ func (v *RDSDatabaseRecommendedOptionProjectedMetric) Serialize(s smithy.ShapeSe
 }
 
 func (v *RDSDatabaseRecommendedOptionProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRDSDatabaseProjectedMetrics(s, schemas.RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	if v.ProjectedMetrics != nil {
+		serializeRDSDatabaseProjectedMetrics(s, schemas.RDSDatabaseRecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	}
 	if v.Rank != 0 {
 		s.WriteInt32(schemas.RDSDatabaseRecommendedOptionProjectedMetric_rank, v.Rank)
 	}
@@ -5622,7 +5740,9 @@ func (v *RDSDBInstanceRecommendationOption) SerializeMembers(s smithy.ShapeSeria
 	if v.PerformanceRisk != 0 {
 		s.WriteFloat64(schemas.RDSDBInstanceRecommendationOption_performanceRisk, v.PerformanceRisk)
 	}
-	serializeRDSDBProjectedUtilizationMetrics(s, schemas.RDSDBInstanceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	if v.ProjectedUtilizationMetrics != nil {
+		serializeRDSDBProjectedUtilizationMetrics(s, schemas.RDSDBInstanceRecommendationOption_projectedUtilizationMetrics, v.ProjectedUtilizationMetrics)
+	}
 	if v.Rank != 0 {
 		s.WriteInt32(schemas.RDSDBInstanceRecommendationOption_rank, v.Rank)
 	}
@@ -5793,8 +5913,12 @@ func (v *RDSDBRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceFinding != "" {
 		s.WriteString(schemas.RDSDBRecommendation_instanceFinding, string(v.InstanceFinding))
 	}
-	serializeRDSInstanceFindingReasonCodes(s, schemas.RDSDBRecommendation_instanceFindingReasonCodes, v.InstanceFindingReasonCodes)
-	serializeRDSDBInstanceRecommendationOptions(s, schemas.RDSDBRecommendation_instanceRecommendationOptions, v.InstanceRecommendationOptions)
+	if v.InstanceFindingReasonCodes != nil {
+		serializeRDSInstanceFindingReasonCodes(s, schemas.RDSDBRecommendation_instanceFindingReasonCodes, v.InstanceFindingReasonCodes)
+	}
+	if v.InstanceRecommendationOptions != nil {
+		serializeRDSDBInstanceRecommendationOptions(s, schemas.RDSDBRecommendation_instanceRecommendationOptions, v.InstanceRecommendationOptions)
+	}
 	if v.LastRefreshTimestamp != nil {
 		s.WriteTime(schemas.RDSDBRecommendation_lastRefreshTimestamp, *v.LastRefreshTimestamp)
 	}
@@ -5810,10 +5934,18 @@ func (v *RDSDBRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageFinding != "" {
 		s.WriteString(schemas.RDSDBRecommendation_storageFinding, string(v.StorageFinding))
 	}
-	serializeRDSStorageFindingReasonCodes(s, schemas.RDSDBRecommendation_storageFindingReasonCodes, v.StorageFindingReasonCodes)
-	serializeRDSDBStorageRecommendationOptions(s, schemas.RDSDBRecommendation_storageRecommendationOptions, v.StorageRecommendationOptions)
-	serializeTags(s, schemas.RDSDBRecommendation_tags, v.Tags)
-	serializeRDSDBUtilizationMetrics(s, schemas.RDSDBRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.StorageFindingReasonCodes != nil {
+		serializeRDSStorageFindingReasonCodes(s, schemas.RDSDBRecommendation_storageFindingReasonCodes, v.StorageFindingReasonCodes)
+	}
+	if v.StorageRecommendationOptions != nil {
+		serializeRDSDBStorageRecommendationOptions(s, schemas.RDSDBRecommendation_storageRecommendationOptions, v.StorageRecommendationOptions)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.RDSDBRecommendation_tags, v.Tags)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeRDSDBUtilizationMetrics(s, schemas.RDSDBRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 }
 func (v *RDSDBRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RDSDBRecommendation, func(s *smithy.Schema) error {
@@ -5943,7 +6075,9 @@ func (v *RDSDBRecommendationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.RDSDBRecommendationFilter_name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.RDSDBRecommendationFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.RDSDBRecommendationFilter_values, v.Values)
+	}
 }
 func (v *RDSDBRecommendationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RDSDBRecommendationFilter, func(s *smithy.Schema) error {
@@ -6170,7 +6304,9 @@ func (v *RDSEffectiveRecommendationPreferences) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *RDSEffectiveRecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCpuVendorArchitectures(s, schemas.RDSEffectiveRecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	if v.CpuVendorArchitectures != nil {
+		serializeCpuVendorArchitectures(s, schemas.RDSEffectiveRecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	}
 	if v.EnhancedInfrastructureMetrics != "" {
 		s.WriteString(schemas.RDSEffectiveRecommendationPreferences_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
 	}
@@ -6611,7 +6747,9 @@ func (v *RecommendationPreferences) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecommendationPreferences) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCpuVendorArchitectures(s, schemas.RecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	if v.CpuVendorArchitectures != nil {
+		serializeCpuVendorArchitectures(s, schemas.RecommendationPreferences_cpuVendorArchitectures, v.CpuVendorArchitectures)
+	}
 }
 func (v *RecommendationPreferences) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecommendationPreferences, func(s *smithy.Schema) error {
@@ -6717,7 +6855,9 @@ func (v *RecommendationPreferencesDetail) SerializeMembers(s smithy.ShapeSeriali
 	if v.LookBackPeriod != "" {
 		s.WriteString(schemas.RecommendationPreferencesDetail_lookBackPeriod, string(v.LookBackPeriod))
 	}
-	serializeEffectivePreferredResources(s, schemas.RecommendationPreferencesDetail_preferredResources, v.PreferredResources)
+	if v.PreferredResources != nil {
+		serializeEffectivePreferredResources(s, schemas.RecommendationPreferencesDetail_preferredResources, v.PreferredResources)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.RecommendationPreferencesDetail_resourceType, string(v.ResourceType))
 	}
@@ -6729,7 +6869,9 @@ func (v *RecommendationPreferencesDetail) SerializeMembers(s smithy.ShapeSeriali
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUtilizationPreferences(s, schemas.RecommendationPreferencesDetail_utilizationPreferences, v.UtilizationPreferences)
+	if v.UtilizationPreferences != nil {
+		serializeUtilizationPreferences(s, schemas.RecommendationPreferencesDetail_utilizationPreferences, v.UtilizationPreferences)
+	}
 }
 func (v *RecommendationPreferencesDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecommendationPreferencesDetail, func(s *smithy.Schema) error {
@@ -6924,8 +7066,12 @@ func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdleSavingsOpportunity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdleSummaries(s, schemas.RecommendationSummary_idleSummaries, v.IdleSummaries)
-	serializeInferredWorkloadSavings(s, schemas.RecommendationSummary_inferredWorkloadSavings, v.InferredWorkloadSavings)
+	if v.IdleSummaries != nil {
+		serializeIdleSummaries(s, schemas.RecommendationSummary_idleSummaries, v.IdleSummaries)
+	}
+	if v.InferredWorkloadSavings != nil {
+		serializeInferredWorkloadSavings(s, schemas.RecommendationSummary_inferredWorkloadSavings, v.InferredWorkloadSavings)
+	}
 	if v.RecommendationResourceType != "" {
 		s.WriteString(schemas.RecommendationSummary_recommendationResourceType, string(v.RecommendationResourceType))
 	}
@@ -6934,7 +7080,9 @@ func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SavingsOpportunity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSummaries(s, schemas.RecommendationSummary_summaries, v.Summaries)
+	if v.Summaries != nil {
+		serializeSummaries(s, schemas.RecommendationSummary_summaries, v.Summaries)
+	}
 }
 func (v *RecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecommendationSummary, func(s *smithy.Schema) error {
@@ -7007,7 +7155,9 @@ func (v *RecommendedOptionProjectedMetric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecommendedOptionProjectedMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProjectedMetrics(s, schemas.RecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	if v.ProjectedMetrics != nil {
+		serializeProjectedMetrics(s, schemas.RecommendedOptionProjectedMetric_projectedMetrics, v.ProjectedMetrics)
+	}
 	if v.Rank != 0 {
 		s.WriteInt32(schemas.RecommendedOptionProjectedMetric_rank, v.Rank)
 	}
@@ -7327,7 +7477,9 @@ func (v *ServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutoScalingConfiguration != "" {
 		s.WriteString(schemas.ServiceConfiguration_autoScalingConfiguration, string(v.AutoScalingConfiguration))
 	}
-	serializeContainerConfigurations(s, schemas.ServiceConfiguration_containerConfigurations, v.ContainerConfigurations)
+	if v.ContainerConfigurations != nil {
+		serializeContainerConfigurations(s, schemas.ServiceConfiguration_containerConfigurations, v.ContainerConfigurations)
+	}
 	if v.Cpu != nil {
 		s.WriteInt32(schemas.ServiceConfiguration_cpu, *v.Cpu)
 	}
@@ -7389,7 +7541,9 @@ func (v *Summary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.Summary_name, string(v.Name))
 	}
-	serializeReasonCodeSummaries(s, schemas.Summary_reasonCodeSummaries, v.ReasonCodeSummaries)
+	if v.ReasonCodeSummaries != nil {
+		serializeReasonCodeSummaries(s, schemas.Summary_reasonCodeSummaries, v.ReasonCodeSummaries)
+	}
 	if v.Value != 0 {
 		s.WriteFloat64(schemas.Summary_value, v.Value)
 	}
@@ -7851,12 +8005,18 @@ func (v *VolumeRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LookBackPeriodInDays != 0 {
 		s.WriteFloat64(schemas.VolumeRecommendation_lookBackPeriodInDays, v.LookBackPeriodInDays)
 	}
-	serializeTags(s, schemas.VolumeRecommendation_tags, v.Tags)
-	serializeEBSUtilizationMetrics(s, schemas.VolumeRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	if v.Tags != nil {
+		serializeTags(s, schemas.VolumeRecommendation_tags, v.Tags)
+	}
+	if v.UtilizationMetrics != nil {
+		serializeEBSUtilizationMetrics(s, schemas.VolumeRecommendation_utilizationMetrics, v.UtilizationMetrics)
+	}
 	if v.VolumeArn != nil {
 		s.WriteString(schemas.VolumeRecommendation_volumeArn, *v.VolumeArn)
 	}
-	serializeVolumeRecommendationOptions(s, schemas.VolumeRecommendation_volumeRecommendationOptions, v.VolumeRecommendationOptions)
+	if v.VolumeRecommendationOptions != nil {
+		serializeVolumeRecommendationOptions(s, schemas.VolumeRecommendation_volumeRecommendationOptions, v.VolumeRecommendationOptions)
+	}
 }
 func (v *VolumeRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VolumeRecommendation, func(s *smithy.Schema) error {

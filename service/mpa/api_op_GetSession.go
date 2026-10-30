@@ -154,15 +154,21 @@ func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionName != nil {
 		s.WriteString(schemas.GetSessionResponse_ActionName, *v.ActionName)
 	}
-	serializeAdditionalSecurityRequirements(s, schemas.GetSessionResponse_AdditionalSecurityRequirements, v.AdditionalSecurityRequirements)
-	serializeApprovalStrategyResponse(s, schemas.GetSessionResponse_ApprovalStrategy, v.ApprovalStrategy)
+	if v.AdditionalSecurityRequirements != nil {
+		serializeAdditionalSecurityRequirements(s, schemas.GetSessionResponse_AdditionalSecurityRequirements, v.AdditionalSecurityRequirements)
+	}
+	if v.ApprovalStrategy != nil {
+		serializeApprovalStrategyResponse(s, schemas.GetSessionResponse_ApprovalStrategy, v.ApprovalStrategy)
+	}
 	if v.ApprovalTeamArn != nil {
 		s.WriteString(schemas.GetSessionResponse_ApprovalTeamArn, *v.ApprovalTeamArn)
 	}
 	if v.ApprovalTeamName != nil {
 		s.WriteString(schemas.GetSessionResponse_ApprovalTeamName, *v.ApprovalTeamName)
 	}
-	serializeGetSessionResponseApproverResponses(s, schemas.GetSessionResponse_ApproverResponses, v.ApproverResponses)
+	if v.ApproverResponses != nil {
+		serializeGetSessionResponseApproverResponses(s, schemas.GetSessionResponse_ApproverResponses, v.ApproverResponses)
+	}
 	if v.CompletionTime != nil {
 		s.WriteTime(schemas.GetSessionResponse_CompletionTime, *v.CompletionTime)
 	}
@@ -178,7 +184,9 @@ func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InitiationTime != nil {
 		s.WriteTime(schemas.GetSessionResponse_InitiationTime, *v.InitiationTime)
 	}
-	serializeSessionMetadata(s, schemas.GetSessionResponse_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeSessionMetadata(s, schemas.GetSessionResponse_Metadata, v.Metadata)
+	}
 	if v.NumberOfApprovers != nil {
 		s.WriteInt32(schemas.GetSessionResponse_NumberOfApprovers, *v.NumberOfApprovers)
 	}

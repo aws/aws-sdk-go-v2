@@ -51,7 +51,9 @@ func (v *BatchCreateDelegationByAssessmentInput) SerializeMembers(s smithy.Shape
 	if v.AssessmentId != nil {
 		s.WriteString(schemas.BatchCreateDelegationByAssessmentRequest_assessmentId, *v.AssessmentId)
 	}
-	serializeCreateDelegationRequests(s, schemas.BatchCreateDelegationByAssessmentRequest_createDelegationRequests, v.CreateDelegationRequests)
+	if v.CreateDelegationRequests != nil {
+		serializeCreateDelegationRequests(s, schemas.BatchCreateDelegationByAssessmentRequest_createDelegationRequests, v.CreateDelegationRequests)
+	}
 }
 
 type BatchCreateDelegationByAssessmentOutput struct {
@@ -75,8 +77,12 @@ func (v *BatchCreateDelegationByAssessmentOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *BatchCreateDelegationByAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDelegations(s, schemas.BatchCreateDelegationByAssessmentResponse_delegations, v.Delegations)
-	serializeBatchCreateDelegationByAssessmentErrors(s, schemas.BatchCreateDelegationByAssessmentResponse_errors, v.Errors)
+	if v.Delegations != nil {
+		serializeDelegations(s, schemas.BatchCreateDelegationByAssessmentResponse_delegations, v.Delegations)
+	}
+	if v.Errors != nil {
+		serializeBatchCreateDelegationByAssessmentErrors(s, schemas.BatchCreateDelegationByAssessmentResponse_errors, v.Errors)
+	}
 }
 func (v *BatchCreateDelegationByAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateDelegationByAssessmentResponse, func(s *smithy.Schema) error {

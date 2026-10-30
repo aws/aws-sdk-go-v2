@@ -109,7 +109,9 @@ func (v *GetNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.GetNamespaceResponse_createdBy, *v.CreatedBy)
 	}
-	serializeNamespaceList(s, schemas.GetNamespaceResponse_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.GetNamespaceResponse_namespace, v.Namespace)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.GetNamespaceResponse_namespaceId, *v.NamespaceId)
 	}

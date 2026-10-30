@@ -63,8 +63,12 @@ func (v *Entity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityAttributesMap(s, schemas.Entity_Attributes, v.Attributes)
-	serializeEntityKeyAttributesMap(s, schemas.Entity_KeyAttributes, v.KeyAttributes)
+	if v.Attributes != nil {
+		serializeEntityAttributesMap(s, schemas.Entity_Attributes, v.Attributes)
+	}
+	if v.KeyAttributes != nil {
+		serializeEntityKeyAttributesMap(s, schemas.Entity_KeyAttributes, v.KeyAttributes)
+	}
 }
 func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
@@ -98,7 +102,9 @@ func (v *EntityMetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Entity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricData(s, schemas.EntityMetricDatum_MetricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricData(s, schemas.EntityMetricDatum_MetricData, v.MetricData)
+	}
 }
 func (v *EntityMetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityMetricDatum, func(s *smithy.Schema) error {
@@ -194,7 +200,9 @@ func (v *Metric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.Metric_MetricName, *v.MetricName)
 	}
@@ -327,12 +335,18 @@ func (v *MetricDataResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Label != nil {
 		s.WriteString(schemas.MetricDataResult_Label, *v.Label)
 	}
-	serializeMetricDataResultMessages(s, schemas.MetricDataResult_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeMetricDataResultMessages(s, schemas.MetricDataResult_Messages, v.Messages)
+	}
 	if v.StatusCode != "" {
 		s.WriteString(schemas.MetricDataResult_StatusCode, string(v.StatusCode))
 	}
-	serializeTimestamps(s, schemas.MetricDataResult_Timestamps, v.Timestamps)
-	serializeValues(s, schemas.MetricDataResult_Values, v.Values)
+	if v.Timestamps != nil {
+		serializeTimestamps(s, schemas.MetricDataResult_Timestamps, v.Timestamps)
+	}
+	if v.Values != nil {
+		serializeValues(s, schemas.MetricDataResult_Values, v.Values)
+	}
 }
 func (v *MetricDataResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricDataResult, func(s *smithy.Schema) error {
@@ -392,8 +406,12 @@ func (v *MetricDatum) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCounts(s, schemas.MetricDatum_Counts, v.Counts)
-	serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	if v.Counts != nil {
+		serializeCounts(s, schemas.MetricDatum_Counts, v.Counts)
+	}
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.MetricDatum_MetricName, *v.MetricName)
 	}
@@ -414,7 +432,9 @@ func (v *MetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Value != nil {
 		s.WriteFloat64(schemas.MetricDatum_Value, *v.Value)
 	}
-	serializeValues(s, schemas.MetricDatum_Values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.MetricDatum_Values, v.Values)
+	}
 }
 func (v *MetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricDatum, func(s *smithy.Schema) error {

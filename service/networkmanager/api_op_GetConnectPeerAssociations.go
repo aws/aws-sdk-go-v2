@@ -53,7 +53,9 @@ func (v *GetConnectPeerAssociationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetConnectPeerAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectPeerIdList(s, schemas.GetConnectPeerAssociationsRequest_ConnectPeerIds, v.ConnectPeerIds)
+	if v.ConnectPeerIds != nil {
+		serializeConnectPeerIdList(s, schemas.GetConnectPeerAssociationsRequest_ConnectPeerIds, v.ConnectPeerIds)
+	}
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.GetConnectPeerAssociationsRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
@@ -86,7 +88,9 @@ func (v *GetConnectPeerAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetConnectPeerAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectPeerAssociationList(s, schemas.GetConnectPeerAssociationsResponse_ConnectPeerAssociations, v.ConnectPeerAssociations)
+	if v.ConnectPeerAssociations != nil {
+		serializeConnectPeerAssociationList(s, schemas.GetConnectPeerAssociationsResponse_ConnectPeerAssociations, v.ConnectPeerAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetConnectPeerAssociationsResponse_NextToken, *v.NextToken)
 	}

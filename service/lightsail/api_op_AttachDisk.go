@@ -100,7 +100,9 @@ func (v *AttachDiskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttachDiskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.AttachDiskResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.AttachDiskResult_operations, v.Operations)
+	}
 }
 func (v *AttachDiskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttachDiskResult, func(s *smithy.Schema) error {

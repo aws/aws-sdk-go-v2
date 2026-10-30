@@ -130,7 +130,9 @@ func (v *OptimizeWaypointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DepartureTime != nil {
 		s.WriteString(schemas.OptimizeWaypointsRequest_DepartureTime, *v.DepartureTime)
 	}
-	serializePosition(s, schemas.OptimizeWaypointsRequest_Destination, v.Destination)
+	if v.Destination != nil {
+		serializePosition(s, schemas.OptimizeWaypointsRequest_Destination, v.Destination)
+	}
 	if v.DestinationOptions != nil {
 		s.WriteStruct(schemas.OptimizeWaypointsRequest_DestinationOptions)
 		v.DestinationOptions.SerializeMembers(s)
@@ -152,7 +154,9 @@ func (v *OptimizeWaypointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizeSequencingFor != "" {
 		s.WriteString(schemas.OptimizeWaypointsRequest_OptimizeSequencingFor, string(v.OptimizeSequencingFor))
 	}
-	serializePosition(s, schemas.OptimizeWaypointsRequest_Origin, v.Origin)
+	if v.Origin != nil {
+		serializePosition(s, schemas.OptimizeWaypointsRequest_Origin, v.Origin)
+	}
 	if v.OriginOptions != nil {
 		s.WriteStruct(schemas.OptimizeWaypointsRequest_OriginOptions)
 		v.OriginOptions.SerializeMembers(s)
@@ -171,7 +175,9 @@ func (v *OptimizeWaypointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TravelModeOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWaypointOptimizationWaypointList(s, schemas.OptimizeWaypointsRequest_Waypoints, v.Waypoints)
+	if v.Waypoints != nil {
+		serializeWaypointOptimizationWaypointList(s, schemas.OptimizeWaypointsRequest_Waypoints, v.Waypoints)
+	}
 }
 
 type OptimizeWaypointsOutput struct {
@@ -228,11 +234,17 @@ func (v *OptimizeWaypointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OptimizeWaypointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaypointOptimizationConnectionList(s, schemas.OptimizeWaypointsResponse_Connections, v.Connections)
+	if v.Connections != nil {
+		serializeWaypointOptimizationConnectionList(s, schemas.OptimizeWaypointsResponse_Connections, v.Connections)
+	}
 	s.WriteInt64(schemas.OptimizeWaypointsResponse_Distance, v.Distance)
 	s.WriteInt64(schemas.OptimizeWaypointsResponse_Duration, v.Duration)
-	serializeWaypointOptimizationImpedingWaypointList(s, schemas.OptimizeWaypointsResponse_ImpedingWaypoints, v.ImpedingWaypoints)
-	serializeWaypointOptimizationOptimizedWaypointList(s, schemas.OptimizeWaypointsResponse_OptimizedWaypoints, v.OptimizedWaypoints)
+	if v.ImpedingWaypoints != nil {
+		serializeWaypointOptimizationImpedingWaypointList(s, schemas.OptimizeWaypointsResponse_ImpedingWaypoints, v.ImpedingWaypoints)
+	}
+	if v.OptimizedWaypoints != nil {
+		serializeWaypointOptimizationOptimizedWaypointList(s, schemas.OptimizeWaypointsResponse_OptimizedWaypoints, v.OptimizedWaypoints)
+	}
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.OptimizeWaypointsResponse_PricingBucket, *v.PricingBucket)
 	}

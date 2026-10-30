@@ -97,7 +97,9 @@ func (v *ListResourcesForTagOptionOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PageToken != nil {
 		s.WriteString(schemas.ListResourcesForTagOptionOutput_PageToken, *v.PageToken)
 	}
-	serializeResourceDetails(s, schemas.ListResourcesForTagOptionOutput_ResourceDetails, v.ResourceDetails)
+	if v.ResourceDetails != nil {
+		serializeResourceDetails(s, schemas.ListResourcesForTagOptionOutput_ResourceDetails, v.ResourceDetails)
+	}
 }
 func (v *ListResourcesForTagOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourcesForTagOptionOutput, func(s *smithy.Schema) error {

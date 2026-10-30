@@ -81,8 +81,12 @@ func (v *CancelDomainConfigChangeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CancelDomainConfigChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGUIDList(s, schemas.CancelDomainConfigChangeResponse_CancelledChangeIds, v.CancelledChangeIds)
-	serializeCancelledChangePropertyList(s, schemas.CancelDomainConfigChangeResponse_CancelledChangeProperties, v.CancelledChangeProperties)
+	if v.CancelledChangeIds != nil {
+		serializeGUIDList(s, schemas.CancelDomainConfigChangeResponse_CancelledChangeIds, v.CancelledChangeIds)
+	}
+	if v.CancelledChangeProperties != nil {
+		serializeCancelledChangePropertyList(s, schemas.CancelDomainConfigChangeResponse_CancelledChangeProperties, v.CancelledChangeProperties)
+	}
 	if v.DryRun != nil {
 		s.WriteBool(schemas.CancelDomainConfigChangeResponse_DryRun, *v.DryRun)
 	}

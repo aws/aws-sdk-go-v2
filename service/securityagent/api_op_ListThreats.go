@@ -95,7 +95,9 @@ func (v *ListThreatsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThreatsOutput_nextToken, *v.NextToken)
 	}
-	serializeThreatSummaryList(s, schemas.ListThreatsOutput_threats, v.Threats)
+	if v.Threats != nil {
+		serializeThreatSummaryList(s, schemas.ListThreatsOutput_threats, v.Threats)
+	}
 }
 func (v *ListThreatsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThreatsOutput, func(s *smithy.Schema) error {

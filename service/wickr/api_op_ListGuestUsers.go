@@ -116,7 +116,9 @@ func (v *ListGuestUsersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGuestUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuestUserList(s, schemas.ListGuestUsersResponse_guestlist, v.Guestlist)
+	if v.Guestlist != nil {
+		serializeGuestUserList(s, schemas.ListGuestUsersResponse_guestlist, v.Guestlist)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGuestUsersResponse_nextToken, *v.NextToken)
 	}

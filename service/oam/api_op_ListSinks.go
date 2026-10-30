@@ -78,7 +78,9 @@ func (v *ListSinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListSinksItems(s, schemas.ListSinksOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeListSinksItems(s, schemas.ListSinksOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSinksOutput_NextToken, *v.NextToken)
 	}

@@ -417,8 +417,12 @@ func (v *DescribeTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DebugHookConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDebugRuleConfigurations(s, schemas.DescribeTrainingJobResponse_DebugRuleConfigurations, v.DebugRuleConfigurations)
-	serializeDebugRuleEvaluationStatuses(s, schemas.DescribeTrainingJobResponse_DebugRuleEvaluationStatuses, v.DebugRuleEvaluationStatuses)
+	if v.DebugRuleConfigurations != nil {
+		serializeDebugRuleConfigurations(s, schemas.DescribeTrainingJobResponse_DebugRuleConfigurations, v.DebugRuleConfigurations)
+	}
+	if v.DebugRuleEvaluationStatuses != nil {
+		serializeDebugRuleEvaluationStatuses(s, schemas.DescribeTrainingJobResponse_DebugRuleEvaluationStatuses, v.DebugRuleEvaluationStatuses)
+	}
 	if v.EnableInterContainerTrafficEncryption != nil {
 		s.WriteBool(schemas.DescribeTrainingJobResponse_EnableInterContainerTrafficEncryption, *v.EnableInterContainerTrafficEncryption)
 	}
@@ -428,7 +432,9 @@ func (v *DescribeTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableNetworkIsolation != nil {
 		s.WriteBool(schemas.DescribeTrainingJobResponse_EnableNetworkIsolation, *v.EnableNetworkIsolation)
 	}
-	serializeTrainingEnvironmentMap(s, schemas.DescribeTrainingJobResponse_Environment, v.Environment)
+	if v.Environment != nil {
+		serializeTrainingEnvironmentMap(s, schemas.DescribeTrainingJobResponse_Environment, v.Environment)
+	}
 	if v.ExperimentConfig != nil {
 		s.WriteStruct(schemas.DescribeTrainingJobResponse_ExperimentConfig)
 		v.ExperimentConfig.SerializeMembers(s)
@@ -437,14 +443,20 @@ func (v *DescribeTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureReason != nil {
 		s.WriteString(schemas.DescribeTrainingJobResponse_FailureReason, *v.FailureReason)
 	}
-	serializeFinalMetricDataList(s, schemas.DescribeTrainingJobResponse_FinalMetricDataList, v.FinalMetricDataList)
-	serializeHyperParameters(s, schemas.DescribeTrainingJobResponse_HyperParameters, v.HyperParameters)
+	if v.FinalMetricDataList != nil {
+		serializeFinalMetricDataList(s, schemas.DescribeTrainingJobResponse_FinalMetricDataList, v.FinalMetricDataList)
+	}
+	if v.HyperParameters != nil {
+		serializeHyperParameters(s, schemas.DescribeTrainingJobResponse_HyperParameters, v.HyperParameters)
+	}
 	if v.InfraCheckConfig != nil {
 		s.WriteStruct(schemas.DescribeTrainingJobResponse_InfraCheckConfig)
 		v.InfraCheckConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputDataConfig(s, schemas.DescribeTrainingJobResponse_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeInputDataConfig(s, schemas.DescribeTrainingJobResponse_InputDataConfig, v.InputDataConfig)
+	}
 	if v.LabelingJobArn != nil {
 		s.WriteString(schemas.DescribeTrainingJobResponse_LabelingJobArn, *v.LabelingJobArn)
 	}
@@ -484,8 +496,12 @@ func (v *DescribeTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProfilerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProfilerRuleConfigurations(s, schemas.DescribeTrainingJobResponse_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
-	serializeProfilerRuleEvaluationStatuses(s, schemas.DescribeTrainingJobResponse_ProfilerRuleEvaluationStatuses, v.ProfilerRuleEvaluationStatuses)
+	if v.ProfilerRuleConfigurations != nil {
+		serializeProfilerRuleConfigurations(s, schemas.DescribeTrainingJobResponse_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	}
+	if v.ProfilerRuleEvaluationStatuses != nil {
+		serializeProfilerRuleEvaluationStatuses(s, schemas.DescribeTrainingJobResponse_ProfilerRuleEvaluationStatuses, v.ProfilerRuleEvaluationStatuses)
+	}
 	if v.ProfilingStatus != "" {
 		s.WriteString(schemas.DescribeTrainingJobResponse_ProfilingStatus, string(v.ProfilingStatus))
 	}
@@ -515,7 +531,9 @@ func (v *DescribeTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecondaryStatus != "" {
 		s.WriteString(schemas.DescribeTrainingJobResponse_SecondaryStatus, string(v.SecondaryStatus))
 	}
-	serializeSecondaryStatusTransitions(s, schemas.DescribeTrainingJobResponse_SecondaryStatusTransitions, v.SecondaryStatusTransitions)
+	if v.SecondaryStatusTransitions != nil {
+		serializeSecondaryStatusTransitions(s, schemas.DescribeTrainingJobResponse_SecondaryStatusTransitions, v.SecondaryStatusTransitions)
+	}
 	if v.ServerlessJobConfig != nil {
 		s.WriteStruct(schemas.DescribeTrainingJobResponse_ServerlessJobConfig)
 		v.ServerlessJobConfig.SerializeMembers(s)

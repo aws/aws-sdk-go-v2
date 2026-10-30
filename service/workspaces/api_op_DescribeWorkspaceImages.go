@@ -52,7 +52,9 @@ func (v *DescribeWorkspaceImagesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkspaceImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkspaceImageIdList(s, schemas.DescribeWorkspaceImagesRequest_ImageIds, v.ImageIds)
+	if v.ImageIds != nil {
+		serializeWorkspaceImageIdList(s, schemas.DescribeWorkspaceImagesRequest_ImageIds, v.ImageIds)
+	}
 	if v.ImageType != "" {
 		s.WriteString(schemas.DescribeWorkspaceImagesRequest_ImageType, string(v.ImageType))
 	}
@@ -86,7 +88,9 @@ func (v *DescribeWorkspaceImagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkspaceImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkspaceImageList(s, schemas.DescribeWorkspaceImagesResult_Images, v.Images)
+	if v.Images != nil {
+		serializeWorkspaceImageList(s, schemas.DescribeWorkspaceImagesResult_Images, v.Images)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceImagesResult_NextToken, *v.NextToken)
 	}

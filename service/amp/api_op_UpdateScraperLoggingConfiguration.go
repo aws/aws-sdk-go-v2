@@ -52,8 +52,12 @@ func (v *UpdateScraperLoggingConfigurationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *UpdateScraperLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScraperLoggingDestination(s, schemas.UpdateScraperLoggingConfigurationRequest_loggingDestination, v.LoggingDestination)
-	serializeScraperComponents(s, schemas.UpdateScraperLoggingConfigurationRequest_scraperComponents, v.ScraperComponents)
+	if v.LoggingDestination != nil {
+		serializeScraperLoggingDestination(s, schemas.UpdateScraperLoggingConfigurationRequest_loggingDestination, v.LoggingDestination)
+	}
+	if v.ScraperComponents != nil {
+		serializeScraperComponents(s, schemas.UpdateScraperLoggingConfigurationRequest_scraperComponents, v.ScraperComponents)
+	}
 	if v.ScraperId != nil {
 		s.WriteString(schemas.UpdateScraperLoggingConfigurationRequest_scraperId, *v.ScraperId)
 	}

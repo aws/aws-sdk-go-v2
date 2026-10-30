@@ -74,7 +74,9 @@ func (v *GetRepositoryTriggersOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ConfigurationId != nil {
 		s.WriteString(schemas.GetRepositoryTriggersOutput_configurationId, *v.ConfigurationId)
 	}
-	serializeRepositoryTriggersList(s, schemas.GetRepositoryTriggersOutput_triggers, v.Triggers)
+	if v.Triggers != nil {
+		serializeRepositoryTriggersList(s, schemas.GetRepositoryTriggersOutput_triggers, v.Triggers)
+	}
 }
 func (v *GetRepositoryTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRepositoryTriggersOutput, func(s *smithy.Schema) error {

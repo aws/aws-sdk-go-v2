@@ -94,7 +94,9 @@ func (v *ListAnnotationStoreVersionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListAnnotationStoreVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationStoreVersionItems(s, schemas.ListAnnotationStoreVersionsResponse_annotationStoreVersions, v.AnnotationStoreVersions)
+	if v.AnnotationStoreVersions != nil {
+		serializeAnnotationStoreVersionItems(s, schemas.ListAnnotationStoreVersionsResponse_annotationStoreVersions, v.AnnotationStoreVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnnotationStoreVersionsResponse_nextToken, *v.NextToken)
 	}

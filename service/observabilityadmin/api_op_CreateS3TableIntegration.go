@@ -64,7 +64,9 @@ func (v *CreateS3TableIntegrationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateS3TableIntegrationInput_RoleArn, *v.RoleArn)
 	}
-	serializeTagMapInput(s, schemas.CreateS3TableIntegrationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateS3TableIntegrationInput_Tags, v.Tags)
+	}
 }
 
 type CreateS3TableIntegrationOutput struct {

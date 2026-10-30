@@ -63,7 +63,9 @@ func (v *CreateEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.CreateEmailTemplateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEmailTemplateRequest_Tags, v.Tags)
+	}
 	if v.TemplateContent != nil {
 		s.WriteStruct(schemas.CreateEmailTemplateRequest_TemplateContent)
 		v.TemplateContent.SerializeMembers(s)

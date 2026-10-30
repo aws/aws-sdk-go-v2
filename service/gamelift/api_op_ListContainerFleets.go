@@ -113,7 +113,9 @@ func (v *ListContainerFleetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContainerFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerFleetList(s, schemas.ListContainerFleetsOutput_ContainerFleets, v.ContainerFleets)
+	if v.ContainerFleets != nil {
+		serializeContainerFleetList(s, schemas.ListContainerFleetsOutput_ContainerFleets, v.ContainerFleets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContainerFleetsOutput_NextToken, *v.NextToken)
 	}

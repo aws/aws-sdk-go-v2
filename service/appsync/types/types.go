@@ -134,7 +134,9 @@ func (v *Api) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Created != nil {
 		s.WriteTime(schemas.Api_created, *v.Created)
 	}
-	serializeMapOfStringToString(s, schemas.Api_dns, v.Dns)
+	if v.Dns != nil {
+		serializeMapOfStringToString(s, schemas.Api_dns, v.Dns)
+	}
 	if v.EventConfig != nil {
 		s.WriteStruct(schemas.Api_eventConfig)
 		v.EventConfig.SerializeMembers(s)
@@ -146,7 +148,9 @@ func (v *Api) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerContact != nil {
 		s.WriteString(schemas.Api_ownerContact, *v.OwnerContact)
 	}
-	serializeTagMap(s, schemas.Api_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Api_tags, v.Tags)
+	}
 	if v.WafWebAclArn != nil {
 		s.WriteString(schemas.Api_wafWebAclArn, *v.WafWebAclArn)
 	}
@@ -797,7 +801,9 @@ func (v *BadRequestDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BadRequestDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeErrors(s, schemas.BadRequestDetail_codeErrors, v.CodeErrors)
+	if v.CodeErrors != nil {
+		serializeCodeErrors(s, schemas.BadRequestDetail_codeErrors, v.CodeErrors)
+	}
 }
 func (v *BadRequestDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BadRequestDetail, func(s *smithy.Schema) error {
@@ -835,7 +841,9 @@ func (v *CachingConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CachingConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCachingKeys(s, schemas.CachingConfig_cachingKeys, v.CachingKeys)
+	if v.CachingKeys != nil {
+		serializeCachingKeys(s, schemas.CachingConfig_cachingKeys, v.CachingKeys)
+	}
 	s.WriteInt64(schemas.CachingConfig_ttl, v.Ttl)
 }
 func (v *CachingConfig) Deserialize(d smithy.ShapeDeserializer) error {
@@ -921,9 +929,15 @@ func (v *ChannelNamespace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ChannelNamespace_name, *v.Name)
 	}
-	serializeAuthModes(s, schemas.ChannelNamespace_publishAuthModes, v.PublishAuthModes)
-	serializeAuthModes(s, schemas.ChannelNamespace_subscribeAuthModes, v.SubscribeAuthModes)
-	serializeTagMap(s, schemas.ChannelNamespace_tags, v.Tags)
+	if v.PublishAuthModes != nil {
+		serializeAuthModes(s, schemas.ChannelNamespace_publishAuthModes, v.PublishAuthModes)
+	}
+	if v.SubscribeAuthModes != nil {
+		serializeAuthModes(s, schemas.ChannelNamespace_subscribeAuthModes, v.SubscribeAuthModes)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ChannelNamespace_tags, v.Tags)
+	}
 }
 func (v *ChannelNamespace) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ChannelNamespace, func(s *smithy.Schema) error {
@@ -1393,8 +1407,12 @@ func (v *DataSourceIntrospectionModel) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataSourceIntrospectionModel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceIntrospectionModelFields(s, schemas.DataSourceIntrospectionModel_fields, v.Fields)
-	serializeDataSourceIntrospectionModelIndexes(s, schemas.DataSourceIntrospectionModel_indexes, v.Indexes)
+	if v.Fields != nil {
+		serializeDataSourceIntrospectionModelFields(s, schemas.DataSourceIntrospectionModel_fields, v.Fields)
+	}
+	if v.Indexes != nil {
+		serializeDataSourceIntrospectionModelIndexes(s, schemas.DataSourceIntrospectionModel_indexes, v.Indexes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DataSourceIntrospectionModel_name, *v.Name)
 	}
@@ -1531,7 +1549,9 @@ func (v *DataSourceIntrospectionModelFieldType) SerializeMembers(s smithy.ShapeS
 		v.Type.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceIntrospectionModelFieldTypeValues(s, schemas.DataSourceIntrospectionModelFieldType_values, v.Values)
+	if v.Values != nil {
+		serializeDataSourceIntrospectionModelFieldTypeValues(s, schemas.DataSourceIntrospectionModelFieldType_values, v.Values)
+	}
 }
 func (v *DataSourceIntrospectionModelFieldType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataSourceIntrospectionModelFieldType, func(s *smithy.Schema) error {
@@ -1571,7 +1591,9 @@ func (v *DataSourceIntrospectionModelIndex) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DataSourceIntrospectionModelIndex) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceIntrospectionModelIndexFields(s, schemas.DataSourceIntrospectionModelIndex_fields, v.Fields)
+	if v.Fields != nil {
+		serializeDataSourceIntrospectionModelIndexFields(s, schemas.DataSourceIntrospectionModelIndex_fields, v.Fields)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DataSourceIntrospectionModelIndex_name, *v.Name)
 	}
@@ -1611,7 +1633,9 @@ func (v *DataSourceIntrospectionResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataSourceIntrospectionResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceIntrospectionModels(s, schemas.DataSourceIntrospectionResult_models, v.Models)
+	if v.Models != nil {
+		serializeDataSourceIntrospectionModels(s, schemas.DataSourceIntrospectionResult_models, v.Models)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DataSourceIntrospectionResult_nextToken, *v.NextToken)
 	}
@@ -1731,7 +1755,9 @@ func (v *DomainNameConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HostedZoneId != nil {
 		s.WriteString(schemas.DomainNameConfig_hostedZoneId, *v.HostedZoneId)
 	}
-	serializeTagMap(s, schemas.DomainNameConfig_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DomainNameConfig_tags, v.Tags)
+	}
 }
 func (v *DomainNameConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DomainNameConfig, func(s *smithy.Schema) error {
@@ -2108,7 +2134,9 @@ func (v *EvaluateCodeErrorDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluateCodeErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeErrors(s, schemas.EvaluateCodeErrorDetail_codeErrors, v.CodeErrors)
+	if v.CodeErrors != nil {
+		serializeCodeErrors(s, schemas.EvaluateCodeErrorDetail_codeErrors, v.CodeErrors)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.EvaluateCodeErrorDetail_message, *v.Message)
 	}
@@ -2198,10 +2226,18 @@ func (v *EventConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthProviders(s, schemas.EventConfig_authProviders, v.AuthProviders)
-	serializeAuthModes(s, schemas.EventConfig_connectionAuthModes, v.ConnectionAuthModes)
-	serializeAuthModes(s, schemas.EventConfig_defaultPublishAuthModes, v.DefaultPublishAuthModes)
-	serializeAuthModes(s, schemas.EventConfig_defaultSubscribeAuthModes, v.DefaultSubscribeAuthModes)
+	if v.AuthProviders != nil {
+		serializeAuthProviders(s, schemas.EventConfig_authProviders, v.AuthProviders)
+	}
+	if v.ConnectionAuthModes != nil {
+		serializeAuthModes(s, schemas.EventConfig_connectionAuthModes, v.ConnectionAuthModes)
+	}
+	if v.DefaultPublishAuthModes != nil {
+		serializeAuthModes(s, schemas.EventConfig_defaultPublishAuthModes, v.DefaultPublishAuthModes)
+	}
+	if v.DefaultSubscribeAuthModes != nil {
+		serializeAuthModes(s, schemas.EventConfig_defaultSubscribeAuthModes, v.DefaultSubscribeAuthModes)
+	}
 	if v.LogConfig != nil {
 		s.WriteStruct(schemas.EventConfig_logConfig)
 		v.LogConfig.SerializeMembers(s)
@@ -2528,7 +2564,9 @@ func (v *GraphqlApi) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GraphqlApi) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalAuthenticationProviders(s, schemas.GraphqlApi_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	if v.AdditionalAuthenticationProviders != nil {
+		serializeAdditionalAuthenticationProviders(s, schemas.GraphqlApi_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	}
 	if v.ApiId != nil {
 		s.WriteString(schemas.GraphqlApi_apiId, *v.ApiId)
 	}
@@ -2541,7 +2579,9 @@ func (v *GraphqlApi) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.GraphqlApi_authenticationType, string(v.AuthenticationType))
 	}
-	serializeMapOfStringToString(s, schemas.GraphqlApi_dns, v.Dns)
+	if v.Dns != nil {
+		serializeMapOfStringToString(s, schemas.GraphqlApi_dns, v.Dns)
+	}
 	if v.EnhancedMetricsConfig != nil {
 		s.WriteStruct(schemas.GraphqlApi_enhancedMetricsConfig)
 		v.EnhancedMetricsConfig.SerializeMembers(s)
@@ -2583,8 +2623,12 @@ func (v *GraphqlApi) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResolverCountLimit != 0 {
 		s.WriteInt32(schemas.GraphqlApi_resolverCountLimit, v.ResolverCountLimit)
 	}
-	serializeTagMap(s, schemas.GraphqlApi_tags, v.Tags)
-	serializeMapOfStringToString(s, schemas.GraphqlApi_uris, v.Uris)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GraphqlApi_tags, v.Tags)
+	}
+	if v.Uris != nil {
+		serializeMapOfStringToString(s, schemas.GraphqlApi_uris, v.Uris)
+	}
 	if v.UserPoolConfig != nil {
 		s.WriteStruct(schemas.GraphqlApi_userPoolConfig)
 		v.UserPoolConfig.SerializeMembers(s)
@@ -3234,7 +3278,9 @@ func (v *PipelineConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipelineConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionsIds(s, schemas.PipelineConfig_functions, v.Functions)
+	if v.Functions != nil {
+		serializeFunctionsIds(s, schemas.PipelineConfig_functions, v.Functions)
+	}
 }
 func (v *PipelineConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineConfig, func(s *smithy.Schema) error {

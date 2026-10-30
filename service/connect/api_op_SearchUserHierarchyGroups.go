@@ -114,7 +114,9 @@ func (v *SearchUserHierarchyGroupsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchUserHierarchyGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeUserHierarchyGroupList(s, schemas.SearchUserHierarchyGroupsResponse_UserHierarchyGroups, v.UserHierarchyGroups)
+	if v.UserHierarchyGroups != nil {
+		serializeUserHierarchyGroupList(s, schemas.SearchUserHierarchyGroupsResponse_UserHierarchyGroups, v.UserHierarchyGroups)
+	}
 }
 func (v *SearchUserHierarchyGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchUserHierarchyGroupsResponse, func(s *smithy.Schema) error {

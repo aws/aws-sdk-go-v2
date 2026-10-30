@@ -93,7 +93,9 @@ func (v *ListDataQualityStatisticAnnotationsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListDataQualityStatisticAnnotationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationList(s, schemas.ListDataQualityStatisticAnnotationsResponse_Annotations, v.Annotations)
+	if v.Annotations != nil {
+		serializeAnnotationList(s, schemas.ListDataQualityStatisticAnnotationsResponse_Annotations, v.Annotations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataQualityStatisticAnnotationsResponse_NextToken, *v.NextToken)
 	}

@@ -91,7 +91,9 @@ func (v *UpdateDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateDevEnvironmentRequest_id, *v.Id)
 	}
-	serializeIdeConfigurationList(s, schemas.UpdateDevEnvironmentRequest_ides, v.Ides)
+	if v.Ides != nil {
+		serializeIdeConfigurationList(s, schemas.UpdateDevEnvironmentRequest_ides, v.Ides)
+	}
 	if v.InactivityTimeoutMinutes != 0 {
 		s.WriteInt32(schemas.UpdateDevEnvironmentRequest_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
 	}
@@ -165,7 +167,9 @@ func (v *UpdateDevEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateDevEnvironmentResponse_id, *v.Id)
 	}
-	serializeIdeConfigurationList(s, schemas.UpdateDevEnvironmentResponse_ides, v.Ides)
+	if v.Ides != nil {
+		serializeIdeConfigurationList(s, schemas.UpdateDevEnvironmentResponse_ides, v.Ides)
+	}
 	if v.InactivityTimeoutMinutes != 0 {
 		s.WriteInt32(schemas.UpdateDevEnvironmentResponse_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
 	}

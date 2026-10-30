@@ -121,7 +121,9 @@ func (v *GetAttributeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetAttributeGroupResponse_name, *v.Name)
 	}
-	serializeTags(s, schemas.GetAttributeGroupResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetAttributeGroupResponse_tags, v.Tags)
+	}
 }
 func (v *GetAttributeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAttributeGroupResponse, func(s *smithy.Schema) error {

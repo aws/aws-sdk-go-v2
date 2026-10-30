@@ -106,11 +106,15 @@ func (v *CreateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludedPropertyList(s, schemas.CreateViewInput_IncludedProperties, v.IncludedProperties)
+	if v.IncludedProperties != nil {
+		serializeIncludedPropertyList(s, schemas.CreateViewInput_IncludedProperties, v.IncludedProperties)
+	}
 	if v.Scope != nil {
 		s.WriteString(schemas.CreateViewInput_Scope, *v.Scope)
 	}
-	serializeTagMap(s, schemas.CreateViewInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateViewInput_Tags, v.Tags)
+	}
 	if v.ViewName != nil {
 		s.WriteString(schemas.CreateViewInput_ViewName, *v.ViewName)
 	}

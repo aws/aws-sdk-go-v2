@@ -88,7 +88,9 @@ func (v *CreatePaymentConnectorInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreatePaymentConnectorRequest_clientToken, *v.ClientToken)
 	}
-	serializeCredentialsProviderConfigurations(s, schemas.CreatePaymentConnectorRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.CredentialProviderConfigurations != nil {
+		serializeCredentialsProviderConfigurations(s, schemas.CreatePaymentConnectorRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePaymentConnectorRequest_description, *v.Description)
 	}
@@ -167,7 +169,9 @@ func (v *CreatePaymentConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreatePaymentConnectorResponse_createdAt, *v.CreatedAt)
 	}
-	serializeCredentialsProviderConfigurations(s, schemas.CreatePaymentConnectorResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.CredentialProviderConfigurations != nil {
+		serializeCredentialsProviderConfigurations(s, schemas.CreatePaymentConnectorResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePaymentConnectorResponse_name, *v.Name)
 	}

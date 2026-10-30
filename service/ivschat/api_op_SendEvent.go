@@ -54,7 +54,9 @@ func (v *SendEventInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SendEventInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventAttributes(s, schemas.SendEventRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeEventAttributes(s, schemas.SendEventRequest_attributes, v.Attributes)
+	}
 	if v.EventName != nil {
 		s.WriteString(schemas.SendEventRequest_eventName, *v.EventName)
 	}

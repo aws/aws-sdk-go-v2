@@ -108,7 +108,9 @@ func (v *ListAppComponentRecommendationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAppComponentRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentRecommendationList(s, schemas.ListAppComponentRecommendationsResponse_componentRecommendations, v.ComponentRecommendations)
+	if v.ComponentRecommendations != nil {
+		serializeComponentRecommendationList(s, schemas.ListAppComponentRecommendationsResponse_componentRecommendations, v.ComponentRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppComponentRecommendationsResponse_nextToken, *v.NextToken)
 	}

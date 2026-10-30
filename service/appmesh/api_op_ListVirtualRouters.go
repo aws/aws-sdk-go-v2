@@ -128,7 +128,9 @@ func (v *ListVirtualRoutersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualRoutersOutput_nextToken, *v.NextToken)
 	}
-	serializeVirtualRouterList(s, schemas.ListVirtualRoutersOutput_virtualRouters, v.VirtualRouters)
+	if v.VirtualRouters != nil {
+		serializeVirtualRouterList(s, schemas.ListVirtualRoutersOutput_virtualRouters, v.VirtualRouters)
+	}
 }
 func (v *ListVirtualRoutersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVirtualRoutersOutput, func(s *smithy.Schema) error {

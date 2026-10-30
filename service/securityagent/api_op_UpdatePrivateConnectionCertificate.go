@@ -138,7 +138,9 @@ func (v *UpdatePrivateConnectionCertificateOutput) SerializeMembers(s smithy.Sha
 	if v.Status != "" {
 		s.WriteString(schemas.UpdatePrivateConnectionCertificateOutput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.UpdatePrivateConnectionCertificateOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdatePrivateConnectionCertificateOutput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdatePrivateConnectionCertificateOutput_type, string(v.Type))
 	}

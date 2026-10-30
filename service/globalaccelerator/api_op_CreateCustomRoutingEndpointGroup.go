@@ -64,7 +64,9 @@ func (v *CreateCustomRoutingEndpointGroupInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateCustomRoutingEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingDestinationConfigurations(s, schemas.CreateCustomRoutingEndpointGroupRequest_DestinationConfigurations, v.DestinationConfigurations)
+	if v.DestinationConfigurations != nil {
+		serializeCustomRoutingDestinationConfigurations(s, schemas.CreateCustomRoutingEndpointGroupRequest_DestinationConfigurations, v.DestinationConfigurations)
+	}
 	if v.EndpointGroupRegion != nil {
 		s.WriteString(schemas.CreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion, *v.EndpointGroupRegion)
 	}

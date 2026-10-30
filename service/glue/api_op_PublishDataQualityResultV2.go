@@ -105,15 +105,21 @@ func (v *PublishDataQualityResultV2Input) SerializeMembers(s smithy.ShapeSeriali
 		v.AggregatedMetrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataQualityAnalyzerResults(s, schemas.PublishDataQualityResultV2Request_AnalyzerResults, v.AnalyzerResults)
+	if v.AnalyzerResults != nil {
+		serializeDataQualityAnalyzerResults(s, schemas.PublishDataQualityResultV2Request_AnalyzerResults, v.AnalyzerResults)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.PublishDataQualityResultV2Request_ClientToken, *v.ClientToken)
 	}
 	if v.DataQualitySecurityConfiguration != nil {
 		s.WriteString(schemas.PublishDataQualityResultV2Request_DataQualitySecurityConfiguration, *v.DataQualitySecurityConfiguration)
 	}
-	serializePublishDataQualityResultDescriptors(s, schemas.PublishDataQualityResultV2Request_Descriptors, v.Descriptors)
-	serializePublishDataQualityResultDimensions(s, schemas.PublishDataQualityResultV2Request_Dimensions, v.Dimensions)
+	if v.Descriptors != nil {
+		serializePublishDataQualityResultDescriptors(s, schemas.PublishDataQualityResultV2Request_Descriptors, v.Descriptors)
+	}
+	if v.Dimensions != nil {
+		serializePublishDataQualityResultDimensions(s, schemas.PublishDataQualityResultV2Request_Dimensions, v.Dimensions)
+	}
 	if v.EvaluationContext != nil {
 		s.WriteString(schemas.PublishDataQualityResultV2Request_EvaluationContext, *v.EvaluationContext)
 	}
@@ -123,8 +129,12 @@ func (v *PublishDataQualityResultV2Input) SerializeMembers(s smithy.ShapeSeriali
 	if v.ExecutionStartedOn != nil {
 		s.WriteTime(schemas.PublishDataQualityResultV2Request_ExecutionStartedOn, *v.ExecutionStartedOn)
 	}
-	serializeDataQualityObservations(s, schemas.PublishDataQualityResultV2Request_Observations, v.Observations)
-	serializeDataQualityRuleResults(s, schemas.PublishDataQualityResultV2Request_RuleResults, v.RuleResults)
+	if v.Observations != nil {
+		serializeDataQualityObservations(s, schemas.PublishDataQualityResultV2Request_Observations, v.Observations)
+	}
+	if v.RuleResults != nil {
+		serializeDataQualityRuleResults(s, schemas.PublishDataQualityResultV2Request_RuleResults, v.RuleResults)
+	}
 	if v.RulesetName != nil {
 		s.WriteString(schemas.PublishDataQualityResultV2Request_RulesetName, *v.RulesetName)
 	}
@@ -136,8 +146,12 @@ func (v *PublishDataQualityResultV2Input) SerializeMembers(s smithy.ShapeSeriali
 	if v.Score != nil {
 		s.WriteFloat64(schemas.PublishDataQualityResultV2Request_Score, *v.Score)
 	}
-	serializeStatisticSummaryList(s, schemas.PublishDataQualityResultV2Request_Statistics, v.Statistics)
-	serializePublishDataQualityResultTags(s, schemas.PublishDataQualityResultV2Request_Tags, v.Tags)
+	if v.Statistics != nil {
+		serializeStatisticSummaryList(s, schemas.PublishDataQualityResultV2Request_Statistics, v.Statistics)
+	}
+	if v.Tags != nil {
+		serializePublishDataQualityResultTags(s, schemas.PublishDataQualityResultV2Request_Tags, v.Tags)
+	}
 	if v.Telemetry != nil {
 		s.WriteStruct(schemas.PublishDataQualityResultV2Request_Telemetry)
 		v.Telemetry.SerializeMembers(s)

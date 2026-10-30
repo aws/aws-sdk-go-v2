@@ -112,7 +112,9 @@ func (v *ListTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTermsResponse_NextToken, *v.NextToken)
 	}
-	serializeTermsDescriptionListType(s, schemas.ListTermsResponse_Terms, v.Terms)
+	if v.Terms != nil {
+		serializeTermsDescriptionListType(s, schemas.ListTermsResponse_Terms, v.Terms)
+	}
 }
 func (v *ListTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTermsResponse, func(s *smithy.Schema) error {

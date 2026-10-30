@@ -136,7 +136,9 @@ func (v *GetConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetConnectorResponse_Name, *v.Name)
 	}
-	serializeCspmProviderDetail(s, schemas.GetConnectorResponse_ProviderDetail, v.ProviderDetail)
+	if v.ProviderDetail != nil {
+		serializeCspmProviderDetail(s, schemas.GetConnectorResponse_ProviderDetail, v.ProviderDetail)
+	}
 }
 func (v *GetConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConnectorResponse, func(s *smithy.Schema) error {

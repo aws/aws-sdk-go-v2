@@ -75,7 +75,9 @@ func (v *GetUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserAliases(s, schemas.GetUserResponse_userAliases, v.UserAliases)
+	if v.UserAliases != nil {
+		serializeUserAliases(s, schemas.GetUserResponse_userAliases, v.UserAliases)
+	}
 }
 func (v *GetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetUserResponse, func(s *smithy.Schema) error {

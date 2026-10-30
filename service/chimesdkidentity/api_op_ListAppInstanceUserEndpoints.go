@@ -84,7 +84,9 @@ func (v *ListAppInstanceUserEndpointsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListAppInstanceUserEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppInstanceUserEndpointSummaryList(s, schemas.ListAppInstanceUserEndpointsResponse_AppInstanceUserEndpoints, v.AppInstanceUserEndpoints)
+	if v.AppInstanceUserEndpoints != nil {
+		serializeAppInstanceUserEndpointSummaryList(s, schemas.ListAppInstanceUserEndpointsResponse_AppInstanceUserEndpoints, v.AppInstanceUserEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppInstanceUserEndpointsResponse_NextToken, *v.NextToken)
 	}

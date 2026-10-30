@@ -61,7 +61,9 @@ func (v *StartCodeReviewJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CodeReviewId != nil {
 		s.WriteString(schemas.StartCodeReviewJobInput_codeReviewId, *v.CodeReviewId)
 	}
-	serializeDiffSource(s, schemas.StartCodeReviewJobInput_diffSource, v.DiffSource)
+	if v.DiffSource != nil {
+		serializeDiffSource(s, schemas.StartCodeReviewJobInput_diffSource, v.DiffSource)
+	}
 }
 
 // Output for the StartCodeReviewJob operation.

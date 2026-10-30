@@ -221,11 +221,15 @@ func (v *CalculateRouteMatrixInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DepartNow != nil {
 		s.WriteBool(schemas.CalculateRouteMatrixRequest_DepartNow, *v.DepartNow)
 	}
-	serializePositionList(s, schemas.CalculateRouteMatrixRequest_DeparturePositions, v.DeparturePositions)
+	if v.DeparturePositions != nil {
+		serializePositionList(s, schemas.CalculateRouteMatrixRequest_DeparturePositions, v.DeparturePositions)
+	}
 	if v.DepartureTime != nil {
 		s.WriteTime(schemas.CalculateRouteMatrixRequest_DepartureTime, *v.DepartureTime)
 	}
-	serializePositionList(s, schemas.CalculateRouteMatrixRequest_DestinationPositions, v.DestinationPositions)
+	if v.DestinationPositions != nil {
+		serializePositionList(s, schemas.CalculateRouteMatrixRequest_DestinationPositions, v.DestinationPositions)
+	}
 	if v.DistanceUnit != "" {
 		s.WriteString(schemas.CalculateRouteMatrixRequest_DistanceUnit, string(v.DistanceUnit))
 	}
@@ -325,9 +329,15 @@ func (v *CalculateRouteMatrixOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CalculateRouteMatrixOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteMatrix(s, schemas.CalculateRouteMatrixResponse_RouteMatrix, v.RouteMatrix)
-	serializePositionList(s, schemas.CalculateRouteMatrixResponse_SnappedDeparturePositions, v.SnappedDeparturePositions)
-	serializePositionList(s, schemas.CalculateRouteMatrixResponse_SnappedDestinationPositions, v.SnappedDestinationPositions)
+	if v.RouteMatrix != nil {
+		serializeRouteMatrix(s, schemas.CalculateRouteMatrixResponse_RouteMatrix, v.RouteMatrix)
+	}
+	if v.SnappedDeparturePositions != nil {
+		serializePositionList(s, schemas.CalculateRouteMatrixResponse_SnappedDeparturePositions, v.SnappedDeparturePositions)
+	}
+	if v.SnappedDestinationPositions != nil {
+		serializePositionList(s, schemas.CalculateRouteMatrixResponse_SnappedDestinationPositions, v.SnappedDestinationPositions)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.CalculateRouteMatrixResponse_Summary)
 		v.Summary.SerializeMembers(s)

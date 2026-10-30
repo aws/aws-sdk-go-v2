@@ -93,11 +93,15 @@ func (v *UpdateAccessControlConfigurationInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *UpdateAccessControlConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipalList(s, schemas.UpdateAccessControlConfigurationRequest_AccessControlList, v.AccessControlList)
+	if v.AccessControlList != nil {
+		serializePrincipalList(s, schemas.UpdateAccessControlConfigurationRequest_AccessControlList, v.AccessControlList)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAccessControlConfigurationRequest_Description, *v.Description)
 	}
-	serializeHierarchicalPrincipalList(s, schemas.UpdateAccessControlConfigurationRequest_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	if v.HierarchicalAccessControlList != nil {
+		serializeHierarchicalPrincipalList(s, schemas.UpdateAccessControlConfigurationRequest_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateAccessControlConfigurationRequest_Id, *v.Id)
 	}

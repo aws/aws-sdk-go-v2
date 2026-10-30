@@ -55,8 +55,12 @@ func (v *ListInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceNameList(s, schemas.ListInstancesRequest_instanceNameFilter, v.InstanceNameFilter)
-	serializeInstanceStateList(s, schemas.ListInstancesRequest_instanceStateFilter, v.InstanceStateFilter)
+	if v.InstanceNameFilter != nil {
+		serializeInstanceNameList(s, schemas.ListInstancesRequest_instanceNameFilter, v.InstanceNameFilter)
+	}
+	if v.InstanceStateFilter != nil {
+		serializeInstanceStateList(s, schemas.ListInstancesRequest_instanceStateFilter, v.InstanceStateFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListInstancesRequest_maxResults, *v.MaxResults)
 	}
@@ -89,7 +93,9 @@ func (v *ListInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceList(s, schemas.ListInstancesResponse_instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.ListInstancesResponse_instances, v.Instances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInstancesResponse_nextToken, *v.NextToken)
 	}

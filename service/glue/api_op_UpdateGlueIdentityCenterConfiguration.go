@@ -47,7 +47,9 @@ func (v *UpdateGlueIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *UpdateGlueIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityCenterScopesList(s, schemas.UpdateGlueIdentityCenterConfigurationRequest_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeIdentityCenterScopesList(s, schemas.UpdateGlueIdentityCenterConfigurationRequest_Scopes, v.Scopes)
+	}
 	if v.UserBackgroundSessionsEnabled != nil {
 		s.WriteBool(schemas.UpdateGlueIdentityCenterConfigurationRequest_UserBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
 	}

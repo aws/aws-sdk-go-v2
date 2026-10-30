@@ -8,9 +8,6 @@ import (
 )
 
 func serializeIceServerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IceServer) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeIceServerList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeUris(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))

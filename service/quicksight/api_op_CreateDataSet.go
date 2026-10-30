@@ -135,8 +135,12 @@ func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.CreateDataSetRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeColumnGroupList(s, schemas.CreateDataSetRequest_ColumnGroups, v.ColumnGroups)
-	serializeColumnLevelPermissionRuleList(s, schemas.CreateDataSetRequest_ColumnLevelPermissionRules, v.ColumnLevelPermissionRules)
+	if v.ColumnGroups != nil {
+		serializeColumnGroupList(s, schemas.CreateDataSetRequest_ColumnGroups, v.ColumnGroups)
+	}
+	if v.ColumnLevelPermissionRules != nil {
+		serializeColumnLevelPermissionRuleList(s, schemas.CreateDataSetRequest_ColumnLevelPermissionRules, v.ColumnLevelPermissionRules)
+	}
 	if v.DataPrepConfiguration != nil {
 		s.WriteStruct(schemas.CreateDataSetRequest_DataPrepConfiguration)
 		v.DataPrepConfiguration.SerializeMembers(s)
@@ -150,13 +154,21 @@ func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataSetUsageConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDatasetParameterList(s, schemas.CreateDataSetRequest_DatasetParameters, v.DatasetParameters)
-	serializeFieldFolderMap(s, schemas.CreateDataSetRequest_FieldFolders, v.FieldFolders)
-	serializeFolderArnList(s, schemas.CreateDataSetRequest_FolderArns, v.FolderArns)
+	if v.DatasetParameters != nil {
+		serializeDatasetParameterList(s, schemas.CreateDataSetRequest_DatasetParameters, v.DatasetParameters)
+	}
+	if v.FieldFolders != nil {
+		serializeFieldFolderMap(s, schemas.CreateDataSetRequest_FieldFolders, v.FieldFolders)
+	}
+	if v.FolderArns != nil {
+		serializeFolderArnList(s, schemas.CreateDataSetRequest_FolderArns, v.FolderArns)
+	}
 	if v.ImportMode != "" {
 		s.WriteString(schemas.CreateDataSetRequest_ImportMode, string(v.ImportMode))
 	}
-	serializeLogicalTableMap(s, schemas.CreateDataSetRequest_LogicalTableMap, v.LogicalTableMap)
+	if v.LogicalTableMap != nil {
+		serializeLogicalTableMap(s, schemas.CreateDataSetRequest_LogicalTableMap, v.LogicalTableMap)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataSetRequest_Name, *v.Name)
 	}
@@ -165,8 +177,12 @@ func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PerformanceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourcePermissionList(s, schemas.CreateDataSetRequest_Permissions, v.Permissions)
-	serializePhysicalTableMap(s, schemas.CreateDataSetRequest_PhysicalTableMap, v.PhysicalTableMap)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateDataSetRequest_Permissions, v.Permissions)
+	}
+	if v.PhysicalTableMap != nil {
+		serializePhysicalTableMap(s, schemas.CreateDataSetRequest_PhysicalTableMap, v.PhysicalTableMap)
+	}
 	if v.RowLevelPermissionDataSet != nil {
 		s.WriteStruct(schemas.CreateDataSetRequest_RowLevelPermissionDataSet)
 		v.RowLevelPermissionDataSet.SerializeMembers(s)
@@ -182,7 +198,9 @@ func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SemanticModelConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDataSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataSetRequest_Tags, v.Tags)
+	}
 	if v.UseAs != "" {
 		s.WriteString(schemas.CreateDataSetRequest_UseAs, string(v.UseAs))
 	}

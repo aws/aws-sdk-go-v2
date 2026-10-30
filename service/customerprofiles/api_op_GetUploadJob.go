@@ -140,7 +140,9 @@ func (v *GetUploadJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.GetUploadJobResponse_DisplayName, *v.DisplayName)
 	}
-	serializeFieldMap(s, schemas.GetUploadJobResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.GetUploadJobResponse_Fields, v.Fields)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.GetUploadJobResponse_JobId, *v.JobId)
 	}

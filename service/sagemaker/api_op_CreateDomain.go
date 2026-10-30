@@ -200,11 +200,15 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateDomainRequest_KmsKeyId, *v.KmsKeyId)
 	}
-	serializeSubnets(s, schemas.CreateDomainRequest_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnets(s, schemas.CreateDomainRequest_SubnetIds, v.SubnetIds)
+	}
 	if v.TagPropagation != "" {
 		s.WriteString(schemas.CreateDomainRequest_TagPropagation, string(v.TagPropagation))
 	}
-	serializeTagList(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateDomainRequest_VpcId, *v.VpcId)
 	}

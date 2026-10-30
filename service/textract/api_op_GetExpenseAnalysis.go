@@ -137,7 +137,9 @@ func (v *GetExpenseAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DocumentMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpenseDocumentList(s, schemas.GetExpenseAnalysisResponse_ExpenseDocuments, v.ExpenseDocuments)
+	if v.ExpenseDocuments != nil {
+		serializeExpenseDocumentList(s, schemas.GetExpenseAnalysisResponse_ExpenseDocuments, v.ExpenseDocuments)
+	}
 	if v.JobStatus != "" {
 		s.WriteString(schemas.GetExpenseAnalysisResponse_JobStatus, string(v.JobStatus))
 	}
@@ -147,7 +149,9 @@ func (v *GetExpenseAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetExpenseAnalysisResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeWarnings(s, schemas.GetExpenseAnalysisResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarnings(s, schemas.GetExpenseAnalysisResponse_Warnings, v.Warnings)
+	}
 }
 func (v *GetExpenseAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetExpenseAnalysisResponse, func(s *smithy.Schema) error {

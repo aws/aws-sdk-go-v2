@@ -129,11 +129,15 @@ func (v *CreateForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForecastName != nil {
 		s.WriteString(schemas.CreateForecastRequest_ForecastName, *v.ForecastName)
 	}
-	serializeForecastTypes(s, schemas.CreateForecastRequest_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.CreateForecastRequest_ForecastTypes, v.ForecastTypes)
+	}
 	if v.PredictorArn != nil {
 		s.WriteString(schemas.CreateForecastRequest_PredictorArn, *v.PredictorArn)
 	}
-	serializeTags(s, schemas.CreateForecastRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateForecastRequest_Tags, v.Tags)
+	}
 	if v.TimeSeriesSelector != nil {
 		s.WriteStruct(schemas.CreateForecastRequest_TimeSeriesSelector)
 		v.TimeSeriesSelector.SerializeMembers(s)

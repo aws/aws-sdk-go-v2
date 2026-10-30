@@ -89,7 +89,9 @@ func (v *ListResourceGroupingRecommendationsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListResourceGroupingRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupingRecommendationList(s, schemas.ListResourceGroupingRecommendationsResponse_groupingRecommendations, v.GroupingRecommendations)
+	if v.GroupingRecommendations != nil {
+		serializeGroupingRecommendationList(s, schemas.ListResourceGroupingRecommendationsResponse_groupingRecommendations, v.GroupingRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceGroupingRecommendationsResponse_nextToken, *v.NextToken)
 	}

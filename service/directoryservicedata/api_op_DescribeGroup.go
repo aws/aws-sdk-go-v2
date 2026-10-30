@@ -66,7 +66,9 @@ func (v *DescribeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DescribeGroupRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeLdapDisplayNameList(s, schemas.DescribeGroupRequest_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeLdapDisplayNameList(s, schemas.DescribeGroupRequest_OtherAttributes, v.OtherAttributes)
+	}
 	if v.Realm != nil {
 		s.WriteString(schemas.DescribeGroupRequest_Realm, *v.Realm)
 	}
@@ -133,7 +135,9 @@ func (v *DescribeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupType != "" {
 		s.WriteString(schemas.DescribeGroupResult_GroupType, string(v.GroupType))
 	}
-	serializeAttributes(s, schemas.DescribeGroupResult_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.DescribeGroupResult_OtherAttributes, v.OtherAttributes)
+	}
 	if v.Realm != nil {
 		s.WriteString(schemas.DescribeGroupResult_Realm, *v.Realm)
 	}

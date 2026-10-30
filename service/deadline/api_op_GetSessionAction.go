@@ -136,12 +136,18 @@ func (v *GetSessionActionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSessionActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcquiredLimits(s, schemas.GetSessionActionResponse_acquiredLimits, v.AcquiredLimits)
-	serializeSessionActionDefinition(s, schemas.GetSessionActionResponse_definition, v.Definition)
+	if v.AcquiredLimits != nil {
+		serializeAcquiredLimits(s, schemas.GetSessionActionResponse_acquiredLimits, v.AcquiredLimits)
+	}
+	if v.Definition != nil {
+		serializeSessionActionDefinition(s, schemas.GetSessionActionResponse_definition, v.Definition)
+	}
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetSessionActionResponse_endedAt, *v.EndedAt)
 	}
-	serializeTaskRunManifestPropertiesListResponse(s, schemas.GetSessionActionResponse_manifests, v.Manifests)
+	if v.Manifests != nil {
+		serializeTaskRunManifestPropertiesListResponse(s, schemas.GetSessionActionResponse_manifests, v.Manifests)
+	}
 	if v.ProcessExitCode != nil {
 		s.WriteInt32(schemas.GetSessionActionResponse_processExitCode, *v.ProcessExitCode)
 	}

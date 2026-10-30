@@ -108,7 +108,9 @@ func (v *ListZonalShiftsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListZonalShiftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeZonalShiftSummaries(s, schemas.ListZonalShiftsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeZonalShiftSummaries(s, schemas.ListZonalShiftsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListZonalShiftsResponse_nextToken, *v.NextToken)
 	}

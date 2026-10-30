@@ -81,7 +81,9 @@ func (v *ExtendTrainingPlanOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExtendTrainingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrainingPlanExtensions(s, schemas.ExtendTrainingPlanResponse_TrainingPlanExtensions, v.TrainingPlanExtensions)
+	if v.TrainingPlanExtensions != nil {
+		serializeTrainingPlanExtensions(s, schemas.ExtendTrainingPlanResponse_TrainingPlanExtensions, v.TrainingPlanExtensions)
+	}
 }
 func (v *ExtendTrainingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExtendTrainingPlanResponse, func(s *smithy.Schema) error {

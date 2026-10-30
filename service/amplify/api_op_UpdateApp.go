@@ -159,7 +159,9 @@ func (v *UpdateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoBranchCreationConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoBranchCreationPatterns(s, schemas.UpdateAppRequest_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	if v.AutoBranchCreationPatterns != nil {
+		serializeAutoBranchCreationPatterns(s, schemas.UpdateAppRequest_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	}
 	if v.BasicAuthCredentials != nil {
 		s.WriteString(schemas.UpdateAppRequest_basicAuthCredentials, *v.BasicAuthCredentials)
 	}
@@ -177,7 +179,9 @@ func (v *UpdateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomHeaders != nil {
 		s.WriteString(schemas.UpdateAppRequest_customHeaders, *v.CustomHeaders)
 	}
-	serializeCustomRules(s, schemas.UpdateAppRequest_customRules, v.CustomRules)
+	if v.CustomRules != nil {
+		serializeCustomRules(s, schemas.UpdateAppRequest_customRules, v.CustomRules)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAppRequest_description, *v.Description)
 	}
@@ -193,7 +197,9 @@ func (v *UpdateAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableBranchAutoDeletion != nil {
 		s.WriteBool(schemas.UpdateAppRequest_enableBranchAutoDeletion, *v.EnableBranchAutoDeletion)
 	}
-	serializeEnvironmentVariables(s, schemas.UpdateAppRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.UpdateAppRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.IamServiceRoleArn != nil {
 		s.WriteString(schemas.UpdateAppRequest_iamServiceRoleArn, *v.IamServiceRoleArn)
 	}

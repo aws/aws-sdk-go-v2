@@ -92,8 +92,12 @@ func (v *GetResourceOauth2TokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourceOauth2TokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiencesListType(s, schemas.GetResourceOauth2TokenRequest_audiences, v.Audiences)
-	serializeCustomRequestParametersType(s, schemas.GetResourceOauth2TokenRequest_customParameters, v.CustomParameters)
+	if v.Audiences != nil {
+		serializeAudiencesListType(s, schemas.GetResourceOauth2TokenRequest_audiences, v.Audiences)
+	}
+	if v.CustomParameters != nil {
+		serializeCustomRequestParametersType(s, schemas.GetResourceOauth2TokenRequest_customParameters, v.CustomParameters)
+	}
 	if v.CustomState != nil {
 		s.WriteString(schemas.GetResourceOauth2TokenRequest_customState, *v.CustomState)
 	}
@@ -109,8 +113,12 @@ func (v *GetResourceOauth2TokenInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ResourceOauth2ReturnUrl != nil {
 		s.WriteString(schemas.GetResourceOauth2TokenRequest_resourceOauth2ReturnUrl, *v.ResourceOauth2ReturnUrl)
 	}
-	serializeResourcesListType(s, schemas.GetResourceOauth2TokenRequest_resources, v.Resources)
-	serializeScopesListType(s, schemas.GetResourceOauth2TokenRequest_scopes, v.Scopes)
+	if v.Resources != nil {
+		serializeResourcesListType(s, schemas.GetResourceOauth2TokenRequest_resources, v.Resources)
+	}
+	if v.Scopes != nil {
+		serializeScopesListType(s, schemas.GetResourceOauth2TokenRequest_scopes, v.Scopes)
+	}
 	if v.SessionUri != nil {
 		s.WriteString(schemas.GetResourceOauth2TokenRequest_sessionUri, *v.SessionUri)
 	}

@@ -79,7 +79,9 @@ func (v *ListSchemaMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSchemaMappingsOutput_nextToken, *v.NextToken)
 	}
-	serializeSchemaMappingList(s, schemas.ListSchemaMappingsOutput_schemaList, v.SchemaList)
+	if v.SchemaList != nil {
+		serializeSchemaMappingList(s, schemas.ListSchemaMappingsOutput_schemaList, v.SchemaList)
+	}
 }
 func (v *ListSchemaMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSchemaMappingsOutput, func(s *smithy.Schema) error {

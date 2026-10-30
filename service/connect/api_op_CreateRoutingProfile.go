@@ -110,13 +110,21 @@ func (v *CreateRoutingProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateRoutingProfileRequest_InstanceId, *v.InstanceId)
 	}
-	serializeRoutingProfileManualAssignmentQueueConfigList(s, schemas.CreateRoutingProfileRequest_ManualAssignmentQueueConfigs, v.ManualAssignmentQueueConfigs)
-	serializeMediaConcurrencies(s, schemas.CreateRoutingProfileRequest_MediaConcurrencies, v.MediaConcurrencies)
+	if v.ManualAssignmentQueueConfigs != nil {
+		serializeRoutingProfileManualAssignmentQueueConfigList(s, schemas.CreateRoutingProfileRequest_ManualAssignmentQueueConfigs, v.ManualAssignmentQueueConfigs)
+	}
+	if v.MediaConcurrencies != nil {
+		serializeMediaConcurrencies(s, schemas.CreateRoutingProfileRequest_MediaConcurrencies, v.MediaConcurrencies)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRoutingProfileRequest_Name, *v.Name)
 	}
-	serializeRoutingProfileQueueConfigList(s, schemas.CreateRoutingProfileRequest_QueueConfigs, v.QueueConfigs)
-	serializeTagMap(s, schemas.CreateRoutingProfileRequest_Tags, v.Tags)
+	if v.QueueConfigs != nil {
+		serializeRoutingProfileQueueConfigList(s, schemas.CreateRoutingProfileRequest_QueueConfigs, v.QueueConfigs)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRoutingProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRoutingProfileOutput struct {

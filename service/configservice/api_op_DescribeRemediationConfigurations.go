@@ -44,7 +44,9 @@ func (v *DescribeRemediationConfigurationsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeRemediationConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigRuleNames(s, schemas.DescribeRemediationConfigurationsRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.ConfigRuleNames != nil {
+		serializeConfigRuleNames(s, schemas.DescribeRemediationConfigurationsRequest_ConfigRuleNames, v.ConfigRuleNames)
+	}
 }
 
 type DescribeRemediationConfigurationsOutput struct {
@@ -65,7 +67,9 @@ func (v *DescribeRemediationConfigurationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeRemediationConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemediationConfigurations(s, schemas.DescribeRemediationConfigurationsResponse_RemediationConfigurations, v.RemediationConfigurations)
+	if v.RemediationConfigurations != nil {
+		serializeRemediationConfigurations(s, schemas.DescribeRemediationConfigurationsResponse_RemediationConfigurations, v.RemediationConfigurations)
+	}
 }
 func (v *DescribeRemediationConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRemediationConfigurationsResponse, func(s *smithy.Schema) error {

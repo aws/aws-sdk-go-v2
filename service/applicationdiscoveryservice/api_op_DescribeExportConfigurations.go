@@ -53,7 +53,9 @@ func (v *DescribeExportConfigurationsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeExportConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportIds(s, schemas.DescribeExportConfigurationsRequest_exportIds, v.ExportIds)
+	if v.ExportIds != nil {
+		serializeExportIds(s, schemas.DescribeExportConfigurationsRequest_exportIds, v.ExportIds)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.DescribeExportConfigurationsRequest_maxResults, v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *DescribeExportConfigurationsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeExportConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportsInfo(s, schemas.DescribeExportConfigurationsResponse_exportsInfo, v.ExportsInfo)
+	if v.ExportsInfo != nil {
+		serializeExportsInfo(s, schemas.DescribeExportConfigurationsResponse_exportsInfo, v.ExportsInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeExportConfigurationsResponse_nextToken, *v.NextToken)
 	}

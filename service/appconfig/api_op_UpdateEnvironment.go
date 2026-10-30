@@ -66,7 +66,9 @@ func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.UpdateEnvironmentRequest_EnvironmentId, *v.EnvironmentId)
 	}
-	serializeMonitorList(s, schemas.UpdateEnvironmentRequest_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorList(s, schemas.UpdateEnvironmentRequest_Monitors, v.Monitors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateEnvironmentRequest_Name, *v.Name)
 	}
@@ -115,7 +117,9 @@ func (v *UpdateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Environment_Id, *v.Id)
 	}
-	serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Environment_Name, *v.Name)
 	}

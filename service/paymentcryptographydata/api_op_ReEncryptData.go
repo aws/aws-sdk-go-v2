@@ -131,7 +131,9 @@ func (v *ReEncryptDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CipherText != nil {
 		s.WriteString(schemas.ReEncryptDataInput_CipherText, *v.CipherText)
 	}
-	serializeReEncryptionAttributes(s, schemas.ReEncryptDataInput_IncomingEncryptionAttributes, v.IncomingEncryptionAttributes)
+	if v.IncomingEncryptionAttributes != nil {
+		serializeReEncryptionAttributes(s, schemas.ReEncryptDataInput_IncomingEncryptionAttributes, v.IncomingEncryptionAttributes)
+	}
 	if v.IncomingKeyIdentifier != nil {
 		s.WriteString(schemas.ReEncryptDataInput_IncomingKeyIdentifier, *v.IncomingKeyIdentifier)
 	}
@@ -140,7 +142,9 @@ func (v *ReEncryptDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IncomingWrappedKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReEncryptionAttributes(s, schemas.ReEncryptDataInput_OutgoingEncryptionAttributes, v.OutgoingEncryptionAttributes)
+	if v.OutgoingEncryptionAttributes != nil {
+		serializeReEncryptionAttributes(s, schemas.ReEncryptDataInput_OutgoingEncryptionAttributes, v.OutgoingEncryptionAttributes)
+	}
 	if v.OutgoingKeyIdentifier != nil {
 		s.WriteString(schemas.ReEncryptDataInput_OutgoingKeyIdentifier, *v.OutgoingKeyIdentifier)
 	}

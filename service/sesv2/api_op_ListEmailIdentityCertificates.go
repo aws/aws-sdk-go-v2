@@ -104,7 +104,9 @@ func (v *ListEmailIdentityCertificatesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListEmailIdentityCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityCertificateList(s, schemas.ListEmailIdentityCertificatesResponse_Certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeIdentityCertificateList(s, schemas.ListEmailIdentityCertificatesResponse_Certificates, v.Certificates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailIdentityCertificatesResponse_NextToken, *v.NextToken)
 	}

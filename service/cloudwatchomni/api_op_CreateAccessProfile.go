@@ -74,7 +74,9 @@ func (v *CreateAccessProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpaceId != nil {
 		s.WriteString(schemas.CreateAccessProfileInput_spaceId, *v.SpaceId)
 	}
-	serializeTagMap(s, schemas.CreateAccessProfileInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAccessProfileInput_tags, v.Tags)
+	}
 }
 
 type CreateAccessProfileOutput struct {

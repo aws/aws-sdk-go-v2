@@ -154,7 +154,9 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputLockingMode != "" {
 		s.WriteString(schemas.CreateChannelRequest_OutputLockingMode, string(v.OutputLockingMode))
 	}
-	serializeTagMap(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	}
 }
 
 type CreateChannelOutput struct {
@@ -265,7 +267,9 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateChannelResponse_Arn, *v.Arn)
 	}
-	serializeAttachedMultiviewChannelList(s, schemas.CreateChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	if v.AttachedMultiviewChannels != nil {
+		serializeAttachedMultiviewChannelList(s, schemas.CreateChannelResponse_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	}
 	if v.ChannelGroupName != nil {
 		s.WriteString(schemas.CreateChannelResponse_ChannelGroupName, *v.ChannelGroupName)
 	}
@@ -281,7 +285,9 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ETag != nil {
 		s.WriteString(schemas.CreateChannelResponse_ETag, *v.ETag)
 	}
-	serializeIngestEndpointList(s, schemas.CreateChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	if v.IngestEndpoints != nil {
+		serializeIngestEndpointList(s, schemas.CreateChannelResponse_IngestEndpoints, v.IngestEndpoints)
+	}
 	if v.InputSwitchConfiguration != nil {
 		s.WriteStruct(schemas.CreateChannelResponse_InputSwitchConfiguration)
 		v.InputSwitchConfiguration.SerializeMembers(s)
@@ -306,7 +312,9 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputLockingMode != "" {
 		s.WriteString(schemas.CreateChannelResponse_OutputLockingMode, string(v.OutputLockingMode))
 	}
-	serializeTagMap(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateChannelResponse, func(s *smithy.Schema) error {

@@ -102,7 +102,9 @@ func (v *ConnectDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Size != "" {
 		s.WriteString(schemas.ConnectDirectoryRequest_Size, string(v.Size))
 	}
-	serializeTags(s, schemas.ConnectDirectoryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ConnectDirectoryRequest_Tags, v.Tags)
+	}
 }
 
 // Contains the results of the ConnectDirectory operation.

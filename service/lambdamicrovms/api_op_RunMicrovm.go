@@ -83,7 +83,9 @@ func (v *RunMicrovmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.RunMicrovmRequest_clientToken, *v.ClientToken)
 	}
-	serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_egressNetworkConnectors, v.EgressNetworkConnectors)
+	if v.EgressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_egressNetworkConnectors, v.EgressNetworkConnectors)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.RunMicrovmRequest_executionRoleArn, *v.ExecutionRoleArn)
 	}
@@ -98,8 +100,12 @@ func (v *RunMicrovmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageVersion != nil {
 		s.WriteString(schemas.RunMicrovmRequest_imageVersion, *v.ImageVersion)
 	}
-	serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_ingressNetworkConnectors, v.IngressNetworkConnectors)
-	serializeLogging(s, schemas.RunMicrovmRequest_logging, v.Logging)
+	if v.IngressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.RunMicrovmRequest_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	}
+	if v.Logging != nil {
+		serializeLogging(s, schemas.RunMicrovmRequest_logging, v.Logging)
+	}
 	if v.MaximumDurationInSeconds != nil {
 		s.WriteInt32(schemas.RunMicrovmRequest_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
 	}
@@ -177,7 +183,9 @@ func (v *RunMicrovmOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RunMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	if v.EgressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	}
 	if v.Endpoint != nil {
 		s.WriteString(schemas.RunMicrovmResponse_endpoint, *v.Endpoint)
 	}
@@ -195,7 +203,9 @@ func (v *RunMicrovmOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageVersion != nil {
 		s.WriteString(schemas.RunMicrovmResponse_imageVersion, *v.ImageVersion)
 	}
-	serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	if v.IngressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.RunMicrovmResponse_ingressNetworkConnectors, v.IngressNetworkConnectors)
+	}
 	if v.MaximumDurationInSeconds != nil {
 		s.WriteInt32(schemas.RunMicrovmResponse_maximumDurationInSeconds, *v.MaximumDurationInSeconds)
 	}

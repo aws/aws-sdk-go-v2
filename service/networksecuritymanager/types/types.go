@@ -144,8 +144,12 @@ func (v *AccountSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccountSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.AccountSet_accountIds, v.AccountIds)
-	serializeOrganizationalUnitList(s, schemas.AccountSet_organizationalUnits, v.OrganizationalUnits)
+	if v.AccountIds != nil {
+		serializeAccountList(s, schemas.AccountSet_accountIds, v.AccountIds)
+	}
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnitList(s, schemas.AccountSet_organizationalUnits, v.OrganizationalUnits)
+	}
 }
 func (v *AccountSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountSet, func(s *smithy.Schema) error {
@@ -311,7 +315,9 @@ func (v *AdminFirewallTypeScope) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllFirewallTypesEnabled != nil {
 		s.WriteBool(schemas.AdminFirewallTypeScope_allFirewallTypesEnabled, *v.AllFirewallTypesEnabled)
 	}
-	serializeFirewallTypeList(s, schemas.AdminFirewallTypeScope_firewallTypes, v.FirewallTypes)
+	if v.FirewallTypes != nil {
+		serializeFirewallTypeList(s, schemas.AdminFirewallTypeScope_firewallTypes, v.FirewallTypes)
+	}
 }
 func (v *AdminFirewallTypeScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdminFirewallTypeScope, func(s *smithy.Schema) error {
@@ -352,7 +358,9 @@ func (v *AdminScope) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FirewallTypeScope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAdminScopeFilter(s, schemas.AdminScope_scopeFilter, v.ScopeFilter)
+	if v.ScopeFilter != nil {
+		serializeAdminScopeFilter(s, schemas.AdminScope_scopeFilter, v.ScopeFilter)
+	}
 }
 func (v *AdminScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdminScope, func(s *smithy.Schema) error {
@@ -523,7 +531,9 @@ func (v *AdminScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FirewallTypeScope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAdminScopeFilterInput(s, schemas.AdminScopeInput_scopeFilter, v.ScopeFilter)
+	if v.ScopeFilter != nil {
+		serializeAdminScopeFilterInput(s, schemas.AdminScopeInput_scopeFilter, v.ScopeFilter)
+	}
 }
 func (v *AdminScopeInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdminScopeInput, func(s *smithy.Schema) error {
@@ -558,8 +568,12 @@ func (v *AdminScopeSelection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminScopeSelection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountReferenceList(s, schemas.AdminScopeSelection_accounts, v.Accounts)
-	serializeOrganizationalUnitReferenceList(s, schemas.AdminScopeSelection_organizationalUnits, v.OrganizationalUnits)
+	if v.Accounts != nil {
+		serializeAccountReferenceList(s, schemas.AdminScopeSelection_accounts, v.Accounts)
+	}
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnitReferenceList(s, schemas.AdminScopeSelection_organizationalUnits, v.OrganizationalUnits)
+	}
 }
 func (v *AdminScopeSelection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdminScopeSelection, func(s *smithy.Schema) error {
@@ -593,8 +607,12 @@ func (v *AdminScopeSelectionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminScopeSelectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.AdminScopeSelectionInput_accounts, v.Accounts)
-	serializeOrganizationalUnitIdList(s, schemas.AdminScopeSelectionInput_organizationalUnits, v.OrganizationalUnits)
+	if v.Accounts != nil {
+		serializeAccountIdList(s, schemas.AdminScopeSelectionInput_accounts, v.Accounts)
+	}
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnitIdList(s, schemas.AdminScopeSelectionInput_organizationalUnits, v.OrganizationalUnits)
+	}
 }
 func (v *AdminScopeSelectionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdminScopeSelectionInput, func(s *smithy.Schema) error {
@@ -918,8 +936,12 @@ func (v *DeploymentCoverageEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallType != "" {
 		s.WriteString(schemas.DeploymentCoverageEntry_firewallType, string(v.FirewallType))
 	}
-	serializeDeploymentResourceTypeList(s, schemas.DeploymentCoverageEntry_inScopeResourceTypes, v.InScopeResourceTypes)
-	serializeDeploymentPolicyArnList(s, schemas.DeploymentCoverageEntry_policyArns, v.PolicyArns)
+	if v.InScopeResourceTypes != nil {
+		serializeDeploymentResourceTypeList(s, schemas.DeploymentCoverageEntry_inScopeResourceTypes, v.InScopeResourceTypes)
+	}
+	if v.PolicyArns != nil {
+		serializeDeploymentPolicyArnList(s, schemas.DeploymentCoverageEntry_policyArns, v.PolicyArns)
+	}
 }
 func (v *DeploymentCoverageEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeploymentCoverageEntry, func(s *smithy.Schema) error {
@@ -1169,12 +1191,24 @@ func (v *InvalidFirewallReasons) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvalidFirewallReasons) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_incorrectAppendableConfigurationOrder, v.IncorrectAppendableConfigurationOrder)
-	serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_incorrectSingleValueConfigurations, v.IncorrectSingleValueConfigurations)
-	serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_missingAppendableConfigurationValues, v.MissingAppendableConfigurationValues)
-	serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_missingMergeableConfigurationValues, v.MissingMergeableConfigurationValues)
-	serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_unexpectedAppendableConfigurationValues, v.UnexpectedAppendableConfigurationValues)
-	serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_unexpectedMergeableConfigurationValues, v.UnexpectedMergeableConfigurationValues)
+	if v.IncorrectAppendableConfigurationOrder != nil {
+		serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_incorrectAppendableConfigurationOrder, v.IncorrectAppendableConfigurationOrder)
+	}
+	if v.IncorrectSingleValueConfigurations != nil {
+		serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_incorrectSingleValueConfigurations, v.IncorrectSingleValueConfigurations)
+	}
+	if v.MissingAppendableConfigurationValues != nil {
+		serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_missingAppendableConfigurationValues, v.MissingAppendableConfigurationValues)
+	}
+	if v.MissingMergeableConfigurationValues != nil {
+		serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_missingMergeableConfigurationValues, v.MissingMergeableConfigurationValues)
+	}
+	if v.UnexpectedAppendableConfigurationValues != nil {
+		serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_unexpectedAppendableConfigurationValues, v.UnexpectedAppendableConfigurationValues)
+	}
+	if v.UnexpectedMergeableConfigurationValues != nil {
+		serializeConfigurationIssueList(s, schemas.InvalidFirewallReasons_unexpectedMergeableConfigurationValues, v.UnexpectedMergeableConfigurationValues)
+	}
 }
 func (v *InvalidFirewallReasons) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvalidFirewallReasons, func(s *smithy.Schema) error {
@@ -1850,8 +1884,12 @@ func (v *ResourceSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceArnList(s, schemas.ResourceSet_explicitArns, v.ExplicitArns)
-	serializeResourceLogicalExpression(s, schemas.ResourceSet_expression, v.Expression)
+	if v.ExplicitArns != nil {
+		serializeResourceArnList(s, schemas.ResourceSet_explicitArns, v.ExplicitArns)
+	}
+	if v.Expression != nil {
+		serializeResourceLogicalExpression(s, schemas.ResourceSet_expression, v.Expression)
+	}
 }
 func (v *ResourceSet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceSet, func(s *smithy.Schema) error {
@@ -1925,8 +1963,12 @@ func (v *ResourceSynchronizationStatusSummary) SerializeMembers(s smithy.ShapeSe
 	if v.EvaluatedAt != nil {
 		s.WriteTime(schemas.ResourceSynchronizationStatusSummary_evaluatedAt, *v.EvaluatedAt)
 	}
-	serializeOutOfSyncReasonsView(s, schemas.ResourceSynchronizationStatusSummary_outOfSyncReasons, v.OutOfSyncReasons)
-	serializeRemediationIssuesView(s, schemas.ResourceSynchronizationStatusSummary_remediationIssues, v.RemediationIssues)
+	if v.OutOfSyncReasons != nil {
+		serializeOutOfSyncReasonsView(s, schemas.ResourceSynchronizationStatusSummary_outOfSyncReasons, v.OutOfSyncReasons)
+	}
+	if v.RemediationIssues != nil {
+		serializeRemediationIssuesView(s, schemas.ResourceSynchronizationStatusSummary_remediationIssues, v.RemediationIssues)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ResourceSynchronizationStatusSummary_resourceArn, *v.ResourceArn)
 	}
@@ -2168,8 +2210,12 @@ func (v *ScopeConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScopeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountFilter(s, schemas.ScopeConfiguration_accountFilter, v.AccountFilter)
-	serializeResourceScopeMap(s, schemas.ScopeConfiguration_resourceScopes, v.ResourceScopes)
+	if v.AccountFilter != nil {
+		serializeAccountFilter(s, schemas.ScopeConfiguration_accountFilter, v.AccountFilter)
+	}
+	if v.ResourceScopes != nil {
+		serializeResourceScopeMap(s, schemas.ScopeConfiguration_resourceScopes, v.ResourceScopes)
+	}
 }
 func (v *ScopeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScopeConfiguration, func(s *smithy.Schema) error {

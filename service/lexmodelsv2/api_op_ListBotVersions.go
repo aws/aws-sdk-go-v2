@@ -115,7 +115,9 @@ func (v *ListBotVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.ListBotVersionsResponse_botId, *v.BotId)
 	}
-	serializeBotVersionSummaryList(s, schemas.ListBotVersionsResponse_botVersionSummaries, v.BotVersionSummaries)
+	if v.BotVersionSummaries != nil {
+		serializeBotVersionSummaryList(s, schemas.ListBotVersionsResponse_botVersionSummaries, v.BotVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBotVersionsResponse_nextToken, *v.NextToken)
 	}

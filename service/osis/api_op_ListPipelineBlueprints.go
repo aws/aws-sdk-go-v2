@@ -60,7 +60,9 @@ func (v *ListPipelineBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPipelineBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePipelineBlueprintsSummaryList(s, schemas.ListPipelineBlueprintsResponse_Blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializePipelineBlueprintsSummaryList(s, schemas.ListPipelineBlueprintsResponse_Blueprints, v.Blueprints)
+	}
 }
 func (v *ListPipelineBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPipelineBlueprintsResponse, func(s *smithy.Schema) error {

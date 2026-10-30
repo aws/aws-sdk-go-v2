@@ -79,7 +79,9 @@ func (v *ListCodeSecurityIntegrationsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListCodeSecurityIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationSummaries(s, schemas.ListCodeSecurityIntegrationsResponse_integrations, v.Integrations)
+	if v.Integrations != nil {
+		serializeIntegrationSummaries(s, schemas.ListCodeSecurityIntegrationsResponse_integrations, v.Integrations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeSecurityIntegrationsResponse_nextToken, *v.NextToken)
 	}

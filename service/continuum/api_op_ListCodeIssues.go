@@ -88,7 +88,9 @@ func (v *ListCodeIssuesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeIssuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeIssueSummaries(s, schemas.ListCodeIssuesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeCodeIssueSummaries(s, schemas.ListCodeIssuesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeIssuesOutput_nextToken, *v.NextToken)
 	}

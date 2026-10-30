@@ -77,7 +77,9 @@ func (v *ListBrokersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBrokersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBrokerSummary(s, schemas.ListBrokersResponse_BrokerSummaries, v.BrokerSummaries)
+	if v.BrokerSummaries != nil {
+		serialize__listOfBrokerSummary(s, schemas.ListBrokersResponse_BrokerSummaries, v.BrokerSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrokersResponse_NextToken, *v.NextToken)
 	}

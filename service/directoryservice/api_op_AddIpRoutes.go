@@ -127,7 +127,9 @@ func (v *AddIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.AddIpRoutesRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeIpRoutes(s, schemas.AddIpRoutesRequest_IpRoutes, v.IpRoutes)
+	if v.IpRoutes != nil {
+		serializeIpRoutes(s, schemas.AddIpRoutesRequest_IpRoutes, v.IpRoutes)
+	}
 	if v.UpdateSecurityGroupForDirectoryControllers != false {
 		s.WriteBool(schemas.AddIpRoutesRequest_UpdateSecurityGroupForDirectoryControllers, v.UpdateSecurityGroupForDirectoryControllers)
 	}

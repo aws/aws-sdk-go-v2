@@ -151,7 +151,9 @@ func (v *UpdateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkId != nil {
 		s.WriteString(schemas.UpdateUserResponse_networkId, *v.NetworkId)
 	}
-	serializeSecurityGroupIdList(s, schemas.UpdateUserResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.UpdateUserResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != nil {
 		s.WriteInt32(schemas.UpdateUserResponse_status, *v.Status)
 	}

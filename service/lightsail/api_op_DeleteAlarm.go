@@ -75,7 +75,9 @@ func (v *DeleteAlarmOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteAlarmResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteAlarmResult_operations, v.Operations)
+	}
 }
 func (v *DeleteAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteAlarmResult, func(s *smithy.Schema) error {

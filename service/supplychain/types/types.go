@@ -417,7 +417,9 @@ func (v *DataIntegrationFlow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DataIntegrationFlow_name, *v.Name)
 	}
-	serializeDataIntegrationFlowSourceList(s, schemas.DataIntegrationFlow_sources, v.Sources)
+	if v.Sources != nil {
+		serializeDataIntegrationFlowSourceList(s, schemas.DataIntegrationFlow_sources, v.Sources)
+	}
 	if v.Target != nil {
 		s.WriteStruct(schemas.DataIntegrationFlow_target)
 		v.Target.SerializeMembers(s)
@@ -984,7 +986,9 @@ func (v *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) Serialize(
 }
 
 func (v *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataIntegrationFlowFieldPriorityDedupeFieldList(s, schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration_fields, v.Fields)
+	if v.Fields != nil {
+		serializeDataIntegrationFlowFieldPriorityDedupeFieldList(s, schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration_fields, v.Fields)
+	}
 }
 func (v *DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataIntegrationFlowFieldPriorityDedupeStrategyConfiguration, func(s *smithy.Schema) error {
@@ -1649,7 +1653,9 @@ func (v *DataLakeDatasetPartitionSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataLakeDatasetPartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeDatasetPartitionFieldList(s, schemas.DataLakeDatasetPartitionSpec_fields, v.Fields)
+	if v.Fields != nil {
+		serializeDataLakeDatasetPartitionFieldList(s, schemas.DataLakeDatasetPartitionSpec_fields, v.Fields)
+	}
 }
 func (v *DataLakeDatasetPartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataLakeDatasetPartitionSpec, func(s *smithy.Schema) error {
@@ -1732,11 +1738,15 @@ func (v *DataLakeDatasetSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataLakeDatasetSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeDatasetSchemaFieldList(s, schemas.DataLakeDatasetSchema_fields, v.Fields)
+	if v.Fields != nil {
+		serializeDataLakeDatasetSchemaFieldList(s, schemas.DataLakeDatasetSchema_fields, v.Fields)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DataLakeDatasetSchema_name, *v.Name)
 	}
-	serializeDataLakeDatasetPrimaryKeyFieldList(s, schemas.DataLakeDatasetSchema_primaryKeys, v.PrimaryKeys)
+	if v.PrimaryKeys != nil {
+		serializeDataLakeDatasetPrimaryKeyFieldList(s, schemas.DataLakeDatasetSchema_primaryKeys, v.PrimaryKeys)
+	}
 }
 func (v *DataLakeDatasetSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataLakeDatasetSchema, func(s *smithy.Schema) error {

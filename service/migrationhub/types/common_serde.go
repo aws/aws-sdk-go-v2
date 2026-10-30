@@ -7,9 +7,6 @@ import (
 )
 
 func serializeApplicationIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeApplicationIds(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeApplicationStateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ApplicationState) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serializeApplicationStateList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeCreatedArtifactList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CreatedArtifact) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -44,9 +35,6 @@ func serializeCreatedArtifactList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeDiscoveredResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DiscoveredResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeDiscoveredResourceList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeLatestResourceAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeLatestResourceAttributeList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeMigrationTaskSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MigrationTaskSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -83,9 +65,6 @@ func serializeMigrationTaskSummaryList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeMigrationTaskUpdateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MigrationTaskUpdate) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -96,9 +75,6 @@ func serializeMigrationTaskUpdateList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeProgressUpdateStreamSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ProgressUpdateStreamSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -109,9 +85,6 @@ func serializeProgressUpdateStreamSummaryList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeResourceAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ResourceAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -122,9 +95,6 @@ func serializeResourceAttributeList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeSourceResourceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SourceResource) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

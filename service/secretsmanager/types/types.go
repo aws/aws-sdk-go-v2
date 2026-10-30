@@ -148,7 +148,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.Filter_Key, string(v.Key))
 	}
-	serializeFilterValuesStringList(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValuesStringList(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -496,7 +498,9 @@ func (v *SecretListEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.SecretListEntry_Description, *v.Description)
 	}
-	serializeExternalSecretRotationMetadataType(s, schemas.SecretListEntry_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	if v.ExternalSecretRotationMetadata != nil {
+		serializeExternalSecretRotationMetadataType(s, schemas.SecretListEntry_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	}
 	if v.ExternalSecretRotationRoleArn != nil {
 		s.WriteString(schemas.SecretListEntry_ExternalSecretRotationRoleArn, *v.ExternalSecretRotationRoleArn)
 	}
@@ -535,8 +539,12 @@ func (v *SecretListEntry) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RotationRules.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecretVersionsToStagesMapType(s, schemas.SecretListEntry_SecretVersionsToStages, v.SecretVersionsToStages)
-	serializeTagListType(s, schemas.SecretListEntry_Tags, v.Tags)
+	if v.SecretVersionsToStages != nil {
+		serializeSecretVersionsToStagesMapType(s, schemas.SecretListEntry_SecretVersionsToStages, v.SecretVersionsToStages)
+	}
+	if v.Tags != nil {
+		serializeTagListType(s, schemas.SecretListEntry_Tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.SecretListEntry_Type, *v.Type)
 	}
@@ -664,7 +672,9 @@ func (v *SecretValueEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VersionId != nil {
 		s.WriteString(schemas.SecretValueEntry_VersionId, *v.VersionId)
 	}
-	serializeSecretVersionStagesType(s, schemas.SecretValueEntry_VersionStages, v.VersionStages)
+	if v.VersionStages != nil {
+		serializeSecretVersionStagesType(s, schemas.SecretValueEntry_VersionStages, v.VersionStages)
+	}
 }
 func (v *SecretValueEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecretValueEntry, func(s *smithy.Schema) error {
@@ -726,14 +736,18 @@ func (v *SecretVersionsListEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.SecretVersionsListEntry_CreatedDate, *v.CreatedDate)
 	}
-	serializeKmsKeyIdListType(s, schemas.SecretVersionsListEntry_KmsKeyIds, v.KmsKeyIds)
+	if v.KmsKeyIds != nil {
+		serializeKmsKeyIdListType(s, schemas.SecretVersionsListEntry_KmsKeyIds, v.KmsKeyIds)
+	}
 	if v.LastAccessedDate != nil {
 		s.WriteTime(schemas.SecretVersionsListEntry_LastAccessedDate, *v.LastAccessedDate)
 	}
 	if v.VersionId != nil {
 		s.WriteString(schemas.SecretVersionsListEntry_VersionId, *v.VersionId)
 	}
-	serializeSecretVersionStagesType(s, schemas.SecretVersionsListEntry_VersionStages, v.VersionStages)
+	if v.VersionStages != nil {
+		serializeSecretVersionStagesType(s, schemas.SecretVersionsListEntry_VersionStages, v.VersionStages)
+	}
 }
 func (v *SecretVersionsListEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecretVersionsListEntry, func(s *smithy.Schema) error {

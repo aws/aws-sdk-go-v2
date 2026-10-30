@@ -228,7 +228,9 @@ func (v *CaseDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CategoryCode != nil {
 		s.WriteString(schemas.CaseDetails_categoryCode, *v.CategoryCode)
 	}
-	serializeCcEmailAddressList(s, schemas.CaseDetails_ccEmailAddresses, v.CcEmailAddresses)
+	if v.CcEmailAddresses != nil {
+		serializeCcEmailAddressList(s, schemas.CaseDetails_ccEmailAddresses, v.CcEmailAddresses)
+	}
 	if v.DisplayId != nil {
 		s.WriteString(schemas.CaseDetails_displayId, *v.DisplayId)
 	}
@@ -392,8 +394,12 @@ func (v *Communication) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Communication) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentSet(s, schemas.Communication_attachmentSet, v.AttachmentSet)
-	serializeAttachmentSet(s, schemas.Communication_attachments, v.Attachments)
+	if v.AttachmentSet != nil {
+		serializeAttachmentSet(s, schemas.Communication_attachmentSet, v.AttachmentSet)
+	}
+	if v.Attachments != nil {
+		serializeAttachmentSet(s, schemas.Communication_attachments, v.Attachments)
+	}
 	if v.Body != nil {
 		s.WriteString(schemas.Communication_body, *v.Body)
 	}
@@ -468,8 +474,12 @@ func (v *CommunicationTypeOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CommunicationTypeOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatesWithoutSupportList(s, schemas.CommunicationTypeOptions_datesWithoutSupport, v.DatesWithoutSupport)
-	serializeSupportedHoursList(s, schemas.CommunicationTypeOptions_supportedHours, v.SupportedHours)
+	if v.DatesWithoutSupport != nil {
+		serializeDatesWithoutSupportList(s, schemas.CommunicationTypeOptions_datesWithoutSupport, v.DatesWithoutSupport)
+	}
+	if v.SupportedHours != nil {
+		serializeSupportedHoursList(s, schemas.CommunicationTypeOptions_supportedHours, v.SupportedHours)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CommunicationTypeOptions_type, *v.Type)
 	}
@@ -645,7 +655,9 @@ func (v *RecentCaseCommunications) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecentCaseCommunications) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationList(s, schemas.RecentCaseCommunications_communications, v.Communications)
+	if v.Communications != nil {
+		serializeCommunicationList(s, schemas.RecentCaseCommunications_communications, v.Communications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.RecentCaseCommunications_nextToken, *v.NextToken)
 	}
@@ -689,7 +701,9 @@ func (v *Service) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryList(s, schemas.Service_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.Service_categories, v.Categories)
+	}
 	if v.Code != nil {
 		s.WriteString(schemas.Service_code, *v.Code)
 	}
@@ -998,7 +1012,9 @@ func (v *TrustedAdvisorCheckDescription) SerializeMembers(s smithy.ShapeSerializ
 	if v.Id != nil {
 		s.WriteString(schemas.TrustedAdvisorCheckDescription_id, *v.Id)
 	}
-	serializeStringList(s, schemas.TrustedAdvisorCheckDescription_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeStringList(s, schemas.TrustedAdvisorCheckDescription_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TrustedAdvisorCheckDescription_name, *v.Name)
 	}
@@ -1144,7 +1160,9 @@ func (v *TrustedAdvisorCheckResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CheckId != nil {
 		s.WriteString(schemas.TrustedAdvisorCheckResult_checkId, *v.CheckId)
 	}
-	serializeTrustedAdvisorResourceDetailList(s, schemas.TrustedAdvisorCheckResult_flaggedResources, v.FlaggedResources)
+	if v.FlaggedResources != nil {
+		serializeTrustedAdvisorResourceDetailList(s, schemas.TrustedAdvisorCheckResult_flaggedResources, v.FlaggedResources)
+	}
 	if v.ResourcesSummary != nil {
 		s.WriteStruct(schemas.TrustedAdvisorCheckResult_resourcesSummary)
 		v.ResourcesSummary.SerializeMembers(s)
@@ -1357,7 +1375,9 @@ func (v *TrustedAdvisorResourceDetail) SerializeMembers(s smithy.ShapeSerializer
 	if v.IsSuppressed != false {
 		s.WriteBool(schemas.TrustedAdvisorResourceDetail_isSuppressed, v.IsSuppressed)
 	}
-	serializeStringList(s, schemas.TrustedAdvisorResourceDetail_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeStringList(s, schemas.TrustedAdvisorResourceDetail_metadata, v.Metadata)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.TrustedAdvisorResourceDetail_region, *v.Region)
 	}

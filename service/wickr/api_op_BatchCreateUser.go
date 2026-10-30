@@ -67,7 +67,9 @@ func (v *BatchCreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkId != nil {
 		s.WriteString(schemas.BatchCreateUserRequest_networkId, *v.NetworkId)
 	}
-	serializeBatchCreateUserRequestItems(s, schemas.BatchCreateUserRequest_users, v.Users)
+	if v.Users != nil {
+		serializeBatchCreateUserRequestItems(s, schemas.BatchCreateUserRequest_users, v.Users)
+	}
 }
 
 type BatchCreateUserOutput struct {
@@ -96,11 +98,15 @@ func (v *BatchCreateUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUserErrorResponseItems(s, schemas.BatchCreateUserResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeBatchUserErrorResponseItems(s, schemas.BatchCreateUserResponse_failed, v.Failed)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchCreateUserResponse_message, *v.Message)
 	}
-	serializeUsers(s, schemas.BatchCreateUserResponse_successful, v.Successful)
+	if v.Successful != nil {
+		serializeUsers(s, schemas.BatchCreateUserResponse_successful, v.Successful)
+	}
 }
 func (v *BatchCreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateUserResponse, func(s *smithy.Schema) error {

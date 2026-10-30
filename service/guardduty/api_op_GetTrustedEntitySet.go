@@ -131,7 +131,9 @@ func (v *GetTrustedEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetTrustedEntitySetResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetTrustedEntitySetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetTrustedEntitySetResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetTrustedEntitySetResponse_UpdatedAt, *v.UpdatedAt)
 	}

@@ -48,7 +48,9 @@ func (v *ListRouterOutputsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRouterOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterOutputFilterList(s, schemas.ListRouterOutputsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeRouterOutputFilterList(s, schemas.ListRouterOutputsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRouterOutputsRequest_MaxResults, *v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *ListRouterOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRouterOutputsResponse_NextToken, *v.NextToken)
 	}
-	serializeListedRouterOutputList(s, schemas.ListRouterOutputsResponse_RouterOutputs, v.RouterOutputs)
+	if v.RouterOutputs != nil {
+		serializeListedRouterOutputList(s, schemas.ListRouterOutputsResponse_RouterOutputs, v.RouterOutputs)
+	}
 }
 func (v *ListRouterOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRouterOutputsResponse, func(s *smithy.Schema) error {

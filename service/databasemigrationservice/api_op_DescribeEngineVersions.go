@@ -81,7 +81,9 @@ func (v *DescribeEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngineVersionList(s, schemas.DescribeEngineVersionsResponse_EngineVersions, v.EngineVersions)
+	if v.EngineVersions != nil {
+		serializeEngineVersionList(s, schemas.DescribeEngineVersionsResponse_EngineVersions, v.EngineVersions)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeEngineVersionsResponse_Marker, *v.Marker)
 	}

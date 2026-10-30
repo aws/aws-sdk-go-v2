@@ -96,7 +96,9 @@ func (v *ListCloudWatchAlarmTemplatesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListCloudWatchAlarmTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCloudWatchAlarmTemplateSummary(s, schemas.ListCloudWatchAlarmTemplatesResponse_CloudWatchAlarmTemplates, v.CloudWatchAlarmTemplates)
+	if v.CloudWatchAlarmTemplates != nil {
+		serialize__listOfCloudWatchAlarmTemplateSummary(s, schemas.ListCloudWatchAlarmTemplatesResponse_CloudWatchAlarmTemplates, v.CloudWatchAlarmTemplates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCloudWatchAlarmTemplatesResponse_NextToken, *v.NextToken)
 	}

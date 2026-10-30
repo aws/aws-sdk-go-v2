@@ -518,8 +518,12 @@ func (v *CodeConfigurationValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Runtime != "" {
 		s.WriteString(schemas.CodeConfigurationValues_Runtime, string(v.Runtime))
 	}
-	serializeRuntimeEnvironmentSecrets(s, schemas.CodeConfigurationValues_RuntimeEnvironmentSecrets, v.RuntimeEnvironmentSecrets)
-	serializeRuntimeEnvironmentVariables(s, schemas.CodeConfigurationValues_RuntimeEnvironmentVariables, v.RuntimeEnvironmentVariables)
+	if v.RuntimeEnvironmentSecrets != nil {
+		serializeRuntimeEnvironmentSecrets(s, schemas.CodeConfigurationValues_RuntimeEnvironmentSecrets, v.RuntimeEnvironmentSecrets)
+	}
+	if v.RuntimeEnvironmentVariables != nil {
+		serializeRuntimeEnvironmentVariables(s, schemas.CodeConfigurationValues_RuntimeEnvironmentVariables, v.RuntimeEnvironmentVariables)
+	}
 	if v.StartCommand != nil {
 		s.WriteString(schemas.CodeConfigurationValues_StartCommand, *v.StartCommand)
 	}
@@ -809,7 +813,9 @@ func (v *CustomDomain) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomDomain) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateValidationRecordList(s, schemas.CustomDomain_CertificateValidationRecords, v.CertificateValidationRecords)
+	if v.CertificateValidationRecords != nil {
+		serializeCertificateValidationRecordList(s, schemas.CustomDomain_CertificateValidationRecords, v.CertificateValidationRecords)
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.CustomDomain_DomainName, *v.DomainName)
 	}
@@ -1075,8 +1081,12 @@ func (v *ImageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Port != nil {
 		s.WriteString(schemas.ImageConfiguration_Port, *v.Port)
 	}
-	serializeRuntimeEnvironmentSecrets(s, schemas.ImageConfiguration_RuntimeEnvironmentSecrets, v.RuntimeEnvironmentSecrets)
-	serializeRuntimeEnvironmentVariables(s, schemas.ImageConfiguration_RuntimeEnvironmentVariables, v.RuntimeEnvironmentVariables)
+	if v.RuntimeEnvironmentSecrets != nil {
+		serializeRuntimeEnvironmentSecrets(s, schemas.ImageConfiguration_RuntimeEnvironmentSecrets, v.RuntimeEnvironmentSecrets)
+	}
+	if v.RuntimeEnvironmentVariables != nil {
+		serializeRuntimeEnvironmentVariables(s, schemas.ImageConfiguration_RuntimeEnvironmentVariables, v.RuntimeEnvironmentVariables)
+	}
 	if v.StartCommand != nil {
 		s.WriteString(schemas.ImageConfiguration_StartCommand, *v.StartCommand)
 	}
@@ -2327,11 +2337,15 @@ func (v *VpcConnector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeletedAt != nil {
 		s.WriteTime(schemas.VpcConnector_DeletedAt, *v.DeletedAt)
 	}
-	serializeStringList(s, schemas.VpcConnector_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeStringList(s, schemas.VpcConnector_SecurityGroups, v.SecurityGroups)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.VpcConnector_Status, string(v.Status))
 	}
-	serializeStringList(s, schemas.VpcConnector_Subnets, v.Subnets)
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.VpcConnector_Subnets, v.Subnets)
+	}
 	if v.VpcConnectorArn != nil {
 		s.WriteString(schemas.VpcConnector_VpcConnectorArn, *v.VpcConnectorArn)
 	}

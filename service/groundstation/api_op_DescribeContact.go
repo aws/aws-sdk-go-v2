@@ -142,7 +142,9 @@ func (v *DescribeContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactStatus != "" {
 		s.WriteString(schemas.DescribeContactResponse_contactStatus, string(v.ContactStatus))
 	}
-	serializeDataflowList(s, schemas.DescribeContactResponse_dataflowList, v.DataflowList)
+	if v.DataflowList != nil {
+		serializeDataflowList(s, schemas.DescribeContactResponse_dataflowList, v.DataflowList)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DescribeContactResponse_endTime, *v.EndTime)
 	}
@@ -180,7 +182,9 @@ func (v *DescribeContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.DescribeContactResponse_startTime, *v.StartTime)
 	}
-	serializeTagsMap(s, schemas.DescribeContactResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.DescribeContactResponse_tags, v.Tags)
+	}
 	if v.TrackingOverrides != nil {
 		s.WriteStruct(schemas.DescribeContactResponse_trackingOverrides)
 		v.TrackingOverrides.SerializeMembers(s)

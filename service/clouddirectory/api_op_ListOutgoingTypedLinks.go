@@ -77,7 +77,9 @@ func (v *ListOutgoingTypedLinksInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.ListOutgoingTypedLinksRequest_DirectoryArn, *v.DirectoryArn)
 	}
-	serializeTypedLinkAttributeRangeList(s, schemas.ListOutgoingTypedLinksRequest_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterAttributeRanges != nil {
+		serializeTypedLinkAttributeRangeList(s, schemas.ListOutgoingTypedLinksRequest_FilterAttributeRanges, v.FilterAttributeRanges)
+	}
 	if v.FilterTypedLink != nil {
 		s.WriteStruct(schemas.ListOutgoingTypedLinksRequest_FilterTypedLink)
 		v.FilterTypedLink.SerializeMembers(s)
@@ -120,7 +122,9 @@ func (v *ListOutgoingTypedLinksOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOutgoingTypedLinksResponse_NextToken, *v.NextToken)
 	}
-	serializeTypedLinkSpecifierList(s, schemas.ListOutgoingTypedLinksResponse_TypedLinkSpecifiers, v.TypedLinkSpecifiers)
+	if v.TypedLinkSpecifiers != nil {
+		serializeTypedLinkSpecifierList(s, schemas.ListOutgoingTypedLinksResponse_TypedLinkSpecifiers, v.TypedLinkSpecifiers)
+	}
 }
 func (v *ListOutgoingTypedLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOutgoingTypedLinksResponse, func(s *smithy.Schema) error {

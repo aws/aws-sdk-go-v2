@@ -66,7 +66,9 @@ func (v *ListChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelsInput_NextToken, *v.NextToken)
 	}
-	serializeStreamFilterList(s, schemas.ListChannelsInput_StreamFilter, v.StreamFilter)
+	if v.StreamFilter != nil {
+		serializeStreamFilterList(s, schemas.ListChannelsInput_StreamFilter, v.StreamFilter)
+	}
 }
 func (in *ListChannelsInput) bindEndpointParams(p *EndpointParameters) {
 
@@ -97,7 +99,9 @@ func (v *ListChannelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelSummaryList(s, schemas.ListChannelsOutput_ChannelSummaries, v.ChannelSummaries)
+	if v.ChannelSummaries != nil {
+		serializeChannelSummaryList(s, schemas.ListChannelsOutput_ChannelSummaries, v.ChannelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelsOutput_NextToken, *v.NextToken)
 	}

@@ -102,8 +102,12 @@ func (v *DescribeManagedJobTemplateOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Document != nil {
 		s.WriteString(schemas.DescribeManagedJobTemplateResponse_document, *v.Document)
 	}
-	serializeDocumentParameters(s, schemas.DescribeManagedJobTemplateResponse_documentParameters, v.DocumentParameters)
-	serializeEnvironments(s, schemas.DescribeManagedJobTemplateResponse_environments, v.Environments)
+	if v.DocumentParameters != nil {
+		serializeDocumentParameters(s, schemas.DescribeManagedJobTemplateResponse_documentParameters, v.DocumentParameters)
+	}
+	if v.Environments != nil {
+		serializeEnvironments(s, schemas.DescribeManagedJobTemplateResponse_environments, v.Environments)
+	}
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.DescribeManagedJobTemplateResponse_templateArn, *v.TemplateArn)
 	}

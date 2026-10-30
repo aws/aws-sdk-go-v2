@@ -91,7 +91,9 @@ func (v *CreateBucketAccessKeyOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.AccessKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOperationList(s, schemas.CreateBucketAccessKeyResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateBucketAccessKeyResult_operations, v.Operations)
+	}
 }
 func (v *CreateBucketAccessKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBucketAccessKeyResult, func(s *smithy.Schema) error {

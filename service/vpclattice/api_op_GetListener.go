@@ -121,7 +121,9 @@ func (v *GetListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetListenerResponse_createdAt, *v.CreatedAt)
 	}
-	serializeRuleAction(s, schemas.GetListenerResponse_defaultAction, v.DefaultAction)
+	if v.DefaultAction != nil {
+		serializeRuleAction(s, schemas.GetListenerResponse_defaultAction, v.DefaultAction)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetListenerResponse_id, *v.Id)
 	}

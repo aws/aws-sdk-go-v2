@@ -104,7 +104,9 @@ func (v *AssociateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Repository.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.AssociateRepositoryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AssociateRepositoryRequest_Tags, v.Tags)
+	}
 }
 
 type AssociateRepositoryOutput struct {
@@ -141,7 +143,9 @@ func (v *AssociateRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RepositoryAssociation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.AssociateRepositoryResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AssociateRepositoryResponse_Tags, v.Tags)
+	}
 }
 func (v *AssociateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssociateRepositoryResponse, func(s *smithy.Schema) error {

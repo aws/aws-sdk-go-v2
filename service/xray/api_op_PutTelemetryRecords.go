@@ -61,7 +61,9 @@ func (v *PutTelemetryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceARN != nil {
 		s.WriteString(schemas.PutTelemetryRecordsRequest_ResourceARN, *v.ResourceARN)
 	}
-	serializeTelemetryRecordList(s, schemas.PutTelemetryRecordsRequest_TelemetryRecords, v.TelemetryRecords)
+	if v.TelemetryRecords != nil {
+		serializeTelemetryRecordList(s, schemas.PutTelemetryRecordsRequest_TelemetryRecords, v.TelemetryRecords)
+	}
 }
 
 type PutTelemetryRecordsOutput struct {

@@ -106,7 +106,9 @@ func (v *UpdateUserProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUserProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserProfileDetails(s, schemas.UpdateUserProfileOutput_details, v.Details)
+	if v.Details != nil {
+		serializeUserProfileDetails(s, schemas.UpdateUserProfileOutput_details, v.Details)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.UpdateUserProfileOutput_domainId, *v.DomainId)
 	}

@@ -161,7 +161,9 @@ func (v *ListResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourcesOutput_NextToken, *v.NextToken)
 	}
-	serializeResourceDescriptions(s, schemas.ListResourcesOutput_ResourceDescriptions, v.ResourceDescriptions)
+	if v.ResourceDescriptions != nil {
+		serializeResourceDescriptions(s, schemas.ListResourcesOutput_ResourceDescriptions, v.ResourceDescriptions)
+	}
 	if v.TypeName != nil {
 		s.WriteString(schemas.ListResourcesOutput_TypeName, *v.TypeName)
 	}

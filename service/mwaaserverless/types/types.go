@@ -220,8 +220,12 @@ func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
@@ -618,7 +622,9 @@ func (v *WorkflowRunDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartedOn != nil {
 		s.WriteTime(schemas.WorkflowRunDetail_StartedOn, *v.StartedOn)
 	}
-	serializeTaskInstanceIds(s, schemas.WorkflowRunDetail_TaskInstances, v.TaskInstances)
+	if v.TaskInstances != nil {
+		serializeTaskInstanceIds(s, schemas.WorkflowRunDetail_TaskInstances, v.TaskInstances)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.WorkflowRunDetail_WorkflowArn, *v.WorkflowArn)
 	}

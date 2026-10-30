@@ -78,7 +78,9 @@ func (v *UpdateStudioInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StudioId != nil {
 		s.WriteString(schemas.UpdateStudioInput_StudioId, *v.StudioId)
 	}
-	serializeSubnetIdList(s, schemas.UpdateStudioInput_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.UpdateStudioInput_SubnetIds, v.SubnetIds)
+	}
 }
 
 type UpdateStudioOutput struct {

@@ -102,7 +102,9 @@ func (v *ListHandshakesForAccountOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHandshakesForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHandshakes(s, schemas.ListHandshakesForAccountResponse_Handshakes, v.Handshakes)
+	if v.Handshakes != nil {
+		serializeHandshakes(s, schemas.ListHandshakesForAccountResponse_Handshakes, v.Handshakes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHandshakesForAccountResponse_NextToken, *v.NextToken)
 	}

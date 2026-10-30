@@ -126,7 +126,9 @@ func (v *LookupDeveloperIdentityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LookupDeveloperIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeveloperUserIdentifierList(s, schemas.LookupDeveloperIdentityResponse_DeveloperUserIdentifierList, v.DeveloperUserIdentifierList)
+	if v.DeveloperUserIdentifierList != nil {
+		serializeDeveloperUserIdentifierList(s, schemas.LookupDeveloperIdentityResponse_DeveloperUserIdentifierList, v.DeveloperUserIdentifierList)
+	}
 	if v.IdentityId != nil {
 		s.WriteString(schemas.LookupDeveloperIdentityResponse_IdentityId, *v.IdentityId)
 	}

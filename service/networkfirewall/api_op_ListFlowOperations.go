@@ -145,7 +145,9 @@ func (v *ListFlowOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlowOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowOperations(s, schemas.ListFlowOperationsResponse_FlowOperations, v.FlowOperations)
+	if v.FlowOperations != nil {
+		serializeFlowOperations(s, schemas.ListFlowOperationsResponse_FlowOperations, v.FlowOperations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlowOperationsResponse_NextToken, *v.NextToken)
 	}

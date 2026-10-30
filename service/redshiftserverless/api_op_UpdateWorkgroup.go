@@ -124,7 +124,9 @@ func (v *UpdateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseCapacity != nil {
 		s.WriteInt32(schemas.UpdateWorkgroupRequest_baseCapacity, *v.BaseCapacity)
 	}
-	serializeConfigParameterList(s, schemas.UpdateWorkgroupRequest_configParameters, v.ConfigParameters)
+	if v.ConfigParameters != nil {
+		serializeConfigParameterList(s, schemas.UpdateWorkgroupRequest_configParameters, v.ConfigParameters)
+	}
 	if v.EnhancedVpcRouting != nil {
 		s.WriteBool(schemas.UpdateWorkgroupRequest_enhancedVpcRouting, *v.EnhancedVpcRouting)
 	}
@@ -148,8 +150,12 @@ func (v *UpdateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.UpdateWorkgroupRequest_publiclyAccessible, *v.PubliclyAccessible)
 	}
-	serializeSecurityGroupIdList(s, schemas.UpdateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.UpdateWorkgroupRequest_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.UpdateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.UpdateWorkgroupRequest_subnetIds, v.SubnetIds)
+	}
 	if v.TrackName != nil {
 		s.WriteString(schemas.UpdateWorkgroupRequest_trackName, *v.TrackName)
 	}

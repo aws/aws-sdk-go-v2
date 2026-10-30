@@ -132,8 +132,12 @@ func (v *Bandwidths) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Bandwidths) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBandwidthList(s, schemas.Bandwidths_available, v.Available)
-	serializeBandwidthList(s, schemas.Bandwidths_supported, v.Supported)
+	if v.Available != nil {
+		serializeBandwidthList(s, schemas.Bandwidths_available, v.Available)
+	}
+	if v.Supported != nil {
+		serializeBandwidthList(s, schemas.Bandwidths_supported, v.Supported)
+	}
 }
 func (v *Bandwidths) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Bandwidths, func(s *smithy.Schema) error {
@@ -254,7 +258,9 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Connection_arn, *v.Arn)
 	}
-	serializeAttachPoint(s, schemas.Connection_attachPoint, v.AttachPoint)
+	if v.AttachPoint != nil {
+		serializeAttachPoint(s, schemas.Connection_attachPoint, v.AttachPoint)
+	}
 	if v.Bandwidth != nil {
 		s.WriteString(schemas.Connection_bandwidth, *v.Bandwidth)
 	}
@@ -276,14 +282,18 @@ func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.Connection_ownerAccount, *v.OwnerAccount)
 	}
-	serializeProvider(s, schemas.Connection_provider, v.Provider)
+	if v.Provider != nil {
+		serializeProvider(s, schemas.Connection_provider, v.Provider)
+	}
 	if v.SharedId != nil {
 		s.WriteString(schemas.Connection_sharedId, *v.SharedId)
 	}
 	if v.State != "" {
 		s.WriteString(schemas.Connection_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.Connection_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Connection_tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Connection_type, *v.Type)
 	}
@@ -432,7 +442,9 @@ func (v *ConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ConnectionSummary_arn, *v.Arn)
 	}
-	serializeAttachPoint(s, schemas.ConnectionSummary_attachPoint, v.AttachPoint)
+	if v.AttachPoint != nil {
+		serializeAttachPoint(s, schemas.ConnectionSummary_attachPoint, v.AttachPoint)
+	}
 	if v.Bandwidth != nil {
 		s.WriteString(schemas.ConnectionSummary_bandwidth, *v.Bandwidth)
 	}
@@ -451,7 +463,9 @@ func (v *ConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Location != nil {
 		s.WriteString(schemas.ConnectionSummary_location, *v.Location)
 	}
-	serializeProvider(s, schemas.ConnectionSummary_provider, v.Provider)
+	if v.Provider != nil {
+		serializeProvider(s, schemas.ConnectionSummary_provider, v.Provider)
+	}
 	if v.SharedId != nil {
 		s.WriteString(schemas.ConnectionSummary_sharedId, *v.SharedId)
 	}
@@ -586,7 +600,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Location != nil {
 		s.WriteString(schemas.Environment_location, *v.Location)
 	}
-	serializeProvider(s, schemas.Environment_provider, v.Provider)
+	if v.Provider != nil {
+		serializeProvider(s, schemas.Environment_provider, v.Provider)
+	}
 	if v.RemoteIdentifierType != "" {
 		s.WriteString(schemas.Environment_remoteIdentifierType, string(v.RemoteIdentifierType))
 	}

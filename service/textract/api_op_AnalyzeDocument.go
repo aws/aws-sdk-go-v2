@@ -130,7 +130,9 @@ func (v *AnalyzeDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Document.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFeatureTypes(s, schemas.AnalyzeDocumentRequest_FeatureTypes, v.FeatureTypes)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.AnalyzeDocumentRequest_FeatureTypes, v.FeatureTypes)
+	}
 	if v.HumanLoopConfig != nil {
 		s.WriteStruct(schemas.AnalyzeDocumentRequest_HumanLoopConfig)
 		v.HumanLoopConfig.SerializeMembers(s)
@@ -173,7 +175,9 @@ func (v *AnalyzeDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzeDocumentModelVersion != nil {
 		s.WriteString(schemas.AnalyzeDocumentResponse_AnalyzeDocumentModelVersion, *v.AnalyzeDocumentModelVersion)
 	}
-	serializeBlockList(s, schemas.AnalyzeDocumentResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.AnalyzeDocumentResponse_Blocks, v.Blocks)
+	}
 	if v.DocumentMetadata != nil {
 		s.WriteStruct(schemas.AnalyzeDocumentResponse_DocumentMetadata)
 		v.DocumentMetadata.SerializeMembers(s)

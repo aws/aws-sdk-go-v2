@@ -94,7 +94,9 @@ func (v *ListDesignationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDesignationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDesignationSummaries(s, schemas.ListDesignationsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDesignationSummaries(s, schemas.ListDesignationsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDesignationsOutput_nextToken, *v.NextToken)
 	}

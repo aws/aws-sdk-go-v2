@@ -29,9 +29,6 @@ func deserializeVectorData(d smithy.ShapeDeserializer, s *smithy.Schema, v *Vect
 }
 
 func serializeDeleteVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +37,6 @@ func serializeDeleteVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeFloat32VectorData(s smithy.ShapeSerializer, schema *smithy.Schema, v []float32) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteFloat32(schema.ListMember(), vv)
@@ -51,9 +45,6 @@ func serializeFloat32VectorData(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeGetVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -62,9 +53,6 @@ func serializeGetVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeGetVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GetOutputVector) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -75,9 +63,6 @@ func serializeGetVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeListIndexesOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []IndexSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -88,9 +73,6 @@ func serializeListIndexesOutputList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeListVectorBucketsOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []VectorBucketSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -101,9 +83,6 @@ func serializeListVectorBucketsOutputList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeListVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ListOutputVector) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -114,9 +93,6 @@ func serializeListVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeNonFilterableMetadataKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -125,9 +101,6 @@ func serializeNonFilterableMetadataKeys(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializePutVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PutInputVector) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -138,9 +111,6 @@ func serializePutVectorsInputList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeQueryVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QueryOutputVector) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -151,9 +121,6 @@ func serializeQueryVectorsOutputList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -162,9 +129,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -434,9 +398,6 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

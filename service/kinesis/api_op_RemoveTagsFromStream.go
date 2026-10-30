@@ -71,7 +71,9 @@ func (v *RemoveTagsFromStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamName != nil {
 		s.WriteString(schemas.RemoveTagsFromStreamInput_StreamName, *v.StreamName)
 	}
-	serializeTagKeyList(s, schemas.RemoveTagsFromStreamInput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.RemoveTagsFromStreamInput_TagKeys, v.TagKeys)
+	}
 }
 func (in *RemoveTagsFromStreamInput) bindEndpointParams(p *EndpointParameters) {
 

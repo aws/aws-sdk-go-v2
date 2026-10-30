@@ -7,9 +7,6 @@ import (
 )
 
 func serializeslackChannelConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SlackChannelConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeslackChannelConfigurationList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeSlackWorkspaceConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SlackWorkspaceConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

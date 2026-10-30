@@ -76,7 +76,9 @@ func (v *BatchEvaluateGeofencesInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CollectionName != nil {
 		s.WriteString(schemas.BatchEvaluateGeofencesRequest_CollectionName, *v.CollectionName)
 	}
-	serializeDevicePositionUpdateList(s, schemas.BatchEvaluateGeofencesRequest_DevicePositionUpdates, v.DevicePositionUpdates)
+	if v.DevicePositionUpdates != nil {
+		serializeDevicePositionUpdateList(s, schemas.BatchEvaluateGeofencesRequest_DevicePositionUpdates, v.DevicePositionUpdates)
+	}
 }
 func (v *BatchEvaluateGeofencesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchEvaluateGeofencesRequest, func(s *smithy.Schema) error {
@@ -112,7 +114,9 @@ func (v *BatchEvaluateGeofencesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchEvaluateGeofencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchEvaluateGeofencesErrorList(s, schemas.BatchEvaluateGeofencesResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchEvaluateGeofencesErrorList(s, schemas.BatchEvaluateGeofencesResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchEvaluateGeofencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchEvaluateGeofencesResponse, func(s *smithy.Schema) error {

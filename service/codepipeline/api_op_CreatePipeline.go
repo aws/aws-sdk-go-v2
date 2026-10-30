@@ -56,7 +56,9 @@ func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Pipeline.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreatePipelineInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePipelineInput_tags, v.Tags)
+	}
 }
 
 // Represents the output of a CreatePipeline action.
@@ -86,7 +88,9 @@ func (v *CreatePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Pipeline.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreatePipelineOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePipelineOutput_tags, v.Tags)
+	}
 }
 func (v *CreatePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePipelineOutput, func(s *smithy.Schema) error {

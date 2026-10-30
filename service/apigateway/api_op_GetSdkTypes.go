@@ -73,7 +73,9 @@ func (v *GetSdkTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSdkTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfSdkType(s, schemas.SdkTypes_items, v.Items)
+	if v.Items != nil {
+		serializeListOfSdkType(s, schemas.SdkTypes_items, v.Items)
+	}
 }
 func (v *GetSdkTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SdkTypes, func(s *smithy.Schema) error {

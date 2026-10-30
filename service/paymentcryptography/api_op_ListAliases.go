@@ -118,7 +118,9 @@ func (v *ListAliasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAliases(s, schemas.ListAliasesOutput_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeAliases(s, schemas.ListAliasesOutput_Aliases, v.Aliases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAliasesOutput_NextToken, *v.NextToken)
 	}

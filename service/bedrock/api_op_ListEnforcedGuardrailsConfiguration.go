@@ -70,7 +70,9 @@ func (v *ListEnforcedGuardrailsConfigurationOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListEnforcedGuardrailsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountEnforcedGuardrailsOutputConfiguration(s, schemas.ListEnforcedGuardrailsConfigurationResponse_guardrailsConfig, v.GuardrailsConfig)
+	if v.GuardrailsConfig != nil {
+		serializeAccountEnforcedGuardrailsOutputConfiguration(s, schemas.ListEnforcedGuardrailsConfigurationResponse_guardrailsConfig, v.GuardrailsConfig)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnforcedGuardrailsConfigurationResponse_nextToken, *v.NextToken)
 	}

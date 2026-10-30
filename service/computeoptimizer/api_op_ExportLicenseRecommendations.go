@@ -112,12 +112,18 @@ func (v *ExportLicenseRecommendationsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ExportLicenseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportLicenseRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableLicenseFields(s, schemas.ExportLicenseRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportLicenseRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableLicenseFields(s, schemas.ExportLicenseRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportLicenseRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeLicenseRecommendationFilters(s, schemas.ExportLicenseRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeLicenseRecommendationFilters(s, schemas.ExportLicenseRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportLicenseRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

@@ -78,7 +78,9 @@ func (v *CreateDevicePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectArn != nil {
 		s.WriteString(schemas.CreateDevicePoolRequest_projectArn, *v.ProjectArn)
 	}
-	serializeRules(s, schemas.CreateDevicePoolRequest_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.CreateDevicePoolRequest_rules, v.Rules)
+	}
 }
 
 // Represents the result of a create device pool request.

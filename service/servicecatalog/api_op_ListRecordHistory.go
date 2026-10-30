@@ -104,7 +104,9 @@ func (v *ListRecordHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListRecordHistoryOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeRecordDetails(s, schemas.ListRecordHistoryOutput_RecordDetails, v.RecordDetails)
+	if v.RecordDetails != nil {
+		serializeRecordDetails(s, schemas.ListRecordHistoryOutput_RecordDetails, v.RecordDetails)
+	}
 }
 func (v *ListRecordHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecordHistoryOutput, func(s *smithy.Schema) error {

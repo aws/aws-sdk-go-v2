@@ -89,15 +89,21 @@ func (v *StartSessionsStatisticsAggregationInput) SerializeMembers(s smithy.Shap
 	if v.FarmId != nil {
 		s.WriteString(schemas.StartSessionsStatisticsAggregationRequest_farmId, *v.FarmId)
 	}
-	serializeUsageGroupBy(s, schemas.StartSessionsStatisticsAggregationRequest_groupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeUsageGroupBy(s, schemas.StartSessionsStatisticsAggregationRequest_groupBy, v.GroupBy)
+	}
 	if v.Period != "" {
 		s.WriteString(schemas.StartSessionsStatisticsAggregationRequest_period, string(v.Period))
 	}
-	serializeSessionsStatisticsResources(s, schemas.StartSessionsStatisticsAggregationRequest_resourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializeSessionsStatisticsResources(s, schemas.StartSessionsStatisticsAggregationRequest_resourceIds, v.ResourceIds)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.StartSessionsStatisticsAggregationRequest_startTime, *v.StartTime)
 	}
-	serializeUsageStatistics(s, schemas.StartSessionsStatisticsAggregationRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeUsageStatistics(s, schemas.StartSessionsStatisticsAggregationRequest_statistics, v.Statistics)
+	}
 	if v.Timezone != nil {
 		s.WriteString(schemas.StartSessionsStatisticsAggregationRequest_timezone, *v.Timezone)
 	}

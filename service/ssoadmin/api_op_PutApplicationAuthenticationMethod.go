@@ -59,7 +59,9 @@ func (v *PutApplicationAuthenticationMethodInput) SerializeMembers(s smithy.Shap
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.PutApplicationAuthenticationMethodRequest_ApplicationArn, *v.ApplicationArn)
 	}
-	serializeAuthenticationMethod(s, schemas.PutApplicationAuthenticationMethodRequest_AuthenticationMethod, v.AuthenticationMethod)
+	if v.AuthenticationMethod != nil {
+		serializeAuthenticationMethod(s, schemas.PutApplicationAuthenticationMethodRequest_AuthenticationMethod, v.AuthenticationMethod)
+	}
 	if v.AuthenticationMethodType != "" {
 		s.WriteString(schemas.PutApplicationAuthenticationMethodRequest_AuthenticationMethodType, string(v.AuthenticationMethodType))
 	}

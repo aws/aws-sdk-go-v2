@@ -134,11 +134,15 @@ func (v *GetOfferOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgreementProposalId != nil {
 		s.WriteString(schemas.GetOfferOutput_agreementProposalId, *v.AgreementProposalId)
 	}
-	serializeOfferAssociatedEntityList(s, schemas.GetOfferOutput_associatedEntities, v.AssociatedEntities)
+	if v.AssociatedEntities != nil {
+		serializeOfferAssociatedEntityList(s, schemas.GetOfferOutput_associatedEntities, v.AssociatedEntities)
+	}
 	if v.AvailableFromTime != nil {
 		s.WriteTime(schemas.GetOfferOutput_availableFromTime, *v.AvailableFromTime)
 	}
-	serializePurchaseOptionBadgeList(s, schemas.GetOfferOutput_badges, v.Badges)
+	if v.Badges != nil {
+		serializePurchaseOptionBadgeList(s, schemas.GetOfferOutput_badges, v.Badges)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetOfferOutput_catalog, *v.Catalog)
 	}

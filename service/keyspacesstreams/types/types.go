@@ -80,7 +80,9 @@ func (v *KeyspacesCell) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKeyspacesCellValue(s, schemas.KeyspacesCell_value, v.Value)
+	if v.Value != nil {
+		serializeKeyspacesCellValue(s, schemas.KeyspacesCell_value, v.Value)
+	}
 }
 func (v *KeyspacesCell) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyspacesCell, func(s *smithy.Schema) error {
@@ -119,13 +121,17 @@ func (v *KeyspacesCellMapDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KeyspacesCellMapDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeyspacesCellValue(s, schemas.KeyspacesCellMapDefinition_key, v.Key)
+	if v.Key != nil {
+		serializeKeyspacesCellValue(s, schemas.KeyspacesCellMapDefinition_key, v.Key)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.KeyspacesCellMapDefinition_metadata)
 		v.Metadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKeyspacesCellValue(s, schemas.KeyspacesCellMapDefinition_value, v.Value)
+	if v.Value != nil {
+		serializeKeyspacesCellValue(s, schemas.KeyspacesCellMapDefinition_value, v.Value)
+	}
 }
 func (v *KeyspacesCellMapDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyspacesCellMapDefinition, func(s *smithy.Schema) error {
@@ -643,8 +649,12 @@ func (v *KeyspacesRow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RowMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKeyspacesCells(s, schemas.KeyspacesRow_staticCells, v.StaticCells)
-	serializeKeyspacesCells(s, schemas.KeyspacesRow_valueCells, v.ValueCells)
+	if v.StaticCells != nil {
+		serializeKeyspacesCells(s, schemas.KeyspacesRow_staticCells, v.StaticCells)
+	}
+	if v.ValueCells != nil {
+		serializeKeyspacesCells(s, schemas.KeyspacesRow_valueCells, v.ValueCells)
+	}
 }
 func (v *KeyspacesRow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyspacesRow, func(s *smithy.Schema) error {
@@ -702,7 +712,9 @@ func (v *Record) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeyspacesKeysMap(s, schemas.Record_clusteringKeys, v.ClusteringKeys)
+	if v.ClusteringKeys != nil {
+		serializeKeyspacesKeysMap(s, schemas.Record_clusteringKeys, v.ClusteringKeys)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Record_createdAt, *v.CreatedAt)
 	}
@@ -722,7 +734,9 @@ func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Origin != "" {
 		s.WriteString(schemas.Record_origin, string(v.Origin))
 	}
-	serializeKeyspacesKeysMap(s, schemas.Record_partitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeKeyspacesKeysMap(s, schemas.Record_partitionKeys, v.PartitionKeys)
+	}
 	if v.SequenceNumber != nil {
 		s.WriteString(schemas.Record_sequenceNumber, *v.SequenceNumber)
 	}
@@ -827,7 +841,9 @@ func (v *Shard) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeShardIdList(s, schemas.Shard_parentShardIds, v.ParentShardIds)
+	if v.ParentShardIds != nil {
+		serializeShardIdList(s, schemas.Shard_parentShardIds, v.ParentShardIds)
+	}
 	if v.SequenceNumberRange != nil {
 		s.WriteStruct(schemas.Shard_sequenceNumberRange)
 		v.SequenceNumberRange.SerializeMembers(s)

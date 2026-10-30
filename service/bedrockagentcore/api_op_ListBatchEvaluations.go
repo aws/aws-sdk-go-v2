@@ -84,7 +84,9 @@ func (v *ListBatchEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchEvaluationSummaryList(s, schemas.ListBatchEvaluationsResponse_batchEvaluations, v.BatchEvaluations)
+	if v.BatchEvaluations != nil {
+		serializeBatchEvaluationSummaryList(s, schemas.ListBatchEvaluationsResponse_batchEvaluations, v.BatchEvaluations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchEvaluationsResponse_nextToken, *v.NextToken)
 	}

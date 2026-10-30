@@ -69,8 +69,12 @@ func (v *ListStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListStepsInput_Marker, *v.Marker)
 	}
-	serializeXmlStringList(s, schemas.ListStepsInput_StepIds, v.StepIds)
-	serializeStepStateList(s, schemas.ListStepsInput_StepStates, v.StepStates)
+	if v.StepIds != nil {
+		serializeXmlStringList(s, schemas.ListStepsInput_StepIds, v.StepIds)
+	}
+	if v.StepStates != nil {
+		serializeStepStateList(s, schemas.ListStepsInput_StepStates, v.StepStates)
+	}
 }
 
 // This output contains the list of steps returned in reverse order. This means
@@ -102,7 +106,9 @@ func (v *ListStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListStepsOutput_Marker, *v.Marker)
 	}
-	serializeStepSummaryList(s, schemas.ListStepsOutput_Steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepSummaryList(s, schemas.ListStepsOutput_Steps, v.Steps)
+	}
 }
 func (v *ListStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStepsOutput, func(s *smithy.Schema) error {

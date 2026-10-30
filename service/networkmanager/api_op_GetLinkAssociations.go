@@ -95,7 +95,9 @@ func (v *GetLinkAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLinkAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkAssociationList(s, schemas.GetLinkAssociationsResponse_LinkAssociations, v.LinkAssociations)
+	if v.LinkAssociations != nil {
+		serializeLinkAssociationList(s, schemas.GetLinkAssociationsResponse_LinkAssociations, v.LinkAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLinkAssociationsResponse_NextToken, *v.NextToken)
 	}

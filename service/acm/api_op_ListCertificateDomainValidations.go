@@ -98,7 +98,9 @@ func (v *ListCertificateDomainValidationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListCertificateDomainValidationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainValidationSummaryList(s, schemas.ListCertificateDomainValidationsResponse_DomainValidationSummaryList, v.DomainValidationSummaryList)
+	if v.DomainValidationSummaryList != nil {
+		serializeDomainValidationSummaryList(s, schemas.ListCertificateDomainValidationsResponse_DomainValidationSummaryList, v.DomainValidationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCertificateDomainValidationsResponse_NextToken, *v.NextToken)
 	}

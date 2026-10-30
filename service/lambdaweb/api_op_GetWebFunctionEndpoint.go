@@ -239,9 +239,15 @@ func (v *GetWebFunctionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.GetWebFunctionEndpointResponse_functionArn, *v.FunctionArn)
 	}
-	serializeRegionalEndpoints(s, schemas.GetWebFunctionEndpointResponse_regionalEndpoints, v.RegionalEndpoints)
-	serializeRegionList(s, schemas.GetWebFunctionEndpointResponse_regions, v.Regions)
-	serializeRevisionWeightList(s, schemas.GetWebFunctionEndpointResponse_revisionWeights, v.RevisionWeights)
+	if v.RegionalEndpoints != nil {
+		serializeRegionalEndpoints(s, schemas.GetWebFunctionEndpointResponse_regionalEndpoints, v.RegionalEndpoints)
+	}
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.GetWebFunctionEndpointResponse_regions, v.Regions)
+	}
+	if v.RevisionWeights != nil {
+		serializeRevisionWeightList(s, schemas.GetWebFunctionEndpointResponse_revisionWeights, v.RevisionWeights)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.GetWebFunctionEndpointResponse_scalingConfig)
 		v.ScalingConfig.SerializeMembers(s)

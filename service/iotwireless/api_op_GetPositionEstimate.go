@@ -102,7 +102,9 @@ func (v *GetPositionEstimateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.GetPositionEstimateRequest_Timestamp, *v.Timestamp)
 	}
-	serializeWiFiAccessPoints(s, schemas.GetPositionEstimateRequest_WiFiAccessPoints, v.WiFiAccessPoints)
+	if v.WiFiAccessPoints != nil {
+		serializeWiFiAccessPoints(s, schemas.GetPositionEstimateRequest_WiFiAccessPoints, v.WiFiAccessPoints)
+	}
 }
 
 type GetPositionEstimateOutput struct {

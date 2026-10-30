@@ -72,7 +72,9 @@ func (v *GetResourcesStatisticsV2Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcesStatisticsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceGroupByRules(s, schemas.GetResourcesStatisticsV2Request_GroupByRules, v.GroupByRules)
+	if v.GroupByRules != nil {
+		serializeResourceGroupByRules(s, schemas.GetResourcesStatisticsV2Request_GroupByRules, v.GroupByRules)
+	}
 	if v.MaxStatisticResults != nil {
 		s.WriteInt32(schemas.GetResourcesStatisticsV2Request_MaxStatisticResults, *v.MaxStatisticResults)
 	}
@@ -106,7 +108,9 @@ func (v *GetResourcesStatisticsV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcesStatisticsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupByResults(s, schemas.GetResourcesStatisticsV2Response_GroupByResults, v.GroupByResults)
+	if v.GroupByResults != nil {
+		serializeGroupByResults(s, schemas.GetResourcesStatisticsV2Response_GroupByResults, v.GroupByResults)
+	}
 }
 func (v *GetResourcesStatisticsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourcesStatisticsV2Response, func(s *smithy.Schema) error {

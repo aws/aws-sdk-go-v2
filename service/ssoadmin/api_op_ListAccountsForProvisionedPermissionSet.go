@@ -102,7 +102,9 @@ func (v *ListAccountsForProvisionedPermissionSetOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListAccountsForProvisionedPermissionSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.ListAccountsForProvisionedPermissionSetResponse_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountList(s, schemas.ListAccountsForProvisionedPermissionSetResponse_AccountIds, v.AccountIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountsForProvisionedPermissionSetResponse_NextToken, *v.NextToken)
 	}

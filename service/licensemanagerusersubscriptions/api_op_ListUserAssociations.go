@@ -65,8 +65,12 @@ func (v *ListUserAssociationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUserAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListUserAssociationsRequest_Filters, v.Filters)
-	serializeIdentityProvider(s, schemas.ListUserAssociationsRequest_IdentityProvider, v.IdentityProvider)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListUserAssociationsRequest_Filters, v.Filters)
+	}
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.ListUserAssociationsRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ListUserAssociationsRequest_InstanceId, *v.InstanceId)
 	}
@@ -101,7 +105,9 @@ func (v *ListUserAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUserAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceUserSummaryList(s, schemas.ListUserAssociationsResponse_InstanceUserSummaries, v.InstanceUserSummaries)
+	if v.InstanceUserSummaries != nil {
+		serializeInstanceUserSummaryList(s, schemas.ListUserAssociationsResponse_InstanceUserSummaries, v.InstanceUserSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserAssociationsResponse_NextToken, *v.NextToken)
 	}

@@ -100,7 +100,9 @@ func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.MemoryConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAgenticRetrieveMessages(s, schemas.AgenticRetrieveStreamRequest_messages, v.Messages)
+	if v.Messages != nil {
+		serializeAgenticRetrieveMessages(s, schemas.AgenticRetrieveStreamRequest_messages, v.Messages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.AgenticRetrieveStreamRequest_nextToken, *v.NextToken)
 	}
@@ -114,7 +116,9 @@ func (v *AgenticRetrieveStreamInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.RetrievalInstructionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAgenticRetrievers(s, schemas.AgenticRetrieveStreamRequest_retrievers, v.Retrievers)
+	if v.Retrievers != nil {
+		serializeAgenticRetrievers(s, schemas.AgenticRetrieveStreamRequest_retrievers, v.Retrievers)
+	}
 	if v.UserContext != nil {
 		s.WriteStruct(schemas.AgenticRetrieveStreamRequest_userContext)
 		v.UserContext.SerializeMembers(s)

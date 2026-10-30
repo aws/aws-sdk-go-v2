@@ -152,7 +152,9 @@ func (v *CoreNetworkPolicyException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CoreNetworkPolicyException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCoreNetworkPolicyErrorList(s, schemas.CoreNetworkPolicyException_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeCoreNetworkPolicyErrorList(s, schemas.CoreNetworkPolicyException_Errors, v.Errors)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.CoreNetworkPolicyException_Message, *v.Message)
 	}
@@ -261,7 +263,9 @@ func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExceptionContextMap(s, schemas.ResourceNotFoundException_Context, v.Context)
+	if v.Context != nil {
+		serializeExceptionContextMap(s, schemas.ResourceNotFoundException_Context, v.Context)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
 	}
@@ -457,7 +461,9 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_Fields, v.Fields)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_Message, *v.Message)
 	}

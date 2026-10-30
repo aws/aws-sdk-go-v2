@@ -84,7 +84,9 @@ func (v *ListEventsDetectionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventsDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventsDetectionJobPropertiesList(s, schemas.ListEventsDetectionJobsResponse_EventsDetectionJobPropertiesList, v.EventsDetectionJobPropertiesList)
+	if v.EventsDetectionJobPropertiesList != nil {
+		serializeEventsDetectionJobPropertiesList(s, schemas.ListEventsDetectionJobsResponse_EventsDetectionJobPropertiesList, v.EventsDetectionJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventsDetectionJobsResponse_NextToken, *v.NextToken)
 	}

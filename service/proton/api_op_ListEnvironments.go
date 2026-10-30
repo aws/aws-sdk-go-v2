@@ -51,7 +51,9 @@ func (v *ListEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentTemplateFilterList(s, schemas.ListEnvironmentsInput_environmentTemplates, v.EnvironmentTemplates)
+	if v.EnvironmentTemplates != nil {
+		serializeEnvironmentTemplateFilterList(s, schemas.ListEnvironmentsInput_environmentTemplates, v.EnvironmentTemplates)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEnvironmentsInput_maxResults, *v.MaxResults)
 	}
@@ -99,7 +101,9 @@ func (v *ListEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentSummaryList(s, schemas.ListEnvironmentsOutput_environments, v.Environments)
+	if v.Environments != nil {
+		serializeEnvironmentSummaryList(s, schemas.ListEnvironmentsOutput_environments, v.Environments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentsOutput_nextToken, *v.NextToken)
 	}

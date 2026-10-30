@@ -99,7 +99,9 @@ func (v *ListBonusPaymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBonusPaymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBonusPaymentList(s, schemas.ListBonusPaymentsResponse_BonusPayments, v.BonusPayments)
+	if v.BonusPayments != nil {
+		serializeBonusPaymentList(s, schemas.ListBonusPaymentsResponse_BonusPayments, v.BonusPayments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBonusPaymentsResponse_NextToken, *v.NextToken)
 	}

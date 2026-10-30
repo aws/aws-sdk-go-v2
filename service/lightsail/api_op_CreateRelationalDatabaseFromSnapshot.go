@@ -140,7 +140,9 @@ func (v *CreateRelationalDatabaseFromSnapshotInput) SerializeMembers(s smithy.Sh
 	if v.SourceRelationalDatabaseName != nil {
 		s.WriteString(schemas.CreateRelationalDatabaseFromSnapshotRequest_sourceRelationalDatabaseName, *v.SourceRelationalDatabaseName)
 	}
-	serializeTagList(s, schemas.CreateRelationalDatabaseFromSnapshotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRelationalDatabaseFromSnapshotRequest_tags, v.Tags)
+	}
 	if v.UseLatestRestorableTime != nil {
 		s.WriteBool(schemas.CreateRelationalDatabaseFromSnapshotRequest_useLatestRestorableTime, *v.UseLatestRestorableTime)
 	}
@@ -166,7 +168,9 @@ func (v *CreateRelationalDatabaseFromSnapshotOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *CreateRelationalDatabaseFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateRelationalDatabaseFromSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateRelationalDatabaseFromSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *CreateRelationalDatabaseFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRelationalDatabaseFromSnapshotResult, func(s *smithy.Schema) error {

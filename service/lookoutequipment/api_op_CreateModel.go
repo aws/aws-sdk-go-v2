@@ -167,7 +167,9 @@ func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServerSideKmsKeyId != nil {
 		s.WriteString(schemas.CreateModelRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
 	}
-	serializeTagList(s, schemas.CreateModelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelRequest_Tags, v.Tags)
+	}
 	if v.TrainingDataEndTime != nil {
 		s.WriteTime(schemas.CreateModelRequest_TrainingDataEndTime, *v.TrainingDataEndTime)
 	}

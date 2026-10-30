@@ -65,7 +65,9 @@ func (v *ListOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RegistrationStatus != "" {
 		s.WriteString(schemas.ListOnPremisesInstancesInput_registrationStatus, string(v.RegistrationStatus))
 	}
-	serializeTagFilterList(s, schemas.ListOnPremisesInstancesInput_tagFilters, v.TagFilters)
+	if v.TagFilters != nil {
+		serializeTagFilterList(s, schemas.ListOnPremisesInstancesInput_tagFilters, v.TagFilters)
+	}
 }
 
 // Represents the output of the list on-premises instances operation.
@@ -92,7 +94,9 @@ func (v *ListOnPremisesInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOnPremisesInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceNameList(s, schemas.ListOnPremisesInstancesOutput_instanceNames, v.InstanceNames)
+	if v.InstanceNames != nil {
+		serializeInstanceNameList(s, schemas.ListOnPremisesInstancesOutput_instanceNames, v.InstanceNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOnPremisesInstancesOutput_nextToken, *v.NextToken)
 	}

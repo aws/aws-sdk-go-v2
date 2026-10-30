@@ -158,12 +158,18 @@ func (v *GetDataProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirstRevisionCreatedBy != nil {
 		s.WriteString(schemas.GetDataProductOutput_firstRevisionCreatedBy, *v.FirstRevisionCreatedBy)
 	}
-	serializeFormOutputList(s, schemas.GetDataProductOutput_formsOutput, v.FormsOutput)
-	serializeGlossaryTerms(s, schemas.GetDataProductOutput_glossaryTerms, v.GlossaryTerms)
+	if v.FormsOutput != nil {
+		serializeFormOutputList(s, schemas.GetDataProductOutput_formsOutput, v.FormsOutput)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.GetDataProductOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetDataProductOutput_id, *v.Id)
 	}
-	serializeDataProductItems(s, schemas.GetDataProductOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDataProductItems(s, schemas.GetDataProductOutput_items, v.Items)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetDataProductOutput_name, *v.Name)
 	}

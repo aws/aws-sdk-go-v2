@@ -199,7 +199,9 @@ func (v *PutRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSeria
 	if v.LookBackPeriod != "" {
 		s.WriteString(schemas.PutRecommendationPreferencesRequest_lookBackPeriod, string(v.LookBackPeriod))
 	}
-	serializePreferredResources(s, schemas.PutRecommendationPreferencesRequest_preferredResources, v.PreferredResources)
+	if v.PreferredResources != nil {
+		serializePreferredResources(s, schemas.PutRecommendationPreferencesRequest_preferredResources, v.PreferredResources)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.PutRecommendationPreferencesRequest_resourceType, string(v.ResourceType))
 	}
@@ -211,7 +213,9 @@ func (v *PutRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSeria
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUtilizationPreferences(s, schemas.PutRecommendationPreferencesRequest_utilizationPreferences, v.UtilizationPreferences)
+	if v.UtilizationPreferences != nil {
+		serializeUtilizationPreferences(s, schemas.PutRecommendationPreferencesRequest_utilizationPreferences, v.UtilizationPreferences)
+	}
 }
 
 type PutRecommendationPreferencesOutput struct {

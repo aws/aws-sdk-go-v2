@@ -274,8 +274,12 @@ func (v *AttestationDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttestationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttestationValue(s, schemas.AttestationDetails_attestationValue, v.AttestationValue)
-	serializeInvestmentDistributions(s, schemas.AttestationDetails_investmentDistributions, v.InvestmentDistributions)
+	if v.AttestationValue != nil {
+		serializeAttestationValue(s, schemas.AttestationDetails_attestationValue, v.AttestationValue)
+	}
+	if v.InvestmentDistributions != nil {
+		serializeInvestmentDistributions(s, schemas.AttestationDetails_investmentDistributions, v.InvestmentDistributions)
+	}
 }
 func (v *AttestationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttestationDetails, func(s *smithy.Schema) error {
@@ -406,7 +410,9 @@ func (v *BillingFeatureFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.BillingFeatureFilter_name, string(v.Name))
 	}
-	serializeBillingFeatureFilterValues(s, schemas.BillingFeatureFilter_value, v.Value)
+	if v.Value != nil {
+		serializeBillingFeatureFilterValues(s, schemas.BillingFeatureFilter_value, v.Value)
+	}
 }
 func (v *BillingFeatureFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BillingFeatureFilter, func(s *smithy.Schema) error {
@@ -787,7 +793,9 @@ func (v *BillingViewHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusCode != "" {
 		s.WriteString(schemas.BillingViewHealthStatus_statusCode, string(v.StatusCode))
 	}
-	serializeBillingViewStatusReasons(s, schemas.BillingViewHealthStatus_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeBillingViewStatusReasons(s, schemas.BillingViewHealthStatus_statusReasons, v.StatusReasons)
+	}
 }
 func (v *BillingViewHealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BillingViewHealthStatus, func(s *smithy.Schema) error {
@@ -1081,11 +1089,15 @@ func (v *BusinessSupportAccountCharge) SerializeMembers(s smithy.ShapeSerializer
 		v.SupportDiscount.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBusinessSupportServiceSpendList(s, schemas.BusinessSupportAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	if v.SupportEligibleSpendByService != nil {
+		serializeBusinessSupportServiceSpendList(s, schemas.BusinessSupportAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	}
 	if v.SupportPlanName != nil {
 		s.WriteString(schemas.BusinessSupportAccountCharge_supportPlanName, *v.SupportPlanName)
 	}
-	serializeBusinessSupportTierChargeList(s, schemas.BusinessSupportAccountCharge_tierCharges, v.TierCharges)
+	if v.TierCharges != nil {
+		serializeBusinessSupportTierChargeList(s, schemas.BusinessSupportAccountCharge_tierCharges, v.TierCharges)
+	}
 	if v.TotalCharge != nil {
 		s.WriteString(schemas.BusinessSupportAccountCharge_totalCharge, *v.TotalCharge)
 	}
@@ -1654,7 +1666,9 @@ func (v *CostCategoryValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.CostCategoryValues_key, *v.Key)
 	}
-	serializeValues(s, schemas.CostCategoryValues_values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.CostCategoryValues_values, v.Values)
+	}
 }
 func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostCategoryValues, func(s *smithy.Schema) error {
@@ -1874,7 +1888,9 @@ func (v *CreditData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.CreditData_accountId, *v.AccountId)
 	}
-	serializeProductNames(s, schemas.CreditData_applicableProductNames, v.ApplicableProductNames)
+	if v.ApplicableProductNames != nil {
+		serializeProductNames(s, schemas.CreditData_applicableProductNames, v.ApplicableProductNames)
+	}
 	if v.ApplicationType != "" {
 		s.WriteString(schemas.CreditData_applicationType, string(v.ApplicationType))
 	}
@@ -1915,7 +1931,9 @@ func (v *CreditData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InitialAmount.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePurchaseTypeApplications(s, schemas.CreditData_purchaseTypeApplications, v.PurchaseTypeApplications)
+	if v.PurchaseTypeApplications != nil {
+		serializePurchaseTypeApplications(s, schemas.CreditData_purchaseTypeApplications, v.PurchaseTypeApplications)
+	}
 	if v.RemainingAmount != nil {
 		s.WriteStruct(schemas.CreditData_remainingAmount)
 		v.RemainingAmount.SerializeMembers(s)
@@ -1924,7 +1942,9 @@ func (v *CreditData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleName != nil {
 		s.WriteString(schemas.CreditData_ruleName, *v.RuleName)
 	}
-	serializeShareableAccountIds(s, schemas.CreditData_shareableAccounts, v.ShareableAccounts)
+	if v.ShareableAccounts != nil {
+		serializeShareableAccountIds(s, schemas.CreditData_shareableAccounts, v.ShareableAccounts)
+	}
 	if v.StartDate != nil {
 		s.WriteTime(schemas.CreditData_startDate, *v.StartDate)
 	}
@@ -2033,7 +2053,9 @@ func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.DimensionValues_key, string(v.Key))
 	}
-	serializeValues(s, schemas.DimensionValues_values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.DimensionValues_values, v.Values)
+	}
 }
 func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
@@ -2357,7 +2379,9 @@ func (v *InvestmentAttestation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InvestmentDisbursedAt != nil {
 		s.WriteTime(schemas.InvestmentAttestation_investmentDisbursedAt, *v.InvestmentDisbursedAt)
 	}
-	serializeInvestmentDistributions(s, schemas.InvestmentAttestation_investmentDistributions, v.InvestmentDistributions)
+	if v.InvestmentDistributions != nil {
+		serializeInvestmentDistributions(s, schemas.InvestmentAttestation_investmentDistributions, v.InvestmentDistributions)
+	}
 	if v.InvestmentId != nil {
 		s.WriteString(schemas.InvestmentAttestation_investmentId, *v.InvestmentId)
 	}
@@ -2373,7 +2397,9 @@ func (v *InvestmentAttestation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutcomeDescription != nil {
 		s.WriteString(schemas.InvestmentAttestation_outcomeDescription, *v.OutcomeDescription)
 	}
-	serializeRejectionReasons(s, schemas.InvestmentAttestation_rejectionReasons, v.RejectionReasons)
+	if v.RejectionReasons != nil {
+		serializeRejectionReasons(s, schemas.InvestmentAttestation_rejectionReasons, v.RejectionReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.InvestmentAttestation_updatedAt, *v.UpdatedAt)
 	}
@@ -2765,15 +2791,21 @@ func (v *LinkedAccountCharge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BillableSeconds != nil {
 		s.WriteInt64(schemas.LinkedAccountCharge_billableSeconds, *v.BillableSeconds)
 	}
-	serializeTimePeriodList(s, schemas.LinkedAccountCharge_linkedTimePeriods, v.LinkedTimePeriods)
+	if v.LinkedTimePeriods != nil {
+		serializeTimePeriodList(s, schemas.LinkedAccountCharge_linkedTimePeriods, v.LinkedTimePeriods)
+	}
 	if v.PayerAccountId != nil {
 		s.WriteString(schemas.LinkedAccountCharge_payerAccountId, *v.PayerAccountId)
 	}
 	if v.ProratedTotalSupportEligibleSpend != nil {
 		s.WriteString(schemas.LinkedAccountCharge_proratedTotalSupportEligibleSpend, *v.ProratedTotalSupportEligibleSpend)
 	}
-	serializeTimePeriodList(s, schemas.LinkedAccountCharge_subscriptionTimePeriods, v.SubscriptionTimePeriods)
-	serializeServiceLevelAccountUsageList(s, schemas.LinkedAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	if v.SubscriptionTimePeriods != nil {
+		serializeTimePeriodList(s, schemas.LinkedAccountCharge_subscriptionTimePeriods, v.SubscriptionTimePeriods)
+	}
+	if v.SupportEligibleSpendByService != nil {
+		serializeServiceLevelAccountUsageList(s, schemas.LinkedAccountCharge_supportEligibleSpendByService, v.SupportEligibleSpendByService)
+	}
 	if v.TotalSeconds != nil {
 		s.WriteInt64(schemas.LinkedAccountCharge_totalSeconds, *v.TotalSeconds)
 	}
@@ -2948,8 +2980,12 @@ func (v *OutcomeBasedInvestment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InvestmentId != nil {
 		s.WriteString(schemas.OutcomeBasedInvestment_investmentId, *v.InvestmentId)
 	}
-	serializeInvestmentMultipliers(s, schemas.OutcomeBasedInvestment_investmentMultipliers, v.InvestmentMultipliers)
-	serializeInvestmentRestrictions(s, schemas.OutcomeBasedInvestment_investmentRestrictions, v.InvestmentRestrictions)
+	if v.InvestmentMultipliers != nil {
+		serializeInvestmentMultipliers(s, schemas.OutcomeBasedInvestment_investmentMultipliers, v.InvestmentMultipliers)
+	}
+	if v.InvestmentRestrictions != nil {
+		serializeInvestmentRestrictions(s, schemas.OutcomeBasedInvestment_investmentRestrictions, v.InvestmentRestrictions)
+	}
 	if v.OutcomeDescription != nil {
 		s.WriteString(schemas.OutcomeBasedInvestment_outcomeDescription, *v.OutcomeDescription)
 	}
@@ -3050,7 +3086,9 @@ func (v *PricingPlan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Tiered != nil {
 		s.WriteString(schemas.PricingPlan_tiered, *v.Tiered)
 	}
-	serializePricingPlanTierList(s, schemas.PricingPlan_tiers, v.Tiers)
+	if v.Tiers != nil {
+		serializePricingPlanTierList(s, schemas.PricingPlan_tiers, v.Tiers)
+	}
 }
 func (v *PricingPlan) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PricingPlan, func(s *smithy.Schema) error {
@@ -3244,15 +3282,23 @@ func (v *PrivatePricingAddendum) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContractArn != nil {
 		s.WriteString(schemas.PrivatePricingAddendum_contractArn, *v.ContractArn)
 	}
-	serializeContractRestrictions(s, schemas.PrivatePricingAddendum_contractRestrictions, v.ContractRestrictions)
+	if v.ContractRestrictions != nil {
+		serializeContractRestrictions(s, schemas.PrivatePricingAddendum_contractRestrictions, v.ContractRestrictions)
+	}
 	if v.ContractTerm != nil {
 		s.WriteStruct(schemas.PrivatePricingAddendum_contractTerm)
 		v.ContractTerm.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAccountList(s, schemas.PrivatePricingAddendum_eligiblePayerAccounts, v.EligiblePayerAccounts)
-	serializeAccountList(s, schemas.PrivatePricingAddendum_investmentAccounts, v.InvestmentAccounts)
-	serializeLegalEntities(s, schemas.PrivatePricingAddendum_legalEntities, v.LegalEntities)
+	if v.EligiblePayerAccounts != nil {
+		serializeAccountList(s, schemas.PrivatePricingAddendum_eligiblePayerAccounts, v.EligiblePayerAccounts)
+	}
+	if v.InvestmentAccounts != nil {
+		serializeAccountList(s, schemas.PrivatePricingAddendum_investmentAccounts, v.InvestmentAccounts)
+	}
+	if v.LegalEntities != nil {
+		serializeLegalEntities(s, schemas.PrivatePricingAddendum_legalEntities, v.LegalEntities)
+	}
 }
 func (v *PrivatePricingAddendum) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PrivatePricingAddendum, func(s *smithy.Schema) error {
@@ -3436,7 +3482,9 @@ func (v *TagValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.TagValues_key, *v.Key)
 	}
-	serializeValues(s, schemas.TagValues_values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.TagValues_values, v.Values)
+	}
 }
 func (v *TagValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagValues, func(s *smithy.Schema) error {

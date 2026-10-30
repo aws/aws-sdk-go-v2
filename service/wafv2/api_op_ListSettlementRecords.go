@@ -79,7 +79,9 @@ func (v *ListSettlementRecordsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Currency != "" {
 		s.WriteString(schemas.ListSettlementRecordsRequest_Currency, string(v.Currency))
 	}
-	serializeMonetizationFilterList(s, schemas.ListSettlementRecordsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeMonetizationFilterList(s, schemas.ListSettlementRecordsRequest_Filters, v.Filters)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.ListSettlementRecordsRequest_Limit, *v.Limit)
 	}
@@ -127,7 +129,9 @@ func (v *ListSettlementRecordsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListSettlementRecordsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeSettlementRecordList(s, schemas.ListSettlementRecordsResponse_Settlements, v.Settlements)
+	if v.Settlements != nil {
+		serializeSettlementRecordList(s, schemas.ListSettlementRecordsResponse_Settlements, v.Settlements)
+	}
 }
 func (v *ListSettlementRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSettlementRecordsResponse, func(s *smithy.Schema) error {

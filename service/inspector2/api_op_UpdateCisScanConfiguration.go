@@ -62,7 +62,9 @@ func (v *UpdateCisScanConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ScanName != nil {
 		s.WriteString(schemas.UpdateCisScanConfigurationRequest_scanName, *v.ScanName)
 	}
-	serializeSchedule(s, schemas.UpdateCisScanConfigurationRequest_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeSchedule(s, schemas.UpdateCisScanConfigurationRequest_schedule, v.Schedule)
+	}
 	if v.SecurityLevel != "" {
 		s.WriteString(schemas.UpdateCisScanConfigurationRequest_securityLevel, string(v.SecurityLevel))
 	}

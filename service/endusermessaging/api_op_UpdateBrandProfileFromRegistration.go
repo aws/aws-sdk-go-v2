@@ -106,7 +106,9 @@ func (v *UpdateBrandProfileFromRegistrationOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *UpdateBrandProfileFromRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobResults(s, schemas.UpdateBrandProfileFromRegistrationOutput_results, v.Results)
+	if v.Results != nil {
+		serializeJobResults(s, schemas.UpdateBrandProfileFromRegistrationOutput_results, v.Results)
+	}
 }
 func (v *UpdateBrandProfileFromRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateBrandProfileFromRegistrationOutput, func(s *smithy.Schema) error {

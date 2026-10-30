@@ -181,7 +181,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.CreateDomainRequest_AccessPolicies, *v.AccessPolicies)
 	}
-	serializeAdvancedOptions(s, schemas.CreateDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.CreateDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.AdvancedSecurityOptions != nil {
 		s.WriteStruct(schemas.CreateDomainRequest_AdvancedSecurityOptions)
 		v.AdvancedSecurityOptions.SerializeMembers(s)
@@ -244,7 +246,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdentityCenterOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLogPublishingOptions(s, schemas.CreateDomainRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.LogPublishingOptions != nil {
+		serializeLogPublishingOptions(s, schemas.CreateDomainRequest_LogPublishingOptions, v.LogPublishingOptions)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.CreateDomainRequest_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
@@ -265,7 +269,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SoftwareUpdateOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDomainRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CreateDomainRequest_TagList, v.TagList)
+	}
 	if v.UseCase != "" {
 		s.WriteString(schemas.CreateDomainRequest_UseCase, string(v.UseCase))
 	}

@@ -104,7 +104,9 @@ func (v *ListSearchesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSearchesResponse_nextToken, *v.NextToken)
 	}
-	serializeSearchSummaries(s, schemas.ListSearchesResponse_searchSummaries, v.SearchSummaries)
+	if v.SearchSummaries != nil {
+		serializeSearchSummaries(s, schemas.ListSearchesResponse_searchSummaries, v.SearchSummaries)
+	}
 }
 func (v *ListSearchesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSearchesResponse, func(s *smithy.Schema) error {

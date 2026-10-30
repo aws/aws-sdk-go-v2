@@ -110,7 +110,9 @@ func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetConfigurationResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetConfigurationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetConfigurationResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.GetConfigurationResponse_uuid, *v.Uuid)
 	}

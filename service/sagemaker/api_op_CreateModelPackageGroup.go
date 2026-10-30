@@ -66,7 +66,9 @@ func (v *CreateModelPackageGroupInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ModelPackageGroupName != nil {
 		s.WriteString(schemas.CreateModelPackageGroupInput_ModelPackageGroupName, *v.ModelPackageGroupName)
 	}
-	serializeTagList(s, schemas.CreateModelPackageGroupInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelPackageGroupInput_Tags, v.Tags)
+	}
 }
 
 type CreateModelPackageGroupOutput struct {

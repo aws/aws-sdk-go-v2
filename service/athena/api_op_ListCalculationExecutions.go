@@ -112,7 +112,9 @@ func (v *ListCalculationExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCalculationExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCalculationsList(s, schemas.ListCalculationExecutionsResponse_Calculations, v.Calculations)
+	if v.Calculations != nil {
+		serializeCalculationsList(s, schemas.ListCalculationExecutionsResponse_Calculations, v.Calculations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCalculationExecutionsResponse_NextToken, *v.NextToken)
 	}

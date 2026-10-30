@@ -78,7 +78,9 @@ func (v *ListIdMappingWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdMappingWorkflowsOutput_nextToken, *v.NextToken)
 	}
-	serializeIdMappingWorkflowList(s, schemas.ListIdMappingWorkflowsOutput_workflowSummaries, v.WorkflowSummaries)
+	if v.WorkflowSummaries != nil {
+		serializeIdMappingWorkflowList(s, schemas.ListIdMappingWorkflowsOutput_workflowSummaries, v.WorkflowSummaries)
+	}
 }
 func (v *ListIdMappingWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListIdMappingWorkflowsOutput, func(s *smithy.Schema) error {

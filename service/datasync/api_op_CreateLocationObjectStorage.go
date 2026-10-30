@@ -157,7 +157,9 @@ func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AccessKey != nil {
 		s.WriteString(schemas.CreateLocationObjectStorageRequest_AccessKey, *v.AccessKey)
 	}
-	serializeAgentArnList(s, schemas.CreateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.CreateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	}
 	if v.BucketName != nil {
 		s.WriteString(schemas.CreateLocationObjectStorageRequest_BucketName, *v.BucketName)
 	}
@@ -189,7 +191,9 @@ func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationObjectStorageRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationObjectStorageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationObjectStorageRequest_Tags, v.Tags)
+	}
 }
 
 // CreateLocationObjectStorageResponse

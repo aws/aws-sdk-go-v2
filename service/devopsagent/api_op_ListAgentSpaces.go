@@ -85,7 +85,9 @@ func (v *ListAgentSpacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentSpaceList(s, schemas.ListAgentSpacesOutput_agentSpaces, v.AgentSpaces)
+	if v.AgentSpaces != nil {
+		serializeAgentSpaceList(s, schemas.ListAgentSpacesOutput_agentSpaces, v.AgentSpaces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentSpacesOutput_nextToken, *v.NextToken)
 	}

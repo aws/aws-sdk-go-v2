@@ -89,7 +89,9 @@ func (v *GetSignalingChannelEndpointOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetSignalingChannelEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceEndpointList(s, schemas.GetSignalingChannelEndpointOutput_ResourceEndpointList, v.ResourceEndpointList)
+	if v.ResourceEndpointList != nil {
+		serializeResourceEndpointList(s, schemas.GetSignalingChannelEndpointOutput_ResourceEndpointList, v.ResourceEndpointList)
+	}
 }
 func (v *GetSignalingChannelEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSignalingChannelEndpointOutput, func(s *smithy.Schema) error {

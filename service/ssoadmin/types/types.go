@@ -86,7 +86,9 @@ func (v *AccessControlAttributeValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessControlAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlAttributeValueSourceList(s, schemas.AccessControlAttributeValue_Source, v.Source)
+	if v.Source != nil {
+		serializeAccessControlAttributeValueSourceList(s, schemas.AccessControlAttributeValue_Source, v.Source)
+	}
 }
 func (v *AccessControlAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessControlAttributeValue, func(s *smithy.Schema) error {
@@ -810,7 +812,9 @@ func (v *AuthenticationMethodItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthenticationMethodItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationMethod(s, schemas.AuthenticationMethodItem_AuthenticationMethod, v.AuthenticationMethod)
+	if v.AuthenticationMethod != nil {
+		serializeAuthenticationMethod(s, schemas.AuthenticationMethodItem_AuthenticationMethod, v.AuthenticationMethod)
+	}
 	if v.AuthenticationMethodType != "" {
 		s.WriteString(schemas.AuthenticationMethodItem_AuthenticationMethodType, string(v.AuthenticationMethodType))
 	}
@@ -852,7 +856,9 @@ func (v *AuthorizationCodeGrant) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthorizationCodeGrant) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRedirectUris(s, schemas.AuthorizationCodeGrant_RedirectUris, v.RedirectUris)
+	if v.RedirectUris != nil {
+		serializeRedirectUris(s, schemas.AuthorizationCodeGrant_RedirectUris, v.RedirectUris)
+	}
 }
 func (v *AuthorizationCodeGrant) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuthorizationCodeGrant, func(s *smithy.Schema) error {
@@ -885,7 +891,9 @@ func (v *AuthorizedTokenIssuer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthorizedTokenIssuer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTokenIssuerAudiences(s, schemas.AuthorizedTokenIssuer_AuthorizedAudiences, v.AuthorizedAudiences)
+	if v.AuthorizedAudiences != nil {
+		serializeTokenIssuerAudiences(s, schemas.AuthorizedTokenIssuer_AuthorizedAudiences, v.AuthorizedAudiences)
+	}
 	if v.TrustedTokenIssuerArn != nil {
 		s.WriteString(schemas.AuthorizedTokenIssuer_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
 	}
@@ -1229,7 +1237,9 @@ func (v *GrantItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GrantItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrant(s, schemas.GrantItem_Grant, v.Grant)
+	if v.Grant != nil {
+		serializeGrant(s, schemas.GrantItem_Grant, v.Grant)
+	}
 	if v.GrantType != "" {
 		s.WriteString(schemas.GrantItem_GrantType, string(v.GrantType))
 	}
@@ -1310,7 +1320,9 @@ func (v *InstanceAccessControlAttributeConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *InstanceAccessControlAttributeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlAttributeList(s, schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes, v.AccessControlAttributes)
+	if v.AccessControlAttributes != nil {
+		serializeAccessControlAttributeList(s, schemas.InstanceAccessControlAttributeConfiguration_AccessControlAttributes, v.AccessControlAttributes)
+	}
 }
 func (v *InstanceAccessControlAttributeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceAccessControlAttributeConfiguration, func(s *smithy.Schema) error {
@@ -1396,7 +1408,9 @@ func (v *InstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.InstanceMetadata_PrimaryRegion, *v.PrimaryRegion)
 	}
-	serializeRegionMetadataList(s, schemas.InstanceMetadata_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionMetadataList(s, schemas.InstanceMetadata_Regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.InstanceMetadata_Status, string(v.Status))
 	}
@@ -1468,7 +1482,9 @@ func (v *JwtBearerGrant) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JwtBearerGrant) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedTokenIssuers(s, schemas.JwtBearerGrant_AuthorizedTokenIssuers, v.AuthorizedTokenIssuers)
+	if v.AuthorizedTokenIssuers != nil {
+		serializeAuthorizedTokenIssuers(s, schemas.JwtBearerGrant_AuthorizedTokenIssuers, v.AuthorizedTokenIssuers)
+	}
 }
 func (v *JwtBearerGrant) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JwtBearerGrant, func(s *smithy.Schema) error {
@@ -2189,7 +2205,9 @@ func (v *ResourceServerConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceServerConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceServerScopes(s, schemas.ResourceServerConfig_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeResourceServerScopes(s, schemas.ResourceServerConfig_Scopes, v.Scopes)
+	}
 }
 func (v *ResourceServerConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceServerConfig, func(s *smithy.Schema) error {
@@ -2264,7 +2282,9 @@ func (v *ScopeDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScopeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScopeTargets(s, schemas.ScopeDetails_AuthorizedTargets, v.AuthorizedTargets)
+	if v.AuthorizedTargets != nil {
+		serializeScopeTargets(s, schemas.ScopeDetails_AuthorizedTargets, v.AuthorizedTargets)
+	}
 	if v.Scope != nil {
 		s.WriteString(schemas.ScopeDetails_Scope, *v.Scope)
 	}

@@ -97,14 +97,18 @@ func (v *CreateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageTagMutability != "" {
 		s.WriteString(schemas.CreateRepositoryRequest_imageTagMutability, string(v.ImageTagMutability))
 	}
-	serializeImageTagMutabilityExclusionFilters(s, schemas.CreateRepositoryRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	if v.ImageTagMutabilityExclusionFilters != nil {
+		serializeImageTagMutabilityExclusionFilters(s, schemas.CreateRepositoryRequest_imageTagMutabilityExclusionFilters, v.ImageTagMutabilityExclusionFilters)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.CreateRepositoryRequest_registryId, *v.RegistryId)
 	}
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.CreateRepositoryRequest_repositoryName, *v.RepositoryName)
 	}
-	serializeTagList(s, schemas.CreateRepositoryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRepositoryRequest_tags, v.Tags)
+	}
 }
 
 type CreateRepositoryOutput struct {

@@ -88,7 +88,9 @@ func (v *ListClusterOperationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClusterOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfClusterOperationInfo(s, schemas.ListClusterOperationsResponse_ClusterOperationInfoList, v.ClusterOperationInfoList)
+	if v.ClusterOperationInfoList != nil {
+		serialize__listOfClusterOperationInfo(s, schemas.ListClusterOperationsResponse_ClusterOperationInfoList, v.ClusterOperationInfoList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClusterOperationsResponse_NextToken, *v.NextToken)
 	}

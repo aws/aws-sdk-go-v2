@@ -54,7 +54,9 @@ func (v *ListAutomatedDiscoveryAccountsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAutomatedDiscoveryAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.ListAutomatedDiscoveryAccountsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serialize__listOf__string(s, schemas.ListAutomatedDiscoveryAccountsRequest_accountIds, v.AccountIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAutomatedDiscoveryAccountsRequest_maxResults, *v.MaxResults)
 	}
@@ -87,7 +89,9 @@ func (v *ListAutomatedDiscoveryAccountsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAutomatedDiscoveryAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAutomatedDiscoveryAccount(s, schemas.ListAutomatedDiscoveryAccountsResponse_items, v.Items)
+	if v.Items != nil {
+		serialize__listOfAutomatedDiscoveryAccount(s, schemas.ListAutomatedDiscoveryAccountsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomatedDiscoveryAccountsResponse_nextToken, *v.NextToken)
 	}

@@ -1300,9 +1300,15 @@ func (v *JobResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JobResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEc2AmiResourceList(s, schemas.JobResource_Ec2AmiResources, v.Ec2AmiResources)
-	serializeLambdaResourceList(s, schemas.JobResource_LambdaResources, v.LambdaResources)
-	serializeS3ResourceList(s, schemas.JobResource_S3Resources, v.S3Resources)
+	if v.Ec2AmiResources != nil {
+		serializeEc2AmiResourceList(s, schemas.JobResource_Ec2AmiResources, v.Ec2AmiResources)
+	}
+	if v.LambdaResources != nil {
+		serializeLambdaResourceList(s, schemas.JobResource_LambdaResources, v.LambdaResources)
+	}
+	if v.S3Resources != nil {
+		serializeS3ResourceList(s, schemas.JobResource_S3Resources, v.S3Resources)
+	}
 }
 func (v *JobResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobResource, func(s *smithy.Schema) error {
@@ -1383,7 +1389,9 @@ func (v *LambdaResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LambdaResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTriggerDefinitionList(s, schemas.LambdaResource_EventTriggers, v.EventTriggers)
+	if v.EventTriggers != nil {
+		serializeEventTriggerDefinitionList(s, schemas.LambdaResource_EventTriggers, v.EventTriggers)
+	}
 	if v.LambdaArn != nil {
 		s.WriteString(schemas.LambdaResource_LambdaArn, *v.LambdaArn)
 	}
@@ -1453,7 +1461,9 @@ func (v *LongTermPricingListEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsLongTermPricingAutoRenew != nil {
 		s.WriteBool(schemas.LongTermPricingListEntry_IsLongTermPricingAutoRenew, *v.IsLongTermPricingAutoRenew)
 	}
-	serializeLongTermPricingAssociatedJobIdList(s, schemas.LongTermPricingListEntry_JobIds, v.JobIds)
+	if v.JobIds != nil {
+		serializeLongTermPricingAssociatedJobIdList(s, schemas.LongTermPricingListEntry_JobIds, v.JobIds)
+	}
 	if v.LongTermPricingEndDate != nil {
 		s.WriteTime(schemas.LongTermPricingListEntry_LongTermPricingEndDate, *v.LongTermPricingEndDate)
 	}
@@ -1611,7 +1621,9 @@ func (v *Notification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DevicePickupSnsTopicARN != nil {
 		s.WriteString(schemas.Notification_DevicePickupSnsTopicARN, *v.DevicePickupSnsTopicARN)
 	}
-	serializeJobStateList(s, schemas.Notification_JobStatesToNotify, v.JobStatesToNotify)
+	if v.JobStatesToNotify != nil {
+		serializeJobStateList(s, schemas.Notification_JobStatesToNotify, v.JobStatesToNotify)
+	}
 	if v.NotifyAll != false {
 		s.WriteBool(schemas.Notification_NotifyAll, v.NotifyAll)
 	}
@@ -1901,7 +1913,9 @@ func (v *S3Resource) SerializeMembers(s smithy.ShapeSerializer) {
 		v.KeyRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTargetOnDeviceServiceList(s, schemas.S3Resource_TargetOnDeviceServices, v.TargetOnDeviceServices)
+	if v.TargetOnDeviceServices != nil {
+		serializeTargetOnDeviceServiceList(s, schemas.S3Resource_TargetOnDeviceServices, v.TargetOnDeviceServices)
+	}
 }
 func (v *S3Resource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3Resource, func(s *smithy.Schema) error {

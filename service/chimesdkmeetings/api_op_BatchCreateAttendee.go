@@ -51,7 +51,9 @@ func (v *BatchCreateAttendeeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateAttendeeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateAttendeeRequestItemList(s, schemas.BatchCreateAttendeeRequest_Attendees, v.Attendees)
+	if v.Attendees != nil {
+		serializeCreateAttendeeRequestItemList(s, schemas.BatchCreateAttendeeRequest_Attendees, v.Attendees)
+	}
 	if v.MeetingId != nil {
 		s.WriteString(schemas.BatchCreateAttendeeRequest_MeetingId, *v.MeetingId)
 	}
@@ -79,8 +81,12 @@ func (v *BatchCreateAttendeeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateAttendeeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttendeeList(s, schemas.BatchCreateAttendeeResponse_Attendees, v.Attendees)
-	serializeBatchCreateAttendeeErrorList(s, schemas.BatchCreateAttendeeResponse_Errors, v.Errors)
+	if v.Attendees != nil {
+		serializeAttendeeList(s, schemas.BatchCreateAttendeeResponse_Attendees, v.Attendees)
+	}
+	if v.Errors != nil {
+		serializeBatchCreateAttendeeErrorList(s, schemas.BatchCreateAttendeeResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchCreateAttendeeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateAttendeeResponse, func(s *smithy.Schema) error {

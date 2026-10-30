@@ -50,7 +50,9 @@ func (v *GetTraceGraphInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTraceGraphRequest_NextToken, *v.NextToken)
 	}
-	serializeTraceIdList(s, schemas.GetTraceGraphRequest_TraceIds, v.TraceIds)
+	if v.TraceIds != nil {
+		serializeTraceIdList(s, schemas.GetTraceGraphRequest_TraceIds, v.TraceIds)
+	}
 }
 
 type GetTraceGraphOutput struct {
@@ -77,7 +79,9 @@ func (v *GetTraceGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTraceGraphResult_NextToken, *v.NextToken)
 	}
-	serializeServiceList(s, schemas.GetTraceGraphResult_Services, v.Services)
+	if v.Services != nil {
+		serializeServiceList(s, schemas.GetTraceGraphResult_Services, v.Services)
+	}
 }
 func (v *GetTraceGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTraceGraphResult, func(s *smithy.Schema) error {

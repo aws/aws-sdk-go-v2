@@ -48,7 +48,9 @@ func (v *RevokePipelineEndpointConnectionsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *RevokePipelineEndpointConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePipelineEndpointIdsList(s, schemas.RevokePipelineEndpointConnectionsRequest_EndpointIds, v.EndpointIds)
+	if v.EndpointIds != nil {
+		serializePipelineEndpointIdsList(s, schemas.RevokePipelineEndpointConnectionsRequest_EndpointIds, v.EndpointIds)
+	}
 	if v.PipelineArn != nil {
 		s.WriteString(schemas.RevokePipelineEndpointConnectionsRequest_PipelineArn, *v.PipelineArn)
 	}

@@ -98,7 +98,9 @@ func (v *ListAddonsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAddonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListAddonsResponse_addons, v.Addons)
+	if v.Addons != nil {
+		serializeStringList(s, schemas.ListAddonsResponse_addons, v.Addons)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAddonsResponse_nextToken, *v.NextToken)
 	}

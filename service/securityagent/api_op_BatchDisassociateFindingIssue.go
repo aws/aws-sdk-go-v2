@@ -64,7 +64,9 @@ func (v *BatchDisassociateFindingIssueInput) SerializeMembers(s smithy.ShapeSeri
 	if v.CodeReviewJobId != nil {
 		s.WriteString(schemas.BatchDisassociateFindingIssueInput_codeReviewJobId, *v.CodeReviewJobId)
 	}
-	serializeFindingIdList(s, schemas.BatchDisassociateFindingIssueInput_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIdList(s, schemas.BatchDisassociateFindingIssueInput_findingIds, v.FindingIds)
+	}
 	if v.PentestJobId != nil {
 		s.WriteString(schemas.BatchDisassociateFindingIssueInput_pentestJobId, *v.PentestJobId)
 	}
@@ -91,7 +93,9 @@ func (v *BatchDisassociateFindingIssueOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchDisassociateFindingIssueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDisassociateFindingIssueErrors(s, schemas.BatchDisassociateFindingIssueOutput_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDisassociateFindingIssueErrors(s, schemas.BatchDisassociateFindingIssueOutput_errors, v.Errors)
+	}
 }
 func (v *BatchDisassociateFindingIssueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisassociateFindingIssueOutput, func(s *smithy.Schema) error {

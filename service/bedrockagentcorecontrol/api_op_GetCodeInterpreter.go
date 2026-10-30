@@ -116,7 +116,9 @@ func (v *GetCodeInterpreterOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCodeInterpreterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificates(s, schemas.GetCodeInterpreterResponse_certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificates(s, schemas.GetCodeInterpreterResponse_certificates, v.Certificates)
+	}
 	if v.CodeInterpreterArn != nil {
 		s.WriteString(schemas.GetCodeInterpreterResponse_codeInterpreterArn, *v.CodeInterpreterArn)
 	}
@@ -135,7 +137,9 @@ func (v *GetCodeInterpreterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetCodeInterpreterResponse_failureReason, *v.FailureReason)
 	}
-	serializeToolsFileSystemConfigurations(s, schemas.GetCodeInterpreterResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.FilesystemConfigurations != nil {
+		serializeToolsFileSystemConfigurations(s, schemas.GetCodeInterpreterResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetCodeInterpreterResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}

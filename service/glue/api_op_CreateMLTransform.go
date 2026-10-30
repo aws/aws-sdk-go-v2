@@ -177,7 +177,9 @@ func (v *CreateMLTransformInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlueVersion != nil {
 		s.WriteString(schemas.CreateMLTransformRequest_GlueVersion, *v.GlueVersion)
 	}
-	serializeGlueTables(s, schemas.CreateMLTransformRequest_InputRecordTables, v.InputRecordTables)
+	if v.InputRecordTables != nil {
+		serializeGlueTables(s, schemas.CreateMLTransformRequest_InputRecordTables, v.InputRecordTables)
+	}
 	if v.MaxCapacity != nil {
 		s.WriteFloat64(schemas.CreateMLTransformRequest_MaxCapacity, *v.MaxCapacity)
 	}
@@ -198,7 +200,9 @@ func (v *CreateMLTransformInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != nil {
 		s.WriteString(schemas.CreateMLTransformRequest_Role, *v.Role)
 	}
-	serializeTagsMap(s, schemas.CreateMLTransformRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateMLTransformRequest_Tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteInt32(schemas.CreateMLTransformRequest_Timeout, *v.Timeout)
 	}

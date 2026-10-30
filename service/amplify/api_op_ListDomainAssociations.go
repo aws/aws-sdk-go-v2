@@ -89,7 +89,9 @@ func (v *ListDomainAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainAssociations(s, schemas.ListDomainAssociationsResult_domainAssociations, v.DomainAssociations)
+	if v.DomainAssociations != nil {
+		serializeDomainAssociations(s, schemas.ListDomainAssociationsResult_domainAssociations, v.DomainAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainAssociationsResult_nextToken, *v.NextToken)
 	}

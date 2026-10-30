@@ -94,7 +94,9 @@ func (v *EnableSecurityHubInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableDefaultStandards != nil {
 		s.WriteBool(schemas.EnableSecurityHubRequest_EnableDefaultStandards, *v.EnableDefaultStandards)
 	}
-	serializeTagMap(s, schemas.EnableSecurityHubRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EnableSecurityHubRequest_Tags, v.Tags)
+	}
 }
 
 type EnableSecurityHubOutput struct {

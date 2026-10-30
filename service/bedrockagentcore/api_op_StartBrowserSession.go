@@ -132,13 +132,21 @@ func (v *StartBrowserSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BrowserIdentifier != nil {
 		s.WriteString(schemas.StartBrowserSessionRequest_browserIdentifier, *v.BrowserIdentifier)
 	}
-	serializeCertificates(s, schemas.StartBrowserSessionRequest_certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificates(s, schemas.StartBrowserSessionRequest_certificates, v.Certificates)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartBrowserSessionRequest_clientToken, *v.ClientToken)
 	}
-	serializeBrowserEnterprisePolicies(s, schemas.StartBrowserSessionRequest_enterprisePolicies, v.EnterprisePolicies)
-	serializeBrowserExtensions(s, schemas.StartBrowserSessionRequest_extensions, v.Extensions)
-	serializeToolsFileSystemConfigurations(s, schemas.StartBrowserSessionRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.EnterprisePolicies != nil {
+		serializeBrowserEnterprisePolicies(s, schemas.StartBrowserSessionRequest_enterprisePolicies, v.EnterprisePolicies)
+	}
+	if v.Extensions != nil {
+		serializeBrowserExtensions(s, schemas.StartBrowserSessionRequest_extensions, v.Extensions)
+	}
+	if v.FilesystemConfigurations != nil {
+		serializeToolsFileSystemConfigurations(s, schemas.StartBrowserSessionRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StartBrowserSessionRequest_name, *v.Name)
 	}

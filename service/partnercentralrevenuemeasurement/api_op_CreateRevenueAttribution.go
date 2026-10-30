@@ -83,7 +83,9 @@ func (v *CreateRevenueAttributionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ProductIdentifier != nil {
 		s.WriteString(schemas.CreateRevenueAttributionInput_ProductIdentifier, *v.ProductIdentifier)
 	}
-	serializeTagList(s, schemas.CreateRevenueAttributionInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRevenueAttributionInput_Tags, v.Tags)
+	}
 	if v.TenancyModel != "" {
 		s.WriteString(schemas.CreateRevenueAttributionInput_TenancyModel, string(v.TenancyModel))
 	}

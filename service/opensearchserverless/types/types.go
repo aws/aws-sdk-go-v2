@@ -807,7 +807,9 @@ func (v *CollectionGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StandbyReplicas != "" {
 		s.WriteString(schemas.CollectionGroupDetail_standbyReplicas, string(v.StandbyReplicas))
 	}
-	serializeTags(s, schemas.CollectionGroupDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CollectionGroupDetail_tags, v.Tags)
+	}
 }
 func (v *CollectionGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CollectionGroupDetail, func(s *smithy.Schema) error {
@@ -1317,7 +1319,9 @@ func (v *CreateCollectionGroupDetail) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StandbyReplicas != "" {
 		s.WriteString(schemas.CreateCollectionGroupDetail_standbyReplicas, string(v.StandbyReplicas))
 	}
-	serializeTags(s, schemas.CreateCollectionGroupDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCollectionGroupDetail_tags, v.Tags)
+	}
 }
 func (v *CreateCollectionGroupDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCollectionGroupDetail, func(s *smithy.Schema) error {
@@ -2168,7 +2172,9 @@ func (v *IngestionJobDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngestionJobDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestionAlerts(s, schemas.IngestionJobDetail_activeAlerts, v.ActiveAlerts)
+	if v.ActiveAlerts != nil {
+		serializeIngestionAlerts(s, schemas.IngestionJobDetail_activeAlerts, v.ActiveAlerts)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.IngestionJobDetail_arn, *v.Arn)
 	}
@@ -2181,7 +2187,9 @@ func (v *IngestionJobDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureIndexName != nil {
 		s.WriteString(schemas.IngestionJobDetail_failureIndexName, *v.FailureIndexName)
 	}
-	serializeIngestionFailureReasons(s, schemas.IngestionJobDetail_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeIngestionFailureReasons(s, schemas.IngestionJobDetail_failureReasons, v.FailureReasons)
+	}
 	if v.IndexName != nil {
 		s.WriteString(schemas.IngestionJobDetail_indexName, *v.IndexName)
 	}
@@ -2548,7 +2556,9 @@ func (v *IngestionStreamDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngestionStreamDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestionAlerts(s, schemas.IngestionStreamDetail_activeAlerts, v.ActiveAlerts)
+	if v.ActiveAlerts != nil {
+		serializeIngestionAlerts(s, schemas.IngestionStreamDetail_activeAlerts, v.ActiveAlerts)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.IngestionStreamDetail_arn, *v.Arn)
 	}
@@ -2561,7 +2571,9 @@ func (v *IngestionStreamDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailureIndexName != nil {
 		s.WriteString(schemas.IngestionStreamDetail_failureIndexName, *v.FailureIndexName)
 	}
-	serializeIngestionFailureReasons(s, schemas.IngestionStreamDetail_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeIngestionFailureReasons(s, schemas.IngestionStreamDetail_failureReasons, v.FailureReasons)
+	}
 	if v.IndexName != nil {
 		s.WriteString(schemas.IngestionStreamDetail_indexName, *v.IndexName)
 	}
@@ -2682,7 +2694,9 @@ func (v *IngestionStreamS3Source) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IngestionStreamS3Source) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamBucketConfigs(s, schemas.IngestionStreamS3Source_buckets, v.Buckets)
+	if v.Buckets != nil {
+		serializeStreamBucketConfigs(s, schemas.IngestionStreamS3Source_buckets, v.Buckets)
+	}
 	if v.SqsArn != nil {
 		s.WriteString(schemas.IngestionStreamS3Source_sqsArn, *v.SqsArn)
 	}
@@ -4182,11 +4196,15 @@ func (v *UpdateVpcEndpointDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateVpcEndpointDetail_name, *v.Name)
 	}
-	serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointDetail_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.UpdateVpcEndpointDetail_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateVpcEndpointDetail_status, string(v.Status))
 	}
-	serializeSubnetIds(s, schemas.UpdateVpcEndpointDetail_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.UpdateVpcEndpointDetail_subnetIds, v.SubnetIds)
+	}
 }
 func (v *UpdateVpcEndpointDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateVpcEndpointDetail, func(s *smithy.Schema) error {
@@ -4310,11 +4328,15 @@ func (v *VpcEndpointDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.VpcEndpointDetail_name, *v.Name)
 	}
-	serializeSecurityGroupIds(s, schemas.VpcEndpointDetail_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcEndpointDetail_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.VpcEndpointDetail_status, string(v.Status))
 	}
-	serializeSubnetIds(s, schemas.VpcEndpointDetail_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcEndpointDetail_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcEndpointDetail_vpcId, *v.VpcId)
 	}

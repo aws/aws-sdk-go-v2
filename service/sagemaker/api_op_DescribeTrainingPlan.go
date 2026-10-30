@@ -168,7 +168,9 @@ func (v *DescribeTrainingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.InUseInstanceCount != nil {
 		s.WriteInt32(schemas.DescribeTrainingPlanResponse_InUseInstanceCount, *v.InUseInstanceCount)
 	}
-	serializeReservedCapacitySummaries(s, schemas.DescribeTrainingPlanResponse_ReservedCapacitySummaries, v.ReservedCapacitySummaries)
+	if v.ReservedCapacitySummaries != nil {
+		serializeReservedCapacitySummaries(s, schemas.DescribeTrainingPlanResponse_ReservedCapacitySummaries, v.ReservedCapacitySummaries)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.DescribeTrainingPlanResponse_StartTime, *v.StartTime)
 	}
@@ -178,7 +180,9 @@ func (v *DescribeTrainingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.DescribeTrainingPlanResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeSageMakerResourceNames(s, schemas.DescribeTrainingPlanResponse_TargetResources, v.TargetResources)
+	if v.TargetResources != nil {
+		serializeSageMakerResourceNames(s, schemas.DescribeTrainingPlanResponse_TargetResources, v.TargetResources)
+	}
 	if v.TotalInstanceCount != nil {
 		s.WriteInt32(schemas.DescribeTrainingPlanResponse_TotalInstanceCount, *v.TotalInstanceCount)
 	}

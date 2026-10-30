@@ -319,7 +319,9 @@ func (v *RegisterTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerDefinitions(s, schemas.RegisterTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	if v.ContainerDefinitions != nil {
+		serializeContainerDefinitions(s, schemas.RegisterTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	}
 	if v.Cpu != nil {
 		s.WriteString(schemas.RegisterTaskDefinitionRequest_cpu, *v.Cpu)
 	}
@@ -337,7 +339,9 @@ func (v *RegisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Family != nil {
 		s.WriteString(schemas.RegisterTaskDefinitionRequest_family, *v.Family)
 	}
-	serializeInferenceAccelerators(s, schemas.RegisterTaskDefinitionRequest_inferenceAccelerators, v.InferenceAccelerators)
+	if v.InferenceAccelerators != nil {
+		serializeInferenceAccelerators(s, schemas.RegisterTaskDefinitionRequest_inferenceAccelerators, v.InferenceAccelerators)
+	}
 	if v.IpcMode != "" {
 		s.WriteString(schemas.RegisterTaskDefinitionRequest_ipcMode, string(v.IpcMode))
 	}
@@ -350,23 +354,31 @@ func (v *RegisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PidMode != "" {
 		s.WriteString(schemas.RegisterTaskDefinitionRequest_pidMode, string(v.PidMode))
 	}
-	serializeTaskDefinitionPlacementConstraints(s, schemas.RegisterTaskDefinitionRequest_placementConstraints, v.PlacementConstraints)
+	if v.PlacementConstraints != nil {
+		serializeTaskDefinitionPlacementConstraints(s, schemas.RegisterTaskDefinitionRequest_placementConstraints, v.PlacementConstraints)
+	}
 	if v.ProxyConfiguration != nil {
 		s.WriteStruct(schemas.RegisterTaskDefinitionRequest_proxyConfiguration)
 		v.ProxyConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCompatibilityList(s, schemas.RegisterTaskDefinitionRequest_requiresCompatibilities, v.RequiresCompatibilities)
+	if v.RequiresCompatibilities != nil {
+		serializeCompatibilityList(s, schemas.RegisterTaskDefinitionRequest_requiresCompatibilities, v.RequiresCompatibilities)
+	}
 	if v.RuntimePlatform != nil {
 		s.WriteStruct(schemas.RegisterTaskDefinitionRequest_runtimePlatform)
 		v.RuntimePlatform.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.RegisterTaskDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterTaskDefinitionRequest_tags, v.Tags)
+	}
 	if v.TaskRoleArn != nil {
 		s.WriteString(schemas.RegisterTaskDefinitionRequest_taskRoleArn, *v.TaskRoleArn)
 	}
-	serializeVolumeList(s, schemas.RegisterTaskDefinitionRequest_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumeList(s, schemas.RegisterTaskDefinitionRequest_volumes, v.Volumes)
+	}
 }
 
 type RegisterTaskDefinitionOutput struct {
@@ -390,7 +402,9 @@ func (v *RegisterTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.RegisterTaskDefinitionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterTaskDefinitionResponse_tags, v.Tags)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteStruct(schemas.RegisterTaskDefinitionResponse_taskDefinition)
 		v.TaskDefinition.SerializeMembers(s)

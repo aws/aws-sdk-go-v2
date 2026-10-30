@@ -262,7 +262,9 @@ func (v *AdditionalDataset) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdditionalDataset) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguration(s, schemas.AdditionalDataset_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfiguration(s, schemas.AdditionalDataset_Configuration, v.Configuration)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AdditionalDataset_Name, *v.Name)
 	}
@@ -347,7 +349,9 @@ func (v *AttributeConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeName != nil {
 		s.WriteString(schemas.AttributeConfig_AttributeName, *v.AttributeName)
 	}
-	serializeTransformations(s, schemas.AttributeConfig_Transformations, v.Transformations)
+	if v.Transformations != nil {
+		serializeTransformations(s, schemas.AttributeConfig_Transformations, v.Transformations)
+	}
 }
 func (v *AttributeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeConfig, func(s *smithy.Schema) error {
@@ -468,7 +472,9 @@ func (v *CategoricalParameterRange) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CategoricalParameterRange_Name, *v.Name)
 	}
-	serializeValues(s, schemas.CategoricalParameterRange_Values, v.Values)
+	if v.Values != nil {
+		serializeValues(s, schemas.CategoricalParameterRange_Values, v.Values)
+	}
 }
 func (v *CategoricalParameterRange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CategoricalParameterRange, func(s *smithy.Schema) error {
@@ -599,8 +605,12 @@ func (v *DataConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalDatasets(s, schemas.DataConfig_AdditionalDatasets, v.AdditionalDatasets)
-	serializeAttributeConfigs(s, schemas.DataConfig_AttributeConfigs, v.AttributeConfigs)
+	if v.AdditionalDatasets != nil {
+		serializeAdditionalDatasets(s, schemas.DataConfig_AdditionalDatasets, v.AdditionalDatasets)
+	}
+	if v.AttributeConfigs != nil {
+		serializeAttributeConfigs(s, schemas.DataConfig_AttributeConfigs, v.AttributeConfigs)
+	}
 	if v.DatasetGroupArn != nil {
 		s.WriteString(schemas.DataConfig_DatasetGroupArn, *v.DatasetGroupArn)
 	}
@@ -1177,7 +1187,9 @@ func (v *EvaluationResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlgorithmArn != nil {
 		s.WriteString(schemas.EvaluationResult_AlgorithmArn, *v.AlgorithmArn)
 	}
-	serializeTestWindows(s, schemas.EvaluationResult_TestWindows, v.TestWindows)
+	if v.TestWindows != nil {
+		serializeTestWindows(s, schemas.EvaluationResult_TestWindows, v.TestWindows)
+	}
 }
 func (v *EvaluationResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EvaluationResult, func(s *smithy.Schema) error {
@@ -1591,7 +1603,9 @@ func (v *Featurization) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeName != nil {
 		s.WriteString(schemas.Featurization_AttributeName, *v.AttributeName)
 	}
-	serializeFeaturizationPipeline(s, schemas.Featurization_FeaturizationPipeline, v.FeaturizationPipeline)
+	if v.FeaturizationPipeline != nil {
+		serializeFeaturizationPipeline(s, schemas.Featurization_FeaturizationPipeline, v.FeaturizationPipeline)
+	}
 }
 func (v *Featurization) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Featurization, func(s *smithy.Schema) error {
@@ -1685,8 +1699,12 @@ func (v *FeaturizationConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FeaturizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeaturizations(s, schemas.FeaturizationConfig_Featurizations, v.Featurizations)
-	serializeForecastDimensions(s, schemas.FeaturizationConfig_ForecastDimensions, v.ForecastDimensions)
+	if v.Featurizations != nil {
+		serializeFeaturizations(s, schemas.FeaturizationConfig_Featurizations, v.Featurizations)
+	}
+	if v.ForecastDimensions != nil {
+		serializeForecastDimensions(s, schemas.FeaturizationConfig_ForecastDimensions, v.ForecastDimensions)
+	}
 	if v.ForecastFrequency != nil {
 		s.WriteString(schemas.FeaturizationConfig_ForecastFrequency, *v.ForecastFrequency)
 	}
@@ -1770,7 +1788,9 @@ func (v *FeaturizationMethod) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeaturizationMethodName != "" {
 		s.WriteString(schemas.FeaturizationMethod_FeaturizationMethodName, string(v.FeaturizationMethodName))
 	}
-	serializeFeaturizationMethodParameters(s, schemas.FeaturizationMethod_FeaturizationMethodParameters, v.FeaturizationMethodParameters)
+	if v.FeaturizationMethodParameters != nil {
+		serializeFeaturizationMethodParameters(s, schemas.FeaturizationMethod_FeaturizationMethodParameters, v.FeaturizationMethodParameters)
+	}
 }
 func (v *FeaturizationMethod) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FeaturizationMethod, func(s *smithy.Schema) error {
@@ -2166,7 +2186,9 @@ func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetGroupArn != nil {
 		s.WriteString(schemas.InputDataConfig_DatasetGroupArn, *v.DatasetGroupArn)
 	}
-	serializeSupplementaryFeatures(s, schemas.InputDataConfig_SupplementaryFeatures, v.SupplementaryFeatures)
+	if v.SupplementaryFeatures != nil {
+		serializeSupplementaryFeatures(s, schemas.InputDataConfig_SupplementaryFeatures, v.SupplementaryFeatures)
+	}
 }
 func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
@@ -2354,11 +2376,15 @@ func (v *Metrics) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AverageWeightedQuantileLoss != nil {
 		s.WriteFloat64(schemas.Metrics_AverageWeightedQuantileLoss, *v.AverageWeightedQuantileLoss)
 	}
-	serializeErrorMetrics(s, schemas.Metrics_ErrorMetrics, v.ErrorMetrics)
+	if v.ErrorMetrics != nil {
+		serializeErrorMetrics(s, schemas.Metrics_ErrorMetrics, v.ErrorMetrics)
+	}
 	if v.RMSE != nil {
 		s.WriteFloat64(schemas.Metrics_RMSE, *v.RMSE)
 	}
-	serializeWeightedQuantileLosses(s, schemas.Metrics_WeightedQuantileLosses, v.WeightedQuantileLosses)
+	if v.WeightedQuantileLosses != nil {
+		serializeWeightedQuantileLosses(s, schemas.Metrics_WeightedQuantileLosses, v.WeightedQuantileLosses)
+	}
 }
 func (v *Metrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Metrics, func(s *smithy.Schema) error {
@@ -2634,9 +2660,15 @@ func (v *ParameterRanges) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParameterRanges) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoricalParameterRanges(s, schemas.ParameterRanges_CategoricalParameterRanges, v.CategoricalParameterRanges)
-	serializeContinuousParameterRanges(s, schemas.ParameterRanges_ContinuousParameterRanges, v.ContinuousParameterRanges)
-	serializeIntegerParameterRanges(s, schemas.ParameterRanges_IntegerParameterRanges, v.IntegerParameterRanges)
+	if v.CategoricalParameterRanges != nil {
+		serializeCategoricalParameterRanges(s, schemas.ParameterRanges_CategoricalParameterRanges, v.CategoricalParameterRanges)
+	}
+	if v.ContinuousParameterRanges != nil {
+		serializeContinuousParameterRanges(s, schemas.ParameterRanges_ContinuousParameterRanges, v.ContinuousParameterRanges)
+	}
+	if v.IntegerParameterRanges != nil {
+		serializeIntegerParameterRanges(s, schemas.ParameterRanges_IntegerParameterRanges, v.IntegerParameterRanges)
+	}
 }
 func (v *ParameterRanges) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ParameterRanges, func(s *smithy.Schema) error {
@@ -2782,7 +2814,9 @@ func (v *PredictorBaseline) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PredictorBaseline) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBaselineMetrics(s, schemas.PredictorBaseline_BaselineMetrics, v.BaselineMetrics)
+	if v.BaselineMetrics != nil {
+		serializeBaselineMetrics(s, schemas.PredictorBaseline_BaselineMetrics, v.BaselineMetrics)
+	}
 }
 func (v *PredictorBaseline) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictorBaseline, func(s *smithy.Schema) error {
@@ -2861,7 +2895,9 @@ func (v *PredictorExecution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlgorithmArn != nil {
 		s.WriteString(schemas.PredictorExecution_AlgorithmArn, *v.AlgorithmArn)
 	}
-	serializeTestWindowDetails(s, schemas.PredictorExecution_TestWindows, v.TestWindows)
+	if v.TestWindows != nil {
+		serializeTestWindowDetails(s, schemas.PredictorExecution_TestWindows, v.TestWindows)
+	}
 }
 func (v *PredictorExecution) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictorExecution, func(s *smithy.Schema) error {
@@ -2897,7 +2933,9 @@ func (v *PredictorExecutionDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PredictorExecutionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePredictorExecutions(s, schemas.PredictorExecutionDetails_PredictorExecutions, v.PredictorExecutions)
+	if v.PredictorExecutions != nil {
+		serializePredictorExecutions(s, schemas.PredictorExecutionDetails_PredictorExecutions, v.PredictorExecutions)
+	}
 }
 func (v *PredictorExecutionDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictorExecutionDetails, func(s *smithy.Schema) error {
@@ -2969,7 +3007,9 @@ func (v *PredictorMonitorEvaluation) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Message != nil {
 		s.WriteString(schemas.PredictorMonitorEvaluation_Message, *v.Message)
 	}
-	serializeMetricResults(s, schemas.PredictorMonitorEvaluation_MetricResults, v.MetricResults)
+	if v.MetricResults != nil {
+		serializeMetricResults(s, schemas.PredictorMonitorEvaluation_MetricResults, v.MetricResults)
+	}
 	if v.MonitorArn != nil {
 		s.WriteString(schemas.PredictorMonitorEvaluation_MonitorArn, *v.MonitorArn)
 	}
@@ -3291,7 +3331,9 @@ func (v *Schema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Schema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaAttributes(s, schemas.Schema_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeSchemaAttributes(s, schemas.Schema_Attributes, v.Attributes)
+	}
 }
 func (v *Schema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Schema, func(s *smithy.Schema) error {
@@ -4186,7 +4228,9 @@ func (v *TimeSeriesTransformation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTimeSeriesConditions(s, schemas.TimeSeriesTransformation_TimeSeriesConditions, v.TimeSeriesConditions)
+	if v.TimeSeriesConditions != nil {
+		serializeTimeSeriesConditions(s, schemas.TimeSeriesTransformation_TimeSeriesConditions, v.TimeSeriesConditions)
+	}
 }
 func (v *TimeSeriesTransformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TimeSeriesTransformation, func(s *smithy.Schema) error {
@@ -4434,7 +4478,9 @@ func (v *WhatIfForecastExportSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Status != nil {
 		s.WriteString(schemas.WhatIfForecastExportSummary_Status, *v.Status)
 	}
-	serializeWhatIfForecastArnListForExport(s, schemas.WhatIfForecastExportSummary_WhatIfForecastArns, v.WhatIfForecastArns)
+	if v.WhatIfForecastArns != nil {
+		serializeWhatIfForecastArnListForExport(s, schemas.WhatIfForecastExportSummary_WhatIfForecastArns, v.WhatIfForecastArns)
+	}
 	if v.WhatIfForecastExportArn != nil {
 		s.WriteString(schemas.WhatIfForecastExportSummary_WhatIfForecastExportArn, *v.WhatIfForecastExportArn)
 	}

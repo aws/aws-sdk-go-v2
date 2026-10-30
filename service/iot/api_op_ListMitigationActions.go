@@ -85,7 +85,9 @@ func (v *ListMitigationActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMitigationActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMitigationActionIdentifierList(s, schemas.ListMitigationActionsResponse_actionIdentifiers, v.ActionIdentifiers)
+	if v.ActionIdentifiers != nil {
+		serializeMitigationActionIdentifierList(s, schemas.ListMitigationActionsResponse_actionIdentifiers, v.ActionIdentifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMitigationActionsResponse_nextToken, *v.NextToken)
 	}

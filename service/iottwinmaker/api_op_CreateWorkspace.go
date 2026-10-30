@@ -67,7 +67,9 @@ func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3Location != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_s3Location, *v.S3Location)
 	}
-	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_workspaceId, *v.WorkspaceId)
 	}

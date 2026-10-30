@@ -135,7 +135,9 @@ func (v *CreateDataRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSe
 		v.S3.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateDataRepositoryAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDataRepositoryAssociationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDataRepositoryAssociationOutput struct {

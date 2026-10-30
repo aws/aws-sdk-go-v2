@@ -78,7 +78,9 @@ func (v *ListInstanceGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstanceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceGroupList(s, schemas.ListInstanceGroupsOutput_InstanceGroups, v.InstanceGroups)
+	if v.InstanceGroups != nil {
+		serializeInstanceGroupList(s, schemas.ListInstanceGroupsOutput_InstanceGroups, v.InstanceGroups)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListInstanceGroupsOutput_Marker, *v.Marker)
 	}

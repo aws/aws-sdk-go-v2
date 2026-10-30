@@ -113,7 +113,9 @@ func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Database != nil {
 		s.WriteString(schemas.BatchExecuteStatementRequest_database, *v.Database)
 	}
-	serializeSqlParameterSets(s, schemas.BatchExecuteStatementRequest_parameterSets, v.ParameterSets)
+	if v.ParameterSets != nil {
+		serializeSqlParameterSets(s, schemas.BatchExecuteStatementRequest_parameterSets, v.ParameterSets)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.BatchExecuteStatementRequest_resourceArn, *v.ResourceArn)
 	}
@@ -178,7 +180,9 @@ func (v *BatchExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateResults(s, schemas.BatchExecuteStatementResponse_updateResults, v.UpdateResults)
+	if v.UpdateResults != nil {
+		serializeUpdateResults(s, schemas.BatchExecuteStatementResponse_updateResults, v.UpdateResults)
+	}
 }
 func (v *BatchExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchExecuteStatementResponse, func(s *smithy.Schema) error {

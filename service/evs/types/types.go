@@ -184,7 +184,9 @@ func (v *ConnectivityInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectivityInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteServerPeeringList(s, schemas.ConnectivityInfo_privateRouteServerPeerings, v.PrivateRouteServerPeerings)
+	if v.PrivateRouteServerPeerings != nil {
+		serializeRouteServerPeeringList(s, schemas.ConnectivityInfo_privateRouteServerPeerings, v.PrivateRouteServerPeerings)
+	}
 }
 func (v *ConnectivityInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectivityInfo, func(s *smithy.Schema) error {
@@ -249,7 +251,9 @@ func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplianceFqdn != nil {
 		s.WriteString(schemas.Connector_applianceFqdn, *v.ApplianceFqdn)
 	}
-	serializeConnectorsChecksList(s, schemas.Connector_checks, v.Checks)
+	if v.Checks != nil {
+		serializeConnectorsChecksList(s, schemas.Connector_checks, v.Checks)
+	}
 	if v.ConnectorId != nil {
 		s.WriteString(schemas.Connector_connectorId, *v.ConnectorId)
 	}
@@ -558,7 +562,9 @@ func (v *Environment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChecksList(s, schemas.Environment_checks, v.Checks)
+	if v.Checks != nil {
+		serializeChecksList(s, schemas.Environment_checks, v.Checks)
+	}
 	if v.ConnectivityInfo != nil {
 		s.WriteStruct(schemas.Environment_connectivityInfo)
 		v.ConnectivityInfo.SerializeMembers(s)
@@ -567,7 +573,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Environment_createdAt, *v.CreatedAt)
 	}
-	serializeSecretList(s, schemas.Environment_credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeSecretList(s, schemas.Environment_credentials, v.Credentials)
+	}
 	if v.EnvironmentArn != nil {
 		s.WriteString(schemas.Environment_environmentArn, *v.EnvironmentArn)
 	}
@@ -586,7 +594,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.Environment_kmsKeyId, *v.KmsKeyId)
 	}
-	serializeLicenseInfoList(s, schemas.Environment_licenseInfo, v.LicenseInfo)
+	if v.LicenseInfo != nil {
+		serializeLicenseInfoList(s, schemas.Environment_licenseInfo, v.LicenseInfo)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.Environment_modifiedAt, *v.ModifiedAt)
 	}
@@ -927,7 +937,9 @@ func (v *Host) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.Host_modifiedAt, *v.ModifiedAt)
 	}
-	serializeNetworkInterfaceList(s, schemas.Host_networkInterfaces, v.NetworkInterfaces)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaceList(s, schemas.Host_networkInterfaces, v.NetworkInterfaces)
+	}
 	if v.PlacementGroupId != nil {
 		s.WriteString(schemas.Host_placementGroupId, *v.PlacementGroupId)
 	}
@@ -1333,7 +1345,9 @@ func (v *InstanceTypeEsxVersionsInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InstanceTypeEsxVersionsInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEsxVersionList(s, schemas.InstanceTypeEsxVersionsInfo_esxVersions, v.EsxVersions)
+	if v.EsxVersions != nil {
+		serializeEsxVersionList(s, schemas.InstanceTypeEsxVersionsInfo_esxVersions, v.EsxVersions)
+	}
 	if v.InstanceType != "" {
 		s.WriteString(schemas.InstanceTypeEsxVersionsInfo_instanceType, string(v.InstanceType))
 	}
@@ -1493,7 +1507,9 @@ func (v *ServiceAccessSecurityGroups) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceAccessSecurityGroups) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroups(s, schemas.ServiceAccessSecurityGroups_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.ServiceAccessSecurityGroups_securityGroups, v.SecurityGroups)
+	}
 }
 func (v *ServiceAccessSecurityGroups) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceAccessSecurityGroups, func(s *smithy.Schema) error {
@@ -1727,7 +1743,9 @@ func (v *VcfVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultEsxVersion != nil {
 		s.WriteString(schemas.VcfVersionInfo_defaultEsxVersion, *v.DefaultEsxVersion)
 	}
-	serializeInstanceTypeList(s, schemas.VcfVersionInfo_instanceTypes, v.InstanceTypes)
+	if v.InstanceTypes != nil {
+		serializeInstanceTypeList(s, schemas.VcfVersionInfo_instanceTypes, v.InstanceTypes)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.VcfVersionInfo_status, *v.Status)
 	}
@@ -1818,7 +1836,9 @@ func (v *Vlan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Vlan_createdAt, *v.CreatedAt)
 	}
-	serializeEipAssociationList(s, schemas.Vlan_eipAssociations, v.EipAssociations)
+	if v.EipAssociations != nil {
+		serializeEipAssociationList(s, schemas.Vlan_eipAssociations, v.EipAssociations)
+	}
 	if v.FunctionName != nil {
 		s.WriteString(schemas.Vlan_functionName, *v.FunctionName)
 	}

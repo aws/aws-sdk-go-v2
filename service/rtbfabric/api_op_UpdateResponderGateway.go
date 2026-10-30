@@ -139,7 +139,9 @@ func (v *UpdateResponderGatewayInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ListenerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeManagedEndpointConfiguration(s, schemas.UpdateResponderGatewayRequest_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
+	if v.ManagedEndpointConfiguration != nil {
+		serializeManagedEndpointConfiguration(s, schemas.UpdateResponderGatewayRequest_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
+	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.UpdateResponderGatewayRequest_port, *v.Port)
 	}

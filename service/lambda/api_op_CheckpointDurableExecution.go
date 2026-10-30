@@ -81,7 +81,9 @@ func (v *CheckpointDurableExecutionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DurableExecutionArn != nil {
 		s.WriteString(schemas.CheckpointDurableExecutionRequest_DurableExecutionArn, *v.DurableExecutionArn)
 	}
-	serializeOperationUpdates(s, schemas.CheckpointDurableExecutionRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeOperationUpdates(s, schemas.CheckpointDurableExecutionRequest_Updates, v.Updates)
+	}
 }
 
 // The response from the CheckpointDurableExecution operation.

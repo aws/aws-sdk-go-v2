@@ -134,7 +134,9 @@ func (v *DescribeCreateCaseOptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCreateCaseOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationTypeOptionsList(s, schemas.DescribeCreateCaseOptionsResponse_communicationTypes, v.CommunicationTypes)
+	if v.CommunicationTypes != nil {
+		serializeCommunicationTypeOptionsList(s, schemas.DescribeCreateCaseOptionsResponse_communicationTypes, v.CommunicationTypes)
+	}
 	if v.LanguageAvailability != nil {
 		s.WriteString(schemas.DescribeCreateCaseOptionsResponse_languageAvailability, *v.LanguageAvailability)
 	}

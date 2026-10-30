@@ -117,7 +117,9 @@ func (v *CreateGrantInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedOperationList(s, schemas.CreateGrantRequest_AllowedOperations, v.AllowedOperations)
+	if v.AllowedOperations != nil {
+		serializeAllowedOperationList(s, schemas.CreateGrantRequest_AllowedOperations, v.AllowedOperations)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateGrantRequest_ClientToken, *v.ClientToken)
 	}
@@ -138,8 +140,12 @@ func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrincipalArnList(s, schemas.CreateGrantRequest_Principals, v.Principals)
-	serializeTagList(s, schemas.CreateGrantRequest_Tags, v.Tags)
+	if v.Principals != nil {
+		serializePrincipalArnList(s, schemas.CreateGrantRequest_Principals, v.Principals)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGrantRequest_Tags, v.Tags)
+	}
 }
 
 type CreateGrantOutput struct {

@@ -219,8 +219,12 @@ func (v *GetDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.GetDbBackupOutput_type, string(v.Type))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.GetDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.GetDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.GetDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.GetDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *GetDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDbBackupOutput, func(s *smithy.Schema) error {

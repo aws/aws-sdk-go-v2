@@ -52,7 +52,9 @@ func (v *ApplicationComponent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentRemarks != nil {
 		s.WriteString(schemas.ApplicationComponent_ComponentRemarks, *v.ComponentRemarks)
 	}
-	serializeDetectedWorkload(s, schemas.ApplicationComponent_DetectedWorkload, v.DetectedWorkload)
+	if v.DetectedWorkload != nil {
+		serializeDetectedWorkload(s, schemas.ApplicationComponent_DetectedWorkload, v.DetectedWorkload)
+	}
 	if v.Monitor != nil {
 		s.WriteBool(schemas.ApplicationComponent_Monitor, *v.Monitor)
 	}
@@ -933,7 +935,9 @@ func (v *Problem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.Problem_EndTime, *v.EndTime)
 	}
-	serializeFeedback(s, schemas.Problem_Feedback, v.Feedback)
+	if v.Feedback != nil {
+		serializeFeedback(s, schemas.Problem_Feedback, v.Feedback)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Problem_Id, *v.Id)
 	}
@@ -1058,7 +1062,9 @@ func (v *RelatedObservations) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RelatedObservations) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObservationList(s, schemas.RelatedObservations_ObservationList, v.ObservationList)
+	if v.ObservationList != nil {
+		serializeObservationList(s, schemas.RelatedObservations_ObservationList, v.ObservationList)
+	}
 }
 func (v *RelatedObservations) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RelatedObservations, func(s *smithy.Schema) error {

@@ -76,7 +76,9 @@ func (v *AttachStaticIpOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttachStaticIpOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.AttachStaticIpResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.AttachStaticIpResult_operations, v.Operations)
+	}
 }
 func (v *AttachStaticIpOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttachStaticIpResult, func(s *smithy.Schema) error {

@@ -90,11 +90,15 @@ func (v *CreateSupportPermitInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Permit.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningKeyInfo(s, schemas.CreateSupportPermitInput_signingKeyInfo, v.SigningKeyInfo)
+	if v.SigningKeyInfo != nil {
+		serializeSigningKeyInfo(s, schemas.CreateSupportPermitInput_signingKeyInfo, v.SigningKeyInfo)
+	}
 	if v.SupportCaseDisplayId != nil {
 		s.WriteString(schemas.CreateSupportPermitInput_supportCaseDisplayId, *v.SupportCaseDisplayId)
 	}
-	serializeTags(s, schemas.CreateSupportPermitInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSupportPermitInput_tags, v.Tags)
+	}
 }
 
 type CreateSupportPermitOutput struct {
@@ -168,14 +172,18 @@ func (v *CreateSupportPermitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Permit.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSigningKeyInfo(s, schemas.CreateSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	if v.SigningKeyInfo != nil {
+		serializeSigningKeyInfo(s, schemas.CreateSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateSupportPermitOutput_status, string(v.Status))
 	}
 	if v.SupportCaseDisplayId != nil {
 		s.WriteString(schemas.CreateSupportPermitOutput_supportCaseDisplayId, *v.SupportCaseDisplayId)
 	}
-	serializeTags(s, schemas.CreateSupportPermitOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSupportPermitOutput_tags, v.Tags)
+	}
 }
 func (v *CreateSupportPermitOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSupportPermitOutput, func(s *smithy.Schema) error {

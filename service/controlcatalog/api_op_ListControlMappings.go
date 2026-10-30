@@ -87,7 +87,9 @@ func (v *ListControlMappingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListControlMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlMappings(s, schemas.ListControlMappingsResponse_ControlMappings, v.ControlMappings)
+	if v.ControlMappings != nil {
+		serializeControlMappings(s, schemas.ListControlMappingsResponse_ControlMappings, v.ControlMappings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListControlMappingsResponse_NextToken, *v.NextToken)
 	}

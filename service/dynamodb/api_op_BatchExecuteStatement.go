@@ -77,7 +77,9 @@ func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.BatchExecuteStatementInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
-	serializePartiQLBatchRequest(s, schemas.BatchExecuteStatementInput_Statements, v.Statements)
+	if v.Statements != nil {
+		serializePartiQLBatchRequest(s, schemas.BatchExecuteStatementInput_Statements, v.Statements)
+	}
 }
 
 type BatchExecuteStatementOutput struct {
@@ -103,8 +105,12 @@ func (v *BatchExecuteStatementOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumedCapacityMultiple(s, schemas.BatchExecuteStatementOutput_ConsumedCapacity, v.ConsumedCapacity)
-	serializePartiQLBatchResponse(s, schemas.BatchExecuteStatementOutput_Responses, v.Responses)
+	if v.ConsumedCapacity != nil {
+		serializeConsumedCapacityMultiple(s, schemas.BatchExecuteStatementOutput_ConsumedCapacity, v.ConsumedCapacity)
+	}
+	if v.Responses != nil {
+		serializePartiQLBatchResponse(s, schemas.BatchExecuteStatementOutput_Responses, v.Responses)
+	}
 }
 func (v *BatchExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchExecuteStatementOutput, func(s *smithy.Schema) error {

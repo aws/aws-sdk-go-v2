@@ -106,7 +106,9 @@ func (v *DescribeVirtualInterfacesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.VirtualInterfaces_nextToken, *v.NextToken)
 	}
-	serializeVirtualInterfaceList(s, schemas.VirtualInterfaces_virtualInterfaces, v.VirtualInterfaces)
+	if v.VirtualInterfaces != nil {
+		serializeVirtualInterfaceList(s, schemas.VirtualInterfaces_virtualInterfaces, v.VirtualInterfaces)
+	}
 }
 func (v *DescribeVirtualInterfacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VirtualInterfaces, func(s *smithy.Schema) error {

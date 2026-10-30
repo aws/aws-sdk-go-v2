@@ -94,7 +94,9 @@ func (v *ListDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExternalId != nil {
 		s.WriteString(schemas.ListDeploymentsInput_externalId, *v.ExternalId)
 	}
-	serializeDeploymentStatusList(s, schemas.ListDeploymentsInput_includeOnlyStatuses, v.IncludeOnlyStatuses)
+	if v.IncludeOnlyStatuses != nil {
+		serializeDeploymentStatusList(s, schemas.ListDeploymentsInput_includeOnlyStatuses, v.IncludeOnlyStatuses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentsInput_nextToken, *v.NextToken)
 	}
@@ -124,7 +126,9 @@ func (v *ListDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentsList(s, schemas.ListDeploymentsOutput_deployments, v.Deployments)
+	if v.Deployments != nil {
+		serializeDeploymentsList(s, schemas.ListDeploymentsOutput_deployments, v.Deployments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentsOutput_nextToken, *v.NextToken)
 	}

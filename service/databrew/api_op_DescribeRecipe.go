@@ -147,8 +147,12 @@ func (v *DescribeRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.DescribeRecipeResponse_ResourceArn, *v.ResourceArn)
 	}
-	serializeRecipeStepList(s, schemas.DescribeRecipeResponse_Steps, v.Steps)
-	serializeTagMap(s, schemas.DescribeRecipeResponse_Tags, v.Tags)
+	if v.Steps != nil {
+		serializeRecipeStepList(s, schemas.DescribeRecipeResponse_Steps, v.Steps)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeRecipeResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRecipeResponse, func(s *smithy.Schema) error {

@@ -78,11 +78,15 @@ func (v *CreateExtensionAssociationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ExtensionVersionNumber != nil {
 		s.WriteInt32(schemas.CreateExtensionAssociationRequest_ExtensionVersionNumber, *v.ExtensionVersionNumber)
 	}
-	serializeParameterValueMap(s, schemas.CreateExtensionAssociationRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterValueMap(s, schemas.CreateExtensionAssociationRequest_Parameters, v.Parameters)
+	}
 	if v.ResourceIdentifier != nil {
 		s.WriteString(schemas.CreateExtensionAssociationRequest_ResourceIdentifier, *v.ResourceIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateExtensionAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateExtensionAssociationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateExtensionAssociationOutput struct {
@@ -131,7 +135,9 @@ func (v *CreateExtensionAssociationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Id != nil {
 		s.WriteString(schemas.ExtensionAssociation_Id, *v.Id)
 	}
-	serializeParameterValueMap(s, schemas.ExtensionAssociation_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterValueMap(s, schemas.ExtensionAssociation_Parameters, v.Parameters)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ExtensionAssociation_ResourceArn, *v.ResourceArn)
 	}

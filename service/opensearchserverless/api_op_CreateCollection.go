@@ -98,7 +98,9 @@ func (v *CreateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StandbyReplicas != "" {
 		s.WriteString(schemas.CreateCollectionRequest_standbyReplicas, string(v.StandbyReplicas))
 	}
-	serializeTags(s, schemas.CreateCollectionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCollectionRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateCollectionRequest_type, string(v.Type))
 	}

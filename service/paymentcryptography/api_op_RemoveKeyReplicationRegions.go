@@ -84,7 +84,9 @@ func (v *RemoveKeyReplicationRegionsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.RemoveKeyReplicationRegionsInput_KeyIdentifier, *v.KeyIdentifier)
 	}
-	serializeRegions(s, schemas.RemoveKeyReplicationRegionsInput_ReplicationRegions, v.ReplicationRegions)
+	if v.ReplicationRegions != nil {
+		serializeRegions(s, schemas.RemoveKeyReplicationRegionsInput_ReplicationRegions, v.ReplicationRegions)
+	}
 }
 
 // Output from removing replication regions from a key.

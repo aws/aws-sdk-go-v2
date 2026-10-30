@@ -76,7 +76,9 @@ func (v *ListAllowListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAllowListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAllowListSummary(s, schemas.ListAllowListsResponse_allowLists, v.AllowLists)
+	if v.AllowLists != nil {
+		serialize__listOfAllowListSummary(s, schemas.ListAllowListsResponse_allowLists, v.AllowLists)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAllowListsResponse_nextToken, *v.NextToken)
 	}

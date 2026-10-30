@@ -102,7 +102,9 @@ func (v *ListAssistantAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssistantAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssistantAssociationSummaryList(s, schemas.ListAssistantAssociationsResponse_assistantAssociationSummaries, v.AssistantAssociationSummaries)
+	if v.AssistantAssociationSummaries != nil {
+		serializeAssistantAssociationSummaryList(s, schemas.ListAssistantAssociationsResponse_assistantAssociationSummaries, v.AssistantAssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssistantAssociationsResponse_nextToken, *v.NextToken)
 	}

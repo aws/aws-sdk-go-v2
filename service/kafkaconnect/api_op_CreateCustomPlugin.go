@@ -73,7 +73,9 @@ func (v *CreateCustomPluginInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCustomPluginRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateCustomPluginRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCustomPluginRequest_tags, v.Tags)
+	}
 }
 
 type CreateCustomPluginOutput struct {

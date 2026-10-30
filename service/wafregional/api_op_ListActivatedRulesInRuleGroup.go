@@ -100,7 +100,9 @@ func (v *ListActivatedRulesInRuleGroupOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListActivatedRulesInRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActivatedRules(s, schemas.ListActivatedRulesInRuleGroupResponse_ActivatedRules, v.ActivatedRules)
+	if v.ActivatedRules != nil {
+		serializeActivatedRules(s, schemas.ListActivatedRulesInRuleGroupResponse_ActivatedRules, v.ActivatedRules)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListActivatedRulesInRuleGroupResponse_NextMarker, *v.NextMarker)
 	}

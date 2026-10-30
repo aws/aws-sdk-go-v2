@@ -85,7 +85,9 @@ func (v *UpdateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LinkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTypesInput(s, schemas.UpdateLinkInput_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesInput(s, schemas.UpdateLinkInput_ResourceTypes, v.ResourceTypes)
+	}
 }
 
 type UpdateLinkOutput struct {
@@ -147,11 +149,15 @@ func (v *UpdateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LinkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTypesOutput(s, schemas.UpdateLinkOutput_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesOutput(s, schemas.UpdateLinkOutput_ResourceTypes, v.ResourceTypes)
+	}
 	if v.SinkArn != nil {
 		s.WriteString(schemas.UpdateLinkOutput_SinkArn, *v.SinkArn)
 	}
-	serializeTagMapOutput(s, schemas.UpdateLinkOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.UpdateLinkOutput_Tags, v.Tags)
+	}
 }
 func (v *UpdateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateLinkOutput, func(s *smithy.Schema) error {

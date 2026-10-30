@@ -141,7 +141,9 @@ func (v *ListViolationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListViolationEventsResponse_nextToken, *v.NextToken)
 	}
-	serializeViolationEvents(s, schemas.ListViolationEventsResponse_violationEvents, v.ViolationEvents)
+	if v.ViolationEvents != nil {
+		serializeViolationEvents(s, schemas.ListViolationEventsResponse_violationEvents, v.ViolationEvents)
+	}
 }
 func (v *ListViolationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListViolationEventsResponse, func(s *smithy.Schema) error {

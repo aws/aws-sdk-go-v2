@@ -92,11 +92,15 @@ func (v *TranslateKeyMaterialInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TranslateKeyMaterialInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIncomingKeyMaterial(s, schemas.TranslateKeyMaterialInput_IncomingKeyMaterial, v.IncomingKeyMaterial)
+	if v.IncomingKeyMaterial != nil {
+		serializeIncomingKeyMaterial(s, schemas.TranslateKeyMaterialInput_IncomingKeyMaterial, v.IncomingKeyMaterial)
+	}
 	if v.KeyCheckValueAlgorithm != "" {
 		s.WriteString(schemas.TranslateKeyMaterialInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
 	}
-	serializeOutgoingKeyMaterial(s, schemas.TranslateKeyMaterialInput_OutgoingKeyMaterial, v.OutgoingKeyMaterial)
+	if v.OutgoingKeyMaterial != nil {
+		serializeOutgoingKeyMaterial(s, schemas.TranslateKeyMaterialInput_OutgoingKeyMaterial, v.OutgoingKeyMaterial)
+	}
 }
 
 type TranslateKeyMaterialOutput struct {

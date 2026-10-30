@@ -65,7 +65,9 @@ func (v *AddCustomRoutingEndpointsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddCustomRoutingEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingEndpointConfigurations(s, schemas.AddCustomRoutingEndpointsRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointConfigurations != nil {
+		serializeCustomRoutingEndpointConfigurations(s, schemas.AddCustomRoutingEndpointsRequest_EndpointConfigurations, v.EndpointConfigurations)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.AddCustomRoutingEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
 	}
@@ -93,7 +95,9 @@ func (v *AddCustomRoutingEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddCustomRoutingEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingEndpointDescriptions(s, schemas.AddCustomRoutingEndpointsResponse_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointDescriptions != nil {
+		serializeCustomRoutingEndpointDescriptions(s, schemas.AddCustomRoutingEndpointsResponse_EndpointDescriptions, v.EndpointDescriptions)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.AddCustomRoutingEndpointsResponse_EndpointGroupArn, *v.EndpointGroupArn)
 	}

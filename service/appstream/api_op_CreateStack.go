@@ -116,7 +116,9 @@ func (v *CreateStackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.CreateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.CreateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	}
 	if v.AgentAccessConfig != nil {
 		s.WriteStruct(schemas.CreateStackRequest_AgentAccessConfig)
 		v.AgentAccessConfig.SerializeMembers(s)
@@ -138,7 +140,9 @@ func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateStackRequest_DisplayName, *v.DisplayName)
 	}
-	serializeEmbedHostDomains(s, schemas.CreateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	if v.EmbedHostDomains != nil {
+		serializeEmbedHostDomains(s, schemas.CreateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	}
 	if v.FeedbackURL != nil {
 		s.WriteString(schemas.CreateStackRequest_FeedbackURL, *v.FeedbackURL)
 	}
@@ -151,14 +155,20 @@ func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageConnectorAuthentication != "" {
 		s.WriteString(schemas.CreateStackRequest_StorageConnectorAuthentication, string(v.StorageConnectorAuthentication))
 	}
-	serializeStorageConnectorList(s, schemas.CreateStackRequest_StorageConnectors, v.StorageConnectors)
+	if v.StorageConnectors != nil {
+		serializeStorageConnectorList(s, schemas.CreateStackRequest_StorageConnectors, v.StorageConnectors)
+	}
 	if v.StreamingExperienceSettings != nil {
 		s.WriteStruct(schemas.CreateStackRequest_StreamingExperienceSettings)
 		v.StreamingExperienceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateStackRequest_Tags, v.Tags)
-	serializeUserSettingList(s, schemas.CreateStackRequest_UserSettings, v.UserSettings)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStackRequest_Tags, v.Tags)
+	}
+	if v.UserSettings != nil {
+		serializeUserSettingList(s, schemas.CreateStackRequest_UserSettings, v.UserSettings)
+	}
 }
 
 type CreateStackOutput struct {

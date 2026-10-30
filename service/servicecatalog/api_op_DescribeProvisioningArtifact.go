@@ -115,13 +115,17 @@ func (v *DescribeProvisioningArtifactOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProvisioningArtifactInfo(s, schemas.DescribeProvisioningArtifactOutput_Info, v.Info)
+	if v.Info != nil {
+		serializeProvisioningArtifactInfo(s, schemas.DescribeProvisioningArtifactOutput_Info, v.Info)
+	}
 	if v.ProvisioningArtifactDetail != nil {
 		s.WriteStruct(schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactDetail)
 		v.ProvisioningArtifactDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProvisioningArtifactParameters(s, schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactParameters, v.ProvisioningArtifactParameters)
+	if v.ProvisioningArtifactParameters != nil {
+		serializeProvisioningArtifactParameters(s, schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactParameters, v.ProvisioningArtifactParameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeProvisioningArtifactOutput_Status, string(v.Status))
 	}

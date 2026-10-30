@@ -86,14 +86,18 @@ func (v *UpdateProjectProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainUnitIdentifier != nil {
 		s.WriteString(schemas.UpdateProjectProfileInput_domainUnitIdentifier, *v.DomainUnitIdentifier)
 	}
-	serializeEnvironmentConfigurationsList(s, schemas.UpdateProjectProfileInput_environmentConfigurations, v.EnvironmentConfigurations)
+	if v.EnvironmentConfigurations != nil {
+		serializeEnvironmentConfigurationsList(s, schemas.UpdateProjectProfileInput_environmentConfigurations, v.EnvironmentConfigurations)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateProjectProfileInput_identifier, *v.Identifier)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateProjectProfileInput_name, *v.Name)
 	}
-	serializeProjectResourceTagParameters(s, schemas.UpdateProjectProfileInput_projectResourceTags, v.ProjectResourceTags)
+	if v.ProjectResourceTags != nil {
+		serializeProjectResourceTagParameters(s, schemas.UpdateProjectProfileInput_projectResourceTags, v.ProjectResourceTags)
+	}
 	if v.ProjectResourceTagsDescription != nil {
 		s.WriteString(schemas.UpdateProjectProfileInput_projectResourceTagsDescription, *v.ProjectResourceTagsDescription)
 	}
@@ -183,7 +187,9 @@ func (v *UpdateProjectProfileOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DomainUnitId != nil {
 		s.WriteString(schemas.UpdateProjectProfileOutput_domainUnitId, *v.DomainUnitId)
 	}
-	serializeEnvironmentConfigurationsList(s, schemas.UpdateProjectProfileOutput_environmentConfigurations, v.EnvironmentConfigurations)
+	if v.EnvironmentConfigurations != nil {
+		serializeEnvironmentConfigurationsList(s, schemas.UpdateProjectProfileOutput_environmentConfigurations, v.EnvironmentConfigurations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateProjectProfileOutput_id, *v.Id)
 	}
@@ -193,7 +199,9 @@ func (v *UpdateProjectProfileOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateProjectProfileOutput_name, *v.Name)
 	}
-	serializeProjectResourceTagParameters(s, schemas.UpdateProjectProfileOutput_projectResourceTags, v.ProjectResourceTags)
+	if v.ProjectResourceTags != nil {
+		serializeProjectResourceTagParameters(s, schemas.UpdateProjectProfileOutput_projectResourceTags, v.ProjectResourceTags)
+	}
 	if v.ProjectResourceTagsDescription != nil {
 		s.WriteString(schemas.UpdateProjectProfileOutput_projectResourceTagsDescription, *v.ProjectResourceTagsDescription)
 	}

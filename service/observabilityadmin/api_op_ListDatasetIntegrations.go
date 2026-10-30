@@ -76,7 +76,9 @@ func (v *ListDatasetIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetIntegrationSummaries(s, schemas.ListDatasetIntegrationsOutput_DatasetIntegrationSummaries, v.DatasetIntegrationSummaries)
+	if v.DatasetIntegrationSummaries != nil {
+		serializeDatasetIntegrationSummaries(s, schemas.ListDatasetIntegrationsOutput_DatasetIntegrationSummaries, v.DatasetIntegrationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetIntegrationsOutput_NextToken, *v.NextToken)
 	}

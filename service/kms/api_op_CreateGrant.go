@@ -276,7 +276,9 @@ func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.CreateGrantRequest_DryRun, *v.DryRun)
 	}
-	serializeGrantTokenList(s, schemas.CreateGrantRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.CreateGrantRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.GranteePrincipal != nil {
 		s.WriteString(schemas.CreateGrantRequest_GranteePrincipal, *v.GranteePrincipal)
 	}
@@ -289,7 +291,9 @@ func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateGrantRequest_Name, *v.Name)
 	}
-	serializeGrantOperationList(s, schemas.CreateGrantRequest_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeGrantOperationList(s, schemas.CreateGrantRequest_Operations, v.Operations)
+	}
 	if v.RetiringPrincipal != nil {
 		s.WriteString(schemas.CreateGrantRequest_RetiringPrincipal, *v.RetiringPrincipal)
 	}

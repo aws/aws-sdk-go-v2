@@ -53,7 +53,9 @@ func (v *BatchRemoveRoleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchRemoveRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessorIdList(s, schemas.BatchRemoveRoleInput_accessorIds, v.AccessorIds)
+	if v.AccessorIds != nil {
+		serializeAccessorIdList(s, schemas.BatchRemoveRoleInput_accessorIds, v.AccessorIds)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.BatchRemoveRoleInput_role, string(v.Role))
 	}
@@ -87,8 +89,12 @@ func (v *BatchRemoveRoleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchRemoveRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchErrorList(s, schemas.BatchRemoveRoleOutput_errors, v.Errors)
-	serializeAccessorIdList(s, schemas.BatchRemoveRoleOutput_removedAccessorIds, v.RemovedAccessorIds)
+	if v.Errors != nil {
+		serializeBatchErrorList(s, schemas.BatchRemoveRoleOutput_errors, v.Errors)
+	}
+	if v.RemovedAccessorIds != nil {
+		serializeAccessorIdList(s, schemas.BatchRemoveRoleOutput_removedAccessorIds, v.RemovedAccessorIds)
+	}
 }
 func (v *BatchRemoveRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchRemoveRoleOutput, func(s *smithy.Schema) error {

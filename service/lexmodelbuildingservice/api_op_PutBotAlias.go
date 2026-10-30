@@ -102,7 +102,9 @@ func (v *PutBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutBotAliasRequest_name, *v.Name)
 	}
-	serializeTagList(s, schemas.PutBotAliasRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutBotAliasRequest_tags, v.Tags)
+	}
 }
 
 type PutBotAliasOutput struct {
@@ -174,7 +176,9 @@ func (v *PutBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutBotAliasResponse_name, *v.Name)
 	}
-	serializeTagList(s, schemas.PutBotAliasResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutBotAliasResponse_tags, v.Tags)
+	}
 }
 func (v *PutBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutBotAliasResponse, func(s *smithy.Schema) error {

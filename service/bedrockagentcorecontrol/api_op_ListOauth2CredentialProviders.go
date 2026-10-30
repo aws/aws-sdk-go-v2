@@ -76,7 +76,9 @@ func (v *ListOauth2CredentialProvidersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListOauth2CredentialProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOauth2CredentialProviders(s, schemas.ListOauth2CredentialProvidersResponse_credentialProviders, v.CredentialProviders)
+	if v.CredentialProviders != nil {
+		serializeOauth2CredentialProviders(s, schemas.ListOauth2CredentialProvidersResponse_credentialProviders, v.CredentialProviders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOauth2CredentialProvidersResponse_nextToken, *v.NextToken)
 	}

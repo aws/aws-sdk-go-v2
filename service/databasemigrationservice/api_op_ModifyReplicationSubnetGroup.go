@@ -57,7 +57,9 @@ func (v *ModifyReplicationSubnetGroupInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ReplicationSubnetGroupIdentifier != nil {
 		s.WriteString(schemas.ModifyReplicationSubnetGroupMessage_ReplicationSubnetGroupIdentifier, *v.ReplicationSubnetGroupIdentifier)
 	}
-	serializeSubnetIdentifierList(s, schemas.ModifyReplicationSubnetGroupMessage_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdentifierList(s, schemas.ModifyReplicationSubnetGroupMessage_SubnetIds, v.SubnetIds)
+	}
 }
 
 type ModifyReplicationSubnetGroupOutput struct {

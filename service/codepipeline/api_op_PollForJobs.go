@@ -69,7 +69,9 @@ func (v *PollForJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxBatchSize != nil {
 		s.WriteInt32(schemas.PollForJobsInput_maxBatchSize, *v.MaxBatchSize)
 	}
-	serializeQueryParamMap(s, schemas.PollForJobsInput_queryParam, v.QueryParam)
+	if v.QueryParam != nil {
+		serializeQueryParamMap(s, schemas.PollForJobsInput_queryParam, v.QueryParam)
+	}
 }
 
 // Represents the output of a PollForJobs action.
@@ -91,7 +93,9 @@ func (v *PollForJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PollForJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobList(s, schemas.PollForJobsOutput_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeJobList(s, schemas.PollForJobsOutput_jobs, v.Jobs)
+	}
 }
 func (v *PollForJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PollForJobsOutput, func(s *smithy.Schema) error {

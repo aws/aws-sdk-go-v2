@@ -78,8 +78,12 @@ func (v *DescribeJobFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBefore != nil {
 		s.WriteTime(schemas.DescribeJobFlowsInput_CreatedBefore, *v.CreatedBefore)
 	}
-	serializeXmlStringList(s, schemas.DescribeJobFlowsInput_JobFlowIds, v.JobFlowIds)
-	serializeJobFlowExecutionStateList(s, schemas.DescribeJobFlowsInput_JobFlowStates, v.JobFlowStates)
+	if v.JobFlowIds != nil {
+		serializeXmlStringList(s, schemas.DescribeJobFlowsInput_JobFlowIds, v.JobFlowIds)
+	}
+	if v.JobFlowStates != nil {
+		serializeJobFlowExecutionStateList(s, schemas.DescribeJobFlowsInput_JobFlowStates, v.JobFlowStates)
+	}
 }
 
 // The output for the DescribeJobFlows operation.
@@ -101,7 +105,9 @@ func (v *DescribeJobFlowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobFlowDetailList(s, schemas.DescribeJobFlowsOutput_JobFlows, v.JobFlows)
+	if v.JobFlows != nil {
+		serializeJobFlowDetailList(s, schemas.DescribeJobFlowsOutput_JobFlows, v.JobFlows)
+	}
 }
 func (v *DescribeJobFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeJobFlowsOutput, func(s *smithy.Schema) error {

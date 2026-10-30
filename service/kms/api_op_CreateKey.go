@@ -555,7 +555,9 @@ func (v *CreateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Policy != nil {
 		s.WriteString(schemas.CreateKeyRequest_Policy, *v.Policy)
 	}
-	serializeTagList(s, schemas.CreateKeyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateKeyRequest_Tags, v.Tags)
+	}
 	if v.XksKeyId != nil {
 		s.WriteString(schemas.CreateKeyRequest_XksKeyId, *v.XksKeyId)
 	}

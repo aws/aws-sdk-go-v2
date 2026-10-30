@@ -74,7 +74,9 @@ func (v *ListCrossAccountAuthorizationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListCrossAccountAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCrossAccountAuthorization(s, schemas.ListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations, v.CrossAccountAuthorizations)
+	if v.CrossAccountAuthorizations != nil {
+		serialize__listOfCrossAccountAuthorization(s, schemas.ListCrossAccountAuthorizationsResponse_CrossAccountAuthorizations, v.CrossAccountAuthorizations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrossAccountAuthorizationsResponse_NextToken, *v.NextToken)
 	}

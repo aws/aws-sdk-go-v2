@@ -33,8 +33,12 @@ func (v *Alternative) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Alternative) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityList(s, schemas.Alternative_Entities, v.Entities)
-	serializeItemList(s, schemas.Alternative_Items, v.Items)
+	if v.Entities != nil {
+		serializeEntityList(s, schemas.Alternative_Entities, v.Entities)
+	}
+	if v.Items != nil {
+		serializeItemList(s, schemas.Alternative_Items, v.Items)
+	}
 	if v.Transcript != nil {
 		s.WriteString(schemas.Alternative_Transcript, *v.Transcript)
 	}
@@ -463,8 +467,12 @@ func (v *CategoryEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CategoryEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CategoryEvent_MatchedCategories, v.MatchedCategories)
-	serializeMatchedCategoryDetails(s, schemas.CategoryEvent_MatchedDetails, v.MatchedDetails)
+	if v.MatchedCategories != nil {
+		serializeStringList(s, schemas.CategoryEvent_MatchedCategories, v.MatchedCategories)
+	}
+	if v.MatchedDetails != nil {
+		serializeMatchedCategoryDetails(s, schemas.CategoryEvent_MatchedDetails, v.MatchedDetails)
+	}
 }
 func (v *CategoryEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CategoryEvent, func(s *smithy.Schema) error {
@@ -759,7 +767,9 @@ func (v *ConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelDefinitions(s, schemas.ConfigurationEvent_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeChannelDefinitions(s, schemas.ConfigurationEvent_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.PostCallAnalyticsSettings != nil {
 		s.WriteStruct(schemas.ConfigurationEvent_PostCallAnalyticsSettings)
 		v.PostCallAnalyticsSettings.SerializeMembers(s)
@@ -1076,8 +1086,12 @@ func (v *MedicalAlternative) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalAlternative) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalEntityList(s, schemas.MedicalAlternative_Entities, v.Entities)
-	serializeMedicalItemList(s, schemas.MedicalAlternative_Items, v.Items)
+	if v.Entities != nil {
+		serializeMedicalEntityList(s, schemas.MedicalAlternative_Entities, v.Entities)
+	}
+	if v.Items != nil {
+		serializeMedicalItemList(s, schemas.MedicalAlternative_Items, v.Items)
+	}
 	if v.Transcript != nil {
 		s.WriteString(schemas.MedicalAlternative_Transcript, *v.Transcript)
 	}
@@ -1295,7 +1309,9 @@ func (v *MedicalResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalAlternativeList(s, schemas.MedicalResult_Alternatives, v.Alternatives)
+	if v.Alternatives != nil {
+		serializeMedicalAlternativeList(s, schemas.MedicalResult_Alternatives, v.Alternatives)
+	}
 	if v.ChannelId != nil {
 		s.WriteString(schemas.MedicalResult_ChannelId, *v.ChannelId)
 	}
@@ -1512,7 +1528,9 @@ func (v *MedicalScribeConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalScribeConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeConfigurationEvent_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeConfigurationEvent_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.EncryptionSettings != nil {
 		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_EncryptionSettings)
 		v.EncryptionSettings.SerializeMembers(s)
@@ -1669,7 +1687,9 @@ func (v *MedicalScribeEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalScribeEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKMSEncryptionContextMap(s, schemas.MedicalScribeEncryptionSettings_KmsEncryptionContext, v.KmsEncryptionContext)
+	if v.KmsEncryptionContext != nil {
+		serializeKMSEncryptionContextMap(s, schemas.MedicalScribeEncryptionSettings_KmsEncryptionContext, v.KmsEncryptionContext)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.MedicalScribeEncryptionSettings_KmsKeyId, *v.KmsKeyId)
 	}
@@ -2027,7 +2047,9 @@ func (v *MedicalScribeStreamDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalScribeStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeStreamDetails_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeStreamDetails_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.EncryptionSettings != nil {
 		s.WriteStruct(schemas.MedicalScribeStreamDetails_EncryptionSettings)
 		v.EncryptionSettings.SerializeMembers(s)
@@ -2331,7 +2353,9 @@ func (v *MedicalScribeTranscriptSegment) SerializeMembers(s smithy.ShapeSerializ
 	if v.IsPartial != false {
 		s.WriteBool(schemas.MedicalScribeTranscriptSegment_IsPartial, v.IsPartial)
 	}
-	serializeMedicalScribeTranscriptItemList(s, schemas.MedicalScribeTranscriptSegment_Items, v.Items)
+	if v.Items != nil {
+		serializeMedicalScribeTranscriptItemList(s, schemas.MedicalScribeTranscriptSegment_Items, v.Items)
+	}
 	if v.SegmentId != nil {
 		s.WriteString(schemas.MedicalScribeTranscriptSegment_SegmentId, *v.SegmentId)
 	}
@@ -2385,7 +2409,9 @@ func (v *MedicalTranscript) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalTranscript) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalResultList(s, schemas.MedicalTranscript_Results, v.Results)
+	if v.Results != nil {
+		serializeMedicalResultList(s, schemas.MedicalTranscript_Results, v.Results)
+	}
 }
 func (v *MedicalTranscript) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MedicalTranscript, func(s *smithy.Schema) error {
@@ -2486,7 +2512,9 @@ func (v *PointsOfInterest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PointsOfInterest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimestampRanges(s, schemas.PointsOfInterest_TimestampRanges, v.TimestampRanges)
+	if v.TimestampRanges != nil {
+		serializeTimestampRanges(s, schemas.PointsOfInterest_TimestampRanges, v.TimestampRanges)
+	}
 }
 func (v *PointsOfInterest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PointsOfInterest, func(s *smithy.Schema) error {
@@ -2674,7 +2702,9 @@ func (v *Result) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Result) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlternativeList(s, schemas.Result_Alternatives, v.Alternatives)
+	if v.Alternatives != nil {
+		serializeAlternativeList(s, schemas.Result_Alternatives, v.Alternatives)
+	}
 	if v.ChannelId != nil {
 		s.WriteString(schemas.Result_ChannelId, *v.ChannelId)
 	}
@@ -2687,7 +2717,9 @@ func (v *Result) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.Result_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLanguageIdentification(s, schemas.Result_LanguageIdentification, v.LanguageIdentification)
+	if v.LanguageIdentification != nil {
+		serializeLanguageIdentification(s, schemas.Result_LanguageIdentification, v.LanguageIdentification)
+	}
 	if v.ResultId != nil {
 		s.WriteString(schemas.Result_ResultId, *v.ResultId)
 	}
@@ -2793,7 +2825,9 @@ func (v *Transcript) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResultList(s, schemas.Transcript_Results, v.Results)
+	if v.Results != nil {
+		serializeResultList(s, schemas.Transcript_Results, v.Results)
+	}
 }
 func (v *Transcript) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Transcript, func(s *smithy.Schema) error {
@@ -2937,16 +2971,24 @@ func (v *UtteranceEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndOffsetMillis != nil {
 		s.WriteInt64(schemas.UtteranceEvent_EndOffsetMillis, *v.EndOffsetMillis)
 	}
-	serializeCallAnalyticsEntityList(s, schemas.UtteranceEvent_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeCallAnalyticsEntityList(s, schemas.UtteranceEvent_Entities, v.Entities)
+	}
 	if v.IsPartial != false {
 		s.WriteBool(schemas.UtteranceEvent_IsPartial, v.IsPartial)
 	}
-	serializeIssuesDetected(s, schemas.UtteranceEvent_IssuesDetected, v.IssuesDetected)
-	serializeCallAnalyticsItemList(s, schemas.UtteranceEvent_Items, v.Items)
+	if v.IssuesDetected != nil {
+		serializeIssuesDetected(s, schemas.UtteranceEvent_IssuesDetected, v.IssuesDetected)
+	}
+	if v.Items != nil {
+		serializeCallAnalyticsItemList(s, schemas.UtteranceEvent_Items, v.Items)
+	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.UtteranceEvent_LanguageCode, string(v.LanguageCode))
 	}
-	serializeCallAnalyticsLanguageIdentification(s, schemas.UtteranceEvent_LanguageIdentification, v.LanguageIdentification)
+	if v.LanguageIdentification != nil {
+		serializeCallAnalyticsLanguageIdentification(s, schemas.UtteranceEvent_LanguageIdentification, v.LanguageIdentification)
+	}
 	if v.ParticipantRole != "" {
 		s.WriteString(schemas.UtteranceEvent_ParticipantRole, string(v.ParticipantRole))
 	}

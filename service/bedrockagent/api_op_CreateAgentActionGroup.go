@@ -143,7 +143,9 @@ func (v *CreateAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionGroupExecutor(s, schemas.CreateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	if v.ActionGroupExecutor != nil {
+		serializeActionGroupExecutor(s, schemas.CreateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	}
 	if v.ActionGroupName != nil {
 		s.WriteString(schemas.CreateAgentActionGroupRequest_actionGroupName, *v.ActionGroupName)
 	}
@@ -156,18 +158,24 @@ func (v *CreateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AgentVersion != nil {
 		s.WriteString(schemas.CreateAgentActionGroupRequest_agentVersion, *v.AgentVersion)
 	}
-	serializeAPISchema(s, schemas.CreateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	if v.ApiSchema != nil {
+		serializeAPISchema(s, schemas.CreateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAgentActionGroupRequest_clientToken, *v.ClientToken)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAgentActionGroupRequest_description, *v.Description)
 	}
-	serializeFunctionSchema(s, schemas.CreateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	if v.FunctionSchema != nil {
+		serializeFunctionSchema(s, schemas.CreateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	}
 	if v.ParentActionGroupSignature != "" {
 		s.WriteString(schemas.CreateAgentActionGroupRequest_parentActionGroupSignature, string(v.ParentActionGroupSignature))
 	}
-	serializeActionGroupSignatureParams(s, schemas.CreateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+	if v.ParentActionGroupSignatureParams != nil {
+		serializeActionGroupSignatureParams(s, schemas.CreateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+	}
 }
 
 type CreateAgentActionGroupOutput struct {

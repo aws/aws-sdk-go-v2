@@ -97,7 +97,9 @@ func (v *ListIngestionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIngestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestions(s, schemas.ListIngestionsResponse_Ingestions, v.Ingestions)
+	if v.Ingestions != nil {
+		serializeIngestions(s, schemas.ListIngestionsResponse_Ingestions, v.Ingestions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIngestionsResponse_NextToken, *v.NextToken)
 	}

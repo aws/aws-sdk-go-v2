@@ -355,12 +355,18 @@ func (v *StartTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.JobExecutionSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeKMSEncryptionContextMap(s, schemas.StartTranscriptionJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.KMSEncryptionContext != nil {
+		serializeKMSEncryptionContextMap(s, schemas.StartTranscriptionJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.StartTranscriptionJobRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLanguageIdSettingsMap(s, schemas.StartTranscriptionJobRequest_LanguageIdSettings, v.LanguageIdSettings)
-	serializeLanguageOptions(s, schemas.StartTranscriptionJobRequest_LanguageOptions, v.LanguageOptions)
+	if v.LanguageIdSettings != nil {
+		serializeLanguageIdSettingsMap(s, schemas.StartTranscriptionJobRequest_LanguageIdSettings, v.LanguageIdSettings)
+	}
+	if v.LanguageOptions != nil {
+		serializeLanguageOptions(s, schemas.StartTranscriptionJobRequest_LanguageOptions, v.LanguageOptions)
+	}
 	if v.Media != nil {
 		s.WriteStruct(schemas.StartTranscriptionJobRequest_Media)
 		v.Media.SerializeMembers(s)
@@ -396,8 +402,12 @@ func (v *StartTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Subtitles.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartTranscriptionJobRequest_Tags, v.Tags)
-	serializeToxicityDetection(s, schemas.StartTranscriptionJobRequest_ToxicityDetection, v.ToxicityDetection)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartTranscriptionJobRequest_Tags, v.Tags)
+	}
+	if v.ToxicityDetection != nil {
+		serializeToxicityDetection(s, schemas.StartTranscriptionJobRequest_ToxicityDetection, v.ToxicityDetection)
+	}
 	if v.TranscriptionJobName != nil {
 		s.WriteString(schemas.StartTranscriptionJobRequest_TranscriptionJobName, *v.TranscriptionJobName)
 	}

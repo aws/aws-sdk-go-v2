@@ -39,7 +39,9 @@ func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeFilterName != nil {
 		s.WriteString(schemas.AttributeFilter_AttributeFilterName, *v.AttributeFilterName)
 	}
-	serializeAttributeFilterValues(s, schemas.AttributeFilter_AttributeFilterValues, v.AttributeFilterValues)
+	if v.AttributeFilterValues != nil {
+		serializeAttributeFilterValues(s, schemas.AttributeFilter_AttributeFilterValues, v.AttributeFilterValues)
+	}
 }
 func (v *AttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeFilter, func(s *smithy.Schema) error {
@@ -96,13 +98,17 @@ func (v *AuditFinding) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuditFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditorResults(s, schemas.AuditFinding_AuditorResults, v.AuditorResults)
+	if v.AuditorResults != nil {
+		serializeAuditorResults(s, schemas.AuditFinding_AuditorResults, v.AuditorResults)
+	}
 	if v.DependencyGraph != nil {
 		s.WriteStruct(schemas.AuditFinding_DependencyGraph)
 		v.DependencyGraph.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.AuditFinding_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.AuditFinding_KeyAttributes, v.KeyAttributes)
+	}
 	if v.MetricGraph != nil {
 		s.WriteStruct(schemas.AuditFinding_MetricGraph)
 		v.MetricGraph.SerializeMembers(s)
@@ -171,7 +177,9 @@ func (v *AuditorResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Auditor != nil {
 		s.WriteString(schemas.AuditorResult_Auditor, *v.Auditor)
 	}
-	serializeDataMap(s, schemas.AuditorResult_Data, v.Data)
+	if v.Data != nil {
+		serializeDataMap(s, schemas.AuditorResult_Data, v.Data)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AuditorResult_Description, *v.Description)
 	}
@@ -227,7 +235,9 @@ func (v *AuditTarget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuditTarget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditTargetEntity(s, schemas.AuditTarget_Data, v.Data)
+	if v.Data != nil {
+		serializeAuditTargetEntity(s, schemas.AuditTarget_Data, v.Data)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.AuditTarget_Type, *v.Type)
 	}
@@ -354,7 +364,9 @@ func (v *BatchDeleteByResourceArns) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.BatchDeleteByResourceArns_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeBatchDeleteResourceArnList(s, schemas.BatchDeleteByResourceArns_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeBatchDeleteResourceArnList(s, schemas.BatchDeleteByResourceArns_ResourceArns, v.ResourceArns)
+	}
 }
 func (v *BatchDeleteByResourceArns) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteByResourceArns, func(s *smithy.Schema) error {
@@ -1006,7 +1018,9 @@ func (v *ChangeEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChangeEventType != "" {
 		s.WriteString(schemas.ChangeEvent_ChangeEventType, string(v.ChangeEventType))
 	}
-	serializeAttributes(s, schemas.ChangeEvent_Entity, v.Entity)
+	if v.Entity != nil {
+		serializeAttributes(s, schemas.ChangeEvent_Entity, v.Entity)
+	}
 	if v.EventId != nil {
 		s.WriteString(schemas.ChangeEvent_EventId, *v.EventId)
 	}
@@ -1094,13 +1108,17 @@ func (v *CodeCaptureConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeCaptureConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureArguments, v.CaptureArguments)
+	if v.CaptureArguments != nil {
+		serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureArguments, v.CaptureArguments)
+	}
 	if v.CaptureLimits != nil {
 		s.WriteStruct(schemas.CodeCaptureConfiguration_CaptureLimits)
 		v.CaptureLimits.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureLocals, v.CaptureLocals)
+	if v.CaptureLocals != nil {
+		serializeStringList(s, schemas.CodeCaptureConfiguration_CaptureLocals, v.CaptureLocals)
+	}
 	if v.CaptureReturn != nil {
 		s.WriteBool(schemas.CodeCaptureConfiguration_CaptureReturn, *v.CaptureReturn)
 	}
@@ -1272,7 +1290,9 @@ func (v *CompositeSliConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompositeSliConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompositeSliComponents(s, schemas.CompositeSliConfig_Components, v.Components)
+	if v.Components != nil {
+		serializeCompositeSliComponents(s, schemas.CompositeSliConfig_Components, v.Components)
+	}
 	if v.SelectionConfig != nil {
 		s.WriteStruct(schemas.CompositeSliConfig_SelectionConfig)
 		v.SelectionConfig.SerializeMembers(s)
@@ -1336,7 +1356,9 @@ func (v *DependencyConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DependencyConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DependencyConfig_DependencyKeyAttributes, v.DependencyKeyAttributes)
+	if v.DependencyKeyAttributes != nil {
+		serializeAttributes(s, schemas.DependencyConfig_DependencyKeyAttributes, v.DependencyKeyAttributes)
+	}
 	if v.DependencyOperationName != nil {
 		s.WriteString(schemas.DependencyConfig_DependencyOperationName, *v.DependencyOperationName)
 	}
@@ -1377,8 +1399,12 @@ func (v *DependencyGraph) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DependencyGraph) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdges(s, schemas.DependencyGraph_Edges, v.Edges)
-	serializeNodes(s, schemas.DependencyGraph_Nodes, v.Nodes)
+	if v.Edges != nil {
+		serializeEdges(s, schemas.DependencyGraph_Edges, v.Edges)
+	}
+	if v.Nodes != nil {
+		serializeNodes(s, schemas.DependencyGraph_Nodes, v.Nodes)
+	}
 }
 func (v *DependencyGraph) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DependencyGraph, func(s *smithy.Schema) error {
@@ -1620,7 +1646,9 @@ func (v *Goal) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttainmentGoal != nil {
 		s.WriteFloat64(schemas.Goal_AttainmentGoal, *v.AttainmentGoal)
 	}
-	serializeInterval(s, schemas.Goal_Interval, v.Interval)
+	if v.Interval != nil {
+		serializeInterval(s, schemas.Goal_Interval, v.Interval)
+	}
 	if v.WarningThreshold != nil {
 		s.WriteFloat64(schemas.Goal_WarningThreshold, *v.WarningThreshold)
 	}
@@ -1678,7 +1706,9 @@ func (v *GroupingAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer)
 	if v.GroupingName != nil {
 		s.WriteString(schemas.GroupingAttributeDefinition_GroupingName, *v.GroupingName)
 	}
-	serializeGroupingSourceKeyStringList(s, schemas.GroupingAttributeDefinition_GroupingSourceKeys, v.GroupingSourceKeys)
+	if v.GroupingSourceKeys != nil {
+		serializeGroupingSourceKeyStringList(s, schemas.GroupingAttributeDefinition_GroupingSourceKeys, v.GroupingSourceKeys)
+	}
 }
 func (v *GroupingAttributeDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GroupingAttributeDefinition, func(s *smithy.Schema) error {
@@ -1723,7 +1753,9 @@ func (v *GroupingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GroupingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupingAttributeDefinitions(s, schemas.GroupingConfiguration_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	if v.GroupingAttributeDefinitions != nil {
+		serializeGroupingAttributeDefinitions(s, schemas.GroupingConfiguration_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GroupingConfiguration_UpdatedAt, *v.UpdatedAt)
 	}
@@ -1814,8 +1846,12 @@ func (v *InstrumentationConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.ARN != nil {
 		s.WriteString(schemas.InstrumentationConfiguration_ARN, *v.ARN)
 	}
-	serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfiguration_AttributeFilters, v.AttributeFilters)
-	serializeCaptureConfiguration(s, schemas.InstrumentationConfiguration_CaptureConfiguration, v.CaptureConfiguration)
+	if v.AttributeFilters != nil {
+		serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfiguration_AttributeFilters, v.AttributeFilters)
+	}
+	if v.CaptureConfiguration != nil {
+		serializeCaptureConfiguration(s, schemas.InstrumentationConfiguration_CaptureConfiguration, v.CaptureConfiguration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.InstrumentationConfiguration_CreatedAt, *v.CreatedAt)
 	}
@@ -1831,7 +1867,9 @@ func (v *InstrumentationConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.InstrumentationConfiguration_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocation(s, schemas.InstrumentationConfiguration_Location, v.Location)
+	if v.Location != nil {
+		serializeLocation(s, schemas.InstrumentationConfiguration_Location, v.Location)
+	}
 	if v.LocationHash != nil {
 		s.WriteString(schemas.InstrumentationConfiguration_LocationHash, *v.LocationHash)
 	}
@@ -2059,8 +2097,12 @@ func (v *InstrumentationConfigurationWithoutServiceEnv) SerializeMembers(s smith
 	if v.ARN != nil {
 		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_ARN, *v.ARN)
 	}
-	serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters, v.AttributeFilters)
-	serializeCaptureConfiguration(s, schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, v.CaptureConfiguration)
+	if v.AttributeFilters != nil {
+		serializeDynamicInstrumentationAttributeFilters(s, schemas.InstrumentationConfigurationWithoutServiceEnv_AttributeFilters, v.AttributeFilters)
+	}
+	if v.CaptureConfiguration != nil {
+		serializeCaptureConfiguration(s, schemas.InstrumentationConfigurationWithoutServiceEnv_CaptureConfiguration, v.CaptureConfiguration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.InstrumentationConfigurationWithoutServiceEnv_CreatedAt, *v.CreatedAt)
 	}
@@ -2073,7 +2115,9 @@ func (v *InstrumentationConfigurationWithoutServiceEnv) SerializeMembers(s smith
 	if v.InstrumentationType != "" {
 		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_InstrumentationType, string(v.InstrumentationType))
 	}
-	serializeLocation(s, schemas.InstrumentationConfigurationWithoutServiceEnv_Location, v.Location)
+	if v.Location != nil {
+		serializeLocation(s, schemas.InstrumentationConfigurationWithoutServiceEnv_Location, v.Location)
+	}
 	if v.LocationHash != nil {
 		s.WriteString(schemas.InstrumentationConfigurationWithoutServiceEnv_LocationHash, *v.LocationHash)
 	}
@@ -2319,7 +2363,9 @@ func (v *Metric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.Metric_MetricName, *v.MetricName)
 	}
@@ -2528,7 +2574,9 @@ func (v *MetricGraph) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.MetricGraph_EndTime, *v.EndTime)
 	}
-	serializeMetricDataQueries(s, schemas.MetricGraph_MetricDataQueries, v.MetricDataQueries)
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.MetricGraph_MetricDataQueries, v.MetricDataQueries)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.MetricGraph_StartTime, *v.StartTime)
 	}
@@ -2592,7 +2640,9 @@ func (v *MetricReference) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.MetricReference_AccountId, *v.AccountId)
 	}
-	serializeDimensions(s, schemas.MetricReference_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.MetricReference_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.MetricReference_MetricName, *v.MetricName)
 	}
@@ -2647,8 +2697,12 @@ func (v *MetricSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.MetricSource_MetricSourceAttributes, v.MetricSourceAttributes)
-	serializeAttributes(s, schemas.MetricSource_MetricSourceKeyAttributes, v.MetricSourceKeyAttributes)
+	if v.MetricSourceAttributes != nil {
+		serializeAttributes(s, schemas.MetricSource_MetricSourceAttributes, v.MetricSourceAttributes)
+	}
+	if v.MetricSourceKeyAttributes != nil {
+		serializeAttributes(s, schemas.MetricSource_MetricSourceKeyAttributes, v.MetricSourceKeyAttributes)
+	}
 }
 func (v *MetricSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricSource, func(s *smithy.Schema) error {
@@ -2842,7 +2896,9 @@ func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Duration != nil {
 		s.WriteFloat64(schemas.Node_Duration, *v.Duration)
 	}
-	serializeAttributes(s, schemas.Node_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.Node_KeyAttributes, v.KeyAttributes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Node_Name, *v.Name)
 	}
@@ -3120,7 +3176,9 @@ func (v *RequestBasedServiceLevelIndicatorMetric) SerializeMembers(s smithy.Shap
 		v.DependencyConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.RequestBasedServiceLevelIndicatorMetric_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.RequestBasedServiceLevelIndicatorMetric_KeyAttributes, v.KeyAttributes)
+	}
 	if v.MetricSource != nil {
 		s.WriteStruct(schemas.RequestBasedServiceLevelIndicatorMetric_MetricSource)
 		v.MetricSource.SerializeMembers(s)
@@ -3129,11 +3187,15 @@ func (v *RequestBasedServiceLevelIndicatorMetric) SerializeMembers(s smithy.Shap
 	if v.MetricType != "" {
 		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetric_MetricType, string(v.MetricType))
 	}
-	serializeMonitoredRequestCountMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric, v.MonitoredRequestCountMetric)
+	if v.MonitoredRequestCountMetric != nil {
+		serializeMonitoredRequestCountMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetric_MonitoredRequestCountMetric, v.MonitoredRequestCountMetric)
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetric_OperationName, *v.OperationName)
 	}
-	serializeMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric, v.TotalRequestCountMetric)
+	if v.TotalRequestCountMetric != nil {
+		serializeMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetric_TotalRequestCountMetric, v.TotalRequestCountMetric)
+	}
 }
 func (v *RequestBasedServiceLevelIndicatorMetric) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestBasedServiceLevelIndicatorMetric, func(s *smithy.Schema) error {
@@ -3250,7 +3312,9 @@ func (v *RequestBasedServiceLevelIndicatorMetricConfig) SerializeMembers(s smith
 		v.DependencyConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_KeyAttributes, v.KeyAttributes)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricName, *v.MetricName)
 	}
@@ -3262,11 +3326,15 @@ func (v *RequestBasedServiceLevelIndicatorMetricConfig) SerializeMembers(s smith
 	if v.MetricType != "" {
 		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_MetricType, string(v.MetricType))
 	}
-	serializeMonitoredRequestCountMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric, v.MonitoredRequestCountMetric)
+	if v.MonitoredRequestCountMetric != nil {
+		serializeMonitoredRequestCountMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_MonitoredRequestCountMetric, v.MonitoredRequestCountMetric)
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.RequestBasedServiceLevelIndicatorMetricConfig_OperationName, *v.OperationName)
 	}
-	serializeMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric, v.TotalRequestCountMetric)
+	if v.TotalRequestCountMetric != nil {
+		serializeMetricDataQueries(s, schemas.RequestBasedServiceLevelIndicatorMetricConfig_TotalRequestCountMetric, v.TotalRequestCountMetric)
+	}
 }
 func (v *RequestBasedServiceLevelIndicatorMetricConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RequestBasedServiceLevelIndicatorMetricConfig, func(s *smithy.Schema) error {
@@ -3517,11 +3585,21 @@ func (v *Service) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMaps(s, schemas.Service_AttributeMaps, v.AttributeMaps)
-	serializeAttributes(s, schemas.Service_KeyAttributes, v.KeyAttributes)
-	serializeLogGroupReferences(s, schemas.Service_LogGroupReferences, v.LogGroupReferences)
-	serializeMetricReferences(s, schemas.Service_MetricReferences, v.MetricReferences)
-	serializeServiceGroups(s, schemas.Service_ServiceGroups, v.ServiceGroups)
+	if v.AttributeMaps != nil {
+		serializeAttributeMaps(s, schemas.Service_AttributeMaps, v.AttributeMaps)
+	}
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.Service_KeyAttributes, v.KeyAttributes)
+	}
+	if v.LogGroupReferences != nil {
+		serializeLogGroupReferences(s, schemas.Service_LogGroupReferences, v.LogGroupReferences)
+	}
+	if v.MetricReferences != nil {
+		serializeMetricReferences(s, schemas.Service_MetricReferences, v.MetricReferences)
+	}
+	if v.ServiceGroups != nil {
+		serializeServiceGroups(s, schemas.Service_ServiceGroups, v.ServiceGroups)
+	}
 }
 func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
@@ -3590,11 +3668,15 @@ func (v *ServiceDependency) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceDependency) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.ServiceDependency_DependencyKeyAttributes, v.DependencyKeyAttributes)
+	if v.DependencyKeyAttributes != nil {
+		serializeAttributes(s, schemas.ServiceDependency_DependencyKeyAttributes, v.DependencyKeyAttributes)
+	}
 	if v.DependencyOperationName != nil {
 		s.WriteString(schemas.ServiceDependency_DependencyOperationName, *v.DependencyOperationName)
 	}
-	serializeMetricReferences(s, schemas.ServiceDependency_MetricReferences, v.MetricReferences)
+	if v.MetricReferences != nil {
+		serializeMetricReferences(s, schemas.ServiceDependency_MetricReferences, v.MetricReferences)
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.ServiceDependency_OperationName, *v.OperationName)
 	}
@@ -3668,11 +3750,15 @@ func (v *ServiceDependent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceDependent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.ServiceDependent_DependentKeyAttributes, v.DependentKeyAttributes)
+	if v.DependentKeyAttributes != nil {
+		serializeAttributes(s, schemas.ServiceDependent_DependentKeyAttributes, v.DependentKeyAttributes)
+	}
 	if v.DependentOperationName != nil {
 		s.WriteString(schemas.ServiceDependent_DependentOperationName, *v.DependentOperationName)
 	}
-	serializeMetricReferences(s, schemas.ServiceDependent_MetricReferences, v.MetricReferences)
+	if v.MetricReferences != nil {
+		serializeMetricReferences(s, schemas.ServiceDependent_MetricReferences, v.MetricReferences)
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.ServiceDependent_OperationName, *v.OperationName)
 	}
@@ -4020,8 +4106,12 @@ func (v *ServiceLevelIndicatorMetric) SerializeMembers(s smithy.ShapeSerializer)
 		v.DependencyConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.ServiceLevelIndicatorMetric_KeyAttributes, v.KeyAttributes)
-	serializeMetricDataQueries(s, schemas.ServiceLevelIndicatorMetric_MetricDataQueries, v.MetricDataQueries)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.ServiceLevelIndicatorMetric_KeyAttributes, v.KeyAttributes)
+	}
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.ServiceLevelIndicatorMetric_MetricDataQueries, v.MetricDataQueries)
+	}
 	if v.MetricSource != nil {
 		s.WriteStruct(schemas.ServiceLevelIndicatorMetric_MetricSource)
 		v.MetricSource.SerializeMembers(s)
@@ -4151,8 +4241,12 @@ func (v *ServiceLevelIndicatorMetricConfig) SerializeMembers(s smithy.ShapeSeria
 		v.DependencyConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.ServiceLevelIndicatorMetricConfig_KeyAttributes, v.KeyAttributes)
-	serializeMetricDataQueries(s, schemas.ServiceLevelIndicatorMetricConfig_MetricDataQueries, v.MetricDataQueries)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.ServiceLevelIndicatorMetricConfig_KeyAttributes, v.KeyAttributes)
+	}
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.ServiceLevelIndicatorMetricConfig_MetricDataQueries, v.MetricDataQueries)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.ServiceLevelIndicatorMetricConfig_MetricName, *v.MetricName)
 	}
@@ -4307,7 +4401,9 @@ func (v *ServiceLevelObjective) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutoInvestigationEnabled != nil {
 		s.WriteBool(schemas.ServiceLevelObjective_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
 	}
-	serializeBurnRateConfigurations(s, schemas.ServiceLevelObjective_BurnRateConfigurations, v.BurnRateConfigurations)
+	if v.BurnRateConfigurations != nil {
+		serializeBurnRateConfigurations(s, schemas.ServiceLevelObjective_BurnRateConfigurations, v.BurnRateConfigurations)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.ServiceLevelObjective_CreatedTime, *v.CreatedTime)
 	}
@@ -4796,7 +4892,9 @@ func (v *ServiceLevelObjectiveSummary) SerializeMembers(s smithy.ShapeSerializer
 	if v.EvaluationType != "" {
 		s.WriteString(schemas.ServiceLevelObjectiveSummary_EvaluationType, string(v.EvaluationType))
 	}
-	serializeAttributes(s, schemas.ServiceLevelObjectiveSummary_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.ServiceLevelObjectiveSummary_KeyAttributes, v.KeyAttributes)
+	}
 	if v.MetricSource != nil {
 		s.WriteStruct(schemas.ServiceLevelObjectiveSummary_MetricSource)
 		v.MetricSource.SerializeMembers(s)
@@ -4885,7 +4983,9 @@ func (v *ServiceOperation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceOperation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricReferences(s, schemas.ServiceOperation_MetricReferences, v.MetricReferences)
+	if v.MetricReferences != nil {
+		serializeMetricReferences(s, schemas.ServiceOperation_MetricReferences, v.MetricReferences)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ServiceOperation_Name, *v.Name)
 	}
@@ -4986,9 +5086,15 @@ func (v *ServiceState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeFilters(s, schemas.ServiceState_AttributeFilters, v.AttributeFilters)
-	serializeLatestChangeEvents(s, schemas.ServiceState_LatestChangeEvents, v.LatestChangeEvents)
-	serializeAttributes(s, schemas.ServiceState_Service, v.Service)
+	if v.AttributeFilters != nil {
+		serializeAttributeFilters(s, schemas.ServiceState_AttributeFilters, v.AttributeFilters)
+	}
+	if v.LatestChangeEvents != nil {
+		serializeLatestChangeEvents(s, schemas.ServiceState_LatestChangeEvents, v.LatestChangeEvents)
+	}
+	if v.Service != nil {
+		serializeAttributes(s, schemas.ServiceState_Service, v.Service)
+	}
 }
 func (v *ServiceState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceState, func(s *smithy.Schema) error {
@@ -5098,10 +5204,18 @@ func (v *ServiceSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMaps(s, schemas.ServiceSummary_AttributeMaps, v.AttributeMaps)
-	serializeAttributes(s, schemas.ServiceSummary_KeyAttributes, v.KeyAttributes)
-	serializeMetricReferences(s, schemas.ServiceSummary_MetricReferences, v.MetricReferences)
-	serializeServiceGroups(s, schemas.ServiceSummary_ServiceGroups, v.ServiceGroups)
+	if v.AttributeMaps != nil {
+		serializeAttributeMaps(s, schemas.ServiceSummary_AttributeMaps, v.AttributeMaps)
+	}
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.ServiceSummary_KeyAttributes, v.KeyAttributes)
+	}
+	if v.MetricReferences != nil {
+		serializeMetricReferences(s, schemas.ServiceSummary_MetricReferences, v.MetricReferences)
+	}
+	if v.ServiceGroups != nil {
+		serializeServiceGroups(s, schemas.ServiceSummary_ServiceGroups, v.ServiceGroups)
+	}
 }
 func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceSummary, func(s *smithy.Schema) error {

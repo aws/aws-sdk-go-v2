@@ -53,7 +53,9 @@ func (v *CreateCloudFormationStackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCloudFormationStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceEntryList(s, schemas.CreateCloudFormationStackRequest_instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceEntryList(s, schemas.CreateCloudFormationStackRequest_instances, v.Instances)
+	}
 }
 
 type CreateCloudFormationStackOutput struct {
@@ -76,7 +78,9 @@ func (v *CreateCloudFormationStackOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCloudFormationStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateCloudFormationStackResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateCloudFormationStackResult_operations, v.Operations)
+	}
 }
 func (v *CreateCloudFormationStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCloudFormationStackResult, func(s *smithy.Schema) error {

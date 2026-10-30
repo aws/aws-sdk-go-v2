@@ -132,7 +132,9 @@ func (v *CreateHITWithHITTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HITLayoutId != nil {
 		s.WriteString(schemas.CreateHITWithHITTypeRequest_HITLayoutId, *v.HITLayoutId)
 	}
-	serializeHITLayoutParameterList(s, schemas.CreateHITWithHITTypeRequest_HITLayoutParameters, v.HITLayoutParameters)
+	if v.HITLayoutParameters != nil {
+		serializeHITLayoutParameterList(s, schemas.CreateHITWithHITTypeRequest_HITLayoutParameters, v.HITLayoutParameters)
+	}
 	if v.HITReviewPolicy != nil {
 		s.WriteStruct(schemas.CreateHITWithHITTypeRequest_HITReviewPolicy)
 		v.HITReviewPolicy.SerializeMembers(s)

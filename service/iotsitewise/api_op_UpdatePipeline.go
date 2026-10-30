@@ -63,11 +63,15 @@ func (v *UpdatePipelineInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeNodeList(s, schemas.UpdatePipelineRequest_computations, v.Computations)
+	if v.Computations != nil {
+		serializeComputeNodeList(s, schemas.UpdatePipelineRequest_computations, v.Computations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdatePipelineRequest_description, *v.Description)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.UpdatePipelineRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.UpdatePipelineRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.PipelineName != nil {
 		s.WriteString(schemas.UpdatePipelineRequest_pipelineName, *v.PipelineName)
 	}

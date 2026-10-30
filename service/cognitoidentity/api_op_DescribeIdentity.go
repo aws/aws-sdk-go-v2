@@ -89,7 +89,9 @@ func (v *DescribeIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.IdentityDescription_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeLoginsList(s, schemas.IdentityDescription_Logins, v.Logins)
+	if v.Logins != nil {
+		serializeLoginsList(s, schemas.IdentityDescription_Logins, v.Logins)
+	}
 }
 func (v *DescribeIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdentityDescription, func(s *smithy.Schema) error {

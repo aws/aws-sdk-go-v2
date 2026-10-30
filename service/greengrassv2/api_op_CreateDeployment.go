@@ -102,7 +102,9 @@ func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDeploymentRequest_clientToken, *v.ClientToken)
 	}
-	serializeComponentDeploymentSpecifications(s, schemas.CreateDeploymentRequest_components, v.Components)
+	if v.Components != nil {
+		serializeComponentDeploymentSpecifications(s, schemas.CreateDeploymentRequest_components, v.Components)
+	}
 	if v.DeploymentName != nil {
 		s.WriteString(schemas.CreateDeploymentRequest_deploymentName, *v.DeploymentName)
 	}
@@ -119,7 +121,9 @@ func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentTargetArn != nil {
 		s.WriteString(schemas.CreateDeploymentRequest_parentTargetArn, *v.ParentTargetArn)
 	}
-	serializeTagMap(s, schemas.CreateDeploymentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDeploymentRequest_tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.CreateDeploymentRequest_targetArn, *v.TargetArn)
 	}

@@ -75,7 +75,9 @@ func (v *ListCoreDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCoreDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListCoreDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListCoreDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreDefinitionsResponse_NextToken, *v.NextToken)
 	}

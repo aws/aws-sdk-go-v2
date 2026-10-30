@@ -136,7 +136,9 @@ func (v *GetDocumentTextDetectionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDocumentTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockList(s, schemas.GetDocumentTextDetectionResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.GetDocumentTextDetectionResponse_Blocks, v.Blocks)
+	}
 	if v.DetectDocumentTextModelVersion != nil {
 		s.WriteString(schemas.GetDocumentTextDetectionResponse_DetectDocumentTextModelVersion, *v.DetectDocumentTextModelVersion)
 	}
@@ -154,7 +156,9 @@ func (v *GetDocumentTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetDocumentTextDetectionResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeWarnings(s, schemas.GetDocumentTextDetectionResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarnings(s, schemas.GetDocumentTextDetectionResponse_Warnings, v.Warnings)
+	}
 }
 func (v *GetDocumentTextDetectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDocumentTextDetectionResponse, func(s *smithy.Schema) error {

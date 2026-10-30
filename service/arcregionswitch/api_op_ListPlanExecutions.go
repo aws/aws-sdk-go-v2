@@ -96,7 +96,9 @@ func (v *ListPlanExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPlanExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAbbreviatedExecutionsList(s, schemas.ListPlanExecutionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAbbreviatedExecutionsList(s, schemas.ListPlanExecutionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPlanExecutionsResponse_nextToken, *v.NextToken)
 	}

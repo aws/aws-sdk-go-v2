@@ -123,14 +123,20 @@ func (v *DescribeConnectorOperationOutput) SerializeMembers(s smithy.ShapeSerial
 		v.ErrorInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfConnectorOperationStep(s, schemas.DescribeConnectorOperationResponse_operationSteps, v.OperationSteps)
-	serializeConnectorConfiguration(s, schemas.DescribeConnectorOperationResponse_originConnectorConfiguration, v.OriginConnectorConfiguration)
+	if v.OperationSteps != nil {
+		serialize__listOfConnectorOperationStep(s, schemas.DescribeConnectorOperationResponse_operationSteps, v.OperationSteps)
+	}
+	if v.OriginConnectorConfiguration != nil {
+		serializeConnectorConfiguration(s, schemas.DescribeConnectorOperationResponse_originConnectorConfiguration, v.OriginConnectorConfiguration)
+	}
 	if v.OriginWorkerSetting != nil {
 		s.WriteStruct(schemas.DescribeConnectorOperationResponse_originWorkerSetting)
 		v.OriginWorkerSetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorConfiguration(s, schemas.DescribeConnectorOperationResponse_targetConnectorConfiguration, v.TargetConnectorConfiguration)
+	if v.TargetConnectorConfiguration != nil {
+		serializeConnectorConfiguration(s, schemas.DescribeConnectorOperationResponse_targetConnectorConfiguration, v.TargetConnectorConfiguration)
+	}
 	if v.TargetWorkerSetting != nil {
 		s.WriteStruct(schemas.DescribeConnectorOperationResponse_targetWorkerSetting)
 		v.TargetWorkerSetting.SerializeMembers(s)

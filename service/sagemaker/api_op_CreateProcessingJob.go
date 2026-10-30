@@ -119,7 +119,9 @@ func (v *CreateProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AppSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProcessingEnvironmentMap(s, schemas.CreateProcessingJobRequest_Environment, v.Environment)
+	if v.Environment != nil {
+		serializeProcessingEnvironmentMap(s, schemas.CreateProcessingJobRequest_Environment, v.Environment)
+	}
 	if v.ExperimentConfig != nil {
 		s.WriteStruct(schemas.CreateProcessingJobRequest_ExperimentConfig)
 		v.ExperimentConfig.SerializeMembers(s)
@@ -130,7 +132,9 @@ func (v *CreateProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProcessingInputs(s, schemas.CreateProcessingJobRequest_ProcessingInputs, v.ProcessingInputs)
+	if v.ProcessingInputs != nil {
+		serializeProcessingInputs(s, schemas.CreateProcessingJobRequest_ProcessingInputs, v.ProcessingInputs)
+	}
 	if v.ProcessingJobName != nil {
 		s.WriteString(schemas.CreateProcessingJobRequest_ProcessingJobName, *v.ProcessingJobName)
 	}
@@ -152,7 +156,9 @@ func (v *CreateProcessingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateProcessingJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProcessingJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProcessingJobOutput struct {

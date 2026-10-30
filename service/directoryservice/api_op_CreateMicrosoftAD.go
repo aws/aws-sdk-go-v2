@@ -105,7 +105,9 @@ func (v *CreateMicrosoftADInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShortName != nil {
 		s.WriteString(schemas.CreateMicrosoftADRequest_ShortName, *v.ShortName)
 	}
-	serializeTags(s, schemas.CreateMicrosoftADRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateMicrosoftADRequest_Tags, v.Tags)
+	}
 	if v.VpcSettings != nil {
 		s.WriteStruct(schemas.CreateMicrosoftADRequest_VpcSettings)
 		v.VpcSettings.SerializeMembers(s)

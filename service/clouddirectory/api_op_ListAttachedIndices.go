@@ -98,7 +98,9 @@ func (v *ListAttachedIndicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAttachedIndicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexAttachmentList(s, schemas.ListAttachedIndicesResponse_IndexAttachments, v.IndexAttachments)
+	if v.IndexAttachments != nil {
+		serializeIndexAttachmentList(s, schemas.ListAttachedIndicesResponse_IndexAttachments, v.IndexAttachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachedIndicesResponse_NextToken, *v.NextToken)
 	}

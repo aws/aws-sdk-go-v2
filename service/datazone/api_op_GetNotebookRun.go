@@ -157,7 +157,9 @@ func (v *GetNotebookRunOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetNotebookRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCellOrder(s, schemas.GetNotebookRunOutput_cellOrder, v.CellOrder)
+	if v.CellOrder != nil {
+		serializeCellOrder(s, schemas.GetNotebookRunOutput_cellOrder, v.CellOrder)
+	}
 	if v.CompletedAt != nil {
 		s.WriteTime(schemas.GetNotebookRunOutput_completedAt, *v.CompletedAt)
 	}
@@ -188,7 +190,9 @@ func (v *GetNotebookRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetNotebookRunOutput_id, *v.Id)
 	}
-	serializeMetadata(s, schemas.GetNotebookRunOutput_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.GetNotebookRunOutput_metadata, v.Metadata)
+	}
 	if v.NetworkConfiguration != nil {
 		s.WriteStruct(schemas.GetNotebookRunOutput_networkConfiguration)
 		v.NetworkConfiguration.SerializeMembers(s)
@@ -205,7 +209,9 @@ func (v *GetNotebookRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.GetNotebookRunOutput_owningProjectId, *v.OwningProjectId)
 	}
-	serializeParameters(s, schemas.GetNotebookRunOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.GetNotebookRunOutput_parameters, v.Parameters)
+	}
 	if v.ScheduleId != nil {
 		s.WriteString(schemas.GetNotebookRunOutput_scheduleId, *v.ScheduleId)
 	}

@@ -212,7 +212,9 @@ func (v *GetHarvestJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetHarvestJobResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetHarvestJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetHarvestJobResponse_Tags, v.Tags)
+	}
 }
 func (v *GetHarvestJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetHarvestJobResponse, func(s *smithy.Schema) error {

@@ -51,7 +51,9 @@ func (v *PutActionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.PutActionsRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.PutActionsRequest_actions, v.Actions)
+	}
 	if v.DatasetArn != nil {
 		s.WriteString(schemas.PutActionsRequest_datasetArn, *v.DatasetArn)
 	}

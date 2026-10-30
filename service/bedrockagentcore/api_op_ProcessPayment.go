@@ -82,7 +82,9 @@ func (v *ProcessPaymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.ProcessPaymentRequest_clientToken, *v.ClientToken)
 	}
-	serializePaymentInput(s, schemas.ProcessPaymentRequest_paymentInput, v.PaymentInput)
+	if v.PaymentInput != nil {
+		serializePaymentInput(s, schemas.ProcessPaymentRequest_paymentInput, v.PaymentInput)
+	}
 	if v.PaymentInstrumentId != nil {
 		s.WriteString(schemas.ProcessPaymentRequest_paymentInstrumentId, *v.PaymentInstrumentId)
 	}
@@ -170,7 +172,9 @@ func (v *ProcessPaymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaymentManagerArn != nil {
 		s.WriteString(schemas.ProcessPaymentResponse_paymentManagerArn, *v.PaymentManagerArn)
 	}
-	serializePaymentOutput(s, schemas.ProcessPaymentResponse_paymentOutput, v.PaymentOutput)
+	if v.PaymentOutput != nil {
+		serializePaymentOutput(s, schemas.ProcessPaymentResponse_paymentOutput, v.PaymentOutput)
+	}
 	if v.PaymentSessionId != nil {
 		s.WriteString(schemas.ProcessPaymentResponse_paymentSessionId, *v.PaymentSessionId)
 	}

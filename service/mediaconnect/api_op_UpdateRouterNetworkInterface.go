@@ -55,7 +55,9 @@ func (v *UpdateRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateRouterNetworkInterfaceRequest_Arn, *v.Arn)
 	}
-	serializeRouterNetworkInterfaceConfiguration(s, schemas.UpdateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterNetworkInterfaceConfiguration(s, schemas.UpdateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRouterNetworkInterfaceRequest_Name, *v.Name)
 	}

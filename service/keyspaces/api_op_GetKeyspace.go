@@ -103,8 +103,12 @@ func (v *GetKeyspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyspaceName != nil {
 		s.WriteString(schemas.GetKeyspaceResponse_keyspaceName, *v.KeyspaceName)
 	}
-	serializeReplicationGroupStatusList(s, schemas.GetKeyspaceResponse_replicationGroupStatuses, v.ReplicationGroupStatuses)
-	serializeRegionList(s, schemas.GetKeyspaceResponse_replicationRegions, v.ReplicationRegions)
+	if v.ReplicationGroupStatuses != nil {
+		serializeReplicationGroupStatusList(s, schemas.GetKeyspaceResponse_replicationGroupStatuses, v.ReplicationGroupStatuses)
+	}
+	if v.ReplicationRegions != nil {
+		serializeRegionList(s, schemas.GetKeyspaceResponse_replicationRegions, v.ReplicationRegions)
+	}
 	if v.ReplicationStrategy != "" {
 		s.WriteString(schemas.GetKeyspaceResponse_replicationStrategy, string(v.ReplicationStrategy))
 	}

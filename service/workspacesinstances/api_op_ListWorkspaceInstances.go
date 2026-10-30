@@ -55,7 +55,9 @@ func (v *ListWorkspaceInstancesInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkspaceInstancesRequest_NextToken, *v.NextToken)
 	}
-	serializeProvisionStates(s, schemas.ListWorkspaceInstancesRequest_ProvisionStates, v.ProvisionStates)
+	if v.ProvisionStates != nil {
+		serializeProvisionStates(s, schemas.ListWorkspaceInstancesRequest_ProvisionStates, v.ProvisionStates)
+	}
 }
 
 // Contains the list of WorkSpaces Instances matching the specified criteria.
@@ -86,7 +88,9 @@ func (v *ListWorkspaceInstancesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkspaceInstancesResponse_NextToken, *v.NextToken)
 	}
-	serializeWorkspaceInstances(s, schemas.ListWorkspaceInstancesResponse_WorkspaceInstances, v.WorkspaceInstances)
+	if v.WorkspaceInstances != nil {
+		serializeWorkspaceInstances(s, schemas.ListWorkspaceInstancesResponse_WorkspaceInstances, v.WorkspaceInstances)
+	}
 }
 func (v *ListWorkspaceInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkspaceInstancesResponse, func(s *smithy.Schema) error {

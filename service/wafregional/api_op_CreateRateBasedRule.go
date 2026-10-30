@@ -163,7 +163,9 @@ func (v *CreateRateBasedRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RateLimit != nil {
 		s.WriteInt64(schemas.CreateRateBasedRuleRequest_RateLimit, *v.RateLimit)
 	}
-	serializeTagList(s, schemas.CreateRateBasedRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRateBasedRuleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRateBasedRuleOutput struct {

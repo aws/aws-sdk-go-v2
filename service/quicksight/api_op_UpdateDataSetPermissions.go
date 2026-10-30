@@ -64,8 +64,12 @@ func (v *UpdateDataSetPermissionsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DataSetId != nil {
 		s.WriteString(schemas.UpdateDataSetPermissionsRequest_DataSetId, *v.DataSetId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateDataSetPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeResourcePermissionList(s, schemas.UpdateDataSetPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateDataSetPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateDataSetPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateDataSetPermissionsOutput struct {

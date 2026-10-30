@@ -161,7 +161,9 @@ func (v *GetAnnotationStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumVersions != nil {
 		s.WriteInt32(schemas.GetAnnotationStoreResponse_numVersions, *v.NumVersions)
 	}
-	serializeReferenceItem(s, schemas.GetAnnotationStoreResponse_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.GetAnnotationStoreResponse_reference, v.Reference)
+	}
 	if v.SseConfig != nil {
 		s.WriteStruct(schemas.GetAnnotationStoreResponse_sseConfig)
 		v.SseConfig.SerializeMembers(s)
@@ -179,11 +181,15 @@ func (v *GetAnnotationStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StoreFormat != "" {
 		s.WriteString(schemas.GetAnnotationStoreResponse_storeFormat, string(v.StoreFormat))
 	}
-	serializeStoreOptions(s, schemas.GetAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	if v.StoreOptions != nil {
+		serializeStoreOptions(s, schemas.GetAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	}
 	if v.StoreSizeBytes != nil {
 		s.WriteInt64(schemas.GetAnnotationStoreResponse_storeSizeBytes, *v.StoreSizeBytes)
 	}
-	serializeTagMap(s, schemas.GetAnnotationStoreResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetAnnotationStoreResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetAnnotationStoreResponse_updateTime, *v.UpdateTime)
 	}

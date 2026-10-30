@@ -94,7 +94,9 @@ func (v *ListOdbPeeringConnectionsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOdbPeeringConnectionsOutput_nextToken, *v.NextToken)
 	}
-	serializeOdbPeeringConnectionList(s, schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections, v.OdbPeeringConnections)
+	if v.OdbPeeringConnections != nil {
+		serializeOdbPeeringConnectionList(s, schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections, v.OdbPeeringConnections)
+	}
 }
 func (v *ListOdbPeeringConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOdbPeeringConnectionsOutput, func(s *smithy.Schema) error {

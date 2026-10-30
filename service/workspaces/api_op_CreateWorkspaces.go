@@ -60,7 +60,9 @@ func (v *CreateWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkspaceRequestList(s, schemas.CreateWorkspacesRequest_Workspaces, v.Workspaces)
+	if v.Workspaces != nil {
+		serializeWorkspaceRequestList(s, schemas.CreateWorkspacesRequest_Workspaces, v.Workspaces)
+	}
 }
 
 type CreateWorkspacesOutput struct {
@@ -88,8 +90,12 @@ func (v *CreateWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedCreateWorkspaceRequests(s, schemas.CreateWorkspacesResult_FailedRequests, v.FailedRequests)
-	serializeWorkspaceList(s, schemas.CreateWorkspacesResult_PendingRequests, v.PendingRequests)
+	if v.FailedRequests != nil {
+		serializeFailedCreateWorkspaceRequests(s, schemas.CreateWorkspacesResult_FailedRequests, v.FailedRequests)
+	}
+	if v.PendingRequests != nil {
+		serializeWorkspaceList(s, schemas.CreateWorkspacesResult_PendingRequests, v.PendingRequests)
+	}
 }
 func (v *CreateWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateWorkspacesResult, func(s *smithy.Schema) error {

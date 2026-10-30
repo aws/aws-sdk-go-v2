@@ -44,7 +44,9 @@ func (v *GetCampaignStateBatchInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCampaignStateBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCampaignIdList(s, schemas.GetCampaignStateBatchRequest_campaignIds, v.CampaignIds)
+	if v.CampaignIds != nil {
+		serializeCampaignIdList(s, schemas.GetCampaignStateBatchRequest_campaignIds, v.CampaignIds)
+	}
 }
 
 // The response for GetCampaignStateBatch API.
@@ -69,8 +71,12 @@ func (v *GetCampaignStateBatchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCampaignStateBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedCampaignStateResponseList(s, schemas.GetCampaignStateBatchResponse_failedRequests, v.FailedRequests)
-	serializeSuccessfulCampaignStateResponseList(s, schemas.GetCampaignStateBatchResponse_successfulRequests, v.SuccessfulRequests)
+	if v.FailedRequests != nil {
+		serializeFailedCampaignStateResponseList(s, schemas.GetCampaignStateBatchResponse_failedRequests, v.FailedRequests)
+	}
+	if v.SuccessfulRequests != nil {
+		serializeSuccessfulCampaignStateResponseList(s, schemas.GetCampaignStateBatchResponse_successfulRequests, v.SuccessfulRequests)
+	}
 }
 func (v *GetCampaignStateBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCampaignStateBatchResponse, func(s *smithy.Schema) error {

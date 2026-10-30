@@ -130,13 +130,17 @@ func (v *GetEngineStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DfeQueryEngine != nil {
 		s.WriteString(schemas.GetEngineStatusOutput_dfeQueryEngine, *v.DfeQueryEngine)
 	}
-	serializeDocumentValuedMap(s, schemas.GetEngineStatusOutput_features, v.Features)
+	if v.Features != nil {
+		serializeDocumentValuedMap(s, schemas.GetEngineStatusOutput_features, v.Features)
+	}
 	if v.Gremlin != nil {
 		s.WriteStruct(schemas.GetEngineStatusOutput_gremlin)
 		v.Gremlin.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringValuedMap(s, schemas.GetEngineStatusOutput_labMode, v.LabMode)
+	if v.LabMode != nil {
+		serializeStringValuedMap(s, schemas.GetEngineStatusOutput_labMode, v.LabMode)
+	}
 	if v.Opencypher != nil {
 		s.WriteStruct(schemas.GetEngineStatusOutput_opencypher)
 		v.Opencypher.SerializeMembers(s)
@@ -151,7 +155,9 @@ func (v *GetEngineStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RollingBackTrxEarliestStartTime != nil {
 		s.WriteString(schemas.GetEngineStatusOutput_rollingBackTrxEarliestStartTime, *v.RollingBackTrxEarliestStartTime)
 	}
-	serializeStringValuedMap(s, schemas.GetEngineStatusOutput_settings, v.Settings)
+	if v.Settings != nil {
+		serializeStringValuedMap(s, schemas.GetEngineStatusOutput_settings, v.Settings)
+	}
 	if v.Sparql != nil {
 		s.WriteStruct(schemas.GetEngineStatusOutput_sparql)
 		v.Sparql.SerializeMembers(s)

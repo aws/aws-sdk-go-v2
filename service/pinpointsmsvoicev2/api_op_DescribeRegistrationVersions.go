@@ -57,7 +57,9 @@ func (v *DescribeRegistrationVersionsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeRegistrationVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistrationVersionFilterList(s, schemas.DescribeRegistrationVersionsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeRegistrationVersionFilterList(s, schemas.DescribeRegistrationVersionsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRegistrationVersionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -67,7 +69,9 @@ func (v *DescribeRegistrationVersionsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.DescribeRegistrationVersionsRequest_RegistrationId, *v.RegistrationId)
 	}
-	serializeRegistrationVersionNumberList(s, schemas.DescribeRegistrationVersionsRequest_VersionNumbers, v.VersionNumbers)
+	if v.VersionNumbers != nil {
+		serializeRegistrationVersionNumberList(s, schemas.DescribeRegistrationVersionsRequest_VersionNumbers, v.VersionNumbers)
+	}
 }
 
 type DescribeRegistrationVersionsOutput struct {
@@ -113,7 +117,9 @@ func (v *DescribeRegistrationVersionsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.DescribeRegistrationVersionsResult_RegistrationId, *v.RegistrationId)
 	}
-	serializeRegistrationVersionInformationList(s, schemas.DescribeRegistrationVersionsResult_RegistrationVersions, v.RegistrationVersions)
+	if v.RegistrationVersions != nil {
+		serializeRegistrationVersionInformationList(s, schemas.DescribeRegistrationVersionsResult_RegistrationVersions, v.RegistrationVersions)
+	}
 }
 func (v *DescribeRegistrationVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRegistrationVersionsResult, func(s *smithy.Schema) error {

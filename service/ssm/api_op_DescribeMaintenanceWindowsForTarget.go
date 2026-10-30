@@ -68,7 +68,9 @@ func (v *DescribeMaintenanceWindowsForTargetInput) SerializeMembers(s smithy.Sha
 	if v.ResourceType != "" {
 		s.WriteString(schemas.DescribeMaintenanceWindowsForTargetRequest_ResourceType, string(v.ResourceType))
 	}
-	serializeTargets(s, schemas.DescribeMaintenanceWindowsForTargetRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.DescribeMaintenanceWindowsForTargetRequest_Targets, v.Targets)
+	}
 }
 
 type DescribeMaintenanceWindowsForTargetOutput struct {
@@ -97,7 +99,9 @@ func (v *DescribeMaintenanceWindowsForTargetOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMaintenanceWindowsForTargetResult_NextToken, *v.NextToken)
 	}
-	serializeMaintenanceWindowsForTargetList(s, schemas.DescribeMaintenanceWindowsForTargetResult_WindowIdentities, v.WindowIdentities)
+	if v.WindowIdentities != nil {
+		serializeMaintenanceWindowsForTargetList(s, schemas.DescribeMaintenanceWindowsForTargetResult_WindowIdentities, v.WindowIdentities)
+	}
 }
 func (v *DescribeMaintenanceWindowsForTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMaintenanceWindowsForTargetResult, func(s *smithy.Schema) error {

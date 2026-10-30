@@ -161,8 +161,12 @@ func (v *StartMLModelTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SagemakerIamRoleArn != nil {
 		s.WriteString(schemas.StartMLModelTrainingJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
 	}
-	serializeStringList(s, schemas.StartMLModelTrainingJobInput_securityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.StartMLModelTrainingJobInput_subnets, v.Subnets)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.StartMLModelTrainingJobInput_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.StartMLModelTrainingJobInput_subnets, v.Subnets)
+	}
 	if v.TrainModelS3Location != nil {
 		s.WriteString(schemas.StartMLModelTrainingJobInput_trainModelS3Location, *v.TrainModelS3Location)
 	}

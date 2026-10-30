@@ -91,7 +91,9 @@ func (v *ListCoreNetworkPrefixListAssociationsOutput) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoreNetworkPrefixListAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializePrefixListAssociationList(s, schemas.ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations, v.PrefixListAssociations)
+	if v.PrefixListAssociations != nil {
+		serializePrefixListAssociationList(s, schemas.ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations, v.PrefixListAssociations)
+	}
 }
 func (v *ListCoreNetworkPrefixListAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCoreNetworkPrefixListAssociationsResponse, func(s *smithy.Schema) error {

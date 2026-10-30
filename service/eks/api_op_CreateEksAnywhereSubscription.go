@@ -98,7 +98,9 @@ func (v *CreateEksAnywhereSubscriptionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEksAnywhereSubscriptionRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateEksAnywhereSubscriptionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEksAnywhereSubscriptionRequest_tags, v.Tags)
+	}
 	if v.Term != nil {
 		s.WriteStruct(schemas.CreateEksAnywhereSubscriptionRequest_term)
 		v.Term.SerializeMembers(s)

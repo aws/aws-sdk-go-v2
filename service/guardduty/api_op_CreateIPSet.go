@@ -108,7 +108,9 @@ func (v *CreateIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateIPSetRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateIPSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIPSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateIPSetOutput struct {

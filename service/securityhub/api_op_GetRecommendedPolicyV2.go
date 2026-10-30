@@ -107,7 +107,9 @@ func (v *GetRecommendedPolicyV2Output) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetRecommendedPolicyV2Response_NextToken, *v.NextToken)
 	}
-	serializeRecommendationSteps(s, schemas.GetRecommendedPolicyV2Response_RecommendationSteps, v.RecommendationSteps)
+	if v.RecommendationSteps != nil {
+		serializeRecommendationSteps(s, schemas.GetRecommendedPolicyV2Response_RecommendationSteps, v.RecommendationSteps)
+	}
 	if v.RecommendationType != "" {
 		s.WriteString(schemas.GetRecommendedPolicyV2Response_RecommendationType, string(v.RecommendationType))
 	}

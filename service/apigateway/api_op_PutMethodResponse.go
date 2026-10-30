@@ -83,8 +83,12 @@ func (v *PutMethodResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.PutMethodResponseRequest_resourceId, *v.ResourceId)
 	}
-	serializeMapOfStringToString(s, schemas.PutMethodResponseRequest_responseModels, v.ResponseModels)
-	serializeMapOfStringToBoolean(s, schemas.PutMethodResponseRequest_responseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeMapOfStringToString(s, schemas.PutMethodResponseRequest_responseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeMapOfStringToBoolean(s, schemas.PutMethodResponseRequest_responseParameters, v.ResponseParameters)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.PutMethodResponseRequest_restApiId, *v.RestApiId)
 	}
@@ -134,8 +138,12 @@ func (v *PutMethodResponseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutMethodResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
-	serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	}
 	if v.StatusCode != nil {
 		s.WriteString(schemas.MethodResponse_statusCode, *v.StatusCode)
 	}

@@ -76,7 +76,9 @@ func (v *CreateCustomLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOcsfEventClassList(s, schemas.CreateCustomLogSourceRequest_eventClasses, v.EventClasses)
+	if v.EventClasses != nil {
+		serializeOcsfEventClassList(s, schemas.CreateCustomLogSourceRequest_eventClasses, v.EventClasses)
+	}
 	if v.SourceName != nil {
 		s.WriteString(schemas.CreateCustomLogSourceRequest_sourceName, *v.SourceName)
 	}

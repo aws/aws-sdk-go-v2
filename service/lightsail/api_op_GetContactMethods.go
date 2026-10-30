@@ -54,7 +54,9 @@ func (v *GetContactMethodsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContactMethodsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactProtocolsList(s, schemas.GetContactMethodsRequest_protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeContactProtocolsList(s, schemas.GetContactMethodsRequest_protocols, v.Protocols)
+	}
 }
 
 type GetContactMethodsOutput struct {
@@ -75,7 +77,9 @@ func (v *GetContactMethodsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContactMethodsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactMethodsList(s, schemas.GetContactMethodsResult_contactMethods, v.ContactMethods)
+	if v.ContactMethods != nil {
+		serializeContactMethodsList(s, schemas.GetContactMethodsResult_contactMethods, v.ContactMethods)
+	}
 }
 func (v *GetContactMethodsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContactMethodsResult, func(s *smithy.Schema) error {

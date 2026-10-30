@@ -230,7 +230,9 @@ func (v *EdgeStructure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != nil {
 		s.WriteInt64(schemas.EdgeStructure_count, *v.Count)
 	}
-	serializeEdgeProperties(s, schemas.EdgeStructure_edgeProperties, v.EdgeProperties)
+	if v.EdgeProperties != nil {
+		serializeEdgeProperties(s, schemas.EdgeStructure_edgeProperties, v.EdgeProperties)
+	}
 }
 func (v *EdgeStructure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EdgeStructure, func(s *smithy.Schema) error {
@@ -401,7 +403,9 @@ func (v *LoaderIdResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LoaderIdResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.LoaderIdResult_loadIds, v.LoadIds)
+	if v.LoadIds != nil {
+		serializeStringList(s, schemas.LoaderIdResult_loadIds, v.LoadIds)
+	}
 }
 func (v *LoaderIdResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoaderIdResult, func(s *smithy.Schema) error {
@@ -554,8 +558,12 @@ func (v *NodeStructure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != nil {
 		s.WriteInt64(schemas.NodeStructure_count, *v.Count)
 	}
-	serializeOutgoingEdgeLabels(s, schemas.NodeStructure_distinctOutgoingEdgeLabels, v.DistinctOutgoingEdgeLabels)
-	serializeNodeProperties(s, schemas.NodeStructure_nodeProperties, v.NodeProperties)
+	if v.DistinctOutgoingEdgeLabels != nil {
+		serializeOutgoingEdgeLabels(s, schemas.NodeStructure_distinctOutgoingEdgeLabels, v.DistinctOutgoingEdgeLabels)
+	}
+	if v.NodeProperties != nil {
+		serializeNodeProperties(s, schemas.NodeStructure_nodeProperties, v.NodeProperties)
+	}
 }
 func (v *NodeStructure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NodeStructure, func(s *smithy.Schema) error {
@@ -721,7 +729,9 @@ func (v *PropertygraphRecord) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Data.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringValuedMap(s, schemas.PropertygraphRecord_eventId, v.EventId)
+	if v.EventId != nil {
+		serializeStringValuedMap(s, schemas.PropertygraphRecord_eventId, v.EventId)
+	}
 	if v.IsLastOp != nil {
 		s.WriteBool(schemas.PropertygraphRecord_isLastOp, *v.IsLastOp)
 	}
@@ -813,12 +823,24 @@ func (v *PropertygraphSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PropertygraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeLabels(s, schemas.PropertygraphSummary_edgeLabels, v.EdgeLabels)
-	serializeLongValuedMapList(s, schemas.PropertygraphSummary_edgeProperties, v.EdgeProperties)
-	serializeEdgeStructures(s, schemas.PropertygraphSummary_edgeStructures, v.EdgeStructures)
-	serializeNodeLabels(s, schemas.PropertygraphSummary_nodeLabels, v.NodeLabels)
-	serializeLongValuedMapList(s, schemas.PropertygraphSummary_nodeProperties, v.NodeProperties)
-	serializeNodeStructures(s, schemas.PropertygraphSummary_nodeStructures, v.NodeStructures)
+	if v.EdgeLabels != nil {
+		serializeEdgeLabels(s, schemas.PropertygraphSummary_edgeLabels, v.EdgeLabels)
+	}
+	if v.EdgeProperties != nil {
+		serializeLongValuedMapList(s, schemas.PropertygraphSummary_edgeProperties, v.EdgeProperties)
+	}
+	if v.EdgeStructures != nil {
+		serializeEdgeStructures(s, schemas.PropertygraphSummary_edgeStructures, v.EdgeStructures)
+	}
+	if v.NodeLabels != nil {
+		serializeNodeLabels(s, schemas.PropertygraphSummary_nodeLabels, v.NodeLabels)
+	}
+	if v.NodeProperties != nil {
+		serializeLongValuedMapList(s, schemas.PropertygraphSummary_nodeProperties, v.NodeProperties)
+	}
+	if v.NodeStructures != nil {
+		serializeNodeStructures(s, schemas.PropertygraphSummary_nodeStructures, v.NodeStructures)
+	}
 	if v.NumEdgeLabels != nil {
 		s.WriteInt64(schemas.PropertygraphSummary_numEdgeLabels, *v.NumEdgeLabels)
 	}
@@ -1200,7 +1222,9 @@ func (v *RDFGraphSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RDFGraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClasses(s, schemas.RDFGraphSummary_classes, v.Classes)
+	if v.Classes != nil {
+		serializeClasses(s, schemas.RDFGraphSummary_classes, v.Classes)
+	}
 	if v.NumClasses != nil {
 		s.WriteInt64(schemas.RDFGraphSummary_numClasses, *v.NumClasses)
 	}
@@ -1213,8 +1237,12 @@ func (v *RDFGraphSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumQuads != nil {
 		s.WriteInt64(schemas.RDFGraphSummary_numQuads, *v.NumQuads)
 	}
-	serializeLongValuedMapList(s, schemas.RDFGraphSummary_predicates, v.Predicates)
-	serializeSubjectStructures(s, schemas.RDFGraphSummary_subjectStructures, v.SubjectStructures)
+	if v.Predicates != nil {
+		serializeLongValuedMapList(s, schemas.RDFGraphSummary_predicates, v.Predicates)
+	}
+	if v.SubjectStructures != nil {
+		serializeSubjectStructures(s, schemas.RDFGraphSummary_subjectStructures, v.SubjectStructures)
+	}
 }
 func (v *RDFGraphSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RDFGraphSummary, func(s *smithy.Schema) error {
@@ -1417,7 +1445,9 @@ func (v *SparqlRecord) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Data.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringValuedMap(s, schemas.SparqlRecord_eventId, v.EventId)
+	if v.EventId != nil {
+		serializeStringValuedMap(s, schemas.SparqlRecord_eventId, v.EventId)
+	}
 	if v.IsLastOp != nil {
 		s.WriteBool(schemas.SparqlRecord_isLastOp, *v.IsLastOp)
 	}
@@ -1654,7 +1684,9 @@ func (v *SubjectStructure) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != nil {
 		s.WriteInt64(schemas.SubjectStructure_count, *v.Count)
 	}
-	serializePredicates(s, schemas.SubjectStructure_predicates, v.Predicates)
+	if v.Predicates != nil {
+		serializePredicates(s, schemas.SubjectStructure_predicates, v.Predicates)
+	}
 }
 func (v *SubjectStructure) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SubjectStructure, func(s *smithy.Schema) error {

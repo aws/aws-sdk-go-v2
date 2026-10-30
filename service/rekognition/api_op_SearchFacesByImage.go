@@ -167,7 +167,9 @@ func (v *SearchFacesByImageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchFacesByImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaceMatchList(s, schemas.SearchFacesByImageResponse_FaceMatches, v.FaceMatches)
+	if v.FaceMatches != nil {
+		serializeFaceMatchList(s, schemas.SearchFacesByImageResponse_FaceMatches, v.FaceMatches)
+	}
 	if v.FaceModelVersion != nil {
 		s.WriteString(schemas.SearchFacesByImageResponse_FaceModelVersion, *v.FaceModelVersion)
 	}

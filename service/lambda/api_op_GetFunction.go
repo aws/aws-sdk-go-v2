@@ -125,7 +125,9 @@ func (v *GetFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetFunctionResponse_Tags, v.Tags)
+	}
 	if v.TagsError != nil {
 		s.WriteStruct(schemas.GetFunctionResponse_TagsError)
 		v.TagsError.SerializeMembers(s)

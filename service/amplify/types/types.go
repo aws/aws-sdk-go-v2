@@ -173,7 +173,9 @@ func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoBranchCreationConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoBranchCreationPatterns(s, schemas.App_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	if v.AutoBranchCreationPatterns != nil {
+		serializeAutoBranchCreationPatterns(s, schemas.App_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	}
 	if v.BasicAuthCredentials != nil {
 		s.WriteString(schemas.App_basicAuthCredentials, *v.BasicAuthCredentials)
 	}
@@ -194,7 +196,9 @@ func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomHeaders != nil {
 		s.WriteString(schemas.App_customHeaders, *v.CustomHeaders)
 	}
-	serializeCustomRules(s, schemas.App_customRules, v.CustomRules)
+	if v.CustomRules != nil {
+		serializeCustomRules(s, schemas.App_customRules, v.CustomRules)
+	}
 	if v.DefaultDomain != nil {
 		s.WriteString(schemas.App_defaultDomain, *v.DefaultDomain)
 	}
@@ -213,7 +217,9 @@ func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableBranchAutoDeletion != nil {
 		s.WriteBool(schemas.App_enableBranchAutoDeletion, *v.EnableBranchAutoDeletion)
 	}
-	serializeEnvironmentVariables(s, schemas.App_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.App_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.IamServiceRoleArn != nil {
 		s.WriteString(schemas.App_iamServiceRoleArn, *v.IamServiceRoleArn)
 	}
@@ -239,7 +245,9 @@ func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RepositoryCloneMethod != "" {
 		s.WriteString(schemas.App_repositoryCloneMethod, string(v.RepositoryCloneMethod))
 	}
-	serializeTagMap(s, schemas.App_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.App_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.App_updateTime, *v.UpdateTime)
 	}
@@ -462,7 +470,9 @@ func (v *AutoBranchCreationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnablePullRequestPreview != nil {
 		s.WriteBool(schemas.AutoBranchCreationConfig_enablePullRequestPreview, *v.EnablePullRequestPreview)
 	}
-	serializeEnvironmentVariables(s, schemas.AutoBranchCreationConfig_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.AutoBranchCreationConfig_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Framework != nil {
 		s.WriteString(schemas.AutoBranchCreationConfig_framework, *v.Framework)
 	}
@@ -807,7 +817,9 @@ func (v *Branch) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActiveJobId != nil {
 		s.WriteString(schemas.Branch_activeJobId, *v.ActiveJobId)
 	}
-	serializeAssociatedResources(s, schemas.Branch_associatedResources, v.AssociatedResources)
+	if v.AssociatedResources != nil {
+		serializeAssociatedResources(s, schemas.Branch_associatedResources, v.AssociatedResources)
+	}
 	if v.Backend != nil {
 		s.WriteStruct(schemas.Branch_backend)
 		v.Backend.SerializeMembers(s)
@@ -834,7 +846,9 @@ func (v *Branch) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.Branch_createTime, *v.CreateTime)
 	}
-	serializeCustomDomains(s, schemas.Branch_customDomains, v.CustomDomains)
+	if v.CustomDomains != nil {
+		serializeCustomDomains(s, schemas.Branch_customDomains, v.CustomDomains)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Branch_description, *v.Description)
 	}
@@ -862,7 +876,9 @@ func (v *Branch) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableSkewProtection != nil {
 		s.WriteBool(schemas.Branch_enableSkewProtection, *v.EnableSkewProtection)
 	}
-	serializeEnvironmentVariables(s, schemas.Branch_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.Branch_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Framework != nil {
 		s.WriteString(schemas.Branch_framework, *v.Framework)
 	}
@@ -875,7 +891,9 @@ func (v *Branch) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Stage != "" {
 		s.WriteString(schemas.Branch_stage, string(v.Stage))
 	}
-	serializeTagMap(s, schemas.Branch_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Branch_tags, v.Tags)
+	}
 	if v.ThumbnailUrl != nil {
 		s.WriteString(schemas.Branch_thumbnailUrl, *v.ThumbnailUrl)
 	}
@@ -1334,7 +1352,9 @@ func (v *DomainAssociation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DomainAssociation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoSubDomainCreationPatterns(s, schemas.DomainAssociation_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	if v.AutoSubDomainCreationPatterns != nil {
+		serializeAutoSubDomainCreationPatterns(s, schemas.DomainAssociation_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	}
 	if v.AutoSubDomainIAMRole != nil {
 		s.WriteString(schemas.DomainAssociation_autoSubDomainIAMRole, *v.AutoSubDomainIAMRole)
 	}
@@ -1361,7 +1381,9 @@ func (v *DomainAssociation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.DomainAssociation_statusReason, *v.StatusReason)
 	}
-	serializeSubDomains(s, schemas.DomainAssociation_subDomains, v.SubDomains)
+	if v.SubDomains != nil {
+		serializeSubDomains(s, schemas.DomainAssociation_subDomains, v.SubDomains)
+	}
 	if v.UpdateStatus != "" {
 		s.WriteString(schemas.DomainAssociation_updateStatus, string(v.UpdateStatus))
 	}
@@ -1436,7 +1458,9 @@ func (v *Job) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSteps(s, schemas.Job_steps, v.Steps)
+	if v.Steps != nil {
+		serializeSteps(s, schemas.Job_steps, v.Steps)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.Job_summary)
 		v.Summary.SerializeMembers(s)
@@ -1809,7 +1833,9 @@ func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogUrl != nil {
 		s.WriteString(schemas.Step_logUrl, *v.LogUrl)
 	}
-	serializeScreenshots(s, schemas.Step_screenshots, v.Screenshots)
+	if v.Screenshots != nil {
+		serializeScreenshots(s, schemas.Step_screenshots, v.Screenshots)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.Step_startTime, *v.StartTime)
 	}

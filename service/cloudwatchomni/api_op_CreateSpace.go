@@ -95,7 +95,9 @@ func (v *CreateSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSpaceInput_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateSpaceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSpaceInput_tags, v.Tags)
+	}
 }
 
 type CreateSpaceOutput struct {

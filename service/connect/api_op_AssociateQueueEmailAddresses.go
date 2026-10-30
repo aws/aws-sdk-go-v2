@@ -90,7 +90,9 @@ func (v *AssociateQueueEmailAddressesInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AssociateQueueEmailAddressesRequest_ClientToken, *v.ClientToken)
 	}
-	serializeEmailAddressConfigList(s, schemas.AssociateQueueEmailAddressesRequest_EmailAddressesConfig, v.EmailAddressesConfig)
+	if v.EmailAddressesConfig != nil {
+		serializeEmailAddressConfigList(s, schemas.AssociateQueueEmailAddressesRequest_EmailAddressesConfig, v.EmailAddressesConfig)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.AssociateQueueEmailAddressesRequest_InstanceId, *v.InstanceId)
 	}

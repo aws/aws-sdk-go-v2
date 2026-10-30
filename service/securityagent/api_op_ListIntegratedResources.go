@@ -101,7 +101,9 @@ func (v *ListIntegratedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntegratedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegratedResourceSummaryList(s, schemas.ListIntegratedResourcesOutput_integratedResourceSummaries, v.IntegratedResourceSummaries)
+	if v.IntegratedResourceSummaries != nil {
+		serializeIntegratedResourceSummaryList(s, schemas.ListIntegratedResourcesOutput_integratedResourceSummaries, v.IntegratedResourceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntegratedResourcesOutput_nextToken, *v.NextToken)
 	}

@@ -114,7 +114,9 @@ func (v *ListSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSnapshotsResponse_nextToken, *v.NextToken)
 	}
-	serializeSnapshotList(s, schemas.ListSnapshotsResponse_snapshots, v.Snapshots)
+	if v.Snapshots != nil {
+		serializeSnapshotList(s, schemas.ListSnapshotsResponse_snapshots, v.Snapshots)
+	}
 }
 func (v *ListSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSnapshotsResponse, func(s *smithy.Schema) error {

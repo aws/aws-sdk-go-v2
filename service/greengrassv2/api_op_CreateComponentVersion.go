@@ -116,7 +116,9 @@ func (v *CreateComponentVersionInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.LambdaFunction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateComponentVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateComponentVersionRequest_tags, v.Tags)
+	}
 }
 
 type CreateComponentVersionOutput struct {

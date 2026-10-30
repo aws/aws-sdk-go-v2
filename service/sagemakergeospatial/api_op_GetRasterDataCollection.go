@@ -120,12 +120,18 @@ func (v *GetRasterDataCollectionOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DescriptionPageUrl != nil {
 		s.WriteString(schemas.GetRasterDataCollectionOutput_DescriptionPageUrl, *v.DescriptionPageUrl)
 	}
-	serializeImageSourceBandList(s, schemas.GetRasterDataCollectionOutput_ImageSourceBands, v.ImageSourceBands)
+	if v.ImageSourceBands != nil {
+		serializeImageSourceBandList(s, schemas.GetRasterDataCollectionOutput_ImageSourceBands, v.ImageSourceBands)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetRasterDataCollectionOutput_Name, *v.Name)
 	}
-	serializeFilterList(s, schemas.GetRasterDataCollectionOutput_SupportedFilters, v.SupportedFilters)
-	serializeTags(s, schemas.GetRasterDataCollectionOutput_Tags, v.Tags)
+	if v.SupportedFilters != nil {
+		serializeFilterList(s, schemas.GetRasterDataCollectionOutput_SupportedFilters, v.SupportedFilters)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetRasterDataCollectionOutput_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetRasterDataCollectionOutput_Type, string(v.Type))
 	}

@@ -112,7 +112,9 @@ func (v *UpdateGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalAuthenticationProviders(s, schemas.UpdateGraphqlApiRequest_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	if v.AdditionalAuthenticationProviders != nil {
+		serializeAdditionalAuthenticationProviders(s, schemas.UpdateGraphqlApiRequest_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	}
 	if v.ApiId != nil {
 		s.WriteString(schemas.UpdateGraphqlApiRequest_apiId, *v.ApiId)
 	}

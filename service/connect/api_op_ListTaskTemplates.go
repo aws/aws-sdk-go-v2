@@ -110,7 +110,9 @@ func (v *ListTaskTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTaskTemplatesResponse_NextToken, *v.NextToken)
 	}
-	serializeTaskTemplateList(s, schemas.ListTaskTemplatesResponse_TaskTemplates, v.TaskTemplates)
+	if v.TaskTemplates != nil {
+		serializeTaskTemplateList(s, schemas.ListTaskTemplatesResponse_TaskTemplates, v.TaskTemplates)
+	}
 }
 func (v *ListTaskTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTaskTemplatesResponse, func(s *smithy.Schema) error {

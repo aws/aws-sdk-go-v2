@@ -97,7 +97,9 @@ func (v *UpdateProvisionedProductPropertiesInput) SerializeMembers(s smithy.Shap
 	if v.ProvisionedProductId != nil {
 		s.WriteString(schemas.UpdateProvisionedProductPropertiesInput_ProvisionedProductId, *v.ProvisionedProductId)
 	}
-	serializeProvisionedProductProperties(s, schemas.UpdateProvisionedProductPropertiesInput_ProvisionedProductProperties, v.ProvisionedProductProperties)
+	if v.ProvisionedProductProperties != nil {
+		serializeProvisionedProductProperties(s, schemas.UpdateProvisionedProductPropertiesInput_ProvisionedProductProperties, v.ProvisionedProductProperties)
+	}
 }
 
 type UpdateProvisionedProductPropertiesOutput struct {
@@ -130,7 +132,9 @@ func (v *UpdateProvisionedProductPropertiesOutput) SerializeMembers(s smithy.Sha
 	if v.ProvisionedProductId != nil {
 		s.WriteString(schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductId, *v.ProvisionedProductId)
 	}
-	serializeProvisionedProductProperties(s, schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductProperties, v.ProvisionedProductProperties)
+	if v.ProvisionedProductProperties != nil {
+		serializeProvisionedProductProperties(s, schemas.UpdateProvisionedProductPropertiesOutput_ProvisionedProductProperties, v.ProvisionedProductProperties)
+	}
 	if v.RecordId != nil {
 		s.WriteString(schemas.UpdateProvisionedProductPropertiesOutput_RecordId, *v.RecordId)
 	}

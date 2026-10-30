@@ -91,7 +91,9 @@ func (v *ListMigrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMigrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationSummaryList(s, schemas.ListMigrationsResponse_migrations, v.Migrations)
+	if v.Migrations != nil {
+		serializeMigrationSummaryList(s, schemas.ListMigrationsResponse_migrations, v.Migrations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMigrationsResponse_nextToken, *v.NextToken)
 	}

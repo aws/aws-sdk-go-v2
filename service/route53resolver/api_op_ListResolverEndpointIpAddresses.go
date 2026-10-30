@@ -97,7 +97,9 @@ func (v *ListResolverEndpointIpAddressesOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListResolverEndpointIpAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpAddressesResponse(s, schemas.ListResolverEndpointIpAddressesResponse_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddressesResponse(s, schemas.ListResolverEndpointIpAddressesResponse_IpAddresses, v.IpAddresses)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResolverEndpointIpAddressesResponse_MaxResults, *v.MaxResults)
 	}

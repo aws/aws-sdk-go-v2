@@ -97,14 +97,18 @@ func (v *DetectEntitiesV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectEntitiesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityList(s, schemas.DetectEntitiesV2Response_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeEntityList(s, schemas.DetectEntitiesV2Response_Entities, v.Entities)
+	}
 	if v.ModelVersion != nil {
 		s.WriteString(schemas.DetectEntitiesV2Response_ModelVersion, *v.ModelVersion)
 	}
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.DetectEntitiesV2Response_PaginationToken, *v.PaginationToken)
 	}
-	serializeUnmappedAttributeList(s, schemas.DetectEntitiesV2Response_UnmappedAttributes, v.UnmappedAttributes)
+	if v.UnmappedAttributes != nil {
+		serializeUnmappedAttributeList(s, schemas.DetectEntitiesV2Response_UnmappedAttributes, v.UnmappedAttributes)
+	}
 }
 func (v *DetectEntitiesV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectEntitiesV2Response, func(s *smithy.Schema) error {

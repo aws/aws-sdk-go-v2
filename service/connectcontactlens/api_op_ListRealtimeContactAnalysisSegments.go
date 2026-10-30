@@ -108,7 +108,9 @@ func (v *ListRealtimeContactAnalysisSegmentsOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsResponse_NextToken, *v.NextToken)
 	}
-	serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsResponse_Segments, v.Segments)
+	if v.Segments != nil {
+		serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsResponse_Segments, v.Segments)
+	}
 }
 func (v *ListRealtimeContactAnalysisSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRealtimeContactAnalysisSegmentsResponse, func(s *smithy.Schema) error {

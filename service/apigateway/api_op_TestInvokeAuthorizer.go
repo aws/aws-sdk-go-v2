@@ -72,22 +72,30 @@ func (v *TestInvokeAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestInvokeAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_additionalContext, v.AdditionalContext)
+	if v.AdditionalContext != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_additionalContext, v.AdditionalContext)
+	}
 	if v.AuthorizerId != nil {
 		s.WriteString(schemas.TestInvokeAuthorizerRequest_authorizerId, *v.AuthorizerId)
 	}
 	if v.Body != nil {
 		s.WriteString(schemas.TestInvokeAuthorizerRequest_body, *v.Body)
 	}
-	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_headers, v.Headers)
-	serializeMapOfStringToList(s, schemas.TestInvokeAuthorizerRequest_multiValueHeaders, v.MultiValueHeaders)
+	if v.Headers != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_headers, v.Headers)
+	}
+	if v.MultiValueHeaders != nil {
+		serializeMapOfStringToList(s, schemas.TestInvokeAuthorizerRequest_multiValueHeaders, v.MultiValueHeaders)
+	}
 	if v.PathWithQueryString != nil {
 		s.WriteString(schemas.TestInvokeAuthorizerRequest_pathWithQueryString, *v.PathWithQueryString)
 	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.TestInvokeAuthorizerRequest_restApiId, *v.RestApiId)
 	}
-	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_stageVariables, v.StageVariables)
+	if v.StageVariables != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_stageVariables, v.StageVariables)
+	}
 }
 
 // Represents the response of the test invoke request for a custom Authorizer
@@ -129,8 +137,12 @@ func (v *TestInvokeAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestInvokeAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStringToList(s, schemas.TestInvokeAuthorizerResponse_authorization, v.Authorization)
-	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerResponse_claims, v.Claims)
+	if v.Authorization != nil {
+		serializeMapOfStringToList(s, schemas.TestInvokeAuthorizerResponse_authorization, v.Authorization)
+	}
+	if v.Claims != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerResponse_claims, v.Claims)
+	}
 	if v.ClientStatus != 0 {
 		s.WriteInt32(schemas.TestInvokeAuthorizerResponse_clientStatus, v.ClientStatus)
 	}

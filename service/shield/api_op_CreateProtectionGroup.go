@@ -92,7 +92,9 @@ func (v *CreateProtectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Aggregation != "" {
 		s.WriteString(schemas.CreateProtectionGroupRequest_Aggregation, string(v.Aggregation))
 	}
-	serializeProtectionGroupMembers(s, schemas.CreateProtectionGroupRequest_Members, v.Members)
+	if v.Members != nil {
+		serializeProtectionGroupMembers(s, schemas.CreateProtectionGroupRequest_Members, v.Members)
+	}
 	if v.Pattern != "" {
 		s.WriteString(schemas.CreateProtectionGroupRequest_Pattern, string(v.Pattern))
 	}
@@ -102,7 +104,9 @@ func (v *CreateProtectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResourceType != "" {
 		s.WriteString(schemas.CreateProtectionGroupRequest_ResourceType, string(v.ResourceType))
 	}
-	serializeTagList(s, schemas.CreateProtectionGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProtectionGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProtectionGroupOutput struct {

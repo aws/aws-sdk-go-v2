@@ -73,11 +73,15 @@ func (v *StartProductSubscriptionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Domain != nil {
 		s.WriteString(schemas.StartProductSubscriptionRequest_Domain, *v.Domain)
 	}
-	serializeIdentityProvider(s, schemas.StartProductSubscriptionRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.StartProductSubscriptionRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.Product != nil {
 		s.WriteString(schemas.StartProductSubscriptionRequest_Product, *v.Product)
 	}
-	serializeTags(s, schemas.StartProductSubscriptionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartProductSubscriptionRequest_Tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.StartProductSubscriptionRequest_Username, *v.Username)
 	}

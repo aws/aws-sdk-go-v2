@@ -69,7 +69,9 @@ func (v *CreateParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParameterGroupName != nil {
 		s.WriteString(schemas.CreateParameterGroupRequest_ParameterGroupName, *v.ParameterGroupName)
 	}
-	serializeTagList(s, schemas.CreateParameterGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateParameterGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateParameterGroupOutput struct {

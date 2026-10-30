@@ -79,7 +79,9 @@ func (v *CreateDatasetExportJobInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ErrorReportLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProcessingInput(s, schemas.CreateDatasetExportJobRequest_input, v.Input)
+	if v.Input != nil {
+		serializeProcessingInput(s, schemas.CreateDatasetExportJobRequest_input, v.Input)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreateDatasetExportJobRequest_workspaceName, *v.WorkspaceName)
 	}

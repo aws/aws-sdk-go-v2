@@ -72,7 +72,9 @@ func (v *SendAutomationSignalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutomationExecutionId != nil {
 		s.WriteString(schemas.SendAutomationSignalRequest_AutomationExecutionId, *v.AutomationExecutionId)
 	}
-	serializeAutomationParameterMap(s, schemas.SendAutomationSignalRequest_Payload, v.Payload)
+	if v.Payload != nil {
+		serializeAutomationParameterMap(s, schemas.SendAutomationSignalRequest_Payload, v.Payload)
+	}
 	if v.SignalType != "" {
 		s.WriteString(schemas.SendAutomationSignalRequest_SignalType, string(v.SignalType))
 	}

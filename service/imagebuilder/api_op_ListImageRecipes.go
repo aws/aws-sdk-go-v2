@@ -61,7 +61,9 @@ func (v *ListImageRecipesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImageRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListImageRecipesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListImageRecipesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListImageRecipesRequest_maxResults, *v.MaxResults)
 	}
@@ -101,7 +103,9 @@ func (v *ListImageRecipesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImageRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageRecipeSummaryList(s, schemas.ListImageRecipesResponse_imageRecipeSummaryList, v.ImageRecipeSummaryList)
+	if v.ImageRecipeSummaryList != nil {
+		serializeImageRecipeSummaryList(s, schemas.ListImageRecipesResponse_imageRecipeSummaryList, v.ImageRecipeSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImageRecipesResponse_nextToken, *v.NextToken)
 	}

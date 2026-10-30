@@ -98,7 +98,9 @@ func (v *CreateDiskSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceName != nil {
 		s.WriteString(schemas.CreateDiskSnapshotRequest_instanceName, *v.InstanceName)
 	}
-	serializeTagList(s, schemas.CreateDiskSnapshotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDiskSnapshotRequest_tags, v.Tags)
+	}
 }
 
 type CreateDiskSnapshotOutput struct {
@@ -121,7 +123,9 @@ func (v *CreateDiskSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDiskSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateDiskSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateDiskSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *CreateDiskSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDiskSnapshotResult, func(s *smithy.Schema) error {

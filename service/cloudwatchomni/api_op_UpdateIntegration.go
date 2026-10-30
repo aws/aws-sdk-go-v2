@@ -55,9 +55,15 @@ func (v *UpdateIntegrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationCredential(s, schemas.UpdateIntegrationInput_credential, v.Credential)
-	serializeIntegrationIdentifier(s, schemas.UpdateIntegrationInput_identifier, v.Identifier)
-	serializeStringMap(s, schemas.UpdateIntegrationInput_integrationAttributes, v.IntegrationAttributes)
+	if v.Credential != nil {
+		serializeIntegrationCredential(s, schemas.UpdateIntegrationInput_credential, v.Credential)
+	}
+	if v.Identifier != nil {
+		serializeIntegrationIdentifier(s, schemas.UpdateIntegrationInput_identifier, v.Identifier)
+	}
+	if v.IntegrationAttributes != nil {
+		serializeStringMap(s, schemas.UpdateIntegrationInput_integrationAttributes, v.IntegrationAttributes)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateIntegrationInput_roleArn, *v.RoleArn)
 	}

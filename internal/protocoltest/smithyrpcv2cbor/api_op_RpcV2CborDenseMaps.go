@@ -47,11 +47,21 @@ func (v *RpcV2CborDenseMapsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RpcV2CborDenseMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseBooleanMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
-	serializeDenseNumberMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, v.DenseNumberMap)
-	serializeDenseSetMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, v.DenseSetMap)
-	serializeDenseStringMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, v.DenseStringMap)
-	serializeDenseStructMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, v.DenseStructMap)
+	if v.DenseBooleanMap != nil {
+		serializeDenseBooleanMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	}
+	if v.DenseNumberMap != nil {
+		serializeDenseNumberMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	}
+	if v.DenseSetMap != nil {
+		serializeDenseSetMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, v.DenseSetMap)
+	}
+	if v.DenseStringMap != nil {
+		serializeDenseStringMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, v.DenseStringMap)
+	}
+	if v.DenseStructMap != nil {
+		serializeDenseStructMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, v.DenseStructMap)
+	}
 }
 func (v *RpcV2CborDenseMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RpcV2CborDenseMapsInputOutput, func(s *smithy.Schema) error {
@@ -95,11 +105,21 @@ func (v *RpcV2CborDenseMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RpcV2CborDenseMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseBooleanMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
-	serializeDenseNumberMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, v.DenseNumberMap)
-	serializeDenseSetMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, v.DenseSetMap)
-	serializeDenseStringMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, v.DenseStringMap)
-	serializeDenseStructMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, v.DenseStructMap)
+	if v.DenseBooleanMap != nil {
+		serializeDenseBooleanMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	}
+	if v.DenseNumberMap != nil {
+		serializeDenseNumberMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	}
+	if v.DenseSetMap != nil {
+		serializeDenseSetMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, v.DenseSetMap)
+	}
+	if v.DenseStringMap != nil {
+		serializeDenseStringMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, v.DenseStringMap)
+	}
+	if v.DenseStructMap != nil {
+		serializeDenseStructMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, v.DenseStructMap)
+	}
 }
 func (v *RpcV2CborDenseMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RpcV2CborDenseMapsInputOutput, func(s *smithy.Schema) error {

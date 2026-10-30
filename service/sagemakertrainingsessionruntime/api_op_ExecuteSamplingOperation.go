@@ -53,7 +53,9 @@ func (v *ExecuteSamplingOperationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecuteSamplingOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSampleOperationConfig(s, schemas.ExecuteSamplingOperationInput_operationConfig, v.OperationConfig)
+	if v.OperationConfig != nil {
+		serializeSampleOperationConfig(s, schemas.ExecuteSamplingOperationInput_operationConfig, v.OperationConfig)
+	}
 	if v.TrainingSessionName != nil {
 		s.WriteString(schemas.ExecuteSamplingOperationInput_trainingSessionName, *v.TrainingSessionName)
 	}

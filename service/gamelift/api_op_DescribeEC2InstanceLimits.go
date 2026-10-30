@@ -129,7 +129,9 @@ func (v *DescribeEC2InstanceLimitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEC2InstanceLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEC2InstanceLimitList(s, schemas.DescribeEC2InstanceLimitsOutput_EC2InstanceLimits, v.EC2InstanceLimits)
+	if v.EC2InstanceLimits != nil {
+		serializeEC2InstanceLimitList(s, schemas.DescribeEC2InstanceLimitsOutput_EC2InstanceLimits, v.EC2InstanceLimits)
+	}
 }
 func (v *DescribeEC2InstanceLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEC2InstanceLimitsOutput, func(s *smithy.Schema) error {

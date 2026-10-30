@@ -118,7 +118,9 @@ func (v *ListParentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListParentsResponse_NextToken, *v.NextToken)
 	}
-	serializeParents(s, schemas.ListParentsResponse_Parents, v.Parents)
+	if v.Parents != nil {
+		serializeParents(s, schemas.ListParentsResponse_Parents, v.Parents)
+	}
 }
 func (v *ListParentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListParentsResponse, func(s *smithy.Schema) error {

@@ -57,11 +57,15 @@ func (v *UpdateKnowledgeBasePermissionsInput) SerializeMembers(s smithy.ShapeSer
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateKnowledgeBasePermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	if v.GrantPermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.UpdateKnowledgeBasePermissionsRequest_KnowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.RevokePermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateKnowledgeBasePermissionsOutput struct {
@@ -104,7 +108,9 @@ func (v *UpdateKnowledgeBasePermissionsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.UpdateKnowledgeBasePermissionsResponse_KnowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateKnowledgeBasePermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateKnowledgeBasePermissionsResponse_RequestId, *v.RequestId)
 	}

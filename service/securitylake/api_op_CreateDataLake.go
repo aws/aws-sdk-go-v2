@@ -73,11 +73,15 @@ func (v *CreateDataLakeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDataLakeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeConfigurationList(s, schemas.CreateDataLakeRequest_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeDataLakeConfigurationList(s, schemas.CreateDataLakeRequest_configurations, v.Configurations)
+	}
 	if v.MetaStoreManagerRoleArn != nil {
 		s.WriteString(schemas.CreateDataLakeRequest_metaStoreManagerRoleArn, *v.MetaStoreManagerRoleArn)
 	}
-	serializeTagList(s, schemas.CreateDataLakeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataLakeRequest_tags, v.Tags)
+	}
 }
 
 type CreateDataLakeOutput struct {
@@ -98,7 +102,9 @@ func (v *CreateDataLakeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDataLakeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeResourceList(s, schemas.CreateDataLakeResponse_dataLakes, v.DataLakes)
+	if v.DataLakes != nil {
+		serializeDataLakeResourceList(s, schemas.CreateDataLakeResponse_dataLakes, v.DataLakes)
+	}
 }
 func (v *CreateDataLakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDataLakeResponse, func(s *smithy.Schema) error {

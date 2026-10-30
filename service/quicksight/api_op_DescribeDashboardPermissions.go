@@ -106,7 +106,9 @@ func (v *DescribeDashboardPermissionsOutput) SerializeMembers(s smithy.ShapeSeri
 		v.LinkSharingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUpdateResourcePermissionList(s, schemas.DescribeDashboardPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.DescribeDashboardPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeDashboardPermissionsResponse_RequestId, *v.RequestId)
 	}

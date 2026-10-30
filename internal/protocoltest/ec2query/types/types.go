@@ -49,7 +49,9 @@ func (v *NestedStructWithList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NestedStructWithList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.NestedStructWithList_ListArg, v.ListArg)
+	if v.ListArg != nil {
+		serializeStringList(s, schemas.NestedStructWithList_ListArg, v.ListArg)
+	}
 }
 func (v *NestedStructWithList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NestedStructWithList, func(s *smithy.Schema) error {
@@ -237,7 +239,9 @@ func (v *XmlNamespaceNested) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Foo != nil {
 		s.WriteString(schemas.XmlNamespaceNested_foo, *v.Foo)
 	}
-	serializeXmlNamespacedList(s, schemas.XmlNamespaceNested_values, v.Values)
+	if v.Values != nil {
+		serializeXmlNamespacedList(s, schemas.XmlNamespaceNested_values, v.Values)
+	}
 }
 func (v *XmlNamespaceNested) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlNamespaceNested, func(s *smithy.Schema) error {

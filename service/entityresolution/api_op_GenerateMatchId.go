@@ -84,7 +84,9 @@ func (v *GenerateMatchIdInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProcessingType != "" {
 		s.WriteString(schemas.GenerateMatchIdInput_processingType, string(v.ProcessingType))
 	}
-	serializeRecordList(s, schemas.GenerateMatchIdInput_records, v.Records)
+	if v.Records != nil {
+		serializeRecordList(s, schemas.GenerateMatchIdInput_records, v.Records)
+	}
 	if v.WorkflowName != nil {
 		s.WriteString(schemas.GenerateMatchIdInput_workflowName, *v.WorkflowName)
 	}
@@ -115,8 +117,12 @@ func (v *GenerateMatchIdOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateMatchIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRecordsList(s, schemas.GenerateMatchIdOutput_failedRecords, v.FailedRecords)
-	serializeMatchGroupsList(s, schemas.GenerateMatchIdOutput_matchGroups, v.MatchGroups)
+	if v.FailedRecords != nil {
+		serializeFailedRecordsList(s, schemas.GenerateMatchIdOutput_failedRecords, v.FailedRecords)
+	}
+	if v.MatchGroups != nil {
+		serializeMatchGroupsList(s, schemas.GenerateMatchIdOutput_matchGroups, v.MatchGroups)
+	}
 }
 func (v *GenerateMatchIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GenerateMatchIdOutput, func(s *smithy.Schema) error {

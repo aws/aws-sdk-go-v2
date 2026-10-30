@@ -84,7 +84,9 @@ func (v *StartIncidentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Impact != nil {
 		s.WriteInt32(schemas.StartIncidentInput_impact, *v.Impact)
 	}
-	serializeRelatedItemList(s, schemas.StartIncidentInput_relatedItems, v.RelatedItems)
+	if v.RelatedItems != nil {
+		serializeRelatedItemList(s, schemas.StartIncidentInput_relatedItems, v.RelatedItems)
+	}
 	if v.ResponsePlanArn != nil {
 		s.WriteString(schemas.StartIncidentInput_responsePlanArn, *v.ResponsePlanArn)
 	}

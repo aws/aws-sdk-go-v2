@@ -91,7 +91,9 @@ func (v *ListAccessControlConfigurationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAccessControlConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlConfigurationSummaryList(s, schemas.ListAccessControlConfigurationsResponse_AccessControlConfigurations, v.AccessControlConfigurations)
+	if v.AccessControlConfigurations != nil {
+		serializeAccessControlConfigurationSummaryList(s, schemas.ListAccessControlConfigurationsResponse_AccessControlConfigurations, v.AccessControlConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessControlConfigurationsResponse_NextToken, *v.NextToken)
 	}

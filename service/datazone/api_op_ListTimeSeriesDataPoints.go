@@ -132,7 +132,9 @@ func (v *ListTimeSeriesDataPointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTimeSeriesDataPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeSeriesDataPointSummaryFormOutputList(s, schemas.ListTimeSeriesDataPointsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeTimeSeriesDataPointSummaryFormOutputList(s, schemas.ListTimeSeriesDataPointsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTimeSeriesDataPointsOutput_nextToken, *v.NextToken)
 	}

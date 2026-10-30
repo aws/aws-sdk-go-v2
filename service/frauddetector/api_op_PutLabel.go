@@ -57,7 +57,9 @@ func (v *PutLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.PutLabelRequest_name, *v.Name)
 	}
-	serializetagList(s, schemas.PutLabelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.PutLabelRequest_tags, v.Tags)
+	}
 }
 
 type PutLabelOutput struct {

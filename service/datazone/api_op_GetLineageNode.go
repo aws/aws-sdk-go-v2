@@ -146,11 +146,15 @@ func (v *GetLineageNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetLineageNodeOutput_domainId, *v.DomainId)
 	}
-	serializeLineageNodeReferenceList(s, schemas.GetLineageNodeOutput_downstreamNodes, v.DownstreamNodes)
+	if v.DownstreamNodes != nil {
+		serializeLineageNodeReferenceList(s, schemas.GetLineageNodeOutput_downstreamNodes, v.DownstreamNodes)
+	}
 	if v.EventTimestamp != nil {
 		s.WriteTime(schemas.GetLineageNodeOutput_eventTimestamp, *v.EventTimestamp)
 	}
-	serializeFormOutputList(s, schemas.GetLineageNodeOutput_formsOutput, v.FormsOutput)
+	if v.FormsOutput != nil {
+		serializeFormOutputList(s, schemas.GetLineageNodeOutput_formsOutput, v.FormsOutput)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetLineageNodeOutput_id, *v.Id)
 	}
@@ -172,7 +176,9 @@ func (v *GetLineageNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedBy != nil {
 		s.WriteString(schemas.GetLineageNodeOutput_updatedBy, *v.UpdatedBy)
 	}
-	serializeLineageNodeReferenceList(s, schemas.GetLineageNodeOutput_upstreamNodes, v.UpstreamNodes)
+	if v.UpstreamNodes != nil {
+		serializeLineageNodeReferenceList(s, schemas.GetLineageNodeOutput_upstreamNodes, v.UpstreamNodes)
+	}
 }
 func (v *GetLineageNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLineageNodeOutput, func(s *smithy.Schema) error {

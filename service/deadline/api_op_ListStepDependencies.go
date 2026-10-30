@@ -115,7 +115,9 @@ func (v *ListStepDependenciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStepDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStepDependencies(s, schemas.ListStepDependenciesResponse_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeStepDependencies(s, schemas.ListStepDependenciesResponse_dependencies, v.Dependencies)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStepDependenciesResponse_nextToken, *v.NextToken)
 	}

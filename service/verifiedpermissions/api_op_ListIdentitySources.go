@@ -80,7 +80,9 @@ func (v *ListIdentitySourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentitySourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentitySourceFilters(s, schemas.ListIdentitySourcesInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeIdentitySourceFilters(s, schemas.ListIdentitySourcesInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListIdentitySourcesInput_maxResults, *v.MaxResults)
 	}
@@ -119,7 +121,9 @@ func (v *ListIdentitySourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentitySourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentitySources(s, schemas.ListIdentitySourcesOutput_identitySources, v.IdentitySources)
+	if v.IdentitySources != nil {
+		serializeIdentitySources(s, schemas.ListIdentitySourcesOutput_identitySources, v.IdentitySources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdentitySourcesOutput_nextToken, *v.NextToken)
 	}

@@ -90,7 +90,9 @@ func (v *ListRealtimeContactAnalysisSegmentsV2Input) SerializeMembers(s smithy.S
 	if v.OutputType != "" {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_OutputType, string(v.OutputType))
 	}
-	serializeRealTimeContactAnalysisSegmentTypes(s, schemas.ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes, v.SegmentTypes)
+	if v.SegmentTypes != nil {
+		serializeRealTimeContactAnalysisSegmentTypes(s, schemas.ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes, v.SegmentTypes)
+	}
 }
 
 type ListRealtimeContactAnalysisSegmentsV2Output struct {
@@ -135,7 +137,9 @@ func (v *ListRealtimeContactAnalysisSegmentsV2Output) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_NextToken, *v.NextToken)
 	}
-	serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments, v.Segments)
+	if v.Segments != nil {
+		serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments, v.Segments)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_Status, string(v.Status))
 	}

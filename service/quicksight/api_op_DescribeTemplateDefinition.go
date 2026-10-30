@@ -139,7 +139,9 @@ func (v *DescribeTemplateDefinitionOutput) SerializeMembers(s smithy.ShapeSerial
 		v.Definition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTemplateErrorList(s, schemas.DescribeTemplateDefinitionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeTemplateErrorList(s, schemas.DescribeTemplateDefinitionResponse_Errors, v.Errors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeTemplateDefinitionResponse_Name, *v.Name)
 	}

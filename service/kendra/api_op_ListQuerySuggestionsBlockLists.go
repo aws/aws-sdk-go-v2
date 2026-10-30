@@ -106,7 +106,9 @@ func (v *ListQuerySuggestionsBlockListsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListQuerySuggestionsBlockListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuerySuggestionsBlockListSummaryItems(s, schemas.ListQuerySuggestionsBlockListsResponse_BlockListSummaryItems, v.BlockListSummaryItems)
+	if v.BlockListSummaryItems != nil {
+		serializeQuerySuggestionsBlockListSummaryItems(s, schemas.ListQuerySuggestionsBlockListsResponse_BlockListSummaryItems, v.BlockListSummaryItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQuerySuggestionsBlockListsResponse_NextToken, *v.NextToken)
 	}

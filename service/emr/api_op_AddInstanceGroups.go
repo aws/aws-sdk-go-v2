@@ -49,7 +49,9 @@ func (v *AddInstanceGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddInstanceGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceGroupConfigList(s, schemas.AddInstanceGroupsInput_InstanceGroups, v.InstanceGroups)
+	if v.InstanceGroups != nil {
+		serializeInstanceGroupConfigList(s, schemas.AddInstanceGroupsInput_InstanceGroups, v.InstanceGroups)
+	}
 	if v.JobFlowId != nil {
 		s.WriteString(schemas.AddInstanceGroupsInput_JobFlowId, *v.JobFlowId)
 	}
@@ -83,7 +85,9 @@ func (v *AddInstanceGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.AddInstanceGroupsOutput_ClusterArn, *v.ClusterArn)
 	}
-	serializeInstanceGroupIdsList(s, schemas.AddInstanceGroupsOutput_InstanceGroupIds, v.InstanceGroupIds)
+	if v.InstanceGroupIds != nil {
+		serializeInstanceGroupIdsList(s, schemas.AddInstanceGroupsOutput_InstanceGroupIds, v.InstanceGroupIds)
+	}
 	if v.JobFlowId != nil {
 		s.WriteString(schemas.AddInstanceGroupsOutput_JobFlowId, *v.JobFlowId)
 	}

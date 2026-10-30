@@ -56,7 +56,9 @@ func (v *ImportDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.ImportDecoderManifestRequest_name, *v.Name)
 	}
-	serializeNetworkFileDefinitions(s, schemas.ImportDecoderManifestRequest_networkFileDefinitions, v.NetworkFileDefinitions)
+	if v.NetworkFileDefinitions != nil {
+		serializeNetworkFileDefinitions(s, schemas.ImportDecoderManifestRequest_networkFileDefinitions, v.NetworkFileDefinitions)
+	}
 }
 func (v *ImportDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportDecoderManifestRequest, func(s *smithy.Schema) error {

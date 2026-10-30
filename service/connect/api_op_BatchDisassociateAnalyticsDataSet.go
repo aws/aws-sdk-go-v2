@@ -58,7 +58,9 @@ func (v *BatchDisassociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *BatchDisassociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSetIds(s, schemas.BatchDisassociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	if v.DataSetIds != nil {
+		serializeDataSetIds(s, schemas.BatchDisassociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchDisassociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
 	}
@@ -88,8 +90,12 @@ func (v *BatchDisassociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *BatchDisassociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSetIds(s, schemas.BatchDisassociateAnalyticsDataSetResponse_Deleted, v.Deleted)
-	serializeErrorResults(s, schemas.BatchDisassociateAnalyticsDataSetResponse_Errors, v.Errors)
+	if v.Deleted != nil {
+		serializeDataSetIds(s, schemas.BatchDisassociateAnalyticsDataSetResponse_Deleted, v.Deleted)
+	}
+	if v.Errors != nil {
+		serializeErrorResults(s, schemas.BatchDisassociateAnalyticsDataSetResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDisassociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisassociateAnalyticsDataSetResponse, func(s *smithy.Schema) error {

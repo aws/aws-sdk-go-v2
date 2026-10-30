@@ -87,7 +87,9 @@ func (v *ListPaymentManagersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPaymentManagersResponse_nextToken, *v.NextToken)
 	}
-	serializePaymentManagerSummaries(s, schemas.ListPaymentManagersResponse_paymentManagers, v.PaymentManagers)
+	if v.PaymentManagers != nil {
+		serializePaymentManagerSummaries(s, schemas.ListPaymentManagersResponse_paymentManagers, v.PaymentManagers)
+	}
 }
 func (v *ListPaymentManagersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPaymentManagersResponse, func(s *smithy.Schema) error {

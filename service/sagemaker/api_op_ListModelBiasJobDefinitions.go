@@ -118,7 +118,9 @@ func (v *ListModelBiasJobDefinitionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListModelBiasJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelBiasJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.JobDefinitionSummaries != nil {
+		serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelBiasJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelBiasJobDefinitionsResponse_NextToken, *v.NextToken)
 	}

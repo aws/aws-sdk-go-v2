@@ -99,7 +99,9 @@ func (v *ListThreatEntitySetsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThreatEntitySetsResponse_NextToken, *v.NextToken)
 	}
-	serializeThreatEntitySetIds(s, schemas.ListThreatEntitySetsResponse_ThreatEntitySetIds, v.ThreatEntitySetIds)
+	if v.ThreatEntitySetIds != nil {
+		serializeThreatEntitySetIds(s, schemas.ListThreatEntitySetsResponse_ThreatEntitySetIds, v.ThreatEntitySetIds)
+	}
 }
 func (v *ListThreatEntitySetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThreatEntitySetsResponse, func(s *smithy.Schema) error {

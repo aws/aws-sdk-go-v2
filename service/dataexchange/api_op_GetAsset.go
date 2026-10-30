@@ -166,7 +166,9 @@ func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceId != nil {
 		s.WriteString(schemas.GetAssetResponse_SourceId, *v.SourceId)
 	}
-	serializeMapOf__string(s, schemas.GetAssetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.GetAssetResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetAssetResponse_UpdatedAt, *v.UpdatedAt)
 	}

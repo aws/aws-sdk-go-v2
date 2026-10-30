@@ -136,7 +136,9 @@ func (v *ListMultipartUploadsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Marker != nil {
 		s.WriteString(schemas.ListMultipartUploadsOutput_Marker, *v.Marker)
 	}
-	serializeUploadsList(s, schemas.ListMultipartUploadsOutput_UploadsList, v.UploadsList)
+	if v.UploadsList != nil {
+		serializeUploadsList(s, schemas.ListMultipartUploadsOutput_UploadsList, v.UploadsList)
+	}
 }
 func (v *ListMultipartUploadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMultipartUploadsOutput, func(s *smithy.Schema) error {

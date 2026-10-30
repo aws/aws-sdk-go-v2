@@ -78,7 +78,9 @@ func (v *GetContainerServiceDeploymentsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetContainerServiceDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerServiceDeploymentList(s, schemas.GetContainerServiceDeploymentsResult_deployments, v.Deployments)
+	if v.Deployments != nil {
+		serializeContainerServiceDeploymentList(s, schemas.GetContainerServiceDeploymentsResult_deployments, v.Deployments)
+	}
 }
 func (v *GetContainerServiceDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContainerServiceDeploymentsResult, func(s *smithy.Schema) error {

@@ -49,11 +49,15 @@ func (v *CreateRecoveryGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRecoveryGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CreateRecoveryGroupRequest_Cells, v.Cells)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.CreateRecoveryGroupRequest_Cells, v.Cells)
+	}
 	if v.RecoveryGroupName != nil {
 		s.WriteString(schemas.CreateRecoveryGroupRequest_RecoveryGroupName, *v.RecoveryGroupName)
 	}
-	serializeTags(s, schemas.CreateRecoveryGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRecoveryGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRecoveryGroupOutput struct {
@@ -83,14 +87,18 @@ func (v *CreateRecoveryGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRecoveryGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CreateRecoveryGroupResponse_Cells, v.Cells)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.CreateRecoveryGroupResponse_Cells, v.Cells)
+	}
 	if v.RecoveryGroupArn != nil {
 		s.WriteString(schemas.CreateRecoveryGroupResponse_RecoveryGroupArn, *v.RecoveryGroupArn)
 	}
 	if v.RecoveryGroupName != nil {
 		s.WriteString(schemas.CreateRecoveryGroupResponse_RecoveryGroupName, *v.RecoveryGroupName)
 	}
-	serializeTags(s, schemas.CreateRecoveryGroupResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRecoveryGroupResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateRecoveryGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRecoveryGroupResponse, func(s *smithy.Schema) error {

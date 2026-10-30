@@ -91,7 +91,9 @@ func (v *DescribeFleetCapacityInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFleetCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetIdOrArnList(s, schemas.DescribeFleetCapacityInput_FleetIds, v.FleetIds)
+	if v.FleetIds != nil {
+		serializeFleetIdOrArnList(s, schemas.DescribeFleetCapacityInput_FleetIds, v.FleetIds)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeFleetCapacityInput_Limit, *v.Limit)
 	}
@@ -125,7 +127,9 @@ func (v *DescribeFleetCapacityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFleetCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetCapacityList(s, schemas.DescribeFleetCapacityOutput_FleetCapacity, v.FleetCapacity)
+	if v.FleetCapacity != nil {
+		serializeFleetCapacityList(s, schemas.DescribeFleetCapacityOutput_FleetCapacity, v.FleetCapacity)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetCapacityOutput_NextToken, *v.NextToken)
 	}

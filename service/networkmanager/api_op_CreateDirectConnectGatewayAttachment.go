@@ -91,8 +91,12 @@ func (v *CreateDirectConnectGatewayAttachmentInput) SerializeMembers(s smithy.Sh
 	if v.DirectConnectGatewayArn != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn, *v.DirectConnectGatewayArn)
 	}
-	serializeExternalRegionCodeList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
-	serializeNatRuleRequestList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.EdgeLocations != nil {
+		serializeExternalRegionCodeList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_EdgeLocations, v.EdgeLocations)
+	}
+	if v.NatGatewayRules != nil {
+		serializeNatRuleRequestList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	}
 	if v.NatGatewaySupport != "" {
 		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
 	}
@@ -102,7 +106,9 @@ func (v *CreateDirectConnectGatewayAttachmentInput) SerializeMembers(s smithy.Sh
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
-	serializeTagList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDirectConnectGatewayAttachmentRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDirectConnectGatewayAttachmentOutput struct {

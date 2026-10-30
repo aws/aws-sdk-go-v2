@@ -106,7 +106,9 @@ func (v *ListNetworkConnectorVersionsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListNetworkConnectorVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkConnectorVersionsList(s, schemas.ListNetworkConnectorVersionsResponse_NetworkConnectorVersions, v.NetworkConnectorVersions)
+	if v.NetworkConnectorVersions != nil {
+		serializeNetworkConnectorVersionsList(s, schemas.ListNetworkConnectorVersionsResponse_NetworkConnectorVersions, v.NetworkConnectorVersions)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListNetworkConnectorVersionsResponse_NextMarker, *v.NextMarker)
 	}

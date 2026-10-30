@@ -113,7 +113,9 @@ func (v *SearchWorkspaceAssociationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchWorkspaceAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeWorkspaceAssociationSearchSummaryList(s, schemas.SearchWorkspaceAssociationsResponse_WorkspaceAssociations, v.WorkspaceAssociations)
+	if v.WorkspaceAssociations != nil {
+		serializeWorkspaceAssociationSearchSummaryList(s, schemas.SearchWorkspaceAssociationsResponse_WorkspaceAssociations, v.WorkspaceAssociations)
+	}
 }
 func (v *SearchWorkspaceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchWorkspaceAssociationsResponse, func(s *smithy.Schema) error {

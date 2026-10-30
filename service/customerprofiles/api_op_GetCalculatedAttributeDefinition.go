@@ -159,7 +159,9 @@ func (v *GetCalculatedAttributeDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.Status != "" {
 		s.WriteString(schemas.GetCalculatedAttributeDefinitionResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetCalculatedAttributeDefinitionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCalculatedAttributeDefinitionResponse_Tags, v.Tags)
+	}
 	if v.UseHistoricalData != nil {
 		s.WriteBool(schemas.GetCalculatedAttributeDefinitionResponse_UseHistoricalData, *v.UseHistoricalData)
 	}

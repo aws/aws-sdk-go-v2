@@ -103,7 +103,9 @@ func (v *AssociateFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionId != nil {
 		s.WriteString(schemas.AssociateFacesRequest_CollectionId, *v.CollectionId)
 	}
-	serializeUserFaceIdList(s, schemas.AssociateFacesRequest_FaceIds, v.FaceIds)
+	if v.FaceIds != nil {
+		serializeUserFaceIdList(s, schemas.AssociateFacesRequest_FaceIds, v.FaceIds)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.AssociateFacesRequest_UserId, *v.UserId)
 	}
@@ -141,8 +143,12 @@ func (v *AssociateFacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociateFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedFacesList(s, schemas.AssociateFacesResponse_AssociatedFaces, v.AssociatedFaces)
-	serializeUnsuccessfulFaceAssociationList(s, schemas.AssociateFacesResponse_UnsuccessfulFaceAssociations, v.UnsuccessfulFaceAssociations)
+	if v.AssociatedFaces != nil {
+		serializeAssociatedFacesList(s, schemas.AssociateFacesResponse_AssociatedFaces, v.AssociatedFaces)
+	}
+	if v.UnsuccessfulFaceAssociations != nil {
+		serializeUnsuccessfulFaceAssociationList(s, schemas.AssociateFacesResponse_UnsuccessfulFaceAssociations, v.UnsuccessfulFaceAssociations)
+	}
 	if v.UserStatus != "" {
 		s.WriteString(schemas.AssociateFacesResponse_UserStatus, string(v.UserStatus))
 	}

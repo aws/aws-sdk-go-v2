@@ -104,7 +104,9 @@ func (v *GetPositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Accuracy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePositionCoordinate(s, schemas.GetPositionResponse_Position, v.Position)
+	if v.Position != nil {
+		serializePositionCoordinate(s, schemas.GetPositionResponse_Position, v.Position)
+	}
 	if v.SolverProvider != "" {
 		s.WriteString(schemas.GetPositionResponse_SolverProvider, string(v.SolverProvider))
 	}

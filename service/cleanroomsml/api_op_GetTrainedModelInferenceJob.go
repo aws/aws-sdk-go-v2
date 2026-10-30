@@ -219,7 +219,9 @@ func (v *GetTrainedModelInferenceJobOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Description != nil {
 		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_description, *v.Description)
 	}
-	serializeInferenceEnvironmentMap(s, schemas.GetTrainedModelInferenceJobResponse_environment, v.Environment)
+	if v.Environment != nil {
+		serializeInferenceEnvironmentMap(s, schemas.GetTrainedModelInferenceJobResponse_environment, v.Environment)
+	}
 	if v.InferenceContainerImageDigest != nil {
 		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_inferenceContainerImageDigest, *v.InferenceContainerImageDigest)
 	}
@@ -265,7 +267,9 @@ func (v *GetTrainedModelInferenceJobOutput) SerializeMembers(s smithy.ShapeSeria
 		v.StatusDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetTrainedModelInferenceJobResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetTrainedModelInferenceJobResponse_tags, v.Tags)
+	}
 	if v.TrainedModelArn != nil {
 		s.WriteString(schemas.GetTrainedModelInferenceJobResponse_trainedModelArn, *v.TrainedModelArn)
 	}

@@ -89,7 +89,9 @@ func (v *UpdateImageSetMetadataInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.LatestVersionId != nil {
 		s.WriteString(schemas.UpdateImageSetMetadataRequest_latestVersionId, *v.LatestVersionId)
 	}
-	serializeMetadataUpdates(s, schemas.UpdateImageSetMetadataRequest_updateImageSetMetadataUpdates, v.UpdateImageSetMetadataUpdates)
+	if v.UpdateImageSetMetadataUpdates != nil {
+		serializeMetadataUpdates(s, schemas.UpdateImageSetMetadataRequest_updateImageSetMetadataUpdates, v.UpdateImageSetMetadataUpdates)
+	}
 }
 
 type UpdateImageSetMetadataOutput struct {

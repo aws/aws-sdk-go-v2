@@ -98,7 +98,9 @@ func (v *DescribeTopicPartitionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTopicPartitionsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfTopicPartitionInfo(s, schemas.DescribeTopicPartitionsResponse_Partitions, v.Partitions)
+	if v.Partitions != nil {
+		serialize__listOfTopicPartitionInfo(s, schemas.DescribeTopicPartitionsResponse_Partitions, v.Partitions)
+	}
 }
 func (v *DescribeTopicPartitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTopicPartitionsResponse, func(s *smithy.Schema) error {

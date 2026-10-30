@@ -111,7 +111,9 @@ func (v *DescribeImageSigningStatusOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.DescribeImageSigningStatusResponse_repositoryName, *v.RepositoryName)
 	}
-	serializeImageSigningStatusList(s, schemas.DescribeImageSigningStatusResponse_signingStatuses, v.SigningStatuses)
+	if v.SigningStatuses != nil {
+		serializeImageSigningStatusList(s, schemas.DescribeImageSigningStatusResponse_signingStatuses, v.SigningStatuses)
+	}
 }
 func (v *DescribeImageSigningStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeImageSigningStatusResponse, func(s *smithy.Schema) error {

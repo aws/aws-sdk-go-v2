@@ -94,7 +94,9 @@ func (v *GetDeploymentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeploymentType != "" {
 		s.WriteString(schemas.GetDeploymentStatusResponse_DeploymentType, string(v.DeploymentType))
 	}
-	serializeErrorDetails(s, schemas.GetDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.GetDeploymentStatusResponse_ErrorMessage, *v.ErrorMessage)
 	}

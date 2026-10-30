@@ -63,7 +63,9 @@ func (v *SendHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SendHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeMetrics(s, schemas.SendHeartbeatRequest_AgentMetrics, v.AgentMetrics)
+	if v.AgentMetrics != nil {
+		serializeEdgeMetrics(s, schemas.SendHeartbeatRequest_AgentMetrics, v.AgentMetrics)
+	}
 	if v.AgentVersion != nil {
 		s.WriteString(schemas.SendHeartbeatRequest_AgentVersion, *v.AgentVersion)
 	}
@@ -78,7 +80,9 @@ func (v *SendHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceName != nil {
 		s.WriteString(schemas.SendHeartbeatRequest_DeviceName, *v.DeviceName)
 	}
-	serializeModels(s, schemas.SendHeartbeatRequest_Models, v.Models)
+	if v.Models != nil {
+		serializeModels(s, schemas.SendHeartbeatRequest_Models, v.Models)
+	}
 }
 
 type SendHeartbeatOutput struct {

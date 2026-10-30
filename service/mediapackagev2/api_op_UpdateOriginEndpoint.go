@@ -125,7 +125,9 @@ func (v *UpdateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerType != "" {
 		s.WriteString(schemas.UpdateOriginEndpointRequest_ContainerType, string(v.ContainerType))
 	}
-	serializeCreateDashManifests(s, schemas.UpdateOriginEndpointRequest_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serializeCreateDashManifests(s, schemas.UpdateOriginEndpointRequest_DashManifests, v.DashManifests)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateOriginEndpointRequest_Description, *v.Description)
 	}
@@ -137,9 +139,15 @@ func (v *UpdateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCreateHlsManifests(s, schemas.UpdateOriginEndpointRequest_HlsManifests, v.HlsManifests)
-	serializeCreateLowLatencyHlsManifests(s, schemas.UpdateOriginEndpointRequest_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
-	serializeCreateMssManifests(s, schemas.UpdateOriginEndpointRequest_MssManifests, v.MssManifests)
+	if v.HlsManifests != nil {
+		serializeCreateHlsManifests(s, schemas.UpdateOriginEndpointRequest_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeCreateLowLatencyHlsManifests(s, schemas.UpdateOriginEndpointRequest_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
+	if v.MssManifests != nil {
+		serializeCreateMssManifests(s, schemas.UpdateOriginEndpointRequest_MssManifests, v.MssManifests)
+	}
 	if v.OriginEndpointName != nil {
 		s.WriteString(schemas.UpdateOriginEndpointRequest_OriginEndpointName, *v.OriginEndpointName)
 	}
@@ -272,7 +280,9 @@ func (v *UpdateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateOriginEndpointResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeGetDashManifests(s, schemas.UpdateOriginEndpointResponse_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serializeGetDashManifests(s, schemas.UpdateOriginEndpointResponse_DashManifests, v.DashManifests)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateOriginEndpointResponse_Description, *v.Description)
 	}
@@ -284,12 +294,18 @@ func (v *UpdateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGetHlsManifests(s, schemas.UpdateOriginEndpointResponse_HlsManifests, v.HlsManifests)
-	serializeGetLowLatencyHlsManifests(s, schemas.UpdateOriginEndpointResponse_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	if v.HlsManifests != nil {
+		serializeGetHlsManifests(s, schemas.UpdateOriginEndpointResponse_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeGetLowLatencyHlsManifests(s, schemas.UpdateOriginEndpointResponse_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.UpdateOriginEndpointResponse_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeGetMssManifests(s, schemas.UpdateOriginEndpointResponse_MssManifests, v.MssManifests)
+	if v.MssManifests != nil {
+		serializeGetMssManifests(s, schemas.UpdateOriginEndpointResponse_MssManifests, v.MssManifests)
+	}
 	if v.OriginEndpointName != nil {
 		s.WriteString(schemas.UpdateOriginEndpointResponse_OriginEndpointName, *v.OriginEndpointName)
 	}
@@ -304,7 +320,9 @@ func (v *UpdateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StreamNameOutputMode != "" {
 		s.WriteString(schemas.UpdateOriginEndpointResponse_StreamNameOutputMode, string(v.StreamNameOutputMode))
 	}
-	serializeTagMap(s, schemas.UpdateOriginEndpointResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateOriginEndpointResponse_Tags, v.Tags)
+	}
 	if v.UriSeparator != "" {
 		s.WriteString(schemas.UpdateOriginEndpointResponse_UriSeparator, string(v.UriSeparator))
 	}

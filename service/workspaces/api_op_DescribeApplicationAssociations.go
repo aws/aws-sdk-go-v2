@@ -60,7 +60,9 @@ func (v *DescribeApplicationAssociationsInput) SerializeMembers(s smithy.ShapeSe
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.DescribeApplicationAssociationsRequest_ApplicationId, *v.ApplicationId)
 	}
-	serializeApplicationAssociatedResourceTypeList(s, schemas.DescribeApplicationAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	if v.AssociatedResourceTypes != nil {
+		serializeApplicationAssociatedResourceTypeList(s, schemas.DescribeApplicationAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeApplicationAssociationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -91,7 +93,9 @@ func (v *DescribeApplicationAssociationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DescribeApplicationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationResourceAssociationList(s, schemas.DescribeApplicationAssociationsResult_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeApplicationResourceAssociationList(s, schemas.DescribeApplicationAssociationsResult_Associations, v.Associations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeApplicationAssociationsResult_NextToken, *v.NextToken)
 	}

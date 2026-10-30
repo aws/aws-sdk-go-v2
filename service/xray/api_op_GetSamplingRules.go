@@ -71,7 +71,9 @@ func (v *GetSamplingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSamplingRulesResult_NextToken, *v.NextToken)
 	}
-	serializeSamplingRuleRecordList(s, schemas.GetSamplingRulesResult_SamplingRuleRecords, v.SamplingRuleRecords)
+	if v.SamplingRuleRecords != nil {
+		serializeSamplingRuleRecordList(s, schemas.GetSamplingRulesResult_SamplingRuleRecords, v.SamplingRuleRecords)
+	}
 }
 func (v *GetSamplingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSamplingRulesResult, func(s *smithy.Schema) error {

@@ -131,7 +131,9 @@ func (v *ListImageScanFindingAggregationsOutput) SerializeMembers(s smithy.Shape
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_requestId, *v.RequestId)
 	}
-	serializeImageScanFindingAggregationsList(s, schemas.ListImageScanFindingAggregationsResponse_responses, v.Responses)
+	if v.Responses != nil {
+		serializeImageScanFindingAggregationsList(s, schemas.ListImageScanFindingAggregationsResponse_responses, v.Responses)
+	}
 }
 func (v *ListImageScanFindingAggregationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListImageScanFindingAggregationsResponse, func(s *smithy.Schema) error {

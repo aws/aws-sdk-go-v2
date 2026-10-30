@@ -131,7 +131,9 @@ func (v *UpdateTableMetadataLocationOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateTableMetadataLocationResponse_name, *v.Name)
 	}
-	serializeNamespaceList(s, schemas.UpdateTableMetadataLocationResponse_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.UpdateTableMetadataLocationResponse_namespace, v.Namespace)
+	}
 	if v.TableARN != nil {
 		s.WriteString(schemas.UpdateTableMetadataLocationResponse_tableARN, *v.TableARN)
 	}

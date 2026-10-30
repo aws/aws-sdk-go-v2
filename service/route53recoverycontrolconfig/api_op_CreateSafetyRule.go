@@ -86,7 +86,9 @@ func (v *CreateSafetyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GatingRule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateSafetyRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateSafetyRuleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSafetyRuleOutput struct {

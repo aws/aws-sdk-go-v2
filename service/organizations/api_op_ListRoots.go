@@ -100,7 +100,9 @@ func (v *ListRootsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRootsResponse_NextToken, *v.NextToken)
 	}
-	serializeRoots(s, schemas.ListRootsResponse_Roots, v.Roots)
+	if v.Roots != nil {
+		serializeRoots(s, schemas.ListRootsResponse_Roots, v.Roots)
+	}
 }
 func (v *ListRootsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRootsResponse, func(s *smithy.Schema) error {

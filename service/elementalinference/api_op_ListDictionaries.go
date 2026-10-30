@@ -76,7 +76,9 @@ func (v *ListDictionariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDictionariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDictionarySummaryList(s, schemas.ListDictionariesResponse_dictionaries, v.Dictionaries)
+	if v.Dictionaries != nil {
+		serializeDictionarySummaryList(s, schemas.ListDictionariesResponse_dictionaries, v.Dictionaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDictionariesResponse_nextToken, *v.NextToken)
 	}

@@ -153,7 +153,9 @@ func (v *CreateBatchInferenceJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SolutionVersionArn != nil {
 		s.WriteString(schemas.CreateBatchInferenceJobRequest_solutionVersionArn, *v.SolutionVersionArn)
 	}
-	serializeTags(s, schemas.CreateBatchInferenceJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateBatchInferenceJobRequest_tags, v.Tags)
+	}
 	if v.ThemeGenerationConfig != nil {
 		s.WriteStruct(schemas.CreateBatchInferenceJobRequest_themeGenerationConfig)
 		v.ThemeGenerationConfig.SerializeMembers(s)

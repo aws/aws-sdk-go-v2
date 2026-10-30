@@ -212,7 +212,9 @@ func (v *ListPackageVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Package != nil {
 		s.WriteString(schemas.ListPackageVersionsResult_package, *v.Package)
 	}
-	serializePackageVersionSummaryList(s, schemas.ListPackageVersionsResult_versions, v.Versions)
+	if v.Versions != nil {
+		serializePackageVersionSummaryList(s, schemas.ListPackageVersionsResult_versions, v.Versions)
+	}
 }
 func (v *ListPackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPackageVersionsResult, func(s *smithy.Schema) error {

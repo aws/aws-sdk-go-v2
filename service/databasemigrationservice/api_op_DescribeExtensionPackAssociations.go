@@ -78,7 +78,9 @@ func (v *DescribeExtensionPackAssociationsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeExtensionPackAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeExtensionPackAssociationsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeExtensionPackAssociationsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeExtensionPackAssociationsMessage_Marker, *v.Marker)
 	}
@@ -123,7 +125,9 @@ func (v *DescribeExtensionPackAssociationsOutput) SerializeMembers(s smithy.Shap
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeExtensionPackAssociationsResponse_Marker, *v.Marker)
 	}
-	serializeSchemaConversionRequestList(s, schemas.DescribeExtensionPackAssociationsResponse_Requests, v.Requests)
+	if v.Requests != nil {
+		serializeSchemaConversionRequestList(s, schemas.DescribeExtensionPackAssociationsResponse_Requests, v.Requests)
+	}
 }
 func (v *DescribeExtensionPackAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeExtensionPackAssociationsResponse, func(s *smithy.Schema) error {

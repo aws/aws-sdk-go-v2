@@ -62,7 +62,9 @@ func (v *AgentConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentParameters(s, schemas.AgentConfiguration_agentParameters, v.AgentParameters)
+	if v.AgentParameters != nil {
+		serializeAgentParameters(s, schemas.AgentConfiguration_agentParameters, v.AgentParameters)
+	}
 	if v.PeriodInSeconds != nil {
 		s.WriteInt32(schemas.AgentConfiguration_periodInSeconds, *v.PeriodInSeconds)
 	}
@@ -218,7 +220,9 @@ func (v *Anomaly) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Anomaly) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalyInstances(s, schemas.Anomaly_instances, v.Instances)
+	if v.Instances != nil {
+		serializeAnomalyInstances(s, schemas.Anomaly_instances, v.Instances)
+	}
 	if v.Metric != nil {
 		s.WriteStruct(schemas.Anomaly_metric)
 		v.Metric.SerializeMembers(s)
@@ -347,7 +351,9 @@ func (v *Channel) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventPublishers(s, schemas.Channel_eventPublishers, v.EventPublishers)
+	if v.EventPublishers != nil {
+		serializeEventPublishers(s, schemas.Channel_eventPublishers, v.EventPublishers)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Channel_id, *v.Id)
 	}
@@ -483,7 +489,9 @@ func (v *FrameMetric) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FrameName != nil {
 		s.WriteString(schemas.FrameMetric_frameName, *v.FrameName)
 	}
-	serializeThreadStates(s, schemas.FrameMetric_threadStates, v.ThreadStates)
+	if v.ThreadStates != nil {
+		serializeThreadStates(s, schemas.FrameMetric_threadStates, v.ThreadStates)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.FrameMetric_type, string(v.Type))
 	}
@@ -537,7 +545,9 @@ func (v *FrameMetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FrameMetric.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFrameMetricValues(s, schemas.FrameMetricDatum_values, v.Values)
+	if v.Values != nil {
+		serializeFrameMetricValues(s, schemas.FrameMetricDatum_values, v.Values)
+	}
 }
 func (v *FrameMetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FrameMetricDatum, func(s *smithy.Schema) error {
@@ -640,7 +650,9 @@ func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FrameName != nil {
 		s.WriteString(schemas.Metric_frameName, *v.FrameName)
 	}
-	serializeStrings(s, schemas.Metric_threadStates, v.ThreadStates)
+	if v.ThreadStates != nil {
+		serializeStrings(s, schemas.Metric_threadStates, v.ThreadStates)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Metric_type, string(v.Type))
 	}
@@ -684,7 +696,9 @@ func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannels(s, schemas.NotificationConfiguration_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.NotificationConfiguration_channels, v.Channels)
+	}
 }
 func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
@@ -735,7 +749,9 @@ func (v *Pattern) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Pattern) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStrings(s, schemas.Pattern_countersToAggregate, v.CountersToAggregate)
+	if v.CountersToAggregate != nil {
+		serializeStrings(s, schemas.Pattern_countersToAggregate, v.CountersToAggregate)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.Pattern_description, *v.Description)
 	}
@@ -748,7 +764,9 @@ func (v *Pattern) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResolutionSteps != nil {
 		s.WriteString(schemas.Pattern_resolutionSteps, *v.ResolutionSteps)
 	}
-	serializeTargetFrames(s, schemas.Pattern_targetFrames, v.TargetFrames)
+	if v.TargetFrames != nil {
+		serializeTargetFrames(s, schemas.Pattern_targetFrames, v.TargetFrames)
+	}
 	if v.ThresholdPercent != 0 {
 		s.WriteFloat64(schemas.Pattern_thresholdPercent, v.ThresholdPercent)
 	}
@@ -886,7 +904,9 @@ func (v *ProfilingGroupDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProfilingStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.ProfilingGroupDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ProfilingGroupDescription_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ProfilingGroupDescription_updatedAt, *v.UpdatedAt)
 	}
@@ -1051,7 +1071,9 @@ func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.Recommendation_startTime, *v.StartTime)
 	}
-	serializeMatches(s, schemas.Recommendation_topMatches, v.TopMatches)
+	if v.TopMatches != nil {
+		serializeMatches(s, schemas.Recommendation_topMatches, v.TopMatches)
+	}
 }
 func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {

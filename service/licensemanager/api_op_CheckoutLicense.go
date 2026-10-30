@@ -82,7 +82,9 @@ func (v *CheckoutLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CheckoutLicenseRequest_ClientToken, *v.ClientToken)
 	}
-	serializeEntitlementDataList(s, schemas.CheckoutLicenseRequest_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementDataList(s, schemas.CheckoutLicenseRequest_Entitlements, v.Entitlements)
+	}
 	if v.KeyFingerprint != nil {
 		s.WriteString(schemas.CheckoutLicenseRequest_KeyFingerprint, *v.KeyFingerprint)
 	}
@@ -136,7 +138,9 @@ func (v *CheckoutLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CheckoutType != "" {
 		s.WriteString(schemas.CheckoutLicenseResponse_CheckoutType, string(v.CheckoutType))
 	}
-	serializeEntitlementDataList(s, schemas.CheckoutLicenseResponse_EntitlementsAllowed, v.EntitlementsAllowed)
+	if v.EntitlementsAllowed != nil {
+		serializeEntitlementDataList(s, schemas.CheckoutLicenseResponse_EntitlementsAllowed, v.EntitlementsAllowed)
+	}
 	if v.Expiration != nil {
 		s.WriteString(schemas.CheckoutLicenseResponse_Expiration, *v.Expiration)
 	}

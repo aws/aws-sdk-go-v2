@@ -84,7 +84,9 @@ func (v *ListRequiredTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRequiredTagsOutput_NextToken, *v.NextToken)
 	}
-	serializeRequiredTagsForListRequiredTags(s, schemas.ListRequiredTagsOutput_RequiredTags, v.RequiredTags)
+	if v.RequiredTags != nil {
+		serializeRequiredTagsForListRequiredTags(s, schemas.ListRequiredTagsOutput_RequiredTags, v.RequiredTags)
+	}
 }
 func (v *ListRequiredTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRequiredTagsOutput, func(s *smithy.Schema) error {

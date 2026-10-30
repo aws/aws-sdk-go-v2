@@ -44,7 +44,9 @@ func (v *BatchGetTaxExemptionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTaxExemptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.BatchGetTaxExemptionsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.BatchGetTaxExemptionsRequest_accountIds, v.AccountIds)
+	}
 }
 
 type BatchGetTaxExemptionsOutput struct {
@@ -68,8 +70,12 @@ func (v *BatchGetTaxExemptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTaxExemptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.BatchGetTaxExemptionsResponse_failedAccounts, v.FailedAccounts)
-	serializeTaxExemptionDetailsMap(s, schemas.BatchGetTaxExemptionsResponse_taxExemptionDetailsMap, v.TaxExemptionDetailsMap)
+	if v.FailedAccounts != nil {
+		serializeAccountIds(s, schemas.BatchGetTaxExemptionsResponse_failedAccounts, v.FailedAccounts)
+	}
+	if v.TaxExemptionDetailsMap != nil {
+		serializeTaxExemptionDetailsMap(s, schemas.BatchGetTaxExemptionsResponse_taxExemptionDetailsMap, v.TaxExemptionDetailsMap)
+	}
 }
 func (v *BatchGetTaxExemptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTaxExemptionsResponse, func(s *smithy.Schema) error {

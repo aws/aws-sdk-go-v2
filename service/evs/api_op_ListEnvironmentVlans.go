@@ -88,7 +88,9 @@ func (v *ListEnvironmentVlansOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentVlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVlanList(s, schemas.ListEnvironmentVlansResponse_environmentVlans, v.EnvironmentVlans)
+	if v.EnvironmentVlans != nil {
+		serializeVlanList(s, schemas.ListEnvironmentVlansResponse_environmentVlans, v.EnvironmentVlans)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentVlansResponse_nextToken, *v.NextToken)
 	}

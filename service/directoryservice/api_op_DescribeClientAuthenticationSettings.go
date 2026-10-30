@@ -100,7 +100,9 @@ func (v *DescribeClientAuthenticationSettingsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *DescribeClientAuthenticationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientAuthenticationSettingsInfo(s, schemas.DescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo, v.ClientAuthenticationSettingsInfo)
+	if v.ClientAuthenticationSettingsInfo != nil {
+		serializeClientAuthenticationSettingsInfo(s, schemas.DescribeClientAuthenticationSettingsResult_ClientAuthenticationSettingsInfo, v.ClientAuthenticationSettingsInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeClientAuthenticationSettingsResult_NextToken, *v.NextToken)
 	}

@@ -43,7 +43,9 @@ func (v *ActiveContext) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ActiveContext_name, *v.Name)
 	}
-	serializeActiveContextParametersMap(s, schemas.ActiveContext_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeActiveContextParametersMap(s, schemas.ActiveContext_parameters, v.Parameters)
+	}
 	if v.TimeToLive != nil {
 		s.WriteStruct(schemas.ActiveContext_timeToLive)
 		v.TimeToLive.SerializeMembers(s)
@@ -243,7 +245,9 @@ func (v *DialogAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlotToElicit != nil {
 		s.WriteString(schemas.DialogAction_slotToElicit, *v.SlotToElicit)
 	}
-	serializeStringMap(s, schemas.DialogAction_slots, v.Slots)
+	if v.Slots != nil {
+		serializeStringMap(s, schemas.DialogAction_slots, v.Slots)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DialogAction_type, string(v.Type))
 	}
@@ -320,7 +324,9 @@ func (v *GenericAttachment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttachmentLinkUrl != nil {
 		s.WriteString(schemas.GenericAttachment_attachmentLinkUrl, *v.AttachmentLinkUrl)
 	}
-	serializelistOfButtons(s, schemas.GenericAttachment_buttons, v.Buttons)
+	if v.Buttons != nil {
+		serializelistOfButtons(s, schemas.GenericAttachment_buttons, v.Buttons)
+	}
 	if v.ImageUrl != nil {
 		s.WriteString(schemas.GenericAttachment_imageUrl, *v.ImageUrl)
 	}
@@ -480,7 +486,9 @@ func (v *IntentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlotToElicit != nil {
 		s.WriteString(schemas.IntentSummary_slotToElicit, *v.SlotToElicit)
 	}
-	serializeStringMap(s, schemas.IntentSummary_slots, v.Slots)
+	if v.Slots != nil {
+		serializeStringMap(s, schemas.IntentSummary_slots, v.Slots)
+	}
 }
 func (v *IntentSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntentSummary, func(s *smithy.Schema) error {
@@ -555,7 +563,9 @@ func (v *PredictedIntent) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NluIntentConfidence.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringMap(s, schemas.PredictedIntent_slots, v.Slots)
+	if v.Slots != nil {
+		serializeStringMap(s, schemas.PredictedIntent_slots, v.Slots)
+	}
 }
 func (v *PredictedIntent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictedIntent, func(s *smithy.Schema) error {
@@ -601,7 +611,9 @@ func (v *ResponseCard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentType != "" {
 		s.WriteString(schemas.ResponseCard_contentType, string(v.ContentType))
 	}
-	serializegenericAttachmentList(s, schemas.ResponseCard_genericAttachments, v.GenericAttachments)
+	if v.GenericAttachments != nil {
+		serializegenericAttachmentList(s, schemas.ResponseCard_genericAttachments, v.GenericAttachments)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ResponseCard_version, *v.Version)
 	}

@@ -92,14 +92,20 @@ func (v *DescribeProductOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgets(s, schemas.DescribeProductOutput_Budgets, v.Budgets)
-	serializeLaunchPaths(s, schemas.DescribeProductOutput_LaunchPaths, v.LaunchPaths)
+	if v.Budgets != nil {
+		serializeBudgets(s, schemas.DescribeProductOutput_Budgets, v.Budgets)
+	}
+	if v.LaunchPaths != nil {
+		serializeLaunchPaths(s, schemas.DescribeProductOutput_LaunchPaths, v.LaunchPaths)
+	}
 	if v.ProductViewSummary != nil {
 		s.WriteStruct(schemas.DescribeProductOutput_ProductViewSummary)
 		v.ProductViewSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProvisioningArtifacts(s, schemas.DescribeProductOutput_ProvisioningArtifacts, v.ProvisioningArtifacts)
+	if v.ProvisioningArtifacts != nil {
+		serializeProvisioningArtifacts(s, schemas.DescribeProductOutput_ProvisioningArtifacts, v.ProvisioningArtifacts)
+	}
 }
 func (v *DescribeProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProductOutput, func(s *smithy.Schema) error {

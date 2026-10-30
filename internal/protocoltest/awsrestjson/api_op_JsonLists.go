@@ -63,15 +63,33 @@ func (v *JsonListsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JsonListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanList(s, schemas.JsonListsInputOutput_booleanList, v.BooleanList)
-	serializeFooEnumList(s, schemas.JsonListsInputOutput_enumList, v.EnumList)
-	serializeIntegerEnumList(s, schemas.JsonListsInputOutput_intEnumList, v.IntEnumList)
-	serializeIntegerList(s, schemas.JsonListsInputOutput_integerList, v.IntegerList)
-	serializeNestedStringList(s, schemas.JsonListsInputOutput_nestedStringList, v.NestedStringList)
-	serializeStringList(s, schemas.JsonListsInputOutput_stringList, v.StringList)
-	serializeStringSet(s, schemas.JsonListsInputOutput_stringSet, v.StringSet)
-	serializeStructureList(s, schemas.JsonListsInputOutput_structureList, v.StructureList)
-	serializeTimestampList(s, schemas.JsonListsInputOutput_timestampList, v.TimestampList)
+	if v.BooleanList != nil {
+		serializeBooleanList(s, schemas.JsonListsInputOutput_booleanList, v.BooleanList)
+	}
+	if v.EnumList != nil {
+		serializeFooEnumList(s, schemas.JsonListsInputOutput_enumList, v.EnumList)
+	}
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.JsonListsInputOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntegerList != nil {
+		serializeIntegerList(s, schemas.JsonListsInputOutput_integerList, v.IntegerList)
+	}
+	if v.NestedStringList != nil {
+		serializeNestedStringList(s, schemas.JsonListsInputOutput_nestedStringList, v.NestedStringList)
+	}
+	if v.StringList != nil {
+		serializeStringList(s, schemas.JsonListsInputOutput_stringList, v.StringList)
+	}
+	if v.StringSet != nil {
+		serializeStringSet(s, schemas.JsonListsInputOutput_stringSet, v.StringSet)
+	}
+	if v.StructureList != nil {
+		serializeStructureList(s, schemas.JsonListsInputOutput_structureList, v.StructureList)
+	}
+	if v.TimestampList != nil {
+		serializeTimestampList(s, schemas.JsonListsInputOutput_timestampList, v.TimestampList)
+	}
 }
 func (v *JsonListsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonListsInputOutput, func(s *smithy.Schema) error {
@@ -132,15 +150,33 @@ func (v *JsonListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *JsonListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanList(s, schemas.JsonListsInputOutput_booleanList, v.BooleanList)
-	serializeFooEnumList(s, schemas.JsonListsInputOutput_enumList, v.EnumList)
-	serializeIntegerEnumList(s, schemas.JsonListsInputOutput_intEnumList, v.IntEnumList)
-	serializeIntegerList(s, schemas.JsonListsInputOutput_integerList, v.IntegerList)
-	serializeNestedStringList(s, schemas.JsonListsInputOutput_nestedStringList, v.NestedStringList)
-	serializeStringList(s, schemas.JsonListsInputOutput_stringList, v.StringList)
-	serializeStringSet(s, schemas.JsonListsInputOutput_stringSet, v.StringSet)
-	serializeStructureList(s, schemas.JsonListsInputOutput_structureList, v.StructureList)
-	serializeTimestampList(s, schemas.JsonListsInputOutput_timestampList, v.TimestampList)
+	if v.BooleanList != nil {
+		serializeBooleanList(s, schemas.JsonListsInputOutput_booleanList, v.BooleanList)
+	}
+	if v.EnumList != nil {
+		serializeFooEnumList(s, schemas.JsonListsInputOutput_enumList, v.EnumList)
+	}
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.JsonListsInputOutput_intEnumList, v.IntEnumList)
+	}
+	if v.IntegerList != nil {
+		serializeIntegerList(s, schemas.JsonListsInputOutput_integerList, v.IntegerList)
+	}
+	if v.NestedStringList != nil {
+		serializeNestedStringList(s, schemas.JsonListsInputOutput_nestedStringList, v.NestedStringList)
+	}
+	if v.StringList != nil {
+		serializeStringList(s, schemas.JsonListsInputOutput_stringList, v.StringList)
+	}
+	if v.StringSet != nil {
+		serializeStringSet(s, schemas.JsonListsInputOutput_stringSet, v.StringSet)
+	}
+	if v.StructureList != nil {
+		serializeStructureList(s, schemas.JsonListsInputOutput_structureList, v.StructureList)
+	}
+	if v.TimestampList != nil {
+		serializeTimestampList(s, schemas.JsonListsInputOutput_timestampList, v.TimestampList)
+	}
 }
 func (v *JsonListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonListsInputOutput, func(s *smithy.Schema) error {

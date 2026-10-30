@@ -80,7 +80,9 @@ func (v *ListLegalHoldsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLegalHoldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLegalHoldsList(s, schemas.ListLegalHoldsOutput_LegalHolds, v.LegalHolds)
+	if v.LegalHolds != nil {
+		serializeLegalHoldsList(s, schemas.ListLegalHoldsOutput_LegalHolds, v.LegalHolds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLegalHoldsOutput_NextToken, *v.NextToken)
 	}

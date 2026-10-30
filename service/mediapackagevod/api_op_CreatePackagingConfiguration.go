@@ -90,7 +90,9 @@ func (v *CreatePackagingConfigurationInput) SerializeMembers(s smithy.ShapeSeria
 	if v.PackagingGroupId != nil {
 		s.WriteString(schemas.CreatePackagingConfigurationRequest_PackagingGroupId, *v.PackagingGroupId)
 	}
-	serializeTags(s, schemas.CreatePackagingConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePackagingConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePackagingConfigurationOutput struct {
@@ -167,7 +169,9 @@ func (v *CreatePackagingConfigurationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.PackagingGroupId != nil {
 		s.WriteString(schemas.CreatePackagingConfigurationResponse_PackagingGroupId, *v.PackagingGroupId)
 	}
-	serializeTags(s, schemas.CreatePackagingConfigurationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePackagingConfigurationResponse_Tags, v.Tags)
+	}
 }
 func (v *CreatePackagingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePackagingConfigurationResponse, func(s *smithy.Schema) error {

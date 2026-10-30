@@ -62,7 +62,9 @@ func (v *CreateBlueprintInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBlueprintRequest_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateBlueprintRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateBlueprintRequest_Tags, v.Tags)
+	}
 }
 
 type CreateBlueprintOutput struct {

@@ -79,7 +79,9 @@ func (v *ListSdiSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSdiSourcesResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfSdiSourceSummary(s, schemas.ListSdiSourcesResponse_SdiSources, v.SdiSources)
+	if v.SdiSources != nil {
+		serialize__listOfSdiSourceSummary(s, schemas.ListSdiSourcesResponse_SdiSources, v.SdiSources)
+	}
 }
 func (v *ListSdiSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSdiSourcesResponse, func(s *smithy.Schema) error {

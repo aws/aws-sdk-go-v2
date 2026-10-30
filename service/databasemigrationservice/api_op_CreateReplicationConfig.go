@@ -142,7 +142,9 @@ func (v *CreateReplicationConfigInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.TableMappings != nil {
 		s.WriteString(schemas.CreateReplicationConfigMessage_TableMappings, *v.TableMappings)
 	}
-	serializeTagList(s, schemas.CreateReplicationConfigMessage_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateReplicationConfigMessage_Tags, v.Tags)
+	}
 	if v.TargetEndpointArn != nil {
 		s.WriteString(schemas.CreateReplicationConfigMessage_TargetEndpointArn, *v.TargetEndpointArn)
 	}

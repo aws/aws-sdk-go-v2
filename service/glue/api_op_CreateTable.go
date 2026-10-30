@@ -78,7 +78,9 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OpenTableFormatInput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePartitionIndexList(s, schemas.CreateTableRequest_PartitionIndexes, v.PartitionIndexes)
+	if v.PartitionIndexes != nil {
+		serializePartitionIndexList(s, schemas.CreateTableRequest_PartitionIndexes, v.PartitionIndexes)
+	}
 	if v.TableInput != nil {
 		s.WriteStruct(schemas.CreateTableRequest_TableInput)
 		v.TableInput.SerializeMembers(s)

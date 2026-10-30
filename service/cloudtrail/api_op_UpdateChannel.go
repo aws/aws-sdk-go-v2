@@ -59,7 +59,9 @@ func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Channel != nil {
 		s.WriteString(schemas.UpdateChannelRequest_Channel, *v.Channel)
 	}
-	serializeDestinations(s, schemas.UpdateChannelRequest_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.UpdateChannelRequest_Destinations, v.Destinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateChannelRequest_Name, *v.Name)
 	}
@@ -95,7 +97,9 @@ func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.UpdateChannelResponse_ChannelArn, *v.ChannelArn)
 	}
-	serializeDestinations(s, schemas.UpdateChannelResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.UpdateChannelResponse_Destinations, v.Destinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateChannelResponse_Name, *v.Name)
 	}

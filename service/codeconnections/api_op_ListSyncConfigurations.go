@@ -97,7 +97,9 @@ func (v *ListSyncConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSyncConfigurationsOutput_NextToken, *v.NextToken)
 	}
-	serializeSyncConfigurationList(s, schemas.ListSyncConfigurationsOutput_SyncConfigurations, v.SyncConfigurations)
+	if v.SyncConfigurations != nil {
+		serializeSyncConfigurationList(s, schemas.ListSyncConfigurationsOutput_SyncConfigurations, v.SyncConfigurations)
+	}
 }
 func (v *ListSyncConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSyncConfigurationsOutput, func(s *smithy.Schema) error {

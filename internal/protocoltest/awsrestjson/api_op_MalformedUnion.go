@@ -38,7 +38,9 @@ func (v *MalformedUnionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MalformedUnionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSimpleUnion(s, schemas.MalformedUnionInput_union, v.Union)
+	if v.Union != nil {
+		serializeSimpleUnion(s, schemas.MalformedUnionInput_union, v.Union)
+	}
 }
 func (v *MalformedUnionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MalformedUnionInput, func(s *smithy.Schema) error {

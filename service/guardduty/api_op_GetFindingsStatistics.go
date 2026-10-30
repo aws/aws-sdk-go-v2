@@ -88,7 +88,9 @@ func (v *GetFindingsStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.FindingCriteria.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFindingStatisticTypes(s, schemas.GetFindingsStatisticsRequest_FindingStatisticTypes, v.FindingStatisticTypes)
+	if v.FindingStatisticTypes != nil {
+		serializeFindingStatisticTypes(s, schemas.GetFindingsStatisticsRequest_FindingStatisticTypes, v.FindingStatisticTypes)
+	}
 	if v.GroupBy != "" {
 		s.WriteString(schemas.GetFindingsStatisticsRequest_GroupBy, string(v.GroupBy))
 	}

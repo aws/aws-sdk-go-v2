@@ -65,7 +65,9 @@ func (v *DescribeLocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationList(s, schemas.Locations_locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.Locations_locations, v.Locations)
+	}
 }
 func (v *DescribeLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Locations, func(s *smithy.Schema) error {

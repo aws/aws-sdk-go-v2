@@ -98,7 +98,9 @@ func (v *DescribeSourceServersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceServersList(s, schemas.DescribeSourceServersResponse_items, v.Items)
+	if v.Items != nil {
+		serializeSourceServersList(s, schemas.DescribeSourceServersResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSourceServersResponse_nextToken, *v.NextToken)
 	}

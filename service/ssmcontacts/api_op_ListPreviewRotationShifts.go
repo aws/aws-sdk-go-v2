@@ -90,11 +90,15 @@ func (v *ListPreviewRotationShiftsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPreviewRotationShiftsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeRotationPreviewMemberList(s, schemas.ListPreviewRotationShiftsRequest_Members, v.Members)
+	if v.Members != nil {
+		serializeRotationPreviewMemberList(s, schemas.ListPreviewRotationShiftsRequest_Members, v.Members)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPreviewRotationShiftsRequest_NextToken, *v.NextToken)
 	}
-	serializeOverrideList(s, schemas.ListPreviewRotationShiftsRequest_Overrides, v.Overrides)
+	if v.Overrides != nil {
+		serializeOverrideList(s, schemas.ListPreviewRotationShiftsRequest_Overrides, v.Overrides)
+	}
 	if v.Recurrence != nil {
 		s.WriteStruct(schemas.ListPreviewRotationShiftsRequest_Recurrence)
 		v.Recurrence.SerializeMembers(s)
@@ -136,7 +140,9 @@ func (v *ListPreviewRotationShiftsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPreviewRotationShiftsResult_NextToken, *v.NextToken)
 	}
-	serializeRotationShifts(s, schemas.ListPreviewRotationShiftsResult_RotationShifts, v.RotationShifts)
+	if v.RotationShifts != nil {
+		serializeRotationShifts(s, schemas.ListPreviewRotationShiftsResult_RotationShifts, v.RotationShifts)
+	}
 }
 func (v *ListPreviewRotationShiftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPreviewRotationShiftsResult, func(s *smithy.Schema) error {

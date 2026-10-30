@@ -68,7 +68,9 @@ func (v *PutTenantSuppressionAttributesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *PutTenantSuppressionAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSuppressionListReasons(s, schemas.PutTenantSuppressionAttributesRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.SuppressedReasons != nil {
+		serializeSuppressionListReasons(s, schemas.PutTenantSuppressionAttributesRequest_SuppressedReasons, v.SuppressedReasons)
+	}
 	if v.SuppressionScope != "" {
 		s.WriteString(schemas.PutTenantSuppressionAttributesRequest_SuppressionScope, string(v.SuppressionScope))
 	}

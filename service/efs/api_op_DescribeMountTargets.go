@@ -120,7 +120,9 @@ func (v *DescribeMountTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeMountTargetsResponse_Marker, *v.Marker)
 	}
-	serializeMountTargetDescriptions(s, schemas.DescribeMountTargetsResponse_MountTargets, v.MountTargets)
+	if v.MountTargets != nil {
+		serializeMountTargetDescriptions(s, schemas.DescribeMountTargetsResponse_MountTargets, v.MountTargets)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.DescribeMountTargetsResponse_NextMarker, *v.NextMarker)
 	}

@@ -113,7 +113,9 @@ func (v *DescribePortfolioSharesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.DescribePortfolioSharesOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializePortfolioShareDetails(s, schemas.DescribePortfolioSharesOutput_PortfolioShareDetails, v.PortfolioShareDetails)
+	if v.PortfolioShareDetails != nil {
+		serializePortfolioShareDetails(s, schemas.DescribePortfolioSharesOutput_PortfolioShareDetails, v.PortfolioShareDetails)
+	}
 }
 func (v *DescribePortfolioSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePortfolioSharesOutput, func(s *smithy.Schema) error {

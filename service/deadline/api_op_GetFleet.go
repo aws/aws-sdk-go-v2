@@ -173,7 +173,9 @@ func (v *GetFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Capabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFleetConfiguration(s, schemas.GetFleetResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeFleetConfiguration(s, schemas.GetFleetResponse_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetFleetResponse_createdAt, *v.CreatedAt)
 	}

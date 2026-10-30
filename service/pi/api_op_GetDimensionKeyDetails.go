@@ -117,7 +117,9 @@ func (v *GetDimensionKeyDetailsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Identifier != nil {
 		s.WriteString(schemas.GetDimensionKeyDetailsRequest_Identifier, *v.Identifier)
 	}
-	serializeRequestedDimensionList(s, schemas.GetDimensionKeyDetailsRequest_RequestedDimensions, v.RequestedDimensions)
+	if v.RequestedDimensions != nil {
+		serializeRequestedDimensionList(s, schemas.GetDimensionKeyDetailsRequest_RequestedDimensions, v.RequestedDimensions)
+	}
 	if v.ServiceType != "" {
 		s.WriteString(schemas.GetDimensionKeyDetailsRequest_ServiceType, string(v.ServiceType))
 	}
@@ -141,7 +143,9 @@ func (v *GetDimensionKeyDetailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDimensionKeyDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionKeyDetailList(s, schemas.GetDimensionKeyDetailsResponse_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionKeyDetailList(s, schemas.GetDimensionKeyDetailsResponse_Dimensions, v.Dimensions)
+	}
 }
 func (v *GetDimensionKeyDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDimensionKeyDetailsResponse, func(s *smithy.Schema) error {

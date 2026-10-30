@@ -82,7 +82,9 @@ func (v *DeleteGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DeleteGatewayResponse_status, string(v.Status))
 	}
-	serializeStatusReasons(s, schemas.DeleteGatewayResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeStatusReasons(s, schemas.DeleteGatewayResponse_statusReasons, v.StatusReasons)
+	}
 }
 func (v *DeleteGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteGatewayResponse, func(s *smithy.Schema) error {

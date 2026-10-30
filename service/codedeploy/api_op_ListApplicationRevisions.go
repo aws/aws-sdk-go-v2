@@ -145,7 +145,9 @@ func (v *ListApplicationRevisionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationRevisionsOutput_nextToken, *v.NextToken)
 	}
-	serializeRevisionLocationList(s, schemas.ListApplicationRevisionsOutput_revisions, v.Revisions)
+	if v.Revisions != nil {
+		serializeRevisionLocationList(s, schemas.ListApplicationRevisionsOutput_revisions, v.Revisions)
+	}
 }
 func (v *ListApplicationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListApplicationRevisionsOutput, func(s *smithy.Schema) error {

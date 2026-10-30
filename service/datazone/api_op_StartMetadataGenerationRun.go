@@ -102,7 +102,9 @@ func (v *StartMetadataGenerationRunInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Type != "" {
 		s.WriteString(schemas.StartMetadataGenerationRunInput_type, string(v.Type))
 	}
-	serializeMetadataGenerationRunTypes(s, schemas.StartMetadataGenerationRunInput_types, v.Types)
+	if v.Types != nil {
+		serializeMetadataGenerationRunTypes(s, schemas.StartMetadataGenerationRunInput_types, v.Types)
+	}
 }
 
 type StartMetadataGenerationRunOutput struct {
@@ -174,7 +176,9 @@ func (v *StartMetadataGenerationRunOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Type != "" {
 		s.WriteString(schemas.StartMetadataGenerationRunOutput_type, string(v.Type))
 	}
-	serializeMetadataGenerationRunTypes(s, schemas.StartMetadataGenerationRunOutput_types, v.Types)
+	if v.Types != nil {
+		serializeMetadataGenerationRunTypes(s, schemas.StartMetadataGenerationRunOutput_types, v.Types)
+	}
 }
 func (v *StartMetadataGenerationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartMetadataGenerationRunOutput, func(s *smithy.Schema) error {

@@ -136,7 +136,9 @@ func (v *GetModelImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.GetModelImportJobResponse_lastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeModelDataSource(s, schemas.GetModelImportJobResponse_modelDataSource, v.ModelDataSource)
+	if v.ModelDataSource != nil {
+		serializeModelDataSource(s, schemas.GetModelImportJobResponse_modelDataSource, v.ModelDataSource)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetModelImportJobResponse_roleArn, *v.RoleArn)
 	}

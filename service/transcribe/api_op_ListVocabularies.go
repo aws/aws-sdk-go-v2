@@ -114,7 +114,9 @@ func (v *ListVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ListVocabulariesResponse_Status, string(v.Status))
 	}
-	serializeVocabularies(s, schemas.ListVocabulariesResponse_Vocabularies, v.Vocabularies)
+	if v.Vocabularies != nil {
+		serializeVocabularies(s, schemas.ListVocabulariesResponse_Vocabularies, v.Vocabularies)
+	}
 }
 func (v *ListVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVocabulariesResponse, func(s *smithy.Schema) error {

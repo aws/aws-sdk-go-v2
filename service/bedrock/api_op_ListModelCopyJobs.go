@@ -137,7 +137,9 @@ func (v *ListModelCopyJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelCopyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelCopyJobSummaries(s, schemas.ListModelCopyJobsResponse_modelCopyJobSummaries, v.ModelCopyJobSummaries)
+	if v.ModelCopyJobSummaries != nil {
+		serializeModelCopyJobSummaries(s, schemas.ListModelCopyJobsResponse_modelCopyJobSummaries, v.ModelCopyJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelCopyJobsResponse_nextToken, *v.NextToken)
 	}

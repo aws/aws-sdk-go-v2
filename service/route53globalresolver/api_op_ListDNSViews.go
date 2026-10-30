@@ -94,7 +94,9 @@ func (v *ListDNSViewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDNSViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDNSViews(s, schemas.ListDNSViewsOutput_dnsViews, v.DnsViews)
+	if v.DnsViews != nil {
+		serializeDNSViews(s, schemas.ListDNSViewsOutput_dnsViews, v.DnsViews)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDNSViewsOutput_nextToken, *v.NextToken)
 	}

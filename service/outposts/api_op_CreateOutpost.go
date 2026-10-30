@@ -83,7 +83,9 @@ func (v *CreateOutpostInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportedHardwareType != "" {
 		s.WriteString(schemas.CreateOutpostInput_SupportedHardwareType, string(v.SupportedHardwareType))
 	}
-	serializeTagMap(s, schemas.CreateOutpostInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateOutpostInput_Tags, v.Tags)
+	}
 }
 
 type CreateOutpostOutput struct {

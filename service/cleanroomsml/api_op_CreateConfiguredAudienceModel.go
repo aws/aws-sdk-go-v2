@@ -144,8 +144,12 @@ func (v *CreateConfiguredAudienceModelInput) SerializeMembers(s smithy.ShapeSeri
 		v.OutputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricsList(s, schemas.CreateConfiguredAudienceModelRequest_sharedAudienceMetrics, v.SharedAudienceMetrics)
-	serializeTagMap(s, schemas.CreateConfiguredAudienceModelRequest_tags, v.Tags)
+	if v.SharedAudienceMetrics != nil {
+		serializeMetricsList(s, schemas.CreateConfiguredAudienceModelRequest_sharedAudienceMetrics, v.SharedAudienceMetrics)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfiguredAudienceModelRequest_tags, v.Tags)
+	}
 }
 
 type CreateConfiguredAudienceModelOutput struct {

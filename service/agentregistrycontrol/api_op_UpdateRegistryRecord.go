@@ -116,7 +116,9 @@ func (v *UpdateRegistryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRegistryRecordRequest_name, *v.Name)
 	}
-	serializeProvenanceList(s, schemas.UpdateRegistryRecordRequest_provenance, v.Provenance)
+	if v.Provenance != nil {
+		serializeProvenanceList(s, schemas.UpdateRegistryRecordRequest_provenance, v.Provenance)
+	}
 	if v.RecordId != nil {
 		s.WriteString(schemas.UpdateRegistryRecordRequest_recordId, *v.RecordId)
 	}
@@ -257,7 +259,9 @@ func (v *UpdateRegistryRecordOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateRegistryRecordResponse_name, *v.Name)
 	}
-	serializeProvenanceList(s, schemas.UpdateRegistryRecordResponse_provenance, v.Provenance)
+	if v.Provenance != nil {
+		serializeProvenanceList(s, schemas.UpdateRegistryRecordResponse_provenance, v.Provenance)
+	}
 	if v.RecordArn != nil {
 		s.WriteString(schemas.UpdateRegistryRecordResponse_recordArn, *v.RecordArn)
 	}

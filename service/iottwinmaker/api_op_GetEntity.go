@@ -152,7 +152,9 @@ func (v *GetEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetEntityResponse_arn, *v.Arn)
 	}
-	serializeComponentsMap(s, schemas.GetEntityResponse_components, v.Components)
+	if v.Components != nil {
+		serializeComponentsMap(s, schemas.GetEntityResponse_components, v.Components)
+	}
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.GetEntityResponse_creationDateTime, *v.CreationDateTime)
 	}

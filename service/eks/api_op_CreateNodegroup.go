@@ -231,8 +231,12 @@ func (v *CreateNodegroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DiskSize != nil {
 		s.WriteInt32(schemas.CreateNodegroupRequest_diskSize, *v.DiskSize)
 	}
-	serializeStringList(s, schemas.CreateNodegroupRequest_instanceTypes, v.InstanceTypes)
-	serializelabelsMap(s, schemas.CreateNodegroupRequest_labels, v.Labels)
+	if v.InstanceTypes != nil {
+		serializeStringList(s, schemas.CreateNodegroupRequest_instanceTypes, v.InstanceTypes)
+	}
+	if v.Labels != nil {
+		serializelabelsMap(s, schemas.CreateNodegroupRequest_labels, v.Labels)
+	}
 	if v.LaunchTemplate != nil {
 		s.WriteStruct(schemas.CreateNodegroupRequest_launchTemplate)
 		v.LaunchTemplate.SerializeMembers(s)
@@ -262,9 +266,15 @@ func (v *CreateNodegroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScalingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CreateNodegroupRequest_subnets, v.Subnets)
-	serializeTagMap(s, schemas.CreateNodegroupRequest_tags, v.Tags)
-	serializetaintsList(s, schemas.CreateNodegroupRequest_taints, v.Taints)
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.CreateNodegroupRequest_subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateNodegroupRequest_tags, v.Tags)
+	}
+	if v.Taints != nil {
+		serializetaintsList(s, schemas.CreateNodegroupRequest_taints, v.Taints)
+	}
 	if v.UpdateConfig != nil {
 		s.WriteStruct(schemas.CreateNodegroupRequest_updateConfig)
 		v.UpdateConfig.SerializeMembers(s)

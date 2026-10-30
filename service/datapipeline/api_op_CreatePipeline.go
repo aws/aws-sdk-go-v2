@@ -91,7 +91,9 @@ func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePipelineInput_name, *v.Name)
 	}
-	serializetagList(s, schemas.CreatePipelineInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreatePipelineInput_tags, v.Tags)
+	}
 	if v.UniqueId != nil {
 		s.WriteString(schemas.CreatePipelineInput_uniqueId, *v.UniqueId)
 	}

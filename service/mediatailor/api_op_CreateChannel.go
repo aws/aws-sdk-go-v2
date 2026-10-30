@@ -85,7 +85,9 @@ func (v *CreateChannelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiences(s, schemas.CreateChannelRequest_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.CreateChannelRequest_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.CreateChannelRequest_ChannelName, *v.ChannelName)
 	}
@@ -94,11 +96,15 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FillerSlate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestOutputs(s, schemas.CreateChannelRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeRequestOutputs(s, schemas.CreateChannelRequest_Outputs, v.Outputs)
+	}
 	if v.PlaybackMode != "" {
 		s.WriteString(schemas.CreateChannelRequest_PlaybackMode, string(v.PlaybackMode))
 	}
-	serialize__mapOf__string(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateChannelRequest_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.CreateChannelRequest_Tier, string(v.Tier))
 	}
@@ -204,7 +210,9 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateChannelResponse_Arn, *v.Arn)
 	}
-	serializeAudiences(s, schemas.CreateChannelResponse_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.CreateChannelResponse_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.CreateChannelResponse_ChannelName, *v.ChannelName)
 	}
@@ -222,11 +230,15 @@ func (v *CreateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.CreateChannelResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeResponseOutputs(s, schemas.CreateChannelResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeResponseOutputs(s, schemas.CreateChannelResponse_Outputs, v.Outputs)
+	}
 	if v.PlaybackMode != nil {
 		s.WriteString(schemas.CreateChannelResponse_PlaybackMode, *v.PlaybackMode)
 	}
-	serialize__mapOf__string(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateChannelResponse_Tags, v.Tags)
+	}
 	if v.Tier != nil {
 		s.WriteString(schemas.CreateChannelResponse_Tier, *v.Tier)
 	}

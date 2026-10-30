@@ -173,7 +173,9 @@ func (v *DescribeMergeConflictsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DestinationCommitId != nil {
 		s.WriteString(schemas.DescribeMergeConflictsOutput_destinationCommitId, *v.DestinationCommitId)
 	}
-	serializeMergeHunks(s, schemas.DescribeMergeConflictsOutput_mergeHunks, v.MergeHunks)
+	if v.MergeHunks != nil {
+		serializeMergeHunks(s, schemas.DescribeMergeConflictsOutput_mergeHunks, v.MergeHunks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMergeConflictsOutput_nextToken, *v.NextToken)
 	}

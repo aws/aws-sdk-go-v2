@@ -99,7 +99,9 @@ func (v *ListStackInstancesForProvisionedProductOutput) SerializeMembers(s smith
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListStackInstancesForProvisionedProductOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeStackInstances(s, schemas.ListStackInstancesForProvisionedProductOutput_StackInstances, v.StackInstances)
+	if v.StackInstances != nil {
+		serializeStackInstances(s, schemas.ListStackInstancesForProvisionedProductOutput_StackInstances, v.StackInstances)
+	}
 }
 func (v *ListStackInstancesForProvisionedProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStackInstancesForProvisionedProductOutput, func(s *smithy.Schema) error {

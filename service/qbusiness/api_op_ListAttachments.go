@@ -100,7 +100,9 @@ func (v *ListAttachmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentList(s, schemas.ListAttachmentsResponse_attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachmentList(s, schemas.ListAttachmentsResponse_attachments, v.Attachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachmentsResponse_nextToken, *v.NextToken)
 	}

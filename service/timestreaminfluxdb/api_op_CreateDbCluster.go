@@ -156,7 +156,9 @@ func (v *CreateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Bucket != nil {
 		s.WriteString(schemas.CreateDbClusterInput_bucket, *v.Bucket)
 	}
-	serializeDbBackupConfigurationInputList(s, schemas.CreateDbClusterInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationInputList(s, schemas.CreateDbClusterInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbInstanceType != "" {
 		s.WriteString(schemas.CreateDbClusterInput_dbInstanceType, string(v.DbInstanceType))
 	}
@@ -203,12 +205,18 @@ func (v *CreateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.CreateDbClusterInput_publiclyAccessible, *v.PubliclyAccessible)
 	}
-	serializeRequestTagMap(s, schemas.CreateDbClusterInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateDbClusterInput_tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.CreateDbClusterInput_username, *v.Username)
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.CreateDbClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.CreateDbClusterInput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateDbClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.CreateDbClusterInput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 
 type CreateDbClusterOutput struct {

@@ -91,7 +91,9 @@ func (v *ListAudienceGenerationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAudienceGenerationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudienceGenerationJobList(s, schemas.ListAudienceGenerationJobsResponse_audienceGenerationJobs, v.AudienceGenerationJobs)
+	if v.AudienceGenerationJobs != nil {
+		serializeAudienceGenerationJobList(s, schemas.ListAudienceGenerationJobsResponse_audienceGenerationJobs, v.AudienceGenerationJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAudienceGenerationJobsResponse_nextToken, *v.NextToken)
 	}

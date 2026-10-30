@@ -156,7 +156,9 @@ func (v *DescribeGeofenceCollectionOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.PricingPlanDataSource != nil {
 		s.WriteString(schemas.DescribeGeofenceCollectionResponse_PricingPlanDataSource, *v.PricingPlanDataSource)
 	}
-	serializeTagMap(s, schemas.DescribeGeofenceCollectionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeGeofenceCollectionResponse_Tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.DescribeGeofenceCollectionResponse_UpdateTime, *v.UpdateTime)
 	}

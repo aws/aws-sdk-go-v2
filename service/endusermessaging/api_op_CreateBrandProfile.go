@@ -70,7 +70,9 @@ func (v *CreateBrandProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeletionProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateBrandProfileInput_deletionProtectionEnabled, *v.DeletionProtectionEnabled)
 	}
-	serializeTagList(s, schemas.CreateBrandProfileInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBrandProfileInput_tags, v.Tags)
+	}
 }
 
 type CreateBrandProfileOutput struct {

@@ -134,7 +134,9 @@ func (v *GetIdMappingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdMappingJobOutputSourceConfig(s, schemas.GetIdMappingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.OutputSourceConfig != nil {
+		serializeIdMappingJobOutputSourceConfig(s, schemas.GetIdMappingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetIdMappingJobOutput_startTime, *v.StartTime)
 	}

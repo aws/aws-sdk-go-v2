@@ -215,7 +215,9 @@ func (v *Anomaly) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorArn != nil {
 		s.WriteString(schemas.Anomaly_MonitorArn, *v.MonitorArn)
 	}
-	serializeRootCauses(s, schemas.Anomaly_RootCauses, v.RootCauses)
+	if v.RootCauses != nil {
+		serializeRootCauses(s, schemas.Anomaly_RootCauses, v.RootCauses)
+	}
 }
 func (v *Anomaly) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Anomaly, func(s *smithy.Schema) error {
@@ -615,8 +617,12 @@ func (v *AnomalySubscription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Frequency != "" {
 		s.WriteString(schemas.AnomalySubscription_Frequency, string(v.Frequency))
 	}
-	serializeMonitorArnList(s, schemas.AnomalySubscription_MonitorArnList, v.MonitorArnList)
-	serializeSubscribers(s, schemas.AnomalySubscription_Subscribers, v.Subscribers)
+	if v.MonitorArnList != nil {
+		serializeMonitorArnList(s, schemas.AnomalySubscription_MonitorArnList, v.MonitorArnList)
+	}
+	if v.Subscribers != nil {
+		serializeSubscribers(s, schemas.AnomalySubscription_Subscribers, v.Subscribers)
+	}
 	if v.SubscriptionArn != nil {
 		s.WriteString(schemas.AnomalySubscription_SubscriptionArn, *v.SubscriptionArn)
 	}
@@ -1073,7 +1079,9 @@ func (v *CostAndUsageComparison) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CostAndUsageSelector.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComparisonMetrics(s, schemas.CostAndUsageComparison_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeComparisonMetrics(s, schemas.CostAndUsageComparison_Metrics, v.Metrics)
+	}
 }
 func (v *CostAndUsageComparison) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostAndUsageComparison, func(s *smithy.Schema) error {
@@ -1158,12 +1166,18 @@ func (v *CostCategory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CostCategory_Name, *v.Name)
 	}
-	serializeCostCategoryProcessingStatusList(s, schemas.CostCategory_ProcessingStatus, v.ProcessingStatus)
+	if v.ProcessingStatus != nil {
+		serializeCostCategoryProcessingStatusList(s, schemas.CostCategory_ProcessingStatus, v.ProcessingStatus)
+	}
 	if v.RuleVersion != "" {
 		s.WriteString(schemas.CostCategory_RuleVersion, string(v.RuleVersion))
 	}
-	serializeCostCategoryRulesList(s, schemas.CostCategory_Rules, v.Rules)
-	serializeCostCategorySplitChargeRulesList(s, schemas.CostCategory_SplitChargeRules, v.SplitChargeRules)
+	if v.Rules != nil {
+		serializeCostCategoryRulesList(s, schemas.CostCategory_Rules, v.Rules)
+	}
+	if v.SplitChargeRules != nil {
+		serializeCostCategorySplitChargeRulesList(s, schemas.CostCategory_SplitChargeRules, v.SplitChargeRules)
+	}
 }
 func (v *CostCategory) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostCategory, func(s *smithy.Schema) error {
@@ -1367,9 +1381,15 @@ func (v *CostCategoryReference) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberOfRules != 0 {
 		s.WriteInt32(schemas.CostCategoryReference_NumberOfRules, v.NumberOfRules)
 	}
-	serializeCostCategoryProcessingStatusList(s, schemas.CostCategoryReference_ProcessingStatus, v.ProcessingStatus)
-	serializeResourceTypes(s, schemas.CostCategoryReference_SupportedResourceTypes, v.SupportedResourceTypes)
-	serializeCostCategoryValuesList(s, schemas.CostCategoryReference_Values, v.Values)
+	if v.ProcessingStatus != nil {
+		serializeCostCategoryProcessingStatusList(s, schemas.CostCategoryReference_ProcessingStatus, v.ProcessingStatus)
+	}
+	if v.SupportedResourceTypes != nil {
+		serializeResourceTypes(s, schemas.CostCategoryReference_SupportedResourceTypes, v.SupportedResourceTypes)
+	}
+	if v.Values != nil {
+		serializeCostCategoryValuesList(s, schemas.CostCategoryReference_Values, v.Values)
+	}
 }
 func (v *CostCategoryReference) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostCategoryReference, func(s *smithy.Schema) error {
@@ -1586,11 +1606,15 @@ func (v *CostCategorySplitChargeRule) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Method != "" {
 		s.WriteString(schemas.CostCategorySplitChargeRule_Method, string(v.Method))
 	}
-	serializeCostCategorySplitChargeRuleParametersList(s, schemas.CostCategorySplitChargeRule_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeCostCategorySplitChargeRuleParametersList(s, schemas.CostCategorySplitChargeRule_Parameters, v.Parameters)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.CostCategorySplitChargeRule_Source, *v.Source)
 	}
-	serializeCostCategorySplitChargeRuleTargetsList(s, schemas.CostCategorySplitChargeRule_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeCostCategorySplitChargeRuleTargetsList(s, schemas.CostCategorySplitChargeRule_Targets, v.Targets)
+	}
 }
 func (v *CostCategorySplitChargeRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostCategorySplitChargeRule, func(s *smithy.Schema) error {
@@ -1640,7 +1664,9 @@ func (v *CostCategorySplitChargeRuleParameter) SerializeMembers(s smithy.ShapeSe
 	if v.Type != "" {
 		s.WriteString(schemas.CostCategorySplitChargeRuleParameter_Type, string(v.Type))
 	}
-	serializeCostCategorySplitChargeRuleParameterValuesList(s, schemas.CostCategorySplitChargeRuleParameter_Values, v.Values)
+	if v.Values != nil {
+		serializeCostCategorySplitChargeRuleParameterValuesList(s, schemas.CostCategorySplitChargeRuleParameter_Values, v.Values)
+	}
 }
 func (v *CostCategorySplitChargeRuleParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostCategorySplitChargeRuleParameter, func(s *smithy.Schema) error {
@@ -1694,8 +1720,12 @@ func (v *CostCategoryValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.CostCategoryValues_Key, *v.Key)
 	}
-	serializeMatchOptions(s, schemas.CostCategoryValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.CostCategoryValues_Values, v.Values)
+	if v.MatchOptions != nil {
+		serializeMatchOptions(s, schemas.CostCategoryValues_MatchOptions, v.MatchOptions)
+	}
+	if v.Values != nil {
+		serializeValues(s, schemas.CostCategoryValues_Values, v.Values)
+	}
 }
 func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostCategoryValues, func(s *smithy.Schema) error {
@@ -1820,13 +1850,17 @@ func (v *CostComparisonDriver) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CostComparisonDriver) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostDrivers(s, schemas.CostComparisonDriver_CostDrivers, v.CostDrivers)
+	if v.CostDrivers != nil {
+		serializeCostDrivers(s, schemas.CostComparisonDriver_CostDrivers, v.CostDrivers)
+	}
 	if v.CostSelector != nil {
 		s.WriteStruct(schemas.CostComparisonDriver_CostSelector)
 		v.CostSelector.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComparisonMetrics(s, schemas.CostComparisonDriver_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeComparisonMetrics(s, schemas.CostComparisonDriver_Metrics, v.Metrics)
+	}
 }
 func (v *CostComparisonDriver) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostComparisonDriver, func(s *smithy.Schema) error {
@@ -1873,7 +1907,9 @@ func (v *CostDriver) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CostDriver) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComparisonMetrics(s, schemas.CostDriver_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeComparisonMetrics(s, schemas.CostDriver_Metrics, v.Metrics)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CostDriver_Name, *v.Name)
 	}
@@ -1974,7 +2010,9 @@ func (v *CoverageByTime) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CoverageByTime) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReservationCoverageGroups(s, schemas.CoverageByTime_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeReservationCoverageGroups(s, schemas.CoverageByTime_Groups, v.Groups)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.CoverageByTime_TimePeriod)
 		v.TimePeriod.SerializeMembers(s)
@@ -2241,7 +2279,9 @@ func (v *CurrentInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SavingsPlansCoveredHoursInLookbackPeriod != nil {
 		s.WriteString(schemas.CurrentInstance_SavingsPlansCoveredHoursInLookbackPeriod, *v.SavingsPlansCoveredHoursInLookbackPeriod)
 	}
-	serializeTagValuesList(s, schemas.CurrentInstance_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagValuesList(s, schemas.CurrentInstance_Tags, v.Tags)
+	}
 	if v.TotalRunningHoursInLookbackPeriod != nil {
 		s.WriteString(schemas.CurrentInstance_TotalRunningHoursInLookbackPeriod, *v.TotalRunningHoursInLookbackPeriod)
 	}
@@ -2384,8 +2424,12 @@ func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.DimensionValues_Key, string(v.Key))
 	}
-	serializeMatchOptions(s, schemas.DimensionValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.DimensionValues_Values, v.Values)
+	if v.MatchOptions != nil {
+		serializeMatchOptions(s, schemas.DimensionValues_MatchOptions, v.MatchOptions)
+	}
+	if v.Values != nil {
+		serializeValues(s, schemas.DimensionValues_Values, v.Values)
+	}
 }
 func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
@@ -2426,7 +2470,9 @@ func (v *DimensionValuesWithAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DimensionValuesWithAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DimensionValuesWithAttributes_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.DimensionValuesWithAttributes_Attributes, v.Attributes)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.DimensionValuesWithAttributes_Value, *v.Value)
 	}
@@ -3190,7 +3236,9 @@ func (v *Expression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressions(s, schemas.Expression_And, v.And)
+	if v.And != nil {
+		serializeExpressions(s, schemas.Expression_And, v.And)
+	}
 	if v.CostCategories != nil {
 		s.WriteStruct(schemas.Expression_CostCategories)
 		v.CostCategories.SerializeMembers(s)
@@ -3206,7 +3254,9 @@ func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Not.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpressions(s, schemas.Expression_Or, v.Or)
+	if v.Or != nil {
+		serializeExpressions(s, schemas.Expression_Or, v.Or)
+	}
 	if v.ProductAttributes != nil {
 		s.WriteStruct(schemas.Expression_ProductAttributes)
 		v.ProductAttributes.SerializeMembers(s)
@@ -3397,8 +3447,12 @@ func (v *Group) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeys(s, schemas.Group_Keys, v.Keys)
-	serializeMetrics(s, schemas.Group_Metrics, v.Metrics)
+	if v.Keys != nil {
+		serializeKeys(s, schemas.Group_Keys, v.Keys)
+	}
+	if v.Metrics != nil {
+		serializeMetrics(s, schemas.Group_Metrics, v.Metrics)
+	}
 }
 func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
@@ -3745,7 +3799,9 @@ func (v *ModifyRecommendationDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModifyRecommendationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetInstancesList(s, schemas.ModifyRecommendationDetail_TargetInstances, v.TargetInstances)
+	if v.TargetInstances != nil {
+		serializeTargetInstancesList(s, schemas.ModifyRecommendationDetail_TargetInstances, v.TargetInstances)
+	}
 }
 func (v *ModifyRecommendationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ModifyRecommendationDetail, func(s *smithy.Schema) error {
@@ -3911,8 +3967,12 @@ func (v *ProductAttributeValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.ProductAttributeValues_Key, *v.Key)
 	}
-	serializeMatchOptions(s, schemas.ProductAttributeValues_MatchOptions, v.MatchOptions)
-	serializeProductAttributeValueList(s, schemas.ProductAttributeValues_Values, v.Values)
+	if v.MatchOptions != nil {
+		serializeMatchOptions(s, schemas.ProductAttributeValues_MatchOptions, v.MatchOptions)
+	}
+	if v.Values != nil {
+		serializeProductAttributeValueList(s, schemas.ProductAttributeValues_Values, v.Values)
+	}
 }
 func (v *ProductAttributeValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProductAttributeValues, func(s *smithy.Schema) error {
@@ -4224,7 +4284,9 @@ func (v *RecommendationDetailData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LookbackPeriodInDays != "" {
 		s.WriteString(schemas.RecommendationDetailData_LookbackPeriodInDays, string(v.LookbackPeriodInDays))
 	}
-	serializeMetricsOverLookbackPeriod(s, schemas.RecommendationDetailData_MetricsOverLookbackPeriod, v.MetricsOverLookbackPeriod)
+	if v.MetricsOverLookbackPeriod != nil {
+		serializeMetricsOverLookbackPeriod(s, schemas.RecommendationDetailData_MetricsOverLookbackPeriod, v.MetricsOverLookbackPeriod)
+	}
 	if v.OfferingId != nil {
 		s.WriteString(schemas.RecommendationDetailData_OfferingId, *v.OfferingId)
 	}
@@ -4700,7 +4762,9 @@ func (v *ReservationCoverageGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReservationCoverageGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.ReservationCoverageGroup_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.ReservationCoverageGroup_Attributes, v.Attributes)
+	}
 	if v.Coverage != nil {
 		s.WriteStruct(schemas.ReservationCoverageGroup_Coverage)
 		v.Coverage.SerializeMembers(s)
@@ -4766,7 +4830,9 @@ func (v *ReservationPurchaseRecommendation) SerializeMembers(s smithy.ShapeSeria
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.ReservationPurchaseRecommendation_PaymentOption, string(v.PaymentOption))
 	}
-	serializeReservationPurchaseRecommendationDetails(s, schemas.ReservationPurchaseRecommendation_RecommendationDetails, v.RecommendationDetails)
+	if v.RecommendationDetails != nil {
+		serializeReservationPurchaseRecommendationDetails(s, schemas.ReservationPurchaseRecommendation_RecommendationDetails, v.RecommendationDetails)
+	}
 	if v.RecommendationSummary != nil {
 		s.WriteStruct(schemas.ReservationPurchaseRecommendation_RecommendationSummary)
 		v.RecommendationSummary.SerializeMembers(s)
@@ -5236,7 +5302,9 @@ func (v *ReservationUtilizationGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReservationUtilizationGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.ReservationUtilizationGroup_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.ReservationUtilizationGroup_Attributes, v.Attributes)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.ReservationUtilizationGroup_Key, *v.Key)
 	}
@@ -5448,13 +5516,17 @@ func (v *ResultByTime) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Estimated != false {
 		s.WriteBool(schemas.ResultByTime_Estimated, v.Estimated)
 	}
-	serializeGroups(s, schemas.ResultByTime_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroups(s, schemas.ResultByTime_Groups, v.Groups)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.ResultByTime_TimePeriod)
 		v.TimePeriod.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetrics(s, schemas.ResultByTime_Total, v.Total)
+	if v.Total != nil {
+		serializeMetrics(s, schemas.ResultByTime_Total, v.Total)
+	}
 }
 func (v *ResultByTime) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResultByTime, func(s *smithy.Schema) error {
@@ -5514,7 +5586,9 @@ func (v *RightsizingRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CurrentInstance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFindingReasonCodes(s, schemas.RightsizingRecommendation_FindingReasonCodes, v.FindingReasonCodes)
+	if v.FindingReasonCodes != nil {
+		serializeFindingReasonCodes(s, schemas.RightsizingRecommendation_FindingReasonCodes, v.FindingReasonCodes)
+	}
 	if v.ModifyRecommendationDetail != nil {
 		s.WriteStruct(schemas.RightsizingRecommendation_ModifyRecommendationDetail)
 		v.ModifyRecommendationDetail.SerializeMembers(s)
@@ -6018,7 +6092,9 @@ func (v *SavingsPlansCoverage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SavingsPlansCoverage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.SavingsPlansCoverage_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.SavingsPlansCoverage_Attributes, v.Attributes)
+	}
 	if v.Coverage != nil {
 		s.WriteStruct(schemas.SavingsPlansCoverage_Coverage)
 		v.Coverage.SerializeMembers(s)
@@ -6217,8 +6293,12 @@ func (v *SavingsPlansPurchaseAnalysisConfiguration) SerializeMembers(s smithy.Sh
 	if v.SavingsPlansTargetCoverage != nil {
 		s.WriteInt32(schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansTargetCoverage, *v.SavingsPlansTargetCoverage)
 	}
-	serializeSavingsPlansToAdd(s, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToAdd, v.SavingsPlansToAdd)
-	serializeSavingsPlansToExclude(s, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToExclude, v.SavingsPlansToExclude)
+	if v.SavingsPlansToAdd != nil {
+		serializeSavingsPlansToAdd(s, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToAdd, v.SavingsPlansToAdd)
+	}
+	if v.SavingsPlansToExclude != nil {
+		serializeSavingsPlansToExclude(s, schemas.SavingsPlansPurchaseAnalysisConfiguration_SavingsPlansToExclude, v.SavingsPlansToExclude)
+	}
 }
 func (v *SavingsPlansPurchaseAnalysisConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SavingsPlansPurchaseAnalysisConfiguration, func(s *smithy.Schema) error {
@@ -6401,7 +6481,9 @@ func (v *SavingsPlansPurchaseAnalysisDetails) SerializeMembers(s smithy.ShapeSer
 	if v.LookbackPeriodInHours != nil {
 		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_LookbackPeriodInHours, *v.LookbackPeriodInHours)
 	}
-	serializeMetricsOverLookbackPeriod(s, schemas.SavingsPlansPurchaseAnalysisDetails_MetricsOverLookbackPeriod, v.MetricsOverLookbackPeriod)
+	if v.MetricsOverLookbackPeriod != nil {
+		serializeMetricsOverLookbackPeriod(s, schemas.SavingsPlansPurchaseAnalysisDetails_MetricsOverLookbackPeriod, v.MetricsOverLookbackPeriod)
+	}
 	if v.UpfrontCost != nil {
 		s.WriteString(schemas.SavingsPlansPurchaseAnalysisDetails_UpfrontCost, *v.UpfrontCost)
 	}
@@ -6528,7 +6610,9 @@ func (v *SavingsPlansPurchaseRecommendation) SerializeMembers(s smithy.ShapeSeri
 	if v.PaymentOption != "" {
 		s.WriteString(schemas.SavingsPlansPurchaseRecommendation_PaymentOption, string(v.PaymentOption))
 	}
-	serializeSavingsPlansPurchaseRecommendationDetailList(s, schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationDetails, v.SavingsPlansPurchaseRecommendationDetails)
+	if v.SavingsPlansPurchaseRecommendationDetails != nil {
+		serializeSavingsPlansPurchaseRecommendationDetailList(s, schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationDetails, v.SavingsPlansPurchaseRecommendationDetails)
+	}
 	if v.SavingsPlansPurchaseRecommendationSummary != nil {
 		s.WriteStruct(schemas.SavingsPlansPurchaseRecommendation_SavingsPlansPurchaseRecommendationSummary)
 		v.SavingsPlansPurchaseRecommendationSummary.SerializeMembers(s)
@@ -7239,7 +7323,9 @@ func (v *SavingsPlansUtilizationDetail) SerializeMembers(s smithy.ShapeSerialize
 		v.AmortizedCommitment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.SavingsPlansUtilizationDetail_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.SavingsPlansUtilizationDetail_Attributes, v.Attributes)
+	}
 	if v.Savings != nil {
 		s.WriteStruct(schemas.SavingsPlansUtilizationDetail_Savings)
 		v.Savings.SerializeMembers(s)
@@ -7447,8 +7533,12 @@ func (v *TagValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.TagValues_Key, *v.Key)
 	}
-	serializeMatchOptions(s, schemas.TagValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.TagValues_Values, v.Values)
+	if v.MatchOptions != nil {
+		serializeMatchOptions(s, schemas.TagValues_MatchOptions, v.MatchOptions)
+	}
+	if v.Values != nil {
+		serializeValues(s, schemas.TagValues_Values, v.Values)
+	}
 }
 func (v *TagValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagValues, func(s *smithy.Schema) error {
@@ -7519,7 +7609,9 @@ func (v *TargetInstance) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExpectedResourceUtilization.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlatformDifferences(s, schemas.TargetInstance_PlatformDifferences, v.PlatformDifferences)
+	if v.PlatformDifferences != nil {
+		serializePlatformDifferences(s, schemas.TargetInstance_PlatformDifferences, v.PlatformDifferences)
+	}
 	if v.ResourceDetails != nil {
 		s.WriteStruct(schemas.TargetInstance_ResourceDetails)
 		v.ResourceDetails.SerializeMembers(s)
@@ -7719,7 +7811,9 @@ func (v *UtilizationByTime) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UtilizationByTime) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReservationUtilizationGroups(s, schemas.UtilizationByTime_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeReservationUtilizationGroups(s, schemas.UtilizationByTime_Groups, v.Groups)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.UtilizationByTime_TimePeriod)
 		v.TimePeriod.SerializeMembers(s)

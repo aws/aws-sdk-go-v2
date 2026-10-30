@@ -82,7 +82,9 @@ func (v *UpdateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSourceId != nil {
 		s.WriteString(schemas.UpdateDataSourceRequest_DataSourceId, *v.DataSourceId)
 	}
-	serializeDataSourceParameters(s, schemas.UpdateDataSourceRequest_DataSourceParameters, v.DataSourceParameters)
+	if v.DataSourceParameters != nil {
+		serializeDataSourceParameters(s, schemas.UpdateDataSourceRequest_DataSourceParameters, v.DataSourceParameters)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDataSourceRequest_Name, *v.Name)
 	}

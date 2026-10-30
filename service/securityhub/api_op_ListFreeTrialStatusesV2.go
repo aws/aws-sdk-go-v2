@@ -62,14 +62,18 @@ func (v *ListFreeTrialStatusesV2Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFreeTrialStatusesV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFreeTrialAccountIdList(s, schemas.ListFreeTrialStatusesV2Request_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeFreeTrialAccountIdList(s, schemas.ListFreeTrialStatusesV2Request_AccountIds, v.AccountIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListFreeTrialStatusesV2Request_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFreeTrialStatusesV2Request_NextToken, *v.NextToken)
 	}
-	serializeFreeTrialStatusValueList(s, schemas.ListFreeTrialStatusesV2Request_Statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeFreeTrialStatusValueList(s, schemas.ListFreeTrialStatusesV2Request_Statuses, v.Statuses)
+	}
 }
 
 type ListFreeTrialStatusesV2Output struct {
@@ -96,7 +100,9 @@ func (v *ListFreeTrialStatusesV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFreeTrialStatusesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountFreeTrialStatusList(s, schemas.ListFreeTrialStatusesV2Response_AccountFreeTrialStatuses, v.AccountFreeTrialStatuses)
+	if v.AccountFreeTrialStatuses != nil {
+		serializeAccountFreeTrialStatusList(s, schemas.ListFreeTrialStatusesV2Response_AccountFreeTrialStatuses, v.AccountFreeTrialStatuses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFreeTrialStatusesV2Response_NextToken, *v.NextToken)
 	}

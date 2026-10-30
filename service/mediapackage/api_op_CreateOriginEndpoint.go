@@ -138,11 +138,15 @@ func (v *CreateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartoverWindowSeconds != nil {
 		s.WriteInt32(schemas.CreateOriginEndpointRequest_StartoverWindowSeconds, *v.StartoverWindowSeconds)
 	}
-	serializeTags(s, schemas.CreateOriginEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateOriginEndpointRequest_Tags, v.Tags)
+	}
 	if v.TimeDelaySeconds != nil {
 		s.WriteInt32(schemas.CreateOriginEndpointRequest_TimeDelaySeconds, *v.TimeDelaySeconds)
 	}
-	serialize__listOf__string(s, schemas.CreateOriginEndpointRequest_Whitelist, v.Whitelist)
+	if v.Whitelist != nil {
+		serialize__listOf__string(s, schemas.CreateOriginEndpointRequest_Whitelist, v.Whitelist)
+	}
 }
 
 type CreateOriginEndpointOutput struct {
@@ -267,14 +271,18 @@ func (v *CreateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StartoverWindowSeconds != nil {
 		s.WriteInt32(schemas.CreateOriginEndpointResponse_StartoverWindowSeconds, *v.StartoverWindowSeconds)
 	}
-	serializeTags(s, schemas.CreateOriginEndpointResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateOriginEndpointResponse_Tags, v.Tags)
+	}
 	if v.TimeDelaySeconds != nil {
 		s.WriteInt32(schemas.CreateOriginEndpointResponse_TimeDelaySeconds, *v.TimeDelaySeconds)
 	}
 	if v.Url != nil {
 		s.WriteString(schemas.CreateOriginEndpointResponse_Url, *v.Url)
 	}
-	serialize__listOf__string(s, schemas.CreateOriginEndpointResponse_Whitelist, v.Whitelist)
+	if v.Whitelist != nil {
+		serialize__listOf__string(s, schemas.CreateOriginEndpointResponse_Whitelist, v.Whitelist)
+	}
 }
 func (v *CreateOriginEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateOriginEndpointResponse, func(s *smithy.Schema) error {

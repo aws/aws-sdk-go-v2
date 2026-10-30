@@ -104,7 +104,9 @@ func (v *ListLanguageModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLanguageModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModels(s, schemas.ListLanguageModelsResponse_Models, v.Models)
+	if v.Models != nil {
+		serializeModels(s, schemas.ListLanguageModelsResponse_Models, v.Models)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLanguageModelsResponse_NextToken, *v.NextToken)
 	}

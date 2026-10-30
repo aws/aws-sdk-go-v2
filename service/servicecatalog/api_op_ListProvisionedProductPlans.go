@@ -103,7 +103,9 @@ func (v *ListProvisionedProductPlansOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListProvisionedProductPlansOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProvisionedProductPlans(s, schemas.ListProvisionedProductPlansOutput_ProvisionedProductPlans, v.ProvisionedProductPlans)
+	if v.ProvisionedProductPlans != nil {
+		serializeProvisionedProductPlans(s, schemas.ListProvisionedProductPlansOutput_ProvisionedProductPlans, v.ProvisionedProductPlans)
+	}
 }
 func (v *ListProvisionedProductPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisionedProductPlansOutput, func(s *smithy.Schema) error {

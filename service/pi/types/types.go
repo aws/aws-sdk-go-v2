@@ -66,7 +66,9 @@ func (v *AnalysisReport) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.AnalysisReport_Identifier, *v.Identifier)
 	}
-	serializeInsightList(s, schemas.AnalysisReport_Insights, v.Insights)
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.AnalysisReport_Insights, v.Insights)
+	}
 	if v.ServiceType != "" {
 		s.WriteString(schemas.AnalysisReport_ServiceType, string(v.ServiceType))
 	}
@@ -162,7 +164,9 @@ func (v *AnalysisReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.AnalysisReportSummary_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.AnalysisReportSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AnalysisReportSummary_Tags, v.Tags)
+	}
 }
 func (v *AnalysisReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisReportSummary, func(s *smithy.Schema) error {
@@ -524,7 +528,9 @@ func (v *DimensionGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DimensionGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSanitizedStringList(s, schemas.DimensionGroup_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeSanitizedStringList(s, schemas.DimensionGroup_Dimensions, v.Dimensions)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.DimensionGroup_Group, *v.Group)
 	}
@@ -567,7 +573,9 @@ func (v *DimensionGroupDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DimensionGroupDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionDetailList(s, schemas.DimensionGroupDetail_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionDetailList(s, schemas.DimensionGroupDetail_Dimensions, v.Dimensions)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.DimensionGroupDetail_Group, *v.Group)
 	}
@@ -611,9 +619,15 @@ func (v *DimensionKeyDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DimensionKeyDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalMetricsMap(s, schemas.DimensionKeyDescription_AdditionalMetrics, v.AdditionalMetrics)
-	serializeDimensionMap(s, schemas.DimensionKeyDescription_Dimensions, v.Dimensions)
-	serializeMetricValuesList(s, schemas.DimensionKeyDescription_Partitions, v.Partitions)
+	if v.AdditionalMetrics != nil {
+		serializeAdditionalMetricsMap(s, schemas.DimensionKeyDescription_AdditionalMetrics, v.AdditionalMetrics)
+	}
+	if v.Dimensions != nil {
+		serializeDimensionMap(s, schemas.DimensionKeyDescription_Dimensions, v.Dimensions)
+	}
+	if v.Partitions != nil {
+		serializeMetricValuesList(s, schemas.DimensionKeyDescription_Partitions, v.Partitions)
+	}
 	if v.Total != nil {
 		s.WriteFloat64(schemas.DimensionKeyDescription_Total, *v.Total)
 	}
@@ -811,7 +825,9 @@ func (v *Insight) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Insight) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataList(s, schemas.Insight_BaselineData, v.BaselineData)
+	if v.BaselineData != nil {
+		serializeDataList(s, schemas.Insight_BaselineData, v.BaselineData)
+	}
 	if v.Context != "" {
 		s.WriteString(schemas.Insight_Context, string(v.Context))
 	}
@@ -821,21 +837,27 @@ func (v *Insight) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.Insight_EndTime, *v.EndTime)
 	}
-	serializeDataList(s, schemas.Insight_InsightData, v.InsightData)
+	if v.InsightData != nil {
+		serializeDataList(s, schemas.Insight_InsightData, v.InsightData)
+	}
 	if v.InsightId != nil {
 		s.WriteString(schemas.Insight_InsightId, *v.InsightId)
 	}
 	if v.InsightType != nil {
 		s.WriteString(schemas.Insight_InsightType, *v.InsightType)
 	}
-	serializeRecommendationList(s, schemas.Insight_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendationList(s, schemas.Insight_Recommendations, v.Recommendations)
+	}
 	if v.Severity != "" {
 		s.WriteString(schemas.Insight_Severity, string(v.Severity))
 	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.Insight_StartTime, *v.StartTime)
 	}
-	serializeInsightList(s, schemas.Insight_SupportingInsights, v.SupportingInsights)
+	if v.SupportingInsights != nil {
+		serializeInsightList(s, schemas.Insight_SupportingInsights, v.SupportingInsights)
+	}
 }
 func (v *Insight) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Insight, func(s *smithy.Schema) error {
@@ -901,7 +923,9 @@ func (v *MetricDimensionGroups) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricDimensionGroups) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionGroupDetailList(s, schemas.MetricDimensionGroups_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeDimensionGroupDetailList(s, schemas.MetricDimensionGroups_Groups, v.Groups)
+	}
 	if v.Metric != nil {
 		s.WriteString(schemas.MetricDimensionGroups_Metric, *v.Metric)
 	}
@@ -940,7 +964,9 @@ func (v *MetricKeyDataPoints) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricKeyDataPoints) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataPointsList(s, schemas.MetricKeyDataPoints_DataPoints, v.DataPoints)
+	if v.DataPoints != nil {
+		serializeDataPointsList(s, schemas.MetricKeyDataPoints_DataPoints, v.DataPoints)
+	}
 	if v.Key != nil {
 		s.WriteStruct(schemas.MetricKeyDataPoints_Key)
 		v.Key.SerializeMembers(s)
@@ -1023,7 +1049,9 @@ func (v *MetricQuery) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricQueryFilterMap(s, schemas.MetricQuery_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeMetricQueryFilterMap(s, schemas.MetricQuery_Filter, v.Filter)
+	}
 	if v.GroupBy != nil {
 		s.WriteStruct(schemas.MetricQuery_GroupBy)
 		v.GroupBy.SerializeMembers(s)
@@ -1078,11 +1106,15 @@ func (v *PerformanceInsightsMetric) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PerformanceInsightsMetric) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescriptiveMap(s, schemas.PerformanceInsightsMetric_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDescriptiveMap(s, schemas.PerformanceInsightsMetric_Dimensions, v.Dimensions)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.PerformanceInsightsMetric_DisplayName, *v.DisplayName)
 	}
-	serializeDescriptiveMap(s, schemas.PerformanceInsightsMetric_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeDescriptiveMap(s, schemas.PerformanceInsightsMetric_Filter, v.Filter)
+	}
 	if v.Metric != nil {
 		s.WriteString(schemas.PerformanceInsightsMetric_Metric, *v.Metric)
 	}
@@ -1182,7 +1214,9 @@ func (v *ResponsePartitionKey) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResponsePartitionKey) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionMap(s, schemas.ResponsePartitionKey_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionMap(s, schemas.ResponsePartitionKey_Dimensions, v.Dimensions)
+	}
 }
 func (v *ResponsePartitionKey) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResponsePartitionKey, func(s *smithy.Schema) error {
@@ -1286,7 +1320,9 @@ func (v *ResponseResourceMetricKey) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResponseResourceMetricKey) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionMap(s, schemas.ResponseResourceMetricKey_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensionMap(s, schemas.ResponseResourceMetricKey_Dimensions, v.Dimensions)
+	}
 	if v.Metric != nil {
 		s.WriteString(schemas.ResponseResourceMetricKey_Metric, *v.Metric)
 	}

@@ -90,7 +90,9 @@ func (v *ListCaseEditsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCaseEditsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCaseEditItems(s, schemas.ListCaseEditsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeCaseEditItems(s, schemas.ListCaseEditsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCaseEditsResponse_nextToken, *v.NextToken)
 	}

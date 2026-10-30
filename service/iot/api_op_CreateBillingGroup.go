@@ -64,7 +64,9 @@ func (v *CreateBillingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BillingGroupProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateBillingGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateBillingGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateBillingGroupOutput struct {

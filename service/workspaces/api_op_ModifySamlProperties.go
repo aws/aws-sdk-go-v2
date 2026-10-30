@@ -58,7 +58,9 @@ func (v *ModifySamlPropertiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModifySamlPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeletableSamlPropertiesList(s, schemas.ModifySamlPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	if v.PropertiesToDelete != nil {
+		serializeDeletableSamlPropertiesList(s, schemas.ModifySamlPropertiesRequest_PropertiesToDelete, v.PropertiesToDelete)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.ModifySamlPropertiesRequest_ResourceId, *v.ResourceId)
 	}

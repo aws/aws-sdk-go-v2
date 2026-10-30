@@ -79,7 +79,9 @@ func (v *ListSessionLoggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionLoggersResponse_nextToken, *v.NextToken)
 	}
-	serializeSessionLoggerList(s, schemas.ListSessionLoggersResponse_sessionLoggers, v.SessionLoggers)
+	if v.SessionLoggers != nil {
+		serializeSessionLoggerList(s, schemas.ListSessionLoggersResponse_sessionLoggers, v.SessionLoggers)
+	}
 }
 func (v *ListSessionLoggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionLoggersResponse, func(s *smithy.Schema) error {

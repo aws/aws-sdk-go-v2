@@ -87,7 +87,9 @@ func (v *ListIntermediateTablesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntermediateTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableSummaryList(s, schemas.ListIntermediateTablesOutput_intermediateTableSummaries, v.IntermediateTableSummaries)
+	if v.IntermediateTableSummaries != nil {
+		serializeIntermediateTableSummaryList(s, schemas.ListIntermediateTablesOutput_intermediateTableSummaries, v.IntermediateTableSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntermediateTablesOutput_nextToken, *v.NextToken)
 	}

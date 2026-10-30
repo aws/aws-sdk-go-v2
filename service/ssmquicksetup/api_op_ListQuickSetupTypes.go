@@ -64,7 +64,9 @@ func (v *ListQuickSetupTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListQuickSetupTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuickSetupTypeList(s, schemas.ListQuickSetupTypesOutput_QuickSetupTypeList, v.QuickSetupTypeList)
+	if v.QuickSetupTypeList != nil {
+		serializeQuickSetupTypeList(s, schemas.ListQuickSetupTypesOutput_QuickSetupTypeList, v.QuickSetupTypeList)
+	}
 }
 func (v *ListQuickSetupTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQuickSetupTypesOutput, func(s *smithy.Schema) error {

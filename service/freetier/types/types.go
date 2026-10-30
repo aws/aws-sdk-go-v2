@@ -70,7 +70,9 @@ func (v *ActivitySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActivityId != nil {
 		s.WriteString(schemas.ActivitySummary_activityId, *v.ActivityId)
 	}
-	serializeActivityReward(s, schemas.ActivitySummary_reward, v.Reward)
+	if v.Reward != nil {
+		serializeActivityReward(s, schemas.ActivitySummary_reward, v.Reward)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ActivitySummary_status, string(v.Status))
 	}
@@ -134,8 +136,12 @@ func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.DimensionValues_Key, string(v.Key))
 	}
-	serializeMatchOptions(s, schemas.DimensionValues_MatchOptions, v.MatchOptions)
-	serializeValues(s, schemas.DimensionValues_Values, v.Values)
+	if v.MatchOptions != nil {
+		serializeMatchOptions(s, schemas.DimensionValues_MatchOptions, v.MatchOptions)
+	}
+	if v.Values != nil {
+		serializeValues(s, schemas.DimensionValues_Values, v.Values)
+	}
 }
 func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
@@ -221,7 +227,9 @@ func (v *Expression) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressions(s, schemas.Expression_And, v.And)
+	if v.And != nil {
+		serializeExpressions(s, schemas.Expression_And, v.And)
+	}
 	if v.Dimensions != nil {
 		s.WriteStruct(schemas.Expression_Dimensions)
 		v.Dimensions.SerializeMembers(s)
@@ -232,7 +240,9 @@ func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Not.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpressions(s, schemas.Expression_Or, v.Or)
+	if v.Or != nil {
+		serializeExpressions(s, schemas.Expression_Or, v.Or)
+	}
 }
 func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {

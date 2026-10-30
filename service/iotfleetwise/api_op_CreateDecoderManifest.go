@@ -91,9 +91,15 @@ func (v *CreateDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDecoderManifestRequest_name, *v.Name)
 	}
-	serializeNetworkInterfaces(s, schemas.CreateDecoderManifestRequest_networkInterfaces, v.NetworkInterfaces)
-	serializeSignalDecoders(s, schemas.CreateDecoderManifestRequest_signalDecoders, v.SignalDecoders)
-	serializeTagList(s, schemas.CreateDecoderManifestRequest_tags, v.Tags)
+	if v.NetworkInterfaces != nil {
+		serializeNetworkInterfaces(s, schemas.CreateDecoderManifestRequest_networkInterfaces, v.NetworkInterfaces)
+	}
+	if v.SignalDecoders != nil {
+		serializeSignalDecoders(s, schemas.CreateDecoderManifestRequest_signalDecoders, v.SignalDecoders)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDecoderManifestRequest_tags, v.Tags)
+	}
 }
 func (v *CreateDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDecoderManifestRequest, func(s *smithy.Schema) error {

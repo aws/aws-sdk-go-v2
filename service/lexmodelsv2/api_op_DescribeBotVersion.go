@@ -122,7 +122,9 @@ func (v *DescribeBotVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.DescribeBotVersionResponse_botId, *v.BotId)
 	}
-	serializeBotMembers(s, schemas.DescribeBotVersionResponse_botMembers, v.BotMembers)
+	if v.BotMembers != nil {
+		serializeBotMembers(s, schemas.DescribeBotVersionResponse_botMembers, v.BotMembers)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.DescribeBotVersionResponse_botName, *v.BotName)
 	}
@@ -146,11 +148,15 @@ func (v *DescribeBotVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeBotVersionResponse_description, *v.Description)
 	}
-	serializeFailureReasons(s, schemas.DescribeBotVersionResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeBotVersionResponse_failureReasons, v.FailureReasons)
+	}
 	if v.IdleSessionTTLInSeconds != nil {
 		s.WriteInt32(schemas.DescribeBotVersionResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
 	}
-	serializeParentBotNetworks(s, schemas.DescribeBotVersionResponse_parentBotNetworks, v.ParentBotNetworks)
+	if v.ParentBotNetworks != nil {
+		serializeParentBotNetworks(s, schemas.DescribeBotVersionResponse_parentBotNetworks, v.ParentBotNetworks)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeBotVersionResponse_roleArn, *v.RoleArn)
 	}

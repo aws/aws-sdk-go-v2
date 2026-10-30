@@ -71,7 +71,9 @@ func (v *UpdateDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DatasetId != nil {
 		s.WriteString(schemas.UpdateDatasetExamplesRequest_datasetId, *v.DatasetId)
 	}
-	serializeDatasetExampleList(s, schemas.UpdateDatasetExamplesRequest_examples, v.Examples)
+	if v.Examples != nil {
+		serializeDatasetExampleList(s, schemas.UpdateDatasetExamplesRequest_examples, v.Examples)
+	}
 }
 
 type UpdateDatasetExamplesOutput struct {

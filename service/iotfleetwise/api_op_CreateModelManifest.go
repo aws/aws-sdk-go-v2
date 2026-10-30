@@ -72,11 +72,15 @@ func (v *CreateModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateModelManifestRequest_name, *v.Name)
 	}
-	serializelistOfStrings(s, schemas.CreateModelManifestRequest_nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializelistOfStrings(s, schemas.CreateModelManifestRequest_nodes, v.Nodes)
+	}
 	if v.SignalCatalogArn != nil {
 		s.WriteString(schemas.CreateModelManifestRequest_signalCatalogArn, *v.SignalCatalogArn)
 	}
-	serializeTagList(s, schemas.CreateModelManifestRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelManifestRequest_tags, v.Tags)
+	}
 }
 func (v *CreateModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateModelManifestRequest, func(s *smithy.Schema) error {

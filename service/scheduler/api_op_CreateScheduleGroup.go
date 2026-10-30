@@ -58,7 +58,9 @@ func (v *CreateScheduleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateScheduleGroupInput_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateScheduleGroupInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateScheduleGroupInput_Tags, v.Tags)
+	}
 }
 func (v *CreateScheduleGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateScheduleGroupInput, func(s *smithy.Schema) error {

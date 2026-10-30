@@ -259,7 +259,9 @@ func (v *CreateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateOutput_name, *v.Name)
 	}
-	serializeOutputConfig(s, schemas.CreateOutput_outputConfig, v.OutputConfig)
+	if v.OutputConfig != nil {
+		serializeOutputConfig(s, schemas.CreateOutput_outputConfig, v.OutputConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateOutput_status, string(v.Status))
 	}
@@ -305,7 +307,9 @@ func (v *CroppingConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CroppingConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTemplateGroupList(s, schemas.CroppingConfig_templateGroups, v.TemplateGroups)
+	if v.TemplateGroups != nil {
+		serializeTemplateGroupList(s, schemas.CroppingConfig_templateGroups, v.TemplateGroups)
+	}
 }
 func (v *CroppingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CroppingConfig, func(s *smithy.Schema) error {
@@ -647,7 +651,9 @@ func (v *FixtureSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FixtureSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompetitorList(s, schemas.FixtureSummary_competitors, v.Competitors)
+	if v.Competitors != nil {
+		serializeCompetitorList(s, schemas.FixtureSummary_competitors, v.Competitors)
+	}
 	if v.FixtureGroup != nil {
 		s.WriteString(schemas.FixtureSummary_fixtureGroup, *v.FixtureGroup)
 	}
@@ -740,7 +746,9 @@ func (v *GetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetOutput_name, *v.Name)
 	}
-	serializeOutputConfig(s, schemas.GetOutput_outputConfig, v.OutputConfig)
+	if v.OutputConfig != nil {
+		serializeOutputConfig(s, schemas.GetOutput_outputConfig, v.OutputConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetOutput_status, string(v.Status))
 	}
@@ -940,8 +948,12 @@ func (v *ScheduleAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScheduleActionOperations(s, schemas.ScheduleAction_operations, v.Operations)
-	serializeScheduleActionStartConfiguration(s, schemas.ScheduleAction_startConfiguration, v.StartConfiguration)
+	if v.Operations != nil {
+		serializeScheduleActionOperations(s, schemas.ScheduleAction_operations, v.Operations)
+	}
+	if v.StartConfiguration != nil {
+		serializeScheduleActionStartConfiguration(s, schemas.ScheduleAction_startConfiguration, v.StartConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ScheduleAction_status, string(v.Status))
 	}
@@ -1147,7 +1159,9 @@ func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.SearchFilter_name, string(v.Name))
 	}
-	serializeFilterValueList(s, schemas.SearchFilter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValueList(s, schemas.SearchFilter_values, v.Values)
+	}
 }
 func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {
@@ -1277,7 +1291,9 @@ func (v *TemplateGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TemplateGroup_name, *v.Name)
 	}
-	serializeTemplateUriList(s, schemas.TemplateGroup_templateUris, v.TemplateUris)
+	if v.TemplateUris != nil {
+		serializeTemplateUriList(s, schemas.TemplateGroup_templateUris, v.TemplateUris)
+	}
 }
 func (v *TemplateGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemplateGroup, func(s *smithy.Schema) error {
@@ -1393,7 +1409,9 @@ func (v *UpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateOutput_name, *v.Name)
 	}
-	serializeOutputConfig(s, schemas.UpdateOutput_outputConfig, v.OutputConfig)
+	if v.OutputConfig != nil {
+		serializeOutputConfig(s, schemas.UpdateOutput_outputConfig, v.OutputConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateOutput_status, string(v.Status))
 	}

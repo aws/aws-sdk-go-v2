@@ -72,7 +72,9 @@ func (v *CreateWorkspaceInstanceInput) SerializeMembers(s smithy.ShapeSerializer
 		v.ManagedInstance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateWorkspaceInstanceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkspaceInstanceRequest_Tags, v.Tags)
+	}
 }
 
 // Returns the unique identifier for the newly created WorkSpaces Instance.

@@ -120,7 +120,9 @@ func (v *UpdateSizeConstraintSetInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SizeConstraintSetId != nil {
 		s.WriteString(schemas.UpdateSizeConstraintSetRequest_SizeConstraintSetId, *v.SizeConstraintSetId)
 	}
-	serializeSizeConstraintSetUpdates(s, schemas.UpdateSizeConstraintSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeSizeConstraintSetUpdates(s, schemas.UpdateSizeConstraintSetRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateSizeConstraintSetOutput struct {

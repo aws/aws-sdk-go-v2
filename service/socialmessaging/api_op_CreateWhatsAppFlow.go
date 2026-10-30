@@ -71,7 +71,9 @@ func (v *CreateWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowCategoryList(s, schemas.CreateWhatsAppFlowInput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeMetaFlowCategoryList(s, schemas.CreateWhatsAppFlowInput_categories, v.Categories)
+	}
 	if v.CloneFlowId != nil {
 		s.WriteString(schemas.CreateWhatsAppFlowInput_cloneFlowId, *v.CloneFlowId)
 	}
@@ -117,7 +119,9 @@ func (v *CreateWhatsAppFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowId != nil {
 		s.WriteString(schemas.CreateWhatsAppFlowOutput_flowId, *v.FlowId)
 	}
-	serializeValidationErrorList(s, schemas.CreateWhatsAppFlowOutput_validationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrorList(s, schemas.CreateWhatsAppFlowOutput_validationErrors, v.ValidationErrors)
+	}
 }
 func (v *CreateWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateWhatsAppFlowOutput, func(s *smithy.Schema) error {

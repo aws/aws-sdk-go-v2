@@ -61,7 +61,9 @@ func (v *AssociateQueueQuickConnectsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.QueueId != nil {
 		s.WriteString(schemas.AssociateQueueQuickConnectsRequest_QueueId, *v.QueueId)
 	}
-	serializeQuickConnectsList(s, schemas.AssociateQueueQuickConnectsRequest_QuickConnectIds, v.QuickConnectIds)
+	if v.QuickConnectIds != nil {
+		serializeQuickConnectsList(s, schemas.AssociateQueueQuickConnectsRequest_QuickConnectIds, v.QuickConnectIds)
+	}
 }
 
 type AssociateQueueQuickConnectsOutput struct {

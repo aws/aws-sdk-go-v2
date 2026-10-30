@@ -52,7 +52,9 @@ func (v *DeleteAwsLogSourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAwsLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsLogSourceConfigurationList(s, schemas.DeleteAwsLogSourceRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeAwsLogSourceConfigurationList(s, schemas.DeleteAwsLogSourceRequest_sources, v.Sources)
+	}
 }
 
 type DeleteAwsLogSourceOutput struct {
@@ -74,7 +76,9 @@ func (v *DeleteAwsLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAwsLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.DeleteAwsLogSourceResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeAccountList(s, schemas.DeleteAwsLogSourceResponse_failed, v.Failed)
+	}
 }
 func (v *DeleteAwsLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteAwsLogSourceResponse, func(s *smithy.Schema) error {

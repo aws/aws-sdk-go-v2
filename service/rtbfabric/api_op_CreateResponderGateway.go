@@ -151,16 +151,24 @@ func (v *CreateResponderGatewayInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ListenerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeManagedEndpointConfiguration(s, schemas.CreateResponderGatewayRequest_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
+	if v.ManagedEndpointConfiguration != nil {
+		serializeManagedEndpointConfiguration(s, schemas.CreateResponderGatewayRequest_managedEndpointConfiguration, v.ManagedEndpointConfiguration)
+	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.CreateResponderGatewayRequest_port, *v.Port)
 	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateResponderGatewayRequest_protocol, string(v.Protocol))
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateResponderGatewayRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateResponderGatewayRequest_subnetIds, v.SubnetIds)
-	serializeTagsMap(s, schemas.CreateResponderGatewayRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateResponderGatewayRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateResponderGatewayRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateResponderGatewayRequest_tags, v.Tags)
+	}
 	if v.TrustStoreConfiguration != nil {
 		s.WriteStruct(schemas.CreateResponderGatewayRequest_trustStoreConfiguration)
 		v.TrustStoreConfiguration.SerializeMembers(s)

@@ -81,7 +81,9 @@ func (v *GetDataQualityModelResultOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.CompletedOn != nil {
 		s.WriteTime(schemas.GetDataQualityModelResultResponse_CompletedOn, *v.CompletedOn)
 	}
-	serializeStatisticModelResults(s, schemas.GetDataQualityModelResultResponse_Model, v.Model)
+	if v.Model != nil {
+		serializeStatisticModelResults(s, schemas.GetDataQualityModelResultResponse_Model, v.Model)
+	}
 }
 func (v *GetDataQualityModelResultOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataQualityModelResultResponse, func(s *smithy.Schema) error {

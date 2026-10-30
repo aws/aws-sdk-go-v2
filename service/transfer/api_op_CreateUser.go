@@ -167,7 +167,9 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomeDirectory != nil {
 		s.WriteString(schemas.CreateUserRequest_HomeDirectory, *v.HomeDirectory)
 	}
-	serializeHomeDirectoryMappings(s, schemas.CreateUserRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryMappings != nil {
+		serializeHomeDirectoryMappings(s, schemas.CreateUserRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	}
 	if v.HomeDirectoryType != "" {
 		s.WriteString(schemas.CreateUserRequest_HomeDirectoryType, string(v.HomeDirectoryType))
 	}
@@ -188,7 +190,9 @@ func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SshPublicKeyBody != nil {
 		s.WriteString(schemas.CreateUserRequest_SshPublicKeyBody, *v.SshPublicKeyBody)
 	}
-	serializeTags(s, schemas.CreateUserRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateUserRequest_Tags, v.Tags)
+	}
 	if v.UserName != nil {
 		s.WriteString(schemas.CreateUserRequest_UserName, *v.UserName)
 	}

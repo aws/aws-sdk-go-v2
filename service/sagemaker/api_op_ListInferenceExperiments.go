@@ -136,7 +136,9 @@ func (v *ListInferenceExperimentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceExperimentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceExperimentList(s, schemas.ListInferenceExperimentsResponse_InferenceExperiments, v.InferenceExperiments)
+	if v.InferenceExperiments != nil {
+		serializeInferenceExperimentList(s, schemas.ListInferenceExperimentsResponse_InferenceExperiments, v.InferenceExperiments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceExperimentsResponse_NextToken, *v.NextToken)
 	}

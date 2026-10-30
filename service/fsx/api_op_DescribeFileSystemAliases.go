@@ -103,7 +103,9 @@ func (v *DescribeFileSystemAliasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeFileSystemAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAliases(s, schemas.DescribeFileSystemAliasesResponse_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeAliases(s, schemas.DescribeFileSystemAliasesResponse_Aliases, v.Aliases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFileSystemAliasesResponse_NextToken, *v.NextToken)
 	}

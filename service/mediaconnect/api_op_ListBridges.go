@@ -103,7 +103,9 @@ func (v *ListBridgesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBridgesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfListedBridge(s, schemas.ListBridgesResponse_Bridges, v.Bridges)
+	if v.Bridges != nil {
+		serialize__listOfListedBridge(s, schemas.ListBridgesResponse_Bridges, v.Bridges)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBridgesResponse_NextToken, *v.NextToken)
 	}

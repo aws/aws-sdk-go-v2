@@ -577,8 +577,12 @@ func (v *UnableToDetectSchemaException) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.UnableToDetectSchemaException_Message, *v.Message)
 	}
-	serializeProcessedInputRecords(s, schemas.UnableToDetectSchemaException_ProcessedInputRecords, v.ProcessedInputRecords)
-	serializeRawInputRecords(s, schemas.UnableToDetectSchemaException_RawInputRecords, v.RawInputRecords)
+	if v.ProcessedInputRecords != nil {
+		serializeProcessedInputRecords(s, schemas.UnableToDetectSchemaException_ProcessedInputRecords, v.ProcessedInputRecords)
+	}
+	if v.RawInputRecords != nil {
+		serializeRawInputRecords(s, schemas.UnableToDetectSchemaException_RawInputRecords, v.RawInputRecords)
+	}
 }
 func (v *UnableToDetectSchemaException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnableToDetectSchemaException, func(s *smithy.Schema) error {

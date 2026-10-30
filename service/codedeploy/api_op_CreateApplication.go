@@ -59,7 +59,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputePlatform != "" {
 		s.WriteString(schemas.CreateApplicationInput_computePlatform, string(v.ComputePlatform))
 	}
-	serializeTagList(s, schemas.CreateApplicationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateApplicationInput_tags, v.Tags)
+	}
 }
 
 // Represents the output of a CreateApplication operation.

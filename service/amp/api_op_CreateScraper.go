@@ -113,16 +113,26 @@ func (v *CreateScraperInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateScraperRequest_clientToken, *v.ClientToken)
 	}
-	serializeDestination(s, schemas.CreateScraperRequest_destination, v.Destination)
-	serializeExporterList(s, schemas.CreateScraperRequest_exporters, v.Exporters)
+	if v.Destination != nil {
+		serializeDestination(s, schemas.CreateScraperRequest_destination, v.Destination)
+	}
+	if v.Exporters != nil {
+		serializeExporterList(s, schemas.CreateScraperRequest_exporters, v.Exporters)
+	}
 	if v.RoleConfiguration != nil {
 		s.WriteStruct(schemas.CreateScraperRequest_roleConfiguration)
 		v.RoleConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScrapeConfiguration(s, schemas.CreateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
-	serializeSource(s, schemas.CreateScraperRequest_source, v.Source)
-	serializeTagMap(s, schemas.CreateScraperRequest_tags, v.Tags)
+	if v.ScrapeConfiguration != nil {
+		serializeScrapeConfiguration(s, schemas.CreateScraperRequest_scrapeConfiguration, v.ScrapeConfiguration)
+	}
+	if v.Source != nil {
+		serializeSource(s, schemas.CreateScraperRequest_source, v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScraperRequest_tags, v.Tags)
+	}
 }
 
 // Represents the output of a CreateScraper operation.
@@ -170,7 +180,9 @@ func (v *CreateScraperOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateScraperResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScraperResponse_tags, v.Tags)
+	}
 }
 func (v *CreateScraperOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateScraperResponse, func(s *smithy.Schema) error {

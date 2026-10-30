@@ -111,8 +111,12 @@ func (v *BatchGetRecordIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.BatchGetRecordIdentifier_FeatureGroupName, *v.FeatureGroupName)
 	}
-	serializeFeatureNames(s, schemas.BatchGetRecordIdentifier_FeatureNames, v.FeatureNames)
-	serializeRecordIdentifiers(s, schemas.BatchGetRecordIdentifier_RecordIdentifiersValueAsString, v.RecordIdentifiersValueAsString)
+	if v.FeatureNames != nil {
+		serializeFeatureNames(s, schemas.BatchGetRecordIdentifier_FeatureNames, v.FeatureNames)
+	}
+	if v.RecordIdentifiersValueAsString != nil {
+		serializeRecordIdentifiers(s, schemas.BatchGetRecordIdentifier_RecordIdentifiersValueAsString, v.RecordIdentifiersValueAsString)
+	}
 }
 func (v *BatchGetRecordIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetRecordIdentifier, func(s *smithy.Schema) error {
@@ -166,7 +170,9 @@ func (v *BatchGetRecordResultDetail) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.BatchGetRecordResultDetail_FeatureGroupName, *v.FeatureGroupName)
 	}
-	serializeRecord(s, schemas.BatchGetRecordResultDetail_Record, v.Record)
+	if v.Record != nil {
+		serializeRecord(s, schemas.BatchGetRecordResultDetail_Record, v.Record)
+	}
 	if v.RecordIdentifierValueAsString != nil {
 		s.WriteString(schemas.BatchGetRecordResultDetail_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
 	}
@@ -226,8 +232,12 @@ func (v *BatchWriteRecordEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.BatchWriteRecordEntry_FeatureGroupName, *v.FeatureGroupName)
 	}
-	serializeRecord(s, schemas.BatchWriteRecordEntry_Record, v.Record)
-	serializeTargetStores(s, schemas.BatchWriteRecordEntry_TargetStores, v.TargetStores)
+	if v.Record != nil {
+		serializeRecord(s, schemas.BatchWriteRecordEntry_Record, v.Record)
+	}
+	if v.TargetStores != nil {
+		serializeTargetStores(s, schemas.BatchWriteRecordEntry_TargetStores, v.TargetStores)
+	}
 	if v.TtlDuration != nil {
 		s.WriteStruct(schemas.BatchWriteRecordEntry_TtlDuration)
 		v.TtlDuration.SerializeMembers(s)
@@ -344,7 +354,9 @@ func (v *FeatureValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ValueAsString != nil {
 		s.WriteString(schemas.FeatureValue_ValueAsString, *v.ValueAsString)
 	}
-	serializeValueAsStringList(s, schemas.FeatureValue_ValueAsStringList, v.ValueAsStringList)
+	if v.ValueAsStringList != nil {
+		serializeValueAsStringList(s, schemas.FeatureValue_ValueAsStringList, v.ValueAsStringList)
+	}
 }
 func (v *FeatureValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FeatureValue, func(s *smithy.Schema) error {

@@ -102,8 +102,12 @@ func (v *UpdateChatControlsConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.ResponseScope != "" {
 		s.WriteString(schemas.UpdateChatControlsConfigurationRequest_responseScope, string(v.ResponseScope))
 	}
-	serializeTopicConfigurations(s, schemas.UpdateChatControlsConfigurationRequest_topicConfigurationsToCreateOrUpdate, v.TopicConfigurationsToCreateOrUpdate)
-	serializeTopicConfigurations(s, schemas.UpdateChatControlsConfigurationRequest_topicConfigurationsToDelete, v.TopicConfigurationsToDelete)
+	if v.TopicConfigurationsToCreateOrUpdate != nil {
+		serializeTopicConfigurations(s, schemas.UpdateChatControlsConfigurationRequest_topicConfigurationsToCreateOrUpdate, v.TopicConfigurationsToCreateOrUpdate)
+	}
+	if v.TopicConfigurationsToDelete != nil {
+		serializeTopicConfigurations(s, schemas.UpdateChatControlsConfigurationRequest_topicConfigurationsToDelete, v.TopicConfigurationsToDelete)
+	}
 }
 
 type UpdateChatControlsConfigurationOutput struct {

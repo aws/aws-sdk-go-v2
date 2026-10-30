@@ -98,7 +98,9 @@ func (v *CreateMultiRegionClusterInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.TLSEnabled != nil {
 		s.WriteBool(schemas.CreateMultiRegionClusterRequest_TLSEnabled, *v.TLSEnabled)
 	}
-	serializeTagList(s, schemas.CreateMultiRegionClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMultiRegionClusterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMultiRegionClusterOutput struct {

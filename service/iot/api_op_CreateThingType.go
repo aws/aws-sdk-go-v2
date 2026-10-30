@@ -59,7 +59,9 @@ func (v *CreateThingTypeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateThingTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.CreateThingTypeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateThingTypeRequest_tags, v.Tags)
+	}
 	if v.ThingTypeName != nil {
 		s.WriteString(schemas.CreateThingTypeRequest_thingTypeName, *v.ThingTypeName)
 	}

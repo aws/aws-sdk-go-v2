@@ -54,7 +54,9 @@ func (v *DisassociateSourceViewsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.DisassociateSourceViewsRequest_arn, *v.Arn)
 	}
-	serializeBillingViewSourceViewsList(s, schemas.DisassociateSourceViewsRequest_sourceViews, v.SourceViews)
+	if v.SourceViews != nil {
+		serializeBillingViewSourceViewsList(s, schemas.DisassociateSourceViewsRequest_sourceViews, v.SourceViews)
+	}
 }
 
 type DisassociateSourceViewsOutput struct {

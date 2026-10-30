@@ -79,7 +79,9 @@ func (v *UpdateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TokenKeyName != nil {
 		s.WriteString(schemas.UpdateAuthorizerRequest_tokenKeyName, *v.TokenKeyName)
 	}
-	serializePublicKeyMap(s, schemas.UpdateAuthorizerRequest_tokenSigningPublicKeys, v.TokenSigningPublicKeys)
+	if v.TokenSigningPublicKeys != nil {
+		serializePublicKeyMap(s, schemas.UpdateAuthorizerRequest_tokenSigningPublicKeys, v.TokenSigningPublicKeys)
+	}
 }
 
 type UpdateAuthorizerOutput struct {

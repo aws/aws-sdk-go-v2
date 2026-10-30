@@ -175,18 +175,24 @@ func (v *GetWorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetWorkflowStepResponse_name, *v.Name)
 	}
-	serializeStringList(s, schemas.GetWorkflowStepResponse_next, v.Next)
+	if v.Next != nil {
+		serializeStringList(s, schemas.GetWorkflowStepResponse_next, v.Next)
+	}
 	if v.NoOfSrvCompleted != nil {
 		s.WriteInt32(schemas.GetWorkflowStepResponse_noOfSrvCompleted, *v.NoOfSrvCompleted)
 	}
 	if v.NoOfSrvFailed != nil {
 		s.WriteInt32(schemas.GetWorkflowStepResponse_noOfSrvFailed, *v.NoOfSrvFailed)
 	}
-	serializeWorkflowStepOutputList(s, schemas.GetWorkflowStepResponse_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeWorkflowStepOutputList(s, schemas.GetWorkflowStepResponse_outputs, v.Outputs)
+	}
 	if v.Owner != "" {
 		s.WriteString(schemas.GetWorkflowStepResponse_owner, string(v.Owner))
 	}
-	serializeStringList(s, schemas.GetWorkflowStepResponse_previous, v.Previous)
+	if v.Previous != nil {
+		serializeStringList(s, schemas.GetWorkflowStepResponse_previous, v.Previous)
+	}
 	if v.ScriptOutputLocation != nil {
 		s.WriteString(schemas.GetWorkflowStepResponse_scriptOutputLocation, *v.ScriptOutputLocation)
 	}
@@ -205,7 +211,9 @@ func (v *GetWorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StepId != nil {
 		s.WriteString(schemas.GetWorkflowStepResponse_stepId, *v.StepId)
 	}
-	serializeStringList(s, schemas.GetWorkflowStepResponse_stepTarget, v.StepTarget)
+	if v.StepTarget != nil {
+		serializeStringList(s, schemas.GetWorkflowStepResponse_stepTarget, v.StepTarget)
+	}
 	if v.TotalNoOfSrv != nil {
 		s.WriteInt32(schemas.GetWorkflowStepResponse_totalNoOfSrv, *v.TotalNoOfSrv)
 	}

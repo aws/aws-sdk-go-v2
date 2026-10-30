@@ -120,7 +120,9 @@ func (v *ListCustomVocabularyItemsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListCustomVocabularyItemsResponse_botVersion, *v.BotVersion)
 	}
-	serializeCustomVocabularyItems(s, schemas.ListCustomVocabularyItemsResponse_customVocabularyItems, v.CustomVocabularyItems)
+	if v.CustomVocabularyItems != nil {
+		serializeCustomVocabularyItems(s, schemas.ListCustomVocabularyItemsResponse_customVocabularyItems, v.CustomVocabularyItems)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListCustomVocabularyItemsResponse_localeId, *v.LocaleId)
 	}

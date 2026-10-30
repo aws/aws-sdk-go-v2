@@ -97,7 +97,9 @@ func (v *SendRcsMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendRcsMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendRcsMessageRequest_Context, v.Context)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendRcsMessageRequest_Context, v.Context)
+	}
 	if v.DestinationPhoneNumber != nil {
 		s.WriteString(schemas.SendRcsMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
 	}

@@ -65,7 +65,9 @@ func (v *AddResourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.NotificationOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSharePrincipalList(s, schemas.AddResourcePermissionsRequest_Principals, v.Principals)
+	if v.Principals != nil {
+		serializeSharePrincipalList(s, schemas.AddResourcePermissionsRequest_Principals, v.Principals)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.AddResourcePermissionsRequest_ResourceId, *v.ResourceId)
 	}
@@ -89,7 +91,9 @@ func (v *AddResourcePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddResourcePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeShareResultsList(s, schemas.AddResourcePermissionsResponse_ShareResults, v.ShareResults)
+	if v.ShareResults != nil {
+		serializeShareResultsList(s, schemas.AddResourcePermissionsResponse_ShareResults, v.ShareResults)
+	}
 }
 func (v *AddResourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddResourcePermissionsResponse, func(s *smithy.Schema) error {

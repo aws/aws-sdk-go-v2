@@ -614,7 +614,9 @@ func (v *DICOMImportJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.DICOMImportJobProperties_endedAt, *v.EndedAt)
 	}
-	serializeImportConfiguration(s, schemas.DICOMImportJobProperties_importConfiguration, v.ImportConfiguration)
+	if v.ImportConfiguration != nil {
+		serializeImportConfiguration(s, schemas.DICOMImportJobProperties_importConfiguration, v.ImportConfiguration)
+	}
 	if v.InputS3Uri != nil {
 		s.WriteString(schemas.DICOMImportJobProperties_inputS3Uri, *v.InputS3Uri)
 	}
@@ -807,7 +809,9 @@ func (v *DicomJsonMetadataImportConfiguration) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DicomJsonMetadataImportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDicomMetadataMappings(s, schemas.DicomJsonMetadataImportConfiguration_dicomMetadataMappings, v.DicomMetadataMappings)
+	if v.DicomMetadataMappings != nil {
+		serializeDicomMetadataMappings(s, schemas.DicomJsonMetadataImportConfiguration_dicomMetadataMappings, v.DicomMetadataMappings)
+	}
 }
 func (v *DicomJsonMetadataImportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DicomJsonMetadataImportConfiguration, func(s *smithy.Schema) error {
@@ -1701,7 +1705,9 @@ func (v *SearchCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchFilters(s, schemas.SearchCriteria_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchFilters(s, schemas.SearchCriteria_filters, v.Filters)
+	}
 	if v.Sort != nil {
 		s.WriteStruct(schemas.SearchCriteria_sort)
 		v.Sort.SerializeMembers(s)
@@ -1747,7 +1753,9 @@ func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.SearchFilter_operator, string(v.Operator))
 	}
-	serializeSearchByAttributeValues(s, schemas.SearchFilter_values, v.Values)
+	if v.Values != nil {
+		serializeSearchByAttributeValues(s, schemas.SearchFilter_values, v.Values)
+	}
 }
 func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {

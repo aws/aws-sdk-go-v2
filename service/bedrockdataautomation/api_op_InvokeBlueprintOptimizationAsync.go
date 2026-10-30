@@ -83,8 +83,12 @@ func (v *InvokeBlueprintOptimizationAsyncInput) SerializeMembers(s smithy.ShapeS
 		v.OutputConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBlueprintOptimizationSamples(s, schemas.InvokeBlueprintOptimizationAsyncRequest_samples, v.Samples)
-	serializeTagList(s, schemas.InvokeBlueprintOptimizationAsyncRequest_tags, v.Tags)
+	if v.Samples != nil {
+		serializeBlueprintOptimizationSamples(s, schemas.InvokeBlueprintOptimizationAsyncRequest_samples, v.Samples)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.InvokeBlueprintOptimizationAsyncRequest_tags, v.Tags)
+	}
 }
 
 // Invoke Blueprint Optimization Async Response

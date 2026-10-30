@@ -158,8 +158,12 @@ func (v *GetCostAndUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetCostAndUsageRequest_Granularity, string(v.Granularity))
 	}
-	serializeGroupDefinitions(s, schemas.GetCostAndUsageRequest_GroupBy, v.GroupBy)
-	serializeMetricNames(s, schemas.GetCostAndUsageRequest_Metrics, v.Metrics)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetCostAndUsageRequest_GroupBy, v.GroupBy)
+	}
+	if v.Metrics != nil {
+		serializeMetricNames(s, schemas.GetCostAndUsageRequest_Metrics, v.Metrics)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostAndUsageRequest_NextPageToken, *v.NextPageToken)
 	}
@@ -201,12 +205,18 @@ func (v *GetCostAndUsageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostAndUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageResponse_DimensionValueAttributes, v.DimensionValueAttributes)
-	serializeGroupDefinitions(s, schemas.GetCostAndUsageResponse_GroupDefinitions, v.GroupDefinitions)
+	if v.DimensionValueAttributes != nil {
+		serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageResponse_DimensionValueAttributes, v.DimensionValueAttributes)
+	}
+	if v.GroupDefinitions != nil {
+		serializeGroupDefinitions(s, schemas.GetCostAndUsageResponse_GroupDefinitions, v.GroupDefinitions)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostAndUsageResponse_NextPageToken, *v.NextPageToken)
 	}
-	serializeResultsByTime(s, schemas.GetCostAndUsageResponse_ResultsByTime, v.ResultsByTime)
+	if v.ResultsByTime != nil {
+		serializeResultsByTime(s, schemas.GetCostAndUsageResponse_ResultsByTime, v.ResultsByTime)
+	}
 }
 func (v *GetCostAndUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCostAndUsageResponse, func(s *smithy.Schema) error {

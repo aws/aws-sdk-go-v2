@@ -113,8 +113,12 @@ func (v *StartTaskExecutionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.StartTaskExecutionRequest_Excludes, v.Excludes)
-	serializeFilterList(s, schemas.StartTaskExecutionRequest_Includes, v.Includes)
+	if v.Excludes != nil {
+		serializeFilterList(s, schemas.StartTaskExecutionRequest_Excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeFilterList(s, schemas.StartTaskExecutionRequest_Includes, v.Includes)
+	}
 	if v.ManifestConfig != nil {
 		s.WriteStruct(schemas.StartTaskExecutionRequest_ManifestConfig)
 		v.ManifestConfig.SerializeMembers(s)
@@ -125,7 +129,9 @@ func (v *StartTaskExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OverrideOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputTagList(s, schemas.StartTaskExecutionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.StartTaskExecutionRequest_Tags, v.Tags)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.StartTaskExecutionRequest_TaskArn, *v.TaskArn)
 	}

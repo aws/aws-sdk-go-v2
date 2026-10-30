@@ -67,7 +67,9 @@ func (v *ListFirewallsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallsRequest_NextToken, *v.NextToken)
 	}
-	serializeVpcIds(s, schemas.ListFirewallsRequest_VpcIds, v.VpcIds)
+	if v.VpcIds != nil {
+		serializeVpcIds(s, schemas.ListFirewallsRequest_VpcIds, v.VpcIds)
+	}
 }
 
 type ListFirewallsOutput struct {
@@ -97,7 +99,9 @@ func (v *ListFirewallsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFirewallsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirewalls(s, schemas.ListFirewallsResponse_Firewalls, v.Firewalls)
+	if v.Firewalls != nil {
+		serializeFirewalls(s, schemas.ListFirewallsResponse_Firewalls, v.Firewalls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallsResponse_NextToken, *v.NextToken)
 	}

@@ -102,7 +102,9 @@ func (v *GetIntentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIntentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntentMetadataList(s, schemas.GetIntentVersionsResponse_intents, v.Intents)
+	if v.Intents != nil {
+		serializeIntentMetadataList(s, schemas.GetIntentVersionsResponse_intents, v.Intents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetIntentVersionsResponse_nextToken, *v.NextToken)
 	}

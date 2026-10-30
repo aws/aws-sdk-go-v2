@@ -117,7 +117,9 @@ func (v *UpdateJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateJobExecutionRequest_status, string(v.Status))
 	}
-	serializeDetailsMap(s, schemas.UpdateJobExecutionRequest_statusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeDetailsMap(s, schemas.UpdateJobExecutionRequest_statusDetails, v.StatusDetails)
+	}
 	if v.StepTimeoutInMinutes != nil {
 		s.WriteInt64(schemas.UpdateJobExecutionRequest_stepTimeoutInMinutes, *v.StepTimeoutInMinutes)
 	}

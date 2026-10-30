@@ -119,7 +119,9 @@ func (v *GetAsyncInvokeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelArn != nil {
 		s.WriteString(schemas.GetAsyncInvokeResponse_modelArn, *v.ModelArn)
 	}
-	serializeAsyncInvokeOutputDataConfig(s, schemas.GetAsyncInvokeResponse_outputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeAsyncInvokeOutputDataConfig(s, schemas.GetAsyncInvokeResponse_outputDataConfig, v.OutputDataConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetAsyncInvokeResponse_status, string(v.Status))
 	}

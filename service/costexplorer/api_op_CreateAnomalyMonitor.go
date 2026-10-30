@@ -76,7 +76,9 @@ func (v *CreateAnomalyMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AnomalyMonitor.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceTagList(s, schemas.CreateAnomalyMonitorRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateAnomalyMonitorRequest_ResourceTags, v.ResourceTags)
+	}
 }
 
 type CreateAnomalyMonitorOutput struct {

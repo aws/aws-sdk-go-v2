@@ -117,7 +117,9 @@ func (v *InvokeHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActorId != nil {
 		s.WriteString(schemas.InvokeHarnessRequest_actorId, *v.ActorId)
 	}
-	serializeHarnessAllowedTools(s, schemas.InvokeHarnessRequest_allowedTools, v.AllowedTools)
+	if v.AllowedTools != nil {
+		serializeHarnessAllowedTools(s, schemas.InvokeHarnessRequest_allowedTools, v.AllowedTools)
+	}
 	if v.Baggage != nil {
 		s.WriteString(schemas.InvokeHarnessRequest_baggage, *v.Baggage)
 	}
@@ -130,8 +132,12 @@ func (v *InvokeHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxTokens != nil {
 		s.WriteInt32(schemas.InvokeHarnessRequest_maxTokens, *v.MaxTokens)
 	}
-	serializeHarnessMessages(s, schemas.InvokeHarnessRequest_messages, v.Messages)
-	serializeHarnessModelConfiguration(s, schemas.InvokeHarnessRequest_model, v.Model)
+	if v.Messages != nil {
+		serializeHarnessMessages(s, schemas.InvokeHarnessRequest_messages, v.Messages)
+	}
+	if v.Model != nil {
+		serializeHarnessModelConfiguration(s, schemas.InvokeHarnessRequest_model, v.Model)
+	}
 	if v.Qualifier != nil {
 		s.WriteString(schemas.InvokeHarnessRequest_qualifier, *v.Qualifier)
 	}
@@ -141,12 +147,18 @@ func (v *InvokeHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuntimeUserId != nil {
 		s.WriteString(schemas.InvokeHarnessRequest_runtimeUserId, *v.RuntimeUserId)
 	}
-	serializeHarnessSkills(s, schemas.InvokeHarnessRequest_skills, v.Skills)
-	serializeHarnessSystemPrompt(s, schemas.InvokeHarnessRequest_systemPrompt, v.SystemPrompt)
+	if v.Skills != nil {
+		serializeHarnessSkills(s, schemas.InvokeHarnessRequest_skills, v.Skills)
+	}
+	if v.SystemPrompt != nil {
+		serializeHarnessSystemPrompt(s, schemas.InvokeHarnessRequest_systemPrompt, v.SystemPrompt)
+	}
 	if v.TimeoutSeconds != nil {
 		s.WriteInt32(schemas.InvokeHarnessRequest_timeoutSeconds, *v.TimeoutSeconds)
 	}
-	serializeHarnessTools(s, schemas.InvokeHarnessRequest_tools, v.Tools)
+	if v.Tools != nil {
+		serializeHarnessTools(s, schemas.InvokeHarnessRequest_tools, v.Tools)
+	}
 	if v.TraceId != nil {
 		s.WriteString(schemas.InvokeHarnessRequest_traceId, *v.TraceId)
 	}

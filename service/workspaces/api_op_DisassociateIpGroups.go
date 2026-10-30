@@ -51,7 +51,9 @@ func (v *DisassociateIpGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DisassociateIpGroupsRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeIpGroupIdList(s, schemas.DisassociateIpGroupsRequest_GroupIds, v.GroupIds)
+	if v.GroupIds != nil {
+		serializeIpGroupIdList(s, schemas.DisassociateIpGroupsRequest_GroupIds, v.GroupIds)
+	}
 }
 
 type DisassociateIpGroupsOutput struct {

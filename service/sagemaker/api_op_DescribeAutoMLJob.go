@@ -201,7 +201,9 @@ func (v *DescribeAutoMLJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GenerateCandidateDefinitionsOnly != nil {
 		s.WriteBool(schemas.DescribeAutoMLJobResponse_GenerateCandidateDefinitionsOnly, *v.GenerateCandidateDefinitionsOnly)
 	}
-	serializeAutoMLInputDataConfig(s, schemas.DescribeAutoMLJobResponse_InputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeAutoMLInputDataConfig(s, schemas.DescribeAutoMLJobResponse_InputDataConfig, v.InputDataConfig)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeAutoMLJobResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -220,7 +222,9 @@ func (v *DescribeAutoMLJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoMLPartialFailureReasons(s, schemas.DescribeAutoMLJobResponse_PartialFailureReasons, v.PartialFailureReasons)
+	if v.PartialFailureReasons != nil {
+		serializeAutoMLPartialFailureReasons(s, schemas.DescribeAutoMLJobResponse_PartialFailureReasons, v.PartialFailureReasons)
+	}
 	if v.ProblemType != "" {
 		s.WriteString(schemas.DescribeAutoMLJobResponse_ProblemType, string(v.ProblemType))
 	}

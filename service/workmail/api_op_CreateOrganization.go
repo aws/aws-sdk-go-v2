@@ -87,7 +87,9 @@ func (v *CreateOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.CreateOrganizationRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeDomains(s, schemas.CreateOrganizationRequest_Domains, v.Domains)
+	if v.Domains != nil {
+		serializeDomains(s, schemas.CreateOrganizationRequest_Domains, v.Domains)
+	}
 	if v.EnableInteroperability != false {
 		s.WriteBool(schemas.CreateOrganizationRequest_EnableInteroperability, v.EnableInteroperability)
 	}

@@ -81,7 +81,9 @@ func (v *ListVPCEConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVPCEConfigurationsResult_nextToken, *v.NextToken)
 	}
-	serializeVPCEConfigurations(s, schemas.ListVPCEConfigurationsResult_vpceConfigurations, v.VpceConfigurations)
+	if v.VpceConfigurations != nil {
+		serializeVPCEConfigurations(s, schemas.ListVPCEConfigurationsResult_vpceConfigurations, v.VpceConfigurations)
+	}
 }
 func (v *ListVPCEConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVPCEConfigurationsResult, func(s *smithy.Schema) error {

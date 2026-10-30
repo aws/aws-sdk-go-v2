@@ -67,7 +67,9 @@ func (v *CreateStorageConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 		v.S3.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateStorageConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStorageConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateStorageConfigurationOutput struct {

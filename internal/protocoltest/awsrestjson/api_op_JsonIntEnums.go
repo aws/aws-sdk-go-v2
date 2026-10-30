@@ -59,9 +59,15 @@ func (v *JsonIntEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegerEnum3 != 0 {
 		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum3, int32(v.IntegerEnum3))
 	}
-	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_integerEnumList, v.IntegerEnumList)
-	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_integerEnumMap, v.IntegerEnumMap)
-	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_integerEnumSet, v.IntegerEnumSet)
+	if v.IntegerEnumList != nil {
+		serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_integerEnumList, v.IntegerEnumList)
+	}
+	if v.IntegerEnumMap != nil {
+		serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_integerEnumMap, v.IntegerEnumMap)
+	}
+	if v.IntegerEnumSet != nil {
+		serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_integerEnumSet, v.IntegerEnumSet)
+	}
 }
 func (v *JsonIntEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {
@@ -133,9 +139,15 @@ func (v *JsonIntEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegerEnum3 != 0 {
 		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum3, int32(v.IntegerEnum3))
 	}
-	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_integerEnumList, v.IntegerEnumList)
-	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_integerEnumMap, v.IntegerEnumMap)
-	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_integerEnumSet, v.IntegerEnumSet)
+	if v.IntegerEnumList != nil {
+		serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_integerEnumList, v.IntegerEnumList)
+	}
+	if v.IntegerEnumMap != nil {
+		serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_integerEnumMap, v.IntegerEnumMap)
+	}
+	if v.IntegerEnumSet != nil {
+		serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_integerEnumSet, v.IntegerEnumSet)
+	}
 }
 func (v *JsonIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {

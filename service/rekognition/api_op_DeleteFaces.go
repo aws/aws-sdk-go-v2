@@ -55,7 +55,9 @@ func (v *DeleteFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionId != nil {
 		s.WriteString(schemas.DeleteFacesRequest_CollectionId, *v.CollectionId)
 	}
-	serializeFaceIdList(s, schemas.DeleteFacesRequest_FaceIds, v.FaceIds)
+	if v.FaceIds != nil {
+		serializeFaceIdList(s, schemas.DeleteFacesRequest_FaceIds, v.FaceIds)
+	}
 }
 
 type DeleteFacesOutput struct {
@@ -79,8 +81,12 @@ func (v *DeleteFacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaceIdList(s, schemas.DeleteFacesResponse_DeletedFaces, v.DeletedFaces)
-	serializeUnsuccessfulFaceDeletionsList(s, schemas.DeleteFacesResponse_UnsuccessfulFaceDeletions, v.UnsuccessfulFaceDeletions)
+	if v.DeletedFaces != nil {
+		serializeFaceIdList(s, schemas.DeleteFacesResponse_DeletedFaces, v.DeletedFaces)
+	}
+	if v.UnsuccessfulFaceDeletions != nil {
+		serializeUnsuccessfulFaceDeletionsList(s, schemas.DeleteFacesResponse_UnsuccessfulFaceDeletions, v.UnsuccessfulFaceDeletions)
+	}
 }
 func (v *DeleteFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteFacesResponse, func(s *smithy.Schema) error {

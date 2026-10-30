@@ -66,7 +66,9 @@ func (v *CreateIntegrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProviderInput(s, schemas.CreateIntegrationInput_input, v.Input)
+	if v.Input != nil {
+		serializeProviderInput(s, schemas.CreateIntegrationInput_input, v.Input)
+	}
 	if v.IntegrationDisplayName != nil {
 		s.WriteString(schemas.CreateIntegrationInput_integrationDisplayName, *v.IntegrationDisplayName)
 	}
@@ -79,7 +81,9 @@ func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Provider != "" {
 		s.WriteString(schemas.CreateIntegrationInput_provider, string(v.Provider))
 	}
-	serializeTagMap(s, schemas.CreateIntegrationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateIntegrationInput_tags, v.Tags)
+	}
 }
 
 type CreateIntegrationOutput struct {

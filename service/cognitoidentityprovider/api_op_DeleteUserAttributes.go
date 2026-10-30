@@ -68,7 +68,9 @@ func (v *DeleteUserAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessToken != nil {
 		s.WriteString(schemas.DeleteUserAttributesRequest_AccessToken, *v.AccessToken)
 	}
-	serializeAttributeNameListType(s, schemas.DeleteUserAttributesRequest_UserAttributeNames, v.UserAttributeNames)
+	if v.UserAttributeNames != nil {
+		serializeAttributeNameListType(s, schemas.DeleteUserAttributesRequest_UserAttributeNames, v.UserAttributeNames)
+	}
 }
 
 // Represents the response from the server to delete user attributes.

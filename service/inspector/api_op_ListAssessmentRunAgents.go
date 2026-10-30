@@ -105,7 +105,9 @@ func (v *ListAssessmentRunAgentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentRunAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentRunAgentList(s, schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents, v.AssessmentRunAgents)
+	if v.AssessmentRunAgents != nil {
+		serializeAssessmentRunAgentList(s, schemas.ListAssessmentRunAgentsResponse_assessmentRunAgents, v.AssessmentRunAgents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentRunAgentsResponse_nextToken, *v.NextToken)
 	}

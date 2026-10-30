@@ -104,7 +104,9 @@ func (v *DescribeEventAggregatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventAggregatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventAggregateList(s, schemas.DescribeEventAggregatesResponse_eventAggregates, v.EventAggregates)
+	if v.EventAggregates != nil {
+		serializeEventAggregateList(s, schemas.DescribeEventAggregatesResponse_eventAggregates, v.EventAggregates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEventAggregatesResponse_nextToken, *v.NextToken)
 	}

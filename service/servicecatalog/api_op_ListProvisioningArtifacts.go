@@ -84,7 +84,9 @@ func (v *ListProvisioningArtifactsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListProvisioningArtifactsOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProvisioningArtifactDetails(s, schemas.ListProvisioningArtifactsOutput_ProvisioningArtifactDetails, v.ProvisioningArtifactDetails)
+	if v.ProvisioningArtifactDetails != nil {
+		serializeProvisioningArtifactDetails(s, schemas.ListProvisioningArtifactsOutput_ProvisioningArtifactDetails, v.ProvisioningArtifactDetails)
+	}
 }
 func (v *ListProvisioningArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisioningArtifactsOutput, func(s *smithy.Schema) error {

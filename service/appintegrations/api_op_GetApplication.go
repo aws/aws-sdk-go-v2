@@ -177,10 +177,18 @@ func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Namespace != nil {
 		s.WriteString(schemas.GetApplicationResponse_Namespace, *v.Namespace)
 	}
-	serializePermissionList(s, schemas.GetApplicationResponse_Permissions, v.Permissions)
-	serializePublicationList(s, schemas.GetApplicationResponse_Publications, v.Publications)
-	serializeSubscriptionList(s, schemas.GetApplicationResponse_Subscriptions, v.Subscriptions)
-	serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.GetApplicationResponse_Permissions, v.Permissions)
+	}
+	if v.Publications != nil {
+		serializePublicationList(s, schemas.GetApplicationResponse_Publications, v.Publications)
+	}
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.GetApplicationResponse_Subscriptions, v.Subscriptions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetApplicationResponse_Tags, v.Tags)
+	}
 }
 func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {

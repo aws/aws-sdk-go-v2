@@ -148,7 +148,9 @@ func (v *CreateProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SupportUrl != nil {
 		s.WriteString(schemas.CreateProductInput_SupportUrl, *v.SupportUrl)
 	}
-	serializeAddTags(s, schemas.CreateProductInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeAddTags(s, schemas.CreateProductInput_Tags, v.Tags)
+	}
 }
 
 type CreateProductOutput struct {
@@ -185,7 +187,9 @@ func (v *CreateProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProvisioningArtifactDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateProductOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateProductOutput_Tags, v.Tags)
+	}
 }
 func (v *CreateProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProductOutput, func(s *smithy.Schema) error {

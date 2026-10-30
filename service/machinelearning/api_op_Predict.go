@@ -62,7 +62,9 @@ func (v *PredictInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PredictEndpoint != nil {
 		s.WriteString(schemas.PredictInput_PredictEndpoint, *v.PredictEndpoint)
 	}
-	serializeRecord(s, schemas.PredictInput_Record, v.Record)
+	if v.Record != nil {
+		serializeRecord(s, schemas.PredictInput_Record, v.Record)
+	}
 }
 
 type PredictOutput struct {

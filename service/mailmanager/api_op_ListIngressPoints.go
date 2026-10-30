@@ -78,7 +78,9 @@ func (v *ListIngressPointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIngressPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressPointsList(s, schemas.ListIngressPointsResponse_IngressPoints, v.IngressPoints)
+	if v.IngressPoints != nil {
+		serializeIngressPointsList(s, schemas.ListIngressPointsResponse_IngressPoints, v.IngressPoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIngressPointsResponse_NextToken, *v.NextToken)
 	}

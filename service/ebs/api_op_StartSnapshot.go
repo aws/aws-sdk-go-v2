@@ -154,7 +154,9 @@ func (v *StartSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentSnapshotId != nil {
 		s.WriteString(schemas.StartSnapshotRequest_ParentSnapshotId, *v.ParentSnapshotId)
 	}
-	serializeTags(s, schemas.StartSnapshotRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartSnapshotRequest_Tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteInt32(schemas.StartSnapshotRequest_Timeout, *v.Timeout)
 	}
@@ -242,7 +244,9 @@ func (v *StartSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.StartSnapshotResponse_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.StartSnapshotResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartSnapshotResponse_Tags, v.Tags)
+	}
 	if v.VolumeSize != nil {
 		s.WriteInt64(schemas.StartSnapshotResponse_VolumeSize, *v.VolumeSize)
 	}

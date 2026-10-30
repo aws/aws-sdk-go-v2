@@ -129,7 +129,9 @@ func (v *GetDataTransformationProfileOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.ProfileId != nil {
 		s.WriteString(schemas.GetDataTransformationProfileResponse_ProfileId, *v.ProfileId)
 	}
-	serializeProfileMapping(s, schemas.GetDataTransformationProfileResponse_ProfileMapping, v.ProfileMapping)
+	if v.ProfileMapping != nil {
+		serializeProfileMapping(s, schemas.GetDataTransformationProfileResponse_ProfileMapping, v.ProfileMapping)
+	}
 	if v.ProfileName != nil {
 		s.WriteString(schemas.GetDataTransformationProfileResponse_ProfileName, *v.ProfileName)
 	}

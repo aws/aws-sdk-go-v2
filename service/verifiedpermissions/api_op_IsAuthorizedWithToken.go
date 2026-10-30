@@ -123,8 +123,12 @@ func (v *IsAuthorizedWithTokenInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContextDefinition(s, schemas.IsAuthorizedWithTokenInput_context, v.Context)
-	serializeEntitiesDefinition(s, schemas.IsAuthorizedWithTokenInput_entities, v.Entities)
+	if v.Context != nil {
+		serializeContextDefinition(s, schemas.IsAuthorizedWithTokenInput_context, v.Context)
+	}
+	if v.Entities != nil {
+		serializeEntitiesDefinition(s, schemas.IsAuthorizedWithTokenInput_entities, v.Entities)
+	}
 	if v.IdentityToken != nil {
 		s.WriteString(schemas.IsAuthorizedWithTokenInput_identityToken, *v.IdentityToken)
 	}
@@ -182,8 +186,12 @@ func (v *IsAuthorizedWithTokenOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Decision != "" {
 		s.WriteString(schemas.IsAuthorizedWithTokenOutput_decision, string(v.Decision))
 	}
-	serializeDeterminingPolicyList(s, schemas.IsAuthorizedWithTokenOutput_determiningPolicies, v.DeterminingPolicies)
-	serializeEvaluationErrorList(s, schemas.IsAuthorizedWithTokenOutput_errors, v.Errors)
+	if v.DeterminingPolicies != nil {
+		serializeDeterminingPolicyList(s, schemas.IsAuthorizedWithTokenOutput_determiningPolicies, v.DeterminingPolicies)
+	}
+	if v.Errors != nil {
+		serializeEvaluationErrorList(s, schemas.IsAuthorizedWithTokenOutput_errors, v.Errors)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.IsAuthorizedWithTokenOutput_principal)
 		v.Principal.SerializeMembers(s)

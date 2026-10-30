@@ -102,7 +102,9 @@ func (v *ListFailureModeFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFailureModeFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingsList(s, schemas.ListFailureModeFindingsResponse_findingsSummary, v.FindingsSummary)
+	if v.FindingsSummary != nil {
+		serializeFindingsList(s, schemas.ListFailureModeFindingsResponse_findingsSummary, v.FindingsSummary)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFailureModeFindingsResponse_nextToken, *v.NextToken)
 	}

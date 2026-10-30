@@ -196,7 +196,9 @@ func (v *DescribeContainerGroupPortMappingsOutput) SerializeMembers(s smithy.Sha
 	if v.ContainerGroupDefinitionArn != nil {
 		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupDefinitionArn, *v.ContainerGroupDefinitionArn)
 	}
-	serializeContainerGroupPortMappingList(s, schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupPortMappings, v.ContainerGroupPortMappings)
+	if v.ContainerGroupPortMappings != nil {
+		serializeContainerGroupPortMappingList(s, schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupPortMappings, v.ContainerGroupPortMappings)
+	}
 	if v.ContainerGroupType != "" {
 		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupType, string(v.ContainerGroupType))
 	}

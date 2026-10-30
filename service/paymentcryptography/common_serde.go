@@ -176,9 +176,6 @@ func deserializeImportKeyMaterial(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func serializeAliases(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Alias) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -189,9 +186,6 @@ func serializeAliases(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeKeySummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.KeySummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -202,9 +196,6 @@ func serializeKeySummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeRegions(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -213,9 +204,6 @@ func serializeRegions(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -224,9 +212,6 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -345,9 +330,6 @@ func deserializeTags(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.Ta
 }
 
 func serializeOptionalBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -357,9 +339,6 @@ func serializeOptionalBlocks(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeReplicationStatus(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.ReplicationStatusType) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

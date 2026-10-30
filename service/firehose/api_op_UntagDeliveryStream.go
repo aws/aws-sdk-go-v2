@@ -55,7 +55,9 @@ func (v *UntagDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeliveryStreamName != nil {
 		s.WriteString(schemas.UntagDeliveryStreamInput_DeliveryStreamName, *v.DeliveryStreamName)
 	}
-	serializeTagKeyList(s, schemas.UntagDeliveryStreamInput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.UntagDeliveryStreamInput_TagKeys, v.TagKeys)
+	}
 }
 
 type UntagDeliveryStreamOutput struct {

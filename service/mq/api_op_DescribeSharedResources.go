@@ -88,7 +88,9 @@ func (v *DescribeSharedResourcesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSharedResourcesResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfSharedResource(s, schemas.DescribeSharedResourcesResponse_SharedResources, v.SharedResources)
+	if v.SharedResources != nil {
+		serialize__listOfSharedResource(s, schemas.DescribeSharedResourcesResponse_SharedResources, v.SharedResources)
+	}
 }
 func (v *DescribeSharedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSharedResourcesResponse, func(s *smithy.Schema) error {

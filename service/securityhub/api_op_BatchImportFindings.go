@@ -94,7 +94,9 @@ func (v *BatchImportFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchImportFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchImportFindingsRequestFindingList(s, schemas.BatchImportFindingsRequest_Findings, v.Findings)
+	if v.Findings != nil {
+		serializeBatchImportFindingsRequestFindingList(s, schemas.BatchImportFindingsRequest_Findings, v.Findings)
+	}
 }
 
 type BatchImportFindingsOutput struct {
@@ -128,7 +130,9 @@ func (v *BatchImportFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FailedCount != nil {
 		s.WriteInt32(schemas.BatchImportFindingsResponse_FailedCount, *v.FailedCount)
 	}
-	serializeImportFindingsErrorList(s, schemas.BatchImportFindingsResponse_FailedFindings, v.FailedFindings)
+	if v.FailedFindings != nil {
+		serializeImportFindingsErrorList(s, schemas.BatchImportFindingsResponse_FailedFindings, v.FailedFindings)
+	}
 	if v.SuccessCount != nil {
 		s.WriteInt32(schemas.BatchImportFindingsResponse_SuccessCount, *v.SuccessCount)
 	}

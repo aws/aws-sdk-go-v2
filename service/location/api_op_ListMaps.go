@@ -117,7 +117,9 @@ func (v *ListMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListMapsResponseEntryList(s, schemas.ListMapsResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeListMapsResponseEntryList(s, schemas.ListMapsResponse_Entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMapsResponse_NextToken, *v.NextToken)
 	}

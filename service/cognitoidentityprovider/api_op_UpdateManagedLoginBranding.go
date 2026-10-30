@@ -102,7 +102,9 @@ func (v *UpdateManagedLoginBrandingInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateManagedLoginBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetListType(s, schemas.UpdateManagedLoginBrandingRequest_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetListType(s, schemas.UpdateManagedLoginBrandingRequest_Assets, v.Assets)
+	}
 	if v.ManagedLoginBrandingId != nil {
 		s.WriteString(schemas.UpdateManagedLoginBrandingRequest_ManagedLoginBrandingId, *v.ManagedLoginBrandingId)
 	}

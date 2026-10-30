@@ -111,7 +111,9 @@ func (v *ListServiceInstanceProvisionedResourcesOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken, *v.NextToken)
 	}
-	serializeProvisionedResourceList(s, schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+	if v.ProvisionedResources != nil {
+		serializeProvisionedResourceList(s, schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+	}
 }
 func (v *ListServiceInstanceProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceInstanceProvisionedResourcesOutput, func(s *smithy.Schema) error {

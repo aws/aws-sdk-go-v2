@@ -94,7 +94,9 @@ func (v *ListContactFlowModuleVersionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListContactFlowModuleVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactFlowModuleVersionSummaryList(s, schemas.ListContactFlowModuleVersionsResponse_ContactFlowModuleVersionSummaryList, v.ContactFlowModuleVersionSummaryList)
+	if v.ContactFlowModuleVersionSummaryList != nil {
+		serializeContactFlowModuleVersionSummaryList(s, schemas.ListContactFlowModuleVersionsResponse_ContactFlowModuleVersionSummaryList, v.ContactFlowModuleVersionSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactFlowModuleVersionsResponse_NextToken, *v.NextToken)
 	}

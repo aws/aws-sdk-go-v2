@@ -107,7 +107,9 @@ func (v *GetOutpostBillingInformationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.PaymentTerm != "" {
 		s.WriteString(schemas.GetOutpostBillingInformationOutput_PaymentTerm, string(v.PaymentTerm))
 	}
-	serializeSubscriptionList(s, schemas.GetOutpostBillingInformationOutput_Subscriptions, v.Subscriptions)
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.GetOutpostBillingInformationOutput_Subscriptions, v.Subscriptions)
+	}
 }
 func (v *GetOutpostBillingInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOutpostBillingInformationOutput, func(s *smithy.Schema) error {

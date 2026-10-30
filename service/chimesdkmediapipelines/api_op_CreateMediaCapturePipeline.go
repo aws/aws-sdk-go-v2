@@ -117,7 +117,9 @@ func (v *CreateMediaCapturePipelineInput) SerializeMembers(s smithy.ShapeSeriali
 		v.SseAwsKeyManagementParams.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateMediaCapturePipelineRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMediaCapturePipelineRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMediaCapturePipelineOutput struct {

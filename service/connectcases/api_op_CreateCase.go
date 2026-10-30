@@ -92,9 +92,15 @@ func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.CreateCaseRequest_domainId, *v.DomainId)
 	}
-	serializeFieldValueList(s, schemas.CreateCaseRequest_fields, v.Fields)
-	serializeUserUnion(s, schemas.CreateCaseRequest_performedBy, v.PerformedBy)
-	serializeMutableTags(s, schemas.CreateCaseRequest_tags, v.Tags)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.CreateCaseRequest_fields, v.Fields)
+	}
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.CreateCaseRequest_performedBy, v.PerformedBy)
+	}
+	if v.Tags != nil {
+		serializeMutableTags(s, schemas.CreateCaseRequest_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.CreateCaseRequest_templateId, *v.TemplateId)
 	}

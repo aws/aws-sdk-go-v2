@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAttachmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeAttachmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeAttachments(s smithy.ShapeSerializer, schema *smithy.Schema, v []AttachmentItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serializeAttachments(s smithy.ShapeSerializer, schema *smithy.Schema, v []A
 }
 
 func serializeConnectionTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ConnectionType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -42,9 +33,6 @@ func serializeConnectionTypeList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeReceipts(s smithy.ShapeSerializer, schema *smithy.Schema, v []Receipt) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -55,9 +43,6 @@ func serializeReceipts(s smithy.ShapeSerializer, schema *smithy.Schema, v []Rece
 }
 
 func serializeTranscript(s smithy.ShapeSerializer, schema *smithy.Schema, v []Item) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -68,9 +53,6 @@ func serializeTranscript(s smithy.ShapeSerializer, schema *smithy.Schema, v []It
 }
 
 func serializeViewActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -208,9 +190,6 @@ func deserializeViewActions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 }
 
 func serializeUrlMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

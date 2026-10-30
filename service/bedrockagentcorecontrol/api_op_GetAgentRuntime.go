@@ -164,7 +164,9 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentRuntimeArn != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_agentRuntimeArn, *v.AgentRuntimeArn)
 	}
-	serializeAgentRuntimeArtifact(s, schemas.GetAgentRuntimeResponse_agentRuntimeArtifact, v.AgentRuntimeArtifact)
+	if v.AgentRuntimeArtifact != nil {
+		serializeAgentRuntimeArtifact(s, schemas.GetAgentRuntimeResponse_agentRuntimeArtifact, v.AgentRuntimeArtifact)
+	}
 	if v.AgentRuntimeId != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_agentRuntimeId, *v.AgentRuntimeId)
 	}
@@ -174,8 +176,12 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentRuntimeVersion != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_agentRuntimeVersion, *v.AgentRuntimeVersion)
 	}
-	serializeAllowedPorts(s, schemas.GetAgentRuntimeResponse_allowedPorts, v.AllowedPorts)
-	serializeAuthorizerConfiguration(s, schemas.GetAgentRuntimeResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AllowedPorts != nil {
+		serializeAllowedPorts(s, schemas.GetAgentRuntimeResponse_allowedPorts, v.AllowedPorts)
+	}
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.GetAgentRuntimeResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.CapacityProviderConfiguration != nil {
 		s.WriteStruct(schemas.GetAgentRuntimeResponse_capacityProviderConfiguration)
 		v.CapacityProviderConfiguration.SerializeMembers(s)
@@ -187,11 +193,15 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_description, *v.Description)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.GetAgentRuntimeResponse_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.GetAgentRuntimeResponse_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_failureReason, *v.FailureReason)
 	}
-	serializeFilesystemConfigurations(s, schemas.GetAgentRuntimeResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.FilesystemConfigurations != nil {
+		serializeFilesystemConfigurations(s, schemas.GetAgentRuntimeResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetAgentRuntimeResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -218,7 +228,9 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProtocolConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestHeaderConfiguration(s, schemas.GetAgentRuntimeResponse_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	if v.RequestHeaderConfiguration != nil {
+		serializeRequestHeaderConfiguration(s, schemas.GetAgentRuntimeResponse_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_roleArn, *v.RoleArn)
 	}

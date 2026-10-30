@@ -103,7 +103,9 @@ func (v *StartAttachedFileUploadInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartAttachedFileUploadRequest_ClientToken, *v.ClientToken)
 	}
-	serializeCreatedByInfo(s, schemas.StartAttachedFileUploadRequest_CreatedBy, v.CreatedBy)
+	if v.CreatedBy != nil {
+		serializeCreatedByInfo(s, schemas.StartAttachedFileUploadRequest_CreatedBy, v.CreatedBy)
+	}
 	if v.FileName != nil {
 		s.WriteString(schemas.StartAttachedFileUploadRequest_FileName, *v.FileName)
 	}
@@ -116,7 +118,9 @@ func (v *StartAttachedFileUploadInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.InstanceId != nil {
 		s.WriteString(schemas.StartAttachedFileUploadRequest_InstanceId, *v.InstanceId)
 	}
-	serializeTagMap(s, schemas.StartAttachedFileUploadRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartAttachedFileUploadRequest_Tags, v.Tags)
+	}
 	if v.UrlExpiryInSeconds != nil {
 		s.WriteInt32(schemas.StartAttachedFileUploadRequest_UrlExpiryInSeconds, *v.UrlExpiryInSeconds)
 	}
@@ -158,7 +162,9 @@ func (v *StartAttachedFileUploadOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartAttachedFileUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreatedByInfo(s, schemas.StartAttachedFileUploadResponse_CreatedBy, v.CreatedBy)
+	if v.CreatedBy != nil {
+		serializeCreatedByInfo(s, schemas.StartAttachedFileUploadResponse_CreatedBy, v.CreatedBy)
+	}
 	if v.CreationTime != nil {
 		s.WriteString(schemas.StartAttachedFileUploadResponse_CreationTime, *v.CreationTime)
 	}

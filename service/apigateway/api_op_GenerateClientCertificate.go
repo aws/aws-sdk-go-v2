@@ -50,7 +50,9 @@ func (v *GenerateClientCertificateInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Description != nil {
 		s.WriteString(schemas.GenerateClientCertificateRequest_description, *v.Description)
 	}
-	serializeMapOfStringToString(s, schemas.GenerateClientCertificateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.GenerateClientCertificateRequest_tags, v.Tags)
+	}
 }
 
 // Represents a client certificate used to configure client-side SSL
@@ -104,7 +106,9 @@ func (v *GenerateClientCertificateOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PemEncodedCertificate != nil {
 		s.WriteString(schemas.ClientCertificate_pemEncodedCertificate, *v.PemEncodedCertificate)
 	}
-	serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.ClientCertificate_tags, v.Tags)
+	}
 }
 func (v *GenerateClientCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClientCertificate, func(s *smithy.Schema) error {

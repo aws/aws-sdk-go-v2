@@ -67,7 +67,9 @@ func (v *GetMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxDatapoints != nil {
 		s.WriteInt32(schemas.GetMetricDataInput_MaxDatapoints, *v.MaxDatapoints)
 	}
-	serializeMetricDataQueries(s, schemas.GetMetricDataInput_MetricDataQueries, v.MetricDataQueries)
+	if v.MetricDataQueries != nil {
+		serializeMetricDataQueries(s, schemas.GetMetricDataInput_MetricDataQueries, v.MetricDataQueries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMetricDataInput_NextToken, *v.NextToken)
 	}
@@ -130,8 +132,12 @@ func (v *GetMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDataResultMessages(s, schemas.GetMetricDataOutput_Messages, v.Messages)
-	serializeMetricDataResults(s, schemas.GetMetricDataOutput_MetricDataResults, v.MetricDataResults)
+	if v.Messages != nil {
+		serializeMetricDataResultMessages(s, schemas.GetMetricDataOutput_Messages, v.Messages)
+	}
+	if v.MetricDataResults != nil {
+		serializeMetricDataResults(s, schemas.GetMetricDataOutput_MetricDataResults, v.MetricDataResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMetricDataOutput_NextToken, *v.NextToken)
 	}

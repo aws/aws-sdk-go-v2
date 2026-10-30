@@ -79,7 +79,9 @@ func (v *CreateSipRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSipRuleRequest_Name, *v.Name)
 	}
-	serializeSipRuleTargetApplicationList(s, schemas.CreateSipRuleRequest_TargetApplications, v.TargetApplications)
+	if v.TargetApplications != nil {
+		serializeSipRuleTargetApplicationList(s, schemas.CreateSipRuleRequest_TargetApplications, v.TargetApplications)
+	}
 	if v.TriggerType != "" {
 		s.WriteString(schemas.CreateSipRuleRequest_TriggerType, string(v.TriggerType))
 	}

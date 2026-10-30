@@ -89,7 +89,9 @@ func (v *DescribeFleetAdvisorLsaAnalysisOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DescribeFleetAdvisorLsaAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetAdvisorLsaAnalysisResponseList(s, schemas.DescribeFleetAdvisorLsaAnalysisResponse_Analysis, v.Analysis)
+	if v.Analysis != nil {
+		serializeFleetAdvisorLsaAnalysisResponseList(s, schemas.DescribeFleetAdvisorLsaAnalysisResponse_Analysis, v.Analysis)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetAdvisorLsaAnalysisResponse_NextToken, *v.NextToken)
 	}

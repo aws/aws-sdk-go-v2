@@ -93,7 +93,9 @@ func (v *CreateConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CommitMessage != nil {
 		s.WriteString(schemas.CreateConfigurationBundleRequest_commitMessage, *v.CommitMessage)
 	}
-	serializeComponentConfigurationMap(s, schemas.CreateConfigurationBundleRequest_components, v.Components)
+	if v.Components != nil {
+		serializeComponentConfigurationMap(s, schemas.CreateConfigurationBundleRequest_components, v.Components)
+	}
 	if v.CreatedBy != nil {
 		s.WriteStruct(schemas.CreateConfigurationBundleRequest_createdBy)
 		v.CreatedBy.SerializeMembers(s)
@@ -105,7 +107,9 @@ func (v *CreateConfigurationBundleInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateConfigurationBundleRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeTagsMap(s, schemas.CreateConfigurationBundleRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateConfigurationBundleRequest_tags, v.Tags)
+	}
 }
 
 type CreateConfigurationBundleOutput struct {

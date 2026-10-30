@@ -111,7 +111,9 @@ func (v *ListThemesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListThemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThemeSummaryList(s, schemas.ListThemesResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeThemeSummaryList(s, schemas.ListThemesResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThemesResponse_nextToken, *v.NextToken)
 	}

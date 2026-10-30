@@ -58,7 +58,9 @@ func (v *PutAttributeMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateField != "" {
 		s.WriteString(schemas.PutAttributeMappingRequest_certificateField, string(v.CertificateField))
 	}
-	serializeMappingRules(s, schemas.PutAttributeMappingRequest_mappingRules, v.MappingRules)
+	if v.MappingRules != nil {
+		serializeMappingRules(s, schemas.PutAttributeMappingRequest_mappingRules, v.MappingRules)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.PutAttributeMappingRequest_profileId, *v.ProfileId)
 	}

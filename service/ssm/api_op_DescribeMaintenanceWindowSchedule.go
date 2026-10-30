@@ -62,7 +62,9 @@ func (v *DescribeMaintenanceWindowScheduleInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeMaintenanceWindowScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePatchOrchestratorFilterList(s, schemas.DescribeMaintenanceWindowScheduleRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializePatchOrchestratorFilterList(s, schemas.DescribeMaintenanceWindowScheduleRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeMaintenanceWindowScheduleRequest_MaxResults, *v.MaxResults)
 	}
@@ -72,7 +74,9 @@ func (v *DescribeMaintenanceWindowScheduleInput) SerializeMembers(s smithy.Shape
 	if v.ResourceType != "" {
 		s.WriteString(schemas.DescribeMaintenanceWindowScheduleRequest_ResourceType, string(v.ResourceType))
 	}
-	serializeTargets(s, schemas.DescribeMaintenanceWindowScheduleRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargets(s, schemas.DescribeMaintenanceWindowScheduleRequest_Targets, v.Targets)
+	}
 	if v.WindowId != nil {
 		s.WriteString(schemas.DescribeMaintenanceWindowScheduleRequest_WindowId, *v.WindowId)
 	}
@@ -104,7 +108,9 @@ func (v *DescribeMaintenanceWindowScheduleOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMaintenanceWindowScheduleResult_NextToken, *v.NextToken)
 	}
-	serializeScheduledWindowExecutionList(s, schemas.DescribeMaintenanceWindowScheduleResult_ScheduledWindowExecutions, v.ScheduledWindowExecutions)
+	if v.ScheduledWindowExecutions != nil {
+		serializeScheduledWindowExecutionList(s, schemas.DescribeMaintenanceWindowScheduleResult_ScheduledWindowExecutions, v.ScheduledWindowExecutions)
+	}
 }
 func (v *DescribeMaintenanceWindowScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMaintenanceWindowScheduleResult, func(s *smithy.Schema) error {

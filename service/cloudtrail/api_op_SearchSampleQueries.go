@@ -96,7 +96,9 @@ func (v *SearchSampleQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchSampleQueriesResponse_NextToken, *v.NextToken)
 	}
-	serializeSearchSampleQueriesSearchResults(s, schemas.SearchSampleQueriesResponse_SearchResults, v.SearchResults)
+	if v.SearchResults != nil {
+		serializeSearchSampleQueriesSearchResults(s, schemas.SearchSampleQueriesResponse_SearchResults, v.SearchResults)
+	}
 }
 func (v *SearchSampleQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchSampleQueriesResponse, func(s *smithy.Schema) error {

@@ -88,7 +88,9 @@ func (v *ListRepositoriesForApprovalRuleTemplateOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRepositoriesForApprovalRuleTemplateOutput_nextToken, *v.NextToken)
 	}
-	serializeRepositoryNameList(s, schemas.ListRepositoriesForApprovalRuleTemplateOutput_repositoryNames, v.RepositoryNames)
+	if v.RepositoryNames != nil {
+		serializeRepositoryNameList(s, schemas.ListRepositoriesForApprovalRuleTemplateOutput_repositoryNames, v.RepositoryNames)
+	}
 }
 func (v *ListRepositoriesForApprovalRuleTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRepositoriesForApprovalRuleTemplateOutput, func(s *smithy.Schema) error {

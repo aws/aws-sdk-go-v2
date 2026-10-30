@@ -143,7 +143,9 @@ func (v *ListCompilationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCompilationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompilationJobSummaries(s, schemas.ListCompilationJobsResponse_CompilationJobSummaries, v.CompilationJobSummaries)
+	if v.CompilationJobSummaries != nil {
+		serializeCompilationJobSummaries(s, schemas.ListCompilationJobsResponse_CompilationJobSummaries, v.CompilationJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCompilationJobsResponse_NextToken, *v.NextToken)
 	}

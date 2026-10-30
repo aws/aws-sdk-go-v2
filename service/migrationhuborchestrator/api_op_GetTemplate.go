@@ -137,7 +137,9 @@ func (v *GetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_id, *v.Id)
 	}
-	serializeTemplateInputList(s, schemas.GetMigrationWorkflowTemplateResponse_inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeTemplateInputList(s, schemas.GetMigrationWorkflowTemplateResponse_inputs, v.Inputs)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_name, *v.Name)
 	}
@@ -150,14 +152,18 @@ func (v *GetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_statusMessage, *v.StatusMessage)
 	}
-	serializeStringMap(s, schemas.GetMigrationWorkflowTemplateResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.GetMigrationWorkflowTemplateResponse_tags, v.Tags)
+	}
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_templateArn, *v.TemplateArn)
 	}
 	if v.TemplateClass != nil {
 		s.WriteString(schemas.GetMigrationWorkflowTemplateResponse_templateClass, *v.TemplateClass)
 	}
-	serializeToolsList(s, schemas.GetMigrationWorkflowTemplateResponse_tools, v.Tools)
+	if v.Tools != nil {
+		serializeToolsList(s, schemas.GetMigrationWorkflowTemplateResponse_tools, v.Tools)
+	}
 }
 func (v *GetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMigrationWorkflowTemplateResponse, func(s *smithy.Schema) error {

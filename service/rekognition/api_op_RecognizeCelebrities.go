@@ -129,11 +129,15 @@ func (v *RecognizeCelebritiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecognizeCelebritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCelebrityList(s, schemas.RecognizeCelebritiesResponse_CelebrityFaces, v.CelebrityFaces)
+	if v.CelebrityFaces != nil {
+		serializeCelebrityList(s, schemas.RecognizeCelebritiesResponse_CelebrityFaces, v.CelebrityFaces)
+	}
 	if v.OrientationCorrection != "" {
 		s.WriteString(schemas.RecognizeCelebritiesResponse_OrientationCorrection, string(v.OrientationCorrection))
 	}
-	serializeComparedFaceList(s, schemas.RecognizeCelebritiesResponse_UnrecognizedFaces, v.UnrecognizedFaces)
+	if v.UnrecognizedFaces != nil {
+		serializeComparedFaceList(s, schemas.RecognizeCelebritiesResponse_UnrecognizedFaces, v.UnrecognizedFaces)
+	}
 }
 func (v *RecognizeCelebritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecognizeCelebritiesResponse, func(s *smithy.Schema) error {

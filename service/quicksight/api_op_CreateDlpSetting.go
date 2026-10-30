@@ -94,14 +94,18 @@ func (v *CreateDlpSettingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDlpSettingRequest_Name, *v.Name)
 	}
-	serializeProviderConfig(s, schemas.CreateDlpSettingRequest_ProviderConfig, v.ProviderConfig)
+	if v.ProviderConfig != nil {
+		serializeProviderConfig(s, schemas.CreateDlpSettingRequest_ProviderConfig, v.ProviderConfig)
+	}
 	if v.ProviderOutageAction != "" {
 		s.WriteString(schemas.CreateDlpSettingRequest_ProviderOutageAction, string(v.ProviderOutageAction))
 	}
 	if v.ProviderType != "" {
 		s.WriteString(schemas.CreateDlpSettingRequest_ProviderType, string(v.ProviderType))
 	}
-	serializeTagList(s, schemas.CreateDlpSettingRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDlpSettingRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDlpSettingOutput struct {

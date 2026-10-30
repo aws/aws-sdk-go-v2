@@ -144,8 +144,12 @@ func (v *CreateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.CreateVocabularyRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializePhrases(s, schemas.CreateVocabularyRequest_Phrases, v.Phrases)
-	serializeTagList(s, schemas.CreateVocabularyRequest_Tags, v.Tags)
+	if v.Phrases != nil {
+		serializePhrases(s, schemas.CreateVocabularyRequest_Phrases, v.Phrases)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVocabularyRequest_Tags, v.Tags)
+	}
 	if v.VocabularyFileUri != nil {
 		s.WriteString(schemas.CreateVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
 	}

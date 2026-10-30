@@ -99,7 +99,9 @@ func (v *ListGlobalTablesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGlobalTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalTableList(s, schemas.ListGlobalTablesOutput_GlobalTables, v.GlobalTables)
+	if v.GlobalTables != nil {
+		serializeGlobalTableList(s, schemas.ListGlobalTablesOutput_GlobalTables, v.GlobalTables)
+	}
 	if v.LastEvaluatedGlobalTableName != nil {
 		s.WriteString(schemas.ListGlobalTablesOutput_LastEvaluatedGlobalTableName, *v.LastEvaluatedGlobalTableName)
 	}

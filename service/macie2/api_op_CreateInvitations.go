@@ -54,7 +54,9 @@ func (v *CreateInvitationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.CreateInvitationsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serialize__listOf__string(s, schemas.CreateInvitationsRequest_accountIds, v.AccountIds)
+	}
 	if v.DisableEmailNotification != nil {
 		s.WriteBool(schemas.CreateInvitationsRequest_disableEmailNotification, *v.DisableEmailNotification)
 	}
@@ -83,7 +85,9 @@ func (v *CreateInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfUnprocessedAccount(s, schemas.CreateInvitationsResponse_unprocessedAccounts, v.UnprocessedAccounts)
+	if v.UnprocessedAccounts != nil {
+		serialize__listOfUnprocessedAccount(s, schemas.CreateInvitationsResponse_unprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *CreateInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateInvitationsResponse, func(s *smithy.Schema) error {

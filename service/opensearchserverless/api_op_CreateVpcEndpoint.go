@@ -70,8 +70,12 @@ func (v *CreateVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVpcEndpointRequest_name, *v.Name)
 	}
-	serializeSecurityGroupIds(s, schemas.CreateVpcEndpointRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.CreateVpcEndpointRequest_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreateVpcEndpointRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.CreateVpcEndpointRequest_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateVpcEndpointRequest_vpcId, *v.VpcId)
 	}

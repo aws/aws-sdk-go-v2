@@ -69,7 +69,9 @@ func (v *UpdateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != "" {
 		s.WriteString(schemas.UpdateCampaignRequest_action, string(v.Action))
 	}
-	serializeDataExtraDimensionNodePathList(s, schemas.UpdateCampaignRequest_dataExtraDimensions, v.DataExtraDimensions)
+	if v.DataExtraDimensions != nil {
+		serializeDataExtraDimensionNodePathList(s, schemas.UpdateCampaignRequest_dataExtraDimensions, v.DataExtraDimensions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateCampaignRequest_description, *v.Description)
 	}

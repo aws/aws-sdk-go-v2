@@ -107,7 +107,9 @@ func (v *ListInferenceEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceEventSummaries(s, schemas.ListInferenceEventsResponse_InferenceEventSummaries, v.InferenceEventSummaries)
+	if v.InferenceEventSummaries != nil {
+		serializeInferenceEventSummaries(s, schemas.ListInferenceEventsResponse_InferenceEventSummaries, v.InferenceEventSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceEventsResponse_NextToken, *v.NextToken)
 	}

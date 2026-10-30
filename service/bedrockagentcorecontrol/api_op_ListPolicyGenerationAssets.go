@@ -117,7 +117,9 @@ func (v *ListPolicyGenerationAssetsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyGenerationAssetsResponse_nextToken, *v.NextToken)
 	}
-	serializePolicyGenerationAssets(s, schemas.ListPolicyGenerationAssetsResponse_policyGenerationAssets, v.PolicyGenerationAssets)
+	if v.PolicyGenerationAssets != nil {
+		serializePolicyGenerationAssets(s, schemas.ListPolicyGenerationAssetsResponse_policyGenerationAssets, v.PolicyGenerationAssets)
+	}
 }
 func (v *ListPolicyGenerationAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicyGenerationAssetsResponse, func(s *smithy.Schema) error {

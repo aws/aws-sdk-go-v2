@@ -79,7 +79,9 @@ func (v *ImportPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MultiRegionDisasterRecoveryApproach != "" {
 		s.WriteString(schemas.ImportPolicyRequest_multiRegionDisasterRecoveryApproach, string(v.MultiRegionDisasterRecoveryApproach))
 	}
-	serializeTagMap(s, schemas.ImportPolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportPolicyRequest_tags, v.Tags)
+	}
 	if v.V1PolicyArn != nil {
 		s.WriteString(schemas.ImportPolicyRequest_v1PolicyArn, *v.V1PolicyArn)
 	}

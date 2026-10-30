@@ -71,7 +71,9 @@ func (v *ListServiceQuotaWarningsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceQuotaWarningsRequest_nextToken, *v.NextToken)
 	}
-	serializePlanArnList(s, schemas.ListServiceQuotaWarningsRequest_planArns, v.PlanArns)
+	if v.PlanArns != nil {
+		serializePlanArnList(s, schemas.ListServiceQuotaWarningsRequest_planArns, v.PlanArns)
+	}
 }
 
 type ListServiceQuotaWarningsOutput struct {
@@ -101,7 +103,9 @@ func (v *ListServiceQuotaWarningsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceQuotaWarningsResponse_nextToken, *v.NextToken)
 	}
-	serializeServiceQuotaWarningSummaryList(s, schemas.ListServiceQuotaWarningsResponse_serviceQuotaWarningSummaries, v.ServiceQuotaWarningSummaries)
+	if v.ServiceQuotaWarningSummaries != nil {
+		serializeServiceQuotaWarningSummaryList(s, schemas.ListServiceQuotaWarningsResponse_serviceQuotaWarningSummaries, v.ServiceQuotaWarningSummaries)
+	}
 }
 func (v *ListServiceQuotaWarningsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceQuotaWarningsResponse, func(s *smithy.Schema) error {

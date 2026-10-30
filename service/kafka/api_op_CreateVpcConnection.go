@@ -70,9 +70,15 @@ func (v *CreateVpcConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Authentication != nil {
 		s.WriteString(schemas.CreateVpcConnectionRequest_Authentication, *v.Authentication)
 	}
-	serialize__listOf__string(s, schemas.CreateVpcConnectionRequest_ClientSubnets, v.ClientSubnets)
-	serialize__listOf__string(s, schemas.CreateVpcConnectionRequest_SecurityGroups, v.SecurityGroups)
-	serialize__mapOf__string(s, schemas.CreateVpcConnectionRequest_Tags, v.Tags)
+	if v.ClientSubnets != nil {
+		serialize__listOf__string(s, schemas.CreateVpcConnectionRequest_ClientSubnets, v.ClientSubnets)
+	}
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.CreateVpcConnectionRequest_SecurityGroups, v.SecurityGroups)
+	}
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateVpcConnectionRequest_Tags, v.Tags)
+	}
 	if v.TargetClusterArn != nil {
 		s.WriteString(schemas.CreateVpcConnectionRequest_TargetClusterArn, *v.TargetClusterArn)
 	}
@@ -123,15 +129,21 @@ func (v *CreateVpcConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Authentication != nil {
 		s.WriteString(schemas.CreateVpcConnectionResponse_Authentication, *v.Authentication)
 	}
-	serialize__listOf__string(s, schemas.CreateVpcConnectionResponse_ClientSubnets, v.ClientSubnets)
+	if v.ClientSubnets != nil {
+		serialize__listOf__string(s, schemas.CreateVpcConnectionResponse_ClientSubnets, v.ClientSubnets)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.CreateVpcConnectionResponse_CreationTime, *v.CreationTime)
 	}
-	serialize__listOf__string(s, schemas.CreateVpcConnectionResponse_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.CreateVpcConnectionResponse_SecurityGroups, v.SecurityGroups)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CreateVpcConnectionResponse_State, string(v.State))
 	}
-	serialize__mapOf__string(s, schemas.CreateVpcConnectionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateVpcConnectionResponse_Tags, v.Tags)
+	}
 	if v.VpcConnectionArn != nil {
 		s.WriteString(schemas.CreateVpcConnectionResponse_VpcConnectionArn, *v.VpcConnectionArn)
 	}

@@ -113,7 +113,9 @@ func (v *UpdateEventBridgeRuleTemplateGroupOutput) SerializeMembers(s smithy.Sha
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateEventBridgeRuleTemplateGroupResponse_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.UpdateEventBridgeRuleTemplateGroupResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateEventBridgeRuleTemplateGroupResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateEventBridgeRuleTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateEventBridgeRuleTemplateGroupResponse, func(s *smithy.Schema) error {

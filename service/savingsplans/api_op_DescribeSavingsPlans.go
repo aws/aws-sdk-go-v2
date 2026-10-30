@@ -57,16 +57,24 @@ func (v *DescribeSavingsPlansInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSavingsPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSavingsPlanFilterList(s, schemas.DescribeSavingsPlansRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSavingsPlanFilterList(s, schemas.DescribeSavingsPlansRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeSavingsPlansRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSavingsPlansRequest_nextToken, *v.NextToken)
 	}
-	serializeSavingsPlanArnList(s, schemas.DescribeSavingsPlansRequest_savingsPlanArns, v.SavingsPlanArns)
-	serializeSavingsPlanIdList(s, schemas.DescribeSavingsPlansRequest_savingsPlanIds, v.SavingsPlanIds)
-	serializeSavingsPlanStateList(s, schemas.DescribeSavingsPlansRequest_states, v.States)
+	if v.SavingsPlanArns != nil {
+		serializeSavingsPlanArnList(s, schemas.DescribeSavingsPlansRequest_savingsPlanArns, v.SavingsPlanArns)
+	}
+	if v.SavingsPlanIds != nil {
+		serializeSavingsPlanIdList(s, schemas.DescribeSavingsPlansRequest_savingsPlanIds, v.SavingsPlanIds)
+	}
+	if v.States != nil {
+		serializeSavingsPlanStateList(s, schemas.DescribeSavingsPlansRequest_states, v.States)
+	}
 }
 
 type DescribeSavingsPlansOutput struct {
@@ -94,7 +102,9 @@ func (v *DescribeSavingsPlansOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSavingsPlansResponse_nextToken, *v.NextToken)
 	}
-	serializeSavingsPlanList(s, schemas.DescribeSavingsPlansResponse_savingsPlans, v.SavingsPlans)
+	if v.SavingsPlans != nil {
+		serializeSavingsPlanList(s, schemas.DescribeSavingsPlansResponse_savingsPlans, v.SavingsPlans)
+	}
 }
 func (v *DescribeSavingsPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSavingsPlansResponse, func(s *smithy.Schema) error {

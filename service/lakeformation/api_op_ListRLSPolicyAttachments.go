@@ -101,7 +101,9 @@ func (v *ListRLSPolicyAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRLSPolicyAttachmentsResponse_NextToken, *v.NextToken)
 	}
-	serializeRLSPolicyAttachmentList(s, schemas.ListRLSPolicyAttachmentsResponse_RLSPolicyAttachments, v.RLSPolicyAttachments)
+	if v.RLSPolicyAttachments != nil {
+		serializeRLSPolicyAttachmentList(s, schemas.ListRLSPolicyAttachmentsResponse_RLSPolicyAttachments, v.RLSPolicyAttachments)
+	}
 }
 func (v *ListRLSPolicyAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRLSPolicyAttachmentsResponse, func(s *smithy.Schema) error {

@@ -76,7 +76,9 @@ func (v *AdminDeleteUserAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminDeleteUserAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameListType(s, schemas.AdminDeleteUserAttributesRequest_UserAttributeNames, v.UserAttributeNames)
+	if v.UserAttributeNames != nil {
+		serializeAttributeNameListType(s, schemas.AdminDeleteUserAttributesRequest_UserAttributeNames, v.UserAttributeNames)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AdminDeleteUserAttributesRequest_UserPoolId, *v.UserPoolId)
 	}

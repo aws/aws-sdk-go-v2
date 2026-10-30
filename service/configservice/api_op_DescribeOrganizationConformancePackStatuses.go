@@ -68,7 +68,9 @@ func (v *DescribeOrganizationConformancePackStatusesInput) SerializeMembers(s sm
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOrganizationConformancePackStatusesRequest_NextToken, *v.NextToken)
 	}
-	serializeOrganizationConformancePackNames(s, schemas.DescribeOrganizationConformancePackStatusesRequest_OrganizationConformancePackNames, v.OrganizationConformancePackNames)
+	if v.OrganizationConformancePackNames != nil {
+		serializeOrganizationConformancePackNames(s, schemas.DescribeOrganizationConformancePackStatusesRequest_OrganizationConformancePackNames, v.OrganizationConformancePackNames)
+	}
 }
 
 type DescribeOrganizationConformancePackStatusesOutput struct {
@@ -96,7 +98,9 @@ func (v *DescribeOrganizationConformancePackStatusesOutput) SerializeMembers(s s
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken, *v.NextToken)
 	}
-	serializeOrganizationConformancePackStatuses(s, schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses, v.OrganizationConformancePackStatuses)
+	if v.OrganizationConformancePackStatuses != nil {
+		serializeOrganizationConformancePackStatuses(s, schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses, v.OrganizationConformancePackStatuses)
+	}
 }
 func (v *DescribeOrganizationConformancePackStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOrganizationConformancePackStatusesResponse, func(s *smithy.Schema) error {

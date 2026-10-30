@@ -80,7 +80,9 @@ func (v *CreatePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3Uri != nil {
 		s.WriteString(schemas.CreatePromptRequest_S3Uri, *v.S3Uri)
 	}
-	serializeTagMap(s, schemas.CreatePromptRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePromptRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePromptOutput struct {

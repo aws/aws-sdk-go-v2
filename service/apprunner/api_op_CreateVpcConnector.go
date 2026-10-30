@@ -65,9 +65,15 @@ func (v *CreateVpcConnectorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateVpcConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CreateVpcConnectorRequest_SecurityGroups, v.SecurityGroups)
-	serializeStringList(s, schemas.CreateVpcConnectorRequest_Subnets, v.Subnets)
-	serializeTagList(s, schemas.CreateVpcConnectorRequest_Tags, v.Tags)
+	if v.SecurityGroups != nil {
+		serializeStringList(s, schemas.CreateVpcConnectorRequest_SecurityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.CreateVpcConnectorRequest_Subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVpcConnectorRequest_Tags, v.Tags)
+	}
 	if v.VpcConnectorName != nil {
 		s.WriteString(schemas.CreateVpcConnectorRequest_VpcConnectorName, *v.VpcConnectorName)
 	}

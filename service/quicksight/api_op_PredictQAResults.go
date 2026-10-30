@@ -118,7 +118,9 @@ func (v *PredictQAResultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PredictQAResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQAResults(s, schemas.PredictQAResultsResponse_AdditionalResults, v.AdditionalResults)
+	if v.AdditionalResults != nil {
+		serializeQAResults(s, schemas.PredictQAResultsResponse_AdditionalResults, v.AdditionalResults)
+	}
 	if v.PrimaryResult != nil {
 		s.WriteStruct(schemas.PredictQAResultsResponse_PrimaryResult)
 		v.PrimaryResult.SerializeMembers(s)

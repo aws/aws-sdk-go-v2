@@ -65,7 +65,9 @@ func (v *BatchGetAttachedFileMetadataInput) SerializeMembers(s smithy.ShapeSeria
 	if v.AssociatedResourceArn != nil {
 		s.WriteString(schemas.BatchGetAttachedFileMetadataRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
 	}
-	serializeFileIdList(s, schemas.BatchGetAttachedFileMetadataRequest_FileIds, v.FileIds)
+	if v.FileIds != nil {
+		serializeFileIdList(s, schemas.BatchGetAttachedFileMetadataRequest_FileIds, v.FileIds)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchGetAttachedFileMetadataRequest_InstanceId, *v.InstanceId)
 	}
@@ -92,8 +94,12 @@ func (v *BatchGetAttachedFileMetadataOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchGetAttachedFileMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachedFileErrorsList(s, schemas.BatchGetAttachedFileMetadataResponse_Errors, v.Errors)
-	serializeAttachedFilesList(s, schemas.BatchGetAttachedFileMetadataResponse_Files, v.Files)
+	if v.Errors != nil {
+		serializeAttachedFileErrorsList(s, schemas.BatchGetAttachedFileMetadataResponse_Errors, v.Errors)
+	}
+	if v.Files != nil {
+		serializeAttachedFilesList(s, schemas.BatchGetAttachedFileMetadataResponse_Files, v.Files)
+	}
 }
 func (v *BatchGetAttachedFileMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAttachedFileMetadataResponse, func(s *smithy.Schema) error {

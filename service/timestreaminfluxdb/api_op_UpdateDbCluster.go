@@ -65,7 +65,9 @@ func (v *UpdateDbClusterInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbBackupConfigurationInputList(s, schemas.UpdateDbClusterInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationInputList(s, schemas.UpdateDbClusterInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbClusterId != nil {
 		s.WriteString(schemas.UpdateDbClusterInput_dbClusterId, *v.DbClusterId)
 	}

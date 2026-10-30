@@ -136,16 +136,26 @@ func (v *CreateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateResourceShareRequest_name, *v.Name)
 	}
-	serializePermissionArnList(s, schemas.CreateResourceShareRequest_permissionArns, v.PermissionArns)
-	serializePrincipalArnOrIdList(s, schemas.CreateResourceShareRequest_principals, v.Principals)
-	serializeResourceArnList(s, schemas.CreateResourceShareRequest_resourceArns, v.ResourceArns)
+	if v.PermissionArns != nil {
+		serializePermissionArnList(s, schemas.CreateResourceShareRequest_permissionArns, v.PermissionArns)
+	}
+	if v.Principals != nil {
+		serializePrincipalArnOrIdList(s, schemas.CreateResourceShareRequest_principals, v.Principals)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.CreateResourceShareRequest_resourceArns, v.ResourceArns)
+	}
 	if v.ResourceShareConfiguration != nil {
 		s.WriteStruct(schemas.CreateResourceShareRequest_resourceShareConfiguration)
 		v.ResourceShareConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceArnOrAccountList(s, schemas.CreateResourceShareRequest_sources, v.Sources)
-	serializeTagList(s, schemas.CreateResourceShareRequest_tags, v.Tags)
+	if v.Sources != nil {
+		serializeSourceArnOrAccountList(s, schemas.CreateResourceShareRequest_sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResourceShareRequest_tags, v.Tags)
+	}
 }
 
 type CreateResourceShareOutput struct {

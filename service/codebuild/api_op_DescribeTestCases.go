@@ -105,7 +105,9 @@ func (v *DescribeTestCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTestCasesOutput_nextToken, *v.NextToken)
 	}
-	serializeTestCases(s, schemas.DescribeTestCasesOutput_testCases, v.TestCases)
+	if v.TestCases != nil {
+		serializeTestCases(s, schemas.DescribeTestCasesOutput_testCases, v.TestCases)
+	}
 }
 func (v *DescribeTestCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTestCasesOutput, func(s *smithy.Schema) error {

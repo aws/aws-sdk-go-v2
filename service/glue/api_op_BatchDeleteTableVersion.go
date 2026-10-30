@@ -68,7 +68,9 @@ func (v *BatchDeleteTableVersionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.TableName != nil {
 		s.WriteString(schemas.BatchDeleteTableVersionRequest_TableName, *v.TableName)
 	}
-	serializeBatchDeleteTableVersionList(s, schemas.BatchDeleteTableVersionRequest_VersionIds, v.VersionIds)
+	if v.VersionIds != nil {
+		serializeBatchDeleteTableVersionList(s, schemas.BatchDeleteTableVersionRequest_VersionIds, v.VersionIds)
+	}
 }
 
 type BatchDeleteTableVersionOutput struct {
@@ -90,7 +92,9 @@ func (v *BatchDeleteTableVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteTableVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableVersionErrors(s, schemas.BatchDeleteTableVersionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeTableVersionErrors(s, schemas.BatchDeleteTableVersionResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDeleteTableVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteTableVersionResponse, func(s *smithy.Schema) error {

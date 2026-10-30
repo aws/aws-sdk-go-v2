@@ -67,7 +67,9 @@ func (v *CreateUserHierarchyGroupInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ParentGroupId != nil {
 		s.WriteString(schemas.CreateUserHierarchyGroupRequest_ParentGroupId, *v.ParentGroupId)
 	}
-	serializeTagMap(s, schemas.CreateUserHierarchyGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateUserHierarchyGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateUserHierarchyGroupOutput struct {

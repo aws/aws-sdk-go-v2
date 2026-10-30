@@ -112,7 +112,9 @@ func (v *GetPluginOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.GetPluginResponse_applicationId, *v.ApplicationId)
 	}
-	serializePluginAuthConfiguration(s, schemas.GetPluginResponse_authConfiguration, v.AuthConfiguration)
+	if v.AuthConfiguration != nil {
+		serializePluginAuthConfiguration(s, schemas.GetPluginResponse_authConfiguration, v.AuthConfiguration)
+	}
 	if v.BuildStatus != "" {
 		s.WriteString(schemas.GetPluginResponse_buildStatus, string(v.BuildStatus))
 	}

@@ -85,7 +85,9 @@ func (v *ListOnlineEvaluationConfigsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOnlineEvaluationConfigsResponse_nextToken, *v.NextToken)
 	}
-	serializeOnlineEvaluationConfigSummaryList(s, schemas.ListOnlineEvaluationConfigsResponse_onlineEvaluationConfigs, v.OnlineEvaluationConfigs)
+	if v.OnlineEvaluationConfigs != nil {
+		serializeOnlineEvaluationConfigSummaryList(s, schemas.ListOnlineEvaluationConfigsResponse_onlineEvaluationConfigs, v.OnlineEvaluationConfigs)
+	}
 }
 func (v *ListOnlineEvaluationConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOnlineEvaluationConfigsResponse, func(s *smithy.Schema) error {

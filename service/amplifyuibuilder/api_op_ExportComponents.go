@@ -103,7 +103,9 @@ func (v *ExportComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentList(s, schemas.ExportComponentsResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeComponentList(s, schemas.ExportComponentsResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExportComponentsResponse_nextToken, *v.NextToken)
 	}

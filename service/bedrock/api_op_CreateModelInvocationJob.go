@@ -104,7 +104,9 @@ func (v *CreateModelInvocationJobInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateModelInvocationJobRequest_clientRequestToken, *v.ClientRequestToken)
 	}
-	serializeModelInvocationJobInputDataConfig(s, schemas.CreateModelInvocationJobRequest_inputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeModelInvocationJobInputDataConfig(s, schemas.CreateModelInvocationJobRequest_inputDataConfig, v.InputDataConfig)
+	}
 	if v.JobName != nil {
 		s.WriteString(schemas.CreateModelInvocationJobRequest_jobName, *v.JobName)
 	}
@@ -114,11 +116,15 @@ func (v *CreateModelInvocationJobInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ModelInvocationType != "" {
 		s.WriteString(schemas.CreateModelInvocationJobRequest_modelInvocationType, string(v.ModelInvocationType))
 	}
-	serializeModelInvocationJobOutputDataConfig(s, schemas.CreateModelInvocationJobRequest_outputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeModelInvocationJobOutputDataConfig(s, schemas.CreateModelInvocationJobRequest_outputDataConfig, v.OutputDataConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateModelInvocationJobRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateModelInvocationJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelInvocationJobRequest_tags, v.Tags)
+	}
 	if v.TimeoutDurationInHours != nil {
 		s.WriteInt32(schemas.CreateModelInvocationJobRequest_timeoutDurationInHours, *v.TimeoutDurationInHours)
 	}

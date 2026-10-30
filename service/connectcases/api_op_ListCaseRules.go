@@ -90,7 +90,9 @@ func (v *ListCaseRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCaseRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCaseRuleSummaryList(s, schemas.ListCaseRulesResponse_caseRules, v.CaseRules)
+	if v.CaseRules != nil {
+		serializeCaseRuleSummaryList(s, schemas.ListCaseRulesResponse_caseRules, v.CaseRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCaseRulesResponse_nextToken, *v.NextToken)
 	}

@@ -79,8 +79,12 @@ func (v *CreateChatResponseConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateChatResponseConfigurationRequest_displayName, *v.DisplayName)
 	}
-	serializeResponseConfigurations(s, schemas.CreateChatResponseConfigurationRequest_responseConfigurations, v.ResponseConfigurations)
-	serializeTags(s, schemas.CreateChatResponseConfigurationRequest_tags, v.Tags)
+	if v.ResponseConfigurations != nil {
+		serializeResponseConfigurations(s, schemas.CreateChatResponseConfigurationRequest_responseConfigurations, v.ResponseConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChatResponseConfigurationRequest_tags, v.Tags)
+	}
 }
 
 type CreateChatResponseConfigurationOutput struct {

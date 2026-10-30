@@ -78,7 +78,9 @@ func (v *DisassociateSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallName != nil {
 		s.WriteString(schemas.DisassociateSubnetsRequest_FirewallName, *v.FirewallName)
 	}
-	serializeAzSubnets(s, schemas.DisassociateSubnetsRequest_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeAzSubnets(s, schemas.DisassociateSubnetsRequest_SubnetIds, v.SubnetIds)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.DisassociateSubnetsRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -131,7 +133,9 @@ func (v *DisassociateSubnetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallName != nil {
 		s.WriteString(schemas.DisassociateSubnetsResponse_FirewallName, *v.FirewallName)
 	}
-	serializeSubnetMappings(s, schemas.DisassociateSubnetsResponse_SubnetMappings, v.SubnetMappings)
+	if v.SubnetMappings != nil {
+		serializeSubnetMappings(s, schemas.DisassociateSubnetsResponse_SubnetMappings, v.SubnetMappings)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.DisassociateSubnetsResponse_UpdateToken, *v.UpdateToken)
 	}

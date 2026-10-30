@@ -69,7 +69,9 @@ func (v *GetGuestUserHistoryCountOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGuestUserHistoryCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuestUserHistoryCountList(s, schemas.GetGuestUserHistoryCountResponse_history, v.History)
+	if v.History != nil {
+		serializeGuestUserHistoryCountList(s, schemas.GetGuestUserHistoryCountResponse_history, v.History)
+	}
 }
 func (v *GetGuestUserHistoryCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetGuestUserHistoryCountResponse, func(s *smithy.Schema) error {

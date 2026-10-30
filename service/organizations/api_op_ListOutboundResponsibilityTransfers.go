@@ -100,7 +100,9 @@ func (v *ListOutboundResponsibilityTransfersOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOutboundResponsibilityTransfersResponse_NextToken, *v.NextToken)
 	}
-	serializeResponsibilityTransfers(s, schemas.ListOutboundResponsibilityTransfersResponse_ResponsibilityTransfers, v.ResponsibilityTransfers)
+	if v.ResponsibilityTransfers != nil {
+		serializeResponsibilityTransfers(s, schemas.ListOutboundResponsibilityTransfersResponse_ResponsibilityTransfers, v.ResponsibilityTransfers)
+	}
 }
 func (v *ListOutboundResponsibilityTransfersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOutboundResponsibilityTransfersResponse, func(s *smithy.Schema) error {

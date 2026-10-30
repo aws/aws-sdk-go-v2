@@ -119,7 +119,9 @@ func (v *GetSearchResultExportJobOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ExportJobIdentifier != nil {
 		s.WriteString(schemas.GetSearchResultExportJobOutput_ExportJobIdentifier, *v.ExportJobIdentifier)
 	}
-	serializeExportSpecification(s, schemas.GetSearchResultExportJobOutput_ExportSpecification, v.ExportSpecification)
+	if v.ExportSpecification != nil {
+		serializeExportSpecification(s, schemas.GetSearchResultExportJobOutput_ExportSpecification, v.ExportSpecification)
+	}
 	if v.SearchJobArn != nil {
 		s.WriteString(schemas.GetSearchResultExportJobOutput_SearchJobArn, *v.SearchJobArn)
 	}

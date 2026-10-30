@@ -82,7 +82,9 @@ func (v *ListJobsByConsumableResourceInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ConsumableResource != nil {
 		s.WriteString(schemas.ListJobsByConsumableResourceRequest_consumableResource, *v.ConsumableResource)
 	}
-	serializeListJobsByConsumableResourceFilterList(s, schemas.ListJobsByConsumableResourceRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListJobsByConsumableResourceFilterList(s, schemas.ListJobsByConsumableResourceRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListJobsByConsumableResourceRequest_maxResults, *v.MaxResults)
 	}
@@ -117,7 +119,9 @@ func (v *ListJobsByConsumableResourceOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListJobsByConsumableResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListJobsByConsumableResourceSummaryList(s, schemas.ListJobsByConsumableResourceResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeListJobsByConsumableResourceSummaryList(s, schemas.ListJobsByConsumableResourceResponse_jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobsByConsumableResourceResponse_nextToken, *v.NextToken)
 	}

@@ -49,7 +49,9 @@ func (v *PutGroupingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutGroupingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupingAttributeDefinitions(s, schemas.PutGroupingConfigurationInput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	if v.GroupingAttributeDefinitions != nil {
+		serializeGroupingAttributeDefinitions(s, schemas.PutGroupingConfigurationInput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	}
 }
 
 type PutGroupingConfigurationOutput struct {

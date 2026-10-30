@@ -96,7 +96,9 @@ func (v *ListFunctionEventInvokeConfigsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListFunctionEventInvokeConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFunctionEventInvokeConfigList(s, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, v.FunctionEventInvokeConfigs)
+	if v.FunctionEventInvokeConfigs != nil {
+		serializeFunctionEventInvokeConfigList(s, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, v.FunctionEventInvokeConfigs)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListFunctionEventInvokeConfigsResponse_NextMarker, *v.NextMarker)
 	}

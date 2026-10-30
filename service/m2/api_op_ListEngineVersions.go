@@ -105,7 +105,9 @@ func (v *ListEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngineVersionsSummaryList(s, schemas.ListEngineVersionsResponse_engineVersions, v.EngineVersions)
+	if v.EngineVersions != nil {
+		serializeEngineVersionsSummaryList(s, schemas.ListEngineVersionsResponse_engineVersions, v.EngineVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngineVersionsResponse_nextToken, *v.NextToken)
 	}

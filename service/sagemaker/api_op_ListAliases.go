@@ -98,7 +98,9 @@ func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAliasesResponse_NextToken, *v.NextToken)
 	}
-	serializeSageMakerImageVersionAliases(s, schemas.ListAliasesResponse_SageMakerImageVersionAliases, v.SageMakerImageVersionAliases)
+	if v.SageMakerImageVersionAliases != nil {
+		serializeSageMakerImageVersionAliases(s, schemas.ListAliasesResponse_SageMakerImageVersionAliases, v.SageMakerImageVersionAliases)
+	}
 }
 func (v *ListAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAliasesResponse, func(s *smithy.Schema) error {

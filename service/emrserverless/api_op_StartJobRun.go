@@ -108,7 +108,9 @@ func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionTimeoutMinutes != nil {
 		s.WriteInt64(schemas.StartJobRunRequest_executionTimeoutMinutes, *v.ExecutionTimeoutMinutes)
 	}
-	serializeJobDriver(s, schemas.StartJobRunRequest_jobDriver, v.JobDriver)
+	if v.JobDriver != nil {
+		serializeJobDriver(s, schemas.StartJobRunRequest_jobDriver, v.JobDriver)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.StartJobRunRequest_mode, string(v.Mode))
 	}
@@ -120,7 +122,9 @@ func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RetryPolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartJobRunRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartJobRunRequest_tags, v.Tags)
+	}
 }
 func (v *StartJobRunInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartJobRunRequest, func(s *smithy.Schema) error {

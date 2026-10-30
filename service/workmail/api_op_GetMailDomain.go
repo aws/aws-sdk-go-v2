@@ -103,7 +103,9 @@ func (v *GetMailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnershipVerificationStatus != "" {
 		s.WriteString(schemas.GetMailDomainResponse_OwnershipVerificationStatus, string(v.OwnershipVerificationStatus))
 	}
-	serializeDnsRecords(s, schemas.GetMailDomainResponse_Records, v.Records)
+	if v.Records != nil {
+		serializeDnsRecords(s, schemas.GetMailDomainResponse_Records, v.Records)
+	}
 }
 func (v *GetMailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMailDomainResponse, func(s *smithy.Schema) error {

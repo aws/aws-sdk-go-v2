@@ -92,7 +92,9 @@ func (v *PutInvocationStepInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InvocationStepTime != nil {
 		s.WriteTime(schemas.PutInvocationStepRequest_invocationStepTime, *v.InvocationStepTime)
 	}
-	serializeInvocationStepPayload(s, schemas.PutInvocationStepRequest_payload, v.Payload)
+	if v.Payload != nil {
+		serializeInvocationStepPayload(s, schemas.PutInvocationStepRequest_payload, v.Payload)
+	}
 	if v.SessionIdentifier != nil {
 		s.WriteString(schemas.PutInvocationStepRequest_sessionIdentifier, *v.SessionIdentifier)
 	}

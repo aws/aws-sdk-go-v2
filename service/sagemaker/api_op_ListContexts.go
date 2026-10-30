@@ -113,7 +113,9 @@ func (v *ListContextsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContextsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContextSummaries(s, schemas.ListContextsResponse_ContextSummaries, v.ContextSummaries)
+	if v.ContextSummaries != nil {
+		serializeContextSummaries(s, schemas.ListContextsResponse_ContextSummaries, v.ContextSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContextsResponse_NextToken, *v.NextToken)
 	}

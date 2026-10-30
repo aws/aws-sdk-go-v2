@@ -119,7 +119,9 @@ func (v *ListAppInputSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppInputSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppInputSourceList(s, schemas.ListAppInputSourcesResponse_appInputSources, v.AppInputSources)
+	if v.AppInputSources != nil {
+		serializeAppInputSourceList(s, schemas.ListAppInputSourcesResponse_appInputSources, v.AppInputSources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppInputSourcesResponse_nextToken, *v.NextToken)
 	}

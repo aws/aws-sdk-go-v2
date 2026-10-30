@@ -107,7 +107,9 @@ func (v *UpdateMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.UpdateMonitorOutput_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.UpdateMonitorOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateMonitorOutput_tags, v.Tags)
+	}
 }
 func (v *UpdateMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateMonitorOutput, func(s *smithy.Schema) error {

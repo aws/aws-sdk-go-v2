@@ -150,7 +150,9 @@ func (v *CopySnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CopySnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CopySnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CopySnapshotResult_operations, v.Operations)
+	}
 }
 func (v *CopySnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CopySnapshotResult, func(s *smithy.Schema) error {

@@ -51,7 +51,9 @@ func (v *AcceptAgreementRequestInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AgreementRequestId != nil {
 		s.WriteString(schemas.AcceptAgreementRequestInput_agreementRequestId, *v.AgreementRequestId)
 	}
-	serializePurchaseOrders(s, schemas.AcceptAgreementRequestInput_purchaseOrders, v.PurchaseOrders)
+	if v.PurchaseOrders != nil {
+		serializePurchaseOrders(s, schemas.AcceptAgreementRequestInput_purchaseOrders, v.PurchaseOrders)
+	}
 }
 
 type AcceptAgreementRequestOutput struct {

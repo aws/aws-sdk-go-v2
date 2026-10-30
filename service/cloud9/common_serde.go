@@ -8,9 +8,6 @@ import (
 )
 
 func serializeBoundedEnvironmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeBoundedEnvironmentIdList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeEnvironmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -30,9 +24,6 @@ func serializeEnvironmentIdList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeEnvironmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Environment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -43,9 +34,6 @@ func serializeEnvironmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeEnvironmentMembersList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EnvironmentMember) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeEnvironmentMembersList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializePermissionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Permissions) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -67,9 +52,6 @@ func serializePermissionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -78,9 +60,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

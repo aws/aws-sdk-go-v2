@@ -78,7 +78,9 @@ func (v *CreateAccountAssociationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAccountAssociationRequest_Name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateAccountAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateAccountAssociationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAccountAssociationOutput struct {

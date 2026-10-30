@@ -63,7 +63,9 @@ func (v *ListClustersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIncludeClustersList(s, schemas.ListClustersRequest_include, v.Include)
+	if v.Include != nil {
+		serializeIncludeClustersList(s, schemas.ListClustersRequest_include, v.Include)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListClustersRequest_maxResults, *v.MaxResults)
 	}
@@ -100,7 +102,9 @@ func (v *ListClustersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListClustersResponse_clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeStringList(s, schemas.ListClustersResponse_clusters, v.Clusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClustersResponse_nextToken, *v.NextToken)
 	}

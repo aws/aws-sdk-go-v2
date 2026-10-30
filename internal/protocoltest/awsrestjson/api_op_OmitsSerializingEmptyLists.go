@@ -53,13 +53,27 @@ func (v *OmitsSerializingEmptyListsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OmitsSerializingEmptyListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBooleanList(s, schemas.OmitsSerializingEmptyListsInput_queryBooleanList, v.QueryBooleanList)
-	serializeDoubleList(s, schemas.OmitsSerializingEmptyListsInput_queryDoubleList, v.QueryDoubleList)
-	serializeFooEnumList(s, schemas.OmitsSerializingEmptyListsInput_queryEnumList, v.QueryEnumList)
-	serializeIntegerEnumList(s, schemas.OmitsSerializingEmptyListsInput_queryIntegerEnumList, v.QueryIntegerEnumList)
-	serializeIntegerList(s, schemas.OmitsSerializingEmptyListsInput_queryIntegerList, v.QueryIntegerList)
-	serializeStringList(s, schemas.OmitsSerializingEmptyListsInput_queryStringList, v.QueryStringList)
-	serializeTimestampList(s, schemas.OmitsSerializingEmptyListsInput_queryTimestampList, v.QueryTimestampList)
+	if v.QueryBooleanList != nil {
+		serializeBooleanList(s, schemas.OmitsSerializingEmptyListsInput_queryBooleanList, v.QueryBooleanList)
+	}
+	if v.QueryDoubleList != nil {
+		serializeDoubleList(s, schemas.OmitsSerializingEmptyListsInput_queryDoubleList, v.QueryDoubleList)
+	}
+	if v.QueryEnumList != nil {
+		serializeFooEnumList(s, schemas.OmitsSerializingEmptyListsInput_queryEnumList, v.QueryEnumList)
+	}
+	if v.QueryIntegerEnumList != nil {
+		serializeIntegerEnumList(s, schemas.OmitsSerializingEmptyListsInput_queryIntegerEnumList, v.QueryIntegerEnumList)
+	}
+	if v.QueryIntegerList != nil {
+		serializeIntegerList(s, schemas.OmitsSerializingEmptyListsInput_queryIntegerList, v.QueryIntegerList)
+	}
+	if v.QueryStringList != nil {
+		serializeStringList(s, schemas.OmitsSerializingEmptyListsInput_queryStringList, v.QueryStringList)
+	}
+	if v.QueryTimestampList != nil {
+		serializeTimestampList(s, schemas.OmitsSerializingEmptyListsInput_queryTimestampList, v.QueryTimestampList)
+	}
 }
 func (v *OmitsSerializingEmptyListsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OmitsSerializingEmptyListsInput, func(s *smithy.Schema) error {

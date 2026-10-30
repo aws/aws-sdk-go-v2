@@ -49,7 +49,9 @@ func (v *PutPartnerEventsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutPartnerEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePutPartnerEventsRequestEntryList(s, schemas.PutPartnerEventsRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializePutPartnerEventsRequestEntryList(s, schemas.PutPartnerEventsRequest_Entries, v.Entries)
+	}
 }
 
 type PutPartnerEventsOutput struct {
@@ -80,7 +82,9 @@ func (v *PutPartnerEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutPartnerEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePutPartnerEventsResultEntryList(s, schemas.PutPartnerEventsResponse_Entries, v.Entries)
+	if v.Entries != nil {
+		serializePutPartnerEventsResultEntryList(s, schemas.PutPartnerEventsResponse_Entries, v.Entries)
+	}
 	if v.FailedEntryCount != 0 {
 		s.WriteInt32(schemas.PutPartnerEventsResponse_FailedEntryCount, v.FailedEntryCount)
 	}

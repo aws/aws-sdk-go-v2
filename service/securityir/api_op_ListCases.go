@@ -82,7 +82,9 @@ func (v *ListCasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListCasesItems(s, schemas.ListCasesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeListCasesItems(s, schemas.ListCasesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCasesResponse_nextToken, *v.NextToken)
 	}

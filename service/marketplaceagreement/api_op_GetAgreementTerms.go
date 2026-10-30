@@ -100,7 +100,9 @@ func (v *GetAgreementTermsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAgreementTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcceptedTermList(s, schemas.GetAgreementTermsOutput_acceptedTerms, v.AcceptedTerms)
+	if v.AcceptedTerms != nil {
+		serializeAcceptedTermList(s, schemas.GetAgreementTermsOutput_acceptedTerms, v.AcceptedTerms)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAgreementTermsOutput_nextToken, *v.NextToken)
 	}

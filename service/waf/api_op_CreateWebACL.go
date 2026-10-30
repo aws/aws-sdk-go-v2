@@ -120,7 +120,9 @@ func (v *CreateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateWebACLRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateWebACLRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWebACLRequest_Tags, v.Tags)
+	}
 }
 
 type CreateWebACLOutput struct {

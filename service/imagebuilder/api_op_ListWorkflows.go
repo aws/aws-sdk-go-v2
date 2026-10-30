@@ -65,7 +65,9 @@ func (v *ListWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ByName != false {
 		s.WriteBool(schemas.ListWorkflowsRequest_byName, v.ByName)
 	}
-	serializeFilterList(s, schemas.ListWorkflowsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListWorkflowsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListWorkflowsRequest_maxResults, *v.MaxResults)
 	}
@@ -103,7 +105,9 @@ func (v *ListWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkflowsResponse_nextToken, *v.NextToken)
 	}
-	serializeWorkflowVersionList(s, schemas.ListWorkflowsResponse_workflowVersionList, v.WorkflowVersionList)
+	if v.WorkflowVersionList != nil {
+		serializeWorkflowVersionList(s, schemas.ListWorkflowsResponse_workflowVersionList, v.WorkflowVersionList)
+	}
 }
 func (v *ListWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkflowsResponse, func(s *smithy.Schema) error {

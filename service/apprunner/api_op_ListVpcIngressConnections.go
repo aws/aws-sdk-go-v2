@@ -99,7 +99,9 @@ func (v *ListVpcIngressConnectionsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVpcIngressConnectionsResponse_NextToken, *v.NextToken)
 	}
-	serializeVpcIngressConnectionSummaryList(s, schemas.ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList, v.VpcIngressConnectionSummaryList)
+	if v.VpcIngressConnectionSummaryList != nil {
+		serializeVpcIngressConnectionSummaryList(s, schemas.ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList, v.VpcIngressConnectionSummaryList)
+	}
 }
 func (v *ListVpcIngressConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVpcIngressConnectionsResponse, func(s *smithy.Schema) error {

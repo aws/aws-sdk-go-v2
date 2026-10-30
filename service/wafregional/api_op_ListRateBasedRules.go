@@ -95,7 +95,9 @@ func (v *ListRateBasedRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListRateBasedRulesResponse_NextMarker, *v.NextMarker)
 	}
-	serializeRuleSummaries(s, schemas.ListRateBasedRulesResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleSummaries(s, schemas.ListRateBasedRulesResponse_Rules, v.Rules)
+	}
 }
 func (v *ListRateBasedRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRateBasedRulesResponse, func(s *smithy.Schema) error {

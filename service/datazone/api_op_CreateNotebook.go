@@ -87,14 +87,18 @@ func (v *CreateNotebookInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateNotebookInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeMetadata(s, schemas.CreateNotebookInput_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.CreateNotebookInput_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNotebookInput_name, *v.Name)
 	}
 	if v.OwningProjectIdentifier != nil {
 		s.WriteString(schemas.CreateNotebookInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
 	}
-	serializeParameters(s, schemas.CreateNotebookInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateNotebookInput_parameters, v.Parameters)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateNotebookInput_type, string(v.Type))
 	}
@@ -190,7 +194,9 @@ func (v *CreateNotebookOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateNotebookOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCellOrder(s, schemas.CreateNotebookOutput_cellOrder, v.CellOrder)
+	if v.CellOrder != nil {
+		serializeCellOrder(s, schemas.CreateNotebookOutput_cellOrder, v.CellOrder)
+	}
 	if v.ComputeId != nil {
 		s.WriteString(schemas.CreateNotebookOutput_computeId, *v.ComputeId)
 	}
@@ -233,14 +239,18 @@ func (v *CreateNotebookOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LockedBy != nil {
 		s.WriteString(schemas.CreateNotebookOutput_lockedBy, *v.LockedBy)
 	}
-	serializeMetadata(s, schemas.CreateNotebookOutput_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.CreateNotebookOutput_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNotebookOutput_name, *v.Name)
 	}
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.CreateNotebookOutput_owningProjectId, *v.OwningProjectId)
 	}
-	serializeParameters(s, schemas.CreateNotebookOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateNotebookOutput_parameters, v.Parameters)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateNotebookOutput_status, string(v.Status))
 	}

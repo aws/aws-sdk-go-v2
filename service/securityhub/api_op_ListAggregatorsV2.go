@@ -77,7 +77,9 @@ func (v *ListAggregatorsV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAggregatorsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregatorV2List(s, schemas.ListAggregatorsV2Response_AggregatorsV2, v.AggregatorsV2)
+	if v.AggregatorsV2 != nil {
+		serializeAggregatorV2List(s, schemas.ListAggregatorsV2Response_AggregatorsV2, v.AggregatorsV2)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAggregatorsV2Response_NextToken, *v.NextToken)
 	}

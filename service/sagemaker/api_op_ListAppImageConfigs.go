@@ -129,7 +129,9 @@ func (v *ListAppImageConfigsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAppImageConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppImageConfigList(s, schemas.ListAppImageConfigsResponse_AppImageConfigs, v.AppImageConfigs)
+	if v.AppImageConfigs != nil {
+		serializeAppImageConfigList(s, schemas.ListAppImageConfigsResponse_AppImageConfigs, v.AppImageConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppImageConfigsResponse_NextToken, *v.NextToken)
 	}

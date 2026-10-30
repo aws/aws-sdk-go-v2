@@ -86,7 +86,9 @@ func (v *ListCapacityProvidersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCapacityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderList(s, schemas.ListCapacityProvidersOutput_capacityProviders, v.CapacityProviders)
+	if v.CapacityProviders != nil {
+		serializeCapacityProviderList(s, schemas.ListCapacityProvidersOutput_capacityProviders, v.CapacityProviders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCapacityProvidersOutput_nextToken, *v.NextToken)
 	}

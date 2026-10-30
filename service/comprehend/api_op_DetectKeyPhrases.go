@@ -80,7 +80,9 @@ func (v *DetectKeyPhrasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectKeyPhrasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfKeyPhrases(s, schemas.DetectKeyPhrasesResponse_KeyPhrases, v.KeyPhrases)
+	if v.KeyPhrases != nil {
+		serializeListOfKeyPhrases(s, schemas.DetectKeyPhrasesResponse_KeyPhrases, v.KeyPhrases)
+	}
 }
 func (v *DetectKeyPhrasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectKeyPhrasesResponse, func(s *smithy.Schema) error {

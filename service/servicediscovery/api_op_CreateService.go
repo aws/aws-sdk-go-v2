@@ -174,7 +174,9 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.CreateServiceRequest_NamespaceId, *v.NamespaceId)
 	}
-	serializeTagList(s, schemas.CreateServiceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServiceRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateServiceRequest_Type, string(v.Type))
 	}

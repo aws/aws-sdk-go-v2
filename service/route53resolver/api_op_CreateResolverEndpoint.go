@@ -213,7 +213,9 @@ func (v *CreateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Dns64Enabled != nil {
 		s.WriteBool(schemas.CreateResolverEndpointRequest_Dns64Enabled, *v.Dns64Enabled)
 	}
-	serializeIpAddressesRequest(s, schemas.CreateResolverEndpointRequest_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddressesRequest(s, schemas.CreateResolverEndpointRequest_IpAddresses, v.IpAddresses)
+	}
 	if v.Ipv6InternetAccessEnabled != nil {
 		s.WriteBool(schemas.CreateResolverEndpointRequest_Ipv6InternetAccessEnabled, *v.Ipv6InternetAccessEnabled)
 	}
@@ -226,15 +228,21 @@ func (v *CreateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PreferredInstanceType != nil {
 		s.WriteString(schemas.CreateResolverEndpointRequest_PreferredInstanceType, *v.PreferredInstanceType)
 	}
-	serializeProtocolList(s, schemas.CreateResolverEndpointRequest_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocolList(s, schemas.CreateResolverEndpointRequest_Protocols, v.Protocols)
+	}
 	if v.ResolverEndpointType != "" {
 		s.WriteString(schemas.CreateResolverEndpointRequest_ResolverEndpointType, string(v.ResolverEndpointType))
 	}
 	if v.RniEnhancedMetricsEnabled != nil {
 		s.WriteBool(schemas.CreateResolverEndpointRequest_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
 	}
-	serializeSecurityGroupIds(s, schemas.CreateResolverEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serializeTagList(s, schemas.CreateResolverEndpointRequest_Tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreateResolverEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResolverEndpointRequest_Tags, v.Tags)
+	}
 	if v.TargetNameServerMetricsEnabled != nil {
 		s.WriteBool(schemas.CreateResolverEndpointRequest_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
 	}

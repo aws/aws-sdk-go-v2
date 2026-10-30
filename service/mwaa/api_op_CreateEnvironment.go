@@ -255,7 +255,9 @@ func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAirflowConfigurationOptions(s, schemas.CreateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowConfigurationOptions != nil {
+		serializeAirflowConfigurationOptions(s, schemas.CreateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	}
 	if v.AirflowVersion != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_AirflowVersion, *v.AirflowVersion)
 	}
@@ -323,7 +325,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartupScriptS3Path != nil {
 		s.WriteString(schemas.CreateEnvironmentInput_StartupScriptS3Path, *v.StartupScriptS3Path)
 	}
-	serializeTagMap(s, schemas.CreateEnvironmentInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEnvironmentInput_Tags, v.Tags)
+	}
 	if v.WebserverAccessMode != "" {
 		s.WriteString(schemas.CreateEnvironmentInput_WebserverAccessMode, string(v.WebserverAccessMode))
 	}

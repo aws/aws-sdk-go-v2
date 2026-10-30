@@ -63,7 +63,9 @@ func (v *ListPurchaseOptionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPurchaseOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePurchaseOptionFilterList(s, schemas.ListPurchaseOptionsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializePurchaseOptionFilterList(s, schemas.ListPurchaseOptionsInput_filters, v.Filters)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.ListPurchaseOptionsInput_locale, *v.Locale)
 	}
@@ -101,7 +103,9 @@ func (v *ListPurchaseOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPurchaseOptionsOutput_nextToken, *v.NextToken)
 	}
-	serializePurchaseOptionSummaryList(s, schemas.ListPurchaseOptionsOutput_purchaseOptions, v.PurchaseOptions)
+	if v.PurchaseOptions != nil {
+		serializePurchaseOptionSummaryList(s, schemas.ListPurchaseOptionsOutput_purchaseOptions, v.PurchaseOptions)
+	}
 }
 func (v *ListPurchaseOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPurchaseOptionsOutput, func(s *smithy.Schema) error {

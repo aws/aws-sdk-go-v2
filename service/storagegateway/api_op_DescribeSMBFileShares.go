@@ -46,7 +46,9 @@ func (v *DescribeSMBFileSharesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSMBFileSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileShareARNList(s, schemas.DescribeSMBFileSharesInput_FileShareARNList, v.FileShareARNList)
+	if v.FileShareARNList != nil {
+		serializeFileShareARNList(s, schemas.DescribeSMBFileSharesInput_FileShareARNList, v.FileShareARNList)
+	}
 }
 
 // DescribeSMBFileSharesOutput
@@ -68,7 +70,9 @@ func (v *DescribeSMBFileSharesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSMBFileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSMBFileShareInfoList(s, schemas.DescribeSMBFileSharesOutput_SMBFileShareInfoList, v.SMBFileShareInfoList)
+	if v.SMBFileShareInfoList != nil {
+		serializeSMBFileShareInfoList(s, schemas.DescribeSMBFileSharesOutput_SMBFileShareInfoList, v.SMBFileShareInfoList)
+	}
 }
 func (v *DescribeSMBFileSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSMBFileSharesOutput, func(s *smithy.Schema) error {

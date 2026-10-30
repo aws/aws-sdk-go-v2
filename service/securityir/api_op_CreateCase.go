@@ -119,21 +119,33 @@ func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EngagementType != "" {
 		s.WriteString(schemas.CreateCaseRequest_engagementType, string(v.EngagementType))
 	}
-	serializeImpactedAccounts(s, schemas.CreateCaseRequest_impactedAccounts, v.ImpactedAccounts)
-	serializeImpactedAwsRegionList(s, schemas.CreateCaseRequest_impactedAwsRegions, v.ImpactedAwsRegions)
-	serializeImpactedServicesList(s, schemas.CreateCaseRequest_impactedServices, v.ImpactedServices)
+	if v.ImpactedAccounts != nil {
+		serializeImpactedAccounts(s, schemas.CreateCaseRequest_impactedAccounts, v.ImpactedAccounts)
+	}
+	if v.ImpactedAwsRegions != nil {
+		serializeImpactedAwsRegionList(s, schemas.CreateCaseRequest_impactedAwsRegions, v.ImpactedAwsRegions)
+	}
+	if v.ImpactedServices != nil {
+		serializeImpactedServicesList(s, schemas.CreateCaseRequest_impactedServices, v.ImpactedServices)
+	}
 	if v.ReportedIncidentStartDate != nil {
 		s.WriteTime(schemas.CreateCaseRequest_reportedIncidentStartDate, *v.ReportedIncidentStartDate)
 	}
 	if v.ResolverType != "" {
 		s.WriteString(schemas.CreateCaseRequest_resolverType, string(v.ResolverType))
 	}
-	serializeTagMap(s, schemas.CreateCaseRequest_tags, v.Tags)
-	serializeThreatActorIpList(s, schemas.CreateCaseRequest_threatActorIpAddresses, v.ThreatActorIpAddresses)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCaseRequest_tags, v.Tags)
+	}
+	if v.ThreatActorIpAddresses != nil {
+		serializeThreatActorIpList(s, schemas.CreateCaseRequest_threatActorIpAddresses, v.ThreatActorIpAddresses)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreateCaseRequest_title, *v.Title)
 	}
-	serializeWatchers(s, schemas.CreateCaseRequest_watchers, v.Watchers)
+	if v.Watchers != nil {
+		serializeWatchers(s, schemas.CreateCaseRequest_watchers, v.Watchers)
+	}
 }
 
 type CreateCaseOutput struct {

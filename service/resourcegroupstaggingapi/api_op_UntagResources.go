@@ -83,8 +83,12 @@ func (v *UntagResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UntagResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceARNListForTagUntag(s, schemas.UntagResourcesInput_ResourceARNList, v.ResourceARNList)
-	serializeTagKeyListForUntag(s, schemas.UntagResourcesInput_TagKeys, v.TagKeys)
+	if v.ResourceARNList != nil {
+		serializeResourceARNListForTagUntag(s, schemas.UntagResourcesInput_ResourceARNList, v.ResourceARNList)
+	}
+	if v.TagKeys != nil {
+		serializeTagKeyListForUntag(s, schemas.UntagResourcesInput_TagKeys, v.TagKeys)
+	}
 }
 
 type UntagResourcesOutput struct {
@@ -108,7 +112,9 @@ func (v *UntagResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UntagResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedResourcesMap(s, schemas.UntagResourcesOutput_FailedResourcesMap, v.FailedResourcesMap)
+	if v.FailedResourcesMap != nil {
+		serializeFailedResourcesMap(s, schemas.UntagResourcesOutput_FailedResourcesMap, v.FailedResourcesMap)
+	}
 }
 func (v *UntagResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UntagResourcesOutput, func(s *smithy.Schema) error {

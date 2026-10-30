@@ -73,13 +73,17 @@ func (v *UpdateThemeForStackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThemeAttributes(s, schemas.UpdateThemeForStackRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.AttributesToDelete != nil {
+		serializeThemeAttributes(s, schemas.UpdateThemeForStackRequest_AttributesToDelete, v.AttributesToDelete)
+	}
 	if v.FaviconS3Location != nil {
 		s.WriteStruct(schemas.UpdateThemeForStackRequest_FaviconS3Location)
 		v.FaviconS3Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeThemeFooterLinks(s, schemas.UpdateThemeForStackRequest_FooterLinks, v.FooterLinks)
+	if v.FooterLinks != nil {
+		serializeThemeFooterLinks(s, schemas.UpdateThemeForStackRequest_FooterLinks, v.FooterLinks)
+	}
 	if v.OrganizationLogoS3Location != nil {
 		s.WriteStruct(schemas.UpdateThemeForStackRequest_OrganizationLogoS3Location)
 		v.OrganizationLogoS3Location.SerializeMembers(s)

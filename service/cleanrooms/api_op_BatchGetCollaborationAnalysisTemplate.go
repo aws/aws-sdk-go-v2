@@ -51,7 +51,9 @@ func (v *BatchGetCollaborationAnalysisTemplateInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *BatchGetCollaborationAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisTemplateArnList(s, schemas.BatchGetCollaborationAnalysisTemplateInput_analysisTemplateArns, v.AnalysisTemplateArns)
+	if v.AnalysisTemplateArns != nil {
+		serializeAnalysisTemplateArnList(s, schemas.BatchGetCollaborationAnalysisTemplateInput_analysisTemplateArns, v.AnalysisTemplateArns)
+	}
 	if v.CollaborationIdentifier != nil {
 		s.WriteString(schemas.BatchGetCollaborationAnalysisTemplateInput_collaborationIdentifier, *v.CollaborationIdentifier)
 	}
@@ -96,8 +98,12 @@ func (v *BatchGetCollaborationAnalysisTemplateOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *BatchGetCollaborationAnalysisTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationAnalysisTemplateList(s, schemas.BatchGetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplates, v.CollaborationAnalysisTemplates)
-	serializeBatchGetCollaborationAnalysisTemplateErrorList(s, schemas.BatchGetCollaborationAnalysisTemplateOutput_errors, v.Errors)
+	if v.CollaborationAnalysisTemplates != nil {
+		serializeCollaborationAnalysisTemplateList(s, schemas.BatchGetCollaborationAnalysisTemplateOutput_collaborationAnalysisTemplates, v.CollaborationAnalysisTemplates)
+	}
+	if v.Errors != nil {
+		serializeBatchGetCollaborationAnalysisTemplateErrorList(s, schemas.BatchGetCollaborationAnalysisTemplateOutput_errors, v.Errors)
+	}
 }
 func (v *BatchGetCollaborationAnalysisTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCollaborationAnalysisTemplateOutput, func(s *smithy.Schema) error {

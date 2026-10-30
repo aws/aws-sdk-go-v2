@@ -75,8 +75,12 @@ func (v *CreateResourceSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceSetType != nil {
 		s.WriteString(schemas.CreateResourceSetRequest_ResourceSetType, *v.ResourceSetType)
 	}
-	serialize__listOfResource(s, schemas.CreateResourceSetRequest_Resources, v.Resources)
-	serializeTags(s, schemas.CreateResourceSetRequest_Tags, v.Tags)
+	if v.Resources != nil {
+		serialize__listOfResource(s, schemas.CreateResourceSetRequest_Resources, v.Resources)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateResourceSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateResourceSetOutput struct {
@@ -129,8 +133,12 @@ func (v *CreateResourceSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceSetType != nil {
 		s.WriteString(schemas.CreateResourceSetResponse_ResourceSetType, *v.ResourceSetType)
 	}
-	serialize__listOfResource(s, schemas.CreateResourceSetResponse_Resources, v.Resources)
-	serializeTags(s, schemas.CreateResourceSetResponse_Tags, v.Tags)
+	if v.Resources != nil {
+		serialize__listOfResource(s, schemas.CreateResourceSetResponse_Resources, v.Resources)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateResourceSetResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateResourceSetResponse, func(s *smithy.Schema) error {

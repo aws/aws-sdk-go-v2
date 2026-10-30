@@ -158,10 +158,18 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.CreateApplicationRequest_ApplicationName, *v.ApplicationName)
 	}
-	serializeCloudWatchLoggingOptions(s, schemas.CreateApplicationRequest_CloudWatchLoggingOptions, v.CloudWatchLoggingOptions)
-	serializeInputs(s, schemas.CreateApplicationRequest_Inputs, v.Inputs)
-	serializeOutputs(s, schemas.CreateApplicationRequest_Outputs, v.Outputs)
-	serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.CloudWatchLoggingOptions != nil {
+		serializeCloudWatchLoggingOptions(s, schemas.CreateApplicationRequest_CloudWatchLoggingOptions, v.CloudWatchLoggingOptions)
+	}
+	if v.Inputs != nil {
+		serializeInputs(s, schemas.CreateApplicationRequest_Inputs, v.Inputs)
+	}
+	if v.Outputs != nil {
+		serializeOutputs(s, schemas.CreateApplicationRequest_Outputs, v.Outputs)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 }
 
 // TBD

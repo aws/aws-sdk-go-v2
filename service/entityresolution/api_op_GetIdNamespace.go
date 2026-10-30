@@ -120,18 +120,24 @@ func (v *GetIdNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetIdNamespaceOutput_description, *v.Description)
 	}
-	serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.GetIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdMappingWorkflowProperties != nil {
+		serializeIdNamespaceIdMappingWorkflowPropertiesList(s, schemas.GetIdNamespaceOutput_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	}
 	if v.IdNamespaceArn != nil {
 		s.WriteString(schemas.GetIdNamespaceOutput_idNamespaceArn, *v.IdNamespaceArn)
 	}
 	if v.IdNamespaceName != nil {
 		s.WriteString(schemas.GetIdNamespaceOutput_idNamespaceName, *v.IdNamespaceName)
 	}
-	serializeIdNamespaceInputSourceConfig(s, schemas.GetIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeIdNamespaceInputSourceConfig(s, schemas.GetIdNamespaceOutput_inputSourceConfig, v.InputSourceConfig)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetIdNamespaceOutput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.GetIdNamespaceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetIdNamespaceOutput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetIdNamespaceOutput_type, string(v.Type))
 	}

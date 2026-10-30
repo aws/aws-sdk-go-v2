@@ -85,7 +85,9 @@ func (v *DescribeBudgetActionsForAccountOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DescribeBudgetActionsForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.DescribeBudgetActionsForAccountResponse_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActions(s, schemas.DescribeBudgetActionsForAccountResponse_Actions, v.Actions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeBudgetActionsForAccountResponse_NextToken, *v.NextToken)
 	}

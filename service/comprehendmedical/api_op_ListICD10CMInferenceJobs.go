@@ -83,7 +83,9 @@ func (v *ListICD10CMInferenceJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListICD10CMInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	if v.ComprehendMedicalAsyncJobPropertiesList != nil {
+		serializeComprehendMedicalAsyncJobPropertiesList(s, schemas.ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, v.ComprehendMedicalAsyncJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListICD10CMInferenceJobsResponse_NextToken, *v.NextToken)
 	}

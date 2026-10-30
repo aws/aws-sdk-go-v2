@@ -90,18 +90,30 @@ func (v *StartBatchEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartBatchEvaluationRequest_clientToken, *v.ClientToken)
 	}
-	serializeDataSourceConfig(s, schemas.StartBatchEvaluationRequest_dataSourceConfig, v.DataSourceConfig)
+	if v.DataSourceConfig != nil {
+		serializeDataSourceConfig(s, schemas.StartBatchEvaluationRequest_dataSourceConfig, v.DataSourceConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.StartBatchEvaluationRequest_description, *v.Description)
 	}
-	serializeEvaluationMetadata(s, schemas.StartBatchEvaluationRequest_evaluationMetadata, v.EvaluationMetadata)
-	serializeEvaluatorList(s, schemas.StartBatchEvaluationRequest_evaluators, v.Evaluators)
-	serializeInsightList(s, schemas.StartBatchEvaluationRequest_insights, v.Insights)
+	if v.EvaluationMetadata != nil {
+		serializeEvaluationMetadata(s, schemas.StartBatchEvaluationRequest_evaluationMetadata, v.EvaluationMetadata)
+	}
+	if v.Evaluators != nil {
+		serializeEvaluatorList(s, schemas.StartBatchEvaluationRequest_evaluators, v.Evaluators)
+	}
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.StartBatchEvaluationRequest_insights, v.Insights)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.StartBatchEvaluationRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeOutputConfig(s, schemas.StartBatchEvaluationRequest_outputConfig, v.OutputConfig)
-	serializeTagsMap(s, schemas.StartBatchEvaluationRequest_tags, v.Tags)
+	if v.OutputConfig != nil {
+		serializeOutputConfig(s, schemas.StartBatchEvaluationRequest_outputConfig, v.OutputConfig)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartBatchEvaluationRequest_tags, v.Tags)
+	}
 }
 
 type StartBatchEvaluationOutput struct {
@@ -177,16 +189,24 @@ func (v *StartBatchEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Description != nil {
 		s.WriteString(schemas.StartBatchEvaluationResponse_description, *v.Description)
 	}
-	serializeEvaluatorList(s, schemas.StartBatchEvaluationResponse_evaluators, v.Evaluators)
-	serializeInsightList(s, schemas.StartBatchEvaluationResponse_insights, v.Insights)
+	if v.Evaluators != nil {
+		serializeEvaluatorList(s, schemas.StartBatchEvaluationResponse_evaluators, v.Evaluators)
+	}
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.StartBatchEvaluationResponse_insights, v.Insights)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.StartBatchEvaluationResponse_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeOutputConfig(s, schemas.StartBatchEvaluationResponse_outputConfig, v.OutputConfig)
+	if v.OutputConfig != nil {
+		serializeOutputConfig(s, schemas.StartBatchEvaluationResponse_outputConfig, v.OutputConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StartBatchEvaluationResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.StartBatchEvaluationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartBatchEvaluationResponse_tags, v.Tags)
+	}
 }
 func (v *StartBatchEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartBatchEvaluationResponse, func(s *smithy.Schema) error {

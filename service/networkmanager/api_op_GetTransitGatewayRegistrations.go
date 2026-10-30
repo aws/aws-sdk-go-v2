@@ -64,7 +64,9 @@ func (v *GetTransitGatewayRegistrationsInput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTransitGatewayRegistrationsRequest_NextToken, *v.NextToken)
 	}
-	serializeTransitGatewayArnList(s, schemas.GetTransitGatewayRegistrationsRequest_TransitGatewayArns, v.TransitGatewayArns)
+	if v.TransitGatewayArns != nil {
+		serializeTransitGatewayArnList(s, schemas.GetTransitGatewayRegistrationsRequest_TransitGatewayArns, v.TransitGatewayArns)
+	}
 }
 
 type GetTransitGatewayRegistrationsOutput struct {
@@ -91,7 +93,9 @@ func (v *GetTransitGatewayRegistrationsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTransitGatewayRegistrationsResponse_NextToken, *v.NextToken)
 	}
-	serializeTransitGatewayRegistrationList(s, schemas.GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations, v.TransitGatewayRegistrations)
+	if v.TransitGatewayRegistrations != nil {
+		serializeTransitGatewayRegistrationList(s, schemas.GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations, v.TransitGatewayRegistrations)
+	}
 }
 func (v *GetTransitGatewayRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTransitGatewayRegistrationsResponse, func(s *smithy.Schema) error {

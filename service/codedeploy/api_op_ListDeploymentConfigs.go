@@ -74,7 +74,9 @@ func (v *ListDeploymentConfigsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentConfigsList(s, schemas.ListDeploymentConfigsOutput_deploymentConfigsList, v.DeploymentConfigsList)
+	if v.DeploymentConfigsList != nil {
+		serializeDeploymentConfigsList(s, schemas.ListDeploymentConfigsOutput_deploymentConfigsList, v.DeploymentConfigsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentConfigsOutput_nextToken, *v.NextToken)
 	}

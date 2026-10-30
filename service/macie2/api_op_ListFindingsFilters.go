@@ -76,7 +76,9 @@ func (v *ListFindingsFiltersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfFindingsFilterListItem(s, schemas.ListFindingsFiltersResponse_findingsFilterListItems, v.FindingsFilterListItems)
+	if v.FindingsFilterListItems != nil {
+		serialize__listOfFindingsFilterListItem(s, schemas.ListFindingsFiltersResponse_findingsFilterListItems, v.FindingsFilterListItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsFiltersResponse_nextToken, *v.NextToken)
 	}

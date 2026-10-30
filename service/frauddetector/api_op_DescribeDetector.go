@@ -93,7 +93,9 @@ func (v *DescribeDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorId != nil {
 		s.WriteString(schemas.DescribeDetectorResult_detectorId, *v.DetectorId)
 	}
-	serializeDetectorVersionSummaryList(s, schemas.DescribeDetectorResult_detectorVersionSummaries, v.DetectorVersionSummaries)
+	if v.DetectorVersionSummaries != nil {
+		serializeDetectorVersionSummaryList(s, schemas.DescribeDetectorResult_detectorVersionSummaries, v.DetectorVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDetectorResult_nextToken, *v.NextToken)
 	}

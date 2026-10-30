@@ -117,7 +117,9 @@ func (v *SearchContentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentSummaryList(s, schemas.SearchContentResponse_contentSummaries, v.ContentSummaries)
+	if v.ContentSummaries != nil {
+		serializeContentSummaryList(s, schemas.SearchContentResponse_contentSummaries, v.ContentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchContentResponse_nextToken, *v.NextToken)
 	}

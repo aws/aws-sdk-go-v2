@@ -94,7 +94,9 @@ func (v *StartMatchmakingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationName != nil {
 		s.WriteString(schemas.StartMatchmakingInput_ConfigurationName, *v.ConfigurationName)
 	}
-	serializePlayerList(s, schemas.StartMatchmakingInput_Players, v.Players)
+	if v.Players != nil {
+		serializePlayerList(s, schemas.StartMatchmakingInput_Players, v.Players)
+	}
 	if v.TicketId != nil {
 		s.WriteString(schemas.StartMatchmakingInput_TicketId, *v.TicketId)
 	}

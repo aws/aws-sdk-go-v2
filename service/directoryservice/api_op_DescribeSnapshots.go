@@ -72,7 +72,9 @@ func (v *DescribeSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSnapshotsRequest_NextToken, *v.NextToken)
 	}
-	serializeSnapshotIds(s, schemas.DescribeSnapshotsRequest_SnapshotIds, v.SnapshotIds)
+	if v.SnapshotIds != nil {
+		serializeSnapshotIds(s, schemas.DescribeSnapshotsRequest_SnapshotIds, v.SnapshotIds)
+	}
 }
 
 // Contains the results of the DescribeSnapshots operation.
@@ -106,7 +108,9 @@ func (v *DescribeSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSnapshotsResult_NextToken, *v.NextToken)
 	}
-	serializeSnapshots(s, schemas.DescribeSnapshotsResult_Snapshots, v.Snapshots)
+	if v.Snapshots != nil {
+		serializeSnapshots(s, schemas.DescribeSnapshotsResult_Snapshots, v.Snapshots)
+	}
 }
 func (v *DescribeSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSnapshotsResult, func(s *smithy.Schema) error {

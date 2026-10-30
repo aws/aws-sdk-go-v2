@@ -54,7 +54,9 @@ func (v *UpdateTagsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.UpdateTagsForDomainRequest_DomainName, *v.DomainName)
 	}
-	serializeTagList(s, schemas.UpdateTagsForDomainRequest_TagsToUpdate, v.TagsToUpdate)
+	if v.TagsToUpdate != nil {
+		serializeTagList(s, schemas.UpdateTagsForDomainRequest_TagsToUpdate, v.TagsToUpdate)
+	}
 }
 
 type UpdateTagsForDomainOutput struct {

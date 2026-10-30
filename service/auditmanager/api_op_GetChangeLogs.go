@@ -94,7 +94,9 @@ func (v *GetChangeLogsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetChangeLogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeLogs(s, schemas.GetChangeLogsResponse_changeLogs, v.ChangeLogs)
+	if v.ChangeLogs != nil {
+		serializeChangeLogs(s, schemas.GetChangeLogsResponse_changeLogs, v.ChangeLogs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetChangeLogsResponse_nextToken, *v.NextToken)
 	}

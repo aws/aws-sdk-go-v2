@@ -74,8 +74,12 @@ func (v *OperationWithNestedStructureOutput) SerializeMembers(s smithy.ShapeSeri
 		v.Dialog.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDialogList(s, schemas.OperationWithNestedStructureOutput_dialogList, v.DialogList)
-	serializeDialogMap(s, schemas.OperationWithNestedStructureOutput_dialogMap, v.DialogMap)
+	if v.DialogList != nil {
+		serializeDialogList(s, schemas.OperationWithNestedStructureOutput_dialogList, v.DialogList)
+	}
+	if v.DialogMap != nil {
+		serializeDialogMap(s, schemas.OperationWithNestedStructureOutput_dialogMap, v.DialogMap)
+	}
 }
 func (v *OperationWithNestedStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationWithNestedStructureOutput, func(s *smithy.Schema) error {

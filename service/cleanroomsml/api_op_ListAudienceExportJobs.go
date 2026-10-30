@@ -84,7 +84,9 @@ func (v *ListAudienceExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAudienceExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudienceExportJobList(s, schemas.ListAudienceExportJobsResponse_audienceExportJobs, v.AudienceExportJobs)
+	if v.AudienceExportJobs != nil {
+		serializeAudienceExportJobList(s, schemas.ListAudienceExportJobsResponse_audienceExportJobs, v.AudienceExportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAudienceExportJobsResponse_nextToken, *v.NextToken)
 	}

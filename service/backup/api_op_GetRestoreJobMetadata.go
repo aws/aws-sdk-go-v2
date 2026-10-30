@@ -68,7 +68,9 @@ func (v *GetRestoreJobMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRestoreJobMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadata(s, schemas.GetRestoreJobMetadataOutput_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.GetRestoreJobMetadataOutput_Metadata, v.Metadata)
+	}
 	if v.RestoreJobId != nil {
 		s.WriteString(schemas.GetRestoreJobMetadataOutput_RestoreJobId, *v.RestoreJobId)
 	}

@@ -116,7 +116,9 @@ func (v *GetAnomaliesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAnomaliesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalies(s, schemas.GetAnomaliesResponse_Anomalies, v.Anomalies)
+	if v.Anomalies != nil {
+		serializeAnomalies(s, schemas.GetAnomaliesResponse_Anomalies, v.Anomalies)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetAnomaliesResponse_NextPageToken, *v.NextPageToken)
 	}

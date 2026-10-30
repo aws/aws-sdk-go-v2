@@ -80,7 +80,9 @@ func (v *GetCloudFormationStackRecordsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetCloudFormationStackRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudFormationStackRecordList(s, schemas.GetCloudFormationStackRecordsResult_cloudFormationStackRecords, v.CloudFormationStackRecords)
+	if v.CloudFormationStackRecords != nil {
+		serializeCloudFormationStackRecordList(s, schemas.GetCloudFormationStackRecordsResult_cloudFormationStackRecords, v.CloudFormationStackRecords)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCloudFormationStackRecordsResult_nextPageToken, *v.NextPageToken)
 	}

@@ -55,7 +55,9 @@ func (v *StartVerificationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartVerificationRequest_ClientToken, *v.ClientToken)
 	}
-	serializeVerificationDetails(s, schemas.StartVerificationRequest_VerificationDetails, v.VerificationDetails)
+	if v.VerificationDetails != nil {
+		serializeVerificationDetails(s, schemas.StartVerificationRequest_VerificationDetails, v.VerificationDetails)
+	}
 }
 
 type StartVerificationOutput struct {
@@ -110,7 +112,9 @@ func (v *StartVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.StartVerificationResponse_StartedAt, *v.StartedAt)
 	}
-	serializeVerificationResponseDetails(s, schemas.StartVerificationResponse_VerificationResponseDetails, v.VerificationResponseDetails)
+	if v.VerificationResponseDetails != nil {
+		serializeVerificationResponseDetails(s, schemas.StartVerificationResponse_VerificationResponseDetails, v.VerificationResponseDetails)
+	}
 	if v.VerificationStatus != "" {
 		s.WriteString(schemas.StartVerificationResponse_VerificationStatus, string(v.VerificationStatus))
 	}

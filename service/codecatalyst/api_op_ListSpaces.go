@@ -70,7 +70,9 @@ func (v *ListSpacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSpacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSpaceSummaries(s, schemas.ListSpacesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeSpaceSummaries(s, schemas.ListSpacesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpacesResponse_nextToken, *v.NextToken)
 	}

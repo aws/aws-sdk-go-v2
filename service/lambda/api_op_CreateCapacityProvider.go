@@ -105,7 +105,9 @@ func (v *CreateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.PropagateTags.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateCapacityProviderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCapacityProviderRequest_Tags, v.Tags)
+	}
 	if v.TelemetryConfig != nil {
 		s.WriteStruct(schemas.CreateCapacityProviderRequest_TelemetryConfig)
 		v.TelemetryConfig.SerializeMembers(s)

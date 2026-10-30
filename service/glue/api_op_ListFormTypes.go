@@ -76,7 +76,9 @@ func (v *ListFormTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFormTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormTypeItemList(s, schemas.ListFormTypesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeFormTypeItemList(s, schemas.ListFormTypesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFormTypesResponse_NextToken, *v.NextToken)
 	}

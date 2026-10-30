@@ -8,9 +8,6 @@ import (
 )
 
 func serializeDimensionEntryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DimensionEntry) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeDimensionEntryList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeDimensionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Dimension) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -32,9 +26,6 @@ func serializeDimensionList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeDimensionValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeDimensionValueList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeEmissionsTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EmissionsType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -54,9 +42,6 @@ func serializeEmissionsTypeList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeEstimatedCarbonEmissionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EstimatedCarbonEmissions) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -67,9 +52,6 @@ func serializeEstimatedCarbonEmissionsList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeEstimatedWaterAllocationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EstimatedWaterAllocation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -80,9 +62,6 @@ func serializeEstimatedWaterAllocationList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeWaterAllocationTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WaterAllocationType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -241,9 +220,6 @@ func deserializeWaterAllocationTypeList(d smithy.ShapeDeserializer, s *smithy.Sc
 }
 
 func serializeDimensionListMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -253,9 +229,6 @@ func serializeDimensionListMap(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeDimensionsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -265,9 +238,6 @@ func serializeDimensionsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 }
 
 func serializeEmissionsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.Emissions) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -279,9 +249,6 @@ func serializeEmissionsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v ma
 }
 
 func serializeWaterAllocationMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.WaterAllocation) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

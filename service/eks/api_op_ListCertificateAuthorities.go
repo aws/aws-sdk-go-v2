@@ -100,7 +100,9 @@ func (v *ListCertificateAuthoritiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCertificateAuthoritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateAuthoritySummaryList(s, schemas.ListCertificateAuthoritiesResponse_certificateAuthorities, v.CertificateAuthorities)
+	if v.CertificateAuthorities != nil {
+		serializeCertificateAuthoritySummaryList(s, schemas.ListCertificateAuthoritiesResponse_certificateAuthorities, v.CertificateAuthorities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCertificateAuthoritiesResponse_nextToken, *v.NextToken)
 	}

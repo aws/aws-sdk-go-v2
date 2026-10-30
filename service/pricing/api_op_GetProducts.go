@@ -60,7 +60,9 @@ func (v *GetProductsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.GetProductsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.GetProductsRequest_Filters, v.Filters)
+	}
 	if v.FormatVersion != nil {
 		s.WriteString(schemas.GetProductsRequest_FormatVersion, *v.FormatVersion)
 	}
@@ -106,7 +108,9 @@ func (v *GetProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetProductsResponse_NextToken, *v.NextToken)
 	}
-	serializePriceListJsonItems(s, schemas.GetProductsResponse_PriceList, v.PriceList)
+	if v.PriceList != nil {
+		serializePriceListJsonItems(s, schemas.GetProductsResponse_PriceList, v.PriceList)
+	}
 }
 func (v *GetProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetProductsResponse, func(s *smithy.Schema) error {

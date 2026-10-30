@@ -242,7 +242,9 @@ func (v *CallResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CallId != nil {
 		s.WriteString(schemas.CallResult_callId, *v.CallId)
 	}
-	serializeCallResultContents(s, schemas.CallResult_content, v.Content)
+	if v.Content != nil {
+		serializeCallResultContents(s, schemas.CallResult_content, v.Content)
+	}
 }
 func (v *CallResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CallResult, func(s *smithy.Schema) error {
@@ -356,7 +358,9 @@ func (v *CompatibilityInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.CompatibilityInformation_message, *v.Message)
 	}
-	serializeModelIdList(s, schemas.CompatibilityInformation_supportedModelIds, v.SupportedModelIds)
+	if v.SupportedModelIds != nil {
+		serializeModelIdList(s, schemas.CompatibilityInformation_supportedModelIds, v.SupportedModelIds)
+	}
 }
 func (v *CompatibilityInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompatibilityInformation, func(s *smithy.Schema) error {
@@ -617,7 +621,9 @@ func (v *ToolSpec) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ToolSpec_description, *v.Description)
 	}
-	serializeToolInputSchema(s, schemas.ToolSpec_inputSchema, v.InputSchema)
+	if v.InputSchema != nil {
+		serializeToolInputSchema(s, schemas.ToolSpec_inputSchema, v.InputSchema)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ToolSpec_name, *v.Name)
 	}

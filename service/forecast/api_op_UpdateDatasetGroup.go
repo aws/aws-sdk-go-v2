@@ -53,7 +53,9 @@ func (v *UpdateDatasetGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDatasetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.UpdateDatasetGroupRequest_DatasetArns, v.DatasetArns)
+	if v.DatasetArns != nil {
+		serializeArnList(s, schemas.UpdateDatasetGroupRequest_DatasetArns, v.DatasetArns)
+	}
 	if v.DatasetGroupArn != nil {
 		s.WriteString(schemas.UpdateDatasetGroupRequest_DatasetGroupArn, *v.DatasetGroupArn)
 	}

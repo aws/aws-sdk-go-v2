@@ -49,7 +49,9 @@ func (v *UpdateServiceAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateServiceAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceAttributesMap(s, schemas.UpdateServiceAttributesRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeServiceAttributesMap(s, schemas.UpdateServiceAttributesRequest_Attributes, v.Attributes)
+	}
 	if v.ServiceId != nil {
 		s.WriteString(schemas.UpdateServiceAttributesRequest_ServiceId, *v.ServiceId)
 	}

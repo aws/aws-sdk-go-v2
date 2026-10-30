@@ -64,7 +64,9 @@ func (v *StartBgpFailoverTestInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartBgpFailoverTestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBGPPeerIdList(s, schemas.StartBgpFailoverTestRequest_bgpPeers, v.BgpPeers)
+	if v.BgpPeers != nil {
+		serializeBGPPeerIdList(s, schemas.StartBgpFailoverTestRequest_bgpPeers, v.BgpPeers)
+	}
 	if v.TestDurationInMinutes != nil {
 		s.WriteInt32(schemas.StartBgpFailoverTestRequest_testDurationInMinutes, *v.TestDurationInMinutes)
 	}

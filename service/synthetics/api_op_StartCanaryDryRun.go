@@ -166,7 +166,9 @@ func (v *StartCanaryDryRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactS3Location != nil {
 		s.WriteString(schemas.StartCanaryDryRunRequest_ArtifactS3Location, *v.ArtifactS3Location)
 	}
-	serializeBrowserConfigs(s, schemas.StartCanaryDryRunRequest_BrowserConfigs, v.BrowserConfigs)
+	if v.BrowserConfigs != nil {
+		serializeBrowserConfigs(s, schemas.StartCanaryDryRunRequest_BrowserConfigs, v.BrowserConfigs)
+	}
 	if v.Code != nil {
 		s.WriteStruct(schemas.StartCanaryDryRunRequest_Code)
 		v.Code.SerializeMembers(s)
@@ -200,7 +202,9 @@ func (v *StartCanaryDryRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VisualReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVisualReferences(s, schemas.StartCanaryDryRunRequest_VisualReferences, v.VisualReferences)
+	if v.VisualReferences != nil {
+		serializeVisualReferences(s, schemas.StartCanaryDryRunRequest_VisualReferences, v.VisualReferences)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.StartCanaryDryRunRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

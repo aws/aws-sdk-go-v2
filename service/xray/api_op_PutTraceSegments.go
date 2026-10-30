@@ -97,7 +97,9 @@ func (v *PutTraceSegmentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutTraceSegmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTraceSegmentDocumentList(s, schemas.PutTraceSegmentsRequest_TraceSegmentDocuments, v.TraceSegmentDocuments)
+	if v.TraceSegmentDocuments != nil {
+		serializeTraceSegmentDocumentList(s, schemas.PutTraceSegmentsRequest_TraceSegmentDocuments, v.TraceSegmentDocuments)
+	}
 }
 
 type PutTraceSegmentsOutput struct {
@@ -118,7 +120,9 @@ func (v *PutTraceSegmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutTraceSegmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnprocessedTraceSegmentList(s, schemas.PutTraceSegmentsResult_UnprocessedTraceSegments, v.UnprocessedTraceSegments)
+	if v.UnprocessedTraceSegments != nil {
+		serializeUnprocessedTraceSegmentList(s, schemas.PutTraceSegmentsResult_UnprocessedTraceSegments, v.UnprocessedTraceSegments)
+	}
 }
 func (v *PutTraceSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutTraceSegmentsResult, func(s *smithy.Schema) error {

@@ -152,15 +152,21 @@ func (v *DescribeManagedRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeManagedRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelSummaries(s, schemas.DescribeManagedRuleGroupResponse_AvailableLabels, v.AvailableLabels)
+	if v.AvailableLabels != nil {
+		serializeLabelSummaries(s, schemas.DescribeManagedRuleGroupResponse_AvailableLabels, v.AvailableLabels)
+	}
 	if v.Capacity != nil {
 		s.WriteInt64(schemas.DescribeManagedRuleGroupResponse_Capacity, *v.Capacity)
 	}
-	serializeLabelSummaries(s, schemas.DescribeManagedRuleGroupResponse_ConsumedLabels, v.ConsumedLabels)
+	if v.ConsumedLabels != nil {
+		serializeLabelSummaries(s, schemas.DescribeManagedRuleGroupResponse_ConsumedLabels, v.ConsumedLabels)
+	}
 	if v.LabelNamespace != nil {
 		s.WriteString(schemas.DescribeManagedRuleGroupResponse_LabelNamespace, *v.LabelNamespace)
 	}
-	serializeRuleSummaries(s, schemas.DescribeManagedRuleGroupResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleSummaries(s, schemas.DescribeManagedRuleGroupResponse_Rules, v.Rules)
+	}
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.DescribeManagedRuleGroupResponse_SnsTopicArn, *v.SnsTopicArn)
 	}

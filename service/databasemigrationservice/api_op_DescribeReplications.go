@@ -55,7 +55,9 @@ func (v *DescribeReplicationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeReplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeReplicationsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeReplicationsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationsMessage_Marker, *v.Marker)
 	}
@@ -90,7 +92,9 @@ func (v *DescribeReplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationsResponse_Marker, *v.Marker)
 	}
-	serializeReplicationList(s, schemas.DescribeReplicationsResponse_Replications, v.Replications)
+	if v.Replications != nil {
+		serializeReplicationList(s, schemas.DescribeReplicationsResponse_Replications, v.Replications)
+	}
 }
 func (v *DescribeReplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationsResponse, func(s *smithy.Schema) error {

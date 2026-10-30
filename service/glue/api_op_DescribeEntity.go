@@ -102,7 +102,9 @@ func (v *DescribeEntityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldsList(s, schemas.DescribeEntityResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldsList(s, schemas.DescribeEntityResponse_Fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEntityResponse_NextToken, *v.NextToken)
 	}

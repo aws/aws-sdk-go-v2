@@ -154,7 +154,9 @@ func (v *GetRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrencyCode != nil {
 		s.WriteString(schemas.GetRecommendationResponse_currencyCode, *v.CurrencyCode)
 	}
-	serializeResourceDetails(s, schemas.GetRecommendationResponse_currentResourceDetails, v.CurrentResourceDetails)
+	if v.CurrentResourceDetails != nil {
+		serializeResourceDetails(s, schemas.GetRecommendationResponse_currentResourceDetails, v.CurrentResourceDetails)
+	}
 	if v.CurrentResourceType != "" {
 		s.WriteString(schemas.GetRecommendationResponse_currentResourceType, string(v.CurrentResourceType))
 	}
@@ -182,7 +184,9 @@ func (v *GetRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecommendationLookbackPeriodInDays != nil {
 		s.WriteInt32(schemas.GetRecommendationResponse_recommendationLookbackPeriodInDays, *v.RecommendationLookbackPeriodInDays)
 	}
-	serializeResourceDetails(s, schemas.GetRecommendationResponse_recommendedResourceDetails, v.RecommendedResourceDetails)
+	if v.RecommendedResourceDetails != nil {
+		serializeResourceDetails(s, schemas.GetRecommendationResponse_recommendedResourceDetails, v.RecommendedResourceDetails)
+	}
 	if v.RecommendedResourceType != "" {
 		s.WriteString(schemas.GetRecommendationResponse_recommendedResourceType, string(v.RecommendedResourceType))
 	}
@@ -204,7 +208,9 @@ func (v *GetRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Source != "" {
 		s.WriteString(schemas.GetRecommendationResponse_source, string(v.Source))
 	}
-	serializeTagList(s, schemas.GetRecommendationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetRecommendationResponse_tags, v.Tags)
+	}
 }
 func (v *GetRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommendationResponse, func(s *smithy.Schema) error {

@@ -62,7 +62,9 @@ func (v *DescribeConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationIdList(s, schemas.DescribeConfigurationsRequest_configurationIds, v.ConfigurationIds)
+	if v.ConfigurationIds != nil {
+		serializeConfigurationIdList(s, schemas.DescribeConfigurationsRequest_configurationIds, v.ConfigurationIds)
+	}
 }
 
 type DescribeConfigurationsOutput struct {
@@ -83,7 +85,9 @@ func (v *DescribeConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescribeConfigurationsAttributes(s, schemas.DescribeConfigurationsResponse_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeDescribeConfigurationsAttributes(s, schemas.DescribeConfigurationsResponse_configurations, v.Configurations)
+	}
 }
 func (v *DescribeConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConfigurationsResponse, func(s *smithy.Schema) error {

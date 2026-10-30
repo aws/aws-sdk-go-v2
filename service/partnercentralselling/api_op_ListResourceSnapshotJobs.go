@@ -114,7 +114,9 @@ func (v *ListResourceSnapshotJobsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceSnapshotJobsResponse_NextToken, *v.NextToken)
 	}
-	serializeResourceSnapshotJobSummaryList(s, schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, v.ResourceSnapshotJobSummaries)
+	if v.ResourceSnapshotJobSummaries != nil {
+		serializeResourceSnapshotJobSummaryList(s, schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, v.ResourceSnapshotJobSummaries)
+	}
 }
 func (v *ListResourceSnapshotJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceSnapshotJobsResponse, func(s *smithy.Schema) error {

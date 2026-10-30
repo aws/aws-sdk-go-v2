@@ -57,7 +57,9 @@ func (v *UpdateTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTemplateDefinition(s, schemas.UpdateTemplateRequest_Definition, v.Definition)
+	if v.Definition != nil {
+		serializeTemplateDefinition(s, schemas.UpdateTemplateRequest_Definition, v.Definition)
+	}
 	if v.ReenrollAllCertificateHolders != nil {
 		s.WriteBool(schemas.UpdateTemplateRequest_ReenrollAllCertificateHolders, *v.ReenrollAllCertificateHolders)
 	}

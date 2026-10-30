@@ -115,7 +115,9 @@ func (v *DescribeLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSer
 	if v.AccessKey != nil {
 		s.WriteString(schemas.DescribeLocationObjectStorageResponse_AccessKey, *v.AccessKey)
 	}
-	serializeAgentArnList(s, schemas.DescribeLocationObjectStorageResponse_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.DescribeLocationObjectStorageResponse_AgentArns, v.AgentArns)
+	}
 	if v.CmkSecretConfig != nil {
 		s.WriteStruct(schemas.DescribeLocationObjectStorageResponse_CmkSecretConfig)
 		v.CmkSecretConfig.SerializeMembers(s)

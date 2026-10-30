@@ -86,7 +86,9 @@ func (v *ListWebhooksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebhooksOutput_NextToken, *v.NextToken)
 	}
-	serializeWebhookList(s, schemas.ListWebhooksOutput_webhooks, v.Webhooks)
+	if v.Webhooks != nil {
+		serializeWebhookList(s, schemas.ListWebhooksOutput_webhooks, v.Webhooks)
+	}
 }
 func (v *ListWebhooksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWebhooksOutput, func(s *smithy.Schema) error {

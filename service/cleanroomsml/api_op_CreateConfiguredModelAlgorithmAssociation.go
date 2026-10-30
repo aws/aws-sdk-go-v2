@@ -111,7 +111,9 @@ func (v *CreateConfiguredModelAlgorithmAssociationInput) SerializeMembers(s smit
 		v.PrivacyConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateConfiguredModelAlgorithmAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfiguredModelAlgorithmAssociationRequest_tags, v.Tags)
+	}
 }
 
 type CreateConfiguredModelAlgorithmAssociationOutput struct {

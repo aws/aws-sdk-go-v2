@@ -113,7 +113,9 @@ func (v *ListInferenceExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceExecutionSummaries(s, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, v.InferenceExecutionSummaries)
+	if v.InferenceExecutionSummaries != nil {
+		serializeInferenceExecutionSummaries(s, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, v.InferenceExecutionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceExecutionsResponse_NextToken, *v.NextToken)
 	}

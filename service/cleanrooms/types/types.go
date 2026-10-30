@@ -49,7 +49,9 @@ func (v *AccessBudget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregateRemainingBudget != nil {
 		s.WriteInt32(schemas.AccessBudget_aggregateRemainingBudget, *v.AggregateRemainingBudget)
 	}
-	serializeAccessBudgetDetailsList(s, schemas.AccessBudget_details, v.Details)
+	if v.Details != nil {
+		serializeAccessBudgetDetailsList(s, schemas.AccessBudget_details, v.Details)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.AccessBudget_resourceArn, *v.ResourceArn)
 	}
@@ -207,7 +209,9 @@ func (v *AccessBudgetsPrivacyTemplateParametersInput) Serialize(s smithy.ShapeSe
 }
 
 func (v *AccessBudgetsPrivacyTemplateParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetParameters(s, schemas.AccessBudgetsPrivacyTemplateParametersInput_budgetParameters, v.BudgetParameters)
+	if v.BudgetParameters != nil {
+		serializeBudgetParameters(s, schemas.AccessBudgetsPrivacyTemplateParametersInput_budgetParameters, v.BudgetParameters)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.AccessBudgetsPrivacyTemplateParametersInput_resourceArn, *v.ResourceArn)
 	}
@@ -250,7 +254,9 @@ func (v *AccessBudgetsPrivacyTemplateParametersOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *AccessBudgetsPrivacyTemplateParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetParameters(s, schemas.AccessBudgetsPrivacyTemplateParametersOutput_budgetParameters, v.BudgetParameters)
+	if v.BudgetParameters != nil {
+		serializeBudgetParameters(s, schemas.AccessBudgetsPrivacyTemplateParametersOutput_budgetParameters, v.BudgetParameters)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.AccessBudgetsPrivacyTemplateParametersOutput_resourceArn, *v.ResourceArn)
 	}
@@ -287,7 +293,9 @@ func (v *AccessBudgetsPrivacyTemplateUpdateParameters) Serialize(s smithy.ShapeS
 }
 
 func (v *AccessBudgetsPrivacyTemplateUpdateParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgetParameters(s, schemas.AccessBudgetsPrivacyTemplateUpdateParameters_budgetParameters, v.BudgetParameters)
+	if v.BudgetParameters != nil {
+		serializeBudgetParameters(s, schemas.AccessBudgetsPrivacyTemplateUpdateParameters_budgetParameters, v.BudgetParameters)
+	}
 }
 func (v *AccessBudgetsPrivacyTemplateUpdateParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessBudgetsPrivacyTemplateUpdateParameters, func(s *smithy.Schema) error {
@@ -322,7 +330,9 @@ func (v *AggregateColumn) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AggregateColumn) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisRuleColumnNameList(s, schemas.AggregateColumn_columnNames, v.ColumnNames)
+	if v.ColumnNames != nil {
+		serializeAnalysisRuleColumnNameList(s, schemas.AggregateColumn_columnNames, v.ColumnNames)
+	}
 	if v.Function != "" {
 		s.WriteString(schemas.AggregateColumn_function, string(v.Function))
 	}
@@ -465,11 +475,15 @@ func (v *AggregationThreshold) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowedAggregateExpressionType != "" {
 		s.WriteString(schemas.AggregationThreshold_allowedAggregateExpressionType, string(v.AllowedAggregateExpressionType))
 	}
-	serializeAnalysisRuleColumnList(s, schemas.AggregationThreshold_identityColumns, v.IdentityColumns)
+	if v.IdentityColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AggregationThreshold_identityColumns, v.IdentityColumns)
+	}
 	if v.MinimumIdentityCount != nil {
 		s.WriteInt32(schemas.AggregationThreshold_minimumIdentityCount, *v.MinimumIdentityCount)
 	}
-	serializeOutputColumnThresholdList(s, schemas.AggregationThreshold_outputColumnThresholds, v.OutputColumnThresholds)
+	if v.OutputColumnThresholds != nil {
+		serializeOutputColumnThresholdList(s, schemas.AggregationThreshold_outputColumnThresholds, v.OutputColumnThresholds)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AggregationThreshold_type, string(v.Type))
 	}
@@ -1021,15 +1035,21 @@ func (v *AnalysisRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollaborationId != nil {
 		s.WriteString(schemas.AnalysisRule_collaborationId, *v.CollaborationId)
 	}
-	serializeConfiguredTableAssociationAnalysisRulePolicy(s, schemas.AnalysisRule_collaborationPolicy, v.CollaborationPolicy)
-	serializeConsolidatedPolicy(s, schemas.AnalysisRule_consolidatedPolicy, v.ConsolidatedPolicy)
+	if v.CollaborationPolicy != nil {
+		serializeConfiguredTableAssociationAnalysisRulePolicy(s, schemas.AnalysisRule_collaborationPolicy, v.CollaborationPolicy)
+	}
+	if v.ConsolidatedPolicy != nil {
+		serializeConsolidatedPolicy(s, schemas.AnalysisRule_consolidatedPolicy, v.ConsolidatedPolicy)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.AnalysisRule_createTime, *v.CreateTime)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.AnalysisRule_name, *v.Name)
 	}
-	serializeAnalysisRulePolicy(s, schemas.AnalysisRule_policy, v.Policy)
+	if v.Policy != nil {
+		serializeAnalysisRulePolicy(s, schemas.AnalysisRule_policy, v.Policy)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AnalysisRule_type, string(v.Type))
 	}
@@ -1130,15 +1150,27 @@ func (v *AnalysisRuleAggregation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.AnalysisRuleAggregation_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeAggregateColumnList(s, schemas.AnalysisRuleAggregation_aggregateColumns, v.AggregateColumns)
-	serializeJoinOperatorsList(s, schemas.AnalysisRuleAggregation_allowedJoinOperators, v.AllowedJoinOperators)
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleAggregation_dimensionColumns, v.DimensionColumns)
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleAggregation_joinColumns, v.JoinColumns)
+	if v.AggregateColumns != nil {
+		serializeAggregateColumnList(s, schemas.AnalysisRuleAggregation_aggregateColumns, v.AggregateColumns)
+	}
+	if v.AllowedJoinOperators != nil {
+		serializeJoinOperatorsList(s, schemas.AnalysisRuleAggregation_allowedJoinOperators, v.AllowedJoinOperators)
+	}
+	if v.DimensionColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleAggregation_dimensionColumns, v.DimensionColumns)
+	}
+	if v.JoinColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleAggregation_joinColumns, v.JoinColumns)
+	}
 	if v.JoinRequired != "" {
 		s.WriteString(schemas.AnalysisRuleAggregation_joinRequired, string(v.JoinRequired))
 	}
-	serializeAggregationConstraints(s, schemas.AnalysisRuleAggregation_outputConstraints, v.OutputConstraints)
-	serializeScalarFunctionsList(s, schemas.AnalysisRuleAggregation_scalarFunctions, v.ScalarFunctions)
+	if v.OutputConstraints != nil {
+		serializeAggregationConstraints(s, schemas.AnalysisRuleAggregation_outputConstraints, v.OutputConstraints)
+	}
+	if v.ScalarFunctions != nil {
+		serializeScalarFunctionsList(s, schemas.AnalysisRuleAggregation_scalarFunctions, v.ScalarFunctions)
+	}
 }
 func (v *AnalysisRuleAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisRuleAggregation, func(s *smithy.Schema) error {
@@ -1230,11 +1262,21 @@ func (v *AnalysisRuleCustom) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.AnalysisRuleCustom_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeAggregationThresholdList(s, schemas.AnalysisRuleCustom_aggregationThresholds, v.AggregationThresholds)
-	serializeAllowedAdditionalAnalyses(s, schemas.AnalysisRuleCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeAllowedAnalysesList(s, schemas.AnalysisRuleCustom_allowedAnalyses, v.AllowedAnalyses)
-	serializeAllowedAnalysisProviderList(s, schemas.AnalysisRuleCustom_allowedAnalysisProviders, v.AllowedAnalysisProviders)
-	serializeAllowedResultReceivers(s, schemas.AnalysisRuleCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	if v.AggregationThresholds != nil {
+		serializeAggregationThresholdList(s, schemas.AnalysisRuleCustom_aggregationThresholds, v.AggregationThresholds)
+	}
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.AnalysisRuleCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedAnalyses != nil {
+		serializeAllowedAnalysesList(s, schemas.AnalysisRuleCustom_allowedAnalyses, v.AllowedAnalyses)
+	}
+	if v.AllowedAnalysisProviders != nil {
+		serializeAllowedAnalysisProviderList(s, schemas.AnalysisRuleCustom_allowedAnalysisProviders, v.AllowedAnalysisProviders)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.AnalysisRuleCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	}
 	if v.ComparisonControls != nil {
 		s.WriteStruct(schemas.AnalysisRuleCustom_comparisonControls)
 		v.ComparisonControls.SerializeMembers(s)
@@ -1245,7 +1287,9 @@ func (v *AnalysisRuleCustom) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DifferentialPrivacy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleCustom_disallowedOutputColumns, v.DisallowedOutputColumns)
+	if v.DisallowedOutputColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleCustom_disallowedOutputColumns, v.DisallowedOutputColumns)
+	}
 }
 func (v *AnalysisRuleCustom) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisRuleCustom, func(s *smithy.Schema) error {
@@ -1306,9 +1350,15 @@ func (v *AnalysisRuleIdMappingTable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisRuleIdMappingTable) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleIdMappingTable_dimensionColumns, v.DimensionColumns)
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleIdMappingTable_joinColumns, v.JoinColumns)
-	serializeQueryConstraintList(s, schemas.AnalysisRuleIdMappingTable_queryConstraints, v.QueryConstraints)
+	if v.DimensionColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleIdMappingTable_dimensionColumns, v.DimensionColumns)
+	}
+	if v.JoinColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleIdMappingTable_joinColumns, v.JoinColumns)
+	}
+	if v.QueryConstraints != nil {
+		serializeQueryConstraintList(s, schemas.AnalysisRuleIdMappingTable_queryConstraints, v.QueryConstraints)
+	}
 }
 func (v *AnalysisRuleIdMappingTable) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisRuleIdMappingTable, func(s *smithy.Schema) error {
@@ -1359,9 +1409,15 @@ func (v *AnalysisRuleList) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.AnalysisRuleList_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeJoinOperatorsList(s, schemas.AnalysisRuleList_allowedJoinOperators, v.AllowedJoinOperators)
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleList_joinColumns, v.JoinColumns)
-	serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleList_listColumns, v.ListColumns)
+	if v.AllowedJoinOperators != nil {
+		serializeJoinOperatorsList(s, schemas.AnalysisRuleList_allowedJoinOperators, v.AllowedJoinOperators)
+	}
+	if v.JoinColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleList_joinColumns, v.JoinColumns)
+	}
+	if v.ListColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.AnalysisRuleList_listColumns, v.ListColumns)
+	}
 }
 func (v *AnalysisRuleList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisRuleList, func(s *smithy.Schema) error {
@@ -1504,7 +1560,9 @@ func (v *AnalysisSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryTables(s, schemas.AnalysisSchema_referencedTables, v.ReferencedTables)
+	if v.ReferencedTables != nil {
+		serializeQueryTables(s, schemas.AnalysisSchema_referencedTables, v.ReferencedTables)
+	}
 }
 func (v *AnalysisSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisSchema, func(s *smithy.Schema) error {
@@ -1679,7 +1737,9 @@ func (v *AnalysisTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisParameterList(s, schemas.AnalysisTemplate_analysisParameters, v.AnalysisParameters)
+	if v.AnalysisParameters != nil {
+		serializeAnalysisParameterList(s, schemas.AnalysisTemplate_analysisParameters, v.AnalysisParameters)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.AnalysisTemplate_arn, *v.Arn)
 	}
@@ -1720,13 +1780,21 @@ func (v *AnalysisTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Schema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisSource(s, schemas.AnalysisTemplate_source, v.Source)
-	serializeAnalysisSourceMetadata(s, schemas.AnalysisTemplate_sourceMetadata, v.SourceMetadata)
-	serializeSyntheticDataParameters(s, schemas.AnalysisTemplate_syntheticDataParameters, v.SyntheticDataParameters)
+	if v.Source != nil {
+		serializeAnalysisSource(s, schemas.AnalysisTemplate_source, v.Source)
+	}
+	if v.SourceMetadata != nil {
+		serializeAnalysisSourceMetadata(s, schemas.AnalysisTemplate_sourceMetadata, v.SourceMetadata)
+	}
+	if v.SyntheticDataParameters != nil {
+		serializeSyntheticDataParameters(s, schemas.AnalysisTemplate_syntheticDataParameters, v.SyntheticDataParameters)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.AnalysisTemplate_updateTime, *v.UpdateTime)
 	}
-	serializeAnalysisTemplateValidationStatusDetailList(s, schemas.AnalysisTemplate_validations, v.Validations)
+	if v.Validations != nil {
+		serializeAnalysisTemplateValidationStatusDetailList(s, schemas.AnalysisTemplate_validations, v.Validations)
+	}
 }
 func (v *AnalysisTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisTemplate, func(s *smithy.Schema) error {
@@ -1845,7 +1913,9 @@ func (v *AnalysisTemplateArtifactMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisTemplateArtifactMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHashList(s, schemas.AnalysisTemplateArtifactMetadata_additionalArtifactHashes, v.AdditionalArtifactHashes)
+	if v.AdditionalArtifactHashes != nil {
+		serializeHashList(s, schemas.AnalysisTemplateArtifactMetadata_additionalArtifactHashes, v.AdditionalArtifactHashes)
+	}
 	if v.EntryPointHash != nil {
 		s.WriteStruct(schemas.AnalysisTemplateArtifactMetadata_entryPointHash)
 		v.EntryPointHash.SerializeMembers(s)
@@ -1891,7 +1961,9 @@ func (v *AnalysisTemplateArtifacts) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisTemplateArtifacts) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisTemplateArtifactList(s, schemas.AnalysisTemplateArtifacts_additionalArtifacts, v.AdditionalArtifacts)
+	if v.AdditionalArtifacts != nil {
+		serializeAnalysisTemplateArtifactList(s, schemas.AnalysisTemplateArtifacts_additionalArtifacts, v.AdditionalArtifacts)
+	}
 	if v.EntryPoint != nil {
 		s.WriteStruct(schemas.AnalysisTemplateArtifacts_entryPoint)
 		v.EntryPoint.SerializeMembers(s)
@@ -2093,7 +2165,9 @@ func (v *AnalysisTemplateValidationStatusDetail) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *AnalysisTemplateValidationStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisTemplateValidationStatusReasonList(s, schemas.AnalysisTemplateValidationStatusDetail_reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeAnalysisTemplateValidationStatusReasonList(s, schemas.AnalysisTemplateValidationStatusDetail_reasons, v.Reasons)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AnalysisTemplateValidationStatusDetail_status, string(v.Status))
 	}
@@ -2628,11 +2702,15 @@ func (v *Change) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Change) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeSpecification(s, schemas.Change_specification, v.Specification)
+	if v.Specification != nil {
+		serializeChangeSpecification(s, schemas.Change_specification, v.Specification)
+	}
 	if v.SpecificationType != "" {
 		s.WriteString(schemas.Change_specificationType, string(v.SpecificationType))
 	}
-	serializeChangeTypeList(s, schemas.Change_types, v.Types)
+	if v.Types != nil {
+		serializeChangeTypeList(s, schemas.Change_types, v.Types)
+	}
 }
 func (v *Change) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Change, func(s *smithy.Schema) error {
@@ -2678,7 +2756,9 @@ func (v *ChangeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeSpecification(s, schemas.ChangeInput_specification, v.Specification)
+	if v.Specification != nil {
+		serializeChangeSpecification(s, schemas.ChangeInput_specification, v.Specification)
+	}
 	if v.SpecificationType != "" {
 		s.WriteString(schemas.ChangeInput_specificationType, string(v.SpecificationType))
 	}
@@ -2934,14 +3014,18 @@ func (v *Collaboration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Collaboration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedResultRegions(s, schemas.Collaboration_allowedResultRegions, v.AllowedResultRegions)
+	if v.AllowedResultRegions != nil {
+		serializeAllowedResultRegions(s, schemas.Collaboration_allowedResultRegions, v.AllowedResultRegions)
+	}
 	if v.AnalyticsEngine != "" {
 		s.WriteString(schemas.Collaboration_analyticsEngine, string(v.AnalyticsEngine))
 	}
 	if v.Arn != nil {
 		s.WriteString(schemas.Collaboration_arn, *v.Arn)
 	}
-	serializeAutoApprovedChangeTypeList(s, schemas.Collaboration_autoApprovedChangeTypes, v.AutoApprovedChangeTypes)
+	if v.AutoApprovedChangeTypes != nil {
+		serializeAutoApprovedChangeTypeList(s, schemas.Collaboration_autoApprovedChangeTypes, v.AutoApprovedChangeTypes)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.Collaboration_createTime, *v.CreateTime)
 	}
@@ -3154,7 +3238,9 @@ func (v *CollaborationAnalysisTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CollaborationAnalysisTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisParameterList(s, schemas.CollaborationAnalysisTemplate_analysisParameters, v.AnalysisParameters)
+	if v.AnalysisParameters != nil {
+		serializeAnalysisParameterList(s, schemas.CollaborationAnalysisTemplate_analysisParameters, v.AnalysisParameters)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.CollaborationAnalysisTemplate_arn, *v.Arn)
 	}
@@ -3192,13 +3278,21 @@ func (v *CollaborationAnalysisTemplate) SerializeMembers(s smithy.ShapeSerialize
 		v.Schema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisSource(s, schemas.CollaborationAnalysisTemplate_source, v.Source)
-	serializeAnalysisSourceMetadata(s, schemas.CollaborationAnalysisTemplate_sourceMetadata, v.SourceMetadata)
-	serializeSyntheticDataParameters(s, schemas.CollaborationAnalysisTemplate_syntheticDataParameters, v.SyntheticDataParameters)
+	if v.Source != nil {
+		serializeAnalysisSource(s, schemas.CollaborationAnalysisTemplate_source, v.Source)
+	}
+	if v.SourceMetadata != nil {
+		serializeAnalysisSourceMetadata(s, schemas.CollaborationAnalysisTemplate_sourceMetadata, v.SourceMetadata)
+	}
+	if v.SyntheticDataParameters != nil {
+		serializeSyntheticDataParameters(s, schemas.CollaborationAnalysisTemplate_syntheticDataParameters, v.SyntheticDataParameters)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.CollaborationAnalysisTemplate_updateTime, *v.UpdateTime)
 	}
-	serializeAnalysisTemplateValidationStatusDetailList(s, schemas.CollaborationAnalysisTemplate_validations, v.Validations)
+	if v.Validations != nil {
+		serializeAnalysisTemplateValidationStatusDetailList(s, schemas.CollaborationAnalysisTemplate_validations, v.Validations)
+	}
 }
 func (v *CollaborationAnalysisTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CollaborationAnalysisTemplate, func(s *smithy.Schema) error {
@@ -3446,8 +3540,12 @@ func (v *CollaborationChangeRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CollaborationChangeRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStatuses(s, schemas.CollaborationChangeRequest_approvals, v.Approvals)
-	serializeChangeList(s, schemas.CollaborationChangeRequest_changes, v.Changes)
+	if v.Approvals != nil {
+		serializeApprovalStatuses(s, schemas.CollaborationChangeRequest_approvals, v.Approvals)
+	}
+	if v.Changes != nil {
+		serializeChangeList(s, schemas.CollaborationChangeRequest_changes, v.Changes)
+	}
 	if v.CollaborationId != nil {
 		s.WriteString(schemas.CollaborationChangeRequest_collaborationId, *v.CollaborationId)
 	}
@@ -3553,8 +3651,12 @@ func (v *CollaborationChangeRequestSummary) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CollaborationChangeRequestSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStatuses(s, schemas.CollaborationChangeRequestSummary_approvals, v.Approvals)
-	serializeChangeList(s, schemas.CollaborationChangeRequestSummary_changes, v.Changes)
+	if v.Approvals != nil {
+		serializeApprovalStatuses(s, schemas.CollaborationChangeRequestSummary_approvals, v.Approvals)
+	}
+	if v.Changes != nil {
+		serializeChangeList(s, schemas.CollaborationChangeRequestSummary_changes, v.Changes)
+	}
 	if v.CollaborationId != nil {
 		s.WriteString(schemas.CollaborationChangeRequestSummary_collaborationId, *v.CollaborationId)
 	}
@@ -3627,7 +3729,9 @@ func (v *CollaborationChangeSpecification) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CollaborationChangeSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoApprovedChangeTypeList(s, schemas.CollaborationChangeSpecification_autoApprovedChangeTypes, v.AutoApprovedChangeTypes)
+	if v.AutoApprovedChangeTypes != nil {
+		serializeAutoApprovedChangeTypeList(s, schemas.CollaborationChangeSpecification_autoApprovedChangeTypes, v.AutoApprovedChangeTypes)
+	}
 }
 func (v *CollaborationChangeSpecification) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CollaborationChangeSpecification, func(s *smithy.Schema) error {
@@ -4271,7 +4375,9 @@ func (v *CollaborationPrivacyBudgetSummary) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CollaborationPrivacyBudgetSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrivacyBudget(s, schemas.CollaborationPrivacyBudgetSummary_budget, v.Budget)
+	if v.Budget != nil {
+		serializePrivacyBudget(s, schemas.CollaborationPrivacyBudgetSummary_budget, v.Budget)
+	}
 	if v.CollaborationArn != nil {
 		s.WriteString(schemas.CollaborationPrivacyBudgetSummary_collaborationArn, *v.CollaborationArn)
 	}
@@ -4437,7 +4543,9 @@ func (v *CollaborationPrivacyBudgetTemplate) SerializeMembers(s smithy.ShapeSeri
 	if v.Id != nil {
 		s.WriteString(schemas.CollaborationPrivacyBudgetTemplate_id, *v.Id)
 	}
-	serializePrivacyBudgetTemplateParametersOutput(s, schemas.CollaborationPrivacyBudgetTemplate_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePrivacyBudgetTemplateParametersOutput(s, schemas.CollaborationPrivacyBudgetTemplate_parameters, v.Parameters)
+	}
 	if v.PrivacyBudgetType != "" {
 		s.WriteString(schemas.CollaborationPrivacyBudgetTemplate_privacyBudgetType, string(v.PrivacyBudgetType))
 	}
@@ -4825,7 +4933,9 @@ func (v *ColumnClassificationDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ColumnClassificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnMappingList(s, schemas.ColumnClassificationDetails_columnMapping, v.ColumnMapping)
+	if v.ColumnMapping != nil {
+		serializeColumnMappingList(s, schemas.ColumnClassificationDetails_columnMapping, v.ColumnMapping)
+	}
 }
 func (v *ColumnClassificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ColumnClassificationDetails, func(s *smithy.Schema) error {
@@ -4961,8 +5071,12 @@ func (v *ComparisonControls) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ComparisonControls) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisRuleColumnList(s, schemas.ComparisonControls_allowedColumnComparisonColumns, v.AllowedColumnComparisonColumns)
-	serializeAnalysisRuleColumnList(s, schemas.ComparisonControls_allowedLiteralComparisonColumns, v.AllowedLiteralComparisonColumns)
+	if v.AllowedColumnComparisonColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ComparisonControls_allowedColumnComparisonColumns, v.AllowedColumnComparisonColumns)
+	}
+	if v.AllowedLiteralComparisonColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ComparisonControls_allowedLiteralComparisonColumns, v.AllowedLiteralComparisonColumns)
+	}
 }
 func (v *ComparisonControls) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComparisonControls, func(s *smithy.Schema) error {
@@ -5416,11 +5530,15 @@ func (v *ConfiguredTable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfiguredTable) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedColumnList(s, schemas.ConfiguredTable_allowedColumns, v.AllowedColumns)
+	if v.AllowedColumns != nil {
+		serializeAllowedColumnList(s, schemas.ConfiguredTable_allowedColumns, v.AllowedColumns)
+	}
 	if v.AnalysisMethod != "" {
 		s.WriteString(schemas.ConfiguredTable_analysisMethod, string(v.AnalysisMethod))
 	}
-	serializeConfiguredTableAnalysisRuleTypeList(s, schemas.ConfiguredTable_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeConfiguredTableAnalysisRuleTypeList(s, schemas.ConfiguredTable_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ConfiguredTable_arn, *v.Arn)
 	}
@@ -5436,8 +5554,12 @@ func (v *ConfiguredTable) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ConfiguredTable_name, *v.Name)
 	}
-	serializeSelectedAnalysisMethods(s, schemas.ConfiguredTable_selectedAnalysisMethods, v.SelectedAnalysisMethods)
-	serializeTableReference(s, schemas.ConfiguredTable_tableReference, v.TableReference)
+	if v.SelectedAnalysisMethods != nil {
+		serializeSelectedAnalysisMethods(s, schemas.ConfiguredTable_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	}
+	if v.TableReference != nil {
+		serializeTableReference(s, schemas.ConfiguredTable_tableReference, v.TableReference)
+	}
 	if v.TableType != "" {
 		s.WriteString(schemas.ConfiguredTable_tableType, string(v.TableType))
 	}
@@ -5546,7 +5668,9 @@ func (v *ConfiguredTableAnalysisRule) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.ConfiguredTableAnalysisRule_createTime, *v.CreateTime)
 	}
-	serializeConfiguredTableAnalysisRulePolicy(s, schemas.ConfiguredTableAnalysisRule_policy, v.Policy)
+	if v.Policy != nil {
+		serializeConfiguredTableAnalysisRulePolicy(s, schemas.ConfiguredTableAnalysisRule_policy, v.Policy)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ConfiguredTableAnalysisRule_type, string(v.Type))
 	}
@@ -5747,11 +5871,15 @@ func (v *ConfiguredTableAssociation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfiguredTableAssociation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredTableAssociationAnalysisRuleTypeList(s, schemas.ConfiguredTableAssociation_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeConfiguredTableAssociationAnalysisRuleTypeList(s, schemas.ConfiguredTableAssociation_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ConfiguredTableAssociation_arn, *v.Arn)
 	}
-	serializeChildResourceList(s, schemas.ConfiguredTableAssociation_childResources, v.ChildResources)
+	if v.ChildResources != nil {
+		serializeChildResourceList(s, schemas.ConfiguredTableAssociation_childResources, v.ChildResources)
+	}
 	if v.ConfiguredTableArn != nil {
 		s.WriteString(schemas.ConfiguredTableAssociation_configuredTableArn, *v.ConfiguredTableArn)
 	}
@@ -5891,7 +6019,9 @@ func (v *ConfiguredTableAssociationAnalysisRule) SerializeMembers(s smithy.Shape
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.ConfiguredTableAssociationAnalysisRule_membershipIdentifier, *v.MembershipIdentifier)
 	}
-	serializeConfiguredTableAssociationAnalysisRulePolicy(s, schemas.ConfiguredTableAssociationAnalysisRule_policy, v.Policy)
+	if v.Policy != nil {
+		serializeConfiguredTableAssociationAnalysisRulePolicy(s, schemas.ConfiguredTableAssociationAnalysisRule_policy, v.Policy)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ConfiguredTableAssociationAnalysisRule_type, string(v.Type))
 	}
@@ -5958,8 +6088,12 @@ func (v *ConfiguredTableAssociationAnalysisRuleAggregation) Serialize(s smithy.S
 }
 
 func (v *ConfiguredTableAssociationAnalysisRuleAggregation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAdditionalAnalyses(s, schemas.ConfiguredTableAssociationAnalysisRuleAggregation_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeAllowedResultReceivers(s, schemas.ConfiguredTableAssociationAnalysisRuleAggregation_allowedResultReceivers, v.AllowedResultReceivers)
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.ConfiguredTableAssociationAnalysisRuleAggregation_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.ConfiguredTableAssociationAnalysisRuleAggregation_allowedResultReceivers, v.AllowedResultReceivers)
+	}
 }
 func (v *ConfiguredTableAssociationAnalysisRuleAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfiguredTableAssociationAnalysisRuleAggregation, func(s *smithy.Schema) error {
@@ -5996,8 +6130,12 @@ func (v *ConfiguredTableAssociationAnalysisRuleCustom) Serialize(s smithy.ShapeS
 }
 
 func (v *ConfiguredTableAssociationAnalysisRuleCustom) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAdditionalAnalyses(s, schemas.ConfiguredTableAssociationAnalysisRuleCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeAllowedResultReceivers(s, schemas.ConfiguredTableAssociationAnalysisRuleCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.ConfiguredTableAssociationAnalysisRuleCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.ConfiguredTableAssociationAnalysisRuleCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	}
 }
 func (v *ConfiguredTableAssociationAnalysisRuleCustom) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfiguredTableAssociationAnalysisRuleCustom, func(s *smithy.Schema) error {
@@ -6034,8 +6172,12 @@ func (v *ConfiguredTableAssociationAnalysisRuleList) Serialize(s smithy.ShapeSer
 }
 
 func (v *ConfiguredTableAssociationAnalysisRuleList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedAdditionalAnalyses(s, schemas.ConfiguredTableAssociationAnalysisRuleList_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeAllowedResultReceivers(s, schemas.ConfiguredTableAssociationAnalysisRuleList_allowedResultReceivers, v.AllowedResultReceivers)
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.ConfiguredTableAssociationAnalysisRuleList_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.ConfiguredTableAssociationAnalysisRuleList_allowedResultReceivers, v.AllowedResultReceivers)
+	}
 }
 func (v *ConfiguredTableAssociationAnalysisRuleList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfiguredTableAssociationAnalysisRuleList, func(s *smithy.Schema) error {
@@ -6238,7 +6380,9 @@ func (v *ConfiguredTableAssociationSummary) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ConfiguredTableAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredTableAssociationAnalysisRuleTypeList(s, schemas.ConfiguredTableAssociationSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeConfiguredTableAssociationAnalysisRuleTypeList(s, schemas.ConfiguredTableAssociationSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ConfiguredTableAssociationSummary_arn, *v.Arn)
 	}
@@ -6363,7 +6507,9 @@ func (v *ConfiguredTableSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalysisMethod != "" {
 		s.WriteString(schemas.ConfiguredTableSummary_analysisMethod, string(v.AnalysisMethod))
 	}
-	serializeConfiguredTableAnalysisRuleTypeList(s, schemas.ConfiguredTableSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeConfiguredTableAnalysisRuleTypeList(s, schemas.ConfiguredTableSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ConfiguredTableSummary_arn, *v.Arn)
 	}
@@ -6376,7 +6522,9 @@ func (v *ConfiguredTableSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ConfiguredTableSummary_name, *v.Name)
 	}
-	serializeSelectedAnalysisMethods(s, schemas.ConfiguredTableSummary_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	if v.SelectedAnalysisMethods != nil {
+		serializeSelectedAnalysisMethods(s, schemas.ConfiguredTableSummary_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	}
 	if v.TableType != "" {
 		s.WriteString(schemas.ConfiguredTableSummary_tableType, string(v.TableType))
 	}
@@ -6505,17 +6653,33 @@ func (v *ConsolidatedPolicyAggregation) SerializeMembers(s smithy.ShapeSerialize
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.ConsolidatedPolicyAggregation_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeAggregateColumnList(s, schemas.ConsolidatedPolicyAggregation_aggregateColumns, v.AggregateColumns)
-	serializeAllowedAdditionalAnalyses(s, schemas.ConsolidatedPolicyAggregation_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeJoinOperatorsList(s, schemas.ConsolidatedPolicyAggregation_allowedJoinOperators, v.AllowedJoinOperators)
-	serializeAllowedResultReceivers(s, schemas.ConsolidatedPolicyAggregation_allowedResultReceivers, v.AllowedResultReceivers)
-	serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyAggregation_dimensionColumns, v.DimensionColumns)
-	serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyAggregation_joinColumns, v.JoinColumns)
+	if v.AggregateColumns != nil {
+		serializeAggregateColumnList(s, schemas.ConsolidatedPolicyAggregation_aggregateColumns, v.AggregateColumns)
+	}
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.ConsolidatedPolicyAggregation_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedJoinOperators != nil {
+		serializeJoinOperatorsList(s, schemas.ConsolidatedPolicyAggregation_allowedJoinOperators, v.AllowedJoinOperators)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.ConsolidatedPolicyAggregation_allowedResultReceivers, v.AllowedResultReceivers)
+	}
+	if v.DimensionColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyAggregation_dimensionColumns, v.DimensionColumns)
+	}
+	if v.JoinColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyAggregation_joinColumns, v.JoinColumns)
+	}
 	if v.JoinRequired != "" {
 		s.WriteString(schemas.ConsolidatedPolicyAggregation_joinRequired, string(v.JoinRequired))
 	}
-	serializeAggregationConstraints(s, schemas.ConsolidatedPolicyAggregation_outputConstraints, v.OutputConstraints)
-	serializeScalarFunctionsList(s, schemas.ConsolidatedPolicyAggregation_scalarFunctions, v.ScalarFunctions)
+	if v.OutputConstraints != nil {
+		serializeAggregationConstraints(s, schemas.ConsolidatedPolicyAggregation_outputConstraints, v.OutputConstraints)
+	}
+	if v.ScalarFunctions != nil {
+		serializeScalarFunctionsList(s, schemas.ConsolidatedPolicyAggregation_scalarFunctions, v.ScalarFunctions)
+	}
 }
 func (v *ConsolidatedPolicyAggregation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConsolidatedPolicyAggregation, func(s *smithy.Schema) error {
@@ -6600,11 +6764,21 @@ func (v *ConsolidatedPolicyCustom) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.ConsolidatedPolicyCustom_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeAggregationThresholdList(s, schemas.ConsolidatedPolicyCustom_aggregationThresholds, v.AggregationThresholds)
-	serializeAllowedAdditionalAnalyses(s, schemas.ConsolidatedPolicyCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeAllowedAnalysesList(s, schemas.ConsolidatedPolicyCustom_allowedAnalyses, v.AllowedAnalyses)
-	serializeAllowedAnalysisProviderList(s, schemas.ConsolidatedPolicyCustom_allowedAnalysisProviders, v.AllowedAnalysisProviders)
-	serializeAllowedResultReceivers(s, schemas.ConsolidatedPolicyCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	if v.AggregationThresholds != nil {
+		serializeAggregationThresholdList(s, schemas.ConsolidatedPolicyCustom_aggregationThresholds, v.AggregationThresholds)
+	}
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.ConsolidatedPolicyCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedAnalyses != nil {
+		serializeAllowedAnalysesList(s, schemas.ConsolidatedPolicyCustom_allowedAnalyses, v.AllowedAnalyses)
+	}
+	if v.AllowedAnalysisProviders != nil {
+		serializeAllowedAnalysisProviderList(s, schemas.ConsolidatedPolicyCustom_allowedAnalysisProviders, v.AllowedAnalysisProviders)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.ConsolidatedPolicyCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	}
 	if v.ComparisonControls != nil {
 		s.WriteStruct(schemas.ConsolidatedPolicyCustom_comparisonControls)
 		v.ComparisonControls.SerializeMembers(s)
@@ -6615,7 +6789,9 @@ func (v *ConsolidatedPolicyCustom) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DifferentialPrivacy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyCustom_disallowedOutputColumns, v.DisallowedOutputColumns)
+	if v.DisallowedOutputColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyCustom_disallowedOutputColumns, v.DisallowedOutputColumns)
+	}
 }
 func (v *ConsolidatedPolicyCustom) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConsolidatedPolicyCustom, func(s *smithy.Schema) error {
@@ -6688,11 +6864,21 @@ func (v *ConsolidatedPolicyList) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.ConsolidatedPolicyList_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeAllowedAdditionalAnalyses(s, schemas.ConsolidatedPolicyList_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeJoinOperatorsList(s, schemas.ConsolidatedPolicyList_allowedJoinOperators, v.AllowedJoinOperators)
-	serializeAllowedResultReceivers(s, schemas.ConsolidatedPolicyList_allowedResultReceivers, v.AllowedResultReceivers)
-	serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyList_joinColumns, v.JoinColumns)
-	serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyList_listColumns, v.ListColumns)
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.ConsolidatedPolicyList_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedJoinOperators != nil {
+		serializeJoinOperatorsList(s, schemas.ConsolidatedPolicyList_allowedJoinOperators, v.AllowedJoinOperators)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.ConsolidatedPolicyList_allowedResultReceivers, v.AllowedResultReceivers)
+	}
+	if v.JoinColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyList_joinColumns, v.JoinColumns)
+	}
+	if v.ListColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.ConsolidatedPolicyList_listColumns, v.ListColumns)
+	}
 }
 func (v *ConsolidatedPolicyList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConsolidatedPolicyList, func(s *smithy.Schema) error {
@@ -6886,7 +7072,9 @@ func (v *DatabricksTableReference) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabricksTableReference) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabricksConnectionType(s, schemas.DatabricksTableReference_connectionType, v.ConnectionType)
+	if v.ConnectionType != nil {
+		serializeDatabricksConnectionType(s, schemas.DatabricksTableReference_connectionType, v.ConnectionType)
+	}
 	if v.SchemaName != nil {
 		s.WriteString(schemas.DatabricksTableReference_schemaName, *v.SchemaName)
 	}
@@ -7045,7 +7233,9 @@ func (v *DifferentialPrivacyConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DifferentialPrivacyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDifferentialPrivacyColumnList(s, schemas.DifferentialPrivacyConfiguration_columns, v.Columns)
+	if v.Columns != nil {
+		serializeDifferentialPrivacyColumnList(s, schemas.DifferentialPrivacyConfiguration_columns, v.Columns)
+	}
 }
 func (v *DifferentialPrivacyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DifferentialPrivacyConfiguration, func(s *smithy.Schema) error {
@@ -7076,7 +7266,9 @@ func (v *DifferentialPrivacyParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DifferentialPrivacyParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDifferentialPrivacySensitivityParametersList(s, schemas.DifferentialPrivacyParameters_sensitivityParameters, v.SensitivityParameters)
+	if v.SensitivityParameters != nil {
+		serializeDifferentialPrivacySensitivityParametersList(s, schemas.DifferentialPrivacyParameters_sensitivityParameters, v.SensitivityParameters)
+	}
 }
 func (v *DifferentialPrivacyParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DifferentialPrivacyParameters, func(s *smithy.Schema) error {
@@ -7209,7 +7401,9 @@ func (v *DifferentialPrivacyPrivacyBudget) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DifferentialPrivacyPrivacyBudget) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDifferentialPrivacyPrivacyBudgetAggregationList(s, schemas.DifferentialPrivacyPrivacyBudget_aggregations, v.Aggregations)
+	if v.Aggregations != nil {
+		serializeDifferentialPrivacyPrivacyBudgetAggregationList(s, schemas.DifferentialPrivacyPrivacyBudget_aggregations, v.Aggregations)
+	}
 	if v.Epsilon != nil {
 		s.WriteInt32(schemas.DifferentialPrivacyPrivacyBudget_epsilon, *v.Epsilon)
 	}
@@ -7308,7 +7502,9 @@ func (v *DifferentialPrivacyPrivacyImpact) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DifferentialPrivacyPrivacyImpact) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDifferentialPrivacyPreviewAggregationList(s, schemas.DifferentialPrivacyPrivacyImpact_aggregations, v.Aggregations)
+	if v.Aggregations != nil {
+		serializeDifferentialPrivacyPreviewAggregationList(s, schemas.DifferentialPrivacyPrivacyImpact_aggregations, v.Aggregations)
+	}
 }
 func (v *DifferentialPrivacyPrivacyImpact) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DifferentialPrivacyPrivacyImpact, func(s *smithy.Schema) error {
@@ -7550,7 +7746,9 @@ func (v *DirectAnalysisConfigurationDetails) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DirectAnalysisConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReceiverAccountIds(s, schemas.DirectAnalysisConfigurationDetails_receiverAccountIds, v.ReceiverAccountIds)
+	if v.ReceiverAccountIds != nil {
+		serializeReceiverAccountIds(s, schemas.DirectAnalysisConfigurationDetails_receiverAccountIds, v.ReceiverAccountIds)
+	}
 }
 func (v *DirectAnalysisConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DirectAnalysisConfigurationDetails, func(s *smithy.Schema) error {
@@ -7811,7 +8009,9 @@ func (v *IdMappingTable) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.IdMappingTable_arn, *v.Arn)
 	}
-	serializeChildResourceList(s, schemas.IdMappingTable_childResources, v.ChildResources)
+	if v.ChildResources != nil {
+		serializeChildResourceList(s, schemas.IdMappingTable_childResources, v.ChildResources)
+	}
 	if v.CollaborationArn != nil {
 		s.WriteString(schemas.IdMappingTable_collaborationArn, *v.CollaborationArn)
 	}
@@ -7968,7 +8168,9 @@ func (v *IdMappingTableInputReferenceProperties) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *IdMappingTableInputReferenceProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdMappingTableInputSourceList(s, schemas.IdMappingTableInputReferenceProperties_idMappingTableInputSource, v.IdMappingTableInputSource)
+	if v.IdMappingTableInputSource != nil {
+		serializeIdMappingTableInputSourceList(s, schemas.IdMappingTableInputReferenceProperties_idMappingTableInputSource, v.IdMappingTableInputSource)
+	}
 }
 func (v *IdMappingTableInputReferenceProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdMappingTableInputReferenceProperties, func(s *smithy.Schema) error {
@@ -8052,7 +8254,9 @@ func (v *IdMappingTableSchemaTypeProperties) SerializeMembers(s smithy.ShapeSeri
 	if v.IdMappingTableId != nil {
 		s.WriteString(schemas.IdMappingTableSchemaTypeProperties_idMappingTableId, *v.IdMappingTableId)
 	}
-	serializeIdMappingTableInputSourceList(s, schemas.IdMappingTableSchemaTypeProperties_idMappingTableInputSource, v.IdMappingTableInputSource)
+	if v.IdMappingTableInputSource != nil {
+		serializeIdMappingTableInputSourceList(s, schemas.IdMappingTableSchemaTypeProperties_idMappingTableInputSource, v.IdMappingTableInputSource)
+	}
 }
 func (v *IdMappingTableSchemaTypeProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdMappingTableSchemaTypeProperties, func(s *smithy.Schema) error {
@@ -8459,7 +8663,9 @@ func (v *IdNamespaceAssociationInputReferenceProperties) Serialize(s smithy.Shap
 }
 
 func (v *IdNamespaceAssociationInputReferenceProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdMappingWorkflowsSupported(s, schemas.IdNamespaceAssociationInputReferenceProperties_idMappingWorkflowsSupported, v.IdMappingWorkflowsSupported)
+	if v.IdMappingWorkflowsSupported != nil {
+		serializeIdMappingWorkflowsSupported(s, schemas.IdNamespaceAssociationInputReferenceProperties_idMappingWorkflowsSupported, v.IdMappingWorkflowsSupported)
+	}
 	if v.IdNamespaceType != "" {
 		s.WriteString(schemas.IdNamespaceAssociationInputReferenceProperties_idNamespaceType, string(v.IdNamespaceType))
 	}
@@ -8703,7 +8909,9 @@ func (v *InheritedAdditionalAnalyses) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InheritedAdditionalAnalyses) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInheritedAdditionalAnalysesSourceList(s, schemas.InheritedAdditionalAnalyses_sources, v.Sources)
+	if v.Sources != nil {
+		serializeInheritedAdditionalAnalysesSourceList(s, schemas.InheritedAdditionalAnalyses_sources, v.Sources)
+	}
 	if v.Value != "" {
 		s.WriteString(schemas.InheritedAdditionalAnalyses_value, string(v.Value))
 	}
@@ -8835,8 +9043,12 @@ func (v *InheritedAllowedAdditionalAnalyses) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *InheritedAllowedAdditionalAnalyses) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInheritedAllowedAdditionalAnalysesSourceList(s, schemas.InheritedAllowedAdditionalAnalyses_sources, v.Sources)
-	serializeAllowedAdditionalAnalyses(s, schemas.InheritedAllowedAdditionalAnalyses_value, v.Value)
+	if v.Sources != nil {
+		serializeInheritedAllowedAdditionalAnalysesSourceList(s, schemas.InheritedAllowedAdditionalAnalyses_sources, v.Sources)
+	}
+	if v.Value != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.InheritedAllowedAdditionalAnalyses_value, v.Value)
+	}
 }
 func (v *InheritedAllowedAdditionalAnalyses) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InheritedAllowedAdditionalAnalyses, func(s *smithy.Schema) error {
@@ -8901,7 +9113,9 @@ func (v *InheritedAllowedAdditionalAnalysesSource) SerializeMembers(s smithy.Sha
 	if v.Type != "" {
 		s.WriteString(schemas.InheritedAllowedAdditionalAnalysesSource_type, string(v.Type))
 	}
-	serializeAllowedAdditionalAnalyses(s, schemas.InheritedAllowedAdditionalAnalysesSource_value, v.Value)
+	if v.Value != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.InheritedAllowedAdditionalAnalysesSource_value, v.Value)
+	}
 }
 func (v *InheritedAllowedAdditionalAnalysesSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InheritedAllowedAdditionalAnalysesSource, func(s *smithy.Schema) error {
@@ -8954,8 +9168,12 @@ func (v *InheritedAllowedResultReceivers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InheritedAllowedResultReceivers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInheritedAllowedResultReceiversSourceList(s, schemas.InheritedAllowedResultReceivers_sources, v.Sources)
-	serializeAccountIdList(s, schemas.InheritedAllowedResultReceivers_value, v.Value)
+	if v.Sources != nil {
+		serializeInheritedAllowedResultReceiversSourceList(s, schemas.InheritedAllowedResultReceivers_sources, v.Sources)
+	}
+	if v.Value != nil {
+		serializeAccountIdList(s, schemas.InheritedAllowedResultReceivers_value, v.Value)
+	}
 }
 func (v *InheritedAllowedResultReceivers) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InheritedAllowedResultReceivers, func(s *smithy.Schema) error {
@@ -9020,7 +9238,9 @@ func (v *InheritedAllowedResultReceiversSource) SerializeMembers(s smithy.ShapeS
 	if v.Type != "" {
 		s.WriteString(schemas.InheritedAllowedResultReceiversSource_type, string(v.Type))
 	}
-	serializeAccountIdList(s, schemas.InheritedAllowedResultReceiversSource_value, v.Value)
+	if v.Value != nil {
+		serializeAccountIdList(s, schemas.InheritedAllowedResultReceiversSource_value, v.Value)
+	}
 }
 func (v *InheritedAllowedResultReceiversSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InheritedAllowedResultReceiversSource, func(s *smithy.Schema) error {
@@ -9074,8 +9294,12 @@ func (v *InheritedDisallowedOutputColumns) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InheritedDisallowedOutputColumns) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnLineageList(s, schemas.InheritedDisallowedOutputColumns_columnLineage, v.ColumnLineage)
-	serializeAnalysisRuleColumnNameList(s, schemas.InheritedDisallowedOutputColumns_value, v.Value)
+	if v.ColumnLineage != nil {
+		serializeColumnLineageList(s, schemas.InheritedDisallowedOutputColumns_columnLineage, v.ColumnLineage)
+	}
+	if v.Value != nil {
+		serializeAnalysisRuleColumnNameList(s, schemas.InheritedDisallowedOutputColumns_value, v.Value)
+	}
 }
 func (v *InheritedDisallowedOutputColumns) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InheritedDisallowedOutputColumns, func(s *smithy.Schema) error {
@@ -9191,11 +9415,15 @@ func (v *IntermediateTable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IntermediateTable) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableAnalysisRuleTypeList(s, schemas.IntermediateTable_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeIntermediateTableAnalysisRuleTypeList(s, schemas.IntermediateTable_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.IntermediateTable_arn, *v.Arn)
 	}
-	serializeChildResourceList(s, schemas.IntermediateTable_childResources, v.ChildResources)
+	if v.ChildResources != nil {
+		serializeChildResourceList(s, schemas.IntermediateTable_childResources, v.ChildResources)
+	}
 	if v.CollaborationArn != nil {
 		s.WriteString(schemas.IntermediateTable_collaborationArn, *v.CollaborationArn)
 	}
@@ -9228,7 +9456,9 @@ func (v *IntermediateTable) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.IntermediateTable_name, *v.Name)
 	}
-	serializePopulationAnalysisConfiguration(s, schemas.IntermediateTable_populationAnalysisConfiguration, v.PopulationAnalysisConfiguration)
+	if v.PopulationAnalysisConfiguration != nil {
+		serializePopulationAnalysisConfiguration(s, schemas.IntermediateTable_populationAnalysisConfiguration, v.PopulationAnalysisConfiguration)
+	}
 	if v.RetentionInDays != nil {
 		s.WriteInt32(schemas.IntermediateTable_retentionInDays, *v.RetentionInDays)
 	}
@@ -9243,7 +9473,9 @@ func (v *IntermediateTable) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.IntermediateTable_statusReason, *v.StatusReason)
 	}
-	serializeDependencyList(s, schemas.IntermediateTable_tableDependencies, v.TableDependencies)
+	if v.TableDependencies != nil {
+		serializeDependencyList(s, schemas.IntermediateTable_tableDependencies, v.TableDependencies)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.IntermediateTable_updateTime, *v.UpdateTime)
 	}
@@ -9377,7 +9609,9 @@ func (v *IntermediateTableActiveVersion) SerializeMembers(s smithy.ShapeSerializ
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.IntermediateTableActiveVersion_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeParameterMap(s, schemas.IntermediateTableActiveVersion_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMap(s, schemas.IntermediateTableActiveVersion_parameters, v.Parameters)
+	}
 	if v.VersionId != nil {
 		s.WriteString(schemas.IntermediateTableActiveVersion_versionId, *v.VersionId)
 	}
@@ -9459,7 +9693,9 @@ func (v *IntermediateTableAnalysisRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IntermediateTableAnalysisRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableAnalysisRulePolicy(s, schemas.IntermediateTableAnalysisRule_analysisRulePolicy, v.AnalysisRulePolicy)
+	if v.AnalysisRulePolicy != nil {
+		serializeIntermediateTableAnalysisRulePolicy(s, schemas.IntermediateTableAnalysisRule_analysisRulePolicy, v.AnalysisRulePolicy)
+	}
 	if v.AnalysisRuleType != "" {
 		s.WriteString(schemas.IntermediateTableAnalysisRule_analysisRuleType, string(v.AnalysisRuleType))
 	}
@@ -9556,11 +9792,21 @@ func (v *IntermediateTableAnalysisRuleCustom) SerializeMembers(s smithy.ShapeSer
 	if v.AdditionalAnalyses != "" {
 		s.WriteString(schemas.IntermediateTableAnalysisRuleCustom_additionalAnalyses, string(v.AdditionalAnalyses))
 	}
-	serializeAggregationThresholdList(s, schemas.IntermediateTableAnalysisRuleCustom_aggregationThresholds, v.AggregationThresholds)
-	serializeAllowedAdditionalAnalyses(s, schemas.IntermediateTableAnalysisRuleCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
-	serializeAllowedAnalysesList(s, schemas.IntermediateTableAnalysisRuleCustom_allowedAnalyses, v.AllowedAnalyses)
-	serializeAllowedAnalysisProviderList(s, schemas.IntermediateTableAnalysisRuleCustom_allowedAnalysisProviders, v.AllowedAnalysisProviders)
-	serializeAllowedResultReceivers(s, schemas.IntermediateTableAnalysisRuleCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	if v.AggregationThresholds != nil {
+		serializeAggregationThresholdList(s, schemas.IntermediateTableAnalysisRuleCustom_aggregationThresholds, v.AggregationThresholds)
+	}
+	if v.AllowedAdditionalAnalyses != nil {
+		serializeAllowedAdditionalAnalyses(s, schemas.IntermediateTableAnalysisRuleCustom_allowedAdditionalAnalyses, v.AllowedAdditionalAnalyses)
+	}
+	if v.AllowedAnalyses != nil {
+		serializeAllowedAnalysesList(s, schemas.IntermediateTableAnalysisRuleCustom_allowedAnalyses, v.AllowedAnalyses)
+	}
+	if v.AllowedAnalysisProviders != nil {
+		serializeAllowedAnalysisProviderList(s, schemas.IntermediateTableAnalysisRuleCustom_allowedAnalysisProviders, v.AllowedAnalysisProviders)
+	}
+	if v.AllowedResultReceivers != nil {
+		serializeAllowedResultReceivers(s, schemas.IntermediateTableAnalysisRuleCustom_allowedResultReceivers, v.AllowedResultReceivers)
+	}
 	if v.ComparisonControls != nil {
 		s.WriteStruct(schemas.IntermediateTableAnalysisRuleCustom_comparisonControls)
 		v.ComparisonControls.SerializeMembers(s)
@@ -9571,7 +9817,9 @@ func (v *IntermediateTableAnalysisRuleCustom) SerializeMembers(s smithy.ShapeSer
 		v.DifferentialPrivacy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisRuleColumnList(s, schemas.IntermediateTableAnalysisRuleCustom_disallowedOutputColumns, v.DisallowedOutputColumns)
+	if v.DisallowedOutputColumns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.IntermediateTableAnalysisRuleCustom_disallowedOutputColumns, v.DisallowedOutputColumns)
+	}
 }
 func (v *IntermediateTableAnalysisRuleCustom) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntermediateTableAnalysisRuleCustom, func(s *smithy.Schema) error {
@@ -9958,7 +10206,9 @@ func (v *IntermediateTableSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IntermediateTableSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnList(s, schemas.IntermediateTableSchema_columns, v.Columns)
+	if v.Columns != nil {
+		serializeColumnList(s, schemas.IntermediateTableSchema_columns, v.Columns)
+	}
 }
 func (v *IntermediateTableSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntermediateTableSchema, func(s *smithy.Schema) error {
@@ -10077,7 +10327,9 @@ func (v *IntermediateTableSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IntermediateTableSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntermediateTableAnalysisRuleTypeList(s, schemas.IntermediateTableSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeIntermediateTableAnalysisRuleTypeList(s, schemas.IntermediateTableSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.IntermediateTableSummary_arn, *v.Arn)
 	}
@@ -10377,7 +10629,9 @@ func (v *MemberChangeSpecification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.MemberChangeSpecification_displayName, *v.DisplayName)
 	}
-	serializeMemberAbilities(s, schemas.MemberChangeSpecification_memberAbilities, v.MemberAbilities)
+	if v.MemberAbilities != nil {
+		serializeMemberAbilities(s, schemas.MemberChangeSpecification_memberAbilities, v.MemberAbilities)
+	}
 	if v.MlMemberAbilities != nil {
 		s.WriteStruct(schemas.MemberChangeSpecification_mlMemberAbilities)
 		v.MlMemberAbilities.SerializeMembers(s)
@@ -10559,7 +10813,9 @@ func (v *Membership) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobLogStatus != "" {
 		s.WriteString(schemas.Membership_jobLogStatus, string(v.JobLogStatus))
 	}
-	serializeMemberAbilities(s, schemas.Membership_memberAbilities, v.MemberAbilities)
+	if v.MemberAbilities != nil {
+		serializeMemberAbilities(s, schemas.Membership_memberAbilities, v.MemberAbilities)
+	}
 	if v.MlMemberAbilities != nil {
 		s.WriteStruct(schemas.Membership_mlMemberAbilities)
 		v.MlMemberAbilities.SerializeMembers(s)
@@ -10963,7 +11219,9 @@ func (v *MembershipProtectedJobResultConfiguration) Serialize(s smithy.ShapeSeri
 }
 
 func (v *MembershipProtectedJobResultConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMembershipProtectedJobOutputConfiguration(s, schemas.MembershipProtectedJobResultConfiguration_outputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeMembershipProtectedJobOutputConfiguration(s, schemas.MembershipProtectedJobResultConfiguration_outputConfiguration, v.OutputConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.MembershipProtectedJobResultConfiguration_roleArn, *v.RoleArn)
 	}
@@ -11031,7 +11289,9 @@ func (v *MembershipProtectedQueryResultConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *MembershipProtectedQueryResultConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMembershipProtectedQueryOutputConfiguration(s, schemas.MembershipProtectedQueryResultConfiguration_outputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeMembershipProtectedQueryOutputConfiguration(s, schemas.MembershipProtectedQueryResultConfiguration_outputConfiguration, v.OutputConfiguration)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.MembershipProtectedQueryResultConfiguration_roleArn, *v.RoleArn)
 	}
@@ -11197,7 +11457,9 @@ func (v *MembershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.MembershipSummary_id, *v.Id)
 	}
-	serializeMemberAbilities(s, schemas.MembershipSummary_memberAbilities, v.MemberAbilities)
+	if v.MemberAbilities != nil {
+		serializeMemberAbilities(s, schemas.MembershipSummary_memberAbilities, v.MemberAbilities)
+	}
 	if v.MlMemberAbilities != nil {
 		s.WriteStruct(schemas.MembershipSummary_mlMemberAbilities)
 		v.MlMemberAbilities.SerializeMembers(s)
@@ -11344,7 +11606,9 @@ func (v *MemberSpecification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.MemberSpecification_displayName, *v.DisplayName)
 	}
-	serializeMemberAbilities(s, schemas.MemberSpecification_memberAbilities, v.MemberAbilities)
+	if v.MemberAbilities != nil {
+		serializeMemberAbilities(s, schemas.MemberSpecification_memberAbilities, v.MemberAbilities)
+	}
 	if v.MlMemberAbilities != nil {
 		s.WriteStruct(schemas.MemberSpecification_mlMemberAbilities)
 		v.MlMemberAbilities.SerializeMembers(s)
@@ -11437,7 +11701,9 @@ func (v *MemberSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MemberSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberAbilities(s, schemas.MemberSummary_abilities, v.Abilities)
+	if v.Abilities != nil {
+		serializeMemberAbilities(s, schemas.MemberSummary_abilities, v.Abilities)
+	}
 	if v.AccountId != nil {
 		s.WriteString(schemas.MemberSummary_accountId, *v.AccountId)
 	}
@@ -11529,7 +11795,9 @@ func (v *MLMemberAbilities) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MLMemberAbilities) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomMLMemberAbilities(s, schemas.MLMemberAbilities_customMLMemberAbilities, v.CustomMLMemberAbilities)
+	if v.CustomMLMemberAbilities != nil {
+		serializeCustomMLMemberAbilities(s, schemas.MLMemberAbilities_customMLMemberAbilities, v.CustomMLMemberAbilities)
+	}
 }
 func (v *MLMemberAbilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MLMemberAbilities, func(s *smithy.Schema) error {
@@ -12067,7 +12335,9 @@ func (v *PrivacyBudgetSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrivacyBudgetSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrivacyBudget(s, schemas.PrivacyBudgetSummary_budget, v.Budget)
+	if v.Budget != nil {
+		serializePrivacyBudget(s, schemas.PrivacyBudgetSummary_budget, v.Budget)
+	}
 	if v.CollaborationArn != nil {
 		s.WriteString(schemas.PrivacyBudgetSummary_collaborationArn, *v.CollaborationArn)
 	}
@@ -12243,7 +12513,9 @@ func (v *PrivacyBudgetTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MembershipId != nil {
 		s.WriteString(schemas.PrivacyBudgetTemplate_membershipId, *v.MembershipId)
 	}
-	serializePrivacyBudgetTemplateParametersOutput(s, schemas.PrivacyBudgetTemplate_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePrivacyBudgetTemplateParametersOutput(s, schemas.PrivacyBudgetTemplate_parameters, v.Parameters)
+	}
 	if v.PrivacyBudgetType != "" {
 		s.WriteString(schemas.PrivacyBudgetTemplate_privacyBudgetType, string(v.PrivacyBudgetType))
 	}
@@ -12657,7 +12929,9 @@ func (v *ProtectedJob) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectedJob) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedJobComputeConfiguration(s, schemas.ProtectedJob_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeProtectedJobComputeConfiguration(s, schemas.ProtectedJob_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.ProtectedJob_createTime, *v.CreateTime)
 	}
@@ -12818,7 +13092,9 @@ func (v *ProtectedJobDirectAnalysisConfigurationDetails) Serialize(s smithy.Shap
 }
 
 func (v *ProtectedJobDirectAnalysisConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedJobReceiverAccountIds(s, schemas.ProtectedJobDirectAnalysisConfigurationDetails_receiverAccountIds, v.ReceiverAccountIds)
+	if v.ReceiverAccountIds != nil {
+		serializeProtectedJobReceiverAccountIds(s, schemas.ProtectedJobDirectAnalysisConfigurationDetails_receiverAccountIds, v.ReceiverAccountIds)
+	}
 }
 func (v *ProtectedJobDirectAnalysisConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobDirectAnalysisConfigurationDetails, func(s *smithy.Schema) error {
@@ -13078,7 +13354,9 @@ func (v *ProtectedJobParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalysisTemplateArn != nil {
 		s.WriteString(schemas.ProtectedJobParameters_analysisTemplateArn, *v.AnalysisTemplateArn)
 	}
-	serializeJobParameterMap(s, schemas.ProtectedJobParameters_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeJobParameterMap(s, schemas.ProtectedJobParameters_parameters, v.Parameters)
+	}
 }
 func (v *ProtectedJobParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobParameters, func(s *smithy.Schema) error {
@@ -13117,7 +13395,9 @@ func (v *ProtectedJobReceiverConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.AnalysisType != "" {
 		s.WriteString(schemas.ProtectedJobReceiverConfiguration_analysisType, string(v.AnalysisType))
 	}
-	serializeProtectedJobConfigurationDetails(s, schemas.ProtectedJobReceiverConfiguration_configurationDetails, v.ConfigurationDetails)
+	if v.ConfigurationDetails != nil {
+		serializeProtectedJobConfigurationDetails(s, schemas.ProtectedJobReceiverConfiguration_configurationDetails, v.ConfigurationDetails)
+	}
 }
 func (v *ProtectedJobReceiverConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobReceiverConfiguration, func(s *smithy.Schema) error {
@@ -13154,7 +13434,9 @@ func (v *ProtectedJobResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectedJobResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedJobOutput(s, schemas.ProtectedJobResult_output, v.Output)
+	if v.Output != nil {
+		serializeProtectedJobOutput(s, schemas.ProtectedJobResult_output, v.Output)
+	}
 }
 func (v *ProtectedJobResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobResult, func(s *smithy.Schema) error {
@@ -13184,7 +13466,9 @@ func (v *ProtectedJobResultConfigurationInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ProtectedJobResultConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedJobOutputConfigurationInput(s, schemas.ProtectedJobResultConfigurationInput_outputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeProtectedJobOutputConfigurationInput(s, schemas.ProtectedJobResultConfigurationInput_outputConfiguration, v.OutputConfiguration)
+	}
 }
 func (v *ProtectedJobResultConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobResultConfigurationInput, func(s *smithy.Schema) error {
@@ -13214,7 +13498,9 @@ func (v *ProtectedJobResultConfigurationOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ProtectedJobResultConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedJobOutputConfigurationOutput(s, schemas.ProtectedJobResultConfigurationOutput_outputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeProtectedJobOutputConfigurationOutput(s, schemas.ProtectedJobResultConfigurationOutput_outputConfiguration, v.OutputConfiguration)
+	}
 }
 func (v *ProtectedJobResultConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedJobResultConfigurationOutput, func(s *smithy.Schema) error {
@@ -13495,7 +13781,9 @@ func (v *ProtectedJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MembershipId != nil {
 		s.WriteString(schemas.ProtectedJobSummary_membershipId, *v.MembershipId)
 	}
-	serializeProtectedJobReceiverConfigurations(s, schemas.ProtectedJobSummary_receiverConfigurations, v.ReceiverConfigurations)
+	if v.ReceiverConfigurations != nil {
+		serializeProtectedJobReceiverConfigurations(s, schemas.ProtectedJobSummary_receiverConfigurations, v.ReceiverConfigurations)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ProtectedJobSummary_status, string(v.Status))
 	}
@@ -13563,7 +13851,9 @@ func (v *ProtectedJobWorkerComputeConfiguration) SerializeMembers(s smithy.Shape
 	if v.Number != nil {
 		s.WriteInt32(schemas.ProtectedJobWorkerComputeConfiguration_number, *v.Number)
 	}
-	serializeWorkerComputeConfigurationProperties(s, schemas.ProtectedJobWorkerComputeConfiguration_properties, v.Properties)
+	if v.Properties != nil {
+		serializeWorkerComputeConfigurationProperties(s, schemas.ProtectedJobWorkerComputeConfiguration_properties, v.Properties)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ProtectedJobWorkerComputeConfiguration_type, string(v.Type))
 	}
@@ -13651,7 +13941,9 @@ func (v *ProtectedQuery) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectedQuery) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeConfiguration(s, schemas.ProtectedQuery_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeComputeConfiguration(s, schemas.ProtectedQuery_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.ProtectedQuery_createTime, *v.CreateTime)
 	}
@@ -13778,7 +14070,9 @@ func (v *ProtectedQueryDistributeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectedQueryDistributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedQueryMemberOutputList(s, schemas.ProtectedQueryDistributeOutput_memberList, v.MemberList)
+	if v.MemberList != nil {
+		serializeProtectedQueryMemberOutputList(s, schemas.ProtectedQueryDistributeOutput_memberList, v.MemberList)
+	}
 	if v.S3 != nil {
 		s.WriteStruct(schemas.ProtectedQueryDistributeOutput_s3)
 		v.S3.SerializeMembers(s)
@@ -13827,7 +14121,9 @@ func (v *ProtectedQueryDistributeOutputConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *ProtectedQueryDistributeOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedQueryDistributeOutputConfigurationLocations(s, schemas.ProtectedQueryDistributeOutputConfiguration_locations, v.Locations)
+	if v.Locations != nil {
+		serializeProtectedQueryDistributeOutputConfigurationLocations(s, schemas.ProtectedQueryDistributeOutputConfiguration_locations, v.Locations)
+	}
 }
 func (v *ProtectedQueryDistributeOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedQueryDistributeOutputConfiguration, func(s *smithy.Schema) error {
@@ -14129,7 +14425,9 @@ func (v *ProtectedQueryResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectedQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedQueryOutput(s, schemas.ProtectedQueryResult_output, v.Output)
+	if v.Output != nil {
+		serializeProtectedQueryOutput(s, schemas.ProtectedQueryResult_output, v.Output)
+	}
 }
 func (v *ProtectedQueryResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedQueryResult, func(s *smithy.Schema) error {
@@ -14159,7 +14457,9 @@ func (v *ProtectedQueryResultConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ProtectedQueryResultConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedQueryOutputConfiguration(s, schemas.ProtectedQueryResultConfiguration_outputConfiguration, v.OutputConfiguration)
+	if v.OutputConfiguration != nil {
+		serializeProtectedQueryOutputConfiguration(s, schemas.ProtectedQueryResultConfiguration_outputConfiguration, v.OutputConfiguration)
+	}
 }
 func (v *ProtectedQueryResultConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectedQueryResultConfiguration, func(s *smithy.Schema) error {
@@ -14332,7 +14632,9 @@ func (v *ProtectedQuerySQLParameters) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AnalysisTemplateArn != nil {
 		s.WriteString(schemas.ProtectedQuerySQLParameters_analysisTemplateArn, *v.AnalysisTemplateArn)
 	}
-	serializeParameterMap(s, schemas.ProtectedQuerySQLParameters_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMap(s, schemas.ProtectedQuerySQLParameters_parameters, v.Parameters)
+	}
 	if v.QueryString != nil {
 		s.WriteString(schemas.ProtectedQuerySQLParameters_queryString, *v.QueryString)
 	}
@@ -14466,7 +14768,9 @@ func (v *ProtectedQuerySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryComputePayerAccountId != nil {
 		s.WriteString(schemas.ProtectedQuerySummary_queryComputePayerAccountId, *v.QueryComputePayerAccountId)
 	}
-	serializeReceiverConfigurationsList(s, schemas.ProtectedQuerySummary_receiverConfigurations, v.ReceiverConfigurations)
+	if v.ReceiverConfigurations != nil {
+		serializeReceiverConfigurationsList(s, schemas.ProtectedQuerySummary_receiverConfigurations, v.ReceiverConfigurations)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ProtectedQuerySummary_status, string(v.Status))
 	}
@@ -14591,7 +14895,9 @@ func (v *QueryConstraintRequireOverlap) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryConstraintRequireOverlap) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisRuleColumnList(s, schemas.QueryConstraintRequireOverlap_columns, v.Columns)
+	if v.Columns != nil {
+		serializeAnalysisRuleColumnList(s, schemas.QueryConstraintRequireOverlap_columns, v.Columns)
+	}
 }
 func (v *QueryConstraintRequireOverlap) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryConstraintRequireOverlap, func(s *smithy.Schema) error {
@@ -14629,7 +14935,9 @@ func (v *ReceiverConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalysisType != "" {
 		s.WriteString(schemas.ReceiverConfiguration_analysisType, string(v.AnalysisType))
 	}
-	serializeConfigurationDetails(s, schemas.ReceiverConfiguration_configurationDetails, v.ConfigurationDetails)
+	if v.ConfigurationDetails != nil {
+		serializeConfigurationDetails(s, schemas.ReceiverConfiguration_configurationDetails, v.ConfigurationDetails)
+	}
 }
 func (v *ReceiverConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReceiverConfiguration, func(s *smithy.Schema) error {
@@ -14790,14 +15098,18 @@ func (v *Schema) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalysisMethod != "" {
 		s.WriteString(schemas.Schema_analysisMethod, string(v.AnalysisMethod))
 	}
-	serializeAnalysisRuleTypeList(s, schemas.Schema_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeAnalysisRuleTypeList(s, schemas.Schema_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.CollaborationArn != nil {
 		s.WriteString(schemas.Schema_collaborationArn, *v.CollaborationArn)
 	}
 	if v.CollaborationId != nil {
 		s.WriteString(schemas.Schema_collaborationId, *v.CollaborationId)
 	}
-	serializeColumnList(s, schemas.Schema_columns, v.Columns)
+	if v.Columns != nil {
+		serializeColumnList(s, schemas.Schema_columns, v.Columns)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.Schema_createTime, *v.CreateTime)
 	}
@@ -14810,13 +15122,21 @@ func (v *Schema) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Schema_name, *v.Name)
 	}
-	serializeColumnList(s, schemas.Schema_partitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeColumnList(s, schemas.Schema_partitionKeys, v.PartitionKeys)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.Schema_resourceArn, *v.ResourceArn)
 	}
-	serializeSchemaStatusDetailList(s, schemas.Schema_schemaStatusDetails, v.SchemaStatusDetails)
-	serializeSchemaTypeProperties(s, schemas.Schema_schemaTypeProperties, v.SchemaTypeProperties)
-	serializeSelectedAnalysisMethods(s, schemas.Schema_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	if v.SchemaStatusDetails != nil {
+		serializeSchemaStatusDetailList(s, schemas.Schema_schemaStatusDetails, v.SchemaStatusDetails)
+	}
+	if v.SchemaTypeProperties != nil {
+		serializeSchemaTypeProperties(s, schemas.Schema_schemaTypeProperties, v.SchemaTypeProperties)
+	}
+	if v.SelectedAnalysisMethods != nil {
+		serializeSelectedAnalysisMethods(s, schemas.Schema_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Schema_type, string(v.Type))
 	}
@@ -14976,8 +15296,12 @@ func (v *SchemaStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalysisType != "" {
 		s.WriteString(schemas.SchemaStatusDetail_analysisType, string(v.AnalysisType))
 	}
-	serializeSchemaConfigurationList(s, schemas.SchemaStatusDetail_configurations, v.Configurations)
-	serializeSchemaStatusReasonList(s, schemas.SchemaStatusDetail_reasons, v.Reasons)
+	if v.Configurations != nil {
+		serializeSchemaConfigurationList(s, schemas.SchemaStatusDetail_configurations, v.Configurations)
+	}
+	if v.Reasons != nil {
+		serializeSchemaStatusReasonList(s, schemas.SchemaStatusDetail_reasons, v.Reasons)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.SchemaStatusDetail_status, string(v.Status))
 	}
@@ -15135,7 +15459,9 @@ func (v *SchemaSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalysisMethod != "" {
 		s.WriteString(schemas.SchemaSummary_analysisMethod, string(v.AnalysisMethod))
 	}
-	serializeAnalysisRuleTypeList(s, schemas.SchemaSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	if v.AnalysisRuleTypes != nil {
+		serializeAnalysisRuleTypeList(s, schemas.SchemaSummary_analysisRuleTypes, v.AnalysisRuleTypes)
+	}
 	if v.CollaborationArn != nil {
 		s.WriteString(schemas.SchemaSummary_collaborationArn, *v.CollaborationArn)
 	}
@@ -15154,7 +15480,9 @@ func (v *SchemaSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.SchemaSummary_resourceArn, *v.ResourceArn)
 	}
-	serializeSelectedAnalysisMethods(s, schemas.SchemaSummary_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	if v.SelectedAnalysisMethods != nil {
+		serializeSelectedAnalysisMethods(s, schemas.SchemaSummary_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.SchemaSummary_type, string(v.Type))
 	}
@@ -15329,7 +15657,9 @@ func (v *SnowflakeTableReference) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.SnowflakeTableReference_tableName, *v.TableName)
 	}
-	serializeSnowflakeTableSchema(s, schemas.SnowflakeTableReference_tableSchema, v.TableSchema)
+	if v.TableSchema != nil {
+		serializeSnowflakeTableSchema(s, schemas.SnowflakeTableReference_tableSchema, v.TableSchema)
+	}
 }
 func (v *SnowflakeTableReference) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SnowflakeTableReference, func(s *smithy.Schema) error {
@@ -15774,7 +16104,9 @@ func (v *WorkerComputeConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Number != nil {
 		s.WriteInt32(schemas.WorkerComputeConfiguration_number, *v.Number)
 	}
-	serializeWorkerComputeConfigurationProperties(s, schemas.WorkerComputeConfiguration_properties, v.Properties)
+	if v.Properties != nil {
+		serializeWorkerComputeConfigurationProperties(s, schemas.WorkerComputeConfiguration_properties, v.Properties)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.WorkerComputeConfiguration_type, string(v.Type))
 	}

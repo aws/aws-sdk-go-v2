@@ -156,7 +156,9 @@ func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomeDirectory != nil {
 		s.WriteString(schemas.UpdateUserRequest_HomeDirectory, *v.HomeDirectory)
 	}
-	serializeHomeDirectoryMappings(s, schemas.UpdateUserRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	if v.HomeDirectoryMappings != nil {
+		serializeHomeDirectoryMappings(s, schemas.UpdateUserRequest_HomeDirectoryMappings, v.HomeDirectoryMappings)
+	}
 	if v.HomeDirectoryType != "" {
 		s.WriteString(schemas.UpdateUserRequest_HomeDirectoryType, string(v.HomeDirectoryType))
 	}

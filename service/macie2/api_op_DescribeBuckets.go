@@ -54,7 +54,9 @@ func (v *DescribeBucketsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBucketsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBucketCriteria(s, schemas.DescribeBucketsRequest_criteria, v.Criteria)
+	if v.Criteria != nil {
+		serializeBucketCriteria(s, schemas.DescribeBucketsRequest_criteria, v.Criteria)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeBucketsRequest_maxResults, *v.MaxResults)
 	}
@@ -91,7 +93,9 @@ func (v *DescribeBucketsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBucketMetadata(s, schemas.DescribeBucketsResponse_buckets, v.Buckets)
+	if v.Buckets != nil {
+		serialize__listOfBucketMetadata(s, schemas.DescribeBucketsResponse_buckets, v.Buckets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeBucketsResponse_nextToken, *v.NextToken)
 	}

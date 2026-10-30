@@ -127,8 +127,12 @@ func (v *GetApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ApiKey_name, *v.Name)
 	}
-	serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
-	serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	if v.StageKeys != nil {
+		serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
+	}
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.ApiKey_value, *v.Value)
 	}

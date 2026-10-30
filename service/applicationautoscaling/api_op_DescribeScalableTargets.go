@@ -223,7 +223,9 @@ func (v *DescribeScalableTargetsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalableTargetsRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceIdsMaxLen1600(s, schemas.DescribeScalableTargetsRequest_ResourceIds, v.ResourceIds)
+	if v.ResourceIds != nil {
+		serializeResourceIdsMaxLen1600(s, schemas.DescribeScalableTargetsRequest_ResourceIds, v.ResourceIds)
+	}
 	if v.ScalableDimension != "" {
 		s.WriteString(schemas.DescribeScalableTargetsRequest_ScalableDimension, string(v.ScalableDimension))
 	}
@@ -257,7 +259,9 @@ func (v *DescribeScalableTargetsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeScalableTargetsResponse_NextToken, *v.NextToken)
 	}
-	serializeScalableTargets(s, schemas.DescribeScalableTargetsResponse_ScalableTargets, v.ScalableTargets)
+	if v.ScalableTargets != nil {
+		serializeScalableTargets(s, schemas.DescribeScalableTargetsResponse_ScalableTargets, v.ScalableTargets)
+	}
 }
 func (v *DescribeScalableTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScalableTargetsResponse, func(s *smithy.Schema) error {

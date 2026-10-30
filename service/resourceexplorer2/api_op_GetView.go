@@ -81,7 +81,9 @@ func (v *GetViewOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.GetViewOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetViewOutput_Tags, v.Tags)
+	}
 	if v.View != nil {
 		s.WriteStruct(schemas.GetViewOutput_View)
 		v.View.SerializeMembers(s)

@@ -96,7 +96,9 @@ func (v *ListControlInsightsByControlDomainOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListControlInsightsByControlDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlInsightsMetadata(s, schemas.ListControlInsightsByControlDomainResponse_controlInsightsMetadata, v.ControlInsightsMetadata)
+	if v.ControlInsightsMetadata != nil {
+		serializeControlInsightsMetadata(s, schemas.ListControlInsightsByControlDomainResponse_controlInsightsMetadata, v.ControlInsightsMetadata)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListControlInsightsByControlDomainResponse_nextToken, *v.NextToken)
 	}

@@ -659,7 +659,9 @@ func (v *ResourceShare) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.ResourceShare_statusMessage, *v.StatusMessage)
 	}
-	serializeTagList(s, schemas.ResourceShare_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceShare_tags, v.Tags)
+	}
 }
 func (v *ResourceShare) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceShare, func(s *smithy.Schema) error {
@@ -933,7 +935,9 @@ func (v *ResourceShareInvitation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceShareArn != nil {
 		s.WriteString(schemas.ResourceShareInvitation_resourceShareArn, *v.ResourceShareArn)
 	}
-	serializeResourceShareAssociationList(s, schemas.ResourceShareInvitation_resourceShareAssociations, v.ResourceShareAssociations)
+	if v.ResourceShareAssociations != nil {
+		serializeResourceShareAssociationList(s, schemas.ResourceShareInvitation_resourceShareAssociations, v.ResourceShareAssociations)
+	}
 	if v.ResourceShareInvitationArn != nil {
 		s.WriteString(schemas.ResourceShareInvitation_resourceShareInvitationArn, *v.ResourceShareInvitationArn)
 	}
@@ -1114,7 +1118,9 @@ func (v *ResourceSharePermissionDetail) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.ResourceSharePermissionDetail_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.ResourceSharePermissionDetail_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceSharePermissionDetail_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ResourceSharePermissionDetail_version, *v.Version)
 	}
@@ -1289,7 +1295,9 @@ func (v *ResourceSharePermissionSummary) SerializeMembers(s smithy.ShapeSerializ
 	if v.Status != nil {
 		s.WriteString(schemas.ResourceSharePermissionSummary_status, *v.Status)
 	}
-	serializeTagList(s, schemas.ResourceSharePermissionSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ResourceSharePermissionSummary_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.ResourceSharePermissionSummary_version, *v.Version)
 	}
@@ -1483,7 +1491,9 @@ func (v *TagFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.TagFilter_tagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.TagFilter_tagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.TagFilter_tagValues, v.TagValues)
+	}
 }
 func (v *TagFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagFilter, func(s *smithy.Schema) error {

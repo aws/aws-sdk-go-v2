@@ -86,7 +86,9 @@ func (v *ListAttachPointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAttachPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachPointDescriptorList(s, schemas.ListAttachPointsResponse_attachPoints, v.AttachPoints)
+	if v.AttachPoints != nil {
+		serializeAttachPointDescriptorList(s, schemas.ListAttachPointsResponse_attachPoints, v.AttachPoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachPointsResponse_nextToken, *v.NextToken)
 	}

@@ -263,13 +263,17 @@ func (v *GetCurrentMetricDataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCurrentMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCurrentMetrics(s, schemas.GetCurrentMetricDataRequest_CurrentMetrics, v.CurrentMetrics)
+	if v.CurrentMetrics != nil {
+		serializeCurrentMetrics(s, schemas.GetCurrentMetricDataRequest_CurrentMetrics, v.CurrentMetrics)
+	}
 	if v.Filters != nil {
 		s.WriteStruct(schemas.GetCurrentMetricDataRequest_Filters)
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroupings(s, schemas.GetCurrentMetricDataRequest_Groupings, v.Groupings)
+	if v.Groupings != nil {
+		serializeGroupings(s, schemas.GetCurrentMetricDataRequest_Groupings, v.Groupings)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GetCurrentMetricDataRequest_InstanceId, *v.InstanceId)
 	}
@@ -279,7 +283,9 @@ func (v *GetCurrentMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCurrentMetricDataRequest_NextToken, *v.NextToken)
 	}
-	serializeCurrentMetricSortCriteriaMaxOne(s, schemas.GetCurrentMetricDataRequest_SortCriteria, v.SortCriteria)
+	if v.SortCriteria != nil {
+		serializeCurrentMetricSortCriteriaMaxOne(s, schemas.GetCurrentMetricDataRequest_SortCriteria, v.SortCriteria)
+	}
 }
 
 type GetCurrentMetricDataOutput struct {
@@ -319,7 +325,9 @@ func (v *GetCurrentMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DataSnapshotTime != nil {
 		s.WriteTime(schemas.GetCurrentMetricDataResponse_DataSnapshotTime, *v.DataSnapshotTime)
 	}
-	serializeCurrentMetricResults(s, schemas.GetCurrentMetricDataResponse_MetricResults, v.MetricResults)
+	if v.MetricResults != nil {
+		serializeCurrentMetricResults(s, schemas.GetCurrentMetricDataResponse_MetricResults, v.MetricResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCurrentMetricDataResponse_NextToken, *v.NextToken)
 	}

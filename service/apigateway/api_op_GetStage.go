@@ -175,15 +175,21 @@ func (v *GetStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.Stage_lastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeMapOfMethodSettings(s, schemas.Stage_methodSettings, v.MethodSettings)
+	if v.MethodSettings != nil {
+		serializeMapOfMethodSettings(s, schemas.Stage_methodSettings, v.MethodSettings)
+	}
 	if v.StageName != nil {
 		s.WriteString(schemas.Stage_stageName, *v.StageName)
 	}
-	serializeMapOfStringToString(s, schemas.Stage_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.Stage_tags, v.Tags)
+	}
 	if v.TracingEnabled != false {
 		s.WriteBool(schemas.Stage_tracingEnabled, v.TracingEnabled)
 	}
-	serializeMapOfStringToString(s, schemas.Stage_variables, v.Variables)
+	if v.Variables != nil {
+		serializeMapOfStringToString(s, schemas.Stage_variables, v.Variables)
+	}
 	if v.WebAclArn != nil {
 		s.WriteString(schemas.Stage_webAclArn, *v.WebAclArn)
 	}

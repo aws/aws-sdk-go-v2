@@ -94,7 +94,9 @@ func (v *GetRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordList(s, schemas.GetRecordsOutput_changeRecords, v.ChangeRecords)
+	if v.ChangeRecords != nil {
+		serializeRecordList(s, schemas.GetRecordsOutput_changeRecords, v.ChangeRecords)
+	}
 	if v.IteratorDescription != nil {
 		s.WriteStruct(schemas.GetRecordsOutput_iteratorDescription)
 		v.IteratorDescription.SerializeMembers(s)

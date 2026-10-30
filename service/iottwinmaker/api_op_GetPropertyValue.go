@@ -101,7 +101,9 @@ func (v *GetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropertyGroupName != nil {
 		s.WriteString(schemas.GetPropertyValueRequest_propertyGroupName, *v.PropertyGroupName)
 	}
-	serializeSelectedPropertyList(s, schemas.GetPropertyValueRequest_selectedProperties, v.SelectedProperties)
+	if v.SelectedProperties != nil {
+		serializeSelectedPropertyList(s, schemas.GetPropertyValueRequest_selectedProperties, v.SelectedProperties)
+	}
 	if v.TabularConditions != nil {
 		s.WriteStruct(schemas.GetPropertyValueRequest_tabularConditions)
 		v.TabularConditions.SerializeMembers(s)
@@ -176,8 +178,12 @@ func (v *GetPropertyValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetPropertyValueResponse_nextToken, *v.NextToken)
 	}
-	serializePropertyLatestValueMap(s, schemas.GetPropertyValueResponse_propertyValues, v.PropertyValues)
-	serializeTabularPropertyValues(s, schemas.GetPropertyValueResponse_tabularPropertyValues, v.TabularPropertyValues)
+	if v.PropertyValues != nil {
+		serializePropertyLatestValueMap(s, schemas.GetPropertyValueResponse_propertyValues, v.PropertyValues)
+	}
+	if v.TabularPropertyValues != nil {
+		serializeTabularPropertyValues(s, schemas.GetPropertyValueResponse_tabularPropertyValues, v.TabularPropertyValues)
+	}
 }
 func (v *GetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPropertyValueResponse, func(s *smithy.Schema) error {

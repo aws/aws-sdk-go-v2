@@ -77,7 +77,9 @@ func (v *ListCustomDataIdentifiersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomDataIdentifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCustomDataIdentifierSummary(s, schemas.ListCustomDataIdentifiersResponse_items, v.Items)
+	if v.Items != nil {
+		serialize__listOfCustomDataIdentifierSummary(s, schemas.ListCustomDataIdentifiersResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomDataIdentifiersResponse_nextToken, *v.NextToken)
 	}

@@ -52,7 +52,9 @@ func (v *ImportSecurityRequirementsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportSecurityRequirementsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportSource(s, schemas.ImportSecurityRequirementsInput_input, v.Input)
+	if v.Input != nil {
+		serializeImportSource(s, schemas.ImportSecurityRequirementsInput_input, v.Input)
+	}
 	if v.PackId != nil {
 		s.WriteString(schemas.ImportSecurityRequirementsInput_packId, *v.PackId)
 	}

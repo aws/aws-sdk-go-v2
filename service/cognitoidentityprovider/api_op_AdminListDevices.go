@@ -124,7 +124,9 @@ func (v *AdminListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceListType(s, schemas.AdminListDevicesResponse_Devices, v.Devices)
+	if v.Devices != nil {
+		serializeDeviceListType(s, schemas.AdminListDevicesResponse_Devices, v.Devices)
+	}
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.AdminListDevicesResponse_PaginationToken, *v.PaginationToken)
 	}

@@ -101,7 +101,9 @@ func (v *ListCollaborationTrainedModelInferenceJobsOutput) Serialize(s smithy.Sh
 }
 
 func (v *ListCollaborationTrainedModelInferenceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationTrainedModelInferenceJobList(s, schemas.ListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs, v.CollaborationTrainedModelInferenceJobs)
+	if v.CollaborationTrainedModelInferenceJobs != nil {
+		serializeCollaborationTrainedModelInferenceJobList(s, schemas.ListCollaborationTrainedModelInferenceJobsResponse_collaborationTrainedModelInferenceJobs, v.CollaborationTrainedModelInferenceJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationTrainedModelInferenceJobsResponse_nextToken, *v.NextToken)
 	}

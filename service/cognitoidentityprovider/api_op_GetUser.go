@@ -105,12 +105,18 @@ func (v *GetUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMFAOptionListType(s, schemas.GetUserResponse_MFAOptions, v.MFAOptions)
+	if v.MFAOptions != nil {
+		serializeMFAOptionListType(s, schemas.GetUserResponse_MFAOptions, v.MFAOptions)
+	}
 	if v.PreferredMfaSetting != nil {
 		s.WriteString(schemas.GetUserResponse_PreferredMfaSetting, *v.PreferredMfaSetting)
 	}
-	serializeAttributeListType(s, schemas.GetUserResponse_UserAttributes, v.UserAttributes)
-	serializeUserMFASettingListType(s, schemas.GetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	if v.UserAttributes != nil {
+		serializeAttributeListType(s, schemas.GetUserResponse_UserAttributes, v.UserAttributes)
+	}
+	if v.UserMFASettingList != nil {
+		serializeUserMFASettingListType(s, schemas.GetUserResponse_UserMFASettingList, v.UserMFASettingList)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.GetUserResponse_Username, *v.Username)
 	}

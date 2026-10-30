@@ -97,7 +97,9 @@ func (v *ListEvaluationFormAIVersionsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListEvaluationFormAIVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationFormAIVersionSummaryList(s, schemas.ListEvaluationFormAIVersionsResponse_AIVersionSummaries, v.AIVersionSummaries)
+	if v.AIVersionSummaries != nil {
+		serializeEvaluationFormAIVersionSummaryList(s, schemas.ListEvaluationFormAIVersionsResponse_AIVersionSummaries, v.AIVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEvaluationFormAIVersionsResponse_NextToken, *v.NextToken)
 	}

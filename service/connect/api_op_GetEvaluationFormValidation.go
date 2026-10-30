@@ -125,7 +125,9 @@ func (v *GetEvaluationFormValidationOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetEvaluationFormValidationResponse_FailureReason, *v.FailureReason)
 	}
-	serializeEvaluationFormValidationFindingList(s, schemas.GetEvaluationFormValidationResponse_Findings, v.Findings)
+	if v.Findings != nil {
+		serializeEvaluationFormValidationFindingList(s, schemas.GetEvaluationFormValidationResponse_Findings, v.Findings)
+	}
 	if v.StartedTime != nil {
 		s.WriteTime(schemas.GetEvaluationFormValidationResponse_StartedTime, *v.StartedTime)
 	}

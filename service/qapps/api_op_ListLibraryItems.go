@@ -89,7 +89,9 @@ func (v *ListLibraryItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLibraryItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLibraryItemList(s, schemas.ListLibraryItemsOutput_libraryItems, v.LibraryItems)
+	if v.LibraryItems != nil {
+		serializeLibraryItemList(s, schemas.ListLibraryItemsOutput_libraryItems, v.LibraryItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLibraryItemsOutput_nextToken, *v.NextToken)
 	}

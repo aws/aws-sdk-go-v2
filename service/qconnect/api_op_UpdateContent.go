@@ -86,7 +86,9 @@ func (v *UpdateContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.UpdateContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeContentMetadata(s, schemas.UpdateContentRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.UpdateContentRequest_metadata, v.Metadata)
+	}
 	if v.OverrideLinkOutUri != nil {
 		s.WriteString(schemas.UpdateContentRequest_overrideLinkOutUri, *v.OverrideLinkOutUri)
 	}

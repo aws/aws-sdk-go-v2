@@ -116,8 +116,12 @@ func (v *DescribeLakeFormationIdentityCenterConfigurationOutput) SerializeMember
 	if v.ResourceShare != nil {
 		s.WriteString(schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ResourceShare, *v.ResourceShare)
 	}
-	serializeServiceIntegrationList(s, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ServiceIntegrations, v.ServiceIntegrations)
-	serializeDataLakePrincipalList(s, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ShareRecipients, v.ShareRecipients)
+	if v.ServiceIntegrations != nil {
+		serializeServiceIntegrationList(s, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ServiceIntegrations, v.ServiceIntegrations)
+	}
+	if v.ShareRecipients != nil {
+		serializeDataLakePrincipalList(s, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse_ShareRecipients, v.ShareRecipients)
+	}
 }
 func (v *DescribeLakeFormationIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeLakeFormationIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {

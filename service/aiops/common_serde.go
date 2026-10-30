@@ -8,9 +8,6 @@ import (
 )
 
 func serializeChatConfigurationArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeChatConfigurationArns(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeCrossAccountConfigurations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.CrossAccountConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeCrossAccountConfigurations(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeInvestigationGroups(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ListInvestigationGroupsModel) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +36,6 @@ func serializeInvestigationGroups(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeTagKeyBoundaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -56,9 +44,6 @@ func serializeTagKeyBoundaries(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -174,9 +159,6 @@ func deserializeTagKeys(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]strin
 }
 
 func serializeChatbotNotificationChannel(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -186,9 +168,6 @@ func serializeChatbotNotificationChannel(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

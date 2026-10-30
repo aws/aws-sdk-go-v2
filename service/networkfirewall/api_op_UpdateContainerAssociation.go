@@ -95,11 +95,15 @@ func (v *UpdateContainerAssociationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ContainerAssociationName != nil {
 		s.WriteString(schemas.UpdateContainerAssociationRequest_ContainerAssociationName, *v.ContainerAssociationName)
 	}
-	serializeContainerMonitoringConfigurations(s, schemas.UpdateContainerAssociationRequest_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	if v.ContainerMonitoringConfigurations != nil {
+		serializeContainerMonitoringConfigurations(s, schemas.UpdateContainerAssociationRequest_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateContainerAssociationRequest_Description, *v.Description)
 	}
-	serializeTagList(s, schemas.UpdateContainerAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UpdateContainerAssociationRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateContainerAssociationRequest_Type, string(v.Type))
 	}
@@ -167,14 +171,18 @@ func (v *UpdateContainerAssociationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.ContainerAssociationName != nil {
 		s.WriteString(schemas.UpdateContainerAssociationResponse_ContainerAssociationName, *v.ContainerAssociationName)
 	}
-	serializeContainerMonitoringConfigurations(s, schemas.UpdateContainerAssociationResponse_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	if v.ContainerMonitoringConfigurations != nil {
+		serializeContainerMonitoringConfigurations(s, schemas.UpdateContainerAssociationResponse_ContainerMonitoringConfigurations, v.ContainerMonitoringConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateContainerAssociationResponse_Description, *v.Description)
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateContainerAssociationResponse_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.UpdateContainerAssociationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UpdateContainerAssociationResponse_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateContainerAssociationResponse_Type, string(v.Type))
 	}

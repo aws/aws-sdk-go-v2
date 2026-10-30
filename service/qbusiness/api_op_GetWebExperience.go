@@ -147,7 +147,9 @@ func (v *GetWebExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.GetWebExperienceResponse_applicationId, *v.ApplicationId)
 	}
-	serializeWebExperienceAuthConfiguration(s, schemas.GetWebExperienceResponse_authenticationConfiguration, v.AuthenticationConfiguration)
+	if v.AuthenticationConfiguration != nil {
+		serializeWebExperienceAuthConfiguration(s, schemas.GetWebExperienceResponse_authenticationConfiguration, v.AuthenticationConfiguration)
+	}
 	if v.BrowserExtensionConfiguration != nil {
 		s.WriteStruct(schemas.GetWebExperienceResponse_browserExtensionConfiguration)
 		v.BrowserExtensionConfiguration.SerializeMembers(s)
@@ -169,8 +171,12 @@ func (v *GetWebExperienceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityProviderConfiguration(s, schemas.GetWebExperienceResponse_identityProviderConfiguration, v.IdentityProviderConfiguration)
-	serializeWebExperienceOrigins(s, schemas.GetWebExperienceResponse_origins, v.Origins)
+	if v.IdentityProviderConfiguration != nil {
+		serializeIdentityProviderConfiguration(s, schemas.GetWebExperienceResponse_identityProviderConfiguration, v.IdentityProviderConfiguration)
+	}
+	if v.Origins != nil {
+		serializeWebExperienceOrigins(s, schemas.GetWebExperienceResponse_origins, v.Origins)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetWebExperienceResponse_roleArn, *v.RoleArn)
 	}

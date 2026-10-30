@@ -104,7 +104,9 @@ func (v *UpdateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointName != nil {
 		s.WriteString(schemas.UpdateEndpointInput_EndpointName, *v.EndpointName)
 	}
-	serializeVariantPropertyList(s, schemas.UpdateEndpointInput_ExcludeRetainedVariantProperties, v.ExcludeRetainedVariantProperties)
+	if v.ExcludeRetainedVariantProperties != nil {
+		serializeVariantPropertyList(s, schemas.UpdateEndpointInput_ExcludeRetainedVariantProperties, v.ExcludeRetainedVariantProperties)
+	}
 	if v.RetainAllVariantProperties != nil {
 		s.WriteBool(schemas.UpdateEndpointInput_RetainAllVariantProperties, *v.RetainAllVariantProperties)
 	}

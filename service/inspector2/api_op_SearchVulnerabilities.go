@@ -87,7 +87,9 @@ func (v *SearchVulnerabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchVulnerabilitiesResponse_nextToken, *v.NextToken)
 	}
-	serializeVulnerabilities(s, schemas.SearchVulnerabilitiesResponse_vulnerabilities, v.Vulnerabilities)
+	if v.Vulnerabilities != nil {
+		serializeVulnerabilities(s, schemas.SearchVulnerabilitiesResponse_vulnerabilities, v.Vulnerabilities)
+	}
 }
 func (v *SearchVulnerabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchVulnerabilitiesResponse, func(s *smithy.Schema) error {

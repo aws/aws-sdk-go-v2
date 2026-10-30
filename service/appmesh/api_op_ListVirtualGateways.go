@@ -128,7 +128,9 @@ func (v *ListVirtualGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualGatewaysOutput_nextToken, *v.NextToken)
 	}
-	serializeVirtualGatewayList(s, schemas.ListVirtualGatewaysOutput_virtualGateways, v.VirtualGateways)
+	if v.VirtualGateways != nil {
+		serializeVirtualGatewayList(s, schemas.ListVirtualGatewaysOutput_virtualGateways, v.VirtualGateways)
+	}
 }
 func (v *ListVirtualGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVirtualGatewaysOutput, func(s *smithy.Schema) error {

@@ -85,7 +85,9 @@ func (v *UpdateMissionProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactPrePassDurationSeconds != nil {
 		s.WriteInt32(schemas.UpdateMissionProfileRequest_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
 	}
-	serializeDataflowEdgeList(s, schemas.UpdateMissionProfileRequest_dataflowEdges, v.DataflowEdges)
+	if v.DataflowEdges != nil {
+		serializeDataflowEdgeList(s, schemas.UpdateMissionProfileRequest_dataflowEdges, v.DataflowEdges)
+	}
 	if v.MinimumViableContactDurationSeconds != nil {
 		s.WriteInt32(schemas.UpdateMissionProfileRequest_minimumViableContactDurationSeconds, *v.MinimumViableContactDurationSeconds)
 	}
@@ -95,7 +97,9 @@ func (v *UpdateMissionProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateMissionProfileRequest_name, *v.Name)
 	}
-	serializeKmsKey(s, schemas.UpdateMissionProfileRequest_streamsKmsKey, v.StreamsKmsKey)
+	if v.StreamsKmsKey != nil {
+		serializeKmsKey(s, schemas.UpdateMissionProfileRequest_streamsKmsKey, v.StreamsKmsKey)
+	}
 	if v.StreamsKmsRole != nil {
 		s.WriteString(schemas.UpdateMissionProfileRequest_streamsKmsRole, *v.StreamsKmsRole)
 	}

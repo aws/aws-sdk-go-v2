@@ -51,7 +51,9 @@ func (v *DescribeImportTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeImportTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescribeImportTasksFilterList(s, schemas.DescribeImportTasksRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeDescribeImportTasksFilterList(s, schemas.DescribeImportTasksRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeImportTasksRequest_maxResults, *v.MaxResults)
 	}
@@ -85,7 +87,9 @@ func (v *DescribeImportTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeImportTasksResponse_nextToken, *v.NextToken)
 	}
-	serializeImportTaskList(s, schemas.DescribeImportTasksResponse_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeImportTaskList(s, schemas.DescribeImportTasksResponse_tasks, v.Tasks)
+	}
 }
 func (v *DescribeImportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeImportTasksResponse, func(s *smithy.Schema) error {

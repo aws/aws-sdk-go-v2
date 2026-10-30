@@ -67,7 +67,9 @@ func (v *ListResourceInventoryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResourceInventoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInventoryFilterList(s, schemas.ListResourceInventoryRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeInventoryFilterList(s, schemas.ListResourceInventoryRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListResourceInventoryRequest_MaxResults, *v.MaxResults)
 	}
@@ -100,7 +102,9 @@ func (v *ListResourceInventoryOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceInventoryResponse_NextToken, *v.NextToken)
 	}
-	serializeResourceInventoryList(s, schemas.ListResourceInventoryResponse_ResourceInventoryList, v.ResourceInventoryList)
+	if v.ResourceInventoryList != nil {
+		serializeResourceInventoryList(s, schemas.ListResourceInventoryResponse_ResourceInventoryList, v.ResourceInventoryList)
+	}
 }
 func (v *ListResourceInventoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceInventoryResponse, func(s *smithy.Schema) error {

@@ -113,7 +113,9 @@ func (v *ListServiceLevelObjectivesInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.IncludeLinkedAccounts != false {
 		s.WriteBool(schemas.ListServiceLevelObjectivesInput_IncludeLinkedAccounts, v.IncludeLinkedAccounts)
 	}
-	serializeAttributes(s, schemas.ListServiceLevelObjectivesInput_KeyAttributes, v.KeyAttributes)
+	if v.KeyAttributes != nil {
+		serializeAttributes(s, schemas.ListServiceLevelObjectivesInput_KeyAttributes, v.KeyAttributes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListServiceLevelObjectivesInput_MaxResults, *v.MaxResults)
 	}
@@ -122,7 +124,9 @@ func (v *ListServiceLevelObjectivesInput) SerializeMembers(s smithy.ShapeSeriali
 		v.MetricSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricSourceTypes(s, schemas.ListServiceLevelObjectivesInput_MetricSourceTypes, v.MetricSourceTypes)
+	if v.MetricSourceTypes != nil {
+		serializeMetricSourceTypes(s, schemas.ListServiceLevelObjectivesInput_MetricSourceTypes, v.MetricSourceTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceLevelObjectivesInput_NextToken, *v.NextToken)
 	}
@@ -159,7 +163,9 @@ func (v *ListServiceLevelObjectivesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceLevelObjectivesOutput_NextToken, *v.NextToken)
 	}
-	serializeServiceLevelObjectiveSummaries(s, schemas.ListServiceLevelObjectivesOutput_SloSummaries, v.SloSummaries)
+	if v.SloSummaries != nil {
+		serializeServiceLevelObjectiveSummaries(s, schemas.ListServiceLevelObjectivesOutput_SloSummaries, v.SloSummaries)
+	}
 }
 func (v *ListServiceLevelObjectivesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceLevelObjectivesOutput, func(s *smithy.Schema) error {

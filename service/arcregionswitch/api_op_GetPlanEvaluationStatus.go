@@ -129,7 +129,9 @@ func (v *GetPlanEvaluationStatusOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Region != nil {
 		s.WriteString(schemas.GetPlanEvaluationStatusResponse_region, *v.Region)
 	}
-	serializePlanWarnings(s, schemas.GetPlanEvaluationStatusResponse_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializePlanWarnings(s, schemas.GetPlanEvaluationStatusResponse_warnings, v.Warnings)
+	}
 }
 func (v *GetPlanEvaluationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPlanEvaluationStatusResponse, func(s *smithy.Schema) error {

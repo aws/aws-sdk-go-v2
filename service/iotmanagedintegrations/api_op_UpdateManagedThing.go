@@ -98,7 +98,9 @@ func (v *UpdateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CapabilityReport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCapabilitySchemas(s, schemas.UpdateManagedThingRequest_CapabilitySchemas, v.CapabilitySchemas)
+	if v.CapabilitySchemas != nil {
+		serializeCapabilitySchemas(s, schemas.UpdateManagedThingRequest_CapabilitySchemas, v.CapabilitySchemas)
+	}
 	if v.Classification != nil {
 		s.WriteString(schemas.UpdateManagedThingRequest_Classification, *v.Classification)
 	}
@@ -111,7 +113,9 @@ func (v *UpdateManagedThingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateManagedThingRequest_Identifier, *v.Identifier)
 	}
-	serializeMetaData(s, schemas.UpdateManagedThingRequest_MetaData, v.MetaData)
+	if v.MetaData != nil {
+		serializeMetaData(s, schemas.UpdateManagedThingRequest_MetaData, v.MetaData)
+	}
 	if v.Model != nil {
 		s.WriteString(schemas.UpdateManagedThingRequest_Model, *v.Model)
 	}

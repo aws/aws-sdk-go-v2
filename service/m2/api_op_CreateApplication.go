@@ -79,7 +79,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateApplicationRequest_clientToken, *v.ClientToken)
 	}
-	serializeDefinition(s, schemas.CreateApplicationRequest_definition, v.Definition)
+	if v.Definition != nil {
+		serializeDefinition(s, schemas.CreateApplicationRequest_definition, v.Definition)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateApplicationRequest_description, *v.Description)
 	}
@@ -95,7 +97,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateApplicationRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	}
 }
 func (v *CreateApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateApplicationRequest, func(s *smithy.Schema) error {

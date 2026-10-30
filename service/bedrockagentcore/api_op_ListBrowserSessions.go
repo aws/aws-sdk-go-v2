@@ -114,7 +114,9 @@ func (v *ListBrowserSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBrowserSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrowserSessionSummaries(s, schemas.ListBrowserSessionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBrowserSessionSummaries(s, schemas.ListBrowserSessionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrowserSessionsResponse_nextToken, *v.NextToken)
 	}

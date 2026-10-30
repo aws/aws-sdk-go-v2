@@ -90,7 +90,9 @@ func (v *ImportTerminologyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ImportTerminologyRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.ImportTerminologyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportTerminologyRequest_Tags, v.Tags)
+	}
 	if v.TerminologyData != nil {
 		s.WriteStruct(schemas.ImportTerminologyRequest_TerminologyData)
 		v.TerminologyData.SerializeMembers(s)

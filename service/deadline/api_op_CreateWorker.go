@@ -85,7 +85,9 @@ func (v *CreateWorkerInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.HostProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateWorkerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWorkerRequest_tags, v.Tags)
+	}
 }
 
 type CreateWorkerOutput struct {

@@ -64,7 +64,9 @@ func (v *GetCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetCaseRequest_domainId, *v.DomainId)
 	}
-	serializeFieldIdentifierList(s, schemas.GetCaseRequest_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldIdentifierList(s, schemas.GetCaseRequest_fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCaseRequest_nextToken, *v.NextToken)
 	}
@@ -121,11 +123,15 @@ func (v *GetCaseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldValueList(s, schemas.GetCaseResponse_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.GetCaseResponse_fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCaseResponse_nextToken, *v.NextToken)
 	}
-	serializeTags(s, schemas.GetCaseResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetCaseResponse_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.GetCaseResponse_templateId, *v.TemplateId)
 	}

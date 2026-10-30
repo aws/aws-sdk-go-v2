@@ -67,7 +67,9 @@ func (v *StartImagePipelineExecutionInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ImagePipelineArn != nil {
 		s.WriteString(schemas.StartImagePipelineExecutionRequest_imagePipelineArn, *v.ImagePipelineArn)
 	}
-	serializeTagMap(s, schemas.StartImagePipelineExecutionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartImagePipelineExecutionRequest_tags, v.Tags)
+	}
 }
 
 type StartImagePipelineExecutionOutput struct {

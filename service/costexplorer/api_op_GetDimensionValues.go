@@ -374,7 +374,9 @@ func (v *GetDimensionValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SearchString != nil {
 		s.WriteString(schemas.GetDimensionValuesRequest_SearchString, *v.SearchString)
 	}
-	serializeSortDefinitions(s, schemas.GetDimensionValuesRequest_SortBy, v.SortBy)
+	if v.SortBy != nil {
+		serializeSortDefinitions(s, schemas.GetDimensionValuesRequest_SortBy, v.SortBy)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.GetDimensionValuesRequest_TimePeriod)
 		v.TimePeriod.SerializeMembers(s)
@@ -510,7 +512,9 @@ func (v *GetDimensionValuesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDimensionValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionValuesWithAttributesList(s, schemas.GetDimensionValuesResponse_DimensionValues, v.DimensionValues)
+	if v.DimensionValues != nil {
+		serializeDimensionValuesWithAttributesList(s, schemas.GetDimensionValuesResponse_DimensionValues, v.DimensionValues)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetDimensionValuesResponse_NextPageToken, *v.NextPageToken)
 	}

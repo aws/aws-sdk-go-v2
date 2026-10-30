@@ -101,7 +101,9 @@ func (v *GetMLModelTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Id != nil {
 		s.WriteString(schemas.GetMLModelTransformJobOutput_id, *v.Id)
 	}
-	serializeModels(s, schemas.GetMLModelTransformJobOutput_models, v.Models)
+	if v.Models != nil {
+		serializeModels(s, schemas.GetMLModelTransformJobOutput_models, v.Models)
+	}
 	if v.RemoteModelTransformJob != nil {
 		s.WriteStruct(schemas.GetMLModelTransformJobOutput_remoteModelTransformJob)
 		v.RemoteModelTransformJob.SerializeMembers(s)

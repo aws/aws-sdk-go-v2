@@ -57,7 +57,9 @@ func (v *AddLFTagsToResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.AddLFTagsToResourceRequest_CatalogId, *v.CatalogId)
 	}
-	serializeLFTagsList(s, schemas.AddLFTagsToResourceRequest_LFTags, v.LFTags)
+	if v.LFTags != nil {
+		serializeLFTagsList(s, schemas.AddLFTagsToResourceRequest_LFTags, v.LFTags)
+	}
 	if v.Resource != nil {
 		s.WriteStruct(schemas.AddLFTagsToResourceRequest_Resource)
 		v.Resource.SerializeMembers(s)
@@ -83,7 +85,9 @@ func (v *AddLFTagsToResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddLFTagsToResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLFTagErrors(s, schemas.AddLFTagsToResourceResponse_Failures, v.Failures)
+	if v.Failures != nil {
+		serializeLFTagErrors(s, schemas.AddLFTagsToResourceResponse_Failures, v.Failures)
+	}
 }
 func (v *AddLFTagsToResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddLFTagsToResourceResponse, func(s *smithy.Schema) error {

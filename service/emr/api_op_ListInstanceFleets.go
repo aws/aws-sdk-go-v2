@@ -79,7 +79,9 @@ func (v *ListInstanceFleetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstanceFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceFleetList(s, schemas.ListInstanceFleetsOutput_InstanceFleets, v.InstanceFleets)
+	if v.InstanceFleets != nil {
+		serializeInstanceFleetList(s, schemas.ListInstanceFleetsOutput_InstanceFleets, v.InstanceFleets)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListInstanceFleetsOutput_Marker, *v.Marker)
 	}

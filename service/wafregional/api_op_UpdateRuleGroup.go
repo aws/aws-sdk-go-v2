@@ -100,7 +100,9 @@ func (v *UpdateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleGroupId != nil {
 		s.WriteString(schemas.UpdateRuleGroupRequest_RuleGroupId, *v.RuleGroupId)
 	}
-	serializeRuleGroupUpdates(s, schemas.UpdateRuleGroupRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeRuleGroupUpdates(s, schemas.UpdateRuleGroupRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateRuleGroupOutput struct {

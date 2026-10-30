@@ -66,7 +66,9 @@ func (v *ListFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionId != nil {
 		s.WriteString(schemas.ListFacesRequest_CollectionId, *v.CollectionId)
 	}
-	serializeFaceIdList(s, schemas.ListFacesRequest_FaceIds, v.FaceIds)
+	if v.FaceIds != nil {
+		serializeFaceIdList(s, schemas.ListFacesRequest_FaceIds, v.FaceIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListFacesRequest_MaxResults, *v.MaxResults)
 	}
@@ -107,7 +109,9 @@ func (v *ListFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FaceModelVersion != nil {
 		s.WriteString(schemas.ListFacesResponse_FaceModelVersion, *v.FaceModelVersion)
 	}
-	serializeFaceList(s, schemas.ListFacesResponse_Faces, v.Faces)
+	if v.Faces != nil {
+		serializeFaceList(s, schemas.ListFacesResponse_Faces, v.Faces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFacesResponse_NextToken, *v.NextToken)
 	}

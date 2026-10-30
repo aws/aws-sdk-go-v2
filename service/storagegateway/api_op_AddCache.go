@@ -57,7 +57,9 @@ func (v *AddCacheInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDiskIds(s, schemas.AddCacheInput_DiskIds, v.DiskIds)
+	if v.DiskIds != nil {
+		serializeDiskIds(s, schemas.AddCacheInput_DiskIds, v.DiskIds)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.AddCacheInput_GatewayARN, *v.GatewayARN)
 	}

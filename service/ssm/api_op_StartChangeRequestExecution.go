@@ -141,15 +141,21 @@ func (v *StartChangeRequestExecutionInput) SerializeMembers(s smithy.ShapeSerial
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.StartChangeRequestExecutionRequest_DocumentVersion, *v.DocumentVersion)
 	}
-	serializeAutomationParameterMap(s, schemas.StartChangeRequestExecutionRequest_Parameters, v.Parameters)
-	serializeRunbooks(s, schemas.StartChangeRequestExecutionRequest_Runbooks, v.Runbooks)
+	if v.Parameters != nil {
+		serializeAutomationParameterMap(s, schemas.StartChangeRequestExecutionRequest_Parameters, v.Parameters)
+	}
+	if v.Runbooks != nil {
+		serializeRunbooks(s, schemas.StartChangeRequestExecutionRequest_Runbooks, v.Runbooks)
+	}
 	if v.ScheduledEndTime != nil {
 		s.WriteTime(schemas.StartChangeRequestExecutionRequest_ScheduledEndTime, *v.ScheduledEndTime)
 	}
 	if v.ScheduledTime != nil {
 		s.WriteTime(schemas.StartChangeRequestExecutionRequest_ScheduledTime, *v.ScheduledTime)
 	}
-	serializeTagList(s, schemas.StartChangeRequestExecutionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartChangeRequestExecutionRequest_Tags, v.Tags)
+	}
 }
 
 type StartChangeRequestExecutionOutput struct {

@@ -45,7 +45,9 @@ func (v *BatchGetRouterNetworkInterfaceInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchGetRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterNetworkInterfaceArnList(s, schemas.BatchGetRouterNetworkInterfaceRequest_Arns, v.Arns)
+	if v.Arns != nil {
+		serializeRouterNetworkInterfaceArnList(s, schemas.BatchGetRouterNetworkInterfaceRequest_Arns, v.Arns)
+	}
 }
 
 type BatchGetRouterNetworkInterfaceOutput struct {
@@ -74,8 +76,12 @@ func (v *BatchGetRouterNetworkInterfaceOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchGetRouterNetworkInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetRouterNetworkInterfaceErrorList(s, schemas.BatchGetRouterNetworkInterfaceResponse_Errors, v.Errors)
-	serializeRouterNetworkInterfaceList(s, schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces, v.RouterNetworkInterfaces)
+	if v.Errors != nil {
+		serializeBatchGetRouterNetworkInterfaceErrorList(s, schemas.BatchGetRouterNetworkInterfaceResponse_Errors, v.Errors)
+	}
+	if v.RouterNetworkInterfaces != nil {
+		serializeRouterNetworkInterfaceList(s, schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces, v.RouterNetworkInterfaces)
+	}
 }
 func (v *BatchGetRouterNetworkInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetRouterNetworkInterfaceResponse, func(s *smithy.Schema) error {

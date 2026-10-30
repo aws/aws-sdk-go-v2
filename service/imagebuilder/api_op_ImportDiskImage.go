@@ -154,7 +154,9 @@ func (v *ImportDiskImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.ImportDiskImageRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeTagMap(s, schemas.ImportDiskImageRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportDiskImageRequest_tags, v.Tags)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.ImportDiskImageRequest_uri, *v.Uri)
 	}

@@ -171,7 +171,9 @@ func (v *Group) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationTag(s, schemas.Group_ApplicationTag, v.ApplicationTag)
+	if v.ApplicationTag != nil {
+		serializeApplicationTag(s, schemas.Group_ApplicationTag, v.ApplicationTag)
+	}
 	if v.Criticality != nil {
 		s.WriteInt32(schemas.Group_Criticality, *v.Criticality)
 	}
@@ -251,11 +253,15 @@ func (v *GroupConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupConfigurationList(s, schemas.GroupConfiguration_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeGroupConfigurationList(s, schemas.GroupConfiguration_Configuration, v.Configuration)
+	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GroupConfiguration_FailureReason, *v.FailureReason)
 	}
-	serializeGroupConfigurationList(s, schemas.GroupConfiguration_ProposedConfiguration, v.ProposedConfiguration)
+	if v.ProposedConfiguration != nil {
+		serializeGroupConfigurationList(s, schemas.GroupConfiguration_ProposedConfiguration, v.ProposedConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GroupConfiguration_Status, string(v.Status))
 	}
@@ -313,7 +319,9 @@ func (v *GroupConfigurationItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GroupConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupParameterList(s, schemas.GroupConfigurationItem_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeGroupParameterList(s, schemas.GroupConfigurationItem_Parameters, v.Parameters)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.GroupConfigurationItem_Type, *v.Type)
 	}
@@ -364,7 +372,9 @@ func (v *GroupConfigurationParameter) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.GroupConfigurationParameter_Name, *v.Name)
 	}
-	serializeGroupConfigurationParameterValueList(s, schemas.GroupConfigurationParameter_Values, v.Values)
+	if v.Values != nil {
+		serializeGroupConfigurationParameterValueList(s, schemas.GroupConfigurationParameter_Values, v.Values)
+	}
 }
 func (v *GroupConfigurationParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GroupConfigurationParameter, func(s *smithy.Schema) error {
@@ -407,7 +417,9 @@ func (v *GroupFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.GroupFilter_Name, string(v.Name))
 	}
-	serializeGroupFilterValues(s, schemas.GroupFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeGroupFilterValues(s, schemas.GroupFilter_Values, v.Values)
+	}
 }
 func (v *GroupFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GroupFilter, func(s *smithy.Schema) error {
@@ -666,7 +678,9 @@ func (v *ListGroupingStatusesFilter) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != "" {
 		s.WriteString(schemas.ListGroupingStatusesFilter_Name, string(v.Name))
 	}
-	serializeListGroupingStatusesFilterValues(s, schemas.ListGroupingStatusesFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeListGroupingStatusesFilterValues(s, schemas.ListGroupingStatusesFilter_Values, v.Values)
+	}
 }
 func (v *ListGroupingStatusesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGroupingStatusesFilter, func(s *smithy.Schema) error {
@@ -880,7 +894,9 @@ func (v *ResourceFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ResourceFilter_Name, string(v.Name))
 	}
-	serializeResourceFilterValues(s, schemas.ResourceFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeResourceFilterValues(s, schemas.ResourceFilter_Values, v.Values)
+	}
 }
 func (v *ResourceFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceFilter, func(s *smithy.Schema) error {

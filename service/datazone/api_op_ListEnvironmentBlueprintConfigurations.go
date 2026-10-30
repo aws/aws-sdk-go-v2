@@ -96,7 +96,9 @@ func (v *ListEnvironmentBlueprintConfigurationsOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListEnvironmentBlueprintConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentBlueprintConfigurations(s, schemas.ListEnvironmentBlueprintConfigurationsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeEnvironmentBlueprintConfigurations(s, schemas.ListEnvironmentBlueprintConfigurationsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentBlueprintConfigurationsOutput_nextToken, *v.NextToken)
 	}

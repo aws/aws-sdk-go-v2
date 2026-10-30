@@ -118,10 +118,18 @@ func (v *DescribeSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalMetricsToRetainList(s, schemas.DescribeSecurityProfileResponse_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
-	serializeAdditionalMetricsToRetainV2List(s, schemas.DescribeSecurityProfileResponse_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
-	serializeAlertTargets(s, schemas.DescribeSecurityProfileResponse_alertTargets, v.AlertTargets)
-	serializeBehaviors(s, schemas.DescribeSecurityProfileResponse_behaviors, v.Behaviors)
+	if v.AdditionalMetricsToRetain != nil {
+		serializeAdditionalMetricsToRetainList(s, schemas.DescribeSecurityProfileResponse_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	}
+	if v.AdditionalMetricsToRetainV2 != nil {
+		serializeAdditionalMetricsToRetainV2List(s, schemas.DescribeSecurityProfileResponse_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	}
+	if v.AlertTargets != nil {
+		serializeAlertTargets(s, schemas.DescribeSecurityProfileResponse_alertTargets, v.AlertTargets)
+	}
+	if v.Behaviors != nil {
+		serializeBehaviors(s, schemas.DescribeSecurityProfileResponse_behaviors, v.Behaviors)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.DescribeSecurityProfileResponse_creationDate, *v.CreationDate)
 	}

@@ -119,17 +119,27 @@ func (v *GetComplianceSummaryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetComplianceSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupBy(s, schemas.GetComplianceSummaryInput_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupBy(s, schemas.GetComplianceSummaryInput_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetComplianceSummaryInput_MaxResults, *v.MaxResults)
 	}
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.GetComplianceSummaryInput_PaginationToken, *v.PaginationToken)
 	}
-	serializeRegionFilterList(s, schemas.GetComplianceSummaryInput_RegionFilters, v.RegionFilters)
-	serializeResourceTypeFilterList(s, schemas.GetComplianceSummaryInput_ResourceTypeFilters, v.ResourceTypeFilters)
-	serializeTagKeyFilterList(s, schemas.GetComplianceSummaryInput_TagKeyFilters, v.TagKeyFilters)
-	serializeTargetIdFilterList(s, schemas.GetComplianceSummaryInput_TargetIdFilters, v.TargetIdFilters)
+	if v.RegionFilters != nil {
+		serializeRegionFilterList(s, schemas.GetComplianceSummaryInput_RegionFilters, v.RegionFilters)
+	}
+	if v.ResourceTypeFilters != nil {
+		serializeResourceTypeFilterList(s, schemas.GetComplianceSummaryInput_ResourceTypeFilters, v.ResourceTypeFilters)
+	}
+	if v.TagKeyFilters != nil {
+		serializeTagKeyFilterList(s, schemas.GetComplianceSummaryInput_TagKeyFilters, v.TagKeyFilters)
+	}
+	if v.TargetIdFilters != nil {
+		serializeTargetIdFilterList(s, schemas.GetComplianceSummaryInput_TargetIdFilters, v.TargetIdFilters)
+	}
 }
 
 type GetComplianceSummaryOutput struct {
@@ -158,7 +168,9 @@ func (v *GetComplianceSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.GetComplianceSummaryOutput_PaginationToken, *v.PaginationToken)
 	}
-	serializeSummaryList(s, schemas.GetComplianceSummaryOutput_SummaryList, v.SummaryList)
+	if v.SummaryList != nil {
+		serializeSummaryList(s, schemas.GetComplianceSummaryOutput_SummaryList, v.SummaryList)
+	}
 }
 func (v *GetComplianceSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetComplianceSummaryOutput, func(s *smithy.Schema) error {

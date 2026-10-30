@@ -63,7 +63,9 @@ func (v *AccessControlRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessControlRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.AccessControlRule_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionsList(s, schemas.AccessControlRule_Actions, v.Actions)
+	}
 	if v.DateCreated != nil {
 		s.WriteTime(schemas.AccessControlRule_DateCreated, *v.DateCreated)
 	}
@@ -76,16 +78,30 @@ func (v *AccessControlRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Effect != "" {
 		s.WriteString(schemas.AccessControlRule_Effect, string(v.Effect))
 	}
-	serializeImpersonationRoleIdList(s, schemas.AccessControlRule_ImpersonationRoleIds, v.ImpersonationRoleIds)
-	serializeIpRangeList(s, schemas.AccessControlRule_IpRanges, v.IpRanges)
+	if v.ImpersonationRoleIds != nil {
+		serializeImpersonationRoleIdList(s, schemas.AccessControlRule_ImpersonationRoleIds, v.ImpersonationRoleIds)
+	}
+	if v.IpRanges != nil {
+		serializeIpRangeList(s, schemas.AccessControlRule_IpRanges, v.IpRanges)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AccessControlRule_Name, *v.Name)
 	}
-	serializeActionsList(s, schemas.AccessControlRule_NotActions, v.NotActions)
-	serializeImpersonationRoleIdList(s, schemas.AccessControlRule_NotImpersonationRoleIds, v.NotImpersonationRoleIds)
-	serializeIpRangeList(s, schemas.AccessControlRule_NotIpRanges, v.NotIpRanges)
-	serializeUserIdList(s, schemas.AccessControlRule_NotUserIds, v.NotUserIds)
-	serializeUserIdList(s, schemas.AccessControlRule_UserIds, v.UserIds)
+	if v.NotActions != nil {
+		serializeActionsList(s, schemas.AccessControlRule_NotActions, v.NotActions)
+	}
+	if v.NotImpersonationRoleIds != nil {
+		serializeImpersonationRoleIdList(s, schemas.AccessControlRule_NotImpersonationRoleIds, v.NotImpersonationRoleIds)
+	}
+	if v.NotIpRanges != nil {
+		serializeIpRangeList(s, schemas.AccessControlRule_NotIpRanges, v.NotIpRanges)
+	}
+	if v.NotUserIds != nil {
+		serializeUserIdList(s, schemas.AccessControlRule_NotUserIds, v.NotUserIds)
+	}
+	if v.UserIds != nil {
+		serializeUserIdList(s, schemas.AccessControlRule_UserIds, v.UserIds)
+	}
 }
 func (v *AccessControlRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessControlRule, func(s *smithy.Schema) error {
@@ -854,8 +870,12 @@ func (v *ImpersonationRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ImpersonationRule_Name, *v.Name)
 	}
-	serializeTargetUsers(s, schemas.ImpersonationRule_NotTargetUsers, v.NotTargetUsers)
-	serializeTargetUsers(s, schemas.ImpersonationRule_TargetUsers, v.TargetUsers)
+	if v.NotTargetUsers != nil {
+		serializeTargetUsers(s, schemas.ImpersonationRule_NotTargetUsers, v.NotTargetUsers)
+	}
+	if v.TargetUsers != nil {
+		serializeTargetUsers(s, schemas.ImpersonationRule_TargetUsers, v.TargetUsers)
+	}
 }
 func (v *ImpersonationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImpersonationRule, func(s *smithy.Schema) error {
@@ -1551,10 +1571,18 @@ func (v *MobileDeviceAccessRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.MobileDeviceAccessRule_Description, *v.Description)
 	}
-	serializeDeviceModelList(s, schemas.MobileDeviceAccessRule_DeviceModels, v.DeviceModels)
-	serializeDeviceOperatingSystemList(s, schemas.MobileDeviceAccessRule_DeviceOperatingSystems, v.DeviceOperatingSystems)
-	serializeDeviceTypeList(s, schemas.MobileDeviceAccessRule_DeviceTypes, v.DeviceTypes)
-	serializeDeviceUserAgentList(s, schemas.MobileDeviceAccessRule_DeviceUserAgents, v.DeviceUserAgents)
+	if v.DeviceModels != nil {
+		serializeDeviceModelList(s, schemas.MobileDeviceAccessRule_DeviceModels, v.DeviceModels)
+	}
+	if v.DeviceOperatingSystems != nil {
+		serializeDeviceOperatingSystemList(s, schemas.MobileDeviceAccessRule_DeviceOperatingSystems, v.DeviceOperatingSystems)
+	}
+	if v.DeviceTypes != nil {
+		serializeDeviceTypeList(s, schemas.MobileDeviceAccessRule_DeviceTypes, v.DeviceTypes)
+	}
+	if v.DeviceUserAgents != nil {
+		serializeDeviceUserAgentList(s, schemas.MobileDeviceAccessRule_DeviceUserAgents, v.DeviceUserAgents)
+	}
 	if v.Effect != "" {
 		s.WriteString(schemas.MobileDeviceAccessRule_Effect, string(v.Effect))
 	}
@@ -1564,10 +1592,18 @@ func (v *MobileDeviceAccessRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.MobileDeviceAccessRule_Name, *v.Name)
 	}
-	serializeDeviceModelList(s, schemas.MobileDeviceAccessRule_NotDeviceModels, v.NotDeviceModels)
-	serializeDeviceOperatingSystemList(s, schemas.MobileDeviceAccessRule_NotDeviceOperatingSystems, v.NotDeviceOperatingSystems)
-	serializeDeviceTypeList(s, schemas.MobileDeviceAccessRule_NotDeviceTypes, v.NotDeviceTypes)
-	serializeDeviceUserAgentList(s, schemas.MobileDeviceAccessRule_NotDeviceUserAgents, v.NotDeviceUserAgents)
+	if v.NotDeviceModels != nil {
+		serializeDeviceModelList(s, schemas.MobileDeviceAccessRule_NotDeviceModels, v.NotDeviceModels)
+	}
+	if v.NotDeviceOperatingSystems != nil {
+		serializeDeviceOperatingSystemList(s, schemas.MobileDeviceAccessRule_NotDeviceOperatingSystems, v.NotDeviceOperatingSystems)
+	}
+	if v.NotDeviceTypes != nil {
+		serializeDeviceTypeList(s, schemas.MobileDeviceAccessRule_NotDeviceTypes, v.NotDeviceTypes)
+	}
+	if v.NotDeviceUserAgents != nil {
+		serializeDeviceUserAgentList(s, schemas.MobileDeviceAccessRule_NotDeviceUserAgents, v.NotDeviceUserAgents)
+	}
 }
 func (v *MobileDeviceAccessRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MobileDeviceAccessRule, func(s *smithy.Schema) error {
@@ -1725,7 +1761,9 @@ func (v *Permission) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GranteeType != "" {
 		s.WriteString(schemas.Permission_GranteeType, string(v.GranteeType))
 	}
-	serializePermissionValues(s, schemas.Permission_PermissionValues, v.PermissionValues)
+	if v.PermissionValues != nil {
+		serializePermissionValues(s, schemas.Permission_PermissionValues, v.PermissionValues)
+	}
 }
 func (v *Permission) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Permission, func(s *smithy.Schema) error {
@@ -1851,7 +1889,9 @@ func (v *PersonalAccessTokenSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PersonalAccessTokenId != nil {
 		s.WriteString(schemas.PersonalAccessTokenSummary_PersonalAccessTokenId, *v.PersonalAccessTokenId)
 	}
-	serializePersonalAccessTokenScopeList(s, schemas.PersonalAccessTokenSummary_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializePersonalAccessTokenScopeList(s, schemas.PersonalAccessTokenSummary_Scopes, v.Scopes)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.PersonalAccessTokenSummary_UserId, *v.UserId)
 	}

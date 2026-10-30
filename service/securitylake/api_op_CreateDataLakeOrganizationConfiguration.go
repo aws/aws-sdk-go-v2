@@ -51,7 +51,9 @@ func (v *CreateDataLakeOrganizationConfigurationInput) Serialize(s smithy.ShapeS
 }
 
 func (v *CreateDataLakeOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.CreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount, v.AutoEnableNewAccount)
+	if v.AutoEnableNewAccount != nil {
+		serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.CreateDataLakeOrganizationConfigurationRequest_autoEnableNewAccount, v.AutoEnableNewAccount)
+	}
 }
 
 type CreateDataLakeOrganizationConfigurationOutput struct {

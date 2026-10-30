@@ -62,7 +62,9 @@ func (v *DescribeStandardsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStandardsRequest_NextToken, *v.NextToken)
 	}
-	serializeStandardsProviders(s, schemas.DescribeStandardsRequest_Providers, v.Providers)
+	if v.Providers != nil {
+		serializeStandardsProviders(s, schemas.DescribeStandardsRequest_Providers, v.Providers)
+	}
 }
 
 type DescribeStandardsOutput struct {
@@ -89,7 +91,9 @@ func (v *DescribeStandardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStandardsResponse_NextToken, *v.NextToken)
 	}
-	serializeStandards(s, schemas.DescribeStandardsResponse_Standards, v.Standards)
+	if v.Standards != nil {
+		serializeStandards(s, schemas.DescribeStandardsResponse_Standards, v.Standards)
+	}
 }
 func (v *DescribeStandardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeStandardsResponse, func(s *smithy.Schema) error {

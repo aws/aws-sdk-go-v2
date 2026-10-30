@@ -86,8 +86,12 @@ func (v *CreateEnvironmentTemplateVersionInput) SerializeMembers(s smithy.ShapeS
 	if v.MajorVersion != nil {
 		s.WriteString(schemas.CreateEnvironmentTemplateVersionInput_majorVersion, *v.MajorVersion)
 	}
-	serializeTemplateVersionSourceInput(s, schemas.CreateEnvironmentTemplateVersionInput_source, v.Source)
-	serializeTagList(s, schemas.CreateEnvironmentTemplateVersionInput_tags, v.Tags)
+	if v.Source != nil {
+		serializeTemplateVersionSourceInput(s, schemas.CreateEnvironmentTemplateVersionInput_source, v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEnvironmentTemplateVersionInput_tags, v.Tags)
+	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.CreateEnvironmentTemplateVersionInput_templateName, *v.TemplateName)
 	}

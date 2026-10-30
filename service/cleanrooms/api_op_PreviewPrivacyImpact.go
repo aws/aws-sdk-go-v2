@@ -53,7 +53,9 @@ func (v *PreviewPrivacyImpactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.PreviewPrivacyImpactInput_membershipIdentifier, *v.MembershipIdentifier)
 	}
-	serializePreviewPrivacyImpactParametersInput(s, schemas.PreviewPrivacyImpactInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePreviewPrivacyImpactParametersInput(s, schemas.PreviewPrivacyImpactInput_parameters, v.Parameters)
+	}
 }
 
 type PreviewPrivacyImpactOutput struct {
@@ -78,7 +80,9 @@ func (v *PreviewPrivacyImpactOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PreviewPrivacyImpactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrivacyImpact(s, schemas.PreviewPrivacyImpactOutput_privacyImpact, v.PrivacyImpact)
+	if v.PrivacyImpact != nil {
+		serializePrivacyImpact(s, schemas.PreviewPrivacyImpactOutput_privacyImpact, v.PrivacyImpact)
+	}
 }
 func (v *PreviewPrivacyImpactOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PreviewPrivacyImpactOutput, func(s *smithy.Schema) error {

@@ -77,7 +77,9 @@ func (v *ListApplicationShaderCachesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListApplicationShaderCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeShaderCacheSummaryList(s, schemas.ListApplicationShaderCachesOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeShaderCacheSummaryList(s, schemas.ListApplicationShaderCachesOutput_Items, v.Items)
+	}
 }
 func (v *ListApplicationShaderCachesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListApplicationShaderCachesOutput, func(s *smithy.Schema) error {

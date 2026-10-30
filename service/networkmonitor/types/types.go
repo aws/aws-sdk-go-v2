@@ -58,7 +58,9 @@ func (v *CreateMonitorProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PacketSize != nil {
 		s.WriteInt32(schemas.CreateMonitorProbeInput_packetSize, *v.PacketSize)
 	}
-	serializeTagMap(s, schemas.CreateMonitorProbeInput_probeTags, v.ProbeTags)
+	if v.ProbeTags != nil {
+		serializeTagMap(s, schemas.CreateMonitorProbeInput_probeTags, v.ProbeTags)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateMonitorProbeInput_protocol, string(v.Protocol))
 	}
@@ -142,7 +144,9 @@ func (v *MonitorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.MonitorSummary_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.MonitorSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.MonitorSummary_tags, v.Tags)
+	}
 }
 func (v *MonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonitorSummary, func(s *smithy.Schema) error {
@@ -264,7 +268,9 @@ func (v *Probe) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Probe_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.Probe_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Probe_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.Probe_vpcId, *v.VpcId)
 	}
@@ -382,7 +388,9 @@ func (v *ProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceArn != nil {
 		s.WriteString(schemas.ProbeInput_sourceArn, *v.SourceArn)
 	}
-	serializeTagMap(s, schemas.ProbeInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ProbeInput_tags, v.Tags)
+	}
 }
 func (v *ProbeInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProbeInput, func(s *smithy.Schema) error {

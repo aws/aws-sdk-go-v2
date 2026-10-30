@@ -85,7 +85,9 @@ func (v *ListAutonomousVirtualMachinesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAutonomousVirtualMachinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutonomousVirtualMachineList(s, schemas.ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines, v.AutonomousVirtualMachines)
+	if v.AutonomousVirtualMachines != nil {
+		serializeAutonomousVirtualMachineList(s, schemas.ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines, v.AutonomousVirtualMachines)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutonomousVirtualMachinesOutput_nextToken, *v.NextToken)
 	}

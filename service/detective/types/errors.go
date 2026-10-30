@@ -279,7 +279,9 @@ func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
 	}
-	serializeResourceList(s, schemas.ServiceQuotaExceededException_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.ServiceQuotaExceededException_Resources, v.Resources)
+	}
 }
 func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {

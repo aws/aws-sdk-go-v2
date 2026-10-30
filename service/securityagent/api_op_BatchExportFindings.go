@@ -70,7 +70,9 @@ func (v *BatchExportFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CodeReviewJobId != nil {
 		s.WriteString(schemas.BatchExportFindingsInput_codeReviewJobId, *v.CodeReviewJobId)
 	}
-	serializeFindingIdList(s, schemas.BatchExportFindingsInput_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIdList(s, schemas.BatchExportFindingsInput_findingIds, v.FindingIds)
+	}
 	if v.IssueDestination != nil {
 		s.WriteStruct(schemas.BatchExportFindingsInput_issueDestination)
 		v.IssueDestination.SerializeMembers(s)
@@ -108,8 +110,12 @@ func (v *BatchExportFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchExportFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchExportFindingErrorList(s, schemas.BatchExportFindingsOutput_errors, v.Errors)
-	serializeBatchExportFindingResultList(s, schemas.BatchExportFindingsOutput_results, v.Results)
+	if v.Errors != nil {
+		serializeBatchExportFindingErrorList(s, schemas.BatchExportFindingsOutput_errors, v.Errors)
+	}
+	if v.Results != nil {
+		serializeBatchExportFindingResultList(s, schemas.BatchExportFindingsOutput_results, v.Results)
+	}
 }
 func (v *BatchExportFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchExportFindingsOutput, func(s *smithy.Schema) error {

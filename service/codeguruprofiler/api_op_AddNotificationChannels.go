@@ -49,7 +49,9 @@ func (v *AddNotificationChannelsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddNotificationChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannels(s, schemas.AddNotificationChannelsRequest_channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.AddNotificationChannelsRequest_channels, v.Channels)
+	}
 	if v.ProfilingGroupName != nil {
 		s.WriteString(schemas.AddNotificationChannelsRequest_profilingGroupName, *v.ProfilingGroupName)
 	}

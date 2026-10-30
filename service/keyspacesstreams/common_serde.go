@@ -230,9 +230,6 @@ func deserializeKeyspacesCellValue(d smithy.ShapeDeserializer, s *smithy.Schema,
 }
 
 func serializeKeyspacesCellList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.KeyspacesCell) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -243,9 +240,6 @@ func serializeKeyspacesCellList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeKeyspacesCellMap(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.KeyspacesCellMapDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -256,9 +250,6 @@ func serializeKeyspacesCellMap(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Record) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -269,9 +260,6 @@ func serializeRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeShardDescriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Shard) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -282,9 +270,6 @@ func serializeShardDescriptionList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeShardIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -293,9 +278,6 @@ func serializeShardIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []s
 }
 
 func serializeStreamList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Stream) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -437,9 +419,6 @@ func deserializeStreamList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ty
 }
 
 func serializeKeyspacesCells(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.KeyspacesCell) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -451,9 +430,6 @@ func serializeKeyspacesCells(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeKeyspacesKeysMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.KeyspacesCellValue) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -463,9 +439,6 @@ func serializeKeyspacesKeysMap(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeKeyspacesUdtMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.KeyspacesCell) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

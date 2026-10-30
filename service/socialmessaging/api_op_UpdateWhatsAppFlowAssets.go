@@ -83,7 +83,9 @@ func (v *UpdateWhatsAppFlowAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWhatsAppFlowAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationErrorList(s, schemas.UpdateWhatsAppFlowAssetsOutput_validationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrorList(s, schemas.UpdateWhatsAppFlowAssetsOutput_validationErrors, v.ValidationErrors)
+	}
 }
 func (v *UpdateWhatsAppFlowAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateWhatsAppFlowAssetsOutput, func(s *smithy.Schema) error {

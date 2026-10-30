@@ -124,7 +124,9 @@ func (v *QueryAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryAssistantResponse_nextToken, *v.NextToken)
 	}
-	serializeQueryResultsList(s, schemas.QueryAssistantResponse_results, v.Results)
+	if v.Results != nil {
+		serializeQueryResultsList(s, schemas.QueryAssistantResponse_results, v.Results)
+	}
 }
 func (v *QueryAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryAssistantResponse, func(s *smithy.Schema) error {

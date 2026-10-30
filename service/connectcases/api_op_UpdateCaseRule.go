@@ -73,7 +73,9 @@ func (v *UpdateCaseRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCaseRuleRequest_name, *v.Name)
 	}
-	serializeCaseRuleDetails(s, schemas.UpdateCaseRuleRequest_rule, v.Rule)
+	if v.Rule != nil {
+		serializeCaseRuleDetails(s, schemas.UpdateCaseRuleRequest_rule, v.Rule)
+	}
 }
 
 type UpdateCaseRuleOutput struct {

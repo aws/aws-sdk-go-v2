@@ -69,7 +69,9 @@ func (v *CreateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.CreateMembershipRequest_applicationId, *v.ApplicationId)
 	}
-	serializeMembershipConfig(s, schemas.CreateMembershipRequest_config, v.Config)
+	if v.Config != nil {
+		serializeMembershipConfig(s, schemas.CreateMembershipRequest_config, v.Config)
+	}
 	if v.MemberType != "" {
 		s.WriteString(schemas.CreateMembershipRequest_memberType, string(v.MemberType))
 	}

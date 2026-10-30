@@ -64,7 +64,9 @@ func (v *UpdateLayoutInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLayoutInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayoutContent(s, schemas.UpdateLayoutRequest_content, v.Content)
+	if v.Content != nil {
+		serializeLayoutContent(s, schemas.UpdateLayoutRequest_content, v.Content)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.UpdateLayoutRequest_domainId, *v.DomainId)
 	}

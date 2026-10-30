@@ -80,7 +80,9 @@ func (v *ListControlPanelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListControlPanelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfControlPanel(s, schemas.ListControlPanelsResponse_ControlPanels, v.ControlPanels)
+	if v.ControlPanels != nil {
+		serialize__listOfControlPanel(s, schemas.ListControlPanelsResponse_ControlPanels, v.ControlPanels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListControlPanelsResponse_NextToken, *v.NextToken)
 	}

@@ -341,7 +341,9 @@ func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.ApplicationSummary_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.ApplicationSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ApplicationSummary_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.ApplicationSummary_VpcId, *v.VpcId)
 	}
@@ -520,7 +522,9 @@ func (v *EnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.EnvironmentSummary_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.EnvironmentSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EnvironmentSummary_Tags, v.Tags)
+	}
 	if v.TransitGatewayId != nil {
 		s.WriteString(schemas.EnvironmentSummary_TransitGatewayId, *v.TransitGatewayId)
 	}
@@ -614,7 +618,9 @@ func (v *EnvironmentVpc) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.EnvironmentVpc_AccountId, *v.AccountId)
 	}
-	serializeCidrBlocks(s, schemas.EnvironmentVpc_CidrBlocks, v.CidrBlocks)
+	if v.CidrBlocks != nil {
+		serializeCidrBlocks(s, schemas.EnvironmentVpc_CidrBlocks, v.CidrBlocks)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.EnvironmentVpc_CreatedTime, *v.CreatedTime)
 	}
@@ -693,7 +699,9 @@ func (v *ErrorResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.ErrorResponse_AccountId, *v.AccountId)
 	}
-	serializeAdditionalDetails(s, schemas.ErrorResponse_AdditionalDetails, v.AdditionalDetails)
+	if v.AdditionalDetails != nil {
+		serializeAdditionalDetails(s, schemas.ErrorResponse_AdditionalDetails, v.AdditionalDetails)
+	}
 	if v.Code != "" {
 		s.WriteString(schemas.ErrorResponse_Code, string(v.Code))
 	}
@@ -938,11 +946,15 @@ func (v *RouteSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.RouteSummary_LastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeHttpMethods(s, schemas.RouteSummary_Methods, v.Methods)
+	if v.Methods != nil {
+		serializeHttpMethods(s, schemas.RouteSummary_Methods, v.Methods)
+	}
 	if v.OwnerAccountId != nil {
 		s.WriteString(schemas.RouteSummary_OwnerAccountId, *v.OwnerAccountId)
 	}
-	serializePathResourceToId(s, schemas.RouteSummary_PathResourceToId, v.PathResourceToId)
+	if v.PathResourceToId != nil {
+		serializePathResourceToId(s, schemas.RouteSummary_PathResourceToId, v.PathResourceToId)
+	}
 	if v.RouteId != nil {
 		s.WriteString(schemas.RouteSummary_RouteId, *v.RouteId)
 	}
@@ -958,7 +970,9 @@ func (v *RouteSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouteSummary_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.RouteSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RouteSummary_Tags, v.Tags)
+	}
 }
 func (v *RouteSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteSummary, func(s *smithy.Schema) error {
@@ -1137,7 +1151,9 @@ func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.ServiceSummary_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.ServiceSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ServiceSummary_Tags, v.Tags)
+	}
 	if v.UrlEndpoint != nil {
 		s.WriteStruct(schemas.ServiceSummary_UrlEndpoint)
 		v.UrlEndpoint.SerializeMembers(s)
@@ -1262,7 +1278,9 @@ func (v *UriPathRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeChildPaths != nil {
 		s.WriteBool(schemas.UriPathRouteInput_IncludeChildPaths, *v.IncludeChildPaths)
 	}
-	serializeHttpMethods(s, schemas.UriPathRouteInput_Methods, v.Methods)
+	if v.Methods != nil {
+		serializeHttpMethods(s, schemas.UriPathRouteInput_Methods, v.Methods)
+	}
 	if v.SourcePath != nil {
 		s.WriteString(schemas.UriPathRouteInput_SourcePath, *v.SourcePath)
 	}

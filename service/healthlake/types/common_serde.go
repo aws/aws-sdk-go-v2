@@ -128,9 +128,6 @@ func deserializeRestoreConfiguration(d smithy.ShapeDeserializer, s *smithy.Schem
 }
 
 func serializeDatastorePropertiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DatastoreProperties) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -141,9 +138,6 @@ func serializeDatastorePropertiesList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeDataTransformationChatOptionsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -152,9 +146,6 @@ func serializeDataTransformationChatOptionsList(s smithy.ShapeSerializer, schema
 }
 
 func serializeDataTransformationProfileSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DataTransformationProfileSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -165,9 +156,6 @@ func serializeDataTransformationProfileSummaryList(s smithy.ShapeSerializer, sch
 }
 
 func serializeDataTransformationProfileVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DataTransformationProfileVersionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -178,9 +166,6 @@ func serializeDataTransformationProfileVersionSummaryList(s smithy.ShapeSerializ
 }
 
 func serializeDefaultProfiles(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -189,9 +174,6 @@ func serializeDefaultProfiles(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeExportJobPropertiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ExportJobProperties) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -202,9 +184,6 @@ func serializeExportJobPropertiesList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeImportJobPropertiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ImportJobProperties) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -215,9 +194,6 @@ func serializeImportJobPropertiesList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -226,9 +202,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -239,9 +212,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func serializeTransformationJobSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TransformationJobSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -469,9 +439,6 @@ func deserializeTransformationJobSummaryList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeProfileMapping(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -481,9 +448,6 @@ func serializeProfileMapping(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -493,9 +457,6 @@ func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[s
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

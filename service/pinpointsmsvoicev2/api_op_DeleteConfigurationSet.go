@@ -113,7 +113,9 @@ func (v *DeleteConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DefaultSenderId != nil {
 		s.WriteString(schemas.DeleteConfigurationSetResult_DefaultSenderId, *v.DefaultSenderId)
 	}
-	serializeEventDestinationList(s, schemas.DeleteConfigurationSetResult_EventDestinations, v.EventDestinations)
+	if v.EventDestinations != nil {
+		serializeEventDestinationList(s, schemas.DeleteConfigurationSetResult_EventDestinations, v.EventDestinations)
+	}
 }
 func (v *DeleteConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteConfigurationSetResult, func(s *smithy.Schema) error {

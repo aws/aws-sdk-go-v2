@@ -74,7 +74,9 @@ func (v *UpdateBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotAliasId != nil {
 		s.WriteString(schemas.UpdateBotAliasRequest_botAliasId, *v.BotAliasId)
 	}
-	serializeBotAliasLocaleSettingsMap(s, schemas.UpdateBotAliasRequest_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasLocaleSettings != nil {
+		serializeBotAliasLocaleSettingsMap(s, schemas.UpdateBotAliasRequest_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	}
 	if v.BotAliasName != nil {
 		s.WriteString(schemas.UpdateBotAliasRequest_botAliasName, *v.BotAliasName)
 	}
@@ -153,7 +155,9 @@ func (v *UpdateBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotAliasId != nil {
 		s.WriteString(schemas.UpdateBotAliasResponse_botAliasId, *v.BotAliasId)
 	}
-	serializeBotAliasLocaleSettingsMap(s, schemas.UpdateBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasLocaleSettings != nil {
+		serializeBotAliasLocaleSettingsMap(s, schemas.UpdateBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	}
 	if v.BotAliasName != nil {
 		s.WriteString(schemas.UpdateBotAliasResponse_botAliasName, *v.BotAliasName)
 	}

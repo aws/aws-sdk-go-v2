@@ -51,7 +51,9 @@ func (v *RemoveCustomRoutingEndpointsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.RemoveCustomRoutingEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
 	}
-	serializeEndpointIds(s, schemas.RemoveCustomRoutingEndpointsRequest_EndpointIds, v.EndpointIds)
+	if v.EndpointIds != nil {
+		serializeEndpointIds(s, schemas.RemoveCustomRoutingEndpointsRequest_EndpointIds, v.EndpointIds)
+	}
 }
 
 type RemoveCustomRoutingEndpointsOutput struct {

@@ -76,7 +76,9 @@ func (v *GetSearchSuggestionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSearchSuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyNameSuggestionList(s, schemas.GetSearchSuggestionsResponse_PropertyNameSuggestions, v.PropertyNameSuggestions)
+	if v.PropertyNameSuggestions != nil {
+		serializePropertyNameSuggestionList(s, schemas.GetSearchSuggestionsResponse_PropertyNameSuggestions, v.PropertyNameSuggestions)
+	}
 }
 func (v *GetSearchSuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSearchSuggestionsResponse, func(s *smithy.Schema) error {

@@ -114,11 +114,15 @@ func (v *StartDeviceDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorAssociationIdentifier != nil {
 		s.WriteString(schemas.StartDeviceDiscoveryRequest_ConnectorAssociationIdentifier, *v.ConnectorAssociationIdentifier)
 	}
-	serializeConnectorDeviceIdList(s, schemas.StartDeviceDiscoveryRequest_ConnectorDeviceIdList, v.ConnectorDeviceIdList)
+	if v.ConnectorDeviceIdList != nil {
+		serializeConnectorDeviceIdList(s, schemas.StartDeviceDiscoveryRequest_ConnectorDeviceIdList, v.ConnectorDeviceIdList)
+	}
 	if v.ControllerIdentifier != nil {
 		s.WriteString(schemas.StartDeviceDiscoveryRequest_ControllerIdentifier, *v.ControllerIdentifier)
 	}
-	serializeCustomProtocolDetail(s, schemas.StartDeviceDiscoveryRequest_CustomProtocolDetail, v.CustomProtocolDetail)
+	if v.CustomProtocolDetail != nil {
+		serializeCustomProtocolDetail(s, schemas.StartDeviceDiscoveryRequest_CustomProtocolDetail, v.CustomProtocolDetail)
+	}
 	if v.DiscoveryType != "" {
 		s.WriteString(schemas.StartDeviceDiscoveryRequest_DiscoveryType, string(v.DiscoveryType))
 	}
@@ -128,7 +132,9 @@ func (v *StartDeviceDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.StartDeviceDiscoveryRequest_Protocol, string(v.Protocol))
 	}
-	serializeTagsMap(s, schemas.StartDeviceDiscoveryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartDeviceDiscoveryRequest_Tags, v.Tags)
+	}
 }
 
 type StartDeviceDiscoveryOutput struct {

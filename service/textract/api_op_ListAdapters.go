@@ -90,7 +90,9 @@ func (v *ListAdaptersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAdaptersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdapterList(s, schemas.ListAdaptersResponse_Adapters, v.Adapters)
+	if v.Adapters != nil {
+		serializeAdapterList(s, schemas.ListAdaptersResponse_Adapters, v.Adapters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAdaptersResponse_NextToken, *v.NextToken)
 	}

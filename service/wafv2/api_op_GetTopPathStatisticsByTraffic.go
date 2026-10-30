@@ -181,8 +181,12 @@ func (v *GetTopPathStatisticsByTrafficOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextMarker != nil {
 		s.WriteString(schemas.GetTopPathStatisticsByTrafficResponse_NextMarker, *v.NextMarker)
 	}
-	serializePathStatisticsList(s, schemas.GetTopPathStatisticsByTrafficResponse_PathStatistics, v.PathStatistics)
-	serializePathStatisticsList(s, schemas.GetTopPathStatisticsByTrafficResponse_TopCategories, v.TopCategories)
+	if v.PathStatistics != nil {
+		serializePathStatisticsList(s, schemas.GetTopPathStatisticsByTrafficResponse_PathStatistics, v.PathStatistics)
+	}
+	if v.TopCategories != nil {
+		serializePathStatisticsList(s, schemas.GetTopPathStatisticsByTrafficResponse_TopCategories, v.TopCategories)
+	}
 	s.WriteInt64(schemas.GetTopPathStatisticsByTrafficResponse_TotalRequestCount, v.TotalRequestCount)
 }
 func (v *GetTopPathStatisticsByTrafficOutput) Deserialize(d smithy.ShapeDeserializer) error {

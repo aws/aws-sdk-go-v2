@@ -110,7 +110,9 @@ func (v *ListCandidatesForAutoMLJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCandidatesForAutoMLJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoMLCandidates(s, schemas.ListCandidatesForAutoMLJobResponse_Candidates, v.Candidates)
+	if v.Candidates != nil {
+		serializeAutoMLCandidates(s, schemas.ListCandidatesForAutoMLJobResponse_Candidates, v.Candidates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCandidatesForAutoMLJobResponse_NextToken, *v.NextToken)
 	}

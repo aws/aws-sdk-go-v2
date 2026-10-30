@@ -78,7 +78,9 @@ func (v *ListVoiceConnectorGroupsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVoiceConnectorGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeVoiceConnectorGroupList(s, schemas.ListVoiceConnectorGroupsResponse_VoiceConnectorGroups, v.VoiceConnectorGroups)
+	if v.VoiceConnectorGroups != nil {
+		serializeVoiceConnectorGroupList(s, schemas.ListVoiceConnectorGroupsResponse_VoiceConnectorGroups, v.VoiceConnectorGroups)
+	}
 }
 func (v *ListVoiceConnectorGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVoiceConnectorGroupsResponse, func(s *smithy.Schema) error {

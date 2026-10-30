@@ -127,12 +127,18 @@ func (v *GeocodeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeocodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeocodeAdditionalFeatureList(s, schemas.GeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AdditionalFeatures != nil {
+		serializeGeocodeAdditionalFeatureList(s, schemas.GeocodeRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
 	if v.AddressNamesMode != "" {
 		s.WriteString(schemas.GeocodeRequest_AddressNamesMode, string(v.AddressNamesMode))
 	}
-	serializeAddressTranslationComponentList(s, schemas.GeocodeRequest_AddressTranslations, v.AddressTranslations)
-	serializePosition(s, schemas.GeocodeRequest_BiasPosition, v.BiasPosition)
+	if v.AddressTranslations != nil {
+		serializeAddressTranslationComponentList(s, schemas.GeocodeRequest_AddressTranslations, v.AddressTranslations)
+	}
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.GeocodeRequest_BiasPosition, v.BiasPosition)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.GeocodeRequest_Filter)
 		v.Filter.SerializeMembers(s)
@@ -197,7 +203,9 @@ func (v *GeocodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.GeocodeResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeGeocodeResultItemList(s, schemas.GeocodeResponse_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeGeocodeResultItemList(s, schemas.GeocodeResponse_ResultItems, v.ResultItems)
+	}
 }
 func (v *GeocodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeocodeResponse, func(s *smithy.Schema) error {

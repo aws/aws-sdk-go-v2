@@ -79,7 +79,9 @@ func (v *CreateExportImageTaskInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ImageName != nil {
 		s.WriteString(schemas.CreateExportImageTaskRequest_ImageName, *v.ImageName)
 	}
-	serializeTags(s, schemas.CreateExportImageTaskRequest_TagSpecifications, v.TagSpecifications)
+	if v.TagSpecifications != nil {
+		serializeTags(s, schemas.CreateExportImageTaskRequest_TagSpecifications, v.TagSpecifications)
+	}
 }
 
 type CreateExportImageTaskOutput struct {

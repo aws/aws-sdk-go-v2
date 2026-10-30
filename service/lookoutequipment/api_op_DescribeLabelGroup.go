@@ -82,7 +82,9 @@ func (v *DescribeLabelGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DescribeLabelGroupResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeFaultCodes(s, schemas.DescribeLabelGroupResponse_FaultCodes, v.FaultCodes)
+	if v.FaultCodes != nil {
+		serializeFaultCodes(s, schemas.DescribeLabelGroupResponse_FaultCodes, v.FaultCodes)
+	}
 	if v.LabelGroupArn != nil {
 		s.WriteString(schemas.DescribeLabelGroupResponse_LabelGroupArn, *v.LabelGroupArn)
 	}

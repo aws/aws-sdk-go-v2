@@ -153,7 +153,9 @@ func (v *CreateEntityRecognizerInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RecognizerName != nil {
 		s.WriteString(schemas.CreateEntityRecognizerRequest_RecognizerName, *v.RecognizerName)
 	}
-	serializeTagList(s, schemas.CreateEntityRecognizerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEntityRecognizerRequest_Tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreateEntityRecognizerRequest_VersionName, *v.VersionName)
 	}

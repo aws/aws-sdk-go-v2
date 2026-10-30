@@ -75,7 +75,9 @@ func (v *ListImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ByName != false {
 		s.WriteBool(schemas.ListImagesRequest_byName, v.ByName)
 	}
-	serializeFilterList(s, schemas.ListImagesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListImagesRequest_filters, v.Filters)
+	}
 	if v.IncludeDeprecated != nil {
 		s.WriteBool(schemas.ListImagesRequest_includeDeprecated, *v.IncludeDeprecated)
 	}
@@ -124,7 +126,9 @@ func (v *ListImagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageVersionList(s, schemas.ListImagesResponse_imageVersionList, v.ImageVersionList)
+	if v.ImageVersionList != nil {
+		serializeImageVersionList(s, schemas.ListImagesResponse_imageVersionList, v.ImageVersionList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImagesResponse_nextToken, *v.NextToken)
 	}

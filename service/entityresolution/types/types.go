@@ -560,7 +560,9 @@ func (v *IdMappingRuleBasedProperties) SerializeMembers(s smithy.ShapeSerializer
 	if v.RuleDefinitionType != "" {
 		s.WriteString(schemas.IdMappingRuleBasedProperties_ruleDefinitionType, string(v.RuleDefinitionType))
 	}
-	serializeRuleList(s, schemas.IdMappingRuleBasedProperties_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.IdMappingRuleBasedProperties_rules, v.Rules)
+	}
 }
 func (v *IdMappingRuleBasedProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdMappingRuleBasedProperties, func(s *smithy.Schema) error {
@@ -1027,7 +1029,9 @@ func (v *IdNamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.IdNamespaceSummary_description, *v.Description)
 	}
-	serializeIdNamespaceIdMappingWorkflowMetadataList(s, schemas.IdNamespaceSummary_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	if v.IdMappingWorkflowProperties != nil {
+		serializeIdNamespaceIdMappingWorkflowMetadataList(s, schemas.IdNamespaceSummary_idMappingWorkflowProperties, v.IdMappingWorkflowProperties)
+	}
 	if v.IdNamespaceArn != nil {
 		s.WriteString(schemas.IdNamespaceSummary_idNamespaceArn, *v.IdNamespaceArn)
 	}
@@ -1479,7 +1483,9 @@ func (v *MatchGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MatchRule != nil {
 		s.WriteString(schemas.MatchGroup_matchRule, *v.MatchRule)
 	}
-	serializeMatchedRecordsList(s, schemas.MatchGroup_records, v.Records)
+	if v.Records != nil {
+		serializeMatchedRecordsList(s, schemas.MatchGroup_records, v.Records)
+	}
 }
 func (v *MatchGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MatchGroup, func(s *smithy.Schema) error {
@@ -1713,9 +1719,15 @@ func (v *NamespaceRuleBasedProperties) SerializeMembers(s smithy.ShapeSerializer
 	if v.AttributeMatchingModel != "" {
 		s.WriteString(schemas.NamespaceRuleBasedProperties_attributeMatchingModel, string(v.AttributeMatchingModel))
 	}
-	serializeRecordMatchingModelList(s, schemas.NamespaceRuleBasedProperties_recordMatchingModels, v.RecordMatchingModels)
-	serializeIdMappingWorkflowRuleDefinitionTypeList(s, schemas.NamespaceRuleBasedProperties_ruleDefinitionTypes, v.RuleDefinitionTypes)
-	serializeRuleList(s, schemas.NamespaceRuleBasedProperties_rules, v.Rules)
+	if v.RecordMatchingModels != nil {
+		serializeRecordMatchingModelList(s, schemas.NamespaceRuleBasedProperties_recordMatchingModels, v.RecordMatchingModels)
+	}
+	if v.RuleDefinitionTypes != nil {
+		serializeIdMappingWorkflowRuleDefinitionTypeList(s, schemas.NamespaceRuleBasedProperties_ruleDefinitionTypes, v.RuleDefinitionTypes)
+	}
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.NamespaceRuleBasedProperties_rules, v.Rules)
+	}
 }
 func (v *NamespaceRuleBasedProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NamespaceRuleBasedProperties, func(s *smithy.Schema) error {
@@ -1835,7 +1847,9 @@ func (v *OutputSource) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomerProfilesIntegrationConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOutputAttributes(s, schemas.OutputSource_output, v.Output)
+	if v.Output != nil {
+		serializeOutputAttributes(s, schemas.OutputSource_output, v.Output)
+	}
 	if v.OutputS3Path != nil {
 		s.WriteString(schemas.OutputSource_outputS3Path, *v.OutputS3Path)
 	}
@@ -1881,8 +1895,12 @@ func (v *ProviderComponentSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProviderComponentSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProviderSchemaAttributes(s, schemas.ProviderComponentSchema_providerSchemaAttributes, v.ProviderSchemaAttributes)
-	serializeSchemas(s, schemas.ProviderComponentSchema_schemas, v.Schemas)
+	if v.ProviderSchemaAttributes != nil {
+		serializeProviderSchemaAttributes(s, schemas.ProviderComponentSchema_providerSchemaAttributes, v.ProviderSchemaAttributes)
+	}
+	if v.Schemas != nil {
+		serializeSchemas(s, schemas.ProviderComponentSchema_schemas, v.Schemas)
+	}
 }
 func (v *ProviderComponentSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProviderComponentSchema, func(s *smithy.Schema) error {
@@ -2005,8 +2023,12 @@ func (v *ProviderIntermediateDataAccessConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *ProviderIntermediateDataAccessConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsAccountIdList(s, schemas.ProviderIntermediateDataAccessConfiguration_awsAccountIds, v.AwsAccountIds)
-	serializeRequiredBucketActionsList(s, schemas.ProviderIntermediateDataAccessConfiguration_requiredBucketActions, v.RequiredBucketActions)
+	if v.AwsAccountIds != nil {
+		serializeAwsAccountIdList(s, schemas.ProviderIntermediateDataAccessConfiguration_awsAccountIds, v.AwsAccountIds)
+	}
+	if v.RequiredBucketActions != nil {
+		serializeRequiredBucketActionsList(s, schemas.ProviderIntermediateDataAccessConfiguration_requiredBucketActions, v.RequiredBucketActions)
+	}
 }
 func (v *ProviderIntermediateDataAccessConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProviderIntermediateDataAccessConfiguration, func(s *smithy.Schema) error {
@@ -2338,7 +2360,9 @@ func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputSourceARN != nil {
 		s.WriteString(schemas.Record_inputSourceARN, *v.InputSourceARN)
 	}
-	serializeRecordAttributeMapString255(s, schemas.Record_recordAttributeMap, v.RecordAttributeMap)
+	if v.RecordAttributeMap != nil {
+		serializeRecordAttributeMapString255(s, schemas.Record_recordAttributeMap, v.RecordAttributeMap)
+	}
 	if v.UniqueId != nil {
 		s.WriteString(schemas.Record_uniqueId, *v.UniqueId)
 	}
@@ -2472,7 +2496,9 @@ func (v *Rule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchingKeys(s, schemas.Rule_matchingKeys, v.MatchingKeys)
+	if v.MatchingKeys != nil {
+		serializeMatchingKeys(s, schemas.Rule_matchingKeys, v.MatchingKeys)
+	}
 	if v.RuleName != nil {
 		s.WriteString(schemas.Rule_ruleName, *v.RuleName)
 	}
@@ -2539,7 +2565,9 @@ func (v *RuleBasedProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MatchPurpose != "" {
 		s.WriteString(schemas.RuleBasedProperties_matchPurpose, string(v.MatchPurpose))
 	}
-	serializeRuleList(s, schemas.RuleBasedProperties_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.RuleBasedProperties_rules, v.Rules)
+	}
 }
 func (v *RuleBasedProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleBasedProperties, func(s *smithy.Schema) error {
@@ -2650,7 +2678,9 @@ func (v *RuleConditionProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MatchingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleConditionList(s, schemas.RuleConditionProperties_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleConditionList(s, schemas.RuleConditionProperties_rules, v.Rules)
+	}
 }
 func (v *RuleConditionProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuleConditionProperties, func(s *smithy.Schema) error {

@@ -313,7 +313,9 @@ func (v *PutBotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdleSessionTTLInSeconds != nil {
 		s.WriteInt32(schemas.PutBotRequest_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
 	}
-	serializeIntentList(s, schemas.PutBotRequest_intents, v.Intents)
+	if v.Intents != nil {
+		serializeIntentList(s, schemas.PutBotRequest_intents, v.Intents)
+	}
 	if v.Locale != "" {
 		s.WriteString(schemas.PutBotRequest_locale, string(v.Locale))
 	}
@@ -326,7 +328,9 @@ func (v *PutBotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProcessBehavior != "" {
 		s.WriteString(schemas.PutBotRequest_processBehavior, string(v.ProcessBehavior))
 	}
-	serializeTagList(s, schemas.PutBotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutBotRequest_tags, v.Tags)
+	}
 	if v.VoiceId != nil {
 		s.WriteString(schemas.PutBotRequest_voiceId, *v.VoiceId)
 	}
@@ -498,7 +502,9 @@ func (v *PutBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdleSessionTTLInSeconds != nil {
 		s.WriteInt32(schemas.PutBotResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
 	}
-	serializeIntentList(s, schemas.PutBotResponse_intents, v.Intents)
+	if v.Intents != nil {
+		serializeIntentList(s, schemas.PutBotResponse_intents, v.Intents)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.PutBotResponse_lastUpdatedDate, *v.LastUpdatedDate)
 	}
@@ -514,7 +520,9 @@ func (v *PutBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.PutBotResponse_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.PutBotResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutBotResponse_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.PutBotResponse_version, *v.Version)
 	}

@@ -86,12 +86,18 @@ func (v *CreateIngestionDestinationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIngestionDestinationRequest_clientToken, *v.ClientToken)
 	}
-	serializeDestinationConfiguration(s, schemas.CreateIngestionDestinationRequest_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.CreateIngestionDestinationRequest_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.IngestionIdentifier != nil {
 		s.WriteString(schemas.CreateIngestionDestinationRequest_ingestionIdentifier, *v.IngestionIdentifier)
 	}
-	serializeProcessingConfiguration(s, schemas.CreateIngestionDestinationRequest_processingConfiguration, v.ProcessingConfiguration)
-	serializeTagList(s, schemas.CreateIngestionDestinationRequest_tags, v.Tags)
+	if v.ProcessingConfiguration != nil {
+		serializeProcessingConfiguration(s, schemas.CreateIngestionDestinationRequest_processingConfiguration, v.ProcessingConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIngestionDestinationRequest_tags, v.Tags)
+	}
 }
 
 type CreateIngestionDestinationOutput struct {

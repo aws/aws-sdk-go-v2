@@ -264,16 +264,24 @@ func (v *CreateBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.CreateBrokerRequest_PubliclyAccessible, *v.PubliclyAccessible)
 	}
-	serialize__listOf__string(s, schemas.CreateBrokerRequest_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.CreateBrokerRequest_SecurityGroups, v.SecurityGroups)
+	}
 	if v.StorageSize != nil {
 		s.WriteInt32(schemas.CreateBrokerRequest_StorageSize, *v.StorageSize)
 	}
 	if v.StorageType != "" {
 		s.WriteString(schemas.CreateBrokerRequest_StorageType, string(v.StorageType))
 	}
-	serialize__listOf__string(s, schemas.CreateBrokerRequest_SubnetIds, v.SubnetIds)
-	serialize__mapOf__string(s, schemas.CreateBrokerRequest_Tags, v.Tags)
-	serialize__listOfUser(s, schemas.CreateBrokerRequest_Users, v.Users)
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.CreateBrokerRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateBrokerRequest_Tags, v.Tags)
+	}
+	if v.Users != nil {
+		serialize__listOfUser(s, schemas.CreateBrokerRequest_Users, v.Users)
+	}
 }
 
 type CreateBrokerOutput struct {

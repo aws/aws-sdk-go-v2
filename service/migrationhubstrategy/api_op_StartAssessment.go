@@ -55,7 +55,9 @@ func (v *StartAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentDataSourceType != "" {
 		s.WriteString(schemas.StartAssessmentRequest_assessmentDataSourceType, string(v.AssessmentDataSourceType))
 	}
-	serializeAssessmentTargets(s, schemas.StartAssessmentRequest_assessmentTargets, v.AssessmentTargets)
+	if v.AssessmentTargets != nil {
+		serializeAssessmentTargets(s, schemas.StartAssessmentRequest_assessmentTargets, v.AssessmentTargets)
+	}
 	if v.S3bucketForAnalysisData != nil {
 		s.WriteString(schemas.StartAssessmentRequest_s3bucketForAnalysisData, *v.S3bucketForAnalysisData)
 	}

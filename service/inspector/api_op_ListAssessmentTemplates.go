@@ -62,7 +62,9 @@ func (v *ListAssessmentTemplatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListParentArnList(s, schemas.ListAssessmentTemplatesRequest_assessmentTargetArns, v.AssessmentTargetArns)
+	if v.AssessmentTargetArns != nil {
+		serializeListParentArnList(s, schemas.ListAssessmentTemplatesRequest_assessmentTargetArns, v.AssessmentTargetArns)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.ListAssessmentTemplatesRequest_filter)
 		v.Filter.SerializeMembers(s)
@@ -102,7 +104,9 @@ func (v *ListAssessmentTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListReturnedArnList(s, schemas.ListAssessmentTemplatesResponse_assessmentTemplateArns, v.AssessmentTemplateArns)
+	if v.AssessmentTemplateArns != nil {
+		serializeListReturnedArnList(s, schemas.ListAssessmentTemplatesResponse_assessmentTemplateArns, v.AssessmentTemplateArns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentTemplatesResponse_nextToken, *v.NextToken)
 	}

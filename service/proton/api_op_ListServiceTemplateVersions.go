@@ -121,7 +121,9 @@ func (v *ListServiceTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceTemplateVersionsOutput_nextToken, *v.NextToken)
 	}
-	serializeServiceTemplateVersionSummaryList(s, schemas.ListServiceTemplateVersionsOutput_templateVersions, v.TemplateVersions)
+	if v.TemplateVersions != nil {
+		serializeServiceTemplateVersionSummaryList(s, schemas.ListServiceTemplateVersionsOutput_templateVersions, v.TemplateVersions)
+	}
 }
 func (v *ListServiceTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceTemplateVersionsOutput, func(s *smithy.Schema) error {

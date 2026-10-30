@@ -61,7 +61,9 @@ func (v *ListReputationEntitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListReputationEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReputationEntityFilter(s, schemas.ListReputationEntitiesRequest_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeReputationEntityFilter(s, schemas.ListReputationEntitiesRequest_Filter, v.Filter)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReputationEntitiesRequest_NextToken, *v.NextToken)
 	}
@@ -98,7 +100,9 @@ func (v *ListReputationEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReputationEntitiesResponse_NextToken, *v.NextToken)
 	}
-	serializeReputationEntitiesList(s, schemas.ListReputationEntitiesResponse_ReputationEntities, v.ReputationEntities)
+	if v.ReputationEntities != nil {
+		serializeReputationEntitiesList(s, schemas.ListReputationEntitiesResponse_ReputationEntities, v.ReputationEntities)
+	}
 }
 func (v *ListReputationEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReputationEntitiesResponse, func(s *smithy.Schema) error {

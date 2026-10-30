@@ -60,7 +60,9 @@ func (v *SynchronizeGatewayTargetsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.GatewayIdentifier != nil {
 		s.WriteString(schemas.SynchronizeGatewayTargetsRequest_gatewayIdentifier, *v.GatewayIdentifier)
 	}
-	serializeTargetIdList(s, schemas.SynchronizeGatewayTargetsRequest_targetIdList, v.TargetIdList)
+	if v.TargetIdList != nil {
+		serializeTargetIdList(s, schemas.SynchronizeGatewayTargetsRequest_targetIdList, v.TargetIdList)
+	}
 }
 
 type SynchronizeGatewayTargetsOutput struct {
@@ -81,7 +83,9 @@ func (v *SynchronizeGatewayTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SynchronizeGatewayTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewayTargetList(s, schemas.SynchronizeGatewayTargetsResponse_targets, v.Targets)
+	if v.Targets != nil {
+		serializeGatewayTargetList(s, schemas.SynchronizeGatewayTargetsResponse_targets, v.Targets)
+	}
 }
 func (v *SynchronizeGatewayTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SynchronizeGatewayTargetsResponse, func(s *smithy.Schema) error {

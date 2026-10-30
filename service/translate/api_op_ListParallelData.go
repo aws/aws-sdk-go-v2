@@ -79,7 +79,9 @@ func (v *ListParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListParallelDataResponse_NextToken, *v.NextToken)
 	}
-	serializeParallelDataPropertiesList(s, schemas.ListParallelDataResponse_ParallelDataPropertiesList, v.ParallelDataPropertiesList)
+	if v.ParallelDataPropertiesList != nil {
+		serializeParallelDataPropertiesList(s, schemas.ListParallelDataResponse_ParallelDataPropertiesList, v.ParallelDataPropertiesList)
+	}
 }
 func (v *ListParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListParallelDataResponse, func(s *smithy.Schema) error {

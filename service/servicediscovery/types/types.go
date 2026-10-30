@@ -88,7 +88,9 @@ func (v *DnsConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DnsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsRecordList(s, schemas.DnsConfig_DnsRecords, v.DnsRecords)
+	if v.DnsRecords != nil {
+		serializeDnsRecordList(s, schemas.DnsConfig_DnsRecords, v.DnsRecords)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.DnsConfig_NamespaceId, *v.NamespaceId)
 	}
@@ -136,7 +138,9 @@ func (v *DnsConfigChange) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DnsConfigChange) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsRecordList(s, schemas.DnsConfigChange_DnsRecords, v.DnsRecords)
+	if v.DnsRecords != nil {
+		serializeDnsRecordList(s, schemas.DnsConfigChange_DnsRecords, v.DnsRecords)
+	}
 }
 func (v *DnsConfigChange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DnsConfigChange, func(s *smithy.Schema) error {
@@ -589,7 +593,9 @@ func (v *HttpInstanceSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpInstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.HttpInstanceSummary_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.HttpInstanceSummary_Attributes, v.Attributes)
+	}
 	if v.HealthStatus != "" {
 		s.WriteString(schemas.HttpInstanceSummary_HealthStatus, string(v.HealthStatus))
 	}
@@ -827,7 +833,9 @@ func (v *Instance) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Instance) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.Instance_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.Instance_Attributes, v.Attributes)
+	}
 	if v.CreatedByAccount != nil {
 		s.WriteString(schemas.Instance_CreatedByAccount, *v.CreatedByAccount)
 	}
@@ -918,7 +926,9 @@ func (v *InstanceSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InstanceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.InstanceSummary_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.InstanceSummary_Attributes, v.Attributes)
+	}
 	if v.CreatedByAccount != nil {
 		s.WriteString(schemas.InstanceSummary_CreatedByAccount, *v.CreatedByAccount)
 	}
@@ -1147,7 +1157,9 @@ func (v *NamespaceFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.NamespaceFilter_Name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.NamespaceFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.NamespaceFilter_Values, v.Values)
+	}
 }
 func (v *NamespaceFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NamespaceFilter, func(s *smithy.Schema) error {
@@ -1429,7 +1441,9 @@ func (v *Operation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Operation_Status, string(v.Status))
 	}
-	serializeOperationTargetsMap(s, schemas.Operation_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeOperationTargetsMap(s, schemas.Operation_Targets, v.Targets)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Operation_Type, string(v.Type))
 	}
@@ -1550,7 +1564,9 @@ func (v *OperationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.OperationFilter_Name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.OperationFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.OperationFilter_Values, v.Values)
+	}
 }
 func (v *OperationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OperationFilter, func(s *smithy.Schema) error {
@@ -2232,7 +2248,9 @@ func (v *ServiceAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceAttributesMap(s, schemas.ServiceAttributes_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeServiceAttributesMap(s, schemas.ServiceAttributes_Attributes, v.Attributes)
+	}
 	if v.ResourceOwner != nil {
 		s.WriteString(schemas.ServiceAttributes_ResourceOwner, *v.ResourceOwner)
 	}
@@ -2367,7 +2385,9 @@ func (v *ServiceFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.ServiceFilter_Name, string(v.Name))
 	}
-	serializeFilterValues(s, schemas.ServiceFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.ServiceFilter_Values, v.Values)
+	}
 }
 func (v *ServiceFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceFilter, func(s *smithy.Schema) error {

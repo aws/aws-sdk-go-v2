@@ -85,7 +85,9 @@ func (v *AssociateTargetsWithJobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.AssociateTargetsWithJobRequest_namespaceId, *v.NamespaceId)
 	}
-	serializeJobTargets(s, schemas.AssociateTargetsWithJobRequest_targets, v.Targets)
+	if v.Targets != nil {
+		serializeJobTargets(s, schemas.AssociateTargetsWithJobRequest_targets, v.Targets)
+	}
 }
 
 type AssociateTargetsWithJobOutput struct {

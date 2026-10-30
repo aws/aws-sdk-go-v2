@@ -63,14 +63,18 @@ func (v *CreateRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRouterNetworkInterfaceRequest_ClientToken, *v.ClientToken)
 	}
-	serializeRouterNetworkInterfaceConfiguration(s, schemas.CreateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterNetworkInterfaceConfiguration(s, schemas.CreateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRouterNetworkInterfaceRequest_Name, *v.Name)
 	}
 	if v.RegionName != nil {
 		s.WriteString(schemas.CreateRouterNetworkInterfaceRequest_RegionName, *v.RegionName)
 	}
-	serialize__mapOfString(s, schemas.CreateRouterNetworkInterfaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.CreateRouterNetworkInterfaceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRouterNetworkInterfaceOutput struct {

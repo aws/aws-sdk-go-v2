@@ -287,7 +287,9 @@ func (v *EndpointConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointType != "" {
 		s.WriteString(schemas.EndpointConfig_endpointType, string(v.EndpointType))
 	}
-	serializeRegionList(s, schemas.EndpointConfig_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.EndpointConfig_regions, v.Regions)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.EndpointConfig_scalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -368,7 +370,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_name, *v.Name)
 	}
-	serializeFilterValueList(s, schemas.Filter_values, v.Values)
+	if v.Values != nil {
+		serializeFilterValueList(s, schemas.Filter_values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -497,8 +501,12 @@ func (v *FunctionEndpointSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointType != "" {
 		s.WriteString(schemas.FunctionEndpointSummary_endpointType, string(v.EndpointType))
 	}
-	serializeRegionList(s, schemas.FunctionEndpointSummary_regions, v.Regions)
-	serializeRevisionWeightList(s, schemas.FunctionEndpointSummary_revisionWeights, v.RevisionWeights)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.FunctionEndpointSummary_regions, v.Regions)
+	}
+	if v.RevisionWeights != nil {
+		serializeRevisionWeightList(s, schemas.FunctionEndpointSummary_revisionWeights, v.RevisionWeights)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.FunctionEndpointSummary_scalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -903,7 +911,9 @@ func (v *RegionalEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.RegionalEndpoint_domainName, *v.DomainName)
 	}
-	serializeRevisionWeightList(s, schemas.RegionalEndpoint_revisionWeights, v.RevisionWeights)
+	if v.RevisionWeights != nil {
+		serializeRevisionWeightList(s, schemas.RegionalEndpoint_revisionWeights, v.RevisionWeights)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.RegionalEndpoint_scalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -1316,7 +1326,9 @@ func (v *ServiceConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EgressNetworkConnectorArn != nil {
 		s.WriteString(schemas.ServiceConfig_egressNetworkConnectorArn, *v.EgressNetworkConnectorArn)
 	}
-	serializeEnvironmentVariables(s, schemas.ServiceConfig_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.ServiceConfig_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.ServiceConfig_executionRoleArn, *v.ExecutionRoleArn)
 	}

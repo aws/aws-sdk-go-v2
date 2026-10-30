@@ -88,7 +88,9 @@ func (v *GetInsightEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInsightEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightEventList(s, schemas.GetInsightEventsResult_InsightEvents, v.InsightEvents)
+	if v.InsightEvents != nil {
+		serializeInsightEventList(s, schemas.GetInsightEventsResult_InsightEvents, v.InsightEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInsightEventsResult_NextToken, *v.NextToken)
 	}

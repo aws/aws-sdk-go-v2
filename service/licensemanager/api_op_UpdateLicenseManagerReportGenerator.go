@@ -103,7 +103,9 @@ func (v *UpdateLicenseManagerReportGeneratorInput) SerializeMembers(s smithy.Sha
 	if v.ReportGeneratorName != nil {
 		s.WriteString(schemas.UpdateLicenseManagerReportGeneratorRequest_ReportGeneratorName, *v.ReportGeneratorName)
 	}
-	serializeReportTypeList(s, schemas.UpdateLicenseManagerReportGeneratorRequest_Type, v.Type)
+	if v.Type != nil {
+		serializeReportTypeList(s, schemas.UpdateLicenseManagerReportGeneratorRequest_Type, v.Type)
+	}
 }
 
 type UpdateLicenseManagerReportGeneratorOutput struct {

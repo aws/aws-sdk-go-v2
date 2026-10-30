@@ -61,14 +61,18 @@ func (v *DescribeNotifyTemplatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeNotifyTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyTemplateFilterList(s, schemas.DescribeNotifyTemplatesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeNotifyTemplateFilterList(s, schemas.DescribeNotifyTemplatesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeNotifyTemplatesRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeNotifyTemplatesRequest_NextToken, *v.NextToken)
 	}
-	serializeNotifyTemplateIdList(s, schemas.DescribeNotifyTemplatesRequest_TemplateIds, v.TemplateIds)
+	if v.TemplateIds != nil {
+		serializeNotifyTemplateIdList(s, schemas.DescribeNotifyTemplatesRequest_TemplateIds, v.TemplateIds)
+	}
 }
 
 type DescribeNotifyTemplatesOutput struct {
@@ -96,7 +100,9 @@ func (v *DescribeNotifyTemplatesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeNotifyTemplatesResult_NextToken, *v.NextToken)
 	}
-	serializeNotifyTemplateInformationList(s, schemas.DescribeNotifyTemplatesResult_NotifyTemplates, v.NotifyTemplates)
+	if v.NotifyTemplates != nil {
+		serializeNotifyTemplateInformationList(s, schemas.DescribeNotifyTemplatesResult_NotifyTemplates, v.NotifyTemplates)
+	}
 }
 func (v *DescribeNotifyTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNotifyTemplatesResult, func(s *smithy.Schema) error {

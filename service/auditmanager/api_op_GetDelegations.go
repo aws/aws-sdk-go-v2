@@ -74,7 +74,9 @@ func (v *GetDelegationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDelegationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDelegationMetadataList(s, schemas.GetDelegationsResponse_delegations, v.Delegations)
+	if v.Delegations != nil {
+		serializeDelegationMetadataList(s, schemas.GetDelegationsResponse_delegations, v.Delegations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDelegationsResponse_nextToken, *v.NextToken)
 	}

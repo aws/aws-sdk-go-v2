@@ -94,7 +94,9 @@ func (v *ListComputeNodeGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComputeNodeGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeNodeGroupList(s, schemas.ListComputeNodeGroupsResponse_computeNodeGroups, v.ComputeNodeGroups)
+	if v.ComputeNodeGroups != nil {
+		serializeComputeNodeGroupList(s, schemas.ListComputeNodeGroupsResponse_computeNodeGroups, v.ComputeNodeGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComputeNodeGroupsResponse_nextToken, *v.NextToken)
 	}

@@ -70,7 +70,9 @@ func (v *CreateDomainNameAccessAssociationInput) SerializeMembers(s smithy.Shape
 	if v.DomainNameArn != nil {
 		s.WriteString(schemas.CreateDomainNameAccessAssociationRequest_domainNameArn, *v.DomainNameArn)
 	}
-	serializeMapOfStringToString(s, schemas.CreateDomainNameAccessAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.CreateDomainNameAccessAssociationRequest_tags, v.Tags)
+	}
 }
 
 // Represents a domain name access association between an access association
@@ -120,7 +122,9 @@ func (v *CreateDomainNameAccessAssociationOutput) SerializeMembers(s smithy.Shap
 	if v.DomainNameArn != nil {
 		s.WriteString(schemas.DomainNameAccessAssociation_domainNameArn, *v.DomainNameArn)
 	}
-	serializeMapOfStringToString(s, schemas.DomainNameAccessAssociation_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.DomainNameAccessAssociation_tags, v.Tags)
+	}
 }
 func (v *CreateDomainNameAccessAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DomainNameAccessAssociation, func(s *smithy.Schema) error {

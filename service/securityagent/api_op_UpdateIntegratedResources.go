@@ -60,7 +60,9 @@ func (v *UpdateIntegratedResourcesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.IntegrationId != nil {
 		s.WriteString(schemas.UpdateIntegratedResourcesInput_integrationId, *v.IntegrationId)
 	}
-	serializeIntegratedResourceInputItemList(s, schemas.UpdateIntegratedResourcesInput_items, v.Items)
+	if v.Items != nil {
+		serializeIntegratedResourceInputItemList(s, schemas.UpdateIntegratedResourcesInput_items, v.Items)
+	}
 }
 
 type UpdateIntegratedResourcesOutput struct {

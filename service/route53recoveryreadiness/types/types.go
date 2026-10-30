@@ -53,9 +53,15 @@ func (v *CellOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CellName != nil {
 		s.WriteString(schemas.CellOutput_CellName, *v.CellName)
 	}
-	serialize__listOf__string(s, schemas.CellOutput_Cells, v.Cells)
-	serialize__listOf__string(s, schemas.CellOutput_ParentReadinessScopes, v.ParentReadinessScopes)
-	serializeTags(s, schemas.CellOutput_Tags, v.Tags)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.CellOutput_Cells, v.Cells)
+	}
+	if v.ParentReadinessScopes != nil {
+		serialize__listOf__string(s, schemas.CellOutput_ParentReadinessScopes, v.ParentReadinessScopes)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CellOutput_Tags, v.Tags)
+	}
 }
 func (v *CellOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CellOutput, func(s *smithy.Schema) error {
@@ -345,7 +351,9 @@ func (v *ReadinessCheckOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceSet != nil {
 		s.WriteString(schemas.ReadinessCheckOutput_ResourceSet, *v.ResourceSet)
 	}
-	serializeTags(s, schemas.ReadinessCheckOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ReadinessCheckOutput_Tags, v.Tags)
+	}
 }
 func (v *ReadinessCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReadinessCheckOutput, func(s *smithy.Schema) error {
@@ -477,14 +485,18 @@ func (v *RecoveryGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecoveryGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.RecoveryGroupOutput_Cells, v.Cells)
+	if v.Cells != nil {
+		serialize__listOf__string(s, schemas.RecoveryGroupOutput_Cells, v.Cells)
+	}
 	if v.RecoveryGroupArn != nil {
 		s.WriteString(schemas.RecoveryGroupOutput_RecoveryGroupArn, *v.RecoveryGroupArn)
 	}
 	if v.RecoveryGroupName != nil {
 		s.WriteString(schemas.RecoveryGroupOutput_RecoveryGroupName, *v.RecoveryGroupName)
 	}
-	serializeTags(s, schemas.RecoveryGroupOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RecoveryGroupOutput_Tags, v.Tags)
+	}
 }
 func (v *RecoveryGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecoveryGroupOutput, func(s *smithy.Schema) error {
@@ -539,7 +551,9 @@ func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DnsTargetResource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.Resource_ReadinessScopes, v.ReadinessScopes)
+	if v.ReadinessScopes != nil {
+		serialize__listOf__string(s, schemas.Resource_ReadinessScopes, v.ReadinessScopes)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.Resource_ResourceArn, *v.ResourceArn)
 	}
@@ -687,8 +701,12 @@ func (v *ResourceSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceSetType != nil {
 		s.WriteString(schemas.ResourceSetOutput_ResourceSetType, *v.ResourceSetType)
 	}
-	serialize__listOfResource(s, schemas.ResourceSetOutput_Resources, v.Resources)
-	serializeTags(s, schemas.ResourceSetOutput_Tags, v.Tags)
+	if v.Resources != nil {
+		serialize__listOfResource(s, schemas.ResourceSetOutput_Resources, v.Resources)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.ResourceSetOutput_Tags, v.Tags)
+	}
 }
 func (v *ResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceSetOutput, func(s *smithy.Schema) error {
@@ -747,7 +765,9 @@ func (v *RuleResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastCheckedTimestamp != nil {
 		s.WriteTime(schemas.RuleResult_LastCheckedTimestamp, *v.LastCheckedTimestamp)
 	}
-	serialize__listOfMessage(s, schemas.RuleResult_Messages, v.Messages)
+	if v.Messages != nil {
+		serialize__listOfMessage(s, schemas.RuleResult_Messages, v.Messages)
+	}
 	if v.Readiness != "" {
 		s.WriteString(schemas.RuleResult_Readiness, string(v.Readiness))
 	}

@@ -222,7 +222,9 @@ func (v *GetStyleDescriptorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.GetStyleDescriptorRequest_Key, *v.Key)
 	}
-	serializePoiCategoryList(s, schemas.GetStyleDescriptorRequest_PoiCategories, v.PoiCategories)
+	if v.PoiCategories != nil {
+		serializePoiCategoryList(s, schemas.GetStyleDescriptorRequest_PoiCategories, v.PoiCategories)
+	}
 	if v.PoiDensity != "" {
 		s.WriteString(schemas.GetStyleDescriptorRequest_PoiDensity, string(v.PoiDensity))
 	}
@@ -238,7 +240,9 @@ func (v *GetStyleDescriptorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Traffic != "" {
 		s.WriteString(schemas.GetStyleDescriptorRequest_Traffic, string(v.Traffic))
 	}
-	serializeTravelModeList(s, schemas.GetStyleDescriptorRequest_TravelModes, v.TravelModes)
+	if v.TravelModes != nil {
+		serializeTravelModeList(s, schemas.GetStyleDescriptorRequest_TravelModes, v.TravelModes)
+	}
 }
 
 type GetStyleDescriptorOutput struct {

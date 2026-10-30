@@ -88,7 +88,9 @@ func (v *UpdateProtectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Aggregation != "" {
 		s.WriteString(schemas.UpdateProtectionGroupRequest_Aggregation, string(v.Aggregation))
 	}
-	serializeProtectionGroupMembers(s, schemas.UpdateProtectionGroupRequest_Members, v.Members)
+	if v.Members != nil {
+		serializeProtectionGroupMembers(s, schemas.UpdateProtectionGroupRequest_Members, v.Members)
+	}
 	if v.Pattern != "" {
 		s.WriteString(schemas.UpdateProtectionGroupRequest_Pattern, string(v.Pattern))
 	}

@@ -92,11 +92,15 @@ func (v *UpdateRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.UpdateRecordRequest_FeatureGroupName, *v.FeatureGroupName)
 	}
-	serializeRecord(s, schemas.UpdateRecordRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeRecord(s, schemas.UpdateRecordRequest_Features, v.Features)
+	}
 	if v.RecordIdentifierValueAsString != nil {
 		s.WriteString(schemas.UpdateRecordRequest_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
 	}
-	serializeTargetStores(s, schemas.UpdateRecordRequest_TargetStores, v.TargetStores)
+	if v.TargetStores != nil {
+		serializeTargetStores(s, schemas.UpdateRecordRequest_TargetStores, v.TargetStores)
+	}
 	if v.TtlDuration != nil {
 		s.WriteStruct(schemas.UpdateRecordRequest_TtlDuration)
 		v.TtlDuration.SerializeMembers(s)

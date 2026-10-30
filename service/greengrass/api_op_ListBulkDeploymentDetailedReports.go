@@ -84,7 +84,9 @@ func (v *ListBulkDeploymentDetailedReportsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListBulkDeploymentDetailedReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBulkDeploymentResults(s, schemas.ListBulkDeploymentDetailedReportsResponse_Deployments, v.Deployments)
+	if v.Deployments != nil {
+		serializeBulkDeploymentResults(s, schemas.ListBulkDeploymentDetailedReportsResponse_Deployments, v.Deployments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBulkDeploymentDetailedReportsResponse_NextToken, *v.NextToken)
 	}

@@ -114,7 +114,9 @@ func (v *ListIdentityProvidersOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdentityProvidersResponse_NextToken, *v.NextToken)
 	}
-	serializeProvidersListType(s, schemas.ListIdentityProvidersResponse_Providers, v.Providers)
+	if v.Providers != nil {
+		serializeProvidersListType(s, schemas.ListIdentityProvidersResponse_Providers, v.Providers)
+	}
 }
 func (v *ListIdentityProvidersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListIdentityProvidersResponse, func(s *smithy.Schema) error {

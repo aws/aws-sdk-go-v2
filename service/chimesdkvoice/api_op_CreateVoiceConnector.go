@@ -106,7 +106,9 @@ func (v *CreateVoiceConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequireEncryption != nil {
 		s.WriteBool(schemas.CreateVoiceConnectorRequest_RequireEncryption, *v.RequireEncryption)
 	}
-	serializeTagList(s, schemas.CreateVoiceConnectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVoiceConnectorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateVoiceConnectorOutput struct {

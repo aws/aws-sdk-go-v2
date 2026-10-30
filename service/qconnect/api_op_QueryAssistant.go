@@ -95,8 +95,12 @@ func (v *QueryAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OverrideKnowledgeBaseSearchType != "" {
 		s.WriteString(schemas.QueryAssistantRequest_overrideKnowledgeBaseSearchType, string(v.OverrideKnowledgeBaseSearchType))
 	}
-	serializeQueryConditionExpression(s, schemas.QueryAssistantRequest_queryCondition, v.QueryCondition)
-	serializeQueryInputData(s, schemas.QueryAssistantRequest_queryInputData, v.QueryInputData)
+	if v.QueryCondition != nil {
+		serializeQueryConditionExpression(s, schemas.QueryAssistantRequest_queryCondition, v.QueryCondition)
+	}
+	if v.QueryInputData != nil {
+		serializeQueryInputData(s, schemas.QueryAssistantRequest_queryInputData, v.QueryInputData)
+	}
 	if v.QueryText != nil {
 		s.WriteString(schemas.QueryAssistantRequest_queryText, *v.QueryText)
 	}
@@ -164,7 +168,9 @@ func (v *QueryAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryAssistantResponse_nextToken, *v.NextToken)
 	}
-	serializeQueryResultsList(s, schemas.QueryAssistantResponse_results, v.Results)
+	if v.Results != nil {
+		serializeQueryResultsList(s, schemas.QueryAssistantResponse_results, v.Results)
+	}
 }
 func (v *QueryAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryAssistantResponse, func(s *smithy.Schema) error {

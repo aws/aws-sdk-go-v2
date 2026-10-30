@@ -69,7 +69,9 @@ func (v *ListIncidentRecordsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIncidentRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListIncidentRecordsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListIncidentRecordsInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListIncidentRecordsInput_maxResults, *v.MaxResults)
 	}
@@ -117,7 +119,9 @@ func (v *ListIncidentRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIncidentRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIncidentRecordSummaryList(s, schemas.ListIncidentRecordsOutput_incidentRecordSummaries, v.IncidentRecordSummaries)
+	if v.IncidentRecordSummaries != nil {
+		serializeIncidentRecordSummaryList(s, schemas.ListIncidentRecordsOutput_incidentRecordSummaries, v.IncidentRecordSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIncidentRecordsOutput_nextToken, *v.NextToken)
 	}

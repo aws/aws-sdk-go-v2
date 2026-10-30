@@ -60,7 +60,9 @@ func (v *StopProductSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Domain != nil {
 		s.WriteString(schemas.StopProductSubscriptionRequest_Domain, *v.Domain)
 	}
-	serializeIdentityProvider(s, schemas.StopProductSubscriptionRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.StopProductSubscriptionRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.Product != nil {
 		s.WriteString(schemas.StopProductSubscriptionRequest_Product, *v.Product)
 	}

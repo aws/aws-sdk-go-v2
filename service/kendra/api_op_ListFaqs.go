@@ -86,7 +86,9 @@ func (v *ListFaqsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFaqsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaqSummaryItems(s, schemas.ListFaqsResponse_FaqSummaryItems, v.FaqSummaryItems)
+	if v.FaqSummaryItems != nil {
+		serializeFaqSummaryItems(s, schemas.ListFaqsResponse_FaqSummaryItems, v.FaqSummaryItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFaqsResponse_NextToken, *v.NextToken)
 	}

@@ -95,7 +95,9 @@ func (v *ListAgentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentList(s, schemas.ListAgentsResponse_Agents, v.Agents)
+	if v.Agents != nil {
+		serializeAgentList(s, schemas.ListAgentsResponse_Agents, v.Agents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentsResponse_NextToken, *v.NextToken)
 	}

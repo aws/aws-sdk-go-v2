@@ -80,7 +80,9 @@ func (v *UpdateHoursOfOperationOverrideInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateHoursOfOperationOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHoursOfOperationOverrideConfigList(s, schemas.UpdateHoursOfOperationOverrideRequest_Config, v.Config)
+	if v.Config != nil {
+		serializeHoursOfOperationOverrideConfigList(s, schemas.UpdateHoursOfOperationOverrideRequest_Config, v.Config)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateHoursOfOperationOverrideRequest_Description, *v.Description)
 	}

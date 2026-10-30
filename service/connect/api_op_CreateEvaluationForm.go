@@ -117,7 +117,9 @@ func (v *CreateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateEvaluationFormRequest_InstanceId, *v.InstanceId)
 	}
-	serializeEvaluationFormItemsList(s, schemas.CreateEvaluationFormRequest_Items, v.Items)
+	if v.Items != nil {
+		serializeEvaluationFormItemsList(s, schemas.CreateEvaluationFormRequest_Items, v.Items)
+	}
 	if v.LanguageConfiguration != nil {
 		s.WriteStruct(schemas.CreateEvaluationFormRequest_LanguageConfiguration)
 		v.LanguageConfiguration.SerializeMembers(s)
@@ -133,7 +135,9 @@ func (v *CreateEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScoringStrategy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateEvaluationFormRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEvaluationFormRequest_Tags, v.Tags)
+	}
 	if v.TargetConfiguration != nil {
 		s.WriteStruct(schemas.CreateEvaluationFormRequest_TargetConfiguration)
 		v.TargetConfiguration.SerializeMembers(s)

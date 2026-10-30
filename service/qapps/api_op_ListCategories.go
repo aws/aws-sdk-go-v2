@@ -69,7 +69,9 @@ func (v *ListCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoriesList(s, schemas.ListCategoriesOutput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoriesList(s, schemas.ListCategoriesOutput_categories, v.Categories)
+	}
 }
 func (v *ListCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCategoriesOutput, func(s *smithy.Schema) error {

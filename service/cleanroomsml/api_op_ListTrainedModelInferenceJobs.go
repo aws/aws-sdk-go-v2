@@ -104,7 +104,9 @@ func (v *ListTrainedModelInferenceJobsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrainedModelInferenceJobsResponse_nextToken, *v.NextToken)
 	}
-	serializeTrainedModelInferenceJobList(s, schemas.ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs, v.TrainedModelInferenceJobs)
+	if v.TrainedModelInferenceJobs != nil {
+		serializeTrainedModelInferenceJobList(s, schemas.ListTrainedModelInferenceJobsResponse_trainedModelInferenceJobs, v.TrainedModelInferenceJobs)
+	}
 }
 func (v *ListTrainedModelInferenceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrainedModelInferenceJobsResponse, func(s *smithy.Schema) error {

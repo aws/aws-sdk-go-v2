@@ -103,7 +103,9 @@ func (v *ListAuditMitigationActionsExecutionsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListAuditMitigationActionsExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditMitigationActionExecutionMetadataList(s, schemas.ListAuditMitigationActionsExecutionsResponse_actionsExecutions, v.ActionsExecutions)
+	if v.ActionsExecutions != nil {
+		serializeAuditMitigationActionExecutionMetadataList(s, schemas.ListAuditMitigationActionsExecutionsResponse_actionsExecutions, v.ActionsExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAuditMitigationActionsExecutionsResponse_nextToken, *v.NextToken)
 	}

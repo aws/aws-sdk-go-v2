@@ -209,7 +209,9 @@ func (v *VerifyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.VerifyRequest_DryRun, *v.DryRun)
 	}
-	serializeGrantTokenList(s, schemas.VerifyRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.VerifyRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.VerifyRequest_KeyId, *v.KeyId)
 	}

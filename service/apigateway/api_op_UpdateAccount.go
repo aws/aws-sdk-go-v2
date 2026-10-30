@@ -44,7 +44,9 @@ func (v *UpdateAccountInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateAccountRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateAccountRequest_patchOperations, v.PatchOperations)
+	}
 }
 
 // Represents an AWS account that is associated with API Gateway.
@@ -82,7 +84,9 @@ func (v *UpdateAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudwatchRoleArn != nil {
 		s.WriteString(schemas.Account_cloudwatchRoleArn, *v.CloudwatchRoleArn)
 	}
-	serializeListOfString(s, schemas.Account_features, v.Features)
+	if v.Features != nil {
+		serializeListOfString(s, schemas.Account_features, v.Features)
+	}
 	if v.ThrottleSettings != nil {
 		s.WriteStruct(schemas.Account_throttleSettings)
 		v.ThrottleSettings.SerializeMembers(s)

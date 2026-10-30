@@ -8,9 +8,6 @@ import (
 )
 
 func serializeActionFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ActionFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeActionFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -32,9 +26,6 @@ func serializeFilterValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeNextSteps(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeNextSteps(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeRecommendedActions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RecommendedAction) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeRecommendedActions(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -177,9 +162,6 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeContext(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

@@ -90,7 +90,9 @@ func (v *CreateOutpostResolverInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PreferredInstanceType != nil {
 		s.WriteString(schemas.CreateOutpostResolverRequest_PreferredInstanceType, *v.PreferredInstanceType)
 	}
-	serializeTagList(s, schemas.CreateOutpostResolverRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateOutpostResolverRequest_Tags, v.Tags)
+	}
 }
 
 type CreateOutpostResolverOutput struct {

@@ -80,7 +80,9 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServiceConnectDefaults.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClusterSettings(s, schemas.UpdateClusterRequest_settings, v.Settings)
+	if v.Settings != nil {
+		serializeClusterSettings(s, schemas.UpdateClusterRequest_settings, v.Settings)
+	}
 }
 
 type UpdateClusterOutput struct {

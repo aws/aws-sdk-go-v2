@@ -68,7 +68,9 @@ func (v *RemoveTagsFromCertificateInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CertificateArn != nil {
 		s.WriteString(schemas.RemoveTagsFromCertificateRequest_CertificateArn, *v.CertificateArn)
 	}
-	serializeTagList(s, schemas.RemoveTagsFromCertificateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RemoveTagsFromCertificateRequest_Tags, v.Tags)
+	}
 }
 func (in *RemoveTagsFromCertificateInput) bindEndpointParams(p *EndpointParameters) {
 

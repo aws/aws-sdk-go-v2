@@ -45,8 +45,12 @@ func (v *BatchStartInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchStartInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.BatchStartRequest_ChannelIds, v.ChannelIds)
-	serialize__listOf__string(s, schemas.BatchStartRequest_MultiplexIds, v.MultiplexIds)
+	if v.ChannelIds != nil {
+		serialize__listOf__string(s, schemas.BatchStartRequest_ChannelIds, v.ChannelIds)
+	}
+	if v.MultiplexIds != nil {
+		serialize__listOf__string(s, schemas.BatchStartRequest_MultiplexIds, v.MultiplexIds)
+	}
 }
 
 // Placeholder documentation for BatchStartResponse
@@ -71,8 +75,12 @@ func (v *BatchStartOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchStartOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfBatchFailedResultModel(s, schemas.BatchStartResponse_Failed, v.Failed)
-	serialize__listOfBatchSuccessfulResultModel(s, schemas.BatchStartResponse_Successful, v.Successful)
+	if v.Failed != nil {
+		serialize__listOfBatchFailedResultModel(s, schemas.BatchStartResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serialize__listOfBatchSuccessfulResultModel(s, schemas.BatchStartResponse_Successful, v.Successful)
+	}
 }
 func (v *BatchStartOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchStartResponse, func(s *smithy.Schema) error {

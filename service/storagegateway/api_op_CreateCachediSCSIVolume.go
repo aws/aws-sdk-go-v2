@@ -147,7 +147,9 @@ func (v *CreateCachediSCSIVolumeInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.SourceVolumeARN != nil {
 		s.WriteString(schemas.CreateCachediSCSIVolumeInput_SourceVolumeARN, *v.SourceVolumeARN)
 	}
-	serializeTags(s, schemas.CreateCachediSCSIVolumeInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCachediSCSIVolumeInput_Tags, v.Tags)
+	}
 	if v.TargetName != nil {
 		s.WriteString(schemas.CreateCachediSCSIVolumeInput_TargetName, *v.TargetName)
 	}

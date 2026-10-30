@@ -60,7 +60,9 @@ func (v *DescribeRegistrationFieldDefinitionsInput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeRegistrationFieldDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldPathList(s, schemas.DescribeRegistrationFieldDefinitionsRequest_FieldPaths, v.FieldPaths)
+	if v.FieldPaths != nil {
+		serializeFieldPathList(s, schemas.DescribeRegistrationFieldDefinitionsRequest_FieldPaths, v.FieldPaths)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRegistrationFieldDefinitionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -109,7 +111,9 @@ func (v *DescribeRegistrationFieldDefinitionsOutput) SerializeMembers(s smithy.S
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegistrationFieldDefinitionsResult_NextToken, *v.NextToken)
 	}
-	serializeRegistrationFieldDefinitionList(s, schemas.DescribeRegistrationFieldDefinitionsResult_RegistrationFieldDefinitions, v.RegistrationFieldDefinitions)
+	if v.RegistrationFieldDefinitions != nil {
+		serializeRegistrationFieldDefinitionList(s, schemas.DescribeRegistrationFieldDefinitionsResult_RegistrationFieldDefinitions, v.RegistrationFieldDefinitions)
+	}
 	if v.RegistrationType != nil {
 		s.WriteString(schemas.DescribeRegistrationFieldDefinitionsResult_RegistrationType, *v.RegistrationType)
 	}

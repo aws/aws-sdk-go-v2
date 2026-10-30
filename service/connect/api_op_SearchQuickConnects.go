@@ -112,7 +112,9 @@ func (v *SearchQuickConnectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchQuickConnectsResponse_NextToken, *v.NextToken)
 	}
-	serializeQuickConnectSearchSummaryList(s, schemas.SearchQuickConnectsResponse_QuickConnects, v.QuickConnects)
+	if v.QuickConnects != nil {
+		serializeQuickConnectSearchSummaryList(s, schemas.SearchQuickConnectsResponse_QuickConnects, v.QuickConnects)
+	}
 }
 func (v *SearchQuickConnectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchQuickConnectsResponse, func(s *smithy.Schema) error {

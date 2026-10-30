@@ -43,7 +43,9 @@ func (v *ListDataLakesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataLakesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionList(s, schemas.ListDataLakesRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.ListDataLakesRequest_regions, v.Regions)
+	}
 }
 
 type ListDataLakesOutput struct {
@@ -64,7 +66,9 @@ func (v *ListDataLakesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataLakesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeResourceList(s, schemas.ListDataLakesResponse_dataLakes, v.DataLakes)
+	if v.DataLakes != nil {
+		serializeDataLakeResourceList(s, schemas.ListDataLakesResponse_dataLakes, v.DataLakes)
+	}
 }
 func (v *ListDataLakesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDataLakesResponse, func(s *smithy.Schema) error {

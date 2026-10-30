@@ -53,7 +53,9 @@ func (v *UpdateApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKey != nil {
 		s.WriteString(schemas.UpdateApiKeyRequest_apiKey, *v.ApiKey)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateApiKeyRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateApiKeyRequest_patchOperations, v.PatchOperations)
+	}
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -127,8 +129,12 @@ func (v *UpdateApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ApiKey_name, *v.Name)
 	}
-	serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
-	serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	if v.StageKeys != nil {
+		serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
+	}
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.ApiKey_value, *v.Value)
 	}

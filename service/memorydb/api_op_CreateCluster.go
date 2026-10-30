@@ -224,8 +224,12 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Port != nil {
 		s.WriteInt32(schemas.CreateClusterRequest_Port, *v.Port)
 	}
-	serializeSecurityGroupIdsList(s, schemas.CreateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSnapshotArnsList(s, schemas.CreateClusterRequest_SnapshotArns, v.SnapshotArns)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.CreateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SnapshotArns != nil {
+		serializeSnapshotArnsList(s, schemas.CreateClusterRequest_SnapshotArns, v.SnapshotArns)
+	}
 	if v.SnapshotName != nil {
 		s.WriteString(schemas.CreateClusterRequest_SnapshotName, *v.SnapshotName)
 	}
@@ -244,7 +248,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TLSEnabled != nil {
 		s.WriteBool(schemas.CreateClusterRequest_TLSEnabled, *v.TLSEnabled)
 	}
-	serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateClusterOutput struct {

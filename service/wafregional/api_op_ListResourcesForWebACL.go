@@ -86,7 +86,9 @@ func (v *ListResourcesForWebACLOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResourcesForWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceArns(s, schemas.ListResourcesForWebACLResponse_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.ListResourcesForWebACLResponse_ResourceArns, v.ResourceArns)
+	}
 }
 func (v *ListResourcesForWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourcesForWebACLResponse, func(s *smithy.Schema) error {

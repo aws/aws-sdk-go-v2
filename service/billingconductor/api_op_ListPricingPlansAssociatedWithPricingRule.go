@@ -121,7 +121,9 @@ func (v *ListPricingPlansAssociatedWithPricingRuleOutput) SerializeMembers(s smi
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPricingPlansAssociatedWithPricingRuleOutput_NextToken, *v.NextToken)
 	}
-	serializePricingPlanArns(s, schemas.ListPricingPlansAssociatedWithPricingRuleOutput_PricingPlanArns, v.PricingPlanArns)
+	if v.PricingPlanArns != nil {
+		serializePricingPlanArns(s, schemas.ListPricingPlansAssociatedWithPricingRuleOutput_PricingPlanArns, v.PricingPlanArns)
+	}
 	if v.PricingRuleArn != nil {
 		s.WriteString(schemas.ListPricingPlansAssociatedWithPricingRuleOutput_PricingRuleArn, *v.PricingRuleArn)
 	}

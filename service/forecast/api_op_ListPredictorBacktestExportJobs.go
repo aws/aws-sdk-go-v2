@@ -69,7 +69,9 @@ func (v *ListPredictorBacktestExportJobsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListPredictorBacktestExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListPredictorBacktestExportJobsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListPredictorBacktestExportJobsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPredictorBacktestExportJobsRequest_MaxResults, *v.MaxResults)
 	}
@@ -104,7 +106,9 @@ func (v *ListPredictorBacktestExportJobsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPredictorBacktestExportJobsResponse_NextToken, *v.NextToken)
 	}
-	serializePredictorBacktestExportJobs(s, schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, v.PredictorBacktestExportJobs)
+	if v.PredictorBacktestExportJobs != nil {
+		serializePredictorBacktestExportJobs(s, schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, v.PredictorBacktestExportJobs)
+	}
 }
 func (v *ListPredictorBacktestExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPredictorBacktestExportJobsResponse, func(s *smithy.Schema) error {

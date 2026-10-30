@@ -196,7 +196,9 @@ func (v *CreateMountTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6Address != nil {
 		s.WriteString(schemas.CreateMountTargetRequest_Ipv6Address, *v.Ipv6Address)
 	}
-	serializeSecurityGroups(s, schemas.CreateMountTargetRequest_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.CreateMountTargetRequest_SecurityGroups, v.SecurityGroups)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.CreateMountTargetRequest_SubnetId, *v.SubnetId)
 	}

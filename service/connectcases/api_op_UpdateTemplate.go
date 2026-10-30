@@ -107,12 +107,18 @@ func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateTemplateRequest_name, *v.Name)
 	}
-	serializeRequiredFieldList(s, schemas.UpdateTemplateRequest_requiredFields, v.RequiredFields)
-	serializeTemplateCaseRuleList(s, schemas.UpdateTemplateRequest_rules, v.Rules)
+	if v.RequiredFields != nil {
+		serializeRequiredFieldList(s, schemas.UpdateTemplateRequest_requiredFields, v.RequiredFields)
+	}
+	if v.Rules != nil {
+		serializeTemplateCaseRuleList(s, schemas.UpdateTemplateRequest_rules, v.Rules)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateTemplateRequest_status, string(v.Status))
 	}
-	serializeTagPropagationConfigurationList(s, schemas.UpdateTemplateRequest_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	if v.TagPropagationConfigurations != nil {
+		serializeTagPropagationConfigurationList(s, schemas.UpdateTemplateRequest_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.UpdateTemplateRequest_templateId, *v.TemplateId)
 	}

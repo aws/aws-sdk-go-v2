@@ -55,7 +55,9 @@ func (v *UpdateLibraryItemInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLibraryItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryIdList(s, schemas.UpdateLibraryItemInput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryIdList(s, schemas.UpdateLibraryItemInput_categories, v.Categories)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.UpdateLibraryItemInput_instanceId, *v.InstanceId)
 	}
@@ -143,7 +145,9 @@ func (v *UpdateLibraryItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVersion != nil {
 		s.WriteInt32(schemas.UpdateLibraryItemOutput_appVersion, *v.AppVersion)
 	}
-	serializeCategoryList(s, schemas.UpdateLibraryItemOutput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.UpdateLibraryItemOutput_categories, v.Categories)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateLibraryItemOutput_createdAt, *v.CreatedAt)
 	}

@@ -52,7 +52,9 @@ func (v *UpdateCampaignSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateCampaignSourceRequest_id, *v.Id)
 	}
-	serializeSource(s, schemas.UpdateCampaignSourceRequest_source, v.Source)
+	if v.Source != nil {
+		serializeSource(s, schemas.UpdateCampaignSourceRequest_source, v.Source)
+	}
 }
 
 type UpdateCampaignSourceOutput struct {

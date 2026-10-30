@@ -92,7 +92,9 @@ func (v *ListDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashboardEntries(s, schemas.ListDashboardsOutput_DashboardEntries, v.DashboardEntries)
+	if v.DashboardEntries != nil {
+		serializeDashboardEntries(s, schemas.ListDashboardsOutput_DashboardEntries, v.DashboardEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDashboardsOutput_NextToken, *v.NextToken)
 	}

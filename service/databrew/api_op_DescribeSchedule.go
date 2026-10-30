@@ -104,7 +104,9 @@ func (v *DescribeScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CronExpression != nil {
 		s.WriteString(schemas.DescribeScheduleResponse_CronExpression, *v.CronExpression)
 	}
-	serializeJobNameList(s, schemas.DescribeScheduleResponse_JobNames, v.JobNames)
+	if v.JobNames != nil {
+		serializeJobNameList(s, schemas.DescribeScheduleResponse_JobNames, v.JobNames)
+	}
 	if v.LastModifiedBy != nil {
 		s.WriteString(schemas.DescribeScheduleResponse_LastModifiedBy, *v.LastModifiedBy)
 	}
@@ -117,7 +119,9 @@ func (v *DescribeScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.DescribeScheduleResponse_ResourceArn, *v.ResourceArn)
 	}
-	serializeTagMap(s, schemas.DescribeScheduleResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeScheduleResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeScheduleResponse, func(s *smithy.Schema) error {

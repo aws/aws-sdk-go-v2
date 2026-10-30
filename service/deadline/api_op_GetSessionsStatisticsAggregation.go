@@ -121,7 +121,9 @@ func (v *GetSessionsStatisticsAggregationOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_nextToken, *v.NextToken)
 	}
-	serializeStatisticsList(s, schemas.GetSessionsStatisticsAggregationResponse_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeStatisticsList(s, schemas.GetSessionsStatisticsAggregationResponse_statistics, v.Statistics)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetSessionsStatisticsAggregationResponse_status, string(v.Status))
 	}

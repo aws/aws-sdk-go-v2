@@ -139,7 +139,9 @@ func (v *GetSegmentDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SegmentType != "" {
 		s.WriteString(schemas.GetSegmentDefinitionResponse_SegmentType, string(v.SegmentType))
 	}
-	serializeTagMap(s, schemas.GetSegmentDefinitionResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetSegmentDefinitionResponse_Tags, v.Tags)
+	}
 }
 func (v *GetSegmentDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSegmentDefinitionResponse, func(s *smithy.Schema) error {

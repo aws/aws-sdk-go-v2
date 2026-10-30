@@ -63,7 +63,9 @@ func (v *UpdateColumnStatisticsForTableInput) SerializeMembers(s smithy.ShapeSer
 	if v.CatalogId != nil {
 		s.WriteString(schemas.UpdateColumnStatisticsForTableRequest_CatalogId, *v.CatalogId)
 	}
-	serializeUpdateColumnStatisticsList(s, schemas.UpdateColumnStatisticsForTableRequest_ColumnStatisticsList, v.ColumnStatisticsList)
+	if v.ColumnStatisticsList != nil {
+		serializeUpdateColumnStatisticsList(s, schemas.UpdateColumnStatisticsForTableRequest_ColumnStatisticsList, v.ColumnStatisticsList)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.UpdateColumnStatisticsForTableRequest_DatabaseName, *v.DatabaseName)
 	}
@@ -90,7 +92,9 @@ func (v *UpdateColumnStatisticsForTableOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateColumnStatisticsForTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnStatisticsErrors(s, schemas.UpdateColumnStatisticsForTableResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeColumnStatisticsErrors(s, schemas.UpdateColumnStatisticsForTableResponse_Errors, v.Errors)
+	}
 }
 func (v *UpdateColumnStatisticsForTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateColumnStatisticsForTableResponse, func(s *smithy.Schema) error {

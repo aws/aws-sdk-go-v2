@@ -150,18 +150,24 @@ func (v *GetEarthObservationJobOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.InputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeJobConfigInput(s, schemas.GetEarthObservationJobOutput_JobConfig, v.JobConfig)
+	if v.JobConfig != nil {
+		serializeJobConfigInput(s, schemas.GetEarthObservationJobOutput_JobConfig, v.JobConfig)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.GetEarthObservationJobOutput_KmsKeyId, *v.KmsKeyId)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetEarthObservationJobOutput_Name, *v.Name)
 	}
-	serializeEarthObservationJobOutputBands(s, schemas.GetEarthObservationJobOutput_OutputBands, v.OutputBands)
+	if v.OutputBands != nil {
+		serializeEarthObservationJobOutputBands(s, schemas.GetEarthObservationJobOutput_OutputBands, v.OutputBands)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetEarthObservationJobOutput_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.GetEarthObservationJobOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetEarthObservationJobOutput_Tags, v.Tags)
+	}
 }
 func (v *GetEarthObservationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEarthObservationJobOutput, func(s *smithy.Schema) error {

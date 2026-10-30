@@ -77,7 +77,9 @@ func (v *DescribeAllManagedProductsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAllManagedProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedProductDescriptors(s, schemas.DescribeAllManagedProductsResponse_ManagedProducts, v.ManagedProducts)
+	if v.ManagedProducts != nil {
+		serializeManagedProductDescriptors(s, schemas.DescribeAllManagedProductsResponse_ManagedProducts, v.ManagedProducts)
+	}
 }
 func (v *DescribeAllManagedProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAllManagedProductsResponse, func(s *smithy.Schema) error {

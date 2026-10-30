@@ -80,7 +80,9 @@ func (v *ListMicrosoftTeamsConfiguredTeamsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListMicrosoftTeamsConfiguredTeamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredTeamsList(s, schemas.ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams, v.ConfiguredTeams)
+	if v.ConfiguredTeams != nil {
+		serializeConfiguredTeamsList(s, schemas.ListMicrosoftTeamsConfiguredTeamsResult_ConfiguredTeams, v.ConfiguredTeams)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMicrosoftTeamsConfiguredTeamsResult_NextToken, *v.NextToken)
 	}

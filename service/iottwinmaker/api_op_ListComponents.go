@@ -101,7 +101,9 @@ func (v *ListComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentSummaries(s, schemas.ListComponentsResponse_componentSummaries, v.ComponentSummaries)
+	if v.ComponentSummaries != nil {
+		serializeComponentSummaries(s, schemas.ListComponentsResponse_componentSummaries, v.ComponentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComponentsResponse_nextToken, *v.NextToken)
 	}

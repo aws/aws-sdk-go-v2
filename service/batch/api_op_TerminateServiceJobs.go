@@ -63,7 +63,9 @@ func (v *TerminateServiceJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TerminateServiceJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.TerminateServiceJobsRequest_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeStringList(s, schemas.TerminateServiceJobsRequest_jobs, v.Jobs)
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.TerminateServiceJobsRequest_reason, *v.Reason)
 	}
@@ -99,8 +101,12 @@ func (v *TerminateServiceJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TerminateServiceJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTerminateServiceJobsErrorDetailList(s, schemas.TerminateServiceJobsResponse_errors, v.Errors)
-	serializeStringList(s, schemas.TerminateServiceJobsResponse_successful, v.Successful)
+	if v.Errors != nil {
+		serializeTerminateServiceJobsErrorDetailList(s, schemas.TerminateServiceJobsResponse_errors, v.Errors)
+	}
+	if v.Successful != nil {
+		serializeStringList(s, schemas.TerminateServiceJobsResponse_successful, v.Successful)
+	}
 }
 func (v *TerminateServiceJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TerminateServiceJobsResponse, func(s *smithy.Schema) error {

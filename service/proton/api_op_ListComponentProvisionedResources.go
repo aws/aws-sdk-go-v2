@@ -104,7 +104,9 @@ func (v *ListComponentProvisionedResourcesOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComponentProvisionedResourcesOutput_nextToken, *v.NextToken)
 	}
-	serializeProvisionedResourceList(s, schemas.ListComponentProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+	if v.ProvisionedResources != nil {
+		serializeProvisionedResourceList(s, schemas.ListComponentProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+	}
 }
 func (v *ListComponentProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListComponentProvisionedResourcesOutput, func(s *smithy.Schema) error {

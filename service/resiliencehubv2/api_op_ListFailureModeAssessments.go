@@ -71,7 +71,9 @@ func (v *ListFailureModeAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFailureModeAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentStatusList(s, schemas.ListFailureModeAssessmentsRequest_assessmentStatuses, v.AssessmentStatuses)
+	if v.AssessmentStatuses != nil {
+		serializeAssessmentStatusList(s, schemas.ListFailureModeAssessmentsRequest_assessmentStatuses, v.AssessmentStatuses)
+	}
 	if v.EndedBefore != nil {
 		s.WriteTime(schemas.ListFailureModeAssessmentsRequest_endedBefore, *v.EndedBefore)
 	}
@@ -118,7 +120,9 @@ func (v *ListFailureModeAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFailureModeAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentSummaryList(s, schemas.ListFailureModeAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	if v.AssessmentSummaries != nil {
+		serializeAssessmentSummaryList(s, schemas.ListFailureModeAssessmentsResponse_assessmentSummaries, v.AssessmentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFailureModeAssessmentsResponse_nextToken, *v.NextToken)
 	}

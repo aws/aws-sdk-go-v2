@@ -94,7 +94,9 @@ func (v *DescribeModelVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeModelVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializemodelVersionDetailList(s, schemas.DescribeModelVersionsResult_modelVersionDetails, v.ModelVersionDetails)
+	if v.ModelVersionDetails != nil {
+		serializemodelVersionDetailList(s, schemas.DescribeModelVersionsResult_modelVersionDetails, v.ModelVersionDetails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeModelVersionsResult_nextToken, *v.NextToken)
 	}

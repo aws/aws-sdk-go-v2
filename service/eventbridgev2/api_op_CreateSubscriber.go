@@ -165,7 +165,9 @@ func (v *CreateSubscriberInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateSubscriberRequest_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateSubscriberRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSubscriberRequest_Tags, v.Tags)
+	}
 	if v.Transformer != nil {
 		s.WriteStruct(schemas.CreateSubscriberRequest_Transformer)
 		v.Transformer.SerializeMembers(s)

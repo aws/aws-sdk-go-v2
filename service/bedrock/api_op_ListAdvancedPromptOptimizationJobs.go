@@ -92,7 +92,9 @@ func (v *ListAdvancedPromptOptimizationJobsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListAdvancedPromptOptimizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedPromptOptimizationJobSummaries(s, schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries, v.JobSummaries)
+	if v.JobSummaries != nil {
+		serializeAdvancedPromptOptimizationJobSummaries(s, schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries, v.JobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken, *v.NextToken)
 	}

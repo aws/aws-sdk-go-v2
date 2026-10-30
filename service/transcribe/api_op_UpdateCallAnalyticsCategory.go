@@ -68,7 +68,9 @@ func (v *UpdateCallAnalyticsCategoryInput) SerializeMembers(s smithy.ShapeSerial
 	if v.InputType != "" {
 		s.WriteString(schemas.UpdateCallAnalyticsCategoryRequest_InputType, string(v.InputType))
 	}
-	serializeRuleList(s, schemas.UpdateCallAnalyticsCategoryRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.UpdateCallAnalyticsCategoryRequest_Rules, v.Rules)
+	}
 }
 
 type UpdateCallAnalyticsCategoryOutput struct {

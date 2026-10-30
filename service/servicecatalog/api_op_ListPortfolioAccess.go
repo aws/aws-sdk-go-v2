@@ -104,7 +104,9 @@ func (v *ListPortfolioAccessOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPortfolioAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ListPortfolioAccessOutput_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ListPortfolioAccessOutput_AccountIds, v.AccountIds)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListPortfolioAccessOutput_NextPageToken, *v.NextPageToken)
 	}

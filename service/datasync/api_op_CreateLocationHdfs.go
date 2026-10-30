@@ -156,7 +156,9 @@ func (v *CreateLocationHdfsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.CreateLocationHdfsRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.CreateLocationHdfsRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.CreateLocationHdfsRequest_AuthenticationType, string(v.AuthenticationType))
 	}
@@ -185,7 +187,9 @@ func (v *CreateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyProviderUri != nil {
 		s.WriteString(schemas.CreateLocationHdfsRequest_KmsKeyProviderUri, *v.KmsKeyProviderUri)
 	}
-	serializeHdfsNameNodeList(s, schemas.CreateLocationHdfsRequest_NameNodes, v.NameNodes)
+	if v.NameNodes != nil {
+		serializeHdfsNameNodeList(s, schemas.CreateLocationHdfsRequest_NameNodes, v.NameNodes)
+	}
 	if v.QopConfiguration != nil {
 		s.WriteStruct(schemas.CreateLocationHdfsRequest_QopConfiguration)
 		v.QopConfiguration.SerializeMembers(s)
@@ -200,7 +204,9 @@ func (v *CreateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationHdfsRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationHdfsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationHdfsRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLocationHdfsOutput struct {

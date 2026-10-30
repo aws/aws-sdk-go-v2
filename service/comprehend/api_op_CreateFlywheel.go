@@ -122,7 +122,9 @@ func (v *CreateFlywheelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelType != "" {
 		s.WriteString(schemas.CreateFlywheelRequest_ModelType, string(v.ModelType))
 	}
-	serializeTagList(s, schemas.CreateFlywheelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFlywheelRequest_Tags, v.Tags)
+	}
 	if v.TaskConfig != nil {
 		s.WriteStruct(schemas.CreateFlywheelRequest_TaskConfig)
 		v.TaskConfig.SerializeMembers(s)

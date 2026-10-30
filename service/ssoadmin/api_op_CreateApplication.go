@@ -117,7 +117,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateApplicationRequest_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {

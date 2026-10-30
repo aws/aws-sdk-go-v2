@@ -101,7 +101,9 @@ func (v *CreateRestApiInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeySource != "" {
 		s.WriteString(schemas.CreateRestApiRequest_apiKeySource, string(v.ApiKeySource))
 	}
-	serializeListOfString(s, schemas.CreateRestApiRequest_binaryMediaTypes, v.BinaryMediaTypes)
+	if v.BinaryMediaTypes != nil {
+		serializeListOfString(s, schemas.CreateRestApiRequest_binaryMediaTypes, v.BinaryMediaTypes)
+	}
 	if v.CloneFrom != nil {
 		s.WriteString(schemas.CreateRestApiRequest_cloneFrom, *v.CloneFrom)
 	}
@@ -131,7 +133,9 @@ func (v *CreateRestApiInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityPolicy != "" {
 		s.WriteString(schemas.CreateRestApiRequest_securityPolicy, string(v.SecurityPolicy))
 	}
-	serializeMapOfStringToString(s, schemas.CreateRestApiRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.CreateRestApiRequest_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CreateRestApiRequest_version, *v.Version)
 	}
@@ -233,7 +237,9 @@ func (v *CreateRestApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiStatusMessage != nil {
 		s.WriteString(schemas.RestApi_apiStatusMessage, *v.ApiStatusMessage)
 	}
-	serializeListOfString(s, schemas.RestApi_binaryMediaTypes, v.BinaryMediaTypes)
+	if v.BinaryMediaTypes != nil {
+		serializeListOfString(s, schemas.RestApi_binaryMediaTypes, v.BinaryMediaTypes)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.RestApi_createdDate, *v.CreatedDate)
 	}
@@ -269,11 +275,15 @@ func (v *CreateRestApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityPolicy != "" {
 		s.WriteString(schemas.RestApi_securityPolicy, string(v.SecurityPolicy))
 	}
-	serializeMapOfStringToString(s, schemas.RestApi_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.RestApi_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.RestApi_version, *v.Version)
 	}
-	serializeListOfString(s, schemas.RestApi_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeListOfString(s, schemas.RestApi_warnings, v.Warnings)
+	}
 }
 func (v *CreateRestApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RestApi, func(s *smithy.Schema) error {

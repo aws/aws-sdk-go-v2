@@ -117,7 +117,9 @@ func (v *DescribeGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayArn != nil {
 		s.WriteString(schemas.DescribeGatewayResponse_gatewayArn, *v.GatewayArn)
 	}
-	serializeGatewayCapabilitySummaries(s, schemas.DescribeGatewayResponse_gatewayCapabilitySummaries, v.GatewayCapabilitySummaries)
+	if v.GatewayCapabilitySummaries != nil {
+		serializeGatewayCapabilitySummaries(s, schemas.DescribeGatewayResponse_gatewayCapabilitySummaries, v.GatewayCapabilitySummaries)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.DescribeGatewayResponse_gatewayId, *v.GatewayId)
 	}

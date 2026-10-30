@@ -128,7 +128,9 @@ func (v *GetRecommenderFilterOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.GetRecommenderFilterResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetRecommenderFilterResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetRecommenderFilterResponse_Tags, v.Tags)
+	}
 }
 func (v *GetRecommenderFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommenderFilterResponse, func(s *smithy.Schema) error {

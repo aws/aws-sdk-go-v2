@@ -138,7 +138,9 @@ func (v *ListCustomModelDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomModelDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomModelDeploymentSummaryList(s, schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries, v.ModelDeploymentSummaries)
+	if v.ModelDeploymentSummaries != nil {
+		serializeCustomModelDeploymentSummaryList(s, schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries, v.ModelDeploymentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomModelDeploymentsResponse_nextToken, *v.NextToken)
 	}

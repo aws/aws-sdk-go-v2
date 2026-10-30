@@ -282,7 +282,9 @@ func (v *GetMLModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TrainingDataSourceId != nil {
 		s.WriteString(schemas.GetMLModelOutput_TrainingDataSourceId, *v.TrainingDataSourceId)
 	}
-	serializeTrainingParameters(s, schemas.GetMLModelOutput_TrainingParameters, v.TrainingParameters)
+	if v.TrainingParameters != nil {
+		serializeTrainingParameters(s, schemas.GetMLModelOutput_TrainingParameters, v.TrainingParameters)
+	}
 }
 func (v *GetMLModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMLModelOutput, func(s *smithy.Schema) error {

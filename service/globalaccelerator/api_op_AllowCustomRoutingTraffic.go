@@ -88,8 +88,12 @@ func (v *AllowCustomRoutingTrafficInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AllowAllTrafficToEndpoint != nil {
 		s.WriteBool(schemas.AllowCustomRoutingTrafficRequest_AllowAllTrafficToEndpoint, *v.AllowAllTrafficToEndpoint)
 	}
-	serializeDestinationAddresses(s, schemas.AllowCustomRoutingTrafficRequest_DestinationAddresses, v.DestinationAddresses)
-	serializeDestinationPorts(s, schemas.AllowCustomRoutingTrafficRequest_DestinationPorts, v.DestinationPorts)
+	if v.DestinationAddresses != nil {
+		serializeDestinationAddresses(s, schemas.AllowCustomRoutingTrafficRequest_DestinationAddresses, v.DestinationAddresses)
+	}
+	if v.DestinationPorts != nil {
+		serializeDestinationPorts(s, schemas.AllowCustomRoutingTrafficRequest_DestinationPorts, v.DestinationPorts)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.AllowCustomRoutingTrafficRequest_EndpointGroupArn, *v.EndpointGroupArn)
 	}

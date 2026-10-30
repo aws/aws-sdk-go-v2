@@ -116,7 +116,9 @@ func (v *ListBlockedGuestUsersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBlockedGuestUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockedGuestUserList(s, schemas.ListBlockedGuestUsersResponse_blocklist, v.Blocklist)
+	if v.Blocklist != nil {
+		serializeBlockedGuestUserList(s, schemas.ListBlockedGuestUsersResponse_blocklist, v.Blocklist)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBlockedGuestUsersResponse_nextToken, *v.NextToken)
 	}

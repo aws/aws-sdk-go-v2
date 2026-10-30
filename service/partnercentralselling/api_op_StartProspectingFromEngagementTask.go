@@ -78,7 +78,9 @@ func (v *StartProspectingFromEngagementTaskInput) SerializeMembers(s smithy.Shap
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartProspectingFromEngagementTaskRequest_ClientToken, *v.ClientToken)
 	}
-	serializeEngagementIdentifierList(s, schemas.StartProspectingFromEngagementTaskRequest_Identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeEngagementIdentifierList(s, schemas.StartProspectingFromEngagementTaskRequest_Identifiers, v.Identifiers)
+	}
 	if v.TaskName != nil {
 		s.WriteString(schemas.StartProspectingFromEngagementTaskRequest_TaskName, *v.TaskName)
 	}
@@ -145,7 +147,9 @@ func (v *StartProspectingFromEngagementTaskOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *StartProspectingFromEngagementTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngagementIdentifierList(s, schemas.StartProspectingFromEngagementTaskResponse_Identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeEngagementIdentifierList(s, schemas.StartProspectingFromEngagementTaskResponse_Identifiers, v.Identifiers)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.StartProspectingFromEngagementTaskResponse_Message, *v.Message)
 	}

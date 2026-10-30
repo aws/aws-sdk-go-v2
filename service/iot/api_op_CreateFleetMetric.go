@@ -112,7 +112,9 @@ func (v *CreateFleetMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryVersion != nil {
 		s.WriteString(schemas.CreateFleetMetricRequest_queryVersion, *v.QueryVersion)
 	}
-	serializeTagList(s, schemas.CreateFleetMetricRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFleetMetricRequest_tags, v.Tags)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.CreateFleetMetricRequest_unit, string(v.Unit))
 	}

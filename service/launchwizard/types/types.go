@@ -221,11 +221,15 @@ func (v *DeploymentData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceGroup != nil {
 		s.WriteString(schemas.DeploymentData_resourceGroup, *v.ResourceGroup)
 	}
-	serializeDeploymentSpecifications(s, schemas.DeploymentData_specifications, v.Specifications)
+	if v.Specifications != nil {
+		serializeDeploymentSpecifications(s, schemas.DeploymentData_specifications, v.Specifications)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DeploymentData_status, string(v.Status))
 	}
-	serializeTags(s, schemas.DeploymentData_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DeploymentData_tags, v.Tags)
+	}
 	if v.WorkloadName != nil {
 		s.WriteString(schemas.DeploymentData_workloadName, *v.WorkloadName)
 	}
@@ -401,7 +405,9 @@ func (v *DeploymentEventDataSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Description != nil {
 		s.WriteString(schemas.DeploymentEventDataSummary_description, *v.Description)
 	}
-	serializeDeploymentEventMetadata(s, schemas.DeploymentEventDataSummary_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeDeploymentEventMetadata(s, schemas.DeploymentEventDataSummary_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DeploymentEventDataSummary_name, *v.Name)
 	}
@@ -470,7 +476,9 @@ func (v *DeploymentFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.DeploymentFilter_name, string(v.Name))
 	}
-	serializeDeploymentFilterValues(s, schemas.DeploymentFilter_values, v.Values)
+	if v.Values != nil {
+		serializeDeploymentFilterValues(s, schemas.DeploymentFilter_values, v.Values)
+	}
 }
 func (v *DeploymentFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeploymentFilter, func(s *smithy.Schema) error {
@@ -585,7 +593,9 @@ func (v *DeploymentPatternVersionFilter) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != "" {
 		s.WriteString(schemas.DeploymentPatternVersionFilter_name, string(v.Name))
 	}
-	serializeDeploymentPatternVersionFilterValues(s, schemas.DeploymentPatternVersionFilter_values, v.Values)
+	if v.Values != nil {
+		serializeDeploymentPatternVersionFilterValues(s, schemas.DeploymentPatternVersionFilter_values, v.Values)
+	}
 }
 func (v *DeploymentPatternVersionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeploymentPatternVersionFilter, func(s *smithy.Schema) error {
@@ -632,8 +642,12 @@ func (v *DeploymentSpecificationsField) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeploymentSpecificationsField) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedValues(s, schemas.DeploymentSpecificationsField_allowedValues, v.AllowedValues)
-	serializeSpecificationsConditionalData(s, schemas.DeploymentSpecificationsField_conditionals, v.Conditionals)
+	if v.AllowedValues != nil {
+		serializeAllowedValues(s, schemas.DeploymentSpecificationsField_allowedValues, v.AllowedValues)
+	}
+	if v.Conditionals != nil {
+		serializeSpecificationsConditionalData(s, schemas.DeploymentSpecificationsField_conditionals, v.Conditionals)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DeploymentSpecificationsField_description, *v.Description)
 	}
@@ -729,7 +743,9 @@ func (v *WorkloadData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkloadData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountConstraintsList(s, schemas.WorkloadData_accountConstraints, v.AccountConstraints)
+	if v.AccountConstraints != nil {
+		serializeAccountConstraintsList(s, schemas.WorkloadData_accountConstraints, v.AccountConstraints)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.WorkloadData_description, *v.Description)
 	}
@@ -816,7 +832,9 @@ func (v *WorkloadDataSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkloadDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountConstraintsList(s, schemas.WorkloadDataSummary_accountConstraints, v.AccountConstraints)
+	if v.AccountConstraints != nil {
+		serializeAccountConstraintsList(s, schemas.WorkloadDataSummary_accountConstraints, v.AccountConstraints)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.WorkloadDataSummary_displayName, *v.DisplayName)
 	}
@@ -904,7 +922,9 @@ func (v *WorkloadDeploymentPatternData) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkloadDeploymentPatternData) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountConstraintsList(s, schemas.WorkloadDeploymentPatternData_accountConstraints, v.AccountConstraints)
+	if v.AccountConstraints != nil {
+		serializeAccountConstraintsList(s, schemas.WorkloadDeploymentPatternData_accountConstraints, v.AccountConstraints)
+	}
 	if v.DeploymentPatternName != nil {
 		s.WriteString(schemas.WorkloadDeploymentPatternData_deploymentPatternName, *v.DeploymentPatternName)
 	}
@@ -917,7 +937,9 @@ func (v *WorkloadDeploymentPatternData) SerializeMembers(s smithy.ShapeSerialize
 	if v.DisplayName != nil {
 		s.WriteString(schemas.WorkloadDeploymentPatternData_displayName, *v.DisplayName)
 	}
-	serializeDeploymentSpecificationsData(s, schemas.WorkloadDeploymentPatternData_specifications, v.Specifications)
+	if v.Specifications != nil {
+		serializeDeploymentSpecificationsData(s, schemas.WorkloadDeploymentPatternData_specifications, v.Specifications)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.WorkloadDeploymentPatternData_status, string(v.Status))
 	}
@@ -1015,7 +1037,9 @@ func (v *WorkloadDeploymentPatternDataSummary) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *WorkloadDeploymentPatternDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountConstraintsList(s, schemas.WorkloadDeploymentPatternDataSummary_accountConstraints, v.AccountConstraints)
+	if v.AccountConstraints != nil {
+		serializeAccountConstraintsList(s, schemas.WorkloadDeploymentPatternDataSummary_accountConstraints, v.AccountConstraints)
+	}
 	if v.DeploymentPatternName != nil {
 		s.WriteString(schemas.WorkloadDeploymentPatternDataSummary_deploymentPatternName, *v.DeploymentPatternName)
 	}

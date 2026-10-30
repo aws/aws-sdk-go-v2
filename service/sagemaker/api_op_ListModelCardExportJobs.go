@@ -131,7 +131,9 @@ func (v *ListModelCardExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelCardExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelCardExportJobSummaryList(s, schemas.ListModelCardExportJobsResponse_ModelCardExportJobSummaries, v.ModelCardExportJobSummaries)
+	if v.ModelCardExportJobSummaries != nil {
+		serializeModelCardExportJobSummaryList(s, schemas.ListModelCardExportJobsResponse_ModelCardExportJobSummaries, v.ModelCardExportJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelCardExportJobsResponse_NextToken, *v.NextToken)
 	}

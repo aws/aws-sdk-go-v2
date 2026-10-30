@@ -76,7 +76,9 @@ func (v *ListPaymentCredentialProvidersOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListPaymentCredentialProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentCredentialProviders(s, schemas.ListPaymentCredentialProvidersResponse_credentialProviders, v.CredentialProviders)
+	if v.CredentialProviders != nil {
+		serializePaymentCredentialProviders(s, schemas.ListPaymentCredentialProvidersResponse_credentialProviders, v.CredentialProviders)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPaymentCredentialProvidersResponse_nextToken, *v.NextToken)
 	}

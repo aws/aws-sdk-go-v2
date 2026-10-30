@@ -95,7 +95,9 @@ func (v *DescribeMultiRegionParametersOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeMultiRegionParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiRegionParametersList(s, schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters, v.MultiRegionParameters)
+	if v.MultiRegionParameters != nil {
+		serializeMultiRegionParametersList(s, schemas.DescribeMultiRegionParametersResponse_MultiRegionParameters, v.MultiRegionParameters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMultiRegionParametersResponse_NextToken, *v.NextToken)
 	}

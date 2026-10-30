@@ -81,9 +81,15 @@ func (v *GetLambdaFunctionRecommendationsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetLambdaFunctionRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
-	serializeLambdaFunctionRecommendationFilters(s, schemas.GetLambdaFunctionRecommendationsRequest_filters, v.Filters)
-	serializeFunctionArns(s, schemas.GetLambdaFunctionRecommendationsRequest_functionArns, v.FunctionArns)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeLambdaFunctionRecommendationFilters(s, schemas.GetLambdaFunctionRecommendationsRequest_filters, v.Filters)
+	}
+	if v.FunctionArns != nil {
+		serializeFunctionArns(s, schemas.GetLambdaFunctionRecommendationsRequest_functionArns, v.FunctionArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetLambdaFunctionRecommendationsRequest_maxResults, *v.MaxResults)
 	}
@@ -116,7 +122,9 @@ func (v *GetLambdaFunctionRecommendationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *GetLambdaFunctionRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLambdaFunctionRecommendations(s, schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations, v.LambdaFunctionRecommendations)
+	if v.LambdaFunctionRecommendations != nil {
+		serializeLambdaFunctionRecommendations(s, schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations, v.LambdaFunctionRecommendations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLambdaFunctionRecommendationsResponse_nextToken, *v.NextToken)
 	}

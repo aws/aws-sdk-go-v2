@@ -134,7 +134,9 @@ func (v *UpdateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.IdentityProviderArn != nil {
 		s.WriteString(schemas.UpdateIdentityProviderRequest_identityProviderArn, *v.IdentityProviderArn)
 	}
-	serializeIdentityProviderDetails(s, schemas.UpdateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
+	if v.IdentityProviderDetails != nil {
+		serializeIdentityProviderDetails(s, schemas.UpdateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
+	}
 	if v.IdentityProviderName != nil {
 		s.WriteString(schemas.UpdateIdentityProviderRequest_identityProviderName, *v.IdentityProviderName)
 	}

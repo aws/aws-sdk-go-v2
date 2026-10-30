@@ -97,7 +97,9 @@ func (v *UpdateBucketBundleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateBucketBundleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.UpdateBucketBundleResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.UpdateBucketBundleResult_operations, v.Operations)
+	}
 }
 func (v *UpdateBucketBundleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateBucketBundleResult, func(s *smithy.Schema) error {

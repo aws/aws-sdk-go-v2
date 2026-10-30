@@ -122,7 +122,9 @@ func (v *CreateIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIdentitySourceInput_clientToken, *v.ClientToken)
 	}
-	serializeConfiguration(s, schemas.CreateIdentitySourceInput_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfiguration(s, schemas.CreateIdentitySourceInput_configuration, v.Configuration)
+	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.CreateIdentitySourceInput_policyStoreId, *v.PolicyStoreId)
 	}

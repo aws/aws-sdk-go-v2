@@ -117,7 +117,9 @@ func (v *StartTargetedSentimentDetectionJobInput) SerializeMembers(s smithy.Shap
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartTargetedSentimentDetectionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartTargetedSentimentDetectionJobRequest_Tags, v.Tags)
+	}
 	if v.VolumeKmsKeyId != nil {
 		s.WriteString(schemas.StartTargetedSentimentDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
 	}

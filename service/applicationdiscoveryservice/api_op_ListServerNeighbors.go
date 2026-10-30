@@ -67,7 +67,9 @@ func (v *ListServerNeighborsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.ListServerNeighborsRequest_maxResults, v.MaxResults)
 	}
-	serializeConfigurationIdList(s, schemas.ListServerNeighborsRequest_neighborConfigurationIds, v.NeighborConfigurationIds)
+	if v.NeighborConfigurationIds != nil {
+		serializeConfigurationIdList(s, schemas.ListServerNeighborsRequest_neighborConfigurationIds, v.NeighborConfigurationIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServerNeighborsRequest_nextToken, *v.NextToken)
 	}
@@ -109,7 +111,9 @@ func (v *ListServerNeighborsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnownDependencyCount != 0 {
 		s.WriteInt64(schemas.ListServerNeighborsResponse_knownDependencyCount, v.KnownDependencyCount)
 	}
-	serializeNeighborDetailsList(s, schemas.ListServerNeighborsResponse_neighbors, v.Neighbors)
+	if v.Neighbors != nil {
+		serializeNeighborDetailsList(s, schemas.ListServerNeighborsResponse_neighbors, v.Neighbors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServerNeighborsResponse_nextToken, *v.NextToken)
 	}

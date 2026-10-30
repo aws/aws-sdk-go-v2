@@ -67,7 +67,9 @@ func (v *CreateSecurityRequirementPackInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Status != "" {
 		s.WriteString(schemas.CreateSecurityRequirementPackInput_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateSecurityRequirementPackInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSecurityRequirementPackInput_tags, v.Tags)
+	}
 }
 
 type CreateSecurityRequirementPackOutput struct {

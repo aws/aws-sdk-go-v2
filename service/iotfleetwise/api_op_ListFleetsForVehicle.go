@@ -107,7 +107,9 @@ func (v *ListFleetsForVehicleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFleetsForVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializefleets(s, schemas.ListFleetsForVehicleResponse_fleets, v.Fleets)
+	if v.Fleets != nil {
+		serializefleets(s, schemas.ListFleetsForVehicleResponse_fleets, v.Fleets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFleetsForVehicleResponse_nextToken, *v.NextToken)
 	}

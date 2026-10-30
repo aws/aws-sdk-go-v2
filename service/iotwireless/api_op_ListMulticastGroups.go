@@ -76,7 +76,9 @@ func (v *ListMulticastGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMulticastGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMulticastGroupList(s, schemas.ListMulticastGroupsResponse_MulticastGroupList, v.MulticastGroupList)
+	if v.MulticastGroupList != nil {
+		serializeMulticastGroupList(s, schemas.ListMulticastGroupsResponse_MulticastGroupList, v.MulticastGroupList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMulticastGroupsResponse_NextToken, *v.NextToken)
 	}

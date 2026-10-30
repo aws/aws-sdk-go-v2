@@ -119,7 +119,9 @@ func (v *ListIndicatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GraphArn != nil {
 		s.WriteString(schemas.ListIndicatorsResponse_GraphArn, *v.GraphArn)
 	}
-	serializeIndicators(s, schemas.ListIndicatorsResponse_Indicators, v.Indicators)
+	if v.Indicators != nil {
+		serializeIndicators(s, schemas.ListIndicatorsResponse_Indicators, v.Indicators)
+	}
 	if v.InvestigationId != nil {
 		s.WriteString(schemas.ListIndicatorsResponse_InvestigationId, *v.InvestigationId)
 	}

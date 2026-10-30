@@ -136,7 +136,9 @@ func (v *CancelConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.CancelConnectionResponse_Catalog, *v.Catalog)
 	}
-	serializeConnectionTypeDetailMap(s, schemas.CancelConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	if v.ConnectionTypes != nil {
+		serializeConnectionTypeDetailMap(s, schemas.CancelConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CancelConnectionResponse_Id, *v.Id)
 	}

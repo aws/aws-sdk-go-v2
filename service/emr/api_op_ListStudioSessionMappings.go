@@ -88,7 +88,9 @@ func (v *ListStudioSessionMappingsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Marker != nil {
 		s.WriteString(schemas.ListStudioSessionMappingsOutput_Marker, *v.Marker)
 	}
-	serializeSessionMappingSummaryList(s, schemas.ListStudioSessionMappingsOutput_SessionMappings, v.SessionMappings)
+	if v.SessionMappings != nil {
+		serializeSessionMappingSummaryList(s, schemas.ListStudioSessionMappingsOutput_SessionMappings, v.SessionMappings)
+	}
 }
 func (v *ListStudioSessionMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStudioSessionMappingsOutput, func(s *smithy.Schema) error {

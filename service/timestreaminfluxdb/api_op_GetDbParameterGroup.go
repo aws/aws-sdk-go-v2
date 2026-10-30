@@ -97,7 +97,9 @@ func (v *GetDbParameterGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetDbParameterGroupOutput_name, *v.Name)
 	}
-	serializeParameters(s, schemas.GetDbParameterGroupOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.GetDbParameterGroupOutput_parameters, v.Parameters)
+	}
 }
 func (v *GetDbParameterGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDbParameterGroupOutput, func(s *smithy.Schema) error {

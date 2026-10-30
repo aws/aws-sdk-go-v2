@@ -87,8 +87,12 @@ func (v *ListMarketplaceRevenueSharesInput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueSharesInput_NextToken, *v.NextToken)
 	}
-	serializeProductCodeList(s, schemas.ListMarketplaceRevenueSharesInput_ProductCodes, v.ProductCodes)
-	serializeMarketplaceProductIdList(s, schemas.ListMarketplaceRevenueSharesInput_ProductIds, v.ProductIds)
+	if v.ProductCodes != nil {
+		serializeProductCodeList(s, schemas.ListMarketplaceRevenueSharesInput_ProductCodes, v.ProductCodes)
+	}
+	if v.ProductIds != nil {
+		serializeMarketplaceProductIdList(s, schemas.ListMarketplaceRevenueSharesInput_ProductIds, v.ProductIds)
+	}
 	if v.SortBy != "" {
 		s.WriteString(schemas.ListMarketplaceRevenueSharesInput_SortBy, string(v.SortBy))
 	}
@@ -120,7 +124,9 @@ func (v *ListMarketplaceRevenueSharesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListMarketplaceRevenueSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMarketplaceRevenueShareSummaryList(s, schemas.ListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries, v.MarketplaceRevenueShareSummaries)
+	if v.MarketplaceRevenueShareSummaries != nil {
+		serializeMarketplaceRevenueShareSummaryList(s, schemas.ListMarketplaceRevenueSharesOutput_MarketplaceRevenueShareSummaries, v.MarketplaceRevenueShareSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueSharesOutput_NextToken, *v.NextToken)
 	}

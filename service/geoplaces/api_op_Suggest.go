@@ -120,8 +120,12 @@ func (v *SuggestInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SuggestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSuggestAdditionalFeatureList(s, schemas.SuggestRequest_AdditionalFeatures, v.AdditionalFeatures)
-	serializePosition(s, schemas.SuggestRequest_BiasPosition, v.BiasPosition)
+	if v.AdditionalFeatures != nil {
+		serializeSuggestAdditionalFeatureList(s, schemas.SuggestRequest_AdditionalFeatures, v.AdditionalFeatures)
+	}
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.SuggestRequest_BiasPosition, v.BiasPosition)
+	}
 	if v.Filter != nil {
 		s.WriteStruct(schemas.SuggestRequest_Filter)
 		v.Filter.SerializeMembers(s)
@@ -189,8 +193,12 @@ func (v *SuggestOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.SuggestResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeQueryRefinementList(s, schemas.SuggestResponse_QueryRefinements, v.QueryRefinements)
-	serializeSuggestResultItemList(s, schemas.SuggestResponse_ResultItems, v.ResultItems)
+	if v.QueryRefinements != nil {
+		serializeQueryRefinementList(s, schemas.SuggestResponse_QueryRefinements, v.QueryRefinements)
+	}
+	if v.ResultItems != nil {
+		serializeSuggestResultItemList(s, schemas.SuggestResponse_ResultItems, v.ResultItems)
+	}
 }
 func (v *SuggestOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuggestResponse, func(s *smithy.Schema) error {

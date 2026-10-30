@@ -173,11 +173,15 @@ func (v *UpdateMatchmakingConfigurationInput) SerializeMembers(s smithy.ShapeSer
 	if v.FlexMatchMode != "" {
 		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_FlexMatchMode, string(v.FlexMatchMode))
 	}
-	serializeGamePropertyList(s, schemas.UpdateMatchmakingConfigurationInput_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.UpdateMatchmakingConfigurationInput_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_GameSessionData, *v.GameSessionData)
 	}
-	serializeQueueArnsList(s, schemas.UpdateMatchmakingConfigurationInput_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.GameSessionQueueArns != nil {
+		serializeQueueArnsList(s, schemas.UpdateMatchmakingConfigurationInput_GameSessionQueueArns, v.GameSessionQueueArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateMatchmakingConfigurationInput_Name, *v.Name)
 	}

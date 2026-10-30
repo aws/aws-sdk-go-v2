@@ -82,7 +82,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateDomainInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDomainRequest, func(s *smithy.Schema) error {

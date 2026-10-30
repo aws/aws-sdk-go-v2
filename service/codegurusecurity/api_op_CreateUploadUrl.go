@@ -90,7 +90,9 @@ func (v *CreateUploadUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CodeArtifactId != nil {
 		s.WriteString(schemas.CreateUploadUrlResponse_codeArtifactId, *v.CodeArtifactId)
 	}
-	serializeRequestHeaderMap(s, schemas.CreateUploadUrlResponse_requestHeaders, v.RequestHeaders)
+	if v.RequestHeaders != nil {
+		serializeRequestHeaderMap(s, schemas.CreateUploadUrlResponse_requestHeaders, v.RequestHeaders)
+	}
 	if v.S3Url != nil {
 		s.WriteString(schemas.CreateUploadUrlResponse_s3Url, *v.S3Url)
 	}

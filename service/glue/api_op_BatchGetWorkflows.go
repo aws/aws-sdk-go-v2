@@ -54,7 +54,9 @@ func (v *BatchGetWorkflowsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeGraph != nil {
 		s.WriteBool(schemas.BatchGetWorkflowsRequest_IncludeGraph, *v.IncludeGraph)
 	}
-	serializeWorkflowNames(s, schemas.BatchGetWorkflowsRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeWorkflowNames(s, schemas.BatchGetWorkflowsRequest_Names, v.Names)
+	}
 }
 
 type BatchGetWorkflowsOutput struct {
@@ -78,8 +80,12 @@ func (v *BatchGetWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowNames(s, schemas.BatchGetWorkflowsResponse_MissingWorkflows, v.MissingWorkflows)
-	serializeWorkflows(s, schemas.BatchGetWorkflowsResponse_Workflows, v.Workflows)
+	if v.MissingWorkflows != nil {
+		serializeWorkflowNames(s, schemas.BatchGetWorkflowsResponse_MissingWorkflows, v.MissingWorkflows)
+	}
+	if v.Workflows != nil {
+		serializeWorkflows(s, schemas.BatchGetWorkflowsResponse_Workflows, v.Workflows)
+	}
 }
 func (v *BatchGetWorkflowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetWorkflowsResponse, func(s *smithy.Schema) error {

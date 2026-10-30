@@ -75,15 +75,23 @@ func (v *UpdateDevEndpointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDevEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapValue(s, schemas.UpdateDevEndpointRequest_AddArguments, v.AddArguments)
-	serializePublicKeysList(s, schemas.UpdateDevEndpointRequest_AddPublicKeys, v.AddPublicKeys)
+	if v.AddArguments != nil {
+		serializeMapValue(s, schemas.UpdateDevEndpointRequest_AddArguments, v.AddArguments)
+	}
+	if v.AddPublicKeys != nil {
+		serializePublicKeysList(s, schemas.UpdateDevEndpointRequest_AddPublicKeys, v.AddPublicKeys)
+	}
 	if v.CustomLibraries != nil {
 		s.WriteStruct(schemas.UpdateDevEndpointRequest_CustomLibraries)
 		v.CustomLibraries.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.UpdateDevEndpointRequest_DeleteArguments, v.DeleteArguments)
-	serializePublicKeysList(s, schemas.UpdateDevEndpointRequest_DeletePublicKeys, v.DeletePublicKeys)
+	if v.DeleteArguments != nil {
+		serializeStringList(s, schemas.UpdateDevEndpointRequest_DeleteArguments, v.DeleteArguments)
+	}
+	if v.DeletePublicKeys != nil {
+		serializePublicKeysList(s, schemas.UpdateDevEndpointRequest_DeletePublicKeys, v.DeletePublicKeys)
+	}
 	if v.EndpointName != nil {
 		s.WriteString(schemas.UpdateDevEndpointRequest_EndpointName, *v.EndpointName)
 	}

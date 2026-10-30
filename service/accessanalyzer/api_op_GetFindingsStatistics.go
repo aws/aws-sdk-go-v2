@@ -75,7 +75,9 @@ func (v *GetFindingsStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingsStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingsStatisticsList(s, schemas.GetFindingsStatisticsResponse_findingsStatistics, v.FindingsStatistics)
+	if v.FindingsStatistics != nil {
+		serializeFindingsStatisticsList(s, schemas.GetFindingsStatisticsResponse_findingsStatistics, v.FindingsStatistics)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetFindingsStatisticsResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}

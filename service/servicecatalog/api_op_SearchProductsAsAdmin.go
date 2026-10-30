@@ -72,7 +72,9 @@ func (v *SearchProductsAsAdminInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.SearchProductsAsAdminInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeProductViewFilters(s, schemas.SearchProductsAsAdminInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeProductViewFilters(s, schemas.SearchProductsAsAdminInput_Filters, v.Filters)
+	}
 	if v.PageSize != 0 {
 		s.WriteInt32(schemas.SearchProductsAsAdminInput_PageSize, v.PageSize)
 	}
@@ -118,7 +120,9 @@ func (v *SearchProductsAsAdminOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.SearchProductsAsAdminOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProductViewDetails(s, schemas.SearchProductsAsAdminOutput_ProductViewDetails, v.ProductViewDetails)
+	if v.ProductViewDetails != nil {
+		serializeProductViewDetails(s, schemas.SearchProductsAsAdminOutput_ProductViewDetails, v.ProductViewDetails)
+	}
 }
 func (v *SearchProductsAsAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchProductsAsAdminOutput, func(s *smithy.Schema) error {

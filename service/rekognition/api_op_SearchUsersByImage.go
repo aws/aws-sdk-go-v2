@@ -156,8 +156,12 @@ func (v *SearchUsersByImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SearchedFace.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUnsearchedFacesList(s, schemas.SearchUsersByImageResponse_UnsearchedFaces, v.UnsearchedFaces)
-	serializeUserMatchList(s, schemas.SearchUsersByImageResponse_UserMatches, v.UserMatches)
+	if v.UnsearchedFaces != nil {
+		serializeUnsearchedFacesList(s, schemas.SearchUsersByImageResponse_UnsearchedFaces, v.UnsearchedFaces)
+	}
+	if v.UserMatches != nil {
+		serializeUserMatchList(s, schemas.SearchUsersByImageResponse_UserMatches, v.UserMatches)
+	}
 }
 func (v *SearchUsersByImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchUsersByImageResponse, func(s *smithy.Schema) error {

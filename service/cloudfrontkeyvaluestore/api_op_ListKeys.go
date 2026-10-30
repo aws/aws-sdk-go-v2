@@ -90,7 +90,9 @@ func (v *ListKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListKeysResponseList(s, schemas.ListKeysResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeListKeysResponseList(s, schemas.ListKeysResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKeysResponse_NextToken, *v.NextToken)
 	}

@@ -77,7 +77,9 @@ func (v *DescribeGlobalSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeGlobalSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalSettings(s, schemas.DescribeGlobalSettingsOutput_GlobalSettings, v.GlobalSettings)
+	if v.GlobalSettings != nil {
+		serializeGlobalSettings(s, schemas.DescribeGlobalSettingsOutput_GlobalSettings, v.GlobalSettings)
+	}
 	if v.LastUpdateTime != nil {
 		s.WriteTime(schemas.DescribeGlobalSettingsOutput_LastUpdateTime, *v.LastUpdateTime)
 	}

@@ -54,7 +54,9 @@ func (v *ListComplianceSummariesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComplianceSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceStringFilterList(s, schemas.ListComplianceSummariesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeComplianceStringFilterList(s, schemas.ListComplianceSummariesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListComplianceSummariesRequest_MaxResults, *v.MaxResults)
 	}
@@ -87,7 +89,9 @@ func (v *ListComplianceSummariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComplianceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceSummaryItemList(s, schemas.ListComplianceSummariesResult_ComplianceSummaryItems, v.ComplianceSummaryItems)
+	if v.ComplianceSummaryItems != nil {
+		serializeComplianceSummaryItemList(s, schemas.ListComplianceSummariesResult_ComplianceSummaryItems, v.ComplianceSummaryItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComplianceSummariesResult_NextToken, *v.NextToken)
 	}

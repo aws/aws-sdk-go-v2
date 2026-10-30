@@ -82,8 +82,12 @@ func (v *UpdateCostCategoryDefinitionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.RuleVersion != "" {
 		s.WriteString(schemas.UpdateCostCategoryDefinitionRequest_RuleVersion, string(v.RuleVersion))
 	}
-	serializeCostCategoryRulesList(s, schemas.UpdateCostCategoryDefinitionRequest_Rules, v.Rules)
-	serializeCostCategorySplitChargeRulesList(s, schemas.UpdateCostCategoryDefinitionRequest_SplitChargeRules, v.SplitChargeRules)
+	if v.Rules != nil {
+		serializeCostCategoryRulesList(s, schemas.UpdateCostCategoryDefinitionRequest_Rules, v.Rules)
+	}
+	if v.SplitChargeRules != nil {
+		serializeCostCategorySplitChargeRulesList(s, schemas.UpdateCostCategoryDefinitionRequest_SplitChargeRules, v.SplitChargeRules)
+	}
 }
 
 type UpdateCostCategoryDefinitionOutput struct {

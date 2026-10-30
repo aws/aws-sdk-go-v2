@@ -106,7 +106,9 @@ func (v *ListUtteranceAnalyticsDataInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.EndDateTime != nil {
 		s.WriteTime(schemas.ListUtteranceAnalyticsDataRequest_endDateTime, *v.EndDateTime)
 	}
-	serializeAnalyticsUtteranceFilters(s, schemas.ListUtteranceAnalyticsDataRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeAnalyticsUtteranceFilters(s, schemas.ListUtteranceAnalyticsDataRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListUtteranceAnalyticsDataRequest_maxResults, *v.MaxResults)
 	}
@@ -161,7 +163,9 @@ func (v *ListUtteranceAnalyticsDataOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUtteranceAnalyticsDataResponse_nextToken, *v.NextToken)
 	}
-	serializeUtteranceSpecifications(s, schemas.ListUtteranceAnalyticsDataResponse_utterances, v.Utterances)
+	if v.Utterances != nil {
+		serializeUtteranceSpecifications(s, schemas.ListUtteranceAnalyticsDataResponse_utterances, v.Utterances)
+	}
 }
 func (v *ListUtteranceAnalyticsDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUtteranceAnalyticsDataResponse, func(s *smithy.Schema) error {

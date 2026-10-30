@@ -92,7 +92,9 @@ func (v *ListDatasetEntriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetEntriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetLabels(s, schemas.ListDatasetEntriesRequest_ContainsLabels, v.ContainsLabels)
+	if v.ContainsLabels != nil {
+		serializeDatasetLabels(s, schemas.ListDatasetEntriesRequest_ContainsLabels, v.ContainsLabels)
+	}
 	if v.DatasetArn != nil {
 		s.WriteString(schemas.ListDatasetEntriesRequest_DatasetArn, *v.DatasetArn)
 	}
@@ -136,7 +138,9 @@ func (v *ListDatasetEntriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetEntriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetEntries(s, schemas.ListDatasetEntriesResponse_DatasetEntries, v.DatasetEntries)
+	if v.DatasetEntries != nil {
+		serializeDatasetEntries(s, schemas.ListDatasetEntriesResponse_DatasetEntries, v.DatasetEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetEntriesResponse_NextToken, *v.NextToken)
 	}

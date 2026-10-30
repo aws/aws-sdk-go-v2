@@ -92,7 +92,9 @@ func (v *ListTemplateGroupAccessControlEntriesOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListTemplateGroupAccessControlEntriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessControlEntryList(s, schemas.ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries, v.AccessControlEntries)
+	if v.AccessControlEntries != nil {
+		serializeAccessControlEntryList(s, schemas.ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries, v.AccessControlEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplateGroupAccessControlEntriesResponse_NextToken, *v.NextToken)
 	}

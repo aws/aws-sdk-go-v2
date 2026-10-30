@@ -115,7 +115,9 @@ func (v *ListPricesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageMarker != nil {
 		s.WriteString(schemas.ListPricesResponse_NextPageMarker, *v.NextPageMarker)
 	}
-	serializeDomainPriceList(s, schemas.ListPricesResponse_Prices, v.Prices)
+	if v.Prices != nil {
+		serializeDomainPriceList(s, schemas.ListPricesResponse_Prices, v.Prices)
+	}
 }
 func (v *ListPricesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPricesResponse, func(s *smithy.Schema) error {

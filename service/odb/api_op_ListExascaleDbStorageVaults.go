@@ -102,7 +102,9 @@ func (v *ListExascaleDbStorageVaultsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListExascaleDbStorageVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExascaleDbStorageVaultList(s, schemas.ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults, v.ExascaleDbStorageVaults)
+	if v.ExascaleDbStorageVaults != nil {
+		serializeExascaleDbStorageVaultList(s, schemas.ListExascaleDbStorageVaultsOutput_exascaleDbStorageVaults, v.ExascaleDbStorageVaults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExascaleDbStorageVaultsOutput_nextToken, *v.NextToken)
 	}

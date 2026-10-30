@@ -97,7 +97,9 @@ func (v *ListProvisionedConcurrencyConfigsOutput) SerializeMembers(s smithy.Shap
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListProvisionedConcurrencyConfigsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeProvisionedConcurrencyConfigList(s, schemas.ListProvisionedConcurrencyConfigsResponse_ProvisionedConcurrencyConfigs, v.ProvisionedConcurrencyConfigs)
+	if v.ProvisionedConcurrencyConfigs != nil {
+		serializeProvisionedConcurrencyConfigList(s, schemas.ListProvisionedConcurrencyConfigsResponse_ProvisionedConcurrencyConfigs, v.ProvisionedConcurrencyConfigs)
+	}
 }
 func (v *ListProvisionedConcurrencyConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisionedConcurrencyConfigsResponse, func(s *smithy.Schema) error {

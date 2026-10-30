@@ -85,7 +85,9 @@ func (v *ListCustomMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricNames(s, schemas.ListCustomMetricsResponse_metricNames, v.MetricNames)
+	if v.MetricNames != nil {
+		serializeMetricNames(s, schemas.ListCustomMetricsResponse_metricNames, v.MetricNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomMetricsResponse_nextToken, *v.NextToken)
 	}

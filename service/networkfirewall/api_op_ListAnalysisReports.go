@@ -104,7 +104,9 @@ func (v *ListAnalysisReportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnalysisReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisReports(s, schemas.ListAnalysisReportsResponse_AnalysisReports, v.AnalysisReports)
+	if v.AnalysisReports != nil {
+		serializeAnalysisReports(s, schemas.ListAnalysisReportsResponse_AnalysisReports, v.AnalysisReports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnalysisReportsResponse_NextToken, *v.NextToken)
 	}

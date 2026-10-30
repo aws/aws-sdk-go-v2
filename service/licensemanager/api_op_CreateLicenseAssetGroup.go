@@ -68,19 +68,27 @@ func (v *CreateLicenseAssetGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseAssetRulesetArnList(s, schemas.CreateLicenseAssetGroupRequest_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	if v.AssociatedLicenseAssetRulesetARNs != nil {
+		serializeLicenseAssetRulesetArnList(s, schemas.CreateLicenseAssetGroupRequest_AssociatedLicenseAssetRulesetARNs, v.AssociatedLicenseAssetRulesetARNs)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateLicenseAssetGroupRequest_ClientToken, *v.ClientToken)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateLicenseAssetGroupRequest_Description, *v.Description)
 	}
-	serializeLicenseAssetGroupConfigurationList(s, schemas.CreateLicenseAssetGroupRequest_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	if v.LicenseAssetGroupConfigurations != nil {
+		serializeLicenseAssetGroupConfigurationList(s, schemas.CreateLicenseAssetGroupRequest_LicenseAssetGroupConfigurations, v.LicenseAssetGroupConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateLicenseAssetGroupRequest_Name, *v.Name)
 	}
-	serializeLicenseAssetGroupPropertyList(s, schemas.CreateLicenseAssetGroupRequest_Properties, v.Properties)
-	serializeTagList(s, schemas.CreateLicenseAssetGroupRequest_Tags, v.Tags)
+	if v.Properties != nil {
+		serializeLicenseAssetGroupPropertyList(s, schemas.CreateLicenseAssetGroupRequest_Properties, v.Properties)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLicenseAssetGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLicenseAssetGroupOutput struct {

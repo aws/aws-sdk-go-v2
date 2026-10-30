@@ -96,7 +96,9 @@ func (v *ListProposalVotesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProposalVotesOutput_NextToken, *v.NextToken)
 	}
-	serializeProposalVoteList(s, schemas.ListProposalVotesOutput_ProposalVotes, v.ProposalVotes)
+	if v.ProposalVotes != nil {
+		serializeProposalVoteList(s, schemas.ListProposalVotesOutput_ProposalVotes, v.ProposalVotes)
+	}
 }
 func (v *ListProposalVotesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProposalVotesOutput, func(s *smithy.Schema) error {

@@ -59,7 +59,9 @@ func (v *DisassociatePersonasFromEntitiesInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DisassociatePersonasFromEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityIdsList(s, schemas.DisassociatePersonasFromEntitiesRequest_EntityIds, v.EntityIds)
+	if v.EntityIds != nil {
+		serializeEntityIdsList(s, schemas.DisassociatePersonasFromEntitiesRequest_EntityIds, v.EntityIds)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DisassociatePersonasFromEntitiesRequest_Id, *v.Id)
 	}
@@ -87,7 +89,9 @@ func (v *DisassociatePersonasFromEntitiesOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DisassociatePersonasFromEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedEntityList(s, schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList, v.FailedEntityList)
+	if v.FailedEntityList != nil {
+		serializeFailedEntityList(s, schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList, v.FailedEntityList)
+	}
 }
 func (v *DisassociatePersonasFromEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociatePersonasFromEntitiesResponse, func(s *smithy.Schema) error {

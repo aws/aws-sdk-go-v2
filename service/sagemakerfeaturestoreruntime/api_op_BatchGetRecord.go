@@ -53,7 +53,9 @@ func (v *BatchGetRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpirationTimeResponse != "" {
 		s.WriteString(schemas.BatchGetRecordRequest_ExpirationTimeResponse, string(v.ExpirationTimeResponse))
 	}
-	serializeBatchGetRecordIdentifiers(s, schemas.BatchGetRecordRequest_Identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeBatchGetRecordIdentifiers(s, schemas.BatchGetRecordRequest_Identifiers, v.Identifiers)
+	}
 }
 
 type BatchGetRecordOutput struct {
@@ -87,9 +89,15 @@ func (v *BatchGetRecordOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetRecordErrors(s, schemas.BatchGetRecordResponse_Errors, v.Errors)
-	serializeBatchGetRecordResultDetails(s, schemas.BatchGetRecordResponse_Records, v.Records)
-	serializeUnprocessedIdentifiers(s, schemas.BatchGetRecordResponse_UnprocessedIdentifiers, v.UnprocessedIdentifiers)
+	if v.Errors != nil {
+		serializeBatchGetRecordErrors(s, schemas.BatchGetRecordResponse_Errors, v.Errors)
+	}
+	if v.Records != nil {
+		serializeBatchGetRecordResultDetails(s, schemas.BatchGetRecordResponse_Records, v.Records)
+	}
+	if v.UnprocessedIdentifiers != nil {
+		serializeUnprocessedIdentifiers(s, schemas.BatchGetRecordResponse_UnprocessedIdentifiers, v.UnprocessedIdentifiers)
+	}
 }
 func (v *BatchGetRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetRecordResponse, func(s *smithy.Schema) error {

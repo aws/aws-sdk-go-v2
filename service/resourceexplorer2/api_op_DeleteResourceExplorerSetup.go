@@ -53,7 +53,9 @@ func (v *DeleteResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerial
 	if v.DeleteInAllRegions != nil {
 		s.WriteBool(schemas.DeleteResourceExplorerSetupInput_DeleteInAllRegions, *v.DeleteInAllRegions)
 	}
-	serializeRegionList(s, schemas.DeleteResourceExplorerSetupInput_RegionList, v.RegionList)
+	if v.RegionList != nil {
+		serializeRegionList(s, schemas.DeleteResourceExplorerSetupInput_RegionList, v.RegionList)
+	}
 }
 
 type DeleteResourceExplorerSetupOutput struct {

@@ -83,7 +83,9 @@ func (v *SearchProvisionedProductsInput) SerializeMembers(s smithy.ShapeSerializ
 		v.AccessLevelFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProvisionedProductFilters(s, schemas.SearchProvisionedProductsInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeProvisionedProductFilters(s, schemas.SearchProvisionedProductsInput_Filters, v.Filters)
+	}
 	if v.PageSize != 0 {
 		s.WriteInt32(schemas.SearchProvisionedProductsInput_PageSize, v.PageSize)
 	}
@@ -126,7 +128,9 @@ func (v *SearchProvisionedProductsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.SearchProvisionedProductsOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProvisionedProductAttributes(s, schemas.SearchProvisionedProductsOutput_ProvisionedProducts, v.ProvisionedProducts)
+	if v.ProvisionedProducts != nil {
+		serializeProvisionedProductAttributes(s, schemas.SearchProvisionedProductsOutput_ProvisionedProducts, v.ProvisionedProducts)
+	}
 	if v.TotalResultsCount != 0 {
 		s.WriteInt32(schemas.SearchProvisionedProductsOutput_TotalResultsCount, v.TotalResultsCount)
 	}

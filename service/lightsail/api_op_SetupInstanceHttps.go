@@ -67,7 +67,9 @@ func (v *SetupInstanceHttpsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateProvider != "" {
 		s.WriteString(schemas.SetupInstanceHttpsRequest_certificateProvider, string(v.CertificateProvider))
 	}
-	serializeSetupDomainNameList(s, schemas.SetupInstanceHttpsRequest_domainNames, v.DomainNames)
+	if v.DomainNames != nil {
+		serializeSetupDomainNameList(s, schemas.SetupInstanceHttpsRequest_domainNames, v.DomainNames)
+	}
 	if v.EmailAddress != nil {
 		s.WriteString(schemas.SetupInstanceHttpsRequest_emailAddress, *v.EmailAddress)
 	}
@@ -94,7 +96,9 @@ func (v *SetupInstanceHttpsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetupInstanceHttpsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.SetupInstanceHttpsResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.SetupInstanceHttpsResult_operations, v.Operations)
+	}
 }
 func (v *SetupInstanceHttpsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SetupInstanceHttpsResult, func(s *smithy.Schema) error {

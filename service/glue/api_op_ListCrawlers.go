@@ -59,7 +59,9 @@ func (v *ListCrawlersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrawlersRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListCrawlersRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListCrawlersRequest_Tags, v.Tags)
+	}
 }
 
 type ListCrawlersOutput struct {
@@ -85,7 +87,9 @@ func (v *ListCrawlersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCrawlersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrawlerNameList(s, schemas.ListCrawlersResponse_CrawlerNames, v.CrawlerNames)
+	if v.CrawlerNames != nil {
+		serializeCrawlerNameList(s, schemas.ListCrawlersResponse_CrawlerNames, v.CrawlerNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCrawlersResponse_NextToken, *v.NextToken)
 	}

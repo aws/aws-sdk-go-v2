@@ -88,7 +88,9 @@ func (v *CreateEventIntegrationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEventIntegrationRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateEventIntegrationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventIntegrationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateEventIntegrationOutput struct {

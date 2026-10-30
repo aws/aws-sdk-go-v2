@@ -103,7 +103,9 @@ func (v *DescribeThingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DescribeThingResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.DescribeThingResponse_attributes, v.Attributes)
+	}
 	if v.BillingGroupName != nil {
 		s.WriteString(schemas.DescribeThingResponse_billingGroupName, *v.BillingGroupName)
 	}

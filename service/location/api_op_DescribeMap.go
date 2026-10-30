@@ -172,7 +172,9 @@ func (v *DescribeMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingPlan != "" {
 		s.WriteString(schemas.DescribeMapResponse_PricingPlan, string(v.PricingPlan))
 	}
-	serializeTagMap(s, schemas.DescribeMapResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeMapResponse_Tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.DescribeMapResponse_UpdateTime, *v.UpdateTime)
 	}

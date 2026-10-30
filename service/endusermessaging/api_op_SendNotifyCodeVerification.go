@@ -95,7 +95,9 @@ func (v *SendNotifyCodeVerificationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendNotifyCodeVerificationInput_configurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendNotifyCodeVerificationInput_context, v.Context)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendNotifyCodeVerificationInput_context, v.Context)
+	}
 	if v.DestinationIdentity != nil {
 		s.WriteString(schemas.SendNotifyCodeVerificationInput_destinationIdentity, *v.DestinationIdentity)
 	}

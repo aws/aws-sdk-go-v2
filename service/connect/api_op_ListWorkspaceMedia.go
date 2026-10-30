@@ -77,7 +77,9 @@ func (v *ListWorkspaceMediaOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkspaceMediaOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaList(s, schemas.ListWorkspaceMediaResponse_Media, v.Media)
+	if v.Media != nil {
+		serializeMediaList(s, schemas.ListWorkspaceMediaResponse_Media, v.Media)
+	}
 }
 func (v *ListWorkspaceMediaOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkspaceMediaResponse, func(s *smithy.Schema) error {

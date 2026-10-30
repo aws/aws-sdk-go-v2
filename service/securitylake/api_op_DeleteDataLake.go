@@ -53,7 +53,9 @@ func (v *DeleteDataLakeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteDataLakeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionList(s, schemas.DeleteDataLakeRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.DeleteDataLakeRequest_regions, v.Regions)
+	}
 }
 
 type DeleteDataLakeOutput struct {

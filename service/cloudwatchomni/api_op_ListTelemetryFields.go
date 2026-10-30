@@ -106,7 +106,9 @@ func (v *ListTelemetryFieldsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTelemetryFieldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldList(s, schemas.ListTelemetryFieldsResponse_fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldList(s, schemas.ListTelemetryFieldsResponse_fields, v.Fields)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTelemetryFieldsResponse_nextToken, *v.NextToken)
 	}

@@ -88,7 +88,9 @@ func (v *ListAnalyzableServersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAnalyzableServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyzableServerSummaryList(s, schemas.ListAnalyzableServersResponse_analyzableServers, v.AnalyzableServers)
+	if v.AnalyzableServers != nil {
+		serializeAnalyzableServerSummaryList(s, schemas.ListAnalyzableServersResponse_analyzableServers, v.AnalyzableServers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnalyzableServersResponse_nextToken, *v.NextToken)
 	}

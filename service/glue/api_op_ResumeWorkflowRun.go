@@ -58,7 +58,9 @@ func (v *ResumeWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ResumeWorkflowRunRequest_Name, *v.Name)
 	}
-	serializeNodeIdList(s, schemas.ResumeWorkflowRunRequest_NodeIds, v.NodeIds)
+	if v.NodeIds != nil {
+		serializeNodeIdList(s, schemas.ResumeWorkflowRunRequest_NodeIds, v.NodeIds)
+	}
 	if v.RunId != nil {
 		s.WriteString(schemas.ResumeWorkflowRunRequest_RunId, *v.RunId)
 	}
@@ -86,7 +88,9 @@ func (v *ResumeWorkflowRunOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResumeWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeIdList(s, schemas.ResumeWorkflowRunResponse_NodeIds, v.NodeIds)
+	if v.NodeIds != nil {
+		serializeNodeIdList(s, schemas.ResumeWorkflowRunResponse_NodeIds, v.NodeIds)
+	}
 	if v.RunId != nil {
 		s.WriteString(schemas.ResumeWorkflowRunResponse_RunId, *v.RunId)
 	}

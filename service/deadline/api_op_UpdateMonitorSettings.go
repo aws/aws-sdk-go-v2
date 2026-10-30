@@ -56,7 +56,9 @@ func (v *UpdateMonitorSettingsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MonitorId != nil {
 		s.WriteString(schemas.UpdateMonitorSettingsRequest_monitorId, *v.MonitorId)
 	}
-	serializeSettingsMap(s, schemas.UpdateMonitorSettingsRequest_settings, v.Settings)
+	if v.Settings != nil {
+		serializeSettingsMap(s, schemas.UpdateMonitorSettingsRequest_settings, v.Settings)
+	}
 }
 
 type UpdateMonitorSettingsOutput struct {

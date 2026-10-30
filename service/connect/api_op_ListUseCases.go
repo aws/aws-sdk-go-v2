@@ -99,7 +99,9 @@ func (v *ListUseCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUseCasesResponse_NextToken, *v.NextToken)
 	}
-	serializeUseCaseSummaryList(s, schemas.ListUseCasesResponse_UseCaseSummaryList, v.UseCaseSummaryList)
+	if v.UseCaseSummaryList != nil {
+		serializeUseCaseSummaryList(s, schemas.ListUseCasesResponse_UseCaseSummaryList, v.UseCaseSummaryList)
+	}
 }
 func (v *ListUseCasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUseCasesResponse, func(s *smithy.Schema) error {

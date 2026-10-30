@@ -92,7 +92,9 @@ func (v *GetBasePathMappingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBasePathMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfBasePathMapping(s, schemas.BasePathMappings_items, v.Items)
+	if v.Items != nil {
+		serializeListOfBasePathMapping(s, schemas.BasePathMappings_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.BasePathMappings_position, *v.Position)
 	}

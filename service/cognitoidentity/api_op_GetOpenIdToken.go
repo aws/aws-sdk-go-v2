@@ -59,7 +59,9 @@ func (v *GetOpenIdTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityId != nil {
 		s.WriteString(schemas.GetOpenIdTokenInput_IdentityId, *v.IdentityId)
 	}
-	serializeLoginsMap(s, schemas.GetOpenIdTokenInput_Logins, v.Logins)
+	if v.Logins != nil {
+		serializeLoginsMap(s, schemas.GetOpenIdTokenInput_Logins, v.Logins)
+	}
 }
 
 // Returned in response to a successful GetOpenIdToken request.

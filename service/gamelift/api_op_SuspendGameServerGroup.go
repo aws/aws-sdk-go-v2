@@ -74,7 +74,9 @@ func (v *SuspendGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.GameServerGroupName != nil {
 		s.WriteString(schemas.SuspendGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
 	}
-	serializeGameServerGroupActions(s, schemas.SuspendGameServerGroupInput_SuspendActions, v.SuspendActions)
+	if v.SuspendActions != nil {
+		serializeGameServerGroupActions(s, schemas.SuspendGameServerGroupInput_SuspendActions, v.SuspendActions)
+	}
 }
 
 type SuspendGameServerGroupOutput struct {

@@ -47,7 +47,9 @@ func (v *GetBlacklistReportsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBlacklistReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlacklistItemNames(s, schemas.GetBlacklistReportsRequest_BlacklistItemNames, v.BlacklistItemNames)
+	if v.BlacklistItemNames != nil {
+		serializeBlacklistItemNames(s, schemas.GetBlacklistReportsRequest_BlacklistItemNames, v.BlacklistItemNames)
+	}
 }
 
 // An object that contains information about blacklist events.
@@ -72,7 +74,9 @@ func (v *GetBlacklistReportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBlacklistReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlacklistReport(s, schemas.GetBlacklistReportsResponse_BlacklistReport, v.BlacklistReport)
+	if v.BlacklistReport != nil {
+		serializeBlacklistReport(s, schemas.GetBlacklistReportsResponse_BlacklistReport, v.BlacklistReport)
+	}
 }
 func (v *GetBlacklistReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBlacklistReportsResponse, func(s *smithy.Schema) error {

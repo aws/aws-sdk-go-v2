@@ -104,7 +104,9 @@ func (v *ListPolicyAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyAttachmentsResponse_NextToken, *v.NextToken)
 	}
-	serializeObjectIdentifierList(s, schemas.ListPolicyAttachmentsResponse_ObjectIdentifiers, v.ObjectIdentifiers)
+	if v.ObjectIdentifiers != nil {
+		serializeObjectIdentifierList(s, schemas.ListPolicyAttachmentsResponse_ObjectIdentifiers, v.ObjectIdentifiers)
+	}
 }
 func (v *ListPolicyAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicyAttachmentsResponse, func(s *smithy.Schema) error {

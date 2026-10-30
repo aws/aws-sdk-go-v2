@@ -103,7 +103,9 @@ func (v *CreateTrainingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpareInstanceCountPerUltraServer != nil {
 		s.WriteInt32(schemas.CreateTrainingPlanRequest_SpareInstanceCountPerUltraServer, *v.SpareInstanceCountPerUltraServer)
 	}
-	serializeTagList(s, schemas.CreateTrainingPlanRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrainingPlanRequest_Tags, v.Tags)
+	}
 	if v.TrainingPlanName != nil {
 		s.WriteString(schemas.CreateTrainingPlanRequest_TrainingPlanName, *v.TrainingPlanName)
 	}

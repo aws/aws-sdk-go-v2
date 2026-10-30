@@ -90,7 +90,9 @@ func (v *CreateModelCardInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SecurityConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateModelCardRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelCardRequest_Tags, v.Tags)
+	}
 }
 
 type CreateModelCardOutput struct {

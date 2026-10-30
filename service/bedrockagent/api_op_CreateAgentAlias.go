@@ -77,8 +77,12 @@ func (v *CreateAgentAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAgentAliasRequest_description, *v.Description)
 	}
-	serializeAgentAliasRoutingConfiguration(s, schemas.CreateAgentAliasRequest_routingConfiguration, v.RoutingConfiguration)
-	serializeTagsMap(s, schemas.CreateAgentAliasRequest_tags, v.Tags)
+	if v.RoutingConfiguration != nil {
+		serializeAgentAliasRoutingConfiguration(s, schemas.CreateAgentAliasRequest_routingConfiguration, v.RoutingConfiguration)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateAgentAliasRequest_tags, v.Tags)
+	}
 }
 
 type CreateAgentAliasOutput struct {

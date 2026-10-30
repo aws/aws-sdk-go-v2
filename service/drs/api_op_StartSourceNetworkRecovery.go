@@ -54,8 +54,12 @@ func (v *StartSourceNetworkRecoveryInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DeployAsNew != nil {
 		s.WriteBool(schemas.StartSourceNetworkRecoveryRequest_deployAsNew, *v.DeployAsNew)
 	}
-	serializeStartSourceNetworkRecoveryRequestNetworkEntries(s, schemas.StartSourceNetworkRecoveryRequest_sourceNetworks, v.SourceNetworks)
-	serializeTagsMap(s, schemas.StartSourceNetworkRecoveryRequest_tags, v.Tags)
+	if v.SourceNetworks != nil {
+		serializeStartSourceNetworkRecoveryRequestNetworkEntries(s, schemas.StartSourceNetworkRecoveryRequest_sourceNetworks, v.SourceNetworks)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartSourceNetworkRecoveryRequest_tags, v.Tags)
+	}
 }
 
 type StartSourceNetworkRecoveryOutput struct {

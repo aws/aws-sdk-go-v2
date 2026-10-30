@@ -111,7 +111,9 @@ func (v *ListSopRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSopRecommendationsResponse_nextToken, *v.NextToken)
 	}
-	serializeSopRecommendationList(s, schemas.ListSopRecommendationsResponse_sopRecommendations, v.SopRecommendations)
+	if v.SopRecommendations != nil {
+		serializeSopRecommendationList(s, schemas.ListSopRecommendationsResponse_sopRecommendations, v.SopRecommendations)
+	}
 }
 func (v *ListSopRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSopRecommendationsResponse, func(s *smithy.Schema) error {

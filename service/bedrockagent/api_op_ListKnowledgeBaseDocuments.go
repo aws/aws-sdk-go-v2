@@ -104,7 +104,9 @@ func (v *ListKnowledgeBaseDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListKnowledgeBaseDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKnowledgeBaseDocumentDetails(s, schemas.ListKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+	if v.DocumentDetails != nil {
+		serializeKnowledgeBaseDocumentDetails(s, schemas.ListKnowledgeBaseDocumentsResponse_documentDetails, v.DocumentDetails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKnowledgeBaseDocumentsResponse_nextToken, *v.NextToken)
 	}

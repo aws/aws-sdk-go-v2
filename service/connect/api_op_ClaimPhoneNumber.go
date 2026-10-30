@@ -116,7 +116,9 @@ func (v *ClaimPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PhoneNumberDescription != nil {
 		s.WriteString(schemas.ClaimPhoneNumberRequest_PhoneNumberDescription, *v.PhoneNumberDescription)
 	}
-	serializeTagMap(s, schemas.ClaimPhoneNumberRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ClaimPhoneNumberRequest_Tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.ClaimPhoneNumberRequest_TargetArn, *v.TargetArn)
 	}

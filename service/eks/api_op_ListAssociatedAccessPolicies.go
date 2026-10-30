@@ -113,7 +113,9 @@ func (v *ListAssociatedAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListAssociatedAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedAccessPoliciesList(s, schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies, v.AssociatedAccessPolicies)
+	if v.AssociatedAccessPolicies != nil {
+		serializeAssociatedAccessPoliciesList(s, schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies, v.AssociatedAccessPolicies)
+	}
 	if v.ClusterName != nil {
 		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_clusterName, *v.ClusterName)
 	}

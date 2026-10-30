@@ -152,8 +152,12 @@ func (v *GetOtaTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetOtaTaskResponse_Status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetOtaTaskResponse_Tags, v.Tags)
-	serializeTarget(s, schemas.GetOtaTaskResponse_Target, v.Target)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetOtaTaskResponse_Tags, v.Tags)
+	}
+	if v.Target != nil {
+		serializeTarget(s, schemas.GetOtaTaskResponse_Target, v.Target)
+	}
 	if v.TaskArn != nil {
 		s.WriteString(schemas.GetOtaTaskResponse_TaskArn, *v.TaskArn)
 	}

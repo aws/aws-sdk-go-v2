@@ -103,7 +103,9 @@ func (v *ListPolicyGenerationSummariesOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyGenerationSummariesResponse_nextToken, *v.NextToken)
 	}
-	serializePolicyGenerationSummaryList(s, schemas.ListPolicyGenerationSummariesResponse_policyGenerations, v.PolicyGenerations)
+	if v.PolicyGenerations != nil {
+		serializePolicyGenerationSummaryList(s, schemas.ListPolicyGenerationSummariesResponse_policyGenerations, v.PolicyGenerations)
+	}
 }
 func (v *ListPolicyGenerationSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicyGenerationSummariesResponse, func(s *smithy.Schema) error {

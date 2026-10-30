@@ -75,7 +75,9 @@ func (v *RemoveEntityOwnerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntityType != "" {
 		s.WriteString(schemas.RemoveEntityOwnerInput_entityType, string(v.EntityType))
 	}
-	serializeOwnerProperties(s, schemas.RemoveEntityOwnerInput_owner, v.Owner)
+	if v.Owner != nil {
+		serializeOwnerProperties(s, schemas.RemoveEntityOwnerInput_owner, v.Owner)
+	}
 }
 
 type RemoveEntityOwnerOutput struct {

@@ -115,7 +115,9 @@ func (v *ListOrganizationRecommendationResourcesOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrganizationRecommendationResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeOrganizationRecommendationResourceSummaryList(s, schemas.ListOrganizationRecommendationResourcesResponse_organizationRecommendationResourceSummaries, v.OrganizationRecommendationResourceSummaries)
+	if v.OrganizationRecommendationResourceSummaries != nil {
+		serializeOrganizationRecommendationResourceSummaryList(s, schemas.ListOrganizationRecommendationResourcesResponse_organizationRecommendationResourceSummaries, v.OrganizationRecommendationResourceSummaries)
+	}
 }
 func (v *ListOrganizationRecommendationResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOrganizationRecommendationResourcesResponse, func(s *smithy.Schema) error {

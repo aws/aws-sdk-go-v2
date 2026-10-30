@@ -117,7 +117,9 @@ func (v *GetMatchingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeJobOutputSourceConfig(s, schemas.GetMatchingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.OutputSourceConfig != nil {
+		serializeJobOutputSourceConfig(s, schemas.GetMatchingJobOutput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetMatchingJobOutput_startTime, *v.StartTime)
 	}

@@ -112,7 +112,9 @@ func (v *ListChannelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelSummaryList(s, schemas.ListChannelsResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannelSummaryList(s, schemas.ListChannelsResponse_Channels, v.Channels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelsResponse_NextToken, *v.NextToken)
 	}

@@ -54,7 +54,9 @@ func (v *RebuildWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RebuildWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRebuildWorkspaceRequests(s, schemas.RebuildWorkspacesRequest_RebuildWorkspaceRequests, v.RebuildWorkspaceRequests)
+	if v.RebuildWorkspaceRequests != nil {
+		serializeRebuildWorkspaceRequests(s, schemas.RebuildWorkspacesRequest_RebuildWorkspaceRequests, v.RebuildWorkspaceRequests)
+	}
 }
 
 type RebuildWorkspacesOutput struct {
@@ -75,7 +77,9 @@ func (v *RebuildWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RebuildWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedRebuildWorkspaceRequests(s, schemas.RebuildWorkspacesResult_FailedRequests, v.FailedRequests)
+	if v.FailedRequests != nil {
+		serializeFailedRebuildWorkspaceRequests(s, schemas.RebuildWorkspacesResult_FailedRequests, v.FailedRequests)
+	}
 }
 func (v *RebuildWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RebuildWorkspacesResult, func(s *smithy.Schema) error {

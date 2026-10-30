@@ -267,7 +267,9 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PointInTimeRecovery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaSpecificationList(s, schemas.CreateTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	if v.ReplicaSpecifications != nil {
+		serializeReplicaSpecificationList(s, schemas.CreateTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	}
 	if v.SchemaDefinition != nil {
 		s.WriteStruct(schemas.CreateTableRequest_schemaDefinition)
 		v.SchemaDefinition.SerializeMembers(s)
@@ -276,7 +278,9 @@ func (v *CreateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.CreateTableRequest_tableName, *v.TableName)
 	}
-	serializeTagList(s, schemas.CreateTableRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTableRequest_tags, v.Tags)
+	}
 	if v.Ttl != nil {
 		s.WriteStruct(schemas.CreateTableRequest_ttl)
 		v.Ttl.SerializeMembers(s)

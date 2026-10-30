@@ -138,7 +138,9 @@ func (v *GetProjectProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainUnitId != nil {
 		s.WriteString(schemas.GetProjectProfileOutput_domainUnitId, *v.DomainUnitId)
 	}
-	serializeEnvironmentConfigurationsList(s, schemas.GetProjectProfileOutput_environmentConfigurations, v.EnvironmentConfigurations)
+	if v.EnvironmentConfigurations != nil {
+		serializeEnvironmentConfigurationsList(s, schemas.GetProjectProfileOutput_environmentConfigurations, v.EnvironmentConfigurations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetProjectProfileOutput_id, *v.Id)
 	}
@@ -148,7 +150,9 @@ func (v *GetProjectProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetProjectProfileOutput_name, *v.Name)
 	}
-	serializeProjectResourceTagParameters(s, schemas.GetProjectProfileOutput_projectResourceTags, v.ProjectResourceTags)
+	if v.ProjectResourceTags != nil {
+		serializeProjectResourceTagParameters(s, schemas.GetProjectProfileOutput_projectResourceTags, v.ProjectResourceTags)
+	}
 	if v.ProjectResourceTagsDescription != nil {
 		s.WriteString(schemas.GetProjectProfileOutput_projectResourceTagsDescription, *v.ProjectResourceTagsDescription)
 	}

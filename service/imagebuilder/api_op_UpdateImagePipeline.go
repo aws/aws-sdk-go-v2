@@ -158,7 +158,9 @@ func (v *UpdateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ImageScanningConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.UpdateImagePipelineRequest_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeTagMap(s, schemas.UpdateImagePipelineRequest_imageTags, v.ImageTags)
+	}
 	if v.ImageTestsConfiguration != nil {
 		s.WriteStruct(schemas.UpdateImagePipelineRequest_imageTestsConfiguration)
 		v.ImageTestsConfiguration.SerializeMembers(s)
@@ -180,7 +182,9 @@ func (v *UpdateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateImagePipelineRequest_status, string(v.Status))
 	}
-	serializeWorkflowConfigurationList(s, schemas.UpdateImagePipelineRequest_workflows, v.Workflows)
+	if v.Workflows != nil {
+		serializeWorkflowConfigurationList(s, schemas.UpdateImagePipelineRequest_workflows, v.Workflows)
+	}
 }
 
 type UpdateImagePipelineOutput struct {

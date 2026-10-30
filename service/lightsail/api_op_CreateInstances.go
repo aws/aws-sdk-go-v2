@@ -115,7 +115,9 @@ func (v *CreateInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddOnRequestList(s, schemas.CreateInstancesRequest_addOns, v.AddOns)
+	if v.AddOns != nil {
+		serializeAddOnRequestList(s, schemas.CreateInstancesRequest_addOns, v.AddOns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.CreateInstancesRequest_availabilityZone, *v.AvailabilityZone)
 	}
@@ -128,14 +130,18 @@ func (v *CreateInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomImageName != nil {
 		s.WriteString(schemas.CreateInstancesRequest_customImageName, *v.CustomImageName)
 	}
-	serializeStringList(s, schemas.CreateInstancesRequest_instanceNames, v.InstanceNames)
+	if v.InstanceNames != nil {
+		serializeStringList(s, schemas.CreateInstancesRequest_instanceNames, v.InstanceNames)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CreateInstancesRequest_ipAddressType, string(v.IpAddressType))
 	}
 	if v.KeyPairName != nil {
 		s.WriteString(schemas.CreateInstancesRequest_keyPairName, *v.KeyPairName)
 	}
-	serializeTagList(s, schemas.CreateInstancesRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInstancesRequest_tags, v.Tags)
+	}
 	if v.UserData != nil {
 		s.WriteString(schemas.CreateInstancesRequest_userData, *v.UserData)
 	}
@@ -161,7 +167,9 @@ func (v *CreateInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateInstancesResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateInstancesResult_operations, v.Operations)
+	}
 }
 func (v *CreateInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateInstancesResult, func(s *smithy.Schema) error {

@@ -112,7 +112,9 @@ func (v *GetUserDefinedFunctionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetUserDefinedFunctionsResponse_NextToken, *v.NextToken)
 	}
-	serializeUserDefinedFunctionList(s, schemas.GetUserDefinedFunctionsResponse_UserDefinedFunctions, v.UserDefinedFunctions)
+	if v.UserDefinedFunctions != nil {
+		serializeUserDefinedFunctionList(s, schemas.GetUserDefinedFunctionsResponse_UserDefinedFunctions, v.UserDefinedFunctions)
+	}
 }
 func (v *GetUserDefinedFunctionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetUserDefinedFunctionsResponse, func(s *smithy.Schema) error {

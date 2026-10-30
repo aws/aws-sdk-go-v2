@@ -70,7 +70,9 @@ func (v *ListAutomaticTapeCreationPoliciesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListAutomaticTapeCreationPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomaticTapeCreationPolicyInfos(s, schemas.ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos, v.AutomaticTapeCreationPolicyInfos)
+	if v.AutomaticTapeCreationPolicyInfos != nil {
+		serializeAutomaticTapeCreationPolicyInfos(s, schemas.ListAutomaticTapeCreationPoliciesOutput_AutomaticTapeCreationPolicyInfos, v.AutomaticTapeCreationPolicyInfos)
+	}
 }
 func (v *ListAutomaticTapeCreationPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAutomaticTapeCreationPoliciesOutput, func(s *smithy.Schema) error {

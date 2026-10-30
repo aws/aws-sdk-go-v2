@@ -108,9 +108,13 @@ func (v *GetDeliverabilityDashboardOptionsOutput) SerializeMembers(s smithy.Shap
 	if v.AccountStatus != "" {
 		s.WriteString(schemas.GetDeliverabilityDashboardOptionsResponse_AccountStatus, string(v.AccountStatus))
 	}
-	serializeDomainDeliverabilityTrackingOptions(s, schemas.GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains, v.ActiveSubscribedDomains)
+	if v.ActiveSubscribedDomains != nil {
+		serializeDomainDeliverabilityTrackingOptions(s, schemas.GetDeliverabilityDashboardOptionsResponse_ActiveSubscribedDomains, v.ActiveSubscribedDomains)
+	}
 	s.WriteBool(schemas.GetDeliverabilityDashboardOptionsResponse_DashboardEnabled, v.DashboardEnabled)
-	serializeDomainDeliverabilityTrackingOptions(s, schemas.GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains, v.PendingExpirationSubscribedDomains)
+	if v.PendingExpirationSubscribedDomains != nil {
+		serializeDomainDeliverabilityTrackingOptions(s, schemas.GetDeliverabilityDashboardOptionsResponse_PendingExpirationSubscribedDomains, v.PendingExpirationSubscribedDomains)
+	}
 	if v.SubscriptionExpiryDate != nil {
 		s.WriteTime(schemas.GetDeliverabilityDashboardOptionsResponse_SubscriptionExpiryDate, *v.SubscriptionExpiryDate)
 	}

@@ -90,7 +90,9 @@ func (v *CreateTrialInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetadataProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTrialRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrialRequest_Tags, v.Tags)
+	}
 	if v.TrialName != nil {
 		s.WriteString(schemas.CreateTrialRequest_TrialName, *v.TrialName)
 	}

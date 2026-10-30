@@ -134,7 +134,9 @@ func (v *RegisterOidcConfigTestOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EndSessionEndpoint != nil {
 		s.WriteString(schemas.RegisterOidcConfigTestResponse_endSessionEndpoint, *v.EndSessionEndpoint)
 	}
-	serializeStringList(s, schemas.RegisterOidcConfigTestResponse_grantTypesSupported, v.GrantTypesSupported)
+	if v.GrantTypesSupported != nil {
+		serializeStringList(s, schemas.RegisterOidcConfigTestResponse_grantTypesSupported, v.GrantTypesSupported)
+	}
 	if v.Issuer != nil {
 		s.WriteString(schemas.RegisterOidcConfigTestResponse_issuer, *v.Issuer)
 	}
@@ -144,15 +146,21 @@ func (v *RegisterOidcConfigTestOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.MicrosoftMultiRefreshToken != nil {
 		s.WriteBool(schemas.RegisterOidcConfigTestResponse_microsoftMultiRefreshToken, *v.MicrosoftMultiRefreshToken)
 	}
-	serializeStringList(s, schemas.RegisterOidcConfigTestResponse_responseTypesSupported, v.ResponseTypesSupported)
+	if v.ResponseTypesSupported != nil {
+		serializeStringList(s, schemas.RegisterOidcConfigTestResponse_responseTypesSupported, v.ResponseTypesSupported)
+	}
 	if v.RevocationEndpoint != nil {
 		s.WriteString(schemas.RegisterOidcConfigTestResponse_revocationEndpoint, *v.RevocationEndpoint)
 	}
-	serializeStringList(s, schemas.RegisterOidcConfigTestResponse_scopesSupported, v.ScopesSupported)
+	if v.ScopesSupported != nil {
+		serializeStringList(s, schemas.RegisterOidcConfigTestResponse_scopesSupported, v.ScopesSupported)
+	}
 	if v.TokenEndpoint != nil {
 		s.WriteString(schemas.RegisterOidcConfigTestResponse_tokenEndpoint, *v.TokenEndpoint)
 	}
-	serializeStringList(s, schemas.RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported, v.TokenEndpointAuthMethodsSupported)
+	if v.TokenEndpointAuthMethodsSupported != nil {
+		serializeStringList(s, schemas.RegisterOidcConfigTestResponse_tokenEndpointAuthMethodsSupported, v.TokenEndpointAuthMethodsSupported)
+	}
 	if v.UserinfoEndpoint != nil {
 		s.WriteString(schemas.RegisterOidcConfigTestResponse_userinfoEndpoint, *v.UserinfoEndpoint)
 	}

@@ -117,7 +117,9 @@ func (v *ListFraudstersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFraudstersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFraudsterSummaries(s, schemas.ListFraudstersResponse_FraudsterSummaries, v.FraudsterSummaries)
+	if v.FraudsterSummaries != nil {
+		serializeFraudsterSummaries(s, schemas.ListFraudstersResponse_FraudsterSummaries, v.FraudsterSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFraudstersResponse_NextToken, *v.NextToken)
 	}

@@ -65,7 +65,9 @@ func (v *ListLocationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationFilterList(s, schemas.ListLocationsInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeLocationFilterList(s, schemas.ListLocationsInput_Filters, v.Filters)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.ListLocationsInput_Limit, *v.Limit)
 	}
@@ -99,7 +101,9 @@ func (v *ListLocationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationModelList(s, schemas.ListLocationsOutput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationModelList(s, schemas.ListLocationsOutput_Locations, v.Locations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLocationsOutput_NextToken, *v.NextToken)
 	}

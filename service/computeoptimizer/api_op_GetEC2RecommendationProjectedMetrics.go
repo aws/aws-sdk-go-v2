@@ -115,7 +115,9 @@ func (v *GetEC2RecommendationProjectedMetricsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *GetEC2RecommendationProjectedMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendedOptionProjectedMetrics(s, schemas.GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+	if v.RecommendedOptionProjectedMetrics != nil {
+		serializeRecommendedOptionProjectedMetrics(s, schemas.GetEC2RecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+	}
 }
 func (v *GetEC2RecommendationProjectedMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEC2RecommendationProjectedMetricsResponse, func(s *smithy.Schema) error {

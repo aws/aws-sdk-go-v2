@@ -53,7 +53,9 @@ func (v *BatchGetIncidentFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetIncidentFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingIdList(s, schemas.BatchGetIncidentFindingsInput_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIdList(s, schemas.BatchGetIncidentFindingsInput_findingIds, v.FindingIds)
+	}
 	if v.IncidentRecordArn != nil {
 		s.WriteString(schemas.BatchGetIncidentFindingsInput_incidentRecordArn, *v.IncidentRecordArn)
 	}
@@ -84,8 +86,12 @@ func (v *BatchGetIncidentFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetIncidentFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetIncidentFindingsErrorList(s, schemas.BatchGetIncidentFindingsOutput_errors, v.Errors)
-	serializeFindingList(s, schemas.BatchGetIncidentFindingsOutput_findings, v.Findings)
+	if v.Errors != nil {
+		serializeBatchGetIncidentFindingsErrorList(s, schemas.BatchGetIncidentFindingsOutput_errors, v.Errors)
+	}
+	if v.Findings != nil {
+		serializeFindingList(s, schemas.BatchGetIncidentFindingsOutput_findings, v.Findings)
+	}
 }
 func (v *BatchGetIncidentFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetIncidentFindingsOutput, func(s *smithy.Schema) error {

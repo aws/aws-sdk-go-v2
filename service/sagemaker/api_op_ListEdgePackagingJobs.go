@@ -132,7 +132,9 @@ func (v *ListEdgePackagingJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEdgePackagingJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgePackagingJobSummaries(s, schemas.ListEdgePackagingJobsResponse_EdgePackagingJobSummaries, v.EdgePackagingJobSummaries)
+	if v.EdgePackagingJobSummaries != nil {
+		serializeEdgePackagingJobSummaries(s, schemas.ListEdgePackagingJobsResponse_EdgePackagingJobSummaries, v.EdgePackagingJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEdgePackagingJobsResponse_NextToken, *v.NextToken)
 	}

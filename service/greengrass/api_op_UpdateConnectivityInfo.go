@@ -49,7 +49,9 @@ func (v *UpdateConnectivityInfoInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateConnectivityInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfConnectivityInfo(s, schemas.UpdateConnectivityInfoRequest_ConnectivityInfo, v.ConnectivityInfo)
+	if v.ConnectivityInfo != nil {
+		serialize__listOfConnectivityInfo(s, schemas.UpdateConnectivityInfoRequest_ConnectivityInfo, v.ConnectivityInfo)
+	}
 	if v.ThingName != nil {
 		s.WriteString(schemas.UpdateConnectivityInfoRequest_ThingName, *v.ThingName)
 	}

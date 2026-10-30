@@ -156,8 +156,12 @@ func (v *PutMetricDataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityMetricDataList(s, schemas.PutMetricDataInput_EntityMetricData, v.EntityMetricData)
-	serializeMetricData(s, schemas.PutMetricDataInput_MetricData, v.MetricData)
+	if v.EntityMetricData != nil {
+		serializeEntityMetricDataList(s, schemas.PutMetricDataInput_EntityMetricData, v.EntityMetricData)
+	}
+	if v.MetricData != nil {
+		serializeMetricData(s, schemas.PutMetricDataInput_MetricData, v.MetricData)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.PutMetricDataInput_Namespace, *v.Namespace)
 	}

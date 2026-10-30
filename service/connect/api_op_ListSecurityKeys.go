@@ -91,7 +91,9 @@ func (v *ListSecurityKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityKeysResponse_NextToken, *v.NextToken)
 	}
-	serializeSecurityKeysList(s, schemas.ListSecurityKeysResponse_SecurityKeys, v.SecurityKeys)
+	if v.SecurityKeys != nil {
+		serializeSecurityKeysList(s, schemas.ListSecurityKeysResponse_SecurityKeys, v.SecurityKeys)
+	}
 }
 func (v *ListSecurityKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityKeysResponse, func(s *smithy.Schema) error {

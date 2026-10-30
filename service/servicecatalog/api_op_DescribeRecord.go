@@ -114,7 +114,9 @@ func (v *DescribeRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RecordDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecordOutputs(s, schemas.DescribeRecordOutput_RecordOutputs, v.RecordOutputs)
+	if v.RecordOutputs != nil {
+		serializeRecordOutputs(s, schemas.DescribeRecordOutput_RecordOutputs, v.RecordOutputs)
+	}
 }
 func (v *DescribeRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRecordOutput, func(s *smithy.Schema) error {

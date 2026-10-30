@@ -53,7 +53,9 @@ func (v *CreateAwsLogSourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAwsLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsLogSourceConfigurationList(s, schemas.CreateAwsLogSourceRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeAwsLogSourceConfigurationList(s, schemas.CreateAwsLogSourceRequest_sources, v.Sources)
+	}
 }
 
 type CreateAwsLogSourceOutput struct {
@@ -76,7 +78,9 @@ func (v *CreateAwsLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAwsLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.CreateAwsLogSourceResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeAccountList(s, schemas.CreateAwsLogSourceResponse_failed, v.Failed)
+	}
 }
 func (v *CreateAwsLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAwsLogSourceResponse, func(s *smithy.Schema) error {

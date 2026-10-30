@@ -79,7 +79,9 @@ func (v *DescribeAggregationAuthorizationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeAggregationAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregationAuthorizationList(s, schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations, v.AggregationAuthorizations)
+	if v.AggregationAuthorizations != nil {
+		serializeAggregationAuthorizationList(s, schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations, v.AggregationAuthorizations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAggregationAuthorizationsResponse_NextToken, *v.NextToken)
 	}

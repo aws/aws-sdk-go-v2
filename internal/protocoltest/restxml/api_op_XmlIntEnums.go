@@ -58,9 +58,15 @@ func (v *XmlIntEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntEnum3 != 0 {
 		s.WriteInt32(schemas.XmlIntEnumsRequest_intEnum3, int32(v.IntEnum3))
 	}
-	serializeIntegerEnumList(s, schemas.XmlIntEnumsRequest_intEnumList, v.IntEnumList)
-	serializeIntegerEnumMap(s, schemas.XmlIntEnumsRequest_intEnumMap, v.IntEnumMap)
-	serializeIntegerEnumSet(s, schemas.XmlIntEnumsRequest_intEnumSet, v.IntEnumSet)
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.XmlIntEnumsRequest_intEnumList, v.IntEnumList)
+	}
+	if v.IntEnumMap != nil {
+		serializeIntegerEnumMap(s, schemas.XmlIntEnumsRequest_intEnumMap, v.IntEnumMap)
+	}
+	if v.IntEnumSet != nil {
+		serializeIntegerEnumSet(s, schemas.XmlIntEnumsRequest_intEnumSet, v.IntEnumSet)
+	}
 }
 
 type XmlIntEnumsOutput struct {
@@ -98,9 +104,15 @@ func (v *XmlIntEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntEnum3 != 0 {
 		s.WriteInt32(schemas.XmlIntEnumsResponse_intEnum3, int32(v.IntEnum3))
 	}
-	serializeIntegerEnumList(s, schemas.XmlIntEnumsResponse_intEnumList, v.IntEnumList)
-	serializeIntegerEnumMap(s, schemas.XmlIntEnumsResponse_intEnumMap, v.IntEnumMap)
-	serializeIntegerEnumSet(s, schemas.XmlIntEnumsResponse_intEnumSet, v.IntEnumSet)
+	if v.IntEnumList != nil {
+		serializeIntegerEnumList(s, schemas.XmlIntEnumsResponse_intEnumList, v.IntEnumList)
+	}
+	if v.IntEnumMap != nil {
+		serializeIntegerEnumMap(s, schemas.XmlIntEnumsResponse_intEnumMap, v.IntEnumMap)
+	}
+	if v.IntEnumSet != nil {
+		serializeIntegerEnumSet(s, schemas.XmlIntEnumsResponse_intEnumSet, v.IntEnumSet)
+	}
 }
 func (v *XmlIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.XmlIntEnumsResponse, func(s *smithy.Schema) error {

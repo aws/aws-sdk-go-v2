@@ -49,7 +49,9 @@ func (v *DescribeStorediSCSIVolumesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeStorediSCSIVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVolumeARNs(s, schemas.DescribeStorediSCSIVolumesInput_VolumeARNs, v.VolumeARNs)
+	if v.VolumeARNs != nil {
+		serializeVolumeARNs(s, schemas.DescribeStorediSCSIVolumesInput_VolumeARNs, v.VolumeARNs)
+	}
 }
 
 type DescribeStorediSCSIVolumesOutput struct {
@@ -114,7 +116,9 @@ func (v *DescribeStorediSCSIVolumesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeStorediSCSIVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStorediSCSIVolumes(s, schemas.DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes, v.StorediSCSIVolumes)
+	if v.StorediSCSIVolumes != nil {
+		serializeStorediSCSIVolumes(s, schemas.DescribeStorediSCSIVolumesOutput_StorediSCSIVolumes, v.StorediSCSIVolumes)
+	}
 }
 func (v *DescribeStorediSCSIVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeStorediSCSIVolumesOutput, func(s *smithy.Schema) error {

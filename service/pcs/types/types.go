@@ -267,8 +267,12 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Cluster_createdAt, *v.CreatedAt)
 	}
-	serializeEndpoints(s, schemas.Cluster_endpoints, v.Endpoints)
-	serializeErrorInfoList(s, schemas.Cluster_errorInfo, v.ErrorInfo)
+	if v.Endpoints != nil {
+		serializeEndpoints(s, schemas.Cluster_endpoints, v.Endpoints)
+	}
+	if v.ErrorInfo != nil {
+		serializeErrorInfoList(s, schemas.Cluster_errorInfo, v.ErrorInfo)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Cluster_id, *v.Id)
 	}
@@ -401,7 +405,9 @@ func (v *ClusterSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AuthKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, v.CgroupCustomSettings)
+	if v.CgroupCustomSettings != nil {
+		serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfiguration_cgroupCustomSettings, v.CgroupCustomSettings)
+	}
 	if v.JwtAuth != nil {
 		s.WriteStruct(schemas.ClusterSlurmConfiguration_jwtAuth)
 		v.JwtAuth.SerializeMembers(s)
@@ -410,13 +416,17 @@ func (v *ClusterSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.ClusterSlurmConfiguration_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
-	serializeSlurmCustomSettings(s, schemas.ClusterSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.ClusterSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 	if v.SlurmRest != nil {
 		s.WriteStruct(schemas.ClusterSlurmConfiguration_slurmRest)
 		v.SlurmRest.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSlurmdbdCustomSettings(s, schemas.ClusterSlurmConfiguration_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+	if v.SlurmdbdCustomSettings != nil {
+		serializeSlurmdbdCustomSettings(s, schemas.ClusterSlurmConfiguration_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+	}
 }
 func (v *ClusterSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterSlurmConfiguration, func(s *smithy.Schema) error {
@@ -487,17 +497,23 @@ func (v *ClusterSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerial
 		v.Accounting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
+	if v.CgroupCustomSettings != nil {
+		serializeCgroupCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.ClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
-	serializeSlurmCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 	if v.SlurmRest != nil {
 		s.WriteStruct(schemas.ClusterSlurmConfigurationRequest_slurmRest)
 		v.SlurmRest.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSlurmdbdCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+	if v.SlurmdbdCustomSettings != nil {
+		serializeSlurmdbdCustomSettings(s, schemas.ClusterSlurmConfigurationRequest_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+	}
 }
 func (v *ClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterSlurmConfigurationRequest, func(s *smithy.Schema) error {
@@ -771,14 +787,18 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomLaunchTemplate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeErrorInfoList(s, schemas.ComputeNodeGroup_errorInfo, v.ErrorInfo)
+	if v.ErrorInfo != nil {
+		serializeErrorInfoList(s, schemas.ComputeNodeGroup_errorInfo, v.ErrorInfo)
+	}
 	if v.IamInstanceProfileArn != nil {
 		s.WriteString(schemas.ComputeNodeGroup_iamInstanceProfileArn, *v.IamInstanceProfileArn)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.ComputeNodeGroup_id, *v.Id)
 	}
-	serializeInstanceList(s, schemas.ComputeNodeGroup_instanceConfigs, v.InstanceConfigs)
+	if v.InstanceConfigs != nil {
+		serializeInstanceList(s, schemas.ComputeNodeGroup_instanceConfigs, v.InstanceConfigs)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.ComputeNodeGroup_modifiedAt, *v.ModifiedAt)
 	}
@@ -811,7 +831,9 @@ func (v *ComputeNodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ComputeNodeGroup_status, string(v.Status))
 	}
-	serializeSubnetIdList(s, schemas.ComputeNodeGroup_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.ComputeNodeGroup_subnetIds, v.SubnetIds)
+	}
 }
 func (v *ComputeNodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComputeNodeGroup, func(s *smithy.Schema) error {
@@ -941,11 +963,15 @@ func (v *ComputeNodeGroupSlurmConfiguration) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ComputeNodeGroupSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGresCustomSettings(s, schemas.ComputeNodeGroupSlurmConfiguration_gresCustomSettings, v.GresCustomSettings)
+	if v.GresCustomSettings != nil {
+		serializeGresCustomSettings(s, schemas.ComputeNodeGroupSlurmConfiguration_gresCustomSettings, v.GresCustomSettings)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.ComputeNodeGroupSlurmConfiguration_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
-	serializeSlurmCustomSettings(s, schemas.ComputeNodeGroupSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.ComputeNodeGroupSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 }
 func (v *ComputeNodeGroupSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComputeNodeGroupSlurmConfiguration, func(s *smithy.Schema) error {
@@ -992,11 +1018,15 @@ func (v *ComputeNodeGroupSlurmConfigurationRequest) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ComputeNodeGroupSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGresCustomSettings(s, schemas.ComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings, v.GresCustomSettings)
+	if v.GresCustomSettings != nil {
+		serializeGresCustomSettings(s, schemas.ComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings, v.GresCustomSettings)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.ComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
-	serializeSlurmCustomSettings(s, schemas.ComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.ComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 }
 func (v *ComputeNodeGroupSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComputeNodeGroupSlurmConfigurationRequest, func(s *smithy.Schema) error {
@@ -1471,8 +1501,12 @@ func (v *Networking) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.Networking_networkType, string(v.NetworkType))
 	}
-	serializeSecurityGroupIdList(s, schemas.Networking_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.Networking_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.Networking_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.Networking_subnetIds, v.SubnetIds)
+	}
 }
 func (v *Networking) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Networking, func(s *smithy.Schema) error {
@@ -1525,8 +1559,12 @@ func (v *NetworkingRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.NetworkingRequest_networkType, string(v.NetworkType))
 	}
-	serializeSecurityGroupIdList(s, schemas.NetworkingRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.NetworkingRequest_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.NetworkingRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.NetworkingRequest_subnetIds, v.SubnetIds)
+	}
 }
 func (v *NetworkingRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkingRequest, func(s *smithy.Schema) error {
@@ -1706,7 +1744,9 @@ func (v *NodeLifecycleScript) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NodeLifecycleScript) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeLifecycleScriptArguments(s, schemas.NodeLifecycleScript_arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeNodeLifecycleScriptArguments(s, schemas.NodeLifecycleScript_arguments, v.Arguments)
+	}
 	if v.ExecutionPolicy != "" {
 		s.WriteString(schemas.NodeLifecycleScript_executionPolicy, string(v.ExecutionPolicy))
 	}
@@ -1776,8 +1816,12 @@ func (v *NodeLifecycleStages) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NodeLifecycleStages) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeLifecycleScriptList(s, schemas.NodeLifecycleStages_nodeBootstrapped, v.NodeBootstrapped)
-	serializeNodeLifecycleScriptList(s, schemas.NodeLifecycleStages_nodeReady, v.NodeReady)
+	if v.NodeBootstrapped != nil {
+		serializeNodeLifecycleScriptList(s, schemas.NodeLifecycleStages_nodeBootstrapped, v.NodeBootstrapped)
+	}
+	if v.NodeReady != nil {
+		serializeNodeLifecycleScriptList(s, schemas.NodeLifecycleStages_nodeReady, v.NodeReady)
+	}
 }
 func (v *NodeLifecycleStages) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NodeLifecycleStages, func(s *smithy.Schema) error {
@@ -1868,11 +1912,15 @@ func (v *Queue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterId != nil {
 		s.WriteString(schemas.Queue_clusterId, *v.ClusterId)
 	}
-	serializeComputeNodeGroupConfigurationList(s, schemas.Queue_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	if v.ComputeNodeGroupConfigurations != nil {
+		serializeComputeNodeGroupConfigurationList(s, schemas.Queue_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Queue_createdAt, *v.CreatedAt)
 	}
-	serializeErrorInfoList(s, schemas.Queue_errorInfo, v.ErrorInfo)
+	if v.ErrorInfo != nil {
+		serializeErrorInfoList(s, schemas.Queue_errorInfo, v.ErrorInfo)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Queue_id, *v.Id)
 	}
@@ -1947,7 +1995,9 @@ func (v *QueueSlurmConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueueSlurmConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSlurmCustomSettings(s, schemas.QueueSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.QueueSlurmConfiguration_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 }
 func (v *QueueSlurmConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueueSlurmConfiguration, func(s *smithy.Schema) error {
@@ -1975,7 +2025,9 @@ func (v *QueueSlurmConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueueSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSlurmCustomSettings(s, schemas.QueueSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.QueueSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 }
 func (v *QueueSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueueSlurmConfigurationRequest, func(s *smithy.Schema) error {
@@ -2705,17 +2757,23 @@ func (v *UpdateClusterSlurmConfigurationRequest) SerializeMembers(s smithy.Shape
 		v.Accounting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCgroupCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
+	if v.CgroupCustomSettings != nil {
+		serializeCgroupCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_cgroupCustomSettings, v.CgroupCustomSettings)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.UpdateClusterSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
-	serializeSlurmCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 	if v.SlurmRest != nil {
 		s.WriteStruct(schemas.UpdateClusterSlurmConfigurationRequest_slurmRest)
 		v.SlurmRest.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSlurmdbdCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+	if v.SlurmdbdCustomSettings != nil {
+		serializeSlurmdbdCustomSettings(s, schemas.UpdateClusterSlurmConfigurationRequest_slurmdbdCustomSettings, v.SlurmdbdCustomSettings)
+	}
 }
 func (v *UpdateClusterSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateClusterSlurmConfigurationRequest, func(s *smithy.Schema) error {
@@ -2770,11 +2828,15 @@ func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) Serialize(s smithy.Sha
 }
 
 func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGresCustomSettings(s, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings, v.GresCustomSettings)
+	if v.GresCustomSettings != nil {
+		serializeGresCustomSettings(s, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_gresCustomSettings, v.GresCustomSettings)
+	}
 	if v.ScaleDownIdleTimeInSeconds != nil {
 		s.WriteInt32(schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_scaleDownIdleTimeInSeconds, *v.ScaleDownIdleTimeInSeconds)
 	}
-	serializeSlurmCustomSettings(s, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 }
 func (v *UpdateComputeNodeGroupSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateComputeNodeGroupSlurmConfigurationRequest, func(s *smithy.Schema) error {
@@ -2862,7 +2924,9 @@ func (v *UpdateQueueSlurmConfigurationRequest) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateQueueSlurmConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSlurmCustomSettings(s, schemas.UpdateQueueSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	if v.SlurmCustomSettings != nil {
+		serializeSlurmCustomSettings(s, schemas.UpdateQueueSlurmConfigurationRequest_slurmCustomSettings, v.SlurmCustomSettings)
+	}
 }
 func (v *UpdateQueueSlurmConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateQueueSlurmConfigurationRequest, func(s *smithy.Schema) error {

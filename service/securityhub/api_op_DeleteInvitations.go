@@ -56,7 +56,9 @@ func (v *DeleteInvitationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteInvitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DeleteInvitationsRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DeleteInvitationsRequest_AccountIds, v.AccountIds)
+	}
 }
 
 type DeleteInvitationsOutput struct {
@@ -79,7 +81,9 @@ func (v *DeleteInvitationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteInvitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResultList(s, schemas.DeleteInvitationsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	if v.UnprocessedAccounts != nil {
+		serializeResultList(s, schemas.DeleteInvitationsResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+	}
 }
 func (v *DeleteInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteInvitationsResponse, func(s *smithy.Schema) error {

@@ -145,7 +145,9 @@ func (v *CreateInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ServerSideKmsKeyId != nil {
 		s.WriteString(schemas.CreateInferenceSchedulerRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
 	}
-	serializeTagList(s, schemas.CreateInferenceSchedulerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInferenceSchedulerRequest_Tags, v.Tags)
+	}
 }
 
 type CreateInferenceSchedulerOutput struct {

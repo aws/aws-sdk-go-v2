@@ -77,7 +77,9 @@ func (v *ListQuotesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQuotesOutput_NextToken, *v.NextToken)
 	}
-	serializeQuoteSummaryListDefinition(s, schemas.ListQuotesOutput_Quotes, v.Quotes)
+	if v.Quotes != nil {
+		serializeQuoteSummaryListDefinition(s, schemas.ListQuotesOutput_Quotes, v.Quotes)
+	}
 }
 func (v *ListQuotesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQuotesOutput, func(s *smithy.Schema) error {

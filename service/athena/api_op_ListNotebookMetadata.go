@@ -95,7 +95,9 @@ func (v *ListNotebookMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotebookMetadataOutput_NextToken, *v.NextToken)
 	}
-	serializeNotebookMetadataArray(s, schemas.ListNotebookMetadataOutput_NotebookMetadataList, v.NotebookMetadataList)
+	if v.NotebookMetadataList != nil {
+		serializeNotebookMetadataArray(s, schemas.ListNotebookMetadataOutput_NotebookMetadataList, v.NotebookMetadataList)
+	}
 }
 func (v *ListNotebookMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotebookMetadataOutput, func(s *smithy.Schema) error {

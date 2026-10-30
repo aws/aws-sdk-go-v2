@@ -98,7 +98,9 @@ func (v *CreateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.CreateVocabularyRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeTagMap(s, schemas.CreateVocabularyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateVocabularyRequest_Tags, v.Tags)
+	}
 	if v.VocabularyName != nil {
 		s.WriteString(schemas.CreateVocabularyRequest_VocabularyName, *v.VocabularyName)
 	}

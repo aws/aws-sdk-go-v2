@@ -63,7 +63,9 @@ func (v *CreateFirewallDomainListInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFirewallDomainListRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateFirewallDomainListRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFirewallDomainListRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFirewallDomainListOutput struct {

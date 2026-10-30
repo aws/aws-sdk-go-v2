@@ -80,14 +80,18 @@ func (v *CreateRetrieverInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRetrieverRequest_clientToken, *v.ClientToken)
 	}
-	serializeRetrieverConfiguration(s, schemas.CreateRetrieverRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRetrieverConfiguration(s, schemas.CreateRetrieverRequest_configuration, v.Configuration)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateRetrieverRequest_displayName, *v.DisplayName)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateRetrieverRequest_roleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateRetrieverRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRetrieverRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateRetrieverRequest_type, string(v.Type))
 	}

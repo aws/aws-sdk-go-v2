@@ -65,7 +65,9 @@ func (v *ListNamespacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNamespaceFilters(s, schemas.ListNamespacesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeNamespaceFilters(s, schemas.ListNamespacesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListNamespacesRequest_MaxResults, *v.MaxResults)
 	}
@@ -103,7 +105,9 @@ func (v *ListNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNamespaceSummariesList(s, schemas.ListNamespacesResponse_Namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeNamespaceSummariesList(s, schemas.ListNamespacesResponse_Namespaces, v.Namespaces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNamespacesResponse_NextToken, *v.NextToken)
 	}

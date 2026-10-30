@@ -101,9 +101,15 @@ func (v *CreateAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentName != nil {
 		s.WriteString(schemas.CreateAgentRequest_AgentName, *v.AgentName)
 	}
-	serializePLSecurityGroupArnList(s, schemas.CreateAgentRequest_SecurityGroupArns, v.SecurityGroupArns)
-	serializePLSubnetArnList(s, schemas.CreateAgentRequest_SubnetArns, v.SubnetArns)
-	serializeInputTagList(s, schemas.CreateAgentRequest_Tags, v.Tags)
+	if v.SecurityGroupArns != nil {
+		serializePLSecurityGroupArnList(s, schemas.CreateAgentRequest_SecurityGroupArns, v.SecurityGroupArns)
+	}
+	if v.SubnetArns != nil {
+		serializePLSubnetArnList(s, schemas.CreateAgentRequest_SubnetArns, v.SubnetArns)
+	}
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateAgentRequest_Tags, v.Tags)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.CreateAgentRequest_VpcEndpointId, *v.VpcEndpointId)
 	}

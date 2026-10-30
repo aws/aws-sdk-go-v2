@@ -132,7 +132,9 @@ func (v *CopyBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRegion != nil {
 		s.WriteString(schemas.CopyBackupRequest_SourceRegion, *v.SourceRegion)
 	}
-	serializeTags(s, schemas.CopyBackupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CopyBackupRequest_Tags, v.Tags)
+	}
 }
 
 type CopyBackupOutput struct {

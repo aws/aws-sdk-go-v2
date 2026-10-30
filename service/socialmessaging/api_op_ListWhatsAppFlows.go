@@ -85,7 +85,9 @@ func (v *ListWhatsAppFlowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWhatsAppFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowSummaryList(s, schemas.ListWhatsAppFlowsOutput_flows, v.Flows)
+	if v.Flows != nil {
+		serializeMetaFlowSummaryList(s, schemas.ListWhatsAppFlowsOutput_flows, v.Flows)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWhatsAppFlowsOutput_nextToken, *v.NextToken)
 	}

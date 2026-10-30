@@ -140,7 +140,9 @@ func (v *ListHyperParameterTuningJobsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListHyperParameterTuningJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHyperParameterTuningJobSummaries(s, schemas.ListHyperParameterTuningJobsResponse_HyperParameterTuningJobSummaries, v.HyperParameterTuningJobSummaries)
+	if v.HyperParameterTuningJobSummaries != nil {
+		serializeHyperParameterTuningJobSummaries(s, schemas.ListHyperParameterTuningJobsResponse_HyperParameterTuningJobSummaries, v.HyperParameterTuningJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHyperParameterTuningJobsResponse_NextToken, *v.NextToken)
 	}

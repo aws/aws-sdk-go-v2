@@ -152,7 +152,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterRole != nil {
 		s.WriteString(schemas.CreateClusterRequest_ClusterRole, *v.ClusterRole)
 	}
-	serializeClusterInstanceGroupSpecifications(s, schemas.CreateClusterRequest_InstanceGroups, v.InstanceGroups)
+	if v.InstanceGroups != nil {
+		serializeClusterInstanceGroupSpecifications(s, schemas.CreateClusterRequest_InstanceGroups, v.InstanceGroups)
+	}
 	if v.NodeProvisioningMode != "" {
 		s.WriteString(schemas.CreateClusterRequest_NodeProvisioningMode, string(v.NodeProvisioningMode))
 	}
@@ -164,13 +166,17 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Orchestrator.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeClusterRestrictedInstanceGroupSpecifications(s, schemas.CreateClusterRequest_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	if v.RestrictedInstanceGroups != nil {
+		serializeClusterRestrictedInstanceGroupSpecifications(s, schemas.CreateClusterRequest_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	}
 	if v.RestrictedInstanceGroupsConfig != nil {
 		s.WriteStruct(schemas.CreateClusterRequest_RestrictedInstanceGroupsConfig)
 		v.RestrictedInstanceGroupsConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateClusterRequest_Tags, v.Tags)
+	}
 	if v.TieredStorageConfig != nil {
 		s.WriteStruct(schemas.CreateClusterRequest_TieredStorageConfig)
 		v.TieredStorageConfig.SerializeMembers(s)

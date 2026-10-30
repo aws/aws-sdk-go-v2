@@ -116,7 +116,9 @@ func (v *StartTopicsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartTopicsDetectionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartTopicsDetectionJobRequest_Tags, v.Tags)
+	}
 	if v.VolumeKmsKeyId != nil {
 		s.WriteString(schemas.StartTopicsDetectionJobRequest_VolumeKmsKeyId, *v.VolumeKmsKeyId)
 	}

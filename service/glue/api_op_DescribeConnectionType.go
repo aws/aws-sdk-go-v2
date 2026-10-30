@@ -111,7 +111,9 @@ func (v *DescribeConnectionTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConnectionTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_AthenaConnectionProperties, v.AthenaConnectionProperties)
+	if v.AthenaConnectionProperties != nil {
+		serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_AthenaConnectionProperties, v.AthenaConnectionProperties)
+	}
 	if v.AuthenticationConfiguration != nil {
 		s.WriteStruct(schemas.DescribeConnectionTypeResponse_AuthenticationConfiguration)
 		v.AuthenticationConfiguration.SerializeMembers(s)
@@ -122,23 +124,35 @@ func (v *DescribeConnectionTypeOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.Capabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeComputeEnvironmentConfigurationMap(s, schemas.DescribeConnectionTypeResponse_ComputeEnvironmentConfigurations, v.ComputeEnvironmentConfigurations)
-	serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_ConnectionOptions, v.ConnectionOptions)
-	serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_ConnectionProperties, v.ConnectionProperties)
+	if v.ComputeEnvironmentConfigurations != nil {
+		serializeComputeEnvironmentConfigurationMap(s, schemas.DescribeConnectionTypeResponse_ComputeEnvironmentConfigurations, v.ComputeEnvironmentConfigurations)
+	}
+	if v.ConnectionOptions != nil {
+		serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_ConnectionOptions, v.ConnectionOptions)
+	}
+	if v.ConnectionProperties != nil {
+		serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_ConnectionProperties, v.ConnectionProperties)
+	}
 	if v.ConnectionType != nil {
 		s.WriteString(schemas.DescribeConnectionTypeResponse_ConnectionType, *v.ConnectionType)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeConnectionTypeResponse_Description, *v.Description)
 	}
-	serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_PhysicalConnectionRequirements, v.PhysicalConnectionRequirements)
-	serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_PythonConnectionProperties, v.PythonConnectionProperties)
+	if v.PhysicalConnectionRequirements != nil {
+		serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_PhysicalConnectionRequirements, v.PhysicalConnectionRequirements)
+	}
+	if v.PythonConnectionProperties != nil {
+		serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_PythonConnectionProperties, v.PythonConnectionProperties)
+	}
 	if v.RestConfiguration != nil {
 		s.WriteStruct(schemas.DescribeConnectionTypeResponse_RestConfiguration)
 		v.RestConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_SparkConnectionProperties, v.SparkConnectionProperties)
+	if v.SparkConnectionProperties != nil {
+		serializePropertiesMap(s, schemas.DescribeConnectionTypeResponse_SparkConnectionProperties, v.SparkConnectionProperties)
+	}
 }
 func (v *DescribeConnectionTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConnectionTypeResponse, func(s *smithy.Schema) error {

@@ -69,7 +69,9 @@ func (v *CreateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataSetRequest_Name, *v.Name)
 	}
-	serializeMapOf__string(s, schemas.CreateDataSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateDataSetRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateDataSetInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDataSetRequest, func(s *smithy.Schema) error {
@@ -175,7 +177,9 @@ func (v *CreateDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceId != nil {
 		s.WriteString(schemas.CreateDataSetResponse_SourceId, *v.SourceId)
 	}
-	serializeMapOf__string(s, schemas.CreateDataSetResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateDataSetResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateDataSetResponse_UpdatedAt, *v.UpdatedAt)
 	}

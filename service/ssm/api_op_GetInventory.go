@@ -60,15 +60,21 @@ func (v *GetInventoryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInventoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInventoryAggregatorList(s, schemas.GetInventoryRequest_Aggregators, v.Aggregators)
-	serializeInventoryFilterList(s, schemas.GetInventoryRequest_Filters, v.Filters)
+	if v.Aggregators != nil {
+		serializeInventoryAggregatorList(s, schemas.GetInventoryRequest_Aggregators, v.Aggregators)
+	}
+	if v.Filters != nil {
+		serializeInventoryFilterList(s, schemas.GetInventoryRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetInventoryRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInventoryRequest_NextToken, *v.NextToken)
 	}
-	serializeResultAttributeList(s, schemas.GetInventoryRequest_ResultAttributes, v.ResultAttributes)
+	if v.ResultAttributes != nil {
+		serializeResultAttributeList(s, schemas.GetInventoryRequest_ResultAttributes, v.ResultAttributes)
+	}
 }
 
 type GetInventoryOutput struct {
@@ -94,7 +100,9 @@ func (v *GetInventoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInventoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInventoryResultEntityList(s, schemas.GetInventoryResult_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeInventoryResultEntityList(s, schemas.GetInventoryResult_Entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetInventoryResult_NextToken, *v.NextToken)
 	}

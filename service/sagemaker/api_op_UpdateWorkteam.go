@@ -82,7 +82,9 @@ func (v *UpdateWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateWorkteamRequest_Description, *v.Description)
 	}
-	serializeMemberDefinitions(s, schemas.UpdateWorkteamRequest_MemberDefinitions, v.MemberDefinitions)
+	if v.MemberDefinitions != nil {
+		serializeMemberDefinitions(s, schemas.UpdateWorkteamRequest_MemberDefinitions, v.MemberDefinitions)
+	}
 	if v.NotificationConfiguration != nil {
 		s.WriteStruct(schemas.UpdateWorkteamRequest_NotificationConfiguration)
 		v.NotificationConfiguration.SerializeMembers(s)

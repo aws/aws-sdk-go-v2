@@ -97,7 +97,9 @@ func (v *DescribeDataSetPermissionsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.DataSetId != nil {
 		s.WriteString(schemas.DescribeDataSetPermissionsResponse_DataSetId, *v.DataSetId)
 	}
-	serializeResourcePermissionList(s, schemas.DescribeDataSetPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.DescribeDataSetPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeDataSetPermissionsResponse_RequestId, *v.RequestId)
 	}

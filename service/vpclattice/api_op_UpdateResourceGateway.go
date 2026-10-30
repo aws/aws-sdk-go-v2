@@ -49,7 +49,9 @@ func (v *UpdateResourceGatewayInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResourceGatewayIdentifier != nil {
 		s.WriteString(schemas.UpdateResourceGatewayRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
 	}
-	serializeSecurityGroupList(s, schemas.UpdateResourceGatewayRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.UpdateResourceGatewayRequest_securityGroupIds, v.SecurityGroupIds)
+	}
 }
 
 type UpdateResourceGatewayOutput struct {
@@ -103,11 +105,15 @@ func (v *UpdateResourceGatewayOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateResourceGatewayResponse_name, *v.Name)
 	}
-	serializeSecurityGroupList(s, schemas.UpdateResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.UpdateResourceGatewayResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateResourceGatewayResponse_status, string(v.Status))
 	}
-	serializeSubnetList(s, schemas.UpdateResourceGatewayResponse_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetList(s, schemas.UpdateResourceGatewayResponse_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.UpdateResourceGatewayResponse_vpcId, *v.VpcId)
 	}

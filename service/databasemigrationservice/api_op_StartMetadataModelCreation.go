@@ -105,7 +105,9 @@ func (v *StartMetadataModelCreationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.MigrationProjectIdentifier != nil {
 		s.WriteString(schemas.StartMetadataModelCreationMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
 	}
-	serializeMetadataModelProperties(s, schemas.StartMetadataModelCreationMessage_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeMetadataModelProperties(s, schemas.StartMetadataModelCreationMessage_Properties, v.Properties)
+	}
 	if v.SelectionRules != nil {
 		s.WriteString(schemas.StartMetadataModelCreationMessage_SelectionRules, *v.SelectionRules)
 	}

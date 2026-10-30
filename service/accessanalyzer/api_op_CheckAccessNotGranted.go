@@ -65,7 +65,9 @@ func (v *CheckAccessNotGrantedInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CheckAccessNotGrantedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessList(s, schemas.CheckAccessNotGrantedRequest_access, v.Access)
+	if v.Access != nil {
+		serializeAccessList(s, schemas.CheckAccessNotGrantedRequest_access, v.Access)
+	}
 	if v.PolicyDocument != nil {
 		s.WriteString(schemas.CheckAccessNotGrantedRequest_policyDocument, *v.PolicyDocument)
 	}
@@ -104,7 +106,9 @@ func (v *CheckAccessNotGrantedOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Message != nil {
 		s.WriteString(schemas.CheckAccessNotGrantedResponse_message, *v.Message)
 	}
-	serializeReasonSummaryList(s, schemas.CheckAccessNotGrantedResponse_reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeReasonSummaryList(s, schemas.CheckAccessNotGrantedResponse_reasons, v.Reasons)
+	}
 	if v.Result != "" {
 		s.WriteString(schemas.CheckAccessNotGrantedResponse_result, string(v.Result))
 	}

@@ -337,7 +337,9 @@ func (v *Environment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAirflowConfigurationOptions(s, schemas.Environment_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowConfigurationOptions != nil {
+		serializeAirflowConfigurationOptions(s, schemas.Environment_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	}
 	if v.AirflowVersion != nil {
 		s.WriteString(schemas.Environment_AirflowVersion, *v.AirflowVersion)
 	}
@@ -428,7 +430,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Environment_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.Environment_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Environment_Tags, v.Tags)
+	}
 	if v.WebserverAccessMode != "" {
 		s.WriteString(schemas.Environment_WebserverAccessMode, string(v.WebserverAccessMode))
 	}
@@ -841,7 +845,9 @@ func (v *MetricDatum) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	}
 	if v.MetricName != nil {
 		s.WriteString(schemas.MetricDatum_MetricName, *v.MetricName)
 	}
@@ -1024,8 +1030,12 @@ func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupList(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetList(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetList(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
@@ -1166,7 +1176,9 @@ func (v *UpdateNetworkConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateNetworkConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupList(s, schemas.UpdateNetworkConfigurationInput_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupList(s, schemas.UpdateNetworkConfigurationInput_SecurityGroupIds, v.SecurityGroupIds)
+	}
 }
 func (v *UpdateNetworkConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateNetworkConfigurationInput, func(s *smithy.Schema) error {

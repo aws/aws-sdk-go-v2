@@ -41,7 +41,9 @@ func (v *RpcV2CborUnionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RpcV2CborUnionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRpcV2CborUnion(s, schemas.RpcV2CborUnionInputOutput_contents, v.Contents)
+	if v.Contents != nil {
+		serializeRpcV2CborUnion(s, schemas.RpcV2CborUnionInputOutput_contents, v.Contents)
+	}
 	if v.OtherValue != nil {
 		s.WriteString(schemas.RpcV2CborUnionInputOutput_otherValue, *v.OtherValue)
 	}
@@ -77,7 +79,9 @@ func (v *RpcV2CborUnionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RpcV2CborUnionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRpcV2CborUnion(s, schemas.RpcV2CborUnionInputOutput_contents, v.Contents)
+	if v.Contents != nil {
+		serializeRpcV2CborUnion(s, schemas.RpcV2CborUnionInputOutput_contents, v.Contents)
+	}
 	if v.OtherValue != nil {
 		s.WriteString(schemas.RpcV2CborUnionInputOutput_otherValue, *v.OtherValue)
 	}

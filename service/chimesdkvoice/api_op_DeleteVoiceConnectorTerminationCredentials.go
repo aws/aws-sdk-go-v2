@@ -49,7 +49,9 @@ func (v *DeleteVoiceConnectorTerminationCredentialsInput) Serialize(s smithy.Sha
 }
 
 func (v *DeleteVoiceConnectorTerminationCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSensitiveStringList(s, schemas.DeleteVoiceConnectorTerminationCredentialsRequest_Usernames, v.Usernames)
+	if v.Usernames != nil {
+		serializeSensitiveStringList(s, schemas.DeleteVoiceConnectorTerminationCredentialsRequest_Usernames, v.Usernames)
+	}
 	if v.VoiceConnectorId != nil {
 		s.WriteString(schemas.DeleteVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId, *v.VoiceConnectorId)
 	}

@@ -46,7 +46,9 @@ func (v *AnalyzeIDInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalyzeIDInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentPages(s, schemas.AnalyzeIDRequest_DocumentPages, v.DocumentPages)
+	if v.DocumentPages != nil {
+		serializeDocumentPages(s, schemas.AnalyzeIDRequest_DocumentPages, v.DocumentPages)
+	}
 }
 
 type AnalyzeIDOutput struct {
@@ -82,7 +84,9 @@ func (v *AnalyzeIDOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DocumentMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityDocumentList(s, schemas.AnalyzeIDResponse_IdentityDocuments, v.IdentityDocuments)
+	if v.IdentityDocuments != nil {
+		serializeIdentityDocumentList(s, schemas.AnalyzeIDResponse_IdentityDocuments, v.IdentityDocuments)
+	}
 }
 func (v *AnalyzeIDOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalyzeIDResponse, func(s *smithy.Schema) error {

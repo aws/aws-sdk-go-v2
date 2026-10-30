@@ -71,7 +71,9 @@ func (v *CreatePullRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePullRequestInput_description, *v.Description)
 	}
-	serializeTargetList(s, schemas.CreatePullRequestInput_targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargetList(s, schemas.CreatePullRequestInput_targets, v.Targets)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreatePullRequestInput_title, *v.Title)
 	}

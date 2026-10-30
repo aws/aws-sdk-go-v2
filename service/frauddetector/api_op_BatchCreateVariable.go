@@ -46,8 +46,12 @@ func (v *BatchCreateVariableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateVariableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializetagList(s, schemas.BatchCreateVariableRequest_tags, v.Tags)
-	serializeVariableEntryList(s, schemas.BatchCreateVariableRequest_variableEntries, v.VariableEntries)
+	if v.Tags != nil {
+		serializetagList(s, schemas.BatchCreateVariableRequest_tags, v.Tags)
+	}
+	if v.VariableEntries != nil {
+		serializeVariableEntryList(s, schemas.BatchCreateVariableRequest_variableEntries, v.VariableEntries)
+	}
 }
 
 type BatchCreateVariableOutput struct {
@@ -68,7 +72,9 @@ func (v *BatchCreateVariableOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateVariableOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateVariableErrorList(s, schemas.BatchCreateVariableResult_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchCreateVariableErrorList(s, schemas.BatchCreateVariableResult_errors, v.Errors)
+	}
 }
 func (v *BatchCreateVariableOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateVariableResult, func(s *smithy.Schema) error {

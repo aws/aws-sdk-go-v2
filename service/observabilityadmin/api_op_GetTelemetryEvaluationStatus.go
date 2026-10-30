@@ -89,7 +89,9 @@ func (v *GetTelemetryEvaluationStatusOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.HomeRegion != nil {
 		s.WriteString(schemas.GetTelemetryEvaluationStatusOutput_HomeRegion, *v.HomeRegion)
 	}
-	serializeRegionStatuses(s, schemas.GetTelemetryEvaluationStatusOutput_RegionStatuses, v.RegionStatuses)
+	if v.RegionStatuses != nil {
+		serializeRegionStatuses(s, schemas.GetTelemetryEvaluationStatusOutput_RegionStatuses, v.RegionStatuses)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetTelemetryEvaluationStatusOutput_Status, string(v.Status))
 	}

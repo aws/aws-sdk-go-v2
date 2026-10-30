@@ -55,7 +55,9 @@ func (v *UpdateConfiguredTableAnalysisRuleInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *UpdateConfiguredTableAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfiguredTableAnalysisRulePolicy(s, schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRulePolicy, v.AnalysisRulePolicy)
+	if v.AnalysisRulePolicy != nil {
+		serializeConfiguredTableAnalysisRulePolicy(s, schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRulePolicy, v.AnalysisRulePolicy)
+	}
 	if v.AnalysisRuleType != "" {
 		s.WriteString(schemas.UpdateConfiguredTableAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
 	}

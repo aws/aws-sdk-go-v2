@@ -93,7 +93,9 @@ func (v *ListResourceConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListResourceConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceConfigurationSummaryList(s, schemas.ListResourceConfigurationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeResourceConfigurationSummaryList(s, schemas.ListResourceConfigurationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceConfigurationsResponse_nextToken, *v.NextToken)
 	}

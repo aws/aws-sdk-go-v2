@@ -76,7 +76,9 @@ func (v *NotifyProvisionProductEngineWorkflowResultInput) SerializeMembers(s smi
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeRecordOutputs(s, schemas.NotifyProvisionProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeRecordOutputs(s, schemas.NotifyProvisionProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	}
 	if v.RecordId != nil {
 		s.WriteString(schemas.NotifyProvisionProductEngineWorkflowResultInput_RecordId, *v.RecordId)
 	}

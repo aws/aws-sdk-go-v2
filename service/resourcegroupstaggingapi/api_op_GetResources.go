@@ -207,12 +207,18 @@ func (v *GetResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.GetResourcesInput_PaginationToken, *v.PaginationToken)
 	}
-	serializeResourceARNListForGet(s, schemas.GetResourcesInput_ResourceARNList, v.ResourceARNList)
-	serializeResourceTypeFilterList(s, schemas.GetResourcesInput_ResourceTypeFilters, v.ResourceTypeFilters)
+	if v.ResourceARNList != nil {
+		serializeResourceARNListForGet(s, schemas.GetResourcesInput_ResourceARNList, v.ResourceARNList)
+	}
+	if v.ResourceTypeFilters != nil {
+		serializeResourceTypeFilterList(s, schemas.GetResourcesInput_ResourceTypeFilters, v.ResourceTypeFilters)
+	}
 	if v.ResourcesPerPage != nil {
 		s.WriteInt32(schemas.GetResourcesInput_ResourcesPerPage, *v.ResourcesPerPage)
 	}
-	serializeTagFilterList(s, schemas.GetResourcesInput_TagFilters, v.TagFilters)
+	if v.TagFilters != nil {
+		serializeTagFilterList(s, schemas.GetResourcesInput_TagFilters, v.TagFilters)
+	}
 	if v.TagsPerPage != nil {
 		s.WriteInt32(schemas.GetResourcesInput_TagsPerPage, *v.TagsPerPage)
 	}
@@ -244,7 +250,9 @@ func (v *GetResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.GetResourcesOutput_PaginationToken, *v.PaginationToken)
 	}
-	serializeResourceTagMappingList(s, schemas.GetResourcesOutput_ResourceTagMappingList, v.ResourceTagMappingList)
+	if v.ResourceTagMappingList != nil {
+		serializeResourceTagMappingList(s, schemas.GetResourcesOutput_ResourceTagMappingList, v.ResourceTagMappingList)
+	}
 }
 func (v *GetResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourcesOutput, func(s *smithy.Schema) error {

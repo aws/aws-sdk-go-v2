@@ -116,7 +116,9 @@ func (v *ListQualificationTypesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NumResults != nil {
 		s.WriteInt32(schemas.ListQualificationTypesResponse_NumResults, *v.NumResults)
 	}
-	serializeQualificationTypeList(s, schemas.ListQualificationTypesResponse_QualificationTypes, v.QualificationTypes)
+	if v.QualificationTypes != nil {
+		serializeQualificationTypeList(s, schemas.ListQualificationTypesResponse_QualificationTypes, v.QualificationTypes)
+	}
 }
 func (v *ListQualificationTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQualificationTypesResponse, func(s *smithy.Schema) error {

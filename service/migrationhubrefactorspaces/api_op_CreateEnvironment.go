@@ -86,7 +86,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkFabricType != "" {
 		s.WriteString(schemas.CreateEnvironmentRequest_NetworkFabricType, string(v.NetworkFabricType))
 	}
-	serializeTagMap(s, schemas.CreateEnvironmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEnvironmentRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEnvironmentRequest, func(s *smithy.Schema) error {
@@ -187,7 +189,9 @@ func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateEnvironmentResponse_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateEnvironmentResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEnvironmentResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEnvironmentResponse, func(s *smithy.Schema) error {

@@ -55,7 +55,9 @@ func (v *GetResourcePaymentTokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcePaymentTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentTokenRequestInput(s, schemas.GetResourcePaymentTokenRequest_paymentTokenRequest, v.PaymentTokenRequest)
+	if v.PaymentTokenRequest != nil {
+		serializePaymentTokenRequestInput(s, schemas.GetResourcePaymentTokenRequest_paymentTokenRequest, v.PaymentTokenRequest)
+	}
 	if v.ResourceCredentialProviderName != nil {
 		s.WriteString(schemas.GetResourcePaymentTokenRequest_resourceCredentialProviderName, *v.ResourceCredentialProviderName)
 	}
@@ -85,7 +87,9 @@ func (v *GetResourcePaymentTokenOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourcePaymentTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentTokenResponseOutput(s, schemas.GetResourcePaymentTokenResponse_paymentTokenResponse, v.PaymentTokenResponse)
+	if v.PaymentTokenResponse != nil {
+		serializePaymentTokenResponseOutput(s, schemas.GetResourcePaymentTokenResponse_paymentTokenResponse, v.PaymentTokenResponse)
+	}
 }
 func (v *GetResourcePaymentTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourcePaymentTokenResponse, func(s *smithy.Schema) error {

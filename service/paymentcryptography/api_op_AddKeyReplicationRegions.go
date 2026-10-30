@@ -90,7 +90,9 @@ func (v *AddKeyReplicationRegionsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.AddKeyReplicationRegionsInput_KeyIdentifier, *v.KeyIdentifier)
 	}
-	serializeRegions(s, schemas.AddKeyReplicationRegionsInput_ReplicationRegions, v.ReplicationRegions)
+	if v.ReplicationRegions != nil {
+		serializeRegions(s, schemas.AddKeyReplicationRegionsInput_ReplicationRegions, v.ReplicationRegions)
+	}
 }
 
 // Output from adding replication regions to a key.

@@ -60,7 +60,9 @@ func (v *UpdateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyId != nil {
 		s.WriteString(schemas.UpdateUsageRequest_keyId, *v.KeyId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateUsageRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateUsageRequest_patchOperations, v.PatchOperations)
+	}
 	if v.UsagePlanId != nil {
 		s.WriteString(schemas.UpdateUsageRequest_usagePlanId, *v.UsagePlanId)
 	}
@@ -104,7 +106,9 @@ func (v *UpdateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndDate != nil {
 		s.WriteString(schemas.Usage_endDate, *v.EndDate)
 	}
-	serializeMapOfKeyUsages(s, schemas.Usage_items, v.Items)
+	if v.Items != nil {
+		serializeMapOfKeyUsages(s, schemas.Usage_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.Usage_position, *v.Position)
 	}

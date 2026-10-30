@@ -382,7 +382,9 @@ func (v *AgentSpace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AgentSpace_name, *v.Name)
 	}
-	serializeAgentSpacePreferences(s, schemas.AgentSpace_preferences, v.Preferences)
+	if v.Preferences != nil {
+		serializeAgentSpacePreferences(s, schemas.AgentSpace_preferences, v.Preferences)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.AgentSpace_updatedAt, *v.UpdatedAt)
 	}
@@ -534,7 +536,9 @@ func (v *ApprovalPattern) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApprovalPattern) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalArgumentPins(s, schemas.ApprovalPattern_argumentPins, v.ArgumentPins)
+	if v.ArgumentPins != nil {
+		serializeApprovalArgumentPins(s, schemas.ApprovalPattern_argumentPins, v.ArgumentPins)
+	}
 	if v.Tool != nil {
 		s.WriteString(schemas.ApprovalPattern_tool, *v.Tool)
 	}
@@ -752,7 +756,9 @@ func (v *AssetFile) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssetFile) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetFileBody(s, schemas.AssetFile_content, v.Content)
+	if v.Content != nil {
+		serializeAssetFileBody(s, schemas.AssetFile_content, v.Content)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AssetFile_createdAt, *v.CreatedAt)
 	}
@@ -866,7 +872,9 @@ func (v *AssetFileContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssetFileContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetFileBody(s, schemas.AssetFileContent_body, v.Body)
+	if v.Body != nil {
+		serializeAssetFileBody(s, schemas.AssetFileContent_body, v.Body)
+	}
 	if v.Metadata != nil {
 		s.WriteDocument(schemas.AssetFileContent_metadata, &smithydocument.Opaque{Value: v.Metadata})
 	}
@@ -1245,8 +1253,12 @@ func (v *Association) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociationId != nil {
 		s.WriteString(schemas.Association_associationId, *v.AssociationId)
 	}
-	serializeAssociationCapabilities(s, schemas.Association_capabilities, v.Capabilities)
-	serializeServiceConfiguration(s, schemas.Association_configuration, v.Configuration)
+	if v.Capabilities != nil {
+		serializeAssociationCapabilities(s, schemas.Association_capabilities, v.Capabilities)
+	}
+	if v.Configuration != nil {
+		serializeServiceConfiguration(s, schemas.Association_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Association_createdAt, *v.CreatedAt)
 	}
@@ -1493,7 +1505,9 @@ func (v *CapabilityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.CapabilityConfiguration_enabled, *v.Enabled)
 	}
-	serializeTriggerFilterGroups(s, schemas.CapabilityConfiguration_triggerFilterGroups, v.TriggerFilterGroups)
+	if v.TriggerFilterGroups != nil {
+		serializeTriggerFilterGroups(s, schemas.CapabilityConfiguration_triggerFilterGroups, v.TriggerFilterGroups)
+	}
 }
 func (v *CapabilityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CapabilityConfiguration, func(s *smithy.Schema) error {
@@ -1684,7 +1698,9 @@ func (v *DatadogServiceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatadogServiceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatadogAuthorizationConfig(s, schemas.DatadogServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeDatadogAuthorizationConfig(s, schemas.DatadogServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DatadogServiceDetails_description, *v.Description)
 	}
@@ -1738,7 +1754,9 @@ func (v *DynatraceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvId != nil {
 		s.WriteString(schemas.DynatraceConfiguration_envId, *v.EnvId)
 	}
-	serializeDynatraceResourceList(s, schemas.DynatraceConfiguration_resources, v.Resources)
+	if v.Resources != nil {
+		serializeDynatraceResourceList(s, schemas.DynatraceConfiguration_resources, v.Resources)
+	}
 }
 func (v *DynatraceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DynatraceConfiguration, func(s *smithy.Schema) error {
@@ -1791,7 +1809,9 @@ func (v *DynatraceOAuthClientCredentialsConfig) SerializeMembers(s smithy.ShapeS
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.DynatraceOAuthClientCredentialsConfig_clientSecret, *v.ClientSecret)
 	}
-	serializeExchangeParameters(s, schemas.DynatraceOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	if v.ExchangeParameters != nil {
+		serializeExchangeParameters(s, schemas.DynatraceOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	}
 }
 func (v *DynatraceOAuthClientCredentialsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DynatraceOAuthClientCredentialsConfig, func(s *smithy.Schema) error {
@@ -1864,7 +1884,9 @@ func (v *DynatraceServiceDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountUrn != nil {
 		s.WriteString(schemas.DynatraceServiceDetails_accountUrn, *v.AccountUrn)
 	}
-	serializeDynatraceServiceAuthorizationConfig(s, schemas.DynatraceServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeDynatraceServiceAuthorizationConfig(s, schemas.DynatraceServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 }
 func (v *DynatraceServiceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DynatraceServiceDetails, func(s *smithy.Schema) error {
@@ -2702,7 +2724,9 @@ func (v *GrafanaServiceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GrafanaServiceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMCPServerAuthorizationConfig(s, schemas.GrafanaServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeMCPServerAuthorizationConfig(s, schemas.GrafanaServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GrafanaServiceDetails_description, *v.Description)
 	}
@@ -3333,8 +3357,12 @@ func (v *MCPServerConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MCPServerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMCPToolDetailsList(s, schemas.MCPServerConfiguration_toolDetails, v.ToolDetails)
-	serializeMCPToolsList(s, schemas.MCPServerConfiguration_tools, v.Tools)
+	if v.ToolDetails != nil {
+		serializeMCPToolDetailsList(s, schemas.MCPServerConfiguration_toolDetails, v.ToolDetails)
+	}
+	if v.Tools != nil {
+		serializeMCPToolsList(s, schemas.MCPServerConfiguration_tools, v.Tools)
+	}
 }
 func (v *MCPServerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MCPServerConfiguration, func(s *smithy.Schema) error {
@@ -3366,7 +3394,9 @@ func (v *MCPServerCustomHeadersConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MCPServerCustomHeadersConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomHeaders(s, schemas.MCPServerCustomHeadersConfig_headers, v.Headers)
+	if v.Headers != nil {
+		serializeCustomHeaders(s, schemas.MCPServerCustomHeadersConfig_headers, v.Headers)
+	}
 }
 func (v *MCPServerCustomHeadersConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MCPServerCustomHeadersConfig, func(s *smithy.Schema) error {
@@ -3394,7 +3424,9 @@ func (v *MCPServerDatadogConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MCPServerDatadogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMCPToolDetailsList(s, schemas.MCPServerDatadogConfiguration_enabledElevatedTools, v.EnabledElevatedTools)
+	if v.EnabledElevatedTools != nil {
+		serializeMCPToolDetailsList(s, schemas.MCPServerDatadogConfiguration_enabledElevatedTools, v.EnabledElevatedTools)
+	}
 }
 func (v *MCPServerDatadogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MCPServerDatadogConfiguration, func(s *smithy.Schema) error {
@@ -3437,7 +3469,9 @@ func (v *MCPServerDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MCPServerDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMCPServerAuthorizationConfig(s, schemas.MCPServerDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeMCPServerAuthorizationConfig(s, schemas.MCPServerDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.MCPServerDetails_description, *v.Description)
 	}
@@ -3495,14 +3529,18 @@ func (v *MCPServerGrafanaConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MCPServerGrafanaConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMCPToolDetailsList(s, schemas.MCPServerGrafanaConfiguration_enabledElevatedTools, v.EnabledElevatedTools)
+	if v.EnabledElevatedTools != nil {
+		serializeMCPToolDetailsList(s, schemas.MCPServerGrafanaConfiguration_enabledElevatedTools, v.EnabledElevatedTools)
+	}
 	if v.Endpoint != nil {
 		s.WriteString(schemas.MCPServerGrafanaConfiguration_endpoint, *v.Endpoint)
 	}
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.MCPServerGrafanaConfiguration_organizationId, *v.OrganizationId)
 	}
-	serializeMCPToolsList(s, schemas.MCPServerGrafanaConfiguration_tools, v.Tools)
+	if v.Tools != nil {
+		serializeMCPToolsList(s, schemas.MCPServerGrafanaConfiguration_tools, v.Tools)
+	}
 }
 func (v *MCPServerGrafanaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MCPServerGrafanaConfiguration, func(s *smithy.Schema) error {
@@ -3631,14 +3669,18 @@ func (v *MCPServerOAuth3LOConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.MCPServerOAuth3LOConfig_clientSecret, *v.ClientSecret)
 	}
-	serializeExchangeParameters(s, schemas.MCPServerOAuth3LOConfig_exchangeParameters, v.ExchangeParameters)
+	if v.ExchangeParameters != nil {
+		serializeExchangeParameters(s, schemas.MCPServerOAuth3LOConfig_exchangeParameters, v.ExchangeParameters)
+	}
 	if v.ExchangeUrl != nil {
 		s.WriteString(schemas.MCPServerOAuth3LOConfig_exchangeUrl, *v.ExchangeUrl)
 	}
 	if v.ReturnToEndpoint != nil {
 		s.WriteString(schemas.MCPServerOAuth3LOConfig_returnToEndpoint, *v.ReturnToEndpoint)
 	}
-	serializeScopes(s, schemas.MCPServerOAuth3LOConfig_scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeScopes(s, schemas.MCPServerOAuth3LOConfig_scopes, v.Scopes)
+	}
 	if v.SupportCodeChallenge != false {
 		s.WriteBool(schemas.MCPServerOAuth3LOConfig_supportCodeChallenge, v.SupportCodeChallenge)
 	}
@@ -3722,11 +3764,15 @@ func (v *MCPServerOAuthClientCredentialsConfig) SerializeMembers(s smithy.ShapeS
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.MCPServerOAuthClientCredentialsConfig_clientSecret, *v.ClientSecret)
 	}
-	serializeExchangeParameters(s, schemas.MCPServerOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	if v.ExchangeParameters != nil {
+		serializeExchangeParameters(s, schemas.MCPServerOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	}
 	if v.ExchangeUrl != nil {
 		s.WriteString(schemas.MCPServerOAuthClientCredentialsConfig_exchangeUrl, *v.ExchangeUrl)
 	}
-	serializeScopes(s, schemas.MCPServerOAuthClientCredentialsConfig_scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeScopes(s, schemas.MCPServerOAuthClientCredentialsConfig_scopes, v.Scopes)
+	}
 }
 func (v *MCPServerOAuthClientCredentialsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MCPServerOAuthClientCredentialsConfig, func(s *smithy.Schema) error {
@@ -3787,7 +3833,9 @@ func (v *MCPServerSigV4AuthorizationConfig) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *MCPServerSigV4AuthorizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomHeaders(s, schemas.MCPServerSigV4AuthorizationConfig_customHeaders, v.CustomHeaders)
+	if v.CustomHeaders != nil {
+		serializeCustomHeaders(s, schemas.MCPServerSigV4AuthorizationConfig_customHeaders, v.CustomHeaders)
+	}
 	if v.McpRoleArn != nil {
 		s.WriteString(schemas.MCPServerSigV4AuthorizationConfig_mcpRoleArn, *v.McpRoleArn)
 	}
@@ -3845,8 +3893,12 @@ func (v *MCPServerSigV4Configuration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MCPServerSigV4Configuration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMCPToolDetailsList(s, schemas.MCPServerSigV4Configuration_toolDetails, v.ToolDetails)
-	serializeMCPToolsList(s, schemas.MCPServerSigV4Configuration_tools, v.Tools)
+	if v.ToolDetails != nil {
+		serializeMCPToolDetailsList(s, schemas.MCPServerSigV4Configuration_toolDetails, v.ToolDetails)
+	}
+	if v.Tools != nil {
+		serializeMCPToolsList(s, schemas.MCPServerSigV4Configuration_tools, v.Tools)
+	}
 }
 func (v *MCPServerSigV4Configuration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MCPServerSigV4Configuration, func(s *smithy.Schema) error {
@@ -4284,12 +4336,18 @@ func (v *NewRelicApiKeyConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.NewRelicApiKeyConfig_accountId, *v.AccountId)
 	}
-	serializeNewRelicAlertPolicyIds(s, schemas.NewRelicApiKeyConfig_alertPolicyIds, v.AlertPolicyIds)
+	if v.AlertPolicyIds != nil {
+		serializeNewRelicAlertPolicyIds(s, schemas.NewRelicApiKeyConfig_alertPolicyIds, v.AlertPolicyIds)
+	}
 	if v.ApiKey != nil {
 		s.WriteString(schemas.NewRelicApiKeyConfig_apiKey, *v.ApiKey)
 	}
-	serializeNewRelicApplicationIds(s, schemas.NewRelicApiKeyConfig_applicationIds, v.ApplicationIds)
-	serializeNewRelicEntityGuids(s, schemas.NewRelicApiKeyConfig_entityGuids, v.EntityGuids)
+	if v.ApplicationIds != nil {
+		serializeNewRelicApplicationIds(s, schemas.NewRelicApiKeyConfig_applicationIds, v.ApplicationIds)
+	}
+	if v.EntityGuids != nil {
+		serializeNewRelicEntityGuids(s, schemas.NewRelicApiKeyConfig_entityGuids, v.EntityGuids)
+	}
 	if v.Region != "" {
 		s.WriteString(schemas.NewRelicApiKeyConfig_region, string(v.Region))
 	}
@@ -4365,7 +4423,9 @@ func (v *NewRelicServiceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NewRelicServiceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNewRelicServiceAuthorizationConfig(s, schemas.NewRelicServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeNewRelicServiceAuthorizationConfig(s, schemas.NewRelicServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 }
 func (v *NewRelicServiceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NewRelicServiceDetails, func(s *smithy.Schema) error {
@@ -4462,7 +4522,9 @@ func (v *PagerDutyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerEmail != nil {
 		s.WriteString(schemas.PagerDutyConfiguration_customerEmail, *v.CustomerEmail)
 	}
-	serializePagerDutyServicesList(s, schemas.PagerDutyConfiguration_services, v.Services)
+	if v.Services != nil {
+		serializePagerDutyServicesList(s, schemas.PagerDutyConfiguration_services, v.Services)
+	}
 }
 func (v *PagerDutyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PagerDutyConfiguration, func(s *smithy.Schema) error {
@@ -4500,8 +4562,12 @@ func (v *PagerDutyDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PagerDutyDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePagerDutyAuthorizationConfig(s, schemas.PagerDutyDetails_authorizationConfig, v.AuthorizationConfig)
-	serializePagerDutyScopes(s, schemas.PagerDutyDetails_scopes, v.Scopes)
+	if v.AuthorizationConfig != nil {
+		serializePagerDutyAuthorizationConfig(s, schemas.PagerDutyDetails_authorizationConfig, v.AuthorizationConfig)
+	}
+	if v.Scopes != nil {
+		serializePagerDutyScopes(s, schemas.PagerDutyDetails_scopes, v.Scopes)
+	}
 }
 func (v *PagerDutyDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PagerDutyDetails, func(s *smithy.Schema) error {
@@ -4553,7 +4619,9 @@ func (v *PagerDutyOAuthClientCredentialsConfig) SerializeMembers(s smithy.ShapeS
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.PagerDutyOAuthClientCredentialsConfig_clientSecret, *v.ClientSecret)
 	}
-	serializeExchangeParameters(s, schemas.PagerDutyOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	if v.ExchangeParameters != nil {
+		serializeExchangeParameters(s, schemas.PagerDutyOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	}
 }
 func (v *PagerDutyOAuthClientCredentialsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PagerDutyOAuthClientCredentialsConfig, func(s *smithy.Schema) error {
@@ -4593,7 +4661,9 @@ func (v *PatternFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PatternFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerRegexPatternList(s, schemas.PatternFilter_patterns, v.Patterns)
+	if v.Patterns != nil {
+		serializeTriggerRegexPatternList(s, schemas.PatternFilter_patterns, v.Patterns)
+	}
 }
 func (v *PatternFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PatternFilter, func(s *smithy.Schema) error {
@@ -4628,7 +4698,9 @@ func (v *PendingMessage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PendingMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessage(s, schemas.PendingMessage_message, v.Message)
+	if v.Message != nil {
+		serializeMessage(s, schemas.PendingMessage_message, v.Message)
+	}
 	if v.MessageId != nil {
 		s.WriteString(schemas.PendingMessage_messageId, *v.MessageId)
 	}
@@ -5390,7 +5462,9 @@ func (v *RegisteredAzureIdentityDetails) SerializeMembers(s smithy.ShapeSerializ
 	if v.WebIdentityRoleArn != nil {
 		s.WriteString(schemas.RegisteredAzureIdentityDetails_webIdentityRoleArn, *v.WebIdentityRoleArn)
 	}
-	serializeWebIdentityTokenAudienceList(s, schemas.RegisteredAzureIdentityDetails_webIdentityTokenAudiences, v.WebIdentityTokenAudiences)
+	if v.WebIdentityTokenAudiences != nil {
+		serializeWebIdentityTokenAudienceList(s, schemas.RegisteredAzureIdentityDetails_webIdentityTokenAudiences, v.WebIdentityTokenAudiences)
+	}
 }
 func (v *RegisteredAzureIdentityDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisteredAzureIdentityDetails, func(s *smithy.Schema) error {
@@ -5618,7 +5692,9 @@ func (v *RegisteredMCPServerDetails) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AuthorizationMethod != "" {
 		s.WriteString(schemas.RegisteredMCPServerDetails_authorizationMethod, string(v.AuthorizationMethod))
 	}
-	serializeCustomHeaderNames(s, schemas.RegisteredMCPServerDetails_customHeaderNames, v.CustomHeaderNames)
+	if v.CustomHeaderNames != nil {
+		serializeCustomHeaderNames(s, schemas.RegisteredMCPServerDetails_customHeaderNames, v.CustomHeaderNames)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegisteredMCPServerDetails_description, *v.Description)
 	}
@@ -5707,7 +5783,9 @@ func (v *RegisteredMCPServerSigV4Details) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisteredMCPServerSigV4Details) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomHeaders(s, schemas.RegisteredMCPServerSigV4Details_customHeaders, v.CustomHeaders)
+	if v.CustomHeaders != nil {
+		serializeCustomHeaders(s, schemas.RegisteredMCPServerSigV4Details_customHeaders, v.CustomHeaders)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegisteredMCPServerSigV4Details_description, *v.Description)
 	}
@@ -5836,7 +5914,9 @@ func (v *RegisteredPagerDutyDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisteredPagerDutyDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePagerDutyScopesList(s, schemas.RegisteredPagerDutyDetails_scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializePagerDutyScopesList(s, schemas.RegisteredPagerDutyDetails_scopes, v.Scopes)
+	}
 }
 func (v *RegisteredPagerDutyDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisteredPagerDutyDetails, func(s *smithy.Schema) error {
@@ -6058,8 +6138,12 @@ func (v *RegisteredService) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisteredService) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentList(s, schemas.RegisteredService_accessibleResources, v.AccessibleResources)
-	serializeAdditionalServiceDetails(s, schemas.RegisteredService_additionalServiceDetails, v.AdditionalServiceDetails)
+	if v.AccessibleResources != nil {
+		serializeDocumentList(s, schemas.RegisteredService_accessibleResources, v.AccessibleResources)
+	}
+	if v.AdditionalServiceDetails != nil {
+		serializeAdditionalServiceDetails(s, schemas.RegisteredService_additionalServiceDetails, v.AdditionalServiceDetails)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RegisteredService_createdAt, *v.CreatedAt)
 	}
@@ -6221,7 +6305,9 @@ func (v *ReleaseManagementConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.ReleaseManagementConfiguration_name, *v.Name)
 	}
-	serializeNetworkAccessConfiguration(s, schemas.ReleaseManagementConfiguration_networkAccess, v.NetworkAccess)
+	if v.NetworkAccess != nil {
+		serializeNetworkAccessConfiguration(s, schemas.ReleaseManagementConfiguration_networkAccess, v.NetworkAccess)
+	}
 }
 func (v *ReleaseManagementConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReleaseManagementConfiguration, func(s *smithy.Schema) error {
@@ -6476,11 +6562,15 @@ func (v *RemoteAgentOAuthClientCredentialsConfig) SerializeMembers(s smithy.Shap
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.RemoteAgentOAuthClientCredentialsConfig_clientSecret, *v.ClientSecret)
 	}
-	serializeExchangeParameters(s, schemas.RemoteAgentOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	if v.ExchangeParameters != nil {
+		serializeExchangeParameters(s, schemas.RemoteAgentOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	}
 	if v.ExchangeUrl != nil {
 		s.WriteString(schemas.RemoteAgentOAuthClientCredentialsConfig_exchangeUrl, *v.ExchangeUrl)
 	}
-	serializeScopes(s, schemas.RemoteAgentOAuthClientCredentialsConfig_scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeScopes(s, schemas.RemoteAgentOAuthClientCredentialsConfig_scopes, v.Scopes)
+	}
 }
 func (v *RemoteAgentOAuthClientCredentialsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RemoteAgentOAuthClientCredentialsConfig, func(s *smithy.Schema) error {
@@ -6537,7 +6627,9 @@ func (v *RemoteAgentServiceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RemoteAgentServiceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemoteAgentAuthorizationConfig(s, schemas.RemoteAgentServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeRemoteAgentAuthorizationConfig(s, schemas.RemoteAgentServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RemoteAgentServiceDetails_description, *v.Description)
 	}
@@ -6736,7 +6828,9 @@ func (v *ScheduleCondition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Expression != nil {
 		s.WriteString(schemas.ScheduleCondition_expression, *v.Expression)
 	}
-	serializeScheduleSpec(s, schemas.ScheduleCondition_spec, v.Spec)
+	if v.Spec != nil {
+		serializeScheduleSpec(s, schemas.ScheduleCondition_spec, v.Spec)
+	}
 }
 func (v *ScheduleCondition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScheduleCondition, func(s *smithy.Schema) error {
@@ -6903,7 +6997,9 @@ func (v *SendMessageContentBlockDeltaEvent) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SendMessageContentBlockDeltaEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSendMessageContentBlockDelta(s, schemas.SendMessageContentBlockDeltaEvent_delta, v.Delta)
+	if v.Delta != nil {
+		serializeSendMessageContentBlockDelta(s, schemas.SendMessageContentBlockDeltaEvent_delta, v.Delta)
+	}
 	if v.Index != nil {
 		s.WriteInt32(schemas.SendMessageContentBlockDeltaEvent_index, *v.Index)
 	}
@@ -8380,9 +8476,15 @@ func (v *ServiceManagedInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv4AddressesPerEni != nil {
 		s.WriteInt32(schemas.ServiceManagedInput_ipv4AddressesPerEni, *v.Ipv4AddressesPerEni)
 	}
-	serializePortRanges(s, schemas.ServiceManagedInput_portRanges, v.PortRanges)
-	serializeListOfSecurityGroupIds(s, schemas.ServiceManagedInput_securityGroupIds, v.SecurityGroupIds)
-	serializeListOfSubnetIds(s, schemas.ServiceManagedInput_subnetIds, v.SubnetIds)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.ServiceManagedInput_portRanges, v.PortRanges)
+	}
+	if v.SecurityGroupIds != nil {
+		serializeListOfSecurityGroupIds(s, schemas.ServiceManagedInput_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeListOfSubnetIds(s, schemas.ServiceManagedInput_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.ServiceManagedInput_vpcId, *v.VpcId)
 	}
@@ -8446,7 +8548,9 @@ func (v *ServiceNowConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceNowConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNowAuthenticationScopeList(s, schemas.ServiceNowConfiguration_authScopes, v.AuthScopes)
+	if v.AuthScopes != nil {
+		serializeServiceNowAuthenticationScopeList(s, schemas.ServiceNowConfiguration_authScopes, v.AuthScopes)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.ServiceNowConfiguration_instanceId, *v.InstanceId)
 	}
@@ -8502,7 +8606,9 @@ func (v *ServiceNowOAuthClientCredentialsConfig) SerializeMembers(s smithy.Shape
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.ServiceNowOAuthClientCredentialsConfig_clientSecret, *v.ClientSecret)
 	}
-	serializeExchangeParameters(s, schemas.ServiceNowOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	if v.ExchangeParameters != nil {
+		serializeExchangeParameters(s, schemas.ServiceNowOAuthClientCredentialsConfig_exchangeParameters, v.ExchangeParameters)
+	}
 }
 func (v *ServiceNowOAuthClientCredentialsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceNowOAuthClientCredentialsConfig, func(s *smithy.Schema) error {
@@ -8572,7 +8678,9 @@ func (v *ServiceNowServiceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceNowServiceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNowServiceAuthorizationConfig(s, schemas.ServiceNowServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	if v.AuthorizationConfig != nil {
+		serializeServiceNowServiceAuthorizationConfig(s, schemas.ServiceNowServiceDetails_authorizationConfig, v.AuthorizationConfig)
+	}
 	if v.InstanceUrl != nil {
 		s.WriteString(schemas.ServiceNowServiceDetails_instanceUrl, *v.InstanceUrl)
 	}
@@ -9157,9 +9265,15 @@ func (v *TaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryTaskId != nil {
 		s.WriteString(schemas.TaskFilter_primaryTaskId, *v.PrimaryTaskId)
 	}
-	serializePriorityList(s, schemas.TaskFilter_priority, v.Priority)
-	serializeTaskStatusList(s, schemas.TaskFilter_status, v.Status)
-	serializeTaskTypeList(s, schemas.TaskFilter_taskType, v.TaskType)
+	if v.Priority != nil {
+		serializePriorityList(s, schemas.TaskFilter_priority, v.Priority)
+	}
+	if v.Status != nil {
+		serializeTaskStatusList(s, schemas.TaskFilter_status, v.Status)
+	}
+	if v.TaskType != nil {
+		serializeTaskTypeList(s, schemas.TaskFilter_taskType, v.TaskType)
+	}
 }
 func (v *TaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskFilter, func(s *smithy.Schema) error {
@@ -9214,7 +9328,9 @@ func (v *TimeRangeSchedule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TimeRangeSchedule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecurrence(s, schemas.TimeRangeSchedule_recurrence, v.Recurrence)
+	if v.Recurrence != nil {
+		serializeRecurrence(s, schemas.TimeRangeSchedule_recurrence, v.Recurrence)
+	}
 	if v.StartAfter != nil {
 		s.WriteString(schemas.TimeRangeSchedule_startAfter, *v.StartAfter)
 	}
@@ -9297,7 +9413,9 @@ func (v *Trigger) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.Trigger_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeTriggerCondition(s, schemas.Trigger_condition, v.Condition)
+	if v.Condition != nil {
+		serializeTriggerCondition(s, schemas.Trigger_condition, v.Condition)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Trigger_createdAt, *v.CreatedAt)
 	}
@@ -9399,7 +9517,9 @@ func (v *TriggerFilterGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TriggerFilterGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerEventList(s, schemas.TriggerFilterGroup_events, v.Events)
+	if v.Events != nil {
+		serializeTriggerEventList(s, schemas.TriggerFilterGroup_events, v.Events)
+	}
 	if v.TargetBranches != nil {
 		s.WriteStruct(schemas.TriggerFilterGroup_targetBranches)
 		v.TargetBranches.SerializeMembers(s)

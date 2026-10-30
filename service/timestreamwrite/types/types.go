@@ -501,11 +501,15 @@ func (v *DataModel) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataModel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionMappings(s, schemas.DataModel_DimensionMappings, v.DimensionMappings)
+	if v.DimensionMappings != nil {
+		serializeDimensionMappings(s, schemas.DataModel_DimensionMappings, v.DimensionMappings)
+	}
 	if v.MeasureNameColumn != nil {
 		s.WriteString(schemas.DataModel_MeasureNameColumn, *v.MeasureNameColumn)
 	}
-	serializeMixedMeasureMappingList(s, schemas.DataModel_MixedMeasureMappings, v.MixedMeasureMappings)
+	if v.MixedMeasureMappings != nil {
+		serializeMixedMeasureMappingList(s, schemas.DataModel_MixedMeasureMappings, v.MixedMeasureMappings)
+	}
 	if v.MultiMeasureMappings != nil {
 		s.WriteStruct(schemas.DataModel_MultiMeasureMappings)
 		v.MultiMeasureMappings.SerializeMembers(s)
@@ -1064,7 +1068,9 @@ func (v *MixedMeasureMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MeasureValueType != "" {
 		s.WriteString(schemas.MixedMeasureMapping_MeasureValueType, string(v.MeasureValueType))
 	}
-	serializeMultiMeasureAttributeMappingList(s, schemas.MixedMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	if v.MultiMeasureAttributeMappings != nil {
+		serializeMultiMeasureAttributeMappingList(s, schemas.MixedMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	}
 	if v.SourceColumn != nil {
 		s.WriteString(schemas.MixedMeasureMapping_SourceColumn, *v.SourceColumn)
 	}
@@ -1172,7 +1178,9 @@ func (v *MultiMeasureMappings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MultiMeasureMappings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiMeasureAttributeMappingList(s, schemas.MultiMeasureMappings_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	if v.MultiMeasureAttributeMappings != nil {
+		serializeMultiMeasureAttributeMappingList(s, schemas.MultiMeasureMappings_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	}
 	if v.TargetMultiMeasureName != nil {
 		s.WriteString(schemas.MultiMeasureMappings_TargetMultiMeasureName, *v.TargetMultiMeasureName)
 	}
@@ -1325,7 +1333,9 @@ func (v *Record) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensions(s, schemas.Record_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.Record_Dimensions, v.Dimensions)
+	}
 	if v.MeasureName != nil {
 		s.WriteString(schemas.Record_MeasureName, *v.MeasureName)
 	}
@@ -1335,7 +1345,9 @@ func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MeasureValueType != "" {
 		s.WriteString(schemas.Record_MeasureValueType, string(v.MeasureValueType))
 	}
-	serializeMeasureValues(s, schemas.Record_MeasureValues, v.MeasureValues)
+	if v.MeasureValues != nil {
+		serializeMeasureValues(s, schemas.Record_MeasureValues, v.MeasureValues)
+	}
 	if v.Time != nil {
 		s.WriteString(schemas.Record_Time, *v.Time)
 	}
@@ -1742,7 +1754,9 @@ func (v *Schema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Schema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionKeyList(s, schemas.Schema_CompositePartitionKey, v.CompositePartitionKey)
+	if v.CompositePartitionKey != nil {
+		serializePartitionKeyList(s, schemas.Schema_CompositePartitionKey, v.CompositePartitionKey)
+	}
 }
 func (v *Schema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Schema, func(s *smithy.Schema) error {

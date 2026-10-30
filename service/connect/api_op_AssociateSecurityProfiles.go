@@ -68,7 +68,9 @@ func (v *AssociateSecurityProfilesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.InstanceId != nil {
 		s.WriteString(schemas.AssociateSecurityProfilesRequest_InstanceId, *v.InstanceId)
 	}
-	serializeSecurityProfiles(s, schemas.AssociateSecurityProfilesRequest_SecurityProfiles, v.SecurityProfiles)
+	if v.SecurityProfiles != nil {
+		serializeSecurityProfiles(s, schemas.AssociateSecurityProfilesRequest_SecurityProfiles, v.SecurityProfiles)
+	}
 }
 
 type AssociateSecurityProfilesOutput struct {

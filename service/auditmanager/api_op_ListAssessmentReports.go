@@ -74,7 +74,9 @@ func (v *ListAssessmentReportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentReportsMetadata(s, schemas.ListAssessmentReportsResponse_assessmentReports, v.AssessmentReports)
+	if v.AssessmentReports != nil {
+		serializeAssessmentReportsMetadata(s, schemas.ListAssessmentReportsResponse_assessmentReports, v.AssessmentReports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentReportsResponse_nextToken, *v.NextToken)
 	}

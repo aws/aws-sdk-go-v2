@@ -142,13 +142,21 @@ func (v *CreateImageRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AdditionalInstanceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateImageRecipeRequest_amiTags, v.AmiTags)
-	serializeAmiWatermarksList(s, schemas.CreateImageRecipeRequest_amiWatermarks, v.AmiWatermarks)
-	serializeInstanceBlockDeviceMappings(s, schemas.CreateImageRecipeRequest_blockDeviceMappings, v.BlockDeviceMappings)
+	if v.AmiTags != nil {
+		serializeTagMap(s, schemas.CreateImageRecipeRequest_amiTags, v.AmiTags)
+	}
+	if v.AmiWatermarks != nil {
+		serializeAmiWatermarksList(s, schemas.CreateImageRecipeRequest_amiWatermarks, v.AmiWatermarks)
+	}
+	if v.BlockDeviceMappings != nil {
+		serializeInstanceBlockDeviceMappings(s, schemas.CreateImageRecipeRequest_blockDeviceMappings, v.BlockDeviceMappings)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateImageRecipeRequest_clientToken, *v.ClientToken)
 	}
-	serializeComponentConfigurationList(s, schemas.CreateImageRecipeRequest_components, v.Components)
+	if v.Components != nil {
+		serializeComponentConfigurationList(s, schemas.CreateImageRecipeRequest_components, v.Components)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateImageRecipeRequest_description, *v.Description)
 	}
@@ -164,7 +172,9 @@ func (v *CreateImageRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.CreateImageRecipeRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeTagMap(s, schemas.CreateImageRecipeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateImageRecipeRequest_tags, v.Tags)
+	}
 	if v.WorkingDirectory != nil {
 		s.WriteString(schemas.CreateImageRecipeRequest_workingDirectory, *v.WorkingDirectory)
 	}

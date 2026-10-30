@@ -138,11 +138,21 @@ func (v *CreatePracticeRunConfigurationInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CreatePracticeRunConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedWindows(s, schemas.CreatePracticeRunConfigurationRequest_allowedWindows, v.AllowedWindows)
-	serializeBlockedDates(s, schemas.CreatePracticeRunConfigurationRequest_blockedDates, v.BlockedDates)
-	serializeBlockedWindows(s, schemas.CreatePracticeRunConfigurationRequest_blockedWindows, v.BlockedWindows)
-	serializeBlockingAlarms(s, schemas.CreatePracticeRunConfigurationRequest_blockingAlarms, v.BlockingAlarms)
-	serializeOutcomeAlarms(s, schemas.CreatePracticeRunConfigurationRequest_outcomeAlarms, v.OutcomeAlarms)
+	if v.AllowedWindows != nil {
+		serializeAllowedWindows(s, schemas.CreatePracticeRunConfigurationRequest_allowedWindows, v.AllowedWindows)
+	}
+	if v.BlockedDates != nil {
+		serializeBlockedDates(s, schemas.CreatePracticeRunConfigurationRequest_blockedDates, v.BlockedDates)
+	}
+	if v.BlockedWindows != nil {
+		serializeBlockedWindows(s, schemas.CreatePracticeRunConfigurationRequest_blockedWindows, v.BlockedWindows)
+	}
+	if v.BlockingAlarms != nil {
+		serializeBlockingAlarms(s, schemas.CreatePracticeRunConfigurationRequest_blockingAlarms, v.BlockingAlarms)
+	}
+	if v.OutcomeAlarms != nil {
+		serializeOutcomeAlarms(s, schemas.CreatePracticeRunConfigurationRequest_outcomeAlarms, v.OutcomeAlarms)
+	}
 	if v.ResourceIdentifier != nil {
 		s.WriteString(schemas.CreatePracticeRunConfigurationRequest_resourceIdentifier, *v.ResourceIdentifier)
 	}

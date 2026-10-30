@@ -121,12 +121,18 @@ func (v *PutPipelineDefinitionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutPipelineDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterObjectList(s, schemas.PutPipelineDefinitionInput_parameterObjects, v.ParameterObjects)
-	serializeParameterValueList(s, schemas.PutPipelineDefinitionInput_parameterValues, v.ParameterValues)
+	if v.ParameterObjects != nil {
+		serializeParameterObjectList(s, schemas.PutPipelineDefinitionInput_parameterObjects, v.ParameterObjects)
+	}
+	if v.ParameterValues != nil {
+		serializeParameterValueList(s, schemas.PutPipelineDefinitionInput_parameterValues, v.ParameterValues)
+	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.PutPipelineDefinitionInput_pipelineId, *v.PipelineId)
 	}
-	serializePipelineObjectList(s, schemas.PutPipelineDefinitionInput_pipelineObjects, v.PipelineObjects)
+	if v.PipelineObjects != nil {
+		serializePipelineObjectList(s, schemas.PutPipelineDefinitionInput_pipelineObjects, v.PipelineObjects)
+	}
 }
 
 // Contains the output of PutPipelineDefinition.
@@ -161,8 +167,12 @@ func (v *PutPipelineDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
 
 func (v *PutPipelineDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	s.WriteBool(schemas.PutPipelineDefinitionOutput_errored, v.Errored)
-	serializeValidationErrors(s, schemas.PutPipelineDefinitionOutput_validationErrors, v.ValidationErrors)
-	serializeValidationWarnings(s, schemas.PutPipelineDefinitionOutput_validationWarnings, v.ValidationWarnings)
+	if v.ValidationErrors != nil {
+		serializeValidationErrors(s, schemas.PutPipelineDefinitionOutput_validationErrors, v.ValidationErrors)
+	}
+	if v.ValidationWarnings != nil {
+		serializeValidationWarnings(s, schemas.PutPipelineDefinitionOutput_validationWarnings, v.ValidationWarnings)
+	}
 }
 func (v *PutPipelineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutPipelineDefinitionOutput, func(s *smithy.Schema) error {

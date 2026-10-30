@@ -79,7 +79,9 @@ func (v *GetServiceSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.GetServiceSettingsResponse_HomeRegions, v.HomeRegions)
+	if v.HomeRegions != nil {
+		serializeStringList(s, schemas.GetServiceSettingsResponse_HomeRegions, v.HomeRegions)
+	}
 	if v.LinuxSubscriptionsDiscovery != "" {
 		s.WriteString(schemas.GetServiceSettingsResponse_LinuxSubscriptionsDiscovery, string(v.LinuxSubscriptionsDiscovery))
 	}
@@ -91,7 +93,9 @@ func (v *GetServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetServiceSettingsResponse_Status, string(v.Status))
 	}
-	serializeStringMap(s, schemas.GetServiceSettingsResponse_StatusMessage, v.StatusMessage)
+	if v.StatusMessage != nil {
+		serializeStringMap(s, schemas.GetServiceSettingsResponse_StatusMessage, v.StatusMessage)
+	}
 }
 func (v *GetServiceSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetServiceSettingsResponse, func(s *smithy.Schema) error {

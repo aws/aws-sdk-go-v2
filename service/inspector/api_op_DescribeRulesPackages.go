@@ -50,7 +50,9 @@ func (v *DescribeRulesPackagesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Locale != "" {
 		s.WriteString(schemas.DescribeRulesPackagesRequest_locale, string(v.Locale))
 	}
-	serializeBatchDescribeArnList(s, schemas.DescribeRulesPackagesRequest_rulesPackageArns, v.RulesPackageArns)
+	if v.RulesPackageArns != nil {
+		serializeBatchDescribeArnList(s, schemas.DescribeRulesPackagesRequest_rulesPackageArns, v.RulesPackageArns)
+	}
 }
 
 type DescribeRulesPackagesOutput struct {
@@ -79,8 +81,12 @@ func (v *DescribeRulesPackagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeRulesPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedItems(s, schemas.DescribeRulesPackagesResponse_failedItems, v.FailedItems)
-	serializeRulesPackageList(s, schemas.DescribeRulesPackagesResponse_rulesPackages, v.RulesPackages)
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.DescribeRulesPackagesResponse_failedItems, v.FailedItems)
+	}
+	if v.RulesPackages != nil {
+		serializeRulesPackageList(s, schemas.DescribeRulesPackagesResponse_rulesPackages, v.RulesPackages)
+	}
 }
 func (v *DescribeRulesPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRulesPackagesResponse, func(s *smithy.Schema) error {

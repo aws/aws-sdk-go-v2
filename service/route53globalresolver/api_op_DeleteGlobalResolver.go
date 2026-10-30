@@ -162,15 +162,21 @@ func (v *DeleteGlobalResolverOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.DeleteGlobalResolverOutput_ipAddressType, string(v.IpAddressType))
 	}
-	serializeIPv4Addresses(s, schemas.DeleteGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
-	serializeIPv6Addresses(s, schemas.DeleteGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeIPv4Addresses(s, schemas.DeleteGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
+	}
+	if v.Ipv6Addresses != nil {
+		serializeIPv6Addresses(s, schemas.DeleteGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DeleteGlobalResolverOutput_name, *v.Name)
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.DeleteGlobalResolverOutput_observabilityRegion, *v.ObservabilityRegion)
 	}
-	serializeRegions(s, schemas.DeleteGlobalResolverOutput_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.DeleteGlobalResolverOutput_regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DeleteGlobalResolverOutput_status, string(v.Status))
 	}

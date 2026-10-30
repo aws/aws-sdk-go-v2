@@ -86,7 +86,9 @@ func (v *CopyWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRegion != nil {
 		s.WriteString(schemas.CopyWorkspaceImageRequest_SourceRegion, *v.SourceRegion)
 	}
-	serializeTagList(s, schemas.CopyWorkspaceImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CopyWorkspaceImageRequest_Tags, v.Tags)
+	}
 }
 
 type CopyWorkspaceImageOutput struct {

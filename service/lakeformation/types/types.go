@@ -48,7 +48,9 @@ func (v *AddObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ETag != nil {
 		s.WriteString(schemas.AddObjectInput_ETag, *v.ETag)
 	}
-	serializePartitionValuesList(s, schemas.AddObjectInput_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializePartitionValuesList(s, schemas.AddObjectInput_PartitionValues, v.PartitionValues)
+	}
 	s.WriteInt64(schemas.AddObjectInput_Size, v.Size)
 	if v.Uri != nil {
 		s.WriteString(schemas.AddObjectInput_Uri, *v.Uri)
@@ -212,8 +214,12 @@ func (v *BatchPermissionsRequestEntry) SerializeMembers(s smithy.ShapeSerializer
 	if v.Id != nil {
 		s.WriteString(schemas.BatchPermissionsRequestEntry_Id, *v.Id)
 	}
-	serializePermissionList(s, schemas.BatchPermissionsRequestEntry_Permissions, v.Permissions)
-	serializePermissionList(s, schemas.BatchPermissionsRequestEntry_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.BatchPermissionsRequestEntry_Permissions, v.Permissions)
+	}
+	if v.PermissionsWithGrantOption != nil {
+		serializePermissionList(s, schemas.BatchPermissionsRequestEntry_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.BatchPermissionsRequestEntry_Principal)
 		v.Principal.SerializeMembers(s)
@@ -343,7 +349,9 @@ func (v *ColumnLFTag) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ColumnLFTag) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLFTagsList(s, schemas.ColumnLFTag_LFTags, v.LFTags)
+	if v.LFTags != nil {
+		serializeLFTagsList(s, schemas.ColumnLFTag_LFTags, v.LFTags)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ColumnLFTag_Name, *v.Name)
 	}
@@ -378,7 +386,9 @@ func (v *ColumnWildcard) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ColumnWildcard) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnNames(s, schemas.ColumnWildcard_ExcludedColumnNames, v.ExcludedColumnNames)
+	if v.ExcludedColumnNames != nil {
+		serializeColumnNames(s, schemas.ColumnWildcard_ExcludedColumnNames, v.ExcludedColumnNames)
+	}
 }
 func (v *ColumnWildcard) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ColumnWildcard, func(s *smithy.Schema) error {
@@ -515,7 +525,9 @@ func (v *DataCellsFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataCellsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnNames(s, schemas.DataCellsFilter_ColumnNames, v.ColumnNames)
+	if v.ColumnNames != nil {
+		serializeColumnNames(s, schemas.DataCellsFilter_ColumnNames, v.ColumnNames)
+	}
 	if v.ColumnWildcard != nil {
 		s.WriteStruct(schemas.DataCellsFilter_ColumnWildcard)
 		v.ColumnWildcard.SerializeMembers(s)
@@ -776,14 +788,30 @@ func (v *DataLakeSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowFullTableExternalDataAccess != nil {
 		s.WriteBool(schemas.DataLakeSettings_AllowFullTableExternalDataAccess, *v.AllowFullTableExternalDataAccess)
 	}
-	serializeAuthorizedSessionTagValueList(s, schemas.DataLakeSettings_AuthorizedSessionTagValueList, v.AuthorizedSessionTagValueList)
-	serializePrincipalPermissionsList(s, schemas.DataLakeSettings_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
-	serializePrincipalPermissionsList(s, schemas.DataLakeSettings_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
-	serializeDataLakePrincipalList(s, schemas.DataLakeSettings_DataLakeAdmins, v.DataLakeAdmins)
-	serializeDataLakePrincipalList(s, schemas.DataLakeSettings_ExternalDataFilteringAllowList, v.ExternalDataFilteringAllowList)
-	serializeParametersMap(s, schemas.DataLakeSettings_Parameters, v.Parameters)
-	serializeDataLakePrincipalList(s, schemas.DataLakeSettings_ReadOnlyAdmins, v.ReadOnlyAdmins)
-	serializeTrustedResourceOwners(s, schemas.DataLakeSettings_TrustedResourceOwners, v.TrustedResourceOwners)
+	if v.AuthorizedSessionTagValueList != nil {
+		serializeAuthorizedSessionTagValueList(s, schemas.DataLakeSettings_AuthorizedSessionTagValueList, v.AuthorizedSessionTagValueList)
+	}
+	if v.CreateDatabaseDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.DataLakeSettings_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
+	}
+	if v.CreateTableDefaultPermissions != nil {
+		serializePrincipalPermissionsList(s, schemas.DataLakeSettings_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	}
+	if v.DataLakeAdmins != nil {
+		serializeDataLakePrincipalList(s, schemas.DataLakeSettings_DataLakeAdmins, v.DataLakeAdmins)
+	}
+	if v.ExternalDataFilteringAllowList != nil {
+		serializeDataLakePrincipalList(s, schemas.DataLakeSettings_ExternalDataFilteringAllowList, v.ExternalDataFilteringAllowList)
+	}
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.DataLakeSettings_Parameters, v.Parameters)
+	}
+	if v.ReadOnlyAdmins != nil {
+		serializeDataLakePrincipalList(s, schemas.DataLakeSettings_ReadOnlyAdmins, v.ReadOnlyAdmins)
+	}
+	if v.TrustedResourceOwners != nil {
+		serializeTrustedResourceOwners(s, schemas.DataLakeSettings_TrustedResourceOwners, v.TrustedResourceOwners)
+	}
 }
 func (v *DataLakeSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataLakeSettings, func(s *smithy.Schema) error {
@@ -889,7 +917,9 @@ func (v *DeleteObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ETag != nil {
 		s.WriteString(schemas.DeleteObjectInput_ETag, *v.ETag)
 	}
-	serializePartitionValuesList(s, schemas.DeleteObjectInput_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializePartitionValuesList(s, schemas.DeleteObjectInput_PartitionValues, v.PartitionValues)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.DeleteObjectInput_Uri, *v.Uri)
 	}
@@ -930,7 +960,9 @@ func (v *DetailsMap) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetailsMap) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceShareList(s, schemas.DetailsMap_ResourceShare, v.ResourceShare)
+	if v.ResourceShare != nil {
+		serializeResourceShareList(s, schemas.DetailsMap_ResourceShare, v.ResourceShare)
+	}
 }
 func (v *DetailsMap) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetailsMap, func(s *smithy.Schema) error {
@@ -1053,7 +1085,9 @@ func (v *ExternalFilteringConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExternalFilteringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScopeTargets(s, schemas.ExternalFilteringConfiguration_AuthorizedTargets, v.AuthorizedTargets)
+	if v.AuthorizedTargets != nil {
+		serializeScopeTargets(s, schemas.ExternalFilteringConfiguration_AuthorizedTargets, v.AuthorizedTargets)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ExternalFilteringConfiguration_Status, string(v.Status))
 	}
@@ -1104,7 +1138,9 @@ func (v *FilterCondition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Field != "" {
 		s.WriteString(schemas.FilterCondition_Field, string(v.Field))
 	}
-	serializeStringValueList(s, schemas.FilterCondition_StringValueList, v.StringValueList)
+	if v.StringValueList != nil {
+		serializeStringValueList(s, schemas.FilterCondition_StringValueList, v.StringValueList)
+	}
 }
 func (v *FilterCondition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterCondition, func(s *smithy.Schema) error {
@@ -1235,7 +1271,9 @@ func (v *LFTag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.LFTag_TagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.LFTag_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.LFTag_TagValues, v.TagValues)
+	}
 }
 func (v *LFTag) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LFTag, func(s *smithy.Schema) error {
@@ -1326,7 +1364,9 @@ func (v *LFTagExpression) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.LFTagExpression_Description, *v.Description)
 	}
-	serializeExpression(s, schemas.LFTagExpression_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeExpression(s, schemas.LFTagExpression_Expression, v.Expression)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.LFTagExpression_Name, *v.Name)
 	}
@@ -1427,7 +1467,9 @@ func (v *LFTagKeyResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.LFTagKeyResource_TagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.LFTagKeyResource_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.LFTagKeyResource_TagValues, v.TagValues)
+	}
 }
 func (v *LFTagKeyResource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LFTagKeyResource, func(s *smithy.Schema) error {
@@ -1480,7 +1522,9 @@ func (v *LFTagPair) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.LFTagPair_TagKey, *v.TagKey)
 	}
-	serializeTagValueList(s, schemas.LFTagPair_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValueList(s, schemas.LFTagPair_TagValues, v.TagValues)
+	}
 }
 func (v *LFTagPair) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LFTagPair, func(s *smithy.Schema) error {
@@ -1535,7 +1579,9 @@ func (v *LFTagPolicyResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.LFTagPolicyResource_CatalogId, *v.CatalogId)
 	}
-	serializeExpression(s, schemas.LFTagPolicyResource_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeExpression(s, schemas.LFTagPolicyResource_Expression, v.Expression)
+	}
 	if v.ExpressionName != nil {
 		s.WriteString(schemas.LFTagPolicyResource_ExpressionName, *v.ExpressionName)
 	}
@@ -1585,8 +1631,12 @@ func (v *PartitionObjects) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartitionObjects) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableObjectList(s, schemas.PartitionObjects_Objects, v.Objects)
-	serializePartitionValuesList(s, schemas.PartitionObjects_PartitionValues, v.PartitionValues)
+	if v.Objects != nil {
+		serializeTableObjectList(s, schemas.PartitionObjects_Objects, v.Objects)
+	}
+	if v.PartitionValues != nil {
+		serializePartitionValuesList(s, schemas.PartitionObjects_PartitionValues, v.PartitionValues)
+	}
 }
 func (v *PartitionObjects) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionObjects, func(s *smithy.Schema) error {
@@ -1618,7 +1668,9 @@ func (v *PartitionValueList) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PartitionValueList) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValueStringList(s, schemas.PartitionValueList_Values, v.Values)
+	if v.Values != nil {
+		serializeValueStringList(s, schemas.PartitionValueList_Values, v.Values)
+	}
 }
 func (v *PartitionValueList) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionValueList, func(s *smithy.Schema) error {
@@ -1703,7 +1755,9 @@ func (v *PrincipalPermissions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrincipalPermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePermissionList(s, schemas.PrincipalPermissions_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.PrincipalPermissions_Permissions, v.Permissions)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.PrincipalPermissions_Principal)
 		v.Principal.SerializeMembers(s)
@@ -1780,8 +1834,12 @@ func (v *PrincipalResourcePermissions) SerializeMembers(s smithy.ShapeSerializer
 	if v.LastUpdatedBy != nil {
 		s.WriteString(schemas.PrincipalResourcePermissions_LastUpdatedBy, *v.LastUpdatedBy)
 	}
-	serializePermissionList(s, schemas.PrincipalResourcePermissions_Permissions, v.Permissions)
-	serializePermissionList(s, schemas.PrincipalResourcePermissions_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.PrincipalResourcePermissions_Permissions, v.Permissions)
+	}
+	if v.PermissionsWithGrantOption != nil {
+		serializePermissionList(s, schemas.PrincipalResourcePermissions_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.PrincipalResourcePermissions_Principal)
 		v.Principal.SerializeMembers(s)
@@ -1869,7 +1927,9 @@ func (v *QueryPlanningContext) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryAsOfTime != nil {
 		s.WriteTime(schemas.QueryPlanningContext_QueryAsOfTime, *v.QueryAsOfTime)
 	}
-	serializeQueryParameterMap(s, schemas.QueryPlanningContext_QueryParameters, v.QueryParameters)
+	if v.QueryParameters != nil {
+		serializeQueryParameterMap(s, schemas.QueryPlanningContext_QueryParameters, v.QueryParameters)
+	}
 	if v.TransactionId != nil {
 		s.WriteString(schemas.QueryPlanningContext_TransactionId, *v.TransactionId)
 	}
@@ -1932,7 +1992,9 @@ func (v *QuerySessionContext) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuerySessionContext) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalContextMap(s, schemas.QuerySessionContext_AdditionalContext, v.AdditionalContext)
+	if v.AdditionalContext != nil {
+		serializeAdditionalContextMap(s, schemas.QuerySessionContext_AdditionalContext, v.AdditionalContext)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.QuerySessionContext_ClusterId, *v.ClusterId)
 	}
@@ -2314,7 +2376,9 @@ func (v *RLSPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RLSPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnList(s, schemas.RLSPolicy_AttachmentColumns, v.AttachmentColumns)
+	if v.AttachmentColumns != nil {
+		serializeColumnList(s, schemas.RLSPolicy_AttachmentColumns, v.AttachmentColumns)
+	}
 	if v.CatalogId != nil {
 		s.WriteString(schemas.RLSPolicy_CatalogId, *v.CatalogId)
 	}
@@ -2575,7 +2639,9 @@ func (v *StorageOptimizer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StorageOptimizer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStorageOptimizerConfig(s, schemas.StorageOptimizer_Config, v.Config)
+	if v.Config != nil {
+		serializeStorageOptimizerConfig(s, schemas.StorageOptimizer_Config, v.Config)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.StorageOptimizer_ErrorMessage, *v.ErrorMessage)
 	}
@@ -2798,7 +2864,9 @@ func (v *TableWithColumnsResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.TableWithColumnsResource_CatalogId, *v.CatalogId)
 	}
-	serializeColumnNames(s, schemas.TableWithColumnsResource_ColumnNames, v.ColumnNames)
+	if v.ColumnNames != nil {
+		serializeColumnNames(s, schemas.TableWithColumnsResource_ColumnNames, v.ColumnNames)
+	}
 	if v.ColumnWildcard != nil {
 		s.WriteStruct(schemas.TableWithColumnsResource_ColumnWildcard)
 		v.ColumnWildcard.SerializeMembers(s)
@@ -2857,7 +2925,9 @@ func (v *TaggedDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Database.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLFTagsList(s, schemas.TaggedDatabase_LFTags, v.LFTags)
+	if v.LFTags != nil {
+		serializeLFTagsList(s, schemas.TaggedDatabase_LFTags, v.LFTags)
+	}
 }
 func (v *TaggedDatabase) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaggedDatabase, func(s *smithy.Schema) error {
@@ -2897,9 +2967,15 @@ func (v *TaggedTable) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaggedTable) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLFTagsList(s, schemas.TaggedTable_LFTagOnDatabase, v.LFTagOnDatabase)
-	serializeColumnLFTagsList(s, schemas.TaggedTable_LFTagsOnColumns, v.LFTagsOnColumns)
-	serializeLFTagsList(s, schemas.TaggedTable_LFTagsOnTable, v.LFTagsOnTable)
+	if v.LFTagOnDatabase != nil {
+		serializeLFTagsList(s, schemas.TaggedTable_LFTagOnDatabase, v.LFTagOnDatabase)
+	}
+	if v.LFTagsOnColumns != nil {
+		serializeColumnLFTagsList(s, schemas.TaggedTable_LFTagsOnColumns, v.LFTagsOnColumns)
+	}
+	if v.LFTagsOnTable != nil {
+		serializeLFTagsList(s, schemas.TaggedTable_LFTagsOnTable, v.LFTagsOnTable)
+	}
 	if v.Table != nil {
 		s.WriteStruct(schemas.TaggedTable_Table)
 		v.Table.SerializeMembers(s)

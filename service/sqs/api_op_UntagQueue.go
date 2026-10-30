@@ -57,7 +57,9 @@ func (v *UntagQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.UntagQueueRequest_QueueUrl, *v.QueueUrl)
 	}
-	serializeTagKeyList(s, schemas.UntagQueueRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.UntagQueueRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type UntagQueueOutput struct {

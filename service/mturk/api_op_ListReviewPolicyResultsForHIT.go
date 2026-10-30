@@ -77,7 +77,9 @@ func (v *ListReviewPolicyResultsForHITInput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReviewPolicyResultsForHITRequest_NextToken, *v.NextToken)
 	}
-	serializeReviewPolicyLevelList(s, schemas.ListReviewPolicyResultsForHITRequest_PolicyLevels, v.PolicyLevels)
+	if v.PolicyLevels != nil {
+		serializeReviewPolicyLevelList(s, schemas.ListReviewPolicyResultsForHITRequest_PolicyLevels, v.PolicyLevels)
+	}
 	if v.RetrieveActions != nil {
 		s.WriteBool(schemas.ListReviewPolicyResultsForHITRequest_RetrieveActions, *v.RetrieveActions)
 	}

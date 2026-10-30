@@ -91,7 +91,9 @@ func (v *ListCalculatedAttributesForProfileOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListCalculatedAttributesForProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCalculatedAttributesForProfileList(s, schemas.ListCalculatedAttributesForProfileResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeCalculatedAttributesForProfileList(s, schemas.ListCalculatedAttributesForProfileResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCalculatedAttributesForProfileResponse_NextToken, *v.NextToken)
 	}

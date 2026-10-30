@@ -100,7 +100,9 @@ func (v *ListSqlInjectionMatchSetsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListSqlInjectionMatchSetsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeSqlInjectionMatchSetSummaries(s, schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets, v.SqlInjectionMatchSets)
+	if v.SqlInjectionMatchSets != nil {
+		serializeSqlInjectionMatchSetSummaries(s, schemas.ListSqlInjectionMatchSetsResponse_SqlInjectionMatchSets, v.SqlInjectionMatchSets)
+	}
 }
 func (v *ListSqlInjectionMatchSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSqlInjectionMatchSetsResponse, func(s *smithy.Schema) error {

@@ -110,7 +110,9 @@ func (v *ListGroupsOlderThanOrderingIdOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListGroupsOlderThanOrderingIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfGroupSummaries(s, schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries, v.GroupsSummaries)
+	if v.GroupsSummaries != nil {
+		serializeListOfGroupSummaries(s, schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries, v.GroupsSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupsOlderThanOrderingIdResponse_NextToken, *v.NextToken)
 	}

@@ -86,7 +86,9 @@ func (v *DescribeQAppPermissionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AppId != nil {
 		s.WriteString(schemas.DescribeQAppPermissionsOutput_appId, *v.AppId)
 	}
-	serializePermissionsOutputList(s, schemas.DescribeQAppPermissionsOutput_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsOutputList(s, schemas.DescribeQAppPermissionsOutput_permissions, v.Permissions)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.DescribeQAppPermissionsOutput_resourceArn, *v.ResourceArn)
 	}

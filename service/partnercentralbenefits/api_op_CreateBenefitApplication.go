@@ -84,7 +84,9 @@ func (v *CreateBenefitApplicationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArns(s, schemas.CreateBenefitApplicationInput_AssociatedResources, v.AssociatedResources)
+	if v.AssociatedResources != nil {
+		serializeArns(s, schemas.CreateBenefitApplicationInput_AssociatedResources, v.AssociatedResources)
+	}
 	if v.BenefitApplicationDetails != nil {
 		s.WriteDocument(schemas.CreateBenefitApplicationInput_BenefitApplicationDetails, &smithydocument.Opaque{Value: v.BenefitApplicationDetails})
 	}
@@ -100,13 +102,21 @@ func (v *CreateBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Description != nil {
 		s.WriteString(schemas.CreateBenefitApplicationInput_Description, *v.Description)
 	}
-	serializeFileInputDetails(s, schemas.CreateBenefitApplicationInput_FileDetails, v.FileDetails)
-	serializeFulfillmentTypes(s, schemas.CreateBenefitApplicationInput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.FileDetails != nil {
+		serializeFileInputDetails(s, schemas.CreateBenefitApplicationInput_FileDetails, v.FileDetails)
+	}
+	if v.FulfillmentTypes != nil {
+		serializeFulfillmentTypes(s, schemas.CreateBenefitApplicationInput_FulfillmentTypes, v.FulfillmentTypes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBenefitApplicationInput_Name, *v.Name)
 	}
-	serializeContacts(s, schemas.CreateBenefitApplicationInput_PartnerContacts, v.PartnerContacts)
-	serializeTags(s, schemas.CreateBenefitApplicationInput_Tags, v.Tags)
+	if v.PartnerContacts != nil {
+		serializeContacts(s, schemas.CreateBenefitApplicationInput_PartnerContacts, v.PartnerContacts)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateBenefitApplicationInput_Tags, v.Tags)
+	}
 }
 
 type CreateBenefitApplicationOutput struct {

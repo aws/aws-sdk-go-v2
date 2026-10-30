@@ -87,7 +87,9 @@ func (v *ListExadbVmClustersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExadbVmClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExadbVmClusterList(s, schemas.ListExadbVmClustersOutput_exadbVmClusters, v.ExadbVmClusters)
+	if v.ExadbVmClusters != nil {
+		serializeExadbVmClusterList(s, schemas.ListExadbVmClustersOutput_exadbVmClusters, v.ExadbVmClusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExadbVmClustersOutput_nextToken, *v.NextToken)
 	}

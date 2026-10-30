@@ -69,8 +69,12 @@ func (v *UpdateEntityInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentUpdatesMapRequest(s, schemas.UpdateEntityRequest_componentUpdates, v.ComponentUpdates)
-	serializeCompositeComponentUpdatesMapRequest(s, schemas.UpdateEntityRequest_compositeComponentUpdates, v.CompositeComponentUpdates)
+	if v.ComponentUpdates != nil {
+		serializeComponentUpdatesMapRequest(s, schemas.UpdateEntityRequest_componentUpdates, v.ComponentUpdates)
+	}
+	if v.CompositeComponentUpdates != nil {
+		serializeCompositeComponentUpdatesMapRequest(s, schemas.UpdateEntityRequest_compositeComponentUpdates, v.CompositeComponentUpdates)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateEntityRequest_description, *v.Description)
 	}

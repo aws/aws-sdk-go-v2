@@ -94,7 +94,9 @@ func (v *GetCSVHeaderOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCSVHeaderOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfStringTypes(s, schemas.GetCSVHeaderResponse_CSVHeader, v.CSVHeader)
+	if v.CSVHeader != nil {
+		serializeListOfStringTypes(s, schemas.GetCSVHeaderResponse_CSVHeader, v.CSVHeader)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.GetCSVHeaderResponse_UserPoolId, *v.UserPoolId)
 	}

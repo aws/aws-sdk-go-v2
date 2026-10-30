@@ -52,7 +52,9 @@ func (v *DeleteConnectInstanceIntegrationInput) SerializeMembers(s smithy.ShapeS
 	if v.ConnectInstanceId != nil {
 		s.WriteString(schemas.DeleteConnectInstanceIntegrationRequest_connectInstanceId, *v.ConnectInstanceId)
 	}
-	serializeIntegrationIdentifier(s, schemas.DeleteConnectInstanceIntegrationRequest_integrationIdentifier, v.IntegrationIdentifier)
+	if v.IntegrationIdentifier != nil {
+		serializeIntegrationIdentifier(s, schemas.DeleteConnectInstanceIntegrationRequest_integrationIdentifier, v.IntegrationIdentifier)
+	}
 }
 
 type DeleteConnectInstanceIntegrationOutput struct {

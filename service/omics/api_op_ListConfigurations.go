@@ -75,7 +75,9 @@ func (v *ListConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationList(s, schemas.ListConfigurationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeConfigurationList(s, schemas.ListConfigurationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationsResponse_nextToken, *v.NextToken)
 	}

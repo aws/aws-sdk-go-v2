@@ -68,7 +68,9 @@ func (v *ConvertRecoveryPointToSnapshotInput) SerializeMembers(s smithy.ShapeSer
 	if v.SnapshotName != nil {
 		s.WriteString(schemas.ConvertRecoveryPointToSnapshotRequest_snapshotName, *v.SnapshotName)
 	}
-	serializeTagList(s, schemas.ConvertRecoveryPointToSnapshotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ConvertRecoveryPointToSnapshotRequest_tags, v.Tags)
+	}
 }
 
 type ConvertRecoveryPointToSnapshotOutput struct {

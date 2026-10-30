@@ -49,7 +49,9 @@ func (v *UpdateCampaignDialerConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCampaignDialerConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDialerConfig(s, schemas.UpdateCampaignDialerConfigRequest_dialerConfig, v.DialerConfig)
+	if v.DialerConfig != nil {
+		serializeDialerConfig(s, schemas.UpdateCampaignDialerConfigRequest_dialerConfig, v.DialerConfig)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateCampaignDialerConfigRequest_id, *v.Id)
 	}

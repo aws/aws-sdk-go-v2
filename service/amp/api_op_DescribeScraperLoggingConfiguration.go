@@ -90,11 +90,15 @@ func (v *DescribeScraperLoggingConfigurationOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeScraperLoggingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScraperLoggingDestination(s, schemas.DescribeScraperLoggingConfigurationResponse_loggingDestination, v.LoggingDestination)
+	if v.LoggingDestination != nil {
+		serializeScraperLoggingDestination(s, schemas.DescribeScraperLoggingConfigurationResponse_loggingDestination, v.LoggingDestination)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.DescribeScraperLoggingConfigurationResponse_modifiedAt, *v.ModifiedAt)
 	}
-	serializeScraperComponents(s, schemas.DescribeScraperLoggingConfigurationResponse_scraperComponents, v.ScraperComponents)
+	if v.ScraperComponents != nil {
+		serializeScraperComponents(s, schemas.DescribeScraperLoggingConfigurationResponse_scraperComponents, v.ScraperComponents)
+	}
 	if v.ScraperId != nil {
 		s.WriteString(schemas.DescribeScraperLoggingConfigurationResponse_scraperId, *v.ScraperId)
 	}

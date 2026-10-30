@@ -86,7 +86,9 @@ func (v *CreateDataGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceDataSetId != nil {
 		s.WriteString(schemas.CreateDataGrantRequest_SourceDataSetId, *v.SourceDataSetId)
 	}
-	serializeMapOf__string(s, schemas.CreateDataGrantRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateDataGrantRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDataGrantOutput struct {
@@ -210,7 +212,9 @@ func (v *CreateDataGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceDataSetId != nil {
 		s.WriteString(schemas.CreateDataGrantResponse_SourceDataSetId, *v.SourceDataSetId)
 	}
-	serializeMapOf__string(s, schemas.CreateDataGrantResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOf__string(s, schemas.CreateDataGrantResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateDataGrantResponse_UpdatedAt, *v.UpdatedAt)
 	}

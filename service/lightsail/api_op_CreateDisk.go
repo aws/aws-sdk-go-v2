@@ -72,7 +72,9 @@ func (v *CreateDiskInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDiskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddOnRequestList(s, schemas.CreateDiskRequest_addOns, v.AddOns)
+	if v.AddOns != nil {
+		serializeAddOnRequestList(s, schemas.CreateDiskRequest_addOns, v.AddOns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.CreateDiskRequest_availabilityZone, *v.AvailabilityZone)
 	}
@@ -82,7 +84,9 @@ func (v *CreateDiskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SizeInGb != nil {
 		s.WriteInt32(schemas.CreateDiskRequest_sizeInGb, *v.SizeInGb)
 	}
-	serializeTagList(s, schemas.CreateDiskRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDiskRequest_tags, v.Tags)
+	}
 }
 
 type CreateDiskOutput struct {
@@ -105,7 +109,9 @@ func (v *CreateDiskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDiskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateDiskResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateDiskResult_operations, v.Operations)
+	}
 }
 func (v *CreateDiskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDiskResult, func(s *smithy.Schema) error {

@@ -77,7 +77,9 @@ func (v *UpdateSourceLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.HttpConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfSegmentDeliveryConfiguration(s, schemas.UpdateSourceLocationRequest_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SegmentDeliveryConfigurations != nil {
+		serialize__listOfSegmentDeliveryConfiguration(s, schemas.UpdateSourceLocationRequest_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.UpdateSourceLocationRequest_SourceLocationName, *v.SourceLocationName)
 	}
@@ -178,11 +180,15 @@ func (v *UpdateSourceLocationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.UpdateSourceLocationResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serialize__listOfSegmentDeliveryConfiguration(s, schemas.UpdateSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SegmentDeliveryConfigurations != nil {
+		serialize__listOfSegmentDeliveryConfiguration(s, schemas.UpdateSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.UpdateSourceLocationResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.UpdateSourceLocationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.UpdateSourceLocationResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateSourceLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateSourceLocationResponse, func(s *smithy.Schema) error {

@@ -194,7 +194,9 @@ func (v *GetTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PointInTimeRecovery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaSpecificationSummaryList(s, schemas.GetTableResponse_replicaSpecifications, v.ReplicaSpecifications)
+	if v.ReplicaSpecifications != nil {
+		serializeReplicaSpecificationSummaryList(s, schemas.GetTableResponse_replicaSpecifications, v.ReplicaSpecifications)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.GetTableResponse_resourceArn, *v.ResourceArn)
 	}

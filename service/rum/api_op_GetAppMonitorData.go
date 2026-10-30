@@ -61,7 +61,9 @@ func (v *GetAppMonitorDataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAppMonitorDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueryFilters(s, schemas.GetAppMonitorDataRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeQueryFilters(s, schemas.GetAppMonitorDataRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.GetAppMonitorDataRequest_MaxResults, v.MaxResults)
 	}
@@ -120,7 +122,9 @@ func (v *GetAppMonitorDataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAppMonitorDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventDataList(s, schemas.GetAppMonitorDataResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEventDataList(s, schemas.GetAppMonitorDataResponse_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAppMonitorDataResponse_NextToken, *v.NextToken)
 	}

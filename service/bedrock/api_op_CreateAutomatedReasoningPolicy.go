@@ -94,7 +94,9 @@ func (v *CreateAutomatedReasoningPolicyInput) SerializeMembers(s smithy.ShapeSer
 		v.PolicyDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAutomatedReasoningPolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAutomatedReasoningPolicyRequest_tags, v.Tags)
+	}
 }
 
 type CreateAutomatedReasoningPolicyOutput struct {

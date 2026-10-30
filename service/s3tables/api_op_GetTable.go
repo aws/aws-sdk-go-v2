@@ -191,7 +191,9 @@ func (v *GetTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetTableResponse_name, *v.Name)
 	}
-	serializeNamespaceList(s, schemas.GetTableResponse_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.GetTableResponse_namespace, v.Namespace)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.GetTableResponse_namespaceId, *v.NamespaceId)
 	}

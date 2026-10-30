@@ -309,7 +309,9 @@ func (v *RunJobFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AmiVersion != nil {
 		s.WriteString(schemas.RunJobFlowInput_AmiVersion, *v.AmiVersion)
 	}
-	serializeApplicationList(s, schemas.RunJobFlowInput_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplicationList(s, schemas.RunJobFlowInput_Applications, v.Applications)
+	}
 	if v.AutoScalingRole != nil {
 		s.WriteString(schemas.RunJobFlowInput_AutoScalingRole, *v.AutoScalingRole)
 	}
@@ -318,8 +320,12 @@ func (v *RunJobFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoTerminationPolicy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBootstrapActionConfigList(s, schemas.RunJobFlowInput_BootstrapActions, v.BootstrapActions)
-	serializeConfigurationList(s, schemas.RunJobFlowInput_Configurations, v.Configurations)
+	if v.BootstrapActions != nil {
+		serializeBootstrapActionConfigList(s, schemas.RunJobFlowInput_BootstrapActions, v.BootstrapActions)
+	}
+	if v.Configurations != nil {
+		serializeConfigurationList(s, schemas.RunJobFlowInput_Configurations, v.Configurations)
+	}
 	if v.CustomAmiId != nil {
 		s.WriteString(schemas.RunJobFlowInput_CustomAmiId, *v.CustomAmiId)
 	}
@@ -367,11 +373,15 @@ func (v *RunJobFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RunJobFlowInput_Name, *v.Name)
 	}
-	serializeNewSupportedProductsList(s, schemas.RunJobFlowInput_NewSupportedProducts, v.NewSupportedProducts)
+	if v.NewSupportedProducts != nil {
+		serializeNewSupportedProductsList(s, schemas.RunJobFlowInput_NewSupportedProducts, v.NewSupportedProducts)
+	}
 	if v.OSReleaseLabel != nil {
 		s.WriteString(schemas.RunJobFlowInput_OSReleaseLabel, *v.OSReleaseLabel)
 	}
-	serializePlacementGroupConfigList(s, schemas.RunJobFlowInput_PlacementGroupConfigs, v.PlacementGroupConfigs)
+	if v.PlacementGroupConfigs != nil {
+		serializePlacementGroupConfigList(s, schemas.RunJobFlowInput_PlacementGroupConfigs, v.PlacementGroupConfigs)
+	}
 	if v.ReleaseLabel != nil {
 		s.WriteString(schemas.RunJobFlowInput_ReleaseLabel, *v.ReleaseLabel)
 	}
@@ -396,9 +406,15 @@ func (v *RunJobFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StepExecutionRoleArn != nil {
 		s.WriteString(schemas.RunJobFlowInput_StepExecutionRoleArn, *v.StepExecutionRoleArn)
 	}
-	serializeStepConfigList(s, schemas.RunJobFlowInput_Steps, v.Steps)
-	serializeSupportedProductsList(s, schemas.RunJobFlowInput_SupportedProducts, v.SupportedProducts)
-	serializeTagList(s, schemas.RunJobFlowInput_Tags, v.Tags)
+	if v.Steps != nil {
+		serializeStepConfigList(s, schemas.RunJobFlowInput_Steps, v.Steps)
+	}
+	if v.SupportedProducts != nil {
+		serializeSupportedProductsList(s, schemas.RunJobFlowInput_SupportedProducts, v.SupportedProducts)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RunJobFlowInput_Tags, v.Tags)
+	}
 	if v.VisibleToAllUsers != nil {
 		s.WriteBool(schemas.RunJobFlowInput_VisibleToAllUsers, *v.VisibleToAllUsers)
 	}

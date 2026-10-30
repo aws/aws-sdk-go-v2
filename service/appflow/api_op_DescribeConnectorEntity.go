@@ -90,7 +90,9 @@ func (v *DescribeConnectorEntityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConnectorEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorEntityFieldList(s, schemas.DescribeConnectorEntityResponse_connectorEntityFields, v.ConnectorEntityFields)
+	if v.ConnectorEntityFields != nil {
+		serializeConnectorEntityFieldList(s, schemas.DescribeConnectorEntityResponse_connectorEntityFields, v.ConnectorEntityFields)
+	}
 }
 func (v *DescribeConnectorEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeConnectorEntityResponse, func(s *smithy.Schema) error {

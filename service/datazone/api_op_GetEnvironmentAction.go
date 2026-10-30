@@ -123,7 +123,9 @@ func (v *GetEnvironmentActionOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.GetEnvironmentActionOutput_name, *v.Name)
 	}
-	serializeActionParameters(s, schemas.GetEnvironmentActionOutput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeActionParameters(s, schemas.GetEnvironmentActionOutput_parameters, v.Parameters)
+	}
 }
 func (v *GetEnvironmentActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEnvironmentActionOutput, func(s *smithy.Schema) error {

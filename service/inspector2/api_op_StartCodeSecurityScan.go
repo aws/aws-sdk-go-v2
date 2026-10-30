@@ -51,7 +51,9 @@ func (v *StartCodeSecurityScanInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartCodeSecurityScanRequest_clientToken, *v.ClientToken)
 	}
-	serializeCodeSecurityResource(s, schemas.StartCodeSecurityScanRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.StartCodeSecurityScanRequest_resource, v.Resource)
+	}
 }
 
 type StartCodeSecurityScanOutput struct {

@@ -95,7 +95,9 @@ func (v *ListProtectedJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProtectedJobsOutput_nextToken, *v.NextToken)
 	}
-	serializeProtectedJobSummaryList(s, schemas.ListProtectedJobsOutput_protectedJobs, v.ProtectedJobs)
+	if v.ProtectedJobs != nil {
+		serializeProtectedJobSummaryList(s, schemas.ListProtectedJobsOutput_protectedJobs, v.ProtectedJobs)
+	}
 }
 func (v *ListProtectedJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProtectedJobsOutput, func(s *smithy.Schema) error {

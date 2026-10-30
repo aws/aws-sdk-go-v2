@@ -141,7 +141,9 @@ func (v *ValidateStateMachineDefinitionOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ValidateStateMachineDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidateStateMachineDefinitionDiagnosticList(s, schemas.ValidateStateMachineDefinitionOutput_diagnostics, v.Diagnostics)
+	if v.Diagnostics != nil {
+		serializeValidateStateMachineDefinitionDiagnosticList(s, schemas.ValidateStateMachineDefinitionOutput_diagnostics, v.Diagnostics)
+	}
 	if v.Result != "" {
 		s.WriteString(schemas.ValidateStateMachineDefinitionOutput_result, string(v.Result))
 	}

@@ -105,7 +105,9 @@ func (v *TranslateTextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetLanguageCode != nil {
 		s.WriteString(schemas.TranslateTextRequest_TargetLanguageCode, *v.TargetLanguageCode)
 	}
-	serializeResourceNameList(s, schemas.TranslateTextRequest_TerminologyNames, v.TerminologyNames)
+	if v.TerminologyNames != nil {
+		serializeResourceNameList(s, schemas.TranslateTextRequest_TerminologyNames, v.TerminologyNames)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.TranslateTextRequest_Text, *v.Text)
 	}
@@ -153,7 +155,9 @@ func (v *TranslateTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AppliedSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAppliedTerminologyList(s, schemas.TranslateTextResponse_AppliedTerminologies, v.AppliedTerminologies)
+	if v.AppliedTerminologies != nil {
+		serializeAppliedTerminologyList(s, schemas.TranslateTextResponse_AppliedTerminologies, v.AppliedTerminologies)
+	}
 	if v.SourceLanguageCode != nil {
 		s.WriteString(schemas.TranslateTextResponse_SourceLanguageCode, *v.SourceLanguageCode)
 	}

@@ -105,7 +105,9 @@ func (v *DescribeStateMachineAliasOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeStateMachineAliasOutput_name, *v.Name)
 	}
-	serializeRoutingConfigurationList(s, schemas.DescribeStateMachineAliasOutput_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeRoutingConfigurationList(s, schemas.DescribeStateMachineAliasOutput_routingConfiguration, v.RoutingConfiguration)
+	}
 	if v.StateMachineAliasArn != nil {
 		s.WriteString(schemas.DescribeStateMachineAliasOutput_stateMachineAliasArn, *v.StateMachineAliasArn)
 	}

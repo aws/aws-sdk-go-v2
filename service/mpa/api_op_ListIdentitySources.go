@@ -85,7 +85,9 @@ func (v *ListIdentitySourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentitySourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentitySources(s, schemas.ListIdentitySourcesResponse_IdentitySources, v.IdentitySources)
+	if v.IdentitySources != nil {
+		serializeIdentitySources(s, schemas.ListIdentitySourcesResponse_IdentitySources, v.IdentitySources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdentitySourcesResponse_NextToken, *v.NextToken)
 	}

@@ -93,7 +93,9 @@ func (v *ListIdentityStoresOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentityStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityStores(s, schemas.ListIdentityStoresResponse_IdentityStores, v.IdentityStores)
+	if v.IdentityStores != nil {
+		serializeIdentityStores(s, schemas.ListIdentityStoresResponse_IdentityStores, v.IdentityStores)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdentityStoresResponse_NextToken, *v.NextToken)
 	}

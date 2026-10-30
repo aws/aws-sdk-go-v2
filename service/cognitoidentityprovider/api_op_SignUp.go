@@ -174,14 +174,18 @@ func (v *SignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientId != nil {
 		s.WriteString(schemas.SignUpRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.SignUpRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.SignUpRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.Password != nil {
 		s.WriteString(schemas.SignUpRequest_Password, *v.Password)
 	}
 	if v.SecretHash != nil {
 		s.WriteString(schemas.SignUpRequest_SecretHash, *v.SecretHash)
 	}
-	serializeAttributeListType(s, schemas.SignUpRequest_UserAttributes, v.UserAttributes)
+	if v.UserAttributes != nil {
+		serializeAttributeListType(s, schemas.SignUpRequest_UserAttributes, v.UserAttributes)
+	}
 	if v.UserContextData != nil {
 		s.WriteStruct(schemas.SignUpRequest_UserContextData)
 		v.UserContextData.SerializeMembers(s)
@@ -190,7 +194,9 @@ func (v *SignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Username != nil {
 		s.WriteString(schemas.SignUpRequest_Username, *v.Username)
 	}
-	serializeAttributeListType(s, schemas.SignUpRequest_ValidationData, v.ValidationData)
+	if v.ValidationData != nil {
+		serializeAttributeListType(s, schemas.SignUpRequest_ValidationData, v.ValidationData)
+	}
 }
 
 // The response from the server for a registration request.

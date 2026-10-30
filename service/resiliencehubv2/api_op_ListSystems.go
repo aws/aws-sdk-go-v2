@@ -85,7 +85,9 @@ func (v *ListSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSystemsResponse_nextToken, *v.NextToken)
 	}
-	serializeSystemSummaryList(s, schemas.ListSystemsResponse_systemSummaries, v.SystemSummaries)
+	if v.SystemSummaries != nil {
+		serializeSystemSummaryList(s, schemas.ListSystemsResponse_systemSummaries, v.SystemSummaries)
+	}
 }
 func (v *ListSystemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSystemsResponse, func(s *smithy.Schema) error {

@@ -127,7 +127,9 @@ func (v *GetFindingsReportAccountSummaryOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFindingsReportAccountSummaryResponse_nextToken, *v.NextToken)
 	}
-	serializeFindingsReportSummaries(s, schemas.GetFindingsReportAccountSummaryResponse_reportSummaries, v.ReportSummaries)
+	if v.ReportSummaries != nil {
+		serializeFindingsReportSummaries(s, schemas.GetFindingsReportAccountSummaryResponse_reportSummaries, v.ReportSummaries)
+	}
 }
 func (v *GetFindingsReportAccountSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingsReportAccountSummaryResponse, func(s *smithy.Schema) error {

@@ -86,7 +86,9 @@ func (v *ListIpRoutesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIpRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpRoutesInfo(s, schemas.ListIpRoutesResult_IpRoutesInfo, v.IpRoutesInfo)
+	if v.IpRoutesInfo != nil {
+		serializeIpRoutesInfo(s, schemas.ListIpRoutesResult_IpRoutesInfo, v.IpRoutesInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIpRoutesResult_NextToken, *v.NextToken)
 	}

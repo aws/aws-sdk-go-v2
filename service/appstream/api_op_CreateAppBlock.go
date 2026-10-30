@@ -103,7 +103,9 @@ func (v *CreateAppBlockInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceS3Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateAppBlockRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAppBlockRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAppBlockOutput struct {

@@ -61,7 +61,9 @@ func (v *SearchFoldersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchFoldersRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeFolderSearchFilterList(s, schemas.SearchFoldersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFolderSearchFilterList(s, schemas.SearchFoldersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchFoldersRequest_MaxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *SearchFoldersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchFoldersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFolderSummaryList(s, schemas.SearchFoldersResponse_FolderSummaryList, v.FolderSummaryList)
+	if v.FolderSummaryList != nil {
+		serializeFolderSummaryList(s, schemas.SearchFoldersResponse_FolderSummaryList, v.FolderSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchFoldersResponse_NextToken, *v.NextToken)
 	}

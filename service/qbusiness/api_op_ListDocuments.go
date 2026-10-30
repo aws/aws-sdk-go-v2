@@ -63,7 +63,9 @@ func (v *ListDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.ListDocumentsRequest_applicationId, *v.ApplicationId)
 	}
-	serializeDataSourceIds(s, schemas.ListDocumentsRequest_dataSourceIds, v.DataSourceIds)
+	if v.DataSourceIds != nil {
+		serializeDataSourceIds(s, schemas.ListDocumentsRequest_dataSourceIds, v.DataSourceIds)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.ListDocumentsRequest_indexId, *v.IndexId)
 	}
@@ -98,7 +100,9 @@ func (v *ListDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentDetailList(s, schemas.ListDocumentsResponse_documentDetailList, v.DocumentDetailList)
+	if v.DocumentDetailList != nil {
+		serializeDocumentDetailList(s, schemas.ListDocumentsResponse_documentDetailList, v.DocumentDetailList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDocumentsResponse_nextToken, *v.NextToken)
 	}

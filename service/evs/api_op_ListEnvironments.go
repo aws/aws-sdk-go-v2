@@ -61,7 +61,9 @@ func (v *ListEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentsRequest_nextToken, *v.NextToken)
 	}
-	serializeEnvironmentStateList(s, schemas.ListEnvironmentsRequest_state, v.State)
+	if v.State != nil {
+		serializeEnvironmentStateList(s, schemas.ListEnvironmentsRequest_state, v.State)
+	}
 }
 
 type ListEnvironmentsOutput struct {
@@ -86,7 +88,9 @@ func (v *ListEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentSummaryList(s, schemas.ListEnvironmentsResponse_environmentSummaries, v.EnvironmentSummaries)
+	if v.EnvironmentSummaries != nil {
+		serializeEnvironmentSummaryList(s, schemas.ListEnvironmentsResponse_environmentSummaries, v.EnvironmentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentsResponse_nextToken, *v.NextToken)
 	}

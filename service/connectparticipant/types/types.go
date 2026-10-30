@@ -253,7 +253,9 @@ func (v *Item) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AbsoluteTime != nil {
 		s.WriteString(schemas.Item_AbsoluteTime, *v.AbsoluteTime)
 	}
-	serializeAttachments(s, schemas.Item_Attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAttachments(s, schemas.Item_Attachments, v.Attachments)
+	}
 	if v.ContactId != nil {
 		s.WriteString(schemas.Item_ContactId, *v.ContactId)
 	}
@@ -399,7 +401,9 @@ func (v *MessageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MessageProcessingStatus != "" {
 		s.WriteString(schemas.MessageMetadata_MessageProcessingStatus, string(v.MessageProcessingStatus))
 	}
-	serializeReceipts(s, schemas.MessageMetadata_Receipts, v.Receipts)
+	if v.Receipts != nil {
+		serializeReceipts(s, schemas.MessageMetadata_Receipts, v.Receipts)
+	}
 }
 func (v *MessageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MessageMetadata, func(s *smithy.Schema) error {
@@ -583,7 +587,9 @@ func (v *UploadMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UploadMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUrlMetadataSignedHeaders(s, schemas.UploadMetadata_HeadersToInclude, v.HeadersToInclude)
+	if v.HeadersToInclude != nil {
+		serializeUrlMetadataSignedHeaders(s, schemas.UploadMetadata_HeadersToInclude, v.HeadersToInclude)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.UploadMetadata_Url, *v.Url)
 	}
@@ -702,7 +708,9 @@ func (v *ViewContent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ViewContent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeViewActions(s, schemas.ViewContent_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeViewActions(s, schemas.ViewContent_Actions, v.Actions)
+	}
 	if v.InputSchema != nil {
 		s.WriteString(schemas.ViewContent_InputSchema, *v.InputSchema)
 	}

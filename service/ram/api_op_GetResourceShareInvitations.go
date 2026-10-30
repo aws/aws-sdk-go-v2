@@ -78,8 +78,12 @@ func (v *GetResourceShareInvitationsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceShareInvitationsRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceShareArnList(s, schemas.GetResourceShareInvitationsRequest_resourceShareArns, v.ResourceShareArns)
-	serializeResourceShareInvitationArnList(s, schemas.GetResourceShareInvitationsRequest_resourceShareInvitationArns, v.ResourceShareInvitationArns)
+	if v.ResourceShareArns != nil {
+		serializeResourceShareArnList(s, schemas.GetResourceShareInvitationsRequest_resourceShareArns, v.ResourceShareArns)
+	}
+	if v.ResourceShareInvitationArns != nil {
+		serializeResourceShareInvitationArnList(s, schemas.GetResourceShareInvitationsRequest_resourceShareInvitationArns, v.ResourceShareInvitationArns)
+	}
 }
 
 type GetResourceShareInvitationsOutput struct {
@@ -110,7 +114,9 @@ func (v *GetResourceShareInvitationsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceShareInvitationsResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceShareInvitationList(s, schemas.GetResourceShareInvitationsResponse_resourceShareInvitations, v.ResourceShareInvitations)
+	if v.ResourceShareInvitations != nil {
+		serializeResourceShareInvitationList(s, schemas.GetResourceShareInvitationsResponse_resourceShareInvitations, v.ResourceShareInvitations)
+	}
 }
 func (v *GetResourceShareInvitationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceShareInvitationsResponse, func(s *smithy.Schema) error {

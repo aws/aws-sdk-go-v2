@@ -375,11 +375,15 @@ func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessTokenValidity != nil {
 		s.WriteInt32(schemas.CreateUserPoolClientRequest_AccessTokenValidity, *v.AccessTokenValidity)
 	}
-	serializeOAuthFlowsType(s, schemas.CreateUserPoolClientRequest_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	if v.AllowedOAuthFlows != nil {
+		serializeOAuthFlowsType(s, schemas.CreateUserPoolClientRequest_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	}
 	if v.AllowedOAuthFlowsUserPoolClient != false {
 		s.WriteBool(schemas.CreateUserPoolClientRequest_AllowedOAuthFlowsUserPoolClient, v.AllowedOAuthFlowsUserPoolClient)
 	}
-	serializeScopeListType(s, schemas.CreateUserPoolClientRequest_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	if v.AllowedOAuthScopes != nil {
+		serializeScopeListType(s, schemas.CreateUserPoolClientRequest_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	}
 	if v.AnalyticsConfiguration != nil {
 		s.WriteStruct(schemas.CreateUserPoolClientRequest_AnalyticsConfiguration)
 		v.AnalyticsConfiguration.SerializeMembers(s)
@@ -388,7 +392,9 @@ func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthSessionValidity != nil {
 		s.WriteInt32(schemas.CreateUserPoolClientRequest_AuthSessionValidity, *v.AuthSessionValidity)
 	}
-	serializeCallbackURLsListType(s, schemas.CreateUserPoolClientRequest_CallbackURLs, v.CallbackURLs)
+	if v.CallbackURLs != nil {
+		serializeCallbackURLsListType(s, schemas.CreateUserPoolClientRequest_CallbackURLs, v.CallbackURLs)
+	}
 	if v.ClientName != nil {
 		s.WriteString(schemas.CreateUserPoolClientRequest_ClientName, *v.ClientName)
 	}
@@ -404,18 +410,24 @@ func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableTokenRevocation != nil {
 		s.WriteBool(schemas.CreateUserPoolClientRequest_EnableTokenRevocation, *v.EnableTokenRevocation)
 	}
-	serializeExplicitAuthFlowsListType(s, schemas.CreateUserPoolClientRequest_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	if v.ExplicitAuthFlows != nil {
+		serializeExplicitAuthFlowsListType(s, schemas.CreateUserPoolClientRequest_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	}
 	if v.GenerateSecret != false {
 		s.WriteBool(schemas.CreateUserPoolClientRequest_GenerateSecret, v.GenerateSecret)
 	}
 	if v.IdTokenValidity != nil {
 		s.WriteInt32(schemas.CreateUserPoolClientRequest_IdTokenValidity, *v.IdTokenValidity)
 	}
-	serializeLogoutURLsListType(s, schemas.CreateUserPoolClientRequest_LogoutURLs, v.LogoutURLs)
+	if v.LogoutURLs != nil {
+		serializeLogoutURLsListType(s, schemas.CreateUserPoolClientRequest_LogoutURLs, v.LogoutURLs)
+	}
 	if v.PreventUserExistenceErrors != "" {
 		s.WriteString(schemas.CreateUserPoolClientRequest_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
 	}
-	serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_ReadAttributes, v.ReadAttributes)
+	if v.ReadAttributes != nil {
+		serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_ReadAttributes, v.ReadAttributes)
+	}
 	if v.RefreshTokenRotation != nil {
 		s.WriteStruct(schemas.CreateUserPoolClientRequest_RefreshTokenRotation)
 		v.RefreshTokenRotation.SerializeMembers(s)
@@ -424,7 +436,9 @@ func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RefreshTokenValidity != 0 {
 		s.WriteInt32(schemas.CreateUserPoolClientRequest_RefreshTokenValidity, v.RefreshTokenValidity)
 	}
-	serializeSupportedIdentityProvidersListType(s, schemas.CreateUserPoolClientRequest_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	if v.SupportedIdentityProviders != nil {
+		serializeSupportedIdentityProvidersListType(s, schemas.CreateUserPoolClientRequest_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	}
 	if v.TokenValidityUnits != nil {
 		s.WriteStruct(schemas.CreateUserPoolClientRequest_TokenValidityUnits)
 		v.TokenValidityUnits.SerializeMembers(s)
@@ -433,7 +447,9 @@ func (v *CreateUserPoolClientInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.CreateUserPoolClientRequest_UserPoolId, *v.UserPoolId)
 	}
-	serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_WriteAttributes, v.WriteAttributes)
+	if v.WriteAttributes != nil {
+		serializeClientPermissionListType(s, schemas.CreateUserPoolClientRequest_WriteAttributes, v.WriteAttributes)
+	}
 }
 
 // Represents the response from the server to create a user pool client.

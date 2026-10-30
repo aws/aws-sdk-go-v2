@@ -147,7 +147,9 @@ func (v *CreateDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateDomainConfigurationRequest_domainName, *v.DomainName)
 	}
-	serializeServerCertificateArns(s, schemas.CreateDomainConfigurationRequest_serverCertificateArns, v.ServerCertificateArns)
+	if v.ServerCertificateArns != nil {
+		serializeServerCertificateArns(s, schemas.CreateDomainConfigurationRequest_serverCertificateArns, v.ServerCertificateArns)
+	}
 	if v.ServerCertificateConfig != nil {
 		s.WriteStruct(schemas.CreateDomainConfigurationRequest_serverCertificateConfig)
 		v.ServerCertificateConfig.SerializeMembers(s)
@@ -156,7 +158,9 @@ func (v *CreateDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ServiceType != "" {
 		s.WriteString(schemas.CreateDomainConfigurationRequest_serviceType, string(v.ServiceType))
 	}
-	serializeTagList(s, schemas.CreateDomainConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDomainConfigurationRequest_tags, v.Tags)
+	}
 	if v.TlsConfig != nil {
 		s.WriteStruct(schemas.CreateDomainConfigurationRequest_tlsConfig)
 		v.TlsConfig.SerializeMembers(s)

@@ -87,8 +87,12 @@ func (v *CreateScheduledAuditInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScheduledAuditName != nil {
 		s.WriteString(schemas.CreateScheduledAuditRequest_scheduledAuditName, *v.ScheduledAuditName)
 	}
-	serializeTagList(s, schemas.CreateScheduledAuditRequest_tags, v.Tags)
-	serializeTargetAuditCheckNames(s, schemas.CreateScheduledAuditRequest_targetCheckNames, v.TargetCheckNames)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateScheduledAuditRequest_tags, v.Tags)
+	}
+	if v.TargetCheckNames != nil {
+		serializeTargetAuditCheckNames(s, schemas.CreateScheduledAuditRequest_targetCheckNames, v.TargetCheckNames)
+	}
 }
 
 type CreateScheduledAuditOutput struct {

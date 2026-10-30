@@ -125,13 +125,17 @@ func (v *UpdateProvisionedProductInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ProvisioningArtifactName != nil {
 		s.WriteString(schemas.UpdateProvisionedProductInput_ProvisioningArtifactName, *v.ProvisioningArtifactName)
 	}
-	serializeUpdateProvisioningParameters(s, schemas.UpdateProvisionedProductInput_ProvisioningParameters, v.ProvisioningParameters)
+	if v.ProvisioningParameters != nil {
+		serializeUpdateProvisioningParameters(s, schemas.UpdateProvisionedProductInput_ProvisioningParameters, v.ProvisioningParameters)
+	}
 	if v.ProvisioningPreferences != nil {
 		s.WriteStruct(schemas.UpdateProvisionedProductInput_ProvisioningPreferences)
 		v.ProvisioningPreferences.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.UpdateProvisionedProductInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateProvisionedProductInput_Tags, v.Tags)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProvisionedProductInput_UpdateToken, *v.UpdateToken)
 	}

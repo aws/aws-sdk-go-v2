@@ -107,7 +107,9 @@ func (v *ListMedicalScribeJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMedicalScribeJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeJobSummaries(s, schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries, v.MedicalScribeJobSummaries)
+	if v.MedicalScribeJobSummaries != nil {
+		serializeMedicalScribeJobSummaries(s, schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries, v.MedicalScribeJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMedicalScribeJobsResponse_NextToken, *v.NextToken)
 	}

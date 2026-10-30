@@ -54,7 +54,9 @@ func (v *DescribeConfigRulesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConfigRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigRuleNames(s, schemas.DescribeConfigRulesRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.ConfigRuleNames != nil {
+		serializeConfigRuleNames(s, schemas.DescribeConfigRulesRequest_ConfigRuleNames, v.ConfigRuleNames)
+	}
 	if v.Filters != nil {
 		s.WriteStruct(schemas.DescribeConfigRulesRequest_Filters)
 		v.Filters.SerializeMembers(s)
@@ -87,7 +89,9 @@ func (v *DescribeConfigRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConfigRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigRules(s, schemas.DescribeConfigRulesResponse_ConfigRules, v.ConfigRules)
+	if v.ConfigRules != nil {
+		serializeConfigRules(s, schemas.DescribeConfigRulesResponse_ConfigRules, v.ConfigRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConfigRulesResponse_NextToken, *v.NextToken)
 	}

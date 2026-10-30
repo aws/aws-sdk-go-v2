@@ -102,7 +102,9 @@ func (v *CreateUpdatedImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NewImageName != nil {
 		s.WriteString(schemas.CreateUpdatedImageRequest_newImageName, *v.NewImageName)
 	}
-	serializeTags(s, schemas.CreateUpdatedImageRequest_newImageTags, v.NewImageTags)
+	if v.NewImageTags != nil {
+		serializeTags(s, schemas.CreateUpdatedImageRequest_newImageTags, v.NewImageTags)
+	}
 }
 
 type CreateUpdatedImageOutput struct {

@@ -83,8 +83,12 @@ func (v *CreateApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApiKeyRequest_name, *v.Name)
 	}
-	serializeListOfStageKeys(s, schemas.CreateApiKeyRequest_stageKeys, v.StageKeys)
-	serializeMapOfStringToString(s, schemas.CreateApiKeyRequest_tags, v.Tags)
+	if v.StageKeys != nil {
+		serializeListOfStageKeys(s, schemas.CreateApiKeyRequest_stageKeys, v.StageKeys)
+	}
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.CreateApiKeyRequest_tags, v.Tags)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.CreateApiKeyRequest_value, *v.Value)
 	}
@@ -161,8 +165,12 @@ func (v *CreateApiKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ApiKey_name, *v.Name)
 	}
-	serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
-	serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	if v.StageKeys != nil {
+		serializeListOfString(s, schemas.ApiKey_stageKeys, v.StageKeys)
+	}
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.ApiKey_tags, v.Tags)
+	}
 	if v.Value != nil {
 		s.WriteString(schemas.ApiKey_value, *v.Value)
 	}

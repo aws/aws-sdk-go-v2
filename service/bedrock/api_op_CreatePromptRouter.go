@@ -86,7 +86,9 @@ func (v *CreatePromptRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FallbackModel.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePromptRouterTargetModels(s, schemas.CreatePromptRouterRequest_models, v.Models)
+	if v.Models != nil {
+		serializePromptRouterTargetModels(s, schemas.CreatePromptRouterRequest_models, v.Models)
+	}
 	if v.PromptRouterName != nil {
 		s.WriteString(schemas.CreatePromptRouterRequest_promptRouterName, *v.PromptRouterName)
 	}
@@ -95,7 +97,9 @@ func (v *CreatePromptRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RoutingCriteria.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreatePromptRouterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePromptRouterRequest_tags, v.Tags)
+	}
 }
 
 type CreatePromptRouterOutput struct {

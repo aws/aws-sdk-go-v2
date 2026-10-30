@@ -89,7 +89,9 @@ func (v *GetClustersForImageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetClustersForImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterInformationList(s, schemas.GetClustersForImageResponse_cluster, v.Cluster)
+	if v.Cluster != nil {
+		serializeClusterInformationList(s, schemas.GetClustersForImageResponse_cluster, v.Cluster)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetClustersForImageResponse_nextToken, *v.NextToken)
 	}

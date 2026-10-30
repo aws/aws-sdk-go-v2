@@ -76,7 +76,9 @@ func (v *CancelJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CancelJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CancelJobsRequest_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeStringList(s, schemas.CancelJobsRequest_jobs, v.Jobs)
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.CancelJobsRequest_reason, *v.Reason)
 	}
@@ -111,8 +113,12 @@ func (v *CancelJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CancelJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCancelJobsErrorDetailList(s, schemas.CancelJobsResponse_errors, v.Errors)
-	serializeStringList(s, schemas.CancelJobsResponse_successful, v.Successful)
+	if v.Errors != nil {
+		serializeCancelJobsErrorDetailList(s, schemas.CancelJobsResponse_errors, v.Errors)
+	}
+	if v.Successful != nil {
+		serializeStringList(s, schemas.CancelJobsResponse_successful, v.Successful)
+	}
 }
 func (v *CancelJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CancelJobsResponse, func(s *smithy.Schema) error {

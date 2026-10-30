@@ -90,7 +90,9 @@ func (v *CreatePublicDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Properties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreatePublicDnsNamespaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePublicDnsNamespaceRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePublicDnsNamespaceOutput struct {

@@ -101,7 +101,9 @@ func (v *ListSystemVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSystemVersionsOutput_nextToken, *v.NextToken)
 	}
-	serializeSystemVersionList(s, schemas.ListSystemVersionsOutput_systemVersions, v.SystemVersions)
+	if v.SystemVersions != nil {
+		serializeSystemVersionList(s, schemas.ListSystemVersionsOutput_systemVersions, v.SystemVersions)
+	}
 }
 func (v *ListSystemVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSystemVersionsOutput, func(s *smithy.Schema) error {

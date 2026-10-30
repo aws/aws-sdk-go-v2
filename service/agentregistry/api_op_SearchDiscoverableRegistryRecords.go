@@ -75,7 +75,9 @@ func (v *SearchDiscoverableRegistryRecordsInput) SerializeMembers(s smithy.Shape
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchDiscoverableRegistryRecordsRequest_maxResults, *v.MaxResults)
 	}
-	serializeRegistryIdList(s, schemas.SearchDiscoverableRegistryRecordsRequest_registryIds, v.RegistryIds)
+	if v.RegistryIds != nil {
+		serializeRegistryIdList(s, schemas.SearchDiscoverableRegistryRecordsRequest_registryIds, v.RegistryIds)
+	}
 	if v.SearchQuery != nil {
 		s.WriteString(schemas.SearchDiscoverableRegistryRecordsRequest_searchQuery, *v.SearchQuery)
 	}
@@ -101,7 +103,9 @@ func (v *SearchDiscoverableRegistryRecordsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *SearchDiscoverableRegistryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryRecordSummaryList(s, schemas.SearchDiscoverableRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	if v.RegistryRecords != nil {
+		serializeRegistryRecordSummaryList(s, schemas.SearchDiscoverableRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	}
 }
 func (v *SearchDiscoverableRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchDiscoverableRegistryRecordsResponse, func(s *smithy.Schema) error {

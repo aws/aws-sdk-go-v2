@@ -303,14 +303,20 @@ func (v *CreateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAcrConfigurationType(s, schemas.CreateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
+	if v.AcrConfiguration != nil {
+		serializeAcrConfigurationType(s, schemas.CreateUserPoolRequest_AcrConfiguration, v.AcrConfiguration)
+	}
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.CreateUserPoolRequest_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAliasAttributesListType(s, schemas.CreateUserPoolRequest_AliasAttributes, v.AliasAttributes)
-	serializeVerifiedAttributesListType(s, schemas.CreateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.AliasAttributes != nil {
+		serializeAliasAttributesListType(s, schemas.CreateUserPoolRequest_AliasAttributes, v.AliasAttributes)
+	}
+	if v.AutoVerifiedAttributes != nil {
+		serializeVerifiedAttributesListType(s, schemas.CreateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	}
 	if v.DeletionProtection != "" {
 		s.WriteString(schemas.CreateUserPoolRequest_DeletionProtection, string(v.DeletionProtection))
 	}
@@ -356,7 +362,9 @@ func (v *CreateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoolName != nil {
 		s.WriteString(schemas.CreateUserPoolRequest_PoolName, *v.PoolName)
 	}
-	serializeSchemaAttributesListType(s, schemas.CreateUserPoolRequest_Schema, v.Schema)
+	if v.Schema != nil {
+		serializeSchemaAttributesListType(s, schemas.CreateUserPoolRequest_Schema, v.Schema)
+	}
 	if v.SmsAuthenticationMessage != nil {
 		s.WriteString(schemas.CreateUserPoolRequest_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
 	}
@@ -378,11 +386,15 @@ func (v *CreateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.UserPoolAddOns.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserPoolTagsType(s, schemas.CreateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTags != nil {
+		serializeUserPoolTagsType(s, schemas.CreateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	}
 	if v.UserPoolTier != "" {
 		s.WriteString(schemas.CreateUserPoolRequest_UserPoolTier, string(v.UserPoolTier))
 	}
-	serializeUsernameAttributesListType(s, schemas.CreateUserPoolRequest_UsernameAttributes, v.UsernameAttributes)
+	if v.UsernameAttributes != nil {
+		serializeUsernameAttributesListType(s, schemas.CreateUserPoolRequest_UsernameAttributes, v.UsernameAttributes)
+	}
 	if v.UsernameConfiguration != nil {
 		s.WriteStruct(schemas.CreateUserPoolRequest_UsernameConfiguration)
 		v.UsernameConfiguration.SerializeMembers(s)

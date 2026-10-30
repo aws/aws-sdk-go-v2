@@ -78,7 +78,9 @@ func (v *GetApplicationComponentStrategiesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GetApplicationComponentStrategiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationComponentStrategies(s, schemas.GetApplicationComponentStrategiesResponse_applicationComponentStrategies, v.ApplicationComponentStrategies)
+	if v.ApplicationComponentStrategies != nil {
+		serializeApplicationComponentStrategies(s, schemas.GetApplicationComponentStrategiesResponse_applicationComponentStrategies, v.ApplicationComponentStrategies)
+	}
 }
 func (v *GetApplicationComponentStrategiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationComponentStrategiesResponse, func(s *smithy.Schema) error {

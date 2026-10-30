@@ -104,7 +104,9 @@ func (v *ListObjectChildrenOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListObjectChildrenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkNameToObjectIdentifierMap(s, schemas.ListObjectChildrenResponse_Children, v.Children)
+	if v.Children != nil {
+		serializeLinkNameToObjectIdentifierMap(s, schemas.ListObjectChildrenResponse_Children, v.Children)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListObjectChildrenResponse_NextToken, *v.NextToken)
 	}

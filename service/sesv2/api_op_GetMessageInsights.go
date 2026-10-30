@@ -88,11 +88,15 @@ func (v *GetMessageInsightsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMessageInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTagList(s, schemas.GetMessageInsightsResponse_EmailTags, v.EmailTags)
+	if v.EmailTags != nil {
+		serializeMessageTagList(s, schemas.GetMessageInsightsResponse_EmailTags, v.EmailTags)
+	}
 	if v.FromEmailAddress != nil {
 		s.WriteString(schemas.GetMessageInsightsResponse_FromEmailAddress, *v.FromEmailAddress)
 	}
-	serializeEmailInsightsList(s, schemas.GetMessageInsightsResponse_Insights, v.Insights)
+	if v.Insights != nil {
+		serializeEmailInsightsList(s, schemas.GetMessageInsightsResponse_Insights, v.Insights)
+	}
 	if v.MessageId != nil {
 		s.WriteString(schemas.GetMessageInsightsResponse_MessageId, *v.MessageId)
 	}

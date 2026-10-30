@@ -65,7 +65,9 @@ func (v *CreateDataSetExportTaskInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDataSetExportTaskRequest_clientToken, *v.ClientToken)
 	}
-	serializeDataSetExportConfig(s, schemas.CreateDataSetExportTaskRequest_exportConfig, v.ExportConfig)
+	if v.ExportConfig != nil {
+		serializeDataSetExportConfig(s, schemas.CreateDataSetExportTaskRequest_exportConfig, v.ExportConfig)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateDataSetExportTaskRequest_kmsKeyId, *v.KmsKeyId)
 	}

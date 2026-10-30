@@ -791,9 +791,6 @@ func deserializeVirtualServiceProvider(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func serializeAwsCloudMapInstanceAttributes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AwsCloudMapInstanceAttribute) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -804,9 +801,6 @@ func serializeAwsCloudMapInstanceAttributes(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeBackends(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Backend) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeBackend(s, schema.ListMember(), vv)
@@ -815,9 +809,6 @@ func serializeBackends(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeCertificateAuthorityArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -826,9 +817,6 @@ func serializeCertificateAuthorityArns(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeGatewayRouteList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GatewayRouteRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -839,9 +827,6 @@ func serializeGatewayRouteList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeGrpcGatewayRouteMetadataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GrpcGatewayRouteMetadata) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -852,9 +837,6 @@ func serializeGrpcGatewayRouteMetadataList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeGrpcRetryPolicyEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GrpcRetryPolicyEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -863,9 +845,6 @@ func serializeGrpcRetryPolicyEvents(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeGrpcRouteMetadataList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GrpcRouteMetadata) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -876,9 +855,6 @@ func serializeGrpcRouteMetadataList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeHttpGatewayRouteHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HttpGatewayRouteHeader) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -889,9 +865,6 @@ func serializeHttpGatewayRouteHeaders(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeHttpQueryParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HttpQueryParameter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -902,9 +875,6 @@ func serializeHttpQueryParameters(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeHttpRetryPolicyEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -913,9 +883,6 @@ func serializeHttpRetryPolicyEvents(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeHttpRouteHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HttpRouteHeader) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -926,9 +893,6 @@ func serializeHttpRouteHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeJsonFormat(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.JsonFormatRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -939,9 +903,6 @@ func serializeJsonFormat(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeListeners(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Listener) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -952,9 +913,6 @@ func serializeListeners(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeMeshList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MeshRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -965,9 +923,6 @@ func serializeMeshList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializePortSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteInt32(schema.ListMember(), int32(vv))
@@ -976,9 +931,6 @@ func serializePortSet(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32
 }
 
 func serializeRouteList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -989,9 +941,6 @@ func serializeRouteList(s smithy.ShapeSerializer, schema *smithy.Schema, v []typ
 }
 
 func serializeSubjectAlternativeNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1000,9 +949,6 @@ func serializeSubjectAlternativeNameList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1011,9 +957,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TagRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1024,9 +967,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeTcpRetryPolicyEvents(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TcpRetryPolicyEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1035,9 +975,6 @@ func serializeTcpRetryPolicyEvents(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeVirtualGatewayCertificateAuthorityArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -1046,9 +983,6 @@ func serializeVirtualGatewayCertificateAuthorityArns(s smithy.ShapeSerializer, s
 }
 
 func serializeVirtualGatewayList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VirtualGatewayRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1059,9 +993,6 @@ func serializeVirtualGatewayList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeVirtualGatewayListeners(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VirtualGatewayListener) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1072,9 +1003,6 @@ func serializeVirtualGatewayListeners(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeVirtualNodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VirtualNodeRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1085,9 +1013,6 @@ func serializeVirtualNodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeVirtualRouterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VirtualRouterRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1098,9 +1023,6 @@ func serializeVirtualRouterList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeVirtualRouterListeners(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VirtualRouterListener) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1111,9 +1033,6 @@ func serializeVirtualRouterListeners(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeVirtualServiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.VirtualServiceRef) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -1124,9 +1043,6 @@ func serializeVirtualServiceList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeWeightedTargets(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WeightedTarget) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

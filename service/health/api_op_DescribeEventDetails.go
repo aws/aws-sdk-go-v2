@@ -64,7 +64,9 @@ func (v *DescribeEventDetailsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeeventArnList(s, schemas.DescribeEventDetailsRequest_eventArns, v.EventArns)
+	if v.EventArns != nil {
+		serializeeventArnList(s, schemas.DescribeEventDetailsRequest_eventArns, v.EventArns)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.DescribeEventDetailsRequest_locale, *v.Locale)
 	}
@@ -91,8 +93,12 @@ func (v *DescribeEventDetailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescribeEventDetailsFailedSet(s, schemas.DescribeEventDetailsResponse_failedSet, v.FailedSet)
-	serializeDescribeEventDetailsSuccessfulSet(s, schemas.DescribeEventDetailsResponse_successfulSet, v.SuccessfulSet)
+	if v.FailedSet != nil {
+		serializeDescribeEventDetailsFailedSet(s, schemas.DescribeEventDetailsResponse_failedSet, v.FailedSet)
+	}
+	if v.SuccessfulSet != nil {
+		serializeDescribeEventDetailsSuccessfulSet(s, schemas.DescribeEventDetailsResponse_successfulSet, v.SuccessfulSet)
+	}
 }
 func (v *DescribeEventDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEventDetailsResponse, func(s *smithy.Schema) error {

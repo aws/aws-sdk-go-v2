@@ -54,7 +54,9 @@ func (v *PutItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetArn != nil {
 		s.WriteString(schemas.PutItemsRequest_datasetArn, *v.DatasetArn)
 	}
-	serializeItemList(s, schemas.PutItemsRequest_items, v.Items)
+	if v.Items != nil {
+		serializeItemList(s, schemas.PutItemsRequest_items, v.Items)
+	}
 }
 
 type PutItemsOutput struct {

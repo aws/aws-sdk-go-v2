@@ -73,7 +73,9 @@ func (v *UpdateTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleReferenceList(s, schemas.UpdateTemplateInput_associatedRuleList, v.AssociatedRuleList)
+	if v.AssociatedRuleList != nil {
+		serializeRuleReferenceList(s, schemas.UpdateTemplateInput_associatedRuleList, v.AssociatedRuleList)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateTemplateInput_clientToken, *v.ClientToken)
 	}
@@ -159,7 +161,9 @@ func (v *UpdateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedRuleList(s, schemas.UpdateTemplateOutput_associatedRuleList, v.AssociatedRuleList)
+	if v.AssociatedRuleList != nil {
+		serializeAssociatedRuleList(s, schemas.UpdateTemplateOutput_associatedRuleList, v.AssociatedRuleList)
+	}
 	if v.FirewallType != "" {
 		s.WriteString(schemas.UpdateTemplateOutput_firewallType, string(v.FirewallType))
 	}

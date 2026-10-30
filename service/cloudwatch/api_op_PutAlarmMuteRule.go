@@ -126,7 +126,9 @@ func (v *PutAlarmMuteRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartDate != nil {
 		s.WriteTime(schemas.PutAlarmMuteRuleInput_StartDate, *v.StartDate)
 	}
-	serializeTagList(s, schemas.PutAlarmMuteRuleInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutAlarmMuteRuleInput_Tags, v.Tags)
+	}
 }
 
 type PutAlarmMuteRuleOutput struct {

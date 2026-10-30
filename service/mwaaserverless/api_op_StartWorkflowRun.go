@@ -71,7 +71,9 @@ func (v *StartWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartWorkflowRunRequest_ClientToken, *v.ClientToken)
 	}
-	serializeObjectMap(s, schemas.StartWorkflowRunRequest_OverrideParameters, v.OverrideParameters)
+	if v.OverrideParameters != nil {
+		serializeObjectMap(s, schemas.StartWorkflowRunRequest_OverrideParameters, v.OverrideParameters)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.StartWorkflowRunRequest_WorkflowArn, *v.WorkflowArn)
 	}

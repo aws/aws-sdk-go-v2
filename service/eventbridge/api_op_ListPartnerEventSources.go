@@ -103,7 +103,9 @@ func (v *ListPartnerEventSourcesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPartnerEventSourcesResponse_NextToken, *v.NextToken)
 	}
-	serializePartnerEventSourceList(s, schemas.ListPartnerEventSourcesResponse_PartnerEventSources, v.PartnerEventSources)
+	if v.PartnerEventSources != nil {
+		serializePartnerEventSourceList(s, schemas.ListPartnerEventSourcesResponse_PartnerEventSources, v.PartnerEventSources)
+	}
 }
 func (v *ListPartnerEventSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPartnerEventSourcesResponse, func(s *smithy.Schema) error {

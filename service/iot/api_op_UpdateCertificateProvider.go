@@ -54,7 +54,9 @@ func (v *UpdateCertificateProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateCertificateProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateProviderAccountDefaultForOperations(s, schemas.UpdateCertificateProviderRequest_accountDefaultForOperations, v.AccountDefaultForOperations)
+	if v.AccountDefaultForOperations != nil {
+		serializeCertificateProviderAccountDefaultForOperations(s, schemas.UpdateCertificateProviderRequest_accountDefaultForOperations, v.AccountDefaultForOperations)
+	}
 	if v.CertificateProviderName != nil {
 		s.WriteString(schemas.UpdateCertificateProviderRequest_certificateProviderName, *v.CertificateProviderName)
 	}

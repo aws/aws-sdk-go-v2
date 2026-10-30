@@ -95,7 +95,9 @@ func (v *CreateLocationNfsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationNfsRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationNfsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationNfsRequest_Tags, v.Tags)
+	}
 }
 
 // CreateLocationNfsResponse

@@ -62,12 +62,18 @@ func (v *CreateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTaskInput_clientToken, *v.ClientToken)
 	}
-	serializeCommand(s, schemas.CreateTaskInput_command, v.Command)
+	if v.Command != nil {
+		serializeCommand(s, schemas.CreateTaskInput_command, v.Command)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateTaskInput_description, *v.Description)
 	}
-	serializeTagMap(s, schemas.CreateTaskInput_tags, v.Tags)
-	serializeTargetList(s, schemas.CreateTaskInput_targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTaskInput_tags, v.Tags)
+	}
+	if v.Targets != nil {
+		serializeTargetList(s, schemas.CreateTaskInput_targets, v.Targets)
+	}
 }
 func (v *CreateTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateTaskInput, func(s *smithy.Schema) error {

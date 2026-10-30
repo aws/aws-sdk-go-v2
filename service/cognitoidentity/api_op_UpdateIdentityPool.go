@@ -90,7 +90,9 @@ func (v *UpdateIdentityPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteBool(schemas.IdentityPool_AllowClassicFlow, *v.AllowClassicFlow)
 	}
 	s.WriteBool(schemas.IdentityPool_AllowUnauthenticatedIdentities, v.AllowUnauthenticatedIdentities)
-	serializeCognitoIdentityProviderList(s, schemas.IdentityPool_CognitoIdentityProviders, v.CognitoIdentityProviders)
+	if v.CognitoIdentityProviders != nil {
+		serializeCognitoIdentityProviderList(s, schemas.IdentityPool_CognitoIdentityProviders, v.CognitoIdentityProviders)
+	}
 	if v.DeveloperProviderName != nil {
 		s.WriteString(schemas.IdentityPool_DeveloperProviderName, *v.DeveloperProviderName)
 	}
@@ -100,10 +102,18 @@ func (v *UpdateIdentityPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityPoolName != nil {
 		s.WriteString(schemas.IdentityPool_IdentityPoolName, *v.IdentityPoolName)
 	}
-	serializeIdentityPoolTagsType(s, schemas.IdentityPool_IdentityPoolTags, v.IdentityPoolTags)
-	serializeOIDCProviderList(s, schemas.IdentityPool_OpenIdConnectProviderARNs, v.OpenIdConnectProviderARNs)
-	serializeSAMLProviderList(s, schemas.IdentityPool_SamlProviderARNs, v.SamlProviderARNs)
-	serializeIdentityProviders(s, schemas.IdentityPool_SupportedLoginProviders, v.SupportedLoginProviders)
+	if v.IdentityPoolTags != nil {
+		serializeIdentityPoolTagsType(s, schemas.IdentityPool_IdentityPoolTags, v.IdentityPoolTags)
+	}
+	if v.OpenIdConnectProviderARNs != nil {
+		serializeOIDCProviderList(s, schemas.IdentityPool_OpenIdConnectProviderARNs, v.OpenIdConnectProviderARNs)
+	}
+	if v.SamlProviderARNs != nil {
+		serializeSAMLProviderList(s, schemas.IdentityPool_SamlProviderARNs, v.SamlProviderARNs)
+	}
+	if v.SupportedLoginProviders != nil {
+		serializeIdentityProviders(s, schemas.IdentityPool_SupportedLoginProviders, v.SupportedLoginProviders)
+	}
 }
 func (v *UpdateIdentityPoolInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdentityPool, func(s *smithy.Schema) error {
@@ -199,7 +209,9 @@ func (v *UpdateIdentityPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteBool(schemas.IdentityPool_AllowClassicFlow, *v.AllowClassicFlow)
 	}
 	s.WriteBool(schemas.IdentityPool_AllowUnauthenticatedIdentities, v.AllowUnauthenticatedIdentities)
-	serializeCognitoIdentityProviderList(s, schemas.IdentityPool_CognitoIdentityProviders, v.CognitoIdentityProviders)
+	if v.CognitoIdentityProviders != nil {
+		serializeCognitoIdentityProviderList(s, schemas.IdentityPool_CognitoIdentityProviders, v.CognitoIdentityProviders)
+	}
 	if v.DeveloperProviderName != nil {
 		s.WriteString(schemas.IdentityPool_DeveloperProviderName, *v.DeveloperProviderName)
 	}
@@ -209,10 +221,18 @@ func (v *UpdateIdentityPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityPoolName != nil {
 		s.WriteString(schemas.IdentityPool_IdentityPoolName, *v.IdentityPoolName)
 	}
-	serializeIdentityPoolTagsType(s, schemas.IdentityPool_IdentityPoolTags, v.IdentityPoolTags)
-	serializeOIDCProviderList(s, schemas.IdentityPool_OpenIdConnectProviderARNs, v.OpenIdConnectProviderARNs)
-	serializeSAMLProviderList(s, schemas.IdentityPool_SamlProviderARNs, v.SamlProviderARNs)
-	serializeIdentityProviders(s, schemas.IdentityPool_SupportedLoginProviders, v.SupportedLoginProviders)
+	if v.IdentityPoolTags != nil {
+		serializeIdentityPoolTagsType(s, schemas.IdentityPool_IdentityPoolTags, v.IdentityPoolTags)
+	}
+	if v.OpenIdConnectProviderARNs != nil {
+		serializeOIDCProviderList(s, schemas.IdentityPool_OpenIdConnectProviderARNs, v.OpenIdConnectProviderARNs)
+	}
+	if v.SamlProviderARNs != nil {
+		serializeSAMLProviderList(s, schemas.IdentityPool_SamlProviderARNs, v.SamlProviderARNs)
+	}
+	if v.SupportedLoginProviders != nil {
+		serializeIdentityProviders(s, schemas.IdentityPool_SupportedLoginProviders, v.SupportedLoginProviders)
+	}
 }
 func (v *UpdateIdentityPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IdentityPool, func(s *smithy.Schema) error {

@@ -122,7 +122,9 @@ func (v *ListStreamSessionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStreamSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamSessionSummaryList(s, schemas.ListStreamSessionsOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeStreamSessionSummaryList(s, schemas.ListStreamSessionsOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStreamSessionsOutput_NextToken, *v.NextToken)
 	}

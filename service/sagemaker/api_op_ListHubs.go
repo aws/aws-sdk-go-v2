@@ -121,7 +121,9 @@ func (v *ListHubsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHubsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHubInfoList(s, schemas.ListHubsResponse_HubSummaries, v.HubSummaries)
+	if v.HubSummaries != nil {
+		serializeHubInfoList(s, schemas.ListHubsResponse_HubSummaries, v.HubSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHubsResponse_NextToken, *v.NextToken)
 	}

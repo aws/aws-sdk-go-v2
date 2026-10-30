@@ -269,7 +269,9 @@ func (v *Beaconing) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataRate != nil {
 		s.WriteInt32(schemas.Beaconing_DataRate, *v.DataRate)
 	}
-	serializeBeaconingFrequencies(s, schemas.Beaconing_Frequencies, v.Frequencies)
+	if v.Frequencies != nil {
+		serializeBeaconingFrequencies(s, schemas.Beaconing_Frequencies, v.Frequencies)
+	}
 }
 func (v *Beaconing) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Beaconing, func(s *smithy.Schema) error {
@@ -453,7 +455,9 @@ func (v *CdmaObj) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CdmaLocalId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCdmaNmrList(s, schemas.CdmaObj_CdmaNmr, v.CdmaNmr)
+	if v.CdmaNmr != nil {
+		serializeCdmaNmrList(s, schemas.CdmaObj_CdmaNmr, v.CdmaNmr)
+	}
 	if v.NetworkId != nil {
 		s.WriteInt32(schemas.CdmaObj_NetworkId, *v.NetworkId)
 	}
@@ -529,11 +533,21 @@ func (v *CellTowers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CellTowers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCdmaList(s, schemas.CellTowers_Cdma, v.Cdma)
-	serializeGsmList(s, schemas.CellTowers_Gsm, v.Gsm)
-	serializeLteList(s, schemas.CellTowers_Lte, v.Lte)
-	serializeTdscdmaList(s, schemas.CellTowers_Tdscdma, v.Tdscdma)
-	serializeWcdmaList(s, schemas.CellTowers_Wcdma, v.Wcdma)
+	if v.Cdma != nil {
+		serializeCdmaList(s, schemas.CellTowers_Cdma, v.Cdma)
+	}
+	if v.Gsm != nil {
+		serializeGsmList(s, schemas.CellTowers_Gsm, v.Gsm)
+	}
+	if v.Lte != nil {
+		serializeLteList(s, schemas.CellTowers_Lte, v.Lte)
+	}
+	if v.Tdscdma != nil {
+		serializeTdscdmaList(s, schemas.CellTowers_Tdscdma, v.Tdscdma)
+	}
+	if v.Wcdma != nil {
+		serializeWcdmaList(s, schemas.CellTowers_Wcdma, v.Wcdma)
+	}
 }
 func (v *CellTowers) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CellTowers, func(s *smithy.Schema) error {
@@ -1288,7 +1302,9 @@ func (v *FPorts) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FPorts) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplications(s, schemas.FPorts_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplications(s, schemas.FPorts_Applications, v.Applications)
+	}
 	if v.ClockSync != nil {
 		s.WriteInt32(schemas.FPorts_ClockSync, *v.ClockSync)
 	}
@@ -1461,7 +1477,9 @@ func (v *FuotaTaskLogOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FuotaTaskLogOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFuotaTaskEventLogOptionList(s, schemas.FuotaTaskLogOption_Events, v.Events)
+	if v.Events != nil {
+		serializeFuotaTaskEventLogOptionList(s, schemas.FuotaTaskLogOption_Events, v.Events)
+	}
 	if v.LogLevel != "" {
 		s.WriteString(schemas.FuotaTaskLogOption_LogLevel, string(v.LogLevel))
 	}
@@ -1629,7 +1647,9 @@ func (v *Gnss) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistAltitude != nil {
 		s.WriteFloat32(schemas.Gnss_AssistAltitude, *v.AssistAltitude)
 	}
-	serializeAssistPosition(s, schemas.Gnss_AssistPosition, v.AssistPosition)
+	if v.AssistPosition != nil {
+		serializeAssistPosition(s, schemas.Gnss_AssistPosition, v.AssistPosition)
+	}
 	if v.CaptureTime != nil {
 		s.WriteFloat32(schemas.Gnss_CaptureTime, *v.CaptureTime)
 	}
@@ -1756,11 +1776,15 @@ func (v *GnssMultiFrame) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistAltitude != nil {
 		s.WriteFloat32(schemas.GnssMultiFrame_AssistAltitude, *v.AssistAltitude)
 	}
-	serializeAssistPosition(s, schemas.GnssMultiFrame_AssistPosition, v.AssistPosition)
+	if v.AssistPosition != nil {
+		serializeAssistPosition(s, schemas.GnssMultiFrame_AssistPosition, v.AssistPosition)
+	}
 	if v.CaptureTimeAccuracy != nil {
 		s.WriteFloat32(schemas.GnssMultiFrame_CaptureTimeAccuracy, *v.CaptureTimeAccuracy)
 	}
-	serializeGnssCaptures(s, schemas.GnssMultiFrame_Captures, v.Captures)
+	if v.Captures != nil {
+		serializeGnssCaptures(s, schemas.GnssMultiFrame_Captures, v.Captures)
+	}
 	if v.Use2DSolver != false {
 		s.WriteBool(schemas.GnssMultiFrame_Use2DSolver, v.Use2DSolver)
 	}
@@ -1950,7 +1974,9 @@ func (v *GsmObj) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GsmLocalId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGsmNmrList(s, schemas.GsmObj_GsmNmr, v.GsmNmr)
+	if v.GsmNmr != nil {
+		serializeGsmNmrList(s, schemas.GsmObj_GsmNmr, v.GsmNmr)
+	}
 	if v.GsmTimingAdvance != nil {
 		s.WriteInt32(schemas.GsmObj_GsmTimingAdvance, *v.GsmTimingAdvance)
 	}
@@ -2430,8 +2456,12 @@ func (v *LoRaWANDeviceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Frequency != nil {
 		s.WriteInt32(schemas.LoRaWANDeviceMetadata_Frequency, *v.Frequency)
 	}
-	serializeLoRaWANGatewayMetadataList(s, schemas.LoRaWANDeviceMetadata_Gateways, v.Gateways)
-	serializeLoRaWANPublicGatewayMetadataList(s, schemas.LoRaWANDeviceMetadata_PublicGateways, v.PublicGateways)
+	if v.Gateways != nil {
+		serializeLoRaWANGatewayMetadataList(s, schemas.LoRaWANDeviceMetadata_Gateways, v.Gateways)
+	}
+	if v.PublicGateways != nil {
+		serializeLoRaWANPublicGatewayMetadataList(s, schemas.LoRaWANDeviceMetadata_PublicGateways, v.PublicGateways)
+	}
 	if v.Timestamp != nil {
 		s.WriteString(schemas.LoRaWANDeviceMetadata_Timestamp, *v.Timestamp)
 	}
@@ -2540,7 +2570,9 @@ func (v *LoRaWANDeviceProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClassCTimeout != nil {
 		s.WriteInt32(schemas.LoRaWANDeviceProfile_ClassCTimeout, *v.ClassCTimeout)
 	}
-	serializeFactoryPresetFreqsList(s, schemas.LoRaWANDeviceProfile_FactoryPresetFreqsList, v.FactoryPresetFreqsList)
+	if v.FactoryPresetFreqsList != nil {
+		serializeFactoryPresetFreqsList(s, schemas.LoRaWANDeviceProfile_FactoryPresetFreqsList, v.FactoryPresetFreqsList)
+	}
 	if v.MacVersion != nil {
 		s.WriteString(schemas.LoRaWANDeviceProfile_MacVersion, *v.MacVersion)
 	}
@@ -2770,15 +2802,21 @@ func (v *LoRaWANGateway) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayEui != nil {
 		s.WriteString(schemas.LoRaWANGateway_GatewayEui, *v.GatewayEui)
 	}
-	serializeJoinEuiFilters(s, schemas.LoRaWANGateway_JoinEuiFilters, v.JoinEuiFilters)
+	if v.JoinEuiFilters != nil {
+		serializeJoinEuiFilters(s, schemas.LoRaWANGateway_JoinEuiFilters, v.JoinEuiFilters)
+	}
 	if v.MaxEirp != nil {
 		s.WriteFloat32(schemas.LoRaWANGateway_MaxEirp, *v.MaxEirp)
 	}
-	serializeNetIdFilters(s, schemas.LoRaWANGateway_NetIdFilters, v.NetIdFilters)
+	if v.NetIdFilters != nil {
+		serializeNetIdFilters(s, schemas.LoRaWANGateway_NetIdFilters, v.NetIdFilters)
+	}
 	if v.RfRegion != nil {
 		s.WriteString(schemas.LoRaWANGateway_RfRegion, *v.RfRegion)
 	}
-	serializeSubBands(s, schemas.LoRaWANGateway_SubBands, v.SubBands)
+	if v.SubBands != nil {
+		serializeSubBands(s, schemas.LoRaWANGateway_SubBands, v.SubBands)
+	}
 }
 func (v *LoRaWANGateway) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LoRaWANGateway, func(s *smithy.Schema) error {
@@ -4146,7 +4184,9 @@ func (v *LteObj) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LteLocalId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLteNmrList(s, schemas.LteObj_LteNmr, v.LteNmr)
+	if v.LteNmr != nil {
+		serializeLteNmrList(s, schemas.LteObj_LteNmr, v.LteNmr)
+	}
 	if v.LteTimingAdvance != nil {
 		s.WriteInt32(schemas.LteObj_LteTimingAdvance, *v.LteTimingAdvance)
 	}
@@ -4668,7 +4708,9 @@ func (v *ParticipatingGateways) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DownlinkMode != "" {
 		s.WriteString(schemas.ParticipatingGateways_DownlinkMode, string(v.DownlinkMode))
 	}
-	serializeGatewayList(s, schemas.ParticipatingGateways_GatewayList, v.GatewayList)
+	if v.GatewayList != nil {
+		serializeGatewayList(s, schemas.ParticipatingGateways_GatewayList, v.GatewayList)
+	}
 	if v.TransmissionInterval != nil {
 		s.WriteInt32(schemas.ParticipatingGateways_TransmissionInterval, *v.TransmissionInterval)
 	}
@@ -4719,7 +4761,9 @@ func (v *ParticipatingGatewaysMulticast) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParticipatingGatewaysMulticast) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewayListMulticast(s, schemas.ParticipatingGatewaysMulticast_GatewayList, v.GatewayList)
+	if v.GatewayList != nil {
+		serializeGatewayListMulticast(s, schemas.ParticipatingGatewaysMulticast_GatewayList, v.GatewayList)
+	}
 	if v.TransmissionInterval != nil {
 		s.WriteInt32(schemas.ParticipatingGatewaysMulticast_TransmissionInterval, *v.TransmissionInterval)
 	}
@@ -5480,7 +5524,9 @@ func (v *SidewalkDevice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateId != nil {
 		s.WriteString(schemas.SidewalkDevice_CertificateId, *v.CertificateId)
 	}
-	serializeDeviceCertificateList(s, schemas.SidewalkDevice_DeviceCertificates, v.DeviceCertificates)
+	if v.DeviceCertificates != nil {
+		serializeDeviceCertificateList(s, schemas.SidewalkDevice_DeviceCertificates, v.DeviceCertificates)
+	}
 	if v.DeviceProfileId != nil {
 		s.WriteString(schemas.SidewalkDevice_DeviceProfileId, *v.DeviceProfileId)
 	}
@@ -5489,7 +5535,9 @@ func (v *SidewalkDevice) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Positioning.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrivateKeysList(s, schemas.SidewalkDevice_PrivateKeys, v.PrivateKeys)
+	if v.PrivateKeys != nil {
+		serializePrivateKeysList(s, schemas.SidewalkDevice_PrivateKeys, v.PrivateKeys)
+	}
 	if v.SidewalkId != nil {
 		s.WriteString(schemas.SidewalkDevice_SidewalkId, *v.SidewalkId)
 	}
@@ -5668,7 +5716,9 @@ func (v *SidewalkGetDeviceProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationServerPublicKey != nil {
 		s.WriteString(schemas.SidewalkGetDeviceProfile_ApplicationServerPublicKey, *v.ApplicationServerPublicKey)
 	}
-	serializeDakCertificateMetadataList(s, schemas.SidewalkGetDeviceProfile_DakCertificateMetadata, v.DakCertificateMetadata)
+	if v.DakCertificateMetadata != nil {
+		serializeDakCertificateMetadataList(s, schemas.SidewalkGetDeviceProfile_DakCertificateMetadata, v.DakCertificateMetadata)
+	}
 	if v.QualificationStatus != nil {
 		s.WriteBool(schemas.SidewalkGetDeviceProfile_QualificationStatus, *v.QualificationStatus)
 	}
@@ -5713,7 +5763,9 @@ func (v *SidewalkGetStartImportInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SidewalkGetStartImportInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceCreationFileList(s, schemas.SidewalkGetStartImportInfo_DeviceCreationFileList, v.DeviceCreationFileList)
+	if v.DeviceCreationFileList != nil {
+		serializeDeviceCreationFileList(s, schemas.SidewalkGetStartImportInfo_DeviceCreationFileList, v.DeviceCreationFileList)
+	}
 	if v.Positioning != nil {
 		s.WriteStruct(schemas.SidewalkGetStartImportInfo_Positioning)
 		v.Positioning.SerializeMembers(s)
@@ -5776,7 +5828,9 @@ func (v *SidewalkListDevice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AmazonId != nil {
 		s.WriteString(schemas.SidewalkListDevice_AmazonId, *v.AmazonId)
 	}
-	serializeDeviceCertificateList(s, schemas.SidewalkListDevice_DeviceCertificates, v.DeviceCertificates)
+	if v.DeviceCertificates != nil {
+		serializeDeviceCertificateList(s, schemas.SidewalkListDevice_DeviceCertificates, v.DeviceCertificates)
+	}
 	if v.DeviceProfileId != nil {
 		s.WriteString(schemas.SidewalkListDevice_DeviceProfileId, *v.DeviceProfileId)
 	}
@@ -6242,7 +6296,9 @@ func (v *SummaryMetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregationPeriod != "" {
 		s.WriteString(schemas.SummaryMetricQuery_AggregationPeriod, string(v.AggregationPeriod))
 	}
-	serializeDimensions(s, schemas.SummaryMetricQuery_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.SummaryMetricQuery_Dimensions, v.Dimensions)
+	}
 	if v.EndTimestamp != nil {
 		s.WriteTime(schemas.SummaryMetricQuery_EndTimestamp, *v.EndTimestamp)
 	}
@@ -6338,7 +6394,9 @@ func (v *SummaryMetricQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregationPeriod != "" {
 		s.WriteString(schemas.SummaryMetricQueryResult_AggregationPeriod, string(v.AggregationPeriod))
 	}
-	serializeDimensions(s, schemas.SummaryMetricQueryResult_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.SummaryMetricQueryResult_Dimensions, v.Dimensions)
+	}
 	if v.EndTimestamp != nil {
 		s.WriteTime(schemas.SummaryMetricQueryResult_EndTimestamp, *v.EndTimestamp)
 	}
@@ -6357,11 +6415,15 @@ func (v *SummaryMetricQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTimestamp != nil {
 		s.WriteTime(schemas.SummaryMetricQueryResult_StartTimestamp, *v.StartTimestamp)
 	}
-	serializeMetricQueryTimestamps(s, schemas.SummaryMetricQueryResult_Timestamps, v.Timestamps)
+	if v.Timestamps != nil {
+		serializeMetricQueryTimestamps(s, schemas.SummaryMetricQueryResult_Timestamps, v.Timestamps)
+	}
 	if v.Unit != nil {
 		s.WriteString(schemas.SummaryMetricQueryResult_Unit, *v.Unit)
 	}
-	serializeMetricQueryValues(s, schemas.SummaryMetricQueryResult_Values, v.Values)
+	if v.Values != nil {
+		serializeMetricQueryValues(s, schemas.SummaryMetricQueryResult_Values, v.Values)
+	}
 }
 func (v *SummaryMetricQueryResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SummaryMetricQueryResult, func(s *smithy.Schema) error {
@@ -6643,7 +6705,9 @@ func (v *TdscdmaObj) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TdscdmaLocalId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTdscdmaNmrList(s, schemas.TdscdmaObj_TdscdmaNmr, v.TdscdmaNmr)
+	if v.TdscdmaNmr != nil {
+		serializeTdscdmaNmrList(s, schemas.TdscdmaObj_TdscdmaNmr, v.TdscdmaNmr)
+	}
 	if v.TdscdmaTimingAdvance != nil {
 		s.WriteInt32(schemas.TdscdmaObj_TdscdmaTimingAdvance, *v.TdscdmaTimingAdvance)
 	}
@@ -6834,7 +6898,9 @@ func (v *UpdateFPorts) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFPorts) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplications(s, schemas.UpdateFPorts_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplications(s, schemas.UpdateFPorts_Applications, v.Applications)
+	}
 	if v.Positioning != nil {
 		s.WriteStruct(schemas.UpdateFPorts_Positioning)
 		v.Positioning.SerializeMembers(s)
@@ -7141,7 +7207,9 @@ func (v *WcdmaObj) SerializeMembers(s smithy.ShapeSerializer) {
 		v.WcdmaLocalId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWcdmaNmrList(s, schemas.WcdmaObj_WcdmaNmr, v.WcdmaNmr)
+	if v.WcdmaNmr != nil {
+		serializeWcdmaNmrList(s, schemas.WcdmaObj_WcdmaNmr, v.WcdmaNmr)
+	}
 }
 func (v *WcdmaObj) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WcdmaObj, func(s *smithy.Schema) error {
@@ -7493,7 +7561,9 @@ func (v *WirelessDeviceLogOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WirelessDeviceLogOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWirelessDeviceEventLogOptionList(s, schemas.WirelessDeviceLogOption_Events, v.Events)
+	if v.Events != nil {
+		serializeWirelessDeviceEventLogOptionList(s, schemas.WirelessDeviceLogOption_Events, v.Events)
+	}
 	if v.LogLevel != "" {
 		s.WriteString(schemas.WirelessDeviceLogOption_LogLevel, string(v.LogLevel))
 	}
@@ -7761,7 +7831,9 @@ func (v *WirelessGatewayLogOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WirelessGatewayLogOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWirelessGatewayEventLogOptionList(s, schemas.WirelessGatewayLogOption_Events, v.Events)
+	if v.Events != nil {
+		serializeWirelessGatewayEventLogOptionList(s, schemas.WirelessGatewayLogOption_Events, v.Events)
+	}
 	if v.LogLevel != "" {
 		s.WriteString(schemas.WirelessGatewayLogOption_LogLevel, string(v.LogLevel))
 	}

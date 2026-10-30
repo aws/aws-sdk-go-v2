@@ -54,7 +54,9 @@ func (v *UpdateEc2DeepInspectionConfigurationInput) SerializeMembers(s smithy.Sh
 	if v.ActivateDeepInspection != nil {
 		s.WriteBool(schemas.UpdateEc2DeepInspectionConfigurationRequest_activateDeepInspection, *v.ActivateDeepInspection)
 	}
-	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationRequest_packagePaths, v.PackagePaths)
+	if v.PackagePaths != nil {
+		serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationRequest_packagePaths, v.PackagePaths)
+	}
 }
 
 type UpdateEc2DeepInspectionConfigurationOutput struct {
@@ -88,8 +90,12 @@ func (v *UpdateEc2DeepInspectionConfigurationOutput) SerializeMembers(s smithy.S
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.UpdateEc2DeepInspectionConfigurationResponse_errorMessage, *v.ErrorMessage)
 	}
-	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths, v.OrgPackagePaths)
-	serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths, v.PackagePaths)
+	if v.OrgPackagePaths != nil {
+		serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_orgPackagePaths, v.OrgPackagePaths)
+	}
+	if v.PackagePaths != nil {
+		serializePathList(s, schemas.UpdateEc2DeepInspectionConfigurationResponse_packagePaths, v.PackagePaths)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateEc2DeepInspectionConfigurationResponse_status, string(v.Status))
 	}

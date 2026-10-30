@@ -114,7 +114,9 @@ func (v *DescribeCodeCoveragesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCodeCoveragesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeCoverages(s, schemas.DescribeCodeCoveragesOutput_codeCoverages, v.CodeCoverages)
+	if v.CodeCoverages != nil {
+		serializeCodeCoverages(s, schemas.DescribeCodeCoveragesOutput_codeCoverages, v.CodeCoverages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeCodeCoveragesOutput_nextToken, *v.NextToken)
 	}

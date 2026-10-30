@@ -89,7 +89,9 @@ func (v *ListProfileAttributeValuesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.DomainName != nil {
 		s.WriteString(schemas.ProfileAttributeValuesResponse_DomainName, *v.DomainName)
 	}
-	serializeAttributeValueItemList(s, schemas.ProfileAttributeValuesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeAttributeValueItemList(s, schemas.ProfileAttributeValuesResponse_Items, v.Items)
+	}
 	if v.StatusCode != 0 {
 		s.WriteInt32(schemas.ProfileAttributeValuesResponse_StatusCode, v.StatusCode)
 	}

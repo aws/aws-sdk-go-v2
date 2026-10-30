@@ -151,7 +151,9 @@ func (v *CreateContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateContainerRecipeRequest_clientToken, *v.ClientToken)
 	}
-	serializeComponentConfigurationList(s, schemas.CreateContainerRecipeRequest_components, v.Components)
+	if v.Components != nil {
+		serializeComponentConfigurationList(s, schemas.CreateContainerRecipeRequest_components, v.Components)
+	}
 	if v.ContainerType != "" {
 		s.WriteString(schemas.CreateContainerRecipeRequest_containerType, string(v.ContainerType))
 	}
@@ -190,7 +192,9 @@ func (v *CreateContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.CreateContainerRecipeRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeTagMap(s, schemas.CreateContainerRecipeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateContainerRecipeRequest_tags, v.Tags)
+	}
 	if v.TargetRepository != nil {
 		s.WriteStruct(schemas.CreateContainerRecipeRequest_targetRepository)
 		v.TargetRepository.SerializeMembers(s)

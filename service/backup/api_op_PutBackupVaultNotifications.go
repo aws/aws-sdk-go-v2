@@ -60,7 +60,9 @@ func (v *PutBackupVaultNotificationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutBackupVaultNotificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupVaultEvents(s, schemas.PutBackupVaultNotificationsInput_BackupVaultEvents, v.BackupVaultEvents)
+	if v.BackupVaultEvents != nil {
+		serializeBackupVaultEvents(s, schemas.PutBackupVaultNotificationsInput_BackupVaultEvents, v.BackupVaultEvents)
+	}
 	if v.BackupVaultName != nil {
 		s.WriteString(schemas.PutBackupVaultNotificationsInput_BackupVaultName, *v.BackupVaultName)
 	}

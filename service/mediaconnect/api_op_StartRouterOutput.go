@@ -91,7 +91,9 @@ func (v *StartRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.StartRouterOutputResponse_Arn, *v.Arn)
 	}
-	serializeMaintenanceSchedule(s, schemas.StartRouterOutputResponse_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.StartRouterOutputResponse_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.StartRouterOutputResponse_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}

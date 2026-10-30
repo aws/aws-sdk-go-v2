@@ -136,7 +136,9 @@ func (v *ImportVmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SemanticVersion != nil {
 		s.WriteString(schemas.ImportVmImageRequest_semanticVersion, *v.SemanticVersion)
 	}
-	serializeTagMap(s, schemas.ImportVmImageRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportVmImageRequest_tags, v.Tags)
+	}
 	if v.VmImportTaskId != nil {
 		s.WriteString(schemas.ImportVmImageRequest_vmImportTaskId, *v.VmImportTaskId)
 	}

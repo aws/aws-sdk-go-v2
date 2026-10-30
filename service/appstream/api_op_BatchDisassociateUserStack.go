@@ -43,7 +43,9 @@ func (v *BatchDisassociateUserStackInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDisassociateUserStackInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserStackAssociationList(s, schemas.BatchDisassociateUserStackRequest_UserStackAssociations, v.UserStackAssociations)
+	if v.UserStackAssociations != nil {
+		serializeUserStackAssociationList(s, schemas.BatchDisassociateUserStackRequest_UserStackAssociations, v.UserStackAssociations)
+	}
 }
 
 type BatchDisassociateUserStackOutput struct {
@@ -64,7 +66,9 @@ func (v *BatchDisassociateUserStackOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDisassociateUserStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserStackAssociationErrorList(s, schemas.BatchDisassociateUserStackResult_errors, v.Errors)
+	if v.Errors != nil {
+		serializeUserStackAssociationErrorList(s, schemas.BatchDisassociateUserStackResult_errors, v.Errors)
+	}
 }
 func (v *BatchDisassociateUserStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisassociateUserStackResult, func(s *smithy.Schema) error {

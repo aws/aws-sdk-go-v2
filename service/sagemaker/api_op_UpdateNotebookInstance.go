@@ -150,8 +150,12 @@ func (v *UpdateNotebookInstanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateNotebookInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotebookInstanceAcceleratorTypes(s, schemas.UpdateNotebookInstanceInput_AcceleratorTypes, v.AcceleratorTypes)
-	serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.UpdateNotebookInstanceInput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	if v.AcceleratorTypes != nil {
+		serializeNotebookInstanceAcceleratorTypes(s, schemas.UpdateNotebookInstanceInput_AcceleratorTypes, v.AcceleratorTypes)
+	}
+	if v.AdditionalCodeRepositories != nil {
+		serializeAdditionalCodeRepositoryNamesOrUrls(s, schemas.UpdateNotebookInstanceInput_AdditionalCodeRepositories, v.AdditionalCodeRepositories)
+	}
 	if v.DefaultCodeRepository != nil {
 		s.WriteString(schemas.UpdateNotebookInstanceInput_DefaultCodeRepository, *v.DefaultCodeRepository)
 	}

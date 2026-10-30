@@ -56,8 +56,12 @@ func (v *BatchDescribeUserLimitsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AccountId != nil {
 		s.WriteString(schemas.BatchDescribeUserLimitsRequest_accountId, *v.AccountId)
 	}
-	serializeResourceTypeList(s, schemas.BatchDescribeUserLimitsRequest_resourceTypes, v.ResourceTypes)
-	serializeBatchDescribeUserLimitsRequestUsersList(s, schemas.BatchDescribeUserLimitsRequest_users, v.Users)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.BatchDescribeUserLimitsRequest_resourceTypes, v.ResourceTypes)
+	}
+	if v.Users != nil {
+		serializeBatchDescribeUserLimitsRequestUsersList(s, schemas.BatchDescribeUserLimitsRequest_users, v.Users)
+	}
 }
 
 type BatchDescribeUserLimitsOutput struct {
@@ -86,8 +90,12 @@ func (v *BatchDescribeUserLimitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDescribeUserLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeUserLimitsErrorList(s, schemas.BatchDescribeUserLimitsResponse_errors, v.Errors)
-	serializeUserLimitsList(s, schemas.BatchDescribeUserLimitsResponse_userLimits, v.UserLimits)
+	if v.Errors != nil {
+		serializeBatchDescribeUserLimitsErrorList(s, schemas.BatchDescribeUserLimitsResponse_errors, v.Errors)
+	}
+	if v.UserLimits != nil {
+		serializeUserLimitsList(s, schemas.BatchDescribeUserLimitsResponse_userLimits, v.UserLimits)
+	}
 }
 func (v *BatchDescribeUserLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDescribeUserLimitsResponse, func(s *smithy.Schema) error {

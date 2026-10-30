@@ -48,7 +48,9 @@ func (v *NullAndEmptyHeadersServerInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.B != nil {
 		s.WriteString(schemas.NullAndEmptyHeadersIO_b, *v.B)
 	}
-	serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+	if v.C != nil {
+		serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+	}
 }
 func (v *NullAndEmptyHeadersServerInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NullAndEmptyHeadersIO, func(s *smithy.Schema) error {
@@ -92,7 +94,9 @@ func (v *NullAndEmptyHeadersServerOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.B != nil {
 		s.WriteString(schemas.NullAndEmptyHeadersIO_b, *v.B)
 	}
-	serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+	if v.C != nil {
+		serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+	}
 }
 func (v *NullAndEmptyHeadersServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NullAndEmptyHeadersIO, func(s *smithy.Schema) error {

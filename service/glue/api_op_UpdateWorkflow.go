@@ -59,7 +59,9 @@ func (v *UpdateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowRunProperties(s, schemas.UpdateWorkflowRequest_DefaultRunProperties, v.DefaultRunProperties)
+	if v.DefaultRunProperties != nil {
+		serializeWorkflowRunProperties(s, schemas.UpdateWorkflowRequest_DefaultRunProperties, v.DefaultRunProperties)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateWorkflowRequest_Description, *v.Description)
 	}

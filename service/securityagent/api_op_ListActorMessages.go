@@ -104,7 +104,9 @@ func (v *ListActorMessagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListActorMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActorMessageList(s, schemas.ListActorMessagesOutput_messages, v.Messages)
+	if v.Messages != nil {
+		serializeActorMessageList(s, schemas.ListActorMessagesOutput_messages, v.Messages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListActorMessagesOutput_nextToken, *v.NextToken)
 	}

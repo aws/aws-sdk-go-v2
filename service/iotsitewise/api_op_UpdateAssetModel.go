@@ -138,21 +138,27 @@ func (v *UpdateAssetModelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAssetModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetModelCompositeModels(s, schemas.UpdateAssetModelRequest_assetModelCompositeModels, v.AssetModelCompositeModels)
+	if v.AssetModelCompositeModels != nil {
+		serializeAssetModelCompositeModels(s, schemas.UpdateAssetModelRequest_assetModelCompositeModels, v.AssetModelCompositeModels)
+	}
 	if v.AssetModelDescription != nil {
 		s.WriteString(schemas.UpdateAssetModelRequest_assetModelDescription, *v.AssetModelDescription)
 	}
 	if v.AssetModelExternalId != nil {
 		s.WriteString(schemas.UpdateAssetModelRequest_assetModelExternalId, *v.AssetModelExternalId)
 	}
-	serializeAssetModelHierarchies(s, schemas.UpdateAssetModelRequest_assetModelHierarchies, v.AssetModelHierarchies)
+	if v.AssetModelHierarchies != nil {
+		serializeAssetModelHierarchies(s, schemas.UpdateAssetModelRequest_assetModelHierarchies, v.AssetModelHierarchies)
+	}
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.UpdateAssetModelRequest_assetModelId, *v.AssetModelId)
 	}
 	if v.AssetModelName != nil {
 		s.WriteString(schemas.UpdateAssetModelRequest_assetModelName, *v.AssetModelName)
 	}
-	serializeAssetModelProperties(s, schemas.UpdateAssetModelRequest_assetModelProperties, v.AssetModelProperties)
+	if v.AssetModelProperties != nil {
+		serializeAssetModelProperties(s, schemas.UpdateAssetModelRequest_assetModelProperties, v.AssetModelProperties)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateAssetModelRequest_clientToken, *v.ClientToken)
 	}

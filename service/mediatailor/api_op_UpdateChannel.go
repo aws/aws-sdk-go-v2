@@ -64,7 +64,9 @@ func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiences(s, schemas.UpdateChannelRequest_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.UpdateChannelRequest_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.UpdateChannelRequest_ChannelName, *v.ChannelName)
 	}
@@ -73,7 +75,9 @@ func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FillerSlate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestOutputs(s, schemas.UpdateChannelRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeRequestOutputs(s, schemas.UpdateChannelRequest_Outputs, v.Outputs)
+	}
 	if v.TimeShiftConfiguration != nil {
 		s.WriteStruct(schemas.UpdateChannelRequest_TimeShiftConfiguration)
 		v.TimeShiftConfiguration.SerializeMembers(s)
@@ -167,7 +171,9 @@ func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateChannelResponse_Arn, *v.Arn)
 	}
-	serializeAudiences(s, schemas.UpdateChannelResponse_Audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.UpdateChannelResponse_Audiences, v.Audiences)
+	}
 	if v.ChannelName != nil {
 		s.WriteString(schemas.UpdateChannelResponse_ChannelName, *v.ChannelName)
 	}
@@ -185,11 +191,15 @@ func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.UpdateChannelResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeResponseOutputs(s, schemas.UpdateChannelResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeResponseOutputs(s, schemas.UpdateChannelResponse_Outputs, v.Outputs)
+	}
 	if v.PlaybackMode != nil {
 		s.WriteString(schemas.UpdateChannelResponse_PlaybackMode, *v.PlaybackMode)
 	}
-	serialize__mapOf__string(s, schemas.UpdateChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.UpdateChannelResponse_Tags, v.Tags)
+	}
 	if v.Tier != nil {
 		s.WriteString(schemas.UpdateChannelResponse_Tier, *v.Tier)
 	}

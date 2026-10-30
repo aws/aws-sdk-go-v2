@@ -97,7 +97,9 @@ func (v *UpdateBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Cors.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePartnerIdList(s, schemas.UpdateBucketRequest_readonlyAccessAccounts, v.ReadonlyAccessAccounts)
+	if v.ReadonlyAccessAccounts != nil {
+		serializePartnerIdList(s, schemas.UpdateBucketRequest_readonlyAccessAccounts, v.ReadonlyAccessAccounts)
+	}
 	if v.Versioning != nil {
 		s.WriteString(schemas.UpdateBucketRequest_versioning, *v.Versioning)
 	}
@@ -131,7 +133,9 @@ func (v *UpdateBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Bucket.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOperationList(s, schemas.UpdateBucketResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.UpdateBucketResult_operations, v.Operations)
+	}
 }
 func (v *UpdateBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateBucketResult, func(s *smithy.Schema) error {

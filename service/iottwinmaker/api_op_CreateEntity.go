@@ -72,8 +72,12 @@ func (v *CreateEntityInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentsMapRequest(s, schemas.CreateEntityRequest_components, v.Components)
-	serializeCompositeComponentsMapRequest(s, schemas.CreateEntityRequest_compositeComponents, v.CompositeComponents)
+	if v.Components != nil {
+		serializeComponentsMapRequest(s, schemas.CreateEntityRequest_components, v.Components)
+	}
+	if v.CompositeComponents != nil {
+		serializeCompositeComponentsMapRequest(s, schemas.CreateEntityRequest_compositeComponents, v.CompositeComponents)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEntityRequest_description, *v.Description)
 	}
@@ -86,7 +90,9 @@ func (v *CreateEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentEntityId != nil {
 		s.WriteString(schemas.CreateEntityRequest_parentEntityId, *v.ParentEntityId)
 	}
-	serializeTagMap(s, schemas.CreateEntityRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEntityRequest_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.CreateEntityRequest_workspaceId, *v.WorkspaceId)
 	}

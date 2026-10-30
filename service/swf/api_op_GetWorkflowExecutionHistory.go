@@ -142,7 +142,9 @@ func (v *GetWorkflowExecutionHistoryOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetWorkflowExecutionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHistoryEventList(s, schemas.History_events, v.Events)
+	if v.Events != nil {
+		serializeHistoryEventList(s, schemas.History_events, v.Events)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.History_nextPageToken, *v.NextPageToken)
 	}

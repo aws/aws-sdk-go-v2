@@ -84,7 +84,9 @@ func (v *GetServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CrossRegionDiscoveryHomeRegion != nil {
 		s.WriteString(schemas.GetServiceSettingsResponse_CrossRegionDiscoveryHomeRegion, *v.CrossRegionDiscoveryHomeRegion)
 	}
-	serializeStringList(s, schemas.GetServiceSettingsResponse_CrossRegionDiscoverySourceRegions, v.CrossRegionDiscoverySourceRegions)
+	if v.CrossRegionDiscoverySourceRegions != nil {
+		serializeStringList(s, schemas.GetServiceSettingsResponse_CrossRegionDiscoverySourceRegions, v.CrossRegionDiscoverySourceRegions)
+	}
 	if v.EnableCrossAccountsDiscovery != nil {
 		s.WriteBool(schemas.GetServiceSettingsResponse_EnableCrossAccountsDiscovery, *v.EnableCrossAccountsDiscovery)
 	}

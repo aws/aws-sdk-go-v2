@@ -64,7 +64,9 @@ func (v *ListPolicyEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListPolicyEventsRequest_endTime, *v.EndTime)
 	}
-	serializePolicyEventTypeList(s, schemas.ListPolicyEventsRequest_eventTypes, v.EventTypes)
+	if v.EventTypes != nil {
+		serializePolicyEventTypeList(s, schemas.ListPolicyEventsRequest_eventTypes, v.EventTypes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListPolicyEventsRequest_maxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *ListPolicyEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPolicyEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyEventList(s, schemas.ListPolicyEventsResponse_events, v.Events)
+	if v.Events != nil {
+		serializePolicyEventList(s, schemas.ListPolicyEventsResponse_events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyEventsResponse_nextToken, *v.NextToken)
 	}

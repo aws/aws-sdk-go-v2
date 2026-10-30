@@ -53,7 +53,9 @@ func (v *UpdateCodeSecurityIntegrationInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateCodeSecurityIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateIntegrationDetails(s, schemas.UpdateCodeSecurityIntegrationRequest_details, v.Details)
+	if v.Details != nil {
+		serializeUpdateIntegrationDetails(s, schemas.UpdateCodeSecurityIntegrationRequest_details, v.Details)
+	}
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.UpdateCodeSecurityIntegrationRequest_integrationArn, *v.IntegrationArn)
 	}

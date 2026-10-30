@@ -119,12 +119,18 @@ func (v *ExportAutoScalingGroupRecommendationsInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ExportAutoScalingGroupRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportAutoScalingGroupRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableAutoScalingGroupFields(s, schemas.ExportAutoScalingGroupRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportAutoScalingGroupRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableAutoScalingGroupFields(s, schemas.ExportAutoScalingGroupRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportAutoScalingGroupRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeFilters(s, schemas.ExportAutoScalingGroupRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ExportAutoScalingGroupRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportAutoScalingGroupRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

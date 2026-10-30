@@ -72,7 +72,9 @@ func (v *UpdateLicenseAssetRulesetInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateLicenseAssetRulesetRequest_Name, *v.Name)
 	}
-	serializeLicenseAssetRuleList(s, schemas.UpdateLicenseAssetRulesetRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeLicenseAssetRuleList(s, schemas.UpdateLicenseAssetRulesetRequest_Rules, v.Rules)
+	}
 }
 
 type UpdateLicenseAssetRulesetOutput struct {

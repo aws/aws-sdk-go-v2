@@ -96,7 +96,9 @@ func (v *CreateNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NodeConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputTagMap(s, schemas.CreateNodeInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagMap(s, schemas.CreateNodeInput_Tags, v.Tags)
+	}
 }
 
 type CreateNodeOutput struct {

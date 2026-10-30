@@ -117,7 +117,9 @@ func (v *ListActiveViolationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListActiveViolationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActiveViolations(s, schemas.ListActiveViolationsResponse_activeViolations, v.ActiveViolations)
+	if v.ActiveViolations != nil {
+		serializeActiveViolations(s, schemas.ListActiveViolationsResponse_activeViolations, v.ActiveViolations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListActiveViolationsResponse_nextToken, *v.NextToken)
 	}

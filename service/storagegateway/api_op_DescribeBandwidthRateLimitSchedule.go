@@ -91,7 +91,9 @@ func (v *DescribeBandwidthRateLimitScheduleOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeBandwidthRateLimitScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBandwidthRateLimitIntervals(s, schemas.DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals, v.BandwidthRateLimitIntervals)
+	if v.BandwidthRateLimitIntervals != nil {
+		serializeBandwidthRateLimitIntervals(s, schemas.DescribeBandwidthRateLimitScheduleOutput_BandwidthRateLimitIntervals, v.BandwidthRateLimitIntervals)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.DescribeBandwidthRateLimitScheduleOutput_GatewayARN, *v.GatewayARN)
 	}

@@ -101,7 +101,9 @@ func (v *ListApplicationAccessScopesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationAccessScopesResponse_NextToken, *v.NextToken)
 	}
-	serializeScopes(s, schemas.ListApplicationAccessScopesResponse_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeScopes(s, schemas.ListApplicationAccessScopesResponse_Scopes, v.Scopes)
+	}
 }
 func (v *ListApplicationAccessScopesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListApplicationAccessScopesResponse, func(s *smithy.Schema) error {

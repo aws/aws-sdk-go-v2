@@ -93,7 +93,9 @@ func (v *ListOmniDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOmniDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOmniDashboardSummaryList(s, schemas.ListOmniDashboardsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeOmniDashboardSummaryList(s, schemas.ListOmniDashboardsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOmniDashboardsOutput_nextToken, *v.NextToken)
 	}

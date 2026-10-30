@@ -78,7 +78,9 @@ func (v *StartUserAccessTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartUserAccessTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserAccessTasksList(s, schemas.StartUserAccessTasksResponse_userAccessTasksList, v.UserAccessTasksList)
+	if v.UserAccessTasksList != nil {
+		serializeUserAccessTasksList(s, schemas.StartUserAccessTasksResponse_userAccessTasksList, v.UserAccessTasksList)
+	}
 }
 func (v *StartUserAccessTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartUserAccessTasksResponse, func(s *smithy.Schema) error {

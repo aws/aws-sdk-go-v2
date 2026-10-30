@@ -104,7 +104,9 @@ func (v *UpdateBudgetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationType != "" {
 		s.WriteString(schemas.UpdateBudgetActionRequest_NotificationType, string(v.NotificationType))
 	}
-	serializeSubscribers(s, schemas.UpdateBudgetActionRequest_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serializeSubscribers(s, schemas.UpdateBudgetActionRequest_Subscribers, v.Subscribers)
+	}
 }
 
 type UpdateBudgetActionOutput struct {

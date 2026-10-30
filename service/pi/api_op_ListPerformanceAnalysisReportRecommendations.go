@@ -87,7 +87,9 @@ func (v *ListPerformanceAnalysisReportRecommendationsInput) SerializeMembers(s s
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsRequest_NextToken, *v.NextToken)
 	}
-	serializeRecommendationIdList(s, schemas.ListPerformanceAnalysisReportRecommendationsRequest_RecommendationIds, v.RecommendationIds)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.ListPerformanceAnalysisReportRecommendationsRequest_RecommendationIds, v.RecommendationIds)
+	}
 	if v.ServiceType != "" {
 		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsRequest_ServiceType, string(v.ServiceType))
 	}
@@ -119,7 +121,9 @@ func (v *ListPerformanceAnalysisReportRecommendationsOutput) SerializeMembers(s 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPerformanceAnalysisReportRecommendationsResponse_NextToken, *v.NextToken)
 	}
-	serializeRecommendationList(s, schemas.ListPerformanceAnalysisReportRecommendationsResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendationList(s, schemas.ListPerformanceAnalysisReportRecommendationsResponse_Recommendations, v.Recommendations)
+	}
 }
 func (v *ListPerformanceAnalysisReportRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPerformanceAnalysisReportRecommendationsResponse, func(s *smithy.Schema) error {

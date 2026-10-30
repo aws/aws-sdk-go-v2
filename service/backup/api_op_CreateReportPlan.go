@@ -96,7 +96,9 @@ func (v *CreateReportPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportPlanName != nil {
 		s.WriteString(schemas.CreateReportPlanInput_ReportPlanName, *v.ReportPlanName)
 	}
-	serializestringMap(s, schemas.CreateReportPlanInput_ReportPlanTags, v.ReportPlanTags)
+	if v.ReportPlanTags != nil {
+		serializestringMap(s, schemas.CreateReportPlanInput_ReportPlanTags, v.ReportPlanTags)
+	}
 	if v.ReportSetting != nil {
 		s.WriteStruct(schemas.CreateReportPlanInput_ReportSetting)
 		v.ReportSetting.SerializeMembers(s)

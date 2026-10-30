@@ -51,7 +51,9 @@ func (v *ListCommitmentPurchaseAnalysesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListCommitmentPurchaseAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisIds(s, schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisIds, v.AnalysisIds)
+	if v.AnalysisIds != nil {
+		serializeAnalysisIds(s, schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisIds, v.AnalysisIds)
+	}
 	if v.AnalysisStatus != "" {
 		s.WriteString(schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisStatus, string(v.AnalysisStatus))
 	}
@@ -84,7 +86,9 @@ func (v *ListCommitmentPurchaseAnalysesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListCommitmentPurchaseAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisSummaryList(s, schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.AnalysisSummaryList != nil {
+		serializeAnalysisSummaryList(s, schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken, *v.NextPageToken)
 	}

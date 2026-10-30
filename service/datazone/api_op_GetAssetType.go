@@ -155,7 +155,9 @@ func (v *GetAssetTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.GetAssetTypeOutput_domainId, *v.DomainId)
 	}
-	serializeFormsOutputMap(s, schemas.GetAssetTypeOutput_formsOutput, v.FormsOutput)
+	if v.FormsOutput != nil {
+		serializeFormsOutputMap(s, schemas.GetAssetTypeOutput_formsOutput, v.FormsOutput)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetAssetTypeOutput_name, *v.Name)
 	}

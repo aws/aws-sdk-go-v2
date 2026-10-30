@@ -97,7 +97,9 @@ func (v *ListDatasetLabelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDatasetLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatasetLabelDescriptions(s, schemas.ListDatasetLabelsResponse_DatasetLabelDescriptions, v.DatasetLabelDescriptions)
+	if v.DatasetLabelDescriptions != nil {
+		serializeDatasetLabelDescriptions(s, schemas.ListDatasetLabelsResponse_DatasetLabelDescriptions, v.DatasetLabelDescriptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDatasetLabelsResponse_NextToken, *v.NextToken)
 	}

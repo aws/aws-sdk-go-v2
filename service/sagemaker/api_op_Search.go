@@ -113,7 +113,9 @@ func (v *SearchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SortOrder != "" {
 		s.WriteString(schemas.SearchRequest_SortOrder, string(v.SortOrder))
 	}
-	serializeVisibilityConditionsList(s, schemas.SearchRequest_VisibilityConditions, v.VisibilityConditions)
+	if v.VisibilityConditions != nil {
+		serializeVisibilityConditionsList(s, schemas.SearchRequest_VisibilityConditions, v.VisibilityConditions)
+	}
 }
 
 type SearchOutput struct {
@@ -145,7 +147,9 @@ func (v *SearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchResponse_NextToken, *v.NextToken)
 	}
-	serializeSearchResultsList(s, schemas.SearchResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeSearchResultsList(s, schemas.SearchResponse_Results, v.Results)
+	}
 	if v.TotalHits != nil {
 		s.WriteStruct(schemas.SearchResponse_TotalHits)
 		v.TotalHits.SerializeMembers(s)

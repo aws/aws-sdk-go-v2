@@ -95,7 +95,9 @@ func (v *ListAIPromptsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIPromptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIPromptSummaryList(s, schemas.ListAIPromptsResponse_aiPromptSummaries, v.AiPromptSummaries)
+	if v.AiPromptSummaries != nil {
+		serializeAIPromptSummaryList(s, schemas.ListAIPromptsResponse_aiPromptSummaries, v.AiPromptSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIPromptsResponse_nextToken, *v.NextToken)
 	}

@@ -49,7 +49,9 @@ func (v *UpdateUsagePlanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUsagePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateUsagePlanRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateUsagePlanRequest_patchOperations, v.PatchOperations)
+	}
 	if v.UsagePlanId != nil {
 		s.WriteString(schemas.UpdateUsagePlanRequest_usagePlanId, *v.UsagePlanId)
 	}
@@ -103,7 +105,9 @@ func (v *UpdateUsagePlanOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateUsagePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfApiStage(s, schemas.UsagePlan_apiStages, v.ApiStages)
+	if v.ApiStages != nil {
+		serializeListOfApiStage(s, schemas.UsagePlan_apiStages, v.ApiStages)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UsagePlan_description, *v.Description)
 	}
@@ -121,7 +125,9 @@ func (v *UpdateUsagePlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Quota.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMapOfStringToString(s, schemas.UsagePlan_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.UsagePlan_tags, v.Tags)
+	}
 	if v.Throttle != nil {
 		s.WriteStruct(schemas.UsagePlan_throttle)
 		v.Throttle.SerializeMembers(s)

@@ -87,7 +87,9 @@ func (v *ListHarvestJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHarvestJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfHarvestJob(s, schemas.ListHarvestJobsResponse_HarvestJobs, v.HarvestJobs)
+	if v.HarvestJobs != nil {
+		serialize__listOfHarvestJob(s, schemas.ListHarvestJobsResponse_HarvestJobs, v.HarvestJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHarvestJobsResponse_NextToken, *v.NextToken)
 	}

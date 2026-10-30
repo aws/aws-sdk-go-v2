@@ -107,7 +107,9 @@ func (v *ListCallAnalyticsJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCallAnalyticsJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCallAnalyticsJobSummaries(s, schemas.ListCallAnalyticsJobsResponse_CallAnalyticsJobSummaries, v.CallAnalyticsJobSummaries)
+	if v.CallAnalyticsJobSummaries != nil {
+		serializeCallAnalyticsJobSummaries(s, schemas.ListCallAnalyticsJobsResponse_CallAnalyticsJobSummaries, v.CallAnalyticsJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCallAnalyticsJobsResponse_NextToken, *v.NextToken)
 	}

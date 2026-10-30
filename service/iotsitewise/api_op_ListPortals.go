@@ -81,7 +81,9 @@ func (v *ListPortalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPortalsResponse_nextToken, *v.NextToken)
 	}
-	serializePortalSummaries(s, schemas.ListPortalsResponse_portalSummaries, v.PortalSummaries)
+	if v.PortalSummaries != nil {
+		serializePortalSummaries(s, schemas.ListPortalsResponse_portalSummaries, v.PortalSummaries)
+	}
 }
 func (v *ListPortalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPortalsResponse, func(s *smithy.Schema) error {

@@ -72,8 +72,12 @@ func (v *UpdateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.UpdateCaseRequest_domainId, *v.DomainId)
 	}
-	serializeFieldValueList(s, schemas.UpdateCaseRequest_fields, v.Fields)
-	serializeUserUnion(s, schemas.UpdateCaseRequest_performedBy, v.PerformedBy)
+	if v.Fields != nil {
+		serializeFieldValueList(s, schemas.UpdateCaseRequest_fields, v.Fields)
+	}
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.UpdateCaseRequest_performedBy, v.PerformedBy)
+	}
 }
 func (v *UpdateCaseInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCaseRequest, func(s *smithy.Schema) error {

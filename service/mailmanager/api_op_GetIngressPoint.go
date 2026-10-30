@@ -139,7 +139,9 @@ func (v *GetIngressPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetIngressPointResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeNetworkConfiguration(s, schemas.GetIngressPointResponse_NetworkConfiguration, v.NetworkConfiguration)
+	if v.NetworkConfiguration != nil {
+		serializeNetworkConfiguration(s, schemas.GetIngressPointResponse_NetworkConfiguration, v.NetworkConfiguration)
+	}
 	if v.RuleSetId != nil {
 		s.WriteString(schemas.GetIngressPointResponse_RuleSetId, *v.RuleSetId)
 	}

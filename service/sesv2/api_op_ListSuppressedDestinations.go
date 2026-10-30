@@ -80,7 +80,9 @@ func (v *ListSuppressedDestinationsInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PageSize != nil {
 		s.WriteInt32(schemas.ListSuppressedDestinationsRequest_PageSize, *v.PageSize)
 	}
-	serializeSuppressionListReasons(s, schemas.ListSuppressedDestinationsRequest_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeSuppressionListReasons(s, schemas.ListSuppressedDestinationsRequest_Reasons, v.Reasons)
+	}
 	if v.StartDate != nil {
 		s.WriteTime(schemas.ListSuppressedDestinationsRequest_StartDate, *v.StartDate)
 	}
@@ -118,7 +120,9 @@ func (v *ListSuppressedDestinationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSuppressedDestinationsResponse_NextToken, *v.NextToken)
 	}
-	serializeSuppressedDestinationSummaries(s, schemas.ListSuppressedDestinationsResponse_SuppressedDestinationSummaries, v.SuppressedDestinationSummaries)
+	if v.SuppressedDestinationSummaries != nil {
+		serializeSuppressedDestinationSummaries(s, schemas.ListSuppressedDestinationsResponse_SuppressedDestinationSummaries, v.SuppressedDestinationSummaries)
+	}
 }
 func (v *ListSuppressedDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSuppressedDestinationsResponse, func(s *smithy.Schema) error {

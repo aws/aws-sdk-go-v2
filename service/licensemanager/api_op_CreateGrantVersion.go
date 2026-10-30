@@ -70,7 +70,9 @@ func (v *CreateGrantVersionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGrantVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedOperationList(s, schemas.CreateGrantVersionRequest_AllowedOperations, v.AllowedOperations)
+	if v.AllowedOperations != nil {
+		serializeAllowedOperationList(s, schemas.CreateGrantVersionRequest_AllowedOperations, v.AllowedOperations)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateGrantVersionRequest_ClientToken, *v.ClientToken)
 	}

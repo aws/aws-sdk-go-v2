@@ -56,7 +56,9 @@ func (v *BatchAssociateResourcesToCustomLineItemInput) SerializeMembers(s smithy
 		v.BillingPeriodRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomLineItemBatchAssociationsList(s, schemas.BatchAssociateResourcesToCustomLineItemInput_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeCustomLineItemBatchAssociationsList(s, schemas.BatchAssociateResourcesToCustomLineItemInput_ResourceArns, v.ResourceArns)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.BatchAssociateResourcesToCustomLineItemInput_TargetArn, *v.TargetArn)
 	}
@@ -100,8 +102,12 @@ func (v *BatchAssociateResourcesToCustomLineItemOutput) Serialize(s smithy.Shape
 }
 
 func (v *BatchAssociateResourcesToCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociateResourcesResponseList(s, schemas.BatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources, v.FailedAssociatedResources)
-	serializeAssociateResourcesResponseList(s, schemas.BatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources, v.SuccessfullyAssociatedResources)
+	if v.FailedAssociatedResources != nil {
+		serializeAssociateResourcesResponseList(s, schemas.BatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources, v.FailedAssociatedResources)
+	}
+	if v.SuccessfullyAssociatedResources != nil {
+		serializeAssociateResourcesResponseList(s, schemas.BatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources, v.SuccessfullyAssociatedResources)
+	}
 }
 func (v *BatchAssociateResourcesToCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateResourcesToCustomLineItemOutput, func(s *smithy.Schema) error {

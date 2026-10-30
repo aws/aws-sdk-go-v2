@@ -80,7 +80,9 @@ func (v *UpdateInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateInferenceExperimentRequest_Description, *v.Description)
 	}
-	serializeModelVariantConfigList(s, schemas.UpdateInferenceExperimentRequest_ModelVariants, v.ModelVariants)
+	if v.ModelVariants != nil {
+		serializeModelVariantConfigList(s, schemas.UpdateInferenceExperimentRequest_ModelVariants, v.ModelVariants)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateInferenceExperimentRequest_Name, *v.Name)
 	}

@@ -110,7 +110,9 @@ func (v *ListReplaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReplaysResponse_NextToken, *v.NextToken)
 	}
-	serializeReplayList(s, schemas.ListReplaysResponse_Replays, v.Replays)
+	if v.Replays != nil {
+		serializeReplayList(s, schemas.ListReplaysResponse_Replays, v.Replays)
+	}
 }
 func (v *ListReplaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReplaysResponse, func(s *smithy.Schema) error {

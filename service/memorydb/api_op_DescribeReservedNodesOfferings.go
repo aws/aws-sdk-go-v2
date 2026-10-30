@@ -115,7 +115,9 @@ func (v *DescribeReservedNodesOfferingsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReservedNodesOfferingsResponse_NextToken, *v.NextToken)
 	}
-	serializeReservedNodesOfferingList(s, schemas.DescribeReservedNodesOfferingsResponse_ReservedNodesOfferings, v.ReservedNodesOfferings)
+	if v.ReservedNodesOfferings != nil {
+		serializeReservedNodesOfferingList(s, schemas.DescribeReservedNodesOfferingsResponse_ReservedNodesOfferings, v.ReservedNodesOfferings)
+	}
 }
 func (v *DescribeReservedNodesOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReservedNodesOfferingsResponse, func(s *smithy.Schema) error {

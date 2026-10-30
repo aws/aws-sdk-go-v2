@@ -122,7 +122,9 @@ func (v *DetectProtectiveEquipmentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectProtectiveEquipmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectiveEquipmentPersons(s, schemas.DetectProtectiveEquipmentResponse_Persons, v.Persons)
+	if v.Persons != nil {
+		serializeProtectiveEquipmentPersons(s, schemas.DetectProtectiveEquipmentResponse_Persons, v.Persons)
+	}
 	if v.ProtectiveEquipmentModelVersion != nil {
 		s.WriteString(schemas.DetectProtectiveEquipmentResponse_ProtectiveEquipmentModelVersion, *v.ProtectiveEquipmentModelVersion)
 	}

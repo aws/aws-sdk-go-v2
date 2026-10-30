@@ -150,7 +150,9 @@ func (v *GetScalingPlanResourceForecastDataOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetScalingPlanResourceForecastDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatapoints(s, schemas.GetScalingPlanResourceForecastDataResponse_Datapoints, v.Datapoints)
+	if v.Datapoints != nil {
+		serializeDatapoints(s, schemas.GetScalingPlanResourceForecastDataResponse_Datapoints, v.Datapoints)
+	}
 }
 func (v *GetScalingPlanResourceForecastDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetScalingPlanResourceForecastDataResponse, func(s *smithy.Schema) error {

@@ -91,7 +91,9 @@ func (v *ListGatewayTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewayTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTargetSummaries(s, schemas.ListGatewayTargetsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeTargetSummaries(s, schemas.ListGatewayTargetsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayTargetsResponse_nextToken, *v.NextToken)
 	}

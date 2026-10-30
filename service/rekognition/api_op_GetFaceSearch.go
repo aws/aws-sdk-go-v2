@@ -168,7 +168,9 @@ func (v *GetFaceSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFaceSearchResponse_NextToken, *v.NextToken)
 	}
-	serializePersonMatches(s, schemas.GetFaceSearchResponse_Persons, v.Persons)
+	if v.Persons != nil {
+		serializePersonMatches(s, schemas.GetFaceSearchResponse_Persons, v.Persons)
+	}
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetFaceSearchResponse_StatusMessage, *v.StatusMessage)
 	}

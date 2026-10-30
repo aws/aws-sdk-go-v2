@@ -84,7 +84,9 @@ func (v *ListBrandsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBrandsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrandSummaryList(s, schemas.ListBrandsResponse_Brands, v.Brands)
+	if v.Brands != nil {
+		serializeBrandSummaryList(s, schemas.ListBrandsResponse_Brands, v.Brands)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrandsResponse_NextToken, *v.NextToken)
 	}

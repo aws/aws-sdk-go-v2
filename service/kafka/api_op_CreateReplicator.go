@@ -73,20 +73,26 @@ func (v *CreateReplicatorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateReplicatorRequest_Description, *v.Description)
 	}
-	serialize__listOfKafkaCluster(s, schemas.CreateReplicatorRequest_KafkaClusters, v.KafkaClusters)
+	if v.KafkaClusters != nil {
+		serialize__listOfKafkaCluster(s, schemas.CreateReplicatorRequest_KafkaClusters, v.KafkaClusters)
+	}
 	if v.LogDelivery != nil {
 		s.WriteStruct(schemas.CreateReplicatorRequest_LogDelivery)
 		v.LogDelivery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfReplicationInfo(s, schemas.CreateReplicatorRequest_ReplicationInfoList, v.ReplicationInfoList)
+	if v.ReplicationInfoList != nil {
+		serialize__listOfReplicationInfo(s, schemas.CreateReplicatorRequest_ReplicationInfoList, v.ReplicationInfoList)
+	}
 	if v.ReplicatorName != nil {
 		s.WriteString(schemas.CreateReplicatorRequest_ReplicatorName, *v.ReplicatorName)
 	}
 	if v.ServiceExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateReplicatorRequest_ServiceExecutionRoleArn, *v.ServiceExecutionRoleArn)
 	}
-	serialize__mapOf__string(s, schemas.CreateReplicatorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateReplicatorRequest_Tags, v.Tags)
+	}
 }
 
 type CreateReplicatorOutput struct {

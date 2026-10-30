@@ -1067,7 +1067,9 @@ func (v *Meeting) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryMeetingId != nil {
 		s.WriteString(schemas.Meeting_PrimaryMeetingId, *v.PrimaryMeetingId)
 	}
-	serializeTenantIdList(s, schemas.Meeting_TenantIds, v.TenantIds)
+	if v.TenantIds != nil {
+		serializeTenantIdList(s, schemas.Meeting_TenantIds, v.TenantIds)
+	}
 }
 func (v *Meeting) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Meeting, func(s *smithy.Schema) error {

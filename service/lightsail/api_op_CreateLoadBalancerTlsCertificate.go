@@ -79,7 +79,9 @@ func (v *CreateLoadBalancerTlsCertificateInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateLoadBalancerTlsCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainNameList(s, schemas.CreateLoadBalancerTlsCertificateRequest_certificateAlternativeNames, v.CertificateAlternativeNames)
+	if v.CertificateAlternativeNames != nil {
+		serializeDomainNameList(s, schemas.CreateLoadBalancerTlsCertificateRequest_certificateAlternativeNames, v.CertificateAlternativeNames)
+	}
 	if v.CertificateDomainName != nil {
 		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_certificateDomainName, *v.CertificateDomainName)
 	}
@@ -89,7 +91,9 @@ func (v *CreateLoadBalancerTlsCertificateInput) SerializeMembers(s smithy.ShapeS
 	if v.LoadBalancerName != nil {
 		s.WriteString(schemas.CreateLoadBalancerTlsCertificateRequest_loadBalancerName, *v.LoadBalancerName)
 	}
-	serializeTagList(s, schemas.CreateLoadBalancerTlsCertificateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLoadBalancerTlsCertificateRequest_tags, v.Tags)
+	}
 }
 
 type CreateLoadBalancerTlsCertificateOutput struct {
@@ -112,7 +116,9 @@ func (v *CreateLoadBalancerTlsCertificateOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *CreateLoadBalancerTlsCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateLoadBalancerTlsCertificateResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateLoadBalancerTlsCertificateResult_operations, v.Operations)
+	}
 }
 func (v *CreateLoadBalancerTlsCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateLoadBalancerTlsCertificateResult, func(s *smithy.Schema) error {

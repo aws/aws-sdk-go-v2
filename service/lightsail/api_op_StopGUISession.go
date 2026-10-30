@@ -68,7 +68,9 @@ func (v *StopGUISessionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopGUISessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.StopGUISessionResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.StopGUISessionResult_operations, v.Operations)
+	}
 }
 func (v *StopGUISessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StopGUISessionResult, func(s *smithy.Schema) error {

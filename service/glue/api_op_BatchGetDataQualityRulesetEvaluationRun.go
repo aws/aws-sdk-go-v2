@@ -43,7 +43,9 @@ func (v *BatchGetDataQualityRulesetEvaluationRunInput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchGetDataQualityRulesetEvaluationRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataQualityRulesetEvaluationRunIdList(s, schemas.BatchGetDataQualityRulesetEvaluationRunRequest_RunIds, v.RunIds)
+	if v.RunIds != nil {
+		serializeDataQualityRulesetEvaluationRunIdList(s, schemas.BatchGetDataQualityRulesetEvaluationRunRequest_RunIds, v.RunIds)
+	}
 }
 
 type BatchGetDataQualityRulesetEvaluationRunOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetDataQualityRulesetEvaluationRunOutput) Serialize(s smithy.Shape
 }
 
 func (v *BatchGetDataQualityRulesetEvaluationRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataQualityRulesetEvaluationRunsList(s, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_Runs, v.Runs)
-	serializeDataQualityRulesetEvaluationRunIdList(s, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_RunsNotFound, v.RunsNotFound)
+	if v.Runs != nil {
+		serializeDataQualityRulesetEvaluationRunsList(s, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_Runs, v.Runs)
+	}
+	if v.RunsNotFound != nil {
+		serializeDataQualityRulesetEvaluationRunIdList(s, schemas.BatchGetDataQualityRulesetEvaluationRunResponse_RunsNotFound, v.RunsNotFound)
+	}
 }
 func (v *BatchGetDataQualityRulesetEvaluationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDataQualityRulesetEvaluationRunResponse, func(s *smithy.Schema) error {

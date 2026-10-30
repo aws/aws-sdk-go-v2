@@ -63,7 +63,9 @@ func (v *StartCodeRemediationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CodeReviewJobId != nil {
 		s.WriteString(schemas.StartCodeRemediationInput_codeReviewJobId, *v.CodeReviewJobId)
 	}
-	serializeFindingIdList(s, schemas.StartCodeRemediationInput_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIdList(s, schemas.StartCodeRemediationInput_findingIds, v.FindingIds)
+	}
 	if v.PentestJobId != nil {
 		s.WriteString(schemas.StartCodeRemediationInput_pentestJobId, *v.PentestJobId)
 	}

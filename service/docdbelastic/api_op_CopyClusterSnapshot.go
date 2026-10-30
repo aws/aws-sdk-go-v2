@@ -97,7 +97,9 @@ func (v *CopyClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnapshotArn != nil {
 		s.WriteString(schemas.CopyClusterSnapshotInput_snapshotArn, *v.SnapshotArn)
 	}
-	serializeTagMap(s, schemas.CopyClusterSnapshotInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CopyClusterSnapshotInput_tags, v.Tags)
+	}
 	if v.TargetSnapshotName != nil {
 		s.WriteString(schemas.CopyClusterSnapshotInput_targetSnapshotName, *v.TargetSnapshotName)
 	}

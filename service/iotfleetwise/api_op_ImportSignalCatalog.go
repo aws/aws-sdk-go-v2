@@ -61,8 +61,12 @@ func (v *ImportSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ImportSignalCatalogRequest_name, *v.Name)
 	}
-	serializeTagList(s, schemas.ImportSignalCatalogRequest_tags, v.Tags)
-	serializeFormattedVss(s, schemas.ImportSignalCatalogRequest_vss, v.Vss)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportSignalCatalogRequest_tags, v.Tags)
+	}
+	if v.Vss != nil {
+		serializeFormattedVss(s, schemas.ImportSignalCatalogRequest_vss, v.Vss)
+	}
 }
 func (v *ImportSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportSignalCatalogRequest, func(s *smithy.Schema) error {

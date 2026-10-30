@@ -141,7 +141,9 @@ func (v *GetSimilarProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetSimilarProfilesResponse_NextToken, *v.NextToken)
 	}
-	serializeProfileIdList(s, schemas.GetSimilarProfilesResponse_ProfileIds, v.ProfileIds)
+	if v.ProfileIds != nil {
+		serializeProfileIdList(s, schemas.GetSimilarProfilesResponse_ProfileIds, v.ProfileIds)
+	}
 	if v.RuleLevel != nil {
 		s.WriteInt32(schemas.GetSimilarProfilesResponse_RuleLevel, *v.RuleLevel)
 	}

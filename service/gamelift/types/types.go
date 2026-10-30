@@ -185,8 +185,12 @@ func (v *AttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S != nil {
 		s.WriteString(schemas.AttributeValue_S, *v.S)
 	}
-	serializePlayerAttributeStringDoubleMap(s, schemas.AttributeValue_SDM, v.SDM)
-	serializePlayerAttributeStringList(s, schemas.AttributeValue_SL, v.SL)
+	if v.SDM != nil {
+		serializePlayerAttributeStringDoubleMap(s, schemas.AttributeValue_SDM, v.SDM)
+	}
+	if v.SL != nil {
+		serializePlayerAttributeStringList(s, schemas.AttributeValue_SL, v.SL)
+	}
 }
 func (v *AttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeValue, func(s *smithy.Schema) error {
@@ -487,7 +491,9 @@ func (v *ClaimFilterOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClaimFilterOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterInstanceStatuses(s, schemas.ClaimFilterOption_InstanceStatuses, v.InstanceStatuses)
+	if v.InstanceStatuses != nil {
+		serializeFilterInstanceStatuses(s, schemas.ClaimFilterOption_InstanceStatuses, v.InstanceStatuses)
+	}
 }
 func (v *ClaimFilterOption) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClaimFilterOption, func(s *smithy.Schema) error {
@@ -600,7 +606,9 @@ func (v *Compute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputeStatus != "" {
 		s.WriteString(schemas.Compute_ComputeStatus, string(v.ComputeStatus))
 	}
-	serializeContainerAttributes(s, schemas.Compute_ContainerAttributes, v.ContainerAttributes)
+	if v.ContainerAttributes != nil {
+		serializeContainerAttributes(s, schemas.Compute_ContainerAttributes, v.ContainerAttributes)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.Compute_CreationTime, *v.CreationTime)
 	}
@@ -1137,11 +1145,15 @@ func (v *ContainerFleet) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InstanceConnectionPortRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIpPermissionsList(s, schemas.ContainerFleet_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	if v.InstanceInboundPermissions != nil {
+		serializeIpPermissionsList(s, schemas.ContainerFleet_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.ContainerFleet_InstanceType, *v.InstanceType)
 	}
-	serializeContainerFleetLocationAttributesList(s, schemas.ContainerFleet_LocationAttributes, v.LocationAttributes)
+	if v.LocationAttributes != nil {
+		serializeContainerFleetLocationAttributesList(s, schemas.ContainerFleet_LocationAttributes, v.LocationAttributes)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.ContainerFleet_LogConfiguration)
 		v.LogConfiguration.SerializeMembers(s)
@@ -1150,7 +1162,9 @@ func (v *ContainerFleet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumGameServerContainerGroupsPerInstance != nil {
 		s.WriteInt32(schemas.ContainerFleet_MaximumGameServerContainerGroupsPerInstance, *v.MaximumGameServerContainerGroupsPerInstance)
 	}
-	serializeMetricGroupList(s, schemas.ContainerFleet_MetricGroups, v.MetricGroups)
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.ContainerFleet_MetricGroups, v.MetricGroups)
+	}
 	if v.NewGameSessionProtectionPolicy != "" {
 		s.WriteString(schemas.ContainerFleet_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
 	}
@@ -1513,7 +1527,9 @@ func (v *ContainerGroupDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.ContainerGroupDefinition_StatusReason, *v.StatusReason)
 	}
-	serializeSupportContainerDefinitionList(s, schemas.ContainerGroupDefinition_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	if v.SupportContainerDefinitions != nil {
+		serializeSupportContainerDefinitionList(s, schemas.ContainerGroupDefinition_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	}
 	if v.TotalMemoryLimitMebibytes != nil {
 		s.WriteInt32(schemas.ContainerGroupDefinition_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
 	}
@@ -1618,7 +1634,9 @@ func (v *ContainerGroupPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerName != nil {
 		s.WriteString(schemas.ContainerGroupPortMapping_ContainerName, *v.ContainerName)
 	}
-	serializeContainerPortMappingList(s, schemas.ContainerGroupPortMapping_ContainerPortMappings, v.ContainerPortMappings)
+	if v.ContainerPortMappings != nil {
+		serializeContainerPortMappingList(s, schemas.ContainerGroupPortMapping_ContainerPortMappings, v.ContainerPortMappings)
+	}
 	if v.ContainerRuntimeId != nil {
 		s.WriteString(schemas.ContainerGroupPortMapping_ContainerRuntimeId, *v.ContainerRuntimeId)
 	}
@@ -1693,7 +1711,9 @@ func (v *ContainerHealthCheck) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerHealthCheck) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerCommandStringList(s, schemas.ContainerHealthCheck_Command, v.Command)
+	if v.Command != nil {
+		serializeContainerCommandStringList(s, schemas.ContainerHealthCheck_Command, v.Command)
+	}
 	if v.Interval != nil {
 		s.WriteInt32(schemas.ContainerHealthCheck_Interval, *v.Interval)
 	}
@@ -1883,7 +1903,9 @@ func (v *ContainerPortConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerPortConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerPortRangeList(s, schemas.ContainerPortConfiguration_ContainerPortRanges, v.ContainerPortRanges)
+	if v.ContainerPortRanges != nil {
+		serializeContainerPortRangeList(s, schemas.ContainerPortConfiguration_ContainerPortRanges, v.ContainerPortRanges)
+	}
 }
 func (v *ContainerPortConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContainerPortConfiguration, func(s *smithy.Schema) error {
@@ -2610,7 +2632,9 @@ func (v *FilterConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationList(s, schemas.FilterConfiguration_AllowedLocations, v.AllowedLocations)
+	if v.AllowedLocations != nil {
+		serializeLocationList(s, schemas.FilterConfiguration_AllowedLocations, v.AllowedLocations)
+	}
 }
 func (v *FilterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterConfiguration, func(s *smithy.Schema) error {
@@ -2900,8 +2924,12 @@ func (v *FleetAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceType != "" {
 		s.WriteString(schemas.FleetAttributes_InstanceType, string(v.InstanceType))
 	}
-	serializeStringList(s, schemas.FleetAttributes_LogPaths, v.LogPaths)
-	serializeMetricGroupList(s, schemas.FleetAttributes_MetricGroups, v.MetricGroups)
+	if v.LogPaths != nil {
+		serializeStringList(s, schemas.FleetAttributes_LogPaths, v.LogPaths)
+	}
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.FleetAttributes_MetricGroups, v.MetricGroups)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.FleetAttributes_Name, *v.Name)
 	}
@@ -2939,7 +2967,9 @@ func (v *FleetAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.FleetAttributes_Status, string(v.Status))
 	}
-	serializeFleetActionList(s, schemas.FleetAttributes_StoppedActions, v.StoppedActions)
+	if v.StoppedActions != nil {
+		serializeFleetActionList(s, schemas.FleetAttributes_StoppedActions, v.StoppedActions)
+	}
 	if v.TerminationTime != nil {
 		s.WriteTime(schemas.FleetAttributes_TerminationTime, *v.TerminationTime)
 	}
@@ -3733,8 +3763,12 @@ func (v *GameServerContainerDefinition) SerializeMembers(s smithy.ShapeSerialize
 	if v.ContainerName != nil {
 		s.WriteString(schemas.GameServerContainerDefinition_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.GameServerContainerDefinition_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.GameServerContainerDefinition_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.ImageUri != nil {
 		s.WriteString(schemas.GameServerContainerDefinition_ImageUri, *v.ImageUri)
 	}
@@ -3743,7 +3777,9 @@ func (v *GameServerContainerDefinition) SerializeMembers(s smithy.ShapeSerialize
 		v.LinuxCapabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerMountPointList(s, schemas.GameServerContainerDefinition_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.GameServerContainerDefinition_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.GameServerContainerDefinition_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)
@@ -3914,8 +3950,12 @@ func (v *GameServerContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ContainerName != nil {
 		s.WriteString(schemas.GameServerContainerDefinitionInput_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.GameServerContainerDefinitionInput_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.GameServerContainerDefinitionInput_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.GameServerContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.ImageUri != nil {
 		s.WriteString(schemas.GameServerContainerDefinitionInput_ImageUri, *v.ImageUri)
 	}
@@ -3924,7 +3964,9 @@ func (v *GameServerContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeri
 		v.LinuxCapabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerMountPointList(s, schemas.GameServerContainerDefinitionInput_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.GameServerContainerDefinitionInput_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.GameServerContainerDefinitionInput_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)
@@ -4168,7 +4210,9 @@ func (v *GameServerGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GameServerProtectionPolicy != "" {
 		s.WriteString(schemas.GameServerGroup_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
 	}
-	serializeInstanceDefinitions(s, schemas.GameServerGroup_InstanceDefinitions, v.InstanceDefinitions)
+	if v.InstanceDefinitions != nil {
+		serializeInstanceDefinitions(s, schemas.GameServerGroup_InstanceDefinitions, v.InstanceDefinitions)
+	}
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.GameServerGroup_LastUpdatedTime, *v.LastUpdatedTime)
 	}
@@ -4181,7 +4225,9 @@ func (v *GameServerGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GameServerGroup_StatusReason, *v.StatusReason)
 	}
-	serializeGameServerGroupActions(s, schemas.GameServerGroup_SuspendedActions, v.SuspendedActions)
+	if v.SuspendedActions != nil {
+		serializeGameServerGroupActions(s, schemas.GameServerGroup_SuspendedActions, v.SuspendedActions)
+	}
 }
 func (v *GameServerGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GameServerGroup, func(s *smithy.Schema) error {
@@ -4547,7 +4593,9 @@ func (v *GameSession) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetId != nil {
 		s.WriteString(schemas.GameSession_FleetId, *v.FleetId)
 	}
-	serializeGamePropertyList(s, schemas.GameSession_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.GameSession_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.GameSession_GameSessionData, *v.GameSessionData)
 	}
@@ -4745,7 +4793,9 @@ func (v *GameSessionConnectionInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddress != nil {
 		s.WriteString(schemas.GameSessionConnectionInfo_IpAddress, *v.IpAddress)
 	}
-	serializeMatchedPlayerSessionList(s, schemas.GameSessionConnectionInfo_MatchedPlayerSessions, v.MatchedPlayerSessions)
+	if v.MatchedPlayerSessions != nil {
+		serializeMatchedPlayerSessionList(s, schemas.GameSessionConnectionInfo_MatchedPlayerSessions, v.MatchedPlayerSessions)
+	}
 	if v.PlayerGatewayStatus != "" {
 		s.WriteString(schemas.GameSessionConnectionInfo_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
 	}
@@ -5063,7 +5113,9 @@ func (v *GameSessionPlacement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.GameSessionPlacement_EndTime, *v.EndTime)
 	}
-	serializeGamePropertyList(s, schemas.GameSessionPlacement_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.GameSessionPlacement_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionArn != nil {
 		s.WriteString(schemas.GameSessionPlacement_GameSessionArn, *v.GameSessionArn)
 	}
@@ -5091,14 +5143,18 @@ func (v *GameSessionPlacement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumPlayerSessionCount != nil {
 		s.WriteInt32(schemas.GameSessionPlacement_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
 	}
-	serializePlacedPlayerSessionList(s, schemas.GameSessionPlacement_PlacedPlayerSessions, v.PlacedPlayerSessions)
+	if v.PlacedPlayerSessions != nil {
+		serializePlacedPlayerSessionList(s, schemas.GameSessionPlacement_PlacedPlayerSessions, v.PlacedPlayerSessions)
+	}
 	if v.PlacementId != nil {
 		s.WriteString(schemas.GameSessionPlacement_PlacementId, *v.PlacementId)
 	}
 	if v.PlayerGatewayStatus != "" {
 		s.WriteString(schemas.GameSessionPlacement_PlayerGatewayStatus, string(v.PlayerGatewayStatus))
 	}
-	serializePlayerLatencyList(s, schemas.GameSessionPlacement_PlayerLatencies, v.PlayerLatencies)
+	if v.PlayerLatencies != nil {
+		serializePlayerLatencyList(s, schemas.GameSessionPlacement_PlayerLatencies, v.PlayerLatencies)
+	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.GameSessionPlacement_Port, *v.Port)
 	}
@@ -5257,7 +5313,9 @@ func (v *GameSessionQueue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomEventData != nil {
 		s.WriteString(schemas.GameSessionQueue_CustomEventData, *v.CustomEventData)
 	}
-	serializeGameSessionQueueDestinationList(s, schemas.GameSessionQueue_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeGameSessionQueueDestinationList(s, schemas.GameSessionQueue_Destinations, v.Destinations)
+	}
 	if v.FilterConfiguration != nil {
 		s.WriteStruct(schemas.GameSessionQueue_FilterConfiguration)
 		v.FilterConfiguration.SerializeMembers(s)
@@ -5272,7 +5330,9 @@ func (v *GameSessionQueue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationTarget != nil {
 		s.WriteString(schemas.GameSessionQueue_NotificationTarget, *v.NotificationTarget)
 	}
-	serializePlayerLatencyPolicyList(s, schemas.GameSessionQueue_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PlayerLatencyPolicies != nil {
+		serializePlayerLatencyPolicyList(s, schemas.GameSessionQueue_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	}
 	if v.PriorityConfiguration != nil {
 		s.WriteStruct(schemas.GameSessionQueue_PriorityConfiguration)
 		v.PriorityConfiguration.SerializeMembers(s)
@@ -5872,7 +5932,9 @@ func (v *LinuxCapabilities) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LinuxCapabilities) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinuxCapabilityList(s, schemas.LinuxCapabilities_Include, v.Include)
+	if v.Include != nil {
+		serializeLinuxCapabilityList(s, schemas.LinuxCapabilities_Include, v.Include)
+	}
 }
 func (v *LinuxCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LinuxCapabilities, func(s *smithy.Schema) error {
@@ -5964,7 +6026,9 @@ func (v *LocationAttributes) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LocationState.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFleetActionList(s, schemas.LocationAttributes_StoppedActions, v.StoppedActions)
+	if v.StoppedActions != nil {
+		serializeFleetActionList(s, schemas.LocationAttributes_StoppedActions, v.StoppedActions)
+	}
 	if v.UpdateStatus != "" {
 		s.WriteString(schemas.LocationAttributes_UpdateStatus, string(v.UpdateStatus))
 	}
@@ -6519,11 +6583,15 @@ func (v *MatchmakingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlexMatchMode != "" {
 		s.WriteString(schemas.MatchmakingConfiguration_FlexMatchMode, string(v.FlexMatchMode))
 	}
-	serializeGamePropertyList(s, schemas.MatchmakingConfiguration_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.MatchmakingConfiguration_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.MatchmakingConfiguration_GameSessionData, *v.GameSessionData)
 	}
-	serializeQueueArnsList(s, schemas.MatchmakingConfiguration_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.GameSessionQueueArns != nil {
+		serializeQueueArnsList(s, schemas.MatchmakingConfiguration_GameSessionQueueArns, v.GameSessionQueueArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.MatchmakingConfiguration_Name, *v.Name)
 	}
@@ -6814,7 +6882,9 @@ func (v *MatchmakingTicket) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GameSessionConnectionInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlayerList(s, schemas.MatchmakingTicket_Players, v.Players)
+	if v.Players != nil {
+		serializePlayerList(s, schemas.MatchmakingTicket_Players, v.Players)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.MatchmakingTicket_StartTime, *v.StartTime)
 	}
@@ -6996,8 +7066,12 @@ func (v *Player) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Player) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLatencyMap(s, schemas.Player_LatencyInMs, v.LatencyInMs)
-	serializePlayerAttributeMap(s, schemas.Player_PlayerAttributes, v.PlayerAttributes)
+	if v.LatencyInMs != nil {
+		serializeLatencyMap(s, schemas.Player_LatencyInMs, v.LatencyInMs)
+	}
+	if v.PlayerAttributes != nil {
+		serializePlayerAttributeMap(s, schemas.Player_PlayerAttributes, v.PlayerAttributes)
+	}
 	if v.PlayerId != nil {
 		s.WriteString(schemas.Player_PlayerId, *v.PlayerId)
 	}
@@ -7072,7 +7146,9 @@ func (v *PlayerConnectionDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PlayerConnectionDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlayerConnectionEndpointList(s, schemas.PlayerConnectionDetail_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializePlayerConnectionEndpointList(s, schemas.PlayerConnectionDetail_Endpoints, v.Endpoints)
+	}
 	if v.Expiration != nil {
 		s.WriteTime(schemas.PlayerConnectionDetail_Expiration, *v.Expiration)
 	}
@@ -7531,8 +7607,12 @@ func (v *PriorityConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PriorityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationList(s, schemas.PriorityConfiguration_LocationOrder, v.LocationOrder)
-	serializePriorityTypeList(s, schemas.PriorityConfiguration_PriorityOrder, v.PriorityOrder)
+	if v.LocationOrder != nil {
+		serializeLocationList(s, schemas.PriorityConfiguration_LocationOrder, v.LocationOrder)
+	}
+	if v.PriorityOrder != nil {
+		serializePriorityTypeList(s, schemas.PriorityConfiguration_PriorityOrder, v.PriorityOrder)
+	}
 }
 func (v *PriorityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PriorityConfiguration, func(s *smithy.Schema) error {
@@ -7592,7 +7672,9 @@ func (v *PriorityConfigurationOverride) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PriorityConfigurationOverride) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocationOrderOverrideList(s, schemas.PriorityConfigurationOverride_LocationOrder, v.LocationOrder)
+	if v.LocationOrder != nil {
+		serializeLocationOrderOverrideList(s, schemas.PriorityConfigurationOverride_LocationOrder, v.LocationOrder)
+	}
 	if v.PlacementFallbackStrategy != "" {
 		s.WriteString(schemas.PriorityConfigurationOverride_PlacementFallbackStrategy, string(v.PlacementFallbackStrategy))
 	}
@@ -7789,7 +7871,9 @@ func (v *RuntimeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxConcurrentGameSessionActivations != nil {
 		s.WriteInt32(schemas.RuntimeConfiguration_MaxConcurrentGameSessionActivations, *v.MaxConcurrentGameSessionActivations)
 	}
-	serializeServerProcessList(s, schemas.RuntimeConfiguration_ServerProcesses, v.ServerProcesses)
+	if v.ServerProcesses != nil {
+		serializeServerProcessList(s, schemas.RuntimeConfiguration_ServerProcesses, v.ServerProcesses)
+	}
 }
 func (v *RuntimeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RuntimeConfiguration, func(s *smithy.Schema) error {
@@ -8421,8 +8505,12 @@ func (v *SupportContainerDefinition) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ContainerName != nil {
 		s.WriteString(schemas.SupportContainerDefinition_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.SupportContainerDefinition_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.SupportContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.SupportContainerDefinition_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.SupportContainerDefinition_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.Essential != nil {
 		s.WriteBool(schemas.SupportContainerDefinition_Essential, *v.Essential)
 	}
@@ -8442,7 +8530,9 @@ func (v *SupportContainerDefinition) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.MemoryHardLimitMebibytes != nil {
 		s.WriteInt32(schemas.SupportContainerDefinition_MemoryHardLimitMebibytes, *v.MemoryHardLimitMebibytes)
 	}
-	serializeContainerMountPointList(s, schemas.SupportContainerDefinition_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.SupportContainerDefinition_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.SupportContainerDefinition_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)
@@ -8619,8 +8709,12 @@ func (v *SupportContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ContainerName != nil {
 		s.WriteString(schemas.SupportContainerDefinitionInput_ContainerName, *v.ContainerName)
 	}
-	serializeContainerDependencyList(s, schemas.SupportContainerDefinitionInput_DependsOn, v.DependsOn)
-	serializeContainerEnvironmentList(s, schemas.SupportContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	if v.DependsOn != nil {
+		serializeContainerDependencyList(s, schemas.SupportContainerDefinitionInput_DependsOn, v.DependsOn)
+	}
+	if v.EnvironmentOverride != nil {
+		serializeContainerEnvironmentList(s, schemas.SupportContainerDefinitionInput_EnvironmentOverride, v.EnvironmentOverride)
+	}
 	if v.Essential != nil {
 		s.WriteBool(schemas.SupportContainerDefinitionInput_Essential, *v.Essential)
 	}
@@ -8640,7 +8734,9 @@ func (v *SupportContainerDefinitionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.MemoryHardLimitMebibytes != nil {
 		s.WriteInt32(schemas.SupportContainerDefinitionInput_MemoryHardLimitMebibytes, *v.MemoryHardLimitMebibytes)
 	}
-	serializeContainerMountPointList(s, schemas.SupportContainerDefinitionInput_MountPoints, v.MountPoints)
+	if v.MountPoints != nil {
+		serializeContainerMountPointList(s, schemas.SupportContainerDefinitionInput_MountPoints, v.MountPoints)
+	}
 	if v.PortConfiguration != nil {
 		s.WriteStruct(schemas.SupportContainerDefinitionInput_PortConfiguration)
 		v.PortConfiguration.SerializeMembers(s)

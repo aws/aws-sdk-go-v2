@@ -67,7 +67,9 @@ func (v *BatchDeleteDatasetDataSegmentsInput) SerializeMembers(s smithy.ShapeSer
 	if v.DatasetId != nil {
 		s.WriteString(schemas.BatchDeleteDatasetDataSegmentsRequest_datasetId, *v.DatasetId)
 	}
-	serializeDeleteDataSegmentEntries(s, schemas.BatchDeleteDatasetDataSegmentsRequest_deleteDataSegmentEntries, v.DeleteDataSegmentEntries)
+	if v.DeleteDataSegmentEntries != nil {
+		serializeDeleteDataSegmentEntries(s, schemas.BatchDeleteDatasetDataSegmentsRequest_deleteDataSegmentEntries, v.DeleteDataSegmentEntries)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.BatchDeleteDatasetDataSegmentsRequest_workspaceName, *v.WorkspaceName)
 	}
@@ -109,7 +111,9 @@ func (v *BatchDeleteDatasetDataSegmentsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.DatasetVersion != nil {
 		s.WriteString(schemas.BatchDeleteDatasetDataSegmentsResponse_datasetVersion, *v.DatasetVersion)
 	}
-	serializeFailedDataSegmentDeletions(s, schemas.BatchDeleteDatasetDataSegmentsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeFailedDataSegmentDeletions(s, schemas.BatchDeleteDatasetDataSegmentsResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteDatasetDataSegmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteDatasetDataSegmentsResponse, func(s *smithy.Schema) error {

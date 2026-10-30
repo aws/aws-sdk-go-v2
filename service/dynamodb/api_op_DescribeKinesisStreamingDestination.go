@@ -81,7 +81,9 @@ func (v *DescribeKinesisStreamingDestinationOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeKinesisStreamingDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKinesisDataStreamDestinations(s, schemas.DescribeKinesisStreamingDestinationOutput_KinesisDataStreamDestinations, v.KinesisDataStreamDestinations)
+	if v.KinesisDataStreamDestinations != nil {
+		serializeKinesisDataStreamDestinations(s, schemas.DescribeKinesisStreamingDestinationOutput_KinesisDataStreamDestinations, v.KinesisDataStreamDestinations)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.DescribeKinesisStreamingDestinationOutput_TableName, *v.TableName)
 	}

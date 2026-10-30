@@ -181,8 +181,12 @@ func (v *StartGameSessionPlacementInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartGameSessionPlacementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDesiredPlayerSessionList(s, schemas.StartGameSessionPlacementInput_DesiredPlayerSessions, v.DesiredPlayerSessions)
-	serializeGamePropertyList(s, schemas.StartGameSessionPlacementInput_GameProperties, v.GameProperties)
+	if v.DesiredPlayerSessions != nil {
+		serializeDesiredPlayerSessionList(s, schemas.StartGameSessionPlacementInput_DesiredPlayerSessions, v.DesiredPlayerSessions)
+	}
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.StartGameSessionPlacementInput_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionData, *v.GameSessionData)
 	}
@@ -198,7 +202,9 @@ func (v *StartGameSessionPlacementInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.PlacementId != nil {
 		s.WriteString(schemas.StartGameSessionPlacementInput_PlacementId, *v.PlacementId)
 	}
-	serializePlayerLatencyList(s, schemas.StartGameSessionPlacementInput_PlayerLatencies, v.PlayerLatencies)
+	if v.PlayerLatencies != nil {
+		serializePlayerLatencyList(s, schemas.StartGameSessionPlacementInput_PlayerLatencies, v.PlayerLatencies)
+	}
 	if v.PriorityConfigurationOverride != nil {
 		s.WriteStruct(schemas.StartGameSessionPlacementInput_PriorityConfigurationOverride)
 		v.PriorityConfigurationOverride.SerializeMembers(s)

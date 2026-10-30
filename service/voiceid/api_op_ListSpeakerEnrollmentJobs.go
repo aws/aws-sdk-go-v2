@@ -121,7 +121,9 @@ func (v *ListSpeakerEnrollmentJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSpeakerEnrollmentJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSpeakerEnrollmentJobSummaries(s, schemas.ListSpeakerEnrollmentJobsResponse_JobSummaries, v.JobSummaries)
+	if v.JobSummaries != nil {
+		serializeSpeakerEnrollmentJobSummaries(s, schemas.ListSpeakerEnrollmentJobsResponse_JobSummaries, v.JobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpeakerEnrollmentJobsResponse_NextToken, *v.NextToken)
 	}

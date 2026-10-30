@@ -135,7 +135,9 @@ func (v *BatchGetRumMetricDefinitionsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchGetRumMetricDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDefinitions(s, schemas.BatchGetRumMetricDefinitionsResponse_MetricDefinitions, v.MetricDefinitions)
+	if v.MetricDefinitions != nil {
+		serializeMetricDefinitions(s, schemas.BatchGetRumMetricDefinitionsResponse_MetricDefinitions, v.MetricDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetRumMetricDefinitionsResponse_NextToken, *v.NextToken)
 	}

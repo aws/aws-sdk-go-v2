@@ -59,7 +59,9 @@ func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobsRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListJobsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListJobsRequest_Tags, v.Tags)
+	}
 }
 
 type ListJobsOutput struct {
@@ -84,7 +86,9 @@ func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobNameList(s, schemas.ListJobsResponse_JobNames, v.JobNames)
+	if v.JobNames != nil {
+		serializeJobNameList(s, schemas.ListJobsResponse_JobNames, v.JobNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobsResponse_NextToken, *v.NextToken)
 	}

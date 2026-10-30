@@ -90,7 +90,9 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomePageUrl != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_HomePageUrl, *v.HomePageUrl)
 	}
-	serialize__listOf__string(s, schemas.UpdateApplicationRequest_Labels, v.Labels)
+	if v.Labels != nil {
+		serialize__listOf__string(s, schemas.UpdateApplicationRequest_Labels, v.Labels)
+	}
 	if v.ReadmeBody != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_ReadmeBody, *v.ReadmeBody)
 	}
@@ -196,7 +198,9 @@ func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsVerifiedAuthor != nil {
 		s.WriteBool(schemas.UpdateApplicationResponse_IsVerifiedAuthor, *v.IsVerifiedAuthor)
 	}
-	serialize__listOf__string(s, schemas.UpdateApplicationResponse_Labels, v.Labels)
+	if v.Labels != nil {
+		serialize__listOf__string(s, schemas.UpdateApplicationResponse_Labels, v.Labels)
+	}
 	if v.LicenseUrl != nil {
 		s.WriteString(schemas.UpdateApplicationResponse_LicenseUrl, *v.LicenseUrl)
 	}

@@ -163,7 +163,9 @@ func (v *StartOutboundVoiceContactInput) SerializeMembers(s smithy.ShapeSerializ
 		v.AnswerMachineDetectionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.StartOutboundVoiceContactRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartOutboundVoiceContactRequest_Attributes, v.Attributes)
+	}
 	if v.CampaignId != nil {
 		s.WriteString(schemas.StartOutboundVoiceContactRequest_CampaignId, *v.CampaignId)
 	}
@@ -193,7 +195,9 @@ func (v *StartOutboundVoiceContactInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.QueueId != nil {
 		s.WriteString(schemas.StartOutboundVoiceContactRequest_QueueId, *v.QueueId)
 	}
-	serializeContactReferences(s, schemas.StartOutboundVoiceContactRequest_References, v.References)
+	if v.References != nil {
+		serializeContactReferences(s, schemas.StartOutboundVoiceContactRequest_References, v.References)
+	}
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.StartOutboundVoiceContactRequest_RelatedContactId, *v.RelatedContactId)
 	}

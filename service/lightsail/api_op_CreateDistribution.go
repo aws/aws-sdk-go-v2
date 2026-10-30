@@ -164,11 +164,15 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheBehaviorSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CacheBehaviors != nil {
+		serializeCacheBehaviorList(s, schemas.CreateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	}
 	if v.CertificateName != nil {
 		s.WriteString(schemas.CreateDistributionRequest_certificateName, *v.CertificateName)
 	}
-	serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	if v.CustomErrorResponses != nil {
+		serializeDistributionCustomErrorResponseList(s, schemas.CreateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	}
 	if v.DefaultCacheBehavior != nil {
 		s.WriteStruct(schemas.CreateDistributionRequest_defaultCacheBehavior)
 		v.DefaultCacheBehavior.SerializeMembers(s)
@@ -194,11 +198,15 @@ func (v *CreateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Origin.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDistributionRequest_tags, v.Tags)
+	}
 	if v.ViewerMinimumTlsProtocolVersion != "" {
 		s.WriteString(schemas.CreateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
 	}
-	serializeWafRuleList(s, schemas.CreateDistributionRequest_wafRules, v.WafRules)
+	if v.WafRules != nil {
+		serializeWafRuleList(s, schemas.CreateDistributionRequest_wafRules, v.WafRules)
+	}
 }
 
 type CreateDistributionOutput struct {

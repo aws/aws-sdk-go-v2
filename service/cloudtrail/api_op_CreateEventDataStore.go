@@ -156,7 +156,9 @@ func (v *CreateEventDataStoreInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEventDataStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.CreateEventDataStoreRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.CreateEventDataStoreRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.CreateEventDataStoreRequest_BillingMode, string(v.BillingMode))
 	}
@@ -178,7 +180,9 @@ func (v *CreateEventDataStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartIngestion != nil {
 		s.WriteBool(schemas.CreateEventDataStoreRequest_StartIngestion, *v.StartIngestion)
 	}
-	serializeTagsList(s, schemas.CreateEventDataStoreRequest_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.CreateEventDataStoreRequest_TagsList, v.TagsList)
+	}
 	if v.TerminationProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateEventDataStoreRequest_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
 	}
@@ -246,7 +250,9 @@ func (v *CreateEventDataStoreOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedEventSelectors(s, schemas.CreateEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.AdvancedEventSelectors != nil {
+		serializeAdvancedEventSelectors(s, schemas.CreateEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.CreateEventDataStoreResponse_BillingMode, string(v.BillingMode))
 	}
@@ -274,7 +280,9 @@ func (v *CreateEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.CreateEventDataStoreResponse_Status, string(v.Status))
 	}
-	serializeTagsList(s, schemas.CreateEventDataStoreResponse_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.CreateEventDataStoreResponse_TagsList, v.TagsList)
+	}
 	if v.TerminationProtectionEnabled != nil {
 		s.WriteBool(schemas.CreateEventDataStoreResponse_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
 	}

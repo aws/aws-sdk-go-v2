@@ -104,9 +104,15 @@ func (v *ListRevenueAttributionAllocationsInput) SerializeMembers(s smithy.Shape
 	if v.Catalog != "" {
 		s.WriteString(schemas.ListRevenueAttributionAllocationsInput_Catalog, string(v.Catalog))
 	}
-	serializeCustomerAwsAccountIdFilterList(s, schemas.ListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters, v.CustomerAwsAccountIdFilters)
-	serializeEntityIdentifierFilterList(s, schemas.ListRevenueAttributionAllocationsInput_EntityIdentifierFilters, v.EntityIdentifierFilters)
-	serializeEntityTypeFilterList(s, schemas.ListRevenueAttributionAllocationsInput_EntityTypeFilters, v.EntityTypeFilters)
+	if v.CustomerAwsAccountIdFilters != nil {
+		serializeCustomerAwsAccountIdFilterList(s, schemas.ListRevenueAttributionAllocationsInput_CustomerAwsAccountIdFilters, v.CustomerAwsAccountIdFilters)
+	}
+	if v.EntityIdentifierFilters != nil {
+		serializeEntityIdentifierFilterList(s, schemas.ListRevenueAttributionAllocationsInput_EntityIdentifierFilters, v.EntityIdentifierFilters)
+	}
+	if v.EntityTypeFilters != nil {
+		serializeEntityTypeFilterList(s, schemas.ListRevenueAttributionAllocationsInput_EntityTypeFilters, v.EntityTypeFilters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRevenueAttributionAllocationsInput_MaxResults, *v.MaxResults)
 	}
@@ -156,7 +162,9 @@ func (v *ListRevenueAttributionAllocationsOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRevenueAttributionAllocationsOutput_NextToken, *v.NextToken)
 	}
-	serializeRevenueAttributionAllocationSummaryList(s, schemas.ListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries, v.RevenueAttributionAllocationSummaries)
+	if v.RevenueAttributionAllocationSummaries != nil {
+		serializeRevenueAttributionAllocationSummaryList(s, schemas.ListRevenueAttributionAllocationsOutput_RevenueAttributionAllocationSummaries, v.RevenueAttributionAllocationSummaries)
+	}
 }
 func (v *ListRevenueAttributionAllocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRevenueAttributionAllocationsOutput, func(s *smithy.Schema) error {

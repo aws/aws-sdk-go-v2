@@ -289,7 +289,9 @@ func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionsSuppressorWaitPeriod != nil {
 		s.WriteInt32(schemas.PutCompositeAlarmInput_ActionsSuppressorWaitPeriod, *v.ActionsSuppressorWaitPeriod)
 	}
-	serializeResourceList(s, schemas.PutCompositeAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmActions != nil {
+		serializeResourceList(s, schemas.PutCompositeAlarmInput_AlarmActions, v.AlarmActions)
+	}
 	if v.AlarmDescription != nil {
 		s.WriteString(schemas.PutCompositeAlarmInput_AlarmDescription, *v.AlarmDescription)
 	}
@@ -299,9 +301,15 @@ func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlarmRule != nil {
 		s.WriteString(schemas.PutCompositeAlarmInput_AlarmRule, *v.AlarmRule)
 	}
-	serializeResourceList(s, schemas.PutCompositeAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
-	serializeResourceList(s, schemas.PutCompositeAlarmInput_OKActions, v.OKActions)
-	serializeTagList(s, schemas.PutCompositeAlarmInput_Tags, v.Tags)
+	if v.InsufficientDataActions != nil {
+		serializeResourceList(s, schemas.PutCompositeAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	}
+	if v.OKActions != nil {
+		serializeResourceList(s, schemas.PutCompositeAlarmInput_OKActions, v.OKActions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutCompositeAlarmInput_Tags, v.Tags)
+	}
 }
 
 type PutCompositeAlarmOutput struct {

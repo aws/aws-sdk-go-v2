@@ -61,7 +61,9 @@ func (v *SetPrincipalTagAttributeMapInput) SerializeMembers(s smithy.ShapeSerial
 	if v.IdentityProviderName != nil {
 		s.WriteString(schemas.SetPrincipalTagAttributeMapInput_IdentityProviderName, *v.IdentityProviderName)
 	}
-	serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapInput_PrincipalTags, v.PrincipalTags)
+	if v.PrincipalTags != nil {
+		serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapInput_PrincipalTags, v.PrincipalTags)
+	}
 	if v.UseDefaults != nil {
 		s.WriteBool(schemas.SetPrincipalTagAttributeMapInput_UseDefaults, *v.UseDefaults)
 	}
@@ -102,7 +104,9 @@ func (v *SetPrincipalTagAttributeMapOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.IdentityProviderName != nil {
 		s.WriteString(schemas.SetPrincipalTagAttributeMapResponse_IdentityProviderName, *v.IdentityProviderName)
 	}
-	serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags, v.PrincipalTags)
+	if v.PrincipalTags != nil {
+		serializePrincipalTags(s, schemas.SetPrincipalTagAttributeMapResponse_PrincipalTags, v.PrincipalTags)
+	}
 	if v.UseDefaults != nil {
 		s.WriteBool(schemas.SetPrincipalTagAttributeMapResponse_UseDefaults, *v.UseDefaults)
 	}

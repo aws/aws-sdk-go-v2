@@ -104,7 +104,9 @@ func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != nil {
 		s.WriteString(schemas.ConflictException_code, *v.Code)
 	}
-	serializeConflictExceptionErrors(s, schemas.ConflictException_errors, v.Errors)
+	if v.Errors != nil {
+		serializeConflictExceptionErrors(s, schemas.ConflictException_errors, v.Errors)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ConflictException_message, *v.Message)
 	}
@@ -514,7 +516,9 @@ func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != nil {
 		s.WriteString(schemas.ValidationException_code, *v.Code)
 	}
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	if v.FieldList != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_fieldList, v.FieldList)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}

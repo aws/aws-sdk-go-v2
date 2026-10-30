@@ -61,8 +61,12 @@ func (v *UpdateFlowPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FlowId != nil {
 		s.WriteString(schemas.UpdateFlowPermissionsInput_FlowId, *v.FlowId)
 	}
-	serializeUpdateFlowPermissionsInputGrantPermissionsList(s, schemas.UpdateFlowPermissionsInput_GrantPermissions, v.GrantPermissions)
-	serializeUpdateFlowPermissionsInputRevokePermissionsList(s, schemas.UpdateFlowPermissionsInput_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeUpdateFlowPermissionsInputGrantPermissionsList(s, schemas.UpdateFlowPermissionsInput_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeUpdateFlowPermissionsInputRevokePermissionsList(s, schemas.UpdateFlowPermissionsInput_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateFlowPermissionsOutput struct {
@@ -109,7 +113,9 @@ func (v *UpdateFlowPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.FlowId != nil {
 		s.WriteString(schemas.UpdateFlowPermissionsOutput_FlowId, *v.FlowId)
 	}
-	serializePermissionsList(s, schemas.UpdateFlowPermissionsOutput_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissionsList(s, schemas.UpdateFlowPermissionsOutput_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateFlowPermissionsOutput_RequestId, *v.RequestId)
 	}

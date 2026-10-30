@@ -135,7 +135,9 @@ func (v *ListProvisionedModelThroughputsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProvisionedModelThroughputsResponse_nextToken, *v.NextToken)
 	}
-	serializeProvisionedModelSummaries(s, schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries, v.ProvisionedModelSummaries)
+	if v.ProvisionedModelSummaries != nil {
+		serializeProvisionedModelSummaries(s, schemas.ListProvisionedModelThroughputsResponse_provisionedModelSummaries, v.ProvisionedModelSummaries)
+	}
 }
 func (v *ListProvisionedModelThroughputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisionedModelThroughputsResponse, func(s *smithy.Schema) error {

@@ -184,7 +184,9 @@ func (v *GetTaskInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkflowVersion != nil {
 		s.WriteString(schemas.GetTaskInstanceResponse_WorkflowVersion, *v.WorkflowVersion)
 	}
-	serializeGenericMap(s, schemas.GetTaskInstanceResponse_Xcom, v.Xcom)
+	if v.Xcom != nil {
+		serializeGenericMap(s, schemas.GetTaskInstanceResponse_Xcom, v.Xcom)
+	}
 }
 func (v *GetTaskInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTaskInstanceResponse, func(s *smithy.Schema) error {

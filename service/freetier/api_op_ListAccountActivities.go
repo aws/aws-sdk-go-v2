@@ -57,7 +57,9 @@ func (v *ListAccountActivitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccountActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterActivityStatuses(s, schemas.ListAccountActivitiesRequest_filterActivityStatuses, v.FilterActivityStatuses)
+	if v.FilterActivityStatuses != nil {
+		serializeFilterActivityStatuses(s, schemas.ListAccountActivitiesRequest_filterActivityStatuses, v.FilterActivityStatuses)
+	}
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.ListAccountActivitiesRequest_languageCode, string(v.LanguageCode))
 	}
@@ -93,7 +95,9 @@ func (v *ListAccountActivitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccountActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActivities(s, schemas.ListAccountActivitiesResponse_activities, v.Activities)
+	if v.Activities != nil {
+		serializeActivities(s, schemas.ListAccountActivitiesResponse_activities, v.Activities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountActivitiesResponse_nextToken, *v.NextToken)
 	}

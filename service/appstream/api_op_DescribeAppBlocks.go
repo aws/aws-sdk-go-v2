@@ -48,7 +48,9 @@ func (v *DescribeAppBlocksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAppBlocksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArnList(s, schemas.DescribeAppBlocksRequest_Arns, v.Arns)
+	if v.Arns != nil {
+		serializeArnList(s, schemas.DescribeAppBlocksRequest_Arns, v.Arns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeAppBlocksRequest_MaxResults, *v.MaxResults)
 	}
@@ -79,7 +81,9 @@ func (v *DescribeAppBlocksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAppBlocksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppBlocks(s, schemas.DescribeAppBlocksResult_AppBlocks, v.AppBlocks)
+	if v.AppBlocks != nil {
+		serializeAppBlocks(s, schemas.DescribeAppBlocksResult_AppBlocks, v.AppBlocks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAppBlocksResult_NextToken, *v.NextToken)
 	}

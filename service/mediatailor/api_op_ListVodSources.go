@@ -115,7 +115,9 @@ func (v *ListVodSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVodSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfVodSource(s, schemas.ListVodSourcesResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfVodSource(s, schemas.ListVodSourcesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVodSourcesResponse_NextToken, *v.NextToken)
 	}

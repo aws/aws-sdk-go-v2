@@ -62,7 +62,9 @@ func (v *DescribeDataMigrationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDataMigrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeDataMigrationsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDataMigrationsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeDataMigrationsMessage_Marker, *v.Marker)
 	}
@@ -100,7 +102,9 @@ func (v *DescribeDataMigrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDataMigrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataMigrations(s, schemas.DescribeDataMigrationsResponse_DataMigrations, v.DataMigrations)
+	if v.DataMigrations != nil {
+		serializeDataMigrations(s, schemas.DescribeDataMigrationsResponse_DataMigrations, v.DataMigrations)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeDataMigrationsResponse_Marker, *v.Marker)
 	}

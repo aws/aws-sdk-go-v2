@@ -166,7 +166,9 @@ func (v *CreateTaskSetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTaskSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderStrategy(s, schemas.CreateTaskSetRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.CreateTaskSetRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTaskSetRequest_clientToken, *v.ClientToken)
 	}
@@ -179,7 +181,9 @@ func (v *CreateTaskSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LaunchType != "" {
 		s.WriteString(schemas.CreateTaskSetRequest_launchType, string(v.LaunchType))
 	}
-	serializeLoadBalancers(s, schemas.CreateTaskSetRequest_loadBalancers, v.LoadBalancers)
+	if v.LoadBalancers != nil {
+		serializeLoadBalancers(s, schemas.CreateTaskSetRequest_loadBalancers, v.LoadBalancers)
+	}
 	if v.NetworkConfiguration != nil {
 		s.WriteStruct(schemas.CreateTaskSetRequest_networkConfiguration)
 		v.NetworkConfiguration.SerializeMembers(s)
@@ -196,8 +200,12 @@ func (v *CreateTaskSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Service != nil {
 		s.WriteString(schemas.CreateTaskSetRequest_service, *v.Service)
 	}
-	serializeServiceRegistries(s, schemas.CreateTaskSetRequest_serviceRegistries, v.ServiceRegistries)
-	serializeTags(s, schemas.CreateTaskSetRequest_tags, v.Tags)
+	if v.ServiceRegistries != nil {
+		serializeServiceRegistries(s, schemas.CreateTaskSetRequest_serviceRegistries, v.ServiceRegistries)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTaskSetRequest_tags, v.Tags)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteString(schemas.CreateTaskSetRequest_taskDefinition, *v.TaskDefinition)
 	}

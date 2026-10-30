@@ -86,7 +86,9 @@ func (v *ListIntentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListIntentsRequest_botVersion, *v.BotVersion)
 	}
-	serializeIntentFilters(s, schemas.ListIntentsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeIntentFilters(s, schemas.ListIntentsRequest_filters, v.Filters)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListIntentsRequest_localeId, *v.LocaleId)
 	}
@@ -145,7 +147,9 @@ func (v *ListIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListIntentsResponse_botVersion, *v.BotVersion)
 	}
-	serializeIntentSummaryList(s, schemas.ListIntentsResponse_intentSummaries, v.IntentSummaries)
+	if v.IntentSummaries != nil {
+		serializeIntentSummaryList(s, schemas.ListIntentsResponse_intentSummaries, v.IntentSummaries)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListIntentsResponse_localeId, *v.LocaleId)
 	}

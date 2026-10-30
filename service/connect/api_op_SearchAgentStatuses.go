@@ -103,7 +103,9 @@ func (v *SearchAgentStatusesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchAgentStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentStatusList(s, schemas.SearchAgentStatusesResponse_AgentStatuses, v.AgentStatuses)
+	if v.AgentStatuses != nil {
+		serializeAgentStatusList(s, schemas.SearchAgentStatusesResponse_AgentStatuses, v.AgentStatuses)
+	}
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchAgentStatusesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}

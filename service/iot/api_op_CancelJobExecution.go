@@ -85,7 +85,9 @@ func (v *CancelJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobId != nil {
 		s.WriteString(schemas.CancelJobExecutionRequest_jobId, *v.JobId)
 	}
-	serializeDetailsMap(s, schemas.CancelJobExecutionRequest_statusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeDetailsMap(s, schemas.CancelJobExecutionRequest_statusDetails, v.StatusDetails)
+	}
 	if v.ThingName != nil {
 		s.WriteString(schemas.CancelJobExecutionRequest_thingName, *v.ThingName)
 	}

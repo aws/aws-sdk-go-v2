@@ -68,7 +68,9 @@ func (v *CreateReportGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateReportGroupInput_name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateReportGroupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateReportGroupInput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateReportGroupInput_type, string(v.Type))
 	}

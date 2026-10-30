@@ -78,7 +78,9 @@ func (v *CreateCustomPermissionsInput) SerializeMembers(s smithy.ShapeSerializer
 		v.Governance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCustomPermissionsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomPermissionsRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCustomPermissionsOutput struct {

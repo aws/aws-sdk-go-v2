@@ -114,7 +114,9 @@ func (v *AddApplicationCloudWatchLoggingOptionOutput) SerializeMembers(s smithy.
 	if v.ApplicationVersionId != nil {
 		s.WriteInt64(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId, *v.ApplicationVersionId)
 	}
-	serializeCloudWatchLoggingOptionDescriptions(s, schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.CloudWatchLoggingOptionDescriptions != nil {
+		serializeCloudWatchLoggingOptionDescriptions(s, schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	}
 	if v.OperationId != nil {
 		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionResponse_OperationId, *v.OperationId)
 	}

@@ -121,8 +121,12 @@ func (v *GetTrainingDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetTrainingDatasetResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetTrainingDatasetResponse_tags, v.Tags)
-	serializeDatasetList(s, schemas.GetTrainingDatasetResponse_trainingData, v.TrainingData)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetTrainingDatasetResponse_tags, v.Tags)
+	}
+	if v.TrainingData != nil {
+		serializeDatasetList(s, schemas.GetTrainingDatasetResponse_trainingData, v.TrainingData)
+	}
 	if v.TrainingDatasetArn != nil {
 		s.WriteString(schemas.GetTrainingDatasetResponse_trainingDatasetArn, *v.TrainingDatasetArn)
 	}

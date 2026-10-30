@@ -72,8 +72,12 @@ func (v *CreateTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomInstructions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFolderArnList(s, schemas.CreateTopicRequest_FolderArns, v.FolderArns)
-	serializeTagList(s, schemas.CreateTopicRequest_Tags, v.Tags)
+	if v.FolderArns != nil {
+		serializeFolderArnList(s, schemas.CreateTopicRequest_FolderArns, v.FolderArns)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTopicRequest_Tags, v.Tags)
+	}
 	if v.Topic != nil {
 		s.WriteStruct(schemas.CreateTopicRequest_Topic)
 		v.Topic.SerializeMembers(s)

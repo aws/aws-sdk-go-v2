@@ -81,7 +81,9 @@ func (v *UpdateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCode(s, schemas.UpdateWorkflowRequest_Code, v.Code)
+	if v.Code != nil {
+		serializeCode(s, schemas.UpdateWorkflowRequest_Code, v.Code)
+	}
 	if v.DefinitionS3Location != nil {
 		s.WriteStruct(schemas.UpdateWorkflowRequest_DefinitionS3Location)
 		v.DefinitionS3Location.SerializeMembers(s)
@@ -146,7 +148,9 @@ func (v *UpdateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.UpdateWorkflowResponse_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeWarningMessages(s, schemas.UpdateWorkflowResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarningMessages(s, schemas.UpdateWorkflowResponse_Warnings, v.Warnings)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.UpdateWorkflowResponse_WorkflowArn, *v.WorkflowArn)
 	}

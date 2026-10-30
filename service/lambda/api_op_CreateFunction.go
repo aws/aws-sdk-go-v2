@@ -281,7 +281,9 @@ func (v *CreateFunctionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchitecturesList(s, schemas.CreateFunctionRequest_Architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitecturesList(s, schemas.CreateFunctionRequest_Architectures, v.Architectures)
+	}
 	if v.CapacityProviderConfig != nil {
 		s.WriteStruct(schemas.CreateFunctionRequest_CapacityProviderConfig)
 		v.CapacityProviderConfig.SerializeMembers(s)
@@ -318,7 +320,9 @@ func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EphemeralStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileSystemConfigList(s, schemas.CreateFunctionRequest_FileSystemConfigs, v.FileSystemConfigs)
+	if v.FileSystemConfigs != nil {
+		serializeFileSystemConfigList(s, schemas.CreateFunctionRequest_FileSystemConfigs, v.FileSystemConfigs)
+	}
 	if v.FunctionName != nil {
 		s.WriteString(schemas.CreateFunctionRequest_FunctionName, *v.FunctionName)
 	}
@@ -333,7 +337,9 @@ func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.CreateFunctionRequest_KMSKeyArn, *v.KMSKeyArn)
 	}
-	serializeLayerList(s, schemas.CreateFunctionRequest_Layers, v.Layers)
+	if v.Layers != nil {
+		serializeLayerList(s, schemas.CreateFunctionRequest_Layers, v.Layers)
+	}
 	if v.LoggingConfig != nil {
 		s.WriteStruct(schemas.CreateFunctionRequest_LoggingConfig)
 		v.LoggingConfig.SerializeMembers(s)
@@ -362,7 +368,9 @@ func (v *CreateFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SnapStart.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateFunctionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFunctionRequest_Tags, v.Tags)
+	}
 	if v.TenancyConfig != nil {
 		s.WriteStruct(schemas.CreateFunctionRequest_TenancyConfig)
 		v.TenancyConfig.SerializeMembers(s)
@@ -580,7 +588,9 @@ func (v *CreateFunctionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArchitecturesList(s, schemas.FunctionConfiguration_Architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitecturesList(s, schemas.FunctionConfiguration_Architectures, v.Architectures)
+	}
 	if v.CapacityProviderConfig != nil {
 		s.WriteStruct(schemas.FunctionConfiguration_CapacityProviderConfig)
 		v.CapacityProviderConfig.SerializeMembers(s)
@@ -618,7 +628,9 @@ func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EphemeralStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileSystemConfigList(s, schemas.FunctionConfiguration_FileSystemConfigs, v.FileSystemConfigs)
+	if v.FileSystemConfigs != nil {
+		serializeFileSystemConfigList(s, schemas.FunctionConfiguration_FileSystemConfigs, v.FileSystemConfigs)
+	}
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.FunctionConfiguration_FunctionArn, *v.FunctionArn)
 	}
@@ -648,7 +660,9 @@ func (v *CreateFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdateStatusReasonCode != "" {
 		s.WriteString(schemas.FunctionConfiguration_LastUpdateStatusReasonCode, string(v.LastUpdateStatusReasonCode))
 	}
-	serializeLayersReferenceList(s, schemas.FunctionConfiguration_Layers, v.Layers)
+	if v.Layers != nil {
+		serializeLayersReferenceList(s, schemas.FunctionConfiguration_Layers, v.Layers)
+	}
 	if v.LoggingConfig != nil {
 		s.WriteStruct(schemas.FunctionConfiguration_LoggingConfig)
 		v.LoggingConfig.SerializeMembers(s)

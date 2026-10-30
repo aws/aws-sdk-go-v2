@@ -71,7 +71,9 @@ func (v *CreateMetricAttributionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DatasetGroupArn != nil {
 		s.WriteString(schemas.CreateMetricAttributionRequest_datasetGroupArn, *v.DatasetGroupArn)
 	}
-	serializeMetricAttributes(s, schemas.CreateMetricAttributionRequest_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricAttributes(s, schemas.CreateMetricAttributionRequest_metrics, v.Metrics)
+	}
 	if v.MetricsOutputConfig != nil {
 		s.WriteStruct(schemas.CreateMetricAttributionRequest_metricsOutputConfig)
 		v.MetricsOutputConfig.SerializeMembers(s)

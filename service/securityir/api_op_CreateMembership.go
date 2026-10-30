@@ -84,12 +84,18 @@ func (v *CreateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CoverEntireOrganization != nil {
 		s.WriteBool(schemas.CreateMembershipRequest_coverEntireOrganization, *v.CoverEntireOrganization)
 	}
-	serializeIncidentResponseTeam(s, schemas.CreateMembershipRequest_incidentResponseTeam, v.IncidentResponseTeam)
+	if v.IncidentResponseTeam != nil {
+		serializeIncidentResponseTeam(s, schemas.CreateMembershipRequest_incidentResponseTeam, v.IncidentResponseTeam)
+	}
 	if v.MembershipName != nil {
 		s.WriteString(schemas.CreateMembershipRequest_membershipName, *v.MembershipName)
 	}
-	serializeOptInFeatures(s, schemas.CreateMembershipRequest_optInFeatures, v.OptInFeatures)
-	serializeTagMap(s, schemas.CreateMembershipRequest_tags, v.Tags)
+	if v.OptInFeatures != nil {
+		serializeOptInFeatures(s, schemas.CreateMembershipRequest_optInFeatures, v.OptInFeatures)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMembershipRequest_tags, v.Tags)
+	}
 }
 
 type CreateMembershipOutput struct {

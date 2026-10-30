@@ -84,7 +84,9 @@ func (v *UpdateDomainEntryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDomainEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.UpdateDomainEntryResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.UpdateDomainEntryResult_operations, v.Operations)
+	}
 }
 func (v *UpdateDomainEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateDomainEntryResult, func(s *smithy.Schema) error {

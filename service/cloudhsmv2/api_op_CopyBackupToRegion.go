@@ -62,7 +62,9 @@ func (v *CopyBackupToRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationRegion != nil {
 		s.WriteString(schemas.CopyBackupToRegionRequest_DestinationRegion, *v.DestinationRegion)
 	}
-	serializeTagList(s, schemas.CopyBackupToRegionRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CopyBackupToRegionRequest_TagList, v.TagList)
+	}
 }
 
 type CopyBackupToRegionOutput struct {

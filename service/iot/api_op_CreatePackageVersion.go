@@ -86,7 +86,9 @@ func (v *CreatePackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Artifact.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceAttributes(s, schemas.CreatePackageVersionRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeResourceAttributes(s, schemas.CreatePackageVersionRequest_attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreatePackageVersionRequest_clientToken, *v.ClientToken)
 	}
@@ -99,7 +101,9 @@ func (v *CreatePackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Recipe != nil {
 		s.WriteString(schemas.CreatePackageVersionRequest_recipe, *v.Recipe)
 	}
-	serializeTagMap(s, schemas.CreatePackageVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePackageVersionRequest_tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreatePackageVersionRequest_versionName, *v.VersionName)
 	}
@@ -144,7 +148,9 @@ func (v *CreatePackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceAttributes(s, schemas.CreatePackageVersionResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeResourceAttributes(s, schemas.CreatePackageVersionResponse_attributes, v.Attributes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePackageVersionResponse_description, *v.Description)
 	}

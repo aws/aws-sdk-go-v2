@@ -63,7 +63,9 @@ func (v *UpdateFacetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFacetAttributeUpdateList(s, schemas.UpdateFacetRequest_AttributeUpdates, v.AttributeUpdates)
+	if v.AttributeUpdates != nil {
+		serializeFacetAttributeUpdateList(s, schemas.UpdateFacetRequest_AttributeUpdates, v.AttributeUpdates)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateFacetRequest_Name, *v.Name)
 	}

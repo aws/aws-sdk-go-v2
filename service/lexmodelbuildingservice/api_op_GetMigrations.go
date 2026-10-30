@@ -108,7 +108,9 @@ func (v *GetMigrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMigrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationSummaryList(s, schemas.GetMigrationsResponse_migrationSummaries, v.MigrationSummaries)
+	if v.MigrationSummaries != nil {
+		serializeMigrationSummaryList(s, schemas.GetMigrationsResponse_migrationSummaries, v.MigrationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMigrationsResponse_nextToken, *v.NextToken)
 	}

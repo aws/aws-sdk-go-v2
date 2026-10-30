@@ -58,7 +58,9 @@ func (v *ListEksAnywhereSubscriptionsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListEksAnywhereSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEksAnywhereSubscriptionStatusValues(s, schemas.ListEksAnywhereSubscriptionsRequest_includeStatus, v.IncludeStatus)
+	if v.IncludeStatus != nil {
+		serializeEksAnywhereSubscriptionStatusValues(s, schemas.ListEksAnywhereSubscriptionsRequest_includeStatus, v.IncludeStatus)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEksAnywhereSubscriptionsRequest_maxResults, *v.MaxResults)
 	}
@@ -95,7 +97,9 @@ func (v *ListEksAnywhereSubscriptionsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEksAnywhereSubscriptionsResponse_nextToken, *v.NextToken)
 	}
-	serializeEksAnywhereSubscriptionList(s, schemas.ListEksAnywhereSubscriptionsResponse_subscriptions, v.Subscriptions)
+	if v.Subscriptions != nil {
+		serializeEksAnywhereSubscriptionList(s, schemas.ListEksAnywhereSubscriptionsResponse_subscriptions, v.Subscriptions)
+	}
 }
 func (v *ListEksAnywhereSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEksAnywhereSubscriptionsResponse, func(s *smithy.Schema) error {

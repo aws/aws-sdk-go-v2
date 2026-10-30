@@ -81,14 +81,18 @@ func (v *StartVectorEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerialize
 		v.InputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVectorEnrichmentJobConfig(s, schemas.StartVectorEnrichmentJobInput_JobConfig, v.JobConfig)
+	if v.JobConfig != nil {
+		serializeVectorEnrichmentJobConfig(s, schemas.StartVectorEnrichmentJobInput_JobConfig, v.JobConfig)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.StartVectorEnrichmentJobInput_KmsKeyId, *v.KmsKeyId)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.StartVectorEnrichmentJobInput_Name, *v.Name)
 	}
-	serializeTags(s, schemas.StartVectorEnrichmentJobInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartVectorEnrichmentJobInput_Tags, v.Tags)
+	}
 }
 
 type StartVectorEnrichmentJobOutput struct {
@@ -174,7 +178,9 @@ func (v *StartVectorEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.InputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVectorEnrichmentJobConfig(s, schemas.StartVectorEnrichmentJobOutput_JobConfig, v.JobConfig)
+	if v.JobConfig != nil {
+		serializeVectorEnrichmentJobConfig(s, schemas.StartVectorEnrichmentJobOutput_JobConfig, v.JobConfig)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.StartVectorEnrichmentJobOutput_KmsKeyId, *v.KmsKeyId)
 	}
@@ -184,7 +190,9 @@ func (v *StartVectorEnrichmentJobOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Status != "" {
 		s.WriteString(schemas.StartVectorEnrichmentJobOutput_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.StartVectorEnrichmentJobOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartVectorEnrichmentJobOutput_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.StartVectorEnrichmentJobOutput_Type, string(v.Type))
 	}

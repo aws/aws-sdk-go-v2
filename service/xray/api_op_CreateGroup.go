@@ -91,7 +91,9 @@ func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InsightsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateGroupOutput struct {

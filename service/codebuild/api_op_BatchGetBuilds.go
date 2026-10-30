@@ -43,7 +43,9 @@ func (v *BatchGetBuildsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetBuildsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildIds(s, schemas.BatchGetBuildsInput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeBuildIds(s, schemas.BatchGetBuildsInput_ids, v.Ids)
+	}
 }
 
 type BatchGetBuildsOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetBuildsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuilds(s, schemas.BatchGetBuildsOutput_builds, v.Builds)
-	serializeBuildIds(s, schemas.BatchGetBuildsOutput_buildsNotFound, v.BuildsNotFound)
+	if v.Builds != nil {
+		serializeBuilds(s, schemas.BatchGetBuildsOutput_builds, v.Builds)
+	}
+	if v.BuildsNotFound != nil {
+		serializeBuildIds(s, schemas.BatchGetBuildsOutput_buildsNotFound, v.BuildsNotFound)
+	}
 }
 func (v *BatchGetBuildsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetBuildsOutput, func(s *smithy.Schema) error {

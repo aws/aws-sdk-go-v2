@@ -182,7 +182,9 @@ func (v *DescribeDomainConfigurationOutput) SerializeMembers(s smithy.ShapeSeria
 		v.ServerCertificateConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeServerCertificates(s, schemas.DescribeDomainConfigurationResponse_serverCertificates, v.ServerCertificates)
+	if v.ServerCertificates != nil {
+		serializeServerCertificates(s, schemas.DescribeDomainConfigurationResponse_serverCertificates, v.ServerCertificates)
+	}
 	if v.ServiceType != "" {
 		s.WriteString(schemas.DescribeDomainConfigurationResponse_serviceType, string(v.ServiceType))
 	}

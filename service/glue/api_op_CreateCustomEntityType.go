@@ -64,14 +64,18 @@ func (v *CreateCustomEntityTypeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCustomEntityTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContextWords(s, schemas.CreateCustomEntityTypeRequest_ContextWords, v.ContextWords)
+	if v.ContextWords != nil {
+		serializeContextWords(s, schemas.CreateCustomEntityTypeRequest_ContextWords, v.ContextWords)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCustomEntityTypeRequest_Name, *v.Name)
 	}
 	if v.RegexString != nil {
 		s.WriteString(schemas.CreateCustomEntityTypeRequest_RegexString, *v.RegexString)
 	}
-	serializeTagsMap(s, schemas.CreateCustomEntityTypeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateCustomEntityTypeRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCustomEntityTypeOutput struct {

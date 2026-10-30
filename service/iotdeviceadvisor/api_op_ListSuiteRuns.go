@@ -97,7 +97,9 @@ func (v *ListSuiteRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSuiteRunsResponse_nextToken, *v.NextToken)
 	}
-	serializeSuiteRunsList(s, schemas.ListSuiteRunsResponse_suiteRunsList, v.SuiteRunsList)
+	if v.SuiteRunsList != nil {
+		serializeSuiteRunsList(s, schemas.ListSuiteRunsResponse_suiteRunsList, v.SuiteRunsList)
+	}
 }
 func (v *ListSuiteRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSuiteRunsResponse, func(s *smithy.Schema) error {

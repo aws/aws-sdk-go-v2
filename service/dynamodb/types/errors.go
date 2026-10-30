@@ -137,7 +137,9 @@ func (v *ConditionalCheckFailedException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConditionalCheckFailedException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMap(s, schemas.ConditionalCheckFailedException_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeMap(s, schemas.ConditionalCheckFailedException_Item, v.Item)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ConditionalCheckFailedException_message, *v.Message)
 	}
@@ -1084,7 +1086,9 @@ func (v *ProvisionedThroughputExceededException) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ProvisionedThroughputExceededException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThrottlingReasonList(s, schemas.ProvisionedThroughputExceededException_ThrottlingReasons, v.ThrottlingReasons)
+	if v.ThrottlingReasons != nil {
+		serializeThrottlingReasonList(s, schemas.ProvisionedThroughputExceededException_ThrottlingReasons, v.ThrottlingReasons)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ProvisionedThroughputExceededException_message, *v.Message)
 	}
@@ -1284,7 +1288,9 @@ func (v *RequestLimitExceeded) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RequestLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThrottlingReasonList(s, schemas.RequestLimitExceeded_ThrottlingReasons, v.ThrottlingReasons)
+	if v.ThrottlingReasons != nil {
+		serializeThrottlingReasonList(s, schemas.RequestLimitExceeded_ThrottlingReasons, v.ThrottlingReasons)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.RequestLimitExceeded_message, *v.Message)
 	}
@@ -1590,7 +1596,9 @@ func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ThrottlingException_message, *v.Message)
 	}
-	serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+	if v.ThrottlingReasons != nil {
+		serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+	}
 }
 func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
@@ -1784,7 +1792,9 @@ func (v *TransactionCanceledException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TransactionCanceledException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCancellationReasonList(s, schemas.TransactionCanceledException_CancellationReasons, v.CancellationReasons)
+	if v.CancellationReasons != nil {
+		serializeCancellationReasonList(s, schemas.TransactionCanceledException_CancellationReasons, v.CancellationReasons)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.TransactionCanceledException_Message, *v.Message)
 	}

@@ -117,7 +117,9 @@ func (v *SearchUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchUsersResponse_NextToken, *v.NextToken)
 	}
-	serializeUserSearchSummaryList(s, schemas.SearchUsersResponse_Users, v.Users)
+	if v.Users != nil {
+		serializeUserSearchSummaryList(s, schemas.SearchUsersResponse_Users, v.Users)
+	}
 }
 func (v *SearchUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchUsersResponse, func(s *smithy.Schema) error {

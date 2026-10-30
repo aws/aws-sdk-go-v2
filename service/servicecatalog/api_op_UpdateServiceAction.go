@@ -62,7 +62,9 @@ func (v *UpdateServiceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.UpdateServiceActionInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeServiceActionDefinitionMap(s, schemas.UpdateServiceActionInput_Definition, v.Definition)
+	if v.Definition != nil {
+		serializeServiceActionDefinitionMap(s, schemas.UpdateServiceActionInput_Definition, v.Definition)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateServiceActionInput_Description, *v.Description)
 	}

@@ -113,7 +113,9 @@ func (v *ListWorkflowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkflowStepsResponse_nextToken, *v.NextToken)
 	}
-	serializeWorkflowStepsSummaryList(s, schemas.ListWorkflowStepsResponse_workflowStepsSummary, v.WorkflowStepsSummary)
+	if v.WorkflowStepsSummary != nil {
+		serializeWorkflowStepsSummaryList(s, schemas.ListWorkflowStepsResponse_workflowStepsSummary, v.WorkflowStepsSummary)
+	}
 }
 func (v *ListWorkflowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkflowStepsResponse, func(s *smithy.Schema) error {

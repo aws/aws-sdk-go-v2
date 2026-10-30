@@ -95,7 +95,9 @@ func (v *ListRetainedMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRetainedMessagesResponse_nextToken, *v.NextToken)
 	}
-	serializeRetainedMessageList(s, schemas.ListRetainedMessagesResponse_retainedTopics, v.RetainedTopics)
+	if v.RetainedTopics != nil {
+		serializeRetainedMessageList(s, schemas.ListRetainedMessagesResponse_retainedTopics, v.RetainedTopics)
+	}
 }
 func (v *ListRetainedMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRetainedMessagesResponse, func(s *smithy.Schema) error {

@@ -65,7 +65,9 @@ func (v *CreateSubscriptionGrantInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSubscriptionGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetTargetNames(s, schemas.CreateSubscriptionGrantInput_assetTargetNames, v.AssetTargetNames)
+	if v.AssetTargetNames != nil {
+		serializeAssetTargetNames(s, schemas.CreateSubscriptionGrantInput_assetTargetNames, v.AssetTargetNames)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateSubscriptionGrantInput_clientToken, *v.ClientToken)
 	}
@@ -75,7 +77,9 @@ func (v *CreateSubscriptionGrantInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EnvironmentIdentifier != nil {
 		s.WriteString(schemas.CreateSubscriptionGrantInput_environmentIdentifier, *v.EnvironmentIdentifier)
 	}
-	serializeGrantedEntityInput(s, schemas.CreateSubscriptionGrantInput_grantedEntity, v.GrantedEntity)
+	if v.GrantedEntity != nil {
+		serializeGrantedEntityInput(s, schemas.CreateSubscriptionGrantInput_grantedEntity, v.GrantedEntity)
+	}
 	if v.SubscriptionTargetIdentifier != nil {
 		s.WriteString(schemas.CreateSubscriptionGrantInput_subscriptionTargetIdentifier, *v.SubscriptionTargetIdentifier)
 	}
@@ -150,7 +154,9 @@ func (v *CreateSubscriptionGrantOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSubscriptionGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubscribedAssets(s, schemas.CreateSubscriptionGrantOutput_assets, v.Assets)
+	if v.Assets != nil {
+		serializeSubscribedAssets(s, schemas.CreateSubscriptionGrantOutput_assets, v.Assets)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateSubscriptionGrantOutput_createdAt, *v.CreatedAt)
 	}
@@ -163,7 +169,9 @@ func (v *CreateSubscriptionGrantOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.CreateSubscriptionGrantOutput_environmentId, *v.EnvironmentId)
 	}
-	serializeGrantedEntity(s, schemas.CreateSubscriptionGrantOutput_grantedEntity, v.GrantedEntity)
+	if v.GrantedEntity != nil {
+		serializeGrantedEntity(s, schemas.CreateSubscriptionGrantOutput_grantedEntity, v.GrantedEntity)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateSubscriptionGrantOutput_id, *v.Id)
 	}

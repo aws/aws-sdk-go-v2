@@ -55,14 +55,18 @@ func (v *DescribeVolumesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVolumeFilters(s, schemas.DescribeVolumesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeVolumeFilters(s, schemas.DescribeVolumesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeVolumesRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeVolumesRequest_NextToken, *v.NextToken)
 	}
-	serializeVolumeIds(s, schemas.DescribeVolumesRequest_VolumeIds, v.VolumeIds)
+	if v.VolumeIds != nil {
+		serializeVolumeIds(s, schemas.DescribeVolumesRequest_VolumeIds, v.VolumeIds)
+	}
 }
 
 type DescribeVolumesOutput struct {
@@ -91,7 +95,9 @@ func (v *DescribeVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeVolumesResponse_NextToken, *v.NextToken)
 	}
-	serializeVolumes(s, schemas.DescribeVolumesResponse_Volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumes(s, schemas.DescribeVolumesResponse_Volumes, v.Volumes)
+	}
 }
 func (v *DescribeVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVolumesResponse, func(s *smithy.Schema) error {

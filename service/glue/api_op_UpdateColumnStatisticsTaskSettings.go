@@ -68,7 +68,9 @@ func (v *UpdateColumnStatisticsTaskSettingsInput) SerializeMembers(s smithy.Shap
 	if v.CatalogID != nil {
 		s.WriteString(schemas.UpdateColumnStatisticsTaskSettingsRequest_CatalogID, *v.CatalogID)
 	}
-	serializeColumnNameList(s, schemas.UpdateColumnStatisticsTaskSettingsRequest_ColumnNameList, v.ColumnNameList)
+	if v.ColumnNameList != nil {
+		serializeColumnNameList(s, schemas.UpdateColumnStatisticsTaskSettingsRequest_ColumnNameList, v.ColumnNameList)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.UpdateColumnStatisticsTaskSettingsRequest_DatabaseName, *v.DatabaseName)
 	}

@@ -94,7 +94,9 @@ func (v *CreateContractualInvestmentAttestationInput) Serialize(s smithy.ShapeSe
 }
 
 func (v *CreateContractualInvestmentAttestationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalRecipients(s, schemas.CreateContractualInvestmentAttestationRequest_additionalRecipients, v.AdditionalRecipients)
+	if v.AdditionalRecipients != nil {
+		serializeAdditionalRecipients(s, schemas.CreateContractualInvestmentAttestationRequest_additionalRecipients, v.AdditionalRecipients)
+	}
 	if v.ApproverDetails != nil {
 		s.WriteStruct(schemas.CreateContractualInvestmentAttestationRequest_approverDetails)
 		v.ApproverDetails.SerializeMembers(s)

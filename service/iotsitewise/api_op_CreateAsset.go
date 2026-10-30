@@ -102,7 +102,9 @@ func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAssetRequest_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateAssetRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAssetRequest_tags, v.Tags)
+	}
 }
 
 type CreateAssetOutput struct {

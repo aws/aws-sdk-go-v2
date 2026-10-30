@@ -51,7 +51,9 @@ func (v *CreateStandbyWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.CreateStandbyWorkspacesRequest_PrimaryRegion, *v.PrimaryRegion)
 	}
-	serializeStandbyWorkspacesList(s, schemas.CreateStandbyWorkspacesRequest_StandbyWorkspaces, v.StandbyWorkspaces)
+	if v.StandbyWorkspaces != nil {
+		serializeStandbyWorkspacesList(s, schemas.CreateStandbyWorkspacesRequest_StandbyWorkspaces, v.StandbyWorkspaces)
+	}
 }
 
 type CreateStandbyWorkspacesOutput struct {
@@ -75,8 +77,12 @@ func (v *CreateStandbyWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateStandbyWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests, v.FailedStandbyRequests)
-	serializePendingCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests, v.PendingStandbyRequests)
+	if v.FailedStandbyRequests != nil {
+		serializeFailedCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_FailedStandbyRequests, v.FailedStandbyRequests)
+	}
+	if v.PendingStandbyRequests != nil {
+		serializePendingCreateStandbyWorkspacesRequestList(s, schemas.CreateStandbyWorkspacesResult_PendingStandbyRequests, v.PendingStandbyRequests)
+	}
 }
 func (v *CreateStandbyWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateStandbyWorkspacesResult, func(s *smithy.Schema) error {

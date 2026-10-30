@@ -58,7 +58,9 @@ func (v *DeleteRemediationExceptionsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ConfigRuleName != nil {
 		s.WriteString(schemas.DeleteRemediationExceptionsRequest_ConfigRuleName, *v.ConfigRuleName)
 	}
-	serializeRemediationExceptionResourceKeys(s, schemas.DeleteRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+	if v.ResourceKeys != nil {
+		serializeRemediationExceptionResourceKeys(s, schemas.DeleteRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+	}
 }
 
 type DeleteRemediationExceptionsOutput struct {
@@ -80,7 +82,9 @@ func (v *DeleteRemediationExceptionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DeleteRemediationExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedDeleteRemediationExceptionsBatches(s, schemas.DeleteRemediationExceptionsResponse_FailedBatches, v.FailedBatches)
+	if v.FailedBatches != nil {
+		serializeFailedDeleteRemediationExceptionsBatches(s, schemas.DeleteRemediationExceptionsResponse_FailedBatches, v.FailedBatches)
+	}
 }
 func (v *DeleteRemediationExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteRemediationExceptionsResponse, func(s *smithy.Schema) error {

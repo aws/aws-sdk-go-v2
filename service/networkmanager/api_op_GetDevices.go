@@ -56,7 +56,9 @@ func (v *GetDevicesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceIdList(s, schemas.GetDevicesRequest_DeviceIds, v.DeviceIds)
+	if v.DeviceIds != nil {
+		serializeDeviceIdList(s, schemas.GetDevicesRequest_DeviceIds, v.DeviceIds)
+	}
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.GetDevicesRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
@@ -92,7 +94,9 @@ func (v *GetDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceList(s, schemas.GetDevicesResponse_Devices, v.Devices)
+	if v.Devices != nil {
+		serializeDeviceList(s, schemas.GetDevicesResponse_Devices, v.Devices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDevicesResponse_NextToken, *v.NextToken)
 	}

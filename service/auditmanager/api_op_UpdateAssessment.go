@@ -75,7 +75,9 @@ func (v *UpdateAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AssessmentReportsDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRoles(s, schemas.UpdateAssessmentRequest_roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.UpdateAssessmentRequest_roles, v.Roles)
+	}
 	if v.Scope != nil {
 		s.WriteStruct(schemas.UpdateAssessmentRequest_scope)
 		v.Scope.SerializeMembers(s)

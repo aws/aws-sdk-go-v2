@@ -83,7 +83,9 @@ func (v *ListABTestsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListABTestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeABTestSummaryList(s, schemas.ListABTestsResponse_abTests, v.AbTests)
+	if v.AbTests != nil {
+		serializeABTestSummaryList(s, schemas.ListABTestsResponse_abTests, v.AbTests)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListABTestsResponse_nextToken, *v.NextToken)
 	}

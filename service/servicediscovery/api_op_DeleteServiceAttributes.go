@@ -52,7 +52,9 @@ func (v *DeleteServiceAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteServiceAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceAttributeKeyList(s, schemas.DeleteServiceAttributesRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeServiceAttributeKeyList(s, schemas.DeleteServiceAttributesRequest_Attributes, v.Attributes)
+	}
 	if v.ServiceId != nil {
 		s.WriteString(schemas.DeleteServiceAttributesRequest_ServiceId, *v.ServiceId)
 	}

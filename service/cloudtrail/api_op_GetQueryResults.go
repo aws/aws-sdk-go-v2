@@ -120,7 +120,9 @@ func (v *GetQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQueryResultsResponse_NextToken, *v.NextToken)
 	}
-	serializeQueryResultRows(s, schemas.GetQueryResultsResponse_QueryResultRows, v.QueryResultRows)
+	if v.QueryResultRows != nil {
+		serializeQueryResultRows(s, schemas.GetQueryResultsResponse_QueryResultRows, v.QueryResultRows)
+	}
 	if v.QueryStatistics != nil {
 		s.WriteStruct(schemas.GetQueryResultsResponse_QueryStatistics)
 		v.QueryStatistics.SerializeMembers(s)

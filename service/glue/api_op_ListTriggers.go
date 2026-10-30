@@ -66,7 +66,9 @@ func (v *ListTriggersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTriggersRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListTriggersRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListTriggersRequest_Tags, v.Tags)
+	}
 }
 
 type ListTriggersOutput struct {
@@ -95,7 +97,9 @@ func (v *ListTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTriggersResponse_NextToken, *v.NextToken)
 	}
-	serializeTriggerNameList(s, schemas.ListTriggersResponse_TriggerNames, v.TriggerNames)
+	if v.TriggerNames != nil {
+		serializeTriggerNameList(s, schemas.ListTriggersResponse_TriggerNames, v.TriggerNames)
+	}
 }
 func (v *ListTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTriggersResponse, func(s *smithy.Schema) error {

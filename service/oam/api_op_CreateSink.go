@@ -67,7 +67,9 @@ func (v *CreateSinkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSinkInput_Name, *v.Name)
 	}
-	serializeTagMapInput(s, schemas.CreateSinkInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapInput(s, schemas.CreateSinkInput_Tags, v.Tags)
+	}
 }
 
 type CreateSinkOutput struct {
@@ -106,7 +108,9 @@ func (v *CreateSinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSinkOutput_Name, *v.Name)
 	}
-	serializeTagMapOutput(s, schemas.CreateSinkOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.CreateSinkOutput_Tags, v.Tags)
+	}
 }
 func (v *CreateSinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSinkOutput, func(s *smithy.Schema) error {

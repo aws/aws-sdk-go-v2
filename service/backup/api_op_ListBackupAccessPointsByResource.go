@@ -93,7 +93,9 @@ func (v *ListBackupAccessPointsByResourceOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListBackupAccessPointsByResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupAccessPoints(s, schemas.ListBackupAccessPointsByResourceResponse_BackupAccessPoints, v.BackupAccessPoints)
+	if v.BackupAccessPoints != nil {
+		serializeBackupAccessPoints(s, schemas.ListBackupAccessPointsByResourceResponse_BackupAccessPoints, v.BackupAccessPoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBackupAccessPointsByResourceResponse_NextToken, *v.NextToken)
 	}

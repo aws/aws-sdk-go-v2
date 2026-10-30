@@ -86,7 +86,9 @@ func (v *ListCustomDetectionRuleOrgConfigurationsOutput) Serialize(s smithy.Shap
 }
 
 func (v *ListCustomDetectionRuleOrgConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectionRuleOrgConfigurationSummaryList(s, schemas.ListCustomDetectionRuleOrgConfigurationsResponse_Configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeDetectionRuleOrgConfigurationSummaryList(s, schemas.ListCustomDetectionRuleOrgConfigurationsResponse_Configurations, v.Configurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomDetectionRuleOrgConfigurationsResponse_NextToken, *v.NextToken)
 	}

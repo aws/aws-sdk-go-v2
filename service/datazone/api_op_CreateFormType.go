@@ -97,7 +97,9 @@ func (v *CreateFormTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.CreateFormTypeInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeModel(s, schemas.CreateFormTypeInput_model, v.Model)
+	if v.Model != nil {
+		serializeModel(s, schemas.CreateFormTypeInput_model, v.Model)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFormTypeInput_name, *v.Name)
 	}

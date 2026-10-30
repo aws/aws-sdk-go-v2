@@ -118,7 +118,9 @@ func (v *ListRetrievedTracesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TraceFormat != "" {
 		s.WriteString(schemas.ListRetrievedTracesResult_TraceFormat, string(v.TraceFormat))
 	}
-	serializeTraceSpanList(s, schemas.ListRetrievedTracesResult_Traces, v.Traces)
+	if v.Traces != nil {
+		serializeTraceSpanList(s, schemas.ListRetrievedTracesResult_Traces, v.Traces)
+	}
 }
 func (v *ListRetrievedTracesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRetrievedTracesResult, func(s *smithy.Schema) error {

@@ -102,7 +102,9 @@ func (v *ListVersionsByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListVersionsByFunctionResponse_NextMarker, *v.NextMarker)
 	}
-	serializeFunctionList(s, schemas.ListVersionsByFunctionResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serializeFunctionList(s, schemas.ListVersionsByFunctionResponse_Versions, v.Versions)
+	}
 }
 func (v *ListVersionsByFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVersionsByFunctionResponse, func(s *smithy.Schema) error {

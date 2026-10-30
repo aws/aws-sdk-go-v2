@@ -68,7 +68,9 @@ func (v *StartDevEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.StartDevEnvironmentRequest_id, *v.Id)
 	}
-	serializeIdeConfigurationList(s, schemas.StartDevEnvironmentRequest_ides, v.Ides)
+	if v.Ides != nil {
+		serializeIdeConfigurationList(s, schemas.StartDevEnvironmentRequest_ides, v.Ides)
+	}
 	if v.InactivityTimeoutMinutes != 0 {
 		s.WriteInt32(schemas.StartDevEnvironmentRequest_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
 	}

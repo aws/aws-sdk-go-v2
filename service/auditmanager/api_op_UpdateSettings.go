@@ -81,7 +81,9 @@ func (v *UpdateSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultExportDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRoles(s, schemas.UpdateSettingsRequest_defaultProcessOwners, v.DefaultProcessOwners)
+	if v.DefaultProcessOwners != nil {
+		serializeRoles(s, schemas.UpdateSettingsRequest_defaultProcessOwners, v.DefaultProcessOwners)
+	}
 	if v.DeregistrationPolicy != nil {
 		s.WriteStruct(schemas.UpdateSettingsRequest_deregistrationPolicy)
 		v.DeregistrationPolicy.SerializeMembers(s)

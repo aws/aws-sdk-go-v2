@@ -67,7 +67,9 @@ func (v *UpdateMethodResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HttpMethod != nil {
 		s.WriteString(schemas.UpdateMethodResponseRequest_httpMethod, *v.HttpMethod)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateMethodResponseRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateMethodResponseRequest_patchOperations, v.PatchOperations)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.UpdateMethodResponseRequest_resourceId, *v.ResourceId)
 	}
@@ -120,8 +122,12 @@ func (v *UpdateMethodResponseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMethodResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
-	serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	if v.ResponseModels != nil {
+		serializeMapOfStringToString(s, schemas.MethodResponse_responseModels, v.ResponseModels)
+	}
+	if v.ResponseParameters != nil {
+		serializeMapOfStringToBoolean(s, schemas.MethodResponse_responseParameters, v.ResponseParameters)
+	}
 	if v.StatusCode != nil {
 		s.WriteString(schemas.MethodResponse_statusCode, *v.StatusCode)
 	}

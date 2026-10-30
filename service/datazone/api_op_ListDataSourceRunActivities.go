@@ -111,7 +111,9 @@ func (v *ListDataSourceRunActivitiesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListDataSourceRunActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceRunActivities(s, schemas.ListDataSourceRunActivitiesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDataSourceRunActivities(s, schemas.ListDataSourceRunActivitiesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSourceRunActivitiesOutput_nextToken, *v.NextToken)
 	}

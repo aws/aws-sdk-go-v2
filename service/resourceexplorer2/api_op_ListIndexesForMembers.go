@@ -66,7 +66,9 @@ func (v *ListIndexesForMembersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIndexesForMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ListIndexesForMembersInput_AccountIdList, v.AccountIdList)
+	if v.AccountIdList != nil {
+		serializeAccountIdList(s, schemas.ListIndexesForMembersInput_AccountIdList, v.AccountIdList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListIndexesForMembersInput_MaxResults, *v.MaxResults)
 	}
@@ -100,7 +102,9 @@ func (v *ListIndexesForMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIndexesForMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberIndexList(s, schemas.ListIndexesForMembersOutput_Indexes, v.Indexes)
+	if v.Indexes != nil {
+		serializeMemberIndexList(s, schemas.ListIndexesForMembersOutput_Indexes, v.Indexes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIndexesForMembersOutput_NextToken, *v.NextToken)
 	}

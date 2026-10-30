@@ -94,7 +94,9 @@ func (v *GetTelemetryQueryResultsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTelemetryQueryResultsResponse_nextToken, *v.NextToken)
 	}
-	serializeRowList(s, schemas.GetTelemetryQueryResultsResponse_rows, v.Rows)
+	if v.Rows != nil {
+		serializeRowList(s, schemas.GetTelemetryQueryResultsResponse_rows, v.Rows)
+	}
 	if v.Statistics != nil {
 		s.WriteStruct(schemas.GetTelemetryQueryResultsResponse_statistics)
 		v.Statistics.SerializeMembers(s)

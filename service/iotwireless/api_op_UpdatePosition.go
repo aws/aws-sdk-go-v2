@@ -60,7 +60,9 @@ func (v *UpdatePositionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePositionCoordinate(s, schemas.UpdatePositionRequest_Position, v.Position)
+	if v.Position != nil {
+		serializePositionCoordinate(s, schemas.UpdatePositionRequest_Position, v.Position)
+	}
 	if v.ResourceIdentifier != nil {
 		s.WriteString(schemas.UpdatePositionRequest_ResourceIdentifier, *v.ResourceIdentifier)
 	}

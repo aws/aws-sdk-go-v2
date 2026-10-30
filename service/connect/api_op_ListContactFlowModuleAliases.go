@@ -95,7 +95,9 @@ func (v *ListContactFlowModuleAliasesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListContactFlowModuleAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactFlowModuleAliasSummaryList(s, schemas.ListContactFlowModuleAliasesResponse_ContactFlowModuleAliasSummaryList, v.ContactFlowModuleAliasSummaryList)
+	if v.ContactFlowModuleAliasSummaryList != nil {
+		serializeContactFlowModuleAliasSummaryList(s, schemas.ListContactFlowModuleAliasesResponse_ContactFlowModuleAliasSummaryList, v.ContactFlowModuleAliasSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactFlowModuleAliasesResponse_NextToken, *v.NextToken)
 	}

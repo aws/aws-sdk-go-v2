@@ -63,7 +63,9 @@ func (v *ModifyEventSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Enabled != nil {
 		s.WriteBool(schemas.ModifyEventSubscriptionMessage_Enabled, *v.Enabled)
 	}
-	serializeEventCategoriesList(s, schemas.ModifyEventSubscriptionMessage_EventCategories, v.EventCategories)
+	if v.EventCategories != nil {
+		serializeEventCategoriesList(s, schemas.ModifyEventSubscriptionMessage_EventCategories, v.EventCategories)
+	}
 	if v.SnsTopicArn != nil {
 		s.WriteString(schemas.ModifyEventSubscriptionMessage_SnsTopicArn, *v.SnsTopicArn)
 	}

@@ -84,8 +84,12 @@ func (v *UpdateGatewayTargetInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGatewayTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateConfigurationList(s, schemas.UpdateGatewayTargetRequest_certificateConfigurations, v.CertificateConfigurations)
-	serializeCredentialProviderConfigurations(s, schemas.UpdateGatewayTargetRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.CertificateConfigurations != nil {
+		serializeCertificateConfigurationList(s, schemas.UpdateGatewayTargetRequest_certificateConfigurations, v.CertificateConfigurations)
+	}
+	if v.CredentialProviderConfigurations != nil {
+		serializeCredentialProviderConfigurations(s, schemas.UpdateGatewayTargetRequest_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayTargetRequest_description, *v.Description)
 	}
@@ -100,8 +104,12 @@ func (v *UpdateGatewayTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateGatewayTargetRequest_name, *v.Name)
 	}
-	serializePrivateEndpoint(s, schemas.UpdateGatewayTargetRequest_privateEndpoint, v.PrivateEndpoint)
-	serializeTargetConfiguration(s, schemas.UpdateGatewayTargetRequest_targetConfiguration, v.TargetConfiguration)
+	if v.PrivateEndpoint != nil {
+		serializePrivateEndpoint(s, schemas.UpdateGatewayTargetRequest_privateEndpoint, v.PrivateEndpoint)
+	}
+	if v.TargetConfiguration != nil {
+		serializeTargetConfiguration(s, schemas.UpdateGatewayTargetRequest_targetConfiguration, v.TargetConfiguration)
+	}
 	if v.TargetId != nil {
 		s.WriteString(schemas.UpdateGatewayTargetRequest_targetId, *v.TargetId)
 	}
@@ -192,12 +200,18 @@ func (v *UpdateGatewayTargetOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGatewayTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizationData(s, schemas.UpdateGatewayTargetResponse_authorizationData, v.AuthorizationData)
-	serializeCertificateConfigurationList(s, schemas.UpdateGatewayTargetResponse_certificateConfigurations, v.CertificateConfigurations)
+	if v.AuthorizationData != nil {
+		serializeAuthorizationData(s, schemas.UpdateGatewayTargetResponse_authorizationData, v.AuthorizationData)
+	}
+	if v.CertificateConfigurations != nil {
+		serializeCertificateConfigurationList(s, schemas.UpdateGatewayTargetResponse_certificateConfigurations, v.CertificateConfigurations)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateGatewayTargetResponse_createdAt, *v.CreatedAt)
 	}
-	serializeCredentialProviderConfigurations(s, schemas.UpdateGatewayTargetResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	if v.CredentialProviderConfigurations != nil {
+		serializeCredentialProviderConfigurations(s, schemas.UpdateGatewayTargetResponse_credentialProviderConfigurations, v.CredentialProviderConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateGatewayTargetResponse_description, *v.Description)
 	}
@@ -215,16 +229,24 @@ func (v *UpdateGatewayTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateGatewayTargetResponse_name, *v.Name)
 	}
-	serializePrivateEndpoint(s, schemas.UpdateGatewayTargetResponse_privateEndpoint, v.PrivateEndpoint)
-	serializePrivateEndpointManagedResources(s, schemas.UpdateGatewayTargetResponse_privateEndpointManagedResources, v.PrivateEndpointManagedResources)
+	if v.PrivateEndpoint != nil {
+		serializePrivateEndpoint(s, schemas.UpdateGatewayTargetResponse_privateEndpoint, v.PrivateEndpoint)
+	}
+	if v.PrivateEndpointManagedResources != nil {
+		serializePrivateEndpointManagedResources(s, schemas.UpdateGatewayTargetResponse_privateEndpointManagedResources, v.PrivateEndpointManagedResources)
+	}
 	if v.ProtocolType != "" {
 		s.WriteString(schemas.UpdateGatewayTargetResponse_protocolType, string(v.ProtocolType))
 	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateGatewayTargetResponse_status, string(v.Status))
 	}
-	serializeStatusReasons(s, schemas.UpdateGatewayTargetResponse_statusReasons, v.StatusReasons)
-	serializeTargetConfiguration(s, schemas.UpdateGatewayTargetResponse_targetConfiguration, v.TargetConfiguration)
+	if v.StatusReasons != nil {
+		serializeStatusReasons(s, schemas.UpdateGatewayTargetResponse_statusReasons, v.StatusReasons)
+	}
+	if v.TargetConfiguration != nil {
+		serializeTargetConfiguration(s, schemas.UpdateGatewayTargetResponse_targetConfiguration, v.TargetConfiguration)
+	}
 	if v.TargetId != nil {
 		s.WriteString(schemas.UpdateGatewayTargetResponse_targetId, *v.TargetId)
 	}

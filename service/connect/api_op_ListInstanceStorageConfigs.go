@@ -100,7 +100,9 @@ func (v *ListInstanceStorageConfigsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInstanceStorageConfigsResponse_NextToken, *v.NextToken)
 	}
-	serializeInstanceStorageConfigs(s, schemas.ListInstanceStorageConfigsResponse_StorageConfigs, v.StorageConfigs)
+	if v.StorageConfigs != nil {
+		serializeInstanceStorageConfigs(s, schemas.ListInstanceStorageConfigsResponse_StorageConfigs, v.StorageConfigs)
+	}
 }
 func (v *ListInstanceStorageConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListInstanceStorageConfigsResponse, func(s *smithy.Schema) error {

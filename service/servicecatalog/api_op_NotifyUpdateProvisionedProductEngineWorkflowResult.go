@@ -72,7 +72,9 @@ func (v *NotifyUpdateProvisionedProductEngineWorkflowResultInput) SerializeMembe
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeRecordOutputs(s, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeRecordOutputs(s, schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_Outputs, v.Outputs)
+	}
 	if v.RecordId != nil {
 		s.WriteString(schemas.NotifyUpdateProvisionedProductEngineWorkflowResultInput_RecordId, *v.RecordId)
 	}

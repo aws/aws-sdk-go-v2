@@ -105,7 +105,9 @@ func (v *ListUniqueProblemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUniqueProblemsResult_nextToken, *v.NextToken)
 	}
-	serializeUniqueProblemsByExecutionResultMap(s, schemas.ListUniqueProblemsResult_uniqueProblems, v.UniqueProblems)
+	if v.UniqueProblems != nil {
+		serializeUniqueProblemsByExecutionResultMap(s, schemas.ListUniqueProblemsResult_uniqueProblems, v.UniqueProblems)
+	}
 }
 func (v *ListUniqueProblemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUniqueProblemsResult, func(s *smithy.Schema) error {

@@ -78,7 +78,9 @@ func (v *ListMonitorEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitorEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListMonitorEvaluationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListMonitorEvaluationsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListMonitorEvaluationsRequest_MaxResults, *v.MaxResults)
 	}
@@ -122,7 +124,9 @@ func (v *ListMonitorEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitorEvaluationsResponse_NextToken, *v.NextToken)
 	}
-	serializePredictorMonitorEvaluations(s, schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations, v.PredictorMonitorEvaluations)
+	if v.PredictorMonitorEvaluations != nil {
+		serializePredictorMonitorEvaluations(s, schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations, v.PredictorMonitorEvaluations)
+	}
 }
 func (v *ListMonitorEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMonitorEvaluationsResponse, func(s *smithy.Schema) error {

@@ -127,7 +127,9 @@ func (v *ListAppVersionResourceMappingsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppVersionResourceMappingsResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceMappingList(s, schemas.ListAppVersionResourceMappingsResponse_resourceMappings, v.ResourceMappings)
+	if v.ResourceMappings != nil {
+		serializeResourceMappingList(s, schemas.ListAppVersionResourceMappingsResponse_resourceMappings, v.ResourceMappings)
+	}
 }
 func (v *ListAppVersionResourceMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAppVersionResourceMappingsResponse, func(s *smithy.Schema) error {

@@ -147,8 +147,12 @@ func (v *CreateDataCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataCatalogInput_Name, *v.Name)
 	}
-	serializeParametersMap(s, schemas.CreateDataCatalogInput_Parameters, v.Parameters)
-	serializeTagList(s, schemas.CreateDataCatalogInput_Tags, v.Tags)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.CreateDataCatalogInput_Parameters, v.Parameters)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataCatalogInput_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateDataCatalogInput_Type, string(v.Type))
 	}

@@ -72,7 +72,9 @@ func (v *DescribeDomainNodesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDomainNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainNodesStatusList(s, schemas.DescribeDomainNodesResponse_DomainNodesStatusList, v.DomainNodesStatusList)
+	if v.DomainNodesStatusList != nil {
+		serializeDomainNodesStatusList(s, schemas.DescribeDomainNodesResponse_DomainNodesStatusList, v.DomainNodesStatusList)
+	}
 }
 func (v *DescribeDomainNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDomainNodesResponse, func(s *smithy.Schema) error {

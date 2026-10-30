@@ -68,7 +68,9 @@ func (v *ListChangeSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListChangeSetsRequest_Catalog, *v.Catalog)
 	}
-	serializeFilterList(s, schemas.ListChangeSetsRequest_FilterList, v.FilterList)
+	if v.FilterList != nil {
+		serializeFilterList(s, schemas.ListChangeSetsRequest_FilterList, v.FilterList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListChangeSetsRequest_MaxResults, *v.MaxResults)
 	}
@@ -103,7 +105,9 @@ func (v *ListChangeSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChangeSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeSetSummaryList(s, schemas.ListChangeSetsResponse_ChangeSetSummaryList, v.ChangeSetSummaryList)
+	if v.ChangeSetSummaryList != nil {
+		serializeChangeSetSummaryList(s, schemas.ListChangeSetsResponse_ChangeSetSummaryList, v.ChangeSetSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChangeSetsResponse_NextToken, *v.NextToken)
 	}

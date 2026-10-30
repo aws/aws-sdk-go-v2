@@ -110,7 +110,9 @@ func (v *ListWatchlistsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWatchlistsResponse_NextToken, *v.NextToken)
 	}
-	serializeWatchlistSummaries(s, schemas.ListWatchlistsResponse_WatchlistSummaries, v.WatchlistSummaries)
+	if v.WatchlistSummaries != nil {
+		serializeWatchlistSummaries(s, schemas.ListWatchlistsResponse_WatchlistSummaries, v.WatchlistSummaries)
+	}
 }
 func (v *ListWatchlistsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWatchlistsResponse, func(s *smithy.Schema) error {

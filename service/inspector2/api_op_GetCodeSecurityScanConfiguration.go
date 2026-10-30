@@ -115,7 +115,9 @@ func (v *GetCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.Shape
 		v.ScopeSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetCodeSecurityScanConfigurationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCodeSecurityScanConfigurationResponse_tags, v.Tags)
+	}
 }
 func (v *GetCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {

@@ -62,7 +62,9 @@ func (v *CreateDiscovererInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceArn != nil {
 		s.WriteString(schemas.CreateDiscovererRequest_SourceArn, *v.SourceArn)
 	}
-	serializeTags(s, schemas.CreateDiscovererRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDiscovererRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDiscovererOutput struct {
@@ -120,7 +122,9 @@ func (v *CreateDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateDiscovererResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.CreateDiscovererResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDiscovererResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDiscovererResponse, func(s *smithy.Schema) error {

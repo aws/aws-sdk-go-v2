@@ -52,7 +52,9 @@ func (v *DeleteServiceFunctionResourcesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DeleteServiceFunctionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceList(s, schemas.DeleteServiceFunctionResourcesRequest_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.DeleteServiceFunctionResourcesRequest_resources, v.Resources)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.DeleteServiceFunctionResourcesRequest_serviceArn, *v.ServiceArn)
 	}
@@ -85,7 +87,9 @@ func (v *DeleteServiceFunctionResourcesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DeleteServiceFunctionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceList(s, schemas.DeleteServiceFunctionResourcesResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.DeleteServiceFunctionResourcesResponse_resources, v.Resources)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.DeleteServiceFunctionResourcesResponse_serviceArn, *v.ServiceArn)
 	}

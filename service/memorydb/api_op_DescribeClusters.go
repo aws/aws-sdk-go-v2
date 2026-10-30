@@ -98,7 +98,9 @@ func (v *DescribeClustersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterList(s, schemas.DescribeClustersResponse_Clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeClusterList(s, schemas.DescribeClustersResponse_Clusters, v.Clusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeClustersResponse_NextToken, *v.NextToken)
 	}

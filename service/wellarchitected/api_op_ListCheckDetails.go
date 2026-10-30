@@ -118,7 +118,9 @@ func (v *ListCheckDetailsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCheckDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCheckDetails(s, schemas.ListCheckDetailsOutput_CheckDetails, v.CheckDetails)
+	if v.CheckDetails != nil {
+		serializeCheckDetails(s, schemas.ListCheckDetailsOutput_CheckDetails, v.CheckDetails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCheckDetailsOutput_NextToken, *v.NextToken)
 	}

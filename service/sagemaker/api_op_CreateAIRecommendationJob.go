@@ -107,7 +107,9 @@ func (v *CreateAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AIWorkloadConfigIdentifier != nil {
 		s.WriteString(schemas.CreateAIRecommendationJobRequest_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
 	}
-	serializeAIAdapterSource(s, schemas.CreateAIRecommendationJobRequest_AdapterSource, v.AdapterSource)
+	if v.AdapterSource != nil {
+		serializeAIAdapterSource(s, schemas.CreateAIRecommendationJobRequest_AdapterSource, v.AdapterSource)
+	}
 	if v.ComputeSpec != nil {
 		s.WriteStruct(schemas.CreateAIRecommendationJobRequest_ComputeSpec)
 		v.ComputeSpec.SerializeMembers(s)
@@ -118,7 +120,9 @@ func (v *CreateAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializ
 		v.InferenceSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAIModelSource(s, schemas.CreateAIRecommendationJobRequest_ModelSource, v.ModelSource)
+	if v.ModelSource != nil {
+		serializeAIModelSource(s, schemas.CreateAIRecommendationJobRequest_ModelSource, v.ModelSource)
+	}
 	if v.OptimizeModel != nil {
 		s.WriteBool(schemas.CreateAIRecommendationJobRequest_OptimizeModel, *v.OptimizeModel)
 	}
@@ -135,7 +139,9 @@ func (v *CreateAIRecommendationJobInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateAIRecommendationJobRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateAIRecommendationJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAIRecommendationJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAIRecommendationJobOutput struct {

@@ -90,7 +90,9 @@ func (v *CreateFindingAggregatorInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.CreateFindingAggregatorRequest_RegionLinkingMode, *v.RegionLinkingMode)
 	}
-	serializeStringList(s, schemas.CreateFindingAggregatorRequest_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeStringList(s, schemas.CreateFindingAggregatorRequest_Regions, v.Regions)
+	}
 }
 
 type CreateFindingAggregatorOutput struct {
@@ -132,7 +134,9 @@ func (v *CreateFindingAggregatorOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.CreateFindingAggregatorResponse_RegionLinkingMode, *v.RegionLinkingMode)
 	}
-	serializeStringList(s, schemas.CreateFindingAggregatorResponse_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeStringList(s, schemas.CreateFindingAggregatorResponse_Regions, v.Regions)
+	}
 }
 func (v *CreateFindingAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateFindingAggregatorResponse, func(s *smithy.Schema) error {

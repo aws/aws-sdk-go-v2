@@ -133,7 +133,9 @@ func (v *ListModelVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelVersionSummaries(s, schemas.ListModelVersionsResponse_ModelVersionSummaries, v.ModelVersionSummaries)
+	if v.ModelVersionSummaries != nil {
+		serializeModelVersionSummaries(s, schemas.ListModelVersionsResponse_ModelVersionSummaries, v.ModelVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelVersionsResponse_NextToken, *v.NextToken)
 	}

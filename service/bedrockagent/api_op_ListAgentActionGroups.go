@@ -99,7 +99,9 @@ func (v *ListAgentActionGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentActionGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionGroupSummaries(s, schemas.ListAgentActionGroupsResponse_actionGroupSummaries, v.ActionGroupSummaries)
+	if v.ActionGroupSummaries != nil {
+		serializeActionGroupSummaries(s, schemas.ListAgentActionGroupsResponse_actionGroupSummaries, v.ActionGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentActionGroupsResponse_nextToken, *v.NextToken)
 	}

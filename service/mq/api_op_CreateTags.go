@@ -49,7 +49,9 @@ func (v *CreateTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.CreateTagsRequest_ResourceArn, *v.ResourceArn)
 	}
-	serialize__mapOf__string(s, schemas.CreateTagsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateTagsRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTagsOutput struct {

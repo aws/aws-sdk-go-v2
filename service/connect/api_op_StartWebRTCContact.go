@@ -112,7 +112,9 @@ func (v *StartWebRTCContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AllowedCapabilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.StartWebRTCContactRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartWebRTCContactRequest_Attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartWebRTCContactRequest_ClientToken, *v.ClientToken)
 	}
@@ -130,11 +132,15 @@ func (v *StartWebRTCContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ParticipantDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContactReferences(s, schemas.StartWebRTCContactRequest_References, v.References)
+	if v.References != nil {
+		serializeContactReferences(s, schemas.StartWebRTCContactRequest_References, v.References)
+	}
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.StartWebRTCContactRequest_RelatedContactId, *v.RelatedContactId)
 	}
-	serializeSegmentAttributes(s, schemas.StartWebRTCContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.StartWebRTCContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
 }
 
 type StartWebRTCContactOutput struct {

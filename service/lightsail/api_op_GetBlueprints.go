@@ -100,7 +100,9 @@ func (v *GetBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintList(s, schemas.GetBlueprintsResult_blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeBlueprintList(s, schemas.GetBlueprintsResult_blueprints, v.Blueprints)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetBlueprintsResult_nextPageToken, *v.NextPageToken)
 	}

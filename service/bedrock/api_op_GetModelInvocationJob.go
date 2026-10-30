@@ -204,7 +204,9 @@ func (v *GetModelInvocationJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ErrorRecordCount != nil {
 		s.WriteInt64(schemas.GetModelInvocationJobResponse_errorRecordCount, *v.ErrorRecordCount)
 	}
-	serializeModelInvocationJobInputDataConfig(s, schemas.GetModelInvocationJobResponse_inputDataConfig, v.InputDataConfig)
+	if v.InputDataConfig != nil {
+		serializeModelInvocationJobInputDataConfig(s, schemas.GetModelInvocationJobResponse_inputDataConfig, v.InputDataConfig)
+	}
 	if v.JobArn != nil {
 		s.WriteString(schemas.GetModelInvocationJobResponse_jobArn, *v.JobArn)
 	}
@@ -226,7 +228,9 @@ func (v *GetModelInvocationJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ModelInvocationType != "" {
 		s.WriteString(schemas.GetModelInvocationJobResponse_modelInvocationType, string(v.ModelInvocationType))
 	}
-	serializeModelInvocationJobOutputDataConfig(s, schemas.GetModelInvocationJobResponse_outputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeModelInvocationJobOutputDataConfig(s, schemas.GetModelInvocationJobResponse_outputDataConfig, v.OutputDataConfig)
+	}
 	if v.ProcessedRecordCount != nil {
 		s.WriteInt64(schemas.GetModelInvocationJobResponse_processedRecordCount, *v.ProcessedRecordCount)
 	}

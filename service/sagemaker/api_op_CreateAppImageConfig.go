@@ -81,7 +81,9 @@ func (v *CreateAppImageConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.KernelGatewayImageConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAppImageConfigRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAppImageConfigRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAppImageConfigOutput struct {

@@ -145,7 +145,9 @@ func (v *ListBackupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBackupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupSummaries(s, schemas.ListBackupsOutput_BackupSummaries, v.BackupSummaries)
+	if v.BackupSummaries != nil {
+		serializeBackupSummaries(s, schemas.ListBackupsOutput_BackupSummaries, v.BackupSummaries)
+	}
 	if v.LastEvaluatedBackupArn != nil {
 		s.WriteString(schemas.ListBackupsOutput_LastEvaluatedBackupArn, *v.LastEvaluatedBackupArn)
 	}

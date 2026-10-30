@@ -74,7 +74,9 @@ func (v *UpdateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAgentSpaceInput_name, *v.Name)
 	}
-	serializeAgentSpacePreferences(s, schemas.UpdateAgentSpaceInput_preferences, v.Preferences)
+	if v.Preferences != nil {
+		serializeAgentSpacePreferences(s, schemas.UpdateAgentSpaceInput_preferences, v.Preferences)
+	}
 }
 
 // Output containing the updated AgentSpace.

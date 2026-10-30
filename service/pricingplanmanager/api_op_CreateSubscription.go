@@ -96,7 +96,9 @@ func (v *CreateSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlanTier != nil {
 		s.WriteString(schemas.CreateSubscriptionInput_planTier, *v.PlanTier)
 	}
-	serializeResourceArns(s, schemas.CreateSubscriptionInput_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.CreateSubscriptionInput_resourceArns, v.ResourceArns)
+	}
 	if v.UsageLevel != nil {
 		s.WriteString(schemas.CreateSubscriptionInput_usageLevel, *v.UsageLevel)
 	}

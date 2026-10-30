@@ -92,7 +92,9 @@ func (v *ListInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceList(s, schemas.ListInstancesResponse_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.ListInstancesResponse_Instances, v.Instances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInstancesResponse_NextToken, *v.NextToken)
 	}

@@ -100,7 +100,9 @@ func (v *GetCreditsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCreditsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreditDataList(s, schemas.GetCreditsResponse_credits, v.Credits)
+	if v.Credits != nil {
+		serializeCreditDataList(s, schemas.GetCreditsResponse_credits, v.Credits)
+	}
 }
 func (v *GetCreditsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCreditsResponse, func(s *smithy.Schema) error {

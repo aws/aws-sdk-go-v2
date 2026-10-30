@@ -53,7 +53,9 @@ func (v *PutReportDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PutReportDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutReportDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 // If the action is successful, the service sends back an HTTP 200 response with

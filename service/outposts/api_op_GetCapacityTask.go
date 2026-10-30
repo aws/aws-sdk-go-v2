@@ -177,7 +177,9 @@ func (v *GetCapacityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutpostId != nil {
 		s.WriteString(schemas.GetCapacityTaskOutput_OutpostId, *v.OutpostId)
 	}
-	serializeRequestedInstancePools(s, schemas.GetCapacityTaskOutput_RequestedInstancePools, v.RequestedInstancePools)
+	if v.RequestedInstancePools != nil {
+		serializeRequestedInstancePools(s, schemas.GetCapacityTaskOutput_RequestedInstancePools, v.RequestedInstancePools)
+	}
 	if v.TaskActionOnBlockingInstances != "" {
 		s.WriteString(schemas.GetCapacityTaskOutput_TaskActionOnBlockingInstances, string(v.TaskActionOnBlockingInstances))
 	}

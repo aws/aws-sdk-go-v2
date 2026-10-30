@@ -263,7 +263,9 @@ func (v *CreateNFSFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CacheAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFileShareClientList(s, schemas.CreateNFSFileShareInput_ClientList, v.ClientList)
+	if v.ClientList != nil {
+		serializeFileShareClientList(s, schemas.CreateNFSFileShareInput_ClientList, v.ClientList)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateNFSFileShareInput_ClientToken, *v.ClientToken)
 	}
@@ -314,7 +316,9 @@ func (v *CreateNFSFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Squash != nil {
 		s.WriteString(schemas.CreateNFSFileShareInput_Squash, *v.Squash)
 	}
-	serializeTags(s, schemas.CreateNFSFileShareInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateNFSFileShareInput_Tags, v.Tags)
+	}
 	if v.VPCEndpointDNSName != nil {
 		s.WriteString(schemas.CreateNFSFileShareInput_VPCEndpointDNSName, *v.VPCEndpointDNSName)
 	}

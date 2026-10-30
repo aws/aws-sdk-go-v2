@@ -106,8 +106,12 @@ func (v *CreateCallAnalyticsCategoryInput) SerializeMembers(s smithy.ShapeSerial
 	if v.InputType != "" {
 		s.WriteString(schemas.CreateCallAnalyticsCategoryRequest_InputType, string(v.InputType))
 	}
-	serializeRuleList(s, schemas.CreateCallAnalyticsCategoryRequest_Rules, v.Rules)
-	serializeTagList(s, schemas.CreateCallAnalyticsCategoryRequest_Tags, v.Tags)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.CreateCallAnalyticsCategoryRequest_Rules, v.Rules)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCallAnalyticsCategoryRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCallAnalyticsCategoryOutput struct {

@@ -75,7 +75,9 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterIdentifier != nil {
 		s.WriteString(schemas.CreateQueueRequest_clusterIdentifier, *v.ClusterIdentifier)
 	}
-	serializeComputeNodeGroupConfigurationList(s, schemas.CreateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	if v.ComputeNodeGroupConfigurations != nil {
+		serializeComputeNodeGroupConfigurationList(s, schemas.CreateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	}
 	if v.QueueName != nil {
 		s.WriteString(schemas.CreateQueueRequest_queueName, *v.QueueName)
 	}
@@ -84,7 +86,9 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SlurmConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRequestTagMap(s, schemas.CreateQueueRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateQueueRequest_tags, v.Tags)
+	}
 }
 
 type CreateQueueOutput struct {

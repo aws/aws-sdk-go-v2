@@ -55,7 +55,9 @@ func (v *BatchDisassociateServiceActionFromProvisioningArtifactInput) SerializeM
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeServiceActionAssociations(s, schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput_ServiceActionAssociations, v.ServiceActionAssociations)
+	if v.ServiceActionAssociations != nil {
+		serializeServiceActionAssociations(s, schemas.BatchDisassociateServiceActionFromProvisioningArtifactInput_ServiceActionAssociations, v.ServiceActionAssociations)
+	}
 }
 
 type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
@@ -77,7 +79,9 @@ func (v *BatchDisassociateServiceActionFromProvisioningArtifactOutput) Serialize
 }
 
 func (v *BatchDisassociateServiceActionFromProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedServiceActionAssociations(s, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput_FailedServiceActionAssociations, v.FailedServiceActionAssociations)
+	if v.FailedServiceActionAssociations != nil {
+		serializeFailedServiceActionAssociations(s, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput_FailedServiceActionAssociations, v.FailedServiceActionAssociations)
+	}
 }
 func (v *BatchDisassociateServiceActionFromProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisassociateServiceActionFromProvisioningArtifactOutput, func(s *smithy.Schema) error {

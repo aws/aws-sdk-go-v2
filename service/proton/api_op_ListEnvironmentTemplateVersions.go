@@ -123,7 +123,9 @@ func (v *ListEnvironmentTemplateVersionsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentTemplateVersionsOutput_nextToken, *v.NextToken)
 	}
-	serializeEnvironmentTemplateVersionSummaryList(s, schemas.ListEnvironmentTemplateVersionsOutput_templateVersions, v.TemplateVersions)
+	if v.TemplateVersions != nil {
+		serializeEnvironmentTemplateVersionSummaryList(s, schemas.ListEnvironmentTemplateVersionsOutput_templateVersions, v.TemplateVersions)
+	}
 }
 func (v *ListEnvironmentTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEnvironmentTemplateVersionsOutput, func(s *smithy.Schema) error {

@@ -99,7 +99,9 @@ func (v *RegisterDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RegisterDomainInput_name, *v.Name)
 	}
-	serializeResourceTagList(s, schemas.RegisterDomainInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeResourceTagList(s, schemas.RegisterDomainInput_tags, v.Tags)
+	}
 	if v.WorkflowExecutionRetentionPeriodInDays != nil {
 		s.WriteString(schemas.RegisterDomainInput_workflowExecutionRetentionPeriodInDays, *v.WorkflowExecutionRetentionPeriodInDays)
 	}

@@ -105,7 +105,9 @@ func (v *QueryLineageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryLineageRequest_NextToken, *v.NextToken)
 	}
-	serializeQueryLineageStartArns(s, schemas.QueryLineageRequest_StartArns, v.StartArns)
+	if v.StartArns != nil {
+		serializeQueryLineageStartArns(s, schemas.QueryLineageRequest_StartArns, v.StartArns)
+	}
 }
 
 type QueryLineageOutput struct {
@@ -133,11 +135,15 @@ func (v *QueryLineageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryLineageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdges(s, schemas.QueryLineageResponse_Edges, v.Edges)
+	if v.Edges != nil {
+		serializeEdges(s, schemas.QueryLineageResponse_Edges, v.Edges)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryLineageResponse_NextToken, *v.NextToken)
 	}
-	serializeVertices(s, schemas.QueryLineageResponse_Vertices, v.Vertices)
+	if v.Vertices != nil {
+		serializeVertices(s, schemas.QueryLineageResponse_Vertices, v.Vertices)
+	}
 }
 func (v *QueryLineageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryLineageResponse, func(s *smithy.Schema) error {

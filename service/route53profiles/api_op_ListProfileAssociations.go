@@ -102,7 +102,9 @@ func (v *ListProfileAssociationsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeProfileAssociations(s, schemas.ListProfileAssociationsResponse_ProfileAssociations, v.ProfileAssociations)
+	if v.ProfileAssociations != nil {
+		serializeProfileAssociations(s, schemas.ListProfileAssociationsResponse_ProfileAssociations, v.ProfileAssociations)
+	}
 }
 func (v *ListProfileAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfileAssociationsResponse, func(s *smithy.Schema) error {

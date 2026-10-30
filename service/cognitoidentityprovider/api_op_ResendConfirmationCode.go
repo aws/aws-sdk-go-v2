@@ -143,7 +143,9 @@ func (v *ResendConfirmationCodeInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientId != nil {
 		s.WriteString(schemas.ResendConfirmationCodeRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.ResendConfirmationCodeRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.ResendConfirmationCodeRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.SecretHash != nil {
 		s.WriteString(schemas.ResendConfirmationCodeRequest_SecretHash, *v.SecretHash)
 	}

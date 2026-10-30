@@ -78,7 +78,9 @@ func (v *ListCostAllocationTagBackfillHistoryOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListCostAllocationTagBackfillHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostAllocationTagBackfillRequestList(s, schemas.ListCostAllocationTagBackfillHistoryResponse_BackfillRequests, v.BackfillRequests)
+	if v.BackfillRequests != nil {
+		serializeCostAllocationTagBackfillRequestList(s, schemas.ListCostAllocationTagBackfillHistoryResponse_BackfillRequests, v.BackfillRequests)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCostAllocationTagBackfillHistoryResponse_NextToken, *v.NextToken)
 	}

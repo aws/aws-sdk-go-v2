@@ -74,7 +74,9 @@ func (v *GetCustomEntityTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCustomEntityTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContextWords(s, schemas.GetCustomEntityTypeResponse_ContextWords, v.ContextWords)
+	if v.ContextWords != nil {
+		serializeContextWords(s, schemas.GetCustomEntityTypeResponse_ContextWords, v.ContextWords)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetCustomEntityTypeResponse_Name, *v.Name)
 	}

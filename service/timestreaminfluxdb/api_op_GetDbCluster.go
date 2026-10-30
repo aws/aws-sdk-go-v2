@@ -174,7 +174,9 @@ func (v *GetDbClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ClusterConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDbBackupConfigurationOutputList(s, schemas.GetDbClusterOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationOutputList(s, schemas.GetDbClusterOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbInstanceType != "" {
 		s.WriteString(schemas.GetDbClusterOutput_dbInstanceType, string(v.DbInstanceType))
 	}
@@ -242,8 +244,12 @@ func (v *GetDbClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetDbClusterOutput_status, string(v.Status))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.GetDbClusterOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.GetDbClusterOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.GetDbClusterOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.GetDbClusterOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *GetDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDbClusterOutput, func(s *smithy.Schema) error {

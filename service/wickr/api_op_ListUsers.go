@@ -137,7 +137,9 @@ func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUsersResponse_nextToken, *v.NextToken)
 	}
-	serializeUsers(s, schemas.ListUsersResponse_users, v.Users)
+	if v.Users != nil {
+		serializeUsers(s, schemas.ListUsersResponse_users, v.Users)
+	}
 }
 func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {

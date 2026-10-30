@@ -135,7 +135,9 @@ func (v *DescribeBotResourceGenerationOutput) SerializeMembers(s smithy.ShapeSer
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.DescribeBotResourceGenerationResponse_creationDateTime, *v.CreationDateTime)
 	}
-	serializeFailureReasons(s, schemas.DescribeBotResourceGenerationResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeBotResourceGenerationResponse_failureReasons, v.FailureReasons)
+	}
 	if v.GeneratedBotLocaleUrl != nil {
 		s.WriteString(schemas.DescribeBotResourceGenerationResponse_generatedBotLocaleUrl, *v.GeneratedBotLocaleUrl)
 	}

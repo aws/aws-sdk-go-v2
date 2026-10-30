@@ -64,7 +64,9 @@ func (v *UpdateMarketplaceModelEndpointInput) SerializeMembers(s smithy.ShapeSer
 	if v.EndpointArn != nil {
 		s.WriteString(schemas.UpdateMarketplaceModelEndpointRequest_endpointArn, *v.EndpointArn)
 	}
-	serializeEndpointConfig(s, schemas.UpdateMarketplaceModelEndpointRequest_endpointConfig, v.EndpointConfig)
+	if v.EndpointConfig != nil {
+		serializeEndpointConfig(s, schemas.UpdateMarketplaceModelEndpointRequest_endpointConfig, v.EndpointConfig)
+	}
 }
 
 type UpdateMarketplaceModelEndpointOutput struct {

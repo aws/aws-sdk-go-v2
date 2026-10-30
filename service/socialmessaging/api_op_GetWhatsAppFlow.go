@@ -120,7 +120,9 @@ func (v *GetWhatsAppFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Application.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetaFlowCategoryList(s, schemas.GetWhatsAppFlowOutput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeMetaFlowCategoryList(s, schemas.GetWhatsAppFlowOutput_categories, v.Categories)
+	}
 	if v.DataApiVersion != nil {
 		s.WriteString(schemas.GetWhatsAppFlowOutput_dataApiVersion, *v.DataApiVersion)
 	}
@@ -149,7 +151,9 @@ func (v *GetWhatsAppFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Preview.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeValidationErrorList(s, schemas.GetWhatsAppFlowOutput_validationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrorList(s, schemas.GetWhatsAppFlowOutput_validationErrors, v.ValidationErrors)
+	}
 	if v.WhatsAppBusinessAccount != nil {
 		s.WriteStruct(schemas.GetWhatsAppFlowOutput_whatsAppBusinessAccount)
 		v.WhatsAppBusinessAccount.SerializeMembers(s)

@@ -63,7 +63,9 @@ func (v *GetColumnStatisticsForTableInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CatalogId != nil {
 		s.WriteString(schemas.GetColumnStatisticsForTableRequest_CatalogId, *v.CatalogId)
 	}
-	serializeGetColumnNamesList(s, schemas.GetColumnStatisticsForTableRequest_ColumnNames, v.ColumnNames)
+	if v.ColumnNames != nil {
+		serializeGetColumnNamesList(s, schemas.GetColumnStatisticsForTableRequest_ColumnNames, v.ColumnNames)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.GetColumnStatisticsForTableRequest_DatabaseName, *v.DatabaseName)
 	}
@@ -93,8 +95,12 @@ func (v *GetColumnStatisticsForTableOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetColumnStatisticsForTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnStatisticsList(s, schemas.GetColumnStatisticsForTableResponse_ColumnStatisticsList, v.ColumnStatisticsList)
-	serializeColumnErrors(s, schemas.GetColumnStatisticsForTableResponse_Errors, v.Errors)
+	if v.ColumnStatisticsList != nil {
+		serializeColumnStatisticsList(s, schemas.GetColumnStatisticsForTableResponse_ColumnStatisticsList, v.ColumnStatisticsList)
+	}
+	if v.Errors != nil {
+		serializeColumnErrors(s, schemas.GetColumnStatisticsForTableResponse_Errors, v.Errors)
+	}
 }
 func (v *GetColumnStatisticsForTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetColumnStatisticsForTableResponse, func(s *smithy.Schema) error {

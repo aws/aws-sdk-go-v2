@@ -111,8 +111,12 @@ func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Schedule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSource(s, schemas.CreateCampaignRequest_source, v.Source)
-	serializeTagMap(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	if v.Source != nil {
+		serializeSource(s, schemas.CreateCampaignRequest_source, v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateCampaignRequest_type, string(v.Type))
 	}
@@ -149,7 +153,9 @@ func (v *CreateCampaignOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateCampaignResponse_id, *v.Id)
 	}
-	serializeTagMap(s, schemas.CreateCampaignResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCampaignResponse_tags, v.Tags)
+	}
 }
 func (v *CreateCampaignOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCampaignResponse, func(s *smithy.Schema) error {

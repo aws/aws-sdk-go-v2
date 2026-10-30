@@ -93,7 +93,9 @@ func (v *CreateQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != nil {
 		s.WriteString(schemas.CreateQuantumTaskRequest_action, *v.Action)
 	}
-	serializeAssociations(s, schemas.CreateQuantumTaskRequest_associations, v.Associations)
+	if v.Associations != nil {
+		serializeAssociations(s, schemas.CreateQuantumTaskRequest_associations, v.Associations)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateQuantumTaskRequest_clientToken, *v.ClientToken)
 	}
@@ -103,7 +105,9 @@ func (v *CreateQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceParameters != nil {
 		s.WriteString(schemas.CreateQuantumTaskRequest_deviceParameters, *v.DeviceParameters)
 	}
-	serializeExperimentalCapabilities(s, schemas.CreateQuantumTaskRequest_experimentalCapabilities, v.ExperimentalCapabilities)
+	if v.ExperimentalCapabilities != nil {
+		serializeExperimentalCapabilities(s, schemas.CreateQuantumTaskRequest_experimentalCapabilities, v.ExperimentalCapabilities)
+	}
 	if v.JobToken != nil {
 		s.WriteString(schemas.CreateQuantumTaskRequest_jobToken, *v.JobToken)
 	}
@@ -116,7 +120,9 @@ func (v *CreateQuantumTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Shots != nil {
 		s.WriteInt64(schemas.CreateQuantumTaskRequest_shots, *v.Shots)
 	}
-	serializeTagsMap(s, schemas.CreateQuantumTaskRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateQuantumTaskRequest_tags, v.Tags)
+	}
 }
 func (v *CreateQuantumTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateQuantumTaskRequest, func(s *smithy.Schema) error {

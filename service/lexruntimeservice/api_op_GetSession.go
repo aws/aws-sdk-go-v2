@@ -117,14 +117,20 @@ func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActiveContextsList(s, schemas.GetSessionResponse_activeContexts, v.ActiveContexts)
+	if v.ActiveContexts != nil {
+		serializeActiveContextsList(s, schemas.GetSessionResponse_activeContexts, v.ActiveContexts)
+	}
 	if v.DialogAction != nil {
 		s.WriteStruct(schemas.GetSessionResponse_dialogAction)
 		v.DialogAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntentSummaryList(s, schemas.GetSessionResponse_recentIntentSummaryView, v.RecentIntentSummaryView)
-	serializeStringMap(s, schemas.GetSessionResponse_sessionAttributes, v.SessionAttributes)
+	if v.RecentIntentSummaryView != nil {
+		serializeIntentSummaryList(s, schemas.GetSessionResponse_recentIntentSummaryView, v.RecentIntentSummaryView)
+	}
+	if v.SessionAttributes != nil {
+		serializeStringMap(s, schemas.GetSessionResponse_sessionAttributes, v.SessionAttributes)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.GetSessionResponse_sessionId, *v.SessionId)
 	}

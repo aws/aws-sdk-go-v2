@@ -92,7 +92,9 @@ func (v *CreateIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateIngestionJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateIngestionJobRequest_tags, v.Tags)
+	}
 }
 
 type CreateIngestionJobOutput struct {

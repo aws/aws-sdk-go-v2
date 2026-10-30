@@ -84,8 +84,12 @@ func (v *CreateConsentPortalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConsentPortalRequest_name, *v.Name)
 	}
-	serializeConsentPortalSources(s, schemas.CreateConsentPortalRequest_sources, v.Sources)
-	serializeTagsMap(s, schemas.CreateConsentPortalRequest_tags, v.Tags)
+	if v.Sources != nil {
+		serializeConsentPortalSources(s, schemas.CreateConsentPortalRequest_sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateConsentPortalRequest_tags, v.Tags)
+	}
 }
 
 type CreateConsentPortalOutput struct {
@@ -186,7 +190,9 @@ func (v *CreateConsentPortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalUrl != nil {
 		s.WriteString(schemas.CreateConsentPortalResponse_portalUrl, *v.PortalUrl)
 	}
-	serializeConsentPortalSources(s, schemas.CreateConsentPortalResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeConsentPortalSources(s, schemas.CreateConsentPortalResponse_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateConsentPortalResponse_status, string(v.Status))
 	}

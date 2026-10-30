@@ -49,8 +49,12 @@ func (v *AddAttributesToFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddAttributesToFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserAttributeList(s, schemas.AddAttributesToFindingsRequest_attributes, v.Attributes)
-	serializeAddRemoveAttributesFindingArnList(s, schemas.AddAttributesToFindingsRequest_findingArns, v.FindingArns)
+	if v.Attributes != nil {
+		serializeUserAttributeList(s, schemas.AddAttributesToFindingsRequest_attributes, v.Attributes)
+	}
+	if v.FindingArns != nil {
+		serializeAddRemoveAttributesFindingArnList(s, schemas.AddAttributesToFindingsRequest_findingArns, v.FindingArns)
+	}
 }
 
 type AddAttributesToFindingsOutput struct {
@@ -74,7 +78,9 @@ func (v *AddAttributesToFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddAttributesToFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedItems(s, schemas.AddAttributesToFindingsResponse_failedItems, v.FailedItems)
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.AddAttributesToFindingsResponse_failedItems, v.FailedItems)
+	}
 }
 func (v *AddAttributesToFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddAttributesToFindingsResponse, func(s *smithy.Schema) error {

@@ -51,7 +51,9 @@ func (v *CreateCollaborationChangeRequestInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateCollaborationChangeRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeInputList(s, schemas.CreateCollaborationChangeRequestInput_changes, v.Changes)
+	if v.Changes != nil {
+		serializeChangeInputList(s, schemas.CreateCollaborationChangeRequestInput_changes, v.Changes)
+	}
 	if v.CollaborationIdentifier != nil {
 		s.WriteString(schemas.CreateCollaborationChangeRequestInput_collaborationIdentifier, *v.CollaborationIdentifier)
 	}

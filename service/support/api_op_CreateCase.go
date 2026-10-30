@@ -165,7 +165,9 @@ func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CategoryCode != nil {
 		s.WriteString(schemas.CreateCaseRequest_categoryCode, *v.CategoryCode)
 	}
-	serializeCcEmailAddressList(s, schemas.CreateCaseRequest_ccEmailAddresses, v.CcEmailAddresses)
+	if v.CcEmailAddresses != nil {
+		serializeCcEmailAddressList(s, schemas.CreateCaseRequest_ccEmailAddresses, v.CcEmailAddresses)
+	}
 	if v.CommunicationBody != nil {
 		s.WriteString(schemas.CreateCaseRequest_communicationBody, *v.CommunicationBody)
 	}
@@ -187,7 +189,9 @@ func (v *CreateCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subject != nil {
 		s.WriteString(schemas.CreateCaseRequest_subject, *v.Subject)
 	}
-	serializeUploadIds(s, schemas.CreateCaseRequest_uploadIds, v.UploadIds)
+	if v.UploadIds != nil {
+		serializeUploadIds(s, schemas.CreateCaseRequest_uploadIds, v.UploadIds)
+	}
 }
 
 // The support case ID returned by a successful completion of the CreateCase operation.

@@ -78,7 +78,9 @@ func (v *CreateCustomActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AliasName != nil {
 		s.WriteString(schemas.CreateCustomActionRequest_AliasName, *v.AliasName)
 	}
-	serializeCustomActionAttachmentList(s, schemas.CreateCustomActionRequest_Attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeCustomActionAttachmentList(s, schemas.CreateCustomActionRequest_Attachments, v.Attachments)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateCustomActionRequest_ClientToken, *v.ClientToken)
 	}
@@ -87,7 +89,9 @@ func (v *CreateCustomActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Definition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCustomActionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomActionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCustomActionOutput struct {

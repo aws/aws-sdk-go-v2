@@ -103,7 +103,9 @@ func (v *CreateGlossaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateGlossaryInput_status, string(v.Status))
 	}
-	serializeGlossaryUsageRestrictions(s, schemas.CreateGlossaryInput_usageRestrictions, v.UsageRestrictions)
+	if v.UsageRestrictions != nil {
+		serializeGlossaryUsageRestrictions(s, schemas.CreateGlossaryInput_usageRestrictions, v.UsageRestrictions)
+	}
 }
 
 type CreateGlossaryOutput struct {
@@ -168,7 +170,9 @@ func (v *CreateGlossaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateGlossaryOutput_status, string(v.Status))
 	}
-	serializeGlossaryUsageRestrictions(s, schemas.CreateGlossaryOutput_usageRestrictions, v.UsageRestrictions)
+	if v.UsageRestrictions != nil {
+		serializeGlossaryUsageRestrictions(s, schemas.CreateGlossaryOutput_usageRestrictions, v.UsageRestrictions)
+	}
 }
 func (v *CreateGlossaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateGlossaryOutput, func(s *smithy.Schema) error {

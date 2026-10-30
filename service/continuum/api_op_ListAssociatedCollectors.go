@@ -94,7 +94,9 @@ func (v *ListAssociatedCollectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociatedCollectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedCollectors(s, schemas.ListAssociatedCollectorsOutput_associatedCollectors, v.AssociatedCollectors)
+	if v.AssociatedCollectors != nil {
+		serializeAssociatedCollectors(s, schemas.ListAssociatedCollectorsOutput_associatedCollectors, v.AssociatedCollectors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedCollectorsOutput_nextToken, *v.NextToken)
 	}

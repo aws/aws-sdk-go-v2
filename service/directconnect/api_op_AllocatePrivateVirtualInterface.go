@@ -285,7 +285,9 @@ func (v *AllocatePrivateVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeS
 	if v.AwsLogicalDeviceId != nil {
 		s.WriteString(schemas.VirtualInterface_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
 	}
-	serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	if v.BgpPeers != nil {
+		serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	}
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.VirtualInterface_connectionId, *v.ConnectionId)
 	}
@@ -322,11 +324,15 @@ func (v *AllocatePrivateVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeS
 	if v.Region != nil {
 		s.WriteString(schemas.VirtualInterface_region, *v.Region)
 	}
-	serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	if v.RouteFilterPrefixes != nil {
+		serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	}
 	if v.SiteLinkEnabled != nil {
 		s.WriteBool(schemas.VirtualInterface_siteLinkEnabled, *v.SiteLinkEnabled)
 	}
-	serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	}
 	if v.VirtualGatewayId != nil {
 		s.WriteString(schemas.VirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
 	}

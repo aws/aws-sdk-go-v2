@@ -104,7 +104,9 @@ func (v *GetMLModelTrainingJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Id != nil {
 		s.WriteString(schemas.GetMLModelTrainingJobOutput_id, *v.Id)
 	}
-	serializeMlModels(s, schemas.GetMLModelTrainingJobOutput_mlModels, v.MlModels)
+	if v.MlModels != nil {
+		serializeMlModels(s, schemas.GetMLModelTrainingJobOutput_mlModels, v.MlModels)
+	}
 	if v.ModelTransformJob != nil {
 		s.WriteStruct(schemas.GetMLModelTrainingJobOutput_modelTransformJob)
 		v.ModelTransformJob.SerializeMembers(s)

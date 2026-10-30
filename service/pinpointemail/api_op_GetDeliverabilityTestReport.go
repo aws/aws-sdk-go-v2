@@ -96,7 +96,9 @@ func (v *GetDeliverabilityTestReportOutput) SerializeMembers(s smithy.ShapeSeria
 		v.DeliverabilityTestReport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIspPlacements(s, schemas.GetDeliverabilityTestReportResponse_IspPlacements, v.IspPlacements)
+	if v.IspPlacements != nil {
+		serializeIspPlacements(s, schemas.GetDeliverabilityTestReportResponse_IspPlacements, v.IspPlacements)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.GetDeliverabilityTestReportResponse_Message, *v.Message)
 	}
@@ -105,7 +107,9 @@ func (v *GetDeliverabilityTestReportOutput) SerializeMembers(s smithy.ShapeSeria
 		v.OverallPlacement.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.GetDeliverabilityTestReportResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetDeliverabilityTestReportResponse_Tags, v.Tags)
+	}
 }
 func (v *GetDeliverabilityTestReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDeliverabilityTestReportResponse, func(s *smithy.Schema) error {

@@ -50,7 +50,9 @@ func (v *DeleteFleetAdvisorDatabasesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteFleetAdvisorDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DeleteFleetAdvisorDatabasesRequest_DatabaseIds, v.DatabaseIds)
+	if v.DatabaseIds != nil {
+		serializeStringList(s, schemas.DeleteFleetAdvisorDatabasesRequest_DatabaseIds, v.DatabaseIds)
+	}
 }
 
 type DeleteFleetAdvisorDatabasesOutput struct {
@@ -71,7 +73,9 @@ func (v *DeleteFleetAdvisorDatabasesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DeleteFleetAdvisorDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DeleteFleetAdvisorDatabasesResponse_DatabaseIds, v.DatabaseIds)
+	if v.DatabaseIds != nil {
+		serializeStringList(s, schemas.DeleteFleetAdvisorDatabasesResponse_DatabaseIds, v.DatabaseIds)
+	}
 }
 func (v *DeleteFleetAdvisorDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteFleetAdvisorDatabasesResponse, func(s *smithy.Schema) error {

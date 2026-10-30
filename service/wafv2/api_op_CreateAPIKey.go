@@ -75,7 +75,9 @@ func (v *CreateAPIKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Scope != "" {
 		s.WriteString(schemas.CreateAPIKeyRequest_Scope, string(v.Scope))
 	}
-	serializeAPIKeyTokenDomains(s, schemas.CreateAPIKeyRequest_TokenDomains, v.TokenDomains)
+	if v.TokenDomains != nil {
+		serializeAPIKeyTokenDomains(s, schemas.CreateAPIKeyRequest_TokenDomains, v.TokenDomains)
+	}
 }
 
 type CreateAPIKeyOutput struct {

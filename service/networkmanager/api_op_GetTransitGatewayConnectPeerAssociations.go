@@ -63,7 +63,9 @@ func (v *GetTransitGatewayConnectPeerAssociationsInput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTransitGatewayConnectPeerAssociationsRequest_NextToken, *v.NextToken)
 	}
-	serializeTransitGatewayConnectPeerArnList(s, schemas.GetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns, v.TransitGatewayConnectPeerArns)
+	if v.TransitGatewayConnectPeerArns != nil {
+		serializeTransitGatewayConnectPeerArnList(s, schemas.GetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns, v.TransitGatewayConnectPeerArns)
+	}
 }
 
 type GetTransitGatewayConnectPeerAssociationsOutput struct {
@@ -90,7 +92,9 @@ func (v *GetTransitGatewayConnectPeerAssociationsOutput) SerializeMembers(s smit
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTransitGatewayConnectPeerAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeTransitGatewayConnectPeerAssociationList(s, schemas.GetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations, v.TransitGatewayConnectPeerAssociations)
+	if v.TransitGatewayConnectPeerAssociations != nil {
+		serializeTransitGatewayConnectPeerAssociationList(s, schemas.GetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations, v.TransitGatewayConnectPeerAssociations)
+	}
 }
 func (v *GetTransitGatewayConnectPeerAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTransitGatewayConnectPeerAssociationsResponse, func(s *smithy.Schema) error {

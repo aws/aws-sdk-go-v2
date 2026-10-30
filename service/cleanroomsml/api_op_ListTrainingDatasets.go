@@ -80,7 +80,9 @@ func (v *ListTrainingDatasetsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrainingDatasetsResponse_nextToken, *v.NextToken)
 	}
-	serializeTrainingDatasetList(s, schemas.ListTrainingDatasetsResponse_trainingDatasets, v.TrainingDatasets)
+	if v.TrainingDatasets != nil {
+		serializeTrainingDatasetList(s, schemas.ListTrainingDatasetsResponse_trainingDatasets, v.TrainingDatasets)
+	}
 }
 func (v *ListTrainingDatasetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrainingDatasetsResponse, func(s *smithy.Schema) error {

@@ -84,7 +84,9 @@ func (v *ListMultiplexProgramsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMultiplexProgramsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMultiplexProgramSummary(s, schemas.ListMultiplexProgramsResponse_MultiplexPrograms, v.MultiplexPrograms)
+	if v.MultiplexPrograms != nil {
+		serialize__listOfMultiplexProgramSummary(s, schemas.ListMultiplexProgramsResponse_MultiplexPrograms, v.MultiplexPrograms)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMultiplexProgramsResponse_NextToken, *v.NextToken)
 	}

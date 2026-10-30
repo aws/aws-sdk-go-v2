@@ -111,7 +111,9 @@ func (v *ListComponentOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComponentOutputsOutput_nextToken, *v.NextToken)
 	}
-	serializeOutputsList(s, schemas.ListComponentOutputsOutput_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputsList(s, schemas.ListComponentOutputsOutput_outputs, v.Outputs)
+	}
 }
 func (v *ListComponentOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListComponentOutputsOutput, func(s *smithy.Schema) error {

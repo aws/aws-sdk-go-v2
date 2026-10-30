@@ -95,7 +95,9 @@ func (v *CreateAccountCustomizationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Namespace != nil {
 		s.WriteString(schemas.CreateAccountCustomizationRequest_Namespace, *v.Namespace)
 	}
-	serializeTagList(s, schemas.CreateAccountCustomizationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAccountCustomizationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAccountCustomizationOutput struct {

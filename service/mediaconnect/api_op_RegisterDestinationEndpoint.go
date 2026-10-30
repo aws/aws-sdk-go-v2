@@ -62,14 +62,18 @@ func (v *RegisterDestinationEndpointInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ClientToken != nil {
 		s.WriteString(schemas.RegisterDestinationEndpointRequest_ClientToken, *v.ClientToken)
 	}
-	serializeDestinationEndpointConfiguration(s, schemas.RegisterDestinationEndpointRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeDestinationEndpointConfiguration(s, schemas.RegisterDestinationEndpointRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegisterDestinationEndpointRequest_Description, *v.Description)
 	}
 	if v.RegionName != nil {
 		s.WriteString(schemas.RegisterDestinationEndpointRequest_RegionName, *v.RegionName)
 	}
-	serialize__mapOfString(s, schemas.RegisterDestinationEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RegisterDestinationEndpointRequest_Tags, v.Tags)
+	}
 }
 
 type RegisterDestinationEndpointOutput struct {

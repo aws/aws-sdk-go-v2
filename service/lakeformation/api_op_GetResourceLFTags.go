@@ -89,9 +89,15 @@ func (v *GetResourceLFTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourceLFTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLFTagsList(s, schemas.GetResourceLFTagsResponse_LFTagOnDatabase, v.LFTagOnDatabase)
-	serializeColumnLFTagsList(s, schemas.GetResourceLFTagsResponse_LFTagsOnColumns, v.LFTagsOnColumns)
-	serializeLFTagsList(s, schemas.GetResourceLFTagsResponse_LFTagsOnTable, v.LFTagsOnTable)
+	if v.LFTagOnDatabase != nil {
+		serializeLFTagsList(s, schemas.GetResourceLFTagsResponse_LFTagOnDatabase, v.LFTagOnDatabase)
+	}
+	if v.LFTagsOnColumns != nil {
+		serializeColumnLFTagsList(s, schemas.GetResourceLFTagsResponse_LFTagsOnColumns, v.LFTagsOnColumns)
+	}
+	if v.LFTagsOnTable != nil {
+		serializeLFTagsList(s, schemas.GetResourceLFTagsResponse_LFTagsOnTable, v.LFTagsOnTable)
+	}
 }
 func (v *GetResourceLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceLFTagsResponse, func(s *smithy.Schema) error {

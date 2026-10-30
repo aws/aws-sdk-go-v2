@@ -170,7 +170,9 @@ func (v *BaseScreenshot) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BaseScreenshot) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBaseScreenshotIgnoreCoordinates(s, schemas.BaseScreenshot_IgnoreCoordinates, v.IgnoreCoordinates)
+	if v.IgnoreCoordinates != nil {
+		serializeBaseScreenshotIgnoreCoordinates(s, schemas.BaseScreenshot_IgnoreCoordinates, v.IgnoreCoordinates)
+	}
 	if v.ScreenshotName != nil {
 		s.WriteString(schemas.BaseScreenshot_ScreenshotName, *v.ScreenshotName)
 	}
@@ -379,7 +381,9 @@ func (v *Canary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactS3Location != nil {
 		s.WriteString(schemas.Canary_ArtifactS3Location, *v.ArtifactS3Location)
 	}
-	serializeBrowserConfigs(s, schemas.Canary_BrowserConfigs, v.BrowserConfigs)
+	if v.BrowserConfigs != nil {
+		serializeBrowserConfigs(s, schemas.Canary_BrowserConfigs, v.BrowserConfigs)
+	}
 	if v.Code != nil {
 		s.WriteStruct(schemas.Canary_Code)
 		v.Code.SerializeMembers(s)
@@ -393,7 +397,9 @@ func (v *Canary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EngineArn != nil {
 		s.WriteString(schemas.Canary_EngineArn, *v.EngineArn)
 	}
-	serializeEngineConfigs(s, schemas.Canary_EngineConfigs, v.EngineConfigs)
+	if v.EngineConfigs != nil {
+		serializeEngineConfigs(s, schemas.Canary_EngineConfigs, v.EngineConfigs)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.Canary_ExecutionRoleArn, *v.ExecutionRoleArn)
 	}
@@ -438,7 +444,9 @@ func (v *Canary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SuccessRetentionPeriodInDays != nil {
 		s.WriteInt32(schemas.Canary_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
 	}
-	serializeTagMap(s, schemas.Canary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Canary_Tags, v.Tags)
+	}
 	if v.Timeline != nil {
 		s.WriteStruct(schemas.Canary_Timeline)
 		v.Timeline.SerializeMembers(s)
@@ -449,7 +457,9 @@ func (v *Canary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VisualReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVisualReferencesOutput(s, schemas.Canary_VisualReferences, v.VisualReferences)
+	if v.VisualReferences != nil {
+		serializeVisualReferencesOutput(s, schemas.Canary_VisualReferences, v.VisualReferences)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.Canary_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)
@@ -618,8 +628,12 @@ func (v *CanaryCodeInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CanaryCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintTypes(s, schemas.CanaryCodeInput_BlueprintTypes, v.BlueprintTypes)
-	serializeDependencies(s, schemas.CanaryCodeInput_Dependencies, v.Dependencies)
+	if v.BlueprintTypes != nil {
+		serializeBlueprintTypes(s, schemas.CanaryCodeInput_BlueprintTypes, v.BlueprintTypes)
+	}
+	if v.Dependencies != nil {
+		serializeDependencies(s, schemas.CanaryCodeInput_Dependencies, v.Dependencies)
+	}
 	if v.Handler != nil {
 		s.WriteString(schemas.CanaryCodeInput_Handler, *v.Handler)
 	}
@@ -704,8 +718,12 @@ func (v *CanaryCodeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CanaryCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlueprintTypes(s, schemas.CanaryCodeOutput_BlueprintTypes, v.BlueprintTypes)
-	serializeDependencies(s, schemas.CanaryCodeOutput_Dependencies, v.Dependencies)
+	if v.BlueprintTypes != nil {
+		serializeBlueprintTypes(s, schemas.CanaryCodeOutput_BlueprintTypes, v.BlueprintTypes)
+	}
+	if v.Dependencies != nil {
+		serializeDependencies(s, schemas.CanaryCodeOutput_Dependencies, v.Dependencies)
+	}
 	if v.Handler != nil {
 		s.WriteString(schemas.CanaryCodeOutput_Handler, *v.Handler)
 	}
@@ -991,7 +1009,9 @@ func (v *CanaryRunConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActiveTracing != nil {
 		s.WriteBool(schemas.CanaryRunConfigInput_ActiveTracing, *v.ActiveTracing)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.CanaryRunConfigInput_EnvironmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.CanaryRunConfigInput_EnvironmentVariables, v.EnvironmentVariables)
+	}
 	if v.EphemeralStorage != nil {
 		s.WriteInt32(schemas.CanaryRunConfigInput_EphemeralStorage, *v.EphemeralStorage)
 	}
@@ -1664,7 +1684,9 @@ func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Group_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.Group_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Group_Tags, v.Tags)
+	}
 }
 func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
@@ -1777,7 +1799,9 @@ func (v *MultiLocationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryLocation != nil {
 		s.WriteString(schemas.MultiLocationConfig_PrimaryLocation, *v.PrimaryLocation)
 	}
-	serializeReplicas(s, schemas.MultiLocationConfig_Replicas, v.Replicas)
+	if v.Replicas != nil {
+		serializeReplicas(s, schemas.MultiLocationConfig_Replicas, v.Replicas)
+	}
 	if v.ReplicationState != "" {
 		s.WriteString(schemas.MultiLocationConfig_ReplicationState, string(v.ReplicationState))
 	}
@@ -2178,7 +2202,9 @@ func (v *VisualReferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseCanaryRunId != nil {
 		s.WriteString(schemas.VisualReferenceInput_BaseCanaryRunId, *v.BaseCanaryRunId)
 	}
-	serializeBaseScreenshots(s, schemas.VisualReferenceInput_BaseScreenshots, v.BaseScreenshots)
+	if v.BaseScreenshots != nil {
+		serializeBaseScreenshots(s, schemas.VisualReferenceInput_BaseScreenshots, v.BaseScreenshots)
+	}
 	if v.BrowserType != "" {
 		s.WriteString(schemas.VisualReferenceInput_BrowserType, string(v.BrowserType))
 	}
@@ -2236,7 +2262,9 @@ func (v *VisualReferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseCanaryRunId != nil {
 		s.WriteString(schemas.VisualReferenceOutput_BaseCanaryRunId, *v.BaseCanaryRunId)
 	}
-	serializeBaseScreenshots(s, schemas.VisualReferenceOutput_BaseScreenshots, v.BaseScreenshots)
+	if v.BaseScreenshots != nil {
+		serializeBaseScreenshots(s, schemas.VisualReferenceOutput_BaseScreenshots, v.BaseScreenshots)
+	}
 	if v.BrowserType != "" {
 		s.WriteString(schemas.VisualReferenceOutput_BrowserType, string(v.BrowserType))
 	}
@@ -2291,8 +2319,12 @@ func (v *VpcConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6AllowedForDualStack != nil {
 		s.WriteBool(schemas.VpcConfigInput_Ipv6AllowedForDualStack, *v.Ipv6AllowedForDualStack)
 	}
-	serializeSecurityGroupIds(s, schemas.VpcConfigInput_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfigInput_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigInput_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfigInput_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfigInput, func(s *smithy.Schema) error {
@@ -2342,8 +2374,12 @@ func (v *VpcConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6AllowedForDualStack != nil {
 		s.WriteBool(schemas.VpcConfigOutput_Ipv6AllowedForDualStack, *v.Ipv6AllowedForDualStack)
 	}
-	serializeSecurityGroupIds(s, schemas.VpcConfigOutput_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfigOutput_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigOutput_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfigOutput_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcConfigOutput_VpcId, *v.VpcId)
 	}

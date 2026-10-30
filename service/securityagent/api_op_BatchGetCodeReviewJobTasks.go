@@ -52,7 +52,9 @@ func (v *BatchGetCodeReviewJobTasksInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.BatchGetCodeReviewJobTasksInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeTaskIdList(s, schemas.BatchGetCodeReviewJobTasksInput_codeReviewJobTaskIds, v.CodeReviewJobTaskIds)
+	if v.CodeReviewJobTaskIds != nil {
+		serializeTaskIdList(s, schemas.BatchGetCodeReviewJobTasksInput_codeReviewJobTaskIds, v.CodeReviewJobTaskIds)
+	}
 }
 
 // Output for the BatchGetCodeReviewJobTasks operation.
@@ -77,8 +79,12 @@ func (v *BatchGetCodeReviewJobTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCodeReviewJobTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeReviewJobTaskList(s, schemas.BatchGetCodeReviewJobTasksOutput_codeReviewJobTasks, v.CodeReviewJobTasks)
-	serializeTaskIdList(s, schemas.BatchGetCodeReviewJobTasksOutput_notFound, v.NotFound)
+	if v.CodeReviewJobTasks != nil {
+		serializeCodeReviewJobTaskList(s, schemas.BatchGetCodeReviewJobTasksOutput_codeReviewJobTasks, v.CodeReviewJobTasks)
+	}
+	if v.NotFound != nil {
+		serializeTaskIdList(s, schemas.BatchGetCodeReviewJobTasksOutput_notFound, v.NotFound)
+	}
 }
 func (v *BatchGetCodeReviewJobTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCodeReviewJobTasksOutput, func(s *smithy.Schema) error {

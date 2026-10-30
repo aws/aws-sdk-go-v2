@@ -70,7 +70,9 @@ func (v *StartSuiteRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SuiteRunConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartSuiteRunRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartSuiteRunRequest_tags, v.Tags)
+	}
 }
 
 type StartSuiteRunOutput struct {

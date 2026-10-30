@@ -57,7 +57,9 @@ func (v *CreateEncoderConfigurationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEncoderConfigurationRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateEncoderConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateEncoderConfigurationRequest_tags, v.Tags)
+	}
 	if v.Video != nil {
 		s.WriteStruct(schemas.CreateEncoderConfigurationRequest_video)
 		v.Video.SerializeMembers(s)

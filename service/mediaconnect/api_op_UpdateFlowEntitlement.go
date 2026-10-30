@@ -88,7 +88,9 @@ func (v *UpdateFlowEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FlowArn != nil {
 		s.WriteString(schemas.UpdateFlowEntitlementRequest_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfString(s, schemas.UpdateFlowEntitlementRequest_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serialize__listOfString(s, schemas.UpdateFlowEntitlementRequest_Subscribers, v.Subscribers)
+	}
 }
 
 type UpdateFlowEntitlementOutput struct {

@@ -60,7 +60,9 @@ func (v *TestTelemetryPipelineInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Configuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecords(s, schemas.TestTelemetryPipelineInput_Records, v.Records)
+	if v.Records != nil {
+		serializeRecords(s, schemas.TestTelemetryPipelineInput_Records, v.Records)
+	}
 	if v.SignalType != "" {
 		s.WriteString(schemas.TestTelemetryPipelineInput_SignalType, string(v.SignalType))
 	}
@@ -85,7 +87,9 @@ func (v *TestTelemetryPipelineOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestTelemetryPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePipelineOutputs(s, schemas.TestTelemetryPipelineOutput_Results, v.Results)
+	if v.Results != nil {
+		serializePipelineOutputs(s, schemas.TestTelemetryPipelineOutput_Results, v.Results)
+	}
 }
 func (v *TestTelemetryPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestTelemetryPipelineOutput, func(s *smithy.Schema) error {

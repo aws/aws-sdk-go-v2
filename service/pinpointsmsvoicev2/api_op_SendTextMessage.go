@@ -128,8 +128,12 @@ func (v *SendTextMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendTextMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendTextMessageRequest_Context, v.Context)
-	serializeDestinationCountryParameters(s, schemas.SendTextMessageRequest_DestinationCountryParameters, v.DestinationCountryParameters)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendTextMessageRequest_Context, v.Context)
+	}
+	if v.DestinationCountryParameters != nil {
+		serializeDestinationCountryParameters(s, schemas.SendTextMessageRequest_DestinationCountryParameters, v.DestinationCountryParameters)
+	}
 	if v.DestinationPhoneNumber != nil {
 		s.WriteString(schemas.SendTextMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
 	}

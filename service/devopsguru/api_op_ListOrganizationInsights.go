@@ -58,14 +58,18 @@ func (v *ListOrganizationInsightsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOrganizationInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListInsightsAccountIdList(s, schemas.ListOrganizationInsightsRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeListInsightsAccountIdList(s, schemas.ListOrganizationInsightsRequest_AccountIds, v.AccountIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListOrganizationInsightsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrganizationInsightsRequest_NextToken, *v.NextToken)
 	}
-	serializeListInsightsOrganizationalUnitIdList(s, schemas.ListOrganizationInsightsRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	if v.OrganizationalUnitIds != nil {
+		serializeListInsightsOrganizationalUnitIdList(s, schemas.ListOrganizationInsightsRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	}
 	if v.StatusFilter != nil {
 		s.WriteStruct(schemas.ListOrganizationInsightsRequest_StatusFilter)
 		v.StatusFilter.SerializeMembers(s)
@@ -103,8 +107,12 @@ func (v *ListOrganizationInsightsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrganizationInsightsResponse_NextToken, *v.NextToken)
 	}
-	serializeProactiveOrganizationInsights(s, schemas.ListOrganizationInsightsResponse_ProactiveInsights, v.ProactiveInsights)
-	serializeReactiveOrganizationInsights(s, schemas.ListOrganizationInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+	if v.ProactiveInsights != nil {
+		serializeProactiveOrganizationInsights(s, schemas.ListOrganizationInsightsResponse_ProactiveInsights, v.ProactiveInsights)
+	}
+	if v.ReactiveInsights != nil {
+		serializeReactiveOrganizationInsights(s, schemas.ListOrganizationInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+	}
 }
 func (v *ListOrganizationInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOrganizationInsightsResponse, func(s *smithy.Schema) error {

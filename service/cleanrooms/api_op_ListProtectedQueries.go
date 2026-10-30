@@ -118,7 +118,9 @@ func (v *ListProtectedQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProtectedQueriesOutput_nextToken, *v.NextToken)
 	}
-	serializeProtectedQuerySummaryList(s, schemas.ListProtectedQueriesOutput_protectedQueries, v.ProtectedQueries)
+	if v.ProtectedQueries != nil {
+		serializeProtectedQuerySummaryList(s, schemas.ListProtectedQueriesOutput_protectedQueries, v.ProtectedQueries)
+	}
 }
 func (v *ListProtectedQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProtectedQueriesOutput, func(s *smithy.Schema) error {

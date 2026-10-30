@@ -85,7 +85,9 @@ func (v *GetBatchImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBatchImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchImportList(s, schemas.GetBatchImportJobsResult_batchImports, v.BatchImports)
+	if v.BatchImports != nil {
+		serializeBatchImportList(s, schemas.GetBatchImportJobsResult_batchImports, v.BatchImports)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBatchImportJobsResult_nextToken, *v.NextToken)
 	}

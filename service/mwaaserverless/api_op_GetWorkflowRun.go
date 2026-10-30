@@ -93,7 +93,9 @@ func (v *GetWorkflowRunOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectMap(s, schemas.GetWorkflowRunResponse_OverrideParameters, v.OverrideParameters)
+	if v.OverrideParameters != nil {
+		serializeObjectMap(s, schemas.GetWorkflowRunResponse_OverrideParameters, v.OverrideParameters)
+	}
 	if v.RunDetail != nil {
 		s.WriteStruct(schemas.GetWorkflowRunResponse_RunDetail)
 		v.RunDetail.SerializeMembers(s)

@@ -124,7 +124,9 @@ func (v *GetCurrentUserDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCurrentUserDataResponse_NextToken, *v.NextToken)
 	}
-	serializeUserDataList(s, schemas.GetCurrentUserDataResponse_UserDataList, v.UserDataList)
+	if v.UserDataList != nil {
+		serializeUserDataList(s, schemas.GetCurrentUserDataResponse_UserDataList, v.UserDataList)
+	}
 }
 func (v *GetCurrentUserDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCurrentUserDataResponse, func(s *smithy.Schema) error {

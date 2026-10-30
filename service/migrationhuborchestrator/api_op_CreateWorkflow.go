@@ -73,12 +73,18 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateMigrationWorkflowRequest_description, *v.Description)
 	}
-	serializeStepInputParameters(s, schemas.CreateMigrationWorkflowRequest_inputParameters, v.InputParameters)
+	if v.InputParameters != nil {
+		serializeStepInputParameters(s, schemas.CreateMigrationWorkflowRequest_inputParameters, v.InputParameters)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateMigrationWorkflowRequest_name, *v.Name)
 	}
-	serializeStringList(s, schemas.CreateMigrationWorkflowRequest_stepTargets, v.StepTargets)
-	serializeStringMap(s, schemas.CreateMigrationWorkflowRequest_tags, v.Tags)
+	if v.StepTargets != nil {
+		serializeStringList(s, schemas.CreateMigrationWorkflowRequest_stepTargets, v.StepTargets)
+	}
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.CreateMigrationWorkflowRequest_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.CreateMigrationWorkflowRequest_templateId, *v.TemplateId)
 	}
@@ -179,12 +185,18 @@ func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateMigrationWorkflowResponse_status, string(v.Status))
 	}
-	serializeStringList(s, schemas.CreateMigrationWorkflowResponse_stepTargets, v.StepTargets)
-	serializeStringMap(s, schemas.CreateMigrationWorkflowResponse_tags, v.Tags)
+	if v.StepTargets != nil {
+		serializeStringList(s, schemas.CreateMigrationWorkflowResponse_stepTargets, v.StepTargets)
+	}
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.CreateMigrationWorkflowResponse_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.CreateMigrationWorkflowResponse_templateId, *v.TemplateId)
 	}
-	serializeStepInputParameters(s, schemas.CreateMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+	if v.WorkflowInputs != nil {
+		serializeStepInputParameters(s, schemas.CreateMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+	}
 }
 func (v *CreateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMigrationWorkflowResponse, func(s *smithy.Schema) error {

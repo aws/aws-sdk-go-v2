@@ -80,7 +80,9 @@ func (v *UpdateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAgentSpaceInput_name, *v.Name)
 	}
-	serializeTargetDomainIdList(s, schemas.UpdateAgentSpaceInput_targetDomainIds, v.TargetDomainIds)
+	if v.TargetDomainIds != nil {
+		serializeTargetDomainIdList(s, schemas.UpdateAgentSpaceInput_targetDomainIds, v.TargetDomainIds)
+	}
 }
 
 // Output for the UpdateAgentSpace operation.
@@ -149,7 +151,9 @@ func (v *UpdateAgentSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateAgentSpaceOutput_name, *v.Name)
 	}
-	serializeTargetDomainIdList(s, schemas.UpdateAgentSpaceOutput_targetDomainIds, v.TargetDomainIds)
+	if v.TargetDomainIds != nil {
+		serializeTargetDomainIdList(s, schemas.UpdateAgentSpaceOutput_targetDomainIds, v.TargetDomainIds)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.UpdateAgentSpaceOutput_updatedAt, *v.UpdatedAt)
 	}

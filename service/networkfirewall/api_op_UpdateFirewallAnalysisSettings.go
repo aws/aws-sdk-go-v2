@@ -69,7 +69,9 @@ func (v *UpdateFirewallAnalysisSettingsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateFirewallAnalysisSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnabledAnalysisTypes(s, schemas.UpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.EnabledAnalysisTypes != nil {
+		serializeEnabledAnalysisTypes(s, schemas.UpdateFirewallAnalysisSettingsRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.UpdateFirewallAnalysisSettingsRequest_FirewallArn, *v.FirewallArn)
 	}
@@ -127,7 +129,9 @@ func (v *UpdateFirewallAnalysisSettingsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateFirewallAnalysisSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnabledAnalysisTypes(s, schemas.UpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.EnabledAnalysisTypes != nil {
+		serializeEnabledAnalysisTypes(s, schemas.UpdateFirewallAnalysisSettingsResponse_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.UpdateFirewallAnalysisSettingsResponse_FirewallArn, *v.FirewallArn)
 	}

@@ -73,8 +73,12 @@ func (v *GetPendingJobExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPendingJobExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobExecutionSummaryList(s, schemas.GetPendingJobExecutionsResponse_inProgressJobs, v.InProgressJobs)
-	serializeJobExecutionSummaryList(s, schemas.GetPendingJobExecutionsResponse_queuedJobs, v.QueuedJobs)
+	if v.InProgressJobs != nil {
+		serializeJobExecutionSummaryList(s, schemas.GetPendingJobExecutionsResponse_inProgressJobs, v.InProgressJobs)
+	}
+	if v.QueuedJobs != nil {
+		serializeJobExecutionSummaryList(s, schemas.GetPendingJobExecutionsResponse_queuedJobs, v.QueuedJobs)
+	}
 }
 func (v *GetPendingJobExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPendingJobExecutionsResponse, func(s *smithy.Schema) error {

@@ -116,8 +116,12 @@ func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInterpretations(s, schemas.GetSessionResponse_interpretations, v.Interpretations)
-	serializeMessages(s, schemas.GetSessionResponse_messages, v.Messages)
+	if v.Interpretations != nil {
+		serializeInterpretations(s, schemas.GetSessionResponse_interpretations, v.Interpretations)
+	}
+	if v.Messages != nil {
+		serializeMessages(s, schemas.GetSessionResponse_messages, v.Messages)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.GetSessionResponse_sessionId, *v.SessionId)
 	}

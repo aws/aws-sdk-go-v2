@@ -177,7 +177,9 @@ func (v *CreateGameSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetId != nil {
 		s.WriteString(schemas.CreateGameSessionInput_FleetId, *v.FleetId)
 	}
-	serializeGamePropertyList(s, schemas.CreateGameSessionInput_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.CreateGameSessionInput_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.CreateGameSessionInput_GameSessionData, *v.GameSessionData)
 	}

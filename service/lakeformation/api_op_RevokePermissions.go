@@ -79,8 +79,12 @@ func (v *RevokePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Condition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePermissionList(s, schemas.RevokePermissionsRequest_Permissions, v.Permissions)
-	serializePermissionList(s, schemas.RevokePermissionsRequest_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.RevokePermissionsRequest_Permissions, v.Permissions)
+	}
+	if v.PermissionsWithGrantOption != nil {
+		serializePermissionList(s, schemas.RevokePermissionsRequest_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.RevokePermissionsRequest_Principal)
 		v.Principal.SerializeMembers(s)

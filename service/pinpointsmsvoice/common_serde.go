@@ -8,9 +8,6 @@ import (
 )
 
 func serializeConfigurationSets(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeConfigurationSets(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeEventDestinations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventDestination) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -32,9 +26,6 @@ func serializeEventDestinations(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeEventTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.EventType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))

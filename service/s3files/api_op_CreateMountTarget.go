@@ -89,7 +89,9 @@ func (v *CreateMountTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6Address != nil {
 		s.WriteString(schemas.CreateMountTargetRequest_ipv6Address, *v.Ipv6Address)
 	}
-	serializeSecurityGroups(s, schemas.CreateMountTargetRequest_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.CreateMountTargetRequest_securityGroups, v.SecurityGroups)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.CreateMountTargetRequest_subnetId, *v.SubnetId)
 	}
@@ -183,7 +185,9 @@ func (v *CreateMountTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerId != nil {
 		s.WriteString(schemas.CreateMountTargetResponse_ownerId, *v.OwnerId)
 	}
-	serializeSecurityGroups(s, schemas.CreateMountTargetResponse_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.CreateMountTargetResponse_securityGroups, v.SecurityGroups)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateMountTargetResponse_status, string(v.Status))
 	}

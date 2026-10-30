@@ -61,7 +61,9 @@ func (v *CreateTransitGatewayPeeringInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
-	serializeTagList(s, schemas.CreateTransitGatewayPeeringRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTransitGatewayPeeringRequest_Tags, v.Tags)
+	}
 	if v.TransitGatewayArn != nil {
 		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_TransitGatewayArn, *v.TransitGatewayArn)
 	}

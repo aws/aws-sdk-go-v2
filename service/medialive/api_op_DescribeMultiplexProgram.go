@@ -104,7 +104,9 @@ func (v *DescribeMultiplexProgramOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.PacketIdentifiersMap.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMultiplexProgramPipelineDetail(s, schemas.DescribeMultiplexProgramResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelineDetails != nil {
+		serialize__listOfMultiplexProgramPipelineDetail(s, schemas.DescribeMultiplexProgramResponse_PipelineDetails, v.PipelineDetails)
+	}
 	if v.ProgramName != nil {
 		s.WriteString(schemas.DescribeMultiplexProgramResponse_ProgramName, *v.ProgramName)
 	}

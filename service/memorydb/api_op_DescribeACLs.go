@@ -89,7 +89,9 @@ func (v *DescribeACLsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeACLsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeACLList(s, schemas.DescribeACLsResponse_ACLs, v.ACLs)
+	if v.ACLs != nil {
+		serializeACLList(s, schemas.DescribeACLsResponse_ACLs, v.ACLs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeACLsResponse_NextToken, *v.NextToken)
 	}

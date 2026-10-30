@@ -102,10 +102,18 @@ func (v *RenderMessageTemplateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenderMessageTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateAttachmentList(s, schemas.RenderMessageTemplateResponse_attachments, v.Attachments)
-	serializeMessageTemplateAttributeKeyList(s, schemas.RenderMessageTemplateResponse_attributesNotInterpolated, v.AttributesNotInterpolated)
-	serializeMessageTemplateContentProvider(s, schemas.RenderMessageTemplateResponse_content, v.Content)
-	serializeMessageTemplateSourceConfigurationSummary(s, schemas.RenderMessageTemplateResponse_sourceConfigurationSummary, v.SourceConfigurationSummary)
+	if v.Attachments != nil {
+		serializeMessageTemplateAttachmentList(s, schemas.RenderMessageTemplateResponse_attachments, v.Attachments)
+	}
+	if v.AttributesNotInterpolated != nil {
+		serializeMessageTemplateAttributeKeyList(s, schemas.RenderMessageTemplateResponse_attributesNotInterpolated, v.AttributesNotInterpolated)
+	}
+	if v.Content != nil {
+		serializeMessageTemplateContentProvider(s, schemas.RenderMessageTemplateResponse_content, v.Content)
+	}
+	if v.SourceConfigurationSummary != nil {
+		serializeMessageTemplateSourceConfigurationSummary(s, schemas.RenderMessageTemplateResponse_sourceConfigurationSummary, v.SourceConfigurationSummary)
+	}
 }
 func (v *RenderMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RenderMessageTemplateResponse, func(s *smithy.Schema) error {

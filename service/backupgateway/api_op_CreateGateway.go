@@ -66,7 +66,9 @@ func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayType != "" {
 		s.WriteString(schemas.CreateGatewayInput_GatewayType, string(v.GatewayType))
 	}
-	serializeTags(s, schemas.CreateGatewayInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateGatewayInput_Tags, v.Tags)
+	}
 }
 func (v *CreateGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateGatewayInput, func(s *smithy.Schema) error {

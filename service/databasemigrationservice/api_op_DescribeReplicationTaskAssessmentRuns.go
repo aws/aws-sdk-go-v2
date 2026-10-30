@@ -64,7 +64,9 @@ func (v *DescribeReplicationTaskAssessmentRunsInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *DescribeReplicationTaskAssessmentRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeReplicationTaskAssessmentRunsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeReplicationTaskAssessmentRunsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationTaskAssessmentRunsMessage_Marker, *v.Marker)
 	}
@@ -100,7 +102,9 @@ func (v *DescribeReplicationTaskAssessmentRunsOutput) SerializeMembers(s smithy.
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker, *v.Marker)
 	}
-	serializeReplicationTaskAssessmentRunList(s, schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns, v.ReplicationTaskAssessmentRuns)
+	if v.ReplicationTaskAssessmentRuns != nil {
+		serializeReplicationTaskAssessmentRunList(s, schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns, v.ReplicationTaskAssessmentRuns)
+	}
 }
 func (v *DescribeReplicationTaskAssessmentRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationTaskAssessmentRunsResponse, func(s *smithy.Schema) error {

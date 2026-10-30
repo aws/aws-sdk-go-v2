@@ -90,7 +90,9 @@ func (v *ListRestoreAccessBackupVaultsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRestoreAccessBackupVaultsOutput_NextToken, *v.NextToken)
 	}
-	serializeRestoreAccessBackupVaultList(s, schemas.ListRestoreAccessBackupVaultsOutput_RestoreAccessBackupVaults, v.RestoreAccessBackupVaults)
+	if v.RestoreAccessBackupVaults != nil {
+		serializeRestoreAccessBackupVaultList(s, schemas.ListRestoreAccessBackupVaultsOutput_RestoreAccessBackupVaults, v.RestoreAccessBackupVaults)
+	}
 }
 func (v *ListRestoreAccessBackupVaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRestoreAccessBackupVaultsOutput, func(s *smithy.Schema) error {

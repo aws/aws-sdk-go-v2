@@ -204,7 +204,9 @@ func (v *RegisterUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionName != nil {
 		s.WriteString(schemas.RegisterUserRequest_SessionName, *v.SessionName)
 	}
-	serializeTagList(s, schemas.RegisterUserRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RegisterUserRequest_Tags, v.Tags)
+	}
 	if v.UserName != nil {
 		s.WriteString(schemas.RegisterUserRequest_UserName, *v.UserName)
 	}

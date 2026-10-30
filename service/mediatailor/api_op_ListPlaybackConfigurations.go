@@ -109,7 +109,9 @@ func (v *ListPlaybackConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPlaybackConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfPlaybackConfiguration(s, schemas.ListPlaybackConfigurationsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfPlaybackConfiguration(s, schemas.ListPlaybackConfigurationsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPlaybackConfigurationsResponse_NextToken, *v.NextToken)
 	}

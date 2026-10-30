@@ -56,7 +56,9 @@ func (v *ListDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentFilterList(s, schemas.ListDeploymentsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeDeploymentFilterList(s, schemas.ListDeploymentsInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDeploymentsInput_maxResults, *v.MaxResults)
 	}
@@ -87,7 +89,9 @@ func (v *ListDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentDataSummaryList(s, schemas.ListDeploymentsOutput_deployments, v.Deployments)
+	if v.Deployments != nil {
+		serializeDeploymentDataSummaryList(s, schemas.ListDeploymentsOutput_deployments, v.Deployments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentsOutput_nextToken, *v.NextToken)
 	}

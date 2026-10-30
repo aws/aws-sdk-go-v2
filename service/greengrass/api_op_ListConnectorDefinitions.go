@@ -75,7 +75,9 @@ func (v *ListConnectorDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectorDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListConnectorDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListConnectorDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectorDefinitionsResponse_NextToken, *v.NextToken)
 	}

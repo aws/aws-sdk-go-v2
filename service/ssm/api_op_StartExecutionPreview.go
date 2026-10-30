@@ -57,7 +57,9 @@ func (v *StartExecutionPreviewInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.StartExecutionPreviewRequest_DocumentVersion, *v.DocumentVersion)
 	}
-	serializeExecutionInputs(s, schemas.StartExecutionPreviewRequest_ExecutionInputs, v.ExecutionInputs)
+	if v.ExecutionInputs != nil {
+		serializeExecutionInputs(s, schemas.StartExecutionPreviewRequest_ExecutionInputs, v.ExecutionInputs)
+	}
 }
 
 type StartExecutionPreviewOutput struct {

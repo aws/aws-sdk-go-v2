@@ -95,7 +95,9 @@ func (v *GetRecommenderSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetRecommenderSchemaResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeRecommenderSchemaFields(s, schemas.GetRecommenderSchemaResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeRecommenderSchemaFields(s, schemas.GetRecommenderSchemaResponse_Fields, v.Fields)
+	}
 	if v.RecommenderSchemaName != nil {
 		s.WriteString(schemas.GetRecommenderSchemaResponse_RecommenderSchemaName, *v.RecommenderSchemaName)
 	}

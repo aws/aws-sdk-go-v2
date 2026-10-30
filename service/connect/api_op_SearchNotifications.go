@@ -115,7 +115,9 @@ func (v *SearchNotificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchNotificationsResponse_NextToken, *v.NextToken)
 	}
-	serializeNotificationSearchSummaryList(s, schemas.SearchNotificationsResponse_Notifications, v.Notifications)
+	if v.Notifications != nil {
+		serializeNotificationSearchSummaryList(s, schemas.SearchNotificationsResponse_Notifications, v.Notifications)
+	}
 }
 func (v *SearchNotificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchNotificationsResponse, func(s *smithy.Schema) error {

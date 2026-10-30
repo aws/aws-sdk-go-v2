@@ -49,7 +49,9 @@ func (v *ListAccountLinksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccountLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkStatusFilterList(s, schemas.ListAccountLinksRequest_LinkStatusFilter, v.LinkStatusFilter)
+	if v.LinkStatusFilter != nil {
+		serializeLinkStatusFilterList(s, schemas.ListAccountLinksRequest_LinkStatusFilter, v.LinkStatusFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAccountLinksRequest_MaxResults, *v.MaxResults)
 	}
@@ -80,7 +82,9 @@ func (v *ListAccountLinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccountLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountLinkList(s, schemas.ListAccountLinksResult_AccountLinks, v.AccountLinks)
+	if v.AccountLinks != nil {
+		serializeAccountLinkList(s, schemas.ListAccountLinksResult_AccountLinks, v.AccountLinks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccountLinksResult_NextToken, *v.NextToken)
 	}

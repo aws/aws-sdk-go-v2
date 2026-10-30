@@ -43,7 +43,9 @@ func (v *BatchGetSandboxesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSandboxesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSandboxIds(s, schemas.BatchGetSandboxesInput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeSandboxIds(s, schemas.BatchGetSandboxesInput_ids, v.Ids)
+	}
 }
 
 type BatchGetSandboxesOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetSandboxesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSandboxesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSandboxes(s, schemas.BatchGetSandboxesOutput_sandboxes, v.Sandboxes)
-	serializeSandboxIds(s, schemas.BatchGetSandboxesOutput_sandboxesNotFound, v.SandboxesNotFound)
+	if v.Sandboxes != nil {
+		serializeSandboxes(s, schemas.BatchGetSandboxesOutput_sandboxes, v.Sandboxes)
+	}
+	if v.SandboxesNotFound != nil {
+		serializeSandboxIds(s, schemas.BatchGetSandboxesOutput_sandboxesNotFound, v.SandboxesNotFound)
+	}
 }
 func (v *BatchGetSandboxesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSandboxesOutput, func(s *smithy.Schema) error {

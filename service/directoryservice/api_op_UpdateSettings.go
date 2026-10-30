@@ -51,7 +51,9 @@ func (v *UpdateSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.UpdateSettingsRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeSettings(s, schemas.UpdateSettingsRequest_Settings, v.Settings)
+	if v.Settings != nil {
+		serializeSettings(s, schemas.UpdateSettingsRequest_Settings, v.Settings)
+	}
 }
 
 type UpdateSettingsOutput struct {

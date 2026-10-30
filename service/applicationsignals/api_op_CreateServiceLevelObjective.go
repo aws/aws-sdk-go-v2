@@ -173,7 +173,9 @@ func (v *CreateServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AutoInvestigationEnabled != nil {
 		s.WriteBool(schemas.CreateServiceLevelObjectiveInput_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
 	}
-	serializeBurnRateConfigurations(s, schemas.CreateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
+	if v.BurnRateConfigurations != nil {
+		serializeBurnRateConfigurations(s, schemas.CreateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
+	}
 	if v.CreateRecommendedSlo != false {
 		s.WriteBool(schemas.CreateServiceLevelObjectiveInput_CreateRecommendedSlo, v.CreateRecommendedSlo)
 	}
@@ -198,7 +200,9 @@ func (v *CreateServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerial
 		v.SliConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateServiceLevelObjectiveInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServiceLevelObjectiveInput_Tags, v.Tags)
+	}
 }
 
 type CreateServiceLevelObjectiveOutput struct {

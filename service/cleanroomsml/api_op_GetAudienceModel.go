@@ -136,7 +136,9 @@ func (v *GetAudienceModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetAudienceModelResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetAudienceModelResponse_tags, v.Tags)
+	}
 	if v.TrainingDataEndTime != nil {
 		s.WriteTime(schemas.GetAudienceModelResponse_trainingDataEndTime, *v.TrainingDataEndTime)
 	}

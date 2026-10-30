@@ -78,7 +78,9 @@ func (v *CreateSavingsPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SavingsPlanOfferingId != nil {
 		s.WriteString(schemas.CreateSavingsPlanRequest_savingsPlanOfferingId, *v.SavingsPlanOfferingId)
 	}
-	serializeTagMap(s, schemas.CreateSavingsPlanRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSavingsPlanRequest_tags, v.Tags)
+	}
 	if v.UpfrontPaymentAmount != nil {
 		s.WriteString(schemas.CreateSavingsPlanRequest_upfrontPaymentAmount, *v.UpfrontPaymentAmount)
 	}

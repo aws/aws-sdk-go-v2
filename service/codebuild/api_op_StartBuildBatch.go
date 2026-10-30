@@ -259,7 +259,9 @@ func (v *StartBuildBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentTypeOverride != "" {
 		s.WriteString(schemas.StartBuildBatchInput_environmentTypeOverride, string(v.EnvironmentTypeOverride))
 	}
-	serializeEnvironmentVariables(s, schemas.StartBuildBatchInput_environmentVariablesOverride, v.EnvironmentVariablesOverride)
+	if v.EnvironmentVariablesOverride != nil {
+		serializeEnvironmentVariables(s, schemas.StartBuildBatchInput_environmentVariablesOverride, v.EnvironmentVariablesOverride)
+	}
 	if v.GitCloneDepthOverride != nil {
 		s.WriteInt32(schemas.StartBuildBatchInput_gitCloneDepthOverride, *v.GitCloneDepthOverride)
 	}
@@ -302,9 +304,15 @@ func (v *StartBuildBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportBuildBatchStatusOverride != nil {
 		s.WriteBool(schemas.StartBuildBatchInput_reportBuildBatchStatusOverride, *v.ReportBuildBatchStatusOverride)
 	}
-	serializeProjectArtifactsList(s, schemas.StartBuildBatchInput_secondaryArtifactsOverride, v.SecondaryArtifactsOverride)
-	serializeProjectSources(s, schemas.StartBuildBatchInput_secondarySourcesOverride, v.SecondarySourcesOverride)
-	serializeProjectSecondarySourceVersions(s, schemas.StartBuildBatchInput_secondarySourcesVersionOverride, v.SecondarySourcesVersionOverride)
+	if v.SecondaryArtifactsOverride != nil {
+		serializeProjectArtifactsList(s, schemas.StartBuildBatchInput_secondaryArtifactsOverride, v.SecondaryArtifactsOverride)
+	}
+	if v.SecondarySourcesOverride != nil {
+		serializeProjectSources(s, schemas.StartBuildBatchInput_secondarySourcesOverride, v.SecondarySourcesOverride)
+	}
+	if v.SecondarySourcesVersionOverride != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.StartBuildBatchInput_secondarySourcesVersionOverride, v.SecondarySourcesVersionOverride)
+	}
 	if v.ServiceRoleOverride != nil {
 		s.WriteString(schemas.StartBuildBatchInput_serviceRoleOverride, *v.ServiceRoleOverride)
 	}

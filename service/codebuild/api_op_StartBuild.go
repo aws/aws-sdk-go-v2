@@ -295,7 +295,9 @@ func (v *StartBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentTypeOverride != "" {
 		s.WriteString(schemas.StartBuildInput_environmentTypeOverride, string(v.EnvironmentTypeOverride))
 	}
-	serializeEnvironmentVariables(s, schemas.StartBuildInput_environmentVariablesOverride, v.EnvironmentVariablesOverride)
+	if v.EnvironmentVariablesOverride != nil {
+		serializeEnvironmentVariables(s, schemas.StartBuildInput_environmentVariablesOverride, v.EnvironmentVariablesOverride)
+	}
 	if v.FleetOverride != nil {
 		s.WriteStruct(schemas.StartBuildInput_fleetOverride)
 		v.FleetOverride.SerializeMembers(s)
@@ -346,9 +348,15 @@ func (v *StartBuildInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportBuildStatusOverride != nil {
 		s.WriteBool(schemas.StartBuildInput_reportBuildStatusOverride, *v.ReportBuildStatusOverride)
 	}
-	serializeProjectArtifactsList(s, schemas.StartBuildInput_secondaryArtifactsOverride, v.SecondaryArtifactsOverride)
-	serializeProjectSources(s, schemas.StartBuildInput_secondarySourcesOverride, v.SecondarySourcesOverride)
-	serializeProjectSecondarySourceVersions(s, schemas.StartBuildInput_secondarySourcesVersionOverride, v.SecondarySourcesVersionOverride)
+	if v.SecondaryArtifactsOverride != nil {
+		serializeProjectArtifactsList(s, schemas.StartBuildInput_secondaryArtifactsOverride, v.SecondaryArtifactsOverride)
+	}
+	if v.SecondarySourcesOverride != nil {
+		serializeProjectSources(s, schemas.StartBuildInput_secondarySourcesOverride, v.SecondarySourcesOverride)
+	}
+	if v.SecondarySourcesVersionOverride != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.StartBuildInput_secondarySourcesVersionOverride, v.SecondarySourcesVersionOverride)
+	}
 	if v.ServiceRoleOverride != nil {
 		s.WriteString(schemas.StartBuildInput_serviceRoleOverride, *v.ServiceRoleOverride)
 	}

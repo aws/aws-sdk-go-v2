@@ -67,8 +67,12 @@ func (v *GetDataflowGraphOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDataflowGraphOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDagEdges(s, schemas.GetDataflowGraphResponse_DagEdges, v.DagEdges)
-	serializeDagNodes(s, schemas.GetDataflowGraphResponse_DagNodes, v.DagNodes)
+	if v.DagEdges != nil {
+		serializeDagEdges(s, schemas.GetDataflowGraphResponse_DagEdges, v.DagEdges)
+	}
+	if v.DagNodes != nil {
+		serializeDagNodes(s, schemas.GetDataflowGraphResponse_DagNodes, v.DagNodes)
+	}
 }
 func (v *GetDataflowGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataflowGraphResponse, func(s *smithy.Schema) error {

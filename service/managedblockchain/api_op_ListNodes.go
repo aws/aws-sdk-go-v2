@@ -103,7 +103,9 @@ func (v *ListNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNodesOutput_NextToken, *v.NextToken)
 	}
-	serializeNodeSummaryList(s, schemas.ListNodesOutput_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeNodeSummaryList(s, schemas.ListNodesOutput_Nodes, v.Nodes)
+	}
 }
 func (v *ListNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNodesOutput, func(s *smithy.Schema) error {

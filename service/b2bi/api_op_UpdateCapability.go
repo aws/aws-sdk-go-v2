@@ -60,8 +60,12 @@ func (v *UpdateCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CapabilityId != nil {
 		s.WriteString(schemas.UpdateCapabilityRequest_capabilityId, *v.CapabilityId)
 	}
-	serializeCapabilityConfiguration(s, schemas.UpdateCapabilityRequest_configuration, v.Configuration)
-	serializeInstructionsDocuments(s, schemas.UpdateCapabilityRequest_instructionsDocuments, v.InstructionsDocuments)
+	if v.Configuration != nil {
+		serializeCapabilityConfiguration(s, schemas.UpdateCapabilityRequest_configuration, v.Configuration)
+	}
+	if v.InstructionsDocuments != nil {
+		serializeInstructionsDocuments(s, schemas.UpdateCapabilityRequest_instructionsDocuments, v.InstructionsDocuments)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateCapabilityRequest_name, *v.Name)
 	}
@@ -127,11 +131,15 @@ func (v *UpdateCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CapabilityId != nil {
 		s.WriteString(schemas.UpdateCapabilityResponse_capabilityId, *v.CapabilityId)
 	}
-	serializeCapabilityConfiguration(s, schemas.UpdateCapabilityResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeCapabilityConfiguration(s, schemas.UpdateCapabilityResponse_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateCapabilityResponse_createdAt, *v.CreatedAt)
 	}
-	serializeInstructionsDocuments(s, schemas.UpdateCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	if v.InstructionsDocuments != nil {
+		serializeInstructionsDocuments(s, schemas.UpdateCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.UpdateCapabilityResponse_modifiedAt, *v.ModifiedAt)
 	}

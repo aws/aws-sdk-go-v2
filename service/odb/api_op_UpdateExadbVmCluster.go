@@ -96,7 +96,9 @@ func (v *UpdateExadbVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseModel != "" {
 		s.WriteString(schemas.UpdateExadbVmClusterInput_licenseModel, string(v.LicenseModel))
 	}
-	serializeStringList(s, schemas.UpdateExadbVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeStringList(s, schemas.UpdateExadbVmClusterInput_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.SystemVersion != nil {
 		s.WriteString(schemas.UpdateExadbVmClusterInput_systemVersion, *v.SystemVersion)
 	}

@@ -83,7 +83,9 @@ func (v *DeleteDiskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteDiskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteDiskResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteDiskResult_operations, v.Operations)
+	}
 }
 func (v *DeleteDiskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteDiskResult, func(s *smithy.Schema) error {

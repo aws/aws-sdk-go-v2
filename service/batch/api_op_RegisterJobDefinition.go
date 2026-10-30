@@ -181,8 +181,12 @@ func (v *RegisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.NodeProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParametersMap(s, schemas.RegisterJobDefinitionRequest_parameters, v.Parameters)
-	serializePlatformCapabilityList(s, schemas.RegisterJobDefinitionRequest_platformCapabilities, v.PlatformCapabilities)
+	if v.Parameters != nil {
+		serializeParametersMap(s, schemas.RegisterJobDefinitionRequest_parameters, v.Parameters)
+	}
+	if v.PlatformCapabilities != nil {
+		serializePlatformCapabilityList(s, schemas.RegisterJobDefinitionRequest_platformCapabilities, v.PlatformCapabilities)
+	}
 	if v.PropagateTags != nil {
 		s.WriteBool(schemas.RegisterJobDefinitionRequest_propagateTags, *v.PropagateTags)
 	}
@@ -194,7 +198,9 @@ func (v *RegisterJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SchedulingPriority != nil {
 		s.WriteInt32(schemas.RegisterJobDefinitionRequest_schedulingPriority, *v.SchedulingPriority)
 	}
-	serializeTagrisTagsMap(s, schemas.RegisterJobDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.RegisterJobDefinitionRequest_tags, v.Tags)
+	}
 	if v.Timeout != nil {
 		s.WriteStruct(schemas.RegisterJobDefinitionRequest_timeout)
 		v.Timeout.SerializeMembers(s)

@@ -140,7 +140,9 @@ func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIdentityProviderRequest_clientToken, *v.ClientToken)
 	}
-	serializeIdentityProviderDetails(s, schemas.CreateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
+	if v.IdentityProviderDetails != nil {
+		serializeIdentityProviderDetails(s, schemas.CreateIdentityProviderRequest_identityProviderDetails, v.IdentityProviderDetails)
+	}
 	if v.IdentityProviderName != nil {
 		s.WriteString(schemas.CreateIdentityProviderRequest_identityProviderName, *v.IdentityProviderName)
 	}
@@ -150,7 +152,9 @@ func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PortalArn != nil {
 		s.WriteString(schemas.CreateIdentityProviderRequest_portalArn, *v.PortalArn)
 	}
-	serializeTagList(s, schemas.CreateIdentityProviderRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIdentityProviderRequest_tags, v.Tags)
+	}
 }
 
 type CreateIdentityProviderOutput struct {

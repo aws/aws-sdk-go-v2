@@ -153,20 +153,28 @@ func (v *BatchUpdateFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Criticality != nil {
 		s.WriteInt32(schemas.BatchUpdateFindingsRequest_Criticality, *v.Criticality)
 	}
-	serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsRequest_FindingIdentifiers, v.FindingIdentifiers)
+	if v.FindingIdentifiers != nil {
+		serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsRequest_FindingIdentifiers, v.FindingIdentifiers)
+	}
 	if v.Note != nil {
 		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Note)
 		v.Note.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRelatedFindingList(s, schemas.BatchUpdateFindingsRequest_RelatedFindings, v.RelatedFindings)
+	if v.RelatedFindings != nil {
+		serializeRelatedFindingList(s, schemas.BatchUpdateFindingsRequest_RelatedFindings, v.RelatedFindings)
+	}
 	if v.Severity != nil {
 		s.WriteStruct(schemas.BatchUpdateFindingsRequest_Severity)
 		v.Severity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTypeList(s, schemas.BatchUpdateFindingsRequest_Types, v.Types)
-	serializeFieldMap(s, schemas.BatchUpdateFindingsRequest_UserDefinedFields, v.UserDefinedFields)
+	if v.Types != nil {
+		serializeTypeList(s, schemas.BatchUpdateFindingsRequest_Types, v.Types)
+	}
+	if v.UserDefinedFields != nil {
+		serializeFieldMap(s, schemas.BatchUpdateFindingsRequest_UserDefinedFields, v.UserDefinedFields)
+	}
 	if v.VerificationState != "" {
 		s.WriteString(schemas.BatchUpdateFindingsRequest_VerificationState, string(v.VerificationState))
 	}
@@ -202,8 +210,12 @@ func (v *BatchUpdateFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsResponse_ProcessedFindings, v.ProcessedFindings)
-	serializeBatchUpdateFindingsUnprocessedFindingsList(s, schemas.BatchUpdateFindingsResponse_UnprocessedFindings, v.UnprocessedFindings)
+	if v.ProcessedFindings != nil {
+		serializeAwsSecurityFindingIdentifierList(s, schemas.BatchUpdateFindingsResponse_ProcessedFindings, v.ProcessedFindings)
+	}
+	if v.UnprocessedFindings != nil {
+		serializeBatchUpdateFindingsUnprocessedFindingsList(s, schemas.BatchUpdateFindingsResponse_UnprocessedFindings, v.UnprocessedFindings)
+	}
 }
 func (v *BatchUpdateFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateFindingsResponse, func(s *smithy.Schema) error {

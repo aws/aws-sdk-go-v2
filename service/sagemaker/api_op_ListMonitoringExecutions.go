@@ -161,7 +161,9 @@ func (v *ListMonitoringExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitoringExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringExecutionSummaryList(s, schemas.ListMonitoringExecutionsResponse_MonitoringExecutionSummaries, v.MonitoringExecutionSummaries)
+	if v.MonitoringExecutionSummaries != nil {
+		serializeMonitoringExecutionSummaryList(s, schemas.ListMonitoringExecutionsResponse_MonitoringExecutionSummaries, v.MonitoringExecutionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitoringExecutionsResponse_NextToken, *v.NextToken)
 	}

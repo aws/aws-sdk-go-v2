@@ -345,7 +345,9 @@ func (v *ExportDiffieHellmanTr31KeyBlock) SerializeMembers(s smithy.ShapeSeriali
 	if v.CertificateAuthorityPublicKeyIdentifier != nil {
 		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
 	}
-	serializeDiffieHellmanDerivationData(s, schemas.ExportDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	if v.DerivationData != nil {
+		serializeDiffieHellmanDerivationData(s, schemas.ExportDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	}
 	if v.DeriveKeyAlgorithm != "" {
 		s.WriteString(schemas.ExportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
 	}
@@ -947,7 +949,9 @@ func (v *ImportDiffieHellmanTr31KeyBlock) SerializeMembers(s smithy.ShapeSeriali
 	if v.CertificateAuthorityPublicKeyIdentifier != nil {
 		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_CertificateAuthorityPublicKeyIdentifier, *v.CertificateAuthorityPublicKeyIdentifier)
 	}
-	serializeDiffieHellmanDerivationData(s, schemas.ImportDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	if v.DerivationData != nil {
+		serializeDiffieHellmanDerivationData(s, schemas.ImportDiffieHellmanTr31KeyBlock_DerivationData, v.DerivationData)
+	}
 	if v.DeriveKeyAlgorithm != "" {
 		s.WriteString(schemas.ImportDiffieHellmanTr31KeyBlock_DeriveKeyAlgorithm, string(v.DeriveKeyAlgorithm))
 	}
@@ -1582,7 +1586,9 @@ func (v *Key) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.Key_PrimaryRegion, *v.PrimaryRegion)
 	}
-	serializeReplicationStatus(s, schemas.Key_ReplicationStatus, v.ReplicationStatus)
+	if v.ReplicationStatus != nil {
+		serializeReplicationStatus(s, schemas.Key_ReplicationStatus, v.ReplicationStatus)
+	}
 	if v.UsageStartTimestamp != nil {
 		s.WriteTime(schemas.Key_UsageStartTimestamp, *v.UsageStartTimestamp)
 	}
@@ -1827,7 +1833,9 @@ func (v *KeyBlockHeaders) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyVersion != nil {
 		s.WriteString(schemas.KeyBlockHeaders_KeyVersion, *v.KeyVersion)
 	}
-	serializeOptionalBlocks(s, schemas.KeyBlockHeaders_OptionalBlocks, v.OptionalBlocks)
+	if v.OptionalBlocks != nil {
+		serializeOptionalBlocks(s, schemas.KeyBlockHeaders_OptionalBlocks, v.OptionalBlocks)
+	}
 }
 func (v *KeyBlockHeaders) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyBlockHeaders, func(s *smithy.Schema) error {

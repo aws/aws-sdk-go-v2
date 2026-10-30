@@ -77,7 +77,9 @@ func (v *PutConfigurationSetSuppressionOptionsInput) SerializeMembers(s smithy.S
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.PutConfigurationSetSuppressionOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeSuppressionListReasons(s, schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.SuppressedReasons != nil {
+		serializeSuppressionListReasons(s, schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressedReasons, v.SuppressedReasons)
+	}
 	if v.SuppressionScope != "" {
 		s.WriteString(schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressionScope, string(v.SuppressionScope))
 	}

@@ -75,7 +75,9 @@ func (v *StartRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.StartRelationalDatabaseResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.StartRelationalDatabaseResult_operations, v.Operations)
+	}
 }
 func (v *StartRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartRelationalDatabaseResult, func(s *smithy.Schema) error {

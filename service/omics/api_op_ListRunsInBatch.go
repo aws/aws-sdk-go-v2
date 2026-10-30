@@ -108,7 +108,9 @@ func (v *ListRunsInBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRunsInBatchResponse_nextToken, *v.NextToken)
 	}
-	serializeRunBatchList(s, schemas.ListRunsInBatchResponse_runs, v.Runs)
+	if v.Runs != nil {
+		serializeRunBatchList(s, schemas.ListRunsInBatchResponse_runs, v.Runs)
+	}
 }
 func (v *ListRunsInBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRunsInBatchResponse, func(s *smithy.Schema) error {

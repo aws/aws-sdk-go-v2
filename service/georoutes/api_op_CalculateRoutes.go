@@ -262,7 +262,9 @@ func (v *CalculateRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DepartureTime != nil {
 		s.WriteString(schemas.CalculateRoutesRequest_DepartureTime, *v.DepartureTime)
 	}
-	serializePosition(s, schemas.CalculateRoutesRequest_Destination, v.Destination)
+	if v.Destination != nil {
+		serializePosition(s, schemas.CalculateRoutesRequest_Destination, v.Destination)
+	}
 	if v.DestinationOptions != nil {
 		s.WriteStruct(schemas.CalculateRoutesRequest_DestinationOptions)
 		v.DestinationOptions.SerializeMembers(s)
@@ -284,8 +286,12 @@ func (v *CalculateRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.CalculateRoutesRequest_Key, *v.Key)
 	}
-	serializeLanguageTagList(s, schemas.CalculateRoutesRequest_Languages, v.Languages)
-	serializeRouteLegAdditionalFeatureList(s, schemas.CalculateRoutesRequest_LegAdditionalFeatures, v.LegAdditionalFeatures)
+	if v.Languages != nil {
+		serializeLanguageTagList(s, schemas.CalculateRoutesRequest_Languages, v.Languages)
+	}
+	if v.LegAdditionalFeatures != nil {
+		serializeRouteLegAdditionalFeatureList(s, schemas.CalculateRoutesRequest_LegAdditionalFeatures, v.LegAdditionalFeatures)
+	}
 	if v.LegGeometryFormat != "" {
 		s.WriteString(schemas.CalculateRoutesRequest_LegGeometryFormat, string(v.LegGeometryFormat))
 	}
@@ -295,13 +301,17 @@ func (v *CalculateRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizeRoutingFor != "" {
 		s.WriteString(schemas.CalculateRoutesRequest_OptimizeRoutingFor, string(v.OptimizeRoutingFor))
 	}
-	serializePosition(s, schemas.CalculateRoutesRequest_Origin, v.Origin)
+	if v.Origin != nil {
+		serializePosition(s, schemas.CalculateRoutesRequest_Origin, v.Origin)
+	}
 	if v.OriginOptions != nil {
 		s.WriteStruct(schemas.CalculateRoutesRequest_OriginOptions)
 		v.OriginOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteSpanAdditionalFeatureList(s, schemas.CalculateRoutesRequest_SpanAdditionalFeatures, v.SpanAdditionalFeatures)
+	if v.SpanAdditionalFeatures != nil {
+		serializeRouteSpanAdditionalFeatureList(s, schemas.CalculateRoutesRequest_SpanAdditionalFeatures, v.SpanAdditionalFeatures)
+	}
 	if v.Tolls != nil {
 		s.WriteStruct(schemas.CalculateRoutesRequest_Tolls)
 		v.Tolls.SerializeMembers(s)
@@ -323,7 +333,9 @@ func (v *CalculateRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TravelStepType != "" {
 		s.WriteString(schemas.CalculateRoutesRequest_TravelStepType, string(v.TravelStepType))
 	}
-	serializeRouteWaypointList(s, schemas.CalculateRoutesRequest_Waypoints, v.Waypoints)
+	if v.Waypoints != nil {
+		serializeRouteWaypointList(s, schemas.CalculateRoutesRequest_Waypoints, v.Waypoints)
+	}
 }
 
 type CalculateRoutesOutput struct {
@@ -368,11 +380,15 @@ func (v *CalculateRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LegGeometryFormat != "" {
 		s.WriteString(schemas.CalculateRoutesResponse_LegGeometryFormat, string(v.LegGeometryFormat))
 	}
-	serializeRouteResponseNoticeList(s, schemas.CalculateRoutesResponse_Notices, v.Notices)
+	if v.Notices != nil {
+		serializeRouteResponseNoticeList(s, schemas.CalculateRoutesResponse_Notices, v.Notices)
+	}
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.CalculateRoutesResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializeRouteList(s, schemas.CalculateRoutesResponse_Routes, v.Routes)
+	if v.Routes != nil {
+		serializeRouteList(s, schemas.CalculateRoutesResponse_Routes, v.Routes)
+	}
 }
 func (v *CalculateRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CalculateRoutesResponse, func(s *smithy.Schema) error {

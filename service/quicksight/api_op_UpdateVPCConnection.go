@@ -77,15 +77,21 @@ func (v *UpdateVPCConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateVPCConnectionRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeDnsResolverList(s, schemas.UpdateVPCConnectionRequest_DnsResolvers, v.DnsResolvers)
+	if v.DnsResolvers != nil {
+		serializeDnsResolverList(s, schemas.UpdateVPCConnectionRequest_DnsResolvers, v.DnsResolvers)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateVPCConnectionRequest_Name, *v.Name)
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateVPCConnectionRequest_RoleArn, *v.RoleArn)
 	}
-	serializeSecurityGroupIdList(s, schemas.UpdateVPCConnectionRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.UpdateVPCConnectionRequest_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.UpdateVPCConnectionRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.UpdateVPCConnectionRequest_SubnetIds, v.SubnetIds)
+	}
 	if v.VPCConnectionId != nil {
 		s.WriteString(schemas.UpdateVPCConnectionRequest_VPCConnectionId, *v.VPCConnectionId)
 	}

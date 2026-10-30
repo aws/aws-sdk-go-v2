@@ -96,7 +96,9 @@ func (v *ListAIGuardrailVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAIGuardrailVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIGuardrailVersionSummariesList(s, schemas.ListAIGuardrailVersionsResponse_aiGuardrailVersionSummaries, v.AiGuardrailVersionSummaries)
+	if v.AiGuardrailVersionSummaries != nil {
+		serializeAIGuardrailVersionSummariesList(s, schemas.ListAIGuardrailVersionsResponse_aiGuardrailVersionSummaries, v.AiGuardrailVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAIGuardrailVersionsResponse_nextToken, *v.NextToken)
 	}

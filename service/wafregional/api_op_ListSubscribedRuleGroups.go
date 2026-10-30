@@ -97,7 +97,9 @@ func (v *ListSubscribedRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListSubscribedRuleGroupsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeSubscribedRuleGroupSummaries(s, schemas.ListSubscribedRuleGroupsResponse_RuleGroups, v.RuleGroups)
+	if v.RuleGroups != nil {
+		serializeSubscribedRuleGroupSummaries(s, schemas.ListSubscribedRuleGroupsResponse_RuleGroups, v.RuleGroups)
+	}
 }
 func (v *ListSubscribedRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSubscribedRuleGroupsResponse, func(s *smithy.Schema) error {

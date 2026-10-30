@@ -88,8 +88,12 @@ func (v *ListVehiclesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVehiclesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeattributeNamesList(s, schemas.ListVehiclesRequest_attributeNames, v.AttributeNames)
-	serializeattributeValuesList(s, schemas.ListVehiclesRequest_attributeValues, v.AttributeValues)
+	if v.AttributeNames != nil {
+		serializeattributeNamesList(s, schemas.ListVehiclesRequest_attributeNames, v.AttributeNames)
+	}
+	if v.AttributeValues != nil {
+		serializeattributeValuesList(s, schemas.ListVehiclesRequest_attributeValues, v.AttributeValues)
+	}
 	if v.ListResponseScope != "" {
 		s.WriteString(schemas.ListVehiclesRequest_listResponseScope, string(v.ListResponseScope))
 	}
@@ -156,7 +160,9 @@ func (v *ListVehiclesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVehiclesResponse_nextToken, *v.NextToken)
 	}
-	serializevehicleSummaries(s, schemas.ListVehiclesResponse_vehicleSummaries, v.VehicleSummaries)
+	if v.VehicleSummaries != nil {
+		serializevehicleSummaries(s, schemas.ListVehiclesResponse_vehicleSummaries, v.VehicleSummaries)
+	}
 }
 func (v *ListVehiclesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVehiclesResponse, func(s *smithy.Schema) error {

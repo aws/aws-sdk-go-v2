@@ -87,7 +87,9 @@ func (v *GroupResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupName != nil {
 		s.WriteString(schemas.GroupResult_groupName, *v.GroupName)
 	}
-	serializeTestCaseRuns(s, schemas.GroupResult_tests, v.Tests)
+	if v.Tests != nil {
+		serializeTestCaseRuns(s, schemas.GroupResult_tests, v.Tests)
+	}
 }
 func (v *GroupResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GroupResult, func(s *smithy.Schema) error {
@@ -156,7 +158,9 @@ func (v *SuiteDefinitionConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.DevicePermissionRoleArn != nil {
 		s.WriteString(schemas.SuiteDefinitionConfiguration_devicePermissionRoleArn, *v.DevicePermissionRoleArn)
 	}
-	serializeDeviceUnderTestList(s, schemas.SuiteDefinitionConfiguration_devices, v.Devices)
+	if v.Devices != nil {
+		serializeDeviceUnderTestList(s, schemas.SuiteDefinitionConfiguration_devices, v.Devices)
+	}
 	if v.IntendedForQualification != nil {
 		s.WriteBool(schemas.SuiteDefinitionConfiguration_intendedForQualification, *v.IntendedForQualification)
 	}
@@ -242,7 +246,9 @@ func (v *SuiteDefinitionInformation) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.SuiteDefinitionInformation_createdAt, *v.CreatedAt)
 	}
-	serializeDeviceUnderTestList(s, schemas.SuiteDefinitionInformation_defaultDevices, v.DefaultDevices)
+	if v.DefaultDevices != nil {
+		serializeDeviceUnderTestList(s, schemas.SuiteDefinitionInformation_defaultDevices, v.DefaultDevices)
+	}
 	if v.IntendedForQualification != nil {
 		s.WriteBool(schemas.SuiteDefinitionInformation_intendedForQualification, *v.IntendedForQualification)
 	}
@@ -324,7 +330,9 @@ func (v *SuiteRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PrimaryDevice.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSelectedTestList(s, schemas.SuiteRunConfiguration_selectedTestList, v.SelectedTestList)
+	if v.SelectedTestList != nil {
+		serializeSelectedTestList(s, schemas.SuiteRunConfiguration_selectedTestList, v.SelectedTestList)
+	}
 }
 func (v *SuiteRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SuiteRunConfiguration, func(s *smithy.Schema) error {
@@ -547,7 +555,9 @@ func (v *TestCaseRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TestCaseRunId != nil {
 		s.WriteString(schemas.TestCaseRun_testCaseRunId, *v.TestCaseRunId)
 	}
-	serializeTestCaseScenariosList(s, schemas.TestCaseRun_testScenarios, v.TestScenarios)
+	if v.TestScenarios != nil {
+		serializeTestCaseScenariosList(s, schemas.TestCaseRun_testScenarios, v.TestScenarios)
+	}
 	if v.Warnings != nil {
 		s.WriteString(schemas.TestCaseRun_warnings, *v.Warnings)
 	}
@@ -706,7 +716,9 @@ func (v *TestResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupResultList(s, schemas.TestResult_groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroupResultList(s, schemas.TestResult_groups, v.Groups)
+	}
 }
 func (v *TestResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TestResult, func(s *smithy.Schema) error {

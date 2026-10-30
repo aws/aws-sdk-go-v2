@@ -144,7 +144,9 @@ func (v *CreateAssetModelCompositeModelInput) SerializeMembers(s smithy.ShapeSer
 	if v.AssetModelCompositeModelName != nil {
 		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelName, *v.AssetModelCompositeModelName)
 	}
-	serializeAssetModelPropertyDefinitions(s, schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	if v.AssetModelCompositeModelProperties != nil {
+		serializeAssetModelPropertyDefinitions(s, schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelProperties, v.AssetModelCompositeModelProperties)
+	}
 	if v.AssetModelCompositeModelType != nil {
 		s.WriteString(schemas.CreateAssetModelCompositeModelRequest_assetModelCompositeModelType, *v.AssetModelCompositeModelType)
 	}
@@ -211,7 +213,9 @@ func (v *CreateAssetModelCompositeModelOutput) SerializeMembers(s smithy.ShapeSe
 	if v.AssetModelCompositeModelId != nil {
 		s.WriteString(schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelId, *v.AssetModelCompositeModelId)
 	}
-	serializeAssetModelCompositeModelPath(s, schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	if v.AssetModelCompositeModelPath != nil {
+		serializeAssetModelCompositeModelPath(s, schemas.CreateAssetModelCompositeModelResponse_assetModelCompositeModelPath, v.AssetModelCompositeModelPath)
+	}
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.CreateAssetModelCompositeModelResponse_assetModelId, *v.AssetModelId)
 	}

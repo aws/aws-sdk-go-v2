@@ -137,7 +137,9 @@ func (v *GetAnnotationImportJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAnnotationImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationFieldMap(s, schemas.GetAnnotationImportResponse_annotationFields, v.AnnotationFields)
+	if v.AnnotationFields != nil {
+		serializeAnnotationFieldMap(s, schemas.GetAnnotationImportResponse_annotationFields, v.AnnotationFields)
+	}
 	if v.CompletionTime != nil {
 		s.WriteTime(schemas.GetAnnotationImportResponse_completionTime, *v.CompletionTime)
 	}
@@ -147,11 +149,15 @@ func (v *GetAnnotationImportJobOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DestinationName != nil {
 		s.WriteString(schemas.GetAnnotationImportResponse_destinationName, *v.DestinationName)
 	}
-	serializeFormatOptions(s, schemas.GetAnnotationImportResponse_formatOptions, v.FormatOptions)
+	if v.FormatOptions != nil {
+		serializeFormatOptions(s, schemas.GetAnnotationImportResponse_formatOptions, v.FormatOptions)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAnnotationImportResponse_id, *v.Id)
 	}
-	serializeAnnotationImportItemDetails(s, schemas.GetAnnotationImportResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAnnotationImportItemDetails(s, schemas.GetAnnotationImportResponse_items, v.Items)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetAnnotationImportResponse_roleArn, *v.RoleArn)
 	}

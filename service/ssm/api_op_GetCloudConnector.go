@@ -95,7 +95,9 @@ func (v *GetCloudConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigConnectorArn != nil {
 		s.WriteString(schemas.GetCloudConnectorResult_ConfigConnectorArn, *v.ConfigConnectorArn)
 	}
-	serializeCloudConnectorConfiguration(s, schemas.GetCloudConnectorResult_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeCloudConnectorConfiguration(s, schemas.GetCloudConnectorResult_Configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetCloudConnectorResult_CreatedAt, *v.CreatedAt)
 	}

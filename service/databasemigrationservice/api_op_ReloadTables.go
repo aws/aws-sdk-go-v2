@@ -66,7 +66,9 @@ func (v *ReloadTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReplicationTaskArn != nil {
 		s.WriteString(schemas.ReloadTablesMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
 	}
-	serializeTableListToReload(s, schemas.ReloadTablesMessage_TablesToReload, v.TablesToReload)
+	if v.TablesToReload != nil {
+		serializeTableListToReload(s, schemas.ReloadTablesMessage_TablesToReload, v.TablesToReload)
+	}
 }
 
 type ReloadTablesOutput struct {

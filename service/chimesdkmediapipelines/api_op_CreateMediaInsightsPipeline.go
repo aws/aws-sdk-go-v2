@@ -81,13 +81,17 @@ func (v *CreateMediaInsightsPipelineInput) SerializeMembers(s smithy.ShapeSerial
 	if v.MediaInsightsPipelineConfigurationArn != nil {
 		s.WriteString(schemas.CreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn, *v.MediaInsightsPipelineConfigurationArn)
 	}
-	serializeMediaInsightsRuntimeMetadata(s, schemas.CreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata, v.MediaInsightsRuntimeMetadata)
+	if v.MediaInsightsRuntimeMetadata != nil {
+		serializeMediaInsightsRuntimeMetadata(s, schemas.CreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata, v.MediaInsightsRuntimeMetadata)
+	}
 	if v.S3RecordingSinkRuntimeConfiguration != nil {
 		s.WriteStruct(schemas.CreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration)
 		v.S3RecordingSinkRuntimeConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateMediaInsightsPipelineRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMediaInsightsPipelineRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMediaInsightsPipelineOutput struct {

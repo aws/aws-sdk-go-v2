@@ -62,7 +62,9 @@ func (v *GetContainerServicePowersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContainerServicePowersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerServicePowerList(s, schemas.GetContainerServicePowersResult_powers, v.Powers)
+	if v.Powers != nil {
+		serializeContainerServicePowerList(s, schemas.GetContainerServicePowersResult_powers, v.Powers)
+	}
 }
 func (v *GetContainerServicePowersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContainerServicePowersResult, func(s *smithy.Schema) error {

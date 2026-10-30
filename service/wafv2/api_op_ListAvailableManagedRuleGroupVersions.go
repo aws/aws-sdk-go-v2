@@ -126,7 +126,9 @@ func (v *ListAvailableManagedRuleGroupVersionsOutput) SerializeMembers(s smithy.
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeManagedRuleGroupVersions(s, schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serializeManagedRuleGroupVersions(s, schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions, v.Versions)
+	}
 }
 func (v *ListAvailableManagedRuleGroupVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAvailableManagedRuleGroupVersionsResponse, func(s *smithy.Schema) error {

@@ -92,7 +92,9 @@ func (v *ListClusterAlertsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListClusterAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfClusterAlert(s, schemas.ListClusterAlertsResponse_Alerts, v.Alerts)
+	if v.Alerts != nil {
+		serialize__listOfClusterAlert(s, schemas.ListClusterAlertsResponse_Alerts, v.Alerts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClusterAlertsResponse_NextToken, *v.NextToken)
 	}

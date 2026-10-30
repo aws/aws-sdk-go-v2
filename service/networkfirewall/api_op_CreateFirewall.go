@@ -176,14 +176,18 @@ func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZoneChangeProtection != false {
 		s.WriteBool(schemas.CreateFirewallRequest_AvailabilityZoneChangeProtection, v.AvailabilityZoneChangeProtection)
 	}
-	serializeAvailabilityZoneMappings(s, schemas.CreateFirewallRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.AvailabilityZoneMappings != nil {
+		serializeAvailabilityZoneMappings(s, schemas.CreateFirewallRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	}
 	if v.DeleteProtection != false {
 		s.WriteBool(schemas.CreateFirewallRequest_DeleteProtection, v.DeleteProtection)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateFirewallRequest_Description, *v.Description)
 	}
-	serializeEnabledAnalysisTypes(s, schemas.CreateFirewallRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.EnabledAnalysisTypes != nil {
+		serializeEnabledAnalysisTypes(s, schemas.CreateFirewallRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	}
 	if v.EncryptionConfiguration != nil {
 		s.WriteStruct(schemas.CreateFirewallRequest_EncryptionConfiguration)
 		v.EncryptionConfiguration.SerializeMembers(s)
@@ -198,7 +202,9 @@ func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallPolicyChangeProtection != false {
 		s.WriteBool(schemas.CreateFirewallRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
 	}
-	serializeNatGatewayMappingsList(s, schemas.CreateFirewallRequest_NatGatewayMappings, v.NatGatewayMappings)
+	if v.NatGatewayMappings != nil {
+		serializeNatGatewayMappingsList(s, schemas.CreateFirewallRequest_NatGatewayMappings, v.NatGatewayMappings)
+	}
 	if v.NoSourcePreservation != false {
 		s.WriteBool(schemas.CreateFirewallRequest_NoSourcePreservation, v.NoSourcePreservation)
 	}
@@ -210,8 +216,12 @@ func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubnetChangeProtection != false {
 		s.WriteBool(schemas.CreateFirewallRequest_SubnetChangeProtection, v.SubnetChangeProtection)
 	}
-	serializeSubnetMappings(s, schemas.CreateFirewallRequest_SubnetMappings, v.SubnetMappings)
-	serializeTagList(s, schemas.CreateFirewallRequest_Tags, v.Tags)
+	if v.SubnetMappings != nil {
+		serializeSubnetMappings(s, schemas.CreateFirewallRequest_SubnetMappings, v.SubnetMappings)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFirewallRequest_Tags, v.Tags)
+	}
 	if v.TransitGatewayId != nil {
 		s.WriteString(schemas.CreateFirewallRequest_TransitGatewayId, *v.TransitGatewayId)
 	}

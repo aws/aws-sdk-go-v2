@@ -73,7 +73,9 @@ func (v *GetCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificateName != nil {
 		s.WriteString(schemas.GetCertificatesRequest_certificateName, *v.CertificateName)
 	}
-	serializeCertificateStatusList(s, schemas.GetCertificatesRequest_certificateStatuses, v.CertificateStatuses)
+	if v.CertificateStatuses != nil {
+		serializeCertificateStatusList(s, schemas.GetCertificatesRequest_certificateStatuses, v.CertificateStatuses)
+	}
 	if v.IncludeCertificateDetails != false {
 		s.WriteBool(schemas.GetCertificatesRequest_includeCertificateDetails, v.IncludeCertificateDetails)
 	}
@@ -106,7 +108,9 @@ func (v *GetCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateSummaryList(s, schemas.GetCertificatesResult_certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificateSummaryList(s, schemas.GetCertificatesResult_certificates, v.Certificates)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCertificatesResult_nextPageToken, *v.NextPageToken)
 	}

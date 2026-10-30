@@ -106,7 +106,9 @@ func (v *UpdateContainerServiceInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.PrivateRegistryAccess.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerServicePublicDomains(s, schemas.UpdateContainerServiceRequest_publicDomainNames, v.PublicDomainNames)
+	if v.PublicDomainNames != nil {
+		serializeContainerServicePublicDomains(s, schemas.UpdateContainerServiceRequest_publicDomainNames, v.PublicDomainNames)
+	}
 	if v.Scale != nil {
 		s.WriteInt32(schemas.UpdateContainerServiceRequest_scale, *v.Scale)
 	}

@@ -147,7 +147,9 @@ func (v *GetDomainLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LayoutType != "" {
 		s.WriteString(schemas.GetDomainLayoutResponse_LayoutType, string(v.LayoutType))
 	}
-	serializeTagMap(s, schemas.GetDomainLayoutResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDomainLayoutResponse_Tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.GetDomainLayoutResponse_Version, *v.Version)
 	}

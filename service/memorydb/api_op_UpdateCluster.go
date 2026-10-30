@@ -154,7 +154,9 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReplicaConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupIdsList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdsList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.ShardConfiguration != nil {
 		s.WriteStruct(schemas.UpdateClusterRequest_ShardConfiguration)
 		v.ShardConfiguration.SerializeMembers(s)

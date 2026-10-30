@@ -86,7 +86,9 @@ func (v *DescribeServicesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Language != nil {
 		s.WriteString(schemas.DescribeServicesRequest_language, *v.Language)
 	}
-	serializeServiceCodeList(s, schemas.DescribeServicesRequest_serviceCodeList, v.ServiceCodeList)
+	if v.ServiceCodeList != nil {
+		serializeServiceCodeList(s, schemas.DescribeServicesRequest_serviceCodeList, v.ServiceCodeList)
+	}
 }
 
 // The list of Amazon Web Services services returned by the DescribeServices operation.
@@ -108,7 +110,9 @@ func (v *DescribeServicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceList(s, schemas.DescribeServicesResponse_services, v.Services)
+	if v.Services != nil {
+		serializeServiceList(s, schemas.DescribeServicesResponse_services, v.Services)
+	}
 }
 func (v *DescribeServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeServicesResponse, func(s *smithy.Schema) error {

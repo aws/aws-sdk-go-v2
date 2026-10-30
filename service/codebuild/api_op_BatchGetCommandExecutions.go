@@ -48,7 +48,9 @@ func (v *BatchGetCommandExecutionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCommandExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandExecutionIds(s, schemas.BatchGetCommandExecutionsInput_commandExecutionIds, v.CommandExecutionIds)
+	if v.CommandExecutionIds != nil {
+		serializeCommandExecutionIds(s, schemas.BatchGetCommandExecutionsInput_commandExecutionIds, v.CommandExecutionIds)
+	}
 	if v.SandboxId != nil {
 		s.WriteString(schemas.BatchGetCommandExecutionsInput_sandboxId, *v.SandboxId)
 	}
@@ -75,8 +77,12 @@ func (v *BatchGetCommandExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetCommandExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandExecutions(s, schemas.BatchGetCommandExecutionsOutput_commandExecutions, v.CommandExecutions)
-	serializeCommandExecutionIds(s, schemas.BatchGetCommandExecutionsOutput_commandExecutionsNotFound, v.CommandExecutionsNotFound)
+	if v.CommandExecutions != nil {
+		serializeCommandExecutions(s, schemas.BatchGetCommandExecutionsOutput_commandExecutions, v.CommandExecutions)
+	}
+	if v.CommandExecutionsNotFound != nil {
+		serializeCommandExecutionIds(s, schemas.BatchGetCommandExecutionsOutput_commandExecutionsNotFound, v.CommandExecutionsNotFound)
+	}
 }
 func (v *BatchGetCommandExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetCommandExecutionsOutput, func(s *smithy.Schema) error {

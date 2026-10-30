@@ -52,7 +52,9 @@ func (v *BatchGetSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollaborationIdentifier != nil {
 		s.WriteString(schemas.BatchGetSchemaInput_collaborationIdentifier, *v.CollaborationIdentifier)
 	}
-	serializeTableAliasList(s, schemas.BatchGetSchemaInput_names, v.Names)
+	if v.Names != nil {
+		serializeTableAliasList(s, schemas.BatchGetSchemaInput_names, v.Names)
+	}
 }
 func (v *BatchGetSchemaInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSchemaInput, func(s *smithy.Schema) error {
@@ -93,8 +95,12 @@ func (v *BatchGetSchemaOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetSchemaErrorList(s, schemas.BatchGetSchemaOutput_errors, v.Errors)
-	serializeSchemaList(s, schemas.BatchGetSchemaOutput_schemas, v.Schemas)
+	if v.Errors != nil {
+		serializeBatchGetSchemaErrorList(s, schemas.BatchGetSchemaOutput_errors, v.Errors)
+	}
+	if v.Schemas != nil {
+		serializeSchemaList(s, schemas.BatchGetSchemaOutput_schemas, v.Schemas)
+	}
 }
 func (v *BatchGetSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSchemaOutput, func(s *smithy.Schema) error {

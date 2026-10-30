@@ -61,14 +61,18 @@ func (v *CreateLiveSourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLiveSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHttpPackageConfigurations(s, schemas.CreateLiveSourceRequest_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.CreateLiveSourceRequest_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LiveSourceName != nil {
 		s.WriteString(schemas.CreateLiveSourceRequest_LiveSourceName, *v.LiveSourceName)
 	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateLiveSourceRequest_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateLiveSourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateLiveSourceRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateLiveSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateLiveSourceRequest, func(s *smithy.Schema) error {
@@ -134,7 +138,9 @@ func (v *CreateLiveSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.CreateLiveSourceResponse_CreationTime, *v.CreationTime)
 	}
-	serializeHttpPackageConfigurations(s, schemas.CreateLiveSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.CreateLiveSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.CreateLiveSourceResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -144,7 +150,9 @@ func (v *CreateLiveSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateLiveSourceResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateLiveSourceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateLiveSourceResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateLiveSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateLiveSourceResponse, func(s *smithy.Schema) error {

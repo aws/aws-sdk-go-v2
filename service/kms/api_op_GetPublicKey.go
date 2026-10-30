@@ -134,7 +134,9 @@ func (v *GetPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrantTokenList(s, schemas.GetPublicKeyRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.GetPublicKeyRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GetPublicKeyRequest_KeyId, *v.KeyId)
 	}
@@ -216,9 +218,15 @@ func (v *GetPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerMasterKeySpec != "" {
 		s.WriteString(schemas.GetPublicKeyResponse_CustomerMasterKeySpec, string(v.CustomerMasterKeySpec))
 	}
-	serializeEncapsulationAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncapsulationAlgorithms, v.EncapsulationAlgorithms)
-	serializeEncryptionAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncryptionAlgorithms, v.EncryptionAlgorithms)
-	serializeKeyAgreementAlgorithmSpecList(s, schemas.GetPublicKeyResponse_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	if v.EncapsulationAlgorithms != nil {
+		serializeEncapsulationAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncapsulationAlgorithms, v.EncapsulationAlgorithms)
+	}
+	if v.EncryptionAlgorithms != nil {
+		serializeEncryptionAlgorithmSpecList(s, schemas.GetPublicKeyResponse_EncryptionAlgorithms, v.EncryptionAlgorithms)
+	}
+	if v.KeyAgreementAlgorithms != nil {
+		serializeKeyAgreementAlgorithmSpecList(s, schemas.GetPublicKeyResponse_KeyAgreementAlgorithms, v.KeyAgreementAlgorithms)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.GetPublicKeyResponse_KeyId, *v.KeyId)
 	}
@@ -231,7 +239,9 @@ func (v *GetPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PublicKey != nil {
 		s.WriteBlob(schemas.GetPublicKeyResponse_PublicKey, v.PublicKey)
 	}
-	serializeSigningAlgorithmSpecList(s, schemas.GetPublicKeyResponse_SigningAlgorithms, v.SigningAlgorithms)
+	if v.SigningAlgorithms != nil {
+		serializeSigningAlgorithmSpecList(s, schemas.GetPublicKeyResponse_SigningAlgorithms, v.SigningAlgorithms)
+	}
 }
 func (v *GetPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPublicKeyResponse, func(s *smithy.Schema) error {

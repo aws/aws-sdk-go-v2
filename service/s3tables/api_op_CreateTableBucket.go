@@ -96,7 +96,9 @@ func (v *CreateTableBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StorageClassConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateTableBucketRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTableBucketRequest_tags, v.Tags)
+	}
 }
 
 type CreateTableBucketOutput struct {

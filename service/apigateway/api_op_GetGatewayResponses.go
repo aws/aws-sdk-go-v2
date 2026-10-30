@@ -95,7 +95,9 @@ func (v *GetGatewayResponsesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGatewayResponsesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfGatewayResponse(s, schemas.GatewayResponses_items, v.Items)
+	if v.Items != nil {
+		serializeListOfGatewayResponse(s, schemas.GatewayResponses_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.GatewayResponses_position, *v.Position)
 	}

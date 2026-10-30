@@ -128,7 +128,9 @@ func (v *CreateFaqInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.S3Path.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateFaqRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFaqRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFaqOutput struct {

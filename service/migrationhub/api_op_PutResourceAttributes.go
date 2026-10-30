@@ -104,7 +104,9 @@ func (v *PutResourceAttributesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ProgressUpdateStream != nil {
 		s.WriteString(schemas.PutResourceAttributesRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
 	}
-	serializeResourceAttributeList(s, schemas.PutResourceAttributesRequest_ResourceAttributeList, v.ResourceAttributeList)
+	if v.ResourceAttributeList != nil {
+		serializeResourceAttributeList(s, schemas.PutResourceAttributesRequest_ResourceAttributeList, v.ResourceAttributeList)
+	}
 }
 
 type PutResourceAttributesOutput struct {

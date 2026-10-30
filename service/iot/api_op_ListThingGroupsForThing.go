@@ -91,7 +91,9 @@ func (v *ListThingGroupsForThingOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThingGroupsForThingResponse_nextToken, *v.NextToken)
 	}
-	serializeThingGroupNameAndArnList(s, schemas.ListThingGroupsForThingResponse_thingGroups, v.ThingGroups)
+	if v.ThingGroups != nil {
+		serializeThingGroupNameAndArnList(s, schemas.ListThingGroupsForThingResponse_thingGroups, v.ThingGroups)
+	}
 }
 func (v *ListThingGroupsForThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThingGroupsForThingResponse, func(s *smithy.Schema) error {

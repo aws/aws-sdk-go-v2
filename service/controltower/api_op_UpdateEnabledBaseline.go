@@ -61,7 +61,9 @@ func (v *UpdateEnabledBaselineInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.EnabledBaselineIdentifier != nil {
 		s.WriteString(schemas.UpdateEnabledBaselineInput_enabledBaselineIdentifier, *v.EnabledBaselineIdentifier)
 	}
-	serializeEnabledBaselineParameters(s, schemas.UpdateEnabledBaselineInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeEnabledBaselineParameters(s, schemas.UpdateEnabledBaselineInput_parameters, v.Parameters)
+	}
 }
 
 type UpdateEnabledBaselineOutput struct {

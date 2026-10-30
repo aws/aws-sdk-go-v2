@@ -66,7 +66,9 @@ func (v *ListDiscoveredResourcesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDiscoveredResourcesRequest_MaxResults, *v.MaxResults)
 	}
-	serializeAWSAccountIdList(s, schemas.ListDiscoveredResourcesRequest_MemberAccountIds, v.MemberAccountIds)
+	if v.MemberAccountIds != nil {
+		serializeAWSAccountIdList(s, schemas.ListDiscoveredResourcesRequest_MemberAccountIds, v.MemberAccountIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoveredResourcesRequest_NextToken, *v.NextToken)
 	}
@@ -100,7 +102,9 @@ func (v *ListDiscoveredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDiscoveredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDiscoveredResourceList(s, schemas.ListDiscoveredResourcesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeDiscoveredResourceList(s, schemas.ListDiscoveredResourcesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoveredResourcesResponse_NextToken, *v.NextToken)
 	}

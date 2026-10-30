@@ -102,7 +102,9 @@ func (v *VerifyCardValidationDataInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ValidationData != nil {
 		s.WriteString(schemas.VerifyCardValidationDataInput_ValidationData, *v.ValidationData)
 	}
-	serializeCardVerificationAttributes(s, schemas.VerifyCardValidationDataInput_VerificationAttributes, v.VerificationAttributes)
+	if v.VerificationAttributes != nil {
+		serializeCardVerificationAttributes(s, schemas.VerifyCardValidationDataInput_VerificationAttributes, v.VerificationAttributes)
+	}
 }
 
 type VerifyCardValidationDataOutput struct {

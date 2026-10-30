@@ -144,10 +144,18 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Namespace != nil {
 		s.WriteString(schemas.CreateApplicationRequest_Namespace, *v.Namespace)
 	}
-	serializePermissionList(s, schemas.CreateApplicationRequest_Permissions, v.Permissions)
-	serializePublicationList(s, schemas.CreateApplicationRequest_Publications, v.Publications)
-	serializeSubscriptionList(s, schemas.CreateApplicationRequest_Subscriptions, v.Subscriptions)
-	serializeTagMap(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	if v.Permissions != nil {
+		serializePermissionList(s, schemas.CreateApplicationRequest_Permissions, v.Permissions)
+	}
+	if v.Publications != nil {
+		serializePublicationList(s, schemas.CreateApplicationRequest_Publications, v.Publications)
+	}
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.CreateApplicationRequest_Subscriptions, v.Subscriptions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateApplicationOutput struct {

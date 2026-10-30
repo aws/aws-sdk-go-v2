@@ -76,13 +76,17 @@ func (v *CreateContextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateContextRequest_Description, *v.Description)
 	}
-	serializeLineageEntityParameters(s, schemas.CreateContextRequest_Properties, v.Properties)
+	if v.Properties != nil {
+		serializeLineageEntityParameters(s, schemas.CreateContextRequest_Properties, v.Properties)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.CreateContextRequest_Source)
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateContextRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContextRequest_Tags, v.Tags)
+	}
 }
 
 type CreateContextOutput struct {

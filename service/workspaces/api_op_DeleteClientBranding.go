@@ -55,7 +55,9 @@ func (v *DeleteClientBrandingInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteClientBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientDeviceTypeList(s, schemas.DeleteClientBrandingRequest_Platforms, v.Platforms)
+	if v.Platforms != nil {
+		serializeClientDeviceTypeList(s, schemas.DeleteClientBrandingRequest_Platforms, v.Platforms)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.DeleteClientBrandingRequest_ResourceId, *v.ResourceId)
 	}

@@ -75,7 +75,9 @@ func (v *PutConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConnectorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsList(s, schemas.PutConnectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutConnectorRequest_Tags, v.Tags)
+	}
 }
 
 type PutConnectorOutput struct {

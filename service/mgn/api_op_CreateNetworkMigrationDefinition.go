@@ -81,16 +81,24 @@ func (v *CreateNetworkMigrationDefinitionInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CreateNetworkMigrationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCidrMappingsList(s, schemas.CreateNetworkMigrationDefinitionRequest_cidrMappings, v.CidrMappings)
+	if v.CidrMappings != nil {
+		serializeCidrMappingsList(s, schemas.CreateNetworkMigrationDefinitionRequest_cidrMappings, v.CidrMappings)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_name, *v.Name)
 	}
-	serializeScopeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_scopeTags, v.ScopeTags)
-	serializeSourceConfigurationList(s, schemas.CreateNetworkMigrationDefinitionRequest_sourceConfigurations, v.SourceConfigurations)
-	serializeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_tags, v.Tags)
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_scopeTags, v.ScopeTags)
+	}
+	if v.SourceConfigurations != nil {
+		serializeSourceConfigurationList(s, schemas.CreateNetworkMigrationDefinitionRequest_sourceConfigurations, v.SourceConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateNetworkMigrationDefinitionRequest_tags, v.Tags)
+	}
 	if v.TargetDeployment != "" {
 		s.WriteString(schemas.CreateNetworkMigrationDefinitionRequest_targetDeployment, string(v.TargetDeployment))
 	}
@@ -173,7 +181,9 @@ func (v *CreateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.Arn != nil {
 		s.WriteString(schemas.NetworkMigrationDefinition_arn, *v.Arn)
 	}
-	serializeCidrMappingsList(s, schemas.NetworkMigrationDefinition_cidrMappings, v.CidrMappings)
+	if v.CidrMappings != nil {
+		serializeCidrMappingsList(s, schemas.NetworkMigrationDefinition_cidrMappings, v.CidrMappings)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.NetworkMigrationDefinition_createdAt, *v.CreatedAt)
 	}
@@ -186,9 +196,15 @@ func (v *CreateNetworkMigrationDefinitionOutput) SerializeMembers(s smithy.Shape
 	if v.NetworkMigrationDefinitionID != nil {
 		s.WriteString(schemas.NetworkMigrationDefinition_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
 	}
-	serializeScopeTagsMap(s, schemas.NetworkMigrationDefinition_scopeTags, v.ScopeTags)
-	serializeSourceConfigurationList(s, schemas.NetworkMigrationDefinition_sourceConfigurations, v.SourceConfigurations)
-	serializeTagsMap(s, schemas.NetworkMigrationDefinition_tags, v.Tags)
+	if v.ScopeTags != nil {
+		serializeScopeTagsMap(s, schemas.NetworkMigrationDefinition_scopeTags, v.ScopeTags)
+	}
+	if v.SourceConfigurations != nil {
+		serializeSourceConfigurationList(s, schemas.NetworkMigrationDefinition_sourceConfigurations, v.SourceConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.NetworkMigrationDefinition_tags, v.Tags)
+	}
 	if v.TargetDeployment != "" {
 		s.WriteString(schemas.NetworkMigrationDefinition_targetDeployment, string(v.TargetDeployment))
 	}

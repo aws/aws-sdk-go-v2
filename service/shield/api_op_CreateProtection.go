@@ -89,7 +89,9 @@ func (v *CreateProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.CreateProtectionRequest_ResourceArn, *v.ResourceArn)
 	}
-	serializeTagList(s, schemas.CreateProtectionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProtectionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProtectionOutput struct {

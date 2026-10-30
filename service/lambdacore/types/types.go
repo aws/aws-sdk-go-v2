@@ -313,12 +313,18 @@ func (v *NetworkConnectorVpcEgressConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *NetworkConnectorVpcEgressConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedComputeResourceTypesList(s, schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes, v.AssociatedComputeResourceTypes)
+	if v.AssociatedComputeResourceTypes != nil {
+		serializeAssociatedComputeResourceTypesList(s, schemas.NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes, v.AssociatedComputeResourceTypes)
+	}
 	if v.NetworkProtocol != "" {
 		s.WriteString(schemas.NetworkConnectorVpcEgressConfiguration_NetworkProtocol, string(v.NetworkProtocol))
 	}
-	serializeNetworkConnectorSecurityGroupIds(s, schemas.NetworkConnectorVpcEgressConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeNetworkConnectorSubnetIds(s, schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeNetworkConnectorSecurityGroupIds(s, schemas.NetworkConnectorVpcEgressConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeNetworkConnectorSubnetIds(s, schemas.NetworkConnectorVpcEgressConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *NetworkConnectorVpcEgressConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkConnectorVpcEgressConfiguration, func(s *smithy.Schema) error {

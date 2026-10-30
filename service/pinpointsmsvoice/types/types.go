@@ -133,7 +133,9 @@ func (v *EventDestination) SerializeMembers(s smithy.ShapeSerializer) {
 		v.KinesisFirehoseDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventTypes(s, schemas.EventDestination_MatchingEventTypes, v.MatchingEventTypes)
+	if v.MatchingEventTypes != nil {
+		serializeEventTypes(s, schemas.EventDestination_MatchingEventTypes, v.MatchingEventTypes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.EventDestination_Name, *v.Name)
 	}
@@ -215,7 +217,9 @@ func (v *EventDestinationDefinition) SerializeMembers(s smithy.ShapeSerializer) 
 		v.KinesisFirehoseDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventTypes(s, schemas.EventDestinationDefinition_MatchingEventTypes, v.MatchingEventTypes)
+	if v.MatchingEventTypes != nil {
+		serializeEventTypes(s, schemas.EventDestinationDefinition_MatchingEventTypes, v.MatchingEventTypes)
+	}
 	if v.SnsDestination != nil {
 		s.WriteStruct(schemas.EventDestinationDefinition_SnsDestination)
 		v.SnsDestination.SerializeMembers(s)

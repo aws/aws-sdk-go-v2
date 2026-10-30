@@ -81,7 +81,9 @@ func (v *UpdateABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateABTestRequest_description, *v.Description)
 	}
-	serializeABTestEvaluationConfig(s, schemas.UpdateABTestRequest_evaluationConfig, v.EvaluationConfig)
+	if v.EvaluationConfig != nil {
+		serializeABTestEvaluationConfig(s, schemas.UpdateABTestRequest_evaluationConfig, v.EvaluationConfig)
+	}
 	if v.ExecutionStatus != "" {
 		s.WriteString(schemas.UpdateABTestRequest_executionStatus, string(v.ExecutionStatus))
 	}
@@ -96,7 +98,9 @@ func (v *UpdateABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateABTestRequest_roleArn, *v.RoleArn)
 	}
-	serializeVariantList(s, schemas.UpdateABTestRequest_variants, v.Variants)
+	if v.Variants != nil {
+		serializeVariantList(s, schemas.UpdateABTestRequest_variants, v.Variants)
+	}
 }
 
 type UpdateABTestOutput struct {

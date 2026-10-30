@@ -82,7 +82,9 @@ func (v *PutJobSuccessResultInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobId != nil {
 		s.WriteString(schemas.PutJobSuccessResultInput_jobId, *v.JobId)
 	}
-	serializeOutputVariablesMap(s, schemas.PutJobSuccessResultInput_outputVariables, v.OutputVariables)
+	if v.OutputVariables != nil {
+		serializeOutputVariablesMap(s, schemas.PutJobSuccessResultInput_outputVariables, v.OutputVariables)
+	}
 }
 
 type PutJobSuccessResultOutput struct {

@@ -83,7 +83,9 @@ func (v *GetDefaultKeyReplicationRegionsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetDefaultKeyReplicationRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegions(s, schemas.GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions, v.EnabledReplicationRegions)
+	if v.EnabledReplicationRegions != nil {
+		serializeRegions(s, schemas.GetDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions, v.EnabledReplicationRegions)
+	}
 }
 func (v *GetDefaultKeyReplicationRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDefaultKeyReplicationRegionsOutput, func(s *smithy.Schema) error {

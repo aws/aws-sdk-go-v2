@@ -88,11 +88,15 @@ func (v *CreateFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentFolderArn != nil {
 		s.WriteString(schemas.CreateFolderRequest_ParentFolderArn, *v.ParentFolderArn)
 	}
-	serializeResourcePermissionList(s, schemas.CreateFolderRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateFolderRequest_Permissions, v.Permissions)
+	}
 	if v.SharingModel != "" {
 		s.WriteString(schemas.CreateFolderRequest_SharingModel, string(v.SharingModel))
 	}
-	serializeTagList(s, schemas.CreateFolderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFolderRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFolderOutput struct {

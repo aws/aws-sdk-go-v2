@@ -67,10 +67,18 @@ func (v *GetListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseIntegerList(s, schemas.GetListsOutput_integers, v.Integers)
-	serializeSparseStringList(s, schemas.GetListsOutput_sparseStrings, v.SparseStrings)
-	serializeDenseStringList(s, schemas.GetListsOutput_strings, v.Strings)
-	serializeDenseStructList(s, schemas.GetListsOutput_structs, v.Structs)
+	if v.Integers != nil {
+		serializeDenseIntegerList(s, schemas.GetListsOutput_integers, v.Integers)
+	}
+	if v.SparseStrings != nil {
+		serializeSparseStringList(s, schemas.GetListsOutput_sparseStrings, v.SparseStrings)
+	}
+	if v.Strings != nil {
+		serializeDenseStringList(s, schemas.GetListsOutput_strings, v.Strings)
+	}
+	if v.Structs != nil {
+		serializeDenseStructList(s, schemas.GetListsOutput_structs, v.Structs)
+	}
 }
 func (v *GetListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetListsOutput, func(s *smithy.Schema) error {

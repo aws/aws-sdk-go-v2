@@ -38,7 +38,9 @@ func (v *AppliedTerminology) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AppliedTerminology_Name, *v.Name)
 	}
-	serializeTermList(s, schemas.AppliedTerminology_Terms, v.Terms)
+	if v.Terms != nil {
+		serializeTermList(s, schemas.AppliedTerminology_Terms, v.Terms)
+	}
 }
 func (v *AppliedTerminology) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AppliedTerminology, func(s *smithy.Schema) error {
@@ -595,7 +597,9 @@ func (v *ParallelDataProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ParallelDataProperties_Status, string(v.Status))
 	}
-	serializeLanguageCodeStringList(s, schemas.ParallelDataProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	if v.TargetLanguageCodes != nil {
+		serializeLanguageCodeStringList(s, schemas.ParallelDataProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	}
 }
 func (v *ParallelDataProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ParallelDataProperties, func(s *smithy.Schema) error {
@@ -989,7 +993,9 @@ func (v *TerminologyProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceLanguageCode != nil {
 		s.WriteString(schemas.TerminologyProperties_SourceLanguageCode, *v.SourceLanguageCode)
 	}
-	serializeLanguageCodeStringList(s, schemas.TerminologyProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	if v.TargetLanguageCodes != nil {
+		serializeLanguageCodeStringList(s, schemas.TerminologyProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	}
 	if v.TermCount != nil {
 		s.WriteInt32(schemas.TerminologyProperties_TermCount, *v.TermCount)
 	}
@@ -1217,7 +1223,9 @@ func (v *TextTranslationJobProperties) SerializeMembers(s smithy.ShapeSerializer
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceNameList(s, schemas.TextTranslationJobProperties_ParallelDataNames, v.ParallelDataNames)
+	if v.ParallelDataNames != nil {
+		serializeResourceNameList(s, schemas.TextTranslationJobProperties_ParallelDataNames, v.ParallelDataNames)
+	}
 	if v.Settings != nil {
 		s.WriteStruct(schemas.TextTranslationJobProperties_Settings)
 		v.Settings.SerializeMembers(s)
@@ -1229,8 +1237,12 @@ func (v *TextTranslationJobProperties) SerializeMembers(s smithy.ShapeSerializer
 	if v.SubmittedTime != nil {
 		s.WriteTime(schemas.TextTranslationJobProperties_SubmittedTime, *v.SubmittedTime)
 	}
-	serializeTargetLanguageCodeStringList(s, schemas.TextTranslationJobProperties_TargetLanguageCodes, v.TargetLanguageCodes)
-	serializeResourceNameList(s, schemas.TextTranslationJobProperties_TerminologyNames, v.TerminologyNames)
+	if v.TargetLanguageCodes != nil {
+		serializeTargetLanguageCodeStringList(s, schemas.TextTranslationJobProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	}
+	if v.TerminologyNames != nil {
+		serializeResourceNameList(s, schemas.TextTranslationJobProperties_TerminologyNames, v.TerminologyNames)
+	}
 }
 func (v *TextTranslationJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TextTranslationJobProperties, func(s *smithy.Schema) error {

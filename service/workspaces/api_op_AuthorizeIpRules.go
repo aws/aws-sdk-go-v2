@@ -54,7 +54,9 @@ func (v *AuthorizeIpRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupId != nil {
 		s.WriteString(schemas.AuthorizeIpRulesRequest_GroupId, *v.GroupId)
 	}
-	serializeIpRuleList(s, schemas.AuthorizeIpRulesRequest_UserRules, v.UserRules)
+	if v.UserRules != nil {
+		serializeIpRuleList(s, schemas.AuthorizeIpRulesRequest_UserRules, v.UserRules)
+	}
 }
 
 type AuthorizeIpRulesOutput struct {

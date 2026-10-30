@@ -127,7 +127,9 @@ func (v *GetPaymentManagerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPaymentManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.GetPaymentManagerResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.GetPaymentManagerResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.GetPaymentManagerResponse_authorizerType, string(v.AuthorizerType))
 	}
@@ -158,7 +160,9 @@ func (v *GetPaymentManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetPaymentManagerResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetPaymentManagerResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetPaymentManagerResponse_tags, v.Tags)
+	}
 	if v.WorkloadIdentityDetails != nil {
 		s.WriteStruct(schemas.GetPaymentManagerResponse_workloadIdentityDetails)
 		v.WorkloadIdentityDetails.SerializeMembers(s)

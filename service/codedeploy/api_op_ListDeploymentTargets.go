@@ -61,7 +61,9 @@ func (v *ListDeploymentTargetsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentTargetsInput_nextToken, *v.NextToken)
 	}
-	serializeTargetFilters(s, schemas.ListDeploymentTargetsInput_targetFilters, v.TargetFilters)
+	if v.TargetFilters != nil {
+		serializeTargetFilters(s, schemas.ListDeploymentTargetsInput_targetFilters, v.TargetFilters)
+	}
 }
 
 type ListDeploymentTargetsOutput struct {
@@ -90,7 +92,9 @@ func (v *ListDeploymentTargetsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentTargetsOutput_nextToken, *v.NextToken)
 	}
-	serializeTargetIdList(s, schemas.ListDeploymentTargetsOutput_targetIds, v.TargetIds)
+	if v.TargetIds != nil {
+		serializeTargetIdList(s, schemas.ListDeploymentTargetsOutput_targetIds, v.TargetIds)
+	}
 }
 func (v *ListDeploymentTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDeploymentTargetsOutput, func(s *smithy.Schema) error {

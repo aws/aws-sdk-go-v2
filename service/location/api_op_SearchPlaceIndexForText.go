@@ -159,10 +159,18 @@ func (v *SearchPlaceIndexForTextInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchPlaceIndexForTextInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.SearchPlaceIndexForTextRequest_BiasPosition, v.BiasPosition)
-	serializeBoundingBox(s, schemas.SearchPlaceIndexForTextRequest_FilterBBox, v.FilterBBox)
-	serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForTextRequest_FilterCategories, v.FilterCategories)
-	serializeCountryCodeList(s, schemas.SearchPlaceIndexForTextRequest_FilterCountries, v.FilterCountries)
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.SearchPlaceIndexForTextRequest_BiasPosition, v.BiasPosition)
+	}
+	if v.FilterBBox != nil {
+		serializeBoundingBox(s, schemas.SearchPlaceIndexForTextRequest_FilterBBox, v.FilterBBox)
+	}
+	if v.FilterCategories != nil {
+		serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForTextRequest_FilterCategories, v.FilterCategories)
+	}
+	if v.FilterCountries != nil {
+		serializeCountryCodeList(s, schemas.SearchPlaceIndexForTextRequest_FilterCountries, v.FilterCountries)
+	}
 	if v.IndexName != nil {
 		s.WriteString(schemas.SearchPlaceIndexForTextRequest_IndexName, *v.IndexName)
 	}
@@ -242,7 +250,9 @@ func (v *SearchPlaceIndexForTextOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchPlaceIndexForTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchForTextResultList(s, schemas.SearchPlaceIndexForTextResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeSearchForTextResultList(s, schemas.SearchPlaceIndexForTextResponse_Results, v.Results)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.SearchPlaceIndexForTextResponse_Summary)
 		v.Summary.SerializeMembers(s)

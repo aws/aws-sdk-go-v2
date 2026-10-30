@@ -60,7 +60,9 @@ func (v *CreateRLSPolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRLSPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnList(s, schemas.CreateRLSPolicyRequest_AttachmentColumns, v.AttachmentColumns)
+	if v.AttachmentColumns != nil {
+		serializeColumnList(s, schemas.CreateRLSPolicyRequest_AttachmentColumns, v.AttachmentColumns)
+	}
 	if v.FilterExpression != nil {
 		s.WriteString(schemas.CreateRLSPolicyRequest_FilterExpression, *v.FilterExpression)
 	}

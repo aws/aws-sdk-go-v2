@@ -109,7 +109,9 @@ func (v *GetBucketsAggregationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBucketsAggregationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuckets(s, schemas.GetBucketsAggregationResponse_buckets, v.Buckets)
+	if v.Buckets != nil {
+		serializeBuckets(s, schemas.GetBucketsAggregationResponse_buckets, v.Buckets)
+	}
 	if v.TotalCount != 0 {
 		s.WriteInt32(schemas.GetBucketsAggregationResponse_totalCount, v.TotalCount)
 	}

@@ -146,8 +146,12 @@ func (v *GetEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MailFromAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePolicyMap(s, schemas.GetEmailIdentityResponse_Policies, v.Policies)
-	serializeTagList(s, schemas.GetEmailIdentityResponse_Tags, v.Tags)
+	if v.Policies != nil {
+		serializePolicyMap(s, schemas.GetEmailIdentityResponse_Policies, v.Policies)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetEmailIdentityResponse_Tags, v.Tags)
+	}
 	if v.VerificationInfo != nil {
 		s.WriteStruct(schemas.GetEmailIdentityResponse_VerificationInfo)
 		v.VerificationInfo.SerializeMembers(s)

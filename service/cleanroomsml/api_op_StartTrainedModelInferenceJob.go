@@ -143,7 +143,9 @@ func (v *StartTrainedModelInferenceJobInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Description != nil {
 		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_description, *v.Description)
 	}
-	serializeInferenceEnvironmentMap(s, schemas.StartTrainedModelInferenceJobRequest_environment, v.Environment)
+	if v.Environment != nil {
+		serializeInferenceEnvironmentMap(s, schemas.StartTrainedModelInferenceJobRequest_environment, v.Environment)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
@@ -166,7 +168,9 @@ func (v *StartTrainedModelInferenceJobInput) SerializeMembers(s smithy.ShapeSeri
 		v.ResourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartTrainedModelInferenceJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartTrainedModelInferenceJobRequest_tags, v.Tags)
+	}
 	if v.TrainedModelArn != nil {
 		s.WriteString(schemas.StartTrainedModelInferenceJobRequest_trainedModelArn, *v.TrainedModelArn)
 	}

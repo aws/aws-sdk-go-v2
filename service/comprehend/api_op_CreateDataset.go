@@ -95,7 +95,9 @@ func (v *CreateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDatasetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDatasetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDatasetOutput struct {

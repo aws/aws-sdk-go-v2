@@ -8,9 +8,6 @@ import (
 )
 
 func serializeHooksProgressEvent(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HookProgressEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeHooksProgressEvent(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeOperations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Operation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -32,9 +26,6 @@ func serializeOperations(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeOperationStatuses(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.OperationStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -43,9 +34,6 @@ func serializeOperationStatuses(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeResourceDescriptions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceDescription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -56,9 +44,6 @@ func serializeResourceDescriptions(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeResourceRequestStatusSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ProgressEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

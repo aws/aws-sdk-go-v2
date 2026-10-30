@@ -119,7 +119,9 @@ func (v *ListModelExplainabilityJobDefinitionsOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListModelExplainabilityJobDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelExplainabilityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	if v.JobDefinitionSummaries != nil {
+		serializeMonitoringJobDefinitionSummaryList(s, schemas.ListModelExplainabilityJobDefinitionsResponse_JobDefinitionSummaries, v.JobDefinitionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelExplainabilityJobDefinitionsResponse_NextToken, *v.NextToken)
 	}

@@ -93,8 +93,12 @@ func (v *DescribeReleaseLabelOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeReleaseLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSimplifiedApplicationList(s, schemas.DescribeReleaseLabelOutput_Applications, v.Applications)
-	serializeOSReleaseList(s, schemas.DescribeReleaseLabelOutput_AvailableOSReleases, v.AvailableOSReleases)
+	if v.Applications != nil {
+		serializeSimplifiedApplicationList(s, schemas.DescribeReleaseLabelOutput_Applications, v.Applications)
+	}
+	if v.AvailableOSReleases != nil {
+		serializeOSReleaseList(s, schemas.DescribeReleaseLabelOutput_AvailableOSReleases, v.AvailableOSReleases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReleaseLabelOutput_NextToken, *v.NextToken)
 	}

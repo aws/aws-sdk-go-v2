@@ -212,7 +212,9 @@ func (v *SignInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.SignRequest_DryRun, *v.DryRun)
 	}
-	serializeGrantTokenList(s, schemas.SignRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.SignRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyId != nil {
 		s.WriteString(schemas.SignRequest_KeyId, *v.KeyId)
 	}

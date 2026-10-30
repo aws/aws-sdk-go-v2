@@ -93,11 +93,15 @@ func (v *CreateReviewTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateReviewTemplateInput_Description, *v.Description)
 	}
-	serializeReviewTemplateLenses(s, schemas.CreateReviewTemplateInput_Lenses, v.Lenses)
+	if v.Lenses != nil {
+		serializeReviewTemplateLenses(s, schemas.CreateReviewTemplateInput_Lenses, v.Lenses)
+	}
 	if v.Notes != nil {
 		s.WriteString(schemas.CreateReviewTemplateInput_Notes, *v.Notes)
 	}
-	serializeTagMap(s, schemas.CreateReviewTemplateInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateReviewTemplateInput_Tags, v.Tags)
+	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.CreateReviewTemplateInput_TemplateName, *v.TemplateName)
 	}

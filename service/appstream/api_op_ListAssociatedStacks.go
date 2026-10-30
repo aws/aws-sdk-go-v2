@@ -76,7 +76,9 @@ func (v *ListAssociatedStacksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociatedStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListAssociatedStacksResult_Names, v.Names)
+	if v.Names != nil {
+		serializeStringList(s, schemas.ListAssociatedStacksResult_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedStacksResult_NextToken, *v.NextToken)
 	}

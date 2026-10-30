@@ -84,7 +84,9 @@ func (v *DescribeProductViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProductViewSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProvisioningArtifacts(s, schemas.DescribeProductViewOutput_ProvisioningArtifacts, v.ProvisioningArtifacts)
+	if v.ProvisioningArtifacts != nil {
+		serializeProvisioningArtifacts(s, schemas.DescribeProductViewOutput_ProvisioningArtifacts, v.ProvisioningArtifacts)
+	}
 }
 func (v *DescribeProductViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProductViewOutput, func(s *smithy.Schema) error {

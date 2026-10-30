@@ -174,7 +174,9 @@ func (v *DescribeAutoMLJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AutoMLJobArtifacts.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoMLJobInputDataConfig(s, schemas.DescribeAutoMLJobV2Response_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	if v.AutoMLJobInputDataConfig != nil {
+		serializeAutoMLJobInputDataConfig(s, schemas.DescribeAutoMLJobV2Response_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	}
 	if v.AutoMLJobName != nil {
 		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLJobName, *v.AutoMLJobName)
 	}
@@ -189,7 +191,9 @@ func (v *DescribeAutoMLJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutoMLJobStatus != "" {
 		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLJobStatus, string(v.AutoMLJobStatus))
 	}
-	serializeAutoMLProblemTypeConfig(s, schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	if v.AutoMLProblemTypeConfig != nil {
+		serializeAutoMLProblemTypeConfig(s, schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	}
 	if v.AutoMLProblemTypeConfigName != "" {
 		s.WriteString(schemas.DescribeAutoMLJobV2Response_AutoMLProblemTypeConfigName, string(v.AutoMLProblemTypeConfigName))
 	}
@@ -230,7 +234,9 @@ func (v *DescribeAutoMLJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAutoMLPartialFailureReasons(s, schemas.DescribeAutoMLJobV2Response_PartialFailureReasons, v.PartialFailureReasons)
+	if v.PartialFailureReasons != nil {
+		serializeAutoMLPartialFailureReasons(s, schemas.DescribeAutoMLJobV2Response_PartialFailureReasons, v.PartialFailureReasons)
+	}
 	if v.ResolvedAttributes != nil {
 		s.WriteStruct(schemas.DescribeAutoMLJobV2Response_ResolvedAttributes)
 		v.ResolvedAttributes.SerializeMembers(s)

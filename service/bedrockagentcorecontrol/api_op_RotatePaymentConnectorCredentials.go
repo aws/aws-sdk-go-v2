@@ -84,7 +84,9 @@ func (v *RotatePaymentConnectorCredentialsInput) SerializeMembers(s smithy.Shape
 	if v.ClientToken != nil {
 		s.WriteString(schemas.RotatePaymentConnectorCredentialsRequest_clientToken, *v.ClientToken)
 	}
-	serializeCredentialRotationConfig(s, schemas.RotatePaymentConnectorCredentialsRequest_credentialsToRotate, v.CredentialsToRotate)
+	if v.CredentialsToRotate != nil {
+		serializeCredentialRotationConfig(s, schemas.RotatePaymentConnectorCredentialsRequest_credentialsToRotate, v.CredentialsToRotate)
+	}
 	if v.PaymentConnectorId != nil {
 		s.WriteString(schemas.RotatePaymentConnectorCredentialsRequest_paymentConnectorId, *v.PaymentConnectorId)
 	}

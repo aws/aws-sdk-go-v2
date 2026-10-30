@@ -115,7 +115,9 @@ func (v *DescribeBudgetActionHistoriesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeBudgetActionHistoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionHistories(s, schemas.DescribeBudgetActionHistoriesResponse_ActionHistories, v.ActionHistories)
+	if v.ActionHistories != nil {
+		serializeActionHistories(s, schemas.DescribeBudgetActionHistoriesResponse_ActionHistories, v.ActionHistories)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeBudgetActionHistoriesResponse_NextToken, *v.NextToken)
 	}

@@ -43,7 +43,9 @@ func (v *BatchGetReportsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReportArns(s, schemas.BatchGetReportsInput_reportArns, v.ReportArns)
+	if v.ReportArns != nil {
+		serializeReportArns(s, schemas.BatchGetReportsInput_reportArns, v.ReportArns)
+	}
 }
 
 type BatchGetReportsOutput struct {
@@ -68,8 +70,12 @@ func (v *BatchGetReportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReports(s, schemas.BatchGetReportsOutput_reports, v.Reports)
-	serializeReportArns(s, schemas.BatchGetReportsOutput_reportsNotFound, v.ReportsNotFound)
+	if v.Reports != nil {
+		serializeReports(s, schemas.BatchGetReportsOutput_reports, v.Reports)
+	}
+	if v.ReportsNotFound != nil {
+		serializeReportArns(s, schemas.BatchGetReportsOutput_reportsNotFound, v.ReportsNotFound)
+	}
 }
 func (v *BatchGetReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetReportsOutput, func(s *smithy.Schema) error {

@@ -63,14 +63,18 @@ func (v *CreateComplianceInquiryInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateComplianceInquiryRequest_clientToken, *v.ClientToken)
 	}
-	serializeInquiryContent(s, schemas.CreateComplianceInquiryRequest_inquiryContent, v.InquiryContent)
+	if v.InquiryContent != nil {
+		serializeInquiryContent(s, schemas.CreateComplianceInquiryRequest_inquiryContent, v.InquiryContent)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateComplianceInquiryRequest_name, *v.Name)
 	}
 	if v.SupportMode != "" {
 		s.WriteString(schemas.CreateComplianceInquiryRequest_supportMode, string(v.SupportMode))
 	}
-	serializeTagsMap(s, schemas.CreateComplianceInquiryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateComplianceInquiryRequest_tags, v.Tags)
+	}
 }
 
 type CreateComplianceInquiryOutput struct {
@@ -99,7 +103,9 @@ func (v *CreateComplianceInquiryOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.ComplianceInquirySummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateComplianceInquiryResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateComplianceInquiryResponse_tags, v.Tags)
+	}
 }
 func (v *CreateComplianceInquiryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateComplianceInquiryResponse, func(s *smithy.Schema) error {

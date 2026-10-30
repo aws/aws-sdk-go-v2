@@ -89,7 +89,9 @@ func (v *ListHsmsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHsmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHsmList(s, schemas.ListHsmsResponse_HsmList, v.HsmList)
+	if v.HsmList != nil {
+		serializeHsmList(s, schemas.ListHsmsResponse_HsmList, v.HsmList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHsmsResponse_NextToken, *v.NextToken)
 	}

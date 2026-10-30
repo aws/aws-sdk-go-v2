@@ -107,7 +107,9 @@ func (v *UpdateGeoMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeoMatchSetId != nil {
 		s.WriteString(schemas.UpdateGeoMatchSetRequest_GeoMatchSetId, *v.GeoMatchSetId)
 	}
-	serializeGeoMatchSetUpdates(s, schemas.UpdateGeoMatchSetRequest_Updates, v.Updates)
+	if v.Updates != nil {
+		serializeGeoMatchSetUpdates(s, schemas.UpdateGeoMatchSetRequest_Updates, v.Updates)
+	}
 }
 
 type UpdateGeoMatchSetOutput struct {

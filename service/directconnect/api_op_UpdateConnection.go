@@ -261,7 +261,9 @@ func (v *UpdateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacSecCapable != nil {
 		s.WriteBool(schemas.Connection_macSecCapable, *v.MacSecCapable)
 	}
-	serializeMacSecKeyList(s, schemas.Connection_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.Connection_macSecKeys, v.MacSecKeys)
+	}
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.Connection_ownerAccount, *v.OwnerAccount)
 	}
@@ -297,7 +299,9 @@ func (v *UpdateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Connection_region, *v.Region)
 	}
-	serializeTagList(s, schemas.Connection_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Connection_tags, v.Tags)
+	}
 	if v.Vlan != 0 {
 		s.WriteInt32(schemas.Connection_vlan, v.Vlan)
 	}

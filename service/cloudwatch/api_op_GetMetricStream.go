@@ -121,11 +121,15 @@ func (v *GetMetricStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.GetMetricStreamOutput_CreationDate, *v.CreationDate)
 	}
-	serializeMetricStreamFilters(s, schemas.GetMetricStreamOutput_ExcludeFilters, v.ExcludeFilters)
+	if v.ExcludeFilters != nil {
+		serializeMetricStreamFilters(s, schemas.GetMetricStreamOutput_ExcludeFilters, v.ExcludeFilters)
+	}
 	if v.FirehoseArn != nil {
 		s.WriteString(schemas.GetMetricStreamOutput_FirehoseArn, *v.FirehoseArn)
 	}
-	serializeMetricStreamFilters(s, schemas.GetMetricStreamOutput_IncludeFilters, v.IncludeFilters)
+	if v.IncludeFilters != nil {
+		serializeMetricStreamFilters(s, schemas.GetMetricStreamOutput_IncludeFilters, v.IncludeFilters)
+	}
 	if v.IncludeLinkedAccountsMetrics != nil {
 		s.WriteBool(schemas.GetMetricStreamOutput_IncludeLinkedAccountsMetrics, *v.IncludeLinkedAccountsMetrics)
 	}
@@ -144,7 +148,9 @@ func (v *GetMetricStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != nil {
 		s.WriteString(schemas.GetMetricStreamOutput_State, *v.State)
 	}
-	serializeMetricStreamStatisticsConfigurations(s, schemas.GetMetricStreamOutput_StatisticsConfigurations, v.StatisticsConfigurations)
+	if v.StatisticsConfigurations != nil {
+		serializeMetricStreamStatisticsConfigurations(s, schemas.GetMetricStreamOutput_StatisticsConfigurations, v.StatisticsConfigurations)
+	}
 }
 func (v *GetMetricStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMetricStreamOutput, func(s *smithy.Schema) error {

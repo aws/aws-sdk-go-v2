@@ -91,7 +91,9 @@ func (v *DescribeWorkspaceImagePermissionsOutput) SerializeMembers(s smithy.Shap
 	if v.ImageId != nil {
 		s.WriteString(schemas.DescribeWorkspaceImagePermissionsResult_ImageId, *v.ImageId)
 	}
-	serializeImagePermissions(s, schemas.DescribeWorkspaceImagePermissionsResult_ImagePermissions, v.ImagePermissions)
+	if v.ImagePermissions != nil {
+		serializeImagePermissions(s, schemas.DescribeWorkspaceImagePermissionsResult_ImagePermissions, v.ImagePermissions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceImagePermissionsResult_NextToken, *v.NextToken)
 	}

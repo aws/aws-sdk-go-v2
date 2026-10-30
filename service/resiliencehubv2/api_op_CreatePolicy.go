@@ -108,7 +108,9 @@ func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SharingEnabled != nil {
 		s.WriteBool(schemas.CreatePolicyRequest_sharingEnabled, *v.SharingEnabled)
 	}
-	serializeTagMap(s, schemas.CreatePolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePolicyRequest_tags, v.Tags)
+	}
 }
 
 type CreatePolicyOutput struct {

@@ -66,7 +66,9 @@ func (v *SearchProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.SearchProductsInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeProductViewFilters(s, schemas.SearchProductsInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeProductViewFilters(s, schemas.SearchProductsInput_Filters, v.Filters)
+	}
 	if v.PageSize != 0 {
 		s.WriteInt32(schemas.SearchProductsInput_PageSize, v.PageSize)
 	}
@@ -109,8 +111,12 @@ func (v *SearchProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.SearchProductsOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProductViewAggregations(s, schemas.SearchProductsOutput_ProductViewAggregations, v.ProductViewAggregations)
-	serializeProductViewSummaries(s, schemas.SearchProductsOutput_ProductViewSummaries, v.ProductViewSummaries)
+	if v.ProductViewAggregations != nil {
+		serializeProductViewAggregations(s, schemas.SearchProductsOutput_ProductViewAggregations, v.ProductViewAggregations)
+	}
+	if v.ProductViewSummaries != nil {
+		serializeProductViewSummaries(s, schemas.SearchProductsOutput_ProductViewSummaries, v.ProductViewSummaries)
+	}
 }
 func (v *SearchProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchProductsOutput, func(s *smithy.Schema) error {

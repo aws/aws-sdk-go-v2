@@ -269,7 +269,9 @@ func (v *FilterParameter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.FilterParameter_Operator, string(v.Operator))
 	}
-	serializeFilterList(s, schemas.FilterParameter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterList(s, schemas.FilterParameter_Values, v.Values)
+	}
 }
 func (v *FilterParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FilterParameter, func(s *smithy.Schema) error {
@@ -377,7 +379,9 @@ func (v *HealthEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImpactType != "" {
 		s.WriteString(schemas.HealthEvent_ImpactType, string(v.ImpactType))
 	}
-	serializeImpactedLocationsList(s, schemas.HealthEvent_ImpactedLocations, v.ImpactedLocations)
+	if v.ImpactedLocations != nil {
+		serializeImpactedLocationsList(s, schemas.HealthEvent_ImpactedLocations, v.ImpactedLocations)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.HealthEvent_LastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -632,7 +636,9 @@ func (v *ImpactedLocation) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InternetHealth.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIpv4PrefixList(s, schemas.ImpactedLocation_Ipv4Prefixes, v.Ipv4Prefixes)
+	if v.Ipv4Prefixes != nil {
+		serializeIpv4PrefixList(s, schemas.ImpactedLocation_Ipv4Prefixes, v.Ipv4Prefixes)
+	}
 	if v.Latitude != nil {
 		s.WriteFloat64(schemas.ImpactedLocation_Latitude, *v.Latitude)
 	}
@@ -1154,11 +1160,15 @@ func (v *NetworkImpairment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkImpairment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkList(s, schemas.NetworkImpairment_AsPath, v.AsPath)
+	if v.AsPath != nil {
+		serializeNetworkList(s, schemas.NetworkImpairment_AsPath, v.AsPath)
+	}
 	if v.NetworkEventType != "" {
 		s.WriteString(schemas.NetworkImpairment_NetworkEventType, string(v.NetworkEventType))
 	}
-	serializeNetworkList(s, schemas.NetworkImpairment_Networks, v.Networks)
+	if v.Networks != nil {
+		serializeNetworkList(s, schemas.NetworkImpairment_Networks, v.Networks)
+	}
 }
 func (v *NetworkImpairment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkImpairment, func(s *smithy.Schema) error {

@@ -119,19 +119,39 @@ func (v *KitchenSinkOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JsonValue != nil {
 		s.WriteString(schemas.KitchenSink_JsonValue, *v.JsonValue)
 	}
-	serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
-	serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
-	serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
-	serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	if v.ListOfLists != nil {
+		serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
+	}
+	if v.ListOfMapsOfStrings != nil {
+		serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
+	}
+	if v.ListOfStrings != nil {
+		serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
+	}
+	if v.ListOfStructs != nil {
+		serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	}
 	if v.Long != nil {
 		s.WriteInt64(schemas.KitchenSink_Long, *v.Long)
 	}
-	serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
-	serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
-	serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
-	serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
-	serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
-	serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	if v.MapOfListsOfStrings != nil {
+		serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
+	}
+	if v.MapOfMaps != nil {
+		serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
+	}
+	if v.MapOfStrings != nil {
+		serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
+	}
+	if v.MapOfStructs != nil {
+		serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
+	}
+	if v.RecursiveList != nil {
+		serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
+	}
+	if v.RecursiveMap != nil {
+		serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	}
 	if v.RecursiveStruct != nil {
 		s.WriteStruct(schemas.KitchenSink_RecursiveStruct)
 		v.RecursiveStruct.SerializeMembers(s)
@@ -328,19 +348,39 @@ func (v *KitchenSinkOperationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.JsonValue != nil {
 		s.WriteString(schemas.KitchenSink_JsonValue, *v.JsonValue)
 	}
-	serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
-	serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
-	serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
-	serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	if v.ListOfLists != nil {
+		serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
+	}
+	if v.ListOfMapsOfStrings != nil {
+		serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
+	}
+	if v.ListOfStrings != nil {
+		serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
+	}
+	if v.ListOfStructs != nil {
+		serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	}
 	if v.Long != nil {
 		s.WriteInt64(schemas.KitchenSink_Long, *v.Long)
 	}
-	serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
-	serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
-	serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
-	serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
-	serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
-	serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	if v.MapOfListsOfStrings != nil {
+		serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
+	}
+	if v.MapOfMaps != nil {
+		serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
+	}
+	if v.MapOfStrings != nil {
+		serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
+	}
+	if v.MapOfStructs != nil {
+		serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
+	}
+	if v.RecursiveList != nil {
+		serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
+	}
+	if v.RecursiveMap != nil {
+		serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	}
 	if v.RecursiveStruct != nil {
 		s.WriteStruct(schemas.KitchenSink_RecursiveStruct)
 		v.RecursiveStruct.SerializeMembers(s)

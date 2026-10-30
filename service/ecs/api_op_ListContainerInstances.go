@@ -125,7 +125,9 @@ func (v *ListContainerInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContainerInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListContainerInstancesResponse_containerInstanceArns, v.ContainerInstanceArns)
+	if v.ContainerInstanceArns != nil {
+		serializeStringList(s, schemas.ListContainerInstancesResponse_containerInstanceArns, v.ContainerInstanceArns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContainerInstancesResponse_nextToken, *v.NextToken)
 	}

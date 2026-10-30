@@ -67,7 +67,9 @@ func (v *GetBuyerDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DashboardIdentifier != nil {
 		s.WriteString(schemas.GetBuyerDashboardInput_dashboardIdentifier, *v.DashboardIdentifier)
 	}
-	serializeEmbeddingDomains(s, schemas.GetBuyerDashboardInput_embeddingDomains, v.EmbeddingDomains)
+	if v.EmbeddingDomains != nil {
+		serializeEmbeddingDomains(s, schemas.GetBuyerDashboardInput_embeddingDomains, v.EmbeddingDomains)
+	}
 }
 
 type GetBuyerDashboardOutput struct {
@@ -110,7 +112,9 @@ func (v *GetBuyerDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EmbedUrl != nil {
 		s.WriteString(schemas.GetBuyerDashboardOutput_embedUrl, *v.EmbedUrl)
 	}
-	serializeEmbeddingDomains(s, schemas.GetBuyerDashboardOutput_embeddingDomains, v.EmbeddingDomains)
+	if v.EmbeddingDomains != nil {
+		serializeEmbeddingDomains(s, schemas.GetBuyerDashboardOutput_embeddingDomains, v.EmbeddingDomains)
+	}
 }
 func (v *GetBuyerDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBuyerDashboardOutput, func(s *smithy.Schema) error {

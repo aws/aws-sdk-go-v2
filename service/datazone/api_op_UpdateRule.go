@@ -74,7 +74,9 @@ func (v *UpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRuleInput_description, *v.Description)
 	}
-	serializeRuleDetail(s, schemas.UpdateRuleInput_detail, v.Detail)
+	if v.Detail != nil {
+		serializeRuleDetail(s, schemas.UpdateRuleInput_detail, v.Detail)
+	}
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.UpdateRuleInput_domainIdentifier, *v.DomainIdentifier)
 	}
@@ -184,7 +186,9 @@ func (v *UpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateRuleOutput_description, *v.Description)
 	}
-	serializeRuleDetail(s, schemas.UpdateRuleOutput_detail, v.Detail)
+	if v.Detail != nil {
+		serializeRuleDetail(s, schemas.UpdateRuleOutput_detail, v.Detail)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateRuleOutput_identifier, *v.Identifier)
 	}
@@ -205,7 +209,9 @@ func (v *UpdateRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRuleTarget(s, schemas.UpdateRuleOutput_target, v.Target)
+	if v.Target != nil {
+		serializeRuleTarget(s, schemas.UpdateRuleOutput_target, v.Target)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.UpdateRuleOutput_updatedAt, *v.UpdatedAt)
 	}

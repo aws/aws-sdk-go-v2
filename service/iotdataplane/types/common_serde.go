@@ -7,9 +7,6 @@ import (
 )
 
 func serializeNamedShadowList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeNamedShadowList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeRetainedMessageList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RetainedMessageSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serializeRetainedMessageList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeSubscriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SubscriptionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

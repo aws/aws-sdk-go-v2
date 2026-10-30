@@ -145,7 +145,9 @@ func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArrayJobId != nil {
 		s.WriteString(schemas.ListJobsRequest_arrayJobId, *v.ArrayJobId)
 	}
-	serializeListJobsFilterList(s, schemas.ListJobsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListJobsFilterList(s, schemas.ListJobsRequest_filters, v.Filters)
+	}
 	if v.JobQueue != nil {
 		s.WriteString(schemas.ListJobsRequest_jobQueue, *v.JobQueue)
 	}
@@ -189,7 +191,9 @@ func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobSummaryList(s, schemas.ListJobsResponse_jobSummaryList, v.JobSummaryList)
+	if v.JobSummaryList != nil {
+		serializeJobSummaryList(s, schemas.ListJobsResponse_jobSummaryList, v.JobSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobsResponse_nextToken, *v.NextToken)
 	}

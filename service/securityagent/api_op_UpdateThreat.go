@@ -103,9 +103,15 @@ func (v *UpdateThreatInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Comments != nil {
 		s.WriteString(schemas.UpdateThreatInput_comments, *v.Comments)
 	}
-	serializeThreatEvidenceList(s, schemas.UpdateThreatInput_evidence, v.Evidence)
-	serializeStringList(s, schemas.UpdateThreatInput_impactedAssets, v.ImpactedAssets)
-	serializeStringList(s, schemas.UpdateThreatInput_impactedGoal, v.ImpactedGoal)
+	if v.Evidence != nil {
+		serializeThreatEvidenceList(s, schemas.UpdateThreatInput_evidence, v.Evidence)
+	}
+	if v.ImpactedAssets != nil {
+		serializeStringList(s, schemas.UpdateThreatInput_impactedAssets, v.ImpactedAssets)
+	}
+	if v.ImpactedGoal != nil {
+		serializeStringList(s, schemas.UpdateThreatInput_impactedGoal, v.ImpactedGoal)
+	}
 	if v.Prerequisites != nil {
 		s.WriteString(schemas.UpdateThreatInput_prerequisites, *v.Prerequisites)
 	}
@@ -235,9 +241,15 @@ func (v *UpdateThreatOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != "" {
 		s.WriteString(schemas.UpdateThreatOutput_createdBy, string(v.CreatedBy))
 	}
-	serializeThreatEvidenceList(s, schemas.UpdateThreatOutput_evidence, v.Evidence)
-	serializeStringList(s, schemas.UpdateThreatOutput_impactedAssets, v.ImpactedAssets)
-	serializeStringList(s, schemas.UpdateThreatOutput_impactedGoal, v.ImpactedGoal)
+	if v.Evidence != nil {
+		serializeThreatEvidenceList(s, schemas.UpdateThreatOutput_evidence, v.Evidence)
+	}
+	if v.ImpactedAssets != nil {
+		serializeStringList(s, schemas.UpdateThreatOutput_impactedAssets, v.ImpactedAssets)
+	}
+	if v.ImpactedGoal != nil {
+		serializeStringList(s, schemas.UpdateThreatOutput_impactedGoal, v.ImpactedGoal)
+	}
 	if v.Prerequisites != nil {
 		s.WriteString(schemas.UpdateThreatOutput_prerequisites, *v.Prerequisites)
 	}
@@ -253,7 +265,9 @@ func (v *UpdateThreatOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateThreatOutput_status, string(v.Status))
 	}
-	serializeStrideCategoryList(s, schemas.UpdateThreatOutput_stride, v.Stride)
+	if v.Stride != nil {
+		serializeStrideCategoryList(s, schemas.UpdateThreatOutput_stride, v.Stride)
+	}
 	if v.ThreatAction != nil {
 		s.WriteString(schemas.UpdateThreatOutput_threatAction, *v.ThreatAction)
 	}

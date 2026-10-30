@@ -56,7 +56,9 @@ func (v *UpdateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionIdentifier != nil {
 		s.WriteString(schemas.UpdateSessionRequest_sessionIdentifier, *v.SessionIdentifier)
 	}
-	serializeSessionMetadataMap(s, schemas.UpdateSessionRequest_sessionMetadata, v.SessionMetadata)
+	if v.SessionMetadata != nil {
+		serializeSessionMetadataMap(s, schemas.UpdateSessionRequest_sessionMetadata, v.SessionMetadata)
+	}
 }
 
 type UpdateSessionOutput struct {

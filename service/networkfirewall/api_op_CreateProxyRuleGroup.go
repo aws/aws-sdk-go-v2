@@ -76,7 +76,9 @@ func (v *CreateProxyRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Rules.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateProxyRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProxyRuleGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProxyRuleGroupOutput struct {

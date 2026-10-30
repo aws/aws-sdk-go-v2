@@ -63,7 +63,9 @@ func (v *BatchGetDocumentStatusInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDocumentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentInfoList(s, schemas.BatchGetDocumentStatusRequest_DocumentInfoList, v.DocumentInfoList)
+	if v.DocumentInfoList != nil {
+		serializeDocumentInfoList(s, schemas.BatchGetDocumentStatusRequest_DocumentInfoList, v.DocumentInfoList)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.BatchGetDocumentStatusRequest_IndexId, *v.IndexId)
 	}
@@ -94,8 +96,12 @@ func (v *BatchGetDocumentStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDocumentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentStatusList(s, schemas.BatchGetDocumentStatusResponse_DocumentStatusList, v.DocumentStatusList)
-	serializeBatchGetDocumentStatusResponseErrors(s, schemas.BatchGetDocumentStatusResponse_Errors, v.Errors)
+	if v.DocumentStatusList != nil {
+		serializeDocumentStatusList(s, schemas.BatchGetDocumentStatusResponse_DocumentStatusList, v.DocumentStatusList)
+	}
+	if v.Errors != nil {
+		serializeBatchGetDocumentStatusResponseErrors(s, schemas.BatchGetDocumentStatusResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchGetDocumentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDocumentStatusResponse, func(s *smithy.Schema) error {

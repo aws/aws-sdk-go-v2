@@ -99,7 +99,9 @@ func (v *GetOrganizationConfigRuleDetailedStatusOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOrganizationConfigRuleDetailedStatusResponse_NextToken, *v.NextToken)
 	}
-	serializeOrganizationConfigRuleDetailedStatus(s, schemas.GetOrganizationConfigRuleDetailedStatusResponse_OrganizationConfigRuleDetailedStatus, v.OrganizationConfigRuleDetailedStatus)
+	if v.OrganizationConfigRuleDetailedStatus != nil {
+		serializeOrganizationConfigRuleDetailedStatus(s, schemas.GetOrganizationConfigRuleDetailedStatusResponse_OrganizationConfigRuleDetailedStatus, v.OrganizationConfigRuleDetailedStatus)
+	}
 }
 func (v *GetOrganizationConfigRuleDetailedStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOrganizationConfigRuleDetailedStatusResponse, func(s *smithy.Schema) error {

@@ -174,16 +174,26 @@ func (v *ClassifyDocumentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClassifyDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfClasses(s, schemas.ClassifyDocumentResponse_Classes, v.Classes)
+	if v.Classes != nil {
+		serializeListOfClasses(s, schemas.ClassifyDocumentResponse_Classes, v.Classes)
+	}
 	if v.DocumentMetadata != nil {
 		s.WriteStruct(schemas.ClassifyDocumentResponse_DocumentMetadata)
 		v.DocumentMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfDocumentType(s, schemas.ClassifyDocumentResponse_DocumentType, v.DocumentType)
-	serializeListOfErrors(s, schemas.ClassifyDocumentResponse_Errors, v.Errors)
-	serializeListOfLabels(s, schemas.ClassifyDocumentResponse_Labels, v.Labels)
-	serializeListOfWarnings(s, schemas.ClassifyDocumentResponse_Warnings, v.Warnings)
+	if v.DocumentType != nil {
+		serializeListOfDocumentType(s, schemas.ClassifyDocumentResponse_DocumentType, v.DocumentType)
+	}
+	if v.Errors != nil {
+		serializeListOfErrors(s, schemas.ClassifyDocumentResponse_Errors, v.Errors)
+	}
+	if v.Labels != nil {
+		serializeListOfLabels(s, schemas.ClassifyDocumentResponse_Labels, v.Labels)
+	}
+	if v.Warnings != nil {
+		serializeListOfWarnings(s, schemas.ClassifyDocumentResponse_Warnings, v.Warnings)
+	}
 }
 func (v *ClassifyDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClassifyDocumentResponse, func(s *smithy.Schema) error {

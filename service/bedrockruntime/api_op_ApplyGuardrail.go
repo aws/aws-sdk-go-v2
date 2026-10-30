@@ -73,7 +73,9 @@ func (v *ApplyGuardrailInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApplyGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContentBlockList(s, schemas.ApplyGuardrailRequest_content, v.Content)
+	if v.Content != nil {
+		serializeGuardrailContentBlockList(s, schemas.ApplyGuardrailRequest_content, v.Content)
+	}
 	if v.GuardrailIdentifier != nil {
 		s.WriteString(schemas.ApplyGuardrailRequest_guardrailIdentifier, *v.GuardrailIdentifier)
 	}
@@ -135,13 +137,17 @@ func (v *ApplyGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionReason != nil {
 		s.WriteString(schemas.ApplyGuardrailResponse_actionReason, *v.ActionReason)
 	}
-	serializeGuardrailAssessmentList(s, schemas.ApplyGuardrailResponse_assessments, v.Assessments)
+	if v.Assessments != nil {
+		serializeGuardrailAssessmentList(s, schemas.ApplyGuardrailResponse_assessments, v.Assessments)
+	}
 	if v.GuardrailCoverage != nil {
 		s.WriteStruct(schemas.ApplyGuardrailResponse_guardrailCoverage)
 		v.GuardrailCoverage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGuardrailOutputContentList(s, schemas.ApplyGuardrailResponse_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeGuardrailOutputContentList(s, schemas.ApplyGuardrailResponse_outputs, v.Outputs)
+	}
 	if v.Usage != nil {
 		s.WriteStruct(schemas.ApplyGuardrailResponse_usage)
 		v.Usage.SerializeMembers(s)

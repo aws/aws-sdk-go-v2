@@ -59,7 +59,9 @@ func (v *ListAutomationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTimeExclusive != nil {
 		s.WriteTime(schemas.ListAutomationEventsRequest_endTimeExclusive, *v.EndTimeExclusive)
 	}
-	serializeAutomationEventFilterList(s, schemas.ListAutomationEventsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeAutomationEventFilterList(s, schemas.ListAutomationEventsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAutomationEventsRequest_maxResults, *v.MaxResults)
 	}
@@ -92,7 +94,9 @@ func (v *ListAutomationEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAutomationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationEvents(s, schemas.ListAutomationEventsResponse_automationEvents, v.AutomationEvents)
+	if v.AutomationEvents != nil {
+		serializeAutomationEvents(s, schemas.ListAutomationEventsResponse_automationEvents, v.AutomationEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationEventsResponse_nextToken, *v.NextToken)
 	}

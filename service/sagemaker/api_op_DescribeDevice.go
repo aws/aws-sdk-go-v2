@@ -143,7 +143,9 @@ func (v *DescribeDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxModels != nil {
 		s.WriteInt32(schemas.DescribeDeviceResponse_MaxModels, *v.MaxModels)
 	}
-	serializeEdgeModels(s, schemas.DescribeDeviceResponse_Models, v.Models)
+	if v.Models != nil {
+		serializeEdgeModels(s, schemas.DescribeDeviceResponse_Models, v.Models)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDeviceResponse_NextToken, *v.NextToken)
 	}

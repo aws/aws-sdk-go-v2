@@ -96,8 +96,12 @@ func (v *GetOpenIdTokenForDeveloperIdentityInput) SerializeMembers(s smithy.Shap
 	if v.IdentityPoolId != nil {
 		s.WriteString(schemas.GetOpenIdTokenForDeveloperIdentityInput_IdentityPoolId, *v.IdentityPoolId)
 	}
-	serializeLoginsMap(s, schemas.GetOpenIdTokenForDeveloperIdentityInput_Logins, v.Logins)
-	serializePrincipalTags(s, schemas.GetOpenIdTokenForDeveloperIdentityInput_PrincipalTags, v.PrincipalTags)
+	if v.Logins != nil {
+		serializeLoginsMap(s, schemas.GetOpenIdTokenForDeveloperIdentityInput_Logins, v.Logins)
+	}
+	if v.PrincipalTags != nil {
+		serializePrincipalTags(s, schemas.GetOpenIdTokenForDeveloperIdentityInput_PrincipalTags, v.PrincipalTags)
+	}
 	if v.TokenDuration != nil {
 		s.WriteInt64(schemas.GetOpenIdTokenForDeveloperIdentityInput_TokenDuration, *v.TokenDuration)
 	}

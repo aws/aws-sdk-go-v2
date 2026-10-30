@@ -66,7 +66,9 @@ func (v *StartNextPendingJobExecutionInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *StartNextPendingJobExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetailsMap(s, schemas.StartNextPendingJobExecutionRequest_statusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeDetailsMap(s, schemas.StartNextPendingJobExecutionRequest_statusDetails, v.StatusDetails)
+	}
 	if v.StepTimeoutInMinutes != nil {
 		s.WriteInt64(schemas.StartNextPendingJobExecutionRequest_stepTimeoutInMinutes, *v.StepTimeoutInMinutes)
 	}

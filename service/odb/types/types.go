@@ -89,7 +89,9 @@ func (v *AdminPasswordSourceSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AdminPasswordSource != "" {
 		s.WriteString(schemas.AdminPasswordSourceSummary_adminPasswordSource, string(v.AdminPasswordSource))
 	}
-	serializeAdminPasswordSourceConfiguration(s, schemas.AdminPasswordSourceSummary_adminPasswordSourceConfiguration, v.AdminPasswordSourceConfiguration)
+	if v.AdminPasswordSourceConfiguration != nil {
+		serializeAdminPasswordSourceConfiguration(s, schemas.AdminPasswordSourceSummary_adminPasswordSourceConfiguration, v.AdminPasswordSourceConfiguration)
+	}
 }
 func (v *AdminPasswordSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AdminPasswordSourceSummary, func(s *smithy.Schema) error {
@@ -489,7 +491,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedStorageSizeInTBs != nil {
 		s.WriteFloat64(schemas.AutonomousDatabase_allocatedStorageSizeInTBs, *v.AllocatedStorageSizeInTBs)
 	}
-	serializeStringList(s, schemas.AutonomousDatabase_allowlistedIps, v.AllowlistedIps)
+	if v.AllowlistedIps != nil {
+		serializeStringList(s, schemas.AutonomousDatabase_allowlistedIps, v.AllowlistedIps)
+	}
 	if v.ApexDetails != nil {
 		s.WriteStruct(schemas.AutonomousDatabase_apexDetails)
 		v.ApexDetails.SerializeMembers(s)
@@ -516,7 +520,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.AutonomousDatabase_availabilityZoneId, *v.AvailabilityZoneId)
 	}
-	serializeStringList(s, schemas.AutonomousDatabase_availableUpgradeVersions, v.AvailableUpgradeVersions)
+	if v.AvailableUpgradeVersions != nil {
+		serializeStringList(s, schemas.AutonomousDatabase_availableUpgradeVersions, v.AvailableUpgradeVersions)
+	}
 	if v.BackupRetentionPeriodInDays != nil {
 		s.WriteInt32(schemas.AutonomousDatabase_backupRetentionPeriodInDays, *v.BackupRetentionPeriodInDays)
 	}
@@ -526,7 +532,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CharacterSet != nil {
 		s.WriteString(schemas.AutonomousDatabase_characterSet, *v.CharacterSet)
 	}
-	serializeIntegerList(s, schemas.AutonomousDatabase_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.CloneTableSpaceList != nil {
+		serializeIntegerList(s, schemas.AutonomousDatabase_cloneTableSpaceList, v.CloneTableSpaceList)
+	}
 	if v.ComputeCount != nil {
 		s.WriteFloat32(schemas.AutonomousDatabase_computeCount, *v.ComputeCount)
 	}
@@ -549,7 +557,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AutonomousDatabase_createdAt, *v.CreatedAt)
 	}
-	serializeCustomerContacts(s, schemas.AutonomousDatabase_customerContacts, v.CustomerContacts)
+	if v.CustomerContacts != nil {
+		serializeCustomerContacts(s, schemas.AutonomousDatabase_customerContacts, v.CustomerContacts)
+	}
 	if v.DataSafeStatus != "" {
 		s.WriteString(schemas.AutonomousDatabase_dataSafeStatus, string(v.DataSafeStatus))
 	}
@@ -571,7 +581,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbName != nil {
 		s.WriteString(schemas.AutonomousDatabase_dbName, *v.DbName)
 	}
-	serializeDatabaseToolList(s, schemas.AutonomousDatabase_dbToolsDetails, v.DbToolsDetails)
+	if v.DbToolsDetails != nil {
+		serializeDatabaseToolList(s, schemas.AutonomousDatabase_dbToolsDetails, v.DbToolsDetails)
+	}
 	if v.DbVersion != nil {
 		s.WriteString(schemas.AutonomousDatabase_dbVersion, *v.DbVersion)
 	}
@@ -671,7 +683,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationsInsightsStatus != "" {
 		s.WriteString(schemas.AutonomousDatabase_operationsInsightsStatus, string(v.OperationsInsightsStatus))
 	}
-	serializeStringList(s, schemas.AutonomousDatabase_peerDbIds, v.PeerDbIds)
+	if v.PeerDbIds != nil {
+		serializeStringList(s, schemas.AutonomousDatabase_peerDbIds, v.PeerDbIds)
+	}
 	if v.PercentProgress != nil {
 		s.WriteFloat32(schemas.AutonomousDatabase_percentProgress, *v.PercentProgress)
 	}
@@ -687,7 +701,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrivateEndpointLabel != nil {
 		s.WriteString(schemas.AutonomousDatabase_privateEndpointLabel, *v.PrivateEndpointLabel)
 	}
-	serializeIntegerList(s, schemas.AutonomousDatabase_provisionableCpus, v.ProvisionableCpus)
+	if v.ProvisionableCpus != nil {
+		serializeIntegerList(s, schemas.AutonomousDatabase_provisionableCpus, v.ProvisionableCpus)
+	}
 	if v.RefreshableMode != "" {
 		s.WriteString(schemas.AutonomousDatabase_refreshableMode, string(v.RefreshableMode))
 	}
@@ -710,7 +726,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != "" {
 		s.WriteString(schemas.AutonomousDatabase_role, string(v.Role))
 	}
-	serializeScheduledOperationDetailsList(s, schemas.AutonomousDatabase_scheduledOperations, v.ScheduledOperations)
+	if v.ScheduledOperations != nil {
+		serializeScheduledOperationDetailsList(s, schemas.AutonomousDatabase_scheduledOperations, v.ScheduledOperations)
+	}
 	if v.ServiceConsoleUrl != nil {
 		s.WriteString(schemas.AutonomousDatabase_serviceConsoleUrl, *v.ServiceConsoleUrl)
 	}
@@ -720,7 +738,9 @@ func (v *AutonomousDatabase) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SqlWebDeveloperUrl != nil {
 		s.WriteString(schemas.AutonomousDatabase_sqlWebDeveloperUrl, *v.SqlWebDeveloperUrl)
 	}
-	serializeStringList(s, schemas.AutonomousDatabase_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	if v.StandbyAllowlistedIps != nil {
+		serializeStringList(s, schemas.AutonomousDatabase_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	}
 	if v.StandbyAllowlistedIpsSource != "" {
 		s.WriteString(schemas.AutonomousDatabase_standbyAllowlistedIpsSource, string(v.StandbyAllowlistedIpsSource))
 	}
@@ -1616,7 +1636,9 @@ func (v *AutonomousDatabaseConnectionStrings) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *AutonomousDatabaseConnectionStrings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseConnectionStringMap(s, schemas.AutonomousDatabaseConnectionStrings_allConnectionStrings, v.AllConnectionStrings)
+	if v.AllConnectionStrings != nil {
+		serializeDatabaseConnectionStringMap(s, schemas.AutonomousDatabaseConnectionStrings_allConnectionStrings, v.AllConnectionStrings)
+	}
 	if v.Dedicated != nil {
 		s.WriteString(schemas.AutonomousDatabaseConnectionStrings_dedicated, *v.Dedicated)
 	}
@@ -1629,7 +1651,9 @@ func (v *AutonomousDatabaseConnectionStrings) SerializeMembers(s smithy.ShapeSer
 	if v.Medium != nil {
 		s.WriteString(schemas.AutonomousDatabaseConnectionStrings_medium, *v.Medium)
 	}
-	serializeDatabaseConnectionStringProfileList(s, schemas.AutonomousDatabaseConnectionStrings_profiles, v.Profiles)
+	if v.Profiles != nil {
+		serializeDatabaseConnectionStringProfileList(s, schemas.AutonomousDatabaseConnectionStrings_profiles, v.Profiles)
+	}
 }
 func (v *AutonomousDatabaseConnectionStrings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutonomousDatabaseConnectionStrings, func(s *smithy.Schema) error {
@@ -2201,7 +2225,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedStorageSizeInTBs != nil {
 		s.WriteFloat64(schemas.AutonomousDatabaseSummary_allocatedStorageSizeInTBs, *v.AllocatedStorageSizeInTBs)
 	}
-	serializeStringList(s, schemas.AutonomousDatabaseSummary_allowlistedIps, v.AllowlistedIps)
+	if v.AllowlistedIps != nil {
+		serializeStringList(s, schemas.AutonomousDatabaseSummary_allowlistedIps, v.AllowlistedIps)
+	}
 	if v.ApexDetails != nil {
 		s.WriteStruct(schemas.AutonomousDatabaseSummary_apexDetails)
 		v.ApexDetails.SerializeMembers(s)
@@ -2228,7 +2254,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_availabilityZoneId, *v.AvailabilityZoneId)
 	}
-	serializeStringList(s, schemas.AutonomousDatabaseSummary_availableUpgradeVersions, v.AvailableUpgradeVersions)
+	if v.AvailableUpgradeVersions != nil {
+		serializeStringList(s, schemas.AutonomousDatabaseSummary_availableUpgradeVersions, v.AvailableUpgradeVersions)
+	}
 	if v.BackupRetentionPeriodInDays != nil {
 		s.WriteInt32(schemas.AutonomousDatabaseSummary_backupRetentionPeriodInDays, *v.BackupRetentionPeriodInDays)
 	}
@@ -2238,7 +2266,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CharacterSet != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_characterSet, *v.CharacterSet)
 	}
-	serializeIntegerList(s, schemas.AutonomousDatabaseSummary_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.CloneTableSpaceList != nil {
+		serializeIntegerList(s, schemas.AutonomousDatabaseSummary_cloneTableSpaceList, v.CloneTableSpaceList)
+	}
 	if v.ComputeCount != nil {
 		s.WriteFloat32(schemas.AutonomousDatabaseSummary_computeCount, *v.ComputeCount)
 	}
@@ -2261,7 +2291,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AutonomousDatabaseSummary_createdAt, *v.CreatedAt)
 	}
-	serializeCustomerContacts(s, schemas.AutonomousDatabaseSummary_customerContacts, v.CustomerContacts)
+	if v.CustomerContacts != nil {
+		serializeCustomerContacts(s, schemas.AutonomousDatabaseSummary_customerContacts, v.CustomerContacts)
+	}
 	if v.DataSafeStatus != "" {
 		s.WriteString(schemas.AutonomousDatabaseSummary_dataSafeStatus, string(v.DataSafeStatus))
 	}
@@ -2283,7 +2315,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbName != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_dbName, *v.DbName)
 	}
-	serializeDatabaseToolList(s, schemas.AutonomousDatabaseSummary_dbToolsDetails, v.DbToolsDetails)
+	if v.DbToolsDetails != nil {
+		serializeDatabaseToolList(s, schemas.AutonomousDatabaseSummary_dbToolsDetails, v.DbToolsDetails)
+	}
 	if v.DbVersion != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_dbVersion, *v.DbVersion)
 	}
@@ -2383,7 +2417,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationsInsightsStatus != "" {
 		s.WriteString(schemas.AutonomousDatabaseSummary_operationsInsightsStatus, string(v.OperationsInsightsStatus))
 	}
-	serializeStringList(s, schemas.AutonomousDatabaseSummary_peerDbIds, v.PeerDbIds)
+	if v.PeerDbIds != nil {
+		serializeStringList(s, schemas.AutonomousDatabaseSummary_peerDbIds, v.PeerDbIds)
+	}
 	if v.PercentProgress != nil {
 		s.WriteFloat32(schemas.AutonomousDatabaseSummary_percentProgress, *v.PercentProgress)
 	}
@@ -2399,7 +2435,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrivateEndpointLabel != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_privateEndpointLabel, *v.PrivateEndpointLabel)
 	}
-	serializeIntegerList(s, schemas.AutonomousDatabaseSummary_provisionableCpus, v.ProvisionableCpus)
+	if v.ProvisionableCpus != nil {
+		serializeIntegerList(s, schemas.AutonomousDatabaseSummary_provisionableCpus, v.ProvisionableCpus)
+	}
 	if v.RefreshableMode != "" {
 		s.WriteString(schemas.AutonomousDatabaseSummary_refreshableMode, string(v.RefreshableMode))
 	}
@@ -2422,7 +2460,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != "" {
 		s.WriteString(schemas.AutonomousDatabaseSummary_role, string(v.Role))
 	}
-	serializeScheduledOperationDetailsList(s, schemas.AutonomousDatabaseSummary_scheduledOperations, v.ScheduledOperations)
+	if v.ScheduledOperations != nil {
+		serializeScheduledOperationDetailsList(s, schemas.AutonomousDatabaseSummary_scheduledOperations, v.ScheduledOperations)
+	}
 	if v.ServiceConsoleUrl != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_serviceConsoleUrl, *v.ServiceConsoleUrl)
 	}
@@ -2432,7 +2472,9 @@ func (v *AutonomousDatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SqlWebDeveloperUrl != nil {
 		s.WriteString(schemas.AutonomousDatabaseSummary_sqlWebDeveloperUrl, *v.SqlWebDeveloperUrl)
 	}
-	serializeStringList(s, schemas.AutonomousDatabaseSummary_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	if v.StandbyAllowlistedIps != nil {
+		serializeStringList(s, schemas.AutonomousDatabaseSummary_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	}
 	if v.StandbyAllowlistedIpsSource != "" {
 		s.WriteString(schemas.AutonomousDatabaseSummary_standbyAllowlistedIpsSource, string(v.StandbyAllowlistedIpsSource))
 	}
@@ -3602,7 +3644,9 @@ func (v *CloudAutonomousVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbNodeStorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CloudAutonomousVmCluster_dbNodeStorageSizeInGBs, *v.DbNodeStorageSizeInGBs)
 	}
-	serializeStringList(s, schemas.CloudAutonomousVmCluster_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.CloudAutonomousVmCluster_dbServers, v.DbServers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CloudAutonomousVmCluster_description, *v.Description)
 	}
@@ -3618,7 +3662,9 @@ func (v *CloudAutonomousVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Hostname != nil {
 		s.WriteString(schemas.CloudAutonomousVmCluster_hostname, *v.Hostname)
 	}
-	serializeIamRoleList(s, schemas.CloudAutonomousVmCluster_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleList(s, schemas.CloudAutonomousVmCluster_iamRoles, v.IamRoles)
+	}
 	if v.IsMtlsEnabledVmCluster != nil {
 		s.WriteBool(schemas.CloudAutonomousVmCluster_isMtlsEnabledVmCluster, *v.IsMtlsEnabledVmCluster)
 	}
@@ -4163,7 +4209,9 @@ func (v *CloudAutonomousVmClusterSummary) SerializeMembers(s smithy.ShapeSeriali
 	if v.DbNodeStorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CloudAutonomousVmClusterSummary_dbNodeStorageSizeInGBs, *v.DbNodeStorageSizeInGBs)
 	}
-	serializeStringList(s, schemas.CloudAutonomousVmClusterSummary_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.CloudAutonomousVmClusterSummary_dbServers, v.DbServers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CloudAutonomousVmClusterSummary_description, *v.Description)
 	}
@@ -4179,7 +4227,9 @@ func (v *CloudAutonomousVmClusterSummary) SerializeMembers(s smithy.ShapeSeriali
 	if v.Hostname != nil {
 		s.WriteString(schemas.CloudAutonomousVmClusterSummary_hostname, *v.Hostname)
 	}
-	serializeIamRoleList(s, schemas.CloudAutonomousVmClusterSummary_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleList(s, schemas.CloudAutonomousVmClusterSummary_iamRoles, v.IamRoles)
+	}
 	if v.IsMtlsEnabledVmCluster != nil {
 		s.WriteBool(schemas.CloudAutonomousVmClusterSummary_isMtlsEnabledVmCluster, *v.IsMtlsEnabledVmCluster)
 	}
@@ -4626,7 +4676,9 @@ func (v *CloudExadataInfrastructure) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CloudExadataInfrastructure_createdAt, *v.CreatedAt)
 	}
-	serializeCustomerContacts(s, schemas.CloudExadataInfrastructure_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	if v.CustomerContactsToSendToOCI != nil {
+		serializeCustomerContacts(s, schemas.CloudExadataInfrastructure_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	}
 	if v.DataStorageSizeInTBs != nil {
 		s.WriteFloat64(schemas.CloudExadataInfrastructure_dataStorageSizeInTBs, *v.DataStorageSizeInTBs)
 	}
@@ -5029,7 +5081,9 @@ func (v *CloudExadataInfrastructureSummary) SerializeMembers(s smithy.ShapeSeria
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CloudExadataInfrastructureSummary_createdAt, *v.CreatedAt)
 	}
-	serializeCustomerContacts(s, schemas.CloudExadataInfrastructureSummary_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	if v.CustomerContactsToSendToOCI != nil {
+		serializeCustomerContacts(s, schemas.CloudExadataInfrastructureSummary_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	}
 	if v.DataStorageSizeInTBs != nil {
 		s.WriteFloat64(schemas.CloudExadataInfrastructureSummary_dataStorageSizeInTBs, *v.DataStorageSizeInTBs)
 	}
@@ -5283,7 +5337,9 @@ func (v *CloudExadataInfrastructureUnallocatedResources) Serialize(s smithy.Shap
 }
 
 func (v *CloudExadataInfrastructureUnallocatedResources) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudAutonomousVmClusterResourceDetailsList(s, schemas.CloudExadataInfrastructureUnallocatedResources_cloudAutonomousVmClusters, v.CloudAutonomousVmClusters)
+	if v.CloudAutonomousVmClusters != nil {
+		serializeCloudAutonomousVmClusterResourceDetailsList(s, schemas.CloudExadataInfrastructureUnallocatedResources_cloudAutonomousVmClusters, v.CloudAutonomousVmClusters)
+	}
 	if v.CloudExadataInfrastructureDisplayName != nil {
 		s.WriteString(schemas.CloudExadataInfrastructureUnallocatedResources_cloudExadataInfrastructureDisplayName, *v.CloudExadataInfrastructureDisplayName)
 	}
@@ -5553,7 +5609,9 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbNodeStorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CloudVmCluster_dbNodeStorageSizeInGBs, *v.DbNodeStorageSizeInGBs)
 	}
-	serializeStringList(s, schemas.CloudVmCluster_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.CloudVmCluster_dbServers, v.DbServers)
+	}
 	if v.DiskRedundancy != "" {
 		s.WriteString(schemas.CloudVmCluster_diskRedundancy, string(v.DiskRedundancy))
 	}
@@ -5569,14 +5627,18 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExascaleDbStorageVaultId != nil {
 		s.WriteString(schemas.CloudVmCluster_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
 	}
-	serializeFileSystemConfigurationDetailsList(s, schemas.CloudVmCluster_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
+	if v.FileSystemConfigurationDetails != nil {
+		serializeFileSystemConfigurationDetailsList(s, schemas.CloudVmCluster_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
+	}
 	if v.GiVersion != nil {
 		s.WriteString(schemas.CloudVmCluster_giVersion, *v.GiVersion)
 	}
 	if v.Hostname != nil {
 		s.WriteString(schemas.CloudVmCluster_hostname, *v.Hostname)
 	}
-	serializeIamRoleList(s, schemas.CloudVmCluster_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleList(s, schemas.CloudVmCluster_iamRoles, v.IamRoles)
+	}
 	if v.IormConfigCache != nil {
 		s.WriteStruct(schemas.CloudVmCluster_iormConfigCache)
 		v.IormConfigCache.SerializeMembers(s)
@@ -5627,11 +5689,15 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanDnsRecordId != nil {
 		s.WriteString(schemas.CloudVmCluster_scanDnsRecordId, *v.ScanDnsRecordId)
 	}
-	serializeStringList(s, schemas.CloudVmCluster_scanIpIds, v.ScanIpIds)
+	if v.ScanIpIds != nil {
+		serializeStringList(s, schemas.CloudVmCluster_scanIpIds, v.ScanIpIds)
+	}
 	if v.Shape != nil {
 		s.WriteString(schemas.CloudVmCluster_shape, *v.Shape)
 	}
-	serializeSensitiveStringList(s, schemas.CloudVmCluster_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeSensitiveStringList(s, schemas.CloudVmCluster_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CloudVmCluster_status, string(v.Status))
 	}
@@ -5650,7 +5716,9 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CloudVmCluster_timeZone, *v.TimeZone)
 	}
-	serializeStringList(s, schemas.CloudVmCluster_vipIds, v.VipIds)
+	if v.VipIds != nil {
+		serializeStringList(s, schemas.CloudVmCluster_vipIds, v.VipIds)
+	}
 	if v.VmBackupStorageType != "" {
 		s.WriteString(schemas.CloudVmCluster_vmBackupStorageType, string(v.VmBackupStorageType))
 	}
@@ -6057,7 +6125,9 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbNodeStorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CloudVmClusterSummary_dbNodeStorageSizeInGBs, *v.DbNodeStorageSizeInGBs)
 	}
-	serializeStringList(s, schemas.CloudVmClusterSummary_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.CloudVmClusterSummary_dbServers, v.DbServers)
+	}
 	if v.DiskRedundancy != "" {
 		s.WriteString(schemas.CloudVmClusterSummary_diskRedundancy, string(v.DiskRedundancy))
 	}
@@ -6073,14 +6143,18 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExascaleDbStorageVaultId != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
 	}
-	serializeFileSystemConfigurationDetailsList(s, schemas.CloudVmClusterSummary_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
+	if v.FileSystemConfigurationDetails != nil {
+		serializeFileSystemConfigurationDetailsList(s, schemas.CloudVmClusterSummary_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
+	}
 	if v.GiVersion != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_giVersion, *v.GiVersion)
 	}
 	if v.Hostname != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_hostname, *v.Hostname)
 	}
-	serializeIamRoleList(s, schemas.CloudVmClusterSummary_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleList(s, schemas.CloudVmClusterSummary_iamRoles, v.IamRoles)
+	}
 	if v.IormConfigCache != nil {
 		s.WriteStruct(schemas.CloudVmClusterSummary_iormConfigCache)
 		v.IormConfigCache.SerializeMembers(s)
@@ -6131,11 +6205,15 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanDnsRecordId != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_scanDnsRecordId, *v.ScanDnsRecordId)
 	}
-	serializeStringList(s, schemas.CloudVmClusterSummary_scanIpIds, v.ScanIpIds)
+	if v.ScanIpIds != nil {
+		serializeStringList(s, schemas.CloudVmClusterSummary_scanIpIds, v.ScanIpIds)
+	}
 	if v.Shape != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_shape, *v.Shape)
 	}
-	serializeSensitiveStringList(s, schemas.CloudVmClusterSummary_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeSensitiveStringList(s, schemas.CloudVmClusterSummary_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CloudVmClusterSummary_status, string(v.Status))
 	}
@@ -6154,7 +6232,9 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_timeZone, *v.TimeZone)
 	}
-	serializeStringList(s, schemas.CloudVmClusterSummary_vipIds, v.VipIds)
+	if v.VipIds != nil {
+		serializeStringList(s, schemas.CloudVmClusterSummary_vipIds, v.VipIds)
+	}
 	if v.VmBackupStorageType != "" {
 		s.WriteString(schemas.CloudVmClusterSummary_vmBackupStorageType, string(v.VmBackupStorageType))
 	}
@@ -6458,7 +6538,9 @@ func (v *CrossRegionS3RestoreSourcesAccess) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CrossRegionS3RestoreSourcesAccess) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CrossRegionS3RestoreSourcesAccess_ipv4Addresses, v.Ipv4Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeStringList(s, schemas.CrossRegionS3RestoreSourcesAccess_ipv4Addresses, v.Ipv4Addresses)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.CrossRegionS3RestoreSourcesAccess_region, *v.Region)
 	}
@@ -7725,8 +7807,12 @@ func (v *DbServer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DbServer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DbServer_autonomousVirtualMachineIds, v.AutonomousVirtualMachineIds)
-	serializeStringList(s, schemas.DbServer_autonomousVmClusterIds, v.AutonomousVmClusterIds)
+	if v.AutonomousVirtualMachineIds != nil {
+		serializeStringList(s, schemas.DbServer_autonomousVirtualMachineIds, v.AutonomousVirtualMachineIds)
+	}
+	if v.AutonomousVmClusterIds != nil {
+		serializeStringList(s, schemas.DbServer_autonomousVmClusterIds, v.AutonomousVmClusterIds)
+	}
 	if v.ComputeModel != "" {
 		s.WriteString(schemas.DbServer_computeModel, string(v.ComputeModel))
 	}
@@ -7780,7 +7866,9 @@ func (v *DbServer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.DbServer_statusReason, *v.StatusReason)
 	}
-	serializeStringList(s, schemas.DbServer_vmClusterIds, v.VmClusterIds)
+	if v.VmClusterIds != nil {
+		serializeStringList(s, schemas.DbServer_vmClusterIds, v.VmClusterIds)
+	}
 }
 func (v *DbServer) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DbServer, func(s *smithy.Schema) error {
@@ -8004,8 +8092,12 @@ func (v *DbServerSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DbServerSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DbServerSummary_autonomousVirtualMachineIds, v.AutonomousVirtualMachineIds)
-	serializeStringList(s, schemas.DbServerSummary_autonomousVmClusterIds, v.AutonomousVmClusterIds)
+	if v.AutonomousVirtualMachineIds != nil {
+		serializeStringList(s, schemas.DbServerSummary_autonomousVirtualMachineIds, v.AutonomousVirtualMachineIds)
+	}
+	if v.AutonomousVmClusterIds != nil {
+		serializeStringList(s, schemas.DbServerSummary_autonomousVmClusterIds, v.AutonomousVmClusterIds)
+	}
 	if v.ComputeModel != "" {
 		s.WriteString(schemas.DbServerSummary_computeModel, string(v.ComputeModel))
 	}
@@ -8059,7 +8151,9 @@ func (v *DbServerSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.DbServerSummary_statusReason, *v.StatusReason)
 	}
-	serializeStringList(s, schemas.DbServerSummary_vmClusterIds, v.VmClusterIds)
+	if v.VmClusterIds != nil {
+		serializeStringList(s, schemas.DbServerSummary_vmClusterIds, v.VmClusterIds)
+	}
 }
 func (v *DbServerSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DbServerSummary, func(s *smithy.Schema) error {
@@ -8306,7 +8400,9 @@ func (v *DbSystemShapeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuntimeMinimumCoreCount != nil {
 		s.WriteInt32(schemas.DbSystemShapeSummary_runtimeMinimumCoreCount, *v.RuntimeMinimumCoreCount)
 	}
-	serializeShapeAttributeList(s, schemas.DbSystemShapeSummary_shapeAttributes, v.ShapeAttributes)
+	if v.ShapeAttributes != nil {
+		serializeShapeAttributeList(s, schemas.DbSystemShapeSummary_shapeAttributes, v.ShapeAttributes)
+	}
 	if v.ShapeFamily != nil {
 		s.WriteString(schemas.DbSystemShapeSummary_shapeFamily, *v.ShapeFamily)
 	}
@@ -8578,7 +8674,9 @@ func (v *EncryptionSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncryptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionKeyConfiguration(s, schemas.EncryptionSummary_encryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeEncryptionKeyConfiguration(s, schemas.EncryptionSummary_encryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyProvider != "" {
 		s.WriteString(schemas.EncryptionSummary_encryptionKeyProvider, string(v.EncryptionKeyProvider))
 	}
@@ -8625,7 +8723,9 @@ func (v *ExadataIormConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExadataIormConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbIormConfigList(s, schemas.ExadataIormConfig_dbPlans, v.DbPlans)
+	if v.DbPlans != nil {
+		serializeDbIormConfigList(s, schemas.ExadataIormConfig_dbPlans, v.DbPlans)
+	}
 	if v.LifecycleDetails != nil {
 		s.WriteString(schemas.ExadataIormConfig_lifecycleDetails, *v.LifecycleDetails)
 	}
@@ -8872,7 +8972,9 @@ func (v *ExadbVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Hostname != nil {
 		s.WriteString(schemas.ExadbVmCluster_hostname, *v.Hostname)
 	}
-	serializeIamRoleList(s, schemas.ExadbVmCluster_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleList(s, schemas.ExadbVmCluster_iamRoles, v.IamRoles)
+	}
 	if v.IormConfigCache != nil {
 		s.WriteStruct(schemas.ExadbVmCluster_iormConfigCache)
 		v.IormConfigCache.SerializeMembers(s)
@@ -8917,7 +9019,9 @@ func (v *ExadbVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanDnsRecordId != nil {
 		s.WriteString(schemas.ExadbVmCluster_scanDnsRecordId, *v.ScanDnsRecordId)
 	}
-	serializeStringList(s, schemas.ExadbVmCluster_scanIpIds, v.ScanIpIds)
+	if v.ScanIpIds != nil {
+		serializeStringList(s, schemas.ExadbVmCluster_scanIpIds, v.ScanIpIds)
+	}
 	if v.ScanListenerPortTcp != nil {
 		s.WriteInt32(schemas.ExadbVmCluster_scanListenerPortTcp, *v.ScanListenerPortTcp)
 	}
@@ -8935,7 +9039,9 @@ func (v *ExadbVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SnapshotFileSystemStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ExadbVmCluster_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeStringList(s, schemas.ExadbVmCluster_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ExadbVmCluster_status, string(v.Status))
 	}
@@ -8956,7 +9062,9 @@ func (v *ExadbVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TotalFileSystemStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ExadbVmCluster_vipIds, v.VipIds)
+	if v.VipIds != nil {
+		serializeStringList(s, schemas.ExadbVmCluster_vipIds, v.VipIds)
+	}
 	if v.VmFileSystemStorage != nil {
 		s.WriteStruct(schemas.ExadbVmCluster_vmFileSystemStorage)
 		v.VmFileSystemStorage.SerializeMembers(s)
@@ -9355,7 +9463,9 @@ func (v *ExadbVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Hostname != nil {
 		s.WriteString(schemas.ExadbVmClusterSummary_hostname, *v.Hostname)
 	}
-	serializeIamRoleList(s, schemas.ExadbVmClusterSummary_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleList(s, schemas.ExadbVmClusterSummary_iamRoles, v.IamRoles)
+	}
 	if v.IormConfigCache != nil {
 		s.WriteStruct(schemas.ExadbVmClusterSummary_iormConfigCache)
 		v.IormConfigCache.SerializeMembers(s)
@@ -9400,7 +9510,9 @@ func (v *ExadbVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanDnsRecordId != nil {
 		s.WriteString(schemas.ExadbVmClusterSummary_scanDnsRecordId, *v.ScanDnsRecordId)
 	}
-	serializeStringList(s, schemas.ExadbVmClusterSummary_scanIpIds, v.ScanIpIds)
+	if v.ScanIpIds != nil {
+		serializeStringList(s, schemas.ExadbVmClusterSummary_scanIpIds, v.ScanIpIds)
+	}
 	if v.ScanListenerPortTcp != nil {
 		s.WriteInt32(schemas.ExadbVmClusterSummary_scanListenerPortTcp, *v.ScanListenerPortTcp)
 	}
@@ -9418,7 +9530,9 @@ func (v *ExadbVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SnapshotFileSystemStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ExadbVmClusterSummary_sshPublicKeys, v.SshPublicKeys)
+	if v.SshPublicKeys != nil {
+		serializeStringList(s, schemas.ExadbVmClusterSummary_sshPublicKeys, v.SshPublicKeys)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ExadbVmClusterSummary_status, string(v.Status))
 	}
@@ -9439,7 +9553,9 @@ func (v *ExadbVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TotalFileSystemStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ExadbVmClusterSummary_vipIds, v.VipIds)
+	if v.VipIds != nil {
+		serializeStringList(s, schemas.ExadbVmClusterSummary_vipIds, v.VipIds)
+	}
 	if v.VmFileSystemStorage != nil {
 		s.WriteStruct(schemas.ExadbVmClusterSummary_vmFileSystemStorage)
 		v.VmFileSystemStorage.SerializeMembers(s)
@@ -9802,7 +9918,9 @@ func (v *ExascaleDbStorageVault) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalFlashCacheInPercent != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVault_additionalFlashCacheInPercent, *v.AdditionalFlashCacheInPercent)
 	}
-	serializeShapeAttributeList(s, schemas.ExascaleDbStorageVault_attachedShapeAttributes, v.AttachedShapeAttributes)
+	if v.AttachedShapeAttributes != nil {
+		serializeShapeAttributeList(s, schemas.ExascaleDbStorageVault_attachedShapeAttributes, v.AttachedShapeAttributes)
+	}
 	if v.AutoscaleLimitInGBs != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVault_autoscaleLimitInGBs, *v.AutoscaleLimitInGBs)
 	}
@@ -9865,11 +9983,15 @@ func (v *ExascaleDbStorageVault) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VaultType != "" {
 		s.WriteString(schemas.ExascaleDbStorageVault_vaultType, string(v.VaultType))
 	}
-	serializeResourceArnList(s, schemas.ExascaleDbStorageVault_vmClusterArns, v.VmClusterArns)
+	if v.VmClusterArns != nil {
+		serializeResourceArnList(s, schemas.ExascaleDbStorageVault_vmClusterArns, v.VmClusterArns)
+	}
 	if v.VmClusterCount != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVault_vmClusterCount, *v.VmClusterCount)
 	}
-	serializeResourceIdList(s, schemas.ExascaleDbStorageVault_vmClusterIds, v.VmClusterIds)
+	if v.VmClusterIds != nil {
+		serializeResourceIdList(s, schemas.ExascaleDbStorageVault_vmClusterIds, v.VmClusterIds)
+	}
 }
 func (v *ExascaleDbStorageVault) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExascaleDbStorageVault, func(s *smithy.Schema) error {
@@ -10060,7 +10182,9 @@ func (v *ExascaleDbStorageVaultSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.AdditionalFlashCacheInPercent != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_additionalFlashCacheInPercent, *v.AdditionalFlashCacheInPercent)
 	}
-	serializeShapeAttributeList(s, schemas.ExascaleDbStorageVaultSummary_attachedShapeAttributes, v.AttachedShapeAttributes)
+	if v.AttachedShapeAttributes != nil {
+		serializeShapeAttributeList(s, schemas.ExascaleDbStorageVaultSummary_attachedShapeAttributes, v.AttachedShapeAttributes)
+	}
 	if v.AutoscaleLimitInGBs != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_autoscaleLimitInGBs, *v.AutoscaleLimitInGBs)
 	}
@@ -10123,11 +10247,15 @@ func (v *ExascaleDbStorageVaultSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.VaultType != "" {
 		s.WriteString(schemas.ExascaleDbStorageVaultSummary_vaultType, string(v.VaultType))
 	}
-	serializeResourceArnList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterArns, v.VmClusterArns)
+	if v.VmClusterArns != nil {
+		serializeResourceArnList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterArns, v.VmClusterArns)
+	}
 	if v.VmClusterCount != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_vmClusterCount, *v.VmClusterCount)
 	}
-	serializeResourceIdList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterIds, v.VmClusterIds)
+	if v.VmClusterIds != nil {
+		serializeResourceIdList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterIds, v.VmClusterIds)
+	}
 }
 func (v *ExascaleDbStorageVaultSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExascaleDbStorageVaultSummary, func(s *smithy.Schema) error {
@@ -10575,7 +10703,9 @@ func (v *KmsAccess) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.KmsAccess_domainName, *v.DomainName)
 	}
-	serializeStringList(s, schemas.KmsAccess_ipv4Addresses, v.Ipv4Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeStringList(s, schemas.KmsAccess_ipv4Addresses, v.Ipv4Addresses)
+	}
 	if v.KmsPolicyDocument != nil {
 		s.WriteString(schemas.KmsAccess_kmsPolicyDocument, *v.KmsPolicyDocument)
 	}
@@ -10715,15 +10845,21 @@ func (v *MaintenanceWindow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomActionTimeoutInMins != nil {
 		s.WriteInt32(schemas.MaintenanceWindow_customActionTimeoutInMins, *v.CustomActionTimeoutInMins)
 	}
-	serializeDaysOfWeek(s, schemas.MaintenanceWindow_daysOfWeek, v.DaysOfWeek)
-	serializeHoursOfDay(s, schemas.MaintenanceWindow_hoursOfDay, v.HoursOfDay)
+	if v.DaysOfWeek != nil {
+		serializeDaysOfWeek(s, schemas.MaintenanceWindow_daysOfWeek, v.DaysOfWeek)
+	}
+	if v.HoursOfDay != nil {
+		serializeHoursOfDay(s, schemas.MaintenanceWindow_hoursOfDay, v.HoursOfDay)
+	}
 	if v.IsCustomActionTimeoutEnabled != nil {
 		s.WriteBool(schemas.MaintenanceWindow_isCustomActionTimeoutEnabled, *v.IsCustomActionTimeoutEnabled)
 	}
 	if v.LeadTimeInWeeks != nil {
 		s.WriteInt32(schemas.MaintenanceWindow_leadTimeInWeeks, *v.LeadTimeInWeeks)
 	}
-	serializeMonths(s, schemas.MaintenanceWindow_months, v.Months)
+	if v.Months != nil {
+		serializeMonths(s, schemas.MaintenanceWindow_months, v.Months)
+	}
 	if v.PatchingMode != "" {
 		s.WriteString(schemas.MaintenanceWindow_patchingMode, string(v.PatchingMode))
 	}
@@ -10733,7 +10869,9 @@ func (v *MaintenanceWindow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SkipRu != nil {
 		s.WriteBool(schemas.MaintenanceWindow_skipRu, *v.SkipRu)
 	}
-	serializeWeeksOfMonth(s, schemas.MaintenanceWindow_weeksOfMonth, v.WeeksOfMonth)
+	if v.WeeksOfMonth != nil {
+		serializeWeeksOfMonth(s, schemas.MaintenanceWindow_weeksOfMonth, v.WeeksOfMonth)
+	}
 }
 func (v *MaintenanceWindow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MaintenanceWindow, func(s *smithy.Schema) error {
@@ -10796,7 +10934,9 @@ func (v *ManagedS3BackupAccess) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedS3BackupAccess) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ManagedS3BackupAccess_ipv4Addresses, v.Ipv4Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeStringList(s, schemas.ManagedS3BackupAccess_ipv4Addresses, v.Ipv4Addresses)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ManagedS3BackupAccess_status, string(v.Status))
 	}
@@ -10861,7 +11001,9 @@ func (v *ManagedServices) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedServices) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCrossRegionS3RestoreSourcesAccessList(s, schemas.ManagedServices_crossRegionS3RestoreSourcesAccess, v.CrossRegionS3RestoreSourcesAccess)
+	if v.CrossRegionS3RestoreSourcesAccess != nil {
+		serializeCrossRegionS3RestoreSourcesAccessList(s, schemas.ManagedServices_crossRegionS3RestoreSourcesAccess, v.CrossRegionS3RestoreSourcesAccess)
+	}
 	if v.KmsAccess != nil {
 		s.WriteStruct(schemas.ManagedServices_kmsAccess)
 		v.KmsAccess.SerializeMembers(s)
@@ -10872,7 +11014,9 @@ func (v *ManagedServices) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ManagedS3BackupAccess.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.ManagedServices_managedServicesIpv4Cidrs, v.ManagedServicesIpv4Cidrs)
+	if v.ManagedServicesIpv4Cidrs != nil {
+		serializeStringList(s, schemas.ManagedServices_managedServicesIpv4Cidrs, v.ManagedServicesIpv4Cidrs)
+	}
 	if v.ResourceGatewayArn != nil {
 		s.WriteString(schemas.ManagedServices_resourceGatewayArn, *v.ResourceGatewayArn)
 	}
@@ -11321,13 +11465,17 @@ func (v *OdbNetwork) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.OdbNetwork_displayName, *v.DisplayName)
 	}
-	serializeResourceIdList(s, schemas.OdbNetwork_ec2PlacementGroupIds, v.Ec2PlacementGroupIds)
+	if v.Ec2PlacementGroupIds != nil {
+		serializeResourceIdList(s, schemas.OdbNetwork_ec2PlacementGroupIds, v.Ec2PlacementGroupIds)
+	}
 	if v.ManagedServices != nil {
 		s.WriteStruct(schemas.OdbNetwork_managedServices)
 		v.ManagedServices.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOciDnsForwardingConfigList(s, schemas.OdbNetwork_ociDnsForwardingConfigs, v.OciDnsForwardingConfigs)
+	if v.OciDnsForwardingConfigs != nil {
+		serializeOciDnsForwardingConfigList(s, schemas.OdbNetwork_ociDnsForwardingConfigs, v.OciDnsForwardingConfigs)
+	}
 	if v.OciNetworkAnchorId != nil {
 		s.WriteString(schemas.OdbNetwork_ociNetworkAnchorId, *v.OciNetworkAnchorId)
 	}
@@ -11349,7 +11497,9 @@ func (v *OdbNetwork) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OdbNetworkId != nil {
 		s.WriteString(schemas.OdbNetwork_odbNetworkId, *v.OdbNetworkId)
 	}
-	serializeStringList(s, schemas.OdbNetwork_peeredCidrs, v.PeeredCidrs)
+	if v.PeeredCidrs != nil {
+		serializeStringList(s, schemas.OdbNetwork_peeredCidrs, v.PeeredCidrs)
+	}
 	if v.PercentProgress != nil {
 		s.WriteFloat32(schemas.OdbNetwork_percentProgress, *v.PercentProgress)
 	}
@@ -11545,13 +11695,17 @@ func (v *OdbNetworkSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.OdbNetworkSummary_displayName, *v.DisplayName)
 	}
-	serializeResourceIdList(s, schemas.OdbNetworkSummary_ec2PlacementGroupIds, v.Ec2PlacementGroupIds)
+	if v.Ec2PlacementGroupIds != nil {
+		serializeResourceIdList(s, schemas.OdbNetworkSummary_ec2PlacementGroupIds, v.Ec2PlacementGroupIds)
+	}
 	if v.ManagedServices != nil {
 		s.WriteStruct(schemas.OdbNetworkSummary_managedServices)
 		v.ManagedServices.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOciDnsForwardingConfigList(s, schemas.OdbNetworkSummary_ociDnsForwardingConfigs, v.OciDnsForwardingConfigs)
+	if v.OciDnsForwardingConfigs != nil {
+		serializeOciDnsForwardingConfigList(s, schemas.OdbNetworkSummary_ociDnsForwardingConfigs, v.OciDnsForwardingConfigs)
+	}
 	if v.OciNetworkAnchorId != nil {
 		s.WriteString(schemas.OdbNetworkSummary_ociNetworkAnchorId, *v.OciNetworkAnchorId)
 	}
@@ -11573,7 +11727,9 @@ func (v *OdbNetworkSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OdbNetworkId != nil {
 		s.WriteString(schemas.OdbNetworkSummary_odbNetworkId, *v.OdbNetworkId)
 	}
-	serializeStringList(s, schemas.OdbNetworkSummary_peeredCidrs, v.PeeredCidrs)
+	if v.PeeredCidrs != nil {
+		serializeStringList(s, schemas.OdbNetworkSummary_peeredCidrs, v.PeeredCidrs)
+	}
 	if v.PercentProgress != nil {
 		s.WriteFloat32(schemas.OdbNetworkSummary_percentProgress, *v.PercentProgress)
 	}
@@ -11738,7 +11894,9 @@ func (v *OdbPeeringConnection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PeerNetworkArn != nil {
 		s.WriteString(schemas.OdbPeeringConnection_peerNetworkArn, *v.PeerNetworkArn)
 	}
-	serializePeeredCidrList(s, schemas.OdbPeeringConnection_peerNetworkCidrs, v.PeerNetworkCidrs)
+	if v.PeerNetworkCidrs != nil {
+		serializePeeredCidrList(s, schemas.OdbPeeringConnection_peerNetworkCidrs, v.PeerNetworkCidrs)
+	}
 	if v.PercentProgress != nil {
 		s.WriteFloat32(schemas.OdbPeeringConnection_percentProgress, *v.PercentProgress)
 	}
@@ -11868,7 +12026,9 @@ func (v *OdbPeeringConnectionSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PeerNetworkArn != nil {
 		s.WriteString(schemas.OdbPeeringConnectionSummary_peerNetworkArn, *v.PeerNetworkArn)
 	}
-	serializePeeredCidrList(s, schemas.OdbPeeringConnectionSummary_peerNetworkCidrs, v.PeerNetworkCidrs)
+	if v.PeerNetworkCidrs != nil {
+		serializePeeredCidrList(s, schemas.OdbPeeringConnectionSummary_peerNetworkCidrs, v.PeerNetworkCidrs)
+	}
 	if v.PercentProgress != nil {
 		s.WriteFloat32(schemas.OdbPeeringConnectionSummary_percentProgress, *v.PercentProgress)
 	}
@@ -12033,7 +12193,9 @@ func (v *PointInTimeRestoreConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PointInTimeRestoreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegerList(s, schemas.PointInTimeRestoreConfiguration_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.CloneTableSpaceList != nil {
+		serializeIntegerList(s, schemas.PointInTimeRestoreConfiguration_cloneTableSpaceList, v.CloneTableSpaceList)
+	}
 	if v.CloneType != "" {
 		s.WriteString(schemas.PointInTimeRestoreConfiguration_cloneType, string(v.CloneType))
 	}
@@ -12179,7 +12341,9 @@ func (v *RestoreFromBackupConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.AutonomousDatabaseBackupId != nil {
 		s.WriteString(schemas.RestoreFromBackupConfiguration_autonomousDatabaseBackupId, *v.AutonomousDatabaseBackupId)
 	}
-	serializeIntegerList(s, schemas.RestoreFromBackupConfiguration_cloneTableSpaceList, v.CloneTableSpaceList)
+	if v.CloneTableSpaceList != nil {
+		serializeIntegerList(s, schemas.RestoreFromBackupConfiguration_cloneTableSpaceList, v.CloneTableSpaceList)
+	}
 	if v.CloneType != "" {
 		s.WriteString(schemas.RestoreFromBackupConfiguration_cloneType, string(v.CloneType))
 	}
@@ -12232,7 +12396,9 @@ func (v *S3Access) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.S3Access_domainName, *v.DomainName)
 	}
-	serializeStringList(s, schemas.S3Access_ipv4Addresses, v.Ipv4Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeStringList(s, schemas.S3Access_ipv4Addresses, v.Ipv4Addresses)
+	}
 	if v.S3PolicyDocument != nil {
 		s.WriteString(schemas.S3Access_s3PolicyDocument, *v.S3PolicyDocument)
 	}
@@ -12516,7 +12682,9 @@ func (v *StsAccess) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.StsAccess_domainName, *v.DomainName)
 	}
-	serializeStringList(s, schemas.StsAccess_ipv4Addresses, v.Ipv4Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeStringList(s, schemas.StsAccess_ipv4Addresses, v.Ipv4Addresses)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.StsAccess_status, string(v.Status))
 	}
@@ -12608,7 +12776,9 @@ func (v *SystemVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Shape != nil {
 		s.WriteString(schemas.SystemVersionSummary_shape, *v.Shape)
 	}
-	serializeStringList(s, schemas.SystemVersionSummary_systemVersions, v.SystemVersions)
+	if v.SystemVersions != nil {
+		serializeStringList(s, schemas.SystemVersionSummary_systemVersions, v.SystemVersions)
+	}
 }
 func (v *SystemVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SystemVersionSummary, func(s *smithy.Schema) error {
@@ -12785,7 +12955,9 @@ func (v *WalletPasswordSourceSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PasswordSource != "" {
 		s.WriteString(schemas.WalletPasswordSourceSummary_passwordSource, string(v.PasswordSource))
 	}
-	serializeWalletPasswordSourceConfiguration(s, schemas.WalletPasswordSourceSummary_passwordSourceConfiguration, v.PasswordSourceConfiguration)
+	if v.PasswordSourceConfiguration != nil {
+		serializeWalletPasswordSourceConfiguration(s, schemas.WalletPasswordSourceSummary_passwordSourceConfiguration, v.PasswordSourceConfiguration)
+	}
 }
 func (v *WalletPasswordSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WalletPasswordSourceSummary, func(s *smithy.Schema) error {

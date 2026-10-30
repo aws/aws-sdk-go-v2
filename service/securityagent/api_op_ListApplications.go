@@ -80,7 +80,9 @@ func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationSummaryList(s, schemas.ListApplicationsResponse_applicationSummaries, v.ApplicationSummaries)
+	if v.ApplicationSummaries != nil {
+		serializeApplicationSummaryList(s, schemas.ListApplicationsResponse_applicationSummaries, v.ApplicationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationsResponse_nextToken, *v.NextToken)
 	}

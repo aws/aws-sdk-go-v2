@@ -87,7 +87,9 @@ func (v *DescribeRuntimeVersionsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRuntimeVersionsResponse_NextToken, *v.NextToken)
 	}
-	serializeRuntimeVersionList(s, schemas.DescribeRuntimeVersionsResponse_RuntimeVersions, v.RuntimeVersions)
+	if v.RuntimeVersions != nil {
+		serializeRuntimeVersionList(s, schemas.DescribeRuntimeVersionsResponse_RuntimeVersions, v.RuntimeVersions)
+	}
 }
 func (v *DescribeRuntimeVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRuntimeVersionsResponse, func(s *smithy.Schema) error {

@@ -96,8 +96,12 @@ func (v *GetContactListOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetContactListResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeTagList(s, schemas.GetContactListResponse_Tags, v.Tags)
-	serializeTopics(s, schemas.GetContactListResponse_Topics, v.Topics)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetContactListResponse_Tags, v.Tags)
+	}
+	if v.Topics != nil {
+		serializeTopics(s, schemas.GetContactListResponse_Topics, v.Topics)
+	}
 }
 func (v *GetContactListOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContactListResponse, func(s *smithy.Schema) error {

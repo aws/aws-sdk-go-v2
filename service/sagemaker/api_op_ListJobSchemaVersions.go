@@ -95,7 +95,9 @@ func (v *ListJobSchemaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListJobSchemaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobConfigSchemas(s, schemas.ListJobSchemaVersionsResponse_JobConfigSchemas, v.JobConfigSchemas)
+	if v.JobConfigSchemas != nil {
+		serializeJobConfigSchemas(s, schemas.ListJobSchemaVersionsResponse_JobConfigSchemas, v.JobConfigSchemas)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListJobSchemaVersionsResponse_NextToken, *v.NextToken)
 	}

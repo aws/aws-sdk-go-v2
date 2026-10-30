@@ -141,7 +141,9 @@ func (v *DescribeInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceList(s, schemas.DescribeInstancesOutput_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.DescribeInstancesOutput_Instances, v.Instances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInstancesOutput_NextToken, *v.NextToken)
 	}

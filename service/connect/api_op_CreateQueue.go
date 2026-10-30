@@ -104,7 +104,9 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateQueueRequest_Description, *v.Description)
 	}
-	serializeEmailAddressConfigList(s, schemas.CreateQueueRequest_EmailAddressesConfig, v.EmailAddressesConfig)
+	if v.EmailAddressesConfig != nil {
+		serializeEmailAddressConfigList(s, schemas.CreateQueueRequest_EmailAddressesConfig, v.EmailAddressesConfig)
+	}
 	if v.HoursOfOperationId != nil {
 		s.WriteString(schemas.CreateQueueRequest_HoursOfOperationId, *v.HoursOfOperationId)
 	}
@@ -127,8 +129,12 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutboundEmailConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQuickConnectsList(s, schemas.CreateQueueRequest_QuickConnectIds, v.QuickConnectIds)
-	serializeTagMap(s, schemas.CreateQueueRequest_Tags, v.Tags)
+	if v.QuickConnectIds != nil {
+		serializeQuickConnectsList(s, schemas.CreateQueueRequest_QuickConnectIds, v.QuickConnectIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateQueueRequest_Tags, v.Tags)
+	}
 }
 
 type CreateQueueOutput struct {

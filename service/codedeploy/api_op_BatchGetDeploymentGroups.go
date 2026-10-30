@@ -53,7 +53,9 @@ func (v *BatchGetDeploymentGroupsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.BatchGetDeploymentGroupsInput_applicationName, *v.ApplicationName)
 	}
-	serializeDeploymentGroupsList(s, schemas.BatchGetDeploymentGroupsInput_deploymentGroupNames, v.DeploymentGroupNames)
+	if v.DeploymentGroupNames != nil {
+		serializeDeploymentGroupsList(s, schemas.BatchGetDeploymentGroupsInput_deploymentGroupNames, v.DeploymentGroupNames)
+	}
 }
 
 // Represents the output of a BatchGetDeploymentGroups operation.
@@ -78,7 +80,9 @@ func (v *BatchGetDeploymentGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDeploymentGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentGroupInfoList(s, schemas.BatchGetDeploymentGroupsOutput_deploymentGroupsInfo, v.DeploymentGroupsInfo)
+	if v.DeploymentGroupsInfo != nil {
+		serializeDeploymentGroupInfoList(s, schemas.BatchGetDeploymentGroupsOutput_deploymentGroupsInfo, v.DeploymentGroupsInfo)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.BatchGetDeploymentGroupsOutput_errorMessage, *v.ErrorMessage)
 	}

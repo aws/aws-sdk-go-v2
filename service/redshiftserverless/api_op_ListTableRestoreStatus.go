@@ -96,7 +96,9 @@ func (v *ListTableRestoreStatusOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTableRestoreStatusResponse_nextToken, *v.NextToken)
 	}
-	serializeTableRestoreStatusList(s, schemas.ListTableRestoreStatusResponse_tableRestoreStatuses, v.TableRestoreStatuses)
+	if v.TableRestoreStatuses != nil {
+		serializeTableRestoreStatusList(s, schemas.ListTableRestoreStatusResponse_tableRestoreStatuses, v.TableRestoreStatuses)
+	}
 }
 func (v *ListTableRestoreStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTableRestoreStatusResponse, func(s *smithy.Schema) error {

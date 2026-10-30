@@ -144,7 +144,9 @@ func (v *GetNotebookExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotebookId != nil {
 		s.WriteString(schemas.GetNotebookExportOutput_notebookId, *v.NotebookId)
 	}
-	serializeOutputLocation(s, schemas.GetNotebookExportOutput_outputLocation, v.OutputLocation)
+	if v.OutputLocation != nil {
+		serializeOutputLocation(s, schemas.GetNotebookExportOutput_outputLocation, v.OutputLocation)
+	}
 	if v.OwningProjectId != nil {
 		s.WriteString(schemas.GetNotebookExportOutput_owningProjectId, *v.OwningProjectId)
 	}

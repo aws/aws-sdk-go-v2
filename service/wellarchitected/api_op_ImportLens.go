@@ -110,7 +110,9 @@ func (v *ImportLensInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LensAlias != nil {
 		s.WriteString(schemas.ImportLensInput_LensAlias, *v.LensAlias)
 	}
-	serializeTagMap(s, schemas.ImportLensInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportLensInput_Tags, v.Tags)
+	}
 }
 
 type ImportLensOutput struct {

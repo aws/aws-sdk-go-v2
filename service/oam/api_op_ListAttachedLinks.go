@@ -94,7 +94,9 @@ func (v *ListAttachedLinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAttachedLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListAttachedLinksItems(s, schemas.ListAttachedLinksOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeListAttachedLinksItems(s, schemas.ListAttachedLinksOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachedLinksOutput_NextToken, *v.NextToken)
 	}

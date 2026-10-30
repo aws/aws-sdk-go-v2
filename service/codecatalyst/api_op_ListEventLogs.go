@@ -129,7 +129,9 @@ func (v *ListEventLogsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEventLogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventLogEntries(s, schemas.ListEventLogsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeEventLogEntries(s, schemas.ListEventLogsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEventLogsResponse_nextToken, *v.NextToken)
 	}

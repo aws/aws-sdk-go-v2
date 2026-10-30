@@ -111,7 +111,9 @@ func (v *ListRoutingProfileQueuesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoutingProfileQueuesResponse_NextToken, *v.NextToken)
 	}
-	serializeRoutingProfileQueueConfigSummaryList(s, schemas.ListRoutingProfileQueuesResponse_RoutingProfileQueueConfigSummaryList, v.RoutingProfileQueueConfigSummaryList)
+	if v.RoutingProfileQueueConfigSummaryList != nil {
+		serializeRoutingProfileQueueConfigSummaryList(s, schemas.ListRoutingProfileQueuesResponse_RoutingProfileQueueConfigSummaryList, v.RoutingProfileQueueConfigSummaryList)
+	}
 }
 func (v *ListRoutingProfileQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoutingProfileQueuesResponse, func(s *smithy.Schema) error {

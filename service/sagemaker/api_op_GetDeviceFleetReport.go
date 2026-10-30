@@ -92,7 +92,9 @@ func (v *GetDeviceFleetReportOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDeviceFleetReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentVersions(s, schemas.GetDeviceFleetReportResponse_AgentVersions, v.AgentVersions)
+	if v.AgentVersions != nil {
+		serializeAgentVersions(s, schemas.GetDeviceFleetReportResponse_AgentVersions, v.AgentVersions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetDeviceFleetReportResponse_Description, *v.Description)
 	}
@@ -107,7 +109,9 @@ func (v *GetDeviceFleetReportOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.DeviceStats.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEdgeModelStats(s, schemas.GetDeviceFleetReportResponse_ModelStats, v.ModelStats)
+	if v.ModelStats != nil {
+		serializeEdgeModelStats(s, schemas.GetDeviceFleetReportResponse_ModelStats, v.ModelStats)
+	}
 	if v.OutputConfig != nil {
 		s.WriteStruct(schemas.GetDeviceFleetReportResponse_OutputConfig)
 		v.OutputConfig.SerializeMembers(s)

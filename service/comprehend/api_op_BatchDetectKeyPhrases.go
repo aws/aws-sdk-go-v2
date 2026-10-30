@@ -54,7 +54,9 @@ func (v *BatchDetectKeyPhrasesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.BatchDetectKeyPhrasesRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeCustomerInputStringList(s, schemas.BatchDetectKeyPhrasesRequest_TextList, v.TextList)
+	if v.TextList != nil {
+		serializeCustomerInputStringList(s, schemas.BatchDetectKeyPhrasesRequest_TextList, v.TextList)
+	}
 }
 
 type BatchDetectKeyPhrasesOutput struct {
@@ -88,8 +90,12 @@ func (v *BatchDetectKeyPhrasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDetectKeyPhrasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchItemErrorList(s, schemas.BatchDetectKeyPhrasesResponse_ErrorList, v.ErrorList)
-	serializeListOfDetectKeyPhrasesResult(s, schemas.BatchDetectKeyPhrasesResponse_ResultList, v.ResultList)
+	if v.ErrorList != nil {
+		serializeBatchItemErrorList(s, schemas.BatchDetectKeyPhrasesResponse_ErrorList, v.ErrorList)
+	}
+	if v.ResultList != nil {
+		serializeListOfDetectKeyPhrasesResult(s, schemas.BatchDetectKeyPhrasesResponse_ResultList, v.ResultList)
+	}
 }
 func (v *BatchDetectKeyPhrasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDetectKeyPhrasesResponse, func(s *smithy.Schema) error {

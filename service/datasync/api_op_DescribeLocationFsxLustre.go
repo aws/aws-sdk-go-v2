@@ -87,7 +87,9 @@ func (v *DescribeLocationFsxLustreOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.LocationUri != nil {
 		s.WriteString(schemas.DescribeLocationFsxLustreResponse_LocationUri, *v.LocationUri)
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxLustreResponse_SecurityGroupArns, v.SecurityGroupArns)
+	}
 }
 func (v *DescribeLocationFsxLustreOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeLocationFsxLustreResponse, func(s *smithy.Schema) error {

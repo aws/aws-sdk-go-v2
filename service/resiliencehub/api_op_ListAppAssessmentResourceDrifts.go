@@ -93,7 +93,9 @@ func (v *ListAppAssessmentResourceDriftsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppAssessmentResourceDriftsResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceDriftList(s, schemas.ListAppAssessmentResourceDriftsResponse_resourceDrifts, v.ResourceDrifts)
+	if v.ResourceDrifts != nil {
+		serializeResourceDriftList(s, schemas.ListAppAssessmentResourceDriftsResponse_resourceDrifts, v.ResourceDrifts)
+	}
 }
 func (v *ListAppAssessmentResourceDriftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAppAssessmentResourceDriftsResponse, func(s *smithy.Schema) error {

@@ -242,7 +242,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeletionProtection != nil {
 		s.WriteBool(schemas.CreateClusterRequest_deletionProtection, *v.DeletionProtection)
 	}
-	serializeEncryptionConfigList(s, schemas.CreateClusterRequest_encryptionConfig, v.EncryptionConfig)
+	if v.EncryptionConfig != nil {
+		serializeEncryptionConfigList(s, schemas.CreateClusterRequest_encryptionConfig, v.EncryptionConfig)
+	}
 	if v.KubeApiServerConfig != nil {
 		s.WriteStruct(schemas.CreateClusterRequest_kubeApiServerConfig)
 		v.KubeApiServerConfig.SerializeMembers(s)
@@ -294,7 +296,9 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StorageConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateClusterRequest_tags, v.Tags)
+	}
 	if v.UpgradePolicy != nil {
 		s.WriteStruct(schemas.CreateClusterRequest_upgradePolicy)
 		v.UpgradePolicy.SerializeMembers(s)

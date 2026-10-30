@@ -70,7 +70,9 @@ func (v *UpdateConfiguredTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedColumnList(s, schemas.UpdateConfiguredTableInput_allowedColumns, v.AllowedColumns)
+	if v.AllowedColumns != nil {
+		serializeAllowedColumnList(s, schemas.UpdateConfiguredTableInput_allowedColumns, v.AllowedColumns)
+	}
 	if v.AnalysisMethod != "" {
 		s.WriteString(schemas.UpdateConfiguredTableInput_analysisMethod, string(v.AnalysisMethod))
 	}
@@ -83,8 +85,12 @@ func (v *UpdateConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateConfiguredTableInput_name, *v.Name)
 	}
-	serializeSelectedAnalysisMethods(s, schemas.UpdateConfiguredTableInput_selectedAnalysisMethods, v.SelectedAnalysisMethods)
-	serializeTableReference(s, schemas.UpdateConfiguredTableInput_tableReference, v.TableReference)
+	if v.SelectedAnalysisMethods != nil {
+		serializeSelectedAnalysisMethods(s, schemas.UpdateConfiguredTableInput_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	}
+	if v.TableReference != nil {
+		serializeTableReference(s, schemas.UpdateConfiguredTableInput_tableReference, v.TableReference)
+	}
 }
 func (v *UpdateConfiguredTableInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateConfiguredTableInput, func(s *smithy.Schema) error {

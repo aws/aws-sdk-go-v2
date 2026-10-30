@@ -209,7 +209,9 @@ func (v *CreateCanaryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddReplicaLocations(s, schemas.CreateCanaryRequest_AddReplicaLocations, v.AddReplicaLocations)
+	if v.AddReplicaLocations != nil {
+		serializeAddReplicaLocations(s, schemas.CreateCanaryRequest_AddReplicaLocations, v.AddReplicaLocations)
+	}
 	if v.ArtifactConfig != nil {
 		s.WriteStruct(schemas.CreateCanaryRequest_ArtifactConfig)
 		v.ArtifactConfig.SerializeMembers(s)
@@ -218,7 +220,9 @@ func (v *CreateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ArtifactS3Location != nil {
 		s.WriteString(schemas.CreateCanaryRequest_ArtifactS3Location, *v.ArtifactS3Location)
 	}
-	serializeBrowserConfigs(s, schemas.CreateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
+	if v.BrowserConfigs != nil {
+		serializeBrowserConfigs(s, schemas.CreateCanaryRequest_BrowserConfigs, v.BrowserConfigs)
+	}
 	if v.Code != nil {
 		s.WriteStruct(schemas.CreateCanaryRequest_Code)
 		v.Code.SerializeMembers(s)
@@ -239,7 +243,9 @@ func (v *CreateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProvisionedResourceCleanup != "" {
 		s.WriteString(schemas.CreateCanaryRequest_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
 	}
-	serializeResourceList(s, schemas.CreateCanaryRequest_ResourcesToReplicateTags, v.ResourcesToReplicateTags)
+	if v.ResourcesToReplicateTags != nil {
+		serializeResourceList(s, schemas.CreateCanaryRequest_ResourcesToReplicateTags, v.ResourcesToReplicateTags)
+	}
 	if v.RunConfig != nil {
 		s.WriteStruct(schemas.CreateCanaryRequest_RunConfig)
 		v.RunConfig.SerializeMembers(s)
@@ -256,7 +262,9 @@ func (v *CreateCanaryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SuccessRetentionPeriodInDays != nil {
 		s.WriteInt32(schemas.CreateCanaryRequest_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
 	}
-	serializeTagMap(s, schemas.CreateCanaryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCanaryRequest_Tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateCanaryRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

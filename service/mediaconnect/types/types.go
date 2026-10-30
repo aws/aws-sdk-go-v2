@@ -537,7 +537,9 @@ func (v *AddMediaStreamRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediaStreamName != nil {
 		s.WriteString(schemas.AddMediaStreamRequest_MediaStreamName, *v.MediaStreamName)
 	}
-	serialize__mapOfString(s, schemas.AddMediaStreamRequest_MediaStreamTags, v.MediaStreamTags)
+	if v.MediaStreamTags != nil {
+		serialize__mapOfString(s, schemas.AddMediaStreamRequest_MediaStreamTags, v.MediaStreamTags)
+	}
 	if v.MediaStreamType != "" {
 		s.WriteString(schemas.AddMediaStreamRequest_MediaStreamType, string(v.MediaStreamType))
 	}
@@ -694,7 +696,9 @@ func (v *AddOutputRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.AddOutputRequest_CidrAllowList, v.CidrAllowList)
+	if v.CidrAllowList != nil {
+		serialize__listOfString(s, schemas.AddOutputRequest_CidrAllowList, v.CidrAllowList)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AddOutputRequest_Description, *v.Description)
 	}
@@ -709,7 +713,9 @@ func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxLatency != nil {
 		s.WriteInt32(schemas.AddOutputRequest_MaxLatency, *v.MaxLatency)
 	}
-	serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.AddOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MediaStreamOutputConfigurations != nil {
+		serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.AddOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.AddOutputRequest_MinLatency, *v.MinLatency)
 	}
@@ -731,7 +737,9 @@ func (v *AddOutputRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputStatus != "" {
 		s.WriteString(schemas.AddOutputRequest_OutputStatus, string(v.OutputStatus))
 	}
-	serialize__mapOfString(s, schemas.AddOutputRequest_OutputTags, v.OutputTags)
+	if v.OutputTags != nil {
+		serialize__mapOfString(s, schemas.AddOutputRequest_OutputTags, v.OutputTags)
+	}
 	if v.Port != nil {
 		s.WriteInt32(schemas.AddOutputRequest_Port, *v.Port)
 	}
@@ -1373,7 +1381,9 @@ func (v *Bridge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BridgeArn != nil {
 		s.WriteString(schemas.Bridge_BridgeArn, *v.BridgeArn)
 	}
-	serialize__listOfMessageDetail(s, schemas.Bridge_BridgeMessages, v.BridgeMessages)
+	if v.BridgeMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.Bridge_BridgeMessages, v.BridgeMessages)
+	}
 	if v.BridgeState != "" {
 		s.WriteString(schemas.Bridge_BridgeState, string(v.BridgeState))
 	}
@@ -1390,7 +1400,9 @@ func (v *Bridge) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Bridge_Name, *v.Name)
 	}
-	serialize__listOfBridgeOutput(s, schemas.Bridge_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfBridgeOutput(s, schemas.Bridge_Outputs, v.Outputs)
+	}
 	if v.PlacementArn != nil {
 		s.WriteString(schemas.Bridge_PlacementArn, *v.PlacementArn)
 	}
@@ -1399,7 +1411,9 @@ func (v *Bridge) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceFailoverConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfBridgeSource(s, schemas.Bridge_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfBridgeSource(s, schemas.Bridge_Sources, v.Sources)
+	}
 }
 func (v *Bridge) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Bridge, func(s *smithy.Schema) error {
@@ -2303,25 +2317,33 @@ func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DestinationEndpoint_Arn, *v.Arn)
 	}
-	serializeDestinationEndpointAssociatedResourceDetails(s, schemas.DestinationEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	if v.AssociatedResourceDetails != nil {
+		serializeDestinationEndpointAssociatedResourceDetails(s, schemas.DestinationEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.DestinationEndpoint_AvailabilityZone, *v.AvailabilityZone)
 	}
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.DestinationEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
 	}
-	serializeDestinationEndpointConfiguration(s, schemas.DestinationEndpoint_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeDestinationEndpointConfiguration(s, schemas.DestinationEndpoint_Configuration, v.Configuration)
+	}
 	if v.ConnectedSource != nil {
 		s.WriteString(schemas.DestinationEndpoint_ConnectedSource, *v.ConnectedSource)
 	}
-	serializeDestinationEndpointConnectionDetails(s, schemas.DestinationEndpoint_ConnectionDetails, v.ConnectionDetails)
+	if v.ConnectionDetails != nil {
+		serializeDestinationEndpointConnectionDetails(s, schemas.DestinationEndpoint_ConnectionDetails, v.ConnectionDetails)
+	}
 	if v.ConnectionState != "" {
 		s.WriteString(schemas.DestinationEndpoint_ConnectionState, string(v.ConnectionState))
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.DestinationEndpoint_CreatedAt, *v.CreatedAt)
 	}
-	serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpoint_DecryptionConfiguration, v.DecryptionConfiguration)
+	if v.DecryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpoint_DecryptionConfiguration, v.DecryptionConfiguration)
+	}
 	if v.DecryptionType != "" {
 		s.WriteString(schemas.DestinationEndpoint_DecryptionType, string(v.DecryptionType))
 	}
@@ -2337,7 +2359,9 @@ func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LifecycleManagement != "" {
 		s.WriteString(schemas.DestinationEndpoint_LifecycleManagement, string(v.LifecycleManagement))
 	}
-	serializeDestinationEndpointMessageList(s, schemas.DestinationEndpoint_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeDestinationEndpointMessageList(s, schemas.DestinationEndpoint_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DestinationEndpoint_Name, *v.Name)
 	}
@@ -2347,11 +2371,15 @@ func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationState != "" {
 		s.WriteString(schemas.DestinationEndpoint_RegistrationState, string(v.RegistrationState))
 	}
-	serializeResourceShareDetails(s, schemas.DestinationEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	if v.ResourceShareDetails != nil {
+		serializeResourceShareDetails(s, schemas.DestinationEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	}
 	if v.ResourceShareOwnership != "" {
 		s.WriteString(schemas.DestinationEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
 	}
-	serialize__mapOfString(s, schemas.DestinationEndpoint_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.DestinationEndpoint_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.DestinationEndpoint_UpdatedAt, *v.UpdatedAt)
 	}
@@ -2745,7 +2773,9 @@ func (v *DestinationEndpointRouterInputConfiguration) SerializeMembers(s smithy.
 	if v.EndpointLifecycleManagement != "" {
 		s.WriteString(schemas.DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement, string(v.EndpointLifecycleManagement))
 	}
-	serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption, v.SourceTransitDecryption)
+	if v.SourceTransitDecryption != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption, v.SourceTransitDecryption)
+	}
 	if v.SourceTransitDecryptionType != "" {
 		s.WriteString(schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType, string(v.SourceTransitDecryptionType))
 	}
@@ -3285,7 +3315,9 @@ func (v *Entitlement) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Entitlement_Name, *v.Name)
 	}
-	serialize__listOfString(s, schemas.Entitlement_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serialize__listOfString(s, schemas.Entitlement_Subscribers, v.Subscribers)
+	}
 }
 func (v *Entitlement) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Entitlement, func(s *smithy.Schema) error {
@@ -3477,7 +3509,9 @@ func (v *FailoverRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.PrimarySourceIndex != nil {
 		s.WriteInt32(schemas.FailoverRouterInputConfiguration_PrimarySourceIndex, *v.PrimarySourceIndex)
 	}
-	serializeFailoverRouterInputProtocolConfigurationList(s, schemas.FailoverRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	if v.ProtocolConfigurations != nil {
+		serializeFailoverRouterInputProtocolConfigurationList(s, schemas.FailoverRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	}
 	if v.SourcePriorityMode != "" {
 		s.WriteString(schemas.FailoverRouterInputConfiguration_SourcePriorityMode, string(v.SourcePriorityMode))
 	}
@@ -3787,7 +3821,9 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncodingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfEntitlement(s, schemas.Flow_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serialize__listOfEntitlement(s, schemas.Flow_Entitlements, v.Entitlements)
+	}
 	if v.FlowArn != nil {
 		s.WriteString(schemas.Flow_FlowArn, *v.FlowArn)
 	}
@@ -3799,7 +3835,9 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Maintenance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMediaStream(s, schemas.Flow_MediaStreams, v.MediaStreams)
+	if v.MediaStreams != nil {
+		serialize__listOfMediaStream(s, schemas.Flow_MediaStreams, v.MediaStreams)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Flow_Name, *v.Name)
 	}
@@ -3808,7 +3846,9 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NdiConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfOutput(s, schemas.Flow_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfOutput(s, schemas.Flow_Outputs, v.Outputs)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.Flow_Source)
 		v.Source.SerializeMembers(s)
@@ -3824,11 +3864,15 @@ func (v *Flow) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceMonitoringConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfSource(s, schemas.Flow_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfSource(s, schemas.Flow_Sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Flow_Status, string(v.Status))
 	}
-	serialize__listOfVpcInterface(s, schemas.Flow_VpcInterfaces, v.VpcInterfaces)
+	if v.VpcInterfaces != nil {
+		serialize__listOfVpcInterface(s, schemas.Flow_VpcInterfaces, v.VpcInterfaces)
+	}
 }
 func (v *Flow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Flow, func(s *smithy.Schema) error {
@@ -3917,7 +3961,9 @@ func (v *FlowTransitEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlowTransitEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowTransitEncryptionKeyConfiguration(s, schemas.FlowTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeFlowTransitEncryptionKeyConfiguration(s, schemas.FlowTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyType != "" {
 		s.WriteString(schemas.FlowTransitEncryption_EncryptionKeyType, string(v.EncryptionKeyType))
 	}
@@ -4373,18 +4419,24 @@ func (v *Gateway) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Gateway) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.Gateway_EgressCidrBlocks, v.EgressCidrBlocks)
+	if v.EgressCidrBlocks != nil {
+		serialize__listOfString(s, schemas.Gateway_EgressCidrBlocks, v.EgressCidrBlocks)
+	}
 	if v.GatewayArn != nil {
 		s.WriteString(schemas.Gateway_GatewayArn, *v.GatewayArn)
 	}
-	serialize__listOfMessageDetail(s, schemas.Gateway_GatewayMessages, v.GatewayMessages)
+	if v.GatewayMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.Gateway_GatewayMessages, v.GatewayMessages)
+	}
 	if v.GatewayState != "" {
 		s.WriteString(schemas.Gateway_GatewayState, string(v.GatewayState))
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.Gateway_Name, *v.Name)
 	}
-	serialize__listOfGatewayNetwork(s, schemas.Gateway_Networks, v.Networks)
+	if v.Networks != nil {
+		serialize__listOfGatewayNetwork(s, schemas.Gateway_Networks, v.Networks)
+	}
 }
 func (v *Gateway) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Gateway, func(s *smithy.Schema) error {
@@ -4526,7 +4578,9 @@ func (v *GatewayInstance) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GatewayInstance_InstanceId, *v.InstanceId)
 	}
-	serialize__listOfMessageDetail(s, schemas.GatewayInstance_InstanceMessages, v.InstanceMessages)
+	if v.InstanceMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.GatewayInstance_InstanceMessages, v.InstanceMessages)
+	}
 	if v.InstanceState != "" {
 		s.WriteString(schemas.GatewayInstance_InstanceState, string(v.InstanceState))
 	}
@@ -4680,11 +4734,15 @@ func (v *GrantEntitlementRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntitlementStatus != "" {
 		s.WriteString(schemas.GrantEntitlementRequest_EntitlementStatus, string(v.EntitlementStatus))
 	}
-	serialize__mapOfString(s, schemas.GrantEntitlementRequest_EntitlementTags, v.EntitlementTags)
+	if v.EntitlementTags != nil {
+		serialize__mapOfString(s, schemas.GrantEntitlementRequest_EntitlementTags, v.EntitlementTags)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GrantEntitlementRequest_Name, *v.Name)
 	}
-	serialize__listOfString(s, schemas.GrantEntitlementRequest_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serialize__listOfString(s, schemas.GrantEntitlementRequest_Subscribers, v.Subscribers)
+	}
 }
 func (v *GrantEntitlementRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GrantEntitlementRequest, func(s *smithy.Schema) error {
@@ -5695,7 +5753,9 @@ func (v *ListedRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputType != "" {
 		s.WriteString(schemas.ListedRouterInput_InputType, string(v.InputType))
 	}
-	serializeMaintenanceSchedule(s, schemas.ListedRouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.ListedRouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.ListedRouterInput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -6046,7 +6106,9 @@ func (v *ListedRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ListedRouterOutput_Id, *v.Id)
 	}
-	serializeMaintenanceSchedule(s, schemas.ListedRouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.ListedRouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.ListedRouterOutput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -6947,7 +7009,9 @@ func (v *MediaLiveTransitEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaLiveTransitEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaLiveTransitEncryptionKeyConfiguration(s, schemas.MediaLiveTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeMediaLiveTransitEncryptionKeyConfiguration(s, schemas.MediaLiveTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyType != "" {
 		s.WriteString(schemas.MediaLiveTransitEncryption_EncryptionKeyType, string(v.EncryptionKeyType))
 	}
@@ -7252,7 +7316,9 @@ func (v *MediaStreamOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MediaStreamOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDestinationConfiguration(s, schemas.MediaStreamOutputConfiguration_DestinationConfigurations, v.DestinationConfigurations)
+	if v.DestinationConfigurations != nil {
+		serialize__listOfDestinationConfiguration(s, schemas.MediaStreamOutputConfiguration_DestinationConfigurations, v.DestinationConfigurations)
+	}
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamOutputConfiguration_EncodingName, string(v.EncodingName))
 	}
@@ -7323,7 +7389,9 @@ func (v *MediaStreamOutputConfigurationRequest) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *MediaStreamOutputConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDestinationConfigurationRequest(s, schemas.MediaStreamOutputConfigurationRequest_DestinationConfigurations, v.DestinationConfigurations)
+	if v.DestinationConfigurations != nil {
+		serialize__listOfDestinationConfigurationRequest(s, schemas.MediaStreamOutputConfigurationRequest_DestinationConfigurations, v.DestinationConfigurations)
+	}
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamOutputConfigurationRequest_EncodingName, string(v.EncodingName))
 	}
@@ -7392,7 +7460,9 @@ func (v *MediaStreamSourceConfiguration) SerializeMembers(s smithy.ShapeSerializ
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamSourceConfiguration_EncodingName, string(v.EncodingName))
 	}
-	serialize__listOfInputConfiguration(s, schemas.MediaStreamSourceConfiguration_InputConfigurations, v.InputConfigurations)
+	if v.InputConfigurations != nil {
+		serialize__listOfInputConfiguration(s, schemas.MediaStreamSourceConfiguration_InputConfigurations, v.InputConfigurations)
+	}
 	if v.MediaStreamName != nil {
 		s.WriteString(schemas.MediaStreamSourceConfiguration_MediaStreamName, *v.MediaStreamName)
 	}
@@ -7450,7 +7520,9 @@ func (v *MediaStreamSourceConfigurationRequest) SerializeMembers(s smithy.ShapeS
 	if v.EncodingName != "" {
 		s.WriteString(schemas.MediaStreamSourceConfigurationRequest_EncodingName, string(v.EncodingName))
 	}
-	serialize__listOfInputConfigurationRequest(s, schemas.MediaStreamSourceConfigurationRequest_InputConfigurations, v.InputConfigurations)
+	if v.InputConfigurations != nil {
+		serialize__listOfInputConfigurationRequest(s, schemas.MediaStreamSourceConfigurationRequest_InputConfigurations, v.InputConfigurations)
+	}
 	if v.MediaStreamName != nil {
 		s.WriteString(schemas.MediaStreamSourceConfigurationRequest_MediaStreamName, *v.MediaStreamName)
 	}
@@ -7510,7 +7582,9 @@ func (v *MergeRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.NetworkInterfaceArn != nil {
 		s.WriteString(schemas.MergeRouterInputConfiguration_NetworkInterfaceArn, *v.NetworkInterfaceArn)
 	}
-	serializeMergeRouterInputProtocolConfigurationList(s, schemas.MergeRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	if v.ProtocolConfigurations != nil {
+		serializeMergeRouterInputProtocolConfigurationList(s, schemas.MergeRouterInputConfiguration_ProtocolConfigurations, v.ProtocolConfigurations)
+	}
 }
 func (v *MergeRouterInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MergeRouterInputConfiguration, func(s *smithy.Schema) error {
@@ -7737,7 +7811,9 @@ func (v *Messages) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Messages) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.Messages_Errors, v.Errors)
+	if v.Errors != nil {
+		serialize__listOfString(s, schemas.Messages_Errors, v.Errors)
+	}
 }
 func (v *Messages) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Messages, func(s *smithy.Schema) error {
@@ -7774,14 +7850,18 @@ func (v *MonitoringConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonitoringConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAudioMonitoringSetting(s, schemas.MonitoringConfig_AudioMonitoringSettings, v.AudioMonitoringSettings)
+	if v.AudioMonitoringSettings != nil {
+		serialize__listOfAudioMonitoringSetting(s, schemas.MonitoringConfig_AudioMonitoringSettings, v.AudioMonitoringSettings)
+	}
 	if v.ContentQualityAnalysisState != "" {
 		s.WriteString(schemas.MonitoringConfig_ContentQualityAnalysisState, string(v.ContentQualityAnalysisState))
 	}
 	if v.ThumbnailState != "" {
 		s.WriteString(schemas.MonitoringConfig_ThumbnailState, string(v.ThumbnailState))
 	}
-	serialize__listOfVideoMonitoringSetting(s, schemas.MonitoringConfig_VideoMonitoringSettings, v.VideoMonitoringSettings)
+	if v.VideoMonitoringSettings != nil {
+		serialize__listOfVideoMonitoringSetting(s, schemas.MonitoringConfig_VideoMonitoringSettings, v.VideoMonitoringSettings)
+	}
 }
 func (v *MonitoringConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MonitoringConfig, func(s *smithy.Schema) error {
@@ -7873,7 +7953,9 @@ func (v *NdiConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MachineName != nil {
 		s.WriteString(schemas.NdiConfig_MachineName, *v.MachineName)
 	}
-	serialize__listOfNdiDiscoveryServerConfig(s, schemas.NdiConfig_NdiDiscoveryServers, v.NdiDiscoveryServers)
+	if v.NdiDiscoveryServers != nil {
+		serialize__listOfNdiDiscoveryServerConfig(s, schemas.NdiConfig_NdiDiscoveryServers, v.NdiDiscoveryServers)
+	}
 	if v.NdiState != "" {
 		s.WriteString(schemas.NdiConfig_NdiState, string(v.NdiState))
 	}
@@ -7976,7 +8058,9 @@ func (v *NdiMediaInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NdiMediaInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfNdiMediaStreamInfo(s, schemas.NdiMediaInfo_Streams, v.Streams)
+	if v.Streams != nil {
+		serialize__listOfNdiMediaStreamInfo(s, schemas.NdiMediaInfo_Streams, v.Streams)
+	}
 }
 func (v *NdiMediaInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NdiMediaInfo, func(s *smithy.Schema) error {
@@ -8186,13 +8270,17 @@ func (v *NdiSourceMetadataInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ActiveSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfNdiSourceInfo(s, schemas.NdiSourceMetadataInfo_DiscoveredSources, v.DiscoveredSources)
+	if v.DiscoveredSources != nil {
+		serialize__listOfNdiSourceInfo(s, schemas.NdiSourceMetadataInfo_DiscoveredSources, v.DiscoveredSources)
+	}
 	if v.MediaInfo != nil {
 		s.WriteStruct(schemas.NdiSourceMetadataInfo_MediaInfo)
 		v.MediaInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMessageDetail(s, schemas.NdiSourceMetadataInfo_Messages, v.Messages)
+	if v.Messages != nil {
+		serialize__listOfMessageDetail(s, schemas.NdiSourceMetadataInfo_Messages, v.Messages)
+	}
 }
 func (v *NdiSourceMetadataInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NdiSourceMetadataInfo, func(s *smithy.Schema) error {
@@ -8487,7 +8575,9 @@ func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BridgeArn != nil {
 		s.WriteString(schemas.Output_BridgeArn, *v.BridgeArn)
 	}
-	serialize__listOfInteger(s, schemas.Output_BridgePorts, v.BridgePorts)
+	if v.BridgePorts != nil {
+		serialize__listOfInteger(s, schemas.Output_BridgePorts, v.BridgePorts)
+	}
 	if v.ConnectedRouterInputArn != nil {
 		s.WriteString(schemas.Output_ConnectedRouterInputArn, *v.ConnectedRouterInputArn)
 	}
@@ -8514,7 +8604,9 @@ func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MediaLiveInputArn != nil {
 		s.WriteString(schemas.Output_MediaLiveInputArn, *v.MediaLiveInputArn)
 	}
-	serialize__listOfMediaStreamOutputConfiguration(s, schemas.Output_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MediaStreamOutputConfigurations != nil {
+		serialize__listOfMediaStreamOutputConfiguration(s, schemas.Output_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Output_Name, *v.Name)
 	}
@@ -8733,7 +8825,9 @@ func (v *PublicDestinationEndpointNetworkingConfiguration) Serialize(s smithy.Sh
 }
 
 func (v *PublicDestinationEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules, v.DestinationAllowRules)
+	if v.DestinationAllowRules != nil {
+		serializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules, v.DestinationAllowRules)
+	}
 }
 func (v *PublicDestinationEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicDestinationEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
@@ -8799,7 +8893,9 @@ func (v *PublicRouterNetworkInterfaceConfiguration) Serialize(s smithy.ShapeSeri
 }
 
 func (v *PublicRouterNetworkInterfaceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkInterfaceRuleList(s, schemas.PublicRouterNetworkInterfaceConfiguration_AllowRules, v.AllowRules)
+	if v.AllowRules != nil {
+		serializeNetworkInterfaceRuleList(s, schemas.PublicRouterNetworkInterfaceConfiguration_AllowRules, v.AllowRules)
+	}
 }
 func (v *PublicRouterNetworkInterfaceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicRouterNetworkInterfaceConfiguration, func(s *smithy.Schema) error {
@@ -8865,7 +8961,9 @@ func (v *PublicSourceEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *PublicSourceEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePublicSourceEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules, v.SourceAllowRules)
+	if v.SourceAllowRules != nil {
+		serializePublicSourceEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules, v.SourceAllowRules)
+	}
 }
 func (v *PublicSourceEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublicSourceEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
@@ -9599,12 +9697,18 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RouterInput_Arn, *v.Arn)
 	}
-	serializeDestinationEndpointArnList(s, schemas.RouterInput_AssociatedDestinationEndpointArns, v.AssociatedDestinationEndpointArns)
+	if v.AssociatedDestinationEndpointArns != nil {
+		serializeDestinationEndpointArnList(s, schemas.RouterInput_AssociatedDestinationEndpointArns, v.AssociatedDestinationEndpointArns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.RouterInput_AvailabilityZone, *v.AvailabilityZone)
 	}
-	serializeRouterInputConfiguration(s, schemas.RouterInput_Configuration, v.Configuration)
-	serializeRouterContentQualityAnalysisConfiguration(s, schemas.RouterInput_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	if v.Configuration != nil {
+		serializeRouterInputConfiguration(s, schemas.RouterInput_Configuration, v.Configuration)
+	}
+	if v.ContentQualityAnalysisConfiguration != nil {
+		serializeRouterContentQualityAnalysisConfiguration(s, schemas.RouterInput_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	}
 	if v.ContentQualityAnalysisType != "" {
 		s.WriteString(schemas.RouterInput_ContentQualityAnalysisType, string(v.ContentQualityAnalysisType))
 	}
@@ -9620,8 +9724,12 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddress != nil {
 		s.WriteString(schemas.RouterInput_IpAddress, *v.IpAddress)
 	}
-	serializeMaintenanceConfiguration(s, schemas.RouterInput_MaintenanceConfiguration, v.MaintenanceConfiguration)
-	serializeMaintenanceSchedule(s, schemas.RouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.RouterInput_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.RouterInput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.RouterInput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -9634,7 +9742,9 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumRoutedOutputs != nil {
 		s.WriteInt32(schemas.RouterInput_MaximumRoutedOutputs, *v.MaximumRoutedOutputs)
 	}
-	serializeRouterInputMessages(s, schemas.RouterInput_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInput_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterInput_Name, *v.Name)
 	}
@@ -9650,8 +9760,12 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouterInput_State, string(v.State))
 	}
-	serializeRouterInputStreamDetails(s, schemas.RouterInput_StreamDetails, v.StreamDetails)
-	serialize__mapOfString(s, schemas.RouterInput_Tags, v.Tags)
+	if v.StreamDetails != nil {
+		serializeRouterInputStreamDetails(s, schemas.RouterInput_StreamDetails, v.StreamDetails)
+	}
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RouterInput_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.RouterInput_Tier, string(v.Tier))
 	}
@@ -9946,7 +10060,9 @@ func (v *RouterInputDestinationEndpointAssociatedResourceDetails) SerializeMembe
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate, *v.MaximumBitrate)
 	}
-	serializeRouterInputMessages(s, schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Name, *v.Name)
 	}
@@ -10038,7 +10154,9 @@ func (v *RouterInputDestinationEndpointConnectionDetails) Serialize(s smithy.Sha
 }
 
 func (v *RouterInputDestinationEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	if v.SourceEncryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	}
 	if v.SourceEncryptionType != "" {
 		s.WriteString(schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType, string(v.SourceEncryptionType))
 	}
@@ -10344,8 +10462,12 @@ func (v *RouterInputSourceMetadataDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouterInputSourceMetadataDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterInputMetadata(s, schemas.RouterInputSourceMetadataDetails_RouterInputMetadata, v.RouterInputMetadata)
-	serializeRouterInputMessages(s, schemas.RouterInputSourceMetadataDetails_SourceMetadataMessages, v.SourceMetadataMessages)
+	if v.RouterInputMetadata != nil {
+		serializeRouterInputMetadata(s, schemas.RouterInputSourceMetadataDetails_RouterInputMetadata, v.RouterInputMetadata)
+	}
+	if v.SourceMetadataMessages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInputSourceMetadataDetails_SourceMetadataMessages, v.SourceMetadataMessages)
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.RouterInputSourceMetadataDetails_Timestamp, *v.Timestamp)
 	}
@@ -10516,7 +10638,9 @@ func (v *RouterInputThumbnailDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Thumbnail != nil {
 		s.WriteBlob(schemas.RouterInputThumbnailDetails_Thumbnail, v.Thumbnail)
 	}
-	serializeRouterInputMessages(s, schemas.RouterInputThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	if v.ThumbnailMessages != nil {
+		serializeRouterInputMessages(s, schemas.RouterInputThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	}
 	if v.Timecode != nil {
 		s.WriteString(schemas.RouterInputThumbnailDetails_Timecode, *v.Timecode)
 	}
@@ -10564,7 +10688,9 @@ func (v *RouterInputTransitEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouterInputTransitEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouterInputTransitEncryptionKeyConfiguration(s, schemas.RouterInputTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeRouterInputTransitEncryptionKeyConfiguration(s, schemas.RouterInputTransitEncryption_EncryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyType != "" {
 		s.WriteString(schemas.RouterInputTransitEncryption_EncryptionKeyType, string(v.EncryptionKeyType))
 	}
@@ -10719,7 +10845,9 @@ func (v *RouterNetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociatedOutputCount != nil {
 		s.WriteInt32(schemas.RouterNetworkInterface_AssociatedOutputCount, *v.AssociatedOutputCount)
 	}
-	serializeRouterNetworkInterfaceConfiguration(s, schemas.RouterNetworkInterface_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterNetworkInterfaceConfiguration(s, schemas.RouterNetworkInterface_Configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RouterNetworkInterface_CreatedAt, *v.CreatedAt)
 	}
@@ -10738,7 +10866,9 @@ func (v *RouterNetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouterNetworkInterface_State, string(v.State))
 	}
-	serialize__mapOfString(s, schemas.RouterNetworkInterface_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RouterNetworkInterface_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.RouterNetworkInterface_UpdatedAt, *v.UpdatedAt)
 	}
@@ -11045,11 +11175,15 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RouterOutput_Arn, *v.Arn)
 	}
-	serializeSourceEndpointArnList(s, schemas.RouterOutput_AssociatedSourceEndpointArns, v.AssociatedSourceEndpointArns)
+	if v.AssociatedSourceEndpointArns != nil {
+		serializeSourceEndpointArnList(s, schemas.RouterOutput_AssociatedSourceEndpointArns, v.AssociatedSourceEndpointArns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.RouterOutput_AvailabilityZone, *v.AvailabilityZone)
 	}
-	serializeRouterOutputConfiguration(s, schemas.RouterOutput_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRouterOutputConfiguration(s, schemas.RouterOutput_Configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.RouterOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -11064,8 +11198,12 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddress != nil {
 		s.WriteString(schemas.RouterOutput_IpAddress, *v.IpAddress)
 	}
-	serializeMaintenanceConfiguration(s, schemas.RouterOutput_MaintenanceConfiguration, v.MaintenanceConfiguration)
-	serializeMaintenanceSchedule(s, schemas.RouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	if v.MaintenanceConfiguration != nil {
+		serializeMaintenanceConfiguration(s, schemas.RouterOutput_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	}
+	if v.MaintenanceSchedule != nil {
+		serializeMaintenanceSchedule(s, schemas.RouterOutput_MaintenanceSchedule, v.MaintenanceSchedule)
+	}
 	if v.MaintenanceScheduleType != "" {
 		s.WriteString(schemas.RouterOutput_MaintenanceScheduleType, string(v.MaintenanceScheduleType))
 	}
@@ -11075,7 +11213,9 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.RouterOutput_MaximumBitrate, *v.MaximumBitrate)
 	}
-	serializeRouterOutputMessages(s, schemas.RouterOutput_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterOutputMessages(s, schemas.RouterOutput_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterOutput_Name, *v.Name)
 	}
@@ -11097,8 +11237,12 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.RouterOutput_State, string(v.State))
 	}
-	serializeRouterOutputStreamDetails(s, schemas.RouterOutput_StreamDetails, v.StreamDetails)
-	serialize__mapOfString(s, schemas.RouterOutput_Tags, v.Tags)
+	if v.StreamDetails != nil {
+		serializeRouterOutputStreamDetails(s, schemas.RouterOutput_StreamDetails, v.StreamDetails)
+	}
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RouterOutput_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.RouterOutput_Tier, string(v.Tier))
 	}
@@ -11605,7 +11749,9 @@ func (v *RouterOutputSourceEndpointAssociatedResourceDetails) SerializeMembers(s
 	if v.MaximumBitrate != nil {
 		s.WriteInt64(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate, *v.MaximumBitrate)
 	}
-	serializeRouterOutputMessages(s, schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeRouterOutputMessages(s, schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Name, *v.Name)
 	}
@@ -11696,7 +11842,9 @@ func (v *RouterOutputSourceEndpointConnectionDetails) Serialize(s smithy.ShapeSe
 }
 
 func (v *RouterOutputSourceEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	if v.DestinationDecryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	}
 	if v.DestinationDecryptionType != "" {
 		s.WriteString(schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType, string(v.DestinationDecryptionType))
 	}
@@ -12409,7 +12557,9 @@ func (v *SetSourceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxSyncBuffer != nil {
 		s.WriteInt32(schemas.SetSourceRequest_MaxSyncBuffer, *v.MaxSyncBuffer)
 	}
-	serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.SetSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	if v.MediaStreamSourceConfigurations != nil {
+		serialize__listOfMediaStreamSourceConfigurationRequest(s, schemas.SetSourceRequest_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	}
 	if v.MinLatency != nil {
 		s.WriteInt32(schemas.SetSourceRequest_MinLatency, *v.MinLatency)
 	}
@@ -12444,7 +12594,9 @@ func (v *SetSourceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceListenerPort != nil {
 		s.WriteInt32(schemas.SetSourceRequest_SourceListenerPort, *v.SourceListenerPort)
 	}
-	serialize__mapOfString(s, schemas.SetSourceRequest_SourceTags, v.SourceTags)
+	if v.SourceTags != nil {
+		serialize__mapOfString(s, schemas.SetSourceRequest_SourceTags, v.SourceTags)
+	}
 	if v.StreamId != nil {
 		s.WriteString(schemas.SetSourceRequest_StreamId, *v.StreamId)
 	}
@@ -12756,7 +12908,9 @@ func (v *Source) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IngestPort != nil {
 		s.WriteInt32(schemas.Source_IngestPort, *v.IngestPort)
 	}
-	serialize__listOfMediaStreamSourceConfiguration(s, schemas.Source_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	if v.MediaStreamSourceConfigurations != nil {
+		serialize__listOfMediaStreamSourceConfiguration(s, schemas.Source_MediaStreamSourceConfigurations, v.MediaStreamSourceConfigurations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Source_Name, *v.Name)
 	}
@@ -13015,16 +13169,24 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.SourceEndpoint_Arn, *v.Arn)
 	}
-	serializeSourceEndpointAssociatedResourceDetails(s, schemas.SourceEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	if v.AssociatedResourceDetails != nil {
+		serializeSourceEndpointAssociatedResourceDetails(s, schemas.SourceEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.SourceEndpoint_AvailabilityZone, *v.AvailabilityZone)
 	}
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.SourceEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
 	}
-	serializeSourceEndpointConfiguration(s, schemas.SourceEndpoint_Configuration, v.Configuration)
-	serializeDestinationEndpointArnList(s, schemas.SourceEndpoint_ConnectedDestinations, v.ConnectedDestinations)
-	serializeSourceEndpointConnectionDetails(s, schemas.SourceEndpoint_ConnectionDetails, v.ConnectionDetails)
+	if v.Configuration != nil {
+		serializeSourceEndpointConfiguration(s, schemas.SourceEndpoint_Configuration, v.Configuration)
+	}
+	if v.ConnectedDestinations != nil {
+		serializeDestinationEndpointArnList(s, schemas.SourceEndpoint_ConnectedDestinations, v.ConnectedDestinations)
+	}
+	if v.ConnectionDetails != nil {
+		serializeSourceEndpointConnectionDetails(s, schemas.SourceEndpoint_ConnectionDetails, v.ConnectionDetails)
+	}
 	if v.ConnectionState != "" {
 		s.WriteString(schemas.SourceEndpoint_ConnectionState, string(v.ConnectionState))
 	}
@@ -13034,7 +13196,9 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.SourceEndpoint_Description, *v.Description)
 	}
-	serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpoint_EncryptionConfiguration, v.EncryptionConfiguration)
+	if v.EncryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpoint_EncryptionConfiguration, v.EncryptionConfiguration)
+	}
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.SourceEndpoint_EncryptionType, string(v.EncryptionType))
 	}
@@ -13044,7 +13208,9 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LifecycleManagement != "" {
 		s.WriteString(schemas.SourceEndpoint_LifecycleManagement, string(v.LifecycleManagement))
 	}
-	serializeSourceEndpointMessageList(s, schemas.SourceEndpoint_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeSourceEndpointMessageList(s, schemas.SourceEndpoint_Messages, v.Messages)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.SourceEndpoint_Name, *v.Name)
 	}
@@ -13054,14 +13220,18 @@ func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationState != "" {
 		s.WriteString(schemas.SourceEndpoint_RegistrationState, string(v.RegistrationState))
 	}
-	serializeResourceShareDetails(s, schemas.SourceEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	if v.ResourceShareDetails != nil {
+		serializeResourceShareDetails(s, schemas.SourceEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	}
 	if v.ResourceShareOwnership != "" {
 		s.WriteString(schemas.SourceEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
 	}
 	if v.SourceType != "" {
 		s.WriteString(schemas.SourceEndpoint_SourceType, string(v.SourceType))
 	}
-	serialize__mapOfString(s, schemas.SourceEndpoint_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.SourceEndpoint_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.SourceEndpoint_UpdatedAt, *v.UpdatedAt)
 	}
@@ -13449,7 +13619,9 @@ func (v *SourceEndpointRouterOutputConfiguration) Serialize(s smithy.ShapeSerial
 }
 
 func (v *SourceEndpointRouterOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption, v.DestinationTransitEncryption)
+	if v.DestinationTransitEncryption != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption, v.DestinationTransitEncryption)
+	}
 	if v.DestinationTransitEncryptionType != "" {
 		s.WriteString(schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType, string(v.DestinationTransitEncryptionType))
 	}
@@ -14228,7 +14400,9 @@ func (v *StandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSeria
 }
 
 func (v *StandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStandardDestinationEndpointNetworkingConfiguration(s, schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration, v.DestinationNetworkingConfiguration)
+	if v.DestinationNetworkingConfiguration != nil {
+		serializeStandardDestinationEndpointNetworkingConfiguration(s, schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration, v.DestinationNetworkingConfiguration)
+	}
 	if v.DestinationNetworkingType != "" {
 		s.WriteString(schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingType, string(v.DestinationNetworkingType))
 	}
@@ -14238,7 +14412,9 @@ func (v *StandardDestinationEndpointConfiguration) SerializeMembers(s smithy.Sha
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardDestinationEndpointConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeStandardDestinationEndpointProtocolConfiguration(s, schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeStandardDestinationEndpointProtocolConfiguration(s, schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
 }
 func (v *StandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
@@ -14300,7 +14476,9 @@ func (v *StandardDestinationEndpointConnectionDetails) Serialize(s smithy.ShapeS
 }
 
 func (v *StandardDestinationEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	if v.SourceEncryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	}
 	if v.SourceEncryptionType != "" {
 		s.WriteString(schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionType, string(v.SourceEncryptionType))
 	}
@@ -14516,7 +14694,9 @@ func (v *StandardRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardRouterInputConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeRouterInputProtocolConfiguration(s, schemas.StandardRouterInputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeRouterInputProtocolConfiguration(s, schemas.StandardRouterInputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
 }
 func (v *StandardRouterInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardRouterInputConfiguration, func(s *smithy.Schema) error {
@@ -14604,7 +14784,9 @@ func (v *StandardRouterOutputConfiguration) SerializeMembers(s smithy.ShapeSeria
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardRouterOutputConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeRouterOutputProtocolConfiguration(s, schemas.StandardRouterOutputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeRouterOutputProtocolConfiguration(s, schemas.StandardRouterOutputConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
 }
 func (v *StandardRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StandardRouterOutputConfiguration, func(s *smithy.Schema) error {
@@ -14735,8 +14917,12 @@ func (v *StandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSer
 	if v.Protocol != "" {
 		s.WriteString(schemas.StandardSourceEndpointConfiguration_Protocol, string(v.Protocol))
 	}
-	serializeStandardSourceEndpointProtocolConfiguration(s, schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
-	serializeStandardSourceEndpointNetworkingConfiguration(s, schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration, v.SourceNetworkingConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeStandardSourceEndpointProtocolConfiguration(s, schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	}
+	if v.SourceNetworkingConfiguration != nil {
+		serializeStandardSourceEndpointNetworkingConfiguration(s, schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration, v.SourceNetworkingConfiguration)
+	}
 	if v.SourceNetworkingType != "" {
 		s.WriteString(schemas.StandardSourceEndpointConfiguration_SourceNetworkingType, string(v.SourceNetworkingType))
 	}
@@ -14801,7 +14987,9 @@ func (v *StandardSourceEndpointConnectionDetails) Serialize(s smithy.ShapeSerial
 }
 
 func (v *StandardSourceEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointEncryptionConfiguration(s, schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	if v.DestinationDecryptionConfiguration != nil {
+		serializeEndpointEncryptionConfiguration(s, schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	}
 	if v.DestinationDecryptionType != "" {
 		s.WriteString(schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionType, string(v.DestinationDecryptionType))
 	}
@@ -15019,7 +15207,9 @@ func (v *ThumbnailDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Thumbnail != nil {
 		s.WriteString(schemas.ThumbnailDetails_Thumbnail, *v.Thumbnail)
 	}
-	serialize__listOfMessageDetail(s, schemas.ThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	if v.ThumbnailMessages != nil {
+		serialize__listOfMessageDetail(s, schemas.ThumbnailDetails_ThumbnailMessages, v.ThumbnailMessages)
+	}
 	if v.Timecode != nil {
 		s.WriteString(schemas.ThumbnailDetails_Timecode, *v.Timecode)
 	}
@@ -15071,7 +15261,9 @@ func (v *TlsEncryption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TlsEncryption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTlsEncryptionConfiguration(s, schemas.TlsEncryption_EncryptionConfiguration, v.EncryptionConfiguration)
+	if v.EncryptionConfiguration != nil {
+		serializeTlsEncryptionConfiguration(s, schemas.TlsEncryption_EncryptionConfiguration, v.EncryptionConfiguration)
+	}
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.TlsEncryption_EncryptionType, string(v.EncryptionType))
 	}
@@ -15214,7 +15406,9 @@ func (v *Transport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Transport) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfString(s, schemas.Transport_CidrAllowList, v.CidrAllowList)
+	if v.CidrAllowList != nil {
+		serialize__listOfString(s, schemas.Transport_CidrAllowList, v.CidrAllowList)
+	}
 	if v.MaxBitrate != nil {
 		s.WriteInt32(schemas.Transport_MaxBitrate, *v.MaxBitrate)
 	}
@@ -15360,7 +15554,9 @@ func (v *TransportMediaInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TransportMediaInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfTransportStreamProgram(s, schemas.TransportMediaInfo_Programs, v.Programs)
+	if v.Programs != nil {
+		serialize__listOfTransportStreamProgram(s, schemas.TransportMediaInfo_Programs, v.Programs)
+	}
 	if v.TsId != nil {
 		s.WriteInt32(schemas.TransportMediaInfo_TsId, *v.TsId)
 	}
@@ -15539,7 +15735,9 @@ func (v *TransportStreamProgram) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProgramPid != nil {
 		s.WriteInt32(schemas.TransportStreamProgram_ProgramPid, *v.ProgramPid)
 	}
-	serialize__listOfTransportStream(s, schemas.TransportStreamProgram_Streams, v.Streams)
+	if v.Streams != nil {
+		serialize__listOfTransportStream(s, schemas.TransportStreamProgram_Streams, v.Streams)
+	}
 }
 func (v *TransportStreamProgram) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TransportStreamProgram, func(s *smithy.Schema) error {
@@ -16193,7 +16391,9 @@ func (v *VpcDestinationEndpointNetworkingConfiguration) Serialize(s smithy.Shape
 }
 
 func (v *VpcDestinationEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcDestinationEndpointNetworkingConfiguration_SubnetId, *v.SubnetId)
 	}
@@ -16257,14 +16457,18 @@ func (v *VpcInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.VpcInterface_Name, *v.Name)
 	}
-	serialize__listOfString(s, schemas.VpcInterface_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	if v.NetworkInterfaceIds != nil {
+		serialize__listOfString(s, schemas.VpcInterface_NetworkInterfaceIds, v.NetworkInterfaceIds)
+	}
 	if v.NetworkInterfaceType != "" {
 		s.WriteString(schemas.VpcInterface_NetworkInterfaceType, string(v.NetworkInterfaceType))
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.VpcInterface_RoleArn, *v.RoleArn)
 	}
-	serialize__listOfString(s, schemas.VpcInterface_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOfString(s, schemas.VpcInterface_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcInterface_SubnetId, *v.SubnetId)
 	}
@@ -16385,11 +16589,15 @@ func (v *VpcInterfaceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.VpcInterfaceRequest_RoleArn, *v.RoleArn)
 	}
-	serialize__listOfString(s, schemas.VpcInterfaceRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOfString(s, schemas.VpcInterfaceRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcInterfaceRequest_SubnetId, *v.SubnetId)
 	}
-	serialize__mapOfString(s, schemas.VpcInterfaceRequest_VpcInterfaceTags, v.VpcInterfaceTags)
+	if v.VpcInterfaceTags != nil {
+		serialize__mapOfString(s, schemas.VpcInterfaceRequest_VpcInterfaceTags, v.VpcInterfaceTags)
+	}
 }
 func (v *VpcInterfaceRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcInterfaceRequest, func(s *smithy.Schema) error {
@@ -16445,7 +16653,9 @@ func (v *VpcRouterNetworkInterfaceConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *VpcRouterNetworkInterfaceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcRouterNetworkInterfaceConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcRouterNetworkInterfaceConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcRouterNetworkInterfaceConfiguration_SubnetId, *v.SubnetId)
 	}
@@ -16488,7 +16698,9 @@ func (v *VpcSourceEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSeria
 }
 
 func (v *VpcSourceEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIdList(s, schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SubnetId != nil {
 		s.WriteString(schemas.VpcSourceEndpointNetworkingConfiguration_SubnetId, *v.SubnetId)
 	}

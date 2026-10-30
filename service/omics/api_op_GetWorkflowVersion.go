@@ -67,7 +67,9 @@ func (v *GetWorkflowVersionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowExportList(s, schemas.GetWorkflowVersionRequest_export, v.Export)
+	if v.Export != nil {
+		serializeWorkflowExportList(s, schemas.GetWorkflowVersionRequest_export, v.Export)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetWorkflowVersionRequest_type, string(v.Type))
 	}
@@ -217,10 +219,18 @@ func (v *GetWorkflowVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Main != nil {
 		s.WriteString(schemas.GetWorkflowVersionResponse_main, *v.Main)
 	}
-	serializeWorkflowMetadata(s, schemas.GetWorkflowVersionResponse_metadata, v.Metadata)
-	serializeWorkflowParameterTemplate(s, schemas.GetWorkflowVersionResponse_parameterTemplate, v.ParameterTemplate)
-	serializeWorkflowProfileParameterTemplates(s, schemas.GetWorkflowVersionResponse_profileParameterTemplates, v.ProfileParameterTemplates)
-	serializeWorkflowProfileList(s, schemas.GetWorkflowVersionResponse_profiles, v.Profiles)
+	if v.Metadata != nil {
+		serializeWorkflowMetadata(s, schemas.GetWorkflowVersionResponse_metadata, v.Metadata)
+	}
+	if v.ParameterTemplate != nil {
+		serializeWorkflowParameterTemplate(s, schemas.GetWorkflowVersionResponse_parameterTemplate, v.ParameterTemplate)
+	}
+	if v.ProfileParameterTemplates != nil {
+		serializeWorkflowProfileParameterTemplates(s, schemas.GetWorkflowVersionResponse_profileParameterTemplates, v.ProfileParameterTemplates)
+	}
+	if v.Profiles != nil {
+		serializeWorkflowProfileList(s, schemas.GetWorkflowVersionResponse_profiles, v.Profiles)
+	}
 	if v.Readme != nil {
 		s.WriteString(schemas.GetWorkflowVersionResponse_readme, *v.Readme)
 	}
@@ -239,7 +249,9 @@ func (v *GetWorkflowVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.GetWorkflowVersionResponse_storageType, string(v.StorageType))
 	}
-	serializeTagMap(s, schemas.GetWorkflowVersionResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetWorkflowVersionResponse_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetWorkflowVersionResponse_type, string(v.Type))
 	}

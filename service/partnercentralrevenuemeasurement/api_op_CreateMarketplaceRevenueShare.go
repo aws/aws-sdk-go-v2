@@ -65,7 +65,9 @@ func (v *CreateMarketplaceRevenueShareInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ProductId != nil {
 		s.WriteString(schemas.CreateMarketplaceRevenueShareInput_ProductId, *v.ProductId)
 	}
-	serializeMarketplaceRevenueShareTagList(s, schemas.CreateMarketplaceRevenueShareInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeMarketplaceRevenueShareTagList(s, schemas.CreateMarketplaceRevenueShareInput_Tags, v.Tags)
+	}
 }
 
 type CreateMarketplaceRevenueShareOutput struct {

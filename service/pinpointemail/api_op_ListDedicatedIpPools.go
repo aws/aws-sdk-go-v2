@@ -83,7 +83,9 @@ func (v *ListDedicatedIpPoolsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDedicatedIpPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfDedicatedIpPools(s, schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools, v.DedicatedIpPools)
+	if v.DedicatedIpPools != nil {
+		serializeListOfDedicatedIpPools(s, schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools, v.DedicatedIpPools)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDedicatedIpPoolsResponse_NextToken, *v.NextToken)
 	}

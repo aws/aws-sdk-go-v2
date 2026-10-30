@@ -98,7 +98,9 @@ func (v *ListAssetContractsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetContractsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetContractList(s, schemas.ListAssetContractsOutput_contracts, v.Contracts)
+	if v.Contracts != nil {
+		serializeAssetContractList(s, schemas.ListAssetContractsOutput_contracts, v.Contracts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetContractsOutput_nextToken, *v.NextToken)
 	}

@@ -274,7 +274,9 @@ func (v *CreateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutomationTargetParameterName != nil {
 		s.WriteString(schemas.CreateAssociationRequest_AutomationTargetParameterName, *v.AutomationTargetParameterName)
 	}
-	serializeCalendarNameOrARNList(s, schemas.CreateAssociationRequest_CalendarNames, v.CalendarNames)
+	if v.CalendarNames != nil {
+		serializeCalendarNameOrARNList(s, schemas.CreateAssociationRequest_CalendarNames, v.CalendarNames)
+	}
 	if v.ComplianceSeverity != "" {
 		s.WriteString(schemas.CreateAssociationRequest_ComplianceSeverity, string(v.ComplianceSeverity))
 	}
@@ -301,7 +303,9 @@ func (v *CreateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParameters(s, schemas.CreateAssociationRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.CreateAssociationRequest_Parameters, v.Parameters)
+	}
 	if v.ScheduleExpression != nil {
 		s.WriteString(schemas.CreateAssociationRequest_ScheduleExpression, *v.ScheduleExpression)
 	}
@@ -311,10 +315,18 @@ func (v *CreateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SyncCompliance != "" {
 		s.WriteString(schemas.CreateAssociationRequest_SyncCompliance, string(v.SyncCompliance))
 	}
-	serializeTagList(s, schemas.CreateAssociationRequest_Tags, v.Tags)
-	serializeTargetLocations(s, schemas.CreateAssociationRequest_TargetLocations, v.TargetLocations)
-	serializeTargetMaps(s, schemas.CreateAssociationRequest_TargetMaps, v.TargetMaps)
-	serializeTargets(s, schemas.CreateAssociationRequest_Targets, v.Targets)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAssociationRequest_Tags, v.Tags)
+	}
+	if v.TargetLocations != nil {
+		serializeTargetLocations(s, schemas.CreateAssociationRequest_TargetLocations, v.TargetLocations)
+	}
+	if v.TargetMaps != nil {
+		serializeTargetMaps(s, schemas.CreateAssociationRequest_TargetMaps, v.TargetMaps)
+	}
+	if v.Targets != nil {
+		serializeTargets(s, schemas.CreateAssociationRequest_Targets, v.Targets)
+	}
 }
 
 type CreateAssociationOutput struct {

@@ -120,7 +120,9 @@ func (v *UpdateAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationValues != nil {
 		s.WriteString(schemas.UpdateAddonRequest_configurationValues, *v.ConfigurationValues)
 	}
-	serializeAddonPodIdentityAssociationsList(s, schemas.UpdateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	if v.PodIdentityAssociations != nil {
+		serializeAddonPodIdentityAssociationsList(s, schemas.UpdateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	}
 	if v.ResolveConflicts != "" {
 		s.WriteString(schemas.UpdateAddonRequest_resolveConflicts, string(v.ResolveConflicts))
 	}

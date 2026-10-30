@@ -135,7 +135,9 @@ func (v *GetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastName != nil {
 		s.WriteString(schemas.GetUserResponse_lastName, *v.LastName)
 	}
-	serializeSecurityGroupIdList(s, schemas.GetUserResponse_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.GetUserResponse_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != nil {
 		s.WriteInt32(schemas.GetUserResponse_status, *v.Status)
 	}

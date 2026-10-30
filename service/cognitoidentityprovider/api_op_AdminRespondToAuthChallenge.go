@@ -344,11 +344,15 @@ func (v *AdminRespondToAuthChallengeInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ChallengeName != "" {
 		s.WriteString(schemas.AdminRespondToAuthChallengeRequest_ChallengeName, string(v.ChallengeName))
 	}
-	serializeChallengeResponsesType(s, schemas.AdminRespondToAuthChallengeRequest_ChallengeResponses, v.ChallengeResponses)
+	if v.ChallengeResponses != nil {
+		serializeChallengeResponsesType(s, schemas.AdminRespondToAuthChallengeRequest_ChallengeResponses, v.ChallengeResponses)
+	}
 	if v.ClientId != nil {
 		s.WriteString(schemas.AdminRespondToAuthChallengeRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.AdminRespondToAuthChallengeRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.AdminRespondToAuthChallengeRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.ContextData != nil {
 		s.WriteStruct(schemas.AdminRespondToAuthChallengeRequest_ContextData)
 		v.ContextData.SerializeMembers(s)
@@ -488,11 +492,15 @@ func (v *AdminRespondToAuthChallengeOutput) SerializeMembers(s smithy.ShapeSeria
 		v.AuthenticationResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAvailableChallengeListType(s, schemas.AdminRespondToAuthChallengeResponse_AvailableChallenges, v.AvailableChallenges)
+	if v.AvailableChallenges != nil {
+		serializeAvailableChallengeListType(s, schemas.AdminRespondToAuthChallengeResponse_AvailableChallenges, v.AvailableChallenges)
+	}
 	if v.ChallengeName != "" {
 		s.WriteString(schemas.AdminRespondToAuthChallengeResponse_ChallengeName, string(v.ChallengeName))
 	}
-	serializeChallengeParametersType(s, schemas.AdminRespondToAuthChallengeResponse_ChallengeParameters, v.ChallengeParameters)
+	if v.ChallengeParameters != nil {
+		serializeChallengeParametersType(s, schemas.AdminRespondToAuthChallengeResponse_ChallengeParameters, v.ChallengeParameters)
+	}
 	if v.Session != nil {
 		s.WriteString(schemas.AdminRespondToAuthChallengeResponse_Session, *v.Session)
 	}

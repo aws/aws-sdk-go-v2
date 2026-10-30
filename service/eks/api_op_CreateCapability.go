@@ -164,7 +164,9 @@ func (v *CreateCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateCapabilityRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateCapabilityRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCapabilityRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateCapabilityRequest_type, string(v.Type))
 	}

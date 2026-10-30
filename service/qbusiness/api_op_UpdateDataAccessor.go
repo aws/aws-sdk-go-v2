@@ -65,7 +65,9 @@ func (v *UpdateDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationList(s, schemas.UpdateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
+	if v.ActionConfigurations != nil {
+		serializeActionConfigurationList(s, schemas.UpdateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
+	}
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.UpdateDataAccessorRequest_applicationId, *v.ApplicationId)
 	}

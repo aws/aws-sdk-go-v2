@@ -87,7 +87,9 @@ func (v *ListSubCheckResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSubCheckResultsOutput_NextToken, *v.NextToken)
 	}
-	serializeSubCheckResultList(s, schemas.ListSubCheckResultsOutput_SubCheckResults, v.SubCheckResults)
+	if v.SubCheckResults != nil {
+		serializeSubCheckResultList(s, schemas.ListSubCheckResultsOutput_SubCheckResults, v.SubCheckResults)
+	}
 }
 func (v *ListSubCheckResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSubCheckResultsOutput, func(s *smithy.Schema) error {

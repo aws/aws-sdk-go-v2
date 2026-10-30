@@ -220,7 +220,9 @@ func (v *TransferDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdnLangCode != nil {
 		s.WriteString(schemas.TransferDomainRequest_IdnLangCode, *v.IdnLangCode)
 	}
-	serializeNameserverList(s, schemas.TransferDomainRequest_Nameservers, v.Nameservers)
+	if v.Nameservers != nil {
+		serializeNameserverList(s, schemas.TransferDomainRequest_Nameservers, v.Nameservers)
+	}
 	if v.PrivacyProtectAdminContact != nil {
 		s.WriteBool(schemas.TransferDomainRequest_PrivacyProtectAdminContact, *v.PrivacyProtectAdminContact)
 	}

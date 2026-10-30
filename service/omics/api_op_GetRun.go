@@ -62,7 +62,9 @@ func (v *GetRunInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRunInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRunExportList(s, schemas.GetRunRequest_export, v.Export)
+	if v.Export != nil {
+		serializeRunExportList(s, schemas.GetRunRequest_export, v.Export)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetRunRequest_id, *v.Id)
 	}
@@ -283,7 +285,9 @@ func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != nil {
 		s.WriteInt32(schemas.GetRunResponse_priority, *v.Priority)
 	}
-	serializeRunResourceDigests(s, schemas.GetRunResponse_resourceDigests, v.ResourceDigests)
+	if v.ResourceDigests != nil {
+		serializeRunResourceDigests(s, schemas.GetRunResponse_resourceDigests, v.ResourceDigests)
+	}
 	if v.RetentionMode != "" {
 		s.WriteString(schemas.GetRunResponse_retentionMode, string(v.RetentionMode))
 	}
@@ -326,7 +330,9 @@ func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.GetRunResponse_storageType, string(v.StorageType))
 	}
-	serializeTagMap(s, schemas.GetRunResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetRunResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.GetRunResponse_uuid, *v.Uuid)
 	}

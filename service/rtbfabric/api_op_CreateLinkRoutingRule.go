@@ -104,7 +104,9 @@ func (v *CreateLinkRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Priority != nil {
 		s.WriteInt32(schemas.CreateLinkRoutingRuleRequest_priority, *v.Priority)
 	}
-	serializeTagsMap(s, schemas.CreateLinkRoutingRuleRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateLinkRoutingRuleRequest_tags, v.Tags)
+	}
 }
 
 type CreateLinkRoutingRuleOutput struct {

@@ -131,11 +131,15 @@ func (v *GetLendingAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLendingAnalysisResponse_NextToken, *v.NextToken)
 	}
-	serializeLendingResultList(s, schemas.GetLendingAnalysisResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeLendingResultList(s, schemas.GetLendingAnalysisResponse_Results, v.Results)
+	}
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetLendingAnalysisResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeWarnings(s, schemas.GetLendingAnalysisResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarnings(s, schemas.GetLendingAnalysisResponse_Warnings, v.Warnings)
+	}
 }
 func (v *GetLendingAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLendingAnalysisResponse, func(s *smithy.Schema) error {

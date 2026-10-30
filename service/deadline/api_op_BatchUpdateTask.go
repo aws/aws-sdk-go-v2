@@ -57,7 +57,9 @@ func (v *BatchUpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchUpdateTaskRequest_clientToken, *v.ClientToken)
 	}
-	serializeBatchUpdateTaskItems(s, schemas.BatchUpdateTaskRequest_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeBatchUpdateTaskItems(s, schemas.BatchUpdateTaskRequest_tasks, v.Tasks)
+	}
 }
 
 type BatchUpdateTaskOutput struct {
@@ -80,7 +82,9 @@ func (v *BatchUpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateTaskErrors(s, schemas.BatchUpdateTaskResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchUpdateTaskErrors(s, schemas.BatchUpdateTaskResponse_errors, v.Errors)
+	}
 }
 func (v *BatchUpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateTaskResponse, func(s *smithy.Schema) error {

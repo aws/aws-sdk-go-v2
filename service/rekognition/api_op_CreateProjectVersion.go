@@ -145,7 +145,9 @@ func (v *CreateProjectVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectArn != nil {
 		s.WriteString(schemas.CreateProjectVersionRequest_ProjectArn, *v.ProjectArn)
 	}
-	serializeTagMap(s, schemas.CreateProjectVersionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateProjectVersionRequest_Tags, v.Tags)
+	}
 	if v.TestingData != nil {
 		s.WriteStruct(schemas.CreateProjectVersionRequest_TestingData)
 		v.TestingData.SerializeMembers(s)

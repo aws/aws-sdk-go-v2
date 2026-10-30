@@ -96,7 +96,9 @@ func (v *ListAssetVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetVersionMetadataList(s, schemas.ListAssetVersionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAssetVersionMetadataList(s, schemas.ListAssetVersionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetVersionsResponse_nextToken, *v.NextToken)
 	}

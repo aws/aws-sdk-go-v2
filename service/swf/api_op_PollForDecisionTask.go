@@ -214,7 +214,9 @@ func (v *PollForDecisionTaskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PollForDecisionTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHistoryEventList(s, schemas.DecisionTask_events, v.Events)
+	if v.Events != nil {
+		serializeHistoryEventList(s, schemas.DecisionTask_events, v.Events)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.DecisionTask_nextPageToken, *v.NextPageToken)
 	}

@@ -94,7 +94,9 @@ func (v *ListStreamingAccessForServicesOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStreamingAccessForServicesOutput_NextToken, *v.NextToken)
 	}
-	serializeStreamingAccessDetailsList(s, schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices, v.StreamingAccessForServices)
+	if v.StreamingAccessForServices != nil {
+		serializeStreamingAccessDetailsList(s, schemas.ListStreamingAccessForServicesOutput_StreamingAccessForServices, v.StreamingAccessForServices)
+	}
 }
 func (v *ListStreamingAccessForServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStreamingAccessForServicesOutput, func(s *smithy.Schema) error {

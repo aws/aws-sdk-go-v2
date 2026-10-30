@@ -260,7 +260,9 @@ func (v *RejectedRecordsException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.RejectedRecordsException_Message, *v.Message)
 	}
-	serializeRejectedRecords(s, schemas.RejectedRecordsException_RejectedRecords, v.RejectedRecords)
+	if v.RejectedRecords != nil {
+		serializeRejectedRecords(s, schemas.RejectedRecordsException_RejectedRecords, v.RejectedRecords)
+	}
 }
 func (v *RejectedRecordsException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RejectedRecordsException, func(s *smithy.Schema) error {

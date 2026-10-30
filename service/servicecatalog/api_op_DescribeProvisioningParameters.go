@@ -141,17 +141,29 @@ func (v *DescribeProvisioningParametersOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DescribeProvisioningParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConstraintSummaries(s, schemas.DescribeProvisioningParametersOutput_ConstraintSummaries, v.ConstraintSummaries)
-	serializeProvisioningArtifactOutputs(s, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputKeys, v.ProvisioningArtifactOutputKeys)
-	serializeProvisioningArtifactOutputs(s, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputs, v.ProvisioningArtifactOutputs)
-	serializeProvisioningArtifactParameters(s, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactParameters, v.ProvisioningArtifactParameters)
+	if v.ConstraintSummaries != nil {
+		serializeConstraintSummaries(s, schemas.DescribeProvisioningParametersOutput_ConstraintSummaries, v.ConstraintSummaries)
+	}
+	if v.ProvisioningArtifactOutputKeys != nil {
+		serializeProvisioningArtifactOutputs(s, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputKeys, v.ProvisioningArtifactOutputKeys)
+	}
+	if v.ProvisioningArtifactOutputs != nil {
+		serializeProvisioningArtifactOutputs(s, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputs, v.ProvisioningArtifactOutputs)
+	}
+	if v.ProvisioningArtifactParameters != nil {
+		serializeProvisioningArtifactParameters(s, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactParameters, v.ProvisioningArtifactParameters)
+	}
 	if v.ProvisioningArtifactPreferences != nil {
 		s.WriteStruct(schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactPreferences)
 		v.ProvisioningArtifactPreferences.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagOptionSummaries(s, schemas.DescribeProvisioningParametersOutput_TagOptions, v.TagOptions)
-	serializeUsageInstructions(s, schemas.DescribeProvisioningParametersOutput_UsageInstructions, v.UsageInstructions)
+	if v.TagOptions != nil {
+		serializeTagOptionSummaries(s, schemas.DescribeProvisioningParametersOutput_TagOptions, v.TagOptions)
+	}
+	if v.UsageInstructions != nil {
+		serializeUsageInstructions(s, schemas.DescribeProvisioningParametersOutput_UsageInstructions, v.UsageInstructions)
+	}
 }
 func (v *DescribeProvisioningParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProvisioningParametersOutput, func(s *smithy.Schema) error {

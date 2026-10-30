@@ -56,7 +56,9 @@ func (v *GetCisScanReportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScanArn != nil {
 		s.WriteString(schemas.GetCisScanReportRequest_scanArn, *v.ScanArn)
 	}
-	serializeReportTargetAccounts(s, schemas.GetCisScanReportRequest_targetAccounts, v.TargetAccounts)
+	if v.TargetAccounts != nil {
+		serializeReportTargetAccounts(s, schemas.GetCisScanReportRequest_targetAccounts, v.TargetAccounts)
+	}
 }
 
 type GetCisScanReportOutput struct {

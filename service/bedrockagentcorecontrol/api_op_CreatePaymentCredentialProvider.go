@@ -65,8 +65,12 @@ func (v *CreatePaymentCredentialProviderInput) SerializeMembers(s smithy.ShapeSe
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePaymentCredentialProviderRequest_name, *v.Name)
 	}
-	serializePaymentProviderConfigurationInput(s, schemas.CreatePaymentCredentialProviderRequest_providerConfigurationInput, v.ProviderConfigurationInput)
-	serializeTagsMap(s, schemas.CreatePaymentCredentialProviderRequest_tags, v.Tags)
+	if v.ProviderConfigurationInput != nil {
+		serializePaymentProviderConfigurationInput(s, schemas.CreatePaymentCredentialProviderRequest_providerConfigurationInput, v.ProviderConfigurationInput)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreatePaymentCredentialProviderRequest_tags, v.Tags)
+	}
 }
 
 type CreatePaymentCredentialProviderOutput struct {
@@ -113,7 +117,9 @@ func (v *CreatePaymentCredentialProviderOutput) SerializeMembers(s smithy.ShapeS
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePaymentCredentialProviderResponse_name, *v.Name)
 	}
-	serializePaymentProviderConfigurationOutput(s, schemas.CreatePaymentCredentialProviderResponse_providerConfigurationOutput, v.ProviderConfigurationOutput)
+	if v.ProviderConfigurationOutput != nil {
+		serializePaymentProviderConfigurationOutput(s, schemas.CreatePaymentCredentialProviderResponse_providerConfigurationOutput, v.ProviderConfigurationOutput)
+	}
 }
 func (v *CreatePaymentCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePaymentCredentialProviderResponse, func(s *smithy.Schema) error {

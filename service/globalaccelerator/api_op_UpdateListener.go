@@ -77,7 +77,9 @@ func (v *UpdateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ListenerArn != nil {
 		s.WriteString(schemas.UpdateListenerRequest_ListenerArn, *v.ListenerArn)
 	}
-	serializePortRanges(s, schemas.UpdateListenerRequest_PortRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.UpdateListenerRequest_PortRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.UpdateListenerRequest_Protocol, string(v.Protocol))
 	}

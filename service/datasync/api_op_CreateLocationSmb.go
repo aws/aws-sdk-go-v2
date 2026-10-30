@@ -180,7 +180,9 @@ func (v *CreateLocationSmbInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.CreateLocationSmbRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.CreateLocationSmbRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.CreateLocationSmbRequest_AuthenticationType, string(v.AuthenticationType))
 	}
@@ -194,7 +196,9 @@ func (v *CreateLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomSecretConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDnsIpList(s, schemas.CreateLocationSmbRequest_DnsIpAddresses, v.DnsIpAddresses)
+	if v.DnsIpAddresses != nil {
+		serializeDnsIpList(s, schemas.CreateLocationSmbRequest_DnsIpAddresses, v.DnsIpAddresses)
+	}
 	if v.Domain != nil {
 		s.WriteString(schemas.CreateLocationSmbRequest_Domain, *v.Domain)
 	}
@@ -221,7 +225,9 @@ func (v *CreateLocationSmbInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationSmbRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationSmbRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationSmbRequest_Tags, v.Tags)
+	}
 	if v.User != nil {
 		s.WriteString(schemas.CreateLocationSmbRequest_User, *v.User)
 	}

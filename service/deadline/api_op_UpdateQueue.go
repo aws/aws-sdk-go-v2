@@ -101,8 +101,12 @@ func (v *UpdateQueueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedStorageProfileIds(s, schemas.UpdateQueueRequest_allowedStorageProfileIdsToAdd, v.AllowedStorageProfileIdsToAdd)
-	serializeAllowedStorageProfileIds(s, schemas.UpdateQueueRequest_allowedStorageProfileIdsToRemove, v.AllowedStorageProfileIdsToRemove)
+	if v.AllowedStorageProfileIdsToAdd != nil {
+		serializeAllowedStorageProfileIds(s, schemas.UpdateQueueRequest_allowedStorageProfileIdsToAdd, v.AllowedStorageProfileIdsToAdd)
+	}
+	if v.AllowedStorageProfileIdsToRemove != nil {
+		serializeAllowedStorageProfileIds(s, schemas.UpdateQueueRequest_allowedStorageProfileIdsToRemove, v.AllowedStorageProfileIdsToRemove)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateQueueRequest_clientToken, *v.ClientToken)
 	}
@@ -131,12 +135,18 @@ func (v *UpdateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueueId != nil {
 		s.WriteString(schemas.UpdateQueueRequest_queueId, *v.QueueId)
 	}
-	serializeRequiredFileSystemLocationNames(s, schemas.UpdateQueueRequest_requiredFileSystemLocationNamesToAdd, v.RequiredFileSystemLocationNamesToAdd)
-	serializeRequiredFileSystemLocationNames(s, schemas.UpdateQueueRequest_requiredFileSystemLocationNamesToRemove, v.RequiredFileSystemLocationNamesToRemove)
+	if v.RequiredFileSystemLocationNamesToAdd != nil {
+		serializeRequiredFileSystemLocationNames(s, schemas.UpdateQueueRequest_requiredFileSystemLocationNamesToAdd, v.RequiredFileSystemLocationNamesToAdd)
+	}
+	if v.RequiredFileSystemLocationNamesToRemove != nil {
+		serializeRequiredFileSystemLocationNames(s, schemas.UpdateQueueRequest_requiredFileSystemLocationNamesToRemove, v.RequiredFileSystemLocationNamesToRemove)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateQueueRequest_roleArn, *v.RoleArn)
 	}
-	serializeSchedulingConfiguration(s, schemas.UpdateQueueRequest_schedulingConfiguration, v.SchedulingConfiguration)
+	if v.SchedulingConfiguration != nil {
+		serializeSchedulingConfiguration(s, schemas.UpdateQueueRequest_schedulingConfiguration, v.SchedulingConfiguration)
+	}
 }
 
 type UpdateQueueOutput struct {

@@ -75,7 +75,9 @@ func (v *StartBulkDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputFileUri != nil {
 		s.WriteString(schemas.StartBulkDeploymentRequest_InputFileUri, *v.InputFileUri)
 	}
-	serializeTags(s, schemas.StartBulkDeploymentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartBulkDeploymentRequest_tags, v.Tags)
+	}
 }
 
 type StartBulkDeploymentOutput struct {

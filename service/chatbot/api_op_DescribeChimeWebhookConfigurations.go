@@ -91,7 +91,9 @@ func (v *DescribeChimeWebhookConfigurationsOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeChimeWebhookConfigurationsResult_NextToken, *v.NextToken)
 	}
-	serializeChimeWebhookConfigurationList(s, schemas.DescribeChimeWebhookConfigurationsResult_WebhookConfigurations, v.WebhookConfigurations)
+	if v.WebhookConfigurations != nil {
+		serializeChimeWebhookConfigurationList(s, schemas.DescribeChimeWebhookConfigurationsResult_WebhookConfigurations, v.WebhookConfigurations)
+	}
 }
 func (v *DescribeChimeWebhookConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeChimeWebhookConfigurationsResult, func(s *smithy.Schema) error {

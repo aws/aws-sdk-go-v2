@@ -82,7 +82,9 @@ func (v *ListLabelGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLabelGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelGroupSummaries(s, schemas.ListLabelGroupsResponse_LabelGroupSummaries, v.LabelGroupSummaries)
+	if v.LabelGroupSummaries != nil {
+		serializeLabelGroupSummaries(s, schemas.ListLabelGroupsResponse_LabelGroupSummaries, v.LabelGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLabelGroupsResponse_NextToken, *v.NextToken)
 	}

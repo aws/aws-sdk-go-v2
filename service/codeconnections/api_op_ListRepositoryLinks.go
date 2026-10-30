@@ -81,7 +81,9 @@ func (v *ListRepositoryLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRepositoryLinksOutput_NextToken, *v.NextToken)
 	}
-	serializeRepositoryLinkList(s, schemas.ListRepositoryLinksOutput_RepositoryLinks, v.RepositoryLinks)
+	if v.RepositoryLinks != nil {
+		serializeRepositoryLinkList(s, schemas.ListRepositoryLinksOutput_RepositoryLinks, v.RepositoryLinks)
+	}
 }
 func (v *ListRepositoryLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRepositoryLinksOutput, func(s *smithy.Schema) error {

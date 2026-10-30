@@ -101,7 +101,9 @@ func (v *DescribeAddonConfigurationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.ConfigurationSchema != nil {
 		s.WriteString(schemas.DescribeAddonConfigurationResponse_configurationSchema, *v.ConfigurationSchema)
 	}
-	serializeAddonPodIdentityConfigurationList(s, schemas.DescribeAddonConfigurationResponse_podIdentityConfiguration, v.PodIdentityConfiguration)
+	if v.PodIdentityConfiguration != nil {
+		serializeAddonPodIdentityConfigurationList(s, schemas.DescribeAddonConfigurationResponse_podIdentityConfiguration, v.PodIdentityConfiguration)
+	}
 }
 func (v *DescribeAddonConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAddonConfigurationResponse, func(s *smithy.Schema) error {

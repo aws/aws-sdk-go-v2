@@ -88,7 +88,9 @@ func (v *ListSecretsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSecretsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFiltersListType(s, schemas.ListSecretsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFiltersListType(s, schemas.ListSecretsRequest_Filters, v.Filters)
+	}
 	if v.IncludePlannedDeletion != nil {
 		s.WriteBool(schemas.ListSecretsRequest_IncludePlannedDeletion, *v.IncludePlannedDeletion)
 	}
@@ -133,7 +135,9 @@ func (v *ListSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecretsResponse_NextToken, *v.NextToken)
 	}
-	serializeSecretListType(s, schemas.ListSecretsResponse_SecretList, v.SecretList)
+	if v.SecretList != nil {
+		serializeSecretListType(s, schemas.ListSecretsResponse_SecretList, v.SecretList)
+	}
 }
 func (v *ListSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecretsResponse, func(s *smithy.Schema) error {

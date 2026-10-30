@@ -76,7 +76,9 @@ func (v *ListGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListGroupsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListGroupsRequest_Filters, v.Filters)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.ListGroupsRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
@@ -115,7 +117,9 @@ func (v *ListGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroups(s, schemas.ListGroupsResponse_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroups(s, schemas.ListGroupsResponse_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupsResponse_NextToken, *v.NextToken)
 	}

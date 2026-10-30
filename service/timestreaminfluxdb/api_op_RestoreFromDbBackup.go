@@ -99,7 +99,9 @@ func (v *RestoreFromDbBackupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RestoreFromDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbBackupConfigurationInputList(s, schemas.RestoreFromDbBackupInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationInputList(s, schemas.RestoreFromDbBackupInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbBackupId != nil {
 		s.WriteString(schemas.RestoreFromDbBackupInput_dbBackupId, *v.DbBackupId)
 	}
@@ -137,9 +139,15 @@ func (v *RestoreFromDbBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RestoreToTime != nil {
 		s.WriteTime(schemas.RestoreFromDbBackupInput_restoreToTime, *v.RestoreToTime)
 	}
-	serializeRequestTagMap(s, schemas.RestoreFromDbBackupInput_tags, v.Tags)
-	serializeVpcSecurityGroupIdList(s, schemas.RestoreFromDbBackupInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.RestoreFromDbBackupInput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.RestoreFromDbBackupInput_tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.RestoreFromDbBackupInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.RestoreFromDbBackupInput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 
 type RestoreFromDbBackupOutput struct {

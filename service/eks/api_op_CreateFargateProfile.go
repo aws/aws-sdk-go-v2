@@ -124,9 +124,15 @@ func (v *CreateFargateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PodExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateFargateProfileRequest_podExecutionRoleArn, *v.PodExecutionRoleArn)
 	}
-	serializeFargateProfileSelectors(s, schemas.CreateFargateProfileRequest_selectors, v.Selectors)
-	serializeStringList(s, schemas.CreateFargateProfileRequest_subnets, v.Subnets)
-	serializeTagMap(s, schemas.CreateFargateProfileRequest_tags, v.Tags)
+	if v.Selectors != nil {
+		serializeFargateProfileSelectors(s, schemas.CreateFargateProfileRequest_selectors, v.Selectors)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.CreateFargateProfileRequest_subnets, v.Subnets)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFargateProfileRequest_tags, v.Tags)
+	}
 }
 
 type CreateFargateProfileOutput struct {

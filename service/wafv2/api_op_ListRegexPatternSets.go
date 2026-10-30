@@ -102,7 +102,9 @@ func (v *ListRegexPatternSetsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListRegexPatternSetsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeRegexPatternSetSummaries(s, schemas.ListRegexPatternSetsResponse_RegexPatternSets, v.RegexPatternSets)
+	if v.RegexPatternSets != nil {
+		serializeRegexPatternSetSummaries(s, schemas.ListRegexPatternSetsResponse_RegexPatternSets, v.RegexPatternSets)
+	}
 }
 func (v *ListRegexPatternSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegexPatternSetsResponse, func(s *smithy.Schema) error {

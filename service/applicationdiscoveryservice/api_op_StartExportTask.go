@@ -94,9 +94,15 @@ func (v *StartExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.StartExportTaskRequest_endTime, *v.EndTime)
 	}
-	serializeExportDataFormats(s, schemas.StartExportTaskRequest_exportDataFormat, v.ExportDataFormat)
-	serializeExportFilters(s, schemas.StartExportTaskRequest_filters, v.Filters)
-	serializeExportPreferences(s, schemas.StartExportTaskRequest_preferences, v.Preferences)
+	if v.ExportDataFormat != nil {
+		serializeExportDataFormats(s, schemas.StartExportTaskRequest_exportDataFormat, v.ExportDataFormat)
+	}
+	if v.Filters != nil {
+		serializeExportFilters(s, schemas.StartExportTaskRequest_filters, v.Filters)
+	}
+	if v.Preferences != nil {
+		serializeExportPreferences(s, schemas.StartExportTaskRequest_preferences, v.Preferences)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.StartExportTaskRequest_startTime, *v.StartTime)
 	}

@@ -80,7 +80,9 @@ func (v *ListAdConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAdConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdConfigurationList(s, schemas.ListAdConfigurationsResponse_adConfigurations, v.AdConfigurations)
+	if v.AdConfigurations != nil {
+		serializeAdConfigurationList(s, schemas.ListAdConfigurationsResponse_adConfigurations, v.AdConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAdConfigurationsResponse_nextToken, *v.NextToken)
 	}

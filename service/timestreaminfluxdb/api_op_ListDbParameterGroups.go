@@ -81,7 +81,9 @@ func (v *ListDbParameterGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDbParameterGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbParameterGroupSummaryList(s, schemas.ListDbParameterGroupsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDbParameterGroupSummaryList(s, schemas.ListDbParameterGroupsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDbParameterGroupsOutput_nextToken, *v.NextToken)
 	}

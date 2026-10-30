@@ -95,7 +95,9 @@ func (v *ListIPSetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIPSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpSetIds(s, schemas.ListIPSetsResponse_IpSetIds, v.IpSetIds)
+	if v.IpSetIds != nil {
+		serializeIpSetIds(s, schemas.ListIPSetsResponse_IpSetIds, v.IpSetIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIPSetsResponse_NextToken, *v.NextToken)
 	}

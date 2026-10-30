@@ -58,7 +58,9 @@ func (v *DisassociateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.DisassociateUserRequest_Domain, *v.Domain)
 	}
-	serializeIdentityProvider(s, schemas.DisassociateUserRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.DisassociateUserRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.DisassociateUserRequest_InstanceId, *v.InstanceId)
 	}

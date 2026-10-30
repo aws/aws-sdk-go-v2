@@ -58,7 +58,9 @@ func (v *DetectToxicContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.DetectToxicContentRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeListOfTextSegments(s, schemas.DetectToxicContentRequest_TextSegments, v.TextSegments)
+	if v.TextSegments != nil {
+		serializeListOfTextSegments(s, schemas.DetectToxicContentRequest_TextSegments, v.TextSegments)
+	}
 }
 
 type DetectToxicContentOutput struct {
@@ -82,7 +84,9 @@ func (v *DetectToxicContentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectToxicContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfToxicLabels(s, schemas.DetectToxicContentResponse_ResultList, v.ResultList)
+	if v.ResultList != nil {
+		serializeListOfToxicLabels(s, schemas.DetectToxicContentResponse_ResultList, v.ResultList)
+	}
 }
 func (v *DetectToxicContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectToxicContentResponse, func(s *smithy.Schema) error {

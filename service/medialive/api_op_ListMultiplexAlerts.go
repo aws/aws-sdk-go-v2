@@ -92,7 +92,9 @@ func (v *ListMultiplexAlertsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMultiplexAlertsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMultiplexAlert(s, schemas.ListMultiplexAlertsResponse_Alerts, v.Alerts)
+	if v.Alerts != nil {
+		serialize__listOfMultiplexAlert(s, schemas.ListMultiplexAlertsResponse_Alerts, v.Alerts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMultiplexAlertsResponse_NextToken, *v.NextToken)
 	}
