@@ -1,3 +1,7 @@
+# v1.59.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.59.0 (2026-10-29)
 
 * **Feature**: Adds support for the PySpark 2.0 analysis template format and for choosing the file format (CSV or Parquet) of protected job results written to Amazon S3, including in a membership's default job result configuration.

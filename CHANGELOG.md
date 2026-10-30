@@ -1,3 +1,31 @@
+# Release (2026-10-30)
+
+## General Highlights
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.55.0](service/amp/CHANGELOG.md#v1550-2026-10-30)
+  * **Feature**: Managed Prometheus collectors now support Amazon MSK consumer-group metrics for Amazon Managed Service for Prometheus and CloudWatch.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.66.0](service/bedrockagentruntime/CHANGELOG.md#v1660-2026-10-30)
+  * **Feature**: Adds the CodeExecution step and codeExecution action to AgenticRetrieveStream trace events, showing when the agent runs code and which documents it reads.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.91.0](service/cloudwatchlogs/CHANGELOG.md#v1910-2026-10-30)
+  * **Feature**: Adds support for account-level retention policies in Amazon CloudWatch Logs. Customers can now use PutAccountPolicy with the new RETENTION POLICY type to set default log retention across all log groups in an account. Includes dry-run mode to preview the impact of policy changes before applying them.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.211.0](service/connect/CHANGELOG.md#v12110-2026-10-30)
+  * **Feature**: Amazon Connect adds tag-based access control for Contact Lens rules. ListRealtimeContactAnalysisSegmentsV2 adds a ListFilter to return only category segments whose rules match given tags. PreEvaluationFilter now supports contact evaluation resources for OnContactEvaluationSubmit rules.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.75.0](service/customerprofiles/CHANGELOG.md#v1750-2026-10-30)
+  * **Feature**: Adds support for template ingestion controls in the GetProfileObjectTypeTemplate API response.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.58.0](service/docdb/CHANGELOG.md#v1580-2026-10-30)
+  * **Feature**: Amazon DocumentDB now returns ServerlessV2PlatformVersion in DBCluster API responses and adds the DescribeServerlessV2PlatformVersions API to discover available platform versions and their capabilities.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.114.0](service/lambda/CHANGELOG.md#v11140-2026-10-30)
+  * **Feature**: Adds ConsumptionMode to SelfManagedKafkaEventSourceConfig, letting Lambda event source mappings consume self-managed Apache Kafka topics as a queue. Set ConsumptionMode to Queue when creating an event source mapping.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.59.0](service/omics/CHANGELOG.md#v1590-2026-10-30)
+  * **Feature**: Adds the outputUriPrefixMode parameter to StartRun and GetRun. You can now write run outputs directly under outputUri, without the prefixes the service adds by default. When you opt in, outputs overwrite existing objects at the same keys.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.286.0](service/sagemaker/CHANGELOG.md#v12860-2026-10-30)
+  * **Feature**: Create endpoints with AcceleratorPartitionLayouts on ProductionVariant and deploy inference components with AcceleratorPartitionType in ComputeResourceRequirements to divide accelerators into hardware-isolated NVIDIA MIG partitions, running multiple models per GPU. P4d, P5, G7, G7e.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.33.0](service/timestreaminfluxdb/CHANGELOG.md#v1330-2026-10-30)
+  * **Feature**: Add DeploymentConfiguration field to CreateDbCluster and UpdateDbCluster APIs to support creation of heterogenous InfluxDB v3 Enterprise clusters.
+
 # Release (2026-10-29)
 
 ## Module Highlights

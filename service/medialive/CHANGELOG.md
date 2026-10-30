@@ -1,3 +1,7 @@
+# v1.114.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.114.0 (2026-10-28)
 
 * **Feature**: AWS Elemental MediaLive now supports SMPTE 2022-7 seamless protection switching for multicast inputs on MediaLive Anywhere. Support for MulticastSettings sources to add a redundant copy of the stream received on a second network interface.

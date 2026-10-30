@@ -1,8 +1,0 @@
-{
-    "id": "509c57fb-f064-4426-9e36-fb82eed402a0",
-    "type": "feature",
-    "description": "Adds the CodeExecution step and codeExecution action to AgenticRetrieveStream trace events, showing when the agent runs code and which documents it reads.",
-    "modules": [
-        "service/bedrockagentruntime"
-    ]
-}

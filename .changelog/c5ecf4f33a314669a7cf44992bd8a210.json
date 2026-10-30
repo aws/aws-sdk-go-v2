@@ -1,8 +1,0 @@
-{
-    "id": "c5ecf4f3-3a31-4669-a7cf-44992bd8a210",
-    "type": "feature",
-    "description": "Adds support for template ingestion controls in the GetProfileObjectTypeTemplate API response.",
-    "modules": [
-        "service/customerprofiles"
-    ]
-}

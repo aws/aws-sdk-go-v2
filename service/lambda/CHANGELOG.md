@@ -1,3 +1,8 @@
+# v1.114.0 (2026-10-30)
+
+* **Feature**: Adds ConsumptionMode to SelfManagedKafkaEventSourceConfig, letting Lambda event source mappings consume self-managed Apache Kafka topics as a queue. Set ConsumptionMode to Queue when creating an event source mapping.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.113.4 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

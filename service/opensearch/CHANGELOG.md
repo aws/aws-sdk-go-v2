@@ -1,3 +1,7 @@
+# v1.87.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.87.0 (2026-10-28)
 
 * **Feature**: This release adds APIs to simplify setting up a replication relationship between OpenSearch clusters. The APIs include new Switchover and Failover actions for planned switchovers and unplanned failovers to ensure high availability for OpenSearch in the event of disaster in a single region.

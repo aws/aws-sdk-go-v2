@@ -1,8 +1,0 @@
-{
-    "id": "74c71d7f-40dd-4241-bce0-102ec9cc8db8",
-    "type": "feature",
-    "description": "Adds support for account-level retention policies in Amazon CloudWatch Logs. Customers can now use PutAccountPolicy with the new RETENTION POLICY type to set default log retention across all log groups in an account. Includes dry-run mode to preview the impact of policy changes before applying them.",
-    "modules": [
-        "service/cloudwatchlogs"
-    ]
-}

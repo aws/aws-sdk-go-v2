@@ -1,8 +1,0 @@
-{
-    "id": "e1bdb923-2d62-4c39-8f64-bfc112a924b9",
-    "type": "feature",
-    "description": "Managed Prometheus collectors now support Amazon MSK consumer-group metrics for Amazon Managed Service for Prometheus and CloudWatch.",
-    "modules": [
-        "service/amp"
-    ]
-}

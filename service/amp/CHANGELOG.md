@@ -1,3 +1,8 @@
+# v1.55.0 (2026-10-30)
+
+* **Feature**: Managed Prometheus collectors now support Amazon MSK consumer-group metrics for Amazon Managed Service for Prometheus and CloudWatch.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.54.8 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

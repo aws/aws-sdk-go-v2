@@ -1,8 +1,0 @@
-{
-    "id": "c202a97c-ed26-44e1-ab7f-c7dee1c7e0f0",
-    "type": "feature",
-    "description": "Amazon Connect adds tag-based access control for Contact Lens rules. ListRealtimeContactAnalysisSegmentsV2 adds a ListFilter to return only category segments whose rules match given tags. PreEvaluationFilter now supports contact evaluation resources for OnContactEvaluationSubmit rules.",
-    "modules": [
-        "service/connect"
-    ]
-}

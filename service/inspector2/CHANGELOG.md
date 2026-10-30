@@ -1,3 +1,7 @@
+# v1.62.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.62.0 (2026-10-27)
 
 * **Feature**: Adding support for Machine Image scan

@@ -1,3 +1,7 @@
+# v1.70.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.70.0 (2026-10-29)
 
 * **Feature**: This release adds support for instance health status checks and system status checks.

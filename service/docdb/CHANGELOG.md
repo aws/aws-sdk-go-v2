@@ -1,3 +1,7 @@
+# v1.58.0 (2026-10-30)
+
+* **Feature**: Amazon DocumentDB now returns ServerlessV2PlatformVersion in DBCluster API responses and adds the DescribeServerlessV2PlatformVersions API to discover available platform versions and their capabilities.
+
 # v1.57.6 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

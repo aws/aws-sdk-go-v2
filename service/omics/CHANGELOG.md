@@ -1,3 +1,8 @@
+# v1.59.0 (2026-10-30)
+
+* **Feature**: Adds the outputUriPrefixMode parameter to StartRun and GetRun. You can now write run outputs directly under outputUri, without the prefixes the service adds by default. When you opt in, outputs overwrite existing objects at the same keys.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.58.0 (2026-10-27)
 
 * **Feature**: Enable schema-based (de)serialization for this service.

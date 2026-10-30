@@ -1,3 +1,7 @@
+# v1.68.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.68.0 (2026-10-29)
 
 * **Feature**: This release adds support for on-demand AMI scanning with Amazon Inspector.

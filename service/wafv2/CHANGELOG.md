@@ -1,3 +1,7 @@
+# v1.84.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.84.0 (2026-10-29)
 
 * **Feature**: AWS WAF customers using Targeted Bot Control, ATP, or ACFP managed rule groups can now enable automatic Challenge JavaScript SDK injection. When enabled, Amazon CloudFront injects the script tag into HTML responses on your behalf, removing the need for manual integration.

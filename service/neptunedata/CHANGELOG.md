@@ -1,3 +1,7 @@
+# v1.27.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.27.0 (2026-10-28)
 
 * **Feature**: Get Storage API analyzes storage usage to identify database bloat and your storage footprint. Index Rebuild API triggers on-demand index reconstruction to eliminate bloat and restore query performance.

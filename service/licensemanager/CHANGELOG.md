@@ -1,3 +1,7 @@
+# v1.48.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.48.0 (2026-10-27)
 
 * **Feature**: AWS License Manager now supports delegate grants for read-only visibility into license distributions. CreateGrant accepts a new GrantType (BuyerGrant or DelegateGrant) and a desired status at distribution time.

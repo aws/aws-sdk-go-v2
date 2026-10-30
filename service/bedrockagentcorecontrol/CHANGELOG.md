@@ -1,3 +1,7 @@
+# v1.77.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.77.0 (2026-10-29)
 
 * **Feature**: Adds Session Endpoint Feature on AgentCore Runtime

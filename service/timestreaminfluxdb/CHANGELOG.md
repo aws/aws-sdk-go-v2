@@ -1,3 +1,8 @@
+# v1.33.0 (2026-10-30)
+
+* **Feature**: Add DeploymentConfiguration field to CreateDbCluster and UpdateDbCluster APIs to support creation of heterogenous InfluxDB v3 Enterprise clusters.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.32.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

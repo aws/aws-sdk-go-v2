@@ -1,3 +1,8 @@
+# v1.211.0 (2026-10-30)
+
+* **Feature**: Amazon Connect adds tag-based access control for Contact Lens rules. ListRealtimeContactAnalysisSegmentsV2 adds a ListFilter to return only category segments whose rules match given tags. PreEvaluationFilter now supports contact evaluation resources for OnContactEvaluationSubmit rules.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.210.0 (2026-10-28)
 
 * **Feature**: Amazon Connect APIs - CreateTaskTemplate and UpdateTaskTemplate accept a new ContactHooks parameter called WrapUpFlowId to identify the flow module that runs when an agent attempts to disconnect from a task created with the template. Use this to verify an agent's work or update external case repos.

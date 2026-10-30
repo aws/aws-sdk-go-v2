@@ -1,3 +1,7 @@
+# v1.27.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.27.0 (2026-10-28)
 
 * **Feature**: Adds support for attaching client certificates for mutual TLS (mTLS) authentication to penetration test target endpoints via the new ClientCertificates field on Assets, enabling pentesting of endpoints that require client certificate authentication.

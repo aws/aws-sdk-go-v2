@@ -1,3 +1,8 @@
+# v1.66.0 (2026-10-30)
+
+* **Feature**: Adds the CodeExecution step and codeExecution action to AgenticRetrieveStream trace events, showing when the agent runs code and which documents it reads.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.65.3 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.

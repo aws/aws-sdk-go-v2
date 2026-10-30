@@ -1,3 +1,7 @@
+# v1.51.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.51.0 (2026-10-28)
 
 * **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol in the AWS GovCloud (US-East) and AWS GovCloud (US-West) Regions.

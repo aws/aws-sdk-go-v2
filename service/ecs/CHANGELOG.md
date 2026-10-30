@@ -1,3 +1,7 @@
+# v1.103.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.103.0 (2026-10-27)
 
 * **Feature**: ECS now supports GPU sharing via NVIDIA Multi-Process Service (MPS) on ECS Managed Instances and ECS EC2, allowing multiple ECS tasks to share a single Nvidia GPU for improved utilization.

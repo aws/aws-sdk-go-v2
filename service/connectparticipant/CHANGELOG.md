@@ -1,3 +1,7 @@
+# v1.46.1 (2026-10-30)
+
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.46.0 (2026-10-28)
 
 * **Feature**: Amazon Connect Participant Service now supports the optional UrlContentDisposition parameter on GetAttachment, which returns a pre-signed URL that renders a chat attachment inline in the browser instead of forcing a download.

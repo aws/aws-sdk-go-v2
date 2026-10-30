@@ -1,3 +1,8 @@
+# v1.286.0 (2026-10-30)
+
+* **Feature**: Create endpoints with AcceleratorPartitionLayouts on ProductionVariant and deploy inference components with AcceleratorPartitionType in ComputeResourceRequirements to divide accelerators into hardware-isolated NVIDIA MIG partitions, running multiple models per GPU. P4d, P5, G7, G7e.
+* **Bug Fix**: Fix malformed JSON when serializing nil lists or maps in union members, map values, and list elements.
+
 # v1.285.1 (2026-10-27)
 
 * **Dependency Update**: Update to smithy-go v1.28.7.
