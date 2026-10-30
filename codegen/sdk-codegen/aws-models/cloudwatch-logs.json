@@ -2032,7 +2032,7 @@
                 "target": "com.amazonaws.cloudwatchlogs#DeleteAccountPolicyRequest"
             },
             "output": {
-                "target": "smithy.api#Unit"
+                "target": "com.amazonaws.cloudwatchlogs#DeleteAccountPolicyResponse"
             },
             "errors": [
                 {
@@ -2068,10 +2068,31 @@
                         "smithy.api#documentation": "<p>The type of policy to delete.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "dryRun": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRun",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to preview the impact of deleting the policy without deleting it. If\n      you specify <code>true</code>, CloudWatch Logs does not delete the policy and\n      returns the estimated impact in <code>dryRunResult</code>. The default is\n      <code>false</code>.</p>\n         <p>Specifying <code>dryRun</code> is valid only when you specify\n      <code>RETENTION_POLICY</code> for <code>policyType</code>. Only one dry run can be in\n      progress for an account at a time.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DeleteAccountPolicyResponse": {
+            "type": "structure",
+            "members": {
+                "dryRunResult": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated impact of deleting the policy. This field is returned only when the request\n      specifies <code>dryRun</code> as <code>true</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteDataProtectionPolicy": {
@@ -5370,6 +5391,70 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The method used to distribute log data to the destination, which can be either random\n      or grouped by log stream.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DryRun": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DryRunCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DryRunResult": {
+            "type": "structure",
+            "members": {
+                "totalMatchedLogGroups": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of log groups in the scope of the policy that were analyzed. This value is\n      the sum of <code>increasedRetentionLogGroupCount</code>,\n      <code>decreasedRetentionLogGroupCount</code>, and\n      <code>unchangedRetentionLogGroupCount</code>, and does not include log groups that could not\n      be analyzed.</p>"
+                    }
+                },
+                "increasedRetentionLogGroupCount": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of log groups whose effective retention period would become longer.</p>"
+                    }
+                },
+                "decreasedRetentionLogGroupCount": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of log groups whose effective retention period would become shorter.</p>"
+                    }
+                },
+                "unchangedRetentionLogGroupCount": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of log groups whose effective retention period would not change.</p>"
+                    }
+                },
+                "failedAnalysisCount": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The number of log groups in the scope of the policy that could not be analyzed. These\n      log groups are not included in <code>totalMatchedLogGroups</code>.</p>"
+                    }
+                },
+                "topLogGroupsImpacted": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogGroupImpacts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Up to 20 log groups in the scope of the policy, sorted by stored bytes in descending\n      order. This list can include log groups whose effective retention period would not\n      change.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the estimated impact of creating, updating, or deleting an account-level\n      retention policy. The analysis compares the effective retention period of each log group,\n      which accounts for all account-level retention policies that apply to it, before and after\n      the change. Log groups in the Delivery class are not included.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DynamicTokenPosition": {
@@ -9717,6 +9802,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether bearer token authentication is enabled for this log group. When enabled,\n      bearer token authentication is allowed on operations until it is explicitly disabled.</p>"
                     }
+                },
+                "retentionPolicyName": {
+                    "target": "com.amazonaws.cloudwatchlogs#PolicyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the account-level retention policy that determines the retention period of\n      this log group. This field is returned only when an account-level retention policy applies to\n      the log group. When it is returned, <code>retentionInDays</code> shows the retention period\n      from that policy instead of the retention period set on the log group. If the policy specifies\n      that log events never expire, <code>retentionInDays</code> is not returned.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9806,6 +9897,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatchlogs#LogGroupIdentifier"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LogGroupImpact": {
+            "type": "structure",
+            "members": {
+                "logGroupName": {
+                    "target": "com.amazonaws.cloudwatchlogs#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the log group.</p>"
+                    }
+                },
+                "currentRetention": {
+                    "target": "com.amazonaws.cloudwatchlogs#RetentionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current effective retention period of the log group, in days. A value of\n      <code>NEVER_EXPIRE</code> indicates that log events in the log group never expire.</p>"
+                    }
+                },
+                "proposedRetention": {
+                    "target": "com.amazonaws.cloudwatchlogs#RetentionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective retention period of the log group, in days, after the change. A value of\n      <code>NEVER_EXPIRE</code> indicates that log events in the log group would never\n      expire.</p>"
+                    }
+                },
+                "storedBytes": {
+                    "target": "com.amazonaws.cloudwatchlogs#StoredBytes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of bytes stored in the log group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the estimated effect of an account-level retention policy change on one log\n      group.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#LogGroupImpacts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchlogs#LogGroupImpact"
             }
         },
         "com.amazonaws.cloudwatchlogs#LogGroupName": {
@@ -12893,6 +13022,12 @@
                     "traits": {
                         "smithy.api#enumValue": "METRIC_EXTRACTION_POLICY"
                     }
+                },
+                "RETENTION_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RETENTION_POLICY"
+                    }
                 }
             }
         },
@@ -13123,6 +13258,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Use this parameter to apply the new policy to a subset of log groups in the account or a\n      data source name and type combination.  </p>\n         <p>Specifying <code>selectionCriteria</code> is valid only when you specify\n        <code>SUBSCRIPTION_FILTER_POLICY</code>, <code>FIELD_INDEX_POLICY</code> or\n        <code>TRANSFORMER_POLICY</code>for <code>policyType</code>.</p>\n         <ul>\n            <li>\n               <p>If <code>policyType</code> is <code>SUBSCRIPTION_FILTER_POLICY</code>, the only\n          supported <code>selectionCriteria</code> filter is <code>LogGroupName NOT IN\n          []</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>policyType</code> is <code>TRANSFORMER_POLICY</code>, the only supported\n            <code>selectionCriteria</code> filter is <code>LogGroupNamePrefix</code>\n               </p>\n            </li>\n            <li>\n               <p>If <code>policyType</code> is <code>FIELD_INDEX_POLICY</code>, the supported\n            <code>selectionCriteria</code> filters are:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>LogGroupNamePrefix</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>DataSourceName</code> AND <code>DataSourceType</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When you specify <code>selectionCriteria</code> for a field index policy you can\n        use either <code>LogGroupNamePrefix</code> by itself or <code>DataSourceName</code> and\n          <code>DataSourceType</code> together.</p>\n            </li>\n         </ul>\n         <p>The <code>selectionCriteria</code> string can be up to 25KB in length. The length is\n      determined by using its UTF-8 bytes.</p>\n         <p>Using the <code>selectionCriteria</code> parameter with\n        <code>SUBSCRIPTION_FILTER_POLICY</code> is useful to help prevent infinite loops. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html\">Log recursion\n        prevention</a>.</p>"
                     }
+                },
+                "dryRun": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRun",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to preview the impact of the policy without creating or updating it.\n      If you specify <code>true</code>, CloudWatch Logs validates the request,\n      does not save the policy, and returns the estimated impact in <code>dryRunResult</code>\n      instead of <code>accountPolicy</code>. The default is <code>false</code>.</p>\n         <p>Specifying <code>dryRun</code> is valid only when you specify\n      <code>RETENTION_POLICY</code> for <code>policyType</code>. Only one dry run can be in\n      progress for an account at a time.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13136,6 +13278,12 @@
                     "target": "com.amazonaws.cloudwatchlogs#AccountPolicy",
                     "traits": {
                         "smithy.api#documentation": "<p>The account policy that you created.</p>"
+                    }
+                },
+                "dryRunResult": {
+                    "target": "com.amazonaws.cloudwatchlogs#DryRunResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated impact of the policy on log groups in the account. This field is returned\n      only when the request specifies <code>dryRun</code> as <code>true</code>.</p>"
                     }
                 }
             },
@@ -15240,6 +15388,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatchlogs#ResultField"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#RetentionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 12
+                }
             }
         },
         "com.amazonaws.cloudwatchlogs#RoleArn": {

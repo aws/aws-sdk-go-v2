@@ -1011,7 +1011,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>"
+                "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>\n         <p>Deprecated. Use deploymentConfiguration to define the cluster topology instead.</p>"
             }
         },
         "com.amazonaws.timestreaminfluxdb#ClusterDeploymentType": {
@@ -1293,7 +1293,17 @@
                 "clusterConfiguration": {
                     "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>\n         <p>Deprecated. Use deploymentConfiguration to view the cluster topology instead.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration of the resource at the time of backup.</p>"
                     }
                 },
                 "dbParameterGroupId": {
@@ -1471,8 +1481,7 @@
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB instance type to run InfluxDB on.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB instance type to run InfluxDB on.</p>\n         <p>Optional when you define the cluster topology with deploymentConfiguration, because the instance type is then specified per node group.</p>"
                     }
                 },
                 "dbStorageType": {
@@ -1517,6 +1526,12 @@
                     "target": "com.amazonaws.timestreaminfluxdb#ClusterDeploymentType",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the type of cluster to create.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compute topology for the cluster, defined as a set of node groups. Use deploymentConfiguration to allocate compute per function: ingest, query, compaction, and processing. A deployment configuration becomes the source of truth for the cluster's topology. Timestream for InfluxDB then ignores any node-count parameters in the associated DB parameter group.</p>"
                     }
                 },
                 "failoverMode": {
@@ -3160,7 +3175,17 @@
                 "clusterConfiguration": {
                     "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>\n         <p>Deprecated. Use deploymentConfiguration to view the cluster topology instead.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration of the resource at the time of backup.</p>"
                     }
                 },
                 "dbParameterGroupId": {
@@ -3554,6 +3579,20 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration": {
+            "type": "union",
+            "members": {
+                "InfluxDBv3Enterprise": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InfluxDBv3EnterpriseDeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration for an InfluxDB 3 Enterprise cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the compute topology of a Timestream for InfluxDB cluster as a set of node groups for a specific database engine. For InfluxDB 3 Enterprise, use the InfluxDBv3Enterprise member to allocate compute per function: ingest, query, compaction, and processing.</p>"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#DeploymentType": {
             "type": "enum",
             "members": {
@@ -3798,7 +3837,17 @@
                 "clusterConfiguration": {
                     "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>The cluster configuration of the resource at the time of backup.</p>\n         <p>Deprecated. Use deploymentConfiguration to view the cluster topology instead.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment configuration of the resource at the time of backup.</p>"
                     }
                 },
                 "dbParameterGroupId": {
@@ -4090,7 +4139,17 @@
                 "clusterConfiguration": {
                     "target": "com.amazonaws.timestreaminfluxdb#ClusterConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>Configuration for node modes in the DbCluster.</p>\n         <p>Deprecated. Use deploymentConfiguration to view the cluster topology instead.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current compute topology of the cluster, as a set of node groups. The returned topology reflects the cluster's actual provisioned nodes.</p>"
                     }
                 },
                 "dbBackupConfigurations": {
@@ -5049,6 +5108,21 @@
                 "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v3 Core parameters in Timestream for InfluxDB.</p>"
             }
         },
+        "com.amazonaws.timestreaminfluxdb#InfluxDBv3EnterpriseDeploymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "nodeGroups": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NodeGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node groups that make up the cluster. Across all node groups, the cluster must include 1 to 4 nodes with the INGEST mode, 0 to 14 nodes with the QUERY mode, and exactly one node with the COMPACT mode.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The compute topology for an InfluxDB 3 Enterprise cluster, expressed as a list of node groups.</p>"
+            }
+        },
         "com.amazonaws.timestreaminfluxdb#InfluxDBv3EnterpriseParameters": {
             "type": "structure",
             "members": {
@@ -5374,30 +5448,45 @@
                 "ingestQueryInstances": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies number of instances in the DbCluster which can both ingest and query.</p>",
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 1,
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>Specifies number of instances in the DbCluster which can both ingest and query.</p>\n         <p>Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster to define the cluster topology instead. When you supply a deployment configuration, Timestream for InfluxDB ignores this parameter.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 4
-                        },
-                        "smithy.api#required": {}
+                        }
                     }
                 },
                 "queryOnlyInstances": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies number of instances in the DbCluster which can only query.</p>",
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 0,
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>Specifies number of instances in the DbCluster which can only query.</p>\n         <p>Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster to define the cluster topology instead. When you supply a deployment configuration, Timestream for InfluxDB ignores this parameter.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 10
-                        },
-                        "smithy.api#required": {}
+                        }
                     }
                 },
                 "dedicatedCompactor": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies if the compactor instance should be a standalone instance or not.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": false,
+                        "smithy.api#deprecated": {
+                            "message": "Use deploymentConfiguration instead.",
+                            "since": "2026-09-28"
+                        },
+                        "smithy.api#documentation": "<p>Specifies if the compactor instance should be a standalone instance or not.</p>\n         <p>Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster to define the cluster topology instead. When you supply a deployment configuration, Timestream for InfluxDB ignores this parameter.</p>"
                     }
                 },
                 "compactionRowLimit": {
@@ -5557,6 +5646,13 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.timestreaminfluxdb#InstanceMode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#InternalServerException": {
@@ -6204,6 +6300,52 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#NodeGroup": {
+            "type": "structure",
+            "members": {
+                "instanceModes": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InstanceModeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The functions that the nodes in this group perform. Provide from 1 to 4 unique modes. Valid modes:</p>\n         <ul>\n            <li>\n               <p>INGEST – Nodes in this mode ingest data. Across all node groups, INGEST nodes must total between 1 and 4.</p>\n            </li>\n            <li>\n               <p>QUERY – Nodes in this mode query data. Across all node groups, QUERY nodes must total between 0 and 14.</p>\n            </li>\n            <li>\n               <p>COMPACT – Nodes in this mode compact data. Exactly one node across all node groups must have this mode. If the cluster has more than three non-compaction nodes, place the COMPACT node in its own dedicated node group.</p>\n            </li>\n            <li>\n               <p>PROCESS – Nodes in this mode process data with the processing engine.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB instance type to run InfluxDB on for the nodes in this group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "count": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of nodes in this group. Valid values are 1 to 13.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 13
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A group of one or more nodes in a Timestream for InfluxDB cluster that share the same instance modes and instance type. A cluster's compute topology is defined as a list of node groups.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#NodeGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#NodeGroup"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#uniqueItems": {}
             }
         },
         "com.amazonaws.timestreaminfluxdb#Organization": {
@@ -7359,7 +7501,13 @@
                 "dbInstanceType": {
                     "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Update the DB cluster to use the specified DB instance Type.</p>"
+                        "smithy.api#documentation": "<p>Update the DB cluster to use the specified DB instance Type.</p>\n         <p>You can't specify both dbInstanceType and deploymentConfiguration in the same request. When you use deploymentConfiguration, the instance type is specified per node group.</p>"
+                    }
+                },
+                "deploymentConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated compute topology for the cluster, defined as a set of node groups. Use deploymentConfiguration to change the cluster's topology or scale its compute in a single call. You can't specify both deploymentConfiguration and dbInstanceType in the same request. When you provide a deployment configuration, Timestream for InfluxDB ignores any node-count parameters in the associated DB parameter group.</p>"
                     }
                 },
                 "failoverMode": {

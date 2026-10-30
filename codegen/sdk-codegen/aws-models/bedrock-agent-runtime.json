@@ -541,6 +541,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details of a long-term memory retrieval that the agent chose to perform.</p>"
                     }
+                },
+                "codeExecution": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgenticRetrieveCodeExecutionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of code that the agent chose to run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -723,6 +729,52 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>List of citation references.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AgenticRetrieveCodeExecutionDetails": {
+            "type": "structure",
+            "members": {
+                "documents": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgenticRetrieveCodeExecutionDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The documents that the code reads. This field is present when the code reads documents.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of code that the agent chose to run in an isolated sandbox. The record includes the documents that the code reads. The corresponding CodeExecution step reports the outcome.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AgenticRetrieveCodeExecutionDocument": {
+            "type": "structure",
+            "members": {
+                "documentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the document.</p>"
+                    }
+                },
+                "sourceRetriever": {
+                    "target": "com.amazonaws.bedrockagentruntime#AgenticRetrieveSourceRetriever",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source retriever associated with the document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A document that a code execution action reads.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentruntime#AgenticRetrieveCodeExecutionDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentruntime#AgenticRetrieveCodeExecutionDocument",
+                "traits": {
+                    "smithy.api#documentation": "<p>A document read by the code.</p>"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The documents read by a code execution action.</p>"
             }
         },
         "com.amazonaws.bedrockagentruntime#AgenticRetrieveConfiguration": {
@@ -1627,6 +1679,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The phase that restores prior session history from AgentCore Memory short-term memory, before the agent begins work.</p>",
                         "smithy.api#enumValue": "SessionHistoryLoad"
+                    }
+                },
+                "CODE_EXECUTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phase that runs agent-generated code in an isolated sandbox. The code can read documents retrieved earlier in the same request.</p>",
+                        "smithy.api#enumValue": "CodeExecution"
                     }
                 }
             },
