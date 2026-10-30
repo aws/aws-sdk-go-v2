@@ -4,13 +4,16 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"os"
+	"reflect"
 	"strconv"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
@@ -595,4 +598,125 @@ func TestResolveDefaultsMode(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestResolveInvocationContextLogging(t *testing.T) {
+	base := &testLogger{}
+	correlated := awsmiddleware.NewCorrelatedLogger(base)
+
+	cases := map[string]struct {
+		Logger logging.Logger
+		Mode   aws.ClientLogMode
+
+		ExpectDecorated bool
+		ExpectUnchanged bool
+	}{
+		"bit set decorates the logger": {
+			Logger:          base,
+			Mode:            aws.LogRequest | aws.LogResponse | aws.LogInvocationContext,
+			ExpectDecorated: true,
+		},
+		"bit not set leaves the logger alone": {
+			Logger:          base,
+			Mode:            aws.LogRequest | aws.LogResponse,
+			ExpectUnchanged: true,
+		},
+		"bit set without a logger stays without one": {
+			Logger: nil,
+			Mode:   aws.LogInvocationContext,
+		},
+		"already decorated logger is not wrapped again": {
+			Logger:          correlated,
+			Mode:            aws.LogInvocationContext,
+			ExpectDecorated: true,
+			ExpectUnchanged: true,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			var options LoadOptions
+			WithLogger(c.Logger)(&options)
+			WithClientLogMode(c.Mode)(&options)
+
+			cfg := aws.Config{Logger: c.Logger, ClientLogMode: c.Mode}
+			if err := resolveInvocationContextLogging(context.Background(), &cfg, configs{options}); err != nil {
+				t.Fatalf("expect no error, got %v", err)
+			}
+
+			_, decorated := cfg.Logger.(*awsmiddleware.CorrelatedLogger)
+			if decorated != c.ExpectDecorated {
+				t.Fatalf("expect decorated=%v, got %v (%T)", c.ExpectDecorated, decorated, cfg.Logger)
+			}
+
+			if c.Logger == nil {
+				if cfg.Logger != nil {
+					t.Fatalf("expect no logger, got %T", cfg.Logger)
+				}
+				return
+			}
+
+			if got, want := cfg.Logger != c.Logger, !c.ExpectUnchanged; got != want {
+				t.Errorf("expect logger replaced=%v, got %v", want, got)
+			}
+		})
+	}
+}
+
+// TestInvocationContextLoggingResolvedLastOfLoggerAndMode guards the wiring the
+// LogInvocationContext bit depends on: the logger decoration runs after both
+// the logger and the client log mode have been resolved.
+func TestInvocationContextLoggingResolvedLastOfLoggerAndMode(t *testing.T) {
+	indexOf := func(want awsConfigResolver) int {
+		wantPtr := reflect.ValueOf(want).Pointer()
+		for i, got := range defaultAWSConfigResolvers {
+			if reflect.ValueOf(got).Pointer() == wantPtr {
+				return i
+			}
+		}
+		t.Fatalf("resolver not registered in defaultAWSConfigResolvers")
+		return -1
+	}
+
+	if at := indexOf(resolveInvocationContextLogging); at < indexOf(resolveLogger) || at < indexOf(resolveClientLogMode) {
+		t.Errorf("expect invocation context logging to be resolved after logger (%v) and log mode (%v), got %v",
+			indexOf(resolveLogger), indexOf(resolveClientLogMode), at)
+	}
+}
+
+func TestLoadDefaultConfigInvocationContextLogging(t *testing.T) {
+	logger := &testLogger{}
+
+	cfg, err := LoadDefaultConfig(context.Background(),
+		WithRegion("us-west-2"),
+		WithCredentialsProvider(credentials.NewStaticCredentialsProvider("id", "key", "")),
+		WithLogger(logger),
+		WithClientLogMode(aws.LogRequest|aws.LogResponse|aws.LogInvocationContext),
+	)
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if _, ok := cfg.Logger.(*awsmiddleware.CorrelatedLogger); !ok {
+		t.Fatalf("expect the loaded logger to be correlated, got %T", cfg.Logger)
+	}
+
+	ctx := awsmiddleware.SetServiceID(context.Background(), "S3")
+	ctx = awsmiddleware.SetOperationName(ctx, "PutObject")
+	logging.WithContext(ctx, cfg.Logger).Logf(logging.Debug, "Request\nPUT /key HTTP/1.1")
+
+	if len(logger.entries) != 1 {
+		t.Fatalf("expect a single entry, got %v", logger.entries)
+	}
+	if e, a := "DEBUG [service=S3 operation=PutObject] Request\nPUT /key HTTP/1.1", logger.entries[0]; e != a {
+		t.Errorf("expect\n%q\ngot\n%q", e, a)
+	}
+}
+
+type testLogger struct {
+	entries []string
+}
+
+func (l *testLogger) Logf(c logging.Classification, format string, v ...interface{}) {
+	l.entries = append(l.entries, fmt.Sprintf(string(c)+" "+format, v...))
 }

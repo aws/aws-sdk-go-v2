@@ -13,6 +13,18 @@ package aws
 // Example: Adding an additional log mode to an existing ClientLogMode value
 //
 //	clientLogMode |= aws.LogResponse
+//
+// Log modes toggle what is logged, not how entries are labeled, with the
+// exception of LogInvocationContext: it does not add entries, it labels the
+// entries the other modes produce with the identifiers of the operation
+// invocation that produced them, e.g. the invocation id that ties a logged
+// response to the request it belongs to.
+//
+// LogInvocationContext is honored where the logger and the log mode are
+// resolved together, i.e. by the config package. Code that builds a client
+// from Options directly, or that overrides the logger for a single call,
+// reaches the same result by wrapping the logger with the NewCorrelatedLogger
+// function of the aws/middleware package.
 type ClientLogMode uint64
 
 // Supported ClientLogMode bits that can be configured to toggle logging of specific SDK events.
@@ -26,6 +38,7 @@ const (
 	LogDeprecatedUsage
 	LogRequestEventMessage
 	LogResponseEventMessage
+	LogInvocationContext
 )
 
 // IsSigning returns whether the Signing logging mode bit is set
@@ -73,6 +86,11 @@ func (m ClientLogMode) IsResponseEventMessage() bool {
 	return m&LogResponseEventMessage != 0
 }
 
+// IsInvocationContext returns whether the InvocationContext logging mode bit is set
+func (m ClientLogMode) IsInvocationContext() bool {
+	return m&LogInvocationContext != 0
+}
+
 // ClearSigning clears the Signing logging mode bit
 func (m *ClientLogMode) ClearSigning() {
 	*m &^= LogSigning
@@ -116,4 +134,9 @@ func (m *ClientLogMode) ClearRequestEventMessage() {
 // ClearResponseEventMessage clears the ResponseEventMessage logging mode bit
 func (m *ClientLogMode) ClearResponseEventMessage() {
 	*m &^= LogResponseEventMessage
+}
+
+// ClearInvocationContext clears the InvocationContext logging mode bit
+func (m *ClientLogMode) ClearInvocationContext() {
+	*m &^= LogInvocationContext
 }

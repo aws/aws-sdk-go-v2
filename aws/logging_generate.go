@@ -25,6 +25,7 @@ var config = struct {
 		"DeprecatedUsage",
 		"RequestEventMessage",
 		"ResponseEventMessage",
+		"InvocationContext",
 	},
 }
 
@@ -50,6 +51,18 @@ package aws
 //
 // Example: Adding an additional log mode to an existing ClientLogMode value
 //  clientLogMode |= aws.LogResponse
+//
+// Log modes toggle what is logged, not how entries are labeled, with the
+// exception of LogInvocationContext: it does not add entries, it labels the
+// entries the other modes produce with the identifiers of the operation
+// invocation that produced them, e.g. the invocation id that ties a logged
+// response to the request it belongs to.
+//
+// LogInvocationContext is honored where the logger and the log mode are
+// resolved together, i.e. by the config package. Code that builds a client
+// from Options directly, or that overrides the logger for a single call,
+// reaches the same result by wrapping the logger with the NewCorrelatedLogger
+// function of the aws/middleware package.
 type ClientLogMode uint64
 
 // Supported ClientLogMode bits that can be configured to toggle logging of specific SDK events.
