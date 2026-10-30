@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,23 @@ type UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallSettings != nil {
+		s.WriteStruct(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings)
+		v.CallSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id, *v.Id)
+	}
+}
+
 type UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
 
 	// The unique identifier of the phone number that was updated.
@@ -55,13 +74,32 @@ type UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId, *v.PhoneNumberId)
+	}
+}
+func (v *UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId, v.PhoneNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLinkedWhatsAppBusinessAccountPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumber, schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput, schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumber, schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput, schemas.UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput), output: &UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

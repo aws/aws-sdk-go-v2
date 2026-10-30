@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,26 @@ type StartVariantImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVariantImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVariantImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVariantImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationFieldMap(s, schemas.StartVariantImportRequest_annotationFields, v.AnnotationFields)
+	if v.DestinationName != nil {
+		s.WriteString(schemas.StartVariantImportRequest_destinationName, *v.DestinationName)
+	}
+	serializeVariantImportItemSources(s, schemas.StartVariantImportRequest_items, v.Items)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartVariantImportRequest_roleArn, *v.RoleArn)
+	}
+	if v.RunLeftNormalization != false {
+		s.WriteBool(schemas.StartVariantImportRequest_runLeftNormalization, v.RunLeftNormalization)
+	}
+}
+
 type StartVariantImportJobOutput struct {
 
 	// The job's ID.
@@ -71,13 +93,32 @@ type StartVariantImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVariantImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVariantImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVariantImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartVariantImportResponse_jobId, *v.JobId)
+	}
+}
+func (v *StartVariantImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVariantImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVariantImportResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartVariantImportResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartVariantImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartVariantImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVariantImportJob, schemas.StartVariantImportRequest, schemas.StartVariantImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartVariantImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVariantImportJob, schemas.StartVariantImportRequest, schemas.StartVariantImportResponse), output: &StartVariantImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

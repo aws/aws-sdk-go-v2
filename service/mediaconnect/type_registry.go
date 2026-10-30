@@ -35,6 +35,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 			Schema: schemas.CreateGateway420Exception,
 			New:    func() any { return &types.CreateGateway420Exception{} },
 		},
+		"com.amazonaws.mediaconnect#DestinationEndpointServiceQuotaExceededException": {
+			Schema: schemas.DestinationEndpointServiceQuotaExceededException,
+			New:    func() any { return &types.DestinationEndpointServiceQuotaExceededException{} },
+		},
 		"com.amazonaws.mediaconnect#ForbiddenException": {
 			Schema: schemas.ForbiddenException,
 			New:    func() any { return &types.ForbiddenException{} },
@@ -66,6 +70,10 @@ var TypeRegistry = &smithy.TypeRegistry{
 		"com.amazonaws.mediaconnect#ServiceUnavailableException": {
 			Schema: schemas.ServiceUnavailableException,
 			New:    func() any { return &types.ServiceUnavailableException{} },
+		},
+		"com.amazonaws.mediaconnect#SourceEndpointServiceQuotaExceededException": {
+			Schema: schemas.SourceEndpointServiceQuotaExceededException,
+			New:    func() any { return &types.SourceEndpointServiceQuotaExceededException{} },
 		},
 		"com.amazonaws.mediaconnect#TooManyRequestsException": {
 			Schema: schemas.TooManyRequestsException,

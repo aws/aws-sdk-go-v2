@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deployment":{"createdAt":946684800,"deletedAt":946684800,"deploymentArn":"__DeploymentArn__","id":"__Id__","modifiedAt":946684800,"name":"__Name__","patternName":"__PatternName__","resourceGroup":"__ResourceGroup__","specifications":{"key0":"__Value__"},"status":"COMPLETED","tags":{"key0":"__Value__"},"workloadName":"__WorkloadName__"}}

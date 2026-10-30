@@ -1,3 +1,8 @@
+# v1.51.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.51.0 (2026-10-22)
 
 * **Feature**: AWS Cloud WAN now provides managed one-to-one NAT directly on it's core network attachments, through integration with Regional Private NAT Gateway. Use UpdateAttachmentNatConfiguration to enable NAT and configure NAT rules, and ListAttachmentNatConfigurations to view them.

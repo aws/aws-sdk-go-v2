@@ -4,7 +4,9 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -42,6 +44,24 @@ type GetArchitectureRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchitectureRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchitectureRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchitectureRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetArchitectureRecommendationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetArchitectureRecommendationsRequest_NextToken, *v.NextToken)
+	}
+	if v.RecoveryGroupName != nil {
+		s.WriteString(schemas.GetArchitectureRecommendationsRequest_RecoveryGroupName, *v.RecoveryGroupName)
+	}
+}
+
 type GetArchitectureRecommendationsOutput struct {
 
 	// The time that a recovery group was last assessed for recommendations, in UTC
@@ -60,13 +80,41 @@ type GetArchitectureRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchitectureRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchitectureRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchitectureRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastAuditTimestamp != nil {
+		s.WriteTime(schemas.GetArchitectureRecommendationsResponse_LastAuditTimestamp, *v.LastAuditTimestamp)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetArchitectureRecommendationsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfRecommendation(s, schemas.GetArchitectureRecommendationsResponse_Recommendations, v.Recommendations)
+}
+func (v *GetArchitectureRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchitectureRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchitectureRecommendationsResponse_LastAuditTimestamp:
+			v.LastAuditTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetArchitectureRecommendationsResponse_LastAuditTimestamp, v.LastAuditTimestamp)
+		case schemas.GetArchitectureRecommendationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetArchitectureRecommendationsResponse_NextToken, v.NextToken)
+		case schemas.GetArchitectureRecommendationsResponse_Recommendations:
+			return deserialize__listOfRecommendation(d, schemas.GetArchitectureRecommendationsResponse_Recommendations, &v.Recommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArchitectureRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetArchitectureRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchitectureRecommendations, schemas.GetArchitectureRecommendationsRequest, schemas.GetArchitectureRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetArchitectureRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchitectureRecommendations, schemas.GetArchitectureRecommendationsRequest, schemas.GetArchitectureRecommendationsResponse), output: &GetArchitectureRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

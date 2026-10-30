@@ -418,6 +418,11 @@ type Channel struct {
 	// containerFormat may be set to TS or FRAGMENTED_MP4 . Default: TS .
 	ContainerFormat ContainerFormat
 
+	// Failover-slate-configuration ARN. A valid ARN value here both specifies the ARN
+	// and enables failover slate. Default: "" (empty string, no failover slate
+	// configuration is applied).
+	FailoverSlateConfigurationArn *string
+
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
 	IngestEndpoint *string
@@ -496,6 +501,9 @@ func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerFormat != "" {
 		s.WriteString(schemas.Channel_containerFormat, string(v.ContainerFormat))
 	}
+	if v.FailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.Channel_failoverSlateConfigurationArn, *v.FailoverSlateConfigurationArn)
+	}
 	if v.IngestEndpoint != nil {
 		s.WriteString(schemas.Channel_ingestEndpoint, *v.IngestEndpoint)
 	}
@@ -553,6 +561,9 @@ func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.ContainerFormat = ContainerFormat(ev)
 			return nil
+		case schemas.Channel_failoverSlateConfigurationArn:
+			v.FailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.Channel_failoverSlateConfigurationArn, v.FailoverSlateConfigurationArn)
 		case schemas.Channel_ingestEndpoint:
 			v.IngestEndpoint = new(string)
 			return d.ReadString(schemas.Channel_ingestEndpoint, v.IngestEndpoint)
@@ -617,6 +628,11 @@ type ChannelSummary struct {
 	// false .
 	Authorized bool
 
+	// Failover-slate-configuration ARN. A valid ARN value here both specifies the ARN
+	// and enables failover slate. Default: "" (empty string, no failover slate
+	// configuration is applied).
+	FailoverSlateConfigurationArn *string
+
 	// Whether the channel allows insecure RTMP ingest. Default: false .
 	InsecureIngest bool
 
@@ -677,6 +693,9 @@ func (v *ChannelSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Authorized != false {
 		s.WriteBool(schemas.ChannelSummary_authorized, v.Authorized)
 	}
+	if v.FailoverSlateConfigurationArn != nil {
+		s.WriteString(schemas.ChannelSummary_failoverSlateConfigurationArn, *v.FailoverSlateConfigurationArn)
+	}
 	if v.InsecureIngest != false {
 		s.WriteBool(schemas.ChannelSummary_insecureIngest, v.InsecureIngest)
 	}
@@ -711,6 +730,9 @@ func (v *ChannelSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.ChannelSummary_arn, v.Arn)
 		case schemas.ChannelSummary_authorized:
 			return d.ReadBool(schemas.ChannelSummary_authorized, &v.Authorized)
+		case schemas.ChannelSummary_failoverSlateConfigurationArn:
+			v.FailoverSlateConfigurationArn = new(string)
+			return d.ReadString(schemas.ChannelSummary_failoverSlateConfigurationArn, v.FailoverSlateConfigurationArn)
 		case schemas.ChannelSummary_insecureIngest:
 			return d.ReadBool(schemas.ChannelSummary_insecureIngest, &v.InsecureIngest)
 		case schemas.ChannelSummary_latencyMode:
@@ -780,6 +802,202 @@ func (v *DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.DestinationConfiguration_s3:
 			v.S3 = &S3DestinationConfiguration{}
 			return v.S3.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Object specifying a failover slate configuration.
+type FailoverSlateConfiguration struct {
+
+	// Failover-slate-configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// Current state of the failover slate configuration.
+	//
+	// This member is required.
+	State FailoverSlateConfigurationState
+
+	// Number of seconds of ingest interruption before the failover slate activates.
+	// Default: 3 .
+	ActivationThresholdSeconds *int32
+
+	// Maximum number of seconds that the failover slate displays. Default: 60 .
+	MaxSlateDisplaySeconds *int32
+
+	// Minimum number of seconds that the failover slate displays after activation.
+	// Default: 3 .
+	MinSlateDisplaySeconds *int32
+
+	// Failover-slate-configuration name.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailoverSlateConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverSlateConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverSlateConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationThresholdSeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfiguration_activationThresholdSeconds, *v.ActivationThresholdSeconds)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.FailoverSlateConfiguration_arn, *v.Arn)
+	}
+	if v.MaxSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfiguration_maxSlateDisplaySeconds, *v.MaxSlateDisplaySeconds)
+	}
+	if v.MinSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfiguration_minSlateDisplaySeconds, *v.MinSlateDisplaySeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FailoverSlateConfiguration_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.FailoverSlateConfiguration_state, string(v.State))
+	}
+	serializeTags(s, schemas.FailoverSlateConfiguration_tags, v.Tags)
+}
+func (v *FailoverSlateConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverSlateConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverSlateConfiguration_activationThresholdSeconds:
+			v.ActivationThresholdSeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfiguration_activationThresholdSeconds, v.ActivationThresholdSeconds)
+		case schemas.FailoverSlateConfiguration_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FailoverSlateConfiguration_arn, v.Arn)
+		case schemas.FailoverSlateConfiguration_maxSlateDisplaySeconds:
+			v.MaxSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfiguration_maxSlateDisplaySeconds, v.MaxSlateDisplaySeconds)
+		case schemas.FailoverSlateConfiguration_minSlateDisplaySeconds:
+			v.MinSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfiguration_minSlateDisplaySeconds, v.MinSlateDisplaySeconds)
+		case schemas.FailoverSlateConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FailoverSlateConfiguration_name, v.Name)
+		case schemas.FailoverSlateConfiguration_state:
+			var ev string
+			if err := d.ReadString(schemas.FailoverSlateConfiguration_state, &ev); err != nil {
+				return err
+			}
+			v.State = FailoverSlateConfigurationState(ev)
+			return nil
+		case schemas.FailoverSlateConfiguration_tags:
+			return deserializeTags(d, schemas.FailoverSlateConfiguration_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
+// Summary information about a failover slate configuration.
+type FailoverSlateConfigurationSummary struct {
+
+	// Failover-slate-configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// Current state of the failover slate configuration.
+	//
+	// This member is required.
+	State FailoverSlateConfigurationState
+
+	// Number of seconds of ingest interruption before the failover slate activates.
+	// Default: 3 .
+	ActivationThresholdSeconds *int32
+
+	// Maximum number of seconds that the failover slate displays. Default: 60 .
+	MaxSlateDisplaySeconds *int32
+
+	// Minimum number of seconds that the failover slate displays after activation.
+	// Default: 3 .
+	MinSlateDisplaySeconds *int32
+
+	// Failover-slate-configuration name.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FailoverSlateConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailoverSlateConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailoverSlateConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationThresholdSeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfigurationSummary_activationThresholdSeconds, *v.ActivationThresholdSeconds)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.FailoverSlateConfigurationSummary_arn, *v.Arn)
+	}
+	if v.MaxSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfigurationSummary_maxSlateDisplaySeconds, *v.MaxSlateDisplaySeconds)
+	}
+	if v.MinSlateDisplaySeconds != nil {
+		s.WriteInt32(schemas.FailoverSlateConfigurationSummary_minSlateDisplaySeconds, *v.MinSlateDisplaySeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FailoverSlateConfigurationSummary_name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.FailoverSlateConfigurationSummary_state, string(v.State))
+	}
+	serializeTags(s, schemas.FailoverSlateConfigurationSummary_tags, v.Tags)
+}
+func (v *FailoverSlateConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailoverSlateConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailoverSlateConfigurationSummary_activationThresholdSeconds:
+			v.ActivationThresholdSeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfigurationSummary_activationThresholdSeconds, v.ActivationThresholdSeconds)
+		case schemas.FailoverSlateConfigurationSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FailoverSlateConfigurationSummary_arn, v.Arn)
+		case schemas.FailoverSlateConfigurationSummary_maxSlateDisplaySeconds:
+			v.MaxSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfigurationSummary_maxSlateDisplaySeconds, v.MaxSlateDisplaySeconds)
+		case schemas.FailoverSlateConfigurationSummary_minSlateDisplaySeconds:
+			v.MinSlateDisplaySeconds = new(int32)
+			return d.ReadInt32(schemas.FailoverSlateConfigurationSummary_minSlateDisplaySeconds, v.MinSlateDisplaySeconds)
+		case schemas.FailoverSlateConfigurationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FailoverSlateConfigurationSummary_name, v.Name)
+		case schemas.FailoverSlateConfigurationSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.FailoverSlateConfigurationSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = FailoverSlateConfigurationState(ev)
+			return nil
+		case schemas.FailoverSlateConfigurationSummary_tags:
+			return deserializeTags(d, schemas.FailoverSlateConfigurationSummary_tags, &v.Tags)
 		}
 		return nil
 	})
@@ -1986,6 +2204,9 @@ type StreamSession struct {
 	// this is returned as a string. For live streams, this is NULL .
 	EndTime *time.Time
 
+	// The properties of the failover slate configuration at the time of going live.
+	FailoverSlateConfiguration *FailoverSlateConfiguration
+
 	// The properties of the incoming RTMP stream.
 	//
 	// Note: ingestConfiguration is deprecated in favor of ingestConfigurations but
@@ -2035,6 +2256,11 @@ func (v *StreamSession) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.StreamSession_endTime, *v.EndTime)
 	}
+	if v.FailoverSlateConfiguration != nil {
+		s.WriteStruct(schemas.StreamSession_failoverSlateConfiguration)
+		v.FailoverSlateConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.IngestConfiguration != nil {
 		s.WriteStruct(schemas.StreamSession_ingestConfiguration)
 		v.IngestConfiguration.SerializeMembers(s)
@@ -2067,6 +2293,9 @@ func (v *StreamSession) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.StreamSession_endTime:
 			v.EndTime = new(time.Time)
 			return d.ReadTime(schemas.StreamSession_endTime, v.EndTime)
+		case schemas.StreamSession_failoverSlateConfiguration:
+			v.FailoverSlateConfiguration = &FailoverSlateConfiguration{}
+			return v.FailoverSlateConfiguration.Deserialize(d)
 		case schemas.StreamSession_ingestConfiguration:
 			v.IngestConfiguration = &IngestConfiguration{}
 			return v.IngestConfiguration.Deserialize(d)

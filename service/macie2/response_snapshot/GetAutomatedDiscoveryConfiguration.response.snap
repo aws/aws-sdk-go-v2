@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"autoEnableOrganizationMembers":"ALL","classificationScopeId":"__ClassificationScopeId__","disabledAt":"2000-01-01T00:00:00Z","firstEnabledAt":"2000-01-01T00:00:00Z","lastUpdatedAt":"2000-01-01T00:00:00Z","sensitivityInspectionTemplateId":"__SensitivityInspectionTemplateId__","status":"ENABLED"}

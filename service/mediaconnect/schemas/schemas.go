@@ -50,6 +50,13 @@ var AddFlowVpcInterfaces = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/flows/{FlowArn}/vpcInterfaces",
 	Code: 201})
 
+var BatchGetDestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetDestinationEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/destinationEndpoints",
+	Code: 200})
+
 var BatchGetRouterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "BatchGetRouterInput",
@@ -70,6 +77,20 @@ var BatchGetRouterOutput = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/routerOutputs",
 	Code: 200})
+
+var BatchGetSourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetSourceEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/sourceEndpoints",
+	Code: 200})
+
+var ConnectEndpoints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ConnectEndpoints",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/connectEndpoints/{DestinationEndpointArn}",
+	Code: 202})
 
 var CreateBridge = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -155,12 +176,26 @@ var DeleteRouterOutput = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/routerOutput/{Arn}",
 	Code: 200})
 
+var DeregisterDestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DeregisterDestinationEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/destinationEndpoint/{Arn}",
+	Code: 200})
+
 var DeregisterGatewayInstance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "DeregisterGatewayInstance",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/gateway-instances/{GatewayInstanceArn}",
 	Code: 202})
+
+var DeregisterSourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DeregisterSourceEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	URI:  "/v1/sourceEndpoint/{Arn}",
+	Code: 200})
 
 var DescribeBridge = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -218,6 +253,20 @@ var DescribeReservation = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/reservations/{ReservationArn}",
 	Code: 200})
 
+var DisconnectEndpoints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DisconnectEndpoints",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/disconnectEndpoints/{DestinationEndpointArn}",
+	Code: 202})
+
+var GetDestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "GetDestinationEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/destinationEndpoint/{Arn}",
+	Code: 200})
+
 var GetRouterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "GetRouterInput",
@@ -253,6 +302,13 @@ var GetRouterOutput = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/routerOutput/{Arn}",
 	Code: 200})
 
+var GetSourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "GetSourceEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/sourceEndpoint/{Arn}",
+	Code: 200})
+
 var GrantFlowEntitlements = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "GrantFlowEntitlements",
@@ -265,6 +321,13 @@ var ListBridges = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListBridges",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/bridges",
+	Code: 200})
+
+var ListDestinationEndpoints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListDestinationEndpoints",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/destinationEndpoints",
 	Code: 200})
 
 var ListEntitlements = smithy.NewSchema(smithy.ShapeID{
@@ -330,6 +393,13 @@ var ListRouterOutputs = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/routerOutputs",
 	Code: 200})
 
+var ListSourceEndpoints = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListSourceEndpoints",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/sourceEndpoints",
+	Code: 200})
+
 var ListTagsForGlobalResource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ListTagsForGlobalResource",
@@ -349,6 +419,20 @@ var PurchaseOffering = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PurchaseOffering",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/offerings/{OfferingArn}",
+	Code: 201})
+
+var RegisterDestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RegisterDestinationEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/destinationEndpoint",
+	Code: 201})
+
+var RegisterSourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RegisterSourceEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/v1/sourceEndpoint",
 	Code: 201})
 
 var RemoveBridgeOutput = smithy.NewSchema(smithy.ShapeID{
@@ -519,6 +603,13 @@ var UpdateBridgeState = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/v1/bridges/{BridgeArn}/state",
 	Code: 202})
 
+var UpdateDestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "UpdateDestinationEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/destinationEndpoint/{Arn}",
+	Code: 202})
+
 var UpdateFlow = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateFlow",
@@ -580,6 +671,13 @@ var UpdateRouterOutput = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateRouterOutput",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/routerOutput/{Arn}",
+	Code: 202})
+
+var UpdateSourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "UpdateSourceEndpoint",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/v1/sourceEndpoint/{Arn}",
 	Code: 202})
 
 var _MediaConnect = smithy.NewSchema(smithy.ShapeID{
@@ -1013,12 +1111,33 @@ var AutomaticEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AutomaticEncryptionKeyConfiguration",
 }, smithy.ShapeTypeStructure, 0)
 
+var AutomaticEndpointEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "AutomaticEndpointEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 0)
+
 var BadRequestException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "BadRequestException",
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
 	&smithytraits.HTTPError{Code: 400})
 var BadRequestException_Message *smithy.Schema
+
+var BatchGetDestinationEndpointError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetDestinationEndpointError",
+}, smithy.ShapeTypeStructure, 3)
+var BatchGetDestinationEndpointError_Arn *smithy.Schema
+
+var BatchGetDestinationEndpointError_Code *smithy.Schema
+
+var BatchGetDestinationEndpointError_Message *smithy.Schema
+
+var _BatchGetDestinationEndpointErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetDestinationEndpointErrorList",
+}, smithy.ShapeTypeList, 1)
+var _BatchGetDestinationEndpointErrorList_member *smithy.Schema
 
 var BatchGetRouterInputError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1067,6 +1186,22 @@ var _BatchGetRouterOutputErrorList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "BatchGetRouterOutputErrorList",
 }, smithy.ShapeTypeList, 1)
 var _BatchGetRouterOutputErrorList_member *smithy.Schema
+
+var BatchGetSourceEndpointError = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetSourceEndpointError",
+}, smithy.ShapeTypeStructure, 3)
+var BatchGetSourceEndpointError_Arn *smithy.Schema
+
+var BatchGetSourceEndpointError_Code *smithy.Schema
+
+var BatchGetSourceEndpointError_Message *smithy.Schema
+
+var _BatchGetSourceEndpointErrorList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetSourceEndpointErrorList",
+}, smithy.ShapeTypeList, 1)
+var _BatchGetSourceEndpointErrorList_member *smithy.Schema
 
 var BlackFrames = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1267,6 +1402,12 @@ var ConnectionStatus_CONNECTED *smithy.Schema
 
 var ConnectionStatus_DISCONNECTED *smithy.Schema
 
+var ConsumedResourceShareDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ConsumedResourceShareDetails",
+}, smithy.ShapeTypeStructure, 1)
+var ConsumedResourceShareDetails_OwnerAccountId *smithy.Schema
+
 var ContentQualityAnalysisFeatureConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ContentQualityAnalysisFeatureConfiguration",
@@ -1361,6 +1502,207 @@ var DestinationConfigurationRequest_DestinationPort *smithy.Schema
 
 var DestinationConfigurationRequest_Interface *smithy.Schema
 
+var DestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpoint",
+}, smithy.ShapeTypeStructure, 23)
+var DestinationEndpoint_Name *smithy.Schema
+
+var DestinationEndpoint_Arn *smithy.Schema
+
+var DestinationEndpoint_Id *smithy.Schema
+
+var DestinationEndpoint_Description *smithy.Schema
+
+var DestinationEndpoint_RegionName *smithy.Schema
+
+var DestinationEndpoint_AvailabilityZone *smithy.Schema
+
+var DestinationEndpoint_AvailabilityZoneId *smithy.Schema
+
+var DestinationEndpoint_CreatedAt *smithy.Schema
+
+var DestinationEndpoint_UpdatedAt *smithy.Schema
+
+var DestinationEndpoint_LifecycleManagement *smithy.Schema
+
+var DestinationEndpoint_Messages *smithy.Schema
+
+var DestinationEndpoint_DestinationType *smithy.Schema
+
+var DestinationEndpoint_Configuration *smithy.Schema
+
+var DestinationEndpoint_ResourceShareOwnership *smithy.Schema
+
+var DestinationEndpoint_ResourceShareDetails *smithy.Schema
+
+var DestinationEndpoint_RegistrationState *smithy.Schema
+
+var DestinationEndpoint_ConnectionDetails *smithy.Schema
+
+var DestinationEndpoint_ConnectionState *smithy.Schema
+
+var DestinationEndpoint_ConnectedSource *smithy.Schema
+
+var DestinationEndpoint_DecryptionType *smithy.Schema
+
+var DestinationEndpoint_DecryptionConfiguration *smithy.Schema
+
+var DestinationEndpoint_AssociatedResourceDetails *smithy.Schema
+
+var DestinationEndpoint_Tags *smithy.Schema
+
+var _DestinationEndpointArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointArn",
+}, smithy.ShapeTypeString, 0)
+
+var _DestinationEndpointArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointArnList",
+}, smithy.ShapeTypeList, 1)
+var _DestinationEndpointArnList_member *smithy.Schema
+
+var DestinationEndpointAssociatedResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointAssociatedResourceDetails",
+}, smithy.ShapeTypeUnion, 2)
+var DestinationEndpointAssociatedResourceDetails_Standard *smithy.Schema
+
+var DestinationEndpointAssociatedResourceDetails_RouterInput *smithy.Schema
+
+var DestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var DestinationEndpointConfiguration_Standard *smithy.Schema
+
+var DestinationEndpointConfiguration_RouterInput *smithy.Schema
+
+var DestinationEndpointConnectionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointConnectionDetails",
+}, smithy.ShapeTypeUnion, 2)
+var DestinationEndpointConnectionDetails_Standard *smithy.Schema
+
+var DestinationEndpointConnectionDetails_RouterInput *smithy.Schema
+
+var DestinationEndpointConnectionState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointConnectionState",
+}, smithy.ShapeTypeEnum, 4)
+var DestinationEndpointConnectionState_CONNECTED *smithy.Schema
+
+var DestinationEndpointConnectionState_DISCONNECTED *smithy.Schema
+
+var DestinationEndpointConnectionState_CONNECTING *smithy.Schema
+
+var DestinationEndpointConnectionState_DISCONNECTING *smithy.Schema
+
+var DestinationEndpointFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointFilter",
+}, smithy.ShapeTypeUnion, 3)
+var DestinationEndpointFilter_RegionNames *smithy.Schema
+
+var DestinationEndpointFilter_DestinationTypes *smithy.Schema
+
+var DestinationEndpointFilter_NameContains *smithy.Schema
+
+var _DestinationEndpointFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointFilterList",
+}, smithy.ShapeTypeList, 1)
+var _DestinationEndpointFilterList_member *smithy.Schema
+
+var _DestinationEndpointList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointList",
+}, smithy.ShapeTypeList, 1)
+var _DestinationEndpointList_member *smithy.Schema
+
+var DestinationEndpointMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointMessage",
+}, smithy.ShapeTypeStructure, 2)
+var DestinationEndpointMessage_Code *smithy.Schema
+
+var DestinationEndpointMessage_Message *smithy.Schema
+
+var _DestinationEndpointMessageList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointMessageList",
+}, smithy.ShapeTypeList, 1)
+var _DestinationEndpointMessageList_member *smithy.Schema
+
+var DestinationEndpointNetworkingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointNetworkingType",
+}, smithy.ShapeTypeEnum, 2)
+var DestinationEndpointNetworkingType_PUBLIC *smithy.Schema
+
+var DestinationEndpointNetworkingType_VPC *smithy.Schema
+
+var DestinationEndpointProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointProtocol",
+}, smithy.ShapeTypeEnum, 4)
+var DestinationEndpointProtocol_RTP *smithy.Schema
+
+var DestinationEndpointProtocol_RIST *smithy.Schema
+
+var DestinationEndpointProtocol_SRT_CALLER *smithy.Schema
+
+var DestinationEndpointProtocol_SRT_LISTENER *smithy.Schema
+
+var DestinationEndpointRegistrationState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointRegistrationState",
+}, smithy.ShapeTypeEnum, 4)
+var DestinationEndpointRegistrationState_REGISTERED *smithy.Schema
+
+var DestinationEndpointRegistrationState_REGISTERING *smithy.Schema
+
+var DestinationEndpointRegistrationState_DEREGISTERING *smithy.Schema
+
+var DestinationEndpointRegistrationState_REGISTRATION_FAILED *smithy.Schema
+
+var DestinationEndpointRouterInputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointRouterInputConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement *smithy.Schema
+
+var DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType *smithy.Schema
+
+var DestinationEndpointRouterInputConfiguration_SourceTransitDecryption *smithy.Schema
+
+var DestinationEndpointRouterInputStreamDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointRouterInputStreamDetails",
+}, smithy.ShapeTypeStructure, 0)
+
+var DestinationEndpointServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointServiceQuotaExceededException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
+var DestinationEndpointServiceQuotaExceededException_Message *smithy.Schema
+
+var DestinationEndpointType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointType",
+}, smithy.ShapeTypeEnum, 2)
+var DestinationEndpointType_STANDARD *smithy.Schema
+
+var DestinationEndpointType_ROUTER_INPUT *smithy.Schema
+
+var _DestinationEndpointTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DestinationEndpointTypeList",
+}, smithy.ShapeTypeList, 1)
+var _DestinationEndpointTypeList_member *smithy.Schema
+
 var DurationUnits = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "DurationUnits",
@@ -1448,6 +1790,48 @@ var Encryption_RoleArn *smithy.Schema
 var Encryption_SecretArn *smithy.Schema
 
 var Encryption_Url *smithy.Schema
+
+var EndpointEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "EndpointEncryptionConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var EndpointEncryptionConfiguration_SecretsManager *smithy.Schema
+
+var EndpointEncryptionConfiguration_Automatic *smithy.Schema
+
+var EndpointEncryptionSecretConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "EndpointEncryptionSecretConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var EndpointEncryptionSecretConfiguration_SecretArn *smithy.Schema
+
+var EndpointEncryptionSecretType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "EndpointEncryptionSecretType",
+}, smithy.ShapeTypeEnum, 4)
+var EndpointEncryptionSecretType_AES_128_KEY *smithy.Schema
+
+var EndpointEncryptionSecretType_AES_192_KEY *smithy.Schema
+
+var EndpointEncryptionSecretType_AES_256_KEY *smithy.Schema
+
+var EndpointEncryptionSecretType_SRT_PASSPHRASE *smithy.Schema
+
+var EndpointEncryptionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "EndpointEncryptionType",
+}, smithy.ShapeTypeEnum, 2)
+var EndpointEncryptionType_SECRETS_MANAGER *smithy.Schema
+
+var EndpointEncryptionType_AUTOMATIC *smithy.Schema
+
+var EndpointLifecycle = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "EndpointLifecycle",
+}, smithy.ShapeTypeEnum, 2)
+var EndpointLifecycle_MANAGED *smithy.Schema
+
+var EndpointLifecycle_UNMANAGED *smithy.Schema
 
 var Entitlement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -1917,6 +2301,52 @@ var ListedBridge_Name *smithy.Schema
 
 var ListedBridge_PlacementArn *smithy.Schema
 
+var ListedDestinationEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListedDestinationEndpoint",
+}, smithy.ShapeTypeStructure, 18)
+var ListedDestinationEndpoint_Name *smithy.Schema
+
+var ListedDestinationEndpoint_Arn *smithy.Schema
+
+var ListedDestinationEndpoint_Id *smithy.Schema
+
+var ListedDestinationEndpoint_DestinationType *smithy.Schema
+
+var ListedDestinationEndpoint_RegionName *smithy.Schema
+
+var ListedDestinationEndpoint_AvailabilityZone *smithy.Schema
+
+var ListedDestinationEndpoint_AvailabilityZoneId *smithy.Schema
+
+var ListedDestinationEndpoint_CreatedAt *smithy.Schema
+
+var ListedDestinationEndpoint_UpdatedAt *smithy.Schema
+
+var ListedDestinationEndpoint_LifecycleManagement *smithy.Schema
+
+var ListedDestinationEndpoint_MessageCount *smithy.Schema
+
+var ListedDestinationEndpoint_ResourceShareOwnership *smithy.Schema
+
+var ListedDestinationEndpoint_ResourceShareState *smithy.Schema
+
+var ListedDestinationEndpoint_RegistrationState *smithy.Schema
+
+var ListedDestinationEndpoint_ConnectionState *smithy.Schema
+
+var ListedDestinationEndpoint_DecryptionType *smithy.Schema
+
+var ListedDestinationEndpoint_ConnectedSource *smithy.Schema
+
+var ListedDestinationEndpoint_AssociatedResourceArn *smithy.Schema
+
+var _ListedDestinationEndpointList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListedDestinationEndpointList",
+}, smithy.ShapeTypeList, 1)
+var _ListedDestinationEndpointList_member *smithy.Schema
+
 var ListedEntitlement = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ListedEntitlement",
@@ -2082,6 +2512,52 @@ var _ListedRouterOutputList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ListedRouterOutputList",
 }, smithy.ShapeTypeList, 1)
 var _ListedRouterOutputList_member *smithy.Schema
+
+var ListedSourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListedSourceEndpoint",
+}, smithy.ShapeTypeStructure, 18)
+var ListedSourceEndpoint_Name *smithy.Schema
+
+var ListedSourceEndpoint_Arn *smithy.Schema
+
+var ListedSourceEndpoint_Id *smithy.Schema
+
+var ListedSourceEndpoint_SourceType *smithy.Schema
+
+var ListedSourceEndpoint_RegionName *smithy.Schema
+
+var ListedSourceEndpoint_AvailabilityZone *smithy.Schema
+
+var ListedSourceEndpoint_AvailabilityZoneId *smithy.Schema
+
+var ListedSourceEndpoint_CreatedAt *smithy.Schema
+
+var ListedSourceEndpoint_UpdatedAt *smithy.Schema
+
+var ListedSourceEndpoint_LifecycleManagement *smithy.Schema
+
+var ListedSourceEndpoint_MessageCount *smithy.Schema
+
+var ListedSourceEndpoint_ResourceShareOwnership *smithy.Schema
+
+var ListedSourceEndpoint_ResourceShareState *smithy.Schema
+
+var ListedSourceEndpoint_RegistrationState *smithy.Schema
+
+var ListedSourceEndpoint_ConnectionState *smithy.Schema
+
+var ListedSourceEndpoint_EncryptionType *smithy.Schema
+
+var ListedSourceEndpoint_ConnectedDestinationCount *smithy.Schema
+
+var ListedSourceEndpoint_AssociatedResourceArn *smithy.Schema
+
+var _ListedSourceEndpointList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListedSourceEndpointList",
+}, smithy.ShapeTypeList, 1)
+var _ListedSourceEndpointList_member *smithy.Schema
 
 var Maintenance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -2615,6 +3091,12 @@ var OutputStatus_ENABLED *smithy.Schema
 
 var OutputStatus_DISABLED *smithy.Schema
 
+var OwnedResourceShareDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "OwnedResourceShareDetails",
+}, smithy.ShapeTypeStructure, 1)
+var OwnedResourceShareDetails_ShareState *smithy.Schema
+
 var PreferredDayTimeMaintenanceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "PreferredDayTimeMaintenanceConfiguration",
@@ -2657,6 +3139,24 @@ var Protocol_udp *smithy.Schema
 
 var Protocol_ndi_speed_hq *smithy.Schema
 
+var PublicDestinationEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicDestinationEndpointNetworkingConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules *smithy.Schema
+
+var PublicDestinationEndpointNetworkingConfigurationAllowRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicDestinationEndpointNetworkingConfigurationAllowRule",
+}, smithy.ShapeTypeStructure, 1)
+var PublicDestinationEndpointNetworkingConfigurationAllowRule_Cidr *smithy.Schema
+
+var _PublicDestinationEndpointNetworkingConfigurationAllowRuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicDestinationEndpointNetworkingConfigurationAllowRuleList",
+}, smithy.ShapeTypeList, 1)
+var _PublicDestinationEndpointNetworkingConfigurationAllowRuleList_member *smithy.Schema
+
 var PublicRouterNetworkInterfaceConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "PublicRouterNetworkInterfaceConfiguration",
@@ -2668,6 +3168,24 @@ var PublicRouterNetworkInterfaceRule = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PublicRouterNetworkInterfaceRule",
 }, smithy.ShapeTypeStructure, 1)
 var PublicRouterNetworkInterfaceRule_Cidr *smithy.Schema
+
+var PublicSourceEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicSourceEndpointNetworkingConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var PublicSourceEndpointNetworkingConfiguration_SourceAllowRules *smithy.Schema
+
+var PublicSourceEndpointNetworkingConfigurationAllowRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicSourceEndpointNetworkingConfigurationAllowRule",
+}, smithy.ShapeTypeStructure, 1)
+var PublicSourceEndpointNetworkingConfigurationAllowRule_Cidr *smithy.Schema
+
+var _PublicSourceEndpointNetworkingConfigurationAllowRuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "PublicSourceEndpointNetworkingConfigurationAllowRuleList",
+}, smithy.ShapeTypeList, 1)
+var _PublicSourceEndpointNetworkingConfigurationAllowRuleList_member *smithy.Schema
 
 var PublicTlsEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -2731,6 +3249,30 @@ var ReservationState_PROCESSING *smithy.Schema
 
 var ReservationState_CANCELED *smithy.Schema
 
+var ResourceShareDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ResourceShareDetails",
+}, smithy.ShapeTypeUnion, 2)
+var ResourceShareDetails_Owned *smithy.Schema
+
+var ResourceShareDetails_Consumed *smithy.Schema
+
+var ResourceShareOwnership = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ResourceShareOwnership",
+}, smithy.ShapeTypeEnum, 2)
+var ResourceShareOwnership_OWNED *smithy.Schema
+
+var ResourceShareOwnership_CONSUMED *smithy.Schema
+
+var ResourceShareState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ResourceShareState",
+}, smithy.ShapeTypeEnum, 2)
+var ResourceShareState_SHARED *smithy.Schema
+
+var ResourceShareState_UNSHARED *smithy.Schema
+
 var ResourceSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ResourceSpecification",
@@ -2761,6 +3303,22 @@ var RistRouterOutputConfiguration_DestinationAddress *smithy.Schema
 
 var RistRouterOutputConfiguration_DestinationPort *smithy.Schema
 
+var RistStandardDestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RistStandardDestinationEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var RistStandardDestinationEndpointConfiguration_DestinationAddress *smithy.Schema
+
+var RistStandardDestinationEndpointConfiguration_DestinationIngestPort *smithy.Schema
+
+var RistStandardSourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RistStandardSourceEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var RistStandardSourceEndpointConfiguration_DestinationIngestPort *smithy.Schema
+
+var RistStandardSourceEndpointConfiguration_RecoveryLatencyMilliseconds *smithy.Schema
+
 var _RoleArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RoleArn",
@@ -2786,7 +3344,7 @@ var _RouterCqaThresholdSeconds = smithy.NewSchema(smithy.ShapeID{
 var RouterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInput",
-}, smithy.ShapeTypeStructure, 26)
+}, smithy.ShapeTypeStructure, 27)
 var RouterInput_Name *smithy.Schema
 
 var RouterInput_Arn *smithy.Schema
@@ -2839,6 +3397,8 @@ var RouterInput_ContentQualityAnalysisType *smithy.Schema
 
 var RouterInput_ContentQualityAnalysisConfiguration *smithy.Schema
 
+var RouterInput_AssociatedDestinationEndpointArns *smithy.Schema
+
 var _RouterInputArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputArn",
@@ -2853,7 +3413,9 @@ var _RouterInputArnList_member *smithy.Schema
 var RouterInputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputConfiguration",
-}, smithy.ShapeTypeUnion, 5)
+}, smithy.ShapeTypeUnion, 6)
+var RouterInputConfiguration_DestinationEndpoint *smithy.Schema
+
 var RouterInputConfiguration_Standard *smithy.Schema
 
 var RouterInputConfiguration_MediaLiveChannel *smithy.Schema
@@ -2863,6 +3425,34 @@ var RouterInputConfiguration_Failover *smithy.Schema
 var RouterInputConfiguration_MediaConnectFlow *smithy.Schema
 
 var RouterInputConfiguration_Merge *smithy.Schema
+
+var RouterInputDestinationEndpointAssociatedResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterInputDestinationEndpointAssociatedResourceDetails",
+}, smithy.ShapeTypeStructure, 4)
+var RouterInputDestinationEndpointAssociatedResourceDetails_Name *smithy.Schema
+
+var RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate *smithy.Schema
+
+var RouterInputDestinationEndpointAssociatedResourceDetails_State *smithy.Schema
+
+var RouterInputDestinationEndpointAssociatedResourceDetails_Messages *smithy.Schema
+
+var RouterInputDestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterInputDestinationEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var RouterInputDestinationEndpointConfiguration_RouterInputArn *smithy.Schema
+
+var RouterInputDestinationEndpointConnectionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterInputDestinationEndpointConnectionDetails",
+}, smithy.ShapeTypeStructure, 3)
+var RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType *smithy.Schema
+
+var RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration *smithy.Schema
+
+var RouterInputDestinationEndpointConnectionDetails_SourceEndpointType *smithy.Schema
 
 var RouterInputFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -2978,7 +3568,9 @@ var RouterInputState_MIGRATING *smithy.Schema
 var RouterInputStreamDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputStreamDetails",
-}, smithy.ShapeTypeUnion, 5)
+}, smithy.ShapeTypeUnion, 6)
+var RouterInputStreamDetails_DestinationEndpoint *smithy.Schema
+
 var RouterInputStreamDetails_Standard *smithy.Schema
 
 var RouterInputStreamDetails_MediaLiveChannel *smithy.Schema
@@ -3042,7 +3634,7 @@ var RouterInputTransitEncryptionKeyType_AUTOMATIC *smithy.Schema
 var RouterInputType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterInputType",
-}, smithy.ShapeTypeEnum, 5)
+}, smithy.ShapeTypeEnum, 6)
 var RouterInputType_STANDARD *smithy.Schema
 
 var RouterInputType_FAILOVER *smithy.Schema
@@ -3052,6 +3644,8 @@ var RouterInputType_MERGE *smithy.Schema
 var RouterInputType_MEDIACONNECT_FLOW *smithy.Schema
 
 var RouterInputType_MEDIALIVE_CHANNEL *smithy.Schema
+
+var RouterInputType_DESTINATION_ENDPOINT *smithy.Schema
 
 var _RouterInputTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3168,7 +3762,7 @@ var _RouterNetworkInterfaceTypeList_member *smithy.Schema
 var RouterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutput",
-}, smithy.ShapeTypeStructure, 24)
+}, smithy.ShapeTypeStructure, 25)
 var RouterOutput_Name *smithy.Schema
 
 var RouterOutput_Arn *smithy.Schema
@@ -3217,6 +3811,8 @@ var RouterOutput_MaintenanceSchedule *smithy.Schema
 
 var RouterOutput_FabricConfiguration *smithy.Schema
 
+var RouterOutput_AssociatedSourceEndpointArns *smithy.Schema
+
 var _RouterOutputArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputArn",
@@ -3231,12 +3827,14 @@ var _RouterOutputArnList_member *smithy.Schema
 var RouterOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputConfiguration",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var RouterOutputConfiguration_Standard *smithy.Schema
 
 var RouterOutputConfiguration_MediaConnectFlow *smithy.Schema
 
 var RouterOutputConfiguration_MediaLiveInput *smithy.Schema
+
+var RouterOutputConfiguration_SourceEndpoint *smithy.Schema
 
 var RouterOutputFilter = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3325,6 +3923,34 @@ var RouterOutputServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
 	&smithytraits.HTTPError{Code: 420})
 var RouterOutputServiceQuotaExceededException_Message *smithy.Schema
 
+var RouterOutputSourceEndpointAssociatedResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterOutputSourceEndpointAssociatedResourceDetails",
+}, smithy.ShapeTypeStructure, 4)
+var RouterOutputSourceEndpointAssociatedResourceDetails_Name *smithy.Schema
+
+var RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate *smithy.Schema
+
+var RouterOutputSourceEndpointAssociatedResourceDetails_State *smithy.Schema
+
+var RouterOutputSourceEndpointAssociatedResourceDetails_Messages *smithy.Schema
+
+var RouterOutputSourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterOutputSourceEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var RouterOutputSourceEndpointConfiguration_RouterOutputArn *smithy.Schema
+
+var RouterOutputSourceEndpointConnectionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RouterOutputSourceEndpointConnectionDetails",
+}, smithy.ShapeTypeStructure, 3)
+var RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType *smithy.Schema
+
+var RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration *smithy.Schema
+
+var RouterOutputSourceEndpointConnectionDetails_DestinationEndpointType *smithy.Schema
+
 var RouterOutputState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputState",
@@ -3352,12 +3978,14 @@ var RouterOutputState_MIGRATING *smithy.Schema
 var RouterOutputStreamDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputStreamDetails",
-}, smithy.ShapeTypeUnion, 3)
+}, smithy.ShapeTypeUnion, 4)
 var RouterOutputStreamDetails_Standard *smithy.Schema
 
 var RouterOutputStreamDetails_MediaConnectFlow *smithy.Schema
 
 var RouterOutputStreamDetails_MediaLiveInput *smithy.Schema
+
+var RouterOutputStreamDetails_SourceEndpoint *smithy.Schema
 
 var RouterOutputTier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3376,12 +4004,14 @@ var RouterOutputTier_OUTPUT_250 *smithy.Schema
 var RouterOutputType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "RouterOutputType",
-}, smithy.ShapeTypeEnum, 3)
+}, smithy.ShapeTypeEnum, 4)
 var RouterOutputType_STANDARD *smithy.Schema
 
 var RouterOutputType_MEDIACONNECT_FLOW *smithy.Schema
 
 var RouterOutputType_MEDIALIVE_INPUT *smithy.Schema
+
+var RouterOutputType_SOURCE_ENDPOINT *smithy.Schema
 
 var _RouterOutputTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3435,6 +4065,24 @@ var RtpRouterOutputConfiguration_DestinationPort *smithy.Schema
 
 var RtpRouterOutputConfiguration_ForwardErrorCorrection *smithy.Schema
 
+var RtpStandardDestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtpStandardDestinationEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var RtpStandardDestinationEndpointConfiguration_DestinationAddress *smithy.Schema
+
+var RtpStandardDestinationEndpointConfiguration_DestinationIngestPort *smithy.Schema
+
+var RtpStandardDestinationEndpointConfiguration_ForwardErrorCorrectionState *smithy.Schema
+
+var RtpStandardSourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RtpStandardSourceEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var RtpStandardSourceEndpointConfiguration_DestinationIngestPort *smithy.Schema
+
+var RtpStandardSourceEndpointConfiguration_ForwardErrorCorrectionState *smithy.Schema
+
 var ScanMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ScanMode",
@@ -3457,6 +4105,14 @@ var SecretsManagerEncryptionKeyConfiguration = smithy.NewSchema(smithy.ShapeID{
 var SecretsManagerEncryptionKeyConfiguration_SecretArn *smithy.Schema
 
 var SecretsManagerEncryptionKeyConfiguration_RoleArn *smithy.Schema
+
+var SecretsManagerEndpointEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SecretsManagerEndpointEncryptionConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var SecretsManagerEndpointEncryptionConfiguration_EncryptionSecretType *smithy.Schema
+
+var SecretsManagerEndpointEncryptionConfiguration_EncryptionSecret *smithy.Schema
 
 var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -3587,6 +4243,207 @@ var Source_RouterIntegrationTransitDecryption *smithy.Schema
 
 var Source_ConnectedRouterOutputArn *smithy.Schema
 
+var SourceEndpoint = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpoint",
+}, smithy.ShapeTypeStructure, 23)
+var SourceEndpoint_Name *smithy.Schema
+
+var SourceEndpoint_Arn *smithy.Schema
+
+var SourceEndpoint_Id *smithy.Schema
+
+var SourceEndpoint_Description *smithy.Schema
+
+var SourceEndpoint_RegionName *smithy.Schema
+
+var SourceEndpoint_AvailabilityZone *smithy.Schema
+
+var SourceEndpoint_AvailabilityZoneId *smithy.Schema
+
+var SourceEndpoint_CreatedAt *smithy.Schema
+
+var SourceEndpoint_UpdatedAt *smithy.Schema
+
+var SourceEndpoint_LifecycleManagement *smithy.Schema
+
+var SourceEndpoint_Messages *smithy.Schema
+
+var SourceEndpoint_SourceType *smithy.Schema
+
+var SourceEndpoint_Configuration *smithy.Schema
+
+var SourceEndpoint_ResourceShareOwnership *smithy.Schema
+
+var SourceEndpoint_ResourceShareDetails *smithy.Schema
+
+var SourceEndpoint_RegistrationState *smithy.Schema
+
+var SourceEndpoint_ConnectionState *smithy.Schema
+
+var SourceEndpoint_ConnectionDetails *smithy.Schema
+
+var SourceEndpoint_ConnectedDestinations *smithy.Schema
+
+var SourceEndpoint_EncryptionType *smithy.Schema
+
+var SourceEndpoint_EncryptionConfiguration *smithy.Schema
+
+var SourceEndpoint_AssociatedResourceDetails *smithy.Schema
+
+var SourceEndpoint_Tags *smithy.Schema
+
+var _SourceEndpointArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointArn",
+}, smithy.ShapeTypeString, 0)
+
+var _SourceEndpointArnList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointArnList",
+}, smithy.ShapeTypeList, 1)
+var _SourceEndpointArnList_member *smithy.Schema
+
+var SourceEndpointAssociatedResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointAssociatedResourceDetails",
+}, smithy.ShapeTypeUnion, 2)
+var SourceEndpointAssociatedResourceDetails_Standard *smithy.Schema
+
+var SourceEndpointAssociatedResourceDetails_RouterOutput *smithy.Schema
+
+var SourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var SourceEndpointConfiguration_Standard *smithy.Schema
+
+var SourceEndpointConfiguration_RouterOutput *smithy.Schema
+
+var SourceEndpointConnectionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointConnectionDetails",
+}, smithy.ShapeTypeUnion, 2)
+var SourceEndpointConnectionDetails_Standard *smithy.Schema
+
+var SourceEndpointConnectionDetails_RouterOutput *smithy.Schema
+
+var SourceEndpointConnectionState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointConnectionState",
+}, smithy.ShapeTypeEnum, 4)
+var SourceEndpointConnectionState_CONNECTED *smithy.Schema
+
+var SourceEndpointConnectionState_DISCONNECTED *smithy.Schema
+
+var SourceEndpointConnectionState_CONNECTING *smithy.Schema
+
+var SourceEndpointConnectionState_DISCONNECTING *smithy.Schema
+
+var SourceEndpointFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointFilter",
+}, smithy.ShapeTypeUnion, 3)
+var SourceEndpointFilter_RegionNames *smithy.Schema
+
+var SourceEndpointFilter_SourceTypes *smithy.Schema
+
+var SourceEndpointFilter_NameContains *smithy.Schema
+
+var _SourceEndpointFilterList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointFilterList",
+}, smithy.ShapeTypeList, 1)
+var _SourceEndpointFilterList_member *smithy.Schema
+
+var _SourceEndpointList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointList",
+}, smithy.ShapeTypeList, 1)
+var _SourceEndpointList_member *smithy.Schema
+
+var SourceEndpointMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointMessage",
+}, smithy.ShapeTypeStructure, 2)
+var SourceEndpointMessage_Code *smithy.Schema
+
+var SourceEndpointMessage_Message *smithy.Schema
+
+var _SourceEndpointMessageList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointMessageList",
+}, smithy.ShapeTypeList, 1)
+var _SourceEndpointMessageList_member *smithy.Schema
+
+var SourceEndpointNetworkingType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointNetworkingType",
+}, smithy.ShapeTypeEnum, 2)
+var SourceEndpointNetworkingType_PUBLIC *smithy.Schema
+
+var SourceEndpointNetworkingType_VPC *smithy.Schema
+
+var SourceEndpointProtocol = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointProtocol",
+}, smithy.ShapeTypeEnum, 4)
+var SourceEndpointProtocol_RTP *smithy.Schema
+
+var SourceEndpointProtocol_RIST *smithy.Schema
+
+var SourceEndpointProtocol_SRT_CALLER *smithy.Schema
+
+var SourceEndpointProtocol_SRT_LISTENER *smithy.Schema
+
+var SourceEndpointRegistrationState = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointRegistrationState",
+}, smithy.ShapeTypeEnum, 4)
+var SourceEndpointRegistrationState_REGISTERED *smithy.Schema
+
+var SourceEndpointRegistrationState_REGISTERING *smithy.Schema
+
+var SourceEndpointRegistrationState_DEREGISTERING *smithy.Schema
+
+var SourceEndpointRegistrationState_REGISTRATION_FAILED *smithy.Schema
+
+var SourceEndpointRouterOutputConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointRouterOutputConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var SourceEndpointRouterOutputConfiguration_EndpointLifecycleManagement *smithy.Schema
+
+var SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType *smithy.Schema
+
+var SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption *smithy.Schema
+
+var SourceEndpointRouterOutputStreamDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointRouterOutputStreamDetails",
+}, smithy.ShapeTypeStructure, 0)
+
+var SourceEndpointServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointServiceQuotaExceededException",
+}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
+	&smithytraits.HTTPError{Code: 420})
+var SourceEndpointServiceQuotaExceededException_Message *smithy.Schema
+
+var SourceEndpointType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointType",
+}, smithy.ShapeTypeEnum, 2)
+var SourceEndpointType_STANDARD *smithy.Schema
+
+var SourceEndpointType_ROUTER_OUTPUT *smithy.Schema
+
+var _SourceEndpointTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SourceEndpointTypeList",
+}, smithy.ShapeTypeList, 1)
+var _SourceEndpointTypeList_member *smithy.Schema
+
 var SourcePriority = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "SourcePriority",
@@ -3629,6 +4486,26 @@ var SrtCallerRouterOutputConfiguration_StreamId *smithy.Schema
 
 var SrtCallerRouterOutputConfiguration_EncryptionConfiguration *smithy.Schema
 
+var SrtCallerStandardDestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SrtCallerStandardDestinationEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var SrtCallerStandardDestinationEndpointConfiguration_SourceListenerPort *smithy.Schema
+
+var SrtCallerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds *smithy.Schema
+
+var SrtCallerStandardDestinationEndpointConfiguration_EncryptionPassphrase *smithy.Schema
+
+var SrtCallerStandardSourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SrtCallerStandardSourceEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var SrtCallerStandardSourceEndpointConfiguration_DestinationIngestPort *smithy.Schema
+
+var SrtCallerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds *smithy.Schema
+
+var SrtCallerStandardSourceEndpointConfiguration_EncryptionPassphrase *smithy.Schema
+
 var SrtDecryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "SrtDecryptionConfiguration",
@@ -3661,6 +4538,87 @@ var SrtListenerRouterOutputConfiguration_MinimumLatencyMilliseconds *smithy.Sche
 
 var SrtListenerRouterOutputConfiguration_EncryptionConfiguration *smithy.Schema
 
+var SrtListenerStandardDestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SrtListenerStandardDestinationEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var SrtListenerStandardDestinationEndpointConfiguration_DestinationAddress *smithy.Schema
+
+var SrtListenerStandardDestinationEndpointConfiguration_DestinationIngestPort *smithy.Schema
+
+var SrtListenerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds *smithy.Schema
+
+var SrtListenerStandardDestinationEndpointConfiguration_StreamId *smithy.Schema
+
+var SrtListenerStandardDestinationEndpointConfiguration_EncryptionPassphrase *smithy.Schema
+
+var SrtListenerStandardSourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "SrtListenerStandardSourceEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var SrtListenerStandardSourceEndpointConfiguration_SourceListenerPort *smithy.Schema
+
+var SrtListenerStandardSourceEndpointConfiguration_SourceAddress *smithy.Schema
+
+var SrtListenerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds *smithy.Schema
+
+var SrtListenerStandardSourceEndpointConfiguration_StreamId *smithy.Schema
+
+var SrtListenerStandardSourceEndpointConfiguration_EncryptionPassphrase *smithy.Schema
+
+var StandardDestinationEndpointAssociatedResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardDestinationEndpointAssociatedResourceDetails",
+}, smithy.ShapeTypeStructure, 0)
+
+var StandardDestinationEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardDestinationEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var StandardDestinationEndpointConfiguration_Name *smithy.Schema
+
+var StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration *smithy.Schema
+
+var StandardDestinationEndpointConfiguration_ProtocolConfiguration *smithy.Schema
+
+var StandardDestinationEndpointConfiguration_DestinationNetworkingType *smithy.Schema
+
+var StandardDestinationEndpointConfiguration_Protocol *smithy.Schema
+
+var StandardDestinationEndpointConnectionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardDestinationEndpointConnectionDetails",
+}, smithy.ShapeTypeStructure, 5)
+var StandardDestinationEndpointConnectionDetails_SourceIpAddress *smithy.Schema
+
+var StandardDestinationEndpointConnectionDetails_SourceListenerPort *smithy.Schema
+
+var StandardDestinationEndpointConnectionDetails_SourceEncryptionType *smithy.Schema
+
+var StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration *smithy.Schema
+
+var StandardDestinationEndpointConnectionDetails_SourceEndpointType *smithy.Schema
+
+var StandardDestinationEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardDestinationEndpointNetworkingConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var StandardDestinationEndpointNetworkingConfiguration_Public *smithy.Schema
+
+var StandardDestinationEndpointNetworkingConfiguration_Vpc *smithy.Schema
+
+var StandardDestinationEndpointProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardDestinationEndpointProtocolConfiguration",
+}, smithy.ShapeTypeUnion, 4)
+var StandardDestinationEndpointProtocolConfiguration_Rist *smithy.Schema
+
+var StandardDestinationEndpointProtocolConfiguration_SrtListener *smithy.Schema
+
+var StandardDestinationEndpointProtocolConfiguration_SrtCaller *smithy.Schema
+
+var StandardDestinationEndpointProtocolConfiguration_Rtp *smithy.Schema
+
 var StandardRouterInputConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "StandardRouterInputConfiguration",
@@ -3692,6 +4650,59 @@ var StandardRouterOutputStreamDetails = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StandardRouterOutputStreamDetails",
 }, smithy.ShapeTypeStructure, 1)
 var StandardRouterOutputStreamDetails_DestinationIpAddress *smithy.Schema
+
+var StandardSourceEndpointAssociatedResourceDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardSourceEndpointAssociatedResourceDetails",
+}, smithy.ShapeTypeStructure, 0)
+
+var StandardSourceEndpointConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardSourceEndpointConfiguration",
+}, smithy.ShapeTypeStructure, 5)
+var StandardSourceEndpointConfiguration_Name *smithy.Schema
+
+var StandardSourceEndpointConfiguration_SourceNetworkingConfiguration *smithy.Schema
+
+var StandardSourceEndpointConfiguration_ProtocolConfiguration *smithy.Schema
+
+var StandardSourceEndpointConfiguration_SourceNetworkingType *smithy.Schema
+
+var StandardSourceEndpointConfiguration_Protocol *smithy.Schema
+
+var StandardSourceEndpointConnectionDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardSourceEndpointConnectionDetails",
+}, smithy.ShapeTypeStructure, 5)
+var StandardSourceEndpointConnectionDetails_DestinationIpAddress *smithy.Schema
+
+var StandardSourceEndpointConnectionDetails_DestinationIngestPort *smithy.Schema
+
+var StandardSourceEndpointConnectionDetails_DestinationDecryptionType *smithy.Schema
+
+var StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration *smithy.Schema
+
+var StandardSourceEndpointConnectionDetails_DestinationEndpointType *smithy.Schema
+
+var StandardSourceEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardSourceEndpointNetworkingConfiguration",
+}, smithy.ShapeTypeUnion, 2)
+var StandardSourceEndpointNetworkingConfiguration_Public *smithy.Schema
+
+var StandardSourceEndpointNetworkingConfiguration_Vpc *smithy.Schema
+
+var StandardSourceEndpointProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "StandardSourceEndpointProtocolConfiguration",
+}, smithy.ShapeTypeUnion, 4)
+var StandardSourceEndpointProtocolConfiguration_Rist *smithy.Schema
+
+var StandardSourceEndpointProtocolConfiguration_SrtListener *smithy.Schema
+
+var StandardSourceEndpointProtocolConfiguration_SrtCaller *smithy.Schema
+
+var StandardSourceEndpointProtocolConfiguration_Rtp *smithy.Schema
 
 var State = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4082,6 +5093,14 @@ var VideoTransferCharacteristics_SMPTE428 *smithy.Schema
 
 var VideoTransferCharacteristics_BT2100_HLG *smithy.Schema
 
+var VpcDestinationEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "VpcDestinationEndpointNetworkingConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds *smithy.Schema
+
+var VpcDestinationEndpointNetworkingConfiguration_SubnetId *smithy.Schema
+
 var VpcInterface = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "VpcInterface",
@@ -4127,6 +5146,14 @@ var VpcRouterNetworkInterfaceConfiguration = smithy.NewSchema(smithy.ShapeID{
 var VpcRouterNetworkInterfaceConfiguration_SecurityGroupIds *smithy.Schema
 
 var VpcRouterNetworkInterfaceConfiguration_SubnetId *smithy.Schema
+
+var VpcSourceEndpointNetworkingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "VpcSourceEndpointNetworkingConfiguration",
+}, smithy.ShapeTypeStructure, 2)
+var VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds *smithy.Schema
+
+var VpcSourceEndpointNetworkingConfiguration_SubnetId *smithy.Schema
 
 var WindowMaintenanceSchedule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4234,6 +5261,20 @@ var AddFlowVpcInterfacesResponse_FlowArn *smithy.Schema
 
 var AddFlowVpcInterfacesResponse_VpcInterfaces *smithy.Schema
 
+var BatchGetDestinationEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetDestinationEndpointRequest",
+}, smithy.ShapeTypeStructure, 1)
+var BatchGetDestinationEndpointRequest_Arns *smithy.Schema
+
+var BatchGetDestinationEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetDestinationEndpointResponse",
+}, smithy.ShapeTypeStructure, 2)
+var BatchGetDestinationEndpointResponse_DestinationEndpoints *smithy.Schema
+
+var BatchGetDestinationEndpointResponse_Errors *smithy.Schema
+
 var BatchGetRouterInputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "BatchGetRouterInputRequest",
@@ -4275,6 +5316,40 @@ var BatchGetRouterOutputResponse = smithy.NewSchema(smithy.ShapeID{
 var BatchGetRouterOutputResponse_RouterOutputs *smithy.Schema
 
 var BatchGetRouterOutputResponse_Errors *smithy.Schema
+
+var BatchGetSourceEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetSourceEndpointRequest",
+}, smithy.ShapeTypeStructure, 1)
+var BatchGetSourceEndpointRequest_Arns *smithy.Schema
+
+var BatchGetSourceEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "BatchGetSourceEndpointResponse",
+}, smithy.ShapeTypeStructure, 2)
+var BatchGetSourceEndpointResponse_SourceEndpoints *smithy.Schema
+
+var BatchGetSourceEndpointResponse_Errors *smithy.Schema
+
+var ConnectEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ConnectEndpointsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var ConnectEndpointsRequest_DestinationEndpointArn *smithy.Schema
+
+var ConnectEndpointsRequest_SourceEndpointArn *smithy.Schema
+
+var ConnectEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ConnectEndpointsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var ConnectEndpointsResponse_DestinationEndpointArn *smithy.Schema
+
+var ConnectEndpointsResponse_DestinationEndpointName *smithy.Schema
+
+var ConnectEndpointsResponse_SourceEndpointArn *smithy.Schema
+
+var ConnectEndpointsResponse_SourceEndpointName *smithy.Schema
 
 var CreateBridgeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4528,6 +5603,20 @@ var DeleteRouterOutputResponse_Name *smithy.Schema
 
 var DeleteRouterOutputResponse_State *smithy.Schema
 
+var DeregisterDestinationEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DeregisterDestinationEndpointRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeregisterDestinationEndpointRequest_Arn *smithy.Schema
+
+var DeregisterDestinationEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DeregisterDestinationEndpointResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeregisterDestinationEndpointResponse_Arn *smithy.Schema
+
+var DeregisterDestinationEndpointResponse_Name *smithy.Schema
+
 var DeregisterGatewayInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "DeregisterGatewayInstanceRequest",
@@ -4543,6 +5632,20 @@ var DeregisterGatewayInstanceResponse = smithy.NewSchema(smithy.ShapeID{
 var DeregisterGatewayInstanceResponse_GatewayInstanceArn *smithy.Schema
 
 var DeregisterGatewayInstanceResponse_InstanceState *smithy.Schema
+
+var DeregisterSourceEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DeregisterSourceEndpointRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DeregisterSourceEndpointRequest_Arn *smithy.Schema
+
+var DeregisterSourceEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DeregisterSourceEndpointResponse",
+}, smithy.ShapeTypeStructure, 2)
+var DeregisterSourceEndpointResponse_Arn *smithy.Schema
+
+var DeregisterSourceEndpointResponse_Name *smithy.Schema
 
 var DescribeBridgeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4650,6 +5753,38 @@ var DescribeReservationResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DescribeReservationResponse_Reservation *smithy.Schema
 
+var DisconnectEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DisconnectEndpointsRequest",
+}, smithy.ShapeTypeStructure, 2)
+var DisconnectEndpointsRequest_DestinationEndpointArn *smithy.Schema
+
+var DisconnectEndpointsRequest_SourceEndpointArn *smithy.Schema
+
+var DisconnectEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "DisconnectEndpointsResponse",
+}, smithy.ShapeTypeStructure, 4)
+var DisconnectEndpointsResponse_DestinationEndpointArn *smithy.Schema
+
+var DisconnectEndpointsResponse_DestinationEndpointName *smithy.Schema
+
+var DisconnectEndpointsResponse_SourceEndpointArn *smithy.Schema
+
+var DisconnectEndpointsResponse_SourceEndpointName *smithy.Schema
+
+var GetDestinationEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "GetDestinationEndpointRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetDestinationEndpointRequest_Arn *smithy.Schema
+
+var GetDestinationEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "GetDestinationEndpointResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetDestinationEndpointResponse_DestinationEndpoint *smithy.Schema
+
 var GetRouterInputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "GetRouterInputRequest",
@@ -4718,6 +5853,18 @@ var GetRouterOutputResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var GetRouterOutputResponse_RouterOutput *smithy.Schema
 
+var GetSourceEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "GetSourceEndpointRequest",
+}, smithy.ShapeTypeStructure, 1)
+var GetSourceEndpointRequest_Arn *smithy.Schema
+
+var GetSourceEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "GetSourceEndpointResponse",
+}, smithy.ShapeTypeStructure, 1)
+var GetSourceEndpointResponse_SourceEndpoint *smithy.Schema
+
 var GrantFlowEntitlementsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "GrantFlowEntitlementsRequest",
@@ -4751,6 +5898,24 @@ var ListBridgesResponse = smithy.NewSchema(smithy.ShapeID{
 var ListBridgesResponse_Bridges *smithy.Schema
 
 var ListBridgesResponse_NextToken *smithy.Schema
+
+var ListDestinationEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListDestinationEndpointsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListDestinationEndpointsRequest_MaxResults *smithy.Schema
+
+var ListDestinationEndpointsRequest_NextToken *smithy.Schema
+
+var ListDestinationEndpointsRequest_Filters *smithy.Schema
+
+var ListDestinationEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListDestinationEndpointsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListDestinationEndpointsResponse_DestinationEndpoints *smithy.Schema
+
+var ListDestinationEndpointsResponse_NextToken *smithy.Schema
 
 var ListEntitlementsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -4904,6 +6069,24 @@ var ListRouterOutputsResponse_RouterOutputs *smithy.Schema
 
 var ListRouterOutputsResponse_NextToken *smithy.Schema
 
+var ListSourceEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListSourceEndpointsRequest",
+}, smithy.ShapeTypeStructure, 3)
+var ListSourceEndpointsRequest_MaxResults *smithy.Schema
+
+var ListSourceEndpointsRequest_NextToken *smithy.Schema
+
+var ListSourceEndpointsRequest_Filters *smithy.Schema
+
+var ListSourceEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "ListSourceEndpointsResponse",
+}, smithy.ShapeTypeStructure, 2)
+var ListSourceEndpointsResponse_SourceEndpoints *smithy.Schema
+
+var ListSourceEndpointsResponse_NextToken *smithy.Schema
+
 var ListTagsForGlobalResourceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "ListTagsForGlobalResourceRequest",
@@ -4943,6 +6126,46 @@ var PurchaseOfferingResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "PurchaseOfferingResponse",
 }, smithy.ShapeTypeStructure, 1)
 var PurchaseOfferingResponse_Reservation *smithy.Schema
+
+var RegisterDestinationEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RegisterDestinationEndpointRequest",
+}, smithy.ShapeTypeStructure, 5)
+var RegisterDestinationEndpointRequest_Description *smithy.Schema
+
+var RegisterDestinationEndpointRequest_Configuration *smithy.Schema
+
+var RegisterDestinationEndpointRequest_RegionName *smithy.Schema
+
+var RegisterDestinationEndpointRequest_Tags *smithy.Schema
+
+var RegisterDestinationEndpointRequest_ClientToken *smithy.Schema
+
+var RegisterDestinationEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RegisterDestinationEndpointResponse",
+}, smithy.ShapeTypeStructure, 1)
+var RegisterDestinationEndpointResponse_DestinationEndpoint *smithy.Schema
+
+var RegisterSourceEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RegisterSourceEndpointRequest",
+}, smithy.ShapeTypeStructure, 5)
+var RegisterSourceEndpointRequest_RegionName *smithy.Schema
+
+var RegisterSourceEndpointRequest_Description *smithy.Schema
+
+var RegisterSourceEndpointRequest_Configuration *smithy.Schema
+
+var RegisterSourceEndpointRequest_Tags *smithy.Schema
+
+var RegisterSourceEndpointRequest_ClientToken *smithy.Schema
+
+var RegisterSourceEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "RegisterSourceEndpointResponse",
+}, smithy.ShapeTypeStructure, 1)
+var RegisterSourceEndpointResponse_SourceEndpoint *smithy.Schema
 
 var RemoveBridgeOutputRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
@@ -5316,6 +6539,22 @@ var UpdateBridgeStateResponse_BridgeArn *smithy.Schema
 
 var UpdateBridgeStateResponse_DesiredState *smithy.Schema
 
+var UpdateDestinationEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "UpdateDestinationEndpointRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateDestinationEndpointRequest_Arn *smithy.Schema
+
+var UpdateDestinationEndpointRequest_Description *smithy.Schema
+
+var UpdateDestinationEndpointRequest_Configuration *smithy.Schema
+
+var UpdateDestinationEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "UpdateDestinationEndpointResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateDestinationEndpointResponse_DestinationEndpoint *smithy.Schema
+
 var UpdateFlowEntitlementRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.mediaconnect",
 	Name:      "UpdateFlowEntitlementRequest",
@@ -5593,6 +6832,22 @@ var UpdateRouterOutputResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateRouterOutputResponse",
 }, smithy.ShapeTypeStructure, 1)
 var UpdateRouterOutputResponse_RouterOutput *smithy.Schema
+
+var UpdateSourceEndpointRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "UpdateSourceEndpointRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateSourceEndpointRequest_Arn *smithy.Schema
+
+var UpdateSourceEndpointRequest_Description *smithy.Schema
+
+var UpdateSourceEndpointRequest_Configuration *smithy.Schema
+
+var UpdateSourceEndpointResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.mediaconnect",
+	Name:      "UpdateSourceEndpointResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateSourceEndpointResponse_SourceEndpoint *smithy.Schema
 
 // Initialize schema members after all schemas are declared to avoid
 // initialization cycles
@@ -6699,6 +7954,14 @@ func init() {
 
 	BadRequestException_Message = BadRequestException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
+	BatchGetDestinationEndpointError_Arn = BatchGetDestinationEndpointError.AddMember("Arn", _DestinationEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	BatchGetDestinationEndpointError_Code = BatchGetDestinationEndpointError.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
+
+	BatchGetDestinationEndpointError_Message = BatchGetDestinationEndpointError.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
+	_BatchGetDestinationEndpointErrorList_member = _BatchGetDestinationEndpointErrorList.AddMember("member", BatchGetDestinationEndpointError)
+
 	BatchGetRouterInputError_Arn = BatchGetRouterInputError.AddMember("Arn", _RouterInputArn, &smithytraits.JSONName{Name: "arn"})
 
 	BatchGetRouterInputError_Code = BatchGetRouterInputError.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
@@ -6722,6 +7985,14 @@ func init() {
 	BatchGetRouterOutputError_Message = BatchGetRouterOutputError.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
 	_BatchGetRouterOutputErrorList_member = _BatchGetRouterOutputErrorList.AddMember("member", BatchGetRouterOutputError)
+
+	BatchGetSourceEndpointError_Arn = BatchGetSourceEndpointError.AddMember("Arn", _SourceEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	BatchGetSourceEndpointError_Code = BatchGetSourceEndpointError.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
+
+	BatchGetSourceEndpointError_Message = BatchGetSourceEndpointError.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
+	_BatchGetSourceEndpointErrorList_member = _BatchGetSourceEndpointErrorList.AddMember("member", BatchGetSourceEndpointError)
 
 	ContentQualityAnalysisState_ENABLED = ContentQualityAnalysisState.AddMember("ENABLED", smithyprelude.Unit)
 
@@ -6785,6 +8056,8 @@ func init() {
 
 	ConnectionStatus_DISCONNECTED = ConnectionStatus.AddMember("DISCONNECTED", smithyprelude.Unit)
 
+	ConsumedResourceShareDetails_OwnerAccountId = ConsumedResourceShareDetails.AddMember("OwnerAccountId", smithyprelude.String, &smithytraits.JSONName{Name: "ownerAccountId"})
+
 	FrozenFramesConfiguration_State = FrozenFramesConfiguration.AddMember("State", ContentQualityAnalysisState, &smithytraits.JSONName{Name: "state"})
 
 	FrozenFramesConfiguration_ThresholdSeconds = FrozenFramesConfiguration.AddMember("ThresholdSeconds", _RouterCqaThresholdSeconds, &smithytraits.JSONName{Name: "thresholdSeconds"})
@@ -6825,6 +8098,288 @@ func init() {
 
 	DesiredState_DELETED = DesiredState.AddMember("DELETED", smithyprelude.Unit)
 
+	EndpointLifecycle_MANAGED = EndpointLifecycle.AddMember("MANAGED", smithyprelude.Unit)
+
+	EndpointLifecycle_UNMANAGED = EndpointLifecycle.AddMember("UNMANAGED", smithyprelude.Unit)
+
+	DestinationEndpointMessage_Code = DestinationEndpointMessage.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
+
+	DestinationEndpointMessage_Message = DestinationEndpointMessage.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
+	_DestinationEndpointMessageList_member = _DestinationEndpointMessageList.AddMember("member", DestinationEndpointMessage)
+
+	DestinationEndpointType_STANDARD = DestinationEndpointType.AddMember("STANDARD", smithyprelude.Unit)
+
+	DestinationEndpointType_ROUTER_INPUT = DestinationEndpointType.AddMember("ROUTER_INPUT", smithyprelude.Unit)
+
+	PublicDestinationEndpointNetworkingConfigurationAllowRule_Cidr = PublicDestinationEndpointNetworkingConfigurationAllowRule.AddMember("Cidr", smithyprelude.String, &smithytraits.JSONName{Name: "cidr"})
+
+	_PublicDestinationEndpointNetworkingConfigurationAllowRuleList_member = _PublicDestinationEndpointNetworkingConfigurationAllowRuleList.AddMember("member", PublicDestinationEndpointNetworkingConfigurationAllowRule)
+
+	PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules = PublicDestinationEndpointNetworkingConfiguration.AddMember("DestinationAllowRules", _PublicDestinationEndpointNetworkingConfigurationAllowRuleList, &smithytraits.JSONName{Name: "destinationAllowRules"})
+
+	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", smithyprelude.String)
+
+	VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds = VpcDestinationEndpointNetworkingConfiguration.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
+
+	VpcDestinationEndpointNetworkingConfiguration_SubnetId = VpcDestinationEndpointNetworkingConfiguration.AddMember("SubnetId", smithyprelude.String, &smithytraits.JSONName{Name: "subnetId"})
+
+	StandardDestinationEndpointNetworkingConfiguration_Public = StandardDestinationEndpointNetworkingConfiguration.AddMember("Public", PublicDestinationEndpointNetworkingConfiguration, &smithytraits.JSONName{Name: "public"})
+
+	StandardDestinationEndpointNetworkingConfiguration_Vpc = StandardDestinationEndpointNetworkingConfiguration.AddMember("Vpc", VpcDestinationEndpointNetworkingConfiguration, &smithytraits.JSONName{Name: "vpc"})
+
+	RistStandardDestinationEndpointConfiguration_DestinationAddress = RistStandardDestinationEndpointConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
+
+	RistStandardDestinationEndpointConfiguration_DestinationIngestPort = RistStandardDestinationEndpointConfiguration.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	EndpointEncryptionSecretConfiguration_SecretArn = EndpointEncryptionSecretConfiguration.AddMember("SecretArn", _SecretArn, &smithytraits.JSONName{Name: "secretArn"})
+
+	SrtListenerStandardDestinationEndpointConfiguration_DestinationAddress = SrtListenerStandardDestinationEndpointConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
+
+	SrtListenerStandardDestinationEndpointConfiguration_DestinationIngestPort = SrtListenerStandardDestinationEndpointConfiguration.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	SrtListenerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds = SrtListenerStandardDestinationEndpointConfiguration.AddMember("MinimumLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "minimumLatencyMilliseconds"})
+
+	SrtListenerStandardDestinationEndpointConfiguration_StreamId = SrtListenerStandardDestinationEndpointConfiguration.AddMember("StreamId", smithyprelude.String, &smithytraits.JSONName{Name: "streamId"})
+
+	SrtListenerStandardDestinationEndpointConfiguration_EncryptionPassphrase = SrtListenerStandardDestinationEndpointConfiguration.AddMember("EncryptionPassphrase", EndpointEncryptionSecretConfiguration, &smithytraits.JSONName{Name: "encryptionPassphrase"})
+
+	SrtCallerStandardDestinationEndpointConfiguration_SourceListenerPort = SrtCallerStandardDestinationEndpointConfiguration.AddMember("SourceListenerPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "sourceListenerPort"})
+
+	SrtCallerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds = SrtCallerStandardDestinationEndpointConfiguration.AddMember("MinimumLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "minimumLatencyMilliseconds"})
+
+	SrtCallerStandardDestinationEndpointConfiguration_EncryptionPassphrase = SrtCallerStandardDestinationEndpointConfiguration.AddMember("EncryptionPassphrase", EndpointEncryptionSecretConfiguration, &smithytraits.JSONName{Name: "encryptionPassphrase"})
+
+	ForwardErrorCorrectionState_ENABLED = ForwardErrorCorrectionState.AddMember("ENABLED", smithyprelude.Unit)
+
+	ForwardErrorCorrectionState_DISABLED = ForwardErrorCorrectionState.AddMember("DISABLED", smithyprelude.Unit)
+
+	RtpStandardDestinationEndpointConfiguration_DestinationAddress = RtpStandardDestinationEndpointConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
+
+	RtpStandardDestinationEndpointConfiguration_DestinationIngestPort = RtpStandardDestinationEndpointConfiguration.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	RtpStandardDestinationEndpointConfiguration_ForwardErrorCorrectionState = RtpStandardDestinationEndpointConfiguration.AddMember("ForwardErrorCorrectionState", ForwardErrorCorrectionState, &smithytraits.JSONName{Name: "forwardErrorCorrectionState"})
+
+	StandardDestinationEndpointProtocolConfiguration_Rist = StandardDestinationEndpointProtocolConfiguration.AddMember("Rist", RistStandardDestinationEndpointConfiguration, &smithytraits.JSONName{Name: "rist"})
+
+	StandardDestinationEndpointProtocolConfiguration_SrtListener = StandardDestinationEndpointProtocolConfiguration.AddMember("SrtListener", SrtListenerStandardDestinationEndpointConfiguration, &smithytraits.JSONName{Name: "srtListener"})
+
+	StandardDestinationEndpointProtocolConfiguration_SrtCaller = StandardDestinationEndpointProtocolConfiguration.AddMember("SrtCaller", SrtCallerStandardDestinationEndpointConfiguration, &smithytraits.JSONName{Name: "srtCaller"})
+
+	StandardDestinationEndpointProtocolConfiguration_Rtp = StandardDestinationEndpointProtocolConfiguration.AddMember("Rtp", RtpStandardDestinationEndpointConfiguration, &smithytraits.JSONName{Name: "rtp"})
+
+	DestinationEndpointNetworkingType_PUBLIC = DestinationEndpointNetworkingType.AddMember("PUBLIC", smithyprelude.Unit)
+
+	DestinationEndpointNetworkingType_VPC = DestinationEndpointNetworkingType.AddMember("VPC", smithyprelude.Unit)
+
+	DestinationEndpointProtocol_RTP = DestinationEndpointProtocol.AddMember("RTP", smithyprelude.Unit)
+
+	DestinationEndpointProtocol_RIST = DestinationEndpointProtocol.AddMember("RIST", smithyprelude.Unit)
+
+	DestinationEndpointProtocol_SRT_CALLER = DestinationEndpointProtocol.AddMember("SRT_CALLER", smithyprelude.Unit)
+
+	DestinationEndpointProtocol_SRT_LISTENER = DestinationEndpointProtocol.AddMember("SRT_LISTENER", smithyprelude.Unit)
+
+	StandardDestinationEndpointConfiguration_Name = StandardDestinationEndpointConfiguration.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration = StandardDestinationEndpointConfiguration.AddMember("DestinationNetworkingConfiguration", StandardDestinationEndpointNetworkingConfiguration, &smithytraits.JSONName{Name: "destinationNetworkingConfiguration"})
+
+	StandardDestinationEndpointConfiguration_ProtocolConfiguration = StandardDestinationEndpointConfiguration.AddMember("ProtocolConfiguration", StandardDestinationEndpointProtocolConfiguration, &smithytraits.JSONName{Name: "protocolConfiguration"})
+
+	StandardDestinationEndpointConfiguration_DestinationNetworkingType = StandardDestinationEndpointConfiguration.AddMember("DestinationNetworkingType", DestinationEndpointNetworkingType, &smithytraits.JSONName{Name: "destinationNetworkingType"})
+
+	StandardDestinationEndpointConfiguration_Protocol = StandardDestinationEndpointConfiguration.AddMember("Protocol", DestinationEndpointProtocol, &smithytraits.JSONName{Name: "protocol"})
+
+	RouterInputDestinationEndpointConfiguration_RouterInputArn = RouterInputDestinationEndpointConfiguration.AddMember("RouterInputArn", _RouterInputArn, &smithytraits.JSONName{Name: "routerInputArn"})
+
+	DestinationEndpointConfiguration_Standard = DestinationEndpointConfiguration.AddMember("Standard", StandardDestinationEndpointConfiguration, &smithytraits.JSONName{Name: "standard"})
+
+	DestinationEndpointConfiguration_RouterInput = DestinationEndpointConfiguration.AddMember("RouterInput", RouterInputDestinationEndpointConfiguration, &smithytraits.JSONName{Name: "routerInput"})
+
+	ResourceShareOwnership_OWNED = ResourceShareOwnership.AddMember("OWNED", smithyprelude.Unit)
+
+	ResourceShareOwnership_CONSUMED = ResourceShareOwnership.AddMember("CONSUMED", smithyprelude.Unit)
+
+	ResourceShareState_SHARED = ResourceShareState.AddMember("SHARED", smithyprelude.Unit)
+
+	ResourceShareState_UNSHARED = ResourceShareState.AddMember("UNSHARED", smithyprelude.Unit)
+
+	OwnedResourceShareDetails_ShareState = OwnedResourceShareDetails.AddMember("ShareState", ResourceShareState, &smithytraits.JSONName{Name: "shareState"})
+
+	ResourceShareDetails_Owned = ResourceShareDetails.AddMember("Owned", OwnedResourceShareDetails, &smithytraits.JSONName{Name: "owned"})
+
+	ResourceShareDetails_Consumed = ResourceShareDetails.AddMember("Consumed", ConsumedResourceShareDetails, &smithytraits.JSONName{Name: "consumed"})
+
+	DestinationEndpointRegistrationState_REGISTERED = DestinationEndpointRegistrationState.AddMember("REGISTERED", smithyprelude.Unit)
+
+	DestinationEndpointRegistrationState_REGISTERING = DestinationEndpointRegistrationState.AddMember("REGISTERING", smithyprelude.Unit)
+
+	DestinationEndpointRegistrationState_DEREGISTERING = DestinationEndpointRegistrationState.AddMember("DEREGISTERING", smithyprelude.Unit)
+
+	DestinationEndpointRegistrationState_REGISTRATION_FAILED = DestinationEndpointRegistrationState.AddMember("REGISTRATION_FAILED", smithyprelude.Unit)
+
+	EndpointEncryptionType_SECRETS_MANAGER = EndpointEncryptionType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
+
+	EndpointEncryptionType_AUTOMATIC = EndpointEncryptionType.AddMember("AUTOMATIC", smithyprelude.Unit)
+
+	EndpointEncryptionSecretType_AES_128_KEY = EndpointEncryptionSecretType.AddMember("AES_128_KEY", smithyprelude.Unit)
+
+	EndpointEncryptionSecretType_AES_192_KEY = EndpointEncryptionSecretType.AddMember("AES_192_KEY", smithyprelude.Unit)
+
+	EndpointEncryptionSecretType_AES_256_KEY = EndpointEncryptionSecretType.AddMember("AES_256_KEY", smithyprelude.Unit)
+
+	EndpointEncryptionSecretType_SRT_PASSPHRASE = EndpointEncryptionSecretType.AddMember("SRT_PASSPHRASE", smithyprelude.Unit)
+
+	SecretsManagerEndpointEncryptionConfiguration_EncryptionSecretType = SecretsManagerEndpointEncryptionConfiguration.AddMember("EncryptionSecretType", EndpointEncryptionSecretType, &smithytraits.JSONName{Name: "encryptionSecretType"})
+
+	SecretsManagerEndpointEncryptionConfiguration_EncryptionSecret = SecretsManagerEndpointEncryptionConfiguration.AddMember("EncryptionSecret", EndpointEncryptionSecretConfiguration, &smithytraits.JSONName{Name: "encryptionSecret"})
+
+	EndpointEncryptionConfiguration_SecretsManager = EndpointEncryptionConfiguration.AddMember("SecretsManager", SecretsManagerEndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "secretsManager"})
+
+	EndpointEncryptionConfiguration_Automatic = EndpointEncryptionConfiguration.AddMember("Automatic", AutomaticEndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "automatic"})
+
+	SourceEndpointType_STANDARD = SourceEndpointType.AddMember("STANDARD", smithyprelude.Unit)
+
+	SourceEndpointType_ROUTER_OUTPUT = SourceEndpointType.AddMember("ROUTER_OUTPUT", smithyprelude.Unit)
+
+	StandardDestinationEndpointConnectionDetails_SourceIpAddress = StandardDestinationEndpointConnectionDetails.AddMember("SourceIpAddress", smithyprelude.String, &smithytraits.JSONName{Name: "sourceIpAddress"})
+
+	StandardDestinationEndpointConnectionDetails_SourceListenerPort = StandardDestinationEndpointConnectionDetails.AddMember("SourceListenerPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "sourceListenerPort"})
+
+	StandardDestinationEndpointConnectionDetails_SourceEncryptionType = StandardDestinationEndpointConnectionDetails.AddMember("SourceEncryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "sourceEncryptionType"})
+
+	StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration = StandardDestinationEndpointConnectionDetails.AddMember("SourceEncryptionConfiguration", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "sourceEncryptionConfiguration"})
+
+	StandardDestinationEndpointConnectionDetails_SourceEndpointType = StandardDestinationEndpointConnectionDetails.AddMember("SourceEndpointType", SourceEndpointType, &smithytraits.JSONName{Name: "sourceEndpointType"})
+
+	RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType = RouterInputDestinationEndpointConnectionDetails.AddMember("SourceEncryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "sourceEncryptionType"})
+
+	RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration = RouterInputDestinationEndpointConnectionDetails.AddMember("SourceEncryptionConfiguration", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "sourceEncryptionConfiguration"})
+
+	RouterInputDestinationEndpointConnectionDetails_SourceEndpointType = RouterInputDestinationEndpointConnectionDetails.AddMember("SourceEndpointType", SourceEndpointType, &smithytraits.JSONName{Name: "sourceEndpointType"})
+
+	DestinationEndpointConnectionDetails_Standard = DestinationEndpointConnectionDetails.AddMember("Standard", StandardDestinationEndpointConnectionDetails, &smithytraits.JSONName{Name: "standard"})
+
+	DestinationEndpointConnectionDetails_RouterInput = DestinationEndpointConnectionDetails.AddMember("RouterInput", RouterInputDestinationEndpointConnectionDetails, &smithytraits.JSONName{Name: "routerInput"})
+
+	DestinationEndpointConnectionState_CONNECTED = DestinationEndpointConnectionState.AddMember("CONNECTED", smithyprelude.Unit)
+
+	DestinationEndpointConnectionState_DISCONNECTED = DestinationEndpointConnectionState.AddMember("DISCONNECTED", smithyprelude.Unit)
+
+	DestinationEndpointConnectionState_CONNECTING = DestinationEndpointConnectionState.AddMember("CONNECTING", smithyprelude.Unit)
+
+	DestinationEndpointConnectionState_DISCONNECTING = DestinationEndpointConnectionState.AddMember("DISCONNECTING", smithyprelude.Unit)
+
+	RouterInputState_CREATING = RouterInputState.AddMember("CREATING", smithyprelude.Unit)
+
+	RouterInputState_STANDBY = RouterInputState.AddMember("STANDBY", smithyprelude.Unit)
+
+	RouterInputState_STARTING = RouterInputState.AddMember("STARTING", smithyprelude.Unit)
+
+	RouterInputState_ACTIVE = RouterInputState.AddMember("ACTIVE", smithyprelude.Unit)
+
+	RouterInputState_STOPPING = RouterInputState.AddMember("STOPPING", smithyprelude.Unit)
+
+	RouterInputState_DELETING = RouterInputState.AddMember("DELETING", smithyprelude.Unit)
+
+	RouterInputState_UPDATING = RouterInputState.AddMember("UPDATING", smithyprelude.Unit)
+
+	RouterInputState_ERROR = RouterInputState.AddMember("ERROR", smithyprelude.Unit)
+
+	RouterInputState_RECOVERING = RouterInputState.AddMember("RECOVERING", smithyprelude.Unit)
+
+	RouterInputState_MIGRATING = RouterInputState.AddMember("MIGRATING", smithyprelude.Unit)
+
+	RouterInputMessage_Code = RouterInputMessage.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
+
+	RouterInputMessage_Message = RouterInputMessage.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
+	_RouterInputMessages_member = _RouterInputMessages.AddMember("member", RouterInputMessage)
+
+	RouterInputDestinationEndpointAssociatedResourceDetails_Name = RouterInputDestinationEndpointAssociatedResourceDetails.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate = RouterInputDestinationEndpointAssociatedResourceDetails.AddMember("MaximumBitrate", smithyprelude.Long, &smithytraits.JSONName{Name: "maximumBitrate"})
+
+	RouterInputDestinationEndpointAssociatedResourceDetails_State = RouterInputDestinationEndpointAssociatedResourceDetails.AddMember("State", RouterInputState, &smithytraits.JSONName{Name: "state"})
+
+	RouterInputDestinationEndpointAssociatedResourceDetails_Messages = RouterInputDestinationEndpointAssociatedResourceDetails.AddMember("Messages", _RouterInputMessages, &smithytraits.JSONName{Name: "messages"})
+
+	DestinationEndpointAssociatedResourceDetails_Standard = DestinationEndpointAssociatedResourceDetails.AddMember("Standard", StandardDestinationEndpointAssociatedResourceDetails, &smithytraits.JSONName{Name: "standard"})
+
+	DestinationEndpointAssociatedResourceDetails_RouterInput = DestinationEndpointAssociatedResourceDetails.AddMember("RouterInput", RouterInputDestinationEndpointAssociatedResourceDetails, &smithytraits.JSONName{Name: "routerInput"})
+
+	DestinationEndpoint_Name = DestinationEndpoint.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	DestinationEndpoint_Arn = DestinationEndpoint.AddMember("Arn", _DestinationEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	DestinationEndpoint_Id = DestinationEndpoint.AddMember("Id", smithyprelude.String, &smithytraits.JSONName{Name: "id"})
+
+	DestinationEndpoint_Description = DestinationEndpoint.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
+
+	DestinationEndpoint_RegionName = DestinationEndpoint.AddMember("RegionName", smithyprelude.String, &smithytraits.JSONName{Name: "regionName"})
+
+	DestinationEndpoint_AvailabilityZone = DestinationEndpoint.AddMember("AvailabilityZone", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZone"})
+
+	DestinationEndpoint_AvailabilityZoneId = DestinationEndpoint.AddMember("AvailabilityZoneId", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZoneId"})
+
+	DestinationEndpoint_CreatedAt = DestinationEndpoint.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "createdAt"})
+
+	DestinationEndpoint_UpdatedAt = DestinationEndpoint.AddMember("UpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "updatedAt"})
+
+	DestinationEndpoint_LifecycleManagement = DestinationEndpoint.AddMember("LifecycleManagement", EndpointLifecycle, &smithytraits.JSONName{Name: "lifecycleManagement"})
+
+	DestinationEndpoint_Messages = DestinationEndpoint.AddMember("Messages", _DestinationEndpointMessageList, &smithytraits.JSONName{Name: "messages"})
+
+	DestinationEndpoint_DestinationType = DestinationEndpoint.AddMember("DestinationType", DestinationEndpointType, &smithytraits.JSONName{Name: "destinationType"})
+
+	DestinationEndpoint_Configuration = DestinationEndpoint.AddMember("Configuration", DestinationEndpointConfiguration, &smithytraits.JSONName{Name: "configuration"})
+
+	DestinationEndpoint_ResourceShareOwnership = DestinationEndpoint.AddMember("ResourceShareOwnership", ResourceShareOwnership, &smithytraits.JSONName{Name: "resourceShareOwnership"})
+
+	DestinationEndpoint_ResourceShareDetails = DestinationEndpoint.AddMember("ResourceShareDetails", ResourceShareDetails, &smithytraits.JSONName{Name: "resourceShareDetails"})
+
+	DestinationEndpoint_RegistrationState = DestinationEndpoint.AddMember("RegistrationState", DestinationEndpointRegistrationState, &smithytraits.JSONName{Name: "registrationState"})
+
+	DestinationEndpoint_ConnectionDetails = DestinationEndpoint.AddMember("ConnectionDetails", DestinationEndpointConnectionDetails, &smithytraits.JSONName{Name: "connectionDetails"})
+
+	DestinationEndpoint_ConnectionState = DestinationEndpoint.AddMember("ConnectionState", DestinationEndpointConnectionState, &smithytraits.JSONName{Name: "connectionState"})
+
+	DestinationEndpoint_ConnectedSource = DestinationEndpoint.AddMember("ConnectedSource", _SourceEndpointArn, &smithytraits.JSONName{Name: "connectedSource"})
+
+	DestinationEndpoint_DecryptionType = DestinationEndpoint.AddMember("DecryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "decryptionType"})
+
+	DestinationEndpoint_DecryptionConfiguration = DestinationEndpoint.AddMember("DecryptionConfiguration", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "decryptionConfiguration"})
+
+	DestinationEndpoint_AssociatedResourceDetails = DestinationEndpoint.AddMember("AssociatedResourceDetails", DestinationEndpointAssociatedResourceDetails, &smithytraits.JSONName{Name: "associatedResourceDetails"})
+
+	DestinationEndpoint_Tags = DestinationEndpoint.AddMember("Tags", ___mapOfString, &smithytraits.JSONName{Name: "tags"})
+
+	_DestinationEndpointArnList_member = _DestinationEndpointArnList.AddMember("member", _DestinationEndpointArn)
+
+	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
+
+	_DestinationEndpointTypeList_member = _DestinationEndpointTypeList.AddMember("member", DestinationEndpointType)
+
+	DestinationEndpointFilter_RegionNames = DestinationEndpointFilter.AddMember("RegionNames", _StringList, &smithytraits.JSONName{Name: "regionNames"})
+
+	DestinationEndpointFilter_DestinationTypes = DestinationEndpointFilter.AddMember("DestinationTypes", _DestinationEndpointTypeList, &smithytraits.JSONName{Name: "destinationTypes"})
+
+	DestinationEndpointFilter_NameContains = DestinationEndpointFilter.AddMember("NameContains", _StringList, &smithytraits.JSONName{Name: "nameContains"})
+
+	_DestinationEndpointFilterList_member = _DestinationEndpointFilterList.AddMember("member", DestinationEndpointFilter)
+
+	_DestinationEndpointList_member = _DestinationEndpointList.AddMember("member", DestinationEndpoint)
+
+	DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement = DestinationEndpointRouterInputConfiguration.AddMember("EndpointLifecycleManagement", EndpointLifecycle, &smithytraits.JSONName{Name: "endpointLifecycleManagement"})
+
+	DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType = DestinationEndpointRouterInputConfiguration.AddMember("SourceTransitDecryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "sourceTransitDecryptionType"})
+
+	DestinationEndpointRouterInputConfiguration_SourceTransitDecryption = DestinationEndpointRouterInputConfiguration.AddMember("SourceTransitDecryption", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "sourceTransitDecryption"})
+
+	DestinationEndpointServiceQuotaExceededException_Message = DestinationEndpointServiceQuotaExceededException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
 	EncodingProfile_DISTRIBUTION_H264_DEFAULT = EncodingProfile.AddMember("DISTRIBUTION_H264_DEFAULT", smithyprelude.Unit)
 
 	EncodingProfile_CONTRIBUTION_H264_DEFAULT = EncodingProfile.AddMember("CONTRIBUTION_H264_DEFAULT", smithyprelude.Unit)
@@ -6864,10 +8419,6 @@ func init() {
 	SrtCallerRouterInputConfiguration_StreamId = SrtCallerRouterInputConfiguration.AddMember("StreamId", smithyprelude.String, &smithytraits.JSONName{Name: "streamId"})
 
 	SrtCallerRouterInputConfiguration_DecryptionConfiguration = SrtCallerRouterInputConfiguration.AddMember("DecryptionConfiguration", SrtDecryptionConfiguration, &smithytraits.JSONName{Name: "decryptionConfiguration"})
-
-	ForwardErrorCorrectionState_ENABLED = ForwardErrorCorrectionState.AddMember("ENABLED", smithyprelude.Unit)
-
-	ForwardErrorCorrectionState_DISABLED = ForwardErrorCorrectionState.AddMember("DISABLED", smithyprelude.Unit)
 
 	RtpRouterInputConfiguration_Port = RtpRouterInputConfiguration.AddMember("Port", smithyprelude.Integer, &smithytraits.JSONName{Name: "port"})
 
@@ -6997,6 +8548,46 @@ func init() {
 
 	InternalServerErrorException_Message = InternalServerErrorException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
+	ListedDestinationEndpoint_Name = ListedDestinationEndpoint.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	ListedDestinationEndpoint_Arn = ListedDestinationEndpoint.AddMember("Arn", _DestinationEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	ListedDestinationEndpoint_Id = ListedDestinationEndpoint.AddMember("Id", smithyprelude.String, &smithytraits.JSONName{Name: "id"})
+
+	ListedDestinationEndpoint_DestinationType = ListedDestinationEndpoint.AddMember("DestinationType", DestinationEndpointType, &smithytraits.JSONName{Name: "destinationType"})
+
+	ListedDestinationEndpoint_RegionName = ListedDestinationEndpoint.AddMember("RegionName", smithyprelude.String, &smithytraits.JSONName{Name: "regionName"})
+
+	ListedDestinationEndpoint_AvailabilityZone = ListedDestinationEndpoint.AddMember("AvailabilityZone", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZone"})
+
+	ListedDestinationEndpoint_AvailabilityZoneId = ListedDestinationEndpoint.AddMember("AvailabilityZoneId", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZoneId"})
+
+	ListedDestinationEndpoint_CreatedAt = ListedDestinationEndpoint.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "createdAt"})
+
+	ListedDestinationEndpoint_UpdatedAt = ListedDestinationEndpoint.AddMember("UpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "updatedAt"})
+
+	ListedDestinationEndpoint_LifecycleManagement = ListedDestinationEndpoint.AddMember("LifecycleManagement", EndpointLifecycle, &smithytraits.JSONName{Name: "lifecycleManagement"})
+
+	ListedDestinationEndpoint_MessageCount = ListedDestinationEndpoint.AddMember("MessageCount", smithyprelude.Integer, &smithytraits.JSONName{Name: "messageCount"})
+
+	ListedDestinationEndpoint_ResourceShareOwnership = ListedDestinationEndpoint.AddMember("ResourceShareOwnership", ResourceShareOwnership, &smithytraits.JSONName{Name: "resourceShareOwnership"})
+
+	ListedDestinationEndpoint_ResourceShareState = ListedDestinationEndpoint.AddMember("ResourceShareState", ResourceShareState, &smithytraits.JSONName{Name: "resourceShareState"})
+
+	ListedDestinationEndpoint_RegistrationState = ListedDestinationEndpoint.AddMember("RegistrationState", DestinationEndpointRegistrationState, &smithytraits.JSONName{Name: "registrationState"})
+
+	ListedDestinationEndpoint_ConnectionState = ListedDestinationEndpoint.AddMember("ConnectionState", DestinationEndpointConnectionState, &smithytraits.JSONName{Name: "connectionState"})
+
+	ListedDestinationEndpoint_DecryptionType = ListedDestinationEndpoint.AddMember("DecryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "decryptionType"})
+
+	ListedDestinationEndpoint_ConnectedSource = ListedDestinationEndpoint.AddMember("ConnectedSource", _SourceEndpointArn, &smithytraits.JSONName{Name: "connectedSource"})
+
+	ListedDestinationEndpoint_AssociatedResourceArn = ListedDestinationEndpoint.AddMember("AssociatedResourceArn", smithyprelude.String, &smithytraits.JSONName{Name: "associatedResourceArn"})
+
+	_ListedDestinationEndpointList_member = _ListedDestinationEndpointList.AddMember("member", ListedDestinationEndpoint)
+
 	RouterInputType_STANDARD = RouterInputType.AddMember("STANDARD", smithyprelude.Unit)
 
 	RouterInputType_FAILOVER = RouterInputType.AddMember("FAILOVER", smithyprelude.Unit)
@@ -7007,25 +8598,7 @@ func init() {
 
 	RouterInputType_MEDIALIVE_CHANNEL = RouterInputType.AddMember("MEDIALIVE_CHANNEL", smithyprelude.Unit)
 
-	RouterInputState_CREATING = RouterInputState.AddMember("CREATING", smithyprelude.Unit)
-
-	RouterInputState_STANDBY = RouterInputState.AddMember("STANDBY", smithyprelude.Unit)
-
-	RouterInputState_STARTING = RouterInputState.AddMember("STARTING", smithyprelude.Unit)
-
-	RouterInputState_ACTIVE = RouterInputState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	RouterInputState_STOPPING = RouterInputState.AddMember("STOPPING", smithyprelude.Unit)
-
-	RouterInputState_DELETING = RouterInputState.AddMember("DELETING", smithyprelude.Unit)
-
-	RouterInputState_UPDATING = RouterInputState.AddMember("UPDATING", smithyprelude.Unit)
-
-	RouterInputState_ERROR = RouterInputState.AddMember("ERROR", smithyprelude.Unit)
-
-	RouterInputState_RECOVERING = RouterInputState.AddMember("RECOVERING", smithyprelude.Unit)
-
-	RouterInputState_MIGRATING = RouterInputState.AddMember("MIGRATING", smithyprelude.Unit)
+	RouterInputType_DESTINATION_ENDPOINT = RouterInputType.AddMember("DESTINATION_ENDPOINT", smithyprelude.Unit)
 
 	RoutingScope_REGIONAL = RoutingScope.AddMember("REGIONAL", smithyprelude.Unit)
 
@@ -7126,6 +8699,8 @@ func init() {
 
 	RouterOutputType_MEDIALIVE_INPUT = RouterOutputType.AddMember("MEDIALIVE_INPUT", smithyprelude.Unit)
 
+	RouterOutputType_SOURCE_ENDPOINT = RouterOutputType.AddMember("SOURCE_ENDPOINT", smithyprelude.Unit)
+
 	RouterOutputState_CREATING = RouterOutputState.AddMember("CREATING", smithyprelude.Unit)
 
 	RouterOutputState_STANDBY = RouterOutputState.AddMember("STANDBY", smithyprelude.Unit)
@@ -7189,6 +8764,62 @@ func init() {
 	ListedRouterOutput_MaintenanceSchedule = ListedRouterOutput.AddMember("MaintenanceSchedule", MaintenanceSchedule, &smithytraits.JSONName{Name: "maintenanceSchedule"})
 
 	_ListedRouterOutputList_member = _ListedRouterOutputList.AddMember("member", ListedRouterOutput)
+
+	SourceEndpointRegistrationState_REGISTERED = SourceEndpointRegistrationState.AddMember("REGISTERED", smithyprelude.Unit)
+
+	SourceEndpointRegistrationState_REGISTERING = SourceEndpointRegistrationState.AddMember("REGISTERING", smithyprelude.Unit)
+
+	SourceEndpointRegistrationState_DEREGISTERING = SourceEndpointRegistrationState.AddMember("DEREGISTERING", smithyprelude.Unit)
+
+	SourceEndpointRegistrationState_REGISTRATION_FAILED = SourceEndpointRegistrationState.AddMember("REGISTRATION_FAILED", smithyprelude.Unit)
+
+	SourceEndpointConnectionState_CONNECTED = SourceEndpointConnectionState.AddMember("CONNECTED", smithyprelude.Unit)
+
+	SourceEndpointConnectionState_DISCONNECTED = SourceEndpointConnectionState.AddMember("DISCONNECTED", smithyprelude.Unit)
+
+	SourceEndpointConnectionState_CONNECTING = SourceEndpointConnectionState.AddMember("CONNECTING", smithyprelude.Unit)
+
+	SourceEndpointConnectionState_DISCONNECTING = SourceEndpointConnectionState.AddMember("DISCONNECTING", smithyprelude.Unit)
+
+	ListedSourceEndpoint_Name = ListedSourceEndpoint.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	ListedSourceEndpoint_Arn = ListedSourceEndpoint.AddMember("Arn", _SourceEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	ListedSourceEndpoint_Id = ListedSourceEndpoint.AddMember("Id", smithyprelude.String, &smithytraits.JSONName{Name: "id"})
+
+	ListedSourceEndpoint_SourceType = ListedSourceEndpoint.AddMember("SourceType", SourceEndpointType, &smithytraits.JSONName{Name: "sourceType"})
+
+	ListedSourceEndpoint_RegionName = ListedSourceEndpoint.AddMember("RegionName", smithyprelude.String, &smithytraits.JSONName{Name: "regionName"})
+
+	ListedSourceEndpoint_AvailabilityZone = ListedSourceEndpoint.AddMember("AvailabilityZone", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZone"})
+
+	ListedSourceEndpoint_AvailabilityZoneId = ListedSourceEndpoint.AddMember("AvailabilityZoneId", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZoneId"})
+
+	ListedSourceEndpoint_CreatedAt = ListedSourceEndpoint.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "createdAt"})
+
+	ListedSourceEndpoint_UpdatedAt = ListedSourceEndpoint.AddMember("UpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "updatedAt"})
+
+	ListedSourceEndpoint_LifecycleManagement = ListedSourceEndpoint.AddMember("LifecycleManagement", EndpointLifecycle, &smithytraits.JSONName{Name: "lifecycleManagement"})
+
+	ListedSourceEndpoint_MessageCount = ListedSourceEndpoint.AddMember("MessageCount", smithyprelude.Integer, &smithytraits.JSONName{Name: "messageCount"})
+
+	ListedSourceEndpoint_ResourceShareOwnership = ListedSourceEndpoint.AddMember("ResourceShareOwnership", ResourceShareOwnership, &smithytraits.JSONName{Name: "resourceShareOwnership"})
+
+	ListedSourceEndpoint_ResourceShareState = ListedSourceEndpoint.AddMember("ResourceShareState", ResourceShareState, &smithytraits.JSONName{Name: "resourceShareState"})
+
+	ListedSourceEndpoint_RegistrationState = ListedSourceEndpoint.AddMember("RegistrationState", SourceEndpointRegistrationState, &smithytraits.JSONName{Name: "registrationState"})
+
+	ListedSourceEndpoint_ConnectionState = ListedSourceEndpoint.AddMember("ConnectionState", SourceEndpointConnectionState, &smithytraits.JSONName{Name: "connectionState"})
+
+	ListedSourceEndpoint_EncryptionType = ListedSourceEndpoint.AddMember("EncryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "encryptionType"})
+
+	ListedSourceEndpoint_ConnectedDestinationCount = ListedSourceEndpoint.AddMember("ConnectedDestinationCount", smithyprelude.Integer, &smithytraits.JSONName{Name: "connectedDestinationCount"})
+
+	ListedSourceEndpoint_AssociatedResourceArn = ListedSourceEndpoint.AddMember("AssociatedResourceArn", smithyprelude.String, &smithytraits.JSONName{Name: "associatedResourceArn"})
+
+	_ListedSourceEndpointList_member = _ListedSourceEndpointList.AddMember("member", ListedSourceEndpoint)
 
 	PreferredDayTimeMaintenanceConfiguration_Day = PreferredDayTimeMaintenanceConfiguration.AddMember("Day", Day, &smithytraits.JSONName{Name: "day"})
 
@@ -7288,9 +8919,19 @@ func init() {
 
 	PublicRouterNetworkInterfaceConfiguration_AllowRules = PublicRouterNetworkInterfaceConfiguration.AddMember("AllowRules", _NetworkInterfaceRuleList, &smithytraits.JSONName{Name: "allowRules"})
 
+	PublicSourceEndpointNetworkingConfigurationAllowRule_Cidr = PublicSourceEndpointNetworkingConfigurationAllowRule.AddMember("Cidr", smithyprelude.String, &smithytraits.JSONName{Name: "cidr"})
+
+	_PublicSourceEndpointNetworkingConfigurationAllowRuleList_member = _PublicSourceEndpointNetworkingConfigurationAllowRuleList.AddMember("member", PublicSourceEndpointNetworkingConfigurationAllowRule)
+
+	PublicSourceEndpointNetworkingConfiguration_SourceAllowRules = PublicSourceEndpointNetworkingConfiguration.AddMember("SourceAllowRules", _PublicSourceEndpointNetworkingConfigurationAllowRuleList, &smithytraits.JSONName{Name: "sourceAllowRules"})
+
 	RistRouterOutputConfiguration_DestinationAddress = RistRouterOutputConfiguration.AddMember("DestinationAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationAddress"})
 
 	RistRouterOutputConfiguration_DestinationPort = RistRouterOutputConfiguration.AddMember("DestinationPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationPort"})
+
+	RistStandardSourceEndpointConfiguration_DestinationIngestPort = RistStandardSourceEndpointConfiguration.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	RistStandardSourceEndpointConfiguration_RecoveryLatencyMilliseconds = RistStandardSourceEndpointConfiguration.AddMember("RecoveryLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "recoveryLatencyMilliseconds"})
 
 	RouterContentQualityAnalysisConfiguration_ContentLevel = RouterContentQualityAnalysisConfiguration.AddMember("ContentLevel", ContentQualityAnalysisFeatureConfiguration, &smithytraits.JSONName{Name: "contentLevel"})
 
@@ -7318,6 +8959,8 @@ func init() {
 
 	StandardRouterInputConfiguration_Protocol = StandardRouterInputConfiguration.AddMember("Protocol", RouterInputProtocol, &smithytraits.JSONName{Name: "protocol"})
 
+	RouterInputConfiguration_DestinationEndpoint = RouterInputConfiguration.AddMember("DestinationEndpoint", DestinationEndpointRouterInputConfiguration, &smithytraits.JSONName{Name: "destinationEndpoint"})
+
 	RouterInputConfiguration_Standard = RouterInputConfiguration.AddMember("Standard", StandardRouterInputConfiguration, &smithytraits.JSONName{Name: "standard"})
 
 	RouterInputConfiguration_MediaLiveChannel = RouterInputConfiguration.AddMember("MediaLiveChannel", MediaLiveChannelRouterInputConfiguration, &smithytraits.JSONName{Name: "mediaLiveChannel"})
@@ -7338,12 +8981,6 @@ func init() {
 
 	RouterInputTier_INPUT_250 = RouterInputTier.AddMember("INPUT_250", smithyprelude.Unit)
 
-	RouterInputMessage_Code = RouterInputMessage.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
-
-	RouterInputMessage_Message = RouterInputMessage.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
-
-	_RouterInputMessages_member = _RouterInputMessages.AddMember("member", RouterInputMessage)
-
 	RouterInputTransitEncryptionKeyType_SECRETS_MANAGER = RouterInputTransitEncryptionKeyType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
 
 	RouterInputTransitEncryptionKeyType_AUTOMATIC = RouterInputTransitEncryptionKeyType.AddMember("AUTOMATIC", smithyprelude.Unit)
@@ -7357,6 +8994,8 @@ func init() {
 	RouterInputTransitEncryption_EncryptionKeyConfiguration = RouterInputTransitEncryption.AddMember("EncryptionKeyConfiguration", RouterInputTransitEncryptionKeyConfiguration, &smithytraits.JSONName{Name: "encryptionKeyConfiguration"})
 
 	StandardRouterInputStreamDetails_SourceIpAddress = StandardRouterInputStreamDetails.AddMember("SourceIpAddress", smithyprelude.String, &smithytraits.JSONName{Name: "sourceIpAddress"})
+
+	RouterInputStreamDetails_DestinationEndpoint = RouterInputStreamDetails.AddMember("DestinationEndpoint", DestinationEndpointRouterInputStreamDetails, &smithytraits.JSONName{Name: "destinationEndpoint"})
 
 	RouterInputStreamDetails_Standard = RouterInputStreamDetails.AddMember("Standard", StandardRouterInputStreamDetails, &smithytraits.JSONName{Name: "standard"})
 
@@ -7422,9 +9061,9 @@ func init() {
 
 	RouterInput_ContentQualityAnalysisConfiguration = RouterInput.AddMember("ContentQualityAnalysisConfiguration", RouterContentQualityAnalysisConfiguration, &smithytraits.JSONName{Name: "contentQualityAnalysisConfiguration"})
 
-	_RouterInputArnList_member = _RouterInputArnList.AddMember("member", _RouterInputArn)
+	RouterInput_AssociatedDestinationEndpointArns = RouterInput.AddMember("AssociatedDestinationEndpointArns", _DestinationEndpointArnList, &smithytraits.JSONName{Name: "associatedDestinationEndpointArns"})
 
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
+	_RouterInputArnList_member = _RouterInputArnList.AddMember("member", _RouterInputArn)
 
 	_RouterNetworkInterfaceArnList_member = _RouterNetworkInterfaceArnList.AddMember("member", _RouterNetworkInterfaceArn)
 
@@ -7469,8 +9108,6 @@ func init() {
 
 	RouterInputThumbnailDetails_Timestamp = RouterInputThumbnailDetails.AddMember("Timestamp", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
 		&smithytraits.JSONName{Name: "timestamp"})
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", smithyprelude.String)
 
 	VpcRouterNetworkInterfaceConfiguration_SecurityGroupIds = VpcRouterNetworkInterfaceConfiguration.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
 
@@ -7588,11 +9225,19 @@ func init() {
 
 	StandardRouterOutputConfiguration_Protocol = StandardRouterOutputConfiguration.AddMember("Protocol", RouterOutputProtocol, &smithytraits.JSONName{Name: "protocol"})
 
+	SourceEndpointRouterOutputConfiguration_EndpointLifecycleManagement = SourceEndpointRouterOutputConfiguration.AddMember("EndpointLifecycleManagement", EndpointLifecycle, &smithytraits.JSONName{Name: "endpointLifecycleManagement"})
+
+	SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType = SourceEndpointRouterOutputConfiguration.AddMember("DestinationTransitEncryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "destinationTransitEncryptionType"})
+
+	SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption = SourceEndpointRouterOutputConfiguration.AddMember("DestinationTransitEncryption", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "destinationTransitEncryption"})
+
 	RouterOutputConfiguration_Standard = RouterOutputConfiguration.AddMember("Standard", StandardRouterOutputConfiguration, &smithytraits.JSONName{Name: "standard"})
 
 	RouterOutputConfiguration_MediaConnectFlow = RouterOutputConfiguration.AddMember("MediaConnectFlow", MediaConnectFlowRouterOutputConfiguration, &smithytraits.JSONName{Name: "mediaConnectFlow"})
 
 	RouterOutputConfiguration_MediaLiveInput = RouterOutputConfiguration.AddMember("MediaLiveInput", MediaLiveInputRouterOutputConfiguration, &smithytraits.JSONName{Name: "mediaLiveInput"})
+
+	RouterOutputConfiguration_SourceEndpoint = RouterOutputConfiguration.AddMember("SourceEndpoint", SourceEndpointRouterOutputConfiguration, &smithytraits.JSONName{Name: "sourceEndpoint"})
 
 	RouterOutputTier_OUTPUT_100 = RouterOutputTier.AddMember("OUTPUT_100", smithyprelude.Unit)
 
@@ -7617,6 +9262,10 @@ func init() {
 	RouterOutputStreamDetails_MediaConnectFlow = RouterOutputStreamDetails.AddMember("MediaConnectFlow", MediaConnectFlowRouterOutputStreamDetails, &smithytraits.JSONName{Name: "mediaConnectFlow"})
 
 	RouterOutputStreamDetails_MediaLiveInput = RouterOutputStreamDetails.AddMember("MediaLiveInput", MediaLiveInputRouterOutputStreamDetails, &smithytraits.JSONName{Name: "mediaLiveInput"})
+
+	RouterOutputStreamDetails_SourceEndpoint = RouterOutputStreamDetails.AddMember("SourceEndpoint", SourceEndpointRouterOutputStreamDetails, &smithytraits.JSONName{Name: "sourceEndpoint"})
+
+	_SourceEndpointArnList_member = _SourceEndpointArnList.AddMember("member", _SourceEndpointArn)
 
 	RouterOutput_Name = RouterOutput.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
 
@@ -7668,6 +9317,8 @@ func init() {
 
 	RouterOutput_FabricConfiguration = RouterOutput.AddMember("FabricConfiguration", FabricConfiguration, &smithytraits.JSONName{Name: "fabricConfiguration"})
 
+	RouterOutput_AssociatedSourceEndpointArns = RouterOutput.AddMember("AssociatedSourceEndpointArns", _SourceEndpointArnList, &smithytraits.JSONName{Name: "associatedSourceEndpointArns"})
+
 	_RouterOutputArnList_member = _RouterOutputArnList.AddMember("member", _RouterOutputArn)
 
 	_RouterOutputTypeList_member = _RouterOutputTypeList.AddMember("member", RouterOutputType)
@@ -7690,7 +9341,171 @@ func init() {
 
 	RouterOutputServiceQuotaExceededException_Message = RouterOutputServiceQuotaExceededException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
+	RouterOutputSourceEndpointAssociatedResourceDetails_Name = RouterOutputSourceEndpointAssociatedResourceDetails.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate = RouterOutputSourceEndpointAssociatedResourceDetails.AddMember("MaximumBitrate", smithyprelude.Long, &smithytraits.JSONName{Name: "maximumBitrate"})
+
+	RouterOutputSourceEndpointAssociatedResourceDetails_State = RouterOutputSourceEndpointAssociatedResourceDetails.AddMember("State", RouterOutputState, &smithytraits.JSONName{Name: "state"})
+
+	RouterOutputSourceEndpointAssociatedResourceDetails_Messages = RouterOutputSourceEndpointAssociatedResourceDetails.AddMember("Messages", _RouterOutputMessages, &smithytraits.JSONName{Name: "messages"})
+
+	RouterOutputSourceEndpointConfiguration_RouterOutputArn = RouterOutputSourceEndpointConfiguration.AddMember("RouterOutputArn", _RouterOutputArn, &smithytraits.JSONName{Name: "routerOutputArn"})
+
+	RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType = RouterOutputSourceEndpointConnectionDetails.AddMember("DestinationDecryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "destinationDecryptionType"})
+
+	RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration = RouterOutputSourceEndpointConnectionDetails.AddMember("DestinationDecryptionConfiguration", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "destinationDecryptionConfiguration"})
+
+	RouterOutputSourceEndpointConnectionDetails_DestinationEndpointType = RouterOutputSourceEndpointConnectionDetails.AddMember("DestinationEndpointType", DestinationEndpointType, &smithytraits.JSONName{Name: "destinationEndpointType"})
+
+	RtpStandardSourceEndpointConfiguration_DestinationIngestPort = RtpStandardSourceEndpointConfiguration.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	RtpStandardSourceEndpointConfiguration_ForwardErrorCorrectionState = RtpStandardSourceEndpointConfiguration.AddMember("ForwardErrorCorrectionState", ForwardErrorCorrectionState, &smithytraits.JSONName{Name: "forwardErrorCorrectionState"})
+
 	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
+	SourceEndpointMessage_Code = SourceEndpointMessage.AddMember("Code", smithyprelude.String, &smithytraits.JSONName{Name: "code"})
+
+	SourceEndpointMessage_Message = SourceEndpointMessage.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
+
+	_SourceEndpointMessageList_member = _SourceEndpointMessageList.AddMember("member", SourceEndpointMessage)
+
+	VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds = VpcSourceEndpointNetworkingConfiguration.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
+
+	VpcSourceEndpointNetworkingConfiguration_SubnetId = VpcSourceEndpointNetworkingConfiguration.AddMember("SubnetId", smithyprelude.String, &smithytraits.JSONName{Name: "subnetId"})
+
+	StandardSourceEndpointNetworkingConfiguration_Public = StandardSourceEndpointNetworkingConfiguration.AddMember("Public", PublicSourceEndpointNetworkingConfiguration, &smithytraits.JSONName{Name: "public"})
+
+	StandardSourceEndpointNetworkingConfiguration_Vpc = StandardSourceEndpointNetworkingConfiguration.AddMember("Vpc", VpcSourceEndpointNetworkingConfiguration, &smithytraits.JSONName{Name: "vpc"})
+
+	SrtListenerStandardSourceEndpointConfiguration_SourceListenerPort = SrtListenerStandardSourceEndpointConfiguration.AddMember("SourceListenerPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "sourceListenerPort"})
+
+	SrtListenerStandardSourceEndpointConfiguration_SourceAddress = SrtListenerStandardSourceEndpointConfiguration.AddMember("SourceAddress", smithyprelude.String, &smithytraits.JSONName{Name: "sourceAddress"})
+
+	SrtListenerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds = SrtListenerStandardSourceEndpointConfiguration.AddMember("MinimumLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "minimumLatencyMilliseconds"})
+
+	SrtListenerStandardSourceEndpointConfiguration_StreamId = SrtListenerStandardSourceEndpointConfiguration.AddMember("StreamId", smithyprelude.String, &smithytraits.JSONName{Name: "streamId"})
+
+	SrtListenerStandardSourceEndpointConfiguration_EncryptionPassphrase = SrtListenerStandardSourceEndpointConfiguration.AddMember("EncryptionPassphrase", EndpointEncryptionSecretConfiguration, &smithytraits.JSONName{Name: "encryptionPassphrase"})
+
+	SrtCallerStandardSourceEndpointConfiguration_DestinationIngestPort = SrtCallerStandardSourceEndpointConfiguration.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	SrtCallerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds = SrtCallerStandardSourceEndpointConfiguration.AddMember("MinimumLatencyMilliseconds", smithyprelude.Long, &smithytraits.JSONName{Name: "minimumLatencyMilliseconds"})
+
+	SrtCallerStandardSourceEndpointConfiguration_EncryptionPassphrase = SrtCallerStandardSourceEndpointConfiguration.AddMember("EncryptionPassphrase", EndpointEncryptionSecretConfiguration, &smithytraits.JSONName{Name: "encryptionPassphrase"})
+
+	StandardSourceEndpointProtocolConfiguration_Rist = StandardSourceEndpointProtocolConfiguration.AddMember("Rist", RistStandardSourceEndpointConfiguration, &smithytraits.JSONName{Name: "rist"})
+
+	StandardSourceEndpointProtocolConfiguration_SrtListener = StandardSourceEndpointProtocolConfiguration.AddMember("SrtListener", SrtListenerStandardSourceEndpointConfiguration, &smithytraits.JSONName{Name: "srtListener"})
+
+	StandardSourceEndpointProtocolConfiguration_SrtCaller = StandardSourceEndpointProtocolConfiguration.AddMember("SrtCaller", SrtCallerStandardSourceEndpointConfiguration, &smithytraits.JSONName{Name: "srtCaller"})
+
+	StandardSourceEndpointProtocolConfiguration_Rtp = StandardSourceEndpointProtocolConfiguration.AddMember("Rtp", RtpStandardSourceEndpointConfiguration, &smithytraits.JSONName{Name: "rtp"})
+
+	SourceEndpointNetworkingType_PUBLIC = SourceEndpointNetworkingType.AddMember("PUBLIC", smithyprelude.Unit)
+
+	SourceEndpointNetworkingType_VPC = SourceEndpointNetworkingType.AddMember("VPC", smithyprelude.Unit)
+
+	SourceEndpointProtocol_RTP = SourceEndpointProtocol.AddMember("RTP", smithyprelude.Unit)
+
+	SourceEndpointProtocol_RIST = SourceEndpointProtocol.AddMember("RIST", smithyprelude.Unit)
+
+	SourceEndpointProtocol_SRT_CALLER = SourceEndpointProtocol.AddMember("SRT_CALLER", smithyprelude.Unit)
+
+	SourceEndpointProtocol_SRT_LISTENER = SourceEndpointProtocol.AddMember("SRT_LISTENER", smithyprelude.Unit)
+
+	StandardSourceEndpointConfiguration_Name = StandardSourceEndpointConfiguration.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	StandardSourceEndpointConfiguration_SourceNetworkingConfiguration = StandardSourceEndpointConfiguration.AddMember("SourceNetworkingConfiguration", StandardSourceEndpointNetworkingConfiguration, &smithytraits.JSONName{Name: "sourceNetworkingConfiguration"})
+
+	StandardSourceEndpointConfiguration_ProtocolConfiguration = StandardSourceEndpointConfiguration.AddMember("ProtocolConfiguration", StandardSourceEndpointProtocolConfiguration, &smithytraits.JSONName{Name: "protocolConfiguration"})
+
+	StandardSourceEndpointConfiguration_SourceNetworkingType = StandardSourceEndpointConfiguration.AddMember("SourceNetworkingType", SourceEndpointNetworkingType, &smithytraits.JSONName{Name: "sourceNetworkingType"})
+
+	StandardSourceEndpointConfiguration_Protocol = StandardSourceEndpointConfiguration.AddMember("Protocol", SourceEndpointProtocol, &smithytraits.JSONName{Name: "protocol"})
+
+	SourceEndpointConfiguration_Standard = SourceEndpointConfiguration.AddMember("Standard", StandardSourceEndpointConfiguration, &smithytraits.JSONName{Name: "standard"})
+
+	SourceEndpointConfiguration_RouterOutput = SourceEndpointConfiguration.AddMember("RouterOutput", RouterOutputSourceEndpointConfiguration, &smithytraits.JSONName{Name: "routerOutput"})
+
+	StandardSourceEndpointConnectionDetails_DestinationIpAddress = StandardSourceEndpointConnectionDetails.AddMember("DestinationIpAddress", smithyprelude.String, &smithytraits.JSONName{Name: "destinationIpAddress"})
+
+	StandardSourceEndpointConnectionDetails_DestinationIngestPort = StandardSourceEndpointConnectionDetails.AddMember("DestinationIngestPort", smithyprelude.Integer, &smithytraits.JSONName{Name: "destinationIngestPort"})
+
+	StandardSourceEndpointConnectionDetails_DestinationDecryptionType = StandardSourceEndpointConnectionDetails.AddMember("DestinationDecryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "destinationDecryptionType"})
+
+	StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration = StandardSourceEndpointConnectionDetails.AddMember("DestinationDecryptionConfiguration", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "destinationDecryptionConfiguration"})
+
+	StandardSourceEndpointConnectionDetails_DestinationEndpointType = StandardSourceEndpointConnectionDetails.AddMember("DestinationEndpointType", DestinationEndpointType, &smithytraits.JSONName{Name: "destinationEndpointType"})
+
+	SourceEndpointConnectionDetails_Standard = SourceEndpointConnectionDetails.AddMember("Standard", StandardSourceEndpointConnectionDetails, &smithytraits.JSONName{Name: "standard"})
+
+	SourceEndpointConnectionDetails_RouterOutput = SourceEndpointConnectionDetails.AddMember("RouterOutput", RouterOutputSourceEndpointConnectionDetails, &smithytraits.JSONName{Name: "routerOutput"})
+
+	SourceEndpointAssociatedResourceDetails_Standard = SourceEndpointAssociatedResourceDetails.AddMember("Standard", StandardSourceEndpointAssociatedResourceDetails, &smithytraits.JSONName{Name: "standard"})
+
+	SourceEndpointAssociatedResourceDetails_RouterOutput = SourceEndpointAssociatedResourceDetails.AddMember("RouterOutput", RouterOutputSourceEndpointAssociatedResourceDetails, &smithytraits.JSONName{Name: "routerOutput"})
+
+	SourceEndpoint_Name = SourceEndpoint.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
+	SourceEndpoint_Arn = SourceEndpoint.AddMember("Arn", _SourceEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	SourceEndpoint_Id = SourceEndpoint.AddMember("Id", smithyprelude.String, &smithytraits.JSONName{Name: "id"})
+
+	SourceEndpoint_Description = SourceEndpoint.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
+
+	SourceEndpoint_RegionName = SourceEndpoint.AddMember("RegionName", smithyprelude.String, &smithytraits.JSONName{Name: "regionName"})
+
+	SourceEndpoint_AvailabilityZone = SourceEndpoint.AddMember("AvailabilityZone", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZone"})
+
+	SourceEndpoint_AvailabilityZoneId = SourceEndpoint.AddMember("AvailabilityZoneId", smithyprelude.String, &smithytraits.JSONName{Name: "availabilityZoneId"})
+
+	SourceEndpoint_CreatedAt = SourceEndpoint.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "createdAt"})
+
+	SourceEndpoint_UpdatedAt = SourceEndpoint.AddMember("UpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"},
+		&smithytraits.JSONName{Name: "updatedAt"})
+
+	SourceEndpoint_LifecycleManagement = SourceEndpoint.AddMember("LifecycleManagement", EndpointLifecycle, &smithytraits.JSONName{Name: "lifecycleManagement"})
+
+	SourceEndpoint_Messages = SourceEndpoint.AddMember("Messages", _SourceEndpointMessageList, &smithytraits.JSONName{Name: "messages"})
+
+	SourceEndpoint_SourceType = SourceEndpoint.AddMember("SourceType", SourceEndpointType, &smithytraits.JSONName{Name: "sourceType"})
+
+	SourceEndpoint_Configuration = SourceEndpoint.AddMember("Configuration", SourceEndpointConfiguration, &smithytraits.JSONName{Name: "configuration"})
+
+	SourceEndpoint_ResourceShareOwnership = SourceEndpoint.AddMember("ResourceShareOwnership", ResourceShareOwnership, &smithytraits.JSONName{Name: "resourceShareOwnership"})
+
+	SourceEndpoint_ResourceShareDetails = SourceEndpoint.AddMember("ResourceShareDetails", ResourceShareDetails, &smithytraits.JSONName{Name: "resourceShareDetails"})
+
+	SourceEndpoint_RegistrationState = SourceEndpoint.AddMember("RegistrationState", SourceEndpointRegistrationState, &smithytraits.JSONName{Name: "registrationState"})
+
+	SourceEndpoint_ConnectionState = SourceEndpoint.AddMember("ConnectionState", SourceEndpointConnectionState, &smithytraits.JSONName{Name: "connectionState"})
+
+	SourceEndpoint_ConnectionDetails = SourceEndpoint.AddMember("ConnectionDetails", SourceEndpointConnectionDetails, &smithytraits.JSONName{Name: "connectionDetails"})
+
+	SourceEndpoint_ConnectedDestinations = SourceEndpoint.AddMember("ConnectedDestinations", _DestinationEndpointArnList, &smithytraits.JSONName{Name: "connectedDestinations"})
+
+	SourceEndpoint_EncryptionType = SourceEndpoint.AddMember("EncryptionType", EndpointEncryptionType, &smithytraits.JSONName{Name: "encryptionType"})
+
+	SourceEndpoint_EncryptionConfiguration = SourceEndpoint.AddMember("EncryptionConfiguration", EndpointEncryptionConfiguration, &smithytraits.JSONName{Name: "encryptionConfiguration"})
+
+	SourceEndpoint_AssociatedResourceDetails = SourceEndpoint.AddMember("AssociatedResourceDetails", SourceEndpointAssociatedResourceDetails, &smithytraits.JSONName{Name: "associatedResourceDetails"})
+
+	SourceEndpoint_Tags = SourceEndpoint.AddMember("Tags", ___mapOfString, &smithytraits.JSONName{Name: "tags"})
+
+	_SourceEndpointTypeList_member = _SourceEndpointTypeList.AddMember("member", SourceEndpointType)
+
+	SourceEndpointFilter_RegionNames = SourceEndpointFilter.AddMember("RegionNames", _StringList, &smithytraits.JSONName{Name: "regionNames"})
+
+	SourceEndpointFilter_SourceTypes = SourceEndpointFilter.AddMember("SourceTypes", _SourceEndpointTypeList, &smithytraits.JSONName{Name: "sourceTypes"})
+
+	SourceEndpointFilter_NameContains = SourceEndpointFilter.AddMember("NameContains", _StringList, &smithytraits.JSONName{Name: "nameContains"})
+
+	_SourceEndpointFilterList_member = _SourceEndpointFilterList.AddMember("member", SourceEndpointFilter)
+
+	_SourceEndpointList_member = _SourceEndpointList.AddMember("member", SourceEndpoint)
+
+	SourceEndpointServiceQuotaExceededException_Message = SourceEndpointServiceQuotaExceededException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
 	ThumbnailDetails_FlowArn = ThumbnailDetails.AddMember("FlowArn", smithyprelude.String, &smithytraits.JSONName{Name: "flowArn"})
 
@@ -7819,6 +9634,12 @@ func init() {
 
 	AddFlowVpcInterfacesResponse_VpcInterfaces = AddFlowVpcInterfacesResponse.AddMember("VpcInterfaces", ___listOfVpcInterface, &smithytraits.JSONName{Name: "vpcInterfaces"})
 
+	BatchGetDestinationEndpointRequest_Arns = BatchGetDestinationEndpointRequest.AddMember("Arns", _DestinationEndpointArnList, &smithytraits.HTTPQuery{Name: "arns"})
+
+	BatchGetDestinationEndpointResponse_DestinationEndpoints = BatchGetDestinationEndpointResponse.AddMember("DestinationEndpoints", _DestinationEndpointList, &smithytraits.JSONName{Name: "destinationEndpoints"})
+
+	BatchGetDestinationEndpointResponse_Errors = BatchGetDestinationEndpointResponse.AddMember("Errors", _BatchGetDestinationEndpointErrorList, &smithytraits.JSONName{Name: "errors"})
+
 	BatchGetRouterInputRequest_Arns = BatchGetRouterInputRequest.AddMember("Arns", _RouterInputArnList, &smithytraits.HTTPQuery{Name: "arns"})
 
 	BatchGetRouterInputResponse_RouterInputs = BatchGetRouterInputResponse.AddMember("RouterInputs", _RouterInputList, &smithytraits.JSONName{Name: "routerInputs"})
@@ -7836,6 +9657,24 @@ func init() {
 	BatchGetRouterOutputResponse_RouterOutputs = BatchGetRouterOutputResponse.AddMember("RouterOutputs", _RouterOutputList, &smithytraits.JSONName{Name: "routerOutputs"})
 
 	BatchGetRouterOutputResponse_Errors = BatchGetRouterOutputResponse.AddMember("Errors", _BatchGetRouterOutputErrorList, &smithytraits.JSONName{Name: "errors"})
+
+	BatchGetSourceEndpointRequest_Arns = BatchGetSourceEndpointRequest.AddMember("Arns", _SourceEndpointArnList, &smithytraits.HTTPQuery{Name: "arns"})
+
+	BatchGetSourceEndpointResponse_SourceEndpoints = BatchGetSourceEndpointResponse.AddMember("SourceEndpoints", _SourceEndpointList, &smithytraits.JSONName{Name: "sourceEndpoints"})
+
+	BatchGetSourceEndpointResponse_Errors = BatchGetSourceEndpointResponse.AddMember("Errors", _BatchGetSourceEndpointErrorList, &smithytraits.JSONName{Name: "errors"})
+
+	ConnectEndpointsRequest_DestinationEndpointArn = ConnectEndpointsRequest.AddMember("DestinationEndpointArn", _DestinationEndpointArn, &smithytraits.HTTPLabel{})
+
+	ConnectEndpointsRequest_SourceEndpointArn = ConnectEndpointsRequest.AddMember("SourceEndpointArn", _SourceEndpointArn, &smithytraits.JSONName{Name: "sourceEndpointArn"})
+
+	ConnectEndpointsResponse_DestinationEndpointArn = ConnectEndpointsResponse.AddMember("DestinationEndpointArn", _DestinationEndpointArn, &smithytraits.JSONName{Name: "destinationEndpointArn"})
+
+	ConnectEndpointsResponse_DestinationEndpointName = ConnectEndpointsResponse.AddMember("DestinationEndpointName", smithyprelude.String, &smithytraits.JSONName{Name: "destinationEndpointName"})
+
+	ConnectEndpointsResponse_SourceEndpointArn = ConnectEndpointsResponse.AddMember("SourceEndpointArn", _SourceEndpointArn, &smithytraits.JSONName{Name: "sourceEndpointArn"})
+
+	ConnectEndpointsResponse_SourceEndpointName = ConnectEndpointsResponse.AddMember("SourceEndpointName", smithyprelude.String, &smithytraits.JSONName{Name: "sourceEndpointName"})
 
 	CreateBridgeRequest_EgressGatewayBridge = CreateBridgeRequest.AddMember("EgressGatewayBridge", AddEgressGatewayBridgeRequest, &smithytraits.JSONName{Name: "egressGatewayBridge"})
 
@@ -7993,6 +9832,12 @@ func init() {
 
 	DeleteRouterOutputResponse_State = DeleteRouterOutputResponse.AddMember("State", RouterOutputState, &smithytraits.JSONName{Name: "state"})
 
+	DeregisterDestinationEndpointRequest_Arn = DeregisterDestinationEndpointRequest.AddMember("Arn", _DestinationEndpointArn, &smithytraits.HTTPLabel{})
+
+	DeregisterDestinationEndpointResponse_Arn = DeregisterDestinationEndpointResponse.AddMember("Arn", _DestinationEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	DeregisterDestinationEndpointResponse_Name = DeregisterDestinationEndpointResponse.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
+
 	DeregisterGatewayInstanceRequest_Force = DeregisterGatewayInstanceRequest.AddMember("Force", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "force"})
 
 	DeregisterGatewayInstanceRequest_GatewayInstanceArn = DeregisterGatewayInstanceRequest.AddMember("GatewayInstanceArn", _GatewayInstanceArn, &smithytraits.HTTPLabel{})
@@ -8000,6 +9845,12 @@ func init() {
 	DeregisterGatewayInstanceResponse_GatewayInstanceArn = DeregisterGatewayInstanceResponse.AddMember("GatewayInstanceArn", smithyprelude.String, &smithytraits.JSONName{Name: "gatewayInstanceArn"})
 
 	DeregisterGatewayInstanceResponse_InstanceState = DeregisterGatewayInstanceResponse.AddMember("InstanceState", InstanceState, &smithytraits.JSONName{Name: "instanceState"})
+
+	DeregisterSourceEndpointRequest_Arn = DeregisterSourceEndpointRequest.AddMember("Arn", _SourceEndpointArn, &smithytraits.HTTPLabel{})
+
+	DeregisterSourceEndpointResponse_Arn = DeregisterSourceEndpointResponse.AddMember("Arn", _SourceEndpointArn, &smithytraits.JSONName{Name: "arn"})
+
+	DeregisterSourceEndpointResponse_Name = DeregisterSourceEndpointResponse.AddMember("Name", smithyprelude.String, &smithytraits.JSONName{Name: "name"})
 
 	DescribeBridgeRequest_BridgeArn = DescribeBridgeRequest.AddMember("BridgeArn", _BridgeArn, &smithytraits.HTTPLabel{})
 
@@ -8044,6 +9895,22 @@ func init() {
 
 	DescribeReservationResponse_Reservation = DescribeReservationResponse.AddMember("Reservation", Reservation, &smithytraits.JSONName{Name: "reservation"})
 
+	DisconnectEndpointsRequest_DestinationEndpointArn = DisconnectEndpointsRequest.AddMember("DestinationEndpointArn", _DestinationEndpointArn, &smithytraits.HTTPLabel{})
+
+	DisconnectEndpointsRequest_SourceEndpointArn = DisconnectEndpointsRequest.AddMember("SourceEndpointArn", _SourceEndpointArn, &smithytraits.JSONName{Name: "sourceEndpointArn"})
+
+	DisconnectEndpointsResponse_DestinationEndpointArn = DisconnectEndpointsResponse.AddMember("DestinationEndpointArn", _DestinationEndpointArn, &smithytraits.JSONName{Name: "destinationEndpointArn"})
+
+	DisconnectEndpointsResponse_DestinationEndpointName = DisconnectEndpointsResponse.AddMember("DestinationEndpointName", smithyprelude.String, &smithytraits.JSONName{Name: "destinationEndpointName"})
+
+	DisconnectEndpointsResponse_SourceEndpointArn = DisconnectEndpointsResponse.AddMember("SourceEndpointArn", _SourceEndpointArn, &smithytraits.JSONName{Name: "sourceEndpointArn"})
+
+	DisconnectEndpointsResponse_SourceEndpointName = DisconnectEndpointsResponse.AddMember("SourceEndpointName", smithyprelude.String, &smithytraits.JSONName{Name: "sourceEndpointName"})
+
+	GetDestinationEndpointRequest_Arn = GetDestinationEndpointRequest.AddMember("Arn", _DestinationEndpointArn, &smithytraits.HTTPLabel{})
+
+	GetDestinationEndpointResponse_DestinationEndpoint = GetDestinationEndpointResponse.AddMember("DestinationEndpoint", DestinationEndpoint, &smithytraits.JSONName{Name: "destinationEndpoint"})
+
 	GetRouterInputRequest_Arn = GetRouterInputRequest.AddMember("Arn", _RouterInputArn, &smithytraits.HTTPLabel{})
 
 	GetRouterInputResponse_RouterInput = GetRouterInputResponse.AddMember("RouterInput", RouterInput, &smithytraits.JSONName{Name: "routerInput"})
@@ -8072,6 +9939,10 @@ func init() {
 
 	GetRouterOutputResponse_RouterOutput = GetRouterOutputResponse.AddMember("RouterOutput", RouterOutput, &smithytraits.JSONName{Name: "routerOutput"})
 
+	GetSourceEndpointRequest_Arn = GetSourceEndpointRequest.AddMember("Arn", _SourceEndpointArn, &smithytraits.HTTPLabel{})
+
+	GetSourceEndpointResponse_SourceEndpoint = GetSourceEndpointResponse.AddMember("SourceEndpoint", SourceEndpoint, &smithytraits.JSONName{Name: "sourceEndpoint"})
+
 	GrantFlowEntitlementsRequest_Entitlements = GrantFlowEntitlementsRequest.AddMember("Entitlements", ___listOfGrantEntitlementRequest, &smithytraits.JSONName{Name: "entitlements"})
 
 	GrantFlowEntitlementsRequest_FlowArn = GrantFlowEntitlementsRequest.AddMember("FlowArn", _FlowArn, &smithytraits.HTTPLabel{})
@@ -8089,6 +9960,16 @@ func init() {
 	ListBridgesResponse_Bridges = ListBridgesResponse.AddMember("Bridges", ___listOfListedBridge, &smithytraits.JSONName{Name: "bridges"})
 
 	ListBridgesResponse_NextToken = ListBridgesResponse.AddMember("NextToken", smithyprelude.String, &smithytraits.JSONName{Name: "nextToken"})
+
+	ListDestinationEndpointsRequest_MaxResults = ListDestinationEndpointsRequest.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListDestinationEndpointsRequest_NextToken = ListDestinationEndpointsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListDestinationEndpointsRequest_Filters = ListDestinationEndpointsRequest.AddMember("Filters", _DestinationEndpointFilterList, &smithytraits.JSONName{Name: "filters"})
+
+	ListDestinationEndpointsResponse_DestinationEndpoints = ListDestinationEndpointsResponse.AddMember("DestinationEndpoints", _ListedDestinationEndpointList, &smithytraits.JSONName{Name: "destinationEndpoints"})
+
+	ListDestinationEndpointsResponse_NextToken = ListDestinationEndpointsResponse.AddMember("NextToken", smithyprelude.String, &smithytraits.JSONName{Name: "nextToken"})
 
 	ListEntitlementsRequest_MaxResults = ListEntitlementsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
 
@@ -8170,6 +10051,16 @@ func init() {
 
 	ListRouterOutputsResponse_NextToken = ListRouterOutputsResponse.AddMember("NextToken", smithyprelude.String, &smithytraits.JSONName{Name: "nextToken"})
 
+	ListSourceEndpointsRequest_MaxResults = ListSourceEndpointsRequest.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
+
+	ListSourceEndpointsRequest_NextToken = ListSourceEndpointsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
+
+	ListSourceEndpointsRequest_Filters = ListSourceEndpointsRequest.AddMember("Filters", _SourceEndpointFilterList, &smithytraits.JSONName{Name: "filters"})
+
+	ListSourceEndpointsResponse_SourceEndpoints = ListSourceEndpointsResponse.AddMember("SourceEndpoints", _ListedSourceEndpointList, &smithytraits.JSONName{Name: "sourceEndpoints"})
+
+	ListSourceEndpointsResponse_NextToken = ListSourceEndpointsResponse.AddMember("NextToken", smithyprelude.String, &smithytraits.JSONName{Name: "nextToken"})
+
 	ListTagsForGlobalResourceRequest_ResourceArn = ListTagsForGlobalResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
 
 	ListTagsForGlobalResourceResponse_Tags = ListTagsForGlobalResourceResponse.AddMember("Tags", ___mapOfString, &smithytraits.JSONName{Name: "tags"})
@@ -8185,6 +10076,30 @@ func init() {
 	PurchaseOfferingRequest_Start = PurchaseOfferingRequest.AddMember("Start", smithyprelude.String, &smithytraits.JSONName{Name: "start"})
 
 	PurchaseOfferingResponse_Reservation = PurchaseOfferingResponse.AddMember("Reservation", Reservation, &smithytraits.JSONName{Name: "reservation"})
+
+	RegisterDestinationEndpointRequest_Description = RegisterDestinationEndpointRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
+
+	RegisterDestinationEndpointRequest_Configuration = RegisterDestinationEndpointRequest.AddMember("Configuration", DestinationEndpointConfiguration, &smithytraits.JSONName{Name: "configuration"})
+
+	RegisterDestinationEndpointRequest_RegionName = RegisterDestinationEndpointRequest.AddMember("RegionName", smithyprelude.String, &smithytraits.JSONName{Name: "regionName"})
+
+	RegisterDestinationEndpointRequest_Tags = RegisterDestinationEndpointRequest.AddMember("Tags", ___mapOfString, &smithytraits.JSONName{Name: "tags"})
+
+	RegisterDestinationEndpointRequest_ClientToken = RegisterDestinationEndpointRequest.AddMember("ClientToken", _ClientToken, &smithytraits.JSONName{Name: "clientToken"})
+
+	RegisterDestinationEndpointResponse_DestinationEndpoint = RegisterDestinationEndpointResponse.AddMember("DestinationEndpoint", DestinationEndpoint, &smithytraits.JSONName{Name: "destinationEndpoint"})
+
+	RegisterSourceEndpointRequest_RegionName = RegisterSourceEndpointRequest.AddMember("RegionName", smithyprelude.String, &smithytraits.JSONName{Name: "regionName"})
+
+	RegisterSourceEndpointRequest_Description = RegisterSourceEndpointRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
+
+	RegisterSourceEndpointRequest_Configuration = RegisterSourceEndpointRequest.AddMember("Configuration", SourceEndpointConfiguration, &smithytraits.JSONName{Name: "configuration"})
+
+	RegisterSourceEndpointRequest_Tags = RegisterSourceEndpointRequest.AddMember("Tags", ___mapOfString, &smithytraits.JSONName{Name: "tags"})
+
+	RegisterSourceEndpointRequest_ClientToken = RegisterSourceEndpointRequest.AddMember("ClientToken", _ClientToken, &smithytraits.JSONName{Name: "clientToken"})
+
+	RegisterSourceEndpointResponse_SourceEndpoint = RegisterSourceEndpointResponse.AddMember("SourceEndpoint", SourceEndpoint, &smithytraits.JSONName{Name: "sourceEndpoint"})
 
 	RemoveBridgeOutputRequest_BridgeArn = RemoveBridgeOutputRequest.AddMember("BridgeArn", _BridgeArn, &smithytraits.HTTPLabel{})
 
@@ -8381,6 +10296,14 @@ func init() {
 	UpdateBridgeStateResponse_BridgeArn = UpdateBridgeStateResponse.AddMember("BridgeArn", smithyprelude.String, &smithytraits.JSONName{Name: "bridgeArn"})
 
 	UpdateBridgeStateResponse_DesiredState = UpdateBridgeStateResponse.AddMember("DesiredState", DesiredState, &smithytraits.JSONName{Name: "desiredState"})
+
+	UpdateDestinationEndpointRequest_Arn = UpdateDestinationEndpointRequest.AddMember("Arn", _DestinationEndpointArn, &smithytraits.HTTPLabel{})
+
+	UpdateDestinationEndpointRequest_Description = UpdateDestinationEndpointRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
+
+	UpdateDestinationEndpointRequest_Configuration = UpdateDestinationEndpointRequest.AddMember("Configuration", DestinationEndpointConfiguration, &smithytraits.JSONName{Name: "configuration"})
+
+	UpdateDestinationEndpointResponse_DestinationEndpoint = UpdateDestinationEndpointResponse.AddMember("DestinationEndpoint", DestinationEndpoint, &smithytraits.JSONName{Name: "destinationEndpoint"})
 
 	UpdateFlowEntitlementRequest_Description = UpdateFlowEntitlementRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
 
@@ -8587,5 +10510,13 @@ func init() {
 	UpdateRouterOutputRequest_FabricConfiguration = UpdateRouterOutputRequest.AddMember("FabricConfiguration", FabricConfiguration, &smithytraits.JSONName{Name: "fabricConfiguration"})
 
 	UpdateRouterOutputResponse_RouterOutput = UpdateRouterOutputResponse.AddMember("RouterOutput", RouterOutput, &smithytraits.JSONName{Name: "routerOutput"})
+
+	UpdateSourceEndpointRequest_Arn = UpdateSourceEndpointRequest.AddMember("Arn", _SourceEndpointArn, &smithytraits.HTTPLabel{})
+
+	UpdateSourceEndpointRequest_Description = UpdateSourceEndpointRequest.AddMember("Description", smithyprelude.String, &smithytraits.JSONName{Name: "description"})
+
+	UpdateSourceEndpointRequest_Configuration = UpdateSourceEndpointRequest.AddMember("Configuration", SourceEndpointConfiguration, &smithytraits.JSONName{Name: "configuration"})
+
+	UpdateSourceEndpointResponse_SourceEndpoint = UpdateSourceEndpointResponse.AddMember("SourceEndpoint", SourceEndpoint, &smithytraits.JSONName{Name: "sourceEndpoint"})
 
 }

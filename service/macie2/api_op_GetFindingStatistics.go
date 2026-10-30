@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -55,6 +57,31 @@ type GetFindingStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.GetFindingStatisticsRequest_findingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupBy != "" {
+		s.WriteString(schemas.GetFindingStatisticsRequest_groupBy, string(v.GroupBy))
+	}
+	if v.Size != nil {
+		s.WriteInt32(schemas.GetFindingStatisticsRequest_size, *v.Size)
+	}
+	if v.SortCriteria != nil {
+		s.WriteStruct(schemas.GetFindingStatisticsRequest_sortCriteria)
+		v.SortCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetFindingStatisticsOutput struct {
 
 	// An array of objects, one for each group of findings that matches the filter
@@ -67,13 +94,29 @@ type GetFindingStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfGroupCount(s, schemas.GetFindingStatisticsResponse_countsByGroup, v.CountsByGroup)
+}
+func (v *GetFindingStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingStatisticsResponse_countsByGroup:
+			return deserialize__listOfGroupCount(d, schemas.GetFindingStatisticsResponse_countsByGroup, &v.CountsByGroup)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingStatistics, schemas.GetFindingStatisticsRequest, schemas.GetFindingStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingStatistics, schemas.GetFindingStatisticsRequest, schemas.GetFindingStatisticsResponse), output: &GetFindingStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

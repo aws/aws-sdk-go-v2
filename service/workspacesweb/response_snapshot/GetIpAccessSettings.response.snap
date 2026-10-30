@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ipAccessSettings":{"additionalEncryptionContext":{"key0":"__Value__"},"associatedPortalArns":["__Member__","__Member__"],"creationDate":946684800,"customerManagedKey":"__CustomerManagedKey__","description":"__Description__","displayName":"__DisplayName__","ipAccessSettingsArn":"__IpAccessSettingsArn__","ipRules":[{"description":"__Description__","ipRange":"__IpRange__"},{"description":"__Description__","ipRange":"__IpRange__"}]}}

@@ -30,9 +30,6 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 	return out, nil
 }
 
-// Shared displayName + description for Create operations where both are present.
-// displayName is @required here - this mixin is Create-only by design (Update has
-// optional displayName).
 type CreateQueueInput struct {
 
 	// The display name of the queue.
@@ -133,8 +130,6 @@ func (v *CreateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeTags(s, schemas.CreateQueueRequest_tags, v.Tags)
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateQueueOutput struct {
 
 	// The queue ID.

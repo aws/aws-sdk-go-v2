@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetTableBucketPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketPolicyRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableBucketPolicyOutput struct {
 
 	// The JSON that defines the policy.
@@ -52,13 +66,32 @@ type GetTableBucketPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourcePolicy != nil {
+		s.WriteString(schemas.GetTableBucketPolicyResponse_resourcePolicy, *v.ResourcePolicy)
+	}
+}
+func (v *GetTableBucketPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableBucketPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableBucketPolicyResponse_resourcePolicy:
+			v.ResourcePolicy = new(string)
+			return d.ReadString(schemas.GetTableBucketPolicyResponse_resourcePolicy, v.ResourcePolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableBucketPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableBucketPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketPolicy, schemas.GetTableBucketPolicyRequest, schemas.GetTableBucketPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableBucketPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketPolicy, schemas.GetTableBucketPolicyRequest, schemas.GetTableBucketPolicyResponse), output: &GetTableBucketPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

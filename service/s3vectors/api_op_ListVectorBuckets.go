@@ -5,7 +5,9 @@ package s3vectors
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListVectorBucketsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorBucketsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorBucketsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorBucketsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVectorBucketsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVectorBucketsInput_nextToken, *v.NextToken)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ListVectorBucketsInput_prefix, *v.Prefix)
+	}
+}
+
 type ListVectorBucketsOutput struct {
 
 	// The list of vector buckets owned by the requester.
@@ -60,13 +80,35 @@ type ListVectorBucketsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorBucketsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorBucketsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorBucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVectorBucketsOutput_nextToken, *v.NextToken)
+	}
+	serializeListVectorBucketsOutputList(s, schemas.ListVectorBucketsOutput_vectorBuckets, v.VectorBuckets)
+}
+func (v *ListVectorBucketsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVectorBucketsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVectorBucketsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVectorBucketsOutput_nextToken, v.NextToken)
+		case schemas.ListVectorBucketsOutput_vectorBuckets:
+			return deserializeListVectorBucketsOutputList(d, schemas.ListVectorBucketsOutput_vectorBuckets, &v.VectorBuckets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVectorBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVectorBuckets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVectorBuckets, schemas.ListVectorBucketsInput, schemas.ListVectorBucketsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVectorBuckets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVectorBuckets, schemas.ListVectorBucketsInput, schemas.ListVectorBucketsOutput), output: &ListVectorBucketsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

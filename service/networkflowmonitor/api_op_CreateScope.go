@@ -5,7 +5,9 @@ package networkflowmonitor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,20 @@ type CreateScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScopeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScopeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateScopeInput_clientToken, *v.ClientToken)
+	}
+	serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
+	serializeTargetResourceList(s, schemas.CreateScopeInput_targets, v.Targets)
+}
+
 type CreateScopeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the scope.
@@ -98,13 +114,51 @@ type CreateScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScopeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScopeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScopeArn != nil {
+		s.WriteString(schemas.CreateScopeOutput_scopeArn, *v.ScopeArn)
+	}
+	if v.ScopeId != nil {
+		s.WriteString(schemas.CreateScopeOutput_scopeId, *v.ScopeId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateScopeOutput_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateScopeOutput_tags, v.Tags)
+}
+func (v *CreateScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateScopeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateScopeOutput_scopeArn:
+			v.ScopeArn = new(string)
+			return d.ReadString(schemas.CreateScopeOutput_scopeArn, v.ScopeArn)
+		case schemas.CreateScopeOutput_scopeId:
+			v.ScopeId = new(string)
+			return d.ReadString(schemas.CreateScopeOutput_scopeId, v.ScopeId)
+		case schemas.CreateScopeOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateScopeOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ScopeStatus(ev)
+			return nil
+		case schemas.CreateScopeOutput_tags:
+			return deserializeTagMap(d, schemas.CreateScopeOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScope{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScope, schemas.CreateScopeInput, schemas.CreateScopeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScope{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScope, schemas.CreateScopeInput, schemas.CreateScopeOutput), output: &CreateScopeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

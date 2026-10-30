@@ -7,6 +7,119 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
 )
 
+func ExampleDestinationEndpointAssociatedResourceDetails_outputUsage() {
+	var union types.DestinationEndpointAssociatedResourceDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DestinationEndpointAssociatedResourceDetailsMemberRouterInput:
+		_ = v.Value // Value is types.RouterInputDestinationEndpointAssociatedResourceDetails
+
+	case *types.DestinationEndpointAssociatedResourceDetailsMemberStandard:
+		_ = v.Value // Value is types.StandardDestinationEndpointAssociatedResourceDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RouterInputDestinationEndpointAssociatedResourceDetails
+var _ *types.StandardDestinationEndpointAssociatedResourceDetails
+
+func ExampleDestinationEndpointConfiguration_outputUsage() {
+	var union types.DestinationEndpointConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DestinationEndpointConfigurationMemberRouterInput:
+		_ = v.Value // Value is types.RouterInputDestinationEndpointConfiguration
+
+	case *types.DestinationEndpointConfigurationMemberStandard:
+		_ = v.Value // Value is types.StandardDestinationEndpointConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StandardDestinationEndpointConfiguration
+var _ *types.RouterInputDestinationEndpointConfiguration
+
+func ExampleDestinationEndpointConnectionDetails_outputUsage() {
+	var union types.DestinationEndpointConnectionDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DestinationEndpointConnectionDetailsMemberRouterInput:
+		_ = v.Value // Value is types.RouterInputDestinationEndpointConnectionDetails
+
+	case *types.DestinationEndpointConnectionDetailsMemberStandard:
+		_ = v.Value // Value is types.StandardDestinationEndpointConnectionDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StandardDestinationEndpointConnectionDetails
+var _ *types.RouterInputDestinationEndpointConnectionDetails
+
+func ExampleDestinationEndpointFilter_outputUsage() {
+	var union types.DestinationEndpointFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DestinationEndpointFilterMemberDestinationTypes:
+		_ = v.Value // Value is []types.DestinationEndpointType
+
+	case *types.DestinationEndpointFilterMemberNameContains:
+		_ = v.Value // Value is []string
+
+	case *types.DestinationEndpointFilterMemberRegionNames:
+		_ = v.Value // Value is []string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ []types.DestinationEndpointType
+
+func ExampleEndpointEncryptionConfiguration_outputUsage() {
+	var union types.EndpointEncryptionConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EndpointEncryptionConfigurationMemberAutomatic:
+		_ = v.Value // Value is types.AutomaticEndpointEncryptionConfiguration
+
+	case *types.EndpointEncryptionConfigurationMemberSecretsManager:
+		_ = v.Value // Value is types.SecretsManagerEndpointEncryptionConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AutomaticEndpointEncryptionConfiguration
+var _ *types.SecretsManagerEndpointEncryptionConfiguration
+
 func ExampleFailoverRouterInputProtocolConfiguration_outputUsage() {
 	var union types.FailoverRouterInputProtocolConfiguration
 	// type switches can be used to check the union value
@@ -143,6 +256,28 @@ func ExampleMergeRouterInputProtocolConfiguration_outputUsage() {
 var _ *types.RistRouterInputConfiguration
 var _ *types.RtpRouterInputConfiguration
 
+func ExampleResourceShareDetails_outputUsage() {
+	var union types.ResourceShareDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ResourceShareDetailsMemberConsumed:
+		_ = v.Value // Value is types.ConsumedResourceShareDetails
+
+	case *types.ResourceShareDetailsMemberOwned:
+		_ = v.Value // Value is types.OwnedResourceShareDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ConsumedResourceShareDetails
+var _ *types.OwnedResourceShareDetails
+
 func ExampleRouterContentQualityAnalysisConfiguration_outputUsage() {
 	var union types.RouterContentQualityAnalysisConfiguration
 	// type switches can be used to check the union value
@@ -165,6 +300,9 @@ func ExampleRouterInputConfiguration_outputUsage() {
 	var union types.RouterInputConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.RouterInputConfigurationMemberDestinationEndpoint:
+		_ = v.Value // Value is types.DestinationEndpointRouterInputConfiguration
+
 	case *types.RouterInputConfigurationMemberFailover:
 		_ = v.Value // Value is types.FailoverRouterInputConfiguration
 
@@ -191,6 +329,7 @@ func ExampleRouterInputConfiguration_outputUsage() {
 
 var _ *types.MergeRouterInputConfiguration
 var _ *types.FailoverRouterInputConfiguration
+var _ *types.DestinationEndpointRouterInputConfiguration
 var _ *types.MediaLiveChannelRouterInputConfiguration
 var _ *types.StandardRouterInputConfiguration
 var _ *types.MediaConnectFlowRouterInputConfiguration
@@ -280,6 +419,9 @@ func ExampleRouterInputStreamDetails_outputUsage() {
 	var union types.RouterInputStreamDetails
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.RouterInputStreamDetailsMemberDestinationEndpoint:
+		_ = v.Value // Value is types.DestinationEndpointRouterInputStreamDetails
+
 	case *types.RouterInputStreamDetailsMemberFailover:
 		_ = v.Value // Value is types.FailoverRouterInputStreamDetails
 
@@ -306,6 +448,7 @@ func ExampleRouterInputStreamDetails_outputUsage() {
 
 var _ *types.MergeRouterInputStreamDetails
 var _ *types.StandardRouterInputStreamDetails
+var _ *types.DestinationEndpointRouterInputStreamDetails
 var _ *types.MediaLiveChannelRouterInputStreamDetails
 var _ *types.FailoverRouterInputStreamDetails
 var _ *types.MediaConnectFlowRouterInputStreamDetails
@@ -389,6 +532,9 @@ func ExampleRouterOutputConfiguration_outputUsage() {
 	case *types.RouterOutputConfigurationMemberMediaLiveInput:
 		_ = v.Value // Value is types.MediaLiveInputRouterOutputConfiguration
 
+	case *types.RouterOutputConfigurationMemberSourceEndpoint:
+		_ = v.Value // Value is types.SourceEndpointRouterOutputConfiguration
+
 	case *types.RouterOutputConfigurationMemberStandard:
 		_ = v.Value // Value is types.StandardRouterOutputConfiguration
 
@@ -402,6 +548,7 @@ func ExampleRouterOutputConfiguration_outputUsage() {
 }
 
 var _ *types.MediaConnectFlowRouterOutputConfiguration
+var _ *types.SourceEndpointRouterOutputConfiguration
 var _ *types.MediaLiveInputRouterOutputConfiguration
 var _ *types.StandardRouterOutputConfiguration
 
@@ -486,6 +633,9 @@ func ExampleRouterOutputStreamDetails_outputUsage() {
 	case *types.RouterOutputStreamDetailsMemberMediaLiveInput:
 		_ = v.Value // Value is types.MediaLiveInputRouterOutputStreamDetails
 
+	case *types.RouterOutputStreamDetailsMemberSourceEndpoint:
+		_ = v.Value // Value is types.SourceEndpointRouterOutputStreamDetails
+
 	case *types.RouterOutputStreamDetailsMemberStandard:
 		_ = v.Value // Value is types.StandardRouterOutputStreamDetails
 
@@ -500,7 +650,203 @@ func ExampleRouterOutputStreamDetails_outputUsage() {
 
 var _ *types.StandardRouterOutputStreamDetails
 var _ *types.MediaConnectFlowRouterOutputStreamDetails
+var _ *types.SourceEndpointRouterOutputStreamDetails
 var _ *types.MediaLiveInputRouterOutputStreamDetails
+
+func ExampleSourceEndpointAssociatedResourceDetails_outputUsage() {
+	var union types.SourceEndpointAssociatedResourceDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceEndpointAssociatedResourceDetailsMemberRouterOutput:
+		_ = v.Value // Value is types.RouterOutputSourceEndpointAssociatedResourceDetails
+
+	case *types.SourceEndpointAssociatedResourceDetailsMemberStandard:
+		_ = v.Value // Value is types.StandardSourceEndpointAssociatedResourceDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StandardSourceEndpointAssociatedResourceDetails
+var _ *types.RouterOutputSourceEndpointAssociatedResourceDetails
+
+func ExampleSourceEndpointConfiguration_outputUsage() {
+	var union types.SourceEndpointConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceEndpointConfigurationMemberRouterOutput:
+		_ = v.Value // Value is types.RouterOutputSourceEndpointConfiguration
+
+	case *types.SourceEndpointConfigurationMemberStandard:
+		_ = v.Value // Value is types.StandardSourceEndpointConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StandardSourceEndpointConfiguration
+var _ *types.RouterOutputSourceEndpointConfiguration
+
+func ExampleSourceEndpointConnectionDetails_outputUsage() {
+	var union types.SourceEndpointConnectionDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceEndpointConnectionDetailsMemberRouterOutput:
+		_ = v.Value // Value is types.RouterOutputSourceEndpointConnectionDetails
+
+	case *types.SourceEndpointConnectionDetailsMemberStandard:
+		_ = v.Value // Value is types.StandardSourceEndpointConnectionDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StandardSourceEndpointConnectionDetails
+var _ *types.RouterOutputSourceEndpointConnectionDetails
+
+func ExampleSourceEndpointFilter_outputUsage() {
+	var union types.SourceEndpointFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SourceEndpointFilterMemberNameContains:
+		_ = v.Value // Value is []string
+
+	case *types.SourceEndpointFilterMemberRegionNames:
+		_ = v.Value // Value is []string
+
+	case *types.SourceEndpointFilterMemberSourceTypes:
+		_ = v.Value // Value is []types.SourceEndpointType
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []string
+var _ []types.SourceEndpointType
+
+func ExampleStandardDestinationEndpointNetworkingConfiguration_outputUsage() {
+	var union types.StandardDestinationEndpointNetworkingConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StandardDestinationEndpointNetworkingConfigurationMemberPublic:
+		_ = v.Value // Value is types.PublicDestinationEndpointNetworkingConfiguration
+
+	case *types.StandardDestinationEndpointNetworkingConfigurationMemberVpc:
+		_ = v.Value // Value is types.VpcDestinationEndpointNetworkingConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PublicDestinationEndpointNetworkingConfiguration
+var _ *types.VpcDestinationEndpointNetworkingConfiguration
+
+func ExampleStandardDestinationEndpointProtocolConfiguration_outputUsage() {
+	var union types.StandardDestinationEndpointProtocolConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StandardDestinationEndpointProtocolConfigurationMemberRist:
+		_ = v.Value // Value is types.RistStandardDestinationEndpointConfiguration
+
+	case *types.StandardDestinationEndpointProtocolConfigurationMemberRtp:
+		_ = v.Value // Value is types.RtpStandardDestinationEndpointConfiguration
+
+	case *types.StandardDestinationEndpointProtocolConfigurationMemberSrtCaller:
+		_ = v.Value // Value is types.SrtCallerStandardDestinationEndpointConfiguration
+
+	case *types.StandardDestinationEndpointProtocolConfigurationMemberSrtListener:
+		_ = v.Value // Value is types.SrtListenerStandardDestinationEndpointConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RistStandardDestinationEndpointConfiguration
+var _ *types.RtpStandardDestinationEndpointConfiguration
+var _ *types.SrtListenerStandardDestinationEndpointConfiguration
+var _ *types.SrtCallerStandardDestinationEndpointConfiguration
+
+func ExampleStandardSourceEndpointNetworkingConfiguration_outputUsage() {
+	var union types.StandardSourceEndpointNetworkingConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StandardSourceEndpointNetworkingConfigurationMemberPublic:
+		_ = v.Value // Value is types.PublicSourceEndpointNetworkingConfiguration
+
+	case *types.StandardSourceEndpointNetworkingConfigurationMemberVpc:
+		_ = v.Value // Value is types.VpcSourceEndpointNetworkingConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VpcSourceEndpointNetworkingConfiguration
+var _ *types.PublicSourceEndpointNetworkingConfiguration
+
+func ExampleStandardSourceEndpointProtocolConfiguration_outputUsage() {
+	var union types.StandardSourceEndpointProtocolConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.StandardSourceEndpointProtocolConfigurationMemberRist:
+		_ = v.Value // Value is types.RistStandardSourceEndpointConfiguration
+
+	case *types.StandardSourceEndpointProtocolConfigurationMemberRtp:
+		_ = v.Value // Value is types.RtpStandardSourceEndpointConfiguration
+
+	case *types.StandardSourceEndpointProtocolConfigurationMemberSrtCaller:
+		_ = v.Value // Value is types.SrtCallerStandardSourceEndpointConfiguration
+
+	case *types.StandardSourceEndpointProtocolConfigurationMemberSrtListener:
+		_ = v.Value // Value is types.SrtListenerStandardSourceEndpointConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RistStandardSourceEndpointConfiguration
+var _ *types.SrtListenerStandardSourceEndpointConfiguration
+var _ *types.RtpStandardSourceEndpointConfiguration
+var _ *types.SrtCallerStandardSourceEndpointConfiguration
 
 func ExampleTlsEncryptionConfiguration_outputUsage() {
 	var union types.TlsEncryptionConfiguration

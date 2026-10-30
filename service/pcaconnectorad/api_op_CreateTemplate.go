@@ -5,7 +5,9 @@ package pcaconnectorad
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,26 @@ type CreateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTemplateRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.CreateTemplateRequest_ConnectorArn, *v.ConnectorArn)
+	}
+	serializeTemplateDefinition(s, schemas.CreateTemplateRequest_Definition, v.Definition)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTemplateRequest_Name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateTemplateRequest_Tags, v.Tags)
+}
+
 type CreateTemplateOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the template.
@@ -69,13 +91,32 @@ type CreateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateTemplateResponse_TemplateArn, *v.TemplateArn)
+	}
+}
+func (v *CreateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTemplateResponse_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.CreateTemplateResponse_TemplateArn, v.TemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplate, schemas.CreateTemplateRequest, schemas.CreateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTemplate, schemas.CreateTemplateRequest, schemas.CreateTemplateResponse), output: &CreateTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

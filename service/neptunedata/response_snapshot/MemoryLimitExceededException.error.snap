@@ -1,0 +1,4 @@
+500
+Content-Type: application/json
+
+{"__type":"MemoryLimitExceededException","code":"MemoryLimitExceededException","detailedMessage":"__DetailedMessage__","requestId":"__RequestId__"}

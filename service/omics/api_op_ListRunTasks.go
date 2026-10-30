@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListRunTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListRunTasksRequest_id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRunTasksRequest_maxResults, *v.MaxResults)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListRunTasksRequest_startingToken, *v.StartingToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRunTasksRequest_status, string(v.Status))
+	}
+}
+
 type ListRunTasksOutput struct {
 
 	// A list of tasks.
@@ -61,13 +84,35 @@ type ListRunTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaskList(s, schemas.ListRunTasksResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRunTasksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRunTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRunTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRunTasksResponse_items:
+			return deserializeTaskList(d, schemas.ListRunTasksResponse_items, &v.Items)
+		case schemas.ListRunTasksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRunTasksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRunTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRunTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunTasks, schemas.ListRunTasksRequest, schemas.ListRunTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRunTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunTasks, schemas.ListRunTasksRequest, schemas.ListRunTasksResponse), output: &ListRunTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

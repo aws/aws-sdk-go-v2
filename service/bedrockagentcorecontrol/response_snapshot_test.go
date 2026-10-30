@@ -633,6 +633,8 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -660,6 +662,14 @@ func TestCheckResponseSnapshot_CreateAgentRuntime(t *testing.T) {
 			"key0": "__Value__",
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -3355,6 +3365,9 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
@@ -3429,6 +3442,9 @@ func TestCheckResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
@@ -5314,6 +5330,8 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
@@ -5422,6 +5440,14 @@ func TestCheckResponseSnapshot_GetAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetAgentRuntime.response")
 	if errors.Is(err, fs.ErrNotExist) {
@@ -7316,6 +7342,9 @@ func TestCheckResponseSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
@@ -10422,6 +10451,34 @@ func TestCheckResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	want := &ResetTokenVaultKeyMaterialOutput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+		KmsConfiguration: &types.KmsConfiguration{
+			KeyType:   types.KeyType("CustomerManagedKey"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResetTokenVaultKeyMaterial.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ResetTokenVaultKeyMaterial(context.Background(), &ResetTokenVaultKeyMaterialInput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ResetTokenVaultKeyMaterial.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
 	want := &RotatePaymentConnectorCredentialsOutput{
 		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
@@ -10994,6 +11051,8 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -11021,7 +11080,15 @@ func TestCheckResponseSnapshot_UpdateAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -13575,6 +13642,9 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
@@ -13651,6 +13721,9 @@ func TestCheckResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),

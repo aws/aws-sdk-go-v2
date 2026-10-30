@@ -5,7 +5,9 @@ package supportauthz
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/supportauthz/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportauthz/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,24 @@ type ListSupportPermitRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportPermitRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportPermitRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportPermitRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSupportPermitRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSupportPermitRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.SupportCaseDisplayId != nil {
+		s.WriteString(schemas.ListSupportPermitRequestsInput_supportCaseDisplayId, *v.SupportCaseDisplayId)
+	}
+}
+
 type ListSupportPermitRequestsOutput struct {
 
 	// The list of permit requests.
@@ -57,13 +77,35 @@ type ListSupportPermitRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportPermitRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportPermitRequestsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportPermitRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSupportPermitRequestsOutput_nextToken, *v.NextToken)
+	}
+	serializeSupportPermitRequests(s, schemas.ListSupportPermitRequestsOutput_supportPermitRequests, v.SupportPermitRequests)
+}
+func (v *ListSupportPermitRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSupportPermitRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSupportPermitRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSupportPermitRequestsOutput_nextToken, v.NextToken)
+		case schemas.ListSupportPermitRequestsOutput_supportPermitRequests:
+			return deserializeSupportPermitRequests(d, schemas.ListSupportPermitRequestsOutput_supportPermitRequests, &v.SupportPermitRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSupportPermitRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSupportPermitRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportPermitRequests, schemas.ListSupportPermitRequestsInput, schemas.ListSupportPermitRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSupportPermitRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportPermitRequests, schemas.ListSupportPermitRequestsInput, schemas.ListSupportPermitRequestsOutput), output: &ListSupportPermitRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -34,6 +36,18 @@ type DeleteS3TableIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteS3TableIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteS3TableIntegrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteS3TableIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteS3TableIntegrationInput_Arn, *v.Arn)
+	}
+}
+
 type DeleteS3TableIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -41,13 +55,26 @@ type DeleteS3TableIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteS3TableIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteS3TableIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteS3TableIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteS3TableIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteS3TableIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteS3TableIntegration, schemas.DeleteS3TableIntegrationInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteS3TableIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteS3TableIntegration, schemas.DeleteS3TableIntegrationInput, nil), output: &DeleteS3TableIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

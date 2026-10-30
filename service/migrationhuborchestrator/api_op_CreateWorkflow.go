@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -58,6 +60,55 @@ type CreateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMigrationWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfigurationId != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowRequest_applicationConfigurationId, *v.ApplicationConfigurationId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowRequest_description, *v.Description)
+	}
+	serializeStepInputParameters(s, schemas.CreateMigrationWorkflowRequest_inputParameters, v.InputParameters)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowRequest_name, *v.Name)
+	}
+	serializeStringList(s, schemas.CreateMigrationWorkflowRequest_stepTargets, v.StepTargets)
+	serializeStringMap(s, schemas.CreateMigrationWorkflowRequest_tags, v.Tags)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowRequest_templateId, *v.TemplateId)
+	}
+}
+func (v *CreateWorkflowInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMigrationWorkflowRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMigrationWorkflowRequest_applicationConfigurationId:
+			v.ApplicationConfigurationId = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowRequest_applicationConfigurationId, v.ApplicationConfigurationId)
+		case schemas.CreateMigrationWorkflowRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowRequest_description, v.Description)
+		case schemas.CreateMigrationWorkflowRequest_inputParameters:
+			return deserializeStepInputParameters(d, schemas.CreateMigrationWorkflowRequest_inputParameters, &v.InputParameters)
+		case schemas.CreateMigrationWorkflowRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowRequest_name, v.Name)
+		case schemas.CreateMigrationWorkflowRequest_stepTargets:
+			return deserializeStringList(d, schemas.CreateMigrationWorkflowRequest_stepTargets, &v.StepTargets)
+		case schemas.CreateMigrationWorkflowRequest_tags:
+			return deserializeStringMap(d, schemas.CreateMigrationWorkflowRequest_tags, &v.Tags)
+		case schemas.CreateMigrationWorkflowRequest_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowRequest_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 type CreateWorkflowOutput struct {
 
 	// The configuration ID of the application configured in Application Discovery
@@ -100,13 +151,87 @@ type CreateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMigrationWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdsApplicationConfigurationId != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_adsApplicationConfigurationId, *v.AdsApplicationConfigurationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateMigrationWorkflowResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_status, string(v.Status))
+	}
+	serializeStringList(s, schemas.CreateMigrationWorkflowResponse_stepTargets, v.StepTargets)
+	serializeStringMap(s, schemas.CreateMigrationWorkflowResponse_tags, v.Tags)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CreateMigrationWorkflowResponse_templateId, *v.TemplateId)
+	}
+	serializeStepInputParameters(s, schemas.CreateMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+}
+func (v *CreateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMigrationWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMigrationWorkflowResponse_adsApplicationConfigurationId:
+			v.AdsApplicationConfigurationId = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowResponse_adsApplicationConfigurationId, v.AdsApplicationConfigurationId)
+		case schemas.CreateMigrationWorkflowResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowResponse_arn, v.Arn)
+		case schemas.CreateMigrationWorkflowResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateMigrationWorkflowResponse_creationTime, v.CreationTime)
+		case schemas.CreateMigrationWorkflowResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowResponse_description, v.Description)
+		case schemas.CreateMigrationWorkflowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowResponse_id, v.Id)
+		case schemas.CreateMigrationWorkflowResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowResponse_name, v.Name)
+		case schemas.CreateMigrationWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateMigrationWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MigrationWorkflowStatusEnum(ev)
+			return nil
+		case schemas.CreateMigrationWorkflowResponse_stepTargets:
+			return deserializeStringList(d, schemas.CreateMigrationWorkflowResponse_stepTargets, &v.StepTargets)
+		case schemas.CreateMigrationWorkflowResponse_tags:
+			return deserializeStringMap(d, schemas.CreateMigrationWorkflowResponse_tags, &v.Tags)
+		case schemas.CreateMigrationWorkflowResponse_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.CreateMigrationWorkflowResponse_templateId, v.TemplateId)
+		case schemas.CreateMigrationWorkflowResponse_workflowInputs:
+			return deserializeStepInputParameters(d, schemas.CreateMigrationWorkflowResponse_workflowInputs, &v.WorkflowInputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateMigrationWorkflowRequest, schemas.CreateMigrationWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflow, schemas.CreateMigrationWorkflowRequest, schemas.CreateMigrationWorkflowResponse), output: &CreateWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

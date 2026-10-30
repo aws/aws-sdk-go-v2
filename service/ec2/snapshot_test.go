@@ -6794,6 +6794,18 @@ func TestCheckSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCapacityManagerSupportabilityScores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerSupportabilityScores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityManagerSupportabilityScores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
@@ -6967,6 +6979,18 @@ func TestCheckSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	_, err := svc.GetImageBlockPublicAccessState(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetImageBlockPublicAccessState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetImageFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetImageFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetImageFindings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16501,6 +16525,18 @@ func TestUpdateSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCapacityManagerSupportabilityScores(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerSupportabilityScores(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityManagerSupportabilityScores")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
@@ -16674,6 +16710,18 @@ func TestUpdateSnapshot_GetImageBlockPublicAccessState(t *testing.T) {
 	_, err := svc.GetImageBlockPublicAccessState(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetImageBlockPublicAccessState")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetImageFindings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetImageFindings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetImageFindings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

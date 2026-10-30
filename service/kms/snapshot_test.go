@@ -134,6 +134,18 @@ func TestCheckSnapshot_CreateKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_Decapsulate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Decapsulate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Decapsulate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_Decrypt(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Decrypt(context.Background(), nil, func(o *Options) {
@@ -271,6 +283,18 @@ func TestCheckSnapshot_EnableKeyRotation(t *testing.T) {
 	_, err := svc.EnableKeyRotation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "EnableKeyRotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_Encapsulate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Encapsulate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "Encapsulate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -781,6 +805,18 @@ func TestUpdateSnapshot_CreateKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_Decapsulate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Decapsulate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Decapsulate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_Decrypt(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Decrypt(context.Background(), nil, func(o *Options) {
@@ -918,6 +954,18 @@ func TestUpdateSnapshot_EnableKeyRotation(t *testing.T) {
 	_, err := svc.EnableKeyRotation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "EnableKeyRotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_Encapsulate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.Encapsulate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "Encapsulate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

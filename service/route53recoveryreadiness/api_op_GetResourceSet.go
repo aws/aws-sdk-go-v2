@@ -4,7 +4,9 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetResourceSetInput struct {
 	ResourceSetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetResourceSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceSetName != nil {
+		s.WriteString(schemas.GetResourceSetRequest_ResourceSetName, *v.ResourceSetName)
+	}
 }
 
 type GetResourceSetOutput struct {
@@ -69,13 +83,50 @@ type GetResourceSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceSetArn != nil {
+		s.WriteString(schemas.GetResourceSetResponse_ResourceSetArn, *v.ResourceSetArn)
+	}
+	if v.ResourceSetName != nil {
+		s.WriteString(schemas.GetResourceSetResponse_ResourceSetName, *v.ResourceSetName)
+	}
+	if v.ResourceSetType != nil {
+		s.WriteString(schemas.GetResourceSetResponse_ResourceSetType, *v.ResourceSetType)
+	}
+	serialize__listOfResource(s, schemas.GetResourceSetResponse_Resources, v.Resources)
+	serializeTags(s, schemas.GetResourceSetResponse_Tags, v.Tags)
+}
+func (v *GetResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceSetResponse_ResourceSetArn:
+			v.ResourceSetArn = new(string)
+			return d.ReadString(schemas.GetResourceSetResponse_ResourceSetArn, v.ResourceSetArn)
+		case schemas.GetResourceSetResponse_ResourceSetName:
+			v.ResourceSetName = new(string)
+			return d.ReadString(schemas.GetResourceSetResponse_ResourceSetName, v.ResourceSetName)
+		case schemas.GetResourceSetResponse_ResourceSetType:
+			v.ResourceSetType = new(string)
+			return d.ReadString(schemas.GetResourceSetResponse_ResourceSetType, v.ResourceSetType)
+		case schemas.GetResourceSetResponse_Resources:
+			return deserialize__listOfResource(d, schemas.GetResourceSetResponse_Resources, &v.Resources)
+		case schemas.GetResourceSetResponse_Tags:
+			return deserializeTags(d, schemas.GetResourceSetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceSet, schemas.GetResourceSetRequest, schemas.GetResourceSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceSet, schemas.GetResourceSetRequest, schemas.GetResourceSetResponse), output: &GetResourceSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

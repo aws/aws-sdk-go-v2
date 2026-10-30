@@ -5,7 +5,9 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,27 @@ type GetOfferTermsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOfferTermsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOfferTermsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOfferTermsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.GetOfferTermsInput_locale, *v.Locale)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetOfferTermsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOfferTermsInput_nextToken, *v.NextToken)
+	}
+	if v.OfferId != nil {
+		s.WriteString(schemas.GetOfferTermsInput_offerId, *v.OfferId)
+	}
+}
+
 type GetOfferTermsOutput struct {
 
 	// The terms attached to the offer. Each element contains exactly one term type.
@@ -73,13 +96,41 @@ type GetOfferTermsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOfferTermsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOfferTermsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOfferTermsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Locale != nil {
+		s.WriteString(schemas.GetOfferTermsOutput_locale, *v.Locale)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOfferTermsOutput_nextToken, *v.NextToken)
+	}
+	serializeOfferTermsList(s, schemas.GetOfferTermsOutput_offerTerms, v.OfferTerms)
+}
+func (v *GetOfferTermsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOfferTermsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOfferTermsOutput_locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.GetOfferTermsOutput_locale, v.Locale)
+		case schemas.GetOfferTermsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOfferTermsOutput_nextToken, v.NextToken)
+		case schemas.GetOfferTermsOutput_offerTerms:
+			return deserializeOfferTermsList(d, schemas.GetOfferTermsOutput_offerTerms, &v.OfferTerms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOfferTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferTerms, schemas.GetOfferTermsInput, schemas.GetOfferTermsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOfferTerms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOfferTerms, schemas.GetOfferTermsInput, schemas.GetOfferTermsOutput), output: &GetOfferTermsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

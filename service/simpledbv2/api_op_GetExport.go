@@ -5,7 +5,9 @@ package simpledbv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithywaiter "github.com/aws/smithy-go/waiter"
@@ -36,6 +38,18 @@ type GetExportInput struct {
 	ExportArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportArn != nil {
+		s.WriteString(schemas.GetExportRequest_exportArn, *v.ExportArn)
+	}
 }
 
 type GetExportOutput struct {
@@ -108,13 +122,124 @@ type GetExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetExportResponse_clientToken, *v.ClientToken)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetExportResponse_domainName, *v.DomainName)
+	}
+	if v.ExportArn != nil {
+		s.WriteString(schemas.GetExportResponse_exportArn, *v.ExportArn)
+	}
+	if v.ExportDataCutoffTime != nil {
+		s.WriteTime(schemas.GetExportResponse_exportDataCutoffTime, *v.ExportDataCutoffTime)
+	}
+	if v.ExportManifest != nil {
+		s.WriteString(schemas.GetExportResponse_exportManifest, *v.ExportManifest)
+	}
+	if v.ExportStatus != "" {
+		s.WriteString(schemas.GetExportResponse_exportStatus, string(v.ExportStatus))
+	}
+	if v.FailureCode != nil {
+		s.WriteString(schemas.GetExportResponse_failureCode, *v.FailureCode)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetExportResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.ItemsCount != nil {
+		s.WriteInt64(schemas.GetExportResponse_itemsCount, *v.ItemsCount)
+	}
+	if v.RequestedAt != nil {
+		s.WriteTime(schemas.GetExportResponse_requestedAt, *v.RequestedAt)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.GetExportResponse_s3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.GetExportResponse_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3KeyPrefix != nil {
+		s.WriteString(schemas.GetExportResponse_s3KeyPrefix, *v.S3KeyPrefix)
+	}
+	if v.S3SseAlgorithm != "" {
+		s.WriteString(schemas.GetExportResponse_s3SseAlgorithm, string(v.S3SseAlgorithm))
+	}
+	if v.S3SseKmsKeyId != nil {
+		s.WriteString(schemas.GetExportResponse_s3SseKmsKeyId, *v.S3SseKmsKeyId)
+	}
+}
+func (v *GetExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExportResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.GetExportResponse_clientToken, v.ClientToken)
+		case schemas.GetExportResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetExportResponse_domainName, v.DomainName)
+		case schemas.GetExportResponse_exportArn:
+			v.ExportArn = new(string)
+			return d.ReadString(schemas.GetExportResponse_exportArn, v.ExportArn)
+		case schemas.GetExportResponse_exportDataCutoffTime:
+			v.ExportDataCutoffTime = new(time.Time)
+			return d.ReadTime(schemas.GetExportResponse_exportDataCutoffTime, v.ExportDataCutoffTime)
+		case schemas.GetExportResponse_exportManifest:
+			v.ExportManifest = new(string)
+			return d.ReadString(schemas.GetExportResponse_exportManifest, v.ExportManifest)
+		case schemas.GetExportResponse_exportStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetExportResponse_exportStatus, &ev); err != nil {
+				return err
+			}
+			v.ExportStatus = types.ExportStatus(ev)
+			return nil
+		case schemas.GetExportResponse_failureCode:
+			v.FailureCode = new(string)
+			return d.ReadString(schemas.GetExportResponse_failureCode, v.FailureCode)
+		case schemas.GetExportResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetExportResponse_failureMessage, v.FailureMessage)
+		case schemas.GetExportResponse_itemsCount:
+			v.ItemsCount = new(int64)
+			return d.ReadInt64(schemas.GetExportResponse_itemsCount, v.ItemsCount)
+		case schemas.GetExportResponse_requestedAt:
+			v.RequestedAt = new(time.Time)
+			return d.ReadTime(schemas.GetExportResponse_requestedAt, v.RequestedAt)
+		case schemas.GetExportResponse_s3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.GetExportResponse_s3Bucket, v.S3Bucket)
+		case schemas.GetExportResponse_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.GetExportResponse_s3BucketOwner, v.S3BucketOwner)
+		case schemas.GetExportResponse_s3KeyPrefix:
+			v.S3KeyPrefix = new(string)
+			return d.ReadString(schemas.GetExportResponse_s3KeyPrefix, v.S3KeyPrefix)
+		case schemas.GetExportResponse_s3SseAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.GetExportResponse_s3SseAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.S3SseAlgorithm = types.S3SseAlgorithm(ev)
+			return nil
+		case schemas.GetExportResponse_s3SseKmsKeyId:
+			v.S3SseKmsKeyId = new(string)
+			return d.ReadString(schemas.GetExportResponse_s3SseKmsKeyId, v.S3SseKmsKeyId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.GetExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.GetExportResponse), output: &GetExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

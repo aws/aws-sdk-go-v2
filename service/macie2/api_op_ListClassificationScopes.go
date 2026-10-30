@@ -5,7 +5,9 @@ package macie2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListClassificationScopesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClassificationScopesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClassificationScopesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClassificationScopesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ListClassificationScopesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClassificationScopesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListClassificationScopesOutput struct {
 
 	// An array that specifies the unique identifier and name of the classification
@@ -53,13 +70,35 @@ type ListClassificationScopesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClassificationScopesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClassificationScopesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClassificationScopesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfClassificationScopeSummary(s, schemas.ListClassificationScopesResponse_classificationScopes, v.ClassificationScopes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClassificationScopesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListClassificationScopesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClassificationScopesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClassificationScopesResponse_classificationScopes:
+			return deserialize__listOfClassificationScopeSummary(d, schemas.ListClassificationScopesResponse_classificationScopes, &v.ClassificationScopes)
+		case schemas.ListClassificationScopesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClassificationScopesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClassificationScopesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClassificationScopes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClassificationScopes, schemas.ListClassificationScopesRequest, schemas.ListClassificationScopesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClassificationScopes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClassificationScopes, schemas.ListClassificationScopesRequest, schemas.ListClassificationScopesResponse), output: &ListClassificationScopesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

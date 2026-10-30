@@ -1746,10 +1746,28 @@ var _ImageScanFindingsList_member *smithy.Schema
 var ImageScanningConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "ImageScanningConfiguration",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 4)
 var ImageScanningConfiguration_imageScanningEnabled *smithy.Schema
 
 var ImageScanningConfiguration_ecrConfiguration *smithy.Schema
+
+var ImageScanningConfiguration_imageScanningTypes *smithy.Schema
+
+var ImageScanningConfiguration_scanResultCondition *smithy.Schema
+
+var ImageScanningType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ImageScanningType",
+}, smithy.ShapeTypeEnum, 2)
+var ImageScanningType_TEST_INSTANCE_CVE *smithy.Schema
+
+var ImageScanningType_ON_DEMAND_AMI_CVE *smithy.Schema
+
+var _ImageScanningTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ImageScanningTypeList",
+}, smithy.ShapeTypeList, 1)
+var _ImageScanningTypeList_member *smithy.Schema
 
 var ImageScanState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -2561,6 +2579,18 @@ var MarketplaceResourceType_COMPONENT_DATA *smithy.Schema
 
 var MarketplaceResourceType_COMPONENT_ARTIFACT *smithy.Schema
 
+var MaximumSeverityLabel = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "MaximumSeverityLabel",
+}, smithy.ShapeTypeEnum, 4)
+var MaximumSeverityLabel_INFORMATIONAL *smithy.Schema
+
+var MaximumSeverityLabel_LOW *smithy.Schema
+
+var MaximumSeverityLabel_MEDIUM *smithy.Schema
+
+var MaximumSeverityLabel_HIGH *smithy.Schema
+
 var _MaxParallelLaunches = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
 	Name:      "MaxParallelLaunches",
@@ -2943,6 +2973,14 @@ var S3Logs = smithy.NewSchema(smithy.ShapeID{
 var S3Logs_s3BucketName *smithy.Schema
 
 var S3Logs_s3KeyPrefix *smithy.Schema
+
+var ScanResultCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.imagebuilder",
+	Name:      "ScanResultCondition",
+}, smithy.ShapeTypeStructure, 2)
+var ScanResultCondition_maximumSeverityLabel *smithy.Schema
+
+var ScanResultCondition_fixAvailable *smithy.Schema
 
 var Schedule = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.imagebuilder",
@@ -6085,9 +6123,31 @@ func init() {
 
 	ImageScanState_reason = ImageScanState.AddMember("reason", _NonEmptyString)
 
+	ImageScanningType_TEST_INSTANCE_CVE = ImageScanningType.AddMember("TEST_INSTANCE_CVE", smithyprelude.Unit)
+
+	ImageScanningType_ON_DEMAND_AMI_CVE = ImageScanningType.AddMember("ON_DEMAND_AMI_CVE", smithyprelude.Unit)
+
+	_ImageScanningTypeList_member = _ImageScanningTypeList.AddMember("member", ImageScanningType)
+
+	MaximumSeverityLabel_INFORMATIONAL = MaximumSeverityLabel.AddMember("INFORMATIONAL", smithyprelude.Unit)
+
+	MaximumSeverityLabel_LOW = MaximumSeverityLabel.AddMember("LOW", smithyprelude.Unit)
+
+	MaximumSeverityLabel_MEDIUM = MaximumSeverityLabel.AddMember("MEDIUM", smithyprelude.Unit)
+
+	MaximumSeverityLabel_HIGH = MaximumSeverityLabel.AddMember("HIGH", smithyprelude.Unit)
+
+	ScanResultCondition_maximumSeverityLabel = ScanResultCondition.AddMember("maximumSeverityLabel", MaximumSeverityLabel)
+
+	ScanResultCondition_fixAvailable = ScanResultCondition.AddMember("fixAvailable", _NullableBoolean)
+
 	ImageScanningConfiguration_imageScanningEnabled = ImageScanningConfiguration.AddMember("imageScanningEnabled", _NullableBoolean)
 
 	ImageScanningConfiguration_ecrConfiguration = ImageScanningConfiguration.AddMember("ecrConfiguration", EcrConfiguration)
+
+	ImageScanningConfiguration_imageScanningTypes = ImageScanningConfiguration.AddMember("imageScanningTypes", _ImageScanningTypeList)
+
+	ImageScanningConfiguration_scanResultCondition = ImageScanningConfiguration.AddMember("scanResultCondition", ScanResultCondition)
 
 	_WorkflowParameterValueList_member = _WorkflowParameterValueList.AddMember("member", _WorkflowParameterValue)
 

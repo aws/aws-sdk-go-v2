@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"networks":[{"accessLevel":"STANDARD","awsAccountId":"__AwsAccountId__","encryptionKeyArn":"__EncryptionKeyArn__","freeTrialExpiration":"__FreeTrialExpiration__","migrationState":1,"networkArn":"__NetworkArn__","networkId":"__NetworkId__","networkName":"__NetworkName__","standing":1},{"accessLevel":"STANDARD","awsAccountId":"__AwsAccountId__","encryptionKeyArn":"__EncryptionKeyArn__","freeTrialExpiration":"__FreeTrialExpiration__","migrationState":1,"networkArn":"__NetworkArn__","networkId":"__NetworkId__","networkName":"__NetworkName__","standing":1}],"nextToken":"__NextToken__"}

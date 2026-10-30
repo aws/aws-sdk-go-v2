@@ -48,10 +48,17 @@ type UpdateContactInput struct {
 	// This member is required.
 	InstanceId *string
 
+	// The additional recipients of an outbound email. Use this field to update the CC
+	// email address recipients of a contact. An empty list clears the existing CC
+	// recipients.
+	AdditionalRecipients *types.NullableAdditionalRecipients
+
 	// The endpoint of the customer for which the contact was initiated. For external
 	// audio contacts, this is usually the end customer's phone number. This value can
 	// only be updated for external audio contacts. For more information, see [Connect Customer Contact Lens integration]in the
-	// Connect Customer Administrator Guide.
+	// Connect Customer Administrator Guide. For email contacts with an OUTBOUND or
+	// AGENT_REPLY initiation method, this value can be updated while the outbound
+	// email is still a draft, before you send it.
 	//
 	// [Connect Customer Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	CustomerEndpoint *types.Endpoint
@@ -88,7 +95,9 @@ type UpdateContactInput struct {
 	// External system endpoint for the contact was initiated. For external audio
 	// contacts, this is the phone number of the external system such as the contact
 	// center. This value can only be updated for external audio contacts. For more
-	// information, see [Connect Customer Contact Lens integration]in the Connect Customer Administrator Guide.
+	// information, see [Connect Customer Contact Lens integration]in the Connect Customer Administrator Guide. For email
+	// contacts with an OUTBOUND or AGENT_REPLY initiation method, this value can be
+	// updated while the outbound email is still a draft, before you send it.
 	//
 	// [Connect Customer Contact Lens integration]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	SystemEndpoint *types.Endpoint
@@ -111,6 +120,11 @@ func (v *UpdateContactInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRecipients != nil {
+		s.WriteStruct(schemas.UpdateContactRequest_AdditionalRecipients)
+		v.AdditionalRecipients.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.ContactId != nil {
 		s.WriteString(schemas.UpdateContactRequest_ContactId, *v.ContactId)
 	}

@@ -5,6 +5,7 @@ Mcp-Protocol-Version: __McpProtocolVersion__
 Mcp-Session-Id: __McpSessionId__
 Traceparent: __TraceParent__
 Tracestate: __TraceState__
+X-Amzn-Bedrock-Agentcore-Runtime-Session-Endpoint-Url: __SessionEndpointUrl__
 X-Amzn-Bedrock-Agentcore-Runtime-Session-Id: __RuntimeSessionId__
 X-Amzn-Trace-Id: __TraceId__
 

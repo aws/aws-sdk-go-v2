@@ -5,7 +5,9 @@ package oam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLinksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLinksInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLinksInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListLinksOutput struct {
 
 	// An array of structures that contain the information about the returned links.
@@ -59,13 +76,35 @@ type ListLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLinksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListLinksItems(s, schemas.ListLinksOutput_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLinksOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLinksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLinksOutput_Items:
+			return deserializeListLinksItems(d, schemas.ListLinksOutput_Items, &v.Items)
+		case schemas.ListLinksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLinksOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinks, schemas.ListLinksInput, schemas.ListLinksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinks, schemas.ListLinksInput, schemas.ListLinksOutput), output: &ListLinksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

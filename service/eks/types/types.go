@@ -3635,6 +3635,42 @@ func (v *ControlPlaneScalingTierInfo) Deserialize(d smithy.ShapeDeserializer) er
 	})
 }
 
+// Indicates the current configuration of Gateway API custom resource definition
+// (CRD) management on your EKS Auto Mode cluster. For example, if CRD management
+// is enabled or disabled. For more information, see EKS Auto Mode load balancing
+// capability in the Amazon EKS User Guide.
+type CrdManagementConfiguration struct {
+
+	// Indicates if Gateway API CRD management is enabled on your EKS Auto Mode
+	// cluster. If CRD management is enabled, EKS Auto Mode will create and update the
+	// Gateway API CRDs in your EKS Auto Mode cluster.
+	Managed *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *CrdManagementConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrdManagementConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CrdManagementConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Managed != nil {
+		s.WriteBool(schemas.CrdManagementConfiguration_managed, *v.Managed)
+	}
+}
+func (v *CrdManagementConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrdManagementConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrdManagementConfiguration_managed:
+			v.Managed = new(bool)
+			return d.ReadBool(schemas.CrdManagementConfiguration_managed, v.Managed)
+		}
+		return nil
+	})
+}
+
 // The access configuration information for the cluster.
 type CreateAccessConfigRequest struct {
 
@@ -4033,6 +4069,11 @@ type ElasticLoadBalancing struct {
 	// and delete load balancers in your Amazon Web Services account.
 	Enabled *bool
 
+	// Indicates the current configuration of the Kubernetes Gateway API for the load
+	// balancing capability on your EKS Auto Mode cluster. For more information, see
+	// EKS Auto Mode load balancing capability in the Amazon EKS User Guide.
+	GatewayApi *GatewayApiConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -4046,6 +4087,11 @@ func (v *ElasticLoadBalancing) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.ElasticLoadBalancing_enabled, *v.Enabled)
 	}
+	if v.GatewayApi != nil {
+		s.WriteStruct(schemas.ElasticLoadBalancing_gatewayApi)
+		v.GatewayApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *ElasticLoadBalancing) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ElasticLoadBalancing, func(s *smithy.Schema) error {
@@ -4053,6 +4099,9 @@ func (v *ElasticLoadBalancing) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ElasticLoadBalancing_enabled:
 			v.Enabled = new(bool)
 			return d.ReadBool(schemas.ElasticLoadBalancing_enabled, v.Enabled)
+		case schemas.ElasticLoadBalancing_gatewayApi:
+			v.GatewayApi = &GatewayApiConfiguration{}
+			return v.GatewayApi.Deserialize(d)
 		}
 		return nil
 	})
@@ -4482,6 +4531,43 @@ func (v *FargateProfileSelector) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.FargateProfileSelector_namespace:
 			v.Namespace = new(string)
 			return d.ReadString(schemas.FargateProfileSelector_namespace, v.Namespace)
+		}
+		return nil
+	})
+}
+
+// Indicates the current configuration of the Kubernetes Gateway API for the load
+// balancing capability on your EKS Auto Mode cluster. For more information, see
+// EKS Auto Mode load balancing capability in the Amazon EKS User Guide.
+type GatewayApiConfiguration struct {
+
+	// Indicates the current configuration of Gateway API custom resource definition
+	// (CRD) management on your EKS Auto Mode cluster. For example, if CRD management
+	// is enabled or disabled.
+	Crds *CrdManagementConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *GatewayApiConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayApiConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayApiConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Crds != nil {
+		s.WriteStruct(schemas.GatewayApiConfiguration_crds)
+		v.Crds.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GatewayApiConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayApiConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayApiConfiguration_crds:
+			v.Crds = &CrdManagementConfiguration{}
+			return v.Crds.Deserialize(d)
 		}
 		return nil
 	})

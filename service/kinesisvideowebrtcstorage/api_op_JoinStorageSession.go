@@ -4,6 +4,8 @@ package kinesisvideowebrtcstorage
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -80,6 +82,18 @@ type JoinStorageSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinStorageSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinStorageSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinStorageSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.JoinStorageSessionInput_channelArn, *v.ChannelArn)
+	}
+}
+
 type JoinStorageSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,13 +101,26 @@ type JoinStorageSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinStorageSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinStorageSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *JoinStorageSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJoinStorageSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJoinStorageSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinStorageSession, schemas.JoinStorageSessionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJoinStorageSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JoinStorageSession, schemas.JoinStorageSessionInput, nil), output: &JoinStorageSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

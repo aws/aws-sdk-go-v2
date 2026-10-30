@@ -1847,6 +1847,85 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 					ErrorCachingMinTTL: ptr.Int64(1),
 				},
 			},
+			Waf: &types.WafConfig{
+				IsWafEnabled: ptr.Bool(true),
+				WafRules: []types.WafRule{
+					{
+						Name: ptr.String("__Name__"),
+						AtpConfig: &types.WafAtpConfig{
+							LoginPath:     ptr.String("__LoginPath__"),
+							PayloadType:   types.WafPayloadTypeEnum("JSON"),
+							UsernameField: ptr.String("__UsernameField__"),
+							PasswordField: ptr.String("__PasswordField__"),
+							ResponseInspection: &types.WafResponseInspection{
+								SuccessCodes: []int32{
+									1,
+									1,
+								},
+								FailureCodes: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						AcfpConfig: &types.WafAcfpConfig{
+							PayloadType:          types.WafPayloadTypeEnum("JSON"),
+							CreationPath:         ptr.String("__CreationPath__"),
+							RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+							ResponseInspection: &types.WafResponseInspection{
+								SuccessCodes: []int32{
+									1,
+									1,
+								},
+								FailureCodes: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						BotControlConfig: &types.WafBotControlConfig{
+							InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+						},
+					},
+					{
+						Name: ptr.String("__Name__"),
+						AtpConfig: &types.WafAtpConfig{
+							LoginPath:     ptr.String("__LoginPath__"),
+							PayloadType:   types.WafPayloadTypeEnum("JSON"),
+							UsernameField: ptr.String("__UsernameField__"),
+							PasswordField: ptr.String("__PasswordField__"),
+							ResponseInspection: &types.WafResponseInspection{
+								SuccessCodes: []int32{
+									1,
+									1,
+								},
+								FailureCodes: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						AcfpConfig: &types.WafAcfpConfig{
+							PayloadType:          types.WafPayloadTypeEnum("JSON"),
+							CreationPath:         ptr.String("__CreationPath__"),
+							RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+							ResponseInspection: &types.WafResponseInspection{
+								SuccessCodes: []int32{
+									1,
+									1,
+								},
+								FailureCodes: []int32{
+									1,
+									1,
+								},
+							},
+						},
+						BotControlConfig: &types.WafBotControlConfig{
+							InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+						},
+					},
+				},
+			},
 		},
 		Operation: &types.Operation{
 			Id:           ptr.String("__Id__"),
@@ -1952,6 +2031,83 @@ func TestCheckResponseSnapshot_CreateDistribution(t *testing.T) {
 				ResponseCode:       ptr.String("__ResponseCode__"),
 				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
 				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
+		EnableWaf: ptr.Bool(true),
+		WafRules: []types.WafRule{
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
 			},
 		},
 	})
@@ -6635,6 +6791,85 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 						ErrorCachingMinTTL: ptr.Int64(1),
 					},
 				},
+				Waf: &types.WafConfig{
+					IsWafEnabled: ptr.Bool(true),
+					WafRules: []types.WafRule{
+						{
+							Name: ptr.String("__Name__"),
+							AtpConfig: &types.WafAtpConfig{
+								LoginPath:     ptr.String("__LoginPath__"),
+								PayloadType:   types.WafPayloadTypeEnum("JSON"),
+								UsernameField: ptr.String("__UsernameField__"),
+								PasswordField: ptr.String("__PasswordField__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							AcfpConfig: &types.WafAcfpConfig{
+								PayloadType:          types.WafPayloadTypeEnum("JSON"),
+								CreationPath:         ptr.String("__CreationPath__"),
+								RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							BotControlConfig: &types.WafBotControlConfig{
+								InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							AtpConfig: &types.WafAtpConfig{
+								LoginPath:     ptr.String("__LoginPath__"),
+								PayloadType:   types.WafPayloadTypeEnum("JSON"),
+								UsernameField: ptr.String("__UsernameField__"),
+								PasswordField: ptr.String("__PasswordField__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							AcfpConfig: &types.WafAcfpConfig{
+								PayloadType:          types.WafPayloadTypeEnum("JSON"),
+								CreationPath:         ptr.String("__CreationPath__"),
+								RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							BotControlConfig: &types.WafBotControlConfig{
+								InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+							},
+						},
+					},
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -6732,6 +6967,85 @@ func TestCheckResponseSnapshot_GetDistributions(t *testing.T) {
 						ResponseCode:       ptr.String("__ResponseCode__"),
 						ResponsePagePath:   ptr.String("__ResponsePagePath__"),
 						ErrorCachingMinTTL: ptr.Int64(1),
+					},
+				},
+				Waf: &types.WafConfig{
+					IsWafEnabled: ptr.Bool(true),
+					WafRules: []types.WafRule{
+						{
+							Name: ptr.String("__Name__"),
+							AtpConfig: &types.WafAtpConfig{
+								LoginPath:     ptr.String("__LoginPath__"),
+								PayloadType:   types.WafPayloadTypeEnum("JSON"),
+								UsernameField: ptr.String("__UsernameField__"),
+								PasswordField: ptr.String("__PasswordField__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							AcfpConfig: &types.WafAcfpConfig{
+								PayloadType:          types.WafPayloadTypeEnum("JSON"),
+								CreationPath:         ptr.String("__CreationPath__"),
+								RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							BotControlConfig: &types.WafBotControlConfig{
+								InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							AtpConfig: &types.WafAtpConfig{
+								LoginPath:     ptr.String("__LoginPath__"),
+								PayloadType:   types.WafPayloadTypeEnum("JSON"),
+								UsernameField: ptr.String("__UsernameField__"),
+								PasswordField: ptr.String("__PasswordField__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							AcfpConfig: &types.WafAcfpConfig{
+								PayloadType:          types.WafPayloadTypeEnum("JSON"),
+								CreationPath:         ptr.String("__CreationPath__"),
+								RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+								ResponseInspection: &types.WafResponseInspection{
+									SuccessCodes: []int32{
+										1,
+										1,
+									},
+									FailureCodes: []int32{
+										1,
+										1,
+									},
+								},
+							},
+							BotControlConfig: &types.WafBotControlConfig{
+								InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+							},
+						},
 					},
 				},
 			},
@@ -7294,6 +7608,36 @@ func TestCheckResponseSnapshot_GetInstance(t *testing.T) {
 				HttpPutResponseHopLimit: ptr.Int32(1),
 				HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 			},
+			InstanceStatus: &types.InstanceHealthStatus{
+				Status: types.InstanceHealthStatusValue("ok"),
+				Details: []types.InstanceHealthStatusDetail{
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
+			SystemStatus: &types.InstanceHealthStatus{
+				Status: types.InstanceHealthStatusValue("ok"),
+				Details: []types.InstanceHealthStatusDetail{
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+					{
+						Name:          types.InstanceHealthStatusDetailName("reachability"),
+						Status:        types.InstanceHealthStatusDetailValue("passed"),
+						ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					},
+				},
+			},
 		},
 	}
 	status, header, body, err := serdeRespReadSnapshot("GetInstance.response")
@@ -7305,7 +7649,8 @@ func TestCheckResponseSnapshot_GetInstance(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetInstance(context.Background(), &GetInstanceInput{
-		InstanceName: ptr.String("__InstanceName__"),
+		InstanceName:        ptr.String("__InstanceName__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -8166,6 +8511,36 @@ func TestCheckResponseSnapshot_GetInstances(t *testing.T) {
 					HttpPutResponseHopLimit: ptr.Int32(1),
 					HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 				},
+				InstanceStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				SystemStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
 			},
 			{
 				Name:        ptr.String("__Name__"),
@@ -8382,6 +8757,36 @@ func TestCheckResponseSnapshot_GetInstances(t *testing.T) {
 					HttpPutResponseHopLimit: ptr.Int32(1),
 					HttpProtocolIpv6:        types.HttpProtocolIpv6("disabled"),
 				},
+				InstanceStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
+				SystemStatus: &types.InstanceHealthStatus{
+					Status: types.InstanceHealthStatusValue("ok"),
+					Details: []types.InstanceHealthStatusDetail{
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+						{
+							Name:          types.InstanceHealthStatusDetailName("reachability"),
+							Status:        types.InstanceHealthStatusDetailValue("passed"),
+							ImpairedSince: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+						},
+					},
+				},
 			},
 		},
 		NextPageToken: ptr.String("__NextPageToken__"),
@@ -8395,7 +8800,8 @@ func TestCheckResponseSnapshot_GetInstances(t *testing.T) {
 	}
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.GetInstances(context.Background(), &GetInstancesInput{
-		PageToken: ptr.String("__PageToken__"),
+		PageToken:           ptr.String("__PageToken__"),
+		IncludeHealthStatus: ptr.Bool(true),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -11078,6 +11484,9 @@ func TestCheckResponseSnapshot_StartInstance(t *testing.T) {
 	svc := serdeRespClient(status, header, body)
 	got, err := svc.StartInstance(context.Background(), &StartInstanceInput{
 		InstanceName: ptr.String("__InstanceName__"),
+		AttributeUpdates: &types.InstanceAttributeUpdates{
+			BundleId: ptr.String("__BundleId__"),
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -12060,6 +12469,83 @@ func TestCheckResponseSnapshot_UpdateDistribution(t *testing.T) {
 				ResponseCode:       ptr.String("__ResponseCode__"),
 				ResponsePagePath:   ptr.String("__ResponsePagePath__"),
 				ErrorCachingMinTTL: ptr.Int64(1),
+			},
+		},
+		EnableWaf: ptr.Bool(true),
+		WafRules: []types.WafRule{
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
+			},
+			{
+				Name: ptr.String("__Name__"),
+				AtpConfig: &types.WafAtpConfig{
+					LoginPath:     ptr.String("__LoginPath__"),
+					PayloadType:   types.WafPayloadTypeEnum("JSON"),
+					UsernameField: ptr.String("__UsernameField__"),
+					PasswordField: ptr.String("__PasswordField__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				AcfpConfig: &types.WafAcfpConfig{
+					PayloadType:          types.WafPayloadTypeEnum("JSON"),
+					CreationPath:         ptr.String("__CreationPath__"),
+					RegistrationPagePath: ptr.String("__RegistrationPagePath__"),
+					ResponseInspection: &types.WafResponseInspection{
+						SuccessCodes: []int32{
+							1,
+							1,
+						},
+						FailureCodes: []int32{
+							1,
+							1,
+						},
+					},
+				},
+				BotControlConfig: &types.WafBotControlConfig{
+					InspectionLevel: types.WafInspectionLevelEnum("COMMON"),
+				},
 			},
 		},
 	})

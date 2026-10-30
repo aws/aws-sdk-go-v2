@@ -544,6 +544,8 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -571,6 +573,14 @@ func TestCheckRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 			"key0": "__Value__",
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2298,6 +2308,9 @@ func TestCheckRequestSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
@@ -5976,6 +5989,33 @@ func TestCheckRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	input := &ResetTokenVaultKeyMaterialInput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResetTokenVaultKeyMaterial(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResetTokenVaultKeyMaterial"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
 	input := &RotatePaymentConnectorCredentialsInput{
 		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
@@ -6310,6 +6350,8 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -6337,7 +6379,15 @@ func TestCheckRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7916,6 +7966,9 @@ func TestCheckRequestSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateKeyJwtConfig: &types.PrivateKeyJwtConfig{
@@ -8990,6 +9043,8 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -9017,6 +9072,14 @@ func TestUpdateRequestSnapshot_CreateAgentRuntime(t *testing.T) {
 			"key0": "__Value__",
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -10744,6 +10807,9 @@ func TestUpdateRequestSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
@@ -14422,6 +14488,33 @@ func TestUpdateRequestSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	input := &ResetTokenVaultKeyMaterialInput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ResetTokenVaultKeyMaterial(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ResetTokenVaultKeyMaterial"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
 	input := &RotatePaymentConnectorCredentialsInput{
 		PaymentManagerId:   ptr.String("__PaymentManagerId__"),
@@ -14756,6 +14849,8 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		LifecycleConfiguration: &types.LifecycleConfiguration{
 			IdleRuntimeSessionTimeout: ptr.Int32(1),
@@ -14783,7 +14878,15 @@ func TestUpdateRequestSnapshot_UpdateAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
-		ClientToken:     ptr.String("__ClientToken__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -16361,6 +16464,9 @@ func TestUpdateRequestSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"concurrency":1,"rebuildId":"__RebuildId__","scope":"ALL","status":"PREPARING","writeBufferSize":"LOW"}

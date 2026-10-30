@@ -23473,6 +23473,12 @@
                     "traits": {
                         "smithy.api#enumValue": "InstanceConnectivity"
                     }
+                },
+                "MULTI_NODE_TRAINING_VALIDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MultiNodeTrainingValidation"
+                    }
                 }
             }
         },

@@ -4,7 +4,9 @@ package supportauthz
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/supportauthz/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportauthz/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetSupportPermitInput struct {
 	SupportPermitIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSupportPermitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSupportPermitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSupportPermitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SupportPermitIdentifier != nil {
+		s.WriteString(schemas.GetSupportPermitInput_supportPermitIdentifier, *v.SupportPermitIdentifier)
+	}
 }
 
 type GetSupportPermitOutput struct {
@@ -82,13 +96,80 @@ type GetSupportPermitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSupportPermitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSupportPermitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSupportPermitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetSupportPermitOutput_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSupportPermitOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSupportPermitOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetSupportPermitOutput_name, *v.Name)
+	}
+	if v.Permit != nil {
+		s.WriteStruct(schemas.GetSupportPermitOutput_permit)
+		v.Permit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSigningKeyInfo(s, schemas.GetSupportPermitOutput_signingKeyInfo, v.SigningKeyInfo)
+	if v.Status != "" {
+		s.WriteString(schemas.GetSupportPermitOutput_status, string(v.Status))
+	}
+	if v.SupportCaseDisplayId != nil {
+		s.WriteString(schemas.GetSupportPermitOutput_supportCaseDisplayId, *v.SupportCaseDisplayId)
+	}
+	serializeTags(s, schemas.GetSupportPermitOutput_tags, v.Tags)
+}
+func (v *GetSupportPermitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSupportPermitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSupportPermitOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSupportPermitOutput_arn, v.Arn)
+		case schemas.GetSupportPermitOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSupportPermitOutput_createdAt, v.CreatedAt)
+		case schemas.GetSupportPermitOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSupportPermitOutput_description, v.Description)
+		case schemas.GetSupportPermitOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSupportPermitOutput_name, v.Name)
+		case schemas.GetSupportPermitOutput_permit:
+			v.Permit = &types.Permit{}
+			return v.Permit.Deserialize(d)
+		case schemas.GetSupportPermitOutput_signingKeyInfo:
+			return deserializeSigningKeyInfo(d, schemas.GetSupportPermitOutput_signingKeyInfo, &v.SigningKeyInfo)
+		case schemas.GetSupportPermitOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSupportPermitOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SupportPermitStatus(ev)
+			return nil
+		case schemas.GetSupportPermitOutput_supportCaseDisplayId:
+			v.SupportCaseDisplayId = new(string)
+			return d.ReadString(schemas.GetSupportPermitOutput_supportCaseDisplayId, v.SupportCaseDisplayId)
+		case schemas.GetSupportPermitOutput_tags:
+			return deserializeTags(d, schemas.GetSupportPermitOutput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSupportPermitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSupportPermit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSupportPermit, schemas.GetSupportPermitInput, schemas.GetSupportPermitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSupportPermit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSupportPermit, schemas.GetSupportPermitInput, schemas.GetSupportPermitOutput), output: &GetSupportPermitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

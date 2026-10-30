@@ -37,6 +37,18 @@ type ListInstancesInput struct {
 	// output of previous API calls to make subsequent calls.
 	NextToken *string
 
+	// Specifies which Amazon Web Services Regions to list IAM Identity Center
+	// instances from. Valid values:
+	//
+	//   - CURRENT_REGION - Lists only the instances in the Region that you call this
+	//   API from.
+	//
+	//   - ALL_REGIONS - Lists the instances that the caller owns or that are shared
+	//   with the caller across all Regions.
+	//
+	// If you don't specify a value, the default is CURRENT_REGION .
+	RegionScope types.RegionScope
+
 	noSmithyDocumentSerde
 }
 
@@ -52,6 +64,9 @@ func (v *ListInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInstancesRequest_NextToken, *v.NextToken)
+	}
+	if v.RegionScope != "" {
+		s.WriteString(schemas.ListInstancesRequest_RegionScope, string(v.RegionScope))
 	}
 }
 

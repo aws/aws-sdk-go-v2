@@ -1,0 +1,5 @@
+PUT /instances/__InstanceId__/contacts/__ContactId__/outbound-email-message
+
+Content-Type: application/json
+
+{"EmailMessage":{"MessageSourceType":"RAW","RawMessage":{"Body":"__Body__","ContentType":"__ContentType__"}}}

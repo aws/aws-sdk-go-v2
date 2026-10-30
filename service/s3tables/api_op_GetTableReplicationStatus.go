@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetTableReplicationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableReplicationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableReplicationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableReplicationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTableReplicationStatusRequest_tableArn, *v.TableArn)
+	}
+}
+
 type GetTableReplicationStatusOutput struct {
 
 	// An array of status information for each replication destination, including the
@@ -58,13 +72,35 @@ type GetTableReplicationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableReplicationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableReplicationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableReplicationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReplicationDestinationStatuses(s, schemas.GetTableReplicationStatusResponse_destinations, v.Destinations)
+	if v.SourceTableArn != nil {
+		s.WriteString(schemas.GetTableReplicationStatusResponse_sourceTableArn, *v.SourceTableArn)
+	}
+}
+func (v *GetTableReplicationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableReplicationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableReplicationStatusResponse_destinations:
+			return deserializeReplicationDestinationStatuses(d, schemas.GetTableReplicationStatusResponse_destinations, &v.Destinations)
+		case schemas.GetTableReplicationStatusResponse_sourceTableArn:
+			v.SourceTableArn = new(string)
+			return d.ReadString(schemas.GetTableReplicationStatusResponse_sourceTableArn, v.SourceTableArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableReplicationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableReplicationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableReplicationStatus, schemas.GetTableReplicationStatusRequest, schemas.GetTableReplicationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableReplicationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableReplicationStatus, schemas.GetTableReplicationStatusRequest, schemas.GetTableReplicationStatusResponse), output: &GetTableReplicationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

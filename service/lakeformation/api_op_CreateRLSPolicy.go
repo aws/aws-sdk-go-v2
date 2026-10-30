@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,22 @@ type CreateRLSPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRLSPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRLSPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRLSPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnList(s, schemas.CreateRLSPolicyRequest_AttachmentColumns, v.AttachmentColumns)
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.CreateRLSPolicyRequest_FilterExpression, *v.FilterExpression)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRLSPolicyRequest_Name, *v.Name)
+	}
+}
+
 type CreateRLSPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,13 +76,26 @@ type CreateRLSPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRLSPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRLSPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRLSPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateRLSPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRLSPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRLSPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRLSPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRLSPolicy, schemas.CreateRLSPolicyRequest, schemas.CreateRLSPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRLSPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRLSPolicy, schemas.CreateRLSPolicyRequest, schemas.CreateRLSPolicyResponse), output: &CreateRLSPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

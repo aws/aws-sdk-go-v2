@@ -967,6 +967,13 @@ var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/resourcepolicy/{resourceArn}",
 	Code: 201})
 
+var ResetTokenVaultKeyMaterial = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResetTokenVaultKeyMaterial",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/identities/reset-token-vault-key-material",
+	Code: 200})
+
 var RotatePaymentConnectorCredentials = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RotatePaymentConnectorCredentials",
@@ -1487,6 +1494,20 @@ var _AllowedClientsList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "AllowedClientsList",
 }, smithy.ShapeTypeList, 1)
 var _AllowedClientsList_member *smithy.Schema
+
+var AllowedPort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AllowedPort",
+}, smithy.ShapeTypeUnion, 2)
+var AllowedPort_port *smithy.Schema
+
+var AllowedPort_portRange *smithy.Schema
+
+var _AllowedPorts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "AllowedPorts",
+}, smithy.ShapeTypeList, 1)
+var _AllowedPorts_member *smithy.Schema
 
 var _AllowedQueryParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -6678,13 +6699,27 @@ var _OAuthScopes = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _OAuthScopes_member *smithy.Schema
 
+var OnBehalfOfAuthenticationConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "OnBehalfOfAuthenticationConfig",
+}, smithy.ShapeTypeStructure, 1)
+var OnBehalfOfAuthenticationConfig_clientAuthenticationMethod *smithy.Schema
+
+var OnBehalfOfClientAuthenticationMethod = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "OnBehalfOfClientAuthenticationMethod",
+}, smithy.ShapeTypeEnum, 1)
+var OnBehalfOfClientAuthenticationMethod_NO_CLIENT *smithy.Schema
+
 var OnBehalfOfTokenExchangeConfigType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "OnBehalfOfTokenExchangeConfigType",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var OnBehalfOfTokenExchangeConfigType_grantType *smithy.Schema
 
 var OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig *smithy.Schema
+
+var OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig *smithy.Schema
 
 var OnBehalfOfTokenExchangeGrantTypeType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -7380,10 +7415,23 @@ var PolicyValidationMode_FAIL_ON_ANY_FINDINGS *smithy.Schema
 
 var PolicyValidationMode_IGNORE_ALL_FINDINGS *smithy.Schema
 
+var _Port = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "Port",
+}, smithy.ShapeTypeInteger, 0)
+
 var _PortalUrlType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "PortalUrlType",
 }, smithy.ShapeTypeString, 0)
+
+var PortRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "PortRange",
+}, smithy.ShapeTypeStructure, 2)
+var PortRange_from *smithy.Schema
+
+var PortRange_to *smithy.Schema
 
 var PrincipalMatchOperator = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -7452,8 +7500,12 @@ var _Prompt = smithy.NewSchema(smithy.ShapeID{
 var ProtocolConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "ProtocolConfiguration",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 3)
 var ProtocolConfiguration_serverProtocol *smithy.Schema
+
+var ProtocolConfiguration_port *smithy.Schema
+
+var ProtocolConfiguration_path *smithy.Schema
 
 var Provider = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -8310,6 +8362,16 @@ var ServerDefinition = smithy.NewSchema(smithy.ShapeID{
 var ServerDefinition_schemaVersion *smithy.Schema
 
 var ServerDefinition_inlineContent *smithy.Schema
+
+var _ServerPath = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ServerPath",
+}, smithy.ShapeTypeString, 0)
+
+var _ServerPort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ServerPort",
+}, smithy.ShapeTypeInteger, 0)
 
 var ServerProtocol = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -9592,7 +9654,7 @@ var CreateAgentRuntimeEndpointResponse_createdAt *smithy.Schema
 var CreateAgentRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "CreateAgentRuntimeRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var CreateAgentRuntimeRequest_agentRuntimeName *smithy.Schema
 
 var CreateAgentRuntimeRequest_agentRuntimeArtifact *smithy.Schema
@@ -9622,6 +9684,8 @@ var CreateAgentRuntimeRequest_capacityProviderConfiguration *smithy.Schema
 var CreateAgentRuntimeRequest_tags *smithy.Schema
 
 var CreateAgentRuntimeRequest_platformVersion *smithy.Schema
+
+var CreateAgentRuntimeRequest_allowedPorts *smithy.Schema
 
 var CreateAgentRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -11157,7 +11221,7 @@ var GetAgentRuntimeRequest_agentRuntimeVersion *smithy.Schema
 var GetAgentRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "GetAgentRuntimeResponse",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 23)
 var GetAgentRuntimeResponse_agentRuntimeArn *smithy.Schema
 
 var GetAgentRuntimeResponse_agentRuntimeName *smithy.Schema
@@ -11201,6 +11265,8 @@ var GetAgentRuntimeResponse_filesystemConfigurations *smithy.Schema
 var GetAgentRuntimeResponse_capacityProviderConfiguration *smithy.Schema
 
 var GetAgentRuntimeResponse_platformVersion *smithy.Schema
+
+var GetAgentRuntimeResponse_allowedPorts *smithy.Schema
 
 var GetApiKeyCredentialProviderRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
@@ -12928,6 +12994,22 @@ var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var PutResourcePolicyResponse_policy *smithy.Schema
 
+var ResetTokenVaultKeyMaterialRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResetTokenVaultKeyMaterialRequest",
+}, smithy.ShapeTypeStructure, 1)
+var ResetTokenVaultKeyMaterialRequest_tokenVaultId *smithy.Schema
+
+var ResetTokenVaultKeyMaterialResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.bedrockagentcorecontrol",
+	Name:      "ResetTokenVaultKeyMaterialResponse",
+}, smithy.ShapeTypeStructure, 3)
+var ResetTokenVaultKeyMaterialResponse_tokenVaultId *smithy.Schema
+
+var ResetTokenVaultKeyMaterialResponse_kmsConfiguration *smithy.Schema
+
+var ResetTokenVaultKeyMaterialResponse_lastModifiedDate *smithy.Schema
+
 var RotatePaymentConnectorCredentialsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "RotatePaymentConnectorCredentialsRequest",
@@ -13105,7 +13187,7 @@ var UpdateAgentRuntimeEndpointResponse_lastUpdatedAt *smithy.Schema
 var UpdateAgentRuntimeRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcorecontrol",
 	Name:      "UpdateAgentRuntimeRequest",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var UpdateAgentRuntimeRequest_agentRuntimeId *smithy.Schema
 
 var UpdateAgentRuntimeRequest_agentRuntimeArtifact *smithy.Schema
@@ -13133,6 +13215,8 @@ var UpdateAgentRuntimeRequest_filesystemConfigurations *smithy.Schema
 var UpdateAgentRuntimeRequest_capacityProviderConfiguration *smithy.Schema
 
 var UpdateAgentRuntimeRequest_platformVersion *smithy.Schema
+
+var UpdateAgentRuntimeRequest_allowedPorts *smithy.Schema
 
 var UpdateAgentRuntimeRequest_clientToken *smithy.Schema
 
@@ -14310,6 +14394,16 @@ func init() {
 	_AllowedAudienceList_member = _AllowedAudienceList.AddMember("member", _AllowedAudience)
 
 	_AllowedClientsList_member = _AllowedClientsList.AddMember("member", _AllowedClient)
+
+	PortRange_from = PortRange.AddMember("from", _Port)
+
+	PortRange_to = PortRange.AddMember("to", _Port)
+
+	AllowedPort_port = AllowedPort.AddMember("port", _Port)
+
+	AllowedPort_portRange = AllowedPort.AddMember("portRange", PortRange)
+
+	_AllowedPorts_member = _AllowedPorts.AddMember("member", AllowedPort)
 
 	_AllowedQueryParameters_member = _AllowedQueryParameters.AddMember("member", _HttpQueryParameterName)
 
@@ -15549,9 +15643,15 @@ func init() {
 
 	TokenExchangeGrantTypeConfigType_actorTokenScopes = TokenExchangeGrantTypeConfigType.AddMember("actorTokenScopes", _ScopesListType)
 
+	OnBehalfOfClientAuthenticationMethod_NO_CLIENT = OnBehalfOfClientAuthenticationMethod.AddMember("NO_CLIENT", smithyprelude.Unit)
+
+	OnBehalfOfAuthenticationConfig_clientAuthenticationMethod = OnBehalfOfAuthenticationConfig.AddMember("clientAuthenticationMethod", OnBehalfOfClientAuthenticationMethod)
+
 	OnBehalfOfTokenExchangeConfigType_grantType = OnBehalfOfTokenExchangeConfigType.AddMember("grantType", OnBehalfOfTokenExchangeGrantTypeType)
 
 	OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig = OnBehalfOfTokenExchangeConfigType.AddMember("tokenExchangeGrantTypeConfig", TokenExchangeGrantTypeConfigType)
+
+	OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig = OnBehalfOfTokenExchangeConfigType.AddMember("onBehalfOfAuthenticationConfig", OnBehalfOfAuthenticationConfig)
 
 	KmsKeySourceType_kmsKeyArn = KmsKeySourceType.AddMember("kmsKeyArn", _KmsKeyArn)
 
@@ -17661,6 +17761,10 @@ func init() {
 
 	ProtocolConfiguration_serverProtocol = ProtocolConfiguration.AddMember("serverProtocol", ServerProtocol)
 
+	ProtocolConfiguration_port = ProtocolConfiguration.AddMember("port", _ServerPort)
+
+	ProtocolConfiguration_path = ProtocolConfiguration.AddMember("path", _ServerPath)
+
 	RecordingConfig_enabled = RecordingConfig.AddMember("enabled", smithyprelude.Boolean)
 
 	RecordingConfig_s3Location = RecordingConfig.AddMember("s3Location", S3Location)
@@ -18036,6 +18140,8 @@ func init() {
 	CreateAgentRuntimeRequest_tags = CreateAgentRuntimeRequest.AddMember("tags", _TagsMap)
 
 	CreateAgentRuntimeRequest_platformVersion = CreateAgentRuntimeRequest.AddMember("platformVersion", _PlatformVersion)
+
+	CreateAgentRuntimeRequest_allowedPorts = CreateAgentRuntimeRequest.AddMember("allowedPorts", _AllowedPorts)
 
 	CreateAgentRuntimeResponse_agentRuntimeArn = CreateAgentRuntimeResponse.AddMember("agentRuntimeArn", _AgentRuntimeArn)
 
@@ -19132,6 +19238,8 @@ func init() {
 	GetAgentRuntimeResponse_capacityProviderConfiguration = GetAgentRuntimeResponse.AddMember("capacityProviderConfiguration", CapacityProviderConfiguration)
 
 	GetAgentRuntimeResponse_platformVersion = GetAgentRuntimeResponse.AddMember("platformVersion", _PlatformVersion)
+
+	GetAgentRuntimeResponse_allowedPorts = GetAgentRuntimeResponse.AddMember("allowedPorts", _AllowedPorts)
 
 	GetApiKeyCredentialProviderRequest_name = GetApiKeyCredentialProviderRequest.AddMember("name", _CredentialProviderName)
 
@@ -20267,6 +20375,14 @@ func init() {
 
 	PutResourcePolicyResponse_policy = PutResourcePolicyResponse.AddMember("policy", _ResourcePolicyBody)
 
+	ResetTokenVaultKeyMaterialRequest_tokenVaultId = ResetTokenVaultKeyMaterialRequest.AddMember("tokenVaultId", _TokenVaultIdType)
+
+	ResetTokenVaultKeyMaterialResponse_tokenVaultId = ResetTokenVaultKeyMaterialResponse.AddMember("tokenVaultId", _TokenVaultIdType)
+
+	ResetTokenVaultKeyMaterialResponse_kmsConfiguration = ResetTokenVaultKeyMaterialResponse.AddMember("kmsConfiguration", KmsConfiguration)
+
+	ResetTokenVaultKeyMaterialResponse_lastModifiedDate = ResetTokenVaultKeyMaterialResponse.AddMember("lastModifiedDate", smithyprelude.Timestamp)
+
 	RotatePaymentConnectorCredentialsRequest_paymentManagerId = RotatePaymentConnectorCredentialsRequest.AddMember("paymentManagerId", _PaymentManagerId, &smithytraits.HTTPLabel{})
 
 	RotatePaymentConnectorCredentialsRequest_paymentConnectorId = RotatePaymentConnectorCredentialsRequest.AddMember("paymentConnectorId", _PaymentConnectorId, &smithytraits.HTTPLabel{})
@@ -20402,6 +20518,8 @@ func init() {
 	UpdateAgentRuntimeRequest_capacityProviderConfiguration = UpdateAgentRuntimeRequest.AddMember("capacityProviderConfiguration", CapacityProviderConfiguration)
 
 	UpdateAgentRuntimeRequest_platformVersion = UpdateAgentRuntimeRequest.AddMember("platformVersion", _PlatformVersion)
+
+	UpdateAgentRuntimeRequest_allowedPorts = UpdateAgentRuntimeRequest.AddMember("allowedPorts", _AllowedPorts)
 
 	UpdateAgentRuntimeRequest_clientToken = UpdateAgentRuntimeRequest.AddMember("clientToken", _ClientToken)
 

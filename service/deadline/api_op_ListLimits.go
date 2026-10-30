@@ -28,7 +28,6 @@ func (c *Client) ListLimits(ctx context.Context, params *ListLimitsInput, optFns
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListLimitsInput struct {
 
 	// The unique identifier of the farm that contains the limits.
@@ -63,7 +62,6 @@ func (v *ListLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListLimitsOutput struct {
 
 	// A list of limits that the farm contains.

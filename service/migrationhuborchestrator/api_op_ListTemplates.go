@@ -5,7 +5,9 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,39 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMigrationWorkflowTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListMigrationWorkflowTemplatesRequest_maxResults, v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListMigrationWorkflowTemplatesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMigrationWorkflowTemplatesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMigrationWorkflowTemplatesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMigrationWorkflowTemplatesRequest_maxResults:
+			return d.ReadInt32(schemas.ListMigrationWorkflowTemplatesRequest_maxResults, &v.MaxResults)
+		case schemas.ListMigrationWorkflowTemplatesRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListMigrationWorkflowTemplatesRequest_name, v.Name)
+		case schemas.ListMigrationWorkflowTemplatesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMigrationWorkflowTemplatesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListTemplatesOutput struct {
 
 	// The summary of the template.
@@ -56,13 +91,35 @@ type ListTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMigrationWorkflowTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMigrationWorkflowTemplatesResponse_nextToken, *v.NextToken)
+	}
+	serializeTemplateSummaryList(s, schemas.ListMigrationWorkflowTemplatesResponse_templateSummary, v.TemplateSummary)
+}
+func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMigrationWorkflowTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMigrationWorkflowTemplatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMigrationWorkflowTemplatesResponse_nextToken, v.NextToken)
+		case schemas.ListMigrationWorkflowTemplatesResponse_templateSummary:
+			return deserializeTemplateSummaryList(d, schemas.ListMigrationWorkflowTemplatesResponse_templateSummary, &v.TemplateSummary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListMigrationWorkflowTemplatesRequest, schemas.ListMigrationWorkflowTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListMigrationWorkflowTemplatesRequest, schemas.ListMigrationWorkflowTemplatesResponse), output: &ListTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

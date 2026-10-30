@@ -4,7 +4,9 @@ package polly
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,27 @@ type DescribeVoicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVoicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVoicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVoicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != "" {
+		s.WriteString(schemas.DescribeVoicesInput_Engine, string(v.Engine))
+	}
+	if v.IncludeAdditionalLanguageCodes != false {
+		s.WriteBool(schemas.DescribeVoicesInput_IncludeAdditionalLanguageCodes, v.IncludeAdditionalLanguageCodes)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DescribeVoicesInput_LanguageCode, string(v.LanguageCode))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeVoicesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeVoicesOutput struct {
 
 	// The pagination token to use in the next request to continue the listing of
@@ -80,13 +103,35 @@ type DescribeVoicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVoicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVoicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVoicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeVoicesOutput_NextToken, *v.NextToken)
+	}
+	serializeVoiceList(s, schemas.DescribeVoicesOutput_Voices, v.Voices)
+}
+func (v *DescribeVoicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVoicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVoicesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeVoicesOutput_NextToken, v.NextToken)
+		case schemas.DescribeVoicesOutput_Voices:
+			return deserializeVoiceList(d, schemas.DescribeVoicesOutput_Voices, &v.Voices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVoicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVoices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVoices, schemas.DescribeVoicesInput, schemas.DescribeVoicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVoices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVoices, schemas.DescribeVoicesInput, schemas.DescribeVoicesOutput), output: &DescribeVoicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

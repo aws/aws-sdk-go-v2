@@ -235,6 +235,31 @@ func TestUpdateResponseSnapshot_AddDirectQueryDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_AddReplicationPeer(t *testing.T) {
+	want := &AddReplicationPeerOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	proto := restjson1.New(schemas.AmazonOpenSearchService)
+	opSchema := smithy.NewOperationSchema(schemas.AddReplicationPeer, schemas.AddReplicationPeerResponse, schemas.AddReplicationPeerResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AddReplicationPeer.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AddTags(t *testing.T) {
 	want := &AddTagsOutput{}
 	proto := restjson1.New(schemas.AmazonOpenSearchService)
@@ -507,6 +532,87 @@ func TestUpdateResponseSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("CancelServiceSoftwareUpdate.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CompareDomainConfiguration(t *testing.T) {
+	want := &CompareDomainConfigurationOutput{
+		SourceDomainArn: ptr.String("__SourceDomainArn__"),
+		TargetDomainArn: ptr.String("__TargetDomainArn__"),
+		Categories: map[string]types.CategoryDiffResult{
+			"key0": {
+				Status:     types.DiffStatus("compared"),
+				InSync:     1,
+				SourceOnly: 1,
+				TargetOnly: 1,
+				Diverged:   1,
+				Items: &types.DiffItems{
+					SourceOnly: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetOnly: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Diverged: []types.DivergentItem{
+						{
+							Name: ptr.String("__Name__"),
+							Fields: []types.DivergentField{
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Fields: []types.DivergentField{
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+							},
+						},
+					},
+				},
+				Truncated: ptr.Bool(true),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonOpenSearchService)
+	opSchema := smithy.NewOperationSchema(schemas.CompareDomainConfiguration, schemas.CompareDomainConfigurationResponse, schemas.CompareDomainConfigurationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CompareDomainConfiguration.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2511,6 +2617,45 @@ func TestUpdateResponseSnapshot_DescribeDomainNodes(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_DescribeDomainReplication(t *testing.T) {
+	want := &DescribeDomainReplicationOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Role:      types.ReplicationRole("PRIMARY"),
+		Peers: []types.ReplicationPeer{
+			{
+				PeerDomainArn: ptr.String("__PeerDomainArn__"),
+				PeerRole:      types.ReplicationRole("PRIMARY"),
+				Status:        types.ReplicationStatus("PENDING_SETUP"),
+				StatusMessage: ptr.String("__StatusMessage__"),
+			},
+			{
+				PeerDomainArn: ptr.String("__PeerDomainArn__"),
+				PeerRole:      types.ReplicationRole("PRIMARY"),
+				Status:        types.ReplicationStatus("PENDING_SETUP"),
+				StatusMessage: ptr.String("__StatusMessage__"),
+			},
+		},
+	}
+	proto := restjson1.New(schemas.AmazonOpenSearchService)
+	opSchema := smithy.NewOperationSchema(schemas.DescribeDomainReplication, schemas.DescribeDomainReplicationResponse, schemas.DescribeDomainReplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DescribeDomainReplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DescribeDomains(t *testing.T) {
 	want := &DescribeDomainsOutput{
 		DomainStatusList: []types.DomainStatus{
@@ -4003,6 +4148,31 @@ func TestUpdateResponseSnapshot_DissociatePackages(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_FailoverReplication(t *testing.T) {
+	want := &FailoverReplicationOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	proto := restjson1.New(schemas.AmazonOpenSearchService)
+	opSchema := smithy.NewOperationSchema(schemas.FailoverReplication, schemas.FailoverReplicationResponse, schemas.FailoverReplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("FailoverReplication.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_GetApplication(t *testing.T) {
 	want := &GetApplicationOutput{
 		Id:       ptr.String("__Id__"),
@@ -5452,6 +5622,31 @@ func TestUpdateResponseSnapshot_RejectInboundConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_RemoveReplicationPeer(t *testing.T) {
+	want := &RemoveReplicationPeerOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	proto := restjson1.New(schemas.AmazonOpenSearchService)
+	opSchema := smithy.NewOperationSchema(schemas.RemoveReplicationPeer, schemas.RemoveReplicationPeerResponse, schemas.RemoveReplicationPeerResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("RemoveReplicationPeer.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RemoveTags(t *testing.T) {
 	want := &RemoveTagsOutput{}
 	proto := restjson1.New(schemas.AmazonOpenSearchService)
@@ -5603,6 +5798,31 @@ func TestUpdateResponseSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("StartServiceSoftwareUpdate.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_SwitchoverReplication(t *testing.T) {
+	want := &SwitchoverReplicationOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	proto := restjson1.New(schemas.AmazonOpenSearchService)
+	opSchema := smithy.NewOperationSchema(schemas.SwitchoverReplication, schemas.SwitchoverReplicationResponse, schemas.SwitchoverReplicationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("SwitchoverReplication.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6647,7 +6867,7 @@ func TestUpdateResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.
 		Message: ptr.String("__Message__"),
 	}
 	proto := restjson1.New(schemas.AmazonOpenSearchService)
-	opSchema := smithy.NewOperationSchema(schemas.CreateDomain, schemas.ResourceAlreadyExistsException, schemas.ResourceAlreadyExistsException)
+	opSchema := smithy.NewOperationSchema(schemas.AddReplicationPeer, schemas.ResourceAlreadyExistsException, schemas.ResourceAlreadyExistsException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,18 @@ type GetTableBucketEncryptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketEncryptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketEncryptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketEncryptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketEncryptionRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableBucketEncryptionOutput struct {
 
 	// The encryption configuration for the table bucket.
@@ -50,13 +64,34 @@ type GetTableBucketEncryptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketEncryptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketEncryptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketEncryptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetTableBucketEncryptionResponse_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTableBucketEncryptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableBucketEncryptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableBucketEncryptionResponse_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableBucketEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableBucketEncryption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketEncryption, schemas.GetTableBucketEncryptionRequest, schemas.GetTableBucketEncryptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableBucketEncryption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketEncryption, schemas.GetTableBucketEncryptionRequest, schemas.GetTableBucketEncryptionResponse), output: &GetTableBucketEncryptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,24 @@ type CreateShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrincipalSubscriber != nil {
+		s.WriteString(schemas.CreateShareRequest_principalSubscriber, *v.PrincipalSubscriber)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateShareRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.ShareName != nil {
+		s.WriteString(schemas.CreateShareRequest_shareName, *v.ShareName)
+	}
+}
+
 type CreateShareOutput struct {
 
 	// The ID that HealthOmics generates for the share.
@@ -72,13 +92,48 @@ type CreateShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareId != nil {
+		s.WriteString(schemas.CreateShareResponse_shareId, *v.ShareId)
+	}
+	if v.ShareName != nil {
+		s.WriteString(schemas.CreateShareResponse_shareName, *v.ShareName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateShareResponse_status, string(v.Status))
+	}
+}
+func (v *CreateShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateShareResponse_shareId:
+			v.ShareId = new(string)
+			return d.ReadString(schemas.CreateShareResponse_shareId, v.ShareId)
+		case schemas.CreateShareResponse_shareName:
+			v.ShareName = new(string)
+			return d.ReadString(schemas.CreateShareResponse_shareName, v.ShareName)
+		case schemas.CreateShareResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateShareResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ShareStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateShare, schemas.CreateShareRequest, schemas.CreateShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateShare, schemas.CreateShareRequest, schemas.CreateShareResponse), output: &CreateShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

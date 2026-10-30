@@ -4,6 +4,8 @@ package repostspace
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,25 @@ type SendInvitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendInvitesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendInvitesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendInvitesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessorIdList(s, schemas.SendInvitesInput_accessorIds, v.AccessorIds)
+	if v.Body != nil {
+		s.WriteString(schemas.SendInvitesInput_body, *v.Body)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.SendInvitesInput_spaceId, *v.SpaceId)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.SendInvitesInput_title, *v.Title)
+	}
+}
+
 type SendInvitesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -55,13 +76,26 @@ type SendInvitesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendInvitesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendInvitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendInvitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendInvitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendInvites{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendInvites, schemas.SendInvitesInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendInvites{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendInvites, schemas.SendInvitesInput, nil), output: &SendInvitesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

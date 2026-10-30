@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,18 @@ type GetTableBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableBucketOutput struct {
 
 	// The Amazon Resource Name (ARN) of the table bucket.
@@ -75,13 +89,66 @@ type GetTableBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetTableBucketResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTableBucketResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTableBucketResponse_name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.GetTableBucketResponse_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.TableBucketId != nil {
+		s.WriteString(schemas.GetTableBucketResponse_tableBucketId, *v.TableBucketId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetTableBucketResponse_type, string(v.Type))
+	}
+}
+func (v *GetTableBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableBucketResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableBucketResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetTableBucketResponse_arn, v.Arn)
+		case schemas.GetTableBucketResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTableBucketResponse_createdAt, v.CreatedAt)
+		case schemas.GetTableBucketResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTableBucketResponse_name, v.Name)
+		case schemas.GetTableBucketResponse_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.GetTableBucketResponse_ownerAccountId, v.OwnerAccountId)
+		case schemas.GetTableBucketResponse_tableBucketId:
+			v.TableBucketId = new(string)
+			return d.ReadString(schemas.GetTableBucketResponse_tableBucketId, v.TableBucketId)
+		case schemas.GetTableBucketResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetTableBucketResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TableBucketType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucket, schemas.GetTableBucketRequest, schemas.GetTableBucketResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucket, schemas.GetTableBucketRequest, schemas.GetTableBucketResponse), output: &GetTableBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

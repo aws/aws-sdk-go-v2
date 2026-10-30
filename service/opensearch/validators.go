@@ -70,6 +70,26 @@ func (m *validateOpAddDirectQueryDataSource) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddReplicationPeer struct {
+}
+
+func (*validateOpAddReplicationPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddReplicationPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddReplicationPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddReplicationPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddTags struct {
 }
 
@@ -205,6 +225,26 @@ func (m *validateOpCancelServiceSoftwareUpdate) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelServiceSoftwareUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCompareDomainConfiguration struct {
+}
+
+func (*validateOpCompareDomainConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCompareDomainConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CompareDomainConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCompareDomainConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +710,26 @@ func (m *validateOpDescribeDomainNodes) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDomainReplication struct {
+}
+
+func (*validateOpDescribeDomainReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDomainReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDomainReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDomainReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomains struct {
 }
 
@@ -825,6 +885,26 @@ func (m *validateOpDissociatePackages) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDissociatePackagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpFailoverReplication struct {
+}
+
+func (*validateOpFailoverReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpFailoverReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*FailoverReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpFailoverReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1370,6 +1450,26 @@ func (m *validateOpRejectInboundConnection) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveReplicationPeer struct {
+}
+
+func (*validateOpRemoveReplicationPeer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveReplicationPeer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveReplicationPeerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveReplicationPeerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveTags struct {
 }
 
@@ -1485,6 +1585,26 @@ func (m *validateOpStartServiceSoftwareUpdate) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartServiceSoftwareUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSwitchoverReplication struct {
+}
+
+func (*validateOpSwitchoverReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSwitchoverReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SwitchoverReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSwitchoverReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1702,6 +1822,10 @@ func addOpAddDirectQueryDataSourceValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpAddDirectQueryDataSource{}, middleware.After)
 }
 
+func addOpAddReplicationPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddReplicationPeer{}, middleware.After)
+}
+
 func addOpAddTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTags{}, middleware.After)
 }
@@ -1728,6 +1852,10 @@ func addOpCancelDomainConfigChangeValidationMiddleware(stack *middleware.Stack) 
 
 func addOpCancelServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelServiceSoftwareUpdate{}, middleware.After)
+}
+
+func addOpCompareDomainConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCompareDomainConfiguration{}, middleware.After)
 }
 
 func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1822,6 +1950,10 @@ func addOpDescribeDomainNodesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeDomainNodes{}, middleware.After)
 }
 
+func addOpDescribeDomainReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDomainReplication{}, middleware.After)
+}
+
 func addOpDescribeDomainsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomains{}, middleware.After)
 }
@@ -1852,6 +1984,10 @@ func addOpDissociatePackageValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDissociatePackagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDissociatePackages{}, middleware.After)
+}
+
+func addOpFailoverReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpFailoverReplication{}, middleware.After)
 }
 
 func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -1962,6 +2098,10 @@ func addOpRejectInboundConnectionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpRejectInboundConnection{}, middleware.After)
 }
 
+func addOpRemoveReplicationPeerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveReplicationPeer{}, middleware.After)
+}
+
 func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveTags{}, middleware.After)
 }
@@ -1984,6 +2124,10 @@ func addOpStartMigrationValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartServiceSoftwareUpdate{}, middleware.After)
+}
+
+func addOpSwitchoverReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSwitchoverReplication{}, middleware.After)
 }
 
 func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -2673,6 +2817,24 @@ func validateOpAddDirectQueryDataSourceInput(v *AddDirectQueryDataSourceInput) e
 	}
 }
 
+func validateOpAddReplicationPeerInput(v *AddReplicationPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddReplicationPeerInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.PeerDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerDomainArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddTagsInput(v *AddTagsInput) error {
 	if v == nil {
 		return nil
@@ -2800,6 +2962,27 @@ func validateOpCancelServiceSoftwareUpdateInput(v *CancelServiceSoftwareUpdateIn
 	invalidParams := smithy.InvalidParamsError{Context: "CancelServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCompareDomainConfigurationInput(v *CompareDomainConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompareDomainConfigurationInput"}
+	if v.SourceDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDomainArn"))
+	}
+	if v.TargetDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDomainArn"))
+	}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3244,6 +3427,21 @@ func validateOpDescribeDomainNodesInput(v *DescribeDomainNodesInput) error {
 	}
 }
 
+func validateOpDescribeDomainReplicationInput(v *DescribeDomainReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDomainReplicationInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDomainsInput(v *DescribeDomainsInput) error {
 	if v == nil {
 		return nil
@@ -3375,6 +3573,27 @@ func validateOpDissociatePackagesInput(v *DissociatePackagesInput) error {
 	}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpFailoverReplicationInput(v *FailoverReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverReplicationInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.PeerDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerDomainArn"))
+	}
+	if v.AllowDataLoss == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowDataLoss"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3831,6 +4050,24 @@ func validateOpRejectInboundConnectionInput(v *RejectInboundConnectionInput) err
 	}
 }
 
+func validateOpRemoveReplicationPeerInput(v *RemoveReplicationPeerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveReplicationPeerInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.PeerDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerDomainArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRemoveTagsInput(v *RemoveTagsInput) error {
 	if v == nil {
 		return nil
@@ -3926,6 +4163,24 @@ func validateOpStartServiceSoftwareUpdateInput(v *StartServiceSoftwareUpdateInpu
 	invalidParams := smithy.InvalidParamsError{Context: "StartServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSwitchoverReplicationInput(v *SwitchoverReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SwitchoverReplicationInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.PeerDomainArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PeerDomainArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

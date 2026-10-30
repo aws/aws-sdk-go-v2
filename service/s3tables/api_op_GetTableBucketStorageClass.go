@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,18 @@ type GetTableBucketStorageClassInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketStorageClassInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketStorageClassRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketStorageClassInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.GetTableBucketStorageClassRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type GetTableBucketStorageClassOutput struct {
 
 	// The storage class configuration for the table bucket.
@@ -52,13 +66,34 @@ type GetTableBucketStorageClassOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableBucketStorageClassOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableBucketStorageClassResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableBucketStorageClassOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageClassConfiguration != nil {
+		s.WriteStruct(schemas.GetTableBucketStorageClassResponse_storageClassConfiguration)
+		v.StorageClassConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTableBucketStorageClassOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableBucketStorageClassResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableBucketStorageClassResponse_storageClassConfiguration:
+			v.StorageClassConfiguration = &types.StorageClassConfiguration{}
+			return v.StorageClassConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableBucketStorageClassMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableBucketStorageClass{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketStorageClass, schemas.GetTableBucketStorageClassRequest, schemas.GetTableBucketStorageClassResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableBucketStorageClass{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableBucketStorageClass, schemas.GetTableBucketStorageClassRequest, schemas.GetTableBucketStorageClassResponse), output: &GetTableBucketStorageClassOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

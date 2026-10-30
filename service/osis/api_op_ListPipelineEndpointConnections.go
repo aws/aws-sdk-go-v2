@@ -5,7 +5,9 @@ package osis
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/osis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type ListPipelineEndpointConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineEndpointConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineEndpointConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineEndpointConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPipelineEndpointConnectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineEndpointConnectionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPipelineEndpointConnectionsOutput struct {
 
 	// When nextToken is returned, there are more results available. The value of
@@ -55,13 +72,35 @@ type ListPipelineEndpointConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineEndpointConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineEndpointConnectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineEndpointConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineEndpointConnectionsResponse_NextToken, *v.NextToken)
+	}
+	serializePipelineEndpointConnectionsSummaryList(s, schemas.ListPipelineEndpointConnectionsResponse_PipelineEndpointConnections, v.PipelineEndpointConnections)
+}
+func (v *ListPipelineEndpointConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelineEndpointConnectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelineEndpointConnectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipelineEndpointConnectionsResponse_NextToken, v.NextToken)
+		case schemas.ListPipelineEndpointConnectionsResponse_PipelineEndpointConnections:
+			return deserializePipelineEndpointConnectionsSummaryList(d, schemas.ListPipelineEndpointConnectionsResponse_PipelineEndpointConnections, &v.PipelineEndpointConnections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelineEndpointConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPipelineEndpointConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineEndpointConnections, schemas.ListPipelineEndpointConnectionsRequest, schemas.ListPipelineEndpointConnectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPipelineEndpointConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineEndpointConnections, schemas.ListPipelineEndpointConnectionsRequest, schemas.ListPipelineEndpointConnectionsResponse), output: &ListPipelineEndpointConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

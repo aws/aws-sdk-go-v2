@@ -2410,7 +2410,7 @@
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains settings for vulnerability scans that Amazon Inspector runs against the test instance\n\t\t\tduring image creation.</p>"
+                        "smithy.api#documentation": "<p>The settings that determine whether and how Amazon Inspector scans the images that\n\t\t\tthis pipeline creates.</p>"
                     }
                 },
                 "workflows": {
@@ -2780,7 +2780,7 @@
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for vulnerability scans that Amazon Inspector runs during image\n\t\t\tcreation. For AMI output, Amazon Inspector scans the test instance. For container\n\t\t\toutput, Amazon Inspector scans the container image that Image Builder pushes to the Amazon ECR\n\t\t\trepository specified in <code>ecrConfiguration</code>.</p>"
+                        "smithy.api#documentation": "<p>The settings that determine whether and how Amazon Inspector scans the image\n\t\t\tfor vulnerabilities.</p>"
                     }
                 },
                 "workflows": {
@@ -7154,7 +7154,7 @@
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Settings for the vulnerability scans that Amazon Inspector runs for this\n\t\t\timage. For AMI output, Amazon Inspector scans the test instance during image creation.\n\t\t\tFor container output, Amazon Inspector scans the container image in its Amazon ECR\n\t\t\trepository.</p>"
+                        "smithy.api#documentation": "<p>The settings that determine whether and how Amazon Inspector scans this\n\t\t\timage.</p>"
                     }
                 },
                 "deprecationTime": {
@@ -7472,7 +7472,7 @@
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains settings for vulnerability scans that Amazon Inspector runs against the test instance\n\t\t\tduring image creation.</p>"
+                        "smithy.api#documentation": "<p>The settings that determine whether and how Amazon Inspector scans the images that\n\t\t\tthe pipeline creates.</p>"
                     }
                 },
                 "imageTags": {
@@ -7967,7 +7967,7 @@
                 "imageScanningEnabled": {
                     "target": "com.amazonaws.imagebuilder#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether Amazon Inspector scans for vulnerabilities when you create a new\n\t\t\timage, and whether Image Builder saves the findings. Amazon Inspector must be enabled in the\n\t\t\taccount. Image tests must also be enabled. For AMI output, Amazon Inspector scans the\n\t\t\ttest instance. For container output, Amazon Inspector scans the container image that\n\t\t\tImage Builder pushes to the Amazon ECR repository from your <code>ecrConfiguration</code>\n\t\t\tsettings.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Amazon Inspector scans for vulnerabilities when you create a new\n\t\t\timage. You must also enable image tests. For AMI output,\n\t\t\t<code>imageScanningTypes</code> sets whether Amazon Inspector scans the test instance or\n\t\t\tthe output AMI. For container output, Amazon Inspector scans the container image that\n\t\t\tImage Builder pushes to the Amazon ECR repository from your <code>ecrConfiguration</code>\n\t\t\tsettings.</p>\n         <p>To use container image scans, you must activate Amazon Inspector for Amazon ECR\n\t\t\tscanning in your account. The Image Builder <code>ListImageScanFindings</code>\n\t\t\toperation returns the findings of these scans.</p>"
                     }
                 },
                 "ecrConfiguration": {
@@ -7975,10 +7975,51 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains Amazon ECR settings for vulnerability scans.</p>"
                     }
+                },
+                "imageScanningTypes": {
+                    "target": "com.amazonaws.imagebuilder#ImageScanningTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of vulnerability scan that Image Builder runs for AMI output when\n\t\t\t<code>imageScanningEnabled</code> is <code>true</code>. Specify a single\n\t\t\tvalue. If you omit <code>imageScanningTypes</code>, Image Builder uses\n\t\t\t<code>TEST_INSTANCE_CVE</code>. The scan types work as follows:</p>\n         <ul>\n            <li>\n               <p>With <code>TEST_INSTANCE_CVE</code>, Amazon Inspector scans the test instance\n\t\t\t\t\tduring image tests. To use this scan, you must activate Amazon Inspector for Amazon EC2\n\t\t\t\t\tscanning in your account. The Image Builder <code>ListImageScanFindings</code>\n\t\t\t\t\toperation returns the findings.</p>\n            </li>\n            <li>\n               <p>With <code>ON_DEMAND_AMI_CVE</code>, Amazon Inspector starts an on-demand scan of\n\t\t\t\t\tthe output AMI during image tests. To use this scan, you must build from\n\t\t\t\t\tan image recipe, but you do not need to activate Amazon Inspector in your\n\t\t\t\t\taccount. The Amazon EC2 <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageFindings.html\">GetImageFindings</a>\n\t\t\t\t\toperation returns the findings.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "scanResultCondition": {
+                    "target": "com.amazonaws.imagebuilder#ScanResultCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition that the output AMI's scan results must meet for the image\n\t\t\tto pass. You can set <code>scanResultCondition</code> only when\n\t\t\t<code>imageScanningTypes</code> is <code>ON_DEMAND_AMI_CVE</code>. If you\n\t\t\tomit it, Image Builder starts the scan but does not wait for it or use its results\n\t\t\tto pass or fail the image.</p>\n         <p>When you set <code>scanResultCondition</code>, the test phase waits for\n\t\t\tthe scan to finish. Then Image Builder checks the findings against the condition.\n\t\t\tBy default, Image Builder counts only findings that have a fix available. To count\n\t\t\tevery finding, set <code>fixAvailable</code> to <code>false</code>. If a counted\n\t\t\tfinding exceeds <code>maximumSeverityLabel</code>, Image Builder fails the image in\n\t\t\tthe test phase and does not distribute the AMI.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains settings for Image Builder image resource and container image scans.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#ImageScanningType": {
+            "type": "enum",
+            "members": {
+                "TEST_INSTANCE_CVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST_INSTANCE_CVE"
+                    }
+                },
+                "ON_DEMAND_AMI_CVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ON_DEMAND_AMI_CVE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.imagebuilder#ImageScanningTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.imagebuilder#ImageScanningType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.imagebuilder#ImageSource": {
@@ -13378,6 +13419,35 @@
                 }
             }
         },
+        "com.amazonaws.imagebuilder#MaximumSeverityLabel": {
+            "type": "enum",
+            "members": {
+                "INFORMATIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFORMATIONAL"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#NonEmptyMaxLengthString": {
             "type": "string",
             "traits": {
@@ -14680,6 +14750,27 @@
                 "smithy.api#documentation": "<p>Amazon S3 logging configuration.</p>"
             }
         },
+        "com.amazonaws.imagebuilder#ScanResultCondition": {
+            "type": "structure",
+            "members": {
+                "maximumSeverityLabel": {
+                    "target": "com.amazonaws.imagebuilder#MaximumSeverityLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum severity allowed for findings on the output AMI.\n\t\t\tA finding above this severity fails the image, unless\n\t\t\t<code>fixAvailable</code> excludes it. Valid values are\n\t\t\t<code>INFORMATIONAL</code>, <code>LOW</code>, <code>MEDIUM</code>,\n\t\t\tand <code>HIGH</code>. A <code>CRITICAL</code> finding that counts\n\t\t\talways fails the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fixAvailable": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether only findings that have a fix available count toward\n\t\t\t<code>maximumSeverityLabel</code>. When <code>false</code>, Image Builder counts\n\t\t\tevery finding. The default is <code>true</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition that sets which findings from an on-demand AMI scan fail the\n\t\t\timage. Image Builder checks the output AMI's findings against this condition during\n\t\t\tthe test phase.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#Schedule": {
             "type": "structure",
             "members": {
@@ -15820,7 +15911,7 @@
                 "imageScanningConfiguration": {
                     "target": "com.amazonaws.imagebuilder#ImageScanningConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains settings for vulnerability scans that Amazon Inspector runs against the test instance\n\t\t\tduring image creation.</p>"
+                        "smithy.api#documentation": "<p>The updated settings that determine whether and how Amazon Inspector scans the\n\t\t\timages that this pipeline creates.</p>"
                     }
                 },
                 "workflows": {

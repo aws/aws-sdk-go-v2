@@ -909,6 +909,86 @@ func (v *AutomaticEncryptionKeyConfiguration) Deserialize(d smithy.ShapeDeserial
 	})
 }
 
+// The configuration for automatic endpoint encryption. In this mode, MediaConnect
+// determines the encryption key when the endpoint connects. This type does not
+// require any additional settings.
+type AutomaticEndpointEncryptionConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+func (v *AutomaticEndpointEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomaticEndpointEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomaticEndpointEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AutomaticEndpointEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomaticEndpointEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// An error for a destination endpoint that MediaConnect couldn't retrieve in a
+// BatchGetDestinationEndpoint request.
+type BatchGetDestinationEndpointError struct {
+
+	// The Amazon Resource Name (ARN) of the destination endpoint that MediaConnect
+	// couldn't retrieve.
+	//
+	// This member is required.
+	Arn *string
+
+	// The error code.
+	//
+	// This member is required.
+	Code *string
+
+	// A description of the error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchGetDestinationEndpointError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDestinationEndpointError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDestinationEndpointError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.BatchGetDestinationEndpointError_Arn, *v.Arn)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.BatchGetDestinationEndpointError_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchGetDestinationEndpointError_Message, *v.Message)
+	}
+}
+func (v *BatchGetDestinationEndpointError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDestinationEndpointError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDestinationEndpointError_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BatchGetDestinationEndpointError_Arn, v.Arn)
+		case schemas.BatchGetDestinationEndpointError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchGetDestinationEndpointError_Code, v.Code)
+		case schemas.BatchGetDestinationEndpointError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchGetDestinationEndpointError_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // An error that occurred when retrieving multiple router inputs in the
 // BatchGetRouterInput operation, including the ARN, error code, and error message.
 type BatchGetRouterInputError struct {
@@ -1076,6 +1156,63 @@ func (v *BatchGetRouterOutputError) Deserialize(d smithy.ShapeDeserializer) erro
 		case schemas.BatchGetRouterOutputError_Message:
 			v.Message = new(string)
 			return d.ReadString(schemas.BatchGetRouterOutputError_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// An error for a source endpoint that MediaConnect couldn't retrieve in a
+// BatchGetSourceEndpoint request.
+type BatchGetSourceEndpointError struct {
+
+	// The Amazon Resource Name (ARN) of the source endpoint that MediaConnect
+	// couldn't retrieve.
+	//
+	// This member is required.
+	Arn *string
+
+	// The error code.
+	//
+	// This member is required.
+	Code *string
+
+	// A description of the error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchGetSourceEndpointError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSourceEndpointError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSourceEndpointError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.BatchGetSourceEndpointError_Arn, *v.Arn)
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.BatchGetSourceEndpointError_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchGetSourceEndpointError_Message, *v.Message)
+	}
+}
+func (v *BatchGetSourceEndpointError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSourceEndpointError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSourceEndpointError_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BatchGetSourceEndpointError_Arn, v.Arn)
+		case schemas.BatchGetSourceEndpointError_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BatchGetSourceEndpointError_Code, v.Code)
+		case schemas.BatchGetSourceEndpointError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchGetSourceEndpointError_Message, v.Message)
 		}
 		return nil
 	})
@@ -1767,6 +1904,40 @@ func (v *ColorInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The cross-account sharing details for an endpoint that another account shares
+// with this account.
+type ConsumedResourceShareDetails struct {
+
+	// The ID of the Amazon Web Services account that owns the shared endpoint.
+	//
+	// This member is required.
+	OwnerAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ConsumedResourceShareDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConsumedResourceShareDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConsumedResourceShareDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.ConsumedResourceShareDetails_OwnerAccountId, *v.OwnerAccountId)
+	}
+}
+func (v *ConsumedResourceShareDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConsumedResourceShareDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConsumedResourceShareDetails_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.ConsumedResourceShareDetails_OwnerAccountId, v.OwnerAccountId)
+		}
+		return nil
+	})
+}
+
 // Configures the content quality analysis features for the router input.
 type ContentQualityAnalysisFeatureConfiguration struct {
 
@@ -1972,6 +2143,654 @@ func (v *DestinationConfigurationRequest) Deserialize(d smithy.ShapeDeserializer
 		case schemas.DestinationConfigurationRequest_Interface:
 			v.Interface = &InterfaceRequest{}
 			return v.Interface.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The details of a destination endpoint in MediaConnect, including its
+// configuration, state, and connection details.
+type DestinationEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the destination endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	// The details of the resource that is associated with the destination endpoint.
+	//
+	// This member is required.
+	AssociatedResourceDetails DestinationEndpointAssociatedResourceDetails
+
+	// The configuration settings for the destination endpoint.
+	//
+	// This member is required.
+	Configuration DestinationEndpointConfiguration
+
+	// The connection state of the destination endpoint. Valid values include the
+	// following:
+	//
+	//   - CONNECTED – The destination endpoint is connected to a source endpoint.
+	//
+	//   - DISCONNECTED – The destination endpoint isn't connected to a source endpoint.
+	//
+	//   - CONNECTING – The destination endpoint is connecting to a source endpoint.
+	//
+	//   - DISCONNECTING – The destination endpoint is disconnecting from a source
+	//   endpoint.
+	//
+	// This member is required.
+	ConnectionState DestinationEndpointConnectionState
+
+	// The date and time when the destination endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The description of the destination endpoint.
+	//
+	// This member is required.
+	Description *string
+
+	// The type of the destination endpoint. Valid values include the following:
+	//
+	//   - STANDARD – A destination endpoint that represents an external destination
+	//   over a standard protocol, such as RTP, RIST, or SRT.
+	//
+	//   - ROUTER_INPUT – A destination endpoint that represents a router input.
+	//
+	// This member is required.
+	DestinationType DestinationEndpointType
+
+	// The unique identifier of the destination endpoint.
+	//
+	// This member is required.
+	Id *string
+
+	// The entity that manages the lifecycle of the destination endpoint.
+	//
+	// This member is required.
+	LifecycleManagement EndpointLifecycle
+
+	// The status messages for the destination endpoint.
+	//
+	// This member is required.
+	Messages []DestinationEndpointMessage
+
+	// The name of the destination endpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Amazon Web Services Region in which the destination endpoint is
+	// located.
+	//
+	// This member is required.
+	RegionName *string
+
+	// The registration state of the destination endpoint. Valid values include the
+	// following:
+	//
+	//   - REGISTERED – The destination endpoint is registered and ready to use.
+	//
+	//   - REGISTERING – MediaConnect is registering the destination endpoint.
+	//
+	//   - DEREGISTERING – MediaConnect is deregistering the destination endpoint.
+	//
+	//   - REGISTRATION_FAILED – MediaConnect couldn't register the destination
+	//   endpoint.
+	//
+	// This member is required.
+	RegistrationState DestinationEndpointRegistrationState
+
+	// The cross-account sharing details for an endpoint. Endpoints are shared through
+	// Resource Access Manager (RAM). This is a union type, so exactly one of its
+	// members is set: owned when this account owns the endpoint and shares it with
+	// other accounts, or consumed when this account consumes an endpoint that another
+	// account shares. To change how an endpoint is shared, use RAM.
+	//
+	// This member is required.
+	ResourceShareDetails ResourceShareDetails
+
+	// Indicates whether this account owns the destination endpoint or consumes it
+	// from another account through RAM.
+	//
+	// This member is required.
+	ResourceShareOwnership ResourceShareOwnership
+
+	// The tags associated with the destination endpoint. Each tag is a key-value pair.
+	//
+	// This member is required.
+	Tags map[string]string
+
+	// The date and time when the destination endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Availability Zone in which the destination endpoint is located.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone in which the destination endpoint is located.
+	AvailabilityZoneId *string
+
+	// The Amazon Resource Name (ARN) of the source endpoint that is connected to the
+	// destination endpoint.
+	ConnectedSource *string
+
+	// The connection details for the destination endpoint.
+	ConnectionDetails DestinationEndpointConnectionDetails
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	DecryptionConfiguration EndpointEncryptionConfiguration
+
+	// The type of decryption used for the destination endpoint connection.
+	DecryptionType EndpointEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DestinationEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DestinationEndpoint_Arn, *v.Arn)
+	}
+	serializeDestinationEndpointAssociatedResourceDetails(s, schemas.DestinationEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.DestinationEndpoint_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.DestinationEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	serializeDestinationEndpointConfiguration(s, schemas.DestinationEndpoint_Configuration, v.Configuration)
+	if v.ConnectedSource != nil {
+		s.WriteString(schemas.DestinationEndpoint_ConnectedSource, *v.ConnectedSource)
+	}
+	serializeDestinationEndpointConnectionDetails(s, schemas.DestinationEndpoint_ConnectionDetails, v.ConnectionDetails)
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.DestinationEndpoint_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DestinationEndpoint_CreatedAt, *v.CreatedAt)
+	}
+	serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpoint_DecryptionConfiguration, v.DecryptionConfiguration)
+	if v.DecryptionType != "" {
+		s.WriteString(schemas.DestinationEndpoint_DecryptionType, string(v.DecryptionType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DestinationEndpoint_Description, *v.Description)
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.DestinationEndpoint_DestinationType, string(v.DestinationType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DestinationEndpoint_Id, *v.Id)
+	}
+	if v.LifecycleManagement != "" {
+		s.WriteString(schemas.DestinationEndpoint_LifecycleManagement, string(v.LifecycleManagement))
+	}
+	serializeDestinationEndpointMessageList(s, schemas.DestinationEndpoint_Messages, v.Messages)
+	if v.Name != nil {
+		s.WriteString(schemas.DestinationEndpoint_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.DestinationEndpoint_RegionName, *v.RegionName)
+	}
+	if v.RegistrationState != "" {
+		s.WriteString(schemas.DestinationEndpoint_RegistrationState, string(v.RegistrationState))
+	}
+	serializeResourceShareDetails(s, schemas.DestinationEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	if v.ResourceShareOwnership != "" {
+		s.WriteString(schemas.DestinationEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
+	}
+	serialize__mapOfString(s, schemas.DestinationEndpoint_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DestinationEndpoint_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DestinationEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationEndpoint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_Arn, v.Arn)
+		case schemas.DestinationEndpoint_AssociatedResourceDetails:
+			return deserializeDestinationEndpointAssociatedResourceDetails(d, schemas.DestinationEndpoint_AssociatedResourceDetails, &v.AssociatedResourceDetails)
+		case schemas.DestinationEndpoint_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_AvailabilityZone, v.AvailabilityZone)
+		case schemas.DestinationEndpoint_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.DestinationEndpoint_Configuration:
+			return deserializeDestinationEndpointConfiguration(d, schemas.DestinationEndpoint_Configuration, &v.Configuration)
+		case schemas.DestinationEndpoint_ConnectedSource:
+			v.ConnectedSource = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_ConnectedSource, v.ConnectedSource)
+		case schemas.DestinationEndpoint_ConnectionDetails:
+			return deserializeDestinationEndpointConnectionDetails(d, schemas.DestinationEndpoint_ConnectionDetails, &v.ConnectionDetails)
+		case schemas.DestinationEndpoint_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpoint_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = DestinationEndpointConnectionState(ev)
+			return nil
+		case schemas.DestinationEndpoint_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DestinationEndpoint_CreatedAt, v.CreatedAt)
+		case schemas.DestinationEndpoint_DecryptionConfiguration:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.DestinationEndpoint_DecryptionConfiguration, &v.DecryptionConfiguration)
+		case schemas.DestinationEndpoint_DecryptionType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpoint_DecryptionType, &ev); err != nil {
+				return err
+			}
+			v.DecryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.DestinationEndpoint_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_Description, v.Description)
+		case schemas.DestinationEndpoint_DestinationType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpoint_DestinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = DestinationEndpointType(ev)
+			return nil
+		case schemas.DestinationEndpoint_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_Id, v.Id)
+		case schemas.DestinationEndpoint_LifecycleManagement:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpoint_LifecycleManagement, &ev); err != nil {
+				return err
+			}
+			v.LifecycleManagement = EndpointLifecycle(ev)
+			return nil
+		case schemas.DestinationEndpoint_Messages:
+			return deserializeDestinationEndpointMessageList(d, schemas.DestinationEndpoint_Messages, &v.Messages)
+		case schemas.DestinationEndpoint_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_Name, v.Name)
+		case schemas.DestinationEndpoint_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.DestinationEndpoint_RegionName, v.RegionName)
+		case schemas.DestinationEndpoint_RegistrationState:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpoint_RegistrationState, &ev); err != nil {
+				return err
+			}
+			v.RegistrationState = DestinationEndpointRegistrationState(ev)
+			return nil
+		case schemas.DestinationEndpoint_ResourceShareDetails:
+			return deserializeResourceShareDetails(d, schemas.DestinationEndpoint_ResourceShareDetails, &v.ResourceShareDetails)
+		case schemas.DestinationEndpoint_ResourceShareOwnership:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpoint_ResourceShareOwnership, &ev); err != nil {
+				return err
+			}
+			v.ResourceShareOwnership = ResourceShareOwnership(ev)
+			return nil
+		case schemas.DestinationEndpoint_Tags:
+			return deserialize__mapOfString(d, schemas.DestinationEndpoint_Tags, &v.Tags)
+		case schemas.DestinationEndpoint_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DestinationEndpoint_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The details of the resource that is associated with a destination endpoint.
+// This is a union type, so exactly one of its members is set, depending on the
+// type of the destination endpoint.
+//
+// The following types satisfy this interface:
+//
+//	DestinationEndpointAssociatedResourceDetailsMemberRouterInput
+//	DestinationEndpointAssociatedResourceDetailsMemberStandard
+type DestinationEndpointAssociatedResourceDetails interface {
+	isDestinationEndpointAssociatedResourceDetails()
+}
+
+// The associated resource details for a destination endpoint that represents a
+// router input.
+type DestinationEndpointAssociatedResourceDetailsMemberRouterInput struct {
+	Value RouterInputDestinationEndpointAssociatedResourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointAssociatedResourceDetailsMemberRouterInput) isDestinationEndpointAssociatedResourceDetails() {
+}
+func (v *DestinationEndpointAssociatedResourceDetailsMemberRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointAssociatedResourceDetails_RouterInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationEndpointAssociatedResourceDetailsMemberRouterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The associated resource details for a standard destination endpoint.
+type DestinationEndpointAssociatedResourceDetailsMemberStandard struct {
+	Value StandardDestinationEndpointAssociatedResourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointAssociatedResourceDetailsMemberStandard) isDestinationEndpointAssociatedResourceDetails() {
+}
+func (v *DestinationEndpointAssociatedResourceDetailsMemberStandard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointAssociatedResourceDetails_Standard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationEndpointAssociatedResourceDetailsMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a destination endpoint. This is a union type, so
+// exactly one of its members is set, depending on the type of the destination
+// endpoint.
+//
+// The following types satisfy this interface:
+//
+//	DestinationEndpointConfigurationMemberRouterInput
+//	DestinationEndpointConfigurationMemberStandard
+type DestinationEndpointConfiguration interface {
+	isDestinationEndpointConfiguration()
+}
+
+// The configuration settings for a destination endpoint that represents a router
+// input.
+type DestinationEndpointConfigurationMemberRouterInput struct {
+	Value RouterInputDestinationEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointConfigurationMemberRouterInput) isDestinationEndpointConfiguration() {}
+func (v *DestinationEndpointConfigurationMemberRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointConfiguration_RouterInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationEndpointConfigurationMemberRouterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a standard destination endpoint, which
+// represents an external destination.
+type DestinationEndpointConfigurationMemberStandard struct {
+	Value StandardDestinationEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointConfigurationMemberStandard) isDestinationEndpointConfiguration() {}
+func (v *DestinationEndpointConfigurationMemberStandard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointConfiguration_Standard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationEndpointConfigurationMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The connection details for a destination endpoint. After the destination
+// endpoint connects to a source endpoint, MediaConnect populates these details to
+// describe the connected source. This is a union type, so exactly one of its
+// members is set, depending on the destination endpoint type.
+//
+// The following types satisfy this interface:
+//
+//	DestinationEndpointConnectionDetailsMemberRouterInput
+//	DestinationEndpointConnectionDetailsMemberStandard
+type DestinationEndpointConnectionDetails interface {
+	isDestinationEndpointConnectionDetails()
+}
+
+// The connection details for a destination endpoint that represents a router
+// input.
+type DestinationEndpointConnectionDetailsMemberRouterInput struct {
+	Value RouterInputDestinationEndpointConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointConnectionDetailsMemberRouterInput) isDestinationEndpointConnectionDetails() {
+}
+func (v *DestinationEndpointConnectionDetailsMemberRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointConnectionDetails_RouterInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationEndpointConnectionDetailsMemberRouterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The connection details for a standard destination endpoint.
+type DestinationEndpointConnectionDetailsMemberStandard struct {
+	Value StandardDestinationEndpointConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointConnectionDetailsMemberStandard) isDestinationEndpointConnectionDetails() {}
+func (v *DestinationEndpointConnectionDetailsMemberStandard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointConnectionDetails_Standard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DestinationEndpointConnectionDetailsMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A filter to apply when listing destination endpoints. This is a union type, so
+// exactly one of its members is set.
+//
+// The following types satisfy this interface:
+//
+//	DestinationEndpointFilterMemberDestinationTypes
+//	DestinationEndpointFilterMemberNameContains
+//	DestinationEndpointFilterMemberRegionNames
+type DestinationEndpointFilter interface {
+	isDestinationEndpointFilter()
+}
+
+// Filters the results to destination endpoints of the specified types.
+type DestinationEndpointFilterMemberDestinationTypes struct {
+	Value []DestinationEndpointType
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointFilterMemberDestinationTypes) isDestinationEndpointFilter() {}
+func (v *DestinationEndpointFilterMemberDestinationTypes) Serialize(s smithy.ShapeSerializer) {
+	serializeDestinationEndpointTypeList(s, schemas.DestinationEndpointFilter_DestinationTypes, v.Value)
+}
+func (v *DestinationEndpointFilterMemberDestinationTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeDestinationEndpointTypeList(d, schemas.DestinationEndpointFilter_DestinationTypes, &v.Value)
+}
+
+// Filters the results to destination endpoints whose names contain the specified
+// strings.
+type DestinationEndpointFilterMemberNameContains struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointFilterMemberNameContains) isDestinationEndpointFilter() {}
+func (v *DestinationEndpointFilterMemberNameContains) Serialize(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DestinationEndpointFilter_NameContains, v.Value)
+}
+func (v *DestinationEndpointFilterMemberNameContains) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringList(d, schemas.DestinationEndpointFilter_NameContains, &v.Value)
+}
+
+// Filters the results to destination endpoints in the specified Amazon Web
+// Services Regions.
+type DestinationEndpointFilterMemberRegionNames struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*DestinationEndpointFilterMemberRegionNames) isDestinationEndpointFilter() {}
+func (v *DestinationEndpointFilterMemberRegionNames) Serialize(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.DestinationEndpointFilter_RegionNames, v.Value)
+}
+func (v *DestinationEndpointFilterMemberRegionNames) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringList(d, schemas.DestinationEndpointFilter_RegionNames, &v.Value)
+}
+
+// A status message for a destination endpoint.
+type DestinationEndpointMessage struct {
+
+	// The message code.
+	//
+	// This member is required.
+	Code *string
+
+	// The message text.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DestinationEndpointMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationEndpointMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.DestinationEndpointMessage_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DestinationEndpointMessage_Message, *v.Message)
+	}
+}
+func (v *DestinationEndpointMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationEndpointMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationEndpointMessage_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.DestinationEndpointMessage_Code, v.Code)
+		case schemas.DestinationEndpointMessage_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DestinationEndpointMessage_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// Configuration settings for a router input that is represented by a destination
+// endpoint.
+type DestinationEndpointRouterInputConfiguration struct {
+
+	// The entity that manages the lifecycle of the associated destination endpoint.
+	// Valid values include the following:
+	//
+	//   - MANAGED – MediaConnect manages the lifecycle of the associated destination
+	//   endpoint.
+	//
+	//   - UNMANAGED – You manage the lifecycle of the associated destination endpoint.
+	//
+	// This member is required.
+	EndpointLifecycleManagement EndpointLifecycle
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	//
+	// This member is required.
+	SourceTransitDecryption EndpointEncryptionConfiguration
+
+	// The type of transit decryption applied to the source content that this router
+	// input receives. Valid values include the following:
+	//
+	//   - SECRETS_MANAGER – The decryption key or passphrase is stored in Secrets
+	//   Manager.
+	//
+	//   - AUTOMATIC – MediaConnect determines the decryption key when the endpoint
+	//   connects.
+	SourceTransitDecryptionType EndpointEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *DestinationEndpointRouterInputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointRouterInputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationEndpointRouterInputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointLifecycleManagement != "" {
+		s.WriteString(schemas.DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement, string(v.EndpointLifecycleManagement))
+	}
+	serializeEndpointEncryptionConfiguration(s, schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption, v.SourceTransitDecryption)
+	if v.SourceTransitDecryptionType != "" {
+		s.WriteString(schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType, string(v.SourceTransitDecryptionType))
+	}
+}
+func (v *DestinationEndpointRouterInputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationEndpointRouterInputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpointRouterInputConfiguration_EndpointLifecycleManagement, &ev); err != nil {
+				return err
+			}
+			v.EndpointLifecycleManagement = EndpointLifecycle(ev)
+			return nil
+		case schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryption, &v.SourceTransitDecryption)
+		case schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationEndpointRouterInputConfiguration_SourceTransitDecryptionType, &ev); err != nil {
+				return err
+			}
+			v.SourceTransitDecryptionType = EndpointEncryptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Configuration details for a router input stream that is represented by a
+// destination endpoint.
+type DestinationEndpointRouterInputStreamDetails struct {
+	noSmithyDocumentSerde
+}
+
+func (v *DestinationEndpointRouterInputStreamDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationEndpointRouterInputStreamDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationEndpointRouterInputStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DestinationEndpointRouterInputStreamDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationEndpointRouterInputStreamDetails, func(s *smithy.Schema) error {
+		switch s {
 		}
 		return nil
 	})
@@ -2311,6 +3130,93 @@ func (v *Encryption) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.Encryption_Url:
 			v.Url = new(string)
 			return d.ReadString(schemas.Encryption_Url, v.Url)
+		}
+		return nil
+	})
+}
+
+// The encryption settings for an endpoint connection. This is a union type, so
+// exactly one of its members is set: secretsManager when you store the encryption
+// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+// determine the encryption key when the endpoint connects.
+//
+// The following types satisfy this interface:
+//
+//	EndpointEncryptionConfigurationMemberAutomatic
+//	EndpointEncryptionConfigurationMemberSecretsManager
+type EndpointEncryptionConfiguration interface {
+	isEndpointEncryptionConfiguration()
+}
+
+// The configuration for automatic encryption, where MediaConnect determines the
+// encryption key when the endpoint connects.
+type EndpointEncryptionConfigurationMemberAutomatic struct {
+	Value AutomaticEndpointEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EndpointEncryptionConfigurationMemberAutomatic) isEndpointEncryptionConfiguration() {}
+func (v *EndpointEncryptionConfigurationMemberAutomatic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointEncryptionConfiguration_Automatic)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EndpointEncryptionConfigurationMemberAutomatic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The encryption configuration for a connection that uses a key or passphrase
+// that you store in Secrets Manager.
+type EndpointEncryptionConfigurationMemberSecretsManager struct {
+	Value SecretsManagerEndpointEncryptionConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*EndpointEncryptionConfigurationMemberSecretsManager) isEndpointEncryptionConfiguration() {}
+func (v *EndpointEncryptionConfigurationMemberSecretsManager) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointEncryptionConfiguration_SecretsManager)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EndpointEncryptionConfigurationMemberSecretsManager) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for the Secrets Manager secret that holds the key or
+// passphrase used to encrypt an endpoint connection.
+type EndpointEncryptionSecretConfiguration struct {
+
+	// The ARN of the Secrets Manager secret that holds the key or passphrase. The
+	// secret must be encrypted with a customer managed Amazon Web Services KMS key
+	// that is enabled and symmetric; it cannot use the Amazon Web Services managed key
+	// aws/secretsmanager . The secret must be in the same Amazon Web Services account
+	// and Region as the endpoint.
+	//
+	// This member is required.
+	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *EndpointEncryptionSecretConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointEncryptionSecretConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointEncryptionSecretConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.EndpointEncryptionSecretConfiguration_SecretArn, *v.SecretArn)
+	}
+}
+func (v *EndpointEncryptionSecretConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointEncryptionSecretConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointEncryptionSecretConfiguration_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.EndpointEncryptionSecretConfiguration_SecretArn, v.SecretArn)
 		}
 		return nil
 	})
@@ -4123,6 +5029,274 @@ func (v *ListedBridge) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A summary of a destination endpoint that the ListDestinationEndpoints operation
+// returns.
+type ListedDestinationEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the destination endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	// The connection state of the destination endpoint. Valid values include the
+	// following:
+	//
+	//   - CONNECTED – The destination endpoint is connected to a source endpoint.
+	//
+	//   - DISCONNECTED – The destination endpoint isn't connected to a source endpoint.
+	//
+	//   - CONNECTING – The destination endpoint is connecting to a source endpoint.
+	//
+	//   - DISCONNECTING – The destination endpoint is disconnecting from a source
+	//   endpoint.
+	//
+	// This member is required.
+	ConnectionState DestinationEndpointConnectionState
+
+	// The date and time when the destination endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The type of the destination endpoint. Valid values include the following:
+	//
+	//   - STANDARD – A destination endpoint that represents an external destination
+	//   over a standard protocol, such as RTP, RIST, or SRT.
+	//
+	//   - ROUTER_INPUT – A destination endpoint that represents a router input.
+	//
+	// This member is required.
+	DestinationType DestinationEndpointType
+
+	// The unique identifier of the destination endpoint.
+	//
+	// This member is required.
+	Id *string
+
+	// The entity that manages the lifecycle of the destination endpoint.
+	//
+	// This member is required.
+	LifecycleManagement EndpointLifecycle
+
+	// The number of status messages for the destination endpoint.
+	//
+	// This member is required.
+	MessageCount *int32
+
+	// The name of the destination endpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Amazon Web Services Region in which the destination endpoint is
+	// located.
+	//
+	// This member is required.
+	RegionName *string
+
+	// The registration state of the destination endpoint. Valid values include the
+	// following:
+	//
+	//   - REGISTERED – The destination endpoint is registered and ready to use.
+	//
+	//   - REGISTERING – MediaConnect is registering the destination endpoint.
+	//
+	//   - DEREGISTERING – MediaConnect is deregistering the destination endpoint.
+	//
+	//   - REGISTRATION_FAILED – MediaConnect couldn't register the destination
+	//   endpoint.
+	//
+	// This member is required.
+	RegistrationState DestinationEndpointRegistrationState
+
+	// Indicates whether this account owns the destination endpoint or consumes it
+	// from another account through RAM.
+	//
+	// This member is required.
+	ResourceShareOwnership ResourceShareOwnership
+
+	// The sharing state of the destination endpoint.
+	//
+	// This member is required.
+	ResourceShareState ResourceShareState
+
+	// The date and time when the destination endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the resource that is associated with the
+	// destination endpoint.
+	AssociatedResourceArn *string
+
+	// The Availability Zone in which the destination endpoint is located.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone in which the destination endpoint is located.
+	AvailabilityZoneId *string
+
+	// The Amazon Resource Name (ARN) of the source endpoint that is connected to the
+	// destination endpoint.
+	ConnectedSource *string
+
+	// The type of decryption used for the destination endpoint connection.
+	DecryptionType EndpointEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListedDestinationEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListedDestinationEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListedDestinationEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_Arn, *v.Arn)
+	}
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.ConnectedSource != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_ConnectedSource, *v.ConnectedSource)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListedDestinationEndpoint_CreatedAt, *v.CreatedAt)
+	}
+	if v.DecryptionType != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_DecryptionType, string(v.DecryptionType))
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_DestinationType, string(v.DestinationType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_Id, *v.Id)
+	}
+	if v.LifecycleManagement != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_LifecycleManagement, string(v.LifecycleManagement))
+	}
+	if v.MessageCount != nil {
+		s.WriteInt32(schemas.ListedDestinationEndpoint_MessageCount, *v.MessageCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.ListedDestinationEndpoint_RegionName, *v.RegionName)
+	}
+	if v.RegistrationState != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_RegistrationState, string(v.RegistrationState))
+	}
+	if v.ResourceShareOwnership != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
+	}
+	if v.ResourceShareState != "" {
+		s.WriteString(schemas.ListedDestinationEndpoint_ResourceShareState, string(v.ResourceShareState))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ListedDestinationEndpoint_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ListedDestinationEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListedDestinationEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListedDestinationEndpoint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_Arn, v.Arn)
+		case schemas.ListedDestinationEndpoint_AssociatedResourceArn:
+			v.AssociatedResourceArn = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_AssociatedResourceArn, v.AssociatedResourceArn)
+		case schemas.ListedDestinationEndpoint_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ListedDestinationEndpoint_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.ListedDestinationEndpoint_ConnectedSource:
+			v.ConnectedSource = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_ConnectedSource, v.ConnectedSource)
+		case schemas.ListedDestinationEndpoint_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = DestinationEndpointConnectionState(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListedDestinationEndpoint_CreatedAt, v.CreatedAt)
+		case schemas.ListedDestinationEndpoint_DecryptionType:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_DecryptionType, &ev); err != nil {
+				return err
+			}
+			v.DecryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_DestinationType:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_DestinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = DestinationEndpointType(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_Id, v.Id)
+		case schemas.ListedDestinationEndpoint_LifecycleManagement:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_LifecycleManagement, &ev); err != nil {
+				return err
+			}
+			v.LifecycleManagement = EndpointLifecycle(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_MessageCount:
+			v.MessageCount = new(int32)
+			return d.ReadInt32(schemas.ListedDestinationEndpoint_MessageCount, v.MessageCount)
+		case schemas.ListedDestinationEndpoint_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_Name, v.Name)
+		case schemas.ListedDestinationEndpoint_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.ListedDestinationEndpoint_RegionName, v.RegionName)
+		case schemas.ListedDestinationEndpoint_RegistrationState:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_RegistrationState, &ev); err != nil {
+				return err
+			}
+			v.RegistrationState = DestinationEndpointRegistrationState(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_ResourceShareOwnership:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_ResourceShareOwnership, &ev); err != nil {
+				return err
+			}
+			v.ResourceShareOwnership = ResourceShareOwnership(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_ResourceShareState:
+			var ev string
+			if err := d.ReadString(schemas.ListedDestinationEndpoint_ResourceShareState, &ev); err != nil {
+				return err
+			}
+			v.ResourceShareState = ResourceShareState(ev)
+			return nil
+		case schemas.ListedDestinationEndpoint_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListedDestinationEndpoint_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 //	An entitlement that has been granted to you from other Amazon Web Services
 //
 // accounts.
@@ -4983,6 +6157,272 @@ func (v *ListedRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ListedRouterOutput_UpdatedAt:
 			v.UpdatedAt = new(time.Time)
 			return d.ReadTime(schemas.ListedRouterOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// A summary of a source endpoint that the ListSourceEndpoints operation returns.
+type ListedSourceEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the source endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	// The number of destination endpoints that are connected to the source endpoint.
+	//
+	// This member is required.
+	ConnectedDestinationCount *int32
+
+	// The connection state of the source endpoint. Valid values include the following:
+	//
+	//   - CONNECTED – The source endpoint is connected to a destination endpoint.
+	//
+	//   - DISCONNECTED – The source endpoint isn't connected to a destination endpoint.
+	//
+	//   - CONNECTING – The source endpoint is connecting to a destination endpoint.
+	//
+	//   - DISCONNECTING – The source endpoint is disconnecting from a destination
+	//   endpoint.
+	//
+	// This member is required.
+	ConnectionState SourceEndpointConnectionState
+
+	// The date and time when the source endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier of the source endpoint.
+	//
+	// This member is required.
+	Id *string
+
+	// The entity that manages the lifecycle of the source endpoint.
+	//
+	// This member is required.
+	LifecycleManagement EndpointLifecycle
+
+	// The number of status messages for the source endpoint.
+	//
+	// This member is required.
+	MessageCount *int32
+
+	// The name of the source endpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Amazon Web Services Region in which the source endpoint is
+	// located.
+	//
+	// This member is required.
+	RegionName *string
+
+	// The registration state of the source endpoint. Valid values include the
+	// following:
+	//
+	//   - REGISTERED – The source endpoint is registered and ready to use.
+	//
+	//   - REGISTERING – MediaConnect is registering the source endpoint.
+	//
+	//   - DEREGISTERING – MediaConnect is deregistering the source endpoint.
+	//
+	//   - REGISTRATION_FAILED – MediaConnect couldn't register the source endpoint.
+	//
+	// This member is required.
+	RegistrationState SourceEndpointRegistrationState
+
+	// Indicates whether this account owns the source endpoint or consumes it from
+	// another account through RAM.
+	//
+	// This member is required.
+	ResourceShareOwnership ResourceShareOwnership
+
+	// The sharing state of the source endpoint.
+	//
+	// This member is required.
+	ResourceShareState ResourceShareState
+
+	// The type of the source endpoint. Valid values include the following:
+	//
+	//   - STANDARD – A source endpoint that represents an external source over a
+	//   standard protocol, such as RTP, RIST, or SRT.
+	//
+	//   - ROUTER_OUTPUT – A source endpoint that represents a router output.
+	//
+	// This member is required.
+	SourceType SourceEndpointType
+
+	// The date and time when the source endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the resource that is associated with the
+	// source endpoint.
+	AssociatedResourceArn *string
+
+	// The Availability Zone in which the source endpoint is located.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone in which the source endpoint is located.
+	AvailabilityZoneId *string
+
+	// The type of encryption used for the source endpoint connection.
+	EncryptionType EndpointEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *ListedSourceEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListedSourceEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListedSourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_Arn, *v.Arn)
+	}
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.ConnectedDestinationCount != nil {
+		s.WriteInt32(schemas.ListedSourceEndpoint_ConnectedDestinationCount, *v.ConnectedDestinationCount)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListedSourceEndpoint_CreatedAt, *v.CreatedAt)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_EncryptionType, string(v.EncryptionType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_Id, *v.Id)
+	}
+	if v.LifecycleManagement != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_LifecycleManagement, string(v.LifecycleManagement))
+	}
+	if v.MessageCount != nil {
+		s.WriteInt32(schemas.ListedSourceEndpoint_MessageCount, *v.MessageCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.ListedSourceEndpoint_RegionName, *v.RegionName)
+	}
+	if v.RegistrationState != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_RegistrationState, string(v.RegistrationState))
+	}
+	if v.ResourceShareOwnership != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
+	}
+	if v.ResourceShareState != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_ResourceShareState, string(v.ResourceShareState))
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.ListedSourceEndpoint_SourceType, string(v.SourceType))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ListedSourceEndpoint_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ListedSourceEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListedSourceEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListedSourceEndpoint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_Arn, v.Arn)
+		case schemas.ListedSourceEndpoint_AssociatedResourceArn:
+			v.AssociatedResourceArn = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_AssociatedResourceArn, v.AssociatedResourceArn)
+		case schemas.ListedSourceEndpoint_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ListedSourceEndpoint_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.ListedSourceEndpoint_ConnectedDestinationCount:
+			v.ConnectedDestinationCount = new(int32)
+			return d.ReadInt32(schemas.ListedSourceEndpoint_ConnectedDestinationCount, v.ConnectedDestinationCount)
+		case schemas.ListedSourceEndpoint_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = SourceEndpointConnectionState(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListedSourceEndpoint_CreatedAt, v.CreatedAt)
+		case schemas.ListedSourceEndpoint_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_Id, v.Id)
+		case schemas.ListedSourceEndpoint_LifecycleManagement:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_LifecycleManagement, &ev); err != nil {
+				return err
+			}
+			v.LifecycleManagement = EndpointLifecycle(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_MessageCount:
+			v.MessageCount = new(int32)
+			return d.ReadInt32(schemas.ListedSourceEndpoint_MessageCount, v.MessageCount)
+		case schemas.ListedSourceEndpoint_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_Name, v.Name)
+		case schemas.ListedSourceEndpoint_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.ListedSourceEndpoint_RegionName, v.RegionName)
+		case schemas.ListedSourceEndpoint_RegistrationState:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_RegistrationState, &ev); err != nil {
+				return err
+			}
+			v.RegistrationState = SourceEndpointRegistrationState(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_ResourceShareOwnership:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_ResourceShareOwnership, &ev); err != nil {
+				return err
+			}
+			v.ResourceShareOwnership = ResourceShareOwnership(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_ResourceShareState:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_ResourceShareState, &ev); err != nil {
+				return err
+			}
+			v.ResourceShareState = ResourceShareState(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.ListedSourceEndpoint_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceEndpointType(ev)
+			return nil
+		case schemas.ListedSourceEndpoint_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListedSourceEndpoint_UpdatedAt, v.UpdatedAt)
 		}
 		return nil
 	})
@@ -7183,6 +8623,48 @@ func (v *Output) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The cross-account sharing details for an endpoint that this account owns and
+// shares with other accounts.
+type OwnedResourceShareDetails struct {
+
+	// The sharing state of the endpoint. Valid values include the following:
+	//
+	//   - SHARED – The endpoint is shared with one or more accounts.
+	//
+	//   - UNSHARED – The endpoint is not shared with other accounts.
+	//
+	// This member is required.
+	ShareState ResourceShareState
+
+	noSmithyDocumentSerde
+}
+
+func (v *OwnedResourceShareDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OwnedResourceShareDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OwnedResourceShareDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ShareState != "" {
+		s.WriteString(schemas.OwnedResourceShareDetails_ShareState, string(v.ShareState))
+	}
+}
+func (v *OwnedResourceShareDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OwnedResourceShareDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OwnedResourceShareDetails_ShareState:
+			var ev string
+			if err := d.ReadString(schemas.OwnedResourceShareDetails_ShareState, &ev); err != nil {
+				return err
+			}
+			v.ShareState = ResourceShareState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for preferred day and time maintenance settings.
 type PreferredDayTimeMaintenanceConfiguration struct {
 
@@ -7226,6 +8708,73 @@ func (v *PreferredDayTimeMaintenanceConfiguration) Deserialize(d smithy.ShapeDes
 		case schemas.PreferredDayTimeMaintenanceConfiguration_Time:
 			v.Time = new(string)
 			return d.ReadString(schemas.PreferredDayTimeMaintenanceConfiguration_Time, v.Time)
+		}
+		return nil
+	})
+}
+
+// The networking configuration for a publicly accessible destination endpoint,
+// including the CIDR blocks that are allowed to connect.
+type PublicDestinationEndpointNetworkingConfiguration struct {
+
+	// The rules that specify which CIDR blocks can connect to the destination
+	// endpoint. You can specify up to 10 rules.
+	//
+	// This member is required.
+	DestinationAllowRules []PublicDestinationEndpointNetworkingConfigurationAllowRule
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublicDestinationEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDestinationEndpointNetworkingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDestinationEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules, v.DestinationAllowRules)
+}
+func (v *PublicDestinationEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDestinationEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules:
+			return deserializePublicDestinationEndpointNetworkingConfigurationAllowRuleList(d, schemas.PublicDestinationEndpointNetworkingConfiguration_DestinationAllowRules, &v.DestinationAllowRules)
+		}
+		return nil
+	})
+}
+
+// A rule that allows a specific CIDR block to connect to the public destination
+// endpoint.
+type PublicDestinationEndpointNetworkingConfigurationAllowRule struct {
+
+	// The CIDR block that is allowed to connect to the destination endpoint, in CIDR
+	// notation.
+	//
+	// This member is required.
+	Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublicDestinationEndpointNetworkingConfigurationAllowRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicDestinationEndpointNetworkingConfigurationAllowRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicDestinationEndpointNetworkingConfigurationAllowRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.PublicDestinationEndpointNetworkingConfigurationAllowRule_Cidr, *v.Cidr)
+	}
+}
+func (v *PublicDestinationEndpointNetworkingConfigurationAllowRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicDestinationEndpointNetworkingConfigurationAllowRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicDestinationEndpointNetworkingConfigurationAllowRule_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.PublicDestinationEndpointNetworkingConfigurationAllowRule_Cidr, v.Cidr)
 		}
 		return nil
 	})
@@ -7291,6 +8840,73 @@ func (v *PublicRouterNetworkInterfaceRule) Deserialize(d smithy.ShapeDeserialize
 		case schemas.PublicRouterNetworkInterfaceRule_Cidr:
 			v.Cidr = new(string)
 			return d.ReadString(schemas.PublicRouterNetworkInterfaceRule_Cidr, v.Cidr)
+		}
+		return nil
+	})
+}
+
+// The networking configuration for a publicly accessible source endpoint,
+// including the CIDR blocks that are allowed to connect.
+type PublicSourceEndpointNetworkingConfiguration struct {
+
+	// The rules that specify which CIDR blocks can connect to the source endpoint.
+	// You can specify up to 10 rules.
+	//
+	// This member is required.
+	SourceAllowRules []PublicSourceEndpointNetworkingConfigurationAllowRule
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublicSourceEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicSourceEndpointNetworkingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicSourceEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePublicSourceEndpointNetworkingConfigurationAllowRuleList(s, schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules, v.SourceAllowRules)
+}
+func (v *PublicSourceEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicSourceEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules:
+			return deserializePublicSourceEndpointNetworkingConfigurationAllowRuleList(d, schemas.PublicSourceEndpointNetworkingConfiguration_SourceAllowRules, &v.SourceAllowRules)
+		}
+		return nil
+	})
+}
+
+// A rule that allows a specific CIDR block to connect to the public source
+// endpoint.
+type PublicSourceEndpointNetworkingConfigurationAllowRule struct {
+
+	// The CIDR block that is allowed to connect to the source endpoint, in CIDR
+	// notation.
+	//
+	// This member is required.
+	Cidr *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PublicSourceEndpointNetworkingConfigurationAllowRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicSourceEndpointNetworkingConfigurationAllowRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicSourceEndpointNetworkingConfigurationAllowRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.PublicSourceEndpointNetworkingConfigurationAllowRule_Cidr, *v.Cidr)
+	}
+}
+func (v *PublicSourceEndpointNetworkingConfigurationAllowRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicSourceEndpointNetworkingConfigurationAllowRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicSourceEndpointNetworkingConfigurationAllowRule_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.PublicSourceEndpointNetworkingConfigurationAllowRule_Cidr, v.Cidr)
 		}
 		return nil
 	})
@@ -7515,6 +9131,56 @@ func (v *Reservation) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The cross-account sharing details for an endpoint. Endpoints are shared through
+// Resource Access Manager (RAM). This is a union type, so exactly one of its
+// members is set: owned when this account owns the endpoint and shares it with
+// other accounts, or consumed when this account consumes an endpoint that another
+// account shares. To change how an endpoint is shared, use RAM.
+//
+// The following types satisfy this interface:
+//
+//	ResourceShareDetailsMemberConsumed
+//	ResourceShareDetailsMemberOwned
+type ResourceShareDetails interface {
+	isResourceShareDetails()
+}
+
+// The sharing details for an endpoint that another account shares with this
+// account through RAM.
+type ResourceShareDetailsMemberConsumed struct {
+	Value ConsumedResourceShareDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceShareDetailsMemberConsumed) isResourceShareDetails() {}
+func (v *ResourceShareDetailsMemberConsumed) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShareDetails_Consumed)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceShareDetailsMemberConsumed) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The sharing details for an endpoint that this account owns and shares with
+// other accounts through RAM.
+type ResourceShareDetailsMemberOwned struct {
+	Value OwnedResourceShareDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ResourceShareDetailsMemberOwned) isResourceShareDetails() {}
+func (v *ResourceShareDetailsMemberOwned) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceShareDetails_Owned)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ResourceShareDetailsMemberOwned) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // A definition of what is being billed for, including the type and amount.
 type ResourceSpecification struct {
 
@@ -7649,6 +9315,98 @@ func (v *RistRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.RistRouterOutputConfiguration_DestinationPort:
 			v.DestinationPort = new(int32)
 			return d.ReadInt32(schemas.RistRouterOutputConfiguration_DestinationPort, v.DestinationPort)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a destination endpoint that uses the RIST
+// protocol.
+type RistStandardDestinationEndpointConfiguration struct {
+
+	// The IP address on which the destination endpoint receives content.
+	//
+	// This member is required.
+	DestinationAddress *string
+
+	// The port on which the destination endpoint receives content. The valid range is
+	// 1024 to 65531.
+	//
+	// This member is required.
+	DestinationIngestPort *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *RistStandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RistStandardDestinationEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RistStandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAddress != nil {
+		s.WriteString(schemas.RistStandardDestinationEndpointConfiguration_DestinationAddress, *v.DestinationAddress)
+	}
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.RistStandardDestinationEndpointConfiguration_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+}
+func (v *RistStandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RistStandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RistStandardDestinationEndpointConfiguration_DestinationAddress:
+			v.DestinationAddress = new(string)
+			return d.ReadString(schemas.RistStandardDestinationEndpointConfiguration_DestinationAddress, v.DestinationAddress)
+		case schemas.RistStandardDestinationEndpointConfiguration_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.RistStandardDestinationEndpointConfiguration_DestinationIngestPort, v.DestinationIngestPort)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a source endpoint that uses the RIST protocol.
+type RistStandardSourceEndpointConfiguration struct {
+
+	// The port on the destination that receives the content. The valid range is 3000
+	// to 30000.
+	//
+	// This member is required.
+	DestinationIngestPort *int32
+
+	// The amount of time, in milliseconds, that the source endpoint allows for
+	// recovering lost packets. The valid range is 10 to 10000.
+	//
+	// This member is required.
+	RecoveryLatencyMilliseconds *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *RistStandardSourceEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RistStandardSourceEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RistStandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.RistStandardSourceEndpointConfiguration_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+	if v.RecoveryLatencyMilliseconds != nil {
+		s.WriteInt64(schemas.RistStandardSourceEndpointConfiguration_RecoveryLatencyMilliseconds, *v.RecoveryLatencyMilliseconds)
+	}
+}
+func (v *RistStandardSourceEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RistStandardSourceEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RistStandardSourceEndpointConfiguration_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.RistStandardSourceEndpointConfiguration_DestinationIngestPort, v.DestinationIngestPort)
+		case schemas.RistStandardSourceEndpointConfiguration_RecoveryLatencyMilliseconds:
+			v.RecoveryLatencyMilliseconds = new(int64)
+			return d.ReadInt64(schemas.RistStandardSourceEndpointConfiguration_RecoveryLatencyMilliseconds, v.RecoveryLatencyMilliseconds)
 		}
 		return nil
 	})
@@ -7812,6 +9570,10 @@ type RouterInput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The Amazon Resource Names (ARNs) of one or more destination endpoints that are
+	// associated with this router input.
+	AssociatedDestinationEndpointArns []string
+
 	// The IP address of the router input.
 	IpAddress *string
 
@@ -7837,6 +9599,7 @@ func (v *RouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RouterInput_Arn, *v.Arn)
 	}
+	serializeDestinationEndpointArnList(s, schemas.RouterInput_AssociatedDestinationEndpointArns, v.AssociatedDestinationEndpointArns)
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.RouterInput_AvailabilityZone, *v.AvailabilityZone)
 	}
@@ -7907,6 +9670,8 @@ func (v *RouterInput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RouterInput_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.RouterInput_Arn, v.Arn)
+		case schemas.RouterInput_AssociatedDestinationEndpointArns:
+			return deserializeDestinationEndpointArnList(d, schemas.RouterInput_AssociatedDestinationEndpointArns, &v.AssociatedDestinationEndpointArns)
 		case schemas.RouterInput_AvailabilityZone:
 			v.AvailabilityZone = new(string)
 			return d.ReadString(schemas.RouterInput_AvailabilityZone, v.AvailabilityZone)
@@ -8012,6 +9777,7 @@ func (v *RouterInput) Deserialize(d smithy.ShapeDeserializer) error {
 //
 // The following types satisfy this interface:
 //
+//	RouterInputConfigurationMemberDestinationEndpoint
 //	RouterInputConfigurationMemberFailover
 //	RouterInputConfigurationMemberMediaConnectFlow
 //	RouterInputConfigurationMemberMediaLiveChannel
@@ -8019,6 +9785,24 @@ func (v *RouterInput) Deserialize(d smithy.ShapeDeserializer) error {
 //	RouterInputConfigurationMemberStandard
 type RouterInputConfiguration interface {
 	isRouterInputConfiguration()
+}
+
+// Configuration settings for a router input that is represented by a destination
+// endpoint.
+type RouterInputConfigurationMemberDestinationEndpoint struct {
+	Value DestinationEndpointRouterInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterInputConfigurationMemberDestinationEndpoint) isRouterInputConfiguration() {}
+func (v *RouterInputConfigurationMemberDestinationEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputConfiguration_DestinationEndpoint)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterInputConfigurationMemberDestinationEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Configuration settings for a failover router input that allows switching
@@ -8124,6 +9908,166 @@ func (v *RouterInputConfigurationMemberStandard) Serialize(s smithy.ShapeSeriali
 }
 func (v *RouterInputConfigurationMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// The details of the router input that is associated with a destination endpoint.
+type RouterInputDestinationEndpointAssociatedResourceDetails struct {
+
+	// The maximum bitrate of the router input, in bits per second.
+	//
+	// This member is required.
+	MaximumBitrate *int64
+
+	// The status messages for the router input.
+	//
+	// This member is required.
+	Messages []RouterInputMessage
+
+	// The name of the router input.
+	//
+	// This member is required.
+	Name *string
+
+	// The state of the router input.
+	//
+	// This member is required.
+	State RouterInputState
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterInputDestinationEndpointAssociatedResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputDestinationEndpointAssociatedResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterInputDestinationEndpointAssociatedResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate, *v.MaximumBitrate)
+	}
+	serializeRouterInputMessages(s, schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages, v.Messages)
+	if v.Name != nil {
+		s.WriteString(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_State, string(v.State))
+	}
+}
+func (v *RouterInputDestinationEndpointAssociatedResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterInputDestinationEndpointAssociatedResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate:
+			v.MaximumBitrate = new(int64)
+			return d.ReadInt64(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_MaximumBitrate, v.MaximumBitrate)
+		case schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages:
+			return deserializeRouterInputMessages(d, schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Messages, &v.Messages)
+		case schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_Name, v.Name)
+		case schemas.RouterInputDestinationEndpointAssociatedResourceDetails_State:
+			var ev string
+			if err := d.ReadString(schemas.RouterInputDestinationEndpointAssociatedResourceDetails_State, &ev); err != nil {
+				return err
+			}
+			v.State = RouterInputState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a destination endpoint that represents a router
+// input.
+type RouterInputDestinationEndpointConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the router input that the destination
+	// endpoint represents.
+	//
+	// This member is required.
+	RouterInputArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterInputDestinationEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputDestinationEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterInputDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterInputArn != nil {
+		s.WriteString(schemas.RouterInputDestinationEndpointConfiguration_RouterInputArn, *v.RouterInputArn)
+	}
+}
+func (v *RouterInputDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterInputDestinationEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterInputDestinationEndpointConfiguration_RouterInputArn:
+			v.RouterInputArn = new(string)
+			return d.ReadString(schemas.RouterInputDestinationEndpointConfiguration_RouterInputArn, v.RouterInputArn)
+		}
+		return nil
+	})
+}
+
+// The connection details for a destination endpoint that represents a router
+// input.
+type RouterInputDestinationEndpointConnectionDetails struct {
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	SourceEncryptionConfiguration EndpointEncryptionConfiguration
+
+	// The type of encryption that the source uses for the connection.
+	SourceEncryptionType EndpointEncryptionType
+
+	// The type of the connected source endpoint.
+	SourceEndpointType SourceEndpointType
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterInputDestinationEndpointConnectionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputDestinationEndpointConnectionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterInputDestinationEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointEncryptionConfiguration(s, schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	if v.SourceEncryptionType != "" {
+		s.WriteString(schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType, string(v.SourceEncryptionType))
+	}
+	if v.SourceEndpointType != "" {
+		s.WriteString(schemas.RouterInputDestinationEndpointConnectionDetails_SourceEndpointType, string(v.SourceEndpointType))
+	}
+}
+func (v *RouterInputDestinationEndpointConnectionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterInputDestinationEndpointConnectionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, &v.SourceEncryptionConfiguration)
+		case schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.RouterInputDestinationEndpointConnectionDetails_SourceEncryptionType, &ev); err != nil {
+				return err
+			}
+			v.SourceEncryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.RouterInputDestinationEndpointConnectionDetails_SourceEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.RouterInputDestinationEndpointConnectionDetails_SourceEndpointType, &ev); err != nil {
+				return err
+			}
+			v.SourceEndpointType = SourceEndpointType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A filter that can be used to retrieve a list of router inputs.
@@ -8425,6 +10369,7 @@ func (v *RouterInputSourceMetadataDetails) Deserialize(d smithy.ShapeDeserialize
 //
 // The following types satisfy this interface:
 //
+//	RouterInputStreamDetailsMemberDestinationEndpoint
 //	RouterInputStreamDetailsMemberFailover
 //	RouterInputStreamDetailsMemberMediaConnectFlow
 //	RouterInputStreamDetailsMemberMediaLiveChannel
@@ -8432,6 +10377,24 @@ func (v *RouterInputSourceMetadataDetails) Deserialize(d smithy.ShapeDeserialize
 //	RouterInputStreamDetailsMemberStandard
 type RouterInputStreamDetails interface {
 	isRouterInputStreamDetails()
+}
+
+// Configuration details for a router input stream that is represented by a
+// destination endpoint.
+type RouterInputStreamDetailsMemberDestinationEndpoint struct {
+	Value DestinationEndpointRouterInputStreamDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterInputStreamDetailsMemberDestinationEndpoint) isRouterInputStreamDetails() {}
+func (v *RouterInputStreamDetailsMemberDestinationEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterInputStreamDetails_DestinationEndpoint)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterInputStreamDetailsMemberDestinationEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Configuration details for a failover router input that can automatically switch
@@ -9053,6 +11016,10 @@ type RouterOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The Amazon Resource Names (ARNs) of one or more source endpoints that are
+	// associated with this router output.
+	AssociatedSourceEndpointArns []string
+
 	// The IP address of the router output.
 	IpAddress *string
 
@@ -9078,6 +11045,7 @@ func (v *RouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.RouterOutput_Arn, *v.Arn)
 	}
+	serializeSourceEndpointArnList(s, schemas.RouterOutput_AssociatedSourceEndpointArns, v.AssociatedSourceEndpointArns)
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.RouterOutput_AvailabilityZone, *v.AvailabilityZone)
 	}
@@ -9144,6 +11112,8 @@ func (v *RouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RouterOutput_Arn:
 			v.Arn = new(string)
 			return d.ReadString(schemas.RouterOutput_Arn, v.Arn)
+		case schemas.RouterOutput_AssociatedSourceEndpointArns:
+			return deserializeSourceEndpointArnList(d, schemas.RouterOutput_AssociatedSourceEndpointArns, &v.AssociatedSourceEndpointArns)
 		case schemas.RouterOutput_AvailabilityZone:
 			v.AvailabilityZone = new(string)
 			return d.ReadString(schemas.RouterOutput_AvailabilityZone, v.AvailabilityZone)
@@ -9246,6 +11216,7 @@ func (v *RouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 //
 //	RouterOutputConfigurationMemberMediaConnectFlow
 //	RouterOutputConfigurationMemberMediaLiveInput
+//	RouterOutputConfigurationMemberSourceEndpoint
 //	RouterOutputConfigurationMemberStandard
 type RouterOutputConfiguration interface {
 	isRouterOutputConfiguration()
@@ -9299,6 +11270,24 @@ func (v *RouterOutputConfigurationMemberMediaLiveInput) Serialize(s smithy.Shape
 	s.CloseStruct()
 }
 func (v *RouterOutputConfigurationMemberMediaLiveInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Configuration settings for a router output that is represented by a source
+// endpoint.
+type RouterOutputConfigurationMemberSourceEndpoint struct {
+	Value SourceEndpointRouterOutputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterOutputConfigurationMemberSourceEndpoint) isRouterOutputConfiguration() {}
+func (v *RouterOutputConfigurationMemberSourceEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputConfiguration_SourceEndpoint)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterOutputConfigurationMemberSourceEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -9580,6 +11569,165 @@ func (v *RouterOutputProtocolConfigurationMemberSrtListener) Deserialize(d smith
 	return v.Value.Deserialize(d)
 }
 
+// The details of the router output that is associated with a source endpoint.
+type RouterOutputSourceEndpointAssociatedResourceDetails struct {
+
+	// The maximum bitrate of the router output, in bits per second.
+	//
+	// This member is required.
+	MaximumBitrate *int64
+
+	// The status messages for the router output.
+	//
+	// This member is required.
+	Messages []RouterOutputMessage
+
+	// The name of the router output.
+	//
+	// This member is required.
+	Name *string
+
+	// The state of the router output.
+	//
+	// This member is required.
+	State RouterOutputState
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterOutputSourceEndpointAssociatedResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputSourceEndpointAssociatedResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterOutputSourceEndpointAssociatedResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate, *v.MaximumBitrate)
+	}
+	serializeRouterOutputMessages(s, schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages, v.Messages)
+	if v.Name != nil {
+		s.WriteString(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_State, string(v.State))
+	}
+}
+func (v *RouterOutputSourceEndpointAssociatedResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterOutputSourceEndpointAssociatedResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate:
+			v.MaximumBitrate = new(int64)
+			return d.ReadInt64(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_MaximumBitrate, v.MaximumBitrate)
+		case schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages:
+			return deserializeRouterOutputMessages(d, schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Messages, &v.Messages)
+		case schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_Name, v.Name)
+		case schemas.RouterOutputSourceEndpointAssociatedResourceDetails_State:
+			var ev string
+			if err := d.ReadString(schemas.RouterOutputSourceEndpointAssociatedResourceDetails_State, &ev); err != nil {
+				return err
+			}
+			v.State = RouterOutputState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a source endpoint that represents a router
+// output.
+type RouterOutputSourceEndpointConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the router output that the source endpoint
+	// represents.
+	//
+	// This member is required.
+	RouterOutputArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterOutputSourceEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputSourceEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterOutputSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterOutputArn != nil {
+		s.WriteString(schemas.RouterOutputSourceEndpointConfiguration_RouterOutputArn, *v.RouterOutputArn)
+	}
+}
+func (v *RouterOutputSourceEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterOutputSourceEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterOutputSourceEndpointConfiguration_RouterOutputArn:
+			v.RouterOutputArn = new(string)
+			return d.ReadString(schemas.RouterOutputSourceEndpointConfiguration_RouterOutputArn, v.RouterOutputArn)
+		}
+		return nil
+	})
+}
+
+// The connection details for a source endpoint that represents a router output.
+type RouterOutputSourceEndpointConnectionDetails struct {
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	DestinationDecryptionConfiguration EndpointEncryptionConfiguration
+
+	// The type of decryption that the destination uses for the connection.
+	DestinationDecryptionType EndpointEncryptionType
+
+	// The type of the connected destination endpoint.
+	DestinationEndpointType DestinationEndpointType
+
+	noSmithyDocumentSerde
+}
+
+func (v *RouterOutputSourceEndpointConnectionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputSourceEndpointConnectionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterOutputSourceEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointEncryptionConfiguration(s, schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	if v.DestinationDecryptionType != "" {
+		s.WriteString(schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType, string(v.DestinationDecryptionType))
+	}
+	if v.DestinationEndpointType != "" {
+		s.WriteString(schemas.RouterOutputSourceEndpointConnectionDetails_DestinationEndpointType, string(v.DestinationEndpointType))
+	}
+}
+func (v *RouterOutputSourceEndpointConnectionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterOutputSourceEndpointConnectionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, &v.DestinationDecryptionConfiguration)
+		case schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType:
+			var ev string
+			if err := d.ReadString(schemas.RouterOutputSourceEndpointConnectionDetails_DestinationDecryptionType, &ev); err != nil {
+				return err
+			}
+			v.DestinationDecryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.RouterOutputSourceEndpointConnectionDetails_DestinationEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.RouterOutputSourceEndpointConnectionDetails_DestinationEndpointType, &ev); err != nil {
+				return err
+			}
+			v.DestinationEndpointType = DestinationEndpointType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the router output's stream, including connection state and
 // destination details. The specific details provided vary based on the router
 // output type.
@@ -9588,6 +11736,7 @@ func (v *RouterOutputProtocolConfigurationMemberSrtListener) Deserialize(d smith
 //
 //	RouterOutputStreamDetailsMemberMediaConnectFlow
 //	RouterOutputStreamDetailsMemberMediaLiveInput
+//	RouterOutputStreamDetailsMemberSourceEndpoint
 //	RouterOutputStreamDetailsMemberStandard
 type RouterOutputStreamDetails interface {
 	isRouterOutputStreamDetails()
@@ -9626,6 +11775,24 @@ func (v *RouterOutputStreamDetailsMemberMediaLiveInput) Serialize(s smithy.Shape
 	s.CloseStruct()
 }
 func (v *RouterOutputStreamDetailsMemberMediaLiveInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Configuration details for a router output stream that is represented by a
+// source endpoint.
+type RouterOutputStreamDetailsMemberSourceEndpoint struct {
+	Value SourceEndpointRouterOutputStreamDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterOutputStreamDetailsMemberSourceEndpoint) isRouterOutputStreamDetails() {}
+func (v *RouterOutputStreamDetailsMemberSourceEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterOutputStreamDetails_SourceEndpoint)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RouterOutputStreamDetailsMemberSourceEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -9849,6 +12016,118 @@ func (v *RtpRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) e
 	})
 }
 
+// The configuration settings for a destination endpoint that uses the RTP
+// protocol.
+type RtpStandardDestinationEndpointConfiguration struct {
+
+	// The IP address on which the destination endpoint receives content.
+	//
+	// This member is required.
+	DestinationAddress *string
+
+	// The port on which the destination endpoint receives content. The valid range is
+	// 1024 to 65531.
+	//
+	// This member is required.
+	DestinationIngestPort *int32
+
+	// Indicates whether forward error correction (FEC) is enabled for the destination
+	// endpoint.
+	//
+	// This member is required.
+	ForwardErrorCorrectionState ForwardErrorCorrectionState
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtpStandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtpStandardDestinationEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtpStandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAddress != nil {
+		s.WriteString(schemas.RtpStandardDestinationEndpointConfiguration_DestinationAddress, *v.DestinationAddress)
+	}
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.RtpStandardDestinationEndpointConfiguration_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+	if v.ForwardErrorCorrectionState != "" {
+		s.WriteString(schemas.RtpStandardDestinationEndpointConfiguration_ForwardErrorCorrectionState, string(v.ForwardErrorCorrectionState))
+	}
+}
+func (v *RtpStandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtpStandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtpStandardDestinationEndpointConfiguration_DestinationAddress:
+			v.DestinationAddress = new(string)
+			return d.ReadString(schemas.RtpStandardDestinationEndpointConfiguration_DestinationAddress, v.DestinationAddress)
+		case schemas.RtpStandardDestinationEndpointConfiguration_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.RtpStandardDestinationEndpointConfiguration_DestinationIngestPort, v.DestinationIngestPort)
+		case schemas.RtpStandardDestinationEndpointConfiguration_ForwardErrorCorrectionState:
+			var ev string
+			if err := d.ReadString(schemas.RtpStandardDestinationEndpointConfiguration_ForwardErrorCorrectionState, &ev); err != nil {
+				return err
+			}
+			v.ForwardErrorCorrectionState = ForwardErrorCorrectionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a source endpoint that uses the RTP protocol.
+type RtpStandardSourceEndpointConfiguration struct {
+
+	// The port on the destination that receives the content. The valid range is 3000
+	// to 30000.
+	//
+	// This member is required.
+	DestinationIngestPort *int32
+
+	// Indicates whether forward error correction (FEC) is enabled for the source
+	// endpoint.
+	//
+	// This member is required.
+	ForwardErrorCorrectionState ForwardErrorCorrectionState
+
+	noSmithyDocumentSerde
+}
+
+func (v *RtpStandardSourceEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RtpStandardSourceEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RtpStandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.RtpStandardSourceEndpointConfiguration_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+	if v.ForwardErrorCorrectionState != "" {
+		s.WriteString(schemas.RtpStandardSourceEndpointConfiguration_ForwardErrorCorrectionState, string(v.ForwardErrorCorrectionState))
+	}
+}
+func (v *RtpStandardSourceEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RtpStandardSourceEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RtpStandardSourceEndpointConfiguration_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.RtpStandardSourceEndpointConfiguration_DestinationIngestPort, v.DestinationIngestPort)
+		case schemas.RtpStandardSourceEndpointConfiguration_ForwardErrorCorrectionState:
+			var ev string
+			if err := d.ReadString(schemas.RtpStandardSourceEndpointConfiguration_ForwardErrorCorrectionState, &ev); err != nil {
+				return err
+			}
+			v.ForwardErrorCorrectionState = ForwardErrorCorrectionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration settings for transit encryption using Secrets Manager,
 // including the secret ARN and role ARN.
 type SecretsManagerEncryptionKeyConfiguration struct {
@@ -9890,6 +12169,65 @@ func (v *SecretsManagerEncryptionKeyConfiguration) Deserialize(d smithy.ShapeDes
 		case schemas.SecretsManagerEncryptionKeyConfiguration_SecretArn:
 			v.SecretArn = new(string)
 			return d.ReadString(schemas.SecretsManagerEncryptionKeyConfiguration_SecretArn, v.SecretArn)
+		}
+		return nil
+	})
+}
+
+// The endpoint encryption configuration for connections that use a key or
+// passphrase that you store in Secrets Manager.
+type SecretsManagerEndpointEncryptionConfiguration struct {
+
+	// The Secrets Manager secret that holds the key or passphrase used to encrypt the
+	// connection.
+	//
+	// This member is required.
+	EncryptionSecret *EndpointEncryptionSecretConfiguration
+
+	// The type of secret used to encrypt the connection. Valid values include the
+	// following:
+	//
+	//   - AES_128_KEY – A 128-bit AES encryption key.
+	//
+	//   - AES_192_KEY – A 192-bit AES encryption key.
+	//
+	//   - AES_256_KEY – A 256-bit AES encryption key.
+	//
+	//   - SRT_PASSPHRASE – An SRT passphrase.
+	EncryptionSecretType EndpointEncryptionSecretType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SecretsManagerEndpointEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecretsManagerEndpointEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecretsManagerEndpointEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionSecret != nil {
+		s.WriteStruct(schemas.SecretsManagerEndpointEncryptionConfiguration_EncryptionSecret)
+		v.EncryptionSecret.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionSecretType != "" {
+		s.WriteString(schemas.SecretsManagerEndpointEncryptionConfiguration_EncryptionSecretType, string(v.EncryptionSecretType))
+	}
+}
+func (v *SecretsManagerEndpointEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecretsManagerEndpointEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecretsManagerEndpointEncryptionConfiguration_EncryptionSecret:
+			v.EncryptionSecret = &EndpointEncryptionSecretConfiguration{}
+			return v.EncryptionSecret.Deserialize(d)
+		case schemas.SecretsManagerEndpointEncryptionConfiguration_EncryptionSecretType:
+			var ev string
+			if err := d.ReadString(schemas.SecretsManagerEndpointEncryptionConfiguration_EncryptionSecretType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionSecretType = EndpointEncryptionSecretType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -10522,6 +12860,649 @@ func (v *Source) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The details of a source endpoint in MediaConnect, including its configuration,
+// state, and connection details.
+type SourceEndpoint struct {
+
+	// The Amazon Resource Name (ARN) of the source endpoint.
+	//
+	// This member is required.
+	Arn *string
+
+	// The details of the resource that is associated with the source endpoint.
+	//
+	// This member is required.
+	AssociatedResourceDetails SourceEndpointAssociatedResourceDetails
+
+	// The configuration settings for the source endpoint.
+	//
+	// This member is required.
+	Configuration SourceEndpointConfiguration
+
+	// The Amazon Resource Names (ARNs) of the destination endpoints that are
+	// connected to the source endpoint.
+	//
+	// This member is required.
+	ConnectedDestinations []string
+
+	// The connection state of the source endpoint. Valid values include the following:
+	//
+	//   - CONNECTED – The source endpoint is connected to a destination endpoint.
+	//
+	//   - DISCONNECTED – The source endpoint isn't connected to a destination endpoint.
+	//
+	//   - CONNECTING – The source endpoint is connecting to a destination endpoint.
+	//
+	//   - DISCONNECTING – The source endpoint is disconnecting from a destination
+	//   endpoint.
+	//
+	// This member is required.
+	ConnectionState SourceEndpointConnectionState
+
+	// The date and time when the source endpoint was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The description of the source endpoint.
+	//
+	// This member is required.
+	Description *string
+
+	// The unique identifier of the source endpoint.
+	//
+	// This member is required.
+	Id *string
+
+	// The entity that manages the lifecycle of the source endpoint.
+	//
+	// This member is required.
+	LifecycleManagement EndpointLifecycle
+
+	// The status messages for the source endpoint.
+	//
+	// This member is required.
+	Messages []SourceEndpointMessage
+
+	// The name of the source endpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The name of the Amazon Web Services Region in which the source endpoint is
+	// located.
+	//
+	// This member is required.
+	RegionName *string
+
+	// The registration state of the source endpoint. Valid values include the
+	// following:
+	//
+	//   - REGISTERED – The source endpoint is registered and ready to use.
+	//
+	//   - REGISTERING – MediaConnect is registering the source endpoint.
+	//
+	//   - DEREGISTERING – MediaConnect is deregistering the source endpoint.
+	//
+	//   - REGISTRATION_FAILED – MediaConnect couldn't register the source endpoint.
+	//
+	// This member is required.
+	RegistrationState SourceEndpointRegistrationState
+
+	// The cross-account sharing details for an endpoint. Endpoints are shared through
+	// Resource Access Manager (RAM). This is a union type, so exactly one of its
+	// members is set: owned when this account owns the endpoint and shares it with
+	// other accounts, or consumed when this account consumes an endpoint that another
+	// account shares. To change how an endpoint is shared, use RAM.
+	//
+	// This member is required.
+	ResourceShareDetails ResourceShareDetails
+
+	// Indicates whether this account owns the source endpoint or consumes it from
+	// another account through RAM.
+	//
+	// This member is required.
+	ResourceShareOwnership ResourceShareOwnership
+
+	// The type of the source endpoint. Valid values include the following:
+	//
+	//   - STANDARD – A source endpoint that represents an external source over a
+	//   standard protocol, such as RTP, RIST, or SRT.
+	//
+	//   - ROUTER_OUTPUT – A source endpoint that represents a router output.
+	//
+	// This member is required.
+	SourceType SourceEndpointType
+
+	// The tags associated with the source endpoint. Each tag is a key-value pair.
+	//
+	// This member is required.
+	Tags map[string]string
+
+	// The date and time when the source endpoint was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Availability Zone in which the source endpoint is located.
+	AvailabilityZone *string
+
+	// The ID of the Availability Zone in which the source endpoint is located.
+	AvailabilityZoneId *string
+
+	// The connection details for the source endpoint.
+	ConnectionDetails SourceEndpointConnectionDetails
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	EncryptionConfiguration EndpointEncryptionConfiguration
+
+	// The type of encryption used for the source endpoint connection.
+	EncryptionType EndpointEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceEndpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SourceEndpoint_Arn, *v.Arn)
+	}
+	serializeSourceEndpointAssociatedResourceDetails(s, schemas.SourceEndpoint_AssociatedResourceDetails, v.AssociatedResourceDetails)
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.SourceEndpoint_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.SourceEndpoint_AvailabilityZoneId, *v.AvailabilityZoneId)
+	}
+	serializeSourceEndpointConfiguration(s, schemas.SourceEndpoint_Configuration, v.Configuration)
+	serializeDestinationEndpointArnList(s, schemas.SourceEndpoint_ConnectedDestinations, v.ConnectedDestinations)
+	serializeSourceEndpointConnectionDetails(s, schemas.SourceEndpoint_ConnectionDetails, v.ConnectionDetails)
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.SourceEndpoint_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.SourceEndpoint_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SourceEndpoint_Description, *v.Description)
+	}
+	serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpoint_EncryptionConfiguration, v.EncryptionConfiguration)
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.SourceEndpoint_EncryptionType, string(v.EncryptionType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SourceEndpoint_Id, *v.Id)
+	}
+	if v.LifecycleManagement != "" {
+		s.WriteString(schemas.SourceEndpoint_LifecycleManagement, string(v.LifecycleManagement))
+	}
+	serializeSourceEndpointMessageList(s, schemas.SourceEndpoint_Messages, v.Messages)
+	if v.Name != nil {
+		s.WriteString(schemas.SourceEndpoint_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.SourceEndpoint_RegionName, *v.RegionName)
+	}
+	if v.RegistrationState != "" {
+		s.WriteString(schemas.SourceEndpoint_RegistrationState, string(v.RegistrationState))
+	}
+	serializeResourceShareDetails(s, schemas.SourceEndpoint_ResourceShareDetails, v.ResourceShareDetails)
+	if v.ResourceShareOwnership != "" {
+		s.WriteString(schemas.SourceEndpoint_ResourceShareOwnership, string(v.ResourceShareOwnership))
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.SourceEndpoint_SourceType, string(v.SourceType))
+	}
+	serialize__mapOfString(s, schemas.SourceEndpoint_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.SourceEndpoint_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *SourceEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEndpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceEndpoint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SourceEndpoint_Arn, v.Arn)
+		case schemas.SourceEndpoint_AssociatedResourceDetails:
+			return deserializeSourceEndpointAssociatedResourceDetails(d, schemas.SourceEndpoint_AssociatedResourceDetails, &v.AssociatedResourceDetails)
+		case schemas.SourceEndpoint_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.SourceEndpoint_AvailabilityZone, v.AvailabilityZone)
+		case schemas.SourceEndpoint_AvailabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.SourceEndpoint_AvailabilityZoneId, v.AvailabilityZoneId)
+		case schemas.SourceEndpoint_Configuration:
+			return deserializeSourceEndpointConfiguration(d, schemas.SourceEndpoint_Configuration, &v.Configuration)
+		case schemas.SourceEndpoint_ConnectedDestinations:
+			return deserializeDestinationEndpointArnList(d, schemas.SourceEndpoint_ConnectedDestinations, &v.ConnectedDestinations)
+		case schemas.SourceEndpoint_ConnectionDetails:
+			return deserializeSourceEndpointConnectionDetails(d, schemas.SourceEndpoint_ConnectionDetails, &v.ConnectionDetails)
+		case schemas.SourceEndpoint_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpoint_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = SourceEndpointConnectionState(ev)
+			return nil
+		case schemas.SourceEndpoint_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.SourceEndpoint_CreatedAt, v.CreatedAt)
+		case schemas.SourceEndpoint_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SourceEndpoint_Description, v.Description)
+		case schemas.SourceEndpoint_EncryptionConfiguration:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.SourceEndpoint_EncryptionConfiguration, &v.EncryptionConfiguration)
+		case schemas.SourceEndpoint_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpoint_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.SourceEndpoint_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SourceEndpoint_Id, v.Id)
+		case schemas.SourceEndpoint_LifecycleManagement:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpoint_LifecycleManagement, &ev); err != nil {
+				return err
+			}
+			v.LifecycleManagement = EndpointLifecycle(ev)
+			return nil
+		case schemas.SourceEndpoint_Messages:
+			return deserializeSourceEndpointMessageList(d, schemas.SourceEndpoint_Messages, &v.Messages)
+		case schemas.SourceEndpoint_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SourceEndpoint_Name, v.Name)
+		case schemas.SourceEndpoint_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.SourceEndpoint_RegionName, v.RegionName)
+		case schemas.SourceEndpoint_RegistrationState:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpoint_RegistrationState, &ev); err != nil {
+				return err
+			}
+			v.RegistrationState = SourceEndpointRegistrationState(ev)
+			return nil
+		case schemas.SourceEndpoint_ResourceShareDetails:
+			return deserializeResourceShareDetails(d, schemas.SourceEndpoint_ResourceShareDetails, &v.ResourceShareDetails)
+		case schemas.SourceEndpoint_ResourceShareOwnership:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpoint_ResourceShareOwnership, &ev); err != nil {
+				return err
+			}
+			v.ResourceShareOwnership = ResourceShareOwnership(ev)
+			return nil
+		case schemas.SourceEndpoint_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpoint_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceEndpointType(ev)
+			return nil
+		case schemas.SourceEndpoint_Tags:
+			return deserialize__mapOfString(d, schemas.SourceEndpoint_Tags, &v.Tags)
+		case schemas.SourceEndpoint_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.SourceEndpoint_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// The details of the resource that is associated with a source endpoint. This is
+// a union type, so exactly one of its members is set, depending on the type of the
+// source endpoint.
+//
+// The following types satisfy this interface:
+//
+//	SourceEndpointAssociatedResourceDetailsMemberRouterOutput
+//	SourceEndpointAssociatedResourceDetailsMemberStandard
+type SourceEndpointAssociatedResourceDetails interface {
+	isSourceEndpointAssociatedResourceDetails()
+}
+
+// The associated resource details for a source endpoint that represents a router
+// output.
+type SourceEndpointAssociatedResourceDetailsMemberRouterOutput struct {
+	Value RouterOutputSourceEndpointAssociatedResourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointAssociatedResourceDetailsMemberRouterOutput) isSourceEndpointAssociatedResourceDetails() {
+}
+func (v *SourceEndpointAssociatedResourceDetailsMemberRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointAssociatedResourceDetails_RouterOutput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceEndpointAssociatedResourceDetailsMemberRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The associated resource details for a standard source endpoint.
+type SourceEndpointAssociatedResourceDetailsMemberStandard struct {
+	Value StandardSourceEndpointAssociatedResourceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointAssociatedResourceDetailsMemberStandard) isSourceEndpointAssociatedResourceDetails() {
+}
+func (v *SourceEndpointAssociatedResourceDetailsMemberStandard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointAssociatedResourceDetails_Standard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceEndpointAssociatedResourceDetailsMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a source endpoint. This is a union type, so
+// exactly one of its members is set, depending on the type of the source endpoint.
+//
+// The following types satisfy this interface:
+//
+//	SourceEndpointConfigurationMemberRouterOutput
+//	SourceEndpointConfigurationMemberStandard
+type SourceEndpointConfiguration interface {
+	isSourceEndpointConfiguration()
+}
+
+// The configuration settings for a source endpoint that represents a router
+// output.
+type SourceEndpointConfigurationMemberRouterOutput struct {
+	Value RouterOutputSourceEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointConfigurationMemberRouterOutput) isSourceEndpointConfiguration() {}
+func (v *SourceEndpointConfigurationMemberRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointConfiguration_RouterOutput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceEndpointConfigurationMemberRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a standard source endpoint, which represents an
+// external source.
+type SourceEndpointConfigurationMemberStandard struct {
+	Value StandardSourceEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointConfigurationMemberStandard) isSourceEndpointConfiguration() {}
+func (v *SourceEndpointConfigurationMemberStandard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointConfiguration_Standard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceEndpointConfigurationMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The connection details for a source endpoint. After the source endpoint
+// connects to a destination endpoint, MediaConnect populates these details to
+// describe the connected destination and how the source delivers content to it.
+// This is a union type, so exactly one of its members is set, depending on the
+// source endpoint type.
+//
+// The following types satisfy this interface:
+//
+//	SourceEndpointConnectionDetailsMemberRouterOutput
+//	SourceEndpointConnectionDetailsMemberStandard
+type SourceEndpointConnectionDetails interface {
+	isSourceEndpointConnectionDetails()
+}
+
+// The connection details for a source endpoint that represents a router output.
+type SourceEndpointConnectionDetailsMemberRouterOutput struct {
+	Value RouterOutputSourceEndpointConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointConnectionDetailsMemberRouterOutput) isSourceEndpointConnectionDetails() {}
+func (v *SourceEndpointConnectionDetailsMemberRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointConnectionDetails_RouterOutput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceEndpointConnectionDetailsMemberRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The connection details for a standard source endpoint.
+type SourceEndpointConnectionDetailsMemberStandard struct {
+	Value StandardSourceEndpointConnectionDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointConnectionDetailsMemberStandard) isSourceEndpointConnectionDetails() {}
+func (v *SourceEndpointConnectionDetailsMemberStandard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointConnectionDetails_Standard)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *SourceEndpointConnectionDetailsMemberStandard) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A filter to apply when listing source endpoints. This is a union type, so
+// exactly one of its members is set.
+//
+// The following types satisfy this interface:
+//
+//	SourceEndpointFilterMemberNameContains
+//	SourceEndpointFilterMemberRegionNames
+//	SourceEndpointFilterMemberSourceTypes
+type SourceEndpointFilter interface {
+	isSourceEndpointFilter()
+}
+
+// Filters the results to source endpoints whose names contain the specified
+// strings.
+type SourceEndpointFilterMemberNameContains struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointFilterMemberNameContains) isSourceEndpointFilter() {}
+func (v *SourceEndpointFilterMemberNameContains) Serialize(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.SourceEndpointFilter_NameContains, v.Value)
+}
+func (v *SourceEndpointFilterMemberNameContains) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringList(d, schemas.SourceEndpointFilter_NameContains, &v.Value)
+}
+
+// Filters the results to source endpoints in the specified Amazon Web Services
+// Regions.
+type SourceEndpointFilterMemberRegionNames struct {
+	Value []string
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointFilterMemberRegionNames) isSourceEndpointFilter() {}
+func (v *SourceEndpointFilterMemberRegionNames) Serialize(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.SourceEndpointFilter_RegionNames, v.Value)
+}
+func (v *SourceEndpointFilterMemberRegionNames) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringList(d, schemas.SourceEndpointFilter_RegionNames, &v.Value)
+}
+
+// Filters the results to source endpoints of the specified types.
+type SourceEndpointFilterMemberSourceTypes struct {
+	Value []SourceEndpointType
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceEndpointFilterMemberSourceTypes) isSourceEndpointFilter() {}
+func (v *SourceEndpointFilterMemberSourceTypes) Serialize(s smithy.ShapeSerializer) {
+	serializeSourceEndpointTypeList(s, schemas.SourceEndpointFilter_SourceTypes, v.Value)
+}
+func (v *SourceEndpointFilterMemberSourceTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeSourceEndpointTypeList(d, schemas.SourceEndpointFilter_SourceTypes, &v.Value)
+}
+
+// A status message for a source endpoint.
+type SourceEndpointMessage struct {
+
+	// The message code.
+	//
+	// This member is required.
+	Code *string
+
+	// The message text.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceEndpointMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEndpointMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.SourceEndpointMessage_Code, *v.Code)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.SourceEndpointMessage_Message, *v.Message)
+	}
+}
+func (v *SourceEndpointMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEndpointMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceEndpointMessage_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.SourceEndpointMessage_Code, v.Code)
+		case schemas.SourceEndpointMessage_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SourceEndpointMessage_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// Configuration settings for a router output that is represented by a source
+// endpoint.
+type SourceEndpointRouterOutputConfiguration struct {
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	//
+	// This member is required.
+	DestinationTransitEncryption EndpointEncryptionConfiguration
+
+	// The entity that manages the lifecycle of the associated source endpoint. Valid
+	// values include the following:
+	//
+	//   - MANAGED – MediaConnect manages the lifecycle of the associated source
+	//   endpoint.
+	//
+	//   - UNMANAGED – You manage the lifecycle of the associated source endpoint.
+	//
+	// This member is required.
+	EndpointLifecycleManagement EndpointLifecycle
+
+	// The type of transit encryption applied to the destination content that this
+	// router output sends. Valid values include the following:
+	//
+	//   - SECRETS_MANAGER – The encryption key or passphrase is stored in Secrets
+	//   Manager.
+	//
+	//   - AUTOMATIC – MediaConnect determines the encryption key when the endpoint
+	//   connects.
+	DestinationTransitEncryptionType EndpointEncryptionType
+
+	noSmithyDocumentSerde
+}
+
+func (v *SourceEndpointRouterOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointRouterOutputConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEndpointRouterOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointEncryptionConfiguration(s, schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption, v.DestinationTransitEncryption)
+	if v.DestinationTransitEncryptionType != "" {
+		s.WriteString(schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType, string(v.DestinationTransitEncryptionType))
+	}
+	if v.EndpointLifecycleManagement != "" {
+		s.WriteString(schemas.SourceEndpointRouterOutputConfiguration_EndpointLifecycleManagement, string(v.EndpointLifecycleManagement))
+	}
+}
+func (v *SourceEndpointRouterOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEndpointRouterOutputConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryption, &v.DestinationTransitEncryption)
+		case schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpointRouterOutputConfiguration_DestinationTransitEncryptionType, &ev); err != nil {
+				return err
+			}
+			v.DestinationTransitEncryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.SourceEndpointRouterOutputConfiguration_EndpointLifecycleManagement:
+			var ev string
+			if err := d.ReadString(schemas.SourceEndpointRouterOutputConfiguration_EndpointLifecycleManagement, &ev); err != nil {
+				return err
+			}
+			v.EndpointLifecycleManagement = EndpointLifecycle(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Configuration details for a router output stream that is represented by a
+// source endpoint.
+type SourceEndpointRouterOutputStreamDetails struct {
+	noSmithyDocumentSerde
+}
+
+func (v *SourceEndpointRouterOutputStreamDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceEndpointRouterOutputStreamDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceEndpointRouterOutputStreamDetails) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SourceEndpointRouterOutputStreamDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceEndpointRouterOutputStreamDetails, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 //	The priority you want to assign to a source. You can have a primary stream and
 //
 // a backup stream or two equally prioritized streams.
@@ -10706,6 +13687,123 @@ func (v *SrtCallerRouterOutputConfiguration) Deserialize(d smithy.ShapeDeseriali
 		case schemas.SrtCallerRouterOutputConfiguration_StreamId:
 			v.StreamId = new(string)
 			return d.ReadString(schemas.SrtCallerRouterOutputConfiguration_StreamId, v.StreamId)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a destination endpoint that uses SRT in caller
+// mode.
+type SrtCallerStandardDestinationEndpointConfiguration struct {
+
+	// The minimum latency, in milliseconds, for the SRT connection. The valid range
+	// is 10 to 10000.
+	//
+	// This member is required.
+	MinimumLatencyMilliseconds *int64
+
+	// The port on which the source listens for the connection. The valid range is
+	// 3000 to 30000.
+	//
+	// This member is required.
+	SourceListenerPort *int32
+
+	// The configuration for the Secrets Manager secret that holds the key or
+	// passphrase used to encrypt an endpoint connection.
+	EncryptionPassphrase *EndpointEncryptionSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *SrtCallerStandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SrtCallerStandardDestinationEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SrtCallerStandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionPassphrase != nil {
+		s.WriteStruct(schemas.SrtCallerStandardDestinationEndpointConfiguration_EncryptionPassphrase)
+		v.EncryptionPassphrase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumLatencyMilliseconds != nil {
+		s.WriteInt64(schemas.SrtCallerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds, *v.MinimumLatencyMilliseconds)
+	}
+	if v.SourceListenerPort != nil {
+		s.WriteInt32(schemas.SrtCallerStandardDestinationEndpointConfiguration_SourceListenerPort, *v.SourceListenerPort)
+	}
+}
+func (v *SrtCallerStandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SrtCallerStandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SrtCallerStandardDestinationEndpointConfiguration_EncryptionPassphrase:
+			v.EncryptionPassphrase = &EndpointEncryptionSecretConfiguration{}
+			return v.EncryptionPassphrase.Deserialize(d)
+		case schemas.SrtCallerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds:
+			v.MinimumLatencyMilliseconds = new(int64)
+			return d.ReadInt64(schemas.SrtCallerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds, v.MinimumLatencyMilliseconds)
+		case schemas.SrtCallerStandardDestinationEndpointConfiguration_SourceListenerPort:
+			v.SourceListenerPort = new(int32)
+			return d.ReadInt32(schemas.SrtCallerStandardDestinationEndpointConfiguration_SourceListenerPort, v.SourceListenerPort)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a source endpoint that uses SRT in caller mode.
+type SrtCallerStandardSourceEndpointConfiguration struct {
+
+	// The port on which the destination listens for the connection. The valid range
+	// is 3000 to 30000.
+	//
+	// This member is required.
+	DestinationIngestPort *int32
+
+	// The minimum latency, in milliseconds, for the SRT connection. The valid range
+	// is 10 to 10000.
+	//
+	// This member is required.
+	MinimumLatencyMilliseconds *int64
+
+	// The configuration for the Secrets Manager secret that holds the key or
+	// passphrase used to encrypt an endpoint connection.
+	EncryptionPassphrase *EndpointEncryptionSecretConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (v *SrtCallerStandardSourceEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SrtCallerStandardSourceEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SrtCallerStandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.SrtCallerStandardSourceEndpointConfiguration_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+	if v.EncryptionPassphrase != nil {
+		s.WriteStruct(schemas.SrtCallerStandardSourceEndpointConfiguration_EncryptionPassphrase)
+		v.EncryptionPassphrase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumLatencyMilliseconds != nil {
+		s.WriteInt64(schemas.SrtCallerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds, *v.MinimumLatencyMilliseconds)
+	}
+}
+func (v *SrtCallerStandardSourceEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SrtCallerStandardSourceEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SrtCallerStandardSourceEndpointConfiguration_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.SrtCallerStandardSourceEndpointConfiguration_DestinationIngestPort, v.DestinationIngestPort)
+		case schemas.SrtCallerStandardSourceEndpointConfiguration_EncryptionPassphrase:
+			v.EncryptionPassphrase = &EndpointEncryptionSecretConfiguration{}
+			return v.EncryptionPassphrase.Deserialize(d)
+		case schemas.SrtCallerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds:
+			v.MinimumLatencyMilliseconds = new(int64)
+			return d.ReadInt64(schemas.SrtCallerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds, v.MinimumLatencyMilliseconds)
 		}
 		return nil
 	})
@@ -10901,6 +13999,489 @@ func (v *SrtListenerRouterOutputConfiguration) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// The configuration settings for a destination endpoint that uses SRT in listener
+// mode.
+type SrtListenerStandardDestinationEndpointConfiguration struct {
+
+	// The IP address on which the destination endpoint listens for incoming
+	// connections.
+	//
+	// This member is required.
+	DestinationAddress *string
+
+	// The port on which the destination endpoint listens for incoming connections.
+	// The valid range is 0 to 65531.
+	//
+	// This member is required.
+	DestinationIngestPort *int32
+
+	// The minimum latency, in milliseconds, for the SRT connection. The valid range
+	// is 10 to 10000.
+	//
+	// This member is required.
+	MinimumLatencyMilliseconds *int64
+
+	// The configuration for the Secrets Manager secret that holds the key or
+	// passphrase used to encrypt an endpoint connection.
+	EncryptionPassphrase *EndpointEncryptionSecretConfiguration
+
+	// The stream ID that identifies the content for the SRT connection.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SrtListenerStandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SrtListenerStandardDestinationEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SrtListenerStandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationAddress != nil {
+		s.WriteString(schemas.SrtListenerStandardDestinationEndpointConfiguration_DestinationAddress, *v.DestinationAddress)
+	}
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.SrtListenerStandardDestinationEndpointConfiguration_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+	if v.EncryptionPassphrase != nil {
+		s.WriteStruct(schemas.SrtListenerStandardDestinationEndpointConfiguration_EncryptionPassphrase)
+		v.EncryptionPassphrase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumLatencyMilliseconds != nil {
+		s.WriteInt64(schemas.SrtListenerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds, *v.MinimumLatencyMilliseconds)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.SrtListenerStandardDestinationEndpointConfiguration_StreamId, *v.StreamId)
+	}
+}
+func (v *SrtListenerStandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SrtListenerStandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SrtListenerStandardDestinationEndpointConfiguration_DestinationAddress:
+			v.DestinationAddress = new(string)
+			return d.ReadString(schemas.SrtListenerStandardDestinationEndpointConfiguration_DestinationAddress, v.DestinationAddress)
+		case schemas.SrtListenerStandardDestinationEndpointConfiguration_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.SrtListenerStandardDestinationEndpointConfiguration_DestinationIngestPort, v.DestinationIngestPort)
+		case schemas.SrtListenerStandardDestinationEndpointConfiguration_EncryptionPassphrase:
+			v.EncryptionPassphrase = &EndpointEncryptionSecretConfiguration{}
+			return v.EncryptionPassphrase.Deserialize(d)
+		case schemas.SrtListenerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds:
+			v.MinimumLatencyMilliseconds = new(int64)
+			return d.ReadInt64(schemas.SrtListenerStandardDestinationEndpointConfiguration_MinimumLatencyMilliseconds, v.MinimumLatencyMilliseconds)
+		case schemas.SrtListenerStandardDestinationEndpointConfiguration_StreamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.SrtListenerStandardDestinationEndpointConfiguration_StreamId, v.StreamId)
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a source endpoint that uses SRT in listener mode.
+type SrtListenerStandardSourceEndpointConfiguration struct {
+
+	// The minimum latency, in milliseconds, for the SRT connection. The valid range
+	// is 10 to 10000.
+	//
+	// This member is required.
+	MinimumLatencyMilliseconds *int64
+
+	// The IP address that the source endpoint listens on for incoming connections.
+	//
+	// This member is required.
+	SourceAddress *string
+
+	// The port that the source endpoint listens on for incoming connections. The
+	// valid range is 1024 to 65535.
+	//
+	// This member is required.
+	SourceListenerPort *int32
+
+	// The configuration for the Secrets Manager secret that holds the key or
+	// passphrase used to encrypt an endpoint connection.
+	EncryptionPassphrase *EndpointEncryptionSecretConfiguration
+
+	// The stream ID that identifies the content for the SRT connection.
+	StreamId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SrtListenerStandardSourceEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SrtListenerStandardSourceEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SrtListenerStandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionPassphrase != nil {
+		s.WriteStruct(schemas.SrtListenerStandardSourceEndpointConfiguration_EncryptionPassphrase)
+		v.EncryptionPassphrase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MinimumLatencyMilliseconds != nil {
+		s.WriteInt64(schemas.SrtListenerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds, *v.MinimumLatencyMilliseconds)
+	}
+	if v.SourceAddress != nil {
+		s.WriteString(schemas.SrtListenerStandardSourceEndpointConfiguration_SourceAddress, *v.SourceAddress)
+	}
+	if v.SourceListenerPort != nil {
+		s.WriteInt32(schemas.SrtListenerStandardSourceEndpointConfiguration_SourceListenerPort, *v.SourceListenerPort)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.SrtListenerStandardSourceEndpointConfiguration_StreamId, *v.StreamId)
+	}
+}
+func (v *SrtListenerStandardSourceEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SrtListenerStandardSourceEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SrtListenerStandardSourceEndpointConfiguration_EncryptionPassphrase:
+			v.EncryptionPassphrase = &EndpointEncryptionSecretConfiguration{}
+			return v.EncryptionPassphrase.Deserialize(d)
+		case schemas.SrtListenerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds:
+			v.MinimumLatencyMilliseconds = new(int64)
+			return d.ReadInt64(schemas.SrtListenerStandardSourceEndpointConfiguration_MinimumLatencyMilliseconds, v.MinimumLatencyMilliseconds)
+		case schemas.SrtListenerStandardSourceEndpointConfiguration_SourceAddress:
+			v.SourceAddress = new(string)
+			return d.ReadString(schemas.SrtListenerStandardSourceEndpointConfiguration_SourceAddress, v.SourceAddress)
+		case schemas.SrtListenerStandardSourceEndpointConfiguration_SourceListenerPort:
+			v.SourceListenerPort = new(int32)
+			return d.ReadInt32(schemas.SrtListenerStandardSourceEndpointConfiguration_SourceListenerPort, v.SourceListenerPort)
+		case schemas.SrtListenerStandardSourceEndpointConfiguration_StreamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.SrtListenerStandardSourceEndpointConfiguration_StreamId, v.StreamId)
+		}
+		return nil
+	})
+}
+
+// The associated resource details for a standard destination endpoint. This type
+// does not require any additional settings.
+type StandardDestinationEndpointAssociatedResourceDetails struct {
+	noSmithyDocumentSerde
+}
+
+func (v *StandardDestinationEndpointAssociatedResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointAssociatedResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandardDestinationEndpointAssociatedResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StandardDestinationEndpointAssociatedResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandardDestinationEndpointAssociatedResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a standard destination endpoint.
+type StandardDestinationEndpointConfiguration struct {
+
+	// The networking configuration for the destination endpoint, which determines
+	// whether it is publicly accessible or in a virtual private cloud (VPC).
+	//
+	// This member is required.
+	DestinationNetworkingConfiguration StandardDestinationEndpointNetworkingConfiguration
+
+	// The name of the destination endpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The protocol configuration for the destination endpoint.
+	//
+	// This member is required.
+	ProtocolConfiguration StandardDestinationEndpointProtocolConfiguration
+
+	// The networking type of the destination endpoint. Valid values include the
+	// following:
+	//
+	//   - PUBLIC – The destination endpoint is publicly accessible.
+	//
+	//   - VPC – The destination endpoint is in a virtual private cloud (VPC).
+	DestinationNetworkingType DestinationEndpointNetworkingType
+
+	// The protocol used by the destination endpoint. Valid values include the
+	// following:
+	//
+	//   - RTP – Real-time Transport Protocol.
+	//
+	//   - RIST – Reliable Internet Stream Transport.
+	//
+	//   - SRT_CALLER – Secure Reliable Transport (SRT) in caller mode.
+	//
+	//   - SRT_LISTENER – Secure Reliable Transport (SRT) in listener mode.
+	Protocol DestinationEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+func (v *StandardDestinationEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandardDestinationEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStandardDestinationEndpointNetworkingConfiguration(s, schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration, v.DestinationNetworkingConfiguration)
+	if v.DestinationNetworkingType != "" {
+		s.WriteString(schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingType, string(v.DestinationNetworkingType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StandardDestinationEndpointConfiguration_Name, *v.Name)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.StandardDestinationEndpointConfiguration_Protocol, string(v.Protocol))
+	}
+	serializeStandardDestinationEndpointProtocolConfiguration(s, schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+}
+func (v *StandardDestinationEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandardDestinationEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration:
+			return deserializeStandardDestinationEndpointNetworkingConfiguration(d, schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingConfiguration, &v.DestinationNetworkingConfiguration)
+		case schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingType:
+			var ev string
+			if err := d.ReadString(schemas.StandardDestinationEndpointConfiguration_DestinationNetworkingType, &ev); err != nil {
+				return err
+			}
+			v.DestinationNetworkingType = DestinationEndpointNetworkingType(ev)
+			return nil
+		case schemas.StandardDestinationEndpointConfiguration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StandardDestinationEndpointConfiguration_Name, v.Name)
+		case schemas.StandardDestinationEndpointConfiguration_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.StandardDestinationEndpointConfiguration_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = DestinationEndpointProtocol(ev)
+			return nil
+		case schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration:
+			return deserializeStandardDestinationEndpointProtocolConfiguration(d, schemas.StandardDestinationEndpointConfiguration_ProtocolConfiguration, &v.ProtocolConfiguration)
+		}
+		return nil
+	})
+}
+
+// The connection details for a standard destination endpoint.
+type StandardDestinationEndpointConnectionDetails struct {
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	SourceEncryptionConfiguration EndpointEncryptionConfiguration
+
+	// The type of encryption that the source uses for the connection.
+	SourceEncryptionType EndpointEncryptionType
+
+	// The type of the connected source endpoint.
+	SourceEndpointType SourceEndpointType
+
+	// The IP address of the source that is connected to the destination endpoint.
+	SourceIpAddress *string
+
+	// The port on which the source listens for the connection.
+	SourceListenerPort *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *StandardDestinationEndpointConnectionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointConnectionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandardDestinationEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointEncryptionConfiguration(s, schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, v.SourceEncryptionConfiguration)
+	if v.SourceEncryptionType != "" {
+		s.WriteString(schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionType, string(v.SourceEncryptionType))
+	}
+	if v.SourceEndpointType != "" {
+		s.WriteString(schemas.StandardDestinationEndpointConnectionDetails_SourceEndpointType, string(v.SourceEndpointType))
+	}
+	if v.SourceIpAddress != nil {
+		s.WriteString(schemas.StandardDestinationEndpointConnectionDetails_SourceIpAddress, *v.SourceIpAddress)
+	}
+	if v.SourceListenerPort != nil {
+		s.WriteInt32(schemas.StandardDestinationEndpointConnectionDetails_SourceListenerPort, *v.SourceListenerPort)
+	}
+}
+func (v *StandardDestinationEndpointConnectionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandardDestinationEndpointConnectionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionConfiguration, &v.SourceEncryptionConfiguration)
+		case schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.StandardDestinationEndpointConnectionDetails_SourceEncryptionType, &ev); err != nil {
+				return err
+			}
+			v.SourceEncryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.StandardDestinationEndpointConnectionDetails_SourceEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.StandardDestinationEndpointConnectionDetails_SourceEndpointType, &ev); err != nil {
+				return err
+			}
+			v.SourceEndpointType = SourceEndpointType(ev)
+			return nil
+		case schemas.StandardDestinationEndpointConnectionDetails_SourceIpAddress:
+			v.SourceIpAddress = new(string)
+			return d.ReadString(schemas.StandardDestinationEndpointConnectionDetails_SourceIpAddress, v.SourceIpAddress)
+		case schemas.StandardDestinationEndpointConnectionDetails_SourceListenerPort:
+			v.SourceListenerPort = new(int32)
+			return d.ReadInt32(schemas.StandardDestinationEndpointConnectionDetails_SourceListenerPort, v.SourceListenerPort)
+		}
+		return nil
+	})
+}
+
+// The networking configuration for a standard destination endpoint. This is a
+// union type, so exactly one of its members is set: public for a publicly
+// accessible endpoint, or vpc for an endpoint in a virtual private cloud (VPC).
+//
+// The following types satisfy this interface:
+//
+//	StandardDestinationEndpointNetworkingConfigurationMemberPublic
+//	StandardDestinationEndpointNetworkingConfigurationMemberVpc
+type StandardDestinationEndpointNetworkingConfiguration interface {
+	isStandardDestinationEndpointNetworkingConfiguration()
+}
+
+// The configuration for a publicly accessible destination endpoint.
+type StandardDestinationEndpointNetworkingConfigurationMemberPublic struct {
+	Value PublicDestinationEndpointNetworkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardDestinationEndpointNetworkingConfigurationMemberPublic) isStandardDestinationEndpointNetworkingConfiguration() {
+}
+func (v *StandardDestinationEndpointNetworkingConfigurationMemberPublic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointNetworkingConfiguration_Public)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardDestinationEndpointNetworkingConfigurationMemberPublic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for a destination endpoint in a virtual private cloud (VPC).
+type StandardDestinationEndpointNetworkingConfigurationMemberVpc struct {
+	Value VpcDestinationEndpointNetworkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardDestinationEndpointNetworkingConfigurationMemberVpc) isStandardDestinationEndpointNetworkingConfiguration() {
+}
+func (v *StandardDestinationEndpointNetworkingConfigurationMemberVpc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointNetworkingConfiguration_Vpc)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardDestinationEndpointNetworkingConfigurationMemberVpc) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The protocol configuration for a standard destination endpoint. This is a union
+// type, so exactly one of its members is set, depending on the protocol that the
+// destination endpoint uses.
+//
+// The following types satisfy this interface:
+//
+//	StandardDestinationEndpointProtocolConfigurationMemberRist
+//	StandardDestinationEndpointProtocolConfigurationMemberRtp
+//	StandardDestinationEndpointProtocolConfigurationMemberSrtCaller
+//	StandardDestinationEndpointProtocolConfigurationMemberSrtListener
+type StandardDestinationEndpointProtocolConfiguration interface {
+	isStandardDestinationEndpointProtocolConfiguration()
+}
+
+// The configuration settings for a destination endpoint that uses the RIST
+// protocol.
+type StandardDestinationEndpointProtocolConfigurationMemberRist struct {
+	Value RistStandardDestinationEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardDestinationEndpointProtocolConfigurationMemberRist) isStandardDestinationEndpointProtocolConfiguration() {
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberRist) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointProtocolConfiguration_Rist)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberRist) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a destination endpoint that uses the RTP
+// protocol.
+type StandardDestinationEndpointProtocolConfigurationMemberRtp struct {
+	Value RtpStandardDestinationEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardDestinationEndpointProtocolConfigurationMemberRtp) isStandardDestinationEndpointProtocolConfiguration() {
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberRtp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointProtocolConfiguration_Rtp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberRtp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a destination endpoint that uses SRT in caller
+// mode.
+type StandardDestinationEndpointProtocolConfigurationMemberSrtCaller struct {
+	Value SrtCallerStandardDestinationEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardDestinationEndpointProtocolConfigurationMemberSrtCaller) isStandardDestinationEndpointProtocolConfiguration() {
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberSrtCaller) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointProtocolConfiguration_SrtCaller)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberSrtCaller) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a destination endpoint that uses SRT in listener
+// mode.
+type StandardDestinationEndpointProtocolConfigurationMemberSrtListener struct {
+	Value SrtListenerStandardDestinationEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardDestinationEndpointProtocolConfigurationMemberSrtListener) isStandardDestinationEndpointProtocolConfiguration() {
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberSrtListener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardDestinationEndpointProtocolConfiguration_SrtListener)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardDestinationEndpointProtocolConfigurationMemberSrtListener) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The configuration settings for a standard router input, including the protocol,
 // protocol-specific configuration, network interface, and availability zone.
 type StandardRouterInputConfiguration struct {
@@ -11077,6 +14658,325 @@ func (v *StandardRouterOutputStreamDetails) Deserialize(d smithy.ShapeDeserializ
 		}
 		return nil
 	})
+}
+
+// The associated resource details for a standard source endpoint. This type does
+// not require any additional settings.
+type StandardSourceEndpointAssociatedResourceDetails struct {
+	noSmithyDocumentSerde
+}
+
+func (v *StandardSourceEndpointAssociatedResourceDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointAssociatedResourceDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandardSourceEndpointAssociatedResourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StandardSourceEndpointAssociatedResourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandardSourceEndpointAssociatedResourceDetails, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
+// The configuration settings for a standard source endpoint.
+type StandardSourceEndpointConfiguration struct {
+
+	// The name of the source endpoint.
+	//
+	// This member is required.
+	Name *string
+
+	// The protocol configuration for the source endpoint.
+	//
+	// This member is required.
+	ProtocolConfiguration StandardSourceEndpointProtocolConfiguration
+
+	// The networking configuration for the source endpoint, which determines whether
+	// it is publicly accessible or in a virtual private cloud (VPC).
+	//
+	// This member is required.
+	SourceNetworkingConfiguration StandardSourceEndpointNetworkingConfiguration
+
+	// The protocol used by the source endpoint. Valid values include the following:
+	//
+	//   - RTP – Real-time Transport Protocol.
+	//
+	//   - RIST – Reliable Internet Stream Transport.
+	//
+	//   - SRT_CALLER – Secure Reliable Transport (SRT) in caller mode.
+	//
+	//   - SRT_LISTENER – Secure Reliable Transport (SRT) in listener mode.
+	Protocol SourceEndpointProtocol
+
+	// The networking type of the source endpoint. Valid values include the following:
+	//
+	//   - PUBLIC – The source endpoint is publicly accessible.
+	//
+	//   - VPC – The source endpoint is in a virtual private cloud (VPC).
+	SourceNetworkingType SourceEndpointNetworkingType
+
+	noSmithyDocumentSerde
+}
+
+func (v *StandardSourceEndpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandardSourceEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StandardSourceEndpointConfiguration_Name, *v.Name)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.StandardSourceEndpointConfiguration_Protocol, string(v.Protocol))
+	}
+	serializeStandardSourceEndpointProtocolConfiguration(s, schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration, v.ProtocolConfiguration)
+	serializeStandardSourceEndpointNetworkingConfiguration(s, schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration, v.SourceNetworkingConfiguration)
+	if v.SourceNetworkingType != "" {
+		s.WriteString(schemas.StandardSourceEndpointConfiguration_SourceNetworkingType, string(v.SourceNetworkingType))
+	}
+}
+func (v *StandardSourceEndpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandardSourceEndpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StandardSourceEndpointConfiguration_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StandardSourceEndpointConfiguration_Name, v.Name)
+		case schemas.StandardSourceEndpointConfiguration_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.StandardSourceEndpointConfiguration_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = SourceEndpointProtocol(ev)
+			return nil
+		case schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration:
+			return deserializeStandardSourceEndpointProtocolConfiguration(d, schemas.StandardSourceEndpointConfiguration_ProtocolConfiguration, &v.ProtocolConfiguration)
+		case schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration:
+			return deserializeStandardSourceEndpointNetworkingConfiguration(d, schemas.StandardSourceEndpointConfiguration_SourceNetworkingConfiguration, &v.SourceNetworkingConfiguration)
+		case schemas.StandardSourceEndpointConfiguration_SourceNetworkingType:
+			var ev string
+			if err := d.ReadString(schemas.StandardSourceEndpointConfiguration_SourceNetworkingType, &ev); err != nil {
+				return err
+			}
+			v.SourceNetworkingType = SourceEndpointNetworkingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The connection details for a standard source endpoint.
+type StandardSourceEndpointConnectionDetails struct {
+
+	// The encryption settings for an endpoint connection. This is a union type, so
+	// exactly one of its members is set: secretsManager when you store the encryption
+	// key or passphrase in Secrets Manager, or automatic when you let MediaConnect
+	// determine the encryption key when the endpoint connects.
+	DestinationDecryptionConfiguration EndpointEncryptionConfiguration
+
+	// The type of decryption that the destination uses for the connection.
+	DestinationDecryptionType EndpointEncryptionType
+
+	// The type of the connected destination endpoint.
+	DestinationEndpointType DestinationEndpointType
+
+	// The port on the destination that receives the content.
+	DestinationIngestPort *int32
+
+	// The IP address of the destination that receives the content.
+	DestinationIpAddress *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *StandardSourceEndpointConnectionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointConnectionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StandardSourceEndpointConnectionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointEncryptionConfiguration(s, schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, v.DestinationDecryptionConfiguration)
+	if v.DestinationDecryptionType != "" {
+		s.WriteString(schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionType, string(v.DestinationDecryptionType))
+	}
+	if v.DestinationEndpointType != "" {
+		s.WriteString(schemas.StandardSourceEndpointConnectionDetails_DestinationEndpointType, string(v.DestinationEndpointType))
+	}
+	if v.DestinationIngestPort != nil {
+		s.WriteInt32(schemas.StandardSourceEndpointConnectionDetails_DestinationIngestPort, *v.DestinationIngestPort)
+	}
+	if v.DestinationIpAddress != nil {
+		s.WriteString(schemas.StandardSourceEndpointConnectionDetails_DestinationIpAddress, *v.DestinationIpAddress)
+	}
+}
+func (v *StandardSourceEndpointConnectionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StandardSourceEndpointConnectionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration:
+			return deserializeEndpointEncryptionConfiguration(d, schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionConfiguration, &v.DestinationDecryptionConfiguration)
+		case schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionType:
+			var ev string
+			if err := d.ReadString(schemas.StandardSourceEndpointConnectionDetails_DestinationDecryptionType, &ev); err != nil {
+				return err
+			}
+			v.DestinationDecryptionType = EndpointEncryptionType(ev)
+			return nil
+		case schemas.StandardSourceEndpointConnectionDetails_DestinationEndpointType:
+			var ev string
+			if err := d.ReadString(schemas.StandardSourceEndpointConnectionDetails_DestinationEndpointType, &ev); err != nil {
+				return err
+			}
+			v.DestinationEndpointType = DestinationEndpointType(ev)
+			return nil
+		case schemas.StandardSourceEndpointConnectionDetails_DestinationIngestPort:
+			v.DestinationIngestPort = new(int32)
+			return d.ReadInt32(schemas.StandardSourceEndpointConnectionDetails_DestinationIngestPort, v.DestinationIngestPort)
+		case schemas.StandardSourceEndpointConnectionDetails_DestinationIpAddress:
+			v.DestinationIpAddress = new(string)
+			return d.ReadString(schemas.StandardSourceEndpointConnectionDetails_DestinationIpAddress, v.DestinationIpAddress)
+		}
+		return nil
+	})
+}
+
+// The networking configuration for a standard source endpoint. This is a union
+// type, so exactly one of its members is set: public for a publicly accessible
+// endpoint, or vpc for an endpoint in a virtual private cloud (VPC).
+//
+// The following types satisfy this interface:
+//
+//	StandardSourceEndpointNetworkingConfigurationMemberPublic
+//	StandardSourceEndpointNetworkingConfigurationMemberVpc
+type StandardSourceEndpointNetworkingConfiguration interface {
+	isStandardSourceEndpointNetworkingConfiguration()
+}
+
+// The configuration for a publicly accessible source endpoint.
+type StandardSourceEndpointNetworkingConfigurationMemberPublic struct {
+	Value PublicSourceEndpointNetworkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardSourceEndpointNetworkingConfigurationMemberPublic) isStandardSourceEndpointNetworkingConfiguration() {
+}
+func (v *StandardSourceEndpointNetworkingConfigurationMemberPublic) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointNetworkingConfiguration_Public)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardSourceEndpointNetworkingConfigurationMemberPublic) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration for a source endpoint in a virtual private cloud (VPC).
+type StandardSourceEndpointNetworkingConfigurationMemberVpc struct {
+	Value VpcSourceEndpointNetworkingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardSourceEndpointNetworkingConfigurationMemberVpc) isStandardSourceEndpointNetworkingConfiguration() {
+}
+func (v *StandardSourceEndpointNetworkingConfigurationMemberVpc) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointNetworkingConfiguration_Vpc)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardSourceEndpointNetworkingConfigurationMemberVpc) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The protocol configuration for a standard source endpoint. This is a union
+// type, so exactly one of its members is set, depending on the protocol that the
+// source endpoint uses.
+//
+// The following types satisfy this interface:
+//
+//	StandardSourceEndpointProtocolConfigurationMemberRist
+//	StandardSourceEndpointProtocolConfigurationMemberRtp
+//	StandardSourceEndpointProtocolConfigurationMemberSrtCaller
+//	StandardSourceEndpointProtocolConfigurationMemberSrtListener
+type StandardSourceEndpointProtocolConfiguration interface {
+	isStandardSourceEndpointProtocolConfiguration()
+}
+
+// The configuration settings for a source endpoint that uses the RIST protocol.
+type StandardSourceEndpointProtocolConfigurationMemberRist struct {
+	Value RistStandardSourceEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardSourceEndpointProtocolConfigurationMemberRist) isStandardSourceEndpointProtocolConfiguration() {
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberRist) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointProtocolConfiguration_Rist)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberRist) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a source endpoint that uses the RTP protocol.
+type StandardSourceEndpointProtocolConfigurationMemberRtp struct {
+	Value RtpStandardSourceEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardSourceEndpointProtocolConfigurationMemberRtp) isStandardSourceEndpointProtocolConfiguration() {
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberRtp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointProtocolConfiguration_Rtp)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberRtp) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a source endpoint that uses SRT in caller mode.
+type StandardSourceEndpointProtocolConfigurationMemberSrtCaller struct {
+	Value SrtCallerStandardSourceEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardSourceEndpointProtocolConfigurationMemberSrtCaller) isStandardSourceEndpointProtocolConfiguration() {
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberSrtCaller) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointProtocolConfiguration_SrtCaller)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberSrtCaller) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// The configuration settings for a source endpoint that uses SRT in listener mode.
+type StandardSourceEndpointProtocolConfigurationMemberSrtListener struct {
+	Value SrtListenerStandardSourceEndpointConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*StandardSourceEndpointProtocolConfigurationMemberSrtListener) isStandardSourceEndpointProtocolConfiguration() {
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberSrtListener) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StandardSourceEndpointProtocolConfiguration_SrtListener)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StandardSourceEndpointProtocolConfigurationMemberSrtListener) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 //	The details of the thumbnail, including thumbnail base64 string, timecode and
@@ -12268,6 +16168,49 @@ func (v *VideoMonitoringSetting) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The networking configuration for a destination endpoint in a virtual private
+// cloud (VPC).
+type VpcDestinationEndpointNetworkingConfiguration struct {
+
+	// The IDs of the security groups to associate with the destination endpoint. You
+	// can specify from 1 to 5 security groups.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The ID of the subnet to use for the destination endpoint.
+	//
+	// This member is required.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VpcDestinationEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcDestinationEndpointNetworkingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcDestinationEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIdList(s, schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.VpcDestinationEndpointNetworkingConfiguration_SubnetId, *v.SubnetId)
+	}
+}
+func (v *VpcDestinationEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcDestinationEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.VpcDestinationEndpointNetworkingConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcDestinationEndpointNetworkingConfiguration_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.VpcDestinationEndpointNetworkingConfiguration_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // The settings for a VPC source.
 type VpcInterface struct {
 
@@ -12520,6 +16463,49 @@ func (v *VpcRouterNetworkInterfaceConfiguration) Deserialize(d smithy.ShapeDeser
 	})
 }
 
+// The networking configuration for a source endpoint in a virtual private cloud
+// (VPC).
+type VpcSourceEndpointNetworkingConfiguration struct {
+
+	// The IDs of the security groups to associate with the source endpoint. You can
+	// specify from 1 to 5 security groups.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The ID of the subnet to use for the source endpoint.
+	//
+	// This member is required.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *VpcSourceEndpointNetworkingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcSourceEndpointNetworkingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcSourceEndpointNetworkingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIdList(s, schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.VpcSourceEndpointNetworkingConfiguration_SubnetId, *v.SubnetId)
+	}
+}
+func (v *VpcSourceEndpointNetworkingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcSourceEndpointNetworkingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.VpcSourceEndpointNetworkingConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcSourceEndpointNetworkingConfiguration_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.VpcSourceEndpointNetworkingConfiguration_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // Defines a specific time window for maintenance operations.
 type WindowMaintenanceSchedule struct {
 
@@ -12586,23 +16572,37 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isFailoverRouterInputProtocolConfiguration()     {}
-func (*UnknownUnionMember) isFlowTransitEncryptionKeyConfiguration()        {}
-func (*UnknownUnionMember) isMaintenanceConfiguration()                     {}
-func (*UnknownUnionMember) isMaintenanceSchedule()                          {}
-func (*UnknownUnionMember) isMediaLiveTransitEncryptionKeyConfiguration()   {}
-func (*UnknownUnionMember) isMergeRouterInputProtocolConfiguration()        {}
-func (*UnknownUnionMember) isRouterContentQualityAnalysisConfiguration()    {}
-func (*UnknownUnionMember) isRouterInputConfiguration()                     {}
-func (*UnknownUnionMember) isRouterInputFilter()                            {}
-func (*UnknownUnionMember) isRouterInputMetadata()                          {}
-func (*UnknownUnionMember) isRouterInputProtocolConfiguration()             {}
-func (*UnknownUnionMember) isRouterInputStreamDetails()                     {}
-func (*UnknownUnionMember) isRouterInputTransitEncryptionKeyConfiguration() {}
-func (*UnknownUnionMember) isRouterNetworkInterfaceConfiguration()          {}
-func (*UnknownUnionMember) isRouterNetworkInterfaceFilter()                 {}
-func (*UnknownUnionMember) isRouterOutputConfiguration()                    {}
-func (*UnknownUnionMember) isRouterOutputFilter()                           {}
-func (*UnknownUnionMember) isRouterOutputProtocolConfiguration()            {}
-func (*UnknownUnionMember) isRouterOutputStreamDetails()                    {}
-func (*UnknownUnionMember) isTlsEncryptionConfiguration()                   {}
+func (*UnknownUnionMember) isDestinationEndpointAssociatedResourceDetails()       {}
+func (*UnknownUnionMember) isDestinationEndpointConfiguration()                   {}
+func (*UnknownUnionMember) isDestinationEndpointConnectionDetails()               {}
+func (*UnknownUnionMember) isDestinationEndpointFilter()                          {}
+func (*UnknownUnionMember) isEndpointEncryptionConfiguration()                    {}
+func (*UnknownUnionMember) isFailoverRouterInputProtocolConfiguration()           {}
+func (*UnknownUnionMember) isFlowTransitEncryptionKeyConfiguration()              {}
+func (*UnknownUnionMember) isMaintenanceConfiguration()                           {}
+func (*UnknownUnionMember) isMaintenanceSchedule()                                {}
+func (*UnknownUnionMember) isMediaLiveTransitEncryptionKeyConfiguration()         {}
+func (*UnknownUnionMember) isMergeRouterInputProtocolConfiguration()              {}
+func (*UnknownUnionMember) isResourceShareDetails()                               {}
+func (*UnknownUnionMember) isRouterContentQualityAnalysisConfiguration()          {}
+func (*UnknownUnionMember) isRouterInputConfiguration()                           {}
+func (*UnknownUnionMember) isRouterInputFilter()                                  {}
+func (*UnknownUnionMember) isRouterInputMetadata()                                {}
+func (*UnknownUnionMember) isRouterInputProtocolConfiguration()                   {}
+func (*UnknownUnionMember) isRouterInputStreamDetails()                           {}
+func (*UnknownUnionMember) isRouterInputTransitEncryptionKeyConfiguration()       {}
+func (*UnknownUnionMember) isRouterNetworkInterfaceConfiguration()                {}
+func (*UnknownUnionMember) isRouterNetworkInterfaceFilter()                       {}
+func (*UnknownUnionMember) isRouterOutputConfiguration()                          {}
+func (*UnknownUnionMember) isRouterOutputFilter()                                 {}
+func (*UnknownUnionMember) isRouterOutputProtocolConfiguration()                  {}
+func (*UnknownUnionMember) isRouterOutputStreamDetails()                          {}
+func (*UnknownUnionMember) isSourceEndpointAssociatedResourceDetails()            {}
+func (*UnknownUnionMember) isSourceEndpointConfiguration()                        {}
+func (*UnknownUnionMember) isSourceEndpointConnectionDetails()                    {}
+func (*UnknownUnionMember) isSourceEndpointFilter()                               {}
+func (*UnknownUnionMember) isStandardDestinationEndpointNetworkingConfiguration() {}
+func (*UnknownUnionMember) isStandardDestinationEndpointProtocolConfiguration()   {}
+func (*UnknownUnionMember) isStandardSourceEndpointNetworkingConfiguration()      {}
+func (*UnknownUnionMember) isStandardSourceEndpointProtocolConfiguration()        {}
+func (*UnknownUnionMember) isTlsEncryptionConfiguration()                         {}

@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,28 @@ type StartReadSetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReadSetExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReadSetExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReadSetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartReadSetExportJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.StartReadSetExportJobRequest_destination, *v.Destination)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartReadSetExportJobRequest_roleArn, *v.RoleArn)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.StartReadSetExportJobRequest_sequenceStoreId, *v.SequenceStoreId)
+	}
+	serializeExportReadSetList(s, schemas.StartReadSetExportJobRequest_sources, v.Sources)
+}
+
 type StartReadSetExportJobOutput struct {
 
 	// When the job was created.
@@ -94,13 +118,60 @@ type StartReadSetExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReadSetExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReadSetExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReadSetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.StartReadSetExportJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.StartReadSetExportJobResponse_destination, *v.Destination)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartReadSetExportJobResponse_id, *v.Id)
+	}
+	if v.SequenceStoreId != nil {
+		s.WriteString(schemas.StartReadSetExportJobResponse_sequenceStoreId, *v.SequenceStoreId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartReadSetExportJobResponse_status, string(v.Status))
+	}
+}
+func (v *StartReadSetExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReadSetExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReadSetExportJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartReadSetExportJobResponse_creationTime, v.CreationTime)
+		case schemas.StartReadSetExportJobResponse_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.StartReadSetExportJobResponse_destination, v.Destination)
+		case schemas.StartReadSetExportJobResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartReadSetExportJobResponse_id, v.Id)
+		case schemas.StartReadSetExportJobResponse_sequenceStoreId:
+			v.SequenceStoreId = new(string)
+			return d.ReadString(schemas.StartReadSetExportJobResponse_sequenceStoreId, v.SequenceStoreId)
+		case schemas.StartReadSetExportJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartReadSetExportJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ReadSetExportJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReadSetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartReadSetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReadSetExportJob, schemas.StartReadSetExportJobRequest, schemas.StartReadSetExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartReadSetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReadSetExportJob, schemas.StartReadSetExportJobRequest, schemas.StartReadSetExportJobResponse), output: &StartReadSetExportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

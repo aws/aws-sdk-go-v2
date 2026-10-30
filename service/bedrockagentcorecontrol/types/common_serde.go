@@ -40,6 +40,21 @@ func serializeAgentRuntimeArtifact(s smithy.ShapeSerializer, schema *smithy.Sche
 	}
 }
 
+func serializeAllowedPort(s smithy.ShapeSerializer, schema *smithy.Schema, v AllowedPort) {
+	switch vv := v.(type) {
+	case *AllowedPortMemberPort:
+		s.WriteUnion(schema, schemas.AllowedPort_port)
+		s.WriteInt32(schemas.AllowedPort_port, vv.Value)
+		s.CloseUnion()
+	case *AllowedPortMemberPortRange:
+		s.WriteUnion(schema, schemas.AllowedPort_portRange)
+		s.WriteStruct(schemas.AllowedPort_portRange)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeApiSchemaConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ApiSchemaConfiguration) {
 	switch vv := v.(type) {
 	case *ApiSchemaConfigurationMemberInlinePayload:
@@ -1541,6 +1556,22 @@ func deserializeAgentRuntimeArtifact(d smithy.ShapeDeserializer, s *smithy.Schem
 	})
 }
 
+func deserializeAllowedPort(d smithy.ShapeDeserializer, s *smithy.Schema, v *AllowedPort) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.AllowedPort_port:
+			vv := &AllowedPortMemberPort{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.AllowedPort_portRange:
+			vv := &AllowedPortMemberPortRange{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 func deserializeApiSchemaConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ApiSchemaConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
@@ -3025,6 +3056,17 @@ func serializeAllowedClientsList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeAllowedPorts(s smithy.ShapeSerializer, schema *smithy.Schema, v []AllowedPort) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		serializeAllowedPort(s, schema.ListMember(), vv)
 	}
 	s.CloseList()
 }
@@ -4875,6 +4917,27 @@ func deserializeAllowedClientsList(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAllowedPorts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AllowedPort) error {
+	*v = make([]AllowedPort, 0)
+	var vv AllowedPort
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AllowedPort
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := deserializeAllowedPort(d, s.ListMember(), &vv); err != nil {
 			return err
 		}
 

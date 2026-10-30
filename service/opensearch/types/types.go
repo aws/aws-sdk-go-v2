@@ -1751,6 +1751,96 @@ func (v *CapabilityFailure) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The result of comparing one metadata category between two domains.
+type CategoryDiffResult struct {
+
+	// The number of items that exist on both domains but differ.
+	Diverged int32
+
+	// The number of items that are identical on both domains.
+	InSync int32
+
+	// The names of the items that differ, and for diverging items, the fields that
+	// differ.
+	Items *DiffItems
+
+	// The number of items that exist only on the source domain.
+	SourceOnly int32
+
+	// Whether the category was compared successfully. compared means the result is
+	// complete; error means the category could not be read.
+	Status DiffStatus
+
+	// The number of items that exist only on the target domain.
+	TargetOnly int32
+
+	// Whether Items omits some differences because the category contained more than
+	// the response can carry. The counts remain complete when this is true .
+	Truncated *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *CategoryDiffResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoryDiffResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoryDiffResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Diverged != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_Diverged, v.Diverged)
+	}
+	if v.InSync != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_InSync, v.InSync)
+	}
+	if v.Items != nil {
+		s.WriteStruct(schemas.CategoryDiffResult_Items)
+		v.Items.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceOnly != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_SourceOnly, v.SourceOnly)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CategoryDiffResult_Status, string(v.Status))
+	}
+	if v.TargetOnly != 0 {
+		s.WriteInt32(schemas.CategoryDiffResult_TargetOnly, v.TargetOnly)
+	}
+	if v.Truncated != nil {
+		s.WriteBool(schemas.CategoryDiffResult_Truncated, *v.Truncated)
+	}
+}
+func (v *CategoryDiffResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoryDiffResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoryDiffResult_Diverged:
+			return d.ReadInt32(schemas.CategoryDiffResult_Diverged, &v.Diverged)
+		case schemas.CategoryDiffResult_InSync:
+			return d.ReadInt32(schemas.CategoryDiffResult_InSync, &v.InSync)
+		case schemas.CategoryDiffResult_Items:
+			v.Items = &DiffItems{}
+			return v.Items.Deserialize(d)
+		case schemas.CategoryDiffResult_SourceOnly:
+			return d.ReadInt32(schemas.CategoryDiffResult_SourceOnly, &v.SourceOnly)
+		case schemas.CategoryDiffResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.CategoryDiffResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DiffStatus(ev)
+			return nil
+		case schemas.CategoryDiffResult_TargetOnly:
+			return d.ReadInt32(schemas.CategoryDiffResult_TargetOnly, &v.TargetOnly)
+		case schemas.CategoryDiffResult_Truncated:
+			v.Truncated = new(bool)
+			return d.ReadBool(schemas.CategoryDiffResult_Truncated, v.Truncated)
+		}
+		return nil
+	})
+}
+
 // Container for information about a configuration change happening on a domain.
 type ChangeProgressDetails struct {
 
@@ -2866,6 +2956,46 @@ func (v *DescribePackagesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The items that differ within one metadata category.
+type DiffItems struct {
+
+	// The items that exist on both domains but differ, with the diverging fields.
+	Diverged []DivergentItem
+
+	// The names of items that exist only on the source domain.
+	SourceOnly []string
+
+	// The names of items that exist only on the target domain.
+	TargetOnly []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DiffItems) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiffItems)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiffItems) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDivergentItemList(s, schemas.DiffItems_Diverged, v.Diverged)
+	serializeDiffItemNameList(s, schemas.DiffItems_SourceOnly, v.SourceOnly)
+	serializeDiffItemNameList(s, schemas.DiffItems_TargetOnly, v.TargetOnly)
+}
+func (v *DiffItems) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiffItems, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiffItems_Diverged:
+			return deserializeDivergentItemList(d, schemas.DiffItems_Diverged, &v.Diverged)
+		case schemas.DiffItems_SourceOnly:
+			return deserializeDiffItemNameList(d, schemas.DiffItems_SourceOnly, &v.SourceOnly)
+		case schemas.DiffItems_TargetOnly:
+			return deserializeDiffItemNameList(d, schemas.DiffItems_TargetOnly, &v.TargetOnly)
+		}
+		return nil
+	})
+}
+
 // The configuration details for a data source that can be directly queried.
 type DirectQueryDataSource struct {
 
@@ -2999,6 +3129,105 @@ func (v *DirectQueryDataSourceTypeMemberSecurityLake) Serialize(s smithy.ShapeSe
 }
 func (v *DirectQueryDataSourceTypeMemberSecurityLake) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
+}
+
+// A single field that differs between the source and target copies of an item.
+type DivergentField struct {
+
+	// The location of the field within the item.
+	Path *string
+
+	// How the comparison treats this field.
+	Policy DiffFieldPolicy
+
+	// The field's value on the source domain.
+	SourceValue *string
+
+	// The field's value on the target domain.
+	TargetValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DivergentField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DivergentField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DivergentField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.DivergentField_Path, *v.Path)
+	}
+	if v.Policy != "" {
+		s.WriteString(schemas.DivergentField_Policy, string(v.Policy))
+	}
+	if v.SourceValue != nil {
+		s.WriteString(schemas.DivergentField_SourceValue, *v.SourceValue)
+	}
+	if v.TargetValue != nil {
+		s.WriteString(schemas.DivergentField_TargetValue, *v.TargetValue)
+	}
+}
+func (v *DivergentField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DivergentField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DivergentField_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.DivergentField_Path, v.Path)
+		case schemas.DivergentField_Policy:
+			var ev string
+			if err := d.ReadString(schemas.DivergentField_Policy, &ev); err != nil {
+				return err
+			}
+			v.Policy = DiffFieldPolicy(ev)
+			return nil
+		case schemas.DivergentField_SourceValue:
+			v.SourceValue = new(string)
+			return d.ReadString(schemas.DivergentField_SourceValue, v.SourceValue)
+		case schemas.DivergentField_TargetValue:
+			v.TargetValue = new(string)
+			return d.ReadString(schemas.DivergentField_TargetValue, v.TargetValue)
+		}
+		return nil
+	})
+}
+
+// An item that exists on both domains but whose contents differ.
+type DivergentItem struct {
+
+	// The fields of the item that differ.
+	Fields []DivergentField
+
+	// The name of the item.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *DivergentItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DivergentItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DivergentItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDivergentFieldList(s, schemas.DivergentItem_Fields, v.Fields)
+	if v.Name != nil {
+		s.WriteString(schemas.DivergentItem_Name, *v.Name)
+	}
+}
+func (v *DivergentItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DivergentItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DivergentItem_Fields:
+			return deserializeDivergentFieldList(d, schemas.DivergentItem_Fields, &v.Fields)
+		case schemas.DivergentItem_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DivergentItem_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Container for the configuration of an OpenSearch Service domain.
@@ -8107,6 +8336,95 @@ func (v *RecurringCharge) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.RecurringCharge_RecurringChargeFrequency:
 			v.RecurringChargeFrequency = new(string)
 			return d.ReadString(schemas.RecurringCharge_RecurringChargeFrequency, v.RecurringChargeFrequency)
+		}
+		return nil
+	})
+}
+
+// A domain that another domain replicates with, and the state of that
+// relationship.
+type ReplicationPeer struct {
+
+	// The Amazon Resource Name (ARN) of the peer domain.
+	PeerDomainArn *string
+
+	// The peer's role in the relationship, either PRIMARY or SECONDARY .
+	PeerRole ReplicationRole
+
+	// The state of the relationship:
+	//
+	//   - PENDING_SETUP - replication is being established.
+	//
+	//   - ACTIVE - replication is running.
+	//
+	//   - SWITCHING_OVER - a planned promotion is in progress.
+	//
+	//   - FAILING_OVER - an unplanned promotion is in progress.
+	//
+	//   - PENDING_REMOVAL - replication is being stopped.
+	//
+	//   - DETACHED - the relationship has ended.
+	//
+	//   - EJECTED - a failover promoted the other domain. The former primary keeps the
+	//   data it had when it was ejected and stays read-only until you remove the peer,
+	//   or discard that data and pair again.
+	//
+	//   - FAILED - setup or teardown could not complete. You can still remove the
+	//   relationship.
+	//
+	// A relationship that is removed successfully no longer appears in Peers .
+	Status ReplicationStatus
+
+	// An explanation of why the relationship is in its current state, when more
+	// detail is available.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *ReplicationPeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicationPeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicationPeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeerDomainArn != nil {
+		s.WriteString(schemas.ReplicationPeer_PeerDomainArn, *v.PeerDomainArn)
+	}
+	if v.PeerRole != "" {
+		s.WriteString(schemas.ReplicationPeer_PeerRole, string(v.PeerRole))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ReplicationPeer_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ReplicationPeer_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ReplicationPeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicationPeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicationPeer_PeerDomainArn:
+			v.PeerDomainArn = new(string)
+			return d.ReadString(schemas.ReplicationPeer_PeerDomainArn, v.PeerDomainArn)
+		case schemas.ReplicationPeer_PeerRole:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationPeer_PeerRole, &ev); err != nil {
+				return err
+			}
+			v.PeerRole = ReplicationRole(ev)
+			return nil
+		case schemas.ReplicationPeer_Status:
+			var ev string
+			if err := d.ReadString(schemas.ReplicationPeer_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ReplicationStatus(ev)
+			return nil
+		case schemas.ReplicationPeer_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ReplicationPeer_StatusMessage, v.StatusMessage)
 		}
 		return nil
 	})

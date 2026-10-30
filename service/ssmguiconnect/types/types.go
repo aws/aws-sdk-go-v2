@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ssmguiconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -26,6 +28,36 @@ type ConnectionRecordingPreferences struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionRecordingPreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionRecordingPreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionRecordingPreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KMSKeyArn != nil {
+		s.WriteString(schemas.ConnectionRecordingPreferences_KMSKeyArn, *v.KMSKeyArn)
+	}
+	if v.RecordingDestinations != nil {
+		s.WriteStruct(schemas.ConnectionRecordingPreferences_RecordingDestinations)
+		v.RecordingDestinations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectionRecordingPreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionRecordingPreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionRecordingPreferences_KMSKeyArn:
+			v.KMSKeyArn = new(string)
+			return d.ReadString(schemas.ConnectionRecordingPreferences_KMSKeyArn, v.KMSKeyArn)
+		case schemas.ConnectionRecordingPreferences_RecordingDestinations:
+			v.RecordingDestinations = &RecordingDestinations{}
+			return v.RecordingDestinations.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Determines where recordings of RDP connections are stored.
 type RecordingDestinations struct {
 
@@ -35,6 +67,25 @@ type RecordingDestinations struct {
 	S3Buckets []S3Bucket
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecordingDestinations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordingDestinations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordingDestinations) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeS3Buckets(s, schemas.RecordingDestinations_S3Buckets, v.S3Buckets)
+}
+func (v *RecordingDestinations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordingDestinations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordingDestinations_S3Buckets:
+			return deserializeS3Buckets(d, schemas.RecordingDestinations_S3Buckets, &v.S3Buckets)
+		}
+		return nil
+	})
 }
 
 // The S3 bucket where RDP connection recordings are stored.
@@ -51,6 +102,34 @@ type S3Bucket struct {
 	BucketOwner *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3Bucket) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Bucket)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Bucket) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Bucket_BucketName, *v.BucketName)
+	}
+	if v.BucketOwner != nil {
+		s.WriteString(schemas.S3Bucket_BucketOwner, *v.BucketOwner)
+	}
+}
+func (v *S3Bucket) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Bucket, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Bucket_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Bucket_BucketName, v.BucketName)
+		case schemas.S3Bucket_BucketOwner:
+			v.BucketOwner = new(string)
+			return d.ReadString(schemas.S3Bucket_BucketOwner, v.BucketOwner)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

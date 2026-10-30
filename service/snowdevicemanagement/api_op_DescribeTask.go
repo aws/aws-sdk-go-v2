@@ -4,7 +4,9 @@ package snowdevicemanagement
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,28 @@ type DescribeTaskInput struct {
 	TaskId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeTaskInput_taskId, *v.TaskId)
+	}
+}
+func (v *DescribeTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTaskInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTaskInput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.DescribeTaskInput_taskId, v.TaskId)
+		}
+		return nil
+	})
 }
 
 type DescribeTaskOutput struct {
@@ -71,13 +95,78 @@ type DescribeTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletedAt != nil {
+		s.WriteTime(schemas.DescribeTaskOutput_completedAt, *v.CompletedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeTaskOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeTaskOutput_description, *v.Description)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DescribeTaskOutput_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeTaskOutput_state, string(v.State))
+	}
+	serializeTagMap(s, schemas.DescribeTaskOutput_tags, v.Tags)
+	serializeTargetList(s, schemas.DescribeTaskOutput_targets, v.Targets)
+	if v.TaskArn != nil {
+		s.WriteString(schemas.DescribeTaskOutput_taskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *DescribeTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTaskOutput_completedAt:
+			v.CompletedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskOutput_completedAt, v.CompletedAt)
+		case schemas.DescribeTaskOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskOutput_createdAt, v.CreatedAt)
+		case schemas.DescribeTaskOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeTaskOutput_description, v.Description)
+		case schemas.DescribeTaskOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeTaskOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DescribeTaskOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTaskOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.TaskState(ev)
+			return nil
+		case schemas.DescribeTaskOutput_tags:
+			return deserializeTagMap(d, schemas.DescribeTaskOutput_tags, &v.Tags)
+		case schemas.DescribeTaskOutput_targets:
+			return deserializeTargetList(d, schemas.DescribeTaskOutput_targets, &v.Targets)
+		case schemas.DescribeTaskOutput_taskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.DescribeTaskOutput_taskArn, v.TaskArn)
+		case schemas.DescribeTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.DescribeTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTask, schemas.DescribeTaskInput, schemas.DescribeTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTask, schemas.DescribeTaskInput, schemas.DescribeTaskOutput), output: &DescribeTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,8 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type PutWhatsAppBusinessPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutWhatsAppBusinessPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutWhatsAppBusinessPublicKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutWhatsAppBusinessPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessPublicKey != nil {
+		s.WriteString(schemas.PutWhatsAppBusinessPublicKeyInput_businessPublicKey, *v.BusinessPublicKey)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.PutWhatsAppBusinessPublicKeyInput_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.OriginationPhoneNumberId != nil {
+		s.WriteString(schemas.PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
+	}
+}
+
 type PutWhatsAppBusinessPublicKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,13 +70,26 @@ type PutWhatsAppBusinessPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutWhatsAppBusinessPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutWhatsAppBusinessPublicKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutWhatsAppBusinessPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutWhatsAppBusinessPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutWhatsAppBusinessPublicKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutWhatsAppBusinessPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutWhatsAppBusinessPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutWhatsAppBusinessPublicKey, schemas.PutWhatsAppBusinessPublicKeyInput, schemas.PutWhatsAppBusinessPublicKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutWhatsAppBusinessPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutWhatsAppBusinessPublicKey, schemas.PutWhatsAppBusinessPublicKeyInput, schemas.PutWhatsAppBusinessPublicKeyOutput), output: &PutWhatsAppBusinessPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

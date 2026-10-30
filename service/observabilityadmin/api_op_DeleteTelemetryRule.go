@@ -4,6 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteTelemetryRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTelemetryRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTelemetryRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTelemetryRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.DeleteTelemetryRuleInput_RuleIdentifier, *v.RuleIdentifier)
+	}
+}
+
 type DeleteTelemetryRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteTelemetryRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTelemetryRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTelemetryRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTelemetryRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTelemetryRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTelemetryRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTelemetryRule, schemas.DeleteTelemetryRuleInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTelemetryRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTelemetryRule, schemas.DeleteTelemetryRuleInput, nil), output: &DeleteTelemetryRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

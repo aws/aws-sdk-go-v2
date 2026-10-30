@@ -850,6 +850,11 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -1076,6 +1081,11 @@ func TestCheckResponseSnapshot_CreateCluster(t *testing.T) {
 			IpFamily:        types.IpFamily("ipv4"),
 			ElasticLoadBalancing: &types.ElasticLoadBalancing{
 				Enabled: ptr.Bool(true),
+				GatewayApi: &types.GatewayApiConfiguration{
+					Crds: &types.CrdManagementConfiguration{
+						Managed: ptr.Bool(true),
+					},
+				},
 			},
 		},
 		Logging: &types.Logging{
@@ -1972,6 +1982,11 @@ func TestCheckResponseSnapshot_DeleteCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -2528,6 +2543,11 @@ func TestCheckResponseSnapshot_DeregisterCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -3259,6 +3279,11 @@ func TestCheckResponseSnapshot_DescribeCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -5381,6 +5406,11 @@ func TestCheckResponseSnapshot_RegisterCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -6042,6 +6072,11 @@ func TestCheckResponseSnapshot_UpdateClusterConfig(t *testing.T) {
 			IpFamily:        types.IpFamily("ipv4"),
 			ElasticLoadBalancing: &types.ElasticLoadBalancing{
 				Enabled: ptr.Bool(true),
+				GatewayApi: &types.GatewayApiConfiguration{
+					Crds: &types.CrdManagementConfiguration{
+						Managed: ptr.Bool(true),
+					},
+				},
 			},
 		},
 		StorageConfig: &types.StorageConfigRequest{
@@ -7109,6 +7144,11 @@ func TestCheckResponseSnapshot_Error_UnsupportedAvailabilityZoneException(t *tes
 			IpFamily:        types.IpFamily("ipv4"),
 			ElasticLoadBalancing: &types.ElasticLoadBalancing{
 				Enabled: ptr.Bool(true),
+				GatewayApi: &types.GatewayApiConfiguration{
+					Crds: &types.CrdManagementConfiguration{
+						Managed: ptr.Bool(true),
+					},
+				},
 			},
 		},
 		Logging: &types.Logging{

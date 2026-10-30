@@ -1,3 +1,12 @@
+# v1.87.0 (2026-10-28)
+
+* **Feature**: This release adds APIs to simplify setting up a replication relationship between OpenSearch clusters. The APIs include new Switchover and Failover actions for planned switchovers and unplanned failovers to ensure high availability for OpenSearch in the event of disaster in a single region.
+
+# v1.86.2 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.86.1 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

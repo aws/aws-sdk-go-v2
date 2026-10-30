@@ -96,6 +96,19 @@ func serialize__listOfPluginDescription(s smithy.ShapeSerializer, schema *smithy
 	s.CloseList()
 }
 
+func serialize__listOfPluginUpdate(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PluginUpdate) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serialize__listOfWorkerConfigurationSummary(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.WorkerConfigurationSummary) {
 	if v == nil {
 		return
@@ -264,6 +277,28 @@ func deserialize__listOfPluginDescription(d smithy.ShapeDeserializer, s *smithy.
 		}
 
 		vv = types.PluginDescription{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserialize__listOfPluginUpdate(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.PluginUpdate) error {
+	*v = make([]types.PluginUpdate, 0)
+	var vv types.PluginUpdate
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.PluginUpdate
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.PluginUpdate{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

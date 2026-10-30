@@ -4,7 +4,9 @@ package s3files
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,31 @@ type CreateMountTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMountTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMountTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMountTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.CreateMountTargetRequest_fileSystemId, *v.FileSystemId)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateMountTargetRequest_ipAddressType, string(v.IpAddressType))
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.CreateMountTargetRequest_ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.CreateMountTargetRequest_ipv6Address, *v.Ipv6Address)
+	}
+	serializeSecurityGroups(s, schemas.CreateMountTargetRequest_securityGroups, v.SecurityGroups)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateMountTargetRequest_subnetId, *v.SubnetId)
+	}
+}
+
 type CreateMountTargetOutput struct {
 
 	// The ID of the mount target, assigned by S3 Files. This ID is used to reference
@@ -128,13 +155,99 @@ type CreateMountTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMountTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMountTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMountTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_fileSystemId, *v.FileSystemId)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_ipv6Address, *v.Ipv6Address)
+	}
+	if v.MountTargetId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_mountTargetId, *v.MountTargetId)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_networkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_ownerId, *v.OwnerId)
+	}
+	serializeSecurityGroups(s, schemas.CreateMountTargetResponse_securityGroups, v.SecurityGroups)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateMountTargetResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_subnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateMountTargetResponse_vpcId, *v.VpcId)
+	}
+}
+func (v *CreateMountTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMountTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMountTargetResponse_availabilityZoneId:
+			v.AvailabilityZoneId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.CreateMountTargetResponse_fileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_fileSystemId, v.FileSystemId)
+		case schemas.CreateMountTargetResponse_ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_ipv4Address, v.Ipv4Address)
+		case schemas.CreateMountTargetResponse_ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_ipv6Address, v.Ipv6Address)
+		case schemas.CreateMountTargetResponse_mountTargetId:
+			v.MountTargetId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_mountTargetId, v.MountTargetId)
+		case schemas.CreateMountTargetResponse_networkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_networkInterfaceId, v.NetworkInterfaceId)
+		case schemas.CreateMountTargetResponse_ownerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_ownerId, v.OwnerId)
+		case schemas.CreateMountTargetResponse_securityGroups:
+			return deserializeSecurityGroups(d, schemas.CreateMountTargetResponse_securityGroups, &v.SecurityGroups)
+		case schemas.CreateMountTargetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateMountTargetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LifeCycleState(ev)
+			return nil
+		case schemas.CreateMountTargetResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_statusMessage, v.StatusMessage)
+		case schemas.CreateMountTargetResponse_subnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_subnetId, v.SubnetId)
+		case schemas.CreateMountTargetResponse_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.CreateMountTargetResponse_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMountTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMountTarget, schemas.CreateMountTargetRequest, schemas.CreateMountTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMountTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMountTarget, schemas.CreateMountTargetRequest, schemas.CreateMountTargetResponse), output: &CreateMountTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,7 +4,9 @@ package neptunedata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -97,6 +99,55 @@ type StartMLModelTransformJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLModelTransformJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLModelTransformJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLModelTransformJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseProcessingInstanceType != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_baseProcessingInstanceType, *v.BaseProcessingInstanceType)
+	}
+	if v.BaseProcessingInstanceVolumeSizeInGB != nil {
+		s.WriteInt32(schemas.StartMLModelTransformJobInput_baseProcessingInstanceVolumeSizeInGB, *v.BaseProcessingInstanceVolumeSizeInGB)
+	}
+	if v.CustomModelTransformParameters != nil {
+		s.WriteStruct(schemas.StartMLModelTransformJobInput_customModelTransformParameters)
+		v.CustomModelTransformParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataProcessingJobId != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_dataProcessingJobId, *v.DataProcessingJobId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_id, *v.Id)
+	}
+	if v.MlModelTrainingJobId != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_mlModelTrainingJobId, *v.MlModelTrainingJobId)
+	}
+	if v.ModelTransformOutputS3Location != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_modelTransformOutputS3Location, *v.ModelTransformOutputS3Location)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+	if v.S3OutputEncryptionKMSKey != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_s3OutputEncryptionKMSKey, *v.S3OutputEncryptionKMSKey)
+	}
+	if v.SagemakerIamRoleArn != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
+	}
+	serializeStringList(s, schemas.StartMLModelTransformJobInput_securityGroupIds, v.SecurityGroupIds)
+	serializeStringList(s, schemas.StartMLModelTransformJobInput_subnets, v.Subnets)
+	if v.TrainingJobName != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_trainingJobName, *v.TrainingJobName)
+	}
+	if v.VolumeEncryptionKMSKey != nil {
+		s.WriteString(schemas.StartMLModelTransformJobInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
+	}
+}
+
 type StartMLModelTransformJobOutput struct {
 
 	// The ARN of the model transform job.
@@ -114,13 +165,44 @@ type StartMLModelTransformJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLModelTransformJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLModelTransformJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLModelTransformJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartMLModelTransformJobOutput_arn, *v.Arn)
+	}
+	if v.CreationTimeInMillis != nil {
+		s.WriteInt64(schemas.StartMLModelTransformJobOutput_creationTimeInMillis, *v.CreationTimeInMillis)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartMLModelTransformJobOutput_id, *v.Id)
+	}
+}
+func (v *StartMLModelTransformJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMLModelTransformJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMLModelTransformJobOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartMLModelTransformJobOutput_arn, v.Arn)
+		case schemas.StartMLModelTransformJobOutput_creationTimeInMillis:
+			v.CreationTimeInMillis = new(int64)
+			return d.ReadInt64(schemas.StartMLModelTransformJobOutput_creationTimeInMillis, v.CreationTimeInMillis)
+		case schemas.StartMLModelTransformJobOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartMLModelTransformJobOutput_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMLModelTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMLModelTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLModelTransformJob, schemas.StartMLModelTransformJobInput, schemas.StartMLModelTransformJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMLModelTransformJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLModelTransformJob, schemas.StartMLModelTransformJobInput, schemas.StartMLModelTransformJobOutput), output: &StartMLModelTransformJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

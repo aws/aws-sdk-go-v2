@@ -5,7 +5,9 @@ package licensemanagerusersubscriptions
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,26 @@ type ListUserAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListUserAssociationsRequest_Filters, v.Filters)
+	serializeIdentityProvider(s, schemas.ListUserAssociationsRequest_IdentityProvider, v.IdentityProvider)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListUserAssociationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUserAssociationsOutput struct {
 
 	// Metadata that describes the list user association operation.
@@ -72,13 +94,35 @@ type ListUserAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceUserSummaryList(s, schemas.ListUserAssociationsResponse_InstanceUserSummaries, v.InstanceUserSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListUserAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserAssociationsResponse_InstanceUserSummaries:
+			return deserializeInstanceUserSummaryList(d, schemas.ListUserAssociationsResponse_InstanceUserSummaries, &v.InstanceUserSummaries)
+		case schemas.ListUserAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserAssociations, schemas.ListUserAssociationsRequest, schemas.ListUserAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUserAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserAssociations, schemas.ListUserAssociationsRequest, schemas.ListUserAssociationsResponse), output: &ListUserAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

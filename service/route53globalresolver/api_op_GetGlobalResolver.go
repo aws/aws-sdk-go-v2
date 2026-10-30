@@ -4,7 +4,9 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -39,6 +41,18 @@ type GetGlobalResolverInput struct {
 	GlobalResolverId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetGlobalResolverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlobalResolverInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlobalResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalResolverId != nil {
+		s.WriteString(schemas.GetGlobalResolverInput_globalResolverId, *v.GlobalResolverId)
+	}
 }
 
 type GetGlobalResolverOutput struct {
@@ -115,13 +129,109 @@ type GetGlobalResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGlobalResolverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGlobalResolverOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGlobalResolverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_arn, *v.Arn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_clientToken, *v.ClientToken)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetGlobalResolverOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_description, *v.Description)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_dnsName, *v.DnsName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_id, *v.Id)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.GetGlobalResolverOutput_ipAddressType, string(v.IpAddressType))
+	}
+	serializeIPv4Addresses(s, schemas.GetGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
+	serializeIPv6Addresses(s, schemas.GetGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	if v.Name != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_name, *v.Name)
+	}
+	if v.ObservabilityRegion != nil {
+		s.WriteString(schemas.GetGlobalResolverOutput_observabilityRegion, *v.ObservabilityRegion)
+	}
+	serializeRegions(s, schemas.GetGlobalResolverOutput_regions, v.Regions)
+	if v.Status != "" {
+		s.WriteString(schemas.GetGlobalResolverOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetGlobalResolverOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetGlobalResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGlobalResolverOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGlobalResolverOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_arn, v.Arn)
+		case schemas.GetGlobalResolverOutput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_clientToken, v.ClientToken)
+		case schemas.GetGlobalResolverOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGlobalResolverOutput_createdAt, v.CreatedAt)
+		case schemas.GetGlobalResolverOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_description, v.Description)
+		case schemas.GetGlobalResolverOutput_dnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_dnsName, v.DnsName)
+		case schemas.GetGlobalResolverOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_id, v.Id)
+		case schemas.GetGlobalResolverOutput_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.GetGlobalResolverOutput_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.GlobalResolverIpAddressType(ev)
+			return nil
+		case schemas.GetGlobalResolverOutput_ipv4Addresses:
+			return deserializeIPv4Addresses(d, schemas.GetGlobalResolverOutput_ipv4Addresses, &v.Ipv4Addresses)
+		case schemas.GetGlobalResolverOutput_ipv6Addresses:
+			return deserializeIPv6Addresses(d, schemas.GetGlobalResolverOutput_ipv6Addresses, &v.Ipv6Addresses)
+		case schemas.GetGlobalResolverOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_name, v.Name)
+		case schemas.GetGlobalResolverOutput_observabilityRegion:
+			v.ObservabilityRegion = new(string)
+			return d.ReadString(schemas.GetGlobalResolverOutput_observabilityRegion, v.ObservabilityRegion)
+		case schemas.GetGlobalResolverOutput_regions:
+			return deserializeRegions(d, schemas.GetGlobalResolverOutput_regions, &v.Regions)
+		case schemas.GetGlobalResolverOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetGlobalResolverOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.GetGlobalResolverOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetGlobalResolverOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGlobalResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGlobalResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalResolver, schemas.GetGlobalResolverInput, schemas.GetGlobalResolverOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGlobalResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGlobalResolver, schemas.GetGlobalResolverInput, schemas.GetGlobalResolverOutput), output: &GetGlobalResolverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

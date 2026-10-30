@@ -889,6 +889,25 @@ func TestCheckRequestSnapshot_UpdateConnector(t *testing.T) {
 		SkipHealthValidation: true,
 		ConnectorArn:         ptr.String("__ConnectorArn__"),
 		CurrentVersion:       ptr.String("__CurrentVersion__"),
+		Plugins: []types.PluginUpdate{
+			{
+				CustomPlugin: &types.CustomPluginUpdate{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        ptr.Int64(1),
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPluginUpdate{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        ptr.Int64(1),
+				},
+			},
+		},
+		WorkerConfiguration: &types.WorkerConfigurationUpdate{
+			Revision:               ptr.Int64(1),
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		UseDefaultWorkerConfiguration: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -1596,6 +1615,25 @@ func TestUpdateRequestSnapshot_UpdateConnector(t *testing.T) {
 		SkipHealthValidation: true,
 		ConnectorArn:         ptr.String("__ConnectorArn__"),
 		CurrentVersion:       ptr.String("__CurrentVersion__"),
+		Plugins: []types.PluginUpdate{
+			{
+				CustomPlugin: &types.CustomPluginUpdate{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        ptr.Int64(1),
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPluginUpdate{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        ptr.Int64(1),
+				},
+			},
+		},
+		WorkerConfiguration: &types.WorkerConfigurationUpdate{
+			Revision:               ptr.Int64(1),
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		UseDefaultWorkerConfiguration: true,
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -4,7 +4,9 @@ package securityir
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -67,6 +69,31 @@ type UpdateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIncidentResponseTeam(s, schemas.UpdateMembershipRequest_incidentResponseTeam, v.IncidentResponseTeam)
+	if v.MembershipAccountsConfigurationsUpdate != nil {
+		s.WriteStruct(schemas.UpdateMembershipRequest_membershipAccountsConfigurationsUpdate)
+		v.MembershipAccountsConfigurationsUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MembershipId != nil {
+		s.WriteString(schemas.UpdateMembershipRequest_membershipId, *v.MembershipId)
+	}
+	if v.MembershipName != nil {
+		s.WriteString(schemas.UpdateMembershipRequest_membershipName, *v.MembershipName)
+	}
+	serializeOptInFeatures(s, schemas.UpdateMembershipRequest_optInFeatures, v.OptInFeatures)
+	if v.UndoMembershipCancellation != nil {
+		s.WriteBool(schemas.UpdateMembershipRequest_undoMembershipCancellation, *v.UndoMembershipCancellation)
+	}
+}
+
 type UpdateMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,13 +101,26 @@ type UpdateMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMembershipResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMembership, schemas.UpdateMembershipRequest, schemas.UpdateMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMembership, schemas.UpdateMembershipRequest, schemas.UpdateMembershipResponse), output: &UpdateMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

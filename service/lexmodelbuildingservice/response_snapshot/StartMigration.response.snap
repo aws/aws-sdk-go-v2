@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"migrationId":"__MigrationId__","migrationStrategy":"CREATE_NEW","migrationTimestamp":946684800,"v1BotLocale":"de-DE","v1BotName":"__V1BotName__","v1BotVersion":"__V1BotVersion__","v2BotId":"__V2BotId__","v2BotRole":"__V2BotRole__"}

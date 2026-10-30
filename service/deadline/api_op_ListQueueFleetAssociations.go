@@ -28,7 +28,6 @@ func (c *Client) ListQueueFleetAssociations(ctx context.Context, params *ListQue
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueFleetAssociationsInput struct {
 
 	// The farm ID for the queue-fleet association list.
@@ -76,7 +75,6 @@ func (v *ListQueueFleetAssociationsInput) SerializeMembers(s smithy.ShapeSeriali
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListQueueFleetAssociationsOutput struct {
 
 	// The queue-fleet associations on the list.

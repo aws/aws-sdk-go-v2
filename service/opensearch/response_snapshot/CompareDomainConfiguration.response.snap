@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Categories":{"key0":{"Diverged":1,"InSync":1,"Items":{"Diverged":[{"Fields":[{"Path":"__Path__","Policy":"redacted","SourceValue":"__SourceValue__","TargetValue":"__TargetValue__"},{"Path":"__Path__","Policy":"redacted","SourceValue":"__SourceValue__","TargetValue":"__TargetValue__"}],"Name":"__Name__"},{"Fields":[{"Path":"__Path__","Policy":"redacted","SourceValue":"__SourceValue__","TargetValue":"__TargetValue__"},{"Path":"__Path__","Policy":"redacted","SourceValue":"__SourceValue__","TargetValue":"__TargetValue__"}],"Name":"__Name__"}],"SourceOnly":["__Member__","__Member__"],"TargetOnly":["__Member__","__Member__"]},"SourceOnly":1,"Status":"compared","TargetOnly":1,"Truncated":true}},"SourceDomainArn":"__SourceDomainArn__","TargetDomainArn":"__TargetDomainArn__"}

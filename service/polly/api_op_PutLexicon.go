@@ -4,6 +4,8 @@ package polly
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,21 @@ type PutLexiconInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLexiconInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLexiconInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLexiconInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.PutLexiconInput_Content, *v.Content)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutLexiconInput_Name, *v.Name)
+	}
+}
+
 type PutLexiconOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,13 +71,26 @@ type PutLexiconOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLexiconOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLexiconOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLexiconOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutLexiconOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLexiconOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLexicon{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLexicon, schemas.PutLexiconInput, schemas.PutLexiconOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutLexicon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLexicon, schemas.PutLexiconInput, schemas.PutLexiconOutput), output: &PutLexiconOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

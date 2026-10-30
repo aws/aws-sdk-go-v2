@@ -4,6 +4,8 @@ package qapps
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteQAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteQAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DeleteQAppInput_appId, *v.AppId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteQAppInput_instanceId, *v.InstanceId)
+	}
+}
+
 type DeleteQAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteQAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteQAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteQAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteQAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteQAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteQApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQApp, schemas.DeleteQAppInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteQApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteQApp, schemas.DeleteQAppInput, nil), output: &DeleteQAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

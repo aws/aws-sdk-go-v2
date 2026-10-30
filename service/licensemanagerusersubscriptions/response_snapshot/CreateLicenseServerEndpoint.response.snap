@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"IdentityProviderArn":"__IdentityProviderArn__","LicenseServerEndpointArn":"__LicenseServerEndpointArn__"}

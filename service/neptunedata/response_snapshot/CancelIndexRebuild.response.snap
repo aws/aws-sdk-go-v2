@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"concurrency":1,"status":"PREPARING","writeBufferSize":"LOW"}

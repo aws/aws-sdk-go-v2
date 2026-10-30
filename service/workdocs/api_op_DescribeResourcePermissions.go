@@ -5,7 +5,9 @@ package workdocs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,30 @@ type DescribeResourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.DescribeResourcePermissionsRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeResourcePermissionsRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeResourcePermissionsRequest_Marker, *v.Marker)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.DescribeResourcePermissionsRequest_PrincipalId, *v.PrincipalId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeResourcePermissionsRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeResourcePermissionsOutput struct {
 
 	// The marker to use when requesting the next set of results. If there are no
@@ -64,13 +90,35 @@ type DescribeResourcePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeResourcePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeResourcePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeResourcePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeResourcePermissionsResponse_Marker, *v.Marker)
+	}
+	serializePrincipalList(s, schemas.DescribeResourcePermissionsResponse_Principals, v.Principals)
+}
+func (v *DescribeResourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeResourcePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeResourcePermissionsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeResourcePermissionsResponse_Marker, v.Marker)
+		case schemas.DescribeResourcePermissionsResponse_Principals:
+			return deserializePrincipalList(d, schemas.DescribeResourcePermissionsResponse_Principals, &v.Principals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeResourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePermissions, schemas.DescribeResourcePermissionsRequest, schemas.DescribeResourcePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeResourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeResourcePermissions, schemas.DescribeResourcePermissionsRequest, schemas.DescribeResourcePermissionsResponse), output: &DescribeResourcePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

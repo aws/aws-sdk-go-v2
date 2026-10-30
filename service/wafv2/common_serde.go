@@ -2286,6 +2286,20 @@ func deserializeWebACLSummaries(d smithy.ShapeDeserializer, s *smithy.Schema, v 
 	})
 }
 
+func serializeChallengeJavascriptSdkInjection(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.ChallengeJavascriptSdkInjectionConfig) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteStruct(schema.MapValue())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
 func serializeCustomResponseBodies(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.CustomResponseBody) {
 	if v == nil {
 		return
@@ -2340,6 +2354,28 @@ func serializeVersionsToPublish(s smithy.ShapeSerializer, schema *smithy.Schema,
 		s.CloseStruct()
 	}
 	s.CloseMap()
+}
+
+func deserializeChallengeJavascriptSdkInjection(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.ChallengeJavascriptSdkInjectionConfig) error {
+	*v = make(map[string]types.ChallengeJavascriptSdkInjectionConfig)
+	var vv types.ChallengeJavascriptSdkInjectionConfig
+	return smithy.ReadMap(d, s, func(k string) error {
+		if isNil, err := d.ReadNil(s.MapValue()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.ChallengeJavascriptSdkInjectionConfig
+			(*v)[k] = zero
+			return nil
+		}
+
+		vv = types.ChallengeJavascriptSdkInjectionConfig{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
 }
 
 func deserializeCustomResponseBodies(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]types.CustomResponseBody) error {

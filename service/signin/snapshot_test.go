@@ -86,6 +86,18 @@ func TestCheckSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateOAuth2TokenWithTokenExchange")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConsoleAuthorizationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConsoleAuthorizationConfiguration(context.Background(), nil, func(o *Options) {
@@ -210,6 +222,18 @@ func TestUpdateSnapshot_CreateOAuth2TokenWithIAM(t *testing.T) {
 	_, err := svc.CreateOAuth2TokenWithIAM(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateOAuth2TokenWithIAM")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateOAuth2TokenWithTokenExchange(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuth2TokenWithTokenExchange(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateOAuth2TokenWithTokenExchange")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

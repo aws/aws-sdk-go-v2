@@ -4,6 +4,8 @@ package rdsdata
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -56,6 +58,46 @@ type BeginTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BeginTransactionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BeginTransactionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BeginTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteString(schemas.BeginTransactionRequest_database, *v.Database)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.BeginTransactionRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.BeginTransactionRequest_schema, *v.Schema)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.BeginTransactionRequest_secretArn, *v.SecretArn)
+	}
+}
+func (v *BeginTransactionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BeginTransactionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BeginTransactionRequest_database:
+			v.Database = new(string)
+			return d.ReadString(schemas.BeginTransactionRequest_database, v.Database)
+		case schemas.BeginTransactionRequest_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.BeginTransactionRequest_resourceArn, v.ResourceArn)
+		case schemas.BeginTransactionRequest_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.BeginTransactionRequest_schema, v.Schema)
+		case schemas.BeginTransactionRequest_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.BeginTransactionRequest_secretArn, v.SecretArn)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the output of a request to start a SQL
 // transaction.
 type BeginTransactionOutput struct {
@@ -69,13 +111,32 @@ type BeginTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BeginTransactionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BeginTransactionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BeginTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionId != nil {
+		s.WriteString(schemas.BeginTransactionResponse_transactionId, *v.TransactionId)
+	}
+}
+func (v *BeginTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BeginTransactionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BeginTransactionResponse_transactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.BeginTransactionResponse_transactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBeginTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBeginTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BeginTransaction, schemas.BeginTransactionRequest, schemas.BeginTransactionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBeginTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BeginTransaction, schemas.BeginTransactionRequest, schemas.BeginTransactionResponse), output: &BeginTransactionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

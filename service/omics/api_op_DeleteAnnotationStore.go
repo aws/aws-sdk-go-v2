@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type DeleteAnnotationStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnnotationStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnnotationStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnnotationStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteAnnotationStoreRequest_force, v.Force)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteAnnotationStoreRequest_name, *v.Name)
+	}
+}
+
 type DeleteAnnotationStoreOutput struct {
 
 	// The store's status.
@@ -58,13 +75,36 @@ type DeleteAnnotationStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAnnotationStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAnnotationStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAnnotationStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteAnnotationStoreResponse_status, string(v.Status))
+	}
+}
+func (v *DeleteAnnotationStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAnnotationStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAnnotationStoreResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteAnnotationStoreResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StoreStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAnnotationStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAnnotationStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnnotationStore, schemas.DeleteAnnotationStoreRequest, schemas.DeleteAnnotationStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAnnotationStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAnnotationStore, schemas.DeleteAnnotationStoreRequest, schemas.DeleteAnnotationStoreResponse), output: &DeleteAnnotationStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

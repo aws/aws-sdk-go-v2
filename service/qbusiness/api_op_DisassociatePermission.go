@@ -4,6 +4,8 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type DisassociatePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DisassociatePermissionRequest_applicationId, *v.ApplicationId)
+	}
+	if v.StatementId != nil {
+		s.WriteString(schemas.DisassociatePermissionRequest_statementId, *v.StatementId)
+	}
+}
+
 type DisassociatePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,13 +64,26 @@ type DisassociatePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociatePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociatePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePermission, schemas.DisassociatePermissionRequest, schemas.DisassociatePermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociatePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePermission, schemas.DisassociatePermissionRequest, schemas.DisassociatePermissionResponse), output: &DisassociatePermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

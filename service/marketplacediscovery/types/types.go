@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -19,6 +21,31 @@ type AmazonMachineImageEbsVolume struct {
 	Iops *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonMachineImageEbsVolume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonMachineImageEbsVolume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonMachineImageEbsVolume) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Iops != nil {
+		s.WriteInt32(schemas.AmazonMachineImageEbsVolume_iops, *v.Iops)
+	}
+	serializeAmazonMachineImageEbsVolumeTypeList(s, schemas.AmazonMachineImageEbsVolume_volumeTypes, v.VolumeTypes)
+}
+func (v *AmazonMachineImageEbsVolume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonMachineImageEbsVolume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonMachineImageEbsVolume_iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.AmazonMachineImageEbsVolume_iops, v.Iops)
+		case schemas.AmazonMachineImageEbsVolume_volumeTypes:
+			return deserializeAmazonMachineImageEbsVolumeTypeList(d, schemas.AmazonMachineImageEbsVolume_volumeTypes, &v.VolumeTypes)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon Machine Image (AMI) fulfillment option, including version
@@ -85,6 +112,117 @@ type AmazonMachineImageFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonMachineImageFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonMachineImageFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonMachineImageFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessUrlTemplate != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_accessUrlTemplate, *v.AccessUrlTemplate)
+	}
+	if v.AmiAlias != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_amiAlias, *v.AmiAlias)
+	}
+	if v.Architecture != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_architecture, *v.Architecture)
+	}
+	if v.AvailableFromTime != nil {
+		s.WriteTime(schemas.AmazonMachineImageFulfillmentOption_availableFromTime, *v.AvailableFromTime)
+	}
+	if v.EbsVolume != nil {
+		s.WriteStruct(schemas.AmazonMachineImageFulfillmentOption_ebsVolume)
+		v.EbsVolume.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionName != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionName, *v.FulfillmentOptionName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	serializeAmazonMachineImageOperatingSystemList(s, schemas.AmazonMachineImageFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.AmazonMachineImageFulfillmentOption_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_shortDescription, *v.ShortDescription)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *AmazonMachineImageFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonMachineImageFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonMachineImageFulfillmentOption_accessUrlTemplate:
+			v.AccessUrlTemplate = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_accessUrlTemplate, v.AccessUrlTemplate)
+		case schemas.AmazonMachineImageFulfillmentOption_amiAlias:
+			v.AmiAlias = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_amiAlias, v.AmiAlias)
+		case schemas.AmazonMachineImageFulfillmentOption_architecture:
+			v.Architecture = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_architecture, v.Architecture)
+		case schemas.AmazonMachineImageFulfillmentOption_availableFromTime:
+			v.AvailableFromTime = new(time.Time)
+			return d.ReadTime(schemas.AmazonMachineImageFulfillmentOption_availableFromTime, v.AvailableFromTime)
+		case schemas.AmazonMachineImageFulfillmentOption_ebsVolume:
+			v.EbsVolume = &AmazonMachineImageEbsVolume{}
+			return v.EbsVolume.Deserialize(d)
+		case schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionName:
+			v.FulfillmentOptionName = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionName, v.FulfillmentOptionName)
+		case schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.AmazonMachineImageFulfillmentOption_operatingSystems:
+			return deserializeAmazonMachineImageOperatingSystemList(d, schemas.AmazonMachineImageFulfillmentOption_operatingSystems, &v.OperatingSystems)
+		case schemas.AmazonMachineImageFulfillmentOption_recommendation:
+			v.Recommendation = &AmazonMachineImageRecommendation{}
+			return v.Recommendation.Deserialize(d)
+		case schemas.AmazonMachineImageFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.AmazonMachineImageFulfillmentOption_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_shortDescription, v.ShortDescription)
+		case schemas.AmazonMachineImageFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.AmazonMachineImageFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an operating system supported by an AMI fulfillment option.
 type AmazonMachineImageOperatingSystem struct {
 
@@ -105,6 +243,40 @@ type AmazonMachineImageOperatingSystem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmazonMachineImageOperatingSystem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonMachineImageOperatingSystem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonMachineImageOperatingSystem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperatingSystemFamilyName != nil {
+		s.WriteString(schemas.AmazonMachineImageOperatingSystem_operatingSystemFamilyName, *v.OperatingSystemFamilyName)
+	}
+	if v.OperatingSystemName != nil {
+		s.WriteString(schemas.AmazonMachineImageOperatingSystem_operatingSystemName, *v.OperatingSystemName)
+	}
+	if v.OperatingSystemVersion != nil {
+		s.WriteString(schemas.AmazonMachineImageOperatingSystem_operatingSystemVersion, *v.OperatingSystemVersion)
+	}
+}
+func (v *AmazonMachineImageOperatingSystem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonMachineImageOperatingSystem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonMachineImageOperatingSystem_operatingSystemFamilyName:
+			v.OperatingSystemFamilyName = new(string)
+			return d.ReadString(schemas.AmazonMachineImageOperatingSystem_operatingSystemFamilyName, v.OperatingSystemFamilyName)
+		case schemas.AmazonMachineImageOperatingSystem_operatingSystemName:
+			v.OperatingSystemName = new(string)
+			return d.ReadString(schemas.AmazonMachineImageOperatingSystem_operatingSystemName, v.OperatingSystemName)
+		case schemas.AmazonMachineImageOperatingSystem_operatingSystemVersion:
+			v.OperatingSystemVersion = new(string)
+			return d.ReadString(schemas.AmazonMachineImageOperatingSystem_operatingSystemVersion, v.OperatingSystemVersion)
+		}
+		return nil
+	})
+}
+
 // Recommended instance types for running an AMI fulfillment option.
 type AmazonMachineImageRecommendation struct {
 
@@ -117,6 +289,31 @@ type AmazonMachineImageRecommendation struct {
 	SecurityGroups []AmazonMachineImageSecurityGroup
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonMachineImageRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonMachineImageRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonMachineImageRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceType != nil {
+		s.WriteString(schemas.AmazonMachineImageRecommendation_instanceType, *v.InstanceType)
+	}
+	serializeAmazonMachineImageSecurityGroupList(s, schemas.AmazonMachineImageRecommendation_securityGroups, v.SecurityGroups)
+}
+func (v *AmazonMachineImageRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonMachineImageRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonMachineImageRecommendation_instanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.AmazonMachineImageRecommendation_instanceType, v.InstanceType)
+		case schemas.AmazonMachineImageRecommendation_securityGroups:
+			return deserializeAmazonMachineImageSecurityGroupList(d, schemas.AmazonMachineImageRecommendation_securityGroups, &v.SecurityGroups)
+		}
+		return nil
+	})
 }
 
 // Contains a recommended security group configuration for an AMI fulfillment
@@ -144,6 +341,43 @@ type AmazonMachineImageSecurityGroup struct {
 	ToPort *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AmazonMachineImageSecurityGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmazonMachineImageSecurityGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmazonMachineImageSecurityGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAmazonMachineImageCidrIpAddressList(s, schemas.AmazonMachineImageSecurityGroup_cidrIpAddresses, v.CidrIpAddresses)
+	if v.FromPort != nil {
+		s.WriteInt32(schemas.AmazonMachineImageSecurityGroup_fromPort, *v.FromPort)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.AmazonMachineImageSecurityGroup_protocol, *v.Protocol)
+	}
+	if v.ToPort != nil {
+		s.WriteInt32(schemas.AmazonMachineImageSecurityGroup_toPort, *v.ToPort)
+	}
+}
+func (v *AmazonMachineImageSecurityGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmazonMachineImageSecurityGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AmazonMachineImageSecurityGroup_cidrIpAddresses:
+			return deserializeAmazonMachineImageCidrIpAddressList(d, schemas.AmazonMachineImageSecurityGroup_cidrIpAddresses, &v.CidrIpAddresses)
+		case schemas.AmazonMachineImageSecurityGroup_fromPort:
+			v.FromPort = new(int32)
+			return d.ReadInt32(schemas.AmazonMachineImageSecurityGroup_fromPort, v.FromPort)
+		case schemas.AmazonMachineImageSecurityGroup_protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.AmazonMachineImageSecurityGroup_protocol, v.Protocol)
+		case schemas.AmazonMachineImageSecurityGroup_toPort:
+			v.ToPort = new(int32)
+			return d.ReadInt32(schemas.AmazonMachineImageSecurityGroup_toPort, v.ToPort)
+		}
+		return nil
+	})
 }
 
 // Describes an API-based fulfillment option, where the product is accessed
@@ -176,6 +410,53 @@ type ApiFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApiFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSupportedServiceList(s, schemas.ApiFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.ApiFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.ApiFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.ApiFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.ApiFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *ApiFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiFulfillmentOption_awsSupportedServices:
+			return deserializeAwsSupportedServiceList(d, schemas.ApiFulfillmentOption_awsSupportedServices, &v.AwsSupportedServices)
+		case schemas.ApiFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.ApiFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.ApiFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.ApiFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.ApiFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.ApiFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.ApiFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.ApiFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an AWS service supported by a fulfillment option.
 type AwsSupportedService struct {
 
@@ -197,6 +478,40 @@ type AwsSupportedService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsSupportedService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsSupportedService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsSupportedService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AwsSupportedService_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.AwsSupportedService_displayName, *v.DisplayName)
+	}
+	if v.SupportedServiceType != nil {
+		s.WriteString(schemas.AwsSupportedService_supportedServiceType, *v.SupportedServiceType)
+	}
+}
+func (v *AwsSupportedService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsSupportedService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsSupportedService_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AwsSupportedService_description, v.Description)
+		case schemas.AwsSupportedService_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.AwsSupportedService_displayName, v.DisplayName)
+		case schemas.AwsSupportedService_supportedServiceType:
+			v.SupportedServiceType = new(string)
+			return d.ReadString(schemas.AwsSupportedService_supportedServiceType, v.SupportedServiceType)
+		}
+		return nil
+	})
+}
+
 // Defines a Bring Your Own License (BYOL) pricing term, where buyers use their
 // existing license for the product.
 type ByolPricingTerm struct {
@@ -214,6 +529,38 @@ type ByolPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByolPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByolPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByolPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ByolPricingTerm_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ByolPricingTerm_type, string(v.Type))
+	}
+}
+func (v *ByolPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByolPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByolPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ByolPricingTerm_id, v.Id)
+		case schemas.ByolPricingTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.ByolPricingTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A category used to classify a listing or product into a logical group.
 type Category struct {
 
@@ -228,6 +575,34 @@ type Category struct {
 	DisplayName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Category) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Category)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Category) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryId != nil {
+		s.WriteString(schemas.Category_categoryId, *v.CategoryId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Category_displayName, *v.DisplayName)
+	}
+}
+func (v *Category) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Category, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Category_categoryId:
+			v.CategoryId = new(string)
+			return d.ReadString(schemas.Category_categoryId, v.CategoryId)
+		case schemas.Category_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Category_displayName, v.DisplayName)
+		}
+		return nil
+	})
 }
 
 // Describes an AWS CloudFormation template fulfillment option for infrastructure
@@ -276,6 +651,86 @@ type CloudFormationFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudFormationFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudFormationFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudFormationFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableFromTime != nil {
+		s.WriteTime(schemas.CloudFormationFulfillmentOption_availableFromTime, *v.AvailableFromTime)
+	}
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionName != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionName, *v.FulfillmentOptionName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	if v.LongDescription != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_longDescription, *v.LongDescription)
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_shortDescription, *v.ShortDescription)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.CloudFormationFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *CloudFormationFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudFormationFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudFormationFulfillmentOption_availableFromTime:
+			v.AvailableFromTime = new(time.Time)
+			return d.ReadTime(schemas.CloudFormationFulfillmentOption_availableFromTime, v.AvailableFromTime)
+		case schemas.CloudFormationFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.CloudFormationFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.CloudFormationFulfillmentOption_fulfillmentOptionName:
+			v.FulfillmentOptionName = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionName, v.FulfillmentOptionName)
+		case schemas.CloudFormationFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.CloudFormationFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.CloudFormationFulfillmentOption_longDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_longDescription, v.LongDescription)
+		case schemas.CloudFormationFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.CloudFormationFulfillmentOption_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_shortDescription, v.ShortDescription)
+		case schemas.CloudFormationFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.CloudFormationFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Defines a configurable upfront pricing term with selectable rate cards, where
 // buyers choose from predefined pricing configurations.
 type ConfigurableUpfrontPricingTerm struct {
@@ -302,6 +757,47 @@ type ConfigurableUpfrontPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurableUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurableUpfrontPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurableUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_id, *v.Id)
+	}
+	serializeConfigurableUpfrontRateCardList(s, schemas.ConfigurableUpfrontPricingTerm_rateCards, v.RateCards)
+	if v.Type != "" {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_type, string(v.Type))
+	}
+}
+func (v *ConfigurableUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurableUpfrontPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurableUpfrontPricingTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ConfigurableUpfrontPricingTerm_currencyCode, v.CurrencyCode)
+		case schemas.ConfigurableUpfrontPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurableUpfrontPricingTerm_id, v.Id)
+		case schemas.ConfigurableUpfrontPricingTerm_rateCards:
+			return deserializeConfigurableUpfrontRateCardList(d, schemas.ConfigurableUpfrontPricingTerm_rateCards, &v.RateCards)
+		case schemas.ConfigurableUpfrontPricingTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurableUpfrontPricingTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A rate card item within a configurable upfront pricing term, including a
 // selector for choosing the configuration and per-unit rates.
 type ConfigurableUpfrontRateCardItem struct {
@@ -325,6 +821,41 @@ type ConfigurableUpfrontRateCardItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurableUpfrontRateCardItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurableUpfrontRateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem_constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRateCardList(s, schemas.ConfigurableUpfrontRateCardItem_rateCard, v.RateCard)
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem_selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConfigurableUpfrontRateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurableUpfrontRateCardItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurableUpfrontRateCardItem_constraints:
+			v.Constraints = &Constraints{}
+			return v.Constraints.Deserialize(d)
+		case schemas.ConfigurableUpfrontRateCardItem_rateCard:
+			return deserializeRateCardList(d, schemas.ConfigurableUpfrontRateCardItem_rateCard, &v.RateCard)
+		case schemas.ConfigurableUpfrontRateCardItem_selector:
+			v.Selector = &Selector{}
+			return v.Selector.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Constraints that control how a buyer can configure a rate card.
 type Constraints struct {
 
@@ -340,6 +871,42 @@ type Constraints struct {
 	QuantityConfiguration RateCardConstraintType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Constraints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Constraints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Constraints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultipleDimensionSelection != "" {
+		s.WriteString(schemas.Constraints_multipleDimensionSelection, string(v.MultipleDimensionSelection))
+	}
+	if v.QuantityConfiguration != "" {
+		s.WriteString(schemas.Constraints_quantityConfiguration, string(v.QuantityConfiguration))
+	}
+}
+func (v *Constraints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Constraints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Constraints_multipleDimensionSelection:
+			var ev string
+			if err := d.ReadString(schemas.Constraints_multipleDimensionSelection, &ev); err != nil {
+				return err
+			}
+			v.MultipleDimensionSelection = RateCardConstraintType(ev)
+			return nil
+		case schemas.Constraints_quantityConfiguration:
+			var ev string
+			if err := d.ReadString(schemas.Constraints_quantityConfiguration, &ev); err != nil {
+				return err
+			}
+			v.QuantityConfiguration = RateCardConstraintType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a container image fulfillment option for container-based deployment.
@@ -383,6 +950,74 @@ type ContainerFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContainerFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSupportedServiceList(s, schemas.ContainerFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionName != nil {
+		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionName, *v.FulfillmentOptionName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	serializeContainerOperatingSystemList(s, schemas.ContainerFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.ContainerFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.ContainerFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *ContainerFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerFulfillmentOption_awsSupportedServices:
+			return deserializeAwsSupportedServiceList(d, schemas.ContainerFulfillmentOption_awsSupportedServices, &v.AwsSupportedServices)
+		case schemas.ContainerFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.ContainerFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.ContainerFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.ContainerFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.ContainerFulfillmentOption_fulfillmentOptionName:
+			v.FulfillmentOptionName = new(string)
+			return d.ReadString(schemas.ContainerFulfillmentOption_fulfillmentOptionName, v.FulfillmentOptionName)
+		case schemas.ContainerFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.ContainerFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.ContainerFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.ContainerFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.ContainerFulfillmentOption_operatingSystems:
+			return deserializeContainerOperatingSystemList(d, schemas.ContainerFulfillmentOption_operatingSystems, &v.OperatingSystems)
+		case schemas.ContainerFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.ContainerFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.ContainerFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.ContainerFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an operating system supported by a container fulfillment option.
 type ContainerOperatingSystem struct {
 
@@ -397,6 +1032,34 @@ type ContainerOperatingSystem struct {
 	OperatingSystemName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ContainerOperatingSystem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContainerOperatingSystem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContainerOperatingSystem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperatingSystemFamilyName != nil {
+		s.WriteString(schemas.ContainerOperatingSystem_operatingSystemFamilyName, *v.OperatingSystemFamilyName)
+	}
+	if v.OperatingSystemName != nil {
+		s.WriteString(schemas.ContainerOperatingSystem_operatingSystemName, *v.OperatingSystemName)
+	}
+}
+func (v *ContainerOperatingSystem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContainerOperatingSystem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContainerOperatingSystem_operatingSystemFamilyName:
+			v.OperatingSystemFamilyName = new(string)
+			return d.ReadString(schemas.ContainerOperatingSystem_operatingSystemFamilyName, v.OperatingSystemFamilyName)
+		case schemas.ContainerOperatingSystem_operatingSystemName:
+			v.OperatingSystemName = new(string)
+			return d.ReadString(schemas.ContainerOperatingSystem_operatingSystemName, v.OperatingSystemName)
+		}
+		return nil
+	})
 }
 
 // Describes a data artifact within a Data Exchange fulfillment option.
@@ -419,6 +1082,46 @@ type DataArtifact struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataArtifact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataArtifact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataArtifact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataClassification != nil {
+		s.WriteString(schemas.DataArtifact_dataClassification, *v.DataClassification)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DataArtifact_description, *v.Description)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DataArtifact_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DataArtifact_resourceType, *v.ResourceType)
+	}
+}
+func (v *DataArtifact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataArtifact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataArtifact_dataClassification:
+			v.DataClassification = new(string)
+			return d.ReadString(schemas.DataArtifact_dataClassification, v.DataClassification)
+		case schemas.DataArtifact_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DataArtifact_description, v.Description)
+		case schemas.DataArtifact_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DataArtifact_resourceArn, v.ResourceArn)
+		case schemas.DataArtifact_resourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DataArtifact_resourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Describes an AWS Data Exchange fulfillment option for data set delivery.
@@ -445,6 +1148,47 @@ type DataExchangeFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataExchangeFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataExchangeFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataExchangeFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataArtifactList(s, schemas.DataExchangeFulfillmentOption_dataArtifacts, v.DataArtifacts)
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+}
+func (v *DataExchangeFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataExchangeFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataExchangeFulfillmentOption_dataArtifacts:
+			return deserializeDataArtifactList(d, schemas.DataExchangeFulfillmentOption_dataArtifacts, &v.DataArtifacts)
+		case schemas.DataExchangeFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.DataExchangeFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.DataExchangeFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A label used to group or categorize pricing dimensions, such as by region or
 // SageMaker option.
 type DimensionLabel struct {
@@ -465,6 +1209,44 @@ type DimensionLabel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DimensionLabel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionLabel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionLabel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DimensionLabel_displayName, *v.DisplayName)
+	}
+	if v.LabelType != "" {
+		s.WriteString(schemas.DimensionLabel_labelType, string(v.LabelType))
+	}
+	if v.LabelValue != nil {
+		s.WriteString(schemas.DimensionLabel_labelValue, *v.LabelValue)
+	}
+}
+func (v *DimensionLabel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionLabel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionLabel_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DimensionLabel_displayName, v.DisplayName)
+		case schemas.DimensionLabel_labelType:
+			var ev string
+			if err := d.ReadString(schemas.DimensionLabel_labelType, &ev); err != nil {
+				return err
+			}
+			v.LabelType = DimensionLabelType(ev)
+			return nil
+		case schemas.DimensionLabel_labelValue:
+			v.LabelValue = new(string)
+			return d.ReadString(schemas.DimensionLabel_labelValue, v.LabelValue)
+		}
+		return nil
+	})
+}
+
 // A legal document associated with a legal term, such as a EULA or data
 // subscription agreement.
 type DocumentItem struct {
@@ -483,6 +1265,44 @@ type DocumentItem struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.DocumentItem_type, string(v.Type))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DocumentItem_url, *v.Url)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DocumentItem_version, *v.Version)
+	}
+}
+func (v *DocumentItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentItem_type:
+			var ev string
+			if err := d.ReadString(schemas.DocumentItem_type, &ev); err != nil {
+				return err
+			}
+			v.Type = LegalDocumentType(ev)
+			return nil
+		case schemas.DocumentItem_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DocumentItem_url, v.Url)
+		case schemas.DocumentItem_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DocumentItem_version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Describes an EC2 Image Builder component fulfillment option.
@@ -526,6 +1346,74 @@ type Ec2ImageBuilderComponentFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ec2ImageBuilderComponentFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ec2ImageBuilderComponentFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ec2ImageBuilderComponentFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSupportedServiceList(s, schemas.Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionName != nil {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName, *v.FulfillmentOptionName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	serializeContainerOperatingSystemList(s, schemas.Ec2ImageBuilderComponentFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *Ec2ImageBuilderComponentFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ec2ImageBuilderComponentFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices:
+			return deserializeAwsSupportedServiceList(d, schemas.Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices, &v.AwsSupportedServices)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName:
+			v.FulfillmentOptionName = new(string)
+			return d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionName, v.FulfillmentOptionName)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_operatingSystems:
+			return deserializeContainerOperatingSystemList(d, schemas.Ec2ImageBuilderComponentFulfillmentOption_operatingSystems, &v.OperatingSystems)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.Ec2ImageBuilderComponentFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.Ec2ImageBuilderComponentFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an Amazon EKS add-on fulfillment option.
 type EksAddOnFulfillmentOption struct {
 
@@ -567,6 +1455,74 @@ type EksAddOnFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EksAddOnFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksAddOnFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksAddOnFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSupportedServiceList(s, schemas.EksAddOnFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionName != nil {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionName, *v.FulfillmentOptionName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	serializeEksAddOnOperatingSystemList(s, schemas.EksAddOnFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.EksAddOnFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *EksAddOnFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksAddOnFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksAddOnFulfillmentOption_awsSupportedServices:
+			return deserializeAwsSupportedServiceList(d, schemas.EksAddOnFulfillmentOption_awsSupportedServices, &v.AwsSupportedServices)
+		case schemas.EksAddOnFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.EksAddOnFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.EksAddOnFulfillmentOption_fulfillmentOptionName:
+			v.FulfillmentOptionName = new(string)
+			return d.ReadString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionName, v.FulfillmentOptionName)
+		case schemas.EksAddOnFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.EksAddOnFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.EksAddOnFulfillmentOption_operatingSystems:
+			return deserializeEksAddOnOperatingSystemList(d, schemas.EksAddOnFulfillmentOption_operatingSystems, &v.OperatingSystems)
+		case schemas.EksAddOnFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.EksAddOnFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.EksAddOnFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.EksAddOnFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an operating system supported by an EKS add-on fulfillment option.
 type EksAddOnOperatingSystem struct {
 
@@ -583,6 +1539,34 @@ type EksAddOnOperatingSystem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EksAddOnOperatingSystem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EksAddOnOperatingSystem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EksAddOnOperatingSystem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperatingSystemFamilyName != nil {
+		s.WriteString(schemas.EksAddOnOperatingSystem_operatingSystemFamilyName, *v.OperatingSystemFamilyName)
+	}
+	if v.OperatingSystemName != nil {
+		s.WriteString(schemas.EksAddOnOperatingSystem_operatingSystemName, *v.OperatingSystemName)
+	}
+}
+func (v *EksAddOnOperatingSystem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EksAddOnOperatingSystem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EksAddOnOperatingSystem_operatingSystemFamilyName:
+			v.OperatingSystemFamilyName = new(string)
+			return d.ReadString(schemas.EksAddOnOperatingSystem_operatingSystemFamilyName, v.OperatingSystemFamilyName)
+		case schemas.EksAddOnOperatingSystem_operatingSystemName:
+			v.OperatingSystemName = new(string)
+			return d.ReadString(schemas.EksAddOnOperatingSystem_operatingSystemName, v.OperatingSystemName)
+		}
+		return nil
+	})
+}
+
 // A single fixed price increase percentage applied at each renewal cycle.
 type FixedPercentage struct {
 
@@ -592,6 +1576,28 @@ type FixedPercentage struct {
 	PercentageValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FixedPercentage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedPercentage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedPercentage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PercentageValue != nil {
+		s.WriteString(schemas.FixedPercentage_percentageValue, *v.PercentageValue)
+	}
+}
+func (v *FixedPercentage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedPercentage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedPercentage_percentageValue:
+			v.PercentageValue = new(string)
+			return d.ReadString(schemas.FixedPercentage_percentageValue, v.PercentageValue)
+		}
+		return nil
+	})
 }
 
 // Defines a fixed upfront pricing term with a pre-paid amount and granted
@@ -629,6 +1635,59 @@ type FixedUpfrontPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FixedUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedUpfrontPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_duration, *v.Duration)
+	}
+	serializeGrantList(s, schemas.FixedUpfrontPricingTerm_grants, v.Grants)
+	if v.Id != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_id, *v.Id)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_price, *v.Price)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_type, string(v.Type))
+	}
+}
+func (v *FixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedUpfrontPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedUpfrontPricingTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_currencyCode, v.CurrencyCode)
+		case schemas.FixedUpfrontPricingTerm_duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_duration, v.Duration)
+		case schemas.FixedUpfrontPricingTerm_grants:
+			return deserializeGrantList(d, schemas.FixedUpfrontPricingTerm_grants, &v.Grants)
+		case schemas.FixedUpfrontPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_id, v.Id)
+		case schemas.FixedUpfrontPricingTerm_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_price, v.Price)
+		case schemas.FixedUpfrontPricingTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.FixedUpfrontPricingTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines a free trial pricing term that enables customers to try the product
 // before purchasing.
 type FreeTrialPricingTerm struct {
@@ -652,6 +1711,47 @@ type FreeTrialPricingTerm struct {
 	Duration *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FreeTrialPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FreeTrialPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FreeTrialPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteString(schemas.FreeTrialPricingTerm_duration, *v.Duration)
+	}
+	serializeGrantList(s, schemas.FreeTrialPricingTerm_grants, v.Grants)
+	if v.Id != nil {
+		s.WriteString(schemas.FreeTrialPricingTerm_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FreeTrialPricingTerm_type, string(v.Type))
+	}
+}
+func (v *FreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FreeTrialPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FreeTrialPricingTerm_duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.FreeTrialPricingTerm_duration, v.Duration)
+		case schemas.FreeTrialPricingTerm_grants:
+			return deserializeGrantList(d, schemas.FreeTrialPricingTerm_grants, &v.Grants)
+		case schemas.FreeTrialPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FreeTrialPricingTerm_id, v.Id)
+		case schemas.FreeTrialPricingTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.FreeTrialPricingTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a fulfillment option for a product. Each element contains exactly one
@@ -683,6 +1783,14 @@ type FulfillmentOptionMemberAmazonMachineImageFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberAmazonMachineImageFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberAmazonMachineImageFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_amazonMachineImageFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberAmazonMachineImageFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An API-based fulfillment option for programmatic integration.
 type FulfillmentOptionMemberApiFulfillmentOption struct {
@@ -692,6 +1800,14 @@ type FulfillmentOptionMemberApiFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberApiFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberApiFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_apiFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberApiFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An AWS CloudFormation template fulfillment option for infrastructure deployment.
 type FulfillmentOptionMemberCloudFormationFulfillmentOption struct {
@@ -701,6 +1817,14 @@ type FulfillmentOptionMemberCloudFormationFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberCloudFormationFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberCloudFormationFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_cloudFormationFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberCloudFormationFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container image fulfillment option for container-based deployment.
 type FulfillmentOptionMemberContainerFulfillmentOption struct {
@@ -710,6 +1834,14 @@ type FulfillmentOptionMemberContainerFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberContainerFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberContainerFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_containerFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberContainerFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An AWS Data Exchange fulfillment option for data set delivery.
 type FulfillmentOptionMemberDataExchangeFulfillmentOption struct {
@@ -719,6 +1851,14 @@ type FulfillmentOptionMemberDataExchangeFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberDataExchangeFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberDataExchangeFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_dataExchangeFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberDataExchangeFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An EC2 Image Builder component fulfillment option.
 type FulfillmentOptionMemberEc2ImageBuilderComponentFulfillmentOption struct {
@@ -728,6 +1868,14 @@ type FulfillmentOptionMemberEc2ImageBuilderComponentFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberEc2ImageBuilderComponentFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberEc2ImageBuilderComponentFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_ec2ImageBuilderComponentFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberEc2ImageBuilderComponentFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An Amazon EKS add-on fulfillment option.
 type FulfillmentOptionMemberEksAddOnFulfillmentOption struct {
@@ -737,6 +1885,14 @@ type FulfillmentOptionMemberEksAddOnFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberEksAddOnFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberEksAddOnFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_eksAddOnFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberEksAddOnFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A Helm chart fulfillment option for Kubernetes deployment.
 type FulfillmentOptionMemberHelmFulfillmentOption struct {
@@ -746,6 +1902,14 @@ type FulfillmentOptionMemberHelmFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberHelmFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberHelmFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_helmFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberHelmFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A professional services fulfillment option.
 type FulfillmentOptionMemberProfessionalServicesFulfillmentOption struct {
@@ -755,6 +1919,14 @@ type FulfillmentOptionMemberProfessionalServicesFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberProfessionalServicesFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberProfessionalServicesFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_professionalServicesFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberProfessionalServicesFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A Software as a Service (SaaS) fulfillment option.
 type FulfillmentOptionMemberSaasFulfillmentOption struct {
@@ -764,6 +1936,14 @@ type FulfillmentOptionMemberSaasFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberSaasFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberSaasFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_saasFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberSaasFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An Amazon SageMaker algorithm fulfillment option.
 type FulfillmentOptionMemberSageMakerAlgorithmFulfillmentOption struct {
@@ -773,6 +1953,14 @@ type FulfillmentOptionMemberSageMakerAlgorithmFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberSageMakerAlgorithmFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberSageMakerAlgorithmFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_sageMakerAlgorithmFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberSageMakerAlgorithmFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An Amazon SageMaker model fulfillment option.
 type FulfillmentOptionMemberSageMakerModelFulfillmentOption struct {
@@ -782,6 +1970,14 @@ type FulfillmentOptionMemberSageMakerModelFulfillmentOption struct {
 }
 
 func (*FulfillmentOptionMemberSageMakerModelFulfillmentOption) isFulfillmentOption() {}
+func (v *FulfillmentOptionMemberSageMakerModelFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOption_sageMakerModelFulfillmentOption)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FulfillmentOptionMemberSageMakerModelFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A summary of a fulfillment option available for deploying or accessing a
 // listing or product.
@@ -799,6 +1995,38 @@ type FulfillmentOptionSummary struct {
 	FulfillmentOptionType FulfillmentOptionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *FulfillmentOptionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FulfillmentOptionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FulfillmentOptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.FulfillmentOptionSummary_displayName, *v.DisplayName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.FulfillmentOptionSummary_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+}
+func (v *FulfillmentOptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FulfillmentOptionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FulfillmentOptionSummary_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.FulfillmentOptionSummary_displayName, v.DisplayName)
+		case schemas.FulfillmentOptionSummary_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.FulfillmentOptionSummary_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An entitlement granted to the buyer as part of a pricing term.
@@ -829,6 +2057,55 @@ type GrantItem struct {
 	MaxQuantity *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrantItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GrantItem_description, *v.Description)
+	}
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.GrantItem_dimensionKey, *v.DimensionKey)
+	}
+	serializeDimensionLabelList(s, schemas.GrantItem_dimensionLabels, v.DimensionLabels)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GrantItem_displayName, *v.DisplayName)
+	}
+	if v.MaxQuantity != nil {
+		s.WriteInt32(schemas.GrantItem_maxQuantity, *v.MaxQuantity)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.GrantItem_unit, *v.Unit)
+	}
+}
+func (v *GrantItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrantItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrantItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GrantItem_description, v.Description)
+		case schemas.GrantItem_dimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.GrantItem_dimensionKey, v.DimensionKey)
+		case schemas.GrantItem_dimensionLabels:
+			return deserializeDimensionLabelList(d, schemas.GrantItem_dimensionLabels, &v.DimensionLabels)
+		case schemas.GrantItem_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GrantItem_displayName, v.DisplayName)
+		case schemas.GrantItem_maxQuantity:
+			v.MaxQuantity = new(int32)
+			return d.ReadInt32(schemas.GrantItem_maxQuantity, v.MaxQuantity)
+		case schemas.GrantItem_unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.GrantItem_unit, v.Unit)
+		}
+		return nil
+	})
 }
 
 // Describes a Helm chart fulfillment option for Kubernetes deployment.
@@ -872,6 +2149,74 @@ type HelmFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HelmFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HelmFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HelmFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsSupportedServiceList(s, schemas.HelmFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionName != nil {
+		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionName, *v.FulfillmentOptionName)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	serializeHelmOperatingSystemList(s, schemas.HelmFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.HelmFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.HelmFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *HelmFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HelmFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HelmFulfillmentOption_awsSupportedServices:
+			return deserializeAwsSupportedServiceList(d, schemas.HelmFulfillmentOption_awsSupportedServices, &v.AwsSupportedServices)
+		case schemas.HelmFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.HelmFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.HelmFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.HelmFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.HelmFulfillmentOption_fulfillmentOptionName:
+			v.FulfillmentOptionName = new(string)
+			return d.ReadString(schemas.HelmFulfillmentOption_fulfillmentOptionName, v.FulfillmentOptionName)
+		case schemas.HelmFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.HelmFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.HelmFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.HelmFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.HelmFulfillmentOption_operatingSystems:
+			return deserializeHelmOperatingSystemList(d, schemas.HelmFulfillmentOption_operatingSystems, &v.OperatingSystems)
+		case schemas.HelmFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.HelmFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.HelmFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.HelmFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an operating system supported by a Helm chart fulfillment option.
 type HelmOperatingSystem struct {
 
@@ -886,6 +2231,34 @@ type HelmOperatingSystem struct {
 	OperatingSystemName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HelmOperatingSystem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HelmOperatingSystem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HelmOperatingSystem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperatingSystemFamilyName != nil {
+		s.WriteString(schemas.HelmOperatingSystem_operatingSystemFamilyName, *v.OperatingSystemFamilyName)
+	}
+	if v.OperatingSystemName != nil {
+		s.WriteString(schemas.HelmOperatingSystem_operatingSystemName, *v.OperatingSystemName)
+	}
+}
+func (v *HelmOperatingSystem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HelmOperatingSystem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HelmOperatingSystem_operatingSystemFamilyName:
+			v.OperatingSystemFamilyName = new(string)
+			return d.ReadString(schemas.HelmOperatingSystem_operatingSystemFamilyName, v.OperatingSystemFamilyName)
+		case schemas.HelmOperatingSystem_operatingSystemName:
+			v.OperatingSystemName = new(string)
+			return d.ReadString(schemas.HelmOperatingSystem_operatingSystemName, v.OperatingSystemName)
+		}
+		return nil
+	})
 }
 
 // Defines a legal term containing documents proposed to buyers, such as EULAs and
@@ -910,6 +2283,41 @@ type LegalTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LegalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LegalTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LegalTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentList(s, schemas.LegalTerm_documents, v.Documents)
+	if v.Id != nil {
+		s.WriteString(schemas.LegalTerm_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.LegalTerm_type, string(v.Type))
+	}
+}
+func (v *LegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LegalTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LegalTerm_documents:
+			return deserializeDocumentList(d, schemas.LegalTerm_documents, &v.Documents)
+		case schemas.LegalTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.LegalTerm_id, v.Id)
+		case schemas.LegalTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.LegalTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A product and offer associated with a listing.
 type ListingAssociatedEntity struct {
 
@@ -920,6 +2328,38 @@ type ListingAssociatedEntity struct {
 	Product *ProductInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListingAssociatedEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingAssociatedEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingAssociatedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Offer != nil {
+		s.WriteStruct(schemas.ListingAssociatedEntity_offer)
+		v.Offer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Product != nil {
+		s.WriteStruct(schemas.ListingAssociatedEntity_product)
+		v.Product.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListingAssociatedEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingAssociatedEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingAssociatedEntity_offer:
+			v.Offer = &OfferInformation{}
+			return v.Offer.Deserialize(d)
+		case schemas.ListingAssociatedEntity_product:
+			v.Product = &ProductInformation{}
+			return v.Product.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A badge indicating a special attribute of a listing, such as free tier
@@ -937,6 +2377,38 @@ type ListingBadge struct {
 	DisplayName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListingBadge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingBadge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingBadge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BadgeType != "" {
+		s.WriteString(schemas.ListingBadge_badgeType, string(v.BadgeType))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ListingBadge_displayName, *v.DisplayName)
+	}
+}
+func (v *ListingBadge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingBadge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingBadge_badgeType:
+			var ev string
+			if err := d.ReadString(schemas.ListingBadge_badgeType, &ev); err != nil {
+				return err
+			}
+			v.BadgeType = ListingBadgeType(ev)
+			return nil
+		case schemas.ListingBadge_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ListingBadge_displayName, v.DisplayName)
+		}
+		return nil
+	})
 }
 
 // A facet value with display information and a count of matching listings. Used
@@ -963,6 +2435,46 @@ type ListingFacet struct {
 	Parent *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListingFacet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingFacet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingFacet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt64(schemas.ListingFacet_count, *v.Count)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.ListingFacet_displayName, *v.DisplayName)
+	}
+	if v.Parent != nil {
+		s.WriteString(schemas.ListingFacet_parent, *v.Parent)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ListingFacet_value, *v.Value)
+	}
+}
+func (v *ListingFacet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingFacet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingFacet_count:
+			v.Count = new(int64)
+			return d.ReadInt64(schemas.ListingFacet_count, v.Count)
+		case schemas.ListingFacet_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.ListingFacet_displayName, v.DisplayName)
+		case schemas.ListingFacet_parent:
+			v.Parent = new(string)
+			return d.ReadString(schemas.ListingFacet_parent, v.Parent)
+		case schemas.ListingFacet_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ListingFacet_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Summary information about a listing returned by search operations, including
@@ -1039,6 +2551,86 @@ type ListingSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListingSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListingSummaryAssociatedEntityList(s, schemas.ListingSummary_associatedEntities, v.AssociatedEntities)
+	serializeListingBadgeList(s, schemas.ListingSummary_badges, v.Badges)
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListingSummary_catalog, *v.Catalog)
+	}
+	serializeCategoryList(s, schemas.ListingSummary_categories, v.Categories)
+	serializeFulfillmentOptionSummaryList(s, schemas.ListingSummary_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
+	if v.ListingId != nil {
+		s.WriteString(schemas.ListingSummary_listingId, *v.ListingId)
+	}
+	if v.ListingName != nil {
+		s.WriteString(schemas.ListingSummary_listingName, *v.ListingName)
+	}
+	if v.LogoThumbnailUrl != nil {
+		s.WriteString(schemas.ListingSummary_logoThumbnailUrl, *v.LogoThumbnailUrl)
+	}
+	serializePricingModelList(s, schemas.ListingSummary_pricingModels, v.PricingModels)
+	serializePricingUnitList(s, schemas.ListingSummary_pricingUnits, v.PricingUnits)
+	if v.Publisher != nil {
+		s.WriteStruct(schemas.ListingSummary_publisher)
+		v.Publisher.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReviewSummary != nil {
+		s.WriteStruct(schemas.ListingSummary_reviewSummary)
+		v.ReviewSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.ListingSummary_shortDescription, *v.ShortDescription)
+	}
+}
+func (v *ListingSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingSummary_associatedEntities:
+			return deserializeListingSummaryAssociatedEntityList(d, schemas.ListingSummary_associatedEntities, &v.AssociatedEntities)
+		case schemas.ListingSummary_badges:
+			return deserializeListingBadgeList(d, schemas.ListingSummary_badges, &v.Badges)
+		case schemas.ListingSummary_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.ListingSummary_catalog, v.Catalog)
+		case schemas.ListingSummary_categories:
+			return deserializeCategoryList(d, schemas.ListingSummary_categories, &v.Categories)
+		case schemas.ListingSummary_fulfillmentOptionSummaries:
+			return deserializeFulfillmentOptionSummaryList(d, schemas.ListingSummary_fulfillmentOptionSummaries, &v.FulfillmentOptionSummaries)
+		case schemas.ListingSummary_listingId:
+			v.ListingId = new(string)
+			return d.ReadString(schemas.ListingSummary_listingId, v.ListingId)
+		case schemas.ListingSummary_listingName:
+			v.ListingName = new(string)
+			return d.ReadString(schemas.ListingSummary_listingName, v.ListingName)
+		case schemas.ListingSummary_logoThumbnailUrl:
+			v.LogoThumbnailUrl = new(string)
+			return d.ReadString(schemas.ListingSummary_logoThumbnailUrl, v.LogoThumbnailUrl)
+		case schemas.ListingSummary_pricingModels:
+			return deserializePricingModelList(d, schemas.ListingSummary_pricingModels, &v.PricingModels)
+		case schemas.ListingSummary_pricingUnits:
+			return deserializePricingUnitList(d, schemas.ListingSummary_pricingUnits, &v.PricingUnits)
+		case schemas.ListingSummary_publisher:
+			v.Publisher = &SellerInformation{}
+			return v.Publisher.Deserialize(d)
+		case schemas.ListingSummary_reviewSummary:
+			v.ReviewSummary = &ReviewSummary{}
+			return v.ReviewSummary.Deserialize(d)
+		case schemas.ListingSummary_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.ListingSummary_shortDescription, v.ShortDescription)
+		}
+		return nil
+	})
+}
+
 // A product associated with a listing summary.
 type ListingSummaryAssociatedEntity struct {
 
@@ -1046,6 +2638,30 @@ type ListingSummaryAssociatedEntity struct {
 	Product *ProductInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListingSummaryAssociatedEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListingSummaryAssociatedEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListingSummaryAssociatedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Product != nil {
+		s.WriteStruct(schemas.ListingSummaryAssociatedEntity_product)
+		v.Product.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListingSummaryAssociatedEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListingSummaryAssociatedEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListingSummaryAssociatedEntity_product:
+			v.Product = &ProductInformation{}
+			return v.Product.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines a net payment term that sets how many days after the invoice date the
@@ -1070,6 +2686,44 @@ type NetPaymentTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetPaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetPaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.NetPaymentTerm_id, *v.Id)
+	}
+	if v.PaymentDuePeriod != nil {
+		s.WriteString(schemas.NetPaymentTerm_paymentDuePeriod, *v.PaymentDuePeriod)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.NetPaymentTerm_type, string(v.Type))
+	}
+}
+func (v *NetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetPaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetPaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_id, v.Id)
+		case schemas.NetPaymentTerm_paymentDuePeriod:
+			v.PaymentDuePeriod = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_paymentDuePeriod, v.PaymentDuePeriod)
+		case schemas.NetPaymentTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.NetPaymentTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A product and optional offer set associated with an offer.
 type OfferAssociatedEntity struct {
 
@@ -1082,6 +2736,38 @@ type OfferAssociatedEntity struct {
 	OfferSet *OfferSetInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferAssociatedEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferAssociatedEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferAssociatedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferSet != nil {
+		s.WriteStruct(schemas.OfferAssociatedEntity_offerSet)
+		v.OfferSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Product != nil {
+		s.WriteStruct(schemas.OfferAssociatedEntity_product)
+		v.Product.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferAssociatedEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferAssociatedEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferAssociatedEntity_offerSet:
+			v.OfferSet = &OfferSetInformation{}
+			return v.OfferSet.Deserialize(d)
+		case schemas.OfferAssociatedEntity_product:
+			v.Product = &ProductInformation{}
+			return v.Product.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Summary information about an offer, including the offer identifier, name, and
@@ -1104,6 +2790,42 @@ type OfferInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OfferInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferId != nil {
+		s.WriteString(schemas.OfferInformation_offerId, *v.OfferId)
+	}
+	if v.OfferName != nil {
+		s.WriteString(schemas.OfferInformation_offerName, *v.OfferName)
+	}
+	if v.SellerOfRecord != nil {
+		s.WriteStruct(schemas.OfferInformation_sellerOfRecord)
+		v.SellerOfRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferInformation_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.OfferInformation_offerId, v.OfferId)
+		case schemas.OfferInformation_offerName:
+			v.OfferName = new(string)
+			return d.ReadString(schemas.OfferInformation_offerName, v.OfferName)
+		case schemas.OfferInformation_sellerOfRecord:
+			v.SellerOfRecord = &SellerInformation{}
+			return v.SellerOfRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A product and offer associated with an offer set.
 type OfferSetAssociatedEntity struct {
 
@@ -1118,6 +2840,38 @@ type OfferSetAssociatedEntity struct {
 	Product *ProductInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetAssociatedEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetAssociatedEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetAssociatedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Offer != nil {
+		s.WriteStruct(schemas.OfferSetAssociatedEntity_offer)
+		v.Offer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Product != nil {
+		s.WriteStruct(schemas.OfferSetAssociatedEntity_product)
+		v.Product.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferSetAssociatedEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetAssociatedEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetAssociatedEntity_offer:
+			v.Offer = &OfferInformation{}
+			return v.Offer.Deserialize(d)
+		case schemas.OfferSetAssociatedEntity_product:
+			v.Product = &ProductInformation{}
+			return v.Product.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Summary information about an offer set, including the identifier and seller of
@@ -1135,6 +2889,36 @@ type OfferSetInformation struct {
 	SellerOfRecord *SellerInformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *OfferSetInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferSetInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OfferSetInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferSetId != nil {
+		s.WriteString(schemas.OfferSetInformation_offerSetId, *v.OfferSetId)
+	}
+	if v.SellerOfRecord != nil {
+		s.WriteStruct(schemas.OfferSetInformation_sellerOfRecord)
+		v.SellerOfRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OfferSetInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OfferSetInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OfferSetInformation_offerSetId:
+			v.OfferSetId = new(string)
+			return d.ReadString(schemas.OfferSetInformation_offerSetId, v.OfferSetId)
+		case schemas.OfferSetInformation_sellerOfRecord:
+			v.SellerOfRecord = &SellerInformation{}
+			return v.SellerOfRecord.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A term attached to an offer. Each element contains exactly one term type, such
@@ -1168,6 +2952,14 @@ type OfferTermMemberByolPricingTerm struct {
 }
 
 func (*OfferTermMemberByolPricingTerm) isOfferTerm() {}
+func (v *OfferTermMemberByolPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_byolPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberByolPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a configurable upfront pricing term with selectable rate cards, where
 // buyers choose from predefined pricing configurations.
@@ -1178,6 +2970,14 @@ type OfferTermMemberConfigurableUpfrontPricingTerm struct {
 }
 
 func (*OfferTermMemberConfigurableUpfrontPricingTerm) isOfferTerm() {}
+func (v *OfferTermMemberConfigurableUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_configurableUpfrontPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberConfigurableUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a fixed upfront pricing term with a pre-paid amount and granted
 // entitlements.
@@ -1188,6 +2988,14 @@ type OfferTermMemberFixedUpfrontPricingTerm struct {
 }
 
 func (*OfferTermMemberFixedUpfrontPricingTerm) isOfferTerm() {}
+func (v *OfferTermMemberFixedUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_fixedUpfrontPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberFixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a free trial pricing term that enables customers to try the product
 // before purchasing.
@@ -1198,6 +3006,14 @@ type OfferTermMemberFreeTrialPricingTerm struct {
 }
 
 func (*OfferTermMemberFreeTrialPricingTerm) isOfferTerm() {}
+func (v *OfferTermMemberFreeTrialPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_freeTrialPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberFreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a legal term containing documents proposed to buyers, such as EULAs and
 // data subscription agreements.
@@ -1208,6 +3024,14 @@ type OfferTermMemberLegalTerm struct {
 }
 
 func (*OfferTermMemberLegalTerm) isOfferTerm() {}
+func (v *OfferTermMemberLegalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_legalTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberLegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A net payment term.
 type OfferTermMemberNetPaymentTerm struct {
@@ -1217,6 +3041,14 @@ type OfferTermMemberNetPaymentTerm struct {
 }
 
 func (*OfferTermMemberNetPaymentTerm) isOfferTerm() {}
+func (v *OfferTermMemberNetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_netPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberNetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a payment schedule term with installment payments at specified dates.
 type OfferTermMemberPaymentScheduleTerm struct {
@@ -1226,6 +3058,14 @@ type OfferTermMemberPaymentScheduleTerm struct {
 }
 
 func (*OfferTermMemberPaymentScheduleTerm) isOfferTerm() {}
+func (v *OfferTermMemberPaymentScheduleTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_paymentScheduleTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberPaymentScheduleTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a recurring payment term with fixed charges at regular billing
 // intervals.
@@ -1236,6 +3076,14 @@ type OfferTermMemberRecurringPaymentTerm struct {
 }
 
 func (*OfferTermMemberRecurringPaymentTerm) isOfferTerm() {}
+func (v *OfferTermMemberRecurringPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_recurringPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberRecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a renewal term that enables automatic agreement renewal.
 type OfferTermMemberRenewalTerm struct {
@@ -1245,6 +3093,14 @@ type OfferTermMemberRenewalTerm struct {
 }
 
 func (*OfferTermMemberRenewalTerm) isOfferTerm() {}
+func (v *OfferTermMemberRenewalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_renewalTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberRenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a support term that includes the refund policy for the offer.
 type OfferTermMemberSupportTerm struct {
@@ -1254,6 +3110,14 @@ type OfferTermMemberSupportTerm struct {
 }
 
 func (*OfferTermMemberSupportTerm) isOfferTerm() {}
+func (v *OfferTermMemberSupportTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_supportTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberSupportTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a usage-based pricing term (typically pay-as-you-go), where buyers are
 // charged based on product usage.
@@ -1264,6 +3128,14 @@ type OfferTermMemberUsageBasedPricingTerm struct {
 }
 
 func (*OfferTermMemberUsageBasedPricingTerm) isOfferTerm() {}
+func (v *OfferTermMemberUsageBasedPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_usageBasedPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberUsageBasedPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a validity term that specifies the duration or date range of an
 // agreement.
@@ -1274,6 +3146,14 @@ type OfferTermMemberValidityTerm struct {
 }
 
 func (*OfferTermMemberValidityTerm) isOfferTerm() {}
+func (v *OfferTermMemberValidityTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_validityTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberValidityTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a variable payment term with a maximum total charge amount.
 type OfferTermMemberVariablePaymentTerm struct {
@@ -1283,6 +3163,14 @@ type OfferTermMemberVariablePaymentTerm struct {
 }
 
 func (*OfferTermMemberVariablePaymentTerm) isOfferTerm() {}
+func (v *OfferTermMemberVariablePaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OfferTerm_variablePaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OfferTermMemberVariablePaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A single installment entry in the renewal payment schedule.
 type PaymentScheduleEntry struct {
@@ -1306,6 +3194,40 @@ type PaymentScheduleEntry struct {
 	DayOfMonth *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PaymentScheduleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeDateOffset != nil {
+		s.WriteString(schemas.PaymentScheduleEntry_chargeDateOffset, *v.ChargeDateOffset)
+	}
+	if v.ChargePercentage != nil {
+		s.WriteString(schemas.PaymentScheduleEntry_chargePercentage, *v.ChargePercentage)
+	}
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.PaymentScheduleEntry_dayOfMonth, *v.DayOfMonth)
+	}
+}
+func (v *PaymentScheduleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleEntry_chargeDateOffset:
+			v.ChargeDateOffset = new(string)
+			return d.ReadString(schemas.PaymentScheduleEntry_chargeDateOffset, v.ChargeDateOffset)
+		case schemas.PaymentScheduleEntry_chargePercentage:
+			v.ChargePercentage = new(string)
+			return d.ReadString(schemas.PaymentScheduleEntry_chargePercentage, v.ChargePercentage)
+		case schemas.PaymentScheduleEntry_dayOfMonth:
+			v.DayOfMonth = new(int32)
+			return d.ReadInt32(schemas.PaymentScheduleEntry_dayOfMonth, v.DayOfMonth)
+		}
+		return nil
+	})
 }
 
 // Defines a payment schedule term with installment payments at specified dates.
@@ -1334,6 +3256,47 @@ type PaymentScheduleTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PaymentScheduleTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.PaymentScheduleTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.PaymentScheduleTerm_id, *v.Id)
+	}
+	serializeScheduleList(s, schemas.PaymentScheduleTerm_schedule, v.Schedule)
+	if v.Type != "" {
+		s.WriteString(schemas.PaymentScheduleTerm_type, string(v.Type))
+	}
+}
+func (v *PaymentScheduleTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.PaymentScheduleTerm_currencyCode, v.CurrencyCode)
+		case schemas.PaymentScheduleTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PaymentScheduleTerm_id, v.Id)
+		case schemas.PaymentScheduleTerm_schedule:
+			return deserializeScheduleList(d, schemas.PaymentScheduleTerm_schedule, &v.Schedule)
+		case schemas.PaymentScheduleTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.PaymentScheduleTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A template for the payment schedule term on the renewal offer.
 type PaymentScheduleTermTemplate struct {
 
@@ -1343,6 +3306,25 @@ type PaymentScheduleTermTemplate struct {
 	Schedule []PaymentScheduleEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *PaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleTermTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleTermTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+}
+func (v *PaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleTermTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleTermTemplate_schedule:
+			return deserializePaymentScheduleEntryList(d, schemas.PaymentScheduleTermTemplate_schedule, &v.Schedule)
+		}
+		return nil
+	})
 }
 
 // A price increase percentage range with minimum, maximum, and default values.
@@ -1367,6 +3349,40 @@ type PercentageRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PercentageRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PercentageRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PercentageRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.PercentageRange_defaultValue, *v.DefaultValue)
+	}
+	if v.MaximumValue != nil {
+		s.WriteString(schemas.PercentageRange_maximumValue, *v.MaximumValue)
+	}
+	if v.MinimumValue != nil {
+		s.WriteString(schemas.PercentageRange_minimumValue, *v.MinimumValue)
+	}
+}
+func (v *PercentageRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PercentageRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PercentageRange_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.PercentageRange_defaultValue, v.DefaultValue)
+		case schemas.PercentageRange_maximumValue:
+			v.MaximumValue = new(string)
+			return d.ReadString(schemas.PercentageRange_maximumValue, v.MaximumValue)
+		case schemas.PercentageRange_minimumValue:
+			v.MinimumValue = new(string)
+			return d.ReadString(schemas.PercentageRange_minimumValue, v.MinimumValue)
+		}
+		return nil
+	})
+}
+
 // The pricing adjustment that applies at each renewal cycle, expressed as either
 // a fixed percentage or a percentage range. Exactly one variant is present.
 //
@@ -1386,6 +3402,14 @@ type PriceIncreaseMemberFixedPercentage struct {
 }
 
 func (*PriceIncreaseMemberFixedPercentage) isPriceIncrease() {}
+func (v *PriceIncreaseMemberFixedPercentage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceIncrease_fixedPercentage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PriceIncreaseMemberFixedPercentage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A percentage band with minimum, maximum, and default values that bound the
 // price increase at each renewal cycle.
@@ -1396,6 +3420,14 @@ type PriceIncreaseMemberPercentageRange struct {
 }
 
 func (*PriceIncreaseMemberPercentageRange) isPriceIncrease() {}
+func (v *PriceIncreaseMemberPercentageRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceIncrease_percentageRange)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PriceIncreaseMemberPercentageRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A pricing model that determines how buyers are charged for a listing, such as
 // usage-based, contract, BYOL, or free.
@@ -1414,6 +3446,38 @@ type PricingModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PricingModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.PricingModel_displayName, *v.DisplayName)
+	}
+	if v.PricingModelType != "" {
+		s.WriteString(schemas.PricingModel_pricingModelType, string(v.PricingModelType))
+	}
+}
+func (v *PricingModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingModel_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.PricingModel_displayName, v.DisplayName)
+		case schemas.PricingModel_pricingModelType:
+			var ev string
+			if err := d.ReadString(schemas.PricingModel_pricingModelType, &ev); err != nil {
+				return err
+			}
+			v.PricingModelType = PricingModelType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A pricing unit that defines the billing dimension for a listing, such as users,
 // hosts, bandwidth, or data.
 type PricingUnit struct {
@@ -1429,6 +3493,38 @@ type PricingUnit struct {
 	PricingUnitType PricingUnitType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PricingUnit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingUnit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingUnit) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.PricingUnit_displayName, *v.DisplayName)
+	}
+	if v.PricingUnitType != "" {
+		s.WriteString(schemas.PricingUnit_pricingUnitType, string(v.PricingUnitType))
+	}
+}
+func (v *PricingUnit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingUnit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingUnit_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.PricingUnit_displayName, v.DisplayName)
+		case schemas.PricingUnit_pricingUnitType:
+			var ev string
+			if err := d.ReadString(schemas.PricingUnit_pricingUnitType, &ev); err != nil {
+				return err
+			}
+			v.PricingUnitType = PricingUnitType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary information about a product, including the identifier, name, and
@@ -1453,6 +3549,42 @@ type ProductInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProductInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Manufacturer != nil {
+		s.WriteStruct(schemas.ProductInformation_manufacturer)
+		v.Manufacturer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ProductInformation_productId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.ProductInformation_productName, *v.ProductName)
+	}
+}
+func (v *ProductInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductInformation_manufacturer:
+			v.Manufacturer = &SellerInformation{}
+			return v.Manufacturer.Deserialize(d)
+		case schemas.ProductInformation_productId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.ProductInformation_productId, v.ProductId)
+		case schemas.ProductInformation_productName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.ProductInformation_productName, v.ProductName)
+		}
+		return nil
+	})
+}
+
 // Describes a professional services fulfillment option.
 type ProfessionalServicesFulfillmentOption struct {
 
@@ -1474,6 +3606,44 @@ type ProfessionalServicesFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProfessionalServicesFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfessionalServicesFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfessionalServicesFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+}
+func (v *ProfessionalServicesFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfessionalServicesFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.ProfessionalServicesFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An embedded promotional image for a product.
 type PromotionalEmbeddedImage struct {
 
@@ -1491,6 +3661,40 @@ type PromotionalEmbeddedImage struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PromotionalEmbeddedImage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromotionalEmbeddedImage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromotionalEmbeddedImage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PromotionalEmbeddedImage_description, *v.Description)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.PromotionalEmbeddedImage_title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.PromotionalEmbeddedImage_url, *v.Url)
+	}
+}
+func (v *PromotionalEmbeddedImage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromotionalEmbeddedImage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromotionalEmbeddedImage_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedImage_description, v.Description)
+		case schemas.PromotionalEmbeddedImage_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedImage_title, v.Title)
+		case schemas.PromotionalEmbeddedImage_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedImage_url, v.Url)
+		}
+		return nil
+	})
 }
 
 // An embedded promotional video for a product.
@@ -1522,6 +3726,52 @@ type PromotionalEmbeddedVideo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PromotionalEmbeddedVideo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromotionalEmbeddedVideo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PromotionalEmbeddedVideo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PromotionalEmbeddedVideo_description, *v.Description)
+	}
+	if v.Preview != nil {
+		s.WriteString(schemas.PromotionalEmbeddedVideo_preview, *v.Preview)
+	}
+	if v.Thumbnail != nil {
+		s.WriteString(schemas.PromotionalEmbeddedVideo_thumbnail, *v.Thumbnail)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.PromotionalEmbeddedVideo_title, *v.Title)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.PromotionalEmbeddedVideo_url, *v.Url)
+	}
+}
+func (v *PromotionalEmbeddedVideo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PromotionalEmbeddedVideo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PromotionalEmbeddedVideo_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedVideo_description, v.Description)
+		case schemas.PromotionalEmbeddedVideo_preview:
+			v.Preview = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedVideo_preview, v.Preview)
+		case schemas.PromotionalEmbeddedVideo_thumbnail:
+			v.Thumbnail = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedVideo_thumbnail, v.Thumbnail)
+		case schemas.PromotionalEmbeddedVideo_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedVideo_title, v.Title)
+		case schemas.PromotionalEmbeddedVideo_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.PromotionalEmbeddedVideo_url, v.Url)
+		}
+		return nil
+	})
+}
+
 // Embedded promotional media for a product, such as images or videos. Each
 // element contains exactly one media type.
 //
@@ -1541,6 +3791,14 @@ type PromotionalMediaMemberEmbeddedImage struct {
 }
 
 func (*PromotionalMediaMemberEmbeddedImage) isPromotionalMedia() {}
+func (v *PromotionalMediaMemberEmbeddedImage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromotionalMedia_embeddedImage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PromotionalMediaMemberEmbeddedImage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // An embedded promotional video for a product.
 type PromotionalMediaMemberEmbeddedVideo struct {
@@ -1550,6 +3808,14 @@ type PromotionalMediaMemberEmbeddedVideo struct {
 }
 
 func (*PromotionalMediaMemberEmbeddedVideo) isPromotionalMedia() {}
+func (v *PromotionalMediaMemberEmbeddedVideo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PromotionalMedia_embeddedVideo)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PromotionalMediaMemberEmbeddedVideo) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A product, offer, and optional offer set associated with a purchase option.
 type PurchaseOptionAssociatedEntity struct {
@@ -1571,6 +3837,46 @@ type PurchaseOptionAssociatedEntity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOptionAssociatedEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOptionAssociatedEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOptionAssociatedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Offer != nil {
+		s.WriteStruct(schemas.PurchaseOptionAssociatedEntity_offer)
+		v.Offer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OfferSet != nil {
+		s.WriteStruct(schemas.PurchaseOptionAssociatedEntity_offerSet)
+		v.OfferSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Product != nil {
+		s.WriteStruct(schemas.PurchaseOptionAssociatedEntity_product)
+		v.Product.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseOptionAssociatedEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOptionAssociatedEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOptionAssociatedEntity_offer:
+			v.Offer = &OfferInformation{}
+			return v.Offer.Deserialize(d)
+		case schemas.PurchaseOptionAssociatedEntity_offerSet:
+			v.OfferSet = &OfferSetInformation{}
+			return v.OfferSet.Deserialize(d)
+		case schemas.PurchaseOptionAssociatedEntity_product:
+			v.Product = &ProductInformation{}
+			return v.Product.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A badge indicating a special attribute of a purchase option, such as private
 // pricing or future dated.
 type PurchaseOptionBadge struct {
@@ -1586,6 +3892,38 @@ type PurchaseOptionBadge struct {
 	DisplayName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PurchaseOptionBadge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOptionBadge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOptionBadge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BadgeType != "" {
+		s.WriteString(schemas.PurchaseOptionBadge_badgeType, string(v.BadgeType))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.PurchaseOptionBadge_displayName, *v.DisplayName)
+	}
+}
+func (v *PurchaseOptionBadge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOptionBadge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOptionBadge_badgeType:
+			var ev string
+			if err := d.ReadString(schemas.PurchaseOptionBadge_badgeType, &ev); err != nil {
+				return err
+			}
+			v.BadgeType = PurchaseOptionBadgeType(ev)
+			return nil
+		case schemas.PurchaseOptionBadge_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.PurchaseOptionBadge_displayName, v.DisplayName)
+		}
+		return nil
+	})
 }
 
 // A filter used to narrow purchase option results by product, seller, type,
@@ -1620,6 +3958,35 @@ type PurchaseOptionFilter struct {
 	FilterValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PurchaseOptionFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOptionFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOptionFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterType != "" {
+		s.WriteString(schemas.PurchaseOptionFilter_filterType, string(v.FilterType))
+	}
+	serializePurchaseOptionFilterValueList(s, schemas.PurchaseOptionFilter_filterValues, v.FilterValues)
+}
+func (v *PurchaseOptionFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOptionFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOptionFilter_filterType:
+			var ev string
+			if err := d.ReadString(schemas.PurchaseOptionFilter_filterType, &ev); err != nil {
+				return err
+			}
+			v.FilterType = PurchaseOptionFilterType(ev)
+			return nil
+		case schemas.PurchaseOptionFilter_filterValues:
+			return deserializePurchaseOptionFilterValueList(d, schemas.PurchaseOptionFilter_filterValues, &v.FilterValues)
+		}
+		return nil
+	})
 }
 
 // Summary information about a purchase option (offer or offer set) available to
@@ -1669,6 +4036,76 @@ type PurchaseOptionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOptionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOptionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePurchaseOptionAssociatedEntityList(s, schemas.PurchaseOptionSummary_associatedEntities, v.AssociatedEntities)
+	if v.AvailableFromTime != nil {
+		s.WriteTime(schemas.PurchaseOptionSummary_availableFromTime, *v.AvailableFromTime)
+	}
+	serializePurchaseOptionBadgeList(s, schemas.PurchaseOptionSummary_badges, v.Badges)
+	if v.Catalog != nil {
+		s.WriteString(schemas.PurchaseOptionSummary_catalog, *v.Catalog)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.PurchaseOptionSummary_expirationTime, *v.ExpirationTime)
+	}
+	if v.PurchaseOptionId != nil {
+		s.WriteString(schemas.PurchaseOptionSummary_purchaseOptionId, *v.PurchaseOptionId)
+	}
+	if v.PurchaseOptionName != nil {
+		s.WriteString(schemas.PurchaseOptionSummary_purchaseOptionName, *v.PurchaseOptionName)
+	}
+	if v.PurchaseOptionType != "" {
+		s.WriteString(schemas.PurchaseOptionSummary_purchaseOptionType, string(v.PurchaseOptionType))
+	}
+	if v.SellerOfRecord != nil {
+		s.WriteStruct(schemas.PurchaseOptionSummary_sellerOfRecord)
+		v.SellerOfRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PurchaseOptionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOptionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOptionSummary_associatedEntities:
+			return deserializePurchaseOptionAssociatedEntityList(d, schemas.PurchaseOptionSummary_associatedEntities, &v.AssociatedEntities)
+		case schemas.PurchaseOptionSummary_availableFromTime:
+			v.AvailableFromTime = new(time.Time)
+			return d.ReadTime(schemas.PurchaseOptionSummary_availableFromTime, v.AvailableFromTime)
+		case schemas.PurchaseOptionSummary_badges:
+			return deserializePurchaseOptionBadgeList(d, schemas.PurchaseOptionSummary_badges, &v.Badges)
+		case schemas.PurchaseOptionSummary_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.PurchaseOptionSummary_catalog, v.Catalog)
+		case schemas.PurchaseOptionSummary_expirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.PurchaseOptionSummary_expirationTime, v.ExpirationTime)
+		case schemas.PurchaseOptionSummary_purchaseOptionId:
+			v.PurchaseOptionId = new(string)
+			return d.ReadString(schemas.PurchaseOptionSummary_purchaseOptionId, v.PurchaseOptionId)
+		case schemas.PurchaseOptionSummary_purchaseOptionName:
+			v.PurchaseOptionName = new(string)
+			return d.ReadString(schemas.PurchaseOptionSummary_purchaseOptionName, v.PurchaseOptionName)
+		case schemas.PurchaseOptionSummary_purchaseOptionType:
+			var ev string
+			if err := d.ReadString(schemas.PurchaseOptionSummary_purchaseOptionType, &ev); err != nil {
+				return err
+			}
+			v.PurchaseOptionType = PurchaseOptionType(ev)
+			return nil
+		case schemas.PurchaseOptionSummary_sellerOfRecord:
+			v.SellerOfRecord = &SellerInformation{}
+			return v.SellerOfRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A per-unit rate within a rate card, defining the price for a specific dimension.
 type RateCardItem struct {
 
@@ -1701,6 +4138,55 @@ type RateCardItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateCardItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateCardItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RateCardItem_description, *v.Description)
+	}
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.RateCardItem_dimensionKey, *v.DimensionKey)
+	}
+	serializeDimensionLabelList(s, schemas.RateCardItem_dimensionLabels, v.DimensionLabels)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.RateCardItem_displayName, *v.DisplayName)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.RateCardItem_price, *v.Price)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.RateCardItem_unit, *v.Unit)
+	}
+}
+func (v *RateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateCardItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateCardItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RateCardItem_description, v.Description)
+		case schemas.RateCardItem_dimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.RateCardItem_dimensionKey, v.DimensionKey)
+		case schemas.RateCardItem_dimensionLabels:
+			return deserializeDimensionLabelList(d, schemas.RateCardItem_dimensionLabels, &v.DimensionLabels)
+		case schemas.RateCardItem_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.RateCardItem_displayName, v.DisplayName)
+		case schemas.RateCardItem_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.RateCardItem_price, v.Price)
+		case schemas.RateCardItem_unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.RateCardItem_unit, v.Unit)
+		}
+		return nil
+	})
+}
+
 // Defines a recurring payment term with fixed charges at regular billing
 // intervals.
 type RecurringPaymentTerm struct {
@@ -1731,6 +4217,60 @@ type RecurringPaymentTerm struct {
 	Type TermType
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecurringPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecurringPaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecurringPaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != "" {
+		s.WriteString(schemas.RecurringPaymentTerm_billingPeriod, string(v.BillingPeriod))
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_id, *v.Id)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_price, *v.Price)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RecurringPaymentTerm_type, string(v.Type))
+	}
+}
+func (v *RecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecurringPaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecurringPaymentTerm_billingPeriod:
+			var ev string
+			if err := d.ReadString(schemas.RecurringPaymentTerm_billingPeriod, &ev); err != nil {
+				return err
+			}
+			v.BillingPeriod = BillingPeriodType(ev)
+			return nil
+		case schemas.RecurringPaymentTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_currencyCode, v.CurrencyCode)
+		case schemas.RecurringPaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_id, v.Id)
+		case schemas.RecurringPaymentTerm_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_price, v.Price)
+		case schemas.RecurringPaymentTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.RecurringPaymentTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines a renewal term that enables automatic agreement renewal.
@@ -1770,6 +4310,62 @@ type RenewalTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewalTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentDeadline != nil {
+		s.WriteString(schemas.RenewalTerm_adjustmentDeadline, *v.AdjustmentDeadline)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RenewalTerm_id, *v.Id)
+	}
+	if v.LockoutPeriod != nil {
+		s.WriteString(schemas.RenewalTerm_lockoutPeriod, *v.LockoutPeriod)
+	}
+	if v.MaxRenewals != nil {
+		s.WriteInt32(schemas.RenewalTerm_maxRenewals, *v.MaxRenewals)
+	}
+	serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
+	serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
+	if v.Type != "" {
+		s.WriteString(schemas.RenewalTerm_type, string(v.Type))
+	}
+}
+func (v *RenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewalTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewalTerm_adjustmentDeadline:
+			v.AdjustmentDeadline = new(string)
+			return d.ReadString(schemas.RenewalTerm_adjustmentDeadline, v.AdjustmentDeadline)
+		case schemas.RenewalTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RenewalTerm_id, v.Id)
+		case schemas.RenewalTerm_lockoutPeriod:
+			v.LockoutPeriod = new(string)
+			return d.ReadString(schemas.RenewalTerm_lockoutPeriod, v.LockoutPeriod)
+		case schemas.RenewalTerm_maxRenewals:
+			v.MaxRenewals = new(int32)
+			return d.ReadInt32(schemas.RenewalTerm_maxRenewals, v.MaxRenewals)
+		case schemas.RenewalTerm_priceIncrease:
+			return deserializePriceIncrease(d, schemas.RenewalTerm_priceIncrease, &v.PriceIncrease)
+		case schemas.RenewalTerm_termTemplates:
+			return deserializeTermTemplateList(d, schemas.RenewalTerm_termTemplates, &v.TermTemplates)
+		case schemas.RenewalTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.RenewalTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A resource that provides supplementary information about a product, such as
 // documentation links, support contacts, or usage instructions.
 type Resource struct {
@@ -1794,6 +4390,54 @@ type Resource struct {
 	DisplayName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != "" {
+		s.WriteString(schemas.Resource_contentType, string(v.ContentType))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Resource_displayName, *v.DisplayName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.Resource_resourceType, string(v.ResourceType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Resource_value, *v.Value)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_contentType:
+			var ev string
+			if err := d.ReadString(schemas.Resource_contentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = ResourceContentType(ev)
+			return nil
+		case schemas.Resource_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Resource_displayName, v.DisplayName)
+		case schemas.Resource_resourceType:
+			var ev string
+			if err := d.ReadString(schemas.Resource_resourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		case schemas.Resource_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Resource_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A review summary from a specific source, including the average rating and total
@@ -1826,6 +4470,56 @@ type ReviewSourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReviewSourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReviewSourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReviewSourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageRating != nil {
+		s.WriteString(schemas.ReviewSourceSummary_averageRating, *v.AverageRating)
+	}
+	if v.SourceId != "" {
+		s.WriteString(schemas.ReviewSourceSummary_sourceId, string(v.SourceId))
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.ReviewSourceSummary_sourceName, *v.SourceName)
+	}
+	if v.SourceUrl != nil {
+		s.WriteString(schemas.ReviewSourceSummary_sourceUrl, *v.SourceUrl)
+	}
+	if v.TotalReviews != nil {
+		s.WriteInt64(schemas.ReviewSourceSummary_totalReviews, *v.TotalReviews)
+	}
+}
+func (v *ReviewSourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReviewSourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReviewSourceSummary_averageRating:
+			v.AverageRating = new(string)
+			return d.ReadString(schemas.ReviewSourceSummary_averageRating, v.AverageRating)
+		case schemas.ReviewSourceSummary_sourceId:
+			var ev string
+			if err := d.ReadString(schemas.ReviewSourceSummary_sourceId, &ev); err != nil {
+				return err
+			}
+			v.SourceId = ReviewSourceId(ev)
+			return nil
+		case schemas.ReviewSourceSummary_sourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.ReviewSourceSummary_sourceName, v.SourceName)
+		case schemas.ReviewSourceSummary_sourceUrl:
+			v.SourceUrl = new(string)
+			return d.ReadString(schemas.ReviewSourceSummary_sourceUrl, v.SourceUrl)
+		case schemas.ReviewSourceSummary_totalReviews:
+			v.TotalReviews = new(int64)
+			return d.ReadInt64(schemas.ReviewSourceSummary_totalReviews, v.TotalReviews)
+		}
+		return nil
+	})
+}
+
 // A summary of customer reviews available for a listing, aggregated by review
 // source.
 type ReviewSummary struct {
@@ -1836,6 +4530,25 @@ type ReviewSummary struct {
 	ReviewSourceSummaries []ReviewSourceSummary
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReviewSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReviewSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReviewSourceSummaryList(s, schemas.ReviewSummary_reviewSourceSummaries, v.ReviewSourceSummaries)
+}
+func (v *ReviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReviewSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReviewSummary_reviewSourceSummaries:
+			return deserializeReviewSourceSummaryList(d, schemas.ReviewSummary_reviewSourceSummaries, &v.ReviewSourceSummaries)
+		}
+		return nil
+	})
 }
 
 // Describes a Software as a Service (SaaS) fulfillment option.
@@ -1878,6 +4591,78 @@ type SaasFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SaasFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SaasFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SaasFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableFromTime != nil {
+		s.WriteTime(schemas.SaasFulfillmentOption_availableFromTime, *v.AvailableFromTime)
+	}
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.SaasFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.SaasFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.SaasFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentUrl != nil {
+		s.WriteString(schemas.SaasFulfillmentOption_fulfillmentUrl, *v.FulfillmentUrl)
+	}
+	if v.LaunchUrl != nil {
+		s.WriteString(schemas.SaasFulfillmentOption_launchUrl, *v.LaunchUrl)
+	}
+	if v.QuickLaunch != "" {
+		s.WriteString(schemas.SaasFulfillmentOption_quickLaunch, string(v.QuickLaunch))
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.SaasFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *SaasFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SaasFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SaasFulfillmentOption_availableFromTime:
+			v.AvailableFromTime = new(time.Time)
+			return d.ReadTime(schemas.SaasFulfillmentOption_availableFromTime, v.AvailableFromTime)
+		case schemas.SaasFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.SaasFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.SaasFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.SaasFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.SaasFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.SaasFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.SaasFulfillmentOption_fulfillmentUrl:
+			v.FulfillmentUrl = new(string)
+			return d.ReadString(schemas.SaasFulfillmentOption_fulfillmentUrl, v.FulfillmentUrl)
+		case schemas.SaasFulfillmentOption_launchUrl:
+			v.LaunchUrl = new(string)
+			return d.ReadString(schemas.SaasFulfillmentOption_launchUrl, v.LaunchUrl)
+		case schemas.SaasFulfillmentOption_quickLaunch:
+			var ev string
+			if err := d.ReadString(schemas.SaasFulfillmentOption_quickLaunch, &ev); err != nil {
+				return err
+			}
+			v.QuickLaunch = SaasQuickLaunchStatus(ev)
+			return nil
+		case schemas.SaasFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.SaasFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Describes an Amazon SageMaker algorithm fulfillment option, including version
 // details and recommended instance types.
 type SageMakerAlgorithmFulfillmentOption struct {
@@ -1912,6 +4697,70 @@ type SageMakerAlgorithmFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SageMakerAlgorithmFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerAlgorithmFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerAlgorithmFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.SageMakerAlgorithmFulfillmentOption_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.SageMakerAlgorithmFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.SageMakerAlgorithmFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *SageMakerAlgorithmFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerAlgorithmFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.SageMakerAlgorithmFulfillmentOption_recommendation:
+			v.Recommendation = &SageMakerAlgorithmRecommendation{}
+			return v.Recommendation.Deserialize(d)
+		case schemas.SageMakerAlgorithmFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.SageMakerAlgorithmFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Recommended instance types for training and inference with a SageMaker
 // algorithm.
 type SageMakerAlgorithmRecommendation struct {
@@ -1930,6 +4779,40 @@ type SageMakerAlgorithmRecommendation struct {
 	RecommendedRealtimeInferenceInstanceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SageMakerAlgorithmRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerAlgorithmRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerAlgorithmRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendedBatchTransformInstanceType != nil {
+		s.WriteString(schemas.SageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType, *v.RecommendedBatchTransformInstanceType)
+	}
+	if v.RecommendedRealtimeInferenceInstanceType != nil {
+		s.WriteString(schemas.SageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType, *v.RecommendedRealtimeInferenceInstanceType)
+	}
+	if v.RecommendedTrainingInstanceType != nil {
+		s.WriteString(schemas.SageMakerAlgorithmRecommendation_recommendedTrainingInstanceType, *v.RecommendedTrainingInstanceType)
+	}
+}
+func (v *SageMakerAlgorithmRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerAlgorithmRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType:
+			v.RecommendedBatchTransformInstanceType = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmRecommendation_recommendedBatchTransformInstanceType, v.RecommendedBatchTransformInstanceType)
+		case schemas.SageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType:
+			v.RecommendedRealtimeInferenceInstanceType = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmRecommendation_recommendedRealtimeInferenceInstanceType, v.RecommendedRealtimeInferenceInstanceType)
+		case schemas.SageMakerAlgorithmRecommendation_recommendedTrainingInstanceType:
+			v.RecommendedTrainingInstanceType = new(string)
+			return d.ReadString(schemas.SageMakerAlgorithmRecommendation_recommendedTrainingInstanceType, v.RecommendedTrainingInstanceType)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon SageMaker model fulfillment option, including version
@@ -1972,6 +4855,76 @@ type SageMakerModelFulfillmentOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SageMakerModelFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerModelFulfillmentOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerModelFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FulfillmentOptionDisplayName != nil {
+		s.WriteString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
+	}
+	if v.FulfillmentOptionId != nil {
+		s.WriteString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionId, *v.FulfillmentOptionId)
+	}
+	if v.FulfillmentOptionType != "" {
+		s.WriteString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionType, string(v.FulfillmentOptionType))
+	}
+	if v.FulfillmentOptionVersion != nil {
+		s.WriteString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
+	}
+	if v.Recommendation != nil {
+		s.WriteStruct(schemas.SageMakerModelFulfillmentOption_recommendation)
+		v.Recommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.SageMakerModelFulfillmentOption_releaseNotes, *v.ReleaseNotes)
+	}
+	serializeSageMakerModelContentTypeList(s, schemas.SageMakerModelFulfillmentOption_supportedContentTypes, v.SupportedContentTypes)
+	serializeSageMakerModelResponseMimeTypeList(s, schemas.SageMakerModelFulfillmentOption_supportedResponseMimeTypes, v.SupportedResponseMimeTypes)
+	if v.UsageInstructions != nil {
+		s.WriteString(schemas.SageMakerModelFulfillmentOption_usageInstructions, *v.UsageInstructions)
+	}
+}
+func (v *SageMakerModelFulfillmentOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerModelFulfillmentOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerModelFulfillmentOption_fulfillmentOptionDisplayName:
+			v.FulfillmentOptionDisplayName = new(string)
+			return d.ReadString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionDisplayName, v.FulfillmentOptionDisplayName)
+		case schemas.SageMakerModelFulfillmentOption_fulfillmentOptionId:
+			v.FulfillmentOptionId = new(string)
+			return d.ReadString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionId, v.FulfillmentOptionId)
+		case schemas.SageMakerModelFulfillmentOption_fulfillmentOptionType:
+			var ev string
+			if err := d.ReadString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentOptionType = FulfillmentOptionType(ev)
+			return nil
+		case schemas.SageMakerModelFulfillmentOption_fulfillmentOptionVersion:
+			v.FulfillmentOptionVersion = new(string)
+			return d.ReadString(schemas.SageMakerModelFulfillmentOption_fulfillmentOptionVersion, v.FulfillmentOptionVersion)
+		case schemas.SageMakerModelFulfillmentOption_recommendation:
+			v.Recommendation = &SageMakerModelRecommendation{}
+			return v.Recommendation.Deserialize(d)
+		case schemas.SageMakerModelFulfillmentOption_releaseNotes:
+			v.ReleaseNotes = new(string)
+			return d.ReadString(schemas.SageMakerModelFulfillmentOption_releaseNotes, v.ReleaseNotes)
+		case schemas.SageMakerModelFulfillmentOption_supportedContentTypes:
+			return deserializeSageMakerModelContentTypeList(d, schemas.SageMakerModelFulfillmentOption_supportedContentTypes, &v.SupportedContentTypes)
+		case schemas.SageMakerModelFulfillmentOption_supportedResponseMimeTypes:
+			return deserializeSageMakerModelResponseMimeTypeList(d, schemas.SageMakerModelFulfillmentOption_supportedResponseMimeTypes, &v.SupportedResponseMimeTypes)
+		case schemas.SageMakerModelFulfillmentOption_usageInstructions:
+			v.UsageInstructions = new(string)
+			return d.ReadString(schemas.SageMakerModelFulfillmentOption_usageInstructions, v.UsageInstructions)
+		}
+		return nil
+	})
+}
+
 // Recommended instance types for inference with a SageMaker model.
 type SageMakerModelRecommendation struct {
 
@@ -1984,6 +4937,34 @@ type SageMakerModelRecommendation struct {
 	RecommendedRealtimeInferenceInstanceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SageMakerModelRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerModelRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerModelRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendedBatchTransformInstanceType != nil {
+		s.WriteString(schemas.SageMakerModelRecommendation_recommendedBatchTransformInstanceType, *v.RecommendedBatchTransformInstanceType)
+	}
+	if v.RecommendedRealtimeInferenceInstanceType != nil {
+		s.WriteString(schemas.SageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType, *v.RecommendedRealtimeInferenceInstanceType)
+	}
+}
+func (v *SageMakerModelRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerModelRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerModelRecommendation_recommendedBatchTransformInstanceType:
+			v.RecommendedBatchTransformInstanceType = new(string)
+			return d.ReadString(schemas.SageMakerModelRecommendation_recommendedBatchTransformInstanceType, v.RecommendedBatchTransformInstanceType)
+		case schemas.SageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType:
+			v.RecommendedRealtimeInferenceInstanceType = new(string)
+			return d.ReadString(schemas.SageMakerModelRecommendation_recommendedRealtimeInferenceInstanceType, v.RecommendedRealtimeInferenceInstanceType)
+		}
+		return nil
+	})
 }
 
 // A payment installment within a payment schedule term.
@@ -2000,6 +4981,34 @@ type ScheduleItem struct {
 	ChargeDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.ScheduleItem_chargeAmount, *v.ChargeAmount)
+	}
+	if v.ChargeDate != nil {
+		s.WriteTime(schemas.ScheduleItem_chargeDate, *v.ChargeDate)
+	}
+}
+func (v *ScheduleItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleItem_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.ScheduleItem_chargeAmount, v.ChargeAmount)
+		case schemas.ScheduleItem_chargeDate:
+			v.ChargeDate = new(time.Time)
+			return d.ReadTime(schemas.ScheduleItem_chargeDate, v.ChargeDate)
+		}
+		return nil
+	})
 }
 
 // A filter used to narrow search results by attribute, such as category, pricing
@@ -2021,6 +5030,35 @@ type SearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterType != "" {
+		s.WriteString(schemas.SearchFilter_filterType, string(v.FilterType))
+	}
+	serializeSearchFilterValueList(s, schemas.SearchFilter_filterValues, v.FilterValues)
+}
+func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchFilter_filterType:
+			var ev string
+			if err := d.ReadString(schemas.SearchFilter_filterType, &ev); err != nil {
+				return err
+			}
+			v.FilterType = SearchFilterType(ev)
+			return nil
+		case schemas.SearchFilter_filterValues:
+			return deserializeSearchFilterValueList(d, schemas.SearchFilter_filterValues, &v.FilterValues)
+		}
+		return nil
+	})
+}
+
 // A selector used to choose a specific configuration within a configurable
 // upfront rate card.
 type Selector struct {
@@ -2036,6 +5074,38 @@ type Selector struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Selector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Selector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Selector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.Selector_type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Selector_value, *v.Value)
+	}
+}
+func (v *Selector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Selector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Selector_type:
+			var ev string
+			if err := d.ReadString(schemas.Selector_type, &ev); err != nil {
+				return err
+			}
+			v.Type = SelectorType(ev)
+			return nil
+		case schemas.Selector_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Selector_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // An engagement option available to potential buyers of a product, such as
@@ -2060,6 +5130,48 @@ type SellerEngagement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SellerEngagement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SellerEngagement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SellerEngagement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != "" {
+		s.WriteString(schemas.SellerEngagement_contentType, string(v.ContentType))
+	}
+	if v.EngagementType != "" {
+		s.WriteString(schemas.SellerEngagement_engagementType, string(v.EngagementType))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SellerEngagement_value, *v.Value)
+	}
+}
+func (v *SellerEngagement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SellerEngagement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SellerEngagement_contentType:
+			var ev string
+			if err := d.ReadString(schemas.SellerEngagement_contentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = SellerEngagementContentType(ev)
+			return nil
+		case schemas.SellerEngagement_engagementType:
+			var ev string
+			if err := d.ReadString(schemas.SellerEngagement_engagementType, &ev); err != nil {
+				return err
+			}
+			v.EngagementType = SellerEngagementType(ev)
+			return nil
+		case schemas.SellerEngagement_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SellerEngagement_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Information about a seller, including the profile identifier and display name.
 type SellerInformation struct {
 
@@ -2074,6 +5186,34 @@ type SellerInformation struct {
 	SellerProfileId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SellerInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SellerInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SellerInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.SellerInformation_displayName, *v.DisplayName)
+	}
+	if v.SellerProfileId != nil {
+		s.WriteString(schemas.SellerInformation_sellerProfileId, *v.SellerProfileId)
+	}
+}
+func (v *SellerInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SellerInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SellerInformation_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.SellerInformation_displayName, v.DisplayName)
+		case schemas.SellerInformation_sellerProfileId:
+			v.SellerProfileId = new(string)
+			return d.ReadString(schemas.SellerInformation_sellerProfileId, v.SellerProfileId)
+		}
+		return nil
+	})
 }
 
 // Defines a support term that includes the refund policy for the offer.
@@ -2097,6 +5237,44 @@ type SupportTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SupportTerm_id, *v.Id)
+	}
+	if v.RefundPolicy != nil {
+		s.WriteString(schemas.SupportTerm_refundPolicy, *v.RefundPolicy)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SupportTerm_type, string(v.Type))
+	}
+}
+func (v *SupportTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SupportTerm_id, v.Id)
+		case schemas.SupportTerm_refundPolicy:
+			v.RefundPolicy = new(string)
+			return d.ReadString(schemas.SupportTerm_refundPolicy, v.RefundPolicy)
+		case schemas.SupportTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.SupportTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structural template defining how a specific term type is reshaped on each
 // renewal cycle. Exactly one variant is present.
 //
@@ -2115,6 +5293,14 @@ type TermTemplateMemberPaymentScheduleTermTemplate struct {
 }
 
 func (*TermTemplateMemberPaymentScheduleTermTemplate) isTermTemplate() {}
+func (v *TermTemplateMemberPaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TermTemplate_paymentScheduleTermTemplate)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TermTemplateMemberPaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a usage-based pricing term (typically pay-as-you-go), where buyers are
 // charged based on product usage.
@@ -2143,6 +5329,47 @@ type UsageBasedPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UsageBasedPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageBasedPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageBasedPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.UsageBasedPricingTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UsageBasedPricingTerm_id, *v.Id)
+	}
+	serializeUsageBasedRateCardList(s, schemas.UsageBasedPricingTerm_rateCards, v.RateCards)
+	if v.Type != "" {
+		s.WriteString(schemas.UsageBasedPricingTerm_type, string(v.Type))
+	}
+}
+func (v *UsageBasedPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageBasedPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageBasedPricingTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.UsageBasedPricingTerm_currencyCode, v.CurrencyCode)
+		case schemas.UsageBasedPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UsageBasedPricingTerm_id, v.Id)
+		case schemas.UsageBasedPricingTerm_rateCards:
+			return deserializeUsageBasedRateCardList(d, schemas.UsageBasedPricingTerm_rateCards, &v.RateCards)
+		case schemas.UsageBasedPricingTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.UsageBasedPricingTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A rate card within a usage-based pricing term, containing per-unit rates.
 type UsageBasedRateCardItem struct {
 
@@ -2152,6 +5379,25 @@ type UsageBasedRateCardItem struct {
 	RateCard []RateCardItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsageBasedRateCardItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageBasedRateCardItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageBasedRateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRateCardList(s, schemas.UsageBasedRateCardItem_rateCard, v.RateCard)
+}
+func (v *UsageBasedRateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageBasedRateCardItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageBasedRateCardItem_rateCard:
+			return deserializeRateCardList(d, schemas.UsageBasedRateCardItem_rateCard, &v.RateCard)
+		}
+		return nil
+	})
 }
 
 // A use case describing a scenario where the product can be applied.
@@ -2175,6 +5421,40 @@ type UseCase struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UseCase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UseCase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UseCase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UseCase_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UseCase_displayName, *v.DisplayName)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.UseCase_value, *v.Value)
+	}
+}
+func (v *UseCase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UseCase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UseCase_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UseCase_description, v.Description)
+		case schemas.UseCase_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.UseCase_displayName, v.DisplayName)
+		case schemas.UseCase_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.UseCase_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // An entry in the list of use cases for a listing.
 type UseCaseEntry struct {
 
@@ -2184,6 +5464,30 @@ type UseCaseEntry struct {
 	UseCase *UseCase
 
 	noSmithyDocumentSerde
+}
+
+func (v *UseCaseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UseCaseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UseCaseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UseCase != nil {
+		s.WriteStruct(schemas.UseCaseEntry_useCase)
+		v.UseCase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UseCaseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UseCaseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UseCaseEntry_useCase:
+			v.UseCase = &UseCase{}
+			return v.UseCase.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines a validity term that specifies the duration or date range of an
@@ -2212,6 +5516,56 @@ type ValidityTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidityTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidityTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidityTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementDuration != nil {
+		s.WriteString(schemas.ValidityTerm_agreementDuration, *v.AgreementDuration)
+	}
+	if v.AgreementEndDate != nil {
+		s.WriteTime(schemas.ValidityTerm_agreementEndDate, *v.AgreementEndDate)
+	}
+	if v.AgreementStartDate != nil {
+		s.WriteTime(schemas.ValidityTerm_agreementStartDate, *v.AgreementStartDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ValidityTerm_id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ValidityTerm_type, string(v.Type))
+	}
+}
+func (v *ValidityTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidityTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidityTerm_agreementDuration:
+			v.AgreementDuration = new(string)
+			return d.ReadString(schemas.ValidityTerm_agreementDuration, v.AgreementDuration)
+		case schemas.ValidityTerm_agreementEndDate:
+			v.AgreementEndDate = new(time.Time)
+			return d.ReadTime(schemas.ValidityTerm_agreementEndDate, v.AgreementEndDate)
+		case schemas.ValidityTerm_agreementStartDate:
+			v.AgreementStartDate = new(time.Time)
+			return d.ReadTime(schemas.ValidityTerm_agreementStartDate, v.AgreementStartDate)
+		case schemas.ValidityTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ValidityTerm_id, v.Id)
+		case schemas.ValidityTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.ValidityTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines a variable payment term with a maximum total charge amount.
 type VariablePaymentTerm struct {
 
@@ -2236,6 +5590,50 @@ type VariablePaymentTerm struct {
 	Type TermType
 
 	noSmithyDocumentSerde
+}
+
+func (v *VariablePaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VariablePaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VariablePaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.VariablePaymentTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.VariablePaymentTerm_id, *v.Id)
+	}
+	if v.MaxTotalChargeAmount != nil {
+		s.WriteString(schemas.VariablePaymentTerm_maxTotalChargeAmount, *v.MaxTotalChargeAmount)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.VariablePaymentTerm_type, string(v.Type))
+	}
+}
+func (v *VariablePaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VariablePaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VariablePaymentTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_currencyCode, v.CurrencyCode)
+		case schemas.VariablePaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_id, v.Id)
+		case schemas.VariablePaymentTerm_maxTotalChargeAmount:
+			v.MaxTotalChargeAmount = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_maxTotalChargeAmount, v.MaxTotalChargeAmount)
+		case schemas.VariablePaymentTerm_type:
+			var ev string
+			if err := d.ReadString(schemas.VariablePaymentTerm_type, &ev); err != nil {
+				return err
+			}
+			v.Type = TermType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -4,7 +4,9 @@ package networkflowmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -58,6 +60,21 @@ type GetQueryStatusWorkloadInsightsTopContributorsDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatusWorkloadInsightsTopContributorsDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryStatusWorkloadInsightsTopContributorsDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryStatusWorkloadInsightsTopContributorsDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryStatusWorkloadInsightsTopContributorsDataInput_queryId, *v.QueryId)
+	}
+	if v.ScopeId != nil {
+		s.WriteString(schemas.GetQueryStatusWorkloadInsightsTopContributorsDataInput_scopeId, *v.ScopeId)
+	}
+}
+
 type GetQueryStatusWorkloadInsightsTopContributorsDataOutput struct {
 
 	// The status of a query for top contributors data.
@@ -81,13 +98,36 @@ type GetQueryStatusWorkloadInsightsTopContributorsDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatusWorkloadInsightsTopContributorsDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryStatusWorkloadInsightsTopContributorsDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput_status, string(v.Status))
+	}
+}
+func (v *GetQueryStatusWorkloadInsightsTopContributorsDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryStatusWorkloadInsightsTopContributorsDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryStatusWorkloadInsightsTopContributorsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatusWorkloadInsightsTopContributorsData, schemas.GetQueryStatusWorkloadInsightsTopContributorsDataInput, schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryStatusWorkloadInsightsTopContributorsData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatusWorkloadInsightsTopContributorsData, schemas.GetQueryStatusWorkloadInsightsTopContributorsDataInput, schemas.GetQueryStatusWorkloadInsightsTopContributorsDataOutput), output: &GetQueryStatusWorkloadInsightsTopContributorsDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

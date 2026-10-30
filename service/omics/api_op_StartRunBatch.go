@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,28 @@ type StartRunBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRunBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRunBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRunBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchName != nil {
+		s.WriteString(schemas.StartRunBatchRequest_batchName, *v.BatchName)
+	}
+	serializeBatchRunSettings(s, schemas.StartRunBatchRequest_batchRunSettings, v.BatchRunSettings)
+	if v.DefaultRunSetting != nil {
+		s.WriteStruct(schemas.StartRunBatchRequest_defaultRunSetting)
+		v.DefaultRunSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartRunBatchRequest_requestId, *v.RequestId)
+	}
+	serializeTagMap(s, schemas.StartRunBatchRequest_tags, v.Tags)
+}
+
 type StartRunBatchOutput struct {
 
 	// The unique ARN of the run batch.
@@ -88,13 +112,57 @@ type StartRunBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRunBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRunBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRunBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartRunBatchResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.StartRunBatchResponse_id, *v.Id)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartRunBatchResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.StartRunBatchResponse_tags, v.Tags)
+	if v.Uuid != nil {
+		s.WriteString(schemas.StartRunBatchResponse_uuid, *v.Uuid)
+	}
+}
+func (v *StartRunBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRunBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRunBatchResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartRunBatchResponse_arn, v.Arn)
+		case schemas.StartRunBatchResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartRunBatchResponse_id, v.Id)
+		case schemas.StartRunBatchResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.StartRunBatchResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BatchStatus(ev)
+			return nil
+		case schemas.StartRunBatchResponse_tags:
+			return deserializeTagMap(d, schemas.StartRunBatchResponse_tags, &v.Tags)
+		case schemas.StartRunBatchResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.StartRunBatchResponse_uuid, v.Uuid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRunBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRunBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRunBatch, schemas.StartRunBatchRequest, schemas.StartRunBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRunBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRunBatch, schemas.StartRunBatchRequest, schemas.StartRunBatchResponse), output: &StartRunBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

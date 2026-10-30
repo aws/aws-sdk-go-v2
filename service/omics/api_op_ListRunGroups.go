@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,24 @@ type ListRunGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRunGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListRunGroupsRequest_name, *v.Name)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListRunGroupsRequest_startingToken, *v.StartingToken)
+	}
+}
+
 type ListRunGroupsOutput struct {
 
 	// A list of groups.
@@ -55,13 +75,35 @@ type ListRunGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRunGroupList(s, schemas.ListRunGroupsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRunGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRunGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRunGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRunGroupsResponse_items:
+			return deserializeRunGroupList(d, schemas.ListRunGroupsResponse_items, &v.Items)
+		case schemas.ListRunGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRunGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRunGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRunGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunGroups, schemas.ListRunGroupsRequest, schemas.ListRunGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRunGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunGroups, schemas.ListRunGroupsRequest, schemas.ListRunGroupsResponse), output: &ListRunGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

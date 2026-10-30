@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -39,6 +41,18 @@ type GetRunCacheInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRunCacheInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunCacheRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunCacheInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunCacheRequest_id, *v.Id)
+	}
 }
 
 type GetRunCacheOutput struct {
@@ -79,13 +93,91 @@ type GetRunCacheOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRunCacheOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunCacheResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRunCacheResponse_arn, *v.Arn)
+	}
+	if v.CacheBehavior != "" {
+		s.WriteString(schemas.GetRunCacheResponse_cacheBehavior, string(v.CacheBehavior))
+	}
+	if v.CacheBucketOwnerId != nil {
+		s.WriteString(schemas.GetRunCacheResponse_cacheBucketOwnerId, *v.CacheBucketOwnerId)
+	}
+	if v.CacheS3Uri != nil {
+		s.WriteString(schemas.GetRunCacheResponse_cacheS3Uri, *v.CacheS3Uri)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetRunCacheResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetRunCacheResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunCacheResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRunCacheResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRunCacheResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetRunCacheResponse_tags, v.Tags)
+}
+func (v *GetRunCacheOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRunCacheResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRunCacheResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRunCacheResponse_arn, v.Arn)
+		case schemas.GetRunCacheResponse_cacheBehavior:
+			var ev string
+			if err := d.ReadString(schemas.GetRunCacheResponse_cacheBehavior, &ev); err != nil {
+				return err
+			}
+			v.CacheBehavior = types.CacheBehavior(ev)
+			return nil
+		case schemas.GetRunCacheResponse_cacheBucketOwnerId:
+			v.CacheBucketOwnerId = new(string)
+			return d.ReadString(schemas.GetRunCacheResponse_cacheBucketOwnerId, v.CacheBucketOwnerId)
+		case schemas.GetRunCacheResponse_cacheS3Uri:
+			v.CacheS3Uri = new(string)
+			return d.ReadString(schemas.GetRunCacheResponse_cacheS3Uri, v.CacheS3Uri)
+		case schemas.GetRunCacheResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunCacheResponse_creationTime, v.CreationTime)
+		case schemas.GetRunCacheResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetRunCacheResponse_description, v.Description)
+		case schemas.GetRunCacheResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetRunCacheResponse_id, v.Id)
+		case schemas.GetRunCacheResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRunCacheResponse_name, v.Name)
+		case schemas.GetRunCacheResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetRunCacheResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RunCacheStatus(ev)
+			return nil
+		case schemas.GetRunCacheResponse_tags:
+			return deserializeTagMap(d, schemas.GetRunCacheResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRunCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRunCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRunCache, schemas.GetRunCacheRequest, schemas.GetRunCacheResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRunCache{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRunCache, schemas.GetRunCacheRequest, schemas.GetRunCacheResponse), output: &GetRunCacheOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

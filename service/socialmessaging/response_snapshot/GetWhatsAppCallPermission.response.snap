@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"actions":[{"actionName":"__ActionName__","canPerformAction":true,"limits":[{"currentUsage":1,"limitExpirationTime":946684800,"maxAllowed":1,"timePeriod":"__TimePeriod__"},{"currentUsage":1,"limitExpirationTime":946684800,"maxAllowed":1,"timePeriod":"__TimePeriod__"}]},{"actionName":"__ActionName__","canPerformAction":true,"limits":[{"currentUsage":1,"limitExpirationTime":946684800,"maxAllowed":1,"timePeriod":"__TimePeriod__"},{"currentUsage":1,"limitExpirationTime":946684800,"maxAllowed":1,"timePeriod":"__TimePeriod__"}]}],"permission":{"expirationTime":946684800,"status":"__Status__"}}

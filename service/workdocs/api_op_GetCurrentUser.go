@@ -4,7 +4,9 @@ package workdocs
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,18 @@ type GetCurrentUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCurrentUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCurrentUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCurrentUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.GetCurrentUserRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+}
+
 type GetCurrentUserOutput struct {
 
 	// Metadata of the user.
@@ -52,13 +66,34 @@ type GetCurrentUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCurrentUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCurrentUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCurrentUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.User != nil {
+		s.WriteStruct(schemas.GetCurrentUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCurrentUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCurrentUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCurrentUserResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCurrentUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCurrentUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCurrentUser, schemas.GetCurrentUserRequest, schemas.GetCurrentUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCurrentUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCurrentUser, schemas.GetCurrentUserRequest, schemas.GetCurrentUserResponse), output: &GetCurrentUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

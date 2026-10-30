@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","roleList":[{"accountId":"__AccountId__","roleName":"__RoleName__"},{"accountId":"__AccountId__","roleName":"__RoleName__"}]}

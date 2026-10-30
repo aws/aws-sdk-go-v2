@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,6 +46,21 @@ type UpdateAnnotationStoreInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateAnnotationStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnnotationStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnnotationStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAnnotationStoreRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAnnotationStoreRequest_name, *v.Name)
+	}
 }
 
 type UpdateAnnotationStoreOutput struct {
@@ -95,13 +112,82 @@ type UpdateAnnotationStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnnotationStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnnotationStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnnotationStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateAnnotationStoreResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAnnotationStoreResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAnnotationStoreResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAnnotationStoreResponse_name, *v.Name)
+	}
+	serializeReferenceItem(s, schemas.UpdateAnnotationStoreResponse_reference, v.Reference)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAnnotationStoreResponse_status, string(v.Status))
+	}
+	if v.StoreFormat != "" {
+		s.WriteString(schemas.UpdateAnnotationStoreResponse_storeFormat, string(v.StoreFormat))
+	}
+	serializeStoreOptions(s, schemas.UpdateAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.UpdateAnnotationStoreResponse_updateTime, *v.UpdateTime)
+	}
+}
+func (v *UpdateAnnotationStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnnotationStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnnotationStoreResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateAnnotationStoreResponse_creationTime, v.CreationTime)
+		case schemas.UpdateAnnotationStoreResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAnnotationStoreResponse_description, v.Description)
+		case schemas.UpdateAnnotationStoreResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAnnotationStoreResponse_id, v.Id)
+		case schemas.UpdateAnnotationStoreResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAnnotationStoreResponse_name, v.Name)
+		case schemas.UpdateAnnotationStoreResponse_reference:
+			return deserializeReferenceItem(d, schemas.UpdateAnnotationStoreResponse_reference, &v.Reference)
+		case schemas.UpdateAnnotationStoreResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAnnotationStoreResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StoreStatus(ev)
+			return nil
+		case schemas.UpdateAnnotationStoreResponse_storeFormat:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAnnotationStoreResponse_storeFormat, &ev); err != nil {
+				return err
+			}
+			v.StoreFormat = types.StoreFormat(ev)
+			return nil
+		case schemas.UpdateAnnotationStoreResponse_storeOptions:
+			return deserializeStoreOptions(d, schemas.UpdateAnnotationStoreResponse_storeOptions, &v.StoreOptions)
+		case schemas.UpdateAnnotationStoreResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateAnnotationStoreResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnnotationStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAnnotationStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnnotationStore, schemas.UpdateAnnotationStoreRequest, schemas.UpdateAnnotationStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAnnotationStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnnotationStore, schemas.UpdateAnnotationStoreRequest, schemas.UpdateAnnotationStoreResponse), output: &UpdateAnnotationStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

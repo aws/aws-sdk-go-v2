@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +45,18 @@ type GetAnnotationImportJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAnnotationImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnnotationImportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnnotationImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetAnnotationImportRequest_jobId, *v.JobId)
+	}
 }
 
 type GetAnnotationImportJobOutput struct {
@@ -116,13 +130,96 @@ type GetAnnotationImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnnotationImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnnotationImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnnotationImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationFieldMap(s, schemas.GetAnnotationImportResponse_annotationFields, v.AnnotationFields)
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.GetAnnotationImportResponse_completionTime, *v.CompletionTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAnnotationImportResponse_creationTime, *v.CreationTime)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.GetAnnotationImportResponse_destinationName, *v.DestinationName)
+	}
+	serializeFormatOptions(s, schemas.GetAnnotationImportResponse_formatOptions, v.FormatOptions)
+	if v.Id != nil {
+		s.WriteString(schemas.GetAnnotationImportResponse_id, *v.Id)
+	}
+	serializeAnnotationImportItemDetails(s, schemas.GetAnnotationImportResponse_items, v.Items)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetAnnotationImportResponse_roleArn, *v.RoleArn)
+	}
+	s.WriteBool(schemas.GetAnnotationImportResponse_runLeftNormalization, v.RunLeftNormalization)
+	if v.Status != "" {
+		s.WriteString(schemas.GetAnnotationImportResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetAnnotationImportResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.GetAnnotationImportResponse_updateTime, *v.UpdateTime)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.GetAnnotationImportResponse_versionName, *v.VersionName)
+	}
+}
+func (v *GetAnnotationImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnnotationImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnnotationImportResponse_annotationFields:
+			return deserializeAnnotationFieldMap(d, schemas.GetAnnotationImportResponse_annotationFields, &v.AnnotationFields)
+		case schemas.GetAnnotationImportResponse_completionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnnotationImportResponse_completionTime, v.CompletionTime)
+		case schemas.GetAnnotationImportResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnnotationImportResponse_creationTime, v.CreationTime)
+		case schemas.GetAnnotationImportResponse_destinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.GetAnnotationImportResponse_destinationName, v.DestinationName)
+		case schemas.GetAnnotationImportResponse_formatOptions:
+			return deserializeFormatOptions(d, schemas.GetAnnotationImportResponse_formatOptions, &v.FormatOptions)
+		case schemas.GetAnnotationImportResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAnnotationImportResponse_id, v.Id)
+		case schemas.GetAnnotationImportResponse_items:
+			return deserializeAnnotationImportItemDetails(d, schemas.GetAnnotationImportResponse_items, &v.Items)
+		case schemas.GetAnnotationImportResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetAnnotationImportResponse_roleArn, v.RoleArn)
+		case schemas.GetAnnotationImportResponse_runLeftNormalization:
+			return d.ReadBool(schemas.GetAnnotationImportResponse_runLeftNormalization, &v.RunLeftNormalization)
+		case schemas.GetAnnotationImportResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAnnotationImportResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		case schemas.GetAnnotationImportResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetAnnotationImportResponse_statusMessage, v.StatusMessage)
+		case schemas.GetAnnotationImportResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetAnnotationImportResponse_updateTime, v.UpdateTime)
+		case schemas.GetAnnotationImportResponse_versionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.GetAnnotationImportResponse_versionName, v.VersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnnotationImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnnotationImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnnotationImportJob, schemas.GetAnnotationImportRequest, schemas.GetAnnotationImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnnotationImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnnotationImportJob, schemas.GetAnnotationImportRequest, schemas.GetAnnotationImportResponse), output: &GetAnnotationImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

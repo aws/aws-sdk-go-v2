@@ -4366,6 +4366,9 @@
                     "target": "com.amazonaws.ec2#GetCapacityManagerMonitoredTagKeys"
                 },
                 {
+                    "target": "com.amazonaws.ec2#GetCapacityManagerSupportabilityScores"
+                },
+                {
                     "target": "com.amazonaws.ec2#GetCapacityReservationUsage"
                 },
                 {
@@ -4409,6 +4412,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#GetImageBlockPublicAccessState"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetImageFindings"
                 },
                 {
                     "target": "com.amazonaws.ec2#GetInstanceMetadataDefaults"
@@ -13484,6 +13490,29 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CapacityAmount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityAvailabilityZoneIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.ec2#CapacityBlock": {
             "type": "structure",
             "members": {
@@ -14574,6 +14603,47 @@
                 }
             }
         },
+        "com.amazonaws.ec2#CapacityManagerSupportabilityScore": {
+            "type": "structure",
+            "members": {
+                "InstanceType": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceType",
+                        "smithy.api#documentation": "<p>\nThe instance type.\n</p>",
+                        "smithy.api#xmlName": "instanceType"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>\nThe ID of the Availability Zone.\n</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.ec2#SupportabilityScore",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Score",
+                        "smithy.api#documentation": "<p>\nHow well the combination can support the requested capacity right now. <code>high</code> means that the combination holds several times the requested amount. \n<code>medium</code> means that it can cover the request with little to spare. <code>low</code> means that it holds less than the requested amount.\n</p>",
+                        "smithy.api#xmlName": "score"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nThe supportability score for a single instance type and Availability Zone combination.\n</p>"
+            }
+        },
+        "com.amazonaws.ec2#CapacityManagerSupportabilityScoreSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#CapacityManagerSupportabilityScore",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#CapacityManagerTagDimension": {
             "type": "structure",
             "members": {
@@ -15375,6 +15445,30 @@
                         "aws.protocols#ec2QueryName": "InstanceTypeSpecificationSet",
                         "smithy.api#documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
                         "smithy.api#xmlName": "instanceTypeSpecificationSet"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceRequirements",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
+                        "smithy.api#xmlName": "instanceRequirements"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZone",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
+                        "smithy.api#xmlName": "availabilityZone"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AvailabilityZoneId",
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>",
+                        "smithy.api#xmlName": "availabilityZoneId"
                     }
                 },
                 "Tags": {
@@ -16261,6 +16355,23 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "dedicated"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CapacityUnit": {
+            "type": "enum",
+            "members": {
+                "VCPUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "vcpus"
+                    }
+                },
+                "INSTANCES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "instances"
                     }
                 }
             }
@@ -19879,6 +19990,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the instance types for which to reserve the capacity.</p>",
                         "smithy.api#xmlName": "InstanceTypeSpecification"
+                    }
+                },
+                "InstanceRequirements": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.ec2#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for internal use.</p>"
                     }
                 },
                 "Tenancy": {
@@ -42900,7 +43029,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code> | <code>x86_64_mac</code> |\n            <code>arm64_mac</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block\n          device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the Amazon EBS volume, in\n          GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the Amazon EBS volume\n            (<code>io1</code> | <code>io2</code> | <code>gp2</code> | <code>gp3</code> | <code>sc1\n          </code>| <code>st1</code> | <code>standard</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the Amazon EBS\n          volume is encrypted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>boot-mode</code> – The boot mode of the image (<code>legacy-bios</code> |\n            <code>uefi</code> | <code>uefi-preferred</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-date</code> - The time when the image was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n            <code>2021-09-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2021-09-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking with\n          ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - A Boolean that indicates whether this image can be\n          used under the Amazon Web Services Free Tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-allowed</code> - A Boolean that indicates whether the image meets the\n          criteria specified for Allowed AMIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-creation-time</code> - The creation date of the\n          source AMI, in the ISO 8601 format in the UTC time zone\n            (<code>\n                     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>.<i>ssssss</i>+<i>HH</i>:<i>MM</i>\n                  </code>).\n          You can use a wildcard (<code>*</code>), for example, <code>2021-09-29T*</code>, which\n          matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-id</code> - The ID of the AMI to which the\n          watermark was originally attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-region</code> - The Region where the watermark\n          was originally attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.watermark-creation-time</code> - The date and time the\n          watermark was attached to the AMI, in the ISO 8601 format in the UTC time zone\n            (<code>\n                     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>.<i>ssssss</i>+<i>HH</i>:<i>MM</i>\n                  </code>).\n          You can use a wildcard (<code>*</code>), for example, <code>2021-09-29T*</code>, which\n          matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.watermark-key</code> - The watermark identifier, in\n            <code>accountId:watermarkName</code> format (for example,\n            <code>123456789012:approvedAmi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type-specification.supported-instance-type</code> – The instance\n          types that are compatible with the AMI, as specified by the AMI owner. Values can be\n          individual instance types (for example, <code>t3.micro</code>) or wildcard patterns that\n          match multiple instance types (for example, <code>t3.*</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type-specification.unsupported-instance-type</code> – The instance\n          types that are not compatible with the AMI, as specified by the AMI owner. Values can be\n          individual instance types (for example, <code>t3.micro</code>) or wildcard patterns that\n          match multiple instance types (for example, <code>t3.*</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> |\n            <code>aws-backup-vault</code> | <code>aws-marketplace</code>). The valid aliases are\n          defined in an Amazon-maintained list. This is not the Amazon Web Services account alias\n          that can be set using the IAM console. We recommend that you use the <b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend\n          that you use the <b>Owner</b> request parameter instead of this\n          filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. The only supported value is\n          <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code\n          (<code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>public-ssm-parameter-name</code> - The name of a public Systems Manager\n          parameter associated with the AMI. The parameter must be in a trusted Amazon Web Services namespace\n          under <code>aws/service/</code>. Returns all AMIs that have ever been associated with\n          the parameter, including previous versions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example,\n            <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-id</code> - The ID of the source AMI from which the AMI was\n          created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-region</code> - The Region of the source AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-instance-id</code> - The ID of the instance that the AMI was created from\n          if the AMI was created using CreateImage. This filter is applicable only if the AMI was\n          created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates that\n          enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code> | <code>x86_64_mac</code> |\n            <code>arm64_mac</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block\n          device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the Amazon EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the Amazon EBS volume, in\n          GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the Amazon EBS volume\n            (<code>io1</code> | <code>io2</code> | <code>gp2</code> | <code>gp3</code> | <code>sc1\n          </code>| <code>st1</code> | <code>standard</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the Amazon EBS\n          volume is encrypted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>boot-mode</code> – The boot mode of the image (<code>legacy-bios</code> |\n            <code>uefi</code> | <code>uefi-preferred</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>creation-date</code> - The time when the image was created, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), for example,\n            <code>2021-09-29T11:04:43.305Z</code>. You can use a wildcard (<code>*</code>), for\n          example, <code>2021-09-29T*</code>, which matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking with\n          ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - A Boolean that indicates whether this image can be\n          used under the Amazon Web Services Free Tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-allowed</code> - A Boolean that indicates whether the image meets the\n          criteria specified for Allowed AMIs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-creation-time</code> - The creation date of the\n          source AMI, in the ISO 8601 format in the UTC time zone\n            (<code>\n                     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>.<i>ssssss</i>+<i>HH</i>:<i>MM</i>\n                  </code>).\n          You can use a wildcard (<code>*</code>), for example, <code>2021-09-29T*</code>, which\n          matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-id</code> - The ID of the AMI to which the\n          watermark was originally attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.source-image-region</code> - The Region where the watermark\n          was originally attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.watermark-creation-time</code> - The date and time the\n          watermark was attached to the AMI, in the ISO 8601 format in the UTC time zone\n            (<code>\n                     <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>.<i>ssssss</i>+<i>HH</i>:<i>MM</i>\n                  </code>).\n          You can use a wildcard (<code>*</code>), for example, <code>2021-09-29T*</code>, which\n          matches an entire day.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-watermark.watermark-key</code> - The watermark identifier, in\n            <code>accountId:watermarkName</code> format (for example,\n            <code>123456789012:approvedAmi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type-specification.supported-instance-type</code> – The instance\n          types that are compatible with the AMI, as specified by the AMI owner. Values can be\n          individual instance types (for example, <code>t3.micro</code>) or wildcard patterns that\n          match multiple instance types (for example, <code>t3.*</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type-specification.unsupported-instance-type</code> – The instance\n          types that are not compatible with the AMI, as specified by the AMI owner. Values can be\n          individual instance types (for example, <code>t3.micro</code>) or wildcard patterns that\n          match multiple instance types (for example, <code>t3.*</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> |\n            <code>aws-backup-vault</code> | <code>aws-marketplace</code>). The valid aliases are\n          defined in an Amazon-maintained list. This is not the Amazon Web Services account alias\n          that can be set using the IAM console. We recommend that you use the <b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The Amazon Web Services account ID of the owner. We recommend\n          that you use the <b>Owner</b> request parameter instead of this\n          filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. The only supported value is\n          <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code\n          (<code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>public-ssm-parameter-name</code> - The name of a public Systems Manager\n          parameter associated with the AMI. The parameter must be in a trusted Amazon Web Services namespace\n          under <code>aws/service/</code>. Returns all AMIs that have ever been associated with\n          the parameter, including previous versions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example,\n            <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.critical-fix-available-since</code> - The earliest date and time, in\n          the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon\n          Inspector reported a fix as available for a <code>critical</code> severity finding on the\n          AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.finding-scan-date</code> - The date and time, in the ISO 8601\n          format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), of the most recent Amazon\n          Inspector scan of the AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.high-fix-available-since</code> - The earliest date and time, in the\n          ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector\n          reported a fix as available for a <code>high</code> severity finding on the AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.highest-finding-severity-label</code> - The highest severity among\n          the AMI's Amazon Inspector findings, whether or not a fix is available. The valid values\n          are the following Amazon Inspector severity levels:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>informational</code> - CVSS score of 0.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>low</code> - CVSS score of 0.1 to 3.9.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>medium</code> - CVSS score of 4.0 to 6.9.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>high</code> - CVSS score of 7.0 to 8.9.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>critical</code> - CVSS score of 9.0 to 10.0.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.informational-fix-available-since</code> - The earliest date and\n          time, in the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), at which\n          Amazon Inspector reported a fix as available for an <code>informational</code> severity\n          finding on the AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.low-fix-available-since</code> - The earliest date and time, in the\n          ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector\n          reported a fix as available for a <code>low</code> severity finding on the AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>scan-result.medium-fix-available-since</code> - The earliest date and time, in\n          the ISO 8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon\n          Inspector reported a fix as available for a <code>medium</code> severity finding on the\n          AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-id</code> - The ID of the source AMI from which the AMI was\n          created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-image-region</code> - The Region of the source AMI.</p>\n            </li>\n            <li>\n               <p>\n                  <code>source-instance-id</code> - The ID of the instance that the AMI was created from\n          if the AMI was created using CreateImage. This filter is applicable only if the AMI was\n          created using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateImage.html\">CreateImage</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates that\n          enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag:<key></code> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 }
@@ -68389,6 +68518,102 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.ec2#GetCapacityManagerSupportabilityScores": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\nScores how well each instance type and Availability Zone combination can support a capacity request, based on current Amazon EC2 capacity. \nThe response includes a score for each combination and an aggregate score for all combinations in the request. \nThis action doesn't launch or reserve instances, and a score doesn't guarantee that a later launch will succeed.\n</p>\n         <p>\nCall this action in the Region where you turned on Capacity Manager. A single request can include Availability Zones in any Region. \nReal-time supportability checks are available only to Amazon Web Services Support customers on the Unified Operations plan.\n</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-manager-supportability.html\">Check supportability</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresRequest": {
+            "type": "structure",
+            "members": {
+                "MarketType": {
+                    "target": "com.amazonaws.ec2#SupportabilityMarketType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe capacity market to score.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityAmount": {
+                    "target": "com.amazonaws.ec2#CapacityAmount",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe amount of capacity that you need, in the unit that you specify for <code>CapacityUnit</code>. Each score is relative to this amount.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityUnit": {
+                    "target": "com.amazonaws.ec2#CapacityUnit",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe unit for <code>CapacityAmount</code>.\n</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CapacityAvailabilityZoneIds": {
+                    "target": "com.amazonaws.ec2#CapacityAvailabilityZoneIdList",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>\nThe IDs of the Availability Zones to score, such as <code>use1-az1</code>. You can specify Availability Zones in different Regions. \nYou can specify up to 10 Availability Zones.\n</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CapacityAvailabilityZoneId"
+                    }
+                },
+                "InstanceTypes": {
+                    "target": "com.amazonaws.ec2#SupportabilityInstanceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe instance types to score. You can specify up to 50 instance types.\n</p>\n         <p>\nSpecify either <code>InstanceTypes</code> or <code>InstanceRequirementsWithMetadata</code>, but not both.\n</p>",
+                        "smithy.api#xmlName": "InstanceType"
+                    }
+                },
+                "InstanceRequirementsWithMetadata": {
+                    "target": "com.amazonaws.ec2#InstanceRequirementsWithMetadataRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe attributes that the instance types must have, such as vCPU and memory ranges. Capacity Manager resolves the attributes into matching instance types and scores each one.\n</p>\n         <p>\nSpecify either <code>InstanceTypes</code> or <code>InstanceRequirementsWithMetadata</code>, but not both.\n</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nChecks whether you have the required permissions for the action, without actually making the request, and provides an error response. \nIf you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.\n</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetCapacityManagerSupportabilityScoresResult": {
+            "type": "structure",
+            "members": {
+                "AggregateScore": {
+                    "target": "com.amazonaws.ec2#SupportabilityScore",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AggregateScore",
+                        "smithy.api#documentation": "<p>\nThe score for all instance type and Availability Zone combinations in the request together. \nA <code>high</code> aggregate score with lower individual scores means that no single combination can support the full request, but the combinations together can.\n</p>",
+                        "smithy.api#xmlName": "aggregateScore"
+                    }
+                },
+                "CapacityManagerSupportabilityScores": {
+                    "target": "com.amazonaws.ec2#CapacityManagerSupportabilityScoreSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CapacityManagerSupportabilityScoreSet",
+                        "smithy.api#documentation": "<p>\nThe score for each instance type and Availability Zone combination in the request.\n</p>",
+                        "smithy.api#xmlName": "capacityManagerSupportabilityScoreSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ec2#GetCapacityReservationUsage": {
             "type": "operation",
             "input": {
@@ -69494,6 +69719,100 @@
                         "aws.protocols#ec2QueryName": "ManagedBy",
                         "smithy.api#documentation": "<p>The entity that manages the state for block public access for AMIs. Possible values\n            include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>account</code> -  The state is managed by the account.</p>\n            </li>\n            <li>\n               <p>\n                  <code>declarative-policy</code> - The state is managed by a declarative policy and\n            can't be modified by the account.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "managedBy"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.ec2#GetImageFindings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetImageFindingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetImageFindingsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Amazon Inspector vulnerability findings for the specified AMI.</p>\n         <p>You can get findings for AMIs that you own, AMIs that are shared with you, and public\n      AMIs. Amazon Inspector returns findings only for AMIs that it has scanned.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ImageFindings",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetImageFindingsEntrySet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageFinding",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetImageFindingsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetImageFindingsRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the AMI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#GetImageFindingsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this request.\n         To get the next page of items, make another request with the token returned in the output.\n\t        For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination\">Pagination</a>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from a previous paginated request. Pagination continues from the end of the items returned by the previous request.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n\t\t\tand provides an error response. If you have the required permissions, the error response is \n\t\t\t<code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ec2#GetImageFindingsResult": {
+            "type": "structure",
+            "members": {
+                "ImageFindings": {
+                    "target": "com.amazonaws.ec2#GetImageFindingsEntrySet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageFindingSet",
+                        "smithy.api#documentation": "<p>The Amazon Inspector findings for the AMI.</p>",
+                        "smithy.api#xmlName": "imageFindingSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to include in another request to get the next page of items. This value is <code>null</code> when there\n         are no more items to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
                     }
                 }
             },
@@ -75751,6 +76070,14 @@
                         "smithy.api#xmlName": "imageWatermarkSet"
                     }
                 },
+                "ScanResults": {
+                    "target": "com.amazonaws.ec2#ScanResults",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ScanResults",
+                        "smithy.api#documentation": "<p>The Amazon Inspector scan results for the AMI. This information is present only for AMIs\n      that Amazon Inspector has scanned.</p>\n         <p>When you share an AMI with other accounts, organizations, or organizational units\n      (OUs), or make it public, its scan results are available to the accounts that can use the\n      AMI.</p>",
+                        "smithy.api#xmlName": "scanResults"
+                    }
+                },
                 "InstanceTypeSpecification": {
                     "target": "com.amazonaws.ec2#InstanceTypeSpecification",
                     "traits": {
@@ -76192,6 +76519,14 @@
                         "smithy.api#documentation": "<p>The watermark criteria that an AMI must match to be allowed. An AMI is allowed if it\n      carries at least one watermark that satisfies an ImageWatermarkFilter. A watermark satisfies a\n      filter when all specified fields in the ImageWatermarkFilter match the corresponding values on\n      the watermark of the AMI.</p>\n         <p>Maximum: 50 values</p>",
                         "smithy.api#xmlName": "imageWatermarkSet"
                     }
+                },
+                "ScanResultCondition": {
+                    "target": "com.amazonaws.ec2#ScanResultCondition",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ScanResultCondition",
+                        "smithy.api#documentation": "<p>The Amazon Inspector scan-result criteria that an AMI must meet to be allowed. The\n      criteria can limit the highest finding severity, the number of days since Amazon Inspector\n      last scanned the AMI, and the number of days since Amazon Inspector reported a fix as\n      available.</p>",
+                        "smithy.api#xmlName": "scanResultCondition"
+                    }
                 }
             },
             "traits": {
@@ -76248,6 +76583,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The watermark criteria that an AMI must match to be allowed. An AMI is allowed if it\n      carries at least one watermark that satisfies an ImageWatermarkFilter. A watermark satisfies a\n      filter when all specified fields in the ImageWatermarkFilter match the corresponding values on\n      the watermark of the AMI.</p>\n         <p>Maximum: 50 values</p>",
                         "smithy.api#xmlName": "ImageWatermark"
+                    }
+                },
+                "ScanResultCondition": {
+                    "target": "com.amazonaws.ec2#ScanResultConditionRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Inspector scan-result criteria that an AMI must meet to be allowed. The\n      criteria can limit the highest finding severity, the number of days since Amazon Inspector\n      last scanned the AMI, and the number of days since Amazon Inspector reported a fix as\n      available.</p>"
                     }
                 }
             },
@@ -76321,6 +76662,87 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#ImageDiskContainer",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ImageFinding": {
+            "type": "structure",
+            "members": {
+                "FixAvailable": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FixAvailable",
+                        "smithy.api#documentation": "<p>Specifies whether a fix is available for the finding. This value is <code>true</code> when\n      Amazon Inspector reports a full or partial fix for the finding.</p>",
+                        "smithy.api#xmlName": "fixAvailable"
+                    }
+                },
+                "Score": {
+                    "target": "com.amazonaws.ec2#Double",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Score",
+                        "smithy.api#documentation": "<p>The Amazon Inspector score for the finding.</p>",
+                        "smithy.api#xmlName": "score"
+                    }
+                },
+                "FirstObservedAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FirstObservedAt",
+                        "smithy.api#documentation": "<p>The date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), when Amazon Inspector first observed the finding.</p>",
+                        "smithy.api#xmlName": "firstObservedAt"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UpdatedAt",
+                        "smithy.api#documentation": "<p>The date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), when Amazon Inspector last updated the finding.</p>",
+                        "smithy.api#xmlName": "updatedAt"
+                    }
+                },
+                "Title": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Title",
+                        "smithy.api#documentation": "<p>The title of the finding.</p>",
+                        "smithy.api#xmlName": "title"
+                    }
+                },
+                "Paths": {
+                    "target": "com.amazonaws.ec2#ImageFindingPathSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PathSet",
+                        "smithy.api#documentation": "<p>The file paths in the AMI that are affected by the finding. Amazon EC2 returns up to 10\n      file paths for each finding.</p>",
+                        "smithy.api#xmlName": "pathSet"
+                    }
+                },
+                "SeverityLabel": {
+                    "target": "com.amazonaws.ec2#SeverityLabel",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SeverityLabel",
+                        "smithy.api#documentation": "<p>The severity of the finding.</p>\n         <p>The valid values are the following Amazon Inspector severity levels, which correspond to\n      CVSS score ranges:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>informational</code> - CVSS score of 0.</p>\n            </li>\n            <li>\n               <p>\n                  <code>low</code> - CVSS score of 0.1 to 3.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>medium</code> - CVSS score of 4.0 to 6.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>high</code> - CVSS score of 7.0 to 8.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>critical</code> - CVSS score of 9.0 to 10.0.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score\">Software\n        package vulnerability severity</a> in the <i>Amazon Inspector User Guide</i>.</p>",
+                        "smithy.api#xmlName": "severityLabel"
+                    }
+                },
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SnapshotId",
+                        "smithy.api#documentation": "<p>The ID of the Amazon EBS snapshot of the AMI in which the finding was detected.</p>",
+                        "smithy.api#xmlName": "snapshotId"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon Inspector vulnerability finding for an AMI.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ImageFindingPathSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -102675,6 +103097,24 @@
                 }
             }
         },
+        "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2147483647
+                }
+            }
+        },
+        "com.amazonaws.ec2#MaxDaysSinceLastFindingScanValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2147483647
+                }
+            }
+        },
         "com.amazonaws.ec2#MaxIpv4AddrPerInterface": {
             "type": "integer"
         },
@@ -103298,6 +103738,66 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "spot-interruption-rate-vcpu"
+                    }
+                },
+                "CAPACITY_TOTAL_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-total-requested-vcpu"
+                    }
+                },
+                "CAPACITY_TOTAL_FULFILLED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-total-fulfilled-vcpu"
+                    }
+                },
+                "SPOT_CAPACITY_TOTAL_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-capacity-total-requested-vcpu"
+                    }
+                },
+                "SPOT_CAPACITY_TOTAL_FULFILLED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-capacity-total-fulfilled-vcpu"
+                    }
+                },
+                "CAPACITY_REQUEST_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "capacity-request-fulfillment-rate"
+                    }
+                },
+                "AVG_INST_AZ_COUNT_PER_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "avg-inst-az-count-per-requested-vcpu"
+                    }
+                },
+                "INST_AZ_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inst-az-fulfillment-rate"
+                    }
+                },
+                "SPOT_CAPACITY_REQUEST_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-capacity-request-fulfillment-rate"
+                    }
+                },
+                "SPOT_AVG_INST_AZ_COUNT_PER_REQUESTED_VCPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-avg-inst-az-count-per-requested-vcpu"
+                    }
+                },
+                "SPOT_INST_AZ_FULFILLMENT_RATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot-inst-az-fulfillment-rate"
                     }
                 }
             }
@@ -127371,6 +127871,184 @@
                 }
             }
         },
+        "com.amazonaws.ec2#ScanResultCondition": {
+            "type": "structure",
+            "members": {
+                "MaxDaysSinceLastFindingScan": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceLastFindingScanValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxDaysSinceLastFindingScan",
+                        "smithy.api#documentation": "<p>The maximum number of days that have elapsed since Amazon Inspector last scanned the AMI.\n      For example, a value of <code>7</code> allows AMIs that were scanned within the last 7 days.\n      AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>",
+                        "smithy.api#xmlName": "maxDaysSinceLastFindingScan"
+                    }
+                },
+                "MaximumSeverityLabel": {
+                    "target": "com.amazonaws.ec2#SeverityLabel",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaximumSeverityLabel",
+                        "smithy.api#documentation": "<p>The maximum severity that an AMI's Amazon Inspector findings can have for the AMI to be\n      allowed. Findings count whether or not a fix is available. For example, a value of\n      <code>medium</code> allows AMIs whose highest severity is <code>informational</code>,\n      <code>low</code>, or <code>medium</code>.</p>\n         <p>The valid values are the following Amazon Inspector severity levels, which correspond to\n      CVSS score ranges:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>informational</code> - CVSS score of 0.</p>\n            </li>\n            <li>\n               <p>\n                  <code>low</code> - CVSS score of 0.1 to 3.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>medium</code> - CVSS score of 4.0 to 6.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>high</code> - CVSS score of 7.0 to 8.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>critical</code> - CVSS score of 9.0 to 10.0.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score\">Software\n        package vulnerability severity</a> in the <i>Amazon Inspector User Guide</i>.</p>\n         <p>A scanned AMI that has no findings meets this limit.</p>\n         <p>AMIs that Amazon Inspector has not scanned are not allowed when you specify this\n      condition.</p>",
+                        "smithy.api#xmlName": "maximumSeverityLabel"
+                    }
+                },
+                "MaxDaysSinceInformationalFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxDaysSinceInformationalFixAvailable",
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for an\n      <code>informational</code> severity finding on the AMI. For example, a value of <code>7</code>\n      does not allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>informational</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>",
+                        "smithy.api#xmlName": "maxDaysSinceInformationalFixAvailable"
+                    }
+                },
+                "MaxDaysSinceLowFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxDaysSinceLowFixAvailable",
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>low</code> severity finding on the AMI. For example, a value of <code>7</code> does not\n      allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>low</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>",
+                        "smithy.api#xmlName": "maxDaysSinceLowFixAvailable"
+                    }
+                },
+                "MaxDaysSinceMediumFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxDaysSinceMediumFixAvailable",
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>medium</code> severity finding on the AMI. For example, a value of <code>7</code> does\n      not allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>medium</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>",
+                        "smithy.api#xmlName": "maxDaysSinceMediumFixAvailable"
+                    }
+                },
+                "MaxDaysSinceHighFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxDaysSinceHighFixAvailable",
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>high</code> severity finding on the AMI. For example, a value of <code>7</code> does not\n      allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>high</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>",
+                        "smithy.api#xmlName": "maxDaysSinceHighFixAvailable"
+                    }
+                },
+                "MaxDaysSinceCriticalFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaxDaysSinceCriticalFixAvailable",
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>critical</code> severity finding on the AMI. For example, a value of <code>7</code> does\n      not allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>critical</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>",
+                        "smithy.api#xmlName": "maxDaysSinceCriticalFixAvailable"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Inspector scan-result criteria that an AMI must meet to be allowed. The\n      criteria can limit the highest finding severity. They can also limit, for each severity, the\n      days since Amazon Inspector reported a fix as available.</p>\n         <p>The severity limit applies to all findings, whether or not a fix is available. The day\n      limits for each severity apply only to findings that have a fix available. A scanned AMI that\n      has no fix-available finding of a given severity meets that severity's day limit. AMIs that\n      Amazon Inspector has not scanned are not allowed when you specify this condition.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ScanResultConditionRequest": {
+            "type": "structure",
+            "members": {
+                "MaxDaysSinceLastFindingScan": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceLastFindingScanValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of days that have elapsed since Amazon Inspector last scanned the AMI.\n      For example, a value of <code>7</code> allows AMIs that were scanned within the last 7 days.\n      AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>"
+                    }
+                },
+                "MaximumSeverityLabel": {
+                    "target": "com.amazonaws.ec2#SeverityLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum severity that an AMI's Amazon Inspector findings can have for the AMI to be\n      allowed. Findings count whether or not a fix is available. For example, a value of\n      <code>medium</code> allows AMIs whose highest severity is <code>informational</code>,\n      <code>low</code>, or <code>medium</code>.</p>\n         <p>The valid values are the following Amazon Inspector severity levels, which correspond to\n      CVSS score ranges:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>informational</code> - CVSS score of 0.</p>\n            </li>\n            <li>\n               <p>\n                  <code>low</code> - CVSS score of 0.1 to 3.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>medium</code> - CVSS score of 4.0 to 6.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>high</code> - CVSS score of 7.0 to 8.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>critical</code> - CVSS score of 9.0 to 10.0.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score\">Software\n        package vulnerability severity</a> in the <i>Amazon Inspector User Guide</i>.</p>\n         <p>A scanned AMI that has no findings meets this limit.</p>\n         <p>AMIs that Amazon Inspector has not scanned are not allowed when you specify this\n      condition.</p>"
+                    }
+                },
+                "MaxDaysSinceInformationalFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for an\n      <code>informational</code> severity finding on the AMI. For example, a value of <code>7</code>\n      does not allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>informational</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>"
+                    }
+                },
+                "MaxDaysSinceLowFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>low</code> severity finding on the AMI. For example, a value of <code>7</code> does not\n      allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>low</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>"
+                    }
+                },
+                "MaxDaysSinceMediumFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>medium</code> severity finding on the AMI. For example, a value of <code>7</code> does\n      not allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>medium</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>"
+                    }
+                },
+                "MaxDaysSinceHighFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>high</code> severity finding on the AMI. For example, a value of <code>7</code> does not\n      allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>high</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>"
+                    }
+                },
+                "MaxDaysSinceCriticalFixAvailable": {
+                    "target": "com.amazonaws.ec2#MaxDaysSinceFixAvailableValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of days since Amazon Inspector reported a fix as available for a\n      <code>critical</code> severity finding on the AMI. For example, a value of <code>7</code> does\n      not allow an AMI if Amazon Inspector reported such a fix more than 7 days ago.</p>\n         <p>A scanned AMI that has no <code>critical</code> severity finding with a fix available meets\n      this limit. AMIs that Amazon Inspector has not scanned are not allowed.</p>\n         <p>Constraints: Minimum value of 0. Maximum value of 2147483647.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Inspector scan-result criteria that an AMI must meet to be allowed. The\n      criteria can limit the highest finding severity. They can also limit, for each severity, the\n      days since Amazon Inspector reported a fix as available.</p>\n         <p>The severity limit applies to all findings, whether or not a fix is available. The day\n      limits for each severity apply only to findings that have a fix available. A scanned AMI that\n      has no fix-available finding of a given severity meets that severity's day limit. AMIs that\n      Amazon Inspector has not scanned are not allowed when you specify this condition.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ScanResults": {
+            "type": "structure",
+            "members": {
+                "HighestFindingSeverityLabel": {
+                    "target": "com.amazonaws.ec2#SeverityLabel",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HighestFindingSeverityLabel",
+                        "smithy.api#documentation": "<p>The highest severity among the AMI's Amazon Inspector findings, whether or not a fix is\n      available.</p>\n         <p>The valid values are the following Amazon Inspector severity levels, which correspond to\n      CVSS score ranges:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>informational</code> - CVSS score of 0.</p>\n            </li>\n            <li>\n               <p>\n                  <code>low</code> - CVSS score of 0.1 to 3.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>medium</code> - CVSS score of 4.0 to 6.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>high</code> - CVSS score of 7.0 to 8.9.</p>\n            </li>\n            <li>\n               <p>\n                  <code>critical</code> - CVSS score of 9.0 to 10.0.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score\">Software\n        package vulnerability severity</a> in the <i>Amazon Inspector User Guide</i>.</p>\n         <p>This value is present only if the AMI has at least one finding.</p>",
+                        "smithy.api#xmlName": "highestFindingSeverityLabel"
+                    }
+                },
+                "FindingScanDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "FindingScanDate",
+                        "smithy.api#documentation": "<p>The date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), of the most recent Amazon Inspector scan of the AMI.</p>",
+                        "smithy.api#xmlName": "findingScanDate"
+                    }
+                },
+                "InformationalFixAvailableSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InformationalFixAvailableSince",
+                        "smithy.api#documentation": "<p>The earliest date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix as available for an\n      <code>informational</code> severity finding on the AMI. This value is present only if the AMI\n      has at least one <code>informational</code> severity finding with a fix available. Amazon\n      Inspector recomputes this value on each scan.</p>",
+                        "smithy.api#xmlName": "informationalFixAvailableSince"
+                    }
+                },
+                "LowFixAvailableSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "LowFixAvailableSince",
+                        "smithy.api#documentation": "<p>The earliest date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix as available for a\n      <code>low</code> severity finding on the AMI. This value is present only if the AMI has at\n      least one <code>low</code> severity finding with a fix available. Amazon Inspector recomputes\n      this value on each scan.</p>",
+                        "smithy.api#xmlName": "lowFixAvailableSince"
+                    }
+                },
+                "MediumFixAvailableSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MediumFixAvailableSince",
+                        "smithy.api#documentation": "<p>The earliest date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix as available for a\n      <code>medium</code> severity finding on the AMI. This value is present only if the AMI has at\n      least one <code>medium</code> severity finding with a fix available. Amazon Inspector\n      recomputes this value on each scan.</p>",
+                        "smithy.api#xmlName": "mediumFixAvailableSince"
+                    }
+                },
+                "HighFixAvailableSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HighFixAvailableSince",
+                        "smithy.api#documentation": "<p>The earliest date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix as available for a\n      <code>high</code> severity finding on the AMI. This value is present only if the AMI has at\n      least one <code>high</code> severity finding with a fix available. Amazon Inspector recomputes\n      this value on each scan.</p>",
+                        "smithy.api#xmlName": "highFixAvailableSince"
+                    }
+                },
+                "CriticalFixAvailableSince": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CriticalFixAvailableSince",
+                        "smithy.api#documentation": "<p>The earliest date and time, in the ISO 8601 format in the UTC time zone\n      (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix as available for a\n      <code>critical</code> severity finding on the AMI. This value is present only if the AMI has\n      at least one <code>critical</code> severity finding with a fix available. Amazon Inspector\n      recomputes this value on each scan.</p>",
+                        "smithy.api#xmlName": "criticalFixAvailableSince"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Inspector scan results for an AMI. This information is present only for AMIs\n      that Amazon Inspector has scanned.</p>\n         <p>When you share an AMI with other accounts, organizations, or organizational units\n      (OUs), or make it public, its scan results are available to the accounts that can use the\n      AMI.</p>\n         <p>The fix-available dates are specific to the AMI. Each date reflects when a fix became\n      available for a finding on that AMI, not when the vendor released the fix. As a result, a date\n      can be later than the vendor's release date, and AMIs with the same vulnerability can have\n      different dates.</p>"
+            }
+        },
         "com.amazonaws.ec2#Schedule": {
             "type": "enum",
             "members": {
@@ -130566,6 +131244,41 @@
                 "target": "com.amazonaws.ec2#ServiceTypeDetail",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#SeverityLabel": {
+            "type": "enum",
+            "members": {
+                "informational": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "informational"
+                    }
+                },
+                "low": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "low"
+                    }
+                },
+                "medium": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "medium"
+                    }
+                },
+                "high": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "high"
+                    }
+                },
+                "critical": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "critical"
+                    }
                 }
             }
         },
@@ -134504,6 +135217,61 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "initializing"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#SupportabilityInstanceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#String",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#SupportabilityMarketType": {
+            "type": "enum",
+            "members": {
+                "ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "on-demand"
+                    }
+                },
+                "SPOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spot"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#SupportabilityScore": {
+            "type": "enum",
+            "members": {
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "high"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "medium"
+                    }
+                },
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "low"
                     }
                 }
             }

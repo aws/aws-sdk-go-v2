@@ -81,10 +81,8 @@ type CreateImageInput struct {
 	// containerRecipeArn , but not both.
 	ImageRecipeArn *string
 
-	// Settings for vulnerability scans that Amazon Inspector runs during image
-	// creation. For AMI output, Amazon Inspector scans the test instance. For
-	// container output, Amazon Inspector scans the container image that Image Builder
-	// pushes to the Amazon ECR repository specified in ecrConfiguration .
+	// The settings that determine whether and how Amazon Inspector scans the image
+	// for vulnerabilities.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
 	// Settings that determine whether Image Builder runs tests on the image after

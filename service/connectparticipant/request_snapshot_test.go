@@ -355,9 +355,10 @@ func TestCheckRequestSnapshot_DisconnectParticipant(t *testing.T) {
 
 func TestCheckRequestSnapshot_GetAttachment(t *testing.T) {
 	input := &GetAttachmentInput{
-		AttachmentId:       ptr.String("__AttachmentId__"),
-		ConnectionToken:    ptr.String("__ConnectionToken__"),
-		UrlExpiryInSeconds: ptr.Int32(1),
+		AttachmentId:          ptr.String("__AttachmentId__"),
+		ConnectionToken:       ptr.String("__ConnectionToken__"),
+		UrlExpiryInSeconds:    ptr.Int32(1),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -688,9 +689,10 @@ func TestUpdateRequestSnapshot_DisconnectParticipant(t *testing.T) {
 
 func TestUpdateRequestSnapshot_GetAttachment(t *testing.T) {
 	input := &GetAttachmentInput{
-		AttachmentId:       ptr.String("__AttachmentId__"),
-		ConnectionToken:    ptr.String("__ConnectionToken__"),
-		UrlExpiryInSeconds: ptr.Int32(1),
+		AttachmentId:          ptr.String("__AttachmentId__"),
+		ConnectionToken:       ptr.String("__ConnectionToken__"),
+		UrlExpiryInSeconds:    ptr.Int32(1),
+		UrlContentDisposition: types.ContentDisposition("INLINE"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

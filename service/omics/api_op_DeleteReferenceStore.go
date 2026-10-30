@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type DeleteReferenceStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReferenceStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReferenceStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReferenceStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteReferenceStoreRequest_id, *v.Id)
+	}
+}
+
 type DeleteReferenceStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,13 +63,26 @@ type DeleteReferenceStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReferenceStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReferenceStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReferenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteReferenceStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReferenceStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReferenceStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteReferenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReferenceStore, schemas.DeleteReferenceStoreRequest, schemas.DeleteReferenceStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteReferenceStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReferenceStore, schemas.DeleteReferenceStoreRequest, schemas.DeleteReferenceStoreResponse), output: &DeleteReferenceStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

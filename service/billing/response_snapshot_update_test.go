@@ -141,6 +141,28 @@ func serdeRespXMLErrorEnvelope(body []byte, code string) []byte {
 	}
 	return []byte("<ErrorResponse><Error><Code>" + code + "</Code>" + inner + "</Error></ErrorResponse>")
 }
+func TestUpdateResponseSnapshot_AssociateContract(t *testing.T) {
+	want := &AssociateContractOutput{}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.AssociateContractResponse, schemas.AssociateContractResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("AssociateContract.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_AssociateSourceViews(t *testing.T) {
 	want := &AssociateSourceViewsOutput{
 		Arn: ptr.String("__Arn__"),
@@ -161,6 +183,28 @@ func TestUpdateResponseSnapshot_AssociateSourceViews(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("AssociateSourceViews.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_CancelContractualInvestmentAttestation(t *testing.T) {
+	want := &CancelContractualInvestmentAttestationOutput{}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.CancelContractualInvestmentAttestation, schemas.CancelContractualInvestmentAttestationResponse, schemas.CancelContractualInvestmentAttestationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CancelContractualInvestmentAttestation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -190,6 +234,30 @@ func TestUpdateResponseSnapshot_CreateBillingView(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_CreateContractualInvestmentAttestation(t *testing.T) {
+	want := &CreateContractualInvestmentAttestationOutput{
+		AttestationId: ptr.String("__AttestationId__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.CreateContractualInvestmentAttestation, schemas.CreateContractualInvestmentAttestationResponse, schemas.CreateContractualInvestmentAttestationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("CreateContractualInvestmentAttestation.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_DeleteBillingView(t *testing.T) {
 	want := &DeleteBillingViewOutput{
 		Arn: ptr.String("__Arn__"),
@@ -210,6 +278,28 @@ func TestUpdateResponseSnapshot_DeleteBillingView(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("DeleteBillingView.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_DisassociateContract(t *testing.T) {
+	want := &DisassociateContractOutput{}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.DisassociateContract, schemas.DisassociateContractResponse, schemas.DisassociateContractResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("DisassociateContract.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -352,6 +442,58 @@ func TestUpdateResponseSnapshot_GetBillingView(t *testing.T) {
 		body = b
 	}
 	if err := serdeRespWriteSnapshot("GetBillingView.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_GetContractInformation(t *testing.T) {
+	want := &GetContractInformationOutput{
+		Contract: &types.ContractDetailsMemberPrivatePricingAddendum{
+			Value: types.PrivatePricingAddendum{
+				ContractArn: ptr.String("__ContractArn__"),
+				ContractTerm: &types.Interval{
+					StartDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				EligiblePayerAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				InvestmentAccounts: []string{
+					"__Member__",
+					"__Member__",
+				},
+				LegalEntities: []types.LegalEntity{
+					{
+						LegalEntityName: ptr.String("__LegalEntityName__"),
+					},
+					{
+						LegalEntityName: ptr.String("__LegalEntityName__"),
+					},
+				},
+				ContractRestrictions: []types.ContractRestriction{
+					types.ContractRestriction("ATTESTATION_SELF_SERVICE_BLOCKED"),
+					types.ContractRestriction("ATTESTATION_SELF_SERVICE_BLOCKED"),
+				},
+			},
+		},
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.GetContractInformation, schemas.GetContractInformationResponse, schemas.GetContractInformationResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("GetContractInformation.response", 200, built.Header, body); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1016,6 +1158,240 @@ func TestUpdateResponseSnapshot_ListBusinessSupportSubscriptionHistory(t *testin
 	}
 }
 
+func TestUpdateResponseSnapshot_ListContracts(t *testing.T) {
+	want := &ListContractsOutput{
+		Items: []types.ContractSummary{
+			{
+				ContractArn: ptr.String("__ContractArn__"),
+				ContractTerm: &types.Interval{
+					StartDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ContractType:      types.ContractType("Cross-Service"),
+				AssociationStatus: types.AssociationStatus("ASSOCIATED"),
+				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+			{
+				ContractArn: ptr.String("__ContractArn__"),
+				ContractTerm: &types.Interval{
+					StartDateInclusive: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+					EndDateInclusive:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+				ContractType:      types.ContractType("Cross-Service"),
+				AssociationStatus: types.AssociationStatus("ASSOCIATED"),
+				LastUpdatedAt:     ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListContracts, schemas.ListContractsResponse, schemas.ListContractsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContracts.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListContractualInvestmentAttestations(t *testing.T) {
+	want := &ListContractualInvestmentAttestationsOutput{
+		Items: []types.InvestmentAttestation{
+			{
+				AttestationId:         ptr.String("__AttestationId__"),
+				InvestmentName:        ptr.String("__InvestmentName__"),
+				OutcomeDescription:    ptr.String("__OutcomeDescription__"),
+				InvestmentSummaryId:   ptr.String("__InvestmentSummaryId__"),
+				InvestmentId:          ptr.String("__InvestmentId__"),
+				AttestedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestationStatus:     types.InvestmentAttestationStatus("PENDING_REVIEW"),
+				InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestedValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+				InvestmentDistributions: []types.InvestmentDistribution{
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+				},
+				RejectionReasons: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IsCancellable: ptr.Bool(true),
+			},
+			{
+				AttestationId:         ptr.String("__AttestationId__"),
+				InvestmentName:        ptr.String("__InvestmentName__"),
+				OutcomeDescription:    ptr.String("__OutcomeDescription__"),
+				InvestmentSummaryId:   ptr.String("__InvestmentSummaryId__"),
+				InvestmentId:          ptr.String("__InvestmentId__"),
+				AttestedAt:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				UpdatedAt:             ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestationStatus:     types.InvestmentAttestationStatus("PENDING_REVIEW"),
+				InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				AttestedValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+				InvestmentDistributions: []types.InvestmentDistribution{
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+					{
+						AccountId: ptr.String("__AccountId__"),
+						InvestmentAmount: &types.Amount{
+							CurrencyCode:   ptr.String("__CurrencyCode__"),
+							CurrencyAmount: ptr.String("__CurrencyAmount__"),
+						},
+					},
+				},
+				RejectionReasons: []string{
+					"__Member__",
+					"__Member__",
+				},
+				IsCancellable: ptr.Bool(true),
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListContractualInvestmentAttestations, schemas.ListContractualInvestmentAttestationsResponse, schemas.ListContractualInvestmentAttestationsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContractualInvestmentAttestations.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListContractualInvestmentSummaries(t *testing.T) {
+	want := &ListContractualInvestmentSummariesOutput{
+		Items: []types.InvestmentSummary{
+			{
+				InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+				InvestmentName:      ptr.String("__InvestmentName__"),
+				InvestmentType:      types.InvestmentType("MILESTONE_BASED"),
+				MaxAllowedInvestmentDisbursementValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+			{
+				InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+				InvestmentName:      ptr.String("__InvestmentName__"),
+				InvestmentType:      types.InvestmentType("MILESTONE_BASED"),
+				MaxAllowedInvestmentDisbursementValue: &types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListContractualInvestmentSummaries, schemas.ListContractualInvestmentSummariesResponse, schemas.ListContractualInvestmentSummariesResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContractualInvestmentSummaries.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateResponseSnapshot_ListContractualInvestments(t *testing.T) {
+	want := &ListContractualInvestmentsOutput{
+		Items: []types.Investment{
+			&types.InvestmentMemberMilestoneBasedInvestment{
+				Value: types.MilestoneBasedInvestment{
+					InvestmentId: ptr.String("__InvestmentId__"),
+					InvestmentValue: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+					InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+			&types.InvestmentMemberMilestoneBasedInvestment{
+				Value: types.MilestoneBasedInvestment{
+					InvestmentId: ptr.String("__InvestmentId__"),
+					InvestmentValue: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+					InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+				},
+			},
+		},
+		NextToken: ptr.String("__NextToken__"),
+	}
+	proto := awsjson.New10(schemas.AWSBilling)
+	opSchema := smithy.NewOperationSchema(schemas.ListContractualInvestments, schemas.ListContractualInvestmentsResponse, schemas.ListContractualInvestmentsResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ListContractualInvestments.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	want := &ListEnterpriseSupportLinkedAccountChargesOutput{
 		LinkedAccount: []types.LinkedAccountCharge{
@@ -1303,7 +1679,7 @@ func TestUpdateResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.AWSBilling)
-	opSchema := smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.AccessDeniedException, schemas.AccessDeniedException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.AccessDeniedException, schemas.AccessDeniedException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1355,7 +1731,7 @@ func TestUpdateResponseSnapshot_Error_ConflictException(t *testing.T) {
 		ResourceType: ptr.String("__ResourceType__"),
 	}
 	proto := awsjson.New10(schemas.AWSBilling)
-	opSchema := smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.ConflictException, schemas.ConflictException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.ConflictException, schemas.ConflictException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1380,7 +1756,7 @@ func TestUpdateResponseSnapshot_Error_InternalServerException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.AWSBilling)
-	opSchema := smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.InternalServerException, schemas.InternalServerException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.InternalServerException, schemas.InternalServerException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1407,7 +1783,7 @@ func TestUpdateResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
 		ResourceType: ptr.String("__ResourceType__"),
 	}
 	proto := awsjson.New10(schemas.AWSBilling)
-	opSchema := smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.ResourceNotFoundException, schemas.ResourceNotFoundException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1461,7 +1837,7 @@ func TestUpdateResponseSnapshot_Error_ThrottlingException(t *testing.T) {
 		Message: ptr.String("__Message__"),
 	}
 	proto := awsjson.New10(schemas.AWSBilling)
-	opSchema := smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.ThrottlingException, schemas.ThrottlingException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.ThrottlingException, schemas.ThrottlingException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1497,7 +1873,7 @@ func TestUpdateResponseSnapshot_Error_ValidationException(t *testing.T) {
 		},
 	}
 	proto := awsjson.New10(schemas.AWSBilling)
-	opSchema := smithy.NewOperationSchema(schemas.AssociateSourceViews, schemas.ValidationException, schemas.ValidationException)
+	opSchema := smithy.NewOperationSchema(schemas.AssociateContract, schemas.ValidationException, schemas.ValidationException)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)

@@ -5,7 +5,9 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,21 @@ type ListDatasetIntegrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetIntegrationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatasetIntegrationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetIntegrationsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListDatasetIntegrationsOutput struct {
 
 	// The dataset integrations in your account.
@@ -52,13 +69,35 @@ type ListDatasetIntegrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatasetIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatasetIntegrationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatasetIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatasetIntegrationSummaries(s, schemas.ListDatasetIntegrationsOutput_DatasetIntegrationSummaries, v.DatasetIntegrationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatasetIntegrationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatasetIntegrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatasetIntegrationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatasetIntegrationsOutput_DatasetIntegrationSummaries:
+			return deserializeDatasetIntegrationSummaries(d, schemas.ListDatasetIntegrationsOutput_DatasetIntegrationSummaries, &v.DatasetIntegrationSummaries)
+		case schemas.ListDatasetIntegrationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatasetIntegrationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatasetIntegrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatasetIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetIntegrations, schemas.ListDatasetIntegrationsInput, schemas.ListDatasetIntegrationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatasetIntegrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatasetIntegrations, schemas.ListDatasetIntegrationsInput, schemas.ListDatasetIntegrationsOutput), output: &ListDatasetIntegrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

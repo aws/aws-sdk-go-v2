@@ -5,7 +5,9 @@ package s3outposts
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type ListOutpostsWithS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostsWithS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostsWithS3Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostsWithS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListOutpostsWithS3Request_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostsWithS3Request_NextToken, *v.NextToken)
+	}
+}
+
 type ListOutpostsWithS3Output struct {
 
 	// Returns a token that you can use to call ListOutpostsWithS3 again and receive
@@ -61,13 +78,35 @@ type ListOutpostsWithS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOutpostsWithS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOutpostsWithS3Result)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOutpostsWithS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOutpostsWithS3Result_NextToken, *v.NextToken)
+	}
+	serializeOutposts(s, schemas.ListOutpostsWithS3Result_Outposts, v.Outposts)
+}
+func (v *ListOutpostsWithS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOutpostsWithS3Result, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOutpostsWithS3Result_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOutpostsWithS3Result_NextToken, v.NextToken)
+		case schemas.ListOutpostsWithS3Result_Outposts:
+			return deserializeOutposts(d, schemas.ListOutpostsWithS3Result_Outposts, &v.Outposts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOutpostsWithS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOutpostsWithS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutpostsWithS3, schemas.ListOutpostsWithS3Request, schemas.ListOutpostsWithS3Result)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOutpostsWithS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOutpostsWithS3, schemas.ListOutpostsWithS3Request, schemas.ListOutpostsWithS3Result), output: &ListOutpostsWithS3Output{}}, middleware.After); err != nil {
 		return err
 	}
 

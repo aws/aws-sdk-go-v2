@@ -1,3 +1,12 @@
+# v1.105.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.105.0 (2026-10-26)
+
+* **Feature**: This release adds support for EKS management of Gateway API CRDs (Custom Resource Definitions)
+
 # v1.104.3 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

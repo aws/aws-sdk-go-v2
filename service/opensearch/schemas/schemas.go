@@ -29,6 +29,13 @@ var AddDirectQueryDataSource = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/directQueryDataSource",
 	Code: 200})
 
+var AddReplicationPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AddReplicationPeer",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/domain/{DomainName}/replication/addPeer",
+	Code: 200})
+
 var AddTags = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "AddTags",
@@ -76,6 +83,13 @@ var CancelServiceSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CancelServiceSoftwareUpdate",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2021-01-01/opensearch/serviceSoftwareUpdate/cancel",
+	Code: 200})
+
+var CompareDomainConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CompareDomainConfiguration",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/compareDomainConfiguration",
 	Code: 200})
 
 var CreateApplication = smithy.NewSchema(smithy.ShapeID{
@@ -239,6 +253,13 @@ var DescribeDomainNodes = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/domain/{DomainName}/nodes",
 	Code: 200})
 
+var DescribeDomainReplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DescribeDomainReplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	URI:  "/2021-01-01/opensearch/domain/{DomainName}/replication",
+	Code: 200})
+
 var DescribeDomains = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DescribeDomains",
@@ -328,6 +349,13 @@ var DissociatePackages = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DissociatePackages",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2021-01-01/packages/dissociateMultiple",
+	Code: 200})
+
+var FailoverReplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "FailoverReplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/domain/{DomainName}/replication/failover",
 	Code: 200})
 
 var GetApplication = smithy.NewSchema(smithy.ShapeID{
@@ -568,6 +596,13 @@ var RejectInboundConnection = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/2021-01-01/opensearch/cc/inboundConnection/{ConnectionId}/reject",
 	Code: 200})
 
+var RemoveReplicationPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "RemoveReplicationPeer",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/domain/{DomainName}/replication/removePeer",
+	Code: 200})
+
 var RemoveTags = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "RemoveTags",
@@ -608,6 +643,13 @@ var StartServiceSoftwareUpdate = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartServiceSoftwareUpdate",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2021-01-01/opensearch/serviceSoftwareUpdate/start",
+	Code: 200})
+
+var SwitchoverReplication = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "SwitchoverReplication",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	URI:  "/2021-01-01/opensearch/domain/{DomainName}/replication/switchover",
 	Code: 200})
 
 var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
@@ -1273,6 +1315,24 @@ var CapabilityStatus_DELETING *smithy.Schema
 
 var CapabilityStatus_DELETE_FAILED *smithy.Schema
 
+var CategoryDiffResult = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CategoryDiffResult",
+}, smithy.ShapeTypeStructure, 7)
+var CategoryDiffResult_Status *smithy.Schema
+
+var CategoryDiffResult_InSync *smithy.Schema
+
+var CategoryDiffResult_SourceOnly *smithy.Schema
+
+var CategoryDiffResult_TargetOnly *smithy.Schema
+
+var CategoryDiffResult_Diverged *smithy.Schema
+
+var CategoryDiffResult_Items *smithy.Schema
+
+var CategoryDiffResult_Truncated *smithy.Schema
+
 var ChangeProgressDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "ChangeProgressDetails",
@@ -1429,6 +1489,14 @@ var _CommitMessage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "CommitMessage",
 }, smithy.ShapeTypeString, 0)
+
+var _CompareDomainConfigurationCategoryMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CompareDomainConfigurationCategoryMap",
+}, smithy.ShapeTypeMap, 2)
+var _CompareDomainConfigurationCategoryMap_key *smithy.Schema
+
+var _CompareDomainConfigurationCategoryMap_value *smithy.Schema
 
 var _CompatibleVersionsList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -1696,6 +1764,56 @@ var _Description = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Description",
 }, smithy.ShapeTypeString, 0)
 
+var _DiffCount = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffCount",
+}, smithy.ShapeTypeInteger, 0)
+
+var _DiffFieldPath = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffFieldPath",
+}, smithy.ShapeTypeString, 0)
+
+var DiffFieldPolicy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffFieldPolicy",
+}, smithy.ShapeTypeEnum, 1)
+var DiffFieldPolicy_REDACTED *smithy.Schema
+
+var _DiffFieldValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffFieldValue",
+}, smithy.ShapeTypeString, 0)
+
+var _DiffItemName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffItemName",
+}, smithy.ShapeTypeString, 0)
+
+var _DiffItemNameList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffItemNameList",
+}, smithy.ShapeTypeList, 1)
+var _DiffItemNameList_member *smithy.Schema
+
+var DiffItems = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffItems",
+}, smithy.ShapeTypeStructure, 3)
+var DiffItems_SourceOnly *smithy.Schema
+
+var DiffItems_TargetOnly *smithy.Schema
+
+var DiffItems_Diverged *smithy.Schema
+
+var DiffStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DiffStatus",
+}, smithy.ShapeTypeEnum, 2)
+var DiffStatus_COMPARED *smithy.Schema
+
+var DiffStatus_ERROR *smithy.Schema
+
 var DirectQueryDataSource = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DirectQueryDataSource",
@@ -1760,6 +1878,38 @@ var _DisableTimestamp = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DisableTimestamp",
 }, smithy.ShapeTypeTimestamp, 0)
+
+var DivergentField = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DivergentField",
+}, smithy.ShapeTypeStructure, 4)
+var DivergentField_Path *smithy.Schema
+
+var DivergentField_SourceValue *smithy.Schema
+
+var DivergentField_TargetValue *smithy.Schema
+
+var DivergentField_Policy *smithy.Schema
+
+var _DivergentFieldList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DivergentFieldList",
+}, smithy.ShapeTypeList, 1)
+var _DivergentFieldList_member *smithy.Schema
+
+var DivergentItem = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DivergentItem",
+}, smithy.ShapeTypeStructure, 2)
+var DivergentItem_Name *smithy.Schema
+
+var DivergentItem_Fields *smithy.Schema
+
+var _DivergentItemList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DivergentItemList",
+}, smithy.ShapeTypeList, 1)
+var _DivergentItemList_member *smithy.Schema
 
 var _DomainArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -3008,6 +3158,17 @@ var _Message = smithy.NewSchema(smithy.ShapeID{
 	Name:      "Message",
 }, smithy.ShapeTypeString, 0)
 
+var _MetadataCategory = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MetadataCategory",
+}, smithy.ShapeTypeString, 0)
+
+var _MetadataCategoryList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "MetadataCategoryList",
+}, smithy.ShapeTypeList, 1)
+var _MetadataCategoryList_member *smithy.Schema
+
 var MigrationError = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "MigrationError",
@@ -3883,6 +4044,57 @@ var _RegionsList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegionsList",
 }, smithy.ShapeTypeList, 1)
 var _RegionsList_member *smithy.Schema
+
+var ReplicationPeer = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ReplicationPeer",
+}, smithy.ShapeTypeStructure, 4)
+var ReplicationPeer_PeerDomainArn *smithy.Schema
+
+var ReplicationPeer_PeerRole *smithy.Schema
+
+var ReplicationPeer_Status *smithy.Schema
+
+var ReplicationPeer_StatusMessage *smithy.Schema
+
+var _ReplicationPeerList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ReplicationPeerList",
+}, smithy.ShapeTypeList, 1)
+var _ReplicationPeerList_member *smithy.Schema
+
+var ReplicationRole = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ReplicationRole",
+}, smithy.ShapeTypeEnum, 2)
+var ReplicationRole_PRIMARY *smithy.Schema
+
+var ReplicationRole_SECONDARY *smithy.Schema
+
+var ReplicationStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ReplicationStatus",
+}, smithy.ShapeTypeEnum, 8)
+var ReplicationStatus_PENDING_SETUP *smithy.Schema
+
+var ReplicationStatus_ACTIVE *smithy.Schema
+
+var ReplicationStatus_SWITCHING_OVER *smithy.Schema
+
+var ReplicationStatus_FAILING_OVER *smithy.Schema
+
+var ReplicationStatus_PENDING_REMOVAL *smithy.Schema
+
+var ReplicationStatus_DETACHED *smithy.Schema
+
+var ReplicationStatus_EJECTED *smithy.Schema
+
+var ReplicationStatus_FAILED *smithy.Schema
+
+var _ReplicationStatusMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "ReplicationStatusMessage",
+}, smithy.ShapeTypeString, 0)
 
 var _RequestId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -4825,6 +5037,24 @@ var AddDirectQueryDataSourceResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var AddDirectQueryDataSourceResponse_DataSourceArn *smithy.Schema
 
+var AddReplicationPeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AddReplicationPeerRequest",
+}, smithy.ShapeTypeStructure, 3)
+var AddReplicationPeerRequest_DomainName *smithy.Schema
+
+var AddReplicationPeerRequest_PeerDomainArn *smithy.Schema
+
+var AddReplicationPeerRequest_DryRun *smithy.Schema
+
+var AddReplicationPeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "AddReplicationPeerResponse",
+}, smithy.ShapeTypeStructure, 2)
+var AddReplicationPeerResponse_DomainArn *smithy.Schema
+
+var AddReplicationPeerResponse_Status *smithy.Schema
+
 var AddTagsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "AddTagsRequest",
@@ -4940,6 +5170,26 @@ var CancelServiceSoftwareUpdateResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "CancelServiceSoftwareUpdateResponse",
 }, smithy.ShapeTypeStructure, 1)
 var CancelServiceSoftwareUpdateResponse_ServiceSoftwareOptions *smithy.Schema
+
+var CompareDomainConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CompareDomainConfigurationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var CompareDomainConfigurationRequest_SourceDomainArn *smithy.Schema
+
+var CompareDomainConfigurationRequest_TargetDomainArn *smithy.Schema
+
+var CompareDomainConfigurationRequest_Categories *smithy.Schema
+
+var CompareDomainConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "CompareDomainConfigurationResponse",
+}, smithy.ShapeTypeStructure, 3)
+var CompareDomainConfigurationResponse_SourceDomainArn *smithy.Schema
+
+var CompareDomainConfigurationResponse_TargetDomainArn *smithy.Schema
+
+var CompareDomainConfigurationResponse_Categories *smithy.Schema
 
 var CreateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -5376,6 +5626,22 @@ var DescribeDomainResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var DescribeDomainResponse_DomainStatus *smithy.Schema
 
+var DescribeDomainReplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DescribeDomainReplicationRequest",
+}, smithy.ShapeTypeStructure, 1)
+var DescribeDomainReplicationRequest_DomainName *smithy.Schema
+
+var DescribeDomainReplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "DescribeDomainReplicationResponse",
+}, smithy.ShapeTypeStructure, 3)
+var DescribeDomainReplicationResponse_DomainArn *smithy.Schema
+
+var DescribeDomainReplicationResponse_Role *smithy.Schema
+
+var DescribeDomainReplicationResponse_Peers *smithy.Schema
+
 var DescribeDomainsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "DescribeDomainsRequest",
@@ -5589,6 +5855,24 @@ var DissociatePackagesResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DissociatePackagesResponse",
 }, smithy.ShapeTypeStructure, 1)
 var DissociatePackagesResponse_DomainPackageDetailsList *smithy.Schema
+
+var FailoverReplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "FailoverReplicationRequest",
+}, smithy.ShapeTypeStructure, 3)
+var FailoverReplicationRequest_DomainName *smithy.Schema
+
+var FailoverReplicationRequest_PeerDomainArn *smithy.Schema
+
+var FailoverReplicationRequest_AllowDataLoss *smithy.Schema
+
+var FailoverReplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "FailoverReplicationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var FailoverReplicationResponse_DomainArn *smithy.Schema
+
+var FailoverReplicationResponse_Status *smithy.Schema
 
 var GetApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -6203,6 +6487,22 @@ var RejectInboundConnectionResponse = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RejectInboundConnectionResponse_Connection *smithy.Schema
 
+var RemoveReplicationPeerRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "RemoveReplicationPeerRequest",
+}, smithy.ShapeTypeStructure, 2)
+var RemoveReplicationPeerRequest_DomainName *smithy.Schema
+
+var RemoveReplicationPeerRequest_PeerDomainArn *smithy.Schema
+
+var RemoveReplicationPeerResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "RemoveReplicationPeerResponse",
+}, smithy.ShapeTypeStructure, 2)
+var RemoveReplicationPeerResponse_DomainArn *smithy.Schema
+
+var RemoveReplicationPeerResponse_Status *smithy.Schema
+
 var RemoveTagsRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
 	Name:      "RemoveTagsRequest",
@@ -6289,6 +6589,22 @@ var StartServiceSoftwareUpdateResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "StartServiceSoftwareUpdateResponse",
 }, smithy.ShapeTypeStructure, 1)
 var StartServiceSoftwareUpdateResponse_ServiceSoftwareOptions *smithy.Schema
+
+var SwitchoverReplicationRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "SwitchoverReplicationRequest",
+}, smithy.ShapeTypeStructure, 2)
+var SwitchoverReplicationRequest_DomainName *smithy.Schema
+
+var SwitchoverReplicationRequest_PeerDomainArn *smithy.Schema
+
+var SwitchoverReplicationResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.opensearch",
+	Name:      "SwitchoverReplicationResponse",
+}, smithy.ShapeTypeStructure, 2)
+var SwitchoverReplicationResponse_DomainArn *smithy.Schema
+
+var SwitchoverReplicationResponse_Status *smithy.Schema
 
 var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.opensearch",
@@ -7009,6 +7325,50 @@ func init() {
 
 	CapabilityStatus_DELETE_FAILED = CapabilityStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
 
+	DiffStatus_COMPARED = DiffStatus.AddMember("COMPARED", smithyprelude.Unit)
+
+	DiffStatus_ERROR = DiffStatus.AddMember("ERROR", smithyprelude.Unit)
+
+	_DiffItemNameList_member = _DiffItemNameList.AddMember("member", _DiffItemName)
+
+	DiffFieldPolicy_REDACTED = DiffFieldPolicy.AddMember("REDACTED", smithyprelude.Unit)
+
+	DivergentField_Path = DivergentField.AddMember("Path", _DiffFieldPath)
+
+	DivergentField_SourceValue = DivergentField.AddMember("SourceValue", _DiffFieldValue)
+
+	DivergentField_TargetValue = DivergentField.AddMember("TargetValue", _DiffFieldValue)
+
+	DivergentField_Policy = DivergentField.AddMember("Policy", DiffFieldPolicy)
+
+	_DivergentFieldList_member = _DivergentFieldList.AddMember("member", DivergentField)
+
+	DivergentItem_Name = DivergentItem.AddMember("Name", _DiffItemName)
+
+	DivergentItem_Fields = DivergentItem.AddMember("Fields", _DivergentFieldList)
+
+	_DivergentItemList_member = _DivergentItemList.AddMember("member", DivergentItem)
+
+	DiffItems_SourceOnly = DiffItems.AddMember("SourceOnly", _DiffItemNameList)
+
+	DiffItems_TargetOnly = DiffItems.AddMember("TargetOnly", _DiffItemNameList)
+
+	DiffItems_Diverged = DiffItems.AddMember("Diverged", _DivergentItemList)
+
+	CategoryDiffResult_Status = CategoryDiffResult.AddMember("Status", DiffStatus)
+
+	CategoryDiffResult_InSync = CategoryDiffResult.AddMember("InSync", _DiffCount)
+
+	CategoryDiffResult_SourceOnly = CategoryDiffResult.AddMember("SourceOnly", _DiffCount)
+
+	CategoryDiffResult_TargetOnly = CategoryDiffResult.AddMember("TargetOnly", _DiffCount)
+
+	CategoryDiffResult_Diverged = CategoryDiffResult.AddMember("Diverged", _DiffCount)
+
+	CategoryDiffResult_Items = CategoryDiffResult.AddMember("Items", DiffItems)
+
+	CategoryDiffResult_Truncated = CategoryDiffResult.AddMember("Truncated", _Boolean)
+
 	ConfigChangeStatus_PENDING = ConfigChangeStatus.AddMember("PENDING", smithyprelude.Unit)
 
 	ConfigChangeStatus_INITIALIZING = ConfigChangeStatus.AddMember("INITIALIZING", smithyprelude.Unit)
@@ -7370,6 +7730,10 @@ func init() {
 	CognitoOptionsStatus_Options = CognitoOptionsStatus.AddMember("Options", CognitoOptions)
 
 	CognitoOptionsStatus_Status = CognitoOptionsStatus.AddMember("Status", OptionStatus)
+
+	_CompareDomainConfigurationCategoryMap_key = _CompareDomainConfigurationCategoryMap.AddMember("key", _MetadataCategory)
+
+	_CompareDomainConfigurationCategoryMap_value = _CompareDomainConfigurationCategoryMap.AddMember("value", CategoryDiffResult)
 
 	_VersionList_member = _VersionList.AddMember("member", _VersionString)
 
@@ -8275,6 +8639,8 @@ func init() {
 
 	MasterNodeStatus_UnAvailable = MasterNodeStatus.AddMember("UnAvailable", smithyprelude.Unit)
 
+	_MetadataCategoryList_member = _MetadataCategoryList.AddMember("member", _MetadataCategory)
+
 	MigrationError_code = MigrationError.AddMember("code", _String)
 
 	MigrationError_message = MigrationError.AddMember("message", _String)
@@ -8474,6 +8840,36 @@ func init() {
 	RecurringCharge_RecurringChargeFrequency = RecurringCharge.AddMember("RecurringChargeFrequency", _String)
 
 	_RecurringChargeList_member = _RecurringChargeList.AddMember("member", RecurringCharge, &smithytraits.XMLName{Name: "RecurringCharge"})
+
+	ReplicationRole_PRIMARY = ReplicationRole.AddMember("PRIMARY", smithyprelude.Unit)
+
+	ReplicationRole_SECONDARY = ReplicationRole.AddMember("SECONDARY", smithyprelude.Unit)
+
+	ReplicationStatus_PENDING_SETUP = ReplicationStatus.AddMember("PENDING_SETUP", smithyprelude.Unit)
+
+	ReplicationStatus_ACTIVE = ReplicationStatus.AddMember("ACTIVE", smithyprelude.Unit)
+
+	ReplicationStatus_SWITCHING_OVER = ReplicationStatus.AddMember("SWITCHING_OVER", smithyprelude.Unit)
+
+	ReplicationStatus_FAILING_OVER = ReplicationStatus.AddMember("FAILING_OVER", smithyprelude.Unit)
+
+	ReplicationStatus_PENDING_REMOVAL = ReplicationStatus.AddMember("PENDING_REMOVAL", smithyprelude.Unit)
+
+	ReplicationStatus_DETACHED = ReplicationStatus.AddMember("DETACHED", smithyprelude.Unit)
+
+	ReplicationStatus_EJECTED = ReplicationStatus.AddMember("EJECTED", smithyprelude.Unit)
+
+	ReplicationStatus_FAILED = ReplicationStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ReplicationPeer_PeerDomainArn = ReplicationPeer.AddMember("PeerDomainArn", _DomainArn)
+
+	ReplicationPeer_PeerRole = ReplicationPeer.AddMember("PeerRole", ReplicationRole)
+
+	ReplicationPeer_Status = ReplicationPeer.AddMember("Status", ReplicationStatus)
+
+	ReplicationPeer_StatusMessage = ReplicationPeer.AddMember("StatusMessage", _ReplicationStatusMessage)
+
+	_ReplicationPeerList_member = _ReplicationPeerList.AddMember("member", ReplicationPeer)
 
 	ReservedInstancePaymentOption_ALL_UPFRONT = ReservedInstancePaymentOption.AddMember("ALL_UPFRONT", smithyprelude.Unit)
 
@@ -8707,6 +9103,16 @@ func init() {
 
 	AddDirectQueryDataSourceResponse_DataSourceArn = AddDirectQueryDataSourceResponse.AddMember("DataSourceArn", _String)
 
+	AddReplicationPeerRequest_DomainName = AddReplicationPeerRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
+
+	AddReplicationPeerRequest_PeerDomainArn = AddReplicationPeerRequest.AddMember("PeerDomainArn", _DomainArn)
+
+	AddReplicationPeerRequest_DryRun = AddReplicationPeerRequest.AddMember("DryRun", _Boolean)
+
+	AddReplicationPeerResponse_DomainArn = AddReplicationPeerResponse.AddMember("DomainArn", _DomainArn)
+
+	AddReplicationPeerResponse_Status = AddReplicationPeerResponse.AddMember("Status", ReplicationStatus)
+
 	AddTagsRequest_ARN = AddTagsRequest.AddMember("ARN", _ARN)
 
 	AddTagsRequest_TagList = AddTagsRequest.AddMember("TagList", _TagList)
@@ -8770,6 +9176,18 @@ func init() {
 	CancelServiceSoftwareUpdateRequest_DomainName = CancelServiceSoftwareUpdateRequest.AddMember("DomainName", _DomainName)
 
 	CancelServiceSoftwareUpdateResponse_ServiceSoftwareOptions = CancelServiceSoftwareUpdateResponse.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
+
+	CompareDomainConfigurationRequest_SourceDomainArn = CompareDomainConfigurationRequest.AddMember("SourceDomainArn", _DomainArn)
+
+	CompareDomainConfigurationRequest_TargetDomainArn = CompareDomainConfigurationRequest.AddMember("TargetDomainArn", _DomainArn)
+
+	CompareDomainConfigurationRequest_Categories = CompareDomainConfigurationRequest.AddMember("Categories", _MetadataCategoryList)
+
+	CompareDomainConfigurationResponse_SourceDomainArn = CompareDomainConfigurationResponse.AddMember("SourceDomainArn", _DomainArn)
+
+	CompareDomainConfigurationResponse_TargetDomainArn = CompareDomainConfigurationResponse.AddMember("TargetDomainArn", _DomainArn)
+
+	CompareDomainConfigurationResponse_Categories = CompareDomainConfigurationResponse.AddMember("Categories", _CompareDomainConfigurationCategoryMap)
 
 	CreateApplicationRequest_clientToken = CreateApplicationRequest.AddMember("clientToken", _ClientToken)
 
@@ -9025,6 +9443,14 @@ func init() {
 
 	DescribeDomainResponse_DomainStatus = DescribeDomainResponse.AddMember("DomainStatus", DomainStatus)
 
+	DescribeDomainReplicationRequest_DomainName = DescribeDomainReplicationRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
+
+	DescribeDomainReplicationResponse_DomainArn = DescribeDomainReplicationResponse.AddMember("DomainArn", _DomainArn)
+
+	DescribeDomainReplicationResponse_Role = DescribeDomainReplicationResponse.AddMember("Role", ReplicationRole)
+
+	DescribeDomainReplicationResponse_Peers = DescribeDomainReplicationResponse.AddMember("Peers", _ReplicationPeerList)
+
 	DescribeDomainsRequest_DomainNames = DescribeDomainsRequest.AddMember("DomainNames", _DomainNameList)
 
 	DescribeDomainsResponse_DomainStatusList = DescribeDomainsResponse.AddMember("DomainStatusList", _DomainStatusList)
@@ -9134,6 +9560,16 @@ func init() {
 	DissociatePackagesRequest_DomainName = DissociatePackagesRequest.AddMember("DomainName", _DomainName)
 
 	DissociatePackagesResponse_DomainPackageDetailsList = DissociatePackagesResponse.AddMember("DomainPackageDetailsList", _DomainPackageDetailsList)
+
+	FailoverReplicationRequest_DomainName = FailoverReplicationRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
+
+	FailoverReplicationRequest_PeerDomainArn = FailoverReplicationRequest.AddMember("PeerDomainArn", _DomainArn)
+
+	FailoverReplicationRequest_AllowDataLoss = FailoverReplicationRequest.AddMember("AllowDataLoss", _Boolean)
+
+	FailoverReplicationResponse_DomainArn = FailoverReplicationResponse.AddMember("DomainArn", _DomainArn)
+
+	FailoverReplicationResponse_Status = FailoverReplicationResponse.AddMember("Status", ReplicationStatus)
 
 	GetApplicationRequest_id = GetApplicationRequest.AddMember("id", _Id, &smithytraits.HTTPLabel{})
 
@@ -9475,6 +9911,14 @@ func init() {
 
 	RejectInboundConnectionResponse_Connection = RejectInboundConnectionResponse.AddMember("Connection", InboundConnection)
 
+	RemoveReplicationPeerRequest_DomainName = RemoveReplicationPeerRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
+
+	RemoveReplicationPeerRequest_PeerDomainArn = RemoveReplicationPeerRequest.AddMember("PeerDomainArn", _DomainArn)
+
+	RemoveReplicationPeerResponse_DomainArn = RemoveReplicationPeerResponse.AddMember("DomainArn", _DomainArn)
+
+	RemoveReplicationPeerResponse_Status = RemoveReplicationPeerResponse.AddMember("Status", ReplicationStatus)
+
 	RemoveTagsRequest_ARN = RemoveTagsRequest.AddMember("ARN", _ARN)
 
 	RemoveTagsRequest_TagKeys = RemoveTagsRequest.AddMember("TagKeys", _StringList)
@@ -9516,6 +9960,14 @@ func init() {
 	StartServiceSoftwareUpdateRequest_DesiredStartTime = StartServiceSoftwareUpdateRequest.AddMember("DesiredStartTime", _Long)
 
 	StartServiceSoftwareUpdateResponse_ServiceSoftwareOptions = StartServiceSoftwareUpdateResponse.AddMember("ServiceSoftwareOptions", ServiceSoftwareOptions)
+
+	SwitchoverReplicationRequest_DomainName = SwitchoverReplicationRequest.AddMember("DomainName", _DomainName, &smithytraits.HTTPLabel{})
+
+	SwitchoverReplicationRequest_PeerDomainArn = SwitchoverReplicationRequest.AddMember("PeerDomainArn", _DomainArn)
+
+	SwitchoverReplicationResponse_DomainArn = SwitchoverReplicationResponse.AddMember("DomainArn", _DomainArn)
+
+	SwitchoverReplicationResponse_Status = SwitchoverReplicationResponse.AddMember("Status", ReplicationStatus)
 
 	UpdateApplicationRequest_id = UpdateApplicationRequest.AddMember("id", _Id, &smithytraits.HTTPLabel{})
 

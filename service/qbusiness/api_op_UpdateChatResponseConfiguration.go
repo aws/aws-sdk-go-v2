@@ -5,7 +5,9 @@ package qbusiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -60,6 +62,28 @@ type UpdateChatResponseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChatResponseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChatResponseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChatResponseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateChatResponseConfigurationRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ChatResponseConfigurationId != nil {
+		s.WriteString(schemas.UpdateChatResponseConfigurationRequest_chatResponseConfigurationId, *v.ChatResponseConfigurationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateChatResponseConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateChatResponseConfigurationRequest_displayName, *v.DisplayName)
+	}
+	serializeResponseConfigurations(s, schemas.UpdateChatResponseConfigurationRequest_responseConfigurations, v.ResponseConfigurations)
+}
+
 type UpdateChatResponseConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -67,13 +91,26 @@ type UpdateChatResponseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChatResponseConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChatResponseConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChatResponseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateChatResponseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChatResponseConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChatResponseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChatResponseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChatResponseConfiguration, schemas.UpdateChatResponseConfigurationRequest, schemas.UpdateChatResponseConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChatResponseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChatResponseConfiguration, schemas.UpdateChatResponseConfigurationRequest, schemas.UpdateChatResponseConfigurationResponse), output: &UpdateChatResponseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

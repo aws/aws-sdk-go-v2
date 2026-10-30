@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidPaginationTokenException","message":"__Message__"}

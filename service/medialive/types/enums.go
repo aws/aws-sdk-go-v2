@@ -2787,6 +2787,26 @@ func (H264AdaptiveQuantization) Values() []H264AdaptiveQuantization {
 	}
 }
 
+type H264AllowExplicitWeightedPrediction string
+
+// Enum values for H264AllowExplicitWeightedPrediction
+const (
+	H264AllowExplicitWeightedPredictionDisabled H264AllowExplicitWeightedPrediction = "DISABLED"
+	H264AllowExplicitWeightedPredictionEnabled  H264AllowExplicitWeightedPrediction = "ENABLED"
+)
+
+// Values returns all known values for H264AllowExplicitWeightedPrediction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (H264AllowExplicitWeightedPrediction) Values() []H264AllowExplicitWeightedPrediction {
+	return []H264AllowExplicitWeightedPrediction{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type H264ColorMetadata string
 
 // Enum values for H264ColorMetadata
@@ -6063,6 +6083,25 @@ func (OutputUsage) Values() []OutputUsage {
 		"MULTIVIEW_EQUAL_SIZE_VIEW",
 		"MULTIVIEW_PRIMARY_VIEW",
 		"MULTIVIEW_SECONDARY_VIEW",
+	}
+}
+
+type PerceptualFilterStrength string
+
+// Enum values for PerceptualFilterStrength
+const (
+	PerceptualFilterStrengthStrength1 PerceptualFilterStrength = "STRENGTH_1"
+	PerceptualFilterStrengthStrength2 PerceptualFilterStrength = "STRENGTH_2"
+)
+
+// Values returns all known values for PerceptualFilterStrength. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PerceptualFilterStrength) Values() []PerceptualFilterStrength {
+	return []PerceptualFilterStrength{
+		"STRENGTH_1",
+		"STRENGTH_2",
 	}
 }
 

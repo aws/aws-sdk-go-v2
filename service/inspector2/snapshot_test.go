@@ -554,6 +554,18 @@ func TestCheckSnapshot_GetMember(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetOnDemandScanStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOnDemandScanStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetOnDemandScanStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetSbomExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSbomExport(context.Background(), nil, func(o *Options) {
@@ -770,6 +782,18 @@ func TestCheckSnapshot_ListMembers(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListOnDemandScans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOnDemandScans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOnDemandScans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -859,6 +883,18 @@ func TestCheckSnapshot_StartCodeSecurityScan(t *testing.T) {
 	_, err := svc.StartCodeSecurityScan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartCodeSecurityScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartOnDemandScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOnDemandScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartOnDemandScan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1525,6 +1561,18 @@ func TestUpdateSnapshot_GetMember(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetOnDemandScanStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetOnDemandScanStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetOnDemandScanStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetSbomExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetSbomExport(context.Background(), nil, func(o *Options) {
@@ -1741,6 +1789,18 @@ func TestUpdateSnapshot_ListMembers(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListOnDemandScans(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOnDemandScans(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOnDemandScans")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1830,6 +1890,18 @@ func TestUpdateSnapshot_StartCodeSecurityScan(t *testing.T) {
 	_, err := svc.StartCodeSecurityScan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartCodeSecurityScan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartOnDemandScan(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartOnDemandScan(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartOnDemandScan")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

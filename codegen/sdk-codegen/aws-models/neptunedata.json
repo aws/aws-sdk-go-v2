@@ -57,6 +57,9 @@
                     "target": "com.amazonaws.neptunedata#CancelGremlinQuery"
                 },
                 {
+                    "target": "com.amazonaws.neptunedata#CancelIndexRebuild"
+                },
+                {
                     "target": "com.amazonaws.neptunedata#CancelLoaderJob"
                 },
                 {
@@ -108,6 +111,9 @@
                     "target": "com.amazonaws.neptunedata#GetGremlinQueryStatus"
                 },
                 {
+                    "target": "com.amazonaws.neptunedata#GetIndexRebuildStatus"
+                },
+                {
                     "target": "com.amazonaws.neptunedata#GetLoaderJobStatus"
                 },
                 {
@@ -144,7 +150,13 @@
                     "target": "com.amazonaws.neptunedata#GetSparqlStream"
                 },
                 {
+                    "target": "com.amazonaws.neptunedata#GetStorageInfo"
+                },
+                {
                     "target": "com.amazonaws.neptunedata#ListGremlinQueries"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ListIndexRebuilds"
                 },
                 {
                     "target": "com.amazonaws.neptunedata#ListLoaderJobs"
@@ -169,6 +181,9 @@
                 },
                 {
                     "target": "com.amazonaws.neptunedata#ManageSparqlStatistics"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#StartIndexRebuild"
                 },
                 {
                     "target": "com.amazonaws.neptunedata#StartLoaderJob"
@@ -1162,6 +1177,119 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunedata#CancelIndexRebuild": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunedata#CancelIndexRebuildInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunedata#CancelIndexRebuildOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#CancelledByMaintenanceException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#CancelledByUserException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ClientTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#PreconditionsFailedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ReadOnlyViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ServerShutdownException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#UnsupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels an in-progress index rebuild operation.</p> <p>When invoking this operation in a Neptune cluster that has IAM authentication enabled, the IAM user or role making the request must have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelindexrebuild\">neptune-db:CancelIndexRebuild</a> IAM action in that cluster.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/storage/indexes/rebuilds/{rebuildId}/cancel",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.neptunedata#CancelIndexRebuildInput": {
+            "type": "structure",
+            "members": {
+                "rebuildId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the index rebuild job to cancel.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunedata#CancelIndexRebuildOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.neptunedata#RebuildStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the cancellation request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "concurrency": {
+                    "target": "com.amazonaws.neptunedata#RebuildConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The concurrency of the rebuild being cancelled, echoed from the original <code>StartIndexRebuild</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "writeBufferSize": {
+                    "target": "com.amazonaws.neptunedata#WriteBufferSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>WriteBufferSize</code> of the rebuild being cancelled, echoed from the original <code>StartIndexRebuild</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunedata#CancelLoaderJob": {
             "type": "operation",
             "input": {
@@ -1648,6 +1776,38 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunedata#CancelledByMaintenanceException": {
+            "type": "structure",
+            "members": {
+                "detailedMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed message describing the problem.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request in question.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code returned with the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Raised when a request is cancelled because the storage layer entered maintenance mode. This typically happens during a customer-initiated operation such as an index rebuild. It should be treated like <code>ConcurrentModificationException</code>.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
             }
         },
         "com.amazonaws.neptunedata#CancelledByUserException": {
@@ -2258,6 +2418,26 @@
                 "smithy.api#documentation": "<p>The payload for DeleteStatistics.</p>"
             }
         },
+        "com.amazonaws.neptunedata#DictionariesInfo": {
+            "type": "structure",
+            "members": {
+                "total": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size and entry count across all dictionary entries.</p>"
+                    }
+                },
+                "blobs": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size and entry count for the blob (large value) dictionary entries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains dictionary storage metrics for the Neptune database, including total dictionary size and entry count, and the size and count for blob (large value) entries.</p>"
+            }
+        },
         "com.amazonaws.neptunedata#DocumentValuedMap": {
             "type": "map",
             "key": {
@@ -2430,6 +2610,9 @@
                     "target": "com.amazonaws.neptunedata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.neptunedata#CancelledByMaintenanceException"
+                },
+                {
                     "target": "com.amazonaws.neptunedata#CancelledByUserException"
                 },
                 {
@@ -2538,6 +2721,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.neptunedata#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#CancelledByMaintenanceException"
                 },
                 {
                     "target": "com.amazonaws.neptunedata#CancelledByUserException"
@@ -2678,6 +2864,9 @@
                     "target": "com.amazonaws.neptunedata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.neptunedata#CancelledByMaintenanceException"
+                },
+                {
                     "target": "com.amazonaws.neptunedata#CancelledByUserException"
                 },
                 {
@@ -2812,6 +3001,9 @@
                     "target": "com.amazonaws.neptunedata#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.neptunedata#CancelledByMaintenanceException"
+                },
+                {
                     "target": "com.amazonaws.neptunedata#CancelledByUserException"
                 },
                 {
@@ -2939,6 +3131,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.neptunedata#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#CancelledByMaintenanceException"
                 },
                 {
                     "target": "com.amazonaws.neptunedata#CancelledByUserException"
@@ -3398,6 +3593,149 @@
                     "target": "com.amazonaws.neptunedata#QueryEvalStats",
                     "traits": {
                         "smithy.api#documentation": "<p>The evaluation status of the Gremlin query.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunedata#GetIndexRebuildStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunedata#GetIndexRebuildStatusInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunedata#GetIndexRebuildStatusOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ClientTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#PreconditionsFailedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#UnsupportedOperationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status of an index rebuild operation.</p> <p>When invoking this operation in a Neptune cluster that has IAM authentication enabled, the IAM user or role making the request must have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getindexrebuildstatus\">neptune-db:GetIndexRebuildStatus</a> IAM action in that cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/storage/indexes/rebuilds/{rebuildId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.neptunedata#GetIndexRebuildStatusInput": {
+            "type": "structure",
+            "members": {
+                "rebuildId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the index rebuild job returned by the StartIndexRebuild operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunedata#GetIndexRebuildStatusOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.neptunedata#RebuildStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rebuild operation. See <code>RebuildStatus</code> for possible values: <code>PREPARING</code>, <code>REBUILDING</code>, <code>COMPLETED</code>, <code>FAILED</code>, <code>CANCELLING</code> or <code>CANCELLED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.neptunedata#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rebuild operation. See <code>Scope</code> for possible values: <code>ALL</code>, <code>QUADS</code>, or <code>DICTIONARIES</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "concurrency": {
+                    "target": "com.amazonaws.neptunedata#RebuildConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The concurrency in effect for this rebuild, as echoed from the original <code>StartIndexRebuild</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "writeBufferSize": {
+                    "target": "com.amazonaws.neptunedata#WriteBufferSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>WriteBufferSize</code> in effect for this rebuild, as echoed from the original <code>StartIndexRebuild</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO-8601 timestamp indicating when the index rebuild operation started.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "progressPercentage": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the index rebuild operation that has been completed, expressed as an integer from 0 to 100.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "estimatedEndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated ISO-8601 timestamp for when the index rebuild operation will complete. The estimate may change as the operation progresses.</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "endTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ISO-8601 timestamp indicating when the index rebuild operation completed. This field is only present when the operation has completed (status is <code>COMPLETED</code>, <code>FAILED</code>, or <code>CANCELLED</code>).</p>",
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the failure, if the rebuild operation failed. This field is only populated when the status is <code>FAILED</code>.</p>"
                     }
                 }
             },
@@ -4735,6 +5073,118 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.neptunedata#GetStorageInfo": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunedata#GetStorageOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ClientTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#PreconditionsFailedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ServerShutdownException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves storage information for the Neptune database instance, including approximate total storage used and per-category size and entry counts. Storage categories include:</p> <ul> <li> <p> <i>Quad indexes</i> - the indexes that store graph data, for both RDF (SPARQL) and Property Graph (Gremlin/openCypher) models.</p> </li> <li> <p> <i>Dictionaries</i> - the term dictionaries, including total dictionary storage and the portion used by blob (large value) entries.</p> </li> <li> <p> <i>Undo logs</i> - the undo logs, reported as a total size and the number of entries in the undo log list.</p> </li> <li> <p> <i>Streams</i> - the change-log streams.</p> </li> <li> <p> <i>Schema</i> - the schema.</p> </li> <li> <p> <i>DFE statistics</i> - the DFE engine statistics.</p> </li> <li> <p> <i>System metadata</i> - internal system metadata.</p> </li> </ul> <p>When invoking this operation in a Neptune cluster that has IAM authentication enabled, the IAM user or role making the request must have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstorageinfo\">neptune-db:GetStorageInfo</a> IAM action in that cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/storage/info",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.neptunedata#GetStorageOutput": {
+            "type": "structure",
+            "members": {
+                "totalStorageBytesUsed": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The approximate total amount of storage used by the Neptune database instance, in bytes.</p>"
+                    }
+                },
+                "quads": {
+                    "target": "com.amazonaws.neptunedata#QuadsIndexesInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the quad indexes, including counts and sizes for both RDF (SPARQL) and Property Graph (Gremlin/openCypher) data.</p>"
+                    }
+                },
+                "dictionaries": {
+                    "target": "com.amazonaws.neptunedata#DictionariesInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the dictionaries, including total dictionary storage and the portion used by blob entries. For additional details on the storage of the Neptune dictionary, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-storage.html#feature-overview-storage-billing\">Neptune Storage Billing</a>.</p>"
+                    }
+                },
+                "undoLogs": {
+                    "target": "com.amazonaws.neptunedata#UndoLogsMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the undo logs. The <code>sizeInBytes</code> field represents the total size of the undo logs in bytes, and the <code>listSize</code> field represents the number of entries in the undo log list.</p>"
+                    }
+                },
+                "streams": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains storage metrics for the Neptune change-log streams, including size in bytes and entry count.</p>"
+                    }
+                },
+                "dfeStatistics": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains storage metrics for the Neptune DFE engine statistics, including size in bytes and entry count.</p>"
+                    }
+                },
+                "schema": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains storage metrics for the Neptune schema, including size in bytes and entry count.</p>"
+                    }
+                },
+                "internals": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains storage metrics for Neptune system metadata, including size in bytes and entry count.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.neptunedata#GraphSummaryType": {
             "type": "enum",
             "members": {
@@ -5096,6 +5546,74 @@
                     "target": "com.amazonaws.neptunedata#GremlinQueries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the current queries.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.neptunedata#ListIndexRebuilds": {
+            "type": "operation",
+            "input": {
+                "target": "smithy.api#Unit"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunedata#ListIndexRebuildsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ClientTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#PreconditionsFailedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of all index rebuild operation identifiers.</p> <p>When invoking this operation in a Neptune cluster that has IAM authentication enabled, the IAM user or role making the request must have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listindexrebuilds\">neptune-db:ListIndexRebuilds</a> IAM action in that cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/storage/indexes/rebuilds",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.neptunedata#ListIndexRebuildsOutput": {
+            "type": "structure",
+            "members": {
+                "rebuildIds": {
+                    "target": "com.amazonaws.neptunedata#RebuildIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unique identifiers for index rebuild operations. Use each ID with the GetIndexRebuildStatus operation to retrieve detailed status information.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -6594,6 +7112,64 @@
                 "smithy.api#documentation": "<p>Payload for the property graph summary response.</p>"
             }
         },
+        "com.amazonaws.neptunedata#QuadsIndexesInfo": {
+            "type": "structure",
+            "members": {
+                "RDF": {
+                    "target": "com.amazonaws.neptunedata#QuadsInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains quad index information for the RDF (SPARQL) data model.</p>"
+                    }
+                },
+                "PG": {
+                    "target": "com.amazonaws.neptunedata#QuadsInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains quad index information for the Property Graph (Gremlin/openCypher) data model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains storage information about quad indexes for both RDF and Property Graph data models.</p>"
+            }
+        },
+        "com.amazonaws.neptunedata#QuadsInfo": {
+            "type": "structure",
+            "members": {
+                "SPOG": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size and count information for the SPOG quad index.</p>"
+                    }
+                },
+                "POGS": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size and count information for the POGS quad index.</p>"
+                    }
+                },
+                "GPSO": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size and count information for the GPSO quad index.</p>"
+                    }
+                },
+                "OSGP": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size and count information for the OSGP quad index. This index is optional. For details on how to enable it and evaluate the benefits and costs, see <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-data-model.html\">Neptune Data Model</a>.</p>"
+                    }
+                },
+                "PZSOG": {
+                    "target": "com.amazonaws.neptunedata#StorageMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Size and count information for the PZSOG quad index.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains storage information about quad indexes.</p>"
+            }
+        },
         "com.amazonaws.neptunedata#QueryEvalStats": {
             "type": "structure",
             "members": {
@@ -6843,6 +7419,70 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.neptunedata#RebuildConcurrency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.neptunedata#RebuildIdList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.neptunedata#RebuildStatus": {
+            "type": "enum",
+            "members": {
+                "PREPARING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rebuild operation is being prepared.</p>",
+                        "smithy.api#enumValue": "PREPARING"
+                    }
+                },
+                "REBUILDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rebuild operation is actively rebuilding indexes.</p>",
+                        "smithy.api#enumValue": "REBUILDING"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rebuild operation has completed successfully.</p>",
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rebuild operation has failed (completely or partially).</p>",
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CANCELLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rebuild operation was cancelled by the user.</p>",
+                        "smithy.api#enumValue": "CANCELLED"
+                    }
+                },
+                "CANCELLING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rebuild operation was cancelled by the user and is in cancelling phase.</p>",
+                        "smithy.api#enumValue": "CANCELLING"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates the current state of a rebuild operation.</p>"
+            }
+        },
         "com.amazonaws.neptunedata#RefreshStatisticsIdMap": {
             "type": "structure",
             "members": {
@@ -6861,6 +7501,37 @@
             "type": "blob",
             "traits": {
                 "smithy.api#mediaType": "text/plain"
+            }
+        },
+        "com.amazonaws.neptunedata#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "detailedMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed message describing the problem.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request in question.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code returned with the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Raised when the specified resource could not be found. The resource might have been deleted or the identifier might be incorrect.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.neptunedata#S3BucketRegion": {
@@ -7116,6 +7787,35 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.neptunedata#Scope": {
+            "type": "enum",
+            "members": {
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rebuild all (quads and dictionaries). This is the default option.</p>",
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "QUADS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rebuild only the quad indexes.</p>",
+                        "smithy.api#enumValue": "QUADS"
+                    }
+                },
+                "DICTIONARIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Rebuild only the dictionaries.</p>",
+                        "smithy.api#enumValue": "DICTIONARIES"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the scope of the storage rebuild operation.</p>"
+            }
+        },
         "com.amazonaws.neptunedata#ServerShutdownException": {
             "type": "structure",
             "members": {
@@ -7209,6 +7909,153 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.neptunedata#SparqlRecord"
+            }
+        },
+        "com.amazonaws.neptunedata#StartIndexRebuild": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.neptunedata#StartIndexRebuildInput"
+            },
+            "output": {
+                "target": "com.amazonaws.neptunedata#StartIndexRebuildOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.neptunedata#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ClientTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ConstraintViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#IllegalArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#MemoryLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#MethodNotAllowedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#PreconditionsFailedException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ReadOnlyViolationException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#ServerShutdownException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.neptunedata#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiates an index rebuild operation to optimize storage and improve query performance. The rebuild operation reorganizes index to reclaim space and improve efficiency.</p> <p>When invoking this operation in a Neptune cluster that has IAM authentication enabled, the IAM user or role making the request must have a policy attached that allows the <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startindexrebuild\">neptune-db:StartIndexRebuild</a> IAM action in that cluster.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/storage/indexes/rebuilds",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.neptunedata#StartIndexRebuildInput": {
+            "type": "structure",
+            "members": {
+                "scope": {
+                    "target": "com.amazonaws.neptunedata#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scope of the rebuild operation. Possible values are:</p> <ul> <li> <p> <code>ALL</code> - Rebuild all (quads and dictionaries). This is the default if not specified.</p> </li> <li> <p> <code>QUADS</code> - Rebuild only the quad indexes. </p> </li> <li> <p> <code>DICTIONARIES</code> - Rebuild only the dictionaries.</p> </li> </ul>",
+                        "smithy.api#httpQuery": "scope"
+                    }
+                },
+                "concurrency": {
+                    "target": "com.amazonaws.neptunedata#RebuildConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of concurrent indexes to rebuild in parallel. If not specified, defaults to <code>1</code>.</p> <p>Valid values are between <code>1</code> and the number of vCPUs available on the writer instance. If the value exceeds the available vCPUs, it is capped at the maximum instead of returning an <code>InvalidParameterException</code>. The effective (capped) value is returned in the response.</p> <p>Higher concurrency can shorten the overall rebuild, but also increases CPU and I/O load during the operation.</p>",
+                        "smithy.api#httpQuery": "concurrency"
+                    }
+                },
+                "writeBufferSize": {
+                    "target": "com.amazonaws.neptunedata#WriteBufferSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls the buffer size used for tracking concurrent write operations during the index rebuild. If your database has high write traffic during the rebuild, a larger buffer prevents the operation from failing due to buffer overflow. Possible values are:</p> <ul> <li> <p> <code>LOW</code> - Suitable for databases with light to moderate write activity. This is the default.</p> </li> <li> <p> <code>MEDIUM</code> - Recommended for databases with sustained write traffic or bulk loading.</p> </li> <li> <p> <code>HIGH</code> - Use when rebuilding indexes during heavy write workloads or continuous bulk data ingestion.</p> </li> </ul> <p>If your rebuild fails and you are actively writing data to the database, retry with a higher <code>writeBufferSize</code> value. For bulk load operations, consider using <code>HIGH</code>.</p>",
+                        "smithy.api#httpQuery": "writeBufferSize"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, the SDK automatically generates one.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.neptunedata#StartIndexRebuildOutput": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.neptunedata#RebuildStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the rebuild operation. See <code>RebuildStatus</code> for possible values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rebuildId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the index rebuild job. Use this ID with the GetIndexRebuildStatus operation to check the progress of the rebuild.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.neptunedata#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of the rebuild operation that was requested. See <code>Scope</code> for possible values: <code>ALL</code>, <code>QUADS</code>, or <code>DICTIONARIES</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "concurrency": {
+                    "target": "com.amazonaws.neptunedata#RebuildConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective concurrency used for this rebuild. This is the value supplied in the request, capped at the number of vCPUs on the writer instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "writeBufferSize": {
+                    "target": "com.amazonaws.neptunedata#WriteBufferSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>WriteBufferSize</code> applied to this rebuild. See the <code>WriteBufferSize</code> enum for possible values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.neptunedata#StartLoaderJob": {
@@ -8056,6 +8903,28 @@
                 "smithy.api#documentation": "<p>Information about the characteristic sets generated in the statistics.</p>"
             }
         },
+        "com.amazonaws.neptunedata#StorageMetrics": {
+            "type": "structure",
+            "members": {
+                "sizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Storage size in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "count": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of entries.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains storage size and entry count metrics.</p>"
+            }
+        },
         "com.amazonaws.neptunedata#StreamRecordsNotFoundException": {
             "type": "structure",
             "members": {
@@ -8224,6 +9093,28 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.neptunedata#UndoLogsMetrics": {
+            "type": "structure",
+            "members": {
+                "sizeInBytes": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total size of the undo logs in bytes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "listSize": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of entries in the undo log list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains storage metrics for the Neptune undo logs, including the total size in bytes and the number of entries in the undo log list.</p>"
+            }
+        },
         "com.amazonaws.neptunedata#UnsupportedOperationException": {
             "type": "structure",
             "members": {
@@ -8253,6 +9144,66 @@
                 "smithy.api#documentation": "<p>Raised when a request attempts to initiate an operation that is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.neptunedata#ValidationException": {
+            "type": "structure",
+            "members": {
+                "detailedMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed message describing the problem.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request in question.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code returned with the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Raised when a parameter value is not valid or is malformed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.neptunedata#WriteBufferSize": {
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Suitable for databases with light to moderate write activity. This is the default.</p>",
+                        "smithy.api#enumValue": "LOW"
+                    }
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Recommended for databases with sustained write traffic or bulk loading.</p>",
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use when rebuilding indexes during heavy write workloads or continuous bulk data ingestion.</p>",
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls the buffer size used during an index rebuild to track concurrent write operations. Larger values allow the rebuild to tolerate heavier concurrent write traffic.</p>"
             }
         }
     }

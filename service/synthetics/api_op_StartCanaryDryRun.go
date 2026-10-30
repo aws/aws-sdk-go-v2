@@ -4,7 +4,9 @@ package synthetics
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -149,6 +151,63 @@ type StartCanaryDryRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCanaryDryRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCanaryDryRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCanaryDryRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactConfig != nil {
+		s.WriteStruct(schemas.StartCanaryDryRunRequest_ArtifactConfig)
+		v.ArtifactConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ArtifactS3Location != nil {
+		s.WriteString(schemas.StartCanaryDryRunRequest_ArtifactS3Location, *v.ArtifactS3Location)
+	}
+	serializeBrowserConfigs(s, schemas.StartCanaryDryRunRequest_BrowserConfigs, v.BrowserConfigs)
+	if v.Code != nil {
+		s.WriteStruct(schemas.StartCanaryDryRunRequest_Code)
+		v.Code.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.StartCanaryDryRunRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.FailureRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.StartCanaryDryRunRequest_FailureRetentionPeriodInDays, *v.FailureRetentionPeriodInDays)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartCanaryDryRunRequest_Name, *v.Name)
+	}
+	if v.ProvisionedResourceCleanup != "" {
+		s.WriteString(schemas.StartCanaryDryRunRequest_ProvisionedResourceCleanup, string(v.ProvisionedResourceCleanup))
+	}
+	if v.RunConfig != nil {
+		s.WriteStruct(schemas.StartCanaryDryRunRequest_RunConfig)
+		v.RunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuntimeVersion != nil {
+		s.WriteString(schemas.StartCanaryDryRunRequest_RuntimeVersion, *v.RuntimeVersion)
+	}
+	if v.SuccessRetentionPeriodInDays != nil {
+		s.WriteInt32(schemas.StartCanaryDryRunRequest_SuccessRetentionPeriodInDays, *v.SuccessRetentionPeriodInDays)
+	}
+	if v.VisualReference != nil {
+		s.WriteStruct(schemas.StartCanaryDryRunRequest_VisualReference)
+		v.VisualReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVisualReferences(s, schemas.StartCanaryDryRunRequest_VisualReferences, v.VisualReferences)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.StartCanaryDryRunRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartCanaryDryRunOutput struct {
 
 	// Returns the dry run configurations for a canary.
@@ -160,13 +219,34 @@ type StartCanaryDryRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCanaryDryRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCanaryDryRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCanaryDryRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRunConfig != nil {
+		s.WriteStruct(schemas.StartCanaryDryRunResponse_DryRunConfig)
+		v.DryRunConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartCanaryDryRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCanaryDryRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCanaryDryRunResponse_DryRunConfig:
+			v.DryRunConfig = &types.DryRunConfigOutput{}
+			return v.DryRunConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCanaryDryRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCanaryDryRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCanaryDryRun, schemas.StartCanaryDryRunRequest, schemas.StartCanaryDryRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCanaryDryRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCanaryDryRun, schemas.StartCanaryDryRunRequest, schemas.StartCanaryDryRunResponse), output: &StartCanaryDryRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","parts":[{"checksum":"__Checksum__","creationTime":"2000-01-01T00:00:00Z","lastUpdatedTime":"2000-01-01T00:00:00Z","partNumber":1,"partSize":1,"partSource":"SOURCE1"},{"checksum":"__Checksum__","creationTime":"2000-01-01T00:00:00Z","lastUpdatedTime":"2000-01-01T00:00:00Z","partNumber":1,"partSize":1,"partSource":"SOURCE1"}]}

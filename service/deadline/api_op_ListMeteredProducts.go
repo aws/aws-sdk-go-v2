@@ -28,7 +28,6 @@ func (c *Client) ListMeteredProducts(ctx context.Context, params *ListMeteredPro
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListMeteredProductsInput struct {
 
 	// The license endpoint ID to include on the list of metered products.
@@ -64,7 +63,6 @@ func (v *ListMeteredProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListMeteredProductsOutput struct {
 
 	// The metered products to list.

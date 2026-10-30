@@ -316,6 +316,16 @@ type CreateKeyInput struct {
 	//
 	//   - ML_DSA_87
 	//
+	//   - Asymmetric ML-KEM key pairs (establishing shared secrets)
+	//
+	//   - ML_KEM_512
+	//
+	//   - ML_KEM_768
+	//
+	//   - ML_KEM_1024
+	//
+	// The ML-KEM key specs are not available in China Regions.
+	//
 	//   - SM2 key pairs (encryption and decryption -or- signing and verification -or-
 	//   deriving shared secrets)
 	//
@@ -351,6 +361,9 @@ type CreateKeyInput struct {
 	//   - For asymmetric KMS keys with ECC_SECG_P256K1 key pairs, specify SIGN_VERIFY .
 	//
 	//   - For asymmetric KMS keys with ML-DSA key pairs, specify SIGN_VERIFY .
+	//
+	//   - For asymmetric KMS keys with ML-KEM key pairs, specify
+	//   ENCAPSULATE_DECAPSULATE .
 	//
 	//   - For asymmetric KMS keys with SM2 key pairs (China Regions only), specify
 	//   ENCRYPT_DECRYPT , SIGN_VERIFY , or KEY_AGREEMENT .

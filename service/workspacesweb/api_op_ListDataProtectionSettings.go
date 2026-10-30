@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListDataProtectionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataProtectionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataProtectionSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataProtectionSettingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataProtectionSettingsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataProtectionSettingsOutput struct {
 
 	// The data protection settings.
@@ -52,13 +69,35 @@ type ListDataProtectionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataProtectionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataProtectionSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataProtectionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataProtectionSettingsList(s, schemas.ListDataProtectionSettingsResponse_dataProtectionSettings, v.DataProtectionSettings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataProtectionSettingsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDataProtectionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataProtectionSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataProtectionSettingsResponse_dataProtectionSettings:
+			return deserializeDataProtectionSettingsList(d, schemas.ListDataProtectionSettingsResponse_dataProtectionSettings, &v.DataProtectionSettings)
+		case schemas.ListDataProtectionSettingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataProtectionSettingsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataProtectionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataProtectionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataProtectionSettings, schemas.ListDataProtectionSettingsRequest, schemas.ListDataProtectionSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataProtectionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataProtectionSettings, schemas.ListDataProtectionSettingsRequest, schemas.ListDataProtectionSettingsResponse), output: &ListDataProtectionSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

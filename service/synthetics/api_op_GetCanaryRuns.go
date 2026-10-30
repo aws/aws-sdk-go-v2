@@ -5,7 +5,9 @@ package synthetics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/synthetics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -62,6 +64,30 @@ type GetCanaryRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCanaryRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCanaryRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCanaryRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRunId != nil {
+		s.WriteString(schemas.GetCanaryRunsRequest_DryRunId, *v.DryRunId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetCanaryRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCanaryRunsRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCanaryRunsRequest_NextToken, *v.NextToken)
+	}
+	if v.RunType != "" {
+		s.WriteString(schemas.GetCanaryRunsRequest_RunType, string(v.RunType))
+	}
+}
+
 type GetCanaryRunsOutput struct {
 
 	// An array of structures. Each structure contains the details of one of the
@@ -79,13 +105,35 @@ type GetCanaryRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCanaryRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCanaryRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCanaryRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCanaryRuns(s, schemas.GetCanaryRunsResponse_CanaryRuns, v.CanaryRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetCanaryRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetCanaryRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCanaryRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCanaryRunsResponse_CanaryRuns:
+			return deserializeCanaryRuns(d, schemas.GetCanaryRunsResponse_CanaryRuns, &v.CanaryRuns)
+		case schemas.GetCanaryRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetCanaryRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCanaryRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCanaryRuns, schemas.GetCanaryRunsRequest, schemas.GetCanaryRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCanaryRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCanaryRuns, schemas.GetCanaryRunsRequest, schemas.GetCanaryRunsResponse), output: &GetCanaryRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

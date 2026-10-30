@@ -40,6 +40,9 @@ type UpdateConfigurationInput struct {
 	// not been individually configured.
 	AccountId *string
 
+	// The Amazon Machine Image (AMI) scan configuration to apply to the account.
+	AmiConfiguration *types.AmiConfiguration
+
 	// Specifies how the Amazon EC2 automated scan will be updated for your
 	// environment.
 	Ec2Configuration *types.Ec2Configuration
@@ -68,6 +71,11 @@ func (v *UpdateConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.UpdateConfigurationRequest_accountId, *v.AccountId)
 	}
+	if v.AmiConfiguration != nil {
+		s.WriteStruct(schemas.UpdateConfigurationRequest_amiConfiguration)
+		v.AmiConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Ec2Configuration != nil {
 		s.WriteStruct(schemas.UpdateConfigurationRequest_ec2Configuration)
 		v.Ec2Configuration.SerializeMembers(s)
@@ -90,6 +98,9 @@ func (v *UpdateConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error
 		case schemas.UpdateConfigurationRequest_accountId:
 			v.AccountId = new(string)
 			return d.ReadString(schemas.UpdateConfigurationRequest_accountId, v.AccountId)
+		case schemas.UpdateConfigurationRequest_amiConfiguration:
+			v.AmiConfiguration = &types.AmiConfiguration{}
+			return v.AmiConfiguration.Deserialize(d)
 		case schemas.UpdateConfigurationRequest_ec2Configuration:
 			v.Ec2Configuration = &types.Ec2Configuration{}
 			return v.Ec2Configuration.Deserialize(d)

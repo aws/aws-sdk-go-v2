@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"codeValidation":true,"firstName":"__FirstName__","inviteCode":"__InviteCode__","inviteExpiration":1,"lastName":"__LastName__","middleName":"__MiddleName__","modified":1,"networkId":"__NetworkId__","securityGroupIds":["__Member__","__Member__"],"status":1,"suspended":true,"userId":"__UserId__"}

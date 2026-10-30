@@ -43,6 +43,17 @@ func serializeDryRunModifierList(s smithy.ShapeSerializer, schema *smithy.Schema
 	s.CloseList()
 }
 
+func serializeEncapsulationAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EncapsulationAlgorithmSpec) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeEncryptionAlgorithmSpecList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EncryptionAlgorithmSpec) {
 	if v == nil {
 		return
@@ -257,6 +268,27 @@ func deserializeDryRunModifierList(d smithy.ShapeDeserializer, s *smithy.Schema,
 		}
 
 		*v = append(*v, DryRunModifierType(vv))
+		return nil
+	})
+}
+
+func deserializeEncapsulationAlgorithmSpecList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]EncapsulationAlgorithmSpec) error {
+	*v = make([]EncapsulationAlgorithmSpec, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero EncapsulationAlgorithmSpec
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, EncapsulationAlgorithmSpec(vv))
 		return nil
 	})
 }

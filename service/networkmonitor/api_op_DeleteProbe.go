@@ -4,6 +4,8 @@ package networkmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,21 @@ type DeleteProbeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProbeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProbeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorName != nil {
+		s.WriteString(schemas.DeleteProbeInput_monitorName, *v.MonitorName)
+	}
+	if v.ProbeId != nil {
+		s.WriteString(schemas.DeleteProbeInput_probeId, *v.ProbeId)
+	}
+}
+
 type DeleteProbeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,13 +68,26 @@ type DeleteProbeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProbeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProbeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProbeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteProbeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProbeOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProbeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteProbe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProbe, schemas.DeleteProbeInput, schemas.DeleteProbeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteProbe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProbe, schemas.DeleteProbeInput, schemas.DeleteProbeOutput), output: &DeleteProbeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

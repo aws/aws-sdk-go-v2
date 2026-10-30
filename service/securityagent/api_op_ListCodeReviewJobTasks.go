@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,33 @@ type ListCodeReviewJobTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeReviewJobTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeReviewJobTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeReviewJobTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListCodeReviewJobTasksInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CategoryName != nil {
+		s.WriteString(schemas.ListCodeReviewJobTasksInput_categoryName, *v.CategoryName)
+	}
+	if v.CodeReviewJobId != nil {
+		s.WriteString(schemas.ListCodeReviewJobTasksInput_codeReviewJobId, *v.CodeReviewJobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodeReviewJobTasksInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeReviewJobTasksInput_nextToken, *v.NextToken)
+	}
+	if v.StepName != "" {
+		s.WriteString(schemas.ListCodeReviewJobTasksInput_stepName, string(v.StepName))
+	}
+}
+
 // Output for the ListCodeReviewJobTasks operation.
 type ListCodeReviewJobTasksOutput struct {
 
@@ -71,13 +100,35 @@ type ListCodeReviewJobTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeReviewJobTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeReviewJobTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeReviewJobTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeReviewJobTaskSummaryList(s, schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries, v.CodeReviewJobTaskSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeReviewJobTasksOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCodeReviewJobTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeReviewJobTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries:
+			return deserializeCodeReviewJobTaskSummaryList(d, schemas.ListCodeReviewJobTasksOutput_codeReviewJobTaskSummaries, &v.CodeReviewJobTaskSummaries)
+		case schemas.ListCodeReviewJobTasksOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodeReviewJobTasksOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeReviewJobTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeReviewJobTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeReviewJobTasks, schemas.ListCodeReviewJobTasksInput, schemas.ListCodeReviewJobTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeReviewJobTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeReviewJobTasks, schemas.ListCodeReviewJobTasksInput, schemas.ListCodeReviewJobTasksOutput), output: &ListCodeReviewJobTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

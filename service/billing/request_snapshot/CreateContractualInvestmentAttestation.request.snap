@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.CreateContractualInvestmentAttestation
+
+{"additionalRecipients":[{"email":"__Email__"},{"email":"__Email__"}],"approverDetails":{"email":"__Email__","name":"__Name__","title":"__Title__"},"attestationDetails":{"attestationValue":{"attestationAmount":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}},"investmentDistributions":[{"accountId":"__AccountId__","investmentAmount":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}},{"accountId":"__AccountId__","investmentAmount":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}}]},"clientToken":"__ClientToken__","contractArn":"__ContractArn__","contractDocumentId":"__ContractDocumentId__","investmentDisbursedAt":946684800,"investmentId":"__InvestmentId__","investmentSummaryId":"__InvestmentSummaryId__"}

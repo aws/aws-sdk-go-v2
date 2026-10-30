@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListRunCachesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunCachesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunCachesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunCachesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRunCachesRequest_maxResults, *v.MaxResults)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListRunCachesRequest_startingToken, *v.StartingToken)
+	}
+}
+
 type ListRunCachesOutput struct {
 
 	// Details about each run cache in the response.
@@ -53,13 +70,35 @@ type ListRunCachesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunCachesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunCachesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRunCacheList(s, schemas.ListRunCachesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRunCachesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRunCachesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRunCachesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRunCachesResponse_items:
+			return deserializeRunCacheList(d, schemas.ListRunCachesResponse_items, &v.Items)
+		case schemas.ListRunCachesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRunCachesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRunCachesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRunCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunCaches, schemas.ListRunCachesRequest, schemas.ListRunCachesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRunCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunCaches, schemas.ListRunCachesRequest, schemas.ListRunCachesResponse), output: &ListRunCachesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

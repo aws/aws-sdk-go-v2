@@ -4,6 +4,8 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type GetWhatsAppBusinessPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppBusinessPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppBusinessPublicKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppBusinessPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginationPhoneNumberId != nil {
+		s.WriteString(schemas.GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
+	}
+}
+
 type GetWhatsAppBusinessPublicKeyOutput struct {
 
 	// The stored PEM-encoded 2048-bit RSA public key.
@@ -48,13 +62,38 @@ type GetWhatsAppBusinessPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppBusinessPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppBusinessPublicKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppBusinessPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessPublicKey != nil {
+		s.WriteString(schemas.GetWhatsAppBusinessPublicKeyOutput_businessPublicKey, *v.BusinessPublicKey)
+	}
+	if v.BusinessPublicKeySignatureStatus != nil {
+		s.WriteString(schemas.GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus, *v.BusinessPublicKeySignatureStatus)
+	}
+}
+func (v *GetWhatsAppBusinessPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWhatsAppBusinessPublicKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWhatsAppBusinessPublicKeyOutput_businessPublicKey:
+			v.BusinessPublicKey = new(string)
+			return d.ReadString(schemas.GetWhatsAppBusinessPublicKeyOutput_businessPublicKey, v.BusinessPublicKey)
+		case schemas.GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus:
+			v.BusinessPublicKeySignatureStatus = new(string)
+			return d.ReadString(schemas.GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus, v.BusinessPublicKeySignatureStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWhatsAppBusinessPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWhatsAppBusinessPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppBusinessPublicKey, schemas.GetWhatsAppBusinessPublicKeyInput, schemas.GetWhatsAppBusinessPublicKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWhatsAppBusinessPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppBusinessPublicKey, schemas.GetWhatsAppBusinessPublicKeyInput, schemas.GetWhatsAppBusinessPublicKeyOutput), output: &GetWhatsAppBusinessPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

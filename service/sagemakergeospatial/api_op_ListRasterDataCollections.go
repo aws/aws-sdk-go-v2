@@ -5,7 +5,9 @@ package sagemakergeospatial
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,34 @@ type ListRasterDataCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRasterDataCollectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRasterDataCollectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRasterDataCollectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRasterDataCollectionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRasterDataCollectionsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListRasterDataCollectionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRasterDataCollectionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRasterDataCollectionsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListRasterDataCollectionsInput_MaxResults, v.MaxResults)
+		case schemas.ListRasterDataCollectionsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRasterDataCollectionsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListRasterDataCollectionsOutput struct {
 
 	// Contains summary information about the raster data collection.
@@ -54,13 +84,35 @@ type ListRasterDataCollectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRasterDataCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRasterDataCollectionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRasterDataCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRasterDataCollectionsOutput_NextToken, *v.NextToken)
+	}
+	serializeDataCollectionsList(s, schemas.ListRasterDataCollectionsOutput_RasterDataCollectionSummaries, v.RasterDataCollectionSummaries)
+}
+func (v *ListRasterDataCollectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRasterDataCollectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRasterDataCollectionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRasterDataCollectionsOutput_NextToken, v.NextToken)
+		case schemas.ListRasterDataCollectionsOutput_RasterDataCollectionSummaries:
+			return deserializeDataCollectionsList(d, schemas.ListRasterDataCollectionsOutput_RasterDataCollectionSummaries, &v.RasterDataCollectionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRasterDataCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRasterDataCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRasterDataCollections, schemas.ListRasterDataCollectionsInput, schemas.ListRasterDataCollectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRasterDataCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRasterDataCollections, schemas.ListRasterDataCollectionsInput, schemas.ListRasterDataCollectionsOutput), output: &ListRasterDataCollectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

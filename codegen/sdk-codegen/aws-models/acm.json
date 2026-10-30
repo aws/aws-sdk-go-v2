@@ -1567,6 +1567,15 @@
                             ]
                         },
                         {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
                             "fn": "stringEquals",
                             "argv": [
                                 {
@@ -1579,15 +1588,6 @@
                                     ]
                                 },
                                 "aws"
-                            ]
-                        },
-                        {
-                            "fn": "booleanEquals",
-                            "argv": [
-                                {
-                                    "ref": "UseFIPS"
-                                },
-                                true
                             ]
                         },
                         {
@@ -1641,9 +1641,9 @@
                             "type": "endpoint"
                         },
                         {
-                            "documentation": "ACME operations are only available in commercial AWS partitions",
+                            "documentation": "ACME operations are only available in the aws and aws-us-gov partitions",
                             "conditions": [],
-                            "error": "ACME operations are only available in commercial AWS partitions",
+                            "error": "ACME operations are only available in the aws and aws-us-gov partitions",
                             "type": "error"
                         },
                         {
@@ -1701,8 +1701,8 @@
                         }
                     ],
                     "root": 2,
-                    "nodeCount": 10,
-                    "nodes": "/////wAAAAH/////AAAAAAX14QEAAAADAAAAAQAAAAQF9eEKAAAAAgAAAAkAAAAFAAAABAAAAAcAAAAGAAAABQX14QgF9eEJAAAABQX14QUAAAAIAAAABgX14QYF9eEHAAAAAwAAAAoF9eEEAAAABAX14QIF9eED"
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAX14QEAAAADAAAAAQAAAAQF9eEKAAAAAgAAAAkAAAAFAAAAAwAAAAcAAAAGAAAABQX14QgF9eEJAAAABQX14QUAAAAIAAAABgX14QYF9eEHAAAAAwAAAAwAAAAKAAAABAX14QMAAAALAAAABgX14QMF9eEEAAAABAX14QIAAAANAAAABgX14QIF9eEE"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1804,7 +1804,7 @@
                                             "type": "endpoint"
                                         },
                                         {
-                                            "documentation": "ACME operations are only available in commercial AWS partitions",
+                                            "documentation": "ACME in the aws partition",
                                             "conditions": [
                                                 {
                                                     "fn": "stringEquals",
@@ -1851,9 +1851,56 @@
                                             "type": "tree"
                                         },
                                         {
-                                            "documentation": "ACME operations are only available in commercial AWS partitions",
+                                            "documentation": "ACME in the aws-us-gov partition",
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws-us-gov"
+                                                    ]
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "documentation": "FIPS endpoints are not available for ACME operations",
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "FIPS endpoints are not available for ACME operations",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "documentation": "ACME standard",
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://acm-acme.{Region}.{PartitionResult#dualStackDnsSuffix}"
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        },
+                                        {
+                                            "documentation": "ACME operations are only available in the aws and aws-us-gov partitions",
                                             "conditions": [],
-                                            "error": "ACME operations are only available in commercial AWS partitions",
+                                            "error": "ACME operations are only available in the aws and aws-us-gov partitions",
                                             "type": "error"
                                         }
                                     ]
@@ -2613,7 +2660,7 @@
                             }
                         },
                         {
-                            "documentation": "ACM-ACME in us-gov-west-1 returns partition error",
+                            "documentation": "ACM-ACME standard endpoint for us-gov-west-1",
                             "params": {
                                 "Region": "us-gov-west-1",
                                 "UseFIPS": false,
@@ -2621,7 +2668,23 @@
                                 "ServiceType": "ACM-ACME"
                             },
                             "expect": {
-                                "error": "ACME operations are only available in commercial AWS partitions"
+                                "endpoint": {
+                                    "url": "https://acm-acme.us-gov-west-1.api.aws"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "ACM-ACME standard endpoint for us-gov-east-1",
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "ServiceType": "ACM-ACME"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://acm-acme.us-gov-east-1.api.aws"
+                                }
                             }
                         },
                         {
@@ -2633,7 +2696,45 @@
                                 "ServiceType": "ACM-ACME"
                             },
                             "expect": {
-                                "error": "ACME operations are only available in commercial AWS partitions"
+                                "error": "ACME operations are only available in the aws and aws-us-gov partitions"
+                            }
+                        },
+                        {
+                            "documentation": "ACM-ACME in cn-northwest-1 returns partition error",
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "ServiceType": "ACM-ACME"
+                            },
+                            "expect": {
+                                "error": "ACME operations are only available in the aws and aws-us-gov partitions"
+                            }
+                        },
+                        {
+                            "documentation": "ACM-ACME with DualStack enabled for us-gov-west-1",
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "ServiceType": "ACM-ACME"
+                            },
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://acm-acme.us-gov-west-1.api.aws"
+                                }
+                            }
+                        },
+                        {
+                            "documentation": "ACM-ACME FIPS in us-gov-west-1 returns error",
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "ServiceType": "ACM-ACME"
+                            },
+                            "expect": {
+                                "error": "FIPS endpoints are not available for ACME operations"
                             }
                         }
                     ]
@@ -6367,7 +6468,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5120
+                    "max": 8192
                 },
                 "smithy.api#sensitive": {}
             }

@@ -4,7 +4,9 @@ package observabilityadmin
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ func (c *Client) GetTelemetryEvaluationStatus(ctx context.Context, params *GetTe
 
 type GetTelemetryEvaluationStatusInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetTelemetryEvaluationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryEvaluationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetTelemetryEvaluationStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type GetTelemetryEvaluationStatusOutput struct {
@@ -58,13 +76,51 @@ type GetTelemetryEvaluationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTelemetryEvaluationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTelemetryEvaluationStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTelemetryEvaluationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetTelemetryEvaluationStatusOutput_FailureReason, *v.FailureReason)
+	}
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.GetTelemetryEvaluationStatusOutput_HomeRegion, *v.HomeRegion)
+	}
+	serializeRegionStatuses(s, schemas.GetTelemetryEvaluationStatusOutput_RegionStatuses, v.RegionStatuses)
+	if v.Status != "" {
+		s.WriteString(schemas.GetTelemetryEvaluationStatusOutput_Status, string(v.Status))
+	}
+}
+func (v *GetTelemetryEvaluationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTelemetryEvaluationStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTelemetryEvaluationStatusOutput_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetTelemetryEvaluationStatusOutput_FailureReason, v.FailureReason)
+		case schemas.GetTelemetryEvaluationStatusOutput_HomeRegion:
+			v.HomeRegion = new(string)
+			return d.ReadString(schemas.GetTelemetryEvaluationStatusOutput_HomeRegion, v.HomeRegion)
+		case schemas.GetTelemetryEvaluationStatusOutput_RegionStatuses:
+			return deserializeRegionStatuses(d, schemas.GetTelemetryEvaluationStatusOutput_RegionStatuses, &v.RegionStatuses)
+		case schemas.GetTelemetryEvaluationStatusOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTelemetryEvaluationStatusOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTelemetryEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTelemetryEvaluationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryEvaluationStatus, nil, schemas.GetTelemetryEvaluationStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTelemetryEvaluationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTelemetryEvaluationStatus, nil, schemas.GetTelemetryEvaluationStatusOutput), output: &GetTelemetryEvaluationStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

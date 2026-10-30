@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,21 @@ type UpdateIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegrationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.UpdateIntegrationInput_integrationId, *v.IntegrationId)
+	}
+	if v.WebhookAction != "" {
+		s.WriteString(schemas.UpdateIntegrationInput_webhookAction, string(v.WebhookAction))
+	}
+}
+
 // Output for the UpdateIntegration operation.
 type UpdateIntegrationOutput struct {
 
@@ -64,13 +81,44 @@ type UpdateIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegrationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.UpdateIntegrationOutput_integrationId, *v.IntegrationId)
+	}
+	if v.Secret != nil {
+		s.WriteString(schemas.UpdateIntegrationOutput_secret, *v.Secret)
+	}
+	if v.WebhookUrl != nil {
+		s.WriteString(schemas.UpdateIntegrationOutput_webhookUrl, *v.WebhookUrl)
+	}
+}
+func (v *UpdateIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntegrationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIntegrationOutput_integrationId:
+			v.IntegrationId = new(string)
+			return d.ReadString(schemas.UpdateIntegrationOutput_integrationId, v.IntegrationId)
+		case schemas.UpdateIntegrationOutput_secret:
+			v.Secret = new(string)
+			return d.ReadString(schemas.UpdateIntegrationOutput_secret, v.Secret)
+		case schemas.UpdateIntegrationOutput_webhookUrl:
+			v.WebhookUrl = new(string)
+			return d.ReadString(schemas.UpdateIntegrationOutput_webhookUrl, v.WebhookUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegration, schemas.UpdateIntegrationInput, schemas.UpdateIntegrationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegration, schemas.UpdateIntegrationInput, schemas.UpdateIntegrationOutput), output: &UpdateIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

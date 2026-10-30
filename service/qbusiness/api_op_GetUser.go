@@ -4,7 +4,9 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,21 @@ type GetUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetUserRequest_applicationId, *v.ApplicationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetUserRequest_userId, *v.UserId)
+	}
+}
+
 type GetUserOutput struct {
 
 	// A list of user aliases attached to a user.
@@ -51,13 +68,29 @@ type GetUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserAliases(s, schemas.GetUserResponse_userAliases, v.UserAliases)
+}
+func (v *GetUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserResponse_userAliases:
+			return deserializeUserAliases(d, schemas.GetUserResponse_userAliases, &v.UserAliases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUser, schemas.GetUserRequest, schemas.GetUserResponse), output: &GetUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

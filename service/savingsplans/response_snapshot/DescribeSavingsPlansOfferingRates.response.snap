@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","searchResults":[{"operation":"__Operation__","productType":"EC2","properties":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"rate":"__Rate__","savingsPlanOffering":{"currency":"CNY","durationSeconds":1,"offeringId":"__OfferingId__","paymentOption":"All Upfront","planDescription":"__PlanDescription__","planType":"Compute"},"serviceCode":"AmazonEC2","unit":"Hrs","usageType":"__UsageType__"},{"operation":"__Operation__","productType":"EC2","properties":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"rate":"__Rate__","savingsPlanOffering":{"currency":"CNY","durationSeconds":1,"offeringId":"__OfferingId__","paymentOption":"All Upfront","planDescription":"__PlanDescription__","planType":"Compute"},"serviceCode":"AmazonEC2","unit":"Hrs","usageType":"__UsageType__"}]}

@@ -5,7 +5,9 @@ package snowdevicemanagement
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,40 @@ type ListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ListDevicesInput_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDevicesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesInput_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ListDevicesInput_jobId, v.JobId)
+		case schemas.ListDevicesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListDevicesInput_maxResults, v.MaxResults)
+		case schemas.ListDevicesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDevicesOutput struct {
 
 	// A list of device structures that contain information about the device.
@@ -55,13 +91,35 @@ type ListDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceSummaryList(s, schemas.ListDevicesOutput_devices, v.Devices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesOutput_devices:
+			return deserializeDeviceSummaryList(d, schemas.ListDevicesOutput_devices, &v.Devices)
+		case schemas.ListDevicesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesInput, schemas.ListDevicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesInput, schemas.ListDevicesOutput), output: &ListDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

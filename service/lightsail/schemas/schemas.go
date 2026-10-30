@@ -2590,7 +2590,7 @@ var _DistributionList_member *smithy.Schema
 var DistributionMetricName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "DistributionMetricName",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 8)
 var DistributionMetricName_Requests *smithy.Schema
 
 var DistributionMetricName_BytesDownloaded *smithy.Schema
@@ -2602,6 +2602,10 @@ var DistributionMetricName_TotalErrorRate *smithy.Schema
 var DistributionMetricName_Http4xxErrorRate *smithy.Schema
 
 var DistributionMetricName_Http5xxErrorRate *smithy.Schema
+
+var DistributionMetricName_WafAllowedRequests *smithy.Schema
+
+var DistributionMetricName_WafBlockedRequests *smithy.Schema
 
 var DnsRecordCreationState = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -2963,7 +2967,7 @@ var InputOrigin_ipAddressType *smithy.Schema
 var Instance = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 22)
+}, smithy.ShapeTypeStructure, 24)
 var Instance_name *smithy.Schema
 
 var Instance_arn *smithy.Schema
@@ -3008,6 +3012,10 @@ var Instance_sshKeyName *smithy.Schema
 
 var Instance_metadataOptions *smithy.Schema
 
+var Instance_instanceStatus *smithy.Schema
+
+var Instance_systemStatus *smithy.Schema
+
 var InstanceAccessDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "InstanceAccessDetails",
@@ -3041,6 +3049,12 @@ var InstanceAccessProtocol = smithy.NewSchema(smithy.ShapeID{
 var InstanceAccessProtocol_ssh *smithy.Schema
 
 var InstanceAccessProtocol_rdp *smithy.Schema
+
+var InstanceAttributeUpdates = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceAttributeUpdates",
+}, smithy.ShapeTypeStructure, 1)
+var InstanceAttributeUpdates_bundleId *smithy.Schema
 
 var InstanceEntry = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -3113,6 +3127,62 @@ var InstanceHealthState_Unused *smithy.Schema
 var InstanceHealthState_Draining *smithy.Schema
 
 var InstanceHealthState_Unavailable *smithy.Schema
+
+var InstanceHealthStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatus",
+}, smithy.ShapeTypeStructure, 2)
+var InstanceHealthStatus_status *smithy.Schema
+
+var InstanceHealthStatus_details *smithy.Schema
+
+var InstanceHealthStatusDetail = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetail",
+}, smithy.ShapeTypeStructure, 3)
+var InstanceHealthStatusDetail_name *smithy.Schema
+
+var InstanceHealthStatusDetail_status *smithy.Schema
+
+var InstanceHealthStatusDetail_impairedSince *smithy.Schema
+
+var _InstanceHealthStatusDetailList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetailList",
+}, smithy.ShapeTypeList, 1)
+var _InstanceHealthStatusDetailList_member *smithy.Schema
+
+var InstanceHealthStatusDetailName = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetailName",
+}, smithy.ShapeTypeEnum, 1)
+var InstanceHealthStatusDetailName_REACHABILITY *smithy.Schema
+
+var InstanceHealthStatusDetailValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusDetailValue",
+}, smithy.ShapeTypeEnum, 4)
+var InstanceHealthStatusDetailValue_PASSED *smithy.Schema
+
+var InstanceHealthStatusDetailValue_FAILED *smithy.Schema
+
+var InstanceHealthStatusDetailValue_INSUFFICIENT_DATA *smithy.Schema
+
+var InstanceHealthStatusDetailValue_INITIALIZING *smithy.Schema
+
+var InstanceHealthStatusValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "InstanceHealthStatusValue",
+}, smithy.ShapeTypeEnum, 5)
+var InstanceHealthStatusValue_OK *smithy.Schema
+
+var InstanceHealthStatusValue_IMPAIRED *smithy.Schema
+
+var InstanceHealthStatusValue_INITIALIZING *smithy.Schema
+
+var InstanceHealthStatusValue_INSUFFICIENT_DATA *smithy.Schema
+
+var InstanceHealthStatusValue_NOT_APPLICABLE *smithy.Schema
 
 var InstanceHealthSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -3433,7 +3503,7 @@ var _KeyPairList_member *smithy.Schema
 var LightsailDistribution = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "LightsailDistribution",
-}, smithy.ShapeTypeStructure, 23)
+}, smithy.ShapeTypeStructure, 24)
 var LightsailDistribution_name *smithy.Schema
 
 var LightsailDistribution_arn *smithy.Schema
@@ -3479,6 +3549,8 @@ var LightsailDistribution_viewerMinimumTlsProtocolVersion *smithy.Schema
 var LightsailDistribution_defaultRootObject *smithy.Schema
 
 var LightsailDistribution_customErrorResponses *smithy.Schema
+
+var LightsailDistribution_waf *smithy.Schema
 
 var LoadBalancer = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -5391,6 +5463,94 @@ var ViewerMinimumTlsProtocolVersionEnum_TLSv12_2019 *smithy.Schema
 
 var ViewerMinimumTlsProtocolVersionEnum_TLSv12_2021 *smithy.Schema
 
+var WafAcfpConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafAcfpConfig",
+}, smithy.ShapeTypeStructure, 4)
+var WafAcfpConfig_payloadType *smithy.Schema
+
+var WafAcfpConfig_creationPath *smithy.Schema
+
+var WafAcfpConfig_registrationPagePath *smithy.Schema
+
+var WafAcfpConfig_responseInspection *smithy.Schema
+
+var WafAtpConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafAtpConfig",
+}, smithy.ShapeTypeStructure, 5)
+var WafAtpConfig_loginPath *smithy.Schema
+
+var WafAtpConfig_payloadType *smithy.Schema
+
+var WafAtpConfig_usernameField *smithy.Schema
+
+var WafAtpConfig_passwordField *smithy.Schema
+
+var WafAtpConfig_responseInspection *smithy.Schema
+
+var WafBotControlConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafBotControlConfig",
+}, smithy.ShapeTypeStructure, 1)
+var WafBotControlConfig_inspectionLevel *smithy.Schema
+
+var WafConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafConfig",
+}, smithy.ShapeTypeStructure, 2)
+var WafConfig_isWafEnabled *smithy.Schema
+
+var WafConfig_wafRules *smithy.Schema
+
+var WafInspectionLevelEnum = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafInspectionLevelEnum",
+}, smithy.ShapeTypeEnum, 2)
+var WafInspectionLevelEnum_COMMON *smithy.Schema
+
+var WafInspectionLevelEnum_TARGETED *smithy.Schema
+
+var WafPayloadTypeEnum = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafPayloadTypeEnum",
+}, smithy.ShapeTypeEnum, 2)
+var WafPayloadTypeEnum_JSON *smithy.Schema
+
+var WafPayloadTypeEnum_FORM_ENCODED *smithy.Schema
+
+var WafResponseInspection = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafResponseInspection",
+}, smithy.ShapeTypeStructure, 2)
+var WafResponseInspection_successCodes *smithy.Schema
+
+var WafResponseInspection_failureCodes *smithy.Schema
+
+var WafRule = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafRule",
+}, smithy.ShapeTypeStructure, 4)
+var WafRule_name *smithy.Schema
+
+var WafRule_atpConfig *smithy.Schema
+
+var WafRule_acfpConfig *smithy.Schema
+
+var WafRule_botControlConfig *smithy.Schema
+
+var _WafRuleList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafRuleList",
+}, smithy.ShapeTypeList, 1)
+var _WafRuleList_member *smithy.Schema
+
+var _WafStatusCodeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.lightsail",
+	Name:      "WafStatusCodeList",
+}, smithy.ShapeTypeList, 1)
+var _WafStatusCodeList_member *smithy.Schema
+
 var AllocateStaticIpRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "AllocateStaticIpRequest",
@@ -5715,7 +5875,7 @@ var CreateDiskSnapshotResult_operations *smithy.Schema
 var CreateDistributionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "CreateDistributionRequest",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 15)
 var CreateDistributionRequest_distributionName *smithy.Schema
 
 var CreateDistributionRequest_origin *smithy.Schema
@@ -5741,6 +5901,10 @@ var CreateDistributionRequest_enablePrivateOriginAccess *smithy.Schema
 var CreateDistributionRequest_defaultRootObject *smithy.Schema
 
 var CreateDistributionRequest_customErrorResponses *smithy.Schema
+
+var CreateDistributionRequest_enableWaf *smithy.Schema
+
+var CreateDistributionRequest_wafRules *smithy.Schema
 
 var CreateDistributionResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -6903,8 +7067,10 @@ var GetInstanceAccessDetailsResult_accessDetails *smithy.Schema
 var GetInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "GetInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetInstanceRequest_instanceName *smithy.Schema
+
+var GetInstanceRequest_includeHealthStatus *smithy.Schema
 
 var GetInstanceMetricDataRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -6953,8 +7119,10 @@ var GetInstancePortStatesResult_portStates *smithy.Schema
 var GetInstancesRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "GetInstancesRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var GetInstancesRequest_pageToken *smithy.Schema
+
+var GetInstancesRequest_includeHealthStatus *smithy.Schema
 
 var GetInstanceSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7662,8 +7830,10 @@ var StartGUISessionResult_operations *smithy.Schema
 var StartInstanceRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "StartInstanceRequest",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
 var StartInstanceRequest_instanceName *smithy.Schema
+
+var StartInstanceRequest_attributeUpdates *smithy.Schema
 
 var StartInstanceResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -7857,7 +8027,7 @@ var UpdateDistributionBundleResult_operation *smithy.Schema
 var UpdateDistributionRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
 	Name:      "UpdateDistributionRequest",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateDistributionRequest_distributionName *smithy.Schema
 
 var UpdateDistributionRequest_origin *smithy.Schema
@@ -7881,6 +8051,10 @@ var UpdateDistributionRequest_enablePrivateOriginAccess *smithy.Schema
 var UpdateDistributionRequest_defaultRootObject *smithy.Schema
 
 var UpdateDistributionRequest_customErrorResponses *smithy.Schema
+
+var UpdateDistributionRequest_enableWaf *smithy.Schema
+
+var UpdateDistributionRequest_wafRules *smithy.Schema
 
 var UpdateDistributionResult = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.lightsail",
@@ -9289,6 +9463,54 @@ func init() {
 
 	IpAddressType_IPV6 = IpAddressType.AddMember("IPV6", smithyprelude.Unit)
 
+	WafPayloadTypeEnum_JSON = WafPayloadTypeEnum.AddMember("JSON", smithyprelude.Unit)
+
+	WafPayloadTypeEnum_FORM_ENCODED = WafPayloadTypeEnum.AddMember("FORM_ENCODED", smithyprelude.Unit)
+
+	_WafStatusCodeList_member = _WafStatusCodeList.AddMember("member", _integer)
+
+	WafResponseInspection_successCodes = WafResponseInspection.AddMember("successCodes", _WafStatusCodeList)
+
+	WafResponseInspection_failureCodes = WafResponseInspection.AddMember("failureCodes", _WafStatusCodeList)
+
+	WafAtpConfig_loginPath = WafAtpConfig.AddMember("loginPath", _string)
+
+	WafAtpConfig_payloadType = WafAtpConfig.AddMember("payloadType", WafPayloadTypeEnum)
+
+	WafAtpConfig_usernameField = WafAtpConfig.AddMember("usernameField", _string)
+
+	WafAtpConfig_passwordField = WafAtpConfig.AddMember("passwordField", _string)
+
+	WafAtpConfig_responseInspection = WafAtpConfig.AddMember("responseInspection", WafResponseInspection)
+
+	WafAcfpConfig_payloadType = WafAcfpConfig.AddMember("payloadType", WafPayloadTypeEnum)
+
+	WafAcfpConfig_creationPath = WafAcfpConfig.AddMember("creationPath", _string)
+
+	WafAcfpConfig_registrationPagePath = WafAcfpConfig.AddMember("registrationPagePath", _string)
+
+	WafAcfpConfig_responseInspection = WafAcfpConfig.AddMember("responseInspection", WafResponseInspection)
+
+	WafInspectionLevelEnum_COMMON = WafInspectionLevelEnum.AddMember("COMMON", smithyprelude.Unit)
+
+	WafInspectionLevelEnum_TARGETED = WafInspectionLevelEnum.AddMember("TARGETED", smithyprelude.Unit)
+
+	WafBotControlConfig_inspectionLevel = WafBotControlConfig.AddMember("inspectionLevel", WafInspectionLevelEnum)
+
+	WafRule_name = WafRule.AddMember("name", _string)
+
+	WafRule_atpConfig = WafRule.AddMember("atpConfig", WafAtpConfig)
+
+	WafRule_acfpConfig = WafRule.AddMember("acfpConfig", WafAcfpConfig)
+
+	WafRule_botControlConfig = WafRule.AddMember("botControlConfig", WafBotControlConfig)
+
+	_WafRuleList_member = _WafRuleList.AddMember("member", WafRule)
+
+	WafConfig_isWafEnabled = WafConfig.AddMember("isWafEnabled", _boolean)
+
+	WafConfig_wafRules = WafConfig.AddMember("wafRules", _WafRuleList)
+
 	LightsailDistribution_name = LightsailDistribution.AddMember("name", _ResourceName)
 
 	LightsailDistribution_arn = LightsailDistribution.AddMember("arn", _NonEmptyString)
@@ -9335,6 +9557,8 @@ func init() {
 
 	LightsailDistribution_customErrorResponses = LightsailDistribution.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
 
+	LightsailDistribution_waf = LightsailDistribution.AddMember("waf", WafConfig)
+
 	_DistributionList_member = _DistributionList.AddMember("member", LightsailDistribution)
 
 	DistributionMetricName_Requests = DistributionMetricName.AddMember("Requests", smithyprelude.Unit)
@@ -9348,6 +9572,10 @@ func init() {
 	DistributionMetricName_Http4xxErrorRate = DistributionMetricName.AddMember("Http4xxErrorRate", smithyprelude.Unit)
 
 	DistributionMetricName_Http5xxErrorRate = DistributionMetricName.AddMember("Http5xxErrorRate", smithyprelude.Unit)
+
+	DistributionMetricName_WafAllowedRequests = DistributionMetricName.AddMember("WafAllowedRequests", smithyprelude.Unit)
+
+	DistributionMetricName_WafBlockedRequests = DistributionMetricName.AddMember("WafBlockedRequests", smithyprelude.Unit)
 
 	_DomainEntryOptions_key = _DomainEntryOptions.AddMember("key", _DomainEntryOptionsKeys)
 
@@ -9567,6 +9795,38 @@ func init() {
 
 	InstanceMetadataOptions_httpProtocolIpv6 = InstanceMetadataOptions.AddMember("httpProtocolIpv6", HttpProtocolIpv6)
 
+	InstanceHealthStatusValue_OK = InstanceHealthStatusValue.AddMember("OK", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_IMPAIRED = InstanceHealthStatusValue.AddMember("IMPAIRED", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_INITIALIZING = InstanceHealthStatusValue.AddMember("INITIALIZING", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_INSUFFICIENT_DATA = InstanceHealthStatusValue.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
+
+	InstanceHealthStatusValue_NOT_APPLICABLE = InstanceHealthStatusValue.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailName_REACHABILITY = InstanceHealthStatusDetailName.AddMember("REACHABILITY", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_PASSED = InstanceHealthStatusDetailValue.AddMember("PASSED", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_FAILED = InstanceHealthStatusDetailValue.AddMember("FAILED", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_INSUFFICIENT_DATA = InstanceHealthStatusDetailValue.AddMember("INSUFFICIENT_DATA", smithyprelude.Unit)
+
+	InstanceHealthStatusDetailValue_INITIALIZING = InstanceHealthStatusDetailValue.AddMember("INITIALIZING", smithyprelude.Unit)
+
+	InstanceHealthStatusDetail_name = InstanceHealthStatusDetail.AddMember("name", InstanceHealthStatusDetailName)
+
+	InstanceHealthStatusDetail_status = InstanceHealthStatusDetail.AddMember("status", InstanceHealthStatusDetailValue)
+
+	InstanceHealthStatusDetail_impairedSince = InstanceHealthStatusDetail.AddMember("impairedSince", _IsoDate)
+
+	_InstanceHealthStatusDetailList_member = _InstanceHealthStatusDetailList.AddMember("member", InstanceHealthStatusDetail)
+
+	InstanceHealthStatus_status = InstanceHealthStatus.AddMember("status", InstanceHealthStatusValue)
+
+	InstanceHealthStatus_details = InstanceHealthStatus.AddMember("details", _InstanceHealthStatusDetailList)
+
 	Instance_name = Instance.AddMember("name", _ResourceName)
 
 	Instance_arn = Instance.AddMember("arn", _NonEmptyString)
@@ -9611,6 +9871,10 @@ func init() {
 
 	Instance_metadataOptions = Instance.AddMember("metadataOptions", InstanceMetadataOptions)
 
+	Instance_instanceStatus = Instance.AddMember("instanceStatus", InstanceHealthStatus)
+
+	Instance_systemStatus = Instance.AddMember("systemStatus", InstanceHealthStatus)
+
 	PasswordData_ciphertext = PasswordData.AddMember("ciphertext", _string)
 
 	PasswordData_keyPairName = PasswordData.AddMember("keyPairName", _ResourceName)
@@ -9640,6 +9904,8 @@ func init() {
 	InstanceAccessDetails_username = InstanceAccessDetails.AddMember("username", _string)
 
 	InstanceAccessDetails_hostKeys = InstanceAccessDetails.AddMember("hostKeys", _HostKeysList)
+
+	InstanceAttributeUpdates_bundleId = InstanceAttributeUpdates.AddMember("bundleId", _NonEmptyString)
 
 	PortInfoSourceType_Default = PortInfoSourceType.AddMember("Default", smithyprelude.Unit)
 
@@ -10919,6 +11185,10 @@ func init() {
 
 	CreateDistributionRequest_customErrorResponses = CreateDistributionRequest.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
 
+	CreateDistributionRequest_enableWaf = CreateDistributionRequest.AddMember("enableWaf", _boolean)
+
+	CreateDistributionRequest_wafRules = CreateDistributionRequest.AddMember("wafRules", _WafRuleList)
+
 	CreateDistributionResult_distribution = CreateDistributionResult.AddMember("distribution", LightsailDistribution)
 
 	CreateDistributionResult_operation = CreateDistributionResult.AddMember("operation", Operation)
@@ -11485,6 +11755,8 @@ func init() {
 
 	GetInstanceRequest_instanceName = GetInstanceRequest.AddMember("instanceName", _ResourceName)
 
+	GetInstanceRequest_includeHealthStatus = GetInstanceRequest.AddMember("includeHealthStatus", _boolean)
+
 	GetInstanceMetricDataRequest_instanceName = GetInstanceMetricDataRequest.AddMember("instanceName", _ResourceName)
 
 	GetInstanceMetricDataRequest_metricName = GetInstanceMetricDataRequest.AddMember("metricName", InstanceMetricName)
@@ -11510,6 +11782,8 @@ func init() {
 	GetInstancePortStatesResult_portStates = GetInstancePortStatesResult.AddMember("portStates", _InstancePortStateList)
 
 	GetInstancesRequest_pageToken = GetInstancesRequest.AddMember("pageToken", _string)
+
+	GetInstancesRequest_includeHealthStatus = GetInstancesRequest.AddMember("includeHealthStatus", _boolean)
 
 	GetInstanceSnapshotRequest_instanceSnapshotName = GetInstanceSnapshotRequest.AddMember("instanceSnapshotName", _ResourceName)
 
@@ -11841,6 +12115,8 @@ func init() {
 
 	StartInstanceRequest_instanceName = StartInstanceRequest.AddMember("instanceName", _ResourceName)
 
+	StartInstanceRequest_attributeUpdates = StartInstanceRequest.AddMember("attributeUpdates", InstanceAttributeUpdates)
+
 	StartInstanceResult_operations = StartInstanceResult.AddMember("operations", _OperationList)
 
 	StartRelationalDatabaseRequest_relationalDatabaseName = StartRelationalDatabaseRequest.AddMember("relationalDatabaseName", _ResourceName)
@@ -11952,6 +12228,10 @@ func init() {
 	UpdateDistributionRequest_defaultRootObject = UpdateDistributionRequest.AddMember("defaultRootObject", _string)
 
 	UpdateDistributionRequest_customErrorResponses = UpdateDistributionRequest.AddMember("customErrorResponses", _DistributionCustomErrorResponseList)
+
+	UpdateDistributionRequest_enableWaf = UpdateDistributionRequest.AddMember("enableWaf", _boolean)
+
+	UpdateDistributionRequest_wafRules = UpdateDistributionRequest.AddMember("wafRules", _WafRuleList)
 
 	UpdateDistributionResult_operation = UpdateDistributionResult.AddMember("operation", Operation)
 

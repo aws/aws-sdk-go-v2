@@ -316,7 +316,6 @@ type InquiryDetail struct {
 	StatusMessage InquiryStatusMessage
 
 	// Support mode for this inquiry. AI_ONLY provides AI-generated responses.
-	// FULL_SUPPORT includes human expert review.
 	SupportMode InquirySupportMode
 
 	// Timestamp indicating when the resource was last modified.

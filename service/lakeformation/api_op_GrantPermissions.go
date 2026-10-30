@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -75,6 +77,35 @@ type GrantPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrantPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GrantPermissionsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.Condition != nil {
+		s.WriteStruct(schemas.GrantPermissionsRequest_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePermissionList(s, schemas.GrantPermissionsRequest_Permissions, v.Permissions)
+	serializePermissionList(s, schemas.GrantPermissionsRequest_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	if v.Principal != nil {
+		s.WriteStruct(schemas.GrantPermissionsRequest_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.GrantPermissionsRequest_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GrantPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -82,13 +113,26 @@ type GrantPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GrantPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GrantPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrantPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGrantPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GrantPermissions, schemas.GrantPermissionsRequest, schemas.GrantPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGrantPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GrantPermissions, schemas.GrantPermissionsRequest, schemas.GrantPermissionsResponse), output: &GrantPermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

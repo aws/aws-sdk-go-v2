@@ -2549,6 +2549,13 @@ var UpdateNotificationContent = smithy.NewSchema(smithy.ShapeID{
 	URI:  "/notifications/{InstanceId}/{NotificationId}",
 	Code: 200})
 
+var UpdateOutboundEmailContactMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContactMessage",
+}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/instances/{InstanceId}/contacts/{ContactId}/outbound-email-message",
+	Code: 200})
+
 var UpdateParticipantAuthentication = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateParticipantAuthentication",
@@ -10974,6 +10981,12 @@ var NotificationType_WIDGET_VIEW *smithy.Schema
 
 var NotificationType_WIDGET_ACTION *smithy.Schema
 
+var NullableAdditionalRecipients = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "NullableAdditionalRecipients",
+}, smithy.ShapeTypeStructure, 1)
+var NullableAdditionalRecipients_CcEmailAddresses *smithy.Schema
+
 var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "NullableBoolean",
@@ -11110,6 +11123,12 @@ var OperationalStatus = smithy.NewSchema(smithy.ShapeID{
 var OperationalStatus_OPEN *smithy.Schema
 
 var OperationalStatus_CLOSED *smithy.Schema
+
+var _OptionalEmailAddressRecipientList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "OptionalEmailAddressRecipientList",
+}, smithy.ShapeTypeList, 1)
+var _OptionalEmailAddressRecipientList_member *smithy.Schema
 
 var _Origin = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13602,7 +13621,7 @@ var _ReferenceKey = smithy.NewSchema(smithy.ShapeID{
 var ReferenceStatus = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ReferenceStatus",
-}, smithy.ShapeTypeEnum, 6)
+}, smithy.ShapeTypeEnum, 7)
 var ReferenceStatus_AVAILABLE *smithy.Schema
 
 var ReferenceStatus_DELETED *smithy.Schema
@@ -13614,6 +13633,8 @@ var ReferenceStatus_REJECTED *smithy.Schema
 var ReferenceStatus_PROCESSING *smithy.Schema
 
 var ReferenceStatus_FAILED *smithy.Schema
+
+var ReferenceStatus_DRAFTING *smithy.Schema
 
 var _ReferenceStatusReason = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -15469,6 +15490,12 @@ var TaskTemplateConstraints_ReadOnlyFields *smithy.Schema
 
 var TaskTemplateConstraints_InvisibleFields *smithy.Schema
 
+var TaskTemplateContactHooks = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "TaskTemplateContactHooks",
+}, smithy.ShapeTypeStructure, 1)
+var TaskTemplateContactHooks_WrapUpFlowId *smithy.Schema
+
 var TaskTemplateDefaultFieldValue = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "TaskTemplateDefaultFieldValue",
@@ -16069,6 +16096,28 @@ var _UpdateHoursOfOperationDescription = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateHoursOfOperationDescription",
 }, smithy.ShapeTypeString, 0)
+
+var UpdateOutboundEmailContent = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContent",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateOutboundEmailContent_MessageSourceType *smithy.Schema
+
+var UpdateOutboundEmailContent_RawMessage *smithy.Schema
+
+var UpdateOutboundEmailMessageSourceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailMessageSourceType",
+}, smithy.ShapeTypeEnum, 1)
+var UpdateOutboundEmailMessageSourceType_RAW *smithy.Schema
+
+var UpdateOutboundRawMessage = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundRawMessage",
+}, smithy.ShapeTypeStructure, 2)
+var UpdateOutboundRawMessage_Body *smithy.Schema
+
+var UpdateOutboundRawMessage_ContentType *smithy.Schema
 
 var UpdateParticipantRoleConfigChannelInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -18677,7 +18726,7 @@ var CreateSecurityProfileResponse_SecurityProfileArn *smithy.Schema
 var CreateTaskTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "CreateTaskTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var CreateTaskTemplateRequest_InstanceId *smithy.Schema
 
 var CreateTaskTemplateRequest_Name *smithy.Schema
@@ -18687,6 +18736,8 @@ var CreateTaskTemplateRequest_Description *smithy.Schema
 var CreateTaskTemplateRequest_ContactFlowId *smithy.Schema
 
 var CreateTaskTemplateRequest_SelfAssignFlowId *smithy.Schema
+
+var CreateTaskTemplateRequest_ContactHooks *smithy.Schema
 
 var CreateTaskTemplateRequest_Constraints *smithy.Schema
 
@@ -20573,7 +20624,7 @@ var GetTaskTemplateRequest_SnapshotVersion *smithy.Schema
 var GetTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "GetTaskTemplateResponse",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var GetTaskTemplateResponse_InstanceId *smithy.Schema
 
 var GetTaskTemplateResponse_Id *smithy.Schema
@@ -20587,6 +20638,8 @@ var GetTaskTemplateResponse_Description *smithy.Schema
 var GetTaskTemplateResponse_ContactFlowId *smithy.Schema
 
 var GetTaskTemplateResponse_SelfAssignFlowId *smithy.Schema
+
+var GetTaskTemplateResponse_ContactHooks *smithy.Schema
 
 var GetTaskTemplateResponse_Constraints *smithy.Schema
 
@@ -23981,7 +24034,7 @@ var UpdateContactFlowNameResponse = smithy.NewSchema(smithy.ShapeID{
 var UpdateContactRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateContactRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateContactRequest_InstanceId *smithy.Schema
 
 var UpdateContactRequest_ContactId *smithy.Schema
@@ -24001,6 +24054,8 @@ var UpdateContactRequest_UserInfo *smithy.Schema
 var UpdateContactRequest_CustomerEndpoint *smithy.Schema
 
 var UpdateContactRequest_SystemEndpoint *smithy.Schema
+
+var UpdateContactRequest_AdditionalRecipients *smithy.Schema
 
 var UpdateContactResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -24343,6 +24398,22 @@ var UpdateNotificationContentResponse = smithy.NewSchema(smithy.ShapeID{
 	Name:      "UpdateNotificationContentResponse",
 }, smithy.ShapeTypeStructure, 0)
 
+var UpdateOutboundEmailContactMessageRequest = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContactMessageRequest",
+}, smithy.ShapeTypeStructure, 3)
+var UpdateOutboundEmailContactMessageRequest_InstanceId *smithy.Schema
+
+var UpdateOutboundEmailContactMessageRequest_ContactId *smithy.Schema
+
+var UpdateOutboundEmailContactMessageRequest_EmailMessage *smithy.Schema
+
+var UpdateOutboundEmailContactMessageResponse = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "UpdateOutboundEmailContactMessageResponse",
+}, smithy.ShapeTypeStructure, 1)
+var UpdateOutboundEmailContactMessageResponse_ContactId *smithy.Schema
+
 var UpdateParticipantAuthenticationRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateParticipantAuthenticationRequest",
@@ -24628,7 +24699,7 @@ var UpdateSecurityProfileRequest_GranularAccessControlConfiguration *smithy.Sche
 var UpdateTaskTemplateRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateTaskTemplateRequest",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var UpdateTaskTemplateRequest_TaskTemplateId *smithy.Schema
 
 var UpdateTaskTemplateRequest_InstanceId *smithy.Schema
@@ -24641,6 +24712,8 @@ var UpdateTaskTemplateRequest_ContactFlowId *smithy.Schema
 
 var UpdateTaskTemplateRequest_SelfAssignFlowId *smithy.Schema
 
+var UpdateTaskTemplateRequest_ContactHooks *smithy.Schema
+
 var UpdateTaskTemplateRequest_Constraints *smithy.Schema
 
 var UpdateTaskTemplateRequest_Defaults *smithy.Schema
@@ -24652,7 +24725,7 @@ var UpdateTaskTemplateRequest_Fields *smithy.Schema
 var UpdateTaskTemplateResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "UpdateTaskTemplateResponse",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var UpdateTaskTemplateResponse_InstanceId *smithy.Schema
 
 var UpdateTaskTemplateResponse_Id *smithy.Schema
@@ -24666,6 +24739,8 @@ var UpdateTaskTemplateResponse_Description *smithy.Schema
 var UpdateTaskTemplateResponse_ContactFlowId *smithy.Schema
 
 var UpdateTaskTemplateResponse_SelfAssignFlowId *smithy.Schema
+
+var UpdateTaskTemplateResponse_ContactHooks *smithy.Schema
 
 var UpdateTaskTemplateResponse_Constraints *smithy.Schema
 
@@ -25669,6 +25744,8 @@ func init() {
 	ReferenceStatus_PROCESSING = ReferenceStatus.AddMember("PROCESSING", smithyprelude.Unit)
 
 	ReferenceStatus_FAILED = ReferenceStatus.AddMember("FAILED", smithyprelude.Unit)
+
+	ReferenceStatus_DRAFTING = ReferenceStatus.AddMember("DRAFTING", smithyprelude.Unit)
 
 	AttachmentReference_Name = AttachmentReference.AddMember("Name", _ReferenceKey)
 
@@ -30294,6 +30371,10 @@ func init() {
 
 	NotificationType_WIDGET_ACTION = NotificationType.AddMember("WIDGET_ACTION", smithyprelude.Unit)
 
+	_OptionalEmailAddressRecipientList_member = _OptionalEmailAddressRecipientList.AddMember("member", EmailAddressInfo)
+
+	NullableAdditionalRecipients_CcEmailAddresses = NullableAdditionalRecipients.AddMember("CcEmailAddresses", _OptionalEmailAddressRecipientList)
+
 	NumberReference_Name = NumberReference.AddMember("Name", _ReferenceKey)
 
 	NumberReference_Value = NumberReference.AddMember("Value", _ReferenceValue)
@@ -31560,6 +31641,8 @@ func init() {
 
 	TaskTemplateConstraints_InvisibleFields = TaskTemplateConstraints.AddMember("InvisibleFields", _InvisibleTaskTemplateFields)
 
+	TaskTemplateContactHooks_WrapUpFlowId = TaskTemplateContactHooks.AddMember("WrapUpFlowId", _ContactFlowModuleId)
+
 	TaskTemplateDefaultFieldValue_Id = TaskTemplateDefaultFieldValue.AddMember("Id", TaskTemplateFieldIdentifier)
 
 	TaskTemplateDefaultFieldValue_DefaultValue = TaskTemplateDefaultFieldValue.AddMember("DefaultValue", _TaskTemplateFieldValue)
@@ -31777,6 +31860,16 @@ func init() {
 	TrafficType_GENERAL = TrafficType.AddMember("GENERAL", smithyprelude.Unit)
 
 	TrafficType_CAMPAIGN = TrafficType.AddMember("CAMPAIGN", smithyprelude.Unit)
+
+	UpdateOutboundEmailMessageSourceType_RAW = UpdateOutboundEmailMessageSourceType.AddMember("RAW", smithyprelude.Unit)
+
+	UpdateOutboundRawMessage_Body = UpdateOutboundRawMessage.AddMember("Body", _Body)
+
+	UpdateOutboundRawMessage_ContentType = UpdateOutboundRawMessage.AddMember("ContentType", _EmailMessageContentType)
+
+	UpdateOutboundEmailContent_MessageSourceType = UpdateOutboundEmailContent.AddMember("MessageSourceType", UpdateOutboundEmailMessageSourceType)
+
+	UpdateOutboundEmailContent_RawMessage = UpdateOutboundEmailContent.AddMember("RawMessage", UpdateOutboundRawMessage)
 
 	UpdateParticipantRoleConfigChannelInfo_Chat = UpdateParticipantRoleConfigChannelInfo.AddMember("Chat", ChatParticipantRoleConfig)
 
@@ -33152,6 +33245,8 @@ func init() {
 
 	CreateTaskTemplateRequest_SelfAssignFlowId = CreateTaskTemplateRequest.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	CreateTaskTemplateRequest_ContactHooks = CreateTaskTemplateRequest.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	CreateTaskTemplateRequest_Constraints = CreateTaskTemplateRequest.AddMember("Constraints", TaskTemplateConstraints)
 
 	CreateTaskTemplateRequest_Defaults = CreateTaskTemplateRequest.AddMember("Defaults", TaskTemplateDefaults)
@@ -34155,6 +34250,8 @@ func init() {
 	GetTaskTemplateResponse_ContactFlowId = GetTaskTemplateResponse.AddMember("ContactFlowId", _ContactFlowId)
 
 	GetTaskTemplateResponse_SelfAssignFlowId = GetTaskTemplateResponse.AddMember("SelfAssignFlowId", _ContactFlowId)
+
+	GetTaskTemplateResponse_ContactHooks = GetTaskTemplateResponse.AddMember("ContactHooks", TaskTemplateContactHooks)
 
 	GetTaskTemplateResponse_Constraints = GetTaskTemplateResponse.AddMember("Constraints", TaskTemplateConstraints)
 
@@ -36296,6 +36393,8 @@ func init() {
 
 	UpdateContactRequest_SystemEndpoint = UpdateContactRequest.AddMember("SystemEndpoint", Endpoint)
 
+	UpdateContactRequest_AdditionalRecipients = UpdateContactRequest.AddMember("AdditionalRecipients", NullableAdditionalRecipients)
+
 	UpdateContactRoutingDataRequest_InstanceId = UpdateContactRoutingDataRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
 
 	UpdateContactRoutingDataRequest_ContactId = UpdateContactRoutingDataRequest.AddMember("ContactId", _ContactId, &smithytraits.HTTPLabel{})
@@ -36504,6 +36603,14 @@ func init() {
 
 	UpdateNotificationContentRequest_Content = UpdateNotificationContentRequest.AddMember("Content", _NotificationContent)
 
+	UpdateOutboundEmailContactMessageRequest_InstanceId = UpdateOutboundEmailContactMessageRequest.AddMember("InstanceId", _InstanceId, &smithytraits.HTTPLabel{})
+
+	UpdateOutboundEmailContactMessageRequest_ContactId = UpdateOutboundEmailContactMessageRequest.AddMember("ContactId", _ContactId, &smithytraits.HTTPLabel{})
+
+	UpdateOutboundEmailContactMessageRequest_EmailMessage = UpdateOutboundEmailContactMessageRequest.AddMember("EmailMessage", UpdateOutboundEmailContent)
+
+	UpdateOutboundEmailContactMessageResponse_ContactId = UpdateOutboundEmailContactMessageResponse.AddMember("ContactId", _ContactId)
+
 	UpdateParticipantAuthenticationRequest_State = UpdateParticipantAuthenticationRequest.AddMember("State", _ParticipantToken)
 
 	UpdateParticipantAuthenticationRequest_InstanceId = UpdateParticipantAuthenticationRequest.AddMember("InstanceId", _InstanceId)
@@ -36696,6 +36803,8 @@ func init() {
 
 	UpdateTaskTemplateRequest_SelfAssignFlowId = UpdateTaskTemplateRequest.AddMember("SelfAssignFlowId", _ContactFlowId)
 
+	UpdateTaskTemplateRequest_ContactHooks = UpdateTaskTemplateRequest.AddMember("ContactHooks", TaskTemplateContactHooks)
+
 	UpdateTaskTemplateRequest_Constraints = UpdateTaskTemplateRequest.AddMember("Constraints", TaskTemplateConstraints)
 
 	UpdateTaskTemplateRequest_Defaults = UpdateTaskTemplateRequest.AddMember("Defaults", TaskTemplateDefaults)
@@ -36717,6 +36826,8 @@ func init() {
 	UpdateTaskTemplateResponse_ContactFlowId = UpdateTaskTemplateResponse.AddMember("ContactFlowId", _ContactFlowId)
 
 	UpdateTaskTemplateResponse_SelfAssignFlowId = UpdateTaskTemplateResponse.AddMember("SelfAssignFlowId", _ContactFlowId)
+
+	UpdateTaskTemplateResponse_ContactHooks = UpdateTaskTemplateResponse.AddMember("ContactHooks", TaskTemplateContactHooks)
 
 	UpdateTaskTemplateResponse_Constraints = UpdateTaskTemplateResponse.AddMember("Constraints", TaskTemplateConstraints)
 

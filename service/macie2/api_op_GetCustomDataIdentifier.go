@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -33,6 +35,18 @@ type GetCustomDataIdentifierInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCustomDataIdentifierInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomDataIdentifierRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomDataIdentifierInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierRequest_id, *v.Id)
+	}
 }
 
 type GetCustomDataIdentifierOutput struct {
@@ -96,13 +110,86 @@ type GetCustomDataIdentifierOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomDataIdentifierOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomDataIdentifierResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomDataIdentifierOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCustomDataIdentifierResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Deleted != nil {
+		s.WriteBool(schemas.GetCustomDataIdentifierResponse_deleted, *v.Deleted)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierResponse_id, *v.Id)
+	}
+	serialize__listOf__string(s, schemas.GetCustomDataIdentifierResponse_ignoreWords, v.IgnoreWords)
+	serialize__listOf__string(s, schemas.GetCustomDataIdentifierResponse_keywords, v.Keywords)
+	if v.MaximumMatchDistance != nil {
+		s.WriteInt32(schemas.GetCustomDataIdentifierResponse_maximumMatchDistance, *v.MaximumMatchDistance)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierResponse_name, *v.Name)
+	}
+	if v.Regex != nil {
+		s.WriteString(schemas.GetCustomDataIdentifierResponse_regex, *v.Regex)
+	}
+	serializeSeverityLevelList(s, schemas.GetCustomDataIdentifierResponse_severityLevels, v.SeverityLevels)
+	serializeTagMap(s, schemas.GetCustomDataIdentifierResponse_tags, v.Tags)
+}
+func (v *GetCustomDataIdentifierOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomDataIdentifierResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomDataIdentifierResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_arn, v.Arn)
+		case schemas.GetCustomDataIdentifierResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCustomDataIdentifierResponse_createdAt, v.CreatedAt)
+		case schemas.GetCustomDataIdentifierResponse_deleted:
+			v.Deleted = new(bool)
+			return d.ReadBool(schemas.GetCustomDataIdentifierResponse_deleted, v.Deleted)
+		case schemas.GetCustomDataIdentifierResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_description, v.Description)
+		case schemas.GetCustomDataIdentifierResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_id, v.Id)
+		case schemas.GetCustomDataIdentifierResponse_ignoreWords:
+			return deserialize__listOf__string(d, schemas.GetCustomDataIdentifierResponse_ignoreWords, &v.IgnoreWords)
+		case schemas.GetCustomDataIdentifierResponse_keywords:
+			return deserialize__listOf__string(d, schemas.GetCustomDataIdentifierResponse_keywords, &v.Keywords)
+		case schemas.GetCustomDataIdentifierResponse_maximumMatchDistance:
+			v.MaximumMatchDistance = new(int32)
+			return d.ReadInt32(schemas.GetCustomDataIdentifierResponse_maximumMatchDistance, v.MaximumMatchDistance)
+		case schemas.GetCustomDataIdentifierResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_name, v.Name)
+		case schemas.GetCustomDataIdentifierResponse_regex:
+			v.Regex = new(string)
+			return d.ReadString(schemas.GetCustomDataIdentifierResponse_regex, v.Regex)
+		case schemas.GetCustomDataIdentifierResponse_severityLevels:
+			return deserializeSeverityLevelList(d, schemas.GetCustomDataIdentifierResponse_severityLevels, &v.SeverityLevels)
+		case schemas.GetCustomDataIdentifierResponse_tags:
+			return deserializeTagMap(d, schemas.GetCustomDataIdentifierResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomDataIdentifier, schemas.GetCustomDataIdentifierRequest, schemas.GetCustomDataIdentifierResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCustomDataIdentifier{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomDataIdentifier, schemas.GetCustomDataIdentifierRequest, schemas.GetCustomDataIdentifierResponse), output: &GetCustomDataIdentifierOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArtifactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArtifactsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArtifactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListArtifactsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListArtifactsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArtifactsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListArtifactsOutput struct {
 
 	// The list of artifact summaries.
@@ -61,13 +81,35 @@ type ListArtifactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArtifactsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArtifactSummaryList(s, schemas.ListArtifactsOutput_artifactSummaries, v.ArtifactSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArtifactsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListArtifactsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListArtifactsOutput_artifactSummaries:
+			return deserializeArtifactSummaryList(d, schemas.ListArtifactsOutput_artifactSummaries, &v.ArtifactSummaries)
+		case schemas.ListArtifactsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListArtifactsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArtifacts, schemas.ListArtifactsInput, schemas.ListArtifactsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArtifacts, schemas.ListArtifactsInput, schemas.ListArtifactsOutput), output: &ListArtifactsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

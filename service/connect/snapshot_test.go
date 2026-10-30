@@ -4418,6 +4418,18 @@ func TestCheckSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOutboundEmailContactMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateOutboundEmailContactMessage")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateParticipantAuthentication(context.Background(), nil, func(o *Options) {
@@ -9246,6 +9258,18 @@ func TestUpdateSnapshot_UpdateNotificationContent(t *testing.T) {
 	_, err := svc.UpdateNotificationContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateNotificationContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOutboundEmailContactMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateOutboundEmailContactMessage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

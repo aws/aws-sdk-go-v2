@@ -5,7 +5,9 @@ package snowdevicemanagement
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -50,6 +52,43 @@ type CreateTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTaskInput_clientToken, *v.ClientToken)
+	}
+	serializeCommand(s, schemas.CreateTaskInput_command, v.Command)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTaskInput_description, *v.Description)
+	}
+	serializeTagMap(s, schemas.CreateTaskInput_tags, v.Tags)
+	serializeTargetList(s, schemas.CreateTaskInput_targets, v.Targets)
+}
+func (v *CreateTaskInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTaskInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTaskInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateTaskInput_clientToken, v.ClientToken)
+		case schemas.CreateTaskInput_command:
+			return deserializeCommand(d, schemas.CreateTaskInput_command, &v.Command)
+		case schemas.CreateTaskInput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateTaskInput_description, v.Description)
+		case schemas.CreateTaskInput_tags:
+			return deserializeTagMap(d, schemas.CreateTaskInput_tags, &v.Tags)
+		case schemas.CreateTaskInput_targets:
+			return deserializeTargetList(d, schemas.CreateTaskInput_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 type CreateTaskOutput struct {
 
 	// The Amazon Resource Name (ARN) of the task that you created.
@@ -64,13 +103,38 @@ type CreateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskArn != nil {
+		s.WriteString(schemas.CreateTaskOutput_taskArn, *v.TaskArn)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *CreateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTaskOutput_taskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.CreateTaskOutput_taskArn, v.TaskArn)
+		case schemas.CreateTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTask, schemas.CreateTaskInput, schemas.CreateTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTask, schemas.CreateTaskInput, schemas.CreateTaskOutput), output: &CreateTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1,3 +1,9 @@
+# v1.48.0 (2026-10-27)
+
+* **Feature**: AWS License Manager now supports delegate grants for read-only visibility into license distributions. CreateGrant accepts a new GrantType (BuyerGrant or DelegateGrant) and a desired status at distribution time.
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.47.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

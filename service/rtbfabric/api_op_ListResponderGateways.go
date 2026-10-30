@@ -5,6 +5,8 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListResponderGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResponderGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResponderGatewaysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResponderGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResponderGatewaysRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResponderGatewaysRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListResponderGatewaysOutput struct {
 
 	// The unique identifier of the gateways.
@@ -61,13 +78,35 @@ type ListResponderGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResponderGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResponderGatewaysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResponderGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGatewayIdList(s, schemas.ListResponderGatewaysResponse_gatewayIds, v.GatewayIds)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResponderGatewaysResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListResponderGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResponderGatewaysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResponderGatewaysResponse_gatewayIds:
+			return deserializeGatewayIdList(d, schemas.ListResponderGatewaysResponse_gatewayIds, &v.GatewayIds)
+		case schemas.ListResponderGatewaysResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResponderGatewaysResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResponderGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResponderGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResponderGateways, schemas.ListResponderGatewaysRequest, schemas.ListResponderGatewaysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResponderGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResponderGateways, schemas.ListResponderGatewaysRequest, schemas.ListResponderGatewaysResponse), output: &ListResponderGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

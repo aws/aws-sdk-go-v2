@@ -4,7 +4,9 @@ package networkmonitor
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -78,6 +80,36 @@ type UpdateProbeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProbeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProbeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.UpdateProbeInput_destination, *v.Destination)
+	}
+	if v.DestinationPort != nil {
+		s.WriteInt32(schemas.UpdateProbeInput_destinationPort, *v.DestinationPort)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.UpdateProbeInput_monitorName, *v.MonitorName)
+	}
+	if v.PacketSize != nil {
+		s.WriteInt32(schemas.UpdateProbeInput_packetSize, *v.PacketSize)
+	}
+	if v.ProbeId != nil {
+		s.WriteString(schemas.UpdateProbeInput_probeId, *v.ProbeId)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateProbeInput_protocol, string(v.Protocol))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateProbeInput_state, string(v.State))
+	}
+}
+
 type UpdateProbeOutput struct {
 
 	// The updated destination IP address for the probe.
@@ -131,13 +163,113 @@ type UpdateProbeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProbeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProbeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProbeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.UpdateProbeOutput_addressFamily, string(v.AddressFamily))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateProbeOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.UpdateProbeOutput_destination, *v.Destination)
+	}
+	if v.DestinationPort != nil {
+		s.WriteInt32(schemas.UpdateProbeOutput_destinationPort, *v.DestinationPort)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateProbeOutput_modifiedAt, *v.ModifiedAt)
+	}
+	if v.PacketSize != nil {
+		s.WriteInt32(schemas.UpdateProbeOutput_packetSize, *v.PacketSize)
+	}
+	if v.ProbeArn != nil {
+		s.WriteString(schemas.UpdateProbeOutput_probeArn, *v.ProbeArn)
+	}
+	if v.ProbeId != nil {
+		s.WriteString(schemas.UpdateProbeOutput_probeId, *v.ProbeId)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateProbeOutput_protocol, string(v.Protocol))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.UpdateProbeOutput_sourceArn, *v.SourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateProbeOutput_state, string(v.State))
+	}
+	serializeTagMap(s, schemas.UpdateProbeOutput_tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.UpdateProbeOutput_vpcId, *v.VpcId)
+	}
+}
+func (v *UpdateProbeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProbeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProbeOutput_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProbeOutput_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = types.AddressFamily(ev)
+			return nil
+		case schemas.UpdateProbeOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateProbeOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateProbeOutput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.UpdateProbeOutput_destination, v.Destination)
+		case schemas.UpdateProbeOutput_destinationPort:
+			v.DestinationPort = new(int32)
+			return d.ReadInt32(schemas.UpdateProbeOutput_destinationPort, v.DestinationPort)
+		case schemas.UpdateProbeOutput_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateProbeOutput_modifiedAt, v.ModifiedAt)
+		case schemas.UpdateProbeOutput_packetSize:
+			v.PacketSize = new(int32)
+			return d.ReadInt32(schemas.UpdateProbeOutput_packetSize, v.PacketSize)
+		case schemas.UpdateProbeOutput_probeArn:
+			v.ProbeArn = new(string)
+			return d.ReadString(schemas.UpdateProbeOutput_probeArn, v.ProbeArn)
+		case schemas.UpdateProbeOutput_probeId:
+			v.ProbeId = new(string)
+			return d.ReadString(schemas.UpdateProbeOutput_probeId, v.ProbeId)
+		case schemas.UpdateProbeOutput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProbeOutput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.Protocol(ev)
+			return nil
+		case schemas.UpdateProbeOutput_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.UpdateProbeOutput_sourceArn, v.SourceArn)
+		case schemas.UpdateProbeOutput_state:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProbeOutput_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.ProbeState(ev)
+			return nil
+		case schemas.UpdateProbeOutput_tags:
+			return deserializeTagMap(d, schemas.UpdateProbeOutput_tags, &v.Tags)
+		case schemas.UpdateProbeOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.UpdateProbeOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProbeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProbe{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProbe, schemas.UpdateProbeInput, schemas.UpdateProbeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProbe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProbe, schemas.UpdateProbeInput, schemas.UpdateProbeOutput), output: &UpdateProbeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

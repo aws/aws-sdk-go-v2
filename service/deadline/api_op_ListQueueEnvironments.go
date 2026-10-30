@@ -28,7 +28,6 @@ func (c *Client) ListQueueEnvironments(ctx context.Context, params *ListQueueEnv
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueEnvironmentsInput struct {
 
 	// The farm ID for the queue environment list.
@@ -72,7 +71,6 @@ func (v *ListQueueEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListQueueEnvironmentsOutput struct {
 
 	// The environments to include in the queue environments list.

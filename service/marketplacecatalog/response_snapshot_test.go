@@ -660,6 +660,14 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 					ProductId: ptr.String("__ProductId__"),
 					State:     types.ExpressPrivateOfferConfigurationStateString("ACTIVE"),
 				},
+				SubsidiaryAuthorizationSummary: &types.SubsidiaryAuthorizationSummary{
+					Name:                ptr.String("__Name__"),
+					Status:              ptr.String("__Status__"),
+					ResourceId:          ptr.String("__ResourceId__"),
+					ResourceName:        ptr.String("__ResourceName__"),
+					SubsidiaryAccountId: ptr.String("__SubsidiaryAccountId__"),
+					CreatedDate:         ptr.String("__CreatedDate__"),
+				},
 			},
 			{
 				Name:             ptr.String("__Name__"),
@@ -737,6 +745,14 @@ func TestCheckResponseSnapshot_ListEntities(t *testing.T) {
 				ExpressPrivateOfferConfigurationSummary: &types.ExpressPrivateOfferConfigurationSummary{
 					ProductId: ptr.String("__ProductId__"),
 					State:     types.ExpressPrivateOfferConfigurationStateString("ACTIVE"),
+				},
+				SubsidiaryAuthorizationSummary: &types.SubsidiaryAuthorizationSummary{
+					Name:                ptr.String("__Name__"),
+					Status:              ptr.String("__Status__"),
+					ResourceId:          ptr.String("__ResourceId__"),
+					ResourceName:        ptr.String("__ResourceName__"),
+					SubsidiaryAccountId: ptr.String("__SubsidiaryAccountId__"),
+					CreatedDate:         ptr.String("__CreatedDate__"),
 				},
 			},
 		},

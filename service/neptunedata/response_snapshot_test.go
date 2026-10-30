@@ -131,6 +131,31 @@ func TestCheckResponseSnapshot_CancelGremlinQuery(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_CancelIndexRebuild(t *testing.T) {
+	want := &CancelIndexRebuildOutput{
+		Status:          types.RebuildStatus("PREPARING"),
+		Concurrency:     ptr.Int32(1),
+		WriteBufferSize: types.WriteBufferSize("LOW"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelIndexRebuild.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CancelIndexRebuild.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_CancelLoaderJob(t *testing.T) {
 	want := &CancelLoaderJobOutput{
 		Status: ptr.String("__Status__"),
@@ -593,6 +618,37 @@ func TestCheckResponseSnapshot_GetGremlinQueryStatus(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "GetGremlinQueryStatus.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_GetIndexRebuildStatus(t *testing.T) {
+	want := &GetIndexRebuildStatusOutput{
+		Status:             types.RebuildStatus("PREPARING"),
+		Scope:              types.Scope("ALL"),
+		Concurrency:        ptr.Int32(1),
+		WriteBufferSize:    types.WriteBufferSize("LOW"),
+		StartTime:          ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		ProgressPercentage: ptr.Int32(1),
+		EstimatedEndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		EndTime:            ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		FailureReason:      ptr.String("__FailureReason__"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetIndexRebuildStatus.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetIndexRebuildStatus(context.Background(), &GetIndexRebuildStatusInput{
+		RebuildId: ptr.String("__RebuildId__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetIndexRebuildStatus.response", err)
 	}
 }
 
@@ -1184,6 +1240,103 @@ func TestCheckResponseSnapshot_GetSparqlStream(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_GetStorageInfo(t *testing.T) {
+	want := &GetStorageInfoOutput{
+		TotalStorageBytesUsed: ptr.Int64(1),
+		Quads: &types.QuadsIndexesInfo{
+			RDF: &types.QuadsInfo{
+				SPOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				POGS: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				GPSO: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				OSGP: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				PZSOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+			},
+			PG: &types.QuadsInfo{
+				SPOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				POGS: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				GPSO: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				OSGP: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+				PZSOG: &types.StorageMetrics{
+					SizeInBytes: ptr.Int64(1),
+					Count:       ptr.Int64(1),
+				},
+			},
+		},
+		Dictionaries: &types.DictionariesInfo{
+			Total: &types.StorageMetrics{
+				SizeInBytes: ptr.Int64(1),
+				Count:       ptr.Int64(1),
+			},
+			Blobs: &types.StorageMetrics{
+				SizeInBytes: ptr.Int64(1),
+				Count:       ptr.Int64(1),
+			},
+		},
+		UndoLogs: &types.UndoLogsMetrics{
+			SizeInBytes: ptr.Int64(1),
+			ListSize:    ptr.Int64(1),
+		},
+		Streams: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+		DfeStatistics: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+		Schema: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+		Internals: &types.StorageMetrics{
+			SizeInBytes: ptr.Int64(1),
+			Count:       ptr.Int64(1),
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("GetStorageInfo.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.GetStorageInfo(context.Background(), &GetStorageInfoInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "GetStorageInfo.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_ListGremlinQueries(t *testing.T) {
 	want := &ListGremlinQueriesOutput{
 		AcceptedQueryCount: ptr.Int32(1),
@@ -1227,6 +1380,30 @@ func TestCheckResponseSnapshot_ListGremlinQueries(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "ListGremlinQueries.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_ListIndexRebuilds(t *testing.T) {
+	want := &ListIndexRebuildsOutput{
+		RebuildIds: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("ListIndexRebuilds.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.ListIndexRebuilds(context.Background(), &ListIndexRebuildsInput{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "ListIndexRebuilds.response", err)
 	}
 }
 
@@ -1466,6 +1643,36 @@ func TestCheckResponseSnapshot_ManageSparqlStatistics(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_StartIndexRebuild(t *testing.T) {
+	want := &StartIndexRebuildOutput{
+		Status:          types.RebuildStatus("PREPARING"),
+		RebuildId:       ptr.String("__RebuildId__"),
+		Scope:           types.Scope("ALL"),
+		Concurrency:     ptr.Int32(1),
+		WriteBufferSize: types.WriteBufferSize("LOW"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("StartIndexRebuild.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.StartIndexRebuild(context.Background(), &StartIndexRebuildInput{
+		Scope:           types.Scope("ALL"),
+		Concurrency:     ptr.Int32(1),
+		WriteBufferSize: types.WriteBufferSize("LOW"),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "StartIndexRebuild.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_StartLoaderJob(t *testing.T) {
 	want := &StartLoaderJobOutput{
 		Status: ptr.String("__Status__"),
@@ -1667,7 +1874,9 @@ func TestCheckResponseSnapshot_Error_AccessDeniedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePropertygraphStatistics(context.Background(), &DeletePropertygraphStatisticsInput{})
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -1738,6 +1947,35 @@ func TestCheckResponseSnapshot_Error_BulkLoadIdNotFoundException(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_Error_CancelledByMaintenanceException(t *testing.T) {
+	want := &types.CancelledByMaintenanceException{
+		DetailedMessage: ptr.String("__DetailedMessage__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Code:            ptr.String("CancelledByMaintenanceException"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("CancelledByMaintenanceException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.CancelledByMaintenanceException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.CancelledByMaintenanceException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "CancelledByMaintenanceException.error", err)
+	}
+}
+
 func TestCheckResponseSnapshot_Error_CancelledByUserException(t *testing.T) {
 	want := &types.CancelledByUserException{
 		DetailedMessage: ptr.String("__DetailedMessage__"),
@@ -1752,8 +1990,8 @@ func TestCheckResponseSnapshot_Error_CancelledByUserException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteGremlinExplainQuery(context.Background(), &ExecuteGremlinExplainQueryInput{
-		GremlinQuery: ptr.String("__GremlinQuery__"),
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -1959,8 +2197,8 @@ func TestCheckResponseSnapshot_Error_InternalFailureException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CancelLoaderJob(context.Background(), &CancelLoaderJobInput{
-		LoadId: ptr.String("__LoadId__"),
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2194,9 +2432,8 @@ func TestCheckResponseSnapshot_Error_MethodNotAllowedException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{
-		Action: types.Action("initiateDatabaseReset"),
-		Token:  ptr.String("__Token__"),
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2398,7 +2635,9 @@ func TestCheckResponseSnapshot_Error_ReadOnlyViolationException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.DeletePropertygraphStatistics(context.Background(), &DeletePropertygraphStatisticsInput{})
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
+	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
 	}
@@ -2408,6 +2647,38 @@ func TestCheckResponseSnapshot_Error_ReadOnlyViolationException(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "ReadOnlyViolationException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ResourceNotFoundException(t *testing.T) {
+	want := &types.ResourceNotFoundException{
+		DetailedMessage: ptr.String("__DetailedMessage__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Code:            ptr.String("ResourceNotFoundException"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ResourceNotFoundException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.StartIndexRebuild(context.Background(), &StartIndexRebuildInput{
+		Scope:           types.Scope("ALL"),
+		Concurrency:     ptr.Int32(1),
+		WriteBufferSize: types.WriteBufferSize("LOW"),
+		ClientToken:     ptr.String("__ClientToken__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ResourceNotFoundException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ResourceNotFoundException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ResourceNotFoundException.error", err)
 	}
 }
 
@@ -2471,9 +2742,8 @@ func TestCheckResponseSnapshot_Error_ServerShutdownException(t *testing.T) {
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.ExecuteFastReset(context.Background(), &ExecuteFastResetInput{
-		Action: types.Action("initiateDatabaseReset"),
-		Token:  ptr.String("__Token__"),
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")
@@ -2664,5 +2934,34 @@ func TestCheckResponseSnapshot_Error_UnsupportedOperationException(t *testing.T)
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("error response snapshot mismatch for %s: %v", "UnsupportedOperationException.error", err)
+	}
+}
+
+func TestCheckResponseSnapshot_Error_ValidationException(t *testing.T) {
+	want := &types.ValidationException{
+		DetailedMessage: ptr.String("__DetailedMessage__"),
+		RequestId:       ptr.String("__RequestId__"),
+		Code:            ptr.String("ValidationException"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("ValidationException.error")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	_, opErr := svc.CancelIndexRebuild(context.Background(), &CancelIndexRebuildInput{
+		RebuildId: ptr.String("__RebuildId__"),
+	})
+	if opErr == nil {
+		t.Fatal("expected error, got nil")
+	}
+	var got *types.ValidationException
+	if !errors.As(opErr, &got) {
+		t.Fatalf("expected types.ValidationException, got %v", opErr)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("error response snapshot mismatch for %s: %v", "ValidationException.error", err)
 	}
 }

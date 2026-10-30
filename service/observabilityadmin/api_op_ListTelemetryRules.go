@@ -5,7 +5,9 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -42,6 +44,24 @@ type ListTelemetryRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTelemetryRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTelemetryRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTelemetryRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTelemetryRulesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTelemetryRulesInput_NextToken, *v.NextToken)
+	}
+	if v.RuleNamePrefix != nil {
+		s.WriteString(schemas.ListTelemetryRulesInput_RuleNamePrefix, *v.RuleNamePrefix)
+	}
+}
+
 type ListTelemetryRulesOutput struct {
 
 	//  A token to resume pagination of results.
@@ -56,13 +76,35 @@ type ListTelemetryRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTelemetryRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTelemetryRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTelemetryRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTelemetryRulesOutput_NextToken, *v.NextToken)
+	}
+	serializeTelemetryRuleSummaries(s, schemas.ListTelemetryRulesOutput_TelemetryRuleSummaries, v.TelemetryRuleSummaries)
+}
+func (v *ListTelemetryRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTelemetryRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTelemetryRulesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTelemetryRulesOutput_NextToken, v.NextToken)
+		case schemas.ListTelemetryRulesOutput_TelemetryRuleSummaries:
+			return deserializeTelemetryRuleSummaries(d, schemas.ListTelemetryRulesOutput_TelemetryRuleSummaries, &v.TelemetryRuleSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTelemetryRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTelemetryRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryRules, schemas.ListTelemetryRulesInput, schemas.ListTelemetryRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTelemetryRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTelemetryRules, schemas.ListTelemetryRulesInput, schemas.ListTelemetryRulesOutput), output: &ListTelemetryRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

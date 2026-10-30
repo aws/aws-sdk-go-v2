@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Marker":"__Marker__","Principals":[{"Id":"__Id__","Roles":[{"Role":"VIEWER","Type":"DIRECT"},{"Role":"VIEWER","Type":"DIRECT"}],"Type":"USER"},{"Id":"__Id__","Roles":[{"Role":"VIEWER","Type":"DIRECT"},{"Role":"VIEWER","Type":"DIRECT"}],"Type":"USER"}]}

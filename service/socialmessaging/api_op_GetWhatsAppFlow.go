@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type GetWhatsAppFlowInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppFlowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetWhatsAppFlowInput_flowId, *v.FlowId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetWhatsAppFlowInput_id, *v.Id)
+	}
 }
 
 type GetWhatsAppFlowOutput struct {
@@ -91,13 +108,100 @@ type GetWhatsAppFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppFlowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteStruct(schemas.GetWhatsAppFlowOutput_application)
+		v.Application.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetaFlowCategoryList(s, schemas.GetWhatsAppFlowOutput_categories, v.Categories)
+	if v.DataApiVersion != nil {
+		s.WriteString(schemas.GetWhatsAppFlowOutput_dataApiVersion, *v.DataApiVersion)
+	}
+	if v.EndpointUri != nil {
+		s.WriteString(schemas.GetWhatsAppFlowOutput_endpointUri, *v.EndpointUri)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetWhatsAppFlowOutput_flowId, *v.FlowId)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.GetWhatsAppFlowOutput_flowName, *v.FlowName)
+	}
+	if v.FlowStatus != nil {
+		s.WriteString(schemas.GetWhatsAppFlowOutput_flowStatus, *v.FlowStatus)
+	}
+	if v.HealthStatus != nil {
+		s.WriteStruct(schemas.GetWhatsAppFlowOutput_healthStatus)
+		v.HealthStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JsonVersion != nil {
+		s.WriteString(schemas.GetWhatsAppFlowOutput_jsonVersion, *v.JsonVersion)
+	}
+	if v.Preview != nil {
+		s.WriteStruct(schemas.GetWhatsAppFlowOutput_preview)
+		v.Preview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeValidationErrorList(s, schemas.GetWhatsAppFlowOutput_validationErrors, v.ValidationErrors)
+	if v.WhatsAppBusinessAccount != nil {
+		s.WriteStruct(schemas.GetWhatsAppFlowOutput_whatsAppBusinessAccount)
+		v.WhatsAppBusinessAccount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWhatsAppFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWhatsAppFlowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWhatsAppFlowOutput_application:
+			v.Application = &types.MetaFlowApplicationInfo{}
+			return v.Application.Deserialize(d)
+		case schemas.GetWhatsAppFlowOutput_categories:
+			return deserializeMetaFlowCategoryList(d, schemas.GetWhatsAppFlowOutput_categories, &v.Categories)
+		case schemas.GetWhatsAppFlowOutput_dataApiVersion:
+			v.DataApiVersion = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowOutput_dataApiVersion, v.DataApiVersion)
+		case schemas.GetWhatsAppFlowOutput_endpointUri:
+			v.EndpointUri = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowOutput_endpointUri, v.EndpointUri)
+		case schemas.GetWhatsAppFlowOutput_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowOutput_flowId, v.FlowId)
+		case schemas.GetWhatsAppFlowOutput_flowName:
+			v.FlowName = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowOutput_flowName, v.FlowName)
+		case schemas.GetWhatsAppFlowOutput_flowStatus:
+			v.FlowStatus = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowOutput_flowStatus, v.FlowStatus)
+		case schemas.GetWhatsAppFlowOutput_healthStatus:
+			v.HealthStatus = &types.MetaFlowHealthStatus{}
+			return v.HealthStatus.Deserialize(d)
+		case schemas.GetWhatsAppFlowOutput_jsonVersion:
+			v.JsonVersion = new(string)
+			return d.ReadString(schemas.GetWhatsAppFlowOutput_jsonVersion, v.JsonVersion)
+		case schemas.GetWhatsAppFlowOutput_preview:
+			v.Preview = &types.MetaFlowPreviewInfo{}
+			return v.Preview.Deserialize(d)
+		case schemas.GetWhatsAppFlowOutput_validationErrors:
+			return deserializeValidationErrorList(d, schemas.GetWhatsAppFlowOutput_validationErrors, &v.ValidationErrors)
+		case schemas.GetWhatsAppFlowOutput_whatsAppBusinessAccount:
+			v.WhatsAppBusinessAccount = &types.MetaFlowWhatsAppBusinessAccountInfo{}
+			return v.WhatsAppBusinessAccount.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWhatsAppFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWhatsAppFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppFlow, schemas.GetWhatsAppFlowInput, schemas.GetWhatsAppFlowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWhatsAppFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppFlow, schemas.GetWhatsAppFlowInput, schemas.GetWhatsAppFlowOutput), output: &GetWhatsAppFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

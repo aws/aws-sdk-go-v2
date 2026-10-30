@@ -15,6 +15,22 @@ import (
 // organizational unit (OU). For more information, see [Granted licenses in License Manager]in the License Manager User
 // Guide.
 //
+// Set the type of grant with the GrantType field:
+//
+//   - BuyerGrant - The default grant type, created by the seller when a customer
+//     subscribes to a product. The seller creates a license for the subscription and a
+//     buyer grant for the customer. With a buyer grant, the customer can use, consume,
+//     and distribute the license, according to the permissions the seller sets in the
+//     product contract.
+//
+//   - DelegateGrant - A delegate grant gives the grantee read-only visibility into
+//     the licenses and grants that you have distributed to buyers for a product. The
+//     grantee can monitor that activity on your behalf, and can also listen for the
+//     related Amazon EventBridge events. A delegate grant conveys no entitlement to
+//     use the licenses, and its only allowed operation is ListReceivedLicenses . You
+//     must create the delegate grant, and its license, from the same Amazon Web
+//     Services account that you used to create those buyer licenses and grants.
+//
 // [Granted licenses in License Manager]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
 func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optFns ...func(*Options)) (*CreateGrantOutput, error) {
 	if params == nil {
@@ -71,6 +87,20 @@ type CreateGrantInput struct {
 	// This member is required.
 	Principals []string
 
+	// The type of grant to create. For more information about each type, see the
+	// preceding description of this operation. Valid values:
+	//
+	//   - BuyerGrant - The default grant type if you don't specify a value. Conveys
+	//   the entitlement to use the license.
+	//
+	//   - DelegateGrant - Gives the grantee read-only visibility into the licenses and
+	//   grants that you have distributed to buyers, with no entitlement to use them.
+	GrantType types.GrantType
+
+	// The options for the grant: the status to set after creation, and how activating
+	// the grant affects other active grants for the same product.
+	Options *types.Options
+
 	// Tags to add to the grant. For more information about tagging support in License
 	// Manager, see the [TagResource]operation.
 	//
@@ -94,11 +124,19 @@ func (v *CreateGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GrantName != nil {
 		s.WriteString(schemas.CreateGrantRequest_GrantName, *v.GrantName)
 	}
+	if v.GrantType != "" {
+		s.WriteString(schemas.CreateGrantRequest_GrantType, string(v.GrantType))
+	}
 	if v.HomeRegion != nil {
 		s.WriteString(schemas.CreateGrantRequest_HomeRegion, *v.HomeRegion)
 	}
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.CreateGrantRequest_LicenseArn, *v.LicenseArn)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CreateGrantRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	serializePrincipalArnList(s, schemas.CreateGrantRequest_Principals, v.Principals)
 	serializeTagList(s, schemas.CreateGrantRequest_Tags, v.Tags)

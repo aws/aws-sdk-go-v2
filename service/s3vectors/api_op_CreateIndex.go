@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -83,6 +85,44 @@ type CreateIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataType != "" {
+		s.WriteString(schemas.CreateIndexInput_dataType, string(v.DataType))
+	}
+	if v.Dimension != nil {
+		s.WriteInt32(schemas.CreateIndexInput_dimension, *v.Dimension)
+	}
+	if v.DistanceMetric != "" {
+		s.WriteString(schemas.CreateIndexInput_distanceMetric, string(v.DistanceMetric))
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateIndexInput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreateIndexInput_indexName, *v.IndexName)
+	}
+	if v.MetadataConfiguration != nil {
+		s.WriteStruct(schemas.CreateIndexInput_metadataConfiguration)
+		v.MetadataConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateIndexInput_tags, v.Tags)
+	if v.VectorBucketArn != nil {
+		s.WriteString(schemas.CreateIndexInput_vectorBucketArn, *v.VectorBucketArn)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.CreateIndexInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type CreateIndexOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created vector index.
@@ -96,13 +136,32 @@ type CreateIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIndexOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.CreateIndexOutput_indexArn, *v.IndexArn)
+	}
+}
+func (v *CreateIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIndexOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIndexOutput_indexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.CreateIndexOutput_indexArn, v.IndexArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexInput, schemas.CreateIndexOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIndex, schemas.CreateIndexInput, schemas.CreateIndexOutput), output: &CreateIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package novaact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,33 @@ type ListActsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListActsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActsRequest_nextToken, *v.NextToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ListActsRequest_sessionId, *v.SessionId)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListActsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.WorkflowDefinitionName != nil {
+		s.WriteString(schemas.ListActsRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
+	}
+	if v.WorkflowRunId != nil {
+		s.WriteString(schemas.ListActsRequest_workflowRunId, *v.WorkflowRunId)
+	}
+}
+
 type ListActsOutput struct {
 
 	// A list of summary information for acts in the session.
@@ -67,13 +96,35 @@ type ListActsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActSummaries(s, schemas.ListActsResponse_actSummaries, v.ActSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListActsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActsResponse_actSummaries:
+			return deserializeActSummaries(d, schemas.ListActsResponse_actSummaries, &v.ActSummaries)
+		case schemas.ListActsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActs, schemas.ListActsRequest, schemas.ListActsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListActs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActs, schemas.ListActsRequest, schemas.ListActsResponse), output: &ListActsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

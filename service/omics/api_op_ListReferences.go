@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,29 @@ type ListReferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListReferencesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReferencesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReferencesRequest_nextToken, *v.NextToken)
+	}
+	if v.ReferenceStoreId != nil {
+		s.WriteString(schemas.ListReferencesRequest_referenceStoreId, *v.ReferenceStoreId)
+	}
+}
+
 type ListReferencesOutput struct {
 
 	// A list of references.
@@ -66,13 +91,35 @@ type ListReferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReferencesResponse_nextToken, *v.NextToken)
+	}
+	serializeReferenceList(s, schemas.ListReferencesResponse_references, v.References)
+}
+func (v *ListReferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReferencesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReferencesResponse_nextToken, v.NextToken)
+		case schemas.ListReferencesResponse_references:
+			return deserializeReferenceList(d, schemas.ListReferencesResponse_references, &v.References)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReferences, schemas.ListReferencesRequest, schemas.ListReferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReferences, schemas.ListReferencesRequest, schemas.ListReferencesResponse), output: &ListReferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -316,6 +316,35 @@ func TestCheckRequestSnapshot_AddDirectQueryDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_AddReplicationPeer(t *testing.T) {
+	input := &AddReplicationPeerInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		DryRun:        ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AddReplicationPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddReplicationPeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AddTags(t *testing.T) {
 	input := &AddTagsInput{
 		ARN: ptr.String("__ARN__"),
@@ -566,6 +595,38 @@ func TestCheckRequestSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelServiceSoftwareUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CompareDomainConfiguration(t *testing.T) {
+	input := &CompareDomainConfigurationInput{
+		SourceDomainArn: ptr.String("__SourceDomainArn__"),
+		TargetDomainArn: ptr.String("__TargetDomainArn__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CompareDomainConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CompareDomainConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1489,6 +1550,33 @@ func TestCheckRequestSnapshot_DescribeDomainNodes(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_DescribeDomainReplication(t *testing.T) {
+	input := &DescribeDomainReplicationInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDomainReplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDomainReplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DescribeDomains(t *testing.T) {
 	input := &DescribeDomainsInput{
 		DomainNames: []string{
@@ -1912,6 +2000,35 @@ func TestCheckRequestSnapshot_DissociatePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DissociatePackages"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_FailoverReplication(t *testing.T) {
+	input := &FailoverReplicationInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		AllowDataLoss: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.FailoverReplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "FailoverReplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2891,6 +3008,34 @@ func TestCheckRequestSnapshot_RejectInboundConnection(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_RemoveReplicationPeer(t *testing.T) {
+	input := &RemoveReplicationPeerInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RemoveReplicationPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveReplicationPeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_RemoveTags(t *testing.T) {
 	input := &RemoveTagsInput{
 		ARN: ptr.String("__ARN__"),
@@ -3095,6 +3240,34 @@ func TestCheckRequestSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartServiceSoftwareUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_SwitchoverReplication(t *testing.T) {
+	input := &SwitchoverReplicationInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SwitchoverReplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SwitchoverReplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -3759,6 +3932,35 @@ func TestUpdateRequestSnapshot_AddDirectQueryDataSource(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_AddReplicationPeer(t *testing.T) {
+	input := &AddReplicationPeerInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		DryRun:        ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AddReplicationPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AddReplicationPeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AddTags(t *testing.T) {
 	input := &AddTagsInput{
 		ARN: ptr.String("__ARN__"),
@@ -4009,6 +4211,38 @@ func TestUpdateRequestSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelServiceSoftwareUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CompareDomainConfiguration(t *testing.T) {
+	input := &CompareDomainConfigurationInput{
+		SourceDomainArn: ptr.String("__SourceDomainArn__"),
+		TargetDomainArn: ptr.String("__TargetDomainArn__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CompareDomainConfiguration(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CompareDomainConfiguration"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -4932,6 +5166,33 @@ func TestUpdateRequestSnapshot_DescribeDomainNodes(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_DescribeDomainReplication(t *testing.T) {
+	input := &DescribeDomainReplicationInput{
+		DomainName: ptr.String("__DomainName__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DescribeDomainReplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DescribeDomainReplication"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DescribeDomains(t *testing.T) {
 	input := &DescribeDomainsInput{
 		DomainNames: []string{
@@ -5355,6 +5616,35 @@ func TestUpdateRequestSnapshot_DissociatePackages(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DissociatePackages"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_FailoverReplication(t *testing.T) {
+	input := &FailoverReplicationInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		AllowDataLoss: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.FailoverReplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "FailoverReplication"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -6334,6 +6624,34 @@ func TestUpdateRequestSnapshot_RejectInboundConnection(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_RemoveReplicationPeer(t *testing.T) {
+	input := &RemoveReplicationPeerInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.RemoveReplicationPeer(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "RemoveReplicationPeer"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_RemoveTags(t *testing.T) {
 	input := &RemoveTagsInput{
 		ARN: ptr.String("__ARN__"),
@@ -6538,6 +6856,34 @@ func TestUpdateRequestSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "StartServiceSoftwareUpdate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_SwitchoverReplication(t *testing.T) {
+	input := &SwitchoverReplicationInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.SwitchoverReplication(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "SwitchoverReplication"); err != nil {
 		t.Fatal(err)
 	}
 }

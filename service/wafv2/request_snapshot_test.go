@@ -10013,6 +10013,9 @@ func TestCheckRequestSnapshot_CreateWebACL(t *testing.T) {
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
 			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
+			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
 			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
@@ -18343,6 +18346,9 @@ func TestCheckRequestSnapshot_UpdateWebACL(t *testing.T) {
 				"key0": {
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
+			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
 			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
@@ -28231,6 +28237,9 @@ func TestUpdateRequestSnapshot_CreateWebACL(t *testing.T) {
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
 			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
+			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{
 			ALBLowReputationMode: types.LowReputationMode("ACTIVE_UNDER_DDOS"),
@@ -36561,6 +36570,9 @@ func TestUpdateRequestSnapshot_UpdateWebACL(t *testing.T) {
 				"key0": {
 					DefaultSizeInspectionLimit: types.SizeInspectionLimit("KB_16"),
 				},
+			},
+			ChallengeJavascriptSdkInjection: map[string]types.ChallengeJavascriptSdkInjectionConfig{
+				"key0": {},
 			},
 		},
 		OnSourceDDoSProtectionConfig: &types.OnSourceDDoSProtectionConfig{

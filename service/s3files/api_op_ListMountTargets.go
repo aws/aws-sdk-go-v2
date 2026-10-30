@@ -5,7 +5,9 @@ package s3files
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3files/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3files/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListMountTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMountTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMountTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMountTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPointId != nil {
+		s.WriteString(schemas.ListMountTargetsRequest_accessPointId, *v.AccessPointId)
+	}
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.ListMountTargetsRequest_fileSystemId, *v.FileSystemId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMountTargetsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMountTargetsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListMountTargetsOutput struct {
 
 	// An array of mount target descriptions.
@@ -63,13 +86,35 @@ type ListMountTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMountTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMountTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMountTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMountTargets(s, schemas.ListMountTargetsResponse_mountTargets, v.MountTargets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMountTargetsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMountTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMountTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMountTargetsResponse_mountTargets:
+			return deserializeMountTargets(d, schemas.ListMountTargetsResponse_mountTargets, &v.MountTargets)
+		case schemas.ListMountTargetsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMountTargetsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMountTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMountTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMountTargets, schemas.ListMountTargetsRequest, schemas.ListMountTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMountTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMountTargets, schemas.ListMountTargetsRequest, schemas.ListMountTargetsResponse), output: &ListMountTargetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

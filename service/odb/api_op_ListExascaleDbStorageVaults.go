@@ -30,6 +30,14 @@ func (c *Client) ListExascaleDbStorageVaults(ctx context.Context, params *ListEx
 
 type ListExascaleDbStorageVaultsInput struct {
 
+	// The unique identifier or Amazon Resource Name (ARN) of an Exadata
+	// infrastructure. If you specify this value, the operation returns only the
+	// Exascale storage vaults on that infrastructure that you own or that are shared
+	// with you. The infrastructure can be one that's shared with you through Amazon
+	// Web Services Resource Access Manager (Amazon Web Services RAM). You can't
+	// combine this filter with a vaultType of EXASCALE_INFRASTRUCTURE .
+	CloudExadataInfrastructureId *string
+
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output.
 	MaxResults *int32
@@ -37,6 +45,14 @@ type ListExascaleDbStorageVaultsInput struct {
 	// The token returned from a previous paginated request. Pagination continues from
 	// the end of the items returned by the previous request.
 	NextToken *string
+
+	// The type of Exascale storage vaults to return. Specify DEDICATED_INFRASTRUCTURE
+	// to return Exascale storage vaults on dedicated Exadata infrastructure, or
+	// EXASCALE_INFRASTRUCTURE to return Exascale storage vaults for Exascale VM
+	// clusters. If you don't specify a value, the operation returns both types. You
+	// can't combine EXASCALE_INFRASTRUCTURE with the cloudExadataInfrastructureId
+	// filter.
+	VaultType types.ExascaleDbStorageVaultType
 
 	noSmithyDocumentSerde
 }
@@ -48,11 +64,17 @@ func (v *ListExascaleDbStorageVaultsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExascaleDbStorageVaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.ListExascaleDbStorageVaultsInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListExascaleDbStorageVaultsInput_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExascaleDbStorageVaultsInput_nextToken, *v.NextToken)
+	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.ListExascaleDbStorageVaultsInput_vaultType, string(v.VaultType))
 	}
 }
 

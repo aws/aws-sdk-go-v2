@@ -5,7 +5,9 @@ package lakeformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -72,6 +74,39 @@ type GetTableObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableObjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableObjectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetTableObjectsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetTableObjectsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTableObjectsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTableObjectsRequest_NextToken, *v.NextToken)
+	}
+	if v.PartitionPredicate != nil {
+		s.WriteString(schemas.GetTableObjectsRequest_PartitionPredicate, *v.PartitionPredicate)
+	}
+	if v.QueryAsOfTime != nil {
+		s.WriteTime(schemas.GetTableObjectsRequest_QueryAsOfTime, *v.QueryAsOfTime)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableObjectsRequest_TableName, *v.TableName)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.GetTableObjectsRequest_TransactionId, *v.TransactionId)
+	}
+}
+
 type GetTableObjectsOutput struct {
 
 	// A continuation token indicating whether additional data is available.
@@ -86,13 +121,35 @@ type GetTableObjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableObjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableObjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTableObjectsResponse_NextToken, *v.NextToken)
+	}
+	serializePartitionedTableObjectsList(s, schemas.GetTableObjectsResponse_Objects, v.Objects)
+}
+func (v *GetTableObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableObjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableObjectsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTableObjectsResponse_NextToken, v.NextToken)
+		case schemas.GetTableObjectsResponse_Objects:
+			return deserializePartitionedTableObjectsList(d, schemas.GetTableObjectsResponse_Objects, &v.Objects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableObjects, schemas.GetTableObjectsRequest, schemas.GetTableObjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableObjects, schemas.GetTableObjectsRequest, schemas.GetTableObjectsResponse), output: &GetTableObjectsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

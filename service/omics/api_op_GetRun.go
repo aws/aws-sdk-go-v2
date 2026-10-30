@@ -6,7 +6,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/omics/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/omics/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,6 +53,19 @@ type GetRunInput struct {
 	Export []types.RunExport
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRunExportList(s, schemas.GetRunRequest_export, v.Export)
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunRequest_id, *v.Id)
+	}
 }
 
 type GetRunOutput struct {
@@ -195,13 +212,332 @@ type GetRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerators != "" {
+		s.WriteString(schemas.GetRunResponse_accelerators, string(v.Accelerators))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRunResponse_arn, *v.Arn)
+	}
+	if v.BatchId != nil {
+		s.WriteString(schemas.GetRunResponse_batchId, *v.BatchId)
+	}
+	if v.CacheBehavior != "" {
+		s.WriteString(schemas.GetRunResponse_cacheBehavior, string(v.CacheBehavior))
+	}
+	if v.CacheId != nil {
+		s.WriteString(schemas.GetRunResponse_cacheId, *v.CacheId)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetRunResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetRunResponse_creationTime, *v.CreationTime)
+	}
+	if v.Definition != nil {
+		s.WriteString(schemas.GetRunResponse_definition, *v.Definition)
+	}
+	if v.Digest != nil {
+		s.WriteString(schemas.GetRunResponse_digest, *v.Digest)
+	}
+	if v.EngineSettings != nil {
+		s.WriteDocument(schemas.GetRunResponse_engineSettings, &smithydocument.Opaque{Value: v.EngineSettings})
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.GetRunResponse_engineVersion, *v.EngineVersion)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetRunResponse_failureReason, *v.FailureReason)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunResponse_id, *v.Id)
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.GetRunResponse_logLevel, string(v.LogLevel))
+	}
+	if v.LogLocation != nil {
+		s.WriteStruct(schemas.GetRunResponse_logLocation)
+		v.LogLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRunResponse_name, *v.Name)
+	}
+	if v.NetworkingMode != "" {
+		s.WriteString(schemas.GetRunResponse_networkingMode, string(v.NetworkingMode))
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.GetRunResponse_outputUri, *v.OutputUri)
+	}
+	if v.Parameters != nil {
+		s.WriteDocument(schemas.GetRunResponse_parameters, &smithydocument.Opaque{Value: v.Parameters})
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetRunResponse_priority, *v.Priority)
+	}
+	serializeRunResourceDigests(s, schemas.GetRunResponse_resourceDigests, v.ResourceDigests)
+	if v.RetentionMode != "" {
+		s.WriteString(schemas.GetRunResponse_retentionMode, string(v.RetentionMode))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetRunResponse_roleArn, *v.RoleArn)
+	}
+	if v.RunGroupId != nil {
+		s.WriteString(schemas.GetRunResponse_runGroupId, *v.RunGroupId)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.GetRunResponse_runId, *v.RunId)
+	}
+	if v.RunOutputUri != nil {
+		s.WriteString(schemas.GetRunResponse_runOutputUri, *v.RunOutputUri)
+	}
+	if v.ScratchStorageMode != "" {
+		s.WriteString(schemas.GetRunResponse_scratchStorageMode, string(v.ScratchStorageMode))
+	}
+	if v.SessionPolicy != nil {
+		s.WriteString(schemas.GetRunResponse_sessionPolicy, *v.SessionPolicy)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRunResponse_startTime, *v.StartTime)
+	}
+	if v.StartedBy != nil {
+		s.WriteString(schemas.GetRunResponse_startedBy, *v.StartedBy)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetRunResponse_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetRunResponse_statusMessage, *v.StatusMessage)
+	}
+	if v.StopTime != nil {
+		s.WriteTime(schemas.GetRunResponse_stopTime, *v.StopTime)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.GetRunResponse_storageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.GetRunResponse_storageType, string(v.StorageType))
+	}
+	serializeTagMap(s, schemas.GetRunResponse_tags, v.Tags)
+	if v.Uuid != nil {
+		s.WriteString(schemas.GetRunResponse_uuid, *v.Uuid)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.GetRunResponse_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.GetRunResponse_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowOwnerId != nil {
+		s.WriteString(schemas.GetRunResponse_workflowOwnerId, *v.WorkflowOwnerId)
+	}
+	if v.WorkflowType != "" {
+		s.WriteString(schemas.GetRunResponse_workflowType, string(v.WorkflowType))
+	}
+	if v.WorkflowUuid != nil {
+		s.WriteString(schemas.GetRunResponse_workflowUuid, *v.WorkflowUuid)
+	}
+	if v.WorkflowVersionName != nil {
+		s.WriteString(schemas.GetRunResponse_workflowVersionName, *v.WorkflowVersionName)
+	}
+}
+func (v *GetRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRunResponse_accelerators:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_accelerators, &ev); err != nil {
+				return err
+			}
+			v.Accelerators = types.Accelerators(ev)
+			return nil
+		case schemas.GetRunResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRunResponse_arn, v.Arn)
+		case schemas.GetRunResponse_batchId:
+			v.BatchId = new(string)
+			return d.ReadString(schemas.GetRunResponse_batchId, v.BatchId)
+		case schemas.GetRunResponse_cacheBehavior:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_cacheBehavior, &ev); err != nil {
+				return err
+			}
+			v.CacheBehavior = types.CacheBehavior(ev)
+			return nil
+		case schemas.GetRunResponse_cacheId:
+			v.CacheId = new(string)
+			return d.ReadString(schemas.GetRunResponse_cacheId, v.CacheId)
+		case schemas.GetRunResponse_configuration:
+			v.Configuration = &types.ConfigurationDetails{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetRunResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunResponse_creationTime, v.CreationTime)
+		case schemas.GetRunResponse_definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.GetRunResponse_definition, v.Definition)
+		case schemas.GetRunResponse_digest:
+			v.Digest = new(string)
+			return d.ReadString(schemas.GetRunResponse_digest, v.Digest)
+		case schemas.GetRunResponse_engineSettings:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetRunResponse_engineSettings, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.EngineSettings = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetRunResponse_engineVersion:
+			v.EngineVersion = new(string)
+			return d.ReadString(schemas.GetRunResponse_engineVersion, v.EngineVersion)
+		case schemas.GetRunResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetRunResponse_failureReason, v.FailureReason)
+		case schemas.GetRunResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetRunResponse_id, v.Id)
+		case schemas.GetRunResponse_logLevel:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_logLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = types.RunLogLevel(ev)
+			return nil
+		case schemas.GetRunResponse_logLocation:
+			v.LogLocation = &types.RunLogLocation{}
+			return v.LogLocation.Deserialize(d)
+		case schemas.GetRunResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRunResponse_name, v.Name)
+		case schemas.GetRunResponse_networkingMode:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_networkingMode, &ev); err != nil {
+				return err
+			}
+			v.NetworkingMode = types.NetworkingMode(ev)
+			return nil
+		case schemas.GetRunResponse_outputUri:
+			v.OutputUri = new(string)
+			return d.ReadString(schemas.GetRunResponse_outputUri, v.OutputUri)
+		case schemas.GetRunResponse_parameters:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetRunResponse_parameters, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Parameters = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetRunResponse_priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetRunResponse_priority, v.Priority)
+		case schemas.GetRunResponse_resourceDigests:
+			return deserializeRunResourceDigests(d, schemas.GetRunResponse_resourceDigests, &v.ResourceDigests)
+		case schemas.GetRunResponse_retentionMode:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_retentionMode, &ev); err != nil {
+				return err
+			}
+			v.RetentionMode = types.RunRetentionMode(ev)
+			return nil
+		case schemas.GetRunResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetRunResponse_roleArn, v.RoleArn)
+		case schemas.GetRunResponse_runGroupId:
+			v.RunGroupId = new(string)
+			return d.ReadString(schemas.GetRunResponse_runGroupId, v.RunGroupId)
+		case schemas.GetRunResponse_runId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.GetRunResponse_runId, v.RunId)
+		case schemas.GetRunResponse_runOutputUri:
+			v.RunOutputUri = new(string)
+			return d.ReadString(schemas.GetRunResponse_runOutputUri, v.RunOutputUri)
+		case schemas.GetRunResponse_scratchStorageMode:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_scratchStorageMode, &ev); err != nil {
+				return err
+			}
+			v.ScratchStorageMode = types.ScratchStorageMode(ev)
+			return nil
+		case schemas.GetRunResponse_sessionPolicy:
+			v.SessionPolicy = new(string)
+			return d.ReadString(schemas.GetRunResponse_sessionPolicy, v.SessionPolicy)
+		case schemas.GetRunResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunResponse_startTime, v.StartTime)
+		case schemas.GetRunResponse_startedBy:
+			v.StartedBy = new(string)
+			return d.ReadString(schemas.GetRunResponse_startedBy, v.StartedBy)
+		case schemas.GetRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RunStatus(ev)
+			return nil
+		case schemas.GetRunResponse_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetRunResponse_statusMessage, v.StatusMessage)
+		case schemas.GetRunResponse_stopTime:
+			v.StopTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunResponse_stopTime, v.StopTime)
+		case schemas.GetRunResponse_storageCapacity:
+			v.StorageCapacity = new(int32)
+			return d.ReadInt32(schemas.GetRunResponse_storageCapacity, v.StorageCapacity)
+		case schemas.GetRunResponse_storageType:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_storageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = types.StorageType(ev)
+			return nil
+		case schemas.GetRunResponse_tags:
+			return deserializeTagMap(d, schemas.GetRunResponse_tags, &v.Tags)
+		case schemas.GetRunResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.GetRunResponse_uuid, v.Uuid)
+		case schemas.GetRunResponse_vpcConfig:
+			v.VpcConfig = &types.VpcConfigResponse{}
+			return v.VpcConfig.Deserialize(d)
+		case schemas.GetRunResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.GetRunResponse_workflowId, v.WorkflowId)
+		case schemas.GetRunResponse_workflowOwnerId:
+			v.WorkflowOwnerId = new(string)
+			return d.ReadString(schemas.GetRunResponse_workflowOwnerId, v.WorkflowOwnerId)
+		case schemas.GetRunResponse_workflowType:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_workflowType, &ev); err != nil {
+				return err
+			}
+			v.WorkflowType = types.WorkflowType(ev)
+			return nil
+		case schemas.GetRunResponse_workflowUuid:
+			v.WorkflowUuid = new(string)
+			return d.ReadString(schemas.GetRunResponse_workflowUuid, v.WorkflowUuid)
+		case schemas.GetRunResponse_workflowVersionName:
+			v.WorkflowVersionName = new(string)
+			return d.ReadString(schemas.GetRunResponse_workflowVersionName, v.WorkflowVersionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRun, schemas.GetRunRequest, schemas.GetRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRun, schemas.GetRunRequest, schemas.GetRunResponse), output: &GetRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,27 @@ type ListThreatsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThreatsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThreatsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThreatsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListThreatsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThreatsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThreatsInput_nextToken, *v.NextToken)
+	}
+	if v.ThreatJobId != nil {
+		s.WriteString(schemas.ListThreatsInput_threatJobId, *v.ThreatJobId)
+	}
+}
+
 // Output for the ListThreats operation.
 type ListThreatsOutput struct {
 
@@ -62,13 +85,35 @@ type ListThreatsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThreatsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThreatsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThreatsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThreatsOutput_nextToken, *v.NextToken)
+	}
+	serializeThreatSummaryList(s, schemas.ListThreatsOutput_threats, v.Threats)
+}
+func (v *ListThreatsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThreatsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThreatsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThreatsOutput_nextToken, v.NextToken)
+		case schemas.ListThreatsOutput_threats:
+			return deserializeThreatSummaryList(d, schemas.ListThreatsOutput_threats, &v.Threats)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThreatsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThreats{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThreats, schemas.ListThreatsInput, schemas.ListThreatsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThreats{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThreats, schemas.ListThreatsInput, schemas.ListThreatsOutput), output: &ListThreatsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

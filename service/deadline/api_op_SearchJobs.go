@@ -28,8 +28,6 @@ func (c *Client) SearchJobs(ctx context.Context, params *SearchJobsInput, optFns
 	return out, nil
 }
 
-// Shared input fields for all Search operations (filterExpressions,
-// sortExpressions, itemOffset, pageSize).
 type SearchJobsInput struct {
 
 	// The farm ID of the job.
@@ -84,7 +82,6 @@ func (v *SearchJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeSearchSortExpressions(s, schemas.SearchJobsRequest_sortExpressions, v.SortExpressions)
 }
 
-// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchJobsOutput struct {
 
 	// The jobs in the search.

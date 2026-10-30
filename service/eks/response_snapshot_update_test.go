@@ -750,6 +750,11 @@ func TestUpdateResponseSnapshot_CreateCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -1573,6 +1578,11 @@ func TestUpdateResponseSnapshot_DeleteCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -2131,6 +2141,11 @@ func TestUpdateResponseSnapshot_DeregisterCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -2849,6 +2864,11 @@ func TestUpdateResponseSnapshot_DescribeCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{
@@ -4915,6 +4935,11 @@ func TestUpdateResponseSnapshot_RegisterCluster(t *testing.T) {
 				IpFamily:        types.IpFamily("ipv4"),
 				ElasticLoadBalancing: &types.ElasticLoadBalancing{
 					Enabled: ptr.Bool(true),
+					GatewayApi: &types.GatewayApiConfiguration{
+						Crds: &types.CrdManagementConfiguration{
+							Managed: ptr.Bool(true),
+						},
+					},
 				},
 			},
 			Logging: &types.Logging{

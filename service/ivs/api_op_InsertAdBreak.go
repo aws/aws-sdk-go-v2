@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Inserts an ad marker in the playlist for the specified channel and duration
@@ -45,6 +46,12 @@ type InsertAdBreakInput struct {
 	// This member is required.
 	DurationSeconds *int32
 
+	// Caller-specified unique identifier for the ad break to insert into the playlist.
+	AdBreakId *string
+
+	// Target time at which the ad break starts.
+	TargetStartAt *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -55,11 +62,17 @@ func (v *InsertAdBreakInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InsertAdBreakInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdBreakId != nil {
+		s.WriteString(schemas.InsertAdBreakRequest_adBreakId, *v.AdBreakId)
+	}
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.InsertAdBreakRequest_channelArn, *v.ChannelArn)
 	}
 	if v.DurationSeconds != nil {
 		s.WriteInt32(schemas.InsertAdBreakRequest_durationSeconds, *v.DurationSeconds)
+	}
+	if v.TargetStartAt != nil {
+		s.WriteTime(schemas.InsertAdBreakRequest_targetStartAt, *v.TargetStartAt)
 	}
 }
 
@@ -67,6 +80,9 @@ type InsertAdBreakOutput struct {
 
 	// Unique identifier for the ad break that was inserted into the playlist.
 	AdBreakId *string
+
+	// Target start time for the inserted ad break.
+	TargetStartAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -84,6 +100,9 @@ func (v *InsertAdBreakOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdBreakId != nil {
 		s.WriteString(schemas.InsertAdBreakResponse_adBreakId, *v.AdBreakId)
 	}
+	if v.TargetStartAt != nil {
+		s.WriteTime(schemas.InsertAdBreakResponse_targetStartAt, *v.TargetStartAt)
+	}
 }
 func (v *InsertAdBreakOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InsertAdBreakResponse, func(s *smithy.Schema) error {
@@ -91,6 +110,9 @@ func (v *InsertAdBreakOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.InsertAdBreakResponse_adBreakId:
 			v.AdBreakId = new(string)
 			return d.ReadString(schemas.InsertAdBreakResponse_adBreakId, v.AdBreakId)
+		case schemas.InsertAdBreakResponse_targetStartAt:
+			v.TargetStartAt = new(time.Time)
+			return d.ReadTime(schemas.InsertAdBreakResponse_targetStartAt, v.TargetStartAt)
 		}
 		return nil
 	})

@@ -86,8 +86,8 @@ type CreateImagePipelineInput struct {
 	// containerRecipeArn , but not both.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans that Amazon Inspector runs against
-	// the test instance during image creation.
+	// The settings that determine whether and how Amazon Inspector scans the images
+	// that this pipeline creates.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
 	// The tags that Image Builder applies to the Image Builder image resource that

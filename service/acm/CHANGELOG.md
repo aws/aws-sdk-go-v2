@@ -1,3 +1,12 @@
+# v1.51.0 (2026-10-28)
+
+* **Feature**: AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol in the AWS GovCloud (US-East) and AWS GovCloud (US-West) Regions.
+
+# v1.50.7 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.6 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

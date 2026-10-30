@@ -5,7 +5,9 @@ package managedblockchainquery
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -72,6 +74,47 @@ type ListTransactionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTransactionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTransactionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTransactionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.ListTransactionsInput_address, *v.Address)
+	}
+	if v.ConfirmationStatusFilter != nil {
+		s.WriteStruct(schemas.ListTransactionsInput_confirmationStatusFilter)
+		v.ConfirmationStatusFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromBlockchainInstant != nil {
+		s.WriteStruct(schemas.ListTransactionsInput_fromBlockchainInstant)
+		v.FromBlockchainInstant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTransactionsInput_maxResults, *v.MaxResults)
+	}
+	if v.Network != "" {
+		s.WriteString(schemas.ListTransactionsInput_network, string(v.Network))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTransactionsInput_nextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListTransactionsInput_sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ToBlockchainInstant != nil {
+		s.WriteStruct(schemas.ListTransactionsInput_toBlockchainInstant)
+		v.ToBlockchainInstant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListTransactionsOutput struct {
 
 	// The array of transactions returned by the request.
@@ -88,13 +131,35 @@ type ListTransactionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTransactionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTransactionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTransactionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTransactionsOutput_nextToken, *v.NextToken)
+	}
+	serializeTransactionOutputList(s, schemas.ListTransactionsOutput_transactions, v.Transactions)
+}
+func (v *ListTransactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTransactionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTransactionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTransactionsOutput_nextToken, v.NextToken)
+		case schemas.ListTransactionsOutput_transactions:
+			return deserializeTransactionOutputList(d, schemas.ListTransactionsOutput_transactions, &v.Transactions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTransactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTransactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransactions, schemas.ListTransactionsInput, schemas.ListTransactionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTransactions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTransactions, schemas.ListTransactionsInput, schemas.ListTransactionsOutput), output: &ListTransactionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

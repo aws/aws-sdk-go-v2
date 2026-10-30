@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Entries":[{"CreateTime":"2000-01-01T00:00:00Z","GeofenceId":"__GeofenceId__","GeofenceProperties":{"key0":"__Value__"},"Geometry":{"Circle":{"Center":[1,1],"Radius":1},"Geobuf":"YmxvYg==","MultiPolygon":[[[[1,1],[1,1]],[[1,1],[1,1]]],[[[1,1],[1,1]],[[1,1],[1,1]]]],"Polygon":[[[1,1],[1,1]],[[1,1],[1,1]]]},"Status":"__Status__","UpdateTime":"2000-01-01T00:00:00Z"},{"CreateTime":"2000-01-01T00:00:00Z","GeofenceId":"__GeofenceId__","GeofenceProperties":{"key0":"__Value__"},"Geometry":{"Circle":{"Center":[1,1],"Radius":1},"Geobuf":"YmxvYg==","MultiPolygon":[[[[1,1],[1,1]],[[1,1],[1,1]]],[[[1,1],[1,1]],[[1,1],[1,1]]]],"Polygon":[[[1,1],[1,1]],[[1,1],[1,1]]]},"Status":"__Status__","UpdateTime":"2000-01-01T00:00:00Z"}],"NextToken":"__NextToken__"}

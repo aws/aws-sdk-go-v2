@@ -5,7 +5,9 @@ package mpa
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,21 @@ type ListApprovalTeamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApprovalTeamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApprovalTeamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApprovalTeamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApprovalTeamsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApprovalTeamsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListApprovalTeamsOutput struct {
 
 	// An array of ListApprovalTeamsResponseApprovalTeam objects. Contains details for
@@ -59,13 +76,35 @@ type ListApprovalTeamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApprovalTeamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApprovalTeamsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApprovalTeamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListApprovalTeamsResponseApprovalTeams(s, schemas.ListApprovalTeamsResponse_ApprovalTeams, v.ApprovalTeams)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApprovalTeamsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApprovalTeamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApprovalTeamsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApprovalTeamsResponse_ApprovalTeams:
+			return deserializeListApprovalTeamsResponseApprovalTeams(d, schemas.ListApprovalTeamsResponse_ApprovalTeams, &v.ApprovalTeams)
+		case schemas.ListApprovalTeamsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApprovalTeamsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApprovalTeamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApprovalTeams{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApprovalTeams, schemas.ListApprovalTeamsRequest, schemas.ListApprovalTeamsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApprovalTeams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApprovalTeams, schemas.ListApprovalTeamsRequest, schemas.ListApprovalTeamsResponse), output: &ListApprovalTeamsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

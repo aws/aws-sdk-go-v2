@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetFindingsFilterInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFindingsFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetFindingsFilterRequest_id, *v.Id)
+	}
 }
 
 type GetFindingsFilterOutput struct {
@@ -71,13 +85,77 @@ type GetFindingsFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GetFindingsFilterResponse_action, string(v.Action))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFindingsFilterResponse_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFindingsFilterResponse_description, *v.Description)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.GetFindingsFilterResponse_findingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFindingsFilterResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFindingsFilterResponse_name, *v.Name)
+	}
+	if v.Position != nil {
+		s.WriteInt32(schemas.GetFindingsFilterResponse_position, *v.Position)
+	}
+	serializeTagMap(s, schemas.GetFindingsFilterResponse_tags, v.Tags)
+}
+func (v *GetFindingsFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsFilterResponse_action:
+			var ev string
+			if err := d.ReadString(schemas.GetFindingsFilterResponse_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.FindingsFilterAction(ev)
+			return nil
+		case schemas.GetFindingsFilterResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFindingsFilterResponse_arn, v.Arn)
+		case schemas.GetFindingsFilterResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFindingsFilterResponse_description, v.Description)
+		case schemas.GetFindingsFilterResponse_findingCriteria:
+			v.FindingCriteria = &types.FindingCriteria{}
+			return v.FindingCriteria.Deserialize(d)
+		case schemas.GetFindingsFilterResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFindingsFilterResponse_id, v.Id)
+		case schemas.GetFindingsFilterResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFindingsFilterResponse_name, v.Name)
+		case schemas.GetFindingsFilterResponse_position:
+			v.Position = new(int32)
+			return d.ReadInt32(schemas.GetFindingsFilterResponse_position, v.Position)
+		case schemas.GetFindingsFilterResponse_tags:
+			return deserializeTagMap(d, schemas.GetFindingsFilterResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsFilter, schemas.GetFindingsFilterRequest, schemas.GetFindingsFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsFilter, schemas.GetFindingsFilterRequest, schemas.GetFindingsFilterResponse), output: &GetFindingsFilterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

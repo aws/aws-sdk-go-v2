@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -32,6 +34,18 @@ type GetApplicationInput struct {
 	ApplicationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationRequest_applicationId, *v.ApplicationId)
+	}
 }
 
 type GetApplicationOutput struct {
@@ -65,13 +79,64 @@ type GetApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetApplicationResponse_applicationId, *v.ApplicationId)
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.GetApplicationResponse_applicationName, *v.ApplicationName)
+	}
+	if v.DefaultKmsKeyId != nil {
+		s.WriteString(schemas.GetApplicationResponse_defaultKmsKeyId, *v.DefaultKmsKeyId)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.GetApplicationResponse_domain, *v.Domain)
+	}
+	if v.IdcConfiguration != nil {
+		s.WriteStruct(schemas.GetApplicationResponse_idcConfiguration)
+		v.IdcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetApplicationResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *GetApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_applicationId, v.ApplicationId)
+		case schemas.GetApplicationResponse_applicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_applicationName, v.ApplicationName)
+		case schemas.GetApplicationResponse_defaultKmsKeyId:
+			v.DefaultKmsKeyId = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_defaultKmsKeyId, v.DefaultKmsKeyId)
+		case schemas.GetApplicationResponse_domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_domain, v.Domain)
+		case schemas.GetApplicationResponse_idcConfiguration:
+			v.IdcConfiguration = &types.IdCConfiguration{}
+			return v.IdcConfiguration.Deserialize(d)
+		case schemas.GetApplicationResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetApplicationResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplication, schemas.GetApplicationRequest, schemas.GetApplicationResponse), output: &GetApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

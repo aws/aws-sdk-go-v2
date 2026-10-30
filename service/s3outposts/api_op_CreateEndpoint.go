@@ -4,7 +4,9 @@ package s3outposts
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -69,6 +71,30 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessType != "" {
+		s.WriteString(schemas.CreateEndpointRequest_AccessType, string(v.AccessType))
+	}
+	if v.CustomerOwnedIpv4Pool != nil {
+		s.WriteString(schemas.CreateEndpointRequest_CustomerOwnedIpv4Pool, *v.CustomerOwnedIpv4Pool)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.CreateEndpointRequest_OutpostId, *v.OutpostId)
+	}
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.CreateEndpointRequest_SecurityGroupId, *v.SecurityGroupId)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateEndpointRequest_SubnetId, *v.SubnetId)
+	}
+}
+
 type CreateEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) of the endpoint.
@@ -80,13 +106,32 @@ type CreateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.CreateEndpointResult_EndpointArn, *v.EndpointArn)
+	}
+}
+func (v *CreateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointResult_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.CreateEndpointResult_EndpointArn, v.EndpointArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpoint, schemas.CreateEndpointRequest, schemas.CreateEndpointResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpoint, schemas.CreateEndpointRequest, schemas.CreateEndpointResult), output: &CreateEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

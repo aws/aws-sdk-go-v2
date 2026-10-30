@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchGetCodeReviewJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCodeReviewJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCodeReviewJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCodeReviewJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchGetCodeReviewJobsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeCodeReviewJobIdList(s, schemas.BatchGetCodeReviewJobsInput_codeReviewJobIds, v.CodeReviewJobIds)
+}
+
 // Output for the BatchGetCodeReviewJobs operation.
 type BatchGetCodeReviewJobsOutput struct {
 
@@ -55,13 +70,32 @@ type BatchGetCodeReviewJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCodeReviewJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCodeReviewJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCodeReviewJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeReviewJobList(s, schemas.BatchGetCodeReviewJobsOutput_codeReviewJobs, v.CodeReviewJobs)
+	serializeCodeReviewJobIdList(s, schemas.BatchGetCodeReviewJobsOutput_notFound, v.NotFound)
+}
+func (v *BatchGetCodeReviewJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCodeReviewJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCodeReviewJobsOutput_codeReviewJobs:
+			return deserializeCodeReviewJobList(d, schemas.BatchGetCodeReviewJobsOutput_codeReviewJobs, &v.CodeReviewJobs)
+		case schemas.BatchGetCodeReviewJobsOutput_notFound:
+			return deserializeCodeReviewJobIdList(d, schemas.BatchGetCodeReviewJobsOutput_notFound, &v.NotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCodeReviewJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCodeReviewJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeReviewJobs, schemas.BatchGetCodeReviewJobsInput, schemas.BatchGetCodeReviewJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCodeReviewJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeReviewJobs, schemas.BatchGetCodeReviewJobsInput, schemas.BatchGetCodeReviewJobsOutput), output: &BatchGetCodeReviewJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

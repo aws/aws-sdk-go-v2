@@ -519,6 +519,50 @@ func (v *AgentSkillsDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A port or port range that is reachable through the runtime's session URL.
+// Specify exactly one of port or portRange .
+//
+// The following types satisfy this interface:
+//
+//	AllowedPortMemberPort
+//	AllowedPortMemberPortRange
+type AllowedPort interface {
+	isAllowedPort()
+}
+
+// A single port that is reachable through the runtime's session URL.
+type AllowedPortMemberPort struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*AllowedPortMemberPort) isAllowedPort() {}
+func (v *AllowedPortMemberPort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.AllowedPort_port, v.Value)
+}
+func (v *AllowedPortMemberPort) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.AllowedPort_port, &v.Value)
+}
+
+// An inclusive range of ports that are reachable through the runtime's session
+// URL.
+type AllowedPortMemberPortRange struct {
+	Value PortRange
+
+	noSmithyDocumentSerde
+}
+
+func (*AllowedPortMemberPortRange) isAllowedPort() {}
+func (v *AllowedPortMemberPortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllowedPort_portRange)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AllowedPortMemberPortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // The configuration that restricts which workloads in the request's identity
 // chain are allowed to invoke the target, identified by their hosting environments
 // and workload identities. At launch, this is supported only for AgentCore Runtime
@@ -15918,6 +15962,46 @@ func (v *OAuthCredentialProvider) Deserialize(d smithy.ShapeDeserializer) error 
 	})
 }
 
+// Specifies the client authentication method to use for the on-behalf-of token
+// exchange.
+type OnBehalfOfAuthenticationConfig struct {
+
+	// The client authentication method to use during the on-behalf-of token exchange.
+	// The NO_CLIENT option omits the clientId and clientSecret during the
+	// on-behalf-of token exchange with the identity provider.
+	//
+	// This member is required.
+	ClientAuthenticationMethod OnBehalfOfClientAuthenticationMethod
+
+	noSmithyDocumentSerde
+}
+
+func (v *OnBehalfOfAuthenticationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnBehalfOfAuthenticationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnBehalfOfAuthenticationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientAuthenticationMethod != "" {
+		s.WriteString(schemas.OnBehalfOfAuthenticationConfig_clientAuthenticationMethod, string(v.ClientAuthenticationMethod))
+	}
+}
+func (v *OnBehalfOfAuthenticationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnBehalfOfAuthenticationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnBehalfOfAuthenticationConfig_clientAuthenticationMethod:
+			var ev string
+			if err := d.ReadString(schemas.OnBehalfOfAuthenticationConfig_clientAuthenticationMethod, &ev); err != nil {
+				return err
+			}
+			v.ClientAuthenticationMethod = OnBehalfOfClientAuthenticationMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration for on-behalf-of token exchange.
 type OnBehalfOfTokenExchangeConfigType struct {
 
@@ -15925,6 +16009,13 @@ type OnBehalfOfTokenExchangeConfigType struct {
 	//
 	// This member is required.
 	GrantType OnBehalfOfTokenExchangeGrantTypeType
+
+	// Specify the client authentication configuration to use for the on-behalf-of
+	// token exchange. With this configuration, you override the provider level client
+	// authentication method for the on-behalf-of exchange with the identity provider.
+	// If you don't specify this configuration, we use the provider level client
+	// authentication method.
+	OnBehalfOfAuthenticationConfig *OnBehalfOfAuthenticationConfig
 
 	// Configuration specific to the TOKEN_EXCHANGE grant type (RFC 8693).
 	TokenExchangeGrantTypeConfig *TokenExchangeGrantTypeConfigType
@@ -15942,6 +16033,11 @@ func (v *OnBehalfOfTokenExchangeConfigType) SerializeMembers(s smithy.ShapeSeria
 	if v.GrantType != "" {
 		s.WriteString(schemas.OnBehalfOfTokenExchangeConfigType_grantType, string(v.GrantType))
 	}
+	if v.OnBehalfOfAuthenticationConfig != nil {
+		s.WriteStruct(schemas.OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig)
+		v.OnBehalfOfAuthenticationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.TokenExchangeGrantTypeConfig != nil {
 		s.WriteStruct(schemas.OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig)
 		v.TokenExchangeGrantTypeConfig.SerializeMembers(s)
@@ -15958,6 +16054,9 @@ func (v *OnBehalfOfTokenExchangeConfigType) Deserialize(d smithy.ShapeDeserializ
 			}
 			v.GrantType = OnBehalfOfTokenExchangeGrantTypeType(ev)
 			return nil
+		case schemas.OnBehalfOfTokenExchangeConfigType_onBehalfOfAuthenticationConfig:
+			v.OnBehalfOfAuthenticationConfig = &OnBehalfOfAuthenticationConfig{}
+			return v.OnBehalfOfAuthenticationConfig.Deserialize(d)
 		case schemas.OnBehalfOfTokenExchangeConfigType_tokenExchangeGrantTypeConfig:
 			v.TokenExchangeGrantTypeConfig = &TokenExchangeGrantTypeConfigType{}
 			return v.TokenExchangeGrantTypeConfig.Deserialize(d)
@@ -17863,6 +17962,51 @@ func (v *PolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// An inclusive range of ports. The value of from must be less than or equal to
+// the value of to .
+type PortRange struct {
+
+	// The first port in the inclusive range.
+	//
+	// This member is required.
+	From *int32
+
+	// The last port in the inclusive range.
+	//
+	// This member is required.
+	To *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.From != nil {
+		s.WriteInt32(schemas.PortRange_from, *v.From)
+	}
+	if v.To != nil {
+		s.WriteInt32(schemas.PortRange_to, *v.To)
+	}
+}
+func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PortRange_from:
+			v.From = new(int32)
+			return d.ReadInt32(schemas.PortRange_from, v.From)
+		case schemas.PortRange_to:
+			v.To = new(int32)
+			return d.ReadInt32(schemas.PortRange_to, v.To)
+		}
+		return nil
+	})
+}
+
 // The private endpoint configuration for a gateway target. Defines how the
 // gateway connects to private resources in your VPC.
 //
@@ -18044,6 +18188,16 @@ type ProtocolConfiguration struct {
 	// This member is required.
 	ServerProtocol ServerProtocol
 
+	// The path on which the agent server accepts requests. The path must begin with /
+	// . When this field is omitted, the default is /invocations for HTTP and AGUI ,
+	// /mcp for MCP , and / for A2A .
+	Path *string
+
+	// The port on which the agent server listens. The port must be between 8000 and
+	// 12000 , excluding the reserved port 8443 . When this field is omitted, the
+	// default is 8080 for HTTP and AGUI , 8000 for MCP , and 9000 for A2A .
+	Port *int32
+
 	noSmithyDocumentSerde
 }
 
@@ -18054,6 +18208,12 @@ func (v *ProtocolConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtocolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Path != nil {
+		s.WriteString(schemas.ProtocolConfiguration_path, *v.Path)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.ProtocolConfiguration_port, *v.Port)
+	}
 	if v.ServerProtocol != "" {
 		s.WriteString(schemas.ProtocolConfiguration_serverProtocol, string(v.ServerProtocol))
 	}
@@ -18061,6 +18221,12 @@ func (v *ProtocolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ProtocolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtocolConfiguration, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ProtocolConfiguration_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ProtocolConfiguration_path, v.Path)
+		case schemas.ProtocolConfiguration_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.ProtocolConfiguration_port, v.Port)
 		case schemas.ProtocolConfiguration_serverProtocol:
 			var ev string
 			if err := d.ReadString(schemas.ProtocolConfiguration_serverProtocol, &ev); err != nil {
@@ -24051,6 +24217,7 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAction()                                 {}
 func (*UnknownUnionMember) isAgentRuntimeArtifact()                   {}
+func (*UnknownUnionMember) isAllowedPort()                            {}
 func (*UnknownUnionMember) isApiSchemaConfiguration()                 {}
 func (*UnknownUnionMember) isAuthorizationData()                      {}
 func (*UnknownUnionMember) isAuthorizerConfiguration()                {}

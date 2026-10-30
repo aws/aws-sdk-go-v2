@@ -4,7 +4,9 @@ package s3vectors
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -64,6 +66,25 @@ type PutVectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVectorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.PutVectorsInput_indexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.PutVectorsInput_indexName, *v.IndexName)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.PutVectorsInput_vectorBucketName, *v.VectorBucketName)
+	}
+	serializePutVectorsInputList(s, schemas.PutVectorsInput_vectors, v.Vectors)
+}
+
 type PutVectorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,13 +92,26 @@ type PutVectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVectorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVectorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVectors, schemas.PutVectorsInput, schemas.PutVectorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVectors, schemas.PutVectorsInput, schemas.PutVectorsOutput), output: &PutVectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -1878,8 +1878,9 @@ func TestCheckRequestSnapshot_ListCustomerManagedPolicyReferencesInPermissionSet
 
 func TestCheckRequestSnapshot_ListInstances(t *testing.T) {
 	input := &ListInstancesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		RegionScope: types.RegionScope("CURRENT_REGION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -4317,8 +4318,9 @@ func TestUpdateRequestSnapshot_ListCustomerManagedPolicyReferencesInPermissionSe
 
 func TestUpdateRequestSnapshot_ListInstances(t *testing.T) {
 	input := &ListInstancesInput{
-		MaxResults: ptr.Int32(1),
-		NextToken:  ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+		NextToken:   ptr.String("__NextToken__"),
+		RegionScope: types.RegionScope("CURRENT_REGION"),
 	}
 	body := &bytes.Buffer{}
 	method := ""

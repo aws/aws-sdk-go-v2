@@ -4,7 +4,9 @@ package lexmodelbuildingservice
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -52,6 +54,24 @@ type GetBotChannelAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotChannelAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotChannelAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotChannelAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAlias != nil {
+		s.WriteString(schemas.GetBotChannelAssociationRequest_botAlias, *v.BotAlias)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.GetBotChannelAssociationRequest_botName, *v.BotName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBotChannelAssociationRequest_name, *v.Name)
+	}
+}
+
 type GetBotChannelAssociationOutput struct {
 
 	// An alias pointing to the specific version of the Amazon Lex bot to which this
@@ -97,13 +117,85 @@ type GetBotChannelAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotChannelAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotChannelAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotChannelAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAlias != nil {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_botAlias, *v.BotAlias)
+	}
+	serializeChannelConfigurationMap(s, schemas.GetBotChannelAssociationResponse_botConfiguration, v.BotConfiguration)
+	if v.BotName != nil {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_botName, *v.BotName)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetBotChannelAssociationResponse_createdDate, *v.CreatedDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_description, *v.Description)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_failureReason, *v.FailureReason)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetBotChannelAssociationResponse_type, string(v.Type))
+	}
+}
+func (v *GetBotChannelAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotChannelAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotChannelAssociationResponse_botAlias:
+			v.BotAlias = new(string)
+			return d.ReadString(schemas.GetBotChannelAssociationResponse_botAlias, v.BotAlias)
+		case schemas.GetBotChannelAssociationResponse_botConfiguration:
+			return deserializeChannelConfigurationMap(d, schemas.GetBotChannelAssociationResponse_botConfiguration, &v.BotConfiguration)
+		case schemas.GetBotChannelAssociationResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.GetBotChannelAssociationResponse_botName, v.BotName)
+		case schemas.GetBotChannelAssociationResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetBotChannelAssociationResponse_createdDate, v.CreatedDate)
+		case schemas.GetBotChannelAssociationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBotChannelAssociationResponse_description, v.Description)
+		case schemas.GetBotChannelAssociationResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetBotChannelAssociationResponse_failureReason, v.FailureReason)
+		case schemas.GetBotChannelAssociationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBotChannelAssociationResponse_name, v.Name)
+		case schemas.GetBotChannelAssociationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBotChannelAssociationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ChannelStatus(ev)
+			return nil
+		case schemas.GetBotChannelAssociationResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetBotChannelAssociationResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ChannelType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBotChannelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotChannelAssociation, schemas.GetBotChannelAssociationRequest, schemas.GetBotChannelAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBotChannelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBotChannelAssociation, schemas.GetBotChannelAssociationRequest, schemas.GetBotChannelAssociationResponse), output: &GetBotChannelAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

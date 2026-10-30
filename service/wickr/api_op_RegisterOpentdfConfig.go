@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,33 @@ type RegisterOpentdfConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterOpentdfConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterOpentdfConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterOpentdfConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigRequest_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigRequest_clientSecret, *v.ClientSecret)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigRequest_domain, *v.Domain)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.RegisterOpentdfConfigRequest_dryRun, *v.DryRun)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigRequest_networkId, *v.NetworkId)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigRequest_provider, *v.Provider)
+	}
+}
+
 type RegisterOpentdfConfigOutput struct {
 
 	// The OIDC client ID used for authenticating with the OpenTDF provider.
@@ -87,13 +116,50 @@ type RegisterOpentdfConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterOpentdfConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterOpentdfConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterOpentdfConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientId != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigResponse_clientId, *v.ClientId)
+	}
+	if v.ClientSecret != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigResponse_clientSecret, *v.ClientSecret)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigResponse_domain, *v.Domain)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.RegisterOpentdfConfigResponse_provider, *v.Provider)
+	}
+}
+func (v *RegisterOpentdfConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterOpentdfConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterOpentdfConfigResponse_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.RegisterOpentdfConfigResponse_clientId, v.ClientId)
+		case schemas.RegisterOpentdfConfigResponse_clientSecret:
+			v.ClientSecret = new(string)
+			return d.ReadString(schemas.RegisterOpentdfConfigResponse_clientSecret, v.ClientSecret)
+		case schemas.RegisterOpentdfConfigResponse_domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.RegisterOpentdfConfigResponse_domain, v.Domain)
+		case schemas.RegisterOpentdfConfigResponse_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.RegisterOpentdfConfigResponse_provider, v.Provider)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterOpentdfConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterOpentdfConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOpentdfConfig, schemas.RegisterOpentdfConfigRequest, schemas.RegisterOpentdfConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterOpentdfConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterOpentdfConfig, schemas.RegisterOpentdfConfigRequest, schemas.RegisterOpentdfConfigResponse), output: &RegisterOpentdfConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

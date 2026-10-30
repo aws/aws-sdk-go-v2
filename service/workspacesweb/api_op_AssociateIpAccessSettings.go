@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type AssociateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIpAccessSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAccessSettingsArn != nil {
+		s.WriteString(schemas.AssociateIpAccessSettingsRequest_ipAccessSettingsArn, *v.IpAccessSettingsArn)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.AssociateIpAccessSettingsRequest_portalArn, *v.PortalArn)
+	}
+}
+
 type AssociateIpAccessSettingsOutput struct {
 
 	// The ARN of the IP access settings resource.
@@ -56,13 +73,38 @@ type AssociateIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateIpAccessSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateIpAccessSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateIpAccessSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAccessSettingsArn != nil {
+		s.WriteString(schemas.AssociateIpAccessSettingsResponse_ipAccessSettingsArn, *v.IpAccessSettingsArn)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.AssociateIpAccessSettingsResponse_portalArn, *v.PortalArn)
+	}
+}
+func (v *AssociateIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateIpAccessSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateIpAccessSettingsResponse_ipAccessSettingsArn:
+			v.IpAccessSettingsArn = new(string)
+			return d.ReadString(schemas.AssociateIpAccessSettingsResponse_ipAccessSettingsArn, v.IpAccessSettingsArn)
+		case schemas.AssociateIpAccessSettingsResponse_portalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.AssociateIpAccessSettingsResponse_portalArn, v.PortalArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIpAccessSettings, schemas.AssociateIpAccessSettingsRequest, schemas.AssociateIpAccessSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateIpAccessSettings, schemas.AssociateIpAccessSettingsRequest, schemas.AssociateIpAccessSettingsResponse), output: &AssociateIpAccessSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

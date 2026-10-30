@@ -8414,10 +8414,12 @@ var _DeepHealthChecks_member *smithy.Schema
 var DeepHealthCheckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "DeepHealthCheckType",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var DeepHealthCheckType_INSTANCE_STRESS *smithy.Schema
 
 var DeepHealthCheckType_INSTANCE_CONNECTIVITY *smithy.Schema
+
+var DeepHealthCheckType_MULTI_NODE_TRAINING_VALIDATION *smithy.Schema
 
 var _DefaultDomainIdList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -39790,6 +39792,8 @@ func init() {
 	DeepHealthCheckType_INSTANCE_STRESS = DeepHealthCheckType.AddMember("INSTANCE_STRESS", smithyprelude.Unit)
 
 	DeepHealthCheckType_INSTANCE_CONNECTIVITY = DeepHealthCheckType.AddMember("INSTANCE_CONNECTIVITY", smithyprelude.Unit)
+
+	DeepHealthCheckType_MULTI_NODE_TRAINING_VALIDATION = DeepHealthCheckType.AddMember("MULTI_NODE_TRAINING_VALIDATION", smithyprelude.Unit)
 
 	_OnStartDeepHealthChecks_member = _OnStartDeepHealthChecks.AddMember("member", DeepHealthCheckType)
 

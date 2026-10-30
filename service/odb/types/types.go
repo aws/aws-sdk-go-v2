@@ -4506,6 +4506,10 @@ type CloudExadataInfrastructure struct {
 	// The user-friendly name for the Exadata infrastructure.
 	DisplayName *string
 
+	// The Exascale storage configuration of the Exadata infrastructure. This value is
+	// present only when Exascale storage is configured on the infrastructure.
+	ExascaleConfiguration *ExascaleConfiguration
+
 	// The Oracle Cloud Identifier (OCID) of the last maintenance run for the Exadata
 	// infrastructure.
 	LastMaintenanceRunId *string
@@ -4576,8 +4580,7 @@ type CloudExadataInfrastructure struct {
 	// The software version of the storage servers on the Exadata infrastructure.
 	StorageServerVersion *string
 
-	// The total amount of storage, in gigabytes (GB), on the the Exadata
-	// infrastructure.
+	// The total amount of storage, in gigabytes (GB), on the Exadata infrastructure.
 	TotalStorageSizeInGBs *int32
 
 	noSmithyDocumentSerde
@@ -4638,6 +4641,11 @@ func (v *CloudExadataInfrastructure) SerializeMembers(s smithy.ShapeSerializer) 
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CloudExadataInfrastructure_displayName, *v.DisplayName)
+	}
+	if v.ExascaleConfiguration != nil {
+		s.WriteStruct(schemas.CloudExadataInfrastructure_exascaleConfiguration)
+		v.ExascaleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LastMaintenanceRunId != nil {
 		s.WriteString(schemas.CloudExadataInfrastructure_lastMaintenanceRunId, *v.LastMaintenanceRunId)
@@ -4762,6 +4770,9 @@ func (v *CloudExadataInfrastructure) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.CloudExadataInfrastructure_displayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.CloudExadataInfrastructure_displayName, v.DisplayName)
+		case schemas.CloudExadataInfrastructure_exascaleConfiguration:
+			v.ExascaleConfiguration = &ExascaleConfiguration{}
+			return v.ExascaleConfiguration.Deserialize(d)
 		case schemas.CloudExadataInfrastructure_lastMaintenanceRunId:
 			v.LastMaintenanceRunId = new(string)
 			return d.ReadString(schemas.CloudExadataInfrastructure_lastMaintenanceRunId, v.LastMaintenanceRunId)
@@ -4898,6 +4909,10 @@ type CloudExadataInfrastructureSummary struct {
 	// The user-friendly name for the Exadata infrastructure.
 	DisplayName *string
 
+	// The Exascale storage configuration of the Exadata infrastructure. This value is
+	// present only when Exascale storage is configured on the infrastructure.
+	ExascaleConfiguration *ExascaleConfiguration
+
 	// The Oracle Cloud Identifier (OCID) of the last maintenance run for the Exadata
 	// infrastructure.
 	LastMaintenanceRunId *string
@@ -4968,8 +4983,7 @@ type CloudExadataInfrastructureSummary struct {
 	// The software version of the storage servers on the Exadata infrastructure.
 	StorageServerVersion *string
 
-	// The total amount of storage, in gigabytes (GB), on the the Exadata
-	// infrastructure.
+	// The total amount of storage, in gigabytes (GB), on the Exadata infrastructure.
 	TotalStorageSizeInGBs *int32
 
 	noSmithyDocumentSerde
@@ -5030,6 +5044,11 @@ func (v *CloudExadataInfrastructureSummary) SerializeMembers(s smithy.ShapeSeria
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CloudExadataInfrastructureSummary_displayName, *v.DisplayName)
+	}
+	if v.ExascaleConfiguration != nil {
+		s.WriteStruct(schemas.CloudExadataInfrastructureSummary_exascaleConfiguration)
+		v.ExascaleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	if v.LastMaintenanceRunId != nil {
 		s.WriteString(schemas.CloudExadataInfrastructureSummary_lastMaintenanceRunId, *v.LastMaintenanceRunId)
@@ -5154,6 +5173,9 @@ func (v *CloudExadataInfrastructureSummary) Deserialize(d smithy.ShapeDeserializ
 		case schemas.CloudExadataInfrastructureSummary_displayName:
 			v.DisplayName = new(string)
 			return d.ReadString(schemas.CloudExadataInfrastructureSummary_displayName, v.DisplayName)
+		case schemas.CloudExadataInfrastructureSummary_exascaleConfiguration:
+			v.ExascaleConfiguration = &ExascaleConfiguration{}
+			return v.ExascaleConfiguration.Deserialize(d)
 		case schemas.CloudExadataInfrastructureSummary_lastMaintenanceRunId:
 			v.LastMaintenanceRunId = new(string)
 			return d.ReadString(schemas.CloudExadataInfrastructureSummary_lastMaintenanceRunId, v.LastMaintenanceRunId)
@@ -5368,6 +5390,18 @@ type CloudVmCluster struct {
 	// The domain of the VM cluster.
 	Domain *string
 
+	// The Amazon Resource Name (ARN) of the Exascale storage vault that the VM
+	// cluster uses. This value is present only for VM clusters that use an Exascale
+	// storage vault.
+	ExascaleDbStorageVaultArn *string
+
+	// The unique identifier of the Exascale storage vault that the VM cluster uses.
+	// This value is present only for VM clusters that use an Exascale storage vault.
+	ExascaleDbStorageVaultId *string
+
+	// The list of file system configurations for the VM cluster.
+	FileSystemConfigurationDetails []FileSystemConfigurationDetails
+
 	// The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.
 	GiVersion *string
 
@@ -5448,6 +5482,10 @@ type CloudVmCluster struct {
 	// Additional information about the status of the VM cluster.
 	StatusReason *string
 
+	// The type of storage management for the VM cluster. A value of ASM indicates
+	// Oracle Automatic Storage Management, and EXASCALE indicates Exascale storage.
+	StorageManagementType StorageManagementType
+
 	// The amount of local node storage, in gigabytes (GB), that's allocated to the VM
 	// cluster.
 	StorageSizeInGBs *int32
@@ -5463,6 +5501,12 @@ type CloudVmCluster struct {
 	// each node in the VM cluster to enable failover. If one node fails, the VIP is
 	// reassigned to another active node in the cluster.
 	VipIds []string
+
+	// The type of storage that the VM cluster uses for VM backups.
+	VmBackupStorageType VmStorageType
+
+	// The type of storage that the VM cluster uses for its VM file systems.
+	VmFileSystemStorageType VmStorageType
 
 	noSmithyDocumentSerde
 }
@@ -5519,6 +5563,13 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.CloudVmCluster_domain, *v.Domain)
 	}
+	if v.ExascaleDbStorageVaultArn != nil {
+		s.WriteString(schemas.CloudVmCluster_exascaleDbStorageVaultArn, *v.ExascaleDbStorageVaultArn)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.CloudVmCluster_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	serializeFileSystemConfigurationDetailsList(s, schemas.CloudVmCluster_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
 	if v.GiVersion != nil {
 		s.WriteString(schemas.CloudVmCluster_giVersion, *v.GiVersion)
 	}
@@ -5587,6 +5638,9 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.CloudVmCluster_statusReason, *v.StatusReason)
 	}
+	if v.StorageManagementType != "" {
+		s.WriteString(schemas.CloudVmCluster_storageManagementType, string(v.StorageManagementType))
+	}
 	if v.StorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CloudVmCluster_storageSizeInGBs, *v.StorageSizeInGBs)
 	}
@@ -5597,6 +5651,12 @@ func (v *CloudVmCluster) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.CloudVmCluster_timeZone, *v.TimeZone)
 	}
 	serializeStringList(s, schemas.CloudVmCluster_vipIds, v.VipIds)
+	if v.VmBackupStorageType != "" {
+		s.WriteString(schemas.CloudVmCluster_vmBackupStorageType, string(v.VmBackupStorageType))
+	}
+	if v.VmFileSystemStorageType != "" {
+		s.WriteString(schemas.CloudVmCluster_vmFileSystemStorageType, string(v.VmFileSystemStorageType))
+	}
 }
 func (v *CloudVmCluster) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudVmCluster, func(s *smithy.Schema) error {
@@ -5653,6 +5713,14 @@ func (v *CloudVmCluster) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CloudVmCluster_domain:
 			v.Domain = new(string)
 			return d.ReadString(schemas.CloudVmCluster_domain, v.Domain)
+		case schemas.CloudVmCluster_exascaleDbStorageVaultArn:
+			v.ExascaleDbStorageVaultArn = new(string)
+			return d.ReadString(schemas.CloudVmCluster_exascaleDbStorageVaultArn, v.ExascaleDbStorageVaultArn)
+		case schemas.CloudVmCluster_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.CloudVmCluster_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.CloudVmCluster_fileSystemConfigurationDetails:
+			return deserializeFileSystemConfigurationDetailsList(d, schemas.CloudVmCluster_fileSystemConfigurationDetails, &v.FileSystemConfigurationDetails)
 		case schemas.CloudVmCluster_giVersion:
 			v.GiVersion = new(string)
 			return d.ReadString(schemas.CloudVmCluster_giVersion, v.GiVersion)
@@ -5730,6 +5798,13 @@ func (v *CloudVmCluster) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CloudVmCluster_statusReason:
 			v.StatusReason = new(string)
 			return d.ReadString(schemas.CloudVmCluster_statusReason, v.StatusReason)
+		case schemas.CloudVmCluster_storageManagementType:
+			var ev string
+			if err := d.ReadString(schemas.CloudVmCluster_storageManagementType, &ev); err != nil {
+				return err
+			}
+			v.StorageManagementType = StorageManagementType(ev)
+			return nil
 		case schemas.CloudVmCluster_storageSizeInGBs:
 			v.StorageSizeInGBs = new(int32)
 			return d.ReadInt32(schemas.CloudVmCluster_storageSizeInGBs, v.StorageSizeInGBs)
@@ -5741,6 +5816,20 @@ func (v *CloudVmCluster) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.CloudVmCluster_timeZone, v.TimeZone)
 		case schemas.CloudVmCluster_vipIds:
 			return deserializeStringList(d, schemas.CloudVmCluster_vipIds, &v.VipIds)
+		case schemas.CloudVmCluster_vmBackupStorageType:
+			var ev string
+			if err := d.ReadString(schemas.CloudVmCluster_vmBackupStorageType, &ev); err != nil {
+				return err
+			}
+			v.VmBackupStorageType = VmStorageType(ev)
+			return nil
+		case schemas.CloudVmCluster_vmFileSystemStorageType:
+			var ev string
+			if err := d.ReadString(schemas.CloudVmCluster_vmFileSystemStorageType, &ev); err != nil {
+				return err
+			}
+			v.VmFileSystemStorageType = VmStorageType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -5804,6 +5893,18 @@ type CloudVmClusterSummary struct {
 
 	// The domain of the VM cluster.
 	Domain *string
+
+	// The Amazon Resource Name (ARN) of the Exascale storage vault that the VM
+	// cluster uses. This value is present only for VM clusters that use an Exascale
+	// storage vault.
+	ExascaleDbStorageVaultArn *string
+
+	// The unique identifier of the Exascale storage vault that the VM cluster uses.
+	// This value is present only for VM clusters that use an Exascale storage vault.
+	ExascaleDbStorageVaultId *string
+
+	// The list of file system configurations for the VM cluster.
+	FileSystemConfigurationDetails []FileSystemConfigurationDetails
 
 	// The software version of the Oracle Grid Infrastructure (GI) for the VM cluster.
 	GiVersion *string
@@ -5885,6 +5986,10 @@ type CloudVmClusterSummary struct {
 	// Additional information about the status of the VM cluster.
 	StatusReason *string
 
+	// The type of storage management for the VM cluster. A value of ASM indicates
+	// Oracle Automatic Storage Management, and EXASCALE indicates Exascale storage.
+	StorageManagementType StorageManagementType
+
 	// The amount of local node storage, in gigabytes (GB), that's allocated to the VM
 	// cluster.
 	StorageSizeInGBs *int32
@@ -5900,6 +6005,12 @@ type CloudVmClusterSummary struct {
 	// each node in the VM cluster to enable failover. If one node fails, the VIP is
 	// reassigned to another active node in the cluster.
 	VipIds []string
+
+	// The type of storage that the VM cluster uses for VM backups.
+	VmBackupStorageType VmStorageType
+
+	// The type of storage that the VM cluster uses for its VM file systems.
+	VmFileSystemStorageType VmStorageType
 
 	noSmithyDocumentSerde
 }
@@ -5956,6 +6067,13 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Domain != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_domain, *v.Domain)
 	}
+	if v.ExascaleDbStorageVaultArn != nil {
+		s.WriteString(schemas.CloudVmClusterSummary_exascaleDbStorageVaultArn, *v.ExascaleDbStorageVaultArn)
+	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.CloudVmClusterSummary_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	serializeFileSystemConfigurationDetailsList(s, schemas.CloudVmClusterSummary_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
 	if v.GiVersion != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_giVersion, *v.GiVersion)
 	}
@@ -6024,6 +6142,9 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.CloudVmClusterSummary_statusReason, *v.StatusReason)
 	}
+	if v.StorageManagementType != "" {
+		s.WriteString(schemas.CloudVmClusterSummary_storageManagementType, string(v.StorageManagementType))
+	}
 	if v.StorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CloudVmClusterSummary_storageSizeInGBs, *v.StorageSizeInGBs)
 	}
@@ -6034,6 +6155,12 @@ func (v *CloudVmClusterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.CloudVmClusterSummary_timeZone, *v.TimeZone)
 	}
 	serializeStringList(s, schemas.CloudVmClusterSummary_vipIds, v.VipIds)
+	if v.VmBackupStorageType != "" {
+		s.WriteString(schemas.CloudVmClusterSummary_vmBackupStorageType, string(v.VmBackupStorageType))
+	}
+	if v.VmFileSystemStorageType != "" {
+		s.WriteString(schemas.CloudVmClusterSummary_vmFileSystemStorageType, string(v.VmFileSystemStorageType))
+	}
 }
 func (v *CloudVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudVmClusterSummary, func(s *smithy.Schema) error {
@@ -6090,6 +6217,14 @@ func (v *CloudVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CloudVmClusterSummary_domain:
 			v.Domain = new(string)
 			return d.ReadString(schemas.CloudVmClusterSummary_domain, v.Domain)
+		case schemas.CloudVmClusterSummary_exascaleDbStorageVaultArn:
+			v.ExascaleDbStorageVaultArn = new(string)
+			return d.ReadString(schemas.CloudVmClusterSummary_exascaleDbStorageVaultArn, v.ExascaleDbStorageVaultArn)
+		case schemas.CloudVmClusterSummary_exascaleDbStorageVaultId:
+			v.ExascaleDbStorageVaultId = new(string)
+			return d.ReadString(schemas.CloudVmClusterSummary_exascaleDbStorageVaultId, v.ExascaleDbStorageVaultId)
+		case schemas.CloudVmClusterSummary_fileSystemConfigurationDetails:
+			return deserializeFileSystemConfigurationDetailsList(d, schemas.CloudVmClusterSummary_fileSystemConfigurationDetails, &v.FileSystemConfigurationDetails)
 		case schemas.CloudVmClusterSummary_giVersion:
 			v.GiVersion = new(string)
 			return d.ReadString(schemas.CloudVmClusterSummary_giVersion, v.GiVersion)
@@ -6167,6 +6302,13 @@ func (v *CloudVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.CloudVmClusterSummary_statusReason:
 			v.StatusReason = new(string)
 			return d.ReadString(schemas.CloudVmClusterSummary_statusReason, v.StatusReason)
+		case schemas.CloudVmClusterSummary_storageManagementType:
+			var ev string
+			if err := d.ReadString(schemas.CloudVmClusterSummary_storageManagementType, &ev); err != nil {
+				return err
+			}
+			v.StorageManagementType = StorageManagementType(ev)
+			return nil
 		case schemas.CloudVmClusterSummary_storageSizeInGBs:
 			v.StorageSizeInGBs = new(int32)
 			return d.ReadInt32(schemas.CloudVmClusterSummary_storageSizeInGBs, v.StorageSizeInGBs)
@@ -6178,6 +6320,20 @@ func (v *CloudVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.CloudVmClusterSummary_timeZone, v.TimeZone)
 		case schemas.CloudVmClusterSummary_vipIds:
 			return deserializeStringList(d, schemas.CloudVmClusterSummary_vipIds, &v.VipIds)
+		case schemas.CloudVmClusterSummary_vmBackupStorageType:
+			var ev string
+			if err := d.ReadString(schemas.CloudVmClusterSummary_vmBackupStorageType, &ev); err != nil {
+				return err
+			}
+			v.VmBackupStorageType = VmStorageType(ev)
+			return nil
+		case schemas.CloudVmClusterSummary_vmFileSystemStorageType:
+			var ev string
+			if err := d.ReadString(schemas.CloudVmClusterSummary_vmFileSystemStorageType, &ev); err != nil {
+				return err
+			}
+			v.VmFileSystemStorageType = VmStorageType(ev)
+			return nil
 		}
 		return nil
 	})
@@ -8619,8 +8775,7 @@ type ExadbVmCluster struct {
 	// listener for the Exascale VM cluster.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the Single Client Access Name
-	// (SCAN) listener for the Exascale VM cluster.
+	// Reserved for future use.
 	ScanListenerPortTcpSsl *int32
 
 	// The hardware model name of the Exadata infrastructure that's running the
@@ -9103,8 +9258,7 @@ type ExadbVmClusterSummary struct {
 	// listener for the Exascale VM cluster.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the Single Client Access Name
-	// (SCAN) listener for the Exascale VM cluster.
+	// Reserved for future use.
 	ScanListenerPortTcpSsl *int32
 
 	// The hardware model name of the Exadata infrastructure that's running the
@@ -9444,6 +9598,69 @@ func (v *ExadbVmClusterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// The Exascale storage configuration of an Exadata infrastructure.
+type ExascaleConfiguration struct {
+
+	// The amount of Exascale storage, in gigabytes (GB), that's available on the
+	// Exadata infrastructure.
+	AvailableStorageSizeInGBs *int32
+
+	// The amount of Exascale VM storage, in gigabytes (GB), that's available on the
+	// Exadata infrastructure.
+	AvailableVmStorageSizeInGBs *int32
+
+	// The total amount of Exascale storage, in gigabytes (GB), configured on the
+	// Exadata infrastructure.
+	TotalStorageSizeInGBs *int32
+
+	// The total amount of Exascale VM storage, in gigabytes (GB), on the Exadata
+	// infrastructure. VM clusters use Exascale VM storage for their VM file systems
+	// and VM backups.
+	TotalVmStorageSizeInGBs *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExascaleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExascaleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExascaleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailableStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.ExascaleConfiguration_availableStorageSizeInGBs, *v.AvailableStorageSizeInGBs)
+	}
+	if v.AvailableVmStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.ExascaleConfiguration_availableVmStorageSizeInGBs, *v.AvailableVmStorageSizeInGBs)
+	}
+	if v.TotalStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.ExascaleConfiguration_totalStorageSizeInGBs, *v.TotalStorageSizeInGBs)
+	}
+	if v.TotalVmStorageSizeInGBs != nil {
+		s.WriteInt32(schemas.ExascaleConfiguration_totalVmStorageSizeInGBs, *v.TotalVmStorageSizeInGBs)
+	}
+}
+func (v *ExascaleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExascaleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExascaleConfiguration_availableStorageSizeInGBs:
+			v.AvailableStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleConfiguration_availableStorageSizeInGBs, v.AvailableStorageSizeInGBs)
+		case schemas.ExascaleConfiguration_availableVmStorageSizeInGBs:
+			v.AvailableVmStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleConfiguration_availableVmStorageSizeInGBs, v.AvailableVmStorageSizeInGBs)
+		case schemas.ExascaleConfiguration_totalStorageSizeInGBs:
+			v.TotalStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleConfiguration_totalStorageSizeInGBs, v.TotalStorageSizeInGBs)
+		case schemas.ExascaleConfiguration_totalVmStorageSizeInGBs:
+			v.TotalVmStorageSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.ExascaleConfiguration_totalVmStorageSizeInGBs, v.TotalVmStorageSizeInGBs)
+		}
+		return nil
+	})
+}
+
 // The storage details for an Exascale storage vault.
 type ExascaleDbStorageDetails struct {
 
@@ -9507,6 +9724,16 @@ type ExascaleDbStorageVault struct {
 	// The Availability Zone ID for the Exascale storage vault.
 	AvailabilityZoneId *string
 
+	// The Amazon Resource Name (ARN) of the Exadata infrastructure that hosts the
+	// Exascale storage vault. This value is present only for vaults on dedicated
+	// Exadata infrastructure.
+	CloudExadataInfrastructureArn *string
+
+	// The unique identifier of the Exadata infrastructure that hosts the Exascale
+	// storage vault. This value is present only for vaults on dedicated Exadata
+	// infrastructure.
+	CloudExadataInfrastructureId *string
+
 	// The date and time when the Exascale storage vault was created.
 	CreatedAt *time.Time
 
@@ -9548,6 +9775,9 @@ type ExascaleDbStorageVault struct {
 	// The time zone of the Exascale storage vault.
 	TimeZone *string
 
+	// The type of infrastructure that hosts the Exascale storage vault.
+	VaultType ExascaleDbStorageVaultType
+
 	// The list of Amazon Resource Names (ARNs) of the VM clusters associated with
 	// this Exascale storage vault.
 	VmClusterArns []string
@@ -9581,6 +9811,12 @@ func (v *ExascaleDbStorageVault) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.ExascaleDbStorageVault_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CloudExadataInfrastructureArn != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_cloudExadataInfrastructureArn, *v.CloudExadataInfrastructureArn)
+	}
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.ExascaleDbStorageVault_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ExascaleDbStorageVault_createdAt, *v.CreatedAt)
@@ -9626,6 +9862,9 @@ func (v *ExascaleDbStorageVault) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TimeZone != nil {
 		s.WriteString(schemas.ExascaleDbStorageVault_timeZone, *v.TimeZone)
 	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.ExascaleDbStorageVault_vaultType, string(v.VaultType))
+	}
 	serializeResourceArnList(s, schemas.ExascaleDbStorageVault_vmClusterArns, v.VmClusterArns)
 	if v.VmClusterCount != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVault_vmClusterCount, *v.VmClusterCount)
@@ -9649,6 +9888,12 @@ func (v *ExascaleDbStorageVault) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExascaleDbStorageVault_availabilityZoneId:
 			v.AvailabilityZoneId = new(string)
 			return d.ReadString(schemas.ExascaleDbStorageVault_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.ExascaleDbStorageVault_cloudExadataInfrastructureArn:
+			v.CloudExadataInfrastructureArn = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_cloudExadataInfrastructureArn, v.CloudExadataInfrastructureArn)
+		case schemas.ExascaleDbStorageVault_cloudExadataInfrastructureId:
+			v.CloudExadataInfrastructureId = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVault_cloudExadataInfrastructureId, v.CloudExadataInfrastructureId)
 		case schemas.ExascaleDbStorageVault_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.ExascaleDbStorageVault_createdAt, v.CreatedAt)
@@ -9695,6 +9940,13 @@ func (v *ExascaleDbStorageVault) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.ExascaleDbStorageVault_timeZone:
 			v.TimeZone = new(string)
 			return d.ReadString(schemas.ExascaleDbStorageVault_timeZone, v.TimeZone)
+		case schemas.ExascaleDbStorageVault_vaultType:
+			var ev string
+			if err := d.ReadString(schemas.ExascaleDbStorageVault_vaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = ExascaleDbStorageVaultType(ev)
+			return nil
 		case schemas.ExascaleDbStorageVault_vmClusterArns:
 			return deserializeResourceArnList(d, schemas.ExascaleDbStorageVault_vmClusterArns, &v.VmClusterArns)
 		case schemas.ExascaleDbStorageVault_vmClusterCount:
@@ -9729,6 +9981,16 @@ type ExascaleDbStorageVaultSummary struct {
 
 	// The Availability Zone ID for the Exascale storage vault.
 	AvailabilityZoneId *string
+
+	// The Amazon Resource Name (ARN) of the Exadata infrastructure that hosts the
+	// Exascale storage vault. This value is present only for vaults on dedicated
+	// Exadata infrastructure.
+	CloudExadataInfrastructureArn *string
+
+	// The unique identifier of the Exadata infrastructure that hosts the Exascale
+	// storage vault. This value is present only for vaults on dedicated Exadata
+	// infrastructure.
+	CloudExadataInfrastructureId *string
 
 	// The date and time when the Exascale storage vault was created.
 	CreatedAt *time.Time
@@ -9771,6 +10033,9 @@ type ExascaleDbStorageVaultSummary struct {
 	// The time zone of the Exascale storage vault.
 	TimeZone *string
 
+	// The type of infrastructure that hosts the Exascale storage vault.
+	VaultType ExascaleDbStorageVaultType
+
 	// The list of Amazon Resource Names (ARNs) of the VM clusters associated with
 	// this Exascale storage vault.
 	VmClusterArns []string
@@ -9804,6 +10069,12 @@ func (v *ExascaleDbStorageVaultSummary) SerializeMembers(s smithy.ShapeSerialize
 	}
 	if v.AvailabilityZoneId != nil {
 		s.WriteString(schemas.ExascaleDbStorageVaultSummary_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.CloudExadataInfrastructureArn != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn, *v.CloudExadataInfrastructureArn)
+	}
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ExascaleDbStorageVaultSummary_createdAt, *v.CreatedAt)
@@ -9849,6 +10120,9 @@ func (v *ExascaleDbStorageVaultSummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.TimeZone != nil {
 		s.WriteString(schemas.ExascaleDbStorageVaultSummary_timeZone, *v.TimeZone)
 	}
+	if v.VaultType != "" {
+		s.WriteString(schemas.ExascaleDbStorageVaultSummary_vaultType, string(v.VaultType))
+	}
 	serializeResourceArnList(s, schemas.ExascaleDbStorageVaultSummary_vmClusterArns, v.VmClusterArns)
 	if v.VmClusterCount != nil {
 		s.WriteInt32(schemas.ExascaleDbStorageVaultSummary_vmClusterCount, *v.VmClusterCount)
@@ -9872,6 +10146,12 @@ func (v *ExascaleDbStorageVaultSummary) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.ExascaleDbStorageVaultSummary_availabilityZoneId:
 			v.AvailabilityZoneId = new(string)
 			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_availabilityZoneId, v.AvailabilityZoneId)
+		case schemas.ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn:
+			v.CloudExadataInfrastructureArn = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_cloudExadataInfrastructureArn, v.CloudExadataInfrastructureArn)
+		case schemas.ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId:
+			v.CloudExadataInfrastructureId = new(string)
+			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_cloudExadataInfrastructureId, v.CloudExadataInfrastructureId)
 		case schemas.ExascaleDbStorageVaultSummary_createdAt:
 			v.CreatedAt = new(time.Time)
 			return d.ReadTime(schemas.ExascaleDbStorageVaultSummary_createdAt, v.CreatedAt)
@@ -9918,6 +10198,13 @@ func (v *ExascaleDbStorageVaultSummary) Deserialize(d smithy.ShapeDeserializer) 
 		case schemas.ExascaleDbStorageVaultSummary_timeZone:
 			v.TimeZone = new(string)
 			return d.ReadString(schemas.ExascaleDbStorageVaultSummary_timeZone, v.TimeZone)
+		case schemas.ExascaleDbStorageVaultSummary_vaultType:
+			var ev string
+			if err := d.ReadString(schemas.ExascaleDbStorageVaultSummary_vaultType, &ev); err != nil {
+				return err
+			}
+			v.VaultType = ExascaleDbStorageVaultType(ev)
+			return nil
 		case schemas.ExascaleDbStorageVaultSummary_vmClusterArns:
 			return deserializeResourceArnList(d, schemas.ExascaleDbStorageVaultSummary_vmClusterArns, &v.VmClusterArns)
 		case schemas.ExascaleDbStorageVaultSummary_vmClusterCount:
@@ -9925,6 +10212,46 @@ func (v *ExascaleDbStorageVaultSummary) Deserialize(d smithy.ShapeDeserializer) 
 			return d.ReadInt32(schemas.ExascaleDbStorageVaultSummary_vmClusterCount, v.VmClusterCount)
 		case schemas.ExascaleDbStorageVaultSummary_vmClusterIds:
 			return deserializeResourceIdList(d, schemas.ExascaleDbStorageVaultSummary_vmClusterIds, &v.VmClusterIds)
+		}
+		return nil
+	})
+}
+
+// The configuration of a file system on a VM cluster.
+type FileSystemConfigurationDetails struct {
+
+	// The size of the file system, in gigabytes (GB).
+	FileSystemSizeInGBs *int32
+
+	// The mount point of the file system.
+	MountPoint *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FileSystemConfigurationDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemConfigurationDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemSizeInGBs != nil {
+		s.WriteInt32(schemas.FileSystemConfigurationDetails_fileSystemSizeInGBs, *v.FileSystemSizeInGBs)
+	}
+	if v.MountPoint != nil {
+		s.WriteString(schemas.FileSystemConfigurationDetails_mountPoint, *v.MountPoint)
+	}
+}
+func (v *FileSystemConfigurationDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemConfigurationDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemConfigurationDetails_fileSystemSizeInGBs:
+			v.FileSystemSizeInGBs = new(int32)
+			return d.ReadInt32(schemas.FileSystemConfigurationDetails_fileSystemSizeInGBs, v.FileSystemSizeInGBs)
+		case schemas.FileSystemConfigurationDetails_mountPoint:
+			v.MountPoint = new(string)
+			return d.ReadString(schemas.FileSystemConfigurationDetails_mountPoint, v.MountPoint)
 		}
 		return nil
 	})

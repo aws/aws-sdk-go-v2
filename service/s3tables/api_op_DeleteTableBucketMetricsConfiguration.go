@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -36,6 +38,18 @@ type DeleteTableBucketMetricsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableBucketMetricsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTableBucketMetricsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableBucketMetricsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.DeleteTableBucketMetricsConfigurationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+}
+
 type DeleteTableBucketMetricsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,13 +57,26 @@ type DeleteTableBucketMetricsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTableBucketMetricsConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTableBucketMetricsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteTableBucketMetricsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTableBucketMetricsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTableBucketMetricsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTableBucketMetricsConfiguration, schemas.DeleteTableBucketMetricsConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTableBucketMetricsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTableBucketMetricsConfiguration, schemas.DeleteTableBucketMetricsConfigurationRequest, nil), output: &DeleteTableBucketMetricsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

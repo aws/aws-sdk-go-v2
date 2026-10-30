@@ -4,7 +4,9 @@ package macie2
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -28,6 +30,15 @@ type GetClassificationExportConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClassificationExportConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClassificationExportConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClassificationExportConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetClassificationExportConfigurationOutput struct {
 
 	// The location where data classification results are stored, and the encryption
@@ -40,13 +51,34 @@ type GetClassificationExportConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClassificationExportConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClassificationExportConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClassificationExportConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetClassificationExportConfigurationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetClassificationExportConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetClassificationExportConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetClassificationExportConfigurationResponse_configuration:
+			v.Configuration = &types.ClassificationExportConfiguration{}
+			return v.Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetClassificationExportConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClassificationExportConfiguration, schemas.GetClassificationExportConfigurationRequest, schemas.GetClassificationExportConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetClassificationExportConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClassificationExportConfiguration, schemas.GetClassificationExportConfigurationRequest, schemas.GetClassificationExportConfigurationResponse), output: &GetClassificationExportConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

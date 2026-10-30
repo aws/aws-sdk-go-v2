@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -46,6 +48,28 @@ type CreateSecurityRequirementPackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityRequirementPackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityRequirementPackInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityRequirementPackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSecurityRequirementPackInput_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateSecurityRequirementPackInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityRequirementPackInput_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateSecurityRequirementPackInput_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateSecurityRequirementPackInput_tags, v.Tags)
+}
+
 type CreateSecurityRequirementPackOutput struct {
 
 	// The unique identifier of the created security requirement pack.
@@ -67,13 +91,48 @@ type CreateSecurityRequirementPackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityRequirementPackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityRequirementPackOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityRequirementPackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateSecurityRequirementPackOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.PackId != nil {
+		s.WriteString(schemas.CreateSecurityRequirementPackOutput_packId, *v.PackId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateSecurityRequirementPackOutput_status, string(v.Status))
+	}
+}
+func (v *CreateSecurityRequirementPackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityRequirementPackOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityRequirementPackOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateSecurityRequirementPackOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateSecurityRequirementPackOutput_packId:
+			v.PackId = new(string)
+			return d.ReadString(schemas.CreateSecurityRequirementPackOutput_packId, v.PackId)
+		case schemas.CreateSecurityRequirementPackOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateSecurityRequirementPackOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SecurityRequirementPackStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityRequirementPackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityRequirementPack, schemas.CreateSecurityRequirementPackInput, schemas.CreateSecurityRequirementPackOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityRequirementPack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityRequirementPack, schemas.CreateSecurityRequirementPackInput, schemas.CreateSecurityRequirementPackOutput), output: &CreateSecurityRequirementPackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

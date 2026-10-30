@@ -6416,8 +6416,10 @@ var InvokeAgentRuntimeRequest_payload *smithy.Schema
 var InvokeAgentRuntimeResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.bedrockagentcore",
 	Name:      "InvokeAgentRuntimeResponse",
-}, smithy.ShapeTypeStructure, 10)
+}, smithy.ShapeTypeStructure, 11)
 var InvokeAgentRuntimeResponse_runtimeSessionId *smithy.Schema
+
+var InvokeAgentRuntimeResponse_sessionEndpointUrl *smithy.Schema
 
 var InvokeAgentRuntimeResponse_mcpSessionId *smithy.Schema
 
@@ -10109,6 +10111,8 @@ func init() {
 	InvokeAgentRuntimeRequest_payload = InvokeAgentRuntimeRequest.AddMember("payload", _Body, &smithytraits.HTTPPayload{})
 
 	InvokeAgentRuntimeResponse_runtimeSessionId = InvokeAgentRuntimeResponse.AddMember("runtimeSessionId", _SessionId, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id"})
+
+	InvokeAgentRuntimeResponse_sessionEndpointUrl = InvokeAgentRuntimeResponse.AddMember("sessionEndpointUrl", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Endpoint-Url"})
 
 	InvokeAgentRuntimeResponse_mcpSessionId = InvokeAgentRuntimeResponse.AddMember("mcpSessionId", _SessionId, &smithytraits.HTTPHeader{Name: "Mcp-Session-Id"})
 

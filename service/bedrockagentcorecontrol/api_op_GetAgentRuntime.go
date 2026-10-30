@@ -105,6 +105,10 @@ type GetAgentRuntimeOutput struct {
 	// The artifact of the AgentCore Runtime.
 	AgentRuntimeArtifact types.AgentRuntimeArtifact
 
+	// The additional ports on the AgentCore Runtime that are reachable through the
+	// runtime's session URL.
+	AllowedPorts []types.AllowedPort
+
 	// The authorizer configuration for the AgentCore Runtime.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
@@ -133,8 +137,8 @@ type GetAgentRuntimeOutput struct {
 	// The version of the runtime platform used by the AgentCore Runtime.
 	PlatformVersion *string
 
-	// The protocol configuration for an agent runtime. This structure defines how the
-	// agent runtime communicates with clients.
+	// The protocol configuration for the AgentCore Runtime, including the protocol,
+	// port, and path on which the agent server is available.
 	ProtocolConfiguration *types.ProtocolConfiguration
 
 	// Configuration for HTTP request headers that will be passed through to the
@@ -170,6 +174,7 @@ func (v *GetAgentRuntimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentRuntimeVersion != nil {
 		s.WriteString(schemas.GetAgentRuntimeResponse_agentRuntimeVersion, *v.AgentRuntimeVersion)
 	}
+	serializeAllowedPorts(s, schemas.GetAgentRuntimeResponse_allowedPorts, v.AllowedPorts)
 	serializeAuthorizerConfiguration(s, schemas.GetAgentRuntimeResponse_authorizerConfiguration, v.AuthorizerConfiguration)
 	if v.CapacityProviderConfiguration != nil {
 		s.WriteStruct(schemas.GetAgentRuntimeResponse_capacityProviderConfiguration)
@@ -243,6 +248,8 @@ func (v *GetAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetAgentRuntimeResponse_agentRuntimeVersion:
 			v.AgentRuntimeVersion = new(string)
 			return d.ReadString(schemas.GetAgentRuntimeResponse_agentRuntimeVersion, v.AgentRuntimeVersion)
+		case schemas.GetAgentRuntimeResponse_allowedPorts:
+			return deserializeAllowedPorts(d, schemas.GetAgentRuntimeResponse_allowedPorts, &v.AllowedPorts)
 		case schemas.GetAgentRuntimeResponse_authorizerConfiguration:
 			return deserializeAuthorizerConfiguration(d, schemas.GetAgentRuntimeResponse_authorizerConfiguration, &v.AuthorizerConfiguration)
 		case schemas.GetAgentRuntimeResponse_capacityProviderConfiguration:

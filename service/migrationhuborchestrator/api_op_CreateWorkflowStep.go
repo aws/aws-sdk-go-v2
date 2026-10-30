@@ -4,7 +4,9 @@ package migrationhuborchestrator
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,76 @@ type CreateWorkflowStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowStepRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowStepRequest_name, *v.Name)
+	}
+	serializeStringList(s, schemas.CreateWorkflowStepRequest_next, v.Next)
+	serializeWorkflowStepOutputList(s, schemas.CreateWorkflowStepRequest_outputs, v.Outputs)
+	serializeStringList(s, schemas.CreateWorkflowStepRequest_previous, v.Previous)
+	if v.StepActionType != "" {
+		s.WriteString(schemas.CreateWorkflowStepRequest_stepActionType, string(v.StepActionType))
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.CreateWorkflowStepRequest_stepGroupId, *v.StepGroupId)
+	}
+	serializeStringList(s, schemas.CreateWorkflowStepRequest_stepTarget, v.StepTarget)
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateWorkflowStepRequest_workflowId, *v.WorkflowId)
+	}
+	if v.WorkflowStepAutomationConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkflowStepRequest_workflowStepAutomationConfiguration)
+		v.WorkflowStepAutomationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWorkflowStepInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowStepRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowStepRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepRequest_description, v.Description)
+		case schemas.CreateWorkflowStepRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepRequest_name, v.Name)
+		case schemas.CreateWorkflowStepRequest_next:
+			return deserializeStringList(d, schemas.CreateWorkflowStepRequest_next, &v.Next)
+		case schemas.CreateWorkflowStepRequest_outputs:
+			return deserializeWorkflowStepOutputList(d, schemas.CreateWorkflowStepRequest_outputs, &v.Outputs)
+		case schemas.CreateWorkflowStepRequest_previous:
+			return deserializeStringList(d, schemas.CreateWorkflowStepRequest_previous, &v.Previous)
+		case schemas.CreateWorkflowStepRequest_stepActionType:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkflowStepRequest_stepActionType, &ev); err != nil {
+				return err
+			}
+			v.StepActionType = types.StepActionType(ev)
+			return nil
+		case schemas.CreateWorkflowStepRequest_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepRequest_stepGroupId, v.StepGroupId)
+		case schemas.CreateWorkflowStepRequest_stepTarget:
+			return deserializeStringList(d, schemas.CreateWorkflowStepRequest_stepTarget, &v.StepTarget)
+		case schemas.CreateWorkflowStepRequest_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepRequest_workflowId, v.WorkflowId)
+		case schemas.CreateWorkflowStepRequest_workflowStepAutomationConfiguration:
+			v.WorkflowStepAutomationConfiguration = &types.WorkflowStepAutomationConfiguration{}
+			return v.WorkflowStepAutomationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type CreateWorkflowStepOutput struct {
 
 	// The ID of the step.
@@ -88,13 +160,50 @@ type CreateWorkflowStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWorkflowStepResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWorkflowStepResponse_name, *v.Name)
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.CreateWorkflowStepResponse_stepGroupId, *v.StepGroupId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateWorkflowStepResponse_workflowId, *v.WorkflowId)
+	}
+}
+func (v *CreateWorkflowStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowStepResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepResponse_id, v.Id)
+		case schemas.CreateWorkflowStepResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepResponse_name, v.Name)
+		case schemas.CreateWorkflowStepResponse_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepResponse_stepGroupId, v.StepGroupId)
+		case schemas.CreateWorkflowStepResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.CreateWorkflowStepResponse_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowStep, schemas.CreateWorkflowStepRequest, schemas.CreateWorkflowStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflowStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowStep, schemas.CreateWorkflowStepRequest, schemas.CreateWorkflowStepResponse), output: &CreateWorkflowStepOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

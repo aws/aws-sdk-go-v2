@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"deletedSecurityRequirementNames":["__Member__","__Member__"],"errors":[{"code":"__Code__","message":"__Message__","securityRequirementName":"__SecurityRequirementName__"},{"code":"__Code__","message":"__Message__","securityRequirementName":"__SecurityRequirementName__"}]}

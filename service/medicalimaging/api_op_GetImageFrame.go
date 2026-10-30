@@ -5,7 +5,9 @@ package medicalimaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medicalimaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -45,6 +47,26 @@ type GetImageFrameInput struct {
 	ImageSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetImageFrameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageFrameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageFrameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.GetImageFrameRequest_datastoreId, *v.DatastoreId)
+	}
+	if v.ImageFrameInformation != nil {
+		s.WriteStruct(schemas.GetImageFrameRequest_imageFrameInformation)
+		v.ImageFrameInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageSetId != nil {
+		s.WriteString(schemas.GetImageFrameRequest_imageSetId, *v.ImageSetId)
+	}
 }
 
 type GetImageFrameOutput struct {
@@ -96,13 +118,40 @@ type GetImageFrameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImageFrameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImageFrameResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImageFrameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetImageFrameResponse_contentType, *v.ContentType)
+	}
+}
+func (v *GetImageFrameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImageFrameResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImageFrameResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetImageFrameResponse_contentType, v.ContentType)
+		}
+		return nil
+	})
+}
+func (v *GetImageFrameOutput) GetPayloadStream() io.Reader { return v.ImageFrameBlob }
+
+var _ smithy.StreamingInput = (*GetImageFrameOutput)(nil)
+
+func (v *GetImageFrameOutput) SetPayloadStream(r io.ReadCloser) { v.ImageFrameBlob = r }
+
+var _ smithy.StreamingOutput = (*GetImageFrameOutput)(nil)
+
 func (c *Client) addOperationGetImageFrameMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImageFrame{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageFrame, schemas.GetImageFrameRequest, schemas.GetImageFrameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImageFrame{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImageFrame, schemas.GetImageFrameRequest, schemas.GetImageFrameResponse), output: &GetImageFrameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *BadGatewayException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *BadGatewayException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadGatewayException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadGatewayException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadGatewayException_Message, *v.Message)
+	}
+}
+func (v *BadGatewayException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadGatewayException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadGatewayException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadGatewayException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	Request validation failed, there is no usable message in the context, or the
 //
@@ -61,6 +83,27 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_message, *v.Message)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Two clients are using the same AWS account, Amazon Lex bot, and user ID.
 type ConflictException struct {
@@ -87,6 +130,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	One of the dependencies, such as AWS Lambda or Amazon Polly, threw an
 //
@@ -123,6 +187,27 @@ func (e *DependencyFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DependencyFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependencyFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependencyFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DependencyFailedException_Message, *v.Message)
+	}
+}
+func (v *DependencyFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependencyFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependencyFailedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DependencyFailedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Internal service error. Retry the call.
 type InternalFailureException struct {
@@ -149,6 +234,27 @@ func (e *InternalFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalFailureException_message, *v.Message)
+	}
+}
+func (v *InternalFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalFailureException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalFailureException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Exceeded a limit.
 type LimitExceededException struct {
@@ -177,6 +283,33 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+	if v.RetryAfterSeconds != nil {
+		s.WriteString(schemas.LimitExceededException_retryAfterSeconds, *v.RetryAfterSeconds)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		case schemas.LimitExceededException_retryAfterSeconds:
+			v.RetryAfterSeconds = new(string)
+			return d.ReadString(schemas.LimitExceededException_retryAfterSeconds, v.RetryAfterSeconds)
+		}
+		return nil
+	})
+}
 
 // This exception is not used.
 type LoopDetectedException struct {
@@ -203,6 +336,27 @@ func (e *LoopDetectedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LoopDetectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *LoopDetectedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoopDetectedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoopDetectedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LoopDetectedException_Message, *v.Message)
+	}
+}
+func (v *LoopDetectedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoopDetectedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoopDetectedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LoopDetectedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The accept header in the request does not have a valid value.
 type NotAcceptableException struct {
@@ -229,6 +383,27 @@ func (e *NotAcceptableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotAcceptableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotAcceptableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotAcceptableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotAcceptableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotAcceptableException_message, *v.Message)
+	}
+}
+func (v *NotAcceptableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotAcceptableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotAcceptableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotAcceptableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource (such as the Amazon Lex bot or an alias) that is referred to is
 // not found.
@@ -256,6 +431,27 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The input speech is too long.
 type RequestTimeoutException struct {
@@ -282,6 +478,27 @@ func (e *RequestTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RequestTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RequestTimeoutException_message, *v.Message)
+	}
+}
+func (v *RequestTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestTimeoutException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestTimeoutException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Content-Type header ( PostContent API) has an invalid value.
 type UnsupportedMediaTypeException struct {
@@ -308,3 +525,24 @@ func (e *UnsupportedMediaTypeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedMediaTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedMediaTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedMediaTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedMediaTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedMediaTypeException_message, *v.Message)
+	}
+}
+func (v *UnsupportedMediaTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedMediaTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedMediaTypeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedMediaTypeException_message, v.Message)
+		}
+		return nil
+	})
+}

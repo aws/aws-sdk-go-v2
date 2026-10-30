@@ -28,7 +28,6 @@ func (c *Client) ListQueueMembers(ctx context.Context, params *ListQueueMembersI
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueMembersInput struct {
 
 	// The farm ID for the queue.
@@ -72,7 +71,6 @@ func (v *ListQueueMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListQueueMembersOutput struct {
 
 	// The members on the list.

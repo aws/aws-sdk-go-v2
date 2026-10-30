@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,33 @@ type ListRunsInBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunsInBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunsInBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunsInBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchId != nil {
+		s.WriteString(schemas.ListRunsInBatchRequest_batchId, *v.BatchId)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListRunsInBatchRequest_maxItems, *v.MaxItems)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.ListRunsInBatchRequest_runId, *v.RunId)
+	}
+	if v.RunSettingId != nil {
+		s.WriteString(schemas.ListRunsInBatchRequest_runSettingId, *v.RunSettingId)
+	}
+	if v.StartingToken != nil {
+		s.WriteString(schemas.ListRunsInBatchRequest_startingToken, *v.StartingToken)
+	}
+	if v.SubmissionStatus != "" {
+		s.WriteString(schemas.ListRunsInBatchRequest_submissionStatus, string(v.SubmissionStatus))
+	}
+}
+
 type ListRunsInBatchOutput struct {
 
 	// A pagination token to retrieve the next page of results. Absent when the last
@@ -69,13 +98,35 @@ type ListRunsInBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRunsInBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRunsInBatchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRunsInBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRunsInBatchResponse_nextToken, *v.NextToken)
+	}
+	serializeRunBatchList(s, schemas.ListRunsInBatchResponse_runs, v.Runs)
+}
+func (v *ListRunsInBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRunsInBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRunsInBatchResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRunsInBatchResponse_nextToken, v.NextToken)
+		case schemas.ListRunsInBatchResponse_runs:
+			return deserializeRunBatchList(d, schemas.ListRunsInBatchResponse_runs, &v.Runs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRunsInBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRunsInBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunsInBatch, schemas.ListRunsInBatchRequest, schemas.ListRunsInBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRunsInBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRunsInBatch, schemas.ListRunsInBatchRequest, schemas.ListRunsInBatchResponse), output: &ListRunsInBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

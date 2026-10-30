@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"activationJobs":[{"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","id":"__Id__","sequenceStoreId":"__SequenceStoreId__","status":"SUBMITTED"},{"completionTime":"2000-01-01T00:00:00Z","creationTime":"2000-01-01T00:00:00Z","id":"__Id__","sequenceStoreId":"__SequenceStoreId__","status":"SUBMITTED"}],"nextToken":"__NextToken__"}

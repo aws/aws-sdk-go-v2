@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -38,6 +40,21 @@ type AssociateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateUserAccessLoggingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalArn != nil {
+		s.WriteString(schemas.AssociateUserAccessLoggingSettingsRequest_portalArn, *v.PortalArn)
+	}
+	if v.UserAccessLoggingSettingsArn != nil {
+		s.WriteString(schemas.AssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn, *v.UserAccessLoggingSettingsArn)
+	}
+}
+
 type AssociateUserAccessLoggingSettingsOutput struct {
 
 	// The ARN of the web portal.
@@ -56,13 +73,38 @@ type AssociateUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateUserAccessLoggingSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateUserAccessLoggingSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateUserAccessLoggingSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalArn != nil {
+		s.WriteString(schemas.AssociateUserAccessLoggingSettingsResponse_portalArn, *v.PortalArn)
+	}
+	if v.UserAccessLoggingSettingsArn != nil {
+		s.WriteString(schemas.AssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn, *v.UserAccessLoggingSettingsArn)
+	}
+}
+func (v *AssociateUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateUserAccessLoggingSettingsResponse_portalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.AssociateUserAccessLoggingSettingsResponse_portalArn, v.PortalArn)
+		case schemas.AssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn:
+			v.UserAccessLoggingSettingsArn = new(string)
+			return d.ReadString(schemas.AssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn, v.UserAccessLoggingSettingsArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserAccessLoggingSettings, schemas.AssociateUserAccessLoggingSettingsRequest, schemas.AssociateUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateUserAccessLoggingSettings, schemas.AssociateUserAccessLoggingSettingsRequest, schemas.AssociateUserAccessLoggingSettingsResponse), output: &AssociateUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

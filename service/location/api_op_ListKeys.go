@@ -5,7 +5,9 @@ package location
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,42 @@ type ListKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListKeysRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeysRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeysRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListKeysInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeysRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeysRequest_Filter:
+			v.Filter = &types.ApiKeyFilter{}
+			return v.Filter.Deserialize(d)
+		case schemas.ListKeysRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListKeysRequest_MaxResults, v.MaxResults)
+		case schemas.ListKeysRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeysRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListKeysOutput struct {
 
 	// Contains API key resources in your Amazon Web Services account. Details include
@@ -67,13 +105,35 @@ type ListKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListKeysResponseEntryList(s, schemas.ListKeysResponse_Entries, v.Entries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeysResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeysResponse_Entries:
+			return deserializeListKeysResponseEntryList(d, schemas.ListKeysResponse_Entries, &v.Entries)
+		case schemas.ListKeysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeysResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeys, schemas.ListKeysRequest, schemas.ListKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeys, schemas.ListKeysRequest, schemas.ListKeysResponse), output: &ListKeysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

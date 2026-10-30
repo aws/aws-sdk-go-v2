@@ -3,4 +3,4 @@ POST /
 Content-Type: application/x-amz-json-1.1
 X-Amz-Target: Lightsail_20161128.GetInstance
 
-{"instanceName":"__InstanceName__"}
+{"includeHealthStatus":true,"instanceName":"__InstanceName__"}

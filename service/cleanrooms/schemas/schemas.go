@@ -955,10 +955,12 @@ var _AllowedResultRegions_member *smithy.Schema
 var AnalysisFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "AnalysisFormat",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 3)
 var AnalysisFormat_SQL *smithy.Schema
 
 var AnalysisFormat_PYSPARK_1_0 *smithy.Schema
+
+var AnalysisFormat_PYSPARK_2_0 *smithy.Schema
 
 var _AnalysisIdentifier = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
@@ -4514,7 +4516,9 @@ var ProtectedJobS3Output_location *smithy.Schema
 var ProtectedJobS3OutputConfigurationInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.cleanrooms",
 	Name:      "ProtectedJobS3OutputConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
+var ProtectedJobS3OutputConfigurationInput_resultFormat *smithy.Schema
+
 var ProtectedJobS3OutputConfigurationInput_bucket *smithy.Schema
 
 var ProtectedJobS3OutputConfigurationInput_keyPrefix *smithy.Schema
@@ -7461,6 +7465,8 @@ func init() {
 
 	AnalysisFormat_PYSPARK_1_0 = AnalysisFormat.AddMember("PYSPARK_1_0", smithyprelude.Unit)
 
+	AnalysisFormat_PYSPARK_2_0 = AnalysisFormat.AddMember("PYSPARK_2_0", smithyprelude.Unit)
+
 	LogExportAnalysisType_PROTECTED_QUERY = LogExportAnalysisType.AddMember("PROTECTED_QUERY", smithyprelude.Unit)
 
 	AnalysisLogExportStatus_IN_PROGRESS = AnalysisLogExportStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
@@ -9346,6 +9352,8 @@ func init() {
 	MembershipProtectedQueryResultConfiguration_outputConfiguration = MembershipProtectedQueryResultConfiguration.AddMember("outputConfiguration", MembershipProtectedQueryOutputConfiguration)
 
 	MembershipProtectedQueryResultConfiguration_roleArn = MembershipProtectedQueryResultConfiguration.AddMember("roleArn", _RoleArn)
+
+	ProtectedJobS3OutputConfigurationInput_resultFormat = ProtectedJobS3OutputConfigurationInput.AddMember("resultFormat", ResultFormat)
 
 	ProtectedJobS3OutputConfigurationInput_bucket = ProtectedJobS3OutputConfigurationInput.AddMember("bucket", smithyprelude.String)
 

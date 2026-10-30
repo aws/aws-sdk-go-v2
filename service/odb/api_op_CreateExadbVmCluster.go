@@ -109,8 +109,7 @@ type CreateExadbVmClusterInput struct {
 	// listener.
 	ScanListenerPortTcp *int32
 
-	// The port number for TCP connections with SSL to the Single Client Access Name
-	// (SCAN) listener.
+	// Reserved for future use.
 	ScanListenerPortTcpSsl *int32
 
 	// The shape attribute for the Exascale VM cluster.

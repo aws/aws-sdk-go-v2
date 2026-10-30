@@ -226,6 +226,32 @@ func TestCheckResponseSnapshot_AddDirectQueryDataSource(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_AddReplicationPeer(t *testing.T) {
+	want := &AddReplicationPeerOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("AddReplicationPeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.AddReplicationPeer(context.Background(), &AddReplicationPeerInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		DryRun:        ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "AddReplicationPeer.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_AddTags(t *testing.T) {
 	want := &AddTagsOutput{}
 	status, header, body, err := serdeRespReadSnapshot("AddTags.response")
@@ -557,6 +583,91 @@ func TestCheckResponseSnapshot_CancelServiceSoftwareUpdate(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "CancelServiceSoftwareUpdate.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_CompareDomainConfiguration(t *testing.T) {
+	want := &CompareDomainConfigurationOutput{
+		SourceDomainArn: ptr.String("__SourceDomainArn__"),
+		TargetDomainArn: ptr.String("__TargetDomainArn__"),
+		Categories: map[string]types.CategoryDiffResult{
+			"key0": {
+				Status:     types.DiffStatus("compared"),
+				InSync:     1,
+				SourceOnly: 1,
+				TargetOnly: 1,
+				Diverged:   1,
+				Items: &types.DiffItems{
+					SourceOnly: []string{
+						"__Member__",
+						"__Member__",
+					},
+					TargetOnly: []string{
+						"__Member__",
+						"__Member__",
+					},
+					Diverged: []types.DivergentItem{
+						{
+							Name: ptr.String("__Name__"),
+							Fields: []types.DivergentField{
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+							},
+						},
+						{
+							Name: ptr.String("__Name__"),
+							Fields: []types.DivergentField{
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+								{
+									Path:        ptr.String("__Path__"),
+									SourceValue: ptr.String("__SourceValue__"),
+									TargetValue: ptr.String("__TargetValue__"),
+									Policy:      types.DiffFieldPolicy("redacted"),
+								},
+							},
+						},
+					},
+				},
+				Truncated: ptr.Bool(true),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("CompareDomainConfiguration.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.CompareDomainConfiguration(context.Background(), &CompareDomainConfigurationInput{
+		SourceDomainArn: ptr.String("__SourceDomainArn__"),
+		TargetDomainArn: ptr.String("__TargetDomainArn__"),
+		Categories: []string{
+			"__Member__",
+			"__Member__",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "CompareDomainConfiguration.response", err)
 	}
 }
 
@@ -2835,6 +2946,44 @@ func TestCheckResponseSnapshot_DescribeDomainNodes(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_DescribeDomainReplication(t *testing.T) {
+	want := &DescribeDomainReplicationOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Role:      types.ReplicationRole("PRIMARY"),
+		Peers: []types.ReplicationPeer{
+			{
+				PeerDomainArn: ptr.String("__PeerDomainArn__"),
+				PeerRole:      types.ReplicationRole("PRIMARY"),
+				Status:        types.ReplicationStatus("PENDING_SETUP"),
+				StatusMessage: ptr.String("__StatusMessage__"),
+			},
+			{
+				PeerDomainArn: ptr.String("__PeerDomainArn__"),
+				PeerRole:      types.ReplicationRole("PRIMARY"),
+				Status:        types.ReplicationStatus("PENDING_SETUP"),
+				StatusMessage: ptr.String("__StatusMessage__"),
+			},
+		},
+	}
+	status, header, body, err := serdeRespReadSnapshot("DescribeDomainReplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.DescribeDomainReplication(context.Background(), &DescribeDomainReplicationInput{
+		DomainName: ptr.String("__DomainName__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "DescribeDomainReplication.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_DescribeDomains(t *testing.T) {
 	want := &DescribeDomainsOutput{
 		DomainStatusList: []types.DomainStatus{
@@ -4390,6 +4539,32 @@ func TestCheckResponseSnapshot_DissociatePackages(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_FailoverReplication(t *testing.T) {
+	want := &FailoverReplicationOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("FailoverReplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.FailoverReplication(context.Background(), &FailoverReplicationInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		AllowDataLoss: ptr.Bool(true),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "FailoverReplication.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_GetApplication(t *testing.T) {
 	want := &GetApplicationOutput{
 		Id:       ptr.String("__Id__"),
@@ -5862,6 +6037,31 @@ func TestCheckResponseSnapshot_RejectInboundConnection(t *testing.T) {
 	}
 }
 
+func TestCheckResponseSnapshot_RemoveReplicationPeer(t *testing.T) {
+	want := &RemoveReplicationPeerOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("RemoveReplicationPeer.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.RemoveReplicationPeer(context.Background(), &RemoveReplicationPeerInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "RemoveReplicationPeer.response", err)
+	}
+}
+
 func TestCheckResponseSnapshot_RemoveTags(t *testing.T) {
 	want := &RemoveTagsOutput{}
 	status, header, body, err := serdeRespReadSnapshot("RemoveTags.response")
@@ -6054,6 +6254,31 @@ func TestCheckResponseSnapshot_StartServiceSoftwareUpdate(t *testing.T) {
 	}
 	if err := smithytesting.CompareValues(want, got); err != nil {
 		t.Errorf("response snapshot mismatch for %s: %v", "StartServiceSoftwareUpdate.response", err)
+	}
+}
+
+func TestCheckResponseSnapshot_SwitchoverReplication(t *testing.T) {
+	want := &SwitchoverReplicationOutput{
+		DomainArn: ptr.String("__DomainArn__"),
+		Status:    types.ReplicationStatus("PENDING_SETUP"),
+	}
+	status, header, body, err := serdeRespReadSnapshot("SwitchoverReplication.response")
+	if errors.Is(err, fs.ErrNotExist) {
+		t.Skip("no response snapshot fixture")
+	}
+	if err != nil {
+		t.Fatal(err)
+	}
+	svc := serdeRespClient(status, header, body)
+	got, err := svc.SwitchoverReplication(context.Background(), &SwitchoverReplicationInput{
+		DomainName:    ptr.String("__DomainName__"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := smithytesting.CompareValues(want, got); err != nil {
+		t.Errorf("response snapshot mismatch for %s: %v", "SwitchoverReplication.response", err)
 	}
 }
 
@@ -7651,205 +7876,10 @@ func TestCheckResponseSnapshot_Error_ResourceAlreadyExistsException(t *testing.T
 		t.Fatal(err)
 	}
 	svc := serdeRespClient(status, header, body)
-	_, opErr := svc.CreateDomain(context.Background(), &CreateDomainInput{
+	_, opErr := svc.AddReplicationPeer(context.Background(), &AddReplicationPeerInput{
 		DomainName:    ptr.String("__DomainName__"),
-		EngineVersion: ptr.String("__EngineVersion__"),
-		ClusterConfig: &types.ClusterConfig{
-			InstanceType:           types.OpenSearchPartitionInstanceType("m3.medium.search"),
-			InstanceCount:          ptr.Int32(1),
-			DedicatedMasterEnabled: ptr.Bool(true),
-			ZoneAwarenessEnabled:   ptr.Bool(true),
-			ZoneAwarenessConfig: &types.ZoneAwarenessConfig{
-				AvailabilityZoneCount: ptr.Int32(1),
-			},
-			DedicatedMasterType:  types.OpenSearchPartitionInstanceType("m3.medium.search"),
-			DedicatedMasterCount: ptr.Int32(1),
-			WarmEnabled:          ptr.Bool(true),
-			WarmType:             types.OpenSearchWarmPartitionInstanceType("ultrawarm1.medium.search"),
-			WarmCount:            ptr.Int32(1),
-			ColdStorageOptions: &types.ColdStorageOptions{
-				Enabled: ptr.Bool(true),
-			},
-			MultiAZWithStandbyEnabled: ptr.Bool(true),
-			NodeOptions: []types.NodeOption{
-				{
-					NodeType: types.NodeOptionsNodeType("coordinator"),
-					NodeConfig: &types.NodeConfig{
-						Enabled: ptr.Bool(true),
-						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
-						Count:   ptr.Int32(1),
-					},
-				},
-				{
-					NodeType: types.NodeOptionsNodeType("coordinator"),
-					NodeConfig: &types.NodeConfig{
-						Enabled: ptr.Bool(true),
-						Type:    types.OpenSearchPartitionInstanceType("m3.medium.search"),
-						Count:   ptr.Int32(1),
-					},
-				},
-			},
-		},
-		EBSOptions: &types.EBSOptions{
-			EBSEnabled: ptr.Bool(true),
-			VolumeType: types.VolumeType("standard"),
-			VolumeSize: ptr.Int32(1),
-			Iops:       ptr.Int32(1),
-			Throughput: ptr.Int32(1),
-		},
-		AccessPolicies: ptr.String("__AccessPolicies__"),
-		IPAddressType:  types.IPAddressType("ipv4"),
-		SnapshotOptions: &types.SnapshotOptions{
-			AutomatedSnapshotStartHour: ptr.Int32(1),
-		},
-		VPCOptions: &types.VPCOptions{
-			SubnetIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			SecurityGroupIds: []string{
-				"__Member__",
-				"__Member__",
-			},
-			EgressEnabled: ptr.Bool(true),
-		},
-		CognitoOptions: &types.CognitoOptions{
-			Enabled:        ptr.Bool(true),
-			UserPoolId:     ptr.String("__UserPoolId__"),
-			IdentityPoolId: ptr.String("__IdentityPoolId__"),
-			RoleArn:        ptr.String("__RoleArn__"),
-		},
-		EncryptionAtRestOptions: &types.EncryptionAtRestOptions{
-			Enabled:        ptr.Bool(true),
-			KmsKeyId:       ptr.String("__KmsKeyId__"),
-			EncryptionMode: types.EncryptionMode("DISK"),
-		},
-		NodeToNodeEncryptionOptions: &types.NodeToNodeEncryptionOptions{
-			Enabled: ptr.Bool(true),
-		},
-		AdvancedOptions: map[string]string{
-			"key0": "__Value__",
-		},
-		LogPublishingOptions: map[string]types.LogPublishingOption{
-			"key0": {
-				CloudWatchLogsLogGroupArn: ptr.String("__CloudWatchLogsLogGroupArn__"),
-				Enabled:                   ptr.Bool(true),
-			},
-		},
-		DomainEndpointOptions: &types.DomainEndpointOptions{
-			EnforceHTTPS:                 ptr.Bool(true),
-			TLSSecurityPolicy:            types.TLSSecurityPolicy("Policy-Min-TLS-1-0-2019-07"),
-			CustomEndpointEnabled:        ptr.Bool(true),
-			CustomEndpoint:               ptr.String("__CustomEndpoint__"),
-			CustomEndpointCertificateArn: ptr.String("__CustomEndpointCertificateArn__"),
-		},
-		AdvancedSecurityOptions: &types.AdvancedSecurityOptionsInput{
-			Enabled:                     ptr.Bool(true),
-			InternalUserDatabaseEnabled: ptr.Bool(true),
-			MasterUserOptions: &types.MasterUserOptions{
-				MasterUserARN:      ptr.String("__MasterUserARN__"),
-				MasterUserName:     ptr.String("__MasterUserName__"),
-				MasterUserPassword: ptr.String("__MasterUserPassword__"),
-			},
-			SAMLOptions: &types.SAMLOptionsInput{
-				Enabled: ptr.Bool(true),
-				Idp: &types.SAMLIdp{
-					MetadataContent: ptr.String("__MetadataContent__"),
-					EntityId:        ptr.String("__EntityId__"),
-				},
-				MasterUserName:        ptr.String("__MasterUserName__"),
-				MasterBackendRole:     ptr.String("__MasterBackendRole__"),
-				SubjectKey:            ptr.String("__SubjectKey__"),
-				RolesKey:              ptr.String("__RolesKey__"),
-				SessionTimeoutMinutes: ptr.Int32(1),
-			},
-			JWTOptions: &types.JWTOptionsInput{
-				Enabled:    ptr.Bool(true),
-				SubjectKey: ptr.String("__SubjectKey__"),
-				RolesKey:   ptr.String("__RolesKey__"),
-				JwksUrl:    ptr.String("__JwksUrl__"),
-				PublicKey:  ptr.String("__PublicKey__"),
-			},
-			IAMFederationOptions: &types.IAMFederationOptionsInput{
-				Enabled:    ptr.Bool(true),
-				SubjectKey: ptr.String("__SubjectKey__"),
-				RolesKey:   ptr.String("__RolesKey__"),
-			},
-			AnonymousAuthEnabled: ptr.Bool(true),
-		},
-		IdentityCenterOptions: &types.IdentityCenterOptionsInput{
-			EnabledAPIAccess:             ptr.Bool(true),
-			IdentityCenterInstanceARN:    ptr.String("__IdentityCenterInstanceARN__"),
-			IdentityCenterInstanceRegion: ptr.String("__IdentityCenterInstanceRegion__"),
-			SubjectKey:                   types.SubjectKeyIdCOption("UserName"),
-			RolesKey:                     types.RolesKeyIdCOption("GroupName"),
-		},
-		TagList: []types.Tag{
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-			{
-				Key:   ptr.String("__Key__"),
-				Value: ptr.String("__Value__"),
-			},
-		},
-		AutoTuneOptions: &types.AutoTuneOptionsInput{
-			DesiredState: types.AutoTuneDesiredState("ENABLED"),
-			MaintenanceSchedules: []types.AutoTuneMaintenanceSchedule{
-				{
-					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					Duration: &types.Duration{
-						Value: ptr.Int64(1),
-						Unit:  types.TimeUnit("HOURS"),
-					},
-					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
-				},
-				{
-					StartAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-					Duration: &types.Duration{
-						Value: ptr.Int64(1),
-						Unit:  types.TimeUnit("HOURS"),
-					},
-					CronExpressionForRecurrence: ptr.String("__CronExpressionForRecurrence__"),
-				},
-			},
-			UseOffPeakWindow: ptr.Bool(true),
-		},
-		OffPeakWindowOptions: &types.OffPeakWindowOptions{
-			Enabled: ptr.Bool(true),
-			OffPeakWindow: &types.OffPeakWindow{
-				WindowStartTime: &types.WindowStartTime{
-					Hours:   1,
-					Minutes: 1,
-				},
-			},
-		},
-		SoftwareUpdateOptions: &types.SoftwareUpdateOptions{
-			AutoSoftwareUpdateEnabled:            ptr.Bool(true),
-			UseLatestServiceSoftwareForBlueGreen: ptr.Bool(true),
-		},
-		AIMLOptions: &types.AIMLOptionsInput{
-			NaturalLanguageQueryGenerationOptions: &types.NaturalLanguageQueryGenerationOptionsInput{
-				DesiredState: types.NaturalLanguageQueryGenerationDesiredState("ENABLED"),
-			},
-			S3VectorsEngine: &types.S3VectorsEngine{
-				Enabled: ptr.Bool(true),
-			},
-			ServerlessVectorAcceleration: &types.ServerlessVectorAcceleration{
-				Enabled: ptr.Bool(true),
-			},
-		},
-		DeploymentStrategyOptions: &types.DeploymentStrategyOptions{
-			DeploymentStrategy: types.DeploymentStrategy("Default"),
-		},
-		AutomatedSnapshotPauseOptions: &types.AutomatedSnapshotPauseRequestOptions{
-			Enabled:   ptr.Bool(true),
-			StartTime: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-			EndTime:   ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
-		},
-		UseCase:    types.DomainUseCase("SEARCH"),
-		EngineMode: types.EngineMode("GENERAL"),
+		PeerDomainArn: ptr.String("__PeerDomainArn__"),
+		DryRun:        ptr.Bool(true),
 	})
 	if opErr == nil {
 		t.Fatal("expected error, got nil")

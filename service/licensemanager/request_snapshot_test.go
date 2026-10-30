@@ -381,6 +381,11 @@ func TestCheckRequestSnapshot_CreateGrant(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		GrantType: types.GrantType("BuyerGrant"),
+		Options: &types.Options{
+			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+			DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -419,6 +424,7 @@ func TestCheckRequestSnapshot_CreateGrantVersion(t *testing.T) {
 		SourceVersion: ptr.String("__SourceVersion__"),
 		Options: &types.Options{
 			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+			DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 		},
 	}
 	body := &bytes.Buffer{}
@@ -3749,6 +3755,11 @@ func TestUpdateRequestSnapshot_CreateGrant(t *testing.T) {
 				Value: ptr.String("__Value__"),
 			},
 		},
+		GrantType: types.GrantType("BuyerGrant"),
+		Options: &types.Options{
+			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+			DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
+		},
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -3787,6 +3798,7 @@ func TestUpdateRequestSnapshot_CreateGrantVersion(t *testing.T) {
 		SourceVersion: ptr.String("__SourceVersion__"),
 		Options: &types.Options{
 			ActivationOverrideBehavior: types.ActivationOverrideBehavior("DISTRIBUTED_GRANTS_ONLY"),
+			DesiredStatus:              types.GrantStatus("PENDING_WORKFLOW"),
 		},
 	}
 	body := &bytes.Buffer{}

@@ -5,7 +5,9 @@ package pcaconnectorad
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,21 @@ type ListDirectoryRegistrationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDirectoryRegistrationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDirectoryRegistrationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDirectoryRegistrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDirectoryRegistrationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDirectoryRegistrationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDirectoryRegistrationsOutput struct {
 
 	// Summary information about each directory registration you have created.
@@ -59,13 +76,35 @@ type ListDirectoryRegistrationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDirectoryRegistrationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDirectoryRegistrationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDirectoryRegistrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectoryRegistrationList(s, schemas.ListDirectoryRegistrationsResponse_DirectoryRegistrations, v.DirectoryRegistrations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDirectoryRegistrationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDirectoryRegistrationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDirectoryRegistrationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDirectoryRegistrationsResponse_DirectoryRegistrations:
+			return deserializeDirectoryRegistrationList(d, schemas.ListDirectoryRegistrationsResponse_DirectoryRegistrations, &v.DirectoryRegistrations)
+		case schemas.ListDirectoryRegistrationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDirectoryRegistrationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDirectoryRegistrationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDirectoryRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDirectoryRegistrations, schemas.ListDirectoryRegistrationsRequest, schemas.ListDirectoryRegistrationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDirectoryRegistrations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDirectoryRegistrations, schemas.ListDirectoryRegistrationsRequest, schemas.ListDirectoryRegistrationsResponse), output: &ListDirectoryRegistrationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

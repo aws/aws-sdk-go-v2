@@ -621,6 +621,19 @@ func serializeInstanceEntryList(s smithy.ShapeSerializer, schema *smithy.Schema,
 	s.CloseList()
 }
 
+func serializeInstanceHealthStatusDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []InstanceHealthStatusDetail) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeInstanceHealthSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []InstanceHealthSummary) {
 	if v == nil {
 		return
@@ -1128,6 +1141,30 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeWafRuleList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WafRule) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeWafStatusCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []int32) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteInt32(schema.ListMember(), int32(vv))
 	}
 	s.CloseList()
 }
@@ -2200,6 +2237,28 @@ func deserializeInstanceEntryList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	})
 }
 
+func deserializeInstanceHealthStatusDetailList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InstanceHealthStatusDetail) error {
+	*v = make([]InstanceHealthStatusDetail, 0)
+	var vv InstanceHealthStatusDetail
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero InstanceHealthStatusDetail
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = InstanceHealthStatusDetail{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeInstanceHealthSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]InstanceHealthSummary) error {
 	*v = make([]InstanceHealthSummary, 0)
 	var vv InstanceHealthSummary
@@ -3083,6 +3142,49 @@ func deserializeTagList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Tag) 
 
 		vv = Tag{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWafRuleList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]WafRule) error {
+	*v = make([]WafRule, 0)
+	var vv WafRule
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero WafRule
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = WafRule{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeWafStatusCodeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]int32) error {
+	*v = make([]int32, 0)
+	var vv int32
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero int32
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadInt32(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

@@ -85,6 +85,7 @@
         "api_op_UpdateAutonomousDatabaseBackup.go",
         "api_op_UpdateCloudExadataInfrastructure.go",
         "api_op_UpdateExadbVmCluster.go",
+        "api_op_UpdateExascaleCloudExadataInfrastructure.go",
         "api_op_UpdateExascaleDbStorageVault.go",
         "api_op_UpdateOdbNetwork.go",
         "api_op_UpdateOdbPeeringConnection.go",

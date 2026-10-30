@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -47,6 +49,74 @@ type SlackChannelConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SlackChannelConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlackChannelConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlackChannelConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.SlackChannelConfiguration_channelId, *v.ChannelId)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.SlackChannelConfiguration_channelName, *v.ChannelName)
+	}
+	if v.ChannelRoleArn != nil {
+		s.WriteString(schemas.SlackChannelConfiguration_channelRoleArn, *v.ChannelRoleArn)
+	}
+	if v.NotifyOnAddCorrespondenceToCase != nil {
+		s.WriteBool(schemas.SlackChannelConfiguration_notifyOnAddCorrespondenceToCase, *v.NotifyOnAddCorrespondenceToCase)
+	}
+	if v.NotifyOnCaseSeverity != "" {
+		s.WriteString(schemas.SlackChannelConfiguration_notifyOnCaseSeverity, string(v.NotifyOnCaseSeverity))
+	}
+	if v.NotifyOnCreateOrReopenCase != nil {
+		s.WriteBool(schemas.SlackChannelConfiguration_notifyOnCreateOrReopenCase, *v.NotifyOnCreateOrReopenCase)
+	}
+	if v.NotifyOnResolveCase != nil {
+		s.WriteBool(schemas.SlackChannelConfiguration_notifyOnResolveCase, *v.NotifyOnResolveCase)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.SlackChannelConfiguration_teamId, *v.TeamId)
+	}
+}
+func (v *SlackChannelConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlackChannelConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlackChannelConfiguration_channelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.SlackChannelConfiguration_channelId, v.ChannelId)
+		case schemas.SlackChannelConfiguration_channelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.SlackChannelConfiguration_channelName, v.ChannelName)
+		case schemas.SlackChannelConfiguration_channelRoleArn:
+			v.ChannelRoleArn = new(string)
+			return d.ReadString(schemas.SlackChannelConfiguration_channelRoleArn, v.ChannelRoleArn)
+		case schemas.SlackChannelConfiguration_notifyOnAddCorrespondenceToCase:
+			v.NotifyOnAddCorrespondenceToCase = new(bool)
+			return d.ReadBool(schemas.SlackChannelConfiguration_notifyOnAddCorrespondenceToCase, v.NotifyOnAddCorrespondenceToCase)
+		case schemas.SlackChannelConfiguration_notifyOnCaseSeverity:
+			var ev string
+			if err := d.ReadString(schemas.SlackChannelConfiguration_notifyOnCaseSeverity, &ev); err != nil {
+				return err
+			}
+			v.NotifyOnCaseSeverity = NotificationSeverityLevel(ev)
+			return nil
+		case schemas.SlackChannelConfiguration_notifyOnCreateOrReopenCase:
+			v.NotifyOnCreateOrReopenCase = new(bool)
+			return d.ReadBool(schemas.SlackChannelConfiguration_notifyOnCreateOrReopenCase, v.NotifyOnCreateOrReopenCase)
+		case schemas.SlackChannelConfiguration_notifyOnResolveCase:
+			v.NotifyOnResolveCase = new(bool)
+			return d.ReadBool(schemas.SlackChannelConfiguration_notifyOnResolveCase, v.NotifyOnResolveCase)
+		case schemas.SlackChannelConfiguration_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.SlackChannelConfiguration_teamId, v.TeamId)
+		}
+		return nil
+	})
+}
+
 // The configuration for a Slack workspace that you added to an Amazon Web
 // Services account.
 type SlackWorkspaceConfiguration struct {
@@ -65,6 +135,40 @@ type SlackWorkspaceConfiguration struct {
 	TeamName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SlackWorkspaceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SlackWorkspaceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SlackWorkspaceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowOrganizationMemberAccount != nil {
+		s.WriteBool(schemas.SlackWorkspaceConfiguration_allowOrganizationMemberAccount, *v.AllowOrganizationMemberAccount)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.SlackWorkspaceConfiguration_teamId, *v.TeamId)
+	}
+	if v.TeamName != nil {
+		s.WriteString(schemas.SlackWorkspaceConfiguration_teamName, *v.TeamName)
+	}
+}
+func (v *SlackWorkspaceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SlackWorkspaceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SlackWorkspaceConfiguration_allowOrganizationMemberAccount:
+			v.AllowOrganizationMemberAccount = new(bool)
+			return d.ReadBool(schemas.SlackWorkspaceConfiguration_allowOrganizationMemberAccount, v.AllowOrganizationMemberAccount)
+		case schemas.SlackWorkspaceConfiguration_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.SlackWorkspaceConfiguration_teamId, v.TeamId)
+		case schemas.SlackWorkspaceConfiguration_teamName:
+			v.TeamName = new(string)
+			return d.ReadString(schemas.SlackWorkspaceConfiguration_teamName, v.TeamName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

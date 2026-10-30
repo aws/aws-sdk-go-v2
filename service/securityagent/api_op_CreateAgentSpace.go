@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -55,6 +57,36 @@ type CreateAgentSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentSpaceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsResources != nil {
+		s.WriteStruct(schemas.CreateAgentSpaceInput_awsResources)
+		v.AwsResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeReviewSettings != nil {
+		s.WriteStruct(schemas.CreateAgentSpaceInput_codeReviewSettings)
+		v.CodeReviewSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentSpaceInput_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateAgentSpaceInput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAgentSpaceInput_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateAgentSpaceInput_tags, v.Tags)
+	serializeTargetDomainIdList(s, schemas.CreateAgentSpaceInput_targetDomainIds, v.TargetDomainIds)
+}
+
 // Output for the CreateAgentSpace operation.
 type CreateAgentSpaceOutput struct {
 
@@ -95,13 +127,81 @@ type CreateAgentSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentSpaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentSpaceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.CreateAgentSpaceOutput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AwsResources != nil {
+		s.WriteStruct(schemas.CreateAgentSpaceOutput_awsResources)
+		v.AwsResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeReviewSettings != nil {
+		s.WriteStruct(schemas.CreateAgentSpaceOutput_codeReviewSettings)
+		v.CodeReviewSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateAgentSpaceOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentSpaceOutput_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateAgentSpaceOutput_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAgentSpaceOutput_name, *v.Name)
+	}
+	serializeTargetDomainIdList(s, schemas.CreateAgentSpaceOutput_targetDomainIds, v.TargetDomainIds)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateAgentSpaceOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CreateAgentSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentSpaceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentSpaceOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.CreateAgentSpaceOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.CreateAgentSpaceOutput_awsResources:
+			v.AwsResources = &types.AWSResources{}
+			return v.AwsResources.Deserialize(d)
+		case schemas.CreateAgentSpaceOutput_codeReviewSettings:
+			v.CodeReviewSettings = &types.CodeReviewSettings{}
+			return v.CodeReviewSettings.Deserialize(d)
+		case schemas.CreateAgentSpaceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAgentSpaceOutput_createdAt, v.CreatedAt)
+		case schemas.CreateAgentSpaceOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAgentSpaceOutput_description, v.Description)
+		case schemas.CreateAgentSpaceOutput_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.CreateAgentSpaceOutput_kmsKeyId, v.KmsKeyId)
+		case schemas.CreateAgentSpaceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAgentSpaceOutput_name, v.Name)
+		case schemas.CreateAgentSpaceOutput_targetDomainIds:
+			return deserializeTargetDomainIdList(d, schemas.CreateAgentSpaceOutput_targetDomainIds, &v.TargetDomainIds)
+		case schemas.CreateAgentSpaceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAgentSpaceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentSpace, schemas.CreateAgentSpaceInput, schemas.CreateAgentSpaceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentSpace, schemas.CreateAgentSpaceInput, schemas.CreateAgentSpaceOutput), output: &CreateAgentSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

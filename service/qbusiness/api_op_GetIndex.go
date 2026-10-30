@@ -4,7 +4,9 @@ package qbusiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -38,6 +40,21 @@ type GetIndexInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetIndexRequest_applicationId, *v.ApplicationId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetIndexRequest_indexId, *v.IndexId)
+	}
 }
 
 type GetIndexOutput struct {
@@ -94,13 +111,115 @@ type GetIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetIndexResponse_applicationId, *v.ApplicationId)
+	}
+	if v.CapacityConfiguration != nil {
+		s.WriteStruct(schemas.GetIndexResponse_capacityConfiguration)
+		v.CapacityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetIndexResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetIndexResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetIndexResponse_displayName, *v.DisplayName)
+	}
+	serializeDocumentAttributeConfigurations(s, schemas.GetIndexResponse_documentAttributeConfigurations, v.DocumentAttributeConfigurations)
+	if v.Error != nil {
+		s.WriteStruct(schemas.GetIndexResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexArn != nil {
+		s.WriteString(schemas.GetIndexResponse_indexArn, *v.IndexArn)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetIndexResponse_indexId, *v.IndexId)
+	}
+	if v.IndexStatistics != nil {
+		s.WriteStruct(schemas.GetIndexResponse_indexStatistics)
+		v.IndexStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetIndexResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetIndexResponse_type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetIndexResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIndexResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetIndexResponse_applicationId, v.ApplicationId)
+		case schemas.GetIndexResponse_capacityConfiguration:
+			v.CapacityConfiguration = &types.IndexCapacityConfiguration{}
+			return v.CapacityConfiguration.Deserialize(d)
+		case schemas.GetIndexResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIndexResponse_createdAt, v.CreatedAt)
+		case schemas.GetIndexResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetIndexResponse_description, v.Description)
+		case schemas.GetIndexResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetIndexResponse_displayName, v.DisplayName)
+		case schemas.GetIndexResponse_documentAttributeConfigurations:
+			return deserializeDocumentAttributeConfigurations(d, schemas.GetIndexResponse_documentAttributeConfigurations, &v.DocumentAttributeConfigurations)
+		case schemas.GetIndexResponse_error:
+			v.Error = &types.ErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.GetIndexResponse_indexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.GetIndexResponse_indexArn, v.IndexArn)
+		case schemas.GetIndexResponse_indexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.GetIndexResponse_indexId, v.IndexId)
+		case schemas.GetIndexResponse_indexStatistics:
+			v.IndexStatistics = &types.IndexStatistics{}
+			return v.IndexStatistics.Deserialize(d)
+		case schemas.GetIndexResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetIndexResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IndexStatus(ev)
+			return nil
+		case schemas.GetIndexResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetIndexResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		case schemas.GetIndexResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetIndexResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIndex, schemas.GetIndexRequest, schemas.GetIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIndex, schemas.GetIndexRequest, schemas.GetIndexResponse), output: &GetIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -208,7 +208,7 @@ func deserializeViewActions(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]s
 	})
 }
 
-func serializeUploadMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+func serializeUrlMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
 	if v == nil {
 		return
 	}
@@ -220,7 +220,7 @@ func serializeUploadMetadataSignedHeaders(s smithy.ShapeSerializer, schema *smit
 	s.CloseMap()
 }
 
-func deserializeUploadMetadataSignedHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+func deserializeUrlMetadataSignedHeaders(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
 	*v = make(map[string]string)
 	var vv string
 	return smithy.ReadMap(d, s, func(k string) error {

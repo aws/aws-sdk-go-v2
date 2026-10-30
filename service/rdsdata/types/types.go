@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/rdsdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -27,6 +29,12 @@ type ArrayValueMemberArrayValues struct {
 }
 
 func (*ArrayValueMemberArrayValues) isArrayValue() {}
+func (v *ArrayValueMemberArrayValues) Serialize(s smithy.ShapeSerializer) {
+	serializeArrayOfArray(s, schemas.ArrayValue_arrayValues, v.Value)
+}
+func (v *ArrayValueMemberArrayValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeArrayOfArray(d, schemas.ArrayValue_arrayValues, &v.Value)
+}
 
 // An array of Boolean values. Can contain null values.
 type ArrayValueMemberBooleanValues struct {
@@ -36,6 +44,12 @@ type ArrayValueMemberBooleanValues struct {
 }
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
+func (v *ArrayValueMemberBooleanValues) Serialize(s smithy.ShapeSerializer) {
+	serializeBooleanArray(s, schemas.ArrayValue_booleanValues, v.Value)
+}
+func (v *ArrayValueMemberBooleanValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeBooleanArray(d, schemas.ArrayValue_booleanValues, &v.Value)
+}
 
 // An array of floating-point numbers. Can contain null values.
 type ArrayValueMemberDoubleValues struct {
@@ -45,6 +59,12 @@ type ArrayValueMemberDoubleValues struct {
 }
 
 func (*ArrayValueMemberDoubleValues) isArrayValue() {}
+func (v *ArrayValueMemberDoubleValues) Serialize(s smithy.ShapeSerializer) {
+	serializeDoubleArray(s, schemas.ArrayValue_doubleValues, v.Value)
+}
+func (v *ArrayValueMemberDoubleValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeDoubleArray(d, schemas.ArrayValue_doubleValues, &v.Value)
+}
 
 // An array of integers. Can contain null values.
 type ArrayValueMemberLongValues struct {
@@ -54,6 +74,12 @@ type ArrayValueMemberLongValues struct {
 }
 
 func (*ArrayValueMemberLongValues) isArrayValue() {}
+func (v *ArrayValueMemberLongValues) Serialize(s smithy.ShapeSerializer) {
+	serializeLongArray(s, schemas.ArrayValue_longValues, v.Value)
+}
+func (v *ArrayValueMemberLongValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeLongArray(d, schemas.ArrayValue_longValues, &v.Value)
+}
 
 // An array of strings. Can contain null values.
 type ArrayValueMemberStringValues struct {
@@ -63,6 +89,12 @@ type ArrayValueMemberStringValues struct {
 }
 
 func (*ArrayValueMemberStringValues) isArrayValue() {}
+func (v *ArrayValueMemberStringValues) Serialize(s smithy.ShapeSerializer) {
+	serializeStringArray(s, schemas.ArrayValue_stringValues, v.Value)
+}
+func (v *ArrayValueMemberStringValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringArray(d, schemas.ArrayValue_stringValues, &v.Value)
+}
 
 // Contains the metadata for a column.
 type ColumnMetadata struct {
@@ -112,6 +144,97 @@ type ColumnMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ColumnMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColumnMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColumnMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArrayBaseColumnType != 0 {
+		s.WriteInt32(schemas.ColumnMetadata_arrayBaseColumnType, v.ArrayBaseColumnType)
+	}
+	if v.IsAutoIncrement != false {
+		s.WriteBool(schemas.ColumnMetadata_isAutoIncrement, v.IsAutoIncrement)
+	}
+	if v.IsCaseSensitive != false {
+		s.WriteBool(schemas.ColumnMetadata_isCaseSensitive, v.IsCaseSensitive)
+	}
+	if v.IsCurrency != false {
+		s.WriteBool(schemas.ColumnMetadata_isCurrency, v.IsCurrency)
+	}
+	if v.IsSigned != false {
+		s.WriteBool(schemas.ColumnMetadata_isSigned, v.IsSigned)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.ColumnMetadata_label, *v.Label)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ColumnMetadata_name, *v.Name)
+	}
+	if v.Nullable != 0 {
+		s.WriteInt32(schemas.ColumnMetadata_nullable, v.Nullable)
+	}
+	if v.Precision != 0 {
+		s.WriteInt32(schemas.ColumnMetadata_precision, v.Precision)
+	}
+	if v.Scale != 0 {
+		s.WriteInt32(schemas.ColumnMetadata_scale, v.Scale)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.ColumnMetadata_schemaName, *v.SchemaName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ColumnMetadata_tableName, *v.TableName)
+	}
+	if v.Type != 0 {
+		s.WriteInt32(schemas.ColumnMetadata_type, v.Type)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ColumnMetadata_typeName, *v.TypeName)
+	}
+}
+func (v *ColumnMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColumnMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColumnMetadata_arrayBaseColumnType:
+			return d.ReadInt32(schemas.ColumnMetadata_arrayBaseColumnType, &v.ArrayBaseColumnType)
+		case schemas.ColumnMetadata_isAutoIncrement:
+			return d.ReadBool(schemas.ColumnMetadata_isAutoIncrement, &v.IsAutoIncrement)
+		case schemas.ColumnMetadata_isCaseSensitive:
+			return d.ReadBool(schemas.ColumnMetadata_isCaseSensitive, &v.IsCaseSensitive)
+		case schemas.ColumnMetadata_isCurrency:
+			return d.ReadBool(schemas.ColumnMetadata_isCurrency, &v.IsCurrency)
+		case schemas.ColumnMetadata_isSigned:
+			return d.ReadBool(schemas.ColumnMetadata_isSigned, &v.IsSigned)
+		case schemas.ColumnMetadata_label:
+			v.Label = new(string)
+			return d.ReadString(schemas.ColumnMetadata_label, v.Label)
+		case schemas.ColumnMetadata_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ColumnMetadata_name, v.Name)
+		case schemas.ColumnMetadata_nullable:
+			return d.ReadInt32(schemas.ColumnMetadata_nullable, &v.Nullable)
+		case schemas.ColumnMetadata_precision:
+			return d.ReadInt32(schemas.ColumnMetadata_precision, &v.Precision)
+		case schemas.ColumnMetadata_scale:
+			return d.ReadInt32(schemas.ColumnMetadata_scale, &v.Scale)
+		case schemas.ColumnMetadata_schemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.ColumnMetadata_schemaName, v.SchemaName)
+		case schemas.ColumnMetadata_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.ColumnMetadata_tableName, v.TableName)
+		case schemas.ColumnMetadata_type:
+			return d.ReadInt32(schemas.ColumnMetadata_type, &v.Type)
+		case schemas.ColumnMetadata_typeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ColumnMetadata_typeName, v.TypeName)
+		}
+		return nil
+	})
+}
+
 // Contains a value.
 //
 // The following types satisfy this interface:
@@ -135,6 +258,12 @@ type FieldMemberArrayValue struct {
 }
 
 func (*FieldMemberArrayValue) isField() {}
+func (v *FieldMemberArrayValue) Serialize(s smithy.ShapeSerializer) {
+	serializeArrayValue(s, schemas.Field_arrayValue, v.Value)
+}
+func (v *FieldMemberArrayValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeArrayValue(d, schemas.Field_arrayValue, &v.Value)
+}
 
 // A value of BLOB data type.
 type FieldMemberBlobValue struct {
@@ -144,6 +273,12 @@ type FieldMemberBlobValue struct {
 }
 
 func (*FieldMemberBlobValue) isField() {}
+func (v *FieldMemberBlobValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.Field_blobValue, v.Value)
+}
+func (v *FieldMemberBlobValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.Field_blobValue, &v.Value)
+}
 
 // A value of Boolean data type.
 type FieldMemberBooleanValue struct {
@@ -153,6 +288,12 @@ type FieldMemberBooleanValue struct {
 }
 
 func (*FieldMemberBooleanValue) isField() {}
+func (v *FieldMemberBooleanValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.Field_booleanValue, v.Value)
+}
+func (v *FieldMemberBooleanValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.Field_booleanValue, &v.Value)
+}
 
 // A value of double data type.
 type FieldMemberDoubleValue struct {
@@ -162,6 +303,12 @@ type FieldMemberDoubleValue struct {
 }
 
 func (*FieldMemberDoubleValue) isField() {}
+func (v *FieldMemberDoubleValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.Field_doubleValue, v.Value)
+}
+func (v *FieldMemberDoubleValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.Field_doubleValue, &v.Value)
+}
 
 // A NULL value.
 type FieldMemberIsNull struct {
@@ -171,6 +318,12 @@ type FieldMemberIsNull struct {
 }
 
 func (*FieldMemberIsNull) isField() {}
+func (v *FieldMemberIsNull) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.Field_isNull, v.Value)
+}
+func (v *FieldMemberIsNull) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.Field_isNull, &v.Value)
+}
 
 // A value of long data type.
 type FieldMemberLongValue struct {
@@ -180,6 +333,12 @@ type FieldMemberLongValue struct {
 }
 
 func (*FieldMemberLongValue) isField() {}
+func (v *FieldMemberLongValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.Field_longValue, v.Value)
+}
+func (v *FieldMemberLongValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt64(schemas.Field_longValue, &v.Value)
+}
 
 // A value of string data type.
 type FieldMemberStringValue struct {
@@ -189,6 +348,12 @@ type FieldMemberStringValue struct {
 }
 
 func (*FieldMemberStringValue) isField() {}
+func (v *FieldMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.Field_stringValue, v.Value)
+}
+func (v *FieldMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.Field_stringValue, &v.Value)
+}
 
 // A record returned by a call.
 //
@@ -200,6 +365,25 @@ type Record struct {
 	Values []Value
 
 	noSmithyDocumentSerde
+}
+
+func (v *Record) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Record)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRow(s, schemas.Record_values, v.Values)
+}
+func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Record_values:
+			return deserializeRow(d, schemas.Record_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // The result set returned by a SQL statement.
@@ -217,6 +401,33 @@ type ResultFrame struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResultFrame) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResultFrame)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResultFrame) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecords(s, schemas.ResultFrame_records, v.Records)
+	if v.ResultSetMetadata != nil {
+		s.WriteStruct(schemas.ResultFrame_resultSetMetadata)
+		v.ResultSetMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResultFrame) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResultFrame, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResultFrame_records:
+			return deserializeRecords(d, schemas.ResultFrame_records, &v.Records)
+		case schemas.ResultFrame_resultSetMetadata:
+			v.ResultSetMetadata = &ResultSetMetadata{}
+			return v.ResultSetMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The metadata of the result set returned by a SQL statement.
 type ResultSetMetadata struct {
 
@@ -227,6 +438,30 @@ type ResultSetMetadata struct {
 	ColumnMetadata []ColumnMetadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResultSetMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResultSetMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResultSetMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnCount != 0 {
+		s.WriteInt64(schemas.ResultSetMetadata_columnCount, v.ColumnCount)
+	}
+	serializeMetadata(s, schemas.ResultSetMetadata_columnMetadata, v.ColumnMetadata)
+}
+func (v *ResultSetMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResultSetMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResultSetMetadata_columnCount:
+			return d.ReadInt64(schemas.ResultSetMetadata_columnCount, &v.ColumnCount)
+		case schemas.ResultSetMetadata_columnMetadata:
+			return deserializeMetadata(d, schemas.ResultSetMetadata_columnMetadata, &v.ColumnMetadata)
+		}
+		return nil
+	})
 }
 
 // Options that control how the result set is returned.
@@ -248,6 +483,42 @@ type ResultSetOptions struct {
 	LongReturnType LongReturnType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResultSetOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResultSetOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResultSetOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecimalReturnType != "" {
+		s.WriteString(schemas.ResultSetOptions_decimalReturnType, string(v.DecimalReturnType))
+	}
+	if v.LongReturnType != "" {
+		s.WriteString(schemas.ResultSetOptions_longReturnType, string(v.LongReturnType))
+	}
+}
+func (v *ResultSetOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResultSetOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResultSetOptions_decimalReturnType:
+			var ev string
+			if err := d.ReadString(schemas.ResultSetOptions_decimalReturnType, &ev); err != nil {
+				return err
+			}
+			v.DecimalReturnType = DecimalReturnType(ev)
+			return nil
+		case schemas.ResultSetOptions_longReturnType:
+			var ev string
+			if err := d.ReadString(schemas.ResultSetOptions_longReturnType, &ev); err != nil {
+				return err
+			}
+			v.LongReturnType = LongReturnType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A parameter used in a SQL statement.
@@ -285,6 +556,41 @@ type SqlParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SqlParameter_name, *v.Name)
+	}
+	if v.TypeHint != "" {
+		s.WriteString(schemas.SqlParameter_typeHint, string(v.TypeHint))
+	}
+	serializeField(s, schemas.SqlParameter_value, v.Value)
+}
+func (v *SqlParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlParameter_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SqlParameter_name, v.Name)
+		case schemas.SqlParameter_typeHint:
+			var ev string
+			if err := d.ReadString(schemas.SqlParameter_typeHint, &ev); err != nil {
+				return err
+			}
+			v.TypeHint = TypeHint(ev)
+			return nil
+		case schemas.SqlParameter_value:
+			return deserializeField(d, schemas.SqlParameter_value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // The result of a SQL statement.
 //
 // This data structure is only used with the deprecated ExecuteSql operation. Use
@@ -300,6 +606,35 @@ type SqlStatementResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlStatementResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlStatementResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlStatementResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberOfRecordsUpdated != 0 {
+		s.WriteInt64(schemas.SqlStatementResult_numberOfRecordsUpdated, v.NumberOfRecordsUpdated)
+	}
+	if v.ResultFrame != nil {
+		s.WriteStruct(schemas.SqlStatementResult_resultFrame)
+		v.ResultFrame.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SqlStatementResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlStatementResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlStatementResult_numberOfRecordsUpdated:
+			return d.ReadInt64(schemas.SqlStatementResult_numberOfRecordsUpdated, &v.NumberOfRecordsUpdated)
+		case schemas.SqlStatementResult_resultFrame:
+			v.ResultFrame = &ResultFrame{}
+			return v.ResultFrame.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure value returned by a call.
 //
 // This data structure is only used with the deprecated ExecuteSql operation. Use
@@ -312,6 +647,25 @@ type StructValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StructValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StructValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StructValue) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArrayValueList(s, schemas.StructValue_attributes, v.Attributes)
+}
+func (v *StructValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StructValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StructValue_attributes:
+			return deserializeArrayValueList(d, schemas.StructValue_attributes, &v.Attributes)
+		}
+		return nil
+	})
+}
+
 // The response elements represent the results of an update.
 type UpdateResult struct {
 
@@ -319,6 +673,25 @@ type UpdateResult struct {
 	GeneratedFields []Field
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldList(s, schemas.UpdateResult_generatedFields, v.GeneratedFields)
+}
+func (v *UpdateResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateResult_generatedFields:
+			return deserializeFieldList(d, schemas.UpdateResult_generatedFields, &v.GeneratedFields)
+		}
+		return nil
+	})
 }
 
 // Contains the value of a column.
@@ -350,6 +723,12 @@ type ValueMemberArrayValues struct {
 }
 
 func (*ValueMemberArrayValues) isValue() {}
+func (v *ValueMemberArrayValues) Serialize(s smithy.ShapeSerializer) {
+	serializeArrayValueList(s, schemas.Value_arrayValues, v.Value)
+}
+func (v *ValueMemberArrayValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeArrayValueList(d, schemas.Value_arrayValues, &v.Value)
+}
 
 // A value for a column of big integer data type.
 type ValueMemberBigIntValue struct {
@@ -359,6 +738,12 @@ type ValueMemberBigIntValue struct {
 }
 
 func (*ValueMemberBigIntValue) isValue() {}
+func (v *ValueMemberBigIntValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.Value_bigIntValue, v.Value)
+}
+func (v *ValueMemberBigIntValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt64(schemas.Value_bigIntValue, &v.Value)
+}
 
 // A value for a column of BIT data type.
 type ValueMemberBitValue struct {
@@ -368,6 +753,12 @@ type ValueMemberBitValue struct {
 }
 
 func (*ValueMemberBitValue) isValue() {}
+func (v *ValueMemberBitValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.Value_bitValue, v.Value)
+}
+func (v *ValueMemberBitValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.Value_bitValue, &v.Value)
+}
 
 // A value for a column of BLOB data type.
 type ValueMemberBlobValue struct {
@@ -377,6 +768,12 @@ type ValueMemberBlobValue struct {
 }
 
 func (*ValueMemberBlobValue) isValue() {}
+func (v *ValueMemberBlobValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.Value_blobValue, v.Value)
+}
+func (v *ValueMemberBlobValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.Value_blobValue, &v.Value)
+}
 
 // A value for a column of double data type.
 type ValueMemberDoubleValue struct {
@@ -386,6 +783,12 @@ type ValueMemberDoubleValue struct {
 }
 
 func (*ValueMemberDoubleValue) isValue() {}
+func (v *ValueMemberDoubleValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat64(schemas.Value_doubleValue, v.Value)
+}
+func (v *ValueMemberDoubleValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat64(schemas.Value_doubleValue, &v.Value)
+}
 
 // A value for a column of integer data type.
 type ValueMemberIntValue struct {
@@ -395,6 +798,12 @@ type ValueMemberIntValue struct {
 }
 
 func (*ValueMemberIntValue) isValue() {}
+func (v *ValueMemberIntValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.Value_intValue, v.Value)
+}
+func (v *ValueMemberIntValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.Value_intValue, &v.Value)
+}
 
 // A NULL value.
 type ValueMemberIsNull struct {
@@ -404,6 +813,12 @@ type ValueMemberIsNull struct {
 }
 
 func (*ValueMemberIsNull) isValue() {}
+func (v *ValueMemberIsNull) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.Value_isNull, v.Value)
+}
+func (v *ValueMemberIsNull) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.Value_isNull, &v.Value)
+}
 
 // A value for a column of real data type.
 type ValueMemberRealValue struct {
@@ -413,6 +828,12 @@ type ValueMemberRealValue struct {
 }
 
 func (*ValueMemberRealValue) isValue() {}
+func (v *ValueMemberRealValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteFloat32(schemas.Value_realValue, v.Value)
+}
+func (v *ValueMemberRealValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadFloat32(schemas.Value_realValue, &v.Value)
+}
 
 // A value for a column of string data type.
 type ValueMemberStringValue struct {
@@ -422,6 +843,12 @@ type ValueMemberStringValue struct {
 }
 
 func (*ValueMemberStringValue) isValue() {}
+func (v *ValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.Value_stringValue, v.Value)
+}
+func (v *ValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.Value_stringValue, &v.Value)
+}
 
 // A value for a column of STRUCT data type.
 type ValueMemberStructValue struct {
@@ -431,6 +858,14 @@ type ValueMemberStructValue struct {
 }
 
 func (*ValueMemberStructValue) isValue() {}
+func (v *ValueMemberStructValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Value_structValue)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ValueMemberStructValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

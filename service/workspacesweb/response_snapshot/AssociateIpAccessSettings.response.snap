@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ipAccessSettingsArn":"__IpAccessSettingsArn__","portalArn":"__PortalArn__"}

@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type RemoveLFTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveLFTagsFromResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveLFTagsFromResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveLFTagsFromResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.RemoveLFTagsFromResourceRequest_CatalogId, *v.CatalogId)
+	}
+	serializeLFTagsList(s, schemas.RemoveLFTagsFromResourceRequest_LFTags, v.LFTags)
+	if v.Resource != nil {
+		s.WriteStruct(schemas.RemoveLFTagsFromResourceRequest_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RemoveLFTagsFromResourceOutput struct {
 
 	// A list of failures to untag a resource.
@@ -58,13 +78,29 @@ type RemoveLFTagsFromResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveLFTagsFromResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveLFTagsFromResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveLFTagsFromResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLFTagErrors(s, schemas.RemoveLFTagsFromResourceResponse_Failures, v.Failures)
+}
+func (v *RemoveLFTagsFromResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveLFTagsFromResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveLFTagsFromResourceResponse_Failures:
+			return deserializeLFTagErrors(d, schemas.RemoveLFTagsFromResourceResponse_Failures, &v.Failures)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveLFTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveLFTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveLFTagsFromResource, schemas.RemoveLFTagsFromResourceRequest, schemas.RemoveLFTagsFromResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveLFTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveLFTagsFromResource, schemas.RemoveLFTagsFromResourceRequest, schemas.RemoveLFTagsFromResourceResponse), output: &RemoveLFTagsFromResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

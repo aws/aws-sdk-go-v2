@@ -6,7 +6,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/mwaa/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +65,30 @@ type InvokeRestApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeRestApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeRestApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeRestApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteDocument(schemas.InvokeRestApiRequest_Body, &smithydocument.Opaque{Value: v.Body})
+	}
+	if v.Method != "" {
+		s.WriteString(schemas.InvokeRestApiRequest_Method, string(v.Method))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.InvokeRestApiRequest_Name, *v.Name)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.InvokeRestApiRequest_Path, *v.Path)
+	}
+	if v.QueryParameters != nil {
+		s.WriteDocument(schemas.InvokeRestApiRequest_QueryParameters, &smithydocument.Opaque{Value: v.QueryParameters})
+	}
+}
+
 type InvokeRestApiOutput struct {
 
 	// The response data from the Apache Airflow REST API call, provided as a JSON
@@ -76,13 +104,44 @@ type InvokeRestApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeRestApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeRestApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeRestApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestApiResponse != nil {
+		s.WriteDocument(schemas.InvokeRestApiResponse_RestApiResponse, &smithydocument.Opaque{Value: v.RestApiResponse})
+	}
+	if v.RestApiStatusCode != nil {
+		s.WriteInt32(schemas.InvokeRestApiResponse_RestApiStatusCode, *v.RestApiStatusCode)
+	}
+}
+func (v *InvokeRestApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeRestApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeRestApiResponse_RestApiResponse:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.InvokeRestApiResponse_RestApiResponse, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.RestApiResponse = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.InvokeRestApiResponse_RestApiStatusCode:
+			v.RestApiStatusCode = new(int32)
+			return d.ReadInt32(schemas.InvokeRestApiResponse_RestApiStatusCode, v.RestApiStatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeRestApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeRestApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeRestApi, schemas.InvokeRestApiRequest, schemas.InvokeRestApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeRestApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeRestApi, schemas.InvokeRestApiRequest, schemas.InvokeRestApiResponse), output: &InvokeRestApiOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

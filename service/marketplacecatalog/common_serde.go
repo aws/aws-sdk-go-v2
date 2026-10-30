@@ -64,6 +64,12 @@ func serializeEntityTypeFilters(s smithy.ShapeSerializer, schema *smithy.Schema,
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *types.EntityTypeFiltersMemberSubsidiaryAuthorizationFilters:
+		s.WriteUnion(schema, schemas.EntityTypeFilters_SubsidiaryAuthorizationFilters)
+		s.WriteStruct(schemas.EntityTypeFilters_SubsidiaryAuthorizationFilters)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	}
 }
 
@@ -120,6 +126,12 @@ func serializeEntityTypeSort(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 	case *types.EntityTypeSortMemberSaaSProductSort:
 		s.WriteUnion(schema, schemas.EntityTypeSort_SaaSProductSort)
 		s.WriteStruct(schemas.EntityTypeSort_SaaSProductSort)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *types.EntityTypeSortMemberSubsidiaryAuthorizationSort:
+		s.WriteUnion(schema, schemas.EntityTypeSort_SubsidiaryAuthorizationSort)
+		s.WriteStruct(schemas.EntityTypeSort_SubsidiaryAuthorizationSort)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -199,6 +211,10 @@ func deserializeEntityTypeFilters(d smithy.ShapeDeserializer, s *smithy.Schema, 
 			vv := &types.EntityTypeFiltersMemberSaaSProductFilters{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.EntityTypeFilters_SubsidiaryAuthorizationFilters:
+			vv := &types.EntityTypeFiltersMemberSubsidiaryAuthorizationFilters{}
+			*v = vv
+			return vv.Deserialize(d)
 		}
 		return nil
 	})
@@ -241,6 +257,10 @@ func deserializeEntityTypeSort(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 			return vv.Deserialize(d)
 		case schemas.EntityTypeSort_SaaSProductSort:
 			vv := &types.EntityTypeSortMemberSaaSProductSort{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.EntityTypeSort_SubsidiaryAuthorizationSort:
+			vv := &types.EntityTypeSortMemberSubsidiaryAuthorizationSort{}
 			*v = vv
 			return vv.Deserialize(d)
 		}
@@ -985,6 +1005,72 @@ func serializeSaaSProductTitleFilterValueList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeSaaSProductVisibilityFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SaaSProductVisibilityString) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSubsidiaryAuthorizationEntityIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSubsidiaryAuthorizationNameFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSubsidiaryAuthorizationResourceIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSubsidiaryAuthorizationResourceNameFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSubsidiaryAuthorizationStatusFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SubsidiaryAuthorizationStatusString) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeSubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
 	}
@@ -2373,6 +2459,132 @@ func deserializeSaaSProductVisibilityFilterValueList(d smithy.ShapeDeserializer,
 		}
 
 		*v = append(*v, types.SaaSProductVisibilityString(vv))
+		return nil
+	})
+}
+
+func deserializeSubsidiaryAuthorizationEntityIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSubsidiaryAuthorizationNameFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSubsidiaryAuthorizationResourceIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSubsidiaryAuthorizationResourceNameFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeSubsidiaryAuthorizationStatusFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.SubsidiaryAuthorizationStatusString) error {
+	*v = make([]types.SubsidiaryAuthorizationStatusString, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.SubsidiaryAuthorizationStatusString
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.SubsidiaryAuthorizationStatusString(vv))
+		return nil
+	})
+}
+
+func deserializeSubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

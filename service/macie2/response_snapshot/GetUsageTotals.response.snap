@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"timeRange":"MONTH_TO_DATE","usageTotals":[{"currency":"USD","estimatedCost":"__EstimatedCost__","type":"DATA_INVENTORY_EVALUATION"},{"currency":"USD","estimatedCost":"__EstimatedCost__","type":"DATA_INVENTORY_EVALUATION"}]}

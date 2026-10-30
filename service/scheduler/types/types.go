@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -32,6 +34,38 @@ type AwsVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AwsVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignPublicIp != "" {
+		s.WriteString(schemas.AwsVpcConfiguration_AssignPublicIp, string(v.AssignPublicIp))
+	}
+	serializeSecurityGroups(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
+	serializeSubnets(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+}
+func (v *AwsVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsVpcConfiguration_AssignPublicIp:
+			var ev string
+			if err := d.ReadString(schemas.AwsVpcConfiguration_AssignPublicIp, &ev); err != nil {
+				return err
+			}
+			v.AssignPublicIp = AssignPublicIp(ev)
+			return nil
+		case schemas.AwsVpcConfiguration_SecurityGroups:
+			return deserializeSecurityGroups(d, schemas.AwsVpcConfiguration_SecurityGroups, &v.SecurityGroups)
+		case schemas.AwsVpcConfiguration_Subnets:
+			return deserializeSubnets(d, schemas.AwsVpcConfiguration_Subnets, &v.Subnets)
+		}
+		return nil
+	})
+}
+
 // The details of a capacity provider strategy.
 type CapacityProviderStrategyItem struct {
 
@@ -54,6 +88,38 @@ type CapacityProviderStrategyItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacityProviderStrategyItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityProviderStrategyItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityProviderStrategyItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Base != 0 {
+		s.WriteInt32(schemas.CapacityProviderStrategyItem_base, v.Base)
+	}
+	if v.CapacityProvider != nil {
+		s.WriteString(schemas.CapacityProviderStrategyItem_capacityProvider, *v.CapacityProvider)
+	}
+	if v.Weight != 0 {
+		s.WriteInt32(schemas.CapacityProviderStrategyItem_weight, v.Weight)
+	}
+}
+func (v *CapacityProviderStrategyItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityProviderStrategyItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityProviderStrategyItem_base:
+			return d.ReadInt32(schemas.CapacityProviderStrategyItem_base, &v.Base)
+		case schemas.CapacityProviderStrategyItem_capacityProvider:
+			v.CapacityProvider = new(string)
+			return d.ReadString(schemas.CapacityProviderStrategyItem_capacityProvider, v.CapacityProvider)
+		case schemas.CapacityProviderStrategyItem_weight:
+			return d.ReadInt32(schemas.CapacityProviderStrategyItem_weight, &v.Weight)
+		}
+		return nil
+	})
+}
+
 // An object that contains information about an Amazon SQS queue that EventBridge
 // Scheduler uses as a dead-letter queue for your schedule. If specified,
 // EventBridge Scheduler delivers failed events that could not be successfully
@@ -65,6 +131,28 @@ type DeadLetterConfig struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeadLetterConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeadLetterConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeadLetterConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeadLetterConfig_Arn, *v.Arn)
+	}
+}
+func (v *DeadLetterConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeadLetterConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeadLetterConfig_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeadLetterConfig_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // The templated target type for the Amazon ECS [RunTask]RunTask API operation.
@@ -143,6 +231,104 @@ type EcsParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EcsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EcsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityProviderStrategy(s, schemas.EcsParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.EnableECSManagedTags != nil {
+		s.WriteBool(schemas.EcsParameters_EnableECSManagedTags, *v.EnableECSManagedTags)
+	}
+	if v.EnableExecuteCommand != nil {
+		s.WriteBool(schemas.EcsParameters_EnableExecuteCommand, *v.EnableExecuteCommand)
+	}
+	if v.Group != nil {
+		s.WriteString(schemas.EcsParameters_Group, *v.Group)
+	}
+	if v.LaunchType != "" {
+		s.WriteString(schemas.EcsParameters_LaunchType, string(v.LaunchType))
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.EcsParameters_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePlacementConstraints(s, schemas.EcsParameters_PlacementConstraints, v.PlacementConstraints)
+	serializePlacementStrategies(s, schemas.EcsParameters_PlacementStrategy, v.PlacementStrategy)
+	if v.PlatformVersion != nil {
+		s.WriteString(schemas.EcsParameters_PlatformVersion, *v.PlatformVersion)
+	}
+	if v.PropagateTags != "" {
+		s.WriteString(schemas.EcsParameters_PropagateTags, string(v.PropagateTags))
+	}
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.EcsParameters_ReferenceId, *v.ReferenceId)
+	}
+	serializeTags(s, schemas.EcsParameters_Tags, v.Tags)
+	if v.TaskCount != nil {
+		s.WriteInt32(schemas.EcsParameters_TaskCount, *v.TaskCount)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.EcsParameters_TaskDefinitionArn, *v.TaskDefinitionArn)
+	}
+}
+func (v *EcsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EcsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EcsParameters_CapacityProviderStrategy:
+			return deserializeCapacityProviderStrategy(d, schemas.EcsParameters_CapacityProviderStrategy, &v.CapacityProviderStrategy)
+		case schemas.EcsParameters_EnableECSManagedTags:
+			v.EnableECSManagedTags = new(bool)
+			return d.ReadBool(schemas.EcsParameters_EnableECSManagedTags, v.EnableECSManagedTags)
+		case schemas.EcsParameters_EnableExecuteCommand:
+			v.EnableExecuteCommand = new(bool)
+			return d.ReadBool(schemas.EcsParameters_EnableExecuteCommand, v.EnableExecuteCommand)
+		case schemas.EcsParameters_Group:
+			v.Group = new(string)
+			return d.ReadString(schemas.EcsParameters_Group, v.Group)
+		case schemas.EcsParameters_LaunchType:
+			var ev string
+			if err := d.ReadString(schemas.EcsParameters_LaunchType, &ev); err != nil {
+				return err
+			}
+			v.LaunchType = LaunchType(ev)
+			return nil
+		case schemas.EcsParameters_NetworkConfiguration:
+			v.NetworkConfiguration = &NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.EcsParameters_PlacementConstraints:
+			return deserializePlacementConstraints(d, schemas.EcsParameters_PlacementConstraints, &v.PlacementConstraints)
+		case schemas.EcsParameters_PlacementStrategy:
+			return deserializePlacementStrategies(d, schemas.EcsParameters_PlacementStrategy, &v.PlacementStrategy)
+		case schemas.EcsParameters_PlatformVersion:
+			v.PlatformVersion = new(string)
+			return d.ReadString(schemas.EcsParameters_PlatformVersion, v.PlatformVersion)
+		case schemas.EcsParameters_PropagateTags:
+			var ev string
+			if err := d.ReadString(schemas.EcsParameters_PropagateTags, &ev); err != nil {
+				return err
+			}
+			v.PropagateTags = PropagateTags(ev)
+			return nil
+		case schemas.EcsParameters_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.EcsParameters_ReferenceId, v.ReferenceId)
+		case schemas.EcsParameters_Tags:
+			return deserializeTags(d, schemas.EcsParameters_Tags, &v.Tags)
+		case schemas.EcsParameters_TaskCount:
+			v.TaskCount = new(int32)
+			return d.ReadInt32(schemas.EcsParameters_TaskCount, v.TaskCount)
+		case schemas.EcsParameters_TaskDefinitionArn:
+			v.TaskDefinitionArn = new(string)
+			return d.ReadString(schemas.EcsParameters_TaskDefinitionArn, v.TaskDefinitionArn)
+		}
+		return nil
+	})
+}
+
 // The templated target type for the EventBridge [PutEvents]PutEvents API operation.
 //
 // [PutEvents]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
@@ -162,6 +348,34 @@ type EventBridgeParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventBridgeParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventBridgeParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventBridgeParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetailType != nil {
+		s.WriteString(schemas.EventBridgeParameters_DetailType, *v.DetailType)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.EventBridgeParameters_Source, *v.Source)
+	}
+}
+func (v *EventBridgeParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventBridgeParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventBridgeParameters_DetailType:
+			v.DetailType = new(string)
+			return d.ReadString(schemas.EventBridgeParameters_DetailType, v.DetailType)
+		case schemas.EventBridgeParameters_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.EventBridgeParameters_Source, v.Source)
+		}
+		return nil
+	})
+}
+
 // Allows you to configure a time window during which EventBridge Scheduler
 // invokes the schedule.
 type FlexibleTimeWindow struct {
@@ -175,6 +389,38 @@ type FlexibleTimeWindow struct {
 	MaximumWindowInMinutes *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlexibleTimeWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlexibleTimeWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlexibleTimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumWindowInMinutes != nil {
+		s.WriteInt32(schemas.FlexibleTimeWindow_MaximumWindowInMinutes, *v.MaximumWindowInMinutes)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.FlexibleTimeWindow_Mode, string(v.Mode))
+	}
+}
+func (v *FlexibleTimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlexibleTimeWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlexibleTimeWindow_MaximumWindowInMinutes:
+			v.MaximumWindowInMinutes = new(int32)
+			return d.ReadInt32(schemas.FlexibleTimeWindow_MaximumWindowInMinutes, v.MaximumWindowInMinutes)
+		case schemas.FlexibleTimeWindow_Mode:
+			var ev string
+			if err := d.ReadString(schemas.FlexibleTimeWindow_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = FlexibleTimeWindowMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The templated target type for the Amazon Kinesis PutRecordPutRecord API operation.
@@ -191,6 +437,28 @@ type KinesisParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PartitionKey != nil {
+		s.WriteString(schemas.KinesisParameters_PartitionKey, *v.PartitionKey)
+	}
+}
+func (v *KinesisParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisParameters_PartitionKey:
+			v.PartitionKey = new(string)
+			return d.ReadString(schemas.KinesisParameters_PartitionKey, v.PartitionKey)
+		}
+		return nil
+	})
+}
+
 // Specifies the network configuration for an ECS task.
 type NetworkConfiguration struct {
 
@@ -200,6 +468,30 @@ type NetworkConfiguration struct {
 	AwsvpcConfiguration *AwsVpcConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsvpcConfiguration != nil {
+		s.WriteStruct(schemas.NetworkConfiguration_awsvpcConfiguration)
+		v.AwsvpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_awsvpcConfiguration:
+			v.AwsvpcConfiguration = &AwsVpcConfiguration{}
+			return v.AwsvpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object representing a constraint on task placement.
@@ -218,6 +510,38 @@ type PlacementConstraint struct {
 	Type PlacementConstraintType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlacementConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.PlacementConstraint_expression, *v.Expression)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PlacementConstraint_type, string(v.Type))
+	}
+}
+func (v *PlacementConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementConstraint_expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.PlacementConstraint_expression, v.Expression)
+		case schemas.PlacementConstraint_type:
+			var ev string
+			if err := d.ReadString(schemas.PlacementConstraint_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PlacementConstraintType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The task placement strategy for a task or service.
@@ -243,6 +567,38 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlacementStrategy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlacementStrategy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlacementStrategy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != nil {
+		s.WriteString(schemas.PlacementStrategy_field, *v.Field)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PlacementStrategy_type, string(v.Type))
+	}
+}
+func (v *PlacementStrategy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlacementStrategy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlacementStrategy_field:
+			v.Field = new(string)
+			return d.ReadString(schemas.PlacementStrategy_field, v.Field)
+		case schemas.PlacementStrategy_type:
+			var ev string
+			if err := d.ReadString(schemas.PlacementStrategy_type, &ev); err != nil {
+				return err
+			}
+			v.Type = PlacementStrategyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A RetryPolicy object that includes information about the retry policy settings,
 // including the maximum age of an event, and the maximum number of times
 // EventBridge Scheduler will try to deliver the event to a target.
@@ -258,6 +614,34 @@ type RetryPolicy struct {
 	MaximumRetryAttempts *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RetryPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetryPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetryPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaximumEventAgeInSeconds != nil {
+		s.WriteInt32(schemas.RetryPolicy_MaximumEventAgeInSeconds, *v.MaximumEventAgeInSeconds)
+	}
+	if v.MaximumRetryAttempts != nil {
+		s.WriteInt32(schemas.RetryPolicy_MaximumRetryAttempts, *v.MaximumRetryAttempts)
+	}
+}
+func (v *RetryPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryPolicy_MaximumEventAgeInSeconds:
+			v.MaximumEventAgeInSeconds = new(int32)
+			return d.ReadInt32(schemas.RetryPolicy_MaximumEventAgeInSeconds, v.MaximumEventAgeInSeconds)
+		case schemas.RetryPolicy_MaximumRetryAttempts:
+			v.MaximumRetryAttempts = new(int32)
+			return d.ReadInt32(schemas.RetryPolicy_MaximumRetryAttempts, v.MaximumRetryAttempts)
+		}
+		return nil
+	})
 }
 
 // The name and value pair of a parameter to use to start execution of a SageMaker
@@ -277,6 +661,34 @@ type SageMakerPipelineParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SageMakerPipelineParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerPipelineParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerPipelineParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SageMakerPipelineParameter_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SageMakerPipelineParameter_Value, *v.Value)
+	}
+}
+func (v *SageMakerPipelineParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerPipelineParameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SageMakerPipelineParameter_Name, v.Name)
+		case schemas.SageMakerPipelineParameter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SageMakerPipelineParameter_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The templated target type for the Amazon SageMaker [StartPipelineExecution]StartPipelineExecution API
 // operation.
 //
@@ -288,6 +700,25 @@ type SageMakerPipelineParameters struct {
 	PipelineParameterList []SageMakerPipelineParameter
 
 	noSmithyDocumentSerde
+}
+
+func (v *SageMakerPipelineParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SageMakerPipelineParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SageMakerPipelineParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSageMakerPipelineParameterList(s, schemas.SageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+}
+func (v *SageMakerPipelineParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SageMakerPipelineParameters_PipelineParameterList:
+			return deserializeSageMakerPipelineParameterList(d, schemas.SageMakerPipelineParameters_PipelineParameterList, &v.PipelineParameterList)
+		}
+		return nil
+	})
 }
 
 // The details of a schedule group.
@@ -309,6 +740,56 @@ type ScheduleGroupSummary struct {
 	State ScheduleGroupState
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ScheduleGroupSummary_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ScheduleGroupSummary_CreationDate, *v.CreationDate)
+	}
+	if v.LastModificationDate != nil {
+		s.WriteTime(schemas.ScheduleGroupSummary_LastModificationDate, *v.LastModificationDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduleGroupSummary_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduleGroupSummary_State, string(v.State))
+	}
+}
+func (v *ScheduleGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleGroupSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScheduleGroupSummary_Arn, v.Arn)
+		case schemas.ScheduleGroupSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ScheduleGroupSummary_CreationDate, v.CreationDate)
+		case schemas.ScheduleGroupSummary_LastModificationDate:
+			v.LastModificationDate = new(time.Time)
+			return d.ReadTime(schemas.ScheduleGroupSummary_LastModificationDate, v.LastModificationDate)
+		case schemas.ScheduleGroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduleGroupSummary_Name, v.Name)
+		case schemas.ScheduleGroupSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleGroupSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduleGroupState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details of a schedule.
@@ -338,6 +819,70 @@ type ScheduleSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ScheduleSummary_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ScheduleSummary_CreationDate, *v.CreationDate)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.ScheduleSummary_GroupName, *v.GroupName)
+	}
+	if v.LastModificationDate != nil {
+		s.WriteTime(schemas.ScheduleSummary_LastModificationDate, *v.LastModificationDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduleSummary_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduleSummary_State, string(v.State))
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.ScheduleSummary_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScheduleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScheduleSummary_Arn, v.Arn)
+		case schemas.ScheduleSummary_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ScheduleSummary_CreationDate, v.CreationDate)
+		case schemas.ScheduleSummary_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.ScheduleSummary_GroupName, v.GroupName)
+		case schemas.ScheduleSummary_LastModificationDate:
+			v.LastModificationDate = new(time.Time)
+			return d.ReadTime(schemas.ScheduleSummary_LastModificationDate, v.LastModificationDate)
+		case schemas.ScheduleSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduleSummary_Name, v.Name)
+		case schemas.ScheduleSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.ScheduleSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduleState(ev)
+			return nil
+		case schemas.ScheduleSummary_Target:
+			v.Target = &TargetSummary{}
+			return v.Target.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The templated target type for the Amazon SQS [SendMessage]SendMessage API operation.
 // Contains the message group ID to use when the target is a FIFO queue. If you
 // specify an Amazon SQS FIFO queue as a target, the queue must have content-based
@@ -354,6 +899,28 @@ type SqsParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqsParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqsParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqsParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageGroupId != nil {
+		s.WriteString(schemas.SqsParameters_MessageGroupId, *v.MessageGroupId)
+	}
+}
+func (v *SqsParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqsParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqsParameters_MessageGroupId:
+			v.MessageGroupId = new(string)
+			return d.ReadString(schemas.SqsParameters_MessageGroupId, v.MessageGroupId)
+		}
+		return nil
+	})
+}
+
 // Tag to associate with a schedule group.
 type Tag struct {
 
@@ -368,6 +935,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The schedule's target. EventBridge Scheduler supports templated target that
@@ -437,6 +1032,96 @@ type Target struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Target) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Target)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Target_Arn, *v.Arn)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.Target_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EcsParameters != nil {
+		s.WriteStruct(schemas.Target_EcsParameters)
+		v.EcsParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventBridgeParameters != nil {
+		s.WriteStruct(schemas.Target_EventBridgeParameters)
+		v.EventBridgeParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Input != nil {
+		s.WriteString(schemas.Target_Input, *v.Input)
+	}
+	if v.KinesisParameters != nil {
+		s.WriteStruct(schemas.Target_KinesisParameters)
+		v.KinesisParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetryPolicy != nil {
+		s.WriteStruct(schemas.Target_RetryPolicy)
+		v.RetryPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Target_RoleArn, *v.RoleArn)
+	}
+	if v.SageMakerPipelineParameters != nil {
+		s.WriteStruct(schemas.Target_SageMakerPipelineParameters)
+		v.SageMakerPipelineParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqsParameters != nil {
+		s.WriteStruct(schemas.Target_SqsParameters)
+		v.SqsParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Target_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Target_Arn, v.Arn)
+		case schemas.Target_DeadLetterConfig:
+			v.DeadLetterConfig = &DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.Target_EcsParameters:
+			v.EcsParameters = &EcsParameters{}
+			return v.EcsParameters.Deserialize(d)
+		case schemas.Target_EventBridgeParameters:
+			v.EventBridgeParameters = &EventBridgeParameters{}
+			return v.EventBridgeParameters.Deserialize(d)
+		case schemas.Target_Input:
+			v.Input = new(string)
+			return d.ReadString(schemas.Target_Input, v.Input)
+		case schemas.Target_KinesisParameters:
+			v.KinesisParameters = &KinesisParameters{}
+			return v.KinesisParameters.Deserialize(d)
+		case schemas.Target_RetryPolicy:
+			v.RetryPolicy = &RetryPolicy{}
+			return v.RetryPolicy.Deserialize(d)
+		case schemas.Target_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Target_RoleArn, v.RoleArn)
+		case schemas.Target_SageMakerPipelineParameters:
+			v.SageMakerPipelineParameters = &SageMakerPipelineParameters{}
+			return v.SageMakerPipelineParameters.Deserialize(d)
+		case schemas.Target_SqsParameters:
+			v.SqsParameters = &SqsParameters{}
+			return v.SqsParameters.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The details of a target.
 type TargetSummary struct {
 
@@ -446,6 +1131,28 @@ type TargetSummary struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TargetSummary_Arn, *v.Arn)
+	}
+}
+func (v *TargetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TargetSummary_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -5,7 +5,9 @@ package novaact
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,27 @@ type ListWorkflowRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowRunsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowRunsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListWorkflowRunsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.WorkflowDefinitionName != nil {
+		s.WriteString(schemas.ListWorkflowRunsRequest_workflowDefinitionName, *v.WorkflowDefinitionName)
+	}
+}
+
 type ListWorkflowRunsOutput struct {
 
 	// A list of summary information for workflow runs.
@@ -61,13 +84,35 @@ type ListWorkflowRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowRunsResponse_nextToken, *v.NextToken)
+	}
+	serializeWorkflowRunSummaries(s, schemas.ListWorkflowRunsResponse_workflowRunSummaries, v.WorkflowRunSummaries)
+}
+func (v *ListWorkflowRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowRunsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowRunsResponse_nextToken, v.NextToken)
+		case schemas.ListWorkflowRunsResponse_workflowRunSummaries:
+			return deserializeWorkflowRunSummaries(d, schemas.ListWorkflowRunsResponse_workflowRunSummaries, &v.WorkflowRunSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowRuns, schemas.ListWorkflowRunsRequest, schemas.ListWorkflowRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowRuns, schemas.ListWorkflowRunsRequest, schemas.ListWorkflowRunsResponse), output: &ListWorkflowRunsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

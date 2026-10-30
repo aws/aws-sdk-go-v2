@@ -1,3 +1,12 @@
+# v1.59.0 (2026-10-29)
+
+* **Feature**: Adds support for the PySpark 2.0 analysis template format and for choosing the file format (CSV or Parquet) of protected job results written to Amazon S3, including in a membership's default job result configuration.
+
+# v1.58.2 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.58.1 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

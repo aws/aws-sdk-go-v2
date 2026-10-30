@@ -5,7 +5,9 @@ package ssmincidents
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,37 @@ type UpdateRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelatedItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateRelatedItemsInput_clientToken, *v.ClientToken)
+	}
+	if v.IncidentRecordArn != nil {
+		s.WriteString(schemas.UpdateRelatedItemsInput_incidentRecordArn, *v.IncidentRecordArn)
+	}
+	serializeRelatedItemsUpdate(s, schemas.UpdateRelatedItemsInput_relatedItemsUpdate, v.RelatedItemsUpdate)
+}
+func (v *UpdateRelatedItemsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelatedItemsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRelatedItemsInput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateRelatedItemsInput_clientToken, v.ClientToken)
+		case schemas.UpdateRelatedItemsInput_incidentRecordArn:
+			v.IncidentRecordArn = new(string)
+			return d.ReadString(schemas.UpdateRelatedItemsInput_incidentRecordArn, v.IncidentRecordArn)
+		case schemas.UpdateRelatedItemsInput_relatedItemsUpdate:
+			return deserializeRelatedItemsUpdate(d, schemas.UpdateRelatedItemsInput_relatedItemsUpdate, &v.RelatedItemsUpdate)
+		}
+		return nil
+	})
+}
+
 type UpdateRelatedItemsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +85,26 @@ type UpdateRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRelatedItemsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRelatedItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelatedItems, schemas.UpdateRelatedItemsInput, schemas.UpdateRelatedItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRelatedItems, schemas.UpdateRelatedItemsInput, schemas.UpdateRelatedItemsOutput), output: &UpdateRelatedItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

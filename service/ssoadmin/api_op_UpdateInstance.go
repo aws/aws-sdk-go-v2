@@ -21,9 +21,9 @@ import (
 //
 //   - Enable permission sets for the instance by specifying PermissionSetsEnabled .
 //
-// A request that specifies both EncryptionConfiguration and PermissionSetsEnabled
-// returns a ValidationException . To perform both operations, call UpdateInstance
-// separately for each. The two calls can be made in parallel.
+// If you specify both EncryptionConfiguration and PermissionSetsEnabled in a
+// request, the request returns a ValidationException . To perform both operations,
+// call UpdateInstance separately for each. You can make the two calls in parallel.
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceInput{}
@@ -60,8 +60,8 @@ type UpdateInstanceInput struct {
 	// value is true . After permission sets are enabled, they cannot be disabled.
 	//
 	// You can't set EncryptionConfiguration and PermissionSetsEnabled in the same
-	// request. To configure both, make two separate UpdateInstance calls. These calls
-	// can be made in parallel.
+	// request. To configure both, make two separate UpdateInstance calls. You can
+	// make these calls in parallel.
 	PermissionSetsEnabled *bool
 
 	noSmithyDocumentSerde

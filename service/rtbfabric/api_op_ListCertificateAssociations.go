@@ -5,7 +5,9 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,24 @@ type ListCertificateAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.ListCertificateAssociationsRequest_gatewayId, *v.GatewayId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCertificateAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateAssociationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCertificateAssociationsOutput struct {
 
 	// The list of certificate associations for the gateway.
@@ -69,13 +89,35 @@ type ListCertificateAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCertificateAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCertificateAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCertificateAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateAssociationSummaryList(s, schemas.ListCertificateAssociationsResponse_certificateAssociations, v.CertificateAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCertificateAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCertificateAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCertificateAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCertificateAssociationsResponse_certificateAssociations:
+			return deserializeCertificateAssociationSummaryList(d, schemas.ListCertificateAssociationsResponse_certificateAssociations, &v.CertificateAssociations)
+		case schemas.ListCertificateAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCertificateAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCertificateAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCertificateAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateAssociations, schemas.ListCertificateAssociationsRequest, schemas.ListCertificateAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCertificateAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCertificateAssociations, schemas.ListCertificateAssociationsRequest, schemas.ListCertificateAssociationsResponse), output: &ListCertificateAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

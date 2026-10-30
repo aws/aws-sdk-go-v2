@@ -3786,10 +3786,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -4053,10 +4065,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -4489,10 +4513,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -4756,10 +4792,22 @@ func TestUpdateResponseSnapshot_DeleteTaskDefinitions(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 						FirelensConfiguration: &types.FirelensConfiguration{
@@ -5240,6 +5288,22 @@ func TestUpdateResponseSnapshot_DeregisterContainerInstance(t *testing.T) {
 					},
 				},
 			},
+			GpuDevices: []types.GpuDevice{
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -5517,10 +5581,22 @@ func TestUpdateResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -5784,10 +5860,22 @@ func TestUpdateResponseSnapshot_DeregisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -6712,6 +6800,22 @@ func TestUpdateResponseSnapshot_DescribeContainerInstances(t *testing.T) {
 						},
 					},
 				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+				},
 			},
 			{
 				ContainerInstanceArn: ptr.String("__ContainerInstanceArn__"),
@@ -6851,6 +6955,22 @@ func TestUpdateResponseSnapshot_DescribeContainerInstances(t *testing.T) {
 							LastUpdated:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							LastStatusChange: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
+					},
+				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
 					},
 				},
 			},
@@ -12237,10 +12357,22 @@ func TestUpdateResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -12504,10 +12636,22 @@ func TestUpdateResponseSnapshot_DescribeTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -13082,6 +13226,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -13149,6 +13299,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -13206,10 +13362,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -13246,10 +13414,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -13423,6 +13603,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -13490,6 +13676,12 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -13547,10 +13739,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -13587,10 +13791,22 @@ func TestUpdateResponseSnapshot_DescribeTasks(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -14775,6 +14991,22 @@ func TestUpdateResponseSnapshot_RegisterContainerInstance(t *testing.T) {
 					},
 				},
 			},
+			GpuDevices: []types.GpuDevice{
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -15076,10 +15308,22 @@ func TestUpdateResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -15343,10 +15587,22 @@ func TestUpdateResponseSnapshot_RegisterTaskDefinition(t *testing.T) {
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 						{
 							Value: ptr.String("__Value__"),
 							Type:  types.ResourceType("GPU"),
+							SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+								Value: types.NvidiaMpsAllocation{
+									Memory:            ptr.Int32(1),
+									MaxComputePercent: ptr.Int32(1),
+								},
+							},
 						},
 					},
 					FirelensConfiguration: &types.FirelensConfiguration{
@@ -15680,6 +15936,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -15747,6 +16009,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -15804,10 +16072,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -15844,10 +16124,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16021,6 +16313,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -16088,6 +16386,12 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -16145,10 +16449,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16185,10 +16501,22 @@ func TestUpdateResponseSnapshot_RunTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16399,6 +16727,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -16466,6 +16800,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -16523,10 +16863,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16563,10 +16915,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16740,6 +17104,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 					{
 						ContainerArn: ptr.String("__ContainerArn__"),
@@ -16807,6 +17177,12 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+						GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+							Value: types.NvidiaMpsAllocation{
+								Memory:            ptr.Int32(1),
+								MaxComputePercent: ptr.Int32(1),
+							},
+						},
 					},
 				},
 				Cpu:                  ptr.String("__Cpu__"),
@@ -16864,10 +17240,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -16904,10 +17292,22 @@ func TestUpdateResponseSnapshot_StartTask(t *testing.T) {
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 								{
 									Value: ptr.String("__Value__"),
 									Type:  types.ResourceType("GPU"),
+									SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+										Value: types.NvidiaMpsAllocation{
+											Memory:            ptr.Int32(1),
+											MaxComputePercent: ptr.Int32(1),
+										},
+									},
 								},
 							},
 						},
@@ -17141,6 +17541,12 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+						Value: types.NvidiaMpsAllocation{
+							Memory:            ptr.Int32(1),
+							MaxComputePercent: ptr.Int32(1),
+						},
+					},
 				},
 				{
 					ContainerArn: ptr.String("__ContainerArn__"),
@@ -17208,6 +17614,12 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 						"__Member__",
 						"__Member__",
 					},
+					GpuSharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+						Value: types.NvidiaMpsAllocation{
+							Memory:            ptr.Int32(1),
+							MaxComputePercent: ptr.Int32(1),
+						},
+					},
 				},
 			},
 			Cpu:                  ptr.String("__Cpu__"),
@@ -17265,10 +17677,22 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 					},
@@ -17305,10 +17729,22 @@ func TestUpdateResponseSnapshot_StopTask(t *testing.T) {
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 							{
 								Value: ptr.String("__Value__"),
 								Type:  types.ResourceType("GPU"),
+								SharingStrategy: &types.SharingStrategyMemberNvidiaMps{
+									Value: types.NvidiaMpsAllocation{
+										Memory:            ptr.Int32(1),
+										MaxComputePercent: ptr.Int32(1),
+									},
+								},
 							},
 						},
 					},
@@ -18071,6 +18507,22 @@ func TestUpdateResponseSnapshot_UpdateContainerAgent(t *testing.T) {
 					},
 				},
 			},
+			GpuDevices: []types.GpuDevice{
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+				{
+					GpuId:                ptr.String("__GpuId__"),
+					SharingMode:          types.GpuSharingMode("IDLE"),
+					TotalMemoryInMiB:     ptr.Int32(1),
+					RemainingMemoryInMiB: ptr.Int32(1),
+					ContainerCount:       ptr.Int32(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.AmazonEC2ContainerServiceV20141113)
@@ -18236,6 +18688,22 @@ func TestUpdateResponseSnapshot_UpdateContainerInstancesState(t *testing.T) {
 						},
 					},
 				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+				},
 			},
 			{
 				ContainerInstanceArn: ptr.String("__ContainerInstanceArn__"),
@@ -18375,6 +18843,22 @@ func TestUpdateResponseSnapshot_UpdateContainerInstancesState(t *testing.T) {
 							LastUpdated:      ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 							LastStatusChange: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
 						},
+					},
+				},
+				GpuDevices: []types.GpuDevice{
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
+					},
+					{
+						GpuId:                ptr.String("__GpuId__"),
+						SharingMode:          types.GpuSharingMode("IDLE"),
+						TotalMemoryInMiB:     ptr.Int32(1),
+						RemainingMemoryInMiB: ptr.Int32(1),
+						ContainerCount:       ptr.Int32(1),
 					},
 				},
 			},

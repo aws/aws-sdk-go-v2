@@ -1,0 +1,5 @@
+POST /storage/indexes/rebuilds?concurrency=1&scope=ALL&writeBufferSize=LOW
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__"}

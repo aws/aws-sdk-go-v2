@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -49,6 +51,22 @@ type CreateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserAccessLoggingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateUserAccessLoggingSettingsRequest_clientToken, *v.ClientToken)
+	}
+	if v.KinesisStreamArn != nil {
+		s.WriteString(schemas.CreateUserAccessLoggingSettingsRequest_kinesisStreamArn, *v.KinesisStreamArn)
+	}
+	serializeTagList(s, schemas.CreateUserAccessLoggingSettingsRequest_tags, v.Tags)
+}
+
 type CreateUserAccessLoggingSettingsOutput struct {
 
 	// The ARN of the user access logging settings.
@@ -62,13 +80,32 @@ type CreateUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserAccessLoggingSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserAccessLoggingSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserAccessLoggingSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserAccessLoggingSettingsArn != nil {
+		s.WriteString(schemas.CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn, *v.UserAccessLoggingSettingsArn)
+	}
+}
+func (v *CreateUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn:
+			v.UserAccessLoggingSettingsArn = new(string)
+			return d.ReadString(schemas.CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn, v.UserAccessLoggingSettingsArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserAccessLoggingSettings, schemas.CreateUserAccessLoggingSettingsRequest, schemas.CreateUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserAccessLoggingSettings, schemas.CreateUserAccessLoggingSettingsRequest, schemas.CreateUserAccessLoggingSettingsResponse), output: &CreateUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

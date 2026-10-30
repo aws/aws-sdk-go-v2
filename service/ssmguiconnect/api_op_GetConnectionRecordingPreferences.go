@@ -4,7 +4,9 @@ package ssmguiconnect
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/ssmguiconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmguiconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -29,6 +31,22 @@ type GetConnectionRecordingPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionRecordingPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionRecordingPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetConnectionRecordingPreferencesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetConnectionRecordingPreferencesOutput struct {
 
 	// Service-provided idempotency token.
@@ -45,13 +63,40 @@ type GetConnectionRecordingPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectionRecordingPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectionRecordingPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectionRecordingPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetConnectionRecordingPreferencesResponse_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionRecordingPreferences != nil {
+		s.WriteStruct(schemas.GetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences)
+		v.ConnectionRecordingPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetConnectionRecordingPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectionRecordingPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectionRecordingPreferencesResponse_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.GetConnectionRecordingPreferencesResponse_ClientToken, v.ClientToken)
+		case schemas.GetConnectionRecordingPreferencesResponse_ConnectionRecordingPreferences:
+			v.ConnectionRecordingPreferences = &types.ConnectionRecordingPreferences{}
+			return v.ConnectionRecordingPreferences.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectionRecordingPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectionRecordingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectionRecordingPreferences, nil, schemas.GetConnectionRecordingPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectionRecordingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectionRecordingPreferences, nil, schemas.GetConnectionRecordingPreferencesResponse), output: &GetConnectionRecordingPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

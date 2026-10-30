@@ -1,3 +1,12 @@
+# v1.73.1 (2026-10-27)
+
+* **Dependency Update**: Update to smithy-go v1.28.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.0 (2026-10-26)
+
+* **Feature**: Add Windows 11 to PlatformType enum
+
 # v1.72.2 (2026-10-22)
 
 * **Bug Fix**: Update smithy-go to v1.28.6

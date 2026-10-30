@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -35,6 +37,18 @@ type GetConfigurationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetConfigurationRequest_name, *v.Name)
+	}
 }
 
 type GetConfigurationOutput struct {
@@ -69,13 +83,77 @@ type GetConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetConfigurationResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetConfigurationResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetConfigurationResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConfigurationResponse_name, *v.Name)
+	}
+	if v.RunConfigurations != nil {
+		s.WriteStruct(schemas.GetConfigurationResponse_runConfigurations)
+		v.RunConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetConfigurationResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetConfigurationResponse_tags, v.Tags)
+	if v.Uuid != nil {
+		s.WriteString(schemas.GetConfigurationResponse_uuid, *v.Uuid)
+	}
+}
+func (v *GetConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetConfigurationResponse_arn, v.Arn)
+		case schemas.GetConfigurationResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetConfigurationResponse_creationTime, v.CreationTime)
+		case schemas.GetConfigurationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfigurationResponse_description, v.Description)
+		case schemas.GetConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfigurationResponse_name, v.Name)
+		case schemas.GetConfigurationResponse_runConfigurations:
+			v.RunConfigurations = &types.RunConfigurationsResponse{}
+			return v.RunConfigurations.Deserialize(d)
+		case schemas.GetConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ConfigurationStatus(ev)
+			return nil
+		case schemas.GetConfigurationResponse_tags:
+			return deserializeTagMap(d, schemas.GetConfigurationResponse_tags, &v.Tags)
+		case schemas.GetConfigurationResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.GetConfigurationResponse_uuid, v.Uuid)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, schemas.GetConfigurationRequest, schemas.GetConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguration, schemas.GetConfigurationRequest, schemas.GetConfigurationResponse), output: &GetConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

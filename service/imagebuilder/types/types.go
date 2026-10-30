@@ -2506,10 +2506,7 @@ type Image struct {
 	// used to create the image. For container images, this is empty.
 	ImageRecipe *ImageRecipe
 
-	// Settings for the vulnerability scans that Amazon Inspector runs for this image.
-	// For AMI output, Amazon Inspector scans the test instance during image creation.
-	// For container output, Amazon Inspector scans the container image in its Amazon
-	// ECR repository.
+	// The settings that determine whether and how Amazon Inspector scans this image.
 	ImageScanningConfiguration *ImageScanningConfiguration
 
 	// The origin of the base image that Image Builder used to build this image.
@@ -3084,8 +3081,8 @@ type ImagePipeline struct {
 	// pipeline.
 	ImageRecipeArn *string
 
-	// Contains settings for vulnerability scans that Amazon Inspector runs against
-	// the test instance during image creation.
+	// The settings that determine whether and how Amazon Inspector scans the images
+	// that the pipeline creates.
 	ImageScanningConfiguration *ImageScanningConfiguration
 
 	// The tags that Image Builder applies to the Image Builder image resource that
@@ -3915,12 +3912,45 @@ type ImageScanningConfiguration struct {
 	EcrConfiguration *EcrConfiguration
 
 	// Specifies whether Amazon Inspector scans for vulnerabilities when you create a
-	// new image, and whether Image Builder saves the findings. Amazon Inspector must
-	// be enabled in the account. Image tests must also be enabled. For AMI output,
-	// Amazon Inspector scans the test instance. For container output, Amazon Inspector
-	// scans the container image that Image Builder pushes to the Amazon ECR repository
-	// from your ecrConfiguration settings.
+	// new image. You must also enable image tests. For AMI output, imageScanningTypes
+	// sets whether Amazon Inspector scans the test instance or the output AMI. For
+	// container output, Amazon Inspector scans the container image that Image Builder
+	// pushes to the Amazon ECR repository from your ecrConfiguration settings.
+	//
+	// To use container image scans, you must activate Amazon Inspector for Amazon ECR
+	// scanning in your account. The Image Builder ListImageScanFindings operation
+	// returns the findings of these scans.
 	ImageScanningEnabled *bool
+
+	// The type of vulnerability scan that Image Builder runs for AMI output when
+	// imageScanningEnabled is true . Specify a single value. If you omit
+	// imageScanningTypes , Image Builder uses TEST_INSTANCE_CVE . The scan types work
+	// as follows:
+	//
+	//   - With TEST_INSTANCE_CVE , Amazon Inspector scans the test instance during
+	//   image tests. To use this scan, you must activate Amazon Inspector for Amazon EC2
+	//   scanning in your account. The Image Builder ListImageScanFindings operation
+	//   returns the findings.
+	//
+	//   - With ON_DEMAND_AMI_CVE , Amazon Inspector starts an on-demand scan of the
+	//   output AMI during image tests. To use this scan, you must build from an image
+	//   recipe, but you do not need to activate Amazon Inspector in your account. The
+	//   Amazon EC2 [GetImageFindings]operation returns the findings.
+	//
+	// [GetImageFindings]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageFindings.html
+	ImageScanningTypes []ImageScanningType
+
+	// The condition that the output AMI's scan results must meet for the image to
+	// pass. You can set scanResultCondition only when imageScanningTypes is
+	// ON_DEMAND_AMI_CVE . If you omit it, Image Builder starts the scan but does not
+	// wait for it or use its results to pass or fail the image.
+	//
+	// When you set scanResultCondition , the test phase waits for the scan to finish.
+	// Then Image Builder checks the findings against the condition. By default, Image
+	// Builder counts only findings that have a fix available. To count every finding,
+	// set fixAvailable to false . If a counted finding exceeds maximumSeverityLabel ,
+	// Image Builder fails the image in the test phase and does not distribute the AMI.
+	ScanResultCondition *ScanResultCondition
 
 	noSmithyDocumentSerde
 }
@@ -3940,6 +3970,12 @@ func (v *ImageScanningConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ImageScanningEnabled != nil {
 		s.WriteBool(schemas.ImageScanningConfiguration_imageScanningEnabled, *v.ImageScanningEnabled)
 	}
+	serializeImageScanningTypeList(s, schemas.ImageScanningConfiguration_imageScanningTypes, v.ImageScanningTypes)
+	if v.ScanResultCondition != nil {
+		s.WriteStruct(schemas.ImageScanningConfiguration_scanResultCondition)
+		v.ScanResultCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 func (v *ImageScanningConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageScanningConfiguration, func(s *smithy.Schema) error {
@@ -3950,6 +3986,11 @@ func (v *ImageScanningConfiguration) Deserialize(d smithy.ShapeDeserializer) err
 		case schemas.ImageScanningConfiguration_imageScanningEnabled:
 			v.ImageScanningEnabled = new(bool)
 			return d.ReadBool(schemas.ImageScanningConfiguration_imageScanningEnabled, v.ImageScanningEnabled)
+		case schemas.ImageScanningConfiguration_imageScanningTypes:
+			return deserializeImageScanningTypeList(d, schemas.ImageScanningConfiguration_imageScanningTypes, &v.ImageScanningTypes)
+		case schemas.ImageScanningConfiguration_scanResultCondition:
+			v.ScanResultCondition = &ScanResultCondition{}
+			return v.ScanResultCondition.Deserialize(d)
 		}
 		return nil
 	})
@@ -7147,6 +7188,59 @@ func (v *S3Logs) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.S3Logs_s3KeyPrefix:
 			v.S3KeyPrefix = new(string)
 			return d.ReadString(schemas.S3Logs_s3KeyPrefix, v.S3KeyPrefix)
+		}
+		return nil
+	})
+}
+
+// A condition that sets which findings from an on-demand AMI scan fail the image.
+// Image Builder checks the output AMI's findings against this condition during the
+// test phase.
+type ScanResultCondition struct {
+
+	// The maximum severity allowed for findings on the output AMI. A finding above
+	// this severity fails the image, unless fixAvailable excludes it. Valid values
+	// are INFORMATIONAL , LOW , MEDIUM , and HIGH . A CRITICAL finding that counts
+	// always fails the image.
+	//
+	// This member is required.
+	MaximumSeverityLabel MaximumSeverityLabel
+
+	// Specifies whether only findings that have a fix available count toward
+	// maximumSeverityLabel . When false , Image Builder counts every finding. The
+	// default is true .
+	FixAvailable *bool
+
+	noSmithyDocumentSerde
+}
+
+func (v *ScanResultCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScanResultCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScanResultCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FixAvailable != nil {
+		s.WriteBool(schemas.ScanResultCondition_fixAvailable, *v.FixAvailable)
+	}
+	if v.MaximumSeverityLabel != "" {
+		s.WriteString(schemas.ScanResultCondition_maximumSeverityLabel, string(v.MaximumSeverityLabel))
+	}
+}
+func (v *ScanResultCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScanResultCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScanResultCondition_fixAvailable:
+			v.FixAvailable = new(bool)
+			return d.ReadBool(schemas.ScanResultCondition_fixAvailable, v.FixAvailable)
+		case schemas.ScanResultCondition_maximumSeverityLabel:
+			var ev string
+			if err := d.ReadString(schemas.ScanResultCondition_maximumSeverityLabel, &ev); err != nil {
+				return err
+			}
+			v.MaximumSeverityLabel = MaximumSeverityLabel(ev)
+			return nil
 		}
 		return nil
 	})

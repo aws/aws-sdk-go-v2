@@ -5,7 +5,9 @@ package repostspace
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChannelsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsInput_nextToken, *v.NextToken)
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.ListChannelsInput_spaceId, *v.SpaceId)
+	}
+}
+
 type ListChannelsOutput struct {
 
 	// An array of structures that contain some information about the channels in the
@@ -60,13 +80,35 @@ type ListChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelsList(s, schemas.ListChannelsOutput_channels, v.Channels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelsOutput_channels:
+			return deserializeChannelsList(d, schemas.ListChannelsOutput_channels, &v.Channels)
+		case schemas.ListChannelsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannels, schemas.ListChannelsInput, schemas.ListChannelsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannels, schemas.ListChannelsInput, schemas.ListChannelsOutput), output: &ListChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

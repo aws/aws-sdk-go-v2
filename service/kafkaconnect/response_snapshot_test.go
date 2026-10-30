@@ -510,6 +510,25 @@ func TestCheckResponseSnapshot_DescribeConnectorOperation(t *testing.T) {
 					WorkerCount: 1,
 				},
 			},
+			Plugins: []types.PluginDescription{
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+			},
+			WorkerConfiguration: &types.WorkerConfigurationDescription{
+				Revision:               1,
+				WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+			},
+			UseDefaultWorkerConfiguration: true,
 		},
 		OriginConnectorConfiguration: map[string]string{
 			"key0": "__Value__",
@@ -533,6 +552,25 @@ func TestCheckResponseSnapshot_DescribeConnectorOperation(t *testing.T) {
 					WorkerCount: 1,
 				},
 			},
+			Plugins: []types.PluginDescription{
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+				{
+					CustomPlugin: &types.CustomPluginDescription{
+						CustomPluginArn: ptr.String("__CustomPluginArn__"),
+						Revision:        1,
+					},
+				},
+			},
+			WorkerConfiguration: &types.WorkerConfigurationDescription{
+				Revision:               1,
+				WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+			},
+			UseDefaultWorkerConfiguration: true,
 		},
 		TargetConnectorConfiguration: map[string]string{
 			"key0": "__Value__",
@@ -1194,6 +1232,25 @@ func TestCheckResponseSnapshot_UpdateConnector(t *testing.T) {
 		SkipHealthValidation: true,
 		ConnectorArn:         ptr.String("__ConnectorArn__"),
 		CurrentVersion:       ptr.String("__CurrentVersion__"),
+		Plugins: []types.PluginUpdate{
+			{
+				CustomPlugin: &types.CustomPluginUpdate{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        ptr.Int64(1),
+				},
+			},
+			{
+				CustomPlugin: &types.CustomPluginUpdate{
+					CustomPluginArn: ptr.String("__CustomPluginArn__"),
+					Revision:        ptr.Int64(1),
+				},
+			},
+		},
+		WorkerConfiguration: &types.WorkerConfigurationUpdate{
+			Revision:               ptr.Int64(1),
+			WorkerConfigurationArn: ptr.String("__WorkerConfigurationArn__"),
+		},
+		UseDefaultWorkerConfiguration: true,
 	})
 	if err != nil {
 		t.Fatal(err)

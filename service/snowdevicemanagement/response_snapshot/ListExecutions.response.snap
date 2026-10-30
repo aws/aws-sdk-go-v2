@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"executions":[{"executionId":"__ExecutionId__","managedDeviceId":"__ManagedDeviceId__","state":"QUEUED","taskId":"__TaskId__"},{"executionId":"__ExecutionId__","managedDeviceId":"__ManagedDeviceId__","state":"QUEUED","taskId":"__TaskId__"}],"nextToken":"__NextToken__"}

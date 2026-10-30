@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,6 +80,33 @@ type UpdateWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkflowRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateWorkflowRequest_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateWorkflowRequest_name, *v.Name)
+	}
+	if v.ReadmeMarkdown != nil {
+		s.WriteString(schemas.UpdateWorkflowRequest_readmeMarkdown, *v.ReadmeMarkdown)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.UpdateWorkflowRequest_storageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.UpdateWorkflowRequest_storageType, string(v.StorageType))
+	}
+}
+
 type UpdateWorkflowOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -85,13 +114,26 @@ type UpdateWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkflow, schemas.UpdateWorkflowRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkflow, schemas.UpdateWorkflowRequest, nil), output: &UpdateWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

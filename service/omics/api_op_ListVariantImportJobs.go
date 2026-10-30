@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListVariantImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVariantImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVariantImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVariantImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListVariantImportJobsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIdList(s, schemas.ListVariantImportJobsRequest_ids, v.Ids)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVariantImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVariantImportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListVariantImportJobsOutput struct {
 
 	// A pagination token that's included if more results are available.
@@ -64,13 +87,35 @@ type ListVariantImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVariantImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVariantImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVariantImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVariantImportJobsResponse_nextToken, *v.NextToken)
+	}
+	serializeVariantImportJobItems(s, schemas.ListVariantImportJobsResponse_variantImportJobs, v.VariantImportJobs)
+}
+func (v *ListVariantImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVariantImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVariantImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVariantImportJobsResponse_nextToken, v.NextToken)
+		case schemas.ListVariantImportJobsResponse_variantImportJobs:
+			return deserializeVariantImportJobItems(d, schemas.ListVariantImportJobsResponse_variantImportJobs, &v.VariantImportJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVariantImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVariantImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVariantImportJobs, schemas.ListVariantImportJobsRequest, schemas.ListVariantImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVariantImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVariantImportJobs, schemas.ListVariantImportJobsRequest, schemas.ListVariantImportJobsResponse), output: &ListVariantImportJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

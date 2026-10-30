@@ -4,6 +4,8 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -39,6 +41,21 @@ type DeleteLFTagExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLFTagExpressionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLFTagExpressionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLFTagExpressionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DeleteLFTagExpressionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteLFTagExpressionRequest_Name, *v.Name)
+	}
+}
+
 type DeleteLFTagExpressionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,13 +63,26 @@ type DeleteLFTagExpressionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLFTagExpressionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLFTagExpressionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLFTagExpressionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteLFTagExpressionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLFTagExpressionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLFTagExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLFTagExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLFTagExpression, schemas.DeleteLFTagExpressionRequest, schemas.DeleteLFTagExpressionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLFTagExpression{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLFTagExpression, schemas.DeleteLFTagExpressionRequest, schemas.DeleteLFTagExpressionResponse), output: &DeleteLFTagExpressionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package wickr
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,33 @@ type ListDevicesForUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesForUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesForUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDevicesForUserRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListDevicesForUserRequest_networkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesForUserRequest_nextToken, *v.NextToken)
+	}
+	if v.SortDirection != "" {
+		s.WriteString(schemas.ListDevicesForUserRequest_sortDirection, string(v.SortDirection))
+	}
+	if v.SortFields != nil {
+		s.WriteString(schemas.ListDevicesForUserRequest_sortFields, *v.SortFields)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListDevicesForUserRequest_userId, *v.UserId)
+	}
+}
+
 type ListDevicesForUserOutput struct {
 
 	// A list of device objects associated with the user within the current page.
@@ -76,13 +105,35 @@ type ListDevicesForUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesForUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesForUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevices(s, schemas.ListDevicesForUserResponse_devices, v.Devices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesForUserResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicesForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesForUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesForUserResponse_devices:
+			return deserializeDevices(d, schemas.ListDevicesForUserResponse_devices, &v.Devices)
+		case schemas.ListDevicesForUserResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesForUserResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicesForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevicesForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicesForUser, schemas.ListDevicesForUserRequest, schemas.ListDevicesForUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevicesForUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicesForUser, schemas.ListDevicesForUserRequest, schemas.ListDevicesForUserResponse), output: &ListDevicesForUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

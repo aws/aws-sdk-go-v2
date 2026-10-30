@@ -1647,6 +1647,24 @@ func (OAuthGrantType) Values() []OAuthGrantType {
 	}
 }
 
+type OnBehalfOfClientAuthenticationMethod string
+
+// Enum values for OnBehalfOfClientAuthenticationMethod
+const (
+	OnBehalfOfClientAuthenticationMethodNoClient OnBehalfOfClientAuthenticationMethod = "NO_CLIENT"
+)
+
+// Values returns all known values for OnBehalfOfClientAuthenticationMethod. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnBehalfOfClientAuthenticationMethod) Values() []OnBehalfOfClientAuthenticationMethod {
+	return []OnBehalfOfClientAuthenticationMethod{
+		"NO_CLIENT",
+	}
+}
+
 type OnBehalfOfTokenExchangeGrantTypeType string
 
 // Enum values for OnBehalfOfTokenExchangeGrantTypeType

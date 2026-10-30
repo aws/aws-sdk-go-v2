@@ -5,7 +5,9 @@ package qbusiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -65,6 +67,32 @@ type CreateRetrieverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRetrieverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRetrieverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRetrieverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateRetrieverRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRetrieverRequest_clientToken, *v.ClientToken)
+	}
+	serializeRetrieverConfiguration(s, schemas.CreateRetrieverRequest_configuration, v.Configuration)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateRetrieverRequest_displayName, *v.DisplayName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateRetrieverRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateRetrieverRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateRetrieverRequest_type, string(v.Type))
+	}
+}
+
 type CreateRetrieverOutput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role associated with a retriever.
@@ -79,13 +107,38 @@ type CreateRetrieverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRetrieverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRetrieverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRetrieverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RetrieverArn != nil {
+		s.WriteString(schemas.CreateRetrieverResponse_retrieverArn, *v.RetrieverArn)
+	}
+	if v.RetrieverId != nil {
+		s.WriteString(schemas.CreateRetrieverResponse_retrieverId, *v.RetrieverId)
+	}
+}
+func (v *CreateRetrieverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRetrieverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRetrieverResponse_retrieverArn:
+			v.RetrieverArn = new(string)
+			return d.ReadString(schemas.CreateRetrieverResponse_retrieverArn, v.RetrieverArn)
+		case schemas.CreateRetrieverResponse_retrieverId:
+			v.RetrieverId = new(string)
+			return d.ReadString(schemas.CreateRetrieverResponse_retrieverId, v.RetrieverId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRetrieverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRetriever{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRetriever, schemas.CreateRetrieverRequest, schemas.CreateRetrieverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRetriever{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRetriever, schemas.CreateRetrieverRequest, schemas.CreateRetrieverResponse), output: &CreateRetrieverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

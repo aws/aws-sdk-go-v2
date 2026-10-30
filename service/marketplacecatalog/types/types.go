@@ -1960,6 +1960,11 @@ type EntitySummary struct {
 	// An object that contains summary information about the SaaS product.
 	SaaSProductSummary *SaaSProductSummary
 
+	// An object that contains summary information about the subsidiary authorization,
+	// such as its status and authorized resource, when the entity type is
+	// SubsidiaryAuthorization .
+	SubsidiaryAuthorizationSummary *SubsidiaryAuthorizationSummary
+
 	// The visibility status of the entity to buyers. This value can be Public
 	// (everyone can view the entity), Limited (the entity is visible to limited
 	// accounts only), or Restricted (the entity was published and then unpublished
@@ -2036,6 +2041,11 @@ func (v *EntitySummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SaaSProductSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
+	if v.SubsidiaryAuthorizationSummary != nil {
+		s.WriteStruct(schemas.EntitySummary_SubsidiaryAuthorizationSummary)
+		v.SubsidiaryAuthorizationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.Visibility != nil {
 		s.WriteString(schemas.EntitySummary_Visibility, *v.Visibility)
 	}
@@ -2085,6 +2095,9 @@ func (v *EntitySummary) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.EntitySummary_SaaSProductSummary:
 			v.SaaSProductSummary = &SaaSProductSummary{}
 			return v.SaaSProductSummary.Deserialize(d)
+		case schemas.EntitySummary_SubsidiaryAuthorizationSummary:
+			v.SubsidiaryAuthorizationSummary = &SubsidiaryAuthorizationSummary{}
+			return v.SubsidiaryAuthorizationSummary.Deserialize(d)
 		case schemas.EntitySummary_Visibility:
 			v.Visibility = new(string)
 			return d.ReadString(schemas.EntitySummary_Visibility, v.Visibility)
@@ -2106,6 +2119,7 @@ func (v *EntitySummary) Deserialize(d smithy.ShapeDeserializer) error {
 //	EntityTypeFiltersMemberOfferSetFilters
 //	EntityTypeFiltersMemberResaleAuthorizationFilters
 //	EntityTypeFiltersMemberSaaSProductFilters
+//	EntityTypeFiltersMemberSubsidiaryAuthorizationFilters
 type EntityTypeFilters interface {
 	isEntityTypeFilters()
 }
@@ -2265,6 +2279,23 @@ func (v *EntityTypeFiltersMemberSaaSProductFilters) Deserialize(d smithy.ShapeDe
 	return v.Value.Deserialize(d)
 }
 
+// A filter for subsidiary authorizations.
+type EntityTypeFiltersMemberSubsidiaryAuthorizationFilters struct {
+	Value SubsidiaryAuthorizationFilters
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeFiltersMemberSubsidiaryAuthorizationFilters) isEntityTypeFilters() {}
+func (v *EntityTypeFiltersMemberSubsidiaryAuthorizationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeFilters_SubsidiaryAuthorizationFilters)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeFiltersMemberSubsidiaryAuthorizationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Object containing all the sort fields per entity type.
 //
 // The following types satisfy this interface:
@@ -2278,6 +2309,7 @@ func (v *EntityTypeFiltersMemberSaaSProductFilters) Deserialize(d smithy.ShapeDe
 //	EntityTypeSortMemberOfferSort
 //	EntityTypeSortMemberResaleAuthorizationSort
 //	EntityTypeSortMemberSaaSProductSort
+//	EntityTypeSortMemberSubsidiaryAuthorizationSort
 type EntityTypeSort interface {
 	isEntityTypeSort()
 }
@@ -2432,6 +2464,23 @@ func (v *EntityTypeSortMemberSaaSProductSort) Serialize(s smithy.ShapeSerializer
 	s.CloseStruct()
 }
 func (v *EntityTypeSortMemberSaaSProductSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A sort for subsidiary authorizations.
+type EntityTypeSortMemberSubsidiaryAuthorizationSort struct {
+	Value SubsidiaryAuthorizationSort
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityTypeSortMemberSubsidiaryAuthorizationSort) isEntityTypeSort() {}
+func (v *EntityTypeSortMemberSubsidiaryAuthorizationSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityTypeSort_SubsidiaryAuthorizationSort)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EntityTypeSortMemberSubsidiaryAuthorizationSort) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -6117,6 +6166,628 @@ func (v *Sort) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.SortOrder = SortOrder(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// The filter for the date a subsidiary authorization was created.
+type SubsidiaryAuthorizationCreatedDateFilter struct {
+
+	// A date range to filter by. The operation returns subsidiary authorizations with
+	// creation dates that fall within this range.
+	DateRange *SubsidiaryAuthorizationCreatedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationCreatedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationCreatedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationCreatedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationCreatedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SubsidiaryAuthorizationCreatedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationCreatedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationCreatedDateFilter_DateRange:
+			v.DateRange = &SubsidiaryAuthorizationCreatedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A date range for filtering subsidiary authorizations by creation date.
+type SubsidiaryAuthorizationCreatedDateFilterDateRange struct {
+
+	// The start date (inclusive) of the date range. The operation returns subsidiary
+	// authorizations created on or after this date.
+	AfterValue *string
+
+	// The end date (inclusive) of the date range. The operation returns subsidiary
+	// authorizations created on or before this date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationCreatedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationCreatedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *SubsidiaryAuthorizationCreatedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
+// The filter for subsidiary authorization entity IDs. Each ID begins with
+// subauthz- followed by 13 alphanumeric characters.
+type SubsidiaryAuthorizationEntityIdFilter struct {
+
+	// A list of entity IDs to filter by. The operation returns subsidiary
+	// authorizations with an entity ID that matches any value in this list. You can
+	// include up to 10 entity IDs in this list.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationEntityIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationEntityIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationEntityIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubsidiaryAuthorizationEntityIdFilterValueList(s, schemas.SubsidiaryAuthorizationEntityIdFilter_ValueList, v.ValueList)
+}
+func (v *SubsidiaryAuthorizationEntityIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationEntityIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationEntityIdFilter_ValueList:
+			return deserializeSubsidiaryAuthorizationEntityIdFilterValueList(d, schemas.SubsidiaryAuthorizationEntityIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
+// The filters that you can use with the ListEntities operation to filter
+// subsidiary authorizations. You can filter by EntityId , Status , ResourceId ,
+// ResourceName , Name , SubsidiaryAccountId , CreatedDate , and LastModifiedDate .
+// You can add only one wildcard filter in a single ListEntities request.
+type SubsidiaryAuthorizationFilters struct {
+
+	// A filter that matches subsidiary authorizations by creation date.
+	CreatedDate *SubsidiaryAuthorizationCreatedDateFilter
+
+	// A filter that matches subsidiary authorizations by entity ID.
+	EntityId *SubsidiaryAuthorizationEntityIdFilter
+
+	// A filter that matches subsidiary authorizations by last modified date.
+	LastModifiedDate *SubsidiaryAuthorizationLastModifiedDateFilter
+
+	// A filter that matches subsidiary authorizations by name.
+	Name *SubsidiaryAuthorizationNameFilter
+
+	// A filter that matches subsidiary authorizations by the ID of the authorized
+	// resource.
+	ResourceId *SubsidiaryAuthorizationResourceIdFilter
+
+	// A filter that matches subsidiary authorizations by the name of the authorized
+	// resource.
+	ResourceName *SubsidiaryAuthorizationResourceNameFilter
+
+	// A filter that matches subsidiary authorizations by status.
+	Status *SubsidiaryAuthorizationStatusFilter
+
+	// A filter that matches subsidiary authorizations by the AWS account ID of the
+	// subsidiary account.
+	SubsidiaryAccountId *SubsidiaryAuthorizationSubsidiaryAccountIdFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationFilters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationFilters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationFilters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_CreatedDate)
+		v.CreatedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntityId != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_EntityId)
+		v.EntityId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_LastModifiedDate)
+		v.LastModifiedDate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_Name)
+		v.Name.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceId != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_ResourceId)
+		v.ResourceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_ResourceName)
+		v.ResourceName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubsidiaryAccountId != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationFilters_SubsidiaryAccountId)
+		v.SubsidiaryAccountId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SubsidiaryAuthorizationFilters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationFilters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationFilters_CreatedDate:
+			v.CreatedDate = &SubsidiaryAuthorizationCreatedDateFilter{}
+			return v.CreatedDate.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_EntityId:
+			v.EntityId = &SubsidiaryAuthorizationEntityIdFilter{}
+			return v.EntityId.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_LastModifiedDate:
+			v.LastModifiedDate = &SubsidiaryAuthorizationLastModifiedDateFilter{}
+			return v.LastModifiedDate.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_Name:
+			v.Name = &SubsidiaryAuthorizationNameFilter{}
+			return v.Name.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_ResourceId:
+			v.ResourceId = &SubsidiaryAuthorizationResourceIdFilter{}
+			return v.ResourceId.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_ResourceName:
+			v.ResourceName = &SubsidiaryAuthorizationResourceNameFilter{}
+			return v.ResourceName.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_Status:
+			v.Status = &SubsidiaryAuthorizationStatusFilter{}
+			return v.Status.Deserialize(d)
+		case schemas.SubsidiaryAuthorizationFilters_SubsidiaryAccountId:
+			v.SubsidiaryAccountId = &SubsidiaryAuthorizationSubsidiaryAccountIdFilter{}
+			return v.SubsidiaryAccountId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The filter for the date a subsidiary authorization was last modified.
+type SubsidiaryAuthorizationLastModifiedDateFilter struct {
+
+	// A date range to filter by. The operation returns subsidiary authorizations with
+	// last modified dates that fall within this range.
+	DateRange *SubsidiaryAuthorizationLastModifiedDateFilterDateRange
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationLastModifiedDateFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationLastModifiedDateFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationLastModifiedDateFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateRange != nil {
+		s.WriteStruct(schemas.SubsidiaryAuthorizationLastModifiedDateFilter_DateRange)
+		v.DateRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SubsidiaryAuthorizationLastModifiedDateFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationLastModifiedDateFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationLastModifiedDateFilter_DateRange:
+			v.DateRange = &SubsidiaryAuthorizationLastModifiedDateFilterDateRange{}
+			return v.DateRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// A date range for filtering subsidiary authorizations by last modified date.
+type SubsidiaryAuthorizationLastModifiedDateFilterDateRange struct {
+
+	// The start date (inclusive) of the date range. The operation returns subsidiary
+	// authorizations last modified on or after this date.
+	AfterValue *string
+
+	// The end date (inclusive) of the date range. The operation returns subsidiary
+	// authorizations last modified on or before this date.
+	BeforeValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationLastModifiedDateFilterDateRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationLastModifiedDateFilterDateRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterValue != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue, *v.AfterValue)
+	}
+	if v.BeforeValue != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue, *v.BeforeValue)
+	}
+}
+func (v *SubsidiaryAuthorizationLastModifiedDateFilterDateRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue:
+			v.AfterValue = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue, v.AfterValue)
+		case schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue:
+			v.BeforeValue = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue, v.BeforeValue)
+		}
+		return nil
+	})
+}
+
+// The filter for subsidiary authorization names.
+type SubsidiaryAuthorizationNameFilter struct {
+
+	// A list of names to filter by. The operation returns subsidiary authorizations
+	// with a name that matches any value in this list. You can include up to 10 names
+	// in this list.
+	ValueList []string
+
+	// A partial name to filter by. The operation returns subsidiary authorizations
+	// whose name contains this value. The value must be at least 3 characters.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubsidiaryAuthorizationNameFilterValueList(s, schemas.SubsidiaryAuthorizationNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *SubsidiaryAuthorizationNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationNameFilter_ValueList:
+			return deserializeSubsidiaryAuthorizationNameFilterValueList(d, schemas.SubsidiaryAuthorizationNameFilter_ValueList, &v.ValueList)
+		case schemas.SubsidiaryAuthorizationNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
+// The filter for the IDs of resources that subsidiary authorizations apply to.
+type SubsidiaryAuthorizationResourceIdFilter struct {
+
+	// A list of resource IDs to filter by. The operation returns subsidiary
+	// authorizations for resources with an ID that matches any value in this list. You
+	// can include up to 10 resource IDs in this list.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationResourceIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationResourceIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationResourceIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubsidiaryAuthorizationResourceIdFilterValueList(s, schemas.SubsidiaryAuthorizationResourceIdFilter_ValueList, v.ValueList)
+}
+func (v *SubsidiaryAuthorizationResourceIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationResourceIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationResourceIdFilter_ValueList:
+			return deserializeSubsidiaryAuthorizationResourceIdFilterValueList(d, schemas.SubsidiaryAuthorizationResourceIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
+// The filter for the names of resources that subsidiary authorizations apply to.
+type SubsidiaryAuthorizationResourceNameFilter struct {
+
+	// A list of resource names to filter by. The operation returns subsidiary
+	// authorizations for resources with a name that matches any value in this list.
+	// You can include up to 10 resource names in this list.
+	ValueList []string
+
+	// A partial resource name to filter by. The operation returns subsidiary
+	// authorizations for resources whose name contains this value. The value must be
+	// at least 3 characters.
+	WildCardValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationResourceNameFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationResourceNameFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationResourceNameFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubsidiaryAuthorizationResourceNameFilterValueList(s, schemas.SubsidiaryAuthorizationResourceNameFilter_ValueList, v.ValueList)
+	if v.WildCardValue != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationResourceNameFilter_WildCardValue, *v.WildCardValue)
+	}
+}
+func (v *SubsidiaryAuthorizationResourceNameFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationResourceNameFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationResourceNameFilter_ValueList:
+			return deserializeSubsidiaryAuthorizationResourceNameFilterValueList(d, schemas.SubsidiaryAuthorizationResourceNameFilter_ValueList, &v.ValueList)
+		case schemas.SubsidiaryAuthorizationResourceNameFilter_WildCardValue:
+			v.WildCardValue = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationResourceNameFilter_WildCardValue, v.WildCardValue)
+		}
+		return nil
+	})
+}
+
+// Specifies the field to sort subsidiary authorizations by and the order
+// (ascending or descending) to apply.
+type SubsidiaryAuthorizationSort struct {
+
+	// The field to sort subsidiary authorizations by. Valid values are EntityId ,
+	// Status , ResourceId , SubsidiaryAccountId , CreatedDate , and LastModifiedDate .
+	SortBy SubsidiaryAuthorizationSortBy
+
+	// The sorting order. Can be ASCENDING or DESCENDING . The default value is
+	// DESCENDING .
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationSort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationSort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationSort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != "" {
+		s.WriteString(schemas.SubsidiaryAuthorizationSort_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SubsidiaryAuthorizationSort_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *SubsidiaryAuthorizationSort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationSort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationSort_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.SubsidiaryAuthorizationSort_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = SubsidiaryAuthorizationSortBy(ev)
+			return nil
+		case schemas.SubsidiaryAuthorizationSort_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.SubsidiaryAuthorizationSort_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// The filter for subsidiary authorization statuses.
+type SubsidiaryAuthorizationStatusFilter struct {
+
+	// A list of statuses to filter by. The operation returns subsidiary
+	// authorizations with a status that matches a value in this list. Valid values
+	// are:
+	//
+	//   - Draft - The subsidiary authorization was created but not yet released. The
+	//   subsidiary account can't see it.
+	//
+	//   - Active - The subsidiary account can use the subsidiary authorization to
+	//   create offers for the authorized product.
+	//
+	//   - Restricted - The subsidiary authorization was discarded while in Draft or
+	//   revoked while Active . It can't be used to create new offers. This status is
+	//   final.
+	ValueList []SubsidiaryAuthorizationStatusString
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationStatusFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationStatusFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubsidiaryAuthorizationStatusFilterValueList(s, schemas.SubsidiaryAuthorizationStatusFilter_ValueList, v.ValueList)
+}
+func (v *SubsidiaryAuthorizationStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationStatusFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationStatusFilter_ValueList:
+			return deserializeSubsidiaryAuthorizationStatusFilterValueList(d, schemas.SubsidiaryAuthorizationStatusFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
+// The filter for the AWS account IDs of subsidiary accounts.
+type SubsidiaryAuthorizationSubsidiaryAccountIdFilter struct {
+
+	// A list of AWS account IDs to filter by. The operation returns subsidiary
+	// authorizations whose subsidiary account ID matches any value in this list. You
+	// can include up to 10 account IDs in this list.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationSubsidiaryAccountIdFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationSubsidiaryAccountIdFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationSubsidiaryAccountIdFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList(s, schemas.SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList, v.ValueList)
+}
+func (v *SubsidiaryAuthorizationSubsidiaryAccountIdFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationSubsidiaryAccountIdFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList:
+			return deserializeSubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList(d, schemas.SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList, &v.ValueList)
+		}
+		return nil
+	})
+}
+
+// An object that contains summary information about a subsidiary authorization,
+// including its name, status, authorized resource, subsidiary account, and
+// creation date. A subsidiary authorization lets a seller authorize one of its
+// subsidiary accounts to create offers for one of its products.
+type SubsidiaryAuthorizationSummary struct {
+
+	// The date the subsidiary authorization was created.
+	CreatedDate *string
+
+	// The name of the subsidiary authorization.
+	Name *string
+
+	// The ID of the resource that the subsidiary authorization applies to. Currently,
+	// this is always a product ID, such as prod-example123 .
+	ResourceId *string
+
+	// The name of the resource that the subsidiary authorization applies to.
+	// Currently, this is always a product name.
+	ResourceName *string
+
+	// The status of the subsidiary authorization. Valid values are:
+	//
+	//   - Draft - The subsidiary authorization was created but not yet released. The
+	//   subsidiary account can't see it.
+	//
+	//   - Active - The subsidiary account can use the subsidiary authorization to
+	//   create offers for the authorized product.
+	//
+	//   - Restricted - The subsidiary authorization was discarded while in Draft or
+	//   revoked while Active . It can't be used to create new offers. This status is
+	//   final.
+	Status *string
+
+	// The 12-digit AWS account ID of the subsidiary account.
+	SubsidiaryAccountId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *SubsidiaryAuthorizationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubsidiaryAuthorizationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubsidiaryAuthorizationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationSummary_CreatedDate, *v.CreatedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationSummary_Name, *v.Name)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationSummary_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationSummary_ResourceName, *v.ResourceName)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationSummary_Status, *v.Status)
+	}
+	if v.SubsidiaryAccountId != nil {
+		s.WriteString(schemas.SubsidiaryAuthorizationSummary_SubsidiaryAccountId, *v.SubsidiaryAccountId)
+	}
+}
+func (v *SubsidiaryAuthorizationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubsidiaryAuthorizationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubsidiaryAuthorizationSummary_CreatedDate:
+			v.CreatedDate = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationSummary_CreatedDate, v.CreatedDate)
+		case schemas.SubsidiaryAuthorizationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationSummary_Name, v.Name)
+		case schemas.SubsidiaryAuthorizationSummary_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationSummary_ResourceId, v.ResourceId)
+		case schemas.SubsidiaryAuthorizationSummary_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationSummary_ResourceName, v.ResourceName)
+		case schemas.SubsidiaryAuthorizationSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationSummary_Status, v.Status)
+		case schemas.SubsidiaryAuthorizationSummary_SubsidiaryAccountId:
+			v.SubsidiaryAccountId = new(string)
+			return d.ReadString(schemas.SubsidiaryAuthorizationSummary_SubsidiaryAccountId, v.SubsidiaryAccountId)
 		}
 		return nil
 	})

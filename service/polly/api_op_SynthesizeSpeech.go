@@ -5,7 +5,9 @@ package polly
 import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"io"
 )
@@ -114,6 +116,38 @@ type SynthesizeSpeechInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SynthesizeSpeechInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SynthesizeSpeechInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SynthesizeSpeechInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Engine != "" {
+		s.WriteString(schemas.SynthesizeSpeechInput_Engine, string(v.Engine))
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SynthesizeSpeechInput_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLexiconNameList(s, schemas.SynthesizeSpeechInput_LexiconNames, v.LexiconNames)
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.SynthesizeSpeechInput_OutputFormat, string(v.OutputFormat))
+	}
+	if v.SampleRate != nil {
+		s.WriteString(schemas.SynthesizeSpeechInput_SampleRate, *v.SampleRate)
+	}
+	serializeSpeechMarkTypeList(s, schemas.SynthesizeSpeechInput_SpeechMarkTypes, v.SpeechMarkTypes)
+	if v.Text != nil {
+		s.WriteString(schemas.SynthesizeSpeechInput_Text, *v.Text)
+	}
+	if v.TextType != "" {
+		s.WriteString(schemas.SynthesizeSpeechInput_TextType, string(v.TextType))
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.SynthesizeSpeechInput_VoiceId, string(v.VoiceId))
+	}
+}
+
 type SynthesizeSpeechOutput struct {
 
 	//  Stream containing the synthesized speech.
@@ -153,13 +187,45 @@ type SynthesizeSpeechOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SynthesizeSpeechOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SynthesizeSpeechOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SynthesizeSpeechOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.SynthesizeSpeechOutput_ContentType, *v.ContentType)
+	}
+	if v.RequestCharacters != 0 {
+		s.WriteInt32(schemas.SynthesizeSpeechOutput_RequestCharacters, v.RequestCharacters)
+	}
+}
+func (v *SynthesizeSpeechOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SynthesizeSpeechOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SynthesizeSpeechOutput_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.SynthesizeSpeechOutput_ContentType, v.ContentType)
+		case schemas.SynthesizeSpeechOutput_RequestCharacters:
+			return d.ReadInt32(schemas.SynthesizeSpeechOutput_RequestCharacters, &v.RequestCharacters)
+		}
+		return nil
+	})
+}
+func (v *SynthesizeSpeechOutput) GetPayloadStream() io.Reader { return v.AudioStream }
+
+var _ smithy.StreamingInput = (*SynthesizeSpeechOutput)(nil)
+
+func (v *SynthesizeSpeechOutput) SetPayloadStream(r io.ReadCloser) { v.AudioStream = r }
+
+var _ smithy.StreamingOutput = (*SynthesizeSpeechOutput)(nil)
+
 func (c *Client) addOperationSynthesizeSpeechMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSynthesizeSpeech{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SynthesizeSpeech, schemas.SynthesizeSpeechInput, schemas.SynthesizeSpeechOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSynthesizeSpeech{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SynthesizeSpeech, schemas.SynthesizeSpeechInput, schemas.SynthesizeSpeechOutput), output: &SynthesizeSpeechOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

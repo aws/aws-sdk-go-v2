@@ -4,7 +4,9 @@ package oam
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,21 @@ type GetLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetLinkInput_Identifier, *v.Identifier)
+	}
+	if v.IncludeTags != nil {
+		s.WriteBool(schemas.GetLinkInput_IncludeTags, *v.IncludeTags)
+	}
+}
+
 type GetLinkOutput struct {
 
 	// The ARN of the link.
@@ -83,13 +100,70 @@ type GetLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetLinkOutput_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetLinkOutput_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.GetLinkOutput_Label, *v.Label)
+	}
+	if v.LabelTemplate != nil {
+		s.WriteString(schemas.GetLinkOutput_LabelTemplate, *v.LabelTemplate)
+	}
+	if v.LinkConfiguration != nil {
+		s.WriteStruct(schemas.GetLinkOutput_LinkConfiguration)
+		v.LinkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTypesOutput(s, schemas.GetLinkOutput_ResourceTypes, v.ResourceTypes)
+	if v.SinkArn != nil {
+		s.WriteString(schemas.GetLinkOutput_SinkArn, *v.SinkArn)
+	}
+	serializeTagMapOutput(s, schemas.GetLinkOutput_Tags, v.Tags)
+}
+func (v *GetLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLinkOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetLinkOutput_Arn, v.Arn)
+		case schemas.GetLinkOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetLinkOutput_Id, v.Id)
+		case schemas.GetLinkOutput_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.GetLinkOutput_Label, v.Label)
+		case schemas.GetLinkOutput_LabelTemplate:
+			v.LabelTemplate = new(string)
+			return d.ReadString(schemas.GetLinkOutput_LabelTemplate, v.LabelTemplate)
+		case schemas.GetLinkOutput_LinkConfiguration:
+			v.LinkConfiguration = &types.LinkConfiguration{}
+			return v.LinkConfiguration.Deserialize(d)
+		case schemas.GetLinkOutput_ResourceTypes:
+			return deserializeResourceTypesOutput(d, schemas.GetLinkOutput_ResourceTypes, &v.ResourceTypes)
+		case schemas.GetLinkOutput_SinkArn:
+			v.SinkArn = new(string)
+			return d.ReadString(schemas.GetLinkOutput_SinkArn, v.SinkArn)
+		case schemas.GetLinkOutput_Tags:
+			return deserializeTagMapOutput(d, schemas.GetLinkOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkInput, schemas.GetLinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLink, schemas.GetLinkInput, schemas.GetLinkOutput), output: &GetLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

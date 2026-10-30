@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -68,6 +70,26 @@ type PutTableReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTableReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.PutTableReplicationRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableArn != nil {
+		s.WriteString(schemas.PutTableReplicationRequest_tableArn, *v.TableArn)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.PutTableReplicationRequest_versionToken, *v.VersionToken)
+	}
+}
+
 type PutTableReplicationOutput struct {
 
 	// The status of the replication configuration operation.
@@ -86,13 +108,38 @@ type PutTableReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTableReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTableReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTableReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.PutTableReplicationResponse_status, *v.Status)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.PutTableReplicationResponse_versionToken, *v.VersionToken)
+	}
+}
+func (v *PutTableReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTableReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTableReplicationResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.PutTableReplicationResponse_status, v.Status)
+		case schemas.PutTableReplicationResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.PutTableReplicationResponse_versionToken, v.VersionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTableReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTableReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableReplication, schemas.PutTableReplicationRequest, schemas.PutTableReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTableReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTableReplication, schemas.PutTableReplicationRequest, schemas.PutTableReplicationResponse), output: &PutTableReplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

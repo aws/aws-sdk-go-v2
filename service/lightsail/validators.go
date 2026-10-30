@@ -3113,6 +3113,38 @@ func validateInstanceEntryList(v []types.InstanceEntry) error {
 	}
 }
 
+func validateWafRule(v *types.WafRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WafRule"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWafRuleList(v []types.WafRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WafRuleList"}
+	for i := range v {
+		if err := validateWafRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAllocateStaticIpInput(v *AllocateStaticIpInput) error {
 	if v == nil {
 		return nil
@@ -3474,6 +3506,11 @@ func validateOpCreateDistributionInput(v *CreateDistributionInput) error {
 	}
 	if v.BundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if v.WafRules != nil {
+		if err := validateWafRuleList(v.WafRules); err != nil {
+			invalidParams.AddNested("WafRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5214,6 +5251,11 @@ func validateOpUpdateDistributionInput(v *UpdateDistributionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDistributionInput"}
 	if v.DistributionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionName"))
+	}
+	if v.WafRules != nil {
+		if err := validateWafRuleList(v.WafRules); err != nil {
+			invalidParams.AddNested("WafRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

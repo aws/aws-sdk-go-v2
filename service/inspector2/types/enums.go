@@ -118,6 +118,73 @@ func (AggregationType) Values() []AggregationType {
 	}
 }
 
+type AmiConfigurationStatus string
+
+// Enum values for AmiConfigurationStatus
+const (
+	AmiConfigurationStatusSuccess AmiConfigurationStatus = "SUCCESS"
+	AmiConfigurationStatusPending AmiConfigurationStatus = "PENDING"
+	AmiConfigurationStatusFailed  AmiConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for AmiConfigurationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmiConfigurationStatus) Values() []AmiConfigurationStatus {
+	return []AmiConfigurationStatus{
+		"SUCCESS",
+		"PENDING",
+		"FAILED",
+	}
+}
+
+type AmiScanDuration string
+
+// Enum values for AmiScanDuration
+const (
+	AmiScanDurationDays180 AmiScanDuration = "DAYS_180"
+	AmiScanDurationDays90  AmiScanDuration = "DAYS_90"
+	AmiScanDurationDays60  AmiScanDuration = "DAYS_60"
+	AmiScanDurationDays30  AmiScanDuration = "DAYS_30"
+	AmiScanDurationDays14  AmiScanDuration = "DAYS_14"
+	AmiScanDurationDays7   AmiScanDuration = "DAYS_7"
+)
+
+// Values returns all known values for AmiScanDuration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmiScanDuration) Values() []AmiScanDuration {
+	return []AmiScanDuration{
+		"DAYS_180",
+		"DAYS_90",
+		"DAYS_60",
+		"DAYS_30",
+		"DAYS_14",
+		"DAYS_7",
+	}
+}
+
+type AmiScanMode string
+
+// Enum values for AmiScanMode
+const (
+	AmiScanModeScanAll        AmiScanMode = "SCAN_ALL"
+	AmiScanModeTargetScanning AmiScanMode = "TARGET_SCANNING"
+)
+
+// Values returns all known values for AmiScanMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AmiScanMode) Values() []AmiScanMode {
+	return []AmiScanMode{
+		"SCAN_ALL",
+		"TARGET_SCANNING",
+	}
+}
+
 type AmiSortBy string
 
 // Enum values for AmiSortBy
@@ -995,6 +1062,7 @@ const (
 	CoverageResourceTypeMicrosoftContainerRegistryRegistryContainerRepository CoverageResourceType = "Microsoft.ContainerRegistry/registry/containerRepository"
 	CoverageResourceTypeMicrosoftWebSites                                     CoverageResourceType = "Microsoft.Web/sites"
 	CoverageResourceTypeMicrosoftContainerRegistryRegistries                  CoverageResourceType = "Microsoft.ContainerRegistry/registries"
+	CoverageResourceTypeMachineImage                                          CoverageResourceType = "MACHINE_IMAGE"
 )
 
 // Values returns all known values for CoverageResourceType. Note that this can be
@@ -1013,6 +1081,7 @@ func (CoverageResourceType) Values() []CoverageResourceType {
 		"Microsoft.ContainerRegistry/registry/containerRepository",
 		"Microsoft.Web/sites",
 		"Microsoft.ContainerRegistry/registries",
+		"MACHINE_IMAGE",
 	}
 }
 
@@ -1626,6 +1695,7 @@ const (
 	FreeTrialTypeVm                 FreeTrialType = "VM"
 	FreeTrialTypeContainerImage     FreeTrialType = "CONTAINER_IMAGE"
 	FreeTrialTypeServerlessFunction FreeTrialType = "SERVERLESS_FUNCTION"
+	FreeTrialTypeMachineImage       FreeTrialType = "MACHINE_IMAGE"
 )
 
 // Values returns all known values for FreeTrialType. Note that this can be
@@ -1642,6 +1712,7 @@ func (FreeTrialType) Values() []FreeTrialType {
 		"VM",
 		"CONTAINER_IMAGE",
 		"SERVERLESS_FUNCTION",
+		"MACHINE_IMAGE",
 	}
 }
 
@@ -1844,6 +1915,27 @@ func (ListCisScansSortBy) Values() []ListCisScansSortBy {
 	}
 }
 
+type MachineImagePlatform string
+
+// Enum values for MachineImagePlatform
+const (
+	MachineImagePlatformWindows MachineImagePlatform = "WINDOWS"
+	MachineImagePlatformLinux   MachineImagePlatform = "LINUX"
+	MachineImagePlatformUnknown MachineImagePlatform = "UNKNOWN"
+)
+
+// Values returns all known values for MachineImagePlatform. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MachineImagePlatform) Values() []MachineImagePlatform {
+	return []MachineImagePlatform{
+		"WINDOWS",
+		"LINUX",
+		"UNKNOWN",
+	}
+}
+
 type MapComparison string
 
 // Enum values for MapComparison
@@ -1877,6 +1969,71 @@ func (NetworkProtocol) Values() []NetworkProtocol {
 	return []NetworkProtocol{
 		"TCP",
 		"UDP",
+	}
+}
+
+type OnDemandResourceType string
+
+// Enum values for OnDemandResourceType
+const (
+	OnDemandResourceTypeAmi OnDemandResourceType = "AMI"
+)
+
+// Values returns all known values for OnDemandResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnDemandResourceType) Values() []OnDemandResourceType {
+	return []OnDemandResourceType{
+		"AMI",
+	}
+}
+
+type OnDemandScanStatus string
+
+// Enum values for OnDemandScanStatus
+const (
+	OnDemandScanStatusInProgress OnDemandScanStatus = "IN_PROGRESS"
+	OnDemandScanStatusSuccessful OnDemandScanStatus = "SUCCESSFUL"
+	OnDemandScanStatusFailed     OnDemandScanStatus = "FAILED"
+)
+
+// Values returns all known values for OnDemandScanStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnDemandScanStatus) Values() []OnDemandScanStatus {
+	return []OnDemandScanStatus{
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+	}
+}
+
+type OnDemandScanStatusReason string
+
+// Enum values for OnDemandScanStatusReason
+const (
+	OnDemandScanStatusReasonAccessDenied                          OnDemandScanStatusReason = "ACCESS_DENIED"
+	OnDemandScanStatusReasonInternalError                         OnDemandScanStatusReason = "INTERNAL_ERROR"
+	OnDemandScanStatusReasonStorageLimitExceeded                  OnDemandScanStatusReason = "STORAGE_LIMIT_EXCEEDED"
+	OnDemandScanStatusReasonExtractionCollectionTimeLimitExceeded OnDemandScanStatusReason = "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED"
+	OnDemandScanStatusReasonUnsupportedOs                         OnDemandScanStatusReason = "UNSUPPORTED_OS"
+	OnDemandScanStatusReasonResourceTerminated                    OnDemandScanStatusReason = "RESOURCE_TERMINATED"
+)
+
+// Values returns all known values for OnDemandScanStatusReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnDemandScanStatusReason) Values() []OnDemandScanStatusReason {
+	return []OnDemandScanStatusReason{
+		"ACCESS_DENIED",
+		"INTERNAL_ERROR",
+		"STORAGE_LIMIT_EXCEEDED",
+		"EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED",
+		"UNSUPPORTED_OS",
+		"RESOURCE_TERMINATED",
 	}
 }
 
@@ -2249,6 +2406,7 @@ const (
 	ResourceTypeMicrosoftComputeVirtualMachines                  ResourceType = "Microsoft.Compute/virtualMachines"
 	ResourceTypeMicrosoftContainerRegistryRegistryContainerImage ResourceType = "Microsoft.ContainerRegistry/registry/containerImage"
 	ResourceTypeMicrosoftWebSites                                ResourceType = "Microsoft.Web/sites"
+	ResourceTypeMachineImage                                     ResourceType = "MACHINE_IMAGE"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -2265,6 +2423,7 @@ func (ResourceType) Values() []ResourceType {
 		"Microsoft.Compute/virtualMachines",
 		"Microsoft.ContainerRegistry/registry/containerImage",
 		"Microsoft.Web/sites",
+		"MACHINE_IMAGE",
 	}
 }
 
@@ -2410,6 +2569,25 @@ func (ScanMode) Values() []ScanMode {
 	}
 }
 
+type ScanSource string
+
+// Enum values for ScanSource
+const (
+	ScanSourceInstanceScan     ScanSource = "INSTANCE_SCAN"
+	ScanSourceMachineImageScan ScanSource = "MACHINE_IMAGE_SCAN"
+)
+
+// Values returns all known values for ScanSource. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScanSource) Values() []ScanSource {
+	return []ScanSource{
+		"INSTANCE_SCAN",
+		"MACHINE_IMAGE_SCAN",
+	}
+}
+
 type ScanStatusCode string
 
 // Enum values for ScanStatusCode
@@ -2469,6 +2647,9 @@ const (
 	ScanStatusReasonUnsupportedCodeArtifacts                     ScanStatusReason = "UNSUPPORTED_CODE_ARTIFACTS"
 	ScanStatusReasonResourceUnmanaged                            ScanStatusReason = "RESOURCE_UNMANAGED"
 	ScanStatusReasonResourceStopped                              ScanStatusReason = "RESOURCE_STOPPED"
+	ScanStatusReasonExtractionCollectionTimeLimitExceeded        ScanStatusReason = "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED"
+	ScanStatusReasonStorageLimitExceeded                         ScanStatusReason = "STORAGE_LIMIT_EXCEEDED"
+	ScanStatusReasonInvalidArtifact                              ScanStatusReason = "INVALID_ARTIFACT"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -2513,6 +2694,9 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"UNSUPPORTED_CODE_ARTIFACTS",
 		"RESOURCE_UNMANAGED",
 		"RESOURCE_STOPPED",
+		"EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED",
+		"STORAGE_LIMIT_EXCEEDED",
+		"INVALID_ARTIFACT",
 	}
 }
 
@@ -2842,6 +3026,7 @@ const (
 	UsageTypeAzureContainerImageRescan      UsageType = "AZURE_CONTAINER_IMAGE_RESCAN"
 	UsageTypeAzureVmAgentBasedInstanceHours UsageType = "AZURE_VM_AGENT_BASED_INSTANCE_HOURS"
 	UsageTypeAzureServerlessFunctionHours   UsageType = "AZURE_SERVERLESS_FUNCTION_HOURS"
+	UsageTypeEc2AmiHours                    UsageType = "EC2_AMI_HOURS"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded
@@ -2863,6 +3048,7 @@ func (UsageType) Values() []UsageType {
 		"AZURE_CONTAINER_IMAGE_RESCAN",
 		"AZURE_VM_AGENT_BASED_INSTANCE_HOURS",
 		"AZURE_SERVERLESS_FUNCTION_HOURS",
+		"EC2_AMI_HOURS",
 	}
 }
 

@@ -4,7 +4,9 @@ package route53globalresolver
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -51,6 +53,30 @@ type UpdateAccessSourceInput struct {
 	Protocol types.DnsProtocol
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateAccessSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessSourceId != nil {
+		s.WriteString(schemas.UpdateAccessSourceInput_accessSourceId, *v.AccessSourceId)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.UpdateAccessSourceInput_cidr, *v.Cidr)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateAccessSourceInput_ipAddressType, string(v.IpAddressType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAccessSourceInput_name, *v.Name)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateAccessSourceInput_protocol, string(v.Protocol))
+	}
 }
 
 type UpdateAccessSourceOutput struct {
@@ -109,13 +135,98 @@ type UpdateAccessSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessSourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_arn, *v.Arn)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_cidr, *v.Cidr)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateAccessSourceOutput_createdAt, *v.CreatedAt)
+	}
+	if v.DnsViewId != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_dnsViewId, *v.DnsViewId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_id, *v.Id)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateAccessSourceOutput_ipAddressType, string(v.IpAddressType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAccessSourceOutput_name, *v.Name)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateAccessSourceOutput_protocol, string(v.Protocol))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateAccessSourceOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.UpdateAccessSourceOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *UpdateAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessSourceOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_arn, v.Arn)
+		case schemas.UpdateAccessSourceOutput_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_cidr, v.Cidr)
+		case schemas.UpdateAccessSourceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAccessSourceOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateAccessSourceOutput_dnsViewId:
+			v.DnsViewId = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_dnsViewId, v.DnsViewId)
+		case schemas.UpdateAccessSourceOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_id, v.Id)
+		case schemas.UpdateAccessSourceOutput_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAccessSourceOutput_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		case schemas.UpdateAccessSourceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAccessSourceOutput_name, v.Name)
+		case schemas.UpdateAccessSourceOutput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAccessSourceOutput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.DnsProtocol(ev)
+			return nil
+		case schemas.UpdateAccessSourceOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAccessSourceOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.UpdateAccessSourceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateAccessSourceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccessSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessSource, schemas.UpdateAccessSourceInput, schemas.UpdateAccessSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccessSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessSource, schemas.UpdateAccessSourceInput, schemas.UpdateAccessSourceOutput), output: &UpdateAccessSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -2973,6 +2973,21 @@ func validateNetworkConfiguration(v *types.NetworkConfiguration) error {
 	}
 }
 
+func validateNvidiaMpsAllocation(v *types.NvidiaMpsAllocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NvidiaMpsAllocation"}
+	if v.Memory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Memory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePlatformDevice(v *types.PlatformDevice) error {
 	if v == nil {
 		return nil
@@ -3043,11 +3058,13 @@ func validateResourceRequirement(v *types.ResourceRequirement) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceRequirement"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.SharingStrategy != nil {
+		if err := validateSharingStrategy(v.SharingStrategy); err != nil {
+			invalidParams.AddNested("SharingStrategy", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3362,6 +3379,25 @@ func validateServiceVolumeConfigurations(v []types.ServiceVolumeConfiguration) e
 		if err := validateServiceVolumeConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSharingStrategy(v types.SharingStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SharingStrategy"}
+	switch uv := v.(type) {
+	case *types.SharingStrategyMemberNvidiaMps:
+		if err := validateNvidiaMpsAllocation(&uv.Value); err != nil {
+			invalidParams.AddNested("[nvidiaMps]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

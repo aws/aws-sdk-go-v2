@@ -4,7 +4,9 @@ package lakeformation
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -59,6 +61,33 @@ type GetTemporaryGluePartitionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemporaryGluePartitionCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemporaryGluePartitionCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.GetTemporaryGluePartitionCredentialsRequest_DurationSeconds, *v.DurationSeconds)
+	}
+	if v.Partition != nil {
+		s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsRequest_Partition)
+		v.Partition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePermissionList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_Permissions, v.Permissions)
+	serializePermissionTypeList(s, schemas.GetTemporaryGluePartitionCredentialsRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTemporaryGluePartitionCredentialsRequest_TableArn, *v.TableArn)
+	}
+}
+
 type GetTemporaryGluePartitionCredentialsOutput struct {
 
 	// The access key ID for the temporary credentials.
@@ -79,13 +108,50 @@ type GetTemporaryGluePartitionCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemporaryGluePartitionCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemporaryGluePartitionCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemporaryGluePartitionCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.GetTemporaryGluePartitionCredentialsResponse_AccessKeyId, *v.AccessKeyId)
+	}
+	if v.Expiration != nil {
+		s.WriteTime(schemas.GetTemporaryGluePartitionCredentialsResponse_Expiration, *v.Expiration)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.GetTemporaryGluePartitionCredentialsResponse_SecretAccessKey, *v.SecretAccessKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.GetTemporaryGluePartitionCredentialsResponse_SessionToken, *v.SessionToken)
+	}
+}
+func (v *GetTemporaryGluePartitionCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemporaryGluePartitionCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemporaryGluePartitionCredentialsResponse_AccessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.GetTemporaryGluePartitionCredentialsResponse_AccessKeyId, v.AccessKeyId)
+		case schemas.GetTemporaryGluePartitionCredentialsResponse_Expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.GetTemporaryGluePartitionCredentialsResponse_Expiration, v.Expiration)
+		case schemas.GetTemporaryGluePartitionCredentialsResponse_SecretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.GetTemporaryGluePartitionCredentialsResponse_SecretAccessKey, v.SecretAccessKey)
+		case schemas.GetTemporaryGluePartitionCredentialsResponse_SessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.GetTemporaryGluePartitionCredentialsResponse_SessionToken, v.SessionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemporaryGluePartitionCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemporaryGluePartitionCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryGluePartitionCredentials, schemas.GetTemporaryGluePartitionCredentialsRequest, schemas.GetTemporaryGluePartitionCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemporaryGluePartitionCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryGluePartitionCredentials, schemas.GetTemporaryGluePartitionCredentialsRequest, schemas.GetTemporaryGluePartitionCredentialsResponse), output: &GetTemporaryGluePartitionCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

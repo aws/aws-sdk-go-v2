@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DisassociateUserAccessLoggingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateUserAccessLoggingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateUserAccessLoggingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateUserAccessLoggingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalArn != nil {
+		s.WriteString(schemas.DisassociateUserAccessLoggingSettingsRequest_portalArn, *v.PortalArn)
+	}
+}
+
 type DisassociateUserAccessLoggingSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DisassociateUserAccessLoggingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateUserAccessLoggingSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateUserAccessLoggingSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateUserAccessLoggingSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateUserAccessLoggingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateUserAccessLoggingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateUserAccessLoggingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateUserAccessLoggingSettings, schemas.DisassociateUserAccessLoggingSettingsRequest, schemas.DisassociateUserAccessLoggingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateUserAccessLoggingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateUserAccessLoggingSettings, schemas.DisassociateUserAccessLoggingSettingsRequest, schemas.DisassociateUserAccessLoggingSettingsResponse), output: &DisassociateUserAccessLoggingSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

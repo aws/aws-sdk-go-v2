@@ -4,6 +4,8 @@ package wickr
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -54,6 +56,30 @@ type CreateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Challenge != nil {
+		s.WriteString(schemas.CreateBotRequest_challenge, *v.Challenge)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateBotRequest_displayName, *v.DisplayName)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateBotRequest_groupId, *v.GroupId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateBotRequest_networkId, *v.NetworkId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.CreateBotRequest_username, *v.Username)
+	}
+}
+
 type CreateBotOutput struct {
 
 	// The unique identifier assigned to the newly created bot.
@@ -82,13 +108,62 @@ type CreateBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotResponse_botId, *v.BotId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateBotResponse_displayName, *v.DisplayName)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.CreateBotResponse_groupId, *v.GroupId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CreateBotResponse_message, *v.Message)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.CreateBotResponse_networkId, *v.NetworkId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.CreateBotResponse_username, *v.Username)
+	}
+}
+func (v *CreateBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.CreateBotResponse_botId, v.BotId)
+		case schemas.CreateBotResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateBotResponse_displayName, v.DisplayName)
+		case schemas.CreateBotResponse_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.CreateBotResponse_groupId, v.GroupId)
+		case schemas.CreateBotResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CreateBotResponse_message, v.Message)
+		case schemas.CreateBotResponse_networkId:
+			v.NetworkId = new(string)
+			return d.ReadString(schemas.CreateBotResponse_networkId, v.NetworkId)
+		case schemas.CreateBotResponse_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.CreateBotResponse_username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBot, schemas.CreateBotRequest, schemas.CreateBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBot, schemas.CreateBotRequest, schemas.CreateBotResponse), output: &CreateBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

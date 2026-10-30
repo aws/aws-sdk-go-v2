@@ -69,6 +69,10 @@ type Options struct {
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
 
+	// Provides idempotency tokens values that will be automatically populated into
+	// idempotent API operations.
+	IdempotencyTokenProvider IdempotencyTokenProvider
+
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
 
@@ -118,6 +122,8 @@ type Options struct {
 	//
 	// Currently does not support per operation call overrides, may in the future.
 	resolvedDefaultsMode aws.DefaultsMode
+
+	Protocol smithyhttp.ClientProtocol
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.

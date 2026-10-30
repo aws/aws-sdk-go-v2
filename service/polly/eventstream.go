@@ -3,22 +3,15 @@
 package polly
 
 import (
-	"bytes"
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
+	"github.com/aws/aws-sdk-go-v2/service/polly/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 	smithy "github.com/aws/smithy-go"
+	"github.com/aws/smithy-go/eventstream"
 	"github.com/aws/smithy-go/middleware"
-	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"io"
 	"sync"
-	"time"
 )
 
 // StartSpeechSynthesisStreamActionStreamWriter provides the interface for writing
@@ -40,452 +33,163 @@ type StartSpeechSynthesisStreamEventStreamReader interface {
 	Close() error
 	Err() error
 }
-
-type eventStreamSigner interface {
-	GetSignature(ctx context.Context, headers, payload []byte, signingTime time.Time, optFns ...func(*v4.StreamSignerOptions)) ([]byte, error)
-}
-
-type asyncStartSpeechSynthesisStreamActionStream struct {
-	Event  types.StartSpeechSynthesisStreamActionStream
-	Result chan<- error
-}
-
-func (e asyncStartSpeechSynthesisStreamActionStream) ReportResult(cancel <-chan struct{}, err error) bool {
-	select {
-	case e.Result <- err:
-		return true
-
-	case <-cancel:
-		return false
-
-	}
-}
-
 type startSpeechSynthesisStreamActionStreamWriter struct {
-	encoder             *eventstream.Encoder
-	signer              eventStreamSigner
-	stream              chan asyncStartSpeechSynthesisStreamActionStream
-	serializationBuffer *bytes.Buffer
-	signingBuffer       *bytes.Buffer
-	eventStream         io.WriteCloser
-	done                chan struct{}
-	closeOnce           sync.Once
-	err                 *smithysync.OnceErr
+	writer *smithyhttp.EventStreamWriter
 }
 
-func newStartSpeechSynthesisStreamActionStreamWriter(stream io.WriteCloser, encoder *eventstream.Encoder, signer eventStreamSigner) *startSpeechSynthesisStreamActionStreamWriter {
-	w := &startSpeechSynthesisStreamActionStreamWriter{
-		encoder:             encoder,
-		signer:              signer,
-		stream:              make(chan asyncStartSpeechSynthesisStreamActionStream),
-		eventStream:         stream,
-		done:                make(chan struct{}),
-		err:                 smithysync.NewOnceErr(),
-		serializationBuffer: bytes.NewBuffer(nil),
-		signingBuffer:       bytes.NewBuffer(nil),
-	}
-
-	go w.writeStream()
-
-	return w
-
-}
+var _ StartSpeechSynthesisStreamActionStreamWriter = (*startSpeechSynthesisStreamActionStreamWriter)(nil)
 
 func (w *startSpeechSynthesisStreamActionStreamWriter) Send(ctx context.Context, event types.StartSpeechSynthesisStreamActionStream) error {
-	return w.send(ctx, event)
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) send(ctx context.Context, event types.StartSpeechSynthesisStreamActionStream) error {
-	if err := w.err.Err(); err != nil {
-		return err
+	var variant *smithy.Schema
+	switch event.(type) {
+	case *types.StartSpeechSynthesisStreamActionStreamMemberCloseStreamEvent:
+		variant = schemas.StartSpeechSynthesisStreamActionStream_CloseStreamEvent
+	case *types.StartSpeechSynthesisStreamActionStreamMemberTextEvent:
+		variant = schemas.StartSpeechSynthesisStreamActionStream_TextEvent
+	default:
+		return fmt.Errorf("unknown event type: %T", event)
 	}
-
-	resultCh := make(chan error)
-
-	wrapped := asyncStartSpeechSynthesisStreamActionStream{
-		Event:  event,
-		Result: resultCh,
+	sv, ok := event.(smithy.Serializable)
+	if !ok {
+		return fmt.Errorf("event %T is not serializable", event)
 	}
-
-	select {
-	case w.stream <- wrapped:
-	case <-ctx.Done():
-		return ctx.Err()
-	case <-w.done:
-		return fmt.Errorf("stream closed, unable to send event")
-
-	}
-
-	select {
-	case err := <-resultCh:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	case <-w.done:
-		return fmt.Errorf("stream closed, unable to send event")
-
-	}
-
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) writeStream() {
-	defer w.Close()
-
-	for {
-		select {
-		case wrapper := <-w.stream:
-			err := w.writeEvent(wrapper.Event)
-			wrapper.ReportResult(w.done, err)
-			if err != nil {
-				w.err.SetError(err)
-				return
-			}
-
-		case <-w.done:
-			if err := w.closeStream(); err != nil {
-				w.err.SetError(err)
-			}
-			return
-
-		}
-	}
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) writeEvent(event types.StartSpeechSynthesisStreamActionStream) error {
-	// serializedEvent returned bytes refers to an underlying byte buffer and must not
-	// escape this writeEvent scope without first copying. Any previous bytes stored in
-	// the buffer are cleared by this call.
-	serializedEvent, err := w.serializeEvent(event)
-	if err != nil {
-		return err
-	}
-
-	// signedEvent returned bytes refers to an underlying byte buffer and must not
-	// escape this writeEvent scope without first copying. Any previous bytes stored in
-	// the buffer are cleared by this call.
-	signedEvent, err := w.signEvent(serializedEvent)
-	if err != nil {
-		return err
-	}
-
-	// bytes are now copied to the underlying stream writer
-	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
-	return err
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) serializeEvent(event types.StartSpeechSynthesisStreamActionStream) ([]byte, error) {
-	w.serializationBuffer.Reset()
-
-	eventMessage := eventstream.Message{}
-
-	if err := awsRestjson1_serializeEventStreamStartSpeechSynthesisStreamActionStream(event, &eventMessage); err != nil {
-		return nil, err
-	}
-
-	if err := w.encoder.Encode(w.serializationBuffer, eventMessage); err != nil {
-		return nil, err
-	}
-
-	return w.serializationBuffer.Bytes(), nil
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) signEvent(payload []byte) ([]byte, error) {
-	w.signingBuffer.Reset()
-
-	date := time.Now().UTC()
-
-	var msg eventstream.Message
-	msg.Headers.Set(eventstreamapi.DateHeader, eventstream.TimestampValue(date))
-	msg.Payload = payload
-
-	var headers bytes.Buffer
-	if err := eventstream.EncodeHeaders(&headers, msg.Headers); err != nil {
-		return nil, err
-	}
-
-	sig, err := w.signer.GetSignature(context.Background(), headers.Bytes(), msg.Payload, date)
-	if err != nil {
-		return nil, err
-	}
-
-	msg.Headers.Set(eventstreamapi.ChunkSignatureHeader, eventstream.BytesValue(sig))
-
-	if err := w.encoder.Encode(w.signingBuffer, msg); err != nil {
-		return nil, err
-	}
-
-	return w.signingBuffer.Bytes(), nil
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) closeStream() (err error) {
-	defer func() {
-		if cErr := w.eventStream.Close(); cErr != nil && err == nil {
-			err = cErr
-		}
-	}()
-
-	// Per the protocol, a signed empty message is used to indicate the end of the stream,
-	// and that no subsequent events will be sent.
-	signedEvent, err := w.signEvent([]byte{})
-	if err != nil {
-		return err
-	}
-
-	_, err = io.Copy(w.eventStream, bytes.NewReader(signedEvent))
-	return err
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) ErrorSet() <-chan struct{} {
-	return w.err.ErrorSet()
+	return w.writer.Send(ctx, variant, sv)
 }
 
 func (w *startSpeechSynthesisStreamActionStreamWriter) Close() error {
-	w.closeOnce.Do(w.safeClose)
-	return w.Err()
-}
-
-func (w *startSpeechSynthesisStreamActionStreamWriter) safeClose() {
-	close(w.done)
+	return w.writer.Close()
 }
 
 func (w *startSpeechSynthesisStreamActionStreamWriter) Err() error {
-	return w.err.Err()
+	return w.writer.Err()
+}
+
+func (w *startSpeechSynthesisStreamActionStreamWriter) ErrorSet() <-chan struct{} {
+	return w.writer.ErrorSet()
 }
 
 type startSpeechSynthesisStreamEventStreamReader struct {
-	stream      chan types.StartSpeechSynthesisStreamEventStream
-	decoder     *eventstream.Decoder
-	eventStream io.ReadCloser
-	err         *smithysync.OnceErr
-	payloadBuf  []byte
-	done        chan struct{}
-	closeOnce   sync.Once
+	reader *smithyhttp.EventStreamReader
+	ch     chan types.StartSpeechSynthesisStreamEventStream
+	done   chan struct{}
+	closed chan struct{}
+
+	closeOnce sync.Once
 }
 
-func newStartSpeechSynthesisStreamEventStreamReader(readCloser io.ReadCloser, decoder *eventstream.Decoder) *startSpeechSynthesisStreamEventStreamReader {
-	w := &startSpeechSynthesisStreamEventStreamReader{
-		stream:      make(chan types.StartSpeechSynthesisStreamEventStream),
-		decoder:     decoder,
-		eventStream: readCloser,
-		err:         smithysync.NewOnceErr(),
-		done:        make(chan struct{}),
-		payloadBuf:  make([]byte, 10*1024),
+var _ StartSpeechSynthesisStreamEventStreamReader = (*startSpeechSynthesisStreamEventStreamReader)(nil)
+
+func newStartSpeechSynthesisStreamEventStreamReader(reader *smithyhttp.EventStreamReader) *startSpeechSynthesisStreamEventStreamReader {
+	r := &startSpeechSynthesisStreamEventStreamReader{
+		reader: reader,
+		ch:     make(chan types.StartSpeechSynthesisStreamEventStream),
+		done:   make(chan struct{}),
+		closed: make(chan struct{}),
 	}
-
-	go w.readEventStream()
-
-	return w
+	go r.pipe()
+	return r
 }
 
-func (r *startSpeechSynthesisStreamEventStreamReader) Events() <-chan types.StartSpeechSynthesisStreamEventStream {
-	return r.stream
-}
-
-func (r *startSpeechSynthesisStreamEventStreamReader) readEventStream() {
-	defer r.Close()
-	defer close(r.stream)
-
-	for {
-		r.payloadBuf = r.payloadBuf[0:0]
-		decodedMessage, err := r.decoder.Decode(r.eventStream, r.payloadBuf)
-		if err != nil {
-			if err == io.EOF {
-				return
-			}
-			select {
-			case <-r.done:
-				return
-			default:
-				r.err.SetError(err)
-				return
-			}
+func (r *startSpeechSynthesisStreamEventStreamReader) pipe() {
+	defer close(r.closed)
+	defer close(r.ch)
+	for event := range r.reader.Events() {
+		var ev types.StartSpeechSynthesisStreamEventStream
+		switch v := event.(type) {
+		case *types.AudioEvent:
+			ev = &types.StartSpeechSynthesisStreamEventStreamMemberAudioEvent{Value: *v}
+		case *types.StreamClosedEvent:
+			ev = &types.StartSpeechSynthesisStreamEventStreamMemberStreamClosedEvent{Value: *v}
+		case *eventstream.UnknownUnionMember:
+			ev = &types.UnknownUnionMember{Tag: v.Tag, Value: v.Value}
+		default:
+			continue
 		}
-
-		event, err := r.deserializeEventMessage(&decodedMessage)
-		if err != nil {
-			r.err.SetError(err)
-			return
-		}
-
 		select {
-		case r.stream <- event:
+		case r.ch <- ev:
 		case <-r.done:
 			return
 		}
-
 	}
 }
 
-func (r *startSpeechSynthesisStreamEventStreamReader) deserializeEventMessage(msg *eventstream.Message) (types.StartSpeechSynthesisStreamEventStream, error) {
-	messageType := msg.Headers.Get(eventstreamapi.MessageTypeHeader)
-	if messageType == nil {
-		return nil, fmt.Errorf("%s event header not present", eventstreamapi.MessageTypeHeader)
-	}
-
-	switch messageType.String() {
-	case eventstreamapi.EventMessageType:
-		var v types.StartSpeechSynthesisStreamEventStream
-		if err := awsRestjson1_deserializeEventStreamStartSpeechSynthesisStreamEventStream(&v, msg); err != nil {
-			return nil, err
-		}
-		return v, nil
-
-	case eventstreamapi.ExceptionMessageType:
-		return nil, awsRestjson1_deserializeEventStreamExceptionStartSpeechSynthesisStreamEventStream(msg)
-
-	case eventstreamapi.ErrorMessageType:
-		errorCode := "UnknownError"
-		errorMessage := errorCode
-		if header := msg.Headers.Get(eventstreamapi.ErrorCodeHeader); header != nil {
-			errorCode = header.String()
-		}
-		if header := msg.Headers.Get(eventstreamapi.ErrorMessageHeader); header != nil {
-			errorMessage = header.String()
-		}
-		return nil, &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-
-	default:
-		mc := msg.Clone()
-		return nil, &UnknownEventMessageError{
-			Type:    messageType.String(),
-			Message: &mc,
-		}
-
-	}
-}
-
-func (r *startSpeechSynthesisStreamEventStreamReader) ErrorSet() <-chan struct{} {
-	return r.err.ErrorSet()
+func (r *startSpeechSynthesisStreamEventStreamReader) Events() <-chan types.StartSpeechSynthesisStreamEventStream {
+	return r.ch
 }
 
 func (r *startSpeechSynthesisStreamEventStreamReader) Close() error {
-	r.closeOnce.Do(r.safeClose)
-	return r.Err()
-}
-
-func (r *startSpeechSynthesisStreamEventStreamReader) safeClose() {
-	close(r.done)
-	r.eventStream.Close()
-
+	r.closeOnce.Do(func() {
+		close(r.done)
+	})
+	return r.reader.Close()
 }
 
 func (r *startSpeechSynthesisStreamEventStreamReader) Err() error {
-	return r.err.Err()
+	return r.reader.Err()
 }
 
 func (r *startSpeechSynthesisStreamEventStreamReader) Closed() <-chan struct{} {
-	return r.done
+	return r.closed
 }
 
-type awsRestjson1_deserializeOpEventStreamStartSpeechSynthesisStream struct {
-	LogEventStreamWrites bool
-	LogEventStreamReads  bool
-
-	existingResult *StartSpeechSynthesisStreamOutput
+type deserializeOpEventStreamStartSpeechSynthesisStream struct {
 	asyncResult    chan deserializeResult
+	options        *Options
+	existingResult *StartSpeechSynthesisStreamOutput
 }
 
-func (*awsRestjson1_deserializeOpEventStreamStartSpeechSynthesisStream) ID() string {
+func (*deserializeOpEventStreamStartSpeechSynthesisStream) ID() string {
 	return "OperationEventStreamDeserializer"
 }
 
-func (m *awsRestjson1_deserializeOpEventStreamStartSpeechSynthesisStream) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
-	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+func (m *deserializeOpEventStreamStartSpeechSynthesisStream) HandleDeserialize(
+	ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler,
+) (
+	middleware.DeserializeOutput, middleware.Metadata, error,
 ) {
-	defer func() {
-		if err == nil {
-			return
+	var out middleware.DeserializeOutput
+	var md middleware.Metadata
+	var err error
+
+	output := m.existingResult
+	isFirstAttempt := output == nil
+	asyncResult := m.asyncResult
+	inputStreamWriter := smithyhttp.GetInputStreamWriter(ctx)
+	if inputStreamWriter == nil {
+		return out, md, fmt.Errorf("input stream writer not found in context")
+	}
+	if rscheme := getResolvedAuthScheme(ctx); rscheme != nil {
+		if es, ok := rscheme.Scheme.Signer().(smithyhttp.EventStreamSigner); ok {
+			req, _ := in.Request.(*smithyhttp.Request)
+			msgSigner, serr := es.NewMessageSigner(ctx, req, getIdentity(ctx), rscheme.SignerProperties)
+			if serr != nil {
+				return out, md, fmt.Errorf("event stream signer: %w", serr)
+			}
+			inputStreamWriter = eventstream.NewSigningWriter(inputStreamWriter, msgSigner)
 		}
-		m.closeResponseBody(out)
-	}()
-
-	logger := middleware.GetLogger(ctx)
-
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type: %T", in.Request)
 	}
-	_ = request
-
-	if err := eventstreamapi.ApplyHTTPTransportFixes(request); err != nil {
-		return out, metadata, err
+	eventWriter := &startSpeechSynthesisStreamActionStreamWriter{
+		writer: smithyhttp.NewEventStreamWriter(m.options.Protocol, schemas.StartSpeechSynthesisStreamActionStream, inputStreamWriter),
 	}
-
-	requestSignature, err := v4.GetSignedRequestSignature(request.Request)
-	if err != nil {
-		return out, metadata, fmt.Errorf("failed to get event stream seed signature: %v", err)
-	}
-
-	identity := getIdentity(ctx)
-	if identity == nil {
-		return out, metadata, fmt.Errorf("no identity")
-	}
-
-	creds, ok := identity.(*internalauthsmithy.CredentialsAdapter)
-	if !ok {
-		return out, metadata, fmt.Errorf("identity is not sigv4 credentials")
-	}
-
-	rscheme := getResolvedAuthScheme(ctx)
-	if rscheme == nil {
-		return out, metadata, fmt.Errorf("no resolved auth scheme")
-	}
-
-	name, ok := smithyhttp.GetSigV4SigningName(&rscheme.SignerProperties)
-	if !ok {
-		return out, metadata, fmt.Errorf("no sigv4 signing name")
-	}
-
-	region, ok := smithyhttp.GetSigV4SigningRegion(&rscheme.SignerProperties)
-	if !ok {
-		return out, metadata, fmt.Errorf("no sigv4 signing region")
-	}
-
-	signer := v4.NewStreamSigner(creds.Credentials, name, region, requestSignature)
-
-	eventWriter := newStartSpeechSynthesisStreamActionStreamWriter(
-		eventstreamapi.GetInputStreamWriter(ctx),
-		eventstream.NewEncoder(func(options *eventstream.EncoderOptions) {
-			options.Logger = logger
-			options.LogMessages = m.LogEventStreamWrites
-
-		}),
-		signer,
-	)
 	defer func() {
-		if err == nil {
-			return
+		if err != nil && !isFirstAttempt {
+			_ = eventWriter.Close()
 		}
-		_ = eventWriter.Close()
 	}()
+	if isFirstAttempt {
+		output = &StartSpeechSynthesisStreamOutput{}
+		output.initialReply = make(chan StartSpeechSynthesisStreamInitialReply, 1)
 
-	//  storing existing output instead of creating a new one
-	var output *StartSpeechSynthesisStreamOutput
-	var asyncResult chan deserializeResult
-
-	existingResult := m.existingResult
-	asyncResult = m.asyncResult
-	if existingResult == nil {
-		// Create async result channel
 		asyncResult = make(chan deserializeResult, 1)
 		asyncReader := newAsyncEventStreamReader(asyncResult)
 		eventReader := newStartSpeechSynthesisStreamEventStreamReader(
-			asyncReader.pipeReader,
-			eventstream.NewDecoder(func(options *eventstream.DecoderOptions) {
-				options.Logger = logger
-				options.Logger = logger
-				options.LogMessages = m.LogEventStreamReads
-			}),
+			smithyhttp.NewEventStreamReader(m.options.Protocol, schemas.StartSpeechSynthesisStreamEventStream, TypeRegistry, asyncReader.pipeReader),
 		)
-		output = &StartSpeechSynthesisStreamOutput{}
+
 		output.eventStream = NewStartSpeechSynthesisStreamEventStream(func(stream *StartSpeechSynthesisStreamEventStream) {
 			stream.Writer = eventWriter
 			stream.Reader = eventReader
 		})
-		output.initialReply = make(chan StartSpeechSynthesisStreamInitialReply, 1)
 
 		go output.eventStream.waitStreamClose()
 
@@ -493,94 +197,35 @@ func (m *awsRestjson1_deserializeOpEventStreamStartSpeechSynthesisStream) Handle
 		m.asyncResult = asyncResult
 	}
 
-	ctxCh := ctx.Value(partialResultChan{})
-	if ctxCh == nil {
-		return out, metadata, fmt.Errorf("Expected a result channel to be stored in the contex, got none")
+	// Drain and re-send on every attempt (not just the first), mirroring
+	// the legacy hand-written middleware: the caller only ever consumes
+	// one value, but always sending keeps this symmetric with m.existingResult
+	// rather than depending on isFirstAttempt to decide who notifies.
+	prc, _ := ctx.Value(partialResultChan{}).(chan PartialResult)
+	if prc != nil {
+		select {
+		case <-prc:
+		default:
+		}
+		prc <- PartialResult{
+			Output:   output,
+			Metadata: middleware.Metadata{},
+		}
 	}
 
-	prc, ok := ctxCh.(chan PartialResult)
+	out, md, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		asyncResult <- deserializeResult{err: err}
+		middleware.AddEventStreamOutputToMetadata(&md, output)
+		return out, md, err
+	}
+
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
-		return out, metadata, fmt.Errorf("async channel expected to be of type `chan partialResult`, got: %T", ctxCh)
-	}
-	// Drain existing results from the channel in case this is a retry
-	select {
-	case <-prc:
-	default:
-	}
-	partial := PartialResult{
-		Output:   output,
-		Metadata: middleware.Metadata{},
-		Error:    nil,
-	}
-	prc <- partial
-
-	out, metadata, err = next.HandleDeserialize(ctx, in)
-
-	if err == nil {
-		// Extract actual response and create real reader
-		resp := out.RawResponse.(*smithyhttp.Response)
-		asyncResult <- deserializeResult{reader: resp.Body, err: nil}
-	} else {
-		asyncResult <- deserializeResult{reader: nil, err: err}
-	}
-	middleware.AddEventStreamOutputToMetadata(&metadata, m.existingResult)
-	return out, metadata, err
-}
-
-func (*awsRestjson1_deserializeOpEventStreamStartSpeechSynthesisStream) closeResponseBody(out middleware.DeserializeOutput) {
-	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(io.Discard, resp.Body)
-		_ = resp.Body.Close()
-	}
-}
-
-func addEventStreamStartSpeechSynthesisStreamMiddleware(stack *middleware.Stack, options Options) error {
-	if err := stack.Deserialize.Insert(&awsRestjson1_deserializeOpEventStreamStartSpeechSynthesisStream{
-		LogEventStreamWrites: options.ClientLogMode.IsRequestEventMessage(),
-		LogEventStreamReads:  options.ClientLogMode.IsResponseEventMessage(),
-	}, "OperationDeserializer", middleware.Before); err != nil {
-		return err
-	}
-	return nil
-
-}
-
-// UnknownEventMessageError provides an error when a message is received from the stream,
-// but the reader is unable to determine what kind of message it is.
-type UnknownEventMessageError struct {
-	Type    string
-	Message *eventstream.Message
-}
-
-// Error retruns the error message string.
-func (e *UnknownEventMessageError) Error() string {
-	return "unknown event stream message type, " + e.Type
-}
-
-func setSafeEventStreamClientLogMode(o *Options, operation string) {
-	switch operation {
-	case "StartSpeechSynthesisStream":
-		toggleEventStreamClientLogMode(o, true, true)
-		return
-
-	default:
-		return
-
-	}
-}
-func toggleEventStreamClientLogMode(o *Options, request, response bool) {
-	mode := o.ClientLogMode
-
-	if request && mode.IsRequestWithBody() {
-		mode.ClearRequestWithBody()
-		mode |= aws.LogRequest
+		return out, md, fmt.Errorf("unknown transport type: %T", out.RawResponse)
 	}
 
-	if response && mode.IsResponseWithBody() {
-		mode.ClearResponseWithBody()
-		mode |= aws.LogResponse
-	}
-
-	o.ClientLogMode = mode
-
+	asyncResult <- deserializeResult{reader: resp.Body}
+	middleware.AddEventStreamOutputToMetadata(&md, output)
+	return out, md, nil
 }

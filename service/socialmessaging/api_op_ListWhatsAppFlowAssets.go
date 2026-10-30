@@ -5,7 +5,9 @@ package socialmessaging
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -48,6 +50,27 @@ type ListWhatsAppFlowAssetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWhatsAppFlowAssetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWhatsAppFlowAssetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWhatsAppFlowAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowId != nil {
+		s.WriteString(schemas.ListWhatsAppFlowAssetsInput_flowId, *v.FlowId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListWhatsAppFlowAssetsInput_id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWhatsAppFlowAssetsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWhatsAppFlowAssetsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListWhatsAppFlowAssetsOutput struct {
 
 	// A list of Flow assets with download URLs.
@@ -64,13 +87,35 @@ type ListWhatsAppFlowAssetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWhatsAppFlowAssetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWhatsAppFlowAssetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWhatsAppFlowAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetaFlowAssetList(s, schemas.ListWhatsAppFlowAssetsOutput_flowAssets, v.FlowAssets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWhatsAppFlowAssetsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListWhatsAppFlowAssetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWhatsAppFlowAssetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWhatsAppFlowAssetsOutput_flowAssets:
+			return deserializeMetaFlowAssetList(d, schemas.ListWhatsAppFlowAssetsOutput_flowAssets, &v.FlowAssets)
+		case schemas.ListWhatsAppFlowAssetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWhatsAppFlowAssetsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWhatsAppFlowAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWhatsAppFlowAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatsAppFlowAssets, schemas.ListWhatsAppFlowAssetsInput, schemas.ListWhatsAppFlowAssetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWhatsAppFlowAssets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWhatsAppFlowAssets, schemas.ListWhatsAppFlowAssetsInput, schemas.ListWhatsAppFlowAssetsOutput), output: &ListWhatsAppFlowAssetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

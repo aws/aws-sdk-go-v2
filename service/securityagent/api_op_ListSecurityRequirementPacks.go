@@ -5,7 +5,9 @@ package securityagent
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,26 @@ type ListSecurityRequirementPacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityRequirementPacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityRequirementPacksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityRequirementPacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListSecurityRequirementPacksInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityRequirementPacksInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityRequirementPacksInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListSecurityRequirementPacksOutput struct {
 
 	// The list of security requirement pack summaries.
@@ -57,13 +79,35 @@ type ListSecurityRequirementPacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityRequirementPacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityRequirementPacksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityRequirementPacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityRequirementPacksOutput_nextToken, *v.NextToken)
+	}
+	serializeSecurityRequirementPackSummaryList(s, schemas.ListSecurityRequirementPacksOutput_securityRequirementPackSummaries, v.SecurityRequirementPackSummaries)
+}
+func (v *ListSecurityRequirementPacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityRequirementPacksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityRequirementPacksOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityRequirementPacksOutput_nextToken, v.NextToken)
+		case schemas.ListSecurityRequirementPacksOutput_securityRequirementPackSummaries:
+			return deserializeSecurityRequirementPackSummaryList(d, schemas.ListSecurityRequirementPacksOutput_securityRequirementPackSummaries, &v.SecurityRequirementPackSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityRequirementPacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityRequirementPacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityRequirementPacks, schemas.ListSecurityRequirementPacksInput, schemas.ListSecurityRequirementPacksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityRequirementPacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityRequirementPacks, schemas.ListSecurityRequirementPacksInput, schemas.ListSecurityRequirementPacksOutput), output: &ListSecurityRequirementPacksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lakeformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type GetWorkUnitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkUnitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkUnitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkUnitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetWorkUnitsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.GetWorkUnitsRequest_PageSize, *v.PageSize)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetWorkUnitsRequest_QueryId, *v.QueryId)
+	}
+}
+
 // A structure for the output.
 type GetWorkUnitsOutput struct {
 
@@ -70,13 +90,41 @@ type GetWorkUnitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkUnitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkUnitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkUnitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetWorkUnitsResponse_NextToken, *v.NextToken)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetWorkUnitsResponse_QueryId, *v.QueryId)
+	}
+	serializeWorkUnitRangeList(s, schemas.GetWorkUnitsResponse_WorkUnitRanges, v.WorkUnitRanges)
+}
+func (v *GetWorkUnitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkUnitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkUnitsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetWorkUnitsResponse_NextToken, v.NextToken)
+		case schemas.GetWorkUnitsResponse_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.GetWorkUnitsResponse_QueryId, v.QueryId)
+		case schemas.GetWorkUnitsResponse_WorkUnitRanges:
+			return deserializeWorkUnitRangeList(d, schemas.GetWorkUnitsResponse_WorkUnitRanges, &v.WorkUnitRanges)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkUnitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkUnits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkUnits, schemas.GetWorkUnitsRequest, schemas.GetWorkUnitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkUnits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkUnits, schemas.GetWorkUnitsRequest, schemas.GetWorkUnitsResponse), output: &GetWorkUnitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

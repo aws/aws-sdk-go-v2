@@ -4,6 +4,8 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DeleteCrossAccountAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCrossAccountAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCrossAccountAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCrossAccountAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAuthorization != nil {
+		s.WriteString(schemas.DeleteCrossAccountAuthorizationRequest_CrossAccountAuthorization, *v.CrossAccountAuthorization)
+	}
+}
+
 type DeleteCrossAccountAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DeleteCrossAccountAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCrossAccountAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCrossAccountAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCrossAccountAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCrossAccountAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCrossAccountAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCrossAccountAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCrossAccountAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCrossAccountAuthorization, schemas.DeleteCrossAccountAuthorizationRequest, schemas.DeleteCrossAccountAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCrossAccountAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCrossAccountAuthorization, schemas.DeleteCrossAccountAuthorizationRequest, schemas.DeleteCrossAccountAuthorizationResponse), output: &DeleteCrossAccountAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

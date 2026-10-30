@@ -424,6 +424,40 @@ func TestCheckRequestSnapshot_CreateKey(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_Decapsulate(t *testing.T) {
+	input := &DecapsulateInput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.Decapsulate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "Decapsulate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_Decrypt(t *testing.T) {
 	input := &DecryptInput{
 		CiphertextBlob: []byte("blob"),
@@ -782,6 +816,39 @@ func TestCheckRequestSnapshot_EnableKeyRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableKeyRotation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_Encapsulate(t *testing.T) {
+	input := &EncapsulateInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		EncapsulationAlgorithm: types.EncapsulationAlgorithmSpec("ML_KEM"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.Encapsulate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "Encapsulate"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -2171,6 +2238,40 @@ func TestUpdateRequestSnapshot_CreateKey(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_Decapsulate(t *testing.T) {
+	input := &DecapsulateInput{
+		KeyId:                      ptr.String("__KeyId__"),
+		SharedSecretCiphertextBlob: []byte("blob"),
+		EncapsulationAlgorithm:     types.EncapsulationAlgorithmSpec("ML_KEM"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.Decapsulate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "Decapsulate"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_Decrypt(t *testing.T) {
 	input := &DecryptInput{
 		CiphertextBlob: []byte("blob"),
@@ -2529,6 +2630,39 @@ func TestUpdateRequestSnapshot_EnableKeyRotation(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "EnableKeyRotation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_Encapsulate(t *testing.T) {
+	input := &EncapsulateInput{
+		KeyId:                  ptr.String("__KeyId__"),
+		EncapsulationAlgorithm: types.EncapsulationAlgorithmSpec("ML_KEM"),
+		GrantTokens: []string{
+			"__Member__",
+			"__Member__",
+		},
+		DryRun: ptr.Bool(true),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.Encapsulate(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "Encapsulate"); err != nil {
 		t.Fatal(err)
 	}
 }

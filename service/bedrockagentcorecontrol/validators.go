@@ -2310,6 +2310,26 @@ func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpResetTokenVaultKeyMaterial struct {
+}
+
+func (*validateOpResetTokenVaultKeyMaterial) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetTokenVaultKeyMaterial) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetTokenVaultKeyMaterialInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetTokenVaultKeyMaterialInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRotatePaymentConnectorCredentials struct {
 }
 
@@ -3450,6 +3470,10 @@ func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
+func addOpResetTokenVaultKeyMaterialValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetTokenVaultKeyMaterial{}, middleware.After)
+}
+
 func addOpRotatePaymentConnectorCredentialsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRotatePaymentConnectorCredentials{}, middleware.After)
 }
@@ -3643,6 +3667,42 @@ func validateAgentRuntimeArtifact(v types.AgentRuntimeArtifact) error {
 			invalidParams.AddNested("[containerConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedPort(v types.AllowedPort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedPort"}
+	switch uv := v.(type) {
+	case *types.AllowedPortMemberPortRange:
+		if err := validatePortRange(&uv.Value); err != nil {
+			invalidParams.AddNested("[portRange]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedPorts(v []types.AllowedPort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedPorts"}
+	for i := range v {
+		if err := validateAllowedPort(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7864,6 +7924,21 @@ func validateOAuthCredentialProvider(v *types.OAuthCredentialProvider) error {
 	}
 }
 
+func validateOnBehalfOfAuthenticationConfig(v *types.OnBehalfOfAuthenticationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnBehalfOfAuthenticationConfig"}
+	if len(v.ClientAuthenticationMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientAuthenticationMethod"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeConfigType) error {
 	if v == nil {
 		return nil
@@ -7875,6 +7950,11 @@ func validateOnBehalfOfTokenExchangeConfigType(v *types.OnBehalfOfTokenExchangeC
 	if v.TokenExchangeGrantTypeConfig != nil {
 		if err := validateTokenExchangeGrantTypeConfigType(v.TokenExchangeGrantTypeConfig); err != nil {
 			invalidParams.AddNested("TokenExchangeGrantTypeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnBehalfOfAuthenticationConfig != nil {
+		if err := validateOnBehalfOfAuthenticationConfig(v.OnBehalfOfAuthenticationConfig); err != nil {
+			invalidParams.AddNested("OnBehalfOfAuthenticationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8050,6 +8130,24 @@ func validatePolicyStatement(v *types.PolicyStatement) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PolicyStatement"}
 	if v.Statement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Statement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePortRange(v *types.PortRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PortRange"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.To == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("To"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9657,6 +9755,11 @@ func validateOpCreateAgentRuntimeInput(v *CreateAgentRuntimeInput) error {
 	if v.CapacityProviderConfiguration != nil {
 		if err := validateCapacityProviderConfiguration(v.CapacityProviderConfiguration); err != nil {
 			invalidParams.AddNested("CapacityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowedPorts != nil {
+		if err := validateAllowedPorts(v.AllowedPorts); err != nil {
+			invalidParams.AddNested("AllowedPorts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -11764,6 +11867,21 @@ func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
 	}
 }
 
+func validateOpResetTokenVaultKeyMaterialInput(v *ResetTokenVaultKeyMaterialInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetTokenVaultKeyMaterialInput"}
+	if v.TokenVaultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenVaultId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRotatePaymentConnectorCredentialsInput(v *RotatePaymentConnectorCredentialsInput) error {
 	if v == nil {
 		return nil
@@ -11968,6 +12086,11 @@ func validateOpUpdateAgentRuntimeInput(v *UpdateAgentRuntimeInput) error {
 	if v.CapacityProviderConfiguration != nil {
 		if err := validateCapacityProviderConfiguration(v.CapacityProviderConfiguration); err != nil {
 			invalidParams.AddNested("CapacityProviderConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AllowedPorts != nil {
+		if err := validateAllowedPorts(v.AllowedPorts); err != nil {
+			invalidParams.AddNested("AllowedPorts", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

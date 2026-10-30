@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"time"
 )
@@ -41,6 +43,18 @@ type GetTableRecordExpirationJobStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableRecordExpirationJobStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRecordExpirationJobStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableRecordExpirationJobStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableArn != nil {
+		s.WriteString(schemas.GetTableRecordExpirationJobStatusRequest_tableArn, *v.TableArn)
+	}
+}
+
 type GetTableRecordExpirationJobStatusOutput struct {
 
 	// The current status of the most recent expiration job.
@@ -65,13 +79,56 @@ type GetTableRecordExpirationJobStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableRecordExpirationJobStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRecordExpirationJobStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableRecordExpirationJobStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetTableRecordExpirationJobStatusResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.LastRunTimestamp != nil {
+		s.WriteTime(schemas.GetTableRecordExpirationJobStatusResponse_lastRunTimestamp, *v.LastRunTimestamp)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.GetTableRecordExpirationJobStatusResponse_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTableRecordExpirationJobStatusResponse_status, string(v.Status))
+	}
+}
+func (v *GetTableRecordExpirationJobStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableRecordExpirationJobStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableRecordExpirationJobStatusResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetTableRecordExpirationJobStatusResponse_failureMessage, v.FailureMessage)
+		case schemas.GetTableRecordExpirationJobStatusResponse_lastRunTimestamp:
+			v.LastRunTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetTableRecordExpirationJobStatusResponse_lastRunTimestamp, v.LastRunTimestamp)
+		case schemas.GetTableRecordExpirationJobStatusResponse_metrics:
+			v.Metrics = &types.TableRecordExpirationJobMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.GetTableRecordExpirationJobStatusResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetTableRecordExpirationJobStatusResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TableRecordExpirationJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableRecordExpirationJobStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTableRecordExpirationJobStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableRecordExpirationJobStatus, schemas.GetTableRecordExpirationJobStatusRequest, schemas.GetTableRecordExpirationJobStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTableRecordExpirationJobStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableRecordExpirationJobStatus, schemas.GetTableRecordExpirationJobStatusRequest, schemas.GetTableRecordExpirationJobStatusResponse), output: &GetTableRecordExpirationJobStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

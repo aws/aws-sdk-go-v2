@@ -5,7 +5,9 @@ package migrationhuborchestrator
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -41,6 +43,39 @@ type ListWorkflowStepGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowStepGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowStepGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowStepGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListWorkflowStepGroupsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowStepGroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.ListWorkflowStepGroupsRequest_workflowId, *v.WorkflowId)
+	}
+}
+func (v *ListWorkflowStepGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowStepGroupsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowStepGroupsRequest_maxResults:
+			return d.ReadInt32(schemas.ListWorkflowStepGroupsRequest_maxResults, &v.MaxResults)
+		case schemas.ListWorkflowStepGroupsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowStepGroupsRequest_nextToken, v.NextToken)
+		case schemas.ListWorkflowStepGroupsRequest_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.ListWorkflowStepGroupsRequest_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
+
 type ListWorkflowStepGroupsOutput struct {
 
 	// The summary of step groups in a migration workflow.
@@ -57,13 +92,35 @@ type ListWorkflowStepGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowStepGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowStepGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowStepGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowStepGroupsResponse_nextToken, *v.NextToken)
+	}
+	serializeWorkflowStepGroupsSummaryList(s, schemas.ListWorkflowStepGroupsResponse_workflowStepGroupsSummary, v.WorkflowStepGroupsSummary)
+}
+func (v *ListWorkflowStepGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowStepGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowStepGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowStepGroupsResponse_nextToken, v.NextToken)
+		case schemas.ListWorkflowStepGroupsResponse_workflowStepGroupsSummary:
+			return deserializeWorkflowStepGroupsSummaryList(d, schemas.ListWorkflowStepGroupsResponse_workflowStepGroupsSummary, &v.WorkflowStepGroupsSummary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowStepGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowStepGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowStepGroups, schemas.ListWorkflowStepGroupsRequest, schemas.ListWorkflowStepGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowStepGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowStepGroups, schemas.ListWorkflowStepGroupsRequest, schemas.ListWorkflowStepGroupsResponse), output: &ListWorkflowStepGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

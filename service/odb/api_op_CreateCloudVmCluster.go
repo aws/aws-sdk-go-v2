@@ -103,6 +103,15 @@ type CreateCloudVmClusterInput struct {
 	// The list of database servers for the VM cluster.
 	DbServers []string
 
+	// The unique identifier or Amazon Resource Name (ARN) of the Exascale storage
+	// vault to use for the VM cluster. Specify this value to create a VM cluster that
+	// uses Exascale storage on dedicated Exadata infrastructure.
+	ExascaleDbStorageVaultId *string
+
+	// The list of file system configurations for the VM cluster. Each entry specifies
+	// the mount point of a file system and its size, in gigabytes (GB).
+	FileSystemConfigurationDetails []types.FileSystemConfigurationDetails
+
 	// Specifies whether to enable database backups to local Exadata storage for the
 	// VM cluster.
 	IsLocalBackupEnabled *bool
@@ -138,6 +147,16 @@ type CreateCloudVmClusterInput struct {
 	//
 	// Default: UTC
 	TimeZone *string
+
+	// The type of storage to use for VM backups. Specify EXASCALE to store VM backups
+	// in Exascale storage on the storage servers, or LOCAL to store them on the
+	// database servers.
+	VmBackupStorageType types.VmStorageType
+
+	// The type of storage to use for the VM file systems. Specify EXASCALE to store
+	// the VM file systems in Exascale storage on the storage servers, or LOCAL to
+	// store them on the database servers.
+	VmFileSystemStorageType types.VmStorageType
 
 	noSmithyDocumentSerde
 }
@@ -176,6 +195,10 @@ func (v *CreateCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_displayName, *v.DisplayName)
 	}
+	if v.ExascaleDbStorageVaultId != nil {
+		s.WriteString(schemas.CreateCloudVmClusterInput_exascaleDbStorageVaultId, *v.ExascaleDbStorageVaultId)
+	}
+	serializeFileSystemConfigurationDetailsList(s, schemas.CreateCloudVmClusterInput_fileSystemConfigurationDetails, v.FileSystemConfigurationDetails)
 	if v.GiVersion != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_giVersion, *v.GiVersion)
 	}
@@ -207,6 +230,12 @@ func (v *CreateCloudVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	serializeRequestTagMap(s, schemas.CreateCloudVmClusterInput_tags, v.Tags)
 	if v.TimeZone != nil {
 		s.WriteString(schemas.CreateCloudVmClusterInput_timeZone, *v.TimeZone)
+	}
+	if v.VmBackupStorageType != "" {
+		s.WriteString(schemas.CreateCloudVmClusterInput_vmBackupStorageType, string(v.VmBackupStorageType))
+	}
+	if v.VmFileSystemStorageType != "" {
+		s.WriteString(schemas.CreateCloudVmClusterInput_vmFileSystemStorageType, string(v.VmFileSystemStorageType))
 	}
 }
 

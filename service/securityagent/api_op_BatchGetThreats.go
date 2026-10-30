@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type BatchGetThreatsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetThreatsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetThreatsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetThreatsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchGetThreatsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeThreatIdList(s, schemas.BatchGetThreatsInput_threatIds, v.ThreatIds)
+}
+
 // Output for the BatchGetThreats operation.
 type BatchGetThreatsOutput struct {
 
@@ -55,13 +70,32 @@ type BatchGetThreatsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetThreatsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetThreatsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetThreatsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThreatIdList(s, schemas.BatchGetThreatsOutput_notFound, v.NotFound)
+	serializeThreatList(s, schemas.BatchGetThreatsOutput_threats, v.Threats)
+}
+func (v *BatchGetThreatsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetThreatsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetThreatsOutput_notFound:
+			return deserializeThreatIdList(d, schemas.BatchGetThreatsOutput_notFound, &v.NotFound)
+		case schemas.BatchGetThreatsOutput_threats:
+			return deserializeThreatList(d, schemas.BatchGetThreatsOutput_threats, &v.Threats)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetThreatsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetThreats{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetThreats, schemas.BatchGetThreatsInput, schemas.BatchGetThreatsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetThreats{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetThreats, schemas.BatchGetThreatsInput, schemas.BatchGetThreatsOutput), output: &BatchGetThreatsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

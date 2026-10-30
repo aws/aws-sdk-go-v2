@@ -5,7 +5,9 @@ package qbusiness
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,34 @@ type CreateDataAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataAccessorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionConfigurationList(s, schemas.CreateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateDataAccessorRequest_applicationId, *v.ApplicationId)
+	}
+	if v.AuthenticationDetail != nil {
+		s.WriteStruct(schemas.CreateDataAccessorRequest_authenticationDetail)
+		v.AuthenticationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataAccessorRequest_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateDataAccessorRequest_displayName, *v.DisplayName)
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.CreateDataAccessorRequest_principal, *v.Principal)
+	}
+	serializeTags(s, schemas.CreateDataAccessorRequest_tags, v.Tags)
+}
+
 type CreateDataAccessorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created data accessor.
@@ -94,13 +124,44 @@ type CreateDataAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataAccessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataAccessorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessorArn != nil {
+		s.WriteString(schemas.CreateDataAccessorResponse_dataAccessorArn, *v.DataAccessorArn)
+	}
+	if v.DataAccessorId != nil {
+		s.WriteString(schemas.CreateDataAccessorResponse_dataAccessorId, *v.DataAccessorId)
+	}
+	if v.IdcApplicationArn != nil {
+		s.WriteString(schemas.CreateDataAccessorResponse_idcApplicationArn, *v.IdcApplicationArn)
+	}
+}
+func (v *CreateDataAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataAccessorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataAccessorResponse_dataAccessorArn:
+			v.DataAccessorArn = new(string)
+			return d.ReadString(schemas.CreateDataAccessorResponse_dataAccessorArn, v.DataAccessorArn)
+		case schemas.CreateDataAccessorResponse_dataAccessorId:
+			v.DataAccessorId = new(string)
+			return d.ReadString(schemas.CreateDataAccessorResponse_dataAccessorId, v.DataAccessorId)
+		case schemas.CreateDataAccessorResponse_idcApplicationArn:
+			v.IdcApplicationArn = new(string)
+			return d.ReadString(schemas.CreateDataAccessorResponse_idcApplicationArn, v.IdcApplicationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAccessor, schemas.CreateDataAccessorRequest, schemas.CreateDataAccessorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataAccessor, schemas.CreateDataAccessorRequest, schemas.CreateDataAccessorResponse), output: &CreateDataAccessorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

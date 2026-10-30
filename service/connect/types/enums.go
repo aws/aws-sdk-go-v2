@@ -4169,6 +4169,7 @@ const (
 	ReferenceStatusRejected   ReferenceStatus = "REJECTED"
 	ReferenceStatusProcessing ReferenceStatus = "PROCESSING"
 	ReferenceStatusFailed     ReferenceStatus = "FAILED"
+	ReferenceStatusDrafting   ReferenceStatus = "DRAFTING"
 )
 
 // Values returns all known values for ReferenceStatus. Note that this can be
@@ -4183,6 +4184,7 @@ func (ReferenceStatus) Values() []ReferenceStatus {
 		"REJECTED",
 		"PROCESSING",
 		"FAILED",
+		"DRAFTING",
 	}
 }
 
@@ -4948,6 +4950,24 @@ func (Unit) Values() []Unit {
 		"SECONDS",
 		"COUNT",
 		"PERCENT",
+	}
+}
+
+type UpdateOutboundEmailMessageSourceType string
+
+// Enum values for UpdateOutboundEmailMessageSourceType
+const (
+	UpdateOutboundEmailMessageSourceTypeRaw UpdateOutboundEmailMessageSourceType = "RAW"
+)
+
+// Values returns all known values for UpdateOutboundEmailMessageSourceType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateOutboundEmailMessageSourceType) Values() []UpdateOutboundEmailMessageSourceType {
+	return []UpdateOutboundEmailMessageSourceType{
+		"RAW",
 	}
 }
 

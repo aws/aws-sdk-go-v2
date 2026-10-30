@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","displayName":"__DisplayName__","groupId":"__GroupId__","message":"__Message__","networkId":"__NetworkId__","username":"__Username__"}

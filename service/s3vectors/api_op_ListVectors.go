@@ -5,7 +5,9 @@ package s3vectors
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3vectors/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3vectors/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -108,6 +110,42 @@ type ListVectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexArn != nil {
+		s.WriteString(schemas.ListVectorsInput_indexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.ListVectorsInput_indexName, *v.IndexName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVectorsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVectorsInput_nextToken, *v.NextToken)
+	}
+	if v.ReturnData != false {
+		s.WriteBool(schemas.ListVectorsInput_returnData, v.ReturnData)
+	}
+	if v.ReturnMetadata != false {
+		s.WriteBool(schemas.ListVectorsInput_returnMetadata, v.ReturnMetadata)
+	}
+	if v.SegmentCount != nil {
+		s.WriteInt32(schemas.ListVectorsInput_segmentCount, *v.SegmentCount)
+	}
+	if v.SegmentIndex != 0 {
+		s.WriteInt32(schemas.ListVectorsInput_segmentIndex, v.SegmentIndex)
+	}
+	if v.VectorBucketName != nil {
+		s.WriteString(schemas.ListVectorsInput_vectorBucketName, *v.VectorBucketName)
+	}
+}
+
 type ListVectorsOutput struct {
 
 	// Vectors in the current segment.
@@ -125,13 +163,35 @@ type ListVectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVectorsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVectorsOutput_nextToken, *v.NextToken)
+	}
+	serializeListVectorsOutputList(s, schemas.ListVectorsOutput_vectors, v.Vectors)
+}
+func (v *ListVectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVectorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVectorsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVectorsOutput_nextToken, v.NextToken)
+		case schemas.ListVectorsOutput_vectors:
+			return deserializeListVectorsOutputList(d, schemas.ListVectorsOutput_vectors, &v.Vectors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVectors, schemas.ListVectorsInput, schemas.ListVectorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVectors, schemas.ListVectorsInput, schemas.ListVectorsOutput), output: &ListVectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

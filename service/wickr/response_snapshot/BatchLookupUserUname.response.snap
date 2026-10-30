@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"failed":[{"field":"__Field__","reason":"__Reason__","uname":"__Uname__"},{"field":"__Field__","reason":"__Reason__","uname":"__Uname__"}],"message":"__Message__","successful":[{"uname":"__Uname__","username":"__Username__"},{"uname":"__Uname__","username":"__Username__"}]}

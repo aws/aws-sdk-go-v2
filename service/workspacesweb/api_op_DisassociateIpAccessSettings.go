@@ -4,6 +4,8 @@ package workspacesweb
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -33,6 +35,18 @@ type DisassociateIpAccessSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateIpAccessSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PortalArn != nil {
+		s.WriteString(schemas.DisassociateIpAccessSettingsRequest_portalArn, *v.PortalArn)
+	}
+}
+
 type DisassociateIpAccessSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,13 +54,26 @@ type DisassociateIpAccessSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateIpAccessSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateIpAccessSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateIpAccessSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateIpAccessSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateIpAccessSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateIpAccessSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateIpAccessSettings, schemas.DisassociateIpAccessSettingsRequest, schemas.DisassociateIpAccessSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateIpAccessSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateIpAccessSettings, schemas.DisassociateIpAccessSettingsRequest, schemas.DisassociateIpAccessSettingsResponse), output: &DisassociateIpAccessSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -266,6 +266,14 @@ var _ContactId = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ContactId",
 }, smithy.ShapeTypeString, 0)
 
+var ContentDisposition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectparticipant",
+	Name:      "ContentDisposition",
+}, smithy.ShapeTypeEnum, 2)
+var ContentDisposition_INLINE *smithy.Schema
+
+var ContentDisposition_ATTACHMENT *smithy.Schema
+
 var _ContentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
 	Name:      "ContentType",
@@ -380,6 +388,11 @@ var MessageProcessingStatus_PROCESSING *smithy.Schema
 var MessageProcessingStatus_FAILED *smithy.Schema
 
 var MessageProcessingStatus_REJECTED *smithy.Schema
+
+var _MetadataUrl = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectparticipant",
+	Name:      "MetadataUrl",
+}, smithy.ShapeTypeString, 0)
 
 var _MostRecent = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
@@ -553,29 +566,6 @@ var UploadMetadata_UrlExpiry *smithy.Schema
 
 var UploadMetadata_HeadersToInclude *smithy.Schema
 
-var _UploadMetadataSignedHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectparticipant",
-	Name:      "UploadMetadataSignedHeaders",
-}, smithy.ShapeTypeMap, 2)
-var _UploadMetadataSignedHeaders_key *smithy.Schema
-
-var _UploadMetadataSignedHeaders_value *smithy.Schema
-
-var _UploadMetadataSignedHeadersKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectparticipant",
-	Name:      "UploadMetadataSignedHeadersKey",
-}, smithy.ShapeTypeString, 0)
-
-var _UploadMetadataSignedHeadersValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectparticipant",
-	Name:      "UploadMetadataSignedHeadersValue",
-}, smithy.ShapeTypeString, 0)
-
-var _UploadMetadataUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectparticipant",
-	Name:      "UploadMetadataUrl",
-}, smithy.ShapeTypeString, 0)
-
 var _URI = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
 	Name:      "URI",
@@ -585,6 +575,24 @@ var _URLExpiryInSeconds = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
 	Name:      "URLExpiryInSeconds",
 }, smithy.ShapeTypeInteger, 0)
+
+var _UrlMetadataSignedHeaders = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectparticipant",
+	Name:      "UrlMetadataSignedHeaders",
+}, smithy.ShapeTypeMap, 2)
+var _UrlMetadataSignedHeaders_key *smithy.Schema
+
+var _UrlMetadataSignedHeaders_value *smithy.Schema
+
+var _UrlMetadataSignedHeadersKey = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectparticipant",
+	Name:      "UrlMetadataSignedHeadersKey",
+}, smithy.ShapeTypeString, 0)
+
+var _UrlMetadataSignedHeadersValue = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connectparticipant",
+	Name:      "UrlMetadataSignedHeadersValue",
+}, smithy.ShapeTypeString, 0)
 
 var ValidationException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
@@ -774,12 +782,14 @@ var DisconnectParticipantResponse = smithy.NewSchema(smithy.ShapeID{
 var GetAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
 	Name:      "GetAttachmentRequest",
-}, smithy.ShapeTypeStructure, 3)
+}, smithy.ShapeTypeStructure, 4)
 var GetAttachmentRequest_AttachmentId *smithy.Schema
 
 var GetAttachmentRequest_ConnectionToken *smithy.Schema
 
 var GetAttachmentRequest_UrlExpiryInSeconds *smithy.Schema
+
+var GetAttachmentRequest_UrlContentDisposition *smithy.Schema
 
 var GetAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connectparticipant",
@@ -970,6 +980,10 @@ func init() {
 
 	_ConnectionTypeList_member = _ConnectionTypeList.AddMember("member", ConnectionType)
 
+	ContentDisposition_INLINE = ContentDisposition.AddMember("INLINE", smithyprelude.Unit)
+
+	ContentDisposition_ATTACHMENT = ContentDisposition.AddMember("ATTACHMENT", smithyprelude.Unit)
+
 	InternalServerException_Message = InternalServerException.AddMember("Message", _Message)
 
 	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
@@ -1072,15 +1086,15 @@ func init() {
 
 	_Transcript_member = _Transcript.AddMember("member", Item)
 
-	_UploadMetadataSignedHeaders_key = _UploadMetadataSignedHeaders.AddMember("key", _UploadMetadataSignedHeadersKey)
+	_UrlMetadataSignedHeaders_key = _UrlMetadataSignedHeaders.AddMember("key", _UrlMetadataSignedHeadersKey)
 
-	_UploadMetadataSignedHeaders_value = _UploadMetadataSignedHeaders.AddMember("value", _UploadMetadataSignedHeadersValue)
+	_UrlMetadataSignedHeaders_value = _UrlMetadataSignedHeaders.AddMember("value", _UrlMetadataSignedHeadersValue)
 
-	UploadMetadata_Url = UploadMetadata.AddMember("Url", _UploadMetadataUrl)
+	UploadMetadata_Url = UploadMetadata.AddMember("Url", _MetadataUrl)
 
 	UploadMetadata_UrlExpiry = UploadMetadata.AddMember("UrlExpiry", _ISO8601Datetime)
 
-	UploadMetadata_HeadersToInclude = UploadMetadata.AddMember("HeadersToInclude", _UploadMetadataSignedHeaders)
+	UploadMetadata_HeadersToInclude = UploadMetadata.AddMember("HeadersToInclude", _UrlMetadataSignedHeaders)
 
 	ValidationException_Message = ValidationException.AddMember("Message", _Reason)
 
@@ -1161,6 +1175,8 @@ func init() {
 	GetAttachmentRequest_ConnectionToken = GetAttachmentRequest.AddMember("ConnectionToken", _ParticipantToken, &smithytraits.HTTPHeader{Name: "X-Amz-Bearer"})
 
 	GetAttachmentRequest_UrlExpiryInSeconds = GetAttachmentRequest.AddMember("UrlExpiryInSeconds", _URLExpiryInSeconds)
+
+	GetAttachmentRequest_UrlContentDisposition = GetAttachmentRequest.AddMember("UrlContentDisposition", ContentDisposition)
 
 	GetAttachmentResponse_Url = GetAttachmentResponse.AddMember("Url", _PreSignedAttachmentUrl)
 

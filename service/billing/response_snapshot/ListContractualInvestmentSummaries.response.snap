@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.ListContractualInvestmentSummaries
+
+{"items":[{"investmentName":"__InvestmentName__","investmentSummaryId":"__InvestmentSummaryId__","investmentType":"MILESTONE_BASED","maxAllowedInvestmentDisbursementValue":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}},{"investmentName":"__InvestmentName__","investmentSummaryId":"__InvestmentSummaryId__","investmentType":"MILESTONE_BASED","maxAllowedInvestmentDisbursementValue":{"currencyAmount":"__CurrencyAmount__","currencyCode":"__CurrencyCode__"}}],"nextToken":"__NextToken__"}

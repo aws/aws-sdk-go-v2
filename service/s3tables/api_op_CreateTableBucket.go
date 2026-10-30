@@ -4,7 +4,9 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/s3tables/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -74,6 +76,29 @@ type CreateTableBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateTableBucketRequest_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTableBucketRequest_name, *v.Name)
+	}
+	if v.StorageClassConfiguration != nil {
+		s.WriteStruct(schemas.CreateTableBucketRequest_storageClassConfiguration)
+		v.StorageClassConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateTableBucketRequest_tags, v.Tags)
+}
+
 type CreateTableBucketOutput struct {
 
 	// The Amazon Resource Name (ARN) of the table bucket.
@@ -87,13 +112,32 @@ type CreateTableBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTableBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTableBucketResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTableBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateTableBucketResponse_arn, *v.Arn)
+	}
+}
+func (v *CreateTableBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTableBucketResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTableBucketResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateTableBucketResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTableBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTableBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTableBucket, schemas.CreateTableBucketRequest, schemas.CreateTableBucketResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTableBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTableBucket, schemas.CreateTableBucketRequest, schemas.CreateTableBucketResponse), output: &CreateTableBucketOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

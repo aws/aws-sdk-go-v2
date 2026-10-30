@@ -4,7 +4,9 @@ package socialmessaging
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,24 @@ type GetWhatsAppCallPermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppCallPermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppCallPermissionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppCallPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.GetWhatsAppCallPermissionInput_destinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.EndUserBsuid != nil {
+		s.WriteString(schemas.GetWhatsAppCallPermissionInput_endUserBsuid, *v.EndUserBsuid)
+	}
+	if v.OriginationPhoneNumberId != nil {
+		s.WriteString(schemas.GetWhatsAppCallPermissionInput_originationPhoneNumberId, *v.OriginationPhoneNumberId)
+	}
+}
+
 type GetWhatsAppCallPermissionOutput struct {
 
 	// The calling actions the business can take with the end user, and any limits
@@ -66,13 +86,37 @@ type GetWhatsAppCallPermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWhatsAppCallPermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWhatsAppCallPermissionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWhatsAppCallPermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWhatsAppCallPermissionActionList(s, schemas.GetWhatsAppCallPermissionOutput_actions, v.Actions)
+	if v.Permission != nil {
+		s.WriteStruct(schemas.GetWhatsAppCallPermissionOutput_permission)
+		v.Permission.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWhatsAppCallPermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWhatsAppCallPermissionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWhatsAppCallPermissionOutput_actions:
+			return deserializeWhatsAppCallPermissionActionList(d, schemas.GetWhatsAppCallPermissionOutput_actions, &v.Actions)
+		case schemas.GetWhatsAppCallPermissionOutput_permission:
+			v.Permission = &types.WhatsAppCallPermission{}
+			return v.Permission.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWhatsAppCallPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWhatsAppCallPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppCallPermission, schemas.GetWhatsAppCallPermissionInput, schemas.GetWhatsAppCallPermissionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWhatsAppCallPermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWhatsAppCallPermission, schemas.GetWhatsAppCallPermissionInput, schemas.GetWhatsAppCallPermissionOutput), output: &GetWhatsAppCallPermissionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

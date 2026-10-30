@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -43,6 +45,86 @@ type MigrationWorkflowSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MigrationWorkflowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MigrationWorkflowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MigrationWorkflowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdsApplicationConfigurationName != nil {
+		s.WriteString(schemas.MigrationWorkflowSummary_adsApplicationConfigurationName, *v.AdsApplicationConfigurationName)
+	}
+	if v.CompletedSteps != nil {
+		s.WriteInt32(schemas.MigrationWorkflowSummary_completedSteps, *v.CompletedSteps)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MigrationWorkflowSummary_creationTime, *v.CreationTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.MigrationWorkflowSummary_endTime, *v.EndTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MigrationWorkflowSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MigrationWorkflowSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.MigrationWorkflowSummary_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.MigrationWorkflowSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.MigrationWorkflowSummary_templateId, *v.TemplateId)
+	}
+	if v.TotalSteps != nil {
+		s.WriteInt32(schemas.MigrationWorkflowSummary_totalSteps, *v.TotalSteps)
+	}
+}
+func (v *MigrationWorkflowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MigrationWorkflowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MigrationWorkflowSummary_adsApplicationConfigurationName:
+			v.AdsApplicationConfigurationName = new(string)
+			return d.ReadString(schemas.MigrationWorkflowSummary_adsApplicationConfigurationName, v.AdsApplicationConfigurationName)
+		case schemas.MigrationWorkflowSummary_completedSteps:
+			v.CompletedSteps = new(int32)
+			return d.ReadInt32(schemas.MigrationWorkflowSummary_completedSteps, v.CompletedSteps)
+		case schemas.MigrationWorkflowSummary_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MigrationWorkflowSummary_creationTime, v.CreationTime)
+		case schemas.MigrationWorkflowSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.MigrationWorkflowSummary_endTime, v.EndTime)
+		case schemas.MigrationWorkflowSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MigrationWorkflowSummary_id, v.Id)
+		case schemas.MigrationWorkflowSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MigrationWorkflowSummary_name, v.Name)
+		case schemas.MigrationWorkflowSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.MigrationWorkflowSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = MigrationWorkflowStatusEnum(ev)
+			return nil
+		case schemas.MigrationWorkflowSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.MigrationWorkflowSummary_statusMessage, v.StatusMessage)
+		case schemas.MigrationWorkflowSummary_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.MigrationWorkflowSummary_templateId, v.TemplateId)
+		case schemas.MigrationWorkflowSummary_totalSteps:
+			v.TotalSteps = new(int32)
+			return d.ReadInt32(schemas.MigrationWorkflowSummary_totalSteps, v.TotalSteps)
+		}
+		return nil
+	})
+}
+
 // Command to be run on a particular operating system.
 type PlatformCommand struct {
 
@@ -55,6 +137,34 @@ type PlatformCommand struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlatformCommand) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformCommand)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformCommand) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Linux != nil {
+		s.WriteString(schemas.PlatformCommand_linux, *v.Linux)
+	}
+	if v.Windows != nil {
+		s.WriteString(schemas.PlatformCommand_windows, *v.Windows)
+	}
+}
+func (v *PlatformCommand) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformCommand, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformCommand_linux:
+			v.Linux = new(string)
+			return d.ReadString(schemas.PlatformCommand_linux, v.Linux)
+		case schemas.PlatformCommand_windows:
+			v.Windows = new(string)
+			return d.ReadString(schemas.PlatformCommand_windows, v.Windows)
+		}
+		return nil
+	})
+}
+
 // The script location for a particular operating system.
 type PlatformScriptKey struct {
 
@@ -65,6 +175,34 @@ type PlatformScriptKey struct {
 	Windows *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlatformScriptKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlatformScriptKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlatformScriptKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Linux != nil {
+		s.WriteString(schemas.PlatformScriptKey_linux, *v.Linux)
+	}
+	if v.Windows != nil {
+		s.WriteString(schemas.PlatformScriptKey_windows, *v.Windows)
+	}
+}
+func (v *PlatformScriptKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlatformScriptKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlatformScriptKey_linux:
+			v.Linux = new(string)
+			return d.ReadString(schemas.PlatformScriptKey_linux, v.Linux)
+		case schemas.PlatformScriptKey_windows:
+			v.Windows = new(string)
+			return d.ReadString(schemas.PlatformScriptKey_windows, v.Windows)
+		}
+		return nil
+	})
 }
 
 // The summary of the Migration Hub Orchestrator plugin.
@@ -91,6 +229,62 @@ type PluginSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PluginSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PluginSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PluginSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteString(schemas.PluginSummary_hostname, *v.Hostname)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.PluginSummary_ipAddress, *v.IpAddress)
+	}
+	if v.PluginId != nil {
+		s.WriteString(schemas.PluginSummary_pluginId, *v.PluginId)
+	}
+	if v.RegisteredTime != nil {
+		s.WriteString(schemas.PluginSummary_registeredTime, *v.RegisteredTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PluginSummary_status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.PluginSummary_version, *v.Version)
+	}
+}
+func (v *PluginSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PluginSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PluginSummary_hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.PluginSummary_hostname, v.Hostname)
+		case schemas.PluginSummary_ipAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.PluginSummary_ipAddress, v.IpAddress)
+		case schemas.PluginSummary_pluginId:
+			v.PluginId = new(string)
+			return d.ReadString(schemas.PluginSummary_pluginId, v.PluginId)
+		case schemas.PluginSummary_registeredTime:
+			v.RegisteredTime = new(string)
+			return d.ReadString(schemas.PluginSummary_registeredTime, v.RegisteredTime)
+		case schemas.PluginSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PluginSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PluginHealth(ev)
+			return nil
+		case schemas.PluginSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PluginSummary_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The custom script to run tests on source or target environments.
 type StepAutomationConfiguration struct {
 
@@ -110,6 +304,64 @@ type StepAutomationConfiguration struct {
 	TargetType TargetType
 
 	noSmithyDocumentSerde
+}
+
+func (v *StepAutomationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepAutomationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepAutomationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Command != nil {
+		s.WriteStruct(schemas.StepAutomationConfiguration_command)
+		v.Command.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RunEnvironment != "" {
+		s.WriteString(schemas.StepAutomationConfiguration_runEnvironment, string(v.RunEnvironment))
+	}
+	if v.ScriptLocationS3Bucket != nil {
+		s.WriteString(schemas.StepAutomationConfiguration_scriptLocationS3Bucket, *v.ScriptLocationS3Bucket)
+	}
+	if v.ScriptLocationS3Key != nil {
+		s.WriteStruct(schemas.StepAutomationConfiguration_scriptLocationS3Key)
+		v.ScriptLocationS3Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.StepAutomationConfiguration_targetType, string(v.TargetType))
+	}
+}
+func (v *StepAutomationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepAutomationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepAutomationConfiguration_command:
+			v.Command = &PlatformCommand{}
+			return v.Command.Deserialize(d)
+		case schemas.StepAutomationConfiguration_runEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.StepAutomationConfiguration_runEnvironment, &ev); err != nil {
+				return err
+			}
+			v.RunEnvironment = RunEnvironment(ev)
+			return nil
+		case schemas.StepAutomationConfiguration_scriptLocationS3Bucket:
+			v.ScriptLocationS3Bucket = new(string)
+			return d.ReadString(schemas.StepAutomationConfiguration_scriptLocationS3Bucket, v.ScriptLocationS3Bucket)
+		case schemas.StepAutomationConfiguration_scriptLocationS3Key:
+			v.ScriptLocationS3Key = &PlatformScriptKey{}
+			return v.ScriptLocationS3Key.Deserialize(d)
+		case schemas.StepAutomationConfiguration_targetType:
+			var ev string
+			if err := d.ReadString(schemas.StepAutomationConfiguration_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A map of key value pairs that is generated when you create a migration
@@ -134,6 +386,12 @@ type StepInputMemberIntegerValue struct {
 }
 
 func (*StepInputMemberIntegerValue) isStepInput() {}
+func (v *StepInputMemberIntegerValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.StepInput_integerValue, v.Value)
+}
+func (v *StepInputMemberIntegerValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.StepInput_integerValue, &v.Value)
+}
 
 // List of string values.
 type StepInputMemberListOfStringsValue struct {
@@ -143,6 +401,12 @@ type StepInputMemberListOfStringsValue struct {
 }
 
 func (*StepInputMemberListOfStringsValue) isStepInput() {}
+func (v *StepInputMemberListOfStringsValue) Serialize(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.StepInput_listOfStringsValue, v.Value)
+}
+func (v *StepInputMemberListOfStringsValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringList(d, schemas.StepInput_listOfStringsValue, &v.Value)
+}
 
 // Map of string values.
 type StepInputMemberMapOfStringValue struct {
@@ -152,6 +416,12 @@ type StepInputMemberMapOfStringValue struct {
 }
 
 func (*StepInputMemberMapOfStringValue) isStepInput() {}
+func (v *StepInputMemberMapOfStringValue) Serialize(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.StepInput_mapOfStringValue, v.Value)
+}
+func (v *StepInputMemberMapOfStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringMap(d, schemas.StepInput_mapOfStringValue, &v.Value)
+}
 
 // String value.
 type StepInputMemberStringValue struct {
@@ -161,6 +431,12 @@ type StepInputMemberStringValue struct {
 }
 
 func (*StepInputMemberStringValue) isStepInput() {}
+func (v *StepInputMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.StepInput_stringValue, v.Value)
+}
+func (v *StepInputMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.StepInput_stringValue, &v.Value)
+}
 
 // The output of the step.
 type StepOutput struct {
@@ -177,6 +453,44 @@ type StepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StepOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataType != "" {
+		s.WriteString(schemas.StepOutput_dataType, string(v.DataType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StepOutput_name, *v.Name)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.StepOutput_required, *v.Required)
+	}
+}
+func (v *StepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StepOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StepOutput_dataType:
+			var ev string
+			if err := d.ReadString(schemas.StepOutput_dataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = DataType(ev)
+			return nil
+		case schemas.StepOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StepOutput_name, v.Name)
+		case schemas.StepOutput_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.StepOutput_required, v.Required)
+		}
+		return nil
+	})
+}
+
 // The input parameters of a template.
 type TemplateInput struct {
 
@@ -190,6 +504,44 @@ type TemplateInput struct {
 	Required *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataType != "" {
+		s.WriteString(schemas.TemplateInput_dataType, string(v.DataType))
+	}
+	if v.InputName != nil {
+		s.WriteString(schemas.TemplateInput_inputName, *v.InputName)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.TemplateInput_required, *v.Required)
+	}
+}
+func (v *TemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateInput_dataType:
+			var ev string
+			if err := d.ReadString(schemas.TemplateInput_dataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = DataType(ev)
+			return nil
+		case schemas.TemplateInput_inputName:
+			v.InputName = new(string)
+			return d.ReadString(schemas.TemplateInput_inputName, v.InputName)
+		case schemas.TemplateInput_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.TemplateInput_required, v.Required)
+		}
+		return nil
+	})
 }
 
 // The migration workflow template used as the source for the new template.
@@ -209,6 +561,12 @@ type TemplateSourceMemberWorkflowId struct {
 }
 
 func (*TemplateSourceMemberWorkflowId) isTemplateSource() {}
+func (v *TemplateSourceMemberWorkflowId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.TemplateSource_workflowId, v.Value)
+}
+func (v *TemplateSourceMemberWorkflowId) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.TemplateSource_workflowId, &v.Value)
+}
 
 // The summary of the step group in the template.
 type TemplateStepGroupSummary struct {
@@ -226,6 +584,40 @@ type TemplateStepGroupSummary struct {
 	Previous []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateStepGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateStepGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateStepGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.TemplateStepGroupSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TemplateStepGroupSummary_name, *v.Name)
+	}
+	serializeStringList(s, schemas.TemplateStepGroupSummary_next, v.Next)
+	serializeStringList(s, schemas.TemplateStepGroupSummary_previous, v.Previous)
+}
+func (v *TemplateStepGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateStepGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateStepGroupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TemplateStepGroupSummary_id, v.Id)
+		case schemas.TemplateStepGroupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TemplateStepGroupSummary_name, v.Name)
+		case schemas.TemplateStepGroupSummary_next:
+			return deserializeStringList(d, schemas.TemplateStepGroupSummary_next, &v.Next)
+		case schemas.TemplateStepGroupSummary_previous:
+			return deserializeStringList(d, schemas.TemplateStepGroupSummary_previous, &v.Previous)
+		}
+		return nil
+	})
 }
 
 // The summary of the step.
@@ -262,6 +654,82 @@ type TemplateStepSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateStepSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateStepSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateStepSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.TemplateStepSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TemplateStepSummary_name, *v.Name)
+	}
+	serializeStringList(s, schemas.TemplateStepSummary_next, v.Next)
+	if v.Owner != "" {
+		s.WriteString(schemas.TemplateStepSummary_owner, string(v.Owner))
+	}
+	serializeStringList(s, schemas.TemplateStepSummary_previous, v.Previous)
+	if v.StepActionType != "" {
+		s.WriteString(schemas.TemplateStepSummary_stepActionType, string(v.StepActionType))
+	}
+	if v.StepGroupId != nil {
+		s.WriteString(schemas.TemplateStepSummary_stepGroupId, *v.StepGroupId)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.TemplateStepSummary_targetType, string(v.TargetType))
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.TemplateStepSummary_templateId, *v.TemplateId)
+	}
+}
+func (v *TemplateStepSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateStepSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateStepSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TemplateStepSummary_id, v.Id)
+		case schemas.TemplateStepSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TemplateStepSummary_name, v.Name)
+		case schemas.TemplateStepSummary_next:
+			return deserializeStringList(d, schemas.TemplateStepSummary_next, &v.Next)
+		case schemas.TemplateStepSummary_owner:
+			var ev string
+			if err := d.ReadString(schemas.TemplateStepSummary_owner, &ev); err != nil {
+				return err
+			}
+			v.Owner = Owner(ev)
+			return nil
+		case schemas.TemplateStepSummary_previous:
+			return deserializeStringList(d, schemas.TemplateStepSummary_previous, &v.Previous)
+		case schemas.TemplateStepSummary_stepActionType:
+			var ev string
+			if err := d.ReadString(schemas.TemplateStepSummary_stepActionType, &ev); err != nil {
+				return err
+			}
+			v.StepActionType = StepActionType(ev)
+			return nil
+		case schemas.TemplateStepSummary_stepGroupId:
+			v.StepGroupId = new(string)
+			return d.ReadString(schemas.TemplateStepSummary_stepGroupId, v.StepGroupId)
+		case schemas.TemplateStepSummary_targetType:
+			var ev string
+			if err := d.ReadString(schemas.TemplateStepSummary_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = TargetType(ev)
+			return nil
+		case schemas.TemplateStepSummary_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.TemplateStepSummary_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 // The summary of the template.
 type TemplateSummary struct {
 
@@ -280,6 +748,46 @@ type TemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TemplateSummary_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TemplateSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.TemplateSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TemplateSummary_name, *v.Name)
+	}
+}
+func (v *TemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TemplateSummary_arn, v.Arn)
+		case schemas.TemplateSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TemplateSummary_description, v.Description)
+		case schemas.TemplateSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TemplateSummary_id, v.Id)
+		case schemas.TemplateSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TemplateSummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
 // List of AWS services utilized in a migration workflow.
 type Tool struct {
 
@@ -290,6 +798,34 @@ type Tool struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tool) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tool)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tool) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Tool_name, *v.Name)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.Tool_url, *v.Url)
+	}
+}
+func (v *Tool) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tool, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tool_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Tool_name, v.Name)
+		case schemas.Tool_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.Tool_url, v.Url)
+		}
+		return nil
+	})
 }
 
 // The custom script to run tests on source or target environments.
@@ -311,6 +847,64 @@ type WorkflowStepAutomationConfiguration struct {
 	TargetType TargetType
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowStepAutomationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowStepAutomationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowStepAutomationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Command != nil {
+		s.WriteStruct(schemas.WorkflowStepAutomationConfiguration_command)
+		v.Command.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RunEnvironment != "" {
+		s.WriteString(schemas.WorkflowStepAutomationConfiguration_runEnvironment, string(v.RunEnvironment))
+	}
+	if v.ScriptLocationS3Bucket != nil {
+		s.WriteString(schemas.WorkflowStepAutomationConfiguration_scriptLocationS3Bucket, *v.ScriptLocationS3Bucket)
+	}
+	if v.ScriptLocationS3Key != nil {
+		s.WriteStruct(schemas.WorkflowStepAutomationConfiguration_scriptLocationS3Key)
+		v.ScriptLocationS3Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.WorkflowStepAutomationConfiguration_targetType, string(v.TargetType))
+	}
+}
+func (v *WorkflowStepAutomationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowStepAutomationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowStepAutomationConfiguration_command:
+			v.Command = &PlatformCommand{}
+			return v.Command.Deserialize(d)
+		case schemas.WorkflowStepAutomationConfiguration_runEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepAutomationConfiguration_runEnvironment, &ev); err != nil {
+				return err
+			}
+			v.RunEnvironment = RunEnvironment(ev)
+			return nil
+		case schemas.WorkflowStepAutomationConfiguration_scriptLocationS3Bucket:
+			v.ScriptLocationS3Bucket = new(string)
+			return d.ReadString(schemas.WorkflowStepAutomationConfiguration_scriptLocationS3Bucket, v.ScriptLocationS3Bucket)
+		case schemas.WorkflowStepAutomationConfiguration_scriptLocationS3Key:
+			v.ScriptLocationS3Key = &PlatformScriptKey{}
+			return v.ScriptLocationS3Key.Deserialize(d)
+		case schemas.WorkflowStepAutomationConfiguration_targetType:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepAutomationConfiguration_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The summary of a step group in a workflow.
@@ -337,6 +931,60 @@ type WorkflowStepGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkflowStepGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowStepGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowStepGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.WorkflowStepGroupSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkflowStepGroupSummary_name, *v.Name)
+	}
+	serializeStringList(s, schemas.WorkflowStepGroupSummary_next, v.Next)
+	if v.Owner != "" {
+		s.WriteString(schemas.WorkflowStepGroupSummary_owner, string(v.Owner))
+	}
+	serializeStringList(s, schemas.WorkflowStepGroupSummary_previous, v.Previous)
+	if v.Status != "" {
+		s.WriteString(schemas.WorkflowStepGroupSummary_status, string(v.Status))
+	}
+}
+func (v *WorkflowStepGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowStepGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowStepGroupSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WorkflowStepGroupSummary_id, v.Id)
+		case schemas.WorkflowStepGroupSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkflowStepGroupSummary_name, v.Name)
+		case schemas.WorkflowStepGroupSummary_next:
+			return deserializeStringList(d, schemas.WorkflowStepGroupSummary_next, &v.Next)
+		case schemas.WorkflowStepGroupSummary_owner:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepGroupSummary_owner, &ev); err != nil {
+				return err
+			}
+			v.Owner = Owner(ev)
+			return nil
+		case schemas.WorkflowStepGroupSummary_previous:
+			return deserializeStringList(d, schemas.WorkflowStepGroupSummary_previous, &v.Previous)
+		case schemas.WorkflowStepGroupSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepGroupSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = StepGroupStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The output of a step.
 type WorkflowStepOutput struct {
 
@@ -353,6 +1001,47 @@ type WorkflowStepOutput struct {
 	Value WorkflowStepOutputUnion
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowStepOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataType != "" {
+		s.WriteString(schemas.WorkflowStepOutput_dataType, string(v.DataType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkflowStepOutput_name, *v.Name)
+	}
+	if v.Required != nil {
+		s.WriteBool(schemas.WorkflowStepOutput_required, *v.Required)
+	}
+	serializeWorkflowStepOutputUnion(s, schemas.WorkflowStepOutput_value, v.Value)
+}
+func (v *WorkflowStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowStepOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowStepOutput_dataType:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepOutput_dataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = DataType(ev)
+			return nil
+		case schemas.WorkflowStepOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkflowStepOutput_name, v.Name)
+		case schemas.WorkflowStepOutput_required:
+			v.Required = new(bool)
+			return d.ReadBool(schemas.WorkflowStepOutput_required, v.Required)
+		case schemas.WorkflowStepOutput_value:
+			return deserializeWorkflowStepOutputUnion(d, schemas.WorkflowStepOutput_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // A structure to hold multiple values of an output.
@@ -374,6 +1063,12 @@ type WorkflowStepOutputUnionMemberIntegerValue struct {
 }
 
 func (*WorkflowStepOutputUnionMemberIntegerValue) isWorkflowStepOutputUnion() {}
+func (v *WorkflowStepOutputUnionMemberIntegerValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.WorkflowStepOutputUnion_integerValue, v.Value)
+}
+func (v *WorkflowStepOutputUnionMemberIntegerValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.WorkflowStepOutputUnion_integerValue, &v.Value)
+}
 
 // The list of string value.
 type WorkflowStepOutputUnionMemberListOfStringValue struct {
@@ -383,6 +1078,12 @@ type WorkflowStepOutputUnionMemberListOfStringValue struct {
 }
 
 func (*WorkflowStepOutputUnionMemberListOfStringValue) isWorkflowStepOutputUnion() {}
+func (v *WorkflowStepOutputUnionMemberListOfStringValue) Serialize(s smithy.ShapeSerializer) {
+	serializeMaxStringList(s, schemas.WorkflowStepOutputUnion_listOfStringValue, v.Value)
+}
+func (v *WorkflowStepOutputUnionMemberListOfStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeMaxStringList(d, schemas.WorkflowStepOutputUnion_listOfStringValue, &v.Value)
+}
 
 // The string value.
 type WorkflowStepOutputUnionMemberStringValue struct {
@@ -392,6 +1093,12 @@ type WorkflowStepOutputUnionMemberStringValue struct {
 }
 
 func (*WorkflowStepOutputUnionMemberStringValue) isWorkflowStepOutputUnion() {}
+func (v *WorkflowStepOutputUnionMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.WorkflowStepOutputUnion_stringValue, v.Value)
+}
+func (v *WorkflowStepOutputUnionMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.WorkflowStepOutputUnion_stringValue, &v.Value)
+}
 
 // The summary of the step in a migration workflow.
 type WorkflowStepSummary struct {
@@ -437,6 +1144,106 @@ type WorkflowStepSummary struct {
 	TotalNoOfSrv *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkflowStepSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowStepSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowStepSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.WorkflowStepSummary_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WorkflowStepSummary_name, *v.Name)
+	}
+	serializeStringList(s, schemas.WorkflowStepSummary_next, v.Next)
+	if v.NoOfSrvCompleted != nil {
+		s.WriteInt32(schemas.WorkflowStepSummary_noOfSrvCompleted, *v.NoOfSrvCompleted)
+	}
+	if v.NoOfSrvFailed != nil {
+		s.WriteInt32(schemas.WorkflowStepSummary_noOfSrvFailed, *v.NoOfSrvFailed)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.WorkflowStepSummary_owner, string(v.Owner))
+	}
+	serializeStringList(s, schemas.WorkflowStepSummary_previous, v.Previous)
+	if v.ScriptLocation != nil {
+		s.WriteString(schemas.WorkflowStepSummary_scriptLocation, *v.ScriptLocation)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WorkflowStepSummary_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.WorkflowStepSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.StepActionType != "" {
+		s.WriteString(schemas.WorkflowStepSummary_stepActionType, string(v.StepActionType))
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.WorkflowStepSummary_stepId, *v.StepId)
+	}
+	if v.TotalNoOfSrv != nil {
+		s.WriteInt32(schemas.WorkflowStepSummary_totalNoOfSrv, *v.TotalNoOfSrv)
+	}
+}
+func (v *WorkflowStepSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowStepSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowStepSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WorkflowStepSummary_description, v.Description)
+		case schemas.WorkflowStepSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WorkflowStepSummary_name, v.Name)
+		case schemas.WorkflowStepSummary_next:
+			return deserializeStringList(d, schemas.WorkflowStepSummary_next, &v.Next)
+		case schemas.WorkflowStepSummary_noOfSrvCompleted:
+			v.NoOfSrvCompleted = new(int32)
+			return d.ReadInt32(schemas.WorkflowStepSummary_noOfSrvCompleted, v.NoOfSrvCompleted)
+		case schemas.WorkflowStepSummary_noOfSrvFailed:
+			v.NoOfSrvFailed = new(int32)
+			return d.ReadInt32(schemas.WorkflowStepSummary_noOfSrvFailed, v.NoOfSrvFailed)
+		case schemas.WorkflowStepSummary_owner:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepSummary_owner, &ev); err != nil {
+				return err
+			}
+			v.Owner = Owner(ev)
+			return nil
+		case schemas.WorkflowStepSummary_previous:
+			return deserializeStringList(d, schemas.WorkflowStepSummary_previous, &v.Previous)
+		case schemas.WorkflowStepSummary_scriptLocation:
+			v.ScriptLocation = new(string)
+			return d.ReadString(schemas.WorkflowStepSummary_scriptLocation, v.ScriptLocation)
+		case schemas.WorkflowStepSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = StepStatus(ev)
+			return nil
+		case schemas.WorkflowStepSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.WorkflowStepSummary_statusMessage, v.StatusMessage)
+		case schemas.WorkflowStepSummary_stepActionType:
+			var ev string
+			if err := d.ReadString(schemas.WorkflowStepSummary_stepActionType, &ev); err != nil {
+				return err
+			}
+			v.StepActionType = StepActionType(ev)
+			return nil
+		case schemas.WorkflowStepSummary_stepId:
+			v.StepId = new(string)
+			return d.ReadString(schemas.WorkflowStepSummary_stepId, v.StepId)
+		case schemas.WorkflowStepSummary_totalNoOfSrv:
+			v.TotalNoOfSrv = new(int32)
+			return d.ReadInt32(schemas.WorkflowStepSummary_totalNoOfSrv, v.TotalNoOfSrv)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

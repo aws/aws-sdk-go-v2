@@ -4,6 +4,8 @@ package s3tables
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -59,6 +61,30 @@ type UpdateTableMetadataLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableMetadataLocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableMetadataLocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableMetadataLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataLocation != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationRequest_metadataLocation, *v.MetadataLocation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationRequest_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationRequest_namespace, *v.Namespace)
+	}
+	if v.TableBucketARN != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationRequest_tableBucketARN, *v.TableBucketARN)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationRequest_versionToken, *v.VersionToken)
+	}
+}
+
 type UpdateTableMetadataLocationOutput struct {
 
 	// The metadata location of the table.
@@ -92,13 +118,53 @@ type UpdateTableMetadataLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableMetadataLocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableMetadataLocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableMetadataLocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetadataLocation != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationResponse_metadataLocation, *v.MetadataLocation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationResponse_name, *v.Name)
+	}
+	serializeNamespaceList(s, schemas.UpdateTableMetadataLocationResponse_namespace, v.Namespace)
+	if v.TableARN != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationResponse_tableARN, *v.TableARN)
+	}
+	if v.VersionToken != nil {
+		s.WriteString(schemas.UpdateTableMetadataLocationResponse_versionToken, *v.VersionToken)
+	}
+}
+func (v *UpdateTableMetadataLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableMetadataLocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableMetadataLocationResponse_metadataLocation:
+			v.MetadataLocation = new(string)
+			return d.ReadString(schemas.UpdateTableMetadataLocationResponse_metadataLocation, v.MetadataLocation)
+		case schemas.UpdateTableMetadataLocationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateTableMetadataLocationResponse_name, v.Name)
+		case schemas.UpdateTableMetadataLocationResponse_namespace:
+			return deserializeNamespaceList(d, schemas.UpdateTableMetadataLocationResponse_namespace, &v.Namespace)
+		case schemas.UpdateTableMetadataLocationResponse_tableARN:
+			v.TableARN = new(string)
+			return d.ReadString(schemas.UpdateTableMetadataLocationResponse_tableARN, v.TableARN)
+		case schemas.UpdateTableMetadataLocationResponse_versionToken:
+			v.VersionToken = new(string)
+			return d.ReadString(schemas.UpdateTableMetadataLocationResponse_versionToken, v.VersionToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableMetadataLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTableMetadataLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableMetadataLocation, schemas.UpdateTableMetadataLocationRequest, schemas.UpdateTableMetadataLocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTableMetadataLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableMetadataLocation, schemas.UpdateTableMetadataLocationRequest, schemas.UpdateTableMetadataLocationResponse), output: &UpdateTableMetadataLocationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

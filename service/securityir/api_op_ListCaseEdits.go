@@ -5,7 +5,9 @@ package securityir
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -44,6 +46,24 @@ type ListCaseEditsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCaseEditsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCaseEditsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCaseEditsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.ListCaseEditsRequest_caseId, *v.CaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCaseEditsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCaseEditsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCaseEditsOutput struct {
 
 	// Response element for ListCaseEdits that includes the action, event timestamp,
@@ -63,13 +83,41 @@ type ListCaseEditsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCaseEditsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCaseEditsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCaseEditsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCaseEditItems(s, schemas.ListCaseEditsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCaseEditsResponse_nextToken, *v.NextToken)
+	}
+	if v.Total != nil {
+		s.WriteInt32(schemas.ListCaseEditsResponse_total, *v.Total)
+	}
+}
+func (v *ListCaseEditsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCaseEditsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCaseEditsResponse_items:
+			return deserializeCaseEditItems(d, schemas.ListCaseEditsResponse_items, &v.Items)
+		case schemas.ListCaseEditsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCaseEditsResponse_nextToken, v.NextToken)
+		case schemas.ListCaseEditsResponse_total:
+			v.Total = new(int32)
+			return d.ReadInt32(schemas.ListCaseEditsResponse_total, v.Total)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCaseEditsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCaseEdits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCaseEdits, schemas.ListCaseEditsRequest, schemas.ListCaseEditsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCaseEdits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCaseEdits, schemas.ListCaseEditsRequest, schemas.ListCaseEditsResponse), output: &ListCaseEditsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

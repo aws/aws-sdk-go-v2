@@ -400,10 +400,8 @@ var InquirySummary_createdAt *smithy.Schema
 var InquirySupportMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.artifact",
 	Name:      "InquirySupportMode",
-}, smithy.ShapeTypeEnum, 2)
+}, smithy.ShapeTypeEnum, 1)
 var InquirySupportMode_AI_ONLY *smithy.Schema
-
-var InquirySupportMode_FULL_SUPPORT *smithy.Schema
 
 var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.artifact",
@@ -1152,8 +1150,6 @@ func init() {
 	InquiryContent_fileContent = InquiryContent.AddMember("fileContent", InquiryFileContent)
 
 	InquirySupportMode_AI_ONLY = InquirySupportMode.AddMember("AI_ONLY", smithyprelude.Unit)
-
-	InquirySupportMode_FULL_SUPPORT = InquirySupportMode.AddMember("FULL_SUPPORT", smithyprelude.Unit)
 
 	InquiryDetail_arn = InquiryDetail.AddMember("arn", smithyprelude.String)
 

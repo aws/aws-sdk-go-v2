@@ -8912,6 +8912,9 @@ func TestUpdateResponseSnapshot_GetTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{
@@ -17057,6 +17060,30 @@ func TestUpdateResponseSnapshot_UpdateNotificationContent(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_UpdateOutboundEmailContactMessage(t *testing.T) {
+	want := &UpdateOutboundEmailContactMessageOutput{
+		ContactId: ptr.String("__ContactId__"),
+	}
+	proto := restjson1.New(schemas.AmazonConnectService)
+	opSchema := smithy.NewOperationSchema(schemas.UpdateOutboundEmailContactMessage, schemas.UpdateOutboundEmailContactMessageResponse, schemas.UpdateOutboundEmailContactMessageResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("UpdateOutboundEmailContactMessage.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_UpdateParticipantAuthentication(t *testing.T) {
 	want := &UpdateParticipantAuthenticationOutput{}
 	proto := restjson1.New(schemas.AmazonConnectService)
@@ -17534,6 +17561,9 @@ func TestUpdateResponseSnapshot_UpdateTaskTemplate(t *testing.T) {
 		Description:      ptr.String("__Description__"),
 		ContactFlowId:    ptr.String("__ContactFlowId__"),
 		SelfAssignFlowId: ptr.String("__SelfAssignFlowId__"),
+		ContactHooks: &types.TaskTemplateContactHooks{
+			WrapUpFlowId: ptr.String("__WrapUpFlowId__"),
+		},
 		Constraints: &types.TaskTemplateConstraints{
 			RequiredFields: []types.RequiredFieldInfo{
 				{

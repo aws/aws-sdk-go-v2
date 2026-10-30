@@ -112,6 +112,21 @@ type GetDistributionMetricDataInput struct {
 	//
 	// Unit : The published unit is Percent .
 	//
+	//   - WafAllowedRequests - The number of viewer requests that Web Application
+	//   Firewall (WAF) allowed. This metric is available only when WAF is enabled for
+	//   the distribution.
+	//
+	// Statistics : The most useful statistic is Sum .
+	//
+	// Unit : The published unit is None .
+	//
+	//   - WafBlockedRequests - The number of viewer requests that WAF blocked. This
+	//   metric is available only when WAF is enabled for the distribution.
+	//
+	// Statistics : The most useful statistic is Sum .
+	//
+	// Unit : The published unit is None .
+	//
 	// This member is required.
 	MetricName types.DistributionMetricName
 

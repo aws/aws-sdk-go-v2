@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Legs":[{"Distance":1,"DurationSeconds":1,"EndPosition":[1,1],"Geometry":{"LineString":[[1,1],[1,1]]},"StartPosition":[1,1],"Steps":[{"Distance":1,"DurationSeconds":1,"EndPosition":[1,1],"GeometryOffset":1,"StartPosition":[1,1]},{"Distance":1,"DurationSeconds":1,"EndPosition":[1,1],"GeometryOffset":1,"StartPosition":[1,1]}]},{"Distance":1,"DurationSeconds":1,"EndPosition":[1,1],"Geometry":{"LineString":[[1,1],[1,1]]},"StartPosition":[1,1],"Steps":[{"Distance":1,"DurationSeconds":1,"EndPosition":[1,1],"GeometryOffset":1,"StartPosition":[1,1]},{"Distance":1,"DurationSeconds":1,"EndPosition":[1,1],"GeometryOffset":1,"StartPosition":[1,1]}]}],"Summary":{"DataSource":"__DataSource__","Distance":1,"DistanceUnit":"Kilometers","DurationSeconds":1,"RouteBBox":[1,1]}}

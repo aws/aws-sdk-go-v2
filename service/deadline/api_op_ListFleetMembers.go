@@ -28,7 +28,6 @@ func (c *Client) ListFleetMembers(ctx context.Context, params *ListFleetMembersI
 	return out, nil
 }
 
-// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListFleetMembersInput struct {
 
 	// The farm ID of the fleet.
@@ -72,7 +71,6 @@ func (v *ListFleetMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Shared pagination field for List operation outputs (nextToken).
 type ListFleetMembersOutput struct {
 
 	// The members on the list.

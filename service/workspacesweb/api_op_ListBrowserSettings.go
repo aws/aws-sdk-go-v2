@@ -5,7 +5,9 @@ package workspacesweb
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -37,6 +39,21 @@ type ListBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrowserSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrowserSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrowserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBrowserSettingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrowserSettingsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBrowserSettingsOutput struct {
 
 	// The browser settings.
@@ -52,13 +69,35 @@ type ListBrowserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrowserSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrowserSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrowserSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBrowserSettingsList(s, schemas.ListBrowserSettingsResponse_browserSettings, v.BrowserSettings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrowserSettingsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBrowserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBrowserSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBrowserSettingsResponse_browserSettings:
+			return deserializeBrowserSettingsList(d, schemas.ListBrowserSettingsResponse_browserSettings, &v.BrowserSettings)
+		case schemas.ListBrowserSettingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBrowserSettingsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBrowserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBrowserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrowserSettings, schemas.ListBrowserSettingsRequest, schemas.ListBrowserSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBrowserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrowserSettings, schemas.ListBrowserSettingsRequest, schemas.ListBrowserSettingsResponse), output: &ListBrowserSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

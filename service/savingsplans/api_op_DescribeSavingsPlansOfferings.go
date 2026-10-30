@@ -4,7 +4,9 @@ package savingsplans
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/savingsplans/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/savingsplans/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -70,6 +72,34 @@ type DescribeSavingsPlansOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSavingsPlansOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSavingsPlansOfferingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSavingsPlansOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCurrencyList(s, schemas.DescribeSavingsPlansOfferingsRequest_currencies, v.Currencies)
+	serializeSavingsPlanDescriptionsList(s, schemas.DescribeSavingsPlansOfferingsRequest_descriptions, v.Descriptions)
+	serializeDurationsList(s, schemas.DescribeSavingsPlansOfferingsRequest_durations, v.Durations)
+	serializeSavingsPlanOfferingFiltersList(s, schemas.DescribeSavingsPlansOfferingsRequest_filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeSavingsPlansOfferingsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSavingsPlansOfferingsRequest_nextToken, *v.NextToken)
+	}
+	serializeUUIDs(s, schemas.DescribeSavingsPlansOfferingsRequest_offeringIds, v.OfferingIds)
+	serializeSavingsPlanOperationList(s, schemas.DescribeSavingsPlansOfferingsRequest_operations, v.Operations)
+	serializeSavingsPlanPaymentOptionList(s, schemas.DescribeSavingsPlansOfferingsRequest_paymentOptions, v.PaymentOptions)
+	serializeSavingsPlanTypeList(s, schemas.DescribeSavingsPlansOfferingsRequest_planTypes, v.PlanTypes)
+	if v.ProductType != "" {
+		s.WriteString(schemas.DescribeSavingsPlansOfferingsRequest_productType, string(v.ProductType))
+	}
+	serializeSavingsPlanServiceCodeList(s, schemas.DescribeSavingsPlansOfferingsRequest_serviceCodes, v.ServiceCodes)
+	serializeSavingsPlanUsageTypeList(s, schemas.DescribeSavingsPlansOfferingsRequest_usageTypes, v.UsageTypes)
+}
+
 type DescribeSavingsPlansOfferingsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -85,13 +115,35 @@ type DescribeSavingsPlansOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSavingsPlansOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSavingsPlansOfferingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSavingsPlansOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSavingsPlansOfferingsResponse_nextToken, *v.NextToken)
+	}
+	serializeSavingsPlanOfferingsList(s, schemas.DescribeSavingsPlansOfferingsResponse_searchResults, v.SearchResults)
+}
+func (v *DescribeSavingsPlansOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSavingsPlansOfferingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSavingsPlansOfferingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSavingsPlansOfferingsResponse_nextToken, v.NextToken)
+		case schemas.DescribeSavingsPlansOfferingsResponse_searchResults:
+			return deserializeSavingsPlanOfferingsList(d, schemas.DescribeSavingsPlansOfferingsResponse_searchResults, &v.SearchResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSavingsPlansOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSavingsPlansOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSavingsPlansOfferings, schemas.DescribeSavingsPlansOfferingsRequest, schemas.DescribeSavingsPlansOfferingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSavingsPlansOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSavingsPlansOfferings, schemas.DescribeSavingsPlansOfferingsRequest, schemas.DescribeSavingsPlansOfferingsResponse), output: &DescribeSavingsPlansOfferingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

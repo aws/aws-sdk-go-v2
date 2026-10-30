@@ -408,6 +408,42 @@ func (DescribePackagesFilterName) Values() []DescribePackagesFilterName {
 	}
 }
 
+type DiffFieldPolicy string
+
+// Enum values for DiffFieldPolicy
+const (
+	DiffFieldPolicyRedacted DiffFieldPolicy = "redacted"
+)
+
+// Values returns all known values for DiffFieldPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiffFieldPolicy) Values() []DiffFieldPolicy {
+	return []DiffFieldPolicy{
+		"redacted",
+	}
+}
+
+type DiffStatus string
+
+// Enum values for DiffStatus
+const (
+	DiffStatusCompared DiffStatus = "compared"
+	DiffStatusError    DiffStatus = "error"
+)
+
+// Values returns all known values for DiffStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiffStatus) Values() []DiffStatus {
+	return []DiffStatus{
+		"compared",
+		"error",
+	}
+}
+
 type DomainHealth string
 
 // Enum values for DomainHealth
@@ -1526,6 +1562,56 @@ func (PropertyValueType) Values() []PropertyValueType {
 	return []PropertyValueType{
 		"PLAIN_TEXT",
 		"STRINGIFIED_JSON",
+	}
+}
+
+type ReplicationRole string
+
+// Enum values for ReplicationRole
+const (
+	ReplicationRolePrimary   ReplicationRole = "PRIMARY"
+	ReplicationRoleSecondary ReplicationRole = "SECONDARY"
+)
+
+// Values returns all known values for ReplicationRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationRole) Values() []ReplicationRole {
+	return []ReplicationRole{
+		"PRIMARY",
+		"SECONDARY",
+	}
+}
+
+type ReplicationStatus string
+
+// Enum values for ReplicationStatus
+const (
+	ReplicationStatusPendingSetup   ReplicationStatus = "PENDING_SETUP"
+	ReplicationStatusActive         ReplicationStatus = "ACTIVE"
+	ReplicationStatusSwitchingOver  ReplicationStatus = "SWITCHING_OVER"
+	ReplicationStatusFailingOver    ReplicationStatus = "FAILING_OVER"
+	ReplicationStatusPendingRemoval ReplicationStatus = "PENDING_REMOVAL"
+	ReplicationStatusDetached       ReplicationStatus = "DETACHED"
+	ReplicationStatusEjected        ReplicationStatus = "EJECTED"
+	ReplicationStatusFailed         ReplicationStatus = "FAILED"
+)
+
+// Values returns all known values for ReplicationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationStatus) Values() []ReplicationStatus {
+	return []ReplicationStatus{
+		"PENDING_SETUP",
+		"ACTIVE",
+		"SWITCHING_OVER",
+		"FAILING_OVER",
+		"PENDING_REMOVAL",
+		"DETACHED",
+		"EJECTED",
+		"FAILED",
 	}
 }
 

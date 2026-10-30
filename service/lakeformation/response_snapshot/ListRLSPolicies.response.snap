@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","RLSPolicies":[{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"CatalogId":"__CatalogId__","FilterExpression":"__FilterExpression__","Name":"__Name__"},{"AttachmentColumns":[{"Name":"__Name__","Type":"__Type__"},{"Name":"__Name__","Type":"__Type__"}],"CatalogId":"__CatalogId__","FilterExpression":"__FilterExpression__","Name":"__Name__"}]}

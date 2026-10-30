@@ -7,20 +7,20 @@
                 "error": {
                     "target": "com.amazonaws.signin#OAuth2ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "OAuth 2.0 error code indicating the specific type of access denial\nCan be TOKEN_EXPIRED, AUTHCODE_EXPIRED, USER_CREDENTIALS_CHANGED, or INSUFFICIENT_PERMISSIONS",
+                        "smithy.api#documentation": "One of TOKEN_EXPIRED, AUTHCODE_EXPIRED, USER_CREDENTIALS_CHANGED, or INSUFFICIENT_PERMISSIONS.",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Detailed message explaining the access denial\nProvides specific information about why access was denied",
+                        "smithy.api#documentation": "The reason access was denied.",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Error thrown for access denied scenarios with flexible HTTP status mapping\n\nRuntime HTTP Status Code Mapping:\n- HTTP 401 (Unauthorized): TOKEN_EXPIRED, AUTHCODE_EXPIRED\n- HTTP 403 (Forbidden): USER_CREDENTIALS_CHANGED, INSUFFICIENT_PERMISSIONS\n\nThe specific HTTP status code is determined at runtime based on the error enum value.\nConsumers should use the error field to determine the specific access denial reason.",
+                "smithy.api#documentation": "You do not have sufficient access to perform this action.",
                 "smithy.api#error": "client"
             }
         },
@@ -30,7 +30,7 @@
                 "accessKeyId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "AWS access key ID for temporary credentials",
+                        "smithy.api#documentation": "The AWS access key ID for the temporary credentials.",
                         "smithy.api#jsonName": "accessKeyId",
                         "smithy.api#required": {}
                     }
@@ -38,7 +38,7 @@
                 "secretAccessKey": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "AWS secret access key for temporary credentials",
+                        "smithy.api#documentation": "The AWS secret access key used to sign requests.",
                         "smithy.api#jsonName": "secretAccessKey",
                         "smithy.api#required": {}
                     }
@@ -46,14 +46,14 @@
                 "sessionToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "AWS session token for temporary credentials",
+                        "smithy.api#documentation": "The session token that validates the temporary security credentials.",
                         "smithy.api#jsonName": "sessionToken",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "AWS credentials structure containing temporary access credentials\n\nScoped, temporary AWS credentials with a 15-minute duration.",
+                "smithy.api#documentation": "Contains the scoped, temporary AWS credentials used to sign requests with SigV4. Valid for 15 minutes.",
                 "smithy.api#sensitive": {}
             }
         },
@@ -71,7 +71,7 @@
         "com.amazonaws.signin#AuthorizationCode": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Authorization code received from AWS Sign-In /v1/authorize endpoint\n\nThe authorization code received from AWS Sign-In from /v1/authorize.\nUsed in auth code redemption flow only.",
+                "smithy.api#documentation": "Authorization code received from AWS Sign-In. Used only in the authorization code redemption flow.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 512
@@ -81,7 +81,7 @@
         "com.amazonaws.signin#BearerTokenType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Token type for access tokens. Always \"Bearer\" per OAuth 2.1.",
+                "smithy.api#documentation": "Token type for access tokens. Currently supports \"Bearer\" as defined in RFC 6749.",
                 "smithy.api#pattern": "^Bearer$"
             }
         },
@@ -95,7 +95,7 @@
         "com.amazonaws.signin#ClientId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Client identifier pattern for AWS Sign-In devtools clients\n\nThe ARN used by client as part of Sign-In onboarding. Expected values:\n- arn:aws:signin:::devtools/cross-device (for cross-device devtools login)\n- arn:aws:signin:::devtools/same-device (for same-device devtools login)",
+                "smithy.api#documentation": "The OAuth 2.0 client identifier.",
                 "smithy.api#pattern": "^arn:aws:signin:::devtools/(cross-device|same-device)$"
             }
         },
@@ -113,7 +113,7 @@
         "com.amazonaws.signin#CodeVerifier": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "PKCE code verifier for OAuth 2.0 security\n\nPKCE code verifier to prove possession of the original code challenge.\nUsed to prevent authorization code interception attacks in public clients.\nMust be 43-128 characters using unreserved characters [A-Z] / [a-z] / [0-9] / \"-\" / \".\" / \"_\" / \"~\"",
+                "smithy.api#documentation": "PKCE code verifier used to prove possession of the original code challenge. Must be 43 to 128 characters.",
                 "smithy.api#length": {
                     "min": 43,
                     "max": 128
@@ -218,7 +218,7 @@
             ],
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "CreateOAuth2Token API\n\nPath: /v1/token\nRequest Method: POST\nContent-Type: application/json or application/x-www-form-urlencoded\n\nThis API implements OAuth 2.0 flows for AWS Sign-In CLI clients, supporting both:\n1. Authorization code redemption (grant_type=authorization_code) - NOT idempotent\n2. Token refresh (grant_type=refresh_token) - Idempotent within token validity window\n\nThe operation behavior is determined by the grant_type parameter in the request body:\n\n**Authorization Code Flow (NOT Idempotent):**\n- JSON or form-encoded body with client_id, grant_type=authorization_code, code, redirect_uri, code_verifier\n- Returns access_token, token_type, expires_in, refresh_token, and id_token\n- Each authorization code can only be used ONCE for security (prevents replay attacks)\n\n**Token Refresh Flow (Idempotent):**\n- JSON or form-encoded body with client_id, grant_type=refresh_token, refresh_token\n- Returns access_token, token_type, expires_in, and refresh_token (no id_token)\n- Multiple calls with same refresh_token return consistent results within validity window\n\nAuthentication and authorization:\n- Confidential clients: sigv4 signing required with signin:ExchangeToken permissions\n- CLI clients (public): authn/authz skipped based on client_id & grant_type\n\nNote: This operation cannot be marked as @idempotent because it handles both idempotent\n(token refresh) and non-idempotent (auth code redemption) flows in a single endpoint.",
+                "smithy.api#documentation": "Exchanges an authorization code or refresh token for an OAuth 2.0 access token and refresh token.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/token"
@@ -255,7 +255,7 @@
                 "tokenInput": {
                     "target": "com.amazonaws.signin#CreateOAuth2TokenRequestBody",
                     "traits": {
-                        "smithy.api#documentation": "Flattened token operation inputs\nThe specific operation is determined by grant_type in the request body",
+                        "smithy.api#documentation": "Flattened token operation inputs. The \"grant_type\" in the request body determines the specific operation.",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -272,7 +272,7 @@
                 "clientId": {
                     "target": "com.amazonaws.signin#ClientId",
                     "traits": {
-                        "smithy.api#documentation": "The client identifier (ARN) used during Sign-In onboarding\nRequired for both authorization code and refresh token flows",
+                        "smithy.api#documentation": "The OAuth 2.0 client identifier. Expected values: \"arn:aws:signin:::devtools/same-device\"\nor \"arn:aws:signin:::devtools/cross-device\".",
                         "smithy.api#jsonName": "clientId",
                         "smithy.api#required": {}
                     }
@@ -280,7 +280,7 @@
                 "grantType": {
                     "target": "com.amazonaws.signin#GrantType",
                     "traits": {
-                        "smithy.api#documentation": "OAuth 2.0 grant type - determines which flow is used\nMust be \"authorization_code\" or \"refresh_token\"",
+                        "smithy.api#documentation": "The OAuth 2.0 grant type. Supported values:\n- \"authorization_code\" - Exchange an authorization code for tokens.\n- \"refresh_token\" - Use a refresh token to obtain a new access token.",
                         "smithy.api#jsonName": "grantType",
                         "smithy.api#required": {}
                     }
@@ -288,33 +288,33 @@
                 "code": {
                     "target": "com.amazonaws.signin#AuthorizationCode",
                     "traits": {
-                        "smithy.api#documentation": "The authorization code received from /v1/authorize\nRequired only when grant_type=authorization_code"
+                        "smithy.api#documentation": "The authorization code received from the \"/v1/authorize\" endpoint.\nRequired when \"grant_type=authorization_code\"."
                     }
                 },
                 "redirectUri": {
                     "target": "com.amazonaws.signin#RedirectUri",
                     "traits": {
-                        "smithy.api#documentation": "The redirect URI that must match the original authorization request\nRequired only when grant_type=authorization_code",
+                        "smithy.api#documentation": "The redirect URI that was used in the original authorization request. Must match exactly.\nRequired when \"grant_type=authorization_code\".",
                         "smithy.api#jsonName": "redirectUri"
                     }
                 },
                 "codeVerifier": {
                     "target": "com.amazonaws.signin#CodeVerifier",
                     "traits": {
-                        "smithy.api#documentation": "PKCE code verifier to prove possession of the original code challenge\nRequired only when grant_type=authorization_code",
+                        "smithy.api#documentation": "The PKCE code verifier that proves possession of the original code challenge.\nRequired when \"grant_type=authorization_code\".",
                         "smithy.api#jsonName": "codeVerifier"
                     }
                 },
                 "refreshToken": {
                     "target": "com.amazonaws.signin#RefreshToken",
                     "traits": {
-                        "smithy.api#documentation": "The refresh token returned from auth_code redemption\nRequired only when grant_type=refresh_token",
+                        "smithy.api#documentation": "The refresh token issued by a previous token response.\nRequired when \"grant_type=refresh_token\".",
                         "smithy.api#jsonName": "refreshToken"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request body payload for CreateOAuth2Token operation\n\nThe operation type is determined by the grant_type parameter:\n- grant_type=authorization_code: Requires code, redirect_uri, code_verifier\n- grant_type=refresh_token: Requires refresh_token"
+                "smithy.api#documentation": "The request body for creating an OAuth 2.0 token. Supports both the authorization code and\nrefresh token flows, selected by the \"grant_type\" parameter."
             }
         },
         "com.amazonaws.signin#CreateOAuth2TokenResponse": {
@@ -323,7 +323,7 @@
                 "tokenOutput": {
                     "target": "com.amazonaws.signin#CreateOAuth2TokenResponseBody",
                     "traits": {
-                        "smithy.api#documentation": "Flattened token operation outputs\nThe specific response fields depend on the grant_type used in the request",
+                        "smithy.api#documentation": "Flattened token operation outputs.\nThe specific response fields depend on the grant_type used in the request.",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {}
                     }
@@ -340,7 +340,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.signin#AccessToken",
                     "traits": {
-                        "smithy.api#documentation": "Scoped-down AWS credentials (15 minute duration)\nPresent for both authorization code redemption and token refresh",
+                        "smithy.api#documentation": "The access token issued by the authorization server. The token contains temporary\nAWS security credentials that you use to sign requests with SigV4.",
                         "smithy.api#jsonName": "accessToken",
                         "smithy.api#required": {}
                     }
@@ -348,7 +348,7 @@
                 "tokenType": {
                     "target": "com.amazonaws.signin#TokenType",
                     "traits": {
-                        "smithy.api#documentation": "Token type indicating this is AWS SigV4 credentials\nValue is \"aws_sigv4\" for both flows",
+                        "smithy.api#documentation": "The type of token issued. Value is \"aws_sigv4\".",
                         "smithy.api#jsonName": "tokenType",
                         "smithy.api#required": {}
                     }
@@ -356,7 +356,7 @@
                 "expiresIn": {
                     "target": "com.amazonaws.signin#ExpiresIn",
                     "traits": {
-                        "smithy.api#documentation": "Time to expiry in seconds (maximum 900)\nPresent for both authorization code redemption and token refresh",
+                        "smithy.api#documentation": "The number of seconds until the access token expires. Maximum value is 900 seconds (15 minutes).",
                         "smithy.api#jsonName": "expiresIn",
                         "smithy.api#required": {}
                     }
@@ -364,7 +364,7 @@
                 "refreshToken": {
                     "target": "com.amazonaws.signin#RefreshToken",
                     "traits": {
-                        "smithy.api#documentation": "Encrypted refresh token with cnf.jkt (SHA-256 thumbprint of presented jwk)\nAlways present in responses (required for both flows)",
+                        "smithy.api#documentation": "A refresh token that can be used to obtain new access tokens without re-authenticating.",
                         "smithy.api#jsonName": "refreshToken",
                         "smithy.api#required": {}
                     }
@@ -372,13 +372,13 @@
                 "idToken": {
                     "target": "com.amazonaws.signin#IdToken",
                     "traits": {
-                        "smithy.api#documentation": "ID token containing user identity information\nPresent only in authorization code redemption response (grant_type=authorization_code)\nNot included in token refresh responses",
+                        "smithy.api#documentation": "A JSON Web Token (JWT) containing user identity claims. Present only when\n\"grant_type=authorization_code\". Not included in refresh token responses.",
                         "smithy.api#jsonName": "idToken"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response body payload for CreateOAuth2Token operation\n\nThe response content depends on the grant_type from the request:\n- grant_type=authorization_code: Returns all fields including refresh_token and id_token\n- grant_type=refresh_token: Returns access_token, token_type, expires_in, refresh_token (no id_token)"
+                "smithy.api#documentation": "The response body for an OAuth 2.0 token request. The fields returned depend on the \"grant_type\".\nThe authorization code flow returns \"refresh_token\" and \"id_token\". The refresh token flow omits \"id_token\"."
             }
         },
         "com.amazonaws.signin#CreateOAuth2TokenWithIAM": {
@@ -411,7 +411,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "Grants permission to exchange client credentials for an OAuth 2.0 access token\nscoped to a resource that can be used to access AWS services from applications",
+                "smithy.api#documentation": "Exchanges client credentials for an OAuth 2.0 access token scoped to a resource, which you can use to access AWS services from applications.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/token?x-amz-client-auth-method=iam"
@@ -429,19 +429,15 @@
                 "grantType": {
                     "target": "com.amazonaws.signin#ClientCredentialsGrantType",
                     "traits": {
-                        "smithy.api#documentation": "OAuth 2.0 grant type. Must be \"client_credentials\".",
+                        "smithy.api#documentation": "The OAuth 2.0 grant type. Must be \"client_credentials\".",
                         "smithy.api#jsonName": "grant_type",
                         "smithy.api#required": {}
                     }
                 },
                 "resource": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.signin#Resource",
                     "traits": {
                         "smithy.api#documentation": "The OAuth resource for which the access token is requested.\nExample: \"aws-mcp.amazonaws.com\".",
-                        "smithy.api#length": {
-                            "min": 1,
-                            "max": 2048
-                        },
                         "smithy.api#required": {}
                     }
                 }
@@ -457,7 +453,7 @@
                 "accessToken": {
                     "target": "com.amazonaws.signin#OAuthAccessToken",
                     "traits": {
-                        "smithy.api#documentation": "JWT access token containing principal identity, resource scope, and session metadata",
+                        "smithy.api#documentation": "Access token containing principal identity, resource scope, and session metadata.",
                         "smithy.api#jsonName": "access_token",
                         "smithy.api#required": {}
                     }
@@ -465,7 +461,7 @@
                 "tokenType": {
                     "target": "com.amazonaws.signin#BearerTokenType",
                     "traits": {
-                        "smithy.api#documentation": "Always \"Bearer\" per OAuth 2.1 specification",
+                        "smithy.api#documentation": "The token type. Always \"Bearer\" as defined in RFC 6749.",
                         "smithy.api#jsonName": "token_type",
                         "smithy.api#required": {}
                     }
@@ -473,14 +469,143 @@
                 "expiresIn": {
                     "target": "com.amazonaws.signin#TokenExpiresIn",
                     "traits": {
-                        "smithy.api#documentation": "Token lifetime in seconds. Value is the minimum of session validity and 1 hour.",
+                        "smithy.api#documentation": "Token lifetime in seconds. Value is the minimum of the caller's session validity and 1 hour (3600 seconds).",
                         "smithy.api#jsonName": "expires_in",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Output structure for CreateOAuth2TokenWithIAM operation\n\nContains the JWT access token, token type, and expiration per RFC 6749 §5.1.",
+                "smithy.api#documentation": "Output structure for CreateOAuth2TokenWithIAM operation\n\nContains the access token, token type, and expiration as defined in RFC 6749 §5.1.",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchange": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchangeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchangeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.signin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InvalidGrantException"
+                },
+                {
+                    "target": "com.amazonaws.signin#InvalidScopeException"
+                },
+                {
+                    "target": "com.amazonaws.signin#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.signin#TooManyRequestsError"
+                },
+                {
+                    "target": "com.amazonaws.signin#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "CreateOAuth2Token",
+                    "documentation": "Exchange a subject token for an OAuth 2.0 access token scoped to a resource"
+                },
+                "smithy.api#auth": [],
+                "smithy.api#documentation": "Exchanges a supported token for an OAuth 2.0 access token scoped to a resource, which you can use to access AWS services from applications.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/token?x-amz-oauth-token-method=token-exchange"
+                },
+                "smithy.rules#staticContextParams": {
+                    "IsOAuthEndpoint": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchangeRequest": {
+            "type": "structure",
+            "members": {
+                "grantType": {
+                    "target": "com.amazonaws.signin#TokenExchangeGrantType",
+                    "traits": {
+                        "smithy.api#documentation": "The OAuth 2.0 grant type. Currently only supports \"urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "smithy.api#jsonName": "grant_type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subjectToken": {
+                    "target": "com.amazonaws.signin#SubjectToken",
+                    "traits": {
+                        "smithy.api#documentation": "The subject token that represents the identity of the party on whose behalf the request is made.\nRequired when \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "smithy.api#jsonName": "subject_token"
+                    }
+                },
+                "subjectTokenType": {
+                    "target": "com.amazonaws.signin#SubjectTokenType",
+                    "traits": {
+                        "smithy.api#documentation": "The token type of the subject token. Currently only supports \"urn:ietf:params:oauth:token-type:jwt\".\nRequired when \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".",
+                        "smithy.api#jsonName": "subject_token_type"
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.signin#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "The OAuth resource for which the access token is requested.\nRequired when \"grant_type=urn:ietf:params:oauth:grant-type:token-exchange\".\nExample: \"glue.amazonaws.com\"."
+                    }
+                },
+                "scope": {
+                    "target": "com.amazonaws.signin#Scope",
+                    "traits": {
+                        "smithy.api#documentation": "IAM managed policy Amazon Resource Names (ARNs) to apply as session policies that further\nscope down the permissions of the issued access token, provided as a space-delimited list.\nExample: \"arn:aws:iam::444455556666:policy/MyPolicy\"."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input structure for CreateOAuth2TokenWithTokenExchange operation",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchangeResponse": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "com.amazonaws.signin#OAuthAccessToken",
+                    "traits": {
+                        "smithy.api#documentation": "Access token containing principal identity, resource scope, and session metadata.",
+                        "smithy.api#jsonName": "access_token",
+                        "smithy.api#required": {}
+                    }
+                },
+                "issuedTokenType": {
+                    "target": "com.amazonaws.signin#IssuedOAuthAccessTokenType",
+                    "traits": {
+                        "smithy.api#documentation": "The token type of the issued token. Always \"urn:ietf:params:oauth:token-type:access_token\" as defined in RFC 8693 §2.2.1.",
+                        "smithy.api#jsonName": "issued_token_type"
+                    }
+                },
+                "tokenType": {
+                    "target": "com.amazonaws.signin#BearerTokenType",
+                    "traits": {
+                        "smithy.api#documentation": "The token type. Currently only supports \"Bearer\" as defined in RFC 6749.",
+                        "smithy.api#jsonName": "token_type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.signin#TokenExpiresIn",
+                    "traits": {
+                        "smithy.api#documentation": "Token lifetime in seconds. Value is the minimum of the subject token's validity and 1 hour (3600 seconds).",
+                        "smithy.api#jsonName": "expires_in",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output structure for CreateOAuth2TokenWithTokenExchange operation.\n\nContains the access token, issued token type, token type, and expiration as defined in RFC 6749 §5.1 and RFC 8693 §2.2.1.",
                 "smithy.api#output": {}
             }
         },
@@ -657,7 +782,7 @@
         "com.amazonaws.signin#ExpiresIn": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Time to expiry in seconds\n\nThe time to expiry in seconds, for these purposes will be at most 900 (15 minutes).",
+                "smithy.api#documentation": "Time to expiry in seconds. At most 900 (15 minutes).",
                 "smithy.api#range": {
                     "min": 1,
                     "max": 900
@@ -817,14 +942,14 @@
         "com.amazonaws.signin#GrantType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "OAuth 2.0 grant type parameter\n\nFor auth code redemption: Must be \"authorization_code\"\nFor token refresh: Must be \"refresh_token\"\n\nBased on client_id & grant_type, authn/authz is skipped for CLI endpoints.",
+                "smithy.api#documentation": "The OAuth 2.0 grant type. \"authorization_code\" for authorization code redemption, \"refresh_token\" for token refresh.",
                 "smithy.api#pattern": "^(authorization_code|refresh_token)$"
             }
         },
         "com.amazonaws.signin#IdToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ID token containing user identity information\n\nEncoded JWT token containing user identity claims and authentication context.\nReturned only in authorization code redemption responses (grant_type=authorization_code).\nContains user identity information such as ARN and other identity claims.",
+                "smithy.api#documentation": "ID token (JWT) containing user identity claims. Returned only for authorization code redemption.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
@@ -837,20 +962,20 @@
                 "error": {
                     "target": "com.amazonaws.signin#OAuth2ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "OAuth 2.0 error code indicating server error\nWill be SERVER_ERROR for internal server errors",
+                        "smithy.api#documentation": "Will be server_error.",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Detailed message explaining the server error\nMay include error details for debugging purposes",
+                        "smithy.api#documentation": "The server error detail.",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Error thrown when an internal server error occurs\n\nHTTP Status Code: 500 Internal Server Error\n\nUsed for unexpected server-side errors that prevent request processing.",
+                "smithy.api#documentation": "The request failed because of an internal server error.",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -885,7 +1010,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "Grants permission to inspect the metadata and state of an OAuth 2.0\naccess token or refresh token\n\nImplements RFC 7662 OAuth 2.0 Token Introspection over a SigV4-authenticated\nendpoint. Inspects the metadata of an access_token or refresh_token issued\nby AWS Sign-In and returns the claims associated with it.\n\nInactive token semantics (RFC 7662 §2.2): when the supplied token is\nunknown, expired, revoked, malformed, or owned by a different account,\nthe response body is exactly { \"active\": false } with all other claims\nomitted.",
+                "smithy.api#documentation": "Inspects the metadata and active state of an OAuth 2.0 access token or refresh token.\n\nImplements RFC 7662 OAuth 2.0 Token Introspection over a SigV4-authenticated\nendpoint. Returns the claims associated with a token issued by AWS Sign-In.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/introspect?x-amz-client-auth-method=iam"
@@ -904,7 +1029,7 @@
                 "token": {
                     "target": "com.amazonaws.signin#IntrospectionToken",
                     "traits": {
-                        "smithy.api#documentation": "The string value of the token to introspect.\nMay be either an access_token or a refresh_token issued by AWS Sign-In.",
+                        "smithy.api#documentation": "The access token or refresh token issued by AWS Sign-In.",
                         "smithy.api#jsonName": "token",
                         "smithy.api#required": {}
                     }
@@ -912,7 +1037,7 @@
                 "tokenTypeHint": {
                     "target": "com.amazonaws.signin#TokenTypeHint",
                     "traits": {
-                        "smithy.api#documentation": "Optional hint about the type of the token submitted for introspection.\nThe server uses this hint to optimize lookup, but still falls back to\nthe other token type on miss. Allowed values: access_token, refresh_token.",
+                        "smithy.api#documentation": "An optional hint about the type of the token submitted for introspection, as defined in RFC 7662 §2.1.\nThe server checks both token types regardless of the hint. Allowed values: \"access_token\", \"refresh_token\".",
                         "smithy.api#jsonName": "token_type_hint"
                     }
                 }
@@ -928,7 +1053,7 @@
                 "active": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "Indicates whether the token is currently active. `true` only when the\ntoken is valid, has not expired, has not been revoked, and belongs to\nthe caller's account.",
+                        "smithy.api#documentation": "Indicates whether the token is currently active. Returns \"true\" only when the token is valid,\nhas not expired, has not been revoked, and belongs to the caller's account.",
                         "smithy.api#required": {}
                     }
                 },
@@ -942,7 +1067,7 @@
                 "userId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "User identifier matching sts:GetCallerIdentity's `UserId` field for the\ntoken's subject principal (e.g. \"AIDAEXAMPLE\" for an IAM user, or\n\"AROAEXAMPLE:session-name\" for an assumed role).",
+                        "smithy.api#documentation": "User identifier matching the \"UserId\" field from \"sts:GetCallerIdentity\" for the token's subject principal.",
                         "smithy.api#jsonName": "user_id"
                     }
                 },
@@ -977,14 +1102,14 @@
                 "sub": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Subject of the token: the IAM principal ARN. For assumed-role sessions,\nthis is the session ARN (matches sts:GetCallerIdentity's `Arn` field),\ne.g. arn:aws:sts::123456789012:assumed-role/MyRole/session-name.",
+                        "smithy.api#documentation": "The IAM principal Amazon Resource Name (ARN). For assumed-role sessions, this is the session ARN.",
                         "smithy.api#jsonName": "sub"
                     }
                 },
                 "aud": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Audience of the token: the OAuth resource the token is scoped to\n(for example, \"aws-mcp.amazonaws.com\"). Omitted for refresh tokens.",
+                        "smithy.api#documentation": "The OAuth resource the token is scoped to. Omitted for refresh tokens.\nExample: \"aws-mcp.amazonaws.com\".",
                         "smithy.api#jsonName": "aud"
                     }
                 },
@@ -1017,9 +1142,9 @@
                     }
                 },
                 "resource": {
-                    "target": "smithy.api#String",
+                    "target": "com.amazonaws.signin#Resource",
                     "traits": {
-                        "smithy.api#documentation": "The OAuth resource the token is scoped to during Human OAuth flow.\nOnly present for refresh token introspection.",
+                        "smithy.api#documentation": "The OAuth resource the token is scoped to. Only present for refresh token introspection.",
                         "smithy.api#jsonName": "resource"
                     }
                 }
@@ -1032,20 +1157,72 @@
         "com.amazonaws.signin#IntrospectedTokenType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Introspection response token_type value. Indicates which kind of token\nwas inspected.",
+                "smithy.api#documentation": "The token_type value in the introspection response.",
                 "smithy.api#pattern": "^(access_token|refresh_token)$"
             }
         },
         "com.amazonaws.signin#IntrospectionToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Token string submitted for introspection. May be an AWS Sign-In\naccess_token (prefix \"ASOA\") or refresh_token (prefix \"ASOR\").",
+                "smithy.api#documentation": "Token string submitted for introspection. May be an AWS Sign-In access token or refresh token.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
                 },
                 "smithy.api#pattern": "^ASO[AR][A-Za-z0-9+/=_\\-]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.signin#InvalidGrantException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "Will be invalid_grant.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request failed because the provided grant is invalid or expired.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.signin#InvalidScopeException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "Will be invalid_scope.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request failed because the requested scope is invalid or exceeds the scope that can be granted.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.signin#IssuedOAuthAccessTokenType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^urn:ietf:params:oauth:token-type:access_token$"
             }
         },
         "com.amazonaws.signin#ListResourcePermissionStatements": {
@@ -1156,64 +1333,106 @@
                 "TOKEN_EXPIRED": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Token has expired and needs to be refreshed",
+                        "smithy.api#documentation": "Token has expired.",
                         "smithy.api#enumValue": "TOKEN_EXPIRED"
                     }
                 },
                 "USER_CREDENTIALS_CHANGED": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "User credentials have been changed",
+                        "smithy.api#documentation": "User credentials have been changed.",
                         "smithy.api#enumValue": "USER_CREDENTIALS_CHANGED"
                     }
                 },
                 "INSUFFICIENT_PERMISSIONS": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Insufficient permissions to perform this operation",
+                        "smithy.api#documentation": "Insufficient permissions to perform this operation.",
                         "smithy.api#enumValue": "INSUFFICIENT_PERMISSIONS"
                     }
                 },
                 "AUTHCODE_EXPIRED": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Authorization code has expired",
+                        "smithy.api#documentation": "Authorization code has expired.",
                         "smithy.api#enumValue": "AUTHCODE_EXPIRED"
                     }
                 },
                 "SERVER_ERROR": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Internal server error occurred",
+                        "smithy.api#documentation": "Internal server error occurred.",
                         "smithy.api#enumValue": "server_error"
                     }
                 },
                 "INVALID_REQUEST": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed",
+                        "smithy.api#documentation": "The request is missing a required parameter, includes an invalid parameter value, or is otherwise malformed.",
                         "smithy.api#enumValue": "INVALID_REQUEST"
                     }
                 },
                 "RESOURCE_NOT_FOUND": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Requested resource was not found",
+                        "smithy.api#documentation": "Requested resource was not found.",
                         "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
                     }
                 },
                 "CONFLICT": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Request conflicts with current state of the resource",
+                        "smithy.api#documentation": "Request conflicts with the current state of the resource.",
                         "smithy.api#enumValue": "CONFLICT"
                     }
                 },
                 "SERVICE_QUOTA_EXCEEDED": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Request would cause a service quota to be exceeded",
+                        "smithy.api#documentation": "Request would cause a service quota to be exceeded.",
                         "smithy.api#enumValue": "SERVICE_QUOTA_EXCEEDED"
+                    }
+                },
+                "OAUTH_UNSUPPORTED_GRANT_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unsupported_grant_type"
+                    }
+                },
+                "OAUTH_INVALID_REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid_request"
+                    }
+                },
+                "OAUTH_INVALID_GRANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid_grant"
+                    }
+                },
+                "OAUTH_INVALID_SCOPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid_scope"
+                    }
+                },
+                "OAUTH_INVALID_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "invalid_target"
+                    }
+                },
+                "OAUTH_RATE_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rate_exceeded"
+                    }
+                },
+                "OAUTH_SERVICE_UNAVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "service_unavailable"
                     }
                 }
             },
@@ -1224,7 +1443,7 @@
         "com.amazonaws.signin#OAuthAccessToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "OAuth 2.0 access token (JWT) containing principal identity and resource scope.",
+                "smithy.api#documentation": "OAuth 2.0 access token containing principal identity and resource scope.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
@@ -1541,7 +1760,7 @@
         "com.amazonaws.signin#RedirectUri": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Redirect URI for OAuth 2.0 flow validation\n\nThe same redirect URI used in the authorization request. This must match exactly\nwhat was sent in the original authorization request for security validation.",
+                "smithy.api#documentation": "The redirect URI from the authorization request. Must match the original request exactly.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -1551,7 +1770,7 @@
         "com.amazonaws.signin#RefreshToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Encrypted refresh token with cnf.jkt\n\nThis is the encrypted refresh token returned from auth code redemption.\nThe token content includes cnf.jkt (SHA-256 thumbprint of the presented jwk).\nUsed in subsequent token refresh requests.",
+                "smithy.api#documentation": "The refresh token returned from authorization code redemption. Used in subsequent token refresh requests.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
@@ -1564,6 +1783,15 @@
             "traits": {
                 "smithy.api#documentation": "AWS region identifier for VPC and VPC endpoint pairing",
                 "smithy.api#pattern": "^[a-z]{2}(-[a-z]+)+-\\d+$"
+            }
+        },
+        "com.amazonaws.signin#Resource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.signin#ResourceNotFoundException": {
@@ -1593,7 +1821,7 @@
         "com.amazonaws.signin#RevocationToken": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Refresh token string submitted for revocation. Must be an AWS Sign-In\nrefresh_token (prefix \"ASOR\").",
+                "smithy.api#documentation": "Refresh token string submitted for revocation.",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 4096
@@ -1632,7 +1860,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "Grants permission to revoke an OAuth 2.0 refresh token and its associated refresh tokens\n\nRevokes a refresh_token issued by AWS Sign-In, invalidating the entire token\nchain so that the refresh_token can no longer be used to mint new access_tokens.\n\nIdempotency: revoking an already-revoked, expired, or otherwise invalid token\nstill returns 200 OK with an empty body. Only the refresh_token type is accepted.",
+                "smithy.api#documentation": "Revokes an OAuth 2.0 refresh token and its associated token chain.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/revoke?x-amz-client-auth-method=iam"
@@ -1651,7 +1879,7 @@
                 "token": {
                     "target": "com.amazonaws.signin#RevocationToken",
                     "traits": {
-                        "smithy.api#documentation": "The refresh_token to revoke. Must be a refresh_token issued by AWS\nSign-In (prefix \"ASOR\"); access_tokens are not accepted for revocation.",
+                        "smithy.api#documentation": "The refresh token to revoke. Must be a refresh token issued by AWS Sign-In.\nAccess tokens are not accepted for revocation.",
                         "smithy.api#jsonName": "token",
                         "smithy.api#required": {}
                     }
@@ -1668,6 +1896,15 @@
             "traits": {
                 "smithy.api#documentation": "Output structure for RevokeOAuth2TokenWithIAM operation\n\nRFC 7009 §2.2 revocation response. The endpoint returns 200 OK with an\nempty body on success; there are no response fields.",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.signin#Scope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
             }
         },
         "com.amazonaws.signin#ServiceQuotaExceededException": {
@@ -1694,6 +1931,30 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.signin#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.signin#OAuth2ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "Will be service_unavailable.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request failed because a dependency is temporarily unavailable. You can retry the request.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.signin#Signin": {
             "type": "service",
             "version": "2023-01-01",
@@ -1703,6 +1964,9 @@
                 },
                 {
                     "target": "com.amazonaws.signin#CreateOAuth2TokenWithIAM"
+                },
+                {
+                    "target": "com.amazonaws.signin#CreateOAuth2TokenWithTokenExchange"
                 },
                 {
                     "target": "com.amazonaws.signin#DeleteConsoleAuthorizationConfiguration"
@@ -1771,7 +2035,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "AWS Sign-In manages authentication for AWS services. This service provides\nsecure authentication flows for accessing AWS resources from the console and developer tools.",
+                "smithy.api#documentation": "AWS Sign-In manages authentication for AWS services. It implements OAuth 2.0, providing secure token exchange and refresh capabilities.",
                 "smithy.api#title": "AWS Sign-In Service",
                 "smithy.rules#endpointBdd": {
                     "version": "1.1",
@@ -4179,6 +4443,22 @@
                 "smithy.api#pattern": "^[A-Za-z0-9+/]{64}=?$"
             }
         },
+        "com.amazonaws.signin#SubjectToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 20000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.signin#SubjectTokenType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^urn:ietf:params:oauth:token-type:.+$"
+            }
+        },
         "com.amazonaws.signin#TargetId": {
             "type": "string",
             "traits": {
@@ -4190,10 +4470,16 @@
                 "smithy.api#pattern": "^(\\d{12}|o-[a-z0-9]{10}|r-[0-9a-z]{4,32})$"
             }
         },
+        "com.amazonaws.signin#TokenExchangeGrantType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^urn:ietf:params:oauth:grant-type:token-exchange$"
+            }
+        },
         "com.amazonaws.signin#TokenExpiresIn": {
             "type": "integer",
             "traits": {
-                "smithy.api#documentation": "Token lifetime in seconds.\nValue is the minimum of session validity and 1 hour (3600 seconds).",
+                "smithy.api#documentation": "Token lifetime in seconds. The lesser of session validity and 3600 (1 hour).",
                 "smithy.api#range": {
                     "min": 1,
                     "max": 3600
@@ -4203,14 +4489,14 @@
         "com.amazonaws.signin#TokenType": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Token type parameter indicating credential usage\n\nA parameter which indicates to the client how the token must be used.\nValue is \"aws_sigv4\" (instead of typical \"Bearer\" for other OAuth systems)\nto indicate that the client must de-serialize the token and use it to generate a signature.",
+                "smithy.api#documentation": "The token type. \"aws_sigv4\" indicates the client must use the token to generate a SigV4 signature.",
                 "smithy.api#pattern": "^aws_sigv4$"
             }
         },
         "com.amazonaws.signin#TokenTypeHint": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Optional RFC 7662 §2.1 token_type_hint value. One of:\n- \"access_token\"\n- \"refresh_token\"",
+                "smithy.api#documentation": "Optional token_type_hint value, as defined in RFC 7662 §2.1. One of \"access_token\" or \"refresh_token\".",
                 "smithy.api#pattern": "^(access_token|refresh_token)$"
             }
         },
@@ -4220,20 +4506,20 @@
                 "error": {
                     "target": "com.amazonaws.signin#OAuth2ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "OAuth 2.0 error code indicating the specific type of error\nWill be INVALID_REQUEST for rate limiting scenarios",
+                        "smithy.api#documentation": "Will be rate_exceeded.",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Detailed message about the rate limiting\nMay include retry-after information or rate limit details",
+                        "smithy.api#documentation": "Details about the rate limit.",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Error thrown when rate limit is exceeded\n\nHTTP Status Code: 429 Too Many Requests\n\nPossible OAuth2ErrorCode values:\n- INVALID_REQUEST: Rate limiting, too many requests, abuse prevention\n\nPossible causes:\n- Too many token requests from the same client\n- Rate limiting based on client_id or IP address\n- Abuse prevention mechanisms triggered\n- Service protection against excessive token generation",
+                "smithy.api#documentation": "The request failed because you exceeded the request rate limit for this operation.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -4244,20 +4530,20 @@
                 "error": {
                     "target": "com.amazonaws.signin#OAuth2ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "OAuth 2.0 error code indicating validation failure\nWill be INVALID_REQUEST for validation errors",
+                        "smithy.api#documentation": "The specific code depends on which validation failed.",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Detailed message explaining the validation failure\nProvides specific information about which validation failed",
+                        "smithy.api#documentation": "The validation constraint that failed.",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Error thrown when request validation fails\n\nHTTP Status Code: 400 Bad Request\n\nUsed for request validation errors such as malformed parameters,\nmissing required fields, or invalid parameter values.",
+                "smithy.api#documentation": "The request failed because it contains a malformed, missing, or invalid parameter.",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

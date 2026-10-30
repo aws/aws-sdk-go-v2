@@ -5,7 +5,9 @@ package macie2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -51,6 +53,30 @@ type GetUsageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfUsageStatisticsFilter(s, schemas.GetUsageStatisticsRequest_filterBy, v.FilterBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetUsageStatisticsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetUsageStatisticsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.GetUsageStatisticsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeRange != "" {
+		s.WriteString(schemas.GetUsageStatisticsRequest_timeRange, string(v.TimeRange))
+	}
+}
+
 type GetUsageStatisticsOutput struct {
 
 	// The string to use in a subsequent request to get the next page of results in a
@@ -73,13 +99,45 @@ type GetUsageStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetUsageStatisticsResponse_nextToken, *v.NextToken)
+	}
+	serialize__listOfUsageRecord(s, schemas.GetUsageStatisticsResponse_records, v.Records)
+	if v.TimeRange != "" {
+		s.WriteString(schemas.GetUsageStatisticsResponse_timeRange, string(v.TimeRange))
+	}
+}
+func (v *GetUsageStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageStatisticsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetUsageStatisticsResponse_nextToken, v.NextToken)
+		case schemas.GetUsageStatisticsResponse_records:
+			return deserialize__listOfUsageRecord(d, schemas.GetUsageStatisticsResponse_records, &v.Records)
+		case schemas.GetUsageStatisticsResponse_timeRange:
+			var ev string
+			if err := d.ReadString(schemas.GetUsageStatisticsResponse_timeRange, &ev); err != nil {
+				return err
+			}
+			v.TimeRange = types.TimeRange(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageStatistics, schemas.GetUsageStatisticsRequest, schemas.GetUsageStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageStatistics, schemas.GetUsageStatisticsRequest, schemas.GetUsageStatisticsResponse), output: &GetUsageStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

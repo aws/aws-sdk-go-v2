@@ -5,6 +5,8 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -34,6 +36,18 @@ type GetRunGroupInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRunGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunGroupRequest_id, *v.Id)
+	}
 }
 
 type GetRunGroupOutput struct {
@@ -71,13 +85,77 @@ type GetRunGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRunGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRunGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRunGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRunGroupResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetRunGroupResponse_creationTime, *v.CreationTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetRunGroupResponse_id, *v.Id)
+	}
+	if v.MaxCpus != nil {
+		s.WriteInt32(schemas.GetRunGroupResponse_maxCpus, *v.MaxCpus)
+	}
+	if v.MaxDuration != nil {
+		s.WriteInt32(schemas.GetRunGroupResponse_maxDuration, *v.MaxDuration)
+	}
+	if v.MaxGpus != nil {
+		s.WriteInt32(schemas.GetRunGroupResponse_maxGpus, *v.MaxGpus)
+	}
+	if v.MaxRuns != nil {
+		s.WriteInt32(schemas.GetRunGroupResponse_maxRuns, *v.MaxRuns)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetRunGroupResponse_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.GetRunGroupResponse_tags, v.Tags)
+}
+func (v *GetRunGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRunGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRunGroupResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetRunGroupResponse_arn, v.Arn)
+		case schemas.GetRunGroupResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetRunGroupResponse_creationTime, v.CreationTime)
+		case schemas.GetRunGroupResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetRunGroupResponse_id, v.Id)
+		case schemas.GetRunGroupResponse_maxCpus:
+			v.MaxCpus = new(int32)
+			return d.ReadInt32(schemas.GetRunGroupResponse_maxCpus, v.MaxCpus)
+		case schemas.GetRunGroupResponse_maxDuration:
+			v.MaxDuration = new(int32)
+			return d.ReadInt32(schemas.GetRunGroupResponse_maxDuration, v.MaxDuration)
+		case schemas.GetRunGroupResponse_maxGpus:
+			v.MaxGpus = new(int32)
+			return d.ReadInt32(schemas.GetRunGroupResponse_maxGpus, v.MaxGpus)
+		case schemas.GetRunGroupResponse_maxRuns:
+			v.MaxRuns = new(int32)
+			return d.ReadInt32(schemas.GetRunGroupResponse_maxRuns, v.MaxRuns)
+		case schemas.GetRunGroupResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetRunGroupResponse_name, v.Name)
+		case schemas.GetRunGroupResponse_tags:
+			return deserializeTagMap(d, schemas.GetRunGroupResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRunGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRunGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRunGroup, schemas.GetRunGroupRequest, schemas.GetRunGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRunGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRunGroup, schemas.GetRunGroupRequest, schemas.GetRunGroupResponse), output: &GetRunGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

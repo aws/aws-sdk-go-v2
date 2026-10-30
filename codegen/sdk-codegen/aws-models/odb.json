@@ -3599,7 +3599,7 @@
                 "totalStorageSizeInGBs": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.</p>"
+                        "smithy.api#documentation": "<p>The total amount of storage, in gigabytes (GB), on the Exadata infrastructure.</p>"
                     }
                 },
                 "percentProgress": {
@@ -3624,6 +3624,12 @@
                     "target": "com.amazonaws.odb#ComputeModel",
                     "traits": {
                         "smithy.api#documentation": "<p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>"
+                    }
+                },
+                "exascaleConfiguration": {
+                    "target": "com.amazonaws.odb#ExascaleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Exascale storage configuration of the Exadata infrastructure. This value is present only when Exascale storage is configured on the infrastructure.</p>"
                     }
                 }
             },
@@ -3668,6 +3674,9 @@
                 },
                 {
                     "target": "com.amazonaws.odb#ListDbServers"
+                },
+                {
+                    "target": "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructure"
                 }
             ],
             "traits": {
@@ -3885,7 +3894,7 @@
                 "totalStorageSizeInGBs": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total amount of storage, in gigabytes (GB), on the the Exadata infrastructure.</p>"
+                        "smithy.api#documentation": "<p>The total amount of storage, in gigabytes (GB), on the Exadata infrastructure.</p>"
                     }
                 },
                 "percentProgress": {
@@ -3910,6 +3919,12 @@
                     "target": "com.amazonaws.odb#ComputeModel",
                     "traits": {
                         "smithy.api#documentation": "<p>The OCI model compute model used when you create or clone an instance: ECPU or OCPU. An ECPU is an abstracted measure of compute resources. ECPUs are based on the number of cores elastically allocated from a pool of compute and storage servers. An OCPU is a legacy physical measure of compute resources. OCPUs are based on the physical core of a processor with hyper-threading enabled. </p>"
+                    }
+                },
+                "exascaleConfiguration": {
+                    "target": "com.amazonaws.odb#ExascaleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Exascale storage configuration of the Exadata infrastructure. This value is present only when Exascale storage is configured on the infrastructure.</p>"
                     }
                 }
             },
@@ -4011,6 +4026,42 @@
                     "target": "com.amazonaws.odb#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM cluster belongs to.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault that the VM cluster uses. This value is present only for VM clusters that use an Exascale storage vault.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale storage vault that the VM cluster uses. This value is present only for VM clusters that use an Exascale storage vault.</p>"
+                    }
+                },
+                "storageManagementType": {
+                    "target": "com.amazonaws.odb#StorageManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage management for the VM cluster. A value of <code>ASM</code> indicates Oracle Automatic Storage Management, and <code>EXASCALE</code> indicates Exascale storage.</p>"
+                    }
+                },
+                "vmFileSystemStorageType": {
+                    "target": "com.amazonaws.odb#VmStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage that the VM cluster uses for its VM file systems.</p>"
+                    }
+                },
+                "vmBackupStorageType": {
+                    "target": "com.amazonaws.odb#VmStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage that the VM cluster uses for VM backups.</p>"
+                    }
+                },
+                "fileSystemConfigurationDetails": {
+                    "target": "com.amazonaws.odb#FileSystemConfigurationDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of file system configurations for the VM cluster.</p>"
                     }
                 },
                 "clusterName": {
@@ -4313,6 +4364,42 @@
                     "target": "com.amazonaws.odb#ResourceArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure that this VM cluster belongs to.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exascale storage vault that the VM cluster uses. This value is present only for VM clusters that use an Exascale storage vault.</p>"
+                    }
+                },
+                "exascaleDbStorageVaultArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exascale storage vault that the VM cluster uses. This value is present only for VM clusters that use an Exascale storage vault.</p>"
+                    }
+                },
+                "storageManagementType": {
+                    "target": "com.amazonaws.odb#StorageManagementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage management for the VM cluster. A value of <code>ASM</code> indicates Oracle Automatic Storage Management, and <code>EXASCALE</code> indicates Exascale storage.</p>"
+                    }
+                },
+                "vmFileSystemStorageType": {
+                    "target": "com.amazonaws.odb#VmStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage that the VM cluster uses for its VM file systems.</p>"
+                    }
+                },
+                "vmBackupStorageType": {
+                    "target": "com.amazonaws.odb#VmStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage that the VM cluster uses for VM backups.</p>"
+                    }
+                },
+                "fileSystemConfigurationDetails": {
+                    "target": "com.amazonaws.odb#FileSystemConfigurationDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of file system configurations for the VM cluster.</p>"
                     }
                 },
                 "clusterName": {
@@ -5650,6 +5737,30 @@
                         "smithy.api#required": {}
                     }
                 },
+                "exascaleDbStorageVaultId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier or Amazon Resource Name (ARN) of the Exascale storage vault to use for the VM cluster. Specify this value to create a VM cluster that uses Exascale storage on dedicated Exadata infrastructure.</p>"
+                    }
+                },
+                "vmFileSystemStorageType": {
+                    "target": "com.amazonaws.odb#VmStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage to use for the VM file systems. Specify <code>EXASCALE</code> to store the VM file systems in Exascale storage on the storage servers, or <code>LOCAL</code> to store them on the database servers.</p>"
+                    }
+                },
+                "vmBackupStorageType": {
+                    "target": "com.amazonaws.odb#VmStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of storage to use for VM backups. Specify <code>EXASCALE</code> to store VM backups in Exascale storage on the storage servers, or <code>LOCAL</code> to store them on the database servers.</p>"
+                    }
+                },
+                "fileSystemConfigurationDetails": {
+                    "target": "com.amazonaws.odb#FileSystemConfigurationDetailsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of file system configurations for the VM cluster. Each entry specifies the mount point of a file system and its size, in gigabytes (GB).</p>"
+                    }
+                },
                 "cpuCoreCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
@@ -5807,6 +5918,9 @@
                 "smithy.api#references": [
                     {
                         "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
+                    },
+                    {
+                        "resource": "com.amazonaws.odb#ExascaleDbStorageVaultResource"
                     },
                     {
                         "resource": "com.amazonaws.odb#OdbNetworkResource"
@@ -6018,7 +6132,7 @@
                 "scanListenerPortTcpSsl": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number for TCP connections with SSL to the Single Client Access Name (SCAN) listener.</p>",
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>",
                         "smithy.api#range": {
                             "min": 1024,
                             "max": 8999
@@ -6133,6 +6247,9 @@
                     "target": "com.amazonaws.odb#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.odb#ServiceQuotaExceededException"
                 },
                 {
@@ -6147,7 +6264,7 @@
                     "aws:RequestTag/${TagKey}",
                     "aws:TagKeys"
                 ],
-                "smithy.api#documentation": "<p>Creates an Exascale storage vault.</p>",
+                "smithy.api#documentation": "<p>Creates an Exascale storage vault.</p> <p>To create the Exascale storage vault on dedicated Exadata infrastructure, specify <code>cloudExadataInfrastructureId</code>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6187,6 +6304,12 @@
                         "smithy.api#range": {
                             "min": 0
                         }
+                    }
+                },
+                "cloudExadataInfrastructureId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier or Amazon Resource Name (ARN) of the Exadata infrastructure on which to create the Exascale storage vault. Specify this value to create the Exascale storage vault on dedicated Exadata infrastructure that has Exascale storage configured. If you specify <code>availabilityZone</code> or <code>availabilityZoneId</code>, the value must match the Availability Zone of the Exadata infrastructure. If you specify neither, the service uses the Availability Zone of the Exadata infrastructure.</p>"
                     }
                 },
                 "availabilityZoneId": {
@@ -6254,7 +6377,12 @@
                 }
             },
             "traits": {
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.odb#CreateExascaleDbStorageVaultOutput": {
@@ -9296,7 +9424,7 @@
                 "scanListenerPortTcpSsl": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number for TCP connections with SSL to the Single Client Access Name (SCAN) listener for the Exascale VM cluster.</p>"
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 },
                 "shape": {
@@ -9629,7 +9757,7 @@
                 "scanListenerPortTcpSsl": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The port number for TCP connections with SSL to the Single Client Access Name (SCAN) listener for the Exascale VM cluster.</p>"
+                        "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
                 },
                 "shape": {
@@ -9709,6 +9837,38 @@
                 "smithy.api#documentation": "<p>Summary information about an Exascale VM cluster.</p>"
             }
         },
+        "com.amazonaws.odb#ExascaleConfiguration": {
+            "type": "structure",
+            "members": {
+                "totalStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of Exascale storage, in gigabytes (GB), configured on the Exadata infrastructure.</p>"
+                    }
+                },
+                "availableStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of Exascale storage, in gigabytes (GB), that's available on the Exadata infrastructure.</p>"
+                    }
+                },
+                "totalVmStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of Exascale VM storage, in gigabytes (GB), on the Exadata infrastructure. VM clusters use Exascale VM storage for their VM file systems and VM backups.</p>"
+                    }
+                },
+                "availableVmStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of Exascale VM storage, in gigabytes (GB), that's available on the Exadata infrastructure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Exascale storage configuration of an Exadata infrastructure.</p>"
+            }
+        },
         "com.amazonaws.odb#ExascaleDbStorageDetails": {
             "type": "structure",
             "members": {
@@ -9767,6 +9927,18 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Availability Zone ID for the Exascale storage vault.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure that hosts the Exascale storage vault. This value is present only for vaults on dedicated Exadata infrastructure.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exadata infrastructure that hosts the Exascale storage vault. This value is present only for vaults on dedicated Exadata infrastructure.</p>"
                     }
                 },
                 "createdAt": {
@@ -9864,6 +10036,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The time zone of the Exascale storage vault.</p>"
+                    }
+                },
+                "vaultType": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageVaultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of infrastructure that hosts the Exascale storage vault.</p>"
                     }
                 }
             },
@@ -9948,6 +10126,18 @@
                         "smithy.api#documentation": "<p>The Availability Zone ID for the Exascale storage vault.</p>"
                     }
                 },
+                "cloudExadataInfrastructureArn": {
+                    "target": "com.amazonaws.odb#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Exadata infrastructure that hosts the Exascale storage vault. This value is present only for vaults on dedicated Exadata infrastructure.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureId": {
+                    "target": "com.amazonaws.odb#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Exadata infrastructure that hosts the Exascale storage vault. This value is present only for vaults on dedicated Exadata infrastructure.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -10044,10 +10234,35 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time zone of the Exascale storage vault.</p>"
                     }
+                },
+                "vaultType": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageVaultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of infrastructure that hosts the Exascale storage vault.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Summary information about an Exascale storage vault.</p>"
+            }
+        },
+        "com.amazonaws.odb#ExascaleDbStorageVaultType": {
+            "type": "enum",
+            "members": {
+                "EXASCALE_INFRASTRUCTURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Exascale storage vault for Exascale VM clusters.</p>",
+                        "smithy.api#enumValue": "EXASCALE_INFRASTRUCTURE"
+                    }
+                },
+                "DEDICATED_INFRASTRUCTURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Exascale storage vault on dedicated Exadata infrastructure for VM clusters.</p>",
+                        "smithy.api#enumValue": "DEDICATED_INFRASTRUCTURE"
+                    }
+                }
             }
         },
         "com.amazonaws.odb#ExternalIdType": {
@@ -10162,6 +10377,32 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.odb#FileSystemConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "mountPoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The mount point of the file system.</p>"
+                    }
+                },
+                "fileSystemSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The size of the file system, in gigabytes (GB).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a file system on a VM cluster.</p>"
+            }
+        },
+        "com.amazonaws.odb#FileSystemConfigurationDetailsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.odb#FileSystemConfigurationDetails"
             }
         },
         "com.amazonaws.odb#FlexComponentList": {
@@ -12908,6 +13149,9 @@
                     "target": "com.amazonaws.odb#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.odb#ThrottlingException"
                 },
                 {
@@ -12949,10 +13193,27 @@
                             "max": 8192
                         }
                     }
+                },
+                "cloudExadataInfrastructureId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier or Amazon Resource Name (ARN) of an Exadata infrastructure. If you specify this value, the operation returns only the Exascale storage vaults on that infrastructure that you own or that are shared with you. The infrastructure can be one that's shared with you through Amazon Web Services Resource Access Manager (Amazon Web Services RAM). You can't combine this filter with a <code>vaultType</code> of <code>EXASCALE_INFRASTRUCTURE</code>.</p>"
+                    }
+                },
+                "vaultType": {
+                    "target": "com.amazonaws.odb#ExascaleDbStorageVaultType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Exascale storage vaults to return. Specify <code>DEDICATED_INFRASTRUCTURE</code> to return Exascale storage vaults on dedicated Exadata infrastructure, or <code>EXASCALE_INFRASTRUCTURE</code> to return Exascale storage vaults for Exascale VM clusters. If you don't specify a value, the operation returns both types. You can't combine <code>EXASCALE_INFRASTRUCTURE</code> with the <code>cloudExadataInfrastructureId</code> filter.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#input": {}
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.odb#CloudExadataInfrastructureResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.odb#ListExascaleDbStorageVaultsOutput": {
@@ -17411,6 +17672,25 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#StorageManagementType": {
+            "type": "enum",
+            "members": {
+                "ASM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Oracle Automatic Storage Management (ASM).</p>",
+                        "smithy.api#enumValue": "ASM"
+                    }
+                },
+                "EXASCALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exascale storage.</p>",
+                        "smithy.api#enumValue": "EXASCALE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.odb#StringList": {
             "type": "list",
             "member": {
@@ -18661,6 +18941,100 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructure": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructureInput"
+            },
+            "output": {
+                "target": "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructureOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.odb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.odb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.odb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Configures or updates the Exascale storage on an Exadata infrastructure. After you configure Exascale storage, you can create Exascale storage vaults on the infrastructure and VM clusters that use Exascale storage.</p>"
+            }
+        },
+        "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructureInput": {
+            "type": "structure",
+            "members": {
+                "cloudExadataInfrastructureId": {
+                    "target": "com.amazonaws.odb#ResourceIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier or Amazon Resource Name (ARN) of the Exadata infrastructure to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of Exascale storage, in gigabytes (GB), to configure on the Exadata infrastructure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalVmStorageSizeInGBs": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of Exascale storage, in gigabytes (GB), to allocate for VM storage on the Exadata infrastructure. VM clusters that store their VM file systems or VM backups in Exascale storage use this capacity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.odb#UpdateExascaleCloudExadataInfrastructureOutput": {
+            "type": "structure",
+            "members": {
+                "displayName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user-friendly name of the updated Exadata infrastructure.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.odb#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Exadata infrastructure after the update operation.</p>"
+                    }
+                },
+                "statusReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional information about the status of the Exadata infrastructure after the update operation.</p>"
+                    }
+                },
+                "cloudExadataInfrastructureId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the updated Exadata infrastructure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.odb#UpdateExascaleDbStorageVault": {
             "type": "operation",
             "input": {
@@ -19124,6 +19498,25 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "other"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.odb#VmStorageType": {
+            "type": "enum",
+            "members": {
+                "LOCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Local storage on the database servers.</p>",
+                        "smithy.api#enumValue": "LOCAL"
+                    }
+                },
+                "EXASCALE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exascale storage on the storage servers.</p>",
+                        "smithy.api#enumValue": "EXASCALE"
                     }
                 }
             }

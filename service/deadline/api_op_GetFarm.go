@@ -50,8 +50,6 @@ func (v *GetFarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 }
 
-// Mixin that adds an optional ARN field to response structures. Apply to
-// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetFarmOutput struct {
 
 	// A multiplier applied to the farm's calculated costs for usage data and budget

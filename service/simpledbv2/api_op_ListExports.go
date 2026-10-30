@@ -5,7 +5,9 @@ package simpledbv2
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -43,6 +45,24 @@ type ListExportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListExportsRequest_domainName, *v.DomainName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListExportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListExportsOutput struct {
 
 	// List of export summaries containing export ARN, status, request timestamp, and
@@ -62,13 +82,35 @@ type ListExportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExportSummaries(s, schemas.ListExportsResponse_exportSummaries, v.ExportSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExportsResponse_exportSummaries:
+			return deserializeExportSummaries(d, schemas.ListExportsResponse_exportSummaries, &v.ExportSummaries)
+		case schemas.ListExportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExports, schemas.ListExportsRequest, schemas.ListExportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListExports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExports, schemas.ListExportsRequest, schemas.ListExportsResponse), output: &ListExportsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

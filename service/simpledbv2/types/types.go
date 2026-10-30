@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/simpledbv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -34,6 +36,50 @@ type ExportSummary struct {
 	RequestedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ExportSummary_domainName, *v.DomainName)
+	}
+	if v.ExportArn != nil {
+		s.WriteString(schemas.ExportSummary_exportArn, *v.ExportArn)
+	}
+	if v.ExportStatus != "" {
+		s.WriteString(schemas.ExportSummary_exportStatus, string(v.ExportStatus))
+	}
+	if v.RequestedAt != nil {
+		s.WriteTime(schemas.ExportSummary_requestedAt, *v.RequestedAt)
+	}
+}
+func (v *ExportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportSummary_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ExportSummary_domainName, v.DomainName)
+		case schemas.ExportSummary_exportArn:
+			v.ExportArn = new(string)
+			return d.ReadString(schemas.ExportSummary_exportArn, v.ExportArn)
+		case schemas.ExportSummary_exportStatus:
+			var ev string
+			if err := d.ReadString(schemas.ExportSummary_exportStatus, &ev); err != nil {
+				return err
+			}
+			v.ExportStatus = ExportStatus(ev)
+			return nil
+		case schemas.ExportSummary_requestedAt:
+			v.RequestedAt = new(time.Time)
+			return d.ReadTime(schemas.ExportSummary_requestedAt, v.RequestedAt)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

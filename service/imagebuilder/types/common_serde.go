@@ -321,6 +321,17 @@ func serializeImageScanFindingsList(s smithy.ShapeSerializer, schema *smithy.Sch
 	s.CloseList()
 }
 
+func serializeImageScanningTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ImageScanningType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeImageSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ImageSummary) {
 	if v == nil {
 		return
@@ -1293,6 +1304,27 @@ func deserializeImageScanFindingsList(d smithy.ShapeDeserializer, s *smithy.Sche
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeImageScanningTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]ImageScanningType) error {
+	*v = make([]ImageScanningType, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero ImageScanningType
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, ImageScanningType(vv))
 		return nil
 	})
 }

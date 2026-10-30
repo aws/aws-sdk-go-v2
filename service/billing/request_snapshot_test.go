@@ -206,6 +206,34 @@ func serdeDecodeJSON(b []byte) (any, bool) {
 	}
 	return v, true
 }
+func TestCheckRequestSnapshot_AssociateContract(t *testing.T) {
+	input := &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateContract"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_AssociateSourceViews(t *testing.T) {
 	input := &AssociateSourceViewsInput{
 		Arn: ptr.String("__Arn__"),
@@ -233,6 +261,35 @@ func TestCheckRequestSnapshot_AssociateSourceViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateSourceViews"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_CancelContractualInvestmentAttestation(t *testing.T) {
+	input := &CancelContractualInvestmentAttestationInput{
+		AttestationId: ptr.String("__AttestationId__"),
+		ContractArn:   ptr.String("__ContractArn__"),
+		Reason:        ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelContractualInvestmentAttestation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelContractualInvestmentAttestation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -307,6 +364,75 @@ func TestCheckRequestSnapshot_CreateBillingView(t *testing.T) {
 	}
 }
 
+func TestCheckRequestSnapshot_CreateContractualInvestmentAttestation(t *testing.T) {
+	input := &CreateContractualInvestmentAttestationInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		InvestmentId:        ptr.String("__InvestmentId__"),
+		ContractDocumentId:  ptr.String("__ContractDocumentId__"),
+		ApproverDetails: &types.ApproverDetails{
+			Name:  ptr.String("__Name__"),
+			Title: ptr.String("__Title__"),
+			Email: ptr.String("__Email__"),
+		},
+		InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AttestationDetails: &types.AttestationDetails{
+			AttestationValue: &types.AttestationValueMemberAttestationAmount{
+				Value: types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+			InvestmentDistributions: []types.InvestmentDistribution{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					InvestmentAmount: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					InvestmentAmount: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+				},
+			},
+		},
+		AdditionalRecipients: []types.AdditionalRecipient{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContractualInvestmentAttestation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContractualInvestmentAttestation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_DeleteBillingView(t *testing.T) {
 	input := &DeleteBillingViewInput{
 		Arn:   ptr.String("__Arn__"),
@@ -331,6 +457,33 @@ func TestCheckRequestSnapshot_DeleteBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBillingView"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_DisassociateContract(t *testing.T) {
+	input := &DisassociateContractInput{
+		ContractArn: ptr.String("__ContractArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateContract"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -437,6 +590,33 @@ func TestCheckRequestSnapshot_GetBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBillingView"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_GetContractInformation(t *testing.T) {
+	input := &GetContractInformationInput{
+		ContractArn: ptr.String("__ContractArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetContractInformation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetContractInformation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -731,6 +911,123 @@ func TestCheckRequestSnapshot_ListBusinessSupportSubscriptionHistory(t *testing.
 	}
 }
 
+func TestCheckRequestSnapshot_ListContracts(t *testing.T) {
+	input := &ListContractsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContracts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContracts"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListContractualInvestmentAttestations(t *testing.T) {
+	input := &ListContractualInvestmentAttestationsInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContractualInvestmentAttestations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContractualInvestmentAttestations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListContractualInvestments(t *testing.T) {
+	input := &ListContractualInvestmentsInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContractualInvestments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContractualInvestments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckRequestSnapshot_ListContractualInvestmentSummaries(t *testing.T) {
+	input := &ListContractualInvestmentSummariesInput{
+		ContractArn: ptr.String("__ContractArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContractualInvestmentSummaries(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeTestSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContractualInvestmentSummaries"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckRequestSnapshot_ListEnterpriseSupportLinkedAccountCharges(t *testing.T) {
 	input := &ListEnterpriseSupportLinkedAccountChargesInput{
 		BillingMonth: ptr.String("__BillingMonth__"),
@@ -1004,6 +1301,34 @@ func TestCheckRequestSnapshot_UpdateBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateRequestSnapshot_AssociateContract(t *testing.T) {
+	input := &AssociateContractInput{
+		ContractArn:        ptr.String("__ContractArn__"),
+		ContractDocumentId: ptr.String("__ContractDocumentId__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.AssociateContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateContract"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_AssociateSourceViews(t *testing.T) {
 	input := &AssociateSourceViewsInput{
 		Arn: ptr.String("__Arn__"),
@@ -1031,6 +1356,35 @@ func TestUpdateRequestSnapshot_AssociateSourceViews(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "AssociateSourceViews"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_CancelContractualInvestmentAttestation(t *testing.T) {
+	input := &CancelContractualInvestmentAttestationInput{
+		AttestationId: ptr.String("__AttestationId__"),
+		ContractArn:   ptr.String("__ContractArn__"),
+		Reason:        ptr.String("__Reason__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CancelContractualInvestmentAttestation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CancelContractualInvestmentAttestation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1105,6 +1459,75 @@ func TestUpdateRequestSnapshot_CreateBillingView(t *testing.T) {
 	}
 }
 
+func TestUpdateRequestSnapshot_CreateContractualInvestmentAttestation(t *testing.T) {
+	input := &CreateContractualInvestmentAttestationInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		InvestmentId:        ptr.String("__InvestmentId__"),
+		ContractDocumentId:  ptr.String("__ContractDocumentId__"),
+		ApproverDetails: &types.ApproverDetails{
+			Name:  ptr.String("__Name__"),
+			Title: ptr.String("__Title__"),
+			Email: ptr.String("__Email__"),
+		},
+		InvestmentDisbursedAt: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+		AttestationDetails: &types.AttestationDetails{
+			AttestationValue: &types.AttestationValueMemberAttestationAmount{
+				Value: types.Amount{
+					CurrencyCode:   ptr.String("__CurrencyCode__"),
+					CurrencyAmount: ptr.String("__CurrencyAmount__"),
+				},
+			},
+			InvestmentDistributions: []types.InvestmentDistribution{
+				{
+					AccountId: ptr.String("__AccountId__"),
+					InvestmentAmount: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+				},
+				{
+					AccountId: ptr.String("__AccountId__"),
+					InvestmentAmount: &types.Amount{
+						CurrencyCode:   ptr.String("__CurrencyCode__"),
+						CurrencyAmount: ptr.String("__CurrencyAmount__"),
+					},
+				},
+			},
+		},
+		AdditionalRecipients: []types.AdditionalRecipient{
+			{
+				Email: ptr.String("__Email__"),
+			},
+			{
+				Email: ptr.String("__Email__"),
+			},
+		},
+		ClientToken: ptr.String("__ClientToken__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.CreateContractualInvestmentAttestation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "CreateContractualInvestmentAttestation"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateRequestSnapshot_DeleteBillingView(t *testing.T) {
 	input := &DeleteBillingViewInput{
 		Arn:   ptr.String("__Arn__"),
@@ -1129,6 +1552,33 @@ func TestUpdateRequestSnapshot_DeleteBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DeleteBillingView"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_DisassociateContract(t *testing.T) {
+	input := &DisassociateContractInput{
+		ContractArn: ptr.String("__ContractArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.DisassociateContract(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "DisassociateContract"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1235,6 +1685,33 @@ func TestUpdateRequestSnapshot_GetBillingView(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetBillingView"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_GetContractInformation(t *testing.T) {
+	input := &GetContractInformationInput{
+		ContractArn: ptr.String("__ContractArn__"),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.GetContractInformation(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "GetContractInformation"); err != nil {
 		t.Fatal(err)
 	}
 }
@@ -1525,6 +2002,123 @@ func TestUpdateRequestSnapshot_ListBusinessSupportSubscriptionHistory(t *testing
 		t.Fatal(err)
 	}
 	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListBusinessSupportSubscriptionHistory"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContracts(t *testing.T) {
+	input := &ListContractsInput{
+		NextToken:  ptr.String("__NextToken__"),
+		MaxResults: ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContracts(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContracts"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContractualInvestmentAttestations(t *testing.T) {
+	input := &ListContractualInvestmentAttestationsInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContractualInvestmentAttestations(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContractualInvestmentAttestations"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContractualInvestments(t *testing.T) {
+	input := &ListContractualInvestmentsInput{
+		ContractArn:         ptr.String("__ContractArn__"),
+		InvestmentSummaryId: ptr.String("__InvestmentSummaryId__"),
+		NextToken:           ptr.String("__NextToken__"),
+		MaxResults:          ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContractualInvestments(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContractualInvestments"); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateRequestSnapshot_ListContractualInvestmentSummaries(t *testing.T) {
+	input := &ListContractualInvestmentSummariesInput{
+		ContractArn: ptr.String("__ContractArn__"),
+		NextToken:   ptr.String("__NextToken__"),
+		MaxResults:  ptr.Int32(1),
+	}
+	body := &bytes.Buffer{}
+	method := ""
+	rawPath := ""
+	rawQuery := ""
+	header := map[string][]string{}
+	svc := serdeNewClient()
+	_, err := svc.ListContractualInvestmentSummaries(context.Background(), input, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			stack.Initialize.Remove("OperationInputValidation")
+			stack.Serialize.Remove("RequestCompression")
+			return stack.Finalize.Add(&captureSerdeRequestMiddleware{
+				body: body, method: &method, rawPath: &rawPath, rawQuery: &rawQuery, header: &header,
+			}, middleware.Before)
+		})
+	})
+	if err != nil && !errors.Is(err, errSerdeSnapshotOK) {
+		t.Fatal(err)
+	}
+	if err := serdeUpdateSnapshot(method, rawPath, rawQuery, header, body.Bytes(), "ListContractualInvestmentSummaries"); err != nil {
 		t.Fatal(err)
 	}
 }

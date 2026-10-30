@@ -583,7 +583,7 @@ func (v *UploadMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UploadMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUploadMetadataSignedHeaders(s, schemas.UploadMetadata_HeadersToInclude, v.HeadersToInclude)
+	serializeUrlMetadataSignedHeaders(s, schemas.UploadMetadata_HeadersToInclude, v.HeadersToInclude)
 	if v.Url != nil {
 		s.WriteString(schemas.UploadMetadata_Url, *v.Url)
 	}
@@ -595,7 +595,7 @@ func (v *UploadMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UploadMetadata, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.UploadMetadata_HeadersToInclude:
-			return deserializeUploadMetadataSignedHeaders(d, schemas.UploadMetadata_HeadersToInclude, &v.HeadersToInclude)
+			return deserializeUrlMetadataSignedHeaders(d, schemas.UploadMetadata_HeadersToInclude, &v.HeadersToInclude)
 		case schemas.UploadMetadata_Url:
 			v.Url = new(string)
 			return d.ReadString(schemas.UploadMetadata_Url, v.Url)

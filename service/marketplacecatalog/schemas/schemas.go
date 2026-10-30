@@ -789,7 +789,7 @@ var _EntityRequestList_member *smithy.Schema
 var EntitySummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntitySummary",
-}, smithy.ShapeTypeStructure, 15)
+}, smithy.ShapeTypeStructure, 16)
 var EntitySummary_Name *smithy.Schema
 
 var EntitySummary_EntityType *smithy.Schema
@@ -820,6 +820,8 @@ var EntitySummary_OfferSetSummary *smithy.Schema
 
 var EntitySummary_ExpressPrivateOfferConfigurationSummary *smithy.Schema
 
+var EntitySummary_SubsidiaryAuthorizationSummary *smithy.Schema
+
 var _EntitySummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntitySummaryList",
@@ -834,7 +836,7 @@ var _EntityType = smithy.NewSchema(smithy.ShapeID{
 var EntityTypeFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntityTypeFilters",
-}, smithy.ShapeTypeUnion, 9)
+}, smithy.ShapeTypeUnion, 10)
 var EntityTypeFilters_DataProductFilters *smithy.Schema
 
 var EntityTypeFilters_SaaSProductFilters *smithy.Schema
@@ -853,10 +855,12 @@ var EntityTypeFilters_OfferSetFilters *smithy.Schema
 
 var EntityTypeFilters_ExpressPrivateOfferConfigurationFilters *smithy.Schema
 
+var EntityTypeFilters_SubsidiaryAuthorizationFilters *smithy.Schema
+
 var EntityTypeSort = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "EntityTypeSort",
-}, smithy.ShapeTypeUnion, 9)
+}, smithy.ShapeTypeUnion, 10)
 var EntityTypeSort_DataProductSort *smithy.Schema
 
 var EntityTypeSort_SaaSProductSort *smithy.Schema
@@ -874,6 +878,8 @@ var EntityTypeSort_MachineLearningProductSort *smithy.Schema
 var EntityTypeSort_OfferSetSort *smithy.Schema
 
 var EntityTypeSort_ExpressPrivateOfferConfigurationSort *smithy.Schema
+
+var EntityTypeSort_SubsidiaryAuthorizationSort *smithy.Schema
 
 var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
@@ -2437,6 +2443,240 @@ var SortOrder_ASCENDING *smithy.Schema
 
 var SortOrder_DESCENDING *smithy.Schema
 
+var SubsidiaryAuthorizationCreatedDateFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationCreatedDateFilter",
+}, smithy.ShapeTypeStructure, 1)
+var SubsidiaryAuthorizationCreatedDateFilter_DateRange *smithy.Schema
+
+var SubsidiaryAuthorizationCreatedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationCreatedDateFilterDateRange",
+}, smithy.ShapeTypeStructure, 2)
+var SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue *smithy.Schema
+
+var SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue *smithy.Schema
+
+var SubsidiaryAuthorizationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationEntityIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var SubsidiaryAuthorizationEntityIdFilter_ValueList *smithy.Schema
+
+var _SubsidiaryAuthorizationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationEntityIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _SubsidiaryAuthorizationEntityIdFilterValueList_member *smithy.Schema
+
+var _SubsidiaryAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationEntityIdString",
+}, smithy.ShapeTypeString, 0)
+
+var SubsidiaryAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationFilters",
+}, smithy.ShapeTypeStructure, 8)
+var SubsidiaryAuthorizationFilters_EntityId *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_Status *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_ResourceId *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_ResourceName *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_Name *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_SubsidiaryAccountId *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_CreatedDate *smithy.Schema
+
+var SubsidiaryAuthorizationFilters_LastModifiedDate *smithy.Schema
+
+var SubsidiaryAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationLastModifiedDateFilter",
+}, smithy.ShapeTypeStructure, 1)
+var SubsidiaryAuthorizationLastModifiedDateFilter_DateRange *smithy.Schema
+
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationLastModifiedDateFilterDateRange",
+}, smithy.ShapeTypeStructure, 2)
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
+
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
+
+var SubsidiaryAuthorizationNameFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationNameFilter",
+}, smithy.ShapeTypeStructure, 2)
+var SubsidiaryAuthorizationNameFilter_ValueList *smithy.Schema
+
+var SubsidiaryAuthorizationNameFilter_WildCardValue *smithy.Schema
+
+var _SubsidiaryAuthorizationNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationNameFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _SubsidiaryAuthorizationNameFilterValueList_member *smithy.Schema
+
+var _SubsidiaryAuthorizationNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationNameFilterWildcard",
+}, smithy.ShapeTypeString, 0)
+
+var _SubsidiaryAuthorizationNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationNameString",
+}, smithy.ShapeTypeString, 0)
+
+var SubsidiaryAuthorizationResourceIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var SubsidiaryAuthorizationResourceIdFilter_ValueList *smithy.Schema
+
+var _SubsidiaryAuthorizationResourceIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _SubsidiaryAuthorizationResourceIdFilterValueList_member *smithy.Schema
+
+var _SubsidiaryAuthorizationResourceIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceIdString",
+}, smithy.ShapeTypeString, 0)
+
+var SubsidiaryAuthorizationResourceNameFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceNameFilter",
+}, smithy.ShapeTypeStructure, 2)
+var SubsidiaryAuthorizationResourceNameFilter_ValueList *smithy.Schema
+
+var SubsidiaryAuthorizationResourceNameFilter_WildCardValue *smithy.Schema
+
+var _SubsidiaryAuthorizationResourceNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceNameFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _SubsidiaryAuthorizationResourceNameFilterValueList_member *smithy.Schema
+
+var _SubsidiaryAuthorizationResourceNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceNameFilterWildcard",
+}, smithy.ShapeTypeString, 0)
+
+var _SubsidiaryAuthorizationResourceNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationResourceNameString",
+}, smithy.ShapeTypeString, 0)
+
+var SubsidiaryAuthorizationSort = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSort",
+}, smithy.ShapeTypeStructure, 2)
+var SubsidiaryAuthorizationSort_SortBy *smithy.Schema
+
+var SubsidiaryAuthorizationSort_SortOrder *smithy.Schema
+
+var SubsidiaryAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSortBy",
+}, smithy.ShapeTypeEnum, 6)
+var SubsidiaryAuthorizationSortBy_EntityId *smithy.Schema
+
+var SubsidiaryAuthorizationSortBy_Status *smithy.Schema
+
+var SubsidiaryAuthorizationSortBy_ResourceId *smithy.Schema
+
+var SubsidiaryAuthorizationSortBy_SubsidiaryAccountId *smithy.Schema
+
+var SubsidiaryAuthorizationSortBy_CreatedDate *smithy.Schema
+
+var SubsidiaryAuthorizationSortBy_LastModifiedDate *smithy.Schema
+
+var SubsidiaryAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationStatusFilter",
+}, smithy.ShapeTypeStructure, 1)
+var SubsidiaryAuthorizationStatusFilter_ValueList *smithy.Schema
+
+var _SubsidiaryAuthorizationStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationStatusFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _SubsidiaryAuthorizationStatusFilterValueList_member *smithy.Schema
+
+var SubsidiaryAuthorizationStatusString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationStatusString",
+}, smithy.ShapeTypeEnum, 3)
+var SubsidiaryAuthorizationStatusString_Draft *smithy.Schema
+
+var SubsidiaryAuthorizationStatusString_Active *smithy.Schema
+
+var SubsidiaryAuthorizationStatusString_Restricted *smithy.Schema
+
+var SubsidiaryAuthorizationSubsidiaryAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdFilter",
+}, smithy.ShapeTypeStructure, 1)
+var SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList *smithy.Schema
+
+var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList",
+}, smithy.ShapeTypeList, 1)
+var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member *smithy.Schema
+
+var _SubsidiaryAuthorizationSubsidiaryAccountIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdString",
+}, smithy.ShapeTypeString, 0)
+
+var SubsidiaryAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSummary",
+}, smithy.ShapeTypeStructure, 6)
+var SubsidiaryAuthorizationSummary_Name *smithy.Schema
+
+var SubsidiaryAuthorizationSummary_Status *smithy.Schema
+
+var SubsidiaryAuthorizationSummary_ResourceId *smithy.Schema
+
+var SubsidiaryAuthorizationSummary_ResourceName *smithy.Schema
+
+var SubsidiaryAuthorizationSummary_SubsidiaryAccountId *smithy.Schema
+
+var SubsidiaryAuthorizationSummary_CreatedDate *smithy.Schema
+
+var _SubsidiaryAuthorizationSummaryNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSummaryNameString",
+}, smithy.ShapeTypeString, 0)
+
+var _SubsidiaryAuthorizationSummaryResourceIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSummaryResourceIdString",
+}, smithy.ShapeTypeString, 0)
+
+var _SubsidiaryAuthorizationSummaryResourceNameString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSummaryResourceNameString",
+}, smithy.ShapeTypeString, 0)
+
+var _SubsidiaryAuthorizationSummaryStatusString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSummaryStatusString",
+}, smithy.ShapeTypeString, 0)
+
+var _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.marketplacecatalog",
+	Name:      "SubsidiaryAuthorizationSummarySubsidiaryAccountIdString",
+}, smithy.ShapeTypeString, 0)
+
 var Tag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.marketplacecatalog",
 	Name:      "Tag",
@@ -3304,6 +3544,18 @@ func init() {
 
 	ExpressPrivateOfferConfigurationSummary_State = ExpressPrivateOfferConfigurationSummary.AddMember("State", ExpressPrivateOfferConfigurationStateString)
 
+	SubsidiaryAuthorizationSummary_Name = SubsidiaryAuthorizationSummary.AddMember("Name", _SubsidiaryAuthorizationSummaryNameString)
+
+	SubsidiaryAuthorizationSummary_Status = SubsidiaryAuthorizationSummary.AddMember("Status", _SubsidiaryAuthorizationSummaryStatusString)
+
+	SubsidiaryAuthorizationSummary_ResourceId = SubsidiaryAuthorizationSummary.AddMember("ResourceId", _SubsidiaryAuthorizationSummaryResourceIdString)
+
+	SubsidiaryAuthorizationSummary_ResourceName = SubsidiaryAuthorizationSummary.AddMember("ResourceName", _SubsidiaryAuthorizationSummaryResourceNameString)
+
+	SubsidiaryAuthorizationSummary_SubsidiaryAccountId = SubsidiaryAuthorizationSummary.AddMember("SubsidiaryAccountId", _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString)
+
+	SubsidiaryAuthorizationSummary_CreatedDate = SubsidiaryAuthorizationSummary.AddMember("CreatedDate", _DateTimeISO8601)
+
 	EntitySummary_Name = EntitySummary.AddMember("Name", _EntityNameString)
 
 	EntitySummary_EntityType = EntitySummary.AddMember("EntityType", _EntityType)
@@ -3333,6 +3585,8 @@ func init() {
 	EntitySummary_OfferSetSummary = EntitySummary.AddMember("OfferSetSummary", OfferSetSummary)
 
 	EntitySummary_ExpressPrivateOfferConfigurationSummary = EntitySummary.AddMember("ExpressPrivateOfferConfigurationSummary", ExpressPrivateOfferConfigurationSummary)
+
+	EntitySummary_SubsidiaryAuthorizationSummary = EntitySummary.AddMember("SubsidiaryAuthorizationSummary", SubsidiaryAuthorizationSummary)
 
 	_EntitySummaryList_member = _EntitySummaryList.AddMember("member", EntitySummary)
 
@@ -3670,6 +3924,68 @@ func init() {
 
 	ExpressPrivateOfferConfigurationFilters_State = ExpressPrivateOfferConfigurationFilters.AddMember("State", ExpressPrivateOfferConfigurationStateFilter)
 
+	_SubsidiaryAuthorizationEntityIdFilterValueList_member = _SubsidiaryAuthorizationEntityIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationEntityIdString)
+
+	SubsidiaryAuthorizationEntityIdFilter_ValueList = SubsidiaryAuthorizationEntityIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationEntityIdFilterValueList)
+
+	SubsidiaryAuthorizationStatusString_Draft = SubsidiaryAuthorizationStatusString.AddMember("Draft", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationStatusString_Active = SubsidiaryAuthorizationStatusString.AddMember("Active", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationStatusString_Restricted = SubsidiaryAuthorizationStatusString.AddMember("Restricted", smithyprelude.Unit)
+
+	_SubsidiaryAuthorizationStatusFilterValueList_member = _SubsidiaryAuthorizationStatusFilterValueList.AddMember("member", SubsidiaryAuthorizationStatusString)
+
+	SubsidiaryAuthorizationStatusFilter_ValueList = SubsidiaryAuthorizationStatusFilter.AddMember("ValueList", _SubsidiaryAuthorizationStatusFilterValueList)
+
+	_SubsidiaryAuthorizationResourceIdFilterValueList_member = _SubsidiaryAuthorizationResourceIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationResourceIdString)
+
+	SubsidiaryAuthorizationResourceIdFilter_ValueList = SubsidiaryAuthorizationResourceIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationResourceIdFilterValueList)
+
+	_SubsidiaryAuthorizationResourceNameFilterValueList_member = _SubsidiaryAuthorizationResourceNameFilterValueList.AddMember("member", _SubsidiaryAuthorizationResourceNameString)
+
+	SubsidiaryAuthorizationResourceNameFilter_ValueList = SubsidiaryAuthorizationResourceNameFilter.AddMember("ValueList", _SubsidiaryAuthorizationResourceNameFilterValueList)
+
+	SubsidiaryAuthorizationResourceNameFilter_WildCardValue = SubsidiaryAuthorizationResourceNameFilter.AddMember("WildCardValue", _SubsidiaryAuthorizationResourceNameFilterWildcard)
+
+	_SubsidiaryAuthorizationNameFilterValueList_member = _SubsidiaryAuthorizationNameFilterValueList.AddMember("member", _SubsidiaryAuthorizationNameString)
+
+	SubsidiaryAuthorizationNameFilter_ValueList = SubsidiaryAuthorizationNameFilter.AddMember("ValueList", _SubsidiaryAuthorizationNameFilterValueList)
+
+	SubsidiaryAuthorizationNameFilter_WildCardValue = SubsidiaryAuthorizationNameFilter.AddMember("WildCardValue", _SubsidiaryAuthorizationNameFilterWildcard)
+
+	_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member = _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationSubsidiaryAccountIdString)
+
+	SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList = SubsidiaryAuthorizationSubsidiaryAccountIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList)
+
+	SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue = SubsidiaryAuthorizationCreatedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
+
+	SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue = SubsidiaryAuthorizationCreatedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
+
+	SubsidiaryAuthorizationCreatedDateFilter_DateRange = SubsidiaryAuthorizationCreatedDateFilter.AddMember("DateRange", SubsidiaryAuthorizationCreatedDateFilterDateRange)
+
+	SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue = SubsidiaryAuthorizationLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
+
+	SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue = SubsidiaryAuthorizationLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
+
+	SubsidiaryAuthorizationLastModifiedDateFilter_DateRange = SubsidiaryAuthorizationLastModifiedDateFilter.AddMember("DateRange", SubsidiaryAuthorizationLastModifiedDateFilterDateRange)
+
+	SubsidiaryAuthorizationFilters_EntityId = SubsidiaryAuthorizationFilters.AddMember("EntityId", SubsidiaryAuthorizationEntityIdFilter)
+
+	SubsidiaryAuthorizationFilters_Status = SubsidiaryAuthorizationFilters.AddMember("Status", SubsidiaryAuthorizationStatusFilter)
+
+	SubsidiaryAuthorizationFilters_ResourceId = SubsidiaryAuthorizationFilters.AddMember("ResourceId", SubsidiaryAuthorizationResourceIdFilter)
+
+	SubsidiaryAuthorizationFilters_ResourceName = SubsidiaryAuthorizationFilters.AddMember("ResourceName", SubsidiaryAuthorizationResourceNameFilter)
+
+	SubsidiaryAuthorizationFilters_Name = SubsidiaryAuthorizationFilters.AddMember("Name", SubsidiaryAuthorizationNameFilter)
+
+	SubsidiaryAuthorizationFilters_SubsidiaryAccountId = SubsidiaryAuthorizationFilters.AddMember("SubsidiaryAccountId", SubsidiaryAuthorizationSubsidiaryAccountIdFilter)
+
+	SubsidiaryAuthorizationFilters_CreatedDate = SubsidiaryAuthorizationFilters.AddMember("CreatedDate", SubsidiaryAuthorizationCreatedDateFilter)
+
+	SubsidiaryAuthorizationFilters_LastModifiedDate = SubsidiaryAuthorizationFilters.AddMember("LastModifiedDate", SubsidiaryAuthorizationLastModifiedDateFilter)
+
 	EntityTypeFilters_DataProductFilters = EntityTypeFilters.AddMember("DataProductFilters", DataProductFilters)
 
 	EntityTypeFilters_SaaSProductFilters = EntityTypeFilters.AddMember("SaaSProductFilters", SaaSProductFilters)
@@ -3687,6 +4003,8 @@ func init() {
 	EntityTypeFilters_OfferSetFilters = EntityTypeFilters.AddMember("OfferSetFilters", OfferSetFilters)
 
 	EntityTypeFilters_ExpressPrivateOfferConfigurationFilters = EntityTypeFilters.AddMember("ExpressPrivateOfferConfigurationFilters", ExpressPrivateOfferConfigurationFilters)
+
+	EntityTypeFilters_SubsidiaryAuthorizationFilters = EntityTypeFilters.AddMember("SubsidiaryAuthorizationFilters", SubsidiaryAuthorizationFilters)
 
 	SaaSProductSortBy_EntityId = SaaSProductSortBy.AddMember("EntityId", smithyprelude.Unit)
 
@@ -3810,6 +4128,22 @@ func init() {
 
 	ExpressPrivateOfferConfigurationSort_SortOrder = ExpressPrivateOfferConfigurationSort.AddMember("SortOrder", SortOrder)
 
+	SubsidiaryAuthorizationSortBy_EntityId = SubsidiaryAuthorizationSortBy.AddMember("EntityId", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationSortBy_Status = SubsidiaryAuthorizationSortBy.AddMember("Status", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationSortBy_ResourceId = SubsidiaryAuthorizationSortBy.AddMember("ResourceId", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationSortBy_SubsidiaryAccountId = SubsidiaryAuthorizationSortBy.AddMember("SubsidiaryAccountId", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationSortBy_CreatedDate = SubsidiaryAuthorizationSortBy.AddMember("CreatedDate", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationSortBy_LastModifiedDate = SubsidiaryAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
+
+	SubsidiaryAuthorizationSort_SortBy = SubsidiaryAuthorizationSort.AddMember("SortBy", SubsidiaryAuthorizationSortBy)
+
+	SubsidiaryAuthorizationSort_SortOrder = SubsidiaryAuthorizationSort.AddMember("SortOrder", SortOrder)
+
 	EntityTypeSort_DataProductSort = EntityTypeSort.AddMember("DataProductSort", DataProductSort)
 
 	EntityTypeSort_SaaSProductSort = EntityTypeSort.AddMember("SaaSProductSort", SaaSProductSort)
@@ -3827,6 +4161,8 @@ func init() {
 	EntityTypeSort_OfferSetSort = EntityTypeSort.AddMember("OfferSetSort", OfferSetSort)
 
 	EntityTypeSort_ExpressPrivateOfferConfigurationSort = EntityTypeSort.AddMember("ExpressPrivateOfferConfigurationSort", ExpressPrivateOfferConfigurationSort)
+
+	EntityTypeSort_SubsidiaryAuthorizationSort = EntityTypeSort.AddMember("SubsidiaryAuthorizationSort", SubsidiaryAuthorizationSort)
 
 	_Errors_key = _Errors.AddMember("key", _EntityId)
 

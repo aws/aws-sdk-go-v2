@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"intents":[{"signature":"__Signature__","supportedLocales":["de-DE","de-DE"]},{"signature":"__Signature__","supportedLocales":["de-DE","de-DE"]}],"nextToken":"__NextToken__"}

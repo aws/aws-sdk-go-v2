@@ -4,6 +4,8 @@ package route53recoveryreadiness
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -40,6 +42,19 @@ type UpdateRecoveryGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.UpdateRecoveryGroupRequest_Cells, v.Cells)
+	if v.RecoveryGroupName != nil {
+		s.WriteString(schemas.UpdateRecoveryGroupRequest_RecoveryGroupName, *v.RecoveryGroupName)
+	}
+}
+
 type UpdateRecoveryGroupOutput struct {
 
 	// A list of a cell's Amazon Resource Names (ARNs).
@@ -60,13 +75,44 @@ type UpdateRecoveryGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecoveryGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecoveryGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecoveryGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.UpdateRecoveryGroupResponse_Cells, v.Cells)
+	if v.RecoveryGroupArn != nil {
+		s.WriteString(schemas.UpdateRecoveryGroupResponse_RecoveryGroupArn, *v.RecoveryGroupArn)
+	}
+	if v.RecoveryGroupName != nil {
+		s.WriteString(schemas.UpdateRecoveryGroupResponse_RecoveryGroupName, *v.RecoveryGroupName)
+	}
+	serializeTags(s, schemas.UpdateRecoveryGroupResponse_Tags, v.Tags)
+}
+func (v *UpdateRecoveryGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecoveryGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecoveryGroupResponse_Cells:
+			return deserialize__listOf__string(d, schemas.UpdateRecoveryGroupResponse_Cells, &v.Cells)
+		case schemas.UpdateRecoveryGroupResponse_RecoveryGroupArn:
+			v.RecoveryGroupArn = new(string)
+			return d.ReadString(schemas.UpdateRecoveryGroupResponse_RecoveryGroupArn, v.RecoveryGroupArn)
+		case schemas.UpdateRecoveryGroupResponse_RecoveryGroupName:
+			v.RecoveryGroupName = new(string)
+			return d.ReadString(schemas.UpdateRecoveryGroupResponse_RecoveryGroupName, v.RecoveryGroupName)
+		case schemas.UpdateRecoveryGroupResponse_Tags:
+			return deserializeTags(d, schemas.UpdateRecoveryGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecoveryGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecoveryGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryGroup, schemas.UpdateRecoveryGroupRequest, schemas.UpdateRecoveryGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecoveryGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecoveryGroup, schemas.UpdateRecoveryGroupRequest, schemas.UpdateRecoveryGroupResponse), output: &UpdateRecoveryGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

@@ -5,7 +5,9 @@ package lakeformation
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -47,6 +49,34 @@ type ListRLSPolicyAttachmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRLSPolicyAttachmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRLSPolicyAttachmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRLSPolicyAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRLSPolicyAttachmentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRLSPolicyAttachmentsRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.ListRLSPolicyAttachmentsRequest_PolicyName, *v.PolicyName)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.ListRLSPolicyAttachmentsRequest_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.ListRLSPolicyAttachmentsRequest_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListRLSPolicyAttachmentsOutput struct {
 
 	// A continuation token, if not all attachments have been returned.
@@ -61,13 +91,35 @@ type ListRLSPolicyAttachmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRLSPolicyAttachmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRLSPolicyAttachmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRLSPolicyAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRLSPolicyAttachmentsResponse_NextToken, *v.NextToken)
+	}
+	serializeRLSPolicyAttachmentList(s, schemas.ListRLSPolicyAttachmentsResponse_RLSPolicyAttachments, v.RLSPolicyAttachments)
+}
+func (v *ListRLSPolicyAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRLSPolicyAttachmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRLSPolicyAttachmentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRLSPolicyAttachmentsResponse_NextToken, v.NextToken)
+		case schemas.ListRLSPolicyAttachmentsResponse_RLSPolicyAttachments:
+			return deserializeRLSPolicyAttachmentList(d, schemas.ListRLSPolicyAttachmentsResponse_RLSPolicyAttachments, &v.RLSPolicyAttachments)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRLSPolicyAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRLSPolicyAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRLSPolicyAttachments, schemas.ListRLSPolicyAttachmentsRequest, schemas.ListRLSPolicyAttachmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRLSPolicyAttachments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRLSPolicyAttachments, schemas.ListRLSPolicyAttachmentsRequest, schemas.ListRLSPolicyAttachmentsResponse), output: &ListRLSPolicyAttachmentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

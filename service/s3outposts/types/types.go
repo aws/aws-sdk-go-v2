@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/s3outposts/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -55,6 +57,101 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessType != "" {
+		s.WriteString(schemas.Endpoint_AccessType, string(v.AccessType))
+	}
+	if v.CidrBlock != nil {
+		s.WriteString(schemas.Endpoint_CidrBlock, *v.CidrBlock)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.Endpoint_CreationTime, *v.CreationTime)
+	}
+	if v.CustomerOwnedIpv4Pool != nil {
+		s.WriteString(schemas.Endpoint_CustomerOwnedIpv4Pool, *v.CustomerOwnedIpv4Pool)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.Endpoint_EndpointArn, *v.EndpointArn)
+	}
+	if v.FailedReason != nil {
+		s.WriteStruct(schemas.Endpoint_FailedReason)
+		v.FailedReason.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeNetworkInterfaces(s, schemas.Endpoint_NetworkInterfaces, v.NetworkInterfaces)
+	if v.OutpostsId != nil {
+		s.WriteString(schemas.Endpoint_OutpostsId, *v.OutpostsId)
+	}
+	if v.SecurityGroupId != nil {
+		s.WriteString(schemas.Endpoint_SecurityGroupId, *v.SecurityGroupId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Endpoint_Status, string(v.Status))
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.Endpoint_SubnetId, *v.SubnetId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.Endpoint_VpcId, *v.VpcId)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_AccessType:
+			var ev string
+			if err := d.ReadString(schemas.Endpoint_AccessType, &ev); err != nil {
+				return err
+			}
+			v.AccessType = EndpointAccessType(ev)
+			return nil
+		case schemas.Endpoint_CidrBlock:
+			v.CidrBlock = new(string)
+			return d.ReadString(schemas.Endpoint_CidrBlock, v.CidrBlock)
+		case schemas.Endpoint_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.Endpoint_CreationTime, v.CreationTime)
+		case schemas.Endpoint_CustomerOwnedIpv4Pool:
+			v.CustomerOwnedIpv4Pool = new(string)
+			return d.ReadString(schemas.Endpoint_CustomerOwnedIpv4Pool, v.CustomerOwnedIpv4Pool)
+		case schemas.Endpoint_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.Endpoint_EndpointArn, v.EndpointArn)
+		case schemas.Endpoint_FailedReason:
+			v.FailedReason = &FailedReason{}
+			return v.FailedReason.Deserialize(d)
+		case schemas.Endpoint_NetworkInterfaces:
+			return deserializeNetworkInterfaces(d, schemas.Endpoint_NetworkInterfaces, &v.NetworkInterfaces)
+		case schemas.Endpoint_OutpostsId:
+			v.OutpostsId = new(string)
+			return d.ReadString(schemas.Endpoint_OutpostsId, v.OutpostsId)
+		case schemas.Endpoint_SecurityGroupId:
+			v.SecurityGroupId = new(string)
+			return d.ReadString(schemas.Endpoint_SecurityGroupId, v.SecurityGroupId)
+		case schemas.Endpoint_Status:
+			var ev string
+			if err := d.ReadString(schemas.Endpoint_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EndpointStatus(ev)
+			return nil
+		case schemas.Endpoint_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.Endpoint_SubnetId, v.SubnetId)
+		case schemas.Endpoint_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.Endpoint_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // The failure reason, if any, for a create or delete endpoint operation.
 type FailedReason struct {
 
@@ -67,6 +164,34 @@ type FailedReason struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FailedReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FailedReason_ErrorCode, *v.ErrorCode)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FailedReason_Message, *v.Message)
+	}
+}
+func (v *FailedReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedReason_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FailedReason_ErrorCode, v.ErrorCode)
+		case schemas.FailedReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FailedReason_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // The container for the network interface.
 type NetworkInterface struct {
 
@@ -74,6 +199,28 @@ type NetworkInterface struct {
 	NetworkInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.NetworkInterface_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+}
+func (v *NetworkInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkInterface_NetworkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.NetworkInterface_NetworkInterfaceId, v.NetworkInterfaceId)
+		}
+		return nil
+	})
 }
 
 // Contains the details for the Outpost object.
@@ -97,6 +244,51 @@ type Outpost struct {
 	S3OutpostArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Outpost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Outpost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Outpost) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityInBytes != 0 {
+		s.WriteInt64(schemas.Outpost_CapacityInBytes, v.CapacityInBytes)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.Outpost_OutpostArn, *v.OutpostArn)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.Outpost_OutpostId, *v.OutpostId)
+	}
+	if v.OwnerId != nil {
+		s.WriteString(schemas.Outpost_OwnerId, *v.OwnerId)
+	}
+	if v.S3OutpostArn != nil {
+		s.WriteString(schemas.Outpost_S3OutpostArn, *v.S3OutpostArn)
+	}
+}
+func (v *Outpost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Outpost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Outpost_CapacityInBytes:
+			return d.ReadInt64(schemas.Outpost_CapacityInBytes, &v.CapacityInBytes)
+		case schemas.Outpost_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.Outpost_OutpostArn, v.OutpostArn)
+		case schemas.Outpost_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.Outpost_OutpostId, v.OutpostId)
+		case schemas.Outpost_OwnerId:
+			v.OwnerId = new(string)
+			return d.ReadString(schemas.Outpost_OwnerId, v.OwnerId)
+		case schemas.Outpost_S3OutpostArn:
+			v.S3OutpostArn = new(string)
+			return d.ReadString(schemas.Outpost_S3OutpostArn, v.S3OutpostArn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

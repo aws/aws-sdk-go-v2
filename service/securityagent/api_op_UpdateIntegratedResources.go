@@ -4,7 +4,9 @@ package securityagent
 
 import (
 	"context"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
 
@@ -45,6 +47,22 @@ type UpdateIntegratedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegratedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegratedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegratedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateIntegratedResourcesInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.UpdateIntegratedResourcesInput_integrationId, *v.IntegrationId)
+	}
+	serializeIntegratedResourceInputItemList(s, schemas.UpdateIntegratedResourcesInput_items, v.Items)
+}
+
 type UpdateIntegratedResourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,13 +70,26 @@ type UpdateIntegratedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegratedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegratedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegratedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateIntegratedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntegratedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntegratedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntegratedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegratedResources, schemas.UpdateIntegratedResourcesInput, schemas.UpdateIntegratedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntegratedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegratedResources, schemas.UpdateIntegratedResourcesInput, schemas.UpdateIntegratedResourcesOutput), output: &UpdateIntegratedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

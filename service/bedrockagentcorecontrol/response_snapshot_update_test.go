@@ -1909,6 +1909,9 @@ func TestUpdateResponseSnapshot_CreateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 						},
 					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
+					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
 				PrivateEndpoint: &types.PrivateEndpointMemberSelfManagedLatticeResource{
@@ -3431,6 +3434,8 @@ func TestUpdateResponseSnapshot_GetAgentRuntime(t *testing.T) {
 		},
 		ProtocolConfiguration: &types.ProtocolConfiguration{
 			ServerProtocol: types.ServerProtocol("MCP"),
+			Port:           ptr.Int32(1),
+			Path:           ptr.String("__Path__"),
 		},
 		EnvironmentVariables: map[string]string{
 			"key0": "__Value__",
@@ -3539,6 +3544,14 @@ func TestUpdateResponseSnapshot_GetAgentRuntime(t *testing.T) {
 			CapacityProviderArn: ptr.String("__CapacityProviderArn__"),
 		},
 		PlatformVersion: ptr.String("__PlatformVersion__"),
+		AllowedPorts: []types.AllowedPort{
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+			&types.AllowedPortMemberPort{
+				Value: 1,
+			},
+		},
 	}
 	proto := restjson1.New(schemas.AmazonBedrockAgentCoreControl)
 	opSchema := smithy.NewOperationSchema(schemas.GetAgentRuntime, schemas.GetAgentRuntimeResponse, schemas.GetAgentRuntimeResponse)
@@ -5440,6 +5453,9 @@ func TestUpdateResponseSnapshot_GetOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),
@@ -8522,6 +8538,35 @@ func TestUpdateResponseSnapshot_PutResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateResponseSnapshot_ResetTokenVaultKeyMaterial(t *testing.T) {
+	want := &ResetTokenVaultKeyMaterialOutput{
+		TokenVaultId: ptr.String("__TokenVaultId__"),
+		KmsConfiguration: &types.KmsConfiguration{
+			KeyType:   types.KeyType("CustomerManagedKey"),
+			KmsKeyArn: ptr.String("__KmsKeyArn__"),
+		},
+		LastModifiedDate: ptr.Time(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC)),
+	}
+	proto := restjson1.New(schemas.AmazonBedrockAgentCoreControl)
+	opSchema := smithy.NewOperationSchema(schemas.ResetTokenVaultKeyMaterial, schemas.ResetTokenVaultKeyMaterialResponse, schemas.ResetTokenVaultKeyMaterialResponse)
+	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
+	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
+		t.Fatal(err)
+	}
+	built := req.Build(context.Background())
+	var body []byte
+	if built.Body != nil {
+		b, err := io.ReadAll(built.Body)
+		if err != nil {
+			t.Fatal(err)
+		}
+		body = b
+	}
+	if err := serdeRespWriteSnapshot("ResetTokenVaultKeyMaterial.response", 200, built.Header, body); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateResponseSnapshot_RotatePaymentConnectorCredentials(t *testing.T) {
 	want := &RotatePaymentConnectorCredentialsOutput{
 		PaymentConnectorId: ptr.String("__PaymentConnectorId__"),
@@ -10403,6 +10448,9 @@ func TestUpdateResponseSnapshot_UpdateOauth2CredentialProvider(t *testing.T) {
 							"__Member__",
 							"__Member__",
 						},
+					},
+					OnBehalfOfAuthenticationConfig: &types.OnBehalfOfAuthenticationConfig{
+						ClientAuthenticationMethod: types.OnBehalfOfClientAuthenticationMethod("NO_CLIENT"),
 					},
 				},
 				ClientAuthenticationMethod: types.ClientAuthenticationMethodType("CLIENT_SECRET_BASIC"),

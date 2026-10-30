@@ -5,7 +5,9 @@ package omics
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/omics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -175,6 +177,78 @@ type CreateWorkflowVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerators != "" {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_accelerators, string(v.Accelerators))
+	}
+	if v.ContainerRegistryMap != nil {
+		s.WriteStruct(schemas.CreateWorkflowVersionRequest_containerRegistryMap)
+		v.ContainerRegistryMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainerRegistryMapUri != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_containerRegistryMapUri, *v.ContainerRegistryMapUri)
+	}
+	if v.DefinitionRepository != nil {
+		s.WriteStruct(schemas.CreateWorkflowVersionRequest_definitionRepository)
+		v.DefinitionRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefinitionUri != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_definitionUri, *v.DefinitionUri)
+	}
+	if v.DefinitionZip != nil {
+		s.WriteBlob(schemas.CreateWorkflowVersionRequest_definitionZip, v.DefinitionZip)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_description, *v.Description)
+	}
+	if v.Engine != "" {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_engine, string(v.Engine))
+	}
+	if v.Main != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_main, *v.Main)
+	}
+	serializeWorkflowParameterTemplate(s, schemas.CreateWorkflowVersionRequest_parameterTemplate, v.ParameterTemplate)
+	if v.ParameterTemplatePath != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_parameterTemplatePath, *v.ParameterTemplatePath)
+	}
+	if v.ReadmeMarkdown != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_readmeMarkdown, *v.ReadmeMarkdown)
+	}
+	if v.ReadmePath != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_readmePath, *v.ReadmePath)
+	}
+	if v.ReadmeUri != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_readmeUri, *v.ReadmeUri)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_requestId, *v.RequestId)
+	}
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.CreateWorkflowVersionRequest_storageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_storageType, string(v.StorageType))
+	}
+	serializeTagMap(s, schemas.CreateWorkflowVersionRequest_tags, v.Tags)
+	if v.VersionName != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_versionName, *v.VersionName)
+	}
+	if v.WorkflowBucketOwnerId != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_workflowBucketOwnerId, *v.WorkflowBucketOwnerId)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateWorkflowVersionRequest_workflowId, *v.WorkflowId)
+	}
+}
+
 type CreateWorkflowVersionOutput struct {
 
 	// ARN of the workflow version.
@@ -201,13 +275,63 @@ type CreateWorkflowVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkflowVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkflowVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkflowVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateWorkflowVersionResponse_arn, *v.Arn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateWorkflowVersionResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateWorkflowVersionResponse_tags, v.Tags)
+	if v.Uuid != nil {
+		s.WriteString(schemas.CreateWorkflowVersionResponse_uuid, *v.Uuid)
+	}
+	if v.VersionName != nil {
+		s.WriteString(schemas.CreateWorkflowVersionResponse_versionName, *v.VersionName)
+	}
+	if v.WorkflowId != nil {
+		s.WriteString(schemas.CreateWorkflowVersionResponse_workflowId, *v.WorkflowId)
+	}
+}
+func (v *CreateWorkflowVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkflowVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkflowVersionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWorkflowVersionResponse_arn, v.Arn)
+		case schemas.CreateWorkflowVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateWorkflowVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowStatus(ev)
+			return nil
+		case schemas.CreateWorkflowVersionResponse_tags:
+			return deserializeTagMap(d, schemas.CreateWorkflowVersionResponse_tags, &v.Tags)
+		case schemas.CreateWorkflowVersionResponse_uuid:
+			v.Uuid = new(string)
+			return d.ReadString(schemas.CreateWorkflowVersionResponse_uuid, v.Uuid)
+		case schemas.CreateWorkflowVersionResponse_versionName:
+			v.VersionName = new(string)
+			return d.ReadString(schemas.CreateWorkflowVersionResponse_versionName, v.VersionName)
+		case schemas.CreateWorkflowVersionResponse_workflowId:
+			v.WorkflowId = new(string)
+			return d.ReadString(schemas.CreateWorkflowVersionResponse_workflowId, v.WorkflowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkflowVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkflowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowVersion, schemas.CreateWorkflowVersionRequest, schemas.CreateWorkflowVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkflowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkflowVersion, schemas.CreateWorkflowVersionRequest, schemas.CreateWorkflowVersionResponse), output: &CreateWorkflowVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 

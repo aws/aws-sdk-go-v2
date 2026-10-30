@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Connectors":[{"Arn":"__Arn__","CertificateAuthorityArn":"__CertificateAuthorityArn__","CertificateEnrollmentPolicyServerEndpoint":"__CertificateEnrollmentPolicyServerEndpoint__","CreatedAt":946684800,"DirectoryId":"__DirectoryId__","Status":"CREATING","StatusReason":"CA_CERTIFICATE_REGISTRATION_FAILED","UpdatedAt":946684800,"VpcInformation":{"IpAddressType":"IPV4","SecurityGroupIds":["__Member__","__Member__"]}},{"Arn":"__Arn__","CertificateAuthorityArn":"__CertificateAuthorityArn__","CertificateEnrollmentPolicyServerEndpoint":"__CertificateEnrollmentPolicyServerEndpoint__","CreatedAt":946684800,"DirectoryId":"__DirectoryId__","Status":"CREATING","StatusReason":"CA_CERTIFICATE_REGISTRATION_FAILED","UpdatedAt":946684800,"VpcInformation":{"IpAddressType":"IPV4","SecurityGroupIds":["__Member__","__Member__"]}}],"NextToken":"__NextToken__"}
