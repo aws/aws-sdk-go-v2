@@ -593,6 +593,24 @@ func serializeAbsoluteBorrowLimitResourceList(s smithy.ShapeSerializer, schema *
 	s.CloseList()
 }
 
+func serializeAcceleratorPartitionLayouts(s smithy.ShapeSerializer, schema *smithy.Schema, v []AcceleratorPartitionLayout) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeAcceleratorPartitionTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeActionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []ActionSummary) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -3895,6 +3913,49 @@ func deserializeAbsoluteBorrowLimitResourceList(d smithy.ShapeDeserializer, s *s
 
 		vv = ComputeQuotaResourceConfig{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcceleratorPartitionLayouts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AcceleratorPartitionLayout) error {
+	*v = make([]AcceleratorPartitionLayout, 0)
+	var vv AcceleratorPartitionLayout
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AcceleratorPartitionLayout
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AcceleratorPartitionLayout{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAcceleratorPartitionTypeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	*v = make([]string, 0)
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero string
+			*v = append(*v, zero)
+			return nil
+		}
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

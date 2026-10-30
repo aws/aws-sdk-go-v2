@@ -575,6 +575,12 @@ var DbStorageType_INFLUX_IO_INCLUDED_T2 *smithy.Schema
 
 var DbStorageType_INFLUX_IO_INCLUDED_T3 *smithy.Schema
 
+var DeploymentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.timestreaminfluxdb",
+	Name:      "DeploymentConfiguration",
+}, smithy.ShapeTypeUnion, 1)
+var DeploymentConfiguration_InfluxDBv3Enterprise *smithy.Schema
+
 var DeploymentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "DeploymentType",
@@ -786,6 +792,12 @@ var InfluxDBv3CoreParameters_pluginRepositoryUrl *smithy.Schema
 
 var InfluxDBv3CoreParameters_pluginRepositorySecretArn *smithy.Schema
 
+var InfluxDBv3EnterpriseDeploymentConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.timestreaminfluxdb",
+	Name:      "InfluxDBv3EnterpriseDeploymentConfiguration",
+}, smithy.ShapeTypeStructure, 1)
+var InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups *smithy.Schema
+
 var InfluxDBv3EnterpriseParameters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "InfluxDBv3EnterpriseParameters",
@@ -994,6 +1006,22 @@ var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "NextToken",
 }, smithy.ShapeTypeString, 0)
+
+var NodeGroup = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.timestreaminfluxdb",
+	Name:      "NodeGroup",
+}, smithy.ShapeTypeStructure, 3)
+var NodeGroup_instanceModes *smithy.Schema
+
+var NodeGroup_instanceType *smithy.Schema
+
+var NodeGroup_count *smithy.Schema
+
+var _NodeGroupList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.timestreaminfluxdb",
+	Name:      "NodeGroupList",
+}, smithy.ShapeTypeList, 1)
+var _NodeGroupList_member *smithy.Schema
 
 var _Organization = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
@@ -1238,7 +1266,7 @@ var CreateDbBackupInput_tags *smithy.Schema
 var CreateDbBackupOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "CreateDbBackupOutput",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var CreateDbBackupOutput_id *smithy.Schema
 
 var CreateDbBackupOutput_name *smithy.Schema
@@ -1262,6 +1290,8 @@ var CreateDbBackupOutput_deploymentType *smithy.Schema
 var CreateDbBackupOutput_kmsKeyId *smithy.Schema
 
 var CreateDbBackupOutput_clusterConfiguration *smithy.Schema
+
+var CreateDbBackupOutput_deploymentConfiguration *smithy.Schema
 
 var CreateDbBackupOutput_dbParameterGroupId *smithy.Schema
 
@@ -1292,7 +1322,7 @@ var CreateDbBackupOutput_maintenanceSchedule *smithy.Schema
 var CreateDbClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "CreateDbClusterInput",
-}, smithy.ShapeTypeStructure, 21)
+}, smithy.ShapeTypeStructure, 22)
 var CreateDbClusterInput_name *smithy.Schema
 
 var CreateDbClusterInput_username *smithy.Schema
@@ -1322,6 +1352,8 @@ var CreateDbClusterInput_vpcSubnetIds *smithy.Schema
 var CreateDbClusterInput_vpcSecurityGroupIds *smithy.Schema
 
 var CreateDbClusterInput_deploymentType *smithy.Schema
+
+var CreateDbClusterInput_deploymentConfiguration *smithy.Schema
 
 var CreateDbClusterInput_failoverMode *smithy.Schema
 
@@ -1480,7 +1512,7 @@ var DeleteDbBackupInput_identifier *smithy.Schema
 var DeleteDbBackupOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "DeleteDbBackupOutput",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var DeleteDbBackupOutput_id *smithy.Schema
 
 var DeleteDbBackupOutput_name *smithy.Schema
@@ -1504,6 +1536,8 @@ var DeleteDbBackupOutput_deploymentType *smithy.Schema
 var DeleteDbBackupOutput_kmsKeyId *smithy.Schema
 
 var DeleteDbBackupOutput_clusterConfiguration *smithy.Schema
+
+var DeleteDbBackupOutput_deploymentConfiguration *smithy.Schema
 
 var DeleteDbBackupOutput_dbParameterGroupId *smithy.Schema
 
@@ -1620,7 +1654,7 @@ var GetDbBackupInput_identifier *smithy.Schema
 var GetDbBackupOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "GetDbBackupOutput",
-}, smithy.ShapeTypeStructure, 25)
+}, smithy.ShapeTypeStructure, 26)
 var GetDbBackupOutput_id *smithy.Schema
 
 var GetDbBackupOutput_name *smithy.Schema
@@ -1644,6 +1678,8 @@ var GetDbBackupOutput_deploymentType *smithy.Schema
 var GetDbBackupOutput_kmsKeyId *smithy.Schema
 
 var GetDbBackupOutput_clusterConfiguration *smithy.Schema
+
+var GetDbBackupOutput_deploymentConfiguration *smithy.Schema
 
 var GetDbBackupOutput_dbParameterGroupId *smithy.Schema
 
@@ -1680,7 +1716,7 @@ var GetDbClusterInput_dbClusterId *smithy.Schema
 var GetDbClusterOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "GetDbClusterOutput",
-}, smithy.ShapeTypeStructure, 27)
+}, smithy.ShapeTypeStructure, 28)
 var GetDbClusterOutput_id *smithy.Schema
 
 var GetDbClusterOutput_name *smithy.Schema
@@ -1730,6 +1766,8 @@ var GetDbClusterOutput_vpcSecurityGroupIds *smithy.Schema
 var GetDbClusterOutput_failoverMode *smithy.Schema
 
 var GetDbClusterOutput_clusterConfiguration *smithy.Schema
+
+var GetDbClusterOutput_deploymentConfiguration *smithy.Schema
 
 var GetDbClusterOutput_dbBackupConfigurations *smithy.Schema
 
@@ -2060,7 +2098,7 @@ var UntagResourceRequest_tagKeys *smithy.Schema
 var UpdateDbClusterInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.timestreaminfluxdb",
 	Name:      "UpdateDbClusterInput",
-}, smithy.ShapeTypeStructure, 8)
+}, smithy.ShapeTypeStructure, 9)
 var UpdateDbClusterInput_dbClusterId *smithy.Schema
 
 var UpdateDbClusterInput_logDeliveryConfiguration *smithy.Schema
@@ -2070,6 +2108,8 @@ var UpdateDbClusterInput_dbParameterGroupIdentifier *smithy.Schema
 var UpdateDbClusterInput_port *smithy.Schema
 
 var UpdateDbClusterInput_dbInstanceType *smithy.Schema
+
+var UpdateDbClusterInput_deploymentConfiguration *smithy.Schema
 
 var UpdateDbClusterInput_failoverMode *smithy.Schema
 
@@ -2476,6 +2516,18 @@ func init() {
 
 	_DbParameterGroupSummaryList_member = _DbParameterGroupSummaryList.AddMember("member", DbParameterGroupSummary)
 
+	NodeGroup_instanceModes = NodeGroup.AddMember("instanceModes", _InstanceModeList)
+
+	NodeGroup_instanceType = NodeGroup.AddMember("instanceType", DbInstanceType)
+
+	NodeGroup_count = NodeGroup.AddMember("count", smithyprelude.Integer)
+
+	_NodeGroupList_member = _NodeGroupList.AddMember("member", NodeGroup)
+
+	InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups = InfluxDBv3EnterpriseDeploymentConfiguration.AddMember("nodeGroups", _NodeGroupList)
+
+	DeploymentConfiguration_InfluxDBv3Enterprise = DeploymentConfiguration.AddMember("InfluxDBv3Enterprise", InfluxDBv3EnterpriseDeploymentConfiguration)
+
 	DurationType_HOURS = DurationType.AddMember("HOURS", smithyprelude.Unit)
 
 	DurationType_MINUTES = DurationType.AddMember("MINUTES", smithyprelude.Unit)
@@ -2872,6 +2924,8 @@ func init() {
 
 	CreateDbBackupOutput_clusterConfiguration = CreateDbBackupOutput.AddMember("clusterConfiguration", ClusterConfiguration)
 
+	CreateDbBackupOutput_deploymentConfiguration = CreateDbBackupOutput.AddMember("deploymentConfiguration", DeploymentConfiguration)
+
 	CreateDbBackupOutput_dbParameterGroupId = CreateDbBackupOutput.AddMember("dbParameterGroupId", _DbParameterGroupId)
 
 	CreateDbBackupOutput_dbInstanceType = CreateDbBackupOutput.AddMember("dbInstanceType", DbInstanceType)
@@ -2927,6 +2981,8 @@ func init() {
 	CreateDbClusterInput_vpcSecurityGroupIds = CreateDbClusterInput.AddMember("vpcSecurityGroupIds", _VpcSecurityGroupIdList)
 
 	CreateDbClusterInput_deploymentType = CreateDbClusterInput.AddMember("deploymentType", ClusterDeploymentType)
+
+	CreateDbClusterInput_deploymentConfiguration = CreateDbClusterInput.AddMember("deploymentConfiguration", DeploymentConfiguration)
 
 	CreateDbClusterInput_failoverMode = CreateDbClusterInput.AddMember("failoverMode", FailoverMode)
 
@@ -3082,6 +3138,8 @@ func init() {
 
 	DeleteDbBackupOutput_clusterConfiguration = DeleteDbBackupOutput.AddMember("clusterConfiguration", ClusterConfiguration)
 
+	DeleteDbBackupOutput_deploymentConfiguration = DeleteDbBackupOutput.AddMember("deploymentConfiguration", DeploymentConfiguration)
+
 	DeleteDbBackupOutput_dbParameterGroupId = DeleteDbBackupOutput.AddMember("dbParameterGroupId", _DbParameterGroupId)
 
 	DeleteDbBackupOutput_dbInstanceType = DeleteDbBackupOutput.AddMember("dbInstanceType", DbInstanceType)
@@ -3198,6 +3256,8 @@ func init() {
 
 	GetDbBackupOutput_clusterConfiguration = GetDbBackupOutput.AddMember("clusterConfiguration", ClusterConfiguration)
 
+	GetDbBackupOutput_deploymentConfiguration = GetDbBackupOutput.AddMember("deploymentConfiguration", DeploymentConfiguration)
+
 	GetDbBackupOutput_dbParameterGroupId = GetDbBackupOutput.AddMember("dbParameterGroupId", _DbParameterGroupId)
 
 	GetDbBackupOutput_dbInstanceType = GetDbBackupOutput.AddMember("dbInstanceType", DbInstanceType)
@@ -3275,6 +3335,8 @@ func init() {
 	GetDbClusterOutput_failoverMode = GetDbClusterOutput.AddMember("failoverMode", FailoverMode)
 
 	GetDbClusterOutput_clusterConfiguration = GetDbClusterOutput.AddMember("clusterConfiguration", ClusterConfiguration)
+
+	GetDbClusterOutput_deploymentConfiguration = GetDbClusterOutput.AddMember("deploymentConfiguration", DeploymentConfiguration)
 
 	GetDbClusterOutput_dbBackupConfigurations = GetDbClusterOutput.AddMember("dbBackupConfigurations", _DbBackupConfigurationOutputList)
 
@@ -3515,6 +3577,8 @@ func init() {
 	UpdateDbClusterInput_port = UpdateDbClusterInput.AddMember("port", _Port)
 
 	UpdateDbClusterInput_dbInstanceType = UpdateDbClusterInput.AddMember("dbInstanceType", DbInstanceType)
+
+	UpdateDbClusterInput_deploymentConfiguration = UpdateDbClusterInput.AddMember("deploymentConfiguration", DeploymentConfiguration)
 
 	UpdateDbClusterInput_failoverMode = UpdateDbClusterInput.AddMember("failoverMode", FailoverMode)
 

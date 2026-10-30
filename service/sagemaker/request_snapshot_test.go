@@ -3797,6 +3797,20 @@ func TestCheckRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -3852,6 +3866,20 @@ func TestCheckRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -4005,6 +4033,20 @@ func TestCheckRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -4060,6 +4102,20 @@ func TestCheckRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -5529,6 +5585,7 @@ func TestCheckRequestSnapshot_CreateInferenceComponent(t *testing.T) {
 				NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 				MinMemoryRequiredInMb:              ptr.Int32(1),
 				MaxMemoryRequiredInMb:              ptr.Int32(1),
+				AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 			},
 			BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 			DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -5574,6 +5631,7 @@ func TestCheckRequestSnapshot_CreateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -5618,6 +5676,7 @@ func TestCheckRequestSnapshot_CreateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -20668,6 +20727,7 @@ func TestCheckRequestSnapshot_UpdateInferenceComponent(t *testing.T) {
 				NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 				MinMemoryRequiredInMb:              ptr.Int32(1),
 				MaxMemoryRequiredInMb:              ptr.Int32(1),
+				AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 			},
 			BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 			DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -20713,6 +20773,7 @@ func TestCheckRequestSnapshot_UpdateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -20757,6 +20818,7 @@ func TestCheckRequestSnapshot_UpdateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -26522,6 +26584,20 @@ func TestUpdateRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -26577,6 +26653,20 @@ func TestUpdateRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -26730,6 +26820,20 @@ func TestUpdateRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -26785,6 +26889,20 @@ func TestUpdateRequestSnapshot_CreateEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -28254,6 +28372,7 @@ func TestUpdateRequestSnapshot_CreateInferenceComponent(t *testing.T) {
 				NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 				MinMemoryRequiredInMb:              ptr.Int32(1),
 				MaxMemoryRequiredInMb:              ptr.Int32(1),
+				AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 			},
 			BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 			DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -28299,6 +28418,7 @@ func TestUpdateRequestSnapshot_CreateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -28343,6 +28463,7 @@ func TestUpdateRequestSnapshot_CreateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -43393,6 +43514,7 @@ func TestUpdateRequestSnapshot_UpdateInferenceComponent(t *testing.T) {
 				NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 				MinMemoryRequiredInMb:              ptr.Int32(1),
 				MaxMemoryRequiredInMb:              ptr.Int32(1),
+				AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 			},
 			BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 			DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -43438,6 +43560,7 @@ func TestUpdateRequestSnapshot_UpdateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{
@@ -43482,6 +43605,7 @@ func TestUpdateRequestSnapshot_UpdateInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfig{

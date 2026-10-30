@@ -3791,7 +3791,8 @@ type PreEvaluationFilterResourceType string
 
 // Enum values for PreEvaluationFilterResourceType
 const (
-	PreEvaluationFilterResourceTypeContact PreEvaluationFilterResourceType = "CONTACT"
+	PreEvaluationFilterResourceTypeContact           PreEvaluationFilterResourceType = "CONTACT"
+	PreEvaluationFilterResourceTypeContactEvaluation PreEvaluationFilterResourceType = "CONTACT_EVALUATION"
 )
 
 // Values returns all known values for PreEvaluationFilterResourceType. Note that
@@ -3802,6 +3803,7 @@ const (
 func (PreEvaluationFilterResourceType) Values() []PreEvaluationFilterResourceType {
 	return []PreEvaluationFilterResourceType{
 		"CONTACT",
+		"CONTACT_EVALUATION",
 	}
 }
 

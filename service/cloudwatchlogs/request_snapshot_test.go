@@ -623,6 +623,7 @@ func TestCheckRequestSnapshot_DeleteAccountPolicy(t *testing.T) {
 	input := &DeleteAccountPolicyInput{
 		PolicyName: ptr.String("__PolicyName__"),
 		PolicyType: types.PolicyType("DATA_PROTECTION_POLICY"),
+		DryRun:     true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -2761,6 +2762,7 @@ func TestCheckRequestSnapshot_PutAccountPolicy(t *testing.T) {
 		PolicyType:        types.PolicyType("DATA_PROTECTION_POLICY"),
 		Scope:             types.Scope("ALL"),
 		SelectionCriteria: ptr.String("__SelectionCriteria__"),
+		DryRun:            true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -5041,6 +5043,7 @@ func TestUpdateRequestSnapshot_DeleteAccountPolicy(t *testing.T) {
 	input := &DeleteAccountPolicyInput{
 		PolicyName: ptr.String("__PolicyName__"),
 		PolicyType: types.PolicyType("DATA_PROTECTION_POLICY"),
+		DryRun:     true,
 	}
 	body := &bytes.Buffer{}
 	method := ""
@@ -7179,6 +7182,7 @@ func TestUpdateRequestSnapshot_PutAccountPolicy(t *testing.T) {
 		PolicyType:        types.PolicyType("DATA_PROTECTION_POLICY"),
 		Scope:             types.Scope("ALL"),
 		SelectionCriteria: ptr.String("__SelectionCriteria__"),
+		DryRun:            true,
 	}
 	body := &bytes.Buffer{}
 	method := ""

@@ -37,10 +37,22 @@ type UpdateDbClusterInput struct {
 	DbBackupConfigurations []types.DbBackupConfiguration
 
 	// Update the DB cluster to use the specified DB instance Type.
+	//
+	// You can't specify both dbInstanceType and deploymentConfiguration in the same
+	// request. When you use deploymentConfiguration, the instance type is specified
+	// per node group.
 	DbInstanceType types.DbInstanceType
 
 	// Update the DB cluster to use the specified DB parameter group.
 	DbParameterGroupIdentifier *string
+
+	// The updated compute topology for the cluster, defined as a set of node groups.
+	// Use deploymentConfiguration to change the cluster's topology or scale its
+	// compute in a single call. You can't specify both deploymentConfiguration and
+	// dbInstanceType in the same request. When you provide a deployment configuration,
+	// Timestream for InfluxDB ignores any node-count parameters in the associated DB
+	// parameter group.
+	DeploymentConfiguration types.DeploymentConfiguration
 
 	// Update the DB cluster's failover behavior.
 	FailoverMode types.FailoverMode
@@ -76,6 +88,9 @@ func (v *UpdateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DbParameterGroupIdentifier != nil {
 		s.WriteString(schemas.UpdateDbClusterInput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
+	}
+	if v.DeploymentConfiguration != nil {
+		serializeDeploymentConfiguration(s, schemas.UpdateDbClusterInput_deploymentConfiguration, v.DeploymentConfiguration)
 	}
 	if v.FailoverMode != "" {
 		s.WriteString(schemas.UpdateDbClusterInput_failoverMode, string(v.FailoverMode))

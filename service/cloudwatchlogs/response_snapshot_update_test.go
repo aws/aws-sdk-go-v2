@@ -449,9 +449,31 @@ func TestUpdateResponseSnapshot_CreateScheduledQuery(t *testing.T) {
 }
 
 func TestUpdateResponseSnapshot_DeleteAccountPolicy(t *testing.T) {
-	want := &DeleteAccountPolicyOutput{}
+	want := &DeleteAccountPolicyOutput{
+		DryRunResult: &types.DryRunResult{
+			TotalMatchedLogGroups:           1,
+			IncreasedRetentionLogGroupCount: 1,
+			DecreasedRetentionLogGroupCount: 1,
+			UnchangedRetentionLogGroupCount: 1,
+			FailedAnalysisCount:             1,
+			TopLogGroupsImpacted: []types.LogGroupImpact{
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+			},
+		},
+	}
 	proto := awsjson.New11(schemas.Logs_20140328)
-	opSchema := smithy.NewOperationSchema(schemas.DeleteAccountPolicy, nil, nil)
+	opSchema := smithy.NewOperationSchema(schemas.DeleteAccountPolicy, schemas.DeleteAccountPolicyResponse, schemas.DeleteAccountPolicyResponse)
 	req := smithyhttp.NewStackRequest().(*smithyhttp.Request)
 	if err := proto.SerializeRequest(context.Background(), opSchema, want, req); err != nil {
 		t.Fatal(err)
@@ -1598,6 +1620,7 @@ func TestUpdateResponseSnapshot_DescribeLogGroups(t *testing.T) {
 				LogGroupArn:                      ptr.String("__LogGroupArn__"),
 				DeletionProtectionEnabled:        ptr.Bool(true),
 				BearerTokenAuthenticationEnabled: ptr.Bool(true),
+				RetentionPolicyName:              ptr.String("__RetentionPolicyName__"),
 			},
 			{
 				LogGroupName:         ptr.String("__LogGroupName__"),
@@ -1616,6 +1639,7 @@ func TestUpdateResponseSnapshot_DescribeLogGroups(t *testing.T) {
 				LogGroupArn:                      ptr.String("__LogGroupArn__"),
 				DeletionProtectionEnabled:        ptr.Bool(true),
 				BearerTokenAuthenticationEnabled: ptr.Bool(true),
+				RetentionPolicyName:              ptr.String("__RetentionPolicyName__"),
 			},
 		},
 		NextToken: ptr.String("__NextToken__"),
@@ -3808,6 +3832,27 @@ func TestUpdateResponseSnapshot_PutAccountPolicy(t *testing.T) {
 			Scope:             types.Scope("ALL"),
 			SelectionCriteria: ptr.String("__SelectionCriteria__"),
 			AccountId:         ptr.String("__AccountId__"),
+		},
+		DryRunResult: &types.DryRunResult{
+			TotalMatchedLogGroups:           1,
+			IncreasedRetentionLogGroupCount: 1,
+			DecreasedRetentionLogGroupCount: 1,
+			UnchangedRetentionLogGroupCount: 1,
+			FailedAnalysisCount:             1,
+			TopLogGroupsImpacted: []types.LogGroupImpact{
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+				{
+					LogGroupName:      ptr.String("__LogGroupName__"),
+					CurrentRetention:  ptr.String("__CurrentRetention__"),
+					ProposedRetention: ptr.String("__ProposedRetention__"),
+					StoredBytes:       ptr.Int64(1),
+				},
+			},
 		},
 	}
 	proto := awsjson.New11(schemas.Logs_20140328)

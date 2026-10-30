@@ -1,4 +1,4 @@
 200
 Content-Type: application/json
 
-{"AllowProfileCreation":true,"Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"Keys":{"key0":[{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]},{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]}]},"SourceLastUpdatedTimestampFormat":"__SourceLastUpdatedTimestampFormat__","SourceName":"__SourceName__","SourceObject":"__SourceObject__","TemplateId":"__TemplateId__"}
+{"AllowProfileCreation":true,"DefaultMaxProfileObjectCount":1,"DefaultMaxProfileObjectCountEffectiveAfter":946684800,"Fields":{"key0":{"ContentType":"STRING","Source":"__Source__","Target":"__Target__"}},"Keys":{"key0":[{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]},{"FieldNames":["__Member__","__Member__"],"StandardIdentifiers":["PROFILE","PROFILE"]}]},"SourceLastUpdatedTimestampFormat":"__SourceLastUpdatedTimestampFormat__","SourceName":"__SourceName__","SourceObject":"__SourceObject__","StoreOnly":true,"TemplateId":"__TemplateId__"}

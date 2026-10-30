@@ -263,6 +263,9 @@ type DBCluster struct {
 	// cluster.
 	ReplicationSourceIdentifier *string
 
+	// The version of the Amazon DocumentDB Serverless platform used by the cluster.
+	ServerlessV2PlatformVersion *string
+
 	// The scaling configuration of an Amazon DocumentDB Serverless cluster.
 	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInfo
 
@@ -1156,6 +1159,38 @@ type ServerlessV2FeaturesSupport struct {
 	// in an Amazon DocumentDB Serverless cluster. You can specify DCU values in
 	// half-step increments, such as 8, 8.5, 9, and so on.
 	MinCapacity *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a specific Amazon DocumentDB Serverless platform
+// version, including its version number, status, engine, and supported features.
+type ServerlessV2PlatformVersionInfo struct {
+
+	// The name of the database engine.
+	Engine *string
+
+	// Specifies whether this platform version is the default version for the engine.
+	// The default platform version is the version used for new DB clusters.
+	IsDefault *bool
+
+	// Specifies any Amazon DocumentDB Serverless v2 properties or limits that differ
+	// between platform versions. You can retrieve the platform version of an existing
+	// cluster and check whether it supports specific features before you use them.
+	ServerlessV2FeaturesSupport *ServerlessV2FeaturesSupport
+
+	// The version number of the serverless platform.
+	ServerlessV2PlatformVersion *string
+
+	// The description of the serverless platform.
+	ServerlessV2PlatformVersionDescription *string
+
+	// The status of the serverless platform. Valid statuses are the following:
+	//
+	//   - enabled - The platform version is in use.
+	//
+	//   - disabled - The platform version is not in use.
+	Status *string
 
 	noSmithyDocumentSerde
 }

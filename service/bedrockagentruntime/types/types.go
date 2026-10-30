@@ -567,6 +567,9 @@ func (v *AgentCollaboratorOutputPayload) Deserialize(d smithy.ShapeDeserializer)
 // An action taken during agentic retrieval.
 type AgenticRetrieveAction struct {
 
+	// The details of code that the agent chose to run.
+	CodeExecution *AgenticRetrieveCodeExecutionDetails
+
 	// Details of a full document expansion action.
 	FullDocumentExpansion *AgenticRetrieveFullDocExpansionDetails
 
@@ -586,6 +589,11 @@ func (v *AgenticRetrieveAction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AgenticRetrieveAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeExecution != nil {
+		s.WriteStruct(schemas.AgenticRetrieveAction_codeExecution)
+		v.CodeExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
 	if v.FullDocumentExpansion != nil {
 		s.WriteStruct(schemas.AgenticRetrieveAction_fullDocumentExpansion)
 		v.FullDocumentExpansion.SerializeMembers(s)
@@ -605,6 +613,9 @@ func (v *AgenticRetrieveAction) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *AgenticRetrieveAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AgenticRetrieveAction, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.AgenticRetrieveAction_codeExecution:
+			v.CodeExecution = &AgenticRetrieveCodeExecutionDetails{}
+			return v.CodeExecution.Deserialize(d)
 		case schemas.AgenticRetrieveAction_fullDocumentExpansion:
 			v.FullDocumentExpansion = &AgenticRetrieveFullDocExpansionDetails{}
 			return v.FullDocumentExpansion.Deserialize(d)
@@ -903,6 +914,81 @@ func (v *AgenticRetrieveCitationReference) Deserialize(d smithy.ShapeDeserialize
 		case schemas.AgenticRetrieveCitationReference_resultIndex:
 			v.ResultIndex = new(int32)
 			return d.ReadInt32(schemas.AgenticRetrieveCitationReference_resultIndex, v.ResultIndex)
+		}
+		return nil
+	})
+}
+
+// The details of code that the agent chose to run in an isolated sandbox. The
+// record includes the documents that the code reads. The corresponding
+// CodeExecution step reports the outcome.
+type AgenticRetrieveCodeExecutionDetails struct {
+
+	// The documents that the code reads. This field is present when the code reads
+	// documents.
+	Documents []AgenticRetrieveCodeExecutionDocument
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveCodeExecutionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveCodeExecutionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveCodeExecutionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Documents != nil {
+		serializeAgenticRetrieveCodeExecutionDocumentList(s, schemas.AgenticRetrieveCodeExecutionDetails_documents, v.Documents)
+	}
+}
+func (v *AgenticRetrieveCodeExecutionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveCodeExecutionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveCodeExecutionDetails_documents:
+			return deserializeAgenticRetrieveCodeExecutionDocumentList(d, schemas.AgenticRetrieveCodeExecutionDetails_documents, &v.Documents)
+		}
+		return nil
+	})
+}
+
+// A document that a code execution action reads.
+type AgenticRetrieveCodeExecutionDocument struct {
+
+	// The identifier of the document.
+	DocumentId *string
+
+	// The source retriever associated with the document.
+	SourceRetriever *AgenticRetrieveSourceRetriever
+
+	noSmithyDocumentSerde
+}
+
+func (v *AgenticRetrieveCodeExecutionDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgenticRetrieveCodeExecutionDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgenticRetrieveCodeExecutionDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentId != nil {
+		s.WriteString(schemas.AgenticRetrieveCodeExecutionDocument_documentId, *v.DocumentId)
+	}
+	if v.SourceRetriever != nil {
+		s.WriteStruct(schemas.AgenticRetrieveCodeExecutionDocument_sourceRetriever)
+		v.SourceRetriever.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgenticRetrieveCodeExecutionDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgenticRetrieveCodeExecutionDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgenticRetrieveCodeExecutionDocument_documentId:
+			v.DocumentId = new(string)
+			return d.ReadString(schemas.AgenticRetrieveCodeExecutionDocument_documentId, v.DocumentId)
+		case schemas.AgenticRetrieveCodeExecutionDocument_sourceRetriever:
+			v.SourceRetriever = &AgenticRetrieveSourceRetriever{}
+			return v.SourceRetriever.Deserialize(d)
 		}
 		return nil
 	})

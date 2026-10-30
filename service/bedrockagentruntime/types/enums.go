@@ -227,6 +227,9 @@ const (
 	// The phase that restores prior session history from AgentCore Memory short-term
 	// memory, before the agent begins work.
 	AgenticRetrieveStepSessionHistoryLoad AgenticRetrieveStep = "SessionHistoryLoad"
+	// The phase that runs agent-generated code in an isolated sandbox. The code can
+	// read documents retrieved earlier in the same request.
+	AgenticRetrieveStepCodeExecution AgenticRetrieveStep = "CodeExecution"
 )
 
 // Values returns all known values for AgenticRetrieveStep. Note that this can be
@@ -240,6 +243,7 @@ func (AgenticRetrieveStep) Values() []AgenticRetrieveStep {
 		"SpeculativeRetrieval",
 		"FullDocumentExpansion",
 		"SessionHistoryLoad",
+		"CodeExecution",
 	}
 }
 

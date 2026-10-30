@@ -10,9 +10,9 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Creates a [version] from the current code and configuration of a function. Use versions
-// to create a snapshot of your function code and configuration that doesn't
-// change.
+// Creates a [version] from the current code and configuration of a Lambda Event Function.
+// Use versions to create a snapshot of your function code and configuration that
+// doesn't change.
 //
 // Lambda doesn't publish a version if the function's configuration and code
 // haven't changed since the last version. Use UpdateFunctionCodeor UpdateFunctionConfiguration to update the function before

@@ -536,8 +536,10 @@ var EksConfiguration_subnetIds *smithy.Schema
 var ExporterConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amp",
 	Name:      "ExporterConfiguration",
-}, smithy.ShapeTypeUnion, 1)
+}, smithy.ShapeTypeUnion, 2)
 var ExporterConfiguration_openSearchConfiguration *smithy.Schema
+
+var ExporterConfiguration_kafkaConfiguration *smithy.Schema
 
 var _ExporterList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amp",
@@ -587,6 +589,21 @@ var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 var InternalServerException_message *smithy.Schema
 
 var InternalServerException_retryAfterSeconds *smithy.Schema
+
+var KafkaExporterConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.amp",
+	Name:      "KafkaExporterConfiguration",
+}, smithy.ShapeTypeStructure, 3)
+var KafkaExporterConfiguration_clusterArn *smithy.Schema
+
+var KafkaExporterConfiguration_topicFilter *smithy.Schema
+
+var KafkaExporterConfiguration_consumerGroupFilter *smithy.Schema
+
+var _KafkaExporterFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.amp",
+	Name:      "KafkaExporterFilter",
+}, smithy.ShapeTypeString, 0)
 
 var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amp",
@@ -681,6 +698,11 @@ var LoggingFilter_qspThreshold *smithy.Schema
 var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.amp",
 	Name:      "LogGroupArn",
+}, smithy.ShapeTypeString, 0)
+
+var _MskClusterArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.amp",
+	Name:      "MskClusterArn",
 }, smithy.ShapeTypeString, 0)
 
 var _OpenSearchDomainArn = smithy.NewSchema(smithy.ShapeID{
@@ -2082,7 +2104,15 @@ func init() {
 
 	OpenSearchExporterConfiguration_domainArn = OpenSearchExporterConfiguration.AddMember("domainArn", _OpenSearchDomainArn)
 
+	KafkaExporterConfiguration_clusterArn = KafkaExporterConfiguration.AddMember("clusterArn", _MskClusterArn)
+
+	KafkaExporterConfiguration_topicFilter = KafkaExporterConfiguration.AddMember("topicFilter", _KafkaExporterFilter)
+
+	KafkaExporterConfiguration_consumerGroupFilter = KafkaExporterConfiguration.AddMember("consumerGroupFilter", _KafkaExporterFilter)
+
 	ExporterConfiguration_openSearchConfiguration = ExporterConfiguration.AddMember("openSearchConfiguration", OpenSearchExporterConfiguration)
+
+	ExporterConfiguration_kafkaConfiguration = ExporterConfiguration.AddMember("kafkaConfiguration", KafkaExporterConfiguration)
 
 	_ExporterList_member = _ExporterList.AddMember("member", ExporterConfiguration)
 

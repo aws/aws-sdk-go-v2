@@ -8,6 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	"time"
 )
 
 // Returns the template information for a specific object type.
@@ -62,6 +63,16 @@ type GetProfileObjectTypeTemplateOutput struct {
 	// TRUE , and if no match is found, then the service creates a new standard profile.
 	AllowProfileCreation bool
 
+	// The default maximum number of objects of this object type that can be stored
+	// per profile. This default applies when you don't set MaxProfileObjectCount on
+	// an object type created from this template. If this value isn't present, no
+	// default limit applies.
+	DefaultMaxProfileObjectCount *int32
+
+	// The timestamp after which DefaultMaxProfileObjectCount takes effect. The
+	// default limit applies only to domains created after this time.
+	DefaultMaxProfileObjectCountEffectiveAfter *time.Time
+
 	// A map of the name and ObjectType field.
 	Fields map[string]types.ObjectTypeField
 
@@ -76,6 +87,11 @@ type GetProfileObjectTypeTemplateOutput struct {
 
 	// The source of the object template.
 	SourceObject *string
+
+	// Indicates whether the template is store-only. Objects of an object type created
+	// from a store-only template are ingested and stored, but the object type can't be
+	// used by calculated attributes or event triggers.
+	StoreOnly bool
 
 	// A unique identifier for the object template.
 	TemplateId *string
@@ -96,6 +112,12 @@ func (v *GetProfileObjectTypeTemplateOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.AllowProfileCreation != false {
 		s.WriteBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, v.AllowProfileCreation)
 	}
+	if v.DefaultMaxProfileObjectCount != nil {
+		s.WriteInt32(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount, *v.DefaultMaxProfileObjectCount)
+	}
+	if v.DefaultMaxProfileObjectCountEffectiveAfter != nil {
+		s.WriteTime(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter, *v.DefaultMaxProfileObjectCountEffectiveAfter)
+	}
 	if v.Fields != nil {
 		serializeFieldMap(s, schemas.GetProfileObjectTypeTemplateResponse_Fields, v.Fields)
 	}
@@ -111,6 +133,9 @@ func (v *GetProfileObjectTypeTemplateOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.SourceObject != nil {
 		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_SourceObject, *v.SourceObject)
 	}
+	if v.StoreOnly != false {
+		s.WriteBool(schemas.GetProfileObjectTypeTemplateResponse_StoreOnly, v.StoreOnly)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.GetProfileObjectTypeTemplateResponse_TemplateId, *v.TemplateId)
 	}
@@ -120,6 +145,12 @@ func (v *GetProfileObjectTypeTemplateOutput) Deserialize(d smithy.ShapeDeseriali
 		switch s {
 		case schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation:
 			return d.ReadBool(schemas.GetProfileObjectTypeTemplateResponse_AllowProfileCreation, &v.AllowProfileCreation)
+		case schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount:
+			v.DefaultMaxProfileObjectCount = new(int32)
+			return d.ReadInt32(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCount, v.DefaultMaxProfileObjectCount)
+		case schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter:
+			v.DefaultMaxProfileObjectCountEffectiveAfter = new(time.Time)
+			return d.ReadTime(schemas.GetProfileObjectTypeTemplateResponse_DefaultMaxProfileObjectCountEffectiveAfter, v.DefaultMaxProfileObjectCountEffectiveAfter)
 		case schemas.GetProfileObjectTypeTemplateResponse_Fields:
 			return deserializeFieldMap(d, schemas.GetProfileObjectTypeTemplateResponse_Fields, &v.Fields)
 		case schemas.GetProfileObjectTypeTemplateResponse_Keys:
@@ -133,6 +164,8 @@ func (v *GetProfileObjectTypeTemplateOutput) Deserialize(d smithy.ShapeDeseriali
 		case schemas.GetProfileObjectTypeTemplateResponse_SourceObject:
 			v.SourceObject = new(string)
 			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_SourceObject, v.SourceObject)
+		case schemas.GetProfileObjectTypeTemplateResponse_StoreOnly:
+			return d.ReadBool(schemas.GetProfileObjectTypeTemplateResponse_StoreOnly, &v.StoreOnly)
 		case schemas.GetProfileObjectTypeTemplateResponse_TemplateId:
 			v.TemplateId = new(string)
 			return d.ReadString(schemas.GetProfileObjectTypeTemplateResponse_TemplateId, v.TemplateId)

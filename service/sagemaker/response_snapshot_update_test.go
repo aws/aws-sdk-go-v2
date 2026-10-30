@@ -7905,6 +7905,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						},
 					},
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName: ptr.String("__VariantName__"),
@@ -7991,6 +8005,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							TotalInstanceCount:       ptr.Int32(1),
 							AvailableInstanceCount:   ptr.Int32(1),
 							UsedByCurrentEndpoint:    ptr.Int32(1),
+						},
+					},
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 				},
@@ -8137,6 +8165,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							ConcurrencyThreshold: ptr.Int32(1),
 						},
 					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				{
 					VariantName: ptr.String("__VariantName__"),
@@ -8205,6 +8247,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
 							PrefixLength:         ptr.Int32(1),
 							ConcurrencyThreshold: ptr.Int32(1),
+						},
+					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
 						},
 					},
 				},
@@ -8280,6 +8336,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							ConcurrencyThreshold: ptr.Int32(1),
 						},
 					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+					},
 				},
 				{
 					VariantName: ptr.String("__VariantName__"),
@@ -8348,6 +8418,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						PrefixAwareRoutingConfig: &types.PrefixAwareRoutingConfig{
 							PrefixLength:         ptr.Int32(1),
 							ConcurrencyThreshold: ptr.Int32(1),
+						},
+					},
+					AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
+						},
+						{
+							AcceleratorPartitionTypes: []string{
+								"__Member__",
+								"__Member__",
+							},
 						},
 					},
 				},
@@ -8483,6 +8567,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 						},
 					},
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName: ptr.String("__VariantName__"),
@@ -8569,6 +8667,20 @@ func TestUpdateResponseSnapshot_DescribeEndpoint(t *testing.T) {
 							TotalInstanceCount:       ptr.Int32(1),
 							AvailableInstanceCount:   ptr.Int32(1),
 							UsedByCurrentEndpoint:    ptr.Int32(1),
+						},
+					},
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
 						},
 					},
 				},
@@ -8660,6 +8772,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -8715,6 +8841,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -8859,6 +8999,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
 				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+				},
 			},
 			{
 				VariantName:          ptr.String("__VariantName__"),
@@ -8914,6 +9068,20 @@ func TestUpdateResponseSnapshot_DescribeEndpointConfig(t *testing.T) {
 				CapacityReservationConfig: &types.ProductionVariantCapacityReservationConfig{
 					CapacityReservationPreference: types.CapacityReservationPreference("capacity-reservations-only"),
 					MlReservationArn:              ptr.String("__MlReservationArn__"),
+				},
+				AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
+					{
+						AcceleratorPartitionTypes: []string{
+							"__Member__",
+							"__Member__",
+						},
+					},
 				},
 			},
 		},
@@ -10439,6 +10607,7 @@ func TestUpdateResponseSnapshot_DescribeInferenceComponent(t *testing.T) {
 				NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 				MinMemoryRequiredInMb:              ptr.Int32(1),
 				MaxMemoryRequiredInMb:              ptr.Int32(1),
+				AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 			},
 			BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 			DataCacheConfig: &types.InferenceComponentDataCacheConfigSummary{
@@ -10488,6 +10657,7 @@ func TestUpdateResponseSnapshot_DescribeInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfigSummary{
@@ -10536,6 +10706,7 @@ func TestUpdateResponseSnapshot_DescribeInferenceComponent(t *testing.T) {
 					NumberOfAcceleratorDevicesRequired: ptr.Float32(1.0),
 					MinMemoryRequiredInMb:              ptr.Int32(1),
 					MaxMemoryRequiredInMb:              ptr.Int32(1),
+					AcceleratorPartitionType:           ptr.String("__AcceleratorPartitionType__"),
 				},
 				BaseInferenceComponentName: ptr.String("__BaseInferenceComponentName__"),
 				DataCacheConfig: &types.InferenceComponentDataCacheConfigSummary{
@@ -22887,6 +23058,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -22973,6 +23158,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -23468,6 +23667,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -23554,6 +23767,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -28085,6 +28312,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -28171,6 +28412,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},
@@ -28666,6 +28921,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 									},
 								},
 							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+							},
 						},
 						{
 							VariantName: ptr.String("__VariantName__"),
@@ -28752,6 +29021,20 @@ func TestUpdateResponseSnapshot_Search(t *testing.T) {
 										TotalInstanceCount:       ptr.Int32(1),
 										AvailableInstanceCount:   ptr.Int32(1),
 										UsedByCurrentEndpoint:    ptr.Int32(1),
+									},
+								},
+							},
+							AcceleratorPartitionLayouts: []types.AcceleratorPartitionLayout{
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
+									},
+								},
+								{
+									AcceleratorPartitionTypes: []string{
+										"__Member__",
+										"__Member__",
 									},
 								},
 							},

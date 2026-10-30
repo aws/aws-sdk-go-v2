@@ -129,6 +129,11 @@ type GetRunOutput struct {
 	// The run's output URI.
 	OutputUri *string
 
+	// The service returns the value that the StartRun request specified for
+	// outputUriPrefixMode . The service returns SERVICE_DEFINED if the request did
+	// not specify a value.
+	OutputUriPrefixMode types.RunOutputUriPrefixMode
+
 	// The run's parameters.
 	Parameters document.Interface
 
@@ -278,6 +283,9 @@ func (v *GetRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OutputUri != nil {
 		s.WriteString(schemas.GetRunResponse_outputUri, *v.OutputUri)
+	}
+	if v.OutputUriPrefixMode != "" {
+		s.WriteString(schemas.GetRunResponse_outputUriPrefixMode, string(v.OutputUriPrefixMode))
 	}
 	if v.Parameters != nil {
 		s.WriteDocument(schemas.GetRunResponse_parameters, &smithydocument.Opaque{Value: v.Parameters})
@@ -436,6 +444,13 @@ func (v *GetRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.GetRunResponse_outputUri:
 			v.OutputUri = new(string)
 			return d.ReadString(schemas.GetRunResponse_outputUri, v.OutputUri)
+		case schemas.GetRunResponse_outputUriPrefixMode:
+			var ev string
+			if err := d.ReadString(schemas.GetRunResponse_outputUriPrefixMode, &ev); err != nil {
+				return err
+			}
+			v.OutputUriPrefixMode = types.RunOutputUriPrefixMode(ev)
+			return nil
 		case schemas.GetRunResponse_parameters:
 			var dv smithydocument.Value
 			if err := d.ReadDocument(schemas.GetRunResponse_parameters, &dv); err != nil {

@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Updates the configuration for a Lambda function URL.
+// Updates the configuration for a function URL of a Lambda Event Function.
 func (c *Client) UpdateFunctionUrlConfig(ctx context.Context, params *UpdateFunctionUrlConfigInput, optFns ...func(*Options)) (*UpdateFunctionUrlConfigOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionUrlConfigInput{}

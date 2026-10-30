@@ -1,0 +1,8 @@
+{
+    "id": "9a722340-fda5-45b8-adf9-9feed866f5ce",
+    "type": "feature",
+    "description": "Create endpoints with AcceleratorPartitionLayouts on ProductionVariant and deploy inference components with AcceleratorPartitionType in ComputeResourceRequirements to divide accelerators into hardware-isolated NVIDIA MIG partitions, running multiple models per GPU. P4d, P5, G7, G7e.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

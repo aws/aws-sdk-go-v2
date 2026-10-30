@@ -1,0 +1,8 @@
+{
+    "id": "59b5a9a1-68a5-4557-b14e-59aa16426994",
+    "type": "feature",
+    "description": "Add DeploymentConfiguration field to CreateDbCluster and UpdateDbCluster APIs to support creation of heterogenous InfluxDB v3 Enterprise clusters.",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

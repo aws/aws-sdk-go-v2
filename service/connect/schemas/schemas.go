@@ -4349,6 +4349,28 @@ var CaseSlaConfiguration_TargetFieldValues *smithy.Schema
 
 var CaseSlaConfiguration_TargetSlaMinutes *smithy.Schema
 
+var CategoriesAttributeAndCondition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeAndCondition",
+}, smithy.ShapeTypeStructure, 1)
+var CategoriesAttributeAndCondition_TagConditions *smithy.Schema
+
+var CategoriesAttributeFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeFilter",
+}, smithy.ShapeTypeStructure, 3)
+var CategoriesAttributeFilter_OrConditions *smithy.Schema
+
+var CategoriesAttributeFilter_AndCondition *smithy.Schema
+
+var CategoriesAttributeFilter_TagCondition *smithy.Schema
+
+var _CategoriesAttributeOrConditionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "CategoriesAttributeOrConditionList",
+}, smithy.ShapeTypeList, 1)
+var _CategoriesAttributeOrConditionList_member *smithy.Schema
+
 var Channel = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "Channel",
@@ -12391,8 +12413,10 @@ var PreEvaluationFilterOperator_EQUALS *smithy.Schema
 var PreEvaluationFilterResourceType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "PreEvaluationFilterResourceType",
-}, smithy.ShapeTypeEnum, 1)
+}, smithy.ShapeTypeEnum, 2)
 var PreEvaluationFilterResourceType_CONTACT *smithy.Schema
+
+var PreEvaluationFilterResourceType_CONTACT_EVALUATION *smithy.Schema
 
 var PreEvaluationFilters = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -13074,7 +13098,9 @@ var _RealTimeContactAnalysisAttachments_member *smithy.Schema
 var RealTimeContactAnalysisCategoryDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RealTimeContactAnalysisCategoryDetails",
-}, smithy.ShapeTypeStructure, 1)
+}, smithy.ShapeTypeStructure, 2)
+var RealTimeContactAnalysisCategoryDetails_RuleId *smithy.Schema
+
 var RealTimeContactAnalysisCategoryDetails_PointsOfInterest *smithy.Schema
 
 var _RealTimeContactAnalysisCategoryName = smithy.NewSchema(smithy.ShapeID{
@@ -13307,6 +13333,12 @@ var _RealtimeContactAnalysisSegments = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RealtimeContactAnalysisSegments",
 }, smithy.ShapeTypeList, 1)
 var _RealtimeContactAnalysisSegments_member *smithy.Schema
+
+var RealTimeContactAnalysisSegmentsFilter = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "RealTimeContactAnalysisSegmentsFilter",
+}, smithy.ShapeTypeStructure, 1)
+var RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter *smithy.Schema
 
 var RealTimeContactAnalysisSegmentTranscript = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -14316,6 +14348,11 @@ var _RuleFunction = smithy.NewSchema(smithy.ShapeID{
 var _RuleId = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "RuleId",
+}, smithy.ShapeTypeString, 0)
+
+var _RuleId256 = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.connect",
+	Name:      "RuleId256",
 }, smithy.ShapeTypeString, 0)
 
 var _RuleName = smithy.NewSchema(smithy.ShapeID{
@@ -21665,7 +21702,7 @@ var ListQuickConnectsResponse_NextToken *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Request = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
 	Name:      "ListRealtimeContactAnalysisSegmentsV2Request",
-}, smithy.ShapeTypeStructure, 6)
+}, smithy.ShapeTypeStructure, 7)
 var ListRealtimeContactAnalysisSegmentsV2Request_InstanceId *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Request_ContactId *smithy.Schema
@@ -21677,6 +21714,8 @@ var ListRealtimeContactAnalysisSegmentsV2Request_NextToken *smithy.Schema
 var ListRealtimeContactAnalysisSegmentsV2Request_OutputType *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes *smithy.Schema
+
+var ListRealtimeContactAnalysisSegmentsV2Request_ListFilter *smithy.Schema
 
 var ListRealtimeContactAnalysisSegmentsV2Response = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.connect",
@@ -26651,6 +26690,16 @@ func init() {
 
 	Campaign_CampaignId = Campaign.AddMember("CampaignId", _CampaignId)
 
+	CategoriesAttributeAndCondition_TagConditions = CategoriesAttributeAndCondition.AddMember("TagConditions", _TagAndConditionList)
+
+	_CategoriesAttributeOrConditionList_member = _CategoriesAttributeOrConditionList.AddMember("member", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_OrConditions = CategoriesAttributeFilter.AddMember("OrConditions", _CategoriesAttributeOrConditionList)
+
+	CategoriesAttributeFilter_AndCondition = CategoriesAttributeFilter.AddMember("AndCondition", CategoriesAttributeAndCondition)
+
+	CategoriesAttributeFilter_TagCondition = CategoriesAttributeFilter.AddMember("TagCondition", TagCondition)
+
 	_ChannelList_member = _ChannelList.AddMember("member", Channel)
 
 	_Channels_member = _Channels.AddMember("member", Channel)
@@ -30571,6 +30620,8 @@ func init() {
 
 	PreEvaluationFilterResourceType_CONTACT = PreEvaluationFilterResourceType.AddMember("CONTACT", smithyprelude.Unit)
 
+	PreEvaluationFilterResourceType_CONTACT_EVALUATION = PreEvaluationFilterResourceType.AddMember("CONTACT_EVALUATION", smithyprelude.Unit)
+
 	PreEvaluationFilterType_TAG = PreEvaluationFilterType.AddMember("TAG", smithyprelude.Unit)
 
 	PreEvaluationFilterOperator_EQUALS = PreEvaluationFilterOperator.AddMember("EQUALS", smithyprelude.Unit)
@@ -30831,6 +30882,8 @@ func init() {
 
 	_RealTimeContactAnalysisPointsOfInterest_member = _RealTimeContactAnalysisPointsOfInterest.AddMember("member", RealTimeContactAnalysisPointOfInterest)
 
+	RealTimeContactAnalysisCategoryDetails_RuleId = RealTimeContactAnalysisCategoryDetails.AddMember("RuleId", _RuleId256)
+
 	RealTimeContactAnalysisCategoryDetails_PointsOfInterest = RealTimeContactAnalysisCategoryDetails.AddMember("PointsOfInterest", _RealTimeContactAnalysisPointsOfInterest)
 
 	_RealTimeContactAnalysisCharacterIntervals_member = _RealTimeContactAnalysisCharacterIntervals.AddMember("member", RealTimeContactAnalysisCharacterInterval)
@@ -30972,6 +31025,8 @@ func init() {
 	RealtimeContactAnalysisSegment_ExtractedInformation = RealtimeContactAnalysisSegment.AddMember("ExtractedInformation", RealTimeContactAnalysisSegmentExtractedInformation)
 
 	_RealtimeContactAnalysisSegments_member = _RealtimeContactAnalysisSegments.AddMember("member", RealtimeContactAnalysisSegment)
+
+	RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter = RealTimeContactAnalysisSegmentsFilter.AddMember("CategoriesAttributeFilter", CategoriesAttributeFilter)
 
 	RealTimeContactAnalysisSegmentType_Transcript = RealTimeContactAnalysisSegmentType.AddMember("Transcript", smithyprelude.Unit)
 
@@ -34884,6 +34939,8 @@ func init() {
 	ListRealtimeContactAnalysisSegmentsV2Request_OutputType = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("OutputType", RealTimeContactAnalysisOutputType)
 
 	ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("SegmentTypes", _RealTimeContactAnalysisSegmentTypes)
+
+	ListRealtimeContactAnalysisSegmentsV2Request_ListFilter = ListRealtimeContactAnalysisSegmentsV2Request.AddMember("ListFilter", RealTimeContactAnalysisSegmentsFilter)
 
 	ListRealtimeContactAnalysisSegmentsV2Response_Channel = ListRealtimeContactAnalysisSegmentsV2Response.AddMember("Channel", RealTimeContactAnalysisSupportedChannel)
 

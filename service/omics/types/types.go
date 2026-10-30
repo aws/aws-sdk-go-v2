@@ -1040,8 +1040,10 @@ type ContainerRegistryMap struct {
 	// their corresponding external repositories.
 	ImageMappings []ImageMapping
 
-	// Mapping that provides the ECR repository path where upstream container images
-	// are pulled and synchronized.
+	// The mappings between upstream container registries and repository prefixes in
+	// your Amazon Elastic Container Registry (Amazon ECR) private registry. The list
+	// can include both pull through cache mappings and mappings for registries that
+	// Amazon Web Services HealthOmics copies images from.
 	RegistryMappings []RegistryMapping
 
 	noSmithyDocumentSerde
@@ -4066,9 +4068,13 @@ func (v *ReferenceStoreFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
-// If you are using the ECR pull through cache feature, the registry mapping maps
-// between the ECR repository and the upstream registry where container images are
-// pulled and synchronized.
+// Maps an upstream container registry to a repository prefix in your Amazon
+// Elastic Container Registry (Amazon ECR) private registry. For registries that
+// Amazon ECR pull through cache supports, you create a pull through cache rule
+// that synchronizes the upstream repositories with your private repositories. You
+// can also use some registries that pull through cache doesn't support. For these
+// registries, specify credentialArn , and Amazon Web Services HealthOmics copies
+// each image into a private Amazon ECR repository the first time a task needs it.
 type RegistryMapping struct {
 
 	// The repository prefix to use in the ECR private repository.

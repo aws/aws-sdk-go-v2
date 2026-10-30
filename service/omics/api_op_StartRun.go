@@ -140,6 +140,11 @@ type StartRunInput struct {
 	// default to RESTRICTED.
 	NetworkingMode types.NetworkingMode
 
+	// You can control the path prefixes that the service adds beneath outputUri . If
+	// you don't specify a value, the service uses SERVICE_DEFINED , which adds a
+	// run-specific prefix.
+	OutputUriPrefixMode types.RunOutputUriPrefixMode
+
 	// Parameters for the run. The run needs all required parameters and can include
 	// optional parameters. The run cannot include any parameters that are not defined
 	// in the parameter template. To retrieve parameters from the run, use the GetRun
@@ -265,6 +270,9 @@ func (v *StartRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.OutputUri != nil {
 		s.WriteString(schemas.StartRunRequest_outputUri, *v.OutputUri)
+	}
+	if v.OutputUriPrefixMode != "" {
+		s.WriteString(schemas.StartRunRequest_outputUriPrefixMode, string(v.OutputUriPrefixMode))
 	}
 	if v.Parameters != nil {
 		s.WriteDocument(schemas.StartRunRequest_parameters, &smithydocument.Opaque{Value: v.Parameters})

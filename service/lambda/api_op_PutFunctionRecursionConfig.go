@@ -10,7 +10,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Sets your function's [recursive loop detection] configuration.
+// Sets the [recursive loop detection] configuration for a Lambda Event Function.
 //
 // When you configure a Lambda function to output to the same service or resource
 // that invokes the function, it's possible to create an infinite recursive loop.

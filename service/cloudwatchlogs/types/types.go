@@ -1876,6 +1876,86 @@ func (v *DestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// Contains the estimated impact of creating, updating, or deleting an
+// account-level retention policy. The analysis compares the effective retention
+// period of each log group, which accounts for all account-level retention
+// policies that apply to it, before and after the change. Log groups in the
+// Delivery class are not included.
+type DryRunResult struct {
+
+	// The number of log groups whose effective retention period would become shorter.
+	DecreasedRetentionLogGroupCount int32
+
+	// The number of log groups in the scope of the policy that could not be analyzed.
+	// These log groups are not included in totalMatchedLogGroups .
+	FailedAnalysisCount int32
+
+	// The number of log groups whose effective retention period would become longer.
+	IncreasedRetentionLogGroupCount int32
+
+	// Up to 20 log groups in the scope of the policy, sorted by stored bytes in
+	// descending order. This list can include log groups whose effective retention
+	// period would not change.
+	TopLogGroupsImpacted []LogGroupImpact
+
+	// The number of log groups in the scope of the policy that were analyzed. This
+	// value is the sum of increasedRetentionLogGroupCount ,
+	// decreasedRetentionLogGroupCount , and unchangedRetentionLogGroupCount , and does
+	// not include log groups that could not be analyzed.
+	TotalMatchedLogGroups int32
+
+	// The number of log groups whose effective retention period would not change.
+	UnchangedRetentionLogGroupCount int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *DryRunResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DryRunResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DryRunResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DecreasedRetentionLogGroupCount != 0 {
+		s.WriteInt32(schemas.DryRunResult_decreasedRetentionLogGroupCount, v.DecreasedRetentionLogGroupCount)
+	}
+	if v.FailedAnalysisCount != 0 {
+		s.WriteInt32(schemas.DryRunResult_failedAnalysisCount, v.FailedAnalysisCount)
+	}
+	if v.IncreasedRetentionLogGroupCount != 0 {
+		s.WriteInt32(schemas.DryRunResult_increasedRetentionLogGroupCount, v.IncreasedRetentionLogGroupCount)
+	}
+	if v.TopLogGroupsImpacted != nil {
+		serializeLogGroupImpacts(s, schemas.DryRunResult_topLogGroupsImpacted, v.TopLogGroupsImpacted)
+	}
+	if v.TotalMatchedLogGroups != 0 {
+		s.WriteInt32(schemas.DryRunResult_totalMatchedLogGroups, v.TotalMatchedLogGroups)
+	}
+	if v.UnchangedRetentionLogGroupCount != 0 {
+		s.WriteInt32(schemas.DryRunResult_unchangedRetentionLogGroupCount, v.UnchangedRetentionLogGroupCount)
+	}
+}
+func (v *DryRunResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DryRunResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DryRunResult_decreasedRetentionLogGroupCount:
+			return d.ReadInt32(schemas.DryRunResult_decreasedRetentionLogGroupCount, &v.DecreasedRetentionLogGroupCount)
+		case schemas.DryRunResult_failedAnalysisCount:
+			return d.ReadInt32(schemas.DryRunResult_failedAnalysisCount, &v.FailedAnalysisCount)
+		case schemas.DryRunResult_increasedRetentionLogGroupCount:
+			return d.ReadInt32(schemas.DryRunResult_increasedRetentionLogGroupCount, &v.IncreasedRetentionLogGroupCount)
+		case schemas.DryRunResult_topLogGroupsImpacted:
+			return deserializeLogGroupImpacts(d, schemas.DryRunResult_topLogGroupsImpacted, &v.TopLogGroupsImpacted)
+		case schemas.DryRunResult_totalMatchedLogGroups:
+			return d.ReadInt32(schemas.DryRunResult_totalMatchedLogGroups, &v.TotalMatchedLogGroups)
+		case schemas.DryRunResult_unchangedRetentionLogGroupCount:
+			return d.ReadInt32(schemas.DryRunResult_unchangedRetentionLogGroupCount, &v.UnchangedRetentionLogGroupCount)
+		}
+		return nil
+	})
+}
+
 // The entity associated with the log events in a PutLogEvents call.
 type Entity struct {
 
@@ -3497,6 +3577,14 @@ type LogGroup struct {
 	// [DeleteRetentionPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html
 	RetentionInDays *int32
 
+	// The name of the account-level retention policy that determines the retention
+	// period of this log group. This field is returned only when an account-level
+	// retention policy applies to the log group. When it is returned, retentionInDays
+	// shows the retention period from that policy instead of the retention period set
+	// on the log group. If the policy specifies that log events never expire,
+	// retentionInDays is not returned.
+	RetentionPolicyName *string
+
 	// The number of bytes stored.
 	StoredBytes *int64
 
@@ -3545,6 +3633,9 @@ func (v *LogGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.RetentionInDays != nil {
 		s.WriteInt32(schemas.LogGroup_retentionInDays, *v.RetentionInDays)
+	}
+	if v.RetentionPolicyName != nil {
+		s.WriteString(schemas.LogGroup_retentionPolicyName, *v.RetentionPolicyName)
 	}
 	if v.StoredBytes != nil {
 		s.WriteInt64(schemas.LogGroup_storedBytes, *v.StoredBytes)
@@ -3596,6 +3687,9 @@ func (v *LogGroup) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.LogGroup_retentionInDays:
 			v.RetentionInDays = new(int32)
 			return d.ReadInt32(schemas.LogGroup_retentionInDays, v.RetentionInDays)
+		case schemas.LogGroup_retentionPolicyName:
+			v.RetentionPolicyName = new(string)
+			return d.ReadString(schemas.LogGroup_retentionPolicyName, v.RetentionPolicyName)
 		case schemas.LogGroup_storedBytes:
 			v.StoredBytes = new(int64)
 			return d.ReadInt64(schemas.LogGroup_storedBytes, v.StoredBytes)
@@ -3639,6 +3733,68 @@ func (v *LogGroupField) Deserialize(d smithy.ShapeDeserializer) error {
 			return d.ReadString(schemas.LogGroupField_name, v.Name)
 		case schemas.LogGroupField_percent:
 			return d.ReadInt32(schemas.LogGroupField_percent, &v.Percent)
+		}
+		return nil
+	})
+}
+
+// Describes the estimated effect of an account-level retention policy change on
+// one log group.
+type LogGroupImpact struct {
+
+	// The current effective retention period of the log group, in days. A value of
+	// NEVER_EXPIRE indicates that log events in the log group never expire.
+	CurrentRetention *string
+
+	// The name of the log group.
+	LogGroupName *string
+
+	// The effective retention period of the log group, in days, after the change. A
+	// value of NEVER_EXPIRE indicates that log events in the log group would never
+	// expire.
+	ProposedRetention *string
+
+	// The number of bytes stored in the log group.
+	StoredBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+func (v *LogGroupImpact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LogGroupImpact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LogGroupImpact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentRetention != nil {
+		s.WriteString(schemas.LogGroupImpact_currentRetention, *v.CurrentRetention)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.LogGroupImpact_logGroupName, *v.LogGroupName)
+	}
+	if v.ProposedRetention != nil {
+		s.WriteString(schemas.LogGroupImpact_proposedRetention, *v.ProposedRetention)
+	}
+	if v.StoredBytes != nil {
+		s.WriteInt64(schemas.LogGroupImpact_storedBytes, *v.StoredBytes)
+	}
+}
+func (v *LogGroupImpact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LogGroupImpact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LogGroupImpact_currentRetention:
+			v.CurrentRetention = new(string)
+			return d.ReadString(schemas.LogGroupImpact_currentRetention, v.CurrentRetention)
+		case schemas.LogGroupImpact_logGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.LogGroupImpact_logGroupName, v.LogGroupName)
+		case schemas.LogGroupImpact_proposedRetention:
+			v.ProposedRetention = new(string)
+			return d.ReadString(schemas.LogGroupImpact_proposedRetention, v.ProposedRetention)
+		case schemas.LogGroupImpact_storedBytes:
+			v.StoredBytes = new(int64)
+			return d.ReadInt64(schemas.LogGroupImpact_storedBytes, v.StoredBytes)
 		}
 		return nil
 	})

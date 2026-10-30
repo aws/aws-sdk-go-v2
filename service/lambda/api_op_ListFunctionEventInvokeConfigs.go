@@ -11,7 +11,8 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Retrieves a list of configurations for asynchronous invocation for a function.
+// Retrieves a list of configurations for asynchronous invocation for a Lambda
+// Event Function. To retrieve more configurations, use the Marker parameter.
 //
 // To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
 func (c *Client) ListFunctionEventInvokeConfigs(ctx context.Context, params *ListFunctionEventInvokeConfigsInput, optFns ...func(*Options)) (*ListFunctionEventInvokeConfigsOutput, error) {

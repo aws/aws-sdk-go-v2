@@ -490,6 +490,16 @@ func serializeLogGroupIdentifiers(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeLogGroupImpacts(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LogGroupImpact) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeLogGroupNames(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -1960,6 +1970,28 @@ func deserializeLogGroupIdentifiers(d smithy.ShapeDeserializer, s *smithy.Schema
 		}
 
 		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeLogGroupImpacts(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.LogGroupImpact) error {
+	*v = make([]types.LogGroupImpact, 0)
+	var vv types.LogGroupImpact
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero types.LogGroupImpact
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = types.LogGroupImpact{}
+		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
 

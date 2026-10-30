@@ -15,9 +15,10 @@ import (
 	"time"
 )
 
-// Returns information about the function or function version, with a link to
-// download the deployment package that's valid for 10 minutes. If you specify a
-// function version, only details that are specific to that version are returned.
+// Returns information about a Lambda Event Function or function version, with a
+// link to download the deployment package that's valid for 10 minutes. If you
+// specify a function version, only details that are specific to that version are
+// returned.
 func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optFns ...func(*Options)) (*GetFunctionOutput, error) {
 	if params == nil {
 		params = &GetFunctionInput{}

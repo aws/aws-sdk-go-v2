@@ -2074,6 +2074,29 @@ var AcceleratorPartitionConfig_Type *smithy.Schema
 
 var AcceleratorPartitionConfig_Count *smithy.Schema
 
+var AcceleratorPartitionLayout = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionLayout",
+}, smithy.ShapeTypeStructure, 1)
+var AcceleratorPartitionLayout_AcceleratorPartitionTypes *smithy.Schema
+
+var _AcceleratorPartitionLayouts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionLayouts",
+}, smithy.ShapeTypeList, 1)
+var _AcceleratorPartitionLayouts_member *smithy.Schema
+
+var _AcceleratorPartitionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionType",
+}, smithy.ShapeTypeString, 0)
+
+var _AcceleratorPartitionTypeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.sagemaker",
+	Name:      "AcceleratorPartitionTypeList",
+}, smithy.ShapeTypeList, 1)
+var _AcceleratorPartitionTypeList_member *smithy.Schema
+
 var _AcceleratorsAmount = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "AcceleratorsAmount",
@@ -11909,7 +11932,7 @@ var InferenceComponentCapacitySizeType_CAPACITY_PERCENT *smithy.Schema
 var InferenceComponentComputeResourceRequirements = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "InferenceComponentComputeResourceRequirements",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var InferenceComponentComputeResourceRequirements_NumberOfCpuCoresRequired *smithy.Schema
 
 var InferenceComponentComputeResourceRequirements_NumberOfAcceleratorDevicesRequired *smithy.Schema
@@ -11917,6 +11940,8 @@ var InferenceComponentComputeResourceRequirements_NumberOfAcceleratorDevicesRequ
 var InferenceComponentComputeResourceRequirements_MinMemoryRequiredInMb *smithy.Schema
 
 var InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb *smithy.Schema
+
+var InferenceComponentComputeResourceRequirements_AcceleratorPartitionType *smithy.Schema
 
 var InferenceComponentContainerSpecification = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -17312,7 +17337,7 @@ var PendingDeploymentSummary_ShadowProductionVariants *smithy.Schema
 var PendingProductionVariantSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "PendingProductionVariantSummary",
-}, smithy.ShapeTypeStructure, 14)
+}, smithy.ShapeTypeStructure, 15)
 var PendingProductionVariantSummary_VariantName *smithy.Schema
 
 var PendingProductionVariantSummary_DeployedImages *smithy.Schema
@@ -17340,6 +17365,8 @@ var PendingProductionVariantSummary_DesiredServerlessConfig *smithy.Schema
 var PendingProductionVariantSummary_ManagedInstanceScaling *smithy.Schema
 
 var PendingProductionVariantSummary_RoutingConfig *smithy.Schema
+
+var PendingProductionVariantSummary_AcceleratorPartitionLayouts *smithy.Schema
 
 var _PendingProductionVariantSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -18568,7 +18595,7 @@ var _ProductId = smithy.NewSchema(smithy.ShapeID{
 var ProductionVariant = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProductionVariant",
-}, smithy.ShapeTypeStructure, 18)
+}, smithy.ShapeTypeStructure, 19)
 var ProductionVariant_VariantName *smithy.Schema
 
 var ProductionVariant_ModelName *smithy.Schema
@@ -18604,6 +18631,8 @@ var ProductionVariant_RoutingConfig *smithy.Schema
 var ProductionVariant_InferenceAmiVersion *smithy.Schema
 
 var ProductionVariant_CapacityReservationConfig *smithy.Schema
+
+var ProductionVariant_AcceleratorPartitionLayouts *smithy.Schema
 
 var ProductionVariantAcceleratorType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -19313,7 +19342,7 @@ var _ProductionVariantStatusList_member *smithy.Schema
 var ProductionVariantSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
 	Name:      "ProductionVariantSummary",
-}, smithy.ShapeTypeStructure, 13)
+}, smithy.ShapeTypeStructure, 14)
 var ProductionVariantSummary_VariantName *smithy.Schema
 
 var ProductionVariantSummary_DeployedImages *smithy.Schema
@@ -19339,6 +19368,8 @@ var ProductionVariantSummary_ManagedInstanceScaling *smithy.Schema
 var ProductionVariantSummary_RoutingConfig *smithy.Schema
 
 var ProductionVariantSummary_CapacityReservationConfig *smithy.Schema
+
+var ProductionVariantSummary_AcceleratorPartitionLayouts *smithy.Schema
 
 var _ProductionVariantSummaryList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.sagemaker",
@@ -35453,6 +35484,12 @@ func init() {
 
 	_AbsoluteBorrowLimitResourceList_member = _AbsoluteBorrowLimitResourceList.AddMember("member", ComputeQuotaResourceConfig)
 
+	_AcceleratorPartitionTypeList_member = _AcceleratorPartitionTypeList.AddMember("member", _AcceleratorPartitionType)
+
+	AcceleratorPartitionLayout_AcceleratorPartitionTypes = AcceleratorPartitionLayout.AddMember("AcceleratorPartitionTypes", _AcceleratorPartitionTypeList)
+
+	_AcceleratorPartitionLayouts_member = _AcceleratorPartitionLayouts.AddMember("member", AcceleratorPartitionLayout)
+
 	AccountDefaultStatus_ENABLED = AccountDefaultStatus.AddMember("ENABLED", smithyprelude.Unit)
 
 	AccountDefaultStatus_DISABLED = AccountDefaultStatus.AddMember("DISABLED", smithyprelude.Unit)
@@ -42077,6 +42114,8 @@ func init() {
 
 	ProductionVariantSummary_CapacityReservationConfig = ProductionVariantSummary.AddMember("CapacityReservationConfig", ProductionVariantCapacityReservationSummary)
 
+	ProductionVariantSummary_AcceleratorPartitionLayouts = ProductionVariantSummary.AddMember("AcceleratorPartitionLayouts", _AcceleratorPartitionLayouts)
+
 	_ProductionVariantSummaryList_member = _ProductionVariantSummaryList.AddMember("member", ProductionVariantSummary)
 
 	EndpointStatus_OUT_OF_SERVICE = EndpointStatus.AddMember("OUT_OF_SERVICE", smithyprelude.Unit)
@@ -43496,6 +43535,8 @@ func init() {
 	InferenceComponentComputeResourceRequirements_MinMemoryRequiredInMb = InferenceComponentComputeResourceRequirements.AddMember("MinMemoryRequiredInMb", _MemoryInMb)
 
 	InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb = InferenceComponentComputeResourceRequirements.AddMember("MaxMemoryRequiredInMb", _MemoryInMb)
+
+	InferenceComponentComputeResourceRequirements_AcceleratorPartitionType = InferenceComponentComputeResourceRequirements.AddMember("AcceleratorPartitionType", _AcceleratorPartitionType)
 
 	InferenceComponentContainerSpecification_Image = InferenceComponentContainerSpecification.AddMember("Image", _ContainerImage)
 
@@ -45889,6 +45930,8 @@ func init() {
 
 	PendingProductionVariantSummary_RoutingConfig = PendingProductionVariantSummary.AddMember("RoutingConfig", ProductionVariantRoutingConfig)
 
+	PendingProductionVariantSummary_AcceleratorPartitionLayouts = PendingProductionVariantSummary.AddMember("AcceleratorPartitionLayouts", _AcceleratorPartitionLayouts)
+
 	_PendingProductionVariantSummaryList_member = _PendingProductionVariantSummaryList.AddMember("member", PendingProductionVariantSummary)
 
 	PendingDeploymentSummary_EndpointConfigName = PendingDeploymentSummary.AddMember("EndpointConfigName", _EndpointConfigName)
@@ -46410,6 +46453,8 @@ func init() {
 	ProductionVariant_InferenceAmiVersion = ProductionVariant.AddMember("InferenceAmiVersion", ProductionVariantInferenceAmiVersion)
 
 	ProductionVariant_CapacityReservationConfig = ProductionVariant.AddMember("CapacityReservationConfig", ProductionVariantCapacityReservationConfig)
+
+	ProductionVariant_AcceleratorPartitionLayouts = ProductionVariant.AddMember("AcceleratorPartitionLayouts", _AcceleratorPartitionLayouts)
 
 	_ProductionVariantList_member = _ProductionVariantList.AddMember("member", ProductionVariant)
 

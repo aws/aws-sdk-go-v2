@@ -72,6 +72,9 @@ func ExampleExporterConfiguration_outputUsage() {
 	var union types.ExporterConfiguration
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.ExporterConfigurationMemberKafkaConfiguration:
+		_ = v.Value // Value is types.KafkaExporterConfiguration
+
 	case *types.ExporterConfigurationMemberOpenSearchConfiguration:
 		_ = v.Value // Value is types.OpenSearchExporterConfiguration
 
@@ -85,6 +88,7 @@ func ExampleExporterConfiguration_outputUsage() {
 }
 
 var _ *types.OpenSearchExporterConfiguration
+var _ *types.KafkaExporterConfiguration
 
 func ExampleIgnoreNearExpected_outputUsage() {
 	var union types.IgnoreNearExpected

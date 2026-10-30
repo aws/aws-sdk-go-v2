@@ -22,7 +22,9 @@ import (
 // An IAM role will be created for you that Amazon Managed Service for Prometheus
 // uses to access the metrics in your source. You must configure this role with a
 // policy that allows it to scrape metrics from your source. For Amazon EKS
-// sources, see [Configuring your Amazon EKS cluster]in the Amazon Managed Service for Prometheus User Guide.
+// sources, see [Configuring your Amazon EKS cluster]in the Amazon Managed Service for Prometheus User Guide. For a
+// Kafka exporter, grant this role access with a cluster policy on the Amazon MSK
+// cluster instead. For details, see KafkaExporterConfiguration .
 //
 // The scrapeConfiguration parameter contains the base-64 encoded YAML
 // configuration for the scraper.
@@ -86,8 +88,9 @@ type CreateScraperInput struct {
 	ClientToken *string
 
 	// The exporter configurations for the scraper. You can configure at most one
-	// Amazon OpenSearch Service domain. If you don't specify a value, the scraper is
-	// created without an exporter configuration.
+	// exporter, for either an Amazon OpenSearch Service domain or an Amazon MSK
+	// cluster. If you don't specify a value, the scraper is created without an
+	// exporter configuration.
 	Exporters []types.ExporterConfiguration
 
 	// Use this structure to enable cross-account access, so that you can use a target

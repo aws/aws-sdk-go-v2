@@ -751,6 +751,25 @@ func (RunLogLevel) Values() []RunLogLevel {
 	}
 }
 
+type RunOutputUriPrefixMode string
+
+// Enum values for RunOutputUriPrefixMode
+const (
+	RunOutputUriPrefixModeServiceDefined    RunOutputUriPrefixMode = "SERVICE_DEFINED"
+	RunOutputUriPrefixModeNoneWithOverwrite RunOutputUriPrefixMode = "NONE_WITH_OVERWRITE"
+)
+
+// Values returns all known values for RunOutputUriPrefixMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RunOutputUriPrefixMode) Values() []RunOutputUriPrefixMode {
+	return []RunOutputUriPrefixMode{
+		"SERVICE_DEFINED",
+		"NONE_WITH_OVERWRITE",
+	}
+}
+
 type RunRetentionMode string
 
 // Enum values for RunRetentionMode

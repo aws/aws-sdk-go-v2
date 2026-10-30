@@ -14170,6 +14170,52 @@ func TestCheckResponseSnapshot_ListRealtimeContactAnalysisSegmentsV2(t *testing.
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -26165,6 +26211,52 @@ func TestCheckResponseSnapshot_Error_OutputTypeNotFoundException(t *testing.T) {
 		SegmentTypes: []types.RealTimeContactAnalysisSegmentType{
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
 			types.RealTimeContactAnalysisSegmentType("Transcript"),
+		},
+		ListFilter: &types.RealTimeContactAnalysisSegmentsFilter{
+			CategoriesAttributeFilter: &types.CategoriesAttributeFilter{
+				OrConditions: []types.CategoriesAttributeAndCondition{
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+					{
+						TagConditions: []types.TagCondition{
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+							{
+								TagKey:   ptr.String("__TagKey__"),
+								TagValue: ptr.String("__TagValue__"),
+							},
+						},
+					},
+				},
+				AndCondition: &types.CategoriesAttributeAndCondition{
+					TagConditions: []types.TagCondition{
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+						{
+							TagKey:   ptr.String("__TagKey__"),
+							TagValue: ptr.String("__TagValue__"),
+						},
+					},
+				},
+				TagCondition: &types.TagCondition{
+					TagKey:   ptr.String("__TagKey__"),
+					TagValue: ptr.String("__TagValue__"),
+				},
+			},
 		},
 	})
 	if opErr == nil {

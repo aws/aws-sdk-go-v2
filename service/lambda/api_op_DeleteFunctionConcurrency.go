@@ -9,7 +9,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-// Removes a concurrent execution limit from a function.
+// Removes a concurrent execution limit from a Lambda Event Function.
 func (c *Client) DeleteFunctionConcurrency(ctx context.Context, params *DeleteFunctionConcurrencyInput, optFns ...func(*Options)) (*DeleteFunctionConcurrencyOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionConcurrencyInput{}

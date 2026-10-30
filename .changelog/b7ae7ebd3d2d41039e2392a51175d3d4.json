@@ -1,0 +1,8 @@
+{
+    "id": "b7ae7ebd-3d2d-4103-9e23-92a51175d3d4",
+    "type": "feature",
+    "description": "Adds the outputUriPrefixMode parameter to StartRun and GetRun. You can now write run outputs directly under outputUri, without the prefixes the service adds by default. When you opt in, outputs overwrite existing objects at the same keys.",
+    "modules": [
+        "service/omics"
+    ]
+}

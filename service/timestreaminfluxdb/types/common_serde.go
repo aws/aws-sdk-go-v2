@@ -7,6 +7,17 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+func serializeDeploymentConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v DeploymentConfiguration) {
+	switch vv := v.(type) {
+	case *DeploymentConfigurationMemberInfluxDBv3Enterprise:
+		s.WriteUnion(schema, schemas.DeploymentConfiguration_InfluxDBv3Enterprise)
+		s.WriteStruct(schemas.DeploymentConfiguration_InfluxDBv3Enterprise)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	}
+}
+
 func serializeParameters(s smithy.ShapeSerializer, schema *smithy.Schema, v Parameters) {
 	switch vv := v.(type) {
 	case *ParametersMemberInfluxDBv2:
@@ -41,6 +52,18 @@ func serializePercentOrAbsoluteLong(s smithy.ShapeSerializer, schema *smithy.Sch
 		s.WriteString(schemas.PercentOrAbsoluteLong_percent, vv.Value)
 		s.CloseUnion()
 	}
+}
+
+func deserializeDeploymentConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *DeploymentConfiguration) error {
+	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
+		switch ms {
+		case schemas.DeploymentConfiguration_InfluxDBv3Enterprise:
+			vv := &DeploymentConfigurationMemberInfluxDBv3Enterprise{}
+			*v = vv
+			return vv.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 func deserializeParameters(d smithy.ShapeDeserializer, s *smithy.Schema, v *Parameters) error {
@@ -161,6 +184,16 @@ func serializeInstanceModeList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeNodeGroupList(s smithy.ShapeSerializer, schema *smithy.Schema, v []NodeGroup) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
 	}
 	s.CloseList()
 }
@@ -381,6 +414,28 @@ func deserializeInstanceModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v
 		}
 
 		*v = append(*v, InstanceMode(vv))
+		return nil
+	})
+}
+
+func deserializeNodeGroupList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]NodeGroup) error {
+	*v = make([]NodeGroup, 0)
+	var vv NodeGroup
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero NodeGroup
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = NodeGroup{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
 		return nil
 	})
 }

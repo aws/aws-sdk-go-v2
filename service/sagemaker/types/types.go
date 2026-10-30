@@ -63,6 +63,46 @@ func (v *AcceleratorPartitionConfig) Deserialize(d smithy.ShapeDeserializer) err
 	})
 }
 
+// A layout of accelerator partitions for a production variant. On NVIDIA GPUs,
+// the partitions are Multi-Instance GPU (MIG) instances. SageMaker applies the
+// layout to every accelerator on the variant's instance type. You can't change the
+// layout of a running endpoint. To use a different layout, create a new endpoint.
+type AcceleratorPartitionLayout struct {
+
+	// The list of partition profiles to carve on each accelerator that this layout
+	// applies to. On NVIDIA GPUs these are Multi-Instance GPU (MIG) profiles, for
+	// example ["mig-3g.40gb", "mig-4g.40gb"] . The order of the profiles doesn't
+	// change how the accelerator is partitioned. However, when you update an endpoint,
+	// a layout with the same profiles in a different order counts as a different
+	// layout, and the update is rejected. Repeat a profile to request more than one
+	// partition of that size: for example, ["mig-3g.40gb", "mig-3g.40gb"] requests
+	// two mig-3g.40gb partitions.
+	AcceleratorPartitionTypes []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *AcceleratorPartitionLayout) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceleratorPartitionLayout)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceleratorPartitionLayout) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorPartitionTypes != nil {
+		serializeAcceleratorPartitionTypeList(s, schemas.AcceleratorPartitionLayout_AcceleratorPartitionTypes, v.AcceleratorPartitionTypes)
+	}
+}
+func (v *AcceleratorPartitionLayout) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceleratorPartitionLayout, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceleratorPartitionLayout_AcceleratorPartitionTypes:
+			return deserializeAcceleratorPartitionTypeList(d, schemas.AcceleratorPartitionLayout_AcceleratorPartitionTypes, &v.AcceleratorPartitionTypes)
+		}
+		return nil
+	})
+}
+
 // A structure describing the source of an action.
 type ActionSource struct {
 
@@ -27422,6 +27462,15 @@ type InferenceComponentComputeResourceRequirements struct {
 	// This member is required.
 	MinMemoryRequiredInMb *int32
 
+	// The accelerator partition profile this inference component occupies; on NVIDIA
+	// GPUs this is a Multi-Instance GPU (MIG) profile such as mig-3g.40gb . It must be
+	// one of the partition profiles declared in the target endpoint's accelerator
+	// partition layout, and when set, NumberOfAcceleratorDevicesRequired must be 1 .
+	// This field is required when the endpoint's production variant has an accelerator
+	// partition layout. For endpoints without a layout, omit this field to place the
+	// inference component on a whole accelerator.
+	AcceleratorPartitionType *string
+
 	// The maximum MB of memory to allocate to run a model that you assign to an
 	// inference component.
 	MaxMemoryRequiredInMb *int32
@@ -27445,6 +27494,9 @@ func (v *InferenceComponentComputeResourceRequirements) Serialize(s smithy.Shape
 }
 
 func (v *InferenceComponentComputeResourceRequirements) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorPartitionType != nil {
+		s.WriteString(schemas.InferenceComponentComputeResourceRequirements_AcceleratorPartitionType, *v.AcceleratorPartitionType)
+	}
 	if v.MaxMemoryRequiredInMb != nil {
 		s.WriteInt32(schemas.InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb, *v.MaxMemoryRequiredInMb)
 	}
@@ -27461,6 +27513,9 @@ func (v *InferenceComponentComputeResourceRequirements) SerializeMembers(s smith
 func (v *InferenceComponentComputeResourceRequirements) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InferenceComponentComputeResourceRequirements, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.InferenceComponentComputeResourceRequirements_AcceleratorPartitionType:
+			v.AcceleratorPartitionType = new(string)
+			return d.ReadString(schemas.InferenceComponentComputeResourceRequirements_AcceleratorPartitionType, v.AcceleratorPartitionType)
 		case schemas.InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb:
 			v.MaxMemoryRequiredInMb = new(int32)
 			return d.ReadInt32(schemas.InferenceComponentComputeResourceRequirements_MaxMemoryRequiredInMb, v.MaxMemoryRequiredInMb)
@@ -41612,6 +41667,12 @@ type PendingProductionVariantSummary struct {
 	// This member is required.
 	VariantName *string
 
+	// The accelerator partition layout that SageMaker is applying to this production
+	// variant. On NVIDIA GPUs, the profiles are Multi-Instance GPU (MIG) profiles.
+	// SageMaker returns the accelerator partition layout as you provided it in the
+	// pending deployment configuration, without normalization.
+	AcceleratorPartitionLayouts []AcceleratorPartitionLayout
+
 	// This parameter is no longer supported. Elastic Inference (EI) is no longer
 	// available.
 	//
@@ -41680,6 +41741,9 @@ func (v *PendingProductionVariantSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PendingProductionVariantSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorPartitionLayouts != nil {
+		serializeAcceleratorPartitionLayouts(s, schemas.PendingProductionVariantSummary_AcceleratorPartitionLayouts, v.AcceleratorPartitionLayouts)
+	}
 	if v.AcceleratorType != "" {
 		s.WriteString(schemas.PendingProductionVariantSummary_AcceleratorType, string(v.AcceleratorType))
 	}
@@ -41734,6 +41798,8 @@ func (v *PendingProductionVariantSummary) SerializeMembers(s smithy.ShapeSeriali
 func (v *PendingProductionVariantSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PendingProductionVariantSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.PendingProductionVariantSummary_AcceleratorPartitionLayouts:
+			return deserializeAcceleratorPartitionLayouts(d, schemas.PendingProductionVariantSummary_AcceleratorPartitionLayouts, &v.AcceleratorPartitionLayouts)
 		case schemas.PendingProductionVariantSummary_AcceleratorType:
 			var ev string
 			if err := d.ReadString(schemas.PendingProductionVariantSummary_AcceleratorType, &ev); err != nil {
@@ -43240,11 +43306,27 @@ func (v *PredefinedMetricSpecification) Deserialize(d smithy.ShapeDeserializer) 
 // behavior.
 type PrefixAwareRoutingConfig struct {
 
-	// The maximum number of in-flight requests on the target instance before the
-	// endpoint routes to another instance. Required when RoutingStrategy is
-	// PREFIX_AWARE . When in-flight requests on the prefix-selected instance reach
-	// this threshold, the endpoint routes the request to an instance with more
-	// available capacity.
+	// The number of in-flight requests on the selected instance or inference
+	// component copy at which the endpoint routes a request to another copy or
+	// instance. Required when RoutingStrategy is PREFIX_AWARE .
+	//
+	// On an endpoint without inference components, the endpoint compares this
+	// threshold with the number of in-flight requests on the selected instance. When
+	// that number reaches the threshold, the endpoint routes the request to another
+	// instance.
+	//
+	// On an endpoint with inference components, the endpoint compares this threshold
+	// with the number of in-flight requests on the selected copy of the invoked
+	// inference component. Requests to other inference components on the same instance
+	// don't count. When the instance hosts more than one copy of the inference
+	// component, the endpoint routes requests that share a prefix to the same copy
+	// and, while that copy has reached the threshold, to another copy on the instance
+	// that is under the threshold. When every copy on the instance has reached the
+	// threshold, the endpoint routes the request to another instance.
+	//
+	// The threshold applies to every instance and every copy of every inference
+	// component in the production variant, so choose a value that suits the instance
+	// or copy that can serve the fewest concurrent requests.
 	ConcurrencyThreshold *int32
 
 	// The maximum length of the prefix used for routing decisions. Required when
@@ -43257,9 +43339,11 @@ type PrefixAwareRoutingConfig struct {
 	//   - For OpenAI-compatible API, this value specifies the number of characters
 	//   from the text content of the messages array.
 	//
-	// The endpoint routes requests that share the same prefix to the same instance.
-	// Set this value to cover shared content (such as system prompts) plus enough
-	// unique content to distribute workloads across instances.
+	// The endpoint routes requests that share the same prefix to the same instance
+	// and, when that instance hosts more than one copy of the invoked inference
+	// component, to the same copy. Set this value to cover shared content (such as
+	// system prompts) plus enough unique content to distribute workloads across
+	// instances and copies.
 	PrefixLength *int32
 
 	noSmithyDocumentSerde
@@ -44463,6 +44547,15 @@ type ProductionVariant struct {
 	// This member is required.
 	VariantName *string
 
+	// The accelerator partition layout for the accelerators backing this production
+	// variant. A layout lists the partition profiles to carve on the accelerators it
+	// applies to; on NVIDIA GPUs these are Multi-Instance GPU (MIG) profiles such as
+	// mig-3g.40gb . Specify a single layout: SageMaker applies it uniformly to every
+	// accelerator on the variant's instance type, and you place one inference
+	// component on each partition. Omit this field to use whole, unpartitioned
+	// accelerators.
+	AcceleratorPartitionLayouts []AcceleratorPartitionLayout
+
 	// This parameter is no longer supported. Elastic Inference (EI) is no longer
 	// available.
 	//
@@ -44606,6 +44699,9 @@ func (v *ProductionVariant) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProductionVariant) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorPartitionLayouts != nil {
+		serializeAcceleratorPartitionLayouts(s, schemas.ProductionVariant_AcceleratorPartitionLayouts, v.AcceleratorPartitionLayouts)
+	}
 	if v.AcceleratorType != "" {
 		s.WriteString(schemas.ProductionVariant_AcceleratorType, string(v.AcceleratorType))
 	}
@@ -44674,6 +44770,8 @@ func (v *ProductionVariant) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ProductionVariant) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProductionVariant, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ProductionVariant_AcceleratorPartitionLayouts:
+			return deserializeAcceleratorPartitionLayouts(d, schemas.ProductionVariant_AcceleratorPartitionLayouts, &v.AcceleratorPartitionLayouts)
 		case schemas.ProductionVariant_AcceleratorType:
 			var ev string
 			if err := d.ReadString(schemas.ProductionVariant_AcceleratorType, &ev); err != nil {
@@ -45106,9 +45204,12 @@ type ProductionVariantRoutingConfig struct {
 	//   - RANDOM : The endpoint routes each request to a randomly chosen instance.
 	//
 	//   - PREFIX_AWARE : The endpoint routes requests that share the same prompt
-	//   prefix to the same instance. When the number of in-flight requests on the
-	//   selected instance reaches the configured threshold, the endpoint routes the
-	//   request to an instance with more available capacity.
+	//   prefix to the same instance and, when that instance hosts more than one copy of
+	//   the invoked inference component, to the same copy. When the number of in-flight
+	//   requests on the selected instance or copy reaches the ConcurrencyThreshold
+	//   value, the endpoint routes the request to another copy on that instance or to
+	//   another instance. The endpoint applies prefix-aware routing only when two or
+	//   more instances can serve the request.
 	//
 	// This member is required.
 	RoutingStrategy RoutingStrategy
@@ -45337,6 +45438,12 @@ type ProductionVariantSummary struct {
 	// This member is required.
 	VariantName *string
 
+	// The accelerator partition layout that SageMaker applies to this production
+	// variant. On NVIDIA GPUs, the profiles are Multi-Instance GPU (MIG) profiles.
+	// SageMaker returns the accelerator partition layout as you provided it when you
+	// created the variant, without normalization.
+	AcceleratorPartitionLayouts []AcceleratorPartitionLayout
+
 	// Settings for the capacity reservation for the compute instances that SageMaker
 	// AI reserves for an endpoint.
 	CapacityReservationConfig *ProductionVariantCapacityReservationSummary
@@ -45392,6 +45499,9 @@ func (v *ProductionVariantSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProductionVariantSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorPartitionLayouts != nil {
+		serializeAcceleratorPartitionLayouts(s, schemas.ProductionVariantSummary_AcceleratorPartitionLayouts, v.AcceleratorPartitionLayouts)
+	}
 	if v.CapacityReservationConfig != nil {
 		s.WriteStruct(schemas.ProductionVariantSummary_CapacityReservationConfig)
 		v.CapacityReservationConfig.SerializeMembers(s)
@@ -45445,6 +45555,8 @@ func (v *ProductionVariantSummary) SerializeMembers(s smithy.ShapeSerializer) {
 func (v *ProductionVariantSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProductionVariantSummary, func(s *smithy.Schema) error {
 		switch s {
+		case schemas.ProductionVariantSummary_AcceleratorPartitionLayouts:
+			return deserializeAcceleratorPartitionLayouts(d, schemas.ProductionVariantSummary_AcceleratorPartitionLayouts, &v.AcceleratorPartitionLayouts)
 		case schemas.ProductionVariantSummary_CapacityReservationConfig:
 			v.CapacityReservationConfig = &ProductionVariantCapacityReservationSummary{}
 			return v.CapacityReservationConfig.Deserialize(d)
@@ -50718,23 +50830,8 @@ type ServerlessJobConfig struct {
 
 	//  The maximum sequence length, in tokens, that the customization job supports.
 	// SageMaker uses this value to select a training configuration for the base model
-	// that you specify. The parameter supports the following values:
-	//
-	//   - 1K
-	//
-	//   - 2K
-	//
-	//   - 4K
-	//
-	//   - 8K
-	//
-	//   - 16K
-	//
-	//   - 32K
-	//
-	//   - 64K
-	//
-	//   - 128K
+	// that you specify. The value must be an integer value from 1K to 1024K (for
+	// example, 32K ).
 	//
 	// If you don't specify a value, SageMaker selects a training configuration based
 	// on the other values that you specify. The selection is not restricted to a

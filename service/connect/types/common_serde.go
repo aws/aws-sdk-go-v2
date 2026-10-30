@@ -1191,6 +1191,16 @@ func serializeCalculationComponentList(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseList()
 }
 
+func serializeCategoriesAttributeOrConditionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CategoriesAttributeAndCondition) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeChannelList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Channel) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -5041,6 +5051,28 @@ func deserializeCalculationComponentList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		vv = CalculationComponent{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeCategoriesAttributeOrConditionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]CategoriesAttributeAndCondition) error {
+	*v = make([]CategoriesAttributeAndCondition, 0)
+	var vv CategoriesAttributeAndCondition
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero CategoriesAttributeAndCondition
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = CategoriesAttributeAndCondition{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

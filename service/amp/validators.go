@@ -1082,6 +1082,11 @@ func validateExporterConfiguration(v types.ExporterConfiguration) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExporterConfiguration"}
 	switch uv := v.(type) {
+	case *types.ExporterConfigurationMemberKafkaConfiguration:
+		if err := validateKafkaExporterConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[kafkaConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExporterConfigurationMemberOpenSearchConfiguration:
 		if err := validateOpenSearchExporterConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[openSearchConfiguration]", err.(smithy.InvalidParamsError))
@@ -1104,6 +1109,21 @@ func validateExporterList(v []types.ExporterConfiguration) error {
 		if err := validateExporterConfiguration(v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKafkaExporterConfiguration(v *types.KafkaExporterConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KafkaExporterConfiguration"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

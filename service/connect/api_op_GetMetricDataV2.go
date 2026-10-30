@@ -394,6 +394,13 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Average evaluation score]
 	//
+	// AVG_EVALUATION_SCORE_BY_SUBMIT_TIME Unit: Percent
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
+	// ID, Evaluation Source, Form Version, Queue, Routing Profile
+	//
+	// UI name: [Average evaluation score (Submit time)]
+	//
 	// AVG_FIRST_RESPONSE_TIME_AGENT Unit: Seconds
 	//
 	// Valid groupings and filters: Agent, Agent Hierarchy, Channel,
@@ -1342,6 +1349,13 @@ type GetMetricDataV2Input struct {
 	//
 	// UI name: [Evaluations performed]
 	//
+	// EVALUATIONS_PERFORMED_BY_SUBMIT_TIME Unit: Count
+	//
+	// Valid groupings and filters: Agent, Agent Hierarchy, Channel, Evaluation Form
+	// ID, Evaluation Source, Form Version, Queue, Routing Profile
+	//
+	// UI name: [Evaluations performed (Submit time)]
+	//
 	// FLOWS_OUTCOME Unit: Count
 	//
 	// Valid groupings and filters: Channel,
@@ -1799,6 +1813,7 @@ type GetMetricDataV2Input struct {
 	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#after-contact-work-time
 	// [Average customer response time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-time-agent
 	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#cases-created
+	// [Evaluations performed (Submit time)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#evaluations-performed-by-submit-time
 	// [Average handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-handle-time
 	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-customer-hold-time
 	// [Average weighted evaluation score]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-weighted-evaluation-score
@@ -1818,6 +1833,7 @@ type GetMetricDataV2Input struct {
 	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-pause-time
 	// [Campaign contacts abandoned after X rate]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#campaign-contacts-abandoned-after-x-rate
 	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-queue-abandon-time
+	// [Average evaluation score (Submit time)]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-evaluation-score-by-submit-time
 	// [AI Tool Invocations]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#ai-tool-invocations
 	// [Contacts transferred out by agent]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#contacts-transferred-out-by-agent
 	// [Average agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html#average-agent-api-connecting-time

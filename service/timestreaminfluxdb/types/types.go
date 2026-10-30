@@ -10,6 +10,8 @@ import (
 )
 
 // Configuration for node modes in the DbCluster.
+//
+// Deprecated. Use deploymentConfiguration to define the cluster topology instead.
 type ClusterConfiguration struct {
 
 	// Indicates if the compactor instance is a standalone instance or not.
@@ -905,6 +907,35 @@ func (v *DbParameterGroupSummary) Deserialize(d smithy.ShapeDeserializer) error 
 		}
 		return nil
 	})
+}
+
+// Defines the compute topology of a Timestream for InfluxDB cluster as a set of
+// node groups for a specific database engine. For InfluxDB 3 Enterprise, use the
+// InfluxDBv3Enterprise member to allocate compute per function: ingest, query,
+// compaction, and processing.
+//
+// The following types satisfy this interface:
+//
+//	DeploymentConfigurationMemberInfluxDBv3Enterprise
+type DeploymentConfiguration interface {
+	isDeploymentConfiguration()
+}
+
+// The deployment configuration for an InfluxDB 3 Enterprise cluster.
+type DeploymentConfigurationMemberInfluxDBv3Enterprise struct {
+	Value InfluxDBv3EnterpriseDeploymentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DeploymentConfigurationMemberInfluxDBv3Enterprise) isDeploymentConfiguration() {}
+func (v *DeploymentConfigurationMemberInfluxDBv3Enterprise) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeploymentConfiguration_InfluxDBv3Enterprise)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *DeploymentConfigurationMemberInfluxDBv3Enterprise) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Duration for InfluxDB parameters in Timestream for InfluxDB.
@@ -1921,24 +1952,44 @@ func (v *InfluxDBv3CoreParameters) Deserialize(d smithy.ShapeDeserializer) error
 	})
 }
 
+// The compute topology for an InfluxDB 3 Enterprise cluster, expressed as a list
+// of node groups.
+type InfluxDBv3EnterpriseDeploymentConfiguration struct {
+
+	// The node groups that make up the cluster. Across all node groups, the cluster
+	// must include 1 to 4 nodes with the INGEST mode, 0 to 14 nodes with the QUERY
+	// mode, and exactly one node with the COMPACT mode.
+	//
+	// This member is required.
+	NodeGroups []NodeGroup
+
+	noSmithyDocumentSerde
+}
+
+func (v *InfluxDBv3EnterpriseDeploymentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InfluxDBv3EnterpriseDeploymentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InfluxDBv3EnterpriseDeploymentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeGroups != nil {
+		serializeNodeGroupList(s, schemas.InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups, v.NodeGroups)
+	}
+}
+func (v *InfluxDBv3EnterpriseDeploymentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InfluxDBv3EnterpriseDeploymentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups:
+			return deserializeNodeGroupList(d, schemas.InfluxDBv3EnterpriseDeploymentConfiguration_nodeGroups, &v.NodeGroups)
+		}
+		return nil
+	})
+}
+
 // All the customer-modifiable InfluxDB v3 Enterprise parameters in Timestream for
 // InfluxDB.
 type InfluxDBv3EnterpriseParameters struct {
-
-	// Specifies if the compactor instance should be a standalone instance or not.
-	//
-	// This member is required.
-	DedicatedCompactor *bool
-
-	// Specifies number of instances in the DbCluster which can both ingest and query.
-	//
-	// This member is required.
-	IngestQueryInstances *int32
-
-	// Specifies number of instances in the DbCluster which can only query.
-	//
-	// This member is required.
-	QueryOnlyInstances *int32
 
 	// Defines how often the catalog synchronizes across cluster nodes.
 	//
@@ -2031,6 +2082,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	// Uses a cached parquet loader when reading parquet files from the object store.
 	DataFusionUseCachedParquetLoader *bool
 
+	// Specifies if the compactor instance should be a standalone instance or not.
+	//
+	// Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster
+	// to define the cluster topology instead. When you supply a deployment
+	// configuration, Timestream for InfluxDB ignores this parameter.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
+	DedicatedCompactor *bool
+
 	// Specifies the grace period before permanently deleting data.
 	//
 	// Default: 24h
@@ -2080,6 +2140,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	//
 	// Default: 90d
 	HardDeleteDefaultDuration *Duration
+
+	// Specifies number of instances in the DbCluster which can both ingest and query.
+	//
+	// Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster
+	// to define the cluster topology instead. When you supply a deployment
+	// configuration, Timestream for InfluxDB ignores this parameter.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
+	IngestQueryInstances *int32
 
 	// Specifies the interval to evict expired entries from the Last-N-Value cache,
 	// expressed as a human-readable duration–for example: 20s, 1m, 1h.
@@ -2149,6 +2218,15 @@ type InfluxDBv3EnterpriseParameters struct {
 	//
 	// Default: 1000
 	QueryLogSize *int32
+
+	// Specifies number of instances in the DbCluster which can only query.
+	//
+	// Deprecated. Use deploymentConfiguration on CreateDbCluster or UpdateDbCluster
+	// to define the cluster topology instead. When you supply a deployment
+	// configuration, Timestream for InfluxDB ignores this parameter.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
+	QueryOnlyInstances *int32
 
 	// Specifies the interval at which data replication occurs between cluster nodes.
 	//
@@ -2708,6 +2786,80 @@ func (v *MaintenanceSchedule) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A group of one or more nodes in a Timestream for InfluxDB cluster that share
+// the same instance modes and instance type. A cluster's compute topology is
+// defined as a list of node groups.
+type NodeGroup struct {
+
+	// The number of nodes in this group. Valid values are 1 to 13.
+	//
+	// This member is required.
+	Count *int32
+
+	// The functions that the nodes in this group perform. Provide from 1 to 4 unique
+	// modes. Valid modes:
+	//
+	//   - INGEST – Nodes in this mode ingest data. Across all node groups, INGEST
+	//   nodes must total between 1 and 4.
+	//
+	//   - QUERY – Nodes in this mode query data. Across all node groups, QUERY nodes
+	//   must total between 0 and 14.
+	//
+	//   - COMPACT – Nodes in this mode compact data. Exactly one node across all node
+	//   groups must have this mode. If the cluster has more than three non-compaction
+	//   nodes, place the COMPACT node in its own dedicated node group.
+	//
+	//   - PROCESS – Nodes in this mode process data with the processing engine.
+	//
+	// This member is required.
+	InstanceModes []InstanceMode
+
+	// The Timestream for InfluxDB DB instance type to run InfluxDB on for the nodes
+	// in this group.
+	//
+	// This member is required.
+	InstanceType DbInstanceType
+
+	noSmithyDocumentSerde
+}
+
+func (v *NodeGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.NodeGroup_count, *v.Count)
+	}
+	if v.InstanceModes != nil {
+		serializeInstanceModeList(s, schemas.NodeGroup_instanceModes, v.InstanceModes)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.NodeGroup_instanceType, string(v.InstanceType))
+	}
+}
+func (v *NodeGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeGroup_count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.NodeGroup_count, v.Count)
+		case schemas.NodeGroup_instanceModes:
+			return deserializeInstanceModeList(d, schemas.NodeGroup_instanceModes, &v.InstanceModes)
+		case schemas.NodeGroup_instanceType:
+			var ev string
+			if err := d.ReadString(schemas.NodeGroup_instanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = DbInstanceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The parameters that comprise the parameter group.
 //
 // The following types satisfy this interface:
@@ -2867,5 +3019,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isParameters()            {}
-func (*UnknownUnionMember) isPercentOrAbsoluteLong() {}
+func (*UnknownUnionMember) isDeploymentConfiguration() {}
+func (*UnknownUnionMember) isParameters()              {}
+func (*UnknownUnionMember) isPercentOrAbsoluteLong()   {}

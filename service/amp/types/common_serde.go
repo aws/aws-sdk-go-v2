@@ -50,6 +50,12 @@ func serializeDestination(s smithy.ShapeSerializer, schema *smithy.Schema, v Des
 
 func serializeExporterConfiguration(s smithy.ShapeSerializer, schema *smithy.Schema, v ExporterConfiguration) {
 	switch vv := v.(type) {
+	case *ExporterConfigurationMemberKafkaConfiguration:
+		s.WriteUnion(schema, schemas.ExporterConfiguration_kafkaConfiguration)
+		s.WriteStruct(schemas.ExporterConfiguration_kafkaConfiguration)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ExporterConfigurationMemberOpenSearchConfiguration:
 		s.WriteUnion(schema, schemas.ExporterConfiguration_openSearchConfiguration)
 		s.WriteStruct(schemas.ExporterConfiguration_openSearchConfiguration)
@@ -156,6 +162,10 @@ func deserializeDestination(d smithy.ShapeDeserializer, s *smithy.Schema, v *Des
 func deserializeExporterConfiguration(d smithy.ShapeDeserializer, s *smithy.Schema, v *ExporterConfiguration) error {
 	return smithy.ReadUnion(d, s, func(ms *smithy.Schema) error {
 		switch ms {
+		case schemas.ExporterConfiguration_kafkaConfiguration:
+			vv := &ExporterConfigurationMemberKafkaConfiguration{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ExporterConfiguration_openSearchConfiguration:
 			vv := &ExporterConfigurationMemberOpenSearchConfiguration{}
 			*v = vv

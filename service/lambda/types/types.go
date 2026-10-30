@@ -1049,9 +1049,9 @@ type ChainedInvokeOptions struct {
 	// The tenant identifier for the chained invocation.
 	TenantId *string
 
-	// The optional X-Ray trace header to use when starting the chained invocation. If
-	// you omit this value, the child invocation inherits the parent durable
-	// execution's trace header.
+	// The X-Ray trace header to use when starting the chained invocation. This
+	// parameter is optional. If you omit this value, the child invocation inherits the
+	// parent durable execution's trace header.
 	//
 	// Specify this value on the START update for the chained invocation operation.
 	// For more information about the header format, see [Tracing header]in the X-Ray Developer Guide.
@@ -6689,6 +6689,25 @@ type SelfManagedKafkaEventSourceConfig struct {
 	// [Customizable consumer group ID]: https://docs.aws.amazon.com/lambda/latest/dg/with-kafka-process.html#services-smaa-topic-add
 	ConsumerGroupId *string
 
+	// The mode that Lambda uses to consume records from your self-managed Apache
+	// Kafka topic. The default is Stream .
+	//
+	//   - Stream – Lambda consumes records using a Kafka consumer group and preserves
+	//   the order of records within each partition. This is the default when you omit
+	//   ConsumptionMode .
+	//
+	//   - Queue – Lambda consumes records using a Kafka share group. Multiple
+	//   consumers can process records from the same partitions concurrently. Queue mode
+	//   does not preserve per-partition order. Queue mode requires an Apache Kafka
+	//   cluster running version 4.2 or later with share groups enabled.
+	//
+	// You cannot change ConsumptionMode after you create the event source mapping. To
+	// use a different consumption mode, create a new event source mapping.
+	//
+	// When ConsumptionMode is Queue , the StartingPosition , StartingPositionTimestamp
+	// , and MaximumBatchingWindowInSeconds parameters are not supported.
+	ConsumptionMode KafkaEventSourceMappingConsumptionMode
+
 	// Specific configuration settings for a Kafka schema registry.
 	SchemaRegistryConfig *KafkaSchemaRegistryConfig
 
@@ -6705,6 +6724,9 @@ func (v *SelfManagedKafkaEventSourceConfig) SerializeMembers(s smithy.ShapeSeria
 	if v.ConsumerGroupId != nil {
 		s.WriteString(schemas.SelfManagedKafkaEventSourceConfig_ConsumerGroupId, *v.ConsumerGroupId)
 	}
+	if v.ConsumptionMode != "" {
+		s.WriteString(schemas.SelfManagedKafkaEventSourceConfig_ConsumptionMode, string(v.ConsumptionMode))
+	}
 	if v.SchemaRegistryConfig != nil {
 		s.WriteStruct(schemas.SelfManagedKafkaEventSourceConfig_SchemaRegistryConfig)
 		v.SchemaRegistryConfig.SerializeMembers(s)
@@ -6717,6 +6739,13 @@ func (v *SelfManagedKafkaEventSourceConfig) Deserialize(d smithy.ShapeDeserializ
 		case schemas.SelfManagedKafkaEventSourceConfig_ConsumerGroupId:
 			v.ConsumerGroupId = new(string)
 			return d.ReadString(schemas.SelfManagedKafkaEventSourceConfig_ConsumerGroupId, v.ConsumerGroupId)
+		case schemas.SelfManagedKafkaEventSourceConfig_ConsumptionMode:
+			var ev string
+			if err := d.ReadString(schemas.SelfManagedKafkaEventSourceConfig_ConsumptionMode, &ev); err != nil {
+				return err
+			}
+			v.ConsumptionMode = KafkaEventSourceMappingConsumptionMode(ev)
+			return nil
 		case schemas.SelfManagedKafkaEventSourceConfig_SchemaRegistryConfig:
 			v.SchemaRegistryConfig = &KafkaSchemaRegistryConfig{}
 			return v.SchemaRegistryConfig.Deserialize(d)

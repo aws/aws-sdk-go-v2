@@ -1387,6 +1387,16 @@ func serializeAgenticRetrieveCitationReferenceList(s smithy.ShapeSerializer, sch
 	s.CloseList()
 }
 
+func serializeAgenticRetrieveCodeExecutionDocumentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgenticRetrieveCodeExecutionDocument) {
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeAgenticRetrieveFailures(s smithy.ShapeSerializer, schema *smithy.Schema, v []AgenticRetrieveFailure) {
 	s.WriteList(schema)
 	for _, vv := range v {
@@ -2208,6 +2218,28 @@ func deserializeAgenticRetrieveCitationReferenceList(d smithy.ShapeDeserializer,
 		}
 
 		vv = AgenticRetrieveCitationReference{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeAgenticRetrieveCodeExecutionDocumentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]AgenticRetrieveCodeExecutionDocument) error {
+	*v = make([]AgenticRetrieveCodeExecutionDocument, 0)
+	var vv AgenticRetrieveCodeExecutionDocument
+	return smithy.ReadList(d, s, func() error {
+		if isNil, err := d.ReadNil(s.ListMember()); err != nil {
+			return err
+		} else if isNil {
+			var zero AgenticRetrieveCodeExecutionDocument
+			*v = append(*v, zero)
+			return nil
+		}
+
+		vv = AgenticRetrieveCodeExecutionDocument{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

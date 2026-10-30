@@ -50,8 +50,9 @@ type UpdateScraperInput struct {
 	Destination types.Destination
 
 	// The exporter configurations for the scraper. You can configure at most one
-	// Amazon OpenSearch Service domain. If you don't specify a value, the existing
-	// exporter configuration remains unchanged.
+	// exporter, for either an Amazon OpenSearch Service domain or an Amazon MSK
+	// cluster. If you don't specify a value, the existing exporter configuration
+	// remains unchanged. Specify an empty list to remove the exporter.
 	Exporters []types.ExporterConfiguration
 
 	// Use this structure to enable cross-account access, so that you can use a target

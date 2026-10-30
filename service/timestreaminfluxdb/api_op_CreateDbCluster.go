@@ -28,11 +28,6 @@ func (c *Client) CreateDbCluster(ctx context.Context, params *CreateDbClusterInp
 
 type CreateDbClusterInput struct {
 
-	// The Timestream for InfluxDB DB instance type to run InfluxDB on.
-	//
-	// This member is required.
-	DbInstanceType types.DbInstanceType
-
 	// The name that uniquely identifies the DB cluster when interacting with the
 	// Amazon Timestream for InfluxDB API and CLI commands. This name will also be a
 	// prefix included in the endpoint. DB cluster names must be unique per customer
@@ -66,6 +61,12 @@ type CreateDbClusterInput struct {
 	// A list of backup configurations to enable automated backups for the DB cluster.
 	DbBackupConfigurations []types.DbBackupConfiguration
 
+	// The Timestream for InfluxDB DB instance type to run InfluxDB on.
+	//
+	// Optional when you define the cluster topology with deploymentConfiguration,
+	// because the instance type is then specified per node group.
+	DbInstanceType types.DbInstanceType
+
 	// The ID of the DB parameter group to assign to your DB cluster. DB parameter
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
@@ -82,6 +83,13 @@ type CreateDbClusterInput struct {
 	//
 	//   - Influx I/O Included 16000 IOPS
 	DbStorageType types.DbStorageType
+
+	// The compute topology for the cluster, defined as a set of node groups. Use
+	// deploymentConfiguration to allocate compute per function: ingest, query,
+	// compaction, and processing. A deployment configuration becomes the source of
+	// truth for the cluster's topology. Timestream for InfluxDB then ignores any
+	// node-count parameters in the associated DB parameter group.
+	DeploymentConfiguration types.DeploymentConfiguration
 
 	// Specifies the type of cluster to create.
 	DeploymentType types.ClusterDeploymentType
@@ -167,6 +175,9 @@ func (v *CreateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	}
 	if v.DbStorageType != "" {
 		s.WriteString(schemas.CreateDbClusterInput_dbStorageType, string(v.DbStorageType))
+	}
+	if v.DeploymentConfiguration != nil {
+		serializeDeploymentConfiguration(s, schemas.CreateDbClusterInput_deploymentConfiguration, v.DeploymentConfiguration)
 	}
 	if v.DeploymentType != "" {
 		s.WriteString(schemas.CreateDbClusterInput_deploymentType, string(v.DeploymentType))

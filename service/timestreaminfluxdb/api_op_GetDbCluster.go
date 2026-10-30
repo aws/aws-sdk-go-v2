@@ -70,6 +70,10 @@ type GetDbClusterOutput struct {
 	AllocatedStorage *int32
 
 	// Configuration for node modes in the DbCluster.
+	//
+	// Deprecated. Use deploymentConfiguration to view the cluster topology instead.
+	//
+	// Deprecated: Use deploymentConfiguration instead.
 	ClusterConfiguration *types.ClusterConfiguration
 
 	// The backup configurations for the DB cluster.
@@ -83,6 +87,10 @@ type GetDbClusterOutput struct {
 
 	// The Timestream for InfluxDB DB storage type that InfluxDB stores data on.
 	DbStorageType types.DbStorageType
+
+	// The current compute topology of the cluster, as a set of node groups. The
+	// returned topology reflects the cluster's actual provisioned nodes.
+	DeploymentConfiguration types.DeploymentConfiguration
 
 	// Deployment type of the DB cluster.
 	DeploymentType types.ClusterDeploymentType
@@ -186,6 +194,9 @@ func (v *GetDbClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DbStorageType != "" {
 		s.WriteString(schemas.GetDbClusterOutput_dbStorageType, string(v.DbStorageType))
 	}
+	if v.DeploymentConfiguration != nil {
+		serializeDeploymentConfiguration(s, schemas.GetDbClusterOutput_deploymentConfiguration, v.DeploymentConfiguration)
+	}
 	if v.DeploymentType != "" {
 		s.WriteString(schemas.GetDbClusterOutput_deploymentType, string(v.DeploymentType))
 	}
@@ -282,6 +293,8 @@ func (v *GetDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 			}
 			v.DbStorageType = types.DbStorageType(ev)
 			return nil
+		case schemas.GetDbClusterOutput_deploymentConfiguration:
+			return deserializeDeploymentConfiguration(d, schemas.GetDbClusterOutput_deploymentConfiguration, &v.DeploymentConfiguration)
 		case schemas.GetDbClusterOutput_deploymentType:
 			var ev string
 			if err := d.ReadString(schemas.GetDbClusterOutput_deploymentType, &ev); err != nil {

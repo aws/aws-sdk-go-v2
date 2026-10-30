@@ -447,6 +447,26 @@ func (InvokeMode) Values() []InvokeMode {
 	}
 }
 
+type KafkaEventSourceMappingConsumptionMode string
+
+// Enum values for KafkaEventSourceMappingConsumptionMode
+const (
+	KafkaEventSourceMappingConsumptionModeStream KafkaEventSourceMappingConsumptionMode = "Stream"
+	KafkaEventSourceMappingConsumptionModeQueue  KafkaEventSourceMappingConsumptionMode = "Queue"
+)
+
+// Values returns all known values for KafkaEventSourceMappingConsumptionMode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KafkaEventSourceMappingConsumptionMode) Values() []KafkaEventSourceMappingConsumptionMode {
+	return []KafkaEventSourceMappingConsumptionMode{
+		"Stream",
+		"Queue",
+	}
+}
+
 type KafkaSchemaRegistryAuthType string
 
 // Enum values for KafkaSchemaRegistryAuthType

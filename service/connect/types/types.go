@@ -3937,6 +3937,96 @@ func (v *CaseSlaConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// A list of tag conditions that the filter evaluates together using AND logic. A
+// category segment matches only when the tags on its rule satisfy every tag
+// condition in the list.
+type CategoriesAttributeAndCondition struct {
+
+	// A list of tag conditions. All of the tag conditions must be met for the
+	// condition to match.
+	TagConditions []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *CategoriesAttributeAndCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoriesAttributeAndCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoriesAttributeAndCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagConditions != nil {
+		serializeTagAndConditionList(s, schemas.CategoriesAttributeAndCondition_TagConditions, v.TagConditions)
+	}
+}
+func (v *CategoriesAttributeAndCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoriesAttributeAndCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoriesAttributeAndCondition_TagConditions:
+			return deserializeTagAndConditionList(d, schemas.CategoriesAttributeAndCondition_TagConditions, &v.TagConditions)
+		}
+		return nil
+	})
+}
+
+// A filter that matches category segments based on the tags assigned to the rules
+// that create the categories. Provide exactly one of OrConditions , AndCondition ,
+// or TagCondition .
+type CategoriesAttributeFilter struct {
+
+	// A condition that the filter evaluates using AND logic. A category segment
+	// matches only when all of the tag conditions in the condition are met.
+	AndCondition *CategoriesAttributeAndCondition
+
+	// A list of conditions that the filter evaluates using OR logic. A category
+	// segment matches when at least one of the conditions in the list is met.
+	OrConditions []CategoriesAttributeAndCondition
+
+	// A single tag condition that a category segment must match. The category's rule
+	// must have the specified tag key and value.
+	TagCondition *TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (v *CategoriesAttributeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoriesAttributeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoriesAttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AndCondition != nil {
+		s.WriteStruct(schemas.CategoriesAttributeFilter_AndCondition)
+		v.AndCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrConditions != nil {
+		serializeCategoriesAttributeOrConditionList(s, schemas.CategoriesAttributeFilter_OrConditions, v.OrConditions)
+	}
+	if v.TagCondition != nil {
+		s.WriteStruct(schemas.CategoriesAttributeFilter_TagCondition)
+		v.TagCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CategoriesAttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoriesAttributeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoriesAttributeFilter_AndCondition:
+			v.AndCondition = &CategoriesAttributeAndCondition{}
+			return v.AndCondition.Deserialize(d)
+		case schemas.CategoriesAttributeFilter_OrConditions:
+			return deserializeCategoriesAttributeOrConditionList(d, schemas.CategoriesAttributeFilter_OrConditions, &v.OrConditions)
+		case schemas.CategoriesAttributeFilter_TagCondition:
+			v.TagCondition = &TagCondition{}
+			return v.TagCondition.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the overall participant interactions at the contact level.
 type ChatContactMetrics struct {
 
@@ -24095,7 +24185,14 @@ type PreEvaluationFilter struct {
 	// This member is required.
 	Operator PreEvaluationFilterOperator
 
-	// The type of resource to filter on. Valid values: CONTACT .
+	// The type of resource to filter on. Valid values:
+	//
+	//   - CONTACT - Filter on attributes of the contact, such as tags assigned to the
+	//   contact.
+	//
+	//   - CONTACT_EVALUATION - Filter on attributes of the contact evaluation, such as
+	//   tags assigned to the contact evaluation, for rules triggered on the
+	//   OnContactEvaluationSubmit event source.
 	//
 	// This member is required.
 	ResourceType PreEvaluationFilterResourceType
@@ -25979,6 +26076,9 @@ type RealTimeContactAnalysisCategoryDetails struct {
 	// This member is required.
 	PointsOfInterest []RealTimeContactAnalysisPointOfInterest
 
+	// The unique identifier of the rule that created the matched category.
+	RuleId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25992,12 +26092,18 @@ func (v *RealTimeContactAnalysisCategoryDetails) SerializeMembers(s smithy.Shape
 	if v.PointsOfInterest != nil {
 		serializeRealTimeContactAnalysisPointsOfInterest(s, schemas.RealTimeContactAnalysisCategoryDetails_PointsOfInterest, v.PointsOfInterest)
 	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.RealTimeContactAnalysisCategoryDetails_RuleId, *v.RuleId)
+	}
 }
 func (v *RealTimeContactAnalysisCategoryDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RealTimeContactAnalysisCategoryDetails, func(s *smithy.Schema) error {
 		switch s {
 		case schemas.RealTimeContactAnalysisCategoryDetails_PointsOfInterest:
 			return deserializeRealTimeContactAnalysisPointsOfInterest(d, schemas.RealTimeContactAnalysisCategoryDetails_PointsOfInterest, &v.PointsOfInterest)
+		case schemas.RealTimeContactAnalysisCategoryDetails_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.RealTimeContactAnalysisCategoryDetails_RuleId, v.RuleId)
 		}
 		return nil
 	})
@@ -26687,6 +26793,44 @@ func (v *RealTimeContactAnalysisSegmentPostContactSummary) Deserialize(d smithy.
 			}
 			v.Status = RealTimeContactAnalysisPostContactSummaryStatus(ev)
 			return nil
+		}
+		return nil
+	})
+}
+
+// A filter that restricts the segments returned by
+// ListRealtimeContactAnalysisSegmentsV2 . It currently supports filtering category
+// segments by the tags on the rules that create them, which enforces tag-based
+// access control on the categories a caller can view.
+type RealTimeContactAnalysisSegmentsFilter struct {
+
+	// A filter applied to category segments based on the tags of the rules that
+	// create the matched categories. This filter applies only when SegmentTypes
+	// includes Categories .
+	CategoriesAttributeFilter *CategoriesAttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (v *RealTimeContactAnalysisSegmentsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RealTimeContactAnalysisSegmentsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RealTimeContactAnalysisSegmentsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoriesAttributeFilter != nil {
+		s.WriteStruct(schemas.RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter)
+		v.CategoriesAttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RealTimeContactAnalysisSegmentsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RealTimeContactAnalysisSegmentsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RealTimeContactAnalysisSegmentsFilter_CategoriesAttributeFilter:
+			v.CategoriesAttributeFilter = &CategoriesAttributeFilter{}
+			return v.CategoriesAttributeFilter.Deserialize(d)
 		}
 		return nil
 	})
@@ -31511,7 +31655,12 @@ func (v *SignInDistribution) Deserialize(d smithy.ShapeDeserializer) error {
 // select question.
 type SingleSelectQuestionRuleCategoryAutomation struct {
 
-	//  The category name, as defined in Rules.
+	// The category name, as defined in Rules. This is equivalent to a conversational
+	// analytics rule with the same name: the automation option is applied based on
+	// whether that rule matched the contact. For more information about creating
+	// rules, see [Create rules]in the Connect Customer Administrator Guide.
+	//
+	// [Create rules]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-rules.html
 	//
 	// This member is required.
 	Category *string
