@@ -74,7 +74,9 @@ func (v *ImportCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ImportCrlRequest_name, *v.Name)
 	}
-	serializeTagList(s, schemas.ImportCrlRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportCrlRequest_tags, v.Tags)
+	}
 	if v.TrustAnchorArn != nil {
 		s.WriteString(schemas.ImportCrlRequest_trustAnchorArn, *v.TrustAnchorArn)
 	}

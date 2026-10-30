@@ -93,7 +93,9 @@ func (v *ImportWorkspaceImageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationList(s, schemas.ImportWorkspaceImageRequest_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeApplicationList(s, schemas.ImportWorkspaceImageRequest_Applications, v.Applications)
+	}
 	if v.Ec2ImageId != nil {
 		s.WriteString(schemas.ImportWorkspaceImageRequest_Ec2ImageId, *v.Ec2ImageId)
 	}
@@ -106,7 +108,9 @@ func (v *ImportWorkspaceImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IngestionProcess != "" {
 		s.WriteString(schemas.ImportWorkspaceImageRequest_IngestionProcess, string(v.IngestionProcess))
 	}
-	serializeTagList(s, schemas.ImportWorkspaceImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportWorkspaceImageRequest_Tags, v.Tags)
+	}
 }
 
 type ImportWorkspaceImageOutput struct {

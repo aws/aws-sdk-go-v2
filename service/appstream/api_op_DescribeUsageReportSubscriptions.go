@@ -78,7 +78,9 @@ func (v *DescribeUsageReportSubscriptionsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeUsageReportSubscriptionsResult_NextToken, *v.NextToken)
 	}
-	serializeUsageReportSubscriptionList(s, schemas.DescribeUsageReportSubscriptionsResult_UsageReportSubscriptions, v.UsageReportSubscriptions)
+	if v.UsageReportSubscriptions != nil {
+		serializeUsageReportSubscriptionList(s, schemas.DescribeUsageReportSubscriptionsResult_UsageReportSubscriptions, v.UsageReportSubscriptions)
+	}
 }
 func (v *DescribeUsageReportSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeUsageReportSubscriptionsResult, func(s *smithy.Schema) error {

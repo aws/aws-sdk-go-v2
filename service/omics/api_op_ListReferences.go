@@ -101,7 +101,9 @@ func (v *ListReferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReferencesResponse_nextToken, *v.NextToken)
 	}
-	serializeReferenceList(s, schemas.ListReferencesResponse_references, v.References)
+	if v.References != nil {
+		serializeReferenceList(s, schemas.ListReferencesResponse_references, v.References)
+	}
 }
 func (v *ListReferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReferencesResponse, func(s *smithy.Schema) error {

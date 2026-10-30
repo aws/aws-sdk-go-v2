@@ -79,7 +79,9 @@ func (v *ListServiceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceProfilesResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceProfileList(s, schemas.ListServiceProfilesResponse_ServiceProfileList, v.ServiceProfileList)
+	if v.ServiceProfileList != nil {
+		serializeServiceProfileList(s, schemas.ListServiceProfilesResponse_ServiceProfileList, v.ServiceProfileList)
+	}
 }
 func (v *ListServiceProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceProfilesResponse, func(s *smithy.Schema) error {

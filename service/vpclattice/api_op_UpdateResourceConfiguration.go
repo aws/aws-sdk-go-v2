@@ -65,8 +65,12 @@ func (v *UpdateResourceConfigurationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AllowAssociationToShareableServiceNetwork != nil {
 		s.WriteBool(schemas.UpdateResourceConfigurationRequest_allowAssociationToShareableServiceNetwork, *v.AllowAssociationToShareableServiceNetwork)
 	}
-	serializePortRangeList(s, schemas.UpdateResourceConfigurationRequest_portRanges, v.PortRanges)
-	serializeResourceConfigurationDefinition(s, schemas.UpdateResourceConfigurationRequest_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.PortRanges != nil {
+		serializePortRangeList(s, schemas.UpdateResourceConfigurationRequest_portRanges, v.PortRanges)
+	}
+	if v.ResourceConfigurationDefinition != nil {
+		serializeResourceConfigurationDefinition(s, schemas.UpdateResourceConfigurationRequest_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	}
 	if v.ResourceConfigurationIdentifier != nil {
 		s.WriteString(schemas.UpdateResourceConfigurationRequest_resourceConfigurationIdentifier, *v.ResourceConfigurationIdentifier)
 	}
@@ -145,11 +149,15 @@ func (v *UpdateResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateResourceConfigurationResponse_name, *v.Name)
 	}
-	serializePortRangeList(s, schemas.UpdateResourceConfigurationResponse_portRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRangeList(s, schemas.UpdateResourceConfigurationResponse_portRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.UpdateResourceConfigurationResponse_protocol, string(v.Protocol))
 	}
-	serializeResourceConfigurationDefinition(s, schemas.UpdateResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationDefinition != nil {
+		serializeResourceConfigurationDefinition(s, schemas.UpdateResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	}
 	if v.ResourceConfigurationGroupId != nil {
 		s.WriteString(schemas.UpdateResourceConfigurationResponse_resourceConfigurationGroupId, *v.ResourceConfigurationGroupId)
 	}

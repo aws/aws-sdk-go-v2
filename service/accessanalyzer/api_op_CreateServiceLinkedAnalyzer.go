@@ -63,11 +63,15 @@ func (v *CreateServiceLinkedAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateServiceLinkedAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInlineArchiveRulesList(s, schemas.CreateServiceLinkedAnalyzerRequest_archiveRules, v.ArchiveRules)
+	if v.ArchiveRules != nil {
+		serializeInlineArchiveRulesList(s, schemas.CreateServiceLinkedAnalyzerRequest_archiveRules, v.ArchiveRules)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateServiceLinkedAnalyzerRequest_clientToken, *v.ClientToken)
 	}
-	serializeAnalyzerConfiguration(s, schemas.CreateServiceLinkedAnalyzerRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAnalyzerConfiguration(s, schemas.CreateServiceLinkedAnalyzerRequest_configuration, v.Configuration)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateServiceLinkedAnalyzerRequest_type, string(v.Type))
 	}

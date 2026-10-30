@@ -99,7 +99,9 @@ func (v *ListPublicKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPublicKeysResponse_NextToken, *v.NextToken)
 	}
-	serializePublicKeyList(s, schemas.ListPublicKeysResponse_PublicKeyList, v.PublicKeyList)
+	if v.PublicKeyList != nil {
+		serializePublicKeyList(s, schemas.ListPublicKeysResponse_PublicKeyList, v.PublicKeyList)
+	}
 }
 func (v *ListPublicKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPublicKeysResponse, func(s *smithy.Schema) error {

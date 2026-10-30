@@ -116,7 +116,9 @@ func (v *CreateIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IngestionType != "" {
 		s.WriteString(schemas.CreateIngestionRequest_ingestionType, string(v.IngestionType))
 	}
-	serializeTagList(s, schemas.CreateIngestionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIngestionRequest_tags, v.Tags)
+	}
 	if v.TenantId != nil {
 		s.WriteString(schemas.CreateIngestionRequest_tenantId, *v.TenantId)
 	}

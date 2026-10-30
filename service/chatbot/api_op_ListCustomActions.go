@@ -81,7 +81,9 @@ func (v *ListCustomActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomActionArnList(s, schemas.ListCustomActionsResult_CustomActions, v.CustomActions)
+	if v.CustomActions != nil {
+		serializeCustomActionArnList(s, schemas.ListCustomActionsResult_CustomActions, v.CustomActions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomActionsResult_NextToken, *v.NextToken)
 	}

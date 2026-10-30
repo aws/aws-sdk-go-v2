@@ -68,7 +68,9 @@ func (v *ListS3BucketsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListS3BucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfS3BucketInfo(s, schemas.ListS3BucketsResponse_Buckets, v.Buckets)
+	if v.Buckets != nil {
+		serializeListOfS3BucketInfo(s, schemas.ListS3BucketsResponse_Buckets, v.Buckets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListS3BucketsResponse_NextToken, *v.NextToken)
 	}

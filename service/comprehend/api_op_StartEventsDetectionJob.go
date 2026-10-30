@@ -100,8 +100,12 @@ func (v *StartEventsDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer
 		v.OutputDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartEventsDetectionJobRequest_Tags, v.Tags)
-	serializeTargetEventTypes(s, schemas.StartEventsDetectionJobRequest_TargetEventTypes, v.TargetEventTypes)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartEventsDetectionJobRequest_Tags, v.Tags)
+	}
+	if v.TargetEventTypes != nil {
+		serializeTargetEventTypes(s, schemas.StartEventsDetectionJobRequest_TargetEventTypes, v.TargetEventTypes)
+	}
 }
 
 type StartEventsDetectionJobOutput struct {

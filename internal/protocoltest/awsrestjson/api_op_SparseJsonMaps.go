@@ -47,11 +47,21 @@ func (v *SparseJsonMapsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparseJsonMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSparseBooleanMap(s, schemas.SparseJsonMapsInputOutput_sparseBooleanMap, v.SparseBooleanMap)
-	serializeSparseNumberMap(s, schemas.SparseJsonMapsInputOutput_sparseNumberMap, v.SparseNumberMap)
-	serializeSparseSetMap(s, schemas.SparseJsonMapsInputOutput_sparseSetMap, v.SparseSetMap)
-	serializeSparseStringMap(s, schemas.SparseJsonMapsInputOutput_sparseStringMap, v.SparseStringMap)
-	serializeSparseStructMap(s, schemas.SparseJsonMapsInputOutput_sparseStructMap, v.SparseStructMap)
+	if v.SparseBooleanMap != nil {
+		serializeSparseBooleanMap(s, schemas.SparseJsonMapsInputOutput_sparseBooleanMap, v.SparseBooleanMap)
+	}
+	if v.SparseNumberMap != nil {
+		serializeSparseNumberMap(s, schemas.SparseJsonMapsInputOutput_sparseNumberMap, v.SparseNumberMap)
+	}
+	if v.SparseSetMap != nil {
+		serializeSparseSetMap(s, schemas.SparseJsonMapsInputOutput_sparseSetMap, v.SparseSetMap)
+	}
+	if v.SparseStringMap != nil {
+		serializeSparseStringMap(s, schemas.SparseJsonMapsInputOutput_sparseStringMap, v.SparseStringMap)
+	}
+	if v.SparseStructMap != nil {
+		serializeSparseStructMap(s, schemas.SparseJsonMapsInputOutput_sparseStructMap, v.SparseStructMap)
+	}
 }
 func (v *SparseJsonMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparseJsonMapsInputOutput, func(s *smithy.Schema) error {
@@ -95,11 +105,21 @@ func (v *SparseJsonMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparseJsonMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSparseBooleanMap(s, schemas.SparseJsonMapsInputOutput_sparseBooleanMap, v.SparseBooleanMap)
-	serializeSparseNumberMap(s, schemas.SparseJsonMapsInputOutput_sparseNumberMap, v.SparseNumberMap)
-	serializeSparseSetMap(s, schemas.SparseJsonMapsInputOutput_sparseSetMap, v.SparseSetMap)
-	serializeSparseStringMap(s, schemas.SparseJsonMapsInputOutput_sparseStringMap, v.SparseStringMap)
-	serializeSparseStructMap(s, schemas.SparseJsonMapsInputOutput_sparseStructMap, v.SparseStructMap)
+	if v.SparseBooleanMap != nil {
+		serializeSparseBooleanMap(s, schemas.SparseJsonMapsInputOutput_sparseBooleanMap, v.SparseBooleanMap)
+	}
+	if v.SparseNumberMap != nil {
+		serializeSparseNumberMap(s, schemas.SparseJsonMapsInputOutput_sparseNumberMap, v.SparseNumberMap)
+	}
+	if v.SparseSetMap != nil {
+		serializeSparseSetMap(s, schemas.SparseJsonMapsInputOutput_sparseSetMap, v.SparseSetMap)
+	}
+	if v.SparseStringMap != nil {
+		serializeSparseStringMap(s, schemas.SparseJsonMapsInputOutput_sparseStringMap, v.SparseStringMap)
+	}
+	if v.SparseStructMap != nil {
+		serializeSparseStructMap(s, schemas.SparseJsonMapsInputOutput_sparseStructMap, v.SparseStructMap)
+	}
 }
 func (v *SparseJsonMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparseJsonMapsInputOutput, func(s *smithy.Schema) error {

@@ -71,8 +71,12 @@ func (v *CreatePricingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePricingPlanInput_Name, *v.Name)
 	}
-	serializePricingRuleArnsInput(s, schemas.CreatePricingPlanInput_PricingRuleArns, v.PricingRuleArns)
-	serializeTagMap(s, schemas.CreatePricingPlanInput_Tags, v.Tags)
+	if v.PricingRuleArns != nil {
+		serializePricingRuleArnsInput(s, schemas.CreatePricingPlanInput_PricingRuleArns, v.PricingRuleArns)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePricingPlanInput_Tags, v.Tags)
+	}
 }
 func (v *CreatePricingPlanInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePricingPlanInput, func(s *smithy.Schema) error {

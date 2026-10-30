@@ -76,14 +76,18 @@ func (v *ListConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationType != "" {
 		s.WriteString(schemas.ListConfigurationsRequest_configurationType, string(v.ConfigurationType))
 	}
-	serializeFilters(s, schemas.ListConfigurationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListConfigurationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.ListConfigurationsRequest_maxResults, v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationsRequest_nextToken, *v.NextToken)
 	}
-	serializeOrderByList(s, schemas.ListConfigurationsRequest_orderBy, v.OrderBy)
+	if v.OrderBy != nil {
+		serializeOrderByList(s, schemas.ListConfigurationsRequest_orderBy, v.OrderBy)
+	}
 }
 
 type ListConfigurationsOutput struct {
@@ -112,7 +116,9 @@ func (v *ListConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurations(s, schemas.ListConfigurationsResponse_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeConfigurations(s, schemas.ListConfigurationsResponse_configurations, v.Configurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationsResponse_nextToken, *v.NextToken)
 	}

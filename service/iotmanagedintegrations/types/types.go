@@ -197,7 +197,9 @@ func (v *AuthConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthMaterials(s, schemas.AuthConfig_GeneralAuthorization, v.GeneralAuthorization)
+	if v.GeneralAuthorization != nil {
+		serializeAuthMaterials(s, schemas.AuthConfig_GeneralAuthorization, v.GeneralAuthorization)
+	}
 	if v.OAuth != nil {
 		s.WriteStruct(schemas.AuthConfig_oAuth)
 		v.OAuth.SerializeMembers(s)
@@ -402,7 +404,9 @@ func (v *CapabilityReport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapabilityReport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityReportEndpoints(s, schemas.CapabilityReport_endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeCapabilityReportEndpoints(s, schemas.CapabilityReport_endpoints, v.Endpoints)
+	}
 	if v.NodeId != nil {
 		s.WriteString(schemas.CapabilityReport_nodeId, *v.NodeId)
 	}
@@ -469,15 +473,21 @@ func (v *CapabilityReportCapability) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapabilityReportCapability) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityReportActions(s, schemas.CapabilityReportCapability_actions, v.Actions)
-	serializeCapabilityReportEvents(s, schemas.CapabilityReportCapability_events, v.Events)
+	if v.Actions != nil {
+		serializeCapabilityReportActions(s, schemas.CapabilityReportCapability_actions, v.Actions)
+	}
+	if v.Events != nil {
+		serializeCapabilityReportEvents(s, schemas.CapabilityReportCapability_events, v.Events)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CapabilityReportCapability_id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CapabilityReportCapability_name, *v.Name)
 	}
-	serializeCapabilityReportProperties(s, schemas.CapabilityReportCapability_properties, v.Properties)
+	if v.Properties != nil {
+		serializeCapabilityReportProperties(s, schemas.CapabilityReportCapability_properties, v.Properties)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CapabilityReportCapability_version, *v.Version)
 	}
@@ -533,8 +543,12 @@ func (v *CapabilityReportEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CapabilityReportEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityReportCapabilities(s, schemas.CapabilityReportEndpoint_capabilities, v.Capabilities)
-	serializeDeviceTypes(s, schemas.CapabilityReportEndpoint_deviceTypes, v.DeviceTypes)
+	if v.Capabilities != nil {
+		serializeCapabilityReportCapabilities(s, schemas.CapabilityReportEndpoint_capabilities, v.Capabilities)
+	}
+	if v.DeviceTypes != nil {
+		serializeDeviceTypes(s, schemas.CapabilityReportEndpoint_deviceTypes, v.DeviceTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CapabilityReportEndpoint_id, *v.Id)
 	}
@@ -679,7 +693,9 @@ func (v *CommandCapability) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CommandCapability) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityActions(s, schemas.CommandCapability_actions, v.Actions)
+	if v.Actions != nil {
+		serializeCapabilityActions(s, schemas.CommandCapability_actions, v.Actions)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CommandCapability_id, *v.Id)
 	}
@@ -733,7 +749,9 @@ func (v *CommandEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CommandEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandCapabilities(s, schemas.CommandEndpoint_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeCommandCapabilities(s, schemas.CommandEndpoint_capabilities, v.Capabilities)
+	}
 	if v.EndpointId != nil {
 		s.WriteString(schemas.CommandEndpoint_endpointId, *v.EndpointId)
 	}
@@ -1162,7 +1180,9 @@ func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CapabilityReport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCapabilitySchemas(s, schemas.Device_CapabilitySchemas, v.CapabilitySchemas)
+	if v.CapabilitySchemas != nil {
+		serializeCapabilitySchemas(s, schemas.Device_CapabilitySchemas, v.CapabilitySchemas)
+	}
 	if v.ConnectorDeviceId != nil {
 		s.WriteString(schemas.Device_ConnectorDeviceId, *v.ConnectorDeviceId)
 	}
@@ -1316,7 +1336,9 @@ func (v *DiscoveredDeviceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorDeviceName != nil {
 		s.WriteString(schemas.DiscoveredDeviceSummary_ConnectorDeviceName, *v.ConnectorDeviceName)
 	}
-	serializeDeviceTypeList(s, schemas.DiscoveredDeviceSummary_DeviceTypes, v.DeviceTypes)
+	if v.DeviceTypes != nil {
+		serializeDeviceTypeList(s, schemas.DiscoveredDeviceSummary_DeviceTypes, v.DeviceTypes)
+	}
 	if v.DiscoveredAt != nil {
 		s.WriteTime(schemas.DiscoveredDeviceSummary_DiscoveredAt, *v.DiscoveredAt)
 	}
@@ -1569,8 +1591,12 @@ func (v *GeneralAuthorizationUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeneralAuthorizationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthMaterials(s, schemas.GeneralAuthorizationUpdate_AuthMaterialsToAdd, v.AuthMaterialsToAdd)
-	serializeAuthMaterials(s, schemas.GeneralAuthorizationUpdate_AuthMaterialsToUpdate, v.AuthMaterialsToUpdate)
+	if v.AuthMaterialsToAdd != nil {
+		serializeAuthMaterials(s, schemas.GeneralAuthorizationUpdate_AuthMaterialsToAdd, v.AuthMaterialsToAdd)
+	}
+	if v.AuthMaterialsToUpdate != nil {
+		serializeAuthMaterials(s, schemas.GeneralAuthorizationUpdate_AuthMaterialsToUpdate, v.AuthMaterialsToUpdate)
+	}
 }
 func (v *GeneralAuthorizationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeneralAuthorizationUpdate, func(s *smithy.Schema) error {
@@ -1969,7 +1995,9 @@ func (v *MatterCapabilityReport) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MatterCapabilityReport) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatterCapabilityReportEndpoints(s, schemas.MatterCapabilityReport_endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeMatterCapabilityReportEndpoints(s, schemas.MatterCapabilityReport_endpoints, v.Endpoints)
+	}
 	if v.NodeId != nil {
 		s.WriteString(schemas.MatterCapabilityReport_nodeId, *v.NodeId)
 	}
@@ -2098,16 +2126,24 @@ func (v *MatterCapabilityReportCluster) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MatterCapabilityReportCluster) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatterCapabilityReportAttributes(s, schemas.MatterCapabilityReportCluster_attributes, v.Attributes)
-	serializeMatterCapabilityReportCommands(s, schemas.MatterCapabilityReportCluster_commands, v.Commands)
-	serializeMatterCapabilityReportEvents(s, schemas.MatterCapabilityReportCluster_events, v.Events)
+	if v.Attributes != nil {
+		serializeMatterCapabilityReportAttributes(s, schemas.MatterCapabilityReportCluster_attributes, v.Attributes)
+	}
+	if v.Commands != nil {
+		serializeMatterCapabilityReportCommands(s, schemas.MatterCapabilityReportCluster_commands, v.Commands)
+	}
+	if v.Events != nil {
+		serializeMatterCapabilityReportEvents(s, schemas.MatterCapabilityReportCluster_events, v.Events)
+	}
 	if v.FabricIndex != nil {
 		s.WriteInt32(schemas.MatterCapabilityReportCluster_fabricIndex, *v.FabricIndex)
 	}
 	if v.FeatureMap != nil {
 		s.WriteInt64(schemas.MatterCapabilityReportCluster_featureMap, *v.FeatureMap)
 	}
-	serializeMatterCapabilityReportGeneratedCommands(s, schemas.MatterCapabilityReportCluster_generatedCommands, v.GeneratedCommands)
+	if v.GeneratedCommands != nil {
+		serializeMatterCapabilityReportGeneratedCommands(s, schemas.MatterCapabilityReportCluster_generatedCommands, v.GeneratedCommands)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.MatterCapabilityReportCluster_id, *v.Id)
 	}
@@ -2198,14 +2234,24 @@ func (v *MatterCapabilityReportEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MatterCapabilityReportEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatterCapabilityReportEndpointClientClusters(s, schemas.MatterCapabilityReportEndpoint_clientClusters, v.ClientClusters)
-	serializeMatterCapabilityReportClusters(s, schemas.MatterCapabilityReportEndpoint_clusters, v.Clusters)
-	serializeDeviceTypes(s, schemas.MatterCapabilityReportEndpoint_deviceTypes, v.DeviceTypes)
+	if v.ClientClusters != nil {
+		serializeMatterCapabilityReportEndpointClientClusters(s, schemas.MatterCapabilityReportEndpoint_clientClusters, v.ClientClusters)
+	}
+	if v.Clusters != nil {
+		serializeMatterCapabilityReportClusters(s, schemas.MatterCapabilityReportEndpoint_clusters, v.Clusters)
+	}
+	if v.DeviceTypes != nil {
+		serializeDeviceTypes(s, schemas.MatterCapabilityReportEndpoint_deviceTypes, v.DeviceTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.MatterCapabilityReportEndpoint_id, *v.Id)
 	}
-	serializeMatterCapabilityReportEndpointParts(s, schemas.MatterCapabilityReportEndpoint_parts, v.Parts)
-	serializeMatterCapabilityReportEndpointSemanticTags(s, schemas.MatterCapabilityReportEndpoint_semanticTags, v.SemanticTags)
+	if v.Parts != nil {
+		serializeMatterCapabilityReportEndpointParts(s, schemas.MatterCapabilityReportEndpoint_parts, v.Parts)
+	}
+	if v.SemanticTags != nil {
+		serializeMatterCapabilityReportEndpointSemanticTags(s, schemas.MatterCapabilityReportEndpoint_semanticTags, v.SemanticTags)
+	}
 }
 func (v *MatterCapabilityReportEndpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MatterCapabilityReportEndpoint, func(s *smithy.Schema) error {
@@ -2259,8 +2305,12 @@ func (v *MatterCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Attributes != nil {
 		s.WriteDocument(schemas.MatterCluster_attributes, &smithydocument.Opaque{Value: v.Attributes})
 	}
-	serializeMatterCommands(s, schemas.MatterCluster_commands, v.Commands)
-	serializeMatterEvents(s, schemas.MatterCluster_events, v.Events)
+	if v.Commands != nil {
+		serializeMatterCommands(s, schemas.MatterCluster_commands, v.Commands)
+	}
+	if v.Events != nil {
+		serializeMatterEvents(s, schemas.MatterCluster_events, v.Events)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.MatterCluster_id, *v.Id)
 	}
@@ -2308,7 +2358,9 @@ func (v *MatterEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MatterEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatterClusters(s, schemas.MatterEndpoint_clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeMatterClusters(s, schemas.MatterEndpoint_clusters, v.Clusters)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.MatterEndpoint_id, *v.Id)
 	}
@@ -2523,7 +2575,9 @@ func (v *OtaTaskAbortConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OtaTaskAbortConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAbortConfigCriteriaList(s, schemas.OtaTaskAbortConfig_AbortConfigCriteriaList, v.AbortConfigCriteriaList)
+	if v.AbortConfigCriteriaList != nil {
+		serializeAbortConfigCriteriaList(s, schemas.OtaTaskAbortConfig_AbortConfigCriteriaList, v.AbortConfigCriteriaList)
+	}
 }
 func (v *OtaTaskAbortConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OtaTaskAbortConfig, func(s *smithy.Schema) error {
@@ -2601,7 +2655,9 @@ func (v *OtaTaskExecutionRetryConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OtaTaskExecutionRetryConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRetryConfigCriteriaList(s, schemas.OtaTaskExecutionRetryConfig_RetryConfigCriteria, v.RetryConfigCriteria)
+	if v.RetryConfigCriteria != nil {
+		serializeRetryConfigCriteriaList(s, schemas.OtaTaskExecutionRetryConfig_RetryConfigCriteria, v.RetryConfigCriteria)
+	}
 }
 func (v *OtaTaskExecutionRetryConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OtaTaskExecutionRetryConfig, func(s *smithy.Schema) error {
@@ -2816,7 +2872,9 @@ func (v *OtaTaskSchedulingConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteString(schemas.OtaTaskSchedulingConfig_EndTime, *v.EndTime)
 	}
-	serializeScheduleMaintenanceWindowList(s, schemas.OtaTaskSchedulingConfig_MaintenanceWindows, v.MaintenanceWindows)
+	if v.MaintenanceWindows != nil {
+		serializeScheduleMaintenanceWindowList(s, schemas.OtaTaskSchedulingConfig_MaintenanceWindows, v.MaintenanceWindows)
+	}
 	if v.StartTime != nil {
 		s.WriteString(schemas.OtaTaskSchedulingConfig_StartTime, *v.StartTime)
 	}
@@ -3586,7 +3644,9 @@ func (v *StateEndpoint) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StateEndpoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStateCapabilities(s, schemas.StateEndpoint_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeStateCapabilities(s, schemas.StateEndpoint_capabilities, v.Capabilities)
+	}
 	if v.EndpointId != nil {
 		s.WriteString(schemas.StateEndpoint_endpointId, *v.EndpointId)
 	}
@@ -3668,7 +3728,9 @@ func (v *TaskProcessingDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumberOfTimedOutThings != nil {
 		s.WriteInt32(schemas.TaskProcessingDetails_numberOfTimedOutThings, *v.NumberOfTimedOutThings)
 	}
-	serializeTarget(s, schemas.TaskProcessingDetails_processingTargets, v.ProcessingTargets)
+	if v.ProcessingTargets != nil {
+		serializeTarget(s, schemas.TaskProcessingDetails_processingTargets, v.ProcessingTargets)
+	}
 }
 func (v *TaskProcessingDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskProcessingDetails, func(s *smithy.Schema) error {

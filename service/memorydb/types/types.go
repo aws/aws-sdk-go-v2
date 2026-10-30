@@ -49,7 +49,9 @@ func (v *ACL) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.ACL_ARN, *v.ARN)
 	}
-	serializeACLClusterNameList(s, schemas.ACL_Clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeACLClusterNameList(s, schemas.ACL_Clusters, v.Clusters)
+	}
 	if v.MinimumEngineVersion != nil {
 		s.WriteString(schemas.ACL_MinimumEngineVersion, *v.MinimumEngineVersion)
 	}
@@ -64,7 +66,9 @@ func (v *ACL) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != nil {
 		s.WriteString(schemas.ACL_Status, *v.Status)
 	}
-	serializeUserNameList(s, schemas.ACL_UserNames, v.UserNames)
+	if v.UserNames != nil {
+		serializeUserNameList(s, schemas.ACL_UserNames, v.UserNames)
+	}
 }
 func (v *ACL) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ACL, func(s *smithy.Schema) error {
@@ -112,8 +116,12 @@ func (v *ACLPendingChanges) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ACLPendingChanges) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserNameList(s, schemas.ACLPendingChanges_UserNamesToAdd, v.UserNamesToAdd)
-	serializeUserNameList(s, schemas.ACLPendingChanges_UserNamesToRemove, v.UserNamesToRemove)
+	if v.UserNamesToAdd != nil {
+		serializeUserNameList(s, schemas.ACLPendingChanges_UserNamesToAdd, v.UserNamesToAdd)
+	}
+	if v.UserNamesToRemove != nil {
+		serializeUserNameList(s, schemas.ACLPendingChanges_UserNamesToRemove, v.UserNamesToRemove)
+	}
 }
 func (v *ACLPendingChanges) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ACLPendingChanges, func(s *smithy.Schema) error {
@@ -224,7 +232,9 @@ func (v *AuthenticationMode) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthenticationMode) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePasswordListInput(s, schemas.AuthenticationMode_Passwords, v.Passwords)
+	if v.Passwords != nil {
+		serializePasswordListInput(s, schemas.AuthenticationMode_Passwords, v.Passwords)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AuthenticationMode_Type, string(v.Type))
 	}
@@ -470,8 +480,12 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PendingUpdates.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSecurityGroupMembershipList(s, schemas.Cluster_SecurityGroups, v.SecurityGroups)
-	serializeShardList(s, schemas.Cluster_Shards, v.Shards)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroupMembershipList(s, schemas.Cluster_SecurityGroups, v.SecurityGroups)
+	}
+	if v.Shards != nil {
+		serializeShardList(s, schemas.Cluster_Shards, v.Shards)
+	}
 	if v.SnapshotRetentionLimit != nil {
 		s.WriteInt32(schemas.Cluster_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
 	}
@@ -704,7 +718,9 @@ func (v *ClusterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Port != nil {
 		s.WriteInt32(schemas.ClusterConfiguration_Port, *v.Port)
 	}
-	serializeShardDetails(s, schemas.ClusterConfiguration_Shards, v.Shards)
+	if v.Shards != nil {
+		serializeShardDetails(s, schemas.ClusterConfiguration_Shards, v.Shards)
+	}
 	if v.SnapshotRetentionLimit != nil {
 		s.WriteInt32(schemas.ClusterConfiguration_SnapshotRetentionLimit, *v.SnapshotRetentionLimit)
 	}
@@ -811,7 +827,9 @@ func (v *ClusterPendingUpdates) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Resharding.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePendingModifiedServiceUpdateList(s, schemas.ClusterPendingUpdates_ServiceUpdates, v.ServiceUpdates)
+	if v.ServiceUpdates != nil {
+		serializePendingModifiedServiceUpdateList(s, schemas.ClusterPendingUpdates_ServiceUpdates, v.ServiceUpdates)
+	}
 }
 func (v *ClusterPendingUpdates) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClusterPendingUpdates, func(s *smithy.Schema) error {
@@ -1019,7 +1037,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Filter_Name, *v.Name)
 	}
-	serializeFilterValueList(s, schemas.Filter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValueList(s, schemas.Filter_Values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -1083,7 +1103,9 @@ func (v *MultiRegionCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ARN != nil {
 		s.WriteString(schemas.MultiRegionCluster_ARN, *v.ARN)
 	}
-	serializeRegionalClusterList(s, schemas.MultiRegionCluster_Clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeRegionalClusterList(s, schemas.MultiRegionCluster_Clusters, v.Clusters)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.MultiRegionCluster_Description, *v.Description)
 	}
@@ -1785,7 +1807,9 @@ func (v *ReservedNode) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OfferingType != nil {
 		s.WriteString(schemas.ReservedNode_OfferingType, *v.OfferingType)
 	}
-	serializeRecurringChargeList(s, schemas.ReservedNode_RecurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringChargeList(s, schemas.ReservedNode_RecurringCharges, v.RecurringCharges)
+	}
 	if v.ReservationId != nil {
 		s.WriteString(schemas.ReservedNode_ReservationId, *v.ReservationId)
 	}
@@ -1881,7 +1905,9 @@ func (v *ReservedNodesOffering) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OfferingType != nil {
 		s.WriteString(schemas.ReservedNodesOffering_OfferingType, *v.OfferingType)
 	}
-	serializeRecurringChargeList(s, schemas.ReservedNodesOffering_RecurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringChargeList(s, schemas.ReservedNodesOffering_RecurringCharges, v.RecurringCharges)
+	}
 	if v.ReservedNodesOfferingId != nil {
 		s.WriteString(schemas.ReservedNodesOffering_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
 	}
@@ -2159,7 +2185,9 @@ func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Shard_Name, *v.Name)
 	}
-	serializeNodeList(s, schemas.Shard_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeNodeList(s, schemas.Shard_Nodes, v.Nodes)
+	}
 	if v.NumberOfNodes != nil {
 		s.WriteInt32(schemas.Shard_NumberOfNodes, *v.NumberOfNodes)
 	}
@@ -2486,7 +2514,9 @@ func (v *Subnet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.Subnet_Identifier, *v.Identifier)
 	}
-	serializeNetworkTypeList(s, schemas.Subnet_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	if v.SupportedNetworkTypes != nil {
+		serializeNetworkTypeList(s, schemas.Subnet_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	}
 }
 func (v *Subnet) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Subnet, func(s *smithy.Schema) error {
@@ -2554,8 +2584,12 @@ func (v *SubnetGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SubnetGroup_Name, *v.Name)
 	}
-	serializeSubnetList(s, schemas.SubnetGroup_Subnets, v.Subnets)
-	serializeNetworkTypeList(s, schemas.SubnetGroup_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	if v.Subnets != nil {
+		serializeSubnetList(s, schemas.SubnetGroup_Subnets, v.Subnets)
+	}
+	if v.SupportedNetworkTypes != nil {
+		serializeNetworkTypeList(s, schemas.SubnetGroup_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.SubnetGroup_VpcId, *v.VpcId)
 	}
@@ -2716,7 +2750,9 @@ func (v *User) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeACLNameList(s, schemas.User_ACLNames, v.ACLNames)
+	if v.ACLNames != nil {
+		serializeACLNameList(s, schemas.User_ACLNames, v.ACLNames)
+	}
 	if v.ARN != nil {
 		s.WriteString(schemas.User_ARN, *v.ARN)
 	}

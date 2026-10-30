@@ -94,7 +94,9 @@ func (v *DescribeStandardsControlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeStandardsControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStandardsControls(s, schemas.DescribeStandardsControlsResponse_Controls, v.Controls)
+	if v.Controls != nil {
+		serializeStandardsControls(s, schemas.DescribeStandardsControlsResponse_Controls, v.Controls)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeStandardsControlsResponse_NextToken, *v.NextToken)
 	}

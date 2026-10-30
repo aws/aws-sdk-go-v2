@@ -109,7 +109,9 @@ func (v *CreateLicenseVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConsumptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEntitlementList(s, schemas.CreateLicenseVersionRequest_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeEntitlementList(s, schemas.CreateLicenseVersionRequest_Entitlements, v.Entitlements)
+	}
 	if v.HomeRegion != nil {
 		s.WriteString(schemas.CreateLicenseVersionRequest_HomeRegion, *v.HomeRegion)
 	}
@@ -121,7 +123,9 @@ func (v *CreateLicenseVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.CreateLicenseVersionRequest_LicenseArn, *v.LicenseArn)
 	}
-	serializeMetadataList(s, schemas.CreateLicenseVersionRequest_LicenseMetadata, v.LicenseMetadata)
+	if v.LicenseMetadata != nil {
+		serializeMetadataList(s, schemas.CreateLicenseVersionRequest_LicenseMetadata, v.LicenseMetadata)
+	}
 	if v.LicenseName != nil {
 		s.WriteString(schemas.CreateLicenseVersionRequest_LicenseName, *v.LicenseName)
 	}

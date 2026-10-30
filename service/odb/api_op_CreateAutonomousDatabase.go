@@ -188,8 +188,12 @@ func (v *CreateAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.AdminPasswordSource != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_adminPasswordSource, string(v.AdminPasswordSource))
 	}
-	serializeAdminPasswordSourceConfigurationInput(s, schemas.CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration, v.AdminPasswordSourceConfiguration)
-	serializeStringList(s, schemas.CreateAutonomousDatabaseInput_allowlistedIps, v.AllowlistedIps)
+	if v.AdminPasswordSourceConfiguration != nil {
+		serializeAdminPasswordSourceConfigurationInput(s, schemas.CreateAutonomousDatabaseInput_adminPasswordSourceConfiguration, v.AdminPasswordSourceConfiguration)
+	}
+	if v.AllowlistedIps != nil {
+		serializeStringList(s, schemas.CreateAutonomousDatabaseInput_allowlistedIps, v.AllowlistedIps)
+	}
 	if v.AutonomousMaintenanceScheduleType != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_autonomousMaintenanceScheduleType, string(v.AutonomousMaintenanceScheduleType))
 	}
@@ -211,7 +215,9 @@ func (v *CreateAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.CpuCoreCount != nil {
 		s.WriteInt32(schemas.CreateAutonomousDatabaseInput_cpuCoreCount, *v.CpuCoreCount)
 	}
-	serializeCustomerContacts(s, schemas.CreateAutonomousDatabaseInput_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	if v.CustomerContactsToSendToOCI != nil {
+		serializeCustomerContacts(s, schemas.CreateAutonomousDatabaseInput_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	}
 	if v.DataStorageSizeInGBs != nil {
 		s.WriteInt32(schemas.CreateAutonomousDatabaseInput_dataStorageSizeInGBs, *v.DataStorageSizeInGBs)
 	}
@@ -224,7 +230,9 @@ func (v *CreateAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DbName != nil {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_dbName, *v.DbName)
 	}
-	serializeDatabaseToolList(s, schemas.CreateAutonomousDatabaseInput_dbToolsDetails, v.DbToolsDetails)
+	if v.DbToolsDetails != nil {
+		serializeDatabaseToolList(s, schemas.CreateAutonomousDatabaseInput_dbToolsDetails, v.DbToolsDetails)
+	}
 	if v.DbVersion != nil {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_dbVersion, *v.DbVersion)
 	}
@@ -234,7 +242,9 @@ func (v *CreateAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_displayName, *v.DisplayName)
 	}
-	serializeEncryptionKeyConfigurationInput(s, schemas.CreateAutonomousDatabaseInput_encryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	if v.EncryptionKeyConfiguration != nil {
+		serializeEncryptionKeyConfigurationInput(s, schemas.CreateAutonomousDatabaseInput_encryptionKeyConfiguration, v.EncryptionKeyConfiguration)
+	}
 	if v.EncryptionKeyProvider != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_encryptionKeyProvider, string(v.EncryptionKeyProvider))
 	}
@@ -276,16 +286,24 @@ func (v *CreateAutonomousDatabaseInput) SerializeMembers(s smithy.ShapeSerialize
 		v.ResourcePoolSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScheduledOperationDetailsList(s, schemas.CreateAutonomousDatabaseInput_scheduledOperations, v.ScheduledOperations)
+	if v.ScheduledOperations != nil {
+		serializeScheduledOperationDetailsList(s, schemas.CreateAutonomousDatabaseInput_scheduledOperations, v.ScheduledOperations)
+	}
 	if v.Source != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_source, string(v.Source))
 	}
-	serializeSourceConfiguration(s, schemas.CreateAutonomousDatabaseInput_sourceConfiguration, v.SourceConfiguration)
-	serializeStringList(s, schemas.CreateAutonomousDatabaseInput_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	if v.SourceConfiguration != nil {
+		serializeSourceConfiguration(s, schemas.CreateAutonomousDatabaseInput_sourceConfiguration, v.SourceConfiguration)
+	}
+	if v.StandbyAllowlistedIps != nil {
+		serializeStringList(s, schemas.CreateAutonomousDatabaseInput_standbyAllowlistedIps, v.StandbyAllowlistedIps)
+	}
 	if v.StandbyAllowlistedIpsSource != "" {
 		s.WriteString(schemas.CreateAutonomousDatabaseInput_standbyAllowlistedIpsSource, string(v.StandbyAllowlistedIpsSource))
 	}
-	serializeRequestTagMap(s, schemas.CreateAutonomousDatabaseInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateAutonomousDatabaseInput_tags, v.Tags)
+	}
 	if v.TransportableTablespace != nil {
 		s.WriteStruct(schemas.CreateAutonomousDatabaseInput_transportableTablespace)
 		v.TransportableTablespace.SerializeMembers(s)

@@ -139,7 +139,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RuleBasedMatching.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDomainOutput struct {
@@ -247,7 +249,9 @@ func (v *CreateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RuleBasedMatching.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateDomainResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDomainResponse, func(s *smithy.Schema) error {

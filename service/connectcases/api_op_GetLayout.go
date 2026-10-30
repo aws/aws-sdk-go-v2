@@ -119,7 +119,9 @@ func (v *GetLayoutOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayoutContent(s, schemas.GetLayoutResponse_content, v.Content)
+	if v.Content != nil {
+		serializeLayoutContent(s, schemas.GetLayoutResponse_content, v.Content)
+	}
 	if v.CreatedTime != nil {
 		s.WriteTime(schemas.GetLayoutResponse_createdTime, *v.CreatedTime)
 	}
@@ -138,7 +140,9 @@ func (v *GetLayoutOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetLayoutResponse_name, *v.Name)
 	}
-	serializeTags(s, schemas.GetLayoutResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetLayoutResponse_tags, v.Tags)
+	}
 }
 func (v *GetLayoutOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLayoutResponse, func(s *smithy.Schema) error {

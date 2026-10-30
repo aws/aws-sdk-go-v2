@@ -99,8 +99,12 @@ func (v *GetResourceSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceSetType != nil {
 		s.WriteString(schemas.GetResourceSetResponse_ResourceSetType, *v.ResourceSetType)
 	}
-	serialize__listOfResource(s, schemas.GetResourceSetResponse_Resources, v.Resources)
-	serializeTags(s, schemas.GetResourceSetResponse_Tags, v.Tags)
+	if v.Resources != nil {
+		serialize__listOfResource(s, schemas.GetResourceSetResponse_Resources, v.Resources)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetResourceSetResponse_Tags, v.Tags)
+	}
 }
 func (v *GetResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourceSetResponse, func(s *smithy.Schema) error {

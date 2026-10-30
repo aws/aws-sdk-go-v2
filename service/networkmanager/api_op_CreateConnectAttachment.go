@@ -95,7 +95,9 @@ func (v *CreateConnectAttachmentInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EdgeLocation != nil {
 		s.WriteString(schemas.CreateConnectAttachmentRequest_EdgeLocation, *v.EdgeLocation)
 	}
-	serializeNatRuleRequestList(s, schemas.CreateConnectAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewayRules != nil {
+		serializeNatRuleRequestList(s, schemas.CreateConnectAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	}
 	if v.NatGatewaySupport != "" {
 		s.WriteString(schemas.CreateConnectAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
 	}
@@ -107,7 +109,9 @@ func (v *CreateConnectAttachmentInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateConnectAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
-	serializeTagList(s, schemas.CreateConnectAttachmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConnectAttachmentRequest_Tags, v.Tags)
+	}
 	if v.TransportAttachmentId != nil {
 		s.WriteString(schemas.CreateConnectAttachmentRequest_TransportAttachmentId, *v.TransportAttachmentId)
 	}

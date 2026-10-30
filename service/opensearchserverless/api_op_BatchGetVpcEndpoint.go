@@ -46,7 +46,9 @@ func (v *BatchGetVpcEndpointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetVpcEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcEndpointIds(s, schemas.BatchGetVpcEndpointRequest_ids, v.Ids)
+	if v.Ids != nil {
+		serializeVpcEndpointIds(s, schemas.BatchGetVpcEndpointRequest_ids, v.Ids)
+	}
 }
 func (v *BatchGetVpcEndpointInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetVpcEndpointRequest, func(s *smithy.Schema) error {
@@ -79,8 +81,12 @@ func (v *BatchGetVpcEndpointOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetVpcEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcEndpointDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails, v.VpcEndpointDetails)
-	serializeVpcEndpointErrorDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails, v.VpcEndpointErrorDetails)
+	if v.VpcEndpointDetails != nil {
+		serializeVpcEndpointDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointDetails, v.VpcEndpointDetails)
+	}
+	if v.VpcEndpointErrorDetails != nil {
+		serializeVpcEndpointErrorDetails(s, schemas.BatchGetVpcEndpointResponse_vpcEndpointErrorDetails, v.VpcEndpointErrorDetails)
+	}
 }
 func (v *BatchGetVpcEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetVpcEndpointResponse, func(s *smithy.Schema) error {

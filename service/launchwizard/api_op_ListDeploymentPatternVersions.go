@@ -68,7 +68,9 @@ func (v *ListDeploymentPatternVersionsInput) SerializeMembers(s smithy.ShapeSeri
 	if v.DeploymentPatternName != nil {
 		s.WriteString(schemas.ListDeploymentPatternVersionsInput_deploymentPatternName, *v.DeploymentPatternName)
 	}
-	serializeFilterList(s, schemas.ListDeploymentPatternVersionsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListDeploymentPatternVersionsInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDeploymentPatternVersionsInput_maxResults, *v.MaxResults)
 	}
@@ -101,7 +103,9 @@ func (v *ListDeploymentPatternVersionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListDeploymentPatternVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentPatternVersionDataSummaryList(s, schemas.ListDeploymentPatternVersionsOutput_deploymentPatternVersions, v.DeploymentPatternVersions)
+	if v.DeploymentPatternVersions != nil {
+		serializeDeploymentPatternVersionDataSummaryList(s, schemas.ListDeploymentPatternVersionsOutput_deploymentPatternVersions, v.DeploymentPatternVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentPatternVersionsOutput_nextToken, *v.NextToken)
 	}

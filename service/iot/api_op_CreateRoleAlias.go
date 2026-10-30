@@ -86,7 +86,9 @@ func (v *CreateRoleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateRoleAliasRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateRoleAliasRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRoleAliasRequest_tags, v.Tags)
+	}
 }
 
 type CreateRoleAliasOutput struct {

@@ -100,8 +100,12 @@ func (v *BatchRestrictions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchRestrictions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeTypesAllowed(s, schemas.BatchRestrictions_computeTypesAllowed, v.ComputeTypesAllowed)
-	serializeFleetsAllowed(s, schemas.BatchRestrictions_fleetsAllowed, v.FleetsAllowed)
+	if v.ComputeTypesAllowed != nil {
+		serializeComputeTypesAllowed(s, schemas.BatchRestrictions_computeTypesAllowed, v.ComputeTypesAllowed)
+	}
+	if v.FleetsAllowed != nil {
+		serializeFleetsAllowed(s, schemas.BatchRestrictions_fleetsAllowed, v.FleetsAllowed)
+	}
 	if v.MaximumBuildsAllowed != nil {
 		s.WriteInt32(schemas.BatchRestrictions_maximumBuildsAllowed, *v.MaximumBuildsAllowed)
 	}
@@ -354,8 +358,12 @@ func (v *Build) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Environment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExportedEnvironmentVariables(s, schemas.Build_exportedEnvironmentVariables, v.ExportedEnvironmentVariables)
-	serializeProjectFileSystemLocations(s, schemas.Build_fileSystemLocations, v.FileSystemLocations)
+	if v.ExportedEnvironmentVariables != nil {
+		serializeExportedEnvironmentVariables(s, schemas.Build_exportedEnvironmentVariables, v.ExportedEnvironmentVariables)
+	}
+	if v.FileSystemLocations != nil {
+		serializeProjectFileSystemLocations(s, schemas.Build_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Build_id, *v.Id)
 	}
@@ -372,20 +380,30 @@ func (v *Build) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkInterface.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBuildPhases(s, schemas.Build_phases, v.Phases)
+	if v.Phases != nil {
+		serializeBuildPhases(s, schemas.Build_phases, v.Phases)
+	}
 	if v.ProjectName != nil {
 		s.WriteString(schemas.Build_projectName, *v.ProjectName)
 	}
 	if v.QueuedTimeoutInMinutes != nil {
 		s.WriteInt32(schemas.Build_queuedTimeoutInMinutes, *v.QueuedTimeoutInMinutes)
 	}
-	serializeBuildReportArns(s, schemas.Build_reportArns, v.ReportArns)
+	if v.ReportArns != nil {
+		serializeBuildReportArns(s, schemas.Build_reportArns, v.ReportArns)
+	}
 	if v.ResolvedSourceVersion != nil {
 		s.WriteString(schemas.Build_resolvedSourceVersion, *v.ResolvedSourceVersion)
 	}
-	serializeBuildArtifactsList(s, schemas.Build_secondaryArtifacts, v.SecondaryArtifacts)
-	serializeProjectSecondarySourceVersions(s, schemas.Build_secondarySourceVersions, v.SecondarySourceVersions)
-	serializeProjectSources(s, schemas.Build_secondarySources, v.SecondarySources)
+	if v.SecondaryArtifacts != nil {
+		serializeBuildArtifactsList(s, schemas.Build_secondaryArtifacts, v.SecondaryArtifacts)
+	}
+	if v.SecondarySourceVersions != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.Build_secondarySourceVersions, v.SecondarySourceVersions)
+	}
+	if v.SecondarySources != nil {
+		serializeProjectSources(s, schemas.Build_secondarySources, v.SecondarySources)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.Build_serviceRole, *v.ServiceRole)
 	}
@@ -822,7 +840,9 @@ func (v *BuildBatch) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BuildBatchStatus != "" {
 		s.WriteString(schemas.BuildBatch_buildBatchStatus, string(v.BuildBatchStatus))
 	}
-	serializeBuildGroups(s, schemas.BuildBatch_buildGroups, v.BuildGroups)
+	if v.BuildGroups != nil {
+		serializeBuildGroups(s, schemas.BuildBatch_buildGroups, v.BuildGroups)
+	}
 	if v.BuildTimeoutInMinutes != nil {
 		s.WriteInt32(schemas.BuildBatch_buildTimeoutInMinutes, *v.BuildTimeoutInMinutes)
 	}
@@ -851,7 +871,9 @@ func (v *BuildBatch) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Environment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProjectFileSystemLocations(s, schemas.BuildBatch_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeProjectFileSystemLocations(s, schemas.BuildBatch_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.BuildBatch_id, *v.Id)
 	}
@@ -863,20 +885,30 @@ func (v *BuildBatch) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LogConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBuildBatchPhases(s, schemas.BuildBatch_phases, v.Phases)
+	if v.Phases != nil {
+		serializeBuildBatchPhases(s, schemas.BuildBatch_phases, v.Phases)
+	}
 	if v.ProjectName != nil {
 		s.WriteString(schemas.BuildBatch_projectName, *v.ProjectName)
 	}
 	if v.QueuedTimeoutInMinutes != nil {
 		s.WriteInt32(schemas.BuildBatch_queuedTimeoutInMinutes, *v.QueuedTimeoutInMinutes)
 	}
-	serializeBuildReportArns(s, schemas.BuildBatch_reportArns, v.ReportArns)
+	if v.ReportArns != nil {
+		serializeBuildReportArns(s, schemas.BuildBatch_reportArns, v.ReportArns)
+	}
 	if v.ResolvedSourceVersion != nil {
 		s.WriteString(schemas.BuildBatch_resolvedSourceVersion, *v.ResolvedSourceVersion)
 	}
-	serializeBuildArtifactsList(s, schemas.BuildBatch_secondaryArtifacts, v.SecondaryArtifacts)
-	serializeProjectSecondarySourceVersions(s, schemas.BuildBatch_secondarySourceVersions, v.SecondarySourceVersions)
-	serializeProjectSources(s, schemas.BuildBatch_secondarySources, v.SecondarySources)
+	if v.SecondaryArtifacts != nil {
+		serializeBuildArtifactsList(s, schemas.BuildBatch_secondaryArtifacts, v.SecondaryArtifacts)
+	}
+	if v.SecondarySourceVersions != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.BuildBatch_secondarySourceVersions, v.SecondarySourceVersions)
+	}
+	if v.SecondarySources != nil {
+		serializeProjectSources(s, schemas.BuildBatch_secondarySources, v.SecondarySources)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.BuildBatch_serviceRole, *v.ServiceRole)
 	}
@@ -1090,7 +1122,9 @@ func (v *BuildBatchPhase) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BuildBatchPhase) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhaseContexts(s, schemas.BuildBatchPhase_contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializePhaseContexts(s, schemas.BuildBatchPhase_contexts, v.Contexts)
+	}
 	if v.DurationInSeconds != nil {
 		s.WriteInt64(schemas.BuildBatchPhase_durationInSeconds, *v.DurationInSeconds)
 	}
@@ -1177,14 +1211,18 @@ func (v *BuildGroup) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CurrentBuildSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentifiers(s, schemas.BuildGroup_dependsOn, v.DependsOn)
+	if v.DependsOn != nil {
+		serializeIdentifiers(s, schemas.BuildGroup_dependsOn, v.DependsOn)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.BuildGroup_identifier, *v.Identifier)
 	}
 	if v.IgnoreFailure != false {
 		s.WriteBool(schemas.BuildGroup_ignoreFailure, v.IgnoreFailure)
 	}
-	serializeBuildSummaries(s, schemas.BuildGroup_priorBuildSummaryList, v.PriorBuildSummaryList)
+	if v.PriorBuildSummaryList != nil {
+		serializeBuildSummaries(s, schemas.BuildGroup_priorBuildSummaryList, v.PriorBuildSummaryList)
+	}
 }
 func (v *BuildGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BuildGroup, func(s *smithy.Schema) error {
@@ -1314,7 +1352,9 @@ func (v *BuildPhase) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BuildPhase) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhaseContexts(s, schemas.BuildPhase_contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializePhaseContexts(s, schemas.BuildPhase_contexts, v.Contexts)
+	}
 	if v.DurationInSeconds != nil {
 		s.WriteInt64(schemas.BuildPhase_durationInSeconds, *v.DurationInSeconds)
 	}
@@ -1483,7 +1523,9 @@ func (v *BuildSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestedOn != nil {
 		s.WriteTime(schemas.BuildSummary_requestedOn, *v.RequestedOn)
 	}
-	serializeResolvedSecondaryArtifacts(s, schemas.BuildSummary_secondaryArtifacts, v.SecondaryArtifacts)
+	if v.SecondaryArtifacts != nil {
+		serializeResolvedSecondaryArtifacts(s, schemas.BuildSummary_secondaryArtifacts, v.SecondaryArtifacts)
+	}
 }
 func (v *BuildSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BuildSummary, func(s *smithy.Schema) error {
@@ -2089,7 +2131,9 @@ func (v *DockerServer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputeType != "" {
 		s.WriteString(schemas.DockerServer_computeType, string(v.ComputeType))
 	}
-	serializeSecurityGroupIds(s, schemas.DockerServer_securityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.DockerServer_securityGroupIds, v.SecurityGroupIds)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.DockerServer_status)
 		v.Status.SerializeMembers(s)
@@ -2184,7 +2228,9 @@ func (v *EnvironmentImage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.EnvironmentImage_name, *v.Name)
 	}
-	serializeImageVersions(s, schemas.EnvironmentImage_versions, v.Versions)
+	if v.Versions != nil {
+		serializeImageVersions(s, schemas.EnvironmentImage_versions, v.Versions)
+	}
 }
 func (v *EnvironmentImage) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentImage, func(s *smithy.Schema) error {
@@ -2223,7 +2269,9 @@ func (v *EnvironmentLanguage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentLanguage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentImages(s, schemas.EnvironmentLanguage_images, v.Images)
+	if v.Images != nil {
+		serializeEnvironmentImages(s, schemas.EnvironmentLanguage_images, v.Images)
+	}
 	if v.Language != "" {
 		s.WriteString(schemas.EnvironmentLanguage_language, string(v.Language))
 	}
@@ -2265,7 +2313,9 @@ func (v *EnvironmentPlatform) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentPlatform) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentLanguages(s, schemas.EnvironmentPlatform_languages, v.Languages)
+	if v.Languages != nil {
+		serializeEnvironmentLanguages(s, schemas.EnvironmentPlatform_languages, v.Languages)
+	}
 	if v.Platform != "" {
 		s.WriteString(schemas.EnvironmentPlatform_platform, string(v.Platform))
 	}
@@ -2676,7 +2726,9 @@ func (v *Fleet) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Status.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.Fleet_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Fleet_tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.Fleet_vpcConfig)
 		v.VpcConfig.SerializeMembers(s)
@@ -2784,7 +2836,9 @@ func (v *FleetProxyRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Effect != "" {
 		s.WriteString(schemas.FleetProxyRule_effect, string(v.Effect))
 	}
-	serializeFleetProxyRuleEntities(s, schemas.FleetProxyRule_entities, v.Entities)
+	if v.Entities != nil {
+		serializeFleetProxyRuleEntities(s, schemas.FleetProxyRule_entities, v.Entities)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.FleetProxyRule_type, string(v.Type))
 	}
@@ -3367,7 +3421,9 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Environment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProjectFileSystemLocations(s, schemas.Project_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeProjectFileSystemLocations(s, schemas.Project_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.LastModified != nil {
 		s.WriteTime(schemas.Project_lastModified, *v.LastModified)
 	}
@@ -3391,9 +3447,15 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceAccessRole != nil {
 		s.WriteString(schemas.Project_resourceAccessRole, *v.ResourceAccessRole)
 	}
-	serializeProjectArtifactsList(s, schemas.Project_secondaryArtifacts, v.SecondaryArtifacts)
-	serializeProjectSecondarySourceVersions(s, schemas.Project_secondarySourceVersions, v.SecondarySourceVersions)
-	serializeProjectSources(s, schemas.Project_secondarySources, v.SecondarySources)
+	if v.SecondaryArtifacts != nil {
+		serializeProjectArtifactsList(s, schemas.Project_secondaryArtifacts, v.SecondaryArtifacts)
+	}
+	if v.SecondarySourceVersions != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.Project_secondarySourceVersions, v.SecondarySourceVersions)
+	}
+	if v.SecondarySources != nil {
+		serializeProjectSources(s, schemas.Project_secondarySources, v.SecondarySources)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.Project_serviceRole, *v.ServiceRole)
 	}
@@ -3405,7 +3467,9 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceVersion != nil {
 		s.WriteString(schemas.Project_sourceVersion, *v.SourceVersion)
 	}
-	serializeTagList(s, schemas.Project_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Project_tags, v.Tags)
+	}
 	if v.TimeoutInMinutes != nil {
 		s.WriteInt32(schemas.Project_timeoutInMinutes, *v.TimeoutInMinutes)
 	}
@@ -3975,7 +4039,9 @@ func (v *ProjectCache) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Location != nil {
 		s.WriteString(schemas.ProjectCache_location, *v.Location)
 	}
-	serializeProjectCacheModes(s, schemas.ProjectCache_modes, v.Modes)
+	if v.Modes != nil {
+		serializeProjectCacheModes(s, schemas.ProjectCache_modes, v.Modes)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ProjectCache_type, string(v.Type))
 	}
@@ -4207,7 +4273,9 @@ func (v *ProjectEnvironment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DockerServer.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnvironmentVariables(s, schemas.ProjectEnvironment_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.ProjectEnvironment_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Fleet != nil {
 		s.WriteStruct(schemas.ProjectEnvironment_fleet)
 		v.Fleet.SerializeMembers(s)
@@ -4748,7 +4816,9 @@ func (v *ProxyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultBehavior != "" {
 		s.WriteString(schemas.ProxyConfiguration_defaultBehavior, string(v.DefaultBehavior))
 	}
-	serializeFleetProxyRules(s, schemas.ProxyConfiguration_orderedProxyRules, v.OrderedProxyRules)
+	if v.OrderedProxyRules != nil {
+		serializeFleetProxyRules(s, schemas.ProxyConfiguration_orderedProxyRules, v.OrderedProxyRules)
+	}
 }
 func (v *ProxyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProxyConfiguration, func(s *smithy.Schema) error {
@@ -4805,7 +4875,9 @@ func (v *PullRequestBuildPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PullRequestBuildPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePullRequestBuildApproverRoles(s, schemas.PullRequestBuildPolicy_approverRoles, v.ApproverRoles)
+	if v.ApproverRoles != nil {
+		serializePullRequestBuildApproverRoles(s, schemas.PullRequestBuildPolicy_approverRoles, v.ApproverRoles)
+	}
 	if v.RequiresCommentApproval != "" {
 		s.WriteString(schemas.PullRequestBuildPolicy_requiresCommentApproval, string(v.RequiresCommentApproval))
 	}
@@ -5208,7 +5280,9 @@ func (v *ReportGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ReportGroup_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.ReportGroup_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ReportGroup_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ReportGroup_type, string(v.Type))
 	}
@@ -5684,7 +5758,9 @@ func (v *Sandbox) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Environment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProjectFileSystemLocations(s, schemas.Sandbox_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeProjectFileSystemLocations(s, schemas.Sandbox_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Sandbox_id, *v.Id)
 	}
@@ -5702,8 +5778,12 @@ func (v *Sandbox) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestTime != nil {
 		s.WriteTime(schemas.Sandbox_requestTime, *v.RequestTime)
 	}
-	serializeProjectSecondarySourceVersions(s, schemas.Sandbox_secondarySourceVersions, v.SecondarySourceVersions)
-	serializeProjectSources(s, schemas.Sandbox_secondarySources, v.SecondarySources)
+	if v.SecondarySourceVersions != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.Sandbox_secondarySourceVersions, v.SecondarySourceVersions)
+	}
+	if v.SecondarySources != nil {
+		serializeProjectSources(s, schemas.Sandbox_secondarySources, v.SecondarySources)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.Sandbox_serviceRole, *v.ServiceRole)
 	}
@@ -5854,7 +5934,9 @@ func (v *SandboxSession) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkInterface.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSandboxSessionPhases(s, schemas.SandboxSession_phases, v.Phases)
+	if v.Phases != nil {
+		serializeSandboxSessionPhases(s, schemas.SandboxSession_phases, v.Phases)
+	}
 	if v.ResolvedSourceVersion != nil {
 		s.WriteString(schemas.SandboxSession_resolvedSourceVersion, *v.ResolvedSourceVersion)
 	}
@@ -5943,7 +6025,9 @@ func (v *SandboxSessionPhase) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SandboxSessionPhase) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhaseContexts(s, schemas.SandboxSessionPhase_contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializePhaseContexts(s, schemas.SandboxSessionPhase_contexts, v.Contexts)
+	}
 	if v.DurationInSeconds != nil {
 		s.WriteInt64(schemas.SandboxSessionPhase_durationInSeconds, *v.DurationInSeconds)
 	}
@@ -6017,7 +6101,9 @@ func (v *ScalingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScalingType != "" {
 		s.WriteString(schemas.ScalingConfigurationInput_scalingType, string(v.ScalingType))
 	}
-	serializeTargetTrackingScalingConfigurations(s, schemas.ScalingConfigurationInput_targetTrackingScalingConfigs, v.TargetTrackingScalingConfigs)
+	if v.TargetTrackingScalingConfigs != nil {
+		serializeTargetTrackingScalingConfigurations(s, schemas.ScalingConfigurationInput_targetTrackingScalingConfigs, v.TargetTrackingScalingConfigs)
+	}
 }
 func (v *ScalingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScalingConfigurationInput, func(s *smithy.Schema) error {
@@ -6073,7 +6159,9 @@ func (v *ScalingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ScalingType != "" {
 		s.WriteString(schemas.ScalingConfigurationOutput_scalingType, string(v.ScalingType))
 	}
-	serializeTargetTrackingScalingConfigurations(s, schemas.ScalingConfigurationOutput_targetTrackingScalingConfigs, v.TargetTrackingScalingConfigs)
+	if v.TargetTrackingScalingConfigs != nil {
+		serializeTargetTrackingScalingConfigurations(s, schemas.ScalingConfigurationOutput_targetTrackingScalingConfigs, v.TargetTrackingScalingConfigs)
+	}
 }
 func (v *ScalingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScalingConfigurationOutput, func(s *smithy.Schema) error {
@@ -6611,7 +6699,9 @@ func (v *TestReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DurationInNanoSeconds != nil {
 		s.WriteInt64(schemas.TestReportSummary_durationInNanoSeconds, *v.DurationInNanoSeconds)
 	}
-	serializeReportStatusCounts(s, schemas.TestReportSummary_statusCounts, v.StatusCounts)
+	if v.StatusCounts != nil {
+		serializeReportStatusCounts(s, schemas.TestReportSummary_statusCounts, v.StatusCounts)
+	}
 	if v.Total != nil {
 		s.WriteInt32(schemas.TestReportSummary_total, *v.Total)
 	}
@@ -6654,8 +6744,12 @@ func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnets(s, schemas.VpcConfig_subnets, v.Subnets)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.VpcConfig_subnets, v.Subnets)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcConfig_vpcId, *v.VpcId)
 	}
@@ -6768,7 +6862,9 @@ func (v *Webhook) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BuildType != "" {
 		s.WriteString(schemas.Webhook_buildType, string(v.BuildType))
 	}
-	serializeFilterGroups(s, schemas.Webhook_filterGroups, v.FilterGroups)
+	if v.FilterGroups != nil {
+		serializeFilterGroups(s, schemas.Webhook_filterGroups, v.FilterGroups)
+	}
 	if v.LastModifiedSecret != nil {
 		s.WriteTime(schemas.Webhook_lastModifiedSecret, *v.LastModifiedSecret)
 	}

@@ -63,7 +63,9 @@ func (v *SearchDatabasesByLFTagsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CatalogId != nil {
 		s.WriteString(schemas.SearchDatabasesByLFTagsRequest_CatalogId, *v.CatalogId)
 	}
-	serializeExpression(s, schemas.SearchDatabasesByLFTagsRequest_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeExpression(s, schemas.SearchDatabasesByLFTagsRequest_Expression, v.Expression)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchDatabasesByLFTagsRequest_MaxResults, *v.MaxResults)
 	}
@@ -93,7 +95,9 @@ func (v *SearchDatabasesByLFTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchDatabasesByLFTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatabaseLFTagsList(s, schemas.SearchDatabasesByLFTagsResponse_DatabaseList, v.DatabaseList)
+	if v.DatabaseList != nil {
+		serializeDatabaseLFTagsList(s, schemas.SearchDatabasesByLFTagsResponse_DatabaseList, v.DatabaseList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchDatabasesByLFTagsResponse_NextToken, *v.NextToken)
 	}

@@ -82,7 +82,9 @@ func (v *ListFoundationModelAgreementOffersOutput) SerializeMembers(s smithy.Sha
 	if v.ModelId != nil {
 		s.WriteString(schemas.ListFoundationModelAgreementOffersResponse_modelId, *v.ModelId)
 	}
-	serializeOffers(s, schemas.ListFoundationModelAgreementOffersResponse_offers, v.Offers)
+	if v.Offers != nil {
+		serializeOffers(s, schemas.ListFoundationModelAgreementOffersResponse_offers, v.Offers)
+	}
 }
 func (v *ListFoundationModelAgreementOffersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListFoundationModelAgreementOffersResponse, func(s *smithy.Schema) error {

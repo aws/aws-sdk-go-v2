@@ -127,7 +127,9 @@ func (v *CreateModelExplainabilityJobDefinitionInput) SerializeMembers(s smithy.
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateModelExplainabilityJobDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelExplainabilityJobDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateModelExplainabilityJobDefinitionOutput struct {

@@ -60,7 +60,9 @@ func (v *ReportInstrumentationConfigurationStatusInput) Serialize(s smithy.Shape
 }
 
 func (v *ReportInstrumentationConfigurationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstrumentationConfigurationStatusList(s, schemas.ReportInstrumentationConfigurationStatusRequest_Configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeInstrumentationConfigurationStatusList(s, schemas.ReportInstrumentationConfigurationStatusRequest_Configurations, v.Configurations)
+	}
 	if v.Environment != nil {
 		s.WriteString(schemas.ReportInstrumentationConfigurationStatusRequest_Environment, *v.Environment)
 	}
@@ -106,7 +108,9 @@ func (v *ReportInstrumentationConfigurationStatusOutput) SerializeMembers(s smit
 	if v.Service != nil {
 		s.WriteString(schemas.ReportInstrumentationConfigurationStatusResponse_Service, *v.Service)
 	}
-	serializeUnprocessedStatusEventList(s, schemas.ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents, v.UnprocessedStatusEvents)
+	if v.UnprocessedStatusEvents != nil {
+		serializeUnprocessedStatusEventList(s, schemas.ReportInstrumentationConfigurationStatusResponse_UnprocessedStatusEvents, v.UnprocessedStatusEvents)
+	}
 }
 func (v *ReportInstrumentationConfigurationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReportInstrumentationConfigurationStatusResponse, func(s *smithy.Schema) error {

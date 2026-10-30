@@ -92,7 +92,9 @@ func (v *CreateWhatIfAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForecastArn != nil {
 		s.WriteString(schemas.CreateWhatIfAnalysisRequest_ForecastArn, *v.ForecastArn)
 	}
-	serializeTags(s, schemas.CreateWhatIfAnalysisRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWhatIfAnalysisRequest_Tags, v.Tags)
+	}
 	if v.TimeSeriesSelector != nil {
 		s.WriteStruct(schemas.CreateWhatIfAnalysisRequest_TimeSeriesSelector)
 		v.TimeSeriesSelector.SerializeMembers(s)

@@ -115,7 +115,9 @@ func (v *ListServicesByNamespaceOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServicesByNamespaceResponse_nextToken, *v.NextToken)
 	}
-	serializeStringList(s, schemas.ListServicesByNamespaceResponse_serviceArns, v.ServiceArns)
+	if v.ServiceArns != nil {
+		serializeStringList(s, schemas.ListServicesByNamespaceResponse_serviceArns, v.ServiceArns)
+	}
 }
 func (v *ListServicesByNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServicesByNamespaceResponse, func(s *smithy.Schema) error {

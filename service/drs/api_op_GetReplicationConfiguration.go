@@ -162,19 +162,27 @@ func (v *GetReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.ReplicationConfiguration_name, *v.Name)
 	}
-	serializePITPolicy(s, schemas.ReplicationConfiguration_pitPolicy, v.PitPolicy)
-	serializeReplicationConfigurationReplicatedDisks(s, schemas.ReplicationConfiguration_replicatedDisks, v.ReplicatedDisks)
+	if v.PitPolicy != nil {
+		serializePITPolicy(s, schemas.ReplicationConfiguration_pitPolicy, v.PitPolicy)
+	}
+	if v.ReplicatedDisks != nil {
+		serializeReplicationConfigurationReplicatedDisks(s, schemas.ReplicationConfiguration_replicatedDisks, v.ReplicatedDisks)
+	}
 	if v.ReplicationServerInstanceType != nil {
 		s.WriteString(schemas.ReplicationConfiguration_replicationServerInstanceType, *v.ReplicationServerInstanceType)
 	}
-	serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfiguration_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	if v.ReplicationServersSecurityGroupsIDs != nil {
+		serializeReplicationServersSecurityGroupsIDs(s, schemas.ReplicationConfiguration_replicationServersSecurityGroupsIDs, v.ReplicationServersSecurityGroupsIDs)
+	}
 	if v.SourceServerID != nil {
 		s.WriteString(schemas.ReplicationConfiguration_sourceServerID, *v.SourceServerID)
 	}
 	if v.StagingAreaSubnetId != nil {
 		s.WriteString(schemas.ReplicationConfiguration_stagingAreaSubnetId, *v.StagingAreaSubnetId)
 	}
-	serializeTagsMap(s, schemas.ReplicationConfiguration_stagingAreaTags, v.StagingAreaTags)
+	if v.StagingAreaTags != nil {
+		serializeTagsMap(s, schemas.ReplicationConfiguration_stagingAreaTags, v.StagingAreaTags)
+	}
 	if v.UseDedicatedReplicationServer != nil {
 		s.WriteBool(schemas.ReplicationConfiguration_useDedicatedReplicationServer, *v.UseDedicatedReplicationServer)
 	}

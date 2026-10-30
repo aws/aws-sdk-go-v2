@@ -122,7 +122,9 @@ func (v *ListThingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThingsResponse_nextToken, *v.NextToken)
 	}
-	serializeThingAttributeList(s, schemas.ListThingsResponse_things, v.Things)
+	if v.Things != nil {
+		serializeThingAttributeList(s, schemas.ListThingsResponse_things, v.Things)
+	}
 }
 func (v *ListThingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThingsResponse, func(s *smithy.Schema) error {

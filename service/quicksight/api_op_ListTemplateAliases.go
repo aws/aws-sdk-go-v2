@@ -106,7 +106,9 @@ func (v *ListTemplateAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.ListTemplateAliasesResponse_Status, v.Status)
 	}
-	serializeTemplateAliasList(s, schemas.ListTemplateAliasesResponse_TemplateAliasList, v.TemplateAliasList)
+	if v.TemplateAliasList != nil {
+		serializeTemplateAliasList(s, schemas.ListTemplateAliasesResponse_TemplateAliasList, v.TemplateAliasList)
+	}
 }
 func (v *ListTemplateAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplateAliasesResponse, func(s *smithy.Schema) error {

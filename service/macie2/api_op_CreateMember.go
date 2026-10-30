@@ -56,7 +56,9 @@ func (v *CreateMemberInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Account.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateMemberRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMemberRequest_tags, v.Tags)
+	}
 }
 
 type CreateMemberOutput struct {

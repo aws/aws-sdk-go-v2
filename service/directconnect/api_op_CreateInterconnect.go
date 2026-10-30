@@ -105,7 +105,9 @@ func (v *CreateInterconnectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestMACSec != nil {
 		s.WriteBool(schemas.CreateInterconnectRequest_requestMACSec, *v.RequestMACSec)
 	}
-	serializeTagList(s, schemas.CreateInterconnectRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInterconnectRequest_tags, v.Tags)
+	}
 }
 
 // Information about an interconnect.
@@ -248,7 +250,9 @@ func (v *CreateInterconnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacSecCapable != nil {
 		s.WriteBool(schemas.Interconnect_macSecCapable, *v.MacSecCapable)
 	}
-	serializeMacSecKeyList(s, schemas.Interconnect_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.Interconnect_macSecKeys, v.MacSecKeys)
+	}
 	if v.PortEncryptionStatus != nil {
 		s.WriteString(schemas.Interconnect_portEncryptionStatus, *v.PortEncryptionStatus)
 	}
@@ -258,7 +262,9 @@ func (v *CreateInterconnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Interconnect_region, *v.Region)
 	}
-	serializeTagList(s, schemas.Interconnect_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Interconnect_tags, v.Tags)
+	}
 }
 func (v *CreateInterconnectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Interconnect, func(s *smithy.Schema) error {

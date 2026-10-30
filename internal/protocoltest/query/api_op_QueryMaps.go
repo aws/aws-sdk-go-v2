@@ -53,18 +53,32 @@ func (v *QueryMapsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplexMap(s, schemas.QueryMapsInput_ComplexMapArg, v.ComplexMapArg)
-	serializeStringMap(s, schemas.QueryMapsInput_FlattenedMap, v.FlattenedMap)
-	serializeMapWithXmlName(s, schemas.QueryMapsInput_FlattenedMapWithXmlName, v.FlattenedMapWithXmlName)
-	serializeStringMap(s, schemas.QueryMapsInput_MapArg, v.MapArg)
-	serializeMapOfLists(s, schemas.QueryMapsInput_MapOfLists, v.MapOfLists)
-	serializeMapWithXmlName(s, schemas.QueryMapsInput_MapWithXmlMemberName, v.MapWithXmlMemberName)
+	if v.ComplexMapArg != nil {
+		serializeComplexMap(s, schemas.QueryMapsInput_ComplexMapArg, v.ComplexMapArg)
+	}
+	if v.FlattenedMap != nil {
+		serializeStringMap(s, schemas.QueryMapsInput_FlattenedMap, v.FlattenedMap)
+	}
+	if v.FlattenedMapWithXmlName != nil {
+		serializeMapWithXmlName(s, schemas.QueryMapsInput_FlattenedMapWithXmlName, v.FlattenedMapWithXmlName)
+	}
+	if v.MapArg != nil {
+		serializeStringMap(s, schemas.QueryMapsInput_MapArg, v.MapArg)
+	}
+	if v.MapOfLists != nil {
+		serializeMapOfLists(s, schemas.QueryMapsInput_MapOfLists, v.MapOfLists)
+	}
+	if v.MapWithXmlMemberName != nil {
+		serializeMapWithXmlName(s, schemas.QueryMapsInput_MapWithXmlMemberName, v.MapWithXmlMemberName)
+	}
 	if v.NestedStructWithMap != nil {
 		s.WriteStruct(schemas.QueryMapsInput_NestedStructWithMap)
 		v.NestedStructWithMap.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringMap(s, schemas.QueryMapsInput_RenamedMapArg, v.RenamedMapArg)
+	if v.RenamedMapArg != nil {
+		serializeStringMap(s, schemas.QueryMapsInput_RenamedMapArg, v.RenamedMapArg)
+	}
 }
 func (v *QueryMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryMapsInput, func(s *smithy.Schema) error {

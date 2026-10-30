@@ -90,7 +90,9 @@ func (v *ListOutgoingCertificatesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListOutgoingCertificatesResponse_nextMarker, *v.NextMarker)
 	}
-	serializeOutgoingCertificates(s, schemas.ListOutgoingCertificatesResponse_outgoingCertificates, v.OutgoingCertificates)
+	if v.OutgoingCertificates != nil {
+		serializeOutgoingCertificates(s, schemas.ListOutgoingCertificatesResponse_outgoingCertificates, v.OutgoingCertificates)
+	}
 }
 func (v *ListOutgoingCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOutgoingCertificatesResponse, func(s *smithy.Schema) error {

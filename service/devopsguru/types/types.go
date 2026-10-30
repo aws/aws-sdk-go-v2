@@ -176,7 +176,9 @@ func (v *AnomalousLogGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImpactStartTime != nil {
 		s.WriteTime(schemas.AnomalousLogGroup_ImpactStartTime, *v.ImpactStartTime)
 	}
-	serializeLogAnomalyShowcases(s, schemas.AnomalousLogGroup_LogAnomalyShowcases, v.LogAnomalyShowcases)
+	if v.LogAnomalyShowcases != nil {
+		serializeLogAnomalyShowcases(s, schemas.AnomalousLogGroup_LogAnomalyShowcases, v.LogAnomalyShowcases)
+	}
 	if v.LogGroupName != nil {
 		s.WriteString(schemas.AnomalousLogGroup_LogGroupName, *v.LogGroupName)
 	}
@@ -316,8 +318,12 @@ func (v *AnomalySourceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnomalySourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudWatchMetricsDetails(s, schemas.AnomalySourceDetails_CloudWatchMetrics, v.CloudWatchMetrics)
-	serializePerformanceInsightsMetricsDetails(s, schemas.AnomalySourceDetails_PerformanceInsightsMetrics, v.PerformanceInsightsMetrics)
+	if v.CloudWatchMetrics != nil {
+		serializeCloudWatchMetricsDetails(s, schemas.AnomalySourceDetails_CloudWatchMetrics, v.CloudWatchMetrics)
+	}
+	if v.PerformanceInsightsMetrics != nil {
+		serializePerformanceInsightsMetricsDetails(s, schemas.AnomalySourceDetails_PerformanceInsightsMetrics, v.PerformanceInsightsMetrics)
+	}
 }
 func (v *AnomalySourceDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnomalySourceDetails, func(s *smithy.Schema) error {
@@ -448,7 +454,9 @@ func (v *CloudFormationCollection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CloudFormationCollection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStackNames(s, schemas.CloudFormationCollection_StackNames, v.StackNames)
+	if v.StackNames != nil {
+		serializeStackNames(s, schemas.CloudFormationCollection_StackNames, v.StackNames)
+	}
 }
 func (v *CloudFormationCollection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudFormationCollection, func(s *smithy.Schema) error {
@@ -482,7 +490,9 @@ func (v *CloudFormationCollectionFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CloudFormationCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStackNames(s, schemas.CloudFormationCollectionFilter_StackNames, v.StackNames)
+	if v.StackNames != nil {
+		serializeStackNames(s, schemas.CloudFormationCollectionFilter_StackNames, v.StackNames)
+	}
 }
 func (v *CloudFormationCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudFormationCollectionFilter, func(s *smithy.Schema) error {
@@ -517,7 +527,9 @@ func (v *CloudFormationCostEstimationResourceCollectionFilter) Serialize(s smith
 }
 
 func (v *CloudFormationCostEstimationResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostEstimationStackNames(s, schemas.CloudFormationCostEstimationResourceCollectionFilter_StackNames, v.StackNames)
+	if v.StackNames != nil {
+		serializeCostEstimationStackNames(s, schemas.CloudFormationCostEstimationResourceCollectionFilter_StackNames, v.StackNames)
+	}
 }
 func (v *CloudFormationCostEstimationResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudFormationCostEstimationResourceCollectionFilter, func(s *smithy.Schema) error {
@@ -610,7 +622,9 @@ func (v *CloudWatchMetricsDataSummary) SerializeMembers(s smithy.ShapeSerializer
 	if v.StatusCode != "" {
 		s.WriteString(schemas.CloudWatchMetricsDataSummary_StatusCode, string(v.StatusCode))
 	}
-	serializeTimestampMetricValuePairList(s, schemas.CloudWatchMetricsDataSummary_TimestampMetricValuePairList, v.TimestampMetricValuePairList)
+	if v.TimestampMetricValuePairList != nil {
+		serializeTimestampMetricValuePairList(s, schemas.CloudWatchMetricsDataSummary_TimestampMetricValuePairList, v.TimestampMetricValuePairList)
+	}
 }
 func (v *CloudWatchMetricsDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudWatchMetricsDataSummary, func(s *smithy.Schema) error {
@@ -668,7 +682,9 @@ func (v *CloudWatchMetricsDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CloudWatchMetricsDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCloudWatchMetricsDimensions(s, schemas.CloudWatchMetricsDetail_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeCloudWatchMetricsDimensions(s, schemas.CloudWatchMetricsDetail_Dimensions, v.Dimensions)
+	}
 	if v.MetricDataSummary != nil {
 		s.WriteStruct(schemas.CloudWatchMetricsDetail_MetricDataSummary)
 		v.MetricDataSummary.SerializeMembers(s)
@@ -829,7 +845,9 @@ func (v *CostEstimationResourceCollectionFilter) SerializeMembers(s smithy.Shape
 		v.CloudFormation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagCostEstimationResourceCollectionFilters(s, schemas.CostEstimationResourceCollectionFilter_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagCostEstimationResourceCollectionFilters(s, schemas.CostEstimationResourceCollectionFilter_Tags, v.Tags)
+	}
 }
 func (v *CostEstimationResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CostEstimationResourceCollectionFilter, func(s *smithy.Schema) error {
@@ -995,7 +1013,9 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ResourceCollection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventResources(s, schemas.Event_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeEventResources(s, schemas.Event_Resources, v.Resources)
+	}
 	if v.Time != nil {
 		s.WriteTime(schemas.Event_Time, *v.Time)
 	}
@@ -1822,7 +1842,9 @@ func (v *ListMonitoredResourcesFilters) SerializeMembers(s smithy.ShapeSerialize
 	if v.ResourcePermission != "" {
 		s.WriteString(schemas.ListMonitoredResourcesFilters_ResourcePermission, string(v.ResourcePermission))
 	}
-	serializeResourceTypeFilters(s, schemas.ListMonitoredResourcesFilters_ResourceTypeFilters, v.ResourceTypeFilters)
+	if v.ResourceTypeFilters != nil {
+		serializeResourceTypeFilters(s, schemas.ListMonitoredResourcesFilters_ResourceTypeFilters, v.ResourceTypeFilters)
+	}
 }
 func (v *ListMonitoredResourcesFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMonitoredResourcesFilters, func(s *smithy.Schema) error {
@@ -1947,7 +1969,9 @@ func (v *LogAnomalyShowcase) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogAnomalyShowcase) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogAnomalyClasses(s, schemas.LogAnomalyShowcase_LogAnomalyClasses, v.LogAnomalyClasses)
+	if v.LogAnomalyClasses != nil {
+		serializeLogAnomalyClasses(s, schemas.LogAnomalyShowcase_LogAnomalyClasses, v.LogAnomalyClasses)
+	}
 }
 func (v *LogAnomalyShowcase) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogAnomalyShowcase, func(s *smithy.Schema) error {
@@ -2271,8 +2295,12 @@ func (v *NotificationFilterConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NotificationFilterConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationMessageTypes(s, schemas.NotificationFilterConfig_MessageTypes, v.MessageTypes)
-	serializeInsightSeverities(s, schemas.NotificationFilterConfig_Severities, v.Severities)
+	if v.MessageTypes != nil {
+		serializeNotificationMessageTypes(s, schemas.NotificationFilterConfig_MessageTypes, v.MessageTypes)
+	}
+	if v.Severities != nil {
+		serializeInsightSeverities(s, schemas.NotificationFilterConfig_Severities, v.Severities)
+	}
 }
 func (v *NotificationFilterConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotificationFilterConfig, func(s *smithy.Schema) error {
@@ -2476,7 +2504,9 @@ func (v *PerformanceInsightsMetricDimensionGroup) Serialize(s smithy.ShapeSerial
 }
 
 func (v *PerformanceInsightsMetricDimensionGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePerformanceInsightsMetricDimensions(s, schemas.PerformanceInsightsMetricDimensionGroup_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializePerformanceInsightsMetricDimensions(s, schemas.PerformanceInsightsMetricDimensionGroup_Dimensions, v.Dimensions)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.PerformanceInsightsMetricDimensionGroup_Group, *v.Group)
 	}
@@ -2568,7 +2598,9 @@ func (v *PerformanceInsightsMetricQuery) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PerformanceInsightsMetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePerformanceInsightsMetricFilterMap(s, schemas.PerformanceInsightsMetricQuery_Filter, v.Filter)
+	if v.Filter != nil {
+		serializePerformanceInsightsMetricFilterMap(s, schemas.PerformanceInsightsMetricQuery_Filter, v.Filter)
+	}
 	if v.GroupBy != nil {
 		s.WriteStruct(schemas.PerformanceInsightsMetricQuery_GroupBy)
 		v.GroupBy.SerializeMembers(s)
@@ -2656,9 +2688,15 @@ func (v *PerformanceInsightsMetricsDetail) SerializeMembers(s smithy.ShapeSerial
 		v.MetricQuery.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePerformanceInsightsReferenceDataList(s, schemas.PerformanceInsightsMetricsDetail_ReferenceData, v.ReferenceData)
-	serializePerformanceInsightsStats(s, schemas.PerformanceInsightsMetricsDetail_StatsAtAnomaly, v.StatsAtAnomaly)
-	serializePerformanceInsightsStats(s, schemas.PerformanceInsightsMetricsDetail_StatsAtBaseline, v.StatsAtBaseline)
+	if v.ReferenceData != nil {
+		serializePerformanceInsightsReferenceDataList(s, schemas.PerformanceInsightsMetricsDetail_ReferenceData, v.ReferenceData)
+	}
+	if v.StatsAtAnomaly != nil {
+		serializePerformanceInsightsStats(s, schemas.PerformanceInsightsMetricsDetail_StatsAtAnomaly, v.StatsAtAnomaly)
+	}
+	if v.StatsAtBaseline != nil {
+		serializePerformanceInsightsStats(s, schemas.PerformanceInsightsMetricsDetail_StatsAtBaseline, v.StatsAtBaseline)
+	}
 	if v.Unit != nil {
 		s.WriteString(schemas.PerformanceInsightsMetricsDetail_Unit, *v.Unit)
 	}
@@ -3009,7 +3047,9 @@ func (v *ProactiveAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AnomalyReportedTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnomalyResources(s, schemas.ProactiveAnomaly_AnomalyResources, v.AnomalyResources)
+	if v.AnomalyResources != nil {
+		serializeAnomalyResources(s, schemas.ProactiveAnomaly_AnomalyResources, v.AnomalyResources)
+	}
 	if v.AnomalyTimeRange != nil {
 		s.WriteStruct(schemas.ProactiveAnomaly_AnomalyTimeRange)
 		v.AnomalyTimeRange.SerializeMembers(s)
@@ -3191,7 +3231,9 @@ func (v *ProactiveAnomalySummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AnomalyReportedTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnomalyResources(s, schemas.ProactiveAnomalySummary_AnomalyResources, v.AnomalyResources)
+	if v.AnomalyResources != nil {
+		serializeAnomalyResources(s, schemas.ProactiveAnomalySummary_AnomalyResources, v.AnomalyResources)
+	}
 	if v.AnomalyTimeRange != nil {
 		s.WriteStruct(schemas.ProactiveAnomalySummary_AnomalyTimeRange)
 		v.AnomalyTimeRange.SerializeMembers(s)
@@ -3478,7 +3520,9 @@ func (v *ProactiveInsightSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProactiveInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedResourceArns(s, schemas.ProactiveInsightSummary_AssociatedResourceArns, v.AssociatedResourceArns)
+	if v.AssociatedResourceArns != nil {
+		serializeAssociatedResourceArns(s, schemas.ProactiveInsightSummary_AssociatedResourceArns, v.AssociatedResourceArns)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ProactiveInsightSummary_Id, *v.Id)
 	}
@@ -3772,7 +3816,9 @@ func (v *ReactiveAnomaly) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AnomalyReportedTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnomalyResources(s, schemas.ReactiveAnomaly_AnomalyResources, v.AnomalyResources)
+	if v.AnomalyResources != nil {
+		serializeAnomalyResources(s, schemas.ReactiveAnomaly_AnomalyResources, v.AnomalyResources)
+	}
 	if v.AnomalyTimeRange != nil {
 		s.WriteStruct(schemas.ReactiveAnomaly_AnomalyTimeRange)
 		v.AnomalyTimeRange.SerializeMembers(s)
@@ -3950,7 +3996,9 @@ func (v *ReactiveAnomalySummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AnomalyReportedTimeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnomalyResources(s, schemas.ReactiveAnomalySummary_AnomalyResources, v.AnomalyResources)
+	if v.AnomalyResources != nil {
+		serializeAnomalyResources(s, schemas.ReactiveAnomalySummary_AnomalyResources, v.AnomalyResources)
+	}
 	if v.AnomalyTimeRange != nil {
 		s.WriteStruct(schemas.ReactiveAnomalySummary_AnomalyTimeRange)
 		v.AnomalyTimeRange.SerializeMembers(s)
@@ -4217,7 +4265,9 @@ func (v *ReactiveInsightSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReactiveInsightSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedResourceArns(s, schemas.ReactiveInsightSummary_AssociatedResourceArns, v.AssociatedResourceArns)
+	if v.AssociatedResourceArns != nil {
+		serializeAssociatedResourceArns(s, schemas.ReactiveInsightSummary_AssociatedResourceArns, v.AssociatedResourceArns)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ReactiveInsightSummary_Id, *v.Id)
 	}
@@ -4466,8 +4516,12 @@ func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Reason != nil {
 		s.WriteString(schemas.Recommendation_Reason, *v.Reason)
 	}
-	serializeRecommendationRelatedAnomalies(s, schemas.Recommendation_RelatedAnomalies, v.RelatedAnomalies)
-	serializeRecommendationRelatedEvents(s, schemas.Recommendation_RelatedEvents, v.RelatedEvents)
+	if v.RelatedAnomalies != nil {
+		serializeRecommendationRelatedAnomalies(s, schemas.Recommendation_RelatedAnomalies, v.RelatedAnomalies)
+	}
+	if v.RelatedEvents != nil {
+		serializeRecommendationRelatedEvents(s, schemas.Recommendation_RelatedEvents, v.RelatedEvents)
+	}
 }
 func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
@@ -4523,8 +4577,12 @@ func (v *RecommendationRelatedAnomaly) SerializeMembers(s smithy.ShapeSerializer
 	if v.AnomalyId != nil {
 		s.WriteString(schemas.RecommendationRelatedAnomaly_AnomalyId, *v.AnomalyId)
 	}
-	serializeRecommendationRelatedAnomalyResources(s, schemas.RecommendationRelatedAnomaly_Resources, v.Resources)
-	serializeRelatedAnomalySourceDetails(s, schemas.RecommendationRelatedAnomaly_SourceDetails, v.SourceDetails)
+	if v.Resources != nil {
+		serializeRecommendationRelatedAnomalyResources(s, schemas.RecommendationRelatedAnomaly_Resources, v.Resources)
+	}
+	if v.SourceDetails != nil {
+		serializeRelatedAnomalySourceDetails(s, schemas.RecommendationRelatedAnomaly_SourceDetails, v.SourceDetails)
+	}
 }
 func (v *RecommendationRelatedAnomaly) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecommendationRelatedAnomaly, func(s *smithy.Schema) error {
@@ -4606,7 +4664,9 @@ func (v *RecommendationRelatedAnomalySourceDetail) Serialize(s smithy.ShapeSeria
 }
 
 func (v *RecommendationRelatedAnomalySourceDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationRelatedCloudWatchMetricsSourceDetails(s, schemas.RecommendationRelatedAnomalySourceDetail_CloudWatchMetrics, v.CloudWatchMetrics)
+	if v.CloudWatchMetrics != nil {
+		serializeRecommendationRelatedCloudWatchMetricsSourceDetails(s, schemas.RecommendationRelatedAnomalySourceDetail_CloudWatchMetrics, v.CloudWatchMetrics)
+	}
 }
 func (v *RecommendationRelatedAnomalySourceDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecommendationRelatedAnomalySourceDetail, func(s *smithy.Schema) error {
@@ -4685,7 +4745,9 @@ func (v *RecommendationRelatedEvent) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.RecommendationRelatedEvent_Name, *v.Name)
 	}
-	serializeRecommendationRelatedEventResources(s, schemas.RecommendationRelatedEvent_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeRecommendationRelatedEventResources(s, schemas.RecommendationRelatedEvent_Resources, v.Resources)
+	}
 }
 func (v *RecommendationRelatedEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RecommendationRelatedEvent, func(s *smithy.Schema) error {
@@ -4808,7 +4870,9 @@ func (v *ResourceCollection) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CloudFormation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagCollections(s, schemas.ResourceCollection_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagCollections(s, schemas.ResourceCollection_Tags, v.Tags)
+	}
 }
 func (v *ResourceCollection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceCollection, func(s *smithy.Schema) error {
@@ -4885,7 +4949,9 @@ func (v *ResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CloudFormation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagCollectionFilters(s, schemas.ResourceCollectionFilter_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagCollectionFilters(s, schemas.ResourceCollectionFilter_Tags, v.Tags)
+	}
 }
 func (v *ResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceCollectionFilter, func(s *smithy.Schema) error {
@@ -4945,8 +5011,12 @@ func (v *SearchInsightsFilters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServiceCollection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInsightSeverities(s, schemas.SearchInsightsFilters_Severities, v.Severities)
-	serializeInsightStatuses(s, schemas.SearchInsightsFilters_Statuses, v.Statuses)
+	if v.Severities != nil {
+		serializeInsightSeverities(s, schemas.SearchInsightsFilters_Severities, v.Severities)
+	}
+	if v.Statuses != nil {
+		serializeInsightStatuses(s, schemas.SearchInsightsFilters_Statuses, v.Statuses)
+	}
 }
 func (v *SearchInsightsFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchInsightsFilters, func(s *smithy.Schema) error {
@@ -5009,8 +5079,12 @@ func (v *SearchOrganizationInsightsFilters) SerializeMembers(s smithy.ShapeSeria
 		v.ServiceCollection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInsightSeverities(s, schemas.SearchOrganizationInsightsFilters_Severities, v.Severities)
-	serializeInsightStatuses(s, schemas.SearchOrganizationInsightsFilters_Statuses, v.Statuses)
+	if v.Severities != nil {
+		serializeInsightSeverities(s, schemas.SearchOrganizationInsightsFilters_Severities, v.Severities)
+	}
+	if v.Statuses != nil {
+		serializeInsightStatuses(s, schemas.SearchOrganizationInsightsFilters_Statuses, v.Statuses)
+	}
 }
 func (v *SearchOrganizationInsightsFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchOrganizationInsightsFilters, func(s *smithy.Schema) error {
@@ -5047,7 +5121,9 @@ func (v *ServiceCollection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceCollection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNames(s, schemas.ServiceCollection_ServiceNames, v.ServiceNames)
+	if v.ServiceNames != nil {
+		serializeServiceNames(s, schemas.ServiceCollection_ServiceNames, v.ServiceNames)
+	}
 }
 func (v *ServiceCollection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServiceCollection, func(s *smithy.Schema) error {
@@ -5460,7 +5536,9 @@ func (v *TagCollection) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppBoundaryKey != nil {
 		s.WriteString(schemas.TagCollection_AppBoundaryKey, *v.AppBoundaryKey)
 	}
-	serializeTagValues(s, schemas.TagCollection_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValues(s, schemas.TagCollection_TagValues, v.TagValues)
+	}
 }
 func (v *TagCollection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagCollection, func(s *smithy.Schema) error {
@@ -5522,7 +5600,9 @@ func (v *TagCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppBoundaryKey != nil {
 		s.WriteString(schemas.TagCollectionFilter_AppBoundaryKey, *v.AppBoundaryKey)
 	}
-	serializeTagValues(s, schemas.TagCollectionFilter_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeTagValues(s, schemas.TagCollectionFilter_TagValues, v.TagValues)
+	}
 }
 func (v *TagCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagCollectionFilter, func(s *smithy.Schema) error {
@@ -5590,7 +5670,9 @@ func (v *TagCostEstimationResourceCollectionFilter) SerializeMembers(s smithy.Sh
 	if v.AppBoundaryKey != nil {
 		s.WriteString(schemas.TagCostEstimationResourceCollectionFilter_AppBoundaryKey, *v.AppBoundaryKey)
 	}
-	serializeCostEstimationTagValues(s, schemas.TagCostEstimationResourceCollectionFilter_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeCostEstimationTagValues(s, schemas.TagCostEstimationResourceCollectionFilter_TagValues, v.TagValues)
+	}
 }
 func (v *TagCostEstimationResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TagCostEstimationResourceCollectionFilter, func(s *smithy.Schema) error {
@@ -5750,7 +5832,9 @@ func (v *UpdateCloudFormationCollectionFilter) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateCloudFormationCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateStackNames(s, schemas.UpdateCloudFormationCollectionFilter_StackNames, v.StackNames)
+	if v.StackNames != nil {
+		serializeUpdateStackNames(s, schemas.UpdateCloudFormationCollectionFilter_StackNames, v.StackNames)
+	}
 }
 func (v *UpdateCloudFormationCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCloudFormationCollectionFilter, func(s *smithy.Schema) error {
@@ -5820,7 +5904,9 @@ func (v *UpdateResourceCollectionFilter) SerializeMembers(s smithy.ShapeSerializ
 		v.CloudFormation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUpdateTagCollectionFilters(s, schemas.UpdateResourceCollectionFilter_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeUpdateTagCollectionFilters(s, schemas.UpdateResourceCollectionFilter_Tags, v.Tags)
+	}
 }
 func (v *UpdateResourceCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateResourceCollectionFilter, func(s *smithy.Schema) error {
@@ -5942,7 +6028,9 @@ func (v *UpdateTagCollectionFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppBoundaryKey != nil {
 		s.WriteString(schemas.UpdateTagCollectionFilter_AppBoundaryKey, *v.AppBoundaryKey)
 	}
-	serializeUpdateTagValues(s, schemas.UpdateTagCollectionFilter_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeUpdateTagValues(s, schemas.UpdateTagCollectionFilter_TagValues, v.TagValues)
+	}
 }
 func (v *UpdateTagCollectionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateTagCollectionFilter, func(s *smithy.Schema) error {

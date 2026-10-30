@@ -114,7 +114,9 @@ func (v *ListDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ListDevicesRequest_arn, *v.Arn)
 	}
-	serializeDeviceFilters(s, schemas.ListDevicesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeDeviceFilters(s, schemas.ListDevicesRequest_filters, v.Filters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicesRequest_nextToken, *v.NextToken)
 	}
@@ -144,7 +146,9 @@ func (v *ListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevices(s, schemas.ListDevicesResult_devices, v.Devices)
+	if v.Devices != nil {
+		serializeDevices(s, schemas.ListDevicesResult_devices, v.Devices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicesResult_nextToken, *v.NextToken)
 	}

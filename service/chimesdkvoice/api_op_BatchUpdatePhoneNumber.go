@@ -47,7 +47,9 @@ func (v *BatchUpdatePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdatePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdatePhoneNumberRequestItemList(s, schemas.BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems, v.UpdatePhoneNumberRequestItems)
+	if v.UpdatePhoneNumberRequestItems != nil {
+		serializeUpdatePhoneNumberRequestItemList(s, schemas.BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems, v.UpdatePhoneNumberRequestItems)
+	}
 }
 
 type BatchUpdatePhoneNumberOutput struct {
@@ -68,7 +70,9 @@ func (v *BatchUpdatePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdatePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberErrorList(s, schemas.BatchUpdatePhoneNumberResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+	if v.PhoneNumberErrors != nil {
+		serializePhoneNumberErrorList(s, schemas.BatchUpdatePhoneNumberResponse_PhoneNumberErrors, v.PhoneNumberErrors)
+	}
 }
 func (v *BatchUpdatePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdatePhoneNumberResponse, func(s *smithy.Schema) error {

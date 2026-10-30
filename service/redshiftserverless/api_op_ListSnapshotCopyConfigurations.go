@@ -90,7 +90,9 @@ func (v *ListSnapshotCopyConfigurationsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSnapshotCopyConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeSnapshotCopyConfigurations(s, schemas.ListSnapshotCopyConfigurationsResponse_snapshotCopyConfigurations, v.SnapshotCopyConfigurations)
+	if v.SnapshotCopyConfigurations != nil {
+		serializeSnapshotCopyConfigurations(s, schemas.ListSnapshotCopyConfigurationsResponse_snapshotCopyConfigurations, v.SnapshotCopyConfigurations)
+	}
 }
 func (v *ListSnapshotCopyConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSnapshotCopyConfigurationsResponse, func(s *smithy.Schema) error {

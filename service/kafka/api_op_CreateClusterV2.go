@@ -65,7 +65,9 @@ func (v *CreateClusterV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Serverless.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.CreateClusterV2Request_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateClusterV2Request_Tags, v.Tags)
+	}
 }
 
 type CreateClusterV2Output struct {

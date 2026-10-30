@@ -160,7 +160,9 @@ func (v *CreateCompilationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCompilationJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCompilationJobRequest_Tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateCompilationJobRequest_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

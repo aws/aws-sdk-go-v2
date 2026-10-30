@@ -135,7 +135,9 @@ func (v *CreateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEventBusRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateEventBusRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEventBusRequest_Tags, v.Tags)
+	}
 }
 
 type CreateEventBusOutput struct {

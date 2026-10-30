@@ -82,7 +82,9 @@ func (v *StartCapacityTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != false {
 		s.WriteBool(schemas.StartCapacityTaskInput_DryRun, v.DryRun)
 	}
-	serializeRequestedInstancePools(s, schemas.StartCapacityTaskInput_InstancePools, v.InstancePools)
+	if v.InstancePools != nil {
+		serializeRequestedInstancePools(s, schemas.StartCapacityTaskInput_InstancePools, v.InstancePools)
+	}
 	if v.InstancesToExclude != nil {
 		s.WriteStruct(schemas.StartCapacityTaskInput_InstancesToExclude)
 		v.InstancesToExclude.SerializeMembers(s)
@@ -200,7 +202,9 @@ func (v *StartCapacityTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutpostId != nil {
 		s.WriteString(schemas.StartCapacityTaskOutput_OutpostId, *v.OutpostId)
 	}
-	serializeRequestedInstancePools(s, schemas.StartCapacityTaskOutput_RequestedInstancePools, v.RequestedInstancePools)
+	if v.RequestedInstancePools != nil {
+		serializeRequestedInstancePools(s, schemas.StartCapacityTaskOutput_RequestedInstancePools, v.RequestedInstancePools)
+	}
 	if v.TaskActionOnBlockingInstances != "" {
 		s.WriteString(schemas.StartCapacityTaskOutput_TaskActionOnBlockingInstances, string(v.TaskActionOnBlockingInstances))
 	}

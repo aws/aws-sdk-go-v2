@@ -139,15 +139,21 @@ func (v *GetWorkflowStepGroupOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.GetWorkflowStepGroupResponse_name, *v.Name)
 	}
-	serializeStringList(s, schemas.GetWorkflowStepGroupResponse_next, v.Next)
+	if v.Next != nil {
+		serializeStringList(s, schemas.GetWorkflowStepGroupResponse_next, v.Next)
+	}
 	if v.Owner != "" {
 		s.WriteString(schemas.GetWorkflowStepGroupResponse_owner, string(v.Owner))
 	}
-	serializeStringList(s, schemas.GetWorkflowStepGroupResponse_previous, v.Previous)
+	if v.Previous != nil {
+		serializeStringList(s, schemas.GetWorkflowStepGroupResponse_previous, v.Previous)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetWorkflowStepGroupResponse_status, string(v.Status))
 	}
-	serializeToolsList(s, schemas.GetWorkflowStepGroupResponse_tools, v.Tools)
+	if v.Tools != nil {
+		serializeToolsList(s, schemas.GetWorkflowStepGroupResponse_tools, v.Tools)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.GetWorkflowStepGroupResponse_workflowId, *v.WorkflowId)
 	}

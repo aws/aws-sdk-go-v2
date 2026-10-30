@@ -77,7 +77,9 @@ func (v *AddPolicyStatementInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddPolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStatementActionList(s, schemas.AddPolicyStatementInput_action, v.Action)
+	if v.Action != nil {
+		serializeStatementActionList(s, schemas.AddPolicyStatementInput_action, v.Action)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.AddPolicyStatementInput_arn, *v.Arn)
 	}
@@ -87,7 +89,9 @@ func (v *AddPolicyStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Effect != "" {
 		s.WriteString(schemas.AddPolicyStatementInput_effect, string(v.Effect))
 	}
-	serializeStatementPrincipalList(s, schemas.AddPolicyStatementInput_principal, v.Principal)
+	if v.Principal != nil {
+		serializeStatementPrincipalList(s, schemas.AddPolicyStatementInput_principal, v.Principal)
+	}
 	if v.StatementId != nil {
 		s.WriteString(schemas.AddPolicyStatementInput_statementId, *v.StatementId)
 	}

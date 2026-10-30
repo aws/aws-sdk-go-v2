@@ -154,7 +154,9 @@ func (v *ResumeReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceServerID != nil {
 		s.WriteString(schemas.SourceServer_sourceServerID, *v.SourceServerID)
 	}
-	serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.SourceServer_tags, v.Tags)
+	}
 	if v.UserProvidedID != nil {
 		s.WriteString(schemas.SourceServer_userProvidedID, *v.UserProvidedID)
 	}

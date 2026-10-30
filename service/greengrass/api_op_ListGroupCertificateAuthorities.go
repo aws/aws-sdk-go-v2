@@ -66,7 +66,9 @@ func (v *ListGroupCertificateAuthoritiesOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListGroupCertificateAuthoritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfGroupCertificateAuthorityProperties(s, schemas.ListGroupCertificateAuthoritiesResponse_GroupCertificateAuthorities, v.GroupCertificateAuthorities)
+	if v.GroupCertificateAuthorities != nil {
+		serialize__listOfGroupCertificateAuthorityProperties(s, schemas.ListGroupCertificateAuthoritiesResponse_GroupCertificateAuthorities, v.GroupCertificateAuthorities)
+	}
 }
 func (v *ListGroupCertificateAuthoritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGroupCertificateAuthoritiesResponse, func(s *smithy.Schema) error {

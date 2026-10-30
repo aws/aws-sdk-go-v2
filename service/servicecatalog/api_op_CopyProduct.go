@@ -83,14 +83,18 @@ func (v *CopyProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.CopyProductInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeCopyOptions(s, schemas.CopyProductInput_CopyOptions, v.CopyOptions)
+	if v.CopyOptions != nil {
+		serializeCopyOptions(s, schemas.CopyProductInput_CopyOptions, v.CopyOptions)
+	}
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CopyProductInput_IdempotencyToken, *v.IdempotencyToken)
 	}
 	if v.SourceProductArn != nil {
 		s.WriteString(schemas.CopyProductInput_SourceProductArn, *v.SourceProductArn)
 	}
-	serializeSourceProvisioningArtifactProperties(s, schemas.CopyProductInput_SourceProvisioningArtifactIdentifiers, v.SourceProvisioningArtifactIdentifiers)
+	if v.SourceProvisioningArtifactIdentifiers != nil {
+		serializeSourceProvisioningArtifactProperties(s, schemas.CopyProductInput_SourceProvisioningArtifactIdentifiers, v.SourceProvisioningArtifactIdentifiers)
+	}
 	if v.TargetProductId != nil {
 		s.WriteString(schemas.CopyProductInput_TargetProductId, *v.TargetProductId)
 	}

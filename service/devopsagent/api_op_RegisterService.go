@@ -88,8 +88,12 @@ func (v *RegisterServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Service != "" {
 		s.WriteString(schemas.RegisterServiceInput_service, string(v.Service))
 	}
-	serializeServiceDetails(s, schemas.RegisterServiceInput_serviceDetails, v.ServiceDetails)
-	serializeTags(s, schemas.RegisterServiceInput_tags, v.Tags)
+	if v.ServiceDetails != nil {
+		serializeServiceDetails(s, schemas.RegisterServiceInput_serviceDetails, v.ServiceDetails)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterServiceInput_tags, v.Tags)
+	}
 	if v.TargetUrlPrivateConnectionName != nil {
 		s.WriteString(schemas.RegisterServiceInput_targetUrlPrivateConnectionName, *v.TargetUrlPrivateConnectionName)
 	}
@@ -127,14 +131,18 @@ func (v *RegisterServiceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalServiceRegistrationStep(s, schemas.RegisterServiceOutput_additionalStep, v.AdditionalStep)
+	if v.AdditionalStep != nil {
+		serializeAdditionalServiceRegistrationStep(s, schemas.RegisterServiceOutput_additionalStep, v.AdditionalStep)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.RegisterServiceOutput_kmsKeyArn, *v.KmsKeyArn)
 	}
 	if v.ServiceId != nil {
 		s.WriteString(schemas.RegisterServiceOutput_serviceId, *v.ServiceId)
 	}
-	serializeTags(s, schemas.RegisterServiceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterServiceOutput_tags, v.Tags)
+	}
 }
 func (v *RegisterServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisterServiceOutput, func(s *smithy.Schema) error {

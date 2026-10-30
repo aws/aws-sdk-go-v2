@@ -105,7 +105,9 @@ func (v *ListImportTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImportTasksOutput_nextToken, *v.NextToken)
 	}
-	serializeImportTaskSummaryList(s, schemas.ListImportTasksOutput_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeImportTaskSummaryList(s, schemas.ListImportTasksOutput_tasks, v.Tasks)
+	}
 }
 func (v *ListImportTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListImportTasksOutput, func(s *smithy.Schema) error {

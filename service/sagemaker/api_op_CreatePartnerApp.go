@@ -143,7 +143,9 @@ func (v *CreatePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePartnerAppRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreatePartnerAppRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePartnerAppRequest_Tags, v.Tags)
+	}
 	if v.Tier != nil {
 		s.WriteString(schemas.CreatePartnerAppRequest_Tier, *v.Tier)
 	}

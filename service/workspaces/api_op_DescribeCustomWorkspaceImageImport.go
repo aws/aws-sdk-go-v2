@@ -100,14 +100,18 @@ func (v *DescribeCustomWorkspaceImageImportOutput) SerializeMembers(s smithy.Sha
 	if v.Created != nil {
 		s.WriteTime(schemas.DescribeCustomWorkspaceImageImportResult_Created, *v.Created)
 	}
-	serializeCustomWorkspaceImageImportErrorDetailsList(s, schemas.DescribeCustomWorkspaceImageImportResult_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeCustomWorkspaceImageImportErrorDetailsList(s, schemas.DescribeCustomWorkspaceImageImportResult_ErrorDetails, v.ErrorDetails)
+	}
 	if v.ImageBuilderInstanceId != nil {
 		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_ImageBuilderInstanceId, *v.ImageBuilderInstanceId)
 	}
 	if v.ImageId != nil {
 		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_ImageId, *v.ImageId)
 	}
-	serializeImageSourceIdentifier(s, schemas.DescribeCustomWorkspaceImageImportResult_ImageSource, v.ImageSource)
+	if v.ImageSource != nil {
+		serializeImageSourceIdentifier(s, schemas.DescribeCustomWorkspaceImageImportResult_ImageSource, v.ImageSource)
+	}
 	if v.InfrastructureConfigurationArn != nil {
 		s.WriteString(schemas.DescribeCustomWorkspaceImageImportResult_InfrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
 	}

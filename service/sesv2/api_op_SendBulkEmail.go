@@ -120,7 +120,9 @@ func (v *SendBulkEmailInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SendBulkEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBulkEmailEntryList(s, schemas.SendBulkEmailRequest_BulkEmailEntries, v.BulkEmailEntries)
+	if v.BulkEmailEntries != nil {
+		serializeBulkEmailEntryList(s, schemas.SendBulkEmailRequest_BulkEmailEntries, v.BulkEmailEntries)
+	}
 	if v.ConfigurationOverrides != nil {
 		s.WriteStruct(schemas.SendBulkEmailRequest_ConfigurationOverrides)
 		v.ConfigurationOverrides.SerializeMembers(s)
@@ -134,7 +136,9 @@ func (v *SendBulkEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultContent.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessageTagList(s, schemas.SendBulkEmailRequest_DefaultEmailTags, v.DefaultEmailTags)
+	if v.DefaultEmailTags != nil {
+		serializeMessageTagList(s, schemas.SendBulkEmailRequest_DefaultEmailTags, v.DefaultEmailTags)
+	}
 	if v.EndpointId != nil {
 		s.WriteString(schemas.SendBulkEmailRequest_EndpointId, *v.EndpointId)
 	}
@@ -150,7 +154,9 @@ func (v *SendBulkEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FromEmailAddressIdentityArn != nil {
 		s.WriteString(schemas.SendBulkEmailRequest_FromEmailAddressIdentityArn, *v.FromEmailAddressIdentityArn)
 	}
-	serializeEmailAddressList(s, schemas.SendBulkEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	if v.ReplyToAddresses != nil {
+		serializeEmailAddressList(s, schemas.SendBulkEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	}
 	if v.TenantName != nil {
 		s.WriteString(schemas.SendBulkEmailRequest_TenantName, *v.TenantName)
 	}
@@ -183,7 +189,9 @@ func (v *SendBulkEmailOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SendBulkEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBulkEmailEntryResultList(s, schemas.SendBulkEmailResponse_BulkEmailEntryResults, v.BulkEmailEntryResults)
+	if v.BulkEmailEntryResults != nil {
+		serializeBulkEmailEntryResultList(s, schemas.SendBulkEmailResponse_BulkEmailEntryResults, v.BulkEmailEntryResults)
+	}
 }
 func (v *SendBulkEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SendBulkEmailResponse, func(s *smithy.Schema) error {

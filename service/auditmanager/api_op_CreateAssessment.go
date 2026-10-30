@@ -95,13 +95,17 @@ func (v *CreateAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAssessmentRequest_name, *v.Name)
 	}
-	serializeRoles(s, schemas.CreateAssessmentRequest_roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.CreateAssessmentRequest_roles, v.Roles)
+	}
 	if v.Scope != nil {
 		s.WriteStruct(schemas.CreateAssessmentRequest_scope)
 		v.Scope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateAssessmentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAssessmentRequest_tags, v.Tags)
+	}
 }
 
 type CreateAssessmentOutput struct {

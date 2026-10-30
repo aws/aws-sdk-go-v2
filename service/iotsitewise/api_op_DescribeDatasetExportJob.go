@@ -125,7 +125,9 @@ func (v *DescribeDatasetExportJobOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.ErrorReportLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProcessingInput(s, schemas.DescribeDatasetExportJobResponse_input, v.Input)
+	if v.Input != nil {
+		serializeProcessingInput(s, schemas.DescribeDatasetExportJobResponse_input, v.Input)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.DescribeDatasetExportJobResponse_jobId, *v.JobId)
 	}

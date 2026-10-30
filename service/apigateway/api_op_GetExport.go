@@ -74,7 +74,9 @@ func (v *GetExportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExportType != nil {
 		s.WriteString(schemas.GetExportRequest_exportType, *v.ExportType)
 	}
-	serializeMapOfStringToString(s, schemas.GetExportRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeMapOfStringToString(s, schemas.GetExportRequest_parameters, v.Parameters)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.GetExportRequest_restApiId, *v.RestApiId)
 	}

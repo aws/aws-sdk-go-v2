@@ -77,7 +77,9 @@ func (v *ListServiceStatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListServiceStatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeFilters(s, schemas.ListServiceStatesInput_AttributeFilters, v.AttributeFilters)
+	if v.AttributeFilters != nil {
+		serializeAttributeFilters(s, schemas.ListServiceStatesInput_AttributeFilters, v.AttributeFilters)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.ListServiceStatesInput_AwsAccountId, *v.AwsAccountId)
 	}
@@ -143,7 +145,9 @@ func (v *ListServiceStatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceStatesOutput_NextToken, *v.NextToken)
 	}
-	serializeServiceStates(s, schemas.ListServiceStatesOutput_ServiceStates, v.ServiceStates)
+	if v.ServiceStates != nil {
+		serializeServiceStates(s, schemas.ListServiceStatesOutput_ServiceStates, v.ServiceStates)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ListServiceStatesOutput_StartTime, *v.StartTime)
 	}

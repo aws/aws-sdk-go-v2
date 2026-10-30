@@ -59,7 +59,9 @@ func (v *ListTagSyncTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTagSyncTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListTagSyncTasksFilterList(s, schemas.ListTagSyncTasksInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeListTagSyncTasksFilterList(s, schemas.ListTagSyncTasksInput_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListTagSyncTasksInput_MaxResults, *v.MaxResults)
 	}
@@ -95,7 +97,9 @@ func (v *ListTagSyncTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTagSyncTasksOutput_NextToken, *v.NextToken)
 	}
-	serializeTagSyncTaskList(s, schemas.ListTagSyncTasksOutput_TagSyncTasks, v.TagSyncTasks)
+	if v.TagSyncTasks != nil {
+		serializeTagSyncTaskList(s, schemas.ListTagSyncTasksOutput_TagSyncTasks, v.TagSyncTasks)
+	}
 }
 func (v *ListTagSyncTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagSyncTasksOutput, func(s *smithy.Schema) error {

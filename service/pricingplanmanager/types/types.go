@@ -153,7 +153,9 @@ func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlanTier != nil {
 		s.WriteString(schemas.Subscription_planTier, *v.PlanTier)
 	}
-	serializeResourceArns(s, schemas.Subscription_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.Subscription_resourceArns, v.ResourceArns)
+	}
 	if v.ScheduledChange != nil {
 		s.WriteStruct(schemas.Subscription_scheduledChange)
 		v.ScheduledChange.SerializeMembers(s)
@@ -294,7 +296,9 @@ func (v *SubscriptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlanTier != nil {
 		s.WriteString(schemas.SubscriptionSummary_planTier, *v.PlanTier)
 	}
-	serializeResourceArns(s, schemas.SubscriptionSummary_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.SubscriptionSummary_resourceArns, v.ResourceArns)
+	}
 	if v.ScheduledChange != nil {
 		s.WriteStruct(schemas.SubscriptionSummary_scheduledChange)
 		v.ScheduledChange.SerializeMembers(s)

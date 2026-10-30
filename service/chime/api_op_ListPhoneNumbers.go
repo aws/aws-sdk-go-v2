@@ -102,7 +102,9 @@ func (v *ListPhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPhoneNumbersResponse_NextToken, *v.NextToken)
 	}
-	serializePhoneNumberList(s, schemas.ListPhoneNumbersResponse_PhoneNumbers, v.PhoneNumbers)
+	if v.PhoneNumbers != nil {
+		serializePhoneNumberList(s, schemas.ListPhoneNumbersResponse_PhoneNumbers, v.PhoneNumbers)
+	}
 }
 func (v *ListPhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPhoneNumbersResponse, func(s *smithy.Schema) error {

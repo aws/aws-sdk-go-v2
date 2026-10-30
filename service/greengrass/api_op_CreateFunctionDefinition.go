@@ -64,7 +64,9 @@ func (v *CreateFunctionDefinitionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFunctionDefinitionRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateFunctionDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateFunctionDefinitionRequest_tags, v.Tags)
+	}
 }
 
 type CreateFunctionDefinitionOutput struct {

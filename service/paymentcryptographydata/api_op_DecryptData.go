@@ -115,7 +115,9 @@ func (v *DecryptDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CipherText != nil {
 		s.WriteString(schemas.DecryptDataInput_CipherText, *v.CipherText)
 	}
-	serializeEncryptionDecryptionAttributes(s, schemas.DecryptDataInput_DecryptionAttributes, v.DecryptionAttributes)
+	if v.DecryptionAttributes != nil {
+		serializeEncryptionDecryptionAttributes(s, schemas.DecryptDataInput_DecryptionAttributes, v.DecryptionAttributes)
+	}
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.DecryptDataInput_KeyIdentifier, *v.KeyIdentifier)
 	}

@@ -104,7 +104,9 @@ func (v *GetConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigArn != nil {
 		s.WriteString(schemas.GetConfigResponse_configArn, *v.ConfigArn)
 	}
-	serializeConfigTypeData(s, schemas.GetConfigResponse_configData, v.ConfigData)
+	if v.ConfigData != nil {
+		serializeConfigTypeData(s, schemas.GetConfigResponse_configData, v.ConfigData)
+	}
 	if v.ConfigId != nil {
 		s.WriteString(schemas.GetConfigResponse_configId, *v.ConfigId)
 	}
@@ -114,7 +116,9 @@ func (v *GetConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetConfigResponse_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.GetConfigResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetConfigResponse_tags, v.Tags)
+	}
 }
 func (v *GetConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetConfigResponse, func(s *smithy.Schema) error {

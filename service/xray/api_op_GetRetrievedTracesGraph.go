@@ -106,7 +106,9 @@ func (v *GetRetrievedTracesGraphOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RetrievalStatus != "" {
 		s.WriteString(schemas.GetRetrievedTracesGraphResult_RetrievalStatus, string(v.RetrievalStatus))
 	}
-	serializeRetrievedServicesList(s, schemas.GetRetrievedTracesGraphResult_Services, v.Services)
+	if v.Services != nil {
+		serializeRetrievedServicesList(s, schemas.GetRetrievedTracesGraphResult_Services, v.Services)
+	}
 }
 func (v *GetRetrievedTracesGraphOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRetrievedTracesGraphResult, func(s *smithy.Schema) error {

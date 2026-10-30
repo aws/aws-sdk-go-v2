@@ -104,7 +104,9 @@ func (v *DescribeImageTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeImageTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageTagDetailList(s, schemas.DescribeImageTagsResponse_imageTagDetails, v.ImageTagDetails)
+	if v.ImageTagDetails != nil {
+		serializeImageTagDetailList(s, schemas.DescribeImageTagsResponse_imageTagDetails, v.ImageTagDetails)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeImageTagsResponse_nextToken, *v.NextToken)
 	}

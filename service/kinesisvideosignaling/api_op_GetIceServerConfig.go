@@ -101,7 +101,9 @@ func (v *GetIceServerConfigOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIceServerConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIceServerList(s, schemas.GetIceServerConfigResponse_IceServerList, v.IceServerList)
+	if v.IceServerList != nil {
+		serializeIceServerList(s, schemas.GetIceServerConfigResponse_IceServerList, v.IceServerList)
+	}
 }
 func (v *GetIceServerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetIceServerConfigResponse, func(s *smithy.Schema) error {

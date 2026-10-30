@@ -176,7 +176,9 @@ func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountAccessType != "" {
 		s.WriteString(schemas.CreateWorkspaceRequest_accountAccessType, string(v.AccountAccessType))
 	}
-	serializeAuthenticationProviders(s, schemas.CreateWorkspaceRequest_authenticationProviders, v.AuthenticationProviders)
+	if v.AuthenticationProviders != nil {
+		serializeAuthenticationProviders(s, schemas.CreateWorkspaceRequest_authenticationProviders, v.AuthenticationProviders)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_clientToken, *v.ClientToken)
 	}
@@ -206,21 +208,29 @@ func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StackSetName != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_stackSetName, *v.StackSetName)
 	}
-	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+	}
 	if v.VpcConfiguration != nil {
 		s.WriteStruct(schemas.CreateWorkspaceRequest_vpcConfiguration)
 		v.VpcConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceTypesList(s, schemas.CreateWorkspaceRequest_workspaceDataSources, v.WorkspaceDataSources)
+	if v.WorkspaceDataSources != nil {
+		serializeDataSourceTypesList(s, schemas.CreateWorkspaceRequest_workspaceDataSources, v.WorkspaceDataSources)
+	}
 	if v.WorkspaceDescription != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_workspaceDescription, *v.WorkspaceDescription)
 	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_workspaceName, *v.WorkspaceName)
 	}
-	serializeNotificationDestinationsList(s, schemas.CreateWorkspaceRequest_workspaceNotificationDestinations, v.WorkspaceNotificationDestinations)
-	serializeOrganizationalUnitList(s, schemas.CreateWorkspaceRequest_workspaceOrganizationalUnits, v.WorkspaceOrganizationalUnits)
+	if v.WorkspaceNotificationDestinations != nil {
+		serializeNotificationDestinationsList(s, schemas.CreateWorkspaceRequest_workspaceNotificationDestinations, v.WorkspaceNotificationDestinations)
+	}
+	if v.WorkspaceOrganizationalUnits != nil {
+		serializeOrganizationalUnitList(s, schemas.CreateWorkspaceRequest_workspaceOrganizationalUnits, v.WorkspaceOrganizationalUnits)
+	}
 	if v.WorkspaceRoleArn != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_workspaceRoleArn, *v.WorkspaceRoleArn)
 	}

@@ -90,7 +90,9 @@ func (v *ListAssistantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssistantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssistantList(s, schemas.ListAssistantsResponse_assistantSummaries, v.AssistantSummaries)
+	if v.AssistantSummaries != nil {
+		serializeAssistantList(s, schemas.ListAssistantsResponse_assistantSummaries, v.AssistantSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssistantsResponse_nextToken, *v.NextToken)
 	}

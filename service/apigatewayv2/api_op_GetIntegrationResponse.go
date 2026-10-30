@@ -130,8 +130,12 @@ func (v *GetIntegrationResponseOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.IntegrationResponseKey != nil {
 		s.WriteString(schemas.GetIntegrationResponseResponse_IntegrationResponseKey, *v.IntegrationResponseKey)
 	}
-	serializeIntegrationParameters(s, schemas.GetIntegrationResponseResponse_ResponseParameters, v.ResponseParameters)
-	serializeTemplateMap(s, schemas.GetIntegrationResponseResponse_ResponseTemplates, v.ResponseTemplates)
+	if v.ResponseParameters != nil {
+		serializeIntegrationParameters(s, schemas.GetIntegrationResponseResponse_ResponseParameters, v.ResponseParameters)
+	}
+	if v.ResponseTemplates != nil {
+		serializeTemplateMap(s, schemas.GetIntegrationResponseResponse_ResponseTemplates, v.ResponseTemplates)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.GetIntegrationResponseResponse_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}

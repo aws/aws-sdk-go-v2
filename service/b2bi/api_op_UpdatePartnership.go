@@ -56,7 +56,9 @@ func (v *UpdatePartnershipInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePartnershipInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartnershipCapabilities(s, schemas.UpdatePartnershipRequest_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializePartnershipCapabilities(s, schemas.UpdatePartnershipRequest_capabilities, v.Capabilities)
+	}
 	if v.CapabilityOptions != nil {
 		s.WriteStruct(schemas.UpdatePartnershipRequest_capabilityOptions)
 		v.CapabilityOptions.SerializeMembers(s)
@@ -130,7 +132,9 @@ func (v *UpdatePartnershipOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePartnershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartnershipCapabilities(s, schemas.UpdatePartnershipResponse_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializePartnershipCapabilities(s, schemas.UpdatePartnershipResponse_capabilities, v.Capabilities)
+	}
 	if v.CapabilityOptions != nil {
 		s.WriteStruct(schemas.UpdatePartnershipResponse_capabilityOptions)
 		v.CapabilityOptions.SerializeMembers(s)

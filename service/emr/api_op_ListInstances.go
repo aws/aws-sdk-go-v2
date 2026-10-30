@@ -79,8 +79,12 @@ func (v *ListInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceGroupId != nil {
 		s.WriteString(schemas.ListInstancesInput_InstanceGroupId, *v.InstanceGroupId)
 	}
-	serializeInstanceGroupTypeList(s, schemas.ListInstancesInput_InstanceGroupTypes, v.InstanceGroupTypes)
-	serializeInstanceStateList(s, schemas.ListInstancesInput_InstanceStates, v.InstanceStates)
+	if v.InstanceGroupTypes != nil {
+		serializeInstanceGroupTypeList(s, schemas.ListInstancesInput_InstanceGroupTypes, v.InstanceGroupTypes)
+	}
+	if v.InstanceStates != nil {
+		serializeInstanceStateList(s, schemas.ListInstancesInput_InstanceStates, v.InstanceStates)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListInstancesInput_Marker, *v.Marker)
 	}
@@ -108,7 +112,9 @@ func (v *ListInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceList(s, schemas.ListInstancesOutput_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.ListInstancesOutput_Instances, v.Instances)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListInstancesOutput_Marker, *v.Marker)
 	}

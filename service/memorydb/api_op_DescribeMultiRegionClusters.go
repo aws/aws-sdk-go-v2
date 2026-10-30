@@ -86,7 +86,9 @@ func (v *DescribeMultiRegionClustersOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeMultiRegionClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiRegionClusterList(s, schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters, v.MultiRegionClusters)
+	if v.MultiRegionClusters != nil {
+		serializeMultiRegionClusterList(s, schemas.DescribeMultiRegionClustersResponse_MultiRegionClusters, v.MultiRegionClusters)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMultiRegionClustersResponse_NextToken, *v.NextToken)
 	}

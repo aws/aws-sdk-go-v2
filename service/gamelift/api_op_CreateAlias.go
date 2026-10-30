@@ -95,7 +95,9 @@ func (v *CreateAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RoutingStrategy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateAliasInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAliasInput_Tags, v.Tags)
+	}
 }
 
 type CreateAliasOutput struct {

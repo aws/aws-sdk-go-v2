@@ -71,8 +71,12 @@ func (v *DescribeWorkspaceSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkspaceSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSnapshotList(s, schemas.DescribeWorkspaceSnapshotsResult_RebuildSnapshots, v.RebuildSnapshots)
-	serializeSnapshotList(s, schemas.DescribeWorkspaceSnapshotsResult_RestoreSnapshots, v.RestoreSnapshots)
+	if v.RebuildSnapshots != nil {
+		serializeSnapshotList(s, schemas.DescribeWorkspaceSnapshotsResult_RebuildSnapshots, v.RebuildSnapshots)
+	}
+	if v.RestoreSnapshots != nil {
+		serializeSnapshotList(s, schemas.DescribeWorkspaceSnapshotsResult_RestoreSnapshots, v.RestoreSnapshots)
+	}
 }
 func (v *DescribeWorkspaceSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspaceSnapshotsResult, func(s *smithy.Schema) error {

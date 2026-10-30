@@ -130,11 +130,15 @@ func (v *GetRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecommendationArn != nil {
 		s.WriteString(schemas.GetRecommendationResponse_recommendationArn, *v.RecommendationArn)
 	}
-	serializeRecommendationConfig(s, schemas.GetRecommendationResponse_recommendationConfig, v.RecommendationConfig)
+	if v.RecommendationConfig != nil {
+		serializeRecommendationConfig(s, schemas.GetRecommendationResponse_recommendationConfig, v.RecommendationConfig)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.GetRecommendationResponse_recommendationId, *v.RecommendationId)
 	}
-	serializeRecommendationResult(s, schemas.GetRecommendationResponse_recommendationResult, v.RecommendationResult)
+	if v.RecommendationResult != nil {
+		serializeRecommendationResult(s, schemas.GetRecommendationResponse_recommendationResult, v.RecommendationResult)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetRecommendationResponse_status, string(v.Status))
 	}

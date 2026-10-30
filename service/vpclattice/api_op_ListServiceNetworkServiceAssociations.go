@@ -116,7 +116,9 @@ func (v *ListServiceNetworkServiceAssociationsOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListServiceNetworkServiceAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceNetworkServiceAssociationList(s, schemas.ListServiceNetworkServiceAssociationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeServiceNetworkServiceAssociationList(s, schemas.ListServiceNetworkServiceAssociationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceNetworkServiceAssociationsResponse_nextToken, *v.NextToken)
 	}

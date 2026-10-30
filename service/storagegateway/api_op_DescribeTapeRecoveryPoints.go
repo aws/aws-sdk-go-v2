@@ -108,7 +108,9 @@ func (v *DescribeTapeRecoveryPointsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeTapeRecoveryPointsOutput_Marker, *v.Marker)
 	}
-	serializeTapeRecoveryPointInfos(s, schemas.DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos, v.TapeRecoveryPointInfos)
+	if v.TapeRecoveryPointInfos != nil {
+		serializeTapeRecoveryPointInfos(s, schemas.DescribeTapeRecoveryPointsOutput_TapeRecoveryPointInfos, v.TapeRecoveryPointInfos)
+	}
 }
 func (v *DescribeTapeRecoveryPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTapeRecoveryPointsOutput, func(s *smithy.Schema) error {

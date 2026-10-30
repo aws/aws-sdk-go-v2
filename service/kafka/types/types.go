@@ -161,8 +161,12 @@ func (v *BrokerCountUpdateInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BrokerCountUpdateInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__double(s, schemas.BrokerCountUpdateInfo_CreatedBrokerIds, v.CreatedBrokerIds)
-	serialize__listOf__double(s, schemas.BrokerCountUpdateInfo_DeletedBrokerIds, v.DeletedBrokerIds)
+	if v.CreatedBrokerIds != nil {
+		serialize__listOf__double(s, schemas.BrokerCountUpdateInfo_CreatedBrokerIds, v.CreatedBrokerIds)
+	}
+	if v.DeletedBrokerIds != nil {
+		serialize__listOf__double(s, schemas.BrokerCountUpdateInfo_DeletedBrokerIds, v.DeletedBrokerIds)
+	}
 }
 func (v *BrokerCountUpdateInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrokerCountUpdateInfo, func(s *smithy.Schema) error {
@@ -336,7 +340,9 @@ func (v *BrokerNodeGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BrokerAZDistribution != "" {
 		s.WriteString(schemas.BrokerNodeGroupInfo_BrokerAZDistribution, string(v.BrokerAZDistribution))
 	}
-	serialize__listOf__string(s, schemas.BrokerNodeGroupInfo_ClientSubnets, v.ClientSubnets)
+	if v.ClientSubnets != nil {
+		serialize__listOf__string(s, schemas.BrokerNodeGroupInfo_ClientSubnets, v.ClientSubnets)
+	}
 	if v.ConnectivityInfo != nil {
 		s.WriteStruct(schemas.BrokerNodeGroupInfo_ConnectivityInfo)
 		v.ConnectivityInfo.SerializeMembers(s)
@@ -345,13 +351,17 @@ func (v *BrokerNodeGroupInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceType != nil {
 		s.WriteString(schemas.BrokerNodeGroupInfo_InstanceType, *v.InstanceType)
 	}
-	serialize__listOf__string(s, schemas.BrokerNodeGroupInfo_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.BrokerNodeGroupInfo_SecurityGroups, v.SecurityGroups)
+	}
 	if v.StorageInfo != nil {
 		s.WriteStruct(schemas.BrokerNodeGroupInfo_StorageInfo)
 		v.StorageInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.BrokerNodeGroupInfo_ZoneIds, v.ZoneIds)
+	if v.ZoneIds != nil {
+		serialize__listOf__string(s, schemas.BrokerNodeGroupInfo_ZoneIds, v.ZoneIds)
+	}
 }
 func (v *BrokerNodeGroupInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrokerNodeGroupInfo, func(s *smithy.Schema) error {
@@ -432,7 +442,9 @@ func (v *BrokerNodeInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CurrentBrokerSoftwareInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.BrokerNodeInfo_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serialize__listOf__string(s, schemas.BrokerNodeInfo_Endpoints, v.Endpoints)
+	}
 }
 func (v *BrokerNodeInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrokerNodeInfo, func(s *smithy.Schema) error {
@@ -996,7 +1008,9 @@ func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StateInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.Cluster_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.Cluster_Tags, v.Tags)
+	}
 }
 func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
@@ -1199,7 +1213,9 @@ func (v *ClusterInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageMode != "" {
 		s.WriteString(schemas.ClusterInfo_StorageMode, string(v.StorageMode))
 	}
-	serialize__mapOf__string(s, schemas.ClusterInfo_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.ClusterInfo_Tags, v.Tags)
+	}
 	if v.ZookeeperConnectString != nil {
 		s.WriteString(schemas.ClusterInfo_ZookeeperConnectString, *v.ZookeeperConnectString)
 	}
@@ -1366,7 +1382,9 @@ func (v *ClusterOperationInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationState != nil {
 		s.WriteString(schemas.ClusterOperationInfo_OperationState, *v.OperationState)
 	}
-	serialize__listOfClusterOperationStep(s, schemas.ClusterOperationInfo_OperationSteps, v.OperationSteps)
+	if v.OperationSteps != nil {
+		serialize__listOfClusterOperationStep(s, schemas.ClusterOperationInfo_OperationSteps, v.OperationSteps)
+	}
 	if v.OperationType != nil {
 		s.WriteString(schemas.ClusterOperationInfo_OperationType, *v.OperationType)
 	}
@@ -1650,7 +1668,9 @@ func (v *ClusterOperationV2Provisioned) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClusterOperationV2Provisioned) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfClusterOperationStep(s, schemas.ClusterOperationV2Provisioned_OperationSteps, v.OperationSteps)
+	if v.OperationSteps != nil {
+		serialize__listOfClusterOperationStep(s, schemas.ClusterOperationV2Provisioned_OperationSteps, v.OperationSteps)
+	}
 	if v.SourceClusterInfo != nil {
 		s.WriteStruct(schemas.ClusterOperationV2Provisioned_SourceClusterInfo)
 		v.SourceClusterInfo.SerializeMembers(s)
@@ -1856,7 +1876,9 @@ func (v *CompatibleKafkaVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceVersion != nil {
 		s.WriteString(schemas.CompatibleKafkaVersion_SourceVersion, *v.SourceVersion)
 	}
-	serialize__listOf__string(s, schemas.CompatibleKafkaVersion_TargetVersions, v.TargetVersions)
+	if v.TargetVersions != nil {
+		serialize__listOf__string(s, schemas.CompatibleKafkaVersion_TargetVersions, v.TargetVersions)
+	}
 }
 func (v *CompatibleKafkaVersion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompatibleKafkaVersion, func(s *smithy.Schema) error {
@@ -1931,7 +1953,9 @@ func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.Configuration_Description, *v.Description)
 	}
-	serialize__listOf__string(s, schemas.Configuration_KafkaVersions, v.KafkaVersions)
+	if v.KafkaVersions != nil {
+		serialize__listOf__string(s, schemas.Configuration_KafkaVersions, v.KafkaVersions)
+	}
 	if v.LatestRevision != nil {
 		s.WriteStruct(schemas.Configuration_LatestRevision)
 		v.LatestRevision.SerializeMembers(s)
@@ -2172,8 +2196,12 @@ func (v *ConsumerGroupReplication) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsumerGroupOffsetSyncMode != "" {
 		s.WriteString(schemas.ConsumerGroupReplication_ConsumerGroupOffsetSyncMode, string(v.ConsumerGroupOffsetSyncMode))
 	}
-	serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplication_ConsumerGroupsToExclude, v.ConsumerGroupsToExclude)
-	serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplication_ConsumerGroupsToReplicate, v.ConsumerGroupsToReplicate)
+	if v.ConsumerGroupsToExclude != nil {
+		serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplication_ConsumerGroupsToExclude, v.ConsumerGroupsToExclude)
+	}
+	if v.ConsumerGroupsToReplicate != nil {
+		serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplication_ConsumerGroupsToReplicate, v.ConsumerGroupsToReplicate)
+	}
 	if v.DetectAndCopyNewConsumerGroups != nil {
 		s.WriteBool(schemas.ConsumerGroupReplication_DetectAndCopyNewConsumerGroups, *v.DetectAndCopyNewConsumerGroups)
 	}
@@ -2241,8 +2269,12 @@ func (v *ConsumerGroupReplicationUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConsumerGroupReplicationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplicationUpdate_ConsumerGroupsToExclude, v.ConsumerGroupsToExclude)
-	serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate, v.ConsumerGroupsToReplicate)
+	if v.ConsumerGroupsToExclude != nil {
+		serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplicationUpdate_ConsumerGroupsToExclude, v.ConsumerGroupsToExclude)
+	}
+	if v.ConsumerGroupsToReplicate != nil {
+		serialize__listOf__stringMax256(s, schemas.ConsumerGroupReplicationUpdate_ConsumerGroupsToReplicate, v.ConsumerGroupsToReplicate)
+	}
 	if v.DetectAndCopyNewConsumerGroups != nil {
 		s.WriteBool(schemas.ConsumerGroupReplicationUpdate_DetectAndCopyNewConsumerGroups, *v.DetectAndCopyNewConsumerGroups)
 	}
@@ -2284,7 +2316,9 @@ func (v *ControllerNodeInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ControllerNodeInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.ControllerNodeInfo_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serialize__listOf__string(s, schemas.ControllerNodeInfo_Endpoints, v.Endpoints)
+	}
 }
 func (v *ControllerNodeInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ControllerNodeInfo, func(s *smithy.Schema) error {
@@ -2800,7 +2834,9 @@ func (v *IcebergDestinationConfiguration) SerializeMembers(s smithy.ShapeSeriali
 		v.DeadLetterQueueS3.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfDestinationTable(s, schemas.IcebergDestinationConfiguration_DestinationTableList, v.DestinationTableList)
+	if v.DestinationTableList != nil {
+		serialize__listOfDestinationTable(s, schemas.IcebergDestinationConfiguration_DestinationTableList, v.DestinationTableList)
+	}
 	if v.SchemaEvolution != nil {
 		s.WriteStruct(schemas.IcebergDestinationConfiguration_SchemaEvolution)
 		v.SchemaEvolution.SerializeMembers(s)
@@ -3108,8 +3144,12 @@ func (v *KafkaClusterClientVpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KafkaClusterClientVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.KafkaClusterClientVpcConfig_SecurityGroupIds, v.SecurityGroupIds)
-	serialize__listOf__string(s, schemas.KafkaClusterClientVpcConfig_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOf__string(s, schemas.KafkaClusterClientVpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.KafkaClusterClientVpcConfig_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *KafkaClusterClientVpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KafkaClusterClientVpcConfig, func(s *smithy.Schema) error {
@@ -3828,7 +3868,9 @@ func (v *MutableClusterInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BrokerCountUpdateInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfBrokerEBSVolumeInfo(s, schemas.MutableClusterInfo_BrokerEBSVolumeInfo, v.BrokerEBSVolumeInfo)
+	if v.BrokerEBSVolumeInfo != nil {
+		serialize__listOfBrokerEBSVolumeInfo(s, schemas.MutableClusterInfo_BrokerEBSVolumeInfo, v.BrokerEBSVolumeInfo)
+	}
 	if v.ClientAuthentication != nil {
 		s.WriteStruct(schemas.MutableClusterInfo_ClientAuthentication)
 		v.ClientAuthentication.SerializeMembers(s)
@@ -4233,7 +4275,9 @@ func (v *PartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PartitionStrategy != "" {
 		s.WriteString(schemas.PartitionSpec_PartitionStrategy, string(v.PartitionStrategy))
 	}
-	serialize__listOfPartitionSource(s, schemas.PartitionSpec_SourceList, v.SourceList)
+	if v.SourceList != nil {
+		serialize__listOfPartitionSource(s, schemas.PartitionSpec_SourceList, v.SourceList)
+	}
 }
 func (v *PartitionSpec) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PartitionSpec, func(s *smithy.Schema) error {
@@ -5422,8 +5466,12 @@ func (v *ReplicatorSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsReplicatorReference != nil {
 		s.WriteBool(schemas.ReplicatorSummary_IsReplicatorReference, *v.IsReplicatorReference)
 	}
-	serialize__listOfKafkaClusterSummary(s, schemas.ReplicatorSummary_KafkaClustersSummary, v.KafkaClustersSummary)
-	serialize__listOfReplicationInfoSummary(s, schemas.ReplicatorSummary_ReplicationInfoSummaryList, v.ReplicationInfoSummaryList)
+	if v.KafkaClustersSummary != nil {
+		serialize__listOfKafkaClusterSummary(s, schemas.ReplicatorSummary_KafkaClustersSummary, v.KafkaClustersSummary)
+	}
+	if v.ReplicationInfoSummaryList != nil {
+		serialize__listOfReplicationInfoSummary(s, schemas.ReplicatorSummary_ReplicationInfoSummaryList, v.ReplicationInfoSummaryList)
+	}
 	if v.ReplicatorArn != nil {
 		s.WriteString(schemas.ReplicatorSummary_ReplicatorArn, *v.ReplicatorArn)
 	}
@@ -5860,7 +5908,9 @@ func (v *Serverless) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConnectivityInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfVpcConfig(s, schemas.Serverless_VpcConfigs, v.VpcConfigs)
+	if v.VpcConfigs != nil {
+		serialize__listOfVpcConfig(s, schemas.Serverless_VpcConfigs, v.VpcConfigs)
+	}
 }
 func (v *Serverless) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Serverless, func(s *smithy.Schema) error {
@@ -5976,7 +6026,9 @@ func (v *ServerlessRequest) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ClientAuthentication.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfVpcConfig(s, schemas.ServerlessRequest_VpcConfigs, v.VpcConfigs)
+	if v.VpcConfigs != nil {
+		serialize__listOfVpcConfig(s, schemas.ServerlessRequest_VpcConfigs, v.VpcConfigs)
+	}
 }
 func (v *ServerlessRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ServerlessRequest, func(s *smithy.Schema) error {
@@ -6145,7 +6197,9 @@ func (v *Tls) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Tls) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.Tls_CertificateAuthorityArnList, v.CertificateAuthorityArnList)
+	if v.CertificateAuthorityArnList != nil {
+		serialize__listOf__string(s, schemas.Tls_CertificateAuthorityArnList, v.CertificateAuthorityArnList)
+	}
 	if v.Enabled != nil {
 		s.WriteBool(schemas.Tls_Enabled, *v.Enabled)
 	}
@@ -6314,14 +6368,18 @@ func (v *TopicPartitionInfo) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TopicPartitionInfo) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__integer(s, schemas.TopicPartitionInfo_Isr, v.Isr)
+	if v.Isr != nil {
+		serialize__listOf__integer(s, schemas.TopicPartitionInfo_Isr, v.Isr)
+	}
 	if v.Leader != nil {
 		s.WriteInt32(schemas.TopicPartitionInfo_Leader, *v.Leader)
 	}
 	if v.Partition != nil {
 		s.WriteInt32(schemas.TopicPartitionInfo_Partition, *v.Partition)
 	}
-	serialize__listOf__integer(s, schemas.TopicPartitionInfo_Replicas, v.Replicas)
+	if v.Replicas != nil {
+		serialize__listOf__integer(s, schemas.TopicPartitionInfo_Replicas, v.Replicas)
+	}
 }
 func (v *TopicPartitionInfo) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TopicPartitionInfo, func(s *smithy.Schema) error {
@@ -6401,8 +6459,12 @@ func (v *TopicReplication) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TopicNameConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__stringMax249(s, schemas.TopicReplication_TopicsToExclude, v.TopicsToExclude)
-	serialize__listOf__stringMax249(s, schemas.TopicReplication_TopicsToReplicate, v.TopicsToReplicate)
+	if v.TopicsToExclude != nil {
+		serialize__listOf__stringMax249(s, schemas.TopicReplication_TopicsToExclude, v.TopicsToExclude)
+	}
+	if v.TopicsToReplicate != nil {
+		serialize__listOf__stringMax249(s, schemas.TopicReplication_TopicsToReplicate, v.TopicsToReplicate)
+	}
 }
 func (v *TopicReplication) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TopicReplication, func(s *smithy.Schema) error {
@@ -6481,8 +6543,12 @@ func (v *TopicReplicationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectAndCopyNewTopics != nil {
 		s.WriteBool(schemas.TopicReplicationUpdate_DetectAndCopyNewTopics, *v.DetectAndCopyNewTopics)
 	}
-	serialize__listOf__stringMax249(s, schemas.TopicReplicationUpdate_TopicsToExclude, v.TopicsToExclude)
-	serialize__listOf__stringMax249(s, schemas.TopicReplicationUpdate_TopicsToReplicate, v.TopicsToReplicate)
+	if v.TopicsToExclude != nil {
+		serialize__listOf__stringMax249(s, schemas.TopicReplicationUpdate_TopicsToExclude, v.TopicsToExclude)
+	}
+	if v.TopicsToReplicate != nil {
+		serialize__listOf__stringMax249(s, schemas.TopicReplicationUpdate_TopicsToReplicate, v.TopicsToReplicate)
+	}
 }
 func (v *TopicReplicationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TopicReplicationUpdate, func(s *smithy.Schema) error {
@@ -6650,8 +6716,12 @@ func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
-	serialize__listOf__string(s, schemas.VpcConfig_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serialize__listOf__string(s, schemas.VpcConfig_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.VpcConfig_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfig, func(s *smithy.Schema) error {
@@ -7148,7 +7218,9 @@ func (v *ZookeeperNodeInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientVpcIpAddress != nil {
 		s.WriteString(schemas.ZookeeperNodeInfo_ClientVpcIpAddress, *v.ClientVpcIpAddress)
 	}
-	serialize__listOf__string(s, schemas.ZookeeperNodeInfo_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serialize__listOf__string(s, schemas.ZookeeperNodeInfo_Endpoints, v.Endpoints)
+	}
 	if v.ZookeeperId != nil {
 		s.WriteFloat64(schemas.ZookeeperNodeInfo_ZookeeperId, *v.ZookeeperId)
 	}

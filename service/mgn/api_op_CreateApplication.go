@@ -61,7 +61,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	}
 }
 func (v *CreateApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateApplicationRequest, func(s *smithy.Schema) error {
@@ -153,7 +155,9 @@ func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Application_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.Application_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.Application_tags, v.Tags)
+	}
 	if v.WaveID != nil {
 		s.WriteString(schemas.Application_waveID, *v.WaveID)
 	}

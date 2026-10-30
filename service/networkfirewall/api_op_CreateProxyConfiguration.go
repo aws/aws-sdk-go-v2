@@ -86,9 +86,15 @@ func (v *CreateProxyConfigurationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ProxyConfigurationName != nil {
 		s.WriteString(schemas.CreateProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
 	}
-	serializeResourceArnList(s, schemas.CreateProxyConfigurationRequest_RuleGroupArns, v.RuleGroupArns)
-	serializeResourceNameList(s, schemas.CreateProxyConfigurationRequest_RuleGroupNames, v.RuleGroupNames)
-	serializeTagList(s, schemas.CreateProxyConfigurationRequest_Tags, v.Tags)
+	if v.RuleGroupArns != nil {
+		serializeResourceArnList(s, schemas.CreateProxyConfigurationRequest_RuleGroupArns, v.RuleGroupArns)
+	}
+	if v.RuleGroupNames != nil {
+		serializeResourceNameList(s, schemas.CreateProxyConfigurationRequest_RuleGroupNames, v.RuleGroupNames)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProxyConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProxyConfigurationOutput struct {

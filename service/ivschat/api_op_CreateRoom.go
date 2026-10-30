@@ -66,7 +66,9 @@ func (v *CreateRoomInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLoggingConfigurationIdentifierList(s, schemas.CreateRoomRequest_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	if v.LoggingConfigurationIdentifiers != nil {
+		serializeLoggingConfigurationIdentifierList(s, schemas.CreateRoomRequest_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	}
 	if v.MaximumMessageLength != nil {
 		s.WriteInt32(schemas.CreateRoomRequest_maximumMessageLength, *v.MaximumMessageLength)
 	}
@@ -81,7 +83,9 @@ func (v *CreateRoomInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRoomRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateRoomRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRoomRequest_tags, v.Tags)
+	}
 }
 func (v *CreateRoomInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRoomRequest, func(s *smithy.Schema) error {
@@ -167,7 +171,9 @@ func (v *CreateRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.CreateRoomResponse_id, *v.Id)
 	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.CreateRoomResponse_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	if v.LoggingConfigurationIdentifiers != nil {
+		serializeLoggingConfigurationIdentifierList(s, schemas.CreateRoomResponse_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	}
 	if v.MaximumMessageLength != nil {
 		s.WriteInt32(schemas.CreateRoomResponse_maximumMessageLength, *v.MaximumMessageLength)
 	}
@@ -182,7 +188,9 @@ func (v *CreateRoomOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRoomResponse_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateRoomResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateRoomResponse_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.CreateRoomResponse_updateTime, *v.UpdateTime)
 	}

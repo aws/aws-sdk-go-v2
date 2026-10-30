@@ -103,7 +103,9 @@ func (v *ListHandshakesForOrganizationOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListHandshakesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHandshakes(s, schemas.ListHandshakesForOrganizationResponse_Handshakes, v.Handshakes)
+	if v.Handshakes != nil {
+		serializeHandshakes(s, schemas.ListHandshakesForOrganizationResponse_Handshakes, v.Handshakes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHandshakesForOrganizationResponse_NextToken, *v.NextToken)
 	}

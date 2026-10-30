@@ -58,14 +58,18 @@ func (v *UpdateExtensionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateExtensionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsMap(s, schemas.UpdateExtensionRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionsMap(s, schemas.UpdateExtensionRequest_Actions, v.Actions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateExtensionRequest_Description, *v.Description)
 	}
 	if v.ExtensionIdentifier != nil {
 		s.WriteString(schemas.UpdateExtensionRequest_ExtensionIdentifier, *v.ExtensionIdentifier)
 	}
-	serializeParameterMap(s, schemas.UpdateExtensionRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMap(s, schemas.UpdateExtensionRequest_Parameters, v.Parameters)
+	}
 	if v.VersionNumber != nil {
 		s.WriteInt32(schemas.UpdateExtensionRequest_VersionNumber, *v.VersionNumber)
 	}
@@ -110,7 +114,9 @@ func (v *UpdateExtensionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsMap(s, schemas.Extension_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionsMap(s, schemas.Extension_Actions, v.Actions)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.Extension_Arn, *v.Arn)
 	}
@@ -123,7 +129,9 @@ func (v *UpdateExtensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Extension_Name, *v.Name)
 	}
-	serializeParameterMap(s, schemas.Extension_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMap(s, schemas.Extension_Parameters, v.Parameters)
+	}
 	if v.VersionNumber != 0 {
 		s.WriteInt32(schemas.Extension_VersionNumber, v.VersionNumber)
 	}

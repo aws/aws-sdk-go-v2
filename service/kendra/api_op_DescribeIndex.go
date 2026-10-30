@@ -140,7 +140,9 @@ func (v *DescribeIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeIndexResponse_Description, *v.Description)
 	}
-	serializeDocumentMetadataConfigurationList(s, schemas.DescribeIndexResponse_DocumentMetadataConfigurations, v.DocumentMetadataConfigurations)
+	if v.DocumentMetadataConfigurations != nil {
+		serializeDocumentMetadataConfigurationList(s, schemas.DescribeIndexResponse_DocumentMetadataConfigurations, v.DocumentMetadataConfigurations)
+	}
 	if v.Edition != "" {
 		s.WriteString(schemas.DescribeIndexResponse_Edition, string(v.Edition))
 	}
@@ -180,7 +182,9 @@ func (v *DescribeIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.UserGroupResolutionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserTokenConfigurationList(s, schemas.DescribeIndexResponse_UserTokenConfigurations, v.UserTokenConfigurations)
+	if v.UserTokenConfigurations != nil {
+		serializeUserTokenConfigurationList(s, schemas.DescribeIndexResponse_UserTokenConfigurations, v.UserTokenConfigurations)
+	}
 }
 func (v *DescribeIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeIndexResponse, func(s *smithy.Schema) error {

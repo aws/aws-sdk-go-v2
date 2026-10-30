@@ -164,7 +164,9 @@ func (v *ListRetirableGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRetirableGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrantList(s, schemas.ListGrantsResponse_Grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.ListGrantsResponse_Grants, v.Grants)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListGrantsResponse_NextMarker, *v.NextMarker)
 	}

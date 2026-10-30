@@ -56,7 +56,9 @@ func (v *UpdateContactListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateContactListRequest_Description, *v.Description)
 	}
-	serializeTopics(s, schemas.UpdateContactListRequest_Topics, v.Topics)
+	if v.Topics != nil {
+		serializeTopics(s, schemas.UpdateContactListRequest_Topics, v.Topics)
+	}
 }
 
 type UpdateContactListOutput struct {

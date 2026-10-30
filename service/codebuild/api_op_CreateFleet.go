@@ -257,7 +257,9 @@ func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScalingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateFleetInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFleetInput_tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateFleetInput_vpcConfig)
 		v.VpcConfig.SerializeMembers(s)

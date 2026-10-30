@@ -90,16 +90,24 @@ func (v *DescribeInputSecurityGroupOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeInputSecurityGroupResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeInputSecurityGroupResponse_Channels, v.Channels)
+	if v.Channels != nil {
+		serialize__listOf__string(s, schemas.DescribeInputSecurityGroupResponse_Channels, v.Channels)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DescribeInputSecurityGroupResponse_Id, *v.Id)
 	}
-	serialize__listOf__string(s, schemas.DescribeInputSecurityGroupResponse_Inputs, v.Inputs)
+	if v.Inputs != nil {
+		serialize__listOf__string(s, schemas.DescribeInputSecurityGroupResponse_Inputs, v.Inputs)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeInputSecurityGroupResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.DescribeInputSecurityGroupResponse_Tags, v.Tags)
-	serialize__listOfInputWhitelistRule(s, schemas.DescribeInputSecurityGroupResponse_WhitelistRules, v.WhitelistRules)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeInputSecurityGroupResponse_Tags, v.Tags)
+	}
+	if v.WhitelistRules != nil {
+		serialize__listOfInputWhitelistRule(s, schemas.DescribeInputSecurityGroupResponse_WhitelistRules, v.WhitelistRules)
+	}
 }
 func (v *DescribeInputSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeInputSecurityGroupResponse, func(s *smithy.Schema) error {

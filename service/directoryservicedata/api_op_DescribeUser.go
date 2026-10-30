@@ -67,7 +67,9 @@ func (v *DescribeUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DescribeUserRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeLdapDisplayNameList(s, schemas.DescribeUserRequest_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeLdapDisplayNameList(s, schemas.DescribeUserRequest_OtherAttributes, v.OtherAttributes)
+	}
 	if v.Realm != nil {
 		s.WriteString(schemas.DescribeUserRequest_Realm, *v.Realm)
 	}
@@ -148,7 +150,9 @@ func (v *DescribeUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GivenName != nil {
 		s.WriteString(schemas.DescribeUserResult_GivenName, *v.GivenName)
 	}
-	serializeAttributes(s, schemas.DescribeUserResult_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.DescribeUserResult_OtherAttributes, v.OtherAttributes)
+	}
 	if v.Realm != nil {
 		s.WriteString(schemas.DescribeUserResult_Realm, *v.Realm)
 	}

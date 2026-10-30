@@ -302,12 +302,18 @@ func (v *ReceiveMessageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReceiveMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.ReceiveMessageRequest_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.ReceiveMessageRequest_AttributeNames, v.AttributeNames)
+	}
 	if v.MaxNumberOfMessages != 0 {
 		s.WriteInt32(schemas.ReceiveMessageRequest_MaxNumberOfMessages, v.MaxNumberOfMessages)
 	}
-	serializeMessageAttributeNameList(s, schemas.ReceiveMessageRequest_MessageAttributeNames, v.MessageAttributeNames)
-	serializeMessageSystemAttributeList(s, schemas.ReceiveMessageRequest_MessageSystemAttributeNames, v.MessageSystemAttributeNames)
+	if v.MessageAttributeNames != nil {
+		serializeMessageAttributeNameList(s, schemas.ReceiveMessageRequest_MessageAttributeNames, v.MessageAttributeNames)
+	}
+	if v.MessageSystemAttributeNames != nil {
+		serializeMessageSystemAttributeList(s, schemas.ReceiveMessageRequest_MessageSystemAttributeNames, v.MessageSystemAttributeNames)
+	}
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.ReceiveMessageRequest_QueueUrl, *v.QueueUrl)
 	}
@@ -341,7 +347,9 @@ func (v *ReceiveMessageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReceiveMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageList(s, schemas.ReceiveMessageResult_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeMessageList(s, schemas.ReceiveMessageResult_Messages, v.Messages)
+	}
 }
 func (v *ReceiveMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReceiveMessageResult, func(s *smithy.Schema) error {

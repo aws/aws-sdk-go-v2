@@ -63,7 +63,9 @@ func (v *UpdateWhatsAppFlowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateWhatsAppFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowCategoryList(s, schemas.UpdateWhatsAppFlowInput_categories, v.Categories)
+	if v.Categories != nil {
+		serializeMetaFlowCategoryList(s, schemas.UpdateWhatsAppFlowInput_categories, v.Categories)
+	}
 	if v.EndpointUri != nil {
 		s.WriteString(schemas.UpdateWhatsAppFlowInput_endpointUri, *v.EndpointUri)
 	}

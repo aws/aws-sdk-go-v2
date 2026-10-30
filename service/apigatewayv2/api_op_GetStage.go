@@ -157,12 +157,18 @@ func (v *GetStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.GetStageResponse_LastUpdatedDate, *v.LastUpdatedDate)
 	}
-	serializeRouteSettingsMap(s, schemas.GetStageResponse_RouteSettings, v.RouteSettings)
+	if v.RouteSettings != nil {
+		serializeRouteSettingsMap(s, schemas.GetStageResponse_RouteSettings, v.RouteSettings)
+	}
 	if v.StageName != nil {
 		s.WriteString(schemas.GetStageResponse_StageName, *v.StageName)
 	}
-	serializeStageVariablesMap(s, schemas.GetStageResponse_StageVariables, v.StageVariables)
-	serializeTags(s, schemas.GetStageResponse_Tags, v.Tags)
+	if v.StageVariables != nil {
+		serializeStageVariablesMap(s, schemas.GetStageResponse_StageVariables, v.StageVariables)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetStageResponse_Tags, v.Tags)
+	}
 }
 func (v *GetStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetStageResponse, func(s *smithy.Schema) error {

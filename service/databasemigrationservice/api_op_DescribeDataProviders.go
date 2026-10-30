@@ -66,7 +66,9 @@ func (v *DescribeDataProvidersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDataProvidersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeDataProvidersMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeDataProvidersMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeDataProvidersMessage_Marker, *v.Marker)
 	}
@@ -103,7 +105,9 @@ func (v *DescribeDataProvidersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDataProvidersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataProviderList(s, schemas.DescribeDataProvidersResponse_DataProviders, v.DataProviders)
+	if v.DataProviders != nil {
+		serializeDataProviderList(s, schemas.DescribeDataProvidersResponse_DataProviders, v.DataProviders)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeDataProvidersResponse_Marker, *v.Marker)
 	}

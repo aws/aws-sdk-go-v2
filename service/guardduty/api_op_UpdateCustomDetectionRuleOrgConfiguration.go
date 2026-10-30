@@ -58,8 +58,12 @@ func (v *UpdateCustomDetectionRuleOrgConfigurationInput) Serialize(s smithy.Shap
 }
 
 func (v *UpdateCustomDetectionRuleOrgConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectionRuleAccountIds(s, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_ExcludeAccountIds, v.ExcludeAccountIds)
-	serializeDetectionRuleAccountIds(s, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_IncludeAccountIds, v.IncludeAccountIds)
+	if v.ExcludeAccountIds != nil {
+		serializeDetectionRuleAccountIds(s, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_ExcludeAccountIds, v.ExcludeAccountIds)
+	}
+	if v.IncludeAccountIds != nil {
+		serializeDetectionRuleAccountIds(s, schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_IncludeAccountIds, v.IncludeAccountIds)
+	}
 	if v.Mode != "" {
 		s.WriteString(schemas.UpdateCustomDetectionRuleOrgConfigurationRequest_Mode, string(v.Mode))
 	}

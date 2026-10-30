@@ -160,11 +160,15 @@ func (v *DescribeDimensionKeysInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDimensionKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalMetricsList(s, schemas.DescribeDimensionKeysRequest_AdditionalMetrics, v.AdditionalMetrics)
+	if v.AdditionalMetrics != nil {
+		serializeAdditionalMetricsList(s, schemas.DescribeDimensionKeysRequest_AdditionalMetrics, v.AdditionalMetrics)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DescribeDimensionKeysRequest_EndTime, *v.EndTime)
 	}
-	serializeMetricQueryFilterMap(s, schemas.DescribeDimensionKeysRequest_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeMetricQueryFilterMap(s, schemas.DescribeDimensionKeysRequest_Filter, v.Filter)
+	}
 	if v.GroupBy != nil {
 		s.WriteStruct(schemas.DescribeDimensionKeysRequest_GroupBy)
 		v.GroupBy.SerializeMembers(s)
@@ -241,11 +245,15 @@ func (v *DescribeDimensionKeysOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AlignedStartTime != nil {
 		s.WriteTime(schemas.DescribeDimensionKeysResponse_AlignedStartTime, *v.AlignedStartTime)
 	}
-	serializeDimensionKeyDescriptionList(s, schemas.DescribeDimensionKeysResponse_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeDimensionKeyDescriptionList(s, schemas.DescribeDimensionKeysResponse_Keys, v.Keys)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDimensionKeysResponse_NextToken, *v.NextToken)
 	}
-	serializeResponsePartitionKeyList(s, schemas.DescribeDimensionKeysResponse_PartitionKeys, v.PartitionKeys)
+	if v.PartitionKeys != nil {
+		serializeResponsePartitionKeyList(s, schemas.DescribeDimensionKeysResponse_PartitionKeys, v.PartitionKeys)
+	}
 }
 func (v *DescribeDimensionKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDimensionKeysResponse, func(s *smithy.Schema) error {

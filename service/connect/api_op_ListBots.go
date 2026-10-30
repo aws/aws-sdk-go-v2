@@ -99,7 +99,9 @@ func (v *ListBotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLexBotConfigList(s, schemas.ListBotsResponse_LexBots, v.LexBots)
+	if v.LexBots != nil {
+		serializeLexBotConfigList(s, schemas.ListBotsResponse_LexBots, v.LexBots)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBotsResponse_NextToken, *v.NextToken)
 	}

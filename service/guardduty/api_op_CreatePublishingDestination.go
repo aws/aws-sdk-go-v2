@@ -82,7 +82,9 @@ func (v *CreatePublishingDestinationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.DetectorId != nil {
 		s.WriteString(schemas.CreatePublishingDestinationRequest_DetectorId, *v.DetectorId)
 	}
-	serializeTagMap(s, schemas.CreatePublishingDestinationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePublishingDestinationRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePublishingDestinationOutput struct {

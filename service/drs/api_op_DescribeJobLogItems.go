@@ -98,7 +98,9 @@ func (v *DescribeJobLogItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeJobLogItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobLogs(s, schemas.DescribeJobLogItemsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeJobLogs(s, schemas.DescribeJobLogItemsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeJobLogItemsResponse_nextToken, *v.NextToken)
 	}

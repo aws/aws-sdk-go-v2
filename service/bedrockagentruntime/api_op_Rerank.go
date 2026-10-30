@@ -66,13 +66,17 @@ func (v *RerankInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.RerankRequest_nextToken, *v.NextToken)
 	}
-	serializeRerankQueriesList(s, schemas.RerankRequest_queries, v.Queries)
+	if v.Queries != nil {
+		serializeRerankQueriesList(s, schemas.RerankRequest_queries, v.Queries)
+	}
 	if v.RerankingConfiguration != nil {
 		s.WriteStruct(schemas.RerankRequest_rerankingConfiguration)
 		v.RerankingConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRerankSourcesList(s, schemas.RerankRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeRerankSourcesList(s, schemas.RerankRequest_sources, v.Sources)
+	}
 }
 
 type RerankOutput struct {
@@ -104,7 +108,9 @@ func (v *RerankOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.RerankResponse_nextToken, *v.NextToken)
 	}
-	serializeRerankResultsList(s, schemas.RerankResponse_results, v.Results)
+	if v.Results != nil {
+		serializeRerankResultsList(s, schemas.RerankResponse_results, v.Results)
+	}
 }
 func (v *RerankOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RerankResponse, func(s *smithy.Schema) error {

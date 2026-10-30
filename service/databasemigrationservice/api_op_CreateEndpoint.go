@@ -390,7 +390,9 @@ func (v *CreateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SybaseSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateEndpointMessage_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEndpointMessage_Tags, v.Tags)
+	}
 	if v.TimestreamSettings != nil {
 		s.WriteStruct(schemas.CreateEndpointMessage_TimestreamSettings)
 		v.TimestreamSettings.SerializeMembers(s)

@@ -61,7 +61,9 @@ func (v *DisassociateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.InstanceId != nil {
 		s.WriteString(schemas.DisassociateWorkspaceRequest_InstanceId, *v.InstanceId)
 	}
-	serializeWorkspaceResourceArnList(s, schemas.DisassociateWorkspaceRequest_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeWorkspaceResourceArnList(s, schemas.DisassociateWorkspaceRequest_ResourceArns, v.ResourceArns)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.DisassociateWorkspaceRequest_WorkspaceId, *v.WorkspaceId)
 	}
@@ -89,8 +91,12 @@ func (v *DisassociateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedBatchAssociationSummaryList(s, schemas.DisassociateWorkspaceResponse_FailedList, v.FailedList)
-	serializeSuccessfulBatchAssociationSummaryList(s, schemas.DisassociateWorkspaceResponse_SuccessfulList, v.SuccessfulList)
+	if v.FailedList != nil {
+		serializeFailedBatchAssociationSummaryList(s, schemas.DisassociateWorkspaceResponse_FailedList, v.FailedList)
+	}
+	if v.SuccessfulList != nil {
+		serializeSuccessfulBatchAssociationSummaryList(s, schemas.DisassociateWorkspaceResponse_SuccessfulList, v.SuccessfulList)
+	}
 }
 func (v *DisassociateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociateWorkspaceResponse, func(s *smithy.Schema) error {

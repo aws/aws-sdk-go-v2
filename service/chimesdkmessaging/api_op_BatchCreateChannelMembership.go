@@ -72,7 +72,9 @@ func (v *BatchCreateChannelMembershipInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ChimeBearer != nil {
 		s.WriteString(schemas.BatchCreateChannelMembershipRequest_ChimeBearer, *v.ChimeBearer)
 	}
-	serializeMemberArns(s, schemas.BatchCreateChannelMembershipRequest_MemberArns, v.MemberArns)
+	if v.MemberArns != nil {
+		serializeMemberArns(s, schemas.BatchCreateChannelMembershipRequest_MemberArns, v.MemberArns)
+	}
 	if v.SubChannelId != nil {
 		s.WriteString(schemas.BatchCreateChannelMembershipRequest_SubChannelId, *v.SubChannelId)
 	}
@@ -108,7 +110,9 @@ func (v *BatchCreateChannelMembershipOutput) SerializeMembers(s smithy.ShapeSeri
 		v.BatchChannelMemberships.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBatchCreateChannelMembershipErrors(s, schemas.BatchCreateChannelMembershipResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchCreateChannelMembershipErrors(s, schemas.BatchCreateChannelMembershipResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchCreateChannelMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateChannelMembershipResponse, func(s *smithy.Schema) error {

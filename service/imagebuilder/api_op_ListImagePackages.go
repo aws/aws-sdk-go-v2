@@ -90,7 +90,9 @@ func (v *ListImagePackagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImagePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImagePackageList(s, schemas.ListImagePackagesResponse_imagePackageList, v.ImagePackageList)
+	if v.ImagePackageList != nil {
+		serializeImagePackageList(s, schemas.ListImagePackagesResponse_imagePackageList, v.ImagePackageList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImagePackagesResponse_nextToken, *v.NextToken)
 	}

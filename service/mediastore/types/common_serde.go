@@ -7,9 +7,6 @@ import (
 )
 
 func serializeAllowedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeAllowedHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeAllowedMethods(s smithy.ShapeSerializer, schema *smithy.Schema, v []MethodName) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeAllowedMethods(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeAllowedOrigins(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +31,6 @@ func serializeAllowedOrigins(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeContainerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Container) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -53,9 +41,6 @@ func serializeContainerList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeCorsPolicy(s smithy.ShapeSerializer, schema *smithy.Schema, v []CorsRule) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -66,9 +51,6 @@ func serializeCorsPolicy(s smithy.ShapeSerializer, schema *smithy.Schema, v []Co
 }
 
 func serializeExposeHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -77,9 +59,6 @@ func serializeExposeHeaders(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeMetricPolicyRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetricPolicyRule) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -90,9 +69,6 @@ func serializeMetricPolicyRules(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -101,9 +77,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

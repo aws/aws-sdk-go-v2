@@ -98,7 +98,9 @@ func (v *ListRoute53HealthChecksInRegionOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListRoute53HealthChecksInRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRoute53HealthCheckList(s, schemas.ListRoute53HealthChecksInRegionResponse_healthChecks, v.HealthChecks)
+	if v.HealthChecks != nil {
+		serializeRoute53HealthCheckList(s, schemas.ListRoute53HealthChecksInRegionResponse_healthChecks, v.HealthChecks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoute53HealthChecksInRegionResponse_nextToken, *v.NextToken)
 	}

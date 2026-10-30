@@ -89,7 +89,9 @@ func (v *ListCommandExecutionsForSandboxOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListCommandExecutionsForSandboxOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandExecutions(s, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, v.CommandExecutions)
+	if v.CommandExecutions != nil {
+		serializeCommandExecutions(s, schemas.ListCommandExecutionsForSandboxOutput_commandExecutions, v.CommandExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommandExecutionsForSandboxOutput_nextToken, *v.NextToken)
 	}

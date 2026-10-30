@@ -69,7 +69,9 @@ func (v *GetRevenueStatisticsSummaryInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Currency != "" {
 		s.WriteString(schemas.GetRevenueStatisticsSummaryRequest_Currency, string(v.Currency))
 	}
-	serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsSummaryRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsSummaryRequest_Filters, v.Filters)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.GetRevenueStatisticsSummaryRequest_Scope, string(v.Scope))
 	}

@@ -100,7 +100,9 @@ func (v *ListEnvironmentVpcsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentVpcsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVpcs(s, schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList, v.EnvironmentVpcList)
+	if v.EnvironmentVpcList != nil {
+		serializeEnvironmentVpcs(s, schemas.ListEnvironmentVpcsResponse_EnvironmentVpcList, v.EnvironmentVpcList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentVpcsResponse_NextToken, *v.NextToken)
 	}

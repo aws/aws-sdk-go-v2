@@ -80,7 +80,9 @@ func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterId != nil {
 		s.WriteString(schemas.StartSessionInput_ClusterId, *v.ClusterId)
 	}
-	serializeConfigurationList(s, schemas.StartSessionInput_EngineConfigurations, v.EngineConfigurations)
+	if v.EngineConfigurations != nil {
+		serializeConfigurationList(s, schemas.StartSessionInput_EngineConfigurations, v.EngineConfigurations)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.StartSessionInput_ExecutionRoleArn, *v.ExecutionRoleArn)
 	}
@@ -95,7 +97,9 @@ func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionIdleTimeoutInMinutes != nil {
 		s.WriteInt64(schemas.StartSessionInput_SessionIdleTimeoutInMinutes, *v.SessionIdleTimeoutInMinutes)
 	}
-	serializeTagList(s, schemas.StartSessionInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartSessionInput_Tags, v.Tags)
+	}
 }
 
 // Output of the StartSession operation.

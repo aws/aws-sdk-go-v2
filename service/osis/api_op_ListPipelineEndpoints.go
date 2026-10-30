@@ -81,7 +81,9 @@ func (v *ListPipelineEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPipelineEndpointsResponse_NextToken, *v.NextToken)
 	}
-	serializePipelineEndpointsSummaryList(s, schemas.ListPipelineEndpointsResponse_PipelineEndpoints, v.PipelineEndpoints)
+	if v.PipelineEndpoints != nil {
+		serializePipelineEndpointsSummaryList(s, schemas.ListPipelineEndpointsResponse_PipelineEndpoints, v.PipelineEndpoints)
+	}
 }
 func (v *ListPipelineEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPipelineEndpointsResponse, func(s *smithy.Schema) error {

@@ -79,7 +79,9 @@ func (v *ListWirelessGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWirelessGatewaysResponse_NextToken, *v.NextToken)
 	}
-	serializeWirelessGatewayStatisticsList(s, schemas.ListWirelessGatewaysResponse_WirelessGatewayList, v.WirelessGatewayList)
+	if v.WirelessGatewayList != nil {
+		serializeWirelessGatewayStatisticsList(s, schemas.ListWirelessGatewaysResponse_WirelessGatewayList, v.WirelessGatewayList)
+	}
 }
 func (v *ListWirelessGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWirelessGatewaysResponse, func(s *smithy.Schema) error {

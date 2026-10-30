@@ -69,7 +69,9 @@ func (v *CreateAutonomousDatabaseBackupInput) SerializeMembers(s smithy.ShapeSer
 	if v.RetentionPeriodInDays != nil {
 		s.WriteInt32(schemas.CreateAutonomousDatabaseBackupInput_retentionPeriodInDays, *v.RetentionPeriodInDays)
 	}
-	serializeRequestTagMap(s, schemas.CreateAutonomousDatabaseBackupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeRequestTagMap(s, schemas.CreateAutonomousDatabaseBackupInput_tags, v.Tags)
+	}
 }
 
 type CreateAutonomousDatabaseBackupOutput struct {

@@ -87,7 +87,9 @@ func (v *GetInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceList(s, schemas.GetInstancesResult_instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.GetInstancesResult_instances, v.Instances)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetInstancesResult_nextPageToken, *v.NextPageToken)
 	}

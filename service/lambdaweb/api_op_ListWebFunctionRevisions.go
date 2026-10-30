@@ -68,7 +68,9 @@ func (v *ListWebFunctionRevisionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWebFunctionRevisionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListWebFunctionRevisionsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListWebFunctionRevisionsRequest_filters, v.Filters)
+	}
 	if v.FunctionName != nil {
 		s.WriteString(schemas.ListWebFunctionRevisionsRequest_functionName, *v.FunctionName)
 	}
@@ -109,7 +111,9 @@ func (v *ListWebFunctionRevisionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebFunctionRevisionsResponse_nextToken, *v.NextToken)
 	}
-	serializeFunctionRevisionSummaryList(s, schemas.ListWebFunctionRevisionsResponse_revisions, v.Revisions)
+	if v.Revisions != nil {
+		serializeFunctionRevisionSummaryList(s, schemas.ListWebFunctionRevisionsResponse_revisions, v.Revisions)
+	}
 }
 func (v *ListWebFunctionRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWebFunctionRevisionsResponse, func(s *smithy.Schema) error {

@@ -184,7 +184,9 @@ func (v *DescribePipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StateReason != nil {
 		s.WriteString(schemas.DescribePipeResponse_StateReason, *v.StateReason)
 	}
-	serializeTagMap(s, schemas.DescribePipeResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribePipeResponse_Tags, v.Tags)
+	}
 	if v.Target != nil {
 		s.WriteString(schemas.DescribePipeResponse_Target, *v.Target)
 	}

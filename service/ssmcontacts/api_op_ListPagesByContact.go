@@ -89,7 +89,9 @@ func (v *ListPagesByContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPagesByContactResult_NextToken, *v.NextToken)
 	}
-	serializePagesList(s, schemas.ListPagesByContactResult_Pages, v.Pages)
+	if v.Pages != nil {
+		serializePagesList(s, schemas.ListPagesByContactResult_Pages, v.Pages)
+	}
 }
 func (v *ListPagesByContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPagesByContactResult, func(s *smithy.Schema) error {

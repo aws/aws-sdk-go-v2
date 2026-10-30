@@ -124,7 +124,9 @@ func (v *GetReadSetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetReadSetExportJobResponse_id, *v.Id)
 	}
-	serializeExportReadSetDetailList(s, schemas.GetReadSetExportJobResponse_readSets, v.ReadSets)
+	if v.ReadSets != nil {
+		serializeExportReadSetDetailList(s, schemas.GetReadSetExportJobResponse_readSets, v.ReadSets)
+	}
 	if v.SequenceStoreId != nil {
 		s.WriteString(schemas.GetReadSetExportJobResponse_sequenceStoreId, *v.SequenceStoreId)
 	}

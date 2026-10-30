@@ -50,7 +50,9 @@ func (v *GetCodeSecurityIntegrationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.GetCodeSecurityIntegrationRequest_integrationArn, *v.IntegrationArn)
 	}
-	serializeTagMap(s, schemas.GetCodeSecurityIntegrationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCodeSecurityIntegrationRequest_tags, v.Tags)
+	}
 }
 
 type GetCodeSecurityIntegrationOutput struct {
@@ -132,7 +134,9 @@ func (v *GetCodeSecurityIntegrationOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.StatusReason != nil {
 		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_statusReason, *v.StatusReason)
 	}
-	serializeTagMap(s, schemas.GetCodeSecurityIntegrationResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetCodeSecurityIntegrationResponse_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetCodeSecurityIntegrationResponse_type, string(v.Type))
 	}

@@ -87,7 +87,9 @@ func (v *ListAcmeExternalAccountBindingsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListAcmeExternalAccountBindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcmeExternalAccountBindingList(s, schemas.ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings, v.ExternalAccountBindings)
+	if v.ExternalAccountBindings != nil {
+		serializeAcmeExternalAccountBindingList(s, schemas.ListAcmeExternalAccountBindingsResponse_ExternalAccountBindings, v.ExternalAccountBindings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAcmeExternalAccountBindingsResponse_NextToken, *v.NextToken)
 	}

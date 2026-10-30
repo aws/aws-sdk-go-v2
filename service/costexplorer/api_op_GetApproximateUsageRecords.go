@@ -62,7 +62,9 @@ func (v *GetApproximateUsageRecordsInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetApproximateUsageRecordsRequest_Granularity, string(v.Granularity))
 	}
-	serializeUsageServices(s, schemas.GetApproximateUsageRecordsRequest_Services, v.Services)
+	if v.Services != nil {
+		serializeUsageServices(s, schemas.GetApproximateUsageRecordsRequest_Services, v.Services)
+	}
 }
 
 type GetApproximateUsageRecordsOutput struct {
@@ -94,7 +96,9 @@ func (v *GetApproximateUsageRecordsOutput) SerializeMembers(s smithy.ShapeSerial
 		v.LookbackPeriod.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeApproximateUsageRecordsPerService(s, schemas.GetApproximateUsageRecordsResponse_Services, v.Services)
+	if v.Services != nil {
+		serializeApproximateUsageRecordsPerService(s, schemas.GetApproximateUsageRecordsResponse_Services, v.Services)
+	}
 	if v.TotalRecords != 0 {
 		s.WriteInt64(schemas.GetApproximateUsageRecordsResponse_TotalRecords, v.TotalRecords)
 	}

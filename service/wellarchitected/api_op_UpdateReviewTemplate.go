@@ -65,8 +65,12 @@ func (v *UpdateReviewTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateReviewTemplateInput_Description, *v.Description)
 	}
-	serializeReviewTemplateLensAliases(s, schemas.UpdateReviewTemplateInput_LensesToAssociate, v.LensesToAssociate)
-	serializeReviewTemplateLensAliases(s, schemas.UpdateReviewTemplateInput_LensesToDisassociate, v.LensesToDisassociate)
+	if v.LensesToAssociate != nil {
+		serializeReviewTemplateLensAliases(s, schemas.UpdateReviewTemplateInput_LensesToAssociate, v.LensesToAssociate)
+	}
+	if v.LensesToDisassociate != nil {
+		serializeReviewTemplateLensAliases(s, schemas.UpdateReviewTemplateInput_LensesToDisassociate, v.LensesToDisassociate)
+	}
 	if v.Notes != nil {
 		s.WriteString(schemas.UpdateReviewTemplateInput_Notes, *v.Notes)
 	}

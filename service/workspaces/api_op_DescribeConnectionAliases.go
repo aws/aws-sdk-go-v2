@@ -54,7 +54,9 @@ func (v *DescribeConnectionAliasesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConnectionAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionAliasIdList(s, schemas.DescribeConnectionAliasesRequest_AliasIds, v.AliasIds)
+	if v.AliasIds != nil {
+		serializeConnectionAliasIdList(s, schemas.DescribeConnectionAliasesRequest_AliasIds, v.AliasIds)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeConnectionAliasesRequest_Limit, *v.Limit)
 	}
@@ -88,7 +90,9 @@ func (v *DescribeConnectionAliasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeConnectionAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionAliasList(s, schemas.DescribeConnectionAliasesResult_ConnectionAliases, v.ConnectionAliases)
+	if v.ConnectionAliases != nil {
+		serializeConnectionAliasList(s, schemas.DescribeConnectionAliasesResult_ConnectionAliases, v.ConnectionAliases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConnectionAliasesResult_NextToken, *v.NextToken)
 	}

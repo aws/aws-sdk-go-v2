@@ -124,7 +124,9 @@ func (v *GetRevenueAttributionAllocationsTaskOutput) SerializeMembers(s smithy.S
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetRevenueAttributionAllocationsTaskOutput_EndedAt, *v.EndedAt)
 	}
-	serializeRevenueAttributionAllocationErrorDetailList(s, schemas.GetRevenueAttributionAllocationsTaskOutput_ErrorDetailList, v.ErrorDetailList)
+	if v.ErrorDetailList != nil {
+		serializeRevenueAttributionAllocationErrorDetailList(s, schemas.GetRevenueAttributionAllocationsTaskOutput_ErrorDetailList, v.ErrorDetailList)
+	}
 	if v.RevenueAttributionArn != nil {
 		s.WriteString(schemas.GetRevenueAttributionAllocationsTaskOutput_RevenueAttributionArn, *v.RevenueAttributionArn)
 	}

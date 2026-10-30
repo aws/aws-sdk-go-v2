@@ -59,11 +59,15 @@ func (v *CreatePrivateGraphEndpointInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.GraphIdentifier != nil {
 		s.WriteString(schemas.CreatePrivateGraphEndpointInput_graphIdentifier, *v.GraphIdentifier)
 	}
-	serializeSubnetIds(s, schemas.CreatePrivateGraphEndpointInput_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.CreatePrivateGraphEndpointInput_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreatePrivateGraphEndpointInput_vpcId, *v.VpcId)
 	}
-	serializeSecurityGroupIds(s, schemas.CreatePrivateGraphEndpointInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.CreatePrivateGraphEndpointInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 func (in *CreatePrivateGraphEndpointInput) bindEndpointParams(p *EndpointParameters) {
 
@@ -106,7 +110,9 @@ func (v *CreatePrivateGraphEndpointOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Status != "" {
 		s.WriteString(schemas.CreatePrivateGraphEndpointOutput_status, string(v.Status))
 	}
-	serializeSubnetIds(s, schemas.CreatePrivateGraphEndpointOutput_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.CreatePrivateGraphEndpointOutput_subnetIds, v.SubnetIds)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.CreatePrivateGraphEndpointOutput_vpcEndpointId, *v.VpcEndpointId)
 	}

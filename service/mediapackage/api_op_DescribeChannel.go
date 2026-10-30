@@ -114,7 +114,9 @@ func (v *DescribeChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IngressAccessLogs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.DescribeChannelResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeChannelResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeChannelResponse, func(s *smithy.Schema) error {

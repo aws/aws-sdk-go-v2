@@ -55,11 +55,15 @@ func (v *CreatePrivateConnectionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePrivateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrivateConnectionMode(s, schemas.CreatePrivateConnectionInput_mode, v.Mode)
+	if v.Mode != nil {
+		serializePrivateConnectionMode(s, schemas.CreatePrivateConnectionInput_mode, v.Mode)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreatePrivateConnectionInput_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreatePrivateConnectionInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePrivateConnectionInput_tags, v.Tags)
+	}
 }
 
 // Output containing the newly created Private Connection summary.
@@ -147,7 +151,9 @@ func (v *CreatePrivateConnectionOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Status != "" {
 		s.WriteString(schemas.CreatePrivateConnectionOutput_status, string(v.Status))
 	}
-	serializeTags(s, schemas.CreatePrivateConnectionOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePrivateConnectionOutput_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreatePrivateConnectionOutput_type, string(v.Type))
 	}

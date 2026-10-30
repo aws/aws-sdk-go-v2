@@ -86,7 +86,9 @@ func (v *ListInvestigationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInvestigationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvestigationActionList(s, schemas.ListInvestigationsResponse_investigationActions, v.InvestigationActions)
+	if v.InvestigationActions != nil {
+		serializeInvestigationActionList(s, schemas.ListInvestigationsResponse_investigationActions, v.InvestigationActions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInvestigationsResponse_nextToken, *v.NextToken)
 	}

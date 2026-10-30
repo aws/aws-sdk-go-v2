@@ -77,7 +77,9 @@ func (v *GetAssociatedResourceInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Resource != nil {
 		s.WriteString(schemas.GetAssociatedResourceRequest_resource, *v.Resource)
 	}
-	serializeGetAssociatedResourceFilter(s, schemas.GetAssociatedResourceRequest_resourceTagStatus, v.ResourceTagStatus)
+	if v.ResourceTagStatus != nil {
+		serializeGetAssociatedResourceFilter(s, schemas.GetAssociatedResourceRequest_resourceTagStatus, v.ResourceTagStatus)
+	}
 	if v.ResourceType != "" {
 		s.WriteString(schemas.GetAssociatedResourceRequest_resourceType, string(v.ResourceType))
 	}
@@ -112,7 +114,9 @@ func (v *GetAssociatedResourceOutput) SerializeMembers(s smithy.ShapeSerializer)
 		v.ApplicationTagResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOptions(s, schemas.GetAssociatedResourceResponse_options, v.Options)
+	if v.Options != nil {
+		serializeOptions(s, schemas.GetAssociatedResourceResponse_options, v.Options)
+	}
 	if v.Resource != nil {
 		s.WriteStruct(schemas.GetAssociatedResourceResponse_resource)
 		v.Resource.SerializeMembers(s)

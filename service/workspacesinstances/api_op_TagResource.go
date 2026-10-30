@@ -49,7 +49,9 @@ func (v *TagResourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.TagResourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.TagResourceRequest_Tags, v.Tags)
+	}
 	if v.WorkspaceInstanceId != nil {
 		s.WriteString(schemas.TagResourceRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
 	}

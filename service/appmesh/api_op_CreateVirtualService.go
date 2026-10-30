@@ -96,7 +96,9 @@ func (v *CreateVirtualServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Spec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateVirtualServiceInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVirtualServiceInput_tags, v.Tags)
+	}
 	if v.VirtualServiceName != nil {
 		s.WriteString(schemas.CreateVirtualServiceInput_virtualServiceName, *v.VirtualServiceName)
 	}

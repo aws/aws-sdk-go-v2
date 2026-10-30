@@ -64,7 +64,9 @@ func (v *ListSecurityControlDefinitionsInput) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityControlDefinitionsRequest_NextToken, *v.NextToken)
 	}
-	serializeSecurityControlsProviders(s, schemas.ListSecurityControlDefinitionsRequest_Providers, v.Providers)
+	if v.Providers != nil {
+		serializeSecurityControlsProviders(s, schemas.ListSecurityControlDefinitionsRequest_Providers, v.Providers)
+	}
 	if v.StandardsArn != nil {
 		s.WriteString(schemas.ListSecurityControlDefinitionsRequest_StandardsArn, *v.StandardsArn)
 	}
@@ -97,7 +99,9 @@ func (v *ListSecurityControlDefinitionsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityControlDefinitionsResponse_NextToken, *v.NextToken)
 	}
-	serializeSecurityControlDefinitions(s, schemas.ListSecurityControlDefinitionsResponse_SecurityControlDefinitions, v.SecurityControlDefinitions)
+	if v.SecurityControlDefinitions != nil {
+		serializeSecurityControlDefinitions(s, schemas.ListSecurityControlDefinitionsResponse_SecurityControlDefinitions, v.SecurityControlDefinitions)
+	}
 }
 func (v *ListSecurityControlDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityControlDefinitionsResponse, func(s *smithy.Schema) error {

@@ -120,7 +120,9 @@ func (v *StartQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.StartQueryInput_EndTime, *v.EndTime)
 	}
-	serializeFilterParameters(s, schemas.StartQueryInput_FilterParameters, v.FilterParameters)
+	if v.FilterParameters != nil {
+		serializeFilterParameters(s, schemas.StartQueryInput_FilterParameters, v.FilterParameters)
+	}
 	if v.LinkedAccountId != nil {
 		s.WriteString(schemas.StartQueryInput_LinkedAccountId, *v.LinkedAccountId)
 	}

@@ -70,8 +70,12 @@ func (v *CreateEndpointAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.CreateEndpointAccessRequest_ownerAccount, *v.OwnerAccount)
 	}
-	serializeSubnetIdList(s, schemas.CreateEndpointAccessRequest_subnetIds, v.SubnetIds)
-	serializeVpcSecurityGroupIdList(s, schemas.CreateEndpointAccessRequest_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateEndpointAccessRequest_subnetIds, v.SubnetIds)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.CreateEndpointAccessRequest_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 	if v.WorkgroupName != nil {
 		s.WriteString(schemas.CreateEndpointAccessRequest_workgroupName, *v.WorkgroupName)
 	}

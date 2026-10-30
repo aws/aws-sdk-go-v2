@@ -65,8 +65,12 @@ func (v *CreateStageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateStageRequest_name, *v.Name)
 	}
-	serializeParticipantTokenConfigurations(s, schemas.CreateStageRequest_participantTokenConfigurations, v.ParticipantTokenConfigurations)
-	serializeTags(s, schemas.CreateStageRequest_tags, v.Tags)
+	if v.ParticipantTokenConfigurations != nil {
+		serializeParticipantTokenConfigurations(s, schemas.CreateStageRequest_participantTokenConfigurations, v.ParticipantTokenConfigurations)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateStageRequest_tags, v.Tags)
+	}
 }
 func (v *CreateStageInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateStageRequest, func(s *smithy.Schema) error {
@@ -108,7 +112,9 @@ func (v *CreateStageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipantTokenList(s, schemas.CreateStageResponse_participantTokens, v.ParticipantTokens)
+	if v.ParticipantTokens != nil {
+		serializeParticipantTokenList(s, schemas.CreateStageResponse_participantTokens, v.ParticipantTokens)
+	}
 	if v.Stage != nil {
 		s.WriteStruct(schemas.CreateStageResponse_stage)
 		v.Stage.SerializeMembers(s)

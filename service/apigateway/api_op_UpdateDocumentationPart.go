@@ -57,7 +57,9 @@ func (v *UpdateDocumentationPartInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DocumentationPartId != nil {
 		s.WriteString(schemas.UpdateDocumentationPartRequest_documentationPartId, *v.DocumentationPartId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateDocumentationPartRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateDocumentationPartRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.UpdateDocumentationPartRequest_restApiId, *v.RestApiId)
 	}

@@ -82,12 +82,18 @@ func (v *ListSolutionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsMarketplaceSolutionArnList(s, schemas.ListSolutionsRequest_AwsMarketplaceSolutionArn, v.AwsMarketplaceSolutionArn)
+	if v.AwsMarketplaceSolutionArn != nil {
+		serializeAwsMarketplaceSolutionArnList(s, schemas.ListSolutionsRequest_AwsMarketplaceSolutionArn, v.AwsMarketplaceSolutionArn)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListSolutionsRequest_Catalog, *v.Catalog)
 	}
-	serializeStringList(s, schemas.ListSolutionsRequest_Category, v.Category)
-	serializeSolutionIdentifiers(s, schemas.ListSolutionsRequest_Identifier, v.Identifier)
+	if v.Category != nil {
+		serializeStringList(s, schemas.ListSolutionsRequest_Category, v.Category)
+	}
+	if v.Identifier != nil {
+		serializeSolutionIdentifiers(s, schemas.ListSolutionsRequest_Identifier, v.Identifier)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListSolutionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -99,7 +105,9 @@ func (v *ListSolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Sort.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFilterStatus(s, schemas.ListSolutionsRequest_Status, v.Status)
+	if v.Status != nil {
+		serializeFilterStatus(s, schemas.ListSolutionsRequest_Status, v.Status)
+	}
 }
 
 type ListSolutionsOutput struct {
@@ -130,7 +138,9 @@ func (v *ListSolutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSolutionsResponse_NextToken, *v.NextToken)
 	}
-	serializeSolutionList(s, schemas.ListSolutionsResponse_SolutionSummaries, v.SolutionSummaries)
+	if v.SolutionSummaries != nil {
+		serializeSolutionList(s, schemas.ListSolutionsResponse_SolutionSummaries, v.SolutionSummaries)
+	}
 }
 func (v *ListSolutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSolutionsResponse, func(s *smithy.Schema) error {

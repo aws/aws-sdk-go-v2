@@ -70,7 +70,9 @@ func (v *ListConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectionsRequest_NextToken, *v.NextToken)
 	}
-	serializeParticipantIdentifierList(s, schemas.ListConnectionsRequest_OtherParticipantIdentifiers, v.OtherParticipantIdentifiers)
+	if v.OtherParticipantIdentifiers != nil {
+		serializeParticipantIdentifierList(s, schemas.ListConnectionsRequest_OtherParticipantIdentifiers, v.OtherParticipantIdentifiers)
+	}
 }
 
 type ListConnectionsOutput struct {
@@ -96,7 +98,9 @@ func (v *ListConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionSummaryList(s, schemas.ListConnectionsResponse_ConnectionSummaries, v.ConnectionSummaries)
+	if v.ConnectionSummaries != nil {
+		serializeConnectionSummaryList(s, schemas.ListConnectionsResponse_ConnectionSummaries, v.ConnectionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectionsResponse_NextToken, *v.NextToken)
 	}

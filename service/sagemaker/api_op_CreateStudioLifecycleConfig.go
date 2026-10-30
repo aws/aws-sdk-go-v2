@@ -68,7 +68,9 @@ func (v *CreateStudioLifecycleConfigInput) SerializeMembers(s smithy.ShapeSerial
 	if v.StudioLifecycleConfigName != nil {
 		s.WriteString(schemas.CreateStudioLifecycleConfigRequest_StudioLifecycleConfigName, *v.StudioLifecycleConfigName)
 	}
-	serializeTagList(s, schemas.CreateStudioLifecycleConfigRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateStudioLifecycleConfigRequest_Tags, v.Tags)
+	}
 }
 
 type CreateStudioLifecycleConfigOutput struct {

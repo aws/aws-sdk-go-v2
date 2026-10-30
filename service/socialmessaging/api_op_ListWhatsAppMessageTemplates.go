@@ -85,7 +85,9 @@ func (v *ListWhatsAppMessageTemplatesOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWhatsAppMessageTemplatesOutput_nextToken, *v.NextToken)
 	}
-	serializeTemplateSummaryList(s, schemas.ListWhatsAppMessageTemplatesOutput_templates, v.Templates)
+	if v.Templates != nil {
+		serializeTemplateSummaryList(s, schemas.ListWhatsAppMessageTemplatesOutput_templates, v.Templates)
+	}
 }
 func (v *ListWhatsAppMessageTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWhatsAppMessageTemplatesOutput, func(s *smithy.Schema) error {

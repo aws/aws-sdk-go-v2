@@ -80,14 +80,18 @@ func (v *CreateMarketplaceModelEndpointInput) SerializeMembers(s smithy.ShapeSer
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateMarketplaceModelEndpointRequest_clientRequestToken, *v.ClientRequestToken)
 	}
-	serializeEndpointConfig(s, schemas.CreateMarketplaceModelEndpointRequest_endpointConfig, v.EndpointConfig)
+	if v.EndpointConfig != nil {
+		serializeEndpointConfig(s, schemas.CreateMarketplaceModelEndpointRequest_endpointConfig, v.EndpointConfig)
+	}
 	if v.EndpointName != nil {
 		s.WriteString(schemas.CreateMarketplaceModelEndpointRequest_endpointName, *v.EndpointName)
 	}
 	if v.ModelSourceIdentifier != nil {
 		s.WriteString(schemas.CreateMarketplaceModelEndpointRequest_modelSourceIdentifier, *v.ModelSourceIdentifier)
 	}
-	serializeTagList(s, schemas.CreateMarketplaceModelEndpointRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMarketplaceModelEndpointRequest_tags, v.Tags)
+	}
 }
 
 type CreateMarketplaceModelEndpointOutput struct {

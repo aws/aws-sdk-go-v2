@@ -79,7 +79,9 @@ func (v *ListTerminologiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTerminologiesResponse_NextToken, *v.NextToken)
 	}
-	serializeTerminologyPropertiesList(s, schemas.ListTerminologiesResponse_TerminologyPropertiesList, v.TerminologyPropertiesList)
+	if v.TerminologyPropertiesList != nil {
+		serializeTerminologyPropertiesList(s, schemas.ListTerminologiesResponse_TerminologyPropertiesList, v.TerminologyPropertiesList)
+	}
 }
 func (v *ListTerminologiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTerminologiesResponse, func(s *smithy.Schema) error {

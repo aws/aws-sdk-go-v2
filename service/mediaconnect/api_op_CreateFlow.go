@@ -102,17 +102,23 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncodingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfGrantEntitlementRequest(s, schemas.CreateFlowRequest_Entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serialize__listOfGrantEntitlementRequest(s, schemas.CreateFlowRequest_Entitlements, v.Entitlements)
+	}
 	if v.FlowSize != "" {
 		s.WriteString(schemas.CreateFlowRequest_FlowSize, string(v.FlowSize))
 	}
-	serialize__mapOfString(s, schemas.CreateFlowRequest_FlowTags, v.FlowTags)
+	if v.FlowTags != nil {
+		serialize__mapOfString(s, schemas.CreateFlowRequest_FlowTags, v.FlowTags)
+	}
 	if v.Maintenance != nil {
 		s.WriteStruct(schemas.CreateFlowRequest_Maintenance)
 		v.Maintenance.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfAddMediaStreamRequest(s, schemas.CreateFlowRequest_MediaStreams, v.MediaStreams)
+	if v.MediaStreams != nil {
+		serialize__listOfAddMediaStreamRequest(s, schemas.CreateFlowRequest_MediaStreams, v.MediaStreams)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFlowRequest_Name, *v.Name)
 	}
@@ -121,7 +127,9 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NdiConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfAddOutputRequest(s, schemas.CreateFlowRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfAddOutputRequest(s, schemas.CreateFlowRequest_Outputs, v.Outputs)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.CreateFlowRequest_Source)
 		v.Source.SerializeMembers(s)
@@ -137,8 +145,12 @@ func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceMonitoringConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfSetSourceRequest(s, schemas.CreateFlowRequest_Sources, v.Sources)
-	serialize__listOfVpcInterfaceRequest(s, schemas.CreateFlowRequest_VpcInterfaces, v.VpcInterfaces)
+	if v.Sources != nil {
+		serialize__listOfSetSourceRequest(s, schemas.CreateFlowRequest_Sources, v.Sources)
+	}
+	if v.VpcInterfaces != nil {
+		serialize__listOfVpcInterfaceRequest(s, schemas.CreateFlowRequest_VpcInterfaces, v.VpcInterfaces)
+	}
 }
 
 type CreateFlowOutput struct {

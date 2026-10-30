@@ -61,7 +61,9 @@ func (v *ImportPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PublicKeyMaterial != nil {
 		s.WriteString(schemas.ImportPublicKeyRequest_publicKeyMaterial, *v.PublicKeyMaterial)
 	}
-	serializeTags(s, schemas.ImportPublicKeyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ImportPublicKeyRequest_tags, v.Tags)
+	}
 }
 
 type ImportPublicKeyOutput struct {

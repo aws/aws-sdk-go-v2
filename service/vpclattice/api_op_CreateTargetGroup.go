@@ -80,7 +80,9 @@ func (v *CreateTargetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTargetGroupRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateTargetGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTargetGroupRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateTargetGroupRequest_type, string(v.Type))
 	}

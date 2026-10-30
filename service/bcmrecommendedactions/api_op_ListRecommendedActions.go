@@ -89,7 +89,9 @@ func (v *ListRecommendedActionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendedActionsResponse_nextToken, *v.NextToken)
 	}
-	serializeRecommendedActions(s, schemas.ListRecommendedActionsResponse_recommendedActions, v.RecommendedActions)
+	if v.RecommendedActions != nil {
+		serializeRecommendedActions(s, schemas.ListRecommendedActionsResponse_recommendedActions, v.RecommendedActions)
+	}
 }
 func (v *ListRecommendedActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendedActionsResponse, func(s *smithy.Schema) error {

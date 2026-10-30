@@ -78,7 +78,9 @@ func (v *DeleteObjectsOnCancelInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.DeleteObjectsOnCancelRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeVirtualObjectList(s, schemas.DeleteObjectsOnCancelRequest_Objects, v.Objects)
+	if v.Objects != nil {
+		serializeVirtualObjectList(s, schemas.DeleteObjectsOnCancelRequest_Objects, v.Objects)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.DeleteObjectsOnCancelRequest_TableName, *v.TableName)
 	}

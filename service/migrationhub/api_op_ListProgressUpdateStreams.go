@@ -81,7 +81,9 @@ func (v *ListProgressUpdateStreamsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProgressUpdateStreamsResult_NextToken, *v.NextToken)
 	}
-	serializeProgressUpdateStreamSummaryList(s, schemas.ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList, v.ProgressUpdateStreamSummaryList)
+	if v.ProgressUpdateStreamSummaryList != nil {
+		serializeProgressUpdateStreamSummaryList(s, schemas.ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList, v.ProgressUpdateStreamSummaryList)
+	}
 }
 func (v *ListProgressUpdateStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProgressUpdateStreamsResult, func(s *smithy.Schema) error {

@@ -74,7 +74,9 @@ func (v *GetStagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetStagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfStage(s, schemas.Stages_item, v.Item)
+	if v.Item != nil {
+		serializeListOfStage(s, schemas.Stages_item, v.Item)
+	}
 }
 func (v *GetStagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Stages, func(s *smithy.Schema) error {

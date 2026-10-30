@@ -66,7 +66,9 @@ func (v *AssetShallow) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceRoleArn != nil {
 		s.WriteString(schemas.AssetShallow_SourceRoleArn, *v.SourceRoleArn)
 	}
-	serializeTags(s, schemas.AssetShallow_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AssetShallow_Tags, v.Tags)
+	}
 }
 func (v *AssetShallow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssetShallow, func(s *smithy.Schema) error {
@@ -229,7 +231,9 @@ func (v *CmafPackage) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Encryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfHlsManifest(s, schemas.CmafPackage_HlsManifests, v.HlsManifests)
+	if v.HlsManifests != nil {
+		serialize__listOfHlsManifest(s, schemas.CmafPackage_HlsManifests, v.HlsManifests)
+	}
 	if v.IncludeEncoderConfigurationInSegments != nil {
 		s.WriteBool(schemas.CmafPackage_IncludeEncoderConfigurationInSegments, *v.IncludeEncoderConfigurationInSegments)
 	}
@@ -439,7 +443,9 @@ func (v *DashPackage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DashPackage) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDashManifest(s, schemas.DashPackage_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serialize__listOfDashManifest(s, schemas.DashPackage_DashManifests, v.DashManifests)
+	}
 	if v.Encryption != nil {
 		s.WriteStruct(schemas.DashPackage_Encryption)
 		v.Encryption.SerializeMembers(s)
@@ -451,7 +457,9 @@ func (v *DashPackage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IncludeIframeOnlyStream != nil {
 		s.WriteBool(schemas.DashPackage_IncludeIframeOnlyStream, *v.IncludeIframeOnlyStream)
 	}
-	serialize__listOf__PeriodTriggersElement(s, schemas.DashPackage_PeriodTriggers, v.PeriodTriggers)
+	if v.PeriodTriggers != nil {
+		serialize__listOf__PeriodTriggersElement(s, schemas.DashPackage_PeriodTriggers, v.PeriodTriggers)
+	}
 	if v.SegmentDurationSeconds != nil {
 		s.WriteInt32(schemas.DashPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
 	}
@@ -823,7 +831,9 @@ func (v *HlsPackage) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Encryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfHlsManifest(s, schemas.HlsPackage_HlsManifests, v.HlsManifests)
+	if v.HlsManifests != nil {
+		serialize__listOfHlsManifest(s, schemas.HlsPackage_HlsManifests, v.HlsManifests)
+	}
 	if v.IncludeDvbSubtitles != nil {
 		s.WriteBool(schemas.HlsPackage_IncludeDvbSubtitles, *v.IncludeDvbSubtitles)
 	}
@@ -963,7 +973,9 @@ func (v *MssPackage) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Encryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfMssManifest(s, schemas.MssPackage_MssManifests, v.MssManifests)
+	if v.MssManifests != nil {
+		serialize__listOfMssManifest(s, schemas.MssPackage_MssManifests, v.MssManifests)
+	}
 	if v.SegmentDurationSeconds != nil {
 		s.WriteInt32(schemas.MssPackage_SegmentDurationSeconds, *v.SegmentDurationSeconds)
 	}
@@ -1056,7 +1068,9 @@ func (v *PackagingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackagingGroupId != nil {
 		s.WriteString(schemas.PackagingConfiguration_PackagingGroupId, *v.PackagingGroupId)
 	}
-	serializeTags(s, schemas.PackagingConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PackagingConfiguration_Tags, v.Tags)
+	}
 }
 func (v *PackagingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PackagingConfiguration, func(s *smithy.Schema) error {
@@ -1154,7 +1168,9 @@ func (v *PackagingGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.PackagingGroup_Id, *v.Id)
 	}
-	serializeTags(s, schemas.PackagingGroup_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.PackagingGroup_Tags, v.Tags)
+	}
 }
 func (v *PackagingGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PackagingGroup, func(s *smithy.Schema) error {
@@ -1236,7 +1252,9 @@ func (v *SpekeKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.SpekeKeyProvider_RoleArn, *v.RoleArn)
 	}
-	serialize__listOf__string(s, schemas.SpekeKeyProvider_SystemIds, v.SystemIds)
+	if v.SystemIds != nil {
+		serialize__listOf__string(s, schemas.SpekeKeyProvider_SystemIds, v.SystemIds)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.SpekeKeyProvider_Url, *v.Url)
 	}

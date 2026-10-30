@@ -83,8 +83,12 @@ func (v *CreateReplicationSubnetGroupInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ReplicationSubnetGroupIdentifier != nil {
 		s.WriteString(schemas.CreateReplicationSubnetGroupMessage_ReplicationSubnetGroupIdentifier, *v.ReplicationSubnetGroupIdentifier)
 	}
-	serializeSubnetIdentifierList(s, schemas.CreateReplicationSubnetGroupMessage_SubnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateReplicationSubnetGroupMessage_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIdentifierList(s, schemas.CreateReplicationSubnetGroupMessage_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateReplicationSubnetGroupMessage_Tags, v.Tags)
+	}
 }
 
 type CreateReplicationSubnetGroupOutput struct {

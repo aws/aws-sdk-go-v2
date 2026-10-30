@@ -93,8 +93,12 @@ func (v *GetApplicationComponentDetailsOutput) SerializeMembers(s smithy.ShapeSe
 		v.ApplicationComponentDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssociatedApplications(s, schemas.GetApplicationComponentDetailsResponse_associatedApplications, v.AssociatedApplications)
-	serializeAssociatedServerIDs(s, schemas.GetApplicationComponentDetailsResponse_associatedServerIds, v.AssociatedServerIds)
+	if v.AssociatedApplications != nil {
+		serializeAssociatedApplications(s, schemas.GetApplicationComponentDetailsResponse_associatedApplications, v.AssociatedApplications)
+	}
+	if v.AssociatedServerIds != nil {
+		serializeAssociatedServerIDs(s, schemas.GetApplicationComponentDetailsResponse_associatedServerIds, v.AssociatedServerIds)
+	}
 	if v.MoreApplicationResource != nil {
 		s.WriteBool(schemas.GetApplicationComponentDetailsResponse_moreApplicationResource, *v.MoreApplicationResource)
 	}

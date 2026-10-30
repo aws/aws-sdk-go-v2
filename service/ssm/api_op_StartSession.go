@@ -80,7 +80,9 @@ func (v *StartSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentName != nil {
 		s.WriteString(schemas.StartSessionRequest_DocumentName, *v.DocumentName)
 	}
-	serializeSessionManagerParameters(s, schemas.StartSessionRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSessionManagerParameters(s, schemas.StartSessionRequest_Parameters, v.Parameters)
+	}
 	if v.Reason != nil {
 		s.WriteString(schemas.StartSessionRequest_Reason, *v.Reason)
 	}

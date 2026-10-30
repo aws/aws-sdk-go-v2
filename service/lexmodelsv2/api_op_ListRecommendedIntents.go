@@ -147,7 +147,9 @@ func (v *ListRecommendedIntentsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendedIntentsResponse_nextToken, *v.NextToken)
 	}
-	serializeRecommendedIntentSummaryList(s, schemas.ListRecommendedIntentsResponse_summaryList, v.SummaryList)
+	if v.SummaryList != nil {
+		serializeRecommendedIntentSummaryList(s, schemas.ListRecommendedIntentsResponse_summaryList, v.SummaryList)
+	}
 }
 func (v *ListRecommendedIntentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendedIntentsResponse, func(s *smithy.Schema) error {

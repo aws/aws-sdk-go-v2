@@ -52,7 +52,9 @@ func (v *BatchGetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.BatchGetFindingsInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeFindingIdList(s, schemas.BatchGetFindingsInput_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIdList(s, schemas.BatchGetFindingsInput_findingIds, v.FindingIds)
+	}
 }
 
 // Output for the BatchGetFindings operation.
@@ -77,8 +79,12 @@ func (v *BatchGetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingList(s, schemas.BatchGetFindingsOutput_findings, v.Findings)
-	serializeFindingIdList(s, schemas.BatchGetFindingsOutput_notFound, v.NotFound)
+	if v.Findings != nil {
+		serializeFindingList(s, schemas.BatchGetFindingsOutput_findings, v.Findings)
+	}
+	if v.NotFound != nil {
+		serializeFindingIdList(s, schemas.BatchGetFindingsOutput_notFound, v.NotFound)
+	}
 }
 func (v *BatchGetFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFindingsOutput, func(s *smithy.Schema) error {

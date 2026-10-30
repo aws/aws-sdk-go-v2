@@ -76,8 +76,12 @@ func (v *UpdateEnvironmentBlueprintInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateEnvironmentBlueprintInput_identifier, *v.Identifier)
 	}
-	serializeProvisioningProperties(s, schemas.UpdateEnvironmentBlueprintInput_provisioningProperties, v.ProvisioningProperties)
-	serializeCustomParameterList(s, schemas.UpdateEnvironmentBlueprintInput_userParameters, v.UserParameters)
+	if v.ProvisioningProperties != nil {
+		serializeProvisioningProperties(s, schemas.UpdateEnvironmentBlueprintInput_provisioningProperties, v.ProvisioningProperties)
+	}
+	if v.UserParameters != nil {
+		serializeCustomParameterList(s, schemas.UpdateEnvironmentBlueprintInput_userParameters, v.UserParameters)
+	}
 }
 
 type UpdateEnvironmentBlueprintOutput struct {
@@ -154,7 +158,9 @@ func (v *UpdateEnvironmentBlueprintOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateEnvironmentBlueprintOutput_description, *v.Description)
 	}
-	serializeGlossaryTerms(s, schemas.UpdateEnvironmentBlueprintOutput_glossaryTerms, v.GlossaryTerms)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.UpdateEnvironmentBlueprintOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateEnvironmentBlueprintOutput_id, *v.Id)
 	}
@@ -164,11 +170,15 @@ func (v *UpdateEnvironmentBlueprintOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.Provider != nil {
 		s.WriteString(schemas.UpdateEnvironmentBlueprintOutput_provider, *v.Provider)
 	}
-	serializeProvisioningProperties(s, schemas.UpdateEnvironmentBlueprintOutput_provisioningProperties, v.ProvisioningProperties)
+	if v.ProvisioningProperties != nil {
+		serializeProvisioningProperties(s, schemas.UpdateEnvironmentBlueprintOutput_provisioningProperties, v.ProvisioningProperties)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.UpdateEnvironmentBlueprintOutput_updatedAt, *v.UpdatedAt)
 	}
-	serializeCustomParameterList(s, schemas.UpdateEnvironmentBlueprintOutput_userParameters, v.UserParameters)
+	if v.UserParameters != nil {
+		serializeCustomParameterList(s, schemas.UpdateEnvironmentBlueprintOutput_userParameters, v.UserParameters)
+	}
 }
 func (v *UpdateEnvironmentBlueprintOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateEnvironmentBlueprintOutput, func(s *smithy.Schema) error {

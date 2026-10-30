@@ -242,8 +242,12 @@ func (v *Campaign) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Schedule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSource(s, schemas.Campaign_source, v.Source)
-	serializeTagMap(s, schemas.Campaign_tags, v.Tags)
+	if v.Source != nil {
+		serializeSource(s, schemas.Campaign_source, v.Source)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Campaign_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Campaign_type, string(v.Type))
 	}
@@ -383,7 +387,9 @@ func (v *CampaignSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CampaignSummary_arn, *v.Arn)
 	}
-	serializeChannelSubtypeList(s, schemas.CampaignSummary_channelSubtypes, v.ChannelSubtypes)
+	if v.ChannelSubtypes != nil {
+		serializeChannelSubtypeList(s, schemas.CampaignSummary_channelSubtypes, v.ChannelSubtypes)
+	}
 	if v.ConnectCampaignFlowArn != nil {
 		s.WriteString(schemas.CampaignSummary_connectCampaignFlowArn, *v.ConnectCampaignFlowArn)
 	}
@@ -730,7 +736,9 @@ func (v *CommunicationLimitsConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CommunicationLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationLimits(s, schemas.CommunicationLimitsConfig_allChannelSubtypes, v.AllChannelSubtypes)
+	if v.AllChannelSubtypes != nil {
+		serializeCommunicationLimits(s, schemas.CommunicationLimitsConfig_allChannelSubtypes, v.AllChannelSubtypes)
+	}
 	if v.InstanceLimitsHandling != "" {
 		s.WriteString(schemas.CommunicationLimitsConfig_instanceLimitsHandling, string(v.InstanceLimitsHandling))
 	}
@@ -857,7 +865,9 @@ func (v *CustomerProfilesIntegrationConfig) SerializeMembers(s smithy.ShapeSeria
 	if v.DomainArn != nil {
 		s.WriteString(schemas.CustomerProfilesIntegrationConfig_domainArn, *v.DomainArn)
 	}
-	serializeObjectTypeNamesMap(s, schemas.CustomerProfilesIntegrationConfig_objectTypeNames, v.ObjectTypeNames)
+	if v.ObjectTypeNames != nil {
+		serializeObjectTypeNamesMap(s, schemas.CustomerProfilesIntegrationConfig_objectTypeNames, v.ObjectTypeNames)
+	}
 }
 func (v *CustomerProfilesIntegrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomerProfilesIntegrationConfig, func(s *smithy.Schema) error {
@@ -931,7 +941,9 @@ func (v *CustomerProfilesIntegrationSummary) SerializeMembers(s smithy.ShapeSeri
 	if v.DomainArn != nil {
 		s.WriteString(schemas.CustomerProfilesIntegrationSummary_domainArn, *v.DomainArn)
 	}
-	serializeObjectTypeNamesMap(s, schemas.CustomerProfilesIntegrationSummary_objectTypeNames, v.ObjectTypeNames)
+	if v.ObjectTypeNames != nil {
+		serializeObjectTypeNamesMap(s, schemas.CustomerProfilesIntegrationSummary_objectTypeNames, v.ObjectTypeNames)
+	}
 }
 func (v *CustomerProfilesIntegrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomerProfilesIntegrationSummary, func(s *smithy.Schema) error {
@@ -981,7 +993,9 @@ func (v *EmailChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultOutboundConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEmailOutboundMode(s, schemas.EmailChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	if v.OutboundMode != nil {
+		serializeEmailOutboundMode(s, schemas.EmailChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	}
 }
 func (v *EmailChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmailChannelSubtypeConfig, func(s *smithy.Schema) error {
@@ -1039,7 +1053,9 @@ func (v *EmailChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerialize
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.EmailChannelSubtypeParameters_templateArn, *v.TemplateArn)
 	}
-	serializeAttributes(s, schemas.EmailChannelSubtypeParameters_templateParameters, v.TemplateParameters)
+	if v.TemplateParameters != nil {
+		serializeAttributes(s, schemas.EmailChannelSubtypeParameters_templateParameters, v.TemplateParameters)
+	}
 }
 func (v *EmailChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EmailChannelSubtypeParameters, func(s *smithy.Schema) error {
@@ -1483,7 +1499,9 @@ func (v *InstanceCommunicationLimitsConfig) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *InstanceCommunicationLimitsConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommunicationLimits(s, schemas.InstanceCommunicationLimitsConfig_allChannelSubtypes, v.AllChannelSubtypes)
+	if v.AllChannelSubtypes != nil {
+		serializeCommunicationLimits(s, schemas.InstanceCommunicationLimitsConfig_allChannelSubtypes, v.AllChannelSubtypes)
+	}
 }
 func (v *InstanceCommunicationLimitsConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InstanceCommunicationLimitsConfig, func(s *smithy.Schema) error {
@@ -1974,7 +1992,9 @@ func (v *LocalTimeZoneConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultTimeZone != nil {
 		s.WriteString(schemas.LocalTimeZoneConfig_defaultTimeZone, *v.DefaultTimeZone)
 	}
-	serializeLocalTimeZoneDetection(s, schemas.LocalTimeZoneConfig_localTimeZoneDetection, v.LocalTimeZoneDetection)
+	if v.LocalTimeZoneDetection != nil {
+		serializeLocalTimeZoneDetection(s, schemas.LocalTimeZoneConfig_localTimeZoneDetection, v.LocalTimeZoneDetection)
+	}
 	if v.LocalTimeZoneDetectionScope != "" {
 		s.WriteString(schemas.LocalTimeZoneConfig_localTimeZoneDetectionScope, string(v.LocalTimeZoneDetectionScope))
 	}
@@ -2052,7 +2072,9 @@ func (v *OutboundRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OutboundRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChannelSubtypeParameters(s, schemas.OutboundRequest_channelSubtypeParameters, v.ChannelSubtypeParameters)
+	if v.ChannelSubtypeParameters != nil {
+		serializeChannelSubtypeParameters(s, schemas.OutboundRequest_channelSubtypeParameters, v.ChannelSubtypeParameters)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.OutboundRequest_clientToken, *v.ClientToken)
 	}
@@ -2126,7 +2148,9 @@ func (v *PredictiveConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BandwidthAllocation != nil {
 		s.WriteFloat64(schemas.PredictiveConfig_bandwidthAllocation, *v.BandwidthAllocation)
 	}
-	serializePacingStrategyList(s, schemas.PredictiveConfig_pacingStrategies, v.PacingStrategies)
+	if v.PacingStrategies != nil {
+		serializePacingStrategyList(s, schemas.PredictiveConfig_pacingStrategies, v.PacingStrategies)
+	}
 }
 func (v *PredictiveConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictiveConfig, func(s *smithy.Schema) error {
@@ -2167,7 +2191,9 @@ func (v *PreviewConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PreviewConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentActions(s, schemas.PreviewConfig_agentActions, v.AgentActions)
+	if v.AgentActions != nil {
+		serializeAgentActions(s, schemas.PreviewConfig_agentActions, v.AgentActions)
+	}
 	if v.BandwidthAllocation != nil {
 		s.WriteFloat64(schemas.PreviewConfig_bandwidthAllocation, *v.BandwidthAllocation)
 	}
@@ -2555,7 +2581,9 @@ func (v *SmsChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultOutboundConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSmsOutboundMode(s, schemas.SmsChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	if v.OutboundMode != nil {
+		serializeSmsOutboundMode(s, schemas.SmsChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	}
 }
 func (v *SmsChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SmsChannelSubtypeConfig, func(s *smithy.Schema) error {
@@ -2613,7 +2641,9 @@ func (v *SmsChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.SmsChannelSubtypeParameters_templateArn, *v.TemplateArn)
 	}
-	serializeAttributes(s, schemas.SmsChannelSubtypeParameters_templateParameters, v.TemplateParameters)
+	if v.TemplateParameters != nil {
+		serializeAttributes(s, schemas.SmsChannelSubtypeParameters_templateParameters, v.TemplateParameters)
+	}
 }
 func (v *SmsChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SmsChannelSubtypeParameters, func(s *smithy.Schema) error {
@@ -2916,7 +2946,9 @@ func (v *TelephonyChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerialize
 		v.DefaultOutboundConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTelephonyOutboundMode(s, schemas.TelephonyChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	if v.OutboundMode != nil {
+		serializeTelephonyOutboundMode(s, schemas.TelephonyChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	}
 }
 func (v *TelephonyChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TelephonyChannelSubtypeConfig, func(s *smithy.Schema) error {
@@ -2977,7 +3009,9 @@ func (v *TelephonyChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSeria
 		v.AnswerMachineDetectionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributes(s, schemas.TelephonyChannelSubtypeParameters_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.TelephonyChannelSubtypeParameters_attributes, v.Attributes)
+	}
 	if v.ConnectSourcePhoneNumber != nil {
 		s.WriteString(schemas.TelephonyChannelSubtypeParameters_connectSourcePhoneNumber, *v.ConnectSourcePhoneNumber)
 	}
@@ -3251,8 +3285,12 @@ func (v *TimeWindow) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOpenHours(s, schemas.TimeWindow_openHours, v.OpenHours)
-	serializeRestrictedPeriods(s, schemas.TimeWindow_restrictedPeriods, v.RestrictedPeriods)
+	if v.OpenHours != nil {
+		serializeOpenHours(s, schemas.TimeWindow_openHours, v.OpenHours)
+	}
+	if v.RestrictedPeriods != nil {
+		serializeRestrictedPeriods(s, schemas.TimeWindow_restrictedPeriods, v.RestrictedPeriods)
+	}
 }
 func (v *TimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TimeWindow, func(s *smithy.Schema) error {
@@ -3341,7 +3379,9 @@ func (v *WhatsAppChannelSubtypeConfig) SerializeMembers(s smithy.ShapeSerializer
 		v.DefaultOutboundConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWhatsAppOutboundMode(s, schemas.WhatsAppChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	if v.OutboundMode != nil {
+		serializeWhatsAppOutboundMode(s, schemas.WhatsAppChannelSubtypeConfig_outboundMode, v.OutboundMode)
+	}
 }
 func (v *WhatsAppChannelSubtypeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WhatsAppChannelSubtypeConfig, func(s *smithy.Schema) error {
@@ -3399,7 +3439,9 @@ func (v *WhatsAppChannelSubtypeParameters) SerializeMembers(s smithy.ShapeSerial
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.WhatsAppChannelSubtypeParameters_templateArn, *v.TemplateArn)
 	}
-	serializeAttributes(s, schemas.WhatsAppChannelSubtypeParameters_templateParameters, v.TemplateParameters)
+	if v.TemplateParameters != nil {
+		serializeAttributes(s, schemas.WhatsAppChannelSubtypeParameters_templateParameters, v.TemplateParameters)
+	}
 }
 func (v *WhatsAppChannelSubtypeParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WhatsAppChannelSubtypeParameters, func(s *smithy.Schema) error {

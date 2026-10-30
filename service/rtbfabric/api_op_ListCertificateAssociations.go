@@ -96,7 +96,9 @@ func (v *ListCertificateAssociationsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListCertificateAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateAssociationSummaryList(s, schemas.ListCertificateAssociationsResponse_certificateAssociations, v.CertificateAssociations)
+	if v.CertificateAssociations != nil {
+		serializeCertificateAssociationSummaryList(s, schemas.ListCertificateAssociationsResponse_certificateAssociations, v.CertificateAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCertificateAssociationsResponse_nextToken, *v.NextToken)
 	}

@@ -78,7 +78,9 @@ func (v *GetDefaultRetentionPolicyOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Description != nil {
 		s.WriteString(schemas.GetDefaultRetentionPolicyResponse_Description, *v.Description)
 	}
-	serializeFolderConfigurations(s, schemas.GetDefaultRetentionPolicyResponse_FolderConfigurations, v.FolderConfigurations)
+	if v.FolderConfigurations != nil {
+		serializeFolderConfigurations(s, schemas.GetDefaultRetentionPolicyResponse_FolderConfigurations, v.FolderConfigurations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetDefaultRetentionPolicyResponse_Id, *v.Id)
 	}

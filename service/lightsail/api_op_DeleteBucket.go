@@ -96,7 +96,9 @@ func (v *DeleteBucketOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteBucketResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteBucketResult_operations, v.Operations)
+	}
 }
 func (v *DeleteBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteBucketResult, func(s *smithy.Schema) error {

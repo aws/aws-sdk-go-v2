@@ -42,7 +42,9 @@ func (v *EnableAlarmActionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableAlarmActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmNames(s, schemas.EnableAlarmActionsInput_AlarmNames, v.AlarmNames)
+	if v.AlarmNames != nil {
+		serializeAlarmNames(s, schemas.EnableAlarmActionsInput_AlarmNames, v.AlarmNames)
+	}
 }
 
 type EnableAlarmActionsOutput struct {

@@ -138,7 +138,9 @@ func (v *SubmitServiceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShareIdentifier != nil {
 		s.WriteString(schemas.SubmitServiceJobRequest_shareIdentifier, *v.ShareIdentifier)
 	}
-	serializeTagrisTagsMap(s, schemas.SubmitServiceJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.SubmitServiceJobRequest_tags, v.Tags)
+	}
 	if v.TimeoutConfig != nil {
 		s.WriteStruct(schemas.SubmitServiceJobRequest_timeoutConfig)
 		v.TimeoutConfig.SerializeMembers(s)

@@ -108,7 +108,9 @@ func (v *RecognizeTextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.RecognizeTextRequest_localeId, *v.LocaleId)
 	}
-	serializeStringMap(s, schemas.RecognizeTextRequest_requestAttributes, v.RequestAttributes)
+	if v.RequestAttributes != nil {
+		serializeStringMap(s, schemas.RecognizeTextRequest_requestAttributes, v.RequestAttributes)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.RecognizeTextRequest_sessionId, *v.SessionId)
 	}
@@ -165,14 +167,20 @@ func (v *RecognizeTextOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecognizeTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInterpretations(s, schemas.RecognizeTextResponse_interpretations, v.Interpretations)
-	serializeMessages(s, schemas.RecognizeTextResponse_messages, v.Messages)
+	if v.Interpretations != nil {
+		serializeInterpretations(s, schemas.RecognizeTextResponse_interpretations, v.Interpretations)
+	}
+	if v.Messages != nil {
+		serializeMessages(s, schemas.RecognizeTextResponse_messages, v.Messages)
+	}
 	if v.RecognizedBotMember != nil {
 		s.WriteStruct(schemas.RecognizeTextResponse_recognizedBotMember)
 		v.RecognizedBotMember.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringMap(s, schemas.RecognizeTextResponse_requestAttributes, v.RequestAttributes)
+	if v.RequestAttributes != nil {
+		serializeStringMap(s, schemas.RecognizeTextResponse_requestAttributes, v.RequestAttributes)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.RecognizeTextResponse_sessionId, *v.SessionId)
 	}

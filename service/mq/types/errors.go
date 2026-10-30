@@ -49,7 +49,9 @@ func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.BadRequestException_Message, *v.Message)
 	}
-	serialize__listOfResourceShareError(s, schemas.BadRequestException_ResourceShareErrors, v.ResourceShareErrors)
+	if v.ResourceShareErrors != nil {
+		serialize__listOfResourceShareError(s, schemas.BadRequestException_ResourceShareErrors, v.ResourceShareErrors)
+	}
 }
 func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
@@ -108,7 +110,9 @@ func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ConflictException_Message, *v.Message)
 	}
-	serialize__listOfResourceShareError(s, schemas.ConflictException_ResourceShareErrors, v.ResourceShareErrors)
+	if v.ResourceShareErrors != nil {
+		serialize__listOfResourceShareError(s, schemas.ConflictException_ResourceShareErrors, v.ResourceShareErrors)
+	}
 }
 func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
@@ -167,7 +171,9 @@ func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ForbiddenException_Message, *v.Message)
 	}
-	serialize__listOfResourceShareError(s, schemas.ForbiddenException_ResourceShareErrors, v.ResourceShareErrors)
+	if v.ResourceShareErrors != nil {
+		serialize__listOfResourceShareError(s, schemas.ForbiddenException_ResourceShareErrors, v.ResourceShareErrors)
+	}
 }
 func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
@@ -226,7 +232,9 @@ func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer
 	if v.Message != nil {
 		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
 	}
-	serialize__listOfResourceShareError(s, schemas.InternalServerErrorException_ResourceShareErrors, v.ResourceShareErrors)
+	if v.ResourceShareErrors != nil {
+		serialize__listOfResourceShareError(s, schemas.InternalServerErrorException_ResourceShareErrors, v.ResourceShareErrors)
+	}
 }
 func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
@@ -285,7 +293,9 @@ func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.NotFoundException_Message, *v.Message)
 	}
-	serialize__listOfResourceShareError(s, schemas.NotFoundException_ResourceShareErrors, v.ResourceShareErrors)
+	if v.ResourceShareErrors != nil {
+		serialize__listOfResourceShareError(s, schemas.NotFoundException_ResourceShareErrors, v.ResourceShareErrors)
+	}
 }
 func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
@@ -344,7 +354,9 @@ func (v *UnauthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.UnauthorizedException_Message, *v.Message)
 	}
-	serialize__listOfResourceShareError(s, schemas.UnauthorizedException_ResourceShareErrors, v.ResourceShareErrors)
+	if v.ResourceShareErrors != nil {
+		serialize__listOfResourceShareError(s, schemas.UnauthorizedException_ResourceShareErrors, v.ResourceShareErrors)
+	}
 }
 func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {

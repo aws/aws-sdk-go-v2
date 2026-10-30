@@ -90,8 +90,12 @@ func (v *CreateChimeWebhookConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.LoggingLevel != nil {
 		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_LoggingLevel, *v.LoggingLevel)
 	}
-	serializeSnsTopicArnList(s, schemas.CreateChimeWebhookConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
-	serializeTags(s, schemas.CreateChimeWebhookConfigurationRequest_Tags, v.Tags)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.CreateChimeWebhookConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChimeWebhookConfigurationRequest_Tags, v.Tags)
+	}
 	if v.WebhookDescription != nil {
 		s.WriteString(schemas.CreateChimeWebhookConfigurationRequest_WebhookDescription, *v.WebhookDescription)
 	}

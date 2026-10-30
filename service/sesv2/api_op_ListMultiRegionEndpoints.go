@@ -86,7 +86,9 @@ func (v *ListMultiRegionEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMultiRegionEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiRegionEndpoints(s, schemas.ListMultiRegionEndpointsResponse_MultiRegionEndpoints, v.MultiRegionEndpoints)
+	if v.MultiRegionEndpoints != nil {
+		serializeMultiRegionEndpoints(s, schemas.ListMultiRegionEndpointsResponse_MultiRegionEndpoints, v.MultiRegionEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMultiRegionEndpointsResponse_NextToken, *v.NextToken)
 	}

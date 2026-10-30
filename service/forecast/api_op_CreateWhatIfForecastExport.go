@@ -91,8 +91,12 @@ func (v *CreateWhatIfForecastExportInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Format != nil {
 		s.WriteString(schemas.CreateWhatIfForecastExportRequest_Format, *v.Format)
 	}
-	serializeTags(s, schemas.CreateWhatIfForecastExportRequest_Tags, v.Tags)
-	serializeWhatIfForecastArnListForExport(s, schemas.CreateWhatIfForecastExportRequest_WhatIfForecastArns, v.WhatIfForecastArns)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWhatIfForecastExportRequest_Tags, v.Tags)
+	}
+	if v.WhatIfForecastArns != nil {
+		serializeWhatIfForecastArnListForExport(s, schemas.CreateWhatIfForecastExportRequest_WhatIfForecastArns, v.WhatIfForecastArns)
+	}
 	if v.WhatIfForecastExportName != nil {
 		s.WriteString(schemas.CreateWhatIfForecastExportRequest_WhatIfForecastExportName, *v.WhatIfForecastExportName)
 	}

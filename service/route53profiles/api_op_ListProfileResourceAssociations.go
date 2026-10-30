@@ -104,7 +104,9 @@ func (v *ListProfileResourceAssociationsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileResourceAssociationsResponse_NextToken, *v.NextToken)
 	}
-	serializeProfileResourceAssociations(s, schemas.ListProfileResourceAssociationsResponse_ProfileResourceAssociations, v.ProfileResourceAssociations)
+	if v.ProfileResourceAssociations != nil {
+		serializeProfileResourceAssociations(s, schemas.ListProfileResourceAssociationsResponse_ProfileResourceAssociations, v.ProfileResourceAssociations)
+	}
 }
 func (v *ListProfileResourceAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProfileResourceAssociationsResponse, func(s *smithy.Schema) error {

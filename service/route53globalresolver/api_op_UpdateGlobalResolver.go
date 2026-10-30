@@ -85,7 +85,9 @@ func (v *UpdateGlobalResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.UpdateGlobalResolverInput_observabilityRegion, *v.ObservabilityRegion)
 	}
-	serializeRegions(s, schemas.UpdateGlobalResolverInput_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.UpdateGlobalResolverInput_regions, v.Regions)
+	}
 }
 
 type UpdateGlobalResolverOutput struct {
@@ -191,15 +193,21 @@ func (v *UpdateGlobalResolverOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.UpdateGlobalResolverOutput_ipAddressType, string(v.IpAddressType))
 	}
-	serializeIPv4Addresses(s, schemas.UpdateGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
-	serializeIPv6Addresses(s, schemas.UpdateGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv4Addresses != nil {
+		serializeIPv4Addresses(s, schemas.UpdateGlobalResolverOutput_ipv4Addresses, v.Ipv4Addresses)
+	}
+	if v.Ipv6Addresses != nil {
+		serializeIPv6Addresses(s, schemas.UpdateGlobalResolverOutput_ipv6Addresses, v.Ipv6Addresses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateGlobalResolverOutput_name, *v.Name)
 	}
 	if v.ObservabilityRegion != nil {
 		s.WriteString(schemas.UpdateGlobalResolverOutput_observabilityRegion, *v.ObservabilityRegion)
 	}
-	serializeRegions(s, schemas.UpdateGlobalResolverOutput_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegions(s, schemas.UpdateGlobalResolverOutput_regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateGlobalResolverOutput_status, string(v.Status))
 	}

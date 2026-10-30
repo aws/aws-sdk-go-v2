@@ -119,7 +119,9 @@ func (v *GetTableAutoScalingSettingsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.KeyspaceName != nil {
 		s.WriteString(schemas.GetTableAutoScalingSettingsResponse_keyspaceName, *v.KeyspaceName)
 	}
-	serializeReplicaAutoScalingSpecificationList(s, schemas.GetTableAutoScalingSettingsResponse_replicaSpecifications, v.ReplicaSpecifications)
+	if v.ReplicaSpecifications != nil {
+		serializeReplicaAutoScalingSpecificationList(s, schemas.GetTableAutoScalingSettingsResponse_replicaSpecifications, v.ReplicaSpecifications)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.GetTableAutoScalingSettingsResponse_resourceArn, *v.ResourceArn)
 	}

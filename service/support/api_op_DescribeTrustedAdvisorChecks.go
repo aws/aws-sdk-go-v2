@@ -120,7 +120,9 @@ func (v *DescribeTrustedAdvisorChecksOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeTrustedAdvisorChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrustedAdvisorCheckList(s, schemas.DescribeTrustedAdvisorChecksResponse_checks, v.Checks)
+	if v.Checks != nil {
+		serializeTrustedAdvisorCheckList(s, schemas.DescribeTrustedAdvisorChecksResponse_checks, v.Checks)
+	}
 }
 func (v *DescribeTrustedAdvisorChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTrustedAdvisorChecksResponse, func(s *smithy.Schema) error {

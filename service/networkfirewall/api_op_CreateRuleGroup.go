@@ -201,7 +201,9 @@ func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SummaryConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateRuleGroupRequest_Type, string(v.Type))
 	}

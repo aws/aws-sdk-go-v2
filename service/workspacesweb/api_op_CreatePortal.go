@@ -86,7 +86,9 @@ func (v *CreatePortalInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreatePortalRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreatePortalRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.CreatePortalRequest_authenticationType, string(v.AuthenticationType))
 	}
@@ -108,7 +110,9 @@ func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PortalCustomDomain != nil {
 		s.WriteString(schemas.CreatePortalRequest_portalCustomDomain, *v.PortalCustomDomain)
 	}
-	serializeTagList(s, schemas.CreatePortalRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePortalRequest_tags, v.Tags)
+	}
 }
 
 type CreatePortalOutput struct {

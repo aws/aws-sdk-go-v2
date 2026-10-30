@@ -94,7 +94,9 @@ func (v *ListWhatsAppFlowAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWhatsAppFlowAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowAssetList(s, schemas.ListWhatsAppFlowAssetsOutput_flowAssets, v.FlowAssets)
+	if v.FlowAssets != nil {
+		serializeMetaFlowAssetList(s, schemas.ListWhatsAppFlowAssetsOutput_flowAssets, v.FlowAssets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWhatsAppFlowAssetsOutput_nextToken, *v.NextToken)
 	}

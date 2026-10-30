@@ -57,7 +57,9 @@ func (v *SendCisSessionTelemetryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SendCisSessionTelemetryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCisSessionMessages(s, schemas.SendCisSessionTelemetryRequest_messages, v.Messages)
+	if v.Messages != nil {
+		serializeCisSessionMessages(s, schemas.SendCisSessionTelemetryRequest_messages, v.Messages)
+	}
 	if v.ScanJobId != nil {
 		s.WriteString(schemas.SendCisSessionTelemetryRequest_scanJobId, *v.ScanJobId)
 	}

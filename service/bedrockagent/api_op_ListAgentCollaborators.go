@@ -94,7 +94,9 @@ func (v *ListAgentCollaboratorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentCollaboratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentCollaboratorSummaries(s, schemas.ListAgentCollaboratorsResponse_agentCollaboratorSummaries, v.AgentCollaboratorSummaries)
+	if v.AgentCollaboratorSummaries != nil {
+		serializeAgentCollaboratorSummaries(s, schemas.ListAgentCollaboratorsResponse_agentCollaboratorSummaries, v.AgentCollaboratorSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentCollaboratorsResponse_nextToken, *v.NextToken)
 	}

@@ -541,7 +541,9 @@ func (v *EventIntegration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.EventIntegration_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.EventIntegration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EventIntegration_Tags, v.Tags)
+	}
 }
 func (v *EventIntegration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventIntegration, func(s *smithy.Schema) error {
@@ -599,7 +601,9 @@ func (v *EventIntegrationAssociation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventIntegrationAssociation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientAssociationMetadata(s, schemas.EventIntegrationAssociation_ClientAssociationMetadata, v.ClientAssociationMetadata)
+	if v.ClientAssociationMetadata != nil {
+		serializeClientAssociationMetadata(s, schemas.EventIntegrationAssociation_ClientAssociationMetadata, v.ClientAssociationMetadata)
+	}
 	if v.ClientId != nil {
 		s.WriteString(schemas.EventIntegrationAssociation_ClientId, *v.ClientId)
 	}
@@ -724,7 +728,9 @@ func (v *ExternalUrlConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessUrl != nil {
 		s.WriteString(schemas.ExternalUrlConfig_AccessUrl, *v.AccessUrl)
 	}
-	serializeApplicationApprovedOrigins(s, schemas.ExternalUrlConfig_ApprovedOrigins, v.ApprovedOrigins)
+	if v.ApprovedOrigins != nil {
+		serializeApplicationApprovedOrigins(s, schemas.ExternalUrlConfig_ApprovedOrigins, v.ApprovedOrigins)
+	}
 }
 func (v *ExternalUrlConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExternalUrlConfig, func(s *smithy.Schema) error {
@@ -760,8 +766,12 @@ func (v *FileConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FileConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldsMap(s, schemas.FileConfiguration_Filters, v.Filters)
-	serializeFolderList(s, schemas.FileConfiguration_Folders, v.Folders)
+	if v.Filters != nil {
+		serializeFieldsMap(s, schemas.FileConfiguration_Filters, v.Filters)
+	}
+	if v.Folders != nil {
+		serializeFolderList(s, schemas.FileConfiguration_Folders, v.Folders)
+	}
 }
 func (v *FileConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FileConfiguration, func(s *smithy.Schema) error {
@@ -794,8 +804,12 @@ func (v *IframeConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IframeConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIframePermissionList(s, schemas.IframeConfig_Allow, v.Allow)
-	serializeIframePermissionList(s, schemas.IframeConfig_Sandbox, v.Sandbox)
+	if v.Allow != nil {
+		serializeIframePermissionList(s, schemas.IframeConfig_Allow, v.Allow)
+	}
+	if v.Sandbox != nil {
+		serializeIframePermissionList(s, schemas.IframeConfig_Sandbox, v.Sandbox)
+	}
 }
 func (v *IframeConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IframeConfig, func(s *smithy.Schema) error {

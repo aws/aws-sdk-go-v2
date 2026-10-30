@@ -89,7 +89,9 @@ func (v *ListTrustStoreCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTrustStoreCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateSummaryList(s, schemas.ListTrustStoreCertificatesResponse_certificateList, v.CertificateList)
+	if v.CertificateList != nil {
+		serializeCertificateSummaryList(s, schemas.ListTrustStoreCertificatesResponse_certificateList, v.CertificateList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrustStoreCertificatesResponse_nextToken, *v.NextToken)
 	}

@@ -94,11 +94,15 @@ func (v *GetAutomationRuleV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAutomationRuleV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationRulesActionListV2(s, schemas.GetAutomationRuleV2Response_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeAutomationRulesActionListV2(s, schemas.GetAutomationRuleV2Response_Actions, v.Actions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetAutomationRuleV2Response_CreatedAt, *v.CreatedAt)
 	}
-	serializeCriteria(s, schemas.GetAutomationRuleV2Response_Criteria, v.Criteria)
+	if v.Criteria != nil {
+		serializeCriteria(s, schemas.GetAutomationRuleV2Response_Criteria, v.Criteria)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetAutomationRuleV2Response_Description, *v.Description)
 	}

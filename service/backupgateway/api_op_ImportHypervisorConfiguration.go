@@ -73,7 +73,9 @@ func (v *ImportHypervisorConfigurationInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Password != nil {
 		s.WriteString(schemas.ImportHypervisorConfigurationInput_Password, *v.Password)
 	}
-	serializeTags(s, schemas.ImportHypervisorConfigurationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ImportHypervisorConfigurationInput_Tags, v.Tags)
+	}
 	if v.Username != nil {
 		s.WriteString(schemas.ImportHypervisorConfigurationInput_Username, *v.Username)
 	}

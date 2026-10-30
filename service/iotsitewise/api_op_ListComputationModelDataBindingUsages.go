@@ -95,7 +95,9 @@ func (v *ListComputationModelDataBindingUsagesOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *ListComputationModelDataBindingUsagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputationModelDataBindingUsageSummaries(s, schemas.ListComputationModelDataBindingUsagesResponse_dataBindingUsageSummaries, v.DataBindingUsageSummaries)
+	if v.DataBindingUsageSummaries != nil {
+		serializeComputationModelDataBindingUsageSummaries(s, schemas.ListComputationModelDataBindingUsagesResponse_dataBindingUsageSummaries, v.DataBindingUsageSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListComputationModelDataBindingUsagesResponse_nextToken, *v.NextToken)
 	}

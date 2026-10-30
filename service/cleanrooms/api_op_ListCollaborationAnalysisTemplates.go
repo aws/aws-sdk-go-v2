@@ -103,7 +103,9 @@ func (v *ListCollaborationAnalysisTemplatesOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListCollaborationAnalysisTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollaborationAnalysisTemplateSummaryList(s, schemas.ListCollaborationAnalysisTemplatesOutput_collaborationAnalysisTemplateSummaries, v.CollaborationAnalysisTemplateSummaries)
+	if v.CollaborationAnalysisTemplateSummaries != nil {
+		serializeCollaborationAnalysisTemplateSummaryList(s, schemas.ListCollaborationAnalysisTemplatesOutput_collaborationAnalysisTemplateSummaries, v.CollaborationAnalysisTemplateSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollaborationAnalysisTemplatesOutput_nextToken, *v.NextToken)
 	}

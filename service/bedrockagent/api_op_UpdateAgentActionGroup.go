@@ -127,7 +127,9 @@ func (v *UpdateAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionGroupExecutor(s, schemas.UpdateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	if v.ActionGroupExecutor != nil {
+		serializeActionGroupExecutor(s, schemas.UpdateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	}
 	if v.ActionGroupId != nil {
 		s.WriteString(schemas.UpdateAgentActionGroupRequest_actionGroupId, *v.ActionGroupId)
 	}
@@ -143,15 +145,21 @@ func (v *UpdateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AgentVersion != nil {
 		s.WriteString(schemas.UpdateAgentActionGroupRequest_agentVersion, *v.AgentVersion)
 	}
-	serializeAPISchema(s, schemas.UpdateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	if v.ApiSchema != nil {
+		serializeAPISchema(s, schemas.UpdateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAgentActionGroupRequest_description, *v.Description)
 	}
-	serializeFunctionSchema(s, schemas.UpdateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	if v.FunctionSchema != nil {
+		serializeFunctionSchema(s, schemas.UpdateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	}
 	if v.ParentActionGroupSignature != "" {
 		s.WriteString(schemas.UpdateAgentActionGroupRequest_parentActionGroupSignature, string(v.ParentActionGroupSignature))
 	}
-	serializeActionGroupSignatureParams(s, schemas.UpdateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+	if v.ParentActionGroupSignatureParams != nil {
+		serializeActionGroupSignatureParams(s, schemas.UpdateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+	}
 }
 
 type UpdateAgentActionGroupOutput struct {

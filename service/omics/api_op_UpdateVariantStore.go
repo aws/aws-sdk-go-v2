@@ -125,7 +125,9 @@ func (v *UpdateVariantStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateVariantStoreResponse_name, *v.Name)
 	}
-	serializeReferenceItem(s, schemas.UpdateVariantStoreResponse_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.UpdateVariantStoreResponse_reference, v.Reference)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateVariantStoreResponse_status, string(v.Status))
 	}

@@ -72,14 +72,20 @@ func (v *CreateApprovalPolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateApprovalPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGovernedActionList(s, schemas.CreateApprovalPolicyRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeGovernedActionList(s, schemas.CreateApprovalPolicyRequest_Actions, v.Actions)
+	}
 	if v.ApplicableTo != nil {
 		s.WriteStruct(schemas.CreateApprovalPolicyRequest_ApplicableTo)
 		v.ApplicableTo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeApprovalGroupList(s, schemas.CreateApprovalPolicyRequest_ApprovalGroups, v.ApprovalGroups)
-	serializeAssetTypeList(s, schemas.CreateApprovalPolicyRequest_AssetTypes, v.AssetTypes)
+	if v.ApprovalGroups != nil {
+		serializeApprovalGroupList(s, schemas.CreateApprovalPolicyRequest_ApprovalGroups, v.ApprovalGroups)
+	}
+	if v.AssetTypes != nil {
+		serializeAssetTypeList(s, schemas.CreateApprovalPolicyRequest_AssetTypes, v.AssetTypes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateApprovalPolicyRequest_Description, *v.Description)
 	}

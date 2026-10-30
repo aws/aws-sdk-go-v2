@@ -77,7 +77,9 @@ func (v *ListPackagingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPackagingGroupsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfPackagingGroup(s, schemas.ListPackagingGroupsResponse_PackagingGroups, v.PackagingGroups)
+	if v.PackagingGroups != nil {
+		serialize__listOfPackagingGroup(s, schemas.ListPackagingGroupsResponse_PackagingGroups, v.PackagingGroups)
+	}
 }
 func (v *ListPackagingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPackagingGroupsResponse, func(s *smithy.Schema) error {

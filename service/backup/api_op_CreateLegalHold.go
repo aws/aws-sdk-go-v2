@@ -78,7 +78,9 @@ func (v *CreateLegalHoldInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RecoveryPointSelection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreateLegalHoldInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLegalHoldInput_Tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreateLegalHoldInput_Title, *v.Title)
 	}

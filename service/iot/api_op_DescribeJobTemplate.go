@@ -127,7 +127,9 @@ func (v *DescribeJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.DescribeJobTemplateResponse_description, *v.Description)
 	}
-	serializeDestinationPackageVersions(s, schemas.DescribeJobTemplateResponse_destinationPackageVersions, v.DestinationPackageVersions)
+	if v.DestinationPackageVersions != nil {
+		serializeDestinationPackageVersions(s, schemas.DescribeJobTemplateResponse_destinationPackageVersions, v.DestinationPackageVersions)
+	}
 	if v.Document != nil {
 		s.WriteString(schemas.DescribeJobTemplateResponse_document, *v.Document)
 	}
@@ -150,7 +152,9 @@ func (v *DescribeJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobTemplateId != nil {
 		s.WriteString(schemas.DescribeJobTemplateResponse_jobTemplateId, *v.JobTemplateId)
 	}
-	serializeMaintenanceWindows(s, schemas.DescribeJobTemplateResponse_maintenanceWindows, v.MaintenanceWindows)
+	if v.MaintenanceWindows != nil {
+		serializeMaintenanceWindows(s, schemas.DescribeJobTemplateResponse_maintenanceWindows, v.MaintenanceWindows)
+	}
 	if v.PresignedUrlConfig != nil {
 		s.WriteStruct(schemas.DescribeJobTemplateResponse_presignedUrlConfig)
 		v.PresignedUrlConfig.SerializeMembers(s)

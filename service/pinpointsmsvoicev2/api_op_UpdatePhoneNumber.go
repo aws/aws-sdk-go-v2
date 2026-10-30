@@ -204,7 +204,9 @@ func (v *UpdatePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.UpdatePhoneNumberResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}
-	serializeNumberCapabilityList(s, schemas.UpdatePhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	if v.NumberCapabilities != nil {
+		serializeNumberCapabilityList(s, schemas.UpdatePhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	}
 	if v.NumberType != "" {
 		s.WriteString(schemas.UpdatePhoneNumberResult_NumberType, string(v.NumberType))
 	}

@@ -110,12 +110,18 @@ func (v *ValidatePipelineDefinitionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidatePipelineDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterObjectList(s, schemas.ValidatePipelineDefinitionInput_parameterObjects, v.ParameterObjects)
-	serializeParameterValueList(s, schemas.ValidatePipelineDefinitionInput_parameterValues, v.ParameterValues)
+	if v.ParameterObjects != nil {
+		serializeParameterObjectList(s, schemas.ValidatePipelineDefinitionInput_parameterObjects, v.ParameterObjects)
+	}
+	if v.ParameterValues != nil {
+		serializeParameterValueList(s, schemas.ValidatePipelineDefinitionInput_parameterValues, v.ParameterValues)
+	}
 	if v.PipelineId != nil {
 		s.WriteString(schemas.ValidatePipelineDefinitionInput_pipelineId, *v.PipelineId)
 	}
-	serializePipelineObjectList(s, schemas.ValidatePipelineDefinitionInput_pipelineObjects, v.PipelineObjects)
+	if v.PipelineObjects != nil {
+		serializePipelineObjectList(s, schemas.ValidatePipelineDefinitionInput_pipelineObjects, v.PipelineObjects)
+	}
 }
 
 // Contains the output of ValidatePipelineDefinition.
@@ -146,8 +152,12 @@ func (v *ValidatePipelineDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
 
 func (v *ValidatePipelineDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	s.WriteBool(schemas.ValidatePipelineDefinitionOutput_errored, v.Errored)
-	serializeValidationErrors(s, schemas.ValidatePipelineDefinitionOutput_validationErrors, v.ValidationErrors)
-	serializeValidationWarnings(s, schemas.ValidatePipelineDefinitionOutput_validationWarnings, v.ValidationWarnings)
+	if v.ValidationErrors != nil {
+		serializeValidationErrors(s, schemas.ValidatePipelineDefinitionOutput_validationErrors, v.ValidationErrors)
+	}
+	if v.ValidationWarnings != nil {
+		serializeValidationWarnings(s, schemas.ValidatePipelineDefinitionOutput_validationWarnings, v.ValidationWarnings)
+	}
 }
 func (v *ValidatePipelineDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidatePipelineDefinitionOutput, func(s *smithy.Schema) error {

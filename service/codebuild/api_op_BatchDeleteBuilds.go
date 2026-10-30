@@ -43,7 +43,9 @@ func (v *BatchDeleteBuildsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteBuildsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildIds(s, schemas.BatchDeleteBuildsInput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeBuildIds(s, schemas.BatchDeleteBuildsInput_ids, v.Ids)
+	}
 }
 
 type BatchDeleteBuildsOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchDeleteBuildsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBuildIds(s, schemas.BatchDeleteBuildsOutput_buildsDeleted, v.BuildsDeleted)
-	serializeBuildsNotDeleted(s, schemas.BatchDeleteBuildsOutput_buildsNotDeleted, v.BuildsNotDeleted)
+	if v.BuildsDeleted != nil {
+		serializeBuildIds(s, schemas.BatchDeleteBuildsOutput_buildsDeleted, v.BuildsDeleted)
+	}
+	if v.BuildsNotDeleted != nil {
+		serializeBuildsNotDeleted(s, schemas.BatchDeleteBuildsOutput_buildsNotDeleted, v.BuildsNotDeleted)
+	}
 }
 func (v *BatchDeleteBuildsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteBuildsOutput, func(s *smithy.Schema) error {

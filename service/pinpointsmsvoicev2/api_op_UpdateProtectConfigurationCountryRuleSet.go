@@ -65,7 +65,9 @@ func (v *UpdateProtectConfigurationCountryRuleSetInput) Serialize(s smithy.Shape
 }
 
 func (v *UpdateProtectConfigurationCountryRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectConfigurationCountryRuleSet(s, schemas.UpdateProtectConfigurationCountryRuleSetRequest_CountryRuleSetUpdates, v.CountryRuleSetUpdates)
+	if v.CountryRuleSetUpdates != nil {
+		serializeProtectConfigurationCountryRuleSet(s, schemas.UpdateProtectConfigurationCountryRuleSetRequest_CountryRuleSetUpdates, v.CountryRuleSetUpdates)
+	}
 	if v.NumberCapability != "" {
 		s.WriteString(schemas.UpdateProtectConfigurationCountryRuleSetRequest_NumberCapability, string(v.NumberCapability))
 	}
@@ -110,7 +112,9 @@ func (v *UpdateProtectConfigurationCountryRuleSetOutput) Serialize(s smithy.Shap
 }
 
 func (v *UpdateProtectConfigurationCountryRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectConfigurationCountryRuleSet(s, schemas.UpdateProtectConfigurationCountryRuleSetResult_CountryRuleSet, v.CountryRuleSet)
+	if v.CountryRuleSet != nil {
+		serializeProtectConfigurationCountryRuleSet(s, schemas.UpdateProtectConfigurationCountryRuleSetResult_CountryRuleSet, v.CountryRuleSet)
+	}
 	if v.NumberCapability != "" {
 		s.WriteString(schemas.UpdateProtectConfigurationCountryRuleSetResult_NumberCapability, string(v.NumberCapability))
 	}

@@ -103,7 +103,9 @@ func (v *DeleteRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteRelationalDatabaseResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteRelationalDatabaseResult_operations, v.Operations)
+	}
 }
 func (v *DeleteRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteRelationalDatabaseResult, func(s *smithy.Schema) error {

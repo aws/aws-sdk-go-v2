@@ -165,7 +165,9 @@ func (v *ForecastGeofenceEventsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DistanceUnit != "" {
 		s.WriteString(schemas.ForecastGeofenceEventsResponse_DistanceUnit, string(v.DistanceUnit))
 	}
-	serializeForecastedEventsList(s, schemas.ForecastGeofenceEventsResponse_ForecastedEvents, v.ForecastedEvents)
+	if v.ForecastedEvents != nil {
+		serializeForecastedEventsList(s, schemas.ForecastGeofenceEventsResponse_ForecastedEvents, v.ForecastedEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ForecastGeofenceEventsResponse_NextToken, *v.NextToken)
 	}

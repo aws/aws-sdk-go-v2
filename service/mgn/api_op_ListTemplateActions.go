@@ -110,7 +110,9 @@ func (v *ListTemplateActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTemplateActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTemplateActionDocuments(s, schemas.ListTemplateActionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeTemplateActionDocuments(s, schemas.ListTemplateActionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplateActionsResponse_nextToken, *v.NextToken)
 	}

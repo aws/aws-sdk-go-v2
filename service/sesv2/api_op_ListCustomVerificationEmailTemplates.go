@@ -94,7 +94,9 @@ func (v *ListCustomVerificationEmailTemplatesOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListCustomVerificationEmailTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomVerificationEmailTemplatesList(s, schemas.ListCustomVerificationEmailTemplatesResponse_CustomVerificationEmailTemplates, v.CustomVerificationEmailTemplates)
+	if v.CustomVerificationEmailTemplates != nil {
+		serializeCustomVerificationEmailTemplatesList(s, schemas.ListCustomVerificationEmailTemplatesResponse_CustomVerificationEmailTemplates, v.CustomVerificationEmailTemplates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomVerificationEmailTemplatesResponse_NextToken, *v.NextToken)
 	}

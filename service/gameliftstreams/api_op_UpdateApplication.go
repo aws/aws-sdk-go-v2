@@ -95,7 +95,9 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationLogOutputUri != nil {
 		s.WriteString(schemas.UpdateApplicationInput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
 	}
-	serializeFilePaths(s, schemas.UpdateApplicationInput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationLogPaths != nil {
+		serializeFilePaths(s, schemas.UpdateApplicationInput_ApplicationLogPaths, v.ApplicationLogPaths)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateApplicationInput_Description, *v.Description)
 	}
@@ -222,14 +224,18 @@ func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationLogOutputUri != nil {
 		s.WriteString(schemas.UpdateApplicationOutput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
 	}
-	serializeFilePaths(s, schemas.UpdateApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationLogPaths != nil {
+		serializeFilePaths(s, schemas.UpdateApplicationOutput_ApplicationLogPaths, v.ApplicationLogPaths)
+	}
 	if v.ApplicationSourceUri != nil {
 		s.WriteString(schemas.UpdateApplicationOutput_ApplicationSourceUri, *v.ApplicationSourceUri)
 	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateApplicationOutput_Arn, *v.Arn)
 	}
-	serializeArnList(s, schemas.UpdateApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.AssociatedStreamGroups != nil {
+		serializeArnList(s, schemas.UpdateApplicationOutput_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateApplicationOutput_CreatedAt, *v.CreatedAt)
 	}
@@ -245,7 +251,9 @@ func (v *UpdateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.UpdateApplicationOutput_LastUpdatedAt, *v.LastUpdatedAt)
 	}
-	serializeReplicationStatuses(s, schemas.UpdateApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	if v.ReplicationStatuses != nil {
+		serializeReplicationStatuses(s, schemas.UpdateApplicationOutput_ReplicationStatuses, v.ReplicationStatuses)
+	}
 	if v.RuntimeEnvironment != nil {
 		s.WriteStruct(schemas.UpdateApplicationOutput_RuntimeEnvironment)
 		v.RuntimeEnvironment.SerializeMembers(s)

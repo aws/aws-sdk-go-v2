@@ -104,9 +104,15 @@ func (v *CreateMigrationProjectInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SchemaConversionApplicationAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataProviderDescriptorDefinitionList(s, schemas.CreateMigrationProjectMessage_SourceDataProviderDescriptors, v.SourceDataProviderDescriptors)
-	serializeTagList(s, schemas.CreateMigrationProjectMessage_Tags, v.Tags)
-	serializeDataProviderDescriptorDefinitionList(s, schemas.CreateMigrationProjectMessage_TargetDataProviderDescriptors, v.TargetDataProviderDescriptors)
+	if v.SourceDataProviderDescriptors != nil {
+		serializeDataProviderDescriptorDefinitionList(s, schemas.CreateMigrationProjectMessage_SourceDataProviderDescriptors, v.SourceDataProviderDescriptors)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMigrationProjectMessage_Tags, v.Tags)
+	}
+	if v.TargetDataProviderDescriptors != nil {
+		serializeDataProviderDescriptorDefinitionList(s, schemas.CreateMigrationProjectMessage_TargetDataProviderDescriptors, v.TargetDataProviderDescriptors)
+	}
 	if v.TransformationRules != nil {
 		s.WriteString(schemas.CreateMigrationProjectMessage_TransformationRules, *v.TransformationRules)
 	}

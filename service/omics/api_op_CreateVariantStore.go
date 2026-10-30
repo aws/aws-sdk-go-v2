@@ -70,13 +70,17 @@ func (v *CreateVariantStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVariantStoreRequest_name, *v.Name)
 	}
-	serializeReferenceItem(s, schemas.CreateVariantStoreRequest_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.CreateVariantStoreRequest_reference, v.Reference)
+	}
 	if v.SseConfig != nil {
 		s.WriteStruct(schemas.CreateVariantStoreRequest_sseConfig)
 		v.SseConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateVariantStoreRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateVariantStoreRequest_tags, v.Tags)
+	}
 }
 
 type CreateVariantStoreOutput struct {
@@ -126,7 +130,9 @@ func (v *CreateVariantStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVariantStoreResponse_name, *v.Name)
 	}
-	serializeReferenceItem(s, schemas.CreateVariantStoreResponse_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.CreateVariantStoreResponse_reference, v.Reference)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateVariantStoreResponse_status, string(v.Status))
 	}

@@ -32,7 +32,9 @@ func (v *AccountRecoverySettingType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccountRecoverySettingType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryMechanismsType(s, schemas.AccountRecoverySettingType_RecoveryMechanisms, v.RecoveryMechanisms)
+	if v.RecoveryMechanisms != nil {
+		serializeRecoveryMechanismsType(s, schemas.AccountRecoverySettingType_RecoveryMechanisms, v.RecoveryMechanisms)
+	}
 }
 func (v *AccountRecoverySettingType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountRecoverySettingType, func(s *smithy.Schema) error {
@@ -749,7 +751,9 @@ func (v *AuthEventType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthEventType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChallengeResponseListType(s, schemas.AuthEventType_ChallengeResponses, v.ChallengeResponses)
+	if v.ChallengeResponses != nil {
+		serializeChallengeResponseListType(s, schemas.AuthEventType_ChallengeResponses, v.ChallengeResponses)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.AuthEventType_CreationDate, *v.CreationDate)
 	}
@@ -1238,7 +1242,9 @@ func (v *CompromisedCredentialsRiskConfigurationType) SerializeMembers(s smithy.
 		v.Actions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventFiltersType(s, schemas.CompromisedCredentialsRiskConfigurationType_EventFilter, v.EventFilter)
+	if v.EventFilter != nil {
+		serializeEventFiltersType(s, schemas.CompromisedCredentialsRiskConfigurationType_EventFilter, v.EventFilter)
+	}
 }
 func (v *CompromisedCredentialsRiskConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompromisedCredentialsRiskConfigurationType, func(s *smithy.Schema) error {
@@ -1296,7 +1302,9 @@ func (v *ContextDataType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncodedData != nil {
 		s.WriteString(schemas.ContextDataType_EncodedData, *v.EncodedData)
 	}
-	serializeHttpHeaderList(s, schemas.ContextDataType_HttpHeaders, v.HttpHeaders)
+	if v.HttpHeaders != nil {
+		serializeHttpHeaderList(s, schemas.ContextDataType_HttpHeaders, v.HttpHeaders)
+	}
 	if v.IpAddress != nil {
 		s.WriteString(schemas.ContextDataType_IpAddress, *v.IpAddress)
 	}
@@ -1634,7 +1642,9 @@ func (v *DeviceType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeviceType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeListType(s, schemas.DeviceType_DeviceAttributes, v.DeviceAttributes)
+	if v.DeviceAttributes != nil {
+		serializeAttributeListType(s, schemas.DeviceType_DeviceAttributes, v.DeviceAttributes)
+	}
 	if v.DeviceCreateDate != nil {
 		s.WriteTime(schemas.DeviceType_DeviceCreateDate, *v.DeviceCreateDate)
 	}
@@ -2748,16 +2758,24 @@ func (v *IdentityProviderType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentityProviderType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcrMappingType(s, schemas.IdentityProviderType_AcrMapping, v.AcrMapping)
-	serializeAttributeMappingType(s, schemas.IdentityProviderType_AttributeMapping, v.AttributeMapping)
+	if v.AcrMapping != nil {
+		serializeAcrMappingType(s, schemas.IdentityProviderType_AcrMapping, v.AcrMapping)
+	}
+	if v.AttributeMapping != nil {
+		serializeAttributeMappingType(s, schemas.IdentityProviderType_AttributeMapping, v.AttributeMapping)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.IdentityProviderType_CreationDate, *v.CreationDate)
 	}
-	serializeIdpIdentifiersListType(s, schemas.IdentityProviderType_IdpIdentifiers, v.IdpIdentifiers)
+	if v.IdpIdentifiers != nil {
+		serializeIdpIdentifiersListType(s, schemas.IdentityProviderType_IdpIdentifiers, v.IdpIdentifiers)
+	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.IdentityProviderType_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeProviderDetailsType(s, schemas.IdentityProviderType_ProviderDetails, v.ProviderDetails)
+	if v.ProviderDetails != nil {
+		serializeProviderDetailsType(s, schemas.IdentityProviderType_ProviderDetails, v.ProviderDetails)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.IdentityProviderType_ProviderName, *v.ProviderName)
 	}
@@ -3200,7 +3218,9 @@ func (v *LimitDefinitionType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LimitDefinitionType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringToStringMapType(s, schemas.LimitDefinitionType_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeStringToStringMapType(s, schemas.LimitDefinitionType_Attributes, v.Attributes)
+	}
 	if v.LimitClass != "" {
 		s.WriteString(schemas.LimitDefinitionType_LimitClass, string(v.LimitClass))
 	}
@@ -3402,7 +3422,9 @@ func (v *LogDeliveryConfigurationType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogDeliveryConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogConfigurationListType(s, schemas.LogDeliveryConfigurationType_LogConfigurations, v.LogConfigurations)
+	if v.LogConfigurations != nil {
+		serializeLogConfigurationListType(s, schemas.LogDeliveryConfigurationType_LogConfigurations, v.LogConfigurations)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.LogDeliveryConfigurationType_UserPoolId, *v.UserPoolId)
 	}
@@ -3479,7 +3501,9 @@ func (v *ManagedLoginBrandingType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedLoginBrandingType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetListType(s, schemas.ManagedLoginBrandingType_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetListType(s, schemas.ManagedLoginBrandingType_Assets, v.Assets)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.ManagedLoginBrandingType_CreationDate, *v.CreationDate)
 	}
@@ -4336,7 +4360,9 @@ func (v *ResourceServerType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ResourceServerType_Name, *v.Name)
 	}
-	serializeResourceServerScopeListType(s, schemas.ResourceServerType_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializeResourceServerScopeListType(s, schemas.ResourceServerType_Scopes, v.Scopes)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.ResourceServerType_UserPoolId, *v.UserPoolId)
 	}
@@ -4473,8 +4499,12 @@ func (v *RiskExceptionConfigurationType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RiskExceptionConfigurationType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockedIPRangeListType(s, schemas.RiskExceptionConfigurationType_BlockedIPRangeList, v.BlockedIPRangeList)
-	serializeSkippedIPRangeListType(s, schemas.RiskExceptionConfigurationType_SkippedIPRangeList, v.SkippedIPRangeList)
+	if v.BlockedIPRangeList != nil {
+		serializeBlockedIPRangeListType(s, schemas.RiskExceptionConfigurationType_BlockedIPRangeList, v.BlockedIPRangeList)
+	}
+	if v.SkippedIPRangeList != nil {
+		serializeSkippedIPRangeListType(s, schemas.RiskExceptionConfigurationType_SkippedIPRangeList, v.SkippedIPRangeList)
+	}
 }
 func (v *RiskExceptionConfigurationType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RiskExceptionConfigurationType, func(s *smithy.Schema) error {
@@ -4710,7 +4740,9 @@ func (v *SignInPolicyType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SignInPolicyType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedFirstAuthFactorsListType(s, schemas.SignInPolicyType_AllowedFirstAuthFactors, v.AllowedFirstAuthFactors)
+	if v.AllowedFirstAuthFactors != nil {
+		serializeAllowedFirstAuthFactorsListType(s, schemas.SignInPolicyType_AllowedFirstAuthFactors, v.AllowedFirstAuthFactors)
+	}
 }
 func (v *SignInPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SignInPolicyType, func(s *smithy.Schema) error {
@@ -5196,7 +5228,9 @@ func (v *TermsType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.TermsType_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeLinksType(s, schemas.TermsType_Links, v.Links)
+	if v.Links != nil {
+		serializeLinksType(s, schemas.TermsType_Links, v.Links)
+	}
 	if v.TermsId != nil {
 		s.WriteString(schemas.TermsType_TermsId, *v.TermsId)
 	}
@@ -5446,7 +5480,9 @@ func (v *UserAttributeUpdateSettingsType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserAttributeUpdateSettingsType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributesRequireVerificationBeforeUpdateType(s, schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate, v.AttributesRequireVerificationBeforeUpdate)
+	if v.AttributesRequireVerificationBeforeUpdate != nil {
+		serializeAttributesRequireVerificationBeforeUpdateType(s, schemas.UserAttributeUpdateSettingsType_AttributesRequireVerificationBeforeUpdate, v.AttributesRequireVerificationBeforeUpdate)
+	}
 }
 func (v *UserAttributeUpdateSettingsType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserAttributeUpdateSettingsType, func(s *smithy.Schema) error {
@@ -6174,11 +6210,15 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessTokenValidity != nil {
 		s.WriteInt32(schemas.UserPoolClientType_AccessTokenValidity, *v.AccessTokenValidity)
 	}
-	serializeOAuthFlowsType(s, schemas.UserPoolClientType_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	if v.AllowedOAuthFlows != nil {
+		serializeOAuthFlowsType(s, schemas.UserPoolClientType_AllowedOAuthFlows, v.AllowedOAuthFlows)
+	}
 	if v.AllowedOAuthFlowsUserPoolClient != nil {
 		s.WriteBool(schemas.UserPoolClientType_AllowedOAuthFlowsUserPoolClient, *v.AllowedOAuthFlowsUserPoolClient)
 	}
-	serializeScopeListType(s, schemas.UserPoolClientType_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	if v.AllowedOAuthScopes != nil {
+		serializeScopeListType(s, schemas.UserPoolClientType_AllowedOAuthScopes, v.AllowedOAuthScopes)
+	}
 	if v.AnalyticsConfiguration != nil {
 		s.WriteStruct(schemas.UserPoolClientType_AnalyticsConfiguration)
 		v.AnalyticsConfiguration.SerializeMembers(s)
@@ -6187,7 +6227,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthSessionValidity != nil {
 		s.WriteInt32(schemas.UserPoolClientType_AuthSessionValidity, *v.AuthSessionValidity)
 	}
-	serializeCallbackURLsListType(s, schemas.UserPoolClientType_CallbackURLs, v.CallbackURLs)
+	if v.CallbackURLs != nil {
+		serializeCallbackURLsListType(s, schemas.UserPoolClientType_CallbackURLs, v.CallbackURLs)
+	}
 	if v.ClientId != nil {
 		s.WriteString(schemas.UserPoolClientType_ClientId, *v.ClientId)
 	}
@@ -6209,18 +6251,24 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableTokenRevocation != nil {
 		s.WriteBool(schemas.UserPoolClientType_EnableTokenRevocation, *v.EnableTokenRevocation)
 	}
-	serializeExplicitAuthFlowsListType(s, schemas.UserPoolClientType_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	if v.ExplicitAuthFlows != nil {
+		serializeExplicitAuthFlowsListType(s, schemas.UserPoolClientType_ExplicitAuthFlows, v.ExplicitAuthFlows)
+	}
 	if v.IdTokenValidity != nil {
 		s.WriteInt32(schemas.UserPoolClientType_IdTokenValidity, *v.IdTokenValidity)
 	}
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.UserPoolClientType_LastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeLogoutURLsListType(s, schemas.UserPoolClientType_LogoutURLs, v.LogoutURLs)
+	if v.LogoutURLs != nil {
+		serializeLogoutURLsListType(s, schemas.UserPoolClientType_LogoutURLs, v.LogoutURLs)
+	}
 	if v.PreventUserExistenceErrors != "" {
 		s.WriteString(schemas.UserPoolClientType_PreventUserExistenceErrors, string(v.PreventUserExistenceErrors))
 	}
-	serializeClientPermissionListType(s, schemas.UserPoolClientType_ReadAttributes, v.ReadAttributes)
+	if v.ReadAttributes != nil {
+		serializeClientPermissionListType(s, schemas.UserPoolClientType_ReadAttributes, v.ReadAttributes)
+	}
 	if v.RefreshTokenRotation != nil {
 		s.WriteStruct(schemas.UserPoolClientType_RefreshTokenRotation)
 		v.RefreshTokenRotation.SerializeMembers(s)
@@ -6229,7 +6277,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RefreshTokenValidity != 0 {
 		s.WriteInt32(schemas.UserPoolClientType_RefreshTokenValidity, v.RefreshTokenValidity)
 	}
-	serializeSupportedIdentityProvidersListType(s, schemas.UserPoolClientType_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	if v.SupportedIdentityProviders != nil {
+		serializeSupportedIdentityProvidersListType(s, schemas.UserPoolClientType_SupportedIdentityProviders, v.SupportedIdentityProviders)
+	}
 	if v.TokenValidityUnits != nil {
 		s.WriteStruct(schemas.UserPoolClientType_TokenValidityUnits)
 		v.TokenValidityUnits.SerializeMembers(s)
@@ -6238,7 +6288,9 @@ func (v *UserPoolClientType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.UserPoolClientType_UserPoolId, *v.UserPoolId)
 	}
-	serializeClientPermissionListType(s, schemas.UserPoolClientType_WriteAttributes, v.WriteAttributes)
+	if v.WriteAttributes != nil {
+		serializeClientPermissionListType(s, schemas.UserPoolClientType_WriteAttributes, v.WriteAttributes)
+	}
 }
 func (v *UserPoolClientType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UserPoolClientType, func(s *smithy.Schema) error {
@@ -6380,7 +6432,9 @@ func (v *UserPoolDescriptionType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UserPoolDescriptionType_Name, *v.Name)
 	}
-	serializeReplicaRegionsType(s, schemas.UserPoolDescriptionType_ReplicaRegions, v.ReplicaRegions)
+	if v.ReplicaRegions != nil {
+		serializeReplicaRegionsType(s, schemas.UserPoolDescriptionType_ReplicaRegions, v.ReplicaRegions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UserPoolDescriptionType_Status, string(v.Status))
 	}
@@ -6785,17 +6839,23 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AccountRecoverySetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAcrConfigurationType(s, schemas.UserPoolType_AcrConfiguration, v.AcrConfiguration)
+	if v.AcrConfiguration != nil {
+		serializeAcrConfigurationType(s, schemas.UserPoolType_AcrConfiguration, v.AcrConfiguration)
+	}
 	if v.AdminCreateUserConfig != nil {
 		s.WriteStruct(schemas.UserPoolType_AdminCreateUserConfig)
 		v.AdminCreateUserConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAliasAttributesListType(s, schemas.UserPoolType_AliasAttributes, v.AliasAttributes)
+	if v.AliasAttributes != nil {
+		serializeAliasAttributesListType(s, schemas.UserPoolType_AliasAttributes, v.AliasAttributes)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UserPoolType_Arn, *v.Arn)
 	}
-	serializeVerifiedAttributesListType(s, schemas.UserPoolType_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.AutoVerifiedAttributes != nil {
+		serializeVerifiedAttributesListType(s, schemas.UserPoolType_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.UserPoolType_CreationDate, *v.CreationDate)
 	}
@@ -6862,7 +6922,9 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Policies.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSchemaAttributesListType(s, schemas.UserPoolType_SchemaAttributes, v.SchemaAttributes)
+	if v.SchemaAttributes != nil {
+		serializeSchemaAttributesListType(s, schemas.UserPoolType_SchemaAttributes, v.SchemaAttributes)
+	}
 	if v.SmsAuthenticationMessage != nil {
 		s.WriteString(schemas.UserPoolType_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
 	}
@@ -6890,11 +6952,15 @@ func (v *UserPoolType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.UserPoolAddOns.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserPoolTagsType(s, schemas.UserPoolType_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTags != nil {
+		serializeUserPoolTagsType(s, schemas.UserPoolType_UserPoolTags, v.UserPoolTags)
+	}
 	if v.UserPoolTier != "" {
 		s.WriteString(schemas.UserPoolType_UserPoolTier, string(v.UserPoolTier))
 	}
-	serializeUsernameAttributesListType(s, schemas.UserPoolType_UsernameAttributes, v.UsernameAttributes)
+	if v.UsernameAttributes != nil {
+		serializeUsernameAttributesListType(s, schemas.UserPoolType_UsernameAttributes, v.UsernameAttributes)
+	}
 	if v.UsernameConfiguration != nil {
 		s.WriteStruct(schemas.UserPoolType_UsernameConfiguration)
 		v.UsernameConfiguration.SerializeMembers(s)
@@ -7087,11 +7153,15 @@ func (v *UserType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UserType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeListType(s, schemas.UserType_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeListType(s, schemas.UserType_Attributes, v.Attributes)
+	}
 	if v.Enabled != false {
 		s.WriteBool(schemas.UserType_Enabled, v.Enabled)
 	}
-	serializeMFAOptionListType(s, schemas.UserType_MFAOptions, v.MFAOptions)
+	if v.MFAOptions != nil {
+		serializeMFAOptionListType(s, schemas.UserType_MFAOptions, v.MFAOptions)
+	}
 	if v.UserCreateDate != nil {
 		s.WriteTime(schemas.UserType_UserCreateDate, *v.UserCreateDate)
 	}
@@ -7378,7 +7448,9 @@ func (v *WebAuthnCredentialDescription) SerializeMembers(s smithy.ShapeSerialize
 	if v.AuthenticatorAttachment != nil {
 		s.WriteString(schemas.WebAuthnCredentialDescription_AuthenticatorAttachment, *v.AuthenticatorAttachment)
 	}
-	serializeWebAuthnAuthenticatorTransportsList(s, schemas.WebAuthnCredentialDescription_AuthenticatorTransports, v.AuthenticatorTransports)
+	if v.AuthenticatorTransports != nil {
+		serializeWebAuthnAuthenticatorTransportsList(s, schemas.WebAuthnCredentialDescription_AuthenticatorTransports, v.AuthenticatorTransports)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.WebAuthnCredentialDescription_CreatedAt, *v.CreatedAt)
 	}

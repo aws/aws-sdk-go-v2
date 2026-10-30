@@ -232,7 +232,9 @@ func (v *CodeReview) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeReview) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisTypes(s, schemas.CodeReview_AnalysisTypes, v.AnalysisTypes)
+	if v.AnalysisTypes != nil {
+		serializeAnalysisTypes(s, schemas.CodeReview_AnalysisTypes, v.AnalysisTypes)
+	}
 	if v.AssociationArn != nil {
 		s.WriteString(schemas.CodeReview_AssociationArn, *v.AssociationArn)
 	}
@@ -551,7 +553,9 @@ func (v *CodeReviewType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CodeReviewType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisTypes(s, schemas.CodeReviewType_AnalysisTypes, v.AnalysisTypes)
+	if v.AnalysisTypes != nil {
+		serializeAnalysisTypes(s, schemas.CodeReviewType_AnalysisTypes, v.AnalysisTypes)
+	}
 	if v.RepositoryAnalysis != nil {
 		s.WriteStruct(schemas.CodeReviewType_RepositoryAnalysis)
 		v.RepositoryAnalysis.SerializeMembers(s)
@@ -899,7 +903,9 @@ func (v *RecommendationFeedback) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimeStamp != nil {
 		s.WriteTime(schemas.RecommendationFeedback_LastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
 	}
-	serializeReactions(s, schemas.RecommendationFeedback_Reactions, v.Reactions)
+	if v.Reactions != nil {
+		serializeReactions(s, schemas.RecommendationFeedback_Reactions, v.Reactions)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.RecommendationFeedback_RecommendationId, *v.RecommendationId)
 	}
@@ -961,7 +967,9 @@ func (v *RecommendationFeedbackSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RecommendationFeedbackSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReactions(s, schemas.RecommendationFeedbackSummary_Reactions, v.Reactions)
+	if v.Reactions != nil {
+		serializeReactions(s, schemas.RecommendationFeedbackSummary_Reactions, v.Reactions)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.RecommendationFeedbackSummary_RecommendationId, *v.RecommendationId)
 	}
@@ -1712,7 +1720,9 @@ func (v *RuleMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RuleName != nil {
 		s.WriteString(schemas.RuleMetadata_RuleName, *v.RuleName)
 	}
-	serializeRuleTags(s, schemas.RuleMetadata_RuleTags, v.RuleTags)
+	if v.RuleTags != nil {
+		serializeRuleTags(s, schemas.RuleMetadata_RuleTags, v.RuleTags)
+	}
 	if v.ShortDescription != nil {
 		s.WriteString(schemas.RuleMetadata_ShortDescription, *v.ShortDescription)
 	}

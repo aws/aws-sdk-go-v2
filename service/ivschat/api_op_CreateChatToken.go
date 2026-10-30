@@ -80,8 +80,12 @@ func (v *CreateChatTokenInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateChatTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChatTokenAttributes(s, schemas.CreateChatTokenRequest_attributes, v.Attributes)
-	serializeChatTokenCapabilities(s, schemas.CreateChatTokenRequest_capabilities, v.Capabilities)
+	if v.Attributes != nil {
+		serializeChatTokenAttributes(s, schemas.CreateChatTokenRequest_attributes, v.Attributes)
+	}
+	if v.Capabilities != nil {
+		serializeChatTokenCapabilities(s, schemas.CreateChatTokenRequest_capabilities, v.Capabilities)
+	}
 	if v.RoomIdentifier != nil {
 		s.WriteString(schemas.CreateChatTokenRequest_roomIdentifier, *v.RoomIdentifier)
 	}

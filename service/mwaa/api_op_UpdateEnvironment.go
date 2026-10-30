@@ -226,7 +226,9 @@ func (v *UpdateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAirflowConfigurationOptions(s, schemas.UpdateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowConfigurationOptions != nil {
+		serializeAirflowConfigurationOptions(s, schemas.UpdateEnvironmentInput_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	}
 	if v.AirflowVersion != nil {
 		s.WriteString(schemas.UpdateEnvironmentInput_AirflowVersion, *v.AirflowVersion)
 	}

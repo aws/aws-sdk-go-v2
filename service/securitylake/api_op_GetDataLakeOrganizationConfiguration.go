@@ -59,7 +59,9 @@ func (v *GetDataLakeOrganizationConfigurationOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *GetDataLakeOrganizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount, v.AutoEnableNewAccount)
+	if v.AutoEnableNewAccount != nil {
+		serializeDataLakeAutoEnableNewAccountConfigurationList(s, schemas.GetDataLakeOrganizationConfigurationResponse_autoEnableNewAccount, v.AutoEnableNewAccount)
+	}
 }
 func (v *GetDataLakeOrganizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataLakeOrganizationConfigurationResponse, func(s *smithy.Schema) error {

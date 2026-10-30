@@ -99,7 +99,9 @@ func (v *ListExtensionAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExtensionAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtensionAssociationSummaries(s, schemas.ExtensionAssociations_Items, v.Items)
+	if v.Items != nil {
+		serializeExtensionAssociationSummaries(s, schemas.ExtensionAssociations_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ExtensionAssociations_NextToken, *v.NextToken)
 	}

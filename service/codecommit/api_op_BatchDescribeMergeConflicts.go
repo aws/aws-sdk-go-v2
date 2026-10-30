@@ -96,7 +96,9 @@ func (v *BatchDescribeMergeConflictsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.DestinationCommitSpecifier != nil {
 		s.WriteString(schemas.BatchDescribeMergeConflictsInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
 	}
-	serializeFilePaths(s, schemas.BatchDescribeMergeConflictsInput_filePaths, v.FilePaths)
+	if v.FilePaths != nil {
+		serializeFilePaths(s, schemas.BatchDescribeMergeConflictsInput_filePaths, v.FilePaths)
+	}
 	if v.MaxConflictFiles != nil {
 		s.WriteInt32(schemas.BatchDescribeMergeConflictsInput_maxConflictFiles, *v.MaxConflictFiles)
 	}
@@ -164,11 +166,15 @@ func (v *BatchDescribeMergeConflictsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.BaseCommitId != nil {
 		s.WriteString(schemas.BatchDescribeMergeConflictsOutput_baseCommitId, *v.BaseCommitId)
 	}
-	serializeConflicts(s, schemas.BatchDescribeMergeConflictsOutput_conflicts, v.Conflicts)
+	if v.Conflicts != nil {
+		serializeConflicts(s, schemas.BatchDescribeMergeConflictsOutput_conflicts, v.Conflicts)
+	}
 	if v.DestinationCommitId != nil {
 		s.WriteString(schemas.BatchDescribeMergeConflictsOutput_destinationCommitId, *v.DestinationCommitId)
 	}
-	serializeBatchDescribeMergeConflictsErrors(s, schemas.BatchDescribeMergeConflictsOutput_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDescribeMergeConflictsErrors(s, schemas.BatchDescribeMergeConflictsOutput_errors, v.Errors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchDescribeMergeConflictsOutput_nextToken, *v.NextToken)
 	}

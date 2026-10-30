@@ -72,11 +72,15 @@ func (v *StopInferenceExperimentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StopInferenceExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelVariantConfigList(s, schemas.StopInferenceExperimentRequest_DesiredModelVariants, v.DesiredModelVariants)
+	if v.DesiredModelVariants != nil {
+		serializeModelVariantConfigList(s, schemas.StopInferenceExperimentRequest_DesiredModelVariants, v.DesiredModelVariants)
+	}
 	if v.DesiredState != "" {
 		s.WriteString(schemas.StopInferenceExperimentRequest_DesiredState, string(v.DesiredState))
 	}
-	serializeModelVariantActionMap(s, schemas.StopInferenceExperimentRequest_ModelVariantActions, v.ModelVariantActions)
+	if v.ModelVariantActions != nil {
+		serializeModelVariantActionMap(s, schemas.StopInferenceExperimentRequest_ModelVariantActions, v.ModelVariantActions)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.StopInferenceExperimentRequest_Name, *v.Name)
 	}

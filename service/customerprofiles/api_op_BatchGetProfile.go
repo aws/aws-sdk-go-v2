@@ -51,7 +51,9 @@ func (v *BatchGetProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.BatchGetProfileRequest_DomainName, *v.DomainName)
 	}
-	serializeBatchGetProfileIdList(s, schemas.BatchGetProfileRequest_ProfileIds, v.ProfileIds)
+	if v.ProfileIds != nil {
+		serializeBatchGetProfileIdList(s, schemas.BatchGetProfileRequest_ProfileIds, v.ProfileIds)
+	}
 }
 
 type BatchGetProfileOutput struct {
@@ -77,8 +79,12 @@ func (v *BatchGetProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetProfileErrorList(s, schemas.BatchGetProfileResponse_Errors, v.Errors)
-	serializeProfileList(s, schemas.BatchGetProfileResponse_Profiles, v.Profiles)
+	if v.Errors != nil {
+		serializeBatchGetProfileErrorList(s, schemas.BatchGetProfileResponse_Errors, v.Errors)
+	}
+	if v.Profiles != nil {
+		serializeProfileList(s, schemas.BatchGetProfileResponse_Profiles, v.Profiles)
+	}
 }
 func (v *BatchGetProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetProfileResponse, func(s *smithy.Schema) error {

@@ -139,7 +139,9 @@ func (v *ListStudioLifecycleConfigsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStudioLifecycleConfigsResponse_NextToken, *v.NextToken)
 	}
-	serializeStudioLifecycleConfigsList(s, schemas.ListStudioLifecycleConfigsResponse_StudioLifecycleConfigs, v.StudioLifecycleConfigs)
+	if v.StudioLifecycleConfigs != nil {
+		serializeStudioLifecycleConfigsList(s, schemas.ListStudioLifecycleConfigsResponse_StudioLifecycleConfigs, v.StudioLifecycleConfigs)
+	}
 }
 func (v *ListStudioLifecycleConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStudioLifecycleConfigsResponse, func(s *smithy.Schema) error {

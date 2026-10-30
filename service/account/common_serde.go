@@ -8,9 +8,6 @@ import (
 )
 
 func serializeRegionOptList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Region) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeRegionOptList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeRegionOptStatusList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RegionOptStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -32,9 +26,6 @@ func serializeRegionOptStatusList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

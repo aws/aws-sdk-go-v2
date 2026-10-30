@@ -45,8 +45,12 @@ func (v *CreateInputSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateInputSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTags(s, schemas.CreateInputSecurityGroupRequest_Tags, v.Tags)
-	serialize__listOfInputWhitelistRuleCidr(s, schemas.CreateInputSecurityGroupRequest_WhitelistRules, v.WhitelistRules)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateInputSecurityGroupRequest_Tags, v.Tags)
+	}
+	if v.WhitelistRules != nil {
+		serialize__listOfInputWhitelistRuleCidr(s, schemas.CreateInputSecurityGroupRequest_WhitelistRules, v.WhitelistRules)
+	}
 }
 
 // Placeholder documentation for CreateInputSecurityGroupResponse

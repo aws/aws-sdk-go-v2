@@ -69,13 +69,17 @@ func (v *CreateHubInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubName != nil {
 		s.WriteString(schemas.CreateHubRequest_HubName, *v.HubName)
 	}
-	serializeHubSearchKeywordList(s, schemas.CreateHubRequest_HubSearchKeywords, v.HubSearchKeywords)
+	if v.HubSearchKeywords != nil {
+		serializeHubSearchKeywordList(s, schemas.CreateHubRequest_HubSearchKeywords, v.HubSearchKeywords)
+	}
 	if v.S3StorageConfig != nil {
 		s.WriteStruct(schemas.CreateHubRequest_S3StorageConfig)
 		v.S3StorageConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateHubRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHubRequest_Tags, v.Tags)
+	}
 }
 
 type CreateHubOutput struct {

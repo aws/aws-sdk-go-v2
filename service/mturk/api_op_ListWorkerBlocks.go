@@ -86,7 +86,9 @@ func (v *ListWorkerBlocksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NumResults != nil {
 		s.WriteInt32(schemas.ListWorkerBlocksResponse_NumResults, *v.NumResults)
 	}
-	serializeWorkerBlockList(s, schemas.ListWorkerBlocksResponse_WorkerBlocks, v.WorkerBlocks)
+	if v.WorkerBlocks != nil {
+		serializeWorkerBlockList(s, schemas.ListWorkerBlocksResponse_WorkerBlocks, v.WorkerBlocks)
+	}
 }
 func (v *ListWorkerBlocksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkerBlocksResponse, func(s *smithy.Schema) error {

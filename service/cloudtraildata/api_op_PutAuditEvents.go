@@ -57,7 +57,9 @@ func (v *PutAuditEventsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAuditEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditEvents(s, schemas.PutAuditEventsRequest_auditEvents, v.AuditEvents)
+	if v.AuditEvents != nil {
+		serializeAuditEvents(s, schemas.PutAuditEventsRequest_auditEvents, v.AuditEvents)
+	}
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.PutAuditEventsRequest_channelArn, *v.ChannelArn)
 	}
@@ -109,8 +111,12 @@ func (v *PutAuditEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAuditEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResultErrorEntries(s, schemas.PutAuditEventsResponse_failed, v.Failed)
-	serializeAuditEventResultEntries(s, schemas.PutAuditEventsResponse_successful, v.Successful)
+	if v.Failed != nil {
+		serializeResultErrorEntries(s, schemas.PutAuditEventsResponse_failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeAuditEventResultEntries(s, schemas.PutAuditEventsResponse_successful, v.Successful)
+	}
 }
 func (v *PutAuditEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAuditEventsResponse, func(s *smithy.Schema) error {

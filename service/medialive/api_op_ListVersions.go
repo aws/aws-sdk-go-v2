@@ -60,7 +60,9 @@ func (v *ListVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfChannelEngineVersionResponse(s, schemas.ListVersionsResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serialize__listOfChannelEngineVersionResponse(s, schemas.ListVersionsResponse_Versions, v.Versions)
+	}
 }
 func (v *ListVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVersionsResponse, func(s *smithy.Schema) error {

@@ -137,8 +137,12 @@ func (v *RestoreTableToPointInTimeInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.BillingModeOverride != "" {
 		s.WriteString(schemas.RestoreTableToPointInTimeInput_BillingModeOverride, string(v.BillingModeOverride))
 	}
-	serializeGlobalSecondaryIndexList(s, schemas.RestoreTableToPointInTimeInput_GlobalSecondaryIndexOverride, v.GlobalSecondaryIndexOverride)
-	serializeLocalSecondaryIndexList(s, schemas.RestoreTableToPointInTimeInput_LocalSecondaryIndexOverride, v.LocalSecondaryIndexOverride)
+	if v.GlobalSecondaryIndexOverride != nil {
+		serializeGlobalSecondaryIndexList(s, schemas.RestoreTableToPointInTimeInput_GlobalSecondaryIndexOverride, v.GlobalSecondaryIndexOverride)
+	}
+	if v.LocalSecondaryIndexOverride != nil {
+		serializeLocalSecondaryIndexList(s, schemas.RestoreTableToPointInTimeInput_LocalSecondaryIndexOverride, v.LocalSecondaryIndexOverride)
+	}
 	if v.OnDemandThroughputOverride != nil {
 		s.WriteStruct(schemas.RestoreTableToPointInTimeInput_OnDemandThroughputOverride)
 		v.OnDemandThroughputOverride.SerializeMembers(s)
@@ -169,7 +173,9 @@ func (v *RestoreTableToPointInTimeInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.UseLatestRestorableTime != nil {
 		s.WriteBool(schemas.RestoreTableToPointInTimeInput_UseLatestRestorableTime, *v.UseLatestRestorableTime)
 	}
-	serializeVectorIndexList(s, schemas.RestoreTableToPointInTimeInput_VectorIndexOverride, v.VectorIndexOverride)
+	if v.VectorIndexOverride != nil {
+		serializeVectorIndexList(s, schemas.RestoreTableToPointInTimeInput_VectorIndexOverride, v.VectorIndexOverride)
+	}
 }
 func (in *RestoreTableToPointInTimeInput) bindEndpointParams(p *EndpointParameters) {
 

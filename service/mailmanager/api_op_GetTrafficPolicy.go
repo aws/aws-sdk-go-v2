@@ -105,7 +105,9 @@ func (v *GetTrafficPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxMessageSizeBytes != nil {
 		s.WriteInt32(schemas.GetTrafficPolicyResponse_MaxMessageSizeBytes, *v.MaxMessageSizeBytes)
 	}
-	serializePolicyStatementList(s, schemas.GetTrafficPolicyResponse_PolicyStatements, v.PolicyStatements)
+	if v.PolicyStatements != nil {
+		serializePolicyStatementList(s, schemas.GetTrafficPolicyResponse_PolicyStatements, v.PolicyStatements)
+	}
 	if v.TrafficPolicyArn != nil {
 		s.WriteString(schemas.GetTrafficPolicyResponse_TrafficPolicyArn, *v.TrafficPolicyArn)
 	}

@@ -85,8 +85,12 @@ func (v *AwsLogSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AwsLogSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.AwsLogSourceConfiguration_accounts, v.Accounts)
-	serializeRegionList(s, schemas.AwsLogSourceConfiguration_regions, v.Regions)
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.AwsLogSourceConfiguration_accounts, v.Accounts)
+	}
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.AwsLogSourceConfiguration_regions, v.Regions)
+	}
 	if v.SourceName != "" {
 		s.WriteString(schemas.AwsLogSourceConfiguration_sourceName, string(v.SourceName))
 	}
@@ -435,7 +439,9 @@ func (v *DataLakeAutoEnableNewAccountConfiguration) SerializeMembers(s smithy.Sh
 	if v.Region != nil {
 		s.WriteString(schemas.DataLakeAutoEnableNewAccountConfiguration_region, *v.Region)
 	}
-	serializeAwsLogSourceResourceList(s, schemas.DataLakeAutoEnableNewAccountConfiguration_sources, v.Sources)
+	if v.Sources != nil {
+		serializeAwsLogSourceResourceList(s, schemas.DataLakeAutoEnableNewAccountConfiguration_sources, v.Sources)
+	}
 }
 func (v *DataLakeAutoEnableNewAccountConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataLakeAutoEnableNewAccountConfiguration, func(s *smithy.Schema) error {
@@ -631,7 +637,9 @@ func (v *DataLakeLifecycleConfiguration) SerializeMembers(s smithy.ShapeSerializ
 		v.Expiration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataLakeLifecycleTransitionList(s, schemas.DataLakeLifecycleConfiguration_transitions, v.Transitions)
+	if v.Transitions != nil {
+		serializeDataLakeLifecycleTransitionList(s, schemas.DataLakeLifecycleConfiguration_transitions, v.Transitions)
+	}
 }
 func (v *DataLakeLifecycleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataLakeLifecycleConfiguration, func(s *smithy.Schema) error {
@@ -754,7 +762,9 @@ func (v *DataLakeReplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataLakeReplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionList(s, schemas.DataLakeReplicationConfiguration_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.DataLakeReplicationConfiguration_regions, v.Regions)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DataLakeReplicationConfiguration_roleArn, *v.RoleArn)
 	}
@@ -924,11 +934,15 @@ func (v *DataLakeSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Account != nil {
 		s.WriteString(schemas.DataLakeSource_account, *v.Account)
 	}
-	serializeOcsfEventClassList(s, schemas.DataLakeSource_eventClasses, v.EventClasses)
+	if v.EventClasses != nil {
+		serializeOcsfEventClassList(s, schemas.DataLakeSource_eventClasses, v.EventClasses)
+	}
 	if v.SourceName != nil {
 		s.WriteString(schemas.DataLakeSource_sourceName, *v.SourceName)
 	}
-	serializeDataLakeSourceStatusList(s, schemas.DataLakeSource_sourceStatuses, v.SourceStatuses)
+	if v.SourceStatuses != nil {
+		serializeDataLakeSourceStatusList(s, schemas.DataLakeSource_sourceStatuses, v.SourceStatuses)
+	}
 }
 func (v *DataLakeSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataLakeSource, func(s *smithy.Schema) error {
@@ -1205,7 +1219,9 @@ func (v *LogSource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.LogSource_region, *v.Region)
 	}
-	serializeLogSourceResourceList(s, schemas.LogSource_sources, v.Sources)
+	if v.Sources != nil {
+		serializeLogSourceResourceList(s, schemas.LogSource_sources, v.Sources)
+	}
 }
 func (v *LogSource) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogSource, func(s *smithy.Schema) error {
@@ -1428,7 +1444,9 @@ func (v *SubscriberResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubscriberResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessTypeList(s, schemas.SubscriberResource_accessTypes, v.AccessTypes)
+	if v.AccessTypes != nil {
+		serializeAccessTypeList(s, schemas.SubscriberResource_accessTypes, v.AccessTypes)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.SubscriberResource_createdAt, *v.CreatedAt)
 	}
@@ -1444,7 +1462,9 @@ func (v *SubscriberResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3BucketArn != nil {
 		s.WriteString(schemas.SubscriberResource_s3BucketArn, *v.S3BucketArn)
 	}
-	serializeLogSourceResourceList(s, schemas.SubscriberResource_sources, v.Sources)
+	if v.Sources != nil {
+		serializeLogSourceResourceList(s, schemas.SubscriberResource_sources, v.Sources)
+	}
 	if v.SubscriberArn != nil {
 		s.WriteString(schemas.SubscriberResource_subscriberArn, *v.SubscriberArn)
 	}

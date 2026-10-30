@@ -54,7 +54,9 @@ func (v *CreateNamespaceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNamespaceList(s, schemas.CreateNamespaceRequest_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.CreateNamespaceRequest_namespace, v.Namespace)
+	}
 	if v.TableBucketARN != nil {
 		s.WriteString(schemas.CreateNamespaceRequest_tableBucketARN, *v.TableBucketARN)
 	}
@@ -85,7 +87,9 @@ func (v *CreateNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNamespaceList(s, schemas.CreateNamespaceResponse_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.CreateNamespaceResponse_namespace, v.Namespace)
+	}
 	if v.TableBucketARN != nil {
 		s.WriteString(schemas.CreateNamespaceResponse_tableBucketARN, *v.TableBucketARN)
 	}

@@ -49,7 +49,9 @@ func (v *UpdateSipMediaApplicationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSipMediaApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSipMediaApplicationEndpointList(s, schemas.UpdateSipMediaApplicationRequest_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeSipMediaApplicationEndpointList(s, schemas.UpdateSipMediaApplicationRequest_Endpoints, v.Endpoints)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateSipMediaApplicationRequest_Name, *v.Name)
 	}

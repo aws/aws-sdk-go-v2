@@ -55,8 +55,12 @@ func (v *CreateACLInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ACLName != nil {
 		s.WriteString(schemas.CreateACLRequest_ACLName, *v.ACLName)
 	}
-	serializeTagList(s, schemas.CreateACLRequest_Tags, v.Tags)
-	serializeUserNameListInput(s, schemas.CreateACLRequest_UserNames, v.UserNames)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateACLRequest_Tags, v.Tags)
+	}
+	if v.UserNames != nil {
+		serializeUserNameListInput(s, schemas.CreateACLRequest_UserNames, v.UserNames)
+	}
 }
 
 type CreateACLOutput struct {

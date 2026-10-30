@@ -169,7 +169,9 @@ func (v *ModifyReplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ReplicationInstanceIdentifier != nil {
 		s.WriteString(schemas.ModifyReplicationInstanceMessage_ReplicationInstanceIdentifier, *v.ReplicationInstanceIdentifier)
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.ModifyReplicationInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.ModifyReplicationInstanceMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 
 type ModifyReplicationInstanceOutput struct {

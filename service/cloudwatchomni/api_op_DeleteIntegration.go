@@ -45,7 +45,9 @@ func (v *DeleteIntegrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationIdentifier(s, schemas.DeleteIntegrationInput_identifier, v.Identifier)
+	if v.Identifier != nil {
+		serializeIntegrationIdentifier(s, schemas.DeleteIntegrationInput_identifier, v.Identifier)
+	}
 }
 
 // The response from deleting an integration. Empty by contract — a successful

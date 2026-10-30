@@ -67,7 +67,9 @@ func (v *CreateDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.CreateDatabaseRequest_KmsKeyId, *v.KmsKeyId)
 	}
-	serializeTagList(s, schemas.CreateDatabaseRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDatabaseRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDatabaseOutput struct {

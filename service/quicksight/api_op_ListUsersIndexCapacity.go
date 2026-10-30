@@ -66,7 +66,9 @@ func (v *ListUsersIndexCapacityInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.ListUsersIndexCapacityRequest_awsAccountId, *v.AwsAccountId)
 	}
-	serializeUserIndexCapacityFilters(s, schemas.ListUsersIndexCapacityRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeUserIndexCapacityFilters(s, schemas.ListUsersIndexCapacityRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListUsersIndexCapacityRequest_maxResults, *v.MaxResults)
 	}
@@ -114,7 +116,9 @@ func (v *ListUsersIndexCapacityOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListUsersIndexCapacityResponse_requestId, *v.RequestId)
 	}
-	serializeUserIndexCapacityList(s, schemas.ListUsersIndexCapacityResponse_users, v.Users)
+	if v.Users != nil {
+		serializeUserIndexCapacityList(s, schemas.ListUsersIndexCapacityResponse_users, v.Users)
+	}
 }
 func (v *ListUsersIndexCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsersIndexCapacityResponse, func(s *smithy.Schema) error {

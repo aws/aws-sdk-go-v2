@@ -69,7 +69,9 @@ func (v *CreateAssociationBatchInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AssociationDispatchAssumeRole != nil {
 		s.WriteString(schemas.CreateAssociationBatchRequest_AssociationDispatchAssumeRole, *v.AssociationDispatchAssumeRole)
 	}
-	serializeCreateAssociationBatchRequestEntries(s, schemas.CreateAssociationBatchRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeCreateAssociationBatchRequestEntries(s, schemas.CreateAssociationBatchRequest_Entries, v.Entries)
+	}
 }
 
 type CreateAssociationBatchOutput struct {
@@ -93,8 +95,12 @@ func (v *CreateAssociationBatchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAssociationBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedCreateAssociationList(s, schemas.CreateAssociationBatchResult_Failed, v.Failed)
-	serializeAssociationDescriptionList(s, schemas.CreateAssociationBatchResult_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeFailedCreateAssociationList(s, schemas.CreateAssociationBatchResult_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeAssociationDescriptionList(s, schemas.CreateAssociationBatchResult_Successful, v.Successful)
+	}
 }
 func (v *CreateAssociationBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAssociationBatchResult, func(s *smithy.Schema) error {

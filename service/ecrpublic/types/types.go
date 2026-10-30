@@ -184,7 +184,9 @@ func (v *ImageDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageSizeInBytes != nil {
 		s.WriteInt64(schemas.ImageDetail_imageSizeInBytes, *v.ImageSizeInBytes)
 	}
-	serializeImageTagList(s, schemas.ImageDetail_imageTags, v.ImageTags)
+	if v.ImageTags != nil {
+		serializeImageTagList(s, schemas.ImageDetail_imageTags, v.ImageTags)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.ImageDetail_registryId, *v.RegistryId)
 	}
@@ -604,7 +606,9 @@ func (v *Registry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Registry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryAliasList(s, schemas.Registry_aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeRegistryAliasList(s, schemas.Registry_aliases, v.Aliases)
+	}
 	if v.RegistryArn != nil {
 		s.WriteString(schemas.Registry_registryArn, *v.RegistryArn)
 	}
@@ -871,7 +875,9 @@ func (v *RepositoryCatalogData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AboutText != nil {
 		s.WriteString(schemas.RepositoryCatalogData_aboutText, *v.AboutText)
 	}
-	serializeArchitectureList(s, schemas.RepositoryCatalogData_architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitectureList(s, schemas.RepositoryCatalogData_architectures, v.Architectures)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RepositoryCatalogData_description, *v.Description)
 	}
@@ -881,7 +887,9 @@ func (v *RepositoryCatalogData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MarketplaceCertified != nil {
 		s.WriteBool(schemas.RepositoryCatalogData_marketplaceCertified, *v.MarketplaceCertified)
 	}
-	serializeOperatingSystemList(s, schemas.RepositoryCatalogData_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeOperatingSystemList(s, schemas.RepositoryCatalogData_operatingSystems, v.OperatingSystems)
+	}
 	if v.UsageText != nil {
 		s.WriteString(schemas.RepositoryCatalogData_usageText, *v.UsageText)
 	}
@@ -981,14 +989,18 @@ func (v *RepositoryCatalogDataInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AboutText != nil {
 		s.WriteString(schemas.RepositoryCatalogDataInput_aboutText, *v.AboutText)
 	}
-	serializeArchitectureList(s, schemas.RepositoryCatalogDataInput_architectures, v.Architectures)
+	if v.Architectures != nil {
+		serializeArchitectureList(s, schemas.RepositoryCatalogDataInput_architectures, v.Architectures)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RepositoryCatalogDataInput_description, *v.Description)
 	}
 	if v.LogoImageBlob != nil {
 		s.WriteBlob(schemas.RepositoryCatalogDataInput_logoImageBlob, v.LogoImageBlob)
 	}
-	serializeOperatingSystemList(s, schemas.RepositoryCatalogDataInput_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeOperatingSystemList(s, schemas.RepositoryCatalogDataInput_operatingSystems, v.OperatingSystems)
+	}
 	if v.UsageText != nil {
 		s.WriteString(schemas.RepositoryCatalogDataInput_usageText, *v.UsageText)
 	}

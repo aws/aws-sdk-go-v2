@@ -93,7 +93,9 @@ func (v *GetArchitectureRecommendationsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetArchitectureRecommendationsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfRecommendation(s, schemas.GetArchitectureRecommendationsResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serialize__listOfRecommendation(s, schemas.GetArchitectureRecommendationsResponse_Recommendations, v.Recommendations)
+	}
 }
 func (v *GetArchitectureRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetArchitectureRecommendationsResponse, func(s *smithy.Schema) error {

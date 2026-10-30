@@ -89,8 +89,12 @@ func (v *CreateTrustInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTrustInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDnsIpAddrs(s, schemas.CreateTrustRequest_ConditionalForwarderIpAddrs, v.ConditionalForwarderIpAddrs)
-	serializeDnsIpv6Addrs(s, schemas.CreateTrustRequest_ConditionalForwarderIpv6Addrs, v.ConditionalForwarderIpv6Addrs)
+	if v.ConditionalForwarderIpAddrs != nil {
+		serializeDnsIpAddrs(s, schemas.CreateTrustRequest_ConditionalForwarderIpAddrs, v.ConditionalForwarderIpAddrs)
+	}
+	if v.ConditionalForwarderIpv6Addrs != nil {
+		serializeDnsIpv6Addrs(s, schemas.CreateTrustRequest_ConditionalForwarderIpv6Addrs, v.ConditionalForwarderIpv6Addrs)
+	}
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.CreateTrustRequest_DirectoryId, *v.DirectoryId)
 	}

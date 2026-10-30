@@ -111,7 +111,9 @@ func (v *CreateManagedEndpointInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SessionIdleTimeoutInMinutes != 0 {
 		s.WriteInt32(schemas.CreateManagedEndpointRequest_sessionIdleTimeoutInMinutes, v.SessionIdleTimeoutInMinutes)
 	}
-	serializeTagMap(s, schemas.CreateManagedEndpointRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateManagedEndpointRequest_tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.CreateManagedEndpointRequest_type, *v.Type)
 	}

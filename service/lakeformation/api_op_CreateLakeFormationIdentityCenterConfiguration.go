@@ -81,8 +81,12 @@ func (v *CreateLakeFormationIdentityCenterConfigurationInput) SerializeMembers(s
 	if v.InstanceArn != nil {
 		s.WriteString(schemas.CreateLakeFormationIdentityCenterConfigurationRequest_InstanceArn, *v.InstanceArn)
 	}
-	serializeServiceIntegrationList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ServiceIntegrations, v.ServiceIntegrations)
-	serializeDataLakePrincipalList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ShareRecipients, v.ShareRecipients)
+	if v.ServiceIntegrations != nil {
+		serializeServiceIntegrationList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ServiceIntegrations, v.ServiceIntegrations)
+	}
+	if v.ShareRecipients != nil {
+		serializeDataLakePrincipalList(s, schemas.CreateLakeFormationIdentityCenterConfigurationRequest_ShareRecipients, v.ShareRecipients)
+	}
 }
 
 type CreateLakeFormationIdentityCenterConfigurationOutput struct {

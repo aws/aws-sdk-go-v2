@@ -58,7 +58,9 @@ func (v *CreateAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAddressListRequest_ClientToken, *v.ClientToken)
 	}
-	serializeTagList(s, schemas.CreateAddressListRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAddressListRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAddressListOutput struct {

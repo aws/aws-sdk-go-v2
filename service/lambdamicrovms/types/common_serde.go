@@ -103,9 +103,6 @@ func deserializePortSpecification(d smithy.ShapeDeserializer, s *smithy.Schema, 
 }
 
 func serializeCapabilityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Capability) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -114,9 +111,6 @@ func serializeCapabilityList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeCpuConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []CpuConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -127,9 +121,6 @@ func serializeCpuConfigurationList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeListOfPortSpecification(s smithy.ShapeSerializer, schema *smithy.Schema, v []PortSpecification) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializePortSpecification(s, schema.ListMember(), vv)
@@ -138,9 +129,6 @@ func serializeListOfPortSpecification(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeManagedMicrovmImageSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ManagedMicrovmImageSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -151,9 +139,6 @@ func serializeManagedMicrovmImageSummaryList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeManagedMicrovmImageVersionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ManagedMicrovmImageVersion) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -164,9 +149,6 @@ func serializeManagedMicrovmImageVersionList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeMicrovmImageBuildSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []MicrovmImageBuildSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -177,9 +159,6 @@ func serializeMicrovmImageBuildSummaries(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeMicrovmImageSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []MicrovmImageSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -190,9 +169,6 @@ func serializeMicrovmImageSummaries(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeMicrovmImageVersionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MicrovmImageVersionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -203,9 +179,6 @@ func serializeMicrovmImageVersionSummaryList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeMicrovmItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MicrovmItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -216,9 +189,6 @@ func serializeMicrovmItemList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeNetworkConnectorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -227,9 +197,6 @@ func serializeNetworkConnectorList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeResourcesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Resources) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -240,9 +207,6 @@ func serializeResourcesList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -511,9 +475,6 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeEnvironmentVariableMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -523,9 +484,6 @@ func serializeEnvironmentVariableMap(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -535,9 +493,6 @@ func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string
 }
 
 func serializeTokenParts(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

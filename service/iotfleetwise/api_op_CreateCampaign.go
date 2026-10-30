@@ -169,13 +169,21 @@ func (v *CreateCampaignInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectionScheme(s, schemas.CreateCampaignRequest_collectionScheme, v.CollectionScheme)
+	if v.CollectionScheme != nil {
+		serializeCollectionScheme(s, schemas.CreateCampaignRequest_collectionScheme, v.CollectionScheme)
+	}
 	if v.Compression != "" {
 		s.WriteString(schemas.CreateCampaignRequest_compression, string(v.Compression))
 	}
-	serializeDataDestinationConfigs(s, schemas.CreateCampaignRequest_dataDestinationConfigs, v.DataDestinationConfigs)
-	serializeDataExtraDimensionNodePathList(s, schemas.CreateCampaignRequest_dataExtraDimensions, v.DataExtraDimensions)
-	serializeDataPartitions(s, schemas.CreateCampaignRequest_dataPartitions, v.DataPartitions)
+	if v.DataDestinationConfigs != nil {
+		serializeDataDestinationConfigs(s, schemas.CreateCampaignRequest_dataDestinationConfigs, v.DataDestinationConfigs)
+	}
+	if v.DataExtraDimensions != nil {
+		serializeDataExtraDimensionNodePathList(s, schemas.CreateCampaignRequest_dataExtraDimensions, v.DataExtraDimensions)
+	}
+	if v.DataPartitions != nil {
+		serializeDataPartitions(s, schemas.CreateCampaignRequest_dataPartitions, v.DataPartitions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCampaignRequest_description, *v.Description)
 	}
@@ -197,15 +205,21 @@ func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SignalCatalogArn != nil {
 		s.WriteString(schemas.CreateCampaignRequest_signalCatalogArn, *v.SignalCatalogArn)
 	}
-	serializeSignalInformationList(s, schemas.CreateCampaignRequest_signalsToCollect, v.SignalsToCollect)
-	serializeSignalFetchInformationList(s, schemas.CreateCampaignRequest_signalsToFetch, v.SignalsToFetch)
+	if v.SignalsToCollect != nil {
+		serializeSignalInformationList(s, schemas.CreateCampaignRequest_signalsToCollect, v.SignalsToCollect)
+	}
+	if v.SignalsToFetch != nil {
+		serializeSignalFetchInformationList(s, schemas.CreateCampaignRequest_signalsToFetch, v.SignalsToFetch)
+	}
 	if v.SpoolingMode != "" {
 		s.WriteString(schemas.CreateCampaignRequest_spoolingMode, string(v.SpoolingMode))
 	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CreateCampaignRequest_startTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.CreateCampaignRequest_targetArn, *v.TargetArn)
 	}

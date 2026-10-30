@@ -505,7 +505,9 @@ func (v *AwsOpportunityCustomer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AwsOpportunityCustomer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerContactsList(s, schemas.AwsOpportunityCustomer_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeCustomerContactsList(s, schemas.AwsOpportunityCustomer_Contacts, v.Contacts)
+	}
 }
 func (v *AwsOpportunityCustomer) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsOpportunityCustomer, func(s *smithy.Schema) error {
@@ -566,7 +568,9 @@ func (v *AwsOpportunityInsights) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OpportunityQuality.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendationList(s, schemas.AwsOpportunityInsights_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendationList(s, schemas.AwsOpportunityInsights_Recommendations, v.Recommendations)
+	}
 }
 func (v *AwsOpportunityInsights) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsOpportunityInsights, func(s *smithy.Schema) error {
@@ -639,7 +643,9 @@ func (v *AwsOpportunityLifeCycle) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextSteps != nil {
 		s.WriteString(schemas.AwsOpportunityLifeCycle_NextSteps, *v.NextSteps)
 	}
-	serializeProfileNextStepsHistories(s, schemas.AwsOpportunityLifeCycle_NextStepsHistory, v.NextStepsHistory)
+	if v.NextStepsHistory != nil {
+		serializeProfileNextStepsHistories(s, schemas.AwsOpportunityLifeCycle_NextStepsHistory, v.NextStepsHistory)
+	}
 	if v.Stage != "" {
 		s.WriteString(schemas.AwsOpportunityLifeCycle_Stage, string(v.Stage))
 	}
@@ -707,7 +713,9 @@ func (v *AwsOpportunityProject) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsPartition != "" {
 		s.WriteString(schemas.AwsOpportunityProject_AwsPartition, string(v.AwsPartition))
 	}
-	serializeExpectedCustomerSpendList(s, schemas.AwsOpportunityProject_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.ExpectedCustomerSpend != nil {
+		serializeExpectedCustomerSpendList(s, schemas.AwsOpportunityProject_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	}
 }
 func (v *AwsOpportunityProject) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsOpportunityProject, func(s *smithy.Schema) error {
@@ -756,10 +764,18 @@ func (v *AwsOpportunityRelatedEntities) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AwsOpportunityRelatedEntities) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsMarketplaceProductIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceProducts, v.AwsMarketplaceProducts)
-	serializeAwsMarketplaceSolutionIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceSolutions, v.AwsMarketplaceSolutions)
-	serializeAwsProductIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsProducts, v.AwsProducts)
-	serializeSolutionIdentifiers(s, schemas.AwsOpportunityRelatedEntities_Solutions, v.Solutions)
+	if v.AwsMarketplaceProducts != nil {
+		serializeAwsMarketplaceProductIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceProducts, v.AwsMarketplaceProducts)
+	}
+	if v.AwsMarketplaceSolutions != nil {
+		serializeAwsMarketplaceSolutionIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsMarketplaceSolutions, v.AwsMarketplaceSolutions)
+	}
+	if v.AwsProducts != nil {
+		serializeAwsProductIdentifiers(s, schemas.AwsOpportunityRelatedEntities_AwsProducts, v.AwsProducts)
+	}
+	if v.Solutions != nil {
+		serializeSolutionIdentifiers(s, schemas.AwsOpportunityRelatedEntities_Solutions, v.Solutions)
+	}
 }
 func (v *AwsOpportunityRelatedEntities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsOpportunityRelatedEntities, func(s *smithy.Schema) error {
@@ -862,7 +878,9 @@ func (v *AwsOpportunitySummaryFullView) SerializeMembers(s smithy.ShapeSerialize
 		v.LifeCycle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAwsOpportunityTeamMembersList(s, schemas.AwsOpportunitySummaryFullView_OpportunityTeam, v.OpportunityTeam)
+	if v.OpportunityTeam != nil {
+		serializeAwsOpportunityTeamMembersList(s, schemas.AwsOpportunitySummaryFullView_OpportunityTeam, v.OpportunityTeam)
+	}
 	if v.Origin != "" {
 		s.WriteString(schemas.AwsOpportunitySummaryFullView_Origin, string(v.Origin))
 	}
@@ -994,8 +1012,12 @@ func (v *AwsProductDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Amount != nil {
 		s.WriteString(schemas.AwsProductDetails_Amount, *v.Amount)
 	}
-	serializeStringList(s, schemas.AwsProductDetails_Categories, v.Categories)
-	serializeAwsProductOptimizationsList(s, schemas.AwsProductDetails_Optimizations, v.Optimizations)
+	if v.Categories != nil {
+		serializeStringList(s, schemas.AwsProductDetails_Categories, v.Categories)
+	}
+	if v.Optimizations != nil {
+		serializeAwsProductOptimizationsList(s, schemas.AwsProductDetails_Optimizations, v.Optimizations)
+	}
 	if v.OptimizedAmount != nil {
 		s.WriteString(schemas.AwsProductDetails_OptimizedAmount, *v.OptimizedAmount)
 	}
@@ -1081,7 +1103,9 @@ func (v *AwsProductInsights) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AwsProductInsights) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsProductsList(s, schemas.AwsProductInsights_AwsProducts, v.AwsProducts)
+	if v.AwsProducts != nil {
+		serializeAwsProductsList(s, schemas.AwsProductInsights_AwsProducts, v.AwsProducts)
+	}
 	if v.CurrencyCode != "" {
 		s.WriteString(schemas.AwsProductInsights_CurrencyCode, string(v.CurrencyCode))
 	}
@@ -1091,7 +1115,9 @@ func (v *AwsProductInsights) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TotalAmount != nil {
 		s.WriteString(schemas.AwsProductInsights_TotalAmount, *v.TotalAmount)
 	}
-	serializeAmountMap(s, schemas.AwsProductInsights_TotalAmountByCategory, v.TotalAmountByCategory)
+	if v.TotalAmountByCategory != nil {
+		serializeAmountMap(s, schemas.AwsProductInsights_TotalAmountByCategory, v.TotalAmountByCategory)
+	}
 	if v.TotalOptimizedAmount != nil {
 		s.WriteString(schemas.AwsProductInsights_TotalOptimizedAmount, *v.TotalOptimizedAmount)
 	}
@@ -1540,7 +1566,9 @@ func (v *Customer) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Account.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomerContactsList(s, schemas.Customer_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeCustomerContactsList(s, schemas.Customer_Contacts, v.Contacts)
+	}
 }
 func (v *Customer) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Customer, func(s *smithy.Schema) error {
@@ -1674,7 +1702,9 @@ func (v *EngagementContextDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.EngagementContextDetails_Id, *v.Id)
 	}
-	serializeEngagementContextPayload(s, schemas.EngagementContextDetails_Payload, v.Payload)
+	if v.Payload != nil {
+		serializeEngagementContextPayload(s, schemas.EngagementContextDetails_Payload, v.Payload)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.EngagementContextDetails_Type, string(v.Type))
 	}
@@ -2012,7 +2042,9 @@ func (v *EngagementInvitationSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.PayloadType != "" {
 		s.WriteString(schemas.EngagementInvitationSummary_PayloadType, string(v.PayloadType))
 	}
-	serializeReceiver(s, schemas.EngagementInvitationSummary_Receiver, v.Receiver)
+	if v.Receiver != nil {
+		serializeReceiver(s, schemas.EngagementInvitationSummary_Receiver, v.Receiver)
+	}
 	if v.SenderAwsAccountId != nil {
 		s.WriteString(schemas.EngagementInvitationSummary_SenderAwsAccountId, *v.SenderAwsAccountId)
 	}
@@ -2452,7 +2484,9 @@ func (v *EngagementSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.EngagementSummary_Arn, *v.Arn)
 	}
-	serializeEngagementContextTypeList(s, schemas.EngagementSummary_ContextTypes, v.ContextTypes)
+	if v.ContextTypes != nil {
+		serializeEngagementContextTypeList(s, schemas.EngagementSummary_ContextTypes, v.ContextTypes)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.EngagementSummary_CreatedAt, *v.CreatedAt)
 	}
@@ -2743,8 +2777,12 @@ func (v *Invitation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.Invitation_Message, *v.Message)
 	}
-	serializePayload(s, schemas.Invitation_Payload, v.Payload)
-	serializeReceiver(s, schemas.Invitation_Receiver, v.Receiver)
+	if v.Payload != nil {
+		serializePayload(s, schemas.Invitation_Payload, v.Payload)
+	}
+	if v.Receiver != nil {
+		serializeReceiver(s, schemas.Invitation_Receiver, v.Receiver)
+	}
 }
 func (v *Invitation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Invitation, func(s *smithy.Schema) error {
@@ -3039,7 +3077,9 @@ func (v *LeadContext) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Insights.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLeadInteractionList(s, schemas.LeadContext_Interactions, v.Interactions)
+	if v.Interactions != nil {
+		serializeLeadInteractionList(s, schemas.LeadContext_Interactions, v.Interactions)
+	}
 	if v.QualificationStatus != nil {
 		s.WriteString(schemas.LeadContext_QualificationStatus, *v.QualificationStatus)
 	}
@@ -3710,7 +3750,9 @@ func (v *LifeCycle) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextSteps != nil {
 		s.WriteString(schemas.LifeCycle_NextSteps, *v.NextSteps)
 	}
-	serializeNextStepsHistories(s, schemas.LifeCycle_NextStepsHistory, v.NextStepsHistory)
+	if v.NextStepsHistory != nil {
+		serializeNextStepsHistories(s, schemas.LifeCycle_NextStepsHistory, v.NextStepsHistory)
+	}
 	if v.ReviewComments != nil {
 		s.WriteString(schemas.LifeCycle_ReviewComments, *v.ReviewComments)
 	}
@@ -4516,11 +4558,15 @@ func (v *Marketing) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CampaignName != nil {
 		s.WriteString(schemas.Marketing_CampaignName, *v.CampaignName)
 	}
-	serializeChannels(s, schemas.Marketing_Channels, v.Channels)
+	if v.Channels != nil {
+		serializeChannels(s, schemas.Marketing_Channels, v.Channels)
+	}
 	if v.Source != "" {
 		s.WriteString(schemas.Marketing_Source, string(v.Source))
 	}
-	serializeUseCases(s, schemas.Marketing_UseCases, v.UseCases)
+	if v.UseCases != nil {
+		serializeUseCases(s, schemas.Marketing_UseCases, v.UseCases)
+	}
 }
 func (v *Marketing) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Marketing, func(s *smithy.Schema) error {
@@ -4748,8 +4794,12 @@ func (v *OpportunityInvitationPayload) SerializeMembers(s smithy.ShapeSerializer
 		v.Project.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReceiverResponsibilityList(s, schemas.OpportunityInvitationPayload_ReceiverResponsibilities, v.ReceiverResponsibilities)
-	serializeSenderContactList(s, schemas.OpportunityInvitationPayload_SenderContacts, v.SenderContacts)
+	if v.ReceiverResponsibilities != nil {
+		serializeReceiverResponsibilityList(s, schemas.OpportunityInvitationPayload_ReceiverResponsibilities, v.ReceiverResponsibilities)
+	}
+	if v.SenderContacts != nil {
+		serializeSenderContactList(s, schemas.OpportunityInvitationPayload_SenderContacts, v.SenderContacts)
+	}
 }
 func (v *OpportunityInvitationPayload) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpportunityInvitationPayload, func(s *smithy.Schema) error {
@@ -5060,11 +5110,15 @@ func (v *OpportunitySummaryView) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Lifecycle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePartnerOpportunityTeamMembersList(s, schemas.OpportunitySummaryView_OpportunityTeam, v.OpportunityTeam)
+	if v.OpportunityTeam != nil {
+		serializePartnerOpportunityTeamMembersList(s, schemas.OpportunitySummaryView_OpportunityTeam, v.OpportunityTeam)
+	}
 	if v.OpportunityType != "" {
 		s.WriteString(schemas.OpportunitySummaryView_OpportunityType, string(v.OpportunityType))
 	}
-	serializePrimaryNeedsFromAws(s, schemas.OpportunitySummaryView_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	if v.PrimaryNeedsFromAws != nil {
+		serializePrimaryNeedsFromAws(s, schemas.OpportunitySummaryView_PrimaryNeedsFromAws, v.PrimaryNeedsFromAws)
+	}
 	if v.Project != nil {
 		s.WriteStruct(schemas.OpportunitySummaryView_Project)
 		v.Project.SerializeMembers(s)
@@ -5356,7 +5410,9 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalComments != nil {
 		s.WriteString(schemas.Project_AdditionalComments, *v.AdditionalComments)
 	}
-	serializeApnPrograms(s, schemas.Project_ApnPrograms, v.ApnPrograms)
+	if v.ApnPrograms != nil {
+		serializeApnPrograms(s, schemas.Project_ApnPrograms, v.ApnPrograms)
+	}
 	if v.AwsPartition != "" {
 		s.WriteString(schemas.Project_AwsPartition, string(v.AwsPartition))
 	}
@@ -5369,13 +5425,17 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerUseCase != nil {
 		s.WriteString(schemas.Project_CustomerUseCase, *v.CustomerUseCase)
 	}
-	serializeDeliveryModels(s, schemas.Project_DeliveryModels, v.DeliveryModels)
+	if v.DeliveryModels != nil {
+		serializeDeliveryModels(s, schemas.Project_DeliveryModels, v.DeliveryModels)
+	}
 	if v.ExpectedContractDuration != nil {
 		s.WriteStruct(schemas.Project_ExpectedContractDuration)
 		v.ExpectedContractDuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpectedCustomerSpendList(s, schemas.Project_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.ExpectedCustomerSpend != nil {
+		serializeExpectedCustomerSpendList(s, schemas.Project_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	}
 	if v.OtherCompetitorNames != nil {
 		s.WriteString(schemas.Project_OtherCompetitorNames, *v.OtherCompetitorNames)
 	}
@@ -5385,7 +5445,9 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelatedOpportunityIdentifier != nil {
 		s.WriteString(schemas.Project_RelatedOpportunityIdentifier, *v.RelatedOpportunityIdentifier)
 	}
-	serializeSalesActivities(s, schemas.Project_SalesActivities, v.SalesActivities)
+	if v.SalesActivities != nil {
+		serializeSalesActivities(s, schemas.Project_SalesActivities, v.SalesActivities)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.Project_Title, *v.Title)
 	}
@@ -5485,7 +5547,9 @@ func (v *ProjectDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BusinessProblem != nil {
 		s.WriteString(schemas.ProjectDetails_BusinessProblem, *v.BusinessProblem)
 	}
-	serializeExpectedCustomerSpendList(s, schemas.ProjectDetails_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.ExpectedCustomerSpend != nil {
+		serializeExpectedCustomerSpendList(s, schemas.ProjectDetails_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	}
 	if v.TargetCompletionDate != nil {
 		s.WriteString(schemas.ProjectDetails_TargetCompletionDate, *v.TargetCompletionDate)
 	}
@@ -5558,13 +5622,17 @@ func (v *ProjectSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProjectSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeliveryModels(s, schemas.ProjectSummary_DeliveryModels, v.DeliveryModels)
+	if v.DeliveryModels != nil {
+		serializeDeliveryModels(s, schemas.ProjectSummary_DeliveryModels, v.DeliveryModels)
+	}
 	if v.ExpectedContractDuration != nil {
 		s.WriteStruct(schemas.ProjectSummary_ExpectedContractDuration)
 		v.ExpectedContractDuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpectedCustomerSpendList(s, schemas.ProjectSummary_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.ExpectedCustomerSpend != nil {
+		serializeExpectedCustomerSpendList(s, schemas.ProjectSummary_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	}
 }
 func (v *ProjectSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectSummary, func(s *smithy.Schema) error {
@@ -5626,17 +5694,23 @@ func (v *ProjectView) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerUseCase != nil {
 		s.WriteString(schemas.ProjectView_CustomerUseCase, *v.CustomerUseCase)
 	}
-	serializeDeliveryModels(s, schemas.ProjectView_DeliveryModels, v.DeliveryModels)
+	if v.DeliveryModels != nil {
+		serializeDeliveryModels(s, schemas.ProjectView_DeliveryModels, v.DeliveryModels)
+	}
 	if v.ExpectedContractDuration != nil {
 		s.WriteStruct(schemas.ProjectView_ExpectedContractDuration)
 		v.ExpectedContractDuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpectedCustomerSpendList(s, schemas.ProjectView_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	if v.ExpectedCustomerSpend != nil {
+		serializeExpectedCustomerSpendList(s, schemas.ProjectView_ExpectedCustomerSpend, v.ExpectedCustomerSpend)
+	}
 	if v.OtherSolutionDescription != nil {
 		s.WriteString(schemas.ProjectView_OtherSolutionDescription, *v.OtherSolutionDescription)
 	}
-	serializeSalesActivities(s, schemas.ProjectView_SalesActivities, v.SalesActivities)
+	if v.SalesActivities != nil {
+		serializeSalesActivities(s, schemas.ProjectView_SalesActivities, v.SalesActivities)
+	}
 }
 func (v *ProjectView) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectView, func(s *smithy.Schema) error {
@@ -5976,7 +6050,9 @@ func (v *ProspectingResultCustomer) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Country != "" {
 		s.WriteString(schemas.ProspectingResultCustomer_Country, string(v.Country))
 	}
-	serializeEligibleProgramsList(s, schemas.ProspectingResultCustomer_EligiblePrograms, v.EligiblePrograms)
+	if v.EligiblePrograms != nil {
+		serializeEligibleProgramsList(s, schemas.ProspectingResultCustomer_EligiblePrograms, v.EligiblePrograms)
+	}
 	if v.Geo != nil {
 		s.WriteString(schemas.ProspectingResultCustomer_Geo, *v.Geo)
 	}
@@ -6219,7 +6295,9 @@ func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendationAttributeMap(s, schemas.Recommendation_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeRecommendationAttributeMap(s, schemas.Recommendation_Attributes, v.Attributes)
+	}
 	if v.Details != nil {
 		s.WriteString(schemas.Recommendation_Details, *v.Details)
 	}
@@ -6312,12 +6390,24 @@ func (v *RelatedEntityIdentifiers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RelatedEntityIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsMarketplaceOfferSetIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceOfferSets, v.AwsMarketplaceOfferSets)
-	serializeAwsMarketplaceOfferIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceOffers, v.AwsMarketplaceOffers)
-	serializeAwsMarketplaceProductIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceProducts, v.AwsMarketplaceProducts)
-	serializeAwsMarketplaceSolutionIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceSolutions, v.AwsMarketplaceSolutions)
-	serializeAwsProductIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsProducts, v.AwsProducts)
-	serializeSolutionIdentifiers(s, schemas.RelatedEntityIdentifiers_Solutions, v.Solutions)
+	if v.AwsMarketplaceOfferSets != nil {
+		serializeAwsMarketplaceOfferSetIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceOfferSets, v.AwsMarketplaceOfferSets)
+	}
+	if v.AwsMarketplaceOffers != nil {
+		serializeAwsMarketplaceOfferIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceOffers, v.AwsMarketplaceOffers)
+	}
+	if v.AwsMarketplaceProducts != nil {
+		serializeAwsMarketplaceProductIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceProducts, v.AwsMarketplaceProducts)
+	}
+	if v.AwsMarketplaceSolutions != nil {
+		serializeAwsMarketplaceSolutionIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsMarketplaceSolutions, v.AwsMarketplaceSolutions)
+	}
+	if v.AwsProducts != nil {
+		serializeAwsProductIdentifiers(s, schemas.RelatedEntityIdentifiers_AwsProducts, v.AwsProducts)
+	}
+	if v.Solutions != nil {
+		serializeSolutionIdentifiers(s, schemas.RelatedEntityIdentifiers_Solutions, v.Solutions)
+	}
 }
 func (v *RelatedEntityIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RelatedEntityIdentifiers, func(s *smithy.Schema) error {

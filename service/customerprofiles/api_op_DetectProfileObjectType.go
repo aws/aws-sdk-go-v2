@@ -51,7 +51,9 @@ func (v *DetectProfileObjectTypeInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DomainName != nil {
 		s.WriteString(schemas.DetectProfileObjectTypeRequest_DomainName, *v.DomainName)
 	}
-	serializeObjects(s, schemas.DetectProfileObjectTypeRequest_Objects, v.Objects)
+	if v.Objects != nil {
+		serializeObjects(s, schemas.DetectProfileObjectTypeRequest_Objects, v.Objects)
+	}
 }
 
 type DetectProfileObjectTypeOutput struct {
@@ -73,7 +75,9 @@ func (v *DetectProfileObjectTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectProfileObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectedProfileObjectTypes(s, schemas.DetectProfileObjectTypeResponse_DetectedProfileObjectTypes, v.DetectedProfileObjectTypes)
+	if v.DetectedProfileObjectTypes != nil {
+		serializeDetectedProfileObjectTypes(s, schemas.DetectProfileObjectTypeResponse_DetectedProfileObjectTypes, v.DetectedProfileObjectTypes)
+	}
 }
 func (v *DetectProfileObjectTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectProfileObjectTypeResponse, func(s *smithy.Schema) error {

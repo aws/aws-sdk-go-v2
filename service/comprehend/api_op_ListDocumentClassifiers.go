@@ -84,7 +84,9 @@ func (v *ListDocumentClassifiersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDocumentClassifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentClassifierPropertiesList(s, schemas.ListDocumentClassifiersResponse_DocumentClassifierPropertiesList, v.DocumentClassifierPropertiesList)
+	if v.DocumentClassifierPropertiesList != nil {
+		serializeDocumentClassifierPropertiesList(s, schemas.ListDocumentClassifiersResponse_DocumentClassifierPropertiesList, v.DocumentClassifierPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDocumentClassifiersResponse_NextToken, *v.NextToken)
 	}

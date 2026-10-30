@@ -43,7 +43,9 @@ func (v *BatchGetFleetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFleetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleetNames(s, schemas.BatchGetFleetsInput_names, v.Names)
+	if v.Names != nil {
+		serializeFleetNames(s, schemas.BatchGetFleetsInput_names, v.Names)
+	}
 }
 
 type BatchGetFleetsOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchGetFleetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFleetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFleets(s, schemas.BatchGetFleetsOutput_fleets, v.Fleets)
-	serializeFleetNames(s, schemas.BatchGetFleetsOutput_fleetsNotFound, v.FleetsNotFound)
+	if v.Fleets != nil {
+		serializeFleets(s, schemas.BatchGetFleetsOutput_fleets, v.Fleets)
+	}
+	if v.FleetsNotFound != nil {
+		serializeFleetNames(s, schemas.BatchGetFleetsOutput_fleetsNotFound, v.FleetsNotFound)
+	}
 }
 func (v *BatchGetFleetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFleetsOutput, func(s *smithy.Schema) error {

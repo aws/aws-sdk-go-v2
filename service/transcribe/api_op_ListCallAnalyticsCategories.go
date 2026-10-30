@@ -90,7 +90,9 @@ func (v *ListCallAnalyticsCategoriesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListCallAnalyticsCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCategoryPropertiesList(s, schemas.ListCallAnalyticsCategoriesResponse_Categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryPropertiesList(s, schemas.ListCallAnalyticsCategoriesResponse_Categories, v.Categories)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCallAnalyticsCategoriesResponse_NextToken, *v.NextToken)
 	}

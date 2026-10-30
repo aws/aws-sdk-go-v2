@@ -77,7 +77,9 @@ func (v *ListEnvironmentAccountConnectionsInput) SerializeMembers(s smithy.Shape
 	if v.RequestedBy != "" {
 		s.WriteString(schemas.ListEnvironmentAccountConnectionsInput_requestedBy, string(v.RequestedBy))
 	}
-	serializeEnvironmentAccountConnectionStatusList(s, schemas.ListEnvironmentAccountConnectionsInput_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeEnvironmentAccountConnectionStatusList(s, schemas.ListEnvironmentAccountConnectionsInput_statuses, v.Statuses)
+	}
 }
 func (v *ListEnvironmentAccountConnectionsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEnvironmentAccountConnectionsInput, func(s *smithy.Schema) error {
@@ -131,7 +133,9 @@ func (v *ListEnvironmentAccountConnectionsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListEnvironmentAccountConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentAccountConnectionSummaryList(s, schemas.ListEnvironmentAccountConnectionsOutput_environmentAccountConnections, v.EnvironmentAccountConnections)
+	if v.EnvironmentAccountConnections != nil {
+		serializeEnvironmentAccountConnectionSummaryList(s, schemas.ListEnvironmentAccountConnectionsOutput_environmentAccountConnections, v.EnvironmentAccountConnections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentAccountConnectionsOutput_nextToken, *v.NextToken)
 	}

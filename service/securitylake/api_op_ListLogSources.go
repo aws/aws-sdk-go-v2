@@ -55,15 +55,21 @@ func (v *ListLogSourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLogSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountList(s, schemas.ListLogSourcesRequest_accounts, v.Accounts)
+	if v.Accounts != nil {
+		serializeAccountList(s, schemas.ListLogSourcesRequest_accounts, v.Accounts)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLogSourcesRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLogSourcesRequest_nextToken, *v.NextToken)
 	}
-	serializeRegionList(s, schemas.ListLogSourcesRequest_regions, v.Regions)
-	serializeLogSourceResourceList(s, schemas.ListLogSourcesRequest_sources, v.Sources)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.ListLogSourcesRequest_regions, v.Regions)
+	}
+	if v.Sources != nil {
+		serializeLogSourceResourceList(s, schemas.ListLogSourcesRequest_sources, v.Sources)
+	}
 }
 
 type ListLogSourcesOutput struct {
@@ -91,7 +97,9 @@ func (v *ListLogSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLogSourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeLogSourceList(s, schemas.ListLogSourcesResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeLogSourceList(s, schemas.ListLogSourcesResponse_sources, v.Sources)
+	}
 }
 func (v *ListLogSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLogSourcesResponse, func(s *smithy.Schema) error {

@@ -80,7 +80,9 @@ func (v *ListFrameworksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFrameworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFrameworkList(s, schemas.ListFrameworksOutput_Frameworks, v.Frameworks)
+	if v.Frameworks != nil {
+		serializeFrameworkList(s, schemas.ListFrameworksOutput_Frameworks, v.Frameworks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFrameworksOutput_NextToken, *v.NextToken)
 	}

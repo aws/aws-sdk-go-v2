@@ -90,7 +90,9 @@ func (v *GetCelebrityInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetCelebrityInfoResponse_Name, *v.Name)
 	}
-	serializeUrls(s, schemas.GetCelebrityInfoResponse_Urls, v.Urls)
+	if v.Urls != nil {
+		serializeUrls(s, schemas.GetCelebrityInfoResponse_Urls, v.Urls)
+	}
 }
 func (v *GetCelebrityInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCelebrityInfoResponse, func(s *smithy.Schema) error {

@@ -39,8 +39,12 @@ func (v *SparseJsonListsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparseJsonListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSparseShortList(s, schemas.SparseJsonListsInputOutput_sparseShortList, v.SparseShortList)
-	serializeSparseStringList(s, schemas.SparseJsonListsInputOutput_sparseStringList, v.SparseStringList)
+	if v.SparseShortList != nil {
+		serializeSparseShortList(s, schemas.SparseJsonListsInputOutput_sparseShortList, v.SparseShortList)
+	}
+	if v.SparseStringList != nil {
+		serializeSparseStringList(s, schemas.SparseJsonListsInputOutput_sparseStringList, v.SparseStringList)
+	}
 }
 func (v *SparseJsonListsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparseJsonListsInputOutput, func(s *smithy.Schema) error {
@@ -72,8 +76,12 @@ func (v *SparseJsonListsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparseJsonListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSparseShortList(s, schemas.SparseJsonListsInputOutput_sparseShortList, v.SparseShortList)
-	serializeSparseStringList(s, schemas.SparseJsonListsInputOutput_sparseStringList, v.SparseStringList)
+	if v.SparseShortList != nil {
+		serializeSparseShortList(s, schemas.SparseJsonListsInputOutput_sparseShortList, v.SparseShortList)
+	}
+	if v.SparseStringList != nil {
+		serializeSparseStringList(s, schemas.SparseJsonListsInputOutput_sparseStringList, v.SparseStringList)
+	}
 }
 func (v *SparseJsonListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparseJsonListsInputOutput, func(s *smithy.Schema) error {

@@ -127,7 +127,9 @@ func (v *ListPendingInvitationResourcesOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPendingInvitationResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeResourceList(s, schemas.ListPendingInvitationResourcesResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourceList(s, schemas.ListPendingInvitationResourcesResponse_resources, v.Resources)
+	}
 }
 func (v *ListPendingInvitationResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPendingInvitationResourcesResponse, func(s *smithy.Schema) error {

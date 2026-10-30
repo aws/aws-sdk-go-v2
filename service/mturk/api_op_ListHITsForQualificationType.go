@@ -92,7 +92,9 @@ func (v *ListHITsForQualificationTypeOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListHITsForQualificationTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHITList(s, schemas.ListHITsForQualificationTypeResponse_HITs, v.HITs)
+	if v.HITs != nil {
+		serializeHITList(s, schemas.ListHITsForQualificationTypeResponse_HITs, v.HITs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHITsForQualificationTypeResponse_NextToken, *v.NextToken)
 	}

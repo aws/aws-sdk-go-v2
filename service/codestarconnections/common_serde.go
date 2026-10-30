@@ -8,9 +8,6 @@ import (
 )
 
 func serializeConnectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Connection) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeConnectionList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeHostList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Host) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeHostList(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeLatestSyncBlockerList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SyncBlocker) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeLatestSyncBlockerList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeRepositoryLinkList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RepositoryLinkInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -60,9 +48,6 @@ func serializeRepositoryLinkList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeRepositorySyncDefinitionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RepositorySyncDefinition) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -73,9 +58,6 @@ func serializeRepositorySyncDefinitionList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeRepositorySyncEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RepositorySyncEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -86,9 +68,6 @@ func serializeRepositorySyncEventList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeResourceSyncEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ResourceSyncEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -99,9 +78,6 @@ func serializeResourceSyncEventList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -110,9 +86,6 @@ func serializeSecurityGroupIds(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -121,9 +94,6 @@ func serializeSubnetIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []str
 }
 
 func serializeSyncBlockerContextList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SyncBlockerContext) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -134,9 +104,6 @@ func serializeSyncBlockerContextList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeSyncConfigurationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SyncConfiguration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -147,9 +114,6 @@ func serializeSyncConfigurationList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -158,9 +122,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

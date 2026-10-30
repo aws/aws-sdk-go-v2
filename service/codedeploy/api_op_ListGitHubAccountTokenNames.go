@@ -74,7 +74,9 @@ func (v *ListGitHubAccountTokenNamesOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGitHubAccountTokenNamesOutput_nextToken, *v.NextToken)
 	}
-	serializeGitHubAccountTokenNameList(s, schemas.ListGitHubAccountTokenNamesOutput_tokenNameList, v.TokenNameList)
+	if v.TokenNameList != nil {
+		serializeGitHubAccountTokenNameList(s, schemas.ListGitHubAccountTokenNamesOutput_tokenNameList, v.TokenNameList)
+	}
 }
 func (v *ListGitHubAccountTokenNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGitHubAccountTokenNamesOutput, func(s *smithy.Schema) error {

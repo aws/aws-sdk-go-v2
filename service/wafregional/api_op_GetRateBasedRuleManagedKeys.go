@@ -88,7 +88,9 @@ func (v *GetRateBasedRuleManagedKeysOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetRateBasedRuleManagedKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedKeys(s, schemas.GetRateBasedRuleManagedKeysResponse_ManagedKeys, v.ManagedKeys)
+	if v.ManagedKeys != nil {
+		serializeManagedKeys(s, schemas.GetRateBasedRuleManagedKeysResponse_ManagedKeys, v.ManagedKeys)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.GetRateBasedRuleManagedKeysResponse_NextMarker, *v.NextMarker)
 	}

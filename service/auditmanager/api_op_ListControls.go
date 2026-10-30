@@ -107,7 +107,9 @@ func (v *ListControlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlMetadataList(s, schemas.ListControlsResponse_controlMetadataList, v.ControlMetadataList)
+	if v.ControlMetadataList != nil {
+		serializeControlMetadataList(s, schemas.ListControlsResponse_controlMetadataList, v.ControlMetadataList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListControlsResponse_nextToken, *v.NextToken)
 	}

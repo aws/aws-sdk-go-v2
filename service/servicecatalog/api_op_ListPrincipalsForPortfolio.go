@@ -99,7 +99,9 @@ func (v *ListPrincipalsForPortfolioOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListPrincipalsForPortfolioOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializePrincipals(s, schemas.ListPrincipalsForPortfolioOutput_Principals, v.Principals)
+	if v.Principals != nil {
+		serializePrincipals(s, schemas.ListPrincipalsForPortfolioOutput_Principals, v.Principals)
+	}
 }
 func (v *ListPrincipalsForPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrincipalsForPortfolioOutput, func(s *smithy.Schema) error {

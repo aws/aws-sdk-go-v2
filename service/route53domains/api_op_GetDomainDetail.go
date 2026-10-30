@@ -203,14 +203,18 @@ func (v *GetDomainDetailOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DnsSec != nil {
 		s.WriteString(schemas.GetDomainDetailResponse_DnsSec, *v.DnsSec)
 	}
-	serializeDnssecKeyList(s, schemas.GetDomainDetailResponse_DnssecKeys, v.DnssecKeys)
+	if v.DnssecKeys != nil {
+		serializeDnssecKeyList(s, schemas.GetDomainDetailResponse_DnssecKeys, v.DnssecKeys)
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.GetDomainDetailResponse_DomainName, *v.DomainName)
 	}
 	if v.ExpirationDate != nil {
 		s.WriteTime(schemas.GetDomainDetailResponse_ExpirationDate, *v.ExpirationDate)
 	}
-	serializeNameserverList(s, schemas.GetDomainDetailResponse_Nameservers, v.Nameservers)
+	if v.Nameservers != nil {
+		serializeNameserverList(s, schemas.GetDomainDetailResponse_Nameservers, v.Nameservers)
+	}
 	if v.RegistrantContact != nil {
 		s.WriteStruct(schemas.GetDomainDetailResponse_RegistrantContact)
 		v.RegistrantContact.SerializeMembers(s)
@@ -231,7 +235,9 @@ func (v *GetDomainDetailOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Reseller != nil {
 		s.WriteString(schemas.GetDomainDetailResponse_Reseller, *v.Reseller)
 	}
-	serializeDomainStatusList(s, schemas.GetDomainDetailResponse_StatusList, v.StatusList)
+	if v.StatusList != nil {
+		serializeDomainStatusList(s, schemas.GetDomainDetailResponse_StatusList, v.StatusList)
+	}
 	if v.TechContact != nil {
 		s.WriteStruct(schemas.GetDomainDetailResponse_TechContact)
 		v.TechContact.SerializeMembers(s)

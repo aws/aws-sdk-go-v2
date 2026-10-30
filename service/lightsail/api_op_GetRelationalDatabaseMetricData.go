@@ -184,7 +184,9 @@ func (v *GetRelationalDatabaseMetricDataInput) SerializeMembers(s smithy.ShapeSe
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetRelationalDatabaseMetricDataRequest_startTime, *v.StartTime)
 	}
-	serializeMetricStatisticList(s, schemas.GetRelationalDatabaseMetricDataRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeMetricStatisticList(s, schemas.GetRelationalDatabaseMetricDataRequest_statistics, v.Statistics)
+	}
 	if v.Unit != "" {
 		s.WriteString(schemas.GetRelationalDatabaseMetricDataRequest_unit, string(v.Unit))
 	}
@@ -211,7 +213,9 @@ func (v *GetRelationalDatabaseMetricDataOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetRelationalDatabaseMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatapointList(s, schemas.GetRelationalDatabaseMetricDataResult_metricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricDatapointList(s, schemas.GetRelationalDatabaseMetricDataResult_metricData, v.MetricData)
+	}
 	if v.MetricName != "" {
 		s.WriteString(schemas.GetRelationalDatabaseMetricDataResult_metricName, string(v.MetricName))
 	}

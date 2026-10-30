@@ -41,7 +41,9 @@ func (v *EnableSecurityHubV2Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnableSecurityHubV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagMap(s, schemas.EnableSecurityHubV2Request_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.EnableSecurityHubV2Request_Tags, v.Tags)
+	}
 }
 
 type EnableSecurityHubV2Output struct {

@@ -114,7 +114,9 @@ func (v *ListRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRoutesResponse_NextToken, *v.NextToken)
 	}
-	serializeRouteSummaries(s, schemas.ListRoutesResponse_RouteSummaryList, v.RouteSummaryList)
+	if v.RouteSummaryList != nil {
+		serializeRouteSummaries(s, schemas.ListRoutesResponse_RouteSummaryList, v.RouteSummaryList)
+	}
 }
 func (v *ListRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRoutesResponse, func(s *smithy.Schema) error {

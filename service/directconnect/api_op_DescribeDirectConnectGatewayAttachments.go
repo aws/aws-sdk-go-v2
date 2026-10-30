@@ -94,7 +94,9 @@ func (v *DescribeDirectConnectGatewayAttachmentsOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeDirectConnectGatewayAttachmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectConnectGatewayAttachmentList(s, schemas.DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments, v.DirectConnectGatewayAttachments)
+	if v.DirectConnectGatewayAttachments != nil {
+		serializeDirectConnectGatewayAttachmentList(s, schemas.DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments, v.DirectConnectGatewayAttachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDirectConnectGatewayAttachmentsResult_nextToken, *v.NextToken)
 	}

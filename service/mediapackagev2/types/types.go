@@ -34,7 +34,9 @@ func (v *CdnAuthConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CdnAuthConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCdnIdentifierSecretArns(s, schemas.CdnAuthConfiguration_CdnIdentifierSecretArns, v.CdnIdentifierSecretArns)
+	if v.CdnIdentifierSecretArns != nil {
+		serializeCdnIdentifierSecretArns(s, schemas.CdnAuthConfiguration_CdnIdentifierSecretArns, v.CdnIdentifierSecretArns)
+	}
 	if v.SecretsRoleArn != nil {
 		s.WriteString(schemas.CdnAuthConfiguration_SecretsRoleArn, *v.SecretsRoleArn)
 	}
@@ -214,7 +216,9 @@ func (v *ChannelListConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ChannelListConfiguration_Arn, *v.Arn)
 	}
-	serializeAttachedMultiviewChannelList(s, schemas.ChannelListConfiguration_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	if v.AttachedMultiviewChannels != nil {
+		serializeAttachedMultiviewChannelList(s, schemas.ChannelListConfiguration_AttachedMultiviewChannels, v.AttachedMultiviewChannels)
+	}
 	if v.ChannelGroupName != nil {
 		s.WriteString(schemas.ChannelListConfiguration_ChannelGroupName, *v.ChannelGroupName)
 	}
@@ -464,8 +468,12 @@ func (v *CreateDashManifestConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.AudioTimelinePattern != "" {
 		s.WriteString(schemas.CreateDashManifestConfiguration_AudioTimelinePattern, string(v.AudioTimelinePattern))
 	}
-	serializeDashAvailabilityStartTimeConfiguration(s, schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
-	serializeDashBaseUrls(s, schemas.CreateDashManifestConfiguration_BaseUrls, v.BaseUrls)
+	if v.AvailabilityStartTimeConfiguration != nil {
+		serializeDashAvailabilityStartTimeConfiguration(s, schemas.CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
+	}
+	if v.BaseUrls != nil {
+		serializeDashBaseUrls(s, schemas.CreateDashManifestConfiguration_BaseUrls, v.BaseUrls)
+	}
 	if v.Compactness != "" {
 		s.WriteString(schemas.CreateDashManifestConfiguration_Compactness, string(v.Compactness))
 	}
@@ -494,8 +502,12 @@ func (v *CreateDashManifestConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.MinUpdatePeriodSeconds != nil {
 		s.WriteInt32(schemas.CreateDashManifestConfiguration_MinUpdatePeriodSeconds, *v.MinUpdatePeriodSeconds)
 	}
-	serializeDashPeriodTriggers(s, schemas.CreateDashManifestConfiguration_PeriodTriggers, v.PeriodTriggers)
-	serializeDashProfiles(s, schemas.CreateDashManifestConfiguration_Profiles, v.Profiles)
+	if v.PeriodTriggers != nil {
+		serializeDashPeriodTriggers(s, schemas.CreateDashManifestConfiguration_PeriodTriggers, v.PeriodTriggers)
+	}
+	if v.Profiles != nil {
+		serializeDashProfiles(s, schemas.CreateDashManifestConfiguration_Profiles, v.Profiles)
+	}
 	if v.ProgramInformation != nil {
 		s.WriteStruct(schemas.CreateDashManifestConfiguration_ProgramInformation)
 		v.ProgramInformation.SerializeMembers(s)
@@ -1188,7 +1200,9 @@ func (v *DashDvbSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DashDvbSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashDvbErrorMetrics(s, schemas.DashDvbSettings_ErrorMetrics, v.ErrorMetrics)
+	if v.ErrorMetrics != nil {
+		serializeDashDvbErrorMetrics(s, schemas.DashDvbSettings_ErrorMetrics, v.ErrorMetrics)
+	}
 	if v.FontDownload != nil {
 		s.WriteStruct(schemas.DashDvbSettings_FontDownload)
 		v.FontDownload.SerializeMembers(s)
@@ -1846,7 +1860,9 @@ func (v *ForceEndpointErrorConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ForceEndpointErrorConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointErrorConditions(s, schemas.ForceEndpointErrorConfiguration_EndpointErrorConditions, v.EndpointErrorConditions)
+	if v.EndpointErrorConditions != nil {
+		serializeEndpointErrorConditions(s, schemas.ForceEndpointErrorConfiguration_EndpointErrorConditions, v.EndpointErrorConditions)
+	}
 }
 func (v *ForceEndpointErrorConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ForceEndpointErrorConfiguration, func(s *smithy.Schema) error {
@@ -1972,8 +1988,12 @@ func (v *GetDashManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.AudioTimelinePattern != "" {
 		s.WriteString(schemas.GetDashManifestConfiguration_AudioTimelinePattern, string(v.AudioTimelinePattern))
 	}
-	serializeDashAvailabilityStartTimeConfiguration(s, schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
-	serializeDashBaseUrls(s, schemas.GetDashManifestConfiguration_BaseUrls, v.BaseUrls)
+	if v.AvailabilityStartTimeConfiguration != nil {
+		serializeDashAvailabilityStartTimeConfiguration(s, schemas.GetDashManifestConfiguration_AvailabilityStartTimeConfiguration, v.AvailabilityStartTimeConfiguration)
+	}
+	if v.BaseUrls != nil {
+		serializeDashBaseUrls(s, schemas.GetDashManifestConfiguration_BaseUrls, v.BaseUrls)
+	}
 	if v.Compactness != "" {
 		s.WriteString(schemas.GetDashManifestConfiguration_Compactness, string(v.Compactness))
 	}
@@ -2002,8 +2022,12 @@ func (v *GetDashManifestConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.MinUpdatePeriodSeconds != nil {
 		s.WriteInt32(schemas.GetDashManifestConfiguration_MinUpdatePeriodSeconds, *v.MinUpdatePeriodSeconds)
 	}
-	serializeDashPeriodTriggers(s, schemas.GetDashManifestConfiguration_PeriodTriggers, v.PeriodTriggers)
-	serializeDashProfiles(s, schemas.GetDashManifestConfiguration_Profiles, v.Profiles)
+	if v.PeriodTriggers != nil {
+		serializeDashPeriodTriggers(s, schemas.GetDashManifestConfiguration_PeriodTriggers, v.PeriodTriggers)
+	}
+	if v.Profiles != nil {
+		serializeDashProfiles(s, schemas.GetDashManifestConfiguration_Profiles, v.Profiles)
+	}
 	if v.ProgramInformation != nil {
 		s.WriteStruct(schemas.GetDashManifestConfiguration_ProgramInformation)
 		v.ProgramInformation.SerializeMembers(s)
@@ -2633,9 +2657,15 @@ func (v *HarvestedManifests) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HarvestedManifests) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarvestedDashManifestsList(s, schemas.HarvestedManifests_DashManifests, v.DashManifests)
-	serializeHarvestedHlsManifestsList(s, schemas.HarvestedManifests_HlsManifests, v.HlsManifests)
-	serializeHarvestedLowLatencyHlsManifestsList(s, schemas.HarvestedManifests_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	if v.DashManifests != nil {
+		serializeHarvestedDashManifestsList(s, schemas.HarvestedManifests_DashManifests, v.DashManifests)
+	}
+	if v.HlsManifests != nil {
+		serializeHarvestedHlsManifestsList(s, schemas.HarvestedManifests_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeHarvestedLowLatencyHlsManifestsList(s, schemas.HarvestedManifests_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
 }
 func (v *HarvestedManifests) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HarvestedManifests, func(s *smithy.Schema) error {
@@ -3203,8 +3233,12 @@ func (v *MultiviewConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MultiviewConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMultiviewLayoutList(s, schemas.MultiviewConfiguration_AvailableLayouts, v.AvailableLayouts)
-	serializeMultiviewSourceList(s, schemas.MultiviewConfiguration_AvailableSources, v.AvailableSources)
+	if v.AvailableLayouts != nil {
+		serializeMultiviewLayoutList(s, schemas.MultiviewConfiguration_AvailableLayouts, v.AvailableLayouts)
+	}
+	if v.AvailableSources != nil {
+		serializeMultiviewSourceList(s, schemas.MultiviewConfiguration_AvailableSources, v.AvailableSources)
+	}
 }
 func (v *MultiviewConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MultiviewConfiguration, func(s *smithy.Schema) error {
@@ -3254,7 +3288,9 @@ func (v *MultiviewFilterConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.Layout != "" {
 		s.WriteString(schemas.MultiviewFilterConfiguration_Layout, string(v.Layout))
 	}
-	serializeMultiviewSourceList(s, schemas.MultiviewFilterConfiguration_Sources, v.Sources)
+	if v.Sources != nil {
+		serializeMultiviewSourceList(s, schemas.MultiviewFilterConfiguration_Sources, v.Sources)
+	}
 }
 func (v *MultiviewFilterConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MultiviewFilterConfiguration, func(s *smithy.Schema) error {
@@ -3366,7 +3402,9 @@ func (v *OriginEndpointListConfiguration) SerializeMembers(s smithy.ShapeSeriali
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.OriginEndpointListConfiguration_CreatedAt, *v.CreatedAt)
 	}
-	serializeListDashManifests(s, schemas.OriginEndpointListConfiguration_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serializeListDashManifests(s, schemas.OriginEndpointListConfiguration_DashManifests, v.DashManifests)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.OriginEndpointListConfiguration_Description, *v.Description)
 	}
@@ -3375,12 +3413,18 @@ func (v *OriginEndpointListConfiguration) SerializeMembers(s smithy.ShapeSeriali
 		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListHlsManifests(s, schemas.OriginEndpointListConfiguration_HlsManifests, v.HlsManifests)
-	serializeListLowLatencyHlsManifests(s, schemas.OriginEndpointListConfiguration_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	if v.HlsManifests != nil {
+		serializeListHlsManifests(s, schemas.OriginEndpointListConfiguration_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeListLowLatencyHlsManifests(s, schemas.OriginEndpointListConfiguration_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.OriginEndpointListConfiguration_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeListMssManifests(s, schemas.OriginEndpointListConfiguration_MssManifests, v.MssManifests)
+	if v.MssManifests != nil {
+		serializeListMssManifests(s, schemas.OriginEndpointListConfiguration_MssManifests, v.MssManifests)
+	}
 	if v.OriginEndpointName != nil {
 		s.WriteString(schemas.OriginEndpointListConfiguration_OriginEndpointName, *v.OriginEndpointName)
 	}
@@ -3573,8 +3617,12 @@ func (v *Scte) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Scte) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomAdTypeList(s, schemas.Scte_CustomAdTypes, v.CustomAdTypes)
-	serializeScteFilterList(s, schemas.Scte_ScteFilter, v.ScteFilter)
+	if v.CustomAdTypes != nil {
+		serializeCustomAdTypeList(s, schemas.Scte_CustomAdTypes, v.CustomAdTypes)
+	}
+	if v.ScteFilter != nil {
+		serializeScteFilterList(s, schemas.Scte_ScteFilter, v.ScteFilter)
+	}
 	if v.ScteInSegments != "" {
 		s.WriteString(schemas.Scte_ScteInSegments, string(v.ScteInSegments))
 	}
@@ -3950,7 +3998,9 @@ func (v *SpekeKeyProvider) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ContentKeyPeriodConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDrmSystems(s, schemas.SpekeKeyProvider_DrmSystems, v.DrmSystems)
+	if v.DrmSystems != nil {
+		serializeDrmSystems(s, schemas.SpekeKeyProvider_DrmSystems, v.DrmSystems)
+	}
 	if v.EncryptionContractConfiguration != nil {
 		s.WriteStruct(schemas.SpekeKeyProvider_EncryptionContractConfiguration)
 		v.EncryptionContractConfiguration.SerializeMembers(s)

@@ -1487,7 +1487,9 @@ func (v *CreateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Rank != nil {
 		s.WriteInt32(schemas.CreateFilterRequest_Rank, *v.Rank)
 	}
-	serializeTagMap(s, schemas.CreateFilterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFilterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFilterOutput struct {

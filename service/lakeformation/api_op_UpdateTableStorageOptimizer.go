@@ -61,7 +61,9 @@ func (v *UpdateTableStorageOptimizerInput) SerializeMembers(s smithy.ShapeSerial
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.UpdateTableStorageOptimizerRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeStorageOptimizerConfigMap(s, schemas.UpdateTableStorageOptimizerRequest_StorageOptimizerConfig, v.StorageOptimizerConfig)
+	if v.StorageOptimizerConfig != nil {
+		serializeStorageOptimizerConfigMap(s, schemas.UpdateTableStorageOptimizerRequest_StorageOptimizerConfig, v.StorageOptimizerConfig)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.UpdateTableStorageOptimizerRequest_TableName, *v.TableName)
 	}

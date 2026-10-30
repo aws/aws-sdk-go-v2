@@ -256,7 +256,9 @@ func (v *DescribeModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInferenceSpecifications(s, schemas.DescribeModelPackageOutput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	if v.AdditionalInferenceSpecifications != nil {
+		serializeAdditionalInferenceSpecifications(s, schemas.DescribeModelPackageOutput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	}
 	if v.ApprovalDescription != nil {
 		s.WriteString(schemas.DescribeModelPackageOutput_ApprovalDescription, *v.ApprovalDescription)
 	}
@@ -271,7 +273,9 @@ func (v *DescribeModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeModelPackageOutput_CreationTime, *v.CreationTime)
 	}
-	serializeCustomerMetadataMap(s, schemas.DescribeModelPackageOutput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	if v.CustomerMetadataProperties != nil {
+		serializeCustomerMetadataMap(s, schemas.DescribeModelPackageOutput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	}
 	if v.Domain != nil {
 		s.WriteString(schemas.DescribeModelPackageOutput_Domain, *v.Domain)
 	}

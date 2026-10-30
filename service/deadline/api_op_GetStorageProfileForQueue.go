@@ -106,7 +106,9 @@ func (v *GetStorageProfileForQueueOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DisplayName != nil {
 		s.WriteString(schemas.GetStorageProfileForQueueResponse_displayName, *v.DisplayName)
 	}
-	serializeFileSystemLocationsList(s, schemas.GetStorageProfileForQueueResponse_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeFileSystemLocationsList(s, schemas.GetStorageProfileForQueueResponse_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.OsFamily != "" {
 		s.WriteString(schemas.GetStorageProfileForQueueResponse_osFamily, string(v.OsFamily))
 	}

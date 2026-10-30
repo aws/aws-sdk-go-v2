@@ -120,7 +120,9 @@ func (v *GetEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MailFromAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.GetEmailIdentityResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetEmailIdentityResponse_Tags, v.Tags)
+	}
 	if v.VerifiedForSendingStatus != false {
 		s.WriteBool(schemas.GetEmailIdentityResponse_VerifiedForSendingStatus, v.VerifiedForSendingStatus)
 	}

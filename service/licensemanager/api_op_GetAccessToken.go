@@ -49,7 +49,9 @@ func (v *GetAccessTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Token != nil {
 		s.WriteString(schemas.GetAccessTokenRequest_Token, *v.Token)
 	}
-	serializeMaxSize3StringList(s, schemas.GetAccessTokenRequest_TokenProperties, v.TokenProperties)
+	if v.TokenProperties != nil {
+		serializeMaxSize3StringList(s, schemas.GetAccessTokenRequest_TokenProperties, v.TokenProperties)
+	}
 }
 
 type GetAccessTokenOutput struct {

@@ -64,7 +64,9 @@ func (v *GetCompatibleKafkaVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCompatibleKafkaVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCompatibleKafkaVersion(s, schemas.GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions, v.CompatibleKafkaVersions)
+	if v.CompatibleKafkaVersions != nil {
+		serialize__listOfCompatibleKafkaVersion(s, schemas.GetCompatibleKafkaVersionsResponse_CompatibleKafkaVersions, v.CompatibleKafkaVersions)
+	}
 }
 func (v *GetCompatibleKafkaVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCompatibleKafkaVersionsResponse, func(s *smithy.Schema) error {

@@ -46,7 +46,9 @@ func (v *GetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationIdentifier(s, schemas.GetIntegrationInput_identifier, v.Identifier)
+	if v.Identifier != nil {
+		serializeIntegrationIdentifier(s, schemas.GetIntegrationInput_identifier, v.Identifier)
+	}
 }
 
 // The response containing the requested integration.

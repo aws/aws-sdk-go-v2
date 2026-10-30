@@ -73,11 +73,15 @@ func (v *CreateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorArn != nil {
 		s.WriteString(schemas.CreateTemplateRequest_ConnectorArn, *v.ConnectorArn)
 	}
-	serializeTemplateDefinition(s, schemas.CreateTemplateRequest_Definition, v.Definition)
+	if v.Definition != nil {
+		serializeTemplateDefinition(s, schemas.CreateTemplateRequest_Definition, v.Definition)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTemplateRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateTemplateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTemplateRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTemplateOutput struct {

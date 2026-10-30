@@ -71,7 +71,9 @@ func (v *StartColumnStatisticsTaskRunInput) SerializeMembers(s smithy.ShapeSeria
 	if v.CatalogID != nil {
 		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_CatalogID, *v.CatalogID)
 	}
-	serializeColumnNameList(s, schemas.StartColumnStatisticsTaskRunRequest_ColumnNameList, v.ColumnNameList)
+	if v.ColumnNameList != nil {
+		serializeColumnNameList(s, schemas.StartColumnStatisticsTaskRunRequest_ColumnNameList, v.ColumnNameList)
+	}
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.StartColumnStatisticsTaskRunRequest_DatabaseName, *v.DatabaseName)
 	}

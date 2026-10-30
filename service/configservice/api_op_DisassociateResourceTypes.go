@@ -59,7 +59,9 @@ func (v *DisassociateResourceTypesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ConfigurationRecorderArn != nil {
 		s.WriteString(schemas.DisassociateResourceTypesRequest_ConfigurationRecorderArn, *v.ConfigurationRecorderArn)
 	}
-	serializeResourceTypeList(s, schemas.DisassociateResourceTypesRequest_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.DisassociateResourceTypesRequest_ResourceTypes, v.ResourceTypes)
+	}
 }
 
 type DisassociateResourceTypesOutput struct {

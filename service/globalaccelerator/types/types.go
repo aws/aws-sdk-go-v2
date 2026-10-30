@@ -108,11 +108,15 @@ func (v *Accelerator) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.Accelerator_Enabled, *v.Enabled)
 	}
-	serializeAcceleratorEvents(s, schemas.Accelerator_Events, v.Events)
+	if v.Events != nil {
+		serializeAcceleratorEvents(s, schemas.Accelerator_Events, v.Events)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.Accelerator_IpAddressType, string(v.IpAddressType))
 	}
-	serializeIpSets(s, schemas.Accelerator_IpSets, v.IpSets)
+	if v.IpSets != nil {
+		serializeIpSets(s, schemas.Accelerator_IpSets, v.IpSets)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.Accelerator_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -324,8 +328,12 @@ func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Attachment_Name, *v.Name)
 	}
-	serializePrincipals(s, schemas.Attachment_Principals, v.Principals)
-	serializeResources(s, schemas.Attachment_Resources, v.Resources)
+	if v.Principals != nil {
+		serializePrincipals(s, schemas.Attachment_Principals, v.Principals)
+	}
+	if v.Resources != nil {
+		serializeResources(s, schemas.Attachment_Resources, v.Resources)
+	}
 }
 func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Attachment, func(s *smithy.Schema) error {
@@ -424,7 +432,9 @@ func (v *ByoipCidr) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Cidr != nil {
 		s.WriteString(schemas.ByoipCidr_Cidr, *v.Cidr)
 	}
-	serializeByoipCidrEvents(s, schemas.ByoipCidr_Events, v.Events)
+	if v.Events != nil {
+		serializeByoipCidrEvents(s, schemas.ByoipCidr_Events, v.Events)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.ByoipCidr_State, string(v.State))
 	}
@@ -685,7 +695,9 @@ func (v *CustomRoutingAccelerator) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.CustomRoutingAccelerator_IpAddressType, string(v.IpAddressType))
 	}
-	serializeIpSets(s, schemas.CustomRoutingAccelerator_IpSets, v.IpSets)
+	if v.IpSets != nil {
+		serializeIpSets(s, schemas.CustomRoutingAccelerator_IpSets, v.IpSets)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.CustomRoutingAccelerator_LastModifiedTime, *v.LastModifiedTime)
 	}
@@ -836,7 +848,9 @@ func (v *CustomRoutingDestinationConfiguration) SerializeMembers(s smithy.ShapeS
 	if v.FromPort != nil {
 		s.WriteInt32(schemas.CustomRoutingDestinationConfiguration_FromPort, *v.FromPort)
 	}
-	serializeCustomRoutingProtocols(s, schemas.CustomRoutingDestinationConfiguration_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeCustomRoutingProtocols(s, schemas.CustomRoutingDestinationConfiguration_Protocols, v.Protocols)
+	}
 	if v.ToPort != nil {
 		s.WriteInt32(schemas.CustomRoutingDestinationConfiguration_ToPort, *v.ToPort)
 	}
@@ -887,7 +901,9 @@ func (v *CustomRoutingDestinationDescription) SerializeMembers(s smithy.ShapeSer
 	if v.FromPort != nil {
 		s.WriteInt32(schemas.CustomRoutingDestinationDescription_FromPort, *v.FromPort)
 	}
-	serializeProtocols(s, schemas.CustomRoutingDestinationDescription_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocols(s, schemas.CustomRoutingDestinationDescription_Protocols, v.Protocols)
+	}
 	if v.ToPort != nil {
 		s.WriteInt32(schemas.CustomRoutingDestinationDescription_ToPort, *v.ToPort)
 	}
@@ -1016,8 +1032,12 @@ func (v *CustomRoutingEndpointGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomRoutingEndpointGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingDestinationDescriptions(s, schemas.CustomRoutingEndpointGroup_DestinationDescriptions, v.DestinationDescriptions)
-	serializeCustomRoutingEndpointDescriptions(s, schemas.CustomRoutingEndpointGroup_EndpointDescriptions, v.EndpointDescriptions)
+	if v.DestinationDescriptions != nil {
+		serializeCustomRoutingDestinationDescriptions(s, schemas.CustomRoutingEndpointGroup_DestinationDescriptions, v.DestinationDescriptions)
+	}
+	if v.EndpointDescriptions != nil {
+		serializeCustomRoutingEndpointDescriptions(s, schemas.CustomRoutingEndpointGroup_EndpointDescriptions, v.EndpointDescriptions)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.CustomRoutingEndpointGroup_EndpointGroupArn, *v.EndpointGroupArn)
 	}
@@ -1069,7 +1089,9 @@ func (v *CustomRoutingListener) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ListenerArn != nil {
 		s.WriteString(schemas.CustomRoutingListener_ListenerArn, *v.ListenerArn)
 	}
-	serializePortRanges(s, schemas.CustomRoutingListener_PortRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.CustomRoutingListener_PortRanges, v.PortRanges)
+	}
 }
 func (v *CustomRoutingListener) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomRoutingListener, func(s *smithy.Schema) error {
@@ -1130,7 +1152,9 @@ func (v *DestinationPortMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceleratorArn != nil {
 		s.WriteString(schemas.DestinationPortMapping_AcceleratorArn, *v.AcceleratorArn)
 	}
-	serializeSocketAddresses(s, schemas.DestinationPortMapping_AcceleratorSocketAddresses, v.AcceleratorSocketAddresses)
+	if v.AcceleratorSocketAddresses != nil {
+		serializeSocketAddresses(s, schemas.DestinationPortMapping_AcceleratorSocketAddresses, v.AcceleratorSocketAddresses)
+	}
 	if v.DestinationSocketAddress != nil {
 		s.WriteStruct(schemas.DestinationPortMapping_DestinationSocketAddress)
 		v.DestinationSocketAddress.SerializeMembers(s)
@@ -1448,7 +1472,9 @@ func (v *EndpointGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EndpointGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointDescriptions(s, schemas.EndpointGroup_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointDescriptions != nil {
+		serializeEndpointDescriptions(s, schemas.EndpointGroup_EndpointDescriptions, v.EndpointDescriptions)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.EndpointGroup_EndpointGroupArn, *v.EndpointGroupArn)
 	}
@@ -1467,7 +1493,9 @@ func (v *EndpointGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HealthCheckProtocol != "" {
 		s.WriteString(schemas.EndpointGroup_HealthCheckProtocol, string(v.HealthCheckProtocol))
 	}
-	serializePortOverrides(s, schemas.EndpointGroup_PortOverrides, v.PortOverrides)
+	if v.PortOverrides != nil {
+		serializePortOverrides(s, schemas.EndpointGroup_PortOverrides, v.PortOverrides)
+	}
 	if v.ThresholdCount != nil {
 		s.WriteInt32(schemas.EndpointGroup_ThresholdCount, *v.ThresholdCount)
 	}
@@ -1638,11 +1666,15 @@ func (v *IpSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IpSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpAddressDetails(s, schemas.IpSet_IpAddressDetails, v.IpAddressDetails)
+	if v.IpAddressDetails != nil {
+		serializeIpAddressDetails(s, schemas.IpSet_IpAddressDetails, v.IpAddressDetails)
+	}
 	if v.IpAddressFamily != "" {
 		s.WriteString(schemas.IpSet_IpAddressFamily, string(v.IpAddressFamily))
 	}
-	serializeIpAddresses(s, schemas.IpSet_IpAddresses, v.IpAddresses)
+	if v.IpAddresses != nil {
+		serializeIpAddresses(s, schemas.IpSet_IpAddresses, v.IpAddresses)
+	}
 	if v.IpFamily != nil {
 		s.WriteString(schemas.IpSet_IpFamily, *v.IpFamily)
 	}
@@ -1718,7 +1750,9 @@ func (v *Listener) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ListenerArn != nil {
 		s.WriteString(schemas.Listener_ListenerArn, *v.ListenerArn)
 	}
-	serializePortRanges(s, schemas.Listener_PortRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.Listener_PortRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.Listener_Protocol, string(v.Protocol))
 	}
@@ -1805,7 +1839,9 @@ func (v *PortMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndpointId != nil {
 		s.WriteString(schemas.PortMapping_EndpointId, *v.EndpointId)
 	}
-	serializeCustomRoutingProtocols(s, schemas.PortMapping_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeCustomRoutingProtocols(s, schemas.PortMapping_Protocols, v.Protocols)
+	}
 }
 func (v *PortMapping) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PortMapping, func(s *smithy.Schema) error {

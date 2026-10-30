@@ -73,7 +73,9 @@ func (v *DescribePoolsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePoolFilterList(s, schemas.DescribePoolsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializePoolFilterList(s, schemas.DescribePoolsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribePoolsRequest_MaxResults, *v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *DescribePoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != "" {
 		s.WriteString(schemas.DescribePoolsRequest_Owner, string(v.Owner))
 	}
-	serializePoolIdList(s, schemas.DescribePoolsRequest_PoolIds, v.PoolIds)
+	if v.PoolIds != nil {
+		serializePoolIdList(s, schemas.DescribePoolsRequest_PoolIds, v.PoolIds)
+	}
 }
 
 type DescribePoolsOutput struct {
@@ -112,7 +116,9 @@ func (v *DescribePoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePoolsResult_NextToken, *v.NextToken)
 	}
-	serializePoolInformationList(s, schemas.DescribePoolsResult_Pools, v.Pools)
+	if v.Pools != nil {
+		serializePoolInformationList(s, schemas.DescribePoolsResult_Pools, v.Pools)
+	}
 }
 func (v *DescribePoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePoolsResult, func(s *smithy.Schema) error {

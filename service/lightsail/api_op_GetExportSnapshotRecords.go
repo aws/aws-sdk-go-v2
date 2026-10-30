@@ -82,7 +82,9 @@ func (v *GetExportSnapshotRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetExportSnapshotRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportSnapshotRecordList(s, schemas.GetExportSnapshotRecordsResult_exportSnapshotRecords, v.ExportSnapshotRecords)
+	if v.ExportSnapshotRecords != nil {
+		serializeExportSnapshotRecordList(s, schemas.GetExportSnapshotRecordsResult_exportSnapshotRecords, v.ExportSnapshotRecords)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetExportSnapshotRecordsResult_nextPageToken, *v.NextPageToken)
 	}

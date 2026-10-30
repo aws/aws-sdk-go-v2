@@ -103,7 +103,9 @@ func (v *ListResourceEndpointAssociationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListResourceEndpointAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceEndpointAssociationList(s, schemas.ListResourceEndpointAssociationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeResourceEndpointAssociationList(s, schemas.ListResourceEndpointAssociationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceEndpointAssociationsResponse_nextToken, *v.NextToken)
 	}

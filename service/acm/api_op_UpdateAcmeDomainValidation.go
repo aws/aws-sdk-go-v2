@@ -50,7 +50,9 @@ func (v *UpdateAcmeDomainValidationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AcmeDomainValidationArn != nil {
 		s.WriteString(schemas.UpdateAcmeDomainValidationRequest_AcmeDomainValidationArn, *v.AcmeDomainValidationArn)
 	}
-	serializePrevalidationOptions(s, schemas.UpdateAcmeDomainValidationRequest_PrevalidationOptions, v.PrevalidationOptions)
+	if v.PrevalidationOptions != nil {
+		serializePrevalidationOptions(s, schemas.UpdateAcmeDomainValidationRequest_PrevalidationOptions, v.PrevalidationOptions)
+	}
 }
 func (in *UpdateAcmeDomainValidationInput) bindEndpointParams(p *EndpointParameters) {
 

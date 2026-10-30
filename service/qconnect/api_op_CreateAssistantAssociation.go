@@ -70,14 +70,18 @@ func (v *CreateAssistantAssociationInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AssistantId != nil {
 		s.WriteString(schemas.CreateAssistantAssociationRequest_assistantId, *v.AssistantId)
 	}
-	serializeAssistantAssociationInputData(s, schemas.CreateAssistantAssociationRequest_association, v.Association)
+	if v.Association != nil {
+		serializeAssistantAssociationInputData(s, schemas.CreateAssistantAssociationRequest_association, v.Association)
+	}
 	if v.AssociationType != "" {
 		s.WriteString(schemas.CreateAssistantAssociationRequest_associationType, string(v.AssociationType))
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAssistantAssociationRequest_clientToken, *v.ClientToken)
 	}
-	serializeTags(s, schemas.CreateAssistantAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAssistantAssociationRequest_tags, v.Tags)
+	}
 }
 func (v *CreateAssistantAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAssistantAssociationRequest, func(s *smithy.Schema) error {

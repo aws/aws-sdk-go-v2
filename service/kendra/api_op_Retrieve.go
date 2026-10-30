@@ -142,7 +142,9 @@ func (v *RetrieveInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AttributeFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentRelevanceOverrideConfigurationList(s, schemas.RetrieveRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
+	if v.DocumentRelevanceOverrideConfigurations != nil {
+		serializeDocumentRelevanceOverrideConfigurationList(s, schemas.RetrieveRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
+	}
 	if v.IndexId != nil {
 		s.WriteString(schemas.RetrieveRequest_IndexId, *v.IndexId)
 	}
@@ -155,7 +157,9 @@ func (v *RetrieveInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryText != nil {
 		s.WriteString(schemas.RetrieveRequest_QueryText, *v.QueryText)
 	}
-	serializeDocumentAttributeKeyList(s, schemas.RetrieveRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
+	if v.RequestedDocumentAttributes != nil {
+		serializeDocumentAttributeKeyList(s, schemas.RetrieveRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
+	}
 	if v.UserContext != nil {
 		s.WriteStruct(schemas.RetrieveRequest_UserContext)
 		v.UserContext.SerializeMembers(s)
@@ -190,7 +194,9 @@ func (v *RetrieveOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryId != nil {
 		s.WriteString(schemas.RetrieveResult_QueryId, *v.QueryId)
 	}
-	serializeRetrieveResultItemList(s, schemas.RetrieveResult_ResultItems, v.ResultItems)
+	if v.ResultItems != nil {
+		serializeRetrieveResultItemList(s, schemas.RetrieveResult_ResultItems, v.ResultItems)
+	}
 }
 func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RetrieveResult, func(s *smithy.Schema) error {

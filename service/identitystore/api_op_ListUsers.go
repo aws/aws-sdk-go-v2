@@ -81,8 +81,12 @@ func (v *ListUsersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtensionNames(s, schemas.ListUsersRequest_Extensions, v.Extensions)
-	serializeFilters(s, schemas.ListUsersRequest_Filters, v.Filters)
+	if v.Extensions != nil {
+		serializeExtensionNames(s, schemas.ListUsersRequest_Extensions, v.Extensions)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListUsersRequest_Filters, v.Filters)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.ListUsersRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
@@ -124,7 +128,9 @@ func (v *ListUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUsersResponse_NextToken, *v.NextToken)
 	}
-	serializeUsers(s, schemas.ListUsersResponse_Users, v.Users)
+	if v.Users != nil {
+		serializeUsers(s, schemas.ListUsersResponse_Users, v.Users)
+	}
 }
 func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {

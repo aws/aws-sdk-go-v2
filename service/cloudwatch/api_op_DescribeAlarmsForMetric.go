@@ -70,7 +70,9 @@ func (v *DescribeAlarmsForMetricInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAlarmsForMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensions(s, schemas.DescribeAlarmsForMetricInput_Dimensions, v.Dimensions)
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.DescribeAlarmsForMetricInput_Dimensions, v.Dimensions)
+	}
 	if v.ExtendedStatistic != nil {
 		s.WriteString(schemas.DescribeAlarmsForMetricInput_ExtendedStatistic, *v.ExtendedStatistic)
 	}
@@ -109,7 +111,9 @@ func (v *DescribeAlarmsForMetricOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAlarmsForMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricAlarms(s, schemas.DescribeAlarmsForMetricOutput_MetricAlarms, v.MetricAlarms)
+	if v.MetricAlarms != nil {
+		serializeMetricAlarms(s, schemas.DescribeAlarmsForMetricOutput_MetricAlarms, v.MetricAlarms)
+	}
 }
 func (v *DescribeAlarmsForMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAlarmsForMetricOutput, func(s *smithy.Schema) error {

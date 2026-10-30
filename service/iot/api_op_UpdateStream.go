@@ -60,7 +60,9 @@ func (v *UpdateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateStreamRequest_description, *v.Description)
 	}
-	serializeStreamFiles(s, schemas.UpdateStreamRequest_files, v.Files)
+	if v.Files != nil {
+		serializeStreamFiles(s, schemas.UpdateStreamRequest_files, v.Files)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateStreamRequest_roleArn, *v.RoleArn)
 	}

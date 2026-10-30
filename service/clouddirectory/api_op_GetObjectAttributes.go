@@ -62,7 +62,9 @@ func (v *GetObjectAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetObjectAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.GetObjectAttributesRequest_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.GetObjectAttributesRequest_AttributeNames, v.AttributeNames)
+	}
 	if v.ConsistencyLevel != "" {
 		s.WriteString(schemas.GetObjectAttributesRequest_ConsistencyLevel, string(v.ConsistencyLevel))
 	}
@@ -99,7 +101,9 @@ func (v *GetObjectAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetObjectAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.GetObjectAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeKeyAndValueList(s, schemas.GetObjectAttributesResponse_Attributes, v.Attributes)
+	}
 }
 func (v *GetObjectAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetObjectAttributesResponse, func(s *smithy.Schema) error {

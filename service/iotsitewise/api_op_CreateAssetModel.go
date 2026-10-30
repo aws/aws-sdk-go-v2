@@ -135,28 +135,36 @@ func (v *CreateAssetModelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAssetModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetModelCompositeModelDefinitions(s, schemas.CreateAssetModelRequest_assetModelCompositeModels, v.AssetModelCompositeModels)
+	if v.AssetModelCompositeModels != nil {
+		serializeAssetModelCompositeModelDefinitions(s, schemas.CreateAssetModelRequest_assetModelCompositeModels, v.AssetModelCompositeModels)
+	}
 	if v.AssetModelDescription != nil {
 		s.WriteString(schemas.CreateAssetModelRequest_assetModelDescription, *v.AssetModelDescription)
 	}
 	if v.AssetModelExternalId != nil {
 		s.WriteString(schemas.CreateAssetModelRequest_assetModelExternalId, *v.AssetModelExternalId)
 	}
-	serializeAssetModelHierarchyDefinitions(s, schemas.CreateAssetModelRequest_assetModelHierarchies, v.AssetModelHierarchies)
+	if v.AssetModelHierarchies != nil {
+		serializeAssetModelHierarchyDefinitions(s, schemas.CreateAssetModelRequest_assetModelHierarchies, v.AssetModelHierarchies)
+	}
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.CreateAssetModelRequest_assetModelId, *v.AssetModelId)
 	}
 	if v.AssetModelName != nil {
 		s.WriteString(schemas.CreateAssetModelRequest_assetModelName, *v.AssetModelName)
 	}
-	serializeAssetModelPropertyDefinitions(s, schemas.CreateAssetModelRequest_assetModelProperties, v.AssetModelProperties)
+	if v.AssetModelProperties != nil {
+		serializeAssetModelPropertyDefinitions(s, schemas.CreateAssetModelRequest_assetModelProperties, v.AssetModelProperties)
+	}
 	if v.AssetModelType != "" {
 		s.WriteString(schemas.CreateAssetModelRequest_assetModelType, string(v.AssetModelType))
 	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAssetModelRequest_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateAssetModelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAssetModelRequest_tags, v.Tags)
+	}
 }
 
 type CreateAssetModelOutput struct {

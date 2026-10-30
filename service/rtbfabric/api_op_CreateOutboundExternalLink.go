@@ -96,7 +96,9 @@ func (v *CreateOutboundExternalLinkInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.PublicEndpoint != nil {
 		s.WriteString(schemas.CreateOutboundExternalLinkRequest_publicEndpoint, *v.PublicEndpoint)
 	}
-	serializeTagsMap(s, schemas.CreateOutboundExternalLinkRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateOutboundExternalLinkRequest_tags, v.Tags)
+	}
 }
 
 type CreateOutboundExternalLinkOutput struct {

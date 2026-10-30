@@ -75,7 +75,9 @@ func (v *AmendBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AmendmentReason != nil {
 		s.WriteString(schemas.AmendBenefitApplicationInput_AmendmentReason, *v.AmendmentReason)
 	}
-	serializeAmendmentList(s, schemas.AmendBenefitApplicationInput_Amendments, v.Amendments)
+	if v.Amendments != nil {
+		serializeAmendmentList(s, schemas.AmendBenefitApplicationInput_Amendments, v.Amendments)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.AmendBenefitApplicationInput_Catalog, *v.Catalog)
 	}

@@ -98,14 +98,18 @@ func (v *SearchAllRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DomainId != nil {
 		s.WriteString(schemas.SearchAllRelatedItemsRequest_domainId, *v.DomainId)
 	}
-	serializeRelatedItemFilterList(s, schemas.SearchAllRelatedItemsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeRelatedItemFilterList(s, schemas.SearchAllRelatedItemsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchAllRelatedItemsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAllRelatedItemsRequest_nextToken, *v.NextToken)
 	}
-	serializeSearchAllRelatedItemsSortList(s, schemas.SearchAllRelatedItemsRequest_sorts, v.Sorts)
+	if v.Sorts != nil {
+		serializeSearchAllRelatedItemsSortList(s, schemas.SearchAllRelatedItemsRequest_sorts, v.Sorts)
+	}
 }
 
 type SearchAllRelatedItemsOutput struct {
@@ -135,7 +139,9 @@ func (v *SearchAllRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAllRelatedItemsResponse_nextToken, *v.NextToken)
 	}
-	serializeSearchAllRelatedItemsResponseItemList(s, schemas.SearchAllRelatedItemsResponse_relatedItems, v.RelatedItems)
+	if v.RelatedItems != nil {
+		serializeSearchAllRelatedItemsResponseItemList(s, schemas.SearchAllRelatedItemsResponse_relatedItems, v.RelatedItems)
+	}
 }
 func (v *SearchAllRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchAllRelatedItemsResponse, func(s *smithy.Schema) error {

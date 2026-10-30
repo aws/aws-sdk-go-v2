@@ -101,7 +101,9 @@ func (v *AssociateSoftwareToImageBuilderInput) SerializeMembers(s smithy.ShapeSe
 	if v.ImageBuilderName != nil {
 		s.WriteString(schemas.AssociateSoftwareToImageBuilderRequest_ImageBuilderName, *v.ImageBuilderName)
 	}
-	serializeStringList(s, schemas.AssociateSoftwareToImageBuilderRequest_SoftwareNames, v.SoftwareNames)
+	if v.SoftwareNames != nil {
+		serializeStringList(s, schemas.AssociateSoftwareToImageBuilderRequest_SoftwareNames, v.SoftwareNames)
+	}
 }
 
 type AssociateSoftwareToImageBuilderOutput struct {

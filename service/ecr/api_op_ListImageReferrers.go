@@ -131,7 +131,9 @@ func (v *ListImageReferrersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImageReferrersResponse_nextToken, *v.NextToken)
 	}
-	serializeImageReferrerList(s, schemas.ListImageReferrersResponse_referrers, v.Referrers)
+	if v.Referrers != nil {
+		serializeImageReferrerList(s, schemas.ListImageReferrersResponse_referrers, v.Referrers)
+	}
 }
 func (v *ListImageReferrersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListImageReferrersResponse, func(s *smithy.Schema) error {

@@ -64,7 +64,9 @@ func (v *ListSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApprovalTeamArn != nil {
 		s.WriteString(schemas.ListSessionsRequest_ApprovalTeamArn, *v.ApprovalTeamArn)
 	}
-	serializeFilters(s, schemas.ListSessionsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListSessionsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListSessionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -101,7 +103,9 @@ func (v *ListSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSessionsResponse_NextToken, *v.NextToken)
 	}
-	serializeListSessionsResponseSessions(s, schemas.ListSessionsResponse_Sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeListSessionsResponseSessions(s, schemas.ListSessionsResponse_Sessions, v.Sessions)
+	}
 }
 func (v *ListSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSessionsResponse, func(s *smithy.Schema) error {

@@ -64,7 +64,9 @@ func (v *UpdateIdentityProviderSettingsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateIdentityProviderSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityProvider(s, schemas.UpdateIdentityProviderSettingsRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.UpdateIdentityProviderSettingsRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.IdentityProviderArn != nil {
 		s.WriteString(schemas.UpdateIdentityProviderSettingsRequest_IdentityProviderArn, *v.IdentityProviderArn)
 	}

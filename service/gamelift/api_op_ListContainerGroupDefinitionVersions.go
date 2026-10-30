@@ -111,7 +111,9 @@ func (v *ListContainerGroupDefinitionVersionsOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListContainerGroupDefinitionVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerGroupDefinitionList(s, schemas.ListContainerGroupDefinitionVersionsOutput_ContainerGroupDefinitions, v.ContainerGroupDefinitions)
+	if v.ContainerGroupDefinitions != nil {
+		serializeContainerGroupDefinitionList(s, schemas.ListContainerGroupDefinitionVersionsOutput_ContainerGroupDefinitions, v.ContainerGroupDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContainerGroupDefinitionVersionsOutput_NextToken, *v.NextToken)
 	}

@@ -56,13 +56,17 @@ func (v *UpdateTableReplicaAutoScalingInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateTableReplicaAutoScalingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalSecondaryIndexAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_GlobalSecondaryIndexUpdates, v.GlobalSecondaryIndexUpdates)
+	if v.GlobalSecondaryIndexUpdates != nil {
+		serializeGlobalSecondaryIndexAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_GlobalSecondaryIndexUpdates, v.GlobalSecondaryIndexUpdates)
+	}
 	if v.ProvisionedWriteCapacityAutoScalingUpdate != nil {
 		s.WriteStruct(schemas.UpdateTableReplicaAutoScalingInput_ProvisionedWriteCapacityAutoScalingUpdate)
 		v.ProvisionedWriteCapacityAutoScalingUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_ReplicaUpdates, v.ReplicaUpdates)
+	if v.ReplicaUpdates != nil {
+		serializeReplicaAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_ReplicaUpdates, v.ReplicaUpdates)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.UpdateTableReplicaAutoScalingInput_TableName, *v.TableName)
 	}

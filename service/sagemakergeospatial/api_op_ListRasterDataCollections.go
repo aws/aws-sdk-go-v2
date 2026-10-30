@@ -94,7 +94,9 @@ func (v *ListRasterDataCollectionsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRasterDataCollectionsOutput_NextToken, *v.NextToken)
 	}
-	serializeDataCollectionsList(s, schemas.ListRasterDataCollectionsOutput_RasterDataCollectionSummaries, v.RasterDataCollectionSummaries)
+	if v.RasterDataCollectionSummaries != nil {
+		serializeDataCollectionsList(s, schemas.ListRasterDataCollectionsOutput_RasterDataCollectionSummaries, v.RasterDataCollectionSummaries)
+	}
 }
 func (v *ListRasterDataCollectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRasterDataCollectionsOutput, func(s *smithy.Schema) error {

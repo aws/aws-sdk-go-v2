@@ -419,7 +419,9 @@ func (v *Message) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageSystemAttributeMap(s, schemas.Message_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeMessageSystemAttributeMap(s, schemas.Message_Attributes, v.Attributes)
+	}
 	if v.Body != nil {
 		s.WriteString(schemas.Message_Body, *v.Body)
 	}
@@ -429,7 +431,9 @@ func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MD5OfMessageAttributes != nil {
 		s.WriteString(schemas.Message_MD5OfMessageAttributes, *v.MD5OfMessageAttributes)
 	}
-	serializeMessageBodyAttributeMap(s, schemas.Message_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageBodyAttributeMap(s, schemas.Message_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageId != nil {
 		s.WriteString(schemas.Message_MessageId, *v.MessageId)
 	}
@@ -509,14 +513,18 @@ func (v *MessageAttributeValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBinaryList(s, schemas.MessageAttributeValue_BinaryListValues, v.BinaryListValues)
+	if v.BinaryListValues != nil {
+		serializeBinaryList(s, schemas.MessageAttributeValue_BinaryListValues, v.BinaryListValues)
+	}
 	if v.BinaryValue != nil {
 		s.WriteBlob(schemas.MessageAttributeValue_BinaryValue, v.BinaryValue)
 	}
 	if v.DataType != nil {
 		s.WriteString(schemas.MessageAttributeValue_DataType, *v.DataType)
 	}
-	serializeStringList(s, schemas.MessageAttributeValue_StringListValues, v.StringListValues)
+	if v.StringListValues != nil {
+		serializeStringList(s, schemas.MessageAttributeValue_StringListValues, v.StringListValues)
+	}
 	if v.StringValue != nil {
 		s.WriteString(schemas.MessageAttributeValue_StringValue, *v.StringValue)
 	}
@@ -584,14 +592,18 @@ func (v *MessageSystemAttributeValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MessageSystemAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBinaryList(s, schemas.MessageSystemAttributeValue_BinaryListValues, v.BinaryListValues)
+	if v.BinaryListValues != nil {
+		serializeBinaryList(s, schemas.MessageSystemAttributeValue_BinaryListValues, v.BinaryListValues)
+	}
 	if v.BinaryValue != nil {
 		s.WriteBlob(schemas.MessageSystemAttributeValue_BinaryValue, v.BinaryValue)
 	}
 	if v.DataType != nil {
 		s.WriteString(schemas.MessageSystemAttributeValue_DataType, *v.DataType)
 	}
-	serializeStringList(s, schemas.MessageSystemAttributeValue_StringListValues, v.StringListValues)
+	if v.StringListValues != nil {
+		serializeStringList(s, schemas.MessageSystemAttributeValue_StringListValues, v.StringListValues)
+	}
 	if v.StringValue != nil {
 		s.WriteString(schemas.MessageSystemAttributeValue_StringValue, *v.StringValue)
 	}
@@ -772,7 +784,9 @@ func (v *SendMessageBatchRequestEntry) SerializeMembers(s smithy.ShapeSerializer
 	if v.Id != nil {
 		s.WriteString(schemas.SendMessageBatchRequestEntry_Id, *v.Id)
 	}
-	serializeMessageBodyAttributeMap(s, schemas.SendMessageBatchRequestEntry_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeMessageBodyAttributeMap(s, schemas.SendMessageBatchRequestEntry_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageBody != nil {
 		s.WriteString(schemas.SendMessageBatchRequestEntry_MessageBody, *v.MessageBody)
 	}
@@ -782,7 +796,9 @@ func (v *SendMessageBatchRequestEntry) SerializeMembers(s smithy.ShapeSerializer
 	if v.MessageGroupId != nil {
 		s.WriteString(schemas.SendMessageBatchRequestEntry_MessageGroupId, *v.MessageGroupId)
 	}
-	serializeMessageBodySystemAttributeMap(s, schemas.SendMessageBatchRequestEntry_MessageSystemAttributes, v.MessageSystemAttributes)
+	if v.MessageSystemAttributes != nil {
+		serializeMessageBodySystemAttributeMap(s, schemas.SendMessageBatchRequestEntry_MessageSystemAttributes, v.MessageSystemAttributes)
+	}
 }
 func (v *SendMessageBatchRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SendMessageBatchRequestEntry, func(s *smithy.Schema) error {

@@ -61,7 +61,9 @@ func (v *ListTrainingPlansInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTrainingPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrainingPlanFilters(s, schemas.ListTrainingPlansRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeTrainingPlanFilters(s, schemas.ListTrainingPlansRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListTrainingPlansRequest_MaxResults, *v.MaxResults)
 	}
@@ -108,7 +110,9 @@ func (v *ListTrainingPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrainingPlansResponse_NextToken, *v.NextToken)
 	}
-	serializeTrainingPlanSummaries(s, schemas.ListTrainingPlansResponse_TrainingPlanSummaries, v.TrainingPlanSummaries)
+	if v.TrainingPlanSummaries != nil {
+		serializeTrainingPlanSummaries(s, schemas.ListTrainingPlansResponse_TrainingPlanSummaries, v.TrainingPlanSummaries)
+	}
 }
 func (v *ListTrainingPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrainingPlansResponse, func(s *smithy.Schema) error {

@@ -93,7 +93,9 @@ func (v *AcceptMatchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptanceType != "" {
 		s.WriteString(schemas.AcceptMatchInput_AcceptanceType, string(v.AcceptanceType))
 	}
-	serializePlayerIdsForAcceptMatch(s, schemas.AcceptMatchInput_PlayerIds, v.PlayerIds)
+	if v.PlayerIds != nil {
+		serializePlayerIdsForAcceptMatch(s, schemas.AcceptMatchInput_PlayerIds, v.PlayerIds)
+	}
 	if v.TicketId != nil {
 		s.WriteString(schemas.AcceptMatchInput_TicketId, *v.TicketId)
 	}

@@ -150,7 +150,9 @@ func (v *GetLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Direction != "" {
 		s.WriteString(schemas.GetLinkResponse_direction, string(v.Direction))
 	}
-	serializeModuleConfigurationList(s, schemas.GetLinkResponse_flowModules, v.FlowModules)
+	if v.FlowModules != nil {
+		serializeModuleConfigurationList(s, schemas.GetLinkResponse_flowModules, v.FlowModules)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GetLinkResponse_gatewayId, *v.GatewayId)
 	}
@@ -168,11 +170,15 @@ func (v *GetLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PeerGatewayId != nil {
 		s.WriteString(schemas.GetLinkResponse_peerGatewayId, *v.PeerGatewayId)
 	}
-	serializeModuleConfigurationList(s, schemas.GetLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	if v.PendingFlowModules != nil {
+		serializeModuleConfigurationList(s, schemas.GetLinkResponse_pendingFlowModules, v.PendingFlowModules)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetLinkResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetLinkResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetLinkResponse_tags, v.Tags)
+	}
 	if v.TimeoutInMillis != nil {
 		s.WriteInt64(schemas.GetLinkResponse_timeoutInMillis, *v.TimeoutInMillis)
 	}

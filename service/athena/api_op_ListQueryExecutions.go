@@ -89,7 +89,9 @@ func (v *ListQueryExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueryExecutionsOutput_NextToken, *v.NextToken)
 	}
-	serializeQueryExecutionIdList(s, schemas.ListQueryExecutionsOutput_QueryExecutionIds, v.QueryExecutionIds)
+	if v.QueryExecutionIds != nil {
+		serializeQueryExecutionIdList(s, schemas.ListQueryExecutionsOutput_QueryExecutionIds, v.QueryExecutionIds)
+	}
 }
 func (v *ListQueryExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueryExecutionsOutput, func(s *smithy.Schema) error {

@@ -98,7 +98,9 @@ func (v *GetSupportedResourceTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSupportedResourceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTypes(s, schemas.GetSupportedResourceTypesOutput_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypes(s, schemas.GetSupportedResourceTypesOutput_ResourceTypes, v.ResourceTypes)
+	}
 }
 func (v *GetSupportedResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSupportedResourceTypesOutput, func(s *smithy.Schema) error {

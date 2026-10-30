@@ -7,9 +7,6 @@ import (
 )
 
 func serializeActiveContextsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ActiveContext) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeActiveContextsList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeButtonsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Button) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeButtonsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []B
 }
 
 func serializeInterpretations(s smithy.ShapeSerializer, schema *smithy.Schema, v []Interpretation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -46,9 +37,6 @@ func serializeInterpretations(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeMessages(s smithy.ShapeSerializer, schema *smithy.Schema, v []Message) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -59,9 +47,6 @@ func serializeMessages(s smithy.ShapeSerializer, schema *smithy.Schema, v []Mess
 }
 
 func serializeRuntimeHintValuesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RuntimeHintValue) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -72,9 +57,6 @@ func serializeRuntimeHintValuesList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -83,9 +65,6 @@ func serializeStringList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []Slot) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -249,9 +228,6 @@ func deserializeValues(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]Slot) 
 }
 
 func serializeActiveContextParametersMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -261,9 +237,6 @@ func serializeActiveContextParametersMap(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeSlotHintsIntentMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]map[string]RuntimeHintDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -273,9 +246,6 @@ func serializeSlotHintsIntentMap(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeSlotHintsSlotMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]RuntimeHintDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -287,9 +257,6 @@ func serializeSlotHintsSlotMap(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSlots(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]Slot) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -301,9 +268,6 @@ func serializeSlots(s smithy.ShapeSerializer, schema *smithy.Schema, v map[strin
 }
 
 func serializeStringMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

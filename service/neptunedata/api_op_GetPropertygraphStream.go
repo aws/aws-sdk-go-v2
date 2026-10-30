@@ -175,11 +175,15 @@ func (v *GetPropertygraphStreamOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Format != nil {
 		s.WriteString(schemas.GetPropertygraphStreamOutput_format, *v.Format)
 	}
-	serializeStringValuedMap(s, schemas.GetPropertygraphStreamOutput_lastEventId, v.LastEventId)
+	if v.LastEventId != nil {
+		serializeStringValuedMap(s, schemas.GetPropertygraphStreamOutput_lastEventId, v.LastEventId)
+	}
 	if v.LastTrxTimestampInMillis != nil {
 		s.WriteInt64(schemas.GetPropertygraphStreamOutput_lastTrxTimestampInMillis, *v.LastTrxTimestampInMillis)
 	}
-	serializePropertygraphRecordsList(s, schemas.GetPropertygraphStreamOutput_records, v.Records)
+	if v.Records != nil {
+		serializePropertygraphRecordsList(s, schemas.GetPropertygraphStreamOutput_records, v.Records)
+	}
 	if v.TotalRecords != nil {
 		s.WriteInt32(schemas.GetPropertygraphStreamOutput_totalRecords, *v.TotalRecords)
 	}

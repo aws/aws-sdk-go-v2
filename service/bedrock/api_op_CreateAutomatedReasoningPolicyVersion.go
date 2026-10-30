@@ -71,7 +71,9 @@ func (v *CreateAutomatedReasoningPolicyVersionInput) SerializeMembers(s smithy.S
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.CreateAutomatedReasoningPolicyVersionRequest_policyArn, *v.PolicyArn)
 	}
-	serializeTagList(s, schemas.CreateAutomatedReasoningPolicyVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAutomatedReasoningPolicyVersionRequest_tags, v.Tags)
+	}
 }
 
 type CreateAutomatedReasoningPolicyVersionOutput struct {

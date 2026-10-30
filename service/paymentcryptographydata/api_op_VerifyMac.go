@@ -95,7 +95,9 @@ func (v *VerifyMacInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MessageData != nil {
 		s.WriteString(schemas.VerifyMacInput_MessageData, *v.MessageData)
 	}
-	serializeMacAttributes(s, schemas.VerifyMacInput_VerificationAttributes, v.VerificationAttributes)
+	if v.VerificationAttributes != nil {
+		serializeMacAttributes(s, schemas.VerifyMacInput_VerificationAttributes, v.VerificationAttributes)
+	}
 }
 
 type VerifyMacOutput struct {

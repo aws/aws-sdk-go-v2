@@ -80,7 +80,9 @@ func (v *DescribeReportDefinitionsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReportDefinitionsResponse_NextToken, *v.NextToken)
 	}
-	serializeReportDefinitionList(s, schemas.DescribeReportDefinitionsResponse_ReportDefinitions, v.ReportDefinitions)
+	if v.ReportDefinitions != nil {
+		serializeReportDefinitionList(s, schemas.DescribeReportDefinitionsResponse_ReportDefinitions, v.ReportDefinitions)
+	}
 }
 func (v *DescribeReportDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReportDefinitionsResponse, func(s *smithy.Schema) error {

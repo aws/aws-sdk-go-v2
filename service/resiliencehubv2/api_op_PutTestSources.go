@@ -61,7 +61,9 @@ func (v *PutTestSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TestId != nil {
 		s.WriteString(schemas.PutTestSourcesRequest_testId, *v.TestId)
 	}
-	serializeTestSourceInputList(s, schemas.PutTestSourcesRequest_testSources, v.TestSources)
+	if v.TestSources != nil {
+		serializeTestSourceInputList(s, schemas.PutTestSourcesRequest_testSources, v.TestSources)
+	}
 }
 
 type PutTestSourcesOutput struct {

@@ -85,7 +85,9 @@ func (v *ListOdbNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOdbNetworksOutput_nextToken, *v.NextToken)
 	}
-	serializeOdbNetworkList(s, schemas.ListOdbNetworksOutput_odbNetworks, v.OdbNetworks)
+	if v.OdbNetworks != nil {
+		serializeOdbNetworkList(s, schemas.ListOdbNetworksOutput_odbNetworks, v.OdbNetworks)
+	}
 }
 func (v *ListOdbNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOdbNetworksOutput, func(s *smithy.Schema) error {

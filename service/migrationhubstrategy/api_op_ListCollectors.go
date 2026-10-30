@@ -92,7 +92,9 @@ func (v *ListCollectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCollectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCollectors(s, schemas.ListCollectorsResponse_Collectors, v.Collectors)
+	if v.Collectors != nil {
+		serializeCollectors(s, schemas.ListCollectorsResponse_Collectors, v.Collectors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCollectorsResponse_nextToken, *v.NextToken)
 	}

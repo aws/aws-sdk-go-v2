@@ -103,7 +103,9 @@ func (v *UpdateLocationAzureBlobInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AccessTier != "" {
 		s.WriteString(schemas.UpdateLocationAzureBlobRequest_AccessTier, string(v.AccessTier))
 	}
-	serializeAgentArnList(s, schemas.UpdateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.UpdateLocationAzureBlobRequest_AgentArns, v.AgentArns)
+	}
 	if v.AuthenticationType != "" {
 		s.WriteString(schemas.UpdateLocationAzureBlobRequest_AuthenticationType, string(v.AuthenticationType))
 	}

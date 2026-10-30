@@ -133,7 +133,9 @@ func (v *CreateMapInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingPlan != "" {
 		s.WriteString(schemas.CreateMapRequest_PricingPlan, string(v.PricingPlan))
 	}
-	serializeTagMap(s, schemas.CreateMapRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateMapRequest_Tags, v.Tags)
+	}
 }
 func (v *CreateMapInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateMapRequest, func(s *smithy.Schema) error {

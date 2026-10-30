@@ -54,8 +54,12 @@ func (v *StartCutoverInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountID != nil {
 		s.WriteString(schemas.StartCutoverRequest_accountID, *v.AccountID)
 	}
-	serializeStartCutoverRequestSourceServerIDs(s, schemas.StartCutoverRequest_sourceServerIDs, v.SourceServerIDs)
-	serializeTagsMap(s, schemas.StartCutoverRequest_tags, v.Tags)
+	if v.SourceServerIDs != nil {
+		serializeStartCutoverRequestSourceServerIDs(s, schemas.StartCutoverRequest_sourceServerIDs, v.SourceServerIDs)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.StartCutoverRequest_tags, v.Tags)
+	}
 }
 func (v *StartCutoverInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartCutoverRequest, func(s *smithy.Schema) error {

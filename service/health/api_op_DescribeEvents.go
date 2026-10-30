@@ -120,7 +120,9 @@ func (v *DescribeEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventList(s, schemas.DescribeEventsResponse_events, v.Events)
+	if v.Events != nil {
+		serializeEventList(s, schemas.DescribeEventsResponse_events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEventsResponse_nextToken, *v.NextToken)
 	}

@@ -83,7 +83,9 @@ func (v *DescribeAppLicenseUsageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAppLicenseUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdminAppLicenseUsageList(s, schemas.DescribeAppLicenseUsageResult_AppLicenseUsages, v.AppLicenseUsages)
+	if v.AppLicenseUsages != nil {
+		serializeAdminAppLicenseUsageList(s, schemas.DescribeAppLicenseUsageResult_AppLicenseUsages, v.AppLicenseUsages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAppLicenseUsageResult_NextToken, *v.NextToken)
 	}

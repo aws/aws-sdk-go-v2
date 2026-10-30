@@ -88,7 +88,9 @@ func (v *ListSecurityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityPoliciesResponse_NextToken, *v.NextToken)
 	}
-	serializeSecurityPolicyNames(s, schemas.ListSecurityPoliciesResponse_SecurityPolicyNames, v.SecurityPolicyNames)
+	if v.SecurityPolicyNames != nil {
+		serializeSecurityPolicyNames(s, schemas.ListSecurityPoliciesResponse_SecurityPolicyNames, v.SecurityPolicyNames)
+	}
 }
 func (v *ListSecurityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityPoliciesResponse, func(s *smithy.Schema) error {

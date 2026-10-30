@@ -107,7 +107,9 @@ func (v *ListVirtualMachinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualMachinesOutput_NextToken, *v.NextToken)
 	}
-	serializeVirtualMachines(s, schemas.ListVirtualMachinesOutput_VirtualMachines, v.VirtualMachines)
+	if v.VirtualMachines != nil {
+		serializeVirtualMachines(s, schemas.ListVirtualMachinesOutput_VirtualMachines, v.VirtualMachines)
+	}
 }
 func (v *ListVirtualMachinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVirtualMachinesOutput, func(s *smithy.Schema) error {

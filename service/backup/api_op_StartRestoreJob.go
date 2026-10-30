@@ -166,7 +166,9 @@ func (v *StartRestoreJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.StartRestoreJobInput_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeMetadata(s, schemas.StartRestoreJobInput_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.StartRestoreJobInput_Metadata, v.Metadata)
+	}
 	if v.RecoveryPointArn != nil {
 		s.WriteString(schemas.StartRestoreJobInput_RecoveryPointArn, *v.RecoveryPointArn)
 	}

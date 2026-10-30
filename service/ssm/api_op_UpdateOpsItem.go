@@ -148,9 +148,15 @@ func (v *UpdateOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateOpsItemRequest_Description, *v.Description)
 	}
-	serializeOpsItemNotifications(s, schemas.UpdateOpsItemRequest_Notifications, v.Notifications)
-	serializeOpsItemOperationalData(s, schemas.UpdateOpsItemRequest_OperationalData, v.OperationalData)
-	serializeOpsItemOpsDataKeysList(s, schemas.UpdateOpsItemRequest_OperationalDataToDelete, v.OperationalDataToDelete)
+	if v.Notifications != nil {
+		serializeOpsItemNotifications(s, schemas.UpdateOpsItemRequest_Notifications, v.Notifications)
+	}
+	if v.OperationalData != nil {
+		serializeOpsItemOperationalData(s, schemas.UpdateOpsItemRequest_OperationalData, v.OperationalData)
+	}
+	if v.OperationalDataToDelete != nil {
+		serializeOpsItemOpsDataKeysList(s, schemas.UpdateOpsItemRequest_OperationalDataToDelete, v.OperationalDataToDelete)
+	}
 	if v.OpsItemArn != nil {
 		s.WriteString(schemas.UpdateOpsItemRequest_OpsItemArn, *v.OpsItemArn)
 	}
@@ -166,7 +172,9 @@ func (v *UpdateOpsItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != nil {
 		s.WriteInt32(schemas.UpdateOpsItemRequest_Priority, *v.Priority)
 	}
-	serializeRelatedOpsItems(s, schemas.UpdateOpsItemRequest_RelatedOpsItems, v.RelatedOpsItems)
+	if v.RelatedOpsItems != nil {
+		serializeRelatedOpsItems(s, schemas.UpdateOpsItemRequest_RelatedOpsItems, v.RelatedOpsItems)
+	}
 	if v.Severity != nil {
 		s.WriteString(schemas.UpdateOpsItemRequest_Severity, *v.Severity)
 	}

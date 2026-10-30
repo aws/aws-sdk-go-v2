@@ -145,8 +145,12 @@ func (v *DescribeJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CompletedOn != nil {
 		s.WriteTime(schemas.DescribeJobRunResponse_CompletedOn, *v.CompletedOn)
 	}
-	serializeDataCatalogOutputList(s, schemas.DescribeJobRunResponse_DataCatalogOutputs, v.DataCatalogOutputs)
-	serializeDatabaseOutputList(s, schemas.DescribeJobRunResponse_DatabaseOutputs, v.DatabaseOutputs)
+	if v.DataCatalogOutputs != nil {
+		serializeDataCatalogOutputList(s, schemas.DescribeJobRunResponse_DataCatalogOutputs, v.DataCatalogOutputs)
+	}
+	if v.DatabaseOutputs != nil {
+		serializeDatabaseOutputList(s, schemas.DescribeJobRunResponse_DatabaseOutputs, v.DatabaseOutputs)
+	}
 	if v.DatasetName != nil {
 		s.WriteString(schemas.DescribeJobRunResponse_DatasetName, *v.DatasetName)
 	}
@@ -170,7 +174,9 @@ func (v *DescribeJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogSubscription != "" {
 		s.WriteString(schemas.DescribeJobRunResponse_LogSubscription, string(v.LogSubscription))
 	}
-	serializeOutputList(s, schemas.DescribeJobRunResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputList(s, schemas.DescribeJobRunResponse_Outputs, v.Outputs)
+	}
 	if v.ProfileConfiguration != nil {
 		s.WriteStruct(schemas.DescribeJobRunResponse_ProfileConfiguration)
 		v.ProfileConfiguration.SerializeMembers(s)
@@ -193,7 +199,9 @@ func (v *DescribeJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DescribeJobRunResponse_State, string(v.State))
 	}
-	serializeValidationConfigurationList(s, schemas.DescribeJobRunResponse_ValidationConfigurations, v.ValidationConfigurations)
+	if v.ValidationConfigurations != nil {
+		serializeValidationConfigurationList(s, schemas.DescribeJobRunResponse_ValidationConfigurations, v.ValidationConfigurations)
+	}
 }
 func (v *DescribeJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeJobRunResponse, func(s *smithy.Schema) error {

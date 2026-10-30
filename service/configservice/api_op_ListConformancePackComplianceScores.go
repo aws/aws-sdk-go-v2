@@ -123,7 +123,9 @@ func (v *ListConformancePackComplianceScoresOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListConformancePackComplianceScoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackComplianceScores(s, schemas.ListConformancePackComplianceScoresResponse_ConformancePackComplianceScores, v.ConformancePackComplianceScores)
+	if v.ConformancePackComplianceScores != nil {
+		serializeConformancePackComplianceScores(s, schemas.ListConformancePackComplianceScoresResponse_ConformancePackComplianceScores, v.ConformancePackComplianceScores)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConformancePackComplianceScoresResponse_NextToken, *v.NextToken)
 	}

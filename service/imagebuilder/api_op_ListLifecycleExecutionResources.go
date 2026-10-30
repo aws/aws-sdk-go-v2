@@ -115,7 +115,9 @@ func (v *ListLifecycleExecutionResourcesOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLifecycleExecutionResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeLifecycleExecutionResourceList(s, schemas.ListLifecycleExecutionResourcesResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeLifecycleExecutionResourceList(s, schemas.ListLifecycleExecutionResourcesResponse_resources, v.Resources)
+	}
 }
 func (v *ListLifecycleExecutionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLifecycleExecutionResourcesResponse, func(s *smithy.Schema) error {

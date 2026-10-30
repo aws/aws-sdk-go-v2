@@ -74,7 +74,9 @@ func (v *ListIdNamespacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdNamespaceList(s, schemas.ListIdNamespacesOutput_idNamespaceSummaries, v.IdNamespaceSummaries)
+	if v.IdNamespaceSummaries != nil {
+		serializeIdNamespaceList(s, schemas.ListIdNamespacesOutput_idNamespaceSummaries, v.IdNamespaceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdNamespacesOutput_nextToken, *v.NextToken)
 	}

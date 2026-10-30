@@ -73,7 +73,9 @@ func (v *GetContactAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContactAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.GetContactAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.GetContactAttributesResponse_Attributes, v.Attributes)
+	}
 }
 func (v *GetContactAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContactAttributesResponse, func(s *smithy.Schema) error {

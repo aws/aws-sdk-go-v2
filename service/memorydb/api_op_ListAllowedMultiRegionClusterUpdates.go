@@ -68,8 +68,12 @@ func (v *ListAllowedMultiRegionClusterUpdatesOutput) Serialize(s smithy.ShapeSer
 }
 
 func (v *ListAllowedMultiRegionClusterUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeTypeList(s, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleDownNodeTypes, v.ScaleDownNodeTypes)
-	serializeNodeTypeList(s, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleUpNodeTypes, v.ScaleUpNodeTypes)
+	if v.ScaleDownNodeTypes != nil {
+		serializeNodeTypeList(s, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleDownNodeTypes, v.ScaleDownNodeTypes)
+	}
+	if v.ScaleUpNodeTypes != nil {
+		serializeNodeTypeList(s, schemas.ListAllowedMultiRegionClusterUpdatesResponse_ScaleUpNodeTypes, v.ScaleUpNodeTypes)
+	}
 }
 func (v *ListAllowedMultiRegionClusterUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAllowedMultiRegionClusterUpdatesResponse, func(s *smithy.Schema) error {

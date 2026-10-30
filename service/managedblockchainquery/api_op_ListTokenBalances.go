@@ -124,7 +124,9 @@ func (v *ListTokenBalancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTokenBalancesOutput_nextToken, *v.NextToken)
 	}
-	serializeTokenBalanceList(s, schemas.ListTokenBalancesOutput_tokenBalances, v.TokenBalances)
+	if v.TokenBalances != nil {
+		serializeTokenBalanceList(s, schemas.ListTokenBalancesOutput_tokenBalances, v.TokenBalances)
+	}
 }
 func (v *ListTokenBalancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTokenBalancesOutput, func(s *smithy.Schema) error {

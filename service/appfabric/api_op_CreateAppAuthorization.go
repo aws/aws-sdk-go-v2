@@ -128,8 +128,12 @@ func (v *CreateAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAppAuthorizationRequest_clientToken, *v.ClientToken)
 	}
-	serializeCredential(s, schemas.CreateAppAuthorizationRequest_credential, v.Credential)
-	serializeTagList(s, schemas.CreateAppAuthorizationRequest_tags, v.Tags)
+	if v.Credential != nil {
+		serializeCredential(s, schemas.CreateAppAuthorizationRequest_credential, v.Credential)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAppAuthorizationRequest_tags, v.Tags)
+	}
 	if v.Tenant != nil {
 		s.WriteStruct(schemas.CreateAppAuthorizationRequest_tenant)
 		v.Tenant.SerializeMembers(s)

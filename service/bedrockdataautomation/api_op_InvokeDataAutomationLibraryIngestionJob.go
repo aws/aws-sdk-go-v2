@@ -101,7 +101,9 @@ func (v *InvokeDataAutomationLibraryIngestionJobInput) SerializeMembers(s smithy
 		v.OutputConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.InvokeDataAutomationLibraryIngestionJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.InvokeDataAutomationLibraryIngestionJobRequest_tags, v.Tags)
+	}
 }
 
 // Invoke DataAutomationLibraryIngestionJob Response

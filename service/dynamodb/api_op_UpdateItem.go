@@ -291,17 +291,27 @@ func (v *UpdateItemInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateItemInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeUpdates(s, schemas.UpdateItemInput_AttributeUpdates, v.AttributeUpdates)
+	if v.AttributeUpdates != nil {
+		serializeAttributeUpdates(s, schemas.UpdateItemInput_AttributeUpdates, v.AttributeUpdates)
+	}
 	if v.ConditionExpression != nil {
 		s.WriteString(schemas.UpdateItemInput_ConditionExpression, *v.ConditionExpression)
 	}
 	if v.ConditionalOperator != "" {
 		s.WriteString(schemas.UpdateItemInput_ConditionalOperator, string(v.ConditionalOperator))
 	}
-	serializeExpectedAttributeMap(s, schemas.UpdateItemInput_Expected, v.Expected)
-	serializeExpressionAttributeNameMap(s, schemas.UpdateItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.UpdateItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializeKey(s, schemas.UpdateItemInput_Key, v.Key)
+	if v.Expected != nil {
+		serializeExpectedAttributeMap(s, schemas.UpdateItemInput_Expected, v.Expected)
+	}
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.UpdateItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.UpdateItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Key != nil {
+		serializeKey(s, schemas.UpdateItemInput_Key, v.Key)
+	}
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.UpdateItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
@@ -384,7 +394,9 @@ func (v *UpdateItemOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMap(s, schemas.UpdateItemOutput_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeMap(s, schemas.UpdateItemOutput_Attributes, v.Attributes)
+	}
 	if v.ConsumedCapacity != nil {
 		s.WriteStruct(schemas.UpdateItemOutput_ConsumedCapacity)
 		v.ConsumedCapacity.SerializeMembers(s)

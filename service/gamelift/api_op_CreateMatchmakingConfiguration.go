@@ -208,11 +208,15 @@ func (v *CreateMatchmakingConfigurationInput) SerializeMembers(s smithy.ShapeSer
 	if v.FlexMatchMode != "" {
 		s.WriteString(schemas.CreateMatchmakingConfigurationInput_FlexMatchMode, string(v.FlexMatchMode))
 	}
-	serializeGamePropertyList(s, schemas.CreateMatchmakingConfigurationInput_GameProperties, v.GameProperties)
+	if v.GameProperties != nil {
+		serializeGamePropertyList(s, schemas.CreateMatchmakingConfigurationInput_GameProperties, v.GameProperties)
+	}
 	if v.GameSessionData != nil {
 		s.WriteString(schemas.CreateMatchmakingConfigurationInput_GameSessionData, *v.GameSessionData)
 	}
-	serializeQueueArnsList(s, schemas.CreateMatchmakingConfigurationInput_GameSessionQueueArns, v.GameSessionQueueArns)
+	if v.GameSessionQueueArns != nil {
+		serializeQueueArnsList(s, schemas.CreateMatchmakingConfigurationInput_GameSessionQueueArns, v.GameSessionQueueArns)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateMatchmakingConfigurationInput_Name, *v.Name)
 	}
@@ -225,7 +229,9 @@ func (v *CreateMatchmakingConfigurationInput) SerializeMembers(s smithy.ShapeSer
 	if v.RuleSetName != nil {
 		s.WriteString(schemas.CreateMatchmakingConfigurationInput_RuleSetName, *v.RuleSetName)
 	}
-	serializeTagList(s, schemas.CreateMatchmakingConfigurationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMatchmakingConfigurationInput_Tags, v.Tags)
+	}
 }
 
 type CreateMatchmakingConfigurationOutput struct {

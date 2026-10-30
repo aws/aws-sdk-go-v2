@@ -209,7 +209,9 @@ func (v *GetCostCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SearchString != nil {
 		s.WriteString(schemas.GetCostCategoriesRequest_SearchString, *v.SearchString)
 	}
-	serializeSortDefinitions(s, schemas.GetCostCategoriesRequest_SortBy, v.SortBy)
+	if v.SortBy != nil {
+		serializeSortDefinitions(s, schemas.GetCostCategoriesRequest_SortBy, v.SortBy)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.GetCostCategoriesRequest_TimePeriod)
 		v.TimePeriod.SerializeMembers(s)
@@ -257,8 +259,12 @@ func (v *GetCostCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostCategoryNamesList(s, schemas.GetCostCategoriesResponse_CostCategoryNames, v.CostCategoryNames)
-	serializeCostCategoryValuesList(s, schemas.GetCostCategoriesResponse_CostCategoryValues, v.CostCategoryValues)
+	if v.CostCategoryNames != nil {
+		serializeCostCategoryNamesList(s, schemas.GetCostCategoriesResponse_CostCategoryNames, v.CostCategoryNames)
+	}
+	if v.CostCategoryValues != nil {
+		serializeCostCategoryValuesList(s, schemas.GetCostCategoriesResponse_CostCategoryValues, v.CostCategoryValues)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostCategoriesResponse_NextPageToken, *v.NextPageToken)
 	}

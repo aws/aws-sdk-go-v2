@@ -68,7 +68,9 @@ func (v *CreateAppBundleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomerManagedKeyIdentifier != nil {
 		s.WriteString(schemas.CreateAppBundleRequest_customerManagedKeyIdentifier, *v.CustomerManagedKeyIdentifier)
 	}
-	serializeTagList(s, schemas.CreateAppBundleRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAppBundleRequest_tags, v.Tags)
+	}
 }
 
 type CreateAppBundleOutput struct {

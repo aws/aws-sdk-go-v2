@@ -101,7 +101,9 @@ func (v *CreatePlanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedAlarmMap(s, schemas.CreatePlanRequest_associatedAlarms, v.AssociatedAlarms)
+	if v.AssociatedAlarms != nil {
+		serializeAssociatedAlarmMap(s, schemas.CreatePlanRequest_associatedAlarms, v.AssociatedAlarms)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePlanRequest_description, *v.Description)
 	}
@@ -120,7 +122,9 @@ func (v *CreatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecoveryTimeObjectiveMinutes != nil {
 		s.WriteInt32(schemas.CreatePlanRequest_recoveryTimeObjectiveMinutes, *v.RecoveryTimeObjectiveMinutes)
 	}
-	serializeRegionList(s, schemas.CreatePlanRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.CreatePlanRequest_regions, v.Regions)
+	}
 	if v.ReportConfiguration != nil {
 		s.WriteStruct(schemas.CreatePlanRequest_reportConfiguration)
 		v.ReportConfiguration.SerializeMembers(s)
@@ -129,9 +133,15 @@ func (v *CreatePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceQuotaChecksEnabled != nil {
 		s.WriteBool(schemas.CreatePlanRequest_serviceQuotaChecksEnabled, *v.ServiceQuotaChecksEnabled)
 	}
-	serializeTags(s, schemas.CreatePlanRequest_tags, v.Tags)
-	serializeTriggerList(s, schemas.CreatePlanRequest_triggers, v.Triggers)
-	serializeWorkflowList(s, schemas.CreatePlanRequest_workflows, v.Workflows)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePlanRequest_tags, v.Tags)
+	}
+	if v.Triggers != nil {
+		serializeTriggerList(s, schemas.CreatePlanRequest_triggers, v.Triggers)
+	}
+	if v.Workflows != nil {
+		serializeWorkflowList(s, schemas.CreatePlanRequest_workflows, v.Workflows)
+	}
 }
 func (in *CreatePlanInput) bindEndpointParams(p *EndpointParameters) {
 

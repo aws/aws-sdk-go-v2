@@ -7,9 +7,6 @@ import (
 )
 
 func serializePoiCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []PoiCategory) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializePoiCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTileAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TileAdditionalFeature) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeTileAdditionalFeatureList(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeTravelModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TravelMode) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +31,6 @@ func serializeTravelModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

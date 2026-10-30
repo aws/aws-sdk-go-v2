@@ -90,7 +90,9 @@ func (v *ListModelMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelMetadataSummaries(s, schemas.ListModelMetadataResponse_ModelMetadataSummaries, v.ModelMetadataSummaries)
+	if v.ModelMetadataSummaries != nil {
+		serializeModelMetadataSummaries(s, schemas.ListModelMetadataResponse_ModelMetadataSummaries, v.ModelMetadataSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelMetadataResponse_NextToken, *v.NextToken)
 	}

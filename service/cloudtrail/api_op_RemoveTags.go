@@ -67,7 +67,9 @@ func (v *RemoveTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.RemoveTagsRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagsList(s, schemas.RemoveTagsRequest_TagsList, v.TagsList)
+	if v.TagsList != nil {
+		serializeTagsList(s, schemas.RemoveTagsRequest_TagsList, v.TagsList)
+	}
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an

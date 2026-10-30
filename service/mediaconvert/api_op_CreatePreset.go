@@ -73,7 +73,9 @@ func (v *CreatePresetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Settings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__mapOf__string(s, schemas.CreatePresetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreatePresetRequest_Tags, v.Tags)
+	}
 }
 
 type CreatePresetOutput struct {

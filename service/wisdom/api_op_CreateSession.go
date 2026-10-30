@@ -77,7 +77,9 @@ func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSessionRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateSessionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSessionRequest_tags, v.Tags)
+	}
 }
 func (v *CreateSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSessionRequest, func(s *smithy.Schema) error {

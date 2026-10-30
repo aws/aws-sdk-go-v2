@@ -102,8 +102,12 @@ func (v *AddPermissionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddPermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAWSAccountIdList(s, schemas.AddPermissionRequest_AWSAccountIds, v.AWSAccountIds)
-	serializeActionNameList(s, schemas.AddPermissionRequest_Actions, v.Actions)
+	if v.AWSAccountIds != nil {
+		serializeAWSAccountIdList(s, schemas.AddPermissionRequest_AWSAccountIds, v.AWSAccountIds)
+	}
+	if v.Actions != nil {
+		serializeActionNameList(s, schemas.AddPermissionRequest_Actions, v.Actions)
+	}
 	if v.Label != nil {
 		s.WriteString(schemas.AddPermissionRequest_Label, *v.Label)
 	}

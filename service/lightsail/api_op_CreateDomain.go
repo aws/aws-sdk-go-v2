@@ -56,7 +56,9 @@ func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateDomainRequest_domainName, *v.DomainName)
 	}
-	serializeTagList(s, schemas.CreateDomainRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDomainRequest_tags, v.Tags)
+	}
 }
 
 type CreateDomainOutput struct {

@@ -103,7 +103,9 @@ func (v *DescribeTestExecutionOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CreationDateTime != nil {
 		s.WriteTime(schemas.DescribeTestExecutionResponse_creationDateTime, *v.CreationDateTime)
 	}
-	serializeFailureReasons(s, schemas.DescribeTestExecutionResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeTestExecutionResponse_failureReasons, v.FailureReasons)
+	}
 	if v.LastUpdatedDateTime != nil {
 		s.WriteTime(schemas.DescribeTestExecutionResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
 	}

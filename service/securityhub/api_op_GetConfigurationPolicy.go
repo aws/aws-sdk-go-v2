@@ -100,7 +100,9 @@ func (v *GetConfigurationPolicyOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.GetConfigurationPolicyResponse_Arn, *v.Arn)
 	}
-	serializePolicy(s, schemas.GetConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.ConfigurationPolicy != nil {
+		serializePolicy(s, schemas.GetConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetConfigurationPolicyResponse_CreatedAt, *v.CreatedAt)
 	}

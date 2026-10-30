@@ -252,8 +252,12 @@ func (v *AwsVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssignPublicIp != "" {
 		s.WriteString(schemas.AwsVpcConfiguration_AssignPublicIp, string(v.AssignPublicIp))
 	}
-	serializeStringList(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
-	serializeStringList(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+	if v.SecurityGroups != nil {
+		serializeStringList(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+	}
 }
 func (v *AwsVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsVpcConfiguration, func(s *smithy.Schema) error {
@@ -890,9 +894,15 @@ func (v *ConnectionHttpParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectionHttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionBodyParametersList(s, schemas.ConnectionHttpParameters_BodyParameters, v.BodyParameters)
-	serializeConnectionHeaderParametersList(s, schemas.ConnectionHttpParameters_HeaderParameters, v.HeaderParameters)
-	serializeConnectionQueryStringParametersList(s, schemas.ConnectionHttpParameters_QueryStringParameters, v.QueryStringParameters)
+	if v.BodyParameters != nil {
+		serializeConnectionBodyParametersList(s, schemas.ConnectionHttpParameters_BodyParameters, v.BodyParameters)
+	}
+	if v.HeaderParameters != nil {
+		serializeConnectionHeaderParametersList(s, schemas.ConnectionHttpParameters_HeaderParameters, v.HeaderParameters)
+	}
+	if v.QueryStringParameters != nil {
+		serializeConnectionQueryStringParametersList(s, schemas.ConnectionHttpParameters_QueryStringParameters, v.QueryStringParameters)
+	}
 }
 func (v *ConnectionHttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConnectionHttpParameters, func(s *smithy.Schema) error {
@@ -1467,7 +1477,9 @@ func (v *EcsParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderStrategy(s, schemas.EcsParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.EcsParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.EnableECSManagedTags != false {
 		s.WriteBool(schemas.EcsParameters_EnableECSManagedTags, v.EnableECSManagedTags)
 	}
@@ -1485,8 +1497,12 @@ func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlacementConstraints(s, schemas.EcsParameters_PlacementConstraints, v.PlacementConstraints)
-	serializePlacementStrategies(s, schemas.EcsParameters_PlacementStrategy, v.PlacementStrategy)
+	if v.PlacementConstraints != nil {
+		serializePlacementConstraints(s, schemas.EcsParameters_PlacementConstraints, v.PlacementConstraints)
+	}
+	if v.PlacementStrategy != nil {
+		serializePlacementStrategies(s, schemas.EcsParameters_PlacementStrategy, v.PlacementStrategy)
+	}
 	if v.PlatformVersion != nil {
 		s.WriteString(schemas.EcsParameters_PlatformVersion, *v.PlatformVersion)
 	}
@@ -1496,7 +1512,9 @@ func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReferenceId != nil {
 		s.WriteString(schemas.EcsParameters_ReferenceId, *v.ReferenceId)
 	}
-	serializeTagList(s, schemas.EcsParameters_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.EcsParameters_Tags, v.Tags)
+	}
 	if v.TaskCount != nil {
 		s.WriteInt32(schemas.EcsParameters_TaskCount, *v.TaskCount)
 	}
@@ -1726,9 +1744,15 @@ func (v *HttpParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaderParametersMap(s, schemas.HttpParameters_HeaderParameters, v.HeaderParameters)
-	serializePathParameterList(s, schemas.HttpParameters_PathParameterValues, v.PathParameterValues)
-	serializeQueryStringParametersMap(s, schemas.HttpParameters_QueryStringParameters, v.QueryStringParameters)
+	if v.HeaderParameters != nil {
+		serializeHeaderParametersMap(s, schemas.HttpParameters_HeaderParameters, v.HeaderParameters)
+	}
+	if v.PathParameterValues != nil {
+		serializePathParameterList(s, schemas.HttpParameters_PathParameterValues, v.PathParameterValues)
+	}
+	if v.QueryStringParameters != nil {
+		serializeQueryStringParametersMap(s, schemas.HttpParameters_QueryStringParameters, v.QueryStringParameters)
+	}
 }
 func (v *HttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpParameters, func(s *smithy.Schema) error {
@@ -1824,7 +1848,9 @@ func (v *InputTransformer) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputTransformer) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTransformerPaths(s, schemas.InputTransformer_InputPathsMap, v.InputPathsMap)
+	if v.InputPathsMap != nil {
+		serializeTransformerPaths(s, schemas.InputTransformer_InputPathsMap, v.InputPathsMap)
+	}
 	if v.InputTemplate != nil {
 		s.WriteString(schemas.InputTransformer_InputTemplate, *v.InputTemplate)
 	}
@@ -2192,7 +2218,9 @@ func (v *PutEventsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventBusName != nil {
 		s.WriteString(schemas.PutEventsRequestEntry_EventBusName, *v.EventBusName)
 	}
-	serializeEventResourceList(s, schemas.PutEventsRequestEntry_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeEventResourceList(s, schemas.PutEventsRequestEntry_Resources, v.Resources)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.PutEventsRequestEntry_Source, *v.Source)
 	}
@@ -2316,7 +2344,9 @@ func (v *PutPartnerEventsRequestEntry) SerializeMembers(s smithy.ShapeSerializer
 	if v.DetailType != nil {
 		s.WriteString(schemas.PutPartnerEventsRequestEntry_DetailType, *v.DetailType)
 	}
-	serializeEventResourceList(s, schemas.PutPartnerEventsRequestEntry_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeEventResourceList(s, schemas.PutPartnerEventsRequestEntry_Resources, v.Resources)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.PutPartnerEventsRequestEntry_Source, *v.Source)
 	}
@@ -2717,7 +2747,9 @@ func (v *ReplayDestination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.ReplayDestination_Arn, *v.Arn)
 	}
-	serializeReplayDestinationFilters(s, schemas.ReplayDestination_FilterArns, v.FilterArns)
+	if v.FilterArns != nil {
+		serializeReplayDestinationFilters(s, schemas.ReplayDestination_FilterArns, v.FilterArns)
+	}
 }
 func (v *ReplayDestination) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReplayDestination, func(s *smithy.Schema) error {
@@ -2915,7 +2947,9 @@ func (v *RunCommandParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RunCommandParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRunCommandTargets(s, schemas.RunCommandParameters_RunCommandTargets, v.RunCommandTargets)
+	if v.RunCommandTargets != nil {
+		serializeRunCommandTargets(s, schemas.RunCommandParameters_RunCommandTargets, v.RunCommandTargets)
+	}
 }
 func (v *RunCommandParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RunCommandParameters, func(s *smithy.Schema) error {
@@ -2956,7 +2990,9 @@ func (v *RunCommandTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.RunCommandTarget_Key, *v.Key)
 	}
-	serializeRunCommandTargetValues(s, schemas.RunCommandTarget_Values, v.Values)
+	if v.Values != nil {
+		serializeRunCommandTargetValues(s, schemas.RunCommandTarget_Values, v.Values)
+	}
 }
 func (v *RunCommandTarget) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RunCommandTarget, func(s *smithy.Schema) error {
@@ -3034,7 +3070,9 @@ func (v *SageMakerPipelineParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SageMakerPipelineParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSageMakerPipelineParameterList(s, schemas.SageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+	if v.PipelineParameterList != nil {
+		serializeSageMakerPipelineParameterList(s, schemas.SageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+	}
 }
 func (v *SageMakerPipelineParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameters, func(s *smithy.Schema) error {

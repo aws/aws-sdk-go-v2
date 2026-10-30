@@ -70,7 +70,9 @@ func (v *UpdatePortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.UpdatePortfolioInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeAddTags(s, schemas.UpdatePortfolioInput_AddTags, v.AddTags)
+	if v.AddTags != nil {
+		serializeAddTags(s, schemas.UpdatePortfolioInput_AddTags, v.AddTags)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdatePortfolioInput_Description, *v.Description)
 	}
@@ -83,7 +85,9 @@ func (v *UpdatePortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProviderName != nil {
 		s.WriteString(schemas.UpdatePortfolioInput_ProviderName, *v.ProviderName)
 	}
-	serializeTagKeys(s, schemas.UpdatePortfolioInput_RemoveTags, v.RemoveTags)
+	if v.RemoveTags != nil {
+		serializeTagKeys(s, schemas.UpdatePortfolioInput_RemoveTags, v.RemoveTags)
+	}
 }
 
 type UpdatePortfolioOutput struct {
@@ -112,7 +116,9 @@ func (v *UpdatePortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PortfolioDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.UpdatePortfolioOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdatePortfolioOutput_Tags, v.Tags)
+	}
 }
 func (v *UpdatePortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePortfolioOutput, func(s *smithy.Schema) error {

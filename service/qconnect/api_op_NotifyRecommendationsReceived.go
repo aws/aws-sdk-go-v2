@@ -63,7 +63,9 @@ func (v *NotifyRecommendationsReceivedInput) SerializeMembers(s smithy.ShapeSeri
 	if v.AssistantId != nil {
 		s.WriteString(schemas.NotifyRecommendationsReceivedRequest_assistantId, *v.AssistantId)
 	}
-	serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedRequest_recommendationIds, v.RecommendationIds)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedRequest_recommendationIds, v.RecommendationIds)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.NotifyRecommendationsReceivedRequest_sessionId, *v.SessionId)
 	}
@@ -105,8 +107,12 @@ func (v *NotifyRecommendationsReceivedOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *NotifyRecommendationsReceivedOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotifyRecommendationsReceivedErrorList(s, schemas.NotifyRecommendationsReceivedResponse_errors, v.Errors)
-	serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedResponse_recommendationIds, v.RecommendationIds)
+	if v.Errors != nil {
+		serializeNotifyRecommendationsReceivedErrorList(s, schemas.NotifyRecommendationsReceivedResponse_errors, v.Errors)
+	}
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.NotifyRecommendationsReceivedResponse_recommendationIds, v.RecommendationIds)
+	}
 }
 func (v *NotifyRecommendationsReceivedOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotifyRecommendationsReceivedResponse, func(s *smithy.Schema) error {

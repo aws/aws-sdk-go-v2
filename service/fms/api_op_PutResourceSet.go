@@ -58,7 +58,9 @@ func (v *PutResourceSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ResourceSet.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PutResourceSetRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.PutResourceSetRequest_TagList, v.TagList)
+	}
 }
 
 type PutResourceSetOutput struct {

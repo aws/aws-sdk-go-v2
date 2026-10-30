@@ -299,7 +299,9 @@ func (v *StartRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.StartRunRequest_storageType, string(v.StorageType))
 	}
-	serializeTagMap(s, schemas.StartRunRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartRunRequest_tags, v.Tags)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.StartRunRequest_workflowId, *v.WorkflowId)
 	}
@@ -373,7 +375,9 @@ func (v *StartRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.StartRunResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.StartRunResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartRunResponse_tags, v.Tags)
+	}
 	if v.Uuid != nil {
 		s.WriteString(schemas.StartRunResponse_uuid, *v.Uuid)
 	}

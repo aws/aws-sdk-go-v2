@@ -103,7 +103,9 @@ func (v *ListRotationShiftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRotationShiftsResult_NextToken, *v.NextToken)
 	}
-	serializeRotationShifts(s, schemas.ListRotationShiftsResult_RotationShifts, v.RotationShifts)
+	if v.RotationShifts != nil {
+		serializeRotationShifts(s, schemas.ListRotationShiftsResult_RotationShifts, v.RotationShifts)
+	}
 }
 func (v *ListRotationShiftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRotationShiftsResult, func(s *smithy.Schema) error {

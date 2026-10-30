@@ -90,7 +90,9 @@ func (v *CreateNotifyCodeConfigurationInput) SerializeMembers(s smithy.ShapeSeri
 	if v.NotifyCodeConfigurationName != nil {
 		s.WriteString(schemas.CreateNotifyCodeConfigurationInput_notifyCodeConfigurationName, *v.NotifyCodeConfigurationName)
 	}
-	serializeTagList(s, schemas.CreateNotifyCodeConfigurationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNotifyCodeConfigurationInput_tags, v.Tags)
+	}
 }
 
 type CreateNotifyCodeConfigurationOutput struct {

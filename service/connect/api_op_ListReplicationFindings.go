@@ -127,12 +127,18 @@ func (v *ListReplicationFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListReplicationFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApproximateDriftedResourceCounts(s, schemas.ListReplicationFindingsResponse_ApproximateDriftedResourceCounts, v.ApproximateDriftedResourceCounts)
+	if v.ApproximateDriftedResourceCounts != nil {
+		serializeApproximateDriftedResourceCounts(s, schemas.ListReplicationFindingsResponse_ApproximateDriftedResourceCounts, v.ApproximateDriftedResourceCounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReplicationFindingsResponse_NextToken, *v.NextToken)
 	}
-	serializeReplicationFindingsList(s, schemas.ListReplicationFindingsResponse_ReplicationFindingsList, v.ReplicationFindingsList)
-	serializeResourceReplicationStatuses(s, schemas.ListReplicationFindingsResponse_ResourceReplicationStatuses, v.ResourceReplicationStatuses)
+	if v.ReplicationFindingsList != nil {
+		serializeReplicationFindingsList(s, schemas.ListReplicationFindingsResponse_ReplicationFindingsList, v.ReplicationFindingsList)
+	}
+	if v.ResourceReplicationStatuses != nil {
+		serializeResourceReplicationStatuses(s, schemas.ListReplicationFindingsResponse_ResourceReplicationStatuses, v.ResourceReplicationStatuses)
+	}
 }
 func (v *ListReplicationFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReplicationFindingsResponse, func(s *smithy.Schema) error {

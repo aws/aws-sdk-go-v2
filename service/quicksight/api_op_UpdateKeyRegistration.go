@@ -53,7 +53,9 @@ func (v *UpdateKeyRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateKeyRegistrationRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeKeyRegistration(s, schemas.UpdateKeyRegistrationRequest_KeyRegistration, v.KeyRegistration)
+	if v.KeyRegistration != nil {
+		serializeKeyRegistration(s, schemas.UpdateKeyRegistrationRequest_KeyRegistration, v.KeyRegistration)
+	}
 }
 
 type UpdateKeyRegistrationOutput struct {
@@ -80,11 +82,15 @@ func (v *UpdateKeyRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateKeyRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedKeyRegistrationEntries(s, schemas.UpdateKeyRegistrationResponse_FailedKeyRegistration, v.FailedKeyRegistration)
+	if v.FailedKeyRegistration != nil {
+		serializeFailedKeyRegistrationEntries(s, schemas.UpdateKeyRegistrationResponse_FailedKeyRegistration, v.FailedKeyRegistration)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateKeyRegistrationResponse_RequestId, *v.RequestId)
 	}
-	serializeSuccessfulKeyRegistrationEntries(s, schemas.UpdateKeyRegistrationResponse_SuccessfulKeyRegistration, v.SuccessfulKeyRegistration)
+	if v.SuccessfulKeyRegistration != nil {
+		serializeSuccessfulKeyRegistrationEntries(s, schemas.UpdateKeyRegistrationResponse_SuccessfulKeyRegistration, v.SuccessfulKeyRegistration)
+	}
 }
 func (v *UpdateKeyRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateKeyRegistrationResponse, func(s *smithy.Schema) error {

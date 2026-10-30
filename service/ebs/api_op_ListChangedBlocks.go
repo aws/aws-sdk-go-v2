@@ -135,7 +135,9 @@ func (v *ListChangedBlocksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BlockSize != nil {
 		s.WriteInt32(schemas.ListChangedBlocksResponse_BlockSize, *v.BlockSize)
 	}
-	serializeChangedBlocks(s, schemas.ListChangedBlocksResponse_ChangedBlocks, v.ChangedBlocks)
+	if v.ChangedBlocks != nil {
+		serializeChangedBlocks(s, schemas.ListChangedBlocksResponse_ChangedBlocks, v.ChangedBlocks)
+	}
 	if v.ExpiryTime != nil {
 		s.WriteTime(schemas.ListChangedBlocksResponse_ExpiryTime, *v.ExpiryTime)
 	}

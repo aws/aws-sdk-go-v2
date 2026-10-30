@@ -89,7 +89,9 @@ func (v *ListLunaClientsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLunaClientsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientList(s, schemas.ListLunaClientsResponse_ClientList, v.ClientList)
+	if v.ClientList != nil {
+		serializeClientList(s, schemas.ListLunaClientsResponse_ClientList, v.ClientList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLunaClientsResponse_NextToken, *v.NextToken)
 	}

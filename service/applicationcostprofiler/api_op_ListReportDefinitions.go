@@ -79,7 +79,9 @@ func (v *ListReportDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReportDefinitionsResult_nextToken, *v.NextToken)
 	}
-	serializeReportDefinitionList(s, schemas.ListReportDefinitionsResult_reportDefinitions, v.ReportDefinitions)
+	if v.ReportDefinitions != nil {
+		serializeReportDefinitionList(s, schemas.ListReportDefinitionsResult_reportDefinitions, v.ReportDefinitions)
+	}
 }
 func (v *ListReportDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReportDefinitionsResult, func(s *smithy.Schema) error {

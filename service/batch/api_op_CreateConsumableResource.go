@@ -67,7 +67,9 @@ func (v *CreateConsumableResourceInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ResourceType != nil {
 		s.WriteString(schemas.CreateConsumableResourceRequest_resourceType, *v.ResourceType)
 	}
-	serializeTagrisTagsMap(s, schemas.CreateConsumableResourceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.CreateConsumableResourceRequest_tags, v.Tags)
+	}
 	if v.TotalQuantity != nil {
 		s.WriteInt64(schemas.CreateConsumableResourceRequest_totalQuantity, *v.TotalQuantity)
 	}

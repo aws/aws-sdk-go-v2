@@ -117,7 +117,9 @@ func (v *CreateTLSInspectionConfigurationInput) SerializeMembers(s smithy.ShapeS
 	if v.TLSInspectionConfigurationName != nil {
 		s.WriteString(schemas.CreateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName, *v.TLSInspectionConfigurationName)
 	}
-	serializeTagList(s, schemas.CreateTLSInspectionConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTLSInspectionConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTLSInspectionConfigurationOutput struct {

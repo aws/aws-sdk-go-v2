@@ -86,7 +86,9 @@ func (v *CreateScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ScopeName != nil {
 		s.WriteString(schemas.CreateScopeInput_scopeName, *v.ScopeName)
 	}
-	serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScopeInput_tags, v.Tags)
+	}
 }
 
 type CreateScopeOutput struct {

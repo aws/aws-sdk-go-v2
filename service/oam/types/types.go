@@ -86,7 +86,9 @@ func (v *ListAttachedLinksItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LinkArn != nil {
 		s.WriteString(schemas.ListAttachedLinksItem_LinkArn, *v.LinkArn)
 	}
-	serializeResourceTypesOutput(s, schemas.ListAttachedLinksItem_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesOutput(s, schemas.ListAttachedLinksItem_ResourceTypes, v.ResourceTypes)
+	}
 }
 func (v *ListAttachedLinksItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAttachedLinksItem, func(s *smithy.Schema) error {
@@ -143,7 +145,9 @@ func (v *ListLinksItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Label != nil {
 		s.WriteString(schemas.ListLinksItem_Label, *v.Label)
 	}
-	serializeResourceTypesOutput(s, schemas.ListLinksItem_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypesOutput(s, schemas.ListLinksItem_ResourceTypes, v.ResourceTypes)
+	}
 	if v.SinkArn != nil {
 		s.WriteString(schemas.ListLinksItem_SinkArn, *v.SinkArn)
 	}

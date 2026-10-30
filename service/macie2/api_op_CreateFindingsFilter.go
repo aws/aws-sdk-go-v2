@@ -106,7 +106,9 @@ func (v *CreateFindingsFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Position != nil {
 		s.WriteInt32(schemas.CreateFindingsFilterRequest_position, *v.Position)
 	}
-	serializeTagMap(s, schemas.CreateFindingsFilterRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFindingsFilterRequest_tags, v.Tags)
+	}
 }
 
 type CreateFindingsFilterOutput struct {

@@ -101,7 +101,9 @@ func (v *SendVoiceMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.SendVoiceMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeContextMap(s, schemas.SendVoiceMessageRequest_Context, v.Context)
+	if v.Context != nil {
+		serializeContextMap(s, schemas.SendVoiceMessageRequest_Context, v.Context)
+	}
 	if v.DestinationPhoneNumber != nil {
 		s.WriteString(schemas.SendVoiceMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
 	}

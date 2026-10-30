@@ -63,14 +63,18 @@ func (v *PopulateIntermediateTableInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AnalysisPayerAccountId != nil {
 		s.WriteString(schemas.PopulateIntermediateTableInput_analysisPayerAccountId, *v.AnalysisPayerAccountId)
 	}
-	serializeIntermediateTableComputeConfiguration(s, schemas.PopulateIntermediateTableInput_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeIntermediateTableComputeConfiguration(s, schemas.PopulateIntermediateTableInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.IntermediateTableIdentifier != nil {
 		s.WriteString(schemas.PopulateIntermediateTableInput_intermediateTableIdentifier, *v.IntermediateTableIdentifier)
 	}
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.PopulateIntermediateTableInput_membershipIdentifier, *v.MembershipIdentifier)
 	}
-	serializeParameterMap(s, schemas.PopulateIntermediateTableInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMap(s, schemas.PopulateIntermediateTableInput_parameters, v.Parameters)
+	}
 }
 
 type PopulateIntermediateTableOutput struct {

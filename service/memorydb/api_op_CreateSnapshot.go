@@ -64,7 +64,9 @@ func (v *CreateSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnapshotName != nil {
 		s.WriteString(schemas.CreateSnapshotRequest_SnapshotName, *v.SnapshotName)
 	}
-	serializeTagList(s, schemas.CreateSnapshotRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSnapshotRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSnapshotOutput struct {

@@ -57,7 +57,9 @@ func (v *PutRegistryScanningConfigurationInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *PutRegistryScanningConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistryScanningRuleList(s, schemas.PutRegistryScanningConfigurationRequest_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRegistryScanningRuleList(s, schemas.PutRegistryScanningConfigurationRequest_rules, v.Rules)
+	}
 	if v.ScanType != "" {
 		s.WriteString(schemas.PutRegistryScanningConfigurationRequest_scanType, string(v.ScanType))
 	}

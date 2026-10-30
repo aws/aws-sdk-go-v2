@@ -51,7 +51,9 @@ func (v *DeleteAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DeleteAttributesRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.DeleteAttributesRequest_attributes, v.Attributes)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.DeleteAttributesRequest_cluster, *v.Cluster)
 	}
@@ -75,7 +77,9 @@ func (v *DeleteAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.DeleteAttributesResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.DeleteAttributesResponse_attributes, v.Attributes)
+	}
 }
 func (v *DeleteAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteAttributesResponse, func(s *smithy.Schema) error {

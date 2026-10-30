@@ -96,7 +96,9 @@ func (v *ListBatchOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchList(s, schemas.ListBatchResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBatchList(s, schemas.ListBatchResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBatchResponse_nextToken, *v.NextToken)
 	}

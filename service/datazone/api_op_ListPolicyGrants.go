@@ -119,7 +119,9 @@ func (v *ListPolicyGrantsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPolicyGrantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyGrantList(s, schemas.ListPolicyGrantsOutput_grantList, v.GrantList)
+	if v.GrantList != nil {
+		serializePolicyGrantList(s, schemas.ListPolicyGrantsOutput_grantList, v.GrantList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyGrantsOutput_nextToken, *v.NextToken)
 	}

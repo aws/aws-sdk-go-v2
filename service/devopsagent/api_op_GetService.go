@@ -80,7 +80,9 @@ func (v *GetServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Service.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.GetServiceOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetServiceOutput_tags, v.Tags)
+	}
 }
 func (v *GetServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetServiceOutput, func(s *smithy.Schema) error {

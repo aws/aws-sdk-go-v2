@@ -72,7 +72,9 @@ func (v *CreateVpcIngressConnectionInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.CreateVpcIngressConnectionRequest_ServiceArn, *v.ServiceArn)
 	}
-	serializeTagList(s, schemas.CreateVpcIngressConnectionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVpcIngressConnectionRequest_Tags, v.Tags)
+	}
 	if v.VpcIngressConnectionName != nil {
 		s.WriteString(schemas.CreateVpcIngressConnectionRequest_VpcIngressConnectionName, *v.VpcIngressConnectionName)
 	}

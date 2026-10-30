@@ -81,7 +81,9 @@ func (v *CreateDeviceProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Sidewalk.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDeviceProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDeviceProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDeviceProfileOutput struct {

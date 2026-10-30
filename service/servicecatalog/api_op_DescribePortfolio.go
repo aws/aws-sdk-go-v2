@@ -87,14 +87,20 @@ func (v *DescribePortfolioOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgets(s, schemas.DescribePortfolioOutput_Budgets, v.Budgets)
+	if v.Budgets != nil {
+		serializeBudgets(s, schemas.DescribePortfolioOutput_Budgets, v.Budgets)
+	}
 	if v.PortfolioDetail != nil {
 		s.WriteStruct(schemas.DescribePortfolioOutput_PortfolioDetail)
 		v.PortfolioDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagOptionDetails(s, schemas.DescribePortfolioOutput_TagOptions, v.TagOptions)
-	serializeTags(s, schemas.DescribePortfolioOutput_Tags, v.Tags)
+	if v.TagOptions != nil {
+		serializeTagOptionDetails(s, schemas.DescribePortfolioOutput_TagOptions, v.TagOptions)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribePortfolioOutput_Tags, v.Tags)
+	}
 }
 func (v *DescribePortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePortfolioOutput, func(s *smithy.Schema) error {

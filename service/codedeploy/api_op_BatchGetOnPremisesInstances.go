@@ -46,7 +46,9 @@ func (v *BatchGetOnPremisesInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetOnPremisesInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceNameList(s, schemas.BatchGetOnPremisesInstancesInput_instanceNames, v.InstanceNames)
+	if v.InstanceNames != nil {
+		serializeInstanceNameList(s, schemas.BatchGetOnPremisesInstancesInput_instanceNames, v.InstanceNames)
+	}
 }
 
 // Represents the output of a BatchGetOnPremisesInstances operation.
@@ -68,7 +70,9 @@ func (v *BatchGetOnPremisesInstancesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchGetOnPremisesInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceInfoList(s, schemas.BatchGetOnPremisesInstancesOutput_instanceInfos, v.InstanceInfos)
+	if v.InstanceInfos != nil {
+		serializeInstanceInfoList(s, schemas.BatchGetOnPremisesInstancesOutput_instanceInfos, v.InstanceInfos)
+	}
 }
 func (v *BatchGetOnPremisesInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetOnPremisesInstancesOutput, func(s *smithy.Schema) error {

@@ -43,7 +43,9 @@ func (v *DescribeTagsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceArnList(s, schemas.DescribeTagsRequest_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.DescribeTagsRequest_resourceArns, v.ResourceArns)
+	}
 }
 
 type DescribeTagsOutput struct {
@@ -64,7 +66,9 @@ func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTagList(s, schemas.DescribeTagsResponse_resourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.DescribeTagsResponse_resourceTags, v.ResourceTags)
+	}
 }
 func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTagsResponse, func(s *smithy.Schema) error {

@@ -102,7 +102,9 @@ func (v *ListScenesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListScenesResponse_nextToken, *v.NextToken)
 	}
-	serializeSceneSummaries(s, schemas.ListScenesResponse_sceneSummaries, v.SceneSummaries)
+	if v.SceneSummaries != nil {
+		serializeSceneSummaries(s, schemas.ListScenesResponse_sceneSummaries, v.SceneSummaries)
+	}
 }
 func (v *ListScenesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListScenesResponse, func(s *smithy.Schema) error {

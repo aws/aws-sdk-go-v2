@@ -147,8 +147,12 @@ func (v *GetCostAndUsageWithResourcesInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Granularity != "" {
 		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_Granularity, string(v.Granularity))
 	}
-	serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesRequest_GroupBy, v.GroupBy)
-	serializeMetricNames(s, schemas.GetCostAndUsageWithResourcesRequest_Metrics, v.Metrics)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesRequest_GroupBy, v.GroupBy)
+	}
+	if v.Metrics != nil {
+		serializeMetricNames(s, schemas.GetCostAndUsageWithResourcesRequest_Metrics, v.Metrics)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_NextPageToken, *v.NextPageToken)
 	}
@@ -190,12 +194,18 @@ func (v *GetCostAndUsageWithResourcesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetCostAndUsageWithResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes, v.DimensionValueAttributes)
-	serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions, v.GroupDefinitions)
+	if v.DimensionValueAttributes != nil {
+		serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes, v.DimensionValueAttributes)
+	}
+	if v.GroupDefinitions != nil {
+		serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions, v.GroupDefinitions)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostAndUsageWithResourcesResponse_NextPageToken, *v.NextPageToken)
 	}
-	serializeResultsByTime(s, schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime, v.ResultsByTime)
+	if v.ResultsByTime != nil {
+		serializeResultsByTime(s, schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime, v.ResultsByTime)
+	}
 }
 func (v *GetCostAndUsageWithResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCostAndUsageWithResourcesResponse, func(s *smithy.Schema) error {

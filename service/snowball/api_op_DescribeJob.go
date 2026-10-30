@@ -78,7 +78,9 @@ func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.JobMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeJobMetadataList(s, schemas.DescribeJobResult_SubJobMetadata, v.SubJobMetadata)
+	if v.SubJobMetadata != nil {
+		serializeJobMetadataList(s, schemas.DescribeJobResult_SubJobMetadata, v.SubJobMetadata)
+	}
 }
 func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeJobResult, func(s *smithy.Schema) error {

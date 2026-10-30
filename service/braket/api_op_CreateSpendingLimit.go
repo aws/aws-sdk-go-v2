@@ -77,7 +77,9 @@ func (v *CreateSpendingLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpendingLimit != nil {
 		s.WriteString(schemas.CreateSpendingLimitRequest_spendingLimit, *v.SpendingLimit)
 	}
-	serializeTagsMap(s, schemas.CreateSpendingLimitRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateSpendingLimitRequest_tags, v.Tags)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.CreateSpendingLimitRequest_timePeriod)
 		v.TimePeriod.SerializeMembers(s)

@@ -112,8 +112,12 @@ func (v *GetContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTimestamp != nil {
 		s.WriteTime(schemas.GetContactResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
 	}
-	serializeTopicPreferenceList(s, schemas.GetContactResponse_TopicDefaultPreferences, v.TopicDefaultPreferences)
-	serializeTopicPreferenceList(s, schemas.GetContactResponse_TopicPreferences, v.TopicPreferences)
+	if v.TopicDefaultPreferences != nil {
+		serializeTopicPreferenceList(s, schemas.GetContactResponse_TopicDefaultPreferences, v.TopicDefaultPreferences)
+	}
+	if v.TopicPreferences != nil {
+		serializeTopicPreferenceList(s, schemas.GetContactResponse_TopicPreferences, v.TopicPreferences)
+	}
 	if v.UnsubscribeAll != false {
 		s.WriteBool(schemas.GetContactResponse_UnsubscribeAll, v.UnsubscribeAll)
 	}

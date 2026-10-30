@@ -101,7 +101,9 @@ func (v *GetFindingStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfGroupCount(s, schemas.GetFindingStatisticsResponse_countsByGroup, v.CountsByGroup)
+	if v.CountsByGroup != nil {
+		serialize__listOfGroupCount(s, schemas.GetFindingStatisticsResponse_countsByGroup, v.CountsByGroup)
+	}
 }
 func (v *GetFindingStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingStatisticsResponse, func(s *smithy.Schema) error {

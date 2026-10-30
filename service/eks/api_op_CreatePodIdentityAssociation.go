@@ -201,7 +201,9 @@ func (v *CreatePodIdentityAssociationInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ServiceAccount != nil {
 		s.WriteString(schemas.CreatePodIdentityAssociationRequest_serviceAccount, *v.ServiceAccount)
 	}
-	serializeTagMap(s, schemas.CreatePodIdentityAssociationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePodIdentityAssociationRequest_tags, v.Tags)
+	}
 	if v.TargetRoleArn != nil {
 		s.WriteString(schemas.CreatePodIdentityAssociationRequest_targetRoleArn, *v.TargetRoleArn)
 	}

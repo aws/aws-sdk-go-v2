@@ -91,7 +91,9 @@ func (v *ListNamedShadowsForThingOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNamedShadowsForThingResponse_nextToken, *v.NextToken)
 	}
-	serializeNamedShadowList(s, schemas.ListNamedShadowsForThingResponse_results, v.Results)
+	if v.Results != nil {
+		serializeNamedShadowList(s, schemas.ListNamedShadowsForThingResponse_results, v.Results)
+	}
 	if v.Timestamp != 0 {
 		s.WriteInt64(schemas.ListNamedShadowsForThingResponse_timestamp, v.Timestamp)
 	}

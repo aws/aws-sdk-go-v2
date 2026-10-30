@@ -146,7 +146,9 @@ func (v *GetSampledRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PopulationSize != 0 {
 		s.WriteInt64(schemas.GetSampledRequestsResponse_PopulationSize, v.PopulationSize)
 	}
-	serializeSampledHTTPRequests(s, schemas.GetSampledRequestsResponse_SampledRequests, v.SampledRequests)
+	if v.SampledRequests != nil {
+		serializeSampledHTTPRequests(s, schemas.GetSampledRequestsResponse_SampledRequests, v.SampledRequests)
+	}
 	if v.TimeWindow != nil {
 		s.WriteStruct(schemas.GetSampledRequestsResponse_TimeWindow)
 		v.TimeWindow.SerializeMembers(s)

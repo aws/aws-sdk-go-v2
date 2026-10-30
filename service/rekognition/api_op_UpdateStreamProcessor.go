@@ -78,8 +78,12 @@ func (v *UpdateStreamProcessorInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateStreamProcessorRequest_Name, *v.Name)
 	}
-	serializeStreamProcessorParametersToDelete(s, schemas.UpdateStreamProcessorRequest_ParametersToDelete, v.ParametersToDelete)
-	serializeRegionsOfInterest(s, schemas.UpdateStreamProcessorRequest_RegionsOfInterestForUpdate, v.RegionsOfInterestForUpdate)
+	if v.ParametersToDelete != nil {
+		serializeStreamProcessorParametersToDelete(s, schemas.UpdateStreamProcessorRequest_ParametersToDelete, v.ParametersToDelete)
+	}
+	if v.RegionsOfInterestForUpdate != nil {
+		serializeRegionsOfInterest(s, schemas.UpdateStreamProcessorRequest_RegionsOfInterestForUpdate, v.RegionsOfInterestForUpdate)
+	}
 	if v.SettingsForUpdate != nil {
 		s.WriteStruct(schemas.UpdateStreamProcessorRequest_SettingsForUpdate)
 		v.SettingsForUpdate.SerializeMembers(s)

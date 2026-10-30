@@ -155,7 +155,9 @@ func (v *PostTextInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PostTextInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActiveContextsList(s, schemas.PostTextRequest_activeContexts, v.ActiveContexts)
+	if v.ActiveContexts != nil {
+		serializeActiveContextsList(s, schemas.PostTextRequest_activeContexts, v.ActiveContexts)
+	}
 	if v.BotAlias != nil {
 		s.WriteString(schemas.PostTextRequest_botAlias, *v.BotAlias)
 	}
@@ -165,8 +167,12 @@ func (v *PostTextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InputText != nil {
 		s.WriteString(schemas.PostTextRequest_inputText, *v.InputText)
 	}
-	serializeStringMap(s, schemas.PostTextRequest_requestAttributes, v.RequestAttributes)
-	serializeStringMap(s, schemas.PostTextRequest_sessionAttributes, v.SessionAttributes)
+	if v.RequestAttributes != nil {
+		serializeStringMap(s, schemas.PostTextRequest_requestAttributes, v.RequestAttributes)
+	}
+	if v.SessionAttributes != nil {
+		serializeStringMap(s, schemas.PostTextRequest_sessionAttributes, v.SessionAttributes)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.PostTextRequest_userId, *v.UserId)
 	}
@@ -328,8 +334,12 @@ func (v *PostTextOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PostTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActiveContextsList(s, schemas.PostTextResponse_activeContexts, v.ActiveContexts)
-	serializeIntentList(s, schemas.PostTextResponse_alternativeIntents, v.AlternativeIntents)
+	if v.ActiveContexts != nil {
+		serializeActiveContextsList(s, schemas.PostTextResponse_activeContexts, v.ActiveContexts)
+	}
+	if v.AlternativeIntents != nil {
+		serializeIntentList(s, schemas.PostTextResponse_alternativeIntents, v.AlternativeIntents)
+	}
 	if v.BotVersion != nil {
 		s.WriteString(schemas.PostTextResponse_botVersion, *v.BotVersion)
 	}
@@ -360,14 +370,18 @@ func (v *PostTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SentimentResponse.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringMap(s, schemas.PostTextResponse_sessionAttributes, v.SessionAttributes)
+	if v.SessionAttributes != nil {
+		serializeStringMap(s, schemas.PostTextResponse_sessionAttributes, v.SessionAttributes)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.PostTextResponse_sessionId, *v.SessionId)
 	}
 	if v.SlotToElicit != nil {
 		s.WriteString(schemas.PostTextResponse_slotToElicit, *v.SlotToElicit)
 	}
-	serializeStringMap(s, schemas.PostTextResponse_slots, v.Slots)
+	if v.Slots != nil {
+		serializeStringMap(s, schemas.PostTextResponse_slots, v.Slots)
+	}
 }
 func (v *PostTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PostTextResponse, func(s *smithy.Schema) error {

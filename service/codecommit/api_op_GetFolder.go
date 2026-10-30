@@ -113,13 +113,21 @@ func (v *GetFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CommitId != nil {
 		s.WriteString(schemas.GetFolderOutput_commitId, *v.CommitId)
 	}
-	serializeFileList(s, schemas.GetFolderOutput_files, v.Files)
+	if v.Files != nil {
+		serializeFileList(s, schemas.GetFolderOutput_files, v.Files)
+	}
 	if v.FolderPath != nil {
 		s.WriteString(schemas.GetFolderOutput_folderPath, *v.FolderPath)
 	}
-	serializeFolderList(s, schemas.GetFolderOutput_subFolders, v.SubFolders)
-	serializeSubModuleList(s, schemas.GetFolderOutput_subModules, v.SubModules)
-	serializeSymbolicLinkList(s, schemas.GetFolderOutput_symbolicLinks, v.SymbolicLinks)
+	if v.SubFolders != nil {
+		serializeFolderList(s, schemas.GetFolderOutput_subFolders, v.SubFolders)
+	}
+	if v.SubModules != nil {
+		serializeSubModuleList(s, schemas.GetFolderOutput_subModules, v.SubModules)
+	}
+	if v.SymbolicLinks != nil {
+		serializeSymbolicLinkList(s, schemas.GetFolderOutput_symbolicLinks, v.SymbolicLinks)
+	}
 	if v.TreeId != nil {
 		s.WriteString(schemas.GetFolderOutput_treeId, *v.TreeId)
 	}

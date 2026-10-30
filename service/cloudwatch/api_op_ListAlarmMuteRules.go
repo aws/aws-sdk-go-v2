@@ -73,7 +73,9 @@ func (v *ListAlarmMuteRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAlarmMuteRulesInput_NextToken, *v.NextToken)
 	}
-	serializeAlarmMuteRuleStatuses(s, schemas.ListAlarmMuteRulesInput_Statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeAlarmMuteRuleStatuses(s, schemas.ListAlarmMuteRulesInput_Statuses, v.Statuses)
+	}
 }
 
 type ListAlarmMuteRulesOutput struct {
@@ -98,7 +100,9 @@ func (v *ListAlarmMuteRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAlarmMuteRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarmMuteRuleSummaries(s, schemas.ListAlarmMuteRulesOutput_AlarmMuteRuleSummaries, v.AlarmMuteRuleSummaries)
+	if v.AlarmMuteRuleSummaries != nil {
+		serializeAlarmMuteRuleSummaries(s, schemas.ListAlarmMuteRulesOutput_AlarmMuteRuleSummaries, v.AlarmMuteRuleSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAlarmMuteRulesOutput_NextToken, *v.NextToken)
 	}

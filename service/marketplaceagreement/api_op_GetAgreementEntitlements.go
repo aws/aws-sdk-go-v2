@@ -82,7 +82,9 @@ func (v *GetAgreementEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAgreementEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgreementEntitlementList(s, schemas.GetAgreementEntitlementsOutput_agreementEntitlements, v.AgreementEntitlements)
+	if v.AgreementEntitlements != nil {
+		serializeAgreementEntitlementList(s, schemas.GetAgreementEntitlementsOutput_agreementEntitlements, v.AgreementEntitlements)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAgreementEntitlementsOutput_nextToken, *v.NextToken)
 	}

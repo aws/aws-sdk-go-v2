@@ -130,8 +130,12 @@ func (v *CreateActivationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationLimit != nil {
 		s.WriteInt32(schemas.CreateActivationRequest_RegistrationLimit, *v.RegistrationLimit)
 	}
-	serializeRegistrationMetadataList(s, schemas.CreateActivationRequest_RegistrationMetadata, v.RegistrationMetadata)
-	serializeTagList(s, schemas.CreateActivationRequest_Tags, v.Tags)
+	if v.RegistrationMetadata != nil {
+		serializeRegistrationMetadataList(s, schemas.CreateActivationRequest_RegistrationMetadata, v.RegistrationMetadata)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateActivationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateActivationOutput struct {

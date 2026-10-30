@@ -142,7 +142,9 @@ func (v *DescribeWhatIfForecastOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EstimatedTimeRemainingInMinutes != nil {
 		s.WriteInt64(schemas.DescribeWhatIfForecastResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
 	}
-	serializeForecastTypes(s, schemas.DescribeWhatIfForecastResponse_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.DescribeWhatIfForecastResponse_ForecastTypes, v.ForecastTypes)
+	}
 	if v.LastModificationTime != nil {
 		s.WriteTime(schemas.DescribeWhatIfForecastResponse_LastModificationTime, *v.LastModificationTime)
 	}
@@ -157,7 +159,9 @@ func (v *DescribeWhatIfForecastOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.TimeSeriesReplacementsDataSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTimeSeriesTransformations(s, schemas.DescribeWhatIfForecastResponse_TimeSeriesTransformations, v.TimeSeriesTransformations)
+	if v.TimeSeriesTransformations != nil {
+		serializeTimeSeriesTransformations(s, schemas.DescribeWhatIfForecastResponse_TimeSeriesTransformations, v.TimeSeriesTransformations)
+	}
 	if v.WhatIfAnalysisArn != nil {
 		s.WriteString(schemas.DescribeWhatIfForecastResponse_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
 	}

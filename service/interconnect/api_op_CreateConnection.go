@@ -80,7 +80,9 @@ func (v *CreateConnectionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachPoint(s, schemas.CreateConnectionRequest_attachPoint, v.AttachPoint)
+	if v.AttachPoint != nil {
+		serializeAttachPoint(s, schemas.CreateConnectionRequest_attachPoint, v.AttachPoint)
+	}
 	if v.Bandwidth != nil {
 		s.WriteString(schemas.CreateConnectionRequest_bandwidth, *v.Bandwidth)
 	}
@@ -93,8 +95,12 @@ func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.CreateConnectionRequest_environmentId, *v.EnvironmentId)
 	}
-	serializeRemoteAccountIdentifier(s, schemas.CreateConnectionRequest_remoteAccount, v.RemoteAccount)
-	serializeTagMap(s, schemas.CreateConnectionRequest_tags, v.Tags)
+	if v.RemoteAccount != nil {
+		serializeRemoteAccountIdentifier(s, schemas.CreateConnectionRequest_remoteAccount, v.RemoteAccount)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConnectionRequest_tags, v.Tags)
+	}
 }
 
 type CreateConnectionOutput struct {

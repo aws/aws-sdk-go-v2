@@ -58,7 +58,9 @@ func (v *DescribeInboundCrossClusterSearchConnectionsInput) Serialize(s smithy.S
 }
 
 func (v *DescribeInboundCrossClusterSearchConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeInboundCrossClusterSearchConnectionsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeInboundCrossClusterSearchConnectionsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != 0 {
 		s.WriteInt32(schemas.DescribeInboundCrossClusterSearchConnectionsRequest_MaxResults, v.MaxResults)
 	}
@@ -91,7 +93,9 @@ func (v *DescribeInboundCrossClusterSearchConnectionsOutput) Serialize(s smithy.
 }
 
 func (v *DescribeInboundCrossClusterSearchConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInboundCrossClusterSearchConnections(s, schemas.DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, v.CrossClusterSearchConnections)
+	if v.CrossClusterSearchConnections != nil {
+		serializeInboundCrossClusterSearchConnections(s, schemas.DescribeInboundCrossClusterSearchConnectionsResponse_CrossClusterSearchConnections, v.CrossClusterSearchConnections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInboundCrossClusterSearchConnectionsResponse_NextToken, *v.NextToken)
 	}

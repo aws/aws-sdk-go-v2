@@ -132,7 +132,9 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_ClientToken, *v.ClientToken)
 	}
-	serializeCode(s, schemas.CreateWorkflowRequest_Code, v.Code)
+	if v.Code != nil {
+		serializeCode(s, schemas.CreateWorkflowRequest_Code, v.Code)
+	}
 	if v.DefinitionS3Location != nil {
 		s.WriteStruct(schemas.CreateWorkflowRequest_DefinitionS3Location)
 		v.DefinitionS3Location.SerializeMembers(s)
@@ -165,7 +167,9 @@ func (v *CreateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTags(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWorkflowRequest_Tags, v.Tags)
+	}
 	if v.TriggerMode != nil {
 		s.WriteString(schemas.CreateWorkflowRequest_TriggerMode, *v.TriggerMode)
 	}
@@ -231,7 +235,9 @@ func (v *CreateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RevisionId != nil {
 		s.WriteString(schemas.CreateWorkflowResponse_RevisionId, *v.RevisionId)
 	}
-	serializeWarningMessages(s, schemas.CreateWorkflowResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarningMessages(s, schemas.CreateWorkflowResponse_Warnings, v.Warnings)
+	}
 	if v.WorkflowArn != nil {
 		s.WriteString(schemas.CreateWorkflowResponse_WorkflowArn, *v.WorkflowArn)
 	}

@@ -104,7 +104,9 @@ func (v *RenderUiTemplateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RenderUiTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRenderingErrorList(s, schemas.RenderUiTemplateResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeRenderingErrorList(s, schemas.RenderUiTemplateResponse_Errors, v.Errors)
+	}
 	if v.RenderedContent != nil {
 		s.WriteString(schemas.RenderUiTemplateResponse_RenderedContent, *v.RenderedContent)
 	}

@@ -76,7 +76,9 @@ func (v *ListHarnessesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHarnessesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHarnessSummaries(s, schemas.ListHarnessesResponse_harnesses, v.Harnesses)
+	if v.Harnesses != nil {
+		serializeHarnessSummaries(s, schemas.ListHarnessesResponse_harnesses, v.Harnesses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHarnessesResponse_nextToken, *v.NextToken)
 	}

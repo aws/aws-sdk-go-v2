@@ -188,7 +188,9 @@ func (v *GetOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetOriginEndpointResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeGetDashManifests(s, schemas.GetOriginEndpointResponse_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serializeGetDashManifests(s, schemas.GetOriginEndpointResponse_DashManifests, v.DashManifests)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetOriginEndpointResponse_Description, *v.Description)
 	}
@@ -200,12 +202,18 @@ func (v *GetOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGetHlsManifests(s, schemas.GetOriginEndpointResponse_HlsManifests, v.HlsManifests)
-	serializeGetLowLatencyHlsManifests(s, schemas.GetOriginEndpointResponse_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	if v.HlsManifests != nil {
+		serializeGetHlsManifests(s, schemas.GetOriginEndpointResponse_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeGetLowLatencyHlsManifests(s, schemas.GetOriginEndpointResponse_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.GetOriginEndpointResponse_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeGetMssManifests(s, schemas.GetOriginEndpointResponse_MssManifests, v.MssManifests)
+	if v.MssManifests != nil {
+		serializeGetMssManifests(s, schemas.GetOriginEndpointResponse_MssManifests, v.MssManifests)
+	}
 	if v.OriginEndpointName != nil {
 		s.WriteString(schemas.GetOriginEndpointResponse_OriginEndpointName, *v.OriginEndpointName)
 	}
@@ -223,7 +231,9 @@ func (v *GetOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamNameOutputMode != "" {
 		s.WriteString(schemas.GetOriginEndpointResponse_StreamNameOutputMode, string(v.StreamNameOutputMode))
 	}
-	serializeTagMap(s, schemas.GetOriginEndpointResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetOriginEndpointResponse_Tags, v.Tags)
+	}
 	if v.UriSeparator != "" {
 		s.WriteString(schemas.GetOriginEndpointResponse_UriSeparator, string(v.UriSeparator))
 	}

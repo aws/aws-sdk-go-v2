@@ -69,14 +69,18 @@ func (v *StartSearchResultExportJobInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartSearchResultExportJobInput_ClientToken, *v.ClientToken)
 	}
-	serializeExportSpecification(s, schemas.StartSearchResultExportJobInput_ExportSpecification, v.ExportSpecification)
+	if v.ExportSpecification != nil {
+		serializeExportSpecification(s, schemas.StartSearchResultExportJobInput_ExportSpecification, v.ExportSpecification)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.StartSearchResultExportJobInput_RoleArn, *v.RoleArn)
 	}
 	if v.SearchJobIdentifier != nil {
 		s.WriteString(schemas.StartSearchResultExportJobInput_SearchJobIdentifier, *v.SearchJobIdentifier)
 	}
-	serializeTagMap(s, schemas.StartSearchResultExportJobInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartSearchResultExportJobInput_Tags, v.Tags)
+	}
 }
 
 type StartSearchResultExportJobOutput struct {

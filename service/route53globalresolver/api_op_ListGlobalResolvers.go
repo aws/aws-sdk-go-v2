@@ -87,7 +87,9 @@ func (v *ListGlobalResolversOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGlobalResolversOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalResolvers(s, schemas.ListGlobalResolversOutput_globalResolvers, v.GlobalResolvers)
+	if v.GlobalResolvers != nil {
+		serializeGlobalResolvers(s, schemas.ListGlobalResolversOutput_globalResolvers, v.GlobalResolvers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGlobalResolversOutput_nextToken, *v.NextToken)
 	}

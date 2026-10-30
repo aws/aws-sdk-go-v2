@@ -98,7 +98,9 @@ func (v *CopySnapshotAndUpdateVolumeInput) SerializeMembers(s smithy.ShapeSerial
 	if v.CopyStrategy != "" {
 		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_CopyStrategy, string(v.CopyStrategy))
 	}
-	serializeUpdateOpenZFSVolumeOptions(s, schemas.CopySnapshotAndUpdateVolumeRequest_Options, v.Options)
+	if v.Options != nil {
+		serializeUpdateOpenZFSVolumeOptions(s, schemas.CopySnapshotAndUpdateVolumeRequest_Options, v.Options)
+	}
 	if v.SourceSnapshotARN != nil {
 		s.WriteString(schemas.CopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN, *v.SourceSnapshotARN)
 	}
@@ -133,7 +135,9 @@ func (v *CopySnapshotAndUpdateVolumeOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *CopySnapshotAndUpdateVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdministrativeActions(s, schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions, v.AdministrativeActions)
+	if v.AdministrativeActions != nil {
+		serializeAdministrativeActions(s, schemas.CopySnapshotAndUpdateVolumeResponse_AdministrativeActions, v.AdministrativeActions)
+	}
 	if v.Lifecycle != "" {
 		s.WriteString(schemas.CopySnapshotAndUpdateVolumeResponse_Lifecycle, string(v.Lifecycle))
 	}

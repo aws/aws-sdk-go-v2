@@ -81,7 +81,9 @@ func (v *ListLicenseVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLicenseVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLicenseList(s, schemas.ListLicenseVersionsResponse_Licenses, v.Licenses)
+	if v.Licenses != nil {
+		serializeLicenseList(s, schemas.ListLicenseVersionsResponse_Licenses, v.Licenses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLicenseVersionsResponse_NextToken, *v.NextToken)
 	}

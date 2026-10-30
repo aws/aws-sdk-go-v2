@@ -111,7 +111,9 @@ func (v *ListFHIRImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFHIRImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportJobPropertiesList(s, schemas.ListFHIRImportJobsResponse_ImportJobPropertiesList, v.ImportJobPropertiesList)
+	if v.ImportJobPropertiesList != nil {
+		serializeImportJobPropertiesList(s, schemas.ListFHIRImportJobsResponse_ImportJobPropertiesList, v.ImportJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFHIRImportJobsResponse_NextToken, *v.NextToken)
 	}

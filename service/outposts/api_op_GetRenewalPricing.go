@@ -69,7 +69,9 @@ func (v *GetRenewalPricingOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRenewalPricingOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePricingOptionList(s, schemas.GetRenewalPricingOutput_PricingOptions, v.PricingOptions)
+	if v.PricingOptions != nil {
+		serializePricingOptionList(s, schemas.GetRenewalPricingOutput_PricingOptions, v.PricingOptions)
+	}
 	if v.PricingResult != "" {
 		s.WriteString(schemas.GetRenewalPricingOutput_PricingResult, string(v.PricingResult))
 	}

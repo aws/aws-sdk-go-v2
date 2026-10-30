@@ -65,7 +65,9 @@ func (v *BatchGetServiceLevelObjectiveBudgetReportInput) Serialize(s smithy.Shap
 }
 
 func (v *BatchGetServiceLevelObjectiveBudgetReportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceLevelObjectiveIds(s, schemas.BatchGetServiceLevelObjectiveBudgetReportInput_SloIds, v.SloIds)
+	if v.SloIds != nil {
+		serializeServiceLevelObjectiveIds(s, schemas.BatchGetServiceLevelObjectiveBudgetReportInput_SloIds, v.SloIds)
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp, *v.Timestamp)
 	}
@@ -103,8 +105,12 @@ func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) Serialize(s smithy.Sha
 }
 
 func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServiceLevelObjectiveBudgetReportErrors(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors, v.Errors)
-	serializeServiceLevelObjectiveBudgetReports(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports, v.Reports)
+	if v.Errors != nil {
+		serializeServiceLevelObjectiveBudgetReportErrors(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors, v.Errors)
+	}
+	if v.Reports != nil {
+		serializeServiceLevelObjectiveBudgetReports(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports, v.Reports)
+	}
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp, *v.Timestamp)
 	}

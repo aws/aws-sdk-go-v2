@@ -107,7 +107,9 @@ func (v *ListMailboxPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMailboxPermissionsResponse_NextToken, *v.NextToken)
 	}
-	serializePermissions(s, schemas.ListMailboxPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissions(s, schemas.ListMailboxPermissionsResponse_Permissions, v.Permissions)
+	}
 }
 func (v *ListMailboxPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMailboxPermissionsResponse, func(s *smithy.Schema) error {

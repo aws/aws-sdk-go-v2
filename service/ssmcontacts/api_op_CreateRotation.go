@@ -86,7 +86,9 @@ func (v *CreateRotationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRotationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRotationContactsArnList(s, schemas.CreateRotationRequest_ContactIds, v.ContactIds)
+	if v.ContactIds != nil {
+		serializeRotationContactsArnList(s, schemas.CreateRotationRequest_ContactIds, v.ContactIds)
+	}
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateRotationRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
@@ -101,7 +103,9 @@ func (v *CreateRotationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CreateRotationRequest_StartTime, *v.StartTime)
 	}
-	serializeTagsList(s, schemas.CreateRotationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.CreateRotationRequest_Tags, v.Tags)
+	}
 	if v.TimeZoneId != nil {
 		s.WriteString(schemas.CreateRotationRequest_TimeZoneId, *v.TimeZoneId)
 	}

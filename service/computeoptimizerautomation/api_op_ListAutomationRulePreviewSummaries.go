@@ -83,7 +83,9 @@ func (v *ListAutomationRulePreviewSummariesInput) SerializeMembers(s smithy.Shap
 		v.OrganizationScope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRecommendedActionTypeList(s, schemas.ListAutomationRulePreviewSummariesRequest_recommendedActionTypes, v.RecommendedActionTypes)
+	if v.RecommendedActionTypes != nil {
+		serializeRecommendedActionTypeList(s, schemas.ListAutomationRulePreviewSummariesRequest_recommendedActionTypes, v.RecommendedActionTypes)
+	}
 	if v.RuleType != "" {
 		s.WriteString(schemas.ListAutomationRulePreviewSummariesRequest_ruleType, string(v.RuleType))
 	}
@@ -114,7 +116,9 @@ func (v *ListAutomationRulePreviewSummariesOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAutomationRulePreviewSummariesResponse_nextToken, *v.NextToken)
 	}
-	serializePreviewResultSummaries(s, schemas.ListAutomationRulePreviewSummariesResponse_previewResultSummaries, v.PreviewResultSummaries)
+	if v.PreviewResultSummaries != nil {
+		serializePreviewResultSummaries(s, schemas.ListAutomationRulePreviewSummariesResponse_previewResultSummaries, v.PreviewResultSummaries)
+	}
 }
 func (v *ListAutomationRulePreviewSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAutomationRulePreviewSummariesResponse, func(s *smithy.Schema) error {

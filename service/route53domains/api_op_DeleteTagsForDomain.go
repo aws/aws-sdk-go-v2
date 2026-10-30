@@ -54,7 +54,9 @@ func (v *DeleteTagsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.DeleteTagsForDomainRequest_DomainName, *v.DomainName)
 	}
-	serializeTagKeyList(s, schemas.DeleteTagsForDomainRequest_TagsToDelete, v.TagsToDelete)
+	if v.TagsToDelete != nil {
+		serializeTagKeyList(s, schemas.DeleteTagsForDomainRequest_TagsToDelete, v.TagsToDelete)
+	}
 }
 
 type DeleteTagsForDomainOutput struct {

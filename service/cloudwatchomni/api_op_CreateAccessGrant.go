@@ -97,11 +97,15 @@ func (v *CreateAccessGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Principal.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScopedActionsList(s, schemas.CreateAccessGrantInput_scopedActions, v.ScopedActions)
+	if v.ScopedActions != nil {
+		serializeScopedActionsList(s, schemas.CreateAccessGrantInput_scopedActions, v.ScopedActions)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.CreateAccessGrantInput_spaceId, *v.SpaceId)
 	}
-	serializeTagMap(s, schemas.CreateAccessGrantInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAccessGrantInput_tags, v.Tags)
+	}
 }
 
 type CreateAccessGrantOutput struct {

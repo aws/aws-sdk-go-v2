@@ -89,7 +89,9 @@ func (v *ListAcmeAccountsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAcmeAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcmeAccountList(s, schemas.ListAcmeAccountsResponse_AcmeAccounts, v.AcmeAccounts)
+	if v.AcmeAccounts != nil {
+		serializeAcmeAccountList(s, schemas.ListAcmeAccountsResponse_AcmeAccounts, v.AcmeAccounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAcmeAccountsResponse_NextToken, *v.NextToken)
 	}

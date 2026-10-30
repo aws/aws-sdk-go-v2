@@ -86,7 +86,9 @@ func (v *DescribeSpendLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSpendLimitsResult_NextToken, *v.NextToken)
 	}
-	serializeSpendLimitList(s, schemas.DescribeSpendLimitsResult_SpendLimits, v.SpendLimits)
+	if v.SpendLimits != nil {
+		serializeSpendLimitList(s, schemas.DescribeSpendLimitsResult_SpendLimits, v.SpendLimits)
+	}
 }
 func (v *DescribeSpendLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSpendLimitsResult, func(s *smithy.Schema) error {

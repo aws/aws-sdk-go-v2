@@ -291,7 +291,9 @@ func (v *CreateSMBFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessBasedEnumeration != nil {
 		s.WriteBool(schemas.CreateSMBFileShareInput_AccessBasedEnumeration, *v.AccessBasedEnumeration)
 	}
-	serializeUserList(s, schemas.CreateSMBFileShareInput_AdminUserList, v.AdminUserList)
+	if v.AdminUserList != nil {
+		serializeUserList(s, schemas.CreateSMBFileShareInput_AdminUserList, v.AdminUserList)
+	}
 	if v.AuditDestinationARN != nil {
 		s.WriteString(schemas.CreateSMBFileShareInput_AuditDestinationARN, *v.AuditDestinationARN)
 	}
@@ -327,7 +329,9 @@ func (v *CreateSMBFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GuessMIMETypeEnabled != nil {
 		s.WriteBool(schemas.CreateSMBFileShareInput_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
 	}
-	serializeUserList(s, schemas.CreateSMBFileShareInput_InvalidUserList, v.InvalidUserList)
+	if v.InvalidUserList != nil {
+		serializeUserList(s, schemas.CreateSMBFileShareInput_InvalidUserList, v.InvalidUserList)
+	}
 	if v.KMSEncrypted != nil {
 		s.WriteBool(schemas.CreateSMBFileShareInput_KMSEncrypted, *v.KMSEncrypted)
 	}
@@ -358,11 +362,15 @@ func (v *CreateSMBFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SMBACLEnabled != nil {
 		s.WriteBool(schemas.CreateSMBFileShareInput_SMBACLEnabled, *v.SMBACLEnabled)
 	}
-	serializeTags(s, schemas.CreateSMBFileShareInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSMBFileShareInput_Tags, v.Tags)
+	}
 	if v.VPCEndpointDNSName != nil {
 		s.WriteString(schemas.CreateSMBFileShareInput_VPCEndpointDNSName, *v.VPCEndpointDNSName)
 	}
-	serializeUserList(s, schemas.CreateSMBFileShareInput_ValidUserList, v.ValidUserList)
+	if v.ValidUserList != nil {
+		serializeUserList(s, schemas.CreateSMBFileShareInput_ValidUserList, v.ValidUserList)
+	}
 }
 
 // CreateSMBFileShareOutput

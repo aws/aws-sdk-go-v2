@@ -63,7 +63,9 @@ func (v *ListFirewallRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DnsViewId != nil {
 		s.WriteString(schemas.ListFirewallRulesInput_dnsViewId, *v.DnsViewId)
 	}
-	serializeFilters(s, schemas.ListFirewallRulesInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListFirewallRulesInput_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListFirewallRulesInput_maxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *ListFirewallRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFirewallRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirewallRules(s, schemas.ListFirewallRulesOutput_firewallRules, v.FirewallRules)
+	if v.FirewallRules != nil {
+		serializeFirewallRules(s, schemas.ListFirewallRulesOutput_firewallRules, v.FirewallRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallRulesOutput_nextToken, *v.NextToken)
 	}

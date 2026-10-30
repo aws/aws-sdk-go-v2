@@ -52,7 +52,9 @@ func (v *BatchGetThreatModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.BatchGetThreatModelsInput_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeThreatModelIdList(s, schemas.BatchGetThreatModelsInput_threatModelIds, v.ThreatModelIds)
+	if v.ThreatModelIds != nil {
+		serializeThreatModelIdList(s, schemas.BatchGetThreatModelsInput_threatModelIds, v.ThreatModelIds)
+	}
 }
 
 // Output for the BatchGetThreatModels operation.
@@ -77,8 +79,12 @@ func (v *BatchGetThreatModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetThreatModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThreatModelIdList(s, schemas.BatchGetThreatModelsOutput_notFound, v.NotFound)
-	serializeThreatModelList(s, schemas.BatchGetThreatModelsOutput_threatModels, v.ThreatModels)
+	if v.NotFound != nil {
+		serializeThreatModelIdList(s, schemas.BatchGetThreatModelsOutput_notFound, v.NotFound)
+	}
+	if v.ThreatModels != nil {
+		serializeThreatModelList(s, schemas.BatchGetThreatModelsOutput_threatModels, v.ThreatModels)
+	}
 }
 func (v *BatchGetThreatModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetThreatModelsOutput, func(s *smithy.Schema) error {

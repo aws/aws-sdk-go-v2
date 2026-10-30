@@ -62,7 +62,9 @@ func (v *PublishMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentName != nil {
 		s.WriteString(schemas.PublishMetricsInput_EnvironmentName, *v.EnvironmentName)
 	}
-	serializeMetricData(s, schemas.PublishMetricsInput_MetricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricData(s, schemas.PublishMetricsInput_MetricData, v.MetricData)
+	}
 }
 func (v *PublishMetricsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PublishMetricsInput, func(s *smithy.Schema) error {

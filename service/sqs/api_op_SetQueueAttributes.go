@@ -227,7 +227,9 @@ func (v *SetQueueAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetQueueAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueueAttributeMap(s, schemas.SetQueueAttributesRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeQueueAttributeMap(s, schemas.SetQueueAttributesRequest_Attributes, v.Attributes)
+	}
 	if v.QueueUrl != nil {
 		s.WriteString(schemas.SetQueueAttributesRequest_QueueUrl, *v.QueueUrl)
 	}

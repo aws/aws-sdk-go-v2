@@ -130,7 +130,9 @@ func (v *ListInstalledComponentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInstalledComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstalledComponentList(s, schemas.ListInstalledComponentsResponse_installedComponents, v.InstalledComponents)
+	if v.InstalledComponents != nil {
+		serializeInstalledComponentList(s, schemas.ListInstalledComponentsResponse_installedComponents, v.InstalledComponents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInstalledComponentsResponse_nextToken, *v.NextToken)
 	}

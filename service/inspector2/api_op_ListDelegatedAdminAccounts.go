@@ -98,7 +98,9 @@ func (v *ListDelegatedAdminAccountsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDelegatedAdminAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDelegatedAdminAccountList(s, schemas.ListDelegatedAdminAccountsResponse_delegatedAdminAccounts, v.DelegatedAdminAccounts)
+	if v.DelegatedAdminAccounts != nil {
+		serializeDelegatedAdminAccountList(s, schemas.ListDelegatedAdminAccountsResponse_delegatedAdminAccounts, v.DelegatedAdminAccounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDelegatedAdminAccountsResponse_nextToken, *v.NextToken)
 	}

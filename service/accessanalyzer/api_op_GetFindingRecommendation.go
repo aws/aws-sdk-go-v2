@@ -134,7 +134,9 @@ func (v *GetFindingRecommendationOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.RecommendationType != "" {
 		s.WriteString(schemas.GetFindingRecommendationResponse_recommendationType, string(v.RecommendationType))
 	}
-	serializeRecommendedStepList(s, schemas.GetFindingRecommendationResponse_recommendedSteps, v.RecommendedSteps)
+	if v.RecommendedSteps != nil {
+		serializeRecommendedStepList(s, schemas.GetFindingRecommendationResponse_recommendedSteps, v.RecommendedSteps)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.GetFindingRecommendationResponse_resourceArn, *v.ResourceArn)
 	}

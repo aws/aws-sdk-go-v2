@@ -57,8 +57,12 @@ func (v *UpdateContextInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateContextRequest_Description, *v.Description)
 	}
-	serializeLineageEntityParameters(s, schemas.UpdateContextRequest_Properties, v.Properties)
-	serializeListLineageEntityParameterKey(s, schemas.UpdateContextRequest_PropertiesToRemove, v.PropertiesToRemove)
+	if v.Properties != nil {
+		serializeLineageEntityParameters(s, schemas.UpdateContextRequest_Properties, v.Properties)
+	}
+	if v.PropertiesToRemove != nil {
+		serializeListLineageEntityParameterKey(s, schemas.UpdateContextRequest_PropertiesToRemove, v.PropertiesToRemove)
+	}
 }
 
 type UpdateContextOutput struct {

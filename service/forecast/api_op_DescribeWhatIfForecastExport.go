@@ -155,7 +155,9 @@ func (v *DescribeWhatIfForecastExportOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.Status != nil {
 		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_Status, *v.Status)
 	}
-	serializeLongArnList(s, schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastArns, v.WhatIfForecastArns)
+	if v.WhatIfForecastArns != nil {
+		serializeLongArnList(s, schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastArns, v.WhatIfForecastArns)
+	}
 	if v.WhatIfForecastExportArn != nil {
 		s.WriteString(schemas.DescribeWhatIfForecastExportResponse_WhatIfForecastExportArn, *v.WhatIfForecastExportArn)
 	}

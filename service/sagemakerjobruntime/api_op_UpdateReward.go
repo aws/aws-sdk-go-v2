@@ -66,7 +66,9 @@ func (v *UpdateRewardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobArn != nil {
 		s.WriteString(schemas.UpdateRewardRequest_JobArn, *v.JobArn)
 	}
-	serializeDoubleList(s, schemas.UpdateRewardRequest_Rewards, v.Rewards)
+	if v.Rewards != nil {
+		serializeDoubleList(s, schemas.UpdateRewardRequest_Rewards, v.Rewards)
+	}
 	if v.TrajectoryId != nil {
 		s.WriteString(schemas.UpdateRewardRequest_TrajectoryId, *v.TrajectoryId)
 	}

@@ -169,8 +169,12 @@ func (v *DeleteDataSourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFormOutputList(s, schemas.DeleteDataSourceOutput_assetFormsOutput, v.AssetFormsOutput)
-	serializeDataSourceConfigurationOutput(s, schemas.DeleteDataSourceOutput_configuration, v.Configuration)
+	if v.AssetFormsOutput != nil {
+		serializeFormOutputList(s, schemas.DeleteDataSourceOutput_assetFormsOutput, v.AssetFormsOutput)
+	}
+	if v.Configuration != nil {
+		serializeDataSourceConfigurationOutput(s, schemas.DeleteDataSourceOutput_configuration, v.Configuration)
+	}
 	if v.ConnectionId != nil {
 		s.WriteString(schemas.DeleteDataSourceOutput_connectionId, *v.ConnectionId)
 	}
@@ -225,7 +229,9 @@ func (v *DeleteDataSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Schedule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSelfGrantStatusOutput(s, schemas.DeleteDataSourceOutput_selfGrantStatus, v.SelfGrantStatus)
+	if v.SelfGrantStatus != nil {
+		serializeSelfGrantStatusOutput(s, schemas.DeleteDataSourceOutput_selfGrantStatus, v.SelfGrantStatus)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DeleteDataSourceOutput_status, string(v.Status))
 	}

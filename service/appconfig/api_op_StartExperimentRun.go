@@ -91,8 +91,12 @@ func (v *StartExperimentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExposurePercentage != nil {
 		s.WriteFloat32(schemas.StartExperimentRunRequest_ExposurePercentage, *v.ExposurePercentage)
 	}
-	serializeTagMap(s, schemas.StartExperimentRunRequest_Tags, v.Tags)
-	serializeTreatmentOverrides(s, schemas.StartExperimentRunRequest_TreatmentOverrides, v.TreatmentOverrides)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartExperimentRunRequest_Tags, v.Tags)
+	}
+	if v.TreatmentOverrides != nil {
+		serializeTreatmentOverrides(s, schemas.StartExperimentRunRequest_TreatmentOverrides, v.TreatmentOverrides)
+	}
 }
 
 // Describes an experiment run, including its status, exposure settings, and
@@ -183,7 +187,9 @@ func (v *StartExperimentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ExperimentRun_Status, string(v.Status))
 	}
-	serializeTreatmentOverrides(s, schemas.ExperimentRun_TreatmentOverrides, v.TreatmentOverrides)
+	if v.TreatmentOverrides != nil {
+		serializeTreatmentOverrides(s, schemas.ExperimentRun_TreatmentOverrides, v.TreatmentOverrides)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ExperimentRun_UpdatedAt, *v.UpdatedAt)
 	}

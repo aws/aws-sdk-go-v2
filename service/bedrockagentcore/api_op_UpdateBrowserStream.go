@@ -70,7 +70,9 @@ func (v *UpdateBrowserStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionId != nil {
 		s.WriteString(schemas.UpdateBrowserStreamRequest_sessionId, *v.SessionId)
 	}
-	serializeStreamUpdate(s, schemas.UpdateBrowserStreamRequest_streamUpdate, v.StreamUpdate)
+	if v.StreamUpdate != nil {
+		serializeStreamUpdate(s, schemas.UpdateBrowserStreamRequest_streamUpdate, v.StreamUpdate)
+	}
 }
 
 type UpdateBrowserStreamOutput struct {

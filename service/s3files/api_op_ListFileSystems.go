@@ -87,7 +87,9 @@ func (v *ListFileSystemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFileSystemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileSystems(s, schemas.ListFileSystemsResponse_fileSystems, v.FileSystems)
+	if v.FileSystems != nil {
+		serializeFileSystems(s, schemas.ListFileSystemsResponse_fileSystems, v.FileSystems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFileSystemsResponse_nextToken, *v.NextToken)
 	}

@@ -90,7 +90,9 @@ func (v *ListVectorBucketsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVectorBucketsOutput_nextToken, *v.NextToken)
 	}
-	serializeListVectorBucketsOutputList(s, schemas.ListVectorBucketsOutput_vectorBuckets, v.VectorBuckets)
+	if v.VectorBuckets != nil {
+		serializeListVectorBucketsOutputList(s, schemas.ListVectorBucketsOutput_vectorBuckets, v.VectorBuckets)
+	}
 }
 func (v *ListVectorBucketsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVectorBucketsOutput, func(s *smithy.Schema) error {

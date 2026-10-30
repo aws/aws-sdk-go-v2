@@ -74,7 +74,9 @@ func (v *ListWhatIfForecastExportsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWhatIfForecastExportsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListWhatIfForecastExportsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListWhatIfForecastExportsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListWhatIfForecastExportsRequest_MaxResults, *v.MaxResults)
 	}
@@ -109,7 +111,9 @@ func (v *ListWhatIfForecastExportsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWhatIfForecastExportsResponse_NextToken, *v.NextToken)
 	}
-	serializeWhatIfForecastExports(s, schemas.ListWhatIfForecastExportsResponse_WhatIfForecastExports, v.WhatIfForecastExports)
+	if v.WhatIfForecastExports != nil {
+		serializeWhatIfForecastExports(s, schemas.ListWhatIfForecastExportsResponse_WhatIfForecastExports, v.WhatIfForecastExports)
+	}
 }
 func (v *ListWhatIfForecastExportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWhatIfForecastExportsResponse, func(s *smithy.Schema) error {

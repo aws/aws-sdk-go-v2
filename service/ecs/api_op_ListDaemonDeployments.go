@@ -85,7 +85,9 @@ func (v *ListDaemonDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDaemonDeploymentsRequest_nextToken, *v.NextToken)
 	}
-	serializeDaemonDeploymentStatusList(s, schemas.ListDaemonDeploymentsRequest_status, v.Status)
+	if v.Status != nil {
+		serializeDaemonDeploymentStatusList(s, schemas.ListDaemonDeploymentsRequest_status, v.Status)
+	}
 }
 
 type ListDaemonDeploymentsOutput struct {
@@ -111,7 +113,9 @@ func (v *ListDaemonDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDaemonDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDaemonDeploymentSummaryList(s, schemas.ListDaemonDeploymentsResponse_daemonDeployments, v.DaemonDeployments)
+	if v.DaemonDeployments != nil {
+		serializeDaemonDeploymentSummaryList(s, schemas.ListDaemonDeploymentsResponse_daemonDeployments, v.DaemonDeployments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDaemonDeploymentsResponse_nextToken, *v.NextToken)
 	}

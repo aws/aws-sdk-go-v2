@@ -47,7 +47,9 @@ func (v *BatchGetTriggersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTriggersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerNameList(s, schemas.BatchGetTriggersRequest_TriggerNames, v.TriggerNames)
+	if v.TriggerNames != nil {
+		serializeTriggerNameList(s, schemas.BatchGetTriggersRequest_TriggerNames, v.TriggerNames)
+	}
 }
 
 type BatchGetTriggersOutput struct {
@@ -71,8 +73,12 @@ func (v *BatchGetTriggersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerList(s, schemas.BatchGetTriggersResponse_Triggers, v.Triggers)
-	serializeTriggerNameList(s, schemas.BatchGetTriggersResponse_TriggersNotFound, v.TriggersNotFound)
+	if v.Triggers != nil {
+		serializeTriggerList(s, schemas.BatchGetTriggersResponse_Triggers, v.Triggers)
+	}
+	if v.TriggersNotFound != nil {
+		serializeTriggerNameList(s, schemas.BatchGetTriggersResponse_TriggersNotFound, v.TriggersNotFound)
+	}
 }
 func (v *BatchGetTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTriggersResponse, func(s *smithy.Schema) error {

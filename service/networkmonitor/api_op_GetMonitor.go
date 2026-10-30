@@ -118,11 +118,15 @@ func (v *GetMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitorName != nil {
 		s.WriteString(schemas.GetMonitorOutput_monitorName, *v.MonitorName)
 	}
-	serializeProbeList(s, schemas.GetMonitorOutput_probes, v.Probes)
+	if v.Probes != nil {
+		serializeProbeList(s, schemas.GetMonitorOutput_probes, v.Probes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.GetMonitorOutput_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.GetMonitorOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetMonitorOutput_tags, v.Tags)
+	}
 }
 func (v *GetMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMonitorOutput, func(s *smithy.Schema) error {

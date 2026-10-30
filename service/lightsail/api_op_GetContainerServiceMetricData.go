@@ -133,7 +133,9 @@ func (v *GetContainerServiceMetricDataInput) SerializeMembers(s smithy.ShapeSeri
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetContainerServiceMetricDataRequest_startTime, *v.StartTime)
 	}
-	serializeMetricStatisticList(s, schemas.GetContainerServiceMetricDataRequest_statistics, v.Statistics)
+	if v.Statistics != nil {
+		serializeMetricStatisticList(s, schemas.GetContainerServiceMetricDataRequest_statistics, v.Statistics)
+	}
 }
 
 type GetContainerServiceMetricDataOutput struct {
@@ -157,7 +159,9 @@ func (v *GetContainerServiceMetricDataOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetContainerServiceMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricDatapointList(s, schemas.GetContainerServiceMetricDataResult_metricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeMetricDatapointList(s, schemas.GetContainerServiceMetricDataResult_metricData, v.MetricData)
+	}
 	if v.MetricName != "" {
 		s.WriteString(schemas.GetContainerServiceMetricDataResult_metricName, string(v.MetricName))
 	}

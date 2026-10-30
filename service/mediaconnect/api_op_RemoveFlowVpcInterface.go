@@ -88,7 +88,9 @@ func (v *RemoveFlowVpcInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FlowArn != nil {
 		s.WriteString(schemas.RemoveFlowVpcInterfaceResponse_FlowArn, *v.FlowArn)
 	}
-	serialize__listOfString(s, schemas.RemoveFlowVpcInterfaceResponse_NonDeletedNetworkInterfaceIds, v.NonDeletedNetworkInterfaceIds)
+	if v.NonDeletedNetworkInterfaceIds != nil {
+		serialize__listOfString(s, schemas.RemoveFlowVpcInterfaceResponse_NonDeletedNetworkInterfaceIds, v.NonDeletedNetworkInterfaceIds)
+	}
 	if v.VpcInterfaceName != nil {
 		s.WriteString(schemas.RemoveFlowVpcInterfaceResponse_VpcInterfaceName, *v.VpcInterfaceName)
 	}

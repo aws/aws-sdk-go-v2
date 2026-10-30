@@ -83,8 +83,12 @@ func (v *GetBuiltinIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Signature != nil {
 		s.WriteString(schemas.GetBuiltinIntentResponse_signature, *v.Signature)
 	}
-	serializeBuiltinIntentSlotList(s, schemas.GetBuiltinIntentResponse_slots, v.Slots)
-	serializeLocaleList(s, schemas.GetBuiltinIntentResponse_supportedLocales, v.SupportedLocales)
+	if v.Slots != nil {
+		serializeBuiltinIntentSlotList(s, schemas.GetBuiltinIntentResponse_slots, v.Slots)
+	}
+	if v.SupportedLocales != nil {
+		serializeLocaleList(s, schemas.GetBuiltinIntentResponse_supportedLocales, v.SupportedLocales)
+	}
 }
 func (v *GetBuiltinIntentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBuiltinIntentResponse, func(s *smithy.Schema) error {

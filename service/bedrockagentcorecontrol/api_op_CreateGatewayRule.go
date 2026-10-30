@@ -74,11 +74,15 @@ func (v *CreateGatewayRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGatewayRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.CreateGatewayRuleRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActions(s, schemas.CreateGatewayRuleRequest_actions, v.Actions)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateGatewayRuleRequest_clientToken, *v.ClientToken)
 	}
-	serializeConditions(s, schemas.CreateGatewayRuleRequest_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.CreateGatewayRuleRequest_conditions, v.Conditions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateGatewayRuleRequest_description, *v.Description)
 	}
@@ -145,8 +149,12 @@ func (v *CreateGatewayRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGatewayRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActions(s, schemas.CreateGatewayRuleResponse_actions, v.Actions)
-	serializeConditions(s, schemas.CreateGatewayRuleResponse_conditions, v.Conditions)
+	if v.Actions != nil {
+		serializeActions(s, schemas.CreateGatewayRuleResponse_actions, v.Actions)
+	}
+	if v.Conditions != nil {
+		serializeConditions(s, schemas.CreateGatewayRuleResponse_conditions, v.Conditions)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateGatewayRuleResponse_createdAt, *v.CreatedAt)
 	}

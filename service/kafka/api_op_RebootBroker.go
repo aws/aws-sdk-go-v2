@@ -49,7 +49,9 @@ func (v *RebootBrokerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RebootBrokerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.RebootBrokerRequest_BrokerIds, v.BrokerIds)
+	if v.BrokerIds != nil {
+		serialize__listOf__string(s, schemas.RebootBrokerRequest_BrokerIds, v.BrokerIds)
+	}
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.RebootBrokerRequest_ClusterArn, *v.ClusterArn)
 	}

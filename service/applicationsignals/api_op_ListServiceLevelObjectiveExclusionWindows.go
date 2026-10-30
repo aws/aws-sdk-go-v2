@@ -87,7 +87,9 @@ func (v *ListServiceLevelObjectiveExclusionWindowsOutput) Serialize(s smithy.Sha
 }
 
 func (v *ListServiceLevelObjectiveExclusionWindowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionWindows(s, schemas.ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows, v.ExclusionWindows)
+	if v.ExclusionWindows != nil {
+		serializeExclusionWindows(s, schemas.ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows, v.ExclusionWindows)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceLevelObjectiveExclusionWindowsOutput_NextToken, *v.NextToken)
 	}

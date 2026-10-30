@@ -147,7 +147,9 @@ func (v *ValidateE911AddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressExternalId != nil {
 		s.WriteString(schemas.ValidateE911AddressResponse_AddressExternalId, *v.AddressExternalId)
 	}
-	serializeCandidateAddressList(s, schemas.ValidateE911AddressResponse_CandidateAddressList, v.CandidateAddressList)
+	if v.CandidateAddressList != nil {
+		serializeCandidateAddressList(s, schemas.ValidateE911AddressResponse_CandidateAddressList, v.CandidateAddressList)
+	}
 	if v.ValidationResult != 0 {
 		s.WriteInt32(schemas.ValidateE911AddressResponse_ValidationResult, v.ValidationResult)
 	}

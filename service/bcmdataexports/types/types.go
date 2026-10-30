@@ -83,7 +83,9 @@ func (v *DataQuery) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryStatement != nil {
 		s.WriteString(schemas.DataQuery_QueryStatement, *v.QueryStatement)
 	}
-	serializeTableConfigurations(s, schemas.DataQuery_TableConfigurations, v.TableConfigurations)
+	if v.TableConfigurations != nil {
+		serializeTableConfigurations(s, schemas.DataQuery_TableConfigurations, v.TableConfigurations)
+	}
 }
 func (v *DataQuery) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataQuery, func(s *smithy.Schema) error {
@@ -751,7 +753,9 @@ func (v *Table) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.Table_TableName, *v.TableName)
 	}
-	serializeTablePropertyDescriptionList(s, schemas.Table_TableProperties, v.TableProperties)
+	if v.TableProperties != nil {
+		serializeTablePropertyDescriptionList(s, schemas.Table_TableProperties, v.TableProperties)
+	}
 }
 func (v *Table) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Table, func(s *smithy.Schema) error {
@@ -803,7 +807,9 @@ func (v *TablePropertyDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TablePropertyDescription_Name, *v.Name)
 	}
-	serializeGenericStringList(s, schemas.TablePropertyDescription_ValidValues, v.ValidValues)
+	if v.ValidValues != nil {
+		serializeGenericStringList(s, schemas.TablePropertyDescription_ValidValues, v.ValidValues)
+	}
 }
 func (v *TablePropertyDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TablePropertyDescription, func(s *smithy.Schema) error {

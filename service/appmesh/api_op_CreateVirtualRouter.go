@@ -96,7 +96,9 @@ func (v *CreateVirtualRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Spec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateVirtualRouterInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVirtualRouterInput_tags, v.Tags)
+	}
 	if v.VirtualRouterName != nil {
 		s.WriteString(schemas.CreateVirtualRouterInput_virtualRouterName, *v.VirtualRouterName)
 	}

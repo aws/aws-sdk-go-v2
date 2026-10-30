@@ -78,8 +78,12 @@ func (v *UpdateChannelNamespaceInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateChannelNamespaceRequest_name, *v.Name)
 	}
-	serializeAuthModes(s, schemas.UpdateChannelNamespaceRequest_publishAuthModes, v.PublishAuthModes)
-	serializeAuthModes(s, schemas.UpdateChannelNamespaceRequest_subscribeAuthModes, v.SubscribeAuthModes)
+	if v.PublishAuthModes != nil {
+		serializeAuthModes(s, schemas.UpdateChannelNamespaceRequest_publishAuthModes, v.PublishAuthModes)
+	}
+	if v.SubscribeAuthModes != nil {
+		serializeAuthModes(s, schemas.UpdateChannelNamespaceRequest_subscribeAuthModes, v.SubscribeAuthModes)
+	}
 }
 
 type UpdateChannelNamespaceOutput struct {

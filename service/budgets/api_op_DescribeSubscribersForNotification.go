@@ -109,7 +109,9 @@ func (v *DescribeSubscribersForNotificationOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSubscribersForNotificationResponse_NextToken, *v.NextToken)
 	}
-	serializeSubscribers(s, schemas.DescribeSubscribersForNotificationResponse_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serializeSubscribers(s, schemas.DescribeSubscribersForNotificationResponse_Subscribers, v.Subscribers)
+	}
 }
 func (v *DescribeSubscribersForNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSubscribersForNotificationResponse, func(s *smithy.Schema) error {

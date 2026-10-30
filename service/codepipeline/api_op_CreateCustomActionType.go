@@ -84,7 +84,9 @@ func (v *CreateCustomActionTypeInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Category != "" {
 		s.WriteString(schemas.CreateCustomActionTypeInput_category, string(v.Category))
 	}
-	serializeActionConfigurationPropertyList(s, schemas.CreateCustomActionTypeInput_configurationProperties, v.ConfigurationProperties)
+	if v.ConfigurationProperties != nil {
+		serializeActionConfigurationPropertyList(s, schemas.CreateCustomActionTypeInput_configurationProperties, v.ConfigurationProperties)
+	}
 	if v.InputArtifactDetails != nil {
 		s.WriteStruct(schemas.CreateCustomActionTypeInput_inputArtifactDetails)
 		v.InputArtifactDetails.SerializeMembers(s)
@@ -103,7 +105,9 @@ func (v *CreateCustomActionTypeInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.Settings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCustomActionTypeInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomActionTypeInput_tags, v.Tags)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.CreateCustomActionTypeInput_version, *v.Version)
 	}
@@ -138,7 +142,9 @@ func (v *CreateCustomActionTypeOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.ActionType.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateCustomActionTypeOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomActionTypeOutput_tags, v.Tags)
+	}
 }
 func (v *CreateCustomActionTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCustomActionTypeOutput, func(s *smithy.Schema) error {

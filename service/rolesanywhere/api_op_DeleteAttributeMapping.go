@@ -58,7 +58,9 @@ func (v *DeleteAttributeMappingInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ProfileId != nil {
 		s.WriteString(schemas.DeleteAttributeMappingRequest_profileId, *v.ProfileId)
 	}
-	serializeSpecifierList(s, schemas.DeleteAttributeMappingRequest_specifiers, v.Specifiers)
+	if v.Specifiers != nil {
+		serializeSpecifierList(s, schemas.DeleteAttributeMappingRequest_specifiers, v.Specifiers)
+	}
 }
 
 type DeleteAttributeMappingOutput struct {

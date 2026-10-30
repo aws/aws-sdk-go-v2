@@ -91,7 +91,9 @@ func (v *ListProxiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProxiesResponse_NextToken, *v.NextToken)
 	}
-	serializeProxies(s, schemas.ListProxiesResponse_Proxies, v.Proxies)
+	if v.Proxies != nil {
+		serializeProxies(s, schemas.ListProxiesResponse_Proxies, v.Proxies)
+	}
 }
 func (v *ListProxiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProxiesResponse, func(s *smithy.Schema) error {

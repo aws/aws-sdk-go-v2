@@ -116,7 +116,9 @@ func (v *UpdateAdapterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAdapterResponse_Description, *v.Description)
 	}
-	serializeFeatureTypes(s, schemas.UpdateAdapterResponse_FeatureTypes, v.FeatureTypes)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.UpdateAdapterResponse_FeatureTypes, v.FeatureTypes)
+	}
 }
 func (v *UpdateAdapterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateAdapterResponse, func(s *smithy.Schema) error {

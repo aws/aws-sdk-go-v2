@@ -62,7 +62,9 @@ func (v *UpdateClusterSettingsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Cluster != nil {
 		s.WriteString(schemas.UpdateClusterSettingsRequest_cluster, *v.Cluster)
 	}
-	serializeClusterSettings(s, schemas.UpdateClusterSettingsRequest_settings, v.Settings)
+	if v.Settings != nil {
+		serializeClusterSettings(s, schemas.UpdateClusterSettingsRequest_settings, v.Settings)
+	}
 }
 
 type UpdateClusterSettingsOutput struct {

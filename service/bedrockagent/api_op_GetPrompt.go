@@ -154,7 +154,9 @@ func (v *GetPromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetPromptResponse_updatedAt, *v.UpdatedAt)
 	}
-	serializePromptVariantList(s, schemas.GetPromptResponse_variants, v.Variants)
+	if v.Variants != nil {
+		serializePromptVariantList(s, schemas.GetPromptResponse_variants, v.Variants)
+	}
 	if v.Version != nil {
 		s.WriteString(schemas.GetPromptResponse_version, *v.Version)
 	}

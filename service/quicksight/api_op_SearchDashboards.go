@@ -65,7 +65,9 @@ func (v *SearchDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchDashboardsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeDashboardSearchFilterList(s, schemas.SearchDashboardsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeDashboardSearchFilterList(s, schemas.SearchDashboardsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchDashboardsRequest_MaxResults, *v.MaxResults)
 	}
@@ -101,7 +103,9 @@ func (v *SearchDashboardsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchDashboardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashboardSummaryList(s, schemas.SearchDashboardsResponse_DashboardSummaryList, v.DashboardSummaryList)
+	if v.DashboardSummaryList != nil {
+		serializeDashboardSummaryList(s, schemas.SearchDashboardsResponse_DashboardSummaryList, v.DashboardSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchDashboardsResponse_NextToken, *v.NextToken)
 	}

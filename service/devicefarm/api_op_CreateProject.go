@@ -68,7 +68,9 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultJobTimeoutMinutes != nil {
 		s.WriteInt32(schemas.CreateProjectRequest_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
 	}
-	serializeEnvironmentVariables(s, schemas.CreateProjectRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.CreateProjectRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateProjectRequest_executionRoleArn, *v.ExecutionRoleArn)
 	}

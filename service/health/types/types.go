@@ -39,7 +39,9 @@ func (v *AccountEntityAggregate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != 0 {
 		s.WriteInt32(schemas.AccountEntityAggregate_count, v.Count)
 	}
-	serializeentityStatuses(s, schemas.AccountEntityAggregate_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeentityStatuses(s, schemas.AccountEntityAggregate_statuses, v.Statuses)
+	}
 }
 func (v *AccountEntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountEntityAggregate, func(s *smithy.Schema) error {
@@ -114,7 +116,9 @@ func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntityArn != nil {
 		s.WriteString(schemas.AffectedEntity_entityArn, *v.EntityArn)
 	}
-	serializeentityMetadata(s, schemas.AffectedEntity_entityMetadata, v.EntityMetadata)
+	if v.EntityMetadata != nil {
+		serializeentityMetadata(s, schemas.AffectedEntity_entityMetadata, v.EntityMetadata)
+	}
 	if v.EntityUrl != nil {
 		s.WriteString(schemas.AffectedEntity_entityUrl, *v.EntityUrl)
 	}
@@ -130,7 +134,9 @@ func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusCode != "" {
 		s.WriteString(schemas.AffectedEntity_statusCode, string(v.StatusCode))
 	}
-	serializetagSet(s, schemas.AffectedEntity_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagSet(s, schemas.AffectedEntity_tags, v.Tags)
+	}
 }
 func (v *AffectedEntity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AffectedEntity, func(s *smithy.Schema) error {
@@ -255,7 +261,9 @@ func (v *EntityAccountFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventArn != nil {
 		s.WriteString(schemas.EntityAccountFilter_eventArn, *v.EventArn)
 	}
-	serializeentityStatusCodeList(s, schemas.EntityAccountFilter_statusCodes, v.StatusCodes)
+	if v.StatusCodes != nil {
+		serializeentityStatusCodeList(s, schemas.EntityAccountFilter_statusCodes, v.StatusCodes)
+	}
 }
 func (v *EntityAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityAccountFilter, func(s *smithy.Schema) error {
@@ -310,7 +318,9 @@ func (v *EntityAggregate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventArn != nil {
 		s.WriteString(schemas.EntityAggregate_eventArn, *v.EventArn)
 	}
-	serializeentityStatuses(s, schemas.EntityAggregate_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeentityStatuses(s, schemas.EntityAggregate_statuses, v.Statuses)
+	}
 }
 func (v *EntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityAggregate, func(s *smithy.Schema) error {
@@ -366,12 +376,24 @@ func (v *EntityFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EntityFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeentityArnList(s, schemas.EntityFilter_entityArns, v.EntityArns)
-	serializeentityValueList(s, schemas.EntityFilter_entityValues, v.EntityValues)
-	serializeeventArnList(s, schemas.EntityFilter_eventArns, v.EventArns)
-	serializedateTimeRangeList(s, schemas.EntityFilter_lastUpdatedTimes, v.LastUpdatedTimes)
-	serializeentityStatusCodeList(s, schemas.EntityFilter_statusCodes, v.StatusCodes)
-	serializetagFilter(s, schemas.EntityFilter_tags, v.Tags)
+	if v.EntityArns != nil {
+		serializeentityArnList(s, schemas.EntityFilter_entityArns, v.EntityArns)
+	}
+	if v.EntityValues != nil {
+		serializeentityValueList(s, schemas.EntityFilter_entityValues, v.EntityValues)
+	}
+	if v.EventArns != nil {
+		serializeeventArnList(s, schemas.EntityFilter_eventArns, v.EventArns)
+	}
+	if v.LastUpdatedTimes != nil {
+		serializedateTimeRangeList(s, schemas.EntityFilter_lastUpdatedTimes, v.LastUpdatedTimes)
+	}
+	if v.StatusCodes != nil {
+		serializeentityStatusCodeList(s, schemas.EntityFilter_statusCodes, v.StatusCodes)
+	}
+	if v.Tags != nil {
+		serializetagFilter(s, schemas.EntityFilter_tags, v.Tags)
+	}
 }
 func (v *EntityFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityFilter, func(s *smithy.Schema) error {
@@ -519,7 +541,9 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.Event_lastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeEventPersonaList(s, schemas.Event_personas, v.Personas)
+	if v.Personas != nil {
+		serializeEventPersonaList(s, schemas.Event_personas, v.Personas)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.Event_region, *v.Region)
 	}
@@ -759,7 +783,9 @@ func (v *EventDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EventDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeeventMetadata(s, schemas.EventDetails_eventMetadata, v.EventMetadata)
+	if v.EventMetadata != nil {
+		serializeeventMetadata(s, schemas.EventDetails_eventMetadata, v.EventMetadata)
+	}
 }
 func (v *EventDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventDetails, func(s *smithy.Schema) error {
@@ -907,21 +933,51 @@ func (v *EventFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventActionabilityList(s, schemas.EventFilter_actionabilities, v.Actionabilities)
-	serializeavailabilityZones(s, schemas.EventFilter_availabilityZones, v.AvailabilityZones)
-	serializedateTimeRangeList(s, schemas.EventFilter_endTimes, v.EndTimes)
-	serializeentityArnList(s, schemas.EventFilter_entityArns, v.EntityArns)
-	serializeentityValueList(s, schemas.EventFilter_entityValues, v.EntityValues)
-	serializeeventArnList(s, schemas.EventFilter_eventArns, v.EventArns)
-	serializeeventStatusCodeList(s, schemas.EventFilter_eventStatusCodes, v.EventStatusCodes)
-	serializeeventTypeCategoryList2(s, schemas.EventFilter_eventTypeCategories, v.EventTypeCategories)
-	serializeeventTypeList2(s, schemas.EventFilter_eventTypeCodes, v.EventTypeCodes)
-	serializedateTimeRangeList(s, schemas.EventFilter_lastUpdatedTimes, v.LastUpdatedTimes)
-	serializeEventPersonaList(s, schemas.EventFilter_personas, v.Personas)
-	serializeregionList(s, schemas.EventFilter_regions, v.Regions)
-	serializeserviceList(s, schemas.EventFilter_services, v.Services)
-	serializedateTimeRangeList(s, schemas.EventFilter_startTimes, v.StartTimes)
-	serializetagFilter(s, schemas.EventFilter_tags, v.Tags)
+	if v.Actionabilities != nil {
+		serializeEventActionabilityList(s, schemas.EventFilter_actionabilities, v.Actionabilities)
+	}
+	if v.AvailabilityZones != nil {
+		serializeavailabilityZones(s, schemas.EventFilter_availabilityZones, v.AvailabilityZones)
+	}
+	if v.EndTimes != nil {
+		serializedateTimeRangeList(s, schemas.EventFilter_endTimes, v.EndTimes)
+	}
+	if v.EntityArns != nil {
+		serializeentityArnList(s, schemas.EventFilter_entityArns, v.EntityArns)
+	}
+	if v.EntityValues != nil {
+		serializeentityValueList(s, schemas.EventFilter_entityValues, v.EntityValues)
+	}
+	if v.EventArns != nil {
+		serializeeventArnList(s, schemas.EventFilter_eventArns, v.EventArns)
+	}
+	if v.EventStatusCodes != nil {
+		serializeeventStatusCodeList(s, schemas.EventFilter_eventStatusCodes, v.EventStatusCodes)
+	}
+	if v.EventTypeCategories != nil {
+		serializeeventTypeCategoryList2(s, schemas.EventFilter_eventTypeCategories, v.EventTypeCategories)
+	}
+	if v.EventTypeCodes != nil {
+		serializeeventTypeList2(s, schemas.EventFilter_eventTypeCodes, v.EventTypeCodes)
+	}
+	if v.LastUpdatedTimes != nil {
+		serializedateTimeRangeList(s, schemas.EventFilter_lastUpdatedTimes, v.LastUpdatedTimes)
+	}
+	if v.Personas != nil {
+		serializeEventPersonaList(s, schemas.EventFilter_personas, v.Personas)
+	}
+	if v.Regions != nil {
+		serializeregionList(s, schemas.EventFilter_regions, v.Regions)
+	}
+	if v.Services != nil {
+		serializeserviceList(s, schemas.EventFilter_services, v.Services)
+	}
+	if v.StartTimes != nil {
+		serializedateTimeRangeList(s, schemas.EventFilter_startTimes, v.StartTimes)
+	}
+	if v.Tags != nil {
+		serializetagFilter(s, schemas.EventFilter_tags, v.Tags)
+	}
 }
 func (v *EventFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventFilter, func(s *smithy.Schema) error {
@@ -1024,7 +1080,9 @@ func (v *EventType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != nil {
 		s.WriteString(schemas.EventType_code, *v.Code)
 	}
-	serializeEventTypePersonaList(s, schemas.EventType_personas, v.Personas)
+	if v.Personas != nil {
+		serializeEventTypePersonaList(s, schemas.EventType_personas, v.Personas)
+	}
 	if v.Service != nil {
 		s.WriteString(schemas.EventType_service, *v.Service)
 	}
@@ -1094,11 +1152,21 @@ func (v *EventTypeFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EventTypeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTypeActionabilityList(s, schemas.EventTypeFilter_actionabilities, v.Actionabilities)
-	serializeEventTypeCategoryList(s, schemas.EventTypeFilter_eventTypeCategories, v.EventTypeCategories)
-	serializeEventTypeCodeList(s, schemas.EventTypeFilter_eventTypeCodes, v.EventTypeCodes)
-	serializeEventTypePersonaList(s, schemas.EventTypeFilter_personas, v.Personas)
-	serializeserviceList(s, schemas.EventTypeFilter_services, v.Services)
+	if v.Actionabilities != nil {
+		serializeEventTypeActionabilityList(s, schemas.EventTypeFilter_actionabilities, v.Actionabilities)
+	}
+	if v.EventTypeCategories != nil {
+		serializeEventTypeCategoryList(s, schemas.EventTypeFilter_eventTypeCategories, v.EventTypeCategories)
+	}
+	if v.EventTypeCodes != nil {
+		serializeEventTypeCodeList(s, schemas.EventTypeFilter_eventTypeCodes, v.EventTypeCodes)
+	}
+	if v.Personas != nil {
+		serializeEventTypePersonaList(s, schemas.EventTypeFilter_personas, v.Personas)
+	}
+	if v.Services != nil {
+		serializeserviceList(s, schemas.EventTypeFilter_services, v.Services)
+	}
 }
 func (v *EventTypeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EventTypeFilter, func(s *smithy.Schema) error {
@@ -1153,11 +1221,15 @@ func (v *LifecycleEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.LifecycleEvent_description, *v.Description)
 	}
-	serializeImpactRiskList(s, schemas.LifecycleEvent_impactRisks, v.ImpactRisks)
+	if v.ImpactRisks != nil {
+		serializeImpactRiskList(s, schemas.LifecycleEvent_impactRisks, v.ImpactRisks)
+	}
 	if v.LifecycleEventType != nil {
 		s.WriteString(schemas.LifecycleEvent_lifecycleEventType, *v.LifecycleEventType)
 	}
-	serializeregionList(s, schemas.LifecycleEvent_regions, v.Regions)
+	if v.Regions != nil {
+		serializeregionList(s, schemas.LifecycleEvent_regions, v.Regions)
+	}
 }
 func (v *LifecycleEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LifecycleEvent, func(s *smithy.Schema) error {
@@ -1286,14 +1358,18 @@ func (v *OrganizationEntityAggregate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrganizationEntityAggregate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountEntityAggregatesList(s, schemas.OrganizationEntityAggregate_accounts, v.Accounts)
+	if v.Accounts != nil {
+		serializeAccountEntityAggregatesList(s, schemas.OrganizationEntityAggregate_accounts, v.Accounts)
+	}
 	if v.Count != 0 {
 		s.WriteInt32(schemas.OrganizationEntityAggregate_count, v.Count)
 	}
 	if v.EventArn != nil {
 		s.WriteString(schemas.OrganizationEntityAggregate_eventArn, *v.EventArn)
 	}
-	serializeentityStatuses(s, schemas.OrganizationEntityAggregate_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeentityStatuses(s, schemas.OrganizationEntityAggregate_statuses, v.Statuses)
+	}
 }
 func (v *OrganizationEntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrganizationEntityAggregate, func(s *smithy.Schema) error {
@@ -1417,7 +1493,9 @@ func (v *OrganizationEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteTime(schemas.OrganizationEvent_lastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeEventPersonaList(s, schemas.OrganizationEvent_personas, v.Personas)
+	if v.Personas != nil {
+		serializeEventPersonaList(s, schemas.OrganizationEvent_personas, v.Personas)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.OrganizationEvent_region, *v.Region)
 	}
@@ -1554,7 +1632,9 @@ func (v *OrganizationEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EventDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeeventMetadata(s, schemas.OrganizationEventDetails_eventMetadata, v.EventMetadata)
+	if v.EventMetadata != nil {
+		serializeeventMetadata(s, schemas.OrganizationEventDetails_eventMetadata, v.EventMetadata)
+	}
 }
 func (v *OrganizationEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OrganizationEventDetails, func(s *smithy.Schema) error {
@@ -1745,26 +1825,46 @@ func (v *OrganizationEventFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrganizationEventFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventActionabilityList(s, schemas.OrganizationEventFilter_actionabilities, v.Actionabilities)
-	serializeawsAccountIdsList(s, schemas.OrganizationEventFilter_awsAccountIds, v.AwsAccountIds)
+	if v.Actionabilities != nil {
+		serializeEventActionabilityList(s, schemas.OrganizationEventFilter_actionabilities, v.Actionabilities)
+	}
+	if v.AwsAccountIds != nil {
+		serializeawsAccountIdsList(s, schemas.OrganizationEventFilter_awsAccountIds, v.AwsAccountIds)
+	}
 	if v.EndTime != nil {
 		s.WriteStruct(schemas.OrganizationEventFilter_endTime)
 		v.EndTime.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeentityArnList(s, schemas.OrganizationEventFilter_entityArns, v.EntityArns)
-	serializeentityValueList(s, schemas.OrganizationEventFilter_entityValues, v.EntityValues)
-	serializeeventStatusCodeList(s, schemas.OrganizationEventFilter_eventStatusCodes, v.EventStatusCodes)
-	serializeeventTypeCategoryList2(s, schemas.OrganizationEventFilter_eventTypeCategories, v.EventTypeCategories)
-	serializeeventTypeList2(s, schemas.OrganizationEventFilter_eventTypeCodes, v.EventTypeCodes)
+	if v.EntityArns != nil {
+		serializeentityArnList(s, schemas.OrganizationEventFilter_entityArns, v.EntityArns)
+	}
+	if v.EntityValues != nil {
+		serializeentityValueList(s, schemas.OrganizationEventFilter_entityValues, v.EntityValues)
+	}
+	if v.EventStatusCodes != nil {
+		serializeeventStatusCodeList(s, schemas.OrganizationEventFilter_eventStatusCodes, v.EventStatusCodes)
+	}
+	if v.EventTypeCategories != nil {
+		serializeeventTypeCategoryList2(s, schemas.OrganizationEventFilter_eventTypeCategories, v.EventTypeCategories)
+	}
+	if v.EventTypeCodes != nil {
+		serializeeventTypeList2(s, schemas.OrganizationEventFilter_eventTypeCodes, v.EventTypeCodes)
+	}
 	if v.LastUpdatedTime != nil {
 		s.WriteStruct(schemas.OrganizationEventFilter_lastUpdatedTime)
 		v.LastUpdatedTime.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventPersonaList(s, schemas.OrganizationEventFilter_personas, v.Personas)
-	serializeregionList(s, schemas.OrganizationEventFilter_regions, v.Regions)
-	serializeserviceList(s, schemas.OrganizationEventFilter_services, v.Services)
+	if v.Personas != nil {
+		serializeEventPersonaList(s, schemas.OrganizationEventFilter_personas, v.Personas)
+	}
+	if v.Regions != nil {
+		serializeregionList(s, schemas.OrganizationEventFilter_regions, v.Regions)
+	}
+	if v.Services != nil {
+		serializeserviceList(s, schemas.OrganizationEventFilter_services, v.Services)
+	}
 	if v.StartTime != nil {
 		s.WriteStruct(schemas.OrganizationEventFilter_startTime)
 		v.StartTime.SerializeMembers(s)
@@ -1837,7 +1937,9 @@ func (v *ServiceLifecycle) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ServiceLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLifecycleEventList(s, schemas.ServiceLifecycle_lifecycleEvents, v.LifecycleEvents)
+	if v.LifecycleEvents != nil {
+		serializeLifecycleEventList(s, schemas.ServiceLifecycle_lifecycleEvents, v.LifecycleEvents)
+	}
 	if v.RecommendedVersion != nil {
 		s.WriteString(schemas.ServiceLifecycle_recommendedVersion, *v.RecommendedVersion)
 	}

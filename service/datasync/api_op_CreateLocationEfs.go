@@ -117,7 +117,9 @@ func (v *CreateLocationEfsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationEfsRequest_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationEfsRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationEfsRequest_Tags, v.Tags)
+	}
 }
 
 // CreateLocationEfs

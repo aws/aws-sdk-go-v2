@@ -418,7 +418,9 @@ func (v *DocumentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.DocumentMetadata_Id, *v.Id)
 	}
-	serializeSharedLabels(s, schemas.DocumentMetadata_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeSharedLabels(s, schemas.DocumentMetadata_Labels, v.Labels)
+	}
 	if v.LatestVersionMetadata != nil {
 		s.WriteStruct(schemas.DocumentMetadata_LatestVersionMetadata)
 		v.LatestVersionMetadata.SerializeMembers(s)
@@ -551,11 +553,15 @@ func (v *DocumentVersionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Size != nil {
 		s.WriteInt64(schemas.DocumentVersionMetadata_Size, *v.Size)
 	}
-	serializeDocumentSourceUrlMap(s, schemas.DocumentVersionMetadata_Source, v.Source)
+	if v.Source != nil {
+		serializeDocumentSourceUrlMap(s, schemas.DocumentVersionMetadata_Source, v.Source)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DocumentVersionMetadata_Status, string(v.Status))
 	}
-	serializeDocumentThumbnailUrlMap(s, schemas.DocumentVersionMetadata_Thumbnail, v.Thumbnail)
+	if v.Thumbnail != nil {
+		serializeDocumentThumbnailUrlMap(s, schemas.DocumentVersionMetadata_Thumbnail, v.Thumbnail)
+	}
 }
 func (v *DocumentVersionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentVersionMetadata, func(s *smithy.Schema) error {
@@ -649,28 +655,42 @@ func (v *Filters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Filters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchAncestorIdList(s, schemas.Filters_AncestorIds, v.AncestorIds)
-	serializeSearchContentCategoryTypeList(s, schemas.Filters_ContentCategories, v.ContentCategories)
+	if v.AncestorIds != nil {
+		serializeSearchAncestorIdList(s, schemas.Filters_AncestorIds, v.AncestorIds)
+	}
+	if v.ContentCategories != nil {
+		serializeSearchContentCategoryTypeList(s, schemas.Filters_ContentCategories, v.ContentCategories)
+	}
 	if v.CreatedRange != nil {
 		s.WriteStruct(schemas.Filters_CreatedRange)
 		v.CreatedRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchLabelList(s, schemas.Filters_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeSearchLabelList(s, schemas.Filters_Labels, v.Labels)
+	}
 	if v.ModifiedRange != nil {
 		s.WriteStruct(schemas.Filters_ModifiedRange)
 		v.ModifiedRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchPrincipalTypeList(s, schemas.Filters_Principals, v.Principals)
-	serializeSearchResourceTypeList(s, schemas.Filters_ResourceTypes, v.ResourceTypes)
-	serializeSearchCollectionTypeList(s, schemas.Filters_SearchCollectionTypes, v.SearchCollectionTypes)
+	if v.Principals != nil {
+		serializeSearchPrincipalTypeList(s, schemas.Filters_Principals, v.Principals)
+	}
+	if v.ResourceTypes != nil {
+		serializeSearchResourceTypeList(s, schemas.Filters_ResourceTypes, v.ResourceTypes)
+	}
+	if v.SearchCollectionTypes != nil {
+		serializeSearchCollectionTypeList(s, schemas.Filters_SearchCollectionTypes, v.SearchCollectionTypes)
+	}
 	if v.SizeRange != nil {
 		s.WriteStruct(schemas.Filters_SizeRange)
 		v.SizeRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTextLocaleTypeList(s, schemas.Filters_TextLocales, v.TextLocales)
+	if v.TextLocales != nil {
+		serializeTextLocaleTypeList(s, schemas.Filters_TextLocales, v.TextLocales)
+	}
 }
 func (v *Filters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filters, func(s *smithy.Schema) error {
@@ -758,7 +778,9 @@ func (v *FolderMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.FolderMetadata_Id, *v.Id)
 	}
-	serializeSharedLabels(s, schemas.FolderMetadata_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeSharedLabels(s, schemas.FolderMetadata_Labels, v.Labels)
+	}
 	if v.LatestVersionSize != nil {
 		s.WriteInt64(schemas.FolderMetadata_LatestVersionSize, *v.LatestVersionSize)
 	}
@@ -964,8 +986,12 @@ func (v *Participants) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Participants) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupMetadataList(s, schemas.Participants_Groups, v.Groups)
-	serializeUserMetadataList(s, schemas.Participants_Users, v.Users)
+	if v.Groups != nil {
+		serializeGroupMetadataList(s, schemas.Participants_Groups, v.Groups)
+	}
+	if v.Users != nil {
+		serializeUserMetadataList(s, schemas.Participants_Users, v.Users)
+	}
 }
 func (v *Participants) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Participants, func(s *smithy.Schema) error {
@@ -1052,7 +1078,9 @@ func (v *Principal) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Principal_Id, *v.Id)
 	}
-	serializePermissionInfoList(s, schemas.Principal_Roles, v.Roles)
+	if v.Roles != nil {
+		serializePermissionInfoList(s, schemas.Principal_Roles, v.Roles)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Principal_Type, string(v.Type))
 	}
@@ -1185,7 +1213,9 @@ func (v *ResourcePath) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourcePath) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourcePathComponentList(s, schemas.ResourcePath_Components, v.Components)
+	if v.Components != nil {
+		serializeResourcePathComponentList(s, schemas.ResourcePath_Components, v.Components)
+	}
 }
 func (v *ResourcePath) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourcePath, func(s *smithy.Schema) error {
@@ -1349,7 +1379,9 @@ func (v *SearchPrincipalType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.SearchPrincipalType_Id, *v.Id)
 	}
-	serializeSearchPrincipalRoleList(s, schemas.SearchPrincipalType_Roles, v.Roles)
+	if v.Roles != nil {
+		serializeSearchPrincipalRoleList(s, schemas.SearchPrincipalType_Roles, v.Roles)
+	}
 }
 func (v *SearchPrincipalType) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPrincipalType, func(s *smithy.Schema) error {
@@ -1675,7 +1707,9 @@ func (v *UploadMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UploadMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSignedHeaderMap(s, schemas.UploadMetadata_SignedHeaders, v.SignedHeaders)
+	if v.SignedHeaders != nil {
+		serializeSignedHeaderMap(s, schemas.UploadMetadata_SignedHeaders, v.SignedHeaders)
+	}
 	if v.UploadUrl != nil {
 		s.WriteString(schemas.UploadMetadata_UploadUrl, *v.UploadUrl)
 	}

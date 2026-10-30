@@ -106,7 +106,9 @@ func (v *ListReplicationBackfillsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListReplicationBackfillsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationBackfillSummaryList(s, schemas.ListReplicationBackfillsResponse_backfills, v.Backfills)
+	if v.Backfills != nil {
+		serializeReplicationBackfillSummaryList(s, schemas.ListReplicationBackfillsResponse_backfills, v.Backfills)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReplicationBackfillsResponse_nextToken, *v.NextToken)
 	}

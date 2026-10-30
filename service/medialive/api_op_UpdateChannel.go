@@ -115,8 +115,12 @@ func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelId != nil {
 		s.WriteString(schemas.UpdateChannelRequest_ChannelId, *v.ChannelId)
 	}
-	serialize__listOf__string(s, schemas.UpdateChannelRequest_ChannelSecurityGroups, v.ChannelSecurityGroups)
-	serialize__listOfOutputDestination(s, schemas.UpdateChannelRequest_Destinations, v.Destinations)
+	if v.ChannelSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.UpdateChannelRequest_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	}
+	if v.Destinations != nil {
+		serialize__listOfOutputDestination(s, schemas.UpdateChannelRequest_Destinations, v.Destinations)
+	}
 	if v.DryRun != nil {
 		s.WriteBool(schemas.UpdateChannelRequest_DryRun, *v.DryRun)
 	}
@@ -130,7 +134,9 @@ func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InferenceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputAttachment(s, schemas.UpdateChannelRequest_InputAttachments, v.InputAttachments)
+	if v.InputAttachments != nil {
+		serialize__listOfInputAttachment(s, schemas.UpdateChannelRequest_InputAttachments, v.InputAttachments)
+	}
 	if v.InputSpecification != nil {
 		s.WriteStruct(schemas.UpdateChannelRequest_InputSpecification)
 		v.InputSpecification.SerializeMembers(s)

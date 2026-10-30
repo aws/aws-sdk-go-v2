@@ -86,7 +86,9 @@ func (v *ValidateCloudConnectorOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ValidateCloudConnectorResult_NextToken, *v.NextToken)
 	}
-	serializeValidationFindingList(s, schemas.ValidateCloudConnectorResult_ValidationFindings, v.ValidationFindings)
+	if v.ValidationFindings != nil {
+		serializeValidationFindingList(s, schemas.ValidateCloudConnectorResult_ValidationFindings, v.ValidationFindings)
+	}
 }
 func (v *ValidateCloudConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateCloudConnectorResult, func(s *smithy.Schema) error {

@@ -102,7 +102,9 @@ func (v *ListLensReviewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLensReviewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLensReviewSummaries(s, schemas.ListLensReviewsOutput_LensReviewSummaries, v.LensReviewSummaries)
+	if v.LensReviewSummaries != nil {
+		serializeLensReviewSummaries(s, schemas.ListLensReviewsOutput_LensReviewSummaries, v.LensReviewSummaries)
+	}
 	if v.MilestoneNumber != nil {
 		s.WriteInt32(schemas.ListLensReviewsOutput_MilestoneNumber, *v.MilestoneNumber)
 	}

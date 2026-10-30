@@ -74,7 +74,9 @@ func (v *CreateNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Notification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSubscribers(s, schemas.CreateNotificationRequest_Subscribers, v.Subscribers)
+	if v.Subscribers != nil {
+		serializeSubscribers(s, schemas.CreateNotificationRequest_Subscribers, v.Subscribers)
+	}
 }
 
 // Response of CreateNotification

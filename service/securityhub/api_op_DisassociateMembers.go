@@ -47,7 +47,9 @@ func (v *DisassociateMembersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DisassociateMembersRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DisassociateMembersRequest_AccountIds, v.AccountIds)
+	}
 }
 
 type DisassociateMembersOutput struct {

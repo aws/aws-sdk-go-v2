@@ -182,7 +182,9 @@ func (v *GetCostAndUsageComparisonsInput) SerializeMembers(s smithy.ShapeSeriali
 		v.Filter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroupDefinitions(s, schemas.GetCostAndUsageComparisonsRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetCostAndUsageComparisonsRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetCostAndUsageComparisonsRequest_MaxResults, *v.MaxResults)
 	}
@@ -222,11 +224,15 @@ func (v *GetCostAndUsageComparisonsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostAndUsageComparisonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostAndUsageComparisons(s, schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons, v.CostAndUsageComparisons)
+	if v.CostAndUsageComparisons != nil {
+		serializeCostAndUsageComparisons(s, schemas.GetCostAndUsageComparisonsResponse_CostAndUsageComparisons, v.CostAndUsageComparisons)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostAndUsageComparisonsResponse_NextPageToken, *v.NextPageToken)
 	}
-	serializeComparisonMetrics(s, schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage, v.TotalCostAndUsage)
+	if v.TotalCostAndUsage != nil {
+		serializeComparisonMetrics(s, schemas.GetCostAndUsageComparisonsResponse_TotalCostAndUsage, v.TotalCostAndUsage)
+	}
 }
 func (v *GetCostAndUsageComparisonsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCostAndUsageComparisonsResponse, func(s *smithy.Schema) error {

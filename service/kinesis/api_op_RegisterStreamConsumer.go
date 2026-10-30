@@ -94,7 +94,9 @@ func (v *RegisterStreamConsumerInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StreamId != nil {
 		s.WriteString(schemas.RegisterStreamConsumerInput_StreamId, *v.StreamId)
 	}
-	serializeTagMap(s, schemas.RegisterStreamConsumerInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RegisterStreamConsumerInput_Tags, v.Tags)
+	}
 }
 func (in *RegisterStreamConsumerInput) bindEndpointParams(p *EndpointParameters) {
 

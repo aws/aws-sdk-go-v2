@@ -134,7 +134,9 @@ func (v *CreateElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.CreateElasticsearchDomainRequest_AccessPolicies, *v.AccessPolicies)
 	}
-	serializeAdvancedOptions(s, schemas.CreateElasticsearchDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.CreateElasticsearchDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.AdvancedSecurityOptions != nil {
 		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_AdvancedSecurityOptions)
 		v.AdvancedSecurityOptions.SerializeMembers(s)
@@ -189,7 +191,9 @@ func (v *CreateElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.EngineMode != "" {
 		s.WriteString(schemas.CreateElasticsearchDomainRequest_EngineMode, string(v.EngineMode))
 	}
-	serializeLogPublishingOptions(s, schemas.CreateElasticsearchDomainRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.LogPublishingOptions != nil {
+		serializeLogPublishingOptions(s, schemas.CreateElasticsearchDomainRequest_LogPublishingOptions, v.LogPublishingOptions)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.CreateElasticsearchDomainRequest_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
@@ -200,7 +204,9 @@ func (v *CreateElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializ
 		v.SnapshotOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateElasticsearchDomainRequest_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.CreateElasticsearchDomainRequest_TagList, v.TagList)
+	}
 	if v.UseCase != "" {
 		s.WriteString(schemas.CreateElasticsearchDomainRequest_UseCase, string(v.UseCase))
 	}

@@ -151,7 +151,9 @@ func (v *GetLinkRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetLinkRoutingRuleResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.GetLinkRoutingRuleResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetLinkRoutingRuleResponse_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetLinkRoutingRuleResponse_updatedAt, *v.UpdatedAt)
 	}

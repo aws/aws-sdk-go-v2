@@ -128,7 +128,9 @@ func (v *ListVirtualServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualServicesOutput_nextToken, *v.NextToken)
 	}
-	serializeVirtualServiceList(s, schemas.ListVirtualServicesOutput_virtualServices, v.VirtualServices)
+	if v.VirtualServices != nil {
+		serializeVirtualServiceList(s, schemas.ListVirtualServicesOutput_virtualServices, v.VirtualServices)
+	}
 }
 func (v *ListVirtualServicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVirtualServicesOutput, func(s *smithy.Schema) error {

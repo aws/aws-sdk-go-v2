@@ -118,7 +118,9 @@ func (v *StartDocumentAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.DocumentLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFeatureTypes(s, schemas.StartDocumentAnalysisRequest_FeatureTypes, v.FeatureTypes)
+	if v.FeatureTypes != nil {
+		serializeFeatureTypes(s, schemas.StartDocumentAnalysisRequest_FeatureTypes, v.FeatureTypes)
+	}
 	if v.JobTag != nil {
 		s.WriteString(schemas.StartDocumentAnalysisRequest_JobTag, *v.JobTag)
 	}

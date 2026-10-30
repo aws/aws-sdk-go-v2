@@ -151,23 +151,33 @@ func (v *DescribeInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeInputResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DescribeInputResponse_AttachedChannels, v.AttachedChannels)
-	serialize__listOfInputDestination(s, schemas.DescribeInputResponse_Destinations, v.Destinations)
+	if v.AttachedChannels != nil {
+		serialize__listOf__string(s, schemas.DescribeInputResponse_AttachedChannels, v.AttachedChannels)
+	}
+	if v.Destinations != nil {
+		serialize__listOfInputDestination(s, schemas.DescribeInputResponse_Destinations, v.Destinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.DescribeInputResponse_Id, *v.Id)
 	}
 	if v.InputClass != "" {
 		s.WriteString(schemas.DescribeInputResponse_InputClass, string(v.InputClass))
 	}
-	serialize__listOfInputDeviceSettings(s, schemas.DescribeInputResponse_InputDevices, v.InputDevices)
+	if v.InputDevices != nil {
+		serialize__listOfInputDeviceSettings(s, schemas.DescribeInputResponse_InputDevices, v.InputDevices)
+	}
 	if v.InputNetworkLocation != "" {
 		s.WriteString(schemas.DescribeInputResponse_InputNetworkLocation, string(v.InputNetworkLocation))
 	}
-	serialize__listOf__string(s, schemas.DescribeInputResponse_InputPartnerIds, v.InputPartnerIds)
+	if v.InputPartnerIds != nil {
+		serialize__listOf__string(s, schemas.DescribeInputResponse_InputPartnerIds, v.InputPartnerIds)
+	}
 	if v.InputSourceType != "" {
 		s.WriteString(schemas.DescribeInputResponse_InputSourceType, string(v.InputSourceType))
 	}
-	serialize__listOfMediaConnectFlow(s, schemas.DescribeInputResponse_MediaConnectFlows, v.MediaConnectFlows)
+	if v.MediaConnectFlows != nil {
+		serialize__listOfMediaConnectFlow(s, schemas.DescribeInputResponse_MediaConnectFlows, v.MediaConnectFlows)
+	}
 	if v.MulticastSettings != nil {
 		s.WriteStruct(schemas.DescribeInputResponse_MulticastSettings)
 		v.MulticastSettings.SerializeMembers(s)
@@ -184,14 +194,20 @@ func (v *DescribeInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RouterSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputSdiSources(s, schemas.DescribeInputResponse_SdiSources, v.SdiSources)
-	serialize__listOf__string(s, schemas.DescribeInputResponse_SecurityGroups, v.SecurityGroups)
+	if v.SdiSources != nil {
+		serializeInputSdiSources(s, schemas.DescribeInputResponse_SdiSources, v.SdiSources)
+	}
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.DescribeInputResponse_SecurityGroups, v.SecurityGroups)
+	}
 	if v.Smpte2110ReceiverGroupSettings != nil {
 		s.WriteStruct(schemas.DescribeInputResponse_Smpte2110ReceiverGroupSettings)
 		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputSource(s, schemas.DescribeInputResponse_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfInputSource(s, schemas.DescribeInputResponse_Sources, v.Sources)
+	}
 	if v.SrtSettings != nil {
 		s.WriteStruct(schemas.DescribeInputResponse_SrtSettings)
 		v.SrtSettings.SerializeMembers(s)
@@ -200,7 +216,9 @@ func (v *DescribeInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DescribeInputResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.DescribeInputResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeInputResponse_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeInputResponse_Type, string(v.Type))
 	}

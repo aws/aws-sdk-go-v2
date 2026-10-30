@@ -114,7 +114,9 @@ func (v *ListSharedReportGroupsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSharedReportGroupsOutput_nextToken, *v.NextToken)
 	}
-	serializeReportGroupArns(s, schemas.ListSharedReportGroupsOutput_reportGroups, v.ReportGroups)
+	if v.ReportGroups != nil {
+		serializeReportGroupArns(s, schemas.ListSharedReportGroupsOutput_reportGroups, v.ReportGroups)
+	}
 }
 func (v *ListSharedReportGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSharedReportGroupsOutput, func(s *smithy.Schema) error {

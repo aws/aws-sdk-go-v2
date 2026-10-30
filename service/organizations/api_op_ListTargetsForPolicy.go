@@ -109,7 +109,9 @@ func (v *ListTargetsForPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTargetsForPolicyResponse_NextToken, *v.NextToken)
 	}
-	serializePolicyTargets(s, schemas.ListTargetsForPolicyResponse_Targets, v.Targets)
+	if v.Targets != nil {
+		serializePolicyTargets(s, schemas.ListTargetsForPolicyResponse_Targets, v.Targets)
+	}
 }
 func (v *ListTargetsForPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTargetsForPolicyResponse, func(s *smithy.Schema) error {

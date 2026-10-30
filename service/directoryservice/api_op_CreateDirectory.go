@@ -124,7 +124,9 @@ func (v *CreateDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Size != "" {
 		s.WriteString(schemas.CreateDirectoryRequest_Size, string(v.Size))
 	}
-	serializeTags(s, schemas.CreateDirectoryRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDirectoryRequest_Tags, v.Tags)
+	}
 	if v.VpcSettings != nil {
 		s.WriteStruct(schemas.CreateDirectoryRequest_VpcSettings)
 		v.VpcSettings.SerializeMembers(s)

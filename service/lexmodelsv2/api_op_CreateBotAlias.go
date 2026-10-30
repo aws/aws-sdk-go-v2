@@ -82,7 +82,9 @@ func (v *CreateBotAliasInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotAliasLocaleSettingsMap(s, schemas.CreateBotAliasRequest_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasLocaleSettings != nil {
+		serializeBotAliasLocaleSettingsMap(s, schemas.CreateBotAliasRequest_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	}
 	if v.BotAliasName != nil {
 		s.WriteString(schemas.CreateBotAliasRequest_botAliasName, *v.BotAliasName)
 	}
@@ -105,7 +107,9 @@ func (v *CreateBotAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SentimentAnalysisSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateBotAliasRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateBotAliasRequest_tags, v.Tags)
+	}
 }
 
 type CreateBotAliasOutput struct {
@@ -162,7 +166,9 @@ func (v *CreateBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotAliasId != nil {
 		s.WriteString(schemas.CreateBotAliasResponse_botAliasId, *v.BotAliasId)
 	}
-	serializeBotAliasLocaleSettingsMap(s, schemas.CreateBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	if v.BotAliasLocaleSettings != nil {
+		serializeBotAliasLocaleSettingsMap(s, schemas.CreateBotAliasResponse_botAliasLocaleSettings, v.BotAliasLocaleSettings)
+	}
 	if v.BotAliasName != nil {
 		s.WriteString(schemas.CreateBotAliasResponse_botAliasName, *v.BotAliasName)
 	}
@@ -191,7 +197,9 @@ func (v *CreateBotAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SentimentAnalysisSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateBotAliasResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateBotAliasResponse_tags, v.Tags)
+	}
 }
 func (v *CreateBotAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBotAliasResponse, func(s *smithy.Schema) error {

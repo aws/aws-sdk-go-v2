@@ -134,7 +134,9 @@ func (v *BandMathConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CustomIndices.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringListInput(s, schemas.BandMathConfigInput_PredefinedIndices, v.PredefinedIndices)
+	if v.PredefinedIndices != nil {
+		serializeStringListInput(s, schemas.BandMathConfigInput_PredefinedIndices, v.PredefinedIndices)
+	}
 }
 func (v *BandMathConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BandMathConfigInput, func(s *smithy.Schema) error {
@@ -198,7 +200,9 @@ func (v *CloudRemovalConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InterpolationValue != nil {
 		s.WriteString(schemas.CloudRemovalConfigInput_InterpolationValue, *v.InterpolationValue)
 	}
-	serializeStringListInput(s, schemas.CloudRemovalConfigInput_TargetBands, v.TargetBands)
+	if v.TargetBands != nil {
+		serializeStringListInput(s, schemas.CloudRemovalConfigInput_TargetBands, v.TargetBands)
+	}
 }
 func (v *CloudRemovalConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudRemovalConfigInput, func(s *smithy.Schema) error {
@@ -236,7 +240,9 @@ func (v *CustomIndicesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomIndicesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationsListInput(s, schemas.CustomIndicesInput_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationsListInput(s, schemas.CustomIndicesInput_Operations, v.Operations)
+	}
 }
 func (v *CustomIndicesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomIndicesInput, func(s *smithy.Schema) error {
@@ -594,7 +600,9 @@ func (v *Geometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Geometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinearRings(s, schemas.Geometry_Coordinates, v.Coordinates)
+	if v.Coordinates != nil {
+		serializeLinearRings(s, schemas.Geometry_Coordinates, v.Coordinates)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Geometry_Type, *v.Type)
 	}
@@ -634,7 +642,9 @@ func (v *GeoMosaicConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlgorithmName != "" {
 		s.WriteString(schemas.GeoMosaicConfigInput_AlgorithmName, string(v.AlgorithmName))
 	}
-	serializeStringListInput(s, schemas.GeoMosaicConfigInput_TargetBands, v.TargetBands)
+	if v.TargetBands != nil {
+		serializeStringListInput(s, schemas.GeoMosaicConfigInput_TargetBands, v.TargetBands)
+	}
 }
 func (v *GeoMosaicConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeoMosaicConfigInput, func(s *smithy.Schema) error {
@@ -776,7 +786,9 @@ func (v *ItemSource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ItemSource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetsMap(s, schemas.ItemSource_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetsMap(s, schemas.ItemSource_Assets, v.Assets)
+	}
 	if v.DateTime != nil {
 		s.WriteTime(schemas.ItemSource_DateTime, *v.DateTime)
 	}
@@ -1122,7 +1134,9 @@ func (v *ListEarthObservationJobOutputConfig) SerializeMembers(s smithy.ShapeSer
 	if v.Status != "" {
 		s.WriteString(schemas.ListEarthObservationJobOutputConfig_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.ListEarthObservationJobOutputConfig_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ListEarthObservationJobOutputConfig_Tags, v.Tags)
+	}
 }
 func (v *ListEarthObservationJobOutputConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEarthObservationJobOutputConfig, func(s *smithy.Schema) error {
@@ -1217,7 +1231,9 @@ func (v *ListVectorEnrichmentJobOutputConfig) SerializeMembers(s smithy.ShapeSer
 	if v.Status != "" {
 		s.WriteString(schemas.ListVectorEnrichmentJobOutputConfig_Status, string(v.Status))
 	}
-	serializeTags(s, schemas.ListVectorEnrichmentJobOutputConfig_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ListVectorEnrichmentJobOutputConfig_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ListVectorEnrichmentJobOutputConfig_Type, string(v.Type))
 	}
@@ -1345,7 +1361,9 @@ func (v *MultiPolygonGeometryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MultiPolygonGeometryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinearRingsList(s, schemas.MultiPolygonGeometryInput_Coordinates, v.Coordinates)
+	if v.Coordinates != nil {
+		serializeLinearRingsList(s, schemas.MultiPolygonGeometryInput_Coordinates, v.Coordinates)
+	}
 }
 func (v *MultiPolygonGeometryInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MultiPolygonGeometryInput, func(s *smithy.Schema) error {
@@ -1654,7 +1672,9 @@ func (v *PolygonGeometryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PolygonGeometryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinearRings(s, schemas.PolygonGeometryInput_Coordinates, v.Coordinates)
+	if v.Coordinates != nil {
+		serializeLinearRings(s, schemas.PolygonGeometryInput_Coordinates, v.Coordinates)
+	}
 }
 func (v *PolygonGeometryInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolygonGeometryInput, func(s *smithy.Schema) error {
@@ -1892,7 +1912,9 @@ func (v *PropertyFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PropertyFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProperty(s, schemas.PropertyFilter_Property, v.Property)
+	if v.Property != nil {
+		serializeProperty(s, schemas.PropertyFilter_Property, v.Property)
+	}
 }
 func (v *PropertyFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyFilter, func(s *smithy.Schema) error {
@@ -1926,7 +1948,9 @@ func (v *PropertyFilters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogicalOperator != "" {
 		s.WriteString(schemas.PropertyFilters_LogicalOperator, string(v.LogicalOperator))
 	}
-	serializePropertyFiltersList(s, schemas.PropertyFilters_Properties, v.Properties)
+	if v.Properties != nil {
+		serializePropertyFiltersList(s, schemas.PropertyFilters_Properties, v.Properties)
+	}
 }
 func (v *PropertyFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyFilters, func(s *smithy.Schema) error {
@@ -2001,8 +2025,12 @@ func (v *RasterDataCollectionMetadata) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.RasterDataCollectionMetadata_Name, *v.Name)
 	}
-	serializeFilterList(s, schemas.RasterDataCollectionMetadata_SupportedFilters, v.SupportedFilters)
-	serializeTags(s, schemas.RasterDataCollectionMetadata_Tags, v.Tags)
+	if v.SupportedFilters != nil {
+		serializeFilterList(s, schemas.RasterDataCollectionMetadata_SupportedFilters, v.SupportedFilters)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.RasterDataCollectionMetadata_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.RasterDataCollectionMetadata_Type, string(v.Type))
 	}
@@ -2068,7 +2096,9 @@ func (v *RasterDataCollectionQueryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RasterDataCollectionQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryInput_AreaOfInterest, v.AreaOfInterest)
+	if v.AreaOfInterest != nil {
+		serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryInput_AreaOfInterest, v.AreaOfInterest)
+	}
 	if v.PropertyFilters != nil {
 		s.WriteStruct(schemas.RasterDataCollectionQueryInput_PropertyFilters)
 		v.PropertyFilters.SerializeMembers(s)
@@ -2137,7 +2167,9 @@ func (v *RasterDataCollectionQueryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RasterDataCollectionQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryOutput_AreaOfInterest, v.AreaOfInterest)
+	if v.AreaOfInterest != nil {
+		serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryOutput_AreaOfInterest, v.AreaOfInterest)
+	}
 	if v.PropertyFilters != nil {
 		s.WriteStruct(schemas.RasterDataCollectionQueryOutput_PropertyFilters)
 		v.PropertyFilters.SerializeMembers(s)
@@ -2205,8 +2237,12 @@ func (v *RasterDataCollectionQueryWithBandFilterInput) Serialize(s smithy.ShapeS
 }
 
 func (v *RasterDataCollectionQueryWithBandFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest, v.AreaOfInterest)
-	serializeStringListInput(s, schemas.RasterDataCollectionQueryWithBandFilterInput_BandFilter, v.BandFilter)
+	if v.AreaOfInterest != nil {
+		serializeAreaOfInterest(s, schemas.RasterDataCollectionQueryWithBandFilterInput_AreaOfInterest, v.AreaOfInterest)
+	}
+	if v.BandFilter != nil {
+		serializeStringListInput(s, schemas.RasterDataCollectionQueryWithBandFilterInput_BandFilter, v.BandFilter)
+	}
 	if v.PropertyFilters != nil {
 		s.WriteStruct(schemas.RasterDataCollectionQueryWithBandFilterInput_PropertyFilters)
 		v.PropertyFilters.SerializeMembers(s)
@@ -2270,7 +2306,9 @@ func (v *ResamplingConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputResolution.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringListInput(s, schemas.ResamplingConfigInput_TargetBands, v.TargetBands)
+	if v.TargetBands != nil {
+		serializeStringListInput(s, schemas.ResamplingConfigInput_TargetBands, v.TargetBands)
+	}
 }
 func (v *ResamplingConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResamplingConfigInput, func(s *smithy.Schema) error {
@@ -2365,7 +2403,9 @@ func (v *StackConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputResolution.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringListInput(s, schemas.StackConfigInput_TargetBands, v.TargetBands)
+	if v.TargetBands != nil {
+		serializeStringListInput(s, schemas.StackConfigInput_TargetBands, v.TargetBands)
+	}
 }
 func (v *StackConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StackConfigInput, func(s *smithy.Schema) error {
@@ -2407,8 +2447,12 @@ func (v *TemporalStatisticsConfigInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.GroupBy != "" {
 		s.WriteString(schemas.TemporalStatisticsConfigInput_GroupBy, string(v.GroupBy))
 	}
-	serializeTemporalStatisticsListInput(s, schemas.TemporalStatisticsConfigInput_Statistics, v.Statistics)
-	serializeStringListInput(s, schemas.TemporalStatisticsConfigInput_TargetBands, v.TargetBands)
+	if v.Statistics != nil {
+		serializeTemporalStatisticsListInput(s, schemas.TemporalStatisticsConfigInput_Statistics, v.Statistics)
+	}
+	if v.TargetBands != nil {
+		serializeStringListInput(s, schemas.TemporalStatisticsConfigInput_TargetBands, v.TargetBands)
+	}
 }
 func (v *TemporalStatisticsConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TemporalStatisticsConfigInput, func(s *smithy.Schema) error {
@@ -2754,7 +2798,9 @@ func (v *VectorEnrichmentJobInputConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VectorEnrichmentJobInputConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVectorEnrichmentJobDataSourceConfigInput(s, schemas.VectorEnrichmentJobInputConfig_DataSourceConfig, v.DataSourceConfig)
+	if v.DataSourceConfig != nil {
+		serializeVectorEnrichmentJobDataSourceConfigInput(s, schemas.VectorEnrichmentJobInputConfig_DataSourceConfig, v.DataSourceConfig)
+	}
 	if v.DocumentType != "" {
 		s.WriteString(schemas.VectorEnrichmentJobInputConfig_DocumentType, string(v.DocumentType))
 	}
@@ -3007,8 +3053,12 @@ func (v *ZonalStatisticsConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ZonalStatisticsConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeZonalStatisticsListInput(s, schemas.ZonalStatisticsConfigInput_Statistics, v.Statistics)
-	serializeStringListInput(s, schemas.ZonalStatisticsConfigInput_TargetBands, v.TargetBands)
+	if v.Statistics != nil {
+		serializeZonalStatisticsListInput(s, schemas.ZonalStatisticsConfigInput_Statistics, v.Statistics)
+	}
+	if v.TargetBands != nil {
+		serializeStringListInput(s, schemas.ZonalStatisticsConfigInput_TargetBands, v.TargetBands)
+	}
 	if v.ZoneS3Path != nil {
 		s.WriteString(schemas.ZonalStatisticsConfigInput_ZoneS3Path, *v.ZoneS3Path)
 	}

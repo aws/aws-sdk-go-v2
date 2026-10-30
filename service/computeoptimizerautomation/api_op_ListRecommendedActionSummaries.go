@@ -56,7 +56,9 @@ func (v *ListRecommendedActionSummariesInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListRecommendedActionSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendedActionFilterList(s, schemas.ListRecommendedActionSummariesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeRecommendedActionFilterList(s, schemas.ListRecommendedActionSummariesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRecommendedActionSummariesRequest_maxResults, *v.MaxResults)
 	}
@@ -90,7 +92,9 @@ func (v *ListRecommendedActionSummariesOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRecommendedActionSummariesResponse_nextToken, *v.NextToken)
 	}
-	serializeRecommendedActionSummaries(s, schemas.ListRecommendedActionSummariesResponse_recommendedActionSummaries, v.RecommendedActionSummaries)
+	if v.RecommendedActionSummaries != nil {
+		serializeRecommendedActionSummaries(s, schemas.ListRecommendedActionSummariesResponse_recommendedActionSummaries, v.RecommendedActionSummaries)
+	}
 }
 func (v *ListRecommendedActionSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRecommendedActionSummariesResponse, func(s *smithy.Schema) error {

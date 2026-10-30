@@ -162,7 +162,9 @@ func (v *CreateVpcConfigurationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ResourceTarget != nil {
 		s.WriteString(schemas.CreateVpcConfigurationRequest_resourceTarget, *v.ResourceTarget)
 	}
-	serializeSubnetIdList(s, schemas.CreateVpcConfigurationRequest_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateVpcConfigurationRequest_subnetIds, v.SubnetIds)
+	}
 	if v.TlsServerName != nil {
 		s.WriteString(schemas.CreateVpcConfigurationRequest_tlsServerName, *v.TlsServerName)
 	}

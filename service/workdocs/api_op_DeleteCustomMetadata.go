@@ -63,7 +63,9 @@ func (v *DeleteCustomMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeleteAll != false {
 		s.WriteBool(schemas.DeleteCustomMetadataRequest_DeleteAll, v.DeleteAll)
 	}
-	serializeCustomMetadataKeyList(s, schemas.DeleteCustomMetadataRequest_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeCustomMetadataKeyList(s, schemas.DeleteCustomMetadataRequest_Keys, v.Keys)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.DeleteCustomMetadataRequest_ResourceId, *v.ResourceId)
 	}

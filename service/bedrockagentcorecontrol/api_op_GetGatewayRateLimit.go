@@ -118,8 +118,12 @@ func (v *GetGatewayRateLimitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetGatewayRateLimitResponse_description, *v.Description)
 	}
-	serializeDimensionKeys(s, schemas.GetGatewayRateLimitResponse_dimensionKeys, v.DimensionKeys)
-	serializeLimitEntries(s, schemas.GetGatewayRateLimitResponse_entries, v.Entries)
+	if v.DimensionKeys != nil {
+		serializeDimensionKeys(s, schemas.GetGatewayRateLimitResponse_dimensionKeys, v.DimensionKeys)
+	}
+	if v.Entries != nil {
+		serializeLimitEntries(s, schemas.GetGatewayRateLimitResponse_entries, v.Entries)
+	}
 	if v.GatewayIdentifier != nil {
 		s.WriteString(schemas.GetGatewayRateLimitResponse_gatewayIdentifier, *v.GatewayIdentifier)
 	}

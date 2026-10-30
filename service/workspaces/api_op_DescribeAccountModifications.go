@@ -70,7 +70,9 @@ func (v *DescribeAccountModificationsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeAccountModificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountModificationList(s, schemas.DescribeAccountModificationsResult_AccountModifications, v.AccountModifications)
+	if v.AccountModifications != nil {
+		serializeAccountModificationList(s, schemas.DescribeAccountModificationsResult_AccountModifications, v.AccountModifications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAccountModificationsResult_NextToken, *v.NextToken)
 	}

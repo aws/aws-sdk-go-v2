@@ -108,7 +108,9 @@ func (v *ListDetectMitigationActionsTasksOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDetectMitigationActionsTasksResponse_nextToken, *v.NextToken)
 	}
-	serializeDetectMitigationActionsTaskSummaryList(s, schemas.ListDetectMitigationActionsTasksResponse_tasks, v.Tasks)
+	if v.Tasks != nil {
+		serializeDetectMitigationActionsTaskSummaryList(s, schemas.ListDetectMitigationActionsTasksResponse_tasks, v.Tasks)
+	}
 }
 func (v *ListDetectMitigationActionsTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDetectMitigationActionsTasksResponse, func(s *smithy.Schema) error {

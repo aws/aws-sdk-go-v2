@@ -111,7 +111,9 @@ func (v *SetIpAddressTypeOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetIpAddressTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.SetIpAddressTypeResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.SetIpAddressTypeResult_operations, v.Operations)
+	}
 }
 func (v *SetIpAddressTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SetIpAddressTypeResult, func(s *smithy.Schema) error {

@@ -53,7 +53,9 @@ func (v *BatchGetRepositoriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetRepositoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRepositoryNameList(s, schemas.BatchGetRepositoriesInput_repositoryNames, v.RepositoryNames)
+	if v.RepositoryNames != nil {
+		serializeRepositoryNameList(s, schemas.BatchGetRepositoriesInput_repositoryNames, v.RepositoryNames)
+	}
 }
 
 // Represents the output of a batch get repositories operation.
@@ -82,9 +84,15 @@ func (v *BatchGetRepositoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetRepositoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetRepositoriesErrorsList(s, schemas.BatchGetRepositoriesOutput_errors, v.Errors)
-	serializeRepositoryMetadataList(s, schemas.BatchGetRepositoriesOutput_repositories, v.Repositories)
-	serializeRepositoryNotFoundList(s, schemas.BatchGetRepositoriesOutput_repositoriesNotFound, v.RepositoriesNotFound)
+	if v.Errors != nil {
+		serializeBatchGetRepositoriesErrorsList(s, schemas.BatchGetRepositoriesOutput_errors, v.Errors)
+	}
+	if v.Repositories != nil {
+		serializeRepositoryMetadataList(s, schemas.BatchGetRepositoriesOutput_repositories, v.Repositories)
+	}
+	if v.RepositoriesNotFound != nil {
+		serializeRepositoryNotFoundList(s, schemas.BatchGetRepositoriesOutput_repositoriesNotFound, v.RepositoriesNotFound)
+	}
 }
 func (v *BatchGetRepositoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetRepositoriesOutput, func(s *smithy.Schema) error {

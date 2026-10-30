@@ -76,7 +76,9 @@ func (v *DeleteLoadBalancerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteLoadBalancerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteLoadBalancerResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteLoadBalancerResult_operations, v.Operations)
+	}
 }
 func (v *DeleteLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteLoadBalancerResult, func(s *smithy.Schema) error {

@@ -121,14 +121,18 @@ func (v *ListPrincipalsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPrincipalsRequest_nextToken, *v.NextToken)
 	}
-	serializePrincipalArnOrIdList(s, schemas.ListPrincipalsRequest_principals, v.Principals)
+	if v.Principals != nil {
+		serializePrincipalArnOrIdList(s, schemas.ListPrincipalsRequest_principals, v.Principals)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ListPrincipalsRequest_resourceArn, *v.ResourceArn)
 	}
 	if v.ResourceOwner != "" {
 		s.WriteString(schemas.ListPrincipalsRequest_resourceOwner, string(v.ResourceOwner))
 	}
-	serializeResourceShareArnList(s, schemas.ListPrincipalsRequest_resourceShareArns, v.ResourceShareArns)
+	if v.ResourceShareArns != nil {
+		serializeResourceShareArnList(s, schemas.ListPrincipalsRequest_resourceShareArns, v.ResourceShareArns)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ListPrincipalsRequest_resourceType, *v.ResourceType)
 	}
@@ -162,7 +166,9 @@ func (v *ListPrincipalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPrincipalsResponse_nextToken, *v.NextToken)
 	}
-	serializePrincipalList(s, schemas.ListPrincipalsResponse_principals, v.Principals)
+	if v.Principals != nil {
+		serializePrincipalList(s, schemas.ListPrincipalsResponse_principals, v.Principals)
+	}
 }
 func (v *ListPrincipalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrincipalsResponse, func(s *smithy.Schema) error {

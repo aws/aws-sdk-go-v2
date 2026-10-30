@@ -95,7 +95,9 @@ func (v *ListGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfListedGateway(s, schemas.ListGatewaysResponse_Gateways, v.Gateways)
+	if v.Gateways != nil {
+		serialize__listOfListedGateway(s, schemas.ListGatewaysResponse_Gateways, v.Gateways)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewaysResponse_NextToken, *v.NextToken)
 	}

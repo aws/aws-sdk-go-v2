@@ -111,7 +111,9 @@ func (v *SearchPromptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchPromptsResponse_NextToken, *v.NextToken)
 	}
-	serializePromptList(s, schemas.SearchPromptsResponse_Prompts, v.Prompts)
+	if v.Prompts != nil {
+		serializePromptList(s, schemas.SearchPromptsResponse_Prompts, v.Prompts)
+	}
 }
 func (v *SearchPromptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPromptsResponse, func(s *smithy.Schema) error {

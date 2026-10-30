@@ -129,7 +129,9 @@ func (v *GetTimeSeriesServiceStatisticsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTimeSeriesServiceStatisticsResult_NextToken, *v.NextToken)
 	}
-	serializeTimeSeriesServiceStatisticsList(s, schemas.GetTimeSeriesServiceStatisticsResult_TimeSeriesServiceStatistics, v.TimeSeriesServiceStatistics)
+	if v.TimeSeriesServiceStatistics != nil {
+		serializeTimeSeriesServiceStatisticsList(s, schemas.GetTimeSeriesServiceStatisticsResult_TimeSeriesServiceStatistics, v.TimeSeriesServiceStatistics)
+	}
 }
 func (v *GetTimeSeriesServiceStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTimeSeriesServiceStatisticsResult, func(s *smithy.Schema) error {

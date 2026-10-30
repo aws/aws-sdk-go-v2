@@ -84,7 +84,9 @@ func (v *ListMemoryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MemoryStrategyId != nil {
 		s.WriteString(schemas.ListMemoryRecordsInput_memoryStrategyId, *v.MemoryStrategyId)
 	}
-	serializeMemoryMetadataFilterList(s, schemas.ListMemoryRecordsInput_metadataFilters, v.MetadataFilters)
+	if v.MetadataFilters != nil {
+		serializeMemoryMetadataFilterList(s, schemas.ListMemoryRecordsInput_metadataFilters, v.MetadataFilters)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.ListMemoryRecordsInput_namespace, *v.Namespace)
 	}
@@ -120,7 +122,9 @@ func (v *ListMemoryRecordsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMemoryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemoryRecordSummaryList(s, schemas.ListMemoryRecordsOutput_memoryRecordSummaries, v.MemoryRecordSummaries)
+	if v.MemoryRecordSummaries != nil {
+		serializeMemoryRecordSummaryList(s, schemas.ListMemoryRecordsOutput_memoryRecordSummaries, v.MemoryRecordSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMemoryRecordsOutput_nextToken, *v.NextToken)
 	}

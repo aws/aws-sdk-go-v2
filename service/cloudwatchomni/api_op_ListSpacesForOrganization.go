@@ -77,7 +77,9 @@ func (v *ListSpacesForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSpacesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSpaceSummaryList(s, schemas.ListSpacesForOrganizationOutput_items, v.Items)
+	if v.Items != nil {
+		serializeSpaceSummaryList(s, schemas.ListSpacesForOrganizationOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSpacesForOrganizationOutput_nextToken, *v.NextToken)
 	}

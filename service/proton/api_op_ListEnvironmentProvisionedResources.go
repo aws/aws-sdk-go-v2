@@ -100,7 +100,9 @@ func (v *ListEnvironmentProvisionedResourcesOutput) SerializeMembers(s smithy.Sh
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentProvisionedResourcesOutput_nextToken, *v.NextToken)
 	}
-	serializeProvisionedResourceList(s, schemas.ListEnvironmentProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+	if v.ProvisionedResources != nil {
+		serializeProvisionedResourceList(s, schemas.ListEnvironmentProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+	}
 }
 func (v *ListEnvironmentProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListEnvironmentProvisionedResourcesOutput, func(s *smithy.Schema) error {

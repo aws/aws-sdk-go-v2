@@ -190,7 +190,9 @@ func (v *PutTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Rule != nil {
 		s.WriteString(schemas.PutTargetsRequest_Rule, *v.Rule)
 	}
-	serializeTargetList(s, schemas.PutTargetsRequest_Targets, v.Targets)
+	if v.Targets != nil {
+		serializeTargetList(s, schemas.PutTargetsRequest_Targets, v.Targets)
+	}
 }
 
 type PutTargetsOutput struct {
@@ -214,7 +216,9 @@ func (v *PutTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePutTargetsResultEntryList(s, schemas.PutTargetsResponse_FailedEntries, v.FailedEntries)
+	if v.FailedEntries != nil {
+		serializePutTargetsResultEntryList(s, schemas.PutTargetsResponse_FailedEntries, v.FailedEntries)
+	}
 	if v.FailedEntryCount != 0 {
 		s.WriteInt32(schemas.PutTargetsResponse_FailedEntryCount, v.FailedEntryCount)
 	}

@@ -95,7 +95,9 @@ func (v *CreateCustomMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MetricType != "" {
 		s.WriteString(schemas.CreateCustomMetricRequest_metricType, string(v.MetricType))
 	}
-	serializeTagList(s, schemas.CreateCustomMetricRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCustomMetricRequest_tags, v.Tags)
+	}
 }
 
 type CreateCustomMetricOutput struct {

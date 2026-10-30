@@ -83,7 +83,9 @@ func (v *ListBillScenarioCommitmentModificationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListBillScenarioCommitmentModificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillScenarioCommitmentModificationItems(s, schemas.ListBillScenarioCommitmentModificationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeBillScenarioCommitmentModificationItems(s, schemas.ListBillScenarioCommitmentModificationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillScenarioCommitmentModificationsResponse_nextToken, *v.NextToken)
 	}

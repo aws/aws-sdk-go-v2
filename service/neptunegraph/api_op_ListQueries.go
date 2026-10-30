@@ -90,7 +90,9 @@ func (v *ListQueriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQuerySummaryList(s, schemas.ListQueriesOutput_queries, v.Queries)
+	if v.Queries != nil {
+		serializeQuerySummaryList(s, schemas.ListQueriesOutput_queries, v.Queries)
+	}
 }
 func (v *ListQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueriesOutput, func(s *smithy.Schema) error {

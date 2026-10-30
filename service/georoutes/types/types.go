@@ -44,7 +44,9 @@ func (v *Circle) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Circle) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.Circle_Center, v.Center)
+	if v.Center != nil {
+		serializePosition(s, schemas.Circle_Center, v.Center)
+	}
 	if v.Radius != nil {
 		s.WriteFloat64(schemas.Circle_Radius, *v.Radius)
 	}
@@ -88,7 +90,9 @@ func (v *Corridor) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Corridor) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.Corridor_LineString, v.LineString)
+	if v.LineString != nil {
+		serializeLineString(s, schemas.Corridor_LineString, v.LineString)
+	}
 	if v.Radius != nil {
 		s.WriteInt32(schemas.Corridor_Radius, *v.Radius)
 	}
@@ -142,11 +146,15 @@ func (v *Isoline) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Isoline) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolineConnectionList(s, schemas.Isoline_Connections, v.Connections)
+	if v.Connections != nil {
+		serializeIsolineConnectionList(s, schemas.Isoline_Connections, v.Connections)
+	}
 	if v.DistanceThreshold != 0 {
 		s.WriteInt64(schemas.Isoline_DistanceThreshold, v.DistanceThreshold)
 	}
-	serializeIsolineShapeGeometryList(s, schemas.Isoline_Geometries, v.Geometries)
+	if v.Geometries != nil {
+		serializeIsolineShapeGeometryList(s, schemas.Isoline_Geometries, v.Geometries)
+	}
 	if v.TimeThreshold != 0 {
 		s.WriteInt64(schemas.Isoline_TimeThreshold, v.TimeThreshold)
 	}
@@ -242,7 +250,9 @@ func (v *IsolineAvoidanceArea) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineAvoidanceArea) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolineAvoidanceAreaGeometryList(s, schemas.IsolineAvoidanceArea_Except, v.Except)
+	if v.Except != nil {
+		serializeIsolineAvoidanceAreaGeometryList(s, schemas.IsolineAvoidanceArea_Except, v.Except)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.IsolineAvoidanceArea_Geometry)
 		v.Geometry.SerializeMembers(s)
@@ -302,19 +312,25 @@ func (v *IsolineAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.IsolineAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.IsolineAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	}
 	if v.Corridor != nil {
 		s.WriteStruct(schemas.IsolineAvoidanceAreaGeometry_Corridor)
 		v.Corridor.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLinearRings(s, schemas.IsolineAvoidanceAreaGeometry_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.IsolineAvoidanceAreaGeometry_Polygon, v.Polygon)
+	}
 	if v.PolylineCorridor != nil {
 		s.WriteStruct(schemas.IsolineAvoidanceAreaGeometry_PolylineCorridor)
 		v.PolylineCorridor.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePolylineRingList(s, schemas.IsolineAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
+	if v.PolylinePolygon != nil {
+		serializePolylineRingList(s, schemas.IsolineAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
+	}
 }
 func (v *IsolineAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IsolineAvoidanceAreaGeometry, func(s *smithy.Schema) error {
@@ -414,7 +430,9 @@ func (v *IsolineAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIsolineAvoidanceAreaList(s, schemas.IsolineAvoidanceOptions_Areas, v.Areas)
+	if v.Areas != nil {
+		serializeIsolineAvoidanceAreaList(s, schemas.IsolineAvoidanceOptions_Areas, v.Areas)
+	}
 	if v.CarShuttleTrains != nil {
 		s.WriteBool(schemas.IsolineAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
 	}
@@ -436,14 +454,18 @@ func (v *IsolineAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TollTransponders != nil {
 		s.WriteBool(schemas.IsolineAvoidanceOptions_TollTransponders, *v.TollTransponders)
 	}
-	serializeTruckRoadTypeList(s, schemas.IsolineAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
+	if v.TruckRoadTypes != nil {
+		serializeTruckRoadTypeList(s, schemas.IsolineAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
+	}
 	if v.Tunnels != nil {
 		s.WriteBool(schemas.IsolineAvoidanceOptions_Tunnels, *v.Tunnels)
 	}
 	if v.UTurns != nil {
 		s.WriteBool(schemas.IsolineAvoidanceOptions_UTurns, *v.UTurns)
 	}
-	serializeIsolineAvoidanceZoneCategoryList(s, schemas.IsolineAvoidanceOptions_ZoneCategories, v.ZoneCategories)
+	if v.ZoneCategories != nil {
+		serializeIsolineAvoidanceZoneCategoryList(s, schemas.IsolineAvoidanceOptions_ZoneCategories, v.ZoneCategories)
+	}
 }
 func (v *IsolineAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IsolineAvoidanceOptions, func(s *smithy.Schema) error {
@@ -698,7 +720,9 @@ func (v *IsolineConnectionGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineConnectionGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.IsolineConnectionGeometry_LineString, v.LineString)
+	if v.LineString != nil {
+		serializeLineString(s, schemas.IsolineConnectionGeometry_LineString, v.LineString)
+	}
 	if v.Polyline != nil {
 		s.WriteString(schemas.IsolineConnectionGeometry_Polyline, *v.Polyline)
 	}
@@ -1092,8 +1116,12 @@ func (v *IsolineShapeGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineShapeGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinearRings(s, schemas.IsolineShapeGeometry_Polygon, v.Polygon)
-	serializePolylineRingList(s, schemas.IsolineShapeGeometry_PolylinePolygon, v.PolylinePolygon)
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.IsolineShapeGeometry_Polygon, v.Polygon)
+	}
+	if v.PolylinePolygon != nil {
+		serializePolylineRingList(s, schemas.IsolineShapeGeometry_PolylinePolygon, v.PolylinePolygon)
+	}
 }
 func (v *IsolineShapeGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IsolineShapeGeometry, func(s *smithy.Schema) error {
@@ -1140,7 +1168,9 @@ func (v *IsolineSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.IsolineSideOfStreetOptions_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.IsolineSideOfStreetOptions_Position, v.Position)
+	}
 	if v.UseWith != "" {
 		s.WriteString(schemas.IsolineSideOfStreetOptions_UseWith, string(v.UseWith))
 	}
@@ -1186,8 +1216,12 @@ func (v *IsolineThresholds) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IsolineThresholds) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistanceThresholdList(s, schemas.IsolineThresholds_Distance, v.Distance)
-	serializeTimeThresholdList(s, schemas.IsolineThresholds_Time, v.Time)
+	if v.Distance != nil {
+		serializeDistanceThresholdList(s, schemas.IsolineThresholds_Distance, v.Distance)
+	}
+	if v.Time != nil {
+		serializeTimeThresholdList(s, schemas.IsolineThresholds_Time, v.Time)
+	}
 }
 func (v *IsolineThresholds) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IsolineThresholds, func(s *smithy.Schema) error {
@@ -1550,7 +1584,9 @@ func (v *IsolineTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GrossWeight != 0 {
 		s.WriteInt64(schemas.IsolineTruckOptions_GrossWeight, v.GrossWeight)
 	}
-	serializeIsolineHazardousCargoTypeList(s, schemas.IsolineTruckOptions_HazardousCargos, v.HazardousCargos)
+	if v.HazardousCargos != nil {
+		serializeIsolineHazardousCargoTypeList(s, schemas.IsolineTruckOptions_HazardousCargos, v.HazardousCargos)
+	}
 	if v.Height != 0 {
 		s.WriteInt64(schemas.IsolineTruckOptions_Height, v.Height)
 	}
@@ -1832,7 +1868,9 @@ func (v *RoadSnapNotice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Title != nil {
 		s.WriteString(schemas.RoadSnapNotice_Title, *v.Title)
 	}
-	serializeRoadSnapTracePointIndexList(s, schemas.RoadSnapNotice_TracePointIndexes, v.TracePointIndexes)
+	if v.TracePointIndexes != nil {
+		serializeRoadSnapTracePointIndexList(s, schemas.RoadSnapNotice_TracePointIndexes, v.TracePointIndexes)
+	}
 }
 func (v *RoadSnapNotice) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoadSnapNotice, func(s *smithy.Schema) error {
@@ -1878,7 +1916,9 @@ func (v *RoadSnapSnappedGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoadSnapSnappedGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.RoadSnapSnappedGeometry_LineString, v.LineString)
+	if v.LineString != nil {
+		serializeLineString(s, schemas.RoadSnapSnappedGeometry_LineString, v.LineString)
+	}
 	if v.Polyline != nil {
 		s.WriteString(schemas.RoadSnapSnappedGeometry_Polyline, *v.Polyline)
 	}
@@ -1928,8 +1968,12 @@ func (v *RoadSnapSnappedTracePoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Confidence != nil {
 		s.WriteFloat64(schemas.RoadSnapSnappedTracePoint_Confidence, *v.Confidence)
 	}
-	serializePosition(s, schemas.RoadSnapSnappedTracePoint_OriginalPosition, v.OriginalPosition)
-	serializePosition(s, schemas.RoadSnapSnappedTracePoint_SnappedPosition, v.SnappedPosition)
+	if v.OriginalPosition != nil {
+		serializePosition(s, schemas.RoadSnapSnappedTracePoint_OriginalPosition, v.OriginalPosition)
+	}
+	if v.SnappedPosition != nil {
+		serializePosition(s, schemas.RoadSnapSnappedTracePoint_SnappedPosition, v.SnappedPosition)
+	}
 }
 func (v *RoadSnapSnappedTracePoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoadSnapSnappedTracePoint, func(s *smithy.Schema) error {
@@ -1978,7 +2022,9 @@ func (v *RoadSnapTracePoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Heading != 0 {
 		s.WriteFloat64(schemas.RoadSnapTracePoint_Heading, v.Heading)
 	}
-	serializePosition(s, schemas.RoadSnapTracePoint_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RoadSnapTracePoint_Position, v.Position)
+	}
 	if v.Speed != 0 {
 		s.WriteFloat64(schemas.RoadSnapTracePoint_Speed, v.Speed)
 	}
@@ -2140,7 +2186,9 @@ func (v *RoadSnapTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GrossWeight != 0 {
 		s.WriteInt64(schemas.RoadSnapTruckOptions_GrossWeight, v.GrossWeight)
 	}
-	serializeRoadSnapHazardousCargoTypeList(s, schemas.RoadSnapTruckOptions_HazardousCargos, v.HazardousCargos)
+	if v.HazardousCargos != nil {
+		serializeRoadSnapHazardousCargoTypeList(s, schemas.RoadSnapTruckOptions_HazardousCargos, v.HazardousCargos)
+	}
 	if v.Height != 0 {
 		s.WriteInt64(schemas.RoadSnapTruckOptions_Height, v.Height)
 	}
@@ -2214,8 +2262,12 @@ func (v *Route) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteLegList(s, schemas.Route_Legs, v.Legs)
-	serializeRouteMajorRoadLabelList(s, schemas.Route_MajorRoadLabels, v.MajorRoadLabels)
+	if v.Legs != nil {
+		serializeRouteLegList(s, schemas.Route_Legs, v.Legs)
+	}
+	if v.MajorRoadLabels != nil {
+		serializeRouteMajorRoadLabelList(s, schemas.Route_MajorRoadLabels, v.MajorRoadLabels)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.Route_Summary)
 		v.Summary.SerializeMembers(s)
@@ -2419,7 +2471,9 @@ func (v *RouteAvoidanceArea) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteAvoidanceArea) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAvoidanceAreaGeometryList(s, schemas.RouteAvoidanceArea_Except, v.Except)
+	if v.Except != nil {
+		serializeRouteAvoidanceAreaGeometryList(s, schemas.RouteAvoidanceArea_Except, v.Except)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.RouteAvoidanceArea_Geometry)
 		v.Geometry.SerializeMembers(s)
@@ -2477,19 +2531,25 @@ func (v *RouteAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.RouteAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.RouteAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	}
 	if v.Corridor != nil {
 		s.WriteStruct(schemas.RouteAvoidanceAreaGeometry_Corridor)
 		v.Corridor.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLinearRings(s, schemas.RouteAvoidanceAreaGeometry_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.RouteAvoidanceAreaGeometry_Polygon, v.Polygon)
+	}
 	if v.PolylineCorridor != nil {
 		s.WriteStruct(schemas.RouteAvoidanceAreaGeometry_PolylineCorridor)
 		v.PolylineCorridor.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePolylineRingList(s, schemas.RouteAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
+	if v.PolylinePolygon != nil {
+		serializePolylineRingList(s, schemas.RouteAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
+	}
 }
 func (v *RouteAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteAvoidanceAreaGeometry, func(s *smithy.Schema) error {
@@ -2595,7 +2655,9 @@ func (v *RouteAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAvoidanceAreaList(s, schemas.RouteAvoidanceOptions_Areas, v.Areas)
+	if v.Areas != nil {
+		serializeRouteAvoidanceAreaList(s, schemas.RouteAvoidanceOptions_Areas, v.Areas)
+	}
 	if v.CarShuttleTrains != nil {
 		s.WriteBool(schemas.RouteAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
 	}
@@ -2617,14 +2679,18 @@ func (v *RouteAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TollTransponders != nil {
 		s.WriteBool(schemas.RouteAvoidanceOptions_TollTransponders, *v.TollTransponders)
 	}
-	serializeTruckRoadTypeList(s, schemas.RouteAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
+	if v.TruckRoadTypes != nil {
+		serializeTruckRoadTypeList(s, schemas.RouteAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
+	}
 	if v.Tunnels != nil {
 		s.WriteBool(schemas.RouteAvoidanceOptions_Tunnels, *v.Tunnels)
 	}
 	if v.UTurns != nil {
 		s.WriteBool(schemas.RouteAvoidanceOptions_UTurns, *v.UTurns)
 	}
-	serializeRouteAvoidanceZoneCategoryList(s, schemas.RouteAvoidanceOptions_ZoneCategories, v.ZoneCategories)
+	if v.ZoneCategories != nil {
+		serializeRouteAvoidanceZoneCategoryList(s, schemas.RouteAvoidanceOptions_ZoneCategories, v.ZoneCategories)
+	}
 }
 func (v *RouteAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteAvoidanceOptions, func(s *smithy.Schema) error {
@@ -2869,7 +2935,9 @@ func (v *RouteContinueHighwayStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteContinueHighwayStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteContinueHighwayStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteContinueHighwayStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteContinueHighwayStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -2924,7 +2992,9 @@ func (v *RouteContinueStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteContinueStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteContinueStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteContinueStepDetails_Intersection, v.Intersection)
+	}
 }
 func (v *RouteContinueStepDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteContinueStepDetails, func(s *smithy.Schema) error {
@@ -3034,7 +3104,9 @@ func (v *RouteDriverOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteDriverOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteDriverScheduleIntervalList(s, schemas.RouteDriverOptions_Schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeRouteDriverScheduleIntervalList(s, schemas.RouteDriverOptions_Schedule, v.Schedule)
+	}
 }
 func (v *RouteDriverOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteDriverOptions, func(s *smithy.Schema) error {
@@ -3162,7 +3234,9 @@ func (v *RouteEnterHighwayStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteEnterHighwayStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteEnterHighwayStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteEnterHighwayStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteEnterHighwayStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -3220,7 +3294,9 @@ func (v *RouteExclusionOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteExclusionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.RouteExclusionOptions_Countries, v.Countries)
+	if v.Countries != nil {
+		serializeCountryCodeList(s, schemas.RouteExclusionOptions_Countries, v.Countries)
+	}
 }
 func (v *RouteExclusionOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteExclusionOptions, func(s *smithy.Schema) error {
@@ -3262,7 +3338,9 @@ func (v *RouteExitStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteExitStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteExitStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteExitStepDetails_Intersection, v.Intersection)
+	}
 	if v.RelativeExit != nil {
 		s.WriteInt32(schemas.RouteExitStepDetails_RelativeExit, *v.RelativeExit)
 	}
@@ -3572,30 +3650,42 @@ func (v *RouteFerryLegDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteFerryLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteFerryAfterTravelStepList(s, schemas.RouteFerryLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	if v.AfterTravelSteps != nil {
+		serializeRouteFerryAfterTravelStepList(s, schemas.RouteFerryLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	}
 	if v.Arrival != nil {
 		s.WriteStruct(schemas.RouteFerryLegDetails_Arrival)
 		v.Arrival.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteFerryBeforeTravelStepList(s, schemas.RouteFerryLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
+	if v.BeforeTravelSteps != nil {
+		serializeRouteFerryBeforeTravelStepList(s, schemas.RouteFerryLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
+	}
 	if v.Departure != nil {
 		s.WriteStruct(schemas.RouteFerryLegDetails_Departure)
 		v.Departure.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteFerryNoticeList(s, schemas.RouteFerryLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RouteFerryLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
+	if v.Notices != nil {
+		serializeRouteFerryNoticeList(s, schemas.RouteFerryLegDetails_Notices, v.Notices)
+	}
+	if v.PassThroughWaypoints != nil {
+		serializeRoutePassThroughWaypointList(s, schemas.RouteFerryLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
+	}
 	if v.RouteName != nil {
 		s.WriteString(schemas.RouteFerryLegDetails_RouteName, *v.RouteName)
 	}
-	serializeRouteFerrySpanList(s, schemas.RouteFerryLegDetails_Spans, v.Spans)
+	if v.Spans != nil {
+		serializeRouteFerrySpanList(s, schemas.RouteFerryLegDetails_Spans, v.Spans)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.RouteFerryLegDetails_Summary)
 		v.Summary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteFerryTravelStepList(s, schemas.RouteFerryLegDetails_TravelSteps, v.TravelSteps)
+	if v.TravelSteps != nil {
+		serializeRouteFerryTravelStepList(s, schemas.RouteFerryLegDetails_TravelSteps, v.TravelSteps)
+	}
 }
 func (v *RouteFerryLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteFerryLegDetails, func(s *smithy.Schema) error {
@@ -3753,8 +3843,12 @@ func (v *RouteFerryPlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RouteFerryPlace_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RouteFerryPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteFerryPlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RouteFerryPlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RouteFerryPlace_Position, v.Position)
+	}
 	if v.WaypointIndex != nil {
 		s.WriteInt32(schemas.RouteFerryPlace_WaypointIndex, *v.WaypointIndex)
 	}
@@ -3827,7 +3921,9 @@ func (v *RouteFerrySpan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RouteFerrySpan_GeometryOffset, *v.GeometryOffset)
 	}
-	serializeLocalizedStringList(s, schemas.RouteFerrySpan_Names, v.Names)
+	if v.Names != nil {
+		serializeLocalizedStringList(s, schemas.RouteFerrySpan_Names, v.Names)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.RouteFerrySpan_Region, *v.Region)
 	}
@@ -4051,7 +4147,9 @@ func (v *RouteIntermodalOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteIntermodalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAccessibilityAttributeList(s, schemas.RouteIntermodalOptions_AccessibilityAttributes, v.AccessibilityAttributes)
+	if v.AccessibilityAttributes != nil {
+		serializeRouteAccessibilityAttributeList(s, schemas.RouteIntermodalOptions_AccessibilityAttributes, v.AccessibilityAttributes)
+	}
 	if v.MaxTransfers != nil {
 		s.WriteInt32(schemas.RouteIntermodalOptions_MaxTransfers, *v.MaxTransfers)
 	}
@@ -4187,9 +4285,15 @@ func (v *RouteIntermodalRentalOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteIntermodalRentalOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteRentalModeList(s, schemas.RouteIntermodalRentalOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalRentalOptions_EnabledFor, v.EnabledFor)
-	serializeRouteRentalModeList(s, schemas.RouteIntermodalRentalOptions_ExcludedModes, v.ExcludedModes)
+	if v.AllowedModes != nil {
+		serializeRouteRentalModeList(s, schemas.RouteIntermodalRentalOptions_AllowedModes, v.AllowedModes)
+	}
+	if v.EnabledFor != nil {
+		serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalRentalOptions_EnabledFor, v.EnabledFor)
+	}
+	if v.ExcludedModes != nil {
+		serializeRouteRentalModeList(s, schemas.RouteIntermodalRentalOptions_ExcludedModes, v.ExcludedModes)
+	}
 }
 func (v *RouteIntermodalRentalOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteIntermodalRentalOptions, func(s *smithy.Schema) error {
@@ -4239,9 +4343,15 @@ func (v *RouteIntermodalTaxiOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteIntermodalTaxiOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTaxiModeList(s, schemas.RouteIntermodalTaxiOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalTaxiOptions_EnabledFor, v.EnabledFor)
-	serializeRouteTaxiModeList(s, schemas.RouteIntermodalTaxiOptions_ExcludedModes, v.ExcludedModes)
+	if v.AllowedModes != nil {
+		serializeRouteTaxiModeList(s, schemas.RouteIntermodalTaxiOptions_AllowedModes, v.AllowedModes)
+	}
+	if v.EnabledFor != nil {
+		serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalTaxiOptions_EnabledFor, v.EnabledFor)
+	}
+	if v.ExcludedModes != nil {
+		serializeRouteTaxiModeList(s, schemas.RouteIntermodalTaxiOptions_ExcludedModes, v.ExcludedModes)
+	}
 }
 func (v *RouteIntermodalTaxiOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteIntermodalTaxiOptions, func(s *smithy.Schema) error {
@@ -4291,9 +4401,15 @@ func (v *RouteIntermodalTransitOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteIntermodalTransitOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTransitModeList(s, schemas.RouteIntermodalTransitOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalTransitOptions_EnabledFor, v.EnabledFor)
-	serializeRouteTransitModeList(s, schemas.RouteIntermodalTransitOptions_ExcludedModes, v.ExcludedModes)
+	if v.AllowedModes != nil {
+		serializeRouteTransitModeList(s, schemas.RouteIntermodalTransitOptions_AllowedModes, v.AllowedModes)
+	}
+	if v.EnabledFor != nil {
+		serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalTransitOptions_EnabledFor, v.EnabledFor)
+	}
+	if v.ExcludedModes != nil {
+		serializeRouteTransitModeList(s, schemas.RouteIntermodalTransitOptions_ExcludedModes, v.ExcludedModes)
+	}
 }
 func (v *RouteIntermodalTransitOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteIntermodalTransitOptions, func(s *smithy.Schema) error {
@@ -4343,9 +4459,15 @@ func (v *RouteIntermodalVehicleOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteIntermodalVehicleOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteVehicleModeList(s, schemas.RouteIntermodalVehicleOptions_AllowedModes, v.AllowedModes)
-	serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalVehicleOptions_EnabledFor, v.EnabledFor)
-	serializeRouteVehicleModeList(s, schemas.RouteIntermodalVehicleOptions_ExcludedModes, v.ExcludedModes)
+	if v.AllowedModes != nil {
+		serializeRouteVehicleModeList(s, schemas.RouteIntermodalVehicleOptions_AllowedModes, v.AllowedModes)
+	}
+	if v.EnabledFor != nil {
+		serializeRouteIntermodalEnabledLegsList(s, schemas.RouteIntermodalVehicleOptions_EnabledFor, v.EnabledFor)
+	}
+	if v.ExcludedModes != nil {
+		serializeRouteVehicleModeList(s, schemas.RouteIntermodalVehicleOptions_ExcludedModes, v.ExcludedModes)
+	}
 }
 func (v *RouteIntermodalVehicleOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteIntermodalVehicleOptions, func(s *smithy.Schema) error {
@@ -4388,7 +4510,9 @@ func (v *RouteKeepStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteKeepStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteKeepStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteKeepStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteKeepStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -4611,7 +4735,9 @@ func (v *RouteLegGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteLegGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.RouteLegGeometry_LineString, v.LineString)
+	if v.LineString != nil {
+		serializeLineString(s, schemas.RouteLegGeometry_LineString, v.LineString)
+	}
 	if v.Polyline != nil {
 		s.WriteString(schemas.RouteLegGeometry_Polyline, *v.Polyline)
 	}
@@ -4905,9 +5031,15 @@ func (v *RouteMatrixAvoidanceAreaGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteMatrixAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.RouteMatrixAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
-	serializeLinearRings(s, schemas.RouteMatrixAvoidanceAreaGeometry_Polygon, v.Polygon)
-	serializePolylineRingList(s, schemas.RouteMatrixAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.RouteMatrixAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	}
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.RouteMatrixAvoidanceAreaGeometry_Polygon, v.Polygon)
+	}
+	if v.PolylinePolygon != nil {
+		serializePolylineRingList(s, schemas.RouteMatrixAvoidanceAreaGeometry_PolylinePolygon, v.PolylinePolygon)
+	}
 }
 func (v *RouteMatrixAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteMatrixAvoidanceAreaGeometry, func(s *smithy.Schema) error {
@@ -4976,7 +5108,9 @@ func (v *RouteMatrixAvoidanceOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteMatrixAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteMatrixAvoidanceAreaList(s, schemas.RouteMatrixAvoidanceOptions_Areas, v.Areas)
+	if v.Areas != nil {
+		serializeRouteMatrixAvoidanceAreaList(s, schemas.RouteMatrixAvoidanceOptions_Areas, v.Areas)
+	}
 	if v.CarShuttleTrains != nil {
 		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
 	}
@@ -4995,14 +5129,18 @@ func (v *RouteMatrixAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TollTransponders != nil {
 		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_TollTransponders, *v.TollTransponders)
 	}
-	serializeTruckRoadTypeList(s, schemas.RouteMatrixAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
+	if v.TruckRoadTypes != nil {
+		serializeTruckRoadTypeList(s, schemas.RouteMatrixAvoidanceOptions_TruckRoadTypes, v.TruckRoadTypes)
+	}
 	if v.Tunnels != nil {
 		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_Tunnels, *v.Tunnels)
 	}
 	if v.UTurns != nil {
 		s.WriteBool(schemas.RouteMatrixAvoidanceOptions_UTurns, *v.UTurns)
 	}
-	serializeRouteMatrixAvoidanceZoneCategoryList(s, schemas.RouteMatrixAvoidanceOptions_ZoneCategories, v.ZoneCategories)
+	if v.ZoneCategories != nil {
+		serializeRouteMatrixAvoidanceZoneCategoryList(s, schemas.RouteMatrixAvoidanceOptions_ZoneCategories, v.ZoneCategories)
+	}
 }
 func (v *RouteMatrixAvoidanceOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteMatrixAvoidanceOptions, func(s *smithy.Schema) error {
@@ -5179,13 +5317,17 @@ func (v *RouteMatrixBoundaryGeometry) SerializeMembers(s smithy.ShapeSerializer)
 		v.AutoCircle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBoundingBox(s, schemas.RouteMatrixBoundaryGeometry_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.RouteMatrixBoundaryGeometry_BoundingBox, v.BoundingBox)
+	}
 	if v.Circle != nil {
 		s.WriteStruct(schemas.RouteMatrixBoundaryGeometry_Circle)
 		v.Circle.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLinearRings(s, schemas.RouteMatrixBoundaryGeometry_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.RouteMatrixBoundaryGeometry_Polygon, v.Polygon)
+	}
 }
 func (v *RouteMatrixBoundaryGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteMatrixBoundaryGeometry, func(s *smithy.Schema) error {
@@ -5289,7 +5431,9 @@ func (v *RouteMatrixDestination) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePosition(s, schemas.RouteMatrixDestination_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RouteMatrixDestination_Position, v.Position)
+	}
 }
 func (v *RouteMatrixDestination) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteMatrixDestination, func(s *smithy.Schema) error {
@@ -5443,7 +5587,9 @@ func (v *RouteMatrixExclusionOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteMatrixExclusionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.RouteMatrixExclusionOptions_Countries, v.Countries)
+	if v.Countries != nil {
+		serializeCountryCodeList(s, schemas.RouteMatrixExclusionOptions_Countries, v.Countries)
+	}
 }
 func (v *RouteMatrixExclusionOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteMatrixExclusionOptions, func(s *smithy.Schema) error {
@@ -5554,7 +5700,9 @@ func (v *RouteMatrixOrigin) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePosition(s, schemas.RouteMatrixOrigin_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RouteMatrixOrigin_Position, v.Position)
+	}
 }
 func (v *RouteMatrixOrigin) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteMatrixOrigin, func(s *smithy.Schema) error {
@@ -5710,7 +5858,9 @@ func (v *RouteMatrixSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteMatrixSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.RouteMatrixSideOfStreetOptions_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RouteMatrixSideOfStreetOptions_Position, v.Position)
+	}
 	if v.UseWith != "" {
 		s.WriteString(schemas.RouteMatrixSideOfStreetOptions_UseWith, string(v.UseWith))
 	}
@@ -5989,7 +6139,9 @@ func (v *RouteMatrixTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GrossWeight != 0 {
 		s.WriteInt64(schemas.RouteMatrixTruckOptions_GrossWeight, v.GrossWeight)
 	}
-	serializeRouteMatrixHazardousCargoTypeList(s, schemas.RouteMatrixTruckOptions_HazardousCargos, v.HazardousCargos)
+	if v.HazardousCargos != nil {
+		serializeRouteMatrixHazardousCargoTypeList(s, schemas.RouteMatrixTruckOptions_HazardousCargos, v.HazardousCargos)
+	}
 	if v.Height != 0 {
 		s.WriteInt64(schemas.RouteMatrixTruckOptions_Height, v.Height)
 	}
@@ -6309,8 +6461,12 @@ func (v *RoutePassThroughPlace) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutePassThroughPlace) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition23(s, schemas.RoutePassThroughPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RoutePassThroughPlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RoutePassThroughPlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RoutePassThroughPlace_Position, v.Position)
+	}
 	if v.WaypointIndex != nil {
 		s.WriteInt32(schemas.RoutePassThroughPlace_WaypointIndex, *v.WaypointIndex)
 	}
@@ -6599,7 +6755,9 @@ func (v *RoutePedestrianLegDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutePedestrianLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRoutePedestrianAfterTravelStepList(s, schemas.RoutePedestrianLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	if v.AfterTravelSteps != nil {
+		serializeRoutePedestrianAfterTravelStepList(s, schemas.RoutePedestrianLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	}
 	if v.Arrival != nil {
 		s.WriteStruct(schemas.RoutePedestrianLegDetails_Arrival)
 		v.Arrival.SerializeMembers(s)
@@ -6610,15 +6768,23 @@ func (v *RoutePedestrianLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Departure.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRoutePedestrianNoticeList(s, schemas.RoutePedestrianLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RoutePedestrianLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	serializeRoutePedestrianSpanList(s, schemas.RoutePedestrianLegDetails_Spans, v.Spans)
+	if v.Notices != nil {
+		serializeRoutePedestrianNoticeList(s, schemas.RoutePedestrianLegDetails_Notices, v.Notices)
+	}
+	if v.PassThroughWaypoints != nil {
+		serializeRoutePassThroughWaypointList(s, schemas.RoutePedestrianLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
+	}
+	if v.Spans != nil {
+		serializeRoutePedestrianSpanList(s, schemas.RoutePedestrianLegDetails_Spans, v.Spans)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.RoutePedestrianLegDetails_Summary)
 		v.Summary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRoutePedestrianTravelStepList(s, schemas.RoutePedestrianLegDetails_TravelSteps, v.TravelSteps)
+	if v.TravelSteps != nil {
+		serializeRoutePedestrianTravelStepList(s, schemas.RoutePedestrianLegDetails_TravelSteps, v.TravelSteps)
+	}
 }
 func (v *RoutePedestrianLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoutePedestrianLegDetails, func(s *smithy.Schema) error {
@@ -6823,8 +6989,12 @@ func (v *RoutePedestrianPlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RoutePedestrianPlace_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RoutePedestrianPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RoutePedestrianPlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RoutePedestrianPlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RoutePedestrianPlace_Position, v.Position)
+	}
 	if v.SideOfStreet != "" {
 		s.WriteString(schemas.RoutePedestrianPlace_SideOfStreet, string(v.SideOfStreet))
 	}
@@ -6992,14 +7162,24 @@ func (v *RoutePedestrianSpan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RoutePedestrianSpan_GeometryOffset, *v.GeometryOffset)
 	}
-	serializeIndexList(s, schemas.RoutePedestrianSpan_Incidents, v.Incidents)
-	serializeLocalizedStringList(s, schemas.RoutePedestrianSpan_Names, v.Names)
-	serializeRouteSpanPedestrianAccessAttributeList(s, schemas.RoutePedestrianSpan_PedestrianAccess, v.PedestrianAccess)
+	if v.Incidents != nil {
+		serializeIndexList(s, schemas.RoutePedestrianSpan_Incidents, v.Incidents)
+	}
+	if v.Names != nil {
+		serializeLocalizedStringList(s, schemas.RoutePedestrianSpan_Names, v.Names)
+	}
+	if v.PedestrianAccess != nil {
+		serializeRouteSpanPedestrianAccessAttributeList(s, schemas.RoutePedestrianSpan_PedestrianAccess, v.PedestrianAccess)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.RoutePedestrianSpan_Region, *v.Region)
 	}
-	serializeRouteSpanRoadAttributeList(s, schemas.RoutePedestrianSpan_RoadAttributes, v.RoadAttributes)
-	serializeRouteNumberList(s, schemas.RoutePedestrianSpan_RouteNumbers, v.RouteNumbers)
+	if v.RoadAttributes != nil {
+		serializeRouteSpanRoadAttributeList(s, schemas.RoutePedestrianSpan_RoadAttributes, v.RoadAttributes)
+	}
+	if v.RouteNumbers != nil {
+		serializeRouteNumberList(s, schemas.RoutePedestrianSpan_RouteNumbers, v.RouteNumbers)
+	}
 	if v.SpeedLimit != nil {
 		s.WriteStruct(schemas.RoutePedestrianSpan_SpeedLimit)
 		v.SpeedLimit.SerializeMembers(s)
@@ -7213,7 +7393,9 @@ func (v *RoutePedestrianTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteInt64(schemas.RoutePedestrianTravelStep_Distance, v.Distance)
 	}
 	s.WriteInt64(schemas.RoutePedestrianTravelStep_Duration, v.Duration)
-	serializeLocalizedStringList(s, schemas.RoutePedestrianTravelStep_ExitNumber, v.ExitNumber)
+	if v.ExitNumber != nil {
+		serializeLocalizedStringList(s, schemas.RoutePedestrianTravelStep_ExitNumber, v.ExitNumber)
+	}
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RoutePedestrianTravelStep_GeometryOffset, *v.GeometryOffset)
 	}
@@ -7340,7 +7522,9 @@ func (v *RouteRampStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteRampStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRampStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteRampStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteRampStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -7687,7 +7871,9 @@ func (v *RouteRentalLegDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteRentalLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteRentalAfterTravelStepList(s, schemas.RouteRentalLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	if v.AfterTravelSteps != nil {
+		serializeRouteRentalAfterTravelStepList(s, schemas.RouteRentalLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	}
 	if v.Agency != nil {
 		s.WriteStruct(schemas.RouteRentalLegDetails_Agency)
 		v.Agency.SerializeMembers(s)
@@ -7698,9 +7884,15 @@ func (v *RouteRentalLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Arrival.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteAttributionList(s, schemas.RouteRentalLegDetails_Attributions, v.Attributions)
-	serializeRouteRentalBeforeTravelStepList(s, schemas.RouteRentalLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	serializeRouteWebLinkList(s, schemas.RouteRentalLegDetails_BookingWebLinks, v.BookingWebLinks)
+	if v.Attributions != nil {
+		serializeRouteAttributionList(s, schemas.RouteRentalLegDetails_Attributions, v.Attributions)
+	}
+	if v.BeforeTravelSteps != nil {
+		serializeRouteRentalBeforeTravelStepList(s, schemas.RouteRentalLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
+	}
+	if v.BookingWebLinks != nil {
+		serializeRouteWebLinkList(s, schemas.RouteRentalLegDetails_BookingWebLinks, v.BookingWebLinks)
+	}
 	if v.Departure != nil {
 		s.WriteStruct(schemas.RouteRentalLegDetails_Departure)
 		v.Departure.SerializeMembers(s)
@@ -7716,7 +7908,9 @@ func (v *RouteRentalLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Transport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteRentalTravelStepList(s, schemas.RouteRentalLegDetails_TravelSteps, v.TravelSteps)
+	if v.TravelSteps != nil {
+		serializeRouteRentalTravelStepList(s, schemas.RouteRentalLegDetails_TravelSteps, v.TravelSteps)
+	}
 }
 func (v *RouteRentalLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteRentalLegDetails, func(s *smithy.Schema) error {
@@ -7843,8 +8037,12 @@ func (v *RouteRentalPlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RouteRentalPlace_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RouteRentalPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteRentalPlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RouteRentalPlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RouteRentalPlace_Position, v.Position)
+	}
 	if v.StationDetails != nil {
 		s.WriteStruct(schemas.RouteRentalPlace_StationDetails)
 		v.StationDetails.SerializeMembers(s)
@@ -8341,9 +8539,15 @@ func (v *RouteRoad) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteRoad) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoad_RoadName, v.RoadName)
-	serializeRouteNumberList(s, schemas.RouteRoad_RouteNumber, v.RouteNumber)
-	serializeLocalizedStringList(s, schemas.RouteRoad_Towards, v.Towards)
+	if v.RoadName != nil {
+		serializeLocalizedStringList(s, schemas.RouteRoad_RoadName, v.RoadName)
+	}
+	if v.RouteNumber != nil {
+		serializeRouteNumberList(s, schemas.RouteRoad_RouteNumber, v.RouteNumber)
+	}
+	if v.Towards != nil {
+		serializeLocalizedStringList(s, schemas.RouteRoad_Towards, v.Towards)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.RouteRoad_Type, string(v.Type))
 	}
@@ -8396,7 +8600,9 @@ func (v *RouteRoundaboutEnterStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteRoundaboutEnterStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoundaboutEnterStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteRoundaboutEnterStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteRoundaboutEnterStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -8460,7 +8666,9 @@ func (v *RouteRoundaboutExitStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteRoundaboutExitStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoundaboutExitStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteRoundaboutExitStepDetails_Intersection, v.Intersection)
+	}
 	if v.RelativeExit != nil {
 		s.WriteInt32(schemas.RouteRoundaboutExitStepDetails_RelativeExit, *v.RelativeExit)
 	}
@@ -8520,7 +8728,9 @@ func (v *RouteRoundaboutPassStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteRoundaboutPassStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteRoundaboutPassStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteRoundaboutPassStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteRoundaboutPassStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -8661,7 +8871,9 @@ func (v *RouteSideOfStreetOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.RouteSideOfStreetOptions_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RouteSideOfStreetOptions_Position, v.Position)
+	}
 	if v.UseWith != "" {
 		s.WriteString(schemas.RouteSideOfStreetOptions_UseWith, string(v.UseWith))
 	}
@@ -8702,7 +8914,9 @@ func (v *RouteSignpost) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteSignpost) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteSignpostLabelList(s, schemas.RouteSignpost_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeRouteSignpostLabelList(s, schemas.RouteSignpost_Labels, v.Labels)
+	}
 }
 func (v *RouteSignpost) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteSignpost, func(s *smithy.Schema) error {
@@ -9274,7 +9488,9 @@ func (v *RouteTaxiLegDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteTaxiLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTaxiAfterTravelStepList(s, schemas.RouteTaxiLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	if v.AfterTravelSteps != nil {
+		serializeRouteTaxiAfterTravelStepList(s, schemas.RouteTaxiLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	}
 	if v.Agency != nil {
 		s.WriteStruct(schemas.RouteTaxiLegDetails_Agency)
 		v.Agency.SerializeMembers(s)
@@ -9285,15 +9501,23 @@ func (v *RouteTaxiLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Arrival.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteAttributionList(s, schemas.RouteTaxiLegDetails_Attributions, v.Attributions)
-	serializeRouteTaxiBeforeTravelStepList(s, schemas.RouteTaxiLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	serializeRouteWebLinkList(s, schemas.RouteTaxiLegDetails_BookingWebLinks, v.BookingWebLinks)
+	if v.Attributions != nil {
+		serializeRouteAttributionList(s, schemas.RouteTaxiLegDetails_Attributions, v.Attributions)
+	}
+	if v.BeforeTravelSteps != nil {
+		serializeRouteTaxiBeforeTravelStepList(s, schemas.RouteTaxiLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
+	}
+	if v.BookingWebLinks != nil {
+		serializeRouteWebLinkList(s, schemas.RouteTaxiLegDetails_BookingWebLinks, v.BookingWebLinks)
+	}
 	if v.Departure != nil {
 		s.WriteStruct(schemas.RouteTaxiLegDetails_Departure)
 		v.Departure.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTaxiNoticeList(s, schemas.RouteTaxiLegDetails_Notices, v.Notices)
+	if v.Notices != nil {
+		serializeRouteTaxiNoticeList(s, schemas.RouteTaxiLegDetails_Notices, v.Notices)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.RouteTaxiLegDetails_Summary)
 		v.Summary.SerializeMembers(s)
@@ -9304,7 +9528,9 @@ func (v *RouteTaxiLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Transport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTaxiTravelStepList(s, schemas.RouteTaxiLegDetails_TravelSteps, v.TravelSteps)
+	if v.TravelSteps != nil {
+		serializeRouteTaxiTravelStepList(s, schemas.RouteTaxiLegDetails_TravelSteps, v.TravelSteps)
+	}
 }
 func (v *RouteTaxiLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteTaxiLegDetails, func(s *smithy.Schema) error {
@@ -9484,8 +9710,12 @@ func (v *RouteTaxiPlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RouteTaxiPlace_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RouteTaxiPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteTaxiPlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RouteTaxiPlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RouteTaxiPlace_Position, v.Position)
+	}
 	if v.StationDetails != nil {
 		s.WriteStruct(schemas.RouteTaxiPlace_StationDetails)
 		v.StationDetails.SerializeMembers(s)
@@ -9935,9 +10165,15 @@ func (v *RouteToll) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Country != nil {
 		s.WriteString(schemas.RouteToll_Country, *v.Country)
 	}
-	serializeRouteTollPaymentSiteList(s, schemas.RouteToll_PaymentSites, v.PaymentSites)
-	serializeRouteTollRateList(s, schemas.RouteToll_Rates, v.Rates)
-	serializeIndexList(s, schemas.RouteToll_Systems, v.Systems)
+	if v.PaymentSites != nil {
+		serializeRouteTollPaymentSiteList(s, schemas.RouteToll_PaymentSites, v.PaymentSites)
+	}
+	if v.Rates != nil {
+		serializeRouteTollRateList(s, schemas.RouteToll_Rates, v.Rates)
+	}
+	if v.Systems != nil {
+		serializeIndexList(s, schemas.RouteToll_Systems, v.Systems)
+	}
 }
 func (v *RouteToll) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteToll, func(s *smithy.Schema) error {
@@ -10174,7 +10410,9 @@ func (v *RouteTollPaymentSite) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RouteTollPaymentSite_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RouteTollPaymentSite_Position, v.Position)
+	if v.Position != nil {
+		serializePosition23(s, schemas.RouteTollPaymentSite_Position, v.Position)
+	}
 }
 func (v *RouteTollPaymentSite) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteTollPaymentSite, func(s *smithy.Schema) error {
@@ -10472,8 +10710,12 @@ func (v *RouteTollRate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Pass.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTollPaymentMethodList(s, schemas.RouteTollRate_PaymentMethods, v.PaymentMethods)
-	serializeRouteTransponderList(s, schemas.RouteTollRate_Transponders, v.Transponders)
+	if v.PaymentMethods != nil {
+		serializeRouteTollPaymentMethodList(s, schemas.RouteTollRate_PaymentMethods, v.PaymentMethods)
+	}
+	if v.Transponders != nil {
+		serializeRouteTransponderList(s, schemas.RouteTollRate_Transponders, v.Transponders)
+	}
 }
 func (v *RouteTollRate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteTollRate, func(s *smithy.Schema) error {
@@ -11092,7 +11334,9 @@ func (v *RouteTransitIntermediateStop) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteTransitIntermediateStop) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTransitIntermediateStopAttributeList(s, schemas.RouteTransitIntermediateStop_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeRouteTransitIntermediateStopAttributeList(s, schemas.RouteTransitIntermediateStop_Attributes, v.Attributes)
+	}
 	if v.Departure != nil {
 		s.WriteStruct(schemas.RouteTransitIntermediateStop_Departure)
 		v.Departure.SerializeMembers(s)
@@ -11225,7 +11469,9 @@ func (v *RouteTransitLegDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteTransitLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteTransitAfterTravelStepList(s, schemas.RouteTransitLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	if v.AfterTravelSteps != nil {
+		serializeRouteTransitAfterTravelStepList(s, schemas.RouteTransitLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	}
 	if v.Agency != nil {
 		s.WriteStruct(schemas.RouteTransitLegDetails_Agency)
 		v.Agency.SerializeMembers(s)
@@ -11236,20 +11482,38 @@ func (v *RouteTransitLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Arrival.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteAttributionList(s, schemas.RouteTransitLegDetails_Attributions, v.Attributions)
-	serializeRouteTransitBeforeTravelStepList(s, schemas.RouteTransitLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
-	serializeRouteWebLinkList(s, schemas.RouteTransitLegDetails_BookingWebLinks, v.BookingWebLinks)
+	if v.Attributions != nil {
+		serializeRouteAttributionList(s, schemas.RouteTransitLegDetails_Attributions, v.Attributions)
+	}
+	if v.BeforeTravelSteps != nil {
+		serializeRouteTransitBeforeTravelStepList(s, schemas.RouteTransitLegDetails_BeforeTravelSteps, v.BeforeTravelSteps)
+	}
+	if v.BookingWebLinks != nil {
+		serializeRouteWebLinkList(s, schemas.RouteTransitLegDetails_BookingWebLinks, v.BookingWebLinks)
+	}
 	if v.Departure != nil {
 		s.WriteStruct(schemas.RouteTransitLegDetails_Departure)
 		v.Departure.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTransitIncidentList(s, schemas.RouteTransitLegDetails_Incidents, v.Incidents)
-	serializeRouteTransitIntermediateStopList(s, schemas.RouteTransitLegDetails_IntermediateStops, v.IntermediateStops)
-	serializeRouteTransitNextDepartureList(s, schemas.RouteTransitLegDetails_NextDepartures, v.NextDepartures)
-	serializeRouteTransitNoticeList(s, schemas.RouteTransitLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RouteTransitLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	serializeRouteTransitSpanList(s, schemas.RouteTransitLegDetails_Spans, v.Spans)
+	if v.Incidents != nil {
+		serializeRouteTransitIncidentList(s, schemas.RouteTransitLegDetails_Incidents, v.Incidents)
+	}
+	if v.IntermediateStops != nil {
+		serializeRouteTransitIntermediateStopList(s, schemas.RouteTransitLegDetails_IntermediateStops, v.IntermediateStops)
+	}
+	if v.NextDepartures != nil {
+		serializeRouteTransitNextDepartureList(s, schemas.RouteTransitLegDetails_NextDepartures, v.NextDepartures)
+	}
+	if v.Notices != nil {
+		serializeRouteTransitNoticeList(s, schemas.RouteTransitLegDetails_Notices, v.Notices)
+	}
+	if v.PassThroughWaypoints != nil {
+		serializeRoutePassThroughWaypointList(s, schemas.RouteTransitLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
+	}
+	if v.Spans != nil {
+		serializeRouteTransitSpanList(s, schemas.RouteTransitLegDetails_Spans, v.Spans)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.RouteTransitLegDetails_Summary)
 		v.Summary.SerializeMembers(s)
@@ -11260,7 +11524,9 @@ func (v *RouteTransitLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Transport.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTransitTravelStepList(s, schemas.RouteTransitLegDetails_TravelSteps, v.TravelSteps)
+	if v.TravelSteps != nil {
+		serializeRouteTransitTravelStepList(s, schemas.RouteTransitLegDetails_TravelSteps, v.TravelSteps)
+	}
 }
 func (v *RouteTransitLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteTransitLegDetails, func(s *smithy.Schema) error {
@@ -11469,9 +11735,15 @@ func (v *RouteTransitOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteTransitOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteAccessibilityAttributeList(s, schemas.RouteTransitOptions_AccessibilityAttributes, v.AccessibilityAttributes)
-	serializeRouteTransitModeList(s, schemas.RouteTransitOptions_AllowedModes, v.AllowedModes)
-	serializeRouteTransitModeList(s, schemas.RouteTransitOptions_ExcludedModes, v.ExcludedModes)
+	if v.AccessibilityAttributes != nil {
+		serializeRouteAccessibilityAttributeList(s, schemas.RouteTransitOptions_AccessibilityAttributes, v.AccessibilityAttributes)
+	}
+	if v.AllowedModes != nil {
+		serializeRouteTransitModeList(s, schemas.RouteTransitOptions_AllowedModes, v.AllowedModes)
+	}
+	if v.ExcludedModes != nil {
+		serializeRouteTransitModeList(s, schemas.RouteTransitOptions_ExcludedModes, v.ExcludedModes)
+	}
 	if v.MaxTransfers != nil {
 		s.WriteInt32(schemas.RouteTransitOptions_MaxTransfers, *v.MaxTransfers)
 	}
@@ -11629,8 +11901,12 @@ func (v *RouteTransitPlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RouteTransitPlace_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RouteTransitPlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteTransitPlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RouteTransitPlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RouteTransitPlace_Position, v.Position)
+	}
 	if v.StationDetails != nil {
 		s.WriteStruct(schemas.RouteTransitPlace_StationDetails)
 		v.StationDetails.SerializeMembers(s)
@@ -11721,7 +11997,9 @@ func (v *RouteTransitSpan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RouteTransitSpan_GeometryOffset, *v.GeometryOffset)
 	}
-	serializeLocalizedStringList(s, schemas.RouteTransitSpan_Names, v.Names)
+	if v.Names != nil {
+		serializeLocalizedStringList(s, schemas.RouteTransitSpan_Names, v.Names)
+	}
 	if v.Region != nil {
 		s.WriteString(schemas.RouteTransitSpan_Region, *v.Region)
 	}
@@ -12278,7 +12556,9 @@ func (v *RouteTruckOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GrossWeight != 0 {
 		s.WriteInt64(schemas.RouteTruckOptions_GrossWeight, v.GrossWeight)
 	}
-	serializeRouteHazardousCargoTypeList(s, schemas.RouteTruckOptions_HazardousCargos, v.HazardousCargos)
+	if v.HazardousCargos != nil {
+		serializeRouteHazardousCargoTypeList(s, schemas.RouteTruckOptions_HazardousCargos, v.HazardousCargos)
+	}
 	if v.Height != 0 {
 		s.WriteInt64(schemas.RouteTruckOptions_Height, v.Height)
 	}
@@ -12422,7 +12702,9 @@ func (v *RouteTurnStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteTurnStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteTurnStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteTurnStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteTurnStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -12486,7 +12768,9 @@ func (v *RouteUTurnStepDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteUTurnStepDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLocalizedStringList(s, schemas.RouteUTurnStepDetails_Intersection, v.Intersection)
+	if v.Intersection != nil {
+		serializeLocalizedStringList(s, schemas.RouteUTurnStepDetails_Intersection, v.Intersection)
+	}
 	if v.SteeringDirection != "" {
 		s.WriteString(schemas.RouteUTurnStepDetails_SteeringDirection, string(v.SteeringDirection))
 	}
@@ -12865,7 +13149,9 @@ func (v *RouteVehicleLegDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteVehicleLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteVehicleAfterTravelStepList(s, schemas.RouteVehicleLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	if v.AfterTravelSteps != nil {
+		serializeRouteVehicleAfterTravelStepList(s, schemas.RouteVehicleLegDetails_AfterTravelSteps, v.AfterTravelSteps)
+	}
 	if v.Arrival != nil {
 		s.WriteStruct(schemas.RouteVehicleLegDetails_Arrival)
 		v.Arrival.SerializeMembers(s)
@@ -12876,20 +13162,38 @@ func (v *RouteVehicleLegDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Departure.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteVehicleIncidentList(s, schemas.RouteVehicleLegDetails_Incidents, v.Incidents)
-	serializeRouteVehicleNoticeList(s, schemas.RouteVehicleLegDetails_Notices, v.Notices)
-	serializeRoutePassThroughWaypointList(s, schemas.RouteVehicleLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
-	serializeRouteVehicleSpanList(s, schemas.RouteVehicleLegDetails_Spans, v.Spans)
+	if v.Incidents != nil {
+		serializeRouteVehicleIncidentList(s, schemas.RouteVehicleLegDetails_Incidents, v.Incidents)
+	}
+	if v.Notices != nil {
+		serializeRouteVehicleNoticeList(s, schemas.RouteVehicleLegDetails_Notices, v.Notices)
+	}
+	if v.PassThroughWaypoints != nil {
+		serializeRoutePassThroughWaypointList(s, schemas.RouteVehicleLegDetails_PassThroughWaypoints, v.PassThroughWaypoints)
+	}
+	if v.Spans != nil {
+		serializeRouteVehicleSpanList(s, schemas.RouteVehicleLegDetails_Spans, v.Spans)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.RouteVehicleLegDetails_Summary)
 		v.Summary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteTollSystemList(s, schemas.RouteVehicleLegDetails_TollSystems, v.TollSystems)
-	serializeRouteTollList(s, schemas.RouteVehicleLegDetails_Tolls, v.Tolls)
-	serializeRouteVehicleTravelStepList(s, schemas.RouteVehicleLegDetails_TravelSteps, v.TravelSteps)
-	serializeTruckRoadTypeList(s, schemas.RouteVehicleLegDetails_TruckRoadTypes, v.TruckRoadTypes)
-	serializeRouteZoneList(s, schemas.RouteVehicleLegDetails_Zones, v.Zones)
+	if v.TollSystems != nil {
+		serializeRouteTollSystemList(s, schemas.RouteVehicleLegDetails_TollSystems, v.TollSystems)
+	}
+	if v.Tolls != nil {
+		serializeRouteTollList(s, schemas.RouteVehicleLegDetails_Tolls, v.Tolls)
+	}
+	if v.TravelSteps != nil {
+		serializeRouteVehicleTravelStepList(s, schemas.RouteVehicleLegDetails_TravelSteps, v.TravelSteps)
+	}
+	if v.TruckRoadTypes != nil {
+		serializeTruckRoadTypeList(s, schemas.RouteVehicleLegDetails_TruckRoadTypes, v.TruckRoadTypes)
+	}
+	if v.Zones != nil {
+		serializeRouteZoneList(s, schemas.RouteVehicleLegDetails_Zones, v.Zones)
+	}
 }
 func (v *RouteVehicleLegDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteVehicleLegDetails, func(s *smithy.Schema) error {
@@ -12991,7 +13295,9 @@ func (v *RouteVehicleNotice) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != "" {
 		s.WriteString(schemas.RouteVehicleNotice_Code, string(v.Code))
 	}
-	serializeRouteVehicleNoticeDetailList(s, schemas.RouteVehicleNotice_Details, v.Details)
+	if v.Details != nil {
+		serializeRouteVehicleNoticeDetailList(s, schemas.RouteVehicleNotice_Details, v.Details)
+	}
 	if v.Impact != "" {
 		s.WriteString(schemas.RouteVehicleNotice_Impact, string(v.Impact))
 	}
@@ -13172,8 +13478,12 @@ func (v *RouteVehiclePlace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RouteVehiclePlace_Name, *v.Name)
 	}
-	serializePosition23(s, schemas.RouteVehiclePlace_OriginalPosition, v.OriginalPosition)
-	serializePosition23(s, schemas.RouteVehiclePlace_Position, v.Position)
+	if v.OriginalPosition != nil {
+		serializePosition23(s, schemas.RouteVehiclePlace_OriginalPosition, v.OriginalPosition)
+	}
+	if v.Position != nil {
+		serializePosition23(s, schemas.RouteVehiclePlace_Position, v.Position)
+	}
 	if v.SideOfStreet != "" {
 		s.WriteString(schemas.RouteVehiclePlace_SideOfStreet, string(v.SideOfStreet))
 	}
@@ -13351,7 +13661,9 @@ func (v *RouteVehicleSpan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BestCaseDuration != 0 {
 		s.WriteInt64(schemas.RouteVehicleSpan_BestCaseDuration, v.BestCaseDuration)
 	}
-	serializeRouteSpanCarAccessAttributeList(s, schemas.RouteVehicleSpan_CarAccess, v.CarAccess)
+	if v.CarAccess != nil {
+		serializeRouteSpanCarAccessAttributeList(s, schemas.RouteVehicleSpan_CarAccess, v.CarAccess)
+	}
 	if v.Country != nil {
 		s.WriteString(schemas.RouteVehicleSpan_Country, *v.Country)
 	}
@@ -13375,30 +13687,50 @@ func (v *RouteVehicleSpan) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RouteVehicleSpan_GeometryOffset, *v.GeometryOffset)
 	}
-	serializeIndexList(s, schemas.RouteVehicleSpan_Incidents, v.Incidents)
-	serializeLocalizedStringList(s, schemas.RouteVehicleSpan_Names, v.Names)
-	serializeIndexList(s, schemas.RouteVehicleSpan_Notices, v.Notices)
+	if v.Incidents != nil {
+		serializeIndexList(s, schemas.RouteVehicleSpan_Incidents, v.Incidents)
+	}
+	if v.Names != nil {
+		serializeLocalizedStringList(s, schemas.RouteVehicleSpan_Names, v.Names)
+	}
+	if v.Notices != nil {
+		serializeIndexList(s, schemas.RouteVehicleSpan_Notices, v.Notices)
+	}
 	if v.RailwayCrossing != "" {
 		s.WriteString(schemas.RouteVehicleSpan_RailwayCrossing, string(v.RailwayCrossing))
 	}
 	if v.Region != nil {
 		s.WriteString(schemas.RouteVehicleSpan_Region, *v.Region)
 	}
-	serializeRouteSpanRoadAttributeList(s, schemas.RouteVehicleSpan_RoadAttributes, v.RoadAttributes)
-	serializeRouteNumberList(s, schemas.RouteVehicleSpan_RouteNumbers, v.RouteNumbers)
-	serializeRouteSpanScooterAccessAttributeList(s, schemas.RouteVehicleSpan_ScooterAccess, v.ScooterAccess)
+	if v.RoadAttributes != nil {
+		serializeRouteSpanRoadAttributeList(s, schemas.RouteVehicleSpan_RoadAttributes, v.RoadAttributes)
+	}
+	if v.RouteNumbers != nil {
+		serializeRouteNumberList(s, schemas.RouteVehicleSpan_RouteNumbers, v.RouteNumbers)
+	}
+	if v.ScooterAccess != nil {
+		serializeRouteSpanScooterAccessAttributeList(s, schemas.RouteVehicleSpan_ScooterAccess, v.ScooterAccess)
+	}
 	if v.SpeedLimit != nil {
 		s.WriteStruct(schemas.RouteVehicleSpan_SpeedLimit)
 		v.SpeedLimit.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIndexList(s, schemas.RouteVehicleSpan_TollSystems, v.TollSystems)
-	serializeRouteSpanTruckAccessAttributeList(s, schemas.RouteVehicleSpan_TruckAccess, v.TruckAccess)
-	serializeIndexList(s, schemas.RouteVehicleSpan_TruckRoadTypes, v.TruckRoadTypes)
+	if v.TollSystems != nil {
+		serializeIndexList(s, schemas.RouteVehicleSpan_TollSystems, v.TollSystems)
+	}
+	if v.TruckAccess != nil {
+		serializeRouteSpanTruckAccessAttributeList(s, schemas.RouteVehicleSpan_TruckAccess, v.TruckAccess)
+	}
+	if v.TruckRoadTypes != nil {
+		serializeIndexList(s, schemas.RouteVehicleSpan_TruckRoadTypes, v.TruckRoadTypes)
+	}
 	if v.TypicalDuration != 0 {
 		s.WriteInt64(schemas.RouteVehicleSpan_TypicalDuration, v.TypicalDuration)
 	}
-	serializeIndexList(s, schemas.RouteVehicleSpan_Zones, v.Zones)
+	if v.Zones != nil {
+		serializeIndexList(s, schemas.RouteVehicleSpan_Zones, v.Zones)
+	}
 }
 func (v *RouteVehicleSpan) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteVehicleSpan, func(s *smithy.Schema) error {
@@ -13675,7 +14007,9 @@ func (v *RouteVehicleTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EnterHighwayStepDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLocalizedStringList(s, schemas.RouteVehicleTravelStep_ExitNumber, v.ExitNumber)
+	if v.ExitNumber != nil {
+		serializeLocalizedStringList(s, schemas.RouteVehicleTravelStep_ExitNumber, v.ExitNumber)
+	}
 	if v.ExitStepDetails != nil {
 		s.WriteStruct(schemas.RouteVehicleTravelStep_ExitStepDetails)
 		v.ExitStepDetails.SerializeMembers(s)
@@ -13932,7 +14266,9 @@ func (v *RouteViolatedConstraints) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AxleCount.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRouteHazardousCargoTypeList(s, schemas.RouteViolatedConstraints_HazardousCargos, v.HazardousCargos)
+	if v.HazardousCargos != nil {
+		serializeRouteHazardousCargoTypeList(s, schemas.RouteViolatedConstraints_HazardousCargos, v.HazardousCargos)
+	}
 	if v.MaxHeight != 0 {
 		s.WriteInt64(schemas.RouteViolatedConstraints_MaxHeight, v.MaxHeight)
 	}
@@ -14134,7 +14470,9 @@ func (v *RouteWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PassThrough != nil {
 		s.WriteBool(schemas.RouteWaypoint_PassThrough, *v.PassThrough)
 	}
-	serializePosition(s, schemas.RouteWaypoint_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.RouteWaypoint_Position, v.Position)
+	}
 	if v.SideOfStreet != nil {
 		s.WriteStruct(schemas.RouteWaypoint_SideOfStreet)
 		v.SideOfStreet.SerializeMembers(s)
@@ -14524,7 +14862,9 @@ func (v *WaypointOptimizationAvoidanceAreaGeometry) Serialize(s smithy.ShapeSeri
 }
 
 func (v *WaypointOptimizationAvoidanceAreaGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBoundingBox(s, schemas.WaypointOptimizationAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	if v.BoundingBox != nil {
+		serializeBoundingBox(s, schemas.WaypointOptimizationAvoidanceAreaGeometry_BoundingBox, v.BoundingBox)
+	}
 }
 func (v *WaypointOptimizationAvoidanceAreaGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationAvoidanceAreaGeometry, func(s *smithy.Schema) error {
@@ -14577,7 +14917,9 @@ func (v *WaypointOptimizationAvoidanceOptions) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *WaypointOptimizationAvoidanceOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaypointOptimizationAvoidanceAreaList(s, schemas.WaypointOptimizationAvoidanceOptions_Areas, v.Areas)
+	if v.Areas != nil {
+		serializeWaypointOptimizationAvoidanceAreaList(s, schemas.WaypointOptimizationAvoidanceOptions_Areas, v.Areas)
+	}
 	if v.CarShuttleTrains != nil {
 		s.WriteBool(schemas.WaypointOptimizationAvoidanceOptions_CarShuttleTrains, *v.CarShuttleTrains)
 	}
@@ -14964,7 +15306,9 @@ func (v *WaypointOptimizationExclusionOptions) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *WaypointOptimizationExclusionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryCodeList(s, schemas.WaypointOptimizationExclusionOptions_Countries, v.Countries)
+	if v.Countries != nil {
+		serializeCountryCodeList(s, schemas.WaypointOptimizationExclusionOptions_Countries, v.Countries)
+	}
 }
 func (v *WaypointOptimizationExclusionOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationExclusionOptions, func(s *smithy.Schema) error {
@@ -15048,11 +15392,15 @@ func (v *WaypointOptimizationImpedingWaypoint) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *WaypointOptimizationImpedingWaypoint) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWaypointOptimizationFailedConstraintList(s, schemas.WaypointOptimizationImpedingWaypoint_FailedConstraints, v.FailedConstraints)
+	if v.FailedConstraints != nil {
+		serializeWaypointOptimizationFailedConstraintList(s, schemas.WaypointOptimizationImpedingWaypoint_FailedConstraints, v.FailedConstraints)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.WaypointOptimizationImpedingWaypoint_Id, *v.Id)
 	}
-	serializePosition(s, schemas.WaypointOptimizationImpedingWaypoint_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.WaypointOptimizationImpedingWaypoint_Position, v.Position)
+	}
 }
 func (v *WaypointOptimizationImpedingWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationImpedingWaypoint, func(s *smithy.Schema) error {
@@ -15132,7 +15480,9 @@ func (v *WaypointOptimizationOptimizedWaypoint) SerializeMembers(s smithy.ShapeS
 	if v.Id != nil {
 		s.WriteString(schemas.WaypointOptimizationOptimizedWaypoint_Id, *v.Id)
 	}
-	serializePosition(s, schemas.WaypointOptimizationOptimizedWaypoint_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.WaypointOptimizationOptimizedWaypoint_Position, v.Position)
+	}
 }
 func (v *WaypointOptimizationOptimizedWaypoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationOptimizedWaypoint, func(s *smithy.Schema) error {
@@ -15374,7 +15724,9 @@ func (v *WaypointOptimizationSideOfStreetOptions) Serialize(s smithy.ShapeSerial
 }
 
 func (v *WaypointOptimizationSideOfStreetOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.WaypointOptimizationSideOfStreetOptions_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.WaypointOptimizationSideOfStreetOptions_Position, v.Position)
+	}
 	if v.UseWith != "" {
 		s.WriteString(schemas.WaypointOptimizationSideOfStreetOptions_UseWith, string(v.UseWith))
 	}
@@ -15657,7 +16009,9 @@ func (v *WaypointOptimizationTruckOptions) SerializeMembers(s smithy.ShapeSerial
 	if v.GrossWeight != 0 {
 		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_GrossWeight, v.GrossWeight)
 	}
-	serializeWaypointOptimizationHazardousCargoTypeList(s, schemas.WaypointOptimizationTruckOptions_HazardousCargos, v.HazardousCargos)
+	if v.HazardousCargos != nil {
+		serializeWaypointOptimizationHazardousCargoTypeList(s, schemas.WaypointOptimizationTruckOptions_HazardousCargos, v.HazardousCargos)
+	}
 	if v.Height != 0 {
 		s.WriteInt64(schemas.WaypointOptimizationTruckOptions_Height, v.Height)
 	}
@@ -15765,14 +16119,18 @@ func (v *WaypointOptimizationWaypoint) SerializeMembers(s smithy.ShapeSerializer
 	if v.AppointmentTime != nil {
 		s.WriteString(schemas.WaypointOptimizationWaypoint_AppointmentTime, *v.AppointmentTime)
 	}
-	serializeBeforeWaypointsList(s, schemas.WaypointOptimizationWaypoint_Before, v.Before)
+	if v.Before != nil {
+		serializeBeforeWaypointsList(s, schemas.WaypointOptimizationWaypoint_Before, v.Before)
+	}
 	if v.Heading != 0 {
 		s.WriteFloat64(schemas.WaypointOptimizationWaypoint_Heading, v.Heading)
 	}
 	if v.Id != nil {
 		s.WriteString(schemas.WaypointOptimizationWaypoint_Id, *v.Id)
 	}
-	serializePosition(s, schemas.WaypointOptimizationWaypoint_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.WaypointOptimizationWaypoint_Position, v.Position)
+	}
 	if v.ServiceDuration != 0 {
 		s.WriteInt64(schemas.WaypointOptimizationWaypoint_ServiceDuration, v.ServiceDuration)
 	}

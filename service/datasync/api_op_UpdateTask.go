@@ -124,8 +124,12 @@ func (v *UpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudWatchLogGroupArn != nil {
 		s.WriteString(schemas.UpdateTaskRequest_CloudWatchLogGroupArn, *v.CloudWatchLogGroupArn)
 	}
-	serializeFilterList(s, schemas.UpdateTaskRequest_Excludes, v.Excludes)
-	serializeFilterList(s, schemas.UpdateTaskRequest_Includes, v.Includes)
+	if v.Excludes != nil {
+		serializeFilterList(s, schemas.UpdateTaskRequest_Excludes, v.Excludes)
+	}
+	if v.Includes != nil {
+		serializeFilterList(s, schemas.UpdateTaskRequest_Includes, v.Includes)
+	}
 	if v.ManifestConfig != nil {
 		s.WriteStruct(schemas.UpdateTaskRequest_ManifestConfig)
 		v.ManifestConfig.SerializeMembers(s)

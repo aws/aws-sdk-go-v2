@@ -83,7 +83,9 @@ func (v *ListCalculatedAttributeDefinitionsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListCalculatedAttributeDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCalculatedAttributeDefinitionsList(s, schemas.ListCalculatedAttributeDefinitionsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeCalculatedAttributeDefinitionsList(s, schemas.ListCalculatedAttributeDefinitionsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCalculatedAttributeDefinitionsResponse_NextToken, *v.NextToken)
 	}

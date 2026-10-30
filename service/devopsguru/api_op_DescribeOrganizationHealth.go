@@ -44,8 +44,12 @@ func (v *DescribeOrganizationHealthInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeOrganizationHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DescribeOrganizationHealthRequest_AccountIds, v.AccountIds)
-	serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationHealthRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DescribeOrganizationHealthRequest_AccountIds, v.AccountIds)
+	}
+	if v.OrganizationalUnitIds != nil {
+		serializeOrganizationalUnitIdList(s, schemas.DescribeOrganizationHealthRequest_OrganizationalUnitIds, v.OrganizationalUnitIds)
+	}
 }
 
 type DescribeOrganizationHealthOutput struct {

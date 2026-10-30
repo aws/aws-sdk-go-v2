@@ -168,7 +168,9 @@ func (v *ListCopyJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AggregationPeriod != nil {
 		s.WriteString(schemas.ListCopyJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
 	}
-	serializeCopyJobSummaryList(s, schemas.ListCopyJobSummariesOutput_CopyJobSummaries, v.CopyJobSummaries)
+	if v.CopyJobSummaries != nil {
+		serializeCopyJobSummaryList(s, schemas.ListCopyJobSummariesOutput_CopyJobSummaries, v.CopyJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCopyJobSummariesOutput_NextToken, *v.NextToken)
 	}

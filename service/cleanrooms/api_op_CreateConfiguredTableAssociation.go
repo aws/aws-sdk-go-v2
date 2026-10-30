@@ -88,7 +88,9 @@ func (v *CreateConfiguredTableAssociationInput) SerializeMembers(s smithy.ShapeS
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateConfiguredTableAssociationInput_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateConfiguredTableAssociationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfiguredTableAssociationInput_tags, v.Tags)
+	}
 }
 func (v *CreateConfiguredTableAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateConfiguredTableAssociationInput, func(s *smithy.Schema) error {

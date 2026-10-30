@@ -61,7 +61,9 @@ func (v *UngroupResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Group != nil {
 		s.WriteString(schemas.UngroupResourcesInput_Group, *v.Group)
 	}
-	serializeResourceArnList(s, schemas.UngroupResourcesInput_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.UngroupResourcesInput_ResourceArns, v.ResourceArns)
+	}
 }
 
 type UngroupResourcesOutput struct {
@@ -93,9 +95,15 @@ func (v *UngroupResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UngroupResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedResourceList(s, schemas.UngroupResourcesOutput_Failed, v.Failed)
-	serializePendingResourceList(s, schemas.UngroupResourcesOutput_Pending, v.Pending)
-	serializeResourceArnList(s, schemas.UngroupResourcesOutput_Succeeded, v.Succeeded)
+	if v.Failed != nil {
+		serializeFailedResourceList(s, schemas.UngroupResourcesOutput_Failed, v.Failed)
+	}
+	if v.Pending != nil {
+		serializePendingResourceList(s, schemas.UngroupResourcesOutput_Pending, v.Pending)
+	}
+	if v.Succeeded != nil {
+		serializeResourceArnList(s, schemas.UngroupResourcesOutput_Succeeded, v.Succeeded)
+	}
 }
 func (v *UngroupResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UngroupResourcesOutput, func(s *smithy.Schema) error {

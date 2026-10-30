@@ -88,7 +88,9 @@ func (v *ListInterfaceRelationshipsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInterfaceRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInterfaceRelationshipSummaries(s, schemas.ListInterfaceRelationshipsResponse_interfaceRelationshipSummaries, v.InterfaceRelationshipSummaries)
+	if v.InterfaceRelationshipSummaries != nil {
+		serializeInterfaceRelationshipSummaries(s, schemas.ListInterfaceRelationshipsResponse_interfaceRelationshipSummaries, v.InterfaceRelationshipSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInterfaceRelationshipsResponse_nextToken, *v.NextToken)
 	}

@@ -105,7 +105,9 @@ func (v *ListSecurityProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityProfilesResponse_nextToken, *v.NextToken)
 	}
-	serializeSecurityProfileIdentifiers(s, schemas.ListSecurityProfilesResponse_securityProfileIdentifiers, v.SecurityProfileIdentifiers)
+	if v.SecurityProfileIdentifiers != nil {
+		serializeSecurityProfileIdentifiers(s, schemas.ListSecurityProfilesResponse_securityProfileIdentifiers, v.SecurityProfileIdentifiers)
+	}
 }
 func (v *ListSecurityProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityProfilesResponse, func(s *smithy.Schema) error {

@@ -101,7 +101,9 @@ func (v *ListDependenciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDependencySummaryList(s, schemas.ListDependenciesResponse_dependencySummaries, v.DependencySummaries)
+	if v.DependencySummaries != nil {
+		serializeDependencySummaryList(s, schemas.ListDependenciesResponse_dependencySummaries, v.DependencySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDependenciesResponse_nextToken, *v.NextToken)
 	}

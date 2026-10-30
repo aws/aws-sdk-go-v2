@@ -49,7 +49,9 @@ func (v *GetCodeSecurityScanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCodeSecurityScanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeSecurityResource(s, schemas.GetCodeSecurityScanRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.GetCodeSecurityScanRequest_resource, v.Resource)
+	}
 	if v.ScanId != nil {
 		s.WriteString(schemas.GetCodeSecurityScanRequest_scanId, *v.ScanId)
 	}
@@ -104,7 +106,9 @@ func (v *GetCodeSecurityScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastCommitId != nil {
 		s.WriteString(schemas.GetCodeSecurityScanResponse_lastCommitId, *v.LastCommitId)
 	}
-	serializeCodeSecurityResource(s, schemas.GetCodeSecurityScanResponse_resource, v.Resource)
+	if v.Resource != nil {
+		serializeCodeSecurityResource(s, schemas.GetCodeSecurityScanResponse_resource, v.Resource)
+	}
 	if v.ScanId != nil {
 		s.WriteString(schemas.GetCodeSecurityScanResponse_scanId, *v.ScanId)
 	}

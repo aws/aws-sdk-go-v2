@@ -98,7 +98,9 @@ func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectId != nil {
 		s.WriteString(schemas.CreateDashboardRequest_projectId, *v.ProjectId)
 	}
-	serializeTagMap(s, schemas.CreateDashboardRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDashboardRequest_tags, v.Tags)
+	}
 }
 
 type CreateDashboardOutput struct {

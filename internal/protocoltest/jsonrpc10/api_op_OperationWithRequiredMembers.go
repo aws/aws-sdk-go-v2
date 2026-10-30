@@ -114,11 +114,15 @@ func (v *OperationWithRequiredMembersOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.RequiredInteger != nil {
 		s.WriteInt32(schemas.OperationWithRequiredMembersOutput_requiredInteger, *v.RequiredInteger)
 	}
-	serializeRequiredStringList(s, schemas.OperationWithRequiredMembersOutput_requiredList, v.RequiredList)
+	if v.RequiredList != nil {
+		serializeRequiredStringList(s, schemas.OperationWithRequiredMembersOutput_requiredList, v.RequiredList)
+	}
 	if v.RequiredLong != nil {
 		s.WriteInt64(schemas.OperationWithRequiredMembersOutput_requiredLong, *v.RequiredLong)
 	}
-	serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersOutput_requiredMap, v.RequiredMap)
+	if v.RequiredMap != nil {
+		serializeRequiredStringMap(s, schemas.OperationWithRequiredMembersOutput_requiredMap, v.RequiredMap)
+	}
 	if v.RequiredShort != nil {
 		s.WriteInt16(schemas.OperationWithRequiredMembersOutput_requiredShort, *v.RequiredShort)
 	}

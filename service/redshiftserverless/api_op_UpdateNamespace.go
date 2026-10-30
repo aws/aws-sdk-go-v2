@@ -143,14 +143,18 @@ func (v *UpdateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultIamRoleArn != nil {
 		s.WriteString(schemas.UpdateNamespaceRequest_defaultIamRoleArn, *v.DefaultIamRoleArn)
 	}
-	serializeIamRoleArnList(s, schemas.UpdateNamespaceRequest_iamRoles, v.IamRoles)
+	if v.IamRoles != nil {
+		serializeIamRoleArnList(s, schemas.UpdateNamespaceRequest_iamRoles, v.IamRoles)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.UpdateNamespaceRequest_kmsKeyId, *v.KmsKeyId)
 	}
 	if v.LogDestinationType != "" {
 		s.WriteString(schemas.UpdateNamespaceRequest_logDestinationType, string(v.LogDestinationType))
 	}
-	serializeLogExportList(s, schemas.UpdateNamespaceRequest_logExports, v.LogExports)
+	if v.LogExports != nil {
+		serializeLogExportList(s, schemas.UpdateNamespaceRequest_logExports, v.LogExports)
+	}
 	if v.ManageAdminPassword != nil {
 		s.WriteBool(schemas.UpdateNamespaceRequest_manageAdminPassword, *v.ManageAdminPassword)
 	}
@@ -166,7 +170,9 @@ func (v *UpdateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3TableKmsKeyId != nil {
 		s.WriteString(schemas.UpdateNamespaceRequest_s3TableKmsKeyId, *v.S3TableKmsKeyId)
 	}
-	serializeS3TableNameList(s, schemas.UpdateNamespaceRequest_s3TableNames, v.S3TableNames)
+	if v.S3TableNames != nil {
+		serializeS3TableNameList(s, schemas.UpdateNamespaceRequest_s3TableNames, v.S3TableNames)
+	}
 }
 
 type UpdateNamespaceOutput struct {

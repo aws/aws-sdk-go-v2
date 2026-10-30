@@ -64,7 +64,9 @@ func (v *CreateAccountPoolInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAccountPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountSource(s, schemas.CreateAccountPoolInput_accountSource, v.AccountSource)
+	if v.AccountSource != nil {
+		serializeAccountSource(s, schemas.CreateAccountPoolInput_accountSource, v.AccountSource)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAccountPoolInput_description, *v.Description)
 	}
@@ -133,7 +135,9 @@ func (v *CreateAccountPoolOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAccountPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountSource(s, schemas.CreateAccountPoolOutput_accountSource, v.AccountSource)
+	if v.AccountSource != nil {
+		serializeAccountSource(s, schemas.CreateAccountPoolOutput_accountSource, v.AccountSource)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateAccountPoolOutput_createdAt, *v.CreatedAt)
 	}

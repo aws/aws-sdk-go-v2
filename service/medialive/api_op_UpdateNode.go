@@ -74,7 +74,9 @@ func (v *UpdateNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != "" {
 		s.WriteString(schemas.UpdateNodeRequest_Role, string(v.Role))
 	}
-	serializeSdiSourceMappingsUpdateRequest(s, schemas.UpdateNodeRequest_SdiSourceMappings, v.SdiSourceMappings)
+	if v.SdiSourceMappings != nil {
+		serializeSdiSourceMappingsUpdateRequest(s, schemas.UpdateNodeRequest_SdiSourceMappings, v.SdiSourceMappings)
+	}
 }
 
 // Placeholder documentation for UpdateNodeResponse
@@ -134,7 +136,9 @@ func (v *UpdateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateNodeResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.UpdateNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ChannelPlacementGroups != nil {
+		serialize__listOf__string(s, schemas.UpdateNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.UpdateNodeResponse_ClusterId, *v.ClusterId)
 	}
@@ -150,11 +154,15 @@ func (v *UpdateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateNodeResponse_Name, *v.Name)
 	}
-	serialize__listOfNodeInterfaceMapping(s, schemas.UpdateNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.NodeInterfaceMappings != nil {
+		serialize__listOfNodeInterfaceMapping(s, schemas.UpdateNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.UpdateNodeResponse_Role, string(v.Role))
 	}
-	serializeSdiSourceMappings(s, schemas.UpdateNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	if v.SdiSourceMappings != nil {
+		serializeSdiSourceMappings(s, schemas.UpdateNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.UpdateNodeResponse_State, string(v.State))
 	}

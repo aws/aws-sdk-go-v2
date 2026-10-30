@@ -74,7 +74,9 @@ func (v *CreateHttpNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateHttpNamespaceRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateHttpNamespaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHttpNamespaceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateHttpNamespaceOutput struct {

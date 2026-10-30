@@ -44,7 +44,9 @@ func (v *DeleteDashboardsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteDashboardsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashboardNames(s, schemas.DeleteDashboardsInput_DashboardNames, v.DashboardNames)
+	if v.DashboardNames != nil {
+		serializeDashboardNames(s, schemas.DeleteDashboardsInput_DashboardNames, v.DashboardNames)
+	}
 }
 
 type DeleteDashboardsOutput struct {

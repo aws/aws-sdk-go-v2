@@ -154,7 +154,9 @@ func (v *DescribeInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryRegion != nil {
 		s.WriteString(schemas.DescribeInstanceResponse_PrimaryRegion, *v.PrimaryRegion)
 	}
-	serializeRegionMetadataList(s, schemas.DescribeInstanceResponse_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionMetadataList(s, schemas.DescribeInstanceResponse_Regions, v.Regions)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeInstanceResponse_Status, string(v.Status))
 	}

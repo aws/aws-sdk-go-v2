@@ -57,7 +57,9 @@ func (v *SendInvitesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SendInvitesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessorIdList(s, schemas.SendInvitesInput_accessorIds, v.AccessorIds)
+	if v.AccessorIds != nil {
+		serializeAccessorIdList(s, schemas.SendInvitesInput_accessorIds, v.AccessorIds)
+	}
 	if v.Body != nil {
 		s.WriteString(schemas.SendInvitesInput_body, *v.Body)
 	}

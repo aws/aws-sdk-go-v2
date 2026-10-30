@@ -152,7 +152,9 @@ func (v *GetSubscriptionRequestDetailsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Id != nil {
 		s.WriteString(schemas.GetSubscriptionRequestDetailsOutput_id, *v.Id)
 	}
-	serializeMetadataForms(s, schemas.GetSubscriptionRequestDetailsOutput_metadataForms, v.MetadataForms)
+	if v.MetadataForms != nil {
+		serializeMetadataForms(s, schemas.GetSubscriptionRequestDetailsOutput_metadataForms, v.MetadataForms)
+	}
 	if v.RequestReason != nil {
 		s.WriteString(schemas.GetSubscriptionRequestDetailsOutput_requestReason, *v.RequestReason)
 	}
@@ -162,8 +164,12 @@ func (v *GetSubscriptionRequestDetailsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Status != "" {
 		s.WriteString(schemas.GetSubscriptionRequestDetailsOutput_status, string(v.Status))
 	}
-	serializeSubscribedListings(s, schemas.GetSubscriptionRequestDetailsOutput_subscribedListings, v.SubscribedListings)
-	serializeSubscribedPrincipals(s, schemas.GetSubscriptionRequestDetailsOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	if v.SubscribedListings != nil {
+		serializeSubscribedListings(s, schemas.GetSubscriptionRequestDetailsOutput_subscribedListings, v.SubscribedListings)
+	}
+	if v.SubscribedPrincipals != nil {
+		serializeSubscribedPrincipals(s, schemas.GetSubscriptionRequestDetailsOutput_subscribedPrincipals, v.SubscribedPrincipals)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetSubscriptionRequestDetailsOutput_updatedAt, *v.UpdatedAt)
 	}

@@ -76,7 +76,9 @@ func (v *GetApplicationGrantOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetApplicationGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrant(s, schemas.GetApplicationGrantResponse_Grant, v.Grant)
+	if v.Grant != nil {
+		serializeGrant(s, schemas.GetApplicationGrantResponse_Grant, v.Grant)
+	}
 }
 func (v *GetApplicationGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetApplicationGrantResponse, func(s *smithy.Schema) error {

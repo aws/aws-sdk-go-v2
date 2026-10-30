@@ -152,7 +152,9 @@ func (v *CreateContactInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.CreateContactRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.CreateContactRequest_Attributes, v.Attributes)
+	}
 	if v.Channel != "" {
 		s.WriteString(schemas.CreateContactRequest_Channel, string(v.Channel))
 	}
@@ -180,11 +182,15 @@ func (v *CreateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PreviousContactId != nil {
 		s.WriteString(schemas.CreateContactRequest_PreviousContactId, *v.PreviousContactId)
 	}
-	serializeContactReferences(s, schemas.CreateContactRequest_References, v.References)
+	if v.References != nil {
+		serializeContactReferences(s, schemas.CreateContactRequest_References, v.References)
+	}
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.CreateContactRequest_RelatedContactId, *v.RelatedContactId)
 	}
-	serializeSegmentAttributes(s, schemas.CreateContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.CreateContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
 	if v.UserInfo != nil {
 		s.WriteStruct(schemas.CreateContactRequest_UserInfo)
 		v.UserInfo.SerializeMembers(s)

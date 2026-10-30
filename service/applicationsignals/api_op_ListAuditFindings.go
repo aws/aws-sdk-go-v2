@@ -117,8 +117,12 @@ func (v *ListAuditFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAuditFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditTargets(s, schemas.ListAuditFindingsInput_AuditTargets, v.AuditTargets)
-	serializeAuditors(s, schemas.ListAuditFindingsInput_Auditors, v.Auditors)
+	if v.AuditTargets != nil {
+		serializeAuditTargets(s, schemas.ListAuditFindingsInput_AuditTargets, v.AuditTargets)
+	}
+	if v.Auditors != nil {
+		serializeAuditors(s, schemas.ListAuditFindingsInput_Auditors, v.Auditors)
+	}
 	if v.DetailLevel != "" {
 		s.WriteString(schemas.ListAuditFindingsInput_DetailLevel, string(v.DetailLevel))
 	}
@@ -172,7 +176,9 @@ func (v *ListAuditFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAuditFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditFindings(s, schemas.ListAuditFindingsOutput_AuditFindings, v.AuditFindings)
+	if v.AuditFindings != nil {
+		serializeAuditFindings(s, schemas.ListAuditFindingsOutput_AuditFindings, v.AuditFindings)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ListAuditFindingsOutput_EndTime, *v.EndTime)
 	}

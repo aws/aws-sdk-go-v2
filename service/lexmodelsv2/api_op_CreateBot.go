@@ -92,11 +92,15 @@ func (v *CreateBotInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBotMembers(s, schemas.CreateBotRequest_botMembers, v.BotMembers)
+	if v.BotMembers != nil {
+		serializeBotMembers(s, schemas.CreateBotRequest_botMembers, v.BotMembers)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.CreateBotRequest_botName, *v.BotName)
 	}
-	serializeTagMap(s, schemas.CreateBotRequest_botTags, v.BotTags)
+	if v.BotTags != nil {
+		serializeTagMap(s, schemas.CreateBotRequest_botTags, v.BotTags)
+	}
 	if v.BotType != "" {
 		s.WriteString(schemas.CreateBotRequest_botType, string(v.BotType))
 	}
@@ -119,7 +123,9 @@ func (v *CreateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateBotRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateBotRequest_testBotAliasTags, v.TestBotAliasTags)
+	if v.TestBotAliasTags != nil {
+		serializeTagMap(s, schemas.CreateBotRequest_testBotAliasTags, v.TestBotAliasTags)
+	}
 }
 
 type CreateBotOutput struct {
@@ -183,14 +189,18 @@ func (v *CreateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.CreateBotResponse_botId, *v.BotId)
 	}
-	serializeBotMembers(s, schemas.CreateBotResponse_botMembers, v.BotMembers)
+	if v.BotMembers != nil {
+		serializeBotMembers(s, schemas.CreateBotResponse_botMembers, v.BotMembers)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.CreateBotResponse_botName, *v.BotName)
 	}
 	if v.BotStatus != "" {
 		s.WriteString(schemas.CreateBotResponse_botStatus, string(v.BotStatus))
 	}
-	serializeTagMap(s, schemas.CreateBotResponse_botTags, v.BotTags)
+	if v.BotTags != nil {
+		serializeTagMap(s, schemas.CreateBotResponse_botTags, v.BotTags)
+	}
 	if v.BotType != "" {
 		s.WriteString(schemas.CreateBotResponse_botType, string(v.BotType))
 	}
@@ -216,7 +226,9 @@ func (v *CreateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateBotResponse_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateBotResponse_testBotAliasTags, v.TestBotAliasTags)
+	if v.TestBotAliasTags != nil {
+		serializeTagMap(s, schemas.CreateBotResponse_testBotAliasTags, v.TestBotAliasTags)
+	}
 }
 func (v *CreateBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateBotResponse, func(s *smithy.Schema) error {

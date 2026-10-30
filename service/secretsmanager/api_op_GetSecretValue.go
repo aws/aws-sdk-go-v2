@@ -179,7 +179,9 @@ func (v *GetSecretValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VersionId != nil {
 		s.WriteString(schemas.GetSecretValueResponse_VersionId, *v.VersionId)
 	}
-	serializeSecretVersionStagesType(s, schemas.GetSecretValueResponse_VersionStages, v.VersionStages)
+	if v.VersionStages != nil {
+		serializeSecretVersionStagesType(s, schemas.GetSecretValueResponse_VersionStages, v.VersionStages)
+	}
 }
 func (v *GetSecretValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSecretValueResponse, func(s *smithy.Schema) error {

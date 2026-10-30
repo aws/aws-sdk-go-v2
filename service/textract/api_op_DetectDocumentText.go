@@ -95,7 +95,9 @@ func (v *DetectDocumentTextOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectDocumentTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBlockList(s, schemas.DetectDocumentTextResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.DetectDocumentTextResponse_Blocks, v.Blocks)
+	}
 	if v.DetectDocumentTextModelVersion != nil {
 		s.WriteString(schemas.DetectDocumentTextResponse_DetectDocumentTextModelVersion, *v.DetectDocumentTextModelVersion)
 	}

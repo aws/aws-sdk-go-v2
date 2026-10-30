@@ -91,7 +91,9 @@ func (v *DescribeFleetLocationAttributesInput) SerializeMembers(s smithy.ShapeSe
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeFleetLocationAttributesInput_Limit, *v.Limit)
 	}
-	serializeLocationList(s, schemas.DescribeFleetLocationAttributesInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.DescribeFleetLocationAttributesInput_Locations, v.Locations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetLocationAttributesInput_NextToken, *v.NextToken)
 	}
@@ -136,7 +138,9 @@ func (v *DescribeFleetLocationAttributesOutput) SerializeMembers(s smithy.ShapeS
 	if v.FleetId != nil {
 		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_FleetId, *v.FleetId)
 	}
-	serializeLocationAttributesList(s, schemas.DescribeFleetLocationAttributesOutput_LocationAttributes, v.LocationAttributes)
+	if v.LocationAttributes != nil {
+		serializeLocationAttributesList(s, schemas.DescribeFleetLocationAttributesOutput_LocationAttributes, v.LocationAttributes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_NextToken, *v.NextToken)
 	}

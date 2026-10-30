@@ -51,7 +51,9 @@ func (v *GetCloudExadataInfrastructureUnallocatedResourcesInput) SerializeMember
 	if v.CloudExadataInfrastructureId != nil {
 		s.WriteString(schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
 	}
-	serializeStringList(s, schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput_dbServers, v.DbServers)
+	if v.DbServers != nil {
+		serializeStringList(s, schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput_dbServers, v.DbServers)
+	}
 }
 
 type GetCloudExadataInfrastructureUnallocatedResourcesOutput struct {

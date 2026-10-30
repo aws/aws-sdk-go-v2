@@ -161,7 +161,9 @@ func (v *MeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.MeterUsageRequest_Timestamp, *v.Timestamp)
 	}
-	serializeUsageAllocations(s, schemas.MeterUsageRequest_UsageAllocations, v.UsageAllocations)
+	if v.UsageAllocations != nil {
+		serializeUsageAllocations(s, schemas.MeterUsageRequest_UsageAllocations, v.UsageAllocations)
+	}
 	if v.UsageDimension != nil {
 		s.WriteString(schemas.MeterUsageRequest_UsageDimension, *v.UsageDimension)
 	}

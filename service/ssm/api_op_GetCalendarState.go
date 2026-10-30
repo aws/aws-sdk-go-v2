@@ -69,7 +69,9 @@ func (v *GetCalendarStateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AtTime != nil {
 		s.WriteString(schemas.GetCalendarStateRequest_AtTime, *v.AtTime)
 	}
-	serializeCalendarNameOrARNList(s, schemas.GetCalendarStateRequest_CalendarNames, v.CalendarNames)
+	if v.CalendarNames != nil {
+		serializeCalendarNameOrARNList(s, schemas.GetCalendarStateRequest_CalendarNames, v.CalendarNames)
+	}
 }
 
 type GetCalendarStateOutput struct {

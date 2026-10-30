@@ -52,7 +52,9 @@ func (v *UpdateServiceEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateServiceEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityLimits(s, schemas.UpdateServiceEnvironmentRequest_capacityLimits, v.CapacityLimits)
+	if v.CapacityLimits != nil {
+		serializeCapacityLimits(s, schemas.UpdateServiceEnvironmentRequest_capacityLimits, v.CapacityLimits)
+	}
 	if v.ServiceEnvironment != nil {
 		s.WriteString(schemas.UpdateServiceEnvironmentRequest_serviceEnvironment, *v.ServiceEnvironment)
 	}

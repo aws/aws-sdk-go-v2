@@ -99,11 +99,15 @@ func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorArn != nil {
 		s.WriteString(schemas.UpdateConnectorRequest_connectorArn, *v.ConnectorArn)
 	}
-	serializeConnectorConfigurationUpdate(s, schemas.UpdateConnectorRequest_connectorConfiguration, v.ConnectorConfiguration)
+	if v.ConnectorConfiguration != nil {
+		serializeConnectorConfigurationUpdate(s, schemas.UpdateConnectorRequest_connectorConfiguration, v.ConnectorConfiguration)
+	}
 	if v.CurrentVersion != nil {
 		s.WriteString(schemas.UpdateConnectorRequest_currentVersion, *v.CurrentVersion)
 	}
-	serialize__listOfPluginUpdate(s, schemas.UpdateConnectorRequest_plugins, v.Plugins)
+	if v.Plugins != nil {
+		serialize__listOfPluginUpdate(s, schemas.UpdateConnectorRequest_plugins, v.Plugins)
+	}
 	if v.SkipHealthValidation != false {
 		s.WriteBool(schemas.UpdateConnectorRequest_skipHealthValidation, v.SkipHealthValidation)
 	}

@@ -65,7 +65,9 @@ func (v *GetRevocationStatusInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRevocationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateHashes(s, schemas.GetRevocationStatusRequest_certificateHashes, v.CertificateHashes)
+	if v.CertificateHashes != nil {
+		serializeCertificateHashes(s, schemas.GetRevocationStatusRequest_certificateHashes, v.CertificateHashes)
+	}
 	if v.JobArn != nil {
 		s.WriteString(schemas.GetRevocationStatusRequest_jobArn, *v.JobArn)
 	}
@@ -100,7 +102,9 @@ func (v *GetRevocationStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRevocationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRevokedEntities(s, schemas.GetRevocationStatusResponse_revokedEntities, v.RevokedEntities)
+	if v.RevokedEntities != nil {
+		serializeRevokedEntities(s, schemas.GetRevocationStatusResponse_revokedEntities, v.RevokedEntities)
+	}
 }
 func (v *GetRevocationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRevocationStatusResponse, func(s *smithy.Schema) error {

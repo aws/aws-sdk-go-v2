@@ -63,8 +63,12 @@ func (v *DescribeClustersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClustersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeClustersRequest_clusters, v.Clusters)
-	serializeClusterFieldList(s, schemas.DescribeClustersRequest_include, v.Include)
+	if v.Clusters != nil {
+		serializeStringList(s, schemas.DescribeClustersRequest_clusters, v.Clusters)
+	}
+	if v.Include != nil {
+		serializeClusterFieldList(s, schemas.DescribeClustersRequest_include, v.Include)
+	}
 }
 
 type DescribeClustersOutput struct {
@@ -88,8 +92,12 @@ func (v *DescribeClustersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClustersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusters(s, schemas.DescribeClustersResponse_clusters, v.Clusters)
-	serializeFailures(s, schemas.DescribeClustersResponse_failures, v.Failures)
+	if v.Clusters != nil {
+		serializeClusters(s, schemas.DescribeClustersResponse_clusters, v.Clusters)
+	}
+	if v.Failures != nil {
+		serializeFailures(s, schemas.DescribeClustersResponse_failures, v.Failures)
+	}
 }
 func (v *DescribeClustersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeClustersResponse, func(s *smithy.Schema) error {

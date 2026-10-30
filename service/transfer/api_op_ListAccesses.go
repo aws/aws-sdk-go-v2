@@ -94,7 +94,9 @@ func (v *ListAccessesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListedAccesses(s, schemas.ListAccessesResponse_Accesses, v.Accesses)
+	if v.Accesses != nil {
+		serializeListedAccesses(s, schemas.ListAccessesResponse_Accesses, v.Accesses)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessesResponse_NextToken, *v.NextToken)
 	}

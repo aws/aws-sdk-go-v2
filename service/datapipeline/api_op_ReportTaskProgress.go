@@ -74,7 +74,9 @@ func (v *ReportTaskProgressInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReportTaskProgressInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializefieldList(s, schemas.ReportTaskProgressInput_fields, v.Fields)
+	if v.Fields != nil {
+		serializefieldList(s, schemas.ReportTaskProgressInput_fields, v.Fields)
+	}
 	if v.TaskId != nil {
 		s.WriteString(schemas.ReportTaskProgressInput_taskId, *v.TaskId)
 	}

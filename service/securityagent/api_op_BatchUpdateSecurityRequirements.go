@@ -52,7 +52,9 @@ func (v *BatchUpdateSecurityRequirementsInput) SerializeMembers(s smithy.ShapeSe
 	if v.PackId != nil {
 		s.WriteString(schemas.BatchUpdateSecurityRequirementsInput_packId, *v.PackId)
 	}
-	serializeUpdateSecurityRequirementEntryList(s, schemas.BatchUpdateSecurityRequirementsInput_securityRequirements, v.SecurityRequirements)
+	if v.SecurityRequirements != nil {
+		serializeUpdateSecurityRequirementEntryList(s, schemas.BatchUpdateSecurityRequirementsInput_securityRequirements, v.SecurityRequirements)
+	}
 }
 
 type BatchUpdateSecurityRequirementsOutput struct {
@@ -80,8 +82,12 @@ func (v *BatchUpdateSecurityRequirementsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchUpdateSecurityRequirementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchSecurityRequirementErrors(s, schemas.BatchUpdateSecurityRequirementsOutput_errors, v.Errors)
-	serializeSecurityRequirementNameList(s, schemas.BatchUpdateSecurityRequirementsOutput_updatedSecurityRequirementNames, v.UpdatedSecurityRequirementNames)
+	if v.Errors != nil {
+		serializeBatchSecurityRequirementErrors(s, schemas.BatchUpdateSecurityRequirementsOutput_errors, v.Errors)
+	}
+	if v.UpdatedSecurityRequirementNames != nil {
+		serializeSecurityRequirementNameList(s, schemas.BatchUpdateSecurityRequirementsOutput_updatedSecurityRequirementNames, v.UpdatedSecurityRequirementNames)
+	}
 }
 func (v *BatchUpdateSecurityRequirementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateSecurityRequirementsOutput, func(s *smithy.Schema) error {

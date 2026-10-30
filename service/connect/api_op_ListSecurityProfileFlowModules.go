@@ -103,7 +103,9 @@ func (v *ListSecurityProfileFlowModulesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListSecurityProfileFlowModulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedFlowModules(s, schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules, v.AllowedFlowModules)
+	if v.AllowedFlowModules != nil {
+		serializeAllowedFlowModules(s, schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules, v.AllowedFlowModules)
+	}
 	if v.LastModifiedRegion != nil {
 		s.WriteString(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion, *v.LastModifiedRegion)
 	}

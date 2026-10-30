@@ -69,21 +69,27 @@ func (v *CreateSignalMapInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateSignalMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__stringPatternS(s, schemas.CreateSignalMapRequest_CloudWatchAlarmTemplateGroupIdentifiers, v.CloudWatchAlarmTemplateGroupIdentifiers)
+	if v.CloudWatchAlarmTemplateGroupIdentifiers != nil {
+		serialize__listOf__stringPatternS(s, schemas.CreateSignalMapRequest_CloudWatchAlarmTemplateGroupIdentifiers, v.CloudWatchAlarmTemplateGroupIdentifiers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateSignalMapRequest_Description, *v.Description)
 	}
 	if v.DiscoveryEntryPointArn != nil {
 		s.WriteString(schemas.CreateSignalMapRequest_DiscoveryEntryPointArn, *v.DiscoveryEntryPointArn)
 	}
-	serialize__listOf__stringPatternS(s, schemas.CreateSignalMapRequest_EventBridgeRuleTemplateGroupIdentifiers, v.EventBridgeRuleTemplateGroupIdentifiers)
+	if v.EventBridgeRuleTemplateGroupIdentifiers != nil {
+		serialize__listOf__stringPatternS(s, schemas.CreateSignalMapRequest_EventBridgeRuleTemplateGroupIdentifiers, v.EventBridgeRuleTemplateGroupIdentifiers)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSignalMapRequest_Name, *v.Name)
 	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateSignalMapRequest_RequestId, *v.RequestId)
 	}
-	serializeTagMap(s, schemas.CreateSignalMapRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSignalMapRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateSignalMapResponse
@@ -163,7 +169,9 @@ func (v *CreateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateSignalMapResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.CreateSignalMapResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	if v.CloudWatchAlarmTemplateGroupIds != nil {
+		serialize__listOf__stringMin7Max11PatternAws097(s, schemas.CreateSignalMapResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateSignalMapResponse_CreatedAt, *v.CreatedAt)
 	}
@@ -176,8 +184,12 @@ func (v *CreateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.CreateSignalMapResponse_ErrorMessage, *v.ErrorMessage)
 	}
-	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.CreateSignalMapResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
-	serializeFailedMediaResourceMap(s, schemas.CreateSignalMapResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	if v.EventBridgeRuleTemplateGroupIds != nil {
+		serialize__listOf__stringMin7Max11PatternAws097(s, schemas.CreateSignalMapResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
+	}
+	if v.FailedMediaResourceMap != nil {
+		serializeFailedMediaResourceMap(s, schemas.CreateSignalMapResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateSignalMapResponse_Id, *v.Id)
 	}
@@ -189,7 +201,9 @@ func (v *CreateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LastSuccessfulMonitorDeployment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMediaResourceMap(s, schemas.CreateSignalMapResponse_MediaResourceMap, v.MediaResourceMap)
+	if v.MediaResourceMap != nil {
+		serializeMediaResourceMap(s, schemas.CreateSignalMapResponse_MediaResourceMap, v.MediaResourceMap)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.CreateSignalMapResponse_ModifiedAt, *v.ModifiedAt)
 	}
@@ -207,7 +221,9 @@ func (v *CreateSignalMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateSignalMapResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateSignalMapResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateSignalMapResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateSignalMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateSignalMapResponse, func(s *smithy.Schema) error {

@@ -64,7 +64,9 @@ func (v *GetWorkflowInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowExportList(s, schemas.GetWorkflowRequest_export, v.Export)
+	if v.Export != nil {
+		serializeWorkflowExportList(s, schemas.GetWorkflowRequest_export, v.Export)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetWorkflowRequest_id, *v.Id)
 	}
@@ -211,13 +213,21 @@ func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Main != nil {
 		s.WriteString(schemas.GetWorkflowResponse_main, *v.Main)
 	}
-	serializeWorkflowMetadata(s, schemas.GetWorkflowResponse_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeWorkflowMetadata(s, schemas.GetWorkflowResponse_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetWorkflowResponse_name, *v.Name)
 	}
-	serializeWorkflowParameterTemplate(s, schemas.GetWorkflowResponse_parameterTemplate, v.ParameterTemplate)
-	serializeWorkflowProfileParameterTemplates(s, schemas.GetWorkflowResponse_profileParameterTemplates, v.ProfileParameterTemplates)
-	serializeWorkflowProfileList(s, schemas.GetWorkflowResponse_profiles, v.Profiles)
+	if v.ParameterTemplate != nil {
+		serializeWorkflowParameterTemplate(s, schemas.GetWorkflowResponse_parameterTemplate, v.ParameterTemplate)
+	}
+	if v.ProfileParameterTemplates != nil {
+		serializeWorkflowProfileParameterTemplates(s, schemas.GetWorkflowResponse_profileParameterTemplates, v.ProfileParameterTemplates)
+	}
+	if v.Profiles != nil {
+		serializeWorkflowProfileList(s, schemas.GetWorkflowResponse_profiles, v.Profiles)
+	}
 	if v.Readme != nil {
 		s.WriteString(schemas.GetWorkflowResponse_readme, *v.Readme)
 	}
@@ -236,7 +246,9 @@ func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.GetWorkflowResponse_storageType, string(v.StorageType))
 	}
-	serializeTagMap(s, schemas.GetWorkflowResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetWorkflowResponse_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GetWorkflowResponse_type, string(v.Type))
 	}

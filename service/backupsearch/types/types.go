@@ -150,10 +150,18 @@ func (v *EBSItemFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EBSItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeConditionList(s, schemas.EBSItemFilter_CreationTimes, v.CreationTimes)
-	serializeStringConditionList(s, schemas.EBSItemFilter_FilePaths, v.FilePaths)
-	serializeTimeConditionList(s, schemas.EBSItemFilter_LastModificationTimes, v.LastModificationTimes)
-	serializeLongConditionList(s, schemas.EBSItemFilter_Sizes, v.Sizes)
+	if v.CreationTimes != nil {
+		serializeTimeConditionList(s, schemas.EBSItemFilter_CreationTimes, v.CreationTimes)
+	}
+	if v.FilePaths != nil {
+		serializeStringConditionList(s, schemas.EBSItemFilter_FilePaths, v.FilePaths)
+	}
+	if v.LastModificationTimes != nil {
+		serializeTimeConditionList(s, schemas.EBSItemFilter_LastModificationTimes, v.LastModificationTimes)
+	}
+	if v.Sizes != nil {
+		serializeLongConditionList(s, schemas.EBSItemFilter_Sizes, v.Sizes)
+	}
 }
 func (v *EBSItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EBSItemFilter, func(s *smithy.Schema) error {
@@ -423,8 +431,12 @@ func (v *ItemFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ItemFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEBSItemFilters(s, schemas.ItemFilters_EBSItemFilters, v.EBSItemFilters)
-	serializeS3ItemFilters(s, schemas.ItemFilters_S3ItemFilters, v.S3ItemFilters)
+	if v.EBSItemFilters != nil {
+		serializeEBSItemFilters(s, schemas.ItemFilters_EBSItemFilters, v.EBSItemFilters)
+	}
+	if v.S3ItemFilters != nil {
+		serializeS3ItemFilters(s, schemas.ItemFilters_S3ItemFilters, v.S3ItemFilters)
+	}
 }
 func (v *ItemFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ItemFilters, func(s *smithy.Schema) error {
@@ -636,11 +648,21 @@ func (v *S3ItemFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3ItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTimeConditionList(s, schemas.S3ItemFilter_CreationTimes, v.CreationTimes)
-	serializeStringConditionList(s, schemas.S3ItemFilter_ETags, v.ETags)
-	serializeStringConditionList(s, schemas.S3ItemFilter_ObjectKeys, v.ObjectKeys)
-	serializeLongConditionList(s, schemas.S3ItemFilter_Sizes, v.Sizes)
-	serializeStringConditionList(s, schemas.S3ItemFilter_VersionIds, v.VersionIds)
+	if v.CreationTimes != nil {
+		serializeTimeConditionList(s, schemas.S3ItemFilter_CreationTimes, v.CreationTimes)
+	}
+	if v.ETags != nil {
+		serializeStringConditionList(s, schemas.S3ItemFilter_ETags, v.ETags)
+	}
+	if v.ObjectKeys != nil {
+		serializeStringConditionList(s, schemas.S3ItemFilter_ObjectKeys, v.ObjectKeys)
+	}
+	if v.Sizes != nil {
+		serializeLongConditionList(s, schemas.S3ItemFilter_Sizes, v.Sizes)
+	}
+	if v.VersionIds != nil {
+		serializeStringConditionList(s, schemas.S3ItemFilter_VersionIds, v.VersionIds)
+	}
 }
 func (v *S3ItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3ItemFilter, func(s *smithy.Schema) error {
@@ -998,15 +1020,23 @@ func (v *SearchScope) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchScope) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryPointArnList(s, schemas.SearchScope_BackupResourceArns, v.BackupResourceArns)
+	if v.BackupResourceArns != nil {
+		serializeRecoveryPointArnList(s, schemas.SearchScope_BackupResourceArns, v.BackupResourceArns)
+	}
 	if v.BackupResourceCreationTime != nil {
 		s.WriteStruct(schemas.SearchScope_BackupResourceCreationTime)
 		v.BackupResourceCreationTime.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.SearchScope_BackupResourceTags, v.BackupResourceTags)
-	serializeResourceTypeList(s, schemas.SearchScope_BackupResourceTypes, v.BackupResourceTypes)
-	serializeResourceArnList(s, schemas.SearchScope_SourceResourceArns, v.SourceResourceArns)
+	if v.BackupResourceTags != nil {
+		serializeTagMap(s, schemas.SearchScope_BackupResourceTags, v.BackupResourceTags)
+	}
+	if v.BackupResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.SearchScope_BackupResourceTypes, v.BackupResourceTypes)
+	}
+	if v.SourceResourceArns != nil {
+		serializeResourceArnList(s, schemas.SearchScope_SourceResourceArns, v.SourceResourceArns)
+	}
 }
 func (v *SearchScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchScope, func(s *smithy.Schema) error {

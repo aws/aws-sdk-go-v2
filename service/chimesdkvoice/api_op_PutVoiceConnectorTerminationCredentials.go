@@ -46,7 +46,9 @@ func (v *PutVoiceConnectorTerminationCredentialsInput) Serialize(s smithy.ShapeS
 }
 
 func (v *PutVoiceConnectorTerminationCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCredentialList(s, schemas.PutVoiceConnectorTerminationCredentialsRequest_Credentials, v.Credentials)
+	if v.Credentials != nil {
+		serializeCredentialList(s, schemas.PutVoiceConnectorTerminationCredentialsRequest_Credentials, v.Credentials)
+	}
 	if v.VoiceConnectorId != nil {
 		s.WriteString(schemas.PutVoiceConnectorTerminationCredentialsRequest_VoiceConnectorId, *v.VoiceConnectorId)
 	}

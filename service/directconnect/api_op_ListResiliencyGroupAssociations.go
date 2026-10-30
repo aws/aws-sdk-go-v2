@@ -85,7 +85,9 @@ func (v *ListResiliencyGroupAssociationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListResiliencyGroupAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResiliencyGroupAssociationList(s, schemas.ListResiliencyGroupAssociationsResult_items, v.Items)
+	if v.Items != nil {
+		serializeResiliencyGroupAssociationList(s, schemas.ListResiliencyGroupAssociationsResult_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResiliencyGroupAssociationsResult_nextToken, *v.NextToken)
 	}

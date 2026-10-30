@@ -121,7 +121,9 @@ func (v *GetFaceLivenessSessionResultsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetFaceLivenessSessionResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuditImages(s, schemas.GetFaceLivenessSessionResultsResponse_AuditImages, v.AuditImages)
+	if v.AuditImages != nil {
+		serializeAuditImages(s, schemas.GetFaceLivenessSessionResultsResponse_AuditImages, v.AuditImages)
+	}
 	if v.Challenge != nil {
 		s.WriteStruct(schemas.GetFaceLivenessSessionResultsResponse_Challenge)
 		v.Challenge.SerializeMembers(s)
@@ -130,7 +132,9 @@ func (v *GetFaceLivenessSessionResultsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Confidence != nil {
 		s.WriteFloat32(schemas.GetFaceLivenessSessionResultsResponse_Confidence, *v.Confidence)
 	}
-	serializeFeedbackList(s, schemas.GetFaceLivenessSessionResultsResponse_Feedback, v.Feedback)
+	if v.Feedback != nil {
+		serializeFeedbackList(s, schemas.GetFaceLivenessSessionResultsResponse_Feedback, v.Feedback)
+	}
 	if v.Metadata != nil {
 		s.WriteStruct(schemas.GetFaceLivenessSessionResultsResponse_Metadata)
 		v.Metadata.SerializeMembers(s)

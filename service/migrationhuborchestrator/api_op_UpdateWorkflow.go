@@ -62,11 +62,15 @@ func (v *UpdateWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateMigrationWorkflowRequest_id, *v.Id)
 	}
-	serializeStepInputParameters(s, schemas.UpdateMigrationWorkflowRequest_inputParameters, v.InputParameters)
+	if v.InputParameters != nil {
+		serializeStepInputParameters(s, schemas.UpdateMigrationWorkflowRequest_inputParameters, v.InputParameters)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateMigrationWorkflowRequest_name, *v.Name)
 	}
-	serializeStringList(s, schemas.UpdateMigrationWorkflowRequest_stepTargets, v.StepTargets)
+	if v.StepTargets != nil {
+		serializeStringList(s, schemas.UpdateMigrationWorkflowRequest_stepTargets, v.StepTargets)
+	}
 }
 func (v *UpdateWorkflowInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateMigrationWorkflowRequest, func(s *smithy.Schema) error {
@@ -164,12 +168,18 @@ func (v *UpdateWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateMigrationWorkflowResponse_status, string(v.Status))
 	}
-	serializeStringList(s, schemas.UpdateMigrationWorkflowResponse_stepTargets, v.StepTargets)
-	serializeStringMap(s, schemas.UpdateMigrationWorkflowResponse_tags, v.Tags)
+	if v.StepTargets != nil {
+		serializeStringList(s, schemas.UpdateMigrationWorkflowResponse_stepTargets, v.StepTargets)
+	}
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.UpdateMigrationWorkflowResponse_tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.UpdateMigrationWorkflowResponse_templateId, *v.TemplateId)
 	}
-	serializeStepInputParameters(s, schemas.UpdateMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+	if v.WorkflowInputs != nil {
+		serializeStepInputParameters(s, schemas.UpdateMigrationWorkflowResponse_workflowInputs, v.WorkflowInputs)
+	}
 }
 func (v *UpdateWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateMigrationWorkflowResponse, func(s *smithy.Schema) error {

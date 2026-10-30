@@ -112,8 +112,12 @@ func (v *RegisterWorkspaceDirectoryInput) SerializeMembers(s smithy.ShapeSeriali
 		v.MicrosoftEntraConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSubnetIds(s, schemas.RegisterWorkspaceDirectoryRequest_SubnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.RegisterWorkspaceDirectoryRequest_Tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.RegisterWorkspaceDirectoryRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RegisterWorkspaceDirectoryRequest_Tags, v.Tags)
+	}
 	if v.Tenancy != "" {
 		s.WriteString(schemas.RegisterWorkspaceDirectoryRequest_Tenancy, string(v.Tenancy))
 	}

@@ -58,7 +58,9 @@ func (v *BatchGetIterableFormsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AssetIdentifier != nil {
 		s.WriteString(schemas.BatchGetIterableFormsRequest_AssetIdentifier, *v.AssetIdentifier)
 	}
-	serializeItemIdentifierList(s, schemas.BatchGetIterableFormsRequest_ItemIdentifiers, v.ItemIdentifiers)
+	if v.ItemIdentifiers != nil {
+		serializeItemIdentifierList(s, schemas.BatchGetIterableFormsRequest_ItemIdentifiers, v.ItemIdentifiers)
+	}
 	if v.IterableFormName != nil {
 		s.WriteString(schemas.BatchGetIterableFormsRequest_IterableFormName, *v.IterableFormName)
 	}
@@ -85,8 +87,12 @@ func (v *BatchGetIterableFormsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetIterableFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeItemErrorList(s, schemas.BatchGetIterableFormsResponse_Errors, v.Errors)
-	serializeIterableFormItemList(s, schemas.BatchGetIterableFormsResponse_Items, v.Items)
+	if v.Errors != nil {
+		serializeItemErrorList(s, schemas.BatchGetIterableFormsResponse_Errors, v.Errors)
+	}
+	if v.Items != nil {
+		serializeIterableFormItemList(s, schemas.BatchGetIterableFormsResponse_Items, v.Items)
+	}
 }
 func (v *BatchGetIterableFormsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetIterableFormsResponse, func(s *smithy.Schema) error {

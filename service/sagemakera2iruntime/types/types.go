@@ -32,7 +32,9 @@ func (v *HumanLoopDataAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HumanLoopDataAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+	if v.ContentClassifiers != nil {
+		serializeContentClassifiers(s, schemas.HumanLoopDataAttributes_ContentClassifiers, v.ContentClassifiers)
+	}
 }
 func (v *HumanLoopDataAttributes) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HumanLoopDataAttributes, func(s *smithy.Schema) error {

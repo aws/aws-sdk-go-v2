@@ -86,7 +86,9 @@ func (v *GetDistributionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDistributionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistributionList(s, schemas.GetDistributionsResult_distributions, v.Distributions)
+	if v.Distributions != nil {
+		serializeDistributionList(s, schemas.GetDistributionsResult_distributions, v.Distributions)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetDistributionsResult_nextPageToken, *v.NextPageToken)
 	}

@@ -133,7 +133,9 @@ func (v *ListResourceSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceSnapshotsResponse_NextToken, *v.NextToken)
 	}
-	serializeResourceSnapshotSummaryList(s, schemas.ListResourceSnapshotsResponse_ResourceSnapshotSummaries, v.ResourceSnapshotSummaries)
+	if v.ResourceSnapshotSummaries != nil {
+		serializeResourceSnapshotSummaryList(s, schemas.ListResourceSnapshotsResponse_ResourceSnapshotSummaries, v.ResourceSnapshotSummaries)
+	}
 }
 func (v *ListResourceSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceSnapshotsResponse, func(s *smithy.Schema) error {

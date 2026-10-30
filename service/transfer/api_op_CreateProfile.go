@@ -69,11 +69,15 @@ func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.As2Id != nil {
 		s.WriteString(schemas.CreateProfileRequest_As2Id, *v.As2Id)
 	}
-	serializeCertificateIds(s, schemas.CreateProfileRequest_CertificateIds, v.CertificateIds)
+	if v.CertificateIds != nil {
+		serializeCertificateIds(s, schemas.CreateProfileRequest_CertificateIds, v.CertificateIds)
+	}
 	if v.ProfileType != "" {
 		s.WriteString(schemas.CreateProfileRequest_ProfileType, string(v.ProfileType))
 	}
-	serializeTags(s, schemas.CreateProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateProfileRequest_Tags, v.Tags)
+	}
 }
 
 type CreateProfileOutput struct {

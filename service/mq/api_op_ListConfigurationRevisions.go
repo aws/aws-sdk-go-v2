@@ -100,7 +100,9 @@ func (v *ListConfigurationRevisionsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationRevisionsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfConfigurationRevision(s, schemas.ListConfigurationRevisionsResponse_Revisions, v.Revisions)
+	if v.Revisions != nil {
+		serialize__listOfConfigurationRevision(s, schemas.ListConfigurationRevisionsResponse_Revisions, v.Revisions)
+	}
 }
 func (v *ListConfigurationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListConfigurationRevisionsResponse, func(s *smithy.Schema) error {

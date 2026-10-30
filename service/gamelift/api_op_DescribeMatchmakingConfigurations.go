@@ -79,7 +79,9 @@ func (v *DescribeMatchmakingConfigurationsInput) SerializeMembers(s smithy.Shape
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeMatchmakingConfigurationsInput_Limit, *v.Limit)
 	}
-	serializeMatchmakingConfigurationNameList(s, schemas.DescribeMatchmakingConfigurationsInput_Names, v.Names)
+	if v.Names != nil {
+		serializeMatchmakingConfigurationNameList(s, schemas.DescribeMatchmakingConfigurationsInput_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMatchmakingConfigurationsInput_NextToken, *v.NextToken)
 	}
@@ -111,7 +113,9 @@ func (v *DescribeMatchmakingConfigurationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeMatchmakingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchmakingConfigurationList(s, schemas.DescribeMatchmakingConfigurationsOutput_Configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeMatchmakingConfigurationList(s, schemas.DescribeMatchmakingConfigurationsOutput_Configurations, v.Configurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMatchmakingConfigurationsOutput_NextToken, *v.NextToken)
 	}

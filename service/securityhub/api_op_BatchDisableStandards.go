@@ -47,7 +47,9 @@ func (v *BatchDisableStandardsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDisableStandardsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStandardsSubscriptionArns(s, schemas.BatchDisableStandardsRequest_StandardsSubscriptionArns, v.StandardsSubscriptionArns)
+	if v.StandardsSubscriptionArns != nil {
+		serializeStandardsSubscriptionArns(s, schemas.BatchDisableStandardsRequest_StandardsSubscriptionArns, v.StandardsSubscriptionArns)
+	}
 }
 
 type BatchDisableStandardsOutput struct {
@@ -68,7 +70,9 @@ func (v *BatchDisableStandardsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDisableStandardsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStandardsSubscriptions(s, schemas.BatchDisableStandardsResponse_StandardsSubscriptions, v.StandardsSubscriptions)
+	if v.StandardsSubscriptions != nil {
+		serializeStandardsSubscriptions(s, schemas.BatchDisableStandardsResponse_StandardsSubscriptions, v.StandardsSubscriptions)
+	}
 }
 func (v *BatchDisableStandardsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDisableStandardsResponse, func(s *smithy.Schema) error {

@@ -79,11 +79,15 @@ func (v *CreatePrivacyBudgetTemplateInput) SerializeMembers(s smithy.ShapeSerial
 	if v.MembershipIdentifier != nil {
 		s.WriteString(schemas.CreatePrivacyBudgetTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
 	}
-	serializePrivacyBudgetTemplateParametersInput(s, schemas.CreatePrivacyBudgetTemplateInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePrivacyBudgetTemplateParametersInput(s, schemas.CreatePrivacyBudgetTemplateInput_parameters, v.Parameters)
+	}
 	if v.PrivacyBudgetType != "" {
 		s.WriteString(schemas.CreatePrivacyBudgetTemplateInput_privacyBudgetType, string(v.PrivacyBudgetType))
 	}
-	serializeTagMap(s, schemas.CreatePrivacyBudgetTemplateInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePrivacyBudgetTemplateInput_tags, v.Tags)
+	}
 }
 
 type CreatePrivacyBudgetTemplateOutput struct {

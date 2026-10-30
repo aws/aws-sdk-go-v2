@@ -80,7 +80,9 @@ func (v *ListOrganizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOrganizationsResponse_NextToken, *v.NextToken)
 	}
-	serializeOrganizationSummaries(s, schemas.ListOrganizationsResponse_OrganizationSummaries, v.OrganizationSummaries)
+	if v.OrganizationSummaries != nil {
+		serializeOrganizationSummaries(s, schemas.ListOrganizationsResponse_OrganizationSummaries, v.OrganizationSummaries)
+	}
 }
 func (v *ListOrganizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOrganizationsResponse, func(s *smithy.Schema) error {

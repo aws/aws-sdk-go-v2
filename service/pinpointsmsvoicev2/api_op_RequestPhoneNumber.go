@@ -126,8 +126,12 @@ func (v *RequestPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MessageType != "" {
 		s.WriteString(schemas.RequestPhoneNumberRequest_MessageType, string(v.MessageType))
 	}
-	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberRequest_NumberCapabilities, v.NumberCapabilities)
-	serializeNumberPreferenceList(s, schemas.RequestPhoneNumberRequest_NumberPreference, v.NumberPreference)
+	if v.NumberCapabilities != nil {
+		serializeNumberCapabilityList(s, schemas.RequestPhoneNumberRequest_NumberCapabilities, v.NumberCapabilities)
+	}
+	if v.NumberPreference != nil {
+		serializeNumberPreferenceList(s, schemas.RequestPhoneNumberRequest_NumberPreference, v.NumberPreference)
+	}
 	if v.NumberType != "" {
 		s.WriteString(schemas.RequestPhoneNumberRequest_NumberType, string(v.NumberType))
 	}
@@ -140,7 +144,9 @@ func (v *RequestPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.RequestPhoneNumberRequest_RegistrationId, *v.RegistrationId)
 	}
-	serializeTagList(s, schemas.RequestPhoneNumberRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RequestPhoneNumberRequest_Tags, v.Tags)
+	}
 }
 
 type RequestPhoneNumberOutput struct {
@@ -251,7 +257,9 @@ func (v *RequestPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.RequestPhoneNumberResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}
-	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	if v.NumberCapabilities != nil {
+		serializeNumberCapabilityList(s, schemas.RequestPhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	}
 	if v.NumberType != "" {
 		s.WriteString(schemas.RequestPhoneNumberResult_NumberType, string(v.NumberType))
 	}
@@ -279,7 +287,9 @@ func (v *RequestPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.RequestPhoneNumberResult_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.RequestPhoneNumberResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.RequestPhoneNumberResult_Tags, v.Tags)
+	}
 	if v.TwoWayChannelArn != nil {
 		s.WriteString(schemas.RequestPhoneNumberResult_TwoWayChannelArn, *v.TwoWayChannelArn)
 	}

@@ -59,7 +59,9 @@ func (v *SearchTopicsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchTopicsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeTopicSearchFilterList(s, schemas.SearchTopicsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeTopicSearchFilterList(s, schemas.SearchTopicsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchTopicsRequest_MaxResults, *v.MaxResults)
 	}
@@ -104,7 +106,9 @@ func (v *SearchTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != 0 {
 		s.WriteInt32(schemas.SearchTopicsResponse_Status, v.Status)
 	}
-	serializeTopicSummaries(s, schemas.SearchTopicsResponse_TopicSummaryList, v.TopicSummaryList)
+	if v.TopicSummaryList != nil {
+		serializeTopicSummaries(s, schemas.SearchTopicsResponse_TopicSummaryList, v.TopicSummaryList)
+	}
 }
 func (v *SearchTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchTopicsResponse, func(s *smithy.Schema) error {

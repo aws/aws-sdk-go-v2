@@ -198,7 +198,9 @@ func (v *LoggingConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.LoggingConfigurationSummary_createTime, *v.CreateTime)
 	}
-	serializeDestinationConfiguration(s, schemas.LoggingConfigurationSummary_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.LoggingConfigurationSummary_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.LoggingConfigurationSummary_id, *v.Id)
 	}
@@ -208,7 +210,9 @@ func (v *LoggingConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.State != "" {
 		s.WriteString(schemas.LoggingConfigurationSummary_state, string(v.State))
 	}
-	serializeTags(s, schemas.LoggingConfigurationSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.LoggingConfigurationSummary_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.LoggingConfigurationSummary_updateTime, *v.UpdateTime)
 	}
@@ -353,7 +357,9 @@ func (v *RoomSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.RoomSummary_id, *v.Id)
 	}
-	serializeLoggingConfigurationIdentifierList(s, schemas.RoomSummary_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	if v.LoggingConfigurationIdentifiers != nil {
+		serializeLoggingConfigurationIdentifierList(s, schemas.RoomSummary_loggingConfigurationIdentifiers, v.LoggingConfigurationIdentifiers)
+	}
 	if v.MessageReviewHandler != nil {
 		s.WriteStruct(schemas.RoomSummary_messageReviewHandler)
 		v.MessageReviewHandler.SerializeMembers(s)
@@ -362,7 +368,9 @@ func (v *RoomSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.RoomSummary_name, *v.Name)
 	}
-	serializeTags(s, schemas.RoomSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RoomSummary_tags, v.Tags)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.RoomSummary_updateTime, *v.UpdateTime)
 	}

@@ -133,7 +133,9 @@ func (v *GetTargetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetTargetGroupResponse_name, *v.Name)
 	}
-	serializeServiceArnList(s, schemas.GetTargetGroupResponse_serviceArns, v.ServiceArns)
+	if v.ServiceArns != nil {
+		serializeServiceArnList(s, schemas.GetTargetGroupResponse_serviceArns, v.ServiceArns)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetTargetGroupResponse_status, string(v.Status))
 	}

@@ -169,8 +169,12 @@ func (v *CreateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyCheckValueAlgorithm != "" {
 		s.WriteString(schemas.CreateKeyInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
 	}
-	serializeRegions(s, schemas.CreateKeyInput_ReplicationRegions, v.ReplicationRegions)
-	serializeTags(s, schemas.CreateKeyInput_Tags, v.Tags)
+	if v.ReplicationRegions != nil {
+		serializeRegions(s, schemas.CreateKeyInput_ReplicationRegions, v.ReplicationRegions)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateKeyInput_Tags, v.Tags)
+	}
 }
 
 type CreateKeyOutput struct {

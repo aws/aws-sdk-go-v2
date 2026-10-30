@@ -173,7 +173,9 @@ func (v *JobExecution) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.JobExecution_status, string(v.Status))
 	}
-	serializeDetailsMap(s, schemas.JobExecution_statusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeDetailsMap(s, schemas.JobExecution_statusDetails, v.StatusDetails)
+	}
 	if v.ThingName != nil {
 		s.WriteString(schemas.JobExecution_thingName, *v.ThingName)
 	}
@@ -251,7 +253,9 @@ func (v *JobExecutionState) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.JobExecutionState_status, string(v.Status))
 	}
-	serializeDetailsMap(s, schemas.JobExecutionState_statusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeDetailsMap(s, schemas.JobExecutionState_statusDetails, v.StatusDetails)
+	}
 	if v.VersionNumber != 0 {
 		s.WriteInt64(schemas.JobExecutionState_versionNumber, v.VersionNumber)
 	}

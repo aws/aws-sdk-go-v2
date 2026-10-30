@@ -135,7 +135,9 @@ func (v *GetSequenceStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetSequenceStoreResponse_name, *v.Name)
 	}
-	serializePropagatedSetLevelTags(s, schemas.GetSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	if v.PropagatedSetLevelTags != nil {
+		serializePropagatedSetLevelTags(s, schemas.GetSequenceStoreResponse_propagatedSetLevelTags, v.PropagatedSetLevelTags)
+	}
 	if v.S3Access != nil {
 		s.WriteStruct(schemas.GetSequenceStoreResponse_s3Access)
 		v.S3Access.SerializeMembers(s)

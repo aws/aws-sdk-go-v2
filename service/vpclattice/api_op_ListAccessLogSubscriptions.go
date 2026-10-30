@@ -100,7 +100,9 @@ func (v *ListAccessLogSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessLogSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessLogSubscriptionList(s, schemas.ListAccessLogSubscriptionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAccessLogSubscriptionList(s, schemas.ListAccessLogSubscriptionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessLogSubscriptionsResponse_nextToken, *v.NextToken)
 	}

@@ -97,7 +97,9 @@ func (v *DeleteClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.DeleteClusterResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.DeleteClusterResponse_ChannelIds, v.ChannelIds)
+	if v.ChannelIds != nil {
+		serialize__listOf__string(s, schemas.DeleteClusterResponse_ChannelIds, v.ChannelIds)
+	}
 	if v.ClusterType != "" {
 		s.WriteString(schemas.DeleteClusterResponse_ClusterType, string(v.ClusterType))
 	}

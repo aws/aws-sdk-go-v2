@@ -110,7 +110,9 @@ func (v *UpdateHubContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubContentName != nil {
 		s.WriteString(schemas.UpdateHubContentRequest_HubContentName, *v.HubContentName)
 	}
-	serializeHubContentSearchKeywordList(s, schemas.UpdateHubContentRequest_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	if v.HubContentSearchKeywords != nil {
+		serializeHubContentSearchKeywordList(s, schemas.UpdateHubContentRequest_HubContentSearchKeywords, v.HubContentSearchKeywords)
+	}
 	if v.HubContentType != "" {
 		s.WriteString(schemas.UpdateHubContentRequest_HubContentType, string(v.HubContentType))
 	}

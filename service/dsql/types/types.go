@@ -184,7 +184,9 @@ func (v *MultiRegionProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MultiRegionProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterArnList(s, schemas.MultiRegionProperties_clusters, v.Clusters)
+	if v.Clusters != nil {
+		serializeClusterArnList(s, schemas.MultiRegionProperties_clusters, v.Clusters)
+	}
 	if v.WitnessRegion != nil {
 		s.WriteString(schemas.MultiRegionProperties_witnessRegion, *v.WitnessRegion)
 	}

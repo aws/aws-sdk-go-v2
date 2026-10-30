@@ -48,7 +48,9 @@ func (v *DescribeWorkspacesConnectionStatusInput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspacesConnectionStatusRequest_NextToken, *v.NextToken)
 	}
-	serializeWorkspaceIdList(s, schemas.DescribeWorkspacesConnectionStatusRequest_WorkspaceIds, v.WorkspaceIds)
+	if v.WorkspaceIds != nil {
+		serializeWorkspaceIdList(s, schemas.DescribeWorkspacesConnectionStatusRequest_WorkspaceIds, v.WorkspaceIds)
+	}
 }
 
 type DescribeWorkspacesConnectionStatusOutput struct {
@@ -76,7 +78,9 @@ func (v *DescribeWorkspacesConnectionStatusOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspacesConnectionStatusResult_NextToken, *v.NextToken)
 	}
-	serializeWorkspaceConnectionStatusList(s, schemas.DescribeWorkspacesConnectionStatusResult_WorkspacesConnectionStatus, v.WorkspacesConnectionStatus)
+	if v.WorkspacesConnectionStatus != nil {
+		serializeWorkspaceConnectionStatusList(s, schemas.DescribeWorkspacesConnectionStatusResult_WorkspacesConnectionStatus, v.WorkspacesConnectionStatus)
+	}
 }
 func (v *DescribeWorkspacesConnectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspacesConnectionStatusResult, func(s *smithy.Schema) error {

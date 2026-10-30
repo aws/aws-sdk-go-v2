@@ -104,7 +104,9 @@ func (v *GetVerificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartedAt != nil {
 		s.WriteTime(schemas.GetVerificationResponse_StartedAt, *v.StartedAt)
 	}
-	serializeVerificationResponseDetails(s, schemas.GetVerificationResponse_VerificationResponseDetails, v.VerificationResponseDetails)
+	if v.VerificationResponseDetails != nil {
+		serializeVerificationResponseDetails(s, schemas.GetVerificationResponse_VerificationResponseDetails, v.VerificationResponseDetails)
+	}
 	if v.VerificationStatus != "" {
 		s.WriteString(schemas.GetVerificationResponse_VerificationStatus, string(v.VerificationStatus))
 	}

@@ -88,8 +88,12 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainUnitId != nil {
 		s.WriteString(schemas.CreateProjectInput_domainUnitId, *v.DomainUnitId)
 	}
-	serializeGlossaryTerms(s, schemas.CreateProjectInput_glossaryTerms, v.GlossaryTerms)
-	serializeProjectMembershipAssignments(s, schemas.CreateProjectInput_membershipAssignments, v.MembershipAssignments)
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateProjectInput_glossaryTerms, v.GlossaryTerms)
+	}
+	if v.MembershipAssignments != nil {
+		serializeProjectMembershipAssignments(s, schemas.CreateProjectInput_membershipAssignments, v.MembershipAssignments)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateProjectInput_name, *v.Name)
 	}
@@ -102,8 +106,12 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectProfileId != nil {
 		s.WriteString(schemas.CreateProjectInput_projectProfileId, *v.ProjectProfileId)
 	}
-	serializeTags(s, schemas.CreateProjectInput_resourceTags, v.ResourceTags)
-	serializeEnvironmentConfigurationUserParametersList(s, schemas.CreateProjectInput_userParameters, v.UserParameters)
+	if v.ResourceTags != nil {
+		serializeTags(s, schemas.CreateProjectInput_resourceTags, v.ResourceTags)
+	}
+	if v.UserParameters != nil {
+		serializeEnvironmentConfigurationUserParametersList(s, schemas.CreateProjectInput_userParameters, v.UserParameters)
+	}
 }
 
 type CreateProjectOutput struct {
@@ -198,8 +206,12 @@ func (v *CreateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EnvironmentDeploymentDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFailureReasons(s, schemas.CreateProjectOutput_failureReasons, v.FailureReasons)
-	serializeGlossaryTerms(s, schemas.CreateProjectOutput_glossaryTerms, v.GlossaryTerms)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.CreateProjectOutput_failureReasons, v.FailureReasons)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTerms(s, schemas.CreateProjectOutput_glossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateProjectOutput_id, *v.Id)
 	}
@@ -218,8 +230,12 @@ func (v *CreateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectStatus != "" {
 		s.WriteString(schemas.CreateProjectOutput_projectStatus, string(v.ProjectStatus))
 	}
-	serializeResourceTags(s, schemas.CreateProjectOutput_resourceTags, v.ResourceTags)
-	serializeEnvironmentConfigurationUserParametersList(s, schemas.CreateProjectOutput_userParameters, v.UserParameters)
+	if v.ResourceTags != nil {
+		serializeResourceTags(s, schemas.CreateProjectOutput_resourceTags, v.ResourceTags)
+	}
+	if v.UserParameters != nil {
+		serializeEnvironmentConfigurationUserParametersList(s, schemas.CreateProjectOutput_userParameters, v.UserParameters)
+	}
 }
 func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProjectOutput, func(s *smithy.Schema) error {

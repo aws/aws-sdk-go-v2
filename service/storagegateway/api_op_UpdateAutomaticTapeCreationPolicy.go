@@ -56,7 +56,9 @@ func (v *UpdateAutomaticTapeCreationPolicyInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *UpdateAutomaticTapeCreationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomaticTapeCreationRules(s, schemas.UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules, v.AutomaticTapeCreationRules)
+	if v.AutomaticTapeCreationRules != nil {
+		serializeAutomaticTapeCreationRules(s, schemas.UpdateAutomaticTapeCreationPolicyInput_AutomaticTapeCreationRules, v.AutomaticTapeCreationRules)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.UpdateAutomaticTapeCreationPolicyInput_GatewayARN, *v.GatewayARN)
 	}

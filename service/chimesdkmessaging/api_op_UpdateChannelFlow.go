@@ -59,7 +59,9 @@ func (v *UpdateChannelFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateChannelFlowRequest_Name, *v.Name)
 	}
-	serializeProcessorList(s, schemas.UpdateChannelFlowRequest_Processors, v.Processors)
+	if v.Processors != nil {
+		serializeProcessorList(s, schemas.UpdateChannelFlowRequest_Processors, v.Processors)
+	}
 }
 
 type UpdateChannelFlowOutput struct {

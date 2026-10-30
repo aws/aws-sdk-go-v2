@@ -53,7 +53,9 @@ func (v *BatchGetResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceKeys(s, schemas.BatchGetResourceConfigRequest_resourceKeys, v.ResourceKeys)
+	if v.ResourceKeys != nil {
+		serializeResourceKeys(s, schemas.BatchGetResourceConfigRequest_resourceKeys, v.ResourceKeys)
+	}
 }
 
 type BatchGetResourceConfigOutput struct {
@@ -82,8 +84,12 @@ func (v *BatchGetResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBaseConfigurationItems(s, schemas.BatchGetResourceConfigResponse_baseConfigurationItems, v.BaseConfigurationItems)
-	serializeResourceKeys(s, schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys, v.UnprocessedResourceKeys)
+	if v.BaseConfigurationItems != nil {
+		serializeBaseConfigurationItems(s, schemas.BatchGetResourceConfigResponse_baseConfigurationItems, v.BaseConfigurationItems)
+	}
+	if v.UnprocessedResourceKeys != nil {
+		serializeResourceKeys(s, schemas.BatchGetResourceConfigResponse_unprocessedResourceKeys, v.UnprocessedResourceKeys)
+	}
 }
 func (v *BatchGetResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetResourceConfigResponse, func(s *smithy.Schema) error {

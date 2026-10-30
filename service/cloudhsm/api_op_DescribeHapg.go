@@ -113,16 +113,24 @@ func (v *DescribeHapgOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HapgSerial != nil {
 		s.WriteString(schemas.DescribeHapgResponse_HapgSerial, *v.HapgSerial)
 	}
-	serializeHsmList(s, schemas.DescribeHapgResponse_HsmsLastActionFailed, v.HsmsLastActionFailed)
-	serializeHsmList(s, schemas.DescribeHapgResponse_HsmsPendingDeletion, v.HsmsPendingDeletion)
-	serializeHsmList(s, schemas.DescribeHapgResponse_HsmsPendingRegistration, v.HsmsPendingRegistration)
+	if v.HsmsLastActionFailed != nil {
+		serializeHsmList(s, schemas.DescribeHapgResponse_HsmsLastActionFailed, v.HsmsLastActionFailed)
+	}
+	if v.HsmsPendingDeletion != nil {
+		serializeHsmList(s, schemas.DescribeHapgResponse_HsmsPendingDeletion, v.HsmsPendingDeletion)
+	}
+	if v.HsmsPendingRegistration != nil {
+		serializeHsmList(s, schemas.DescribeHapgResponse_HsmsPendingRegistration, v.HsmsPendingRegistration)
+	}
 	if v.Label != nil {
 		s.WriteString(schemas.DescribeHapgResponse_Label, *v.Label)
 	}
 	if v.LastModifiedTimestamp != nil {
 		s.WriteString(schemas.DescribeHapgResponse_LastModifiedTimestamp, *v.LastModifiedTimestamp)
 	}
-	serializePartitionSerialList(s, schemas.DescribeHapgResponse_PartitionSerialList, v.PartitionSerialList)
+	if v.PartitionSerialList != nil {
+		serializePartitionSerialList(s, schemas.DescribeHapgResponse_PartitionSerialList, v.PartitionSerialList)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.DescribeHapgResponse_State, string(v.State))
 	}

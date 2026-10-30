@@ -88,8 +88,12 @@ func (v *UpdateMatchingWorkflowInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.IncrementalRunConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
-	serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_inputSourceConfig, v.InputSourceConfig)
+	}
+	if v.OutputSourceConfig != nil {
+		serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowInput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.ResolutionTechniques != nil {
 		s.WriteStruct(schemas.UpdateMatchingWorkflowInput_resolutionTechniques)
 		v.ResolutionTechniques.SerializeMembers(s)
@@ -161,8 +165,12 @@ func (v *UpdateMatchingWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.IncrementalRunConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
-	serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	if v.InputSourceConfig != nil {
+		serializeInputSourceConfig(s, schemas.UpdateMatchingWorkflowOutput_inputSourceConfig, v.InputSourceConfig)
+	}
+	if v.OutputSourceConfig != nil {
+		serializeOutputSourceConfig(s, schemas.UpdateMatchingWorkflowOutput_outputSourceConfig, v.OutputSourceConfig)
+	}
 	if v.ResolutionTechniques != nil {
 		s.WriteStruct(schemas.UpdateMatchingWorkflowOutput_resolutionTechniques)
 		v.ResolutionTechniques.SerializeMembers(s)

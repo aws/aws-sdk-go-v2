@@ -67,7 +67,9 @@ func (v *CreateResiliencyGroupInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResiliencyGroupName != nil {
 		s.WriteString(schemas.CreateResiliencyGroupRequest_resiliencyGroupName, *v.ResiliencyGroupName)
 	}
-	serializeTagList(s, schemas.CreateResiliencyGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateResiliencyGroupRequest_tags, v.Tags)
+	}
 }
 
 type CreateResiliencyGroupOutput struct {

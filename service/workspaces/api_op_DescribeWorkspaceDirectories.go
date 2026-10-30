@@ -56,15 +56,21 @@ func (v *DescribeWorkspaceDirectoriesInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeWorkspaceDirectoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryIdList(s, schemas.DescribeWorkspaceDirectoriesRequest_DirectoryIds, v.DirectoryIds)
-	serializeDescribeWorkspaceDirectoriesFilterList(s, schemas.DescribeWorkspaceDirectoriesRequest_Filters, v.Filters)
+	if v.DirectoryIds != nil {
+		serializeDirectoryIdList(s, schemas.DescribeWorkspaceDirectoriesRequest_DirectoryIds, v.DirectoryIds)
+	}
+	if v.Filters != nil {
+		serializeDescribeWorkspaceDirectoriesFilterList(s, schemas.DescribeWorkspaceDirectoriesRequest_Filters, v.Filters)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeWorkspaceDirectoriesRequest_Limit, *v.Limit)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceDirectoriesRequest_NextToken, *v.NextToken)
 	}
-	serializeWorkspaceDirectoryNameList(s, schemas.DescribeWorkspaceDirectoriesRequest_WorkspaceDirectoryNames, v.WorkspaceDirectoryNames)
+	if v.WorkspaceDirectoryNames != nil {
+		serializeWorkspaceDirectoryNameList(s, schemas.DescribeWorkspaceDirectoriesRequest_WorkspaceDirectoryNames, v.WorkspaceDirectoryNames)
+	}
 }
 
 type DescribeWorkspaceDirectoriesOutput struct {
@@ -89,7 +95,9 @@ func (v *DescribeWorkspaceDirectoriesOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeWorkspaceDirectoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryList(s, schemas.DescribeWorkspaceDirectoriesResult_Directories, v.Directories)
+	if v.Directories != nil {
+		serializeDirectoryList(s, schemas.DescribeWorkspaceDirectoriesResult_Directories, v.Directories)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceDirectoriesResult_NextToken, *v.NextToken)
 	}

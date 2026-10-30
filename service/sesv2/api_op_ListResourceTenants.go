@@ -99,7 +99,9 @@ func (v *ListResourceTenantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResourceTenantsResponse_NextToken, *v.NextToken)
 	}
-	serializeResourceTenantMetadataList(s, schemas.ListResourceTenantsResponse_ResourceTenants, v.ResourceTenants)
+	if v.ResourceTenants != nil {
+		serializeResourceTenantMetadataList(s, schemas.ListResourceTenantsResponse_ResourceTenants, v.ResourceTenants)
+	}
 }
 func (v *ListResourceTenantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResourceTenantsResponse, func(s *smithy.Schema) error {

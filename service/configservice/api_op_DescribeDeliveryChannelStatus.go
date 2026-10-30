@@ -46,7 +46,9 @@ func (v *DescribeDeliveryChannelStatusInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeDeliveryChannelStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeliveryChannelNameList(s, schemas.DescribeDeliveryChannelStatusRequest_DeliveryChannelNames, v.DeliveryChannelNames)
+	if v.DeliveryChannelNames != nil {
+		serializeDeliveryChannelNameList(s, schemas.DescribeDeliveryChannelStatusRequest_DeliveryChannelNames, v.DeliveryChannelNames)
+	}
 }
 
 // The output for the DescribeDeliveryChannelStatus action.
@@ -68,7 +70,9 @@ func (v *DescribeDeliveryChannelStatusOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeDeliveryChannelStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeliveryChannelStatusList(s, schemas.DescribeDeliveryChannelStatusResponse_DeliveryChannelsStatus, v.DeliveryChannelsStatus)
+	if v.DeliveryChannelsStatus != nil {
+		serializeDeliveryChannelStatusList(s, schemas.DescribeDeliveryChannelStatusResponse_DeliveryChannelsStatus, v.DeliveryChannelsStatus)
+	}
 }
 func (v *DescribeDeliveryChannelStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeDeliveryChannelStatusResponse, func(s *smithy.Schema) error {

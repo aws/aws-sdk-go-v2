@@ -94,7 +94,9 @@ func (v *ListTestRunDependenciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTestRunDependenciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTestRunDependencySummaryList(s, schemas.ListTestRunDependenciesResponse_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeTestRunDependencySummaryList(s, schemas.ListTestRunDependenciesResponse_dependencies, v.Dependencies)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTestRunDependenciesResponse_nextToken, *v.NextToken)
 	}

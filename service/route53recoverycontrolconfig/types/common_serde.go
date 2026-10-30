@@ -7,9 +7,6 @@ import (
 )
 
 func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serialize__listOf__string(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serialize__listOf__stringMax36PatternS(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serialize__listOf__stringMax36PatternS(s smithy.ShapeSerializer, schema *sm
 }
 
 func serialize__listOf__stringMin1Max256PatternAZaZ09(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +31,6 @@ func serialize__listOf__stringMin1Max256PatternAZaZ09(s smithy.ShapeSerializer, 
 }
 
 func serialize__listOfCluster(s smithy.ShapeSerializer, schema *smithy.Schema, v []Cluster) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -53,9 +41,6 @@ func serialize__listOfCluster(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serialize__listOfClusterEndpoint(s smithy.ShapeSerializer, schema *smithy.Schema, v []ClusterEndpoint) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -66,9 +51,6 @@ func serialize__listOfClusterEndpoint(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serialize__listOfControlPanel(s smithy.ShapeSerializer, schema *smithy.Schema, v []ControlPanel) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -79,9 +61,6 @@ func serialize__listOfControlPanel(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serialize__listOfRoutingControl(s smithy.ShapeSerializer, schema *smithy.Schema, v []RoutingControl) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -92,9 +71,6 @@ func serialize__listOfRoutingControl(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serialize__listOfRule(s smithy.ShapeSerializer, schema *smithy.Schema, v []Rule) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -278,9 +254,6 @@ func deserialize__listOfRule(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]
 }
 
 func serialize__mapOf__stringMin0Max256PatternS(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

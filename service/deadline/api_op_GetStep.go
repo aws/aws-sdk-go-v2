@@ -213,7 +213,9 @@ func (v *GetStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TaskRunStatus != "" {
 		s.WriteString(schemas.GetStepResponse_taskRunStatus, string(v.TaskRunStatus))
 	}
-	serializeTaskRunStatusCounts(s, schemas.GetStepResponse_taskRunStatusCounts, v.TaskRunStatusCounts)
+	if v.TaskRunStatusCounts != nil {
+		serializeTaskRunStatusCounts(s, schemas.GetStepResponse_taskRunStatusCounts, v.TaskRunStatusCounts)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetStepResponse_updatedAt, *v.UpdatedAt)
 	}

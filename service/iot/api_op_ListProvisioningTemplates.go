@@ -81,7 +81,9 @@ func (v *ListProvisioningTemplatesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProvisioningTemplatesResponse_nextToken, *v.NextToken)
 	}
-	serializeProvisioningTemplateListing(s, schemas.ListProvisioningTemplatesResponse_templates, v.Templates)
+	if v.Templates != nil {
+		serializeProvisioningTemplateListing(s, schemas.ListProvisioningTemplatesResponse_templates, v.Templates)
+	}
 }
 func (v *ListProvisioningTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisioningTemplatesResponse, func(s *smithy.Schema) error {

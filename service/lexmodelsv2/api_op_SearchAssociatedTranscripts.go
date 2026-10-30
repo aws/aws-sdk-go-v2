@@ -92,7 +92,9 @@ func (v *SearchAssociatedTranscriptsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.BotVersion != nil {
 		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_botVersion, *v.BotVersion)
 	}
-	serializeAssociatedTranscriptFilters(s, schemas.SearchAssociatedTranscriptsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeAssociatedTranscriptFilters(s, schemas.SearchAssociatedTranscriptsRequest_filters, v.Filters)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.SearchAssociatedTranscriptsRequest_localeId, *v.LocaleId)
 	}
@@ -152,7 +154,9 @@ func (v *SearchAssociatedTranscriptsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SearchAssociatedTranscriptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedTranscriptList(s, schemas.SearchAssociatedTranscriptsResponse_associatedTranscripts, v.AssociatedTranscripts)
+	if v.AssociatedTranscripts != nil {
+		serializeAssociatedTranscriptList(s, schemas.SearchAssociatedTranscriptsResponse_associatedTranscripts, v.AssociatedTranscripts)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.SearchAssociatedTranscriptsResponse_botId, *v.BotId)
 	}

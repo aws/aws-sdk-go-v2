@@ -102,7 +102,9 @@ func (v *ListCommandsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCommandsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandSummaryList(s, schemas.ListCommandsResponse_commands, v.Commands)
+	if v.Commands != nil {
+		serializeCommandSummaryList(s, schemas.ListCommandsResponse_commands, v.Commands)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommandsResponse_nextToken, *v.NextToken)
 	}

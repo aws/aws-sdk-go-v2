@@ -96,7 +96,9 @@ func (v *AccountGrouping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutoAssociate != nil {
 		s.WriteBool(schemas.AccountGrouping_AutoAssociate, *v.AutoAssociate)
 	}
-	serializeAccountIdList(s, schemas.AccountGrouping_LinkedAccountIds, v.LinkedAccountIds)
+	if v.LinkedAccountIds != nil {
+		serializeAccountIdList(s, schemas.AccountGrouping_LinkedAccountIds, v.LinkedAccountIds)
+	}
 	if v.ResponsibilityTransferArn != nil {
 		s.WriteString(schemas.AccountGrouping_ResponsibilityTransferArn, *v.ResponsibilityTransferArn)
 	}
@@ -422,7 +424,9 @@ func (v *BillingGroupCostReportResultElement) SerializeMembers(s smithy.ShapeSer
 	if v.Arn != nil {
 		s.WriteString(schemas.BillingGroupCostReportResultElement_Arn, *v.Arn)
 	}
-	serializeAttributesList(s, schemas.BillingGroupCostReportResultElement_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributesList(s, schemas.BillingGroupCostReportResultElement_Attributes, v.Attributes)
+	}
 	if v.Currency != nil {
 		s.WriteString(schemas.BillingGroupCostReportResultElement_Currency, *v.Currency)
 	}
@@ -742,7 +746,9 @@ func (v *CreateTieringInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomTiersList(s, schemas.CreateTieringInput_CustomTiers, v.CustomTiers)
+	if v.CustomTiers != nil {
+		serializeCustomTiersList(s, schemas.CreateTieringInput_CustomTiers, v.CustomTiers)
+	}
 	if v.FreeTier != nil {
 		s.WriteStruct(schemas.CreateTieringInput_FreeTier)
 		v.FreeTier.SerializeMembers(s)
@@ -842,7 +848,9 @@ func (v *CustomLineItemChargeDetails) SerializeMembers(s smithy.ShapeSerializer)
 		v.Flat.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLineItemFiltersList(s, schemas.CustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	if v.LineItemFilters != nil {
+		serializeLineItemFiltersList(s, schemas.CustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	}
 	if v.Percentage != nil {
 		s.WriteStruct(schemas.CustomLineItemChargeDetails_Percentage)
 		v.Percentage.SerializeMembers(s)
@@ -1087,7 +1095,9 @@ func (v *CustomLineItemPercentageChargeDetails) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *CustomLineItemPercentageChargeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomLineItemAssociationsList(s, schemas.CustomLineItemPercentageChargeDetails_AssociatedValues, v.AssociatedValues)
+	if v.AssociatedValues != nil {
+		serializeCustomLineItemAssociationsList(s, schemas.CustomLineItemPercentageChargeDetails_AssociatedValues, v.AssociatedValues)
+	}
 	if v.PercentageValue != nil {
 		s.WriteFloat64(schemas.CustomLineItemPercentageChargeDetails_PercentageValue, *v.PercentageValue)
 	}
@@ -1455,11 +1465,15 @@ func (v *LineItemFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Attribute != "" {
 		s.WriteString(schemas.LineItemFilter_Attribute, string(v.Attribute))
 	}
-	serializeAttributeValueList(s, schemas.LineItemFilter_AttributeValues, v.AttributeValues)
+	if v.AttributeValues != nil {
+		serializeAttributeValueList(s, schemas.LineItemFilter_AttributeValues, v.AttributeValues)
+	}
 	if v.MatchOption != "" {
 		s.WriteString(schemas.LineItemFilter_MatchOption, string(v.MatchOption))
 	}
-	serializeLineItemFilterValuesList(s, schemas.LineItemFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeLineItemFilterValuesList(s, schemas.LineItemFilter_Values, v.Values)
+	}
 }
 func (v *LineItemFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LineItemFilter, func(s *smithy.Schema) error {
@@ -1525,7 +1539,9 @@ func (v *ListAccountAssociationsFilter) SerializeMembers(s smithy.ShapeSerialize
 	if v.AccountId != nil {
 		s.WriteString(schemas.ListAccountAssociationsFilter_AccountId, *v.AccountId)
 	}
-	serializeAccountIdFilterList(s, schemas.ListAccountAssociationsFilter_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdFilterList(s, schemas.ListAccountAssociationsFilter_AccountIds, v.AccountIds)
+	}
 	if v.Association != nil {
 		s.WriteString(schemas.ListAccountAssociationsFilter_Association, *v.Association)
 	}
@@ -1605,7 +1621,9 @@ func (v *ListBillingGroupCostReportsFilter) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListBillingGroupCostReportsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingGroupArnList(s, schemas.ListBillingGroupCostReportsFilter_BillingGroupArns, v.BillingGroupArns)
+	if v.BillingGroupArns != nil {
+		serializeBillingGroupArnList(s, schemas.ListBillingGroupCostReportsFilter_BillingGroupArns, v.BillingGroupArns)
+	}
 }
 func (v *ListBillingGroupCostReportsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBillingGroupCostReportsFilter, func(s *smithy.Schema) error {
@@ -1657,18 +1675,30 @@ func (v *ListBillingGroupsFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillingGroupsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingGroupArnList(s, schemas.ListBillingGroupsFilter_Arns, v.Arns)
+	if v.Arns != nil {
+		serializeBillingGroupArnList(s, schemas.ListBillingGroupsFilter_Arns, v.Arns)
+	}
 	if v.AutoAssociate != nil {
 		s.WriteBool(schemas.ListBillingGroupsFilter_AutoAssociate, *v.AutoAssociate)
 	}
-	serializeBillingGroupTypeList(s, schemas.ListBillingGroupsFilter_BillingGroupTypes, v.BillingGroupTypes)
-	serializeStringSearches(s, schemas.ListBillingGroupsFilter_Names, v.Names)
+	if v.BillingGroupTypes != nil {
+		serializeBillingGroupTypeList(s, schemas.ListBillingGroupsFilter_BillingGroupTypes, v.BillingGroupTypes)
+	}
+	if v.Names != nil {
+		serializeStringSearches(s, schemas.ListBillingGroupsFilter_Names, v.Names)
+	}
 	if v.PricingPlan != nil {
 		s.WriteString(schemas.ListBillingGroupsFilter_PricingPlan, *v.PricingPlan)
 	}
-	serializePrimaryAccountIdList(s, schemas.ListBillingGroupsFilter_PrimaryAccountIds, v.PrimaryAccountIds)
-	serializeResponsibilityTransferArnsList(s, schemas.ListBillingGroupsFilter_ResponsibilityTransferArns, v.ResponsibilityTransferArns)
-	serializeBillingGroupStatusList(s, schemas.ListBillingGroupsFilter_Statuses, v.Statuses)
+	if v.PrimaryAccountIds != nil {
+		serializePrimaryAccountIdList(s, schemas.ListBillingGroupsFilter_PrimaryAccountIds, v.PrimaryAccountIds)
+	}
+	if v.ResponsibilityTransferArns != nil {
+		serializeResponsibilityTransferArnsList(s, schemas.ListBillingGroupsFilter_ResponsibilityTransferArns, v.ResponsibilityTransferArns)
+	}
+	if v.Statuses != nil {
+		serializeBillingGroupStatusList(s, schemas.ListBillingGroupsFilter_Statuses, v.Statuses)
+	}
 }
 func (v *ListBillingGroupsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListBillingGroupsFilter, func(s *smithy.Schema) error {
@@ -1731,7 +1761,9 @@ func (v *ListCustomLineItemChargeDetails) SerializeMembers(s smithy.ShapeSeriali
 		v.Flat.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLineItemFiltersList(s, schemas.ListCustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	if v.LineItemFilters != nil {
+		serializeLineItemFiltersList(s, schemas.ListCustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	}
 	if v.Percentage != nil {
 		s.WriteStruct(schemas.ListCustomLineItemChargeDetails_Percentage)
 		v.Percentage.SerializeMembers(s)
@@ -1862,10 +1894,18 @@ func (v *ListCustomLineItemsFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomLineItemsFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ListCustomLineItemsFilter_AccountIds, v.AccountIds)
-	serializeCustomLineItemArns(s, schemas.ListCustomLineItemsFilter_Arns, v.Arns)
-	serializeBillingGroupArnList(s, schemas.ListCustomLineItemsFilter_BillingGroups, v.BillingGroups)
-	serializeCustomLineItemNameList(s, schemas.ListCustomLineItemsFilter_Names, v.Names)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.ListCustomLineItemsFilter_AccountIds, v.AccountIds)
+	}
+	if v.Arns != nil {
+		serializeCustomLineItemArns(s, schemas.ListCustomLineItemsFilter_Arns, v.Arns)
+	}
+	if v.BillingGroups != nil {
+		serializeBillingGroupArnList(s, schemas.ListCustomLineItemsFilter_BillingGroups, v.BillingGroups)
+	}
+	if v.Names != nil {
+		serializeCustomLineItemNameList(s, schemas.ListCustomLineItemsFilter_Names, v.Names)
+	}
 }
 func (v *ListCustomLineItemsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCustomLineItemsFilter, func(s *smithy.Schema) error {
@@ -1977,7 +2017,9 @@ func (v *ListPricingPlansFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPricingPlansFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePricingPlanArns(s, schemas.ListPricingPlansFilter_Arns, v.Arns)
+	if v.Arns != nil {
+		serializePricingPlanArns(s, schemas.ListPricingPlansFilter_Arns, v.Arns)
+	}
 }
 func (v *ListPricingPlansFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPricingPlansFilter, func(s *smithy.Schema) error {
@@ -2008,7 +2050,9 @@ func (v *ListPricingRulesFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPricingRulesFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePricingRuleArns(s, schemas.ListPricingRulesFilter_Arns, v.Arns)
+	if v.Arns != nil {
+		serializePricingRuleArns(s, schemas.ListPricingRulesFilter_Arns, v.Arns)
+	}
 }
 func (v *ListPricingRulesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPricingRulesFilter, func(s *smithy.Schema) error {
@@ -2459,7 +2503,9 @@ func (v *Tiering) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Tiering) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomTiersList(s, schemas.Tiering_CustomTiers, v.CustomTiers)
+	if v.CustomTiers != nil {
+		serializeCustomTiersList(s, schemas.Tiering_CustomTiers, v.CustomTiers)
+	}
 	if v.FreeTier != nil {
 		s.WriteStruct(schemas.Tiering_FreeTier)
 		v.FreeTier.SerializeMembers(s)
@@ -2553,7 +2599,9 @@ func (v *UpdateCustomLineItemChargeDetails) SerializeMembers(s smithy.ShapeSeria
 		v.Flat.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLineItemFiltersList(s, schemas.UpdateCustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	if v.LineItemFilters != nil {
+		serializeLineItemFiltersList(s, schemas.UpdateCustomLineItemChargeDetails_LineItemFilters, v.LineItemFilters)
+	}
 	if v.Percentage != nil {
 		s.WriteStruct(schemas.UpdateCustomLineItemChargeDetails_Percentage)
 		v.Percentage.SerializeMembers(s)
@@ -2699,7 +2747,9 @@ func (v *UpdateTieringInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTieringInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomTiersList(s, schemas.UpdateTieringInput_CustomTiers, v.CustomTiers)
+	if v.CustomTiers != nil {
+		serializeCustomTiersList(s, schemas.UpdateTieringInput_CustomTiers, v.CustomTiers)
+	}
 	if v.FreeTier != nil {
 		s.WriteStruct(schemas.UpdateTieringInput_FreeTier)
 		v.FreeTier.SerializeMembers(s)

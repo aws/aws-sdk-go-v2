@@ -74,7 +74,9 @@ func (v *ListCellsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCellsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfCellOutput(s, schemas.ListCellsResponse_Cells, v.Cells)
+	if v.Cells != nil {
+		serialize__listOfCellOutput(s, schemas.ListCellsResponse_Cells, v.Cells)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCellsResponse_NextToken, *v.NextToken)
 	}

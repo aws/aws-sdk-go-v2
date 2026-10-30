@@ -58,7 +58,9 @@ func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationsRequest_nextToken, *v.NextToken)
 	}
-	serializeApplicationStatuses(s, schemas.ListApplicationsRequest_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeApplicationStatuses(s, schemas.ListApplicationsRequest_statuses, v.Statuses)
+	}
 }
 
 type ListApplicationsOutput struct {
@@ -85,7 +87,9 @@ func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationSummaries(s, schemas.ListApplicationsResponse_ApplicationSummaries, v.ApplicationSummaries)
+	if v.ApplicationSummaries != nil {
+		serializeApplicationSummaries(s, schemas.ListApplicationsResponse_ApplicationSummaries, v.ApplicationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApplicationsResponse_nextToken, *v.NextToken)
 	}

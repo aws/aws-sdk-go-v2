@@ -120,8 +120,12 @@ func (v *UpdateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateDataSetRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeColumnGroupList(s, schemas.UpdateDataSetRequest_ColumnGroups, v.ColumnGroups)
-	serializeColumnLevelPermissionRuleList(s, schemas.UpdateDataSetRequest_ColumnLevelPermissionRules, v.ColumnLevelPermissionRules)
+	if v.ColumnGroups != nil {
+		serializeColumnGroupList(s, schemas.UpdateDataSetRequest_ColumnGroups, v.ColumnGroups)
+	}
+	if v.ColumnLevelPermissionRules != nil {
+		serializeColumnLevelPermissionRuleList(s, schemas.UpdateDataSetRequest_ColumnLevelPermissionRules, v.ColumnLevelPermissionRules)
+	}
 	if v.DataPrepConfiguration != nil {
 		s.WriteStruct(schemas.UpdateDataSetRequest_DataPrepConfiguration)
 		v.DataPrepConfiguration.SerializeMembers(s)
@@ -135,12 +139,18 @@ func (v *UpdateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DataSetUsageConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDatasetParameterList(s, schemas.UpdateDataSetRequest_DatasetParameters, v.DatasetParameters)
-	serializeFieldFolderMap(s, schemas.UpdateDataSetRequest_FieldFolders, v.FieldFolders)
+	if v.DatasetParameters != nil {
+		serializeDatasetParameterList(s, schemas.UpdateDataSetRequest_DatasetParameters, v.DatasetParameters)
+	}
+	if v.FieldFolders != nil {
+		serializeFieldFolderMap(s, schemas.UpdateDataSetRequest_FieldFolders, v.FieldFolders)
+	}
 	if v.ImportMode != "" {
 		s.WriteString(schemas.UpdateDataSetRequest_ImportMode, string(v.ImportMode))
 	}
-	serializeLogicalTableMap(s, schemas.UpdateDataSetRequest_LogicalTableMap, v.LogicalTableMap)
+	if v.LogicalTableMap != nil {
+		serializeLogicalTableMap(s, schemas.UpdateDataSetRequest_LogicalTableMap, v.LogicalTableMap)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateDataSetRequest_Name, *v.Name)
 	}
@@ -149,7 +159,9 @@ func (v *UpdateDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PerformanceConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePhysicalTableMap(s, schemas.UpdateDataSetRequest_PhysicalTableMap, v.PhysicalTableMap)
+	if v.PhysicalTableMap != nil {
+		serializePhysicalTableMap(s, schemas.UpdateDataSetRequest_PhysicalTableMap, v.PhysicalTableMap)
+	}
 	if v.RowLevelPermissionDataSet != nil {
 		s.WriteStruct(schemas.UpdateDataSetRequest_RowLevelPermissionDataSet)
 		v.RowLevelPermissionDataSet.SerializeMembers(s)

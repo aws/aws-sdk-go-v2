@@ -108,7 +108,9 @@ func (v *CommonControlFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CommonControlFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectiveResourceFilterList(s, schemas.CommonControlFilter_Objectives, v.Objectives)
+	if v.Objectives != nil {
+		serializeObjectiveResourceFilterList(s, schemas.CommonControlFilter_Objectives, v.Objectives)
+	}
 }
 func (v *CommonControlFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CommonControlFilter, func(s *smithy.Schema) error {
@@ -283,7 +285,9 @@ func (v *ControlFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ControlFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGovernedProviderFilterList(s, schemas.ControlFilter_GovernedProviders, v.GovernedProviders)
+	if v.GovernedProviders != nil {
+		serializeGovernedProviderFilterList(s, schemas.ControlFilter_GovernedProviders, v.GovernedProviders)
+	}
 	if v.Implementations != nil {
 		s.WriteStruct(schemas.ControlFilter_Implementations)
 		v.Implementations.SerializeMembers(s)
@@ -336,7 +340,9 @@ func (v *ControlMapping) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlArn != nil {
 		s.WriteString(schemas.ControlMapping_ControlArn, *v.ControlArn)
 	}
-	serializeMapping(s, schemas.ControlMapping_Mapping, v.Mapping)
+	if v.Mapping != nil {
+		serializeMapping(s, schemas.ControlMapping_Mapping, v.Mapping)
+	}
 	if v.MappingType != "" {
 		s.WriteString(schemas.ControlMapping_MappingType, string(v.MappingType))
 	}
@@ -388,9 +394,15 @@ func (v *ControlMappingFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ControlMappingFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommonControlArnFilterList(s, schemas.ControlMappingFilter_CommonControlArns, v.CommonControlArns)
-	serializeControlArnFilterList(s, schemas.ControlMappingFilter_ControlArns, v.ControlArns)
-	serializeMappingTypeFilterList(s, schemas.ControlMappingFilter_MappingTypes, v.MappingTypes)
+	if v.CommonControlArns != nil {
+		serializeCommonControlArnFilterList(s, schemas.ControlMappingFilter_CommonControlArns, v.CommonControlArns)
+	}
+	if v.ControlArns != nil {
+		serializeControlArnFilterList(s, schemas.ControlMappingFilter_ControlArns, v.ControlArns)
+	}
+	if v.MappingTypes != nil {
+		serializeMappingTypeFilterList(s, schemas.ControlMappingFilter_MappingTypes, v.MappingTypes)
+	}
 }
 func (v *ControlMappingFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ControlMappingFilter, func(s *smithy.Schema) error {
@@ -564,7 +576,9 @@ func (v *ControlSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ControlSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControlAliases(s, schemas.ControlSummary_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeControlAliases(s, schemas.ControlSummary_Aliases, v.Aliases)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ControlSummary_Arn, *v.Arn)
 	}
@@ -577,8 +591,12 @@ func (v *ControlSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ControlSummary_Description, *v.Description)
 	}
-	serializeGovernedProviders(s, schemas.ControlSummary_GovernedProviders, v.GovernedProviders)
-	serializeGovernedResources(s, schemas.ControlSummary_GovernedResources, v.GovernedResources)
+	if v.GovernedProviders != nil {
+		serializeGovernedProviders(s, schemas.ControlSummary_GovernedProviders, v.GovernedProviders)
+	}
+	if v.GovernedResources != nil {
+		serializeGovernedResources(s, schemas.ControlSummary_GovernedResources, v.GovernedResources)
+	}
 	if v.Implementation != nil {
 		s.WriteStruct(schemas.ControlSummary_Implementation)
 		v.Implementation.SerializeMembers(s)
@@ -884,8 +902,12 @@ func (v *ImplementationFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImplementationFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImplementationIdentifierFilterList(s, schemas.ImplementationFilter_Identifiers, v.Identifiers)
-	serializeImplementationTypeFilterList(s, schemas.ImplementationFilter_Types, v.Types)
+	if v.Identifiers != nil {
+		serializeImplementationIdentifierFilterList(s, schemas.ImplementationFilter_Identifiers, v.Identifiers)
+	}
+	if v.Types != nil {
+		serializeImplementationTypeFilterList(s, schemas.ImplementationFilter_Types, v.Types)
+	}
 }
 func (v *ImplementationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImplementationFilter, func(s *smithy.Schema) error {
@@ -1034,7 +1056,9 @@ func (v *ObjectiveFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ObjectiveFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainResourceFilterList(s, schemas.ObjectiveFilter_Domains, v.Domains)
+	if v.Domains != nil {
+		serializeDomainResourceFilterList(s, schemas.ObjectiveFilter_Domains, v.Domains)
+	}
 }
 func (v *ObjectiveFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ObjectiveFilter, func(s *smithy.Schema) error {
@@ -1208,7 +1232,9 @@ func (v *RegionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeployableRegions(s, schemas.RegionConfiguration_DeployableRegions, v.DeployableRegions)
+	if v.DeployableRegions != nil {
+		serializeDeployableRegions(s, schemas.RegionConfiguration_DeployableRegions, v.DeployableRegions)
+	}
 	if v.Scope != "" {
 		s.WriteString(schemas.RegionConfiguration_Scope, string(v.Scope))
 	}

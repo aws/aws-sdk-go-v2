@@ -115,7 +115,9 @@ func (v *CreatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != nil {
 		s.WriteString(schemas.CreatePermissionRequest_resourceType, *v.ResourceType)
 	}
-	serializeTagList(s, schemas.CreatePermissionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePermissionRequest_tags, v.Tags)
+	}
 }
 
 type CreatePermissionOutput struct {

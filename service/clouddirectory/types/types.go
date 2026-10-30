@@ -93,7 +93,9 @@ func (v *AttributeKeyAndValue) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Key.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTypedAttributeValue(s, schemas.AttributeKeyAndValue_Value, v.Value)
+	if v.Value != nil {
+		serializeTypedAttributeValue(s, schemas.AttributeKeyAndValue_Value, v.Value)
+	}
 }
 func (v *AttributeKeyAndValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeKeyAndValue, func(s *smithy.Schema) error {
@@ -134,7 +136,9 @@ func (v *AttributeNameAndValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeName != nil {
 		s.WriteString(schemas.AttributeNameAndValue_AttributeName, *v.AttributeName)
 	}
-	serializeTypedAttributeValue(s, schemas.AttributeNameAndValue_Value, v.Value)
+	if v.Value != nil {
+		serializeTypedAttributeValue(s, schemas.AttributeNameAndValue_Value, v.Value)
+	}
 }
 func (v *AttributeNameAndValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeNameAndValue, func(s *smithy.Schema) error {
@@ -177,7 +181,9 @@ func (v *BatchAddFacetToObject) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchAddFacetToObject) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.BatchAddFacetToObject_ObjectAttributeList, v.ObjectAttributeList)
+	if v.ObjectAttributeList != nil {
+		serializeAttributeKeyAndValueList(s, schemas.BatchAddFacetToObject_ObjectAttributeList, v.ObjectAttributeList)
+	}
 	if v.ObjectReference != nil {
 		s.WriteStruct(schemas.BatchAddFacetToObject_ObjectReference)
 		v.ObjectReference.SerializeMembers(s)
@@ -500,7 +506,9 @@ func (v *BatchAttachTypedLink) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchAttachTypedLink) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameAndValueList(s, schemas.BatchAttachTypedLink_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeNameAndValueList(s, schemas.BatchAttachTypedLink_Attributes, v.Attributes)
+	}
 	if v.SourceObjectReference != nil {
 		s.WriteStruct(schemas.BatchAttachTypedLink_SourceObjectReference)
 		v.SourceObjectReference.SerializeMembers(s)
@@ -611,7 +619,9 @@ func (v *BatchCreateIndex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LinkName != nil {
 		s.WriteString(schemas.BatchCreateIndex_LinkName, *v.LinkName)
 	}
-	serializeAttributeKeyList(s, schemas.BatchCreateIndex_OrderedIndexedAttributeList, v.OrderedIndexedAttributeList)
+	if v.OrderedIndexedAttributeList != nil {
+		serializeAttributeKeyList(s, schemas.BatchCreateIndex_OrderedIndexedAttributeList, v.OrderedIndexedAttributeList)
+	}
 	if v.ParentReference != nil {
 		s.WriteStruct(schemas.BatchCreateIndex_ParentReference)
 		v.ParentReference.SerializeMembers(s)
@@ -712,13 +722,17 @@ func (v *BatchCreateObject) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LinkName != nil {
 		s.WriteString(schemas.BatchCreateObject_LinkName, *v.LinkName)
 	}
-	serializeAttributeKeyAndValueList(s, schemas.BatchCreateObject_ObjectAttributeList, v.ObjectAttributeList)
+	if v.ObjectAttributeList != nil {
+		serializeAttributeKeyAndValueList(s, schemas.BatchCreateObject_ObjectAttributeList, v.ObjectAttributeList)
+	}
 	if v.ParentReference != nil {
 		s.WriteStruct(schemas.BatchCreateObject_ParentReference)
 		v.ParentReference.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSchemaFacetList(s, schemas.BatchCreateObject_SchemaFacet, v.SchemaFacet)
+	if v.SchemaFacet != nil {
+		serializeSchemaFacetList(s, schemas.BatchCreateObject_SchemaFacet, v.SchemaFacet)
+	}
 }
 func (v *BatchCreateObject) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateObject, func(s *smithy.Schema) error {
@@ -1147,7 +1161,9 @@ func (v *BatchGetLinkAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetLinkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.BatchGetLinkAttributes_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.BatchGetLinkAttributes_AttributeNames, v.AttributeNames)
+	}
 	if v.TypedLinkSpecifier != nil {
 		s.WriteStruct(schemas.BatchGetLinkAttributes_TypedLinkSpecifier)
 		v.TypedLinkSpecifier.SerializeMembers(s)
@@ -1183,7 +1199,9 @@ func (v *BatchGetLinkAttributesResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetLinkAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.BatchGetLinkAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeKeyAndValueList(s, schemas.BatchGetLinkAttributesResponse_Attributes, v.Attributes)
+	}
 }
 func (v *BatchGetLinkAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetLinkAttributesResponse, func(s *smithy.Schema) error {
@@ -1224,7 +1242,9 @@ func (v *BatchGetObjectAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetObjectAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.BatchGetObjectAttributes_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.BatchGetObjectAttributes_AttributeNames, v.AttributeNames)
+	}
 	if v.ObjectReference != nil {
 		s.WriteStruct(schemas.BatchGetObjectAttributes_ObjectReference)
 		v.ObjectReference.SerializeMembers(s)
@@ -1268,7 +1288,9 @@ func (v *BatchGetObjectAttributesResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetObjectAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.BatchGetObjectAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeKeyAndValueList(s, schemas.BatchGetObjectAttributesResponse_Attributes, v.Attributes)
+	}
 }
 func (v *BatchGetObjectAttributesResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetObjectAttributesResponse, func(s *smithy.Schema) error {
@@ -1338,7 +1360,9 @@ func (v *BatchGetObjectInformationResponse) SerializeMembers(s smithy.ShapeSeria
 	if v.ObjectIdentifier != nil {
 		s.WriteString(schemas.BatchGetObjectInformationResponse_ObjectIdentifier, *v.ObjectIdentifier)
 	}
-	serializeSchemaFacetList(s, schemas.BatchGetObjectInformationResponse_SchemaFacets, v.SchemaFacets)
+	if v.SchemaFacets != nil {
+		serializeSchemaFacetList(s, schemas.BatchGetObjectInformationResponse_SchemaFacets, v.SchemaFacets)
+	}
 }
 func (v *BatchGetObjectInformationResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetObjectInformationResponse, func(s *smithy.Schema) error {
@@ -1426,7 +1450,9 @@ func (v *BatchListAttachedIndicesResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchListAttachedIndicesResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexAttachmentList(s, schemas.BatchListAttachedIndicesResponse_IndexAttachments, v.IndexAttachments)
+	if v.IndexAttachments != nil {
+		serializeIndexAttachmentList(s, schemas.BatchListAttachedIndicesResponse_IndexAttachments, v.IndexAttachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListAttachedIndicesResponse_NextToken, *v.NextToken)
 	}
@@ -1478,7 +1504,9 @@ func (v *BatchListIncomingTypedLinks) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchListIncomingTypedLinks) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkAttributeRangeList(s, schemas.BatchListIncomingTypedLinks_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterAttributeRanges != nil {
+		serializeTypedLinkAttributeRangeList(s, schemas.BatchListIncomingTypedLinks_FilterAttributeRanges, v.FilterAttributeRanges)
+	}
 	if v.FilterTypedLink != nil {
 		s.WriteStruct(schemas.BatchListIncomingTypedLinks_FilterTypedLink)
 		v.FilterTypedLink.SerializeMembers(s)
@@ -1537,7 +1565,9 @@ func (v *BatchListIncomingTypedLinksResponse) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchListIncomingTypedLinksResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkSpecifierList(s, schemas.BatchListIncomingTypedLinksResponse_LinkSpecifiers, v.LinkSpecifiers)
+	if v.LinkSpecifiers != nil {
+		serializeTypedLinkSpecifierList(s, schemas.BatchListIncomingTypedLinksResponse_LinkSpecifiers, v.LinkSpecifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListIncomingTypedLinksResponse_NextToken, *v.NextToken)
 	}
@@ -1594,7 +1624,9 @@ func (v *BatchListIndex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListIndex_NextToken, *v.NextToken)
 	}
-	serializeObjectAttributeRangeList(s, schemas.BatchListIndex_RangesOnIndexedValues, v.RangesOnIndexedValues)
+	if v.RangesOnIndexedValues != nil {
+		serializeObjectAttributeRangeList(s, schemas.BatchListIndex_RangesOnIndexedValues, v.RangesOnIndexedValues)
+	}
 }
 func (v *BatchListIndex) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchListIndex, func(s *smithy.Schema) error {
@@ -1634,7 +1666,9 @@ func (v *BatchListIndexResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchListIndexResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexAttachmentList(s, schemas.BatchListIndexResponse_IndexAttachments, v.IndexAttachments)
+	if v.IndexAttachments != nil {
+		serializeIndexAttachmentList(s, schemas.BatchListIndexResponse_IndexAttachments, v.IndexAttachments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListIndexResponse_NextToken, *v.NextToken)
 	}
@@ -1738,7 +1772,9 @@ func (v *BatchListObjectAttributesResponse) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchListObjectAttributesResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.BatchListObjectAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeKeyAndValueList(s, schemas.BatchListObjectAttributesResponse_Attributes, v.Attributes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListObjectAttributesResponse_NextToken, *v.NextToken)
 	}
@@ -1830,7 +1866,9 @@ func (v *BatchListObjectChildrenResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchListObjectChildrenResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkNameToObjectIdentifierMap(s, schemas.BatchListObjectChildrenResponse_Children, v.Children)
+	if v.Children != nil {
+		serializeLinkNameToObjectIdentifierMap(s, schemas.BatchListObjectChildrenResponse_Children, v.Children)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListObjectChildrenResponse_NextToken, *v.NextToken)
 	}
@@ -1926,7 +1964,9 @@ func (v *BatchListObjectParentPathsResponse) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListObjectParentPathsResponse_NextToken, *v.NextToken)
 	}
-	serializePathToObjectIdentifiersList(s, schemas.BatchListObjectParentPathsResponse_PathToObjectIdentifiersList, v.PathToObjectIdentifiersList)
+	if v.PathToObjectIdentifiersList != nil {
+		serializePathToObjectIdentifiersList(s, schemas.BatchListObjectParentPathsResponse_PathToObjectIdentifiersList, v.PathToObjectIdentifiersList)
+	}
 }
 func (v *BatchListObjectParentPathsResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchListObjectParentPathsResponse, func(s *smithy.Schema) error {
@@ -2018,7 +2058,9 @@ func (v *BatchListObjectParentsResponse) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListObjectParentsResponse_NextToken, *v.NextToken)
 	}
-	serializeObjectIdentifierAndLinkNameList(s, schemas.BatchListObjectParentsResponse_ParentLinks, v.ParentLinks)
+	if v.ParentLinks != nil {
+		serializeObjectIdentifierAndLinkNameList(s, schemas.BatchListObjectParentsResponse_ParentLinks, v.ParentLinks)
+	}
 }
 func (v *BatchListObjectParentsResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchListObjectParentsResponse, func(s *smithy.Schema) error {
@@ -2106,7 +2148,9 @@ func (v *BatchListObjectPoliciesResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchListObjectPoliciesResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectIdentifierList(s, schemas.BatchListObjectPoliciesResponse_AttachedPolicyIds, v.AttachedPolicyIds)
+	if v.AttachedPolicyIds != nil {
+		serializeObjectIdentifierList(s, schemas.BatchListObjectPoliciesResponse_AttachedPolicyIds, v.AttachedPolicyIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListObjectPoliciesResponse_NextToken, *v.NextToken)
 	}
@@ -2158,7 +2202,9 @@ func (v *BatchListOutgoingTypedLinks) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchListOutgoingTypedLinks) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkAttributeRangeList(s, schemas.BatchListOutgoingTypedLinks_FilterAttributeRanges, v.FilterAttributeRanges)
+	if v.FilterAttributeRanges != nil {
+		serializeTypedLinkAttributeRangeList(s, schemas.BatchListOutgoingTypedLinks_FilterAttributeRanges, v.FilterAttributeRanges)
+	}
 	if v.FilterTypedLink != nil {
 		s.WriteStruct(schemas.BatchListOutgoingTypedLinks_FilterTypedLink)
 		v.FilterTypedLink.SerializeMembers(s)
@@ -2220,7 +2266,9 @@ func (v *BatchListOutgoingTypedLinksResponse) SerializeMembers(s smithy.ShapeSer
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListOutgoingTypedLinksResponse_NextToken, *v.NextToken)
 	}
-	serializeTypedLinkSpecifierList(s, schemas.BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers, v.TypedLinkSpecifiers)
+	if v.TypedLinkSpecifiers != nil {
+		serializeTypedLinkSpecifierList(s, schemas.BatchListOutgoingTypedLinksResponse_TypedLinkSpecifiers, v.TypedLinkSpecifiers)
+	}
 }
 func (v *BatchListOutgoingTypedLinksResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchListOutgoingTypedLinksResponse, func(s *smithy.Schema) error {
@@ -2311,7 +2359,9 @@ func (v *BatchListPolicyAttachmentsResponse) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchListPolicyAttachmentsResponse_NextToken, *v.NextToken)
 	}
-	serializeObjectIdentifierList(s, schemas.BatchListPolicyAttachmentsResponse_ObjectIdentifiers, v.ObjectIdentifiers)
+	if v.ObjectIdentifiers != nil {
+		serializeObjectIdentifierList(s, schemas.BatchListPolicyAttachmentsResponse_ObjectIdentifiers, v.ObjectIdentifiers)
+	}
 }
 func (v *BatchListPolicyAttachmentsResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchListPolicyAttachmentsResponse, func(s *smithy.Schema) error {
@@ -2405,7 +2455,9 @@ func (v *BatchLookupPolicyResponse) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchLookupPolicyResponse_NextToken, *v.NextToken)
 	}
-	serializePolicyToPathList(s, schemas.BatchLookupPolicyResponse_PolicyToPathList, v.PolicyToPathList)
+	if v.PolicyToPathList != nil {
+		serializePolicyToPathList(s, schemas.BatchLookupPolicyResponse_PolicyToPathList, v.PolicyToPathList)
+	}
 }
 func (v *BatchLookupPolicyResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchLookupPolicyResponse, func(s *smithy.Schema) error {
@@ -2996,7 +3048,9 @@ func (v *BatchUpdateLinkAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateLinkAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkAttributeUpdateList(s, schemas.BatchUpdateLinkAttributes_AttributeUpdates, v.AttributeUpdates)
+	if v.AttributeUpdates != nil {
+		serializeLinkAttributeUpdateList(s, schemas.BatchUpdateLinkAttributes_AttributeUpdates, v.AttributeUpdates)
+	}
 	if v.TypedLinkSpecifier != nil {
 		s.WriteStruct(schemas.BatchUpdateLinkAttributes_TypedLinkSpecifier)
 		v.TypedLinkSpecifier.SerializeMembers(s)
@@ -3060,7 +3114,9 @@ func (v *BatchUpdateObjectAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchUpdateObjectAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectAttributeUpdateList(s, schemas.BatchUpdateObjectAttributes_AttributeUpdates, v.AttributeUpdates)
+	if v.AttributeUpdates != nil {
+		serializeObjectAttributeUpdateList(s, schemas.BatchUpdateObjectAttributes_AttributeUpdates, v.AttributeUpdates)
+	}
 	if v.ObjectReference != nil {
 		s.WriteStruct(schemas.BatchUpdateObjectAttributes_ObjectReference)
 		v.ObjectReference.SerializeMembers(s)
@@ -3731,11 +3787,15 @@ func (v *FacetAttributeDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FacetAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedAttributeValue(s, schemas.FacetAttributeDefinition_DefaultValue, v.DefaultValue)
+	if v.DefaultValue != nil {
+		serializeTypedAttributeValue(s, schemas.FacetAttributeDefinition_DefaultValue, v.DefaultValue)
+	}
 	if v.IsImmutable != false {
 		s.WriteBool(schemas.FacetAttributeDefinition_IsImmutable, v.IsImmutable)
 	}
-	serializeRuleMap(s, schemas.FacetAttributeDefinition_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleMap(s, schemas.FacetAttributeDefinition_Rules, v.Rules)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.FacetAttributeDefinition_Type, string(v.Type))
 	}
@@ -3880,7 +3940,9 @@ func (v *IndexAttachment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IndexAttachment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.IndexAttachment_IndexedAttributes, v.IndexedAttributes)
+	if v.IndexedAttributes != nil {
+		serializeAttributeKeyAndValueList(s, schemas.IndexAttachment_IndexedAttributes, v.IndexedAttributes)
+	}
 	if v.ObjectIdentifier != nil {
 		s.WriteString(schemas.IndexAttachment_ObjectIdentifier, *v.ObjectIdentifier)
 	}
@@ -3921,7 +3983,9 @@ func (v *LinkAttributeAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttributeActionType != "" {
 		s.WriteString(schemas.LinkAttributeAction_AttributeActionType, string(v.AttributeActionType))
 	}
-	serializeTypedAttributeValue(s, schemas.LinkAttributeAction_AttributeUpdateValue, v.AttributeUpdateValue)
+	if v.AttributeUpdateValue != nil {
+		serializeTypedAttributeValue(s, schemas.LinkAttributeAction_AttributeUpdateValue, v.AttributeUpdateValue)
+	}
 }
 func (v *LinkAttributeAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LinkAttributeAction, func(s *smithy.Schema) error {
@@ -4006,7 +4070,9 @@ func (v *ObjectAttributeAction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ObjectAttributeActionType != "" {
 		s.WriteString(schemas.ObjectAttributeAction_ObjectAttributeActionType, string(v.ObjectAttributeActionType))
 	}
-	serializeTypedAttributeValue(s, schemas.ObjectAttributeAction_ObjectAttributeUpdateValue, v.ObjectAttributeUpdateValue)
+	if v.ObjectAttributeUpdateValue != nil {
+		serializeTypedAttributeValue(s, schemas.ObjectAttributeAction_ObjectAttributeUpdateValue, v.ObjectAttributeUpdateValue)
+	}
 }
 func (v *ObjectAttributeAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ObjectAttributeAction, func(s *smithy.Schema) error {
@@ -4220,7 +4286,9 @@ func (v *PathToObjectIdentifiers) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PathToObjectIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeObjectIdentifierList(s, schemas.PathToObjectIdentifiers_ObjectIdentifiers, v.ObjectIdentifiers)
+	if v.ObjectIdentifiers != nil {
+		serializeObjectIdentifierList(s, schemas.PathToObjectIdentifiers_ObjectIdentifiers, v.ObjectIdentifiers)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.PathToObjectIdentifiers_Path, *v.Path)
 	}
@@ -4313,7 +4381,9 @@ func (v *PolicyToPath) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Path != nil {
 		s.WriteString(schemas.PolicyToPath_Path, *v.Path)
 	}
-	serializePolicyAttachmentList(s, schemas.PolicyToPath_Policies, v.Policies)
+	if v.Policies != nil {
+		serializePolicyAttachmentList(s, schemas.PolicyToPath_Policies, v.Policies)
+	}
 }
 func (v *PolicyToPath) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyToPath, func(s *smithy.Schema) error {
@@ -4348,7 +4418,9 @@ func (v *Rule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleParameterMap(s, schemas.Rule_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeRuleParameterMap(s, schemas.Rule_Parameters, v.Parameters)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Rule_Type, string(v.Type))
 	}
@@ -4578,11 +4650,15 @@ func (v *TypedAttributeValueRange) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndMode != "" {
 		s.WriteString(schemas.TypedAttributeValueRange_EndMode, string(v.EndMode))
 	}
-	serializeTypedAttributeValue(s, schemas.TypedAttributeValueRange_EndValue, v.EndValue)
+	if v.EndValue != nil {
+		serializeTypedAttributeValue(s, schemas.TypedAttributeValueRange_EndValue, v.EndValue)
+	}
 	if v.StartMode != "" {
 		s.WriteString(schemas.TypedAttributeValueRange_StartMode, string(v.StartMode))
 	}
-	serializeTypedAttributeValue(s, schemas.TypedAttributeValueRange_StartValue, v.StartValue)
+	if v.StartValue != nil {
+		serializeTypedAttributeValue(s, schemas.TypedAttributeValueRange_StartValue, v.StartValue)
+	}
 }
 func (v *TypedAttributeValueRange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TypedAttributeValueRange, func(s *smithy.Schema) error {
@@ -4647,7 +4723,9 @@ func (v *TypedLinkAttributeDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TypedLinkAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedAttributeValue(s, schemas.TypedLinkAttributeDefinition_DefaultValue, v.DefaultValue)
+	if v.DefaultValue != nil {
+		serializeTypedAttributeValue(s, schemas.TypedLinkAttributeDefinition_DefaultValue, v.DefaultValue)
+	}
 	if v.IsImmutable != false {
 		s.WriteBool(schemas.TypedLinkAttributeDefinition_IsImmutable, v.IsImmutable)
 	}
@@ -4657,7 +4735,9 @@ func (v *TypedLinkAttributeDefinition) SerializeMembers(s smithy.ShapeSerializer
 	if v.RequiredBehavior != "" {
 		s.WriteString(schemas.TypedLinkAttributeDefinition_RequiredBehavior, string(v.RequiredBehavior))
 	}
-	serializeRuleMap(s, schemas.TypedLinkAttributeDefinition_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeRuleMap(s, schemas.TypedLinkAttributeDefinition_Rules, v.Rules)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.TypedLinkAttributeDefinition_Type, string(v.Type))
 	}
@@ -4771,8 +4851,12 @@ func (v *TypedLinkFacet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TypedLinkFacet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTypedLinkAttributeDefinitionList(s, schemas.TypedLinkFacet_Attributes, v.Attributes)
-	serializeAttributeNameList(s, schemas.TypedLinkFacet_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	if v.Attributes != nil {
+		serializeTypedLinkAttributeDefinitionList(s, schemas.TypedLinkFacet_Attributes, v.Attributes)
+	}
+	if v.IdentityAttributeOrder != nil {
+		serializeAttributeNameList(s, schemas.TypedLinkFacet_IdentityAttributeOrder, v.IdentityAttributeOrder)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.TypedLinkFacet_Name, *v.Name)
 	}
@@ -4926,7 +5010,9 @@ func (v *TypedLinkSpecifier) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TypedLinkSpecifier) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameAndValueList(s, schemas.TypedLinkSpecifier_IdentityAttributeValues, v.IdentityAttributeValues)
+	if v.IdentityAttributeValues != nil {
+		serializeAttributeNameAndValueList(s, schemas.TypedLinkSpecifier_IdentityAttributeValues, v.IdentityAttributeValues)
+	}
 	if v.SourceObjectReference != nil {
 		s.WriteStruct(schemas.TypedLinkSpecifier_SourceObjectReference)
 		v.SourceObjectReference.SerializeMembers(s)

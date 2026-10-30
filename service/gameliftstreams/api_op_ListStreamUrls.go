@@ -113,7 +113,9 @@ func (v *ListStreamUrlsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStreamUrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamUrlSummaryList(s, schemas.ListStreamUrlsOutput_Items, v.Items)
+	if v.Items != nil {
+		serializeStreamUrlSummaryList(s, schemas.ListStreamUrlsOutput_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStreamUrlsOutput_NextToken, *v.NextToken)
 	}

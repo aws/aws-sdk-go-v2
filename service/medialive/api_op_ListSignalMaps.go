@@ -93,7 +93,9 @@ func (v *ListSignalMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSignalMapsResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfSignalMapSummary(s, schemas.ListSignalMapsResponse_SignalMaps, v.SignalMaps)
+	if v.SignalMaps != nil {
+		serialize__listOfSignalMapSummary(s, schemas.ListSignalMapsResponse_SignalMaps, v.SignalMaps)
+	}
 }
 func (v *ListSignalMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSignalMapsResponse, func(s *smithy.Schema) error {

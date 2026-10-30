@@ -148,7 +148,9 @@ func (v *GetTranscriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTranscriptResponse_NextToken, *v.NextToken)
 	}
-	serializeTranscript(s, schemas.GetTranscriptResponse_Transcript, v.Transcript)
+	if v.Transcript != nil {
+		serializeTranscript(s, schemas.GetTranscriptResponse_Transcript, v.Transcript)
+	}
 }
 func (v *GetTranscriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTranscriptResponse, func(s *smithy.Schema) error {

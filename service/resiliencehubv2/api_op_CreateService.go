@@ -83,7 +83,9 @@ func (v *CreateServiceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedSystemList(s, schemas.CreateServiceRequest_associatedSystems, v.AssociatedSystems)
+	if v.AssociatedSystems != nil {
+		serializeAssociatedSystemList(s, schemas.CreateServiceRequest_associatedSystems, v.AssociatedSystems)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateServiceRequest_clientToken, *v.ClientToken)
 	}
@@ -112,13 +114,17 @@ func (v *CreateServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.CreateServiceRequest_policyArn, *v.PolicyArn)
 	}
-	serializeRegionList(s, schemas.CreateServiceRequest_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.CreateServiceRequest_regions, v.Regions)
+	}
 	if v.ReportConfiguration != nil {
 		s.WriteStruct(schemas.CreateServiceRequest_reportConfiguration)
 		v.ReportConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateServiceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateServiceRequest_tags, v.Tags)
+	}
 }
 
 type CreateServiceOutput struct {

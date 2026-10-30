@@ -115,7 +115,9 @@ func (v *ListAssociatedPackagesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedPackagesResult_nextToken, *v.NextToken)
 	}
-	serializeAssociatedPackageList(s, schemas.ListAssociatedPackagesResult_packages, v.Packages)
+	if v.Packages != nil {
+		serializeAssociatedPackageList(s, schemas.ListAssociatedPackagesResult_packages, v.Packages)
+	}
 }
 func (v *ListAssociatedPackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAssociatedPackagesResult, func(s *smithy.Schema) error {

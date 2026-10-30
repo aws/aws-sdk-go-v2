@@ -118,8 +118,12 @@ func (v *SearchInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchInsightsResponse_NextToken, *v.NextToken)
 	}
-	serializeProactiveInsights(s, schemas.SearchInsightsResponse_ProactiveInsights, v.ProactiveInsights)
-	serializeReactiveInsights(s, schemas.SearchInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+	if v.ProactiveInsights != nil {
+		serializeProactiveInsights(s, schemas.SearchInsightsResponse_ProactiveInsights, v.ProactiveInsights)
+	}
+	if v.ReactiveInsights != nil {
+		serializeReactiveInsights(s, schemas.SearchInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+	}
 }
 func (v *SearchInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchInsightsResponse, func(s *smithy.Schema) error {

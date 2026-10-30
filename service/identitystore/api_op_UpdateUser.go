@@ -76,7 +76,9 @@ func (v *UpdateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.UpdateUserRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
-	serializeAttributeOperations(s, schemas.UpdateUserRequest_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeAttributeOperations(s, schemas.UpdateUserRequest_Operations, v.Operations)
+	}
 	if v.Revision != nil {
 		s.WriteString(schemas.UpdateUserRequest_Revision, *v.Revision)
 	}

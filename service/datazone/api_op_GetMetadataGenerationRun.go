@@ -154,8 +154,12 @@ func (v *GetMetadataGenerationRunOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Type != "" {
 		s.WriteString(schemas.GetMetadataGenerationRunOutput_type, string(v.Type))
 	}
-	serializeMetadataGenerationRunTypeStats(s, schemas.GetMetadataGenerationRunOutput_typeStats, v.TypeStats)
-	serializeMetadataGenerationRunTypes(s, schemas.GetMetadataGenerationRunOutput_types, v.Types)
+	if v.TypeStats != nil {
+		serializeMetadataGenerationRunTypeStats(s, schemas.GetMetadataGenerationRunOutput_typeStats, v.TypeStats)
+	}
+	if v.Types != nil {
+		serializeMetadataGenerationRunTypes(s, schemas.GetMetadataGenerationRunOutput_types, v.Types)
+	}
 }
 func (v *GetMetadataGenerationRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMetadataGenerationRunOutput, func(s *smithy.Schema) error {

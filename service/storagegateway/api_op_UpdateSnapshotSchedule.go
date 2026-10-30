@@ -95,7 +95,9 @@ func (v *UpdateSnapshotScheduleInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StartAt != nil {
 		s.WriteInt32(schemas.UpdateSnapshotScheduleInput_StartAt, *v.StartAt)
 	}
-	serializeTags(s, schemas.UpdateSnapshotScheduleInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateSnapshotScheduleInput_Tags, v.Tags)
+	}
 	if v.VolumeARN != nil {
 		s.WriteString(schemas.UpdateSnapshotScheduleInput_VolumeARN, *v.VolumeARN)
 	}

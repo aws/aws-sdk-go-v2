@@ -128,7 +128,9 @@ func (v *ListMlflowTrackingServersOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMlflowTrackingServersResponse_NextToken, *v.NextToken)
 	}
-	serializeTrackingServerSummaryList(s, schemas.ListMlflowTrackingServersResponse_TrackingServerSummaries, v.TrackingServerSummaries)
+	if v.TrackingServerSummaries != nil {
+		serializeTrackingServerSummaryList(s, schemas.ListMlflowTrackingServersResponse_TrackingServerSummaries, v.TrackingServerSummaries)
+	}
 }
 func (v *ListMlflowTrackingServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListMlflowTrackingServersResponse, func(s *smithy.Schema) error {

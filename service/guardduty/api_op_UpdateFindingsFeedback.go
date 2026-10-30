@@ -71,7 +71,9 @@ func (v *UpdateFindingsFeedbackInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Feedback != "" {
 		s.WriteString(schemas.UpdateFindingsFeedbackRequest_Feedback, string(v.Feedback))
 	}
-	serializeFindingIds(s, schemas.UpdateFindingsFeedbackRequest_FindingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIds(s, schemas.UpdateFindingsFeedbackRequest_FindingIds, v.FindingIds)
+	}
 }
 
 type UpdateFindingsFeedbackOutput struct {

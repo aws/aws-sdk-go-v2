@@ -80,7 +80,9 @@ func (v *UpdateFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateFeaturedResultsSetRequest_Description, *v.Description)
 	}
-	serializeFeaturedDocumentList(s, schemas.UpdateFeaturedResultsSetRequest_FeaturedDocuments, v.FeaturedDocuments)
+	if v.FeaturedDocuments != nil {
+		serializeFeaturedDocumentList(s, schemas.UpdateFeaturedResultsSetRequest_FeaturedDocuments, v.FeaturedDocuments)
+	}
 	if v.FeaturedResultsSetId != nil {
 		s.WriteString(schemas.UpdateFeaturedResultsSetRequest_FeaturedResultsSetId, *v.FeaturedResultsSetId)
 	}
@@ -90,7 +92,9 @@ func (v *UpdateFeaturedResultsSetInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.IndexId != nil {
 		s.WriteString(schemas.UpdateFeaturedResultsSetRequest_IndexId, *v.IndexId)
 	}
-	serializeQueryTextList(s, schemas.UpdateFeaturedResultsSetRequest_QueryTexts, v.QueryTexts)
+	if v.QueryTexts != nil {
+		serializeQueryTextList(s, schemas.UpdateFeaturedResultsSetRequest_QueryTexts, v.QueryTexts)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateFeaturedResultsSetRequest_Status, string(v.Status))
 	}

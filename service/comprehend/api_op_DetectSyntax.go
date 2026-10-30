@@ -84,7 +84,9 @@ func (v *DetectSyntaxOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectSyntaxOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfSyntaxTokens(s, schemas.DetectSyntaxResponse_SyntaxTokens, v.SyntaxTokens)
+	if v.SyntaxTokens != nil {
+		serializeListOfSyntaxTokens(s, schemas.DetectSyntaxResponse_SyntaxTokens, v.SyntaxTokens)
+	}
 }
 func (v *DetectSyntaxOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectSyntaxResponse, func(s *smithy.Schema) error {

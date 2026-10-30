@@ -113,7 +113,9 @@ func (v *CreateLocationS3Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateLocationS3Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.CreateLocationS3Request_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.CreateLocationS3Request_AgentArns, v.AgentArns)
+	}
 	if v.S3BucketArn != nil {
 		s.WriteString(schemas.CreateLocationS3Request_S3BucketArn, *v.S3BucketArn)
 	}
@@ -128,7 +130,9 @@ func (v *CreateLocationS3Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Subdirectory != nil {
 		s.WriteString(schemas.CreateLocationS3Request_Subdirectory, *v.Subdirectory)
 	}
-	serializeInputTagList(s, schemas.CreateLocationS3Request_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagList(s, schemas.CreateLocationS3Request_Tags, v.Tags)
+	}
 }
 
 // CreateLocationS3Response

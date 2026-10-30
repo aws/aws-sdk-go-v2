@@ -122,7 +122,9 @@ func (v *DescribeHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HubName != nil {
 		s.WriteString(schemas.DescribeHubResponse_HubName, *v.HubName)
 	}
-	serializeHubSearchKeywordList(s, schemas.DescribeHubResponse_HubSearchKeywords, v.HubSearchKeywords)
+	if v.HubSearchKeywords != nil {
+		serializeHubSearchKeywordList(s, schemas.DescribeHubResponse_HubSearchKeywords, v.HubSearchKeywords)
+	}
 	if v.HubStatus != "" {
 		s.WriteString(schemas.DescribeHubResponse_HubStatus, string(v.HubStatus))
 	}

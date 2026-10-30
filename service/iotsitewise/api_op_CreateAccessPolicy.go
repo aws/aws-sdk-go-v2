@@ -97,7 +97,9 @@ func (v *CreateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAccessPolicyRequest_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateAccessPolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAccessPolicyRequest_tags, v.Tags)
+	}
 }
 
 type CreateAccessPolicyOutput struct {

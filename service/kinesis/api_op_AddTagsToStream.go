@@ -73,7 +73,9 @@ func (v *AddTagsToStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamName != nil {
 		s.WriteString(schemas.AddTagsToStreamInput_StreamName, *v.StreamName)
 	}
-	serializeTagMap(s, schemas.AddTagsToStreamInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AddTagsToStreamInput_Tags, v.Tags)
+	}
 }
 func (in *AddTagsToStreamInput) bindEndpointParams(p *EndpointParameters) {
 

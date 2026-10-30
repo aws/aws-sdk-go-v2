@@ -250,9 +250,15 @@ func (v *CreateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PayloadFormatVersion != nil {
 		s.WriteString(schemas.CreateIntegrationRequest_PayloadFormatVersion, *v.PayloadFormatVersion)
 	}
-	serializeIntegrationParameters(s, schemas.CreateIntegrationRequest_RequestParameters, v.RequestParameters)
-	serializeTemplateMap(s, schemas.CreateIntegrationRequest_RequestTemplates, v.RequestTemplates)
-	serializeResponseParameters(s, schemas.CreateIntegrationRequest_ResponseParameters, v.ResponseParameters)
+	if v.RequestParameters != nil {
+		serializeIntegrationParameters(s, schemas.CreateIntegrationRequest_RequestParameters, v.RequestParameters)
+	}
+	if v.RequestTemplates != nil {
+		serializeTemplateMap(s, schemas.CreateIntegrationRequest_RequestTemplates, v.RequestTemplates)
+	}
+	if v.ResponseParameters != nil {
+		serializeResponseParameters(s, schemas.CreateIntegrationRequest_ResponseParameters, v.ResponseParameters)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.CreateIntegrationRequest_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}
@@ -505,9 +511,15 @@ func (v *CreateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PayloadFormatVersion != nil {
 		s.WriteString(schemas.CreateIntegrationResult_PayloadFormatVersion, *v.PayloadFormatVersion)
 	}
-	serializeIntegrationParameters(s, schemas.CreateIntegrationResult_RequestParameters, v.RequestParameters)
-	serializeTemplateMap(s, schemas.CreateIntegrationResult_RequestTemplates, v.RequestTemplates)
-	serializeResponseParameters(s, schemas.CreateIntegrationResult_ResponseParameters, v.ResponseParameters)
+	if v.RequestParameters != nil {
+		serializeIntegrationParameters(s, schemas.CreateIntegrationResult_RequestParameters, v.RequestParameters)
+	}
+	if v.RequestTemplates != nil {
+		serializeTemplateMap(s, schemas.CreateIntegrationResult_RequestTemplates, v.RequestTemplates)
+	}
+	if v.ResponseParameters != nil {
+		serializeResponseParameters(s, schemas.CreateIntegrationResult_ResponseParameters, v.ResponseParameters)
+	}
 	if v.TemplateSelectionExpression != nil {
 		s.WriteString(schemas.CreateIntegrationResult_TemplateSelectionExpression, *v.TemplateSelectionExpression)
 	}

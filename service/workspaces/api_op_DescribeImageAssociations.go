@@ -48,7 +48,9 @@ func (v *DescribeImageAssociationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeImageAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageAssociatedResourceTypeList(s, schemas.DescribeImageAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	if v.AssociatedResourceTypes != nil {
+		serializeImageAssociatedResourceTypeList(s, schemas.DescribeImageAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	}
 	if v.ImageId != nil {
 		s.WriteString(schemas.DescribeImageAssociationsRequest_ImageId, *v.ImageId)
 	}
@@ -72,7 +74,9 @@ func (v *DescribeImageAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeImageAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageResourceAssociationList(s, schemas.DescribeImageAssociationsResult_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeImageResourceAssociationList(s, schemas.DescribeImageAssociationsResult_Associations, v.Associations)
+	}
 }
 func (v *DescribeImageAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeImageAssociationsResult, func(s *smithy.Schema) error {

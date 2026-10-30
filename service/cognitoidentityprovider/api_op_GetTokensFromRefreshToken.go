@@ -103,7 +103,9 @@ func (v *GetTokensFromRefreshTokenInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ClientId != nil {
 		s.WriteString(schemas.GetTokensFromRefreshTokenRequest_ClientId, *v.ClientId)
 	}
-	serializeClientMetadataType(s, schemas.GetTokensFromRefreshTokenRequest_ClientMetadata, v.ClientMetadata)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.GetTokensFromRefreshTokenRequest_ClientMetadata, v.ClientMetadata)
+	}
 	if v.ClientSecret != nil {
 		s.WriteString(schemas.GetTokensFromRefreshTokenRequest_ClientSecret, *v.ClientSecret)
 	}

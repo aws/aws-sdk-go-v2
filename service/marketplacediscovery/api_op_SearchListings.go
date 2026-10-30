@@ -69,7 +69,9 @@ func (v *SearchListingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchListingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchFilterList(s, schemas.SearchListingsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchFilterList(s, schemas.SearchListingsInput_filters, v.Filters)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.SearchListingsInput_locale, *v.Locale)
 	}
@@ -121,7 +123,9 @@ func (v *SearchListingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchListingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListingSummaryList(s, schemas.SearchListingsOutput_listingSummaries, v.ListingSummaries)
+	if v.ListingSummaries != nil {
+		serializeListingSummaryList(s, schemas.SearchListingsOutput_listingSummaries, v.ListingSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchListingsOutput_nextToken, *v.NextToken)
 	}

@@ -86,7 +86,9 @@ func (v *ListCompatibleImagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCompatibleImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleImageList(s, schemas.ListCompatibleImagesResult_CompatibleImages, v.CompatibleImages)
+	if v.CompatibleImages != nil {
+		serializeCompatibleImageList(s, schemas.ListCompatibleImagesResult_CompatibleImages, v.CompatibleImages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCompatibleImagesResult_NextToken, *v.NextToken)
 	}

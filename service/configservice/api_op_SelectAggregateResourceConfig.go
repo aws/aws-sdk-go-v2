@@ -128,7 +128,9 @@ func (v *SelectAggregateResourceConfigOutput) SerializeMembers(s smithy.ShapeSer
 		v.QueryInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResults(s, schemas.SelectAggregateResourceConfigResponse_Results, v.Results)
+	if v.Results != nil {
+		serializeResults(s, schemas.SelectAggregateResourceConfigResponse_Results, v.Results)
+	}
 }
 func (v *SelectAggregateResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SelectAggregateResourceConfigResponse, func(s *smithy.Schema) error {

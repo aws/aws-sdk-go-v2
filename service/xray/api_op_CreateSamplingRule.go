@@ -80,7 +80,9 @@ func (v *CreateSamplingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SamplingRule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateSamplingRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSamplingRuleRequest_Tags, v.Tags)
+	}
 }
 
 type CreateSamplingRuleOutput struct {

@@ -117,7 +117,9 @@ func (v *StartPiiEntitiesDetectionJobInput) SerializeMembers(s smithy.ShapeSeria
 		v.RedactionConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartPiiEntitiesDetectionJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartPiiEntitiesDetectionJobRequest_Tags, v.Tags)
+	}
 }
 
 type StartPiiEntitiesDetectionJobOutput struct {

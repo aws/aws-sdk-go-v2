@@ -168,7 +168,9 @@ func (v *CreateTrackerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PricingPlanDataSource != nil {
 		s.WriteString(schemas.CreateTrackerRequest_PricingPlanDataSource, *v.PricingPlanDataSource)
 	}
-	serializeTagMap(s, schemas.CreateTrackerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTrackerRequest_Tags, v.Tags)
+	}
 	if v.TrackerName != nil {
 		s.WriteString(schemas.CreateTrackerRequest_TrackerName, *v.TrackerName)
 	}

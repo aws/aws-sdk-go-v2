@@ -98,7 +98,9 @@ func (v *UpdateRoutingControlStateInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.RoutingControlState != "" {
 		s.WriteString(schemas.UpdateRoutingControlStateRequest_RoutingControlState, string(v.RoutingControlState))
 	}
-	serializeArns(s, schemas.UpdateRoutingControlStateRequest_SafetyRulesToOverride, v.SafetyRulesToOverride)
+	if v.SafetyRulesToOverride != nil {
+		serializeArns(s, schemas.UpdateRoutingControlStateRequest_SafetyRulesToOverride, v.SafetyRulesToOverride)
+	}
 }
 
 type UpdateRoutingControlStateOutput struct {

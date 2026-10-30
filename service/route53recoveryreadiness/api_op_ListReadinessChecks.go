@@ -77,7 +77,9 @@ func (v *ListReadinessChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReadinessChecksResponse_NextToken, *v.NextToken)
 	}
-	serialize__listOfReadinessCheckOutput(s, schemas.ListReadinessChecksResponse_ReadinessChecks, v.ReadinessChecks)
+	if v.ReadinessChecks != nil {
+		serialize__listOfReadinessCheckOutput(s, schemas.ListReadinessChecksResponse_ReadinessChecks, v.ReadinessChecks)
+	}
 }
 func (v *ListReadinessChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListReadinessChecksResponse, func(s *smithy.Schema) error {

@@ -44,7 +44,9 @@ func (v *AppDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CanEdit != nil {
 		s.WriteBool(schemas.AppDefinition_canEdit, *v.CanEdit)
 	}
-	serializeCardModelList(s, schemas.AppDefinition_cards, v.Cards)
+	if v.Cards != nil {
+		serializeCardModelList(s, schemas.AppDefinition_cards, v.Cards)
+	}
 }
 func (v *AppDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AppDefinition, func(s *smithy.Schema) error {
@@ -83,7 +85,9 @@ func (v *AppDefinitionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AppDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCardList(s, schemas.AppDefinitionInput_cards, v.Cards)
+	if v.Cards != nil {
+		serializeCardList(s, schemas.AppDefinitionInput_cards, v.Cards)
+	}
 	if v.InitialPrompt != nil {
 		s.WriteString(schemas.AppDefinitionInput_initialPrompt, *v.InitialPrompt)
 	}
@@ -167,7 +171,9 @@ func (v *AttributeFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeFilters(s, schemas.AttributeFilter_andAllFilters, v.AndAllFilters)
+	if v.AndAllFilters != nil {
+		serializeAttributeFilters(s, schemas.AttributeFilter_andAllFilters, v.AndAllFilters)
+	}
 	if v.ContainsAll != nil {
 		s.WriteStruct(schemas.AttributeFilter_containsAll)
 		v.ContainsAll.SerializeMembers(s)
@@ -208,7 +214,9 @@ func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NotFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributeFilters(s, schemas.AttributeFilter_orAllFilters, v.OrAllFilters)
+	if v.OrAllFilters != nil {
+		serializeAttributeFilters(s, schemas.AttributeFilter_orAllFilters, v.OrAllFilters)
+	}
 }
 func (v *AttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeFilter, func(s *smithy.Schema) error {
@@ -527,7 +535,9 @@ func (v *CardStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrentValue != nil {
 		s.WriteString(schemas.CardStatus_currentValue, *v.CurrentValue)
 	}
-	serializeSubmissionList(s, schemas.CardStatus_submissions, v.Submissions)
+	if v.Submissions != nil {
+		serializeSubmissionList(s, schemas.CardStatus_submissions, v.Submissions)
+	}
 }
 func (v *CardStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CardStatus, func(s *smithy.Schema) error {
@@ -797,7 +807,9 @@ func (v *DocumentAttribute) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DocumentAttribute_name, *v.Name)
 	}
-	serializeDocumentAttributeValue(s, schemas.DocumentAttribute_value, v.Value)
+	if v.Value != nil {
+		serializeDocumentAttributeValue(s, schemas.DocumentAttribute_value, v.Value)
+	}
 }
 func (v *DocumentAttribute) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentAttribute, func(s *smithy.Schema) error {
@@ -934,7 +946,9 @@ func (v *FileUploadCard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowOverride != nil {
 		s.WriteBool(schemas.FileUploadCard_allowOverride, *v.AllowOverride)
 	}
-	serializeDependencyList(s, schemas.FileUploadCard_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeDependencyList(s, schemas.FileUploadCard_dependencies, v.Dependencies)
+	}
 	if v.FileId != nil {
 		s.WriteString(schemas.FileUploadCard_fileId, *v.FileId)
 	}
@@ -1119,7 +1133,9 @@ func (v *FormInputCard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputeMode != "" {
 		s.WriteString(schemas.FormInputCard_computeMode, string(v.ComputeMode))
 	}
-	serializeDependencyList(s, schemas.FormInputCard_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeDependencyList(s, schemas.FormInputCard_dependencies, v.Dependencies)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.FormInputCard_id, *v.Id)
 	}
@@ -1371,7 +1387,9 @@ func (v *LibraryItemMember) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppVersion != nil {
 		s.WriteInt32(schemas.LibraryItemMember_appVersion, *v.AppVersion)
 	}
-	serializeCategoryList(s, schemas.LibraryItemMember_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.LibraryItemMember_categories, v.Categories)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.LibraryItemMember_createdAt, *v.CreatedAt)
 	}
@@ -1830,7 +1848,9 @@ func (v *QPluginCard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionIdentifier != nil {
 		s.WriteString(schemas.QPluginCard_actionIdentifier, *v.ActionIdentifier)
 	}
-	serializeDependencyList(s, schemas.QPluginCard_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeDependencyList(s, schemas.QPluginCard_dependencies, v.Dependencies)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.QPluginCard_id, *v.Id)
 	}
@@ -2036,11 +2056,15 @@ func (v *QQueryCard) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AttributeFilter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDependencyList(s, schemas.QQueryCard_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeDependencyList(s, schemas.QQueryCard_dependencies, v.Dependencies)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.QQueryCard_id, *v.Id)
 	}
-	serializeMemoryReferenceList(s, schemas.QQueryCard_memoryReferences, v.MemoryReferences)
+	if v.MemoryReferences != nil {
+		serializeMemoryReferenceList(s, schemas.QQueryCard_memoryReferences, v.MemoryReferences)
+	}
 	if v.OutputSource != "" {
 		s.WriteString(schemas.QQueryCard_outputSource, string(v.OutputSource))
 	}
@@ -2383,7 +2407,9 @@ func (v *TextInputCard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultValue != nil {
 		s.WriteString(schemas.TextInputCard_defaultValue, *v.DefaultValue)
 	}
-	serializeDependencyList(s, schemas.TextInputCard_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeDependencyList(s, schemas.TextInputCard_dependencies, v.Dependencies)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.TextInputCard_id, *v.Id)
 	}

@@ -102,7 +102,9 @@ func (v *ListDbSystemShapesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDbSystemShapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbSystemShapeList(s, schemas.ListDbSystemShapesOutput_dbSystemShapes, v.DbSystemShapes)
+	if v.DbSystemShapes != nil {
+		serializeDbSystemShapeList(s, schemas.ListDbSystemShapesOutput_dbSystemShapes, v.DbSystemShapes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDbSystemShapesOutput_nextToken, *v.NextToken)
 	}

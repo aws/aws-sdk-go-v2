@@ -148,7 +148,9 @@ func (v *ListServicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServicesOutput_NextToken, *v.NextToken)
 	}
-	serializeServiceSummaries(s, schemas.ListServicesOutput_ServiceSummaries, v.ServiceSummaries)
+	if v.ServiceSummaries != nil {
+		serializeServiceSummaries(s, schemas.ListServicesOutput_ServiceSummaries, v.ServiceSummaries)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ListServicesOutput_StartTime, *v.StartTime)
 	}

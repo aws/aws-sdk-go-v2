@@ -67,7 +67,9 @@ func (v *CancelStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StepCancellationOption != "" {
 		s.WriteString(schemas.CancelStepsInput_StepCancellationOption, string(v.StepCancellationOption))
 	}
-	serializeStepIdsList(s, schemas.CancelStepsInput_StepIds, v.StepIds)
+	if v.StepIds != nil {
+		serializeStepIdsList(s, schemas.CancelStepsInput_StepIds, v.StepIds)
+	}
 }
 
 // The output for the CancelSteps operation.
@@ -90,7 +92,9 @@ func (v *CancelStepsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CancelStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCancelStepsInfoList(s, schemas.CancelStepsOutput_CancelStepsInfoList, v.CancelStepsInfoList)
+	if v.CancelStepsInfoList != nil {
+		serializeCancelStepsInfoList(s, schemas.CancelStepsOutput_CancelStepsInfoList, v.CancelStepsInfoList)
+	}
 }
 func (v *CancelStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CancelStepsOutput, func(s *smithy.Schema) error {

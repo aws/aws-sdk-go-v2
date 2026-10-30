@@ -74,7 +74,9 @@ func (v *UpdatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EndpointConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__stringMin20Max2048(s, schemas.UpdatePortalRequest_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	if v.IncludedPortalProductArns != nil {
+		serialize__listOf__stringMin20Max2048(s, schemas.UpdatePortalRequest_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	}
 	if v.LogoUri != nil {
 		s.WriteString(schemas.UpdatePortalRequest_LogoUri, *v.LogoUri)
 	}
@@ -160,7 +162,9 @@ func (v *UpdatePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EndpointConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__stringMin20Max2048(s, schemas.UpdatePortalResponse_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	if v.IncludedPortalProductArns != nil {
+		serialize__listOf__stringMin20Max2048(s, schemas.UpdatePortalResponse_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	}
 	if v.LastModified != nil {
 		s.WriteTime(schemas.UpdatePortalResponse_LastModified, *v.LastModified)
 	}
@@ -197,7 +201,9 @@ func (v *UpdatePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusException.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.UpdatePortalResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdatePortalResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePortalResponse, func(s *smithy.Schema) error {

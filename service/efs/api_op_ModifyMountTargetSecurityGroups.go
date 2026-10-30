@@ -63,7 +63,9 @@ func (v *ModifyMountTargetSecurityGroupsInput) SerializeMembers(s smithy.ShapeSe
 	if v.MountTargetId != nil {
 		s.WriteString(schemas.ModifyMountTargetSecurityGroupsRequest_MountTargetId, *v.MountTargetId)
 	}
-	serializeSecurityGroups(s, schemas.ModifyMountTargetSecurityGroupsRequest_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.ModifyMountTargetSecurityGroupsRequest_SecurityGroups, v.SecurityGroups)
+	}
 }
 
 type ModifyMountTargetSecurityGroupsOutput struct {

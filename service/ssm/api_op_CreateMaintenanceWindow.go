@@ -162,7 +162,9 @@ func (v *CreateMaintenanceWindowInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.StartDate != nil {
 		s.WriteString(schemas.CreateMaintenanceWindowRequest_StartDate, *v.StartDate)
 	}
-	serializeTagList(s, schemas.CreateMaintenanceWindowRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMaintenanceWindowRequest_Tags, v.Tags)
+	}
 }
 
 type CreateMaintenanceWindowOutput struct {

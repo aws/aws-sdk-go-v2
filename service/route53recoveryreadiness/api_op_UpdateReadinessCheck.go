@@ -92,7 +92,9 @@ func (v *UpdateReadinessCheckOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ResourceSet != nil {
 		s.WriteString(schemas.UpdateReadinessCheckResponse_ResourceSet, *v.ResourceSet)
 	}
-	serializeTags(s, schemas.UpdateReadinessCheckResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateReadinessCheckResponse_Tags, v.Tags)
+	}
 }
 func (v *UpdateReadinessCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateReadinessCheckResponse, func(s *smithy.Schema) error {

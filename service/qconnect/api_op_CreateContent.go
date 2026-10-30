@@ -93,14 +93,18 @@ func (v *CreateContentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.CreateContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
-	serializeContentMetadata(s, schemas.CreateContentRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContentMetadata(s, schemas.CreateContentRequest_metadata, v.Metadata)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateContentRequest_name, *v.Name)
 	}
 	if v.OverrideLinkOutUri != nil {
 		s.WriteString(schemas.CreateContentRequest_overrideLinkOutUri, *v.OverrideLinkOutUri)
 	}
-	serializeTags(s, schemas.CreateContentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateContentRequest_tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreateContentRequest_title, *v.Title)
 	}

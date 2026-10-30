@@ -100,7 +100,9 @@ func (v *ListStageDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStageDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceDeploymentSummaries(s, schemas.ListStageDevicesResponse_DeviceDeploymentSummaries, v.DeviceDeploymentSummaries)
+	if v.DeviceDeploymentSummaries != nil {
+		serializeDeviceDeploymentSummaries(s, schemas.ListStageDevicesResponse_DeviceDeploymentSummaries, v.DeviceDeploymentSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStageDevicesResponse_NextToken, *v.NextToken)
 	}

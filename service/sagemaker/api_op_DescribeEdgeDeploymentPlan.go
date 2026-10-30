@@ -144,11 +144,15 @@ func (v *DescribeEdgeDeploymentPlanOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.DescribeEdgeDeploymentPlanResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
-	serializeEdgeDeploymentModelConfigs(s, schemas.DescribeEdgeDeploymentPlanResponse_ModelConfigs, v.ModelConfigs)
+	if v.ModelConfigs != nil {
+		serializeEdgeDeploymentModelConfigs(s, schemas.DescribeEdgeDeploymentPlanResponse_ModelConfigs, v.ModelConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEdgeDeploymentPlanResponse_NextToken, *v.NextToken)
 	}
-	serializeDeploymentStageStatusSummaries(s, schemas.DescribeEdgeDeploymentPlanResponse_Stages, v.Stages)
+	if v.Stages != nil {
+		serializeDeploymentStageStatusSummaries(s, schemas.DescribeEdgeDeploymentPlanResponse_Stages, v.Stages)
+	}
 }
 func (v *DescribeEdgeDeploymentPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEdgeDeploymentPlanResponse, func(s *smithy.Schema) error {

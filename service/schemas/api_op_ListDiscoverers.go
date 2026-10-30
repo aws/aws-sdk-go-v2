@@ -91,7 +91,9 @@ func (v *ListDiscoverersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDiscoverersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDiscovererSummary(s, schemas.ListDiscoverersResponse_Discoverers, v.Discoverers)
+	if v.Discoverers != nil {
+		serialize__listOfDiscovererSummary(s, schemas.ListDiscoverersResponse_Discoverers, v.Discoverers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoverersResponse_NextToken, *v.NextToken)
 	}

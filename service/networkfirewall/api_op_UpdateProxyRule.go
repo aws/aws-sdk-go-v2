@@ -90,7 +90,9 @@ func (v *UpdateProxyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != "" {
 		s.WriteString(schemas.UpdateProxyRuleRequest_Action, string(v.Action))
 	}
-	serializeProxyRuleConditionList(s, schemas.UpdateProxyRuleRequest_AddConditions, v.AddConditions)
+	if v.AddConditions != nil {
+		serializeProxyRuleConditionList(s, schemas.UpdateProxyRuleRequest_AddConditions, v.AddConditions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateProxyRuleRequest_Description, *v.Description)
 	}
@@ -103,7 +105,9 @@ func (v *UpdateProxyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProxyRuleName != nil {
 		s.WriteString(schemas.UpdateProxyRuleRequest_ProxyRuleName, *v.ProxyRuleName)
 	}
-	serializeProxyRuleConditionList(s, schemas.UpdateProxyRuleRequest_RemoveConditions, v.RemoveConditions)
+	if v.RemoveConditions != nil {
+		serializeProxyRuleConditionList(s, schemas.UpdateProxyRuleRequest_RemoveConditions, v.RemoveConditions)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProxyRuleRequest_UpdateToken, *v.UpdateToken)
 	}
@@ -147,7 +151,9 @@ func (v *UpdateProxyRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProxyRule.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProxyRuleConditionList(s, schemas.UpdateProxyRuleResponse_RemovedConditions, v.RemovedConditions)
+	if v.RemovedConditions != nil {
+		serializeProxyRuleConditionList(s, schemas.UpdateProxyRuleResponse_RemovedConditions, v.RemovedConditions)
+	}
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateProxyRuleResponse_UpdateToken, *v.UpdateToken)
 	}

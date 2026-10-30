@@ -157,7 +157,9 @@ func (v *GetTextDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetTextDetectionResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeTextDetectionResults(s, schemas.GetTextDetectionResponse_TextDetections, v.TextDetections)
+	if v.TextDetections != nil {
+		serializeTextDetectionResults(s, schemas.GetTextDetectionResponse_TextDetections, v.TextDetections)
+	}
 	if v.TextModelVersion != nil {
 		s.WriteString(schemas.GetTextDetectionResponse_TextModelVersion, *v.TextModelVersion)
 	}

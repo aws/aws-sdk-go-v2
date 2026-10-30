@@ -114,7 +114,9 @@ func (v *DescribeBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BotId != nil {
 		s.WriteString(schemas.DescribeBotResponse_botId, *v.BotId)
 	}
-	serializeBotMembers(s, schemas.DescribeBotResponse_botMembers, v.BotMembers)
+	if v.BotMembers != nil {
+		serializeBotMembers(s, schemas.DescribeBotResponse_botMembers, v.BotMembers)
+	}
 	if v.BotName != nil {
 		s.WriteString(schemas.DescribeBotResponse_botName, *v.BotName)
 	}
@@ -140,7 +142,9 @@ func (v *DescribeBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ErrorLogSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFailureReasons(s, schemas.DescribeBotResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeBotResponse_failureReasons, v.FailureReasons)
+	}
 	if v.IdleSessionTTLInSeconds != nil {
 		s.WriteInt32(schemas.DescribeBotResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
 	}

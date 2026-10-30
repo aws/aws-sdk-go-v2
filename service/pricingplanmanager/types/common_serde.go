@@ -7,9 +7,6 @@ import (
 )
 
 func serializeResourceArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeResourceArns(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeSubscriptionSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SubscriptionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

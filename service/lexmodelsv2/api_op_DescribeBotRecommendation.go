@@ -159,7 +159,9 @@ func (v *DescribeBotRecommendationOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.EncryptionSetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeFailureReasons(s, schemas.DescribeBotRecommendationResponse_failureReasons, v.FailureReasons)
+	if v.FailureReasons != nil {
+		serializeFailureReasons(s, schemas.DescribeBotRecommendationResponse_failureReasons, v.FailureReasons)
+	}
 	if v.LastUpdatedDateTime != nil {
 		s.WriteTime(schemas.DescribeBotRecommendationResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
 	}

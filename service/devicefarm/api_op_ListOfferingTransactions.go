@@ -80,7 +80,9 @@ func (v *ListOfferingTransactionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOfferingTransactionsResult_nextToken, *v.NextToken)
 	}
-	serializeOfferingTransactions(s, schemas.ListOfferingTransactionsResult_offeringTransactions, v.OfferingTransactions)
+	if v.OfferingTransactions != nil {
+		serializeOfferingTransactions(s, schemas.ListOfferingTransactionsResult_offeringTransactions, v.OfferingTransactions)
+	}
 }
 func (v *ListOfferingTransactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOfferingTransactionsResult, func(s *smithy.Schema) error {

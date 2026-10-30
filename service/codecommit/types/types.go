@@ -807,7 +807,9 @@ func (v *Comment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthorArn != nil {
 		s.WriteString(schemas.Comment_authorArn, *v.AuthorArn)
 	}
-	serializeCallerReactions(s, schemas.Comment_callerReactions, v.CallerReactions)
+	if v.CallerReactions != nil {
+		serializeCallerReactions(s, schemas.Comment_callerReactions, v.CallerReactions)
+	}
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.Comment_clientRequestToken, *v.ClientRequestToken)
 	}
@@ -829,7 +831,9 @@ func (v *Comment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastModifiedDate != nil {
 		s.WriteTime(schemas.Comment_lastModifiedDate, *v.LastModifiedDate)
 	}
-	serializeReactionCountsMap(s, schemas.Comment_reactionCounts, v.ReactionCounts)
+	if v.ReactionCounts != nil {
+		serializeReactionCountsMap(s, schemas.Comment_reactionCounts, v.ReactionCounts)
+	}
 }
 func (v *Comment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Comment, func(s *smithy.Schema) error {
@@ -915,7 +919,9 @@ func (v *CommentsForComparedCommit) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BeforeCommitId != nil {
 		s.WriteString(schemas.CommentsForComparedCommit_beforeCommitId, *v.BeforeCommitId)
 	}
-	serializeComments(s, schemas.CommentsForComparedCommit_comments, v.Comments)
+	if v.Comments != nil {
+		serializeComments(s, schemas.CommentsForComparedCommit_comments, v.Comments)
+	}
 	if v.Location != nil {
 		s.WriteStruct(schemas.CommentsForComparedCommit_location)
 		v.Location.SerializeMembers(s)
@@ -1010,7 +1016,9 @@ func (v *CommentsForPullRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BeforeCommitId != nil {
 		s.WriteString(schemas.CommentsForPullRequest_beforeCommitId, *v.BeforeCommitId)
 	}
-	serializeComments(s, schemas.CommentsForPullRequest_comments, v.Comments)
+	if v.Comments != nil {
+		serializeComments(s, schemas.CommentsForPullRequest_comments, v.Comments)
+	}
 	if v.Location != nil {
 		s.WriteStruct(schemas.CommentsForPullRequest_location)
 		v.Location.SerializeMembers(s)
@@ -1118,7 +1126,9 @@ func (v *Commit) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.Commit_message, *v.Message)
 	}
-	serializeParentList(s, schemas.Commit_parents, v.Parents)
+	if v.Parents != nil {
+		serializeParentList(s, schemas.Commit_parents, v.Parents)
+	}
 	if v.TreeId != nil {
 		s.WriteString(schemas.Commit_treeId, *v.TreeId)
 	}
@@ -1176,7 +1186,9 @@ func (v *Conflict) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ConflictMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMergeHunks(s, schemas.Conflict_mergeHunks, v.MergeHunks)
+	if v.MergeHunks != nil {
+		serializeMergeHunks(s, schemas.Conflict_mergeHunks, v.MergeHunks)
+	}
 }
 func (v *Conflict) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Conflict, func(s *smithy.Schema) error {
@@ -1336,9 +1348,15 @@ func (v *ConflictResolution) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConflictResolution) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteFileEntries(s, schemas.ConflictResolution_deleteFiles, v.DeleteFiles)
-	serializeReplaceContentEntries(s, schemas.ConflictResolution_replaceContents, v.ReplaceContents)
-	serializeSetFileModeEntries(s, schemas.ConflictResolution_setFileModes, v.SetFileModes)
+	if v.DeleteFiles != nil {
+		serializeDeleteFileEntries(s, schemas.ConflictResolution_deleteFiles, v.DeleteFiles)
+	}
+	if v.ReplaceContents != nil {
+		serializeReplaceContentEntries(s, schemas.ConflictResolution_replaceContents, v.ReplaceContents)
+	}
+	if v.SetFileModes != nil {
+		serializeSetFileModeEntries(s, schemas.ConflictResolution_setFileModes, v.SetFileModes)
+	}
 }
 func (v *ConflictResolution) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConflictResolution, func(s *smithy.Schema) error {
@@ -1566,7 +1584,9 @@ func (v *DiffHunk) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BeforeStartLine != nil {
 		s.WriteInt32(schemas.DiffHunk_beforeStartLine, *v.BeforeStartLine)
 	}
-	serializeDiffChangeList(s, schemas.DiffHunk_changes, v.Changes)
+	if v.Changes != nil {
+		serializeDiffChangeList(s, schemas.DiffHunk_changes, v.Changes)
+	}
 }
 func (v *DiffHunk) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DiffHunk, func(s *smithy.Schema) error {
@@ -1617,8 +1637,12 @@ func (v *Evaluation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Evaluation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalRulesNotSatisfiedList(s, schemas.Evaluation_approvalRulesNotSatisfied, v.ApprovalRulesNotSatisfied)
-	serializeApprovalRulesSatisfiedList(s, schemas.Evaluation_approvalRulesSatisfied, v.ApprovalRulesSatisfied)
+	if v.ApprovalRulesNotSatisfied != nil {
+		serializeApprovalRulesNotSatisfiedList(s, schemas.Evaluation_approvalRulesNotSatisfied, v.ApprovalRulesNotSatisfied)
+	}
+	if v.ApprovalRulesSatisfied != nil {
+		serializeApprovalRulesSatisfiedList(s, schemas.Evaluation_approvalRulesSatisfied, v.ApprovalRulesSatisfied)
+	}
 	if v.Approved != false {
 		s.WriteBool(schemas.Evaluation_approved, v.Approved)
 	}
@@ -1907,7 +1931,9 @@ func (v *FileVersion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Path != nil {
 		s.WriteString(schemas.FileVersion_path, *v.Path)
 	}
-	serializeRevisionChildren(s, schemas.FileVersion_revisionChildren, v.RevisionChildren)
+	if v.RevisionChildren != nil {
+		serializeRevisionChildren(s, schemas.FileVersion_revisionChildren, v.RevisionChildren)
+	}
 }
 func (v *FileVersion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FileVersion, func(s *smithy.Schema) error {
@@ -2474,7 +2500,9 @@ func (v *PullRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PullRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalRulesList(s, schemas.PullRequest_approvalRules, v.ApprovalRules)
+	if v.ApprovalRules != nil {
+		serializeApprovalRulesList(s, schemas.PullRequest_approvalRules, v.ApprovalRules)
+	}
 	if v.AuthorArn != nil {
 		s.WriteString(schemas.PullRequest_authorArn, *v.AuthorArn)
 	}
@@ -2496,7 +2524,9 @@ func (v *PullRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PullRequestStatus != "" {
 		s.WriteString(schemas.PullRequest_pullRequestStatus, string(v.PullRequestStatus))
 	}
-	serializePullRequestTargetList(s, schemas.PullRequest_pullRequestTargets, v.PullRequestTargets)
+	if v.PullRequestTargets != nil {
+		serializePullRequestTargetList(s, schemas.PullRequest_pullRequestTargets, v.PullRequestTargets)
+	}
 	if v.RevisionId != nil {
 		s.WriteString(schemas.PullRequest_revisionId, *v.RevisionId)
 	}
@@ -3092,7 +3122,9 @@ func (v *ReactionForComment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Reaction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReactionUsersList(s, schemas.ReactionForComment_reactionUsers, v.ReactionUsers)
+	if v.ReactionUsers != nil {
+		serializeReactionUsersList(s, schemas.ReactionForComment_reactionUsers, v.ReactionUsers)
+	}
 	if v.ReactionsFromDeletedUsersCount != nil {
 		s.WriteInt32(schemas.ReactionForComment_reactionsFromDeletedUsersCount, *v.ReactionsFromDeletedUsersCount)
 	}
@@ -3444,14 +3476,18 @@ func (v *RepositoryTrigger) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RepositoryTrigger) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBranchNameList(s, schemas.RepositoryTrigger_branches, v.Branches)
+	if v.Branches != nil {
+		serializeBranchNameList(s, schemas.RepositoryTrigger_branches, v.Branches)
+	}
 	if v.CustomData != nil {
 		s.WriteString(schemas.RepositoryTrigger_customData, *v.CustomData)
 	}
 	if v.DestinationArn != nil {
 		s.WriteString(schemas.RepositoryTrigger_destinationArn, *v.DestinationArn)
 	}
-	serializeRepositoryTriggerEventList(s, schemas.RepositoryTrigger_events, v.Events)
+	if v.Events != nil {
+		serializeRepositoryTriggerEventList(s, schemas.RepositoryTrigger_events, v.Events)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RepositoryTrigger_name, *v.Name)
 	}

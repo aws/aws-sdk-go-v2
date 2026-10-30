@@ -130,7 +130,9 @@ func (v *RetrieveOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.RetrieveResponse_nextToken, *v.NextToken)
 	}
-	serializeKnowledgeBaseRetrievalResults(s, schemas.RetrieveResponse_retrievalResults, v.RetrievalResults)
+	if v.RetrievalResults != nil {
+		serializeKnowledgeBaseRetrievalResults(s, schemas.RetrieveResponse_retrievalResults, v.RetrievalResults)
+	}
 }
 func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RetrieveResponse, func(s *smithy.Schema) error {

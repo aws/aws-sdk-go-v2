@@ -107,7 +107,9 @@ func (v *ListLineageGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLineageGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineageGroupSummaries(s, schemas.ListLineageGroupsResponse_LineageGroupSummaries, v.LineageGroupSummaries)
+	if v.LineageGroupSummaries != nil {
+		serializeLineageGroupSummaries(s, schemas.ListLineageGroupsResponse_LineageGroupSummaries, v.LineageGroupSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLineageGroupsResponse_NextToken, *v.NextToken)
 	}

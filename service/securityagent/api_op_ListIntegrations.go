@@ -51,7 +51,9 @@ func (v *ListIntegrationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntegrationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationFilter(s, schemas.ListIntegrationsInput_filter, v.Filter)
+	if v.Filter != nil {
+		serializeIntegrationFilter(s, schemas.ListIntegrationsInput_filter, v.Filter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListIntegrationsInput_maxResults, *v.MaxResults)
 	}
@@ -85,7 +87,9 @@ func (v *ListIntegrationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegrationSummaryList(s, schemas.ListIntegrationsOutput_integrationSummaries, v.IntegrationSummaries)
+	if v.IntegrationSummaries != nil {
+		serializeIntegrationSummaryList(s, schemas.ListIntegrationsOutput_integrationSummaries, v.IntegrationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntegrationsOutput_nextToken, *v.NextToken)
 	}

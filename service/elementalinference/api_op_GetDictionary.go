@@ -106,11 +106,15 @@ func (v *GetDictionaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetDictionaryResponse_name, *v.Name)
 	}
-	serializeFeedReferences(s, schemas.GetDictionaryResponse_references, v.References)
+	if v.References != nil {
+		serializeFeedReferences(s, schemas.GetDictionaryResponse_references, v.References)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetDictionaryResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetDictionaryResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDictionaryResponse_tags, v.Tags)
+	}
 }
 func (v *GetDictionaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDictionaryResponse, func(s *smithy.Schema) error {

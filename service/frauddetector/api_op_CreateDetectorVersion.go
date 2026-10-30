@@ -81,13 +81,21 @@ func (v *CreateDetectorVersionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DetectorId != nil {
 		s.WriteString(schemas.CreateDetectorVersionRequest_detectorId, *v.DetectorId)
 	}
-	serializeListOfStrings(s, schemas.CreateDetectorVersionRequest_externalModelEndpoints, v.ExternalModelEndpoints)
-	serializeListOfModelVersions(s, schemas.CreateDetectorVersionRequest_modelVersions, v.ModelVersions)
+	if v.ExternalModelEndpoints != nil {
+		serializeListOfStrings(s, schemas.CreateDetectorVersionRequest_externalModelEndpoints, v.ExternalModelEndpoints)
+	}
+	if v.ModelVersions != nil {
+		serializeListOfModelVersions(s, schemas.CreateDetectorVersionRequest_modelVersions, v.ModelVersions)
+	}
 	if v.RuleExecutionMode != "" {
 		s.WriteString(schemas.CreateDetectorVersionRequest_ruleExecutionMode, string(v.RuleExecutionMode))
 	}
-	serializeRuleList(s, schemas.CreateDetectorVersionRequest_rules, v.Rules)
-	serializetagList(s, schemas.CreateDetectorVersionRequest_tags, v.Tags)
+	if v.Rules != nil {
+		serializeRuleList(s, schemas.CreateDetectorVersionRequest_rules, v.Rules)
+	}
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateDetectorVersionRequest_tags, v.Tags)
+	}
 }
 
 type CreateDetectorVersionOutput struct {

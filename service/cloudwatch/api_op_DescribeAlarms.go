@@ -130,8 +130,12 @@ func (v *DescribeAlarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlarmNamePrefix != nil {
 		s.WriteString(schemas.DescribeAlarmsInput_AlarmNamePrefix, *v.AlarmNamePrefix)
 	}
-	serializeAlarmNames(s, schemas.DescribeAlarmsInput_AlarmNames, v.AlarmNames)
-	serializeAlarmTypes(s, schemas.DescribeAlarmsInput_AlarmTypes, v.AlarmTypes)
+	if v.AlarmNames != nil {
+		serializeAlarmNames(s, schemas.DescribeAlarmsInput_AlarmNames, v.AlarmNames)
+	}
+	if v.AlarmTypes != nil {
+		serializeAlarmTypes(s, schemas.DescribeAlarmsInput_AlarmTypes, v.AlarmTypes)
+	}
 	if v.ChildrenOfAlarmName != nil {
 		s.WriteString(schemas.DescribeAlarmsInput_ChildrenOfAlarmName, *v.ChildrenOfAlarmName)
 	}
@@ -176,9 +180,15 @@ func (v *DescribeAlarmsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAlarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompositeAlarms(s, schemas.DescribeAlarmsOutput_CompositeAlarms, v.CompositeAlarms)
-	serializeLogAlarms(s, schemas.DescribeAlarmsOutput_LogAlarms, v.LogAlarms)
-	serializeMetricAlarms(s, schemas.DescribeAlarmsOutput_MetricAlarms, v.MetricAlarms)
+	if v.CompositeAlarms != nil {
+		serializeCompositeAlarms(s, schemas.DescribeAlarmsOutput_CompositeAlarms, v.CompositeAlarms)
+	}
+	if v.LogAlarms != nil {
+		serializeLogAlarms(s, schemas.DescribeAlarmsOutput_LogAlarms, v.LogAlarms)
+	}
+	if v.MetricAlarms != nil {
+		serializeMetricAlarms(s, schemas.DescribeAlarmsOutput_MetricAlarms, v.MetricAlarms)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAlarmsOutput_NextToken, *v.NextToken)
 	}

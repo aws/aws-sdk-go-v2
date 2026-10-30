@@ -106,7 +106,9 @@ func (v *ListIAMPolicyAssignmentsForUserOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListIAMPolicyAssignmentsForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActiveIAMPolicyAssignmentList(s, schemas.ListIAMPolicyAssignmentsForUserResponse_ActiveAssignments, v.ActiveAssignments)
+	if v.ActiveAssignments != nil {
+		serializeActiveIAMPolicyAssignmentList(s, schemas.ListIAMPolicyAssignmentsForUserResponse_ActiveAssignments, v.ActiveAssignments)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIAMPolicyAssignmentsForUserResponse_NextToken, *v.NextToken)
 	}

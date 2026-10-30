@@ -61,7 +61,9 @@ func (v *UpdateQAppSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SessionId != nil {
 		s.WriteString(schemas.UpdateQAppSessionInput_sessionId, *v.SessionId)
 	}
-	serializeCardValueList(s, schemas.UpdateQAppSessionInput_values, v.Values)
+	if v.Values != nil {
+		serializeCardValueList(s, schemas.UpdateQAppSessionInput_values, v.Values)
+	}
 }
 
 type UpdateQAppSessionOutput struct {

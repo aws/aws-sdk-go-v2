@@ -63,7 +63,9 @@ func (v *BatchDeletePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.BatchDeletePartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeBatchDeletePartitionValueList(s, schemas.BatchDeletePartitionRequest_PartitionsToDelete, v.PartitionsToDelete)
+	if v.PartitionsToDelete != nil {
+		serializeBatchDeletePartitionValueList(s, schemas.BatchDeletePartitionRequest_PartitionsToDelete, v.PartitionsToDelete)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.BatchDeletePartitionRequest_TableName, *v.TableName)
 	}
@@ -87,7 +89,9 @@ func (v *BatchDeletePartitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeletePartitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePartitionErrors(s, schemas.BatchDeletePartitionResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializePartitionErrors(s, schemas.BatchDeletePartitionResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDeletePartitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeletePartitionResponse, func(s *smithy.Schema) error {

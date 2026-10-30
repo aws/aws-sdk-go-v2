@@ -95,7 +95,9 @@ func (v *ListAttacksInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttacksRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceArnFilterList(s, schemas.ListAttacksRequest_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArnFilterList(s, schemas.ListAttacksRequest_ResourceArns, v.ResourceArns)
+	}
 	if v.StartTime != nil {
 		s.WriteStruct(schemas.ListAttacksRequest_StartTime)
 		v.StartTime.SerializeMembers(s)
@@ -136,7 +138,9 @@ func (v *ListAttacksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAttacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttackSummaries(s, schemas.ListAttacksResponse_AttackSummaries, v.AttackSummaries)
+	if v.AttackSummaries != nil {
+		serializeAttackSummaries(s, schemas.ListAttacksResponse_AttackSummaries, v.AttackSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttacksResponse_NextToken, *v.NextToken)
 	}

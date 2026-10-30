@@ -115,7 +115,9 @@ func (v *GetMissionProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContactPrePassDurationSeconds != nil {
 		s.WriteInt32(schemas.GetMissionProfileResponse_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
 	}
-	serializeDataflowEdgeList(s, schemas.GetMissionProfileResponse_dataflowEdges, v.DataflowEdges)
+	if v.DataflowEdges != nil {
+		serializeDataflowEdgeList(s, schemas.GetMissionProfileResponse_dataflowEdges, v.DataflowEdges)
+	}
 	if v.MinimumViableContactDurationSeconds != nil {
 		s.WriteInt32(schemas.GetMissionProfileResponse_minimumViableContactDurationSeconds, *v.MinimumViableContactDurationSeconds)
 	}
@@ -131,11 +133,15 @@ func (v *GetMissionProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.GetMissionProfileResponse_region, *v.Region)
 	}
-	serializeKmsKey(s, schemas.GetMissionProfileResponse_streamsKmsKey, v.StreamsKmsKey)
+	if v.StreamsKmsKey != nil {
+		serializeKmsKey(s, schemas.GetMissionProfileResponse_streamsKmsKey, v.StreamsKmsKey)
+	}
 	if v.StreamsKmsRole != nil {
 		s.WriteString(schemas.GetMissionProfileResponse_streamsKmsRole, *v.StreamsKmsRole)
 	}
-	serializeTagsMap(s, schemas.GetMissionProfileResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetMissionProfileResponse_tags, v.Tags)
+	}
 	if v.TelemetrySinkConfigArn != nil {
 		s.WriteString(schemas.GetMissionProfileResponse_telemetrySinkConfigArn, *v.TelemetrySinkConfigArn)
 	}

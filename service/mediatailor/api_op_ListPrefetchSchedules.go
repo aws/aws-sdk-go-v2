@@ -142,7 +142,9 @@ func (v *ListPrefetchSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPrefetchSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfPrefetchSchedule(s, schemas.ListPrefetchSchedulesResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfPrefetchSchedule(s, schemas.ListPrefetchSchedulesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPrefetchSchedulesResponse_NextToken, *v.NextToken)
 	}

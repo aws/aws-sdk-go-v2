@@ -86,7 +86,9 @@ func (v *ListBillingGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBillingGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingGroupNameAndArnList(s, schemas.ListBillingGroupsResponse_billingGroups, v.BillingGroups)
+	if v.BillingGroups != nil {
+		serializeBillingGroupNameAndArnList(s, schemas.ListBillingGroupsResponse_billingGroups, v.BillingGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBillingGroupsResponse_nextToken, *v.NextToken)
 	}

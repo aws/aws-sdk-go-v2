@@ -54,7 +54,9 @@ func (v *PutWhatsAppBusinessAccountEventDestinationsInput) Serialize(s smithy.Sh
 }
 
 func (v *PutWhatsAppBusinessAccountEventDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations, v.EventDestinations)
+	if v.EventDestinations != nil {
+		serializeWhatsAppBusinessAccountEventDestinations(s, schemas.PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations, v.EventDestinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.PutWhatsAppBusinessAccountEventDestinationsInput_id, *v.Id)
 	}

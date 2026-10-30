@@ -80,7 +80,9 @@ func (v *DescribePendingAggregationRequestsOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePendingAggregationRequestsResponse_NextToken, *v.NextToken)
 	}
-	serializePendingAggregationRequestList(s, schemas.DescribePendingAggregationRequestsResponse_PendingAggregationRequests, v.PendingAggregationRequests)
+	if v.PendingAggregationRequests != nil {
+		serializePendingAggregationRequestList(s, schemas.DescribePendingAggregationRequestsResponse_PendingAggregationRequests, v.PendingAggregationRequests)
+	}
 }
 func (v *DescribePendingAggregationRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePendingAggregationRequestsResponse, func(s *smithy.Schema) error {

@@ -94,7 +94,9 @@ func (v *ListLoggingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLoggingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLoggingConfigurationList(s, schemas.ListLoggingConfigurationsResponse_loggingConfigurations, v.LoggingConfigurations)
+	if v.LoggingConfigurations != nil {
+		serializeLoggingConfigurationList(s, schemas.ListLoggingConfigurationsResponse_loggingConfigurations, v.LoggingConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLoggingConfigurationsResponse_nextToken, *v.NextToken)
 	}

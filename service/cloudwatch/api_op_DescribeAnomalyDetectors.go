@@ -80,9 +80,15 @@ func (v *DescribeAnomalyDetectorsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAnomalyDetectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalyDetectorIds(s, schemas.DescribeAnomalyDetectorsInput_AnomalyDetectorIds, v.AnomalyDetectorIds)
-	serializeAnomalyDetectorTypes(s, schemas.DescribeAnomalyDetectorsInput_AnomalyDetectorTypes, v.AnomalyDetectorTypes)
-	serializeDimensions(s, schemas.DescribeAnomalyDetectorsInput_Dimensions, v.Dimensions)
+	if v.AnomalyDetectorIds != nil {
+		serializeAnomalyDetectorIds(s, schemas.DescribeAnomalyDetectorsInput_AnomalyDetectorIds, v.AnomalyDetectorIds)
+	}
+	if v.AnomalyDetectorTypes != nil {
+		serializeAnomalyDetectorTypes(s, schemas.DescribeAnomalyDetectorsInput_AnomalyDetectorTypes, v.AnomalyDetectorTypes)
+	}
+	if v.Dimensions != nil {
+		serializeDimensions(s, schemas.DescribeAnomalyDetectorsInput_Dimensions, v.Dimensions)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeAnomalyDetectorsInput_MaxResults, *v.MaxResults)
 	}
@@ -119,7 +125,9 @@ func (v *DescribeAnomalyDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAnomalyDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalyDetectors(s, schemas.DescribeAnomalyDetectorsOutput_AnomalyDetectors, v.AnomalyDetectors)
+	if v.AnomalyDetectors != nil {
+		serializeAnomalyDetectors(s, schemas.DescribeAnomalyDetectorsOutput_AnomalyDetectors, v.AnomalyDetectors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAnomalyDetectorsOutput_NextToken, *v.NextToken)
 	}

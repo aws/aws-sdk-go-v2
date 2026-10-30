@@ -239,11 +239,21 @@ func (v *ApiKeyRestrictions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApiKeyRestrictions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApiKeyActionList(s, schemas.ApiKeyRestrictions_AllowActions, v.AllowActions)
-	serializeAndroidAppList(s, schemas.ApiKeyRestrictions_AllowAndroidApps, v.AllowAndroidApps)
-	serializeAppleAppList(s, schemas.ApiKeyRestrictions_AllowAppleApps, v.AllowAppleApps)
-	serializeRefererPatternList(s, schemas.ApiKeyRestrictions_AllowReferers, v.AllowReferers)
-	serializeGeoArnList(s, schemas.ApiKeyRestrictions_AllowResources, v.AllowResources)
+	if v.AllowActions != nil {
+		serializeApiKeyActionList(s, schemas.ApiKeyRestrictions_AllowActions, v.AllowActions)
+	}
+	if v.AllowAndroidApps != nil {
+		serializeAndroidAppList(s, schemas.ApiKeyRestrictions_AllowAndroidApps, v.AllowAndroidApps)
+	}
+	if v.AllowAppleApps != nil {
+		serializeAppleAppList(s, schemas.ApiKeyRestrictions_AllowAppleApps, v.AllowAppleApps)
+	}
+	if v.AllowReferers != nil {
+		serializeRefererPatternList(s, schemas.ApiKeyRestrictions_AllowReferers, v.AllowReferers)
+	}
+	if v.AllowResources != nil {
+		serializeGeoArnList(s, schemas.ApiKeyRestrictions_AllowResources, v.AllowResources)
+	}
 }
 func (v *ApiKeyRestrictions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApiKeyRestrictions, func(s *smithy.Schema) error {
@@ -631,7 +641,9 @@ func (v *BatchPutGeofenceRequestEntry) SerializeMembers(s smithy.ShapeSerializer
 	if v.GeofenceId != nil {
 		s.WriteString(schemas.BatchPutGeofenceRequestEntry_GeofenceId, *v.GeofenceId)
 	}
-	serializePropertyMap(s, schemas.BatchPutGeofenceRequestEntry_GeofenceProperties, v.GeofenceProperties)
+	if v.GeofenceProperties != nil {
+		serializePropertyMap(s, schemas.BatchPutGeofenceRequestEntry_GeofenceProperties, v.GeofenceProperties)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.BatchPutGeofenceRequestEntry_Geometry)
 		v.Geometry.SerializeMembers(s)
@@ -993,7 +1005,9 @@ func (v *CalculateRouteSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DurationSeconds != nil {
 		s.WriteFloat64(schemas.CalculateRouteSummary_DurationSeconds, *v.DurationSeconds)
 	}
-	serializeBoundingBox(s, schemas.CalculateRouteSummary_RouteBBox, v.RouteBBox)
+	if v.RouteBBox != nil {
+		serializeBoundingBox(s, schemas.CalculateRouteSummary_RouteBBox, v.RouteBBox)
+	}
 }
 func (v *CalculateRouteSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CalculateRouteSummary, func(s *smithy.Schema) error {
@@ -1114,7 +1128,9 @@ func (v *CellSignals) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CellSignals) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLteCellDetailsList(s, schemas.CellSignals_LteCellDetails, v.LteCellDetails)
+	if v.LteCellDetails != nil {
+		serializeLteCellDetailsList(s, schemas.CellSignals_LteCellDetails, v.LteCellDetails)
+	}
 }
 func (v *CellSignals) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CellSignals, func(s *smithy.Schema) error {
@@ -1153,7 +1169,9 @@ func (v *Circle) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Circle) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.Circle_Center, v.Center)
+	if v.Center != nil {
+		serializePosition(s, schemas.Circle_Center, v.Center)
+	}
 	if v.Radius != nil {
 		s.WriteFloat64(schemas.Circle_Radius, *v.Radius)
 	}
@@ -1278,8 +1296,12 @@ func (v *DevicePosition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceId != nil {
 		s.WriteString(schemas.DevicePosition_DeviceId, *v.DeviceId)
 	}
-	serializePosition(s, schemas.DevicePosition_Position, v.Position)
-	serializePositionPropertyMap(s, schemas.DevicePosition_PositionProperties, v.PositionProperties)
+	if v.Position != nil {
+		serializePosition(s, schemas.DevicePosition_Position, v.Position)
+	}
+	if v.PositionProperties != nil {
+		serializePositionPropertyMap(s, schemas.DevicePosition_PositionProperties, v.PositionProperties)
+	}
 	if v.ReceivedTime != nil {
 		s.WriteTime(schemas.DevicePosition_ReceivedTime, *v.ReceivedTime)
 	}
@@ -1362,8 +1384,12 @@ func (v *DevicePositionUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceId != nil {
 		s.WriteString(schemas.DevicePositionUpdate_DeviceId, *v.DeviceId)
 	}
-	serializePosition(s, schemas.DevicePositionUpdate_Position, v.Position)
-	serializePositionPropertyMap(s, schemas.DevicePositionUpdate_PositionProperties, v.PositionProperties)
+	if v.Position != nil {
+		serializePosition(s, schemas.DevicePositionUpdate_Position, v.Position)
+	}
+	if v.PositionProperties != nil {
+		serializePositionPropertyMap(s, schemas.DevicePositionUpdate_PositionProperties, v.PositionProperties)
+	}
 	if v.SampleTime != nil {
 		s.WriteTime(schemas.DevicePositionUpdate_SampleTime, *v.SampleTime)
 	}
@@ -1448,11 +1474,15 @@ func (v *DeviceState) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv4Address != nil {
 		s.WriteString(schemas.DeviceState_Ipv4Address, *v.Ipv4Address)
 	}
-	serializePosition(s, schemas.DeviceState_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.DeviceState_Position, v.Position)
+	}
 	if v.SampleTime != nil {
 		s.WriteTime(schemas.DeviceState_SampleTime, *v.SampleTime)
 	}
-	serializeWiFiAccessPointList(s, schemas.DeviceState_WiFiAccessPoints, v.WiFiAccessPoints)
+	if v.WiFiAccessPoints != nil {
+		serializeWiFiAccessPointList(s, schemas.DeviceState_WiFiAccessPoints, v.WiFiAccessPoints)
+	}
 }
 func (v *DeviceState) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeviceState, func(s *smithy.Schema) error {
@@ -1550,7 +1580,9 @@ func (v *ForecastedEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeofenceId != nil {
 		s.WriteString(schemas.ForecastedEvent_GeofenceId, *v.GeofenceId)
 	}
-	serializePropertyMap(s, schemas.ForecastedEvent_GeofenceProperties, v.GeofenceProperties)
+	if v.GeofenceProperties != nil {
+		serializePropertyMap(s, schemas.ForecastedEvent_GeofenceProperties, v.GeofenceProperties)
+	}
 	if v.IsDeviceInGeofence != nil {
 		s.WriteBool(schemas.ForecastedEvent_IsDeviceInGeofence, *v.IsDeviceInGeofence)
 	}
@@ -1608,7 +1640,9 @@ func (v *ForecastGeofenceEventsDeviceState) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ForecastGeofenceEventsDeviceState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.ForecastGeofenceEventsDeviceState_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.ForecastGeofenceEventsDeviceState_Position, v.Position)
+	}
 	if v.Speed != nil {
 		s.WriteFloat64(schemas.ForecastGeofenceEventsDeviceState_Speed, *v.Speed)
 	}
@@ -1740,8 +1774,12 @@ func (v *GeofenceGeometry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Geobuf != nil {
 		s.WriteBlob(schemas.GeofenceGeometry_Geobuf, v.Geobuf)
 	}
-	serializeMultiLinearRings(s, schemas.GeofenceGeometry_MultiPolygon, v.MultiPolygon)
-	serializeLinearRings(s, schemas.GeofenceGeometry_Polygon, v.Polygon)
+	if v.MultiPolygon != nil {
+		serializeMultiLinearRings(s, schemas.GeofenceGeometry_MultiPolygon, v.MultiPolygon)
+	}
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.GeofenceGeometry_Polygon, v.Polygon)
+	}
 }
 func (v *GeofenceGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeofenceGeometry, func(s *smithy.Schema) error {
@@ -1798,7 +1836,9 @@ func (v *InferredState) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviationDistance != nil {
 		s.WriteFloat64(schemas.InferredState_DeviationDistance, *v.DeviationDistance)
 	}
-	serializePosition(s, schemas.InferredState_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.InferredState_Position, v.Position)
+	}
 	if v.ProxyDetected != nil {
 		s.WriteBool(schemas.InferredState_ProxyDetected, *v.ProxyDetected)
 	}
@@ -1879,7 +1919,9 @@ func (v *JobError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != "" {
 		s.WriteString(schemas.JobError_Code, string(v.Code))
 	}
-	serializeJobErrorMessagesList(s, schemas.JobError_Messages, v.Messages)
+	if v.Messages != nil {
+		serializeJobErrorMessagesList(s, schemas.JobError_Messages, v.Messages)
+	}
 }
 func (v *JobError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobError, func(s *smithy.Schema) error {
@@ -2125,14 +2167,20 @@ func (v *Leg) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DurationSeconds != nil {
 		s.WriteFloat64(schemas.Leg_DurationSeconds, *v.DurationSeconds)
 	}
-	serializePosition(s, schemas.Leg_EndPosition, v.EndPosition)
+	if v.EndPosition != nil {
+		serializePosition(s, schemas.Leg_EndPosition, v.EndPosition)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.Leg_Geometry)
 		v.Geometry.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePosition(s, schemas.Leg_StartPosition, v.StartPosition)
-	serializeStepList(s, schemas.Leg_Steps, v.Steps)
+	if v.StartPosition != nil {
+		serializePosition(s, schemas.Leg_StartPosition, v.StartPosition)
+	}
+	if v.Steps != nil {
+		serializeStepList(s, schemas.Leg_Steps, v.Steps)
+	}
 }
 func (v *Leg) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Leg, func(s *smithy.Schema) error {
@@ -2179,7 +2227,9 @@ func (v *LegGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LegGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineString(s, schemas.LegGeometry_LineString, v.LineString)
+	if v.LineString != nil {
+		serializeLineString(s, schemas.LegGeometry_LineString, v.LineString)
+	}
 }
 func (v *LegGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LegGeometry, func(s *smithy.Schema) error {
@@ -2236,8 +2286,12 @@ func (v *ListDevicePositionsResponseEntry) SerializeMembers(s smithy.ShapeSerial
 	if v.DeviceId != nil {
 		s.WriteString(schemas.ListDevicePositionsResponseEntry_DeviceId, *v.DeviceId)
 	}
-	serializePosition(s, schemas.ListDevicePositionsResponseEntry_Position, v.Position)
-	serializePositionPropertyMap(s, schemas.ListDevicePositionsResponseEntry_PositionProperties, v.PositionProperties)
+	if v.Position != nil {
+		serializePosition(s, schemas.ListDevicePositionsResponseEntry_Position, v.Position)
+	}
+	if v.PositionProperties != nil {
+		serializePositionPropertyMap(s, schemas.ListDevicePositionsResponseEntry_PositionProperties, v.PositionProperties)
+	}
 	if v.SampleTime != nil {
 		s.WriteTime(schemas.ListDevicePositionsResponseEntry_SampleTime, *v.SampleTime)
 	}
@@ -2435,7 +2489,9 @@ func (v *ListGeofenceResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeofenceId != nil {
 		s.WriteString(schemas.ListGeofenceResponseEntry_GeofenceId, *v.GeofenceId)
 	}
-	serializePropertyMap(s, schemas.ListGeofenceResponseEntry_GeofenceProperties, v.GeofenceProperties)
+	if v.GeofenceProperties != nil {
+		serializePropertyMap(s, schemas.ListGeofenceResponseEntry_GeofenceProperties, v.GeofenceProperties)
+	}
 	if v.Geometry != nil {
 		s.WriteStruct(schemas.ListGeofenceResponseEntry_Geometry)
 		v.Geometry.SerializeMembers(s)
@@ -3231,7 +3287,9 @@ func (v *LteCellDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Mnc != nil {
 		s.WriteInt32(schemas.LteCellDetails_Mnc, *v.Mnc)
 	}
-	serializeLteNetworkMeasurementsList(s, schemas.LteCellDetails_NetworkMeasurements, v.NetworkMeasurements)
+	if v.NetworkMeasurements != nil {
+		serializeLteNetworkMeasurementsList(s, schemas.LteCellDetails_NetworkMeasurements, v.NetworkMeasurements)
+	}
 	if v.NrCapable != nil {
 		s.WriteBool(schemas.LteCellDetails_NrCapable, *v.NrCapable)
 	}
@@ -3525,7 +3583,9 @@ func (v *MapConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomLayerList(s, schemas.MapConfiguration_CustomLayers, v.CustomLayers)
+	if v.CustomLayers != nil {
+		serializeCustomLayerList(s, schemas.MapConfiguration_CustomLayers, v.CustomLayers)
+	}
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.MapConfiguration_PoliticalView, *v.PoliticalView)
 	}
@@ -3580,7 +3640,9 @@ func (v *MapConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MapConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomLayerList(s, schemas.MapConfigurationUpdate_CustomLayers, v.CustomLayers)
+	if v.CustomLayers != nil {
+		serializeCustomLayerList(s, schemas.MapConfigurationUpdate_CustomLayers, v.CustomLayers)
+	}
 	if v.PoliticalView != nil {
 		s.WriteString(schemas.MapConfigurationUpdate_PoliticalView, *v.PoliticalView)
 	}
@@ -3703,7 +3765,9 @@ func (v *Place) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AddressNumber != nil {
 		s.WriteString(schemas.Place_AddressNumber, *v.AddressNumber)
 	}
-	serializePlaceCategoryList(s, schemas.Place_Categories, v.Categories)
+	if v.Categories != nil {
+		serializePlaceCategoryList(s, schemas.Place_Categories, v.Categories)
+	}
 	if v.Country != nil {
 		s.WriteString(schemas.Place_Country, *v.Country)
 	}
@@ -3739,7 +3803,9 @@ func (v *Place) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SubRegion != nil {
 		s.WriteString(schemas.Place_SubRegion, *v.SubRegion)
 	}
-	serializePlaceSupplementalCategoryList(s, schemas.Place_SupplementalCategories, v.SupplementalCategories)
+	if v.SupplementalCategories != nil {
+		serializePlaceSupplementalCategoryList(s, schemas.Place_SupplementalCategories, v.SupplementalCategories)
+	}
 	if v.TimeZone != nil {
 		s.WriteStruct(schemas.Place_TimeZone)
 		v.TimeZone.SerializeMembers(s)
@@ -3831,7 +3897,9 @@ func (v *PlaceGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PlaceGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.PlaceGeometry_Point, v.Point)
+	if v.Point != nil {
+		serializePosition(s, schemas.PlaceGeometry_Point, v.Point)
+	}
 }
 func (v *PlaceGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PlaceGeometry, func(s *smithy.Schema) error {
@@ -4102,11 +4170,15 @@ func (v *SearchForSuggestionsResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchForSuggestionsResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePlaceCategoryList(s, schemas.SearchForSuggestionsResult_Categories, v.Categories)
+	if v.Categories != nil {
+		serializePlaceCategoryList(s, schemas.SearchForSuggestionsResult_Categories, v.Categories)
+	}
 	if v.PlaceId != nil {
 		s.WriteString(schemas.SearchForSuggestionsResult_PlaceId, *v.PlaceId)
 	}
-	serializePlaceSupplementalCategoryList(s, schemas.SearchForSuggestionsResult_SupplementalCategories, v.SupplementalCategories)
+	if v.SupplementalCategories != nil {
+		serializePlaceSupplementalCategoryList(s, schemas.SearchForSuggestionsResult_SupplementalCategories, v.SupplementalCategories)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.SearchForSuggestionsResult_Text, *v.Text)
 	}
@@ -4260,7 +4332,9 @@ func (v *SearchPlaceIndexForPositionSummary) SerializeMembers(s smithy.ShapeSeri
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchPlaceIndexForPositionSummary_MaxResults, *v.MaxResults)
 	}
-	serializePosition(s, schemas.SearchPlaceIndexForPositionSummary_Position, v.Position)
+	if v.Position != nil {
+		serializePosition(s, schemas.SearchPlaceIndexForPositionSummary_Position, v.Position)
+	}
 }
 func (v *SearchPlaceIndexForPositionSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForPositionSummary, func(s *smithy.Schema) error {
@@ -4344,13 +4418,21 @@ func (v *SearchPlaceIndexForSuggestionsSummary) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *SearchPlaceIndexForSuggestionsSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.SearchPlaceIndexForSuggestionsSummary_BiasPosition, v.BiasPosition)
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.SearchPlaceIndexForSuggestionsSummary_BiasPosition, v.BiasPosition)
+	}
 	if v.DataSource != nil {
 		s.WriteString(schemas.SearchPlaceIndexForSuggestionsSummary_DataSource, *v.DataSource)
 	}
-	serializeBoundingBox(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterBBox, v.FilterBBox)
-	serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCategories, v.FilterCategories)
-	serializeCountryCodeList(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCountries, v.FilterCountries)
+	if v.FilterBBox != nil {
+		serializeBoundingBox(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterBBox, v.FilterBBox)
+	}
+	if v.FilterCategories != nil {
+		serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCategories, v.FilterCategories)
+	}
+	if v.FilterCountries != nil {
+		serializeCountryCodeList(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCountries, v.FilterCountries)
+	}
 	if v.Language != nil {
 		s.WriteString(schemas.SearchPlaceIndexForSuggestionsSummary_Language, *v.Language)
 	}
@@ -4458,20 +4540,30 @@ func (v *SearchPlaceIndexForTextSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchPlaceIndexForTextSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePosition(s, schemas.SearchPlaceIndexForTextSummary_BiasPosition, v.BiasPosition)
+	if v.BiasPosition != nil {
+		serializePosition(s, schemas.SearchPlaceIndexForTextSummary_BiasPosition, v.BiasPosition)
+	}
 	if v.DataSource != nil {
 		s.WriteString(schemas.SearchPlaceIndexForTextSummary_DataSource, *v.DataSource)
 	}
-	serializeBoundingBox(s, schemas.SearchPlaceIndexForTextSummary_FilterBBox, v.FilterBBox)
-	serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForTextSummary_FilterCategories, v.FilterCategories)
-	serializeCountryCodeList(s, schemas.SearchPlaceIndexForTextSummary_FilterCountries, v.FilterCountries)
+	if v.FilterBBox != nil {
+		serializeBoundingBox(s, schemas.SearchPlaceIndexForTextSummary_FilterBBox, v.FilterBBox)
+	}
+	if v.FilterCategories != nil {
+		serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForTextSummary_FilterCategories, v.FilterCategories)
+	}
+	if v.FilterCountries != nil {
+		serializeCountryCodeList(s, schemas.SearchPlaceIndexForTextSummary_FilterCountries, v.FilterCountries)
+	}
 	if v.Language != nil {
 		s.WriteString(schemas.SearchPlaceIndexForTextSummary_Language, *v.Language)
 	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchPlaceIndexForTextSummary_MaxResults, *v.MaxResults)
 	}
-	serializeBoundingBox(s, schemas.SearchPlaceIndexForTextSummary_ResultBBox, v.ResultBBox)
+	if v.ResultBBox != nil {
+		serializeBoundingBox(s, schemas.SearchPlaceIndexForTextSummary_ResultBBox, v.ResultBBox)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.SearchPlaceIndexForTextSummary_Text, *v.Text)
 	}
@@ -4558,11 +4650,15 @@ func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DurationSeconds != nil {
 		s.WriteFloat64(schemas.Step_DurationSeconds, *v.DurationSeconds)
 	}
-	serializePosition(s, schemas.Step_EndPosition, v.EndPosition)
+	if v.EndPosition != nil {
+		serializePosition(s, schemas.Step_EndPosition, v.EndPosition)
+	}
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.Step_GeometryOffset, *v.GeometryOffset)
 	}
-	serializePosition(s, schemas.Step_StartPosition, v.StartPosition)
+	if v.StartPosition != nil {
+		serializePosition(s, schemas.Step_StartPosition, v.StartPosition)
+	}
 }
 func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Step, func(s *smithy.Schema) error {
@@ -4647,7 +4743,9 @@ func (v *TrackingFilterGeometry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrackingFilterGeometry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinearRings(s, schemas.TrackingFilterGeometry_Polygon, v.Polygon)
+	if v.Polygon != nil {
+		serializeLinearRings(s, schemas.TrackingFilterGeometry_Polygon, v.Polygon)
+	}
 }
 func (v *TrackingFilterGeometry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrackingFilterGeometry, func(s *smithy.Schema) error {
@@ -4813,7 +4911,9 @@ func (v *ValidateAddressActionOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidateAddressActionOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidateAddressAdditionalFeatureList(s, schemas.ValidateAddressActionOptions_AdditionalFeatures, v.AdditionalFeatures)
+	if v.AdditionalFeatures != nil {
+		serializeValidateAddressAdditionalFeatureList(s, schemas.ValidateAddressActionOptions_AdditionalFeatures, v.AdditionalFeatures)
+	}
 }
 func (v *ValidateAddressActionOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateAddressActionOptions, func(s *smithy.Schema) error {

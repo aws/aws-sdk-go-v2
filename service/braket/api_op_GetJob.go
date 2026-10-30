@@ -48,7 +48,9 @@ func (v *GetJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHybridJobAdditionalAttributeNamesList(s, schemas.GetJobRequest_additionalAttributeNames, v.AdditionalAttributeNames)
+	if v.AdditionalAttributeNames != nil {
+		serializeHybridJobAdditionalAttributeNamesList(s, schemas.GetJobRequest_additionalAttributeNames, v.AdditionalAttributeNames)
+	}
 	if v.JobArn != nil {
 		s.WriteString(schemas.GetJobRequest_jobArn, *v.JobArn)
 	}
@@ -177,7 +179,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AlgorithmSpecification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssociations(s, schemas.GetJobResponse_associations, v.Associations)
+	if v.Associations != nil {
+		serializeAssociations(s, schemas.GetJobResponse_associations, v.Associations)
+	}
 	if v.BillableDuration != nil {
 		s.WriteInt32(schemas.GetJobResponse_billableDuration, *v.BillableDuration)
 	}
@@ -197,12 +201,18 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetJobResponse_endedAt, *v.EndedAt)
 	}
-	serializeJobEvents(s, schemas.GetJobResponse_events, v.Events)
+	if v.Events != nil {
+		serializeJobEvents(s, schemas.GetJobResponse_events, v.Events)
+	}
 	if v.FailureReason != nil {
 		s.WriteString(schemas.GetJobResponse_failureReason, *v.FailureReason)
 	}
-	serializeHyperParameters(s, schemas.GetJobResponse_hyperParameters, v.HyperParameters)
-	serializeInputConfigList(s, schemas.GetJobResponse_inputDataConfig, v.InputDataConfig)
+	if v.HyperParameters != nil {
+		serializeHyperParameters(s, schemas.GetJobResponse_hyperParameters, v.HyperParameters)
+	}
+	if v.InputDataConfig != nil {
+		serializeInputConfigList(s, schemas.GetJobResponse_inputDataConfig, v.InputDataConfig)
+	}
 	if v.InstanceConfig != nil {
 		s.WriteStruct(schemas.GetJobResponse_instanceConfig)
 		v.InstanceConfig.SerializeMembers(s)
@@ -238,7 +248,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.GetJobResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetJobResponse_tags, v.Tags)
+	}
 }
 func (v *GetJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetJobResponse, func(s *smithy.Schema) error {

@@ -173,7 +173,9 @@ func (v *GetRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnomalies(s, schemas.GetRecommendationsResponse_anomalies, v.Anomalies)
+	if v.Anomalies != nil {
+		serializeAnomalies(s, schemas.GetRecommendationsResponse_anomalies, v.Anomalies)
+	}
 	if v.ProfileEndTime != nil {
 		s.WriteTime(schemas.GetRecommendationsResponse_profileEndTime, *v.ProfileEndTime)
 	}
@@ -183,7 +185,9 @@ func (v *GetRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfilingGroupName != nil {
 		s.WriteString(schemas.GetRecommendationsResponse_profilingGroupName, *v.ProfilingGroupName)
 	}
-	serializeRecommendations(s, schemas.GetRecommendationsResponse_recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendations(s, schemas.GetRecommendationsResponse_recommendations, v.Recommendations)
+	}
 }
 func (v *GetRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecommendationsResponse, func(s *smithy.Schema) error {

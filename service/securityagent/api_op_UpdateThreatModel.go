@@ -92,7 +92,9 @@ func (v *UpdateThreatModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentList(s, schemas.UpdateThreatModelInput_scopeDocs, v.ScopeDocs)
+	if v.ScopeDocs != nil {
+		serializeDocumentList(s, schemas.UpdateThreatModelInput_scopeDocs, v.ScopeDocs)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.UpdateThreatModelInput_serviceRole, *v.ServiceRole)
 	}
@@ -179,7 +181,9 @@ func (v *UpdateThreatModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentList(s, schemas.UpdateThreatModelOutput_scopeDocs, v.ScopeDocs)
+	if v.ScopeDocs != nil {
+		serializeDocumentList(s, schemas.UpdateThreatModelOutput_scopeDocs, v.ScopeDocs)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.UpdateThreatModelOutput_serviceRole, *v.ServiceRole)
 	}

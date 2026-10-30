@@ -84,7 +84,9 @@ func (v *ListDirectoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDirectoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectoryList(s, schemas.ListDirectoriesResponse_Directories, v.Directories)
+	if v.Directories != nil {
+		serializeDirectoryList(s, schemas.ListDirectoriesResponse_Directories, v.Directories)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDirectoriesResponse_NextToken, *v.NextToken)
 	}

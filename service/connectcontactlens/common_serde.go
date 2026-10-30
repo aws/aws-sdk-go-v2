@@ -8,9 +8,6 @@ import (
 )
 
 func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ExtractedInformationValue) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeExtractedInformationValues(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.IssueDetected) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeIssuesDetected(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeMatchedCategories(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -45,9 +36,6 @@ func serializeMatchedCategories(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializePointsOfInterest(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.PointOfInterest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -58,9 +46,6 @@ func serializePointsOfInterest(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeRealtimeContactAnalysisSegments(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RealtimeContactAnalysisSegment) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -180,9 +165,6 @@ func deserializeRealtimeContactAnalysisSegments(d smithy.ShapeDeserializer, s *s
 }
 
 func serializeMatchedDetails(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.CategoryDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

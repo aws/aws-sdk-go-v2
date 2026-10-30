@@ -74,7 +74,9 @@ func (v *ListForecastExportJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListForecastExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListForecastExportJobsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListForecastExportJobsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListForecastExportJobsRequest_MaxResults, *v.MaxResults)
 	}
@@ -105,7 +107,9 @@ func (v *ListForecastExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListForecastExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeForecastExportJobs(s, schemas.ListForecastExportJobsResponse_ForecastExportJobs, v.ForecastExportJobs)
+	if v.ForecastExportJobs != nil {
+		serializeForecastExportJobs(s, schemas.ListForecastExportJobsResponse_ForecastExportJobs, v.ForecastExportJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListForecastExportJobsResponse_NextToken, *v.NextToken)
 	}

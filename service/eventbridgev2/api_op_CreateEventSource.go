@@ -74,7 +74,9 @@ func (v *CreateEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateEventSourceRequest_ClientToken, *v.ClientToken)
 	}
-	serializeEventSourceConfiguration(s, schemas.CreateEventSourceRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeEventSourceConfiguration(s, schemas.CreateEventSourceRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEventSourceRequest_Description, *v.Description)
 	}
@@ -84,7 +86,9 @@ func (v *CreateEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEventSourceRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateEventSourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventSourceRequest_Tags, v.Tags)
+	}
 }
 func (in *CreateEventSourceInput) bindEndpointParams(p *EndpointParameters) {
 

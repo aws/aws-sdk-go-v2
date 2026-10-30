@@ -124,7 +124,9 @@ func (v *GetFlowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndedAt != nil {
 		s.WriteTime(schemas.GetFlowExecutionResponse_endedAt, *v.EndedAt)
 	}
-	serializeFlowExecutionErrors(s, schemas.GetFlowExecutionResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeFlowExecutionErrors(s, schemas.GetFlowExecutionResponse_errors, v.Errors)
+	}
 	if v.ExecutionArn != nil {
 		s.WriteString(schemas.GetFlowExecutionResponse_executionArn, *v.ExecutionArn)
 	}

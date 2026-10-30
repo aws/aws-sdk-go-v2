@@ -88,8 +88,12 @@ func (v *BatchRebootClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClusterName != nil {
 		s.WriteString(schemas.BatchRebootClusterNodesRequest_ClusterName, *v.ClusterName)
 	}
-	serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesRequest_NodeIds, v.NodeIds)
-	serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesRequest_NodeLogicalIds, v.NodeLogicalIds)
+	if v.NodeIds != nil {
+		serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesRequest_NodeIds, v.NodeIds)
+	}
+	if v.NodeLogicalIds != nil {
+		serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesRequest_NodeLogicalIds, v.NodeLogicalIds)
+	}
 }
 
 type BatchRebootClusterNodesOutput struct {
@@ -126,10 +130,18 @@ func (v *BatchRebootClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchRebootClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchRebootClusterNodesErrors(s, schemas.BatchRebootClusterNodesResponse_Failed, v.Failed)
-	serializeBatchRebootClusterNodeLogicalIdsErrors(s, schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds, v.FailedNodeLogicalIds)
-	serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesResponse_Successful, v.Successful)
-	serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds, v.SuccessfulNodeLogicalIds)
+	if v.Failed != nil {
+		serializeBatchRebootClusterNodesErrors(s, schemas.BatchRebootClusterNodesResponse_Failed, v.Failed)
+	}
+	if v.FailedNodeLogicalIds != nil {
+		serializeBatchRebootClusterNodeLogicalIdsErrors(s, schemas.BatchRebootClusterNodesResponse_FailedNodeLogicalIds, v.FailedNodeLogicalIds)
+	}
+	if v.Successful != nil {
+		serializeClusterNodeIds(s, schemas.BatchRebootClusterNodesResponse_Successful, v.Successful)
+	}
+	if v.SuccessfulNodeLogicalIds != nil {
+		serializeClusterNodeLogicalIdList(s, schemas.BatchRebootClusterNodesResponse_SuccessfulNodeLogicalIds, v.SuccessfulNodeLogicalIds)
+	}
 }
 func (v *BatchRebootClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchRebootClusterNodesResponse, func(s *smithy.Schema) error {

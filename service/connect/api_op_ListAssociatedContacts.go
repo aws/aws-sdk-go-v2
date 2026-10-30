@@ -95,7 +95,9 @@ func (v *ListAssociatedContactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociatedContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedContactSummaryList(s, schemas.ListAssociatedContactsResponse_ContactSummaryList, v.ContactSummaryList)
+	if v.ContactSummaryList != nil {
+		serializeAssociatedContactSummaryList(s, schemas.ListAssociatedContactsResponse_ContactSummaryList, v.ContactSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedContactsResponse_NextToken, *v.NextToken)
 	}

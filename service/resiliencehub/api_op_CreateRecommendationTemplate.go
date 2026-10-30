@@ -99,9 +99,15 @@ func (v *CreateRecommendationTemplateInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRecommendationTemplateRequest_name, *v.Name)
 	}
-	serializeRecommendationIdList(s, schemas.CreateRecommendationTemplateRequest_recommendationIds, v.RecommendationIds)
-	serializeRenderRecommendationTypeList(s, schemas.CreateRecommendationTemplateRequest_recommendationTypes, v.RecommendationTypes)
-	serializeTagMap(s, schemas.CreateRecommendationTemplateRequest_tags, v.Tags)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.CreateRecommendationTemplateRequest_recommendationIds, v.RecommendationIds)
+	}
+	if v.RecommendationTypes != nil {
+		serializeRenderRecommendationTypeList(s, schemas.CreateRecommendationTemplateRequest_recommendationTypes, v.RecommendationTypes)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommendationTemplateRequest_tags, v.Tags)
+	}
 }
 func (v *CreateRecommendationTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRecommendationTemplateRequest, func(s *smithy.Schema) error {

@@ -84,14 +84,18 @@ func (v *CreateAIAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAIAgentRequest_clientToken, *v.ClientToken)
 	}
-	serializeAIAgentConfiguration(s, schemas.CreateAIAgentRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAIAgentConfiguration(s, schemas.CreateAIAgentRequest_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAIAgentRequest_description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAIAgentRequest_name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateAIAgentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAIAgentRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateAIAgentRequest_type, string(v.Type))
 	}

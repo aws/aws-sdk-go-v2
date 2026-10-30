@@ -92,7 +92,9 @@ func (v *ListPositionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPositionConfigurationsResponse_NextToken, *v.NextToken)
 	}
-	serializePositionConfigurationList(s, schemas.ListPositionConfigurationsResponse_PositionConfigurationList, v.PositionConfigurationList)
+	if v.PositionConfigurationList != nil {
+		serializePositionConfigurationList(s, schemas.ListPositionConfigurationsResponse_PositionConfigurationList, v.PositionConfigurationList)
+	}
 }
 func (v *ListPositionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPositionConfigurationsResponse, func(s *smithy.Schema) error {

@@ -162,13 +162,17 @@ func (v *CreateHyperParameterTuningJobInput) SerializeMembers(s smithy.ShapeSeri
 	if v.HyperParameterTuningJobName != nil {
 		s.WriteString(schemas.CreateHyperParameterTuningJobRequest_HyperParameterTuningJobName, *v.HyperParameterTuningJobName)
 	}
-	serializeTagList(s, schemas.CreateHyperParameterTuningJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHyperParameterTuningJobRequest_Tags, v.Tags)
+	}
 	if v.TrainingJobDefinition != nil {
 		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinition)
 		v.TrainingJobDefinition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHyperParameterTrainingJobDefinitions(s, schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	if v.TrainingJobDefinitions != nil {
+		serializeHyperParameterTrainingJobDefinitions(s, schemas.CreateHyperParameterTuningJobRequest_TrainingJobDefinitions, v.TrainingJobDefinitions)
+	}
 	if v.WarmStartConfig != nil {
 		s.WriteStruct(schemas.CreateHyperParameterTuningJobRequest_WarmStartConfig)
 		v.WarmStartConfig.SerializeMembers(s)

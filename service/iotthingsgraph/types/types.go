@@ -199,7 +199,9 @@ func (v *EntityFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.EntityFilter_name, string(v.Name))
 	}
-	serializeEntityFilterValues(s, schemas.EntityFilter_value, v.Value)
+	if v.Value != nil {
+		serializeEntityFilterValues(s, schemas.EntityFilter_value, v.Value)
+	}
 }
 func (v *EntityFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityFilter, func(s *smithy.Schema) error {
@@ -441,7 +443,9 @@ func (v *FlowTemplateFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.FlowTemplateFilter_name, string(v.Name))
 	}
-	serializeFlowTemplateFilterValues(s, schemas.FlowTemplateFilter_value, v.Value)
+	if v.Value != nil {
+		serializeFlowTemplateFilterValues(s, schemas.FlowTemplateFilter_value, v.Value)
+	}
 }
 func (v *FlowTemplateFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FlowTemplateFilter, func(s *smithy.Schema) error {
@@ -620,7 +624,9 @@ func (v *SystemInstanceDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Summary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDependencyRevisions(s, schemas.SystemInstanceDescription_validatedDependencyRevisions, v.ValidatedDependencyRevisions)
+	if v.ValidatedDependencyRevisions != nil {
+		serializeDependencyRevisions(s, schemas.SystemInstanceDescription_validatedDependencyRevisions, v.ValidatedDependencyRevisions)
+	}
 	if v.ValidatedNamespaceVersion != nil {
 		s.WriteInt64(schemas.SystemInstanceDescription_validatedNamespaceVersion, *v.ValidatedNamespaceVersion)
 	}
@@ -679,7 +685,9 @@ func (v *SystemInstanceFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.SystemInstanceFilter_name, string(v.Name))
 	}
-	serializeSystemInstanceFilterValues(s, schemas.SystemInstanceFilter_value, v.Value)
+	if v.Value != nil {
+		serializeSystemInstanceFilterValues(s, schemas.SystemInstanceFilter_value, v.Value)
+	}
 }
 func (v *SystemInstanceFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SystemInstanceFilter, func(s *smithy.Schema) error {
@@ -890,7 +898,9 @@ func (v *SystemTemplateFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != "" {
 		s.WriteString(schemas.SystemTemplateFilter_name, string(v.Name))
 	}
-	serializeSystemTemplateFilterValues(s, schemas.SystemTemplateFilter_value, v.Value)
+	if v.Value != nil {
+		serializeSystemTemplateFilterValues(s, schemas.SystemTemplateFilter_value, v.Value)
+	}
 }
 func (v *SystemTemplateFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SystemTemplateFilter, func(s *smithy.Schema) error {

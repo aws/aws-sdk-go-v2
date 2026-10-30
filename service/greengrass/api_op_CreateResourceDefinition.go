@@ -63,7 +63,9 @@ func (v *CreateResourceDefinitionInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.CreateResourceDefinitionRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateResourceDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateResourceDefinitionRequest_tags, v.Tags)
+	}
 }
 
 type CreateResourceDefinitionOutput struct {

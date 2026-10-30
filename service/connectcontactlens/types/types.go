@@ -32,8 +32,12 @@ func (v *Categories) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Categories) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMatchedCategories(s, schemas.Categories_MatchedCategories, v.MatchedCategories)
-	serializeMatchedDetails(s, schemas.Categories_MatchedDetails, v.MatchedDetails)
+	if v.MatchedCategories != nil {
+		serializeMatchedCategories(s, schemas.Categories_MatchedCategories, v.MatchedCategories)
+	}
+	if v.MatchedDetails != nil {
+		serializeMatchedDetails(s, schemas.Categories_MatchedDetails, v.MatchedDetails)
+	}
 }
 func (v *Categories) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Categories, func(s *smithy.Schema) error {
@@ -65,7 +69,9 @@ func (v *CategoryDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CategoryDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePointsOfInterest(s, schemas.CategoryDetails_PointsOfInterest, v.PointsOfInterest)
+	if v.PointsOfInterest != nil {
+		serializePointsOfInterest(s, schemas.CategoryDetails_PointsOfInterest, v.PointsOfInterest)
+	}
 }
 func (v *CategoryDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CategoryDetails, func(s *smithy.Schema) error {
@@ -170,7 +176,9 @@ func (v *ExtractedInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExtractedInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtractedInformationValues(s, schemas.ExtractedInformation_ExtractedValues, v.ExtractedValues)
+	if v.ExtractedValues != nil {
+		serializeExtractedInformationValues(s, schemas.ExtractedInformation_ExtractedValues, v.ExtractedValues)
+	}
 	if v.ExtractionDefinitionDisplayLabel != nil {
 		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel, *v.ExtractionDefinitionDisplayLabel)
 	}
@@ -238,7 +246,9 @@ func (v *ExtractedInformationValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Content != nil {
 		s.WriteString(schemas.ExtractedInformationValue_Content, *v.Content)
 	}
-	serializePointsOfInterest(s, schemas.ExtractedInformationValue_PointsOfInterest, v.PointsOfInterest)
+	if v.PointsOfInterest != nil {
+		serializePointsOfInterest(s, schemas.ExtractedInformationValue_PointsOfInterest, v.PointsOfInterest)
+	}
 }
 func (v *ExtractedInformationValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExtractedInformationValue, func(s *smithy.Schema) error {
@@ -536,7 +546,9 @@ func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Transcript_Id, *v.Id)
 	}
-	serializeIssuesDetected(s, schemas.Transcript_IssuesDetected, v.IssuesDetected)
+	if v.IssuesDetected != nil {
+		serializeIssuesDetected(s, schemas.Transcript_IssuesDetected, v.IssuesDetected)
+	}
 	if v.ParticipantId != nil {
 		s.WriteString(schemas.Transcript_ParticipantId, *v.ParticipantId)
 	}

@@ -51,7 +51,9 @@ func (v *ResetNotificationSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResetNotificationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationSettingKeys(s, schemas.ResetNotificationSettingsRequest_notificationSettingKeys, v.NotificationSettingKeys)
+	if v.NotificationSettingKeys != nil {
+		serializeNotificationSettingKeys(s, schemas.ResetNotificationSettingsRequest_notificationSettingKeys, v.NotificationSettingKeys)
+	}
 	if v.TrustAnchorId != nil {
 		s.WriteString(schemas.ResetNotificationSettingsRequest_trustAnchorId, *v.TrustAnchorId)
 	}

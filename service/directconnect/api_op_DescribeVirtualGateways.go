@@ -72,7 +72,9 @@ func (v *DescribeVirtualGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeVirtualGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVirtualGatewayList(s, schemas.VirtualGateways_virtualGateways, v.VirtualGateways)
+	if v.VirtualGateways != nil {
+		serializeVirtualGatewayList(s, schemas.VirtualGateways_virtualGateways, v.VirtualGateways)
+	}
 }
 func (v *DescribeVirtualGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VirtualGateways, func(s *smithy.Schema) error {

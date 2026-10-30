@@ -61,7 +61,9 @@ func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrentApplicationVersion != nil {
 		s.WriteInt32(schemas.UpdateApplicationRequest_currentApplicationVersion, *v.CurrentApplicationVersion)
 	}
-	serializeDefinition(s, schemas.UpdateApplicationRequest_definition, v.Definition)
+	if v.Definition != nil {
+		serializeDefinition(s, schemas.UpdateApplicationRequest_definition, v.Definition)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateApplicationRequest_description, *v.Description)
 	}

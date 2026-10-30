@@ -58,7 +58,9 @@ func (v *CreateHumanTaskUiInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HumanTaskUiName != nil {
 		s.WriteString(schemas.CreateHumanTaskUiRequest_HumanTaskUiName, *v.HumanTaskUiName)
 	}
-	serializeTagList(s, schemas.CreateHumanTaskUiRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateHumanTaskUiRequest_Tags, v.Tags)
+	}
 	if v.UiTemplate != nil {
 		s.WriteStruct(schemas.CreateHumanTaskUiRequest_UiTemplate)
 		v.UiTemplate.SerializeMembers(s)

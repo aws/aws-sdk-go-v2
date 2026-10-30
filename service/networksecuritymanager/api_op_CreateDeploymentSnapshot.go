@@ -61,7 +61,9 @@ func (v *CreateDeploymentSnapshotInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DeploymentIdentifier != nil {
 		s.WriteString(schemas.CreateDeploymentSnapshotInput_deploymentIdentifier, *v.DeploymentIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateDeploymentSnapshotInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDeploymentSnapshotInput_tags, v.Tags)
+	}
 }
 
 type CreateDeploymentSnapshotOutput struct {
@@ -135,8 +137,12 @@ func (v *CreateDeploymentSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDeploymentSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedPolicyList(s, schemas.CreateDeploymentSnapshotOutput_associatedPolicyList, v.AssociatedPolicyList)
-	serializeAssociatedScopeList(s, schemas.CreateDeploymentSnapshotOutput_associatedScopeList, v.AssociatedScopeList)
+	if v.AssociatedPolicyList != nil {
+		serializeAssociatedPolicyList(s, schemas.CreateDeploymentSnapshotOutput_associatedPolicyList, v.AssociatedPolicyList)
+	}
+	if v.AssociatedScopeList != nil {
+		serializeAssociatedScopeList(s, schemas.CreateDeploymentSnapshotOutput_associatedScopeList, v.AssociatedScopeList)
+	}
 	if v.DeploymentArn != nil {
 		s.WriteString(schemas.CreateDeploymentSnapshotOutput_deploymentArn, *v.DeploymentArn)
 	}

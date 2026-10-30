@@ -91,7 +91,9 @@ func (v *ListQuickResponsesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQuickResponsesResponse_nextToken, *v.NextToken)
 	}
-	serializeQuickResponseSummaryList(s, schemas.ListQuickResponsesResponse_quickResponseSummaries, v.QuickResponseSummaries)
+	if v.QuickResponseSummaries != nil {
+		serializeQuickResponseSummaryList(s, schemas.ListQuickResponsesResponse_quickResponseSummaries, v.QuickResponseSummaries)
+	}
 }
 func (v *ListQuickResponsesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQuickResponsesResponse, func(s *smithy.Schema) error {

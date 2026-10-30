@@ -96,7 +96,9 @@ func (v *ListGroupingAttributeDefinitionsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListGroupingAttributeDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupingAttributeDefinitions(s, schemas.ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	if v.GroupingAttributeDefinitions != nil {
+		serializeGroupingAttributeDefinitions(s, schemas.ListGroupingAttributeDefinitionsOutput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupingAttributeDefinitionsOutput_NextToken, *v.NextToken)
 	}

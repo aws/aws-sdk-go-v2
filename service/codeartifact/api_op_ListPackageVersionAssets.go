@@ -183,7 +183,9 @@ func (v *ListPackageVersionAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPackageVersionAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetSummaryList(s, schemas.ListPackageVersionAssetsResult_assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetSummaryList(s, schemas.ListPackageVersionAssetsResult_assets, v.Assets)
+	}
 	if v.Format != "" {
 		s.WriteString(schemas.ListPackageVersionAssetsResult_format, string(v.Format))
 	}

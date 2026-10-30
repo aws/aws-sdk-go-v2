@@ -65,7 +65,9 @@ func (v *CreateDirectConnectGatewayInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DirectConnectGatewayName != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayRequest_directConnectGatewayName, *v.DirectConnectGatewayName)
 	}
-	serializeTagList(s, schemas.CreateDirectConnectGatewayRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDirectConnectGatewayRequest_tags, v.Tags)
+	}
 }
 
 type CreateDirectConnectGatewayOutput struct {

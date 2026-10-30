@@ -56,7 +56,9 @@ func (v *HttpPrefixHeadersInResponseOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *HttpPrefixHeadersInResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.HttpPrefixHeadersInResponseOutput_prefixHeaders, v.PrefixHeaders)
+	if v.PrefixHeaders != nil {
+		serializeStringMap(s, schemas.HttpPrefixHeadersInResponseOutput_prefixHeaders, v.PrefixHeaders)
+	}
 }
 func (v *HttpPrefixHeadersInResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpPrefixHeadersInResponseOutput, func(s *smithy.Schema) error {

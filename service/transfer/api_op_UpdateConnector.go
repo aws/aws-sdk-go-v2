@@ -119,7 +119,9 @@ func (v *UpdateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConnectorId != nil {
 		s.WriteString(schemas.UpdateConnectorRequest_ConnectorId, *v.ConnectorId)
 	}
-	serializeUpdateConnectorEgressConfig(s, schemas.UpdateConnectorRequest_EgressConfig, v.EgressConfig)
+	if v.EgressConfig != nil {
+		serializeUpdateConnectorEgressConfig(s, schemas.UpdateConnectorRequest_EgressConfig, v.EgressConfig)
+	}
 	if v.IpAddressType != "" {
 		s.WriteString(schemas.UpdateConnectorRequest_IpAddressType, string(v.IpAddressType))
 	}

@@ -118,8 +118,12 @@ func (v *ListAnomaliesForInsightOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAnomaliesForInsightResponse_NextToken, *v.NextToken)
 	}
-	serializeProactiveAnomalies(s, schemas.ListAnomaliesForInsightResponse_ProactiveAnomalies, v.ProactiveAnomalies)
-	serializeReactiveAnomalies(s, schemas.ListAnomaliesForInsightResponse_ReactiveAnomalies, v.ReactiveAnomalies)
+	if v.ProactiveAnomalies != nil {
+		serializeProactiveAnomalies(s, schemas.ListAnomaliesForInsightResponse_ProactiveAnomalies, v.ProactiveAnomalies)
+	}
+	if v.ReactiveAnomalies != nil {
+		serializeReactiveAnomalies(s, schemas.ListAnomaliesForInsightResponse_ReactiveAnomalies, v.ReactiveAnomalies)
+	}
 }
 func (v *ListAnomaliesForInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAnomaliesForInsightResponse, func(s *smithy.Schema) error {

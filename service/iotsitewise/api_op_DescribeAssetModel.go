@@ -188,8 +188,12 @@ func (v *DescribeAssetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetModelArn != nil {
 		s.WriteString(schemas.DescribeAssetModelResponse_assetModelArn, *v.AssetModelArn)
 	}
-	serializeAssetModelCompositeModelSummaries(s, schemas.DescribeAssetModelResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
-	serializeAssetModelCompositeModels(s, schemas.DescribeAssetModelResponse_assetModelCompositeModels, v.AssetModelCompositeModels)
+	if v.AssetModelCompositeModelSummaries != nil {
+		serializeAssetModelCompositeModelSummaries(s, schemas.DescribeAssetModelResponse_assetModelCompositeModelSummaries, v.AssetModelCompositeModelSummaries)
+	}
+	if v.AssetModelCompositeModels != nil {
+		serializeAssetModelCompositeModels(s, schemas.DescribeAssetModelResponse_assetModelCompositeModels, v.AssetModelCompositeModels)
+	}
 	if v.AssetModelCreationDate != nil {
 		s.WriteTime(schemas.DescribeAssetModelResponse_assetModelCreationDate, *v.AssetModelCreationDate)
 	}
@@ -199,7 +203,9 @@ func (v *DescribeAssetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetModelExternalId != nil {
 		s.WriteString(schemas.DescribeAssetModelResponse_assetModelExternalId, *v.AssetModelExternalId)
 	}
-	serializeAssetModelHierarchies(s, schemas.DescribeAssetModelResponse_assetModelHierarchies, v.AssetModelHierarchies)
+	if v.AssetModelHierarchies != nil {
+		serializeAssetModelHierarchies(s, schemas.DescribeAssetModelResponse_assetModelHierarchies, v.AssetModelHierarchies)
+	}
 	if v.AssetModelId != nil {
 		s.WriteString(schemas.DescribeAssetModelResponse_assetModelId, *v.AssetModelId)
 	}
@@ -209,7 +215,9 @@ func (v *DescribeAssetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetModelName != nil {
 		s.WriteString(schemas.DescribeAssetModelResponse_assetModelName, *v.AssetModelName)
 	}
-	serializeAssetModelProperties(s, schemas.DescribeAssetModelResponse_assetModelProperties, v.AssetModelProperties)
+	if v.AssetModelProperties != nil {
+		serializeAssetModelProperties(s, schemas.DescribeAssetModelResponse_assetModelProperties, v.AssetModelProperties)
+	}
 	if v.AssetModelStatus != nil {
 		s.WriteStruct(schemas.DescribeAssetModelResponse_assetModelStatus)
 		v.AssetModelStatus.SerializeMembers(s)
@@ -224,7 +232,9 @@ func (v *DescribeAssetModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ETag != nil {
 		s.WriteString(schemas.DescribeAssetModelResponse_eTag, *v.ETag)
 	}
-	serializeInterfaceDetails(s, schemas.DescribeAssetModelResponse_interfaceDetails, v.InterfaceDetails)
+	if v.InterfaceDetails != nil {
+		serializeInterfaceDetails(s, schemas.DescribeAssetModelResponse_interfaceDetails, v.InterfaceDetails)
+	}
 }
 func (v *DescribeAssetModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAssetModelResponse, func(s *smithy.Schema) error {

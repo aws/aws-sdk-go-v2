@@ -85,7 +85,9 @@ func (v *DescribeTrustedTokenIssuerOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.TrustedTokenIssuerArn != nil {
 		s.WriteString(schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerArn, *v.TrustedTokenIssuerArn)
 	}
-	serializeTrustedTokenIssuerConfiguration(s, schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerConfiguration, v.TrustedTokenIssuerConfiguration)
+	if v.TrustedTokenIssuerConfiguration != nil {
+		serializeTrustedTokenIssuerConfiguration(s, schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerConfiguration, v.TrustedTokenIssuerConfiguration)
+	}
 	if v.TrustedTokenIssuerType != "" {
 		s.WriteString(schemas.DescribeTrustedTokenIssuerResponse_TrustedTokenIssuerType, string(v.TrustedTokenIssuerType))
 	}

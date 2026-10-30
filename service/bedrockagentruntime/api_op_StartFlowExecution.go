@@ -79,7 +79,9 @@ func (v *StartFlowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowIdentifier != nil {
 		s.WriteString(schemas.StartFlowExecutionRequest_flowIdentifier, *v.FlowIdentifier)
 	}
-	serializeFlowInputs(s, schemas.StartFlowExecutionRequest_inputs, v.Inputs)
+	if v.Inputs != nil {
+		serializeFlowInputs(s, schemas.StartFlowExecutionRequest_inputs, v.Inputs)
+	}
 	if v.ModelPerformanceConfiguration != nil {
 		s.WriteStruct(schemas.StartFlowExecutionRequest_modelPerformanceConfiguration)
 		v.ModelPerformanceConfiguration.SerializeMembers(s)

@@ -59,9 +59,15 @@ func (v *CreateVpcLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVpcLinkRequest_Name, *v.Name)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateVpcLinkRequest_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateVpcLinkRequest_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.CreateVpcLinkRequest_Tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateVpcLinkRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateVpcLinkRequest_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateVpcLinkRequest_Tags, v.Tags)
+	}
 }
 
 type CreateVpcLinkOutput struct {
@@ -112,9 +118,15 @@ func (v *CreateVpcLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateVpcLinkResponse_Name, *v.Name)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateVpcLinkResponse_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateVpcLinkResponse_SubnetIds, v.SubnetIds)
-	serializeTags(s, schemas.CreateVpcLinkResponse_Tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateVpcLinkResponse_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateVpcLinkResponse_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateVpcLinkResponse_Tags, v.Tags)
+	}
 	if v.VpcLinkId != nil {
 		s.WriteString(schemas.CreateVpcLinkResponse_VpcLinkId, *v.VpcLinkId)
 	}

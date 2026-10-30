@@ -69,7 +69,9 @@ func (v *CreateSignalingChannelInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SingleMasterConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagOnCreateList(s, schemas.CreateSignalingChannelInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagOnCreateList(s, schemas.CreateSignalingChannelInput_Tags, v.Tags)
+	}
 }
 
 type CreateSignalingChannelOutput struct {

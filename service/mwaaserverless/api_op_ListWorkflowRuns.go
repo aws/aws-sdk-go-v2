@@ -96,7 +96,9 @@ func (v *ListWorkflowRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkflowRunsResponse_NextToken, *v.NextToken)
 	}
-	serializeWorkflowRunSummaries(s, schemas.ListWorkflowRunsResponse_WorkflowRuns, v.WorkflowRuns)
+	if v.WorkflowRuns != nil {
+		serializeWorkflowRunSummaries(s, schemas.ListWorkflowRunsResponse_WorkflowRuns, v.WorkflowRuns)
+	}
 }
 func (v *ListWorkflowRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkflowRunsResponse, func(s *smithy.Schema) error {

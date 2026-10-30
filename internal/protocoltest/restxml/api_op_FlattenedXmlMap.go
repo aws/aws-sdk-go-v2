@@ -39,7 +39,9 @@ func (v *FlattenedXmlMapInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlattenedXmlMapInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFooEnumMap(s, schemas.FlattenedXmlMapRequest_myMap, v.MyMap)
+	if v.MyMap != nil {
+		serializeFooEnumMap(s, schemas.FlattenedXmlMapRequest_myMap, v.MyMap)
+	}
 }
 
 type FlattenedXmlMapOutput struct {
@@ -58,7 +60,9 @@ func (v *FlattenedXmlMapOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlattenedXmlMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFooEnumMap(s, schemas.FlattenedXmlMapResponse_myMap, v.MyMap)
+	if v.MyMap != nil {
+		serializeFooEnumMap(s, schemas.FlattenedXmlMapResponse_myMap, v.MyMap)
+	}
 }
 func (v *FlattenedXmlMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FlattenedXmlMapResponse, func(s *smithy.Schema) error {

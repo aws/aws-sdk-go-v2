@@ -160,7 +160,9 @@ func (v *DescribeInferenceComponentOutput) SerializeMembers(s smithy.ShapeSerial
 		v.Specification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInferenceComponentSpecificationSummaryList(s, schemas.DescribeInferenceComponentOutput_Specifications, v.Specifications)
+	if v.Specifications != nil {
+		serializeInferenceComponentSpecificationSummaryList(s, schemas.DescribeInferenceComponentOutput_Specifications, v.Specifications)
+	}
 	if v.VariantName != nil {
 		s.WriteString(schemas.DescribeInferenceComponentOutput_VariantName, *v.VariantName)
 	}

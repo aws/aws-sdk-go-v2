@@ -110,7 +110,9 @@ func (v *StartDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.StartDeploymentRequest_Description, *v.Description)
 	}
-	serializeDynamicParameterMap(s, schemas.StartDeploymentRequest_DynamicExtensionParameters, v.DynamicExtensionParameters)
+	if v.DynamicExtensionParameters != nil {
+		serializeDynamicParameterMap(s, schemas.StartDeploymentRequest_DynamicExtensionParameters, v.DynamicExtensionParameters)
+	}
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.StartDeploymentRequest_EnvironmentId, *v.EnvironmentId)
 	}
@@ -120,7 +122,9 @@ func (v *StartDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LatestDeploymentNumber != nil {
 		s.WriteInt32(schemas.StartDeploymentRequest_LatestDeploymentNumber, *v.LatestDeploymentNumber)
 	}
-	serializeTagMap(s, schemas.StartDeploymentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartDeploymentRequest_Tags, v.Tags)
+	}
 }
 
 type StartDeploymentOutput struct {
@@ -216,7 +220,9 @@ func (v *StartDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.Deployment_ApplicationId, *v.ApplicationId)
 	}
-	serializeAppliedExtensions(s, schemas.Deployment_AppliedExtensions, v.AppliedExtensions)
+	if v.AppliedExtensions != nil {
+		serializeAppliedExtensions(s, schemas.Deployment_AppliedExtensions, v.AppliedExtensions)
+	}
 	if v.CompletedAt != nil {
 		s.WriteTime(schemas.Deployment_CompletedAt, *v.CompletedAt)
 	}
@@ -247,7 +253,9 @@ func (v *StartDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.Deployment_EnvironmentId, *v.EnvironmentId)
 	}
-	serializeDeploymentEvents(s, schemas.Deployment_EventLog, v.EventLog)
+	if v.EventLog != nil {
+		serializeDeploymentEvents(s, schemas.Deployment_EventLog, v.EventLog)
+	}
 	if v.FinalBakeTimeInMinutes != 0 {
 		s.WriteInt32(schemas.Deployment_FinalBakeTimeInMinutes, v.FinalBakeTimeInMinutes)
 	}

@@ -96,7 +96,9 @@ func (v *ListWorkspaceServiceAccountsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkspaceServiceAccountsResponse_nextToken, *v.NextToken)
 	}
-	serializeServiceAccountList(s, schemas.ListWorkspaceServiceAccountsResponse_serviceAccounts, v.ServiceAccounts)
+	if v.ServiceAccounts != nil {
+		serializeServiceAccountList(s, schemas.ListWorkspaceServiceAccountsResponse_serviceAccounts, v.ServiceAccounts)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.ListWorkspaceServiceAccountsResponse_workspaceId, *v.WorkspaceId)
 	}

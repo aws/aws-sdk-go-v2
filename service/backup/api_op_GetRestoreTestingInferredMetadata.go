@@ -89,7 +89,9 @@ func (v *GetRestoreTestingInferredMetadataOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GetRestoreTestingInferredMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializestringMap(s, schemas.GetRestoreTestingInferredMetadataOutput_InferredMetadata, v.InferredMetadata)
+	if v.InferredMetadata != nil {
+		serializestringMap(s, schemas.GetRestoreTestingInferredMetadataOutput_InferredMetadata, v.InferredMetadata)
+	}
 }
 func (v *GetRestoreTestingInferredMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRestoreTestingInferredMetadataOutput, func(s *smithy.Schema) error {

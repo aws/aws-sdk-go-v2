@@ -105,7 +105,9 @@ func (v *ListCodeIssueArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeIssueArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeIssueArtifactItems(s, schemas.ListCodeIssueArtifactsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeCodeIssueArtifactItems(s, schemas.ListCodeIssueArtifactsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeIssueArtifactsOutput_nextToken, *v.NextToken)
 	}

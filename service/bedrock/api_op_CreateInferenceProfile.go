@@ -84,8 +84,12 @@ func (v *CreateInferenceProfileInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.InferenceProfileName != nil {
 		s.WriteString(schemas.CreateInferenceProfileRequest_inferenceProfileName, *v.InferenceProfileName)
 	}
-	serializeInferenceProfileModelSource(s, schemas.CreateInferenceProfileRequest_modelSource, v.ModelSource)
-	serializeTagList(s, schemas.CreateInferenceProfileRequest_tags, v.Tags)
+	if v.ModelSource != nil {
+		serializeInferenceProfileModelSource(s, schemas.CreateInferenceProfileRequest_modelSource, v.ModelSource)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateInferenceProfileRequest_tags, v.Tags)
+	}
 }
 
 type CreateInferenceProfileOutput struct {

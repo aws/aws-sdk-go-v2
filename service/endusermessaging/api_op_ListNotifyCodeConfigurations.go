@@ -83,7 +83,9 @@ func (v *ListNotifyCodeConfigurationsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNotifyCodeConfigurationsOutput_nextToken, *v.NextToken)
 	}
-	serializeNotifyCodeConfigurationList(s, schemas.ListNotifyCodeConfigurationsOutput_notifyCodeConfigurations, v.NotifyCodeConfigurations)
+	if v.NotifyCodeConfigurations != nil {
+		serializeNotifyCodeConfigurationList(s, schemas.ListNotifyCodeConfigurationsOutput_notifyCodeConfigurations, v.NotifyCodeConfigurations)
+	}
 }
 func (v *ListNotifyCodeConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNotifyCodeConfigurationsOutput, func(s *smithy.Schema) error {

@@ -104,7 +104,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesktopEndpoint != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_desktopEndpoint, *v.DesktopEndpoint)
 	}
-	serializeDeviceCreationTagsMap(s, schemas.CreateEnvironmentRequest_deviceCreationTags, v.DeviceCreationTags)
+	if v.DeviceCreationTags != nil {
+		serializeDeviceCreationTagsMap(s, schemas.CreateEnvironmentRequest_deviceCreationTags, v.DeviceCreationTags)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateEnvironmentRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
@@ -122,7 +124,9 @@ func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SoftwareSetUpdateSchedule != "" {
 		s.WriteString(schemas.CreateEnvironmentRequest_softwareSetUpdateSchedule, string(v.SoftwareSetUpdateSchedule))
 	}
-	serializeTagsMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateEnvironmentRequest_tags, v.Tags)
+	}
 }
 
 type CreateEnvironmentOutput struct {

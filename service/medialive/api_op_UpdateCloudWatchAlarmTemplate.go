@@ -244,7 +244,9 @@ func (v *UpdateCloudWatchAlarmTemplateOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Statistic != "" {
 		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateResponse_Statistic, string(v.Statistic))
 	}
-	serializeTagMap(s, schemas.UpdateCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.UpdateCloudWatchAlarmTemplateResponse_Tags, v.Tags)
+	}
 	if v.TargetResourceType != "" {
 		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateResponse_TargetResourceType, string(v.TargetResourceType))
 	}

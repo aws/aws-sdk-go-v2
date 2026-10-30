@@ -236,7 +236,9 @@ func (v *ApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SqlApplicationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcConfigurations(s, schemas.ApplicationConfiguration_VpcConfigurations, v.VpcConfigurations)
+	if v.VpcConfigurations != nil {
+		serializeVpcConfigurations(s, schemas.ApplicationConfiguration_VpcConfigurations, v.VpcConfigurations)
+	}
 	if v.ZeppelinApplicationConfiguration != nil {
 		s.WriteStruct(schemas.ApplicationConfiguration_ZeppelinApplicationConfiguration)
 		v.ZeppelinApplicationConfiguration.SerializeMembers(s)
@@ -368,7 +370,9 @@ func (v *ApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSer
 		v.SqlApplicationConfigurationDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcConfigurationDescriptions(s, schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions, v.VpcConfigurationDescriptions)
+	if v.VpcConfigurationDescriptions != nil {
+		serializeVpcConfigurationDescriptions(s, schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions, v.VpcConfigurationDescriptions)
+	}
 	if v.ZeppelinApplicationConfigurationDescription != nil {
 		s.WriteStruct(schemas.ApplicationConfigurationDescription_ZeppelinApplicationConfigurationDescription)
 		v.ZeppelinApplicationConfigurationDescription.SerializeMembers(s)
@@ -494,7 +498,9 @@ func (v *ApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializ
 		v.SqlApplicationConfigurationUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVpcConfigurationUpdates(s, schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates, v.VpcConfigurationUpdates)
+	if v.VpcConfigurationUpdates != nil {
+		serializeVpcConfigurationUpdates(s, schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates, v.VpcConfigurationUpdates)
+	}
 	if v.ZeppelinApplicationConfigurationUpdate != nil {
 		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ZeppelinApplicationConfigurationUpdate)
 		v.ZeppelinApplicationConfigurationUpdate.SerializeMembers(s)
@@ -659,7 +665,9 @@ func (v *ApplicationDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationVersionUpdatedFrom != nil {
 		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionUpdatedFrom, *v.ApplicationVersionUpdatedFrom)
 	}
-	serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.CloudWatchLoggingOptionDescriptions != nil {
+		serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	}
 	if v.ConditionalToken != nil {
 		s.WriteString(schemas.ApplicationDetail_ConditionalToken, *v.ConditionalToken)
 	}
@@ -2621,7 +2629,9 @@ func (v *EnvironmentProperties) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentProperties) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyGroups(s, schemas.EnvironmentProperties_PropertyGroups, v.PropertyGroups)
+	if v.PropertyGroups != nil {
+		serializePropertyGroups(s, schemas.EnvironmentProperties_PropertyGroups, v.PropertyGroups)
+	}
 }
 func (v *EnvironmentProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentProperties, func(s *smithy.Schema) error {
@@ -2649,7 +2659,9 @@ func (v *EnvironmentPropertyDescriptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentPropertyDescriptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyGroups(s, schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions, v.PropertyGroupDescriptions)
+	if v.PropertyGroupDescriptions != nil {
+		serializePropertyGroups(s, schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions, v.PropertyGroupDescriptions)
+	}
 }
 func (v *EnvironmentPropertyDescriptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentPropertyDescriptions, func(s *smithy.Schema) error {
@@ -2680,7 +2692,9 @@ func (v *EnvironmentPropertyUpdates) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EnvironmentPropertyUpdates) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePropertyGroups(s, schemas.EnvironmentPropertyUpdates_PropertyGroups, v.PropertyGroups)
+	if v.PropertyGroups != nil {
+		serializePropertyGroups(s, schemas.EnvironmentPropertyUpdates_PropertyGroups, v.PropertyGroups)
+	}
 }
 func (v *EnvironmentPropertyUpdates) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnvironmentPropertyUpdates, func(s *smithy.Schema) error {
@@ -3217,7 +3231,9 @@ func (v *InputDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	if v.InAppStreamNames != nil {
+		serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	}
 	if v.InputId != nil {
 		s.WriteString(schemas.InputDescription_InputId, *v.InputId)
 	}
@@ -3631,7 +3647,9 @@ func (v *InputSchemaUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InputSchemaUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	if v.RecordColumnUpdates != nil {
+		serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	}
 	if v.RecordEncodingUpdate != nil {
 		s.WriteString(schemas.InputSchemaUpdate_RecordEncodingUpdate, *v.RecordEncodingUpdate)
 	}
@@ -5333,7 +5351,9 @@ func (v *PropertyGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropertyGroupId != nil {
 		s.WriteString(schemas.PropertyGroup_PropertyGroupId, *v.PropertyGroupId)
 	}
-	serializePropertyMap(s, schemas.PropertyGroup_PropertyMap, v.PropertyMap)
+	if v.PropertyMap != nil {
+		serializePropertyMap(s, schemas.PropertyGroup_PropertyMap, v.PropertyMap)
+	}
 }
 func (v *PropertyGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyGroup, func(s *smithy.Schema) error {
@@ -5709,7 +5729,9 @@ func (v *RunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FlinkRunConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSqlRunConfigurations(s, schemas.RunConfiguration_SqlRunConfigurations, v.SqlRunConfigurations)
+	if v.SqlRunConfigurations != nil {
+		serializeSqlRunConfigurations(s, schemas.RunConfiguration_SqlRunConfigurations, v.SqlRunConfigurations)
+	}
 }
 func (v *RunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RunConfiguration, func(s *smithy.Schema) error {
@@ -6417,7 +6439,9 @@ func (v *SourceSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	if v.RecordColumns != nil {
+		serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	}
 	if v.RecordEncoding != nil {
 		s.WriteString(schemas.SourceSchema_RecordEncoding, *v.RecordEncoding)
 	}
@@ -6468,9 +6492,15 @@ func (v *SqlApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SqlApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputs(s, schemas.SqlApplicationConfiguration_Inputs, v.Inputs)
-	serializeOutputs(s, schemas.SqlApplicationConfiguration_Outputs, v.Outputs)
-	serializeReferenceDataSources(s, schemas.SqlApplicationConfiguration_ReferenceDataSources, v.ReferenceDataSources)
+	if v.Inputs != nil {
+		serializeInputs(s, schemas.SqlApplicationConfiguration_Inputs, v.Inputs)
+	}
+	if v.Outputs != nil {
+		serializeOutputs(s, schemas.SqlApplicationConfiguration_Outputs, v.Outputs)
+	}
+	if v.ReferenceDataSources != nil {
+		serializeReferenceDataSources(s, schemas.SqlApplicationConfiguration_ReferenceDataSources, v.ReferenceDataSources)
+	}
 }
 func (v *SqlApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlApplicationConfiguration, func(s *smithy.Schema) error {
@@ -6511,9 +6541,15 @@ func (v *SqlApplicationConfigurationDescription) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *SqlApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputDescriptions(s, schemas.SqlApplicationConfigurationDescription_InputDescriptions, v.InputDescriptions)
-	serializeOutputDescriptions(s, schemas.SqlApplicationConfigurationDescription_OutputDescriptions, v.OutputDescriptions)
-	serializeReferenceDataSourceDescriptions(s, schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	if v.InputDescriptions != nil {
+		serializeInputDescriptions(s, schemas.SqlApplicationConfigurationDescription_InputDescriptions, v.InputDescriptions)
+	}
+	if v.OutputDescriptions != nil {
+		serializeOutputDescriptions(s, schemas.SqlApplicationConfigurationDescription_OutputDescriptions, v.OutputDescriptions)
+	}
+	if v.ReferenceDataSourceDescriptions != nil {
+		serializeReferenceDataSourceDescriptions(s, schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	}
 }
 func (v *SqlApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlApplicationConfigurationDescription, func(s *smithy.Schema) error {
@@ -6554,9 +6590,15 @@ func (v *SqlApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SqlApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputUpdates(s, schemas.SqlApplicationConfigurationUpdate_InputUpdates, v.InputUpdates)
-	serializeOutputUpdates(s, schemas.SqlApplicationConfigurationUpdate_OutputUpdates, v.OutputUpdates)
-	serializeReferenceDataSourceUpdates(s, schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+	if v.InputUpdates != nil {
+		serializeInputUpdates(s, schemas.SqlApplicationConfigurationUpdate_InputUpdates, v.InputUpdates)
+	}
+	if v.OutputUpdates != nil {
+		serializeOutputUpdates(s, schemas.SqlApplicationConfigurationUpdate_OutputUpdates, v.OutputUpdates)
+	}
+	if v.ReferenceDataSourceUpdates != nil {
+		serializeReferenceDataSourceUpdates(s, schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+	}
 }
 func (v *SqlApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlApplicationConfigurationUpdate, func(s *smithy.Schema) error {
@@ -6695,8 +6737,12 @@ func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
@@ -6747,8 +6793,12 @@ func (v *VpcConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcConfigurationId != nil {
 		s.WriteString(schemas.VpcConfigurationDescription_VpcConfigurationId, *v.VpcConfigurationId)
 	}
@@ -6802,8 +6852,12 @@ func (v *VpcConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates, v.SecurityGroupIdUpdates)
-	serializeSubnetIds(s, schemas.VpcConfigurationUpdate_SubnetIdUpdates, v.SubnetIdUpdates)
+	if v.SecurityGroupIdUpdates != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates, v.SecurityGroupIdUpdates)
+	}
+	if v.SubnetIdUpdates != nil {
+		serializeSubnetIds(s, schemas.VpcConfigurationUpdate_SubnetIdUpdates, v.SubnetIdUpdates)
+	}
 	if v.VpcConfigurationId != nil {
 		s.WriteString(schemas.VpcConfigurationUpdate_VpcConfigurationId, *v.VpcConfigurationId)
 	}
@@ -6856,7 +6910,9 @@ func (v *ZeppelinApplicationConfiguration) SerializeMembers(s smithy.ShapeSerial
 		v.CatalogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration, v.CustomArtifactsConfiguration)
+	if v.CustomArtifactsConfiguration != nil {
+		serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration, v.CustomArtifactsConfiguration)
+	}
 	if v.DeployAsApplicationConfiguration != nil {
 		s.WriteStruct(schemas.ZeppelinApplicationConfiguration_DeployAsApplicationConfiguration)
 		v.DeployAsApplicationConfiguration.SerializeMembers(s)
@@ -6922,7 +6978,9 @@ func (v *ZeppelinApplicationConfigurationDescription) SerializeMembers(s smithy.
 		v.CatalogConfigurationDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomArtifactsConfigurationDescriptionList(s, schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription, v.CustomArtifactsConfigurationDescription)
+	if v.CustomArtifactsConfigurationDescription != nil {
+		serializeCustomArtifactsConfigurationDescriptionList(s, schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription, v.CustomArtifactsConfigurationDescription)
+	}
 	if v.DeployAsApplicationConfigurationDescription != nil {
 		s.WriteStruct(schemas.ZeppelinApplicationConfigurationDescription_DeployAsApplicationConfigurationDescription)
 		v.DeployAsApplicationConfigurationDescription.SerializeMembers(s)
@@ -6988,7 +7046,9 @@ func (v *ZeppelinApplicationConfigurationUpdate) SerializeMembers(s smithy.Shape
 		v.CatalogConfigurationUpdate.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate, v.CustomArtifactsConfigurationUpdate)
+	if v.CustomArtifactsConfigurationUpdate != nil {
+		serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate, v.CustomArtifactsConfigurationUpdate)
+	}
 	if v.DeployAsApplicationConfigurationUpdate != nil {
 		s.WriteStruct(schemas.ZeppelinApplicationConfigurationUpdate_DeployAsApplicationConfigurationUpdate)
 		v.DeployAsApplicationConfigurationUpdate.SerializeMembers(s)

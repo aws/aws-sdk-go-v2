@@ -235,7 +235,9 @@ func (v *CalculateIsolinesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DepartureTime != nil {
 		s.WriteString(schemas.CalculateIsolinesRequest_DepartureTime, *v.DepartureTime)
 	}
-	serializePosition(s, schemas.CalculateIsolinesRequest_Destination, v.Destination)
+	if v.Destination != nil {
+		serializePosition(s, schemas.CalculateIsolinesRequest_Destination, v.Destination)
+	}
 	if v.DestinationOptions != nil {
 		s.WriteStruct(schemas.CalculateIsolinesRequest_DestinationOptions)
 		v.DestinationOptions.SerializeMembers(s)
@@ -258,7 +260,9 @@ func (v *CalculateIsolinesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizeRoutingFor != "" {
 		s.WriteString(schemas.CalculateIsolinesRequest_OptimizeRoutingFor, string(v.OptimizeRoutingFor))
 	}
-	serializePosition(s, schemas.CalculateIsolinesRequest_Origin, v.Origin)
+	if v.Origin != nil {
+		serializePosition(s, schemas.CalculateIsolinesRequest_Origin, v.Origin)
+	}
 	if v.OriginOptions != nil {
 		s.WriteStruct(schemas.CalculateIsolinesRequest_OriginOptions)
 		v.OriginOptions.SerializeMembers(s)
@@ -363,12 +367,18 @@ func (v *CalculateIsolinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsolineGeometryFormat != "" {
 		s.WriteString(schemas.CalculateIsolinesResponse_IsolineGeometryFormat, string(v.IsolineGeometryFormat))
 	}
-	serializeIsolineList(s, schemas.CalculateIsolinesResponse_Isolines, v.Isolines)
+	if v.Isolines != nil {
+		serializeIsolineList(s, schemas.CalculateIsolinesResponse_Isolines, v.Isolines)
+	}
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.CalculateIsolinesResponse_PricingBucket, *v.PricingBucket)
 	}
-	serializePosition(s, schemas.CalculateIsolinesResponse_SnappedDestination, v.SnappedDestination)
-	serializePosition(s, schemas.CalculateIsolinesResponse_SnappedOrigin, v.SnappedOrigin)
+	if v.SnappedDestination != nil {
+		serializePosition(s, schemas.CalculateIsolinesResponse_SnappedDestination, v.SnappedDestination)
+	}
+	if v.SnappedOrigin != nil {
+		serializePosition(s, schemas.CalculateIsolinesResponse_SnappedOrigin, v.SnappedOrigin)
+	}
 }
 func (v *CalculateIsolinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CalculateIsolinesResponse, func(s *smithy.Schema) error {

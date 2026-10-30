@@ -80,7 +80,9 @@ func (v *ListDetectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDetectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectorIds(s, schemas.ListDetectorsResponse_DetectorIds, v.DetectorIds)
+	if v.DetectorIds != nil {
+		serializeDetectorIds(s, schemas.ListDetectorsResponse_DetectorIds, v.DetectorIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDetectorsResponse_NextToken, *v.NextToken)
 	}

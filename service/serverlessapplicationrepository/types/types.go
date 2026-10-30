@@ -86,9 +86,15 @@ func (v *ApplicationPolicyStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApplicationPolicyStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOf__string(s, schemas.ApplicationPolicyStatement_Actions, v.Actions)
-	serialize__listOf__string(s, schemas.ApplicationPolicyStatement_PrincipalOrgIDs, v.PrincipalOrgIDs)
-	serialize__listOf__string(s, schemas.ApplicationPolicyStatement_Principals, v.Principals)
+	if v.Actions != nil {
+		serialize__listOf__string(s, schemas.ApplicationPolicyStatement_Actions, v.Actions)
+	}
+	if v.PrincipalOrgIDs != nil {
+		serialize__listOf__string(s, schemas.ApplicationPolicyStatement_PrincipalOrgIDs, v.PrincipalOrgIDs)
+	}
+	if v.Principals != nil {
+		serialize__listOf__string(s, schemas.ApplicationPolicyStatement_Principals, v.Principals)
+	}
 	if v.StatementId != nil {
 		s.WriteString(schemas.ApplicationPolicyStatement_StatementId, *v.StatementId)
 	}
@@ -187,7 +193,9 @@ func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomePageUrl != nil {
 		s.WriteString(schemas.ApplicationSummary_HomePageUrl, *v.HomePageUrl)
 	}
-	serialize__listOf__string(s, schemas.ApplicationSummary_Labels, v.Labels)
+	if v.Labels != nil {
+		serialize__listOf__string(s, schemas.ApplicationSummary_Labels, v.Labels)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ApplicationSummary_Name, *v.Name)
 	}
@@ -332,7 +340,9 @@ func (v *ParameterDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllowedPattern != nil {
 		s.WriteString(schemas.ParameterDefinition_AllowedPattern, *v.AllowedPattern)
 	}
-	serialize__listOf__string(s, schemas.ParameterDefinition_AllowedValues, v.AllowedValues)
+	if v.AllowedValues != nil {
+		serialize__listOf__string(s, schemas.ParameterDefinition_AllowedValues, v.AllowedValues)
+	}
 	if v.ConstraintDescription != nil {
 		s.WriteString(schemas.ParameterDefinition_ConstraintDescription, *v.ConstraintDescription)
 	}
@@ -360,7 +370,9 @@ func (v *ParameterDefinition) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NoEcho != nil {
 		s.WriteBool(schemas.ParameterDefinition_NoEcho, *v.NoEcho)
 	}
-	serialize__listOf__string(s, schemas.ParameterDefinition_ReferencedByResources, v.ReferencedByResources)
+	if v.ReferencedByResources != nil {
+		serialize__listOf__string(s, schemas.ParameterDefinition_ReferencedByResources, v.ReferencedByResources)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.ParameterDefinition_Type, *v.Type)
 	}
@@ -486,7 +498,9 @@ func (v *RollbackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonitoringTimeInMinutes != nil {
 		s.WriteInt32(schemas.RollbackConfiguration_MonitoringTimeInMinutes, *v.MonitoringTimeInMinutes)
 	}
-	serialize__listOfRollbackTrigger(s, schemas.RollbackConfiguration_RollbackTriggers, v.RollbackTriggers)
+	if v.RollbackTriggers != nil {
+		serialize__listOfRollbackTrigger(s, schemas.RollbackConfiguration_RollbackTriggers, v.RollbackTriggers)
+	}
 }
 func (v *RollbackConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RollbackConfiguration, func(s *smithy.Schema) error {
@@ -709,8 +723,12 @@ func (v *Version) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteString(schemas.Version_CreationTime, *v.CreationTime)
 	}
-	serialize__listOfParameterDefinition(s, schemas.Version_ParameterDefinitions, v.ParameterDefinitions)
-	serialize__listOfCapability(s, schemas.Version_RequiredCapabilities, v.RequiredCapabilities)
+	if v.ParameterDefinitions != nil {
+		serialize__listOfParameterDefinition(s, schemas.Version_ParameterDefinitions, v.ParameterDefinitions)
+	}
+	if v.RequiredCapabilities != nil {
+		serialize__listOfCapability(s, schemas.Version_RequiredCapabilities, v.RequiredCapabilities)
+	}
 	if v.ResourcesSupported != nil {
 		s.WriteBool(schemas.Version_ResourcesSupported, *v.ResourcesSupported)
 	}

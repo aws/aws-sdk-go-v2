@@ -83,7 +83,9 @@ func (v *ListAssociatedAttributeGroupsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListAssociatedAttributeGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeGroupIds(s, schemas.ListAssociatedAttributeGroupsResponse_attributeGroups, v.AttributeGroups)
+	if v.AttributeGroups != nil {
+		serializeAttributeGroupIds(s, schemas.ListAssociatedAttributeGroupsResponse_attributeGroups, v.AttributeGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedAttributeGroupsResponse_nextToken, *v.NextToken)
 	}

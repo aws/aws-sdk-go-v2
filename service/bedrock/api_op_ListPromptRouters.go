@@ -85,7 +85,9 @@ func (v *ListPromptRoutersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPromptRoutersResponse_nextToken, *v.NextToken)
 	}
-	serializePromptRouterSummaries(s, schemas.ListPromptRoutersResponse_promptRouterSummaries, v.PromptRouterSummaries)
+	if v.PromptRouterSummaries != nil {
+		serializePromptRouterSummaries(s, schemas.ListPromptRoutersResponse_promptRouterSummaries, v.PromptRouterSummaries)
+	}
 }
 func (v *ListPromptRoutersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPromptRoutersResponse, func(s *smithy.Schema) error {

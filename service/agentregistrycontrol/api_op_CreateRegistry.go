@@ -117,7 +117,9 @@ func (v *CreateRegistryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRegistryRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateRegistryRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateRegistryRequest_tags, v.Tags)
+	}
 }
 
 // Response structure for creating a registry

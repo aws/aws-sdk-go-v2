@@ -101,7 +101,9 @@ func (v *ListThingRegistrationTaskReportsOutput) SerializeMembers(s smithy.Shape
 	if v.ReportType != "" {
 		s.WriteString(schemas.ListThingRegistrationTaskReportsResponse_reportType, string(v.ReportType))
 	}
-	serializeS3FileUrlList(s, schemas.ListThingRegistrationTaskReportsResponse_resourceLinks, v.ResourceLinks)
+	if v.ResourceLinks != nil {
+		serializeS3FileUrlList(s, schemas.ListThingRegistrationTaskReportsResponse_resourceLinks, v.ResourceLinks)
+	}
 }
 func (v *ListThingRegistrationTaskReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThingRegistrationTaskReportsResponse, func(s *smithy.Schema) error {

@@ -86,7 +86,9 @@ func (v *GetRevenueStatisticsTimeSeriesInput) SerializeMembers(s smithy.ShapeSer
 	if v.Currency != "" {
 		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_Currency, string(v.Currency))
 	}
-	serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsTimeSeriesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeMonetizationFilterList(s, schemas.GetRevenueStatisticsTimeSeriesRequest_Filters, v.Filters)
+	}
 	if v.GroupBy != "" {
 		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesRequest_GroupBy, string(v.GroupBy))
 	}
@@ -134,7 +136,9 @@ func (v *GetRevenueStatisticsTimeSeriesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetRevenueStatisticsTimeSeriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataPointsList(s, schemas.GetRevenueStatisticsTimeSeriesResponse_DataPoints, v.DataPoints)
+	if v.DataPoints != nil {
+		serializeDataPointsList(s, schemas.GetRevenueStatisticsTimeSeriesResponse_DataPoints, v.DataPoints)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.GetRevenueStatisticsTimeSeriesResponse_NextMarker, *v.NextMarker)
 	}

@@ -67,8 +67,12 @@ func (v *CreateOauth2CredentialProviderInput) SerializeMembers(s smithy.ShapeSer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateOauth2CredentialProviderRequest_name, *v.Name)
 	}
-	serializeOauth2ProviderConfigInput(s, schemas.CreateOauth2CredentialProviderRequest_oauth2ProviderConfigInput, v.Oauth2ProviderConfigInput)
-	serializeTagsMap(s, schemas.CreateOauth2CredentialProviderRequest_tags, v.Tags)
+	if v.Oauth2ProviderConfigInput != nil {
+		serializeOauth2ProviderConfigInput(s, schemas.CreateOauth2CredentialProviderRequest_oauth2ProviderConfigInput, v.Oauth2ProviderConfigInput)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateOauth2CredentialProviderRequest_tags, v.Tags)
+	}
 }
 
 type CreateOauth2CredentialProviderOutput struct {
@@ -142,7 +146,9 @@ func (v *CreateOauth2CredentialProviderOutput) SerializeMembers(s smithy.ShapeSe
 	if v.Name != nil {
 		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_name, *v.Name)
 	}
-	serializeOauth2ProviderConfigOutput(s, schemas.CreateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	if v.Oauth2ProviderConfigOutput != nil {
+		serializeOauth2ProviderConfigOutput(s, schemas.CreateOauth2CredentialProviderResponse_oauth2ProviderConfigOutput, v.Oauth2ProviderConfigOutput)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateOauth2CredentialProviderResponse_status, string(v.Status))
 	}

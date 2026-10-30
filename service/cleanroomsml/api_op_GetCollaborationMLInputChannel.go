@@ -149,7 +149,9 @@ func (v *GetCollaborationMLInputChannelOutput) SerializeMembers(s smithy.ShapeSe
 	if v.CollaborationIdentifier != nil {
 		s.WriteString(schemas.GetCollaborationMLInputChannelResponse_collaborationIdentifier, *v.CollaborationIdentifier)
 	}
-	serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	if v.ConfiguredModelAlgorithmAssociations != nil {
+		serializeConfiguredModelAlgorithmAssociationArnList(s, schemas.GetCollaborationMLInputChannelResponse_configuredModelAlgorithmAssociations, v.ConfiguredModelAlgorithmAssociations)
+	}
 	if v.CreateTime != nil {
 		s.WriteTime(schemas.GetCollaborationMLInputChannelResponse_createTime, *v.CreateTime)
 	}
@@ -176,7 +178,9 @@ func (v *GetCollaborationMLInputChannelOutput) SerializeMembers(s smithy.ShapeSe
 		v.PayerConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePrivacyBudgets(s, schemas.GetCollaborationMLInputChannelResponse_privacyBudgets, v.PrivacyBudgets)
+	if v.PrivacyBudgets != nil {
+		serializePrivacyBudgets(s, schemas.GetCollaborationMLInputChannelResponse_privacyBudgets, v.PrivacyBudgets)
+	}
 	if v.RetentionInDays != nil {
 		s.WriteInt32(schemas.GetCollaborationMLInputChannelResponse_retentionInDays, *v.RetentionInDays)
 	}

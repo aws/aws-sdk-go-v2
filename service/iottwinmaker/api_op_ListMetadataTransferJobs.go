@@ -62,7 +62,9 @@ func (v *ListMetadataTransferJobsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DestinationType != "" {
 		s.WriteString(schemas.ListMetadataTransferJobsRequest_destinationType, string(v.DestinationType))
 	}
-	serializeListMetadataTransferJobsFilters(s, schemas.ListMetadataTransferJobsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListMetadataTransferJobsFilters(s, schemas.ListMetadataTransferJobsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListMetadataTransferJobsRequest_maxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *ListMetadataTransferJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetadataTransferJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataTransferJobSummaries(s, schemas.ListMetadataTransferJobsResponse_metadataTransferJobSummaries, v.MetadataTransferJobSummaries)
+	if v.MetadataTransferJobSummaries != nil {
+		serializeMetadataTransferJobSummaries(s, schemas.ListMetadataTransferJobsResponse_metadataTransferJobSummaries, v.MetadataTransferJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetadataTransferJobsResponse_nextToken, *v.NextToken)
 	}

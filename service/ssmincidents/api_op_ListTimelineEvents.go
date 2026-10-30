@@ -77,7 +77,9 @@ func (v *ListTimelineEventsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTimelineEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListTimelineEventsInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListTimelineEventsInput_filters, v.Filters)
+	}
 	if v.IncidentRecordArn != nil {
 		s.WriteString(schemas.ListTimelineEventsInput_incidentRecordArn, *v.IncidentRecordArn)
 	}
@@ -151,7 +153,9 @@ func (v *ListTimelineEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTimelineEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventSummaryList(s, schemas.ListTimelineEventsOutput_eventSummaries, v.EventSummaries)
+	if v.EventSummaries != nil {
+		serializeEventSummaryList(s, schemas.ListTimelineEventsOutput_eventSummaries, v.EventSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTimelineEventsOutput_nextToken, *v.NextToken)
 	}

@@ -58,7 +58,9 @@ func (v *ListConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConfigurationDefinitionId != nil {
 		s.WriteString(schemas.ListConfigurationsInput_ConfigurationDefinitionId, *v.ConfigurationDefinitionId)
 	}
-	serializeFiltersList(s, schemas.ListConfigurationsInput_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFiltersList(s, schemas.ListConfigurationsInput_Filters, v.Filters)
+	}
 	if v.ManagerArn != nil {
 		s.WriteString(schemas.ListConfigurationsInput_ManagerArn, *v.ManagerArn)
 	}
@@ -92,7 +94,9 @@ func (v *ListConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationsList(s, schemas.ListConfigurationsOutput_ConfigurationsList, v.ConfigurationsList)
+	if v.ConfigurationsList != nil {
+		serializeConfigurationsList(s, schemas.ListConfigurationsOutput_ConfigurationsList, v.ConfigurationsList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationsOutput_NextToken, *v.NextToken)
 	}

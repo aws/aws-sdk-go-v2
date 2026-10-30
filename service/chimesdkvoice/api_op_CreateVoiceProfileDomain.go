@@ -83,7 +83,9 @@ func (v *CreateVoiceProfileDomainInput) SerializeMembers(s smithy.ShapeSerialize
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateVoiceProfileDomainRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVoiceProfileDomainRequest_Tags, v.Tags)
+	}
 }
 
 type CreateVoiceProfileDomainOutput struct {

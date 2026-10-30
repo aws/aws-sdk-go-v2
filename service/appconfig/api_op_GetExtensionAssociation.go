@@ -96,7 +96,9 @@ func (v *GetExtensionAssociationOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Id != nil {
 		s.WriteString(schemas.ExtensionAssociation_Id, *v.Id)
 	}
-	serializeParameterValueMap(s, schemas.ExtensionAssociation_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterValueMap(s, schemas.ExtensionAssociation_Parameters, v.Parameters)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.ExtensionAssociation_ResourceArn, *v.ResourceArn)
 	}

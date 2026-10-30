@@ -57,7 +57,9 @@ func (v *DescribeExpressGatewayServiceInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeExpressGatewayServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressGatewayServiceIncludeList(s, schemas.DescribeExpressGatewayServiceRequest_include, v.Include)
+	if v.Include != nil {
+		serializeExpressGatewayServiceIncludeList(s, schemas.DescribeExpressGatewayServiceRequest_include, v.Include)
+	}
 	if v.ServiceArn != nil {
 		s.WriteString(schemas.DescribeExpressGatewayServiceRequest_serviceArn, *v.ServiceArn)
 	}

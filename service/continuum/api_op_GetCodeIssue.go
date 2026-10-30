@@ -168,7 +168,9 @@ func (v *GetCodeIssueOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EvidenceAvailability != "" {
 		s.WriteString(schemas.GetCodeIssueOutput_evidenceAvailability, string(v.EvidenceAvailability))
 	}
-	serializeIssueFindingIds(s, schemas.GetCodeIssueOutput_findingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeIssueFindingIds(s, schemas.GetCodeIssueOutput_findingIds, v.FindingIds)
+	}
 	if v.IssueArn != nil {
 		s.WriteString(schemas.GetCodeIssueOutput_issueArn, *v.IssueArn)
 	}

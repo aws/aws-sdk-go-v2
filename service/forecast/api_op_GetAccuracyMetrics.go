@@ -108,7 +108,9 @@ func (v *GetAccuracyMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OptimizationMetric != "" {
 		s.WriteString(schemas.GetAccuracyMetricsResponse_OptimizationMetric, string(v.OptimizationMetric))
 	}
-	serializePredictorEvaluationResults(s, schemas.GetAccuracyMetricsResponse_PredictorEvaluationResults, v.PredictorEvaluationResults)
+	if v.PredictorEvaluationResults != nil {
+		serializePredictorEvaluationResults(s, schemas.GetAccuracyMetricsResponse_PredictorEvaluationResults, v.PredictorEvaluationResults)
+	}
 }
 func (v *GetAccuracyMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAccuracyMetricsResponse, func(s *smithy.Schema) error {

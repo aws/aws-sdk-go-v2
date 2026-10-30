@@ -421,7 +421,9 @@ func (v *AttributeValueUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != "" {
 		s.WriteString(schemas.AttributeValueUpdate_Action, string(v.Action))
 	}
-	serializeAttributeValue(s, schemas.AttributeValueUpdate_Value, v.Value)
+	if v.Value != nil {
+		serializeAttributeValue(s, schemas.AttributeValueUpdate_Value, v.Value)
+	}
 }
 func (v *AttributeValueUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeValueUpdate, func(s *smithy.Schema) error {
@@ -569,7 +571,9 @@ func (v *AutoScalingSettingsDescription) SerializeMembers(s smithy.ShapeSerializ
 	if v.MinimumUnits != nil {
 		s.WriteInt64(schemas.AutoScalingSettingsDescription_MinimumUnits, *v.MinimumUnits)
 	}
-	serializeAutoScalingPolicyDescriptionList(s, schemas.AutoScalingSettingsDescription_ScalingPolicies, v.ScalingPolicies)
+	if v.ScalingPolicies != nil {
+		serializeAutoScalingPolicyDescriptionList(s, schemas.AutoScalingSettingsDescription_ScalingPolicies, v.ScalingPolicies)
+	}
 }
 func (v *AutoScalingSettingsDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AutoScalingSettingsDescription, func(s *smithy.Schema) error {
@@ -1141,7 +1145,9 @@ func (v *BatchStatementError) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != "" {
 		s.WriteString(schemas.BatchStatementError_Code, string(v.Code))
 	}
-	serializeAttributeMap(s, schemas.BatchStatementError_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeMap(s, schemas.BatchStatementError_Item, v.Item)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchStatementError_Message, *v.Message)
 	}
@@ -1201,7 +1207,9 @@ func (v *BatchStatementRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConsistentRead != nil {
 		s.WriteBool(schemas.BatchStatementRequest_ConsistentRead, *v.ConsistentRead)
 	}
-	serializePreparedStatementParameters(s, schemas.BatchStatementRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePreparedStatementParameters(s, schemas.BatchStatementRequest_Parameters, v.Parameters)
+	}
 	if v.ReturnValuesOnConditionCheckFailure != "" {
 		s.WriteString(schemas.BatchStatementRequest_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
 	}
@@ -1259,7 +1267,9 @@ func (v *BatchStatementResponse) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributeMap(s, schemas.BatchStatementResponse_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeMap(s, schemas.BatchStatementResponse_Item, v.Item)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.BatchStatementResponse_TableName, *v.TableName)
 	}
@@ -1368,7 +1378,9 @@ func (v *CancellationReason) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != nil {
 		s.WriteString(schemas.CancellationReason_Code, *v.Code)
 	}
-	serializeAttributeMap(s, schemas.CancellationReason_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeMap(s, schemas.CancellationReason_Item, v.Item)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.CancellationReason_Message, *v.Message)
 	}
@@ -1614,7 +1626,9 @@ func (v *Condition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeValueList(s, schemas.Condition_AttributeValueList, v.AttributeValueList)
+	if v.AttributeValueList != nil {
+		serializeAttributeValueList(s, schemas.Condition_AttributeValueList, v.AttributeValueList)
+	}
 	if v.ComparisonOperator != "" {
 		s.WriteString(schemas.Condition_ComparisonOperator, string(v.ComparisonOperator))
 	}
@@ -1690,9 +1704,15 @@ func (v *ConditionCheck) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConditionExpression != nil {
 		s.WriteString(schemas.ConditionCheck_ConditionExpression, *v.ConditionExpression)
 	}
-	serializeExpressionAttributeNameMap(s, schemas.ConditionCheck_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.ConditionCheck_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializeKey(s, schemas.ConditionCheck_Key, v.Key)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.ConditionCheck_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.ConditionCheck_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Key != nil {
+		serializeKey(s, schemas.ConditionCheck_Key, v.Key)
+	}
 	if v.ReturnValuesOnConditionCheckFailure != "" {
 		s.WriteString(schemas.ConditionCheck_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
 	}
@@ -1778,8 +1798,12 @@ func (v *ConsumedCapacity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CapacityUnits != nil {
 		s.WriteFloat64(schemas.ConsumedCapacity_CapacityUnits, *v.CapacityUnits)
 	}
-	serializeSecondaryIndexesCapacityMap(s, schemas.ConsumedCapacity_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
-	serializeSecondaryIndexesCapacityMap(s, schemas.ConsumedCapacity_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeSecondaryIndexesCapacityMap(s, schemas.ConsumedCapacity_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
+	if v.LocalSecondaryIndexes != nil {
+		serializeSecondaryIndexesCapacityMap(s, schemas.ConsumedCapacity_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	}
 	if v.ReadCapacityUnits != nil {
 		s.WriteFloat64(schemas.ConsumedCapacity_ReadCapacityUnits, *v.ReadCapacityUnits)
 	}
@@ -1791,7 +1815,9 @@ func (v *ConsumedCapacity) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.ConsumedCapacity_TableName, *v.TableName)
 	}
-	serializeVectorIndexesCapacityMap(s, schemas.ConsumedCapacity_VectorIndexes, v.VectorIndexes)
+	if v.VectorIndexes != nil {
+		serializeVectorIndexesCapacityMap(s, schemas.ConsumedCapacity_VectorIndexes, v.VectorIndexes)
+	}
 	if v.WriteCapacityUnits != nil {
 		s.WriteFloat64(schemas.ConsumedCapacity_WriteCapacityUnits, *v.WriteCapacityUnits)
 	}
@@ -1996,7 +2022,9 @@ func (v *CreateGlobalSecondaryIndexAction) SerializeMembers(s smithy.ShapeSerial
 	if v.IndexName != nil {
 		s.WriteString(schemas.CreateGlobalSecondaryIndexAction_IndexName, *v.IndexName)
 	}
-	serializeKeySchema(s, schemas.CreateGlobalSecondaryIndexAction_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.CreateGlobalSecondaryIndexAction_KeySchema, v.KeySchema)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.CreateGlobalSecondaryIndexAction_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -2161,7 +2189,9 @@ func (v *CreateReplicationGroupMemberAction) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CreateReplicationGroupMemberAction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicaGlobalSecondaryIndexList(s, schemas.CreateReplicationGroupMemberAction_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeReplicaGlobalSecondaryIndexList(s, schemas.CreateReplicationGroupMemberAction_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
 	if v.KMSMasterKeyId != nil {
 		s.WriteString(schemas.CreateReplicationGroupMemberAction_KMSMasterKeyId, *v.KMSMasterKeyId)
 	}
@@ -2269,7 +2299,9 @@ func (v *CreateVectorIndexAction) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Projection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchSchema(s, schemas.CreateVectorIndexAction_SearchSchema, v.SearchSchema)
+	if v.SearchSchema != nil {
+		serializeSearchSchema(s, schemas.CreateVectorIndexAction_SearchSchema, v.SearchSchema)
+	}
 	if v.VectorAttribute != nil {
 		s.WriteStruct(schemas.CreateVectorIndexAction_VectorAttribute)
 		v.VectorAttribute.SerializeMembers(s)
@@ -2330,7 +2362,9 @@ func (v *CsvOptions) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Delimiter != nil {
 		s.WriteString(schemas.CsvOptions_Delimiter, *v.Delimiter)
 	}
-	serializeCsvHeaderList(s, schemas.CsvOptions_HeaderList, v.HeaderList)
+	if v.HeaderList != nil {
+		serializeCsvHeaderList(s, schemas.CsvOptions_HeaderList, v.HeaderList)
+	}
 }
 func (v *CsvOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CsvOptions, func(s *smithy.Schema) error {
@@ -2387,9 +2421,15 @@ func (v *Delete) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConditionExpression != nil {
 		s.WriteString(schemas.Delete_ConditionExpression, *v.ConditionExpression)
 	}
-	serializeExpressionAttributeNameMap(s, schemas.Delete_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.Delete_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializeKey(s, schemas.Delete_Key, v.Key)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.Delete_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.Delete_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Key != nil {
+		serializeKey(s, schemas.Delete_Key, v.Key)
+	}
 	if v.ReturnValuesOnConditionCheckFailure != "" {
 		s.WriteString(schemas.Delete_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
 	}
@@ -2579,7 +2619,9 @@ func (v *DeleteRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKey(s, schemas.DeleteRequest_Key, v.Key)
+	if v.Key != nil {
+		serializeKey(s, schemas.DeleteRequest_Key, v.Key)
+	}
 }
 func (v *DeleteRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteRequest, func(s *smithy.Schema) error {
@@ -2978,14 +3020,18 @@ func (v *ExpectedAttributeValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExpectedAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeValueList(s, schemas.ExpectedAttributeValue_AttributeValueList, v.AttributeValueList)
+	if v.AttributeValueList != nil {
+		serializeAttributeValueList(s, schemas.ExpectedAttributeValue_AttributeValueList, v.AttributeValueList)
+	}
 	if v.ComparisonOperator != "" {
 		s.WriteString(schemas.ExpectedAttributeValue_ComparisonOperator, string(v.ComparisonOperator))
 	}
 	if v.Exists != nil {
 		s.WriteBool(schemas.ExpectedAttributeValue_Exists, *v.Exists)
 	}
-	serializeAttributeValue(s, schemas.ExpectedAttributeValue_Value, v.Value)
+	if v.Value != nil {
+		serializeAttributeValue(s, schemas.ExpectedAttributeValue_Value, v.Value)
+	}
 }
 func (v *ExpectedAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExpectedAttributeValue, func(s *smithy.Schema) error {
@@ -3408,8 +3454,12 @@ func (v *FilterSpecification) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressionAttributeNameMap(s, schemas.FilterSpecification_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.FilterSpecification_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.FilterSpecification_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.FilterSpecification_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
 	if v.FilterExpression != nil {
 		s.WriteString(schemas.FilterSpecification_FilterExpression, *v.FilterExpression)
 	}
@@ -3478,8 +3528,12 @@ func (v *Get) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Get) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExpressionAttributeNameMap(s, schemas.Get_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeKey(s, schemas.Get_Key, v.Key)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.Get_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.Key != nil {
+		serializeKey(s, schemas.Get_Key, v.Key)
+	}
 	if v.ProjectionExpression != nil {
 		s.WriteString(schemas.Get_ProjectionExpression, *v.ProjectionExpression)
 	}
@@ -3574,7 +3628,9 @@ func (v *GlobalSecondaryIndex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.GlobalSecondaryIndex_IndexName, *v.IndexName)
 	}
-	serializeKeySchema(s, schemas.GlobalSecondaryIndex_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.GlobalSecondaryIndex_KeySchema, v.KeySchema)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.GlobalSecondaryIndex_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -3779,7 +3835,9 @@ func (v *GlobalSecondaryIndexDescription) SerializeMembers(s smithy.ShapeSeriali
 	if v.ItemCount != nil {
 		s.WriteInt64(schemas.GlobalSecondaryIndexDescription_ItemCount, *v.ItemCount)
 	}
-	serializeKeySchema(s, schemas.GlobalSecondaryIndexDescription_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.GlobalSecondaryIndexDescription_KeySchema, v.KeySchema)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.GlobalSecondaryIndexDescription_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -3896,7 +3954,9 @@ func (v *GlobalSecondaryIndexInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.GlobalSecondaryIndexInfo_IndexName, *v.IndexName)
 	}
-	serializeKeySchema(s, schemas.GlobalSecondaryIndexInfo_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.GlobalSecondaryIndexInfo_KeySchema, v.KeySchema)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.GlobalSecondaryIndexInfo_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -4087,7 +4147,9 @@ func (v *GlobalTable) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlobalTableName != nil {
 		s.WriteString(schemas.GlobalTable_GlobalTableName, *v.GlobalTableName)
 	}
-	serializeReplicaList(s, schemas.GlobalTable_ReplicationGroup, v.ReplicationGroup)
+	if v.ReplicationGroup != nil {
+		serializeReplicaList(s, schemas.GlobalTable_ReplicationGroup, v.ReplicationGroup)
+	}
 }
 func (v *GlobalTable) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GlobalTable, func(s *smithy.Schema) error {
@@ -4150,7 +4212,9 @@ func (v *GlobalTableDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlobalTableStatus != "" {
 		s.WriteString(schemas.GlobalTableDescription_GlobalTableStatus, string(v.GlobalTableStatus))
 	}
-	serializeReplicaDescriptionList(s, schemas.GlobalTableDescription_ReplicationGroup, v.ReplicationGroup)
+	if v.ReplicationGroup != nil {
+		serializeReplicaDescriptionList(s, schemas.GlobalTableDescription_ReplicationGroup, v.ReplicationGroup)
+	}
 }
 func (v *GlobalTableDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GlobalTableDescription, func(s *smithy.Schema) error {
@@ -4792,8 +4856,12 @@ func (v *ItemCollectionMetrics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ItemCollectionMetrics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeItemCollectionKeyAttributeMap(s, schemas.ItemCollectionMetrics_ItemCollectionKey, v.ItemCollectionKey)
-	serializeItemCollectionSizeEstimateRange(s, schemas.ItemCollectionMetrics_SizeEstimateRangeGB, v.SizeEstimateRangeGB)
+	if v.ItemCollectionKey != nil {
+		serializeItemCollectionKeyAttributeMap(s, schemas.ItemCollectionMetrics_ItemCollectionKey, v.ItemCollectionKey)
+	}
+	if v.SizeEstimateRangeGB != nil {
+		serializeItemCollectionSizeEstimateRange(s, schemas.ItemCollectionMetrics_SizeEstimateRangeGB, v.SizeEstimateRangeGB)
+	}
 }
 func (v *ItemCollectionMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ItemCollectionMetrics, func(s *smithy.Schema) error {
@@ -4823,7 +4891,9 @@ func (v *ItemResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ItemResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMap(s, schemas.ItemResponse_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeMap(s, schemas.ItemResponse_Item, v.Item)
+	}
 }
 func (v *ItemResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ItemResponse, func(s *smithy.Schema) error {
@@ -4919,12 +4989,18 @@ func (v *KeysAndAttributes) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KeysAndAttributes) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.KeysAndAttributes_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeAttributeNameList(s, schemas.KeysAndAttributes_AttributesToGet, v.AttributesToGet)
+	}
 	if v.ConsistentRead != nil {
 		s.WriteBool(schemas.KeysAndAttributes_ConsistentRead, *v.ConsistentRead)
 	}
-	serializeExpressionAttributeNameMap(s, schemas.KeysAndAttributes_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeKeyList(s, schemas.KeysAndAttributes_Keys, v.Keys)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.KeysAndAttributes_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.Keys != nil {
+		serializeKeyList(s, schemas.KeysAndAttributes_Keys, v.Keys)
+	}
 	if v.ProjectionExpression != nil {
 		s.WriteString(schemas.KeysAndAttributes_ProjectionExpression, *v.ProjectionExpression)
 	}
@@ -5136,7 +5212,9 @@ func (v *LocalSecondaryIndex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.LocalSecondaryIndex_IndexName, *v.IndexName)
 	}
-	serializeKeySchema(s, schemas.LocalSecondaryIndex_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.LocalSecondaryIndex_KeySchema, v.KeySchema)
+	}
 	if v.Projection != nil {
 		s.WriteStruct(schemas.LocalSecondaryIndex_Projection)
 		v.Projection.SerializeMembers(s)
@@ -5222,7 +5300,9 @@ func (v *LocalSecondaryIndexDescription) SerializeMembers(s smithy.ShapeSerializ
 	if v.ItemCount != nil {
 		s.WriteInt64(schemas.LocalSecondaryIndexDescription_ItemCount, *v.ItemCount)
 	}
-	serializeKeySchema(s, schemas.LocalSecondaryIndexDescription_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.LocalSecondaryIndexDescription_KeySchema, v.KeySchema)
+	}
 	if v.Projection != nil {
 		s.WriteStruct(schemas.LocalSecondaryIndexDescription_Projection)
 		v.Projection.SerializeMembers(s)
@@ -5296,7 +5376,9 @@ func (v *LocalSecondaryIndexInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IndexName != nil {
 		s.WriteString(schemas.LocalSecondaryIndexInfo_IndexName, *v.IndexName)
 	}
-	serializeKeySchema(s, schemas.LocalSecondaryIndexInfo_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.LocalSecondaryIndexInfo_KeySchema, v.KeySchema)
+	}
 	if v.Projection != nil {
 		s.WriteStruct(schemas.LocalSecondaryIndexInfo_Projection)
 		v.Projection.SerializeMembers(s)
@@ -5433,7 +5515,9 @@ func (v *ParameterizedStatement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParameterizedStatement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePreparedStatementParameters(s, schemas.ParameterizedStatement_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializePreparedStatementParameters(s, schemas.ParameterizedStatement_Parameters, v.Parameters)
+	}
 	if v.ReturnValuesOnConditionCheckFailure != "" {
 		s.WriteString(schemas.ParameterizedStatement_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
 	}
@@ -5614,7 +5698,9 @@ func (v *Projection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Projection) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNonKeyAttributeNameList(s, schemas.Projection_NonKeyAttributes, v.NonKeyAttributes)
+	if v.NonKeyAttributes != nil {
+		serializeNonKeyAttributeNameList(s, schemas.Projection_NonKeyAttributes, v.NonKeyAttributes)
+	}
 	if v.ProjectionType != "" {
 		s.WriteString(schemas.Projection_ProjectionType, string(v.ProjectionType))
 	}
@@ -5861,9 +5947,15 @@ func (v *Put) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConditionExpression != nil {
 		s.WriteString(schemas.Put_ConditionExpression, *v.ConditionExpression)
 	}
-	serializeExpressionAttributeNameMap(s, schemas.Put_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.Put_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializePutItemInputAttributeMap(s, schemas.Put_Item, v.Item)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.Put_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.Put_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Item != nil {
+		serializePutItemInputAttributeMap(s, schemas.Put_Item, v.Item)
+	}
 	if v.ReturnValuesOnConditionCheckFailure != "" {
 		s.WriteString(schemas.Put_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
 	}
@@ -5920,7 +6012,9 @@ func (v *PutRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePutItemInputAttributeMap(s, schemas.PutRequest_Item, v.Item)
+	if v.Item != nil {
+		serializePutItemInputAttributeMap(s, schemas.PutRequest_Item, v.Item)
+	}
 }
 func (v *PutRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutRequest, func(s *smithy.Schema) error {
@@ -6001,7 +6095,9 @@ func (v *ReplicaAutoScalingDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicaAutoScalingDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicaGlobalSecondaryIndexAutoScalingDescriptionList(s, schemas.ReplicaAutoScalingDescription_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeReplicaGlobalSecondaryIndexAutoScalingDescriptionList(s, schemas.ReplicaAutoScalingDescription_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
 	if v.RegionName != nil {
 		s.WriteString(schemas.ReplicaAutoScalingDescription_RegionName, *v.RegionName)
 	}
@@ -6074,7 +6170,9 @@ func (v *ReplicaAutoScalingUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegionName != nil {
 		s.WriteString(schemas.ReplicaAutoScalingUpdate_RegionName, *v.RegionName)
 	}
-	serializeReplicaGlobalSecondaryIndexAutoScalingUpdateList(s, schemas.ReplicaAutoScalingUpdate_ReplicaGlobalSecondaryIndexUpdates, v.ReplicaGlobalSecondaryIndexUpdates)
+	if v.ReplicaGlobalSecondaryIndexUpdates != nil {
+		serializeReplicaGlobalSecondaryIndexAutoScalingUpdateList(s, schemas.ReplicaAutoScalingUpdate_ReplicaGlobalSecondaryIndexUpdates, v.ReplicaGlobalSecondaryIndexUpdates)
+	}
 	if v.ReplicaProvisionedReadCapacityAutoScalingUpdate != nil {
 		s.WriteStruct(schemas.ReplicaAutoScalingUpdate_ReplicaProvisionedReadCapacityAutoScalingUpdate)
 		v.ReplicaProvisionedReadCapacityAutoScalingUpdate.SerializeMembers(s)
@@ -6185,7 +6283,9 @@ func (v *ReplicaDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicaDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicaGlobalSecondaryIndexDescriptionList(s, schemas.ReplicaDescription_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeReplicaGlobalSecondaryIndexDescriptionList(s, schemas.ReplicaDescription_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
 	if v.GlobalTableSettingsReplicationMode != "" {
 		s.WriteString(schemas.ReplicaDescription_GlobalTableSettingsReplicationMode, string(v.GlobalTableSettingsReplicationMode))
 	}
@@ -6750,7 +6850,9 @@ func (v *ReplicaSettingsDescription) SerializeMembers(s smithy.ShapeSerializer) 
 		v.ReplicaBillingModeSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaGlobalSecondaryIndexSettingsDescriptionList(s, schemas.ReplicaSettingsDescription_ReplicaGlobalSecondaryIndexSettings, v.ReplicaGlobalSecondaryIndexSettings)
+	if v.ReplicaGlobalSecondaryIndexSettings != nil {
+		serializeReplicaGlobalSecondaryIndexSettingsDescriptionList(s, schemas.ReplicaSettingsDescription_ReplicaGlobalSecondaryIndexSettings, v.ReplicaGlobalSecondaryIndexSettings)
+	}
 	if v.ReplicaProvisionedReadCapacityAutoScalingSettings != nil {
 		s.WriteStruct(schemas.ReplicaSettingsDescription_ReplicaProvisionedReadCapacityAutoScalingSettings)
 		v.ReplicaProvisionedReadCapacityAutoScalingSettings.SerializeMembers(s)
@@ -6853,7 +6955,9 @@ func (v *ReplicaSettingsUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegionName != nil {
 		s.WriteString(schemas.ReplicaSettingsUpdate_RegionName, *v.RegionName)
 	}
-	serializeReplicaGlobalSecondaryIndexSettingsUpdateList(s, schemas.ReplicaSettingsUpdate_ReplicaGlobalSecondaryIndexSettingsUpdate, v.ReplicaGlobalSecondaryIndexSettingsUpdate)
+	if v.ReplicaGlobalSecondaryIndexSettingsUpdate != nil {
+		serializeReplicaGlobalSecondaryIndexSettingsUpdateList(s, schemas.ReplicaSettingsUpdate_ReplicaGlobalSecondaryIndexSettingsUpdate, v.ReplicaGlobalSecondaryIndexSettingsUpdate)
+	}
 	if v.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate != nil {
 		s.WriteStruct(schemas.ReplicaSettingsUpdate_ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate)
 		v.ReplicaProvisionedReadCapacityAutoScalingSettingsUpdate.SerializeMembers(s)
@@ -7165,7 +7269,9 @@ func (v *SearchResultItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchResultItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMap(s, schemas.SearchResultItem_Item, v.Item)
+	if v.Item != nil {
+		serializeAttributeMap(s, schemas.SearchResultItem_Item, v.Item)
+	}
 	if v.Score != 0 {
 		s.WriteFloat64(schemas.SearchResultItem_Score, v.Score)
 	}
@@ -7306,7 +7412,9 @@ func (v *SourceTableDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ItemCount != nil {
 		s.WriteInt64(schemas.SourceTableDetails_ItemCount, *v.ItemCount)
 	}
-	serializeKeySchema(s, schemas.SourceTableDetails_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.SourceTableDetails_KeySchema, v.KeySchema)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.SourceTableDetails_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -7413,8 +7521,12 @@ func (v *SourceTableFeatureDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SourceTableFeatureDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalSecondaryIndexes(s, schemas.SourceTableFeatureDetails_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
-	serializeLocalSecondaryIndexes(s, schemas.SourceTableFeatureDetails_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeGlobalSecondaryIndexes(s, schemas.SourceTableFeatureDetails_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
+	if v.LocalSecondaryIndexes != nil {
+		serializeLocalSecondaryIndexes(s, schemas.SourceTableFeatureDetails_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	}
 	if v.SSEDescription != nil {
 		s.WriteStruct(schemas.SourceTableFeatureDetails_SSEDescription)
 		v.SSEDescription.SerializeMembers(s)
@@ -7430,7 +7542,9 @@ func (v *SourceTableFeatureDetails) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TimeToLiveDescription.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeVectorIndexes(s, schemas.SourceTableFeatureDetails_VectorIndexes, v.VectorIndexes)
+	if v.VectorIndexes != nil {
+		serializeVectorIndexes(s, schemas.SourceTableFeatureDetails_VectorIndexes, v.VectorIndexes)
+	}
 }
 func (v *SourceTableFeatureDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SourceTableFeatureDetails, func(s *smithy.Schema) error {
@@ -7687,7 +7801,9 @@ func (v *TableAutoScalingDescription) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableAutoScalingDescription) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicaAutoScalingDescriptionList(s, schemas.TableAutoScalingDescription_Replicas, v.Replicas)
+	if v.Replicas != nil {
+		serializeReplicaAutoScalingDescriptionList(s, schemas.TableAutoScalingDescription_Replicas, v.Replicas)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.TableAutoScalingDescription_TableName, *v.TableName)
 	}
@@ -7818,12 +7934,18 @@ func (v *TableCreationParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableCreationParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeDefinitions(s, schemas.TableCreationParameters_AttributeDefinitions, v.AttributeDefinitions)
+	if v.AttributeDefinitions != nil {
+		serializeAttributeDefinitions(s, schemas.TableCreationParameters_AttributeDefinitions, v.AttributeDefinitions)
+	}
 	if v.BillingMode != "" {
 		s.WriteString(schemas.TableCreationParameters_BillingMode, string(v.BillingMode))
 	}
-	serializeGlobalSecondaryIndexList(s, schemas.TableCreationParameters_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
-	serializeKeySchema(s, schemas.TableCreationParameters_KeySchema, v.KeySchema)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeGlobalSecondaryIndexList(s, schemas.TableCreationParameters_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.TableCreationParameters_KeySchema, v.KeySchema)
+	}
 	if v.OnDemandThroughput != nil {
 		s.WriteStruct(schemas.TableCreationParameters_OnDemandThroughput)
 		v.OnDemandThroughput.SerializeMembers(s)
@@ -7842,7 +7964,9 @@ func (v *TableCreationParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableName != nil {
 		s.WriteString(schemas.TableCreationParameters_TableName, *v.TableName)
 	}
-	serializeVectorIndexList(s, schemas.TableCreationParameters_VectorIndexes, v.VectorIndexes)
+	if v.VectorIndexes != nil {
+		serializeVectorIndexList(s, schemas.TableCreationParameters_VectorIndexes, v.VectorIndexes)
+	}
 }
 func (v *TableCreationParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableCreationParameters, func(s *smithy.Schema) error {
@@ -8229,7 +8353,9 @@ func (v *TableDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ArchivalSummary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAttributeDefinitions(s, schemas.TableDescription_AttributeDefinitions, v.AttributeDefinitions)
+	if v.AttributeDefinitions != nil {
+		serializeAttributeDefinitions(s, schemas.TableDescription_AttributeDefinitions, v.AttributeDefinitions)
+	}
 	if v.BillingModeSummary != nil {
 		s.WriteStruct(schemas.TableDescription_BillingModeSummary)
 		v.BillingModeSummary.SerializeMembers(s)
@@ -8244,25 +8370,33 @@ func (v *TableDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisassociationProtectionEnabled != nil {
 		s.WriteBool(schemas.TableDescription_DisassociationProtectionEnabled, *v.DisassociationProtectionEnabled)
 	}
-	serializeGlobalSecondaryIndexDescriptionList(s, schemas.TableDescription_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeGlobalSecondaryIndexDescriptionList(s, schemas.TableDescription_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
 	if v.GlobalTableSettingsReplicationMode != "" {
 		s.WriteString(schemas.TableDescription_GlobalTableSettingsReplicationMode, string(v.GlobalTableSettingsReplicationMode))
 	}
 	if v.GlobalTableVersion != nil {
 		s.WriteString(schemas.TableDescription_GlobalTableVersion, *v.GlobalTableVersion)
 	}
-	serializeGlobalTableWitnessDescriptionList(s, schemas.TableDescription_GlobalTableWitnesses, v.GlobalTableWitnesses)
+	if v.GlobalTableWitnesses != nil {
+		serializeGlobalTableWitnessDescriptionList(s, schemas.TableDescription_GlobalTableWitnesses, v.GlobalTableWitnesses)
+	}
 	if v.ItemCount != nil {
 		s.WriteInt64(schemas.TableDescription_ItemCount, *v.ItemCount)
 	}
-	serializeKeySchema(s, schemas.TableDescription_KeySchema, v.KeySchema)
+	if v.KeySchema != nil {
+		serializeKeySchema(s, schemas.TableDescription_KeySchema, v.KeySchema)
+	}
 	if v.LatestStreamArn != nil {
 		s.WriteString(schemas.TableDescription_LatestStreamArn, *v.LatestStreamArn)
 	}
 	if v.LatestStreamLabel != nil {
 		s.WriteString(schemas.TableDescription_LatestStreamLabel, *v.LatestStreamLabel)
 	}
-	serializeLocalSecondaryIndexDescriptionList(s, schemas.TableDescription_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	if v.LocalSecondaryIndexes != nil {
+		serializeLocalSecondaryIndexDescriptionList(s, schemas.TableDescription_LocalSecondaryIndexes, v.LocalSecondaryIndexes)
+	}
 	if v.MultiRegionConsistency != "" {
 		s.WriteString(schemas.TableDescription_MultiRegionConsistency, string(v.MultiRegionConsistency))
 	}
@@ -8276,7 +8410,9 @@ func (v *TableDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProvisionedThroughput.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeReplicaDescriptionList(s, schemas.TableDescription_Replicas, v.Replicas)
+	if v.Replicas != nil {
+		serializeReplicaDescriptionList(s, schemas.TableDescription_Replicas, v.Replicas)
+	}
 	if v.RestoreSummary != nil {
 		s.WriteStruct(schemas.TableDescription_RestoreSummary)
 		v.RestoreSummary.SerializeMembers(s)
@@ -8312,7 +8448,9 @@ func (v *TableDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TableStatus != "" {
 		s.WriteString(schemas.TableDescription_TableStatus, string(v.TableStatus))
 	}
-	serializeVectorIndexDescriptionList(s, schemas.TableDescription_VectorIndexes, v.VectorIndexes)
+	if v.VectorIndexes != nil {
+		serializeVectorIndexDescriptionList(s, schemas.TableDescription_VectorIndexes, v.VectorIndexes)
+	}
 	if v.WarmThroughput != nil {
 		s.WriteStruct(schemas.TableDescription_WarmThroughput)
 		v.WarmThroughput.SerializeMembers(s)
@@ -8857,9 +8995,15 @@ func (v *Update) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConditionExpression != nil {
 		s.WriteString(schemas.Update_ConditionExpression, *v.ConditionExpression)
 	}
-	serializeExpressionAttributeNameMap(s, schemas.Update_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.Update_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializeKey(s, schemas.Update_Key, v.Key)
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.Update_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.Update_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Key != nil {
+		serializeKey(s, schemas.Update_Key, v.Key)
+	}
 	if v.ReturnValuesOnConditionCheckFailure != "" {
 		s.WriteString(schemas.Update_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
 	}
@@ -9049,7 +9193,9 @@ func (v *UpdateReplicationGroupMemberAction) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateReplicationGroupMemberAction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicaGlobalSecondaryIndexList(s, schemas.UpdateReplicationGroupMemberAction_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	if v.GlobalSecondaryIndexes != nil {
+		serializeReplicaGlobalSecondaryIndexList(s, schemas.UpdateReplicationGroupMemberAction_GlobalSecondaryIndexes, v.GlobalSecondaryIndexes)
+	}
 	if v.KMSMasterKeyId != nil {
 		s.WriteString(schemas.UpdateReplicationGroupMemberAction_KMSMasterKeyId, *v.KMSMasterKeyId)
 	}
@@ -9235,7 +9381,9 @@ func (v *VectorIndex) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Projection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchSchema(s, schemas.VectorIndex_SearchSchema, v.SearchSchema)
+	if v.SearchSchema != nil {
+		serializeSearchSchema(s, schemas.VectorIndex_SearchSchema, v.SearchSchema)
+	}
 	if v.VectorAttribute != nil {
 		s.WriteStruct(schemas.VectorIndex_VectorAttribute)
 		v.VectorAttribute.SerializeMembers(s)
@@ -9360,7 +9508,9 @@ func (v *VectorIndexDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Projection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchSchema(s, schemas.VectorIndexDescription_SearchSchema, v.SearchSchema)
+	if v.SearchSchema != nil {
+		serializeSearchSchema(s, schemas.VectorIndexDescription_SearchSchema, v.SearchSchema)
+	}
 	if v.VectorAttribute != nil {
 		s.WriteStruct(schemas.VectorIndexDescription_VectorAttribute)
 		v.VectorAttribute.SerializeMembers(s)
@@ -9463,7 +9613,9 @@ func (v *VectorIndexInfo) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Projection.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchSchema(s, schemas.VectorIndexInfo_SearchSchema, v.SearchSchema)
+	if v.SearchSchema != nil {
+		serializeSearchSchema(s, schemas.VectorIndexInfo_SearchSchema, v.SearchSchema)
+	}
 	if v.VectorAttribute != nil {
 		s.WriteStruct(schemas.VectorIndexInfo_VectorAttribute)
 		v.VectorAttribute.SerializeMembers(s)

@@ -79,7 +79,9 @@ func (v *ListTrailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrailsResponse_NextToken, *v.NextToken)
 	}
-	serializeTrails(s, schemas.ListTrailsResponse_Trails, v.Trails)
+	if v.Trails != nil {
+		serializeTrails(s, schemas.ListTrailsResponse_Trails, v.Trails)
+	}
 }
 func (v *ListTrailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrailsResponse, func(s *smithy.Schema) error {

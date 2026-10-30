@@ -62,7 +62,9 @@ func (v *CreateLoggerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateLoggerDefinitionRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateLoggerDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLoggerDefinitionRequest_tags, v.Tags)
+	}
 }
 
 type CreateLoggerDefinitionOutput struct {

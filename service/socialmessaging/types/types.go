@@ -114,11 +114,15 @@ func (v *LibraryTemplateButtonInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PhoneNumber != nil {
 		s.WriteString(schemas.LibraryTemplateButtonInput_phoneNumber, *v.PhoneNumber)
 	}
-	serializeSupportedApps(s, schemas.LibraryTemplateButtonInput_supportedApps, v.SupportedApps)
+	if v.SupportedApps != nil {
+		serializeSupportedApps(s, schemas.LibraryTemplateButtonInput_supportedApps, v.SupportedApps)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.LibraryTemplateButtonInput_type, *v.Type)
 	}
-	serializeMetaUrlWithSuffixExample(s, schemas.LibraryTemplateButtonInput_url, v.Url)
+	if v.Url != nil {
+		serializeMetaUrlWithSuffixExample(s, schemas.LibraryTemplateButtonInput_url, v.Url)
+	}
 	if v.ZeroTapTermsAccepted != nil {
 		s.WriteBool(schemas.LibraryTemplateButtonInput_zeroTapTermsAccepted, *v.ZeroTapTermsAccepted)
 	}
@@ -187,7 +191,9 @@ func (v *LibraryTemplateButtonList) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PhoneNumber != nil {
 		s.WriteString(schemas.LibraryTemplateButtonList_phoneNumber, *v.PhoneNumber)
 	}
-	serializeSupportedApps(s, schemas.LibraryTemplateButtonList_supportedApps, v.SupportedApps)
+	if v.SupportedApps != nil {
+		serializeSupportedApps(s, schemas.LibraryTemplateButtonList_supportedApps, v.SupportedApps)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.LibraryTemplateButtonList_text, *v.Text)
 	}
@@ -315,7 +321,9 @@ func (v *LinkedWhatsAppBusinessAccount) SerializeMembers(s smithy.ShapeSerialize
 	if v.DirectSendEnforcementStatusExpiresAt != nil {
 		s.WriteTime(schemas.LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt, *v.DirectSendEnforcementStatusExpiresAt)
 	}
-	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.LinkedWhatsAppBusinessAccount_eventDestinations, v.EventDestinations)
+	if v.EventDestinations != nil {
+		serializeWhatsAppBusinessAccountEventDestinations(s, schemas.LinkedWhatsAppBusinessAccount_eventDestinations, v.EventDestinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_id, *v.Id)
 	}
@@ -325,7 +333,9 @@ func (v *LinkedWhatsAppBusinessAccount) SerializeMembers(s smithy.ShapeSerialize
 	if v.MarketingMessagesOnboardingStatus != nil {
 		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus, *v.MarketingMessagesOnboardingStatus)
 	}
-	serializeWhatsAppPhoneNumberSummaryList(s, schemas.LinkedWhatsAppBusinessAccount_phoneNumbers, v.PhoneNumbers)
+	if v.PhoneNumbers != nil {
+		serializeWhatsAppPhoneNumberSummaryList(s, schemas.LinkedWhatsAppBusinessAccount_phoneNumbers, v.PhoneNumbers)
+	}
 	if v.RegistrationStatus != "" {
 		s.WriteString(schemas.LinkedWhatsAppBusinessAccount_registrationStatus, string(v.RegistrationStatus))
 	}
@@ -414,7 +424,9 @@ func (v *LinkedWhatsAppBusinessAccountIdMetaData) SerializeMembers(s smithy.Shap
 	if v.RegistrationStatus != "" {
 		s.WriteString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus, string(v.RegistrationStatus))
 	}
-	serializeWhatsAppPhoneNumberDetailList(s, schemas.LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers, v.UnregisteredWhatsAppPhoneNumbers)
+	if v.UnregisteredWhatsAppPhoneNumbers != nil {
+		serializeWhatsAppPhoneNumberDetailList(s, schemas.LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers, v.UnregisteredWhatsAppPhoneNumbers)
+	}
 	if v.WabaId != nil {
 		s.WriteString(schemas.LinkedWhatsAppBusinessAccountIdMetaData_wabaId, *v.WabaId)
 	}
@@ -523,7 +535,9 @@ func (v *LinkedWhatsAppBusinessAccountSummary) SerializeMembers(s smithy.ShapeSe
 	if v.DirectSendEnforcementStatusExpiresAt != nil {
 		s.WriteTime(schemas.LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt, *v.DirectSendEnforcementStatusExpiresAt)
 	}
-	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.LinkedWhatsAppBusinessAccountSummary_eventDestinations, v.EventDestinations)
+	if v.EventDestinations != nil {
+		serializeWhatsAppBusinessAccountEventDestinations(s, schemas.LinkedWhatsAppBusinessAccountSummary_eventDestinations, v.EventDestinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.LinkedWhatsAppBusinessAccountSummary_id, *v.Id)
 	}
@@ -778,7 +792,9 @@ func (v *MetaFlowHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CanSendMessage != nil {
 		s.WriteString(schemas.MetaFlowHealthStatus_canSendMessage, *v.CanSendMessage)
 	}
-	serializeMetaFlowHealthEntityList(s, schemas.MetaFlowHealthStatus_entities, v.Entities)
+	if v.Entities != nil {
+		serializeMetaFlowHealthEntityList(s, schemas.MetaFlowHealthStatus_entities, v.Entities)
+	}
 }
 func (v *MetaFlowHealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetaFlowHealthStatus, func(s *smithy.Schema) error {
@@ -878,7 +894,9 @@ func (v *MetaFlowSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetaFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaFlowCategoryList(s, schemas.MetaFlowSummary_flowCategories, v.FlowCategories)
+	if v.FlowCategories != nil {
+		serializeMetaFlowCategoryList(s, schemas.MetaFlowSummary_flowCategories, v.FlowCategories)
+	}
 	if v.FlowId != nil {
 		s.WriteString(schemas.MetaFlowSummary_flowId, *v.FlowId)
 	}
@@ -888,7 +906,9 @@ func (v *MetaFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FlowStatus != nil {
 		s.WriteString(schemas.MetaFlowSummary_flowStatus, *v.FlowStatus)
 	}
-	serializeValidationErrorList(s, schemas.MetaFlowSummary_validationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrorList(s, schemas.MetaFlowSummary_validationErrors, v.ValidationErrors)
+	}
 }
 func (v *MetaFlowSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetaFlowSummary, func(s *smithy.Schema) error {
@@ -1027,7 +1047,9 @@ func (v *MetaLibraryTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LibraryTemplateBodyInputs.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetaLibraryTemplateButtonInputs(s, schemas.MetaLibraryTemplate_libraryTemplateButtonInputs, v.LibraryTemplateButtonInputs)
+	if v.LibraryTemplateButtonInputs != nil {
+		serializeMetaLibraryTemplateButtonInputs(s, schemas.MetaLibraryTemplate_libraryTemplateButtonInputs, v.LibraryTemplateButtonInputs)
+	}
 	if v.LibraryTemplateName != nil {
 		s.WriteString(schemas.MetaLibraryTemplate_libraryTemplateName, *v.LibraryTemplateName)
 	}
@@ -1116,8 +1138,12 @@ func (v *MetaLibraryTemplateDefinition) SerializeMembers(s smithy.ShapeSerialize
 	if v.TemplateBody != nil {
 		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateBody, *v.TemplateBody)
 	}
-	serializeMetaTemplateBodyExampleParams(s, schemas.MetaLibraryTemplateDefinition_templateBodyExampleParams, v.TemplateBodyExampleParams)
-	serializeMetaLibraryTemplateButtonList(s, schemas.MetaLibraryTemplateDefinition_templateButtons, v.TemplateButtons)
+	if v.TemplateBodyExampleParams != nil {
+		serializeMetaTemplateBodyExampleParams(s, schemas.MetaLibraryTemplateDefinition_templateBodyExampleParams, v.TemplateBodyExampleParams)
+	}
+	if v.TemplateButtons != nil {
+		serializeMetaLibraryTemplateButtonList(s, schemas.MetaLibraryTemplateDefinition_templateButtons, v.TemplateButtons)
+	}
 	if v.TemplateCategory != nil {
 		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateCategory, *v.TemplateCategory)
 	}
@@ -1127,7 +1153,9 @@ func (v *MetaLibraryTemplateDefinition) SerializeMembers(s smithy.ShapeSerialize
 	if v.TemplateId != nil {
 		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateId, *v.TemplateId)
 	}
-	serializeMetaIndustries(s, schemas.MetaLibraryTemplateDefinition_templateIndustry, v.TemplateIndustry)
+	if v.TemplateIndustry != nil {
+		serializeMetaIndustries(s, schemas.MetaLibraryTemplateDefinition_templateIndustry, v.TemplateIndustry)
+	}
 	if v.TemplateLanguage != nil {
 		s.WriteString(schemas.MetaLibraryTemplateDefinition_templateLanguage, *v.TemplateLanguage)
 	}
@@ -1261,7 +1289,9 @@ func (v *S3PresignedUrl) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3PresignedUrl) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaders(s, schemas.S3PresignedUrl_headers, v.Headers)
+	if v.Headers != nil {
+		serializeHeaders(s, schemas.S3PresignedUrl_headers, v.Headers)
+	}
 	if v.Url != nil {
 		s.WriteString(schemas.S3PresignedUrl_url, *v.Url)
 	}
@@ -1501,7 +1531,9 @@ func (v *WabaPhoneNumberSetupFinalization) SerializeMembers(s smithy.ShapeSerial
 	if v.Id != nil {
 		s.WriteString(schemas.WabaPhoneNumberSetupFinalization_id, *v.Id)
 	}
-	serializeTagList(s, schemas.WabaPhoneNumberSetupFinalization_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.WabaPhoneNumberSetupFinalization_tags, v.Tags)
+	}
 	if v.TwoFactorPin != nil {
 		s.WriteString(schemas.WabaPhoneNumberSetupFinalization_twoFactorPin, *v.TwoFactorPin)
 	}
@@ -1548,11 +1580,15 @@ func (v *WabaSetupFinalization) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WabaSetupFinalization) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWhatsAppBusinessAccountEventDestinations(s, schemas.WabaSetupFinalization_eventDestinations, v.EventDestinations)
+	if v.EventDestinations != nil {
+		serializeWhatsAppBusinessAccountEventDestinations(s, schemas.WabaSetupFinalization_eventDestinations, v.EventDestinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.WabaSetupFinalization_id, *v.Id)
 	}
-	serializeTagList(s, schemas.WabaSetupFinalization_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.WabaSetupFinalization_tags, v.Tags)
+	}
 }
 func (v *WabaSetupFinalization) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WabaSetupFinalization, func(s *smithy.Schema) error {
@@ -1649,11 +1685,15 @@ func (v *WhatsAppCallHours) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Enabled != nil {
 		s.WriteBool(schemas.WhatsAppCallHours_enabled, *v.Enabled)
 	}
-	serializeWhatsAppHolidayScheduleList(s, schemas.WhatsAppCallHours_holidaySchedule, v.HolidaySchedule)
+	if v.HolidaySchedule != nil {
+		serializeWhatsAppHolidayScheduleList(s, schemas.WhatsAppCallHours_holidaySchedule, v.HolidaySchedule)
+	}
 	if v.Timezone != nil {
 		s.WriteString(schemas.WhatsAppCallHours_timezone, *v.Timezone)
 	}
-	serializeWhatsAppWeeklyOperatingHoursList(s, schemas.WhatsAppCallHours_weeklyOperatingHours, v.WeeklyOperatingHours)
+	if v.WeeklyOperatingHours != nil {
+		serializeWhatsAppWeeklyOperatingHoursList(s, schemas.WhatsAppCallHours_weeklyOperatingHours, v.WeeklyOperatingHours)
+	}
 }
 func (v *WhatsAppCallHours) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WhatsAppCallHours, func(s *smithy.Schema) error {
@@ -1753,7 +1793,9 @@ func (v *WhatsAppCallPermissionAction) SerializeMembers(s smithy.ShapeSerializer
 	if v.CanPerformAction != nil {
 		s.WriteBool(schemas.WhatsAppCallPermissionAction_canPerformAction, *v.CanPerformAction)
 	}
-	serializeWhatsAppCallPermissionLimitList(s, schemas.WhatsAppCallPermissionAction_limits, v.Limits)
+	if v.Limits != nil {
+		serializeWhatsAppCallPermissionLimitList(s, schemas.WhatsAppCallPermissionAction_limits, v.Limits)
+	}
 }
 func (v *WhatsAppCallPermissionAction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WhatsAppCallPermissionAction, func(s *smithy.Schema) error {
@@ -2218,7 +2260,9 @@ func (v *WhatsAppSetupFinalization) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PhoneNumberParent != nil {
 		s.WriteString(schemas.WhatsAppSetupFinalization_phoneNumberParent, *v.PhoneNumberParent)
 	}
-	serializeWabaPhoneNumberSetupFinalizationList(s, schemas.WhatsAppSetupFinalization_phoneNumbers, v.PhoneNumbers)
+	if v.PhoneNumbers != nil {
+		serializeWabaPhoneNumberSetupFinalizationList(s, schemas.WhatsAppSetupFinalization_phoneNumbers, v.PhoneNumbers)
+	}
 	if v.Waba != nil {
 		s.WriteStruct(schemas.WhatsAppSetupFinalization_waba)
 		v.Waba.SerializeMembers(s)
@@ -2311,7 +2355,9 @@ func (v *WhatsAppSignupCallbackResult) SerializeMembers(s smithy.ShapeSerializer
 	if v.AssociateInProgressToken != nil {
 		s.WriteString(schemas.WhatsAppSignupCallbackResult_associateInProgressToken, *v.AssociateInProgressToken)
 	}
-	serializeLinkedAccountWithIncompleteSetup(s, schemas.WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup, v.LinkedAccountsWithIncompleteSetup)
+	if v.LinkedAccountsWithIncompleteSetup != nil {
+		serializeLinkedAccountWithIncompleteSetup(s, schemas.WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup, v.LinkedAccountsWithIncompleteSetup)
+	}
 }
 func (v *WhatsAppSignupCallbackResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WhatsAppSignupCallbackResult, func(s *smithy.Schema) error {

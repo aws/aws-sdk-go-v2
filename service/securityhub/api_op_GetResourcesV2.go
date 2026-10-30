@@ -101,7 +101,9 @@ func (v *GetResourcesV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Scopes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSortCriteria(s, schemas.GetResourcesV2Request_SortCriteria, v.SortCriteria)
+	if v.SortCriteria != nil {
+		serializeSortCriteria(s, schemas.GetResourcesV2Request_SortCriteria, v.SortCriteria)
+	}
 }
 
 type GetResourcesV2Output struct {
@@ -131,7 +133,9 @@ func (v *GetResourcesV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourcesV2Response_NextToken, *v.NextToken)
 	}
-	serializeResources(s, schemas.GetResourcesV2Response_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeResources(s, schemas.GetResourcesV2Response_Resources, v.Resources)
+	}
 }
 func (v *GetResourcesV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetResourcesV2Response, func(s *smithy.Schema) error {

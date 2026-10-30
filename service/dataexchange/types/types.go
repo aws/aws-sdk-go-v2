@@ -165,7 +165,9 @@ func (v *AssetConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfTag(s, schemas.AssetConfiguration_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeListOfTag(s, schemas.AssetConfiguration_Tags, v.Tags)
+	}
 }
 func (v *AssetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AssetConfiguration, func(s *smithy.Schema) error {
@@ -730,7 +732,9 @@ func (v *DatabaseLFTagPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DatabaseLFTagPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfLFTags(s, schemas.DatabaseLFTagPolicy_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeListOfLFTags(s, schemas.DatabaseLFTagPolicy_Expression, v.Expression)
+	}
 }
 func (v *DatabaseLFTagPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatabaseLFTagPolicy, func(s *smithy.Schema) error {
@@ -765,8 +769,12 @@ func (v *DatabaseLFTagPolicyAndPermissions) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DatabaseLFTagPolicyAndPermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfLFTags(s, schemas.DatabaseLFTagPolicyAndPermissions_Expression, v.Expression)
-	serializeListOfDatabaseLFTagPolicyPermissions(s, schemas.DatabaseLFTagPolicyAndPermissions_Permissions, v.Permissions)
+	if v.Expression != nil {
+		serializeListOfLFTags(s, schemas.DatabaseLFTagPolicyAndPermissions_Expression, v.Expression)
+	}
+	if v.Permissions != nil {
+		serializeListOfDatabaseLFTagPolicyPermissions(s, schemas.DatabaseLFTagPolicyAndPermissions_Permissions, v.Permissions)
+	}
 }
 func (v *DatabaseLFTagPolicyAndPermissions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatabaseLFTagPolicyAndPermissions, func(s *smithy.Schema) error {
@@ -1165,7 +1173,9 @@ func (v *Details) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ImportAssetFromSignedUrlJobErrorDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfAssetSourceEntry(s, schemas.Details_ImportAssetsFromS3JobErrorDetails, v.ImportAssetsFromS3JobErrorDetails)
+	if v.ImportAssetsFromS3JobErrorDetails != nil {
+		serializeListOfAssetSourceEntry(s, schemas.Details_ImportAssetsFromS3JobErrorDetails, v.ImportAssetsFromS3JobErrorDetails)
+	}
 }
 func (v *Details) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Details, func(s *smithy.Schema) error {
@@ -1337,7 +1347,9 @@ func (v *ExportAssetsToS3RequestDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportAssetsToS3RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAssetDestinationEntry(s, schemas.ExportAssetsToS3RequestDetails_AssetDestinations, v.AssetDestinations)
+	if v.AssetDestinations != nil {
+		serializeListOfAssetDestinationEntry(s, schemas.ExportAssetsToS3RequestDetails_AssetDestinations, v.AssetDestinations)
+	}
 	if v.DataSetId != nil {
 		s.WriteString(schemas.ExportAssetsToS3RequestDetails_DataSetId, *v.DataSetId)
 	}
@@ -1400,7 +1412,9 @@ func (v *ExportAssetsToS3ResponseDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExportAssetsToS3ResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAssetDestinationEntry(s, schemas.ExportAssetsToS3ResponseDetails_AssetDestinations, v.AssetDestinations)
+	if v.AssetDestinations != nil {
+		serializeListOfAssetDestinationEntry(s, schemas.ExportAssetsToS3ResponseDetails_AssetDestinations, v.AssetDestinations)
+	}
 	if v.DataSetId != nil {
 		s.WriteString(schemas.ExportAssetsToS3ResponseDetails_DataSetId, *v.DataSetId)
 	}
@@ -1594,7 +1608,9 @@ func (v *ExportRevisionsToS3RequestDetails) SerializeMembers(s smithy.ShapeSeria
 		v.Encryption.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfRevisionDestinationEntry(s, schemas.ExportRevisionsToS3RequestDetails_RevisionDestinations, v.RevisionDestinations)
+	if v.RevisionDestinations != nil {
+		serializeListOfRevisionDestinationEntry(s, schemas.ExportRevisionsToS3RequestDetails_RevisionDestinations, v.RevisionDestinations)
+	}
 }
 func (v *ExportRevisionsToS3RequestDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportRevisionsToS3RequestDetails, func(s *smithy.Schema) error {
@@ -1652,7 +1668,9 @@ func (v *ExportRevisionsToS3ResponseDetails) SerializeMembers(s smithy.ShapeSeri
 	if v.EventActionArn != nil {
 		s.WriteString(schemas.ExportRevisionsToS3ResponseDetails_EventActionArn, *v.EventActionArn)
 	}
-	serializeListOfRevisionDestinationEntry(s, schemas.ExportRevisionsToS3ResponseDetails_RevisionDestinations, v.RevisionDestinations)
+	if v.RevisionDestinations != nil {
+		serializeListOfRevisionDestinationEntry(s, schemas.ExportRevisionsToS3ResponseDetails_RevisionDestinations, v.RevisionDestinations)
+	}
 }
 func (v *ExportRevisionsToS3ResponseDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExportRevisionsToS3ResponseDetails, func(s *smithy.Schema) error {
@@ -2380,7 +2398,9 @@ func (v *ImportAssetsFromRedshiftDataSharesRequestDetails) Serialize(s smithy.Sh
 }
 
 func (v *ImportAssetsFromRedshiftDataSharesRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfRedshiftDataShareAssetSourceEntry(s, schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_AssetSources, v.AssetSources)
+	if v.AssetSources != nil {
+		serializeListOfRedshiftDataShareAssetSourceEntry(s, schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_AssetSources, v.AssetSources)
+	}
 	if v.DataSetId != nil {
 		s.WriteString(schemas.ImportAssetsFromRedshiftDataSharesRequestDetails_DataSetId, *v.DataSetId)
 	}
@@ -2432,7 +2452,9 @@ func (v *ImportAssetsFromRedshiftDataSharesResponseDetails) Serialize(s smithy.S
 }
 
 func (v *ImportAssetsFromRedshiftDataSharesResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfRedshiftDataShareAssetSourceEntry(s, schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_AssetSources, v.AssetSources)
+	if v.AssetSources != nil {
+		serializeListOfRedshiftDataShareAssetSourceEntry(s, schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_AssetSources, v.AssetSources)
+	}
 	if v.DataSetId != nil {
 		s.WriteString(schemas.ImportAssetsFromRedshiftDataSharesResponseDetails_DataSetId, *v.DataSetId)
 	}
@@ -2484,7 +2506,9 @@ func (v *ImportAssetsFromS3RequestDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ImportAssetsFromS3RequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAssetSourceEntry(s, schemas.ImportAssetsFromS3RequestDetails_AssetSources, v.AssetSources)
+	if v.AssetSources != nil {
+		serializeListOfAssetSourceEntry(s, schemas.ImportAssetsFromS3RequestDetails_AssetSources, v.AssetSources)
+	}
 	if v.DataSetId != nil {
 		s.WriteString(schemas.ImportAssetsFromS3RequestDetails_DataSetId, *v.DataSetId)
 	}
@@ -2536,7 +2560,9 @@ func (v *ImportAssetsFromS3ResponseDetails) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ImportAssetsFromS3ResponseDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAssetSourceEntry(s, schemas.ImportAssetsFromS3ResponseDetails_AssetSources, v.AssetSources)
+	if v.AssetSources != nil {
+		serializeListOfAssetSourceEntry(s, schemas.ImportAssetsFromS3ResponseDetails_AssetSources, v.AssetSources)
+	}
 	if v.DataSetId != nil {
 		s.WriteString(schemas.ImportAssetsFromS3ResponseDetails_DataSetId, *v.DataSetId)
 	}
@@ -2635,7 +2661,9 @@ func (v *JobEntry) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Details.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfJobError(s, schemas.JobEntry_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeListOfJobError(s, schemas.JobEntry_Errors, v.Errors)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.JobEntry_Id, *v.Id)
 	}
@@ -2870,7 +2898,9 @@ func (v *LakeFormationDataPermissionAsset) SerializeMembers(s smithy.ShapeSerial
 	if v.LakeFormationDataPermissionType != "" {
 		s.WriteString(schemas.LakeFormationDataPermissionAsset_LakeFormationDataPermissionType, string(v.LakeFormationDataPermissionType))
 	}
-	serializeListOfLFPermissions(s, schemas.LakeFormationDataPermissionAsset_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeListOfLFPermissions(s, schemas.LakeFormationDataPermissionAsset_Permissions, v.Permissions)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.LakeFormationDataPermissionAsset_RoleArn, *v.RoleArn)
 	}
@@ -3044,7 +3074,9 @@ func (v *LFTag) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TagKey != nil {
 		s.WriteString(schemas.LFTag_TagKey, *v.TagKey)
 	}
-	serializeListOfLFTagValues(s, schemas.LFTag_TagValues, v.TagValues)
+	if v.TagValues != nil {
+		serializeListOfLFTagValues(s, schemas.LFTag_TagValues, v.TagValues)
+	}
 }
 func (v *LFTag) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LFTag, func(s *smithy.Schema) error {
@@ -4019,9 +4051,15 @@ func (v *S3DataAccessAsset) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Bucket != nil {
 		s.WriteString(schemas.S3DataAccessAsset_Bucket, *v.Bucket)
 	}
-	serializeListOf__string(s, schemas.S3DataAccessAsset_KeyPrefixes, v.KeyPrefixes)
-	serializeListOf__string(s, schemas.S3DataAccessAsset_Keys, v.Keys)
-	serializeListOfKmsKeysToGrant(s, schemas.S3DataAccessAsset_KmsKeysToGrant, v.KmsKeysToGrant)
+	if v.KeyPrefixes != nil {
+		serializeListOf__string(s, schemas.S3DataAccessAsset_KeyPrefixes, v.KeyPrefixes)
+	}
+	if v.Keys != nil {
+		serializeListOf__string(s, schemas.S3DataAccessAsset_Keys, v.Keys)
+	}
+	if v.KmsKeysToGrant != nil {
+		serializeListOfKmsKeysToGrant(s, schemas.S3DataAccessAsset_KmsKeysToGrant, v.KmsKeysToGrant)
+	}
 	if v.S3AccessPointAlias != nil {
 		s.WriteString(schemas.S3DataAccessAsset_S3AccessPointAlias, *v.S3AccessPointAlias)
 	}
@@ -4083,9 +4121,15 @@ func (v *S3DataAccessAssetSourceEntry) SerializeMembers(s smithy.ShapeSerializer
 	if v.Bucket != nil {
 		s.WriteString(schemas.S3DataAccessAssetSourceEntry_Bucket, *v.Bucket)
 	}
-	serializeListOf__string(s, schemas.S3DataAccessAssetSourceEntry_KeyPrefixes, v.KeyPrefixes)
-	serializeListOf__string(s, schemas.S3DataAccessAssetSourceEntry_Keys, v.Keys)
-	serializeListOfKmsKeysToGrant(s, schemas.S3DataAccessAssetSourceEntry_KmsKeysToGrant, v.KmsKeysToGrant)
+	if v.KeyPrefixes != nil {
+		serializeListOf__string(s, schemas.S3DataAccessAssetSourceEntry_KeyPrefixes, v.KeyPrefixes)
+	}
+	if v.Keys != nil {
+		serializeListOf__string(s, schemas.S3DataAccessAssetSourceEntry_Keys, v.Keys)
+	}
+	if v.KmsKeysToGrant != nil {
+		serializeListOfKmsKeysToGrant(s, schemas.S3DataAccessAssetSourceEntry_KmsKeysToGrant, v.KmsKeysToGrant)
+	}
 }
 func (v *S3DataAccessAssetSourceEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3DataAccessAssetSourceEntry, func(s *smithy.Schema) error {
@@ -4125,8 +4169,12 @@ func (v *S3DataAccessDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3DataAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOf__string(s, schemas.S3DataAccessDetails_KeyPrefixes, v.KeyPrefixes)
-	serializeListOf__string(s, schemas.S3DataAccessDetails_Keys, v.Keys)
+	if v.KeyPrefixes != nil {
+		serializeListOf__string(s, schemas.S3DataAccessDetails_KeyPrefixes, v.KeyPrefixes)
+	}
+	if v.Keys != nil {
+		serializeListOf__string(s, schemas.S3DataAccessDetails_Keys, v.Keys)
+	}
 }
 func (v *S3DataAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3DataAccessDetails, func(s *smithy.Schema) error {
@@ -4251,7 +4299,9 @@ func (v *SchemaChangeRequestDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SchemaChangeRequestDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfSchemaChangeDetails(s, schemas.SchemaChangeRequestDetails_Changes, v.Changes)
+	if v.Changes != nil {
+		serializeListOfSchemaChangeDetails(s, schemas.SchemaChangeRequestDetails_Changes, v.Changes)
+	}
 	if v.SchemaChangeAt != nil {
 		s.WriteTime(schemas.SchemaChangeRequestDetails_SchemaChangeAt, *v.SchemaChangeAt)
 	}
@@ -4291,9 +4341,15 @@ func (v *ScopeDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScopeDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfLakeFormationTagPolicies(s, schemas.ScopeDetails_LakeFormationTagPolicies, v.LakeFormationTagPolicies)
-	serializeListOfRedshiftDataShares(s, schemas.ScopeDetails_RedshiftDataShares, v.RedshiftDataShares)
-	serializeListOfS3DataAccesses(s, schemas.ScopeDetails_S3DataAccesses, v.S3DataAccesses)
+	if v.LakeFormationTagPolicies != nil {
+		serializeListOfLakeFormationTagPolicies(s, schemas.ScopeDetails_LakeFormationTagPolicies, v.LakeFormationTagPolicies)
+	}
+	if v.RedshiftDataShares != nil {
+		serializeListOfRedshiftDataShares(s, schemas.ScopeDetails_RedshiftDataShares, v.RedshiftDataShares)
+	}
+	if v.S3DataAccesses != nil {
+		serializeListOfS3DataAccesses(s, schemas.ScopeDetails_S3DataAccesses, v.S3DataAccesses)
+	}
 }
 func (v *ScopeDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScopeDetails, func(s *smithy.Schema) error {
@@ -4327,7 +4383,9 @@ func (v *TableLFTagPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableLFTagPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfLFTags(s, schemas.TableLFTagPolicy_Expression, v.Expression)
+	if v.Expression != nil {
+		serializeListOfLFTags(s, schemas.TableLFTagPolicy_Expression, v.Expression)
+	}
 }
 func (v *TableLFTagPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableLFTagPolicy, func(s *smithy.Schema) error {
@@ -4362,8 +4420,12 @@ func (v *TableLFTagPolicyAndPermissions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableLFTagPolicyAndPermissions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfLFTags(s, schemas.TableLFTagPolicyAndPermissions_Expression, v.Expression)
-	serializeListOfTableTagPolicyLFPermissions(s, schemas.TableLFTagPolicyAndPermissions_Permissions, v.Permissions)
+	if v.Expression != nil {
+		serializeListOfLFTags(s, schemas.TableLFTagPolicyAndPermissions_Expression, v.Expression)
+	}
+	if v.Permissions != nil {
+		serializeListOfTableTagPolicyLFPermissions(s, schemas.TableLFTagPolicyAndPermissions_Permissions, v.Permissions)
+	}
 }
 func (v *TableLFTagPolicyAndPermissions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableLFTagPolicyAndPermissions, func(s *smithy.Schema) error {

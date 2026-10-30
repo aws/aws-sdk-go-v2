@@ -105,14 +105,18 @@ func (v *GetDomainObjectTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EncryptionKey != nil {
 		s.WriteString(schemas.GetDomainObjectTypeResponse_EncryptionKey, *v.EncryptionKey)
 	}
-	serializeDomainObjectTypeFields(s, schemas.GetDomainObjectTypeResponse_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeDomainObjectTypeFields(s, schemas.GetDomainObjectTypeResponse_Fields, v.Fields)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetDomainObjectTypeResponse_LastUpdatedAt, *v.LastUpdatedAt)
 	}
 	if v.ObjectTypeName != nil {
 		s.WriteString(schemas.GetDomainObjectTypeResponse_ObjectTypeName, *v.ObjectTypeName)
 	}
-	serializeTagMap(s, schemas.GetDomainObjectTypeResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDomainObjectTypeResponse_Tags, v.Tags)
+	}
 }
 func (v *GetDomainObjectTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDomainObjectTypeResponse, func(s *smithy.Schema) error {

@@ -122,8 +122,12 @@ func (v *StartReplicationTaskAssessmentRunInput) SerializeMembers(s smithy.Shape
 	if v.AssessmentRunName != nil {
 		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_AssessmentRunName, *v.AssessmentRunName)
 	}
-	serializeExcludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_Exclude, v.Exclude)
-	serializeIncludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_IncludeOnly, v.IncludeOnly)
+	if v.Exclude != nil {
+		serializeExcludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_Exclude, v.Exclude)
+	}
+	if v.IncludeOnly != nil {
+		serializeIncludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_IncludeOnly, v.IncludeOnly)
+	}
 	if v.ReplicationTaskArn != nil {
 		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
 	}
@@ -142,7 +146,9 @@ func (v *StartReplicationTaskAssessmentRunInput) SerializeMembers(s smithy.Shape
 	if v.ServiceAccessRoleArn != nil {
 		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
 	}
-	serializeTagList(s, schemas.StartReplicationTaskAssessmentRunMessage_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartReplicationTaskAssessmentRunMessage_Tags, v.Tags)
+	}
 }
 
 type StartReplicationTaskAssessmentRunOutput struct {

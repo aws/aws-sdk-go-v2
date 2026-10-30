@@ -86,7 +86,9 @@ func (v *ListEphemeridesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ListEphemeridesRequest_startTime, *v.StartTime)
 	}
-	serializeEphemerisStatusList(s, schemas.ListEphemeridesRequest_statusList, v.StatusList)
+	if v.StatusList != nil {
+		serializeEphemerisStatusList(s, schemas.ListEphemeridesRequest_statusList, v.StatusList)
+	}
 }
 
 type ListEphemeridesOutput struct {
@@ -110,7 +112,9 @@ func (v *ListEphemeridesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEphemeridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEphemeridesList(s, schemas.ListEphemeridesResponse_ephemerides, v.Ephemerides)
+	if v.Ephemerides != nil {
+		serializeEphemeridesList(s, schemas.ListEphemeridesResponse_ephemerides, v.Ephemerides)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEphemeridesResponse_nextToken, *v.NextToken)
 	}

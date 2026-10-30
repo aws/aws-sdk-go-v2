@@ -52,7 +52,9 @@ func (v *BatchAssociateScramSecretInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.BatchAssociateScramSecretRequest_ClusterArn, *v.ClusterArn)
 	}
-	serialize__listOf__string(s, schemas.BatchAssociateScramSecretRequest_SecretArnList, v.SecretArnList)
+	if v.SecretArnList != nil {
+		serialize__listOf__string(s, schemas.BatchAssociateScramSecretRequest_SecretArnList, v.SecretArnList)
+	}
 }
 
 type BatchAssociateScramSecretOutput struct {
@@ -79,7 +81,9 @@ func (v *BatchAssociateScramSecretOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.ClusterArn != nil {
 		s.WriteString(schemas.BatchAssociateScramSecretResponse_ClusterArn, *v.ClusterArn)
 	}
-	serialize__listOfUnprocessedScramSecret(s, schemas.BatchAssociateScramSecretResponse_UnprocessedScramSecrets, v.UnprocessedScramSecrets)
+	if v.UnprocessedScramSecrets != nil {
+		serialize__listOfUnprocessedScramSecret(s, schemas.BatchAssociateScramSecretResponse_UnprocessedScramSecrets, v.UnprocessedScramSecrets)
+	}
 }
 func (v *BatchAssociateScramSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateScramSecretResponse, func(s *smithy.Schema) error {

@@ -7,9 +7,6 @@ import (
 )
 
 func serializeS3Buckets(s smithy.ShapeSerializer, schema *smithy.Schema, v []S3Bucket) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

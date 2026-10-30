@@ -70,7 +70,9 @@ func (v *ListConsumableResourcesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConsumableResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListConsumableResourcesFilterList(s, schemas.ListConsumableResourcesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListConsumableResourcesFilterList(s, schemas.ListConsumableResourcesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListConsumableResourcesRequest_maxResults, *v.MaxResults)
 	}
@@ -105,7 +107,9 @@ func (v *ListConsumableResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConsumableResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumableResourceSummaryList(s, schemas.ListConsumableResourcesResponse_consumableResources, v.ConsumableResources)
+	if v.ConsumableResources != nil {
+		serializeConsumableResourceSummaryList(s, schemas.ListConsumableResourcesResponse_consumableResources, v.ConsumableResources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConsumableResourcesResponse_nextToken, *v.NextToken)
 	}

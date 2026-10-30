@@ -90,7 +90,9 @@ func (v *CreateOrganizationalUnitInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ParentId != nil {
 		s.WriteString(schemas.CreateOrganizationalUnitRequest_ParentId, *v.ParentId)
 	}
-	serializeTags(s, schemas.CreateOrganizationalUnitRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateOrganizationalUnitRequest_Tags, v.Tags)
+	}
 }
 
 type CreateOrganizationalUnitOutput struct {

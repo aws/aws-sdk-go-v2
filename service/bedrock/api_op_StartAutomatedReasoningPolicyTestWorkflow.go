@@ -69,7 +69,9 @@ func (v *StartAutomatedReasoningPolicyTestWorkflowInput) SerializeMembers(s smit
 	if v.PolicyArn != nil {
 		s.WriteString(schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_policyArn, *v.PolicyArn)
 	}
-	serializeAutomatedReasoningPolicyTestCaseIdList(s, schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_testCaseIds, v.TestCaseIds)
+	if v.TestCaseIds != nil {
+		serializeAutomatedReasoningPolicyTestCaseIdList(s, schemas.StartAutomatedReasoningPolicyTestWorkflowRequest_testCaseIds, v.TestCaseIds)
+	}
 }
 
 type StartAutomatedReasoningPolicyTestWorkflowOutput struct {

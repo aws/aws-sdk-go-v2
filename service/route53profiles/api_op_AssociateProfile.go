@@ -71,7 +71,9 @@ func (v *AssociateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.AssociateProfileRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagList(s, schemas.AssociateProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AssociateProfileRequest_Tags, v.Tags)
+	}
 }
 
 type AssociateProfileOutput struct {

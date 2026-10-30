@@ -114,7 +114,9 @@ func (v *ListObservabilityConfigurationsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListObservabilityConfigurationsResponse_NextToken, *v.NextToken)
 	}
-	serializeObservabilityConfigurationSummaryList(s, schemas.ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList, v.ObservabilityConfigurationSummaryList)
+	if v.ObservabilityConfigurationSummaryList != nil {
+		serializeObservabilityConfigurationSummaryList(s, schemas.ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList, v.ObservabilityConfigurationSummaryList)
+	}
 }
 func (v *ListObservabilityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListObservabilityConfigurationsResponse, func(s *smithy.Schema) error {

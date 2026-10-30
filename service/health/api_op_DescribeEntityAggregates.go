@@ -44,7 +44,9 @@ func (v *DescribeEntityAggregatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEntityAggregatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventArnsList(s, schemas.DescribeEntityAggregatesRequest_eventArns, v.EventArns)
+	if v.EventArns != nil {
+		serializeEventArnsList(s, schemas.DescribeEntityAggregatesRequest_eventArns, v.EventArns)
+	}
 }
 
 type DescribeEntityAggregatesOutput struct {
@@ -65,7 +67,9 @@ func (v *DescribeEntityAggregatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEntityAggregatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityAggregateList(s, schemas.DescribeEntityAggregatesResponse_entityAggregates, v.EntityAggregates)
+	if v.EntityAggregates != nil {
+		serializeEntityAggregateList(s, schemas.DescribeEntityAggregatesResponse_entityAggregates, v.EntityAggregates)
+	}
 }
 func (v *DescribeEntityAggregatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEntityAggregatesResponse, func(s *smithy.Schema) error {

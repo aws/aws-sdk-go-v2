@@ -133,8 +133,12 @@ func (v *StartEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AdditionalRecipients.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEmailAttachments(s, schemas.StartEmailContactRequest_Attachments, v.Attachments)
-	serializeAttributes(s, schemas.StartEmailContactRequest_Attributes, v.Attributes)
+	if v.Attachments != nil {
+		serializeEmailAttachments(s, schemas.StartEmailContactRequest_Attachments, v.Attachments)
+	}
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.StartEmailContactRequest_Attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartEmailContactRequest_ClientToken, *v.ClientToken)
 	}
@@ -163,11 +167,15 @@ func (v *StartEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.StartEmailContactRequest_Name, *v.Name)
 	}
-	serializeContactReferences(s, schemas.StartEmailContactRequest_References, v.References)
+	if v.References != nil {
+		serializeContactReferences(s, schemas.StartEmailContactRequest_References, v.References)
+	}
 	if v.RelatedContactId != nil {
 		s.WriteString(schemas.StartEmailContactRequest_RelatedContactId, *v.RelatedContactId)
 	}
-	serializeSegmentAttributes(s, schemas.StartEmailContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.StartEmailContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
 }
 
 type StartEmailContactOutput struct {

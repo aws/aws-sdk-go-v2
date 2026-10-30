@@ -98,7 +98,9 @@ func (v *GenerateAuthRequestCryptogramInput) SerializeMembers(s smithy.ShapeSeri
 	if v.MajorKeyDerivationMode != "" {
 		s.WriteString(schemas.GenerateAuthRequestCryptogramInput_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
 	}
-	serializeSessionKeyDerivation(s, schemas.GenerateAuthRequestCryptogramInput_SessionKeyDerivationAttributes, v.SessionKeyDerivationAttributes)
+	if v.SessionKeyDerivationAttributes != nil {
+		serializeSessionKeyDerivation(s, schemas.GenerateAuthRequestCryptogramInput_SessionKeyDerivationAttributes, v.SessionKeyDerivationAttributes)
+	}
 	if v.TransactionData != nil {
 		s.WriteString(schemas.GenerateAuthRequestCryptogramInput_TransactionData, *v.TransactionData)
 	}

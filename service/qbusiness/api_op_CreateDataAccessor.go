@@ -79,7 +79,9 @@ func (v *CreateDataAccessorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationList(s, schemas.CreateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
+	if v.ActionConfigurations != nil {
+		serializeActionConfigurationList(s, schemas.CreateDataAccessorRequest_actionConfigurations, v.ActionConfigurations)
+	}
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.CreateDataAccessorRequest_applicationId, *v.ApplicationId)
 	}
@@ -97,7 +99,9 @@ func (v *CreateDataAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Principal != nil {
 		s.WriteString(schemas.CreateDataAccessorRequest_principal, *v.Principal)
 	}
-	serializeTags(s, schemas.CreateDataAccessorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDataAccessorRequest_tags, v.Tags)
+	}
 }
 
 type CreateDataAccessorOutput struct {

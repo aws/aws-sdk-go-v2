@@ -216,7 +216,9 @@ func (v *QueryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnInfoList(s, schemas.QueryResponse_ColumnInfo, v.ColumnInfo)
+	if v.ColumnInfo != nil {
+		serializeColumnInfoList(s, schemas.QueryResponse_ColumnInfo, v.ColumnInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.QueryResponse_NextToken, *v.NextToken)
 	}
@@ -233,7 +235,9 @@ func (v *QueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QueryStatus.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRowList(s, schemas.QueryResponse_Rows, v.Rows)
+	if v.Rows != nil {
+		serializeRowList(s, schemas.QueryResponse_Rows, v.Rows)
+	}
 }
 func (v *QueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QueryResponse, func(s *smithy.Schema) error {

@@ -60,7 +60,9 @@ func (v *PutEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluations(s, schemas.PutEvaluationsRequest_Evaluations, v.Evaluations)
+	if v.Evaluations != nil {
+		serializeEvaluations(s, schemas.PutEvaluationsRequest_Evaluations, v.Evaluations)
+	}
 	if v.ResultToken != nil {
 		s.WriteString(schemas.PutEvaluationsRequest_ResultToken, *v.ResultToken)
 	}
@@ -87,7 +89,9 @@ func (v *PutEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluations(s, schemas.PutEvaluationsResponse_FailedEvaluations, v.FailedEvaluations)
+	if v.FailedEvaluations != nil {
+		serializeEvaluations(s, schemas.PutEvaluationsResponse_FailedEvaluations, v.FailedEvaluations)
+	}
 }
 func (v *PutEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutEvaluationsResponse, func(s *smithy.Schema) error {

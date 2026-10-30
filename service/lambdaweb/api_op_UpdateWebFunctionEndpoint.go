@@ -123,7 +123,9 @@ func (v *UpdateWebFunctionEndpointInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.FunctionName != nil {
 		s.WriteString(schemas.UpdateWebFunctionEndpointRequest_functionName, *v.FunctionName)
 	}
-	serializeRevisionWeightList(s, schemas.UpdateWebFunctionEndpointRequest_revisionWeights, v.RevisionWeights)
+	if v.RevisionWeights != nil {
+		serializeRevisionWeightList(s, schemas.UpdateWebFunctionEndpointRequest_revisionWeights, v.RevisionWeights)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.UpdateWebFunctionEndpointRequest_scalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -294,9 +296,15 @@ func (v *UpdateWebFunctionEndpointOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.UpdateWebFunctionEndpointResponse_functionArn, *v.FunctionArn)
 	}
-	serializeRegionalEndpoints(s, schemas.UpdateWebFunctionEndpointResponse_regionalEndpoints, v.RegionalEndpoints)
-	serializeRegionList(s, schemas.UpdateWebFunctionEndpointResponse_regions, v.Regions)
-	serializeRevisionWeightList(s, schemas.UpdateWebFunctionEndpointResponse_revisionWeights, v.RevisionWeights)
+	if v.RegionalEndpoints != nil {
+		serializeRegionalEndpoints(s, schemas.UpdateWebFunctionEndpointResponse_regionalEndpoints, v.RegionalEndpoints)
+	}
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.UpdateWebFunctionEndpointResponse_regions, v.Regions)
+	}
+	if v.RevisionWeights != nil {
+		serializeRevisionWeightList(s, schemas.UpdateWebFunctionEndpointResponse_revisionWeights, v.RevisionWeights)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.UpdateWebFunctionEndpointResponse_scalingConfig)
 		v.ScalingConfig.SerializeMembers(s)

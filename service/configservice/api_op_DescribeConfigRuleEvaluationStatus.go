@@ -62,7 +62,9 @@ func (v *DescribeConfigRuleEvaluationStatusInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeConfigRuleEvaluationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigRuleNames(s, schemas.DescribeConfigRuleEvaluationStatusRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.ConfigRuleNames != nil {
+		serializeConfigRuleNames(s, schemas.DescribeConfigRuleEvaluationStatusRequest_ConfigRuleNames, v.ConfigRuleNames)
+	}
 	if v.Limit != 0 {
 		s.WriteInt32(schemas.DescribeConfigRuleEvaluationStatusRequest_Limit, v.Limit)
 	}
@@ -93,7 +95,9 @@ func (v *DescribeConfigRuleEvaluationStatusOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeConfigRuleEvaluationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigRuleEvaluationStatusList(s, schemas.DescribeConfigRuleEvaluationStatusResponse_ConfigRulesEvaluationStatus, v.ConfigRulesEvaluationStatus)
+	if v.ConfigRulesEvaluationStatus != nil {
+		serializeConfigRuleEvaluationStatusList(s, schemas.DescribeConfigRuleEvaluationStatusResponse_ConfigRulesEvaluationStatus, v.ConfigRulesEvaluationStatus)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConfigRuleEvaluationStatusResponse_NextToken, *v.NextToken)
 	}

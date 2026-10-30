@@ -170,7 +170,9 @@ func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SyncSchedule != nil {
 		s.WriteString(schemas.CreateDataSourceRequest_syncSchedule, *v.SyncSchedule)
 	}
-	serializeTags(s, schemas.CreateDataSourceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDataSourceRequest_tags, v.Tags)
+	}
 	if v.VpcConfiguration != nil {
 		s.WriteStruct(schemas.CreateDataSourceRequest_vpcConfiguration)
 		v.VpcConfiguration.SerializeMembers(s)

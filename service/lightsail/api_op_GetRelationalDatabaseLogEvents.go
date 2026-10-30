@@ -144,7 +144,9 @@ func (v *GetRelationalDatabaseLogEventsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextForwardToken != nil {
 		s.WriteString(schemas.GetRelationalDatabaseLogEventsResult_nextForwardToken, *v.NextForwardToken)
 	}
-	serializeLogEventList(s, schemas.GetRelationalDatabaseLogEventsResult_resourceLogEvents, v.ResourceLogEvents)
+	if v.ResourceLogEvents != nil {
+		serializeLogEventList(s, schemas.GetRelationalDatabaseLogEventsResult_resourceLogEvents, v.ResourceLogEvents)
+	}
 }
 func (v *GetRelationalDatabaseLogEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRelationalDatabaseLogEventsResult, func(s *smithy.Schema) error {

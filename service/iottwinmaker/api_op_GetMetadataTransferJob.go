@@ -143,7 +143,9 @@ func (v *GetMetadataTransferJobOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ReportUrl != nil {
 		s.WriteString(schemas.GetMetadataTransferJobResponse_reportUrl, *v.ReportUrl)
 	}
-	serializeSourceConfigurations(s, schemas.GetMetadataTransferJobResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeSourceConfigurations(s, schemas.GetMetadataTransferJobResponse_sources, v.Sources)
+	}
 	if v.Status != nil {
 		s.WriteStruct(schemas.GetMetadataTransferJobResponse_status)
 		v.Status.SerializeMembers(s)

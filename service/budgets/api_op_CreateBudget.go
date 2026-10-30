@@ -81,8 +81,12 @@ func (v *CreateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Budget.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNotificationWithSubscribersList(s, schemas.CreateBudgetRequest_NotificationsWithSubscribers, v.NotificationsWithSubscribers)
-	serializeResourceTagList(s, schemas.CreateBudgetRequest_ResourceTags, v.ResourceTags)
+	if v.NotificationsWithSubscribers != nil {
+		serializeNotificationWithSubscribersList(s, schemas.CreateBudgetRequest_NotificationsWithSubscribers, v.NotificationsWithSubscribers)
+	}
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateBudgetRequest_ResourceTags, v.ResourceTags)
+	}
 }
 
 // Response of CreateBudget

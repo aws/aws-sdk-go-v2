@@ -57,7 +57,9 @@ func (v *Assessment) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.Assessment_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Assessment_tags, v.Tags)
+	}
 }
 func (v *Assessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Assessment, func(s *smithy.Schema) error {
@@ -129,14 +131,18 @@ func (v *AssessmentControl) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentReportEvidenceCount != 0 {
 		s.WriteInt32(schemas.AssessmentControl_assessmentReportEvidenceCount, v.AssessmentReportEvidenceCount)
 	}
-	serializeControlComments(s, schemas.AssessmentControl_comments, v.Comments)
+	if v.Comments != nil {
+		serializeControlComments(s, schemas.AssessmentControl_comments, v.Comments)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AssessmentControl_description, *v.Description)
 	}
 	if v.EvidenceCount != 0 {
 		s.WriteInt32(schemas.AssessmentControl_evidenceCount, v.EvidenceCount)
 	}
-	serializeEvidenceSources(s, schemas.AssessmentControl_evidenceSources, v.EvidenceSources)
+	if v.EvidenceSources != nil {
+		serializeEvidenceSources(s, schemas.AssessmentControl_evidenceSources, v.EvidenceSources)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AssessmentControl_id, *v.Id)
 	}
@@ -229,8 +235,12 @@ func (v *AssessmentControlSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssessmentControlSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentControls(s, schemas.AssessmentControlSet_controls, v.Controls)
-	serializeDelegations(s, schemas.AssessmentControlSet_delegations, v.Delegations)
+	if v.Controls != nil {
+		serializeAssessmentControls(s, schemas.AssessmentControlSet_controls, v.Controls)
+	}
+	if v.Delegations != nil {
+		serializeDelegations(s, schemas.AssessmentControlSet_delegations, v.Delegations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AssessmentControlSet_description, *v.Description)
 	}
@@ -240,7 +250,9 @@ func (v *AssessmentControlSet) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ManualEvidenceCount != 0 {
 		s.WriteInt32(schemas.AssessmentControlSet_manualEvidenceCount, v.ManualEvidenceCount)
 	}
-	serializeRoles(s, schemas.AssessmentControlSet_roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.AssessmentControlSet_roles, v.Roles)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AssessmentControlSet_status, string(v.Status))
 	}
@@ -491,7 +503,9 @@ func (v *AssessmentFramework) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.AssessmentFramework_arn, *v.Arn)
 	}
-	serializeAssessmentControlSets(s, schemas.AssessmentFramework_controlSets, v.ControlSets)
+	if v.ControlSets != nil {
+		serializeAssessmentControlSets(s, schemas.AssessmentFramework_controlSets, v.ControlSets)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AssessmentFramework_id, *v.Id)
 	}
@@ -867,7 +881,9 @@ func (v *AssessmentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.AssessmentMetadata_creationTime, *v.CreationTime)
 	}
-	serializeDelegations(s, schemas.AssessmentMetadata_delegations, v.Delegations)
+	if v.Delegations != nil {
+		serializeDelegations(s, schemas.AssessmentMetadata_delegations, v.Delegations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.AssessmentMetadata_description, *v.Description)
 	}
@@ -880,7 +896,9 @@ func (v *AssessmentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AssessmentMetadata_name, *v.Name)
 	}
-	serializeRoles(s, schemas.AssessmentMetadata_roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.AssessmentMetadata_roles, v.Roles)
+	}
 	if v.Scope != nil {
 		s.WriteStruct(schemas.AssessmentMetadata_scope)
 		v.Scope.SerializeMembers(s)
@@ -977,7 +995,9 @@ func (v *AssessmentMetadataItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.AssessmentMetadataItem_creationTime, *v.CreationTime)
 	}
-	serializeDelegations(s, schemas.AssessmentMetadataItem_delegations, v.Delegations)
+	if v.Delegations != nil {
+		serializeDelegations(s, schemas.AssessmentMetadataItem_delegations, v.Delegations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AssessmentMetadataItem_id, *v.Id)
 	}
@@ -987,7 +1007,9 @@ func (v *AssessmentMetadataItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AssessmentMetadataItem_name, *v.Name)
 	}
-	serializeRoles(s, schemas.AssessmentMetadataItem_roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.AssessmentMetadataItem_roles, v.Roles)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AssessmentMetadataItem_status, string(v.Status))
 	}
@@ -1735,7 +1757,9 @@ func (v *Control) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Control_arn, *v.Arn)
 	}
-	serializeControlMappingSources(s, schemas.Control_controlMappingSources, v.ControlMappingSources)
+	if v.ControlMappingSources != nil {
+		serializeControlMappingSources(s, schemas.Control_controlMappingSources, v.ControlMappingSources)
+	}
 	if v.ControlSources != nil {
 		s.WriteString(schemas.Control_controlSources, *v.ControlSources)
 	}
@@ -1763,7 +1787,9 @@ func (v *Control) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.Control_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.Control_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Control_tags, v.Tags)
+	}
 	if v.TestingInformation != nil {
 		s.WriteString(schemas.Control_testingInformation, *v.TestingInformation)
 	}
@@ -2352,7 +2378,9 @@ func (v *ControlSet) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ControlSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeControls(s, schemas.ControlSet_controls, v.Controls)
+	if v.Controls != nil {
+		serializeControls(s, schemas.ControlSet_controls, v.Controls)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ControlSet_id, *v.Id)
 	}
@@ -2435,7 +2463,9 @@ func (v *CreateAssessmentFrameworkControlSet) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CreateAssessmentFrameworkControlSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateAssessmentFrameworkControls(s, schemas.CreateAssessmentFrameworkControlSet_controls, v.Controls)
+	if v.Controls != nil {
+		serializeCreateAssessmentFrameworkControls(s, schemas.CreateAssessmentFrameworkControlSet_controls, v.Controls)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAssessmentFrameworkControlSet_name, *v.Name)
 	}
@@ -3068,7 +3098,9 @@ func (v *Evidence) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssessmentReportSelection != nil {
 		s.WriteString(schemas.Evidence_assessmentReportSelection, *v.AssessmentReportSelection)
 	}
-	serializeEvidenceAttributes(s, schemas.Evidence_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeEvidenceAttributes(s, schemas.Evidence_attributes, v.Attributes)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.Evidence_awsAccountId, *v.AwsAccountId)
 	}
@@ -3102,7 +3134,9 @@ func (v *Evidence) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Evidence_id, *v.Id)
 	}
-	serializeResources(s, schemas.Evidence_resourcesIncluded, v.ResourcesIncluded)
+	if v.ResourcesIncluded != nil {
+		serializeResources(s, schemas.Evidence_resourcesIncluded, v.ResourcesIncluded)
+	}
 	if v.Time != nil {
 		s.WriteTime(schemas.Evidence_time, *v.Time)
 	}
@@ -3388,7 +3422,9 @@ func (v *Framework) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComplianceType != nil {
 		s.WriteString(schemas.Framework_complianceType, *v.ComplianceType)
 	}
-	serializeControlSets(s, schemas.Framework_controlSets, v.ControlSets)
+	if v.ControlSets != nil {
+		serializeControlSets(s, schemas.Framework_controlSets, v.ControlSets)
+	}
 	if v.ControlSources != nil {
 		s.WriteString(schemas.Framework_controlSources, *v.ControlSources)
 	}
@@ -3416,7 +3452,9 @@ func (v *Framework) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Framework_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.Framework_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Framework_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Framework_type, string(v.Type))
 	}
@@ -4073,8 +4111,12 @@ func (v *Scope) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Scope) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAWSAccounts(s, schemas.Scope_awsAccounts, v.AwsAccounts)
-	serializeAWSServices(s, schemas.Scope_awsServices, v.AwsServices)
+	if v.AwsAccounts != nil {
+		serializeAWSAccounts(s, schemas.Scope_awsAccounts, v.AwsAccounts)
+	}
+	if v.AwsServices != nil {
+		serializeAWSServices(s, schemas.Scope_awsServices, v.AwsServices)
+	}
 }
 func (v *Scope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Scope, func(s *smithy.Schema) error {
@@ -4196,7 +4238,9 @@ func (v *Settings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DefaultExportDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRoles(s, schemas.Settings_defaultProcessOwners, v.DefaultProcessOwners)
+	if v.DefaultProcessOwners != nil {
+		serializeRoles(s, schemas.Settings_defaultProcessOwners, v.DefaultProcessOwners)
+	}
 	if v.DeregistrationPolicy != nil {
 		s.WriteStruct(schemas.Settings_deregistrationPolicy)
 		v.DeregistrationPolicy.SerializeMembers(s)
@@ -4440,7 +4484,9 @@ func (v *UpdateAssessmentFrameworkControlSet) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateAssessmentFrameworkControlSet) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCreateAssessmentFrameworkControls(s, schemas.UpdateAssessmentFrameworkControlSet_controls, v.Controls)
+	if v.Controls != nil {
+		serializeCreateAssessmentFrameworkControls(s, schemas.UpdateAssessmentFrameworkControlSet_controls, v.Controls)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateAssessmentFrameworkControlSet_id, *v.Id)
 	}

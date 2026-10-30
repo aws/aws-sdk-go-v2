@@ -95,11 +95,15 @@ func (v *ListPhoneNumbersV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPhoneNumbersV2Request_NextToken, *v.NextToken)
 	}
-	serializePhoneNumberCountryCodes(s, schemas.ListPhoneNumbersV2Request_PhoneNumberCountryCodes, v.PhoneNumberCountryCodes)
+	if v.PhoneNumberCountryCodes != nil {
+		serializePhoneNumberCountryCodes(s, schemas.ListPhoneNumbersV2Request_PhoneNumberCountryCodes, v.PhoneNumberCountryCodes)
+	}
 	if v.PhoneNumberPrefix != nil {
 		s.WriteString(schemas.ListPhoneNumbersV2Request_PhoneNumberPrefix, *v.PhoneNumberPrefix)
 	}
-	serializePhoneNumberTypes(s, schemas.ListPhoneNumbersV2Request_PhoneNumberTypes, v.PhoneNumberTypes)
+	if v.PhoneNumberTypes != nil {
+		serializePhoneNumberTypes(s, schemas.ListPhoneNumbersV2Request_PhoneNumberTypes, v.PhoneNumberTypes)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.ListPhoneNumbersV2Request_TargetArn, *v.TargetArn)
 	}
@@ -127,7 +131,9 @@ func (v *ListPhoneNumbersV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPhoneNumbersV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListPhoneNumbersSummaryList(s, schemas.ListPhoneNumbersV2Response_ListPhoneNumbersSummaryList, v.ListPhoneNumbersSummaryList)
+	if v.ListPhoneNumbersSummaryList != nil {
+		serializeListPhoneNumbersSummaryList(s, schemas.ListPhoneNumbersV2Response_ListPhoneNumbersSummaryList, v.ListPhoneNumbersSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPhoneNumbersV2Response_NextToken, *v.NextToken)
 	}

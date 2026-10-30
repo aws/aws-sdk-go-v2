@@ -119,7 +119,9 @@ func (v *CreatePrefetchScheduleInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.StreamId != nil {
 		s.WriteString(schemas.CreatePrefetchScheduleRequest_StreamId, *v.StreamId)
 	}
-	serialize__mapOf__string(s, schemas.CreatePrefetchScheduleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreatePrefetchScheduleRequest_Tags, v.Tags)
+	}
 }
 func (v *CreatePrefetchScheduleInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePrefetchScheduleRequest, func(s *smithy.Schema) error {
@@ -244,7 +246,9 @@ func (v *CreatePrefetchScheduleOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.StreamId != nil {
 		s.WriteString(schemas.CreatePrefetchScheduleResponse_StreamId, *v.StreamId)
 	}
-	serialize__mapOf__string(s, schemas.CreatePrefetchScheduleResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreatePrefetchScheduleResponse_Tags, v.Tags)
+	}
 }
 func (v *CreatePrefetchScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePrefetchScheduleResponse, func(s *smithy.Schema) error {

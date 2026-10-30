@@ -60,7 +60,9 @@ func (v *BatchCheckLayerAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCheckLayerAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchedOperationLayerDigestList(s, schemas.BatchCheckLayerAvailabilityRequest_layerDigests, v.LayerDigests)
+	if v.LayerDigests != nil {
+		serializeBatchedOperationLayerDigestList(s, schemas.BatchCheckLayerAvailabilityRequest_layerDigests, v.LayerDigests)
+	}
 	if v.RegistryId != nil {
 		s.WriteString(schemas.BatchCheckLayerAvailabilityRequest_registryId, *v.RegistryId)
 	}
@@ -91,8 +93,12 @@ func (v *BatchCheckLayerAvailabilityOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchCheckLayerAvailabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayerFailureList(s, schemas.BatchCheckLayerAvailabilityResponse_failures, v.Failures)
-	serializeLayerList(s, schemas.BatchCheckLayerAvailabilityResponse_layers, v.Layers)
+	if v.Failures != nil {
+		serializeLayerFailureList(s, schemas.BatchCheckLayerAvailabilityResponse_failures, v.Failures)
+	}
+	if v.Layers != nil {
+		serializeLayerList(s, schemas.BatchCheckLayerAvailabilityResponse_layers, v.Layers)
+	}
 }
 func (v *BatchCheckLayerAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCheckLayerAvailabilityResponse, func(s *smithy.Schema) error {

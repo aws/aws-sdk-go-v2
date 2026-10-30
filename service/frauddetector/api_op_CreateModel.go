@@ -71,7 +71,9 @@ func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelType != "" {
 		s.WriteString(schemas.CreateModelRequest_modelType, string(v.ModelType))
 	}
-	serializetagList(s, schemas.CreateModelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateModelRequest_tags, v.Tags)
+	}
 }
 
 type CreateModelOutput struct {

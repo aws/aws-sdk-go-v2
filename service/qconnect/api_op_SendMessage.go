@@ -109,7 +109,9 @@ func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Message.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessageMetadata(s, schemas.SendMessageRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMessageMetadata(s, schemas.SendMessageRequest_metadata, v.Metadata)
+	}
 	if v.OrchestratorUseCase != nil {
 		s.WriteString(schemas.SendMessageRequest_orchestratorUseCase, *v.OrchestratorUseCase)
 	}

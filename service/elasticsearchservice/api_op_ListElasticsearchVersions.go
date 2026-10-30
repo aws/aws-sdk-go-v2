@@ -85,7 +85,9 @@ func (v *ListElasticsearchVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListElasticsearchVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeElasticsearchVersionList(s, schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions, v.ElasticsearchVersions)
+	if v.ElasticsearchVersions != nil {
+		serializeElasticsearchVersionList(s, schemas.ListElasticsearchVersionsResponse_ElasticsearchVersions, v.ElasticsearchVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListElasticsearchVersionsResponse_NextToken, *v.NextToken)
 	}

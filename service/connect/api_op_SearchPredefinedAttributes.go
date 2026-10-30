@@ -121,7 +121,9 @@ func (v *SearchPredefinedAttributesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchPredefinedAttributesResponse_NextToken, *v.NextToken)
 	}
-	serializePredefinedAttributeSearchSummaryList(s, schemas.SearchPredefinedAttributesResponse_PredefinedAttributes, v.PredefinedAttributes)
+	if v.PredefinedAttributes != nil {
+		serializePredefinedAttributeSearchSummaryList(s, schemas.SearchPredefinedAttributesResponse_PredefinedAttributes, v.PredefinedAttributes)
+	}
 }
 func (v *SearchPredefinedAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchPredefinedAttributesResponse, func(s *smithy.Schema) error {

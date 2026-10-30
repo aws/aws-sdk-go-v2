@@ -138,7 +138,9 @@ func (v *GetFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Rank != nil {
 		s.WriteInt32(schemas.GetFilterResponse_Rank, *v.Rank)
 	}
-	serializeTagMap(s, schemas.GetFilterResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetFilterResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetFilterResponse_UpdatedAt, *v.UpdatedAt)
 	}

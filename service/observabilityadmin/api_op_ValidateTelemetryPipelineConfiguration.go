@@ -69,7 +69,9 @@ func (v *ValidateTelemetryPipelineConfigurationOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ValidateTelemetryPipelineConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationErrors(s, schemas.ValidateTelemetryPipelineConfigurationOutput_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeValidationErrors(s, schemas.ValidateTelemetryPipelineConfigurationOutput_Errors, v.Errors)
+	}
 }
 func (v *ValidateTelemetryPipelineConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateTelemetryPipelineConfigurationOutput, func(s *smithy.Schema) error {

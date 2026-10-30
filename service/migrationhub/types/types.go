@@ -188,7 +188,9 @@ func (v *MigrationTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProgressUpdateStream != nil {
 		s.WriteString(schemas.MigrationTask_ProgressUpdateStream, *v.ProgressUpdateStream)
 	}
-	serializeLatestResourceAttributeList(s, schemas.MigrationTask_ResourceAttributeList, v.ResourceAttributeList)
+	if v.ResourceAttributeList != nil {
+		serializeLatestResourceAttributeList(s, schemas.MigrationTask_ResourceAttributeList, v.ResourceAttributeList)
+	}
 	if v.Task != nil {
 		s.WriteStruct(schemas.MigrationTask_Task)
 		v.Task.SerializeMembers(s)

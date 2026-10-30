@@ -122,7 +122,9 @@ func (v *ListLabelingJobsForWorkteamOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListLabelingJobsForWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLabelingJobForWorkteamSummaryList(s, schemas.ListLabelingJobsForWorkteamResponse_LabelingJobSummaryList, v.LabelingJobSummaryList)
+	if v.LabelingJobSummaryList != nil {
+		serializeLabelingJobForWorkteamSummaryList(s, schemas.ListLabelingJobsForWorkteamResponse_LabelingJobSummaryList, v.LabelingJobSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLabelingJobsForWorkteamResponse_NextToken, *v.NextToken)
 	}

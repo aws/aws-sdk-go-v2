@@ -127,7 +127,9 @@ func (v *AuthenticationDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.AwsSso.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAuthenticationProviders(s, schemas.AuthenticationDescription_providers, v.Providers)
+	if v.Providers != nil {
+		serializeAuthenticationProviders(s, schemas.AuthenticationDescription_providers, v.Providers)
+	}
 	if v.Saml != nil {
 		s.WriteStruct(schemas.AuthenticationDescription_saml)
 		v.Saml.SerializeMembers(s)
@@ -175,7 +177,9 @@ func (v *AuthenticationSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuthenticationSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthenticationProviders(s, schemas.AuthenticationSummary_providers, v.Providers)
+	if v.Providers != nil {
+		serializeAuthenticationProviders(s, schemas.AuthenticationSummary_providers, v.Providers)
+	}
 	if v.SamlConfigurationStatus != "" {
 		s.WriteString(schemas.AuthenticationSummary_samlConfigurationStatus, string(v.SamlConfigurationStatus))
 	}
@@ -341,8 +345,12 @@ func (v *NetworkAccessConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkAccessConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrefixListIds(s, schemas.NetworkAccessConfiguration_prefixListIds, v.PrefixListIds)
-	serializeVpceIds(s, schemas.NetworkAccessConfiguration_vpceIds, v.VpceIds)
+	if v.PrefixListIds != nil {
+		serializePrefixListIds(s, schemas.NetworkAccessConfiguration_prefixListIds, v.PrefixListIds)
+	}
+	if v.VpceIds != nil {
+		serializeVpceIds(s, schemas.NetworkAccessConfiguration_vpceIds, v.VpceIds)
+	}
 }
 func (v *NetworkAccessConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkAccessConfiguration, func(s *smithy.Schema) error {
@@ -431,8 +439,12 @@ func (v *RoleValues) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoleValues) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRoleValueList(s, schemas.RoleValues_admin, v.Admin)
-	serializeRoleValueList(s, schemas.RoleValues_editor, v.Editor)
+	if v.Admin != nil {
+		serializeRoleValueList(s, schemas.RoleValues_admin, v.Admin)
+	}
+	if v.Editor != nil {
+		serializeRoleValueList(s, schemas.RoleValues_editor, v.Editor)
+	}
 }
 func (v *RoleValues) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoleValues, func(s *smithy.Schema) error {
@@ -531,13 +543,17 @@ func (v *SamlConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SamlConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedOrganizations(s, schemas.SamlConfiguration_allowedOrganizations, v.AllowedOrganizations)
+	if v.AllowedOrganizations != nil {
+		serializeAllowedOrganizations(s, schemas.SamlConfiguration_allowedOrganizations, v.AllowedOrganizations)
+	}
 	if v.AssertionAttributes != nil {
 		s.WriteStruct(schemas.SamlConfiguration_assertionAttributes)
 		v.AssertionAttributes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdpMetadata(s, schemas.SamlConfiguration_idpMetadata, v.IdpMetadata)
+	if v.IdpMetadata != nil {
+		serializeIdpMetadata(s, schemas.SamlConfiguration_idpMetadata, v.IdpMetadata)
+	}
 	if v.LoginValidityDuration != 0 {
 		s.WriteInt32(schemas.SamlConfiguration_loginValidityDuration, v.LoginValidityDuration)
 	}
@@ -873,7 +889,9 @@ func (v *UpdateInstruction) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Role != "" {
 		s.WriteString(schemas.UpdateInstruction_role, string(v.Role))
 	}
-	serializeUserList(s, schemas.UpdateInstruction_users, v.Users)
+	if v.Users != nil {
+		serializeUserList(s, schemas.UpdateInstruction_users, v.Users)
+	}
 }
 func (v *UpdateInstruction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateInstruction, func(s *smithy.Schema) error {
@@ -1026,8 +1044,12 @@ func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcConfiguration_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcConfiguration_subnetIds, v.SubnetIds)
+	}
 }
 func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
@@ -1222,7 +1244,9 @@ func (v *WorkspaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Created != nil {
 		s.WriteTime(schemas.WorkspaceDescription_created, *v.Created)
 	}
-	serializeDataSourceTypesList(s, schemas.WorkspaceDescription_dataSources, v.DataSources)
+	if v.DataSources != nil {
+		serializeDataSourceTypesList(s, schemas.WorkspaceDescription_dataSources, v.DataSources)
+	}
 	if v.DegradedWorkspaceReason != nil {
 		s.WriteString(schemas.WorkspaceDescription_degradedWorkspaceReason, *v.DegradedWorkspaceReason)
 	}
@@ -1270,11 +1294,15 @@ func (v *WorkspaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkAccessControl.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNotificationDestinationsList(s, schemas.WorkspaceDescription_notificationDestinations, v.NotificationDestinations)
+	if v.NotificationDestinations != nil {
+		serializeNotificationDestinationsList(s, schemas.WorkspaceDescription_notificationDestinations, v.NotificationDestinations)
+	}
 	if v.OrganizationRoleName != nil {
 		s.WriteString(schemas.WorkspaceDescription_organizationRoleName, *v.OrganizationRoleName)
 	}
-	serializeOrganizationalUnitList(s, schemas.WorkspaceDescription_organizationalUnits, v.OrganizationalUnits)
+	if v.OrganizationalUnits != nil {
+		serializeOrganizationalUnitList(s, schemas.WorkspaceDescription_organizationalUnits, v.OrganizationalUnits)
+	}
 	if v.PermissionType != "" {
 		s.WriteString(schemas.WorkspaceDescription_permissionType, string(v.PermissionType))
 	}
@@ -1284,7 +1312,9 @@ func (v *WorkspaceDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.WorkspaceDescription_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.WorkspaceDescription_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.WorkspaceDescription_tags, v.Tags)
+	}
 	if v.VpcConfiguration != nil {
 		s.WriteStruct(schemas.WorkspaceDescription_vpcConfiguration)
 		v.VpcConfiguration.SerializeMembers(s)
@@ -1509,11 +1539,15 @@ func (v *WorkspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.WorkspaceSummary_name, *v.Name)
 	}
-	serializeNotificationDestinationsList(s, schemas.WorkspaceSummary_notificationDestinations, v.NotificationDestinations)
+	if v.NotificationDestinations != nil {
+		serializeNotificationDestinationsList(s, schemas.WorkspaceSummary_notificationDestinations, v.NotificationDestinations)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.WorkspaceSummary_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.WorkspaceSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.WorkspaceSummary_tags, v.Tags)
+	}
 }
 func (v *WorkspaceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkspaceSummary, func(s *smithy.Schema) error {

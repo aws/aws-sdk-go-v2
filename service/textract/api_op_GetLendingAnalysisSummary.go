@@ -117,7 +117,9 @@ func (v *GetLendingAnalysisSummaryOutput) SerializeMembers(s smithy.ShapeSeriali
 		v.Summary.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWarnings(s, schemas.GetLendingAnalysisSummaryResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarnings(s, schemas.GetLendingAnalysisSummaryResponse_Warnings, v.Warnings)
+	}
 }
 func (v *GetLendingAnalysisSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLendingAnalysisSummaryResponse, func(s *smithy.Schema) error {

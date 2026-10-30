@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAccountDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccountDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAccountDetailsList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeAccountIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -32,9 +26,6 @@ func serializeAccountIds(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeAuthorities(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Authority) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +36,6 @@ func serializeAuthorities(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeBatchDeleteTaxRegistrationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeleteTaxRegistrationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -58,9 +46,6 @@ func serializeBatchDeleteTaxRegistrationErrors(s smithy.ShapeSerializer, schema 
 }
 
 func serializeBatchPutTaxRegistrationErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchPutTaxRegistrationError) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -71,9 +56,6 @@ func serializeBatchPutTaxRegistrationErrors(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeMalaysiaServiceTaxCodesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MalaysiaServiceTaxCode) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -82,9 +64,6 @@ func serializeMalaysiaServiceTaxCodesList(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeSupplementalTaxRegistrationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SupplementalTaxRegistration) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -95,9 +74,6 @@ func serializeSupplementalTaxRegistrationList(s smithy.ShapeSerializer, schema *
 }
 
 func serializeTaxDocumentMetadatas(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TaxDocumentMetadata) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -108,9 +84,6 @@ func serializeTaxDocumentMetadatas(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeTaxExemptions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TaxExemption) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -121,9 +94,6 @@ func serializeTaxExemptions(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTaxExemptionTypes(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TaxExemptionType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -134,9 +104,6 @@ func serializeTaxExemptionTypes(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeTaxRegistrationDocuments(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TaxRegistrationDocument) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -147,9 +114,6 @@ func serializeTaxRegistrationDocuments(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -422,9 +386,6 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeAddressRoleMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.Jurisdiction) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -436,9 +397,6 @@ func serializeAddressRoleMap(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeTaxExemptionDetailsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]types.TaxExemptionDetails) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

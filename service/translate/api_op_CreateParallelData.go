@@ -91,7 +91,9 @@ func (v *CreateParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ParallelDataConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateParallelDataRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateParallelDataRequest_Tags, v.Tags)
+	}
 }
 
 type CreateParallelDataOutput struct {

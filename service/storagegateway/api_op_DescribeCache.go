@@ -112,7 +112,9 @@ func (v *DescribeCacheOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CacheUsedPercentage != 0 {
 		s.WriteFloat64(schemas.DescribeCacheOutput_CacheUsedPercentage, v.CacheUsedPercentage)
 	}
-	serializeDiskIds(s, schemas.DescribeCacheOutput_DiskIds, v.DiskIds)
+	if v.DiskIds != nil {
+		serializeDiskIds(s, schemas.DescribeCacheOutput_DiskIds, v.DiskIds)
+	}
 	if v.GatewayARN != nil {
 		s.WriteString(schemas.DescribeCacheOutput_GatewayARN, *v.GatewayARN)
 	}

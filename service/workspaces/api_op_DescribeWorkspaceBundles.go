@@ -56,7 +56,9 @@ func (v *DescribeWorkspaceBundlesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkspaceBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBundleIdList(s, schemas.DescribeWorkspaceBundlesRequest_BundleIds, v.BundleIds)
+	if v.BundleIds != nil {
+		serializeBundleIdList(s, schemas.DescribeWorkspaceBundlesRequest_BundleIds, v.BundleIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceBundlesRequest_NextToken, *v.NextToken)
 	}
@@ -88,7 +90,9 @@ func (v *DescribeWorkspaceBundlesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkspaceBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBundleList(s, schemas.DescribeWorkspaceBundlesResult_Bundles, v.Bundles)
+	if v.Bundles != nil {
+		serializeBundleList(s, schemas.DescribeWorkspaceBundlesResult_Bundles, v.Bundles)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspaceBundlesResult_NextToken, *v.NextToken)
 	}

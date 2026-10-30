@@ -114,7 +114,9 @@ func (v *ListMicrovmImageBuildsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMicrovmImageBuildsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMicrovmImageBuildSummaries(s, schemas.ListMicrovmImageBuildsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeMicrovmImageBuildSummaries(s, schemas.ListMicrovmImageBuildsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMicrovmImageBuildsOutput_nextToken, *v.NextToken)
 	}

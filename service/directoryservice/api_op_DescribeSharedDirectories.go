@@ -63,7 +63,9 @@ func (v *DescribeSharedDirectoriesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.OwnerDirectoryId != nil {
 		s.WriteString(schemas.DescribeSharedDirectoriesRequest_OwnerDirectoryId, *v.OwnerDirectoryId)
 	}
-	serializeDirectoryIds(s, schemas.DescribeSharedDirectoriesRequest_SharedDirectoryIds, v.SharedDirectoryIds)
+	if v.SharedDirectoryIds != nil {
+		serializeDirectoryIds(s, schemas.DescribeSharedDirectoriesRequest_SharedDirectoryIds, v.SharedDirectoryIds)
+	}
 }
 
 type DescribeSharedDirectoriesOutput struct {
@@ -92,7 +94,9 @@ func (v *DescribeSharedDirectoriesOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSharedDirectoriesResult_NextToken, *v.NextToken)
 	}
-	serializeSharedDirectories(s, schemas.DescribeSharedDirectoriesResult_SharedDirectories, v.SharedDirectories)
+	if v.SharedDirectories != nil {
+		serializeSharedDirectories(s, schemas.DescribeSharedDirectoriesResult_SharedDirectories, v.SharedDirectories)
+	}
 }
 func (v *DescribeSharedDirectoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSharedDirectoriesResult, func(s *smithy.Schema) error {

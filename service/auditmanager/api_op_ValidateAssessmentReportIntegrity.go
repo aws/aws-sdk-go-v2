@@ -91,7 +91,9 @@ func (v *ValidateAssessmentReportIntegrityOutput) SerializeMembers(s smithy.Shap
 	if v.SignatureValid != nil {
 		s.WriteBool(schemas.ValidateAssessmentReportIntegrityResponse_signatureValid, *v.SignatureValid)
 	}
-	serializeValidationErrors(s, schemas.ValidateAssessmentReportIntegrityResponse_validationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serializeValidationErrors(s, schemas.ValidateAssessmentReportIntegrityResponse_validationErrors, v.ValidationErrors)
+	}
 }
 func (v *ValidateAssessmentReportIntegrityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidateAssessmentReportIntegrityResponse, func(s *smithy.Schema) error {

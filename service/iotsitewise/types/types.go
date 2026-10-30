@@ -648,7 +648,9 @@ func (v *AssetCompositeModel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AssetCompositeModel_name, *v.Name)
 	}
-	serializeAssetProperties(s, schemas.AssetCompositeModel_properties, v.Properties)
+	if v.Properties != nil {
+		serializeAssetProperties(s, schemas.AssetCompositeModel_properties, v.Properties)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.AssetCompositeModel_type, *v.Type)
 	}
@@ -783,7 +785,9 @@ func (v *AssetCompositeModelSummary) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.AssetCompositeModelSummary_name, *v.Name)
 	}
-	serializeAssetCompositeModelPath(s, schemas.AssetCompositeModelSummary_path, v.Path)
+	if v.Path != nil {
+		serializeAssetCompositeModelPath(s, schemas.AssetCompositeModelSummary_path, v.Path)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.AssetCompositeModelSummary_type, *v.Type)
 	}
@@ -1060,7 +1064,9 @@ func (v *AssetModelCompositeModel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AssetModelCompositeModel_name, *v.Name)
 	}
-	serializeAssetModelProperties(s, schemas.AssetModelCompositeModel_properties, v.Properties)
+	if v.Properties != nil {
+		serializeAssetModelProperties(s, schemas.AssetModelCompositeModel_properties, v.Properties)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.AssetModelCompositeModel_type, *v.Type)
 	}
@@ -1146,7 +1152,9 @@ func (v *AssetModelCompositeModelDefinition) SerializeMembers(s smithy.ShapeSeri
 	if v.Name != nil {
 		s.WriteString(schemas.AssetModelCompositeModelDefinition_name, *v.Name)
 	}
-	serializeAssetModelPropertyDefinitions(s, schemas.AssetModelCompositeModelDefinition_properties, v.Properties)
+	if v.Properties != nil {
+		serializeAssetModelPropertyDefinitions(s, schemas.AssetModelCompositeModelDefinition_properties, v.Properties)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.AssetModelCompositeModelDefinition_type, *v.Type)
 	}
@@ -1269,7 +1277,9 @@ func (v *AssetModelCompositeModelSummary) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.AssetModelCompositeModelSummary_name, *v.Name)
 	}
-	serializeAssetModelCompositeModelPath(s, schemas.AssetModelCompositeModelSummary_path, v.Path)
+	if v.Path != nil {
+		serializeAssetModelCompositeModelPath(s, schemas.AssetModelCompositeModelSummary_path, v.Path)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.AssetModelCompositeModelSummary_type, *v.Type)
 	}
@@ -1560,7 +1570,9 @@ func (v *AssetModelProperty) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AssetModelProperty_name, *v.Name)
 	}
-	serializeAssetModelPropertyPath(s, schemas.AssetModelProperty_path, v.Path)
+	if v.Path != nil {
+		serializeAssetModelPropertyPath(s, schemas.AssetModelProperty_path, v.Path)
+	}
 	if v.Type != nil {
 		s.WriteStruct(schemas.AssetModelProperty_type)
 		v.Type.SerializeMembers(s)
@@ -1927,11 +1939,15 @@ func (v *AssetModelPropertySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.AssetModelPropertySummary_id, *v.Id)
 	}
-	serializeInterfaceSummaries(s, schemas.AssetModelPropertySummary_interfaceSummaries, v.InterfaceSummaries)
+	if v.InterfaceSummaries != nil {
+		serializeInterfaceSummaries(s, schemas.AssetModelPropertySummary_interfaceSummaries, v.InterfaceSummaries)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AssetModelPropertySummary_name, *v.Name)
 	}
-	serializeAssetModelPropertyPath(s, schemas.AssetModelPropertySummary_path, v.Path)
+	if v.Path != nil {
+		serializeAssetModelPropertyPath(s, schemas.AssetModelPropertySummary_path, v.Path)
+	}
 	if v.Type != nil {
 		s.WriteStruct(schemas.AssetModelPropertySummary_type)
 		v.Type.SerializeMembers(s)
@@ -2257,7 +2273,9 @@ func (v *AssetProperty) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Notification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssetPropertyPath(s, schemas.AssetProperty_path, v.Path)
+	if v.Path != nil {
+		serializeAssetPropertyPath(s, schemas.AssetProperty_path, v.Path)
+	}
 	if v.Unit != nil {
 		s.WriteString(schemas.AssetProperty_unit, *v.Unit)
 	}
@@ -2500,7 +2518,9 @@ func (v *AssetPropertySummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Notification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssetPropertyPath(s, schemas.AssetPropertySummary_path, v.Path)
+	if v.Path != nil {
+		serializeAssetPropertyPath(s, schemas.AssetPropertySummary_path, v.Path)
+	}
 	if v.Unit != nil {
 		s.WriteString(schemas.AssetPropertySummary_unit, *v.Unit)
 	}
@@ -2782,7 +2802,9 @@ func (v *AssetSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExternalId != nil {
 		s.WriteString(schemas.AssetSummary_externalId, *v.ExternalId)
 	}
-	serializeAssetHierarchies(s, schemas.AssetSummary_hierarchies, v.Hierarchies)
+	if v.Hierarchies != nil {
+		serializeAssetHierarchies(s, schemas.AssetSummary_hierarchies, v.Hierarchies)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AssetSummary_id, *v.Id)
 	}
@@ -2917,7 +2939,9 @@ func (v *AssociatedAssetsSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExternalId != nil {
 		s.WriteString(schemas.AssociatedAssetsSummary_externalId, *v.ExternalId)
 	}
-	serializeAssetHierarchies(s, schemas.AssociatedAssetsSummary_hierarchies, v.Hierarchies)
+	if v.Hierarchies != nil {
+		serializeAssetHierarchies(s, schemas.AssociatedAssetsSummary_hierarchies, v.Hierarchies)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.AssociatedAssetsSummary_id, *v.Id)
 	}
@@ -3152,7 +3176,9 @@ func (v *BatchGetAssetPropertyAggregatesEntry) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchGetAssetPropertyAggregatesEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregateTypes(s, schemas.BatchGetAssetPropertyAggregatesEntry_aggregateTypes, v.AggregateTypes)
+	if v.AggregateTypes != nil {
+		serializeAggregateTypes(s, schemas.BatchGetAssetPropertyAggregatesEntry_aggregateTypes, v.AggregateTypes)
+	}
 	if v.AssetId != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyAggregatesEntry_assetId, *v.AssetId)
 	}
@@ -3168,7 +3194,9 @@ func (v *BatchGetAssetPropertyAggregatesEntry) SerializeMembers(s smithy.ShapeSe
 	if v.PropertyId != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyAggregatesEntry_propertyId, *v.PropertyId)
 	}
-	serializeQualities(s, schemas.BatchGetAssetPropertyAggregatesEntry_qualities, v.Qualities)
+	if v.Qualities != nil {
+		serializeQualities(s, schemas.BatchGetAssetPropertyAggregatesEntry_qualities, v.Qualities)
+	}
 	if v.Resolution != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyAggregatesEntry_resolution, *v.Resolution)
 	}
@@ -3422,7 +3450,9 @@ func (v *BatchGetAssetPropertyAggregatesSuccessEntry) Serialize(s smithy.ShapeSe
 }
 
 func (v *BatchGetAssetPropertyAggregatesSuccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregatedValues(s, schemas.BatchGetAssetPropertyAggregatesSuccessEntry_aggregatedValues, v.AggregatedValues)
+	if v.AggregatedValues != nil {
+		serializeAggregatedValues(s, schemas.BatchGetAssetPropertyAggregatesSuccessEntry_aggregatedValues, v.AggregatedValues)
+	}
 	if v.EntryId != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyAggregatesSuccessEntry_entryId, *v.EntryId)
 	}
@@ -3700,7 +3730,9 @@ func (v *BatchGetAssetPropertyValueHistoryEntry) SerializeMembers(s smithy.Shape
 	if v.PropertyId != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyValueHistoryEntry_propertyId, *v.PropertyId)
 	}
-	serializeQualities(s, schemas.BatchGetAssetPropertyValueHistoryEntry_qualities, v.Qualities)
+	if v.Qualities != nil {
+		serializeQualities(s, schemas.BatchGetAssetPropertyValueHistoryEntry_qualities, v.Qualities)
+	}
 	if v.StartDate != nil {
 		s.WriteTime(schemas.BatchGetAssetPropertyValueHistoryEntry_startDate, *v.StartDate)
 	}
@@ -3940,7 +3972,9 @@ func (v *BatchGetAssetPropertyValueHistorySuccessEntry) Serialize(s smithy.Shape
 }
 
 func (v *BatchGetAssetPropertyValueHistorySuccessEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetPropertyValueHistory(s, schemas.BatchGetAssetPropertyValueHistorySuccessEntry_assetPropertyValueHistory, v.AssetPropertyValueHistory)
+	if v.AssetPropertyValueHistory != nil {
+		serializeAssetPropertyValueHistory(s, schemas.BatchGetAssetPropertyValueHistorySuccessEntry_assetPropertyValueHistory, v.AssetPropertyValueHistory)
+	}
 	if v.EntryId != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyValueHistorySuccessEntry_entryId, *v.EntryId)
 	}
@@ -4102,7 +4136,9 @@ func (v *BatchPutAssetPropertyError) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.BatchPutAssetPropertyError_errorMessage, *v.ErrorMessage)
 	}
-	serializeTimestamps(s, schemas.BatchPutAssetPropertyError_timestamps, v.Timestamps)
+	if v.Timestamps != nil {
+		serializeTimestamps(s, schemas.BatchPutAssetPropertyError_timestamps, v.Timestamps)
+	}
 }
 func (v *BatchPutAssetPropertyError) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutAssetPropertyError, func(s *smithy.Schema) error {
@@ -4153,7 +4189,9 @@ func (v *BatchPutAssetPropertyErrorEntry) SerializeMembers(s smithy.ShapeSeriali
 	if v.EntryId != nil {
 		s.WriteString(schemas.BatchPutAssetPropertyErrorEntry_entryId, *v.EntryId)
 	}
-	serializeBatchPutAssetPropertyErrors(s, schemas.BatchPutAssetPropertyErrorEntry_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchPutAssetPropertyErrors(s, schemas.BatchPutAssetPropertyErrorEntry_errors, v.Errors)
+	}
 }
 func (v *BatchPutAssetPropertyErrorEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutAssetPropertyErrorEntry, func(s *smithy.Schema) error {
@@ -4432,7 +4470,9 @@ func (v *CompositionDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompositionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompositionRelationship(s, schemas.CompositionDetails_compositionRelationship, v.CompositionRelationship)
+	if v.CompositionRelationship != nil {
+		serializeCompositionRelationship(s, schemas.CompositionDetails_compositionRelationship, v.CompositionRelationship)
+	}
 }
 func (v *CompositionDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompositionDetails, func(s *smithy.Schema) error {
@@ -4639,7 +4679,9 @@ func (v *ComputationModelDataBindingUsageSummary) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ComputationModelDataBindingUsageSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputationModelIdList(s, schemas.ComputationModelDataBindingUsageSummary_computationModelIds, v.ComputationModelIds)
+	if v.ComputationModelIds != nil {
+		serializeComputationModelIdList(s, schemas.ComputationModelDataBindingUsageSummary_computationModelIds, v.ComputationModelIds)
+	}
 	if v.MatchedDataBinding != nil {
 		s.WriteStruct(schemas.ComputationModelDataBindingUsageSummary_matchedDataBinding)
 		v.MatchedDataBinding.SerializeMembers(s)
@@ -4692,7 +4734,9 @@ func (v *ComputationModelDataBindingValue) SerializeMembers(s smithy.ShapeSerial
 		v.AssetProperty.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBindingValueList(s, schemas.ComputationModelDataBindingValue_list, v.List)
+	if v.List != nil {
+		serializeBindingValueList(s, schemas.ComputationModelDataBindingValue_list, v.List)
+	}
 }
 func (v *ComputationModelDataBindingValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComputationModelDataBindingValue, func(s *smithy.Schema) error {
@@ -4955,8 +4999,12 @@ func (v *ComputeNode) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComputeNodeName != nil {
 		s.WriteString(schemas.ComputeNode_computeNodeName, *v.ComputeNodeName)
 	}
-	serializeComputeNodeNameList(s, schemas.ComputeNode_dependsOn, v.DependsOn)
-	serializeEnvironmentVariablesMap(s, schemas.ComputeNode_environmentVariables, v.EnvironmentVariables)
+	if v.DependsOn != nil {
+		serializeComputeNodeNameList(s, schemas.ComputeNode_dependsOn, v.DependsOn)
+	}
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.ComputeNode_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.TaskName != nil {
 		s.WriteString(schemas.ComputeNode_taskName, *v.TaskName)
 	}
@@ -5041,12 +5089,18 @@ func (v *ComputeNodeExecutionDetails) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ComputeNodeName != nil {
 		s.WriteString(schemas.ComputeNodeExecutionDetails_computeNodeName, *v.ComputeNodeName)
 	}
-	serializeComputeNodeNameList(s, schemas.ComputeNodeExecutionDetails_dependsOn, v.DependsOn)
+	if v.DependsOn != nil {
+		serializeComputeNodeNameList(s, schemas.ComputeNodeExecutionDetails_dependsOn, v.DependsOn)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.ComputeNodeExecutionDetails_endTime, *v.EndTime)
 	}
-	serializeExecutionEnvironmentVariablesMap(s, schemas.ComputeNodeExecutionDetails_executionEnvironmentVariables, v.ExecutionEnvironmentVariables)
-	serializeMountList(s, schemas.ComputeNodeExecutionDetails_executionMounts, v.ExecutionMounts)
+	if v.ExecutionEnvironmentVariables != nil {
+		serializeExecutionEnvironmentVariablesMap(s, schemas.ComputeNodeExecutionDetails_executionEnvironmentVariables, v.ExecutionEnvironmentVariables)
+	}
+	if v.ExecutionMounts != nil {
+		serializeMountList(s, schemas.ComputeNodeExecutionDetails_executionMounts, v.ExecutionMounts)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ComputeNodeExecutionDetails_startTime, *v.StartTime)
 	}
@@ -5129,7 +5183,9 @@ func (v *ComputeNodeExecutionStateDetails) SerializeMembers(s smithy.ShapeSerial
 	if v.Code != "" {
 		s.WriteString(schemas.ComputeNodeExecutionStateDetails_code, string(v.Code))
 	}
-	serializeDetailedErrorList(s, schemas.ComputeNodeExecutionStateDetails_details, v.Details)
+	if v.Details != nil {
+		serializeDetailedErrorList(s, schemas.ComputeNodeExecutionStateDetails_details, v.Details)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ComputeNodeExecutionStateDetails_message, *v.Message)
 	}
@@ -5353,17 +5409,23 @@ func (v *ContainerTaskConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerTaskConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandList(s, schemas.ContainerTaskConfiguration_command, v.Command)
+	if v.Command != nil {
+		serializeCommandList(s, schemas.ContainerTaskConfiguration_command, v.Command)
+	}
 	if v.EcrUri != nil {
 		s.WriteString(schemas.ContainerTaskConfiguration_ecrUri, *v.EcrUri)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.ContainerTaskConfiguration_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.ContainerTaskConfiguration_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.EphemeralStorageConfiguration != nil {
 		s.WriteStruct(schemas.ContainerTaskConfiguration_ephemeralStorageConfiguration)
 		v.EphemeralStorageConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMountList(s, schemas.ContainerTaskConfiguration_mounts, v.Mounts)
+	if v.Mounts != nil {
+		serializeMountList(s, schemas.ContainerTaskConfiguration_mounts, v.Mounts)
+	}
 	if v.ProcessingType != "" {
 		s.WriteString(schemas.ContainerTaskConfiguration_processingType, string(v.ProcessingType))
 	}
@@ -5466,7 +5528,9 @@ func (v *Csv) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Csv) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnNames(s, schemas.Csv_columnNames, v.ColumnNames)
+	if v.ColumnNames != nil {
+		serializeColumnNames(s, schemas.Csv_columnNames, v.ColumnNames)
+	}
 }
 func (v *Csv) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Csv, func(s *smithy.Schema) error {
@@ -6097,7 +6161,9 @@ func (v *DatasetItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetId != nil {
 		s.WriteString(schemas.DatasetItem_datasetId, *v.DatasetId)
 	}
-	serializeExportDataTypeList(s, schemas.DatasetItem_exportDataTypes, v.ExportDataTypes)
+	if v.ExportDataTypes != nil {
+		serializeExportDataTypeList(s, schemas.DatasetItem_exportDataTypes, v.ExportDataTypes)
+	}
 	if v.TrimSettings != nil {
 		s.WriteStruct(schemas.DatasetItem_trimSettings)
 		v.TrimSettings.SerializeMembers(s)
@@ -6446,7 +6512,9 @@ func (v *Datum) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Datum) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatumList(s, schemas.Datum_arrayValue, v.ArrayValue)
+	if v.ArrayValue != nil {
+		serializeDatumList(s, schemas.Datum_arrayValue, v.ArrayValue)
+	}
 	if v.NullValue != nil {
 		s.WriteBool(schemas.Datum_nullValue, *v.NullValue)
 	}
@@ -7027,7 +7095,9 @@ func (v *ErrorDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Code != "" {
 		s.WriteString(schemas.ErrorDetails_code, string(v.Code))
 	}
-	serializeDetailedErrors(s, schemas.ErrorDetails_details, v.Details)
+	if v.Details != nil {
+		serializeDetailedErrors(s, schemas.ErrorDetails_details, v.Details)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ErrorDetails_message, *v.Message)
 	}
@@ -7207,8 +7277,12 @@ func (v *ExecutionEnvironmentVariables) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecutionEnvironmentVariables) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeNodeEnvironmentVariablesMap(s, schemas.ExecutionEnvironmentVariables_computeNodes, v.ComputeNodes)
-	serializeEnvironmentVariablesMap(s, schemas.ExecutionEnvironmentVariables_global, v.Global)
+	if v.ComputeNodes != nil {
+		serializeComputeNodeEnvironmentVariablesMap(s, schemas.ExecutionEnvironmentVariables_computeNodes, v.ComputeNodes)
+	}
+	if v.Global != nil {
+		serializeEnvironmentVariablesMap(s, schemas.ExecutionEnvironmentVariables_global, v.Global)
+	}
 }
 func (v *ExecutionEnvironmentVariables) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExecutionEnvironmentVariables, func(s *smithy.Schema) error {
@@ -8242,7 +8316,9 @@ func (v *GatewaySummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.GatewaySummary_creationDate, *v.CreationDate)
 	}
-	serializeGatewayCapabilitySummaries(s, schemas.GatewaySummary_gatewayCapabilitySummaries, v.GatewayCapabilitySummaries)
+	if v.GatewayCapabilitySummaries != nil {
+		serializeGatewayCapabilitySummaries(s, schemas.GatewaySummary_gatewayCapabilitySummaries, v.GatewayCapabilitySummaries)
+	}
 	if v.GatewayId != nil {
 		s.WriteString(schemas.GatewaySummary_gatewayId, *v.GatewayId)
 	}
@@ -8935,7 +9011,9 @@ func (v *InvocationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCitations(s, schemas.InvocationOutput_citations, v.Citations)
+	if v.Citations != nil {
+		serializeCitations(s, schemas.InvocationOutput_citations, v.Citations)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.InvocationOutput_message, *v.Message)
 	}
@@ -9137,15 +9215,21 @@ func (v *ListSearchesFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSearchesFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupIdFilterList(s, schemas.ListSearchesFilters_groupIdFilter, v.GroupIdFilter)
-	serializeSearchTypeFilterList(s, schemas.ListSearchesFilters_searchTypeFilter, v.SearchTypeFilter)
+	if v.GroupIdFilter != nil {
+		serializeGroupIdFilterList(s, schemas.ListSearchesFilters_groupIdFilter, v.GroupIdFilter)
+	}
+	if v.SearchTypeFilter != nil {
+		serializeSearchTypeFilterList(s, schemas.ListSearchesFilters_searchTypeFilter, v.SearchTypeFilter)
+	}
 	if v.StartedAfter != nil {
 		s.WriteTime(schemas.ListSearchesFilters_startedAfter, *v.StartedAfter)
 	}
 	if v.StartedBefore != nil {
 		s.WriteTime(schemas.ListSearchesFilters_startedBefore, *v.StartedBefore)
 	}
-	serializeSearchStatusFilterList(s, schemas.ListSearchesFilters_statusFilter, v.StatusFilter)
+	if v.StatusFilter != nil {
+		serializeSearchStatusFilterList(s, schemas.ListSearchesFilters_statusFilter, v.StatusFilter)
+	}
 }
 func (v *ListSearchesFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSearchesFilters, func(s *smithy.Schema) error {
@@ -9400,7 +9484,9 @@ func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProcessingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpressionVariables(s, schemas.Metric_variables, v.Variables)
+	if v.Variables != nil {
+		serializeExpressionVariables(s, schemas.Metric_variables, v.Variables)
+	}
 	if v.Window != nil {
 		s.WriteStruct(schemas.Metric_window)
 		v.Window.SerializeMembers(s)
@@ -9584,7 +9670,9 @@ func (v *Mount) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelativePath != nil {
 		s.WriteString(schemas.Mount_relativePath, *v.RelativePath)
 	}
-	serializeMountSource(s, schemas.Mount_source, v.Source)
+	if v.Source != nil {
+		serializeMountSource(s, schemas.Mount_source, v.Source)
+	}
 	if v.StorageType != "" {
 		s.WriteString(schemas.Mount_storageType, string(v.StorageType))
 	}
@@ -9631,7 +9719,9 @@ func (v *MountOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MountOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeNodeMountsMap(s, schemas.MountOverrides_computeNodes, v.ComputeNodes)
+	if v.ComputeNodes != nil {
+		serializeComputeNodeMountsMap(s, schemas.MountOverrides_computeNodes, v.ComputeNodes)
+	}
 }
 func (v *MountOverrides) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MountOverrides, func(s *smithy.Schema) error {
@@ -9777,7 +9867,9 @@ func (v *PipelineExecutionStateDetails) SerializeMembers(s smithy.ShapeSerialize
 	if v.Code != "" {
 		s.WriteString(schemas.PipelineExecutionStateDetails_code, string(v.Code))
 	}
-	serializeDetailedErrorList(s, schemas.PipelineExecutionStateDetails_details, v.Details)
+	if v.Details != nil {
+		serializeDetailedErrorList(s, schemas.PipelineExecutionStateDetails_details, v.Details)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.PipelineExecutionStateDetails_message, *v.Message)
 	}
@@ -10261,7 +10353,9 @@ func (v *PortalTypeEntry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PortalTypeEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePortalTools(s, schemas.PortalTypeEntry_portalTools, v.PortalTools)
+	if v.PortalTools != nil {
+		serializePortalTools(s, schemas.PortalTypeEntry_portalTools, v.PortalTools)
+	}
 }
 func (v *PortalTypeEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PortalTypeEntry, func(s *smithy.Schema) error {
@@ -10494,7 +10588,9 @@ func (v *Property) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Notification.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAssetPropertyPath(s, schemas.Property_path, v.Path)
+	if v.Path != nil {
+		serializeAssetPropertyPath(s, schemas.Property_path, v.Path)
+	}
 	if v.Type != nil {
 		s.WriteStruct(schemas.Property_type)
 		v.Type.SerializeMembers(s)
@@ -10619,7 +10715,9 @@ func (v *PropertyMappingConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.MatchByPropertyName != false {
 		s.WriteBool(schemas.PropertyMappingConfiguration_matchByPropertyName, v.MatchByPropertyName)
 	}
-	serializePropertyMappings(s, schemas.PropertyMappingConfiguration_overrides, v.Overrides)
+	if v.Overrides != nil {
+		serializePropertyMappings(s, schemas.PropertyMappingConfiguration_overrides, v.Overrides)
+	}
 }
 func (v *PropertyMappingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PropertyMappingConfiguration, func(s *smithy.Schema) error {
@@ -10855,7 +10953,9 @@ func (v *PutAssetPropertyValueEntry) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PropertyId != nil {
 		s.WriteString(schemas.PutAssetPropertyValueEntry_propertyId, *v.PropertyId)
 	}
-	serializeAssetPropertyValues(s, schemas.PutAssetPropertyValueEntry_propertyValues, v.PropertyValues)
+	if v.PropertyValues != nil {
+		serializeAssetPropertyValues(s, schemas.PutAssetPropertyValueEntry_propertyValues, v.PropertyValues)
+	}
 }
 func (v *PutAssetPropertyValueEntry) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutAssetPropertyValueEntry, func(s *smithy.Schema) error {
@@ -11312,7 +11412,9 @@ func (v *Row) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Row) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatumList(s, schemas.Row_data, v.Data)
+	if v.Data != nil {
+		serializeDatumList(s, schemas.Row_data, v.Data)
+	}
 }
 func (v *Row) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Row, func(s *smithy.Schema) error {
@@ -11389,9 +11491,15 @@ func (v *SearchFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSetIdList(s, schemas.SearchFilters_datasetIds, v.DatasetIds)
-	serializeTimeIntervalList(s, schemas.SearchFilters_timeIntervals, v.TimeIntervals)
-	serializeTimeSeriesIdList(s, schemas.SearchFilters_timeSeriesIds, v.TimeSeriesIds)
+	if v.DatasetIds != nil {
+		serializeDataSetIdList(s, schemas.SearchFilters_datasetIds, v.DatasetIds)
+	}
+	if v.TimeIntervals != nil {
+		serializeTimeIntervalList(s, schemas.SearchFilters_timeIntervals, v.TimeIntervals)
+	}
+	if v.TimeSeriesIds != nil {
+		serializeTimeSeriesIdList(s, schemas.SearchFilters_timeSeriesIds, v.TimeSeriesIds)
+	}
 }
 func (v *SearchFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchFilters, func(s *smithy.Schema) error {
@@ -12338,7 +12446,9 @@ func (v *Transform) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProcessingConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExpressionVariables(s, schemas.Transform_variables, v.Variables)
+	if v.Variables != nil {
+		serializeExpressionVariables(s, schemas.Transform_variables, v.Variables)
+	}
 }
 func (v *Transform) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Transform, func(s *smithy.Schema) error {
@@ -12633,7 +12743,9 @@ func (v *VariableValue) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropertyId != nil {
 		s.WriteString(schemas.VariableValue_propertyId, *v.PropertyId)
 	}
-	serializeAssetModelPropertyPath(s, schemas.VariableValue_propertyPath, v.PropertyPath)
+	if v.PropertyPath != nil {
+		serializeAssetModelPropertyPath(s, schemas.VariableValue_propertyPath, v.PropertyPath)
+	}
 }
 func (v *VariableValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VariableValue, func(s *smithy.Schema) error {

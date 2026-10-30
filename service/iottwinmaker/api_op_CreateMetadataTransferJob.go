@@ -68,7 +68,9 @@ func (v *CreateMetadataTransferJobInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.MetadataTransferJobId != nil {
 		s.WriteString(schemas.CreateMetadataTransferJobRequest_metadataTransferJobId, *v.MetadataTransferJobId)
 	}
-	serializeSourceConfigurations(s, schemas.CreateMetadataTransferJobRequest_sources, v.Sources)
+	if v.Sources != nil {
+		serializeSourceConfigurations(s, schemas.CreateMetadataTransferJobRequest_sources, v.Sources)
+	}
 }
 
 type CreateMetadataTransferJobOutput struct {

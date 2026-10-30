@@ -69,7 +69,9 @@ func (v *BatchCreateDataTableValueInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.InstanceId != nil {
 		s.WriteString(schemas.BatchCreateDataTableValueRequest_InstanceId, *v.InstanceId)
 	}
-	serializeDataTableValueList(s, schemas.BatchCreateDataTableValueRequest_Values, v.Values)
+	if v.Values != nil {
+		serializeDataTableValueList(s, schemas.BatchCreateDataTableValueRequest_Values, v.Values)
+	}
 }
 
 type BatchCreateDataTableValueOutput struct {
@@ -98,8 +100,12 @@ func (v *BatchCreateDataTableValueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateDataTableValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchCreateDataTableValueFailureResultList(s, schemas.BatchCreateDataTableValueResponse_Failed, v.Failed)
-	serializeBatchCreateDataTableValueSuccessResultList(s, schemas.BatchCreateDataTableValueResponse_Successful, v.Successful)
+	if v.Failed != nil {
+		serializeBatchCreateDataTableValueFailureResultList(s, schemas.BatchCreateDataTableValueResponse_Failed, v.Failed)
+	}
+	if v.Successful != nil {
+		serializeBatchCreateDataTableValueSuccessResultList(s, schemas.BatchCreateDataTableValueResponse_Successful, v.Successful)
+	}
 }
 func (v *BatchCreateDataTableValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateDataTableValueResponse, func(s *smithy.Schema) error {

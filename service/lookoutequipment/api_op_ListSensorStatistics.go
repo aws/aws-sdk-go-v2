@@ -101,7 +101,9 @@ func (v *ListSensorStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSensorStatisticsResponse_NextToken, *v.NextToken)
 	}
-	serializeSensorStatisticsSummaries(s, schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries, v.SensorStatisticsSummaries)
+	if v.SensorStatisticsSummaries != nil {
+		serializeSensorStatisticsSummaries(s, schemas.ListSensorStatisticsResponse_SensorStatisticsSummaries, v.SensorStatisticsSummaries)
+	}
 }
 func (v *ListSensorStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSensorStatisticsResponse, func(s *smithy.Schema) error {

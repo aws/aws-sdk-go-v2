@@ -68,7 +68,9 @@ func (v *UpdateDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AppId != nil {
 		s.WriteString(schemas.UpdateDomainAssociationRequest_appId, *v.AppId)
 	}
-	serializeAutoSubDomainCreationPatterns(s, schemas.UpdateDomainAssociationRequest_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	if v.AutoSubDomainCreationPatterns != nil {
+		serializeAutoSubDomainCreationPatterns(s, schemas.UpdateDomainAssociationRequest_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	}
 	if v.AutoSubDomainIAMRole != nil {
 		s.WriteString(schemas.UpdateDomainAssociationRequest_autoSubDomainIAMRole, *v.AutoSubDomainIAMRole)
 	}
@@ -83,7 +85,9 @@ func (v *UpdateDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EnableAutoSubDomain != nil {
 		s.WriteBool(schemas.UpdateDomainAssociationRequest_enableAutoSubDomain, *v.EnableAutoSubDomain)
 	}
-	serializeSubDomainSettings(s, schemas.UpdateDomainAssociationRequest_subDomainSettings, v.SubDomainSettings)
+	if v.SubDomainSettings != nil {
+		serializeSubDomainSettings(s, schemas.UpdateDomainAssociationRequest_subDomainSettings, v.SubDomainSettings)
+	}
 }
 
 // The result structure for the update domain association request.

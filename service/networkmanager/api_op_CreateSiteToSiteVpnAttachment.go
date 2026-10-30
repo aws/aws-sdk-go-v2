@@ -83,7 +83,9 @@ func (v *CreateSiteToSiteVpnAttachmentInput) SerializeMembers(s smithy.ShapeSeri
 	if v.CoreNetworkId != nil {
 		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
 	}
-	serializeNatRuleRequestList(s, schemas.CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	if v.NatGatewayRules != nil {
+		serializeNatRuleRequestList(s, schemas.CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules, v.NatGatewayRules)
+	}
 	if v.NatGatewaySupport != "" {
 		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport, string(v.NatGatewaySupport))
 	}
@@ -93,7 +95,9 @@ func (v *CreateSiteToSiteVpnAttachmentInput) SerializeMembers(s smithy.ShapeSeri
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
-	serializeTagList(s, schemas.CreateSiteToSiteVpnAttachmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateSiteToSiteVpnAttachmentRequest_Tags, v.Tags)
+	}
 	if v.VpnConnectionArn != nil {
 		s.WriteString(schemas.CreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn, *v.VpnConnectionArn)
 	}

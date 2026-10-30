@@ -77,7 +77,9 @@ func (v *DescribeEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpoints(s, schemas.DescribeEndpointsResponse_Endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpoints(s, schemas.DescribeEndpointsResponse_Endpoints, v.Endpoints)
+	}
 }
 func (v *DescribeEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEndpointsResponse, func(s *smithy.Schema) error {

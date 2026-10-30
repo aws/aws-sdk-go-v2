@@ -44,7 +44,9 @@ func (v *BatchUpdateAutomatedDiscoveryAccountsInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *BatchUpdateAutomatedDiscoveryAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAutomatedDiscoveryAccountUpdate(s, schemas.BatchUpdateAutomatedDiscoveryAccountsRequest_accounts, v.Accounts)
+	if v.Accounts != nil {
+		serialize__listOfAutomatedDiscoveryAccountUpdate(s, schemas.BatchUpdateAutomatedDiscoveryAccountsRequest_accounts, v.Accounts)
+	}
 }
 
 type BatchUpdateAutomatedDiscoveryAccountsOutput struct {
@@ -68,7 +70,9 @@ func (v *BatchUpdateAutomatedDiscoveryAccountsOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *BatchUpdateAutomatedDiscoveryAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfAutomatedDiscoveryAccountUpdateError(s, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serialize__listOfAutomatedDiscoveryAccountUpdateError(s, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse_errors, v.Errors)
+	}
 }
 func (v *BatchUpdateAutomatedDiscoveryAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse, func(s *smithy.Schema) error {

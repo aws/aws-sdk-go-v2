@@ -139,7 +139,9 @@ func (v *GetFlowAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetFlowAliasResponse_name, *v.Name)
 	}
-	serializeFlowAliasRoutingConfiguration(s, schemas.GetFlowAliasResponse_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeFlowAliasRoutingConfiguration(s, schemas.GetFlowAliasResponse_routingConfiguration, v.RoutingConfiguration)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetFlowAliasResponse_updatedAt, *v.UpdatedAt)
 	}

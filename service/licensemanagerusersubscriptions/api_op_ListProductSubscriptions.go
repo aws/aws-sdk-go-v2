@@ -66,8 +66,12 @@ func (v *ListProductSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProductSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListProductSubscriptionsRequest_Filters, v.Filters)
-	serializeIdentityProvider(s, schemas.ListProductSubscriptionsRequest_IdentityProvider, v.IdentityProvider)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListProductSubscriptionsRequest_Filters, v.Filters)
+	}
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.ListProductSubscriptionsRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListProductSubscriptionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -105,7 +109,9 @@ func (v *ListProductSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProductSubscriptionsResponse_NextToken, *v.NextToken)
 	}
-	serializeProductUserSummaryList(s, schemas.ListProductSubscriptionsResponse_ProductUserSummaries, v.ProductUserSummaries)
+	if v.ProductUserSummaries != nil {
+		serializeProductUserSummaryList(s, schemas.ListProductSubscriptionsResponse_ProductUserSummaries, v.ProductUserSummaries)
+	}
 }
 func (v *ListProductSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProductSubscriptionsResponse, func(s *smithy.Schema) error {

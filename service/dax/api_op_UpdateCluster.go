@@ -87,7 +87,9 @@ func (v *UpdateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PreferredMaintenanceWindow != nil {
 		s.WriteString(schemas.UpdateClusterRequest_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
 	}
-	serializeSecurityGroupIdentifierList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdentifierList(s, schemas.UpdateClusterRequest_SecurityGroupIds, v.SecurityGroupIds)
+	}
 }
 
 type UpdateClusterOutput struct {

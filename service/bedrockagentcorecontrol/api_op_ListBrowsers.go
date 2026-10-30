@@ -84,7 +84,9 @@ func (v *ListBrowsersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBrowsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrowserSummaries(s, schemas.ListBrowsersResponse_browserSummaries, v.BrowserSummaries)
+	if v.BrowserSummaries != nil {
+		serializeBrowserSummaries(s, schemas.ListBrowsersResponse_browserSummaries, v.BrowserSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrowsersResponse_nextToken, *v.NextToken)
 	}

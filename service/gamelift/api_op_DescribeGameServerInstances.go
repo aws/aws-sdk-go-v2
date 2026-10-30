@@ -82,7 +82,9 @@ func (v *DescribeGameServerInstancesInput) SerializeMembers(s smithy.ShapeSerial
 	if v.GameServerGroupName != nil {
 		s.WriteString(schemas.DescribeGameServerInstancesInput_GameServerGroupName, *v.GameServerGroupName)
 	}
-	serializeGameServerInstanceIds(s, schemas.DescribeGameServerInstancesInput_InstanceIds, v.InstanceIds)
+	if v.InstanceIds != nil {
+		serializeGameServerInstanceIds(s, schemas.DescribeGameServerInstancesInput_InstanceIds, v.InstanceIds)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeGameServerInstancesInput_Limit, *v.Limit)
 	}
@@ -114,7 +116,9 @@ func (v *DescribeGameServerInstancesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeGameServerInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGameServerInstances(s, schemas.DescribeGameServerInstancesOutput_GameServerInstances, v.GameServerInstances)
+	if v.GameServerInstances != nil {
+		serializeGameServerInstances(s, schemas.DescribeGameServerInstancesOutput_GameServerInstances, v.GameServerInstances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeGameServerInstancesOutput_NextToken, *v.NextToken)
 	}

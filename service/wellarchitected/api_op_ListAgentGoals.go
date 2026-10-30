@@ -90,7 +90,9 @@ func (v *ListAgentGoalsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgentGoalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGoalSummaries(s, schemas.ListAgentGoalsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeGoalSummaries(s, schemas.ListAgentGoalsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentGoalsResponse_nextToken, *v.NextToken)
 	}

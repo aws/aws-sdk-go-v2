@@ -83,7 +83,9 @@ func (v *CreateImpersonationRoleInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.CreateImpersonationRoleRequest_OrganizationId, *v.OrganizationId)
 	}
-	serializeImpersonationRuleList(s, schemas.CreateImpersonationRoleRequest_Rules, v.Rules)
+	if v.Rules != nil {
+		serializeImpersonationRuleList(s, schemas.CreateImpersonationRoleRequest_Rules, v.Rules)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateImpersonationRoleRequest_Type, string(v.Type))
 	}

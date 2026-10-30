@@ -94,7 +94,9 @@ func (v *ListKeyspacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListKeyspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKeyspaceSummaryList(s, schemas.ListKeyspacesResponse_keyspaces, v.Keyspaces)
+	if v.Keyspaces != nil {
+		serializeKeyspaceSummaryList(s, schemas.ListKeyspacesResponse_keyspaces, v.Keyspaces)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKeyspacesResponse_nextToken, *v.NextToken)
 	}

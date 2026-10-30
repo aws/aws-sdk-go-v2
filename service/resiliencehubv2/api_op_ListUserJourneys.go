@@ -87,7 +87,9 @@ func (v *ListUserJourneysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserJourneysResponse_nextToken, *v.NextToken)
 	}
-	serializeUserJourneySummaryList(s, schemas.ListUserJourneysResponse_userJourneySummaries, v.UserJourneySummaries)
+	if v.UserJourneySummaries != nil {
+		serializeUserJourneySummaryList(s, schemas.ListUserJourneysResponse_userJourneySummaries, v.UserJourneySummaries)
+	}
 }
 func (v *ListUserJourneysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserJourneysResponse, func(s *smithy.Schema) error {

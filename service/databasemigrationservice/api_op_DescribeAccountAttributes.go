@@ -76,7 +76,9 @@ func (v *DescribeAccountAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAccountAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountQuotaList(s, schemas.DescribeAccountAttributesResponse_AccountQuotas, v.AccountQuotas)
+	if v.AccountQuotas != nil {
+		serializeAccountQuotaList(s, schemas.DescribeAccountAttributesResponse_AccountQuotas, v.AccountQuotas)
+	}
 	if v.UniqueAccountIdentifier != nil {
 		s.WriteString(schemas.DescribeAccountAttributesResponse_UniqueAccountIdentifier, *v.UniqueAccountIdentifier)
 	}

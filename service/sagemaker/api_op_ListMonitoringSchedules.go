@@ -151,7 +151,9 @@ func (v *ListMonitoringSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMonitoringSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMonitoringScheduleSummaryList(s, schemas.ListMonitoringSchedulesResponse_MonitoringScheduleSummaries, v.MonitoringScheduleSummaries)
+	if v.MonitoringScheduleSummaries != nil {
+		serializeMonitoringScheduleSummaryList(s, schemas.ListMonitoringSchedulesResponse_MonitoringScheduleSummaries, v.MonitoringScheduleSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMonitoringSchedulesResponse_NextToken, *v.NextToken)
 	}

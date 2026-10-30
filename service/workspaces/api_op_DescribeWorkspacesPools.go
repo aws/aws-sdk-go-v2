@@ -58,14 +58,18 @@ func (v *DescribeWorkspacesPoolsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeWorkspacesPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDescribeWorkspacesPoolsFilters(s, schemas.DescribeWorkspacesPoolsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeDescribeWorkspacesPoolsFilters(s, schemas.DescribeWorkspacesPoolsRequest_Filters, v.Filters)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeWorkspacesPoolsRequest_Limit, *v.Limit)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspacesPoolsRequest_NextToken, *v.NextToken)
 	}
-	serializeWorkspacesPoolIds(s, schemas.DescribeWorkspacesPoolsRequest_PoolIds, v.PoolIds)
+	if v.PoolIds != nil {
+		serializeWorkspacesPoolIds(s, schemas.DescribeWorkspacesPoolsRequest_PoolIds, v.PoolIds)
+	}
 }
 
 type DescribeWorkspacesPoolsOutput struct {
@@ -93,7 +97,9 @@ func (v *DescribeWorkspacesPoolsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspacesPoolsResult_NextToken, *v.NextToken)
 	}
-	serializeWorkspacesPools(s, schemas.DescribeWorkspacesPoolsResult_WorkspacesPools, v.WorkspacesPools)
+	if v.WorkspacesPools != nil {
+		serializeWorkspacesPools(s, schemas.DescribeWorkspacesPoolsResult_WorkspacesPools, v.WorkspacesPools)
+	}
 }
 func (v *DescribeWorkspacesPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspacesPoolsResult, func(s *smithy.Schema) error {

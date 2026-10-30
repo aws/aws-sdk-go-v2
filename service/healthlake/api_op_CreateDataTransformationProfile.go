@@ -89,11 +89,15 @@ func (v *CreateDataTransformationProfileInput) SerializeMembers(s smithy.ShapeSe
 	if v.ProfileName != nil {
 		s.WriteString(schemas.CreateDataTransformationProfileRequest_ProfileName, *v.ProfileName)
 	}
-	serializeCreateDataTransformationProfileSource(s, schemas.CreateDataTransformationProfileRequest_Source, v.Source)
+	if v.Source != nil {
+		serializeCreateDataTransformationProfileSource(s, schemas.CreateDataTransformationProfileRequest_Source, v.Source)
+	}
 	if v.SourceFormat != "" {
 		s.WriteString(schemas.CreateDataTransformationProfileRequest_SourceFormat, string(v.SourceFormat))
 	}
-	serializeTagMap(s, schemas.CreateDataTransformationProfileRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataTransformationProfileRequest_Tags, v.Tags)
+	}
 }
 
 // The response from the CreateDataTransformationProfile operation.

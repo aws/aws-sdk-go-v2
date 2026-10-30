@@ -192,7 +192,9 @@ func (v *EntitlementsListMember) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.EntitlementsListMember_createdAt, *v.CreatedAt)
 	}
-	serializeEntitlementSummary(s, schemas.EntitlementsListMember_entitlement, v.Entitlement)
+	if v.Entitlement != nil {
+		serializeEntitlementSummary(s, schemas.EntitlementsListMember_entitlement, v.Entitlement)
+	}
 	if v.EntitlementId != nil {
 		s.WriteString(schemas.EntitlementsListMember_entitlementId, *v.EntitlementId)
 	}
@@ -569,7 +571,9 @@ func (v *PrincipalRoleEntitlement) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PrincipalRoleEntitlement) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePrincipal(s, schemas.PrincipalRoleEntitlement_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipal(s, schemas.PrincipalRoleEntitlement_principal, v.Principal)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlement_roleArn, *v.RoleArn)
 	}
@@ -625,7 +629,9 @@ func (v *PrincipalRoleEntitlementDetails) SerializeMembers(s smithy.ShapeSeriali
 	if v.AccountName != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlementDetails_accountName, *v.AccountName)
 	}
-	serializePrincipal(s, schemas.PrincipalRoleEntitlementDetails_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipal(s, schemas.PrincipalRoleEntitlementDetails_principal, v.Principal)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlementDetails_roleArn, *v.RoleArn)
 	}
@@ -675,7 +681,9 @@ func (v *PrincipalRoleEntitlementFilter) SerializeMembers(s smithy.ShapeSerializ
 	if v.Account != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlementFilter_account, *v.Account)
 	}
-	serializePrincipalFilter(s, schemas.PrincipalRoleEntitlementFilter_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipalFilter(s, schemas.PrincipalRoleEntitlementFilter_principal, v.Principal)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlementFilter_roleArn, *v.RoleArn)
 	}
@@ -733,7 +741,9 @@ func (v *PrincipalRoleEntitlementSummary) SerializeMembers(s smithy.ShapeSeriali
 	if v.AccountName != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlementSummary_accountName, *v.AccountName)
 	}
-	serializePrincipal(s, schemas.PrincipalRoleEntitlementSummary_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipal(s, schemas.PrincipalRoleEntitlementSummary_principal, v.Principal)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.PrincipalRoleEntitlementSummary_roleArn, *v.RoleArn)
 	}

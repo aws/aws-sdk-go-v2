@@ -77,7 +77,9 @@ func (v *CreateSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateSubscriptionRequest_clientToken, *v.ClientToken)
 	}
-	serializeSubscriptionPrincipal(s, schemas.CreateSubscriptionRequest_principal, v.Principal)
+	if v.Principal != nil {
+		serializeSubscriptionPrincipal(s, schemas.CreateSubscriptionRequest_principal, v.Principal)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateSubscriptionRequest_type, string(v.Type))
 	}

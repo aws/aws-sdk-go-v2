@@ -65,7 +65,9 @@ func (v *PutCorsPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerName != nil {
 		s.WriteString(schemas.PutCorsPolicyInput_ContainerName, *v.ContainerName)
 	}
-	serializeCorsPolicy(s, schemas.PutCorsPolicyInput_CorsPolicy, v.CorsPolicy)
+	if v.CorsPolicy != nil {
+		serializeCorsPolicy(s, schemas.PutCorsPolicyInput_CorsPolicy, v.CorsPolicy)
+	}
 }
 
 type PutCorsPolicyOutput struct {

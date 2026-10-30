@@ -65,7 +65,9 @@ func (v *PutRegistrationFieldValueInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.PutRegistrationFieldValueRequest_RegistrationId, *v.RegistrationId)
 	}
-	serializeSelectChoiceList(s, schemas.PutRegistrationFieldValueRequest_SelectChoices, v.SelectChoices)
+	if v.SelectChoices != nil {
+		serializeSelectChoiceList(s, schemas.PutRegistrationFieldValueRequest_SelectChoices, v.SelectChoices)
+	}
 	if v.TextValue != nil {
 		s.WriteString(schemas.PutRegistrationFieldValueRequest_TextValue, *v.TextValue)
 	}
@@ -127,7 +129,9 @@ func (v *PutRegistrationFieldValueOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.PutRegistrationFieldValueResult_RegistrationId, *v.RegistrationId)
 	}
-	serializeSelectChoiceList(s, schemas.PutRegistrationFieldValueResult_SelectChoices, v.SelectChoices)
+	if v.SelectChoices != nil {
+		serializeSelectChoiceList(s, schemas.PutRegistrationFieldValueResult_SelectChoices, v.SelectChoices)
+	}
 	if v.TextValue != nil {
 		s.WriteString(schemas.PutRegistrationFieldValueResult_TextValue, *v.TextValue)
 	}

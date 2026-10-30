@@ -90,19 +90,27 @@ func (v *RegisterApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationType != "" {
 		s.WriteString(schemas.RegisterApplicationInput_ApplicationType, string(v.ApplicationType))
 	}
-	serializeComponentInfoList(s, schemas.RegisterApplicationInput_ComponentsInfo, v.ComponentsInfo)
-	serializeApplicationCredentialList(s, schemas.RegisterApplicationInput_Credentials, v.Credentials)
+	if v.ComponentsInfo != nil {
+		serializeComponentInfoList(s, schemas.RegisterApplicationInput_ComponentsInfo, v.ComponentsInfo)
+	}
+	if v.Credentials != nil {
+		serializeApplicationCredentialList(s, schemas.RegisterApplicationInput_Credentials, v.Credentials)
+	}
 	if v.DatabaseArn != nil {
 		s.WriteString(schemas.RegisterApplicationInput_DatabaseArn, *v.DatabaseArn)
 	}
-	serializeInstanceList(s, schemas.RegisterApplicationInput_Instances, v.Instances)
+	if v.Instances != nil {
+		serializeInstanceList(s, schemas.RegisterApplicationInput_Instances, v.Instances)
+	}
 	if v.SapInstanceNumber != nil {
 		s.WriteString(schemas.RegisterApplicationInput_SapInstanceNumber, *v.SapInstanceNumber)
 	}
 	if v.Sid != nil {
 		s.WriteString(schemas.RegisterApplicationInput_Sid, *v.Sid)
 	}
-	serializeTagMap(s, schemas.RegisterApplicationInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.RegisterApplicationInput_Tags, v.Tags)
+	}
 }
 func (v *RegisterApplicationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisterApplicationInput, func(s *smithy.Schema) error {

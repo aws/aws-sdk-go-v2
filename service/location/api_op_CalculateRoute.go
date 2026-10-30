@@ -241,11 +241,15 @@ func (v *CalculateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DepartNow != nil {
 		s.WriteBool(schemas.CalculateRouteRequest_DepartNow, *v.DepartNow)
 	}
-	serializePosition(s, schemas.CalculateRouteRequest_DeparturePosition, v.DeparturePosition)
+	if v.DeparturePosition != nil {
+		serializePosition(s, schemas.CalculateRouteRequest_DeparturePosition, v.DeparturePosition)
+	}
 	if v.DepartureTime != nil {
 		s.WriteTime(schemas.CalculateRouteRequest_DepartureTime, *v.DepartureTime)
 	}
-	serializePosition(s, schemas.CalculateRouteRequest_DestinationPosition, v.DestinationPosition)
+	if v.DestinationPosition != nil {
+		serializePosition(s, schemas.CalculateRouteRequest_DestinationPosition, v.DestinationPosition)
+	}
 	if v.DistanceUnit != "" {
 		s.WriteString(schemas.CalculateRouteRequest_DistanceUnit, string(v.DistanceUnit))
 	}
@@ -266,7 +270,9 @@ func (v *CalculateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TruckModeOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWaypointPositionList(s, schemas.CalculateRouteRequest_WaypointPositions, v.WaypointPositions)
+	if v.WaypointPositions != nil {
+		serializeWaypointPositionList(s, schemas.CalculateRouteRequest_WaypointPositions, v.WaypointPositions)
+	}
 }
 func (v *CalculateRouteInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CalculateRouteRequest, func(s *smithy.Schema) error {
@@ -376,7 +382,9 @@ func (v *CalculateRouteOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CalculateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLegList(s, schemas.CalculateRouteResponse_Legs, v.Legs)
+	if v.Legs != nil {
+		serializeLegList(s, schemas.CalculateRouteResponse_Legs, v.Legs)
+	}
 	if v.Summary != nil {
 		s.WriteStruct(schemas.CalculateRouteResponse_Summary)
 		v.Summary.SerializeMembers(s)

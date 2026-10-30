@@ -80,8 +80,12 @@ func (v *ListDeploymentInstancesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.DeploymentId != nil {
 		s.WriteString(schemas.ListDeploymentInstancesInput_deploymentId, *v.DeploymentId)
 	}
-	serializeInstanceStatusList(s, schemas.ListDeploymentInstancesInput_instanceStatusFilter, v.InstanceStatusFilter)
-	serializeInstanceTypeList(s, schemas.ListDeploymentInstancesInput_instanceTypeFilter, v.InstanceTypeFilter)
+	if v.InstanceStatusFilter != nil {
+		serializeInstanceStatusList(s, schemas.ListDeploymentInstancesInput_instanceStatusFilter, v.InstanceStatusFilter)
+	}
+	if v.InstanceTypeFilter != nil {
+		serializeInstanceTypeList(s, schemas.ListDeploymentInstancesInput_instanceTypeFilter, v.InstanceTypeFilter)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentInstancesInput_nextToken, *v.NextToken)
 	}
@@ -111,7 +115,9 @@ func (v *ListDeploymentInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstancesList(s, schemas.ListDeploymentInstancesOutput_instancesList, v.InstancesList)
+	if v.InstancesList != nil {
+		serializeInstancesList(s, schemas.ListDeploymentInstancesOutput_instancesList, v.InstancesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentInstancesOutput_nextToken, *v.NextToken)
 	}

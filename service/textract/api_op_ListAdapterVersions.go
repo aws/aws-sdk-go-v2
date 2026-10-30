@@ -99,7 +99,9 @@ func (v *ListAdapterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAdapterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdapterVersionList(s, schemas.ListAdapterVersionsResponse_AdapterVersions, v.AdapterVersions)
+	if v.AdapterVersions != nil {
+		serializeAdapterVersionList(s, schemas.ListAdapterVersionsResponse_AdapterVersions, v.AdapterVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAdapterVersionsResponse_NextToken, *v.NextToken)
 	}

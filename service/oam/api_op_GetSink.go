@@ -100,7 +100,9 @@ func (v *GetSinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetSinkOutput_Name, *v.Name)
 	}
-	serializeTagMapOutput(s, schemas.GetSinkOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMapOutput(s, schemas.GetSinkOutput_Tags, v.Tags)
+	}
 }
 func (v *GetSinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetSinkOutput, func(s *smithy.Schema) error {

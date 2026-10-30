@@ -97,7 +97,9 @@ func (v *GetPipelineStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineVersion != nil {
 		s.WriteInt32(schemas.GetPipelineStateOutput_pipelineVersion, *v.PipelineVersion)
 	}
-	serializeStageStateList(s, schemas.GetPipelineStateOutput_stageStates, v.StageStates)
+	if v.StageStates != nil {
+		serializeStageStateList(s, schemas.GetPipelineStateOutput_stageStates, v.StageStates)
+	}
 	if v.Updated != nil {
 		s.WriteTime(schemas.GetPipelineStateOutput_updated, *v.Updated)
 	}

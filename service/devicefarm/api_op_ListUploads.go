@@ -151,7 +151,9 @@ func (v *ListUploadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUploadsResult_nextToken, *v.NextToken)
 	}
-	serializeUploads(s, schemas.ListUploadsResult_uploads, v.Uploads)
+	if v.Uploads != nil {
+		serializeUploads(s, schemas.ListUploadsResult_uploads, v.Uploads)
+	}
 }
 func (v *ListUploadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUploadsResult, func(s *smithy.Schema) error {

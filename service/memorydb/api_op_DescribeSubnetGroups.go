@@ -95,7 +95,9 @@ func (v *DescribeSubnetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeSubnetGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeSubnetGroupList(s, schemas.DescribeSubnetGroupsResponse_SubnetGroups, v.SubnetGroups)
+	if v.SubnetGroups != nil {
+		serializeSubnetGroupList(s, schemas.DescribeSubnetGroupsResponse_SubnetGroups, v.SubnetGroups)
+	}
 }
 func (v *DescribeSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSubnetGroupsResponse, func(s *smithy.Schema) error {

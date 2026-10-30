@@ -88,9 +88,15 @@ func (v *ListEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntityType != nil {
 		s.WriteString(schemas.ListEntitiesRequest_EntityType, *v.EntityType)
 	}
-	serializeEntityTypeFilters(s, schemas.ListEntitiesRequest_EntityTypeFilters, v.EntityTypeFilters)
-	serializeEntityTypeSort(s, schemas.ListEntitiesRequest_EntityTypeSort, v.EntityTypeSort)
-	serializeFilterList(s, schemas.ListEntitiesRequest_FilterList, v.FilterList)
+	if v.EntityTypeFilters != nil {
+		serializeEntityTypeFilters(s, schemas.ListEntitiesRequest_EntityTypeFilters, v.EntityTypeFilters)
+	}
+	if v.EntityTypeSort != nil {
+		serializeEntityTypeSort(s, schemas.ListEntitiesRequest_EntityTypeSort, v.EntityTypeSort)
+	}
+	if v.FilterList != nil {
+		serializeFilterList(s, schemas.ListEntitiesRequest_FilterList, v.FilterList)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListEntitiesRequest_MaxResults, *v.MaxResults)
 	}
@@ -128,7 +134,9 @@ func (v *ListEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntitySummaryList(s, schemas.ListEntitiesResponse_EntitySummaryList, v.EntitySummaryList)
+	if v.EntitySummaryList != nil {
+		serializeEntitySummaryList(s, schemas.ListEntitiesResponse_EntitySummaryList, v.EntitySummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntitiesResponse_NextToken, *v.NextToken)
 	}

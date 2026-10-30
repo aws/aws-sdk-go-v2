@@ -136,7 +136,9 @@ func (v *ExecuteSqlOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExecuteSqlOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSqlStatementResults(s, schemas.ExecuteSqlResponse_sqlStatementResults, v.SqlStatementResults)
+	if v.SqlStatementResults != nil {
+		serializeSqlStatementResults(s, schemas.ExecuteSqlResponse_sqlStatementResults, v.SqlStatementResults)
+	}
 }
 func (v *ExecuteSqlOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExecuteSqlResponse, func(s *smithy.Schema) error {

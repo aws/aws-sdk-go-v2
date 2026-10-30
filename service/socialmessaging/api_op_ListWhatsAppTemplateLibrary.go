@@ -53,7 +53,9 @@ func (v *ListWhatsAppTemplateLibraryInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWhatsAppTemplateLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilter(s, schemas.ListWhatsAppTemplateLibraryInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilter(s, schemas.ListWhatsAppTemplateLibraryInput_filters, v.Filters)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.ListWhatsAppTemplateLibraryInput_id, *v.Id)
 	}
@@ -86,7 +88,9 @@ func (v *ListWhatsAppTemplateLibraryOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListWhatsAppTemplateLibraryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetaLibraryTemplatesList(s, schemas.ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates, v.MetaLibraryTemplates)
+	if v.MetaLibraryTemplates != nil {
+		serializeMetaLibraryTemplatesList(s, schemas.ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates, v.MetaLibraryTemplates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWhatsAppTemplateLibraryOutput_nextToken, *v.NextToken)
 	}

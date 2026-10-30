@@ -93,7 +93,9 @@ func (v *CreateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnapshotId != nil {
 		s.WriteString(schemas.CreateVolumeRequest_SnapshotId, *v.SnapshotId)
 	}
-	serializeTagSpecifications(s, schemas.CreateVolumeRequest_TagSpecifications, v.TagSpecifications)
+	if v.TagSpecifications != nil {
+		serializeTagSpecifications(s, schemas.CreateVolumeRequest_TagSpecifications, v.TagSpecifications)
+	}
 	if v.Throughput != nil {
 		s.WriteInt32(schemas.CreateVolumeRequest_Throughput, *v.Throughput)
 	}

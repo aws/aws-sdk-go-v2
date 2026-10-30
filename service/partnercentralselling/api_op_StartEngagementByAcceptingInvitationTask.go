@@ -77,7 +77,9 @@ func (v *StartEngagementByAcceptingInvitationTaskInput) SerializeMembers(s smith
 	if v.Identifier != nil {
 		s.WriteString(schemas.StartEngagementByAcceptingInvitationTaskRequest_Identifier, *v.Identifier)
 	}
-	serializeTagList(s, schemas.StartEngagementByAcceptingInvitationTaskRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartEngagementByAcceptingInvitationTaskRequest_Tags, v.Tags)
+	}
 }
 
 type StartEngagementByAcceptingInvitationTaskOutput struct {

@@ -74,7 +74,9 @@ func (v *ListDirectQueryDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDirectQueryDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDirectQueryDataSourceList(s, schemas.ListDirectQueryDataSourcesResponse_DirectQueryDataSources, v.DirectQueryDataSources)
+	if v.DirectQueryDataSources != nil {
+		serializeDirectQueryDataSourceList(s, schemas.ListDirectQueryDataSourcesResponse_DirectQueryDataSources, v.DirectQueryDataSources)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDirectQueryDataSourcesResponse_NextToken, *v.NextToken)
 	}

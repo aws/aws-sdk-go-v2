@@ -83,11 +83,15 @@ func (v *TestInvokeMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientCertificateId != nil {
 		s.WriteString(schemas.TestInvokeMethodRequest_clientCertificateId, *v.ClientCertificateId)
 	}
-	serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_headers, v.Headers)
+	if v.Headers != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_headers, v.Headers)
+	}
 	if v.HttpMethod != nil {
 		s.WriteString(schemas.TestInvokeMethodRequest_httpMethod, *v.HttpMethod)
 	}
-	serializeMapOfStringToList(s, schemas.TestInvokeMethodRequest_multiValueHeaders, v.MultiValueHeaders)
+	if v.MultiValueHeaders != nil {
+		serializeMapOfStringToList(s, schemas.TestInvokeMethodRequest_multiValueHeaders, v.MultiValueHeaders)
+	}
 	if v.PathWithQueryString != nil {
 		s.WriteString(schemas.TestInvokeMethodRequest_pathWithQueryString, *v.PathWithQueryString)
 	}
@@ -97,7 +101,9 @@ func (v *TestInvokeMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RestApiId != nil {
 		s.WriteString(schemas.TestInvokeMethodRequest_restApiId, *v.RestApiId)
 	}
-	serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_stageVariables, v.StageVariables)
+	if v.StageVariables != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_stageVariables, v.StageVariables)
+	}
 }
 
 // Represents the response of the test invoke request in the HTTP method.
@@ -137,14 +143,18 @@ func (v *TestInvokeMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Body != nil {
 		s.WriteString(schemas.TestInvokeMethodResponse_body, *v.Body)
 	}
-	serializeMapOfStringToString(s, schemas.TestInvokeMethodResponse_headers, v.Headers)
+	if v.Headers != nil {
+		serializeMapOfStringToString(s, schemas.TestInvokeMethodResponse_headers, v.Headers)
+	}
 	if v.Latency != 0 {
 		s.WriteInt64(schemas.TestInvokeMethodResponse_latency, v.Latency)
 	}
 	if v.Log != nil {
 		s.WriteString(schemas.TestInvokeMethodResponse_log, *v.Log)
 	}
-	serializeMapOfStringToList(s, schemas.TestInvokeMethodResponse_multiValueHeaders, v.MultiValueHeaders)
+	if v.MultiValueHeaders != nil {
+		serializeMapOfStringToList(s, schemas.TestInvokeMethodResponse_multiValueHeaders, v.MultiValueHeaders)
+	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.TestInvokeMethodResponse_status, v.Status)
 	}

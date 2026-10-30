@@ -97,7 +97,9 @@ func (v *UpdateScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateScheduledActionRequest_roleArn, *v.RoleArn)
 	}
-	serializeSchedule(s, schemas.UpdateScheduledActionRequest_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeSchedule(s, schemas.UpdateScheduledActionRequest_schedule, v.Schedule)
+	}
 	if v.ScheduledActionDescription != nil {
 		s.WriteString(schemas.UpdateScheduledActionRequest_scheduledActionDescription, *v.ScheduledActionDescription)
 	}
@@ -107,7 +109,9 @@ func (v *UpdateScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StartTime != nil {
 		s.WriteTime(schemas.UpdateScheduledActionRequest_startTime, *v.StartTime)
 	}
-	serializeTargetAction(s, schemas.UpdateScheduledActionRequest_targetAction, v.TargetAction)
+	if v.TargetAction != nil {
+		serializeTargetAction(s, schemas.UpdateScheduledActionRequest_targetAction, v.TargetAction)
+	}
 }
 
 type UpdateScheduledActionOutput struct {

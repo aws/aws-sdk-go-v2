@@ -227,7 +227,9 @@ func (v *GetLabelDetectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LabelModelVersion != nil {
 		s.WriteString(schemas.GetLabelDetectionResponse_LabelModelVersion, *v.LabelModelVersion)
 	}
-	serializeLabelDetections(s, schemas.GetLabelDetectionResponse_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeLabelDetections(s, schemas.GetLabelDetectionResponse_Labels, v.Labels)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetLabelDetectionResponse_NextToken, *v.NextToken)
 	}

@@ -60,7 +60,9 @@ func (v *ListVirtualInterfaceTestHistoryInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListVirtualInterfaceTestHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBGPPeerIdList(s, schemas.ListVirtualInterfaceTestHistoryRequest_bgpPeers, v.BgpPeers)
+	if v.BgpPeers != nil {
+		serializeBGPPeerIdList(s, schemas.ListVirtualInterfaceTestHistoryRequest_bgpPeers, v.BgpPeers)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListVirtualInterfaceTestHistoryRequest_maxResults, *v.MaxResults)
 	}
@@ -103,7 +105,9 @@ func (v *ListVirtualInterfaceTestHistoryOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualInterfaceTestHistoryResponse_nextToken, *v.NextToken)
 	}
-	serializeVirtualInterfaceTestHistoryList(s, schemas.ListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory, v.VirtualInterfaceTestHistory)
+	if v.VirtualInterfaceTestHistory != nil {
+		serializeVirtualInterfaceTestHistoryList(s, schemas.ListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory, v.VirtualInterfaceTestHistory)
+	}
 }
 func (v *ListVirtualInterfaceTestHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVirtualInterfaceTestHistoryResponse, func(s *smithy.Schema) error {

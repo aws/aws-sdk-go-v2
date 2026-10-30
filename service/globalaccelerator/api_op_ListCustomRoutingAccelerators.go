@@ -77,7 +77,9 @@ func (v *ListCustomRoutingAcceleratorsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListCustomRoutingAcceleratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomRoutingAccelerators(s, schemas.ListCustomRoutingAcceleratorsResponse_Accelerators, v.Accelerators)
+	if v.Accelerators != nil {
+		serializeCustomRoutingAccelerators(s, schemas.ListCustomRoutingAcceleratorsResponse_Accelerators, v.Accelerators)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomRoutingAcceleratorsResponse_NextToken, *v.NextToken)
 	}

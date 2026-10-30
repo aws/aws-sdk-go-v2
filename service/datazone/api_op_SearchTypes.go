@@ -98,7 +98,9 @@ func (v *SearchTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.SearchTypesInput_domainIdentifier, *v.DomainIdentifier)
 	}
-	serializeFilterClause(s, schemas.SearchTypesInput_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterClause(s, schemas.SearchTypesInput_filters, v.Filters)
+	}
 	if v.Managed != nil {
 		s.WriteBool(schemas.SearchTypesInput_managed, *v.Managed)
 	}
@@ -108,7 +110,9 @@ func (v *SearchTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchTypesInput_nextToken, *v.NextToken)
 	}
-	serializeSearchInList(s, schemas.SearchTypesInput_searchIn, v.SearchIn)
+	if v.SearchIn != nil {
+		serializeSearchInList(s, schemas.SearchTypesInput_searchIn, v.SearchIn)
+	}
 	if v.SearchScope != "" {
 		s.WriteString(schemas.SearchTypesInput_searchScope, string(v.SearchScope))
 	}
@@ -150,7 +154,9 @@ func (v *SearchTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchTypesResultItems(s, schemas.SearchTypesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeSearchTypesResultItems(s, schemas.SearchTypesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchTypesOutput_nextToken, *v.NextToken)
 	}

@@ -204,11 +204,15 @@ func (v *MetricQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.MetricQueryResult_Message, *v.Message)
 	}
-	serializeMetricValues(s, schemas.MetricQueryResult_MetricValues, v.MetricValues)
+	if v.MetricValues != nil {
+		serializeMetricValues(s, schemas.MetricQueryResult_MetricValues, v.MetricValues)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.MetricQueryResult_Status, string(v.Status))
 	}
-	serializeXAxisValues(s, schemas.MetricQueryResult_XAxisValues, v.XAxisValues)
+	if v.XAxisValues != nil {
+		serializeXAxisValues(s, schemas.MetricQueryResult_XAxisValues, v.XAxisValues)
+	}
 }
 func (v *MetricQueryResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MetricQueryResult, func(s *smithy.Schema) error {

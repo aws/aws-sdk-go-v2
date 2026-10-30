@@ -66,7 +66,9 @@ func (v *ListSupportedPhoneNumberCountriesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListSupportedPhoneNumberCountriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberCountriesList(s, schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries, v.PhoneNumberCountries)
+	if v.PhoneNumberCountries != nil {
+		serializePhoneNumberCountriesList(s, schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries, v.PhoneNumberCountries)
+	}
 }
 func (v *ListSupportedPhoneNumberCountriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSupportedPhoneNumberCountriesResponse, func(s *smithy.Schema) error {

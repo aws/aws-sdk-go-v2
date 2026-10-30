@@ -81,7 +81,9 @@ func (v *SnapToRoadsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnappedGeometryFormat != "" {
 		s.WriteString(schemas.SnapToRoadsRequest_SnappedGeometryFormat, string(v.SnappedGeometryFormat))
 	}
-	serializeRoadSnapTracePointList(s, schemas.SnapToRoadsRequest_TracePoints, v.TracePoints)
+	if v.TracePoints != nil {
+		serializeRoadSnapTracePointList(s, schemas.SnapToRoadsRequest_TracePoints, v.TracePoints)
+	}
 	if v.TravelMode != "" {
 		s.WriteString(schemas.SnapToRoadsRequest_TravelMode, string(v.TravelMode))
 	}
@@ -131,7 +133,9 @@ func (v *SnapToRoadsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SnapToRoadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRoadSnapNoticeList(s, schemas.SnapToRoadsResponse_Notices, v.Notices)
+	if v.Notices != nil {
+		serializeRoadSnapNoticeList(s, schemas.SnapToRoadsResponse_Notices, v.Notices)
+	}
 	if v.PricingBucket != nil {
 		s.WriteString(schemas.SnapToRoadsResponse_PricingBucket, *v.PricingBucket)
 	}
@@ -143,7 +147,9 @@ func (v *SnapToRoadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SnappedGeometryFormat != "" {
 		s.WriteString(schemas.SnapToRoadsResponse_SnappedGeometryFormat, string(v.SnappedGeometryFormat))
 	}
-	serializeRoadSnapSnappedTracePointList(s, schemas.SnapToRoadsResponse_SnappedTracePoints, v.SnappedTracePoints)
+	if v.SnappedTracePoints != nil {
+		serializeRoadSnapSnappedTracePointList(s, schemas.SnapToRoadsResponse_SnappedTracePoints, v.SnappedTracePoints)
+	}
 }
 func (v *SnapToRoadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SnapToRoadsResponse, func(s *smithy.Schema) error {

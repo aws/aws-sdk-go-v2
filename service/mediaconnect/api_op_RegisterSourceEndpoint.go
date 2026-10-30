@@ -62,14 +62,18 @@ func (v *RegisterSourceEndpointInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.RegisterSourceEndpointRequest_ClientToken, *v.ClientToken)
 	}
-	serializeSourceEndpointConfiguration(s, schemas.RegisterSourceEndpointRequest_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeSourceEndpointConfiguration(s, schemas.RegisterSourceEndpointRequest_Configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.RegisterSourceEndpointRequest_Description, *v.Description)
 	}
 	if v.RegionName != nil {
 		s.WriteString(schemas.RegisterSourceEndpointRequest_RegionName, *v.RegionName)
 	}
-	serialize__mapOfString(s, schemas.RegisterSourceEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOfString(s, schemas.RegisterSourceEndpointRequest_Tags, v.Tags)
+	}
 }
 
 type RegisterSourceEndpointOutput struct {

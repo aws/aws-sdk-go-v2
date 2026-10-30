@@ -68,7 +68,9 @@ func (v *CreateEventStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventStreamName != nil {
 		s.WriteString(schemas.CreateEventStreamRequest_EventStreamName, *v.EventStreamName)
 	}
-	serializeTagMap(s, schemas.CreateEventStreamRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventStreamRequest_Tags, v.Tags)
+	}
 	if v.Uri != nil {
 		s.WriteString(schemas.CreateEventStreamRequest_Uri, *v.Uri)
 	}
@@ -100,7 +102,9 @@ func (v *CreateEventStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventStreamArn != nil {
 		s.WriteString(schemas.CreateEventStreamResponse_EventStreamArn, *v.EventStreamArn)
 	}
-	serializeTagMap(s, schemas.CreateEventStreamResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateEventStreamResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateEventStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEventStreamResponse, func(s *smithy.Schema) error {

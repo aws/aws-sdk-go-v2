@@ -48,7 +48,9 @@ func (v *DescribeBundleAssociationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBundleAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBundleAssociatedResourceTypeList(s, schemas.DescribeBundleAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	if v.AssociatedResourceTypes != nil {
+		serializeBundleAssociatedResourceTypeList(s, schemas.DescribeBundleAssociationsRequest_AssociatedResourceTypes, v.AssociatedResourceTypes)
+	}
 	if v.BundleId != nil {
 		s.WriteString(schemas.DescribeBundleAssociationsRequest_BundleId, *v.BundleId)
 	}
@@ -72,7 +74,9 @@ func (v *DescribeBundleAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBundleAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBundleResourceAssociationList(s, schemas.DescribeBundleAssociationsResult_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeBundleResourceAssociationList(s, schemas.DescribeBundleAssociationsResult_Associations, v.Associations)
+	}
 }
 func (v *DescribeBundleAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeBundleAssociationsResult, func(s *smithy.Schema) error {

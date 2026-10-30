@@ -129,7 +129,9 @@ func (v *GetChannelScheduleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetChannelScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfScheduleEntry(s, schemas.GetChannelScheduleResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfScheduleEntry(s, schemas.GetChannelScheduleResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetChannelScheduleResponse_NextToken, *v.NextToken)
 	}

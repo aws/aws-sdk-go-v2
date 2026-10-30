@@ -85,7 +85,9 @@ func (v *GetParametersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterNameList(s, schemas.GetParametersRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeParameterNameList(s, schemas.GetParametersRequest_Names, v.Names)
+	}
 	if v.WithDecryption != nil {
 		s.WriteBool(schemas.GetParametersRequest_WithDecryption, *v.WithDecryption)
 	}
@@ -113,8 +115,12 @@ func (v *GetParametersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterNameList(s, schemas.GetParametersResult_InvalidParameters, v.InvalidParameters)
-	serializeParameterList(s, schemas.GetParametersResult_Parameters, v.Parameters)
+	if v.InvalidParameters != nil {
+		serializeParameterNameList(s, schemas.GetParametersResult_InvalidParameters, v.InvalidParameters)
+	}
+	if v.Parameters != nil {
+		serializeParameterList(s, schemas.GetParametersResult_Parameters, v.Parameters)
+	}
 }
 func (v *GetParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetParametersResult, func(s *smithy.Schema) error {

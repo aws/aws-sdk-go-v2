@@ -49,11 +49,21 @@ func (v *QueryListsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryListsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGreetingList(s, schemas.QueryListsInput_ComplexListArg, v.ComplexListArg)
-	serializeStringList(s, schemas.QueryListsInput_FlattenedListArg, v.FlattenedListArg)
-	serializeListWithXmlName(s, schemas.QueryListsInput_FlattenedListArgWithXmlName, v.FlattenedListArgWithXmlName)
-	serializeStringList(s, schemas.QueryListsInput_ListArg, v.ListArg)
-	serializeListWithXmlName(s, schemas.QueryListsInput_ListArgWithXmlNameMember, v.ListArgWithXmlNameMember)
+	if v.ComplexListArg != nil {
+		serializeGreetingList(s, schemas.QueryListsInput_ComplexListArg, v.ComplexListArg)
+	}
+	if v.FlattenedListArg != nil {
+		serializeStringList(s, schemas.QueryListsInput_FlattenedListArg, v.FlattenedListArg)
+	}
+	if v.FlattenedListArgWithXmlName != nil {
+		serializeListWithXmlName(s, schemas.QueryListsInput_FlattenedListArgWithXmlName, v.FlattenedListArgWithXmlName)
+	}
+	if v.ListArg != nil {
+		serializeStringList(s, schemas.QueryListsInput_ListArg, v.ListArg)
+	}
+	if v.ListArgWithXmlNameMember != nil {
+		serializeListWithXmlName(s, schemas.QueryListsInput_ListArgWithXmlNameMember, v.ListArgWithXmlNameMember)
+	}
 	if v.NestedWithList != nil {
 		s.WriteStruct(schemas.QueryListsInput_NestedWithList)
 		v.NestedWithList.SerializeMembers(s)

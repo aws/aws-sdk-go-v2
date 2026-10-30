@@ -76,7 +76,9 @@ func (v *CreateReplicationConfigurationInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CreateReplicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationsToCreate(s, schemas.CreateReplicationConfigurationRequest_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinationsToCreate(s, schemas.CreateReplicationConfigurationRequest_Destinations, v.Destinations)
+	}
 	if v.SourceFileSystemId != nil {
 		s.WriteString(schemas.CreateReplicationConfigurationRequest_SourceFileSystemId, *v.SourceFileSystemId)
 	}
@@ -136,7 +138,9 @@ func (v *CreateReplicationConfigurationOutput) SerializeMembers(s smithy.ShapeSe
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.ReplicationConfigurationDescription_CreationTime, *v.CreationTime)
 	}
-	serializeDestinations(s, schemas.ReplicationConfigurationDescription_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.ReplicationConfigurationDescription_Destinations, v.Destinations)
+	}
 	if v.OriginalSourceFileSystemArn != nil {
 		s.WriteString(schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn, *v.OriginalSourceFileSystemArn)
 	}

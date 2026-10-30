@@ -112,7 +112,9 @@ func (v *ListQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueuesResponse_nextToken, *v.NextToken)
 	}
-	serializeQueueSummaries(s, schemas.ListQueuesResponse_queues, v.Queues)
+	if v.Queues != nil {
+		serializeQueueSummaries(s, schemas.ListQueuesResponse_queues, v.Queues)
+	}
 }
 func (v *ListQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListQueuesResponse, func(s *smithy.Schema) error {

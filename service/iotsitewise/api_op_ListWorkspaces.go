@@ -82,7 +82,9 @@ func (v *ListWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkspacesResponse_nextToken, *v.NextToken)
 	}
-	serializeWorkspaceSummaries(s, schemas.ListWorkspacesResponse_workspaceSummaries, v.WorkspaceSummaries)
+	if v.WorkspaceSummaries != nil {
+		serializeWorkspaceSummaries(s, schemas.ListWorkspacesResponse_workspaceSummaries, v.WorkspaceSummaries)
+	}
 }
 func (v *ListWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkspacesResponse, func(s *smithy.Schema) error {

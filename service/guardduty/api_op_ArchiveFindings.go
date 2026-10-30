@@ -59,7 +59,9 @@ func (v *ArchiveFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetectorId != nil {
 		s.WriteString(schemas.ArchiveFindingsRequest_DetectorId, *v.DetectorId)
 	}
-	serializeFindingIds(s, schemas.ArchiveFindingsRequest_FindingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIds(s, schemas.ArchiveFindingsRequest_FindingIds, v.FindingIds)
+	}
 }
 
 type ArchiveFindingsOutput struct {

@@ -90,7 +90,9 @@ func (v *RespondDecisionTaskCompletedInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *RespondDecisionTaskCompletedInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDecisionList(s, schemas.RespondDecisionTaskCompletedInput_decisions, v.Decisions)
+	if v.Decisions != nil {
+		serializeDecisionList(s, schemas.RespondDecisionTaskCompletedInput_decisions, v.Decisions)
+	}
 	if v.ExecutionContext != nil {
 		s.WriteString(schemas.RespondDecisionTaskCompletedInput_executionContext, *v.ExecutionContext)
 	}

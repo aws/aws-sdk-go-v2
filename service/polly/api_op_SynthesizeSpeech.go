@@ -129,14 +129,18 @@ func (v *SynthesizeSpeechInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.SynthesizeSpeechInput_LanguageCode, string(v.LanguageCode))
 	}
-	serializeLexiconNameList(s, schemas.SynthesizeSpeechInput_LexiconNames, v.LexiconNames)
+	if v.LexiconNames != nil {
+		serializeLexiconNameList(s, schemas.SynthesizeSpeechInput_LexiconNames, v.LexiconNames)
+	}
 	if v.OutputFormat != "" {
 		s.WriteString(schemas.SynthesizeSpeechInput_OutputFormat, string(v.OutputFormat))
 	}
 	if v.SampleRate != nil {
 		s.WriteString(schemas.SynthesizeSpeechInput_SampleRate, *v.SampleRate)
 	}
-	serializeSpeechMarkTypeList(s, schemas.SynthesizeSpeechInput_SpeechMarkTypes, v.SpeechMarkTypes)
+	if v.SpeechMarkTypes != nil {
+		serializeSpeechMarkTypeList(s, schemas.SynthesizeSpeechInput_SpeechMarkTypes, v.SpeechMarkTypes)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.SynthesizeSpeechInput_Text, *v.Text)
 	}

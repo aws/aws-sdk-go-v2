@@ -81,7 +81,9 @@ func (v *GetMediaForFragmentListInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMediaForFragmentListInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFragmentNumberList(s, schemas.GetMediaForFragmentListInput_Fragments, v.Fragments)
+	if v.Fragments != nil {
+		serializeFragmentNumberList(s, schemas.GetMediaForFragmentListInput_Fragments, v.Fragments)
+	}
 	if v.StreamARN != nil {
 		s.WriteString(schemas.GetMediaForFragmentListInput_StreamARN, *v.StreamARN)
 	}

@@ -135,7 +135,9 @@ func (v *ClinicalNoteGenerationSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ClinicalNoteGenerationSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNoteTemplateSettings(s, schemas.ClinicalNoteGenerationSettings_noteTemplateSettings, v.NoteTemplateSettings)
+	if v.NoteTemplateSettings != nil {
+		serializeNoteTemplateSettings(s, schemas.ClinicalNoteGenerationSettings_noteTemplateSettings, v.NoteTemplateSettings)
+	}
 }
 func (v *ClinicalNoteGenerationSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationSettings, func(s *smithy.Schema) error {
@@ -163,7 +165,9 @@ func (v *ClinicalNoteGenerationSettingsResponse) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ClinicalNoteGenerationSettingsResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNoteTemplateSettingsResponse(s, schemas.ClinicalNoteGenerationSettingsResponse_noteTemplateSettings, v.NoteTemplateSettings)
+	if v.NoteTemplateSettings != nil {
+		serializeNoteTemplateSettingsResponse(s, schemas.ClinicalNoteGenerationSettingsResponse_noteTemplateSettings, v.NoteTemplateSettings)
+	}
 }
 func (v *ClinicalNoteGenerationSettingsResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ClinicalNoteGenerationSettingsResponse, func(s *smithy.Schema) error {
@@ -254,7 +258,9 @@ func (v *CustomTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTemplateInstructions(s, schemas.CustomTemplate_templateInstructions, v.TemplateInstructions)
+	if v.TemplateInstructions != nil {
+		serializeTemplateInstructions(s, schemas.CustomTemplate_templateInstructions, v.TemplateInstructions)
+	}
 	if v.TemplateType != "" {
 		s.WriteString(schemas.CustomTemplate_templateType, string(v.TemplateType))
 	}
@@ -536,7 +542,9 @@ func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FhirServer.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeS3Sources(s, schemas.InputDataConfig_s3Sources, v.S3Sources)
+	if v.S3Sources != nil {
+		serializeS3Sources(s, schemas.InputDataConfig_s3Sources, v.S3Sources)
+	}
 }
 func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
@@ -830,7 +838,9 @@ func (v *MedicalScribeConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MedicalScribeConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeConfigurationEvent_channelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeConfigurationEvent_channelDefinitions, v.ChannelDefinitions)
+	}
 	if v.EncounterContext != nil {
 		s.WriteStruct(schemas.MedicalScribeConfigurationEvent_encounterContext)
 		v.EncounterContext.SerializeMembers(s)
@@ -988,7 +998,9 @@ func (v *MedicalScribeListeningSessionDetails) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *MedicalScribeListeningSessionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeListeningSessionDetails_channelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeMedicalScribeChannelDefinitions(s, schemas.MedicalScribeListeningSessionDetails_channelDefinitions, v.ChannelDefinitions)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.MedicalScribeListeningSessionDetails_domainId, *v.DomainId)
 	}

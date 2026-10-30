@@ -79,7 +79,9 @@ func (v *DisassociateAvailabilityZonesInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DisassociateAvailabilityZonesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneMappings(s, schemas.DisassociateAvailabilityZonesRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.AvailabilityZoneMappings != nil {
+		serializeAvailabilityZoneMappings(s, schemas.DisassociateAvailabilityZonesRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.DisassociateAvailabilityZonesRequest_FirewallArn, *v.FirewallArn)
 	}
@@ -133,7 +135,9 @@ func (v *DisassociateAvailabilityZonesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DisassociateAvailabilityZonesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneMappings(s, schemas.DisassociateAvailabilityZonesResponse_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.AvailabilityZoneMappings != nil {
+		serializeAvailabilityZoneMappings(s, schemas.DisassociateAvailabilityZonesResponse_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	}
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.DisassociateAvailabilityZonesResponse_FirewallArn, *v.FirewallArn)
 	}

@@ -124,7 +124,9 @@ func (v *ListModelCustomizationJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelCustomizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelCustomizationJobSummaries(s, schemas.ListModelCustomizationJobsResponse_modelCustomizationJobSummaries, v.ModelCustomizationJobSummaries)
+	if v.ModelCustomizationJobSummaries != nil {
+		serializeModelCustomizationJobSummaries(s, schemas.ListModelCustomizationJobsResponse_modelCustomizationJobSummaries, v.ModelCustomizationJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelCustomizationJobsResponse_nextToken, *v.NextToken)
 	}

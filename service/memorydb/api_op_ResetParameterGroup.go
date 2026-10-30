@@ -62,7 +62,9 @@ func (v *ResetParameterGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParameterGroupName != nil {
 		s.WriteString(schemas.ResetParameterGroupRequest_ParameterGroupName, *v.ParameterGroupName)
 	}
-	serializeParameterNameList(s, schemas.ResetParameterGroupRequest_ParameterNames, v.ParameterNames)
+	if v.ParameterNames != nil {
+		serializeParameterNameList(s, schemas.ResetParameterGroupRequest_ParameterNames, v.ParameterNames)
+	}
 }
 
 type ResetParameterGroupOutput struct {

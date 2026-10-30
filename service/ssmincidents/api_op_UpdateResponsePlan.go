@@ -103,33 +103,45 @@ func (v *UpdateResponsePlanInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateResponsePlanInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.UpdateResponsePlanInput_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionsList(s, schemas.UpdateResponsePlanInput_actions, v.Actions)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateResponsePlanInput_arn, *v.Arn)
 	}
-	serializeChatChannel(s, schemas.UpdateResponsePlanInput_chatChannel, v.ChatChannel)
+	if v.ChatChannel != nil {
+		serializeChatChannel(s, schemas.UpdateResponsePlanInput_chatChannel, v.ChatChannel)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateResponsePlanInput_clientToken, *v.ClientToken)
 	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.UpdateResponsePlanInput_displayName, *v.DisplayName)
 	}
-	serializeEngagementSet(s, schemas.UpdateResponsePlanInput_engagements, v.Engagements)
+	if v.Engagements != nil {
+		serializeEngagementSet(s, schemas.UpdateResponsePlanInput_engagements, v.Engagements)
+	}
 	if v.IncidentTemplateDedupeString != nil {
 		s.WriteString(schemas.UpdateResponsePlanInput_incidentTemplateDedupeString, *v.IncidentTemplateDedupeString)
 	}
 	if v.IncidentTemplateImpact != nil {
 		s.WriteInt32(schemas.UpdateResponsePlanInput_incidentTemplateImpact, *v.IncidentTemplateImpact)
 	}
-	serializeNotificationTargetSet(s, schemas.UpdateResponsePlanInput_incidentTemplateNotificationTargets, v.IncidentTemplateNotificationTargets)
+	if v.IncidentTemplateNotificationTargets != nil {
+		serializeNotificationTargetSet(s, schemas.UpdateResponsePlanInput_incidentTemplateNotificationTargets, v.IncidentTemplateNotificationTargets)
+	}
 	if v.IncidentTemplateSummary != nil {
 		s.WriteString(schemas.UpdateResponsePlanInput_incidentTemplateSummary, *v.IncidentTemplateSummary)
 	}
-	serializeTagMapUpdate(s, schemas.UpdateResponsePlanInput_incidentTemplateTags, v.IncidentTemplateTags)
+	if v.IncidentTemplateTags != nil {
+		serializeTagMapUpdate(s, schemas.UpdateResponsePlanInput_incidentTemplateTags, v.IncidentTemplateTags)
+	}
 	if v.IncidentTemplateTitle != nil {
 		s.WriteString(schemas.UpdateResponsePlanInput_incidentTemplateTitle, *v.IncidentTemplateTitle)
 	}
-	serializeIntegrations(s, schemas.UpdateResponsePlanInput_integrations, v.Integrations)
+	if v.Integrations != nil {
+		serializeIntegrations(s, schemas.UpdateResponsePlanInput_integrations, v.Integrations)
+	}
 }
 func (v *UpdateResponsePlanInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateResponsePlanInput, func(s *smithy.Schema) error {

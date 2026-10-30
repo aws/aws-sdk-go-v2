@@ -105,7 +105,9 @@ func (v *AssociateFirewallRuleGroupInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Priority != nil {
 		s.WriteInt32(schemas.AssociateFirewallRuleGroupRequest_Priority, *v.Priority)
 	}
-	serializeTagList(s, schemas.AssociateFirewallRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AssociateFirewallRuleGroupRequest_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.AssociateFirewallRuleGroupRequest_VpcId, *v.VpcId)
 	}

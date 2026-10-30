@@ -49,7 +49,9 @@ func (v *Application) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationTagDefinition(s, schemas.Application_applicationTag, v.ApplicationTag)
+	if v.ApplicationTag != nil {
+		serializeApplicationTagDefinition(s, schemas.Application_applicationTag, v.ApplicationTag)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.Application_arn, *v.Arn)
 	}
@@ -68,7 +70,9 @@ func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Application_name, *v.Name)
 	}
-	serializeTags(s, schemas.Application_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.Application_tags, v.Tags)
+	}
 }
 func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
@@ -214,7 +218,9 @@ func (v *ApplicationTagResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ApplicationTagResult_nextToken, *v.NextToken)
 	}
-	serializeResourcesList(s, schemas.ApplicationTagResult_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourcesList(s, schemas.ApplicationTagResult_resources, v.Resources)
+	}
 }
 func (v *ApplicationTagResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ApplicationTagResult, func(s *smithy.Schema) error {
@@ -328,7 +334,9 @@ func (v *AttributeGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AttributeGroup_name, *v.Name)
 	}
-	serializeTags(s, schemas.AttributeGroup_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AttributeGroup_tags, v.Tags)
+	}
 }
 func (v *AttributeGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttributeGroup, func(s *smithy.Schema) error {
@@ -743,7 +751,9 @@ func (v *ResourceInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ResourceInfo_name, *v.Name)
 	}
-	serializeOptions(s, schemas.ResourceInfo_options, v.Options)
+	if v.Options != nil {
+		serializeOptions(s, schemas.ResourceInfo_options, v.Options)
+	}
 	if v.ResourceDetails != nil {
 		s.WriteStruct(schemas.ResourceInfo_resourceDetails)
 		v.ResourceDetails.SerializeMembers(s)

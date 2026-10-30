@@ -176,8 +176,12 @@ func (v *CreateApplicationVersionOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CreationTime != nil {
 		s.WriteString(schemas.CreateApplicationVersionResponse_CreationTime, *v.CreationTime)
 	}
-	serialize__listOfParameterDefinition(s, schemas.CreateApplicationVersionResponse_ParameterDefinitions, v.ParameterDefinitions)
-	serialize__listOfCapability(s, schemas.CreateApplicationVersionResponse_RequiredCapabilities, v.RequiredCapabilities)
+	if v.ParameterDefinitions != nil {
+		serialize__listOfParameterDefinition(s, schemas.CreateApplicationVersionResponse_ParameterDefinitions, v.ParameterDefinitions)
+	}
+	if v.RequiredCapabilities != nil {
+		serialize__listOfCapability(s, schemas.CreateApplicationVersionResponse_RequiredCapabilities, v.RequiredCapabilities)
+	}
 	if v.ResourcesSupported != nil {
 		s.WriteBool(schemas.CreateApplicationVersionResponse_ResourcesSupported, *v.ResourcesSupported)
 	}

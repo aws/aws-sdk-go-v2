@@ -65,7 +65,9 @@ func (v *AccountSettings) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxJobTimeoutMinutes != nil {
 		s.WriteInt32(schemas.AccountSettings_maxJobTimeoutMinutes, *v.MaxJobTimeoutMinutes)
 	}
-	serializeMaxSlotMap(s, schemas.AccountSettings_maxSlots, v.MaxSlots)
+	if v.MaxSlots != nil {
+		serializeMaxSlotMap(s, schemas.AccountSettings_maxSlots, v.MaxSlots)
+	}
 	if v.SkipAppResign != nil {
 		s.WriteBool(schemas.AccountSettings_skipAppResign, *v.SkipAppResign)
 	}
@@ -74,8 +76,12 @@ func (v *AccountSettings) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TrialMinutes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePurchasedDevicesMap(s, schemas.AccountSettings_unmeteredDevices, v.UnmeteredDevices)
-	serializePurchasedDevicesMap(s, schemas.AccountSettings_unmeteredRemoteAccessDevices, v.UnmeteredRemoteAccessDevices)
+	if v.UnmeteredDevices != nil {
+		serializePurchasedDevicesMap(s, schemas.AccountSettings_unmeteredDevices, v.UnmeteredDevices)
+	}
+	if v.UnmeteredRemoteAccessDevices != nil {
+		serializePurchasedDevicesMap(s, schemas.AccountSettings_unmeteredRemoteAccessDevices, v.UnmeteredRemoteAccessDevices)
+	}
 }
 func (v *AccountSettings) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountSettings, func(s *smithy.Schema) error {
@@ -394,7 +400,9 @@ func (v *CreateRemoteAccessSessionConfiguration) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *CreateRemoteAccessSessionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuxiliaryAppArnList(s, schemas.CreateRemoteAccessSessionConfiguration_auxiliaryApps, v.AuxiliaryApps)
+	if v.AuxiliaryApps != nil {
+		serializeAuxiliaryAppArnList(s, schemas.CreateRemoteAccessSessionConfiguration_auxiliaryApps, v.AuxiliaryApps)
+	}
 	if v.BillingMethod != "" {
 		s.WriteString(schemas.CreateRemoteAccessSessionConfiguration_billingMethod, string(v.BillingMethod))
 	}
@@ -403,8 +411,12 @@ func (v *CreateRemoteAccessSessionConfiguration) SerializeMembers(s smithy.Shape
 		v.DeviceProxy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRemoteAccessParameters(s, schemas.CreateRemoteAccessSessionConfiguration_parameters, v.Parameters)
-	serializeAmazonResourceNames(s, schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
+	if v.Parameters != nil {
+		serializeRemoteAccessParameters(s, schemas.CreateRemoteAccessSessionConfiguration_parameters, v.Parameters)
+	}
+	if v.VpceConfigurationArns != nil {
+		serializeAmazonResourceNames(s, schemas.CreateRemoteAccessSessionConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
+	}
 }
 func (v *CreateRemoteAccessSessionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRemoteAccessSessionConfiguration, func(s *smithy.Schema) error {
@@ -460,9 +472,15 @@ func (v *CustomerArtifactPaths) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CustomerArtifactPaths) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAndroidPaths(s, schemas.CustomerArtifactPaths_androidPaths, v.AndroidPaths)
-	serializeDeviceHostPaths(s, schemas.CustomerArtifactPaths_deviceHostPaths, v.DeviceHostPaths)
-	serializeIosPaths(s, schemas.CustomerArtifactPaths_iosPaths, v.IosPaths)
+	if v.AndroidPaths != nil {
+		serializeAndroidPaths(s, schemas.CustomerArtifactPaths_androidPaths, v.AndroidPaths)
+	}
+	if v.DeviceHostPaths != nil {
+		serializeDeviceHostPaths(s, schemas.CustomerArtifactPaths_deviceHostPaths, v.DeviceHostPaths)
+	}
+	if v.IosPaths != nil {
+		serializeIosPaths(s, schemas.CustomerArtifactPaths_iosPaths, v.IosPaths)
+	}
 }
 func (v *CustomerArtifactPaths) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomerArtifactPaths, func(s *smithy.Schema) error {
@@ -603,7 +621,9 @@ func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Image != nil {
 		s.WriteString(schemas.Device_image, *v.Image)
 	}
-	serializeDeviceInstances(s, schemas.Device_instances, v.Instances)
+	if v.Instances != nil {
+		serializeDeviceInstances(s, schemas.Device_instances, v.Instances)
+	}
 	if v.Manufacturer != nil {
 		s.WriteString(schemas.Device_manufacturer, *v.Manufacturer)
 	}
@@ -840,7 +860,9 @@ func (v *DeviceFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.DeviceFilter_operator, string(v.Operator))
 	}
-	serializeDeviceFilterValues(s, schemas.DeviceFilter_values, v.Values)
+	if v.Values != nil {
+		serializeDeviceFilterValues(s, schemas.DeviceFilter_values, v.Values)
+	}
 }
 func (v *DeviceFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeviceFilter, func(s *smithy.Schema) error {
@@ -908,7 +930,9 @@ func (v *DeviceInstance) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InstanceProfile.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInstanceLabels(s, schemas.DeviceInstance_labels, v.Labels)
+	if v.Labels != nil {
+		serializeInstanceLabels(s, schemas.DeviceInstance_labels, v.Labels)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.DeviceInstance_status, string(v.Status))
 	}
@@ -1053,7 +1077,9 @@ func (v *DevicePool) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DevicePool_name, *v.Name)
 	}
-	serializeRules(s, schemas.DevicePool_rules, v.Rules)
+	if v.Rules != nil {
+		serializeRules(s, schemas.DevicePool_rules, v.Rules)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.DevicePool_type, string(v.Type))
 	}
@@ -1117,7 +1143,9 @@ func (v *DevicePoolCompatibilityResult) SerializeMembers(s smithy.ShapeSerialize
 		v.Device.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncompatibilityMessages(s, schemas.DevicePoolCompatibilityResult_incompatibilityMessages, v.IncompatibilityMessages)
+	if v.IncompatibilityMessages != nil {
+		serializeIncompatibilityMessages(s, schemas.DevicePoolCompatibilityResult_incompatibilityMessages, v.IncompatibilityMessages)
+	}
 }
 func (v *DevicePoolCompatibilityResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DevicePoolCompatibilityResult, func(s *smithy.Schema) error {
@@ -1282,7 +1310,9 @@ func (v *DeviceSelectionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeviceSelectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceFilters(s, schemas.DeviceSelectionConfiguration_filters, v.Filters)
+	if v.Filters != nil {
+		serializeDeviceFilters(s, schemas.DeviceSelectionConfiguration_filters, v.Filters)
+	}
 	if v.MaxDevices != nil {
 		s.WriteInt32(schemas.DeviceSelectionConfiguration_maxDevices, *v.MaxDevices)
 	}
@@ -1325,7 +1355,9 @@ func (v *DeviceSelectionResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeviceSelectionResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceFilters(s, schemas.DeviceSelectionResult_filters, v.Filters)
+	if v.Filters != nil {
+		serializeDeviceFilters(s, schemas.DeviceSelectionResult_filters, v.Filters)
+	}
 	if v.MatchedDevicesCount != nil {
 		s.WriteInt32(schemas.DeviceSelectionResult_matchedDevicesCount, *v.MatchedDevicesCount)
 	}
@@ -1570,7 +1602,9 @@ func (v *InstanceProfile) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.InstanceProfile_description, *v.Description)
 	}
-	serializePackageIds(s, schemas.InstanceProfile_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
+	if v.ExcludeAppPackagesFromCleanup != nil {
+		serializePackageIds(s, schemas.InstanceProfile_excludeAppPackagesFromCleanup, v.ExcludeAppPackagesFromCleanup)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.InstanceProfile_name, *v.Name)
 	}
@@ -2335,7 +2369,9 @@ func (v *Offering) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Platform != "" {
 		s.WriteString(schemas.Offering_platform, string(v.Platform))
 	}
-	serializeRecurringCharges(s, schemas.Offering_recurringCharges, v.RecurringCharges)
+	if v.RecurringCharges != nil {
+		serializeRecurringCharges(s, schemas.Offering_recurringCharges, v.RecurringCharges)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Offering_type, string(v.Type))
 	}
@@ -2744,7 +2780,9 @@ func (v *Project) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DefaultJobTimeoutMinutes != nil {
 		s.WriteInt32(schemas.Project_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
 	}
-	serializeEnvironmentVariables(s, schemas.Project_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.Project_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.Project_executionRoleArn, *v.ExecutionRoleArn)
 	}
@@ -3636,7 +3674,9 @@ func (v *Run) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeviceSelectionResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnvironmentVariables(s, schemas.Run_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.Run_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.EventCount != nil {
 		s.WriteInt32(schemas.Run_eventCount, *v.EventCount)
 	}
@@ -3648,7 +3688,9 @@ func (v *Run) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Insights.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInsightsTypes(s, schemas.Run_insightsTypes, v.InsightsTypes)
+	if v.InsightsTypes != nil {
+		serializeInsightsTypes(s, schemas.Run_insightsTypes, v.InsightsTypes)
+	}
 	if v.JobTimeoutMinutes != nil {
 		s.WriteInt32(schemas.Run_jobTimeoutMinutes, *v.JobTimeoutMinutes)
 	}
@@ -4069,7 +4111,9 @@ func (v *ScheduleRunConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScheduleRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAmazonResourceNames(s, schemas.ScheduleRunConfiguration_auxiliaryApps, v.AuxiliaryApps)
+	if v.AuxiliaryApps != nil {
+		serializeAmazonResourceNames(s, schemas.ScheduleRunConfiguration_auxiliaryApps, v.AuxiliaryApps)
+	}
 	if v.BillingMethod != "" {
 		s.WriteString(schemas.ScheduleRunConfiguration_billingMethod, string(v.BillingMethod))
 	}
@@ -4083,14 +4127,18 @@ func (v *ScheduleRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeviceProxy.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEnvironmentVariables(s, schemas.ScheduleRunConfiguration_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.ScheduleRunConfiguration_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.ScheduleRunConfiguration_executionRoleArn, *v.ExecutionRoleArn)
 	}
 	if v.ExtraDataPackageArn != nil {
 		s.WriteString(schemas.ScheduleRunConfiguration_extraDataPackageArn, *v.ExtraDataPackageArn)
 	}
-	serializeInsightsTypes(s, schemas.ScheduleRunConfiguration_insightsTypes, v.InsightsTypes)
+	if v.InsightsTypes != nil {
+		serializeInsightsTypes(s, schemas.ScheduleRunConfiguration_insightsTypes, v.InsightsTypes)
+	}
 	if v.Locale != nil {
 		s.WriteString(schemas.ScheduleRunConfiguration_locale, *v.Locale)
 	}
@@ -4107,7 +4155,9 @@ func (v *ScheduleRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Radios.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAmazonResourceNames(s, schemas.ScheduleRunConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
+	if v.VpceConfigurationArns != nil {
+		serializeAmazonResourceNames(s, schemas.ScheduleRunConfiguration_vpceConfigurationArns, v.VpceConfigurationArns)
+	}
 }
 func (v *ScheduleRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScheduleRunConfiguration, func(s *smithy.Schema) error {
@@ -4254,7 +4304,9 @@ func (v *ScheduleRunTest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Filter != nil {
 		s.WriteString(schemas.ScheduleRunTest_filter, *v.Filter)
 	}
-	serializeTestParameters(s, schemas.ScheduleRunTest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeTestParameters(s, schemas.ScheduleRunTest_parameters, v.Parameters)
+	}
 	if v.TestPackageArn != nil {
 		s.WriteString(schemas.ScheduleRunTest_testPackageArn, *v.TestPackageArn)
 	}
@@ -5048,8 +5100,12 @@ func (v *TestGridVpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TestGridVpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.TestGridVpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.TestGridVpcConfig_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.TestGridVpcConfig_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.TestGridVpcConfig_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.TestGridVpcConfig_vpcId, *v.VpcId)
 	}
@@ -5285,7 +5341,9 @@ func (v *UniqueProblem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.UniqueProblem_message, *v.Message)
 	}
-	serializeProblems(s, schemas.UniqueProblem_problems, v.Problems)
+	if v.Problems != nil {
+		serializeProblems(s, schemas.UniqueProblem_problems, v.Problems)
+	}
 }
 func (v *UniqueProblem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UniqueProblem, func(s *smithy.Schema) error {
@@ -5529,8 +5587,12 @@ func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
-	serializeVpcSubnetIds(s, schemas.VpcConfig_subnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeVpcSecurityGroupIds(s, schemas.VpcConfig_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeVpcSubnetIds(s, schemas.VpcConfig_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcConfig_vpcId, *v.VpcId)
 	}

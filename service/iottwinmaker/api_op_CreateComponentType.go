@@ -88,18 +88,30 @@ func (v *CreateComponentTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComponentTypeName != nil {
 		s.WriteString(schemas.CreateComponentTypeRequest_componentTypeName, *v.ComponentTypeName)
 	}
-	serializeCompositeComponentTypesRequest(s, schemas.CreateComponentTypeRequest_compositeComponentTypes, v.CompositeComponentTypes)
+	if v.CompositeComponentTypes != nil {
+		serializeCompositeComponentTypesRequest(s, schemas.CreateComponentTypeRequest_compositeComponentTypes, v.CompositeComponentTypes)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateComponentTypeRequest_description, *v.Description)
 	}
-	serializeExtendsFrom(s, schemas.CreateComponentTypeRequest_extendsFrom, v.ExtendsFrom)
-	serializeFunctionsRequest(s, schemas.CreateComponentTypeRequest_functions, v.Functions)
+	if v.ExtendsFrom != nil {
+		serializeExtendsFrom(s, schemas.CreateComponentTypeRequest_extendsFrom, v.ExtendsFrom)
+	}
+	if v.Functions != nil {
+		serializeFunctionsRequest(s, schemas.CreateComponentTypeRequest_functions, v.Functions)
+	}
 	if v.IsSingleton != nil {
 		s.WriteBool(schemas.CreateComponentTypeRequest_isSingleton, *v.IsSingleton)
 	}
-	serializePropertyDefinitionsRequest(s, schemas.CreateComponentTypeRequest_propertyDefinitions, v.PropertyDefinitions)
-	serializePropertyGroupsRequest(s, schemas.CreateComponentTypeRequest_propertyGroups, v.PropertyGroups)
-	serializeTagMap(s, schemas.CreateComponentTypeRequest_tags, v.Tags)
+	if v.PropertyDefinitions != nil {
+		serializePropertyDefinitionsRequest(s, schemas.CreateComponentTypeRequest_propertyDefinitions, v.PropertyDefinitions)
+	}
+	if v.PropertyGroups != nil {
+		serializePropertyGroupsRequest(s, schemas.CreateComponentTypeRequest_propertyGroups, v.PropertyGroups)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateComponentTypeRequest_tags, v.Tags)
+	}
 	if v.WorkspaceId != nil {
 		s.WriteString(schemas.CreateComponentTypeRequest_workspaceId, *v.WorkspaceId)
 	}

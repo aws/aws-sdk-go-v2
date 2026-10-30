@@ -73,7 +73,9 @@ func (v *DeleteColumnStatisticsForPartitionInput) SerializeMembers(s smithy.Shap
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.DeleteColumnStatisticsForPartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeValueStringList(s, schemas.DeleteColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializeValueStringList(s, schemas.DeleteColumnStatisticsForPartitionRequest_PartitionValues, v.PartitionValues)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.DeleteColumnStatisticsForPartitionRequest_TableName, *v.TableName)
 	}

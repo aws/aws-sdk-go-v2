@@ -176,7 +176,9 @@ func (v *GetPersonTrackingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetPersonTrackingResponse_NextToken, *v.NextToken)
 	}
-	serializePersonDetections(s, schemas.GetPersonTrackingResponse_Persons, v.Persons)
+	if v.Persons != nil {
+		serializePersonDetections(s, schemas.GetPersonTrackingResponse_Persons, v.Persons)
+	}
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetPersonTrackingResponse_StatusMessage, *v.StatusMessage)
 	}

@@ -80,7 +80,9 @@ func (v *ListIdentityPoolsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIdentityPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityPoolsList(s, schemas.ListIdentityPoolsResponse_IdentityPools, v.IdentityPools)
+	if v.IdentityPools != nil {
+		serializeIdentityPoolsList(s, schemas.ListIdentityPoolsResponse_IdentityPools, v.IdentityPools)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIdentityPoolsResponse_NextToken, *v.NextToken)
 	}

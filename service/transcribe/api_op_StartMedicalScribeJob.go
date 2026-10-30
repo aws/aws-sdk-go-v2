@@ -181,11 +181,15 @@ func (v *StartMedicalScribeJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartMedicalScribeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMedicalScribeChannelDefinitions(s, schemas.StartMedicalScribeJobRequest_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeMedicalScribeChannelDefinitions(s, schemas.StartMedicalScribeJobRequest_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.DataAccessRoleArn != nil {
 		s.WriteString(schemas.StartMedicalScribeJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
 	}
-	serializeKMSEncryptionContextMap(s, schemas.StartMedicalScribeJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.KMSEncryptionContext != nil {
+		serializeKMSEncryptionContextMap(s, schemas.StartMedicalScribeJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	}
 	if v.Media != nil {
 		s.WriteStruct(schemas.StartMedicalScribeJobRequest_Media)
 		v.Media.SerializeMembers(s)
@@ -210,7 +214,9 @@ func (v *StartMedicalScribeJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Settings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartMedicalScribeJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartMedicalScribeJobRequest_Tags, v.Tags)
+	}
 }
 
 type StartMedicalScribeJobOutput struct {

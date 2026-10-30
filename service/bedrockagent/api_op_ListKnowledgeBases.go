@@ -84,7 +84,9 @@ func (v *ListKnowledgeBasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListKnowledgeBasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKnowledgeBaseSummaries(s, schemas.ListKnowledgeBasesResponse_knowledgeBaseSummaries, v.KnowledgeBaseSummaries)
+	if v.KnowledgeBaseSummaries != nil {
+		serializeKnowledgeBaseSummaries(s, schemas.ListKnowledgeBasesResponse_knowledgeBaseSummaries, v.KnowledgeBaseSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListKnowledgeBasesResponse_nextToken, *v.NextToken)
 	}

@@ -57,7 +57,9 @@ func (v *RegisterThingInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterThingInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameters(s, schemas.RegisterThingRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.RegisterThingRequest_parameters, v.Parameters)
+	}
 	if v.TemplateBody != nil {
 		s.WriteString(schemas.RegisterThingRequest_templateBody, *v.TemplateBody)
 	}
@@ -87,7 +89,9 @@ func (v *RegisterThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CertificatePem != nil {
 		s.WriteString(schemas.RegisterThingResponse_certificatePem, *v.CertificatePem)
 	}
-	serializeResourceArns(s, schemas.RegisterThingResponse_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.RegisterThingResponse_resourceArns, v.ResourceArns)
+	}
 }
 func (v *RegisterThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegisterThingResponse, func(s *smithy.Schema) error {

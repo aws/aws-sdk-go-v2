@@ -81,7 +81,9 @@ func (v *ListHITsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHITsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHITList(s, schemas.ListHITsResponse_HITs, v.HITs)
+	if v.HITs != nil {
+		serializeHITList(s, schemas.ListHITsResponse_HITs, v.HITs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHITsResponse_NextToken, *v.NextToken)
 	}

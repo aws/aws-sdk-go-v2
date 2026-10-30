@@ -218,7 +218,9 @@ func (v *DescribeDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeDomainResponse_Status, string(v.Status))
 	}
-	serializeSubnets(s, schemas.DescribeDomainResponse_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnets(s, schemas.DescribeDomainResponse_SubnetIds, v.SubnetIds)
+	}
 	if v.TagPropagation != "" {
 		s.WriteString(schemas.DescribeDomainResponse_TagPropagation, string(v.TagPropagation))
 	}

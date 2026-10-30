@@ -95,7 +95,9 @@ func (v *DescribeActionConnectorPermissionsOutput) SerializeMembers(s smithy.Sha
 	if v.Arn != nil {
 		s.WriteString(schemas.DescribeActionConnectorPermissionsResponse_Arn, *v.Arn)
 	}
-	serializeResourcePermissionList(s, schemas.DescribeActionConnectorPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.DescribeActionConnectorPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.DescribeActionConnectorPermissionsResponse_RequestId, *v.RequestId)
 	}

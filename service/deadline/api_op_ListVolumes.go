@@ -102,7 +102,9 @@ func (v *ListVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVolumesResponse_nextToken, *v.NextToken)
 	}
-	serializeVolumeSummaries(s, schemas.ListVolumesResponse_volumes, v.Volumes)
+	if v.Volumes != nil {
+		serializeVolumeSummaries(s, schemas.ListVolumesResponse_volumes, v.Volumes)
+	}
 }
 func (v *ListVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVolumesResponse, func(s *smithy.Schema) error {

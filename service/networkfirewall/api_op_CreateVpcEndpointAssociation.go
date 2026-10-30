@@ -77,7 +77,9 @@ func (v *CreateVpcEndpointAssociationInput) SerializeMembers(s smithy.ShapeSeria
 		v.SubnetMapping.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateVpcEndpointAssociationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVpcEndpointAssociationRequest_Tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateVpcEndpointAssociationRequest_VpcId, *v.VpcId)
 	}

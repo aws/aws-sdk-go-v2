@@ -7,9 +7,6 @@ import (
 )
 
 func serializeDayOfWeekList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DayOfWeek) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeDayOfWeekList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeDeviceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeviceSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -31,9 +25,6 @@ func serializeDeviceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []De
 }
 
 func serializeEnvironmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EnvironmentSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -44,9 +35,6 @@ func serializeEnvironmentList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSoftwareList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Software) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeSoftwareList(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeSoftwareSetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SoftwareSetSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeSoftwareSetList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -81,9 +63,6 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -246,9 +225,6 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeDeviceCreationTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -258,9 +234,6 @@ func serializeDeviceCreationTagsMap(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeTagsMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

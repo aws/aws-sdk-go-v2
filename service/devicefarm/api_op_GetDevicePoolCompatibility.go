@@ -135,8 +135,12 @@ func (v *GetDevicePoolCompatibilityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDevicePoolCompatibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevicePoolCompatibilityResults(s, schemas.GetDevicePoolCompatibilityResult_compatibleDevices, v.CompatibleDevices)
-	serializeDevicePoolCompatibilityResults(s, schemas.GetDevicePoolCompatibilityResult_incompatibleDevices, v.IncompatibleDevices)
+	if v.CompatibleDevices != nil {
+		serializeDevicePoolCompatibilityResults(s, schemas.GetDevicePoolCompatibilityResult_compatibleDevices, v.CompatibleDevices)
+	}
+	if v.IncompatibleDevices != nil {
+		serializeDevicePoolCompatibilityResults(s, schemas.GetDevicePoolCompatibilityResult_incompatibleDevices, v.IncompatibleDevices)
+	}
 }
 func (v *GetDevicePoolCompatibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDevicePoolCompatibilityResult, func(s *smithy.Schema) error {

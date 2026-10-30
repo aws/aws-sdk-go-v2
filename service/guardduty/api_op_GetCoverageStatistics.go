@@ -67,7 +67,9 @@ func (v *GetCoverageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.FilterCriteria.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCoverageStatisticsTypeList(s, schemas.GetCoverageStatisticsRequest_StatisticsType, v.StatisticsType)
+	if v.StatisticsType != nil {
+		serializeCoverageStatisticsTypeList(s, schemas.GetCoverageStatisticsRequest_StatisticsType, v.StatisticsType)
+	}
 }
 
 type GetCoverageStatisticsOutput struct {

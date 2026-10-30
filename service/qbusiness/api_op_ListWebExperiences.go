@@ -90,7 +90,9 @@ func (v *ListWebExperiencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWebExperiencesResponse_nextToken, *v.NextToken)
 	}
-	serializeWebExperiences(s, schemas.ListWebExperiencesResponse_webExperiences, v.WebExperiences)
+	if v.WebExperiences != nil {
+		serializeWebExperiences(s, schemas.ListWebExperiencesResponse_webExperiences, v.WebExperiences)
+	}
 }
 func (v *ListWebExperiencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWebExperiencesResponse, func(s *smithy.Schema) error {

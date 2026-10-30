@@ -59,7 +59,9 @@ func (v *UpdateFrameworkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFrameworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFrameworkControls(s, schemas.UpdateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	if v.FrameworkControls != nil {
+		serializeFrameworkControls(s, schemas.UpdateFrameworkInput_FrameworkControls, v.FrameworkControls)
+	}
 	if v.FrameworkDescription != nil {
 		s.WriteString(schemas.UpdateFrameworkInput_FrameworkDescription, *v.FrameworkDescription)
 	}

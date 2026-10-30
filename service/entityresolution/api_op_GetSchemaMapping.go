@@ -112,14 +112,18 @@ func (v *GetSchemaMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HasWorkflows != nil {
 		s.WriteBool(schemas.GetSchemaMappingOutput_hasWorkflows, *v.HasWorkflows)
 	}
-	serializeSchemaInputAttributes(s, schemas.GetSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	if v.MappedInputFields != nil {
+		serializeSchemaInputAttributes(s, schemas.GetSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	}
 	if v.SchemaArn != nil {
 		s.WriteString(schemas.GetSchemaMappingOutput_schemaArn, *v.SchemaArn)
 	}
 	if v.SchemaName != nil {
 		s.WriteString(schemas.GetSchemaMappingOutput_schemaName, *v.SchemaName)
 	}
-	serializeTagMap(s, schemas.GetSchemaMappingOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetSchemaMappingOutput_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetSchemaMappingOutput_updatedAt, *v.UpdatedAt)
 	}

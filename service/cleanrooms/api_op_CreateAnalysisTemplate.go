@@ -83,7 +83,9 @@ func (v *CreateAnalysisTemplateInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisParameterList(s, schemas.CreateAnalysisTemplateInput_analysisParameters, v.AnalysisParameters)
+	if v.AnalysisParameters != nil {
+		serializeAnalysisParameterList(s, schemas.CreateAnalysisTemplateInput_analysisParameters, v.AnalysisParameters)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAnalysisTemplateInput_description, *v.Description)
 	}
@@ -106,9 +108,15 @@ func (v *CreateAnalysisTemplateInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.Schema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalysisSource(s, schemas.CreateAnalysisTemplateInput_source, v.Source)
-	serializeSyntheticDataParameters(s, schemas.CreateAnalysisTemplateInput_syntheticDataParameters, v.SyntheticDataParameters)
-	serializeTagMap(s, schemas.CreateAnalysisTemplateInput_tags, v.Tags)
+	if v.Source != nil {
+		serializeAnalysisSource(s, schemas.CreateAnalysisTemplateInput_source, v.Source)
+	}
+	if v.SyntheticDataParameters != nil {
+		serializeSyntheticDataParameters(s, schemas.CreateAnalysisTemplateInput_syntheticDataParameters, v.SyntheticDataParameters)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAnalysisTemplateInput_tags, v.Tags)
+	}
 }
 func (v *CreateAnalysisTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAnalysisTemplateInput, func(s *smithy.Schema) error {

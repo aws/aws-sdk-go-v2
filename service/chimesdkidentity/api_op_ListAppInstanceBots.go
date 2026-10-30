@@ -88,7 +88,9 @@ func (v *ListAppInstanceBotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppInstanceArn != nil {
 		s.WriteString(schemas.ListAppInstanceBotsResponse_AppInstanceArn, *v.AppInstanceArn)
 	}
-	serializeAppInstanceBotList(s, schemas.ListAppInstanceBotsResponse_AppInstanceBots, v.AppInstanceBots)
+	if v.AppInstanceBots != nil {
+		serializeAppInstanceBotList(s, schemas.ListAppInstanceBotsResponse_AppInstanceBots, v.AppInstanceBots)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAppInstanceBotsResponse_NextToken, *v.NextToken)
 	}

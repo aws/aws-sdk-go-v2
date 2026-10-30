@@ -62,7 +62,9 @@ func (v *PutFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantId != nil {
 		s.WriteString(schemas.PutFeedbackRequest_assistantId, *v.AssistantId)
 	}
-	serializeContentFeedbackData(s, schemas.PutFeedbackRequest_contentFeedback, v.ContentFeedback)
+	if v.ContentFeedback != nil {
+		serializeContentFeedbackData(s, schemas.PutFeedbackRequest_contentFeedback, v.ContentFeedback)
+	}
 	if v.TargetId != nil {
 		s.WriteString(schemas.PutFeedbackRequest_targetId, *v.TargetId)
 	}
@@ -117,7 +119,9 @@ func (v *PutFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssistantId != nil {
 		s.WriteString(schemas.PutFeedbackResponse_assistantId, *v.AssistantId)
 	}
-	serializeContentFeedbackData(s, schemas.PutFeedbackResponse_contentFeedback, v.ContentFeedback)
+	if v.ContentFeedback != nil {
+		serializeContentFeedbackData(s, schemas.PutFeedbackResponse_contentFeedback, v.ContentFeedback)
+	}
 	if v.TargetId != nil {
 		s.WriteString(schemas.PutFeedbackResponse_targetId, *v.TargetId)
 	}

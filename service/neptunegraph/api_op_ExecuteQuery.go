@@ -98,7 +98,9 @@ func (v *ExecuteQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Language != "" {
 		s.WriteString(schemas.ExecuteQueryInput_language, string(v.Language))
 	}
-	serializeDocumentValuedMap(s, schemas.ExecuteQueryInput_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeDocumentValuedMap(s, schemas.ExecuteQueryInput_parameters, v.Parameters)
+	}
 	if v.PlanCache != "" {
 		s.WriteString(schemas.ExecuteQueryInput_planCache, string(v.PlanCache))
 	}

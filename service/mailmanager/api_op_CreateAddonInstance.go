@@ -61,7 +61,9 @@ func (v *CreateAddonInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAddonInstanceRequest_ClientToken, *v.ClientToken)
 	}
-	serializeTagList(s, schemas.CreateAddonInstanceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAddonInstanceRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAddonInstanceOutput struct {

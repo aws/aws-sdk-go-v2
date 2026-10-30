@@ -55,7 +55,9 @@ func (v *CreateEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.CreateEntitlementRequest_applicationArn, *v.ApplicationArn)
 	}
-	serializeEntitlement(s, schemas.CreateEntitlementRequest_entitlement, v.Entitlement)
+	if v.Entitlement != nil {
+		serializeEntitlement(s, schemas.CreateEntitlementRequest_entitlement, v.Entitlement)
+	}
 }
 
 type CreateEntitlementOutput struct {

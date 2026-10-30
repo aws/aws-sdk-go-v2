@@ -53,7 +53,9 @@ func (v *StartNetworkMigrationCodeGenerationInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *StartNetworkMigrationCodeGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeGenerationOutputFormatTypes(s, schemas.StartNetworkMigrationCodeGenerationRequest_codeGenerationOutputFormatTypes, v.CodeGenerationOutputFormatTypes)
+	if v.CodeGenerationOutputFormatTypes != nil {
+		serializeCodeGenerationOutputFormatTypes(s, schemas.StartNetworkMigrationCodeGenerationRequest_codeGenerationOutputFormatTypes, v.CodeGenerationOutputFormatTypes)
+	}
 	if v.NetworkMigrationDefinitionID != nil {
 		s.WriteString(schemas.StartNetworkMigrationCodeGenerationRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
 	}

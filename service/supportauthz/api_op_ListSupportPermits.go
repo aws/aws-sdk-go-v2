@@ -57,7 +57,9 @@ func (v *ListSupportPermitsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSupportPermitsInput_nextToken, *v.NextToken)
 	}
-	serializeSupportPermitStatuses(s, schemas.ListSupportPermitsInput_supportPermitStatuses, v.SupportPermitStatuses)
+	if v.SupportPermitStatuses != nil {
+		serializeSupportPermitStatuses(s, schemas.ListSupportPermitsInput_supportPermitStatuses, v.SupportPermitStatuses)
+	}
 }
 
 type ListSupportPermitsOutput struct {
@@ -86,7 +88,9 @@ func (v *ListSupportPermitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSupportPermitsOutput_nextToken, *v.NextToken)
 	}
-	serializeSupportPermitSummaries(s, schemas.ListSupportPermitsOutput_supportPermits, v.SupportPermits)
+	if v.SupportPermits != nil {
+		serializeSupportPermitSummaries(s, schemas.ListSupportPermitsOutput_supportPermits, v.SupportPermits)
+	}
 }
 func (v *ListSupportPermitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSupportPermitsOutput, func(s *smithy.Schema) error {

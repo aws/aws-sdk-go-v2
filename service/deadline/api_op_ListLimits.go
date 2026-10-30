@@ -90,7 +90,9 @@ func (v *ListLimitsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimitSummaries(s, schemas.ListLimitsResponse_limits, v.Limits)
+	if v.Limits != nil {
+		serializeLimitSummaries(s, schemas.ListLimitsResponse_limits, v.Limits)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLimitsResponse_nextToken, *v.NextToken)
 	}

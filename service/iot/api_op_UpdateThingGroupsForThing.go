@@ -59,8 +59,12 @@ func (v *UpdateThingGroupsForThingInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.OverrideDynamicGroups != false {
 		s.WriteBool(schemas.UpdateThingGroupsForThingRequest_overrideDynamicGroups, v.OverrideDynamicGroups)
 	}
-	serializeThingGroupList(s, schemas.UpdateThingGroupsForThingRequest_thingGroupsToAdd, v.ThingGroupsToAdd)
-	serializeThingGroupList(s, schemas.UpdateThingGroupsForThingRequest_thingGroupsToRemove, v.ThingGroupsToRemove)
+	if v.ThingGroupsToAdd != nil {
+		serializeThingGroupList(s, schemas.UpdateThingGroupsForThingRequest_thingGroupsToAdd, v.ThingGroupsToAdd)
+	}
+	if v.ThingGroupsToRemove != nil {
+		serializeThingGroupList(s, schemas.UpdateThingGroupsForThingRequest_thingGroupsToRemove, v.ThingGroupsToRemove)
+	}
 	if v.ThingName != nil {
 		s.WriteString(schemas.UpdateThingGroupsForThingRequest_thingName, *v.ThingName)
 	}

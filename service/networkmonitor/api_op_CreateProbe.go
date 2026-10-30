@@ -72,7 +72,9 @@ func (v *CreateProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Probe.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateProbeInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateProbeInput_tags, v.Tags)
+	}
 }
 
 type CreateProbeOutput struct {
@@ -172,7 +174,9 @@ func (v *CreateProbeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateProbeOutput_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateProbeOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateProbeOutput_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateProbeOutput_vpcId, *v.VpcId)
 	}

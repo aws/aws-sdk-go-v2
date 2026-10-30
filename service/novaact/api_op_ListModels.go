@@ -84,8 +84,12 @@ func (v *ListModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CompatibilityInformation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeModelAliases(s, schemas.ListModelsResponse_modelAliases, v.ModelAliases)
-	serializeModelSummaries(s, schemas.ListModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.ModelAliases != nil {
+		serializeModelAliases(s, schemas.ListModelsResponse_modelAliases, v.ModelAliases)
+	}
+	if v.ModelSummaries != nil {
+		serializeModelSummaries(s, schemas.ListModelsResponse_modelSummaries, v.ModelSummaries)
+	}
 }
 func (v *ListModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListModelsResponse, func(s *smithy.Schema) error {

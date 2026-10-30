@@ -89,7 +89,9 @@ func (v *StartSingleWirelessDeviceImportTaskInput) SerializeMembers(s smithy.Sha
 		v.Sidewalk.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartSingleWirelessDeviceImportTaskRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartSingleWirelessDeviceImportTaskRequest_Tags, v.Tags)
+	}
 }
 
 type StartSingleWirelessDeviceImportTaskOutput struct {

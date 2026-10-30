@@ -50,8 +50,12 @@ func (v *DeleteTagsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationIdList(s, schemas.DeleteTagsRequest_configurationIds, v.ConfigurationIds)
-	serializeTagSet(s, schemas.DeleteTagsRequest_tags, v.Tags)
+	if v.ConfigurationIds != nil {
+		serializeConfigurationIdList(s, schemas.DeleteTagsRequest_configurationIds, v.ConfigurationIds)
+	}
+	if v.Tags != nil {
+		serializeTagSet(s, schemas.DeleteTagsRequest_tags, v.Tags)
+	}
 }
 
 type DeleteTagsOutput struct {

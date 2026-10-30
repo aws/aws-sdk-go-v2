@@ -111,7 +111,9 @@ func (v *ListSourceResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSourceResourcesResult_NextToken, *v.NextToken)
 	}
-	serializeSourceResourceList(s, schemas.ListSourceResourcesResult_SourceResourceList, v.SourceResourceList)
+	if v.SourceResourceList != nil {
+		serializeSourceResourceList(s, schemas.ListSourceResourcesResult_SourceResourceList, v.SourceResourceList)
+	}
 }
 func (v *ListSourceResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSourceResourcesResult, func(s *smithy.Schema) error {

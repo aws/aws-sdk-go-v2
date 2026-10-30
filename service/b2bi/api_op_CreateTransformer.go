@@ -129,7 +129,9 @@ func (v *CreateTransformerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTransformerRequest_clientToken, *v.ClientToken)
 	}
-	serializeEdiType(s, schemas.CreateTransformerRequest_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.CreateTransformerRequest_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.CreateTransformerRequest_fileFormat, string(v.FileFormat))
 	}
@@ -162,7 +164,9 @@ func (v *CreateTransformerInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SampleDocuments.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTransformerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTransformerRequest_tags, v.Tags)
+	}
 }
 
 type CreateTransformerOutput struct {
@@ -256,7 +260,9 @@ func (v *CreateTransformerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateTransformerResponse_createdAt, *v.CreatedAt)
 	}
-	serializeEdiType(s, schemas.CreateTransformerResponse_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.CreateTransformerResponse_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.CreateTransformerResponse_fileFormat, string(v.FileFormat))
 	}

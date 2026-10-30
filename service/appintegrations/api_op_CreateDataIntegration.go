@@ -96,7 +96,9 @@ func (v *CreateDataIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataIntegrationRequest_Name, *v.Name)
 	}
-	serializeObjectConfiguration(s, schemas.CreateDataIntegrationRequest_ObjectConfiguration, v.ObjectConfiguration)
+	if v.ObjectConfiguration != nil {
+		serializeObjectConfiguration(s, schemas.CreateDataIntegrationRequest_ObjectConfiguration, v.ObjectConfiguration)
+	}
 	if v.ScheduleConfig != nil {
 		s.WriteStruct(schemas.CreateDataIntegrationRequest_ScheduleConfig)
 		v.ScheduleConfig.SerializeMembers(s)
@@ -105,7 +107,9 @@ func (v *CreateDataIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SourceURI != nil {
 		s.WriteString(schemas.CreateDataIntegrationRequest_SourceURI, *v.SourceURI)
 	}
-	serializeTagMap(s, schemas.CreateDataIntegrationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataIntegrationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDataIntegrationOutput struct {
@@ -184,7 +188,9 @@ func (v *CreateDataIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataIntegrationResponse_Name, *v.Name)
 	}
-	serializeObjectConfiguration(s, schemas.CreateDataIntegrationResponse_ObjectConfiguration, v.ObjectConfiguration)
+	if v.ObjectConfiguration != nil {
+		serializeObjectConfiguration(s, schemas.CreateDataIntegrationResponse_ObjectConfiguration, v.ObjectConfiguration)
+	}
 	if v.ScheduleConfiguration != nil {
 		s.WriteStruct(schemas.CreateDataIntegrationResponse_ScheduleConfiguration)
 		v.ScheduleConfiguration.SerializeMembers(s)
@@ -193,7 +199,9 @@ func (v *CreateDataIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.SourceURI != nil {
 		s.WriteString(schemas.CreateDataIntegrationResponse_SourceURI, *v.SourceURI)
 	}
-	serializeTagMap(s, schemas.CreateDataIntegrationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataIntegrationResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateDataIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDataIntegrationResponse, func(s *smithy.Schema) error {

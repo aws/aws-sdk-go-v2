@@ -92,7 +92,9 @@ func (v *ListFlowAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlowAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowAssociationSummaryList(s, schemas.ListFlowAssociationsResponse_FlowAssociationSummaryList, v.FlowAssociationSummaryList)
+	if v.FlowAssociationSummaryList != nil {
+		serializeFlowAssociationSummaryList(s, schemas.ListFlowAssociationsResponse_FlowAssociationSummaryList, v.FlowAssociationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlowAssociationsResponse_NextToken, *v.NextToken)
 	}

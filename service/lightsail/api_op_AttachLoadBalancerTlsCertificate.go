@@ -93,7 +93,9 @@ func (v *AttachLoadBalancerTlsCertificateOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *AttachLoadBalancerTlsCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.AttachLoadBalancerTlsCertificateResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.AttachLoadBalancerTlsCertificateResult_operations, v.Operations)
+	}
 }
 func (v *AttachLoadBalancerTlsCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttachLoadBalancerTlsCertificateResult, func(s *smithy.Schema) error {

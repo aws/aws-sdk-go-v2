@@ -59,7 +59,9 @@ func (v *GetLinkAttributesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLinkAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeNameList(s, schemas.GetLinkAttributesRequest_AttributeNames, v.AttributeNames)
+	if v.AttributeNames != nil {
+		serializeAttributeNameList(s, schemas.GetLinkAttributesRequest_AttributeNames, v.AttributeNames)
+	}
 	if v.ConsistencyLevel != "" {
 		s.WriteString(schemas.GetLinkAttributesRequest_ConsistencyLevel, string(v.ConsistencyLevel))
 	}
@@ -91,7 +93,9 @@ func (v *GetLinkAttributesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetLinkAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeKeyAndValueList(s, schemas.GetLinkAttributesResponse_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeKeyAndValueList(s, schemas.GetLinkAttributesResponse_Attributes, v.Attributes)
+	}
 }
 func (v *GetLinkAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetLinkAttributesResponse, func(s *smithy.Schema) error {

@@ -53,7 +53,9 @@ func (v *BatchWriteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.BatchWriteRequest_DirectoryArn, *v.DirectoryArn)
 	}
-	serializeBatchWriteOperationList(s, schemas.BatchWriteRequest_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeBatchWriteOperationList(s, schemas.BatchWriteRequest_Operations, v.Operations)
+	}
 }
 
 type BatchWriteOutput struct {
@@ -74,7 +76,9 @@ func (v *BatchWriteOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchWriteOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchWriteOperationResponseList(s, schemas.BatchWriteResponse_Responses, v.Responses)
+	if v.Responses != nil {
+		serializeBatchWriteOperationResponseList(s, schemas.BatchWriteResponse_Responses, v.Responses)
+	}
 }
 func (v *BatchWriteOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchWriteResponse, func(s *smithy.Schema) error {

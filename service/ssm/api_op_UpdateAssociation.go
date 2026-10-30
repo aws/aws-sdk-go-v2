@@ -285,7 +285,9 @@ func (v *UpdateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AutomationTargetParameterName != nil {
 		s.WriteString(schemas.UpdateAssociationRequest_AutomationTargetParameterName, *v.AutomationTargetParameterName)
 	}
-	serializeCalendarNameOrARNList(s, schemas.UpdateAssociationRequest_CalendarNames, v.CalendarNames)
+	if v.CalendarNames != nil {
+		serializeCalendarNameOrARNList(s, schemas.UpdateAssociationRequest_CalendarNames, v.CalendarNames)
+	}
 	if v.ComplianceSeverity != "" {
 		s.WriteString(schemas.UpdateAssociationRequest_ComplianceSeverity, string(v.ComplianceSeverity))
 	}
@@ -309,7 +311,9 @@ func (v *UpdateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParameters(s, schemas.UpdateAssociationRequest_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameters(s, schemas.UpdateAssociationRequest_Parameters, v.Parameters)
+	}
 	if v.ScheduleExpression != nil {
 		s.WriteString(schemas.UpdateAssociationRequest_ScheduleExpression, *v.ScheduleExpression)
 	}
@@ -319,9 +323,15 @@ func (v *UpdateAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SyncCompliance != "" {
 		s.WriteString(schemas.UpdateAssociationRequest_SyncCompliance, string(v.SyncCompliance))
 	}
-	serializeTargetLocations(s, schemas.UpdateAssociationRequest_TargetLocations, v.TargetLocations)
-	serializeTargetMaps(s, schemas.UpdateAssociationRequest_TargetMaps, v.TargetMaps)
-	serializeTargets(s, schemas.UpdateAssociationRequest_Targets, v.Targets)
+	if v.TargetLocations != nil {
+		serializeTargetLocations(s, schemas.UpdateAssociationRequest_TargetLocations, v.TargetLocations)
+	}
+	if v.TargetMaps != nil {
+		serializeTargetMaps(s, schemas.UpdateAssociationRequest_TargetMaps, v.TargetMaps)
+	}
+	if v.Targets != nil {
+		serializeTargets(s, schemas.UpdateAssociationRequest_Targets, v.Targets)
+	}
 }
 
 type UpdateAssociationOutput struct {

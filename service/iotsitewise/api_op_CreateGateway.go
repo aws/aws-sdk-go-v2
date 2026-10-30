@@ -85,7 +85,9 @@ func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayVersion != nil {
 		s.WriteString(schemas.CreateGatewayRequest_gatewayVersion, *v.GatewayVersion)
 	}
-	serializeTagMap(s, schemas.CreateGatewayRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateGatewayRequest_tags, v.Tags)
+	}
 }
 
 type CreateGatewayOutput struct {

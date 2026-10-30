@@ -105,7 +105,9 @@ func (v *ImportPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourcePhoneNumberArn != nil {
 		s.WriteString(schemas.ImportPhoneNumberRequest_SourcePhoneNumberArn, *v.SourcePhoneNumberArn)
 	}
-	serializeTagMap(s, schemas.ImportPhoneNumberRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.ImportPhoneNumberRequest_Tags, v.Tags)
+	}
 }
 
 type ImportPhoneNumberOutput struct {

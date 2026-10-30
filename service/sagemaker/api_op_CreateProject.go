@@ -77,8 +77,12 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServiceCatalogProvisioningDetails.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateProjectInput_Tags, v.Tags)
-	serializeCreateTemplateProviderList(s, schemas.CreateProjectInput_TemplateProviders, v.TemplateProviders)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProjectInput_Tags, v.Tags)
+	}
+	if v.TemplateProviders != nil {
+		serializeCreateTemplateProviderList(s, schemas.CreateProjectInput_TemplateProviders, v.TemplateProviders)
+	}
 }
 
 type CreateProjectOutput struct {

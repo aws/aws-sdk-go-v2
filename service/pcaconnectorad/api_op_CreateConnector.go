@@ -70,7 +70,9 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.CreateConnectorRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateConnectorRequest_Tags, v.Tags)
+	}
 	if v.VpcInformation != nil {
 		s.WriteStruct(schemas.CreateConnectorRequest_VpcInformation)
 		v.VpcInformation.SerializeMembers(s)

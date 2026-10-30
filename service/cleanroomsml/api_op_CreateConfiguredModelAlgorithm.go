@@ -113,7 +113,9 @@ func (v *CreateConfiguredModelAlgorithmInput) SerializeMembers(s smithy.ShapeSer
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateConfiguredModelAlgorithmRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.CreateConfiguredModelAlgorithmRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfiguredModelAlgorithmRequest_tags, v.Tags)
+	}
 	if v.TrainingContainerConfig != nil {
 		s.WriteStruct(schemas.CreateConfiguredModelAlgorithmRequest_trainingContainerConfig)
 		v.TrainingContainerConfig.SerializeMembers(s)

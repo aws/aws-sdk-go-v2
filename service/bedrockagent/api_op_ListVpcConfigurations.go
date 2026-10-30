@@ -97,7 +97,9 @@ func (v *ListVpcConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVpcConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcConfigurationSummaryList(s, schemas.ListVpcConfigurationsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeVpcConfigurationSummaryList(s, schemas.ListVpcConfigurationsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVpcConfigurationsResponse_nextToken, *v.NextToken)
 	}

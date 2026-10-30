@@ -121,7 +121,9 @@ func (v *GetBenefitAllocationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBenefitAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBenefitIdentifiers(s, schemas.GetBenefitAllocationOutput_ApplicableBenefitIds, v.ApplicableBenefitIds)
+	if v.ApplicableBenefitIds != nil {
+		serializeBenefitIdentifiers(s, schemas.GetBenefitAllocationOutput_ApplicableBenefitIds, v.ApplicableBenefitIds)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.GetBenefitAllocationOutput_Arn, *v.Arn)
 	}
@@ -143,7 +145,9 @@ func (v *GetBenefitAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ExpiresAt != nil {
 		s.WriteTime(schemas.GetBenefitAllocationOutput_ExpiresAt, *v.ExpiresAt)
 	}
-	serializeFulfillmentDetails(s, schemas.GetBenefitAllocationOutput_FulfillmentDetail, v.FulfillmentDetail)
+	if v.FulfillmentDetail != nil {
+		serializeFulfillmentDetails(s, schemas.GetBenefitAllocationOutput_FulfillmentDetail, v.FulfillmentDetail)
+	}
 	if v.FulfillmentType != "" {
 		s.WriteString(schemas.GetBenefitAllocationOutput_FulfillmentType, string(v.FulfillmentType))
 	}

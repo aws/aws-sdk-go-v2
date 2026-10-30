@@ -103,7 +103,9 @@ func (v *CreateAudienceModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAudienceModelRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateAudienceModelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAudienceModelRequest_tags, v.Tags)
+	}
 	if v.TrainingDataEndTime != nil {
 		s.WriteTime(schemas.CreateAudienceModelRequest_trainingDataEndTime, *v.TrainingDataEndTime)
 	}

@@ -44,7 +44,9 @@ func (v *BatchGetDestinationEndpointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDestinationEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationEndpointArnList(s, schemas.BatchGetDestinationEndpointRequest_Arns, v.Arns)
+	if v.Arns != nil {
+		serializeDestinationEndpointArnList(s, schemas.BatchGetDestinationEndpointRequest_Arns, v.Arns)
+	}
 }
 
 type BatchGetDestinationEndpointOutput struct {
@@ -72,8 +74,12 @@ func (v *BatchGetDestinationEndpointOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchGetDestinationEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationEndpointList(s, schemas.BatchGetDestinationEndpointResponse_DestinationEndpoints, v.DestinationEndpoints)
-	serializeBatchGetDestinationEndpointErrorList(s, schemas.BatchGetDestinationEndpointResponse_Errors, v.Errors)
+	if v.DestinationEndpoints != nil {
+		serializeDestinationEndpointList(s, schemas.BatchGetDestinationEndpointResponse_DestinationEndpoints, v.DestinationEndpoints)
+	}
+	if v.Errors != nil {
+		serializeBatchGetDestinationEndpointErrorList(s, schemas.BatchGetDestinationEndpointResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchGetDestinationEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDestinationEndpointResponse, func(s *smithy.Schema) error {

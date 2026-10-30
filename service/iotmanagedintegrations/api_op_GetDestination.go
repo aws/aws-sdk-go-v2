@@ -109,7 +109,9 @@ func (v *GetDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetDestinationResponse_RoleArn, *v.RoleArn)
 	}
-	serializeTagsMap(s, schemas.GetDestinationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.GetDestinationResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetDestinationResponse_UpdatedAt, *v.UpdatedAt)
 	}

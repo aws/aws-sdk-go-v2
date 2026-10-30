@@ -84,7 +84,9 @@ func (v *ListDataAutomationLibraryIngestionJobsOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListDataAutomationLibraryIngestionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataAutomationLibraryIngestionJobSummaries(s, schemas.ListDataAutomationLibraryIngestionJobsResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeDataAutomationLibraryIngestionJobSummaries(s, schemas.ListDataAutomationLibraryIngestionJobsResponse_jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataAutomationLibraryIngestionJobsResponse_nextToken, *v.NextToken)
 	}

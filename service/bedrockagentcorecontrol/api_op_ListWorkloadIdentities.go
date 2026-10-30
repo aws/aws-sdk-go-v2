@@ -79,7 +79,9 @@ func (v *ListWorkloadIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkloadIdentitiesResponse_nextToken, *v.NextToken)
 	}
-	serializeWorkloadIdentityList(s, schemas.ListWorkloadIdentitiesResponse_workloadIdentities, v.WorkloadIdentities)
+	if v.WorkloadIdentities != nil {
+		serializeWorkloadIdentityList(s, schemas.ListWorkloadIdentitiesResponse_workloadIdentities, v.WorkloadIdentities)
+	}
 }
 func (v *ListWorkloadIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkloadIdentitiesResponse, func(s *smithy.Schema) error {

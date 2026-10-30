@@ -127,8 +127,12 @@ func (v *CheckDocumentAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HasAccess != nil {
 		s.WriteBool(schemas.CheckDocumentAccessResponse_hasAccess, *v.HasAccess)
 	}
-	serializeAssociatedUsers(s, schemas.CheckDocumentAccessResponse_userAliases, v.UserAliases)
-	serializeAssociatedGroups(s, schemas.CheckDocumentAccessResponse_userGroups, v.UserGroups)
+	if v.UserAliases != nil {
+		serializeAssociatedUsers(s, schemas.CheckDocumentAccessResponse_userAliases, v.UserAliases)
+	}
+	if v.UserGroups != nil {
+		serializeAssociatedGroups(s, schemas.CheckDocumentAccessResponse_userGroups, v.UserGroups)
+	}
 }
 func (v *CheckDocumentAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CheckDocumentAccessResponse, func(s *smithy.Schema) error {

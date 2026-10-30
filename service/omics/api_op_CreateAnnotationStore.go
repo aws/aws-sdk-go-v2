@@ -80,7 +80,9 @@ func (v *CreateAnnotationStoreInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAnnotationStoreRequest_name, *v.Name)
 	}
-	serializeReferenceItem(s, schemas.CreateAnnotationStoreRequest_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.CreateAnnotationStoreRequest_reference, v.Reference)
+	}
 	if v.SseConfig != nil {
 		s.WriteStruct(schemas.CreateAnnotationStoreRequest_sseConfig)
 		v.SseConfig.SerializeMembers(s)
@@ -89,8 +91,12 @@ func (v *CreateAnnotationStoreInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StoreFormat != "" {
 		s.WriteString(schemas.CreateAnnotationStoreRequest_storeFormat, string(v.StoreFormat))
 	}
-	serializeStoreOptions(s, schemas.CreateAnnotationStoreRequest_storeOptions, v.StoreOptions)
-	serializeTagMap(s, schemas.CreateAnnotationStoreRequest_tags, v.Tags)
+	if v.StoreOptions != nil {
+		serializeStoreOptions(s, schemas.CreateAnnotationStoreRequest_storeOptions, v.StoreOptions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAnnotationStoreRequest_tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreateAnnotationStoreRequest_versionName, *v.VersionName)
 	}
@@ -156,14 +162,18 @@ func (v *CreateAnnotationStoreOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAnnotationStoreResponse_name, *v.Name)
 	}
-	serializeReferenceItem(s, schemas.CreateAnnotationStoreResponse_reference, v.Reference)
+	if v.Reference != nil {
+		serializeReferenceItem(s, schemas.CreateAnnotationStoreResponse_reference, v.Reference)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateAnnotationStoreResponse_status, string(v.Status))
 	}
 	if v.StoreFormat != "" {
 		s.WriteString(schemas.CreateAnnotationStoreResponse_storeFormat, string(v.StoreFormat))
 	}
-	serializeStoreOptions(s, schemas.CreateAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	if v.StoreOptions != nil {
+		serializeStoreOptions(s, schemas.CreateAnnotationStoreResponse_storeOptions, v.StoreOptions)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreateAnnotationStoreResponse_versionName, *v.VersionName)
 	}

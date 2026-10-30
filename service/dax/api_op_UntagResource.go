@@ -53,7 +53,9 @@ func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceName != nil {
 		s.WriteString(schemas.UntagResourceRequest_ResourceName, *v.ResourceName)
 	}
-	serializeKeyList(s, schemas.UntagResourceRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeKeyList(s, schemas.UntagResourceRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type UntagResourceOutput struct {
@@ -74,7 +76,9 @@ func (v *UntagResourceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UntagResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.UntagResourceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UntagResourceResponse_Tags, v.Tags)
+	}
 }
 func (v *UntagResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UntagResourceResponse, func(s *smithy.Schema) error {

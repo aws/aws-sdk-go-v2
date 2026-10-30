@@ -81,7 +81,9 @@ func (v *CreateBridgeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateBridgeRequest_Name, *v.Name)
 	}
-	serialize__listOfAddBridgeOutputRequest(s, schemas.CreateBridgeRequest_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serialize__listOfAddBridgeOutputRequest(s, schemas.CreateBridgeRequest_Outputs, v.Outputs)
+	}
 	if v.PlacementArn != nil {
 		s.WriteString(schemas.CreateBridgeRequest_PlacementArn, *v.PlacementArn)
 	}
@@ -90,7 +92,9 @@ func (v *CreateBridgeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SourceFailoverConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfAddBridgeSourceRequest(s, schemas.CreateBridgeRequest_Sources, v.Sources)
+	if v.Sources != nil {
+		serialize__listOfAddBridgeSourceRequest(s, schemas.CreateBridgeRequest_Sources, v.Sources)
+	}
 }
 
 type CreateBridgeOutput struct {

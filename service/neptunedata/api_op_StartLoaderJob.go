@@ -302,7 +302,9 @@ func (v *StartLoaderJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartLoaderJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.StartLoaderJobInput_dependencies, v.Dependencies)
+	if v.Dependencies != nil {
+		serializeStringList(s, schemas.StartLoaderJobInput_dependencies, v.Dependencies)
+	}
 	if v.EdgeOnlyLoad != nil {
 		s.WriteBool(schemas.StartLoaderJobInput_edgeOnlyLoad, *v.EdgeOnlyLoad)
 	}
@@ -321,7 +323,9 @@ func (v *StartLoaderJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Parallelism != "" {
 		s.WriteString(schemas.StartLoaderJobInput_parallelism, string(v.Parallelism))
 	}
-	serializeStringValuedMap(s, schemas.StartLoaderJobInput_parserConfiguration, v.ParserConfiguration)
+	if v.ParserConfiguration != nil {
+		serializeStringValuedMap(s, schemas.StartLoaderJobInput_parserConfiguration, v.ParserConfiguration)
+	}
 	if v.QueueRequest != nil {
 		s.WriteBool(schemas.StartLoaderJobInput_queueRequest, *v.QueueRequest)
 	}
@@ -365,7 +369,9 @@ func (v *StartLoaderJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartLoaderJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringValuedMap(s, schemas.StartLoaderJobOutput_payload, v.Payload)
+	if v.Payload != nil {
+		serializeStringValuedMap(s, schemas.StartLoaderJobOutput_payload, v.Payload)
+	}
 	if v.Status != nil {
 		s.WriteString(schemas.StartLoaderJobOutput_status, *v.Status)
 	}

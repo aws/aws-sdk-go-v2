@@ -275,7 +275,9 @@ func (v *DiscountsBreakdown) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DiscountsBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDiscountsBreakdownAmountList(s, schemas.DiscountsBreakdown_Breakdown, v.Breakdown)
+	if v.Breakdown != nil {
+		serializeDiscountsBreakdownAmountList(s, schemas.DiscountsBreakdown_Breakdown, v.Breakdown)
+	}
 	if v.TotalAmount != nil {
 		s.WriteString(schemas.DiscountsBreakdown_TotalAmount, *v.TotalAmount)
 	}
@@ -390,12 +392,18 @@ func (v *EinvoiceDeliveryPreference) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.EinvoiceDeliveryActivationDate != nil {
 		s.WriteTime(schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryActivationDate, *v.EinvoiceDeliveryActivationDate)
 	}
-	serializeEinvoiceDeliveryAttachmentTypes(s, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes, v.EinvoiceDeliveryAttachmentTypes)
-	serializeEinvoiceDeliveryDocumentTypes(s, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes, v.EinvoiceDeliveryDocumentTypes)
+	if v.EinvoiceDeliveryAttachmentTypes != nil {
+		serializeEinvoiceDeliveryAttachmentTypes(s, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryAttachmentTypes, v.EinvoiceDeliveryAttachmentTypes)
+	}
+	if v.EinvoiceDeliveryDocumentTypes != nil {
+		serializeEinvoiceDeliveryDocumentTypes(s, schemas.EinvoiceDeliveryPreference_EinvoiceDeliveryDocumentTypes, v.EinvoiceDeliveryDocumentTypes)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.EinvoiceDeliveryPreference_Protocol, string(v.Protocol))
 	}
-	serializePurchaseOrderDataSources(s, schemas.EinvoiceDeliveryPreference_PurchaseOrderDataSources, v.PurchaseOrderDataSources)
+	if v.PurchaseOrderDataSources != nil {
+		serializePurchaseOrderDataSources(s, schemas.EinvoiceDeliveryPreference_PurchaseOrderDataSources, v.PurchaseOrderDataSources)
+	}
 }
 func (v *EinvoiceDeliveryPreference) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EinvoiceDeliveryPreference, func(s *smithy.Schema) error {
@@ -525,7 +533,9 @@ func (v *FeesBreakdown) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FeesBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFeesBreakdownAmountList(s, schemas.FeesBreakdown_Breakdown, v.Breakdown)
+	if v.Breakdown != nil {
+		serializeFeesBreakdownAmountList(s, schemas.FeesBreakdown_Breakdown, v.Breakdown)
+	}
 	if v.TotalAmount != nil {
 		s.WriteString(schemas.FeesBreakdown_TotalAmount, *v.TotalAmount)
 	}
@@ -632,10 +642,18 @@ func (v *Filters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Filters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.Filters_Accounts, v.Accounts)
-	serializeAccountIdList(s, schemas.Filters_BillSourceAccounts, v.BillSourceAccounts)
-	serializeAccountIdList(s, schemas.Filters_InvoiceReceivers, v.InvoiceReceivers)
-	serializeInvoiceUnitNames(s, schemas.Filters_Names, v.Names)
+	if v.Accounts != nil {
+		serializeAccountIdList(s, schemas.Filters_Accounts, v.Accounts)
+	}
+	if v.BillSourceAccounts != nil {
+		serializeAccountIdList(s, schemas.Filters_BillSourceAccounts, v.BillSourceAccounts)
+	}
+	if v.InvoiceReceivers != nil {
+		serializeAccountIdList(s, schemas.Filters_InvoiceReceivers, v.InvoiceReceivers)
+	}
+	if v.Names != nil {
+		serializeInvoiceUnitNames(s, schemas.Filters_Names, v.Names)
+	}
 }
 func (v *Filters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filters, func(s *smithy.Schema) error {
@@ -673,8 +691,12 @@ func (v *InvoiceConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvoiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEinvoiceDeliveryAttachmentTypes(s, schemas.InvoiceConfiguration_AttachmentTypes, v.AttachmentTypes)
-	serializeEinvoiceDeliveryDocumentTypes(s, schemas.InvoiceConfiguration_DocumentTypes, v.DocumentTypes)
+	if v.AttachmentTypes != nil {
+		serializeEinvoiceDeliveryAttachmentTypes(s, schemas.InvoiceConfiguration_AttachmentTypes, v.AttachmentTypes)
+	}
+	if v.DocumentTypes != nil {
+		serializeEinvoiceDeliveryDocumentTypes(s, schemas.InvoiceConfiguration_DocumentTypes, v.DocumentTypes)
+	}
 }
 func (v *InvoiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvoiceConfiguration, func(s *smithy.Schema) error {
@@ -793,7 +815,9 @@ func (v *InvoicePDF) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InvoiceId != nil {
 		s.WriteString(schemas.InvoicePDF_InvoiceId, *v.InvoiceId)
 	}
-	serializeSupplementalDocuments(s, schemas.InvoicePDF_SupplementalDocuments, v.SupplementalDocuments)
+	if v.SupplementalDocuments != nil {
+		serializeSupplementalDocuments(s, schemas.InvoicePDF_SupplementalDocuments, v.SupplementalDocuments)
+	}
 }
 func (v *InvoicePDF) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvoicePDF, func(s *smithy.Schema) error {
@@ -1098,7 +1122,9 @@ func (v *InvoiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.BaseCurrencyAmount.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeBillSourceAccountList(s, schemas.InvoiceSummary_BillSourceAccounts, v.BillSourceAccounts)
+	if v.BillSourceAccounts != nil {
+		serializeBillSourceAccountList(s, schemas.InvoiceSummary_BillSourceAccounts, v.BillSourceAccounts)
+	}
 	if v.BillSourceAccountsTotalCount != nil {
 		s.WriteInt32(schemas.InvoiceSummary_BillSourceAccountsTotalCount, *v.BillSourceAccountsTotalCount)
 	}
@@ -1368,8 +1394,12 @@ func (v *InvoiceUnitRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvoiceUnitRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleAccountIdList(s, schemas.InvoiceUnitRule_BillSourceAccounts, v.BillSourceAccounts)
-	serializeRuleAccountIdList(s, schemas.InvoiceUnitRule_LinkedAccounts, v.LinkedAccounts)
+	if v.BillSourceAccounts != nil {
+		serializeRuleAccountIdList(s, schemas.InvoiceUnitRule_BillSourceAccounts, v.BillSourceAccounts)
+	}
+	if v.LinkedAccounts != nil {
+		serializeRuleAccountIdList(s, schemas.InvoiceUnitRule_LinkedAccounts, v.LinkedAccounts)
+	}
 }
 func (v *InvoiceUnitRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InvoiceUnitRule, func(s *smithy.Schema) error {
@@ -1618,7 +1648,9 @@ func (v *ProcurementPortalPreference) SerializeMembers(s smithy.ShapeSerializer)
 	if v.BuyerIdentifier != nil {
 		s.WriteString(schemas.ProcurementPortalPreference_BuyerIdentifier, *v.BuyerIdentifier)
 	}
-	serializeContacts(s, schemas.ProcurementPortalPreference_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContacts(s, schemas.ProcurementPortalPreference_Contacts, v.Contacts)
+	}
 	if v.CreateDate != nil {
 		s.WriteTime(schemas.ProcurementPortalPreference_CreateDate, *v.CreateDate)
 	}
@@ -1814,8 +1846,12 @@ func (v *ProcurementPortalPreferenceSelector) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ProcurementPortalPreferenceSelector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvoiceUnitArns(s, schemas.ProcurementPortalPreferenceSelector_InvoiceUnitArns, v.InvoiceUnitArns)
-	serializeSellerOfRecords(s, schemas.ProcurementPortalPreferenceSelector_SellerOfRecords, v.SellerOfRecords)
+	if v.InvoiceUnitArns != nil {
+		serializeInvoiceUnitArns(s, schemas.ProcurementPortalPreferenceSelector_InvoiceUnitArns, v.InvoiceUnitArns)
+	}
+	if v.SellerOfRecords != nil {
+		serializeSellerOfRecords(s, schemas.ProcurementPortalPreferenceSelector_SellerOfRecords, v.SellerOfRecords)
+	}
 }
 func (v *ProcurementPortalPreferenceSelector) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProcurementPortalPreferenceSelector, func(s *smithy.Schema) error {
@@ -2410,7 +2446,9 @@ func (v *TaxesBreakdown) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaxesBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTaxesBreakdownAmountList(s, schemas.TaxesBreakdown_Breakdown, v.Breakdown)
+	if v.Breakdown != nil {
+		serializeTaxesBreakdownAmountList(s, schemas.TaxesBreakdown_Breakdown, v.Breakdown)
+	}
 	if v.TotalAmount != nil {
 		s.WriteString(schemas.TaxesBreakdown_TotalAmount, *v.TotalAmount)
 	}

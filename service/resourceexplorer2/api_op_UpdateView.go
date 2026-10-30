@@ -76,7 +76,9 @@ func (v *UpdateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Filters.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIncludedPropertyList(s, schemas.UpdateViewInput_IncludedProperties, v.IncludedProperties)
+	if v.IncludedProperties != nil {
+		serializeIncludedPropertyList(s, schemas.UpdateViewInput_IncludedProperties, v.IncludedProperties)
+	}
 	if v.ViewArn != nil {
 		s.WriteString(schemas.UpdateViewInput_ViewArn, *v.ViewArn)
 	}

@@ -136,7 +136,9 @@ func (v *GetWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCode(s, schemas.GetWorkflowResponse_Code, v.Code)
+	if v.Code != nil {
+		serializeCode(s, schemas.GetWorkflowResponse_Code, v.Code)
+	}
 	if v.CodeSnapshottedAt != nil {
 		s.WriteTime(schemas.GetWorkflowResponse_CodeSnapshottedAt, *v.CodeSnapshottedAt)
 	}

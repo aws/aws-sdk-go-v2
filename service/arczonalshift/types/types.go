@@ -300,12 +300,18 @@ func (v *ManagedResourceSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ManagedResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppliedWeights(s, schemas.ManagedResourceSummary_appliedWeights, v.AppliedWeights)
+	if v.AppliedWeights != nil {
+		serializeAppliedWeights(s, schemas.ManagedResourceSummary_appliedWeights, v.AppliedWeights)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ManagedResourceSummary_arn, *v.Arn)
 	}
-	serializeAutoshiftsInResource(s, schemas.ManagedResourceSummary_autoshifts, v.Autoshifts)
-	serializeAvailabilityZones(s, schemas.ManagedResourceSummary_availabilityZones, v.AvailabilityZones)
+	if v.Autoshifts != nil {
+		serializeAutoshiftsInResource(s, schemas.ManagedResourceSummary_autoshifts, v.Autoshifts)
+	}
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZones(s, schemas.ManagedResourceSummary_availabilityZones, v.AvailabilityZones)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ManagedResourceSummary_name, *v.Name)
 	}
@@ -315,7 +321,9 @@ func (v *ManagedResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ZonalAutoshiftStatus != "" {
 		s.WriteString(schemas.ManagedResourceSummary_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
 	}
-	serializeZonalShiftsInResource(s, schemas.ManagedResourceSummary_zonalShifts, v.ZonalShifts)
+	if v.ZonalShifts != nil {
+		serializeZonalShiftsInResource(s, schemas.ManagedResourceSummary_zonalShifts, v.ZonalShifts)
+	}
 }
 func (v *ManagedResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ManagedResourceSummary, func(s *smithy.Schema) error {
@@ -415,11 +423,21 @@ func (v *PracticeRunConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PracticeRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedWindows(s, schemas.PracticeRunConfiguration_allowedWindows, v.AllowedWindows)
-	serializeBlockedDates(s, schemas.PracticeRunConfiguration_blockedDates, v.BlockedDates)
-	serializeBlockedWindows(s, schemas.PracticeRunConfiguration_blockedWindows, v.BlockedWindows)
-	serializeBlockingAlarms(s, schemas.PracticeRunConfiguration_blockingAlarms, v.BlockingAlarms)
-	serializeOutcomeAlarms(s, schemas.PracticeRunConfiguration_outcomeAlarms, v.OutcomeAlarms)
+	if v.AllowedWindows != nil {
+		serializeAllowedWindows(s, schemas.PracticeRunConfiguration_allowedWindows, v.AllowedWindows)
+	}
+	if v.BlockedDates != nil {
+		serializeBlockedDates(s, schemas.PracticeRunConfiguration_blockedDates, v.BlockedDates)
+	}
+	if v.BlockedWindows != nil {
+		serializeBlockedWindows(s, schemas.PracticeRunConfiguration_blockedWindows, v.BlockedWindows)
+	}
+	if v.BlockingAlarms != nil {
+		serializeBlockingAlarms(s, schemas.PracticeRunConfiguration_blockingAlarms, v.BlockingAlarms)
+	}
+	if v.OutcomeAlarms != nil {
+		serializeOutcomeAlarms(s, schemas.PracticeRunConfiguration_outcomeAlarms, v.OutcomeAlarms)
+	}
 }
 func (v *PracticeRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PracticeRunConfiguration, func(s *smithy.Schema) error {

@@ -68,7 +68,9 @@ func (v *DescribeTagsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.DescribeTagsResult_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.DescribeTagsResult_TagList, v.TagList)
+	}
 }
 func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTagsResult, func(s *smithy.Schema) error {

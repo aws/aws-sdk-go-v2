@@ -96,8 +96,12 @@ func (v *CreateTrustedTokenIssuerInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTrustedTokenIssuerRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateTrustedTokenIssuerRequest_Tags, v.Tags)
-	serializeTrustedTokenIssuerConfiguration(s, schemas.CreateTrustedTokenIssuerRequest_TrustedTokenIssuerConfiguration, v.TrustedTokenIssuerConfiguration)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrustedTokenIssuerRequest_Tags, v.Tags)
+	}
+	if v.TrustedTokenIssuerConfiguration != nil {
+		serializeTrustedTokenIssuerConfiguration(s, schemas.CreateTrustedTokenIssuerRequest_TrustedTokenIssuerConfiguration, v.TrustedTokenIssuerConfiguration)
+	}
 	if v.TrustedTokenIssuerType != "" {
 		s.WriteString(schemas.CreateTrustedTokenIssuerRequest_TrustedTokenIssuerType, string(v.TrustedTokenIssuerType))
 	}

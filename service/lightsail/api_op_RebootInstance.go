@@ -74,7 +74,9 @@ func (v *RebootInstanceOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RebootInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.RebootInstanceResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.RebootInstanceResult_operations, v.Operations)
+	}
 }
 func (v *RebootInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RebootInstanceResult, func(s *smithy.Schema) error {

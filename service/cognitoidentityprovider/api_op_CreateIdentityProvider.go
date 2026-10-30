@@ -200,10 +200,18 @@ func (v *CreateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcrMappingType(s, schemas.CreateIdentityProviderRequest_AcrMapping, v.AcrMapping)
-	serializeAttributeMappingType(s, schemas.CreateIdentityProviderRequest_AttributeMapping, v.AttributeMapping)
-	serializeIdpIdentifiersListType(s, schemas.CreateIdentityProviderRequest_IdpIdentifiers, v.IdpIdentifiers)
-	serializeProviderDetailsType(s, schemas.CreateIdentityProviderRequest_ProviderDetails, v.ProviderDetails)
+	if v.AcrMapping != nil {
+		serializeAcrMappingType(s, schemas.CreateIdentityProviderRequest_AcrMapping, v.AcrMapping)
+	}
+	if v.AttributeMapping != nil {
+		serializeAttributeMappingType(s, schemas.CreateIdentityProviderRequest_AttributeMapping, v.AttributeMapping)
+	}
+	if v.IdpIdentifiers != nil {
+		serializeIdpIdentifiersListType(s, schemas.CreateIdentityProviderRequest_IdpIdentifiers, v.IdpIdentifiers)
+	}
+	if v.ProviderDetails != nil {
+		serializeProviderDetailsType(s, schemas.CreateIdentityProviderRequest_ProviderDetails, v.ProviderDetails)
+	}
 	if v.ProviderName != nil {
 		s.WriteString(schemas.CreateIdentityProviderRequest_ProviderName, *v.ProviderName)
 	}

@@ -122,7 +122,9 @@ func (v *UpdateRcsAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TwoWayMediaS3Role != nil {
 		s.WriteString(schemas.UpdateRcsAgentRequest_TwoWayMediaS3Role, *v.TwoWayMediaS3Role)
 	}
-	serializeRcsEventTypeList(s, schemas.UpdateRcsAgentRequest_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	if v.TwoWayRcsEventsEnabled != nil {
+		serializeRcsEventTypeList(s, schemas.UpdateRcsAgentRequest_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	}
 }
 
 type UpdateRcsAgentOutput struct {
@@ -236,7 +238,9 @@ func (v *UpdateRcsAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TwoWayMediaS3Role != nil {
 		s.WriteString(schemas.UpdateRcsAgentResult_TwoWayMediaS3Role, *v.TwoWayMediaS3Role)
 	}
-	serializeRcsEventTypeList(s, schemas.UpdateRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	if v.TwoWayRcsEventsEnabled != nil {
+		serializeRcsEventTypeList(s, schemas.UpdateRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	}
 }
 func (v *UpdateRcsAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateRcsAgentResult, func(s *smithy.Schema) error {

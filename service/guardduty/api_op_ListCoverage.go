@@ -117,7 +117,9 @@ func (v *ListCoverageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCoverageResponse_NextToken, *v.NextToken)
 	}
-	serializeCoverageResources(s, schemas.ListCoverageResponse_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeCoverageResources(s, schemas.ListCoverageResponse_Resources, v.Resources)
+	}
 }
 func (v *ListCoverageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCoverageResponse, func(s *smithy.Schema) error {

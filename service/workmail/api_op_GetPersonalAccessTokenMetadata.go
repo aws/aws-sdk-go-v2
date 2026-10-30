@@ -109,7 +109,9 @@ func (v *GetPersonalAccessTokenMetadataOutput) SerializeMembers(s smithy.ShapeSe
 	if v.PersonalAccessTokenId != nil {
 		s.WriteString(schemas.GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId, *v.PersonalAccessTokenId)
 	}
-	serializePersonalAccessTokenScopeList(s, schemas.GetPersonalAccessTokenMetadataResponse_Scopes, v.Scopes)
+	if v.Scopes != nil {
+		serializePersonalAccessTokenScopeList(s, schemas.GetPersonalAccessTokenMetadataResponse_Scopes, v.Scopes)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.GetPersonalAccessTokenMetadataResponse_UserId, *v.UserId)
 	}

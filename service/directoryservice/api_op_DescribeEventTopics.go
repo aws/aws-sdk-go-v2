@@ -56,7 +56,9 @@ func (v *DescribeEventTopicsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DescribeEventTopicsRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeTopicNames(s, schemas.DescribeEventTopicsRequest_TopicNames, v.TopicNames)
+	if v.TopicNames != nil {
+		serializeTopicNames(s, schemas.DescribeEventTopicsRequest_TopicNames, v.TopicNames)
+	}
 }
 
 // The result of a DescribeEventTopic request.
@@ -79,7 +81,9 @@ func (v *DescribeEventTopicsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventTopicsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventTopics(s, schemas.DescribeEventTopicsResult_EventTopics, v.EventTopics)
+	if v.EventTopics != nil {
+		serializeEventTopics(s, schemas.DescribeEventTopicsResult_EventTopics, v.EventTopics)
+	}
 }
 func (v *DescribeEventTopicsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEventTopicsResult, func(s *smithy.Schema) error {

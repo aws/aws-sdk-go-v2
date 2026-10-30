@@ -94,7 +94,9 @@ func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleActions(s, schemas.CreateRuleRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeRuleActions(s, schemas.CreateRuleRequest_Actions, v.Actions)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateRuleRequest_ClientToken, *v.ClientToken)
 	}
@@ -115,7 +117,9 @@ func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PublishStatus != "" {
 		s.WriteString(schemas.CreateRuleRequest_PublishStatus, string(v.PublishStatus))
 	}
-	serializeTagMap(s, schemas.CreateRuleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRuleRequest_Tags, v.Tags)
+	}
 	if v.TriggerEventSource != nil {
 		s.WriteStruct(schemas.CreateRuleRequest_TriggerEventSource)
 		v.TriggerEventSource.SerializeMembers(s)

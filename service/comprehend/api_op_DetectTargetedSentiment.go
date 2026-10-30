@@ -82,7 +82,9 @@ func (v *DetectTargetedSentimentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectTargetedSentimentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfTargetedSentimentEntities(s, schemas.DetectTargetedSentimentResponse_Entities, v.Entities)
+	if v.Entities != nil {
+		serializeListOfTargetedSentimentEntities(s, schemas.DetectTargetedSentimentResponse_Entities, v.Entities)
+	}
 }
 func (v *DetectTargetedSentimentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetectTargetedSentimentResponse, func(s *smithy.Schema) error {

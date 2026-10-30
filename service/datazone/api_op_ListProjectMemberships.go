@@ -117,7 +117,9 @@ func (v *ListProjectMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProjectMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProjectMembers(s, schemas.ListProjectMembershipsOutput_members, v.Members)
+	if v.Members != nil {
+		serializeProjectMembers(s, schemas.ListProjectMembershipsOutput_members, v.Members)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProjectMembershipsOutput_nextToken, *v.NextToken)
 	}

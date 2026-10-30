@@ -135,7 +135,9 @@ func (v *ListSecretVersionIdsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecretVersionIdsResponse_NextToken, *v.NextToken)
 	}
-	serializeSecretVersionsListType(s, schemas.ListSecretVersionIdsResponse_Versions, v.Versions)
+	if v.Versions != nil {
+		serializeSecretVersionsListType(s, schemas.ListSecretVersionIdsResponse_Versions, v.Versions)
+	}
 }
 func (v *ListSecretVersionIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecretVersionIdsResponse, func(s *smithy.Schema) error {

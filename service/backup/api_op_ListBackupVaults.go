@@ -96,7 +96,9 @@ func (v *ListBackupVaultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBackupVaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBackupVaultList(s, schemas.ListBackupVaultsOutput_BackupVaultList, v.BackupVaultList)
+	if v.BackupVaultList != nil {
+		serializeBackupVaultList(s, schemas.ListBackupVaultsOutput_BackupVaultList, v.BackupVaultList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBackupVaultsOutput_NextToken, *v.NextToken)
 	}

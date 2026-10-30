@@ -33,8 +33,12 @@ func (v *Access) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Access) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionsList(s, schemas.Access_actions, v.Actions)
-	serializeResourcesList(s, schemas.Access_resources, v.Resources)
+	if v.Actions != nil {
+		serializeActionsList(s, schemas.Access_actions, v.Actions)
+	}
+	if v.Resources != nil {
+		serializeResourcesList(s, schemas.Access_resources, v.Resources)
+	}
 }
 func (v *Access) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Access, func(s *smithy.Schema) error {
@@ -103,7 +107,9 @@ func (v *AccessPreview) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzerArn != nil {
 		s.WriteString(schemas.AccessPreview_analyzerArn, *v.AnalyzerArn)
 	}
-	serializeConfigurationsMap(s, schemas.AccessPreview_configurations, v.Configurations)
+	if v.Configurations != nil {
+		serializeConfigurationsMap(s, schemas.AccessPreview_configurations, v.Configurations)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AccessPreview_createdAt, *v.CreatedAt)
 	}
@@ -246,11 +252,15 @@ func (v *AccessPreviewFinding) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessPreviewFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.AccessPreviewFinding_action, v.Action)
+	if v.Action != nil {
+		serializeActionList(s, schemas.AccessPreviewFinding_action, v.Action)
+	}
 	if v.ChangeType != "" {
 		s.WriteString(schemas.AccessPreviewFinding_changeType, string(v.ChangeType))
 	}
-	serializeConditionKeyMap(s, schemas.AccessPreviewFinding_condition, v.Condition)
+	if v.Condition != nil {
+		serializeConditionKeyMap(s, schemas.AccessPreviewFinding_condition, v.Condition)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AccessPreviewFinding_createdAt, *v.CreatedAt)
 	}
@@ -269,7 +279,9 @@ func (v *AccessPreviewFinding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsPublic != nil {
 		s.WriteBool(schemas.AccessPreviewFinding_isPublic, *v.IsPublic)
 	}
-	serializePrincipalMap(s, schemas.AccessPreviewFinding_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipalMap(s, schemas.AccessPreviewFinding_principal, v.Principal)
+	}
 	if v.Resource != nil {
 		s.WriteString(schemas.AccessPreviewFinding_resource, *v.Resource)
 	}
@@ -282,7 +294,9 @@ func (v *AccessPreviewFinding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.AccessPreviewFinding_resourceType, string(v.ResourceType))
 	}
-	serializeFindingSourceList(s, schemas.AccessPreviewFinding_sources, v.Sources)
+	if v.Sources != nil {
+		serializeFindingSourceList(s, schemas.AccessPreviewFinding_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AccessPreviewFinding_status, string(v.Status))
 	}
@@ -552,7 +566,9 @@ func (v *AnalysisRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalysisRuleCriteriaList(s, schemas.AnalysisRule_exclusions, v.Exclusions)
+	if v.Exclusions != nil {
+		serializeAnalysisRuleCriteriaList(s, schemas.AnalysisRule_exclusions, v.Exclusions)
+	}
 }
 func (v *AnalysisRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisRule, func(s *smithy.Schema) error {
@@ -596,8 +612,12 @@ func (v *AnalysisRuleCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalysisRuleCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdsList(s, schemas.AnalysisRuleCriteria_accountIds, v.AccountIds)
-	serializeTagsList(s, schemas.AnalysisRuleCriteria_resourceTags, v.ResourceTags)
+	if v.AccountIds != nil {
+		serializeAccountIdsList(s, schemas.AnalysisRuleCriteria_accountIds, v.AccountIds)
+	}
+	if v.ResourceTags != nil {
+		serializeTagsList(s, schemas.AnalysisRuleCriteria_resourceTags, v.ResourceTags)
+	}
 }
 func (v *AnalysisRuleCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AnalysisRuleCriteria, func(s *smithy.Schema) error {
@@ -674,7 +694,9 @@ func (v *AnalyzedResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AnalyzedResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.AnalyzedResource_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.AnalyzedResource_actions, v.Actions)
+	}
 	if v.AnalyzedAt != nil {
 		s.WriteTime(schemas.AnalyzedResource_analyzedAt, *v.AnalyzedAt)
 	}
@@ -696,7 +718,9 @@ func (v *AnalyzedResource) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.AnalyzedResource_resourceType, string(v.ResourceType))
 	}
-	serializeSharedViaList(s, schemas.AnalyzedResource_sharedVia, v.SharedVia)
+	if v.SharedVia != nil {
+		serializeSharedViaList(s, schemas.AnalyzedResource_sharedVia, v.SharedVia)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AnalyzedResource_status, string(v.Status))
 	}
@@ -940,7 +964,9 @@ func (v *AnalyzerSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.AnalyzerSummary_arn, *v.Arn)
 	}
-	serializeAnalyzerConfiguration(s, schemas.AnalyzerSummary_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeAnalyzerConfiguration(s, schemas.AnalyzerSummary_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.AnalyzerSummary_createdAt, *v.CreatedAt)
 	}
@@ -964,7 +990,9 @@ func (v *AnalyzerSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.AnalyzerSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.AnalyzerSummary_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.AnalyzerSummary_type, string(v.Type))
 	}
@@ -1053,7 +1081,9 @@ func (v *ArchiveRuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ArchiveRuleSummary_createdAt, *v.CreatedAt)
 	}
-	serializeFilterCriteriaMap(s, schemas.ArchiveRuleSummary_filter, v.Filter)
+	if v.Filter != nil {
+		serializeFilterCriteriaMap(s, schemas.ArchiveRuleSummary_filter, v.Filter)
+	}
 	if v.RuleName != nil {
 		s.WriteString(schemas.ArchiveRuleSummary_ruleName, *v.RuleName)
 	}
@@ -1126,7 +1156,9 @@ func (v *CloudTrailDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CloudTrailDetails_startTime, *v.StartTime)
 	}
-	serializeTrailList(s, schemas.CloudTrailDetails_trails, v.Trails)
+	if v.Trails != nil {
+		serializeTrailList(s, schemas.CloudTrailDetails_trails, v.Trails)
+	}
 }
 func (v *CloudTrailDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudTrailDetails, func(s *smithy.Schema) error {
@@ -1186,7 +1218,9 @@ func (v *CloudTrailProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CloudTrailProperties_startTime, *v.StartTime)
 	}
-	serializeTrailPropertiesList(s, schemas.CloudTrailProperties_trailProperties, v.TrailProperties)
+	if v.TrailProperties != nil {
+		serializeTrailPropertiesList(s, schemas.CloudTrailProperties_trailProperties, v.TrailProperties)
+	}
 }
 func (v *CloudTrailProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CloudTrailProperties, func(s *smithy.Schema) error {
@@ -1494,12 +1528,18 @@ func (v *Criterion) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Criterion) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValueList(s, schemas.Criterion_contains, v.Contains)
-	serializeValueList(s, schemas.Criterion_eq, v.Eq)
+	if v.Contains != nil {
+		serializeValueList(s, schemas.Criterion_contains, v.Contains)
+	}
+	if v.Eq != nil {
+		serializeValueList(s, schemas.Criterion_eq, v.Eq)
+	}
 	if v.Exists != nil {
 		s.WriteBool(schemas.Criterion_exists, *v.Exists)
 	}
-	serializeValueList(s, schemas.Criterion_neq, v.Neq)
+	if v.Neq != nil {
+		serializeValueList(s, schemas.Criterion_neq, v.Neq)
+	}
 }
 func (v *Criterion) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Criterion, func(s *smithy.Schema) error {
@@ -1669,11 +1709,15 @@ func (v *EbsSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EbsSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEbsGroupList(s, schemas.EbsSnapshotConfiguration_groups, v.Groups)
+	if v.Groups != nil {
+		serializeEbsGroupList(s, schemas.EbsSnapshotConfiguration_groups, v.Groups)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.EbsSnapshotConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
-	serializeEbsUserIdList(s, schemas.EbsSnapshotConfiguration_userIds, v.UserIds)
+	if v.UserIds != nil {
+		serializeEbsUserIdList(s, schemas.EbsSnapshotConfiguration_userIds, v.UserIds)
+	}
 }
 func (v *EbsSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EbsSnapshotConfiguration, func(s *smithy.Schema) error {
@@ -1843,16 +1887,24 @@ func (v *ExternalAccessDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExternalAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.ExternalAccessDetails_action, v.Action)
-	serializeConditionKeyMap(s, schemas.ExternalAccessDetails_condition, v.Condition)
+	if v.Action != nil {
+		serializeActionList(s, schemas.ExternalAccessDetails_action, v.Action)
+	}
+	if v.Condition != nil {
+		serializeConditionKeyMap(s, schemas.ExternalAccessDetails_condition, v.Condition)
+	}
 	if v.IsPublic != nil {
 		s.WriteBool(schemas.ExternalAccessDetails_isPublic, *v.IsPublic)
 	}
-	serializePrincipalMap(s, schemas.ExternalAccessDetails_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipalMap(s, schemas.ExternalAccessDetails_principal, v.Principal)
+	}
 	if v.ResourceControlPolicyRestriction != "" {
 		s.WriteString(schemas.ExternalAccessDetails_resourceControlPolicyRestriction, string(v.ResourceControlPolicyRestriction))
 	}
-	serializeFindingSourceList(s, schemas.ExternalAccessDetails_sources, v.Sources)
+	if v.Sources != nil {
+		serializeFindingSourceList(s, schemas.ExternalAccessDetails_sources, v.Sources)
+	}
 }
 func (v *ExternalAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExternalAccessDetails, func(s *smithy.Schema) error {
@@ -1907,7 +1959,9 @@ func (v *ExternalAccessFindingsStatistics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ExternalAccessFindingsStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceTypeStatisticsMap(s, schemas.ExternalAccessFindingsStatistics_resourceTypeStatistics, v.ResourceTypeStatistics)
+	if v.ResourceTypeStatistics != nil {
+		serializeResourceTypeStatisticsMap(s, schemas.ExternalAccessFindingsStatistics_resourceTypeStatistics, v.ResourceTypeStatistics)
+	}
 	if v.TotalActiveFindings != nil {
 		s.WriteInt32(schemas.ExternalAccessFindingsStatistics_totalActiveFindings, *v.TotalActiveFindings)
 	}
@@ -2015,11 +2069,15 @@ func (v *Finding) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.Finding_action, v.Action)
+	if v.Action != nil {
+		serializeActionList(s, schemas.Finding_action, v.Action)
+	}
 	if v.AnalyzedAt != nil {
 		s.WriteTime(schemas.Finding_analyzedAt, *v.AnalyzedAt)
 	}
-	serializeConditionKeyMap(s, schemas.Finding_condition, v.Condition)
+	if v.Condition != nil {
+		serializeConditionKeyMap(s, schemas.Finding_condition, v.Condition)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Finding_createdAt, *v.CreatedAt)
 	}
@@ -2032,7 +2090,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsPublic != nil {
 		s.WriteBool(schemas.Finding_isPublic, *v.IsPublic)
 	}
-	serializePrincipalMap(s, schemas.Finding_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipalMap(s, schemas.Finding_principal, v.Principal)
+	}
 	if v.Resource != nil {
 		s.WriteString(schemas.Finding_resource, *v.Resource)
 	}
@@ -2045,7 +2105,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.Finding_resourceType, string(v.ResourceType))
 	}
-	serializeFindingSourceList(s, schemas.Finding_sources, v.Sources)
+	if v.Sources != nil {
+		serializeFindingSourceList(s, schemas.Finding_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Finding_status, string(v.Status))
 	}
@@ -2143,7 +2205,9 @@ func (v *FindingAggregationAccountDetails) SerializeMembers(s smithy.ShapeSerial
 	if v.Account != nil {
 		s.WriteString(schemas.FindingAggregationAccountDetails_account, *v.Account)
 	}
-	serializeFindingAggregationAccountDetailsMap(s, schemas.FindingAggregationAccountDetails_details, v.Details)
+	if v.Details != nil {
+		serializeFindingAggregationAccountDetailsMap(s, schemas.FindingAggregationAccountDetails_details, v.Details)
+	}
 	if v.NumberOfActiveFindings != nil {
 		s.WriteInt32(schemas.FindingAggregationAccountDetails_numberOfActiveFindings, *v.NumberOfActiveFindings)
 	}
@@ -2523,11 +2587,15 @@ func (v *FindingSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.FindingSummary_action, v.Action)
+	if v.Action != nil {
+		serializeActionList(s, schemas.FindingSummary_action, v.Action)
+	}
 	if v.AnalyzedAt != nil {
 		s.WriteTime(schemas.FindingSummary_analyzedAt, *v.AnalyzedAt)
 	}
-	serializeConditionKeyMap(s, schemas.FindingSummary_condition, v.Condition)
+	if v.Condition != nil {
+		serializeConditionKeyMap(s, schemas.FindingSummary_condition, v.Condition)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.FindingSummary_createdAt, *v.CreatedAt)
 	}
@@ -2540,7 +2608,9 @@ func (v *FindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsPublic != nil {
 		s.WriteBool(schemas.FindingSummary_isPublic, *v.IsPublic)
 	}
-	serializePrincipalMap(s, schemas.FindingSummary_principal, v.Principal)
+	if v.Principal != nil {
+		serializePrincipalMap(s, schemas.FindingSummary_principal, v.Principal)
+	}
 	if v.Resource != nil {
 		s.WriteString(schemas.FindingSummary_resource, *v.Resource)
 	}
@@ -2553,7 +2623,9 @@ func (v *FindingSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.FindingSummary_resourceType, string(v.ResourceType))
 	}
-	serializeFindingSourceList(s, schemas.FindingSummary_sources, v.Sources)
+	if v.Sources != nil {
+		serializeFindingSourceList(s, schemas.FindingSummary_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.FindingSummary_status, string(v.Status))
 	}
@@ -2880,7 +2952,9 @@ func (v *GeneratedPolicyResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GeneratedPolicyResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGeneratedPolicyList(s, schemas.GeneratedPolicyResult_generatedPolicies, v.GeneratedPolicies)
+	if v.GeneratedPolicies != nil {
+		serializeGeneratedPolicyList(s, schemas.GeneratedPolicyResult_generatedPolicies, v.GeneratedPolicies)
+	}
 	if v.Properties != nil {
 		s.WriteStruct(schemas.GeneratedPolicyResult_properties)
 		v.Properties.SerializeMembers(s)
@@ -2963,7 +3037,9 @@ func (v *InlineArchiveRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InlineArchiveRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterCriteriaMap(s, schemas.InlineArchiveRule_filter, v.Filter)
+	if v.Filter != nil {
+		serializeFilterCriteriaMap(s, schemas.InlineArchiveRule_filter, v.Filter)
+	}
 	if v.RuleName != nil {
 		s.WriteString(schemas.InlineArchiveRule_ruleName, *v.RuleName)
 	}
@@ -3000,7 +3076,9 @@ func (v *InternalAccessAnalysisRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InternalAccessAnalysisRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInternalAccessAnalysisRuleCriteriaList(s, schemas.InternalAccessAnalysisRule_inclusions, v.Inclusions)
+	if v.Inclusions != nil {
+		serializeInternalAccessAnalysisRuleCriteriaList(s, schemas.InternalAccessAnalysisRule_inclusions, v.Inclusions)
+	}
 }
 func (v *InternalAccessAnalysisRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalAccessAnalysisRule, func(s *smithy.Schema) error {
@@ -3051,9 +3129,15 @@ func (v *InternalAccessAnalysisRuleCriteria) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *InternalAccessAnalysisRuleCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdsList(s, schemas.InternalAccessAnalysisRuleCriteria_accountIds, v.AccountIds)
-	serializeResourceArnsList(s, schemas.InternalAccessAnalysisRuleCriteria_resourceArns, v.ResourceArns)
-	serializeResourceTypeList(s, schemas.InternalAccessAnalysisRuleCriteria_resourceTypes, v.ResourceTypes)
+	if v.AccountIds != nil {
+		serializeAccountIdsList(s, schemas.InternalAccessAnalysisRuleCriteria_accountIds, v.AccountIds)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnsList(s, schemas.InternalAccessAnalysisRuleCriteria_resourceArns, v.ResourceArns)
+	}
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.InternalAccessAnalysisRuleCriteria_resourceTypes, v.ResourceTypes)
+	}
 }
 func (v *InternalAccessAnalysisRuleCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalAccessAnalysisRuleCriteria, func(s *smithy.Schema) error {
@@ -3192,9 +3276,15 @@ func (v *InternalAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessType != "" {
 		s.WriteString(schemas.InternalAccessDetails_accessType, string(v.AccessType))
 	}
-	serializeActionList(s, schemas.InternalAccessDetails_action, v.Action)
-	serializeConditionKeyMap(s, schemas.InternalAccessDetails_condition, v.Condition)
-	serializePrincipalMap(s, schemas.InternalAccessDetails_principal, v.Principal)
+	if v.Action != nil {
+		serializeActionList(s, schemas.InternalAccessDetails_action, v.Action)
+	}
+	if v.Condition != nil {
+		serializeConditionKeyMap(s, schemas.InternalAccessDetails_condition, v.Condition)
+	}
+	if v.Principal != nil {
+		serializePrincipalMap(s, schemas.InternalAccessDetails_principal, v.Principal)
+	}
 	if v.PrincipalOwnerAccount != nil {
 		s.WriteString(schemas.InternalAccessDetails_principalOwnerAccount, *v.PrincipalOwnerAccount)
 	}
@@ -3207,7 +3297,9 @@ func (v *InternalAccessDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceControlPolicyRestriction != "" {
 		s.WriteString(schemas.InternalAccessDetails_serviceControlPolicyRestriction, string(v.ServiceControlPolicyRestriction))
 	}
-	serializeFindingSourceList(s, schemas.InternalAccessDetails_sources, v.Sources)
+	if v.Sources != nil {
+		serializeFindingSourceList(s, schemas.InternalAccessDetails_sources, v.Sources)
+	}
 }
 func (v *InternalAccessDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InternalAccessDetails, func(s *smithy.Schema) error {
@@ -3284,7 +3376,9 @@ func (v *InternalAccessFindingsStatistics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InternalAccessFindingsStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInternalAccessResourceTypeStatisticsMap(s, schemas.InternalAccessFindingsStatistics_resourceTypeStatistics, v.ResourceTypeStatistics)
+	if v.ResourceTypeStatistics != nil {
+		serializeInternalAccessResourceTypeStatisticsMap(s, schemas.InternalAccessFindingsStatistics_resourceTypeStatistics, v.ResourceTypeStatistics)
+	}
 	if v.TotalActiveFindings != nil {
 		s.WriteInt32(schemas.InternalAccessFindingsStatistics_totalActiveFindings, *v.TotalActiveFindings)
 	}
@@ -3575,7 +3669,9 @@ func (v *KmsGrantConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IssuingAccount != nil {
 		s.WriteString(schemas.KmsGrantConfiguration_issuingAccount, *v.IssuingAccount)
 	}
-	serializeKmsGrantOperationsList(s, schemas.KmsGrantConfiguration_operations, v.Operations)
+	if v.Operations != nil {
+		serializeKmsGrantOperationsList(s, schemas.KmsGrantConfiguration_operations, v.Operations)
+	}
 	if v.RetiringPrincipal != nil {
 		s.WriteString(schemas.KmsGrantConfiguration_retiringPrincipal, *v.RetiringPrincipal)
 	}
@@ -3636,8 +3732,12 @@ func (v *KmsGrantConstraints) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KmsGrantConstraints) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKmsConstraintsMap(s, schemas.KmsGrantConstraints_encryptionContextEquals, v.EncryptionContextEquals)
-	serializeKmsConstraintsMap(s, schemas.KmsGrantConstraints_encryptionContextSubset, v.EncryptionContextSubset)
+	if v.EncryptionContextEquals != nil {
+		serializeKmsConstraintsMap(s, schemas.KmsGrantConstraints_encryptionContextEquals, v.EncryptionContextEquals)
+	}
+	if v.EncryptionContextSubset != nil {
+		serializeKmsConstraintsMap(s, schemas.KmsGrantConstraints_encryptionContextSubset, v.EncryptionContextSubset)
+	}
 }
 func (v *KmsGrantConstraints) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KmsGrantConstraints, func(s *smithy.Schema) error {
@@ -3686,8 +3786,12 @@ func (v *KmsKeyConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KmsKeyConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKmsGrantConfigurationsList(s, schemas.KmsKeyConfiguration_grants, v.Grants)
-	serializeKmsKeyPoliciesMap(s, schemas.KmsKeyConfiguration_keyPolicies, v.KeyPolicies)
+	if v.Grants != nil {
+		serializeKmsGrantConfigurationsList(s, schemas.KmsKeyConfiguration_grants, v.Grants)
+	}
+	if v.KeyPolicies != nil {
+		serializeKmsKeyPoliciesMap(s, schemas.KmsKeyConfiguration_keyPolicies, v.KeyPolicies)
+	}
 }
 func (v *KmsKeyConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KmsKeyConfiguration, func(s *smithy.Schema) error {
@@ -3725,7 +3829,9 @@ func (v *Location) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePathElementList(s, schemas.Location_path, v.Path)
+	if v.Path != nil {
+		serializePathElementList(s, schemas.Location_path, v.Path)
+	}
 	if v.Span != nil {
 		s.WriteStruct(schemas.Location_span)
 		v.Span.SerializeMembers(s)
@@ -4118,7 +4224,9 @@ func (v *RdsDbClusterSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *RdsDbClusterSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRdsDbClusterSnapshotAttributesMap(s, schemas.RdsDbClusterSnapshotConfiguration_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeRdsDbClusterSnapshotAttributesMap(s, schemas.RdsDbClusterSnapshotConfiguration_attributes, v.Attributes)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.RdsDbClusterSnapshotConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
@@ -4211,7 +4319,9 @@ func (v *RdsDbSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RdsDbSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRdsDbSnapshotAttributesMap(s, schemas.RdsDbSnapshotConfiguration_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeRdsDbSnapshotAttributesMap(s, schemas.RdsDbSnapshotConfiguration_attributes, v.Attributes)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.RdsDbSnapshotConfiguration_kmsKeyId, *v.KmsKeyId)
 	}
@@ -4442,7 +4552,9 @@ func (v *S3AccessPointConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AccessPointPolicy != nil {
 		s.WriteString(schemas.S3AccessPointConfiguration_accessPointPolicy, *v.AccessPointPolicy)
 	}
-	serializeNetworkOriginConfiguration(s, schemas.S3AccessPointConfiguration_networkOrigin, v.NetworkOrigin)
+	if v.NetworkOrigin != nil {
+		serializeNetworkOriginConfiguration(s, schemas.S3AccessPointConfiguration_networkOrigin, v.NetworkOrigin)
+	}
 	if v.PublicAccessBlock != nil {
 		s.WriteStruct(schemas.S3AccessPointConfiguration_publicAccessBlock)
 		v.PublicAccessBlock.SerializeMembers(s)
@@ -4491,7 +4603,9 @@ func (v *S3BucketAclGrantConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3BucketAclGrantConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAclGrantee(s, schemas.S3BucketAclGrantConfiguration_grantee, v.Grantee)
+	if v.Grantee != nil {
+		serializeAclGrantee(s, schemas.S3BucketAclGrantConfiguration_grantee, v.Grantee)
+	}
 	if v.Permission != "" {
 		s.WriteString(schemas.S3BucketAclGrantConfiguration_permission, string(v.Permission))
 	}
@@ -4555,8 +4669,12 @@ func (v *S3BucketConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *S3BucketConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeS3AccessPointConfigurationsMap(s, schemas.S3BucketConfiguration_accessPoints, v.AccessPoints)
-	serializeS3BucketAclGrantConfigurationsList(s, schemas.S3BucketConfiguration_bucketAclGrants, v.BucketAclGrants)
+	if v.AccessPoints != nil {
+		serializeS3AccessPointConfigurationsMap(s, schemas.S3BucketConfiguration_accessPoints, v.AccessPoints)
+	}
+	if v.BucketAclGrants != nil {
+		serializeS3BucketAclGrantConfigurationsList(s, schemas.S3BucketConfiguration_bucketAclGrants, v.BucketAclGrants)
+	}
 	if v.BucketPolicy != nil {
 		s.WriteString(schemas.S3BucketConfiguration_bucketPolicy, *v.BucketPolicy)
 	}
@@ -4621,7 +4739,9 @@ func (v *S3ExpressDirectoryAccessPointConfiguration) SerializeMembers(s smithy.S
 	if v.AccessPointPolicy != nil {
 		s.WriteString(schemas.S3ExpressDirectoryAccessPointConfiguration_accessPointPolicy, *v.AccessPointPolicy)
 	}
-	serializeNetworkOriginConfiguration(s, schemas.S3ExpressDirectoryAccessPointConfiguration_networkOrigin, v.NetworkOrigin)
+	if v.NetworkOrigin != nil {
+		serializeNetworkOriginConfiguration(s, schemas.S3ExpressDirectoryAccessPointConfiguration_networkOrigin, v.NetworkOrigin)
+	}
 }
 func (v *S3ExpressDirectoryAccessPointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.S3ExpressDirectoryAccessPointConfiguration, func(s *smithy.Schema) error {
@@ -4667,7 +4787,9 @@ func (v *S3ExpressDirectoryBucketConfiguration) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *S3ExpressDirectoryBucketConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeS3ExpressDirectoryAccessPointConfigurationsMap(s, schemas.S3ExpressDirectoryBucketConfiguration_accessPoints, v.AccessPoints)
+	if v.AccessPoints != nil {
+		serializeS3ExpressDirectoryAccessPointConfigurationsMap(s, schemas.S3ExpressDirectoryBucketConfiguration_accessPoints, v.AccessPoints)
+	}
 	if v.BucketPolicy != nil {
 		s.WriteString(schemas.S3ExpressDirectoryBucketConfiguration_bucketPolicy, *v.BucketPolicy)
 	}
@@ -5090,7 +5212,9 @@ func (v *Trail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudTrailArn != nil {
 		s.WriteString(schemas.Trail_cloudTrailArn, *v.CloudTrailArn)
 	}
-	serializeRegionList(s, schemas.Trail_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.Trail_regions, v.Regions)
+	}
 }
 func (v *Trail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Trail, func(s *smithy.Schema) error {
@@ -5140,7 +5264,9 @@ func (v *TrailProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CloudTrailArn != nil {
 		s.WriteString(schemas.TrailProperties_cloudTrailArn, *v.CloudTrailArn)
 	}
-	serializeRegionList(s, schemas.TrailProperties_regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.TrailProperties_regions, v.Regions)
+	}
 }
 func (v *TrailProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrailProperties, func(s *smithy.Schema) error {
@@ -5237,7 +5363,9 @@ func (v *UnusedAccessFindingsStatistics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnusedAccessFindingsStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountAggregations(s, schemas.UnusedAccessFindingsStatistics_topAccounts, v.TopAccounts)
+	if v.TopAccounts != nil {
+		serializeAccountAggregations(s, schemas.UnusedAccessFindingsStatistics_topAccounts, v.TopAccounts)
+	}
 	if v.TotalActiveFindings != nil {
 		s.WriteInt32(schemas.UnusedAccessFindingsStatistics_totalActiveFindings, *v.TotalActiveFindings)
 	}
@@ -5247,7 +5375,9 @@ func (v *UnusedAccessFindingsStatistics) SerializeMembers(s smithy.ShapeSerializ
 	if v.TotalResolvedFindings != nil {
 		s.WriteInt32(schemas.UnusedAccessFindingsStatistics_totalResolvedFindings, *v.TotalResolvedFindings)
 	}
-	serializeUnusedAccessTypeStatisticsList(s, schemas.UnusedAccessFindingsStatistics_unusedAccessTypeStatistics, v.UnusedAccessTypeStatistics)
+	if v.UnusedAccessTypeStatistics != nil {
+		serializeUnusedAccessTypeStatisticsList(s, schemas.UnusedAccessFindingsStatistics_unusedAccessTypeStatistics, v.UnusedAccessTypeStatistics)
+	}
 }
 func (v *UnusedAccessFindingsStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnusedAccessFindingsStatistics, func(s *smithy.Schema) error {
@@ -5502,7 +5632,9 @@ func (v *UnusedPermissionDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UnusedPermissionDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUnusedActionList(s, schemas.UnusedPermissionDetails_actions, v.Actions)
+	if v.Actions != nil {
+		serializeUnusedActionList(s, schemas.UnusedPermissionDetails_actions, v.Actions)
+	}
 	if v.LastAccessed != nil {
 		s.WriteTime(schemas.UnusedPermissionDetails_lastAccessed, *v.LastAccessed)
 	}
@@ -5660,7 +5792,9 @@ func (v *ValidatePolicyFinding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LearnMoreLink != nil {
 		s.WriteString(schemas.ValidatePolicyFinding_learnMoreLink, *v.LearnMoreLink)
 	}
-	serializeLocationList(s, schemas.ValidatePolicyFinding_locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.ValidatePolicyFinding_locations, v.Locations)
+	}
 }
 func (v *ValidatePolicyFinding) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ValidatePolicyFinding, func(s *smithy.Schema) error {

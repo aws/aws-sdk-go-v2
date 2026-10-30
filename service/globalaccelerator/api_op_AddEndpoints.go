@@ -68,7 +68,9 @@ func (v *AddEndpointsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointConfigurations(s, schemas.AddEndpointsRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointConfigurations != nil {
+		serializeEndpointConfigurations(s, schemas.AddEndpointsRequest_EndpointConfigurations, v.EndpointConfigurations)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.AddEndpointsRequest_EndpointGroupArn, *v.EndpointGroupArn)
 	}
@@ -95,7 +97,9 @@ func (v *AddEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AddEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointDescriptions(s, schemas.AddEndpointsResponse_EndpointDescriptions, v.EndpointDescriptions)
+	if v.EndpointDescriptions != nil {
+		serializeEndpointDescriptions(s, schemas.AddEndpointsResponse_EndpointDescriptions, v.EndpointDescriptions)
+	}
 	if v.EndpointGroupArn != nil {
 		s.WriteString(schemas.AddEndpointsResponse_EndpointGroupArn, *v.EndpointGroupArn)
 	}

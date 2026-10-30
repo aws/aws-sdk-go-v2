@@ -100,7 +100,9 @@ func (v *ListStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastEvaluatedStreamArn != nil {
 		s.WriteString(schemas.ListStreamsOutput_LastEvaluatedStreamArn, *v.LastEvaluatedStreamArn)
 	}
-	serializeStreamList(s, schemas.ListStreamsOutput_Streams, v.Streams)
+	if v.Streams != nil {
+		serializeStreamList(s, schemas.ListStreamsOutput_Streams, v.Streams)
+	}
 }
 func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStreamsOutput, func(s *smithy.Schema) error {

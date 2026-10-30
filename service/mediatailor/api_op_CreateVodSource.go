@@ -61,11 +61,15 @@ func (v *CreateVodSourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateVodSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHttpPackageConfigurations(s, schemas.CreateVodSourceRequest_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.CreateVodSourceRequest_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateVodSourceRequest_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateVodSourceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateVodSourceRequest_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.CreateVodSourceRequest_VodSourceName, *v.VodSourceName)
 	}
@@ -134,14 +138,18 @@ func (v *CreateVodSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.CreateVodSourceResponse_CreationTime, *v.CreationTime)
 	}
-	serializeHttpPackageConfigurations(s, schemas.CreateVodSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.HttpPackageConfigurations != nil {
+		serializeHttpPackageConfigurations(s, schemas.CreateVodSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	}
 	if v.LastModifiedTime != nil {
 		s.WriteTime(schemas.CreateVodSourceResponse_LastModifiedTime, *v.LastModifiedTime)
 	}
 	if v.SourceLocationName != nil {
 		s.WriteString(schemas.CreateVodSourceResponse_SourceLocationName, *v.SourceLocationName)
 	}
-	serialize__mapOf__string(s, schemas.CreateVodSourceResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateVodSourceResponse_Tags, v.Tags)
+	}
 	if v.VodSourceName != nil {
 		s.WriteString(schemas.CreateVodSourceResponse_VodSourceName, *v.VodSourceName)
 	}

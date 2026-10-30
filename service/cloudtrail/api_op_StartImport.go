@@ -88,7 +88,9 @@ func (v *StartImportInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportDestinations(s, schemas.StartImportRequest_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeImportDestinations(s, schemas.StartImportRequest_Destinations, v.Destinations)
+	}
 	if v.EndEventTime != nil {
 		s.WriteTime(schemas.StartImportRequest_EndEventTime, *v.EndEventTime)
 	}
@@ -151,7 +153,9 @@ func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.StartImportResponse_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeImportDestinations(s, schemas.StartImportResponse_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeImportDestinations(s, schemas.StartImportResponse_Destinations, v.Destinations)
+	}
 	if v.EndEventTime != nil {
 		s.WriteTime(schemas.StartImportResponse_EndEventTime, *v.EndEventTime)
 	}

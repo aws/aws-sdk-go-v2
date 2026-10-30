@@ -49,7 +49,9 @@ func (v *UpdateEmergencyContactSettingsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateEmergencyContactSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmergencyContactList(s, schemas.UpdateEmergencyContactSettingsRequest_EmergencyContactList, v.EmergencyContactList)
+	if v.EmergencyContactList != nil {
+		serializeEmergencyContactList(s, schemas.UpdateEmergencyContactSettingsRequest_EmergencyContactList, v.EmergencyContactList)
+	}
 }
 
 type UpdateEmergencyContactSettingsOutput struct {

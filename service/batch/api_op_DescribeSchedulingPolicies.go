@@ -44,7 +44,9 @@ func (v *DescribeSchedulingPoliciesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSchedulingPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.DescribeSchedulingPoliciesRequest_arns, v.Arns)
+	if v.Arns != nil {
+		serializeStringList(s, schemas.DescribeSchedulingPoliciesRequest_arns, v.Arns)
+	}
 }
 
 type DescribeSchedulingPoliciesOutput struct {
@@ -65,7 +67,9 @@ func (v *DescribeSchedulingPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeSchedulingPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchedulingPolicyDetailList(s, schemas.DescribeSchedulingPoliciesResponse_schedulingPolicies, v.SchedulingPolicies)
+	if v.SchedulingPolicies != nil {
+		serializeSchedulingPolicyDetailList(s, schemas.DescribeSchedulingPoliciesResponse_schedulingPolicies, v.SchedulingPolicies)
+	}
 }
 func (v *DescribeSchedulingPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeSchedulingPoliciesResponse, func(s *smithy.Schema) error {

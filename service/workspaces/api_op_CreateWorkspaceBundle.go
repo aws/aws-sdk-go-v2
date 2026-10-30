@@ -95,7 +95,9 @@ func (v *CreateWorkspaceBundleInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.RootStorage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateWorkspaceBundleRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkspaceBundleRequest_Tags, v.Tags)
+	}
 	if v.UserStorage != nil {
 		s.WriteStruct(schemas.CreateWorkspaceBundleRequest_UserStorage)
 		v.UserStorage.SerializeMembers(s)

@@ -91,14 +91,18 @@ func (v *GetReadinessCheckStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetReadinessCheckStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfMessage(s, schemas.GetReadinessCheckStatusResponse_Messages, v.Messages)
+	if v.Messages != nil {
+		serialize__listOfMessage(s, schemas.GetReadinessCheckStatusResponse_Messages, v.Messages)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetReadinessCheckStatusResponse_NextToken, *v.NextToken)
 	}
 	if v.Readiness != "" {
 		s.WriteString(schemas.GetReadinessCheckStatusResponse_Readiness, string(v.Readiness))
 	}
-	serialize__listOfResourceResult(s, schemas.GetReadinessCheckStatusResponse_Resources, v.Resources)
+	if v.Resources != nil {
+		serialize__listOfResourceResult(s, schemas.GetReadinessCheckStatusResponse_Resources, v.Resources)
+	}
 }
 func (v *GetReadinessCheckStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetReadinessCheckStatusResponse, func(s *smithy.Schema) error {

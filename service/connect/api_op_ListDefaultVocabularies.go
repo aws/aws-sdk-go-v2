@@ -97,7 +97,9 @@ func (v *ListDefaultVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDefaultVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDefaultVocabularyList(s, schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList, v.DefaultVocabularyList)
+	if v.DefaultVocabularyList != nil {
+		serializeDefaultVocabularyList(s, schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList, v.DefaultVocabularyList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDefaultVocabulariesResponse_NextToken, *v.NextToken)
 	}

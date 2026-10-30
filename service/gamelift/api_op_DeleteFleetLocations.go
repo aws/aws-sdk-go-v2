@@ -70,7 +70,9 @@ func (v *DeleteFleetLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetId != nil {
 		s.WriteString(schemas.DeleteFleetLocationsInput_FleetId, *v.FleetId)
 	}
-	serializeLocationList(s, schemas.DeleteFleetLocationsInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.DeleteFleetLocationsInput_Locations, v.Locations)
+	}
 }
 
 type DeleteFleetLocationsOutput struct {
@@ -109,7 +111,9 @@ func (v *DeleteFleetLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FleetId != nil {
 		s.WriteString(schemas.DeleteFleetLocationsOutput_FleetId, *v.FleetId)
 	}
-	serializeLocationStateList(s, schemas.DeleteFleetLocationsOutput_LocationStates, v.LocationStates)
+	if v.LocationStates != nil {
+		serializeLocationStateList(s, schemas.DeleteFleetLocationsOutput_LocationStates, v.LocationStates)
+	}
 }
 func (v *DeleteFleetLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteFleetLocationsOutput, func(s *smithy.Schema) error {

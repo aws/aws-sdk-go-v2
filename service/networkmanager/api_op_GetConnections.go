@@ -56,7 +56,9 @@ func (v *GetConnectionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionIdList(s, schemas.GetConnectionsRequest_ConnectionIds, v.ConnectionIds)
+	if v.ConnectionIds != nil {
+		serializeConnectionIdList(s, schemas.GetConnectionsRequest_ConnectionIds, v.ConnectionIds)
+	}
 	if v.DeviceId != nil {
 		s.WriteString(schemas.GetConnectionsRequest_DeviceId, *v.DeviceId)
 	}
@@ -92,7 +94,9 @@ func (v *GetConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionList(s, schemas.GetConnectionsResponse_Connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionList(s, schemas.GetConnectionsResponse_Connections, v.Connections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetConnectionsResponse_NextToken, *v.NextToken)
 	}

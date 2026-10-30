@@ -70,7 +70,9 @@ func (v *PutDeliverabilityDashboardOptionInput) Serialize(s smithy.ShapeSerializ
 
 func (v *PutDeliverabilityDashboardOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	s.WriteBool(schemas.PutDeliverabilityDashboardOptionRequest_DashboardEnabled, v.DashboardEnabled)
-	serializeDomainDeliverabilityTrackingOptions(s, schemas.PutDeliverabilityDashboardOptionRequest_SubscribedDomains, v.SubscribedDomains)
+	if v.SubscribedDomains != nil {
+		serializeDomainDeliverabilityTrackingOptions(s, schemas.PutDeliverabilityDashboardOptionRequest_SubscribedDomains, v.SubscribedDomains)
+	}
 }
 
 // A response that indicates whether the Deliverability dashboard is enabled.

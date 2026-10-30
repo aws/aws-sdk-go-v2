@@ -49,7 +49,9 @@ func (v *ListDistributionConfigurationsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListDistributionConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListDistributionConfigurationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListDistributionConfigurationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListDistributionConfigurationsRequest_maxResults, *v.MaxResults)
 	}
@@ -84,7 +86,9 @@ func (v *ListDistributionConfigurationsOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListDistributionConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDistributionConfigurationSummaryList(s, schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList, v.DistributionConfigurationSummaryList)
+	if v.DistributionConfigurationSummaryList != nil {
+		serializeDistributionConfigurationSummaryList(s, schemas.ListDistributionConfigurationsResponse_distributionConfigurationSummaryList, v.DistributionConfigurationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDistributionConfigurationsResponse_nextToken, *v.NextToken)
 	}

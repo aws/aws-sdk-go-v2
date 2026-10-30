@@ -150,7 +150,9 @@ func (v *CreateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableSimpleResponses != nil {
 		s.WriteBool(schemas.CreateAuthorizerRequest_EnableSimpleResponses, *v.EnableSimpleResponses)
 	}
-	serializeIdentitySourceList(s, schemas.CreateAuthorizerRequest_IdentitySource, v.IdentitySource)
+	if v.IdentitySource != nil {
+		serializeIdentitySourceList(s, schemas.CreateAuthorizerRequest_IdentitySource, v.IdentitySource)
+	}
 	if v.IdentityValidationExpression != nil {
 		s.WriteString(schemas.CreateAuthorizerRequest_IdentityValidationExpression, *v.IdentityValidationExpression)
 	}
@@ -281,7 +283,9 @@ func (v *CreateAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableSimpleResponses != nil {
 		s.WriteBool(schemas.CreateAuthorizerResponse_EnableSimpleResponses, *v.EnableSimpleResponses)
 	}
-	serializeIdentitySourceList(s, schemas.CreateAuthorizerResponse_IdentitySource, v.IdentitySource)
+	if v.IdentitySource != nil {
+		serializeIdentitySourceList(s, schemas.CreateAuthorizerResponse_IdentitySource, v.IdentitySource)
+	}
 	if v.IdentityValidationExpression != nil {
 		s.WriteString(schemas.CreateAuthorizerResponse_IdentityValidationExpression, *v.IdentityValidationExpression)
 	}

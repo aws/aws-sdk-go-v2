@@ -181,7 +181,9 @@ func (v *GetCostForecastOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeForecastResultsByTime(s, schemas.GetCostForecastResponse_ForecastResultsByTime, v.ForecastResultsByTime)
+	if v.ForecastResultsByTime != nil {
+		serializeForecastResultsByTime(s, schemas.GetCostForecastResponse_ForecastResultsByTime, v.ForecastResultsByTime)
+	}
 	if v.Total != nil {
 		s.WriteStruct(schemas.GetCostForecastResponse_Total)
 		v.Total.SerializeMembers(s)

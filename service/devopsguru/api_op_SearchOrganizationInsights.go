@@ -74,7 +74,9 @@ func (v *SearchOrganizationInsightsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchOrganizationInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchInsightsAccountIdList(s, schemas.SearchOrganizationInsightsRequest_AccountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeSearchInsightsAccountIdList(s, schemas.SearchOrganizationInsightsRequest_AccountIds, v.AccountIds)
+	}
 	if v.Filters != nil {
 		s.WriteStruct(schemas.SearchOrganizationInsightsRequest_Filters)
 		v.Filters.SerializeMembers(s)
@@ -126,8 +128,12 @@ func (v *SearchOrganizationInsightsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchOrganizationInsightsResponse_NextToken, *v.NextToken)
 	}
-	serializeProactiveInsights(s, schemas.SearchOrganizationInsightsResponse_ProactiveInsights, v.ProactiveInsights)
-	serializeReactiveInsights(s, schemas.SearchOrganizationInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+	if v.ProactiveInsights != nil {
+		serializeProactiveInsights(s, schemas.SearchOrganizationInsightsResponse_ProactiveInsights, v.ProactiveInsights)
+	}
+	if v.ReactiveInsights != nil {
+		serializeReactiveInsights(s, schemas.SearchOrganizationInsightsResponse_ReactiveInsights, v.ReactiveInsights)
+	}
 }
 func (v *SearchOrganizationInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchOrganizationInsightsResponse, func(s *smithy.Schema) error {

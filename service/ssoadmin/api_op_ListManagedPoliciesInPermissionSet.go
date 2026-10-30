@@ -95,7 +95,9 @@ func (v *ListManagedPoliciesInPermissionSetOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListManagedPoliciesInPermissionSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachedManagedPolicyList(s, schemas.ListManagedPoliciesInPermissionSetResponse_AttachedManagedPolicies, v.AttachedManagedPolicies)
+	if v.AttachedManagedPolicies != nil {
+		serializeAttachedManagedPolicyList(s, schemas.ListManagedPoliciesInPermissionSetResponse_AttachedManagedPolicies, v.AttachedManagedPolicies)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedPoliciesInPermissionSetResponse_NextToken, *v.NextToken)
 	}

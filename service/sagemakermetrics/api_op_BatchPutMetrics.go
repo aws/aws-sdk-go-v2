@@ -50,7 +50,9 @@ func (v *BatchPutMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRawMetricDataList(s, schemas.BatchPutMetricsRequest_MetricData, v.MetricData)
+	if v.MetricData != nil {
+		serializeRawMetricDataList(s, schemas.BatchPutMetricsRequest_MetricData, v.MetricData)
+	}
 	if v.TrialComponentName != nil {
 		s.WriteString(schemas.BatchPutMetricsRequest_TrialComponentName, *v.TrialComponentName)
 	}
@@ -74,7 +76,9 @@ func (v *BatchPutMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutMetricsErrorList(s, schemas.BatchPutMetricsResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchPutMetricsErrorList(s, schemas.BatchPutMetricsResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchPutMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutMetricsResponse, func(s *smithy.Schema) error {

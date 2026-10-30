@@ -122,7 +122,9 @@ func (v *ListChildrenOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChildrenOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChildren(s, schemas.ListChildrenResponse_Children, v.Children)
+	if v.Children != nil {
+		serializeChildren(s, schemas.ListChildrenResponse_Children, v.Children)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChildrenResponse_NextToken, *v.NextToken)
 	}

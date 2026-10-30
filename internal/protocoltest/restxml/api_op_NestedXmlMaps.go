@@ -40,8 +40,12 @@ func (v *NestedXmlMapsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NestedXmlMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNestedMap(s, schemas.NestedXmlMapsRequest_flatNestedMap, v.FlatNestedMap)
-	serializeNestedMap(s, schemas.NestedXmlMapsRequest_nestedMap, v.NestedMap)
+	if v.FlatNestedMap != nil {
+		serializeNestedMap(s, schemas.NestedXmlMapsRequest_flatNestedMap, v.FlatNestedMap)
+	}
+	if v.NestedMap != nil {
+		serializeNestedMap(s, schemas.NestedXmlMapsRequest_nestedMap, v.NestedMap)
+	}
 }
 
 type NestedXmlMapsOutput struct {
@@ -62,8 +66,12 @@ func (v *NestedXmlMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NestedXmlMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNestedMap(s, schemas.NestedXmlMapsResponse_flatNestedMap, v.FlatNestedMap)
-	serializeNestedMap(s, schemas.NestedXmlMapsResponse_nestedMap, v.NestedMap)
+	if v.FlatNestedMap != nil {
+		serializeNestedMap(s, schemas.NestedXmlMapsResponse_flatNestedMap, v.FlatNestedMap)
+	}
+	if v.NestedMap != nil {
+		serializeNestedMap(s, schemas.NestedXmlMapsResponse_nestedMap, v.NestedMap)
+	}
 }
 func (v *NestedXmlMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NestedXmlMapsResponse, func(s *smithy.Schema) error {

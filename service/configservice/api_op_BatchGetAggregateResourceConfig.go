@@ -58,7 +58,9 @@ func (v *BatchGetAggregateResourceConfigInput) SerializeMembers(s smithy.ShapeSe
 	if v.ConfigurationAggregatorName != nil {
 		s.WriteString(schemas.BatchGetAggregateResourceConfigRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
 	}
-	serializeResourceIdentifiersList(s, schemas.BatchGetAggregateResourceConfigRequest_ResourceIdentifiers, v.ResourceIdentifiers)
+	if v.ResourceIdentifiers != nil {
+		serializeResourceIdentifiersList(s, schemas.BatchGetAggregateResourceConfigRequest_ResourceIdentifiers, v.ResourceIdentifiers)
+	}
 }
 
 type BatchGetAggregateResourceConfigOutput struct {
@@ -83,8 +85,12 @@ func (v *BatchGetAggregateResourceConfigOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchGetAggregateResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBaseConfigurationItems(s, schemas.BatchGetAggregateResourceConfigResponse_BaseConfigurationItems, v.BaseConfigurationItems)
-	serializeUnprocessedResourceIdentifierList(s, schemas.BatchGetAggregateResourceConfigResponse_UnprocessedResourceIdentifiers, v.UnprocessedResourceIdentifiers)
+	if v.BaseConfigurationItems != nil {
+		serializeBaseConfigurationItems(s, schemas.BatchGetAggregateResourceConfigResponse_BaseConfigurationItems, v.BaseConfigurationItems)
+	}
+	if v.UnprocessedResourceIdentifiers != nil {
+		serializeUnprocessedResourceIdentifierList(s, schemas.BatchGetAggregateResourceConfigResponse_UnprocessedResourceIdentifiers, v.UnprocessedResourceIdentifiers)
+	}
 }
 func (v *BatchGetAggregateResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAggregateResourceConfigResponse, func(s *smithy.Schema) error {

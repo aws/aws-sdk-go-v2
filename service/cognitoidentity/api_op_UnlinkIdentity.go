@@ -60,8 +60,12 @@ func (v *UnlinkIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityId != nil {
 		s.WriteString(schemas.UnlinkIdentityInput_IdentityId, *v.IdentityId)
 	}
-	serializeLoginsMap(s, schemas.UnlinkIdentityInput_Logins, v.Logins)
-	serializeLoginsList(s, schemas.UnlinkIdentityInput_LoginsToRemove, v.LoginsToRemove)
+	if v.Logins != nil {
+		serializeLoginsMap(s, schemas.UnlinkIdentityInput_Logins, v.Logins)
+	}
+	if v.LoginsToRemove != nil {
+		serializeLoginsList(s, schemas.UnlinkIdentityInput_LoginsToRemove, v.LoginsToRemove)
+	}
 }
 
 type UnlinkIdentityOutput struct {

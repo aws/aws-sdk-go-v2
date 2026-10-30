@@ -88,15 +88,21 @@ func (v *CreatePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreatePipelineRequest_clientToken, *v.ClientToken)
 	}
-	serializeComputeNodeList(s, schemas.CreatePipelineRequest_computations, v.Computations)
+	if v.Computations != nil {
+		serializeComputeNodeList(s, schemas.CreatePipelineRequest_computations, v.Computations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreatePipelineRequest_description, *v.Description)
 	}
-	serializeEnvironmentVariablesMap(s, schemas.CreatePipelineRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariablesMap(s, schemas.CreatePipelineRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.PipelineName != nil {
 		s.WriteString(schemas.CreatePipelineRequest_pipelineName, *v.PipelineName)
 	}
-	serializeTagMap(s, schemas.CreatePipelineRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreatePipelineRequest_tags, v.Tags)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreatePipelineRequest_workspaceName, *v.WorkspaceName)
 	}

@@ -131,7 +131,9 @@ func (v *GetPredictiveScalingForecastOutput) SerializeMembers(s smithy.ShapeSeri
 		v.CapacityForecast.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeLoadForecasts(s, schemas.GetPredictiveScalingForecastResponse_LoadForecast, v.LoadForecast)
+	if v.LoadForecast != nil {
+		serializeLoadForecasts(s, schemas.GetPredictiveScalingForecastResponse_LoadForecast, v.LoadForecast)
+	}
 	if v.UpdateTime != nil {
 		s.WriteTime(schemas.GetPredictiveScalingForecastResponse_UpdateTime, *v.UpdateTime)
 	}

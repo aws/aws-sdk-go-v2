@@ -90,7 +90,9 @@ func (v *CreateTriggerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.CreateTriggerRequest_Actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionList(s, schemas.CreateTriggerRequest_Actions, v.Actions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateTriggerRequest_Description, *v.Description)
 	}
@@ -113,7 +115,9 @@ func (v *CreateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartOnCreation != false {
 		s.WriteBool(schemas.CreateTriggerRequest_StartOnCreation, v.StartOnCreation)
 	}
-	serializeTagsMap(s, schemas.CreateTriggerRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateTriggerRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateTriggerRequest_Type, string(v.Type))
 	}

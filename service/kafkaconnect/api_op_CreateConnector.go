@@ -115,7 +115,9 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Capacity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeConnectorConfiguration(s, schemas.CreateConnectorRequest_connectorConfiguration, v.ConnectorConfiguration)
+	if v.ConnectorConfiguration != nil {
+		serializeConnectorConfiguration(s, schemas.CreateConnectorRequest_connectorConfiguration, v.ConnectorConfiguration)
+	}
 	if v.ConnectorDescription != nil {
 		s.WriteString(schemas.CreateConnectorRequest_connectorDescription, *v.ConnectorDescription)
 	}
@@ -148,11 +150,15 @@ func (v *CreateConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NetworkType != "" {
 		s.WriteString(schemas.CreateConnectorRequest_networkType, string(v.NetworkType))
 	}
-	serialize__listOfPlugin(s, schemas.CreateConnectorRequest_plugins, v.Plugins)
+	if v.Plugins != nil {
+		serialize__listOfPlugin(s, schemas.CreateConnectorRequest_plugins, v.Plugins)
+	}
 	if v.ServiceExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateConnectorRequest_serviceExecutionRoleArn, *v.ServiceExecutionRoleArn)
 	}
-	serializeTags(s, schemas.CreateConnectorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateConnectorRequest_tags, v.Tags)
+	}
 	if v.WorkerConfiguration != nil {
 		s.WriteStruct(schemas.CreateConnectorRequest_workerConfiguration)
 		v.WorkerConfiguration.SerializeMembers(s)

@@ -52,7 +52,9 @@ func (v *DescribeInstancePatchStatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInstancePatchStatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceIdList(s, schemas.DescribeInstancePatchStatesRequest_InstanceIds, v.InstanceIds)
+	if v.InstanceIds != nil {
+		serializeInstanceIdList(s, schemas.DescribeInstancePatchStatesRequest_InstanceIds, v.InstanceIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeInstancePatchStatesRequest_MaxResults, *v.MaxResults)
 	}
@@ -83,7 +85,9 @@ func (v *DescribeInstancePatchStatesOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeInstancePatchStatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstancePatchStateList(s, schemas.DescribeInstancePatchStatesResult_InstancePatchStates, v.InstancePatchStates)
+	if v.InstancePatchStates != nil {
+		serializeInstancePatchStateList(s, schemas.DescribeInstancePatchStatesResult_InstancePatchStates, v.InstancePatchStates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInstancePatchStatesResult_NextToken, *v.NextToken)
 	}

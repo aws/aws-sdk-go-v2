@@ -70,7 +70,9 @@ func (v *CreateServiceEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateServiceEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityLimits(s, schemas.CreateServiceEnvironmentRequest_capacityLimits, v.CapacityLimits)
+	if v.CapacityLimits != nil {
+		serializeCapacityLimits(s, schemas.CreateServiceEnvironmentRequest_capacityLimits, v.CapacityLimits)
+	}
 	if v.ServiceEnvironmentName != nil {
 		s.WriteString(schemas.CreateServiceEnvironmentRequest_serviceEnvironmentName, *v.ServiceEnvironmentName)
 	}
@@ -80,7 +82,9 @@ func (v *CreateServiceEnvironmentInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.State != "" {
 		s.WriteString(schemas.CreateServiceEnvironmentRequest_state, string(v.State))
 	}
-	serializeTagrisTagsMap(s, schemas.CreateServiceEnvironmentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.CreateServiceEnvironmentRequest_tags, v.Tags)
+	}
 }
 
 type CreateServiceEnvironmentOutput struct {

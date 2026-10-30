@@ -71,7 +71,9 @@ func (v *PutAggregationAuthorizationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AuthorizedAwsRegion != nil {
 		s.WriteString(schemas.PutAggregationAuthorizationRequest_AuthorizedAwsRegion, *v.AuthorizedAwsRegion)
 	}
-	serializeTagsList(s, schemas.PutAggregationAuthorizationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.PutAggregationAuthorizationRequest_Tags, v.Tags)
+	}
 }
 
 type PutAggregationAuthorizationOutput struct {

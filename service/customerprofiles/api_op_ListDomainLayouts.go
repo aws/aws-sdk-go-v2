@@ -83,7 +83,9 @@ func (v *ListDomainLayoutsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainLayoutsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLayoutList(s, schemas.ListDomainLayoutsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeLayoutList(s, schemas.ListDomainLayoutsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainLayoutsResponse_NextToken, *v.NextToken)
 	}

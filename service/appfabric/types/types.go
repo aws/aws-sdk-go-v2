@@ -410,7 +410,9 @@ func (v *AuditLogDestinationConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AuditLogDestinationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestination(s, schemas.AuditLogDestinationConfiguration_destination, v.Destination)
+	if v.Destination != nil {
+		serializeDestination(s, schemas.AuditLogDestinationConfiguration_destination, v.Destination)
+	}
 }
 func (v *AuditLogDestinationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AuditLogDestinationConfiguration, func(s *smithy.Schema) error {
@@ -846,11 +848,15 @@ func (v *IngestionDestination) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.IngestionDestination_createdAt, *v.CreatedAt)
 	}
-	serializeDestinationConfiguration(s, schemas.IngestionDestination_destinationConfiguration, v.DestinationConfiguration)
+	if v.DestinationConfiguration != nil {
+		serializeDestinationConfiguration(s, schemas.IngestionDestination_destinationConfiguration, v.DestinationConfiguration)
+	}
 	if v.IngestionArn != nil {
 		s.WriteString(schemas.IngestionDestination_ingestionArn, *v.IngestionArn)
 	}
-	serializeProcessingConfiguration(s, schemas.IngestionDestination_processingConfiguration, v.ProcessingConfiguration)
+	if v.ProcessingConfiguration != nil {
+		serializeProcessingConfiguration(s, schemas.IngestionDestination_processingConfiguration, v.ProcessingConfiguration)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.IngestionDestination_status, string(v.Status))
 	}

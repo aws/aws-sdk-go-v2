@@ -64,7 +64,9 @@ func (v *UpdateReportGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExportConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.UpdateReportGroupInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UpdateReportGroupInput_tags, v.Tags)
+	}
 }
 
 type UpdateReportGroupOutput struct {

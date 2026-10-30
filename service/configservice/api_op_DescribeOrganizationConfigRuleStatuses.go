@@ -67,7 +67,9 @@ func (v *DescribeOrganizationConfigRuleStatusesInput) SerializeMembers(s smithy.
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOrganizationConfigRuleStatusesRequest_NextToken, *v.NextToken)
 	}
-	serializeOrganizationConfigRuleNames(s, schemas.DescribeOrganizationConfigRuleStatusesRequest_OrganizationConfigRuleNames, v.OrganizationConfigRuleNames)
+	if v.OrganizationConfigRuleNames != nil {
+		serializeOrganizationConfigRuleNames(s, schemas.DescribeOrganizationConfigRuleStatusesRequest_OrganizationConfigRuleNames, v.OrganizationConfigRuleNames)
+	}
 }
 
 type DescribeOrganizationConfigRuleStatusesOutput struct {
@@ -95,7 +97,9 @@ func (v *DescribeOrganizationConfigRuleStatusesOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOrganizationConfigRuleStatusesResponse_NextToken, *v.NextToken)
 	}
-	serializeOrganizationConfigRuleStatuses(s, schemas.DescribeOrganizationConfigRuleStatusesResponse_OrganizationConfigRuleStatuses, v.OrganizationConfigRuleStatuses)
+	if v.OrganizationConfigRuleStatuses != nil {
+		serializeOrganizationConfigRuleStatuses(s, schemas.DescribeOrganizationConfigRuleStatusesResponse_OrganizationConfigRuleStatuses, v.OrganizationConfigRuleStatuses)
+	}
 }
 func (v *DescribeOrganizationConfigRuleStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOrganizationConfigRuleStatusesResponse, func(s *smithy.Schema) error {

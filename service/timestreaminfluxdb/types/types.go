@@ -607,7 +607,9 @@ func (v *DbInstanceForClusterSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.InstanceMode != "" {
 		s.WriteString(schemas.DbInstanceForClusterSummary_instanceMode, string(v.InstanceMode))
 	}
-	serializeInstanceModeList(s, schemas.DbInstanceForClusterSummary_instanceModes, v.InstanceModes)
+	if v.InstanceModes != nil {
+		serializeInstanceModeList(s, schemas.DbInstanceForClusterSummary_instanceModes, v.InstanceModes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.DbInstanceForClusterSummary_name, *v.Name)
 	}
@@ -1688,8 +1690,12 @@ func (v *InfluxDBv3CoreParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DistinctCacheEvictionInterval.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_execMemPoolBytes, v.ExecMemPoolBytes)
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_forceSnapshotMemThreshold, v.ForceSnapshotMemThreshold)
+	if v.ExecMemPoolBytes != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_execMemPoolBytes, v.ExecMemPoolBytes)
+	}
+	if v.ForceSnapshotMemThreshold != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_forceSnapshotMemThreshold, v.ForceSnapshotMemThreshold)
+	}
 	if v.Gen1Duration != nil {
 		s.WriteStruct(schemas.InfluxDBv3CoreParameters_gen1Duration)
 		v.Gen1Duration.SerializeMembers(s)
@@ -1732,7 +1738,9 @@ func (v *InfluxDBv3CoreParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ParquetMemCacheQueryPathDuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_parquetMemCacheSize, v.ParquetMemCacheSize)
+	if v.ParquetMemCacheSize != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3CoreParameters_parquetMemCacheSize, v.ParquetMemCacheSize)
+	}
 	if v.PluginRepositorySecretArn != nil {
 		s.WriteString(schemas.InfluxDBv3CoreParameters_pluginRepositorySecretArn, *v.PluginRepositorySecretArn)
 	}
@@ -2308,8 +2316,12 @@ func (v *InfluxDBv3EnterpriseParameters) SerializeMembers(s smithy.ShapeSerializ
 	if v.DistinctValueCacheDisableFromHistory != nil {
 		s.WriteBool(schemas.InfluxDBv3EnterpriseParameters_distinctValueCacheDisableFromHistory, *v.DistinctValueCacheDisableFromHistory)
 	}
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_execMemPoolBytes, v.ExecMemPoolBytes)
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_forceSnapshotMemThreshold, v.ForceSnapshotMemThreshold)
+	if v.ExecMemPoolBytes != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_execMemPoolBytes, v.ExecMemPoolBytes)
+	}
+	if v.ForceSnapshotMemThreshold != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_forceSnapshotMemThreshold, v.ForceSnapshotMemThreshold)
+	}
 	if v.Gen1Duration != nil {
 		s.WriteStruct(schemas.InfluxDBv3EnterpriseParameters_gen1Duration)
 		v.Gen1Duration.SerializeMembers(s)
@@ -2358,7 +2370,9 @@ func (v *InfluxDBv3EnterpriseParameters) SerializeMembers(s smithy.ShapeSerializ
 		v.ParquetMemCacheQueryPathDuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheSize, v.ParquetMemCacheSize)
+	if v.ParquetMemCacheSize != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_parquetMemCacheSize, v.ParquetMemCacheSize)
+	}
 	if v.PluginRepositorySecretArn != nil {
 		s.WriteString(schemas.InfluxDBv3EnterpriseParameters_pluginRepositorySecretArn, *v.PluginRepositorySecretArn)
 	}
@@ -2394,7 +2408,9 @@ func (v *InfluxDBv3EnterpriseParameters) SerializeMembers(s smithy.ShapeSerializ
 		v.SnapshotDuration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_snapshotSize, v.SnapshotSize)
+	if v.SnapshotSize != nil {
+		serializePercentOrAbsoluteLong(s, schemas.InfluxDBv3EnterpriseParameters_snapshotSize, v.SnapshotSize)
+	}
 	if v.SnapshottedWalFilesToKeep != nil {
 		s.WriteInt32(schemas.InfluxDBv3EnterpriseParameters_snapshottedWalFilesToKeep, *v.SnapshottedWalFilesToKeep)
 	}

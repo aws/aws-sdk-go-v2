@@ -101,7 +101,9 @@ func (v *DescribeLocationFsxOpenZfsOutput) SerializeMembers(s smithy.ShapeSerial
 		v.Protocol.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxOpenZfsResponse_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.DescribeLocationFsxOpenZfsResponse_SecurityGroupArns, v.SecurityGroupArns)
+	}
 }
 func (v *DescribeLocationFsxOpenZfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeLocationFsxOpenZfsResponse, func(s *smithy.Schema) error {

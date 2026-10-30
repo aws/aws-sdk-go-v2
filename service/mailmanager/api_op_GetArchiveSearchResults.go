@@ -68,7 +68,9 @@ func (v *GetArchiveSearchResultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetArchiveSearchResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRowsList(s, schemas.GetArchiveSearchResultsResponse_Rows, v.Rows)
+	if v.Rows != nil {
+		serializeRowsList(s, schemas.GetArchiveSearchResultsResponse_Rows, v.Rows)
+	}
 }
 func (v *GetArchiveSearchResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetArchiveSearchResultsResponse, func(s *smithy.Schema) error {

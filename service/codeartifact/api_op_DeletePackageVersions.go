@@ -122,7 +122,9 @@ func (v *DeletePackageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Repository != nil {
 		s.WriteString(schemas.DeletePackageVersionsRequest_repository, *v.Repository)
 	}
-	serializePackageVersionList(s, schemas.DeletePackageVersionsRequest_versions, v.Versions)
+	if v.Versions != nil {
+		serializePackageVersionList(s, schemas.DeletePackageVersionsRequest_versions, v.Versions)
+	}
 }
 
 type DeletePackageVersionsOutput struct {
@@ -160,8 +162,12 @@ func (v *DeletePackageVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeletePackageVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageVersionErrorMap(s, schemas.DeletePackageVersionsResult_failedVersions, v.FailedVersions)
-	serializeSuccessfulPackageVersionInfoMap(s, schemas.DeletePackageVersionsResult_successfulVersions, v.SuccessfulVersions)
+	if v.FailedVersions != nil {
+		serializePackageVersionErrorMap(s, schemas.DeletePackageVersionsResult_failedVersions, v.FailedVersions)
+	}
+	if v.SuccessfulVersions != nil {
+		serializeSuccessfulPackageVersionInfoMap(s, schemas.DeletePackageVersionsResult_successfulVersions, v.SuccessfulVersions)
+	}
 }
 func (v *DeletePackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeletePackageVersionsResult, func(s *smithy.Schema) error {

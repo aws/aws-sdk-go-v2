@@ -85,7 +85,9 @@ func (v *GenerateMacInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GenerateMacInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMacAttributes(s, schemas.GenerateMacInput_GenerationAttributes, v.GenerationAttributes)
+	if v.GenerationAttributes != nil {
+		serializeMacAttributes(s, schemas.GenerateMacInput_GenerationAttributes, v.GenerationAttributes)
+	}
 	if v.KeyIdentifier != nil {
 		s.WriteString(schemas.GenerateMacInput_KeyIdentifier, *v.KeyIdentifier)
 	}

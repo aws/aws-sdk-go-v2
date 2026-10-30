@@ -75,7 +75,9 @@ func (v *ListLoggerDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLoggerDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfDefinitionInformation(s, schemas.ListLoggerDefinitionsResponse_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serialize__listOfDefinitionInformation(s, schemas.ListLoggerDefinitionsResponse_Definitions, v.Definitions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLoggerDefinitionsResponse_NextToken, *v.NextToken)
 	}

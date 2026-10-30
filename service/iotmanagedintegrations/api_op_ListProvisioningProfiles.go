@@ -74,7 +74,9 @@ func (v *ListProvisioningProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProvisioningProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProvisioningProfileListDefinition(s, schemas.ListProvisioningProfilesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeProvisioningProfileListDefinition(s, schemas.ListProvisioningProfilesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProvisioningProfilesResponse_NextToken, *v.NextToken)
 	}

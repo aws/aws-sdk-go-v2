@@ -102,7 +102,9 @@ func (v *RegisterContainerInstanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterContainerInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.RegisterContainerInstanceRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.RegisterContainerInstanceRequest_attributes, v.Attributes)
+	}
 	if v.Cluster != nil {
 		s.WriteString(schemas.RegisterContainerInstanceRequest_cluster, *v.Cluster)
 	}
@@ -115,9 +117,15 @@ func (v *RegisterContainerInstanceInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.InstanceIdentityDocumentSignature != nil {
 		s.WriteString(schemas.RegisterContainerInstanceRequest_instanceIdentityDocumentSignature, *v.InstanceIdentityDocumentSignature)
 	}
-	serializePlatformDevices(s, schemas.RegisterContainerInstanceRequest_platformDevices, v.PlatformDevices)
-	serializeTags(s, schemas.RegisterContainerInstanceRequest_tags, v.Tags)
-	serializeResources(s, schemas.RegisterContainerInstanceRequest_totalResources, v.TotalResources)
+	if v.PlatformDevices != nil {
+		serializePlatformDevices(s, schemas.RegisterContainerInstanceRequest_platformDevices, v.PlatformDevices)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterContainerInstanceRequest_tags, v.Tags)
+	}
+	if v.TotalResources != nil {
+		serializeResources(s, schemas.RegisterContainerInstanceRequest_totalResources, v.TotalResources)
+	}
 	if v.VersionInfo != nil {
 		s.WriteStruct(schemas.RegisterContainerInstanceRequest_versionInfo)
 		v.VersionInfo.SerializeMembers(s)

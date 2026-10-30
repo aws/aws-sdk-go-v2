@@ -52,7 +52,9 @@ func (v *DeleteTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceId != nil {
 		s.WriteString(schemas.DeleteTagsRequest_ResourceId, *v.ResourceId)
 	}
-	serializeTagKeyList(s, schemas.DeleteTagsRequest_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.DeleteTagsRequest_TagKeys, v.TagKeys)
+	}
 }
 
 type DeleteTagsOutput struct {

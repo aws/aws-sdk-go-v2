@@ -162,7 +162,9 @@ func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ExecutionMode != "" {
 		s.WriteString(schemas.BatchExecuteStatementInput_ExecutionMode, string(v.ExecutionMode))
 	}
-	serializeSqlParametersList(s, schemas.BatchExecuteStatementInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSqlParametersList(s, schemas.BatchExecuteStatementInput_Parameters, v.Parameters)
+	}
 	if v.ResultFormat != "" {
 		s.WriteString(schemas.BatchExecuteStatementInput_ResultFormat, string(v.ResultFormat))
 	}
@@ -175,7 +177,9 @@ func (v *BatchExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.SessionKeepAliveSeconds != nil {
 		s.WriteInt32(schemas.BatchExecuteStatementInput_SessionKeepAliveSeconds, *v.SessionKeepAliveSeconds)
 	}
-	serializeSqlList(s, schemas.BatchExecuteStatementInput_Sqls, v.Sqls)
+	if v.Sqls != nil {
+		serializeSqlList(s, schemas.BatchExecuteStatementInput_Sqls, v.Sqls)
+	}
 	if v.StatementName != nil {
 		s.WriteString(schemas.BatchExecuteStatementInput_StatementName, *v.StatementName)
 	}
@@ -268,7 +272,9 @@ func (v *BatchExecuteStatementOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Database != nil {
 		s.WriteString(schemas.BatchExecuteStatementOutput_Database, *v.Database)
 	}
-	serializeDbGroupList(s, schemas.BatchExecuteStatementOutput_DbGroups, v.DbGroups)
+	if v.DbGroups != nil {
+		serializeDbGroupList(s, schemas.BatchExecuteStatementOutput_DbGroups, v.DbGroups)
+	}
 	if v.DbUser != nil {
 		s.WriteString(schemas.BatchExecuteStatementOutput_DbUser, *v.DbUser)
 	}

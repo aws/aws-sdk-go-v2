@@ -55,7 +55,9 @@ func (v *BatchGetApplicationRevisionsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.BatchGetApplicationRevisionsInput_applicationName, *v.ApplicationName)
 	}
-	serializeRevisionLocationList(s, schemas.BatchGetApplicationRevisionsInput_revisions, v.Revisions)
+	if v.Revisions != nil {
+		serializeRevisionLocationList(s, schemas.BatchGetApplicationRevisionsInput_revisions, v.Revisions)
+	}
 }
 
 // Represents the output of a BatchGetApplicationRevisions operation.
@@ -89,7 +91,9 @@ func (v *BatchGetApplicationRevisionsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.BatchGetApplicationRevisionsOutput_errorMessage, *v.ErrorMessage)
 	}
-	serializeRevisionInfoList(s, schemas.BatchGetApplicationRevisionsOutput_revisions, v.Revisions)
+	if v.Revisions != nil {
+		serializeRevisionInfoList(s, schemas.BatchGetApplicationRevisionsOutput_revisions, v.Revisions)
+	}
 }
 func (v *BatchGetApplicationRevisionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetApplicationRevisionsOutput, func(s *smithy.Schema) error {

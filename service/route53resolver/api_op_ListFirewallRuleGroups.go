@@ -95,7 +95,9 @@ func (v *ListFirewallRuleGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFirewallRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFirewallRuleGroupMetadataList(s, schemas.ListFirewallRuleGroupsResponse_FirewallRuleGroups, v.FirewallRuleGroups)
+	if v.FirewallRuleGroups != nil {
+		serializeFirewallRuleGroupMetadataList(s, schemas.ListFirewallRuleGroupsResponse_FirewallRuleGroups, v.FirewallRuleGroups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFirewallRuleGroupsResponse_NextToken, *v.NextToken)
 	}

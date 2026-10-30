@@ -92,7 +92,9 @@ func (v *ListAssociatedResourcesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociatedResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeResources(s, schemas.ListAssociatedResourcesResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResources(s, schemas.ListAssociatedResourcesResponse_resources, v.Resources)
+	}
 }
 func (v *ListAssociatedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAssociatedResourcesResponse, func(s *smithy.Schema) error {

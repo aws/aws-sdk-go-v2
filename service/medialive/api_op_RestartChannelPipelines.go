@@ -51,7 +51,9 @@ func (v *RestartChannelPipelinesInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ChannelId != nil {
 		s.WriteString(schemas.RestartChannelPipelinesRequest_ChannelId, *v.ChannelId)
 	}
-	serialize__listOfChannelPipelineIdToRestart(s, schemas.RestartChannelPipelinesRequest_PipelineIds, v.PipelineIds)
+	if v.PipelineIds != nil {
+		serialize__listOfChannelPipelineIdToRestart(s, schemas.RestartChannelPipelinesRequest_PipelineIds, v.PipelineIds)
+	}
 }
 
 // Placeholder documentation for RestartChannelPipelinesResponse
@@ -166,9 +168,15 @@ func (v *RestartChannelPipelinesOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.ChannelEngineVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.RestartChannelPipelinesResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
-	serialize__listOfOutputDestination(s, schemas.RestartChannelPipelinesResponse_Destinations, v.Destinations)
-	serialize__listOfChannelEgressEndpoint(s, schemas.RestartChannelPipelinesResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.ChannelSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.RestartChannelPipelinesResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	}
+	if v.Destinations != nil {
+		serialize__listOfOutputDestination(s, schemas.RestartChannelPipelinesResponse_Destinations, v.Destinations)
+	}
+	if v.EgressEndpoints != nil {
+		serialize__listOfChannelEgressEndpoint(s, schemas.RestartChannelPipelinesResponse_EgressEndpoints, v.EgressEndpoints)
+	}
 	if v.EncoderSettings != nil {
 		s.WriteStruct(schemas.RestartChannelPipelinesResponse_EncoderSettings)
 		v.EncoderSettings.SerializeMembers(s)
@@ -182,7 +190,9 @@ func (v *RestartChannelPipelinesOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.InferenceSettings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfInputAttachment(s, schemas.RestartChannelPipelinesResponse_InputAttachments, v.InputAttachments)
+	if v.InputAttachments != nil {
+		serialize__listOfInputAttachment(s, schemas.RestartChannelPipelinesResponse_InputAttachments, v.InputAttachments)
+	}
 	if v.InputSpecification != nil {
 		s.WriteStruct(schemas.RestartChannelPipelinesResponse_InputSpecification)
 		v.InputSpecification.SerializeMembers(s)
@@ -207,7 +217,9 @@ func (v *RestartChannelPipelinesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.Name != nil {
 		s.WriteString(schemas.RestartChannelPipelinesResponse_Name, *v.Name)
 	}
-	serialize__listOfPipelineDetail(s, schemas.RestartChannelPipelinesResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelineDetails != nil {
+		serialize__listOfPipelineDetail(s, schemas.RestartChannelPipelinesResponse_PipelineDetails, v.PipelineDetails)
+	}
 	if v.PipelinesRunningCount != nil {
 		s.WriteInt32(schemas.RestartChannelPipelinesResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
 	}
@@ -217,7 +229,9 @@ func (v *RestartChannelPipelinesOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.State != "" {
 		s.WriteString(schemas.RestartChannelPipelinesResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.RestartChannelPipelinesResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RestartChannelPipelinesResponse_Tags, v.Tags)
+	}
 	if v.Vpc != nil {
 		s.WriteStruct(schemas.RestartChannelPipelinesResponse_Vpc)
 		v.Vpc.SerializeMembers(s)

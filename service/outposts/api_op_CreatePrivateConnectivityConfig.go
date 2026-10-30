@@ -56,7 +56,9 @@ func (v *CreatePrivateConnectivityConfigInput) SerializeMembers(s smithy.ShapeSe
 	if v.OutpostId != nil {
 		s.WriteString(schemas.CreatePrivateConnectivityConfigInput_OutpostId, *v.OutpostId)
 	}
-	serializeVpcInformationList(s, schemas.CreatePrivateConnectivityConfigInput_VpcInformationList, v.VpcInformationList)
+	if v.VpcInformationList != nil {
+		serializeVpcInformationList(s, schemas.CreatePrivateConnectivityConfigInput_VpcInformationList, v.VpcInformationList)
+	}
 }
 
 type CreatePrivateConnectivityConfigOutput struct {

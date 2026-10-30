@@ -110,7 +110,9 @@ func (v *ListDataSourceSyncJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDataSourceSyncJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataSourceSyncJobHistoryList(s, schemas.ListDataSourceSyncJobsResponse_History, v.History)
+	if v.History != nil {
+		serializeDataSourceSyncJobHistoryList(s, schemas.ListDataSourceSyncJobsResponse_History, v.History)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDataSourceSyncJobsResponse_NextToken, *v.NextToken)
 	}

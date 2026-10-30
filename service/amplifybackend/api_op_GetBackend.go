@@ -102,7 +102,9 @@ func (v *GetBackendOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AppName != nil {
 		s.WriteString(schemas.GetBackendResponse_AppName, *v.AppName)
 	}
-	serializeListOf__string(s, schemas.GetBackendResponse_BackendEnvironmentList, v.BackendEnvironmentList)
+	if v.BackendEnvironmentList != nil {
+		serializeListOf__string(s, schemas.GetBackendResponse_BackendEnvironmentList, v.BackendEnvironmentList)
+	}
 	if v.BackendEnvironmentName != nil {
 		s.WriteString(schemas.GetBackendResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
 	}

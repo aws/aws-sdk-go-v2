@@ -96,8 +96,12 @@ func (v *CreateLicenseManagerReportGeneratorInput) SerializeMembers(s smithy.Sha
 	if v.ReportGeneratorName != nil {
 		s.WriteString(schemas.CreateLicenseManagerReportGeneratorRequest_ReportGeneratorName, *v.ReportGeneratorName)
 	}
-	serializeTagList(s, schemas.CreateLicenseManagerReportGeneratorRequest_Tags, v.Tags)
-	serializeReportTypeList(s, schemas.CreateLicenseManagerReportGeneratorRequest_Type, v.Type)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLicenseManagerReportGeneratorRequest_Tags, v.Tags)
+	}
+	if v.Type != nil {
+		serializeReportTypeList(s, schemas.CreateLicenseManagerReportGeneratorRequest_Type, v.Type)
+	}
 }
 
 type CreateLicenseManagerReportGeneratorOutput struct {

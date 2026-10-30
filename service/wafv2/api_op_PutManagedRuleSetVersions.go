@@ -120,7 +120,9 @@ func (v *PutManagedRuleSetVersionsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Scope != "" {
 		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Scope, string(v.Scope))
 	}
-	serializeVersionsToPublish(s, schemas.PutManagedRuleSetVersionsRequest_VersionsToPublish, v.VersionsToPublish)
+	if v.VersionsToPublish != nil {
+		serializeVersionsToPublish(s, schemas.PutManagedRuleSetVersionsRequest_VersionsToPublish, v.VersionsToPublish)
+	}
 }
 
 type PutManagedRuleSetVersionsOutput struct {

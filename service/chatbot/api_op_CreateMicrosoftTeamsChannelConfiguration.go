@@ -108,15 +108,21 @@ func (v *CreateMicrosoftTeamsChannelConfigurationInput) SerializeMembers(s smith
 	if v.ConfigurationName != nil {
 		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_ConfigurationName, *v.ConfigurationName)
 	}
-	serializeGuardrailPolicyArnList(s, schemas.CreateTeamsChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.GuardrailPolicyArns != nil {
+		serializeGuardrailPolicyArnList(s, schemas.CreateTeamsChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	}
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
 	}
 	if v.LoggingLevel != nil {
 		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_LoggingLevel, *v.LoggingLevel)
 	}
-	serializeSnsTopicArnList(s, schemas.CreateTeamsChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
-	serializeTags(s, schemas.CreateTeamsChannelConfigurationRequest_Tags, v.Tags)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.CreateTeamsChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTeamsChannelConfigurationRequest_Tags, v.Tags)
+	}
 	if v.TeamId != nil {
 		s.WriteString(schemas.CreateTeamsChannelConfigurationRequest_TeamId, *v.TeamId)
 	}

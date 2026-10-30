@@ -46,7 +46,9 @@ func (v *DescribeNFSFileSharesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeNFSFileSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFileShareARNList(s, schemas.DescribeNFSFileSharesInput_FileShareARNList, v.FileShareARNList)
+	if v.FileShareARNList != nil {
+		serializeFileShareARNList(s, schemas.DescribeNFSFileSharesInput_FileShareARNList, v.FileShareARNList)
+	}
 }
 
 // DescribeNFSFileSharesOutput
@@ -68,7 +70,9 @@ func (v *DescribeNFSFileSharesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeNFSFileSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNFSFileShareInfoList(s, schemas.DescribeNFSFileSharesOutput_NFSFileShareInfoList, v.NFSFileShareInfoList)
+	if v.NFSFileShareInfoList != nil {
+		serializeNFSFileShareInfoList(s, schemas.DescribeNFSFileSharesOutput_NFSFileShareInfoList, v.NFSFileShareInfoList)
+	}
 }
 func (v *DescribeNFSFileSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeNFSFileSharesOutput, func(s *smithy.Schema) error {

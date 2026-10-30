@@ -81,7 +81,9 @@ func (v *CreateAgentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.CreateAgentStatusRequest_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateAgentStatusRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAgentStatusRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAgentStatusOutput struct {

@@ -212,7 +212,9 @@ func (v *CreateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InitialResponseSetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputContextsList(s, schemas.CreateIntentRequest_inputContexts, v.InputContexts)
+	if v.InputContexts != nil {
+		serializeInputContextsList(s, schemas.CreateIntentRequest_inputContexts, v.InputContexts)
+	}
 	if v.IntentClosingSetting != nil {
 		s.WriteStruct(schemas.CreateIntentRequest_intentClosingSetting)
 		v.IntentClosingSetting.SerializeMembers(s)
@@ -237,7 +239,9 @@ func (v *CreateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.CreateIntentRequest_localeId, *v.LocaleId)
 	}
-	serializeOutputContextsList(s, schemas.CreateIntentRequest_outputContexts, v.OutputContexts)
+	if v.OutputContexts != nil {
+		serializeOutputContextsList(s, schemas.CreateIntentRequest_outputContexts, v.OutputContexts)
+	}
 	if v.ParentIntentSignature != nil {
 		s.WriteString(schemas.CreateIntentRequest_parentIntentSignature, *v.ParentIntentSignature)
 	}
@@ -251,7 +255,9 @@ func (v *CreateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QnAIntentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSampleUtterancesList(s, schemas.CreateIntentRequest_sampleUtterances, v.SampleUtterances)
+	if v.SampleUtterances != nil {
+		serializeSampleUtterancesList(s, schemas.CreateIntentRequest_sampleUtterances, v.SampleUtterances)
+	}
 }
 
 type CreateIntentOutput struct {
@@ -357,7 +363,9 @@ func (v *CreateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InitialResponseSetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputContextsList(s, schemas.CreateIntentResponse_inputContexts, v.InputContexts)
+	if v.InputContexts != nil {
+		serializeInputContextsList(s, schemas.CreateIntentResponse_inputContexts, v.InputContexts)
+	}
 	if v.IntentClosingSetting != nil {
 		s.WriteStruct(schemas.CreateIntentResponse_intentClosingSetting)
 		v.IntentClosingSetting.SerializeMembers(s)
@@ -385,7 +393,9 @@ func (v *CreateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.CreateIntentResponse_localeId, *v.LocaleId)
 	}
-	serializeOutputContextsList(s, schemas.CreateIntentResponse_outputContexts, v.OutputContexts)
+	if v.OutputContexts != nil {
+		serializeOutputContextsList(s, schemas.CreateIntentResponse_outputContexts, v.OutputContexts)
+	}
 	if v.ParentIntentSignature != nil {
 		s.WriteString(schemas.CreateIntentResponse_parentIntentSignature, *v.ParentIntentSignature)
 	}
@@ -399,7 +409,9 @@ func (v *CreateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QnAIntentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSampleUtterancesList(s, schemas.CreateIntentResponse_sampleUtterances, v.SampleUtterances)
+	if v.SampleUtterances != nil {
+		serializeSampleUtterancesList(s, schemas.CreateIntentResponse_sampleUtterances, v.SampleUtterances)
+	}
 }
 func (v *CreateIntentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateIntentResponse, func(s *smithy.Schema) error {

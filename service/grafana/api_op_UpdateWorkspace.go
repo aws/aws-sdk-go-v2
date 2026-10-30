@@ -190,7 +190,9 @@ func (v *UpdateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.VpcConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataSourceTypesList(s, schemas.UpdateWorkspaceRequest_workspaceDataSources, v.WorkspaceDataSources)
+	if v.WorkspaceDataSources != nil {
+		serializeDataSourceTypesList(s, schemas.UpdateWorkspaceRequest_workspaceDataSources, v.WorkspaceDataSources)
+	}
 	if v.WorkspaceDescription != nil {
 		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceDescription, *v.WorkspaceDescription)
 	}
@@ -200,8 +202,12 @@ func (v *UpdateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceName, *v.WorkspaceName)
 	}
-	serializeNotificationDestinationsList(s, schemas.UpdateWorkspaceRequest_workspaceNotificationDestinations, v.WorkspaceNotificationDestinations)
-	serializeOrganizationalUnitList(s, schemas.UpdateWorkspaceRequest_workspaceOrganizationalUnits, v.WorkspaceOrganizationalUnits)
+	if v.WorkspaceNotificationDestinations != nil {
+		serializeNotificationDestinationsList(s, schemas.UpdateWorkspaceRequest_workspaceNotificationDestinations, v.WorkspaceNotificationDestinations)
+	}
+	if v.WorkspaceOrganizationalUnits != nil {
+		serializeOrganizationalUnitList(s, schemas.UpdateWorkspaceRequest_workspaceOrganizationalUnits, v.WorkspaceOrganizationalUnits)
+	}
 	if v.WorkspaceRoleArn != nil {
 		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceRoleArn, *v.WorkspaceRoleArn)
 	}

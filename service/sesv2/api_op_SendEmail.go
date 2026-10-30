@@ -157,7 +157,9 @@ func (v *SendEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Destination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMessageTagList(s, schemas.SendEmailRequest_EmailTags, v.EmailTags)
+	if v.EmailTags != nil {
+		serializeMessageTagList(s, schemas.SendEmailRequest_EmailTags, v.EmailTags)
+	}
 	if v.EndpointId != nil {
 		s.WriteString(schemas.SendEmailRequest_EndpointId, *v.EndpointId)
 	}
@@ -178,7 +180,9 @@ func (v *SendEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ListManagementOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEmailAddressList(s, schemas.SendEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	if v.ReplyToAddresses != nil {
+		serializeEmailAddressList(s, schemas.SendEmailRequest_ReplyToAddresses, v.ReplyToAddresses)
+	}
 	if v.TenantName != nil {
 		s.WriteString(schemas.SendEmailRequest_TenantName, *v.TenantName)
 	}

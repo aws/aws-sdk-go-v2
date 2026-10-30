@@ -157,7 +157,9 @@ func (v *GetTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LatestSessionActionId != nil {
 		s.WriteString(schemas.GetTaskResponse_latestSessionActionId, *v.LatestSessionActionId)
 	}
-	serializeTaskParameters(s, schemas.GetTaskResponse_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeTaskParameters(s, schemas.GetTaskResponse_parameters, v.Parameters)
+	}
 	if v.RunStatus != "" {
 		s.WriteString(schemas.GetTaskResponse_runStatus, string(v.RunStatus))
 	}

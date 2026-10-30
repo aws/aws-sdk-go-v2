@@ -77,8 +77,12 @@ func (v *ListManagedEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedEndpointsRequest_nextToken, *v.NextToken)
 	}
-	serializeEndpointStates(s, schemas.ListManagedEndpointsRequest_states, v.States)
-	serializeEndpointTypes(s, schemas.ListManagedEndpointsRequest_types, v.Types)
+	if v.States != nil {
+		serializeEndpointStates(s, schemas.ListManagedEndpointsRequest_states, v.States)
+	}
+	if v.Types != nil {
+		serializeEndpointTypes(s, schemas.ListManagedEndpointsRequest_types, v.Types)
+	}
 	if v.VirtualClusterId != nil {
 		s.WriteString(schemas.ListManagedEndpointsRequest_virtualClusterId, *v.VirtualClusterId)
 	}
@@ -105,7 +109,9 @@ func (v *ListManagedEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpoints(s, schemas.ListManagedEndpointsResponse_endpoints, v.Endpoints)
+	if v.Endpoints != nil {
+		serializeEndpoints(s, schemas.ListManagedEndpointsResponse_endpoints, v.Endpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedEndpointsResponse_nextToken, *v.NextToken)
 	}

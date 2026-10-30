@@ -62,7 +62,9 @@ func (v *PutRetentionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PutRetentionPolicyRequest_Description, *v.Description)
 	}
-	serializeFolderConfigurations(s, schemas.PutRetentionPolicyRequest_FolderConfigurations, v.FolderConfigurations)
+	if v.FolderConfigurations != nil {
+		serializeFolderConfigurations(s, schemas.PutRetentionPolicyRequest_FolderConfigurations, v.FolderConfigurations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.PutRetentionPolicyRequest_Id, *v.Id)
 	}

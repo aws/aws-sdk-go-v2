@@ -82,7 +82,9 @@ func (v *ListOtaTaskExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOtaTaskExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOtaTaskExecutionSummariesListDefinition(s, schemas.ListOtaTaskExecutionsResponse_ExecutionSummaries, v.ExecutionSummaries)
+	if v.ExecutionSummaries != nil {
+		serializeOtaTaskExecutionSummariesListDefinition(s, schemas.ListOtaTaskExecutionsResponse_ExecutionSummaries, v.ExecutionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOtaTaskExecutionsResponse_NextToken, *v.NextToken)
 	}

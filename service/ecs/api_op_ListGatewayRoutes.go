@@ -86,7 +86,9 @@ func (v *ListGatewayRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceContainerPortName != nil {
 		s.WriteString(schemas.ListGatewayRoutesRequest_serviceContainerPortName, *v.ServiceContainerPortName)
 	}
-	serializeGatewayRouteStatusList(s, schemas.ListGatewayRoutesRequest_status, v.Status)
+	if v.Status != nil {
+		serializeGatewayRouteStatusList(s, schemas.ListGatewayRoutesRequest_status, v.Status)
+	}
 }
 
 type ListGatewayRoutesOutput struct {
@@ -111,7 +113,9 @@ func (v *ListGatewayRoutesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewayRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGatewayRouteSummaryList(s, schemas.ListGatewayRoutesResponse_gatewayRoutes, v.GatewayRoutes)
+	if v.GatewayRoutes != nil {
+		serializeGatewayRouteSummaryList(s, schemas.ListGatewayRoutesResponse_gatewayRoutes, v.GatewayRoutes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayRoutesResponse_nextToken, *v.NextToken)
 	}

@@ -88,7 +88,9 @@ func (v *CreatePaymentManagerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePaymentManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.CreatePaymentManagerRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.CreatePaymentManagerRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.CreatePaymentManagerRequest_authorizerType, string(v.AuthorizerType))
 	}
@@ -107,7 +109,9 @@ func (v *CreatePaymentManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreatePaymentManagerRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagsMap(s, schemas.CreatePaymentManagerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreatePaymentManagerRequest_tags, v.Tags)
+	}
 }
 
 type CreatePaymentManagerOutput struct {
@@ -176,7 +180,9 @@ func (v *CreatePaymentManagerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreatePaymentManagerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.CreatePaymentManagerResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.CreatePaymentManagerResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.CreatePaymentManagerResponse_authorizerType, string(v.AuthorizerType))
 	}
@@ -201,7 +207,9 @@ func (v *CreatePaymentManagerOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.CreatePaymentManagerResponse_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.CreatePaymentManagerResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreatePaymentManagerResponse_tags, v.Tags)
+	}
 	if v.WorkloadIdentityDetails != nil {
 		s.WriteStruct(schemas.CreatePaymentManagerResponse_workloadIdentityDetails)
 		v.WorkloadIdentityDetails.SerializeMembers(s)

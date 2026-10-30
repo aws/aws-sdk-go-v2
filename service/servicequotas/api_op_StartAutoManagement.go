@@ -64,7 +64,9 @@ func (v *StartAutoManagementInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartAutoManagementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExclusionList(s, schemas.StartAutoManagementRequest_ExclusionList, v.ExclusionList)
+	if v.ExclusionList != nil {
+		serializeExclusionList(s, schemas.StartAutoManagementRequest_ExclusionList, v.ExclusionList)
+	}
 	if v.NotificationArn != nil {
 		s.WriteString(schemas.StartAutoManagementRequest_NotificationArn, *v.NotificationArn)
 	}

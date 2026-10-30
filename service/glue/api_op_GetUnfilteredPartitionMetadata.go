@@ -90,7 +90,9 @@ func (v *GetUnfilteredPartitionMetadataInput) SerializeMembers(s smithy.ShapeSer
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeValueStringList(s, schemas.GetUnfilteredPartitionMetadataRequest_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializeValueStringList(s, schemas.GetUnfilteredPartitionMetadataRequest_PartitionValues, v.PartitionValues)
+	}
 	if v.QuerySessionContext != nil {
 		s.WriteStruct(schemas.GetUnfilteredPartitionMetadataRequest_QuerySessionContext)
 		v.QuerySessionContext.SerializeMembers(s)
@@ -99,7 +101,9 @@ func (v *GetUnfilteredPartitionMetadataInput) SerializeMembers(s smithy.ShapeSer
 	if v.Region != nil {
 		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_Region, *v.Region)
 	}
-	serializePermissionTypeList(s, schemas.GetUnfilteredPartitionMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	if v.SupportedPermissionTypes != nil {
+		serializePermissionTypeList(s, schemas.GetUnfilteredPartitionMetadataRequest_SupportedPermissionTypes, v.SupportedPermissionTypes)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.GetUnfilteredPartitionMetadataRequest_TableName, *v.TableName)
 	}
@@ -130,7 +134,9 @@ func (v *GetUnfilteredPartitionMetadataOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetUnfilteredPartitionMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNameStringList(s, schemas.GetUnfilteredPartitionMetadataResponse_AuthorizedColumns, v.AuthorizedColumns)
+	if v.AuthorizedColumns != nil {
+		serializeNameStringList(s, schemas.GetUnfilteredPartitionMetadataResponse_AuthorizedColumns, v.AuthorizedColumns)
+	}
 	if v.IsRegisteredWithLakeFormation != false {
 		s.WriteBool(schemas.GetUnfilteredPartitionMetadataResponse_IsRegisteredWithLakeFormation, v.IsRegisteredWithLakeFormation)
 	}

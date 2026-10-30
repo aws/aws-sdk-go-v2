@@ -369,7 +369,9 @@ func (v *EventBusV2Parameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeduplicationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEventBusV2MetadataMap(s, schemas.EventBusV2Parameters_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeEventBusV2MetadataMap(s, schemas.EventBusV2Parameters_Metadata, v.Metadata)
+	}
 	if v.SystemMetadata != nil {
 		s.WriteStruct(schemas.EventBusV2Parameters_SystemMetadata)
 		v.SystemMetadata.SerializeMembers(s)
@@ -675,7 +677,9 @@ func (v *FilterConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FilterConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.FilterConfiguration_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.FilterConfiguration_Filters, v.Filters)
+	}
 	if v.Language != "" {
 		s.WriteString(schemas.FilterConfiguration_Language, string(v.Language))
 	}
@@ -726,12 +730,18 @@ func (v *HttpParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HttpParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaderParametersMap(s, schemas.HttpParameters_HeaderParameters, v.HeaderParameters)
+	if v.HeaderParameters != nil {
+		serializeHeaderParametersMap(s, schemas.HttpParameters_HeaderParameters, v.HeaderParameters)
+	}
 	if v.InvocationTimeoutSeconds != nil {
 		s.WriteString(schemas.HttpParameters_InvocationTimeoutSeconds, *v.InvocationTimeoutSeconds)
 	}
-	serializePathParameterList(s, schemas.HttpParameters_PathParameterValues, v.PathParameterValues)
-	serializeQueryStringParametersMap(s, schemas.HttpParameters_QueryStringParameters, v.QueryStringParameters)
+	if v.PathParameterValues != nil {
+		serializePathParameterList(s, schemas.HttpParameters_PathParameterValues, v.PathParameterValues)
+	}
+	if v.QueryStringParameters != nil {
+		serializeQueryStringParametersMap(s, schemas.HttpParameters_QueryStringParameters, v.QueryStringParameters)
+	}
 }
 func (v *HttpParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HttpParameters, func(s *smithy.Schema) error {
@@ -1302,7 +1312,9 @@ func (v *PutEventsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DetailType != nil {
 		s.WriteString(schemas.PutEventsRequestEntry_DetailType, *v.DetailType)
 	}
-	serializePutEventsResourceList(s, schemas.PutEventsRequestEntry_Resources, v.Resources)
+	if v.Resources != nil {
+		serializePutEventsResourceList(s, schemas.PutEventsRequestEntry_Resources, v.Resources)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.PutEventsRequestEntry_Source, *v.Source)
 	}
@@ -1483,7 +1495,9 @@ func (v *PutRawEventsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Data != nil {
 		s.WriteBlob(schemas.PutRawEventsRequestEntry_Data, v.Data)
 	}
-	serializeEventMetadataMap(s, schemas.PutRawEventsRequestEntry_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeEventMetadataMap(s, schemas.PutRawEventsRequestEntry_Metadata, v.Metadata)
+	}
 	if v.SystemMetadata != nil {
 		s.WriteStruct(schemas.PutRawEventsRequestEntry_SystemMetadata)
 		v.SystemMetadata.SerializeMembers(s)
@@ -1857,7 +1871,9 @@ func (v *SnsParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SnsParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSnsMessageAttributeMap(s, schemas.SnsParameters_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeSnsMessageAttributeMap(s, schemas.SnsParameters_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageDeduplicationId != nil {
 		s.WriteString(schemas.SnsParameters_MessageDeduplicationId, *v.MessageDeduplicationId)
 	}
@@ -1977,14 +1993,18 @@ func (v *SqsParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DelaySeconds != nil {
 		s.WriteString(schemas.SqsParameters_DelaySeconds, *v.DelaySeconds)
 	}
-	serializeSqsMessageAttributeMap(s, schemas.SqsParameters_MessageAttributes, v.MessageAttributes)
+	if v.MessageAttributes != nil {
+		serializeSqsMessageAttributeMap(s, schemas.SqsParameters_MessageAttributes, v.MessageAttributes)
+	}
 	if v.MessageDeduplicationId != nil {
 		s.WriteString(schemas.SqsParameters_MessageDeduplicationId, *v.MessageDeduplicationId)
 	}
 	if v.MessageGroupId != nil {
 		s.WriteString(schemas.SqsParameters_MessageGroupId, *v.MessageGroupId)
 	}
-	serializeSqsMessageAttributeMap(s, schemas.SqsParameters_MessageSystemAttributes, v.MessageSystemAttributes)
+	if v.MessageSystemAttributes != nil {
+		serializeSqsMessageAttributeMap(s, schemas.SqsParameters_MessageSystemAttributes, v.MessageSystemAttributes)
+	}
 }
 func (v *SqsParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqsParameters, func(s *smithy.Schema) error {

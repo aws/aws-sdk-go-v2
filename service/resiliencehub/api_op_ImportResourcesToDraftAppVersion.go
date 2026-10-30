@@ -69,12 +69,18 @@ func (v *ImportResourcesToDraftAppVersionInput) SerializeMembers(s smithy.ShapeS
 	if v.AppArn != nil {
 		s.WriteString(schemas.ImportResourcesToDraftAppVersionRequest_appArn, *v.AppArn)
 	}
-	serializeEksSourceList(s, schemas.ImportResourcesToDraftAppVersionRequest_eksSources, v.EksSources)
+	if v.EksSources != nil {
+		serializeEksSourceList(s, schemas.ImportResourcesToDraftAppVersionRequest_eksSources, v.EksSources)
+	}
 	if v.ImportStrategy != "" {
 		s.WriteString(schemas.ImportResourcesToDraftAppVersionRequest_importStrategy, string(v.ImportStrategy))
 	}
-	serializeArnList(s, schemas.ImportResourcesToDraftAppVersionRequest_sourceArns, v.SourceArns)
-	serializeTerraformSourceList(s, schemas.ImportResourcesToDraftAppVersionRequest_terraformSources, v.TerraformSources)
+	if v.SourceArns != nil {
+		serializeArnList(s, schemas.ImportResourcesToDraftAppVersionRequest_sourceArns, v.SourceArns)
+	}
+	if v.TerraformSources != nil {
+		serializeTerraformSourceList(s, schemas.ImportResourcesToDraftAppVersionRequest_terraformSources, v.TerraformSources)
+	}
 }
 func (v *ImportResourcesToDraftAppVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportResourcesToDraftAppVersionRequest, func(s *smithy.Schema) error {
@@ -151,12 +157,18 @@ func (v *ImportResourcesToDraftAppVersionOutput) SerializeMembers(s smithy.Shape
 	if v.AppVersion != nil {
 		s.WriteString(schemas.ImportResourcesToDraftAppVersionResponse_appVersion, *v.AppVersion)
 	}
-	serializeEksSourceList(s, schemas.ImportResourcesToDraftAppVersionResponse_eksSources, v.EksSources)
-	serializeArnList(s, schemas.ImportResourcesToDraftAppVersionResponse_sourceArns, v.SourceArns)
+	if v.EksSources != nil {
+		serializeEksSourceList(s, schemas.ImportResourcesToDraftAppVersionResponse_eksSources, v.EksSources)
+	}
+	if v.SourceArns != nil {
+		serializeArnList(s, schemas.ImportResourcesToDraftAppVersionResponse_sourceArns, v.SourceArns)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ImportResourcesToDraftAppVersionResponse_status, string(v.Status))
 	}
-	serializeTerraformSourceList(s, schemas.ImportResourcesToDraftAppVersionResponse_terraformSources, v.TerraformSources)
+	if v.TerraformSources != nil {
+		serializeTerraformSourceList(s, schemas.ImportResourcesToDraftAppVersionResponse_terraformSources, v.TerraformSources)
+	}
 }
 func (v *ImportResourcesToDraftAppVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImportResourcesToDraftAppVersionResponse, func(s *smithy.Schema) error {

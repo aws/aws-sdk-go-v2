@@ -122,18 +122,24 @@ func (v *GetFeedOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Association.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.GetFeedResponse_dataEndpoints, v.DataEndpoints)
+	if v.DataEndpoints != nil {
+		serializeStringList(s, schemas.GetFeedResponse_dataEndpoints, v.DataEndpoints)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetFeedResponse_id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetFeedResponse_name, *v.Name)
 	}
-	serializeGetOutputList(s, schemas.GetFeedResponse_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeGetOutputList(s, schemas.GetFeedResponse_outputs, v.Outputs)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetFeedResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetFeedResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetFeedResponse_tags, v.Tags)
+	}
 }
 func (v *GetFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFeedResponse, func(s *smithy.Schema) error {

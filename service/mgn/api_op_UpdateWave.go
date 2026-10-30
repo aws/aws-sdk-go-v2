@@ -145,7 +145,9 @@ func (v *UpdateWaveOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Wave_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.Wave_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.Wave_tags, v.Tags)
+	}
 	if v.WaveAggregatedStatus != nil {
 		s.WriteStruct(schemas.Wave_waveAggregatedStatus)
 		v.WaveAggregatedStatus.SerializeMembers(s)

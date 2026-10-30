@@ -59,8 +59,12 @@ func (v *CreateContactListInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateContactListRequest_Description, *v.Description)
 	}
-	serializeTagList(s, schemas.CreateContactListRequest_Tags, v.Tags)
-	serializeTopics(s, schemas.CreateContactListRequest_Topics, v.Topics)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContactListRequest_Tags, v.Tags)
+	}
+	if v.Topics != nil {
+		serializeTopics(s, schemas.CreateContactListRequest_Topics, v.Topics)
+	}
 }
 
 type CreateContactListOutput struct {

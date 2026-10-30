@@ -855,7 +855,9 @@ func (v *ShaderCacheSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.ShaderCacheSummary_ApplicationArn, *v.ApplicationArn)
 	}
-	serializeArnList(s, schemas.ShaderCacheSummary_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	if v.AssociatedStreamGroups != nil {
+		serializeArnList(s, schemas.ShaderCacheSummary_AssociatedStreamGroups, v.AssociatedStreamGroups)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.ShaderCacheSummary_Identifier, *v.Identifier)
 	}
@@ -1708,7 +1710,9 @@ func (v *VpcTransitConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcTransitConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpv4CidrBlockList(s, schemas.VpcTransitConfiguration_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	if v.Ipv4CidrBlocks != nil {
+		serializeIpv4CidrBlockList(s, schemas.VpcTransitConfiguration_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.VpcTransitConfiguration_VpcId, *v.VpcId)
 	}
@@ -1755,7 +1759,9 @@ func (v *VpcTransitConfigurationResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcTransitConfigurationResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpv4CidrBlockList(s, schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	if v.Ipv4CidrBlocks != nil {
+		serializeIpv4CidrBlockList(s, schemas.VpcTransitConfigurationResponse_Ipv4CidrBlocks, v.Ipv4CidrBlocks)
+	}
 	if v.TransitGatewayId != nil {
 		s.WriteString(schemas.VpcTransitConfigurationResponse_TransitGatewayId, *v.TransitGatewayId)
 	}

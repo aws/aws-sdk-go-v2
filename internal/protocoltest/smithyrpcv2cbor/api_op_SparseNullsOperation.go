@@ -39,8 +39,12 @@ func (v *SparseNullsOperationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparseNullsOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
-	serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+	if v.SparseStringList != nil {
+		serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
+	}
+	if v.SparseStringMap != nil {
+		serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+	}
 }
 func (v *SparseNullsOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparseNullsOperationInputOutput, func(s *smithy.Schema) error {
@@ -72,8 +76,12 @@ func (v *SparseNullsOperationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SparseNullsOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
-	serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+	if v.SparseStringList != nil {
+		serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
+	}
+	if v.SparseStringMap != nil {
+		serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+	}
 }
 func (v *SparseNullsOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SparseNullsOperationInputOutput, func(s *smithy.Schema) error {

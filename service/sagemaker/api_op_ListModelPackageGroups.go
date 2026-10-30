@@ -121,7 +121,9 @@ func (v *ListModelPackageGroupsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelPackageGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelPackageGroupSummaryList(s, schemas.ListModelPackageGroupsOutput_ModelPackageGroupSummaryList, v.ModelPackageGroupSummaryList)
+	if v.ModelPackageGroupSummaryList != nil {
+		serializeModelPackageGroupSummaryList(s, schemas.ListModelPackageGroupsOutput_ModelPackageGroupSummaryList, v.ModelPackageGroupSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelPackageGroupsOutput_NextToken, *v.NextToken)
 	}

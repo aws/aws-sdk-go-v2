@@ -60,7 +60,9 @@ func (v *PutActionInteractionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutActionInteractionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionInteractionsList(s, schemas.PutActionInteractionsRequest_actionInteractions, v.ActionInteractions)
+	if v.ActionInteractions != nil {
+		serializeActionInteractionsList(s, schemas.PutActionInteractionsRequest_actionInteractions, v.ActionInteractions)
+	}
 	if v.TrackingId != nil {
 		s.WriteString(schemas.PutActionInteractionsRequest_trackingId, *v.TrackingId)
 	}

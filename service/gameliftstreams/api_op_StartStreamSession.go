@@ -251,8 +251,12 @@ func (v *StartStreamSessionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.StartStreamSessionInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.StartStreamSessionInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.StartStreamSessionInput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.StartStreamSessionInput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationIdentifier != nil {
 		s.WriteString(schemas.StartStreamSessionInput_ApplicationIdentifier, *v.ApplicationIdentifier)
 	}
@@ -273,7 +277,9 @@ func (v *StartStreamSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Identifier != nil {
 		s.WriteString(schemas.StartStreamSessionInput_Identifier, *v.Identifier)
 	}
-	serializeLocationList(s, schemas.StartStreamSessionInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationList(s, schemas.StartStreamSessionInput_Locations, v.Locations)
+	}
 	if v.PerformanceStatsConfiguration != nil {
 		s.WriteStruct(schemas.StartStreamSessionInput_PerformanceStatsConfiguration)
 		v.PerformanceStatsConfiguration.SerializeMembers(s)
@@ -501,8 +507,12 @@ func (v *StartStreamSessionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartStreamSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariables(s, schemas.StartStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
-	serializeGameLaunchArgList(s, schemas.StartStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	if v.AdditionalEnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.StartStreamSessionOutput_AdditionalEnvironmentVariables, v.AdditionalEnvironmentVariables)
+	}
+	if v.AdditionalLaunchArgs != nil {
+		serializeGameLaunchArgList(s, schemas.StartStreamSessionOutput_AdditionalLaunchArgs, v.AdditionalLaunchArgs)
+	}
 	if v.ApplicationArn != nil {
 		s.WriteString(schemas.StartStreamSessionOutput_ApplicationArn, *v.ApplicationArn)
 	}

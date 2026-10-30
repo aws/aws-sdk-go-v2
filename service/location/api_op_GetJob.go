@@ -184,7 +184,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetJobResponse_Status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.GetJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetJobResponse_Tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetJobResponse_UpdatedAt, *v.UpdatedAt)
 	}

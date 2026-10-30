@@ -116,7 +116,9 @@ func (v *UsageAllocation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedUsageQuantity != nil {
 		s.WriteInt32(schemas.UsageAllocation_AllocatedUsageQuantity, *v.AllocatedUsageQuantity)
 	}
-	serializeTagList(s, schemas.UsageAllocation_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.UsageAllocation_Tags, v.Tags)
+	}
 }
 func (v *UsageAllocation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageAllocation, func(s *smithy.Schema) error {
@@ -219,7 +221,9 @@ func (v *UsageRecord) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.UsageRecord_Timestamp, *v.Timestamp)
 	}
-	serializeUsageAllocations(s, schemas.UsageRecord_UsageAllocations, v.UsageAllocations)
+	if v.UsageAllocations != nil {
+		serializeUsageAllocations(s, schemas.UsageRecord_UsageAllocations, v.UsageAllocations)
+	}
 }
 func (v *UsageRecord) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageRecord, func(s *smithy.Schema) error {

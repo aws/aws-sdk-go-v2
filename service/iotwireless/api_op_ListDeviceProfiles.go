@@ -83,7 +83,9 @@ func (v *ListDeviceProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeviceProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceProfileList(s, schemas.ListDeviceProfilesResponse_DeviceProfileList, v.DeviceProfileList)
+	if v.DeviceProfileList != nil {
+		serializeDeviceProfileList(s, schemas.ListDeviceProfilesResponse_DeviceProfileList, v.DeviceProfileList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeviceProfilesResponse_NextToken, *v.NextToken)
 	}

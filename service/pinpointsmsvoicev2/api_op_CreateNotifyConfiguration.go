@@ -94,12 +94,18 @@ func (v *CreateNotifyConfigurationInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateNotifyConfigurationRequest_DisplayName, *v.DisplayName)
 	}
-	serializeNotifyEnabledChannelsList(s, schemas.CreateNotifyConfigurationRequest_EnabledChannels, v.EnabledChannels)
-	serializeIsoCountryCodeList(s, schemas.CreateNotifyConfigurationRequest_EnabledCountries, v.EnabledCountries)
+	if v.EnabledChannels != nil {
+		serializeNotifyEnabledChannelsList(s, schemas.CreateNotifyConfigurationRequest_EnabledChannels, v.EnabledChannels)
+	}
+	if v.EnabledCountries != nil {
+		serializeIsoCountryCodeList(s, schemas.CreateNotifyConfigurationRequest_EnabledCountries, v.EnabledCountries)
+	}
 	if v.PoolId != nil {
 		s.WriteString(schemas.CreateNotifyConfigurationRequest_PoolId, *v.PoolId)
 	}
-	serializeTagList(s, schemas.CreateNotifyConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNotifyConfigurationRequest_Tags, v.Tags)
+	}
 	if v.UseCase != "" {
 		s.WriteString(schemas.CreateNotifyConfigurationRequest_UseCase, string(v.UseCase))
 	}
@@ -200,8 +206,12 @@ func (v *CreateNotifyConfigurationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateNotifyConfigurationResult_DisplayName, *v.DisplayName)
 	}
-	serializeNotifyEnabledChannelsList(s, schemas.CreateNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
-	serializeIsoCountryCodeList(s, schemas.CreateNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	if v.EnabledChannels != nil {
+		serializeNotifyEnabledChannelsList(s, schemas.CreateNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
+	}
+	if v.EnabledCountries != nil {
+		serializeIsoCountryCodeList(s, schemas.CreateNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	}
 	if v.NotifyConfigurationArn != nil {
 		s.WriteString(schemas.CreateNotifyConfigurationResult_NotifyConfigurationArn, *v.NotifyConfigurationArn)
 	}
@@ -217,7 +227,9 @@ func (v *CreateNotifyConfigurationOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Status != "" {
 		s.WriteString(schemas.CreateNotifyConfigurationResult_Status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateNotifyConfigurationResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateNotifyConfigurationResult_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.CreateNotifyConfigurationResult_Tier, string(v.Tier))
 	}

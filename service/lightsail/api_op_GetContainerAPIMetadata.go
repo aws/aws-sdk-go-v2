@@ -58,7 +58,9 @@ func (v *GetContainerAPIMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContainerAPIMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerServiceMetadataEntryList(s, schemas.GetContainerAPIMetadataResult_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeContainerServiceMetadataEntryList(s, schemas.GetContainerAPIMetadataResult_metadata, v.Metadata)
+	}
 }
 func (v *GetContainerAPIMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContainerAPIMetadataResult, func(s *smithy.Schema) error {

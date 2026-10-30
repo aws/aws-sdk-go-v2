@@ -178,7 +178,9 @@ func (v *UpdateBranchInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnableSkewProtection != nil {
 		s.WriteBool(schemas.UpdateBranchRequest_enableSkewProtection, *v.EnableSkewProtection)
 	}
-	serializeEnvironmentVariables(s, schemas.UpdateBranchRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariables(s, schemas.UpdateBranchRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Framework != nil {
 		s.WriteString(schemas.UpdateBranchRequest_framework, *v.Framework)
 	}

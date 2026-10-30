@@ -69,7 +69,9 @@ func (v *ModifyHapgInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Label != nil {
 		s.WriteString(schemas.ModifyHapgRequest_Label, *v.Label)
 	}
-	serializePartitionSerialList(s, schemas.ModifyHapgRequest_PartitionSerialList, v.PartitionSerialList)
+	if v.PartitionSerialList != nil {
+		serializePartitionSerialList(s, schemas.ModifyHapgRequest_PartitionSerialList, v.PartitionSerialList)
+	}
 }
 
 type ModifyHapgOutput struct {

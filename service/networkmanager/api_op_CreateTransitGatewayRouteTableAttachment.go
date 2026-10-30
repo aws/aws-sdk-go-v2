@@ -71,7 +71,9 @@ func (v *CreateTransitGatewayRouteTableAttachmentInput) SerializeMembers(s smith
 	if v.RoutingPolicyLabel != nil {
 		s.WriteString(schemas.CreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
 	}
-	serializeTagList(s, schemas.CreateTransitGatewayRouteTableAttachmentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTransitGatewayRouteTableAttachmentRequest_Tags, v.Tags)
+	}
 	if v.TransitGatewayRouteTableArn != nil {
 		s.WriteString(schemas.CreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn, *v.TransitGatewayRouteTableArn)
 	}

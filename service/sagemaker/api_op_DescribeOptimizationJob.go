@@ -184,11 +184,15 @@ func (v *DescribeOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.ModelSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOptimizationConfigs(s, schemas.DescribeOptimizationJobResponse_OptimizationConfigs, v.OptimizationConfigs)
+	if v.OptimizationConfigs != nil {
+		serializeOptimizationConfigs(s, schemas.DescribeOptimizationJobResponse_OptimizationConfigs, v.OptimizationConfigs)
+	}
 	if v.OptimizationEndTime != nil {
 		s.WriteTime(schemas.DescribeOptimizationJobResponse_OptimizationEndTime, *v.OptimizationEndTime)
 	}
-	serializeOptimizationJobEnvironmentVariables(s, schemas.DescribeOptimizationJobResponse_OptimizationEnvironment, v.OptimizationEnvironment)
+	if v.OptimizationEnvironment != nil {
+		serializeOptimizationJobEnvironmentVariables(s, schemas.DescribeOptimizationJobResponse_OptimizationEnvironment, v.OptimizationEnvironment)
+	}
 	if v.OptimizationJobArn != nil {
 		s.WriteString(schemas.DescribeOptimizationJobResponse_OptimizationJobArn, *v.OptimizationJobArn)
 	}
@@ -219,7 +223,9 @@ func (v *DescribeOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerialize
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeOptimizationJobTrainingPlanArns(s, schemas.DescribeOptimizationJobResponse_TrainingPlanArns, v.TrainingPlanArns)
+	if v.TrainingPlanArns != nil {
+		serializeOptimizationJobTrainingPlanArns(s, schemas.DescribeOptimizationJobResponse_TrainingPlanArns, v.TrainingPlanArns)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.DescribeOptimizationJobResponse_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

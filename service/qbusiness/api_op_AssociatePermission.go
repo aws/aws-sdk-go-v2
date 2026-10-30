@@ -67,11 +67,15 @@ func (v *AssociatePermissionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssociatePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQIamActions(s, schemas.AssociatePermissionRequest_actions, v.Actions)
+	if v.Actions != nil {
+		serializeQIamActions(s, schemas.AssociatePermissionRequest_actions, v.Actions)
+	}
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.AssociatePermissionRequest_applicationId, *v.ApplicationId)
 	}
-	serializePermissionConditions(s, schemas.AssociatePermissionRequest_conditions, v.Conditions)
+	if v.Conditions != nil {
+		serializePermissionConditions(s, schemas.AssociatePermissionRequest_conditions, v.Conditions)
+	}
 	if v.Principal != nil {
 		s.WriteString(schemas.AssociatePermissionRequest_principal, *v.Principal)
 	}

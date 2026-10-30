@@ -199,7 +199,9 @@ func (v *GetSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.GetSpaceOutput_description, *v.Description)
 	}
-	serializeGroupAdmins(s, schemas.GetSpaceOutput_groupAdmins, v.GroupAdmins)
+	if v.GroupAdmins != nil {
+		serializeGroupAdmins(s, schemas.GetSpaceOutput_groupAdmins, v.GroupAdmins)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.GetSpaceOutput_identityStoreId, *v.IdentityStoreId)
 	}
@@ -209,7 +211,9 @@ func (v *GetSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RandomDomain != nil {
 		s.WriteString(schemas.GetSpaceOutput_randomDomain, *v.RandomDomain)
 	}
-	serializeRoles(s, schemas.GetSpaceOutput_roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.GetSpaceOutput_roles, v.Roles)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.GetSpaceOutput_spaceId, *v.SpaceId)
 	}
@@ -227,7 +231,9 @@ func (v *GetSpaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Tier != "" {
 		s.WriteString(schemas.GetSpaceOutput_tier, string(v.Tier))
 	}
-	serializeUserAdmins(s, schemas.GetSpaceOutput_userAdmins, v.UserAdmins)
+	if v.UserAdmins != nil {
+		serializeUserAdmins(s, schemas.GetSpaceOutput_userAdmins, v.UserAdmins)
+	}
 	if v.UserCount != nil {
 		s.WriteInt32(schemas.GetSpaceOutput_userCount, *v.UserCount)
 	}

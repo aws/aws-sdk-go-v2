@@ -87,7 +87,9 @@ func (v *ListV2LoggingLevelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListV2LoggingLevelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogTargetConfigurations(s, schemas.ListV2LoggingLevelsResponse_logTargetConfigurations, v.LogTargetConfigurations)
+	if v.LogTargetConfigurations != nil {
+		serializeLogTargetConfigurations(s, schemas.ListV2LoggingLevelsResponse_logTargetConfigurations, v.LogTargetConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListV2LoggingLevelsResponse_nextToken, *v.NextToken)
 	}

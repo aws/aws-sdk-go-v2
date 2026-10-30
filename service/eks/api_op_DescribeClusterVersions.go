@@ -71,7 +71,9 @@ func (v *DescribeClusterVersionsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClusterType != nil {
 		s.WriteString(schemas.DescribeClusterVersionsRequest_clusterType, *v.ClusterType)
 	}
-	serializeStringList(s, schemas.DescribeClusterVersionsRequest_clusterVersions, v.ClusterVersions)
+	if v.ClusterVersions != nil {
+		serializeStringList(s, schemas.DescribeClusterVersionsRequest_clusterVersions, v.ClusterVersions)
+	}
 	if v.DefaultOnly != nil {
 		s.WriteBool(schemas.DescribeClusterVersionsRequest_defaultOnly, *v.DefaultOnly)
 	}
@@ -113,7 +115,9 @@ func (v *DescribeClusterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeClusterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterVersionList(s, schemas.DescribeClusterVersionsResponse_clusterVersions, v.ClusterVersions)
+	if v.ClusterVersions != nil {
+		serializeClusterVersionList(s, schemas.DescribeClusterVersionsResponse_clusterVersions, v.ClusterVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeClusterVersionsResponse_nextToken, *v.NextToken)
 	}

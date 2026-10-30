@@ -93,7 +93,9 @@ func (v *ListPrivacyBudgetTemplatesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPrivacyBudgetTemplatesOutput_nextToken, *v.NextToken)
 	}
-	serializePrivacyBudgetTemplateSummaryList(s, schemas.ListPrivacyBudgetTemplatesOutput_privacyBudgetTemplateSummaries, v.PrivacyBudgetTemplateSummaries)
+	if v.PrivacyBudgetTemplateSummaries != nil {
+		serializePrivacyBudgetTemplateSummaryList(s, schemas.ListPrivacyBudgetTemplatesOutput_privacyBudgetTemplateSummaries, v.PrivacyBudgetTemplateSummaries)
+	}
 }
 func (v *ListPrivacyBudgetTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPrivacyBudgetTemplatesOutput, func(s *smithy.Schema) error {

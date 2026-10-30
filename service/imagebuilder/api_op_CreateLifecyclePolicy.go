@@ -119,7 +119,9 @@ func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateLifecyclePolicyRequest_name, *v.Name)
 	}
-	serializeLifecyclePolicyDetails(s, schemas.CreateLifecyclePolicyRequest_policyDetails, v.PolicyDetails)
+	if v.PolicyDetails != nil {
+		serializeLifecyclePolicyDetails(s, schemas.CreateLifecyclePolicyRequest_policyDetails, v.PolicyDetails)
+	}
 	if v.ResourceSelection != nil {
 		s.WriteStruct(schemas.CreateLifecyclePolicyRequest_resourceSelection)
 		v.ResourceSelection.SerializeMembers(s)
@@ -131,7 +133,9 @@ func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Status != "" {
 		s.WriteString(schemas.CreateLifecyclePolicyRequest_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateLifecyclePolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateLifecyclePolicyRequest_tags, v.Tags)
+	}
 }
 
 type CreateLifecyclePolicyOutput struct {

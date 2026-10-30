@@ -62,7 +62,9 @@ func (v *UpdateIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HttpMethod != nil {
 		s.WriteString(schemas.UpdateIntegrationRequest_httpMethod, *v.HttpMethod)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateIntegrationRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateIntegrationRequest_patchOperations, v.PatchOperations)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.UpdateIntegrationRequest_resourceId, *v.ResourceId)
 	}
@@ -212,7 +214,9 @@ func (v *UpdateIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfString(s, schemas.Integration_cacheKeyParameters, v.CacheKeyParameters)
+	if v.CacheKeyParameters != nil {
+		serializeListOfString(s, schemas.Integration_cacheKeyParameters, v.CacheKeyParameters)
+	}
 	if v.CacheNamespace != nil {
 		s.WriteString(schemas.Integration_cacheNamespace, *v.CacheNamespace)
 	}
@@ -231,15 +235,21 @@ func (v *UpdateIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HttpMethod != nil {
 		s.WriteString(schemas.Integration_httpMethod, *v.HttpMethod)
 	}
-	serializeMapOfIntegrationResponse(s, schemas.Integration_integrationResponses, v.IntegrationResponses)
+	if v.IntegrationResponses != nil {
+		serializeMapOfIntegrationResponse(s, schemas.Integration_integrationResponses, v.IntegrationResponses)
+	}
 	if v.IntegrationTarget != nil {
 		s.WriteString(schemas.Integration_integrationTarget, *v.IntegrationTarget)
 	}
 	if v.PassthroughBehavior != nil {
 		s.WriteString(schemas.Integration_passthroughBehavior, *v.PassthroughBehavior)
 	}
-	serializeMapOfStringToString(s, schemas.Integration_requestParameters, v.RequestParameters)
-	serializeMapOfStringToString(s, schemas.Integration_requestTemplates, v.RequestTemplates)
+	if v.RequestParameters != nil {
+		serializeMapOfStringToString(s, schemas.Integration_requestParameters, v.RequestParameters)
+	}
+	if v.RequestTemplates != nil {
+		serializeMapOfStringToString(s, schemas.Integration_requestTemplates, v.RequestTemplates)
+	}
 	if v.ResponseTransferMode != "" {
 		s.WriteString(schemas.Integration_responseTransferMode, string(v.ResponseTransferMode))
 	}

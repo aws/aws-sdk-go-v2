@@ -157,7 +157,9 @@ func (v *GetDevicePositionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDevicePositionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevicePositionList(s, schemas.GetDevicePositionHistoryResponse_DevicePositions, v.DevicePositions)
+	if v.DevicePositions != nil {
+		serializeDevicePositionList(s, schemas.GetDevicePositionHistoryResponse_DevicePositions, v.DevicePositions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDevicePositionHistoryResponse_NextToken, *v.NextToken)
 	}

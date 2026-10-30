@@ -90,7 +90,9 @@ func (v *CreateAgreementRequestInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Intent != "" {
 		s.WriteString(schemas.CreateAgreementRequestInput_intent, string(v.Intent))
 	}
-	serializeRequestedTermList(s, schemas.CreateAgreementRequestInput_requestedTerms, v.RequestedTerms)
+	if v.RequestedTerms != nil {
+		serializeRequestedTermList(s, schemas.CreateAgreementRequestInput_requestedTerms, v.RequestedTerms)
+	}
 	if v.SourceAgreementIdentifier != nil {
 		s.WriteString(schemas.CreateAgreementRequestInput_sourceAgreementIdentifier, *v.SourceAgreementIdentifier)
 	}

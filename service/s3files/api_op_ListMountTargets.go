@@ -93,7 +93,9 @@ func (v *ListMountTargetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMountTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMountTargets(s, schemas.ListMountTargetsResponse_mountTargets, v.MountTargets)
+	if v.MountTargets != nil {
+		serializeMountTargets(s, schemas.ListMountTargetsResponse_mountTargets, v.MountTargets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMountTargetsResponse_nextToken, *v.NextToken)
 	}

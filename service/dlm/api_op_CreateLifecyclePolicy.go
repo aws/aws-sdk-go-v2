@@ -157,7 +157,9 @@ func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreateInterval != nil {
 		s.WriteInt32(schemas.CreateLifecyclePolicyRequest_CreateInterval, *v.CreateInterval)
 	}
-	serializeCrossRegionCopyTargetList(s, schemas.CreateLifecyclePolicyRequest_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	if v.CrossRegionCopyTargets != nil {
+		serializeCrossRegionCopyTargetList(s, schemas.CreateLifecyclePolicyRequest_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	}
 	if v.DefaultPolicy != "" {
 		s.WriteString(schemas.CreateLifecyclePolicyRequest_DefaultPolicy, string(v.DefaultPolicy))
 	}
@@ -186,7 +188,9 @@ func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.State != "" {
 		s.WriteString(schemas.CreateLifecyclePolicyRequest_State, string(v.State))
 	}
-	serializeTagMap(s, schemas.CreateLifecyclePolicyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateLifecyclePolicyRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLifecyclePolicyOutput struct {

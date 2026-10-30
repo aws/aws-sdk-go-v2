@@ -49,7 +49,9 @@ func (v *UpdateSubscriberNotificationInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *UpdateSubscriberNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNotificationConfiguration(s, schemas.UpdateSubscriberNotificationRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNotificationConfiguration(s, schemas.UpdateSubscriberNotificationRequest_configuration, v.Configuration)
+	}
 	if v.SubscriberId != nil {
 		s.WriteString(schemas.UpdateSubscriberNotificationRequest_subscriberId, *v.SubscriberId)
 	}

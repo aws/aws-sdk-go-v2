@@ -51,7 +51,9 @@ func (v *BatchDeleteDelegationByAssessmentInput) SerializeMembers(s smithy.Shape
 	if v.AssessmentId != nil {
 		s.WriteString(schemas.BatchDeleteDelegationByAssessmentRequest_assessmentId, *v.AssessmentId)
 	}
-	serializeDelegationIds(s, schemas.BatchDeleteDelegationByAssessmentRequest_delegationIds, v.DelegationIds)
+	if v.DelegationIds != nil {
+		serializeDelegationIds(s, schemas.BatchDeleteDelegationByAssessmentRequest_delegationIds, v.DelegationIds)
+	}
 }
 
 type BatchDeleteDelegationByAssessmentOutput struct {
@@ -72,7 +74,9 @@ func (v *BatchDeleteDelegationByAssessmentOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *BatchDeleteDelegationByAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteDelegationByAssessmentErrors(s, schemas.BatchDeleteDelegationByAssessmentResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchDeleteDelegationByAssessmentErrors(s, schemas.BatchDeleteDelegationByAssessmentResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteDelegationByAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteDelegationByAssessmentResponse, func(s *smithy.Schema) error {

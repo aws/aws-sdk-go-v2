@@ -55,7 +55,9 @@ func (v *ListUsageTotalsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListUsageTotalsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUsageAccountIdList(s, schemas.ListUsageTotalsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeUsageAccountIdList(s, schemas.ListUsageTotalsRequest_accountIds, v.AccountIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListUsageTotalsRequest_maxResults, *v.MaxResults)
 	}
@@ -104,7 +106,9 @@ func (v *ListUsageTotalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUsageTotalsResponse_nextToken, *v.NextToken)
 	}
-	serializeUsageTotalList(s, schemas.ListUsageTotalsResponse_totals, v.Totals)
+	if v.Totals != nil {
+		serializeUsageTotalList(s, schemas.ListUsageTotalsResponse_totals, v.Totals)
+	}
 }
 func (v *ListUsageTotalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUsageTotalsResponse, func(s *smithy.Schema) error {

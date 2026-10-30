@@ -43,7 +43,9 @@ func (v *StopDataCollectionByAgentIdsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *StopDataCollectionByAgentIdsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentIds(s, schemas.StopDataCollectionByAgentIdsRequest_agentIds, v.AgentIds)
+	if v.AgentIds != nil {
+		serializeAgentIds(s, schemas.StopDataCollectionByAgentIdsRequest_agentIds, v.AgentIds)
+	}
 }
 
 type StopDataCollectionByAgentIdsOutput struct {
@@ -66,7 +68,9 @@ func (v *StopDataCollectionByAgentIdsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *StopDataCollectionByAgentIdsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentConfigurationStatusList(s, schemas.StopDataCollectionByAgentIdsResponse_agentsConfigurationStatus, v.AgentsConfigurationStatus)
+	if v.AgentsConfigurationStatus != nil {
+		serializeAgentConfigurationStatusList(s, schemas.StopDataCollectionByAgentIdsResponse_agentsConfigurationStatus, v.AgentsConfigurationStatus)
+	}
 }
 func (v *StopDataCollectionByAgentIdsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StopDataCollectionByAgentIdsResponse, func(s *smithy.Schema) error {

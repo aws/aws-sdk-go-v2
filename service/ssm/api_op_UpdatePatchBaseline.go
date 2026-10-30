@@ -147,7 +147,9 @@ func (v *UpdatePatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApprovalRules.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePatchIdList(s, schemas.UpdatePatchBaselineRequest_ApprovedPatches, v.ApprovedPatches)
+	if v.ApprovedPatches != nil {
+		serializePatchIdList(s, schemas.UpdatePatchBaselineRequest_ApprovedPatches, v.ApprovedPatches)
+	}
 	if v.ApprovedPatchesComplianceLevel != "" {
 		s.WriteString(schemas.UpdatePatchBaselineRequest_ApprovedPatchesComplianceLevel, string(v.ApprovedPatchesComplianceLevel))
 	}
@@ -171,14 +173,18 @@ func (v *UpdatePatchBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.UpdatePatchBaselineRequest_Name, *v.Name)
 	}
-	serializePatchIdList(s, schemas.UpdatePatchBaselineRequest_RejectedPatches, v.RejectedPatches)
+	if v.RejectedPatches != nil {
+		serializePatchIdList(s, schemas.UpdatePatchBaselineRequest_RejectedPatches, v.RejectedPatches)
+	}
 	if v.RejectedPatchesAction != "" {
 		s.WriteString(schemas.UpdatePatchBaselineRequest_RejectedPatchesAction, string(v.RejectedPatchesAction))
 	}
 	if v.Replace != nil {
 		s.WriteBool(schemas.UpdatePatchBaselineRequest_Replace, *v.Replace)
 	}
-	serializePatchSourceList(s, schemas.UpdatePatchBaselineRequest_Sources, v.Sources)
+	if v.Sources != nil {
+		serializePatchSourceList(s, schemas.UpdatePatchBaselineRequest_Sources, v.Sources)
+	}
 }
 
 type UpdatePatchBaselineOutput struct {
@@ -257,7 +263,9 @@ func (v *UpdatePatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApprovalRules.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePatchIdList(s, schemas.UpdatePatchBaselineResult_ApprovedPatches, v.ApprovedPatches)
+	if v.ApprovedPatches != nil {
+		serializePatchIdList(s, schemas.UpdatePatchBaselineResult_ApprovedPatches, v.ApprovedPatches)
+	}
 	if v.ApprovedPatchesComplianceLevel != "" {
 		s.WriteString(schemas.UpdatePatchBaselineResult_ApprovedPatchesComplianceLevel, string(v.ApprovedPatchesComplianceLevel))
 	}
@@ -290,11 +298,15 @@ func (v *UpdatePatchBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperatingSystem != "" {
 		s.WriteString(schemas.UpdatePatchBaselineResult_OperatingSystem, string(v.OperatingSystem))
 	}
-	serializePatchIdList(s, schemas.UpdatePatchBaselineResult_RejectedPatches, v.RejectedPatches)
+	if v.RejectedPatches != nil {
+		serializePatchIdList(s, schemas.UpdatePatchBaselineResult_RejectedPatches, v.RejectedPatches)
+	}
 	if v.RejectedPatchesAction != "" {
 		s.WriteString(schemas.UpdatePatchBaselineResult_RejectedPatchesAction, string(v.RejectedPatchesAction))
 	}
-	serializePatchSourceList(s, schemas.UpdatePatchBaselineResult_Sources, v.Sources)
+	if v.Sources != nil {
+		serializePatchSourceList(s, schemas.UpdatePatchBaselineResult_Sources, v.Sources)
+	}
 }
 func (v *UpdatePatchBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePatchBaselineResult, func(s *smithy.Schema) error {

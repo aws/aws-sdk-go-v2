@@ -102,7 +102,9 @@ func (v *UpdateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CustomEventData != nil {
 		s.WriteString(schemas.UpdateGameSessionQueueInput_CustomEventData, *v.CustomEventData)
 	}
-	serializeGameSessionQueueDestinationList(s, schemas.UpdateGameSessionQueueInput_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeGameSessionQueueDestinationList(s, schemas.UpdateGameSessionQueueInput_Destinations, v.Destinations)
+	}
 	if v.FilterConfiguration != nil {
 		s.WriteStruct(schemas.UpdateGameSessionQueueInput_FilterConfiguration)
 		v.FilterConfiguration.SerializeMembers(s)
@@ -114,7 +116,9 @@ func (v *UpdateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NotificationTarget != nil {
 		s.WriteString(schemas.UpdateGameSessionQueueInput_NotificationTarget, *v.NotificationTarget)
 	}
-	serializePlayerLatencyPolicyList(s, schemas.UpdateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PlayerLatencyPolicies != nil {
+		serializePlayerLatencyPolicyList(s, schemas.UpdateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	}
 	if v.PriorityConfiguration != nil {
 		s.WriteStruct(schemas.UpdateGameSessionQueueInput_PriorityConfiguration)
 		v.PriorityConfiguration.SerializeMembers(s)

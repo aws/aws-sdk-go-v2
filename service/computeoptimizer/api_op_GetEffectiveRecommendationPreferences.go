@@ -150,8 +150,12 @@ func (v *GetEffectiveRecommendationPreferencesOutput) SerializeMembers(s smithy.
 	if v.LookBackPeriod != "" {
 		s.WriteString(schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod, string(v.LookBackPeriod))
 	}
-	serializeEffectivePreferredResources(s, schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources, v.PreferredResources)
-	serializeUtilizationPreferences(s, schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences, v.UtilizationPreferences)
+	if v.PreferredResources != nil {
+		serializeEffectivePreferredResources(s, schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources, v.PreferredResources)
+	}
+	if v.UtilizationPreferences != nil {
+		serializeUtilizationPreferences(s, schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences, v.UtilizationPreferences)
+	}
 }
 func (v *GetEffectiveRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEffectiveRecommendationPreferencesResponse, func(s *smithy.Schema) error {

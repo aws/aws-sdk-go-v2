@@ -58,7 +58,9 @@ func (v *BatchCreateRoomMembershipInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AccountId != nil {
 		s.WriteString(schemas.BatchCreateRoomMembershipRequest_AccountId, *v.AccountId)
 	}
-	serializeMembershipItemList(s, schemas.BatchCreateRoomMembershipRequest_MembershipItemList, v.MembershipItemList)
+	if v.MembershipItemList != nil {
+		serializeMembershipItemList(s, schemas.BatchCreateRoomMembershipRequest_MembershipItemList, v.MembershipItemList)
+	}
 	if v.RoomId != nil {
 		s.WriteString(schemas.BatchCreateRoomMembershipRequest_RoomId, *v.RoomId)
 	}
@@ -83,7 +85,9 @@ func (v *BatchCreateRoomMembershipOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchCreateRoomMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMemberErrorList(s, schemas.BatchCreateRoomMembershipResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeMemberErrorList(s, schemas.BatchCreateRoomMembershipResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchCreateRoomMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchCreateRoomMembershipResponse, func(s *smithy.Schema) error {

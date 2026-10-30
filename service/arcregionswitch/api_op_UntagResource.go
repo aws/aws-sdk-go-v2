@@ -51,7 +51,9 @@ func (v *UntagResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UntagResourceRequest_arn, *v.Arn)
 	}
-	serializeTagKeys(s, schemas.UntagResourceRequest_resourceTagKeys, v.ResourceTagKeys)
+	if v.ResourceTagKeys != nil {
+		serializeTagKeys(s, schemas.UntagResourceRequest_resourceTagKeys, v.ResourceTagKeys)
+	}
 }
 func (in *UntagResourceInput) bindEndpointParams(p *EndpointParameters) {
 

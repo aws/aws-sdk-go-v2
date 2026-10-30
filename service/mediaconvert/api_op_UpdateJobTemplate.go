@@ -88,7 +88,9 @@ func (v *UpdateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateJobTemplateRequest_Description, *v.Description)
 	}
-	serialize__listOfHopDestination(s, schemas.UpdateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	if v.HopDestinations != nil {
+		serialize__listOfHopDestination(s, schemas.UpdateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateJobTemplateRequest_Name, *v.Name)
 	}

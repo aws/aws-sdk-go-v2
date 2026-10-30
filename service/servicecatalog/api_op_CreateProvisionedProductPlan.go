@@ -116,7 +116,9 @@ func (v *CreateProvisionedProductPlanInput) SerializeMembers(s smithy.ShapeSeria
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateProvisionedProductPlanInput_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializeNotificationArns(s, schemas.CreateProvisionedProductPlanInput_NotificationArns, v.NotificationArns)
+	if v.NotificationArns != nil {
+		serializeNotificationArns(s, schemas.CreateProvisionedProductPlanInput_NotificationArns, v.NotificationArns)
+	}
 	if v.PathId != nil {
 		s.WriteString(schemas.CreateProvisionedProductPlanInput_PathId, *v.PathId)
 	}
@@ -135,8 +137,12 @@ func (v *CreateProvisionedProductPlanInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ProvisioningArtifactId != nil {
 		s.WriteString(schemas.CreateProvisionedProductPlanInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
 	}
-	serializeUpdateProvisioningParameters(s, schemas.CreateProvisionedProductPlanInput_ProvisioningParameters, v.ProvisioningParameters)
-	serializeTags(s, schemas.CreateProvisionedProductPlanInput_Tags, v.Tags)
+	if v.ProvisioningParameters != nil {
+		serializeUpdateProvisioningParameters(s, schemas.CreateProvisionedProductPlanInput_ProvisioningParameters, v.ProvisioningParameters)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateProvisionedProductPlanInput_Tags, v.Tags)
+	}
 }
 
 type CreateProvisionedProductPlanOutput struct {

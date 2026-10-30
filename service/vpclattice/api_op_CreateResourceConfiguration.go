@@ -158,18 +158,24 @@ func (v *CreateResourceConfigurationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Name != nil {
 		s.WriteString(schemas.CreateResourceConfigurationRequest_name, *v.Name)
 	}
-	serializePortRangeList(s, schemas.CreateResourceConfigurationRequest_portRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRangeList(s, schemas.CreateResourceConfigurationRequest_portRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateResourceConfigurationRequest_protocol, string(v.Protocol))
 	}
-	serializeResourceConfigurationDefinition(s, schemas.CreateResourceConfigurationRequest_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationDefinition != nil {
+		serializeResourceConfigurationDefinition(s, schemas.CreateResourceConfigurationRequest_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	}
 	if v.ResourceConfigurationGroupIdentifier != nil {
 		s.WriteString(schemas.CreateResourceConfigurationRequest_resourceConfigurationGroupIdentifier, *v.ResourceConfigurationGroupIdentifier)
 	}
 	if v.ResourceGatewayIdentifier != nil {
 		s.WriteString(schemas.CreateResourceConfigurationRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
 	}
-	serializeTagMap(s, schemas.CreateResourceConfigurationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateResourceConfigurationRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateResourceConfigurationRequest_type, string(v.Type))
 	}
@@ -298,11 +304,15 @@ func (v *CreateResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateResourceConfigurationResponse_name, *v.Name)
 	}
-	serializePortRangeList(s, schemas.CreateResourceConfigurationResponse_portRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRangeList(s, schemas.CreateResourceConfigurationResponse_portRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateResourceConfigurationResponse_protocol, string(v.Protocol))
 	}
-	serializeResourceConfigurationDefinition(s, schemas.CreateResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationDefinition != nil {
+		serializeResourceConfigurationDefinition(s, schemas.CreateResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	}
 	if v.ResourceConfigurationGroupId != nil {
 		s.WriteString(schemas.CreateResourceConfigurationResponse_resourceConfigurationGroupId, *v.ResourceConfigurationGroupId)
 	}

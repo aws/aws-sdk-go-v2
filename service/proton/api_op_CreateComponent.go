@@ -130,7 +130,9 @@ func (v *CreateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceSpec != nil {
 		s.WriteString(schemas.CreateComponentInput_serviceSpec, *v.ServiceSpec)
 	}
-	serializeTagList(s, schemas.CreateComponentInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateComponentInput_tags, v.Tags)
+	}
 	if v.TemplateFile != nil {
 		s.WriteString(schemas.CreateComponentInput_templateFile, *v.TemplateFile)
 	}

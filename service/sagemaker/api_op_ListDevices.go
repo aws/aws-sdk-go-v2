@@ -97,7 +97,9 @@ func (v *ListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeviceSummaries(s, schemas.ListDevicesResponse_DeviceSummaries, v.DeviceSummaries)
+	if v.DeviceSummaries != nil {
+		serializeDeviceSummaries(s, schemas.ListDevicesResponse_DeviceSummaries, v.DeviceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDevicesResponse_NextToken, *v.NextToken)
 	}

@@ -130,7 +130,9 @@ func (v *CreateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BaseCapacity != nil {
 		s.WriteInt32(schemas.CreateWorkgroupRequest_baseCapacity, *v.BaseCapacity)
 	}
-	serializeConfigParameterList(s, schemas.CreateWorkgroupRequest_configParameters, v.ConfigParameters)
+	if v.ConfigParameters != nil {
+		serializeConfigParameterList(s, schemas.CreateWorkgroupRequest_configParameters, v.ConfigParameters)
+	}
 	if v.EnhancedVpcRouting != nil {
 		s.WriteBool(schemas.CreateWorkgroupRequest_enhancedVpcRouting, *v.EnhancedVpcRouting)
 	}
@@ -157,9 +159,15 @@ func (v *CreateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.CreateWorkgroupRequest_publiclyAccessible, *v.PubliclyAccessible)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateWorkgroupRequest_subnetIds, v.SubnetIds)
-	serializeTagList(s, schemas.CreateWorkgroupRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateWorkgroupRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkgroupRequest_tags, v.Tags)
+	}
 	if v.TrackName != nil {
 		s.WriteString(schemas.CreateWorkgroupRequest_trackName, *v.TrackName)
 	}

@@ -100,7 +100,9 @@ func (v *ListNetworkMigrationAnalysisResultsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListNetworkMigrationAnalysisResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkMigrationAnalysisResultsList(s, schemas.ListNetworkMigrationAnalysisResultsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeNetworkMigrationAnalysisResultsList(s, schemas.ListNetworkMigrationAnalysisResultsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNetworkMigrationAnalysisResultsResponse_nextToken, *v.NextToken)
 	}

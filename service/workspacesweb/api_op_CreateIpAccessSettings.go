@@ -69,7 +69,9 @@ func (v *CreateIpAccessSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContextMap(s, schemas.CreateIpAccessSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AdditionalEncryptionContext != nil {
+		serializeEncryptionContextMap(s, schemas.CreateIpAccessSettingsRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateIpAccessSettingsRequest_clientToken, *v.ClientToken)
 	}
@@ -82,8 +84,12 @@ func (v *CreateIpAccessSettingsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateIpAccessSettingsRequest_displayName, *v.DisplayName)
 	}
-	serializeIpRuleList(s, schemas.CreateIpAccessSettingsRequest_ipRules, v.IpRules)
-	serializeTagList(s, schemas.CreateIpAccessSettingsRequest_tags, v.Tags)
+	if v.IpRules != nil {
+		serializeIpRuleList(s, schemas.CreateIpAccessSettingsRequest_ipRules, v.IpRules)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIpAccessSettingsRequest_tags, v.Tags)
+	}
 }
 
 type CreateIpAccessSettingsOutput struct {

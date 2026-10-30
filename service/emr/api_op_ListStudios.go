@@ -73,7 +73,9 @@ func (v *ListStudiosOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListStudiosOutput_Marker, *v.Marker)
 	}
-	serializeStudioSummaryList(s, schemas.ListStudiosOutput_Studios, v.Studios)
+	if v.Studios != nil {
+		serializeStudioSummaryList(s, schemas.ListStudiosOutput_Studios, v.Studios)
+	}
 }
 func (v *ListStudiosOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStudiosOutput, func(s *smithy.Schema) error {

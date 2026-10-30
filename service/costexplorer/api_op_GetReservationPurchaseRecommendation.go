@@ -248,7 +248,9 @@ func (v *GetReservationPurchaseRecommendationOutput) SerializeMembers(s smithy.S
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetReservationPurchaseRecommendationResponse_NextPageToken, *v.NextPageToken)
 	}
-	serializeReservationPurchaseRecommendations(s, schemas.GetReservationPurchaseRecommendationResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeReservationPurchaseRecommendations(s, schemas.GetReservationPurchaseRecommendationResponse_Recommendations, v.Recommendations)
+	}
 }
 func (v *GetReservationPurchaseRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetReservationPurchaseRecommendationResponse, func(s *smithy.Schema) error {

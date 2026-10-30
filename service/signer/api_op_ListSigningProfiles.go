@@ -76,7 +76,9 @@ func (v *ListSigningProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlatformId != nil {
 		s.WriteString(schemas.ListSigningProfilesRequest_platformId, *v.PlatformId)
 	}
-	serializeStatuses(s, schemas.ListSigningProfilesRequest_statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeStatuses(s, schemas.ListSigningProfilesRequest_statuses, v.Statuses)
+	}
 }
 
 type ListSigningProfilesOutput struct {
@@ -105,7 +107,9 @@ func (v *ListSigningProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSigningProfilesResponse_nextToken, *v.NextToken)
 	}
-	serializeSigningProfiles(s, schemas.ListSigningProfilesResponse_profiles, v.Profiles)
+	if v.Profiles != nil {
+		serializeSigningProfiles(s, schemas.ListSigningProfilesResponse_profiles, v.Profiles)
+	}
 }
 func (v *ListSigningProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSigningProfilesResponse, func(s *smithy.Schema) error {

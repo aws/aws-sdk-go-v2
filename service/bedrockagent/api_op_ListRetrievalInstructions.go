@@ -88,7 +88,9 @@ func (v *ListRetrievalInstructionsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRetrievalInstructionsResponse_nextToken, *v.NextToken)
 	}
-	serializeRetrievalInstructionSummaries(s, schemas.ListRetrievalInstructionsResponse_retrievalInstructionSummaries, v.RetrievalInstructionSummaries)
+	if v.RetrievalInstructionSummaries != nil {
+		serializeRetrievalInstructionSummaries(s, schemas.ListRetrievalInstructionsResponse_retrievalInstructionSummaries, v.RetrievalInstructionSummaries)
+	}
 }
 func (v *ListRetrievalInstructionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRetrievalInstructionsResponse, func(s *smithy.Schema) error {

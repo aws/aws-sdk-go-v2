@@ -7,9 +7,6 @@ import (
 )
 
 func serializeCustomerAwsAccountIdFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeCustomerAwsAccountIdFilterList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeEntityIdentifierFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeEntityIdentifierFilterList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeEntityTypeFilterList(s smithy.ShapeSerializer, schema *smithy.Schema, v []EntityType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -40,9 +31,6 @@ func serializeEntityTypeFilterList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeMarketplaceProductIdList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -51,9 +39,6 @@ func serializeMarketplaceProductIdList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeMarketplaceRevenueShareAllocationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MarketplaceRevenueShareAllocationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -64,9 +49,6 @@ func serializeMarketplaceRevenueShareAllocationSummaryList(s smithy.ShapeSeriali
 }
 
 func serializeMarketplaceRevenueShareSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MarketplaceRevenueShareSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -77,9 +59,6 @@ func serializeMarketplaceRevenueShareSummaryList(s smithy.ShapeSerializer, schem
 }
 
 func serializeMarketplaceRevenueShareTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -90,9 +69,6 @@ func serializeMarketplaceRevenueShareTagList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeProductCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -101,9 +77,6 @@ func serializeProductCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeRevenueAttributionAllocationErrorDetailList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RevenueAttributionAllocationErrorDetail) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -114,9 +87,6 @@ func serializeRevenueAttributionAllocationErrorDetailList(s smithy.ShapeSerializ
 }
 
 func serializeRevenueAttributionAllocationSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RevenueAttributionAllocationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -127,9 +97,6 @@ func serializeRevenueAttributionAllocationSummaryList(s smithy.ShapeSerializer, 
 }
 
 func serializeRevenueAttributionIdentifierList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -138,9 +105,6 @@ func serializeRevenueAttributionIdentifierList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeRevenueAttributionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []AttributionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -151,9 +115,6 @@ func serializeRevenueAttributionSummaries(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeRevenueShareAllocationChangeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []RevenueShareAllocation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -164,9 +125,6 @@ func serializeRevenueShareAllocationChangeList(s smithy.ShapeSerializer, schema 
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -175,9 +133,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -188,9 +143,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) 
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

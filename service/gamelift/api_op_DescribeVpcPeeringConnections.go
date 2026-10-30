@@ -80,7 +80,9 @@ func (v *DescribeVpcPeeringConnectionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeVpcPeeringConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVpcPeeringConnectionList(s, schemas.DescribeVpcPeeringConnectionsOutput_VpcPeeringConnections, v.VpcPeeringConnections)
+	if v.VpcPeeringConnections != nil {
+		serializeVpcPeeringConnectionList(s, schemas.DescribeVpcPeeringConnectionsOutput_VpcPeeringConnections, v.VpcPeeringConnections)
+	}
 }
 func (v *DescribeVpcPeeringConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVpcPeeringConnectionsOutput, func(s *smithy.Schema) error {

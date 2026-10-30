@@ -69,8 +69,12 @@ func (v *CreateLicenseAssetRulesetInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.CreateLicenseAssetRulesetRequest_Name, *v.Name)
 	}
-	serializeLicenseAssetRuleList(s, schemas.CreateLicenseAssetRulesetRequest_Rules, v.Rules)
-	serializeTagList(s, schemas.CreateLicenseAssetRulesetRequest_Tags, v.Tags)
+	if v.Rules != nil {
+		serializeLicenseAssetRuleList(s, schemas.CreateLicenseAssetRulesetRequest_Rules, v.Rules)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLicenseAssetRulesetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLicenseAssetRulesetOutput struct {

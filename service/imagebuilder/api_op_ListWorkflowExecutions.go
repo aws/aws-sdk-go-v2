@@ -113,7 +113,9 @@ func (v *ListWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListWorkflowExecutionsResponse_requestId, *v.RequestId)
 	}
-	serializeWorkflowExecutionsList(s, schemas.ListWorkflowExecutionsResponse_workflowExecutions, v.WorkflowExecutions)
+	if v.WorkflowExecutions != nil {
+		serializeWorkflowExecutionsList(s, schemas.ListWorkflowExecutionsResponse_workflowExecutions, v.WorkflowExecutions)
+	}
 }
 func (v *ListWorkflowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWorkflowExecutionsResponse, func(s *smithy.Schema) error {

@@ -44,7 +44,9 @@ func (v *BatchGetFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingIdentifiers(s, schemas.BatchGetFindingsRequest_findingIdentifiers, v.FindingIdentifiers)
+	if v.FindingIdentifiers != nil {
+		serializeFindingIdentifiers(s, schemas.BatchGetFindingsRequest_findingIdentifiers, v.FindingIdentifiers)
+	}
 }
 
 type BatchGetFindingsOutput struct {
@@ -74,8 +76,12 @@ func (v *BatchGetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetFindingsErrors(s, schemas.BatchGetFindingsResponse_failedFindings, v.FailedFindings)
-	serializeFindings(s, schemas.BatchGetFindingsResponse_findings, v.Findings)
+	if v.FailedFindings != nil {
+		serializeBatchGetFindingsErrors(s, schemas.BatchGetFindingsResponse_failedFindings, v.FailedFindings)
+	}
+	if v.Findings != nil {
+		serializeFindings(s, schemas.BatchGetFindingsResponse_findings, v.Findings)
+	}
 }
 func (v *BatchGetFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetFindingsResponse, func(s *smithy.Schema) error {

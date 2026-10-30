@@ -59,7 +59,9 @@ func (v *DescribeDomainControllersInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.DescribeDomainControllersRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeDomainControllerIds(s, schemas.DescribeDomainControllersRequest_DomainControllerIds, v.DomainControllerIds)
+	if v.DomainControllerIds != nil {
+		serializeDomainControllerIds(s, schemas.DescribeDomainControllersRequest_DomainControllerIds, v.DomainControllerIds)
+	}
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeDomainControllersRequest_Limit, *v.Limit)
 	}
@@ -90,7 +92,9 @@ func (v *DescribeDomainControllersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDomainControllersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainControllers(s, schemas.DescribeDomainControllersResult_DomainControllers, v.DomainControllers)
+	if v.DomainControllers != nil {
+		serializeDomainControllers(s, schemas.DescribeDomainControllersResult_DomainControllers, v.DomainControllers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDomainControllersResult_NextToken, *v.NextToken)
 	}

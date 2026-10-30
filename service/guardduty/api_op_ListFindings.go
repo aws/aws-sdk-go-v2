@@ -224,7 +224,9 @@ func (v *ListFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingIds(s, schemas.ListFindingsResponse_FindingIds, v.FindingIds)
+	if v.FindingIds != nil {
+		serializeFindingIds(s, schemas.ListFindingsResponse_FindingIds, v.FindingIds)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsResponse_NextToken, *v.NextToken)
 	}

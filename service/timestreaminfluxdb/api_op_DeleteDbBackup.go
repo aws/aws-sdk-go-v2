@@ -219,8 +219,12 @@ func (v *DeleteDbBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.DeleteDbBackupOutput_type, string(v.Type))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.DeleteDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.DeleteDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.DeleteDbBackupOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.DeleteDbBackupOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *DeleteDbBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteDbBackupOutput, func(s *smithy.Schema) error {

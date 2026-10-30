@@ -74,7 +74,9 @@ func (v *ListEntityRecognizerSummariesOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListEntityRecognizerSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityRecognizerSummariesList(s, schemas.ListEntityRecognizerSummariesResponse_EntityRecognizerSummariesList, v.EntityRecognizerSummariesList)
+	if v.EntityRecognizerSummariesList != nil {
+		serializeEntityRecognizerSummariesList(s, schemas.ListEntityRecognizerSummariesResponse_EntityRecognizerSummariesList, v.EntityRecognizerSummariesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEntityRecognizerSummariesResponse_NextToken, *v.NextToken)
 	}

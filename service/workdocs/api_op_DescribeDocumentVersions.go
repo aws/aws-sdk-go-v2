@@ -107,7 +107,9 @@ func (v *DescribeDocumentVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDocumentVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentVersionMetadataList(s, schemas.DescribeDocumentVersionsResponse_DocumentVersions, v.DocumentVersions)
+	if v.DocumentVersions != nil {
+		serializeDocumentVersionMetadataList(s, schemas.DescribeDocumentVersionsResponse_DocumentVersions, v.DocumentVersions)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeDocumentVersionsResponse_Marker, *v.Marker)
 	}

@@ -70,13 +70,17 @@ func (v *CreateTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTrustAnchorRequest_name, *v.Name)
 	}
-	serializeNotificationSettings(s, schemas.CreateTrustAnchorRequest_notificationSettings, v.NotificationSettings)
+	if v.NotificationSettings != nil {
+		serializeNotificationSettings(s, schemas.CreateTrustAnchorRequest_notificationSettings, v.NotificationSettings)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.CreateTrustAnchorRequest_source)
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTrustAnchorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrustAnchorRequest_tags, v.Tags)
+	}
 }
 func (v *CreateTrustAnchorInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateTrustAnchorRequest, func(s *smithy.Schema) error {

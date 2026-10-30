@@ -95,7 +95,9 @@ func (v *PutDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DashboardName != nil {
 		s.WriteString(schemas.PutDashboardInput_DashboardName, *v.DashboardName)
 	}
-	serializeTagList(s, schemas.PutDashboardInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutDashboardInput_Tags, v.Tags)
+	}
 }
 
 type PutDashboardOutput struct {
@@ -124,7 +126,9 @@ func (v *PutDashboardOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDashboardValidationMessages(s, schemas.PutDashboardOutput_DashboardValidationMessages, v.DashboardValidationMessages)
+	if v.DashboardValidationMessages != nil {
+		serializeDashboardValidationMessages(s, schemas.PutDashboardOutput_DashboardValidationMessages, v.DashboardValidationMessages)
+	}
 }
 func (v *PutDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutDashboardOutput, func(s *smithy.Schema) error {

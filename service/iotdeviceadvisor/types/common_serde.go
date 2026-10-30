@@ -7,9 +7,6 @@ import (
 )
 
 func serializeDeviceUnderTestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []DeviceUnderTest) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -20,9 +17,6 @@ func serializeDeviceUnderTestList(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeGroupResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []GroupResult) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -33,9 +27,6 @@ func serializeGroupResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSelectedTestList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -44,9 +35,6 @@ func serializeSelectedTestList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeSuiteDefinitionInformationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SuiteDefinitionInformation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -57,9 +45,6 @@ func serializeSuiteDefinitionInformationList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeSuiteRunsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []SuiteRunInformation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -70,9 +55,6 @@ func serializeSuiteRunsList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -81,9 +63,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTestCaseRuns(s smithy.ShapeSerializer, schema *smithy.Schema, v []TestCaseRun) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serializeTestCaseRuns(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeTestCaseScenariosList(s smithy.ShapeSerializer, schema *smithy.Schema, v []TestCaseScenario) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -281,9 +257,6 @@ func deserializeTestCaseScenariosList(d smithy.ShapeDeserializer, s *smithy.Sche
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

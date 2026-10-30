@@ -267,7 +267,9 @@ func (v *Ec2Config) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Ec2Config) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEc2SecurityGroupArnList(s, schemas.Ec2Config_SecurityGroupArns, v.SecurityGroupArns)
+	if v.SecurityGroupArns != nil {
+		serializeEc2SecurityGroupArnList(s, schemas.Ec2Config_SecurityGroupArns, v.SecurityGroupArns)
+	}
 	if v.SubnetArn != nil {
 		s.WriteString(schemas.Ec2Config_SubnetArn, *v.SubnetArn)
 	}
@@ -806,7 +808,9 @@ func (v *LocationFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.LocationFilter_Operator, string(v.Operator))
 	}
-	serializeFilterValues(s, schemas.LocationFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.LocationFilter_Values, v.Values)
+	}
 }
 func (v *LocationFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LocationFilter, func(s *smithy.Schema) error {
@@ -1085,7 +1089,9 @@ func (v *OnPremConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OnPremConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentArnList(s, schemas.OnPremConfig_AgentArns, v.AgentArns)
+	if v.AgentArns != nil {
+		serializeAgentArnList(s, schemas.OnPremConfig_AgentArns, v.AgentArns)
+	}
 }
 func (v *OnPremConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OnPremConfig, func(s *smithy.Schema) error {
@@ -1608,8 +1614,12 @@ func (v *PrivateLinkConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrivateLinkEndpoint != nil {
 		s.WriteString(schemas.PrivateLinkConfig_PrivateLinkEndpoint, *v.PrivateLinkEndpoint)
 	}
-	serializePLSecurityGroupArnList(s, schemas.PrivateLinkConfig_SecurityGroupArns, v.SecurityGroupArns)
-	serializePLSubnetArnList(s, schemas.PrivateLinkConfig_SubnetArns, v.SubnetArns)
+	if v.SecurityGroupArns != nil {
+		serializePLSecurityGroupArnList(s, schemas.PrivateLinkConfig_SecurityGroupArns, v.SecurityGroupArns)
+	}
+	if v.SubnetArns != nil {
+		serializePLSubnetArnList(s, schemas.PrivateLinkConfig_SubnetArns, v.SubnetArns)
+	}
 	if v.VpcEndpointId != nil {
 		s.WriteString(schemas.PrivateLinkConfig_VpcEndpointId, *v.VpcEndpointId)
 	}
@@ -2714,7 +2724,9 @@ func (v *TaskFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.TaskFilter_Operator, string(v.Operator))
 	}
-	serializeFilterValues(s, schemas.TaskFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeFilterValues(s, schemas.TaskFilter_Values, v.Values)
+	}
 }
 func (v *TaskFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaskFilter, func(s *smithy.Schema) error {

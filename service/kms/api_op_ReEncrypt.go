@@ -301,19 +301,27 @@ func (v *ReEncryptInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DestinationEncryptionAlgorithm != "" {
 		s.WriteString(schemas.ReEncryptRequest_DestinationEncryptionAlgorithm, string(v.DestinationEncryptionAlgorithm))
 	}
-	serializeEncryptionContextType(s, schemas.ReEncryptRequest_DestinationEncryptionContext, v.DestinationEncryptionContext)
+	if v.DestinationEncryptionContext != nil {
+		serializeEncryptionContextType(s, schemas.ReEncryptRequest_DestinationEncryptionContext, v.DestinationEncryptionContext)
+	}
 	if v.DestinationKeyId != nil {
 		s.WriteString(schemas.ReEncryptRequest_DestinationKeyId, *v.DestinationKeyId)
 	}
 	if v.DryRun != nil {
 		s.WriteBool(schemas.ReEncryptRequest_DryRun, *v.DryRun)
 	}
-	serializeDryRunModifierList(s, schemas.ReEncryptRequest_DryRunModifiers, v.DryRunModifiers)
-	serializeGrantTokenList(s, schemas.ReEncryptRequest_GrantTokens, v.GrantTokens)
+	if v.DryRunModifiers != nil {
+		serializeDryRunModifierList(s, schemas.ReEncryptRequest_DryRunModifiers, v.DryRunModifiers)
+	}
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.ReEncryptRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.SourceEncryptionAlgorithm != "" {
 		s.WriteString(schemas.ReEncryptRequest_SourceEncryptionAlgorithm, string(v.SourceEncryptionAlgorithm))
 	}
-	serializeEncryptionContextType(s, schemas.ReEncryptRequest_SourceEncryptionContext, v.SourceEncryptionContext)
+	if v.SourceEncryptionContext != nil {
+		serializeEncryptionContextType(s, schemas.ReEncryptRequest_SourceEncryptionContext, v.SourceEncryptionContext)
+	}
 	if v.SourceKeyId != nil {
 		s.WriteString(schemas.ReEncryptRequest_SourceKeyId, *v.SourceKeyId)
 	}

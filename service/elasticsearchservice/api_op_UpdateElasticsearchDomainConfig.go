@@ -126,7 +126,9 @@ func (v *UpdateElasticsearchDomainConfigInput) SerializeMembers(s smithy.ShapeSe
 	if v.AccessPolicies != nil {
 		s.WriteString(schemas.UpdateElasticsearchDomainConfigRequest_AccessPolicies, *v.AccessPolicies)
 	}
-	serializeAdvancedOptions(s, schemas.UpdateElasticsearchDomainConfigRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.UpdateElasticsearchDomainConfigRequest_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.AdvancedSecurityOptions != nil {
 		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_AdvancedSecurityOptions)
 		v.AdvancedSecurityOptions.SerializeMembers(s)
@@ -181,7 +183,9 @@ func (v *UpdateElasticsearchDomainConfigInput) SerializeMembers(s smithy.ShapeSe
 	if v.EngineMode != "" {
 		s.WriteString(schemas.UpdateElasticsearchDomainConfigRequest_EngineMode, string(v.EngineMode))
 	}
-	serializeLogPublishingOptions(s, schemas.UpdateElasticsearchDomainConfigRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.LogPublishingOptions != nil {
+		serializeLogPublishingOptions(s, schemas.UpdateElasticsearchDomainConfigRequest_LogPublishingOptions, v.LogPublishingOptions)
+	}
 	if v.NodeToNodeEncryptionOptions != nil {
 		s.WriteStruct(schemas.UpdateElasticsearchDomainConfigRequest_NodeToNodeEncryptionOptions)
 		v.NodeToNodeEncryptionOptions.SerializeMembers(s)

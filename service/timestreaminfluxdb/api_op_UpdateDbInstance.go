@@ -86,7 +86,9 @@ func (v *UpdateDbInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AllocatedStorage != nil {
 		s.WriteInt32(schemas.UpdateDbInstanceInput_allocatedStorage, *v.AllocatedStorage)
 	}
-	serializeDbBackupConfigurationInputList(s, schemas.UpdateDbInstanceInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationInputList(s, schemas.UpdateDbInstanceInput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbInstanceType != "" {
 		s.WriteString(schemas.UpdateDbInstanceInput_dbInstanceType, string(v.DbInstanceType))
 	}
@@ -238,7 +240,9 @@ func (v *UpdateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.UpdateDbInstanceOutput_availabilityZone, *v.AvailabilityZone)
 	}
-	serializeDbBackupConfigurationOutputList(s, schemas.UpdateDbInstanceOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	if v.DbBackupConfigurations != nil {
+		serializeDbBackupConfigurationOutputList(s, schemas.UpdateDbInstanceOutput_dbBackupConfigurations, v.DbBackupConfigurations)
+	}
 	if v.DbClusterId != nil {
 		s.WriteString(schemas.UpdateDbInstanceOutput_dbClusterId, *v.DbClusterId)
 	}
@@ -266,7 +270,9 @@ func (v *UpdateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceMode != "" {
 		s.WriteString(schemas.UpdateDbInstanceOutput_instanceMode, string(v.InstanceMode))
 	}
-	serializeInstanceModeList(s, schemas.UpdateDbInstanceOutput_instanceModes, v.InstanceModes)
+	if v.InstanceModes != nil {
+		serializeInstanceModeList(s, schemas.UpdateDbInstanceOutput_instanceModes, v.InstanceModes)
+	}
 	if v.KmsKeyId != nil {
 		s.WriteString(schemas.UpdateDbInstanceOutput_kmsKeyId, *v.KmsKeyId)
 	}
@@ -304,8 +310,12 @@ func (v *UpdateDbInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.UpdateDbInstanceOutput_status, string(v.Status))
 	}
-	serializeVpcSecurityGroupIdList(s, schemas.UpdateDbInstanceOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
-	serializeVpcSubnetIdList(s, schemas.UpdateDbInstanceOutput_vpcSubnetIds, v.VpcSubnetIds)
+	if v.VpcSecurityGroupIds != nil {
+		serializeVpcSecurityGroupIdList(s, schemas.UpdateDbInstanceOutput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
+	if v.VpcSubnetIds != nil {
+		serializeVpcSubnetIdList(s, schemas.UpdateDbInstanceOutput_vpcSubnetIds, v.VpcSubnetIds)
+	}
 }
 func (v *UpdateDbInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateDbInstanceOutput, func(s *smithy.Schema) error {

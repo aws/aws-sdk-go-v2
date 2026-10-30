@@ -133,7 +133,9 @@ func (v *GetListingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetListingOutput_id, *v.Id)
 	}
-	serializeListingItem(s, schemas.GetListingOutput_item, v.Item)
+	if v.Item != nil {
+		serializeListingItem(s, schemas.GetListingOutput_item, v.Item)
+	}
 	if v.ListingRevision != nil {
 		s.WriteString(schemas.GetListingOutput_listingRevision, *v.ListingRevision)
 	}

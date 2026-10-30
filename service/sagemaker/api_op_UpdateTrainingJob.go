@@ -68,7 +68,9 @@ func (v *UpdateTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProfilerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProfilerRuleConfigurations(s, schemas.UpdateTrainingJobRequest_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	if v.ProfilerRuleConfigurations != nil {
+		serializeProfilerRuleConfigurations(s, schemas.UpdateTrainingJobRequest_ProfilerRuleConfigurations, v.ProfilerRuleConfigurations)
+	}
 	if v.RemoteDebugConfig != nil {
 		s.WriteStruct(schemas.UpdateTrainingJobRequest_RemoteDebugConfig)
 		v.RemoteDebugConfig.SerializeMembers(s)

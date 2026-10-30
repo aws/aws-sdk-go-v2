@@ -100,7 +100,9 @@ func (v *ListApiDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApiDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApiDestinationResponseList(s, schemas.ListApiDestinationsResponse_ApiDestinations, v.ApiDestinations)
+	if v.ApiDestinations != nil {
+		serializeApiDestinationResponseList(s, schemas.ListApiDestinationsResponse_ApiDestinations, v.ApiDestinations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApiDestinationsResponse_NextToken, *v.NextToken)
 	}

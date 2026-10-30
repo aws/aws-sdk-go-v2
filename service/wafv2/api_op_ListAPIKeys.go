@@ -110,7 +110,9 @@ func (v *ListAPIKeysOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAPIKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAPIKeySummaries(s, schemas.ListAPIKeysResponse_APIKeySummaries, v.APIKeySummaries)
+	if v.APIKeySummaries != nil {
+		serializeAPIKeySummaries(s, schemas.ListAPIKeysResponse_APIKeySummaries, v.APIKeySummaries)
+	}
 	if v.ApplicationIntegrationURL != nil {
 		s.WriteString(schemas.ListAPIKeysResponse_ApplicationIntegrationURL, *v.ApplicationIntegrationURL)
 	}

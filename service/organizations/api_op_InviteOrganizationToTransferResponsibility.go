@@ -96,7 +96,9 @@ func (v *InviteOrganizationToTransferResponsibilityInput) SerializeMembers(s smi
 	if v.StartTimestamp != nil {
 		s.WriteTime(schemas.InviteOrganizationToTransferResponsibilityRequest_StartTimestamp, *v.StartTimestamp)
 	}
-	serializeTags(s, schemas.InviteOrganizationToTransferResponsibilityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.InviteOrganizationToTransferResponsibilityRequest_Tags, v.Tags)
+	}
 	if v.Target != nil {
 		s.WriteStruct(schemas.InviteOrganizationToTransferResponsibilityRequest_Target)
 		v.Target.SerializeMembers(s)

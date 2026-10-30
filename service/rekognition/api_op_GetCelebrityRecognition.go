@@ -168,7 +168,9 @@ func (v *GetCelebrityRecognitionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCelebrityRecognitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCelebrityRecognitions(s, schemas.GetCelebrityRecognitionResponse_Celebrities, v.Celebrities)
+	if v.Celebrities != nil {
+		serializeCelebrityRecognitions(s, schemas.GetCelebrityRecognitionResponse_Celebrities, v.Celebrities)
+	}
 	if v.JobId != nil {
 		s.WriteString(schemas.GetCelebrityRecognitionResponse_JobId, *v.JobId)
 	}

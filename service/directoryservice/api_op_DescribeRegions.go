@@ -88,7 +88,9 @@ func (v *DescribeRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegionsResult_NextToken, *v.NextToken)
 	}
-	serializeRegionsDescription(s, schemas.DescribeRegionsResult_RegionsDescription, v.RegionsDescription)
+	if v.RegionsDescription != nil {
+		serializeRegionsDescription(s, schemas.DescribeRegionsResult_RegionsDescription, v.RegionsDescription)
+	}
 }
 func (v *DescribeRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRegionsResult, func(s *smithy.Schema) error {

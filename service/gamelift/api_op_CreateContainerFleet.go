@@ -367,17 +367,23 @@ func (v *CreateContainerFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InstanceConnectionPortRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIpPermissionsList(s, schemas.CreateContainerFleetInput_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	if v.InstanceInboundPermissions != nil {
+		serializeIpPermissionsList(s, schemas.CreateContainerFleetInput_InstanceInboundPermissions, v.InstanceInboundPermissions)
+	}
 	if v.InstanceType != nil {
 		s.WriteString(schemas.CreateContainerFleetInput_InstanceType, *v.InstanceType)
 	}
-	serializeLocationConfigurationList(s, schemas.CreateContainerFleetInput_Locations, v.Locations)
+	if v.Locations != nil {
+		serializeLocationConfigurationList(s, schemas.CreateContainerFleetInput_Locations, v.Locations)
+	}
 	if v.LogConfiguration != nil {
 		s.WriteStruct(schemas.CreateContainerFleetInput_LogConfiguration)
 		v.LogConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetricGroupList(s, schemas.CreateContainerFleetInput_MetricGroups, v.MetricGroups)
+	if v.MetricGroups != nil {
+		serializeMetricGroupList(s, schemas.CreateContainerFleetInput_MetricGroups, v.MetricGroups)
+	}
 	if v.NewGameSessionProtectionPolicy != "" {
 		s.WriteString(schemas.CreateContainerFleetInput_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
 	}
@@ -387,7 +393,9 @@ func (v *CreateContainerFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PlayerGatewayMode != "" {
 		s.WriteString(schemas.CreateContainerFleetInput_PlayerGatewayMode, string(v.PlayerGatewayMode))
 	}
-	serializeTagList(s, schemas.CreateContainerFleetInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContainerFleetInput_Tags, v.Tags)
+	}
 }
 
 type CreateContainerFleetOutput struct {

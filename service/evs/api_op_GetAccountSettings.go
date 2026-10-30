@@ -62,7 +62,9 @@ func (v *GetAccountSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetAccountSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountSettingList(s, schemas.GetAccountSettingsResponse_settings, v.Settings)
+	if v.Settings != nil {
+		serializeAccountSettingList(s, schemas.GetAccountSettingsResponse_settings, v.Settings)
+	}
 }
 func (v *GetAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAccountSettingsResponse, func(s *smithy.Schema) error {

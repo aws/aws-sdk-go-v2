@@ -112,7 +112,9 @@ func (v *GetDataAccessorOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDataAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionConfigurationList(s, schemas.GetDataAccessorResponse_actionConfigurations, v.ActionConfigurations)
+	if v.ActionConfigurations != nil {
+		serializeActionConfigurationList(s, schemas.GetDataAccessorResponse_actionConfigurations, v.ActionConfigurations)
+	}
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.GetDataAccessorResponse_applicationId, *v.ApplicationId)
 	}

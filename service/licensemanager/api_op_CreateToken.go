@@ -73,8 +73,12 @@ func (v *CreateTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.CreateTokenRequest_LicenseArn, *v.LicenseArn)
 	}
-	serializeArnList(s, schemas.CreateTokenRequest_RoleArns, v.RoleArns)
-	serializeMaxSize3StringList(s, schemas.CreateTokenRequest_TokenProperties, v.TokenProperties)
+	if v.RoleArns != nil {
+		serializeArnList(s, schemas.CreateTokenRequest_RoleArns, v.RoleArns)
+	}
+	if v.TokenProperties != nil {
+		serializeMaxSize3StringList(s, schemas.CreateTokenRequest_TokenProperties, v.TokenProperties)
+	}
 }
 
 type CreateTokenOutput struct {

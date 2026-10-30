@@ -90,7 +90,9 @@ func (v *ListInputSourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInputSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInputSourceSummaryList(s, schemas.ListInputSourcesResponse_inputSourceSummaries, v.InputSourceSummaries)
+	if v.InputSourceSummaries != nil {
+		serializeInputSourceSummaryList(s, schemas.ListInputSourcesResponse_inputSourceSummaries, v.InputSourceSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInputSourcesResponse_nextToken, *v.NextToken)
 	}

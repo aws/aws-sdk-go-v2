@@ -79,7 +79,9 @@ func (v *CreateAgentRuntimeEndpointInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAgentRuntimeEndpointRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateAgentRuntimeEndpointRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateAgentRuntimeEndpointRequest_tags, v.Tags)
+	}
 }
 
 type CreateAgentRuntimeEndpointOutput struct {

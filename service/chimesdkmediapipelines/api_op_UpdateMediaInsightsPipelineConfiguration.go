@@ -58,7 +58,9 @@ func (v *UpdateMediaInsightsPipelineConfigurationInput) Serialize(s smithy.Shape
 }
 
 func (v *UpdateMediaInsightsPipelineConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaInsightsPipelineConfigurationElements(s, schemas.UpdateMediaInsightsPipelineConfigurationRequest_Elements, v.Elements)
+	if v.Elements != nil {
+		serializeMediaInsightsPipelineConfigurationElements(s, schemas.UpdateMediaInsightsPipelineConfigurationRequest_Elements, v.Elements)
+	}
 	if v.Identifier != nil {
 		s.WriteString(schemas.UpdateMediaInsightsPipelineConfigurationRequest_Identifier, *v.Identifier)
 	}

@@ -95,7 +95,9 @@ func (v *ListEnrollmentStatusesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.IncludeMemberAccounts != nil {
 		s.WriteBool(schemas.ListEnrollmentStatusesResponse_includeMemberAccounts, *v.IncludeMemberAccounts)
 	}
-	serializeAccountEnrollmentStatuses(s, schemas.ListEnrollmentStatusesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeAccountEnrollmentStatuses(s, schemas.ListEnrollmentStatusesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnrollmentStatusesResponse_nextToken, *v.NextToken)
 	}

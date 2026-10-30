@@ -49,7 +49,9 @@ func (v *BatchGetConfigurationPolicyAssociationsInput) Serialize(s smithy.ShapeS
 }
 
 func (v *BatchGetConfigurationPolicyAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationPolicyAssociationsList(s, schemas.BatchGetConfigurationPolicyAssociationsRequest_ConfigurationPolicyAssociationIdentifiers, v.ConfigurationPolicyAssociationIdentifiers)
+	if v.ConfigurationPolicyAssociationIdentifiers != nil {
+		serializeConfigurationPolicyAssociationsList(s, schemas.BatchGetConfigurationPolicyAssociationsRequest_ConfigurationPolicyAssociationIdentifiers, v.ConfigurationPolicyAssociationIdentifiers)
+	}
 }
 
 type BatchGetConfigurationPolicyAssociationsOutput struct {
@@ -75,8 +77,12 @@ func (v *BatchGetConfigurationPolicyAssociationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *BatchGetConfigurationPolicyAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationPolicyAssociationList(s, schemas.BatchGetConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociations, v.ConfigurationPolicyAssociations)
-	serializeUnprocessedConfigurationPolicyAssociationList(s, schemas.BatchGetConfigurationPolicyAssociationsResponse_UnprocessedConfigurationPolicyAssociations, v.UnprocessedConfigurationPolicyAssociations)
+	if v.ConfigurationPolicyAssociations != nil {
+		serializeConfigurationPolicyAssociationList(s, schemas.BatchGetConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociations, v.ConfigurationPolicyAssociations)
+	}
+	if v.UnprocessedConfigurationPolicyAssociations != nil {
+		serializeUnprocessedConfigurationPolicyAssociationList(s, schemas.BatchGetConfigurationPolicyAssociationsResponse_UnprocessedConfigurationPolicyAssociations, v.UnprocessedConfigurationPolicyAssociations)
+	}
 }
 func (v *BatchGetConfigurationPolicyAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetConfigurationPolicyAssociationsResponse, func(s *smithy.Schema) error {

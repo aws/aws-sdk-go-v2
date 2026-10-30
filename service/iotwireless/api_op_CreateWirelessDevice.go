@@ -107,7 +107,9 @@ func (v *CreateWirelessDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Sidewalk.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateWirelessDeviceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWirelessDeviceRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateWirelessDeviceRequest_Type, string(v.Type))
 	}

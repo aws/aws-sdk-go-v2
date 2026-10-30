@@ -249,7 +249,9 @@ func (v *GetDomainNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecurityPolicy != "" {
 		s.WriteString(schemas.DomainName_securityPolicy, string(v.SecurityPolicy))
 	}
-	serializeMapOfStringToString(s, schemas.DomainName_tags, v.Tags)
+	if v.Tags != nil {
+		serializeMapOfStringToString(s, schemas.DomainName_tags, v.Tags)
+	}
 }
 func (v *GetDomainNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DomainName, func(s *smithy.Schema) error {

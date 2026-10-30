@@ -84,7 +84,9 @@ func (v *ImportHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StorageType != "" {
 		s.WriteString(schemas.ImportHostKeyRequest_StorageType, string(v.StorageType))
 	}
-	serializeTags(s, schemas.ImportHostKeyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ImportHostKeyRequest_Tags, v.Tags)
+	}
 }
 
 type ImportHostKeyOutput struct {

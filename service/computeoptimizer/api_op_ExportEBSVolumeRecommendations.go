@@ -115,12 +115,18 @@ func (v *ExportEBSVolumeRecommendationsInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ExportEBSVolumeRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportEBSVolumeRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableVolumeFields(s, schemas.ExportEBSVolumeRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportEBSVolumeRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableVolumeFields(s, schemas.ExportEBSVolumeRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportEBSVolumeRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeEBSFilters(s, schemas.ExportEBSVolumeRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeEBSFilters(s, schemas.ExportEBSVolumeRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportEBSVolumeRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

@@ -81,7 +81,9 @@ func (v *DescribeInsightRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeInsightRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInsightRules(s, schemas.DescribeInsightRulesOutput_InsightRules, v.InsightRules)
+	if v.InsightRules != nil {
+		serializeInsightRules(s, schemas.DescribeInsightRulesOutput_InsightRules, v.InsightRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeInsightRulesOutput_NextToken, *v.NextToken)
 	}

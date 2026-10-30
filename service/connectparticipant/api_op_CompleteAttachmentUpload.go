@@ -68,7 +68,9 @@ func (v *CompleteAttachmentUploadInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompleteAttachmentUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentIdList(s, schemas.CompleteAttachmentUploadRequest_AttachmentIds, v.AttachmentIds)
+	if v.AttachmentIds != nil {
+		serializeAttachmentIdList(s, schemas.CompleteAttachmentUploadRequest_AttachmentIds, v.AttachmentIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CompleteAttachmentUploadRequest_ClientToken, *v.ClientToken)
 	}

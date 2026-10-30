@@ -82,14 +82,18 @@ func (v *UpdateMicrosoftTeamsChannelConfigurationInput) SerializeMembers(s smith
 	if v.ChatConfigurationArn != nil {
 		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_ChatConfigurationArn, *v.ChatConfigurationArn)
 	}
-	serializeGuardrailPolicyArnList(s, schemas.UpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	if v.GuardrailPolicyArns != nil {
+		serializeGuardrailPolicyArnList(s, schemas.UpdateTeamsChannelConfigurationRequest_GuardrailPolicyArns, v.GuardrailPolicyArns)
+	}
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_IamRoleArn, *v.IamRoleArn)
 	}
 	if v.LoggingLevel != nil {
 		s.WriteString(schemas.UpdateTeamsChannelConfigurationRequest_LoggingLevel, *v.LoggingLevel)
 	}
-	serializeSnsTopicArnList(s, schemas.UpdateTeamsChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	if v.SnsTopicArns != nil {
+		serializeSnsTopicArnList(s, schemas.UpdateTeamsChannelConfigurationRequest_SnsTopicArns, v.SnsTopicArns)
+	}
 	if v.UserAuthorizationRequired != nil {
 		s.WriteBool(schemas.UpdateTeamsChannelConfigurationRequest_UserAuthorizationRequired, *v.UserAuthorizationRequired)
 	}

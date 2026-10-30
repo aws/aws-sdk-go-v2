@@ -45,7 +45,9 @@ func (v *BatchGetProjectsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProjectNames(s, schemas.BatchGetProjectsInput_names, v.Names)
+	if v.Names != nil {
+		serializeProjectNames(s, schemas.BatchGetProjectsInput_names, v.Names)
+	}
 }
 
 type BatchGetProjectsOutput struct {
@@ -69,8 +71,12 @@ func (v *BatchGetProjectsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProjects(s, schemas.BatchGetProjectsOutput_projects, v.Projects)
-	serializeProjectNames(s, schemas.BatchGetProjectsOutput_projectsNotFound, v.ProjectsNotFound)
+	if v.Projects != nil {
+		serializeProjects(s, schemas.BatchGetProjectsOutput_projects, v.Projects)
+	}
+	if v.ProjectsNotFound != nil {
+		serializeProjectNames(s, schemas.BatchGetProjectsOutput_projectsNotFound, v.ProjectsNotFound)
+	}
 }
 func (v *BatchGetProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetProjectsOutput, func(s *smithy.Schema) error {

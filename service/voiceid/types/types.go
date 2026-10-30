@@ -490,7 +490,9 @@ func (v *EnrollmentJobFraudDetectionConfig) SerializeMembers(s smithy.ShapeSeria
 	if v.RiskThreshold != nil {
 		s.WriteInt32(schemas.EnrollmentJobFraudDetectionConfig_RiskThreshold, *v.RiskThreshold)
 	}
-	serializeEnrollmentJobFraudDetectionConfigWatchlistIds(s, schemas.EnrollmentJobFraudDetectionConfig_WatchlistIds, v.WatchlistIds)
+	if v.WatchlistIds != nil {
+		serializeEnrollmentJobFraudDetectionConfigWatchlistIds(s, schemas.EnrollmentJobFraudDetectionConfig_WatchlistIds, v.WatchlistIds)
+	}
 }
 func (v *EnrollmentJobFraudDetectionConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EnrollmentJobFraudDetectionConfig, func(s *smithy.Schema) error {
@@ -655,7 +657,9 @@ func (v *FraudDetectionResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FraudDetectionResultId != nil {
 		s.WriteString(schemas.FraudDetectionResult_FraudDetectionResultId, *v.FraudDetectionResultId)
 	}
-	serializeFraudDetectionReasons(s, schemas.FraudDetectionResult_Reasons, v.Reasons)
+	if v.Reasons != nil {
+		serializeFraudDetectionReasons(s, schemas.FraudDetectionResult_Reasons, v.Reasons)
+	}
 	if v.RiskDetails != nil {
 		s.WriteStruct(schemas.FraudDetectionResult_RiskDetails)
 		v.RiskDetails.SerializeMembers(s)
@@ -777,7 +781,9 @@ func (v *Fraudster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeneratedFraudsterId != nil {
 		s.WriteString(schemas.Fraudster_GeneratedFraudsterId, *v.GeneratedFraudsterId)
 	}
-	serializeResponseWatchlistIds(s, schemas.Fraudster_WatchlistIds, v.WatchlistIds)
+	if v.WatchlistIds != nil {
+		serializeResponseWatchlistIds(s, schemas.Fraudster_WatchlistIds, v.WatchlistIds)
+	}
 }
 func (v *Fraudster) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Fraudster, func(s *smithy.Schema) error {
@@ -1093,7 +1099,9 @@ func (v *FraudsterSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GeneratedFraudsterId != nil {
 		s.WriteString(schemas.FraudsterSummary_GeneratedFraudsterId, *v.GeneratedFraudsterId)
 	}
-	serializeResponseWatchlistIds(s, schemas.FraudsterSummary_WatchlistIds, v.WatchlistIds)
+	if v.WatchlistIds != nil {
+		serializeResponseWatchlistIds(s, schemas.FraudsterSummary_WatchlistIds, v.WatchlistIds)
+	}
 }
 func (v *FraudsterSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FraudsterSummary, func(s *smithy.Schema) error {
@@ -1305,7 +1313,9 @@ func (v *RegistrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FraudsterSimilarityThreshold != nil {
 		s.WriteInt32(schemas.RegistrationConfig_FraudsterSimilarityThreshold, *v.FraudsterSimilarityThreshold)
 	}
-	serializeRegistrationConfigWatchlistIds(s, schemas.RegistrationConfig_WatchlistIds, v.WatchlistIds)
+	if v.WatchlistIds != nil {
+		serializeRegistrationConfigWatchlistIds(s, schemas.RegistrationConfig_WatchlistIds, v.WatchlistIds)
+	}
 }
 func (v *RegistrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RegistrationConfig, func(s *smithy.Schema) error {

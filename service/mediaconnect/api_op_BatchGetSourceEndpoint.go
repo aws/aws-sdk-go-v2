@@ -44,7 +44,9 @@ func (v *BatchGetSourceEndpointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSourceEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSourceEndpointArnList(s, schemas.BatchGetSourceEndpointRequest_Arns, v.Arns)
+	if v.Arns != nil {
+		serializeSourceEndpointArnList(s, schemas.BatchGetSourceEndpointRequest_Arns, v.Arns)
+	}
 }
 
 type BatchGetSourceEndpointOutput struct {
@@ -72,8 +74,12 @@ func (v *BatchGetSourceEndpointOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetSourceEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetSourceEndpointErrorList(s, schemas.BatchGetSourceEndpointResponse_Errors, v.Errors)
-	serializeSourceEndpointList(s, schemas.BatchGetSourceEndpointResponse_SourceEndpoints, v.SourceEndpoints)
+	if v.Errors != nil {
+		serializeBatchGetSourceEndpointErrorList(s, schemas.BatchGetSourceEndpointResponse_Errors, v.Errors)
+	}
+	if v.SourceEndpoints != nil {
+		serializeSourceEndpointList(s, schemas.BatchGetSourceEndpointResponse_SourceEndpoints, v.SourceEndpoints)
+	}
 }
 func (v *BatchGetSourceEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetSourceEndpointResponse, func(s *smithy.Schema) error {

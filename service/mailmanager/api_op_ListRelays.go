@@ -82,7 +82,9 @@ func (v *ListRelaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRelaysResponse_NextToken, *v.NextToken)
 	}
-	serializeRelays(s, schemas.ListRelaysResponse_Relays, v.Relays)
+	if v.Relays != nil {
+		serializeRelays(s, schemas.ListRelaysResponse_Relays, v.Relays)
+	}
 }
 func (v *ListRelaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRelaysResponse, func(s *smithy.Schema) error {

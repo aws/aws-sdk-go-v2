@@ -152,7 +152,9 @@ func (v *GetEnvironmentProfileOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetEnvironmentProfileOutput_updatedAt, *v.UpdatedAt)
 	}
-	serializeCustomParameterList(s, schemas.GetEnvironmentProfileOutput_userParameters, v.UserParameters)
+	if v.UserParameters != nil {
+		serializeCustomParameterList(s, schemas.GetEnvironmentProfileOutput_userParameters, v.UserParameters)
+	}
 }
 func (v *GetEnvironmentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEnvironmentProfileOutput, func(s *smithy.Schema) error {

@@ -60,8 +60,12 @@ func (v *DescribeRcsAgentCountryLaunchStatusInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *DescribeRcsAgentCountryLaunchStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryLaunchStatusFilterList(s, schemas.DescribeRcsAgentCountryLaunchStatusRequest_Filters, v.Filters)
-	serializeIsoCountryCodeList(s, schemas.DescribeRcsAgentCountryLaunchStatusRequest_IsoCountryCodes, v.IsoCountryCodes)
+	if v.Filters != nil {
+		serializeCountryLaunchStatusFilterList(s, schemas.DescribeRcsAgentCountryLaunchStatusRequest_Filters, v.Filters)
+	}
+	if v.IsoCountryCodes != nil {
+		serializeIsoCountryCodeList(s, schemas.DescribeRcsAgentCountryLaunchStatusRequest_IsoCountryCodes, v.IsoCountryCodes)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRcsAgentCountryLaunchStatusRequest_MaxResults, *v.MaxResults)
 	}
@@ -106,7 +110,9 @@ func (v *DescribeRcsAgentCountryLaunchStatusOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeRcsAgentCountryLaunchStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCountryLaunchStatusInformationList(s, schemas.DescribeRcsAgentCountryLaunchStatusResult_CountryLaunchStatus, v.CountryLaunchStatus)
+	if v.CountryLaunchStatus != nil {
+		serializeCountryLaunchStatusInformationList(s, schemas.DescribeRcsAgentCountryLaunchStatusResult_CountryLaunchStatus, v.CountryLaunchStatus)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRcsAgentCountryLaunchStatusResult_NextToken, *v.NextToken)
 	}

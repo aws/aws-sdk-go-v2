@@ -61,7 +61,9 @@ func (v *CreateDirectConnectGatewayAssociationInput) Serialize(s smithy.ShapeSer
 }
 
 func (v *CreateDirectConnectGatewayAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	if v.AddAllowedPrefixesToDirectConnectGateway != nil {
+		serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	}
 	if v.DirectConnectGatewayId != nil {
 		s.WriteString(schemas.CreateDirectConnectGatewayAssociationRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
 	}

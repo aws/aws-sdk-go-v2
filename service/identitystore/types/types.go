@@ -422,7 +422,9 @@ func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.Group_DisplayName, *v.DisplayName)
 	}
-	serializeExternalIds(s, schemas.Group_ExternalIds, v.ExternalIds)
+	if v.ExternalIds != nil {
+		serializeExternalIds(s, schemas.Group_ExternalIds, v.ExternalIds)
+	}
 	if v.GroupArn != nil {
 		s.WriteString(schemas.Group_GroupArn, *v.GroupArn)
 	}
@@ -545,7 +547,9 @@ func (v *GroupMembership) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.GroupMembership_IdentityStoreId, *v.IdentityStoreId)
 	}
-	serializeMemberId(s, schemas.GroupMembership_MemberId, v.MemberId)
+	if v.MemberId != nil {
+		serializeMemberId(s, schemas.GroupMembership_MemberId, v.MemberId)
+	}
 	if v.MembershipArn != nil {
 		s.WriteString(schemas.GroupMembership_MembershipArn, *v.MembershipArn)
 	}
@@ -620,7 +624,9 @@ func (v *GroupMembershipExistenceResult) SerializeMembers(s smithy.ShapeSerializ
 	if v.GroupId != nil {
 		s.WriteString(schemas.GroupMembershipExistenceResult_GroupId, *v.GroupId)
 	}
-	serializeMemberId(s, schemas.GroupMembershipExistenceResult_MemberId, v.MemberId)
+	if v.MemberId != nil {
+		serializeMemberId(s, schemas.GroupMembershipExistenceResult_MemberId, v.MemberId)
+	}
 	if v.MembershipExists != false {
 		s.WriteBool(schemas.GroupMembershipExistenceResult_MembershipExists, v.MembershipExists)
 	}
@@ -840,9 +846,15 @@ func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpCidrList(s, schemas.NetworkConfiguration_ApiAllowSourceIps, v.ApiAllowSourceIps)
-	serializeVpcIdList(s, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
-	serializeIpCidrList(s, schemas.NetworkConfiguration_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	if v.ApiAllowSourceIps != nil {
+		serializeIpCidrList(s, schemas.NetworkConfiguration_ApiAllowSourceIps, v.ApiAllowSourceIps)
+	}
+	if v.ApiRestrictSourceVpcs != nil {
+		serializeVpcIdList(s, schemas.NetworkConfiguration_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+	}
+	if v.ScimAllowSourceIps != nil {
+		serializeIpCidrList(s, schemas.NetworkConfiguration_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	}
 	if v.VpceAccessRequired != nil {
 		s.WriteBool(schemas.NetworkConfiguration_VpceAccessRequired, *v.VpceAccessRequired)
 	}
@@ -907,9 +919,15 @@ func (v *NetworkConfigurationDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkConfigurationDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, v.ApiAllowSourceIps)
-	serializeVpcIdList(s, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
-	serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	if v.ApiAllowSourceIps != nil {
+		serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ApiAllowSourceIps, v.ApiAllowSourceIps)
+	}
+	if v.ApiRestrictSourceVpcs != nil {
+		serializeVpcIdList(s, schemas.NetworkConfigurationDetails_ApiRestrictSourceVpcs, v.ApiRestrictSourceVpcs)
+	}
+	if v.ScimAllowSourceIps != nil {
+		serializeIpCidrList(s, schemas.NetworkConfigurationDetails_ScimAllowSourceIps, v.ScimAllowSourceIps)
+	}
 	if v.VpceAccessRequired != nil {
 		s.WriteBool(schemas.NetworkConfigurationDetails_VpceAccessRequired, *v.VpceAccessRequired)
 	}
@@ -1271,7 +1289,9 @@ func (v *User) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddresses(s, schemas.User_Addresses, v.Addresses)
+	if v.Addresses != nil {
+		serializeAddresses(s, schemas.User_Addresses, v.Addresses)
+	}
 	if v.Birthdate != nil {
 		s.WriteString(schemas.User_Birthdate, *v.Birthdate)
 	}
@@ -1284,9 +1304,15 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.User_DisplayName, *v.DisplayName)
 	}
-	serializeEmails(s, schemas.User_Emails, v.Emails)
-	serializeExtensions(s, schemas.User_Extensions, v.Extensions)
-	serializeExternalIds(s, schemas.User_ExternalIds, v.ExternalIds)
+	if v.Emails != nil {
+		serializeEmails(s, schemas.User_Emails, v.Emails)
+	}
+	if v.Extensions != nil {
+		serializeExtensions(s, schemas.User_Extensions, v.Extensions)
+	}
+	if v.ExternalIds != nil {
+		serializeExternalIds(s, schemas.User_ExternalIds, v.ExternalIds)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.User_IdentityStoreId, *v.IdentityStoreId)
 	}
@@ -1301,8 +1327,12 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NickName != nil {
 		s.WriteString(schemas.User_NickName, *v.NickName)
 	}
-	serializePhoneNumbers(s, schemas.User_PhoneNumbers, v.PhoneNumbers)
-	serializePhotos(s, schemas.User_Photos, v.Photos)
+	if v.PhoneNumbers != nil {
+		serializePhoneNumbers(s, schemas.User_PhoneNumbers, v.PhoneNumbers)
+	}
+	if v.Photos != nil {
+		serializePhotos(s, schemas.User_Photos, v.Photos)
+	}
 	if v.PreferredLanguage != nil {
 		s.WriteString(schemas.User_PreferredLanguage, *v.PreferredLanguage)
 	}
@@ -1312,7 +1342,9 @@ func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Revision != nil {
 		s.WriteString(schemas.User_Revision, *v.Revision)
 	}
-	serializeRoles(s, schemas.User_Roles, v.Roles)
+	if v.Roles != nil {
+		serializeRoles(s, schemas.User_Roles, v.Roles)
+	}
 	if v.Timezone != nil {
 		s.WriteString(schemas.User_Timezone, *v.Timezone)
 	}

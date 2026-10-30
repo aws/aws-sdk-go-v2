@@ -67,10 +67,18 @@ func (v *GetMapsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDenseIntegerMap(s, schemas.GetMapsOutput_integers, v.Integers)
-	serializeSparseStringMap(s, schemas.GetMapsOutput_sparseStrings, v.SparseStrings)
-	serializeDenseStringMap(s, schemas.GetMapsOutput_strings, v.Strings)
-	serializeDenseStructMap(s, schemas.GetMapsOutput_structs, v.Structs)
+	if v.Integers != nil {
+		serializeDenseIntegerMap(s, schemas.GetMapsOutput_integers, v.Integers)
+	}
+	if v.SparseStrings != nil {
+		serializeSparseStringMap(s, schemas.GetMapsOutput_sparseStrings, v.SparseStrings)
+	}
+	if v.Strings != nil {
+		serializeDenseStringMap(s, schemas.GetMapsOutput_strings, v.Strings)
+	}
+	if v.Structs != nil {
+		serializeDenseStructMap(s, schemas.GetMapsOutput_structs, v.Structs)
+	}
 }
 func (v *GetMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMapsOutput, func(s *smithy.Schema) error {

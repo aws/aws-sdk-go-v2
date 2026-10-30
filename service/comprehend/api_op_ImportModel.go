@@ -93,7 +93,9 @@ func (v *ImportModelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceModelArn != nil {
 		s.WriteString(schemas.ImportModelRequest_SourceModelArn, *v.SourceModelArn)
 	}
-	serializeTagList(s, schemas.ImportModelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportModelRequest_Tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.ImportModelRequest_VersionName, *v.VersionName)
 	}

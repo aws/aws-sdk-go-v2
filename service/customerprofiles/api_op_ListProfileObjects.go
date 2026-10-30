@@ -107,7 +107,9 @@ func (v *ListProfileObjectsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProfileObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProfileObjectList(s, schemas.ListProfileObjectsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeProfileObjectList(s, schemas.ListProfileObjectsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileObjectsResponse_NextToken, *v.NextToken)
 	}

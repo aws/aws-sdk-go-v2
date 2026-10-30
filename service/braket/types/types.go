@@ -858,7 +858,9 @@ func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.JobSummary_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.JobSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.JobSummary_tags, v.Tags)
+	}
 }
 func (v *JobSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobSummary, func(s *smithy.Schema) error {
@@ -920,7 +922,9 @@ func (v *ProgramSetValidationFailure) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProgramSetValidationFailure) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProgramValidationFailuresList(s, schemas.ProgramSetValidationFailure_errors, v.Errors)
+	if v.Errors != nil {
+		serializeProgramValidationFailuresList(s, schemas.ProgramSetValidationFailure_errors, v.Errors)
+	}
 	if v.InputsIndex != nil {
 		s.WriteInt64(schemas.ProgramSetValidationFailure_inputsIndex, *v.InputsIndex)
 	}
@@ -1095,7 +1099,9 @@ func (v *QuantumTaskSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.QuantumTaskSummary_status, string(v.Status))
 	}
-	serializeTagsMap(s, schemas.QuantumTaskSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.QuantumTaskSummary_tags, v.Tags)
+	}
 }
 func (v *QuantumTaskSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.QuantumTaskSummary, func(s *smithy.Schema) error {
@@ -1257,7 +1263,9 @@ func (v *SearchDevicesFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.SearchDevicesFilter_name, *v.Name)
 	}
-	serializeString256List(s, schemas.SearchDevicesFilter_values, v.Values)
+	if v.Values != nil {
+		serializeString256List(s, schemas.SearchDevicesFilter_values, v.Values)
+	}
 }
 func (v *SearchDevicesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchDevicesFilter, func(s *smithy.Schema) error {
@@ -1307,7 +1315,9 @@ func (v *SearchJobsFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.SearchJobsFilter_operator, string(v.Operator))
 	}
-	serializeString256List(s, schemas.SearchJobsFilter_values, v.Values)
+	if v.Values != nil {
+		serializeString256List(s, schemas.SearchJobsFilter_values, v.Values)
+	}
 }
 func (v *SearchJobsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchJobsFilter, func(s *smithy.Schema) error {
@@ -1364,7 +1374,9 @@ func (v *SearchQuantumTasksFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.SearchQuantumTasksFilter_operator, string(v.Operator))
 	}
-	serializeString256List(s, schemas.SearchQuantumTasksFilter_values, v.Values)
+	if v.Values != nil {
+		serializeString256List(s, schemas.SearchQuantumTasksFilter_values, v.Values)
+	}
 }
 func (v *SearchQuantumTasksFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchQuantumTasksFilter, func(s *smithy.Schema) error {
@@ -1421,7 +1433,9 @@ func (v *SearchSpendingLimitsFilter) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Operator != "" {
 		s.WriteString(schemas.SearchSpendingLimitsFilter_operator, string(v.Operator))
 	}
-	serializeString256List(s, schemas.SearchSpendingLimitsFilter_values, v.Values)
+	if v.Values != nil {
+		serializeString256List(s, schemas.SearchSpendingLimitsFilter_values, v.Values)
+	}
 }
 func (v *SearchSpendingLimitsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchSpendingLimitsFilter, func(s *smithy.Schema) error {
@@ -1519,7 +1533,9 @@ func (v *SpendingLimitSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpendingLimitArn != nil {
 		s.WriteString(schemas.SpendingLimitSummary_spendingLimitArn, *v.SpendingLimitArn)
 	}
-	serializeTagsMap(s, schemas.SpendingLimitSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.SpendingLimitSummary_tags, v.Tags)
+	}
 	if v.TimePeriod != nil {
 		s.WriteStruct(schemas.SpendingLimitSummary_timePeriod)
 		v.TimePeriod.SerializeMembers(s)

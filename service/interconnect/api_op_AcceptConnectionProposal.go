@@ -72,14 +72,18 @@ func (v *AcceptConnectionProposalInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ActivationKey != nil {
 		s.WriteString(schemas.AcceptConnectionProposalRequest_activationKey, *v.ActivationKey)
 	}
-	serializeAttachPoint(s, schemas.AcceptConnectionProposalRequest_attachPoint, v.AttachPoint)
+	if v.AttachPoint != nil {
+		serializeAttachPoint(s, schemas.AcceptConnectionProposalRequest_attachPoint, v.AttachPoint)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AcceptConnectionProposalRequest_clientToken, *v.ClientToken)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.AcceptConnectionProposalRequest_description, *v.Description)
 	}
-	serializeTagMap(s, schemas.AcceptConnectionProposalRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.AcceptConnectionProposalRequest_tags, v.Tags)
+	}
 }
 
 type AcceptConnectionProposalOutput struct {

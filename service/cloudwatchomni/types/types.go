@@ -117,7 +117,9 @@ func (v *AccessGrant) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Principal.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeScopedActionsList(s, schemas.AccessGrant_scopedActions, v.ScopedActions)
+	if v.ScopedActions != nil {
+		serializeScopedActionsList(s, schemas.AccessGrant_scopedActions, v.ScopedActions)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.AccessGrant_spaceId, *v.SpaceId)
 	}
@@ -206,7 +208,9 @@ func (v *AccessGrantPrincipal) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessGrantPrincipal) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessGrantPrincipalAttributeList(s, schemas.AccessGrantPrincipal_principalAttributes, v.PrincipalAttributes)
+	if v.PrincipalAttributes != nil {
+		serializeAccessGrantPrincipalAttributeList(s, schemas.AccessGrantPrincipal_principalAttributes, v.PrincipalAttributes)
+	}
 	if v.PrincipalId != nil {
 		s.WriteString(schemas.AccessGrantPrincipal_principalId, *v.PrincipalId)
 	}
@@ -697,14 +701,18 @@ func (v *Alert) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Alert_name, *v.Name)
 	}
-	serializeNotificationRuleList(s, schemas.Alert_notificationRules, v.NotificationRules)
+	if v.NotificationRules != nil {
+		serializeNotificationRuleList(s, schemas.Alert_notificationRules, v.NotificationRules)
+	}
 	if v.NotificationStatus != "" {
 		s.WriteString(schemas.Alert_notificationStatus, string(v.NotificationStatus))
 	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.Alert_profileId, *v.ProfileId)
 	}
-	serializeRule(s, schemas.Alert_rule, v.Rule)
+	if v.Rule != nil {
+		serializeRule(s, schemas.Alert_rule, v.Rule)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.Alert_spaceId, *v.SpaceId)
 	}
@@ -942,15 +950,21 @@ func (v *AlertFilterCriteria) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AlertFilterCriteria) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlertIdFilterList(s, schemas.AlertFilterCriteria_ids, v.Ids)
+	if v.Ids != nil {
+		serializeAlertIdFilterList(s, schemas.AlertFilterCriteria_ids, v.Ids)
+	}
 	if v.NamePrefix != nil {
 		s.WriteString(schemas.AlertFilterCriteria_namePrefix, *v.NamePrefix)
 	}
-	serializeAlertNameFilterList(s, schemas.AlertFilterCriteria_names, v.Names)
+	if v.Names != nil {
+		serializeAlertNameFilterList(s, schemas.AlertFilterCriteria_names, v.Names)
+	}
 	if v.NotificationsEnabled != nil {
 		s.WriteBool(schemas.AlertFilterCriteria_notificationsEnabled, *v.NotificationsEnabled)
 	}
-	serializeAlertStateList(s, schemas.AlertFilterCriteria_stateValue, v.StateValue)
+	if v.StateValue != nil {
+		serializeAlertStateList(s, schemas.AlertFilterCriteria_stateValue, v.StateValue)
+	}
 }
 func (v *AlertFilterCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AlertFilterCriteria, func(s *smithy.Schema) error {
@@ -1449,7 +1463,9 @@ func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Domain_createdAt, *v.CreatedAt)
 	}
-	serializeStringList(s, schemas.Domain_customEndpointUrls, v.CustomEndpointUrls)
+	if v.CustomEndpointUrls != nil {
+		serializeStringList(s, schemas.Domain_customEndpointUrls, v.CustomEndpointUrls)
+	}
 	if v.DomainArn != nil {
 		s.WriteString(schemas.Domain_domainArn, *v.DomainArn)
 	}
@@ -1467,7 +1483,9 @@ func (v *Domain) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdentityProviderConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityProviderList(s, schemas.Domain_identityProviders, v.IdentityProviders)
+	if v.IdentityProviders != nil {
+		serializeIdentityProviderList(s, schemas.Domain_identityProviders, v.IdentityProviders)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Domain_name, *v.Name)
 	}
@@ -1714,10 +1732,18 @@ func (v *Edge) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Metadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringSet(s, schemas.Edge_operations, v.Operations)
-	serializeSignalSet(s, schemas.Edge_signalTypes, v.SignalTypes)
-	serializeSourceSet(s, schemas.Edge_sources, v.Sources)
-	serializeContextGraphAttributeMap(s, schemas.Edge_telemetryAttributes, v.TelemetryAttributes)
+	if v.Operations != nil {
+		serializeStringSet(s, schemas.Edge_operations, v.Operations)
+	}
+	if v.SignalTypes != nil {
+		serializeSignalSet(s, schemas.Edge_signalTypes, v.SignalTypes)
+	}
+	if v.Sources != nil {
+		serializeSourceSet(s, schemas.Edge_sources, v.Sources)
+	}
+	if v.TelemetryAttributes != nil {
+		serializeContextGraphAttributeMap(s, schemas.Edge_telemetryAttributes, v.TelemetryAttributes)
+	}
 	if v.To != nil {
 		s.WriteString(schemas.Edge_to, *v.To)
 	}
@@ -1811,9 +1837,15 @@ func (v *EdgeFilters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.From != nil {
 		s.WriteString(schemas.EdgeFilters_from, *v.From)
 	}
-	serializeStringSet(s, schemas.EdgeFilters_operations, v.Operations)
-	serializeSourceSet(s, schemas.EdgeFilters_sources, v.Sources)
-	serializeKeyFilterList(s, schemas.EdgeFilters_telemetryAttributes, v.TelemetryAttributes)
+	if v.Operations != nil {
+		serializeStringSet(s, schemas.EdgeFilters_operations, v.Operations)
+	}
+	if v.Sources != nil {
+		serializeSourceSet(s, schemas.EdgeFilters_sources, v.Sources)
+	}
+	if v.TelemetryAttributes != nil {
+		serializeKeyFilterList(s, schemas.EdgeFilters_telemetryAttributes, v.TelemetryAttributes)
+	}
 	if v.To != nil {
 		s.WriteString(schemas.EdgeFilters_to, *v.To)
 	}
@@ -2103,7 +2135,9 @@ func (v *Field) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Field) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldList(s, schemas.Field_children, v.Children)
+	if v.Children != nil {
+		serializeFieldList(s, schemas.Field_children, v.Children)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Field_name, *v.Name)
 	}
@@ -2276,7 +2310,9 @@ func (v *Integration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegrationArn != nil {
 		s.WriteString(schemas.Integration_integrationArn, *v.IntegrationArn)
 	}
-	serializeStringMap(s, schemas.Integration_integrationAttributes, v.IntegrationAttributes)
+	if v.IntegrationAttributes != nil {
+		serializeStringMap(s, schemas.Integration_integrationAttributes, v.IntegrationAttributes)
+	}
 	if v.IntegrationId != nil {
 		s.WriteString(schemas.Integration_integrationId, *v.IntegrationId)
 	}
@@ -2512,7 +2548,9 @@ func (v *KeyFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.KeyFilter_key, *v.Key)
 	}
-	serializeKeyFilterValues(s, schemas.KeyFilter_values, v.Values)
+	if v.Values != nil {
+		serializeKeyFilterValues(s, schemas.KeyFilter_values, v.Values)
+	}
 }
 func (v *KeyFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.KeyFilter, func(s *smithy.Schema) error {
@@ -2556,7 +2594,9 @@ func (v *LogMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LogMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogMetadataAttributeMap(s, schemas.LogMetadata_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeLogMetadataAttributeMap(s, schemas.LogMetadata_attributes, v.Attributes)
+	}
 }
 func (v *LogMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LogMetadata, func(s *smithy.Schema) error {
@@ -2598,14 +2638,20 @@ func (v *Metadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Metadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogMetadataList(s, schemas.Metadata_logs, v.Logs)
-	serializeMetricMetadataList(s, schemas.Metadata_metrics, v.Metrics)
+	if v.Logs != nil {
+		serializeLogMetadataList(s, schemas.Metadata_logs, v.Logs)
+	}
+	if v.Metrics != nil {
+		serializeMetricMetadataList(s, schemas.Metadata_metrics, v.Metrics)
+	}
 	if v.Semantics != nil {
 		s.WriteStruct(schemas.Metadata_semantics)
 		v.Semantics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTraceMetadataList(s, schemas.Metadata_traces, v.Traces)
+	if v.Traces != nil {
+		serializeTraceMetadataList(s, schemas.Metadata_traces, v.Traces)
+	}
 }
 func (v *Metadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Metadata, func(s *smithy.Schema) error {
@@ -2663,7 +2709,9 @@ func (v *MetricMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MetricMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataAttributeMap(s, schemas.MetricMetadata_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeMetadataAttributeMap(s, schemas.MetricMetadata_attributes, v.Attributes)
+	}
 	if v.MetricType != nil {
 		s.WriteString(schemas.MetricMetadata_metricType, *v.MetricType)
 	}
@@ -2841,8 +2889,12 @@ func (v *Node) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringSet(s, schemas.Node_alternateNames, v.AlternateNames)
-	serializeEdgeList(s, schemas.Node_edges, v.Edges)
+	if v.AlternateNames != nil {
+		serializeStringSet(s, schemas.Node_alternateNames, v.AlternateNames)
+	}
+	if v.Edges != nil {
+		serializeEdgeList(s, schemas.Node_edges, v.Edges)
+	}
 	if v.FirstObservedAt != nil {
 		s.WriteTime(schemas.Node_firstObservedAt, *v.FirstObservedAt)
 	}
@@ -2868,11 +2920,21 @@ func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NodeType != "" {
 		s.WriteString(schemas.Node_nodeType, string(v.NodeType))
 	}
-	serializeOperationDetails(s, schemas.Node_operationDetails, v.OperationDetails)
-	serializeSignalSet(s, schemas.Node_signalTypes, v.SignalTypes)
-	serializeSourceSet(s, schemas.Node_sources, v.Sources)
-	serializeIntelligenceTagMap(s, schemas.Node_tags, v.Tags)
-	serializeContextGraphAttributeMap(s, schemas.Node_telemetryAttributes, v.TelemetryAttributes)
+	if v.OperationDetails != nil {
+		serializeOperationDetails(s, schemas.Node_operationDetails, v.OperationDetails)
+	}
+	if v.SignalTypes != nil {
+		serializeSignalSet(s, schemas.Node_signalTypes, v.SignalTypes)
+	}
+	if v.Sources != nil {
+		serializeSourceSet(s, schemas.Node_sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeIntelligenceTagMap(s, schemas.Node_tags, v.Tags)
+	}
+	if v.TelemetryAttributes != nil {
+		serializeContextGraphAttributeMap(s, schemas.Node_telemetryAttributes, v.TelemetryAttributes)
+	}
 }
 func (v *Node) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Node, func(s *smithy.Schema) error {
@@ -2970,24 +3032,42 @@ func (v *NodeFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NodeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeCategorySet(s, schemas.NodeFilters_category, v.Category)
-	serializeStringSet(s, schemas.NodeFilters_cloudProvider, v.CloudProvider)
+	if v.Category != nil {
+		serializeNodeCategorySet(s, schemas.NodeFilters_category, v.Category)
+	}
+	if v.CloudProvider != nil {
+		serializeStringSet(s, schemas.NodeFilters_cloudProvider, v.CloudProvider)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.NodeFilters_name, *v.Name)
 	}
-	serializeStringSet(s, schemas.NodeFilters_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeStringSet(s, schemas.NodeFilters_namespace, v.Namespace)
+	}
 	if v.NodeId != nil {
 		s.WriteString(schemas.NodeFilters_nodeId, *v.NodeId)
 	}
 	if v.NodeType != "" {
 		s.WriteString(schemas.NodeFilters_nodeType, string(v.NodeType))
 	}
-	serializeStringSet(s, schemas.NodeFilters_region, v.Region)
-	serializeStringSet(s, schemas.NodeFilters_sourceAccountId, v.SourceAccountId)
-	serializeSourceSet(s, schemas.NodeFilters_sources, v.Sources)
-	serializeStringSet(s, schemas.NodeFilters_stage, v.Stage)
-	serializeKeyFilterList(s, schemas.NodeFilters_tags, v.Tags)
-	serializeKeyFilterList(s, schemas.NodeFilters_telemetryAttributes, v.TelemetryAttributes)
+	if v.Region != nil {
+		serializeStringSet(s, schemas.NodeFilters_region, v.Region)
+	}
+	if v.SourceAccountId != nil {
+		serializeStringSet(s, schemas.NodeFilters_sourceAccountId, v.SourceAccountId)
+	}
+	if v.Sources != nil {
+		serializeSourceSet(s, schemas.NodeFilters_sources, v.Sources)
+	}
+	if v.Stage != nil {
+		serializeStringSet(s, schemas.NodeFilters_stage, v.Stage)
+	}
+	if v.Tags != nil {
+		serializeKeyFilterList(s, schemas.NodeFilters_tags, v.Tags)
+	}
+	if v.TelemetryAttributes != nil {
+		serializeKeyFilterList(s, schemas.NodeFilters_telemetryAttributes, v.TelemetryAttributes)
+	}
 }
 func (v *NodeFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NodeFilters, func(s *smithy.Schema) error {
@@ -3261,7 +3341,9 @@ func (v *NotificationTarget) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.NotificationTarget_arn, *v.Arn)
 	}
-	serializeNotificationTargetMetadata(s, schemas.NotificationTarget_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeNotificationTargetMetadata(s, schemas.NotificationTarget_metadata, v.Metadata)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.NotificationTarget_type, string(v.Type))
 	}
@@ -3303,7 +3385,9 @@ func (v *NotificationTrigger) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NotificationTrigger) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlertStateList(s, schemas.NotificationTrigger_stateValues, v.StateValues)
+	if v.StateValues != nil {
+		serializeAlertStateList(s, schemas.NotificationTrigger_stateValues, v.StateValues)
+	}
 }
 func (v *NotificationTrigger) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NotificationTrigger, func(s *smithy.Schema) error {
@@ -3479,7 +3563,9 @@ func (v *OmniDashboard) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.OmniDashboard_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.OmniDashboard_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.OmniDashboard_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.OmniDashboard_updatedAt, *v.UpdatedAt)
 	}
@@ -3585,7 +3671,9 @@ func (v *OmniDashboardSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.OmniDashboardSummary_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.OmniDashboardSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.OmniDashboardSummary_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.OmniDashboardSummary_updatedAt, *v.UpdatedAt)
 	}
@@ -3788,7 +3876,9 @@ func (v *OrganizationAccessGrantPrincipal) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OrganizationAccessGrantPrincipal) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessGrantPrincipalAttributeList(s, schemas.OrganizationAccessGrantPrincipal_principalAttributes, v.PrincipalAttributes)
+	if v.PrincipalAttributes != nil {
+		serializeAccessGrantPrincipalAttributeList(s, schemas.OrganizationAccessGrantPrincipal_principalAttributes, v.PrincipalAttributes)
+	}
 	if v.PrincipalId != nil {
 		s.WriteString(schemas.OrganizationAccessGrantPrincipal_principalId, *v.PrincipalId)
 	}
@@ -4028,7 +4118,9 @@ func (v *OrganizationDomain) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.OrganizationDomain_createdAt, *v.CreatedAt)
 	}
-	serializeStringList(s, schemas.OrganizationDomain_customEndpointUrls, v.CustomEndpointUrls)
+	if v.CustomEndpointUrls != nil {
+		serializeStringList(s, schemas.OrganizationDomain_customEndpointUrls, v.CustomEndpointUrls)
+	}
 	if v.DomainAccessRoleArn != nil {
 		s.WriteString(schemas.OrganizationDomain_domainAccessRoleArn, *v.DomainAccessRoleArn)
 	}
@@ -4049,7 +4141,9 @@ func (v *OrganizationDomain) SerializeMembers(s smithy.ShapeSerializer) {
 		v.IdentityProviderConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIdentityProviderList(s, schemas.OrganizationDomain_identityProviders, v.IdentityProviders)
+	if v.IdentityProviders != nil {
+		serializeIdentityProviderList(s, schemas.OrganizationDomain_identityProviders, v.IdentityProviders)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.OrganizationDomain_name, *v.Name)
 	}
@@ -4340,13 +4434,21 @@ func (v *ResourceScope) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceScope) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceArnList(s, schemas.ResourceScope_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArnList(s, schemas.ResourceScope_resourceArns, v.ResourceArns)
+	}
 	if v.ResourceType != nil {
 		s.WriteString(schemas.ResourceScope_resourceType, *v.ResourceType)
 	}
-	serializeRowScopeGroupList(s, schemas.ResourceScope_rowScopeGroups, v.RowScopeGroups)
-	serializeSignalTypeList(s, schemas.ResourceScope_signalTypes, v.SignalTypes)
-	serializeResourceScopeTagMap(s, schemas.ResourceScope_tags, v.Tags)
+	if v.RowScopeGroups != nil {
+		serializeRowScopeGroupList(s, schemas.ResourceScope_rowScopeGroups, v.RowScopeGroups)
+	}
+	if v.SignalTypes != nil {
+		serializeSignalTypeList(s, schemas.ResourceScope_signalTypes, v.SignalTypes)
+	}
+	if v.Tags != nil {
+		serializeResourceScopeTagMap(s, schemas.ResourceScope_tags, v.Tags)
+	}
 }
 func (v *ResourceScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceScope, func(s *smithy.Schema) error {
@@ -4404,7 +4506,9 @@ func (v *RowScope) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Operator != "" {
 		s.WriteString(schemas.RowScope_operator, string(v.Operator))
 	}
-	serializeRowScopeValueList(s, schemas.RowScope_values, v.Values)
+	if v.Values != nil {
+		serializeRowScopeValueList(s, schemas.RowScope_values, v.Values)
+	}
 }
 func (v *RowScope) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RowScope, func(s *smithy.Schema) error {
@@ -4481,9 +4585,15 @@ func (v *ScopedActions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScopedActions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeScopedActionNameList(s, schemas.ScopedActions_actions, v.Actions)
-	serializeContextConditionsMap(s, schemas.ScopedActions_contextConditions, v.ContextConditions)
-	serializeResourceScopeList(s, schemas.ScopedActions_resources, v.Resources)
+	if v.Actions != nil {
+		serializeScopedActionNameList(s, schemas.ScopedActions_actions, v.Actions)
+	}
+	if v.ContextConditions != nil {
+		serializeContextConditionsMap(s, schemas.ScopedActions_contextConditions, v.ContextConditions)
+	}
+	if v.Resources != nil {
+		serializeResourceScopeList(s, schemas.ScopedActions_resources, v.Resources)
+	}
 }
 func (v *ScopedActions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScopedActions, func(s *smithy.Schema) error {
@@ -5004,7 +5114,9 @@ func (v *TraceMetadata) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TraceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTraceMetadataAttributeMap(s, schemas.TraceMetadata_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeTraceMetadataAttributeMap(s, schemas.TraceMetadata_attributes, v.Attributes)
+	}
 }
 func (v *TraceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TraceMetadata, func(s *smithy.Schema) error {

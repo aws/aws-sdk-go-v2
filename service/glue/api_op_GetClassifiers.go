@@ -74,7 +74,9 @@ func (v *GetClassifiersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetClassifiersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClassifierList(s, schemas.GetClassifiersResponse_Classifiers, v.Classifiers)
+	if v.Classifiers != nil {
+		serializeClassifierList(s, schemas.GetClassifiersResponse_Classifiers, v.Classifiers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetClassifiersResponse_NextToken, *v.NextToken)
 	}

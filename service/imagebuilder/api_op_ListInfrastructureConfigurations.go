@@ -49,7 +49,9 @@ func (v *ListInfrastructureConfigurationsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListInfrastructureConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListInfrastructureConfigurationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListInfrastructureConfigurationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListInfrastructureConfigurationsRequest_maxResults, *v.MaxResults)
 	}
@@ -84,7 +86,9 @@ func (v *ListInfrastructureConfigurationsOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListInfrastructureConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInfrastructureConfigurationSummaryList(s, schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList, v.InfrastructureConfigurationSummaryList)
+	if v.InfrastructureConfigurationSummaryList != nil {
+		serializeInfrastructureConfigurationSummaryList(s, schemas.ListInfrastructureConfigurationsResponse_infrastructureConfigurationSummaryList, v.InfrastructureConfigurationSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInfrastructureConfigurationsResponse_nextToken, *v.NextToken)
 	}

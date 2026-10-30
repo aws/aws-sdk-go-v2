@@ -102,7 +102,9 @@ func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TracingEnabled != nil {
 		s.WriteBool(schemas.CreateDeploymentRequest_tracingEnabled, *v.TracingEnabled)
 	}
-	serializeMapOfStringToString(s, schemas.CreateDeploymentRequest_variables, v.Variables)
+	if v.Variables != nil {
+		serializeMapOfStringToString(s, schemas.CreateDeploymentRequest_variables, v.Variables)
+	}
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -136,7 +138,9 @@ func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePathToMapOfMethodSnapshot(s, schemas.Deployment_apiSummary, v.ApiSummary)
+	if v.ApiSummary != nil {
+		serializePathToMapOfMethodSnapshot(s, schemas.Deployment_apiSummary, v.ApiSummary)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.Deployment_createdDate, *v.CreatedDate)
 	}

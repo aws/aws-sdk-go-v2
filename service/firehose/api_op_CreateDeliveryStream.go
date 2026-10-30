@@ -289,7 +289,9 @@ func (v *CreateDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SplunkDestinationConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagDeliveryStreamInputTagList(s, schemas.CreateDeliveryStreamInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagDeliveryStreamInputTagList(s, schemas.CreateDeliveryStreamInput_Tags, v.Tags)
+	}
 }
 
 type CreateDeliveryStreamOutput struct {

@@ -150,8 +150,12 @@ func (v *StartMLDataProcessingJobInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.SagemakerIamRoleArn != nil {
 		s.WriteString(schemas.StartMLDataProcessingJobInput_sagemakerIamRoleArn, *v.SagemakerIamRoleArn)
 	}
-	serializeStringList(s, schemas.StartMLDataProcessingJobInput_securityGroupIds, v.SecurityGroupIds)
-	serializeStringList(s, schemas.StartMLDataProcessingJobInput_subnets, v.Subnets)
+	if v.SecurityGroupIds != nil {
+		serializeStringList(s, schemas.StartMLDataProcessingJobInput_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.Subnets != nil {
+		serializeStringList(s, schemas.StartMLDataProcessingJobInput_subnets, v.Subnets)
+	}
 	if v.VolumeEncryptionKMSKey != nil {
 		s.WriteString(schemas.StartMLDataProcessingJobInput_volumeEncryptionKMSKey, *v.VolumeEncryptionKMSKey)
 	}

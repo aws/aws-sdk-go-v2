@@ -82,7 +82,9 @@ func (v *UpdateApplicationComponentConfigInput) SerializeMembers(s smithy.ShapeS
 	if v.SecretsManagerKey != nil {
 		s.WriteString(schemas.UpdateApplicationComponentConfigRequest_secretsManagerKey, *v.SecretsManagerKey)
 	}
-	serializeSourceCodeList(s, schemas.UpdateApplicationComponentConfigRequest_sourceCodeList, v.SourceCodeList)
+	if v.SourceCodeList != nil {
+		serializeSourceCodeList(s, schemas.UpdateApplicationComponentConfigRequest_sourceCodeList, v.SourceCodeList)
+	}
 	if v.StrategyOption != nil {
 		s.WriteStruct(schemas.UpdateApplicationComponentConfigRequest_strategyOption)
 		v.StrategyOption.SerializeMembers(s)

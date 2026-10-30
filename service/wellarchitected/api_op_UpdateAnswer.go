@@ -88,7 +88,9 @@ func (v *UpdateAnswerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChoiceUpdates(s, schemas.UpdateAnswerInput_ChoiceUpdates, v.ChoiceUpdates)
+	if v.ChoiceUpdates != nil {
+		serializeChoiceUpdates(s, schemas.UpdateAnswerInput_ChoiceUpdates, v.ChoiceUpdates)
+	}
 	if v.IsApplicable != nil {
 		s.WriteBool(schemas.UpdateAnswerInput_IsApplicable, *v.IsApplicable)
 	}
@@ -104,7 +106,9 @@ func (v *UpdateAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Reason != "" {
 		s.WriteString(schemas.UpdateAnswerInput_Reason, string(v.Reason))
 	}
-	serializeSelectedChoices(s, schemas.UpdateAnswerInput_SelectedChoices, v.SelectedChoices)
+	if v.SelectedChoices != nil {
+		serializeSelectedChoices(s, schemas.UpdateAnswerInput_SelectedChoices, v.SelectedChoices)
+	}
 	if v.WorkloadId != nil {
 		s.WriteString(schemas.UpdateAnswerInput_WorkloadId, *v.WorkloadId)
 	}

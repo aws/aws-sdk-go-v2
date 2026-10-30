@@ -125,7 +125,9 @@ func (v *GetPackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Artifact.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceAttributes(s, schemas.GetPackageVersionResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeResourceAttributes(s, schemas.GetPackageVersionResponse_attributes, v.Attributes)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.GetPackageVersionResponse_creationDate, *v.CreationDate)
 	}

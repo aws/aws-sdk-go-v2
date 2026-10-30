@@ -129,7 +129,9 @@ func (v *GetDashboardEmbedUrlInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDashboardEmbedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalDashboardIdList(s, schemas.GetDashboardEmbedUrlRequest_AdditionalDashboardIds, v.AdditionalDashboardIds)
+	if v.AdditionalDashboardIds != nil {
+		serializeAdditionalDashboardIdList(s, schemas.GetDashboardEmbedUrlRequest_AdditionalDashboardIds, v.AdditionalDashboardIds)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.GetDashboardEmbedUrlRequest_AwsAccountId, *v.AwsAccountId)
 	}

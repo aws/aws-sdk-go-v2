@@ -120,7 +120,9 @@ func (v *ListQueueEmailAddressesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListQueueEmailAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEmailAddressMetadataList(s, schemas.ListQueueEmailAddressesResponse_EmailAddressMetadataList, v.EmailAddressMetadataList)
+	if v.EmailAddressMetadataList != nil {
+		serializeEmailAddressMetadataList(s, schemas.ListQueueEmailAddressesResponse_EmailAddressMetadataList, v.EmailAddressMetadataList)
+	}
 	if v.LastModifiedRegion != nil {
 		s.WriteString(schemas.ListQueueEmailAddressesResponse_LastModifiedRegion, *v.LastModifiedRegion)
 	}

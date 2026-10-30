@@ -83,7 +83,9 @@ func (v *GetEffectivePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetEffectivePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEffectivePolicies(s, schemas.GetEffectivePoliciesResponse_effectivePolicies, v.EffectivePolicies)
+	if v.EffectivePolicies != nil {
+		serializeEffectivePolicies(s, schemas.GetEffectivePoliciesResponse_effectivePolicies, v.EffectivePolicies)
+	}
 }
 func (v *GetEffectivePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEffectivePoliciesResponse, func(s *smithy.Schema) error {

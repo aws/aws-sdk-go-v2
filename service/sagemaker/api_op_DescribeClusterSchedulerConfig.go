@@ -175,7 +175,9 @@ func (v *DescribeClusterSchedulerConfigOutput) SerializeMembers(s smithy.ShapeSe
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeClusterSchedulerConfigResponse_Status, string(v.Status))
 	}
-	serializeStatusDetailsMap(s, schemas.DescribeClusterSchedulerConfigResponse_StatusDetails, v.StatusDetails)
+	if v.StatusDetails != nil {
+		serializeStatusDetailsMap(s, schemas.DescribeClusterSchedulerConfigResponse_StatusDetails, v.StatusDetails)
+	}
 }
 func (v *DescribeClusterSchedulerConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeClusterSchedulerConfigResponse, func(s *smithy.Schema) error {

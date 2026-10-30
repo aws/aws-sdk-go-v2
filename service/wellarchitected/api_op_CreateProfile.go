@@ -82,8 +82,12 @@ func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfileName != nil {
 		s.WriteString(schemas.CreateProfileInput_ProfileName, *v.ProfileName)
 	}
-	serializeProfileQuestionUpdates(s, schemas.CreateProfileInput_ProfileQuestions, v.ProfileQuestions)
-	serializeTagMap(s, schemas.CreateProfileInput_Tags, v.Tags)
+	if v.ProfileQuestions != nil {
+		serializeProfileQuestionUpdates(s, schemas.CreateProfileInput_ProfileQuestions, v.ProfileQuestions)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateProfileInput_Tags, v.Tags)
+	}
 }
 
 type CreateProfileOutput struct {

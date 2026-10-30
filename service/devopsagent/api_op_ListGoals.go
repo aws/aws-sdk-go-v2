@@ -99,7 +99,9 @@ func (v *ListGoalsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGoalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGoalList(s, schemas.ListGoalsResponse_goals, v.Goals)
+	if v.Goals != nil {
+		serializeGoalList(s, schemas.ListGoalsResponse_goals, v.Goals)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGoalsResponse_nextToken, *v.NextToken)
 	}

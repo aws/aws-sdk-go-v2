@@ -55,7 +55,9 @@ func (v *BatchGetTracesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetTracesRequest_NextToken, *v.NextToken)
 	}
-	serializeTraceIdList(s, schemas.BatchGetTracesRequest_TraceIds, v.TraceIds)
+	if v.TraceIds != nil {
+		serializeTraceIdList(s, schemas.BatchGetTracesRequest_TraceIds, v.TraceIds)
+	}
 }
 
 type BatchGetTracesOutput struct {
@@ -85,8 +87,12 @@ func (v *BatchGetTracesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetTracesResult_NextToken, *v.NextToken)
 	}
-	serializeTraceList(s, schemas.BatchGetTracesResult_Traces, v.Traces)
-	serializeUnprocessedTraceIdList(s, schemas.BatchGetTracesResult_UnprocessedTraceIds, v.UnprocessedTraceIds)
+	if v.Traces != nil {
+		serializeTraceList(s, schemas.BatchGetTracesResult_Traces, v.Traces)
+	}
+	if v.UnprocessedTraceIds != nil {
+		serializeUnprocessedTraceIdList(s, schemas.BatchGetTracesResult_UnprocessedTraceIds, v.UnprocessedTraceIds)
+	}
 }
 func (v *BatchGetTracesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetTracesResult, func(s *smithy.Schema) error {

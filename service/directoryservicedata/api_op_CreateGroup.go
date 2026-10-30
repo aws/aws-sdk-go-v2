@@ -91,7 +91,9 @@ func (v *CreateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupType != "" {
 		s.WriteString(schemas.CreateGroupRequest_GroupType, string(v.GroupType))
 	}
-	serializeAttributes(s, schemas.CreateGroupRequest_OtherAttributes, v.OtherAttributes)
+	if v.OtherAttributes != nil {
+		serializeAttributes(s, schemas.CreateGroupRequest_OtherAttributes, v.OtherAttributes)
+	}
 	if v.SAMAccountName != nil {
 		s.WriteString(schemas.CreateGroupRequest_SAMAccountName, *v.SAMAccountName)
 	}

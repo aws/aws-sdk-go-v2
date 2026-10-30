@@ -101,7 +101,9 @@ func (v *SearchGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Realm != nil {
 		s.WriteString(schemas.SearchGroupsRequest_Realm, *v.Realm)
 	}
-	serializeLdapDisplayNameList(s, schemas.SearchGroupsRequest_SearchAttributes, v.SearchAttributes)
+	if v.SearchAttributes != nil {
+		serializeLdapDisplayNameList(s, schemas.SearchGroupsRequest_SearchAttributes, v.SearchAttributes)
+	}
 	if v.SearchString != nil {
 		s.WriteString(schemas.SearchGroupsRequest_SearchString, *v.SearchString)
 	}
@@ -138,7 +140,9 @@ func (v *SearchGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.SearchGroupsResult_DirectoryId, *v.DirectoryId)
 	}
-	serializeGroupList(s, schemas.SearchGroupsResult_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroupList(s, schemas.SearchGroupsResult_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchGroupsResult_NextToken, *v.NextToken)
 	}

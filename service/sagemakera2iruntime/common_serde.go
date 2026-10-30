@@ -8,9 +8,6 @@ import (
 )
 
 func serializeContentClassifiers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ContentClassifier) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeContentClassifiers(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeHumanLoopSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HumanLoopSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

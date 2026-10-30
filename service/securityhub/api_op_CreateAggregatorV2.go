@@ -55,11 +55,15 @@ func (v *CreateAggregatorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAggregatorV2Request_ClientToken, *v.ClientToken)
 	}
-	serializeStringList(s, schemas.CreateAggregatorV2Request_LinkedRegions, v.LinkedRegions)
+	if v.LinkedRegions != nil {
+		serializeStringList(s, schemas.CreateAggregatorV2Request_LinkedRegions, v.LinkedRegions)
+	}
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.CreateAggregatorV2Request_RegionLinkingMode, *v.RegionLinkingMode)
 	}
-	serializeTagMap(s, schemas.CreateAggregatorV2Request_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAggregatorV2Request_Tags, v.Tags)
+	}
 }
 
 type CreateAggregatorV2Output struct {
@@ -95,7 +99,9 @@ func (v *CreateAggregatorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregatorV2Arn != nil {
 		s.WriteString(schemas.CreateAggregatorV2Response_AggregatorV2Arn, *v.AggregatorV2Arn)
 	}
-	serializeStringList(s, schemas.CreateAggregatorV2Response_LinkedRegions, v.LinkedRegions)
+	if v.LinkedRegions != nil {
+		serializeStringList(s, schemas.CreateAggregatorV2Response_LinkedRegions, v.LinkedRegions)
+	}
 	if v.RegionLinkingMode != nil {
 		s.WriteString(schemas.CreateAggregatorV2Response_RegionLinkingMode, *v.RegionLinkingMode)
 	}

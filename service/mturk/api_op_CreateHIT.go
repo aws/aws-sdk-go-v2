@@ -191,7 +191,9 @@ func (v *CreateHITInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HITLayoutId != nil {
 		s.WriteString(schemas.CreateHITRequest_HITLayoutId, *v.HITLayoutId)
 	}
-	serializeHITLayoutParameterList(s, schemas.CreateHITRequest_HITLayoutParameters, v.HITLayoutParameters)
+	if v.HITLayoutParameters != nil {
+		serializeHITLayoutParameterList(s, schemas.CreateHITRequest_HITLayoutParameters, v.HITLayoutParameters)
+	}
 	if v.HITReviewPolicy != nil {
 		s.WriteStruct(schemas.CreateHITRequest_HITReviewPolicy)
 		v.HITReviewPolicy.SerializeMembers(s)
@@ -206,7 +208,9 @@ func (v *CreateHITInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxAssignments != nil {
 		s.WriteInt32(schemas.CreateHITRequest_MaxAssignments, *v.MaxAssignments)
 	}
-	serializeQualificationRequirementList(s, schemas.CreateHITRequest_QualificationRequirements, v.QualificationRequirements)
+	if v.QualificationRequirements != nil {
+		serializeQualificationRequirementList(s, schemas.CreateHITRequest_QualificationRequirements, v.QualificationRequirements)
+	}
 	if v.Question != nil {
 		s.WriteString(schemas.CreateHITRequest_Question, *v.Question)
 	}

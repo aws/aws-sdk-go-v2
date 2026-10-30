@@ -77,7 +77,9 @@ func (v *ListRuleTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRuleTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleTypeList(s, schemas.ListRuleTypesOutput_ruleTypes, v.RuleTypes)
+	if v.RuleTypes != nil {
+		serializeRuleTypeList(s, schemas.ListRuleTypesOutput_ruleTypes, v.RuleTypes)
+	}
 }
 func (v *ListRuleTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRuleTypesOutput, func(s *smithy.Schema) error {

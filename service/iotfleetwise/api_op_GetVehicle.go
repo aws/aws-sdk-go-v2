@@ -105,7 +105,9 @@ func (v *GetVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetVehicleResponse_arn, *v.Arn)
 	}
-	serializeattributesMap(s, schemas.GetVehicleResponse_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeattributesMap(s, schemas.GetVehicleResponse_attributes, v.Attributes)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.GetVehicleResponse_creationTime, *v.CreationTime)
 	}
@@ -118,7 +120,9 @@ func (v *GetVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelManifestArn != nil {
 		s.WriteString(schemas.GetVehicleResponse_modelManifestArn, *v.ModelManifestArn)
 	}
-	serializeStateTemplateAssociations(s, schemas.GetVehicleResponse_stateTemplates, v.StateTemplates)
+	if v.StateTemplates != nil {
+		serializeStateTemplateAssociations(s, schemas.GetVehicleResponse_stateTemplates, v.StateTemplates)
+	}
 	if v.VehicleName != nil {
 		s.WriteString(schemas.GetVehicleResponse_vehicleName, *v.VehicleName)
 	}

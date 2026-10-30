@@ -81,7 +81,9 @@ func (v *ListPlaybackRestrictionPoliciesOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPlaybackRestrictionPoliciesResponse_nextToken, *v.NextToken)
 	}
-	serializePlaybackRestrictionPolicyList(s, schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, v.PlaybackRestrictionPolicies)
+	if v.PlaybackRestrictionPolicies != nil {
+		serializePlaybackRestrictionPolicyList(s, schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, v.PlaybackRestrictionPolicies)
+	}
 }
 func (v *ListPlaybackRestrictionPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPlaybackRestrictionPoliciesResponse, func(s *smithy.Schema) error {

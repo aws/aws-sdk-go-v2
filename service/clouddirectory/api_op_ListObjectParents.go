@@ -117,8 +117,12 @@ func (v *ListObjectParentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListObjectParentsResponse_NextToken, *v.NextToken)
 	}
-	serializeObjectIdentifierAndLinkNameList(s, schemas.ListObjectParentsResponse_ParentLinks, v.ParentLinks)
-	serializeObjectIdentifierToLinkNameMap(s, schemas.ListObjectParentsResponse_Parents, v.Parents)
+	if v.ParentLinks != nil {
+		serializeObjectIdentifierAndLinkNameList(s, schemas.ListObjectParentsResponse_ParentLinks, v.ParentLinks)
+	}
+	if v.Parents != nil {
+		serializeObjectIdentifierToLinkNameMap(s, schemas.ListObjectParentsResponse_Parents, v.Parents)
+	}
 }
 func (v *ListObjectParentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListObjectParentsResponse, func(s *smithy.Schema) error {

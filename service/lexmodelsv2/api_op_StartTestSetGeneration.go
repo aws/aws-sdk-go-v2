@@ -87,7 +87,9 @@ func (v *StartTestSetGenerationInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.TestSetName != nil {
 		s.WriteString(schemas.StartTestSetGenerationRequest_testSetName, *v.TestSetName)
 	}
-	serializeTagMap(s, schemas.StartTestSetGenerationRequest_testSetTags, v.TestSetTags)
+	if v.TestSetTags != nil {
+		serializeTagMap(s, schemas.StartTestSetGenerationRequest_testSetTags, v.TestSetTags)
+	}
 }
 
 type StartTestSetGenerationOutput struct {
@@ -161,7 +163,9 @@ func (v *StartTestSetGenerationOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.TestSetName != nil {
 		s.WriteString(schemas.StartTestSetGenerationResponse_testSetName, *v.TestSetName)
 	}
-	serializeTagMap(s, schemas.StartTestSetGenerationResponse_testSetTags, v.TestSetTags)
+	if v.TestSetTags != nil {
+		serializeTagMap(s, schemas.StartTestSetGenerationResponse_testSetTags, v.TestSetTags)
+	}
 }
 func (v *StartTestSetGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartTestSetGenerationResponse, func(s *smithy.Schema) error {

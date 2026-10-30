@@ -165,7 +165,9 @@ func (v *ListTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTasksResponse_nextToken, *v.NextToken)
 	}
-	serializeStringList(s, schemas.ListTasksResponse_taskArns, v.TaskArns)
+	if v.TaskArns != nil {
+		serializeStringList(s, schemas.ListTasksResponse_taskArns, v.TaskArns)
+	}
 }
 func (v *ListTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTasksResponse, func(s *smithy.Schema) error {

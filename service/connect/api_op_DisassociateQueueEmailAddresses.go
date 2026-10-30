@@ -82,7 +82,9 @@ func (v *DisassociateQueueEmailAddressesInput) SerializeMembers(s smithy.ShapeSe
 	if v.ClientToken != nil {
 		s.WriteString(schemas.DisassociateQueueEmailAddressesRequest_ClientToken, *v.ClientToken)
 	}
-	serializeEmailAddressIdList(s, schemas.DisassociateQueueEmailAddressesRequest_EmailAddressesId, v.EmailAddressesId)
+	if v.EmailAddressesId != nil {
+		serializeEmailAddressIdList(s, schemas.DisassociateQueueEmailAddressesRequest_EmailAddressesId, v.EmailAddressesId)
+	}
 	if v.InstanceId != nil {
 		s.WriteString(schemas.DisassociateQueueEmailAddressesRequest_InstanceId, *v.InstanceId)
 	}

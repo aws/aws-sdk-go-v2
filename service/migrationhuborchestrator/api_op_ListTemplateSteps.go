@@ -111,7 +111,9 @@ func (v *ListTemplateStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplateStepsResponse_nextToken, *v.NextToken)
 	}
-	serializeTemplateStepSummaryList(s, schemas.ListTemplateStepsResponse_templateStepSummaryList, v.TemplateStepSummaryList)
+	if v.TemplateStepSummaryList != nil {
+		serializeTemplateStepSummaryList(s, schemas.ListTemplateStepsResponse_templateStepSummaryList, v.TemplateStepSummaryList)
+	}
 }
 func (v *ListTemplateStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplateStepsResponse, func(s *smithy.Schema) error {

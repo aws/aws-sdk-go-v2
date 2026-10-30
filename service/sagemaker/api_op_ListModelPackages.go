@@ -141,7 +141,9 @@ func (v *ListModelPackagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListModelPackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeModelPackageSummaryList(s, schemas.ListModelPackagesOutput_ModelPackageSummaryList, v.ModelPackageSummaryList)
+	if v.ModelPackageSummaryList != nil {
+		serializeModelPackageSummaryList(s, schemas.ListModelPackagesOutput_ModelPackageSummaryList, v.ModelPackageSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListModelPackagesOutput_NextToken, *v.NextToken)
 	}

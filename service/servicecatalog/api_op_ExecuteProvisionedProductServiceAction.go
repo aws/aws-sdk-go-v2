@@ -74,7 +74,9 @@ func (v *ExecuteProvisionedProductServiceActionInput) SerializeMembers(s smithy.
 	if v.ExecuteToken != nil {
 		s.WriteString(schemas.ExecuteProvisionedProductServiceActionInput_ExecuteToken, *v.ExecuteToken)
 	}
-	serializeExecutionParameterMap(s, schemas.ExecuteProvisionedProductServiceActionInput_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeExecutionParameterMap(s, schemas.ExecuteProvisionedProductServiceActionInput_Parameters, v.Parameters)
+	}
 	if v.ProvisionedProductId != nil {
 		s.WriteString(schemas.ExecuteProvisionedProductServiceActionInput_ProvisionedProductId, *v.ProvisionedProductId)
 	}

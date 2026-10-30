@@ -111,7 +111,9 @@ func (v *CreateEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointConfigurations(s, schemas.CreateEndpointGroupRequest_EndpointConfigurations, v.EndpointConfigurations)
+	if v.EndpointConfigurations != nil {
+		serializeEndpointConfigurations(s, schemas.CreateEndpointGroupRequest_EndpointConfigurations, v.EndpointConfigurations)
+	}
 	if v.EndpointGroupRegion != nil {
 		s.WriteString(schemas.CreateEndpointGroupRequest_EndpointGroupRegion, *v.EndpointGroupRegion)
 	}
@@ -133,7 +135,9 @@ func (v *CreateEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ListenerArn != nil {
 		s.WriteString(schemas.CreateEndpointGroupRequest_ListenerArn, *v.ListenerArn)
 	}
-	serializePortOverrides(s, schemas.CreateEndpointGroupRequest_PortOverrides, v.PortOverrides)
+	if v.PortOverrides != nil {
+		serializePortOverrides(s, schemas.CreateEndpointGroupRequest_PortOverrides, v.PortOverrides)
+	}
 	if v.ThresholdCount != nil {
 		s.WriteInt32(schemas.CreateEndpointGroupRequest_ThresholdCount, *v.ThresholdCount)
 	}

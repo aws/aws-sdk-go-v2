@@ -70,7 +70,9 @@ func (v *UpdateResourceMetricsConfigurationInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *UpdateResourceMetricsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceMetricSelectionList(s, schemas.UpdateResourceMetricsConfigurationInput_MetricSelections, v.MetricSelections)
+	if v.MetricSelections != nil {
+		serializeResourceMetricSelectionList(s, schemas.UpdateResourceMetricsConfigurationInput_MetricSelections, v.MetricSelections)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateResourceMetricsConfigurationInput_ResourceArn, *v.ResourceArn)
 	}

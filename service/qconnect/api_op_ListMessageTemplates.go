@@ -87,7 +87,9 @@ func (v *ListMessageTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMessageTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateSummaryList(s, schemas.ListMessageTemplatesResponse_messageTemplateSummaries, v.MessageTemplateSummaries)
+	if v.MessageTemplateSummaries != nil {
+		serializeMessageTemplateSummaryList(s, schemas.ListMessageTemplatesResponse_messageTemplateSummaries, v.MessageTemplateSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMessageTemplatesResponse_nextToken, *v.NextToken)
 	}

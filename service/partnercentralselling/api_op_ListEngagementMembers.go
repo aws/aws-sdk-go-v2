@@ -99,7 +99,9 @@ func (v *ListEngagementMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEngagementMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEngagementMembers(s, schemas.ListEngagementMembersResponse_EngagementMemberList, v.EngagementMemberList)
+	if v.EngagementMemberList != nil {
+		serializeEngagementMembers(s, schemas.ListEngagementMembersResponse_EngagementMemberList, v.EngagementMemberList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEngagementMembersResponse_NextToken, *v.NextToken)
 	}

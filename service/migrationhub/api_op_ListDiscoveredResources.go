@@ -93,7 +93,9 @@ func (v *ListDiscoveredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDiscoveredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDiscoveredResourceList(s, schemas.ListDiscoveredResourcesResult_DiscoveredResourceList, v.DiscoveredResourceList)
+	if v.DiscoveredResourceList != nil {
+		serializeDiscoveredResourceList(s, schemas.ListDiscoveredResourcesResult_DiscoveredResourceList, v.DiscoveredResourceList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDiscoveredResourcesResult_NextToken, *v.NextToken)
 	}

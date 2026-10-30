@@ -117,7 +117,9 @@ func (v *ListTagsForStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HasMoreTags != nil {
 		s.WriteBool(schemas.ListTagsForStreamOutput_HasMoreTags, *v.HasMoreTags)
 	}
-	serializeTagList(s, schemas.ListTagsForStreamOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ListTagsForStreamOutput_Tags, v.Tags)
+	}
 }
 func (v *ListTagsForStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsForStreamOutput, func(s *smithy.Schema) error {

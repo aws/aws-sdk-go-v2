@@ -174,7 +174,9 @@ func (v *GetAttachmentUploadLinksOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.UploadId != nil {
 		s.WriteString(schemas.GetAttachmentUploadLinksResponse_uploadId, *v.UploadId)
 	}
-	serializeUploadUrlList(s, schemas.GetAttachmentUploadLinksResponse_uploadUrls, v.UploadUrls)
+	if v.UploadUrls != nil {
+		serializeUploadUrlList(s, schemas.GetAttachmentUploadLinksResponse_uploadUrls, v.UploadUrls)
+	}
 }
 func (v *GetAttachmentUploadLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAttachmentUploadLinksResponse, func(s *smithy.Schema) error {

@@ -86,7 +86,9 @@ func (v *CreateInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateInstanceRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeTagMap(s, schemas.CreateInstanceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateInstanceRequest_tags, v.Tags)
+	}
 	if v.WebAppDnsDomain != nil {
 		s.WriteString(schemas.CreateInstanceRequest_webAppDnsDomain, *v.WebAppDnsDomain)
 	}

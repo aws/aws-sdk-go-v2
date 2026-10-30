@@ -140,7 +140,9 @@ func (v *DescribeTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EndTime != nil {
 		s.WriteTime(schemas.DescribeTrialComponentResponse_EndTime, *v.EndTime)
 	}
-	serializeTrialComponentArtifacts(s, schemas.DescribeTrialComponentResponse_InputArtifacts, v.InputArtifacts)
+	if v.InputArtifacts != nil {
+		serializeTrialComponentArtifacts(s, schemas.DescribeTrialComponentResponse_InputArtifacts, v.InputArtifacts)
+	}
 	if v.LastModifiedBy != nil {
 		s.WriteStruct(schemas.DescribeTrialComponentResponse_LastModifiedBy)
 		v.LastModifiedBy.SerializeMembers(s)
@@ -157,15 +159,23 @@ func (v *DescribeTrialComponentOutput) SerializeMembers(s smithy.ShapeSerializer
 		v.MetadataProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTrialComponentMetricSummaries(s, schemas.DescribeTrialComponentResponse_Metrics, v.Metrics)
-	serializeTrialComponentArtifacts(s, schemas.DescribeTrialComponentResponse_OutputArtifacts, v.OutputArtifacts)
-	serializeTrialComponentParameters(s, schemas.DescribeTrialComponentResponse_Parameters, v.Parameters)
+	if v.Metrics != nil {
+		serializeTrialComponentMetricSummaries(s, schemas.DescribeTrialComponentResponse_Metrics, v.Metrics)
+	}
+	if v.OutputArtifacts != nil {
+		serializeTrialComponentArtifacts(s, schemas.DescribeTrialComponentResponse_OutputArtifacts, v.OutputArtifacts)
+	}
+	if v.Parameters != nil {
+		serializeTrialComponentParameters(s, schemas.DescribeTrialComponentResponse_Parameters, v.Parameters)
+	}
 	if v.Source != nil {
 		s.WriteStruct(schemas.DescribeTrialComponentResponse_Source)
 		v.Source.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTrialComponentSources(s, schemas.DescribeTrialComponentResponse_Sources, v.Sources)
+	if v.Sources != nil {
+		serializeTrialComponentSources(s, schemas.DescribeTrialComponentResponse_Sources, v.Sources)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.DescribeTrialComponentResponse_StartTime, *v.StartTime)
 	}

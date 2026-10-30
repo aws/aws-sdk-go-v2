@@ -166,7 +166,9 @@ func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamName != nil {
 		s.WriteString(schemas.CreateStreamInput_StreamName, *v.StreamName)
 	}
-	serializeTagMap(s, schemas.CreateStreamInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateStreamInput_Tags, v.Tags)
+	}
 	if v.WarmThroughputMiBps != nil {
 		s.WriteInt32(schemas.CreateStreamInput_WarmThroughputMiBps, *v.WarmThroughputMiBps)
 	}

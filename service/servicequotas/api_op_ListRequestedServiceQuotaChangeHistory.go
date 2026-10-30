@@ -116,7 +116,9 @@ func (v *ListRequestedServiceQuotaChangeHistoryOutput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryResponse_NextToken, *v.NextToken)
 	}
-	serializeRequestedServiceQuotaChangeHistoryListDefinition(s, schemas.ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas, v.RequestedQuotas)
+	if v.RequestedQuotas != nil {
+		serializeRequestedServiceQuotaChangeHistoryListDefinition(s, schemas.ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas, v.RequestedQuotas)
+	}
 }
 func (v *ListRequestedServiceQuotaChangeHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRequestedServiceQuotaChangeHistoryResponse, func(s *smithy.Schema) error {

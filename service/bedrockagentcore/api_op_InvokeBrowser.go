@@ -76,7 +76,9 @@ func (v *InvokeBrowserInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvokeBrowserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrowserAction(s, schemas.InvokeBrowserRequest_action, v.Action)
+	if v.Action != nil {
+		serializeBrowserAction(s, schemas.InvokeBrowserRequest_action, v.Action)
+	}
 	if v.BrowserIdentifier != nil {
 		s.WriteString(schemas.InvokeBrowserRequest_browserIdentifier, *v.BrowserIdentifier)
 	}
@@ -112,7 +114,9 @@ func (v *InvokeBrowserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvokeBrowserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrowserActionResult(s, schemas.InvokeBrowserResponse_result, v.Result)
+	if v.Result != nil {
+		serializeBrowserActionResult(s, schemas.InvokeBrowserResponse_result, v.Result)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.InvokeBrowserResponse_sessionId, *v.SessionId)
 	}

@@ -70,7 +70,9 @@ func (v *DescribePhoneNumbersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePhoneNumberFilterList(s, schemas.DescribePhoneNumbersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializePhoneNumberFilterList(s, schemas.DescribePhoneNumbersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribePhoneNumbersRequest_MaxResults, *v.MaxResults)
 	}
@@ -80,7 +82,9 @@ func (v *DescribePhoneNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != "" {
 		s.WriteString(schemas.DescribePhoneNumbersRequest_Owner, string(v.Owner))
 	}
-	serializePhoneNumberIdList(s, schemas.DescribePhoneNumbersRequest_PhoneNumberIds, v.PhoneNumberIds)
+	if v.PhoneNumberIds != nil {
+		serializePhoneNumberIdList(s, schemas.DescribePhoneNumbersRequest_PhoneNumberIds, v.PhoneNumberIds)
+	}
 }
 
 type DescribePhoneNumbersOutput struct {
@@ -109,7 +113,9 @@ func (v *DescribePhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribePhoneNumbersResult_NextToken, *v.NextToken)
 	}
-	serializePhoneNumberInformationList(s, schemas.DescribePhoneNumbersResult_PhoneNumbers, v.PhoneNumbers)
+	if v.PhoneNumbers != nil {
+		serializePhoneNumberInformationList(s, schemas.DescribePhoneNumbersResult_PhoneNumbers, v.PhoneNumbers)
+	}
 }
 func (v *DescribePhoneNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePhoneNumbersResult, func(s *smithy.Schema) error {

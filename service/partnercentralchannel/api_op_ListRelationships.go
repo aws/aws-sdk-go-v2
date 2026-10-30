@@ -65,19 +65,27 @@ func (v *ListRelationshipsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRelationshipsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.ListRelationshipsRequest_associatedAccountIds, v.AssociatedAccountIds)
-	serializeAssociationTypeList(s, schemas.ListRelationshipsRequest_associationTypes, v.AssociationTypes)
+	if v.AssociatedAccountIds != nil {
+		serializeAccountIdList(s, schemas.ListRelationshipsRequest_associatedAccountIds, v.AssociatedAccountIds)
+	}
+	if v.AssociationTypes != nil {
+		serializeAssociationTypeList(s, schemas.ListRelationshipsRequest_associationTypes, v.AssociationTypes)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListRelationshipsRequest_catalog, *v.Catalog)
 	}
-	serializeRelationshipDisplayNameList(s, schemas.ListRelationshipsRequest_displayNames, v.DisplayNames)
+	if v.DisplayNames != nil {
+		serializeRelationshipDisplayNameList(s, schemas.ListRelationshipsRequest_displayNames, v.DisplayNames)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListRelationshipsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRelationshipsRequest_nextToken, *v.NextToken)
 	}
-	serializeProgramManagementAccountIdentifierList(s, schemas.ListRelationshipsRequest_programManagementAccountIdentifiers, v.ProgramManagementAccountIdentifiers)
+	if v.ProgramManagementAccountIdentifiers != nil {
+		serializeProgramManagementAccountIdentifierList(s, schemas.ListRelationshipsRequest_programManagementAccountIdentifiers, v.ProgramManagementAccountIdentifiers)
+	}
 	if v.Sort != nil {
 		s.WriteStruct(schemas.ListRelationshipsRequest_sort)
 		v.Sort.SerializeMembers(s)
@@ -106,7 +114,9 @@ func (v *ListRelationshipsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRelationshipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelationshipSummaries(s, schemas.ListRelationshipsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeRelationshipSummaries(s, schemas.ListRelationshipsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRelationshipsResponse_nextToken, *v.NextToken)
 	}

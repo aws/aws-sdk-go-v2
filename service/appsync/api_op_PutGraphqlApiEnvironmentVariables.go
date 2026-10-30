@@ -107,7 +107,9 @@ func (v *PutGraphqlApiEnvironmentVariablesInput) SerializeMembers(s smithy.Shape
 	if v.ApiId != nil {
 		s.WriteString(schemas.PutGraphqlApiEnvironmentVariablesRequest_apiId, *v.ApiId)
 	}
-	serializeEnvironmentVariableMap(s, schemas.PutGraphqlApiEnvironmentVariablesRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariableMap(s, schemas.PutGraphqlApiEnvironmentVariablesRequest_environmentVariables, v.EnvironmentVariables)
+	}
 }
 
 type PutGraphqlApiEnvironmentVariablesOutput struct {
@@ -129,7 +131,9 @@ func (v *PutGraphqlApiEnvironmentVariablesOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *PutGraphqlApiEnvironmentVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEnvironmentVariableMap(s, schemas.PutGraphqlApiEnvironmentVariablesResponse_environmentVariables, v.EnvironmentVariables)
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariableMap(s, schemas.PutGraphqlApiEnvironmentVariablesResponse_environmentVariables, v.EnvironmentVariables)
+	}
 }
 func (v *PutGraphqlApiEnvironmentVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutGraphqlApiEnvironmentVariablesResponse, func(s *smithy.Schema) error {

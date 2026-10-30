@@ -82,7 +82,9 @@ func (v *GetTagKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PaginationToken != nil {
 		s.WriteString(schemas.GetTagKeysOutput_PaginationToken, *v.PaginationToken)
 	}
-	serializeTagKeyList(s, schemas.GetTagKeysOutput_TagKeys, v.TagKeys)
+	if v.TagKeys != nil {
+		serializeTagKeyList(s, schemas.GetTagKeysOutput_TagKeys, v.TagKeys)
+	}
 }
 func (v *GetTagKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTagKeysOutput, func(s *smithy.Schema) error {

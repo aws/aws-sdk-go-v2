@@ -128,7 +128,9 @@ func (v *GetReferenceImportJobOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetReferenceImportJobResponse_roleArn, *v.RoleArn)
 	}
-	serializeImportReferenceSourceList(s, schemas.GetReferenceImportJobResponse_sources, v.Sources)
+	if v.Sources != nil {
+		serializeImportReferenceSourceList(s, schemas.GetReferenceImportJobResponse_sources, v.Sources)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetReferenceImportJobResponse_status, string(v.Status))
 	}

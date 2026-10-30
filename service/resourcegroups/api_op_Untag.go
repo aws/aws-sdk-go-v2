@@ -58,7 +58,9 @@ func (v *UntagInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UntagInput_Arn, *v.Arn)
 	}
-	serializeTagKeyList(s, schemas.UntagInput_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeTagKeyList(s, schemas.UntagInput_Keys, v.Keys)
+	}
 }
 
 type UntagOutput struct {
@@ -86,7 +88,9 @@ func (v *UntagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UntagOutput_Arn, *v.Arn)
 	}
-	serializeTagKeyList(s, schemas.UntagOutput_Keys, v.Keys)
+	if v.Keys != nil {
+		serializeTagKeyList(s, schemas.UntagOutput_Keys, v.Keys)
+	}
 }
 func (v *UntagOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UntagOutput, func(s *smithy.Schema) error {

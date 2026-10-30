@@ -101,7 +101,9 @@ func (v *ListManagedViewsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListManagedViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeManagedViewArnList(s, schemas.ListManagedViewsOutput_ManagedViews, v.ManagedViews)
+	if v.ManagedViews != nil {
+		serializeManagedViewArnList(s, schemas.ListManagedViewsOutput_ManagedViews, v.ManagedViews)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListManagedViewsOutput_NextToken, *v.NextToken)
 	}

@@ -124,7 +124,9 @@ func (v *UpdateOrganizationConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.DetectorId != nil {
 		s.WriteString(schemas.UpdateOrganizationConfigurationRequest_DetectorId, *v.DetectorId)
 	}
-	serializeOrganizationFeaturesConfigurations(s, schemas.UpdateOrganizationConfigurationRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeOrganizationFeaturesConfigurations(s, schemas.UpdateOrganizationConfigurationRequest_Features, v.Features)
+	}
 }
 
 type UpdateOrganizationConfigurationOutput struct {

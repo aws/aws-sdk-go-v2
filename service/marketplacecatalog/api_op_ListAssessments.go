@@ -80,7 +80,9 @@ func (v *ListAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListAssessmentsRequest_Catalog, *v.Catalog)
 	}
-	serializeFrameworkFilters(s, schemas.ListAssessmentsRequest_FrameworkFilters, v.FrameworkFilters)
+	if v.FrameworkFilters != nil {
+		serializeFrameworkFilters(s, schemas.ListAssessmentsRequest_FrameworkFilters, v.FrameworkFilters)
+	}
 	if v.FrameworkId != nil {
 		s.WriteString(schemas.ListAssessmentsRequest_FrameworkId, *v.FrameworkId)
 	}
@@ -113,7 +115,9 @@ func (v *ListAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentSummaryList(s, schemas.ListAssessmentsResponse_AssessmentSummaryList, v.AssessmentSummaryList)
+	if v.AssessmentSummaryList != nil {
+		serializeAssessmentSummaryList(s, schemas.ListAssessmentsResponse_AssessmentSummaryList, v.AssessmentSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssessmentsResponse_NextToken, *v.NextToken)
 	}

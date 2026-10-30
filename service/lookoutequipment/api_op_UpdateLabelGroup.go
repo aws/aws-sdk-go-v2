@@ -48,7 +48,9 @@ func (v *UpdateLabelGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateLabelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFaultCodes(s, schemas.UpdateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	if v.FaultCodes != nil {
+		serializeFaultCodes(s, schemas.UpdateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	}
 	if v.LabelGroupName != nil {
 		s.WriteString(schemas.UpdateLabelGroupRequest_LabelGroupName, *v.LabelGroupName)
 	}

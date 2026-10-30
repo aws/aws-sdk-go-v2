@@ -185,7 +185,9 @@ func (v *GetCostComparisonDriversInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Filter.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroupDefinitions(s, schemas.GetCostComparisonDriversRequest_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupDefinitions(s, schemas.GetCostComparisonDriversRequest_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetCostComparisonDriversRequest_MaxResults, *v.MaxResults)
 	}
@@ -219,7 +221,9 @@ func (v *GetCostComparisonDriversOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCostComparisonDriversOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostComparisonDrivers(s, schemas.GetCostComparisonDriversResponse_CostComparisonDrivers, v.CostComparisonDrivers)
+	if v.CostComparisonDrivers != nil {
+		serializeCostComparisonDrivers(s, schemas.GetCostComparisonDriversResponse_CostComparisonDrivers, v.CostComparisonDrivers)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetCostComparisonDriversResponse_NextPageToken, *v.NextPageToken)
 	}

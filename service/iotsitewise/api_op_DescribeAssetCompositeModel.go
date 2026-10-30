@@ -139,7 +139,9 @@ func (v *DescribeAssetCompositeModelOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeAssetCompositeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionDefinitions(s, schemas.DescribeAssetCompositeModelResponse_actionDefinitions, v.ActionDefinitions)
+	if v.ActionDefinitions != nil {
+		serializeActionDefinitions(s, schemas.DescribeAssetCompositeModelResponse_actionDefinitions, v.ActionDefinitions)
+	}
 	if v.AssetCompositeModelDescription != nil {
 		s.WriteString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelDescription, *v.AssetCompositeModelDescription)
 	}
@@ -152,9 +154,15 @@ func (v *DescribeAssetCompositeModelOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.AssetCompositeModelName != nil {
 		s.WriteString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelName, *v.AssetCompositeModelName)
 	}
-	serializeAssetCompositeModelPath(s, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelPath, v.AssetCompositeModelPath)
-	serializeAssetProperties(s, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelProperties, v.AssetCompositeModelProperties)
-	serializeAssetCompositeModelSummaries(s, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelSummaries, v.AssetCompositeModelSummaries)
+	if v.AssetCompositeModelPath != nil {
+		serializeAssetCompositeModelPath(s, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelPath, v.AssetCompositeModelPath)
+	}
+	if v.AssetCompositeModelProperties != nil {
+		serializeAssetProperties(s, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelProperties, v.AssetCompositeModelProperties)
+	}
+	if v.AssetCompositeModelSummaries != nil {
+		serializeAssetCompositeModelSummaries(s, schemas.DescribeAssetCompositeModelResponse_assetCompositeModelSummaries, v.AssetCompositeModelSummaries)
+	}
 	if v.AssetCompositeModelType != nil {
 		s.WriteString(schemas.DescribeAssetCompositeModelResponse_assetCompositeModelType, *v.AssetCompositeModelType)
 	}

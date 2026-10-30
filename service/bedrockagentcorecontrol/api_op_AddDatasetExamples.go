@@ -68,7 +68,9 @@ func (v *AddDatasetExamplesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetId != nil {
 		s.WriteString(schemas.AddDatasetExamplesRequest_datasetId, *v.DatasetId)
 	}
-	serializeDataSourceType(s, schemas.AddDatasetExamplesRequest_source, v.Source)
+	if v.Source != nil {
+		serializeDataSourceType(s, schemas.AddDatasetExamplesRequest_source, v.Source)
+	}
 }
 
 type AddDatasetExamplesOutput struct {
@@ -125,7 +127,9 @@ func (v *AddDatasetExamplesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatasetId != nil {
 		s.WriteString(schemas.AddDatasetExamplesResponse_datasetId, *v.DatasetId)
 	}
-	serializeExampleIdList(s, schemas.AddDatasetExamplesResponse_exampleIds, v.ExampleIds)
+	if v.ExampleIds != nil {
+		serializeExampleIdList(s, schemas.AddDatasetExamplesResponse_exampleIds, v.ExampleIds)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AddDatasetExamplesResponse_status, string(v.Status))
 	}

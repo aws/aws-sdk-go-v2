@@ -89,7 +89,9 @@ func (v *ListFoldersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFoldersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFolderSummaryList(s, schemas.ListFoldersResponse_FolderSummaryList, v.FolderSummaryList)
+	if v.FolderSummaryList != nil {
+		serializeFolderSummaryList(s, schemas.ListFoldersResponse_FolderSummaryList, v.FolderSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFoldersResponse_NextToken, *v.NextToken)
 	}

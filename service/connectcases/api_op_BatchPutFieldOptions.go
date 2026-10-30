@@ -60,7 +60,9 @@ func (v *BatchPutFieldOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FieldId != nil {
 		s.WriteString(schemas.BatchPutFieldOptionsRequest_fieldId, *v.FieldId)
 	}
-	serializeFieldOptionsList(s, schemas.BatchPutFieldOptionsRequest_options, v.Options)
+	if v.Options != nil {
+		serializeFieldOptionsList(s, schemas.BatchPutFieldOptionsRequest_options, v.Options)
+	}
 }
 func (v *BatchPutFieldOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutFieldOptionsRequest, func(s *smithy.Schema) error {
@@ -96,7 +98,9 @@ func (v *BatchPutFieldOptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutFieldOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldOptionErrorList(s, schemas.BatchPutFieldOptionsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeFieldOptionErrorList(s, schemas.BatchPutFieldOptionsResponse_errors, v.Errors)
+	}
 }
 func (v *BatchPutFieldOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutFieldOptionsResponse, func(s *smithy.Schema) error {

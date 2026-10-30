@@ -190,7 +190,9 @@ func (v *DescribeDatasetImportJobOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.EstimatedTimeRemainingInMinutes != nil {
 		s.WriteInt64(schemas.DescribeDatasetImportJobResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
 	}
-	serializeFieldStatistics(s, schemas.DescribeDatasetImportJobResponse_FieldStatistics, v.FieldStatistics)
+	if v.FieldStatistics != nil {
+		serializeFieldStatistics(s, schemas.DescribeDatasetImportJobResponse_FieldStatistics, v.FieldStatistics)
+	}
 	if v.Format != nil {
 		s.WriteString(schemas.DescribeDatasetImportJobResponse_Format, *v.Format)
 	}

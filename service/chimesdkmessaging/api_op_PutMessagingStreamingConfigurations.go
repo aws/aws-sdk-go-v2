@@ -54,7 +54,9 @@ func (v *PutMessagingStreamingConfigurationsInput) SerializeMembers(s smithy.Sha
 	if v.AppInstanceArn != nil {
 		s.WriteString(schemas.PutMessagingStreamingConfigurationsRequest_AppInstanceArn, *v.AppInstanceArn)
 	}
-	serializeStreamingConfigurationList(s, schemas.PutMessagingStreamingConfigurationsRequest_StreamingConfigurations, v.StreamingConfigurations)
+	if v.StreamingConfigurations != nil {
+		serializeStreamingConfigurationList(s, schemas.PutMessagingStreamingConfigurationsRequest_StreamingConfigurations, v.StreamingConfigurations)
+	}
 }
 
 type PutMessagingStreamingConfigurationsOutput struct {
@@ -75,7 +77,9 @@ func (v *PutMessagingStreamingConfigurationsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *PutMessagingStreamingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStreamingConfigurationList(s, schemas.PutMessagingStreamingConfigurationsResponse_StreamingConfigurations, v.StreamingConfigurations)
+	if v.StreamingConfigurations != nil {
+		serializeStreamingConfigurationList(s, schemas.PutMessagingStreamingConfigurationsResponse_StreamingConfigurations, v.StreamingConfigurations)
+	}
 }
 func (v *PutMessagingStreamingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutMessagingStreamingConfigurationsResponse, func(s *smithy.Schema) error {

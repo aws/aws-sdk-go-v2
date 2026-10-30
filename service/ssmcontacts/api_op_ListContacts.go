@@ -86,7 +86,9 @@ func (v *ListContactsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactsList(s, schemas.ListContactsResult_Contacts, v.Contacts)
+	if v.Contacts != nil {
+		serializeContactsList(s, schemas.ListContactsResult_Contacts, v.Contacts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContactsResult_NextToken, *v.NextToken)
 	}

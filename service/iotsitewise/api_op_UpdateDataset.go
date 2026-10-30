@@ -94,7 +94,9 @@ func (v *UpdateDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DatasetSource.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMetadata(s, schemas.UpdateDatasetRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.UpdateDatasetRequest_metadata, v.Metadata)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.UpdateDatasetRequest_workspaceName, *v.WorkspaceName)
 	}

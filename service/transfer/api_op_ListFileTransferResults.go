@@ -119,7 +119,9 @@ func (v *ListFileTransferResultsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFileTransferResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorFileTransferResults(s, schemas.ListFileTransferResultsResponse_FileTransferResults, v.FileTransferResults)
+	if v.FileTransferResults != nil {
+		serializeConnectorFileTransferResults(s, schemas.ListFileTransferResultsResponse_FileTransferResults, v.FileTransferResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFileTransferResultsResponse_NextToken, *v.NextToken)
 	}

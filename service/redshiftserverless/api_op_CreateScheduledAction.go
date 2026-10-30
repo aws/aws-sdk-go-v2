@@ -118,7 +118,9 @@ func (v *CreateScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateScheduledActionRequest_roleArn, *v.RoleArn)
 	}
-	serializeSchedule(s, schemas.CreateScheduledActionRequest_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeSchedule(s, schemas.CreateScheduledActionRequest_schedule, v.Schedule)
+	}
 	if v.ScheduledActionDescription != nil {
 		s.WriteString(schemas.CreateScheduledActionRequest_scheduledActionDescription, *v.ScheduledActionDescription)
 	}
@@ -128,7 +130,9 @@ func (v *CreateScheduledActionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StartTime != nil {
 		s.WriteTime(schemas.CreateScheduledActionRequest_startTime, *v.StartTime)
 	}
-	serializeTargetAction(s, schemas.CreateScheduledActionRequest_targetAction, v.TargetAction)
+	if v.TargetAction != nil {
+		serializeTargetAction(s, schemas.CreateScheduledActionRequest_targetAction, v.TargetAction)
+	}
 }
 
 type CreateScheduledActionOutput struct {

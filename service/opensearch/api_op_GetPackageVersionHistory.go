@@ -102,7 +102,9 @@ func (v *GetPackageVersionHistoryOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.PackageID != nil {
 		s.WriteString(schemas.GetPackageVersionHistoryResponse_PackageID, *v.PackageID)
 	}
-	serializePackageVersionHistoryList(s, schemas.GetPackageVersionHistoryResponse_PackageVersionHistoryList, v.PackageVersionHistoryList)
+	if v.PackageVersionHistoryList != nil {
+		serializePackageVersionHistoryList(s, schemas.GetPackageVersionHistoryResponse_PackageVersionHistoryList, v.PackageVersionHistoryList)
+	}
 }
 func (v *GetPackageVersionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPackageVersionHistoryResponse, func(s *smithy.Schema) error {

@@ -120,7 +120,9 @@ func (v *SearchAvailablePhoneNumbersOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SearchAvailablePhoneNumbersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailableNumbersList(s, schemas.SearchAvailablePhoneNumbersResponse_AvailableNumbersList, v.AvailableNumbersList)
+	if v.AvailableNumbersList != nil {
+		serializeAvailableNumbersList(s, schemas.SearchAvailablePhoneNumbersResponse_AvailableNumbersList, v.AvailableNumbersList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchAvailablePhoneNumbersResponse_NextToken, *v.NextToken)
 	}

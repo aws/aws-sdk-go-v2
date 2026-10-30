@@ -62,7 +62,9 @@ func (v *QuerySchemaVersionMetadataInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.QuerySchemaVersionMetadataInput_MaxResults, *v.MaxResults)
 	}
-	serializeMetadataList(s, schemas.QuerySchemaVersionMetadataInput_MetadataList, v.MetadataList)
+	if v.MetadataList != nil {
+		serializeMetadataList(s, schemas.QuerySchemaVersionMetadataInput_MetadataList, v.MetadataList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.QuerySchemaVersionMetadataInput_NextToken, *v.NextToken)
 	}
@@ -106,7 +108,9 @@ func (v *QuerySchemaVersionMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QuerySchemaVersionMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataInfoMap(s, schemas.QuerySchemaVersionMetadataResponse_MetadataInfoMap, v.MetadataInfoMap)
+	if v.MetadataInfoMap != nil {
+		serializeMetadataInfoMap(s, schemas.QuerySchemaVersionMetadataResponse_MetadataInfoMap, v.MetadataInfoMap)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.QuerySchemaVersionMetadataResponse_NextToken, *v.NextToken)
 	}

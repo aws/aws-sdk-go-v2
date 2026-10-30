@@ -63,7 +63,9 @@ func (v *BatchAssociateDataSegmentsToDatasetInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *BatchAssociateDataSegmentsToDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociateDataSegmentEntries(s, schemas.BatchAssociateDataSegmentsToDatasetRequest_associateDataSegmentEntries, v.AssociateDataSegmentEntries)
+	if v.AssociateDataSegmentEntries != nil {
+		serializeAssociateDataSegmentEntries(s, schemas.BatchAssociateDataSegmentsToDatasetRequest_associateDataSegmentEntries, v.AssociateDataSegmentEntries)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchAssociateDataSegmentsToDatasetRequest_clientToken, *v.ClientToken)
 	}
@@ -111,7 +113,9 @@ func (v *BatchAssociateDataSegmentsToDatasetOutput) SerializeMembers(s smithy.Sh
 	if v.DatasetVersion != nil {
 		s.WriteString(schemas.BatchAssociateDataSegmentsToDatasetResponse_datasetVersion, *v.DatasetVersion)
 	}
-	serializeFailedDataSegmentAssociations(s, schemas.BatchAssociateDataSegmentsToDatasetResponse_failedAssociations, v.FailedAssociations)
+	if v.FailedAssociations != nil {
+		serializeFailedDataSegmentAssociations(s, schemas.BatchAssociateDataSegmentsToDatasetResponse_failedAssociations, v.FailedAssociations)
+	}
 }
 func (v *BatchAssociateDataSegmentsToDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchAssociateDataSegmentsToDatasetResponse, func(s *smithy.Schema) error {

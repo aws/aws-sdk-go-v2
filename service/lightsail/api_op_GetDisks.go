@@ -77,7 +77,9 @@ func (v *GetDisksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDisksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDiskList(s, schemas.GetDisksResult_disks, v.Disks)
+	if v.Disks != nil {
+		serializeDiskList(s, schemas.GetDisksResult_disks, v.Disks)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetDisksResult_nextPageToken, *v.NextPageToken)
 	}

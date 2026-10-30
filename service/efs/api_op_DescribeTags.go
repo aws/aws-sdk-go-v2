@@ -110,7 +110,9 @@ func (v *DescribeTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.DescribeTagsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeTags(s, schemas.DescribeTagsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeTagsResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeTagsResponse, func(s *smithy.Schema) error {

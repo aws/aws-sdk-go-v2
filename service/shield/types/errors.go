@@ -290,7 +290,9 @@ func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFieldList(s, schemas.InvalidParameterException_fields, v.Fields)
+	if v.Fields != nil {
+		serializeValidationExceptionFieldList(s, schemas.InvalidParameterException_fields, v.Fields)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.InvalidParameterException_message, *v.Message)
 	}

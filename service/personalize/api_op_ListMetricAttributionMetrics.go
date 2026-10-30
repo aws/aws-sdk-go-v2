@@ -84,7 +84,9 @@ func (v *ListMetricAttributionMetricsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ListMetricAttributionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricAttributes(s, schemas.ListMetricAttributionMetricsResponse_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricAttributes(s, schemas.ListMetricAttributionMetricsResponse_metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetricAttributionMetricsResponse_nextToken, *v.NextToken)
 	}

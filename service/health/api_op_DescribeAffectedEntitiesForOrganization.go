@@ -93,8 +93,12 @@ func (v *DescribeAffectedEntitiesForOrganizationInput) SerializeMembers(s smithy
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAffectedEntitiesForOrganizationRequest_nextToken, *v.NextToken)
 	}
-	serializeOrganizationEntityAccountFiltersList(s, schemas.DescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters, v.OrganizationEntityAccountFilters)
-	serializeOrganizationEntityFiltersList(s, schemas.DescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters, v.OrganizationEntityFilters)
+	if v.OrganizationEntityAccountFilters != nil {
+		serializeOrganizationEntityAccountFiltersList(s, schemas.DescribeAffectedEntitiesForOrganizationRequest_organizationEntityAccountFilters, v.OrganizationEntityAccountFilters)
+	}
+	if v.OrganizationEntityFilters != nil {
+		serializeOrganizationEntityFiltersList(s, schemas.DescribeAffectedEntitiesForOrganizationRequest_organizationEntityFilters, v.OrganizationEntityFilters)
+	}
 }
 
 type DescribeAffectedEntitiesForOrganizationOutput struct {
@@ -127,8 +131,12 @@ func (v *DescribeAffectedEntitiesForOrganizationOutput) Serialize(s smithy.Shape
 }
 
 func (v *DescribeAffectedEntitiesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityList(s, schemas.DescribeAffectedEntitiesForOrganizationResponse_entities, v.Entities)
-	serializeDescribeAffectedEntitiesForOrganizationFailedSet(s, schemas.DescribeAffectedEntitiesForOrganizationResponse_failedSet, v.FailedSet)
+	if v.Entities != nil {
+		serializeEntityList(s, schemas.DescribeAffectedEntitiesForOrganizationResponse_entities, v.Entities)
+	}
+	if v.FailedSet != nil {
+		serializeDescribeAffectedEntitiesForOrganizationFailedSet(s, schemas.DescribeAffectedEntitiesForOrganizationResponse_failedSet, v.FailedSet)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAffectedEntitiesForOrganizationResponse_nextToken, *v.NextToken)
 	}

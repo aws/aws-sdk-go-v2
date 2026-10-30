@@ -180,7 +180,9 @@ func (v *DescribeReservationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.DescribeReservationResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.DescribeReservationResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeReservationResponse_Tags, v.Tags)
+	}
 	if v.UsagePrice != nil {
 		s.WriteFloat64(schemas.DescribeReservationResponse_UsagePrice, *v.UsagePrice)
 	}

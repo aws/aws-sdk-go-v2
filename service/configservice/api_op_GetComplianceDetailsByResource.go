@@ -67,7 +67,9 @@ func (v *GetComplianceDetailsByResourceInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetComplianceDetailsByResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceTypes(s, schemas.GetComplianceDetailsByResourceRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.ComplianceTypes != nil {
+		serializeComplianceTypes(s, schemas.GetComplianceDetailsByResourceRequest_ComplianceTypes, v.ComplianceTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetComplianceDetailsByResourceRequest_NextToken, *v.NextToken)
 	}
@@ -105,7 +107,9 @@ func (v *GetComplianceDetailsByResourceOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetComplianceDetailsByResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationResults(s, schemas.GetComplianceDetailsByResourceResponse_EvaluationResults, v.EvaluationResults)
+	if v.EvaluationResults != nil {
+		serializeEvaluationResults(s, schemas.GetComplianceDetailsByResourceResponse_EvaluationResults, v.EvaluationResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetComplianceDetailsByResourceResponse_NextToken, *v.NextToken)
 	}

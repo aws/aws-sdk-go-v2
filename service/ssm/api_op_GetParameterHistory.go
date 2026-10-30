@@ -107,7 +107,9 @@ func (v *GetParameterHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetParameterHistoryResult_NextToken, *v.NextToken)
 	}
-	serializeParameterHistoryList(s, schemas.GetParameterHistoryResult_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterHistoryList(s, schemas.GetParameterHistoryResult_Parameters, v.Parameters)
+	}
 }
 func (v *GetParameterHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetParameterHistoryResult, func(s *smithy.Schema) error {

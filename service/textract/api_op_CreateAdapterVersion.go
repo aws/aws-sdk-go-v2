@@ -112,7 +112,9 @@ func (v *CreateAdapterVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateAdapterVersionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAdapterVersionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAdapterVersionOutput struct {

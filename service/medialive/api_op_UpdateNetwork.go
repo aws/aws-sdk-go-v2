@@ -61,14 +61,18 @@ func (v *UpdateNetworkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfIpPoolUpdateRequest(s, schemas.UpdateNetworkRequest_IpPools, v.IpPools)
+	if v.IpPools != nil {
+		serialize__listOfIpPoolUpdateRequest(s, schemas.UpdateNetworkRequest_IpPools, v.IpPools)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateNetworkRequest_Name, *v.Name)
 	}
 	if v.NetworkId != nil {
 		s.WriteString(schemas.UpdateNetworkRequest_NetworkId, *v.NetworkId)
 	}
-	serialize__listOfRouteUpdateRequest(s, schemas.UpdateNetworkRequest_Routes, v.Routes)
+	if v.Routes != nil {
+		serialize__listOfRouteUpdateRequest(s, schemas.UpdateNetworkRequest_Routes, v.Routes)
+	}
 }
 
 // Placeholder documentation for UpdateNetworkResponse
@@ -118,15 +122,21 @@ func (v *UpdateNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateNetworkResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.UpdateNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.AssociatedClusterIds != nil {
+		serialize__listOf__string(s, schemas.UpdateNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateNetworkResponse_Id, *v.Id)
 	}
-	serialize__listOfIpPool(s, schemas.UpdateNetworkResponse_IpPools, v.IpPools)
+	if v.IpPools != nil {
+		serialize__listOfIpPool(s, schemas.UpdateNetworkResponse_IpPools, v.IpPools)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateNetworkResponse_Name, *v.Name)
 	}
-	serialize__listOfRoute(s, schemas.UpdateNetworkResponse_Routes, v.Routes)
+	if v.Routes != nil {
+		serialize__listOfRoute(s, schemas.UpdateNetworkResponse_Routes, v.Routes)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.UpdateNetworkResponse_State, string(v.State))
 	}

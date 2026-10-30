@@ -74,7 +74,9 @@ func (v *GetContainerImagesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetContainerImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContainerImageList(s, schemas.GetContainerImagesResult_containerImages, v.ContainerImages)
+	if v.ContainerImages != nil {
+		serializeContainerImageList(s, schemas.GetContainerImagesResult_containerImages, v.ContainerImages)
+	}
 }
 func (v *GetContainerImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContainerImagesResult, func(s *smithy.Schema) error {

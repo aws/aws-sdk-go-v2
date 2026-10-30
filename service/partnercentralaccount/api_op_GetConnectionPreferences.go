@@ -104,7 +104,9 @@ func (v *GetConnectionPreferencesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetConnectionPreferencesResponse_Catalog, *v.Catalog)
 	}
-	serializeParticipantIdentifierList(s, schemas.GetConnectionPreferencesResponse_ExcludedParticipantIds, v.ExcludedParticipantIds)
+	if v.ExcludedParticipantIds != nil {
+		serializeParticipantIdentifierList(s, schemas.GetConnectionPreferencesResponse_ExcludedParticipantIds, v.ExcludedParticipantIds)
+	}
 	if v.Revision != nil {
 		s.WriteInt64(schemas.GetConnectionPreferencesResponse_Revision, *v.Revision)
 	}

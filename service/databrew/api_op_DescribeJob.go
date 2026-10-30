@@ -162,8 +162,12 @@ func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.DescribeJobResponse_CreatedBy, *v.CreatedBy)
 	}
-	serializeDataCatalogOutputList(s, schemas.DescribeJobResponse_DataCatalogOutputs, v.DataCatalogOutputs)
-	serializeDatabaseOutputList(s, schemas.DescribeJobResponse_DatabaseOutputs, v.DatabaseOutputs)
+	if v.DataCatalogOutputs != nil {
+		serializeDataCatalogOutputList(s, schemas.DescribeJobResponse_DataCatalogOutputs, v.DataCatalogOutputs)
+	}
+	if v.DatabaseOutputs != nil {
+		serializeDatabaseOutputList(s, schemas.DescribeJobResponse_DatabaseOutputs, v.DatabaseOutputs)
+	}
 	if v.DatasetName != nil {
 		s.WriteString(schemas.DescribeJobResponse_DatasetName, *v.DatasetName)
 	}
@@ -196,7 +200,9 @@ func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DescribeJobResponse_Name, *v.Name)
 	}
-	serializeOutputList(s, schemas.DescribeJobResponse_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeOutputList(s, schemas.DescribeJobResponse_Outputs, v.Outputs)
+	}
 	if v.ProfileConfiguration != nil {
 		s.WriteStruct(schemas.DescribeJobResponse_ProfileConfiguration)
 		v.ProfileConfiguration.SerializeMembers(s)
@@ -216,14 +222,18 @@ func (v *DescribeJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeJobResponse_RoleArn, *v.RoleArn)
 	}
-	serializeTagMap(s, schemas.DescribeJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DescribeJobResponse_Tags, v.Tags)
+	}
 	if v.Timeout != 0 {
 		s.WriteInt32(schemas.DescribeJobResponse_Timeout, v.Timeout)
 	}
 	if v.Type != "" {
 		s.WriteString(schemas.DescribeJobResponse_Type, string(v.Type))
 	}
-	serializeValidationConfigurationList(s, schemas.DescribeJobResponse_ValidationConfigurations, v.ValidationConfigurations)
+	if v.ValidationConfigurations != nil {
+		serializeValidationConfigurationList(s, schemas.DescribeJobResponse_ValidationConfigurations, v.ValidationConfigurations)
+	}
 }
 func (v *DescribeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeJobResponse, func(s *smithy.Schema) error {

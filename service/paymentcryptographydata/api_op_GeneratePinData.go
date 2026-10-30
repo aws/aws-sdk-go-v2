@@ -124,7 +124,9 @@ func (v *GeneratePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EncryptionWrappedKey.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePinGenerationAttributes(s, schemas.GeneratePinDataInput_GenerationAttributes, v.GenerationAttributes)
+	if v.GenerationAttributes != nil {
+		serializePinGenerationAttributes(s, schemas.GeneratePinDataInput_GenerationAttributes, v.GenerationAttributes)
+	}
 	if v.GenerationKeyIdentifier != nil {
 		s.WriteString(schemas.GeneratePinDataInput_GenerationKeyIdentifier, *v.GenerationKeyIdentifier)
 	}
@@ -216,7 +218,9 @@ func (v *GeneratePinDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GenerationKeyCheckValue != nil {
 		s.WriteString(schemas.GeneratePinDataOutput_GenerationKeyCheckValue, *v.GenerationKeyCheckValue)
 	}
-	serializePinData(s, schemas.GeneratePinDataOutput_PinData, v.PinData)
+	if v.PinData != nil {
+		serializePinData(s, schemas.GeneratePinDataOutput_PinData, v.PinData)
+	}
 }
 func (v *GeneratePinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GeneratePinDataOutput, func(s *smithy.Schema) error {

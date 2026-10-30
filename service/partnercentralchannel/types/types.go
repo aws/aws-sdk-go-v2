@@ -223,7 +223,9 @@ func (v *ChannelHandshakeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ChannelHandshakeSummary_createdAt, *v.CreatedAt)
 	}
-	serializeHandshakeDetail(s, schemas.ChannelHandshakeSummary_detail, v.Detail)
+	if v.Detail != nil {
+		serializeHandshakeDetail(s, schemas.ChannelHandshakeSummary_detail, v.Detail)
+	}
 	if v.HandshakeType != "" {
 		s.WriteString(schemas.ChannelHandshakeSummary_handshakeType, string(v.HandshakeType))
 	}
@@ -960,7 +962,9 @@ func (v *ProgramManagementAccountTypeFilters) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ProgramManagementAccountTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProgramList(s, schemas.ProgramManagementAccountTypeFilters_programs, v.Programs)
+	if v.Programs != nil {
+		serializeProgramList(s, schemas.ProgramManagementAccountTypeFilters_programs, v.Programs)
+	}
 }
 func (v *ProgramManagementAccountTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProgramManagementAccountTypeFilters, func(s *smithy.Schema) error {
@@ -1609,7 +1613,9 @@ func (v *RevokeServicePeriodTypeFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RevokeServicePeriodTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServicePeriodTypeList(s, schemas.RevokeServicePeriodTypeFilters_servicePeriodTypes, v.ServicePeriodTypes)
+	if v.ServicePeriodTypes != nil {
+		serializeServicePeriodTypeList(s, schemas.RevokeServicePeriodTypeFilters_servicePeriodTypes, v.ServicePeriodTypes)
+	}
 }
 func (v *RevokeServicePeriodTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RevokeServicePeriodTypeFilters, func(s *smithy.Schema) error {
@@ -1835,7 +1841,9 @@ func (v *StartServicePeriodTypeFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartServicePeriodTypeFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeServicePeriodTypeList(s, schemas.StartServicePeriodTypeFilters_servicePeriodTypes, v.ServicePeriodTypes)
+	if v.ServicePeriodTypes != nil {
+		serializeServicePeriodTypeList(s, schemas.StartServicePeriodTypeFilters_servicePeriodTypes, v.ServicePeriodTypes)
+	}
 }
 func (v *StartServicePeriodTypeFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartServicePeriodTypeFilters, func(s *smithy.Schema) error {

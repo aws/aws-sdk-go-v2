@@ -104,7 +104,9 @@ func (v *CreateContactMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateContactMethodRequest_protocol, string(v.Protocol))
 	}
-	serializeTagList(s, schemas.CreateContactMethodRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContactMethodRequest_tags, v.Tags)
+	}
 }
 
 type CreateContactMethodOutput struct {
@@ -127,7 +129,9 @@ func (v *CreateContactMethodOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateContactMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateContactMethodResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateContactMethodResult_operations, v.Operations)
+	}
 }
 func (v *CreateContactMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateContactMethodResult, func(s *smithy.Schema) error {

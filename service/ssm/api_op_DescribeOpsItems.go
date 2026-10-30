@@ -129,7 +129,9 @@ func (v *DescribeOpsItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOpsItemsRequest_NextToken, *v.NextToken)
 	}
-	serializeOpsItemFilters(s, schemas.DescribeOpsItemsRequest_OpsItemFilters, v.OpsItemFilters)
+	if v.OpsItemFilters != nil {
+		serializeOpsItemFilters(s, schemas.DescribeOpsItemsRequest_OpsItemFilters, v.OpsItemFilters)
+	}
 }
 
 type DescribeOpsItemsOutput struct {
@@ -157,7 +159,9 @@ func (v *DescribeOpsItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeOpsItemsResponse_NextToken, *v.NextToken)
 	}
-	serializeOpsItemSummaries(s, schemas.DescribeOpsItemsResponse_OpsItemSummaries, v.OpsItemSummaries)
+	if v.OpsItemSummaries != nil {
+		serializeOpsItemSummaries(s, schemas.DescribeOpsItemsResponse_OpsItemSummaries, v.OpsItemSummaries)
+	}
 }
 func (v *DescribeOpsItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeOpsItemsResponse, func(s *smithy.Schema) error {

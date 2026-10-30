@@ -74,7 +74,9 @@ func (v *CreateImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateImageRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateImageRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateImageRequest_Tags, v.Tags)
+	}
 }
 
 type CreateImageOutput struct {

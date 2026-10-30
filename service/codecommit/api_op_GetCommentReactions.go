@@ -98,7 +98,9 @@ func (v *GetCommentReactionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetCommentReactionsOutput_nextToken, *v.NextToken)
 	}
-	serializeReactionsForCommentList(s, schemas.GetCommentReactionsOutput_reactionsForComment, v.ReactionsForComment)
+	if v.ReactionsForComment != nil {
+		serializeReactionsForCommentList(s, schemas.GetCommentReactionsOutput_reactionsForComment, v.ReactionsForComment)
+	}
 }
 func (v *GetCommentReactionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCommentReactionsOutput, func(s *smithy.Schema) error {

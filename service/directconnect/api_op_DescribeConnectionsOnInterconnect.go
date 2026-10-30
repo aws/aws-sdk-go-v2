@@ -76,7 +76,9 @@ func (v *DescribeConnectionsOnInterconnectOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeConnectionsOnInterconnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.Connections_nextToken, *v.NextToken)
 	}

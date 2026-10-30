@@ -83,7 +83,9 @@ func (v *CreateEntitlementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EnvironmentId != nil {
 		s.WriteString(schemas.CreateEntitlementRequest_environmentId, *v.EnvironmentId)
 	}
-	serializeVmIdList(s, schemas.CreateEntitlementRequest_vmIds, v.VmIds)
+	if v.VmIds != nil {
+		serializeVmIdList(s, schemas.CreateEntitlementRequest_vmIds, v.VmIds)
+	}
 }
 
 type CreateEntitlementOutput struct {
@@ -104,7 +106,9 @@ func (v *CreateEntitlementOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateEntitlementOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVmEntitlementList(s, schemas.CreateEntitlementResponse_entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeVmEntitlementList(s, schemas.CreateEntitlementResponse_entitlements, v.Entitlements)
+	}
 }
 func (v *CreateEntitlementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEntitlementResponse, func(s *smithy.Schema) error {

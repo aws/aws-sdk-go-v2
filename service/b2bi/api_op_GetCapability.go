@@ -111,11 +111,15 @@ func (v *GetCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CapabilityId != nil {
 		s.WriteString(schemas.GetCapabilityResponse_capabilityId, *v.CapabilityId)
 	}
-	serializeCapabilityConfiguration(s, schemas.GetCapabilityResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeCapabilityConfiguration(s, schemas.GetCapabilityResponse_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetCapabilityResponse_createdAt, *v.CreatedAt)
 	}
-	serializeInstructionsDocuments(s, schemas.GetCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	if v.InstructionsDocuments != nil {
+		serializeInstructionsDocuments(s, schemas.GetCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.GetCapabilityResponse_modifiedAt, *v.ModifiedAt)
 	}

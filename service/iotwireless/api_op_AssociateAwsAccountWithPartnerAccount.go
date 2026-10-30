@@ -67,7 +67,9 @@ func (v *AssociateAwsAccountWithPartnerAccountInput) SerializeMembers(s smithy.S
 		v.Sidewalk.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.AssociateAwsAccountWithPartnerAccountRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.AssociateAwsAccountWithPartnerAccountRequest_Tags, v.Tags)
+	}
 }
 
 type AssociateAwsAccountWithPartnerAccountOutput struct {

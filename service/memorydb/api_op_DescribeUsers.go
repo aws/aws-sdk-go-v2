@@ -57,7 +57,9 @@ func (v *DescribeUsersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeUsersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeUsersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeUsersRequest_MaxResults, *v.MaxResults)
 	}
@@ -97,7 +99,9 @@ func (v *DescribeUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeUsersResponse_NextToken, *v.NextToken)
 	}
-	serializeUserList(s, schemas.DescribeUsersResponse_Users, v.Users)
+	if v.Users != nil {
+		serializeUserList(s, schemas.DescribeUsersResponse_Users, v.Users)
+	}
 }
 func (v *DescribeUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeUsersResponse, func(s *smithy.Schema) error {

@@ -59,7 +59,9 @@ func (v *ListServiceIndexesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceIndexesInput_NextToken, *v.NextToken)
 	}
-	serializeRegionList(s, schemas.ListServiceIndexesInput_Regions, v.Regions)
+	if v.Regions != nil {
+		serializeRegionList(s, schemas.ListServiceIndexesInput_Regions, v.Regions)
+	}
 }
 
 type ListServiceIndexesOutput struct {
@@ -85,7 +87,9 @@ func (v *ListServiceIndexesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListServiceIndexesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndexList(s, schemas.ListServiceIndexesOutput_Indexes, v.Indexes)
+	if v.Indexes != nil {
+		serializeIndexList(s, schemas.ListServiceIndexesOutput_Indexes, v.Indexes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceIndexesOutput_NextToken, *v.NextToken)
 	}

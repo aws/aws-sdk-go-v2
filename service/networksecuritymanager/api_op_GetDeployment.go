@@ -132,8 +132,12 @@ func (v *GetDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociatedPolicyList(s, schemas.GetDeploymentOutput_associatedPolicyList, v.AssociatedPolicyList)
-	serializeAssociatedScopeList(s, schemas.GetDeploymentOutput_associatedScopeList, v.AssociatedScopeList)
+	if v.AssociatedPolicyList != nil {
+		serializeAssociatedPolicyList(s, schemas.GetDeploymentOutput_associatedPolicyList, v.AssociatedPolicyList)
+	}
+	if v.AssociatedScopeList != nil {
+		serializeAssociatedScopeList(s, schemas.GetDeploymentOutput_associatedScopeList, v.AssociatedScopeList)
+	}
 	if v.DeploymentArn != nil {
 		s.WriteString(schemas.GetDeploymentOutput_deploymentArn, *v.DeploymentArn)
 	}
@@ -142,7 +146,9 @@ func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DeploymentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDeploymentCoverageList(s, schemas.GetDeploymentOutput_deploymentCoverage, v.DeploymentCoverage)
+	if v.DeploymentCoverage != nil {
+		serializeDeploymentCoverageList(s, schemas.GetDeploymentOutput_deploymentCoverage, v.DeploymentCoverage)
+	}
 	if v.DeploymentDescription != nil {
 		s.WriteString(schemas.GetDeploymentOutput_deploymentDescription, *v.DeploymentDescription)
 	}
@@ -170,7 +176,9 @@ func (v *GetDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Version != nil {
 		s.WriteString(schemas.GetDeploymentOutput_version, *v.Version)
 	}
-	serializeDeploymentWarningList(s, schemas.GetDeploymentOutput_warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeDeploymentWarningList(s, schemas.GetDeploymentOutput_warnings, v.Warnings)
+	}
 }
 func (v *GetDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDeploymentOutput, func(s *smithy.Schema) error {

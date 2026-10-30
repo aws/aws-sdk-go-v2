@@ -150,7 +150,9 @@ func (v *CreatePresignedUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PresignedUrlExpiration != nil {
 		s.WriteTime(schemas.CreatePresignedUrlOutput_presignedUrlExpiration, *v.PresignedUrlExpiration)
 	}
-	serializePresignedUrlFields(s, schemas.CreatePresignedUrlOutput_presignedUrlFields, v.PresignedUrlFields)
+	if v.PresignedUrlFields != nil {
+		serializePresignedUrlFields(s, schemas.CreatePresignedUrlOutput_presignedUrlFields, v.PresignedUrlFields)
+	}
 }
 func (v *CreatePresignedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePresignedUrlOutput, func(s *smithy.Schema) error {

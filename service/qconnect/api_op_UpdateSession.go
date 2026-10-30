@@ -68,21 +68,27 @@ func (v *UpdateSessionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAIAgentConfigurationMap(s, schemas.UpdateSessionRequest_aiAgentConfiguration, v.AiAgentConfiguration)
+	if v.AiAgentConfiguration != nil {
+		serializeAIAgentConfigurationMap(s, schemas.UpdateSessionRequest_aiAgentConfiguration, v.AiAgentConfiguration)
+	}
 	if v.AssistantId != nil {
 		s.WriteString(schemas.UpdateSessionRequest_assistantId, *v.AssistantId)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateSessionRequest_description, *v.Description)
 	}
-	serializeOrchestratorConfigurationList(s, schemas.UpdateSessionRequest_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	if v.OrchestratorConfigurationList != nil {
+		serializeOrchestratorConfigurationList(s, schemas.UpdateSessionRequest_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	}
 	if v.RemoveOrchestratorConfigurationList != nil {
 		s.WriteBool(schemas.UpdateSessionRequest_removeOrchestratorConfigurationList, *v.RemoveOrchestratorConfigurationList)
 	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.UpdateSessionRequest_sessionId, *v.SessionId)
 	}
-	serializeTagFilter(s, schemas.UpdateSessionRequest_tagFilter, v.TagFilter)
+	if v.TagFilter != nil {
+		serializeTagFilter(s, schemas.UpdateSessionRequest_tagFilter, v.TagFilter)
+	}
 }
 
 type UpdateSessionOutput struct {

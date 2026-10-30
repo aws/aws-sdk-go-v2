@@ -120,7 +120,9 @@ func (v *CreateNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNetworkInput_Name, *v.Name)
 	}
-	serializeInputTagMap(s, schemas.CreateNetworkInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeInputTagMap(s, schemas.CreateNetworkInput_Tags, v.Tags)
+	}
 	if v.VotingPolicy != nil {
 		s.WriteStruct(schemas.CreateNetworkInput_VotingPolicy)
 		v.VotingPolicy.SerializeMembers(s)

@@ -112,22 +112,30 @@ func (v *AttackDetail) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AttackDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSummarizedCounterList(s, schemas.AttackDetail_AttackCounters, v.AttackCounters)
+	if v.AttackCounters != nil {
+		serializeSummarizedCounterList(s, schemas.AttackDetail_AttackCounters, v.AttackCounters)
+	}
 	if v.AttackId != nil {
 		s.WriteString(schemas.AttackDetail_AttackId, *v.AttackId)
 	}
-	serializeAttackProperties(s, schemas.AttackDetail_AttackProperties, v.AttackProperties)
+	if v.AttackProperties != nil {
+		serializeAttackProperties(s, schemas.AttackDetail_AttackProperties, v.AttackProperties)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.AttackDetail_EndTime, *v.EndTime)
 	}
-	serializeMitigationList(s, schemas.AttackDetail_Mitigations, v.Mitigations)
+	if v.Mitigations != nil {
+		serializeMitigationList(s, schemas.AttackDetail_Mitigations, v.Mitigations)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.AttackDetail_ResourceArn, *v.ResourceArn)
 	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.AttackDetail_StartTime, *v.StartTime)
 	}
-	serializeSubResourceSummaryList(s, schemas.AttackDetail_SubResources, v.SubResources)
+	if v.SubResources != nil {
+		serializeSubResourceSummaryList(s, schemas.AttackDetail_SubResources, v.SubResources)
+	}
 }
 func (v *AttackDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AttackDetail, func(s *smithy.Schema) error {
@@ -202,7 +210,9 @@ func (v *AttackProperty) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttackPropertyIdentifier != "" {
 		s.WriteString(schemas.AttackProperty_AttackPropertyIdentifier, string(v.AttackPropertyIdentifier))
 	}
-	serializeTopContributors(s, schemas.AttackProperty_TopContributors, v.TopContributors)
+	if v.TopContributors != nil {
+		serializeTopContributors(s, schemas.AttackProperty_TopContributors, v.TopContributors)
+	}
 	if v.Total != 0 {
 		s.WriteInt64(schemas.AttackProperty_Total, v.Total)
 	}
@@ -318,7 +328,9 @@ func (v *AttackSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttackId != nil {
 		s.WriteString(schemas.AttackSummary_AttackId, *v.AttackId)
 	}
-	serializeAttackVectorDescriptionList(s, schemas.AttackSummary_AttackVectors, v.AttackVectors)
+	if v.AttackVectors != nil {
+		serializeAttackVectorDescriptionList(s, schemas.AttackSummary_AttackVectors, v.AttackVectors)
+	}
 	if v.EndTime != nil {
 		s.WriteTime(schemas.AttackSummary_EndTime, *v.EndTime)
 	}
@@ -686,9 +698,15 @@ func (v *InclusionProtectionFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InclusionProtectionFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectionNameFilters(s, schemas.InclusionProtectionFilters_ProtectionNames, v.ProtectionNames)
-	serializeResourceArnFilters(s, schemas.InclusionProtectionFilters_ResourceArns, v.ResourceArns)
-	serializeProtectedResourceTypeFilters(s, schemas.InclusionProtectionFilters_ResourceTypes, v.ResourceTypes)
+	if v.ProtectionNames != nil {
+		serializeProtectionNameFilters(s, schemas.InclusionProtectionFilters_ProtectionNames, v.ProtectionNames)
+	}
+	if v.ResourceArns != nil {
+		serializeResourceArnFilters(s, schemas.InclusionProtectionFilters_ResourceArns, v.ResourceArns)
+	}
+	if v.ResourceTypes != nil {
+		serializeProtectedResourceTypeFilters(s, schemas.InclusionProtectionFilters_ResourceTypes, v.ResourceTypes)
+	}
 }
 func (v *InclusionProtectionFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InclusionProtectionFilters, func(s *smithy.Schema) error {
@@ -736,10 +754,18 @@ func (v *InclusionProtectionGroupFilters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *InclusionProtectionGroupFilters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectionGroupAggregationFilters(s, schemas.InclusionProtectionGroupFilters_Aggregations, v.Aggregations)
-	serializeProtectionGroupPatternFilters(s, schemas.InclusionProtectionGroupFilters_Patterns, v.Patterns)
-	serializeProtectionGroupIdFilters(s, schemas.InclusionProtectionGroupFilters_ProtectionGroupIds, v.ProtectionGroupIds)
-	serializeProtectedResourceTypeFilters(s, schemas.InclusionProtectionGroupFilters_ResourceTypes, v.ResourceTypes)
+	if v.Aggregations != nil {
+		serializeProtectionGroupAggregationFilters(s, schemas.InclusionProtectionGroupFilters_Aggregations, v.Aggregations)
+	}
+	if v.Patterns != nil {
+		serializeProtectionGroupPatternFilters(s, schemas.InclusionProtectionGroupFilters_Patterns, v.Patterns)
+	}
+	if v.ProtectionGroupIds != nil {
+		serializeProtectionGroupIdFilters(s, schemas.InclusionProtectionGroupFilters_ProtectionGroupIds, v.ProtectionGroupIds)
+	}
+	if v.ResourceTypes != nil {
+		serializeProtectedResourceTypeFilters(s, schemas.InclusionProtectionGroupFilters_ResourceTypes, v.ResourceTypes)
+	}
 }
 func (v *InclusionProtectionGroupFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.InclusionProtectionGroupFilters, func(s *smithy.Schema) error {
@@ -868,7 +894,9 @@ func (v *Protection) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ApplicationLayerAutomaticResponseConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeHealthCheckIds(s, schemas.Protection_HealthCheckIds, v.HealthCheckIds)
+	if v.HealthCheckIds != nil {
+		serializeHealthCheckIds(s, schemas.Protection_HealthCheckIds, v.HealthCheckIds)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.Protection_Id, *v.Id)
 	}
@@ -975,7 +1003,9 @@ func (v *ProtectionGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Aggregation != "" {
 		s.WriteString(schemas.ProtectionGroup_Aggregation, string(v.Aggregation))
 	}
-	serializeProtectionGroupMembers(s, schemas.ProtectionGroup_Members, v.Members)
+	if v.Members != nil {
+		serializeProtectionGroupMembers(s, schemas.ProtectionGroup_Members, v.Members)
+	}
 	if v.Pattern != "" {
 		s.WriteString(schemas.ProtectionGroup_Pattern, string(v.Pattern))
 	}
@@ -1153,7 +1183,9 @@ func (v *ProtectionLimits) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectionLimits) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimits(s, schemas.ProtectionLimits_ProtectedResourceTypeLimits, v.ProtectedResourceTypeLimits)
+	if v.ProtectedResourceTypeLimits != nil {
+		serializeLimits(s, schemas.ProtectionLimits_ProtectedResourceTypeLimits, v.ProtectedResourceTypeLimits)
+	}
 }
 func (v *ProtectionLimits) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProtectionLimits, func(s *smithy.Schema) error {
@@ -1245,8 +1277,12 @@ func (v *SubResourceSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SubResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSummarizedAttackVectorList(s, schemas.SubResourceSummary_AttackVectors, v.AttackVectors)
-	serializeSummarizedCounterList(s, schemas.SubResourceSummary_Counters, v.Counters)
+	if v.AttackVectors != nil {
+		serializeSummarizedAttackVectorList(s, schemas.SubResourceSummary_AttackVectors, v.AttackVectors)
+	}
+	if v.Counters != nil {
+		serializeSummarizedCounterList(s, schemas.SubResourceSummary_Counters, v.Counters)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.SubResourceSummary_Id, *v.Id)
 	}
@@ -1335,7 +1371,9 @@ func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EndTime != nil {
 		s.WriteTime(schemas.Subscription_EndTime, *v.EndTime)
 	}
-	serializeLimits(s, schemas.Subscription_Limits, v.Limits)
+	if v.Limits != nil {
+		serializeLimits(s, schemas.Subscription_Limits, v.Limits)
+	}
 	if v.ProactiveEngagementStatus != "" {
 		s.WriteString(schemas.Subscription_ProactiveEngagementStatus, string(v.ProactiveEngagementStatus))
 	}
@@ -1461,7 +1499,9 @@ func (v *SummarizedAttackVector) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SummarizedAttackVector) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSummarizedCounterList(s, schemas.SummarizedAttackVector_VectorCounters, v.VectorCounters)
+	if v.VectorCounters != nil {
+		serializeSummarizedCounterList(s, schemas.SummarizedAttackVector_VectorCounters, v.VectorCounters)
+	}
 	if v.VectorType != nil {
 		s.WriteString(schemas.SummarizedAttackVector_VectorType, *v.VectorType)
 	}

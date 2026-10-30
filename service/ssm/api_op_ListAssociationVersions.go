@@ -85,7 +85,9 @@ func (v *ListAssociationVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssociationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssociationVersionList(s, schemas.ListAssociationVersionsResult_AssociationVersions, v.AssociationVersions)
+	if v.AssociationVersions != nil {
+		serializeAssociationVersionList(s, schemas.ListAssociationVersionsResult_AssociationVersions, v.AssociationVersions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssociationVersionsResult_NextToken, *v.NextToken)
 	}

@@ -127,7 +127,9 @@ func (v *DescribeMetadataModelChildrenOutput) SerializeMembers(s smithy.ShapeSer
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeMetadataModelChildrenResponse_Marker, *v.Marker)
 	}
-	serializeMetadataModelReferenceList(s, schemas.DescribeMetadataModelChildrenResponse_MetadataModelChildren, v.MetadataModelChildren)
+	if v.MetadataModelChildren != nil {
+		serializeMetadataModelReferenceList(s, schemas.DescribeMetadataModelChildrenResponse_MetadataModelChildren, v.MetadataModelChildren)
+	}
 }
 func (v *DescribeMetadataModelChildrenOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMetadataModelChildrenResponse, func(s *smithy.Schema) error {

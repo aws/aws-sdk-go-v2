@@ -105,7 +105,9 @@ func (v *CreateGlobalTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GlobalTableName != nil {
 		s.WriteString(schemas.CreateGlobalTableInput_GlobalTableName, *v.GlobalTableName)
 	}
-	serializeReplicaList(s, schemas.CreateGlobalTableInput_ReplicationGroup, v.ReplicationGroup)
+	if v.ReplicationGroup != nil {
+		serializeReplicaList(s, schemas.CreateGlobalTableInput_ReplicationGroup, v.ReplicationGroup)
+	}
 }
 func (in *CreateGlobalTableInput) bindEndpointParams(p *EndpointParameters) {
 

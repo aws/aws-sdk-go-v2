@@ -99,7 +99,9 @@ func (v *ListQueueMembersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListQueueMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeQueueMemberList(s, schemas.ListQueueMembersResponse_members, v.Members)
+	if v.Members != nil {
+		serializeQueueMemberList(s, schemas.ListQueueMembersResponse_members, v.Members)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListQueueMembersResponse_nextToken, *v.NextToken)
 	}

@@ -33,7 +33,9 @@ func (v *AmazonMachineImageEbsVolume) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Iops != nil {
 		s.WriteInt32(schemas.AmazonMachineImageEbsVolume_iops, *v.Iops)
 	}
-	serializeAmazonMachineImageEbsVolumeTypeList(s, schemas.AmazonMachineImageEbsVolume_volumeTypes, v.VolumeTypes)
+	if v.VolumeTypes != nil {
+		serializeAmazonMachineImageEbsVolumeTypeList(s, schemas.AmazonMachineImageEbsVolume_volumeTypes, v.VolumeTypes)
+	}
 }
 func (v *AmazonMachineImageEbsVolume) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AmazonMachineImageEbsVolume, func(s *smithy.Schema) error {
@@ -151,7 +153,9 @@ func (v *AmazonMachineImageFulfillmentOption) SerializeMembers(s smithy.ShapeSer
 	if v.FulfillmentOptionVersion != nil {
 		s.WriteString(schemas.AmazonMachineImageFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
 	}
-	serializeAmazonMachineImageOperatingSystemList(s, schemas.AmazonMachineImageFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeAmazonMachineImageOperatingSystemList(s, schemas.AmazonMachineImageFulfillmentOption_operatingSystems, v.OperatingSystems)
+	}
 	if v.Recommendation != nil {
 		s.WriteStruct(schemas.AmazonMachineImageFulfillmentOption_recommendation)
 		v.Recommendation.SerializeMembers(s)
@@ -301,7 +305,9 @@ func (v *AmazonMachineImageRecommendation) SerializeMembers(s smithy.ShapeSerial
 	if v.InstanceType != nil {
 		s.WriteString(schemas.AmazonMachineImageRecommendation_instanceType, *v.InstanceType)
 	}
-	serializeAmazonMachineImageSecurityGroupList(s, schemas.AmazonMachineImageRecommendation_securityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeAmazonMachineImageSecurityGroupList(s, schemas.AmazonMachineImageRecommendation_securityGroups, v.SecurityGroups)
+	}
 }
 func (v *AmazonMachineImageRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AmazonMachineImageRecommendation, func(s *smithy.Schema) error {
@@ -350,7 +356,9 @@ func (v *AmazonMachineImageSecurityGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AmazonMachineImageSecurityGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAmazonMachineImageCidrIpAddressList(s, schemas.AmazonMachineImageSecurityGroup_cidrIpAddresses, v.CidrIpAddresses)
+	if v.CidrIpAddresses != nil {
+		serializeAmazonMachineImageCidrIpAddressList(s, schemas.AmazonMachineImageSecurityGroup_cidrIpAddresses, v.CidrIpAddresses)
+	}
 	if v.FromPort != nil {
 		s.WriteInt32(schemas.AmazonMachineImageSecurityGroup_fromPort, *v.FromPort)
 	}
@@ -417,7 +425,9 @@ func (v *ApiFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ApiFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSupportedServiceList(s, schemas.ApiFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.AwsSupportedServices != nil {
+		serializeAwsSupportedServiceList(s, schemas.ApiFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	}
 	if v.FulfillmentOptionDisplayName != nil {
 		s.WriteString(schemas.ApiFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
 	}
@@ -770,7 +780,9 @@ func (v *ConfigurableUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializ
 	if v.Id != nil {
 		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_id, *v.Id)
 	}
-	serializeConfigurableUpfrontRateCardList(s, schemas.ConfigurableUpfrontPricingTerm_rateCards, v.RateCards)
+	if v.RateCards != nil {
+		serializeConfigurableUpfrontRateCardList(s, schemas.ConfigurableUpfrontPricingTerm_rateCards, v.RateCards)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_type, string(v.Type))
 	}
@@ -833,7 +845,9 @@ func (v *ConfigurableUpfrontRateCardItem) SerializeMembers(s smithy.ShapeSeriali
 		v.Constraints.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeRateCardList(s, schemas.ConfigurableUpfrontRateCardItem_rateCard, v.RateCard)
+	if v.RateCard != nil {
+		serializeRateCardList(s, schemas.ConfigurableUpfrontRateCardItem_rateCard, v.RateCard)
+	}
 	if v.Selector != nil {
 		s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem_selector)
 		v.Selector.SerializeMembers(s)
@@ -957,7 +971,9 @@ func (v *ContainerFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainerFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSupportedServiceList(s, schemas.ContainerFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.AwsSupportedServices != nil {
+		serializeAwsSupportedServiceList(s, schemas.ContainerFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	}
 	if v.FulfillmentOptionDisplayName != nil {
 		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
 	}
@@ -973,7 +989,9 @@ func (v *ContainerFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.FulfillmentOptionVersion != nil {
 		s.WriteString(schemas.ContainerFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
 	}
-	serializeContainerOperatingSystemList(s, schemas.ContainerFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeContainerOperatingSystemList(s, schemas.ContainerFulfillmentOption_operatingSystems, v.OperatingSystems)
+	}
 	if v.ReleaseNotes != nil {
 		s.WriteString(schemas.ContainerFulfillmentOption_releaseNotes, *v.ReleaseNotes)
 	}
@@ -1155,7 +1173,9 @@ func (v *DataExchangeFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataExchangeFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataArtifactList(s, schemas.DataExchangeFulfillmentOption_dataArtifacts, v.DataArtifacts)
+	if v.DataArtifacts != nil {
+		serializeDataArtifactList(s, schemas.DataExchangeFulfillmentOption_dataArtifacts, v.DataArtifacts)
+	}
 	if v.FulfillmentOptionDisplayName != nil {
 		s.WriteString(schemas.DataExchangeFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
 	}
@@ -1353,7 +1373,9 @@ func (v *Ec2ImageBuilderComponentFulfillmentOption) Serialize(s smithy.ShapeSeri
 }
 
 func (v *Ec2ImageBuilderComponentFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSupportedServiceList(s, schemas.Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.AwsSupportedServices != nil {
+		serializeAwsSupportedServiceList(s, schemas.Ec2ImageBuilderComponentFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	}
 	if v.FulfillmentOptionDisplayName != nil {
 		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
 	}
@@ -1369,7 +1391,9 @@ func (v *Ec2ImageBuilderComponentFulfillmentOption) SerializeMembers(s smithy.Sh
 	if v.FulfillmentOptionVersion != nil {
 		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
 	}
-	serializeContainerOperatingSystemList(s, schemas.Ec2ImageBuilderComponentFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeContainerOperatingSystemList(s, schemas.Ec2ImageBuilderComponentFulfillmentOption_operatingSystems, v.OperatingSystems)
+	}
 	if v.ReleaseNotes != nil {
 		s.WriteString(schemas.Ec2ImageBuilderComponentFulfillmentOption_releaseNotes, *v.ReleaseNotes)
 	}
@@ -1462,7 +1486,9 @@ func (v *EksAddOnFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EksAddOnFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSupportedServiceList(s, schemas.EksAddOnFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.AwsSupportedServices != nil {
+		serializeAwsSupportedServiceList(s, schemas.EksAddOnFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	}
 	if v.FulfillmentOptionDisplayName != nil {
 		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
 	}
@@ -1478,7 +1504,9 @@ func (v *EksAddOnFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FulfillmentOptionVersion != nil {
 		s.WriteString(schemas.EksAddOnFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
 	}
-	serializeEksAddOnOperatingSystemList(s, schemas.EksAddOnFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeEksAddOnOperatingSystemList(s, schemas.EksAddOnFulfillmentOption_operatingSystems, v.OperatingSystems)
+	}
 	if v.ReleaseNotes != nil {
 		s.WriteString(schemas.EksAddOnFulfillmentOption_releaseNotes, *v.ReleaseNotes)
 	}
@@ -1648,7 +1676,9 @@ func (v *FixedUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Duration != nil {
 		s.WriteString(schemas.FixedUpfrontPricingTerm_duration, *v.Duration)
 	}
-	serializeGrantList(s, schemas.FixedUpfrontPricingTerm_grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.FixedUpfrontPricingTerm_grants, v.Grants)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.FixedUpfrontPricingTerm_id, *v.Id)
 	}
@@ -1723,7 +1753,9 @@ func (v *FreeTrialPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Duration != nil {
 		s.WriteString(schemas.FreeTrialPricingTerm_duration, *v.Duration)
 	}
-	serializeGrantList(s, schemas.FreeTrialPricingTerm_grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.FreeTrialPricingTerm_grants, v.Grants)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.FreeTrialPricingTerm_id, *v.Id)
 	}
@@ -2072,7 +2104,9 @@ func (v *GrantItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DimensionKey != nil {
 		s.WriteString(schemas.GrantItem_dimensionKey, *v.DimensionKey)
 	}
-	serializeDimensionLabelList(s, schemas.GrantItem_dimensionLabels, v.DimensionLabels)
+	if v.DimensionLabels != nil {
+		serializeDimensionLabelList(s, schemas.GrantItem_dimensionLabels, v.DimensionLabels)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.GrantItem_displayName, *v.DisplayName)
 	}
@@ -2156,7 +2190,9 @@ func (v *HelmFulfillmentOption) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HelmFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsSupportedServiceList(s, schemas.HelmFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	if v.AwsSupportedServices != nil {
+		serializeAwsSupportedServiceList(s, schemas.HelmFulfillmentOption_awsSupportedServices, v.AwsSupportedServices)
+	}
 	if v.FulfillmentOptionDisplayName != nil {
 		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionDisplayName, *v.FulfillmentOptionDisplayName)
 	}
@@ -2172,7 +2208,9 @@ func (v *HelmFulfillmentOption) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FulfillmentOptionVersion != nil {
 		s.WriteString(schemas.HelmFulfillmentOption_fulfillmentOptionVersion, *v.FulfillmentOptionVersion)
 	}
-	serializeHelmOperatingSystemList(s, schemas.HelmFulfillmentOption_operatingSystems, v.OperatingSystems)
+	if v.OperatingSystems != nil {
+		serializeHelmOperatingSystemList(s, schemas.HelmFulfillmentOption_operatingSystems, v.OperatingSystems)
+	}
 	if v.ReleaseNotes != nil {
 		s.WriteString(schemas.HelmFulfillmentOption_releaseNotes, *v.ReleaseNotes)
 	}
@@ -2290,7 +2328,9 @@ func (v *LegalTerm) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LegalTerm) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDocumentList(s, schemas.LegalTerm_documents, v.Documents)
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.LegalTerm_documents, v.Documents)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.LegalTerm_id, *v.Id)
 	}
@@ -2558,13 +2598,21 @@ func (v *ListingSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListingSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListingSummaryAssociatedEntityList(s, schemas.ListingSummary_associatedEntities, v.AssociatedEntities)
-	serializeListingBadgeList(s, schemas.ListingSummary_badges, v.Badges)
+	if v.AssociatedEntities != nil {
+		serializeListingSummaryAssociatedEntityList(s, schemas.ListingSummary_associatedEntities, v.AssociatedEntities)
+	}
+	if v.Badges != nil {
+		serializeListingBadgeList(s, schemas.ListingSummary_badges, v.Badges)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.ListingSummary_catalog, *v.Catalog)
 	}
-	serializeCategoryList(s, schemas.ListingSummary_categories, v.Categories)
-	serializeFulfillmentOptionSummaryList(s, schemas.ListingSummary_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.ListingSummary_categories, v.Categories)
+	}
+	if v.FulfillmentOptionSummaries != nil {
+		serializeFulfillmentOptionSummaryList(s, schemas.ListingSummary_fulfillmentOptionSummaries, v.FulfillmentOptionSummaries)
+	}
 	if v.ListingId != nil {
 		s.WriteString(schemas.ListingSummary_listingId, *v.ListingId)
 	}
@@ -2574,8 +2622,12 @@ func (v *ListingSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LogoThumbnailUrl != nil {
 		s.WriteString(schemas.ListingSummary_logoThumbnailUrl, *v.LogoThumbnailUrl)
 	}
-	serializePricingModelList(s, schemas.ListingSummary_pricingModels, v.PricingModels)
-	serializePricingUnitList(s, schemas.ListingSummary_pricingUnits, v.PricingUnits)
+	if v.PricingModels != nil {
+		serializePricingModelList(s, schemas.ListingSummary_pricingModels, v.PricingModels)
+	}
+	if v.PricingUnits != nil {
+		serializePricingUnitList(s, schemas.ListingSummary_pricingUnits, v.PricingUnits)
+	}
 	if v.Publisher != nil {
 		s.WriteStruct(schemas.ListingSummary_publisher)
 		v.Publisher.SerializeMembers(s)
@@ -3269,7 +3321,9 @@ func (v *PaymentScheduleTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.PaymentScheduleTerm_id, *v.Id)
 	}
-	serializeScheduleList(s, schemas.PaymentScheduleTerm_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializeScheduleList(s, schemas.PaymentScheduleTerm_schedule, v.Schedule)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.PaymentScheduleTerm_type, string(v.Type))
 	}
@@ -3315,7 +3369,9 @@ func (v *PaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PaymentScheduleTermTemplate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+	if v.Schedule != nil {
+		serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+	}
 }
 func (v *PaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PaymentScheduleTermTemplate, func(s *smithy.Schema) error {
@@ -3970,7 +4026,9 @@ func (v *PurchaseOptionFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilterType != "" {
 		s.WriteString(schemas.PurchaseOptionFilter_filterType, string(v.FilterType))
 	}
-	serializePurchaseOptionFilterValueList(s, schemas.PurchaseOptionFilter_filterValues, v.FilterValues)
+	if v.FilterValues != nil {
+		serializePurchaseOptionFilterValueList(s, schemas.PurchaseOptionFilter_filterValues, v.FilterValues)
+	}
 }
 func (v *PurchaseOptionFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PurchaseOptionFilter, func(s *smithy.Schema) error {
@@ -4043,11 +4101,15 @@ func (v *PurchaseOptionSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PurchaseOptionSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePurchaseOptionAssociatedEntityList(s, schemas.PurchaseOptionSummary_associatedEntities, v.AssociatedEntities)
+	if v.AssociatedEntities != nil {
+		serializePurchaseOptionAssociatedEntityList(s, schemas.PurchaseOptionSummary_associatedEntities, v.AssociatedEntities)
+	}
 	if v.AvailableFromTime != nil {
 		s.WriteTime(schemas.PurchaseOptionSummary_availableFromTime, *v.AvailableFromTime)
 	}
-	serializePurchaseOptionBadgeList(s, schemas.PurchaseOptionSummary_badges, v.Badges)
+	if v.Badges != nil {
+		serializePurchaseOptionBadgeList(s, schemas.PurchaseOptionSummary_badges, v.Badges)
+	}
 	if v.Catalog != nil {
 		s.WriteString(schemas.PurchaseOptionSummary_catalog, *v.Catalog)
 	}
@@ -4151,7 +4213,9 @@ func (v *RateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DimensionKey != nil {
 		s.WriteString(schemas.RateCardItem_dimensionKey, *v.DimensionKey)
 	}
-	serializeDimensionLabelList(s, schemas.RateCardItem_dimensionLabels, v.DimensionLabels)
+	if v.DimensionLabels != nil {
+		serializeDimensionLabelList(s, schemas.RateCardItem_dimensionLabels, v.DimensionLabels)
+	}
 	if v.DisplayName != nil {
 		s.WriteString(schemas.RateCardItem_displayName, *v.DisplayName)
 	}
@@ -4329,8 +4393,12 @@ func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxRenewals != nil {
 		s.WriteInt32(schemas.RenewalTerm_maxRenewals, *v.MaxRenewals)
 	}
-	serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
-	serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
+	if v.PriceIncrease != nil {
+		serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
+	}
+	if v.TermTemplates != nil {
+		serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.RenewalTerm_type, string(v.Type))
 	}
@@ -4539,7 +4607,9 @@ func (v *ReviewSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReviewSourceSummaryList(s, schemas.ReviewSummary_reviewSourceSummaries, v.ReviewSourceSummaries)
+	if v.ReviewSourceSummaries != nil {
+		serializeReviewSourceSummaryList(s, schemas.ReviewSummary_reviewSourceSummaries, v.ReviewSourceSummaries)
+	}
 }
 func (v *ReviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReviewSummary, func(s *smithy.Schema) error {
@@ -4882,8 +4952,12 @@ func (v *SageMakerModelFulfillmentOption) SerializeMembers(s smithy.ShapeSeriali
 	if v.ReleaseNotes != nil {
 		s.WriteString(schemas.SageMakerModelFulfillmentOption_releaseNotes, *v.ReleaseNotes)
 	}
-	serializeSageMakerModelContentTypeList(s, schemas.SageMakerModelFulfillmentOption_supportedContentTypes, v.SupportedContentTypes)
-	serializeSageMakerModelResponseMimeTypeList(s, schemas.SageMakerModelFulfillmentOption_supportedResponseMimeTypes, v.SupportedResponseMimeTypes)
+	if v.SupportedContentTypes != nil {
+		serializeSageMakerModelContentTypeList(s, schemas.SageMakerModelFulfillmentOption_supportedContentTypes, v.SupportedContentTypes)
+	}
+	if v.SupportedResponseMimeTypes != nil {
+		serializeSageMakerModelResponseMimeTypeList(s, schemas.SageMakerModelFulfillmentOption_supportedResponseMimeTypes, v.SupportedResponseMimeTypes)
+	}
 	if v.UsageInstructions != nil {
 		s.WriteString(schemas.SageMakerModelFulfillmentOption_usageInstructions, *v.UsageInstructions)
 	}
@@ -5040,7 +5114,9 @@ func (v *SearchFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilterType != "" {
 		s.WriteString(schemas.SearchFilter_filterType, string(v.FilterType))
 	}
-	serializeSearchFilterValueList(s, schemas.SearchFilter_filterValues, v.FilterValues)
+	if v.FilterValues != nil {
+		serializeSearchFilterValueList(s, schemas.SearchFilter_filterValues, v.FilterValues)
+	}
 }
 func (v *SearchFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchFilter, func(s *smithy.Schema) error {
@@ -5342,7 +5418,9 @@ func (v *UsageBasedPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.UsageBasedPricingTerm_id, *v.Id)
 	}
-	serializeUsageBasedRateCardList(s, schemas.UsageBasedPricingTerm_rateCards, v.RateCards)
+	if v.RateCards != nil {
+		serializeUsageBasedRateCardList(s, schemas.UsageBasedPricingTerm_rateCards, v.RateCards)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UsageBasedPricingTerm_type, string(v.Type))
 	}
@@ -5388,7 +5466,9 @@ func (v *UsageBasedRateCardItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UsageBasedRateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRateCardList(s, schemas.UsageBasedRateCardItem_rateCard, v.RateCard)
+	if v.RateCard != nil {
+		serializeRateCardList(s, schemas.UsageBasedRateCardItem_rateCard, v.RateCard)
+	}
 }
 func (v *UsageBasedRateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UsageBasedRateCardItem, func(s *smithy.Schema) error {

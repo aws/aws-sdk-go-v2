@@ -84,7 +84,9 @@ func (v *ListProfilePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfilePermissionsResponse_nextToken, *v.NextToken)
 	}
-	serializePermissions(s, schemas.ListProfilePermissionsResponse_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializePermissions(s, schemas.ListProfilePermissionsResponse_permissions, v.Permissions)
+	}
 	if v.PolicySizeBytes != 0 {
 		s.WriteInt32(schemas.ListProfilePermissionsResponse_policySizeBytes, v.PolicySizeBytes)
 	}

@@ -99,7 +99,9 @@ func (v *CreateStateMachineAliasInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.CreateStateMachineAliasInput_name, *v.Name)
 	}
-	serializeRoutingConfigurationList(s, schemas.CreateStateMachineAliasInput_routingConfiguration, v.RoutingConfiguration)
+	if v.RoutingConfiguration != nil {
+		serializeRoutingConfigurationList(s, schemas.CreateStateMachineAliasInput_routingConfiguration, v.RoutingConfiguration)
+	}
 }
 
 type CreateStateMachineAliasOutput struct {

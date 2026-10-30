@@ -135,7 +135,9 @@ func (v *GetIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.GetIndexResponse_displayName, *v.DisplayName)
 	}
-	serializeDocumentAttributeConfigurations(s, schemas.GetIndexResponse_documentAttributeConfigurations, v.DocumentAttributeConfigurations)
+	if v.DocumentAttributeConfigurations != nil {
+		serializeDocumentAttributeConfigurations(s, schemas.GetIndexResponse_documentAttributeConfigurations, v.DocumentAttributeConfigurations)
+	}
 	if v.Error != nil {
 		s.WriteStruct(schemas.GetIndexResponse_error)
 		v.Error.SerializeMembers(s)

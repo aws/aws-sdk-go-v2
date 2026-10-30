@@ -100,7 +100,9 @@ func (v *DescribeWorkspacesPoolSessionsOutput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeWorkspacesPoolSessionsResult_NextToken, *v.NextToken)
 	}
-	serializeWorkspacesPoolSessions(s, schemas.DescribeWorkspacesPoolSessionsResult_Sessions, v.Sessions)
+	if v.Sessions != nil {
+		serializeWorkspacesPoolSessions(s, schemas.DescribeWorkspacesPoolSessionsResult_Sessions, v.Sessions)
+	}
 }
 func (v *DescribeWorkspacesPoolSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspacesPoolSessionsResult, func(s *smithy.Schema) error {

@@ -46,7 +46,9 @@ func (v *BatchDeleteEvaluationJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteEvaluationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvaluationJobIdentifiers(s, schemas.BatchDeleteEvaluationJobRequest_jobIdentifiers, v.JobIdentifiers)
+	if v.JobIdentifiers != nil {
+		serializeEvaluationJobIdentifiers(s, schemas.BatchDeleteEvaluationJobRequest_jobIdentifiers, v.JobIdentifiers)
+	}
 }
 
 type BatchDeleteEvaluationJobOutput struct {
@@ -75,8 +77,12 @@ func (v *BatchDeleteEvaluationJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteEvaluationJobErrors(s, schemas.BatchDeleteEvaluationJobResponse_errors, v.Errors)
-	serializeBatchDeleteEvaluationJobItems(s, schemas.BatchDeleteEvaluationJobResponse_evaluationJobs, v.EvaluationJobs)
+	if v.Errors != nil {
+		serializeBatchDeleteEvaluationJobErrors(s, schemas.BatchDeleteEvaluationJobResponse_errors, v.Errors)
+	}
+	if v.EvaluationJobs != nil {
+		serializeBatchDeleteEvaluationJobItems(s, schemas.BatchDeleteEvaluationJobResponse_evaluationJobs, v.EvaluationJobs)
+	}
 }
 func (v *BatchDeleteEvaluationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteEvaluationJobResponse, func(s *smithy.Schema) error {

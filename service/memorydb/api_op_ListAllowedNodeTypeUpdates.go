@@ -74,8 +74,12 @@ func (v *ListAllowedNodeTypeUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAllowedNodeTypeUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeTypeList(s, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleDownNodeTypes, v.ScaleDownNodeTypes)
-	serializeNodeTypeList(s, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleUpNodeTypes, v.ScaleUpNodeTypes)
+	if v.ScaleDownNodeTypes != nil {
+		serializeNodeTypeList(s, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleDownNodeTypes, v.ScaleDownNodeTypes)
+	}
+	if v.ScaleUpNodeTypes != nil {
+		serializeNodeTypeList(s, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleUpNodeTypes, v.ScaleUpNodeTypes)
+	}
 }
 func (v *ListAllowedNodeTypeUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAllowedNodeTypeUpdatesResponse, func(s *smithy.Schema) error {

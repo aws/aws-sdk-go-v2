@@ -85,7 +85,9 @@ func (v *ListDeploymentEventsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDeploymentEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentEventDataSummaryList(s, schemas.ListDeploymentEventsOutput_deploymentEvents, v.DeploymentEvents)
+	if v.DeploymentEvents != nil {
+		serializeDeploymentEventDataSummaryList(s, schemas.ListDeploymentEventsOutput_deploymentEvents, v.DeploymentEvents)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeploymentEventsOutput_nextToken, *v.NextToken)
 	}

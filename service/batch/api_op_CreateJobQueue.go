@@ -122,25 +122,33 @@ func (v *CreateJobQueueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateJobQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComputeEnvironmentOrders(s, schemas.CreateJobQueueRequest_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	if v.ComputeEnvironmentOrder != nil {
+		serializeComputeEnvironmentOrders(s, schemas.CreateJobQueueRequest_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	}
 	if v.JobQueueName != nil {
 		s.WriteString(schemas.CreateJobQueueRequest_jobQueueName, *v.JobQueueName)
 	}
 	if v.JobQueueType != "" {
 		s.WriteString(schemas.CreateJobQueueRequest_jobQueueType, string(v.JobQueueType))
 	}
-	serializeJobStateTimeLimitActions(s, schemas.CreateJobQueueRequest_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	if v.JobStateTimeLimitActions != nil {
+		serializeJobStateTimeLimitActions(s, schemas.CreateJobQueueRequest_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	}
 	if v.Priority != nil {
 		s.WriteInt32(schemas.CreateJobQueueRequest_priority, *v.Priority)
 	}
 	if v.SchedulingPolicyArn != nil {
 		s.WriteString(schemas.CreateJobQueueRequest_schedulingPolicyArn, *v.SchedulingPolicyArn)
 	}
-	serializeServiceEnvironmentOrders(s, schemas.CreateJobQueueRequest_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	if v.ServiceEnvironmentOrder != nil {
+		serializeServiceEnvironmentOrders(s, schemas.CreateJobQueueRequest_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CreateJobQueueRequest_state, string(v.State))
 	}
-	serializeTagrisTagsMap(s, schemas.CreateJobQueueRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagrisTagsMap(s, schemas.CreateJobQueueRequest_tags, v.Tags)
+	}
 }
 
 type CreateJobQueueOutput struct {

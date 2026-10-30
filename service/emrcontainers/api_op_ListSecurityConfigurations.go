@@ -94,7 +94,9 @@ func (v *ListSecurityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSecurityConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeSecurityConfigurations(s, schemas.ListSecurityConfigurationsResponse_securityConfigurations, v.SecurityConfigurations)
+	if v.SecurityConfigurations != nil {
+		serializeSecurityConfigurations(s, schemas.ListSecurityConfigurationsResponse_securityConfigurations, v.SecurityConfigurations)
+	}
 }
 func (v *ListSecurityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListSecurityConfigurationsResponse, func(s *smithy.Schema) error {

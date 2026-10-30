@@ -98,7 +98,9 @@ func (v *ScanProvisionedProductsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ScanProvisionedProductsOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeProvisionedProductDetails(s, schemas.ScanProvisionedProductsOutput_ProvisionedProducts, v.ProvisionedProducts)
+	if v.ProvisionedProducts != nil {
+		serializeProvisionedProductDetails(s, schemas.ScanProvisionedProductsOutput_ProvisionedProducts, v.ProvisionedProducts)
+	}
 }
 func (v *ScanProvisionedProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScanProvisionedProductsOutput, func(s *smithy.Schema) error {

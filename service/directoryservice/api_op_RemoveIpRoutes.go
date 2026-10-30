@@ -48,8 +48,12 @@ func (v *RemoveIpRoutesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RemoveIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCidrIps(s, schemas.RemoveIpRoutesRequest_CidrIps, v.CidrIps)
-	serializeCidrIpv6s(s, schemas.RemoveIpRoutesRequest_CidrIpv6s, v.CidrIpv6s)
+	if v.CidrIps != nil {
+		serializeCidrIps(s, schemas.RemoveIpRoutesRequest_CidrIps, v.CidrIps)
+	}
+	if v.CidrIpv6s != nil {
+		serializeCidrIpv6s(s, schemas.RemoveIpRoutesRequest_CidrIpv6s, v.CidrIpv6s)
+	}
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.RemoveIpRoutesRequest_DirectoryId, *v.DirectoryId)
 	}

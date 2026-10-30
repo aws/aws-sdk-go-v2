@@ -66,7 +66,9 @@ func (v *PutWebhookInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTagList(s, schemas.PutWebhookInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutWebhookInput_tags, v.Tags)
+	}
 	if v.Webhook != nil {
 		s.WriteStruct(schemas.PutWebhookInput_webhook)
 		v.Webhook.SerializeMembers(s)

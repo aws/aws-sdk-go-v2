@@ -60,7 +60,9 @@ func (v *DescribeServiceUpdatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeServiceUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterNameList(s, schemas.DescribeServiceUpdatesRequest_ClusterNames, v.ClusterNames)
+	if v.ClusterNames != nil {
+		serializeClusterNameList(s, schemas.DescribeServiceUpdatesRequest_ClusterNames, v.ClusterNames)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeServiceUpdatesRequest_MaxResults, *v.MaxResults)
 	}
@@ -70,7 +72,9 @@ func (v *DescribeServiceUpdatesInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ServiceUpdateName != nil {
 		s.WriteString(schemas.DescribeServiceUpdatesRequest_ServiceUpdateName, *v.ServiceUpdateName)
 	}
-	serializeServiceUpdateStatusList(s, schemas.DescribeServiceUpdatesRequest_Status, v.Status)
+	if v.Status != nil {
+		serializeServiceUpdateStatusList(s, schemas.DescribeServiceUpdatesRequest_Status, v.Status)
+	}
 }
 
 type DescribeServiceUpdatesOutput struct {
@@ -101,7 +105,9 @@ func (v *DescribeServiceUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeServiceUpdatesResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceUpdateList(s, schemas.DescribeServiceUpdatesResponse_ServiceUpdates, v.ServiceUpdates)
+	if v.ServiceUpdates != nil {
+		serializeServiceUpdateList(s, schemas.DescribeServiceUpdatesResponse_ServiceUpdates, v.ServiceUpdates)
+	}
 }
 func (v *DescribeServiceUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeServiceUpdatesResponse, func(s *smithy.Schema) error {

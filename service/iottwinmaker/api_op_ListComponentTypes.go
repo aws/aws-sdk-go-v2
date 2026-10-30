@@ -56,7 +56,9 @@ func (v *ListComponentTypesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComponentTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListComponentTypesFilters(s, schemas.ListComponentTypesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeListComponentTypesFilters(s, schemas.ListComponentTypesRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListComponentTypesRequest_maxResults, *v.MaxResults)
 	}
@@ -117,7 +119,9 @@ func (v *ListComponentTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListComponentTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComponentTypeSummaries(s, schemas.ListComponentTypesResponse_componentTypeSummaries, v.ComponentTypeSummaries)
+	if v.ComponentTypeSummaries != nil {
+		serializeComponentTypeSummaries(s, schemas.ListComponentTypesResponse_componentTypeSummaries, v.ComponentTypeSummaries)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListComponentTypesResponse_maxResults, *v.MaxResults)
 	}

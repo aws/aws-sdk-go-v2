@@ -69,7 +69,9 @@ func (v *GetBillingGroupCostReportInput) SerializeMembers(s smithy.ShapeSerializ
 		v.BillingPeriodRange.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGroupByAttributesList(s, schemas.GetBillingGroupCostReportInput_GroupBy, v.GroupBy)
+	if v.GroupBy != nil {
+		serializeGroupByAttributesList(s, schemas.GetBillingGroupCostReportInput_GroupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetBillingGroupCostReportInput_MaxResults, *v.MaxResults)
 	}
@@ -99,7 +101,9 @@ func (v *GetBillingGroupCostReportOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBillingGroupCostReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingGroupCostReportResultsList(s, schemas.GetBillingGroupCostReportOutput_BillingGroupCostReportResults, v.BillingGroupCostReportResults)
+	if v.BillingGroupCostReportResults != nil {
+		serializeBillingGroupCostReportResultsList(s, schemas.GetBillingGroupCostReportOutput_BillingGroupCostReportResults, v.BillingGroupCostReportResults)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetBillingGroupCostReportOutput_NextToken, *v.NextToken)
 	}

@@ -95,7 +95,9 @@ func (v *ListResolverConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResolverConfigsResponse_NextToken, *v.NextToken)
 	}
-	serializeResolverConfigList(s, schemas.ListResolverConfigsResponse_ResolverConfigs, v.ResolverConfigs)
+	if v.ResolverConfigs != nil {
+		serializeResolverConfigList(s, schemas.ListResolverConfigsResponse_ResolverConfigs, v.ResolverConfigs)
+	}
 }
 func (v *ListResolverConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResolverConfigsResponse, func(s *smithy.Schema) error {

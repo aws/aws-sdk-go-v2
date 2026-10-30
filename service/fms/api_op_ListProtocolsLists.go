@@ -97,7 +97,9 @@ func (v *ListProtocolsListsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProtocolsListsResponse_NextToken, *v.NextToken)
 	}
-	serializeProtocolsListsData(s, schemas.ListProtocolsListsResponse_ProtocolsLists, v.ProtocolsLists)
+	if v.ProtocolsLists != nil {
+		serializeProtocolsListsData(s, schemas.ListProtocolsListsResponse_ProtocolsLists, v.ProtocolsLists)
+	}
 }
 func (v *ListProtocolsListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProtocolsListsResponse, func(s *smithy.Schema) error {

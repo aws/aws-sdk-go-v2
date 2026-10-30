@@ -125,7 +125,9 @@ func (v *GetRemediationsV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetRemediationsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemediationV2ItemList(s, schemas.GetRemediationsV2Response_Items, v.Items)
+	if v.Items != nil {
+		serializeRemediationV2ItemList(s, schemas.GetRemediationsV2Response_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetRemediationsV2Response_NextToken, *v.NextToken)
 	}

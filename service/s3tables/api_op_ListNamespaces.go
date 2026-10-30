@@ -101,7 +101,9 @@ func (v *ListNamespacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContinuationToken != nil {
 		s.WriteString(schemas.ListNamespacesResponse_continuationToken, *v.ContinuationToken)
 	}
-	serializeNamespaceSummaryList(s, schemas.ListNamespacesResponse_namespaces, v.Namespaces)
+	if v.Namespaces != nil {
+		serializeNamespaceSummaryList(s, schemas.ListNamespacesResponse_namespaces, v.Namespaces)
+	}
 }
 func (v *ListNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNamespacesResponse, func(s *smithy.Schema) error {

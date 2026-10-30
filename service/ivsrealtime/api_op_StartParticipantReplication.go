@@ -71,7 +71,9 @@ func (v *StartParticipantReplicationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartParticipantReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParticipantAttributes(s, schemas.StartParticipantReplicationRequest_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeParticipantAttributes(s, schemas.StartParticipantReplicationRequest_attributes, v.Attributes)
+	}
 	if v.DestinationStageArn != nil {
 		s.WriteString(schemas.StartParticipantReplicationRequest_destinationStageArn, *v.DestinationStageArn)
 	}

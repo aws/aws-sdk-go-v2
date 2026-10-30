@@ -73,8 +73,12 @@ func (v *CreateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFeedRequest_name, *v.Name)
 	}
-	serializeCreateOutputList(s, schemas.CreateFeedRequest_outputs, v.Outputs)
-	serializeTagMap(s, schemas.CreateFeedRequest_tags, v.Tags)
+	if v.Outputs != nil {
+		serializeCreateOutputList(s, schemas.CreateFeedRequest_outputs, v.Outputs)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFeedRequest_tags, v.Tags)
+	}
 }
 
 type CreateFeedOutput struct {
@@ -150,18 +154,24 @@ func (v *CreateFeedOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Association.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.CreateFeedResponse_dataEndpoints, v.DataEndpoints)
+	if v.DataEndpoints != nil {
+		serializeStringList(s, schemas.CreateFeedResponse_dataEndpoints, v.DataEndpoints)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.CreateFeedResponse_id, *v.Id)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateFeedResponse_name, *v.Name)
 	}
-	serializeGetOutputList(s, schemas.CreateFeedResponse_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeGetOutputList(s, schemas.CreateFeedResponse_outputs, v.Outputs)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateFeedResponse_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.CreateFeedResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateFeedResponse_tags, v.Tags)
+	}
 }
 func (v *CreateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateFeedResponse, func(s *smithy.Schema) error {

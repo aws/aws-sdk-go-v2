@@ -145,7 +145,9 @@ func (v *DeleteRcsAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.DeleteRcsAgentResult_TwoWayChannelRole, *v.TwoWayChannelRole)
 	}
 	s.WriteBool(schemas.DeleteRcsAgentResult_TwoWayEnabled, v.TwoWayEnabled)
-	serializeRcsEventTypeList(s, schemas.DeleteRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	if v.TwoWayRcsEventsEnabled != nil {
+		serializeRcsEventTypeList(s, schemas.DeleteRcsAgentResult_TwoWayRcsEventsEnabled, v.TwoWayRcsEventsEnabled)
+	}
 }
 func (v *DeleteRcsAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteRcsAgentResult, func(s *smithy.Schema) error {

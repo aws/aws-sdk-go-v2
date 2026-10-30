@@ -77,7 +77,9 @@ func (v *AdminSetUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminSetUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMFAOptionListType(s, schemas.AdminSetUserSettingsRequest_MFAOptions, v.MFAOptions)
+	if v.MFAOptions != nil {
+		serializeMFAOptionListType(s, schemas.AdminSetUserSettingsRequest_MFAOptions, v.MFAOptions)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AdminSetUserSettingsRequest_UserPoolId, *v.UserPoolId)
 	}

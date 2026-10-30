@@ -84,7 +84,9 @@ func (v *ConfigureLogsForPlaybackConfigurationInput) SerializeMembers(s smithy.S
 		v.AdsInteractionLog.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfLoggingStrategies(s, schemas.ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	if v.EnabledLoggingStrategies != nil {
+		serialize__listOfLoggingStrategies(s, schemas.ConfigureLogsForPlaybackConfigurationRequest_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	}
 	if v.ManifestServiceInteractionLog != nil {
 		s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationRequest_ManifestServiceInteractionLog)
 		v.ManifestServiceInteractionLog.SerializeMembers(s)
@@ -160,7 +162,9 @@ func (v *ConfigureLogsForPlaybackConfigurationOutput) SerializeMembers(s smithy.
 		v.AdsInteractionLog.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOfLoggingStrategies(s, schemas.ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	if v.EnabledLoggingStrategies != nil {
+		serialize__listOfLoggingStrategies(s, schemas.ConfigureLogsForPlaybackConfigurationResponse_EnabledLoggingStrategies, v.EnabledLoggingStrategies)
+	}
 	if v.ManifestServiceInteractionLog != nil {
 		s.WriteStruct(schemas.ConfigureLogsForPlaybackConfigurationResponse_ManifestServiceInteractionLog)
 		v.ManifestServiceInteractionLog.SerializeMembers(s)

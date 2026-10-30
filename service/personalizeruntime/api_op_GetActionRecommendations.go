@@ -88,7 +88,9 @@ func (v *GetActionRecommendationsInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.FilterArn != nil {
 		s.WriteString(schemas.GetActionRecommendationsRequest_filterArn, *v.FilterArn)
 	}
-	serializeFilterValues(s, schemas.GetActionRecommendationsRequest_filterValues, v.FilterValues)
+	if v.FilterValues != nil {
+		serializeFilterValues(s, schemas.GetActionRecommendationsRequest_filterValues, v.FilterValues)
+	}
 	if v.NumResults != 0 {
 		s.WriteInt32(schemas.GetActionRecommendationsRequest_numResults, v.NumResults)
 	}
@@ -122,7 +124,9 @@ func (v *GetActionRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetActionRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionList(s, schemas.GetActionRecommendationsResponse_actionList, v.ActionList)
+	if v.ActionList != nil {
+		serializeActionList(s, schemas.GetActionRecommendationsResponse_actionList, v.ActionList)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.GetActionRecommendationsResponse_recommendationId, *v.RecommendationId)
 	}

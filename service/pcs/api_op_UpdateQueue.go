@@ -71,7 +71,9 @@ func (v *UpdateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClusterIdentifier != nil {
 		s.WriteString(schemas.UpdateQueueRequest_clusterIdentifier, *v.ClusterIdentifier)
 	}
-	serializeComputeNodeGroupConfigurationList(s, schemas.UpdateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	if v.ComputeNodeGroupConfigurations != nil {
+		serializeComputeNodeGroupConfigurationList(s, schemas.UpdateQueueRequest_computeNodeGroupConfigurations, v.ComputeNodeGroupConfigurations)
+	}
 	if v.QueueIdentifier != nil {
 		s.WriteString(schemas.UpdateQueueRequest_queueIdentifier, *v.QueueIdentifier)
 	}

@@ -118,7 +118,9 @@ func (v *PutLaunchActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Order != nil {
 		s.WriteInt32(schemas.PutLaunchActionRequest_order, *v.Order)
 	}
-	serializeLaunchActionParameters(s, schemas.PutLaunchActionRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeLaunchActionParameters(s, schemas.PutLaunchActionRequest_parameters, v.Parameters)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.PutLaunchActionRequest_resourceId, *v.ResourceId)
 	}
@@ -202,7 +204,9 @@ func (v *PutLaunchActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Order != nil {
 		s.WriteInt32(schemas.PutLaunchActionResponse_order, *v.Order)
 	}
-	serializeLaunchActionParameters(s, schemas.PutLaunchActionResponse_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeLaunchActionParameters(s, schemas.PutLaunchActionResponse_parameters, v.Parameters)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.PutLaunchActionResponse_resourceId, *v.ResourceId)
 	}

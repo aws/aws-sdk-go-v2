@@ -43,7 +43,9 @@ func (v *BatchGetMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricQueryList(s, schemas.BatchGetMetricsRequest_MetricQueries, v.MetricQueries)
+	if v.MetricQueries != nil {
+		serializeMetricQueryList(s, schemas.BatchGetMetricsRequest_MetricQueries, v.MetricQueries)
+	}
 }
 
 type BatchGetMetricsOutput struct {
@@ -64,7 +66,9 @@ func (v *BatchGetMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricQueryResultList(s, schemas.BatchGetMetricsResponse_MetricQueryResults, v.MetricQueryResults)
+	if v.MetricQueryResults != nil {
+		serializeMetricQueryResultList(s, schemas.BatchGetMetricsResponse_MetricQueryResults, v.MetricQueryResults)
+	}
 }
 func (v *BatchGetMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetMetricsResponse, func(s *smithy.Schema) error {

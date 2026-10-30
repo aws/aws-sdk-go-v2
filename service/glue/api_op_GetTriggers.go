@@ -84,7 +84,9 @@ func (v *GetTriggersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTriggersResponse_NextToken, *v.NextToken)
 	}
-	serializeTriggerList(s, schemas.GetTriggersResponse_Triggers, v.Triggers)
+	if v.Triggers != nil {
+		serializeTriggerList(s, schemas.GetTriggersResponse_Triggers, v.Triggers)
+	}
 }
 func (v *GetTriggersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTriggersResponse, func(s *smithy.Schema) error {

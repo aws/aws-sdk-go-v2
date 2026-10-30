@@ -118,12 +118,18 @@ func (v *ExportRDSDatabaseRecommendationsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ExportRDSDatabaseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportRDSDatabaseRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableRDSDBFields(s, schemas.ExportRDSDatabaseRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportRDSDatabaseRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableRDSDBFields(s, schemas.ExportRDSDatabaseRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportRDSDatabaseRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeRDSDBRecommendationFilters(s, schemas.ExportRDSDatabaseRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeRDSDBRecommendationFilters(s, schemas.ExportRDSDatabaseRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportRDSDatabaseRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

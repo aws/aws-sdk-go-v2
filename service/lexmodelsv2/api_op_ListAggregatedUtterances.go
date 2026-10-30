@@ -123,7 +123,9 @@ func (v *ListAggregatedUtterancesInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.BotVersion != nil {
 		s.WriteString(schemas.ListAggregatedUtterancesRequest_botVersion, *v.BotVersion)
 	}
-	serializeAggregatedUtterancesFilters(s, schemas.ListAggregatedUtterancesRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeAggregatedUtterancesFilters(s, schemas.ListAggregatedUtterancesRequest_filters, v.Filters)
+	}
 	if v.LocaleId != nil {
 		s.WriteString(schemas.ListAggregatedUtterancesRequest_localeId, *v.LocaleId)
 	}
@@ -201,7 +203,9 @@ func (v *ListAggregatedUtterancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAggregatedUtterancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAggregatedUtterancesSummaryList(s, schemas.ListAggregatedUtterancesResponse_aggregatedUtterancesSummaries, v.AggregatedUtterancesSummaries)
+	if v.AggregatedUtterancesSummaries != nil {
+		serializeAggregatedUtterancesSummaryList(s, schemas.ListAggregatedUtterancesResponse_aggregatedUtterancesSummaries, v.AggregatedUtterancesSummaries)
+	}
 	if v.AggregationDuration != nil {
 		s.WriteStruct(schemas.ListAggregatedUtterancesResponse_aggregationDuration)
 		v.AggregationDuration.SerializeMembers(s)

@@ -79,7 +79,9 @@ func (v *PutEventTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.PutEventTypeRequest_description, *v.Description)
 	}
-	serializeNonEmptyListOfStrings(s, schemas.PutEventTypeRequest_entityTypes, v.EntityTypes)
+	if v.EntityTypes != nil {
+		serializeNonEmptyListOfStrings(s, schemas.PutEventTypeRequest_entityTypes, v.EntityTypes)
+	}
 	if v.EventIngestion != "" {
 		s.WriteString(schemas.PutEventTypeRequest_eventIngestion, string(v.EventIngestion))
 	}
@@ -88,12 +90,18 @@ func (v *PutEventTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EventOrchestration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeNonEmptyListOfStrings(s, schemas.PutEventTypeRequest_eventVariables, v.EventVariables)
-	serializeListOfStrings(s, schemas.PutEventTypeRequest_labels, v.Labels)
+	if v.EventVariables != nil {
+		serializeNonEmptyListOfStrings(s, schemas.PutEventTypeRequest_eventVariables, v.EventVariables)
+	}
+	if v.Labels != nil {
+		serializeListOfStrings(s, schemas.PutEventTypeRequest_labels, v.Labels)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.PutEventTypeRequest_name, *v.Name)
 	}
-	serializetagList(s, schemas.PutEventTypeRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.PutEventTypeRequest_tags, v.Tags)
+	}
 }
 
 type PutEventTypeOutput struct {

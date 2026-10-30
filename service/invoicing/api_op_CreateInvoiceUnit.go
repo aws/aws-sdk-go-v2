@@ -84,7 +84,9 @@ func (v *CreateInvoiceUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateInvoiceUnitRequest_Name, *v.Name)
 	}
-	serializeResourceTagList(s, schemas.CreateInvoiceUnitRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateInvoiceUnitRequest_ResourceTags, v.ResourceTags)
+	}
 	if v.Rule != nil {
 		s.WriteStruct(schemas.CreateInvoiceUnitRequest_Rule)
 		v.Rule.SerializeMembers(s)

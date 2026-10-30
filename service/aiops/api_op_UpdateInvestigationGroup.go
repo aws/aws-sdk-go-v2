@@ -96,8 +96,12 @@ func (v *UpdateInvestigationGroupInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChatbotNotificationChannel(s, schemas.UpdateInvestigationGroupRequest_chatbotNotificationChannel, v.ChatbotNotificationChannel)
-	serializeCrossAccountConfigurations(s, schemas.UpdateInvestigationGroupRequest_crossAccountConfigurations, v.CrossAccountConfigurations)
+	if v.ChatbotNotificationChannel != nil {
+		serializeChatbotNotificationChannel(s, schemas.UpdateInvestigationGroupRequest_chatbotNotificationChannel, v.ChatbotNotificationChannel)
+	}
+	if v.CrossAccountConfigurations != nil {
+		serializeCrossAccountConfigurations(s, schemas.UpdateInvestigationGroupRequest_crossAccountConfigurations, v.CrossAccountConfigurations)
+	}
 	if v.EncryptionConfiguration != nil {
 		s.WriteStruct(schemas.UpdateInvestigationGroupRequest_encryptionConfiguration)
 		v.EncryptionConfiguration.SerializeMembers(s)
@@ -112,7 +116,9 @@ func (v *UpdateInvestigationGroupInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RoleArn != nil {
 		s.WriteString(schemas.UpdateInvestigationGroupRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagKeyBoundaries(s, schemas.UpdateInvestigationGroupRequest_tagKeyBoundaries, v.TagKeyBoundaries)
+	if v.TagKeyBoundaries != nil {
+		serializeTagKeyBoundaries(s, schemas.UpdateInvestigationGroupRequest_tagKeyBoundaries, v.TagKeyBoundaries)
+	}
 }
 
 type UpdateInvestigationGroupOutput struct {

@@ -210,7 +210,9 @@ func (v *CreateAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleName != nil {
 		s.WriteString(schemas.CreateAccountRequest_RoleName, *v.RoleName)
 	}
-	serializeTags(s, schemas.CreateAccountRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAccountRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAccountOutput struct {

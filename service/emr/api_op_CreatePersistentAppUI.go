@@ -63,7 +63,9 @@ func (v *CreatePersistentAppUIInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ProfilerType != "" {
 		s.WriteString(schemas.CreatePersistentAppUIInput_ProfilerType, string(v.ProfilerType))
 	}
-	serializeTagList(s, schemas.CreatePersistentAppUIInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePersistentAppUIInput_Tags, v.Tags)
+	}
 	if v.TargetResourceArn != nil {
 		s.WriteString(schemas.CreatePersistentAppUIInput_TargetResourceArn, *v.TargetResourceArn)
 	}

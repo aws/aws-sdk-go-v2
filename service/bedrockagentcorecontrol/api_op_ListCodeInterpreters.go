@@ -82,7 +82,9 @@ func (v *ListCodeInterpretersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodeInterpretersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodeInterpreterSummaries(s, schemas.ListCodeInterpretersResponse_codeInterpreterSummaries, v.CodeInterpreterSummaries)
+	if v.CodeInterpreterSummaries != nil {
+		serializeCodeInterpreterSummaries(s, schemas.ListCodeInterpretersResponse_codeInterpreterSummaries, v.CodeInterpreterSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodeInterpretersResponse_nextToken, *v.NextToken)
 	}

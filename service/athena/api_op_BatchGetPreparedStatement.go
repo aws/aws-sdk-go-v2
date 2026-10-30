@@ -52,7 +52,9 @@ func (v *BatchGetPreparedStatementInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetPreparedStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePreparedStatementNameList(s, schemas.BatchGetPreparedStatementInput_PreparedStatementNames, v.PreparedStatementNames)
+	if v.PreparedStatementNames != nil {
+		serializePreparedStatementNameList(s, schemas.BatchGetPreparedStatementInput_PreparedStatementNames, v.PreparedStatementNames)
+	}
 	if v.WorkGroup != nil {
 		s.WriteString(schemas.BatchGetPreparedStatementInput_WorkGroup, *v.WorkGroup)
 	}
@@ -80,8 +82,12 @@ func (v *BatchGetPreparedStatementOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetPreparedStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePreparedStatementDetailsList(s, schemas.BatchGetPreparedStatementOutput_PreparedStatements, v.PreparedStatements)
-	serializeUnprocessedPreparedStatementNameList(s, schemas.BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames, v.UnprocessedPreparedStatementNames)
+	if v.PreparedStatements != nil {
+		serializePreparedStatementDetailsList(s, schemas.BatchGetPreparedStatementOutput_PreparedStatements, v.PreparedStatements)
+	}
+	if v.UnprocessedPreparedStatementNames != nil {
+		serializeUnprocessedPreparedStatementNameList(s, schemas.BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames, v.UnprocessedPreparedStatementNames)
+	}
 }
 func (v *BatchGetPreparedStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetPreparedStatementOutput, func(s *smithy.Schema) error {

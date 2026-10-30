@@ -127,7 +127,9 @@ func (v *ListClusterSchedulerConfigsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListClusterSchedulerConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClusterSchedulerConfigSummaryList(s, schemas.ListClusterSchedulerConfigsResponse_ClusterSchedulerConfigSummaries, v.ClusterSchedulerConfigSummaries)
+	if v.ClusterSchedulerConfigSummaries != nil {
+		serializeClusterSchedulerConfigSummaryList(s, schemas.ListClusterSchedulerConfigsResponse_ClusterSchedulerConfigSummaries, v.ClusterSchedulerConfigSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListClusterSchedulerConfigsResponse_NextToken, *v.NextToken)
 	}

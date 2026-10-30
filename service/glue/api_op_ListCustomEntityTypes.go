@@ -54,7 +54,9 @@ func (v *ListCustomEntityTypesInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomEntityTypesRequest_NextToken, *v.NextToken)
 	}
-	serializeTagsMap(s, schemas.ListCustomEntityTypesRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.ListCustomEntityTypesRequest_Tags, v.Tags)
+	}
 }
 
 type ListCustomEntityTypesOutput struct {
@@ -78,7 +80,9 @@ func (v *ListCustomEntityTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomEntityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomEntityTypes(s, schemas.ListCustomEntityTypesResponse_CustomEntityTypes, v.CustomEntityTypes)
+	if v.CustomEntityTypes != nil {
+		serializeCustomEntityTypes(s, schemas.ListCustomEntityTypesResponse_CustomEntityTypes, v.CustomEntityTypes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomEntityTypesResponse_NextToken, *v.NextToken)
 	}

@@ -88,7 +88,9 @@ func (v *UpdateGlobalTableSettingsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.GlobalTableBillingMode != "" {
 		s.WriteString(schemas.UpdateGlobalTableSettingsInput_GlobalTableBillingMode, string(v.GlobalTableBillingMode))
 	}
-	serializeGlobalTableGlobalSecondaryIndexSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_GlobalTableGlobalSecondaryIndexSettingsUpdate, v.GlobalTableGlobalSecondaryIndexSettingsUpdate)
+	if v.GlobalTableGlobalSecondaryIndexSettingsUpdate != nil {
+		serializeGlobalTableGlobalSecondaryIndexSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_GlobalTableGlobalSecondaryIndexSettingsUpdate, v.GlobalTableGlobalSecondaryIndexSettingsUpdate)
+	}
 	if v.GlobalTableName != nil {
 		s.WriteString(schemas.UpdateGlobalTableSettingsInput_GlobalTableName, *v.GlobalTableName)
 	}
@@ -100,7 +102,9 @@ func (v *UpdateGlobalTableSettingsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.GlobalTableProvisionedWriteCapacityUnits != nil {
 		s.WriteInt64(schemas.UpdateGlobalTableSettingsInput_GlobalTableProvisionedWriteCapacityUnits, *v.GlobalTableProvisionedWriteCapacityUnits)
 	}
-	serializeReplicaSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_ReplicaSettingsUpdate, v.ReplicaSettingsUpdate)
+	if v.ReplicaSettingsUpdate != nil {
+		serializeReplicaSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_ReplicaSettingsUpdate, v.ReplicaSettingsUpdate)
+	}
 }
 func (in *UpdateGlobalTableSettingsInput) bindEndpointParams(p *EndpointParameters) {
 
@@ -132,7 +136,9 @@ func (v *UpdateGlobalTableSettingsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.GlobalTableName != nil {
 		s.WriteString(schemas.UpdateGlobalTableSettingsOutput_GlobalTableName, *v.GlobalTableName)
 	}
-	serializeReplicaSettingsDescriptionList(s, schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+	if v.ReplicaSettings != nil {
+		serializeReplicaSettingsDescriptionList(s, schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+	}
 }
 func (v *UpdateGlobalTableSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateGlobalTableSettingsOutput, func(s *smithy.Schema) error {

@@ -140,7 +140,9 @@ func (v *CreateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContainerType != "" {
 		s.WriteString(schemas.CreateOriginEndpointRequest_ContainerType, string(v.ContainerType))
 	}
-	serializeCreateDashManifests(s, schemas.CreateOriginEndpointRequest_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serializeCreateDashManifests(s, schemas.CreateOriginEndpointRequest_DashManifests, v.DashManifests)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateOriginEndpointRequest_Description, *v.Description)
 	}
@@ -149,9 +151,15 @@ func (v *CreateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeCreateHlsManifests(s, schemas.CreateOriginEndpointRequest_HlsManifests, v.HlsManifests)
-	serializeCreateLowLatencyHlsManifests(s, schemas.CreateOriginEndpointRequest_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
-	serializeCreateMssManifests(s, schemas.CreateOriginEndpointRequest_MssManifests, v.MssManifests)
+	if v.HlsManifests != nil {
+		serializeCreateHlsManifests(s, schemas.CreateOriginEndpointRequest_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeCreateLowLatencyHlsManifests(s, schemas.CreateOriginEndpointRequest_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
+	if v.MssManifests != nil {
+		serializeCreateMssManifests(s, schemas.CreateOriginEndpointRequest_MssManifests, v.MssManifests)
+	}
 	if v.OriginEndpointName != nil {
 		s.WriteString(schemas.CreateOriginEndpointRequest_OriginEndpointName, *v.OriginEndpointName)
 	}
@@ -166,7 +174,9 @@ func (v *CreateOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamNameOutputMode != "" {
 		s.WriteString(schemas.CreateOriginEndpointRequest_StreamNameOutputMode, string(v.StreamNameOutputMode))
 	}
-	serializeTagMap(s, schemas.CreateOriginEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateOriginEndpointRequest_Tags, v.Tags)
+	}
 	if v.UriSeparator != "" {
 		s.WriteString(schemas.CreateOriginEndpointRequest_UriSeparator, string(v.UriSeparator))
 	}
@@ -285,7 +295,9 @@ func (v *CreateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateOriginEndpointResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeGetDashManifests(s, schemas.CreateOriginEndpointResponse_DashManifests, v.DashManifests)
+	if v.DashManifests != nil {
+		serializeGetDashManifests(s, schemas.CreateOriginEndpointResponse_DashManifests, v.DashManifests)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateOriginEndpointResponse_Description, *v.Description)
 	}
@@ -297,12 +309,18 @@ func (v *CreateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.ForceEndpointErrorConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGetHlsManifests(s, schemas.CreateOriginEndpointResponse_HlsManifests, v.HlsManifests)
-	serializeGetLowLatencyHlsManifests(s, schemas.CreateOriginEndpointResponse_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	if v.HlsManifests != nil {
+		serializeGetHlsManifests(s, schemas.CreateOriginEndpointResponse_HlsManifests, v.HlsManifests)
+	}
+	if v.LowLatencyHlsManifests != nil {
+		serializeGetLowLatencyHlsManifests(s, schemas.CreateOriginEndpointResponse_LowLatencyHlsManifests, v.LowLatencyHlsManifests)
+	}
 	if v.ModifiedAt != nil {
 		s.WriteTime(schemas.CreateOriginEndpointResponse_ModifiedAt, *v.ModifiedAt)
 	}
-	serializeGetMssManifests(s, schemas.CreateOriginEndpointResponse_MssManifests, v.MssManifests)
+	if v.MssManifests != nil {
+		serializeGetMssManifests(s, schemas.CreateOriginEndpointResponse_MssManifests, v.MssManifests)
+	}
 	if v.OriginEndpointName != nil {
 		s.WriteString(schemas.CreateOriginEndpointResponse_OriginEndpointName, *v.OriginEndpointName)
 	}
@@ -317,7 +335,9 @@ func (v *CreateOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.StreamNameOutputMode != "" {
 		s.WriteString(schemas.CreateOriginEndpointResponse_StreamNameOutputMode, string(v.StreamNameOutputMode))
 	}
-	serializeTagMap(s, schemas.CreateOriginEndpointResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateOriginEndpointResponse_Tags, v.Tags)
+	}
 	if v.UriSeparator != "" {
 		s.WriteString(schemas.CreateOriginEndpointResponse_UriSeparator, string(v.UriSeparator))
 	}

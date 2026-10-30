@@ -111,7 +111,9 @@ func (v *PutTemplateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.PutTemplateActionRequest_documentVersion, *v.DocumentVersion)
 	}
-	serializeSsmDocumentExternalParameters(s, schemas.PutTemplateActionRequest_externalParameters, v.ExternalParameters)
+	if v.ExternalParameters != nil {
+		serializeSsmDocumentExternalParameters(s, schemas.PutTemplateActionRequest_externalParameters, v.ExternalParameters)
+	}
 	if v.LaunchConfigurationTemplateID != nil {
 		s.WriteString(schemas.PutTemplateActionRequest_launchConfigurationTemplateID, *v.LaunchConfigurationTemplateID)
 	}
@@ -124,7 +126,9 @@ func (v *PutTemplateActionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Order != nil {
 		s.WriteInt32(schemas.PutTemplateActionRequest_order, *v.Order)
 	}
-	serializeSsmDocumentParameters(s, schemas.PutTemplateActionRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSsmDocumentParameters(s, schemas.PutTemplateActionRequest_parameters, v.Parameters)
+	}
 	if v.TimeoutSeconds != nil {
 		s.WriteInt32(schemas.PutTemplateActionRequest_timeoutSeconds, *v.TimeoutSeconds)
 	}
@@ -256,7 +260,9 @@ func (v *PutTemplateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DocumentVersion != nil {
 		s.WriteString(schemas.TemplateActionDocument_documentVersion, *v.DocumentVersion)
 	}
-	serializeSsmDocumentExternalParameters(s, schemas.TemplateActionDocument_externalParameters, v.ExternalParameters)
+	if v.ExternalParameters != nil {
+		serializeSsmDocumentExternalParameters(s, schemas.TemplateActionDocument_externalParameters, v.ExternalParameters)
+	}
 	if v.MustSucceedForCutover != nil {
 		s.WriteBool(schemas.TemplateActionDocument_mustSucceedForCutover, *v.MustSucceedForCutover)
 	}
@@ -266,7 +272,9 @@ func (v *PutTemplateActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Order != nil {
 		s.WriteInt32(schemas.TemplateActionDocument_order, *v.Order)
 	}
-	serializeSsmDocumentParameters(s, schemas.TemplateActionDocument_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeSsmDocumentParameters(s, schemas.TemplateActionDocument_parameters, v.Parameters)
+	}
 	if v.TimeoutSeconds != nil {
 		s.WriteInt32(schemas.TemplateActionDocument_timeoutSeconds, *v.TimeoutSeconds)
 	}

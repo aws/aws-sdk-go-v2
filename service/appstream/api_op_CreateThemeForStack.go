@@ -80,7 +80,9 @@ func (v *CreateThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FaviconS3Location.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeThemeFooterLinks(s, schemas.CreateThemeForStackRequest_FooterLinks, v.FooterLinks)
+	if v.FooterLinks != nil {
+		serializeThemeFooterLinks(s, schemas.CreateThemeForStackRequest_FooterLinks, v.FooterLinks)
+	}
 	if v.OrganizationLogoS3Location != nil {
 		s.WriteStruct(schemas.CreateThemeForStackRequest_OrganizationLogoS3Location)
 		v.OrganizationLogoS3Location.SerializeMembers(s)

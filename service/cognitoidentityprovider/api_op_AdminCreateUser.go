@@ -231,8 +231,12 @@ func (v *AdminCreateUserInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AdminCreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientMetadataType(s, schemas.AdminCreateUserRequest_ClientMetadata, v.ClientMetadata)
-	serializeDeliveryMediumListType(s, schemas.AdminCreateUserRequest_DesiredDeliveryMediums, v.DesiredDeliveryMediums)
+	if v.ClientMetadata != nil {
+		serializeClientMetadataType(s, schemas.AdminCreateUserRequest_ClientMetadata, v.ClientMetadata)
+	}
+	if v.DesiredDeliveryMediums != nil {
+		serializeDeliveryMediumListType(s, schemas.AdminCreateUserRequest_DesiredDeliveryMediums, v.DesiredDeliveryMediums)
+	}
 	if v.ForceAliasCreation != false {
 		s.WriteBool(schemas.AdminCreateUserRequest_ForceAliasCreation, v.ForceAliasCreation)
 	}
@@ -242,14 +246,18 @@ func (v *AdminCreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TemporaryPassword != nil {
 		s.WriteString(schemas.AdminCreateUserRequest_TemporaryPassword, *v.TemporaryPassword)
 	}
-	serializeAttributeListType(s, schemas.AdminCreateUserRequest_UserAttributes, v.UserAttributes)
+	if v.UserAttributes != nil {
+		serializeAttributeListType(s, schemas.AdminCreateUserRequest_UserAttributes, v.UserAttributes)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.AdminCreateUserRequest_UserPoolId, *v.UserPoolId)
 	}
 	if v.Username != nil {
 		s.WriteString(schemas.AdminCreateUserRequest_Username, *v.Username)
 	}
-	serializeAttributeListType(s, schemas.AdminCreateUserRequest_ValidationData, v.ValidationData)
+	if v.ValidationData != nil {
+		serializeAttributeListType(s, schemas.AdminCreateUserRequest_ValidationData, v.ValidationData)
+	}
 }
 
 // Represents the response from the server to the request to create the user.

@@ -91,7 +91,9 @@ func (v *CreatePrivateDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerializ
 		v.Properties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreatePrivateDnsNamespaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreatePrivateDnsNamespaceRequest_Tags, v.Tags)
+	}
 	if v.Vpc != nil {
 		s.WriteString(schemas.CreatePrivateDnsNamespaceRequest_Vpc, *v.Vpc)
 	}

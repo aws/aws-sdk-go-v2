@@ -107,7 +107,9 @@ func (v *ListWorkflowsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListWorkflowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowList(s, schemas.ListWorkflowsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeWorkflowList(s, schemas.ListWorkflowsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWorkflowsResponse_NextToken, *v.NextToken)
 	}

@@ -81,7 +81,9 @@ func (v *ListPortalProductsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListPortalProductsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfPortalProductSummary(s, schemas.ListPortalProductsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfPortalProductSummary(s, schemas.ListPortalProductsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPortalProductsResponse_NextToken, *v.NextToken)
 	}

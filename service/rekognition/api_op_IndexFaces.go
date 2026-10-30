@@ -196,7 +196,9 @@ func (v *IndexFacesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CollectionId != nil {
 		s.WriteString(schemas.IndexFacesRequest_CollectionId, *v.CollectionId)
 	}
-	serializeAttributes(s, schemas.IndexFacesRequest_DetectionAttributes, v.DetectionAttributes)
+	if v.DetectionAttributes != nil {
+		serializeAttributes(s, schemas.IndexFacesRequest_DetectionAttributes, v.DetectionAttributes)
+	}
 	if v.ExternalImageId != nil {
 		s.WriteString(schemas.IndexFacesRequest_ExternalImageId, *v.ExternalImageId)
 	}
@@ -270,11 +272,15 @@ func (v *IndexFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FaceModelVersion != nil {
 		s.WriteString(schemas.IndexFacesResponse_FaceModelVersion, *v.FaceModelVersion)
 	}
-	serializeFaceRecordList(s, schemas.IndexFacesResponse_FaceRecords, v.FaceRecords)
+	if v.FaceRecords != nil {
+		serializeFaceRecordList(s, schemas.IndexFacesResponse_FaceRecords, v.FaceRecords)
+	}
 	if v.OrientationCorrection != "" {
 		s.WriteString(schemas.IndexFacesResponse_OrientationCorrection, string(v.OrientationCorrection))
 	}
-	serializeUnindexedFaces(s, schemas.IndexFacesResponse_UnindexedFaces, v.UnindexedFaces)
+	if v.UnindexedFaces != nil {
+		serializeUnindexedFaces(s, schemas.IndexFacesResponse_UnindexedFaces, v.UnindexedFaces)
+	}
 }
 func (v *IndexFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IndexFacesResponse, func(s *smithy.Schema) error {

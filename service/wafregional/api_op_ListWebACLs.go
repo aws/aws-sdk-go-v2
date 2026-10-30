@@ -97,7 +97,9 @@ func (v *ListWebACLsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListWebACLsResponse_NextMarker, *v.NextMarker)
 	}
-	serializeWebACLSummaries(s, schemas.ListWebACLsResponse_WebACLs, v.WebACLs)
+	if v.WebACLs != nil {
+		serializeWebACLSummaries(s, schemas.ListWebACLsResponse_WebACLs, v.WebACLs)
+	}
 }
 func (v *ListWebACLsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWebACLsResponse, func(s *smithy.Schema) error {

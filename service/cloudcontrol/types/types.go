@@ -365,8 +365,12 @@ func (v *ResourceRequestStatusFilter) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResourceRequestStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationStatuses(s, schemas.ResourceRequestStatusFilter_OperationStatuses, v.OperationStatuses)
-	serializeOperations(s, schemas.ResourceRequestStatusFilter_Operations, v.Operations)
+	if v.OperationStatuses != nil {
+		serializeOperationStatuses(s, schemas.ResourceRequestStatusFilter_OperationStatuses, v.OperationStatuses)
+	}
+	if v.Operations != nil {
+		serializeOperations(s, schemas.ResourceRequestStatusFilter_Operations, v.Operations)
+	}
 }
 func (v *ResourceRequestStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceRequestStatusFilter, func(s *smithy.Schema) error {

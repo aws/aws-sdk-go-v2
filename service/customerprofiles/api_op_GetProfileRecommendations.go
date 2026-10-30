@@ -84,8 +84,12 @@ func (v *GetProfileRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetProfileRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCandidateIdList(s, schemas.GetProfileRecommendationsRequest_CandidateIds, v.CandidateIds)
-	serializeRecommenderContext(s, schemas.GetProfileRecommendationsRequest_Context, v.Context)
+	if v.CandidateIds != nil {
+		serializeCandidateIdList(s, schemas.GetProfileRecommendationsRequest_CandidateIds, v.CandidateIds)
+	}
+	if v.Context != nil {
+		serializeRecommenderContext(s, schemas.GetProfileRecommendationsRequest_Context, v.Context)
+	}
 	if v.DiversityConfig != nil {
 		s.WriteStruct(schemas.GetProfileRecommendationsRequest_DiversityConfig)
 		v.DiversityConfig.SerializeMembers(s)
@@ -105,11 +109,15 @@ func (v *GetProfileRecommendationsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ProfileId != nil {
 		s.WriteString(schemas.GetProfileRecommendationsRequest_ProfileId, *v.ProfileId)
 	}
-	serializeRecommenderFilters(s, schemas.GetProfileRecommendationsRequest_RecommenderFilters, v.RecommenderFilters)
+	if v.RecommenderFilters != nil {
+		serializeRecommenderFilters(s, schemas.GetProfileRecommendationsRequest_RecommenderFilters, v.RecommenderFilters)
+	}
 	if v.RecommenderName != nil {
 		s.WriteString(schemas.GetProfileRecommendationsRequest_RecommenderName, *v.RecommenderName)
 	}
-	serializeRecommenderPromotionalFilters(s, schemas.GetProfileRecommendationsRequest_RecommenderPromotionalFilters, v.RecommenderPromotionalFilters)
+	if v.RecommenderPromotionalFilters != nil {
+		serializeRecommenderPromotionalFilters(s, schemas.GetProfileRecommendationsRequest_RecommenderPromotionalFilters, v.RecommenderPromotionalFilters)
+	}
 }
 
 type GetProfileRecommendationsOutput struct {
@@ -130,7 +138,9 @@ func (v *GetProfileRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetProfileRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecommendations(s, schemas.GetProfileRecommendationsResponse_Recommendations, v.Recommendations)
+	if v.Recommendations != nil {
+		serializeRecommendations(s, schemas.GetProfileRecommendationsResponse_Recommendations, v.Recommendations)
+	}
 }
 func (v *GetProfileRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetProfileRecommendationsResponse, func(s *smithy.Schema) error {

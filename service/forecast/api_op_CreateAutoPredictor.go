@@ -212,14 +212,18 @@ func (v *CreateAutoPredictorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExplainPredictor != nil {
 		s.WriteBool(schemas.CreateAutoPredictorRequest_ExplainPredictor, *v.ExplainPredictor)
 	}
-	serializeForecastDimensions(s, schemas.CreateAutoPredictorRequest_ForecastDimensions, v.ForecastDimensions)
+	if v.ForecastDimensions != nil {
+		serializeForecastDimensions(s, schemas.CreateAutoPredictorRequest_ForecastDimensions, v.ForecastDimensions)
+	}
 	if v.ForecastFrequency != nil {
 		s.WriteString(schemas.CreateAutoPredictorRequest_ForecastFrequency, *v.ForecastFrequency)
 	}
 	if v.ForecastHorizon != nil {
 		s.WriteInt32(schemas.CreateAutoPredictorRequest_ForecastHorizon, *v.ForecastHorizon)
 	}
-	serializeForecastTypes(s, schemas.CreateAutoPredictorRequest_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.CreateAutoPredictorRequest_ForecastTypes, v.ForecastTypes)
+	}
 	if v.MonitorConfig != nil {
 		s.WriteStruct(schemas.CreateAutoPredictorRequest_MonitorConfig)
 		v.MonitorConfig.SerializeMembers(s)
@@ -234,7 +238,9 @@ func (v *CreateAutoPredictorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReferencePredictorArn != nil {
 		s.WriteString(schemas.CreateAutoPredictorRequest_ReferencePredictorArn, *v.ReferencePredictorArn)
 	}
-	serializeTags(s, schemas.CreateAutoPredictorRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateAutoPredictorRequest_Tags, v.Tags)
+	}
 	if v.TimeAlignmentBoundary != nil {
 		s.WriteStruct(schemas.CreateAutoPredictorRequest_TimeAlignmentBoundary)
 		v.TimeAlignmentBoundary.SerializeMembers(s)

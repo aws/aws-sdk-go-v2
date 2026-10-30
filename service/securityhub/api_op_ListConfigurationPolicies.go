@@ -90,7 +90,9 @@ func (v *ListConfigurationPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationPolicySummaryList(s, schemas.ListConfigurationPoliciesResponse_ConfigurationPolicySummaries, v.ConfigurationPolicySummaries)
+	if v.ConfigurationPolicySummaries != nil {
+		serializeConfigurationPolicySummaryList(s, schemas.ListConfigurationPoliciesResponse_ConfigurationPolicySummaries, v.ConfigurationPolicySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConfigurationPoliciesResponse_NextToken, *v.NextToken)
 	}

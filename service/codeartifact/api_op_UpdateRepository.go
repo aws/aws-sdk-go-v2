@@ -74,7 +74,9 @@ func (v *UpdateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Repository != nil {
 		s.WriteString(schemas.UpdateRepositoryRequest_repository, *v.Repository)
 	}
-	serializeUpstreamRepositoryList(s, schemas.UpdateRepositoryRequest_upstreams, v.Upstreams)
+	if v.Upstreams != nil {
+		serializeUpstreamRepositoryList(s, schemas.UpdateRepositoryRequest_upstreams, v.Upstreams)
+	}
 }
 
 type UpdateRepositoryOutput struct {

@@ -102,7 +102,9 @@ func (v *UpdateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateFleetRequest_clientToken, *v.ClientToken)
 	}
-	serializeFleetConfiguration(s, schemas.UpdateFleetRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeFleetConfiguration(s, schemas.UpdateFleetRequest_configuration, v.Configuration)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateFleetRequest_description, *v.Description)
 	}

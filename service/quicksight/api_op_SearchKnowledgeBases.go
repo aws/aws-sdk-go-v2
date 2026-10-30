@@ -59,7 +59,9 @@ func (v *SearchKnowledgeBasesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.SearchKnowledgeBasesRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeKnowledgeBaseSearchFilters(s, schemas.SearchKnowledgeBasesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeKnowledgeBaseSearchFilters(s, schemas.SearchKnowledgeBasesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchKnowledgeBasesRequest_MaxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *SearchKnowledgeBasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchKnowledgeBasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeKnowledgeBaseSummaries(s, schemas.SearchKnowledgeBasesResponse_KnowledgeBaseSummaries, v.KnowledgeBaseSummaries)
+	if v.KnowledgeBaseSummaries != nil {
+		serializeKnowledgeBaseSummaries(s, schemas.SearchKnowledgeBasesResponse_KnowledgeBaseSummaries, v.KnowledgeBaseSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchKnowledgeBasesResponse_NextToken, *v.NextToken)
 	}

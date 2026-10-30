@@ -89,7 +89,9 @@ func (v *ListAssetsForLicenseAssetGroupOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListAssetsForLicenseAssetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetList(s, schemas.ListAssetsForLicenseAssetGroupResponse_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetList(s, schemas.ListAssetsForLicenseAssetGroupResponse_Assets, v.Assets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetsForLicenseAssetGroupResponse_NextToken, *v.NextToken)
 	}

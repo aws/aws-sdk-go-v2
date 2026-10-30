@@ -95,7 +95,9 @@ func (v *ListMaterializedViewRefreshTaskRunsOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *ListMaterializedViewRefreshTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMaterializedViewRefreshTaskRunsList(s, schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns, v.MaterializedViewRefreshTaskRuns)
+	if v.MaterializedViewRefreshTaskRuns != nil {
+		serializeMaterializedViewRefreshTaskRunsList(s, schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns, v.MaterializedViewRefreshTaskRuns)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken, *v.NextToken)
 	}

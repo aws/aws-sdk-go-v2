@@ -70,7 +70,9 @@ func (v *BatchToggleUserSuspendStatusInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Suspend != nil {
 		s.WriteBool(schemas.BatchToggleUserSuspendStatusRequest_suspend, *v.Suspend)
 	}
-	serializeUserIds(s, schemas.BatchToggleUserSuspendStatusRequest_userIds, v.UserIds)
+	if v.UserIds != nil {
+		serializeUserIds(s, schemas.BatchToggleUserSuspendStatusRequest_userIds, v.UserIds)
+	}
 }
 
 type BatchToggleUserSuspendStatusOutput struct {
@@ -99,11 +101,15 @@ func (v *BatchToggleUserSuspendStatusOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *BatchToggleUserSuspendStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUserErrorResponseItems(s, schemas.BatchToggleUserSuspendStatusResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeBatchUserErrorResponseItems(s, schemas.BatchToggleUserSuspendStatusResponse_failed, v.Failed)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchToggleUserSuspendStatusResponse_message, *v.Message)
 	}
-	serializeBatchUserSuccessResponseItems(s, schemas.BatchToggleUserSuspendStatusResponse_successful, v.Successful)
+	if v.Successful != nil {
+		serializeBatchUserSuccessResponseItems(s, schemas.BatchToggleUserSuspendStatusResponse_successful, v.Successful)
+	}
 }
 func (v *BatchToggleUserSuspendStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchToggleUserSuspendStatusResponse, func(s *smithy.Schema) error {

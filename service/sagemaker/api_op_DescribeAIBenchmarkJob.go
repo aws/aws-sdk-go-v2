@@ -134,7 +134,9 @@ func (v *DescribeAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AIWorkloadConfigIdentifier != nil {
 		s.WriteString(schemas.DescribeAIBenchmarkJobResponse_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
 	}
-	serializeAIBenchmarkTarget(s, schemas.DescribeAIBenchmarkJobResponse_BenchmarkTarget, v.BenchmarkTarget)
+	if v.BenchmarkTarget != nil {
+		serializeAIBenchmarkTarget(s, schemas.DescribeAIBenchmarkJobResponse_BenchmarkTarget, v.BenchmarkTarget)
+	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribeAIBenchmarkJobResponse_CreationTime, *v.CreationTime)
 	}
@@ -160,7 +162,9 @@ func (v *DescribeAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.StartTime != nil {
 		s.WriteTime(schemas.DescribeAIBenchmarkJobResponse_StartTime, *v.StartTime)
 	}
-	serializeTagList(s, schemas.DescribeAIBenchmarkJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DescribeAIBenchmarkJobResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAIBenchmarkJobResponse, func(s *smithy.Schema) error {

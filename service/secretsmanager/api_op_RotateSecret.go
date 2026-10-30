@@ -160,7 +160,9 @@ func (v *RotateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.RotateSecretRequest_ClientRequestToken, *v.ClientRequestToken)
 	}
-	serializeExternalSecretRotationMetadataType(s, schemas.RotateSecretRequest_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	if v.ExternalSecretRotationMetadata != nil {
+		serializeExternalSecretRotationMetadataType(s, schemas.RotateSecretRequest_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	}
 	if v.ExternalSecretRotationRoleArn != nil {
 		s.WriteString(schemas.RotateSecretRequest_ExternalSecretRotationRoleArn, *v.ExternalSecretRotationRoleArn)
 	}

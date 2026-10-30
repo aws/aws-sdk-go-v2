@@ -71,7 +71,9 @@ func (v *ListAvailableZonesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAvailableZonesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAZList(s, schemas.ListAvailableZonesResponse_AZList, v.AZList)
+	if v.AZList != nil {
+		serializeAZList(s, schemas.ListAvailableZonesResponse_AZList, v.AZList)
+	}
 }
 func (v *ListAvailableZonesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListAvailableZonesResponse, func(s *smithy.Schema) error {

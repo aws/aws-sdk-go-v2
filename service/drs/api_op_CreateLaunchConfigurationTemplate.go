@@ -96,7 +96,9 @@ func (v *CreateLaunchConfigurationTemplateInput) SerializeMembers(s smithy.Shape
 	if v.RecoveryMode != "" {
 		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_recoveryMode, string(v.RecoveryMode))
 	}
-	serializeTagsMap(s, schemas.CreateLaunchConfigurationTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateLaunchConfigurationTemplateRequest_tags, v.Tags)
+	}
 	if v.TargetInstanceTypeRightSizingMethod != "" {
 		s.WriteString(schemas.CreateLaunchConfigurationTemplateRequest_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
 	}

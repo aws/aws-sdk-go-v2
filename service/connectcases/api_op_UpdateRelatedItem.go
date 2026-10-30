@@ -91,11 +91,15 @@ func (v *UpdateRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseId != nil {
 		s.WriteString(schemas.UpdateRelatedItemRequest_caseId, *v.CaseId)
 	}
-	serializeRelatedItemUpdateContent(s, schemas.UpdateRelatedItemRequest_content, v.Content)
+	if v.Content != nil {
+		serializeRelatedItemUpdateContent(s, schemas.UpdateRelatedItemRequest_content, v.Content)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.UpdateRelatedItemRequest_domainId, *v.DomainId)
 	}
-	serializeUserUnion(s, schemas.UpdateRelatedItemRequest_performedBy, v.PerformedBy)
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.UpdateRelatedItemRequest_performedBy, v.PerformedBy)
+	}
 	if v.RelatedItemId != nil {
 		s.WriteString(schemas.UpdateRelatedItemRequest_relatedItemId, *v.RelatedItemId)
 	}
@@ -154,16 +158,24 @@ func (v *UpdateRelatedItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssociationTime != nil {
 		s.WriteTime(schemas.UpdateRelatedItemResponse_associationTime, *v.AssociationTime)
 	}
-	serializeRelatedItemContent(s, schemas.UpdateRelatedItemResponse_content, v.Content)
-	serializeUserUnion(s, schemas.UpdateRelatedItemResponse_createdBy, v.CreatedBy)
-	serializeUserUnion(s, schemas.UpdateRelatedItemResponse_lastUpdatedUser, v.LastUpdatedUser)
+	if v.Content != nil {
+		serializeRelatedItemContent(s, schemas.UpdateRelatedItemResponse_content, v.Content)
+	}
+	if v.CreatedBy != nil {
+		serializeUserUnion(s, schemas.UpdateRelatedItemResponse_createdBy, v.CreatedBy)
+	}
+	if v.LastUpdatedUser != nil {
+		serializeUserUnion(s, schemas.UpdateRelatedItemResponse_lastUpdatedUser, v.LastUpdatedUser)
+	}
 	if v.RelatedItemArn != nil {
 		s.WriteString(schemas.UpdateRelatedItemResponse_relatedItemArn, *v.RelatedItemArn)
 	}
 	if v.RelatedItemId != nil {
 		s.WriteString(schemas.UpdateRelatedItemResponse_relatedItemId, *v.RelatedItemId)
 	}
-	serializeTags(s, schemas.UpdateRelatedItemResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateRelatedItemResponse_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.UpdateRelatedItemResponse_type, string(v.Type))
 	}

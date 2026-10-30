@@ -88,8 +88,12 @@ func (v *IsAuthorizedInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContextDefinition(s, schemas.IsAuthorizedInput_context, v.Context)
-	serializeEntitiesDefinition(s, schemas.IsAuthorizedInput_entities, v.Entities)
+	if v.Context != nil {
+		serializeContextDefinition(s, schemas.IsAuthorizedInput_context, v.Context)
+	}
+	if v.Entities != nil {
+		serializeEntitiesDefinition(s, schemas.IsAuthorizedInput_entities, v.Entities)
+	}
 	if v.PolicyStoreId != nil {
 		s.WriteString(schemas.IsAuthorizedInput_policyStoreId, *v.PolicyStoreId)
 	}
@@ -146,8 +150,12 @@ func (v *IsAuthorizedOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Decision != "" {
 		s.WriteString(schemas.IsAuthorizedOutput_decision, string(v.Decision))
 	}
-	serializeDeterminingPolicyList(s, schemas.IsAuthorizedOutput_determiningPolicies, v.DeterminingPolicies)
-	serializeEvaluationErrorList(s, schemas.IsAuthorizedOutput_errors, v.Errors)
+	if v.DeterminingPolicies != nil {
+		serializeDeterminingPolicyList(s, schemas.IsAuthorizedOutput_determiningPolicies, v.DeterminingPolicies)
+	}
+	if v.Errors != nil {
+		serializeEvaluationErrorList(s, schemas.IsAuthorizedOutput_errors, v.Errors)
+	}
 }
 func (v *IsAuthorizedOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IsAuthorizedOutput, func(s *smithy.Schema) error {

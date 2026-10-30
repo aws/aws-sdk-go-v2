@@ -100,7 +100,9 @@ func (v *ListTrustedTokenIssuersOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrustedTokenIssuersResponse_NextToken, *v.NextToken)
 	}
-	serializeTrustedTokenIssuerList(s, schemas.ListTrustedTokenIssuersResponse_TrustedTokenIssuers, v.TrustedTokenIssuers)
+	if v.TrustedTokenIssuers != nil {
+		serializeTrustedTokenIssuerList(s, schemas.ListTrustedTokenIssuersResponse_TrustedTokenIssuers, v.TrustedTokenIssuers)
+	}
 }
 func (v *ListTrustedTokenIssuersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrustedTokenIssuersResponse, func(s *smithy.Schema) error {

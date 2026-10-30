@@ -103,11 +103,15 @@ func (v *PredictedItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ItemId != nil {
 		s.WriteString(schemas.PredictedItem_itemId, *v.ItemId)
 	}
-	serializeMetadata(s, schemas.PredictedItem_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.PredictedItem_metadata, v.Metadata)
+	}
 	if v.PromotionName != nil {
 		s.WriteString(schemas.PredictedItem_promotionName, *v.PromotionName)
 	}
-	serializeReasonList(s, schemas.PredictedItem_reason, v.Reason)
+	if v.Reason != nil {
+		serializeReasonList(s, schemas.PredictedItem_reason, v.Reason)
+	}
 	if v.Score != nil {
 		s.WriteFloat64(schemas.PredictedItem_score, *v.Score)
 	}
@@ -178,7 +182,9 @@ func (v *Promotion) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FilterArn != nil {
 		s.WriteString(schemas.Promotion_filterArn, *v.FilterArn)
 	}
-	serializeFilterValues(s, schemas.Promotion_filterValues, v.FilterValues)
+	if v.FilterValues != nil {
+		serializeFilterValues(s, schemas.Promotion_filterValues, v.FilterValues)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Promotion_name, *v.Name)
 	}

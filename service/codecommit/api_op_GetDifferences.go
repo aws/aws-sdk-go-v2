@@ -128,7 +128,9 @@ func (v *GetDifferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetDifferencesOutput_NextToken, *v.NextToken)
 	}
-	serializeDifferenceList(s, schemas.GetDifferencesOutput_differences, v.Differences)
+	if v.Differences != nil {
+		serializeDifferenceList(s, schemas.GetDifferencesOutput_differences, v.Differences)
+	}
 }
 func (v *GetDifferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDifferencesOutput, func(s *smithy.Schema) error {

@@ -68,14 +68,18 @@ func (v *DescribeDataRepositoryTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDataRepositoryTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataRepositoryTaskFilters(s, schemas.DescribeDataRepositoryTasksRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeDataRepositoryTaskFilters(s, schemas.DescribeDataRepositoryTasksRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeDataRepositoryTasksRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDataRepositoryTasksRequest_NextToken, *v.NextToken)
 	}
-	serializeTaskIds(s, schemas.DescribeDataRepositoryTasksRequest_TaskIds, v.TaskIds)
+	if v.TaskIds != nil {
+		serializeTaskIds(s, schemas.DescribeDataRepositoryTasksRequest_TaskIds, v.TaskIds)
+	}
 }
 
 type DescribeDataRepositoryTasksOutput struct {
@@ -101,7 +105,9 @@ func (v *DescribeDataRepositoryTasksOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeDataRepositoryTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDataRepositoryTasks(s, schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks, v.DataRepositoryTasks)
+	if v.DataRepositoryTasks != nil {
+		serializeDataRepositoryTasks(s, schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks, v.DataRepositoryTasks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeDataRepositoryTasksResponse_NextToken, *v.NextToken)
 	}

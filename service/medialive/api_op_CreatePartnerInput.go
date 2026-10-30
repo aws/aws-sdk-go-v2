@@ -58,7 +58,9 @@ func (v *CreatePartnerInputInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreatePartnerInputRequest_RequestId, *v.RequestId)
 	}
-	serializeTags(s, schemas.CreatePartnerInputRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePartnerInputRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreatePartnerInputResponse

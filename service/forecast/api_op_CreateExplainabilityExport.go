@@ -107,7 +107,9 @@ func (v *CreateExplainabilityExportInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Format != nil {
 		s.WriteString(schemas.CreateExplainabilityExportRequest_Format, *v.Format)
 	}
-	serializeTags(s, schemas.CreateExplainabilityExportRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateExplainabilityExportRequest_Tags, v.Tags)
+	}
 }
 
 type CreateExplainabilityExportOutput struct {

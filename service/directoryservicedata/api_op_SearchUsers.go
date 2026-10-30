@@ -101,7 +101,9 @@ func (v *SearchUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Realm != nil {
 		s.WriteString(schemas.SearchUsersRequest_Realm, *v.Realm)
 	}
-	serializeLdapDisplayNameList(s, schemas.SearchUsersRequest_SearchAttributes, v.SearchAttributes)
+	if v.SearchAttributes != nil {
+		serializeLdapDisplayNameList(s, schemas.SearchUsersRequest_SearchAttributes, v.SearchAttributes)
+	}
 	if v.SearchString != nil {
 		s.WriteString(schemas.SearchUsersRequest_SearchString, *v.SearchString)
 	}
@@ -144,7 +146,9 @@ func (v *SearchUsersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Realm != nil {
 		s.WriteString(schemas.SearchUsersResult_Realm, *v.Realm)
 	}
-	serializeUserList(s, schemas.SearchUsersResult_Users, v.Users)
+	if v.Users != nil {
+		serializeUserList(s, schemas.SearchUsersResult_Users, v.Users)
+	}
 }
 func (v *SearchUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchUsersResult, func(s *smithy.Schema) error {

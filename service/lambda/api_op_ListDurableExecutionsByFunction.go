@@ -102,7 +102,9 @@ func (v *ListDurableExecutionsByFunctionInput) SerializeMembers(s smithy.ShapeSe
 	if v.StartedBefore != nil {
 		s.WriteTime(schemas.ListDurableExecutionsByFunctionRequest_StartedBefore, *v.StartedBefore)
 	}
-	serializeExecutionStatusList(s, schemas.ListDurableExecutionsByFunctionRequest_Statuses, v.Statuses)
+	if v.Statuses != nil {
+		serializeExecutionStatusList(s, schemas.ListDurableExecutionsByFunctionRequest_Statuses, v.Statuses)
+	}
 }
 
 // The response from the ListDurableExecutionsByFunction operation, containing a
@@ -129,7 +131,9 @@ func (v *ListDurableExecutionsByFunctionOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListDurableExecutionsByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDurableExecutions(s, schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions, v.DurableExecutions)
+	if v.DurableExecutions != nil {
+		serializeDurableExecutions(s, schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions, v.DurableExecutions)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.ListDurableExecutionsByFunctionResponse_NextMarker, *v.NextMarker)
 	}

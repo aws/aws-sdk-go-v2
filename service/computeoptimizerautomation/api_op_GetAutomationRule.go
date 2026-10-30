@@ -145,7 +145,9 @@ func (v *GetAutomationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Priority != nil {
 		s.WriteString(schemas.GetAutomationRuleResponse_priority, *v.Priority)
 	}
-	serializeRecommendedActionTypeList(s, schemas.GetAutomationRuleResponse_recommendedActionTypes, v.RecommendedActionTypes)
+	if v.RecommendedActionTypes != nil {
+		serializeRecommendedActionTypeList(s, schemas.GetAutomationRuleResponse_recommendedActionTypes, v.RecommendedActionTypes)
+	}
 	if v.RuleArn != nil {
 		s.WriteString(schemas.GetAutomationRuleResponse_ruleArn, *v.RuleArn)
 	}
@@ -166,7 +168,9 @@ func (v *GetAutomationRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetAutomationRuleResponse_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.GetAutomationRuleResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.GetAutomationRuleResponse_tags, v.Tags)
+	}
 }
 func (v *GetAutomationRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAutomationRuleResponse, func(s *smithy.Schema) error {

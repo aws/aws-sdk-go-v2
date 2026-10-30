@@ -52,7 +52,9 @@ func (v *UpdateVpcAttachmentInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubnetArnList(s, schemas.UpdateVpcAttachmentRequest_AddSubnetArns, v.AddSubnetArns)
+	if v.AddSubnetArns != nil {
+		serializeSubnetArnList(s, schemas.UpdateVpcAttachmentRequest_AddSubnetArns, v.AddSubnetArns)
+	}
 	if v.AttachmentId != nil {
 		s.WriteString(schemas.UpdateVpcAttachmentRequest_AttachmentId, *v.AttachmentId)
 	}
@@ -61,7 +63,9 @@ func (v *UpdateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Options.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSubnetArnList(s, schemas.UpdateVpcAttachmentRequest_RemoveSubnetArns, v.RemoveSubnetArns)
+	if v.RemoveSubnetArns != nil {
+		serializeSubnetArnList(s, schemas.UpdateVpcAttachmentRequest_RemoveSubnetArns, v.RemoveSubnetArns)
+	}
 }
 
 type UpdateVpcAttachmentOutput struct {

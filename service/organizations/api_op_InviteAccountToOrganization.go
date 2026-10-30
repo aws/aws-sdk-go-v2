@@ -99,7 +99,9 @@ func (v *InviteAccountToOrganizationInput) SerializeMembers(s smithy.ShapeSerial
 	if v.Notes != nil {
 		s.WriteString(schemas.InviteAccountToOrganizationRequest_Notes, *v.Notes)
 	}
-	serializeTags(s, schemas.InviteAccountToOrganizationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.InviteAccountToOrganizationRequest_Tags, v.Tags)
+	}
 	if v.Target != nil {
 		s.WriteStruct(schemas.InviteAccountToOrganizationRequest_Target)
 		v.Target.SerializeMembers(s)

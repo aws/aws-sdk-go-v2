@@ -104,7 +104,9 @@ func (v *GetReadinessCheckResourceStatusOutput) SerializeMembers(s smithy.ShapeS
 	if v.Readiness != "" {
 		s.WriteString(schemas.GetReadinessCheckResourceStatusResponse_Readiness, string(v.Readiness))
 	}
-	serialize__listOfRuleResult(s, schemas.GetReadinessCheckResourceStatusResponse_Rules, v.Rules)
+	if v.Rules != nil {
+		serialize__listOfRuleResult(s, schemas.GetReadinessCheckResourceStatusResponse_Rules, v.Rules)
+	}
 }
 func (v *GetReadinessCheckResourceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetReadinessCheckResourceStatusResponse, func(s *smithy.Schema) error {

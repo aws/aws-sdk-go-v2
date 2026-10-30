@@ -70,7 +70,9 @@ func (v *ListIngestionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSourceId != nil {
 		s.WriteString(schemas.ListIngestionJobsRequest_dataSourceId, *v.DataSourceId)
 	}
-	serializeIngestionJobFilters(s, schemas.ListIngestionJobsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeIngestionJobFilters(s, schemas.ListIngestionJobsRequest_filters, v.Filters)
+	}
 	if v.KnowledgeBaseId != nil {
 		s.WriteString(schemas.ListIngestionJobsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
 	}
@@ -112,7 +114,9 @@ func (v *ListIngestionJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIngestionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngestionJobSummaries(s, schemas.ListIngestionJobsResponse_ingestionJobSummaries, v.IngestionJobSummaries)
+	if v.IngestionJobSummaries != nil {
+		serializeIngestionJobSummaries(s, schemas.ListIngestionJobsResponse_ingestionJobSummaries, v.IngestionJobSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIngestionJobsResponse_nextToken, *v.NextToken)
 	}

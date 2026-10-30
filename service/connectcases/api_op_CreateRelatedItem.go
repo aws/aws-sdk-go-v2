@@ -109,11 +109,15 @@ func (v *CreateRelatedItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CaseId != nil {
 		s.WriteString(schemas.CreateRelatedItemRequest_caseId, *v.CaseId)
 	}
-	serializeRelatedItemInputContent(s, schemas.CreateRelatedItemRequest_content, v.Content)
+	if v.Content != nil {
+		serializeRelatedItemInputContent(s, schemas.CreateRelatedItemRequest_content, v.Content)
+	}
 	if v.DomainId != nil {
 		s.WriteString(schemas.CreateRelatedItemRequest_domainId, *v.DomainId)
 	}
-	serializeUserUnion(s, schemas.CreateRelatedItemRequest_performedBy, v.PerformedBy)
+	if v.PerformedBy != nil {
+		serializeUserUnion(s, schemas.CreateRelatedItemRequest_performedBy, v.PerformedBy)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateRelatedItemRequest_type, string(v.Type))
 	}

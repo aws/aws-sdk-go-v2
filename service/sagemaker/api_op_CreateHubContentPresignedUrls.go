@@ -126,7 +126,9 @@ func (v *CreateHubContentPresignedUrlsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *CreateHubContentPresignedUrlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedUrlConfigs(s, schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs, v.AuthorizedUrlConfigs)
+	if v.AuthorizedUrlConfigs != nil {
+		serializeAuthorizedUrlConfigs(s, schemas.CreateHubContentPresignedUrlsResponse_AuthorizedUrlConfigs, v.AuthorizedUrlConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.CreateHubContentPresignedUrlsResponse_NextToken, *v.NextToken)
 	}

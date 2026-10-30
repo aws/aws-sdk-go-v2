@@ -131,7 +131,9 @@ func (v *ListMarketplaceRevenueShareAllocationsOutput) Serialize(s smithy.ShapeS
 }
 
 func (v *ListMarketplaceRevenueShareAllocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMarketplaceRevenueShareAllocationSummaryList(s, schemas.ListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries, v.MarketplaceRevenueShareAllocationSummaries)
+	if v.MarketplaceRevenueShareAllocationSummaries != nil {
+		serializeMarketplaceRevenueShareAllocationSummaryList(s, schemas.ListMarketplaceRevenueShareAllocationsOutput_MarketplaceRevenueShareAllocationSummaries, v.MarketplaceRevenueShareAllocationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMarketplaceRevenueShareAllocationsOutput_NextToken, *v.NextToken)
 	}

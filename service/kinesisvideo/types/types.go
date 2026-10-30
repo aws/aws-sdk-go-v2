@@ -412,7 +412,9 @@ func (v *ImageGenerationConfiguration) SerializeMembers(s smithy.ShapeSerializer
 	if v.Format != "" {
 		s.WriteString(schemas.ImageGenerationConfiguration_Format, string(v.Format))
 	}
-	serializeFormatConfig(s, schemas.ImageGenerationConfiguration_FormatConfig, v.FormatConfig)
+	if v.FormatConfig != nil {
+		serializeFormatConfig(s, schemas.ImageGenerationConfiguration_FormatConfig, v.FormatConfig)
+	}
 	if v.HeightPixels != nil {
 		s.WriteInt32(schemas.ImageGenerationConfiguration_HeightPixels, *v.HeightPixels)
 	}
@@ -1216,7 +1218,9 @@ func (v *SingleMasterChannelEndpointConfiguration) Serialize(s smithy.ShapeSeria
 }
 
 func (v *SingleMasterChannelEndpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfProtocols(s, schemas.SingleMasterChannelEndpointConfiguration_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeListOfProtocols(s, schemas.SingleMasterChannelEndpointConfiguration_Protocols, v.Protocols)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.SingleMasterChannelEndpointConfiguration_Role, string(v.Role))
 	}

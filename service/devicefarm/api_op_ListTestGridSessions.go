@@ -116,7 +116,9 @@ func (v *ListTestGridSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTestGridSessionsResult_nextToken, *v.NextToken)
 	}
-	serializeTestGridSessions(s, schemas.ListTestGridSessionsResult_testGridSessions, v.TestGridSessions)
+	if v.TestGridSessions != nil {
+		serializeTestGridSessions(s, schemas.ListTestGridSessionsResult_testGridSessions, v.TestGridSessions)
+	}
 }
 func (v *ListTestGridSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTestGridSessionsResult, func(s *smithy.Schema) error {

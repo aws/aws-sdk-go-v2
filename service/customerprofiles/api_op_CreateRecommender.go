@@ -86,7 +86,9 @@ func (v *CreateRecommenderInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecommenderSchemaName != nil {
 		s.WriteString(schemas.CreateRecommenderRequest_RecommenderSchemaName, *v.RecommenderSchemaName)
 	}
-	serializeTagMap(s, schemas.CreateRecommenderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommenderRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRecommenderOutput struct {
@@ -115,7 +117,9 @@ func (v *CreateRecommenderOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecommenderArn != nil {
 		s.WriteString(schemas.CreateRecommenderResponse_RecommenderArn, *v.RecommenderArn)
 	}
-	serializeTagMap(s, schemas.CreateRecommenderResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommenderResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateRecommenderOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRecommenderResponse, func(s *smithy.Schema) error {

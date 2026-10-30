@@ -86,14 +86,18 @@ func (v *CreateScanInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateScanRequest_clientToken, *v.ClientToken)
 	}
-	serializeResourceId(s, schemas.CreateScanRequest_resourceId, v.ResourceId)
+	if v.ResourceId != nil {
+		serializeResourceId(s, schemas.CreateScanRequest_resourceId, v.ResourceId)
+	}
 	if v.ScanName != nil {
 		s.WriteString(schemas.CreateScanRequest_scanName, *v.ScanName)
 	}
 	if v.ScanType != "" {
 		s.WriteString(schemas.CreateScanRequest_scanType, string(v.ScanType))
 	}
-	serializeTagMap(s, schemas.CreateScanRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateScanRequest_tags, v.Tags)
+	}
 }
 
 type CreateScanOutput struct {
@@ -136,7 +140,9 @@ func (v *CreateScanOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateScanOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourceId(s, schemas.CreateScanResponse_resourceId, v.ResourceId)
+	if v.ResourceId != nil {
+		serializeResourceId(s, schemas.CreateScanResponse_resourceId, v.ResourceId)
+	}
 	if v.RunId != nil {
 		s.WriteString(schemas.CreateScanResponse_runId, *v.RunId)
 	}

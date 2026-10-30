@@ -128,7 +128,9 @@ func (v *CreateTapesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoolId != nil {
 		s.WriteString(schemas.CreateTapesInput_PoolId, *v.PoolId)
 	}
-	serializeTags(s, schemas.CreateTapesInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTapesInput_Tags, v.Tags)
+	}
 	if v.TapeBarcodePrefix != nil {
 		s.WriteString(schemas.CreateTapesInput_TapeBarcodePrefix, *v.TapeBarcodePrefix)
 	}
@@ -160,7 +162,9 @@ func (v *CreateTapesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTapesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTapeARNs(s, schemas.CreateTapesOutput_TapeARNs, v.TapeARNs)
+	if v.TapeARNs != nil {
+		serializeTapeARNs(s, schemas.CreateTapesOutput_TapeARNs, v.TapeARNs)
+	}
 }
 func (v *CreateTapesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateTapesOutput, func(s *smithy.Schema) error {

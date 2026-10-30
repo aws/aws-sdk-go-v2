@@ -70,7 +70,9 @@ func (v *TerminateWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TerminateWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTerminateWorkspaceRequests(s, schemas.TerminateWorkspacesRequest_TerminateWorkspaceRequests, v.TerminateWorkspaceRequests)
+	if v.TerminateWorkspaceRequests != nil {
+		serializeTerminateWorkspaceRequests(s, schemas.TerminateWorkspacesRequest_TerminateWorkspaceRequests, v.TerminateWorkspaceRequests)
+	}
 }
 
 type TerminateWorkspacesOutput struct {
@@ -91,7 +93,9 @@ func (v *TerminateWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TerminateWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedTerminateWorkspaceRequests(s, schemas.TerminateWorkspacesResult_FailedRequests, v.FailedRequests)
+	if v.FailedRequests != nil {
+		serializeFailedTerminateWorkspaceRequests(s, schemas.TerminateWorkspacesResult_FailedRequests, v.FailedRequests)
+	}
 }
 func (v *TerminateWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TerminateWorkspacesResult, func(s *smithy.Schema) error {

@@ -63,7 +63,9 @@ func (v *PutDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventTypeName != nil {
 		s.WriteString(schemas.PutDetectorRequest_eventTypeName, *v.EventTypeName)
 	}
-	serializetagList(s, schemas.PutDetectorRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.PutDetectorRequest_tags, v.Tags)
+	}
 }
 
 type PutDetectorOutput struct {

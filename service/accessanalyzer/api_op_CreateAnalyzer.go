@@ -77,12 +77,18 @@ func (v *CreateAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzerName != nil {
 		s.WriteString(schemas.CreateAnalyzerRequest_analyzerName, *v.AnalyzerName)
 	}
-	serializeInlineArchiveRulesList(s, schemas.CreateAnalyzerRequest_archiveRules, v.ArchiveRules)
+	if v.ArchiveRules != nil {
+		serializeInlineArchiveRulesList(s, schemas.CreateAnalyzerRequest_archiveRules, v.ArchiveRules)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAnalyzerRequest_clientToken, *v.ClientToken)
 	}
-	serializeAnalyzerConfiguration(s, schemas.CreateAnalyzerRequest_configuration, v.Configuration)
-	serializeTagsMap(s, schemas.CreateAnalyzerRequest_tags, v.Tags)
+	if v.Configuration != nil {
+		serializeAnalyzerConfiguration(s, schemas.CreateAnalyzerRequest_configuration, v.Configuration)
+	}
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateAnalyzerRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateAnalyzerRequest_type, string(v.Type))
 	}

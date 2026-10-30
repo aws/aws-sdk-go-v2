@@ -152,7 +152,9 @@ func (v *GetFindingHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFindingHistoryResponse_NextToken, *v.NextToken)
 	}
-	serializeFindingHistoryRecordList(s, schemas.GetFindingHistoryResponse_Records, v.Records)
+	if v.Records != nil {
+		serializeFindingHistoryRecordList(s, schemas.GetFindingHistoryResponse_Records, v.Records)
+	}
 }
 func (v *GetFindingHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingHistoryResponse, func(s *smithy.Schema) error {

@@ -62,7 +62,9 @@ func (v *DescribeDRTAccessOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeDRTAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogBucketList(s, schemas.DescribeDRTAccessResponse_LogBucketList, v.LogBucketList)
+	if v.LogBucketList != nil {
+		serializeLogBucketList(s, schemas.DescribeDRTAccessResponse_LogBucketList, v.LogBucketList)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.DescribeDRTAccessResponse_RoleArn, *v.RoleArn)
 	}

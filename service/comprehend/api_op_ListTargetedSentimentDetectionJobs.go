@@ -87,7 +87,9 @@ func (v *ListTargetedSentimentDetectionJobsOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTargetedSentimentDetectionJobsResponse_NextToken, *v.NextToken)
 	}
-	serializeTargetedSentimentDetectionJobPropertiesList(s, schemas.ListTargetedSentimentDetectionJobsResponse_TargetedSentimentDetectionJobPropertiesList, v.TargetedSentimentDetectionJobPropertiesList)
+	if v.TargetedSentimentDetectionJobPropertiesList != nil {
+		serializeTargetedSentimentDetectionJobPropertiesList(s, schemas.ListTargetedSentimentDetectionJobsResponse_TargetedSentimentDetectionJobPropertiesList, v.TargetedSentimentDetectionJobPropertiesList)
+	}
 }
 func (v *ListTargetedSentimentDetectionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTargetedSentimentDetectionJobsResponse, func(s *smithy.Schema) error {

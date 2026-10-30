@@ -76,7 +76,9 @@ func (v *DetachDiskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetachDiskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DetachDiskResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DetachDiskResult_operations, v.Operations)
+	}
 }
 func (v *DetachDiskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DetachDiskResult, func(s *smithy.Schema) error {

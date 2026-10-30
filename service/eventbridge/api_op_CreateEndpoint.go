@@ -76,7 +76,9 @@ func (v *CreateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEndpointRequest_Description, *v.Description)
 	}
-	serializeEndpointEventBusList(s, schemas.CreateEndpointRequest_EventBuses, v.EventBuses)
+	if v.EventBuses != nil {
+		serializeEndpointEventBusList(s, schemas.CreateEndpointRequest_EventBuses, v.EventBuses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEndpointRequest_Name, *v.Name)
 	}
@@ -134,7 +136,9 @@ func (v *CreateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateEndpointResponse_Arn, *v.Arn)
 	}
-	serializeEndpointEventBusList(s, schemas.CreateEndpointResponse_EventBuses, v.EventBuses)
+	if v.EventBuses != nil {
+		serializeEndpointEventBusList(s, schemas.CreateEndpointResponse_EventBuses, v.EventBuses)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateEndpointResponse_Name, *v.Name)
 	}

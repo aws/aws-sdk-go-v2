@@ -108,7 +108,9 @@ func (v *ListCisScanResultsAggregatedByTargetResourceOutput) SerializeMembers(s 
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCisScanResultsAggregatedByTargetResourceResponse_nextToken, *v.NextToken)
 	}
-	serializeCisTargetResourceAggregationList(s, schemas.ListCisScanResultsAggregatedByTargetResourceResponse_targetResourceAggregations, v.TargetResourceAggregations)
+	if v.TargetResourceAggregations != nil {
+		serializeCisTargetResourceAggregationList(s, schemas.ListCisScanResultsAggregatedByTargetResourceResponse_targetResourceAggregations, v.TargetResourceAggregations)
+	}
 }
 func (v *ListCisScanResultsAggregatedByTargetResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListCisScanResultsAggregatedByTargetResourceResponse, func(s *smithy.Schema) error {

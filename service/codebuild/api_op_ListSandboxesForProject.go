@@ -89,7 +89,9 @@ func (v *ListSandboxesForProjectOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSandboxesForProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSandboxIds(s, schemas.ListSandboxesForProjectOutput_ids, v.Ids)
+	if v.Ids != nil {
+		serializeSandboxIds(s, schemas.ListSandboxesForProjectOutput_ids, v.Ids)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSandboxesForProjectOutput_nextToken, *v.NextToken)
 	}

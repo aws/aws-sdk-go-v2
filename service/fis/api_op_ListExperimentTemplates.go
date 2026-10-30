@@ -76,7 +76,9 @@ func (v *ListExperimentTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExperimentTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExperimentTemplateSummaryList(s, schemas.ListExperimentTemplatesResponse_experimentTemplates, v.ExperimentTemplates)
+	if v.ExperimentTemplates != nil {
+		serializeExperimentTemplateSummaryList(s, schemas.ListExperimentTemplatesResponse_experimentTemplates, v.ExperimentTemplates)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExperimentTemplatesResponse_nextToken, *v.NextToken)
 	}

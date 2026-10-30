@@ -89,7 +89,9 @@ func (v *ListEnvironmentConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEnvironmentConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConnectorList(s, schemas.ListEnvironmentConnectorsResponse_connectors, v.Connectors)
+	if v.Connectors != nil {
+		serializeConnectorList(s, schemas.ListEnvironmentConnectorsResponse_connectors, v.Connectors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEnvironmentConnectorsResponse_nextToken, *v.NextToken)
 	}

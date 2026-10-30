@@ -63,7 +63,9 @@ func (v *CreateWorkloadEstimateInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.RateType != "" {
 		s.WriteString(schemas.CreateWorkloadEstimateRequest_rateType, string(v.RateType))
 	}
-	serializeTags(s, schemas.CreateWorkloadEstimateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateWorkloadEstimateRequest_tags, v.Tags)
+	}
 }
 
 // Mixin for common fields returned by CRUD APIs

@@ -96,7 +96,9 @@ func (v *ListRetrainingSchedulersOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRetrainingSchedulersResponse_NextToken, *v.NextToken)
 	}
-	serializeRetrainingSchedulerSummaries(s, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, v.RetrainingSchedulerSummaries)
+	if v.RetrainingSchedulerSummaries != nil {
+		serializeRetrainingSchedulerSummaries(s, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, v.RetrainingSchedulerSummaries)
+	}
 }
 func (v *ListRetrainingSchedulersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRetrainingSchedulersResponse, func(s *smithy.Schema) error {

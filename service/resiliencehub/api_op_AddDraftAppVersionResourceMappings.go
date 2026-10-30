@@ -66,7 +66,9 @@ func (v *AddDraftAppVersionResourceMappingsInput) SerializeMembers(s smithy.Shap
 	if v.AppArn != nil {
 		s.WriteString(schemas.AddDraftAppVersionResourceMappingsRequest_appArn, *v.AppArn)
 	}
-	serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings, v.ResourceMappings)
+	if v.ResourceMappings != nil {
+		serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings, v.ResourceMappings)
+	}
 }
 func (v *AddDraftAppVersionResourceMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddDraftAppVersionResourceMappingsRequest, func(s *smithy.Schema) error {
@@ -124,7 +126,9 @@ func (v *AddDraftAppVersionResourceMappingsOutput) SerializeMembers(s smithy.Sha
 	if v.AppVersion != nil {
 		s.WriteString(schemas.AddDraftAppVersionResourceMappingsResponse_appVersion, *v.AppVersion)
 	}
-	serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings, v.ResourceMappings)
+	if v.ResourceMappings != nil {
+		serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings, v.ResourceMappings)
+	}
 }
 func (v *AddDraftAppVersionResourceMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddDraftAppVersionResourceMappingsResponse, func(s *smithy.Schema) error {

@@ -41,7 +41,9 @@ func (v *AggregatedLogOddsMetric) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AggregatedVariablesImportance != nil {
 		s.WriteFloat32(schemas.AggregatedLogOddsMetric_aggregatedVariablesImportance, *v.AggregatedVariablesImportance)
 	}
-	serializeListOfStrings(s, schemas.AggregatedLogOddsMetric_variableNames, v.VariableNames)
+	if v.VariableNames != nil {
+		serializeListOfStrings(s, schemas.AggregatedLogOddsMetric_variableNames, v.VariableNames)
+	}
 }
 func (v *AggregatedLogOddsMetric) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregatedLogOddsMetric, func(s *smithy.Schema) error {
@@ -91,7 +93,9 @@ func (v *AggregatedVariablesImpactExplanation) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *AggregatedVariablesImpactExplanation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfStrings(s, schemas.AggregatedVariablesImpactExplanation_eventVariableNames, v.EventVariableNames)
+	if v.EventVariableNames != nil {
+		serializeListOfStrings(s, schemas.AggregatedVariablesImpactExplanation_eventVariableNames, v.EventVariableNames)
+	}
 	if v.LogOddsImpact != nil {
 		s.WriteFloat32(schemas.AggregatedVariablesImpactExplanation_logOddsImpact, *v.LogOddsImpact)
 	}
@@ -137,7 +141,9 @@ func (v *AggregatedVariablesImportanceMetrics) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *AggregatedVariablesImportanceMetrics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAggregatedLogOddsMetrics(s, schemas.AggregatedVariablesImportanceMetrics_logOddsMetrics, v.LogOddsMetrics)
+	if v.LogOddsMetrics != nil {
+		serializeListOfAggregatedLogOddsMetrics(s, schemas.AggregatedVariablesImportanceMetrics_logOddsMetrics, v.LogOddsMetrics)
+	}
 }
 func (v *AggregatedVariablesImportanceMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AggregatedVariablesImportanceMetrics, func(s *smithy.Schema) error {
@@ -352,7 +358,9 @@ func (v *ATITrainingMetricsValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ATITrainingMetricsValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeATIMetricDataPointsList(s, schemas.ATITrainingMetricsValue_metricDataPoints, v.MetricDataPoints)
+	if v.MetricDataPoints != nil {
+		serializeATIMetricDataPointsList(s, schemas.ATITrainingMetricsValue_metricDataPoints, v.MetricDataPoints)
+	}
 	if v.ModelPerformance != nil {
 		s.WriteStruct(schemas.ATITrainingMetricsValue_modelPerformance)
 		v.ModelPerformance.SerializeMembers(s)
@@ -792,8 +800,12 @@ func (v *DataValidationMetrics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DataValidationMetrics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializefieldValidationMessageList(s, schemas.DataValidationMetrics_fieldLevelMessages, v.FieldLevelMessages)
-	serializefileValidationMessageList(s, schemas.DataValidationMetrics_fileLevelMessages, v.FileLevelMessages)
+	if v.FieldLevelMessages != nil {
+		serializefieldValidationMessageList(s, schemas.DataValidationMetrics_fieldLevelMessages, v.FieldLevelMessages)
+	}
+	if v.FileLevelMessages != nil {
+		serializefileValidationMessageList(s, schemas.DataValidationMetrics_fileLevelMessages, v.FileLevelMessages)
+	}
 }
 func (v *DataValidationMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DataValidationMetrics, func(s *smithy.Schema) error {
@@ -1084,11 +1096,15 @@ func (v *EvaluatedExternalModel) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluatedExternalModel) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStrings(s, schemas.EvaluatedExternalModel_inputVariables, v.InputVariables)
+	if v.InputVariables != nil {
+		serializeMapOfStrings(s, schemas.EvaluatedExternalModel_inputVariables, v.InputVariables)
+	}
 	if v.ModelEndpoint != nil {
 		s.WriteString(schemas.EvaluatedExternalModel_modelEndpoint, *v.ModelEndpoint)
 	}
-	serializeMapOfStrings(s, schemas.EvaluatedExternalModel_outputVariables, v.OutputVariables)
+	if v.OutputVariables != nil {
+		serializeMapOfStrings(s, schemas.EvaluatedExternalModel_outputVariables, v.OutputVariables)
+	}
 	if v.UseEventVariables != nil {
 		s.WriteBool(schemas.EvaluatedExternalModel_useEventVariables, *v.UseEventVariables)
 	}
@@ -1138,7 +1154,9 @@ func (v *EvaluatedModelVersion) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EvaluatedModelVersion) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfModelVersionEvaluations(s, schemas.EvaluatedModelVersion_evaluations, v.Evaluations)
+	if v.Evaluations != nil {
+		serializeListOfModelVersionEvaluations(s, schemas.EvaluatedModelVersion_evaluations, v.Evaluations)
+	}
 	if v.ModelId != nil {
 		s.WriteString(schemas.EvaluatedModelVersion_modelId, *v.ModelId)
 	}
@@ -1214,7 +1232,9 @@ func (v *EvaluatedRule) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Matched != nil {
 		s.WriteBool(schemas.EvaluatedRule_matched, *v.Matched)
 	}
-	serializeListOfStrings(s, schemas.EvaluatedRule_outcomes, v.Outcomes)
+	if v.Outcomes != nil {
+		serializeListOfStrings(s, schemas.EvaluatedRule_outcomes, v.Outcomes)
+	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.EvaluatedRule_ruleId, *v.RuleId)
 	}
@@ -1291,7 +1311,9 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CurrentLabel != nil {
 		s.WriteString(schemas.Event_currentLabel, *v.CurrentLabel)
 	}
-	serializelistOfEntities(s, schemas.Event_entities, v.Entities)
+	if v.Entities != nil {
+		serializelistOfEntities(s, schemas.Event_entities, v.Entities)
+	}
 	if v.EventId != nil {
 		s.WriteString(schemas.Event_eventId, *v.EventId)
 	}
@@ -1301,7 +1323,9 @@ func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventTypeName != nil {
 		s.WriteString(schemas.Event_eventTypeName, *v.EventTypeName)
 	}
-	serializeEventAttributeMap(s, schemas.Event_eventVariables, v.EventVariables)
+	if v.EventVariables != nil {
+		serializeEventAttributeMap(s, schemas.Event_eventVariables, v.EventVariables)
+	}
 	if v.LabelTimestamp != nil {
 		s.WriteString(schemas.Event_labelTimestamp, *v.LabelTimestamp)
 	}
@@ -1500,7 +1524,9 @@ func (v *EventType) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.EventType_description, *v.Description)
 	}
-	serializeNonEmptyListOfStrings(s, schemas.EventType_entityTypes, v.EntityTypes)
+	if v.EntityTypes != nil {
+		serializeNonEmptyListOfStrings(s, schemas.EventType_entityTypes, v.EntityTypes)
+	}
 	if v.EventIngestion != "" {
 		s.WriteString(schemas.EventType_eventIngestion, string(v.EventIngestion))
 	}
@@ -1509,13 +1535,17 @@ func (v *EventType) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EventOrchestration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfStrings(s, schemas.EventType_eventVariables, v.EventVariables)
+	if v.EventVariables != nil {
+		serializeListOfStrings(s, schemas.EventType_eventVariables, v.EventVariables)
+	}
 	if v.IngestedEventStatistics != nil {
 		s.WriteStruct(schemas.EventType_ingestedEventStatistics)
 		v.IngestedEventStatistics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfStrings(s, schemas.EventType_labels, v.Labels)
+	if v.Labels != nil {
+		serializeListOfStrings(s, schemas.EventType_labels, v.Labels)
+	}
 	if v.LastUpdatedTime != nil {
 		s.WriteString(schemas.EventType_lastUpdatedTime, *v.LastUpdatedTime)
 	}
@@ -1800,7 +1830,9 @@ func (v *ExternalModelOutputs) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ExternalModel.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExternalModelPredictionMap(s, schemas.ExternalModelOutputs_outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeExternalModelPredictionMap(s, schemas.ExternalModelOutputs_outputs, v.Outputs)
+	}
 }
 func (v *ExternalModelOutputs) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExternalModelOutputs, func(s *smithy.Schema) error {
@@ -2291,7 +2323,9 @@ func (v *LabelSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LabelSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializelabelMapper(s, schemas.LabelSchema_labelMapper, v.LabelMapper)
+	if v.LabelMapper != nil {
+		serializelabelMapper(s, schemas.LabelSchema_labelMapper, v.LabelMapper)
+	}
 	if v.UnlabeledEventsTreatment != "" {
 		s.WriteString(schemas.LabelSchema_unlabeledEventsTreatment, string(v.UnlabeledEventsTreatment))
 	}
@@ -2667,11 +2701,15 @@ func (v *ModelOutputConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModelOutputConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCsvIndexToVariableMap(s, schemas.ModelOutputConfiguration_csvIndexToVariableMap, v.CsvIndexToVariableMap)
+	if v.CsvIndexToVariableMap != nil {
+		serializeCsvIndexToVariableMap(s, schemas.ModelOutputConfiguration_csvIndexToVariableMap, v.CsvIndexToVariableMap)
+	}
 	if v.Format != "" {
 		s.WriteString(schemas.ModelOutputConfiguration_format, string(v.Format))
 	}
-	serializeJsonKeyToVariableMap(s, schemas.ModelOutputConfiguration_jsonKeyToVariableMap, v.JsonKeyToVariableMap)
+	if v.JsonKeyToVariableMap != nil {
+		serializeJsonKeyToVariableMap(s, schemas.ModelOutputConfiguration_jsonKeyToVariableMap, v.JsonKeyToVariableMap)
+	}
 }
 func (v *ModelOutputConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ModelOutputConfiguration, func(s *smithy.Schema) error {
@@ -2716,7 +2754,9 @@ func (v *ModelScores) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ModelVersion.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeModelPredictionMap(s, schemas.ModelScores_scores, v.Scores)
+	if v.Scores != nil {
+		serializeModelPredictionMap(s, schemas.ModelScores_scores, v.Scores)
+	}
 }
 func (v *ModelScores) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ModelScores, func(s *smithy.Schema) error {
@@ -3136,7 +3176,9 @@ func (v *OFITrainingMetricsValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OFITrainingMetricsValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOFIMetricDataPointsList(s, schemas.OFITrainingMetricsValue_metricDataPoints, v.MetricDataPoints)
+	if v.MetricDataPoints != nil {
+		serializeOFIMetricDataPointsList(s, schemas.OFITrainingMetricsValue_metricDataPoints, v.MetricDataPoints)
+	}
 	if v.ModelPerformance != nil {
 		s.WriteStruct(schemas.OFITrainingMetricsValue_modelPerformance)
 		v.ModelPerformance.SerializeMembers(s)
@@ -3250,8 +3292,12 @@ func (v *PredictionExplanations) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PredictionExplanations) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfAggregatedVariablesImpactExplanations(s, schemas.PredictionExplanations_aggregatedVariablesImpactExplanations, v.AggregatedVariablesImpactExplanations)
-	serializelistOfVariableImpactExplanations(s, schemas.PredictionExplanations_variableImpactExplanations, v.VariableImpactExplanations)
+	if v.AggregatedVariablesImpactExplanations != nil {
+		serializeListOfAggregatedVariablesImpactExplanations(s, schemas.PredictionExplanations_aggregatedVariablesImpactExplanations, v.AggregatedVariablesImpactExplanations)
+	}
+	if v.VariableImpactExplanations != nil {
+		serializelistOfVariableImpactExplanations(s, schemas.PredictionExplanations_variableImpactExplanations, v.VariableImpactExplanations)
+	}
 }
 func (v *PredictionExplanations) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PredictionExplanations, func(s *smithy.Schema) error {
@@ -3428,7 +3474,9 @@ func (v *RuleDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastUpdatedTime != nil {
 		s.WriteString(schemas.RuleDetail_lastUpdatedTime, *v.LastUpdatedTime)
 	}
-	serializeNonEmptyListOfStrings(s, schemas.RuleDetail_outcomes, v.Outcomes)
+	if v.Outcomes != nil {
+		serializeNonEmptyListOfStrings(s, schemas.RuleDetail_outcomes, v.Outcomes)
+	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.RuleDetail_ruleId, *v.RuleId)
 	}
@@ -3496,7 +3544,9 @@ func (v *RuleResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RuleResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfStrings(s, schemas.RuleResult_outcomes, v.Outcomes)
+	if v.Outcomes != nil {
+		serializeListOfStrings(s, schemas.RuleResult_outcomes, v.Outcomes)
+	}
 	if v.RuleId != nil {
 		s.WriteString(schemas.RuleResult_ruleId, *v.RuleId)
 	}
@@ -3686,7 +3736,9 @@ func (v *TFITrainingMetricsValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TFITrainingMetricsValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTFIMetricDataPointsList(s, schemas.TFITrainingMetricsValue_metricDataPoints, v.MetricDataPoints)
+	if v.MetricDataPoints != nil {
+		serializeTFIMetricDataPointsList(s, schemas.TFITrainingMetricsValue_metricDataPoints, v.MetricDataPoints)
+	}
 	if v.ModelPerformance != nil {
 		s.WriteStruct(schemas.TFITrainingMetricsValue_modelPerformance)
 		v.ModelPerformance.SerializeMembers(s)
@@ -3732,7 +3784,9 @@ func (v *TrainingDataSchema) SerializeMembers(s smithy.ShapeSerializer) {
 		v.LabelSchema.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfStrings(s, schemas.TrainingDataSchema_modelVariables, v.ModelVariables)
+	if v.ModelVariables != nil {
+		serializeListOfStrings(s, schemas.TrainingDataSchema_modelVariables, v.ModelVariables)
+	}
 }
 func (v *TrainingDataSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrainingDataSchema, func(s *smithy.Schema) error {
@@ -3771,7 +3825,9 @@ func (v *TrainingMetrics) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Auc != nil {
 		s.WriteFloat32(schemas.TrainingMetrics_auc, *v.Auc)
 	}
-	serializemetricDataPointsList(s, schemas.TrainingMetrics_metricDataPoints, v.MetricDataPoints)
+	if v.MetricDataPoints != nil {
+		serializemetricDataPointsList(s, schemas.TrainingMetrics_metricDataPoints, v.MetricDataPoints)
+	}
 }
 func (v *TrainingMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrainingMetrics, func(s *smithy.Schema) error {
@@ -4294,7 +4350,9 @@ func (v *VariableImportanceMetrics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VariableImportanceMetrics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfLogOddsMetrics(s, schemas.VariableImportanceMetrics_logOddsMetrics, v.LogOddsMetrics)
+	if v.LogOddsMetrics != nil {
+		serializeListOfLogOddsMetrics(s, schemas.VariableImportanceMetrics_logOddsMetrics, v.LogOddsMetrics)
+	}
 }
 func (v *VariableImportanceMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VariableImportanceMetrics, func(s *smithy.Schema) error {

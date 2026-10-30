@@ -60,7 +60,9 @@ func (v *UpdateSchemaMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateSchemaMappingInput_description, *v.Description)
 	}
-	serializeSchemaInputAttributes(s, schemas.UpdateSchemaMappingInput_mappedInputFields, v.MappedInputFields)
+	if v.MappedInputFields != nil {
+		serializeSchemaInputAttributes(s, schemas.UpdateSchemaMappingInput_mappedInputFields, v.MappedInputFields)
+	}
 	if v.SchemaName != nil {
 		s.WriteString(schemas.UpdateSchemaMappingInput_schemaName, *v.SchemaName)
 	}
@@ -105,7 +107,9 @@ func (v *UpdateSchemaMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateSchemaMappingOutput_description, *v.Description)
 	}
-	serializeSchemaInputAttributes(s, schemas.UpdateSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	if v.MappedInputFields != nil {
+		serializeSchemaInputAttributes(s, schemas.UpdateSchemaMappingOutput_mappedInputFields, v.MappedInputFields)
+	}
 	if v.SchemaArn != nil {
 		s.WriteString(schemas.UpdateSchemaMappingOutput_schemaArn, *v.SchemaArn)
 	}

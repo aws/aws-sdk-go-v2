@@ -81,7 +81,9 @@ func (v *ListBrandProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListBrandProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBrandProfileInfoList(s, schemas.ListBrandProfilesOutput_brandProfiles, v.BrandProfiles)
+	if v.BrandProfiles != nil {
+		serializeBrandProfileInfoList(s, schemas.ListBrandProfilesOutput_brandProfiles, v.BrandProfiles)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListBrandProfilesOutput_nextToken, *v.NextToken)
 	}

@@ -95,7 +95,9 @@ func (v *ListDbNodesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDbNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbNodeList(s, schemas.ListDbNodesOutput_dbNodes, v.DbNodes)
+	if v.DbNodes != nil {
+		serializeDbNodeList(s, schemas.ListDbNodesOutput_dbNodes, v.DbNodes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDbNodesOutput_nextToken, *v.NextToken)
 	}

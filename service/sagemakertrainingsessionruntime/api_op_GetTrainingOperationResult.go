@@ -96,7 +96,9 @@ func (v *GetTrainingOperationResultOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.ErrorDetails != nil {
 		s.WriteString(schemas.GetTrainingOperationResultOutput_errorDetails, *v.ErrorDetails)
 	}
-	serializeOperationResult(s, schemas.GetTrainingOperationResultOutput_operationResult, v.OperationResult)
+	if v.OperationResult != nil {
+		serializeOperationResult(s, schemas.GetTrainingOperationResultOutput_operationResult, v.OperationResult)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetTrainingOperationResultOutput_status, string(v.Status))
 	}

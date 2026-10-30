@@ -46,7 +46,9 @@ func (v *DescribeElasticsearchDomainsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeElasticsearchDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainNameList(s, schemas.DescribeElasticsearchDomainsRequest_DomainNames, v.DomainNames)
+	if v.DomainNames != nil {
+		serializeDomainNameList(s, schemas.DescribeElasticsearchDomainsRequest_DomainNames, v.DomainNames)
+	}
 }
 
 // The result of a DescribeElasticsearchDomains request. Contains the status of
@@ -71,7 +73,9 @@ func (v *DescribeElasticsearchDomainsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *DescribeElasticsearchDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeElasticsearchDomainStatusList(s, schemas.DescribeElasticsearchDomainsResponse_DomainStatusList, v.DomainStatusList)
+	if v.DomainStatusList != nil {
+		serializeElasticsearchDomainStatusList(s, schemas.DescribeElasticsearchDomainsResponse_DomainStatusList, v.DomainStatusList)
+	}
 }
 func (v *DescribeElasticsearchDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeElasticsearchDomainsResponse, func(s *smithy.Schema) error {

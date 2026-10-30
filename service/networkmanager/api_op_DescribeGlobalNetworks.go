@@ -51,7 +51,9 @@ func (v *DescribeGlobalNetworksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeGlobalNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalNetworkIdList(s, schemas.DescribeGlobalNetworksRequest_GlobalNetworkIds, v.GlobalNetworkIds)
+	if v.GlobalNetworkIds != nil {
+		serializeGlobalNetworkIdList(s, schemas.DescribeGlobalNetworksRequest_GlobalNetworkIds, v.GlobalNetworkIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeGlobalNetworksRequest_MaxResults, *v.MaxResults)
 	}
@@ -81,7 +83,9 @@ func (v *DescribeGlobalNetworksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeGlobalNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalNetworkList(s, schemas.DescribeGlobalNetworksResponse_GlobalNetworks, v.GlobalNetworks)
+	if v.GlobalNetworks != nil {
+		serializeGlobalNetworkList(s, schemas.DescribeGlobalNetworksResponse_GlobalNetworks, v.GlobalNetworks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeGlobalNetworksResponse_NextToken, *v.NextToken)
 	}

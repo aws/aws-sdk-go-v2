@@ -107,7 +107,9 @@ func (v *CreateWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RunningMode != "" {
 		s.WriteString(schemas.CreateWorkspacesPoolRequest_RunningMode, string(v.RunningMode))
 	}
-	serializeTagList(s, schemas.CreateWorkspacesPoolRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateWorkspacesPoolRequest_Tags, v.Tags)
+	}
 	if v.TimeoutSettings != nil {
 		s.WriteStruct(schemas.CreateWorkspacesPoolRequest_TimeoutSettings)
 		v.TimeoutSettings.SerializeMembers(s)

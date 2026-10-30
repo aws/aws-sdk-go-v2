@@ -141,9 +141,15 @@ func (v *GetTemplateStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.GetTemplateStepResponse_name, *v.Name)
 	}
-	serializeStringList(s, schemas.GetTemplateStepResponse_next, v.Next)
-	serializeStepOutputList(s, schemas.GetTemplateStepResponse_outputs, v.Outputs)
-	serializeStringList(s, schemas.GetTemplateStepResponse_previous, v.Previous)
+	if v.Next != nil {
+		serializeStringList(s, schemas.GetTemplateStepResponse_next, v.Next)
+	}
+	if v.Outputs != nil {
+		serializeStepOutputList(s, schemas.GetTemplateStepResponse_outputs, v.Outputs)
+	}
+	if v.Previous != nil {
+		serializeStringList(s, schemas.GetTemplateStepResponse_previous, v.Previous)
+	}
 	if v.StepActionType != "" {
 		s.WriteString(schemas.GetTemplateStepResponse_stepActionType, string(v.StepActionType))
 	}

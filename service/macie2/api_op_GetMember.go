@@ -122,7 +122,9 @@ func (v *GetMemberOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RelationshipStatus != "" {
 		s.WriteString(schemas.GetMemberResponse_relationshipStatus, string(v.RelationshipStatus))
 	}
-	serializeTagMap(s, schemas.GetMemberResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetMemberResponse_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetMemberResponse_updatedAt, *v.UpdatedAt)
 	}

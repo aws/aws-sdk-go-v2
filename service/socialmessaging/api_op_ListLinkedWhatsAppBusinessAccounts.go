@@ -74,7 +74,9 @@ func (v *ListLinkedWhatsAppBusinessAccountsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListLinkedWhatsAppBusinessAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLinkedWhatsAppBusinessAccountSummaryList(s, schemas.ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts, v.LinkedAccounts)
+	if v.LinkedAccounts != nil {
+		serializeLinkedWhatsAppBusinessAccountSummaryList(s, schemas.ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts, v.LinkedAccounts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLinkedWhatsAppBusinessAccountsOutput_nextToken, *v.NextToken)
 	}

@@ -63,7 +63,9 @@ func (v *PurchaseReservedNodesOfferingInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ReservedNodesOfferingId != nil {
 		s.WriteString(schemas.PurchaseReservedNodesOfferingRequest_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
 	}
-	serializeTagList(s, schemas.PurchaseReservedNodesOfferingRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PurchaseReservedNodesOfferingRequest_Tags, v.Tags)
+	}
 }
 
 type PurchaseReservedNodesOfferingOutput struct {

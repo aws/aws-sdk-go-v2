@@ -123,7 +123,9 @@ func (v *StartContentUploadOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartContentUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHeaders(s, schemas.StartContentUploadResponse_headersToInclude, v.HeadersToInclude)
+	if v.HeadersToInclude != nil {
+		serializeHeaders(s, schemas.StartContentUploadResponse_headersToInclude, v.HeadersToInclude)
+	}
 	if v.UploadId != nil {
 		s.WriteString(schemas.StartContentUploadResponse_uploadId, *v.UploadId)
 	}

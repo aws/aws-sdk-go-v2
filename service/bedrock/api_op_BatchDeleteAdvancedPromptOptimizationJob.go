@@ -44,7 +44,9 @@ func (v *BatchDeleteAdvancedPromptOptimizationJobInput) Serialize(s smithy.Shape
 }
 
 func (v *BatchDeleteAdvancedPromptOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedPromptOptimizationJobIdentifiers(s, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest_jobIdentifiers, v.JobIdentifiers)
+	if v.JobIdentifiers != nil {
+		serializeAdvancedPromptOptimizationJobIdentifiers(s, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest_jobIdentifiers, v.JobIdentifiers)
+	}
 }
 
 // Batch Delete Advanced Prompt Optimization Jobs Response
@@ -73,8 +75,12 @@ func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) Serialize(s smithy.Shap
 }
 
 func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteAdvancedPromptOptimizationJobItems(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs, v.AdvancedPromptOptimizationJobs)
-	serializeBatchDeleteAdvancedPromptOptimizationJobErrors(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors, v.Errors)
+	if v.AdvancedPromptOptimizationJobs != nil {
+		serializeBatchDeleteAdvancedPromptOptimizationJobItems(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs, v.AdvancedPromptOptimizationJobs)
+	}
+	if v.Errors != nil {
+		serializeBatchDeleteAdvancedPromptOptimizationJobErrors(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors, v.Errors)
+	}
 }
 func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse, func(s *smithy.Schema) error {

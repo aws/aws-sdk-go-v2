@@ -77,7 +77,9 @@ func (v *AddPolicyGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.AddPolicyGrantInput_clientToken, *v.ClientToken)
 	}
-	serializePolicyGrantDetail(s, schemas.AddPolicyGrantInput_detail, v.Detail)
+	if v.Detail != nil {
+		serializePolicyGrantDetail(s, schemas.AddPolicyGrantInput_detail, v.Detail)
+	}
 	if v.DomainIdentifier != nil {
 		s.WriteString(schemas.AddPolicyGrantInput_domainIdentifier, *v.DomainIdentifier)
 	}
@@ -90,7 +92,9 @@ func (v *AddPolicyGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyType != "" {
 		s.WriteString(schemas.AddPolicyGrantInput_policyType, string(v.PolicyType))
 	}
-	serializePolicyGrantPrincipal(s, schemas.AddPolicyGrantInput_principal, v.Principal)
+	if v.Principal != nil {
+		serializePolicyGrantPrincipal(s, schemas.AddPolicyGrantInput_principal, v.Principal)
+	}
 }
 
 type AddPolicyGrantOutput struct {

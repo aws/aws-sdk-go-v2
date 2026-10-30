@@ -62,7 +62,9 @@ func (v *ListSavingsPlansPurchaseRecommendationGenerationInput) SerializeMembers
 	if v.PageSize != 0 {
 		s.WriteInt32(schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_PageSize, v.PageSize)
 	}
-	serializeRecommendationIdList(s, schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_RecommendationIds, v.RecommendationIds)
+	if v.RecommendationIds != nil {
+		serializeRecommendationIdList(s, schemas.ListSavingsPlansPurchaseRecommendationGenerationRequest_RecommendationIds, v.RecommendationIds)
+	}
 }
 
 type ListSavingsPlansPurchaseRecommendationGenerationOutput struct {
@@ -86,7 +88,9 @@ func (v *ListSavingsPlansPurchaseRecommendationGenerationOutput) Serialize(s smi
 }
 
 func (v *ListSavingsPlansPurchaseRecommendationGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGenerationSummaryList(s, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_GenerationSummaryList, v.GenerationSummaryList)
+	if v.GenerationSummaryList != nil {
+		serializeGenerationSummaryList(s, schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_GenerationSummaryList, v.GenerationSummaryList)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.ListSavingsPlansPurchaseRecommendationGenerationResponse_NextPageToken, *v.NextPageToken)
 	}

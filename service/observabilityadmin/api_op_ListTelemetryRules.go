@@ -86,7 +86,9 @@ func (v *ListTelemetryRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTelemetryRulesOutput_NextToken, *v.NextToken)
 	}
-	serializeTelemetryRuleSummaries(s, schemas.ListTelemetryRulesOutput_TelemetryRuleSummaries, v.TelemetryRuleSummaries)
+	if v.TelemetryRuleSummaries != nil {
+		serializeTelemetryRuleSummaries(s, schemas.ListTelemetryRulesOutput_TelemetryRuleSummaries, v.TelemetryRuleSummaries)
+	}
 }
 func (v *ListTelemetryRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTelemetryRulesOutput, func(s *smithy.Schema) error {

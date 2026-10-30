@@ -104,7 +104,9 @@ func (v *CreateGatewayRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Spec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateGatewayRouteInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGatewayRouteInput_tags, v.Tags)
+	}
 	if v.VirtualGatewayName != nil {
 		s.WriteString(schemas.CreateGatewayRouteInput_virtualGatewayName, *v.VirtualGatewayName)
 	}

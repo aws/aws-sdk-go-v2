@@ -106,7 +106,9 @@ func (v *UpdateScheduledReportInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.WidgetDateRangeOverride.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeWidgetIdList(s, schemas.UpdateScheduledReportRequest_widgetIds, v.WidgetIds)
+	if v.WidgetIds != nil {
+		serializeWidgetIdList(s, schemas.UpdateScheduledReportRequest_widgetIds, v.WidgetIds)
+	}
 }
 
 type UpdateScheduledReportOutput struct {

@@ -52,7 +52,9 @@ func (v *BatchGetDevicePositionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDevicePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdList(s, schemas.BatchGetDevicePositionRequest_DeviceIds, v.DeviceIds)
+	if v.DeviceIds != nil {
+		serializeIdList(s, schemas.BatchGetDevicePositionRequest_DeviceIds, v.DeviceIds)
+	}
 	if v.TrackerName != nil {
 		s.WriteString(schemas.BatchGetDevicePositionRequest_TrackerName, *v.TrackerName)
 	}
@@ -97,8 +99,12 @@ func (v *BatchGetDevicePositionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDevicePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDevicePositionList(s, schemas.BatchGetDevicePositionResponse_DevicePositions, v.DevicePositions)
-	serializeBatchGetDevicePositionErrorList(s, schemas.BatchGetDevicePositionResponse_Errors, v.Errors)
+	if v.DevicePositions != nil {
+		serializeDevicePositionList(s, schemas.BatchGetDevicePositionResponse_DevicePositions, v.DevicePositions)
+	}
+	if v.Errors != nil {
+		serializeBatchGetDevicePositionErrorList(s, schemas.BatchGetDevicePositionResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchGetDevicePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDevicePositionResponse, func(s *smithy.Schema) error {

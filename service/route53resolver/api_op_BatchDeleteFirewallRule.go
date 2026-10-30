@@ -43,7 +43,9 @@ func (v *BatchDeleteFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeleteFirewallRuleEntries(s, schemas.BatchDeleteFirewallRuleRequest_DeleteFirewallRuleEntries, v.DeleteFirewallRuleEntries)
+	if v.DeleteFirewallRuleEntries != nil {
+		serializeDeleteFirewallRuleEntries(s, schemas.BatchDeleteFirewallRuleRequest_DeleteFirewallRuleEntries, v.DeleteFirewallRuleEntries)
+	}
 }
 
 type BatchDeleteFirewallRuleOutput struct {
@@ -67,8 +69,12 @@ func (v *BatchDeleteFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeleteFirewallRuleErrors(s, schemas.BatchDeleteFirewallRuleResponse_DeleteErrors, v.DeleteErrors)
-	serializeFirewallRules(s, schemas.BatchDeleteFirewallRuleResponse_DeletedFirewallRules, v.DeletedFirewallRules)
+	if v.DeleteErrors != nil {
+		serializeBatchDeleteFirewallRuleErrors(s, schemas.BatchDeleteFirewallRuleResponse_DeleteErrors, v.DeleteErrors)
+	}
+	if v.DeletedFirewallRules != nil {
+		serializeFirewallRules(s, schemas.BatchDeleteFirewallRuleResponse_DeletedFirewallRules, v.DeletedFirewallRules)
+	}
 }
 func (v *BatchDeleteFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteFirewallRuleResponse, func(s *smithy.Schema) error {

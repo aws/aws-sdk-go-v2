@@ -52,7 +52,9 @@ func (v *BatchGetStepInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetStepInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetStepIdentifiers(s, schemas.BatchGetStepRequest_identifiers, v.Identifiers)
+	if v.Identifiers != nil {
+		serializeBatchGetStepIdentifiers(s, schemas.BatchGetStepRequest_identifiers, v.Identifiers)
+	}
 }
 
 type BatchGetStepOutput struct {
@@ -80,8 +82,12 @@ func (v *BatchGetStepOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetStepErrors(s, schemas.BatchGetStepResponse_errors, v.Errors)
-	serializeBatchGetStepItems(s, schemas.BatchGetStepResponse_steps, v.Steps)
+	if v.Errors != nil {
+		serializeBatchGetStepErrors(s, schemas.BatchGetStepResponse_errors, v.Errors)
+	}
+	if v.Steps != nil {
+		serializeBatchGetStepItems(s, schemas.BatchGetStepResponse_steps, v.Steps)
+	}
 }
 func (v *BatchGetStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetStepResponse, func(s *smithy.Schema) error {

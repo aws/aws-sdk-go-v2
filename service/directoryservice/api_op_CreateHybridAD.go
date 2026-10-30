@@ -75,7 +75,9 @@ func (v *CreateHybridADInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SecretArn != nil {
 		s.WriteString(schemas.CreateHybridADRequest_SecretArn, *v.SecretArn)
 	}
-	serializeTags(s, schemas.CreateHybridADRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateHybridADRequest_Tags, v.Tags)
+	}
 }
 
 type CreateHybridADOutput struct {

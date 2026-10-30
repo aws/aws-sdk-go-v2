@@ -205,7 +205,9 @@ func (v *CreateBotVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdleSessionTTLInSeconds != nil {
 		s.WriteInt32(schemas.CreateBotVersionResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
 	}
-	serializeIntentList(s, schemas.CreateBotVersionResponse_intents, v.Intents)
+	if v.Intents != nil {
+		serializeIntentList(s, schemas.CreateBotVersionResponse_intents, v.Intents)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.CreateBotVersionResponse_lastUpdatedDate, *v.LastUpdatedDate)
 	}

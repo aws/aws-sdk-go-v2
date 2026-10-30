@@ -62,7 +62,9 @@ func (v *CompleteAttachmentUploadInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompleteAttachmentUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompletedUploadList(s, schemas.CompleteAttachmentUploadRequest_completedUploads, v.CompletedUploads)
+	if v.CompletedUploads != nil {
+		serializeCompletedUploadList(s, schemas.CompleteAttachmentUploadRequest_completedUploads, v.CompletedUploads)
+	}
 	if v.DryRun != nil {
 		s.WriteBool(schemas.CompleteAttachmentUploadRequest_dryRun, *v.DryRun)
 	}

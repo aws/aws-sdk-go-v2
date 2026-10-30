@@ -44,7 +44,9 @@ func (v *DescribeAssessmentRunsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAssessmentRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDescribeArnList(s, schemas.DescribeAssessmentRunsRequest_assessmentRunArns, v.AssessmentRunArns)
+	if v.AssessmentRunArns != nil {
+		serializeBatchDescribeArnList(s, schemas.DescribeAssessmentRunsRequest_assessmentRunArns, v.AssessmentRunArns)
+	}
 }
 
 type DescribeAssessmentRunsOutput struct {
@@ -73,8 +75,12 @@ func (v *DescribeAssessmentRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAssessmentRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentRunList(s, schemas.DescribeAssessmentRunsResponse_assessmentRuns, v.AssessmentRuns)
-	serializeFailedItems(s, schemas.DescribeAssessmentRunsResponse_failedItems, v.FailedItems)
+	if v.AssessmentRuns != nil {
+		serializeAssessmentRunList(s, schemas.DescribeAssessmentRunsResponse_assessmentRuns, v.AssessmentRuns)
+	}
+	if v.FailedItems != nil {
+		serializeFailedItems(s, schemas.DescribeAssessmentRunsResponse_failedItems, v.FailedItems)
+	}
 }
 func (v *DescribeAssessmentRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeAssessmentRunsResponse, func(s *smithy.Schema) error {

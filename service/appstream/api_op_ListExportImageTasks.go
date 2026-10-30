@@ -51,7 +51,9 @@ func (v *ListExportImageTasksInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExportImageTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListExportImageTasksRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListExportImageTasksRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListExportImageTasksRequest_MaxResults, *v.MaxResults)
 	}
@@ -82,7 +84,9 @@ func (v *ListExportImageTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExportImageTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExportImageTasks(s, schemas.ListExportImageTasksResult_ExportImageTasks, v.ExportImageTasks)
+	if v.ExportImageTasks != nil {
+		serializeExportImageTasks(s, schemas.ListExportImageTasksResult_ExportImageTasks, v.ExportImageTasks)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExportImageTasksResult_NextToken, *v.NextToken)
 	}

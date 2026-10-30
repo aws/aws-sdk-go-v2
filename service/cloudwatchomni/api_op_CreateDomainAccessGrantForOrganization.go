@@ -84,7 +84,9 @@ func (v *CreateDomainAccessGrantForOrganizationInput) SerializeMembers(s smithy.
 		v.Principal.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.CreateDomainAccessGrantForOrganizationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDomainAccessGrantForOrganizationInput_tags, v.Tags)
+	}
 }
 
 type CreateDomainAccessGrantForOrganizationOutput struct {

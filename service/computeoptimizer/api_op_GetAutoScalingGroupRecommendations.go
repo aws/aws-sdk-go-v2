@@ -76,9 +76,15 @@ func (v *GetAutoScalingGroupRecommendationsInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GetAutoScalingGroupRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetAutoScalingGroupRecommendationsRequest_accountIds, v.AccountIds)
-	serializeAutoScalingGroupArns(s, schemas.GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns, v.AutoScalingGroupArns)
-	serializeFilters(s, schemas.GetAutoScalingGroupRecommendationsRequest_filters, v.Filters)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetAutoScalingGroupRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.AutoScalingGroupArns != nil {
+		serializeAutoScalingGroupArns(s, schemas.GetAutoScalingGroupRecommendationsRequest_autoScalingGroupArns, v.AutoScalingGroupArns)
+	}
+	if v.Filters != nil {
+		serializeFilters(s, schemas.GetAutoScalingGroupRecommendationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetAutoScalingGroupRecommendationsRequest_maxResults, *v.MaxResults)
 	}
@@ -123,8 +129,12 @@ func (v *GetAutoScalingGroupRecommendationsOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetAutoScalingGroupRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoScalingGroupRecommendations(s, schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations, v.AutoScalingGroupRecommendations)
-	serializeGetRecommendationErrors(s, schemas.GetAutoScalingGroupRecommendationsResponse_errors, v.Errors)
+	if v.AutoScalingGroupRecommendations != nil {
+		serializeAutoScalingGroupRecommendations(s, schemas.GetAutoScalingGroupRecommendationsResponse_autoScalingGroupRecommendations, v.AutoScalingGroupRecommendations)
+	}
+	if v.Errors != nil {
+		serializeGetRecommendationErrors(s, schemas.GetAutoScalingGroupRecommendationsResponse_errors, v.Errors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetAutoScalingGroupRecommendationsResponse_nextToken, *v.NextToken)
 	}

@@ -98,11 +98,15 @@ func (v *CreateAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateAuthorizerRequest_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CreateAuthorizerRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAuthorizerRequest_tags, v.Tags)
+	}
 	if v.TokenKeyName != nil {
 		s.WriteString(schemas.CreateAuthorizerRequest_tokenKeyName, *v.TokenKeyName)
 	}
-	serializePublicKeyMap(s, schemas.CreateAuthorizerRequest_tokenSigningPublicKeys, v.TokenSigningPublicKeys)
+	if v.TokenSigningPublicKeys != nil {
+		serializePublicKeyMap(s, schemas.CreateAuthorizerRequest_tokenSigningPublicKeys, v.TokenSigningPublicKeys)
+	}
 }
 
 type CreateAuthorizerOutput struct {

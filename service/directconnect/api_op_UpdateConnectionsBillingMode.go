@@ -54,7 +54,9 @@ func (v *UpdateConnectionsBillingModeInput) SerializeMembers(s smithy.ShapeSeria
 	if v.BillingMode != "" {
 		s.WriteString(schemas.UpdateConnectionsBillingModeRequest_billingMode, string(v.BillingMode))
 	}
-	serializeConnectionIdList(s, schemas.UpdateConnectionsBillingModeRequest_connectionIds, v.ConnectionIds)
+	if v.ConnectionIds != nil {
+		serializeConnectionIdList(s, schemas.UpdateConnectionsBillingModeRequest_connectionIds, v.ConnectionIds)
+	}
 }
 
 type UpdateConnectionsBillingModeOutput struct {
@@ -81,7 +83,9 @@ func (v *UpdateConnectionsBillingModeOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.BillingMode != "" {
 		s.WriteString(schemas.UpdateConnectionsBillingModeResponse_billingMode, string(v.BillingMode))
 	}
-	serializeConnectionList(s, schemas.UpdateConnectionsBillingModeResponse_connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionList(s, schemas.UpdateConnectionsBillingModeResponse_connections, v.Connections)
+	}
 }
 func (v *UpdateConnectionsBillingModeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateConnectionsBillingModeResponse, func(s *smithy.Schema) error {

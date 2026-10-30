@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAccessSources(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccessSourcesItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAccessSources(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeAccessTokens(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AccessTokenItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeAccessTokens(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeBatchCreateFirewallRuleInputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateFirewallRuleInputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeBatchCreateFirewallRuleInputItems(s smithy.ShapeSerializer, schema
 }
 
 func serializeBatchCreateFirewallRuleOutputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchCreateFirewallRuleOutputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -60,9 +48,6 @@ func serializeBatchCreateFirewallRuleOutputItems(s smithy.ShapeSerializer, schem
 }
 
 func serializeBatchDeleteFirewallRuleInputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeleteFirewallRuleInputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -73,9 +58,6 @@ func serializeBatchDeleteFirewallRuleInputItems(s smithy.ShapeSerializer, schema
 }
 
 func serializeBatchDeleteFirewallRuleOutputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchDeleteFirewallRuleOutputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -86,9 +68,6 @@ func serializeBatchDeleteFirewallRuleOutputItems(s smithy.ShapeSerializer, schem
 }
 
 func serializeBatchUpdateFirewallRuleInputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateFirewallRuleInputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -99,9 +78,6 @@ func serializeBatchUpdateFirewallRuleInputItems(s smithy.ShapeSerializer, schema
 }
 
 func serializeBatchUpdateFirewallRuleOutputItems(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchUpdateFirewallRuleOutputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -112,9 +88,6 @@ func serializeBatchUpdateFirewallRuleOutputItems(s smithy.ShapeSerializer, schem
 }
 
 func serializeDNSViews(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DNSViewSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -125,9 +98,6 @@ func serializeDNSViews(s smithy.ShapeSerializer, schema *smithy.Schema, v []type
 }
 
 func serializeDomains(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -136,9 +106,6 @@ func serializeDomains(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeFirewallDomainLists(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FirewallDomainListsItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -149,9 +116,6 @@ func serializeFirewallDomainLists(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeFirewallRules(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FirewallRulesItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -162,9 +126,6 @@ func serializeFirewallRules(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeGlobalResolvers(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.GlobalResolversItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -175,9 +136,6 @@ func serializeGlobalResolvers(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeHostedZoneAssociations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.HostedZoneAssociationSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -188,9 +146,6 @@ func serializeHostedZoneAssociations(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeIPv4Addresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -199,9 +154,6 @@ func serializeIPv4Addresses(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeIPv6Addresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -210,9 +162,6 @@ func serializeIPv6Addresses(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeManagedFirewallDomainLists(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ManagedFirewallDomainListsItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -223,9 +172,6 @@ func serializeManagedFirewallDomainLists(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeRegions(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -234,9 +180,6 @@ func serializeRegions(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeSharedDNSViews(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SharedDNSViewSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -247,9 +190,6 @@ func serializeSharedDNSViews(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeStrings(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -258,9 +198,6 @@ func serializeStrings(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -269,9 +206,6 @@ func serializeTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []strin
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -760,9 +694,6 @@ func deserializeValidationExceptionFieldList(d smithy.ShapeDeserializer, s *smit
 }
 
 func serializeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -772,9 +703,6 @@ func serializeFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v map[str
 }
 
 func serializeTags(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

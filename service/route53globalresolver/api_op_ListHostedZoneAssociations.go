@@ -96,7 +96,9 @@ func (v *ListHostedZoneAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHostedZoneAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHostedZoneAssociations(s, schemas.ListHostedZoneAssociationsOutput_hostedZoneAssociations, v.HostedZoneAssociations)
+	if v.HostedZoneAssociations != nil {
+		serializeHostedZoneAssociations(s, schemas.ListHostedZoneAssociationsOutput_hostedZoneAssociations, v.HostedZoneAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHostedZoneAssociationsOutput_nextToken, *v.NextToken)
 	}

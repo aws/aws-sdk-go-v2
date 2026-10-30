@@ -94,7 +94,9 @@ func (v *DescribeImageReplicationStatusOutput) SerializeMembers(s smithy.ShapeSe
 		v.ImageId.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeImageReplicationStatusList(s, schemas.DescribeImageReplicationStatusResponse_replicationStatuses, v.ReplicationStatuses)
+	if v.ReplicationStatuses != nil {
+		serializeImageReplicationStatusList(s, schemas.DescribeImageReplicationStatusResponse_replicationStatuses, v.ReplicationStatuses)
+	}
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.DescribeImageReplicationStatusResponse_repositoryName, *v.RepositoryName)
 	}

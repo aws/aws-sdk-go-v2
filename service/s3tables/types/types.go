@@ -154,7 +154,9 @@ func (v *IcebergMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PartitionSpec.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTableProperties(s, schemas.IcebergMetadata_properties, v.Properties)
+	if v.Properties != nil {
+		serializeTableProperties(s, schemas.IcebergMetadata_properties, v.Properties)
+	}
 	if v.Schema != nil {
 		s.WriteStruct(schemas.IcebergMetadata_schema)
 		v.Schema.SerializeMembers(s)
@@ -290,7 +292,9 @@ func (v *IcebergPartitionSpec) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergPartitionSpec) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergPartitionFieldList(s, schemas.IcebergPartitionSpec_fields, v.Fields)
+	if v.Fields != nil {
+		serializeIcebergPartitionFieldList(s, schemas.IcebergPartitionSpec_fields, v.Fields)
+	}
 	if v.SpecId != nil {
 		s.WriteInt32(schemas.IcebergPartitionSpec_specId, *v.SpecId)
 	}
@@ -326,7 +330,9 @@ func (v *IcebergSchema) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSchema) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaFieldList(s, schemas.IcebergSchema_fields, v.Fields)
+	if v.Fields != nil {
+		serializeSchemaFieldList(s, schemas.IcebergSchema_fields, v.Fields)
+	}
 }
 func (v *IcebergSchema) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IcebergSchema, func(s *smithy.Schema) error {
@@ -375,8 +381,12 @@ func (v *IcebergSchemaV2) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSchemaV2) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSchemaV2FieldList(s, schemas.IcebergSchemaV2_fields, v.Fields)
-	serializeIntegerList(s, schemas.IcebergSchemaV2_identifierFieldIds, v.IdentifierFieldIds)
+	if v.Fields != nil {
+		serializeSchemaV2FieldList(s, schemas.IcebergSchemaV2_fields, v.Fields)
+	}
+	if v.IdentifierFieldIds != nil {
+		serializeIntegerList(s, schemas.IcebergSchemaV2_identifierFieldIds, v.IdentifierFieldIds)
+	}
 	if v.SchemaId != nil {
 		s.WriteInt32(schemas.IcebergSchemaV2_schemaId, *v.SchemaId)
 	}
@@ -555,7 +565,9 @@ func (v *IcebergSortOrder) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcebergSortOrder) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIcebergSortFieldList(s, schemas.IcebergSortOrder_fields, v.Fields)
+	if v.Fields != nil {
+		serializeIcebergSortFieldList(s, schemas.IcebergSortOrder_fields, v.Fields)
+	}
 	if v.OrderId != nil {
 		s.WriteInt32(schemas.IcebergSortOrder_orderId, *v.OrderId)
 	}
@@ -741,7 +753,9 @@ func (v *NamespaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != nil {
 		s.WriteString(schemas.NamespaceSummary_createdBy, *v.CreatedBy)
 	}
-	serializeNamespaceList(s, schemas.NamespaceSummary_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.NamespaceSummary_namespace, v.Namespace)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.NamespaceSummary_namespaceId, *v.NamespaceId)
 	}
@@ -1144,7 +1158,9 @@ func (v *TableBucketMaintenanceConfigurationValue) Serialize(s smithy.ShapeSeria
 }
 
 func (v *TableBucketMaintenanceConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableBucketMaintenanceSettings(s, schemas.TableBucketMaintenanceConfigurationValue_settings, v.Settings)
+	if v.Settings != nil {
+		serializeTableBucketMaintenanceSettings(s, schemas.TableBucketMaintenanceConfigurationValue_settings, v.Settings)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.TableBucketMaintenanceConfigurationValue_status, string(v.Status))
 	}
@@ -1223,7 +1239,9 @@ func (v *TableBucketReplicationConfiguration) SerializeMembers(s smithy.ShapeSer
 	if v.Role != nil {
 		s.WriteString(schemas.TableBucketReplicationConfiguration_role, *v.Role)
 	}
-	serializeTableBucketReplicationRules(s, schemas.TableBucketReplicationConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeTableBucketReplicationRules(s, schemas.TableBucketReplicationConfiguration_rules, v.Rules)
+	}
 }
 func (v *TableBucketReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableBucketReplicationConfiguration, func(s *smithy.Schema) error {
@@ -1257,7 +1275,9 @@ func (v *TableBucketReplicationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableBucketReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationDestinations(s, schemas.TableBucketReplicationRule_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeReplicationDestinations(s, schemas.TableBucketReplicationRule_destinations, v.Destinations)
+	}
 }
 func (v *TableBucketReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableBucketReplicationRule, func(s *smithy.Schema) error {
@@ -1376,7 +1396,9 @@ func (v *TableMaintenanceConfigurationValue) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *TableMaintenanceConfigurationValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableMaintenanceSettings(s, schemas.TableMaintenanceConfigurationValue_settings, v.Settings)
+	if v.Settings != nil {
+		serializeTableMaintenanceSettings(s, schemas.TableMaintenanceConfigurationValue_settings, v.Settings)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.TableMaintenanceConfigurationValue_status, string(v.Status))
 	}
@@ -1685,7 +1707,9 @@ func (v *TableReplicationConfiguration) SerializeMembers(s smithy.ShapeSerialize
 	if v.Role != nil {
 		s.WriteString(schemas.TableReplicationConfiguration_role, *v.Role)
 	}
-	serializeTableReplicationRules(s, schemas.TableReplicationConfiguration_rules, v.Rules)
+	if v.Rules != nil {
+		serializeTableReplicationRules(s, schemas.TableReplicationConfiguration_rules, v.Rules)
+	}
 }
 func (v *TableReplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableReplicationConfiguration, func(s *smithy.Schema) error {
@@ -1718,7 +1742,9 @@ func (v *TableReplicationRule) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TableReplicationRule) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReplicationDestinations(s, schemas.TableReplicationRule_destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeReplicationDestinations(s, schemas.TableReplicationRule_destinations, v.Destinations)
+	}
 }
 func (v *TableReplicationRule) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TableReplicationRule, func(s *smithy.Schema) error {
@@ -1795,7 +1821,9 @@ func (v *TableSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.TableSummary_name, *v.Name)
 	}
-	serializeNamespaceList(s, schemas.TableSummary_namespace, v.Namespace)
+	if v.Namespace != nil {
+		serializeNamespaceList(s, schemas.TableSummary_namespace, v.Namespace)
+	}
 	if v.NamespaceId != nil {
 		s.WriteString(schemas.TableSummary_namespaceId, *v.NamespaceId)
 	}

@@ -135,7 +135,9 @@ func (v *CreateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecordingConfigurationArn != nil {
 		s.WriteString(schemas.CreateChannelRequest_recordingConfigurationArn, *v.RecordingConfigurationArn)
 	}
-	serializeTags(s, schemas.CreateChannelRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateChannelRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateChannelRequest_type, string(v.Type))
 	}

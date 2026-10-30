@@ -61,7 +61,9 @@ func (v *GetSdkInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSdkInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMapOfStringToString(s, schemas.GetSdkRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeMapOfStringToString(s, schemas.GetSdkRequest_parameters, v.Parameters)
+	}
 	if v.RestApiId != nil {
 		s.WriteString(schemas.GetSdkRequest_restApiId, *v.RestApiId)
 	}

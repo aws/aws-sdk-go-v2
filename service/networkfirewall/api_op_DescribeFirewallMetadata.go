@@ -97,7 +97,9 @@ func (v *DescribeFirewallMetadataOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeFirewallMetadataResponse_Status, string(v.Status))
 	}
-	serializeSupportedAvailabilityZones(s, schemas.DescribeFirewallMetadataResponse_SupportedAvailabilityZones, v.SupportedAvailabilityZones)
+	if v.SupportedAvailabilityZones != nil {
+		serializeSupportedAvailabilityZones(s, schemas.DescribeFirewallMetadataResponse_SupportedAvailabilityZones, v.SupportedAvailabilityZones)
+	}
 	if v.TransitGatewayAttachmentId != nil {
 		s.WriteString(schemas.DescribeFirewallMetadataResponse_TransitGatewayAttachmentId, *v.TransitGatewayAttachmentId)
 	}

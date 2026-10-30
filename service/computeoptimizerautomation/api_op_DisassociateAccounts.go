@@ -53,7 +53,9 @@ func (v *DisassociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DisassociateAccountsRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DisassociateAccountsRequest_accountIds, v.AccountIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.DisassociateAccountsRequest_clientToken, *v.ClientToken)
 	}
@@ -80,8 +82,12 @@ func (v *DisassociateAccountsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DisassociateAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIdList(s, schemas.DisassociateAccountsResponse_accountIds, v.AccountIds)
-	serializeStringList(s, schemas.DisassociateAccountsResponse_errors, v.Errors)
+	if v.AccountIds != nil {
+		serializeAccountIdList(s, schemas.DisassociateAccountsResponse_accountIds, v.AccountIds)
+	}
+	if v.Errors != nil {
+		serializeStringList(s, schemas.DisassociateAccountsResponse_errors, v.Errors)
+	}
 }
 func (v *DisassociateAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociateAccountsResponse, func(s *smithy.Schema) error {

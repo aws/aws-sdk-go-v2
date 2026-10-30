@@ -119,7 +119,9 @@ func (v *StartJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.OutputOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartJobRequest_Tags, v.Tags)
+	}
 }
 
 type StartJobOutput struct {

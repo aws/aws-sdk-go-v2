@@ -151,7 +151,9 @@ func (v *TransactWriteItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReturnItemCollectionMetrics != "" {
 		s.WriteString(schemas.TransactWriteItemsInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
 	}
-	serializeTransactWriteItemList(s, schemas.TransactWriteItemsInput_TransactItems, v.TransactItems)
+	if v.TransactItems != nil {
+		serializeTransactWriteItemList(s, schemas.TransactWriteItemsInput_TransactItems, v.TransactItems)
+	}
 }
 func (in *TransactWriteItemsInput) bindEndpointParams(p *EndpointParameters) {
 	func() {
@@ -236,8 +238,12 @@ func (v *TransactWriteItemsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TransactWriteItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConsumedCapacityMultiple(s, schemas.TransactWriteItemsOutput_ConsumedCapacity, v.ConsumedCapacity)
-	serializeItemCollectionMetricsPerTable(s, schemas.TransactWriteItemsOutput_ItemCollectionMetrics, v.ItemCollectionMetrics)
+	if v.ConsumedCapacity != nil {
+		serializeConsumedCapacityMultiple(s, schemas.TransactWriteItemsOutput_ConsumedCapacity, v.ConsumedCapacity)
+	}
+	if v.ItemCollectionMetrics != nil {
+		serializeItemCollectionMetricsPerTable(s, schemas.TransactWriteItemsOutput_ItemCollectionMetrics, v.ItemCollectionMetrics)
+	}
 }
 func (v *TransactWriteItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TransactWriteItemsOutput, func(s *smithy.Schema) error {

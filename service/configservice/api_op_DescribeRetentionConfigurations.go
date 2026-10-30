@@ -59,7 +59,9 @@ func (v *DescribeRetentionConfigurationsInput) SerializeMembers(s smithy.ShapeSe
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRetentionConfigurationsRequest_NextToken, *v.NextToken)
 	}
-	serializeRetentionConfigurationNameList(s, schemas.DescribeRetentionConfigurationsRequest_RetentionConfigurationNames, v.RetentionConfigurationNames)
+	if v.RetentionConfigurationNames != nil {
+		serializeRetentionConfigurationNameList(s, schemas.DescribeRetentionConfigurationsRequest_RetentionConfigurationNames, v.RetentionConfigurationNames)
+	}
 }
 
 type DescribeRetentionConfigurationsOutput struct {
@@ -87,7 +89,9 @@ func (v *DescribeRetentionConfigurationsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRetentionConfigurationsResponse_NextToken, *v.NextToken)
 	}
-	serializeRetentionConfigurationList(s, schemas.DescribeRetentionConfigurationsResponse_RetentionConfigurations, v.RetentionConfigurations)
+	if v.RetentionConfigurations != nil {
+		serializeRetentionConfigurationList(s, schemas.DescribeRetentionConfigurationsResponse_RetentionConfigurations, v.RetentionConfigurations)
+	}
 }
 func (v *DescribeRetentionConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRetentionConfigurationsResponse, func(s *smithy.Schema) error {

@@ -97,7 +97,9 @@ func (v *ListInferenceSchedulersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListInferenceSchedulersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInferenceSchedulerSummaries(s, schemas.ListInferenceSchedulersResponse_InferenceSchedulerSummaries, v.InferenceSchedulerSummaries)
+	if v.InferenceSchedulerSummaries != nil {
+		serializeInferenceSchedulerSummaries(s, schemas.ListInferenceSchedulersResponse_InferenceSchedulerSummaries, v.InferenceSchedulerSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListInferenceSchedulersResponse_NextToken, *v.NextToken)
 	}

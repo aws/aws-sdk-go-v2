@@ -84,8 +84,12 @@ func (v *GetAccountCustomizationsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AccountColor != "" {
 		s.WriteString(schemas.GetAccountCustomizationsOutput_accountColor, string(v.AccountColor))
 	}
-	serializeRegionsList(s, schemas.GetAccountCustomizationsOutput_visibleRegions, v.VisibleRegions)
-	serializeServiceList(s, schemas.GetAccountCustomizationsOutput_visibleServices, v.VisibleServices)
+	if v.VisibleRegions != nil {
+		serializeRegionsList(s, schemas.GetAccountCustomizationsOutput_visibleRegions, v.VisibleRegions)
+	}
+	if v.VisibleServices != nil {
+		serializeServiceList(s, schemas.GetAccountCustomizationsOutput_visibleServices, v.VisibleServices)
+	}
 }
 func (v *GetAccountCustomizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetAccountCustomizationsOutput, func(s *smithy.Schema) error {

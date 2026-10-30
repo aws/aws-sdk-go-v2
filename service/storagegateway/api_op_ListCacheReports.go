@@ -76,7 +76,9 @@ func (v *ListCacheReportsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCacheReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCacheReportList(s, schemas.ListCacheReportsOutput_CacheReportList, v.CacheReportList)
+	if v.CacheReportList != nil {
+		serializeCacheReportList(s, schemas.ListCacheReportsOutput_CacheReportList, v.CacheReportList)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.ListCacheReportsOutput_Marker, *v.Marker)
 	}

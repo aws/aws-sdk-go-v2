@@ -88,7 +88,9 @@ func (v *GetVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetVariablesResult_nextToken, *v.NextToken)
 	}
-	serializeVariableList(s, schemas.GetVariablesResult_variables, v.Variables)
+	if v.Variables != nil {
+		serializeVariableList(s, schemas.GetVariablesResult_variables, v.Variables)
+	}
 }
 func (v *GetVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetVariablesResult, func(s *smithy.Schema) error {

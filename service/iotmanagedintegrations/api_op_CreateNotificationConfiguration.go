@@ -70,7 +70,9 @@ func (v *CreateNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSe
 	if v.EventType != "" {
 		s.WriteString(schemas.CreateNotificationConfigurationRequest_EventType, string(v.EventType))
 	}
-	serializeTagsMap(s, schemas.CreateNotificationConfigurationRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateNotificationConfigurationRequest_Tags, v.Tags)
+	}
 }
 
 type CreateNotificationConfigurationOutput struct {

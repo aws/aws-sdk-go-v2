@@ -88,7 +88,9 @@ func (v *CreateBatchImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutputPath != nil {
 		s.WriteString(schemas.CreateBatchImportJobRequest_outputPath, *v.OutputPath)
 	}
-	serializetagList(s, schemas.CreateBatchImportJobRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializetagList(s, schemas.CreateBatchImportJobRequest_tags, v.Tags)
+	}
 }
 
 type CreateBatchImportJobOutput struct {

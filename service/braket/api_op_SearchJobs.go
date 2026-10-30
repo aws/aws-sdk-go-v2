@@ -52,7 +52,9 @@ func (v *SearchJobsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchJobsFilterList(s, schemas.SearchJobsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchJobsFilterList(s, schemas.SearchJobsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchJobsRequest_maxResults, *v.MaxResults)
 	}
@@ -102,7 +104,9 @@ func (v *SearchJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeJobSummaryList(s, schemas.SearchJobsResponse_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeJobSummaryList(s, schemas.SearchJobsResponse_jobs, v.Jobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchJobsResponse_nextToken, *v.NextToken)
 	}

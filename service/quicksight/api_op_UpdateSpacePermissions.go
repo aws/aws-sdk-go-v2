@@ -57,8 +57,12 @@ func (v *UpdateSpacePermissionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateSpacePermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 	if v.SpaceId != nil {
 		s.WriteString(schemas.UpdateSpacePermissionsRequest_SpaceId, *v.SpaceId)
 	}
@@ -93,7 +97,9 @@ func (v *UpdateSpacePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSpacePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsResponse_permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateSpacePermissionsResponse_permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateSpacePermissionsResponse_requestId, *v.RequestId)
 	}

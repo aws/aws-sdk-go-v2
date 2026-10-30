@@ -73,7 +73,9 @@ func (v *ListProfileObjectTypeTemplatesOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListProfileObjectTypeTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProfileObjectTypeTemplateList(s, schemas.ListProfileObjectTypeTemplatesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeProfileObjectTypeTemplateList(s, schemas.ListProfileObjectTypeTemplatesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProfileObjectTypeTemplatesResponse_NextToken, *v.NextToken)
 	}

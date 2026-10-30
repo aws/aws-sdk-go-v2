@@ -76,7 +76,9 @@ func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApplicationRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateApplicationRequest_tags, v.Tags)
+	}
 	if v.WorkspaceName != nil {
 		s.WriteString(schemas.CreateApplicationRequest_workspaceName, *v.WorkspaceName)
 	}

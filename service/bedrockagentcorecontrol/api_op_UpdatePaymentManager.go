@@ -70,7 +70,9 @@ func (v *UpdatePaymentManagerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdatePaymentManagerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.UpdatePaymentManagerRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.UpdatePaymentManagerRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.UpdatePaymentManagerRequest_authorizerType, string(v.AuthorizerType))
 	}

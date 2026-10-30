@@ -88,7 +88,9 @@ func (v *ListAttachmentRoutingPolicyAssociationsOutput) Serialize(s smithy.Shape
 }
 
 func (v *ListAttachmentRoutingPolicyAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttachmentRoutingPolicyAssociationsList(s, schemas.ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations, v.AttachmentRoutingPolicyAssociations)
+	if v.AttachmentRoutingPolicyAssociations != nil {
+		serializeAttachmentRoutingPolicyAssociationsList(s, schemas.ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations, v.AttachmentRoutingPolicyAssociations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAttachmentRoutingPolicyAssociationsResponse_NextToken, *v.NextToken)
 	}

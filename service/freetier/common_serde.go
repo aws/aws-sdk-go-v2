@@ -32,9 +32,6 @@ func deserializeActivityReward(d smithy.ShapeDeserializer, s *smithy.Schema, v *
 }
 
 func serializeActivities(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ActivitySummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -45,9 +42,6 @@ func serializeActivities(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeExpressions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Expression) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -58,9 +52,6 @@ func serializeExpressions(s smithy.ShapeSerializer, schema *smithy.Schema, v []t
 }
 
 func serializeFilterActivityStatuses(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ActivityStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -69,9 +60,6 @@ func serializeFilterActivityStatuses(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeFreeTierUsages(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.FreeTierUsage) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -82,9 +70,6 @@ func serializeFreeTierUsages(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeMatchOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.MatchOption) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -93,9 +78,6 @@ func serializeMatchOptions(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))

@@ -95,7 +95,9 @@ func (v *DescribeUpdateDirectoryOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeUpdateDirectoryResult_NextToken, *v.NextToken)
 	}
-	serializeUpdateActivities(s, schemas.DescribeUpdateDirectoryResult_UpdateActivities, v.UpdateActivities)
+	if v.UpdateActivities != nil {
+		serializeUpdateActivities(s, schemas.DescribeUpdateDirectoryResult_UpdateActivities, v.UpdateActivities)
+	}
 }
 func (v *DescribeUpdateDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeUpdateDirectoryResult, func(s *smithy.Schema) error {

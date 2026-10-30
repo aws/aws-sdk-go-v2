@@ -185,9 +185,15 @@ func (v *CreateClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ShardInstanceCount != nil {
 		s.WriteInt32(schemas.CreateClusterInput_shardInstanceCount, *v.ShardInstanceCount)
 	}
-	serializeStringList(s, schemas.CreateClusterInput_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.CreateClusterInput_tags, v.Tags)
-	serializeStringList(s, schemas.CreateClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.CreateClusterInput_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateClusterInput_tags, v.Tags)
+	}
+	if v.VpcSecurityGroupIds != nil {
+		serializeStringList(s, schemas.CreateClusterInput_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+	}
 }
 func (v *CreateClusterInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateClusterInput, func(s *smithy.Schema) error {

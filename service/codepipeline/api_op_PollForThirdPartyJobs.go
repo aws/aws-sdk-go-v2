@@ -81,7 +81,9 @@ func (v *PollForThirdPartyJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PollForThirdPartyJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeThirdPartyJobList(s, schemas.PollForThirdPartyJobsOutput_jobs, v.Jobs)
+	if v.Jobs != nil {
+		serializeThirdPartyJobList(s, schemas.PollForThirdPartyJobsOutput_jobs, v.Jobs)
+	}
 }
 func (v *PollForThirdPartyJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PollForThirdPartyJobsOutput, func(s *smithy.Schema) error {

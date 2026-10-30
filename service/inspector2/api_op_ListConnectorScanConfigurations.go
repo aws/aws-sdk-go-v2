@@ -53,7 +53,9 @@ func (v *ListConnectorScanConfigurationsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ListConnectorScanConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAwsConfigConnectorArnList(s, schemas.ListConnectorScanConfigurationsRequest_awsConfigConnectorArns, v.AwsConfigConnectorArns)
+	if v.AwsConfigConnectorArns != nil {
+		serializeAwsConfigConnectorArnList(s, schemas.ListConnectorScanConfigurationsRequest_awsConfigConnectorArns, v.AwsConfigConnectorArns)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListConnectorScanConfigurationsRequest_maxResults, *v.MaxResults)
 	}
@@ -90,7 +92,9 @@ func (v *ListConnectorScanConfigurationsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListConnectorScanConfigurationsResponse_nextToken, *v.NextToken)
 	}
-	serializeConnectorScanConfigurationItemList(s, schemas.ListConnectorScanConfigurationsResponse_scanConfigurations, v.ScanConfigurations)
+	if v.ScanConfigurations != nil {
+		serializeConnectorScanConfigurationItemList(s, schemas.ListConnectorScanConfigurationsResponse_scanConfigurations, v.ScanConfigurations)
+	}
 }
 func (v *ListConnectorScanConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListConnectorScanConfigurationsResponse, func(s *smithy.Schema) error {

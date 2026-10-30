@@ -148,7 +148,9 @@ func (v *CreateDaemonInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDaemonInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.CreateDaemonRequest_capacityProviderArns, v.CapacityProviderArns)
+	if v.CapacityProviderArns != nil {
+		serializeStringList(s, schemas.CreateDaemonRequest_capacityProviderArns, v.CapacityProviderArns)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateDaemonRequest_clientToken, *v.ClientToken)
 	}
@@ -178,7 +180,9 @@ func (v *CreateDaemonInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PropagateTags != "" {
 		s.WriteString(schemas.CreateDaemonRequest_propagateTags, string(v.PropagateTags))
 	}
-	serializeTags(s, schemas.CreateDaemonRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDaemonRequest_tags, v.Tags)
+	}
 }
 
 type CreateDaemonOutput struct {

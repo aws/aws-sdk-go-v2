@@ -173,7 +173,9 @@ func (v *GetAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Authorizer_name, *v.Name)
 	}
-	serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	if v.ProviderARNs != nil {
+		serializeListOfARNs(s, schemas.Authorizer_providerARNs, v.ProviderARNs)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.Authorizer_type, string(v.Type))
 	}

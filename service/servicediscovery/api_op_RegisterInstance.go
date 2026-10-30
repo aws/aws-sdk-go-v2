@@ -211,7 +211,9 @@ func (v *RegisterInstanceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.RegisterInstanceRequest_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.RegisterInstanceRequest_Attributes, v.Attributes)
+	}
 	if v.CreatorRequestId != nil {
 		s.WriteString(schemas.RegisterInstanceRequest_CreatorRequestId, *v.CreatorRequestId)
 	}

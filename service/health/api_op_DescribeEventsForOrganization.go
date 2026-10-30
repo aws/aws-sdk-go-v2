@@ -128,7 +128,9 @@ func (v *DescribeEventsForOrganizationOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeEventsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOrganizationEventList(s, schemas.DescribeEventsForOrganizationResponse_events, v.Events)
+	if v.Events != nil {
+		serializeOrganizationEventList(s, schemas.DescribeEventsForOrganizationResponse_events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeEventsForOrganizationResponse_nextToken, *v.NextToken)
 	}

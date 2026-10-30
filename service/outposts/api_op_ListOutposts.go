@@ -59,9 +59,15 @@ func (v *ListOutpostsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOutpostsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneList(s, schemas.ListOutpostsInput_AvailabilityZoneFilter, v.AvailabilityZoneFilter)
-	serializeAvailabilityZoneIdList(s, schemas.ListOutpostsInput_AvailabilityZoneIdFilter, v.AvailabilityZoneIdFilter)
-	serializeLifeCycleStatusList(s, schemas.ListOutpostsInput_LifeCycleStatusFilter, v.LifeCycleStatusFilter)
+	if v.AvailabilityZoneFilter != nil {
+		serializeAvailabilityZoneList(s, schemas.ListOutpostsInput_AvailabilityZoneFilter, v.AvailabilityZoneFilter)
+	}
+	if v.AvailabilityZoneIdFilter != nil {
+		serializeAvailabilityZoneIdList(s, schemas.ListOutpostsInput_AvailabilityZoneIdFilter, v.AvailabilityZoneIdFilter)
+	}
+	if v.LifeCycleStatusFilter != nil {
+		serializeLifeCycleStatusList(s, schemas.ListOutpostsInput_LifeCycleStatusFilter, v.LifeCycleStatusFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListOutpostsInput_MaxResults, *v.MaxResults)
 	}
@@ -94,7 +100,9 @@ func (v *ListOutpostsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListOutpostsOutput_NextToken, *v.NextToken)
 	}
-	serializeoutpostListDefinition(s, schemas.ListOutpostsOutput_Outposts, v.Outposts)
+	if v.Outposts != nil {
+		serializeoutpostListDefinition(s, schemas.ListOutpostsOutput_Outposts, v.Outposts)
+	}
 }
 func (v *ListOutpostsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOutpostsOutput, func(s *smithy.Schema) error {

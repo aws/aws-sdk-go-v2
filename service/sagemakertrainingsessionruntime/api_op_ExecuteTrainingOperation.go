@@ -70,7 +70,9 @@ func (v *ExecuteTrainingOperationInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.ClientToken != nil {
 		s.WriteString(schemas.ExecuteTrainingOperationInput_clientToken, *v.ClientToken)
 	}
-	serializeOperationConfig(s, schemas.ExecuteTrainingOperationInput_operationConfig, v.OperationConfig)
+	if v.OperationConfig != nil {
+		serializeOperationConfig(s, schemas.ExecuteTrainingOperationInput_operationConfig, v.OperationConfig)
+	}
 	if v.SequenceNumber != nil {
 		s.WriteInt32(schemas.ExecuteTrainingOperationInput_sequenceNumber, *v.SequenceNumber)
 	}

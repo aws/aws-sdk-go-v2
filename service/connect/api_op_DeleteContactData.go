@@ -75,7 +75,9 @@ func (v *DeleteContactDataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteContactDataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContactFields(s, schemas.DeleteContactDataRequest_ContactFields, v.ContactFields)
+	if v.ContactFields != nil {
+		serializeContactFields(s, schemas.DeleteContactDataRequest_ContactFields, v.ContactFields)
+	}
 	if v.ContactId != nil {
 		s.WriteString(schemas.DeleteContactDataRequest_ContactId, *v.ContactId)
 	}

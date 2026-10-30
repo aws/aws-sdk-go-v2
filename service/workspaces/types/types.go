@@ -75,8 +75,12 @@ func (v *AccessEndpointConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccessEndpointConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.AccessEndpointConfig_AccessEndpoints, v.AccessEndpoints)
-	serializeInternetFallbackProtocolList(s, schemas.AccessEndpointConfig_InternetFallbackProtocols, v.InternetFallbackProtocols)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.AccessEndpointConfig_AccessEndpoints, v.AccessEndpoints)
+	}
+	if v.InternetFallbackProtocols != nil {
+		serializeInternetFallbackProtocolList(s, schemas.AccessEndpointConfig_InternetFallbackProtocols, v.InternetFallbackProtocols)
+	}
 }
 func (v *AccessEndpointConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessEndpointConfig, func(s *smithy.Schema) error {
@@ -1016,7 +1020,9 @@ func (v *ConnectionAlias) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AliasId != nil {
 		s.WriteString(schemas.ConnectionAlias_AliasId, *v.AliasId)
 	}
-	serializeConnectionAliasAssociationList(s, schemas.ConnectionAlias_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeConnectionAliasAssociationList(s, schemas.ConnectionAlias_Associations, v.Associations)
+	}
 	if v.ConnectionString != nil {
 		s.WriteString(schemas.ConnectionAlias_ConnectionString, *v.ConnectionString)
 	}
@@ -1311,7 +1317,9 @@ func (v *DefaultClientBrandingAttributes) SerializeMembers(s smithy.ShapeSeriali
 	if v.ForgotPasswordLink != nil {
 		s.WriteString(schemas.DefaultClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
 	}
-	serializeLoginMessage(s, schemas.DefaultClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.LoginMessage != nil {
+		serializeLoginMessage(s, schemas.DefaultClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	}
 	if v.LogoUrl != nil {
 		s.WriteString(schemas.DefaultClientBrandingAttributes_LogoUrl, *v.LogoUrl)
 	}
@@ -1398,7 +1406,9 @@ func (v *DefaultImportClientBrandingAttributes) SerializeMembers(s smithy.ShapeS
 	if v.ForgotPasswordLink != nil {
 		s.WriteString(schemas.DefaultImportClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
 	}
-	serializeLoginMessage(s, schemas.DefaultImportClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.LoginMessage != nil {
+		serializeLoginMessage(s, schemas.DefaultImportClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	}
 	if v.Logo != nil {
 		s.WriteBlob(schemas.DefaultImportClientBrandingAttributes_Logo, v.Logo)
 	}
@@ -1552,7 +1562,9 @@ func (v *DescribeWorkspaceDirectoriesFilter) SerializeMembers(s smithy.ShapeSeri
 	if v.Name != "" {
 		s.WriteString(schemas.DescribeWorkspaceDirectoriesFilter_Name, string(v.Name))
 	}
-	serializeDescribeWorkspaceDirectoriesFilterValues(s, schemas.DescribeWorkspaceDirectoriesFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeDescribeWorkspaceDirectoriesFilterValues(s, schemas.DescribeWorkspaceDirectoriesFilter_Values, v.Values)
+	}
 }
 func (v *DescribeWorkspaceDirectoriesFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspaceDirectoriesFilter, func(s *smithy.Schema) error {
@@ -1605,7 +1617,9 @@ func (v *DescribeWorkspacesPoolsFilter) SerializeMembers(s smithy.ShapeSerialize
 	if v.Operator != "" {
 		s.WriteString(schemas.DescribeWorkspacesPoolsFilter_Operator, string(v.Operator))
 	}
-	serializeDescribeWorkspacesPoolsFilterValues(s, schemas.DescribeWorkspacesPoolsFilter_Values, v.Values)
+	if v.Values != nil {
+		serializeDescribeWorkspacesPoolsFilterValues(s, schemas.DescribeWorkspacesPoolsFilter_Values, v.Values)
+	}
 }
 func (v *DescribeWorkspacesPoolsFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeWorkspacesPoolsFilter, func(s *smithy.Schema) error {
@@ -2234,7 +2248,9 @@ func (v *IosClientBrandingAttributes) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ForgotPasswordLink != nil {
 		s.WriteString(schemas.IosClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
 	}
-	serializeLoginMessage(s, schemas.IosClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.LoginMessage != nil {
+		serializeLoginMessage(s, schemas.IosClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	}
 	if v.Logo2xUrl != nil {
 		s.WriteString(schemas.IosClientBrandingAttributes_Logo2xUrl, *v.Logo2xUrl)
 	}
@@ -2354,7 +2370,9 @@ func (v *IosImportClientBrandingAttributes) SerializeMembers(s smithy.ShapeSeria
 	if v.ForgotPasswordLink != nil {
 		s.WriteString(schemas.IosImportClientBrandingAttributes_ForgotPasswordLink, *v.ForgotPasswordLink)
 	}
-	serializeLoginMessage(s, schemas.IosImportClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	if v.LoginMessage != nil {
+		serializeLoginMessage(s, schemas.IosImportClientBrandingAttributes_LoginMessage, v.LoginMessage)
+	}
 	if v.Logo != nil {
 		s.WriteBlob(schemas.IosImportClientBrandingAttributes_Logo, v.Logo)
 	}
@@ -3080,7 +3098,9 @@ func (v *StandbyWorkspace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PrimaryWorkspaceId != nil {
 		s.WriteString(schemas.StandbyWorkspace_PrimaryWorkspaceId, *v.PrimaryWorkspaceId)
 	}
-	serializeTagList(s, schemas.StandbyWorkspace_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StandbyWorkspace_Tags, v.Tags)
+	}
 	if v.VolumeEncryptionKey != nil {
 		s.WriteString(schemas.StandbyWorkspace_VolumeEncryptionKey, *v.VolumeEncryptionKey)
 	}
@@ -3310,11 +3330,15 @@ func (v *StreamingProperties) SerializeMembers(s smithy.ShapeSerializer) {
 		v.GlobalAccelerator.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStorageConnectors(s, schemas.StreamingProperties_StorageConnectors, v.StorageConnectors)
+	if v.StorageConnectors != nil {
+		serializeStorageConnectors(s, schemas.StreamingProperties_StorageConnectors, v.StorageConnectors)
+	}
 	if v.StreamingExperiencePreferredProtocol != "" {
 		s.WriteString(schemas.StreamingProperties_StreamingExperiencePreferredProtocol, string(v.StreamingExperiencePreferredProtocol))
 	}
-	serializeUserSettings(s, schemas.StreamingProperties_UserSettings, v.UserSettings)
+	if v.UserSettings != nil {
+		serializeUserSettings(s, schemas.StreamingProperties_UserSettings, v.UserSettings)
+	}
 }
 func (v *StreamingProperties) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StreamingProperties, func(s *smithy.Schema) error {
@@ -3759,12 +3783,18 @@ func (v *Workspace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv6Address != nil {
 		s.WriteString(schemas.Workspace_Ipv6Address, *v.Ipv6Address)
 	}
-	serializeModificationStateList(s, schemas.Workspace_ModificationStates, v.ModificationStates)
-	serializeRelatedWorkspaces(s, schemas.Workspace_RelatedWorkspaces, v.RelatedWorkspaces)
+	if v.ModificationStates != nil {
+		serializeModificationStateList(s, schemas.Workspace_ModificationStates, v.ModificationStates)
+	}
+	if v.RelatedWorkspaces != nil {
+		serializeRelatedWorkspaces(s, schemas.Workspace_RelatedWorkspaces, v.RelatedWorkspaces)
+	}
 	if v.RootVolumeEncryptionEnabled != nil {
 		s.WriteBool(schemas.Workspace_RootVolumeEncryptionEnabled, *v.RootVolumeEncryptionEnabled)
 	}
-	serializeStandbyWorkspacesPropertiesList(s, schemas.Workspace_StandbyWorkspacesProperties, v.StandbyWorkspacesProperties)
+	if v.StandbyWorkspacesProperties != nil {
+		serializeStandbyWorkspacesPropertiesList(s, schemas.Workspace_StandbyWorkspacesProperties, v.StandbyWorkspacesProperties)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.Workspace_State, string(v.State))
 	}
@@ -4077,8 +4107,12 @@ func (v *WorkSpaceApplication) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.WorkSpaceApplication_State, string(v.State))
 	}
-	serializeComputeList(s, schemas.WorkSpaceApplication_SupportedComputeTypeNames, v.SupportedComputeTypeNames)
-	serializeOperatingSystemNameList(s, schemas.WorkSpaceApplication_SupportedOperatingSystemNames, v.SupportedOperatingSystemNames)
+	if v.SupportedComputeTypeNames != nil {
+		serializeComputeList(s, schemas.WorkSpaceApplication_SupportedComputeTypeNames, v.SupportedComputeTypeNames)
+	}
+	if v.SupportedOperatingSystemNames != nil {
+		serializeOperatingSystemNameList(s, schemas.WorkSpaceApplication_SupportedOperatingSystemNames, v.SupportedOperatingSystemNames)
+	}
 }
 func (v *WorkSpaceApplication) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkSpaceApplication, func(s *smithy.Schema) error {
@@ -4137,7 +4171,9 @@ func (v *WorkSpaceApplicationDeployment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkSpaceApplicationDeployment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkspaceResourceAssociationList(s, schemas.WorkSpaceApplicationDeployment_Associations, v.Associations)
+	if v.Associations != nil {
+		serializeWorkspaceResourceAssociationList(s, schemas.WorkSpaceApplicationDeployment_Associations, v.Associations)
+	}
 }
 func (v *WorkSpaceApplicationDeployment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkSpaceApplicationDeployment, func(s *smithy.Schema) error {
@@ -4596,8 +4632,12 @@ func (v *WorkspaceDirectory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryType != "" {
 		s.WriteString(schemas.WorkspaceDirectory_DirectoryType, string(v.DirectoryType))
 	}
-	serializeDnsIpAddresses(s, schemas.WorkspaceDirectory_DnsIpAddresses, v.DnsIpAddresses)
-	serializeDnsIpv6Addresses(s, schemas.WorkspaceDirectory_DnsIpv6Addresses, v.DnsIpv6Addresses)
+	if v.DnsIpAddresses != nil {
+		serializeDnsIpAddresses(s, schemas.WorkspaceDirectory_DnsIpAddresses, v.DnsIpAddresses)
+	}
+	if v.DnsIpv6Addresses != nil {
+		serializeDnsIpv6Addresses(s, schemas.WorkspaceDirectory_DnsIpv6Addresses, v.DnsIpv6Addresses)
+	}
 	if v.EndpointEncryptionMode != "" {
 		s.WriteString(schemas.WorkspaceDirectory_EndpointEncryptionMode, string(v.EndpointEncryptionMode))
 	}
@@ -4638,7 +4678,9 @@ func (v *WorkspaceDirectory) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StreamingProperties.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSubnetIds(s, schemas.WorkspaceDirectory_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.WorkspaceDirectory_SubnetIds, v.SubnetIds)
+	}
 	if v.Tenancy != "" {
 		s.WriteString(schemas.WorkspaceDirectory_Tenancy, string(v.Tenancy))
 	}
@@ -4667,7 +4709,9 @@ func (v *WorkspaceDirectory) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.WorkspaceType != "" {
 		s.WriteString(schemas.WorkspaceDirectory_WorkspaceType, string(v.WorkspaceType))
 	}
-	serializeIpGroupIdList(s, schemas.WorkspaceDirectory_ipGroupIds, v.IpGroupIds)
+	if v.IpGroupIds != nil {
+		serializeIpGroupIdList(s, schemas.WorkspaceDirectory_ipGroupIds, v.IpGroupIds)
+	}
 }
 func (v *WorkspaceDirectory) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkspaceDirectory, func(s *smithy.Schema) error {
@@ -4849,7 +4893,9 @@ func (v *WorkspaceImage) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ErrorCode != nil {
 		s.WriteString(schemas.WorkspaceImage_ErrorCode, *v.ErrorCode)
 	}
-	serializeErrorDetailsList(s, schemas.WorkspaceImage_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetailsList(s, schemas.WorkspaceImage_ErrorDetails, v.ErrorDetails)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.WorkspaceImage_ErrorMessage, *v.ErrorMessage)
 	}
@@ -5018,7 +5064,9 @@ func (v *WorkspaceProperties) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperatingSystemName != "" {
 		s.WriteString(schemas.WorkspaceProperties_OperatingSystemName, string(v.OperatingSystemName))
 	}
-	serializeProtocolList(s, schemas.WorkspaceProperties_Protocols, v.Protocols)
+	if v.Protocols != nil {
+		serializeProtocolList(s, schemas.WorkspaceProperties_Protocols, v.Protocols)
+	}
 	if v.RootVolumeSizeGib != nil {
 		s.WriteInt32(schemas.WorkspaceProperties_RootVolumeSizeGib, *v.RootVolumeSizeGib)
 	}
@@ -5153,7 +5201,9 @@ func (v *WorkspaceRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RootVolumeEncryptionEnabled != nil {
 		s.WriteBool(schemas.WorkspaceRequest_RootVolumeEncryptionEnabled, *v.RootVolumeEncryptionEnabled)
 	}
-	serializeTagList(s, schemas.WorkspaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.WorkspaceRequest_Tags, v.Tags)
+	}
 	if v.UserName != nil {
 		s.WriteString(schemas.WorkspaceRequest_UserName, *v.UserName)
 	}
@@ -5338,7 +5388,9 @@ func (v *WorkspacesIpGroup) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupName != nil {
 		s.WriteString(schemas.WorkspacesIpGroup_groupName, *v.GroupName)
 	}
-	serializeIpRuleList(s, schemas.WorkspacesIpGroup_userRules, v.UserRules)
+	if v.UserRules != nil {
+		serializeIpRuleList(s, schemas.WorkspacesIpGroup_userRules, v.UserRules)
+	}
 }
 func (v *WorkspacesIpGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkspacesIpGroup, func(s *smithy.Schema) error {
@@ -5455,7 +5507,9 @@ func (v *WorkspacesPool) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.WorkspacesPool_DirectoryId, *v.DirectoryId)
 	}
-	serializeWorkspacesPoolErrors(s, schemas.WorkspacesPool_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeWorkspacesPoolErrors(s, schemas.WorkspacesPool_Errors, v.Errors)
+	}
 	if v.PoolArn != nil {
 		s.WriteString(schemas.WorkspacesPool_PoolArn, *v.PoolArn)
 	}

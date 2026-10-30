@@ -83,7 +83,9 @@ func (v *ConfigureAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FleetInstanceId != nil {
 		s.WriteString(schemas.ConfigureAgentRequest_fleetInstanceId, *v.FleetInstanceId)
 	}
-	serializeMetadata(s, schemas.ConfigureAgentRequest_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.ConfigureAgentRequest_metadata, v.Metadata)
+	}
 	if v.ProfilingGroupName != nil {
 		s.WriteString(schemas.ConfigureAgentRequest_profilingGroupName, *v.ProfilingGroupName)
 	}

@@ -169,8 +169,12 @@ func (v *DescribeChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.DescribeChannelResponse_Status, string(v.Status))
 	}
-	serialize__mapOf__string(s, schemas.DescribeChannelResponse_Tags, v.Tags)
-	serialize__listOfTopicConfiguration(s, schemas.DescribeChannelResponse_TopicConfigurationList, v.TopicConfigurationList)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeChannelResponse_Tags, v.Tags)
+	}
+	if v.TopicConfigurationList != nil {
+		serialize__listOfTopicConfiguration(s, schemas.DescribeChannelResponse_TopicConfigurationList, v.TopicConfigurationList)
+	}
 }
 func (v *DescribeChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeChannelResponse, func(s *smithy.Schema) error {

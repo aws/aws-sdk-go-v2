@@ -111,7 +111,9 @@ func (v *AddApplicationReferenceDataSourceOutput) SerializeMembers(s smithy.Shap
 	if v.ApplicationVersionId != nil {
 		s.WriteInt64(schemas.AddApplicationReferenceDataSourceResponse_ApplicationVersionId, *v.ApplicationVersionId)
 	}
-	serializeReferenceDataSourceDescriptions(s, schemas.AddApplicationReferenceDataSourceResponse_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	if v.ReferenceDataSourceDescriptions != nil {
+		serializeReferenceDataSourceDescriptions(s, schemas.AddApplicationReferenceDataSourceResponse_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+	}
 }
 func (v *AddApplicationReferenceDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AddApplicationReferenceDataSourceResponse, func(s *smithy.Schema) error {

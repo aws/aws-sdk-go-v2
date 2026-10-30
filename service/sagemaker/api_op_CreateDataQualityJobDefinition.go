@@ -129,7 +129,9 @@ func (v *CreateDataQualityJobDefinitionInput) SerializeMembers(s smithy.ShapeSer
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateDataQualityJobDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDataQualityJobDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateDataQualityJobDefinitionOutput struct {

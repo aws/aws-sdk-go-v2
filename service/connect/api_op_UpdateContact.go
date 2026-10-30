@@ -147,8 +147,12 @@ func (v *UpdateContactInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QueueInfo.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContactReferences(s, schemas.UpdateContactRequest_References, v.References)
-	serializeSegmentAttributes(s, schemas.UpdateContactRequest_SegmentAttributes, v.SegmentAttributes)
+	if v.References != nil {
+		serializeContactReferences(s, schemas.UpdateContactRequest_References, v.References)
+	}
+	if v.SegmentAttributes != nil {
+		serializeSegmentAttributes(s, schemas.UpdateContactRequest_SegmentAttributes, v.SegmentAttributes)
+	}
 	if v.SystemEndpoint != nil {
 		s.WriteStruct(schemas.UpdateContactRequest_SystemEndpoint)
 		v.SystemEndpoint.SerializeMembers(s)

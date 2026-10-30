@@ -111,12 +111,18 @@ func (v *ExportECSServiceRecommendationsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *ExportECSServiceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.ExportECSServiceRecommendationsRequest_accountIds, v.AccountIds)
-	serializeExportableECSServiceFields(s, schemas.ExportECSServiceRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.ExportECSServiceRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.FieldsToExport != nil {
+		serializeExportableECSServiceFields(s, schemas.ExportECSServiceRecommendationsRequest_fieldsToExport, v.FieldsToExport)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.ExportECSServiceRecommendationsRequest_fileFormat, string(v.FileFormat))
 	}
-	serializeECSServiceRecommendationFilters(s, schemas.ExportECSServiceRecommendationsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeECSServiceRecommendationFilters(s, schemas.ExportECSServiceRecommendationsRequest_filters, v.Filters)
+	}
 	if v.IncludeMemberAccounts != false {
 		s.WriteBool(schemas.ExportECSServiceRecommendationsRequest_includeMemberAccounts, v.IncludeMemberAccounts)
 	}

@@ -100,7 +100,9 @@ func (v *GetOperationsForResourceOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetOperationsForResourceResult_nextPageToken, *v.NextPageToken)
 	}
-	serializeOperationList(s, schemas.GetOperationsForResourceResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.GetOperationsForResourceResult_operations, v.Operations)
+	}
 }
 func (v *GetOperationsForResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetOperationsForResourceResult, func(s *smithy.Schema) error {

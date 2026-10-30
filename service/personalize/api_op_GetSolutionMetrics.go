@@ -70,7 +70,9 @@ func (v *GetSolutionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetSolutionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetrics(s, schemas.GetSolutionMetricsResponse_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetrics(s, schemas.GetSolutionMetricsResponse_metrics, v.Metrics)
+	}
 	if v.SolutionVersionArn != nil {
 		s.WriteString(schemas.GetSolutionMetricsResponse_solutionVersionArn, *v.SolutionVersionArn)
 	}

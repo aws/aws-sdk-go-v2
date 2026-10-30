@@ -101,7 +101,9 @@ func (v *CreateHITTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Keywords != nil {
 		s.WriteString(schemas.CreateHITTypeRequest_Keywords, *v.Keywords)
 	}
-	serializeQualificationRequirementList(s, schemas.CreateHITTypeRequest_QualificationRequirements, v.QualificationRequirements)
+	if v.QualificationRequirements != nil {
+		serializeQualificationRequirementList(s, schemas.CreateHITTypeRequest_QualificationRequirements, v.QualificationRequirements)
+	}
 	if v.Reward != nil {
 		s.WriteString(schemas.CreateHITTypeRequest_Reward, *v.Reward)
 	}

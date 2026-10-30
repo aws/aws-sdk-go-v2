@@ -62,7 +62,9 @@ func (v *UpdateBillingPreferencesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateBillingPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBillingPreferencesPerKey(s, schemas.UpdateBillingPreferencesRequest_billingPreferencesPerKey, v.BillingPreferencesPerKey)
+	if v.BillingPreferencesPerKey != nil {
+		serializeBillingPreferencesPerKey(s, schemas.UpdateBillingPreferencesRequest_billingPreferencesPerKey, v.BillingPreferencesPerKey)
+	}
 	if v.Feature != "" {
 		s.WriteString(schemas.UpdateBillingPreferencesRequest_feature, string(v.Feature))
 	}

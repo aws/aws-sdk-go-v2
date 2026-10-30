@@ -117,7 +117,9 @@ func (v *GetMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.GetMicrovmImageOutput_state, string(v.State))
 	}
-	serializeTags(s, schemas.GetMicrovmImageOutput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetMicrovmImageOutput_tags, v.Tags)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.GetMicrovmImageOutput_updatedAt, *v.UpdatedAt)
 	}

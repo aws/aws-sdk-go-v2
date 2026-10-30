@@ -105,7 +105,9 @@ func (v *PutMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeyRequired != false {
 		s.WriteBool(schemas.PutMethodRequest_apiKeyRequired, v.ApiKeyRequired)
 	}
-	serializeListOfString(s, schemas.PutMethodRequest_authorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationScopes != nil {
+		serializeListOfString(s, schemas.PutMethodRequest_authorizationScopes, v.AuthorizationScopes)
+	}
 	if v.AuthorizationType != nil {
 		s.WriteString(schemas.PutMethodRequest_authorizationType, *v.AuthorizationType)
 	}
@@ -118,8 +120,12 @@ func (v *PutMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationName != nil {
 		s.WriteString(schemas.PutMethodRequest_operationName, *v.OperationName)
 	}
-	serializeMapOfStringToString(s, schemas.PutMethodRequest_requestModels, v.RequestModels)
-	serializeMapOfStringToBoolean(s, schemas.PutMethodRequest_requestParameters, v.RequestParameters)
+	if v.RequestModels != nil {
+		serializeMapOfStringToString(s, schemas.PutMethodRequest_requestModels, v.RequestModels)
+	}
+	if v.RequestParameters != nil {
+		serializeMapOfStringToBoolean(s, schemas.PutMethodRequest_requestParameters, v.RequestParameters)
+	}
 	if v.RequestValidatorId != nil {
 		s.WriteString(schemas.PutMethodRequest_requestValidatorId, *v.RequestValidatorId)
 	}
@@ -217,7 +223,9 @@ func (v *PutMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeyRequired != nil {
 		s.WriteBool(schemas.Method_apiKeyRequired, *v.ApiKeyRequired)
 	}
-	serializeListOfString(s, schemas.Method_authorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationScopes != nil {
+		serializeListOfString(s, schemas.Method_authorizationScopes, v.AuthorizationScopes)
+	}
 	if v.AuthorizationType != nil {
 		s.WriteString(schemas.Method_authorizationType, *v.AuthorizationType)
 	}
@@ -232,12 +240,18 @@ func (v *PutMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MethodIntegration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMapOfMethodResponse(s, schemas.Method_methodResponses, v.MethodResponses)
+	if v.MethodResponses != nil {
+		serializeMapOfMethodResponse(s, schemas.Method_methodResponses, v.MethodResponses)
+	}
 	if v.OperationName != nil {
 		s.WriteString(schemas.Method_operationName, *v.OperationName)
 	}
-	serializeMapOfStringToString(s, schemas.Method_requestModels, v.RequestModels)
-	serializeMapOfStringToBoolean(s, schemas.Method_requestParameters, v.RequestParameters)
+	if v.RequestModels != nil {
+		serializeMapOfStringToString(s, schemas.Method_requestModels, v.RequestModels)
+	}
+	if v.RequestParameters != nil {
+		serializeMapOfStringToBoolean(s, schemas.Method_requestParameters, v.RequestParameters)
+	}
 	if v.RequestValidatorId != nil {
 		s.WriteString(schemas.Method_requestValidatorId, *v.RequestValidatorId)
 	}

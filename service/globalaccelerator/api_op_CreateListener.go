@@ -93,7 +93,9 @@ func (v *CreateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdempotencyToken != nil {
 		s.WriteString(schemas.CreateListenerRequest_IdempotencyToken, *v.IdempotencyToken)
 	}
-	serializePortRanges(s, schemas.CreateListenerRequest_PortRanges, v.PortRanges)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.CreateListenerRequest_PortRanges, v.PortRanges)
+	}
 	if v.Protocol != "" {
 		s.WriteString(schemas.CreateListenerRequest_Protocol, string(v.Protocol))
 	}

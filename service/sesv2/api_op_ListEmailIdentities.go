@@ -64,7 +64,9 @@ func (v *ListEmailIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEmailIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityFilter(s, schemas.ListEmailIdentitiesRequest_Filter, v.Filter)
+	if v.Filter != nil {
+		serializeIdentityFilter(s, schemas.ListEmailIdentitiesRequest_Filter, v.Filter)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailIdentitiesRequest_NextToken, *v.NextToken)
 	}
@@ -99,7 +101,9 @@ func (v *ListEmailIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEmailIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityInfoList(s, schemas.ListEmailIdentitiesResponse_EmailIdentities, v.EmailIdentities)
+	if v.EmailIdentities != nil {
+		serializeIdentityInfoList(s, schemas.ListEmailIdentitiesResponse_EmailIdentities, v.EmailIdentities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailIdentitiesResponse_NextToken, *v.NextToken)
 	}

@@ -126,7 +126,9 @@ func (v *CreateProvisioningArtifactOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateProvisioningArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProvisioningArtifactInfo(s, schemas.CreateProvisioningArtifactOutput_Info, v.Info)
+	if v.Info != nil {
+		serializeProvisioningArtifactInfo(s, schemas.CreateProvisioningArtifactOutput_Info, v.Info)
+	}
 	if v.ProvisioningArtifactDetail != nil {
 		s.WriteStruct(schemas.CreateProvisioningArtifactOutput_ProvisioningArtifactDetail)
 		v.ProvisioningArtifactDetail.SerializeMembers(s)

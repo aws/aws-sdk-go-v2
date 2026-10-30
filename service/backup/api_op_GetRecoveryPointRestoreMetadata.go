@@ -107,7 +107,9 @@ func (v *GetRecoveryPointRestoreMetadataOutput) SerializeMembers(s smithy.ShapeS
 	if v.ResourceType != nil {
 		s.WriteString(schemas.GetRecoveryPointRestoreMetadataOutput_ResourceType, *v.ResourceType)
 	}
-	serializeMetadata(s, schemas.GetRecoveryPointRestoreMetadataOutput_RestoreMetadata, v.RestoreMetadata)
+	if v.RestoreMetadata != nil {
+		serializeMetadata(s, schemas.GetRecoveryPointRestoreMetadataOutput_RestoreMetadata, v.RestoreMetadata)
+	}
 }
 func (v *GetRecoveryPointRestoreMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecoveryPointRestoreMetadataOutput, func(s *smithy.Schema) error {

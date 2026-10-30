@@ -63,7 +63,9 @@ func (v *AssociateEncryptionConfigInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ClusterName != nil {
 		s.WriteString(schemas.AssociateEncryptionConfigRequest_clusterName, *v.ClusterName)
 	}
-	serializeEncryptionConfigList(s, schemas.AssociateEncryptionConfigRequest_encryptionConfig, v.EncryptionConfig)
+	if v.EncryptionConfig != nil {
+		serializeEncryptionConfigList(s, schemas.AssociateEncryptionConfigRequest_encryptionConfig, v.EncryptionConfig)
+	}
 }
 
 type AssociateEncryptionConfigOutput struct {

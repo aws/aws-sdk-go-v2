@@ -61,7 +61,9 @@ func (v *PutRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.CodeReviewArn != nil {
 		s.WriteString(schemas.PutRecommendationFeedbackRequest_CodeReviewArn, *v.CodeReviewArn)
 	}
-	serializeReactions(s, schemas.PutRecommendationFeedbackRequest_Reactions, v.Reactions)
+	if v.Reactions != nil {
+		serializeReactions(s, schemas.PutRecommendationFeedbackRequest_Reactions, v.Reactions)
+	}
 	if v.RecommendationId != nil {
 		s.WriteString(schemas.PutRecommendationFeedbackRequest_RecommendationId, *v.RecommendationId)
 	}

@@ -62,7 +62,9 @@ func (v *UpgradeDomainInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpgradeDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedOptions(s, schemas.UpgradeDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.UpgradeDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.DomainName != nil {
 		s.WriteString(schemas.UpgradeDomainRequest_DomainName, *v.DomainName)
 	}
@@ -108,7 +110,9 @@ func (v *UpgradeDomainOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpgradeDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdvancedOptions(s, schemas.UpgradeDomainResponse_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedOptions != nil {
+		serializeAdvancedOptions(s, schemas.UpgradeDomainResponse_AdvancedOptions, v.AdvancedOptions)
+	}
 	if v.ChangeProgressDetails != nil {
 		s.WriteStruct(schemas.UpgradeDomainResponse_ChangeProgressDetails)
 		v.ChangeProgressDetails.SerializeMembers(s)

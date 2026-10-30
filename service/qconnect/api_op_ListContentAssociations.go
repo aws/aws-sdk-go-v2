@@ -98,7 +98,9 @@ func (v *ListContentAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContentAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentAssociationSummaryList(s, schemas.ListContentAssociationsResponse_contentAssociationSummaries, v.ContentAssociationSummaries)
+	if v.ContentAssociationSummaries != nil {
+		serializeContentAssociationSummaryList(s, schemas.ListContentAssociationsResponse_contentAssociationSummaries, v.ContentAssociationSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContentAssociationsResponse_nextToken, *v.NextToken)
 	}

@@ -129,7 +129,9 @@ func (v *ListMetadataGenerationRunsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMetadataGenerationRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetadataGenerationRuns(s, schemas.ListMetadataGenerationRunsOutput_items, v.Items)
+	if v.Items != nil {
+		serializeMetadataGenerationRuns(s, schemas.ListMetadataGenerationRunsOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMetadataGenerationRunsOutput_nextToken, *v.NextToken)
 	}

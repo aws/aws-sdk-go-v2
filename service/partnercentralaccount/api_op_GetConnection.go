@@ -108,7 +108,9 @@ func (v *GetConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Catalog != nil {
 		s.WriteString(schemas.GetConnectionResponse_Catalog, *v.Catalog)
 	}
-	serializeConnectionTypeDetailMap(s, schemas.GetConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	if v.ConnectionTypes != nil {
+		serializeConnectionTypeDetailMap(s, schemas.GetConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetConnectionResponse_Id, *v.Id)
 	}

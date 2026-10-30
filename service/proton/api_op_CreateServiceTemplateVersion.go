@@ -94,16 +94,24 @@ func (v *CreateServiceTemplateVersionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateServiceTemplateVersionInput_clientToken, *v.ClientToken)
 	}
-	serializeCompatibleEnvironmentTemplateInputList(s, schemas.CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	if v.CompatibleEnvironmentTemplates != nil {
+		serializeCompatibleEnvironmentTemplateInputList(s, schemas.CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates, v.CompatibleEnvironmentTemplates)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateServiceTemplateVersionInput_description, *v.Description)
 	}
 	if v.MajorVersion != nil {
 		s.WriteString(schemas.CreateServiceTemplateVersionInput_majorVersion, *v.MajorVersion)
 	}
-	serializeTemplateVersionSourceInput(s, schemas.CreateServiceTemplateVersionInput_source, v.Source)
-	serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.CreateServiceTemplateVersionInput_supportedComponentSources, v.SupportedComponentSources)
-	serializeTagList(s, schemas.CreateServiceTemplateVersionInput_tags, v.Tags)
+	if v.Source != nil {
+		serializeTemplateVersionSourceInput(s, schemas.CreateServiceTemplateVersionInput_source, v.Source)
+	}
+	if v.SupportedComponentSources != nil {
+		serializeServiceTemplateSupportedComponentSourceInputList(s, schemas.CreateServiceTemplateVersionInput_supportedComponentSources, v.SupportedComponentSources)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateServiceTemplateVersionInput_tags, v.Tags)
+	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.CreateServiceTemplateVersionInput_templateName, *v.TemplateName)
 	}

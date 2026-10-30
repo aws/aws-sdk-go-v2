@@ -104,7 +104,9 @@ func (v *RestoreAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RequestId != nil {
 		s.WriteString(schemas.RestoreAnalysisResponse_RequestId, *v.RequestId)
 	}
-	serializeFolderArnList(s, schemas.RestoreAnalysisResponse_RestorationFailedFolderArns, v.RestorationFailedFolderArns)
+	if v.RestorationFailedFolderArns != nil {
+		serializeFolderArnList(s, schemas.RestoreAnalysisResponse_RestorationFailedFolderArns, v.RestorationFailedFolderArns)
+	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.RestoreAnalysisResponse_Status, v.Status)
 	}

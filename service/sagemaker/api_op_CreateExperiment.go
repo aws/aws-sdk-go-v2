@@ -99,7 +99,9 @@ func (v *CreateExperimentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExperimentName != nil {
 		s.WriteString(schemas.CreateExperimentRequest_ExperimentName, *v.ExperimentName)
 	}
-	serializeTagList(s, schemas.CreateExperimentRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateExperimentRequest_Tags, v.Tags)
+	}
 }
 
 type CreateExperimentOutput struct {

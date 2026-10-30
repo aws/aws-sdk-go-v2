@@ -150,7 +150,9 @@ func (v *CreateCloudFormationChangeSetInput) SerializeMembers(s smithy.ShapeSeri
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_ApplicationId, *v.ApplicationId)
 	}
-	serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_Capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_Capabilities, v.Capabilities)
+	}
 	if v.ChangeSetName != nil {
 		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_ChangeSetName, *v.ChangeSetName)
 	}
@@ -160,9 +162,15 @@ func (v *CreateCloudFormationChangeSetInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Description != nil {
 		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_Description, *v.Description)
 	}
-	serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_NotificationArns, v.NotificationArns)
-	serialize__listOfParameterValue(s, schemas.CreateCloudFormationChangeSetRequest_ParameterOverrides, v.ParameterOverrides)
-	serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_ResourceTypes, v.ResourceTypes)
+	if v.NotificationArns != nil {
+		serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_NotificationArns, v.NotificationArns)
+	}
+	if v.ParameterOverrides != nil {
+		serialize__listOfParameterValue(s, schemas.CreateCloudFormationChangeSetRequest_ParameterOverrides, v.ParameterOverrides)
+	}
+	if v.ResourceTypes != nil {
+		serialize__listOf__string(s, schemas.CreateCloudFormationChangeSetRequest_ResourceTypes, v.ResourceTypes)
+	}
 	if v.RollbackConfiguration != nil {
 		s.WriteStruct(schemas.CreateCloudFormationChangeSetRequest_RollbackConfiguration)
 		v.RollbackConfiguration.SerializeMembers(s)
@@ -174,7 +182,9 @@ func (v *CreateCloudFormationChangeSetInput) SerializeMembers(s smithy.ShapeSeri
 	if v.StackName != nil {
 		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_StackName, *v.StackName)
 	}
-	serialize__listOfTag(s, schemas.CreateCloudFormationChangeSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__listOfTag(s, schemas.CreateCloudFormationChangeSetRequest_Tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.CreateCloudFormationChangeSetRequest_TemplateId, *v.TemplateId)
 	}

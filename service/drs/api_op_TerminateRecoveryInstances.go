@@ -45,7 +45,9 @@ func (v *TerminateRecoveryInstancesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TerminateRecoveryInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryInstancesForTerminationRequest(s, schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
+	if v.RecoveryInstanceIDs != nil {
+		serializeRecoveryInstancesForTerminationRequest(s, schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
+	}
 }
 func (v *TerminateRecoveryInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TerminateRecoveryInstancesRequest, func(s *smithy.Schema) error {

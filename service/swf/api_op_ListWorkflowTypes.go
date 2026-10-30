@@ -144,7 +144,9 @@ func (v *ListWorkflowTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.WorkflowTypeInfos_nextPageToken, *v.NextPageToken)
 	}
-	serializeWorkflowTypeInfoList(s, schemas.WorkflowTypeInfos_typeInfos, v.TypeInfos)
+	if v.TypeInfos != nil {
+		serializeWorkflowTypeInfoList(s, schemas.WorkflowTypeInfos_typeInfos, v.TypeInfos)
+	}
 }
 func (v *ListWorkflowTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WorkflowTypeInfos, func(s *smithy.Schema) error {

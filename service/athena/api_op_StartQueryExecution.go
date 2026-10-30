@@ -103,7 +103,9 @@ func (v *StartQueryExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.EngineConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExecutionParameters(s, schemas.StartQueryExecutionInput_ExecutionParameters, v.ExecutionParameters)
+	if v.ExecutionParameters != nil {
+		serializeExecutionParameters(s, schemas.StartQueryExecutionInput_ExecutionParameters, v.ExecutionParameters)
+	}
 	if v.QueryExecutionContext != nil {
 		s.WriteStruct(schemas.StartQueryExecutionInput_QueryExecutionContext)
 		v.QueryExecutionContext.SerializeMembers(s)

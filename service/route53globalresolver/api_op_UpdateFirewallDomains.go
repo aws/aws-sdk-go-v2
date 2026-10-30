@@ -60,7 +60,9 @@ func (v *UpdateFirewallDomainsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateFirewallDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomains(s, schemas.UpdateFirewallDomainsInput_domains, v.Domains)
+	if v.Domains != nil {
+		serializeDomains(s, schemas.UpdateFirewallDomainsInput_domains, v.Domains)
+	}
 	if v.FirewallDomainListId != nil {
 		s.WriteString(schemas.UpdateFirewallDomainsInput_firewallDomainListId, *v.FirewallDomainListId)
 	}

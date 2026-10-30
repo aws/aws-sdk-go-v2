@@ -60,7 +60,9 @@ func (v *CreateOrderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLineItemRequestListDefinition(s, schemas.CreateOrderInput_LineItems, v.LineItems)
+	if v.LineItems != nil {
+		serializeLineItemRequestListDefinition(s, schemas.CreateOrderInput_LineItems, v.LineItems)
+	}
 	if v.OutpostIdentifier != nil {
 		s.WriteString(schemas.CreateOrderInput_OutpostIdentifier, *v.OutpostIdentifier)
 	}

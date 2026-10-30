@@ -74,7 +74,9 @@ func (v *ListAssetTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetTypeItemList(s, schemas.ListAssetTypesResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeAssetTypeItemList(s, schemas.ListAssetTypesResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetTypesResponse_NextToken, *v.NextToken)
 	}

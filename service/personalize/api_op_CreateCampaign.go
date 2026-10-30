@@ -153,7 +153,9 @@ func (v *CreateCampaignInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SolutionVersionArn != nil {
 		s.WriteString(schemas.CreateCampaignRequest_solutionVersionArn, *v.SolutionVersionArn)
 	}
-	serializeTags(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCampaignRequest_tags, v.Tags)
+	}
 }
 
 type CreateCampaignOutput struct {

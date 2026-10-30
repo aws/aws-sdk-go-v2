@@ -60,7 +60,9 @@ func (v *DeleteAnnotationStoreVersionsInput) SerializeMembers(s smithy.ShapeSeri
 	if v.Name != nil {
 		s.WriteString(schemas.DeleteAnnotationStoreVersionsRequest_name, *v.Name)
 	}
-	serializeVersionList(s, schemas.DeleteAnnotationStoreVersionsRequest_versions, v.Versions)
+	if v.Versions != nil {
+		serializeVersionList(s, schemas.DeleteAnnotationStoreVersionsRequest_versions, v.Versions)
+	}
 }
 
 type DeleteAnnotationStoreVersionsOutput struct {
@@ -81,7 +83,9 @@ func (v *DeleteAnnotationStoreVersionsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DeleteAnnotationStoreVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVersionDeleteErrorList(s, schemas.DeleteAnnotationStoreVersionsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeVersionDeleteErrorList(s, schemas.DeleteAnnotationStoreVersionsResponse_errors, v.Errors)
+	}
 }
 func (v *DeleteAnnotationStoreVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteAnnotationStoreVersionsResponse, func(s *smithy.Schema) error {

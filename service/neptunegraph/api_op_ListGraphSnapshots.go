@@ -100,7 +100,9 @@ func (v *ListGraphSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGraphSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGraphSnapshotSummaryList(s, schemas.ListGraphSnapshotsOutput_graphSnapshots, v.GraphSnapshots)
+	if v.GraphSnapshots != nil {
+		serializeGraphSnapshotSummaryList(s, schemas.ListGraphSnapshotsOutput_graphSnapshots, v.GraphSnapshots)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGraphSnapshotsOutput_nextToken, *v.NextToken)
 	}

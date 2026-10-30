@@ -131,7 +131,9 @@ func (v *GetTableObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTableObjectsResponse_NextToken, *v.NextToken)
 	}
-	serializePartitionedTableObjectsList(s, schemas.GetTableObjectsResponse_Objects, v.Objects)
+	if v.Objects != nil {
+		serializePartitionedTableObjectsList(s, schemas.GetTableObjectsResponse_Objects, v.Objects)
+	}
 }
 func (v *GetTableObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTableObjectsResponse, func(s *smithy.Schema) error {

@@ -198,7 +198,9 @@ func (v *ListEffectivePolicyValidationErrorsOutput) SerializeMembers(s smithy.Sh
 	if v.AccountId != nil {
 		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_AccountId, *v.AccountId)
 	}
-	serializeEffectivePolicyValidationErrors(s, schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors, v.EffectivePolicyValidationErrors)
+	if v.EffectivePolicyValidationErrors != nil {
+		serializeEffectivePolicyValidationErrors(s, schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors, v.EffectivePolicyValidationErrors)
+	}
 	if v.EvaluationTimestamp != nil {
 		s.WriteTime(schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp, *v.EvaluationTimestamp)
 	}

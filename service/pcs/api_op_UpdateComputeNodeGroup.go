@@ -154,7 +154,9 @@ func (v *UpdateComputeNodeGroupInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.SpotOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.UpdateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeStringList(s, schemas.UpdateComputeNodeGroupRequest_subnetIds, v.SubnetIds)
+	}
 }
 
 type UpdateComputeNodeGroupOutput struct {

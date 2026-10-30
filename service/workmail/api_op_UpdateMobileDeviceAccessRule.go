@@ -92,10 +92,18 @@ func (v *UpdateMobileDeviceAccessRuleInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateMobileDeviceAccessRuleRequest_Description, *v.Description)
 	}
-	serializeDeviceModelList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceModels, v.DeviceModels)
-	serializeDeviceOperatingSystemList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems, v.DeviceOperatingSystems)
-	serializeDeviceTypeList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceTypes, v.DeviceTypes)
-	serializeDeviceUserAgentList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceUserAgents, v.DeviceUserAgents)
+	if v.DeviceModels != nil {
+		serializeDeviceModelList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceModels, v.DeviceModels)
+	}
+	if v.DeviceOperatingSystems != nil {
+		serializeDeviceOperatingSystemList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems, v.DeviceOperatingSystems)
+	}
+	if v.DeviceTypes != nil {
+		serializeDeviceTypeList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceTypes, v.DeviceTypes)
+	}
+	if v.DeviceUserAgents != nil {
+		serializeDeviceUserAgentList(s, schemas.UpdateMobileDeviceAccessRuleRequest_DeviceUserAgents, v.DeviceUserAgents)
+	}
 	if v.Effect != "" {
 		s.WriteString(schemas.UpdateMobileDeviceAccessRuleRequest_Effect, string(v.Effect))
 	}
@@ -105,10 +113,18 @@ func (v *UpdateMobileDeviceAccessRuleInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateMobileDeviceAccessRuleRequest_Name, *v.Name)
 	}
-	serializeDeviceModelList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceModels, v.NotDeviceModels)
-	serializeDeviceOperatingSystemList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems, v.NotDeviceOperatingSystems)
-	serializeDeviceTypeList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceTypes, v.NotDeviceTypes)
-	serializeDeviceUserAgentList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents, v.NotDeviceUserAgents)
+	if v.NotDeviceModels != nil {
+		serializeDeviceModelList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceModels, v.NotDeviceModels)
+	}
+	if v.NotDeviceOperatingSystems != nil {
+		serializeDeviceOperatingSystemList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems, v.NotDeviceOperatingSystems)
+	}
+	if v.NotDeviceTypes != nil {
+		serializeDeviceTypeList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceTypes, v.NotDeviceTypes)
+	}
+	if v.NotDeviceUserAgents != nil {
+		serializeDeviceUserAgentList(s, schemas.UpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents, v.NotDeviceUserAgents)
+	}
 	if v.OrganizationId != nil {
 		s.WriteString(schemas.UpdateMobileDeviceAccessRuleRequest_OrganizationId, *v.OrganizationId)
 	}

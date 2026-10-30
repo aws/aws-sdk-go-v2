@@ -46,7 +46,9 @@ func (v *BatchGetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentsList(s, schemas.BatchGetDeploymentsInput_deploymentIds, v.DeploymentIds)
+	if v.DeploymentIds != nil {
+		serializeDeploymentsList(s, schemas.BatchGetDeploymentsInput_deploymentIds, v.DeploymentIds)
+	}
 }
 
 // Represents the output of a BatchGetDeployments operation.
@@ -68,7 +70,9 @@ func (v *BatchGetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDeploymentsInfoList(s, schemas.BatchGetDeploymentsOutput_deploymentsInfo, v.DeploymentsInfo)
+	if v.DeploymentsInfo != nil {
+		serializeDeploymentsInfoList(s, schemas.BatchGetDeploymentsOutput_deploymentsInfo, v.DeploymentsInfo)
+	}
 }
 func (v *BatchGetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetDeploymentsOutput, func(s *smithy.Schema) error {

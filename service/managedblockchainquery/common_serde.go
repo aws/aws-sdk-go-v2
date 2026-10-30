@@ -8,9 +8,6 @@ import (
 )
 
 func serializeAssetContractList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.AssetContract) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeAssetContractList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeBatchGetTokenBalanceErrors(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchGetTokenBalanceErrorItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeBatchGetTokenBalanceErrors(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeBatchGetTokenBalanceOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchGetTokenBalanceOutputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeBatchGetTokenBalanceOutputList(s smithy.ShapeSerializer, schema *s
 }
 
 func serializeChainAddresses(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -58,9 +46,6 @@ func serializeChainAddresses(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeConfirmationStatusIncludeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ConfirmationStatus) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -69,9 +54,6 @@ func serializeConfirmationStatusIncludeList(s smithy.ShapeSerializer, schema *sm
 }
 
 func serializeGetTokenBalanceInputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.BatchGetTokenBalanceInputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -82,9 +64,6 @@ func serializeGetTokenBalanceInputList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeTokenBalanceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TokenBalance) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -95,9 +74,6 @@ func serializeTokenBalanceList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeTransactionEventList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TransactionEvent) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -108,9 +84,6 @@ func serializeTransactionEventList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeTransactionOutputList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.TransactionOutputItem) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -121,9 +94,6 @@ func serializeTransactionOutputList(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

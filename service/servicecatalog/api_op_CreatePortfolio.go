@@ -86,7 +86,9 @@ func (v *CreatePortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProviderName != nil {
 		s.WriteString(schemas.CreatePortfolioInput_ProviderName, *v.ProviderName)
 	}
-	serializeAddTags(s, schemas.CreatePortfolioInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeAddTags(s, schemas.CreatePortfolioInput_Tags, v.Tags)
+	}
 }
 
 type CreatePortfolioOutput struct {
@@ -115,7 +117,9 @@ func (v *CreatePortfolioOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PortfolioDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.CreatePortfolioOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreatePortfolioOutput_Tags, v.Tags)
+	}
 }
 func (v *CreatePortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreatePortfolioOutput, func(s *smithy.Schema) error {

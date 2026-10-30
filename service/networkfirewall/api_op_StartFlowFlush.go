@@ -90,7 +90,9 @@ func (v *StartFlowFlushInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.StartFlowFlushRequest_FirewallArn, *v.FirewallArn)
 	}
-	serializeFlowFilters(s, schemas.StartFlowFlushRequest_FlowFilters, v.FlowFilters)
+	if v.FlowFilters != nil {
+		serializeFlowFilters(s, schemas.StartFlowFlushRequest_FlowFilters, v.FlowFilters)
+	}
 	if v.MinimumFlowAgeInSeconds != nil {
 		s.WriteInt32(schemas.StartFlowFlushRequest_MinimumFlowAgeInSeconds, *v.MinimumFlowAgeInSeconds)
 	}

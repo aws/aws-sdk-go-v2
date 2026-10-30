@@ -73,7 +73,9 @@ func (v *UpdateDomainNameserversInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.FIAuthKey != nil {
 		s.WriteString(schemas.UpdateDomainNameserversRequest_FIAuthKey, *v.FIAuthKey)
 	}
-	serializeNameserverList(s, schemas.UpdateDomainNameserversRequest_Nameservers, v.Nameservers)
+	if v.Nameservers != nil {
+		serializeNameserverList(s, schemas.UpdateDomainNameserversRequest_Nameservers, v.Nameservers)
+	}
 }
 
 // The UpdateDomainNameservers response includes the following element.

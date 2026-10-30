@@ -87,7 +87,9 @@ func (v *ListAcmeDomainValidationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAcmeDomainValidationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAcmeDomainValidationList(s, schemas.ListAcmeDomainValidationsResponse_AcmeDomainValidations, v.AcmeDomainValidations)
+	if v.AcmeDomainValidations != nil {
+		serializeAcmeDomainValidationList(s, schemas.ListAcmeDomainValidationsResponse_AcmeDomainValidations, v.AcmeDomainValidations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAcmeDomainValidationsResponse_NextToken, *v.NextToken)
 	}

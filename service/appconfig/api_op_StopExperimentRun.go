@@ -171,7 +171,9 @@ func (v *StopExperimentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ExperimentRun_Status, string(v.Status))
 	}
-	serializeTreatmentOverrides(s, schemas.ExperimentRun_TreatmentOverrides, v.TreatmentOverrides)
+	if v.TreatmentOverrides != nil {
+		serializeTreatmentOverrides(s, schemas.ExperimentRun_TreatmentOverrides, v.TreatmentOverrides)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.ExperimentRun_UpdatedAt, *v.UpdatedAt)
 	}

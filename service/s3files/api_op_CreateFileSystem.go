@@ -102,7 +102,9 @@ func (v *CreateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateFileSystemRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateFileSystemRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFileSystemRequest_tags, v.Tags)
+	}
 }
 
 type CreateFileSystemOutput struct {
@@ -203,7 +205,9 @@ func (v *CreateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.CreateFileSystemResponse_statusMessage, *v.StatusMessage)
 	}
-	serializeTagList(s, schemas.CreateFileSystemResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFileSystemResponse_tags, v.Tags)
+	}
 }
 func (v *CreateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateFileSystemResponse, func(s *smithy.Schema) error {

@@ -58,7 +58,9 @@ func (v *DeleteLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeleteAll != false {
 		s.WriteBool(schemas.DeleteLabelsRequest_DeleteAll, v.DeleteAll)
 	}
-	serializeSharedLabels(s, schemas.DeleteLabelsRequest_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeSharedLabels(s, schemas.DeleteLabelsRequest_Labels, v.Labels)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.DeleteLabelsRequest_ResourceId, *v.ResourceId)
 	}

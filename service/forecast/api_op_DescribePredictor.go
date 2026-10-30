@@ -201,14 +201,18 @@ func (v *DescribePredictorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AlgorithmArn != nil {
 		s.WriteString(schemas.DescribePredictorResponse_AlgorithmArn, *v.AlgorithmArn)
 	}
-	serializeArnList(s, schemas.DescribePredictorResponse_AutoMLAlgorithmArns, v.AutoMLAlgorithmArns)
+	if v.AutoMLAlgorithmArns != nil {
+		serializeArnList(s, schemas.DescribePredictorResponse_AutoMLAlgorithmArns, v.AutoMLAlgorithmArns)
+	}
 	if v.AutoMLOverrideStrategy != "" {
 		s.WriteString(schemas.DescribePredictorResponse_AutoMLOverrideStrategy, string(v.AutoMLOverrideStrategy))
 	}
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.DescribePredictorResponse_CreationTime, *v.CreationTime)
 	}
-	serializeArnList(s, schemas.DescribePredictorResponse_DatasetImportJobArns, v.DatasetImportJobArns)
+	if v.DatasetImportJobArns != nil {
+		serializeArnList(s, schemas.DescribePredictorResponse_DatasetImportJobArns, v.DatasetImportJobArns)
+	}
 	if v.EncryptionConfig != nil {
 		s.WriteStruct(schemas.DescribePredictorResponse_EncryptionConfig)
 		v.EncryptionConfig.SerializeMembers(s)
@@ -230,7 +234,9 @@ func (v *DescribePredictorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ForecastHorizon != nil {
 		s.WriteInt32(schemas.DescribePredictorResponse_ForecastHorizon, *v.ForecastHorizon)
 	}
-	serializeForecastTypes(s, schemas.DescribePredictorResponse_ForecastTypes, v.ForecastTypes)
+	if v.ForecastTypes != nil {
+		serializeForecastTypes(s, schemas.DescribePredictorResponse_ForecastTypes, v.ForecastTypes)
+	}
 	if v.HPOConfig != nil {
 		s.WriteStruct(schemas.DescribePredictorResponse_HPOConfig)
 		v.HPOConfig.SerializeMembers(s)
@@ -273,7 +279,9 @@ func (v *DescribePredictorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != nil {
 		s.WriteString(schemas.DescribePredictorResponse_Status, *v.Status)
 	}
-	serializeTrainingParameters(s, schemas.DescribePredictorResponse_TrainingParameters, v.TrainingParameters)
+	if v.TrainingParameters != nil {
+		serializeTrainingParameters(s, schemas.DescribePredictorResponse_TrainingParameters, v.TrainingParameters)
+	}
 }
 func (v *DescribePredictorOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribePredictorResponse, func(s *smithy.Schema) error {

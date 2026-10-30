@@ -119,19 +119,27 @@ func (v *ListIntentStageMetricsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIntentStageMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnalyticsBinByList(s, schemas.ListIntentStageMetricsRequest_binBy, v.BinBy)
+	if v.BinBy != nil {
+		serializeAnalyticsBinByList(s, schemas.ListIntentStageMetricsRequest_binBy, v.BinBy)
+	}
 	if v.BotId != nil {
 		s.WriteString(schemas.ListIntentStageMetricsRequest_botId, *v.BotId)
 	}
 	if v.EndDateTime != nil {
 		s.WriteTime(schemas.ListIntentStageMetricsRequest_endDateTime, *v.EndDateTime)
 	}
-	serializeAnalyticsIntentStageFilters(s, schemas.ListIntentStageMetricsRequest_filters, v.Filters)
-	serializeAnalyticsIntentStageGroupByList(s, schemas.ListIntentStageMetricsRequest_groupBy, v.GroupBy)
+	if v.Filters != nil {
+		serializeAnalyticsIntentStageFilters(s, schemas.ListIntentStageMetricsRequest_filters, v.Filters)
+	}
+	if v.GroupBy != nil {
+		serializeAnalyticsIntentStageGroupByList(s, schemas.ListIntentStageMetricsRequest_groupBy, v.GroupBy)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListIntentStageMetricsRequest_maxResults, *v.MaxResults)
 	}
-	serializeAnalyticsIntentStageMetrics(s, schemas.ListIntentStageMetricsRequest_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeAnalyticsIntentStageMetrics(s, schemas.ListIntentStageMetricsRequest_metrics, v.Metrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntentStageMetricsRequest_nextToken, *v.NextToken)
 	}
@@ -176,7 +184,9 @@ func (v *ListIntentStageMetricsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIntentStageMetricsResponse_nextToken, *v.NextToken)
 	}
-	serializeAnalyticsIntentStageResults(s, schemas.ListIntentStageMetricsResponse_results, v.Results)
+	if v.Results != nil {
+		serializeAnalyticsIntentStageResults(s, schemas.ListIntentStageMetricsResponse_results, v.Results)
+	}
 }
 func (v *ListIntentStageMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListIntentStageMetricsResponse, func(s *smithy.Schema) error {

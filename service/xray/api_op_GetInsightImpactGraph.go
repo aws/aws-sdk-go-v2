@@ -129,7 +129,9 @@ func (v *GetInsightImpactGraphOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ServiceGraphStartTime != nil {
 		s.WriteTime(schemas.GetInsightImpactGraphResult_ServiceGraphStartTime, *v.ServiceGraphStartTime)
 	}
-	serializeInsightImpactGraphServiceList(s, schemas.GetInsightImpactGraphResult_Services, v.Services)
+	if v.Services != nil {
+		serializeInsightImpactGraphServiceList(s, schemas.GetInsightImpactGraphResult_Services, v.Services)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.GetInsightImpactGraphResult_StartTime, *v.StartTime)
 	}

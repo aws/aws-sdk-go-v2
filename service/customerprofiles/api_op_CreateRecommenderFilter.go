@@ -79,7 +79,9 @@ func (v *CreateRecommenderFilterInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RecommenderSchemaName != nil {
 		s.WriteString(schemas.CreateRecommenderFilterRequest_RecommenderSchemaName, *v.RecommenderSchemaName)
 	}
-	serializeTagMap(s, schemas.CreateRecommenderFilterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommenderFilterRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRecommenderFilterOutput struct {
@@ -108,7 +110,9 @@ func (v *CreateRecommenderFilterOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.RecommenderFilterArn != nil {
 		s.WriteString(schemas.CreateRecommenderFilterResponse_RecommenderFilterArn, *v.RecommenderFilterArn)
 	}
-	serializeTagMap(s, schemas.CreateRecommenderFilterResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateRecommenderFilterResponse_Tags, v.Tags)
+	}
 }
 func (v *CreateRecommenderFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateRecommenderFilterResponse, func(s *smithy.Schema) error {

@@ -113,7 +113,9 @@ func (v *DescribeVoicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeVoicesOutput_NextToken, *v.NextToken)
 	}
-	serializeVoiceList(s, schemas.DescribeVoicesOutput_Voices, v.Voices)
+	if v.Voices != nil {
+		serializeVoiceList(s, schemas.DescribeVoicesOutput_Voices, v.Voices)
+	}
 }
 func (v *DescribeVoicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVoicesOutput, func(s *smithy.Schema) error {

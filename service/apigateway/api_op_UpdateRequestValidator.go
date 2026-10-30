@@ -54,7 +54,9 @@ func (v *UpdateRequestValidatorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRequestValidatorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfPatchOperation(s, schemas.UpdateRequestValidatorRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateRequestValidatorRequest_patchOperations, v.PatchOperations)
+	}
 	if v.RequestValidatorId != nil {
 		s.WriteString(schemas.UpdateRequestValidatorRequest_requestValidatorId, *v.RequestValidatorId)
 	}

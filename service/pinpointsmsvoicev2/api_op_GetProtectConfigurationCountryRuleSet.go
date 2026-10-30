@@ -99,7 +99,9 @@ func (v *GetProtectConfigurationCountryRuleSetOutput) Serialize(s smithy.ShapeSe
 }
 
 func (v *GetProtectConfigurationCountryRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectConfigurationCountryRuleSet(s, schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet, v.CountryRuleSet)
+	if v.CountryRuleSet != nil {
+		serializeProtectConfigurationCountryRuleSet(s, schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet, v.CountryRuleSet)
+	}
 	if v.NumberCapability != "" {
 		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability, string(v.NumberCapability))
 	}

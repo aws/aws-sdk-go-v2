@@ -155,7 +155,9 @@ func (v *ListCustomModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCustomModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomModelSummaryList(s, schemas.ListCustomModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.ModelSummaries != nil {
+		serializeCustomModelSummaryList(s, schemas.ListCustomModelsResponse_modelSummaries, v.ModelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomModelsResponse_nextToken, *v.NextToken)
 	}

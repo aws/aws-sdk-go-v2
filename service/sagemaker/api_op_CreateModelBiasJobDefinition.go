@@ -126,7 +126,9 @@ func (v *CreateModelBiasJobDefinitionInput) SerializeMembers(s smithy.ShapeSeria
 		v.StoppingCondition.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateModelBiasJobDefinitionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateModelBiasJobDefinitionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateModelBiasJobDefinitionOutput struct {

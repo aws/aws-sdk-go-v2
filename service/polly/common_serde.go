@@ -8,9 +8,6 @@ import (
 )
 
 func serializeEngineList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Engine) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -19,9 +16,6 @@ func serializeEngineList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ty
 }
 
 func serializeLanguageCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LanguageCode) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -30,9 +24,6 @@ func serializeLanguageCodeList(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeLexiconDescriptionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LexiconDescription) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -43,9 +34,6 @@ func serializeLexiconDescriptionList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeLexiconNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -54,9 +42,6 @@ func serializeLexiconNameList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeSpeechMarkTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SpeechMarkType) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -65,9 +50,6 @@ func serializeSpeechMarkTypeList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeSynthesisTasks(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SynthesisTask) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -78,9 +60,6 @@ func serializeSynthesisTasks(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeThrottlingReasonList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ThrottlingReason) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -91,9 +70,6 @@ func serializeThrottlingReasonList(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ValidationExceptionField) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -104,9 +80,6 @@ func serializeValidationExceptionFieldList(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeVoiceList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Voice) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

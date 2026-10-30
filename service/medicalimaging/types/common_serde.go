@@ -149,9 +149,6 @@ func deserializeSearchByAttributeValue(d smithy.ShapeDeserializer, s *smithy.Sch
 }
 
 func serializeDatastoreSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []DatastoreSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -162,9 +159,6 @@ func serializeDatastoreSummaries(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeDICOMImportJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []DICOMImportJobSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -175,9 +169,6 @@ func serializeDICOMImportJobSummaries(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeDicomMetadataMappings(s smithy.ShapeSerializer, schema *smithy.Schema, v []DicomMetadataMapping) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -188,9 +179,6 @@ func serializeDicomMetadataMappings(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeImageSetPropertiesList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ImageSetProperties) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -201,9 +189,6 @@ func serializeImageSetPropertiesList(s smithy.ShapeSerializer, schema *smithy.Sc
 }
 
 func serializeImageSetsMetadataSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []ImageSetsMetadataSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -214,9 +199,6 @@ func serializeImageSetsMetadataSummaries(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeSearchByAttributeValues(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchByAttributeValue) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		serializeSearchByAttributeValue(s, schema.ListMember(), vv)
@@ -225,9 +207,6 @@ func serializeSearchByAttributeValues(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeSearchFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v []SearchFilter) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -238,9 +217,6 @@ func serializeSearchFilters(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -423,9 +399,6 @@ func deserializeTagKeyList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]st
 }
 
 func serializeTagMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

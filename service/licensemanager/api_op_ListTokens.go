@@ -52,14 +52,18 @@ func (v *ListTokensInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListTokensInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListTokensRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListTokensRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListTokensRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTokensRequest_NextToken, *v.NextToken)
 	}
-	serializeStringList(s, schemas.ListTokensRequest_TokenIds, v.TokenIds)
+	if v.TokenIds != nil {
+		serializeStringList(s, schemas.ListTokensRequest_TokenIds, v.TokenIds)
+	}
 }
 
 type ListTokensOutput struct {
@@ -86,7 +90,9 @@ func (v *ListTokensOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTokensResponse_NextToken, *v.NextToken)
 	}
-	serializeTokenList(s, schemas.ListTokensResponse_Tokens, v.Tokens)
+	if v.Tokens != nil {
+		serializeTokenList(s, schemas.ListTokensResponse_Tokens, v.Tokens)
+	}
 }
 func (v *ListTokensOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTokensResponse, func(s *smithy.Schema) error {

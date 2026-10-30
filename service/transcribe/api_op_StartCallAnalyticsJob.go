@@ -173,7 +173,9 @@ func (v *StartCallAnalyticsJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CallAnalyticsJobName != nil {
 		s.WriteString(schemas.StartCallAnalyticsJobRequest_CallAnalyticsJobName, *v.CallAnalyticsJobName)
 	}
-	serializeChannelDefinitions(s, schemas.StartCallAnalyticsJobRequest_ChannelDefinitions, v.ChannelDefinitions)
+	if v.ChannelDefinitions != nil {
+		serializeChannelDefinitions(s, schemas.StartCallAnalyticsJobRequest_ChannelDefinitions, v.ChannelDefinitions)
+	}
 	if v.DataAccessRoleArn != nil {
 		s.WriteString(schemas.StartCallAnalyticsJobRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
 	}
@@ -193,7 +195,9 @@ func (v *StartCallAnalyticsJobInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Settings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.StartCallAnalyticsJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartCallAnalyticsJobRequest_Tags, v.Tags)
+	}
 }
 
 type StartCallAnalyticsJobOutput struct {

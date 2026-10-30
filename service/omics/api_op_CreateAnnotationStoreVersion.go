@@ -67,11 +67,15 @@ func (v *CreateAnnotationStoreVersionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAnnotationStoreVersionRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateAnnotationStoreVersionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAnnotationStoreVersionRequest_tags, v.Tags)
+	}
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreateAnnotationStoreVersionRequest_versionName, *v.VersionName)
 	}
-	serializeVersionOptions(s, schemas.CreateAnnotationStoreVersionRequest_versionOptions, v.VersionOptions)
+	if v.VersionOptions != nil {
+		serializeVersionOptions(s, schemas.CreateAnnotationStoreVersionRequest_versionOptions, v.VersionOptions)
+	}
 }
 
 type CreateAnnotationStoreVersionOutput struct {
@@ -142,7 +146,9 @@ func (v *CreateAnnotationStoreVersionOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.VersionName != nil {
 		s.WriteString(schemas.CreateAnnotationStoreVersionResponse_versionName, *v.VersionName)
 	}
-	serializeVersionOptions(s, schemas.CreateAnnotationStoreVersionResponse_versionOptions, v.VersionOptions)
+	if v.VersionOptions != nil {
+		serializeVersionOptions(s, schemas.CreateAnnotationStoreVersionResponse_versionOptions, v.VersionOptions)
+	}
 }
 func (v *CreateAnnotationStoreVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateAnnotationStoreVersionResponse, func(s *smithy.Schema) error {

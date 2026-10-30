@@ -106,8 +106,12 @@ func (v *UpdateAppBlockBuilderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessEndpointList(s, schemas.UpdateAppBlockBuilderRequest_AccessEndpoints, v.AccessEndpoints)
-	serializeAppBlockBuilderAttributes(s, schemas.UpdateAppBlockBuilderRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.AccessEndpoints != nil {
+		serializeAccessEndpointList(s, schemas.UpdateAppBlockBuilderRequest_AccessEndpoints, v.AccessEndpoints)
+	}
+	if v.AttributesToDelete != nil {
+		serializeAppBlockBuilderAttributes(s, schemas.UpdateAppBlockBuilderRequest_AttributesToDelete, v.AttributesToDelete)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAppBlockBuilderRequest_Description, *v.Description)
 	}

@@ -107,7 +107,9 @@ func (v *CreateImageVersionInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSageMakerImageVersionAliases(s, schemas.CreateImageVersionRequest_Aliases, v.Aliases)
+	if v.Aliases != nil {
+		serializeSageMakerImageVersionAliases(s, schemas.CreateImageVersionRequest_Aliases, v.Aliases)
+	}
 	if v.BaseImage != nil {
 		s.WriteString(schemas.CreateImageVersionRequest_BaseImage, *v.BaseImage)
 	}

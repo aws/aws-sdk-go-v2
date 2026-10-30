@@ -104,8 +104,12 @@ func (v *ListProspectingFromEngagementTasksInput) SerializeMembers(s smithy.Shap
 	if v.StartBefore != nil {
 		s.WriteTime(schemas.ListProspectingFromEngagementTasksRequest_StartBefore, *v.StartBefore)
 	}
-	serializeTaskIdentifierList(s, schemas.ListProspectingFromEngagementTasksRequest_TaskIdentifier, v.TaskIdentifier)
-	serializeTaskNameList(s, schemas.ListProspectingFromEngagementTasksRequest_TaskName, v.TaskName)
+	if v.TaskIdentifier != nil {
+		serializeTaskIdentifierList(s, schemas.ListProspectingFromEngagementTasksRequest_TaskIdentifier, v.TaskIdentifier)
+	}
+	if v.TaskName != nil {
+		serializeTaskNameList(s, schemas.ListProspectingFromEngagementTasksRequest_TaskName, v.TaskName)
+	}
 }
 
 // Represents the response structure containing a paginated list of prospecting
@@ -141,7 +145,9 @@ func (v *ListProspectingFromEngagementTasksOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListProspectingFromEngagementTasksResponse_NextToken, *v.NextToken)
 	}
-	serializeProspectingTaskSummaryList(s, schemas.ListProspectingFromEngagementTasksResponse_TaskSummaries, v.TaskSummaries)
+	if v.TaskSummaries != nil {
+		serializeProspectingTaskSummaryList(s, schemas.ListProspectingFromEngagementTasksResponse_TaskSummaries, v.TaskSummaries)
+	}
 }
 func (v *ListProspectingFromEngagementTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProspectingFromEngagementTasksResponse, func(s *smithy.Schema) error {

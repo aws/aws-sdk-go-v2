@@ -110,7 +110,9 @@ func (v *CreateTapeWithBarcodeInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.PoolId != nil {
 		s.WriteString(schemas.CreateTapeWithBarcodeInput_PoolId, *v.PoolId)
 	}
-	serializeTags(s, schemas.CreateTapeWithBarcodeInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateTapeWithBarcodeInput_Tags, v.Tags)
+	}
 	if v.TapeBarcode != nil {
 		s.WriteString(schemas.CreateTapeWithBarcodeInput_TapeBarcode, *v.TapeBarcode)
 	}

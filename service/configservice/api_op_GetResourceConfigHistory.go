@@ -146,7 +146,9 @@ func (v *GetResourceConfigHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetResourceConfigHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationItemList(s, schemas.GetResourceConfigHistoryResponse_configurationItems, v.ConfigurationItems)
+	if v.ConfigurationItems != nil {
+		serializeConfigurationItemList(s, schemas.GetResourceConfigHistoryResponse_configurationItems, v.ConfigurationItems)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetResourceConfigHistoryResponse_nextToken, *v.NextToken)
 	}

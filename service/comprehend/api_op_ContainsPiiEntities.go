@@ -77,7 +77,9 @@ func (v *ContainsPiiEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ContainsPiiEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfEntityLabels(s, schemas.ContainsPiiEntitiesResponse_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeListOfEntityLabels(s, schemas.ContainsPiiEntitiesResponse_Labels, v.Labels)
+	}
 }
 func (v *ContainsPiiEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContainsPiiEntitiesResponse, func(s *smithy.Schema) error {

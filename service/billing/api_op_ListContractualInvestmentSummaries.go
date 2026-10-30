@@ -91,7 +91,9 @@ func (v *ListContractualInvestmentSummariesOutput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *ListContractualInvestmentSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvestmentSummaries(s, schemas.ListContractualInvestmentSummariesResponse_items, v.Items)
+	if v.Items != nil {
+		serializeInvestmentSummaries(s, schemas.ListContractualInvestmentSummariesResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContractualInvestmentSummariesResponse_nextToken, *v.NextToken)
 	}

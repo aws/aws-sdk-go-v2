@@ -66,7 +66,9 @@ func (v *UpdateIngressPointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIngressPointConfiguration(s, schemas.UpdateIngressPointRequest_IngressPointConfiguration, v.IngressPointConfiguration)
+	if v.IngressPointConfiguration != nil {
+		serializeIngressPointConfiguration(s, schemas.UpdateIngressPointRequest_IngressPointConfiguration, v.IngressPointConfiguration)
+	}
 	if v.IngressPointId != nil {
 		s.WriteString(schemas.UpdateIngressPointRequest_IngressPointId, *v.IngressPointId)
 	}

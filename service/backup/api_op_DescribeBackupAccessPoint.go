@@ -134,7 +134,9 @@ func (v *DescribeBackupAccessPointOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AccessPointArn != nil {
 		s.WriteString(schemas.DescribeBackupAccessPointResponse_AccessPointArn, *v.AccessPointArn)
 	}
-	serializeAccessPointMetadataMap(s, schemas.DescribeBackupAccessPointResponse_AccessPointMetadata, v.AccessPointMetadata)
+	if v.AccessPointMetadata != nil {
+		serializeAccessPointMetadataMap(s, schemas.DescribeBackupAccessPointResponse_AccessPointMetadata, v.AccessPointMetadata)
+	}
 	if v.BackupVaultArn != nil {
 		s.WriteString(schemas.DescribeBackupAccessPointResponse_BackupVaultArn, *v.BackupVaultArn)
 	}

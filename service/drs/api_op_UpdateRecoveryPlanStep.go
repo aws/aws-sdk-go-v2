@@ -50,7 +50,9 @@ func (v *UpdateRecoveryPlanStepInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRecoveryPlanStepInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecoveryPlanStepConfiguration(s, schemas.UpdateRecoveryPlanStepRequest_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeRecoveryPlanStepConfiguration(s, schemas.UpdateRecoveryPlanStepRequest_configuration, v.Configuration)
+	}
 	if v.RecoveryPlanStepArn != nil {
 		s.WriteString(schemas.UpdateRecoveryPlanStepRequest_recoveryPlanStepArn, *v.RecoveryPlanStepArn)
 	}

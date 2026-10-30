@@ -96,7 +96,9 @@ func (v *ListMessageTemplateVersionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListMessageTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMessageTemplateVersionSummaryList(s, schemas.ListMessageTemplateVersionsResponse_messageTemplateVersionSummaries, v.MessageTemplateVersionSummaries)
+	if v.MessageTemplateVersionSummaries != nil {
+		serializeMessageTemplateVersionSummaryList(s, schemas.ListMessageTemplateVersionsResponse_messageTemplateVersionSummaries, v.MessageTemplateVersionSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMessageTemplateVersionsResponse_nextToken, *v.NextToken)
 	}

@@ -97,7 +97,9 @@ func (v *GetTablesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableAttributesList(s, schemas.GetTablesRequest_AttributesToGet, v.AttributesToGet)
+	if v.AttributesToGet != nil {
+		serializeTableAttributesList(s, schemas.GetTablesRequest_AttributesToGet, v.AttributesToGet)
+	}
 	if v.AuditContext != nil {
 		s.WriteStruct(schemas.GetTablesRequest_AuditContext)
 		v.AuditContext.SerializeMembers(s)
@@ -156,7 +158,9 @@ func (v *GetTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetTablesResponse_NextToken, *v.NextToken)
 	}
-	serializeTableList(s, schemas.GetTablesResponse_TableList, v.TableList)
+	if v.TableList != nil {
+		serializeTableList(s, schemas.GetTablesResponse_TableList, v.TableList)
+	}
 }
 func (v *GetTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTablesResponse, func(s *smithy.Schema) error {

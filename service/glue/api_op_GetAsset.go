@@ -105,19 +105,27 @@ func (v *GetAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssetTypeId != nil {
 		s.WriteString(schemas.GetAssetOutput_AssetTypeId, *v.AssetTypeId)
 	}
-	serializeAssetFormMap(s, schemas.GetAssetOutput_Attachments, v.Attachments)
+	if v.Attachments != nil {
+		serializeAssetFormMap(s, schemas.GetAssetOutput_Attachments, v.Attachments)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetAssetOutput_CreatedAt, *v.CreatedAt)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetAssetOutput_Description, *v.Description)
 	}
-	serializeAssetFormMap(s, schemas.GetAssetOutput_Forms, v.Forms)
-	serializeGlossaryTermIdList(s, schemas.GetAssetOutput_GlossaryTerms, v.GlossaryTerms)
+	if v.Forms != nil {
+		serializeAssetFormMap(s, schemas.GetAssetOutput_Forms, v.Forms)
+	}
+	if v.GlossaryTerms != nil {
+		serializeGlossaryTermIdList(s, schemas.GetAssetOutput_GlossaryTerms, v.GlossaryTerms)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetAssetOutput_Id, *v.Id)
 	}
-	serializeIterableFormMap(s, schemas.GetAssetOutput_IterableForms, v.IterableForms)
+	if v.IterableForms != nil {
+		serializeIterableFormMap(s, schemas.GetAssetOutput_IterableForms, v.IterableForms)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.GetAssetOutput_Name, *v.Name)
 	}

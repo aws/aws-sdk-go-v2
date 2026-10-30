@@ -87,7 +87,9 @@ func (v *DescribeChapCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeChapCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChapCredentials(s, schemas.DescribeChapCredentialsOutput_ChapCredentials, v.ChapCredentials)
+	if v.ChapCredentials != nil {
+		serializeChapCredentials(s, schemas.DescribeChapCredentialsOutput_ChapCredentials, v.ChapCredentials)
+	}
 }
 func (v *DescribeChapCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeChapCredentialsOutput, func(s *smithy.Schema) error {

@@ -123,7 +123,9 @@ func (v *GetEventStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StoppedSince != nil {
 		s.WriteTime(schemas.GetEventStreamResponse_StoppedSince, *v.StoppedSince)
 	}
-	serializeTagMap(s, schemas.GetEventStreamResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetEventStreamResponse_Tags, v.Tags)
+	}
 }
 func (v *GetEventStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEventStreamResponse, func(s *smithy.Schema) error {

@@ -90,7 +90,9 @@ func (v *ListLaunchActionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLaunchActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLaunchActions(s, schemas.ListLaunchActionsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeLaunchActions(s, schemas.ListLaunchActionsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLaunchActionsResponse_nextToken, *v.NextToken)
 	}

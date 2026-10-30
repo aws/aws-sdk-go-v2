@@ -59,7 +59,9 @@ func (v *Actor) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MfaForwardingAddress != nil {
 		s.WriteString(schemas.Actor_mfaForwardingAddress, *v.MfaForwardingAddress)
 	}
-	serializeUriList(s, schemas.Actor_uris, v.Uris)
+	if v.Uris != nil {
+		serializeUriList(s, schemas.Actor_uris, v.Uris)
+	}
 }
 func (v *Actor) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Actor, func(s *smithy.Schema) error {
@@ -216,7 +218,9 @@ func (v *AgentSpace) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.AgentSpace_name, *v.Name)
 	}
-	serializeTargetDomainIdList(s, schemas.AgentSpace_targetDomainIds, v.TargetDomainIds)
+	if v.TargetDomainIds != nil {
+		serializeTargetDomainIdList(s, schemas.AgentSpace_targetDomainIds, v.TargetDomainIds)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.AgentSpace_updatedAt, *v.UpdatedAt)
 	}
@@ -595,13 +599,27 @@ func (v *Assets) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Assets) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActorList(s, schemas.Assets_actors, v.Actors)
-	serializeClientCertificateList(s, schemas.Assets_clientCertificates, v.ClientCertificates)
-	serializeDocumentList(s, schemas.Assets_documents, v.Documents)
-	serializeEndpointList(s, schemas.Assets_endpoints, v.Endpoints)
-	serializeIntegratedRepositoryList(s, schemas.Assets_integratedRepositories, v.IntegratedRepositories)
-	serializeSourceCodeRepositoryList(s, schemas.Assets_sourceCode, v.SourceCode)
-	serializeTrustedCaCertificateList(s, schemas.Assets_trustedCaCertificates, v.TrustedCaCertificates)
+	if v.Actors != nil {
+		serializeActorList(s, schemas.Assets_actors, v.Actors)
+	}
+	if v.ClientCertificates != nil {
+		serializeClientCertificateList(s, schemas.Assets_clientCertificates, v.ClientCertificates)
+	}
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.Assets_documents, v.Documents)
+	}
+	if v.Endpoints != nil {
+		serializeEndpointList(s, schemas.Assets_endpoints, v.Endpoints)
+	}
+	if v.IntegratedRepositories != nil {
+		serializeIntegratedRepositoryList(s, schemas.Assets_integratedRepositories, v.IntegratedRepositories)
+	}
+	if v.SourceCode != nil {
+		serializeSourceCodeRepositoryList(s, schemas.Assets_sourceCode, v.SourceCode)
+	}
+	if v.TrustedCaCertificates != nil {
+		serializeTrustedCaCertificateList(s, schemas.Assets_trustedCaCertificates, v.TrustedCaCertificates)
+	}
 }
 func (v *Assets) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Assets, func(s *smithy.Schema) error {
@@ -708,12 +726,24 @@ func (v *AWSResources) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AWSResources) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIamRoles(s, schemas.AWSResources_iamRoles, v.IamRoles)
-	serializeLambdaFunctionArns(s, schemas.AWSResources_lambdaFunctionArns, v.LambdaFunctionArns)
-	serializeLogGroupArns(s, schemas.AWSResources_logGroups, v.LogGroups)
-	serializeS3BucketArns(s, schemas.AWSResources_s3Buckets, v.S3Buckets)
-	serializeSecretArns(s, schemas.AWSResources_secretArns, v.SecretArns)
-	serializeVpcConfigs(s, schemas.AWSResources_vpcs, v.Vpcs)
+	if v.IamRoles != nil {
+		serializeIamRoles(s, schemas.AWSResources_iamRoles, v.IamRoles)
+	}
+	if v.LambdaFunctionArns != nil {
+		serializeLambdaFunctionArns(s, schemas.AWSResources_lambdaFunctionArns, v.LambdaFunctionArns)
+	}
+	if v.LogGroups != nil {
+		serializeLogGroupArns(s, schemas.AWSResources_logGroups, v.LogGroups)
+	}
+	if v.S3Buckets != nil {
+		serializeS3BucketArns(s, schemas.AWSResources_s3Buckets, v.S3Buckets)
+	}
+	if v.SecretArns != nil {
+		serializeSecretArns(s, schemas.AWSResources_secretArns, v.SecretArns)
+	}
+	if v.Vpcs != nil {
+		serializeVpcConfigs(s, schemas.AWSResources_vpcs, v.Vpcs)
+	}
 }
 func (v *AWSResources) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AWSResources, func(s *smithy.Schema) error {
@@ -963,7 +993,9 @@ func (v *AzureDevOpsResourceCapabilities) SerializeMembers(s smithy.ShapeSeriali
 	if v.RemediateCode != nil {
 		s.WriteBool(schemas.AzureDevOpsResourceCapabilities_remediateCode, *v.RemediateCode)
 	}
-	serializeTriggerFilterGroups(s, schemas.AzureDevOpsResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	if v.TriggerFilterGroups != nil {
+		serializeTriggerFilterGroups(s, schemas.AzureDevOpsResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	}
 }
 func (v *AzureDevOpsResourceCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AzureDevOpsResourceCapabilities, func(s *smithy.Schema) error {
@@ -1687,7 +1719,9 @@ func (v *BitbucketResourceCapabilities) SerializeMembers(s smithy.ShapeSerialize
 	if v.RemediateCode != nil {
 		s.WriteBool(schemas.BitbucketResourceCapabilities_remediateCode, *v.RemediateCode)
 	}
-	serializeTriggerFilterGroups(s, schemas.BitbucketResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	if v.TriggerFilterGroups != nil {
+		serializeTriggerFilterGroups(s, schemas.BitbucketResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	}
 }
 func (v *BitbucketResourceCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BitbucketResourceCapabilities, func(s *smithy.Schema) error {
@@ -1867,7 +1901,9 @@ func (v *ClientCertificate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.ClientCertificate_name, *v.Name)
 	}
-	serializeClientCertificateOriginList(s, schemas.ClientCertificate_origins, v.Origins)
+	if v.Origins != nil {
+		serializeClientCertificateOriginList(s, schemas.ClientCertificate_origins, v.Origins)
+	}
 	if v.SecretArn != nil {
 		s.WriteString(schemas.ClientCertificate_secretArn, *v.SecretArn)
 	}
@@ -2019,7 +2055,9 @@ func (v *CodeRemediationTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusReason != nil {
 		s.WriteString(schemas.CodeRemediationTask_statusReason, *v.StatusReason)
 	}
-	serializeCodeRemediationTaskDetailsList(s, schemas.CodeRemediationTask_taskDetails, v.TaskDetails)
+	if v.TaskDetails != nil {
+		serializeCodeRemediationTaskDetailsList(s, schemas.CodeRemediationTask_taskDetails, v.TaskDetails)
+	}
 }
 func (v *CodeRemediationTask) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CodeRemediationTask, func(s *smithy.Schema) error {
@@ -2341,14 +2379,20 @@ func (v *CodeReviewJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CodeReviewJob_createdAt, *v.CreatedAt)
 	}
-	serializeDocumentList(s, schemas.CodeReviewJob_documents, v.Documents)
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.CodeReviewJob_documents, v.Documents)
+	}
 	if v.ErrorInformation != nil {
 		s.WriteStruct(schemas.CodeReviewJob_errorInformation)
 		v.ErrorInformation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeExecutionContextList(s, schemas.CodeReviewJob_executionContext, v.ExecutionContext)
-	serializeIntegratedRepositoryList(s, schemas.CodeReviewJob_integratedRepositories, v.IntegratedRepositories)
+	if v.ExecutionContext != nil {
+		serializeExecutionContextList(s, schemas.CodeReviewJob_executionContext, v.ExecutionContext)
+	}
+	if v.IntegratedRepositories != nil {
+		serializeIntegratedRepositoryList(s, schemas.CodeReviewJob_integratedRepositories, v.IntegratedRepositories)
+	}
 	if v.LogConfig != nil {
 		s.WriteStruct(schemas.CodeReviewJob_logConfig)
 		v.LogConfig.SerializeMembers(s)
@@ -2368,11 +2412,15 @@ func (v *CodeReviewJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.CodeReviewJob_serviceRole, *v.ServiceRole)
 	}
-	serializeSourceCodeRepositoryList(s, schemas.CodeReviewJob_sourceCode, v.SourceCode)
+	if v.SourceCode != nil {
+		serializeSourceCodeRepositoryList(s, schemas.CodeReviewJob_sourceCode, v.SourceCode)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CodeReviewJob_status, string(v.Status))
 	}
-	serializeStepList(s, schemas.CodeReviewJob_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepList(s, schemas.CodeReviewJob_steps, v.Steps)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CodeReviewJob_title, *v.Title)
 	}
@@ -2584,7 +2632,9 @@ func (v *CodeReviewJobTask) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.CodeReviewJobTask_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeCategoryList(s, schemas.CodeReviewJobTask_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.CodeReviewJobTask_categories, v.Categories)
+	}
 	if v.CodeReviewId != nil {
 		s.WriteString(schemas.CodeReviewJobTask_codeReviewId, *v.CodeReviewId)
 	}
@@ -3890,7 +3940,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AttackScript != nil {
 		s.WriteString(schemas.Finding_attackScript, *v.AttackScript)
 	}
-	serializeCodeLocationList(s, schemas.Finding_codeLocations, v.CodeLocations)
+	if v.CodeLocations != nil {
+		serializeCodeLocationList(s, schemas.Finding_codeLocations, v.CodeLocations)
+	}
 	if v.CodeRemediationTask != nil {
 		s.WriteStruct(schemas.Finding_codeRemediationTask)
 		v.CodeRemediationTask.SerializeMembers(s)
@@ -3943,7 +3995,9 @@ func (v *Finding) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RemediationCode != nil {
 		s.WriteString(schemas.Finding_remediationCode, *v.RemediationCode)
 	}
-	serializeStringList(s, schemas.Finding_revalidationJobIds, v.RevalidationJobIds)
+	if v.RevalidationJobIds != nil {
+		serializeStringList(s, schemas.Finding_revalidationJobIds, v.RevalidationJobIds)
+	}
 	if v.RiskLevel != "" {
 		s.WriteString(schemas.Finding_riskLevel, string(v.RiskLevel))
 	}
@@ -4466,7 +4520,9 @@ func (v *GitHubResourceCapabilities) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RemediateCode != nil {
 		s.WriteBool(schemas.GitHubResourceCapabilities_remediateCode, *v.RemediateCode)
 	}
-	serializeTriggerFilterGroups(s, schemas.GitHubResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	if v.TriggerFilterGroups != nil {
+		serializeTriggerFilterGroups(s, schemas.GitHubResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	}
 }
 func (v *GitHubResourceCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GitHubResourceCapabilities, func(s *smithy.Schema) error {
@@ -4697,7 +4753,9 @@ func (v *GitLabResourceCapabilities) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RemediateCode != nil {
 		s.WriteBool(schemas.GitLabResourceCapabilities_remediateCode, *v.RemediateCode)
 	}
-	serializeTriggerFilterGroups(s, schemas.GitLabResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	if v.TriggerFilterGroups != nil {
+		serializeTriggerFilterGroups(s, schemas.GitLabResourceCapabilities_triggerFilterGroups, v.TriggerFilterGroups)
+	}
 }
 func (v *GitLabResourceCapabilities) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GitLabResourceCapabilities, func(s *smithy.Schema) error {
@@ -5059,8 +5117,12 @@ func (v *IntegratedResourceInputItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IntegratedResourceInputItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProviderResourceCapabilities(s, schemas.IntegratedResourceInputItem_capabilities, v.Capabilities)
-	serializeIntegratedResource(s, schemas.IntegratedResourceInputItem_resource, v.Resource)
+	if v.Capabilities != nil {
+		serializeProviderResourceCapabilities(s, schemas.IntegratedResourceInputItem_capabilities, v.Capabilities)
+	}
+	if v.Resource != nil {
+		serializeIntegratedResource(s, schemas.IntegratedResourceInputItem_resource, v.Resource)
+	}
 }
 func (v *IntegratedResourceInputItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntegratedResourceInputItem, func(s *smithy.Schema) error {
@@ -5217,11 +5279,15 @@ func (v *IntegratedResourceSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IntegratedResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProviderResourceCapabilities(s, schemas.IntegratedResourceSummary_capabilities, v.Capabilities)
+	if v.Capabilities != nil {
+		serializeProviderResourceCapabilities(s, schemas.IntegratedResourceSummary_capabilities, v.Capabilities)
+	}
 	if v.IntegrationId != nil {
 		s.WriteString(schemas.IntegratedResourceSummary_integrationId, *v.IntegrationId)
 	}
-	serializeIntegratedResourceMetadata(s, schemas.IntegratedResourceSummary_resource, v.Resource)
+	if v.Resource != nil {
+		serializeIntegratedResourceMetadata(s, schemas.IntegratedResourceSummary_resource, v.Resource)
+	}
 }
 func (v *IntegratedResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IntegratedResourceSummary, func(s *smithy.Schema) error {
@@ -5998,7 +6064,9 @@ func (v *MembershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationId != nil {
 		s.WriteString(schemas.MembershipSummary_applicationId, *v.ApplicationId)
 	}
-	serializeMembershipConfig(s, schemas.MembershipSummary_config, v.Config)
+	if v.Config != nil {
+		serializeMembershipConfig(s, schemas.MembershipSummary_config, v.Config)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.MembershipSummary_createdAt, *v.CreatedAt)
 	}
@@ -6011,7 +6079,9 @@ func (v *MembershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MembershipId != nil {
 		s.WriteString(schemas.MembershipSummary_membershipId, *v.MembershipId)
 	}
-	serializeMemberMetadata(s, schemas.MembershipSummary_metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMemberMetadata(s, schemas.MembershipSummary_metadata, v.Metadata)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.MembershipSummary_updatedAt, *v.UpdatedAt)
 	}
@@ -6080,8 +6150,12 @@ func (v *NetworkTrafficConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *NetworkTrafficConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomHeaderList(s, schemas.NetworkTrafficConfig_customHeaders, v.CustomHeaders)
-	serializeNetworkTrafficRuleList(s, schemas.NetworkTrafficConfig_rules, v.Rules)
+	if v.CustomHeaders != nil {
+		serializeCustomHeaderList(s, schemas.NetworkTrafficConfig_customHeaders, v.CustomHeaders)
+	}
+	if v.Rules != nil {
+		serializeNetworkTrafficRuleList(s, schemas.NetworkTrafficConfig_rules, v.Rules)
+	}
 }
 func (v *NetworkTrafficConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NetworkTrafficConfig, func(s *smithy.Schema) error {
@@ -6259,8 +6333,12 @@ func (v *Pentest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Pentest_createdAt, *v.CreatedAt)
 	}
-	serializeSkillTypeList(s, schemas.Pentest_disableManagedSkills, v.DisableManagedSkills)
-	serializeRiskTypeList(s, schemas.Pentest_excludeRiskTypes, v.ExcludeRiskTypes)
+	if v.DisableManagedSkills != nil {
+		serializeSkillTypeList(s, schemas.Pentest_disableManagedSkills, v.DisableManagedSkills)
+	}
+	if v.ExcludeRiskTypes != nil {
+		serializeRiskTypeList(s, schemas.Pentest_excludeRiskTypes, v.ExcludeRiskTypes)
+	}
 	if v.LogConfig != nil {
 		s.WriteStruct(schemas.Pentest_logConfig)
 		v.LogConfig.SerializeMembers(s)
@@ -6509,8 +6587,12 @@ func (v *PentestJob) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActorList(s, schemas.PentestJob_actors, v.Actors)
-	serializeEndpointList(s, schemas.PentestJob_allowedDomains, v.AllowedDomains)
+	if v.Actors != nil {
+		serializeActorList(s, schemas.PentestJob_actors, v.Actors)
+	}
+	if v.AllowedDomains != nil {
+		serializeEndpointList(s, schemas.PentestJob_allowedDomains, v.AllowedDomains)
+	}
 	if v.CicdConfiguration != nil {
 		s.WriteStruct(schemas.PentestJob_cicdConfiguration)
 		v.CicdConfiguration.SerializeMembers(s)
@@ -6519,25 +6601,41 @@ func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CleanUpStrategy != "" {
 		s.WriteString(schemas.PentestJob_cleanUpStrategy, string(v.CleanUpStrategy))
 	}
-	serializeClientCertificateList(s, schemas.PentestJob_clientCertificates, v.ClientCertificates)
+	if v.ClientCertificates != nil {
+		serializeClientCertificateList(s, schemas.PentestJob_clientCertificates, v.ClientCertificates)
+	}
 	if v.CodeRemediationStrategy != "" {
 		s.WriteString(schemas.PentestJob_codeRemediationStrategy, string(v.CodeRemediationStrategy))
 	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.PentestJob_createdAt, *v.CreatedAt)
 	}
-	serializeSkillTypeList(s, schemas.PentestJob_disableManagedSkills, v.DisableManagedSkills)
-	serializeDocumentList(s, schemas.PentestJob_documents, v.Documents)
-	serializeEndpointList(s, schemas.PentestJob_endpoints, v.Endpoints)
+	if v.DisableManagedSkills != nil {
+		serializeSkillTypeList(s, schemas.PentestJob_disableManagedSkills, v.DisableManagedSkills)
+	}
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.PentestJob_documents, v.Documents)
+	}
+	if v.Endpoints != nil {
+		serializeEndpointList(s, schemas.PentestJob_endpoints, v.Endpoints)
+	}
 	if v.ErrorInformation != nil {
 		s.WriteStruct(schemas.PentestJob_errorInformation)
 		v.ErrorInformation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEndpointList(s, schemas.PentestJob_excludePaths, v.ExcludePaths)
-	serializeRiskTypeList(s, schemas.PentestJob_excludeRiskTypes, v.ExcludeRiskTypes)
-	serializeExecutionContextList(s, schemas.PentestJob_executionContext, v.ExecutionContext)
-	serializeIntegratedRepositoryList(s, schemas.PentestJob_integratedRepositories, v.IntegratedRepositories)
+	if v.ExcludePaths != nil {
+		serializeEndpointList(s, schemas.PentestJob_excludePaths, v.ExcludePaths)
+	}
+	if v.ExcludeRiskTypes != nil {
+		serializeRiskTypeList(s, schemas.PentestJob_excludeRiskTypes, v.ExcludeRiskTypes)
+	}
+	if v.ExecutionContext != nil {
+		serializeExecutionContextList(s, schemas.PentestJob_executionContext, v.ExecutionContext)
+	}
+	if v.IntegratedRepositories != nil {
+		serializeIntegratedRepositoryList(s, schemas.PentestJob_integratedRepositories, v.IntegratedRepositories)
+	}
 	if v.JobType != "" {
 		s.WriteString(schemas.PentestJob_jobType, string(v.JobType))
 	}
@@ -6571,21 +6669,29 @@ func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReportUrl != nil {
 		s.WriteString(schemas.PentestJob_reportUrl, *v.ReportUrl)
 	}
-	serializeScopeChangeList(s, schemas.PentestJob_scopeChanges, v.ScopeChanges)
+	if v.ScopeChanges != nil {
+		serializeScopeChangeList(s, schemas.PentestJob_scopeChanges, v.ScopeChanges)
+	}
 	if v.ScopeResult != nil {
 		s.WriteStruct(schemas.PentestJob_scopeResult)
 		v.ScopeResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeStringList(s, schemas.PentestJob_selectedFindingIds, v.SelectedFindingIds)
+	if v.SelectedFindingIds != nil {
+		serializeStringList(s, schemas.PentestJob_selectedFindingIds, v.SelectedFindingIds)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.PentestJob_serviceRole, *v.ServiceRole)
 	}
-	serializeSourceCodeRepositoryList(s, schemas.PentestJob_sourceCode, v.SourceCode)
+	if v.SourceCode != nil {
+		serializeSourceCodeRepositoryList(s, schemas.PentestJob_sourceCode, v.SourceCode)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.PentestJob_status, string(v.Status))
 	}
-	serializeStepList(s, schemas.PentestJob_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepList(s, schemas.PentestJob_steps, v.Steps)
+	}
 	if v.TestScope != nil {
 		s.WriteStruct(schemas.PentestJob_testScope)
 		v.TestScope.SerializeMembers(s)
@@ -6594,7 +6700,9 @@ func (v *PentestJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Title != nil {
 		s.WriteString(schemas.PentestJob_title, *v.Title)
 	}
-	serializeTrustedCaCertificateList(s, schemas.PentestJob_trustedCaCertificates, v.TrustedCaCertificates)
+	if v.TrustedCaCertificates != nil {
+		serializeTrustedCaCertificateList(s, schemas.PentestJob_trustedCaCertificates, v.TrustedCaCertificates)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.PentestJob_updatedAt, *v.UpdatedAt)
 	}
@@ -7025,7 +7133,9 @@ func (v *PrivateConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.PrivateConnectionSummary_status, string(v.Status))
 	}
-	serializeTagMap(s, schemas.PrivateConnectionSummary_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.PrivateConnectionSummary_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.PrivateConnectionSummary_type, string(v.Type))
 	}
@@ -7443,12 +7553,24 @@ func (v *ReportFilters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComplianceReport != nil {
 		s.WriteBool(schemas.ReportFilters_complianceReport, *v.ComplianceReport)
 	}
-	serializeConfidenceLevelFilterList(s, schemas.ReportFilters_confidenceLevels, v.ConfidenceLevels)
-	serializeReportFilterList(s, schemas.ReportFilters_findingTypes, v.FindingTypes)
-	serializeRiskLevelFilterList(s, schemas.ReportFilters_riskLevels, v.RiskLevels)
-	serializeRiskTypeFilterList(s, schemas.ReportFilters_riskTypes, v.RiskTypes)
-	serializeFindingStatusFilterList(s, schemas.ReportFilters_statuses, v.Statuses)
-	serializeTaskExecutionStatusFilterList(s, schemas.ReportFilters_taskStatuses, v.TaskStatuses)
+	if v.ConfidenceLevels != nil {
+		serializeConfidenceLevelFilterList(s, schemas.ReportFilters_confidenceLevels, v.ConfidenceLevels)
+	}
+	if v.FindingTypes != nil {
+		serializeReportFilterList(s, schemas.ReportFilters_findingTypes, v.FindingTypes)
+	}
+	if v.RiskLevels != nil {
+		serializeRiskLevelFilterList(s, schemas.ReportFilters_riskLevels, v.RiskLevels)
+	}
+	if v.RiskTypes != nil {
+		serializeRiskTypeFilterList(s, schemas.ReportFilters_riskTypes, v.RiskTypes)
+	}
+	if v.Statuses != nil {
+		serializeFindingStatusFilterList(s, schemas.ReportFilters_statuses, v.Statuses)
+	}
+	if v.TaskStatuses != nil {
+		serializeTaskExecutionStatusFilterList(s, schemas.ReportFilters_taskStatuses, v.TaskStatuses)
+	}
 }
 func (v *ReportFilters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ReportFilters, func(s *smithy.Schema) error {
@@ -7956,9 +8078,15 @@ func (v *ServiceManagedInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Ipv4AddressesPerEni != nil {
 		s.WriteInt32(schemas.ServiceManagedInput_ipv4AddressesPerEni, *v.Ipv4AddressesPerEni)
 	}
-	serializePortRanges(s, schemas.ServiceManagedInput_portRanges, v.PortRanges)
-	serializePrivateConnectionSecurityGroupIds(s, schemas.ServiceManagedInput_securityGroupIds, v.SecurityGroupIds)
-	serializePrivateConnectionSubnetIds(s, schemas.ServiceManagedInput_subnetIds, v.SubnetIds)
+	if v.PortRanges != nil {
+		serializePortRanges(s, schemas.ServiceManagedInput_portRanges, v.PortRanges)
+	}
+	if v.SecurityGroupIds != nil {
+		serializePrivateConnectionSecurityGroupIds(s, schemas.ServiceManagedInput_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializePrivateConnectionSubnetIds(s, schemas.ServiceManagedInput_subnetIds, v.SubnetIds)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.ServiceManagedInput_vpcId, *v.VpcId)
 	}
@@ -8317,7 +8445,9 @@ func (v *Task) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AgentSpaceId != nil {
 		s.WriteString(schemas.Task_agentSpaceId, *v.AgentSpaceId)
 	}
-	serializeCategoryList(s, schemas.Task_categories, v.Categories)
+	if v.Categories != nil {
+		serializeCategoryList(s, schemas.Task_categories, v.Categories)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Task_createdAt, *v.CreatedAt)
 	}
@@ -8665,9 +8795,15 @@ func (v *Threat) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedBy != "" {
 		s.WriteString(schemas.Threat_createdBy, string(v.CreatedBy))
 	}
-	serializeThreatEvidenceList(s, schemas.Threat_evidence, v.Evidence)
-	serializeStringList(s, schemas.Threat_impactedAssets, v.ImpactedAssets)
-	serializeStringList(s, schemas.Threat_impactedGoal, v.ImpactedGoal)
+	if v.Evidence != nil {
+		serializeThreatEvidenceList(s, schemas.Threat_evidence, v.Evidence)
+	}
+	if v.ImpactedAssets != nil {
+		serializeStringList(s, schemas.Threat_impactedAssets, v.ImpactedAssets)
+	}
+	if v.ImpactedGoal != nil {
+		serializeStringList(s, schemas.Threat_impactedGoal, v.ImpactedGoal)
+	}
 	if v.Prerequisites != nil {
 		s.WriteString(schemas.Threat_prerequisites, *v.Prerequisites)
 	}
@@ -8683,7 +8819,9 @@ func (v *Threat) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.Threat_status, string(v.Status))
 	}
-	serializeStrideCategoryList(s, schemas.Threat_stride, v.Stride)
+	if v.Stride != nil {
+		serializeStrideCategoryList(s, schemas.Threat_stride, v.Stride)
+	}
 	if v.ThreatAction != nil {
 		s.WriteString(schemas.Threat_threatAction, *v.ThreatAction)
 	}
@@ -8960,7 +9098,9 @@ func (v *ThreatModel) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ReportDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentList(s, schemas.ThreatModel_scopeDocs, v.ScopeDocs)
+	if v.ScopeDocs != nil {
+		serializeDocumentList(s, schemas.ThreatModel_scopeDocs, v.ScopeDocs)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.ThreatModel_serviceRole, *v.ServiceRole)
 	}
@@ -9081,7 +9221,9 @@ func (v *ThreatModelJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.ThreatModelJob_createdAt, *v.CreatedAt)
 	}
-	serializeDocumentList(s, schemas.ThreatModelJob_documents, v.Documents)
+	if v.Documents != nil {
+		serializeDocumentList(s, schemas.ThreatModelJob_documents, v.Documents)
+	}
 	if v.ErrorInformation != nil {
 		s.WriteStruct(schemas.ThreatModelJob_errorInformation)
 		v.ErrorInformation.SerializeMembers(s)
@@ -9093,14 +9235,20 @@ func (v *ThreatModelJob) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionStartTime != nil {
 		s.WriteTime(schemas.ThreatModelJob_executionStartTime, *v.ExecutionStartTime)
 	}
-	serializeIntegratedRepositoryList(s, schemas.ThreatModelJob_integratedRepositories, v.IntegratedRepositories)
+	if v.IntegratedRepositories != nil {
+		serializeIntegratedRepositoryList(s, schemas.ThreatModelJob_integratedRepositories, v.IntegratedRepositories)
+	}
 	if v.ReportDestination != nil {
 		s.WriteStruct(schemas.ThreatModelJob_reportDestination)
 		v.ReportDestination.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDocumentList(s, schemas.ThreatModelJob_scopeDocs, v.ScopeDocs)
-	serializeSourceCodeRepositoryList(s, schemas.ThreatModelJob_sourceCode, v.SourceCode)
+	if v.ScopeDocs != nil {
+		serializeDocumentList(s, schemas.ThreatModelJob_scopeDocs, v.ScopeDocs)
+	}
+	if v.SourceCode != nil {
+		serializeSourceCodeRepositoryList(s, schemas.ThreatModelJob_sourceCode, v.SourceCode)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ThreatModelJob_status, string(v.Status))
 	}
@@ -9623,7 +9771,9 @@ func (v *ThreatSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.ThreatSummary_status, string(v.Status))
 	}
-	serializeStrideCategoryList(s, schemas.ThreatSummary_stride, v.Stride)
+	if v.Stride != nil {
+		serializeStrideCategoryList(s, schemas.ThreatSummary_stride, v.Stride)
+	}
 	if v.ThreatId != nil {
 		s.WriteString(schemas.ThreatSummary_threatId, *v.ThreatId)
 	}
@@ -9725,7 +9875,9 @@ func (v *TriggerFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MatchMode != "" {
 		s.WriteString(schemas.TriggerFilter_matchMode, string(v.MatchMode))
 	}
-	serializeTriggerRegexPatternList(s, schemas.TriggerFilter_patterns, v.Patterns)
+	if v.Patterns != nil {
+		serializeTriggerRegexPatternList(s, schemas.TriggerFilter_patterns, v.Patterns)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.TriggerFilter_type, string(v.Type))
 	}
@@ -9777,8 +9929,12 @@ func (v *TriggerFilterGroup) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TriggerFilterGroup) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTriggerEventList(s, schemas.TriggerFilterGroup_events, v.Events)
-	serializeTriggerFilterList(s, schemas.TriggerFilterGroup_filters, v.Filters)
+	if v.Events != nil {
+		serializeTriggerEventList(s, schemas.TriggerFilterGroup_events, v.Events)
+	}
+	if v.Filters != nil {
+		serializeTriggerFilterList(s, schemas.TriggerFilterGroup_filters, v.Filters)
+	}
 }
 func (v *TriggerFilterGroup) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TriggerFilterGroup, func(s *smithy.Schema) error {
@@ -9810,7 +9966,9 @@ func (v *TrustedCaCertificate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrustedCaCertificate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCaCertificateSource(s, schemas.TrustedCaCertificate_source, v.Source)
+	if v.Source != nil {
+		serializeCaCertificateSource(s, schemas.TrustedCaCertificate_source, v.Source)
+	}
 }
 func (v *TrustedCaCertificate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrustedCaCertificate, func(s *smithy.Schema) error {
@@ -10104,7 +10262,9 @@ func (v *VerificationScript) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VerificationScript) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVerificationScriptEnvVarList(s, schemas.VerificationScript_envVars, v.EnvVars)
+	if v.EnvVars != nil {
+		serializeVerificationScriptEnvVarList(s, schemas.VerificationScript_envVars, v.EnvVars)
+	}
 	if v.Instructions != nil {
 		s.WriteString(schemas.VerificationScript_instructions, *v.Instructions)
 	}
@@ -10199,8 +10359,12 @@ func (v *VpcConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupArns(s, schemas.VpcConfig_securityGroupArns, v.SecurityGroupArns)
-	serializeSubnetArns(s, schemas.VpcConfig_subnetArns, v.SubnetArns)
+	if v.SecurityGroupArns != nil {
+		serializeSecurityGroupArns(s, schemas.VpcConfig_securityGroupArns, v.SecurityGroupArns)
+	}
+	if v.SubnetArns != nil {
+		serializeSubnetArns(s, schemas.VpcConfig_subnetArns, v.SubnetArns)
+	}
 	if v.VpcArn != nil {
 		s.WriteString(schemas.VpcConfig_vpcArn, *v.VpcArn)
 	}

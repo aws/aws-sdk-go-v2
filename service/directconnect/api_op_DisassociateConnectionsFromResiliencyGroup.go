@@ -57,7 +57,9 @@ func (v *DisassociateConnectionsFromResiliencyGroupInput) SerializeMembers(s smi
 	if v.ClientToken != nil {
 		s.WriteString(schemas.DisassociateConnectionsFromResiliencyGroupRequest_clientToken, *v.ClientToken)
 	}
-	serializeConnectionIdentifierList(s, schemas.DisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers, v.ConnectionIdentifiers)
+	if v.ConnectionIdentifiers != nil {
+		serializeConnectionIdentifierList(s, schemas.DisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers, v.ConnectionIdentifiers)
+	}
 	if v.ResiliencyGroupId != nil {
 		s.WriteString(schemas.DisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId, *v.ResiliencyGroupId)
 	}
@@ -81,7 +83,9 @@ func (v *DisassociateConnectionsFromResiliencyGroupOutput) Serialize(s smithy.Sh
 }
 
 func (v *DisassociateConnectionsFromResiliencyGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeResiliencyGroupAssociationList(s, schemas.DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations, v.ResiliencyGroupAssociations)
+	if v.ResiliencyGroupAssociations != nil {
+		serializeResiliencyGroupAssociationList(s, schemas.DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations, v.ResiliencyGroupAssociations)
+	}
 }
 func (v *DisassociateConnectionsFromResiliencyGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DisassociateConnectionsFromResiliencyGroupResult, func(s *smithy.Schema) error {

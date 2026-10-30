@@ -53,7 +53,9 @@ func (v *BatchGrantPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.CatalogId != nil {
 		s.WriteString(schemas.BatchGrantPermissionsRequest_CatalogId, *v.CatalogId)
 	}
-	serializeBatchPermissionsRequestEntryList(s, schemas.BatchGrantPermissionsRequest_Entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchPermissionsRequestEntryList(s, schemas.BatchGrantPermissionsRequest_Entries, v.Entries)
+	}
 }
 
 type BatchGrantPermissionsOutput struct {
@@ -74,7 +76,9 @@ func (v *BatchGrantPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGrantPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPermissionsFailureList(s, schemas.BatchGrantPermissionsResponse_Failures, v.Failures)
+	if v.Failures != nil {
+		serializeBatchPermissionsFailureList(s, schemas.BatchGrantPermissionsResponse_Failures, v.Failures)
+	}
 }
 func (v *BatchGrantPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGrantPermissionsResponse, func(s *smithy.Schema) error {

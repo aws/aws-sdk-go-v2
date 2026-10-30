@@ -67,7 +67,9 @@ func (v *GetRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.GetRecordRequest_FeatureGroupName, *v.FeatureGroupName)
 	}
-	serializeFeatureNames(s, schemas.GetRecordRequest_FeatureNames, v.FeatureNames)
+	if v.FeatureNames != nil {
+		serializeFeatureNames(s, schemas.GetRecordRequest_FeatureNames, v.FeatureNames)
+	}
 	if v.RecordIdentifierValueAsString != nil {
 		s.WriteString(schemas.GetRecordRequest_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
 	}
@@ -97,7 +99,9 @@ func (v *GetRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExpiresAt != nil {
 		s.WriteString(schemas.GetRecordResponse_ExpiresAt, *v.ExpiresAt)
 	}
-	serializeRecord(s, schemas.GetRecordResponse_Record, v.Record)
+	if v.Record != nil {
+		serializeRecord(s, schemas.GetRecordResponse_Record, v.Record)
+	}
 }
 func (v *GetRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRecordResponse, func(s *smithy.Schema) error {

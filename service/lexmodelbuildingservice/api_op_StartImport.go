@@ -86,7 +86,9 @@ func (v *StartImportInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.StartImportRequest_resourceType, string(v.ResourceType))
 	}
-	serializeTagList(s, schemas.StartImportRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartImportRequest_tags, v.Tags)
+	}
 }
 
 type StartImportOutput struct {
@@ -144,7 +146,9 @@ func (v *StartImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceType != "" {
 		s.WriteString(schemas.StartImportResponse_resourceType, string(v.ResourceType))
 	}
-	serializeTagList(s, schemas.StartImportResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.StartImportResponse_tags, v.Tags)
+	}
 }
 func (v *StartImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartImportResponse, func(s *smithy.Schema) error {

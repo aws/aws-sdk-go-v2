@@ -339,7 +339,9 @@ func (v *PutScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlarms(s, schemas.PutScalingPolicyResponse_Alarms, v.Alarms)
+	if v.Alarms != nil {
+		serializeAlarms(s, schemas.PutScalingPolicyResponse_Alarms, v.Alarms)
+	}
 	if v.PolicyARN != nil {
 		s.WriteString(schemas.PutScalingPolicyResponse_PolicyARN, *v.PolicyARN)
 	}

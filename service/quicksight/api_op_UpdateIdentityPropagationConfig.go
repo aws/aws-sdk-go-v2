@@ -58,7 +58,9 @@ func (v *UpdateIdentityPropagationConfigInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateIdentityPropagationConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizedTargetsList(s, schemas.UpdateIdentityPropagationConfigRequest_AuthorizedTargets, v.AuthorizedTargets)
+	if v.AuthorizedTargets != nil {
+		serializeAuthorizedTargetsList(s, schemas.UpdateIdentityPropagationConfigRequest_AuthorizedTargets, v.AuthorizedTargets)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateIdentityPropagationConfigRequest_AwsAccountId, *v.AwsAccountId)
 	}

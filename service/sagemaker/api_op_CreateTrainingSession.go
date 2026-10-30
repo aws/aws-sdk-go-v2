@@ -117,7 +117,9 @@ func (v *CreateTrainingSessionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateTrainingSessionRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateTrainingSessionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTrainingSessionRequest_Tags, v.Tags)
+	}
 	if v.TrainingSessionName != nil {
 		s.WriteString(schemas.CreateTrainingSessionRequest_TrainingSessionName, *v.TrainingSessionName)
 	}

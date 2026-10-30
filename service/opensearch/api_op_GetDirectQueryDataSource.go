@@ -99,11 +99,15 @@ func (v *GetDirectQueryDataSourceOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.DataSourceName != nil {
 		s.WriteString(schemas.GetDirectQueryDataSourceResponse_DataSourceName, *v.DataSourceName)
 	}
-	serializeDirectQueryDataSourceType(s, schemas.GetDirectQueryDataSourceResponse_DataSourceType, v.DataSourceType)
+	if v.DataSourceType != nil {
+		serializeDirectQueryDataSourceType(s, schemas.GetDirectQueryDataSourceResponse_DataSourceType, v.DataSourceType)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetDirectQueryDataSourceResponse_Description, *v.Description)
 	}
-	serializeDirectQueryOpenSearchARNList(s, schemas.GetDirectQueryDataSourceResponse_OpenSearchArns, v.OpenSearchArns)
+	if v.OpenSearchArns != nil {
+		serializeDirectQueryOpenSearchARNList(s, schemas.GetDirectQueryDataSourceResponse_OpenSearchArns, v.OpenSearchArns)
+	}
 }
 func (v *GetDirectQueryDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDirectQueryDataSourceResponse, func(s *smithy.Schema) error {

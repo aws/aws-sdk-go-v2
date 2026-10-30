@@ -61,7 +61,9 @@ func (v *ListNodesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNodeFilterList(s, schemas.ListNodesRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeNodeFilterList(s, schemas.ListNodesRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListNodesRequest_MaxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *ListNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNodesResult_NextToken, *v.NextToken)
 	}
-	serializeNodeList(s, schemas.ListNodesResult_Nodes, v.Nodes)
+	if v.Nodes != nil {
+		serializeNodeList(s, schemas.ListNodesResult_Nodes, v.Nodes)
+	}
 }
 func (v *ListNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListNodesResult, func(s *smithy.Schema) error {

@@ -118,8 +118,12 @@ func (v *SearchIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchIndexResponse_nextToken, *v.NextToken)
 	}
-	serializeThingGroupDocumentList(s, schemas.SearchIndexResponse_thingGroups, v.ThingGroups)
-	serializeThingDocumentList(s, schemas.SearchIndexResponse_things, v.Things)
+	if v.ThingGroups != nil {
+		serializeThingGroupDocumentList(s, schemas.SearchIndexResponse_thingGroups, v.ThingGroups)
+	}
+	if v.Things != nil {
+		serializeThingDocumentList(s, schemas.SearchIndexResponse_things, v.Things)
+	}
 }
 func (v *SearchIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchIndexResponse, func(s *smithy.Schema) error {

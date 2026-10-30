@@ -123,7 +123,9 @@ func (v *UpdateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomeEfsFileSystemCreation != "" {
 		s.WriteString(schemas.UpdateDomainRequest_HomeEfsFileSystemCreation, string(v.HomeEfsFileSystemCreation))
 	}
-	serializeSubnets(s, schemas.UpdateDomainRequest_SubnetIds, v.SubnetIds)
+	if v.SubnetIds != nil {
+		serializeSubnets(s, schemas.UpdateDomainRequest_SubnetIds, v.SubnetIds)
+	}
 	if v.TagPropagation != "" {
 		s.WriteString(schemas.UpdateDomainRequest_TagPropagation, string(v.TagPropagation))
 	}

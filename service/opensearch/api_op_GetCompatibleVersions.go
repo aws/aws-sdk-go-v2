@@ -69,7 +69,9 @@ func (v *GetCompatibleVersionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetCompatibleVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompatibleVersionsList(s, schemas.GetCompatibleVersionsResponse_CompatibleVersions, v.CompatibleVersions)
+	if v.CompatibleVersions != nil {
+		serializeCompatibleVersionsList(s, schemas.GetCompatibleVersionsResponse_CompatibleVersions, v.CompatibleVersions)
+	}
 }
 func (v *GetCompatibleVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetCompatibleVersionsResponse, func(s *smithy.Schema) error {

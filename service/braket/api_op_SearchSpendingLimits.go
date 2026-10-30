@@ -54,7 +54,9 @@ func (v *SearchSpendingLimitsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchSpendingLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchSpendingLimitsFilterList(s, schemas.SearchSpendingLimitsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeSearchSpendingLimitsFilterList(s, schemas.SearchSpendingLimitsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchSpendingLimitsRequest_maxResults, *v.MaxResults)
 	}
@@ -90,7 +92,9 @@ func (v *SearchSpendingLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchSpendingLimitsResponse_nextToken, *v.NextToken)
 	}
-	serializeSpendingLimitSummaryList(s, schemas.SearchSpendingLimitsResponse_spendingLimits, v.SpendingLimits)
+	if v.SpendingLimits != nil {
+		serializeSpendingLimitSummaryList(s, schemas.SearchSpendingLimitsResponse_spendingLimits, v.SpendingLimits)
+	}
 }
 func (v *SearchSpendingLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchSpendingLimitsResponse, func(s *smithy.Schema) error {

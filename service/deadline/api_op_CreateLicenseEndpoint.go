@@ -65,9 +65,15 @@ func (v *CreateLicenseEndpointInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateLicenseEndpointRequest_clientToken, *v.ClientToken)
 	}
-	serializeSecurityGroupIdList(s, schemas.CreateLicenseEndpointRequest_securityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIdList(s, schemas.CreateLicenseEndpointRequest_subnetIds, v.SubnetIds)
-	serializeTags(s, schemas.CreateLicenseEndpointRequest_tags, v.Tags)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIdList(s, schemas.CreateLicenseEndpointRequest_securityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIdList(s, schemas.CreateLicenseEndpointRequest_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateLicenseEndpointRequest_tags, v.Tags)
+	}
 	if v.VpcId != nil {
 		s.WriteString(schemas.CreateLicenseEndpointRequest_vpcId, *v.VpcId)
 	}

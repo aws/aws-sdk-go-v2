@@ -167,8 +167,12 @@ func (v *GetEventPredictionMetadataOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.EntityType != nil {
 		s.WriteString(schemas.GetEventPredictionMetadataResult_entityType, *v.EntityType)
 	}
-	serializeListOfEvaluatedExternalModels(s, schemas.GetEventPredictionMetadataResult_evaluatedExternalModels, v.EvaluatedExternalModels)
-	serializeListOfEvaluatedModelVersions(s, schemas.GetEventPredictionMetadataResult_evaluatedModelVersions, v.EvaluatedModelVersions)
+	if v.EvaluatedExternalModels != nil {
+		serializeListOfEvaluatedExternalModels(s, schemas.GetEventPredictionMetadataResult_evaluatedExternalModels, v.EvaluatedExternalModels)
+	}
+	if v.EvaluatedModelVersions != nil {
+		serializeListOfEvaluatedModelVersions(s, schemas.GetEventPredictionMetadataResult_evaluatedModelVersions, v.EvaluatedModelVersions)
+	}
 	if v.EventId != nil {
 		s.WriteString(schemas.GetEventPredictionMetadataResult_eventId, *v.EventId)
 	}
@@ -178,15 +182,21 @@ func (v *GetEventPredictionMetadataOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.EventTypeName != nil {
 		s.WriteString(schemas.GetEventPredictionMetadataResult_eventTypeName, *v.EventTypeName)
 	}
-	serializeListOfEventVariableSummaries(s, schemas.GetEventPredictionMetadataResult_eventVariables, v.EventVariables)
-	serializeListOfStrings(s, schemas.GetEventPredictionMetadataResult_outcomes, v.Outcomes)
+	if v.EventVariables != nil {
+		serializeListOfEventVariableSummaries(s, schemas.GetEventPredictionMetadataResult_eventVariables, v.EventVariables)
+	}
+	if v.Outcomes != nil {
+		serializeListOfStrings(s, schemas.GetEventPredictionMetadataResult_outcomes, v.Outcomes)
+	}
 	if v.PredictionTimestamp != nil {
 		s.WriteString(schemas.GetEventPredictionMetadataResult_predictionTimestamp, *v.PredictionTimestamp)
 	}
 	if v.RuleExecutionMode != "" {
 		s.WriteString(schemas.GetEventPredictionMetadataResult_ruleExecutionMode, string(v.RuleExecutionMode))
 	}
-	serializeEvaluatedRuleList(s, schemas.GetEventPredictionMetadataResult_rules, v.Rules)
+	if v.Rules != nil {
+		serializeEvaluatedRuleList(s, schemas.GetEventPredictionMetadataResult_rules, v.Rules)
+	}
 }
 func (v *GetEventPredictionMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetEventPredictionMetadataResult, func(s *smithy.Schema) error {

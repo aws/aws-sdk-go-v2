@@ -84,7 +84,9 @@ func (v *GetDataAutomationLibraryEntityOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *GetDataAutomationLibraryEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityDetails(s, schemas.GetDataAutomationLibraryEntityResponse_entity, v.Entity)
+	if v.Entity != nil {
+		serializeEntityDetails(s, schemas.GetDataAutomationLibraryEntityResponse_entity, v.Entity)
+	}
 }
 func (v *GetDataAutomationLibraryEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDataAutomationLibraryEntityResponse, func(s *smithy.Schema) error {

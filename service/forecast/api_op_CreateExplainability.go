@@ -210,7 +210,9 @@ func (v *CreateExplainabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartDateTime != nil {
 		s.WriteString(schemas.CreateExplainabilityRequest_StartDateTime, *v.StartDateTime)
 	}
-	serializeTags(s, schemas.CreateExplainabilityRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateExplainabilityRequest_Tags, v.Tags)
+	}
 }
 
 type CreateExplainabilityOutput struct {

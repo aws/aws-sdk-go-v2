@@ -247,7 +247,9 @@ func (v *GetApprovalTeamResponseApprover) SerializeMembers(s smithy.ShapeSeriali
 	if v.LastActivityTime != nil {
 		s.WriteTime(schemas.GetApprovalTeamResponseApprover_LastActivityTime, *v.LastActivityTime)
 	}
-	serializeMfaMethods(s, schemas.GetApprovalTeamResponseApprover_MfaMethods, v.MfaMethods)
+	if v.MfaMethods != nil {
+		serializeMfaMethods(s, schemas.GetApprovalTeamResponseApprover_MfaMethods, v.MfaMethods)
+	}
 	if v.PendingBaselineSessionArn != nil {
 		s.WriteString(schemas.GetApprovalTeamResponseApprover_PendingBaselineSessionArn, *v.PendingBaselineSessionArn)
 	}
@@ -573,7 +575,9 @@ func (v *IdentitySourceForList) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IdentitySourceArn != nil {
 		s.WriteString(schemas.IdentitySourceForList_IdentitySourceArn, *v.IdentitySourceArn)
 	}
-	serializeIdentitySourceParametersForList(s, schemas.IdentitySourceForList_IdentitySourceParameters, v.IdentitySourceParameters)
+	if v.IdentitySourceParameters != nil {
+		serializeIdentitySourceParametersForList(s, schemas.IdentitySourceForList_IdentitySourceParameters, v.IdentitySourceParameters)
+	}
 	if v.IdentitySourceType != "" {
 		s.WriteString(schemas.IdentitySourceForList_IdentitySourceType, string(v.IdentitySourceType))
 	}
@@ -768,7 +772,9 @@ func (v *ListApprovalTeamsResponseApprovalTeam) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListApprovalTeamsResponseApprovalTeam) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategyResponse(s, schemas.ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy, v.ApprovalStrategy)
+	if v.ApprovalStrategy != nil {
+		serializeApprovalStrategyResponse(s, schemas.ListApprovalTeamsResponseApprovalTeam_ApprovalStrategy, v.ApprovalStrategy)
+	}
 	if v.Arn != nil {
 		s.WriteString(schemas.ListApprovalTeamsResponseApprovalTeam_Arn, *v.Arn)
 	}
@@ -971,7 +977,9 @@ func (v *ListSessionsResponseSession) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ActionName != nil {
 		s.WriteString(schemas.ListSessionsResponseSession_ActionName, *v.ActionName)
 	}
-	serializeAdditionalSecurityRequirements(s, schemas.ListSessionsResponseSession_AdditionalSecurityRequirements, v.AdditionalSecurityRequirements)
+	if v.AdditionalSecurityRequirements != nil {
+		serializeAdditionalSecurityRequirements(s, schemas.ListSessionsResponseSession_AdditionalSecurityRequirements, v.AdditionalSecurityRequirements)
+	}
 	if v.ApprovalTeamArn != nil {
 		s.WriteString(schemas.ListSessionsResponseSession_ApprovalTeamArn, *v.ApprovalTeamArn)
 	}
@@ -1224,8 +1232,12 @@ func (v *PendingUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PendingUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategyResponse(s, schemas.PendingUpdate_ApprovalStrategy, v.ApprovalStrategy)
-	serializeGetApprovalTeamResponseApprovers(s, schemas.PendingUpdate_Approvers, v.Approvers)
+	if v.ApprovalStrategy != nil {
+		serializeApprovalStrategyResponse(s, schemas.PendingUpdate_ApprovalStrategy, v.ApprovalStrategy)
+	}
+	if v.Approvers != nil {
+		serializeGetApprovalTeamResponseApprovers(s, schemas.PendingUpdate_Approvers, v.Approvers)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.PendingUpdate_Description, *v.Description)
 	}

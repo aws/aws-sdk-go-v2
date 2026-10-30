@@ -63,7 +63,9 @@ func (v *StartProtectedJobInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StartProtectedJobInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProtectedJobComputeConfiguration(s, schemas.StartProtectedJobInput_computeConfiguration, v.ComputeConfiguration)
+	if v.ComputeConfiguration != nil {
+		serializeProtectedJobComputeConfiguration(s, schemas.StartProtectedJobInput_computeConfiguration, v.ComputeConfiguration)
+	}
 	if v.JobComputePayerAccountId != nil {
 		s.WriteString(schemas.StartProtectedJobInput_jobComputePayerAccountId, *v.JobComputePayerAccountId)
 	}

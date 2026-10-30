@@ -157,7 +157,9 @@ func (v *StartAssetBundleExportJobInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.IncludeTags != false {
 		s.WriteBool(schemas.StartAssetBundleExportJobRequest_IncludeTags, v.IncludeTags)
 	}
-	serializeAssetBundleResourceArns(s, schemas.StartAssetBundleExportJobRequest_ResourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeAssetBundleResourceArns(s, schemas.StartAssetBundleExportJobRequest_ResourceArns, v.ResourceArns)
+	}
 	if v.ValidationStrategy != nil {
 		s.WriteStruct(schemas.StartAssetBundleExportJobRequest_ValidationStrategy)
 		v.ValidationStrategy.SerializeMembers(s)

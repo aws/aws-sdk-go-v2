@@ -76,7 +76,9 @@ func (v *CreateUploadJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainName != nil {
 		s.WriteString(schemas.CreateUploadJobRequest_DomainName, *v.DomainName)
 	}
-	serializeFieldMap(s, schemas.CreateUploadJobRequest_Fields, v.Fields)
+	if v.Fields != nil {
+		serializeFieldMap(s, schemas.CreateUploadJobRequest_Fields, v.Fields)
+	}
 	if v.UniqueKey != nil {
 		s.WriteString(schemas.CreateUploadJobRequest_UniqueKey, *v.UniqueKey)
 	}

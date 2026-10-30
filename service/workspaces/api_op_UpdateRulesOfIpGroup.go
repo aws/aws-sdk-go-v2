@@ -52,7 +52,9 @@ func (v *UpdateRulesOfIpGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GroupId != nil {
 		s.WriteString(schemas.UpdateRulesOfIpGroupRequest_GroupId, *v.GroupId)
 	}
-	serializeIpRuleList(s, schemas.UpdateRulesOfIpGroupRequest_UserRules, v.UserRules)
+	if v.UserRules != nil {
+		serializeIpRuleList(s, schemas.UpdateRulesOfIpGroupRequest_UserRules, v.UserRules)
+	}
 }
 
 type UpdateRulesOfIpGroupOutput struct {

@@ -116,7 +116,9 @@ func (v *ListImportedModelsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImportedModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportedModelSummaryList(s, schemas.ListImportedModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.ModelSummaries != nil {
+		serializeImportedModelSummaryList(s, schemas.ListImportedModelsResponse_modelSummaries, v.ModelSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImportedModelsResponse_nextToken, *v.NextToken)
 	}

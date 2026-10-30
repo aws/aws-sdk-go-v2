@@ -101,7 +101,9 @@ func (v *UpdateCrawlerInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CatalogId != nil {
 		s.WriteString(schemas.UpdateCrawlerRequest_CatalogId, *v.CatalogId)
 	}
-	serializeClassifierNameList(s, schemas.UpdateCrawlerRequest_Classifiers, v.Classifiers)
+	if v.Classifiers != nil {
+		serializeClassifierNameList(s, schemas.UpdateCrawlerRequest_Classifiers, v.Classifiers)
+	}
 	if v.Configuration != nil {
 		s.WriteString(schemas.UpdateCrawlerRequest_Configuration, *v.Configuration)
 	}

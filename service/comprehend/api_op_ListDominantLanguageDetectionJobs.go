@@ -84,7 +84,9 @@ func (v *ListDominantLanguageDetectionJobsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListDominantLanguageDetectionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDominantLanguageDetectionJobPropertiesList(s, schemas.ListDominantLanguageDetectionJobsResponse_DominantLanguageDetectionJobPropertiesList, v.DominantLanguageDetectionJobPropertiesList)
+	if v.DominantLanguageDetectionJobPropertiesList != nil {
+		serializeDominantLanguageDetectionJobPropertiesList(s, schemas.ListDominantLanguageDetectionJobsResponse_DominantLanguageDetectionJobPropertiesList, v.DominantLanguageDetectionJobPropertiesList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDominantLanguageDetectionJobsResponse_NextToken, *v.NextToken)
 	}

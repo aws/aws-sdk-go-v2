@@ -104,7 +104,9 @@ func (v *ListUserPoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListUserPoolsResponse_NextToken, *v.NextToken)
 	}
-	serializeUserPoolListType(s, schemas.ListUserPoolsResponse_UserPools, v.UserPools)
+	if v.UserPools != nil {
+		serializeUserPoolListType(s, schemas.ListUserPoolsResponse_UserPools, v.UserPools)
+	}
 }
 func (v *ListUserPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListUserPoolsResponse, func(s *smithy.Schema) error {

@@ -100,7 +100,9 @@ func (v *ListTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTagsResponse_NextToken, *v.NextToken)
 	}
-	serializeTagList(s, schemas.ListTagsResponse_TagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.ListTagsResponse_TagList, v.TagList)
+	}
 }
 func (v *ListTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTagsResponse, func(s *smithy.Schema) error {

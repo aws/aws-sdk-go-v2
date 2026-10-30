@@ -90,7 +90,9 @@ func (v *ListEdgeAgentConfigurationsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListEdgeAgentConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListEdgeAgentConfigurationsEdgeConfigList(s, schemas.ListEdgeAgentConfigurationsOutput_EdgeConfigs, v.EdgeConfigs)
+	if v.EdgeConfigs != nil {
+		serializeListEdgeAgentConfigurationsEdgeConfigList(s, schemas.ListEdgeAgentConfigurationsOutput_EdgeConfigs, v.EdgeConfigs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEdgeAgentConfigurationsOutput_NextToken, *v.NextToken)
 	}

@@ -195,7 +195,9 @@ func (v *DescribeBrokerOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfActionRequired(s, schemas.DescribeBrokerResponse_ActionsRequired, v.ActionsRequired)
+	if v.ActionsRequired != nil {
+		serialize__listOfActionRequired(s, schemas.DescribeBrokerResponse_ActionsRequired, v.ActionsRequired)
+	}
 	if v.AuthenticationStrategy != "" {
 		s.WriteString(schemas.DescribeBrokerResponse_AuthenticationStrategy, string(v.AuthenticationStrategy))
 	}
@@ -208,7 +210,9 @@ func (v *DescribeBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BrokerId != nil {
 		s.WriteString(schemas.DescribeBrokerResponse_BrokerId, *v.BrokerId)
 	}
-	serialize__listOfBrokerInstance(s, schemas.DescribeBrokerResponse_BrokerInstances, v.BrokerInstances)
+	if v.BrokerInstances != nil {
+		serialize__listOfBrokerInstance(s, schemas.DescribeBrokerResponse_BrokerInstances, v.BrokerInstances)
+	}
 	if v.BrokerName != nil {
 		s.WriteString(schemas.DescribeBrokerResponse_BrokerName, *v.BrokerName)
 	}
@@ -285,23 +289,33 @@ func (v *DescribeBrokerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PendingLdapServerMetadata.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serialize__listOf__string(s, schemas.DescribeBrokerResponse_PendingSecurityGroups, v.PendingSecurityGroups)
+	if v.PendingSecurityGroups != nil {
+		serialize__listOf__string(s, schemas.DescribeBrokerResponse_PendingSecurityGroups, v.PendingSecurityGroups)
+	}
 	if v.PendingStorageSize != nil {
 		s.WriteInt32(schemas.DescribeBrokerResponse_PendingStorageSize, *v.PendingStorageSize)
 	}
 	if v.PubliclyAccessible != nil {
 		s.WriteBool(schemas.DescribeBrokerResponse_PubliclyAccessible, *v.PubliclyAccessible)
 	}
-	serialize__listOf__string(s, schemas.DescribeBrokerResponse_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serialize__listOf__string(s, schemas.DescribeBrokerResponse_SecurityGroups, v.SecurityGroups)
+	}
 	if v.StorageSize != nil {
 		s.WriteInt32(schemas.DescribeBrokerResponse_StorageSize, *v.StorageSize)
 	}
 	if v.StorageType != "" {
 		s.WriteString(schemas.DescribeBrokerResponse_StorageType, string(v.StorageType))
 	}
-	serialize__listOf__string(s, schemas.DescribeBrokerResponse_SubnetIds, v.SubnetIds)
-	serialize__mapOf__string(s, schemas.DescribeBrokerResponse_Tags, v.Tags)
-	serialize__listOfUserSummary(s, schemas.DescribeBrokerResponse_Users, v.Users)
+	if v.SubnetIds != nil {
+		serialize__listOf__string(s, schemas.DescribeBrokerResponse_SubnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.DescribeBrokerResponse_Tags, v.Tags)
+	}
+	if v.Users != nil {
+		serialize__listOfUserSummary(s, schemas.DescribeBrokerResponse_Users, v.Users)
+	}
 }
 func (v *DescribeBrokerOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeBrokerResponse, func(s *smithy.Schema) error {

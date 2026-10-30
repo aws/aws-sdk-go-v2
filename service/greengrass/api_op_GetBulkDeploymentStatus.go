@@ -92,11 +92,15 @@ func (v *GetBulkDeploymentStatusOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.CreatedAt != nil {
 		s.WriteString(schemas.GetBulkDeploymentStatusResponse_CreatedAt, *v.CreatedAt)
 	}
-	serializeErrorDetails(s, schemas.GetBulkDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetails(s, schemas.GetBulkDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	}
 	if v.ErrorMessage != nil {
 		s.WriteString(schemas.GetBulkDeploymentStatusResponse_ErrorMessage, *v.ErrorMessage)
 	}
-	serializeTags(s, schemas.GetBulkDeploymentStatusResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.GetBulkDeploymentStatusResponse_tags, v.Tags)
+	}
 }
 func (v *GetBulkDeploymentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBulkDeploymentStatusResponse, func(s *smithy.Schema) error {

@@ -94,7 +94,9 @@ func (v *ListSegmentSubscriptionEventsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListSegmentSubscriptionEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSubscriptionEventsList(s, schemas.ListSegmentSubscriptionEventsResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeSubscriptionEventsList(s, schemas.ListSegmentSubscriptionEventsResponse_Events, v.Events)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSegmentSubscriptionEventsResponse_NextToken, *v.NextToken)
 	}

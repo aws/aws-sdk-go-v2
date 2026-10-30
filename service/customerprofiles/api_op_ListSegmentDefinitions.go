@@ -82,7 +82,9 @@ func (v *ListSegmentDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListSegmentDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSegmentDefinitionsList(s, schemas.ListSegmentDefinitionsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeSegmentDefinitionsList(s, schemas.ListSegmentDefinitionsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListSegmentDefinitionsResponse_NextToken, *v.NextToken)
 	}

@@ -71,7 +71,9 @@ func (v *ListProvisionedCapacityOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListProvisionedCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeProvisionedCapacityList(s, schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList, v.ProvisionedCapacityList)
+	if v.ProvisionedCapacityList != nil {
+		serializeProvisionedCapacityList(s, schemas.ListProvisionedCapacityOutput_ProvisionedCapacityList, v.ProvisionedCapacityList)
+	}
 }
 func (v *ListProvisionedCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListProvisionedCapacityOutput, func(s *smithy.Schema) error {

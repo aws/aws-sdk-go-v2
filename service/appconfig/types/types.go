@@ -258,7 +258,9 @@ func (v *AppliedExtension) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExtensionId != nil {
 		s.WriteString(schemas.AppliedExtension_ExtensionId, *v.ExtensionId)
 	}
-	serializeParameterValueMap(s, schemas.AppliedExtension_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterValueMap(s, schemas.AppliedExtension_Parameters, v.Parameters)
+	}
 	if v.VersionNumber != 0 {
 		s.WriteInt32(schemas.AppliedExtension_VersionNumber, v.VersionNumber)
 	}
@@ -449,7 +451,9 @@ func (v *ConfigurationProfileSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Type != nil {
 		s.WriteString(schemas.ConfigurationProfileSummary_Type, *v.Type)
 	}
-	serializeValidatorTypeList(s, schemas.ConfigurationProfileSummary_ValidatorTypes, v.ValidatorTypes)
+	if v.ValidatorTypes != nil {
+		serializeValidatorTypeList(s, schemas.ConfigurationProfileSummary_ValidatorTypes, v.ValidatorTypes)
+	}
 }
 func (v *ConfigurationProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ConfigurationProfileSummary, func(s *smithy.Schema) error {
@@ -571,7 +575,9 @@ func (v *DeploymentEvent) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeploymentEvent) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionInvocations(s, schemas.DeploymentEvent_ActionInvocations, v.ActionInvocations)
+	if v.ActionInvocations != nil {
+		serializeActionInvocations(s, schemas.DeploymentEvent_ActionInvocations, v.ActionInvocations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.DeploymentEvent_Description, *v.Description)
 	}
@@ -635,8 +641,12 @@ func (v *DeploymentParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeploymentParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDynamicParameterMap(s, schemas.DeploymentParameters_DynamicExtensionParameters, v.DynamicExtensionParameters)
-	serializeTagMap(s, schemas.DeploymentParameters_Tags, v.Tags)
+	if v.DynamicExtensionParameters != nil {
+		serializeDynamicParameterMap(s, schemas.DeploymentParameters_DynamicExtensionParameters, v.DynamicExtensionParameters)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.DeploymentParameters_Tags, v.Tags)
+	}
 }
 func (v *DeploymentParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeploymentParameters, func(s *smithy.Schema) error {
@@ -950,7 +960,9 @@ func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Environment_Id, *v.Id)
 	}
-	serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	if v.Monitors != nil {
+		serializeMonitorList(s, schemas.Environment_Monitors, v.Monitors)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.Environment_Name, *v.Name)
 	}
@@ -1072,7 +1084,9 @@ func (v *ExperimentDefinitionSnapshot) SerializeMembers(s smithy.ShapeSerializer
 	if v.Name != nil {
 		s.WriteString(schemas.ExperimentDefinitionSnapshot_Name, *v.Name)
 	}
-	serializeTreatmentList(s, schemas.ExperimentDefinitionSnapshot_Treatments, v.Treatments)
+	if v.Treatments != nil {
+		serializeTreatmentList(s, schemas.ExperimentDefinitionSnapshot_Treatments, v.Treatments)
+	}
 }
 func (v *ExperimentDefinitionSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ExperimentDefinitionSnapshot, func(s *smithy.Schema) error {
@@ -1284,7 +1298,9 @@ func (v *ExperimentRunEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OccurredAt != nil {
 		s.WriteTime(schemas.ExperimentRunEvent_OccurredAt, *v.OccurredAt)
 	}
-	serializeTreatmentOverrides(s, schemas.ExperimentRunEvent_TreatmentOverrides, v.TreatmentOverrides)
+	if v.TreatmentOverrides != nil {
+		serializeTreatmentOverrides(s, schemas.ExperimentRunEvent_TreatmentOverrides, v.TreatmentOverrides)
+	}
 	if v.TriggeredBy != "" {
 		s.WriteString(schemas.ExperimentRunEvent_TriggeredBy, string(v.TriggeredBy))
 	}
@@ -1605,7 +1621,9 @@ func (v *FlagValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FlagValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeValueMap(s, schemas.FlagValue_AttributeValues, v.AttributeValues)
+	if v.AttributeValues != nil {
+		serializeAttributeValueMap(s, schemas.FlagValue_AttributeValues, v.AttributeValues)
+	}
 	s.WriteBool(schemas.FlagValue_Enabled, v.Enabled)
 }
 func (v *FlagValue) Deserialize(d smithy.ShapeDeserializer) error {

@@ -54,7 +54,9 @@ func (v *CreateLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AuthenticationToken != nil {
 		s.WriteString(schemas.CreateLabelsRequest_AuthenticationToken, *v.AuthenticationToken)
 	}
-	serializeSharedLabels(s, schemas.CreateLabelsRequest_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeSharedLabels(s, schemas.CreateLabelsRequest_Labels, v.Labels)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.CreateLabelsRequest_ResourceId, *v.ResourceId)
 	}

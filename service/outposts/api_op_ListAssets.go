@@ -74,8 +74,12 @@ func (v *ListAssetsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetTypeList(s, schemas.ListAssetsInput_AssetTypeFilter, v.AssetTypeFilter)
-	serializeHostIdList(s, schemas.ListAssetsInput_HostIdFilter, v.HostIdFilter)
+	if v.AssetTypeFilter != nil {
+		serializeAssetTypeList(s, schemas.ListAssetsInput_AssetTypeFilter, v.AssetTypeFilter)
+	}
+	if v.HostIdFilter != nil {
+		serializeHostIdList(s, schemas.ListAssetsInput_HostIdFilter, v.HostIdFilter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListAssetsInput_MaxResults, *v.MaxResults)
 	}
@@ -85,7 +89,9 @@ func (v *ListAssetsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OutpostIdentifier != nil {
 		s.WriteString(schemas.ListAssetsInput_OutpostIdentifier, *v.OutpostIdentifier)
 	}
-	serializeStatusList(s, schemas.ListAssetsInput_StatusFilter, v.StatusFilter)
+	if v.StatusFilter != nil {
+		serializeStatusList(s, schemas.ListAssetsInput_StatusFilter, v.StatusFilter)
+	}
 }
 
 type ListAssetsOutput struct {
@@ -109,7 +115,9 @@ func (v *ListAssetsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAssetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetListDefinition(s, schemas.ListAssetsOutput_Assets, v.Assets)
+	if v.Assets != nil {
+		serializeAssetListDefinition(s, schemas.ListAssetsOutput_Assets, v.Assets)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAssetsOutput_NextToken, *v.NextToken)
 	}

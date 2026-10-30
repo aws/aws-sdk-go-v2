@@ -100,7 +100,9 @@ func (v *ListImportErrorsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImportErrorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportErrors(s, schemas.ListImportErrorsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeImportErrors(s, schemas.ListImportErrorsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImportErrorsResponse_nextToken, *v.NextToken)
 	}

@@ -100,7 +100,9 @@ func (v *ListHumanTaskUisOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListHumanTaskUisOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHumanTaskUiSummaries(s, schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries, v.HumanTaskUiSummaries)
+	if v.HumanTaskUiSummaries != nil {
+		serializeHumanTaskUiSummaries(s, schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries, v.HumanTaskUiSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListHumanTaskUisResponse_NextToken, *v.NextToken)
 	}

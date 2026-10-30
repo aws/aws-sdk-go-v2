@@ -110,7 +110,9 @@ func (v *ListStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStepsResponse_nextToken, *v.NextToken)
 	}
-	serializeStepSummaries(s, schemas.ListStepsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeStepSummaries(s, schemas.ListStepsResponse_steps, v.Steps)
+	}
 }
 func (v *ListStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListStepsResponse, func(s *smithy.Schema) error {

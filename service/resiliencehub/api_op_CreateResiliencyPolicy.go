@@ -85,14 +85,18 @@ func (v *CreateResiliencyPolicyInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.DataLocationConstraint != "" {
 		s.WriteString(schemas.CreateResiliencyPolicyRequest_dataLocationConstraint, string(v.DataLocationConstraint))
 	}
-	serializeDisruptionPolicy(s, schemas.CreateResiliencyPolicyRequest_policy, v.Policy)
+	if v.Policy != nil {
+		serializeDisruptionPolicy(s, schemas.CreateResiliencyPolicyRequest_policy, v.Policy)
+	}
 	if v.PolicyDescription != nil {
 		s.WriteString(schemas.CreateResiliencyPolicyRequest_policyDescription, *v.PolicyDescription)
 	}
 	if v.PolicyName != nil {
 		s.WriteString(schemas.CreateResiliencyPolicyRequest_policyName, *v.PolicyName)
 	}
-	serializeTagMap(s, schemas.CreateResiliencyPolicyRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateResiliencyPolicyRequest_tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.CreateResiliencyPolicyRequest_tier, string(v.Tier))
 	}

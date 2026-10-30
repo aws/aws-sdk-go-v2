@@ -55,15 +55,21 @@ func (v *DescribeVerifiedDestinationNumbersInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeVerifiedDestinationNumbersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDestinationPhoneNumberList(s, schemas.DescribeVerifiedDestinationNumbersRequest_DestinationPhoneNumbers, v.DestinationPhoneNumbers)
-	serializeVerifiedDestinationNumberFilterList(s, schemas.DescribeVerifiedDestinationNumbersRequest_Filters, v.Filters)
+	if v.DestinationPhoneNumbers != nil {
+		serializeDestinationPhoneNumberList(s, schemas.DescribeVerifiedDestinationNumbersRequest_DestinationPhoneNumbers, v.DestinationPhoneNumbers)
+	}
+	if v.Filters != nil {
+		serializeVerifiedDestinationNumberFilterList(s, schemas.DescribeVerifiedDestinationNumbersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeVerifiedDestinationNumbersRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeVerifiedDestinationNumbersRequest_NextToken, *v.NextToken)
 	}
-	serializeVerifiedDestinationNumberIdList(s, schemas.DescribeVerifiedDestinationNumbersRequest_VerifiedDestinationNumberIds, v.VerifiedDestinationNumberIds)
+	if v.VerifiedDestinationNumberIds != nil {
+		serializeVerifiedDestinationNumberIdList(s, schemas.DescribeVerifiedDestinationNumbersRequest_VerifiedDestinationNumberIds, v.VerifiedDestinationNumberIds)
+	}
 }
 
 type DescribeVerifiedDestinationNumbersOutput struct {
@@ -93,7 +99,9 @@ func (v *DescribeVerifiedDestinationNumbersOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeVerifiedDestinationNumbersResult_NextToken, *v.NextToken)
 	}
-	serializeVerifiedDestinationNumberInformationList(s, schemas.DescribeVerifiedDestinationNumbersResult_VerifiedDestinationNumbers, v.VerifiedDestinationNumbers)
+	if v.VerifiedDestinationNumbers != nil {
+		serializeVerifiedDestinationNumberInformationList(s, schemas.DescribeVerifiedDestinationNumbersResult_VerifiedDestinationNumbers, v.VerifiedDestinationNumbers)
+	}
 }
 func (v *DescribeVerifiedDestinationNumbersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeVerifiedDestinationNumbersResult, func(s *smithy.Schema) error {

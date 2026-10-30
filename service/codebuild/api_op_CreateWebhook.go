@@ -105,7 +105,9 @@ func (v *CreateWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BuildType != "" {
 		s.WriteString(schemas.CreateWebhookInput_buildType, string(v.BuildType))
 	}
-	serializeFilterGroups(s, schemas.CreateWebhookInput_filterGroups, v.FilterGroups)
+	if v.FilterGroups != nil {
+		serializeFilterGroups(s, schemas.CreateWebhookInput_filterGroups, v.FilterGroups)
+	}
 	if v.ManualCreation != nil {
 		s.WriteBool(schemas.CreateWebhookInput_manualCreation, *v.ManualCreation)
 	}

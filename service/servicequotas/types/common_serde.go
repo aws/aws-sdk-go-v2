@@ -7,9 +7,6 @@ import (
 )
 
 func serializeExcludedQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -18,9 +15,6 @@ func serializeExcludedQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema,
 }
 
 func serializeInputTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -29,9 +23,6 @@ func serializeInputTagKeys(s smithy.ShapeSerializer, schema *smithy.Schema, v []
 }
 
 func serializeInputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -42,9 +33,6 @@ func serializeInputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag
 }
 
 func serializeOutputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -55,9 +43,6 @@ func serializeOutputTags(s smithy.ShapeSerializer, schema *smithy.Schema, v []Ta
 }
 
 func serializeQuotaInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QuotaInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -68,9 +53,6 @@ func serializeQuotaInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v [
 }
 
 func serializeQuotaUtilizationInfoList(s smithy.ShapeSerializer, schema *smithy.Schema, v []QuotaUtilizationInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -81,9 +63,6 @@ func serializeQuotaUtilizationInfoList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeRequestedServiceQuotaChangeHistoryListDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v []RequestedServiceQuotaChange) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -94,9 +73,6 @@ func serializeRequestedServiceQuotaChangeHistoryListDefinition(s smithy.ShapeSer
 }
 
 func serializeServiceInfoListDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v []ServiceInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -107,9 +83,6 @@ func serializeServiceInfoListDefinition(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeServiceQuotaIncreaseRequestInTemplateList(s smithy.ShapeSerializer, schema *smithy.Schema, v []ServiceQuotaIncreaseRequestInTemplate) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -120,9 +93,6 @@ func serializeServiceQuotaIncreaseRequestInTemplateList(s smithy.ShapeSerializer
 }
 
 func serializeServiceQuotaListDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v []ServiceQuota) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -351,9 +321,6 @@ func deserializeServiceQuotaListDefinition(d smithy.ShapeDeserializer, s *smithy
 }
 
 func serializeExclusionList(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -363,9 +330,6 @@ func serializeExclusionList(s smithy.ShapeSerializer, schema *smithy.Schema, v m
 }
 
 func serializeExclusionQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string][]QuotaInfo) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)
@@ -375,9 +339,6 @@ func serializeExclusionQuotaList(s smithy.ShapeSerializer, schema *smithy.Schema
 }
 
 func serializeMetricDimensionsMapDefinition(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
-	if v == nil {
-		return
-	}
 	s.WriteMap(schema)
 	for k, vv := range v {
 		s.WriteKey(schema.MapKey(), k)

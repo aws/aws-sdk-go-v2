@@ -85,7 +85,9 @@ func (v *ListIndicesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIndicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIndices(s, schemas.ListIndicesResponse_indices, v.Indices)
+	if v.Indices != nil {
+		serializeIndices(s, schemas.ListIndicesResponse_indices, v.Indices)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIndicesResponse_nextToken, *v.NextToken)
 	}

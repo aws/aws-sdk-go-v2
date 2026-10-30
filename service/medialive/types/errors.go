@@ -421,7 +421,9 @@ func (v *UnprocessableEntityException) SerializeMembers(s smithy.ShapeSerializer
 	if v.Message != nil {
 		s.WriteString(schemas.UnprocessableEntityException_Message, *v.Message)
 	}
-	serialize__listOfValidationError(s, schemas.UnprocessableEntityException_ValidationErrors, v.ValidationErrors)
+	if v.ValidationErrors != nil {
+		serialize__listOfValidationError(s, schemas.UnprocessableEntityException_ValidationErrors, v.ValidationErrors)
+	}
 }
 func (v *UnprocessableEntityException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UnprocessableEntityException, func(s *smithy.Schema) error {

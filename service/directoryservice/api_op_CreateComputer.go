@@ -63,7 +63,9 @@ func (v *CreateComputerInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateComputerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.CreateComputerRequest_ComputerAttributes, v.ComputerAttributes)
+	if v.ComputerAttributes != nil {
+		serializeAttributes(s, schemas.CreateComputerRequest_ComputerAttributes, v.ComputerAttributes)
+	}
 	if v.ComputerName != nil {
 		s.WriteString(schemas.CreateComputerRequest_ComputerName, *v.ComputerName)
 	}

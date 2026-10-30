@@ -68,7 +68,9 @@ func (v *GetProvisionedProductOutputsInput) SerializeMembers(s smithy.ShapeSeria
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.GetProvisionedProductOutputsInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeOutputKeys(s, schemas.GetProvisionedProductOutputsInput_OutputKeys, v.OutputKeys)
+	if v.OutputKeys != nil {
+		serializeOutputKeys(s, schemas.GetProvisionedProductOutputsInput_OutputKeys, v.OutputKeys)
+	}
 	if v.PageSize != 0 {
 		s.WriteInt32(schemas.GetProvisionedProductOutputsInput_PageSize, v.PageSize)
 	}
@@ -110,7 +112,9 @@ func (v *GetProvisionedProductOutputsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetProvisionedProductOutputsOutput_NextPageToken, *v.NextPageToken)
 	}
-	serializeRecordOutputs(s, schemas.GetProvisionedProductOutputsOutput_Outputs, v.Outputs)
+	if v.Outputs != nil {
+		serializeRecordOutputs(s, schemas.GetProvisionedProductOutputsOutput_Outputs, v.Outputs)
+	}
 }
 func (v *GetProvisionedProductOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetProvisionedProductOutputsOutput, func(s *smithy.Schema) error {

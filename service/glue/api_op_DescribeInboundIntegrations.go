@@ -87,7 +87,9 @@ func (v *DescribeInboundIntegrationsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *DescribeInboundIntegrationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInboundIntegrationsList(s, schemas.DescribeInboundIntegrationsResponse_InboundIntegrations, v.InboundIntegrations)
+	if v.InboundIntegrations != nil {
+		serializeInboundIntegrationsList(s, schemas.DescribeInboundIntegrationsResponse_InboundIntegrations, v.InboundIntegrations)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeInboundIntegrationsResponse_Marker, *v.Marker)
 	}

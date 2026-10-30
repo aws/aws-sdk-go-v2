@@ -204,7 +204,9 @@ func (v *PutObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.PutObjectRequest_Key, *v.Key)
 	}
-	serializeMetadata(s, schemas.PutObjectRequest_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeMetadata(s, schemas.PutObjectRequest_Metadata, v.Metadata)
+	}
 	if v.ObjectLockLegalHoldStatus != nil {
 		s.WriteString(schemas.PutObjectRequest_ObjectLockLegalHoldStatus, *v.ObjectLockLegalHoldStatus)
 	}

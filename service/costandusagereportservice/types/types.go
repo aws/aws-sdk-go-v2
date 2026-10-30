@@ -88,8 +88,12 @@ func (v *ReportDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReportDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalArtifactList(s, schemas.ReportDefinition_AdditionalArtifacts, v.AdditionalArtifacts)
-	serializeSchemaElementList(s, schemas.ReportDefinition_AdditionalSchemaElements, v.AdditionalSchemaElements)
+	if v.AdditionalArtifacts != nil {
+		serializeAdditionalArtifactList(s, schemas.ReportDefinition_AdditionalArtifacts, v.AdditionalArtifacts)
+	}
+	if v.AdditionalSchemaElements != nil {
+		serializeSchemaElementList(s, schemas.ReportDefinition_AdditionalSchemaElements, v.AdditionalSchemaElements)
+	}
 	if v.BillingViewArn != nil {
 		s.WriteString(schemas.ReportDefinition_BillingViewArn, *v.BillingViewArn)
 	}

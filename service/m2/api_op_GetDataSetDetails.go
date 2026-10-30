@@ -110,7 +110,9 @@ func (v *GetDataSetDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DataSetName != nil {
 		s.WriteString(schemas.GetDataSetDetailsResponse_dataSetName, *v.DataSetName)
 	}
-	serializeDatasetDetailOrgAttributes(s, schemas.GetDataSetDetailsResponse_dataSetOrg, v.DataSetOrg)
+	if v.DataSetOrg != nil {
+		serializeDatasetDetailOrgAttributes(s, schemas.GetDataSetDetailsResponse_dataSetOrg, v.DataSetOrg)
+	}
 	if v.FileSize != nil {
 		s.WriteInt64(schemas.GetDataSetDetailsResponse_fileSize, *v.FileSize)
 	}

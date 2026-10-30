@@ -108,7 +108,9 @@ func (v *SearchUserProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchUserProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserProfileSummaries(s, schemas.SearchUserProfilesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeUserProfileSummaries(s, schemas.SearchUserProfilesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchUserProfilesOutput_nextToken, *v.NextToken)
 	}

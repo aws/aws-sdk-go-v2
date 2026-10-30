@@ -183,7 +183,9 @@ func (v *ListOpenWorkflowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListOpenWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowExecutionInfoList(s, schemas.WorkflowExecutionInfos_executionInfos, v.ExecutionInfos)
+	if v.ExecutionInfos != nil {
+		serializeWorkflowExecutionInfoList(s, schemas.WorkflowExecutionInfos_executionInfos, v.ExecutionInfos)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.WorkflowExecutionInfos_nextPageToken, *v.NextPageToken)
 	}

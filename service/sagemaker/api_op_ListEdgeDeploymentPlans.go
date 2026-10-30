@@ -127,7 +127,9 @@ func (v *ListEdgeDeploymentPlansOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEdgeDeploymentPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEdgeDeploymentPlanSummaries(s, schemas.ListEdgeDeploymentPlansResponse_EdgeDeploymentPlanSummaries, v.EdgeDeploymentPlanSummaries)
+	if v.EdgeDeploymentPlanSummaries != nil {
+		serializeEdgeDeploymentPlanSummaries(s, schemas.ListEdgeDeploymentPlansResponse_EdgeDeploymentPlanSummaries, v.EdgeDeploymentPlanSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEdgeDeploymentPlansResponse_NextToken, *v.NextToken)
 	}

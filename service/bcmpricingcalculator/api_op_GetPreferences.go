@@ -63,9 +63,15 @@ func (v *GetPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRateTypes(s, schemas.GetPreferencesResponse_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
-	serializeRateTypes(s, schemas.GetPreferencesResponse_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
-	serializeRateTypes(s, schemas.GetPreferencesResponse_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+	if v.ManagementAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.GetPreferencesResponse_managementAccountRateTypeSelections, v.ManagementAccountRateTypeSelections)
+	}
+	if v.MemberAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.GetPreferencesResponse_memberAccountRateTypeSelections, v.MemberAccountRateTypeSelections)
+	}
+	if v.StandaloneAccountRateTypeSelections != nil {
+		serializeRateTypes(s, schemas.GetPreferencesResponse_standaloneAccountRateTypeSelections, v.StandaloneAccountRateTypeSelections)
+	}
 }
 func (v *GetPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetPreferencesResponse, func(s *smithy.Schema) error {

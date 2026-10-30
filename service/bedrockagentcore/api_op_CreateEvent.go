@@ -121,8 +121,12 @@ func (v *CreateEventInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MemoryId != nil {
 		s.WriteString(schemas.CreateEventInput_memoryId, *v.MemoryId)
 	}
-	serializeMetadataMap(s, schemas.CreateEventInput_metadata, v.Metadata)
-	serializePayloadTypeList(s, schemas.CreateEventInput_payload, v.Payload)
+	if v.Metadata != nil {
+		serializeMetadataMap(s, schemas.CreateEventInput_metadata, v.Metadata)
+	}
+	if v.Payload != nil {
+		serializePayloadTypeList(s, schemas.CreateEventInput_payload, v.Payload)
+	}
 	if v.SessionId != nil {
 		s.WriteString(schemas.CreateEventInput_sessionId, *v.SessionId)
 	}

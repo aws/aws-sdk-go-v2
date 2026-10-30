@@ -314,7 +314,9 @@ func (v *PutParameterInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Policies != nil {
 		s.WriteString(schemas.PutParameterRequest_Policies, *v.Policies)
 	}
-	serializeTagList(s, schemas.PutParameterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutParameterRequest_Tags, v.Tags)
+	}
 	if v.Tier != "" {
 		s.WriteString(schemas.PutParameterRequest_Tier, string(v.Tier))
 	}

@@ -96,9 +96,15 @@ func (v *CreateCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCrossAccountAttachmentRequest_Name, *v.Name)
 	}
-	serializePrincipals(s, schemas.CreateCrossAccountAttachmentRequest_Principals, v.Principals)
-	serializeResources(s, schemas.CreateCrossAccountAttachmentRequest_Resources, v.Resources)
-	serializeTags(s, schemas.CreateCrossAccountAttachmentRequest_Tags, v.Tags)
+	if v.Principals != nil {
+		serializePrincipals(s, schemas.CreateCrossAccountAttachmentRequest_Principals, v.Principals)
+	}
+	if v.Resources != nil {
+		serializeResources(s, schemas.CreateCrossAccountAttachmentRequest_Resources, v.Resources)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateCrossAccountAttachmentRequest_Tags, v.Tags)
+	}
 }
 
 type CreateCrossAccountAttachmentOutput struct {

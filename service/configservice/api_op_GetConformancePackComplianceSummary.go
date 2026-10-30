@@ -52,7 +52,9 @@ func (v *GetConformancePackComplianceSummaryInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GetConformancePackComplianceSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackNamesToSummarizeList(s, schemas.GetConformancePackComplianceSummaryRequest_ConformancePackNames, v.ConformancePackNames)
+	if v.ConformancePackNames != nil {
+		serializeConformancePackNamesToSummarizeList(s, schemas.GetConformancePackComplianceSummaryRequest_ConformancePackNames, v.ConformancePackNames)
+	}
 	if v.Limit != 0 {
 		s.WriteInt32(schemas.GetConformancePackComplianceSummaryRequest_Limit, v.Limit)
 	}
@@ -83,7 +85,9 @@ func (v *GetConformancePackComplianceSummaryOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GetConformancePackComplianceSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConformancePackComplianceSummaryList(s, schemas.GetConformancePackComplianceSummaryResponse_ConformancePackComplianceSummaryList, v.ConformancePackComplianceSummaryList)
+	if v.ConformancePackComplianceSummaryList != nil {
+		serializeConformancePackComplianceSummaryList(s, schemas.GetConformancePackComplianceSummaryResponse_ConformancePackComplianceSummaryList, v.ConformancePackComplianceSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetConformancePackComplianceSummaryResponse_NextToken, *v.NextToken)
 	}

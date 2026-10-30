@@ -97,21 +97,29 @@ func (v *CreateMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventExpiryDuration != nil {
 		s.WriteInt32(schemas.CreateMemoryInput_eventExpiryDuration, *v.EventExpiryDuration)
 	}
-	serializeIndexedKeysList(s, schemas.CreateMemoryInput_indexedKeys, v.IndexedKeys)
+	if v.IndexedKeys != nil {
+		serializeIndexedKeysList(s, schemas.CreateMemoryInput_indexedKeys, v.IndexedKeys)
+	}
 	if v.MemoryExecutionRoleArn != nil {
 		s.WriteString(schemas.CreateMemoryInput_memoryExecutionRoleArn, *v.MemoryExecutionRoleArn)
 	}
-	serializeMemoryStrategyInputList(s, schemas.CreateMemoryInput_memoryStrategies, v.MemoryStrategies)
+	if v.MemoryStrategies != nil {
+		serializeMemoryStrategyInputList(s, schemas.CreateMemoryInput_memoryStrategies, v.MemoryStrategies)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateMemoryInput_name, *v.Name)
 	}
-	serializeNamespaceKeysList(s, schemas.CreateMemoryInput_namespaceKeys, v.NamespaceKeys)
+	if v.NamespaceKeys != nil {
+		serializeNamespaceKeysList(s, schemas.CreateMemoryInput_namespaceKeys, v.NamespaceKeys)
+	}
 	if v.StreamDeliveryResources != nil {
 		s.WriteStruct(schemas.CreateMemoryInput_streamDeliveryResources)
 		v.StreamDeliveryResources.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.CreateMemoryInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateMemoryInput_tags, v.Tags)
+	}
 }
 
 type CreateMemoryOutput struct {

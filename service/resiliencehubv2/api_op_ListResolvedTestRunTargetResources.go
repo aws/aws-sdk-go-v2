@@ -96,7 +96,9 @@ func (v *ListResolvedTestRunTargetResourcesOutput) SerializeMembers(s smithy.Sha
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListResolvedTestRunTargetResourcesResponse_nextToken, *v.NextToken)
 	}
-	serializeResolvedTargetResourceList(s, schemas.ListResolvedTestRunTargetResourcesResponse_resolvedTargetResources, v.ResolvedTargetResources)
+	if v.ResolvedTargetResources != nil {
+		serializeResolvedTargetResourceList(s, schemas.ListResolvedTestRunTargetResourcesResponse_resolvedTargetResources, v.ResolvedTargetResources)
+	}
 }
 func (v *ListResolvedTestRunTargetResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListResolvedTestRunTargetResourcesResponse, func(s *smithy.Schema) error {

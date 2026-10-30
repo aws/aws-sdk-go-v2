@@ -74,7 +74,9 @@ func (v *CreateQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.CreateQAppInput_instanceId, *v.InstanceId)
 	}
-	serializeTagMap(s, schemas.CreateQAppInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateQAppInput_tags, v.Tags)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CreateQAppInput_title, *v.Title)
 	}
@@ -171,7 +173,9 @@ func (v *CreateQAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InitialPrompt != nil {
 		s.WriteString(schemas.CreateQAppOutput_initialPrompt, *v.InitialPrompt)
 	}
-	serializeAppRequiredCapabilities(s, schemas.CreateQAppOutput_requiredCapabilities, v.RequiredCapabilities)
+	if v.RequiredCapabilities != nil {
+		serializeAppRequiredCapabilities(s, schemas.CreateQAppOutput_requiredCapabilities, v.RequiredCapabilities)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.CreateQAppOutput_status, string(v.Status))
 	}

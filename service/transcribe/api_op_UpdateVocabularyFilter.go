@@ -110,7 +110,9 @@ func (v *UpdateVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.VocabularyFilterName != nil {
 		s.WriteString(schemas.UpdateVocabularyFilterRequest_VocabularyFilterName, *v.VocabularyFilterName)
 	}
-	serializeWords(s, schemas.UpdateVocabularyFilterRequest_Words, v.Words)
+	if v.Words != nil {
+		serializeWords(s, schemas.UpdateVocabularyFilterRequest_Words, v.Words)
+	}
 }
 
 type UpdateVocabularyFilterOutput struct {

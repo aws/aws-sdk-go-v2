@@ -151,7 +151,9 @@ func (v *GetWorkflowRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.GetWorkflowRunResponse_status, string(v.Status))
 	}
-	serializeWorkflowRunStatusReasons(s, schemas.GetWorkflowRunResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeWorkflowRunStatusReasons(s, schemas.GetWorkflowRunResponse_statusReasons, v.StatusReasons)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.GetWorkflowRunResponse_workflowId, *v.WorkflowId)
 	}

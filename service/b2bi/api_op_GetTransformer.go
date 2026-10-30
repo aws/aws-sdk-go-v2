@@ -146,7 +146,9 @@ func (v *GetTransformerOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetTransformerResponse_createdAt, *v.CreatedAt)
 	}
-	serializeEdiType(s, schemas.GetTransformerResponse_ediType, v.EdiType)
+	if v.EdiType != nil {
+		serializeEdiType(s, schemas.GetTransformerResponse_ediType, v.EdiType)
+	}
 	if v.FileFormat != "" {
 		s.WriteString(schemas.GetTransformerResponse_fileFormat, string(v.FileFormat))
 	}

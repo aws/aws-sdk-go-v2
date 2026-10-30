@@ -146,7 +146,9 @@ func (v *PutComplianceItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ItemContentHash != nil {
 		s.WriteString(schemas.PutComplianceItemsRequest_ItemContentHash, *v.ItemContentHash)
 	}
-	serializeComplianceItemEntryList(s, schemas.PutComplianceItemsRequest_Items, v.Items)
+	if v.Items != nil {
+		serializeComplianceItemEntryList(s, schemas.PutComplianceItemsRequest_Items, v.Items)
+	}
 	if v.ResourceId != nil {
 		s.WriteString(schemas.PutComplianceItemsRequest_ResourceId, *v.ResourceId)
 	}

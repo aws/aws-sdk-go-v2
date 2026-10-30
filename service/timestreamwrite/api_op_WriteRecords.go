@@ -114,7 +114,9 @@ func (v *WriteRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.WriteRecordsRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeRecords(s, schemas.WriteRecordsRequest_Records, v.Records)
+	if v.Records != nil {
+		serializeRecords(s, schemas.WriteRecordsRequest_Records, v.Records)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.WriteRecordsRequest_TableName, *v.TableName)
 	}

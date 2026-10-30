@@ -96,7 +96,9 @@ func (v *CreateFirewallPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.FirewallPolicyName != nil {
 		s.WriteString(schemas.CreateFirewallPolicyRequest_FirewallPolicyName, *v.FirewallPolicyName)
 	}
-	serializeTagList(s, schemas.CreateFirewallPolicyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFirewallPolicyRequest_Tags, v.Tags)
+	}
 }
 
 type CreateFirewallPolicyOutput struct {

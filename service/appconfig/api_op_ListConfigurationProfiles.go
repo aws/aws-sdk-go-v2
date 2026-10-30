@@ -91,7 +91,9 @@ func (v *ListConfigurationProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListConfigurationProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationProfileSummaryList(s, schemas.ConfigurationProfiles_Items, v.Items)
+	if v.Items != nil {
+		serializeConfigurationProfileSummaryList(s, schemas.ConfigurationProfiles_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ConfigurationProfiles_NextToken, *v.NextToken)
 	}

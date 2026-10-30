@@ -83,7 +83,9 @@ func (v *ListImportFileEnrichmentsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImportFileEnrichmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImportFileEnrichmentsList(s, schemas.ListImportFileEnrichmentsResponse_items, v.Items)
+	if v.Items != nil {
+		serializeImportFileEnrichmentsList(s, schemas.ListImportFileEnrichmentsResponse_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImportFileEnrichmentsResponse_nextToken, *v.NextToken)
 	}

@@ -106,7 +106,9 @@ func (v *SearchHoursOfOperationOverridesOutput) SerializeMembers(s smithy.ShapeS
 	if v.ApproximateTotalCount != nil {
 		s.WriteInt64(schemas.SearchHoursOfOperationOverridesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
 	}
-	serializeHoursOfOperationOverrideList(s, schemas.SearchHoursOfOperationOverridesResponse_HoursOfOperationOverrides, v.HoursOfOperationOverrides)
+	if v.HoursOfOperationOverrides != nil {
+		serializeHoursOfOperationOverrideList(s, schemas.SearchHoursOfOperationOverridesResponse_HoursOfOperationOverrides, v.HoursOfOperationOverrides)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchHoursOfOperationOverridesResponse_NextToken, *v.NextToken)
 	}

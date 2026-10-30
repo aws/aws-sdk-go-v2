@@ -370,7 +370,9 @@ func (v *DevEnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.DevEnvironmentSummary_id, *v.Id)
 	}
-	serializeIdes(s, schemas.DevEnvironmentSummary_ides, v.Ides)
+	if v.Ides != nil {
+		serializeIdes(s, schemas.DevEnvironmentSummary_ides, v.Ides)
+	}
 	s.WriteInt32(schemas.DevEnvironmentSummary_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
 	if v.InstanceType != "" {
 		s.WriteString(schemas.DevEnvironmentSummary_instanceType, string(v.InstanceType))
@@ -386,7 +388,9 @@ func (v *DevEnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProjectName != nil {
 		s.WriteString(schemas.DevEnvironmentSummary_projectName, *v.ProjectName)
 	}
-	serializeDevEnvironmentRepositorySummaries(s, schemas.DevEnvironmentSummary_repositories, v.Repositories)
+	if v.Repositories != nil {
+		serializeDevEnvironmentRepositorySummaries(s, schemas.DevEnvironmentSummary_repositories, v.Repositories)
+	}
 	if v.SpaceName != nil {
 		s.WriteString(schemas.DevEnvironmentSummary_spaceName, *v.SpaceName)
 	}
@@ -747,7 +751,9 @@ func (v *ExecuteCommandSessionConfiguration) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ExecuteCommandSessionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExecuteCommandSessionConfigurationArguments(s, schemas.ExecuteCommandSessionConfiguration_arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeExecuteCommandSessionConfigurationArguments(s, schemas.ExecuteCommandSessionConfiguration_arguments, v.Arguments)
+	}
 	if v.Command != nil {
 		s.WriteString(schemas.ExecuteCommandSessionConfiguration_command, *v.Command)
 	}
@@ -797,7 +803,9 @@ func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != nil {
 		s.WriteString(schemas.Filter_key, *v.Key)
 	}
-	serializeStringList(s, schemas.Filter_values, v.Values)
+	if v.Values != nil {
+		serializeStringList(s, schemas.Filter_values, v.Values)
+	}
 }
 func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
@@ -1190,7 +1198,9 @@ func (v *ProjectListFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Key != "" {
 		s.WriteString(schemas.ProjectListFilter_key, string(v.Key))
 	}
-	serializeStringList(s, schemas.ProjectListFilter_values, v.Values)
+	if v.Values != nil {
+		serializeStringList(s, schemas.ProjectListFilter_values, v.Values)
+	}
 }
 func (v *ProjectListFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProjectListFilter, func(s *smithy.Schema) error {
@@ -1622,7 +1632,9 @@ func (v *WorkflowRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.WorkflowRunSummary_status, string(v.Status))
 	}
-	serializeWorkflowRunStatusReasons(s, schemas.WorkflowRunSummary_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeWorkflowRunStatusReasons(s, schemas.WorkflowRunSummary_statusReasons, v.StatusReasons)
+	}
 	if v.WorkflowId != nil {
 		s.WriteString(schemas.WorkflowRunSummary_workflowId, *v.WorkflowId)
 	}

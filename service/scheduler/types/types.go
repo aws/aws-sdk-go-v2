@@ -44,8 +44,12 @@ func (v *AwsVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AssignPublicIp != "" {
 		s.WriteString(schemas.AwsVpcConfiguration_AssignPublicIp, string(v.AssignPublicIp))
 	}
-	serializeSecurityGroups(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
-	serializeSubnets(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.AwsVpcConfiguration_SecurityGroups, v.SecurityGroups)
+	}
+	if v.Subnets != nil {
+		serializeSubnets(s, schemas.AwsVpcConfiguration_Subnets, v.Subnets)
+	}
 }
 func (v *AwsVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AwsVpcConfiguration, func(s *smithy.Schema) error {
@@ -238,7 +242,9 @@ func (v *EcsParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderStrategy(s, schemas.EcsParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.EcsParameters_CapacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.EnableECSManagedTags != nil {
 		s.WriteBool(schemas.EcsParameters_EnableECSManagedTags, *v.EnableECSManagedTags)
 	}
@@ -256,8 +262,12 @@ func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
 		v.NetworkConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlacementConstraints(s, schemas.EcsParameters_PlacementConstraints, v.PlacementConstraints)
-	serializePlacementStrategies(s, schemas.EcsParameters_PlacementStrategy, v.PlacementStrategy)
+	if v.PlacementConstraints != nil {
+		serializePlacementConstraints(s, schemas.EcsParameters_PlacementConstraints, v.PlacementConstraints)
+	}
+	if v.PlacementStrategy != nil {
+		serializePlacementStrategies(s, schemas.EcsParameters_PlacementStrategy, v.PlacementStrategy)
+	}
 	if v.PlatformVersion != nil {
 		s.WriteString(schemas.EcsParameters_PlatformVersion, *v.PlatformVersion)
 	}
@@ -267,7 +277,9 @@ func (v *EcsParameters) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ReferenceId != nil {
 		s.WriteString(schemas.EcsParameters_ReferenceId, *v.ReferenceId)
 	}
-	serializeTags(s, schemas.EcsParameters_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.EcsParameters_Tags, v.Tags)
+	}
 	if v.TaskCount != nil {
 		s.WriteInt32(schemas.EcsParameters_TaskCount, *v.TaskCount)
 	}
@@ -709,7 +721,9 @@ func (v *SageMakerPipelineParameters) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SageMakerPipelineParameters) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSageMakerPipelineParameterList(s, schemas.SageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+	if v.PipelineParameterList != nil {
+		serializeSageMakerPipelineParameterList(s, schemas.SageMakerPipelineParameters_PipelineParameterList, v.PipelineParameterList)
+	}
 }
 func (v *SageMakerPipelineParameters) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SageMakerPipelineParameters, func(s *smithy.Schema) error {

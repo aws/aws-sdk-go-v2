@@ -94,7 +94,9 @@ func (v *ListChallengeMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListChallengeMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChallengeMetadataList(s, schemas.ListChallengeMetadataResponse_Challenges, v.Challenges)
+	if v.Challenges != nil {
+		serializeChallengeMetadataList(s, schemas.ListChallengeMetadataResponse_Challenges, v.Challenges)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChallengeMetadataResponse_NextToken, *v.NextToken)
 	}

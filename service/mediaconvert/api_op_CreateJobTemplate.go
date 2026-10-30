@@ -99,7 +99,9 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_Description, *v.Description)
 	}
-	serialize__listOfHopDestination(s, schemas.CreateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	if v.HopDestinations != nil {
+		serialize__listOfHopDestination(s, schemas.CreateJobTemplateRequest_HopDestinations, v.HopDestinations)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateJobTemplateRequest_Name, *v.Name)
 	}
@@ -117,7 +119,9 @@ func (v *CreateJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusUpdateInterval != "" {
 		s.WriteString(schemas.CreateJobTemplateRequest_StatusUpdateInterval, string(v.StatusUpdateInterval))
 	}
-	serialize__mapOf__string(s, schemas.CreateJobTemplateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__string(s, schemas.CreateJobTemplateRequest_Tags, v.Tags)
+	}
 }
 
 type CreateJobTemplateOutput struct {

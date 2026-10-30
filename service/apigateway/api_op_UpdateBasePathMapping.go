@@ -69,7 +69,9 @@ func (v *UpdateBasePathMappingInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.DomainNameId != nil {
 		s.WriteString(schemas.UpdateBasePathMappingRequest_domainNameId, *v.DomainNameId)
 	}
-	serializeListOfPatchOperation(s, schemas.UpdateBasePathMappingRequest_patchOperations, v.PatchOperations)
+	if v.PatchOperations != nil {
+		serializeListOfPatchOperation(s, schemas.UpdateBasePathMappingRequest_patchOperations, v.PatchOperations)
+	}
 }
 
 // Represents the base path that callers of the API must provide as part of the

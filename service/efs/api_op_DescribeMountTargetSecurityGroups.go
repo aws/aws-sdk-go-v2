@@ -77,7 +77,9 @@ func (v *DescribeMountTargetSecurityGroupsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeMountTargetSecurityGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroups(s, schemas.DescribeMountTargetSecurityGroupsResponse_SecurityGroups, v.SecurityGroups)
+	if v.SecurityGroups != nil {
+		serializeSecurityGroups(s, schemas.DescribeMountTargetSecurityGroupsResponse_SecurityGroups, v.SecurityGroups)
+	}
 }
 func (v *DescribeMountTargetSecurityGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeMountTargetSecurityGroupsResponse, func(s *smithy.Schema) error {

@@ -99,7 +99,9 @@ func (v *ListFargateProfilesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFargateProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringList(s, schemas.ListFargateProfilesResponse_fargateProfileNames, v.FargateProfileNames)
+	if v.FargateProfileNames != nil {
+		serializeStringList(s, schemas.ListFargateProfilesResponse_fargateProfileNames, v.FargateProfileNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFargateProfilesResponse_nextToken, *v.NextToken)
 	}

@@ -254,7 +254,9 @@ func (v *DescribeLabelingJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingConditions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.DescribeLabelingJobResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.DescribeLabelingJobResponse_Tags, v.Tags)
+	}
 }
 func (v *DescribeLabelingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeLabelingJobResponse, func(s *smithy.Schema) error {

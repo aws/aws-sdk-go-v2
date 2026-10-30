@@ -54,14 +54,18 @@ func (v *DescribeRegistrationAttachmentsInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DescribeRegistrationAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegistrationAttachmentFilterList(s, schemas.DescribeRegistrationAttachmentsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeRegistrationAttachmentFilterList(s, schemas.DescribeRegistrationAttachmentsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeRegistrationAttachmentsRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegistrationAttachmentsRequest_NextToken, *v.NextToken)
 	}
-	serializeRegistrationAttachmentIdList(s, schemas.DescribeRegistrationAttachmentsRequest_RegistrationAttachmentIds, v.RegistrationAttachmentIds)
+	if v.RegistrationAttachmentIds != nil {
+		serializeRegistrationAttachmentIdList(s, schemas.DescribeRegistrationAttachmentsRequest_RegistrationAttachmentIds, v.RegistrationAttachmentIds)
+	}
 }
 
 type DescribeRegistrationAttachmentsOutput struct {
@@ -92,7 +96,9 @@ func (v *DescribeRegistrationAttachmentsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRegistrationAttachmentsResult_NextToken, *v.NextToken)
 	}
-	serializeRegistrationAttachmentsInformationList(s, schemas.DescribeRegistrationAttachmentsResult_RegistrationAttachments, v.RegistrationAttachments)
+	if v.RegistrationAttachments != nil {
+		serializeRegistrationAttachmentsInformationList(s, schemas.DescribeRegistrationAttachmentsResult_RegistrationAttachments, v.RegistrationAttachments)
+	}
 }
 func (v *DescribeRegistrationAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeRegistrationAttachmentsResult, func(s *smithy.Schema) error {

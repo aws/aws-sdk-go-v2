@@ -134,7 +134,9 @@ func (v *ChangeProgressStatus) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChangeProgressStatus) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeChangeProgressStageList(s, schemas.ChangeProgressStatus_ChangeProgressStages, v.ChangeProgressStages)
+	if v.ChangeProgressStages != nil {
+		serializeChangeProgressStageList(s, schemas.ChangeProgressStatus_ChangeProgressStages, v.ChangeProgressStages)
+	}
 	if v.StartTime != nil {
 		s.WriteTime(schemas.ChangeProgressStatus_StartTime, *v.StartTime)
 	}
@@ -365,13 +367,17 @@ func (v *Pipeline) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.Pipeline_CreatedAt, *v.CreatedAt)
 	}
-	serializePipelineDestinationList(s, schemas.Pipeline_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializePipelineDestinationList(s, schemas.Pipeline_Destinations, v.Destinations)
+	}
 	if v.EncryptionAtRestOptions != nil {
 		s.WriteStruct(schemas.Pipeline_EncryptionAtRestOptions)
 		v.EncryptionAtRestOptions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIngestEndpointUrlsList(s, schemas.Pipeline_IngestEndpointUrls, v.IngestEndpointUrls)
+	if v.IngestEndpointUrls != nil {
+		serializeIngestEndpointUrlsList(s, schemas.Pipeline_IngestEndpointUrls, v.IngestEndpointUrls)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.Pipeline_LastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -398,7 +404,9 @@ func (v *Pipeline) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PipelineRoleArn != nil {
 		s.WriteString(schemas.Pipeline_PipelineRoleArn, *v.PipelineRoleArn)
 	}
-	serializeServiceVpcEndpointsList(s, schemas.Pipeline_ServiceVpcEndpoints, v.ServiceVpcEndpoints)
+	if v.ServiceVpcEndpoints != nil {
+		serializeServiceVpcEndpointsList(s, schemas.Pipeline_ServiceVpcEndpoints, v.ServiceVpcEndpoints)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.Pipeline_Status, string(v.Status))
 	}
@@ -407,11 +415,15 @@ func (v *Pipeline) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.Pipeline_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Pipeline_Tags, v.Tags)
+	}
 	if v.VpcEndpointService != nil {
 		s.WriteString(schemas.Pipeline_VpcEndpointService, *v.VpcEndpointService)
 	}
-	serializeVpcEndpointsList(s, schemas.Pipeline_VpcEndpoints, v.VpcEndpoints)
+	if v.VpcEndpoints != nil {
+		serializeVpcEndpointsList(s, schemas.Pipeline_VpcEndpoints, v.VpcEndpoints)
+	}
 }
 func (v *Pipeline) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Pipeline, func(s *smithy.Schema) error {
@@ -826,8 +838,12 @@ func (v *PipelineEndpointVpcOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PipelineEndpointVpcOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.PipelineEndpointVpcOptions_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.PipelineEndpointVpcOptions_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.PipelineEndpointVpcOptions_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.PipelineEndpointVpcOptions_SubnetIds, v.SubnetIds)
+	}
 }
 func (v *PipelineEndpointVpcOptions) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineEndpointVpcOptions, func(s *smithy.Schema) error {
@@ -918,7 +934,9 @@ func (v *PipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.PipelineSummary_CreatedAt, *v.CreatedAt)
 	}
-	serializePipelineDestinationList(s, schemas.PipelineSummary_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializePipelineDestinationList(s, schemas.PipelineSummary_Destinations, v.Destinations)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.PipelineSummary_LastUpdatedAt, *v.LastUpdatedAt)
 	}
@@ -942,7 +960,9 @@ func (v *PipelineSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StatusReason.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PipelineSummary_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PipelineSummary_Tags, v.Tags)
+	}
 }
 func (v *PipelineSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PipelineSummary, func(s *smithy.Schema) error {
@@ -1233,8 +1253,12 @@ func (v *VpcOptions) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *VpcOptions) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSecurityGroupIds(s, schemas.VpcOptions_SecurityGroupIds, v.SecurityGroupIds)
-	serializeSubnetIds(s, schemas.VpcOptions_SubnetIds, v.SubnetIds)
+	if v.SecurityGroupIds != nil {
+		serializeSecurityGroupIds(s, schemas.VpcOptions_SecurityGroupIds, v.SecurityGroupIds)
+	}
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.VpcOptions_SubnetIds, v.SubnetIds)
+	}
 	if v.VpcAttachmentOptions != nil {
 		s.WriteStruct(schemas.VpcOptions_VpcAttachmentOptions)
 		v.VpcAttachmentOptions.SerializeMembers(s)

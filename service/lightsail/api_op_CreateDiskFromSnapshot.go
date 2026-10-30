@@ -131,7 +131,9 @@ func (v *CreateDiskFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDiskFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAddOnRequestList(s, schemas.CreateDiskFromSnapshotRequest_addOns, v.AddOns)
+	if v.AddOns != nil {
+		serializeAddOnRequestList(s, schemas.CreateDiskFromSnapshotRequest_addOns, v.AddOns)
+	}
 	if v.AvailabilityZone != nil {
 		s.WriteString(schemas.CreateDiskFromSnapshotRequest_availabilityZone, *v.AvailabilityZone)
 	}
@@ -150,7 +152,9 @@ func (v *CreateDiskFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.SourceDiskName != nil {
 		s.WriteString(schemas.CreateDiskFromSnapshotRequest_sourceDiskName, *v.SourceDiskName)
 	}
-	serializeTagList(s, schemas.CreateDiskFromSnapshotRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateDiskFromSnapshotRequest_tags, v.Tags)
+	}
 	if v.UseLatestRestorableAutoSnapshot != nil {
 		s.WriteBool(schemas.CreateDiskFromSnapshotRequest_useLatestRestorableAutoSnapshot, *v.UseLatestRestorableAutoSnapshot)
 	}
@@ -176,7 +180,9 @@ func (v *CreateDiskFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateDiskFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.CreateDiskFromSnapshotResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.CreateDiskFromSnapshotResult_operations, v.Operations)
+	}
 }
 func (v *CreateDiskFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateDiskFromSnapshotResult, func(s *smithy.Schema) error {

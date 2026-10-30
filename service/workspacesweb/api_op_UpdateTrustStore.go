@@ -59,8 +59,12 @@ func (v *UpdateTrustStoreInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateTrustStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateList(s, schemas.UpdateTrustStoreRequest_certificatesToAdd, v.CertificatesToAdd)
-	serializeCertificateThumbprintList(s, schemas.UpdateTrustStoreRequest_certificatesToDelete, v.CertificatesToDelete)
+	if v.CertificatesToAdd != nil {
+		serializeCertificateList(s, schemas.UpdateTrustStoreRequest_certificatesToAdd, v.CertificatesToAdd)
+	}
+	if v.CertificatesToDelete != nil {
+		serializeCertificateThumbprintList(s, schemas.UpdateTrustStoreRequest_certificatesToDelete, v.CertificatesToDelete)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateTrustStoreRequest_clientToken, *v.ClientToken)
 	}

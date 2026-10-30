@@ -115,7 +115,9 @@ func (v *ListStepConsumersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListStepConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStepConsumers(s, schemas.ListStepConsumersResponse_consumers, v.Consumers)
+	if v.Consumers != nil {
+		serializeStepConsumers(s, schemas.ListStepConsumersResponse_consumers, v.Consumers)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListStepConsumersResponse_nextToken, *v.NextToken)
 	}

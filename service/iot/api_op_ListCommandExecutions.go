@@ -144,7 +144,9 @@ func (v *ListCommandExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCommandExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCommandExecutionSummaryList(s, schemas.ListCommandExecutionsResponse_commandExecutions, v.CommandExecutions)
+	if v.CommandExecutions != nil {
+		serializeCommandExecutionSummaryList(s, schemas.ListCommandExecutionsResponse_commandExecutions, v.CommandExecutions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCommandExecutionsResponse_nextToken, *v.NextToken)
 	}

@@ -93,7 +93,9 @@ func (v *CreateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeyRequired != nil {
 		s.WriteBool(schemas.CreateRouteRequest_ApiKeyRequired, *v.ApiKeyRequired)
 	}
-	serializeAuthorizationScopes(s, schemas.CreateRouteRequest_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationScopes != nil {
+		serializeAuthorizationScopes(s, schemas.CreateRouteRequest_AuthorizationScopes, v.AuthorizationScopes)
+	}
 	if v.AuthorizationType != "" {
 		s.WriteString(schemas.CreateRouteRequest_AuthorizationType, string(v.AuthorizationType))
 	}
@@ -106,8 +108,12 @@ func (v *CreateRouteInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationName != nil {
 		s.WriteString(schemas.CreateRouteRequest_OperationName, *v.OperationName)
 	}
-	serializeRouteModels(s, schemas.CreateRouteRequest_RequestModels, v.RequestModels)
-	serializeRouteParameters(s, schemas.CreateRouteRequest_RequestParameters, v.RequestParameters)
+	if v.RequestModels != nil {
+		serializeRouteModels(s, schemas.CreateRouteRequest_RequestModels, v.RequestModels)
+	}
+	if v.RequestParameters != nil {
+		serializeRouteParameters(s, schemas.CreateRouteRequest_RequestParameters, v.RequestParameters)
+	}
 	if v.RouteKey != nil {
 		s.WriteString(schemas.CreateRouteRequest_RouteKey, *v.RouteKey)
 	}
@@ -195,7 +201,9 @@ func (v *CreateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApiKeyRequired != nil {
 		s.WriteBool(schemas.CreateRouteResult_ApiKeyRequired, *v.ApiKeyRequired)
 	}
-	serializeAuthorizationScopes(s, schemas.CreateRouteResult_AuthorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationScopes != nil {
+		serializeAuthorizationScopes(s, schemas.CreateRouteResult_AuthorizationScopes, v.AuthorizationScopes)
+	}
 	if v.AuthorizationType != "" {
 		s.WriteString(schemas.CreateRouteResult_AuthorizationType, string(v.AuthorizationType))
 	}
@@ -208,8 +216,12 @@ func (v *CreateRouteOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.OperationName != nil {
 		s.WriteString(schemas.CreateRouteResult_OperationName, *v.OperationName)
 	}
-	serializeRouteModels(s, schemas.CreateRouteResult_RequestModels, v.RequestModels)
-	serializeRouteParameters(s, schemas.CreateRouteResult_RequestParameters, v.RequestParameters)
+	if v.RequestModels != nil {
+		serializeRouteModels(s, schemas.CreateRouteResult_RequestModels, v.RequestModels)
+	}
+	if v.RequestParameters != nil {
+		serializeRouteParameters(s, schemas.CreateRouteResult_RequestParameters, v.RequestParameters)
+	}
 	if v.RouteId != nil {
 		s.WriteString(schemas.CreateRouteResult_RouteId, *v.RouteId)
 	}

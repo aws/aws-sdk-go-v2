@@ -100,7 +100,9 @@ func (v *ListChannelBansOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ChannelArn != nil {
 		s.WriteString(schemas.ListChannelBansResponse_ChannelArn, *v.ChannelArn)
 	}
-	serializeChannelBanSummaryList(s, schemas.ListChannelBansResponse_ChannelBans, v.ChannelBans)
+	if v.ChannelBans != nil {
+		serializeChannelBanSummaryList(s, schemas.ListChannelBansResponse_ChannelBans, v.ChannelBans)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListChannelBansResponse_NextToken, *v.NextToken)
 	}

@@ -82,7 +82,9 @@ func (v *DeleteDeploymentGroupOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteDeploymentGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutoScalingGroupList(s, schemas.DeleteDeploymentGroupOutput_hooksNotCleanedUp, v.HooksNotCleanedUp)
+	if v.HooksNotCleanedUp != nil {
+		serializeAutoScalingGroupList(s, schemas.DeleteDeploymentGroupOutput_hooksNotCleanedUp, v.HooksNotCleanedUp)
+	}
 }
 func (v *DeleteDeploymentGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteDeploymentGroupOutput, func(s *smithy.Schema) error {

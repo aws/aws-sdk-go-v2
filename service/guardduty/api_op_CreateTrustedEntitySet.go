@@ -118,7 +118,9 @@ func (v *CreateTrustedEntitySetInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTrustedEntitySetRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateTrustedEntitySetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTrustedEntitySetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateTrustedEntitySetOutput struct {

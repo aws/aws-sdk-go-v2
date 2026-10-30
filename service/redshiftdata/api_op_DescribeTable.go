@@ -183,7 +183,9 @@ func (v *DescribeTableOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnList(s, schemas.DescribeTableResponse_ColumnList, v.ColumnList)
+	if v.ColumnList != nil {
+		serializeColumnList(s, schemas.DescribeTableResponse_ColumnList, v.ColumnList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeTableResponse_NextToken, *v.NextToken)
 	}

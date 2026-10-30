@@ -94,7 +94,9 @@ func (v *ListTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LastEvaluatedTableName != nil {
 		s.WriteString(schemas.ListTablesOutput_LastEvaluatedTableName, *v.LastEvaluatedTableName)
 	}
-	serializeTableNameList(s, schemas.ListTablesOutput_TableNames, v.TableNames)
+	if v.TableNames != nil {
+		serializeTableNameList(s, schemas.ListTablesOutput_TableNames, v.TableNames)
+	}
 }
 func (v *ListTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTablesOutput, func(s *smithy.Schema) error {

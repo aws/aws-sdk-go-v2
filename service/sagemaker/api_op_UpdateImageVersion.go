@@ -102,8 +102,12 @@ func (v *UpdateImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Alias != nil {
 		s.WriteString(schemas.UpdateImageVersionRequest_Alias, *v.Alias)
 	}
-	serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToAdd, v.AliasesToAdd)
-	serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToDelete, v.AliasesToDelete)
+	if v.AliasesToAdd != nil {
+		serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToAdd, v.AliasesToAdd)
+	}
+	if v.AliasesToDelete != nil {
+		serializeSageMakerImageVersionAliases(s, schemas.UpdateImageVersionRequest_AliasesToDelete, v.AliasesToDelete)
+	}
 	if v.Horovod != nil {
 		s.WriteBool(schemas.UpdateImageVersionRequest_Horovod, *v.Horovod)
 	}

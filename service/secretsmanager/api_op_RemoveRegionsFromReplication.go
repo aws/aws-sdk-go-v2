@@ -60,7 +60,9 @@ func (v *RemoveRegionsFromReplicationInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *RemoveRegionsFromReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRemoveReplicaRegionListType(s, schemas.RemoveRegionsFromReplicationRequest_RemoveReplicaRegions, v.RemoveReplicaRegions)
+	if v.RemoveReplicaRegions != nil {
+		serializeRemoveReplicaRegionListType(s, schemas.RemoveRegionsFromReplicationRequest_RemoveReplicaRegions, v.RemoveReplicaRegions)
+	}
 	if v.SecretId != nil {
 		s.WriteString(schemas.RemoveRegionsFromReplicationRequest_SecretId, *v.SecretId)
 	}
@@ -90,7 +92,9 @@ func (v *RemoveRegionsFromReplicationOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.ARN != nil {
 		s.WriteString(schemas.RemoveRegionsFromReplicationResponse_ARN, *v.ARN)
 	}
-	serializeReplicationStatusListType(s, schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus, v.ReplicationStatus)
+	if v.ReplicationStatus != nil {
+		serializeReplicationStatusListType(s, schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus, v.ReplicationStatus)
+	}
 }
 func (v *RemoveRegionsFromReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RemoveRegionsFromReplicationResponse, func(s *smithy.Schema) error {

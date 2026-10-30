@@ -56,7 +56,9 @@ func (v *UpdateSipMediaApplicationCallInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateSipMediaApplicationCallInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSMAUpdateCallArgumentsMap(s, schemas.UpdateSipMediaApplicationCallRequest_Arguments, v.Arguments)
+	if v.Arguments != nil {
+		serializeSMAUpdateCallArgumentsMap(s, schemas.UpdateSipMediaApplicationCallRequest_Arguments, v.Arguments)
+	}
 	if v.SipMediaApplicationId != nil {
 		s.WriteString(schemas.UpdateSipMediaApplicationCallRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
 	}

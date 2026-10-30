@@ -125,7 +125,9 @@ func (v *GetVariantImportJobOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVariantImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnnotationFieldMap(s, schemas.GetVariantImportResponse_annotationFields, v.AnnotationFields)
+	if v.AnnotationFields != nil {
+		serializeAnnotationFieldMap(s, schemas.GetVariantImportResponse_annotationFields, v.AnnotationFields)
+	}
 	if v.CompletionTime != nil {
 		s.WriteTime(schemas.GetVariantImportResponse_completionTime, *v.CompletionTime)
 	}
@@ -138,7 +140,9 @@ func (v *GetVariantImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetVariantImportResponse_id, *v.Id)
 	}
-	serializeVariantImportItemDetails(s, schemas.GetVariantImportResponse_items, v.Items)
+	if v.Items != nil {
+		serializeVariantImportItemDetails(s, schemas.GetVariantImportResponse_items, v.Items)
+	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.GetVariantImportResponse_roleArn, *v.RoleArn)
 	}

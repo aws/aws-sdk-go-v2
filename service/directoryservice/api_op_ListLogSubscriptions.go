@@ -84,7 +84,9 @@ func (v *ListLogSubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLogSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogSubscriptions(s, schemas.ListLogSubscriptionsResult_LogSubscriptions, v.LogSubscriptions)
+	if v.LogSubscriptions != nil {
+		serializeLogSubscriptions(s, schemas.ListLogSubscriptionsResult_LogSubscriptions, v.LogSubscriptions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLogSubscriptionsResult_NextToken, *v.NextToken)
 	}

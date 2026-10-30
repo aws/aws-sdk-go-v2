@@ -89,7 +89,9 @@ func (v *ListExtractionDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListExtractionDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeExtractionDefinitionSummaryList(s, schemas.ListExtractionDefinitionsResponse_ExtractionDefinitionSummaryList, v.ExtractionDefinitionSummaryList)
+	if v.ExtractionDefinitionSummaryList != nil {
+		serializeExtractionDefinitionSummaryList(s, schemas.ListExtractionDefinitionsResponse_ExtractionDefinitionSummaryList, v.ExtractionDefinitionSummaryList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListExtractionDefinitionsResponse_NextToken, *v.NextToken)
 	}

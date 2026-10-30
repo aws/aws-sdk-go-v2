@@ -87,7 +87,9 @@ func (v *ListOpenCypherQueriesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AcceptedQueryCount != nil {
 		s.WriteInt32(schemas.ListOpenCypherQueriesOutput_acceptedQueryCount, *v.AcceptedQueryCount)
 	}
-	serializeOpenCypherQueries(s, schemas.ListOpenCypherQueriesOutput_queries, v.Queries)
+	if v.Queries != nil {
+		serializeOpenCypherQueries(s, schemas.ListOpenCypherQueriesOutput_queries, v.Queries)
+	}
 	if v.RunningQueryCount != nil {
 		s.WriteInt32(schemas.ListOpenCypherQueriesOutput_runningQueryCount, *v.RunningQueryCount)
 	}

@@ -60,11 +60,15 @@ func (v *DescribeS3AccessPointAttachmentsInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *DescribeS3AccessPointAttachmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeS3AccessPointAttachmentsFilters(s, schemas.DescribeS3AccessPointAttachmentsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeS3AccessPointAttachmentsFilters(s, schemas.DescribeS3AccessPointAttachmentsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeS3AccessPointAttachmentsRequest_MaxResults, *v.MaxResults)
 	}
-	serializeS3AccessPointAttachmentNames(s, schemas.DescribeS3AccessPointAttachmentsRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeS3AccessPointAttachmentNames(s, schemas.DescribeS3AccessPointAttachmentsRequest_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeS3AccessPointAttachmentsRequest_NextToken, *v.NextToken)
 	}
@@ -97,7 +101,9 @@ func (v *DescribeS3AccessPointAttachmentsOutput) SerializeMembers(s smithy.Shape
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeS3AccessPointAttachmentsResponse_NextToken, *v.NextToken)
 	}
-	serializeS3AccessPointAttachments(s, schemas.DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments, v.S3AccessPointAttachments)
+	if v.S3AccessPointAttachments != nil {
+		serializeS3AccessPointAttachments(s, schemas.DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments, v.S3AccessPointAttachments)
+	}
 }
 func (v *DescribeS3AccessPointAttachmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeS3AccessPointAttachmentsResponse, func(s *smithy.Schema) error {

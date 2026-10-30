@@ -82,7 +82,9 @@ func (v *CreateOmniDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SpaceId != nil {
 		s.WriteString(schemas.CreateOmniDashboardInput_spaceId, *v.SpaceId)
 	}
-	serializeTagMap(s, schemas.CreateOmniDashboardInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateOmniDashboardInput_tags, v.Tags)
+	}
 }
 
 type CreateOmniDashboardOutput struct {

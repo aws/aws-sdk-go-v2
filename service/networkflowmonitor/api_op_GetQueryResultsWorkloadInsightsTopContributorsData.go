@@ -121,7 +121,9 @@ func (v *GetQueryResultsWorkloadInsightsTopContributorsDataOutput) Serialize(s s
 }
 
 func (v *GetQueryResultsWorkloadInsightsTopContributorsDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkloadInsightsTopContributorsDataPoints(s, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints, v.Datapoints)
+	if v.Datapoints != nil {
+		serializeWorkloadInsightsTopContributorsDataPoints(s, schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_datapoints, v.Datapoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetQueryResultsWorkloadInsightsTopContributorsDataOutput_nextToken, *v.NextToken)
 	}

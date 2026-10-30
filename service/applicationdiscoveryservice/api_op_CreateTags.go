@@ -55,8 +55,12 @@ func (v *CreateTagsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationIdList(s, schemas.CreateTagsRequest_configurationIds, v.ConfigurationIds)
-	serializeTagSet(s, schemas.CreateTagsRequest_tags, v.Tags)
+	if v.ConfigurationIds != nil {
+		serializeConfigurationIdList(s, schemas.CreateTagsRequest_configurationIds, v.ConfigurationIds)
+	}
+	if v.Tags != nil {
+		serializeTagSet(s, schemas.CreateTagsRequest_tags, v.Tags)
+	}
 }
 
 type CreateTagsOutput struct {

@@ -82,7 +82,9 @@ func (v *UpdateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DesktopEndpoint != nil {
 		s.WriteString(schemas.UpdateEnvironmentRequest_desktopEndpoint, *v.DesktopEndpoint)
 	}
-	serializeDeviceCreationTagsMap(s, schemas.UpdateEnvironmentRequest_deviceCreationTags, v.DeviceCreationTags)
+	if v.DeviceCreationTags != nil {
+		serializeDeviceCreationTagsMap(s, schemas.UpdateEnvironmentRequest_deviceCreationTags, v.DeviceCreationTags)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.UpdateEnvironmentRequest_id, *v.Id)
 	}

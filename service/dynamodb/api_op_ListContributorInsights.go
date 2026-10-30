@@ -87,7 +87,9 @@ func (v *ListContributorInsightsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListContributorInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContributorInsightsSummaries(s, schemas.ListContributorInsightsOutput_ContributorInsightsSummaries, v.ContributorInsightsSummaries)
+	if v.ContributorInsightsSummaries != nil {
+		serializeContributorInsightsSummaries(s, schemas.ListContributorInsightsOutput_ContributorInsightsSummaries, v.ContributorInsightsSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListContributorInsightsOutput_NextToken, *v.NextToken)
 	}

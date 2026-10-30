@@ -102,7 +102,9 @@ func (v *ListTemplateStepGroupsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTemplateStepGroupsResponse_nextToken, *v.NextToken)
 	}
-	serializeTemplateStepGroupSummaryList(s, schemas.ListTemplateStepGroupsResponse_templateStepGroupSummary, v.TemplateStepGroupSummary)
+	if v.TemplateStepGroupSummary != nil {
+		serializeTemplateStepGroupSummaryList(s, schemas.ListTemplateStepGroupsResponse_templateStepGroupSummary, v.TemplateStepGroupSummary)
+	}
 }
 func (v *ListTemplateStepGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTemplateStepGroupsResponse, func(s *smithy.Schema) error {

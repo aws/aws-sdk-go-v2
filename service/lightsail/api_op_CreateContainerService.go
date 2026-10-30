@@ -151,14 +151,18 @@ func (v *CreateContainerServiceInput) SerializeMembers(s smithy.ShapeSerializer)
 		v.PrivateRegistryAccess.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContainerServicePublicDomains(s, schemas.CreateContainerServiceRequest_publicDomainNames, v.PublicDomainNames)
+	if v.PublicDomainNames != nil {
+		serializeContainerServicePublicDomains(s, schemas.CreateContainerServiceRequest_publicDomainNames, v.PublicDomainNames)
+	}
 	if v.Scale != nil {
 		s.WriteInt32(schemas.CreateContainerServiceRequest_scale, *v.Scale)
 	}
 	if v.ServiceName != nil {
 		s.WriteString(schemas.CreateContainerServiceRequest_serviceName, *v.ServiceName)
 	}
-	serializeTagList(s, schemas.CreateContainerServiceRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateContainerServiceRequest_tags, v.Tags)
+	}
 }
 
 type CreateContainerServiceOutput struct {

@@ -99,7 +99,9 @@ func (v *DescribeAccessPointsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeAccessPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointDescriptions(s, schemas.DescribeAccessPointsResponse_AccessPoints, v.AccessPoints)
+	if v.AccessPoints != nil {
+		serializeAccessPointDescriptions(s, schemas.DescribeAccessPointsResponse_AccessPoints, v.AccessPoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeAccessPointsResponse_NextToken, *v.NextToken)
 	}

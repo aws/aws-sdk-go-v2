@@ -235,7 +235,9 @@ func (v *UpdateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SizeInBytes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	}
 	if v.ThroughputMode != "" {
 		s.WriteString(schemas.FileSystemDescription_ThroughputMode, string(v.ThroughputMode))
 	}

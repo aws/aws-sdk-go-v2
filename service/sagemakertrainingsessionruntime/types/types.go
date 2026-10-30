@@ -165,7 +165,9 @@ func (v *ComputeLogprobsResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ComputeLogprobsResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDoubleList(s, schemas.ComputeLogprobsResult_logprobs, v.Logprobs)
+	if v.Logprobs != nil {
+		serializeDoubleList(s, schemas.ComputeLogprobsResult_logprobs, v.Logprobs)
+	}
 }
 func (v *ComputeLogprobsResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ComputeLogprobsResult, func(s *smithy.Schema) error {
@@ -204,7 +206,9 @@ func (v *Datum) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Datum) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTensorDataMap(s, schemas.Datum_lossFnInputs, v.LossFnInputs)
+	if v.LossFnInputs != nil {
+		serializeTensorDataMap(s, schemas.Datum_lossFnInputs, v.LossFnInputs)
+	}
 	if v.ModelInput != nil {
 		s.WriteStruct(schemas.Datum_modelInput)
 		v.ModelInput.SerializeMembers(s)
@@ -247,7 +251,9 @@ func (v *EncodedTextChunk) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncodedTextChunk) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIntegerList(s, schemas.EncodedTextChunk_tokens, v.Tokens)
+	if v.Tokens != nil {
+		serializeIntegerList(s, schemas.EncodedTextChunk_tokens, v.Tokens)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.EncodedTextChunk_type, string(v.Type))
 	}
@@ -299,7 +305,9 @@ func (v *ForwardBackwardConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ForwardBackwardConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatumList(s, schemas.ForwardBackwardConfig_datumList, v.DatumList)
+	if v.DatumList != nil {
+		serializeDatumList(s, schemas.ForwardBackwardConfig_datumList, v.DatumList)
+	}
 	if v.LossFnConfig != nil {
 		s.WriteDocument(schemas.ForwardBackwardConfig_lossFnConfig, &smithydocument.Opaque{Value: v.LossFnConfig})
 	}
@@ -362,8 +370,12 @@ func (v *ForwardBackwardResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LossFnOutputType != nil {
 		s.WriteString(schemas.ForwardBackwardResult_lossFnOutputType, *v.LossFnOutputType)
 	}
-	serializeTensorDataMapList(s, schemas.ForwardBackwardResult_lossFnOutputs, v.LossFnOutputs)
-	serializeMetricsMap(s, schemas.ForwardBackwardResult_metrics, v.Metrics)
+	if v.LossFnOutputs != nil {
+		serializeTensorDataMapList(s, schemas.ForwardBackwardResult_lossFnOutputs, v.LossFnOutputs)
+	}
+	if v.Metrics != nil {
+		serializeMetricsMap(s, schemas.ForwardBackwardResult_metrics, v.Metrics)
+	}
 	if v.TokenUsage != nil {
 		s.WriteStruct(schemas.ForwardBackwardResult_tokenUsage)
 		v.TokenUsage.SerializeMembers(s)
@@ -418,7 +430,9 @@ func (v *ForwardConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ForwardConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDatumList(s, schemas.ForwardConfig_datumList, v.DatumList)
+	if v.DatumList != nil {
+		serializeDatumList(s, schemas.ForwardConfig_datumList, v.DatumList)
+	}
 	if v.LossFnConfig != nil {
 		s.WriteDocument(schemas.ForwardConfig_lossFnConfig, &smithydocument.Opaque{Value: v.LossFnConfig})
 	}
@@ -480,8 +494,12 @@ func (v *ForwardResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LossFnOutputType != nil {
 		s.WriteString(schemas.ForwardResult_lossFnOutputType, *v.LossFnOutputType)
 	}
-	serializeTensorDataMapList(s, schemas.ForwardResult_lossFnOutputs, v.LossFnOutputs)
-	serializeMetricsMap(s, schemas.ForwardResult_metrics, v.Metrics)
+	if v.LossFnOutputs != nil {
+		serializeTensorDataMapList(s, schemas.ForwardResult_lossFnOutputs, v.LossFnOutputs)
+	}
+	if v.Metrics != nil {
+		serializeMetricsMap(s, schemas.ForwardResult_metrics, v.Metrics)
+	}
 	if v.TokenUsage != nil {
 		s.WriteStruct(schemas.ForwardResult_tokenUsage)
 		v.TokenUsage.SerializeMembers(s)
@@ -653,7 +671,9 @@ func (v *ModelInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ModelInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncodedTextChunkList(s, schemas.ModelInput_chunks, v.Chunks)
+	if v.Chunks != nil {
+		serializeEncodedTextChunkList(s, schemas.ModelInput_chunks, v.Chunks)
+	}
 }
 func (v *ModelInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ModelInput, func(s *smithy.Schema) error {
@@ -954,7 +974,9 @@ func (v *OptimizerStepResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OptimizerStepResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMetricsMap(s, schemas.OptimizerStepResult_metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeMetricsMap(s, schemas.OptimizerStepResult_metrics, v.Metrics)
+	}
 }
 func (v *OptimizerStepResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OptimizerStepResult, func(s *smithy.Schema) error {
@@ -1085,7 +1107,9 @@ func (v *SampledSequence) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SampledSequence) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDoubleList(s, schemas.SampledSequence_logprobs, v.Logprobs)
+	if v.Logprobs != nil {
+		serializeDoubleList(s, schemas.SampledSequence_logprobs, v.Logprobs)
+	}
 	if v.StopReason != "" {
 		s.WriteString(schemas.SampledSequence_stopReason, string(v.StopReason))
 	}
@@ -1094,7 +1118,9 @@ func (v *SampledSequence) SerializeMembers(s smithy.ShapeSerializer) {
 		v.TokenUsage.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntegerList(s, schemas.SampledSequence_tokens, v.Tokens)
+	if v.Tokens != nil {
+		serializeIntegerList(s, schemas.SampledSequence_tokens, v.Tokens)
+	}
 }
 func (v *SampledSequence) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SampledSequence, func(s *smithy.Schema) error {
@@ -1272,9 +1298,15 @@ func (v *SampleResponse) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SampleResponse) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDoubleList(s, schemas.SampleResponse_promptLogprobs, v.PromptLogprobs)
-	serializeSampledSequenceList(s, schemas.SampleResponse_sequences, v.Sequences)
-	serializeTopkPromptLogprobsList(s, schemas.SampleResponse_topkPromptLogprobs, v.TopkPromptLogprobs)
+	if v.PromptLogprobs != nil {
+		serializeDoubleList(s, schemas.SampleResponse_promptLogprobs, v.PromptLogprobs)
+	}
+	if v.Sequences != nil {
+		serializeSampledSequenceList(s, schemas.SampleResponse_sequences, v.Sequences)
+	}
+	if v.TopkPromptLogprobs != nil {
+		serializeTopkPromptLogprobsList(s, schemas.SampleResponse_topkPromptLogprobs, v.TopkPromptLogprobs)
+	}
 }
 func (v *SampleResponse) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SampleResponse, func(s *smithy.Schema) error {
@@ -1378,7 +1410,9 @@ func (v *SamplingParams) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Seed != nil {
 		s.WriteInt32(schemas.SamplingParams_seed, *v.Seed)
 	}
-	serializeStopSequenceList(s, schemas.SamplingParams_stop, v.Stop)
+	if v.Stop != nil {
+		serializeStopSequenceList(s, schemas.SamplingParams_stop, v.Stop)
+	}
 	if v.Temperature != nil {
 		s.WriteFloat64(schemas.SamplingParams_temperature, *v.Temperature)
 	}
@@ -1584,7 +1618,9 @@ func (v *TensorData) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Dtype != nil {
 		s.WriteString(schemas.TensorData_dtype, *v.Dtype)
 	}
-	serializeIntegerList(s, schemas.TensorData_shape, v.Shape)
+	if v.Shape != nil {
+		serializeIntegerList(s, schemas.TensorData_shape, v.Shape)
+	}
 }
 func (v *TensorData) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TensorData, func(s *smithy.Schema) error {

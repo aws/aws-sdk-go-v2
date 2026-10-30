@@ -118,7 +118,9 @@ func (v *GetJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Details.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeListOfJobError(s, schemas.GetJobResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeListOfJobError(s, schemas.GetJobResponse_Errors, v.Errors)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetJobResponse_Id, *v.Id)
 	}

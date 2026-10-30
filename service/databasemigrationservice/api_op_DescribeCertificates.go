@@ -55,7 +55,9 @@ func (v *DescribeCertificatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeCertificatesMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeCertificatesMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeCertificatesMessage_Marker, *v.Marker)
 	}
@@ -86,7 +88,9 @@ func (v *DescribeCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateList(s, schemas.DescribeCertificatesResponse_Certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificateList(s, schemas.DescribeCertificatesResponse_Certificates, v.Certificates)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeCertificatesResponse_Marker, *v.Marker)
 	}

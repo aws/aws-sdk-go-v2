@@ -128,7 +128,9 @@ func (v *DatasourcePackageIngestDetail) SerializeMembers(s smithy.ShapeSerialize
 	if v.DatasourcePackageIngestState != "" {
 		s.WriteString(schemas.DatasourcePackageIngestDetail_DatasourcePackageIngestState, string(v.DatasourcePackageIngestState))
 	}
-	serializeLastIngestStateChangeDates(s, schemas.DatasourcePackageIngestDetail_LastIngestStateChange, v.LastIngestStateChange)
+	if v.LastIngestStateChange != nil {
+		serializeLastIngestStateChangeDates(s, schemas.DatasourcePackageIngestDetail_LastIngestStateChange, v.LastIngestStateChange)
+	}
 }
 func (v *DatasourcePackageIngestDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DatasourcePackageIngestDetail, func(s *smithy.Schema) error {
@@ -889,7 +891,9 @@ func (v *MemberDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdministratorId != nil {
 		s.WriteString(schemas.MemberDetail_AdministratorId, *v.AdministratorId)
 	}
-	serializeDatasourcePackageIngestStates(s, schemas.MemberDetail_DatasourcePackageIngestStates, v.DatasourcePackageIngestStates)
+	if v.DatasourcePackageIngestStates != nil {
+		serializeDatasourcePackageIngestStates(s, schemas.MemberDetail_DatasourcePackageIngestStates, v.DatasourcePackageIngestStates)
+	}
 	if v.DisabledReason != "" {
 		s.WriteString(schemas.MemberDetail_DisabledReason, string(v.DisabledReason))
 	}
@@ -920,7 +924,9 @@ func (v *MemberDetail) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.UpdatedTime != nil {
 		s.WriteTime(schemas.MemberDetail_UpdatedTime, *v.UpdatedTime)
 	}
-	serializeVolumeUsageByDatasourcePackage(s, schemas.MemberDetail_VolumeUsageByDatasourcePackage, v.VolumeUsageByDatasourcePackage)
+	if v.VolumeUsageByDatasourcePackage != nil {
+		serializeVolumeUsageByDatasourcePackage(s, schemas.MemberDetail_VolumeUsageByDatasourcePackage, v.VolumeUsageByDatasourcePackage)
+	}
 	if v.VolumeUsageInBytes != nil {
 		s.WriteInt64(schemas.MemberDetail_VolumeUsageInBytes, *v.VolumeUsageInBytes)
 	}
@@ -1019,7 +1025,9 @@ func (v *MembershipDatasources) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccountId != nil {
 		s.WriteString(schemas.MembershipDatasources_AccountId, *v.AccountId)
 	}
-	serializeDatasourcePackageIngestHistory(s, schemas.MembershipDatasources_DatasourcePackageIngestHistory, v.DatasourcePackageIngestHistory)
+	if v.DatasourcePackageIngestHistory != nil {
+		serializeDatasourcePackageIngestHistory(s, schemas.MembershipDatasources_DatasourcePackageIngestHistory, v.DatasourcePackageIngestHistory)
+	}
 	if v.GraphArn != nil {
 		s.WriteString(schemas.MembershipDatasources_GraphArn, *v.GraphArn)
 	}

@@ -111,7 +111,9 @@ func (v *AccountMetaData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Address.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAddressRoleMap(s, schemas.AccountMetaData_addressRoleMap, v.AddressRoleMap)
+	if v.AddressRoleMap != nil {
+		serializeAddressRoleMap(s, schemas.AccountMetaData_addressRoleMap, v.AddressRoleMap)
+	}
 	if v.AddressType != "" {
 		s.WriteString(schemas.AccountMetaData_addressType, string(v.AddressType))
 	}
@@ -1948,7 +1950,9 @@ func (v *MalaysiaAdditionalInfo) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BusinessRegistrationNumber != nil {
 		s.WriteString(schemas.MalaysiaAdditionalInfo_businessRegistrationNumber, *v.BusinessRegistrationNumber)
 	}
-	serializeMalaysiaServiceTaxCodesList(s, schemas.MalaysiaAdditionalInfo_serviceTaxCodes, v.ServiceTaxCodes)
+	if v.ServiceTaxCodes != nil {
+		serializeMalaysiaServiceTaxCodesList(s, schemas.MalaysiaAdditionalInfo_serviceTaxCodes, v.ServiceTaxCodes)
+	}
 	if v.TaxInformationNumber != nil {
 		s.WriteString(schemas.MalaysiaAdditionalInfo_taxInformationNumber, *v.TaxInformationNumber)
 	}
@@ -2700,7 +2704,9 @@ func (v *TaxExemptionDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HeritageObtainedReason != nil {
 		s.WriteString(schemas.TaxExemptionDetails_heritageObtainedReason, *v.HeritageObtainedReason)
 	}
-	serializeTaxExemptions(s, schemas.TaxExemptionDetails_taxExemptions, v.TaxExemptions)
+	if v.TaxExemptions != nil {
+		serializeTaxExemptions(s, schemas.TaxExemptionDetails_taxExemptions, v.TaxExemptions)
+	}
 }
 func (v *TaxExemptionDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaxExemptionDetails, func(s *smithy.Schema) error {
@@ -2743,7 +2749,9 @@ func (v *TaxExemptionType) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TaxExemptionType) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorities(s, schemas.TaxExemptionType_applicableJurisdictions, v.ApplicableJurisdictions)
+	if v.ApplicableJurisdictions != nil {
+		serializeAuthorities(s, schemas.TaxExemptionType_applicableJurisdictions, v.ApplicableJurisdictions)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.TaxExemptionType_description, *v.Description)
 	}
@@ -2890,7 +2898,9 @@ func (v *TaxRegistration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.TaxRegistration_status, string(v.Status))
 	}
-	serializeTaxDocumentMetadatas(s, schemas.TaxRegistration_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	if v.TaxDocumentMetadatas != nil {
+		serializeTaxDocumentMetadatas(s, schemas.TaxRegistration_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	}
 }
 func (v *TaxRegistration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaxRegistration, func(s *smithy.Schema) error {
@@ -3241,7 +3251,9 @@ func (v *TaxRegistrationWithJurisdiction) SerializeMembers(s smithy.ShapeSeriali
 	if v.Status != "" {
 		s.WriteString(schemas.TaxRegistrationWithJurisdiction_status, string(v.Status))
 	}
-	serializeTaxDocumentMetadatas(s, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	if v.TaxDocumentMetadatas != nil {
+		serializeTaxDocumentMetadatas(s, schemas.TaxRegistrationWithJurisdiction_taxDocumentMetadatas, v.TaxDocumentMetadatas)
+	}
 }
 func (v *TaxRegistrationWithJurisdiction) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TaxRegistrationWithJurisdiction, func(s *smithy.Schema) error {
@@ -3501,7 +3513,9 @@ func (v *VerificationDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DateOfBirth != nil {
 		s.WriteString(schemas.VerificationDetails_dateOfBirth, *v.DateOfBirth)
 	}
-	serializeTaxRegistrationDocuments(s, schemas.VerificationDetails_taxRegistrationDocuments, v.TaxRegistrationDocuments)
+	if v.TaxRegistrationDocuments != nil {
+		serializeTaxRegistrationDocuments(s, schemas.VerificationDetails_taxRegistrationDocuments, v.TaxRegistrationDocuments)
+	}
 }
 func (v *VerificationDetails) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VerificationDetails, func(s *smithy.Schema) error {

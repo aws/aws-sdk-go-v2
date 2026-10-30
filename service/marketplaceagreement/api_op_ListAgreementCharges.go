@@ -95,7 +95,9 @@ func (v *ListAgreementChargesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAgreementChargesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCharges(s, schemas.ListAgreementChargesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeCharges(s, schemas.ListAgreementChargesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgreementChargesOutput_nextToken, *v.NextToken)
 	}

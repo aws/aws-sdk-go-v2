@@ -68,7 +68,9 @@ func (v *DescribeServiceEnvironmentsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeServiceEnvironmentsRequest_nextToken, *v.NextToken)
 	}
-	serializeStringList(s, schemas.DescribeServiceEnvironmentsRequest_serviceEnvironments, v.ServiceEnvironments)
+	if v.ServiceEnvironments != nil {
+		serializeStringList(s, schemas.DescribeServiceEnvironmentsRequest_serviceEnvironments, v.ServiceEnvironments)
+	}
 }
 
 type DescribeServiceEnvironmentsOutput struct {
@@ -98,7 +100,9 @@ func (v *DescribeServiceEnvironmentsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeServiceEnvironmentsResponse_nextToken, *v.NextToken)
 	}
-	serializeServiceEnvironmentDetailList(s, schemas.DescribeServiceEnvironmentsResponse_serviceEnvironments, v.ServiceEnvironments)
+	if v.ServiceEnvironments != nil {
+		serializeServiceEnvironmentDetailList(s, schemas.DescribeServiceEnvironmentsResponse_serviceEnvironments, v.ServiceEnvironments)
+	}
 }
 func (v *DescribeServiceEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeServiceEnvironmentsResponse, func(s *smithy.Schema) error {

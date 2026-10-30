@@ -70,8 +70,12 @@ func (v *DescribeComplianceByConfigRuleInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *DescribeComplianceByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceTypes(s, schemas.DescribeComplianceByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
-	serializeConfigRuleNames(s, schemas.DescribeComplianceByConfigRuleRequest_ConfigRuleNames, v.ConfigRuleNames)
+	if v.ComplianceTypes != nil {
+		serializeComplianceTypes(s, schemas.DescribeComplianceByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
+	}
+	if v.ConfigRuleNames != nil {
+		serializeConfigRuleNames(s, schemas.DescribeComplianceByConfigRuleRequest_ConfigRuleNames, v.ConfigRuleNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeComplianceByConfigRuleRequest_NextToken, *v.NextToken)
 	}
@@ -99,7 +103,9 @@ func (v *DescribeComplianceByConfigRuleOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *DescribeComplianceByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeComplianceByConfigRules(s, schemas.DescribeComplianceByConfigRuleResponse_ComplianceByConfigRules, v.ComplianceByConfigRules)
+	if v.ComplianceByConfigRules != nil {
+		serializeComplianceByConfigRules(s, schemas.DescribeComplianceByConfigRuleResponse_ComplianceByConfigRules, v.ComplianceByConfigRules)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeComplianceByConfigRuleResponse_NextToken, *v.NextToken)
 	}

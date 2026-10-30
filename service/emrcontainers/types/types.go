@@ -213,8 +213,12 @@ func (v *Configuration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Classification != nil {
 		s.WriteString(schemas.Configuration_classification, *v.Classification)
 	}
-	serializeConfigurationList(s, schemas.Configuration_configurations, v.Configurations)
-	serializeSensitivePropertiesMap(s, schemas.Configuration_properties, v.Properties)
+	if v.Configurations != nil {
+		serializeConfigurationList(s, schemas.Configuration_configurations, v.Configurations)
+	}
+	if v.Properties != nil {
+		serializeSensitivePropertiesMap(s, schemas.Configuration_properties, v.Properties)
+	}
 }
 func (v *Configuration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Configuration, func(s *smithy.Schema) error {
@@ -250,7 +254,9 @@ func (v *ConfigurationOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConfigurationOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationList(s, schemas.ConfigurationOverrides_applicationConfiguration, v.ApplicationConfiguration)
+	if v.ApplicationConfiguration != nil {
+		serializeConfigurationList(s, schemas.ConfigurationOverrides_applicationConfiguration, v.ApplicationConfiguration)
+	}
 	if v.MonitoringConfiguration != nil {
 		s.WriteStruct(schemas.ConfigurationOverrides_monitoringConfiguration)
 		v.MonitoringConfiguration.SerializeMembers(s)
@@ -370,7 +376,9 @@ func (v *ContainerProvider) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.ContainerProvider_id, *v.Id)
 	}
-	serializeContainerInfo(s, schemas.ContainerProvider_info, v.Info)
+	if v.Info != nil {
+		serializeContainerInfo(s, schemas.ContainerProvider_info, v.Info)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ContainerProvider_type, string(v.Type))
 	}
@@ -618,8 +626,12 @@ func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StateDetails != nil {
 		s.WriteString(schemas.Endpoint_stateDetails, *v.StateDetails)
 	}
-	serializeSubnetIds(s, schemas.Endpoint_subnetIds, v.SubnetIds)
-	serializeTagMap(s, schemas.Endpoint_tags, v.Tags)
+	if v.SubnetIds != nil {
+		serializeSubnetIds(s, schemas.Endpoint_subnetIds, v.SubnetIds)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.Endpoint_tags, v.Tags)
+	}
 	if v.Type != nil {
 		s.WriteString(schemas.Endpoint_type, *v.Type)
 	}
@@ -994,7 +1006,9 @@ func (v *JobRun) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StateDetails != nil {
 		s.WriteString(schemas.JobRun_stateDetails, *v.StateDetails)
 	}
-	serializeTagMap(s, schemas.JobRun_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.JobRun_tags, v.Tags)
+	}
 	if v.VirtualClusterId != nil {
 		s.WriteString(schemas.JobRun_virtualClusterId, *v.VirtualClusterId)
 	}
@@ -1139,7 +1153,9 @@ func (v *JobTemplate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.JobTemplate_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.JobTemplate_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.JobTemplate_tags, v.Tags)
+	}
 }
 func (v *JobTemplate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.JobTemplate, func(s *smithy.Schema) error {
@@ -1227,8 +1243,12 @@ func (v *JobTemplateData) SerializeMembers(s smithy.ShapeSerializer) {
 		v.JobDriver.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.JobTemplateData_jobTags, v.JobTags)
-	serializeTemplateParameterConfigurationMap(s, schemas.JobTemplateData_parameterConfiguration, v.ParameterConfiguration)
+	if v.JobTags != nil {
+		serializeTagMap(s, schemas.JobTemplateData_jobTags, v.JobTags)
+	}
+	if v.ParameterConfiguration != nil {
+		serializeTemplateParameterConfigurationMap(s, schemas.JobTemplateData_parameterConfiguration, v.ParameterConfiguration)
+	}
 	if v.ReleaseLabel != nil {
 		s.WriteString(schemas.JobTemplateData_releaseLabel, *v.ReleaseLabel)
 	}
@@ -1497,7 +1517,9 @@ func (v *ParametricConfigurationOverrides) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ParametricConfigurationOverrides) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationList(s, schemas.ParametricConfigurationOverrides_applicationConfiguration, v.ApplicationConfiguration)
+	if v.ApplicationConfiguration != nil {
+		serializeConfigurationList(s, schemas.ParametricConfigurationOverrides_applicationConfiguration, v.ApplicationConfiguration)
+	}
 	if v.MonitoringConfiguration != nil {
 		s.WriteStruct(schemas.ParametricConfigurationOverrides_monitoringConfiguration)
 		v.MonitoringConfiguration.SerializeMembers(s)
@@ -1901,7 +1923,9 @@ func (v *SecurityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SecurityConfigurationData.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.SecurityConfiguration_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.SecurityConfiguration_tags, v.Tags)
+	}
 }
 func (v *SecurityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SecurityConfiguration, func(s *smithy.Schema) error {
@@ -2042,7 +2066,9 @@ func (v *SparkSubmitJobDriver) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EntryPoint != nil {
 		s.WriteString(schemas.SparkSubmitJobDriver_entryPoint, *v.EntryPoint)
 	}
-	serializeEntryPointArguments(s, schemas.SparkSubmitJobDriver_entryPointArguments, v.EntryPointArguments)
+	if v.EntryPointArguments != nil {
+		serializeEntryPointArguments(s, schemas.SparkSubmitJobDriver_entryPointArguments, v.EntryPointArguments)
+	}
 	if v.SparkSubmitParameters != nil {
 		s.WriteString(schemas.SparkSubmitJobDriver_sparkSubmitParameters, *v.SparkSubmitParameters)
 	}
@@ -2252,7 +2278,9 @@ func (v *VirtualCluster) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.VirtualCluster_state, string(v.State))
 	}
-	serializeTagMap(s, schemas.VirtualCluster_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.VirtualCluster_tags, v.Tags)
+	}
 }
 func (v *VirtualCluster) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VirtualCluster, func(s *smithy.Schema) error {

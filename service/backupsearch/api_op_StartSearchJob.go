@@ -90,7 +90,9 @@ func (v *StartSearchJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SearchScope.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.StartSearchJobInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.StartSearchJobInput_Tags, v.Tags)
+	}
 }
 
 type StartSearchJobOutput struct {

@@ -147,8 +147,12 @@ func (v *GetStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StreamIdentifier != nil {
 		s.WriteString(schemas.GetStreamOutput_streamIdentifier, *v.StreamIdentifier)
 	}
-	serializeTagMap(s, schemas.GetStreamOutput_tags, v.Tags)
-	serializeTargetDefinition(s, schemas.GetStreamOutput_targetDefinition, v.TargetDefinition)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetStreamOutput_tags, v.Tags)
+	}
+	if v.TargetDefinition != nil {
+		serializeTargetDefinition(s, schemas.GetStreamOutput_targetDefinition, v.TargetDefinition)
+	}
 }
 func (v *GetStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetStreamOutput, func(s *smithy.Schema) error {

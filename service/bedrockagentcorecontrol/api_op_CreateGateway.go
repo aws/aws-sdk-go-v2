@@ -114,7 +114,9 @@ func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.CreateGatewayRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.CreateGatewayRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.CreateGatewayRequest_authorizerType, string(v.AuthorizerType))
 	}
@@ -127,7 +129,9 @@ func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExceptionLevel != "" {
 		s.WriteString(schemas.CreateGatewayRequest_exceptionLevel, string(v.ExceptionLevel))
 	}
-	serializeGatewayInterceptorConfigurations(s, schemas.CreateGatewayRequest_interceptorConfigurations, v.InterceptorConfigurations)
+	if v.InterceptorConfigurations != nil {
+		serializeGatewayInterceptorConfigurations(s, schemas.CreateGatewayRequest_interceptorConfigurations, v.InterceptorConfigurations)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateGatewayRequest_kmsKeyArn, *v.KmsKeyArn)
 	}
@@ -139,14 +143,18 @@ func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PolicyEngineConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGatewayProtocolConfiguration(s, schemas.CreateGatewayRequest_protocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeGatewayProtocolConfiguration(s, schemas.CreateGatewayRequest_protocolConfiguration, v.ProtocolConfiguration)
+	}
 	if v.ProtocolType != "" {
 		s.WriteString(schemas.CreateGatewayRequest_protocolType, string(v.ProtocolType))
 	}
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateGatewayRequest_roleArn, *v.RoleArn)
 	}
-	serializeTagsMap(s, schemas.CreateGatewayRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateGatewayRequest_tags, v.Tags)
+	}
 }
 
 type CreateGatewayOutput struct {
@@ -253,7 +261,9 @@ func (v *CreateGatewayOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAuthorizerConfiguration(s, schemas.CreateGatewayResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.AuthorizerConfiguration != nil {
+		serializeAuthorizerConfiguration(s, schemas.CreateGatewayResponse_authorizerConfiguration, v.AuthorizerConfiguration)
+	}
 	if v.AuthorizerType != "" {
 		s.WriteString(schemas.CreateGatewayResponse_authorizerType, string(v.AuthorizerType))
 	}
@@ -280,7 +290,9 @@ func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GatewayUrl != nil {
 		s.WriteString(schemas.CreateGatewayResponse_gatewayUrl, *v.GatewayUrl)
 	}
-	serializeGatewayInterceptorConfigurations(s, schemas.CreateGatewayResponse_interceptorConfigurations, v.InterceptorConfigurations)
+	if v.InterceptorConfigurations != nil {
+		serializeGatewayInterceptorConfigurations(s, schemas.CreateGatewayResponse_interceptorConfigurations, v.InterceptorConfigurations)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateGatewayResponse_kmsKeyArn, *v.KmsKeyArn)
 	}
@@ -292,7 +304,9 @@ func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.PolicyEngineConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGatewayProtocolConfiguration(s, schemas.CreateGatewayResponse_protocolConfiguration, v.ProtocolConfiguration)
+	if v.ProtocolConfiguration != nil {
+		serializeGatewayProtocolConfiguration(s, schemas.CreateGatewayResponse_protocolConfiguration, v.ProtocolConfiguration)
+	}
 	if v.ProtocolType != "" {
 		s.WriteString(schemas.CreateGatewayResponse_protocolType, string(v.ProtocolType))
 	}
@@ -302,7 +316,9 @@ func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CreateGatewayResponse_status, string(v.Status))
 	}
-	serializeStatusReasons(s, schemas.CreateGatewayResponse_statusReasons, v.StatusReasons)
+	if v.StatusReasons != nil {
+		serializeStatusReasons(s, schemas.CreateGatewayResponse_statusReasons, v.StatusReasons)
+	}
 	if v.UpdatedAt != nil {
 		s.WriteTime(schemas.CreateGatewayResponse_updatedAt, *v.UpdatedAt)
 	}

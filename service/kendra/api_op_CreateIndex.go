@@ -153,7 +153,9 @@ func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateIndexRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateIndexRequest_Tags, v.Tags)
+	}
 	if v.UserContextPolicy != "" {
 		s.WriteString(schemas.CreateIndexRequest_UserContextPolicy, string(v.UserContextPolicy))
 	}
@@ -162,7 +164,9 @@ func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.UserGroupResolutionConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeUserTokenConfigurationList(s, schemas.CreateIndexRequest_UserTokenConfigurations, v.UserTokenConfigurations)
+	if v.UserTokenConfigurations != nil {
+		serializeUserTokenConfigurationList(s, schemas.CreateIndexRequest_UserTokenConfigurations, v.UserTokenConfigurations)
+	}
 }
 
 type CreateIndexOutput struct {

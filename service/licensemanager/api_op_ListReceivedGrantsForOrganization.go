@@ -56,7 +56,9 @@ func (v *ListReceivedGrantsForOrganizationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *ListReceivedGrantsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListReceivedGrantsForOrganizationRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListReceivedGrantsForOrganizationRequest_Filters, v.Filters)
+	}
 	if v.LicenseArn != nil {
 		s.WriteString(schemas.ListReceivedGrantsForOrganizationRequest_LicenseArn, *v.LicenseArn)
 	}
@@ -89,7 +91,9 @@ func (v *ListReceivedGrantsForOrganizationOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *ListReceivedGrantsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGrantList(s, schemas.ListReceivedGrantsForOrganizationResponse_Grants, v.Grants)
+	if v.Grants != nil {
+		serializeGrantList(s, schemas.ListReceivedGrantsForOrganizationResponse_Grants, v.Grants)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListReceivedGrantsForOrganizationResponse_NextToken, *v.NextToken)
 	}

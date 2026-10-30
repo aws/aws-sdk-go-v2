@@ -72,7 +72,9 @@ func (v *GetBucketBundlesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetBucketBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBucketBundleList(s, schemas.GetBucketBundlesResult_bundles, v.Bundles)
+	if v.Bundles != nil {
+		serializeBucketBundleList(s, schemas.GetBucketBundlesResult_bundles, v.Bundles)
+	}
 }
 func (v *GetBucketBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetBucketBundlesResult, func(s *smithy.Schema) error {

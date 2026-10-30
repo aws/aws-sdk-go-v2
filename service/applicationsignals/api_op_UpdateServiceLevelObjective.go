@@ -78,7 +78,9 @@ func (v *UpdateServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerial
 	if v.AutoInvestigationEnabled != nil {
 		s.WriteBool(schemas.UpdateServiceLevelObjectiveInput_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
 	}
-	serializeBurnRateConfigurations(s, schemas.UpdateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
+	if v.BurnRateConfigurations != nil {
+		serializeBurnRateConfigurations(s, schemas.UpdateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateServiceLevelObjectiveInput_Description, *v.Description)
 	}

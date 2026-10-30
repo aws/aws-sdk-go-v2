@@ -100,7 +100,9 @@ func (v *DescribeResourcePermissionsOutput) SerializeMembers(s smithy.ShapeSeria
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeResourcePermissionsResponse_Marker, *v.Marker)
 	}
-	serializePrincipalList(s, schemas.DescribeResourcePermissionsResponse_Principals, v.Principals)
+	if v.Principals != nil {
+		serializePrincipalList(s, schemas.DescribeResourcePermissionsResponse_Principals, v.Principals)
+	}
 }
 func (v *DescribeResourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeResourcePermissionsResponse, func(s *smithy.Schema) error {

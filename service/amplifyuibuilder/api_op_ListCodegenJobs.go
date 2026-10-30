@@ -93,7 +93,9 @@ func (v *ListCodegenJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListCodegenJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCodegenJobSummaryList(s, schemas.ListCodegenJobsResponse_entities, v.Entities)
+	if v.Entities != nil {
+		serializeCodegenJobSummaryList(s, schemas.ListCodegenJobsResponse_entities, v.Entities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCodegenJobsResponse_nextToken, *v.NextToken)
 	}

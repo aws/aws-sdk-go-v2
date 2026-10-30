@@ -67,7 +67,9 @@ func (v *CreateUseCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IntegrationAssociationId != nil {
 		s.WriteString(schemas.CreateUseCaseRequest_IntegrationAssociationId, *v.IntegrationAssociationId)
 	}
-	serializeTagMap(s, schemas.CreateUseCaseRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateUseCaseRequest_Tags, v.Tags)
+	}
 	if v.UseCaseType != "" {
 		s.WriteString(schemas.CreateUseCaseRequest_UseCaseType, string(v.UseCaseType))
 	}

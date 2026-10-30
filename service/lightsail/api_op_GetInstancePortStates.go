@@ -69,7 +69,9 @@ func (v *GetInstancePortStatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstancePortStatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstancePortStateList(s, schemas.GetInstancePortStatesResult_portStates, v.PortStates)
+	if v.PortStates != nil {
+		serializeInstancePortStateList(s, schemas.GetInstancePortStatesResult_portStates, v.PortStates)
+	}
 }
 func (v *GetInstancePortStatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetInstancePortStatesResult, func(s *smithy.Schema) error {

@@ -8,9 +8,6 @@ import (
 )
 
 func serializeDataIngestionJobSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DataIngestionJobSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeDataIngestionJobSummaries(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeDatasetSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.DatasetSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeDatasetSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeFaultCodes(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -45,9 +36,6 @@ func serializeFaultCodes(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeInferenceEventSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InferenceEventSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -58,9 +46,6 @@ func serializeInferenceEventSummaries(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeInferenceExecutionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InferenceExecutionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -71,9 +56,6 @@ func serializeInferenceExecutionSummaries(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeInferenceSchedulerSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.InferenceSchedulerSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -84,9 +66,6 @@ func serializeInferenceSchedulerSummaries(s smithy.ShapeSerializer, schema *smit
 }
 
 func serializeLabelGroupSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LabelGroupSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -97,9 +76,6 @@ func serializeLabelGroupSummaries(s smithy.ShapeSerializer, schema *smithy.Schem
 }
 
 func serializeLabelSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.LabelSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -110,9 +86,6 @@ func serializeLabelSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeListOfDiscardedFiles(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.S3Object) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -123,9 +96,6 @@ func serializeListOfDiscardedFiles(s smithy.ShapeSerializer, schema *smithy.Sche
 }
 
 func serializeModelSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ModelSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -136,9 +106,6 @@ func serializeModelSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v 
 }
 
 func serializeModelVersionSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.ModelVersionSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -149,9 +116,6 @@ func serializeModelVersionSummaries(s smithy.ShapeSerializer, schema *smithy.Sch
 }
 
 func serializeRetrainingSchedulerSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RetrainingSchedulerSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -162,9 +126,6 @@ func serializeRetrainingSchedulerSummaries(s smithy.ShapeSerializer, schema *smi
 }
 
 func serializeSensorStatisticsSummaries(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.SensorStatisticsSummary) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -175,9 +136,6 @@ func serializeSensorStatisticsSummaries(s smithy.ShapeSerializer, schema *smithy
 }
 
 func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteString(schema.ListMember(), string(vv))
@@ -186,9 +144,6 @@ func serializeTagKeyList(s smithy.ShapeSerializer, schema *smithy.Schema, v []st
 }
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

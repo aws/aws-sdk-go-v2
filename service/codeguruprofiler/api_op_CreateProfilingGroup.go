@@ -79,7 +79,9 @@ func (v *CreateProfilingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ProfilingGroupName != nil {
 		s.WriteString(schemas.CreateProfilingGroupRequest_profilingGroupName, *v.ProfilingGroupName)
 	}
-	serializeTagsMap(s, schemas.CreateProfilingGroupRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateProfilingGroupRequest_tags, v.Tags)
+	}
 }
 func (v *CreateProfilingGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateProfilingGroupRequest, func(s *smithy.Schema) error {

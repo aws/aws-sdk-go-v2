@@ -96,7 +96,9 @@ func (v *GetFixtureOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFixtureOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompetitorList(s, schemas.GetFixtureResponse_competitors, v.Competitors)
+	if v.Competitors != nil {
+		serializeCompetitorList(s, schemas.GetFixtureResponse_competitors, v.Competitors)
+	}
 	if v.FixtureGroup != nil {
 		s.WriteString(schemas.GetFixtureResponse_fixtureGroup, *v.FixtureGroup)
 	}

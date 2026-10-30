@@ -97,7 +97,9 @@ func (v *CreateEnvironmentTemplateInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Provisioning != "" {
 		s.WriteString(schemas.CreateEnvironmentTemplateInput_provisioning, string(v.Provisioning))
 	}
-	serializeTagList(s, schemas.CreateEnvironmentTemplateInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEnvironmentTemplateInput_tags, v.Tags)
+	}
 }
 func (v *CreateEnvironmentTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateEnvironmentTemplateInput, func(s *smithy.Schema) error {

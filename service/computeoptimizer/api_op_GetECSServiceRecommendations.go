@@ -75,15 +75,21 @@ func (v *GetECSServiceRecommendationsInput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GetECSServiceRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetECSServiceRecommendationsRequest_accountIds, v.AccountIds)
-	serializeECSServiceRecommendationFilters(s, schemas.GetECSServiceRecommendationsRequest_filters, v.Filters)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetECSServiceRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeECSServiceRecommendationFilters(s, schemas.GetECSServiceRecommendationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetECSServiceRecommendationsRequest_maxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetECSServiceRecommendationsRequest_nextToken, *v.NextToken)
 	}
-	serializeServiceArns(s, schemas.GetECSServiceRecommendationsRequest_serviceArns, v.ServiceArns)
+	if v.ServiceArns != nil {
+		serializeServiceArns(s, schemas.GetECSServiceRecommendationsRequest_serviceArns, v.ServiceArns)
+	}
 }
 
 type GetECSServiceRecommendationsOutput struct {
@@ -110,8 +116,12 @@ func (v *GetECSServiceRecommendationsOutput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetECSServiceRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeECSServiceRecommendations(s, schemas.GetECSServiceRecommendationsResponse_ecsServiceRecommendations, v.EcsServiceRecommendations)
-	serializeGetRecommendationErrors(s, schemas.GetECSServiceRecommendationsResponse_errors, v.Errors)
+	if v.EcsServiceRecommendations != nil {
+		serializeECSServiceRecommendations(s, schemas.GetECSServiceRecommendationsResponse_ecsServiceRecommendations, v.EcsServiceRecommendations)
+	}
+	if v.Errors != nil {
+		serializeGetRecommendationErrors(s, schemas.GetECSServiceRecommendationsResponse_errors, v.Errors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetECSServiceRecommendationsResponse_nextToken, *v.NextToken)
 	}

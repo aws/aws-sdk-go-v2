@@ -98,7 +98,9 @@ func (v *GetDecryptedAPIKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreationTimestamp != nil {
 		s.WriteTime(schemas.GetDecryptedAPIKeyResponse_CreationTimestamp, *v.CreationTimestamp)
 	}
-	serializeTokenDomains(s, schemas.GetDecryptedAPIKeyResponse_TokenDomains, v.TokenDomains)
+	if v.TokenDomains != nil {
+		serializeTokenDomains(s, schemas.GetDecryptedAPIKeyResponse_TokenDomains, v.TokenDomains)
+	}
 }
 func (v *GetDecryptedAPIKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDecryptedAPIKeyResponse, func(s *smithy.Schema) error {

@@ -65,8 +65,12 @@ func (v *UpdateAnalysisPermissionsInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateAnalysisPermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateAnalysisPermissionsOutput struct {
@@ -106,7 +110,9 @@ func (v *UpdateAnalysisPermissionsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.AnalysisId != nil {
 		s.WriteString(schemas.UpdateAnalysisPermissionsResponse_AnalysisId, *v.AnalysisId)
 	}
-	serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeUpdateResourcePermissionList(s, schemas.UpdateAnalysisPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateAnalysisPermissionsResponse_RequestId, *v.RequestId)
 	}

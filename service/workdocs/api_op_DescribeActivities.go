@@ -136,7 +136,9 @@ func (v *DescribeActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeActivitiesResponse_Marker, *v.Marker)
 	}
-	serializeUserActivities(s, schemas.DescribeActivitiesResponse_UserActivities, v.UserActivities)
+	if v.UserActivities != nil {
+		serializeUserActivities(s, schemas.DescribeActivitiesResponse_UserActivities, v.UserActivities)
+	}
 }
 func (v *DescribeActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeActivitiesResponse, func(s *smithy.Schema) error {

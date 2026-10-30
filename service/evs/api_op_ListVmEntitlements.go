@@ -106,7 +106,9 @@ func (v *ListVmEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListVmEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeVmEntitlementList(s, schemas.ListVmEntitlementsResponse_entitlements, v.Entitlements)
+	if v.Entitlements != nil {
+		serializeVmEntitlementList(s, schemas.ListVmEntitlementsResponse_entitlements, v.Entitlements)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVmEntitlementsResponse_nextToken, *v.NextToken)
 	}

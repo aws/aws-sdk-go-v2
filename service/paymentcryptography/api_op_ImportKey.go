@@ -285,12 +285,18 @@ func (v *ImportKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyCheckValueAlgorithm != "" {
 		s.WriteString(schemas.ImportKeyInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
 	}
-	serializeImportKeyMaterial(s, schemas.ImportKeyInput_KeyMaterial, v.KeyMaterial)
-	serializeRegions(s, schemas.ImportKeyInput_ReplicationRegions, v.ReplicationRegions)
+	if v.KeyMaterial != nil {
+		serializeImportKeyMaterial(s, schemas.ImportKeyInput_KeyMaterial, v.KeyMaterial)
+	}
+	if v.ReplicationRegions != nil {
+		serializeRegions(s, schemas.ImportKeyInput_ReplicationRegions, v.ReplicationRegions)
+	}
 	if v.RequesterComment != nil {
 		s.WriteString(schemas.ImportKeyInput_RequesterComment, *v.RequesterComment)
 	}
-	serializeTags(s, schemas.ImportKeyInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.ImportKeyInput_Tags, v.Tags)
+	}
 }
 
 type ImportKeyOutput struct {

@@ -149,17 +149,23 @@ func (v *GetBatchEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetBatchEvaluationResponse_createdAt, *v.CreatedAt)
 	}
-	serializeDataSourceConfig(s, schemas.GetBatchEvaluationResponse_dataSourceConfig, v.DataSourceConfig)
+	if v.DataSourceConfig != nil {
+		serializeDataSourceConfig(s, schemas.GetBatchEvaluationResponse_dataSourceConfig, v.DataSourceConfig)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.GetBatchEvaluationResponse_description, *v.Description)
 	}
-	serializeErrorDetailsList(s, schemas.GetBatchEvaluationResponse_errorDetails, v.ErrorDetails)
+	if v.ErrorDetails != nil {
+		serializeErrorDetailsList(s, schemas.GetBatchEvaluationResponse_errorDetails, v.ErrorDetails)
+	}
 	if v.EvaluationResults != nil {
 		s.WriteStruct(schemas.GetBatchEvaluationResponse_evaluationResults)
 		v.EvaluationResults.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeEvaluatorList(s, schemas.GetBatchEvaluationResponse_evaluators, v.Evaluators)
+	if v.Evaluators != nil {
+		serializeEvaluatorList(s, schemas.GetBatchEvaluationResponse_evaluators, v.Evaluators)
+	}
 	if v.ExecutionSummaryResult != nil {
 		s.WriteStruct(schemas.GetBatchEvaluationResponse_executionSummaryResult)
 		v.ExecutionSummaryResult.SerializeMembers(s)
@@ -170,12 +176,18 @@ func (v *GetBatchEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FailureAnalysisResult.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInsightResultList(s, schemas.GetBatchEvaluationResponse_insightResults, v.InsightResults)
-	serializeInsightList(s, schemas.GetBatchEvaluationResponse_insights, v.Insights)
+	if v.InsightResults != nil {
+		serializeInsightResultList(s, schemas.GetBatchEvaluationResponse_insightResults, v.InsightResults)
+	}
+	if v.Insights != nil {
+		serializeInsightList(s, schemas.GetBatchEvaluationResponse_insights, v.Insights)
+	}
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.GetBatchEvaluationResponse_kmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeOutputConfig(s, schemas.GetBatchEvaluationResponse_outputConfig, v.OutputConfig)
+	if v.OutputConfig != nil {
+		serializeOutputConfig(s, schemas.GetBatchEvaluationResponse_outputConfig, v.OutputConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.GetBatchEvaluationResponse_status, string(v.Status))
 	}

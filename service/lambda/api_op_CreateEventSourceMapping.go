@@ -326,7 +326,9 @@ func (v *CreateEventSourceMappingInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.FunctionName != nil {
 		s.WriteString(schemas.CreateEventSourceMappingRequest_FunctionName, *v.FunctionName)
 	}
-	serializeFunctionResponseTypeList(s, schemas.CreateEventSourceMappingRequest_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.FunctionResponseTypes != nil {
+		serializeFunctionResponseTypeList(s, schemas.CreateEventSourceMappingRequest_FunctionResponseTypes, v.FunctionResponseTypes)
+	}
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.CreateEventSourceMappingRequest_KMSKeyArn, *v.KMSKeyArn)
 	}
@@ -357,7 +359,9 @@ func (v *CreateEventSourceMappingInput) SerializeMembers(s smithy.ShapeSerialize
 		v.ProvisionedPollerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQueues(s, schemas.CreateEventSourceMappingRequest_Queues, v.Queues)
+	if v.Queues != nil {
+		serializeQueues(s, schemas.CreateEventSourceMappingRequest_Queues, v.Queues)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.CreateEventSourceMappingRequest_ScalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -373,15 +377,21 @@ func (v *CreateEventSourceMappingInput) SerializeMembers(s smithy.ShapeSerialize
 		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceAccessConfigurations(s, schemas.CreateEventSourceMappingRequest_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.SourceAccessConfigurations != nil {
+		serializeSourceAccessConfigurations(s, schemas.CreateEventSourceMappingRequest_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	}
 	if v.StartingPosition != "" {
 		s.WriteString(schemas.CreateEventSourceMappingRequest_StartingPosition, string(v.StartingPosition))
 	}
 	if v.StartingPositionTimestamp != nil {
 		s.WriteTime(schemas.CreateEventSourceMappingRequest_StartingPositionTimestamp, *v.StartingPositionTimestamp)
 	}
-	serializeTags(s, schemas.CreateEventSourceMappingRequest_Tags, v.Tags)
-	serializeTopics(s, schemas.CreateEventSourceMappingRequest_Topics, v.Topics)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateEventSourceMappingRequest_Tags, v.Tags)
+	}
+	if v.Topics != nil {
+		serializeTopics(s, schemas.CreateEventSourceMappingRequest_Topics, v.Topics)
+	}
 	if v.TumblingWindowInSeconds != nil {
 		s.WriteInt32(schemas.CreateEventSourceMappingRequest_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
 	}
@@ -616,7 +626,9 @@ func (v *CreateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.FunctionArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_FunctionArn, *v.FunctionArn)
 	}
-	serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	if v.FunctionResponseTypes != nil {
+		serializeFunctionResponseTypeList(s, schemas.EventSourceMappingConfiguration_FunctionResponseTypes, v.FunctionResponseTypes)
+	}
 	if v.KMSKeyArn != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_KMSKeyArn, *v.KMSKeyArn)
 	}
@@ -653,7 +665,9 @@ func (v *CreateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.ProvisionedPollerConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	if v.Queues != nil {
+		serializeQueues(s, schemas.EventSourceMappingConfiguration_Queues, v.Queues)
+	}
 	if v.ScalingConfig != nil {
 		s.WriteStruct(schemas.EventSourceMappingConfiguration_ScalingConfig)
 		v.ScalingConfig.SerializeMembers(s)
@@ -669,7 +683,9 @@ func (v *CreateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 		v.SelfManagedKafkaEventSourceConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	if v.SourceAccessConfigurations != nil {
+		serializeSourceAccessConfigurations(s, schemas.EventSourceMappingConfiguration_SourceAccessConfigurations, v.SourceAccessConfigurations)
+	}
 	if v.StartingPosition != "" {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StartingPosition, string(v.StartingPosition))
 	}
@@ -682,7 +698,9 @@ func (v *CreateEventSourceMappingOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.StateTransitionReason != nil {
 		s.WriteString(schemas.EventSourceMappingConfiguration_StateTransitionReason, *v.StateTransitionReason)
 	}
-	serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	if v.Topics != nil {
+		serializeTopics(s, schemas.EventSourceMappingConfiguration_Topics, v.Topics)
+	}
 	if v.TumblingWindowInSeconds != nil {
 		s.WriteInt32(schemas.EventSourceMappingConfiguration_TumblingWindowInSeconds, *v.TumblingWindowInSeconds)
 	}

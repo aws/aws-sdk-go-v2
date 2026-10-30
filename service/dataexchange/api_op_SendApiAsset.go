@@ -91,8 +91,12 @@ func (v *SendApiAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Path != nil {
 		s.WriteString(schemas.SendApiAssetRequest_Path, *v.Path)
 	}
-	serializeMapOf__string(s, schemas.SendApiAssetRequest_QueryStringParameters, v.QueryStringParameters)
-	serializeMapOf__string(s, schemas.SendApiAssetRequest_RequestHeaders, v.RequestHeaders)
+	if v.QueryStringParameters != nil {
+		serializeMapOf__string(s, schemas.SendApiAssetRequest_QueryStringParameters, v.QueryStringParameters)
+	}
+	if v.RequestHeaders != nil {
+		serializeMapOf__string(s, schemas.SendApiAssetRequest_RequestHeaders, v.RequestHeaders)
+	}
 	if v.RevisionId != nil {
 		s.WriteString(schemas.SendApiAssetRequest_RevisionId, *v.RevisionId)
 	}
@@ -153,7 +157,9 @@ func (v *SendApiAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Body != nil {
 		s.WriteString(schemas.SendApiAssetResponse_Body, *v.Body)
 	}
-	serializeMapOf__string(s, schemas.SendApiAssetResponse_ResponseHeaders, v.ResponseHeaders)
+	if v.ResponseHeaders != nil {
+		serializeMapOf__string(s, schemas.SendApiAssetResponse_ResponseHeaders, v.ResponseHeaders)
+	}
 }
 func (v *SendApiAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SendApiAssetResponse, func(s *smithy.Schema) error {

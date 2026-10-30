@@ -80,8 +80,12 @@ func (v *GetOfferingStatusOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetOfferingStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOfferingStatusMap(s, schemas.GetOfferingStatusResult_current, v.Current)
-	serializeOfferingStatusMap(s, schemas.GetOfferingStatusResult_nextPeriod, v.NextPeriod)
+	if v.Current != nil {
+		serializeOfferingStatusMap(s, schemas.GetOfferingStatusResult_current, v.Current)
+	}
+	if v.NextPeriod != nil {
+		serializeOfferingStatusMap(s, schemas.GetOfferingStatusResult_nextPeriod, v.NextPeriod)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetOfferingStatusResult_nextToken, *v.NextToken)
 	}

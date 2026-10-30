@@ -74,7 +74,9 @@ func (v *AppliedGuardrailDetails) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.GuardrailId != nil {
 		s.WriteString(schemas.AppliedGuardrailDetails_guardrailId, *v.GuardrailId)
 	}
-	serializeGuardrailOriginList(s, schemas.AppliedGuardrailDetails_guardrailOrigin, v.GuardrailOrigin)
+	if v.GuardrailOrigin != nil {
+		serializeGuardrailOriginList(s, schemas.AppliedGuardrailDetails_guardrailOrigin, v.GuardrailOrigin)
+	}
 	if v.GuardrailOwnership != "" {
 		s.WriteString(schemas.AppliedGuardrailDetails_guardrailOwnership, string(v.GuardrailOwnership))
 	}
@@ -251,7 +253,9 @@ func (v *AsyncInvokeSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ModelArn != nil {
 		s.WriteString(schemas.AsyncInvokeSummary_modelArn, *v.ModelArn)
 	}
-	serializeAsyncInvokeOutputDataConfig(s, schemas.AsyncInvokeSummary_outputDataConfig, v.OutputDataConfig)
+	if v.OutputDataConfig != nil {
+		serializeAsyncInvokeOutputDataConfig(s, schemas.AsyncInvokeSummary_outputDataConfig, v.OutputDataConfig)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.AsyncInvokeSummary_status, string(v.Status))
 	}
@@ -334,7 +338,9 @@ func (v *AudioBlock) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.AudioBlock_format, string(v.Format))
 	}
-	serializeAudioSource(s, schemas.AudioBlock_source, v.Source)
+	if v.Source != nil {
+		serializeAudioSource(s, schemas.AudioBlock_source, v.Source)
+	}
 }
 func (v *AudioBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AudioBlock, func(s *smithy.Schema) error {
@@ -617,11 +623,15 @@ func (v *Citation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Citation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCitationLocation(s, schemas.Citation_location, v.Location)
+	if v.Location != nil {
+		serializeCitationLocation(s, schemas.Citation_location, v.Location)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.Citation_source, *v.Source)
 	}
-	serializeCitationSourceContentList(s, schemas.Citation_sourceContent, v.SourceContent)
+	if v.SourceContent != nil {
+		serializeCitationSourceContentList(s, schemas.Citation_sourceContent, v.SourceContent)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.Citation_title, *v.Title)
 	}
@@ -833,8 +843,12 @@ func (v *CitationsContentBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CitationsContentBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCitations(s, schemas.CitationsContentBlock_citations, v.Citations)
-	serializeCitationGeneratedContentList(s, schemas.CitationsContentBlock_content, v.Content)
+	if v.Citations != nil {
+		serializeCitations(s, schemas.CitationsContentBlock_citations, v.Citations)
+	}
+	if v.Content != nil {
+		serializeCitationGeneratedContentList(s, schemas.CitationsContentBlock_content, v.Content)
+	}
 }
 func (v *CitationsContentBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CitationsContentBlock, func(s *smithy.Schema) error {
@@ -878,11 +892,15 @@ func (v *CitationsDelta) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CitationsDelta) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCitationLocation(s, schemas.CitationsDelta_location, v.Location)
+	if v.Location != nil {
+		serializeCitationLocation(s, schemas.CitationsDelta_location, v.Location)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.CitationsDelta_source, *v.Source)
 	}
-	serializeCitationSourceContentListDelta(s, schemas.CitationsDelta_sourceContent, v.SourceContent)
+	if v.SourceContent != nil {
+		serializeCitationSourceContentListDelta(s, schemas.CitationsDelta_sourceContent, v.SourceContent)
+	}
 	if v.Title != nil {
 		s.WriteString(schemas.CitationsDelta_title, *v.Title)
 	}
@@ -1376,7 +1394,9 @@ func (v *ContentBlockDeltaEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentBlockIndex != nil {
 		s.WriteInt32(schemas.ContentBlockDeltaEvent_contentBlockIndex, *v.ContentBlockIndex)
 	}
-	serializeContentBlockDelta(s, schemas.ContentBlockDeltaEvent_delta, v.Delta)
+	if v.Delta != nil {
+		serializeContentBlockDelta(s, schemas.ContentBlockDeltaEvent_delta, v.Delta)
+	}
 }
 func (v *ContentBlockDeltaEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContentBlockDeltaEvent, func(s *smithy.Schema) error {
@@ -1479,7 +1499,9 @@ func (v *ContentBlockStartEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ContentBlockIndex != nil {
 		s.WriteInt32(schemas.ContentBlockStartEvent_contentBlockIndex, *v.ContentBlockIndex)
 	}
-	serializeContentBlockStart(s, schemas.ContentBlockStartEvent_start, v.Start)
+	if v.Start != nil {
+		serializeContentBlockStart(s, schemas.ContentBlockStartEvent_start, v.Start)
+	}
 }
 func (v *ContentBlockStartEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ContentBlockStartEvent, func(s *smithy.Schema) error {
@@ -1905,8 +1927,12 @@ func (v *ConverseTokensRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AdditionalModelRequestFields != nil {
 		s.WriteDocument(schemas.ConverseTokensRequest_additionalModelRequestFields, &smithydocument.Opaque{Value: v.AdditionalModelRequestFields})
 	}
-	serializeMessages(s, schemas.ConverseTokensRequest_messages, v.Messages)
-	serializeSystemContentBlocks(s, schemas.ConverseTokensRequest_system, v.System)
+	if v.Messages != nil {
+		serializeMessages(s, schemas.ConverseTokensRequest_messages, v.Messages)
+	}
+	if v.System != nil {
+		serializeSystemContentBlocks(s, schemas.ConverseTokensRequest_system, v.System)
+	}
 	if v.ToolConfig != nil {
 		s.WriteStruct(schemas.ConverseTokensRequest_toolConfig)
 		v.ToolConfig.SerializeMembers(s)
@@ -2094,7 +2120,9 @@ func (v *DocumentBlock) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.DocumentBlock_name, *v.Name)
 	}
-	serializeDocumentSource(s, schemas.DocumentBlock_source, v.Source)
+	if v.Source != nil {
+		serializeDocumentSource(s, schemas.DocumentBlock_source, v.Source)
+	}
 }
 func (v *DocumentBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DocumentBlock, func(s *smithy.Schema) error {
@@ -2698,7 +2726,9 @@ func (v *GuardrailAutomatedReasoningImpossibleFinding) Serialize(s smithy.ShapeS
 }
 
 func (v *GuardrailAutomatedReasoningImpossibleFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningRuleList(s, schemas.GuardrailAutomatedReasoningImpossibleFinding_contradictingRules, v.ContradictingRules)
+	if v.ContradictingRules != nil {
+		serializeGuardrailAutomatedReasoningRuleList(s, schemas.GuardrailAutomatedReasoningImpossibleFinding_contradictingRules, v.ContradictingRules)
+	}
 	if v.LogicWarning != nil {
 		s.WriteStruct(schemas.GuardrailAutomatedReasoningImpossibleFinding_logicWarning)
 		v.LogicWarning.SerializeMembers(s)
@@ -2782,7 +2812,9 @@ func (v *GuardrailAutomatedReasoningInvalidFinding) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GuardrailAutomatedReasoningInvalidFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningRuleList(s, schemas.GuardrailAutomatedReasoningInvalidFinding_contradictingRules, v.ContradictingRules)
+	if v.ContradictingRules != nil {
+		serializeGuardrailAutomatedReasoningRuleList(s, schemas.GuardrailAutomatedReasoningInvalidFinding_contradictingRules, v.ContradictingRules)
+	}
 	if v.LogicWarning != nil {
 		s.WriteStruct(schemas.GuardrailAutomatedReasoningInvalidFinding_logicWarning)
 		v.LogicWarning.SerializeMembers(s)
@@ -2836,8 +2868,12 @@ func (v *GuardrailAutomatedReasoningLogicWarning) Serialize(s smithy.ShapeSerial
 }
 
 func (v *GuardrailAutomatedReasoningLogicWarning) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningLogicWarning_claims, v.Claims)
-	serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningLogicWarning_premises, v.Premises)
+	if v.Claims != nil {
+		serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningLogicWarning_claims, v.Claims)
+	}
+	if v.Premises != nil {
+		serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningLogicWarning_premises, v.Premises)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.GuardrailAutomatedReasoningLogicWarning_type, string(v.Type))
 	}
@@ -2901,7 +2937,9 @@ func (v *GuardrailAutomatedReasoningPolicyAssessment) Serialize(s smithy.ShapeSe
 }
 
 func (v *GuardrailAutomatedReasoningPolicyAssessment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningFindingList(s, schemas.GuardrailAutomatedReasoningPolicyAssessment_findings, v.Findings)
+	if v.Findings != nil {
+		serializeGuardrailAutomatedReasoningFindingList(s, schemas.GuardrailAutomatedReasoningPolicyAssessment_findings, v.Findings)
+	}
 }
 func (v *GuardrailAutomatedReasoningPolicyAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningPolicyAssessment, func(s *smithy.Schema) error {
@@ -3039,7 +3077,9 @@ func (v *GuardrailAutomatedReasoningScenario) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GuardrailAutomatedReasoningScenario) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningScenario_statements, v.Statements)
+	if v.Statements != nil {
+		serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningScenario_statements, v.Statements)
+	}
 }
 func (v *GuardrailAutomatedReasoningScenario) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningScenario, func(s *smithy.Schema) error {
@@ -3148,13 +3188,21 @@ func (v *GuardrailAutomatedReasoningTranslation) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *GuardrailAutomatedReasoningTranslation) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningTranslation_claims, v.Claims)
+	if v.Claims != nil {
+		serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningTranslation_claims, v.Claims)
+	}
 	if v.Confidence != nil {
 		s.WriteFloat64(schemas.GuardrailAutomatedReasoningTranslation_confidence, *v.Confidence)
 	}
-	serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningTranslation_premises, v.Premises)
-	serializeGuardrailAutomatedReasoningInputTextReferenceList(s, schemas.GuardrailAutomatedReasoningTranslation_untranslatedClaims, v.UntranslatedClaims)
-	serializeGuardrailAutomatedReasoningInputTextReferenceList(s, schemas.GuardrailAutomatedReasoningTranslation_untranslatedPremises, v.UntranslatedPremises)
+	if v.Premises != nil {
+		serializeGuardrailAutomatedReasoningStatementList(s, schemas.GuardrailAutomatedReasoningTranslation_premises, v.Premises)
+	}
+	if v.UntranslatedClaims != nil {
+		serializeGuardrailAutomatedReasoningInputTextReferenceList(s, schemas.GuardrailAutomatedReasoningTranslation_untranslatedClaims, v.UntranslatedClaims)
+	}
+	if v.UntranslatedPremises != nil {
+		serializeGuardrailAutomatedReasoningInputTextReferenceList(s, schemas.GuardrailAutomatedReasoningTranslation_untranslatedPremises, v.UntranslatedPremises)
+	}
 }
 func (v *GuardrailAutomatedReasoningTranslation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningTranslation, func(s *smithy.Schema) error {
@@ -3196,8 +3244,12 @@ func (v *GuardrailAutomatedReasoningTranslationAmbiguousFinding) Serialize(s smi
 }
 
 func (v *GuardrailAutomatedReasoningTranslationAmbiguousFinding) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningDifferenceScenarioList(s, schemas.GuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios, v.DifferenceScenarios)
-	serializeGuardrailAutomatedReasoningTranslationOptionList(s, schemas.GuardrailAutomatedReasoningTranslationAmbiguousFinding_options, v.Options)
+	if v.DifferenceScenarios != nil {
+		serializeGuardrailAutomatedReasoningDifferenceScenarioList(s, schemas.GuardrailAutomatedReasoningTranslationAmbiguousFinding_differenceScenarios, v.DifferenceScenarios)
+	}
+	if v.Options != nil {
+		serializeGuardrailAutomatedReasoningTranslationOptionList(s, schemas.GuardrailAutomatedReasoningTranslationAmbiguousFinding_options, v.Options)
+	}
 }
 func (v *GuardrailAutomatedReasoningTranslationAmbiguousFinding) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningTranslationAmbiguousFinding, func(s *smithy.Schema) error {
@@ -3227,7 +3279,9 @@ func (v *GuardrailAutomatedReasoningTranslationOption) Serialize(s smithy.ShapeS
 }
 
 func (v *GuardrailAutomatedReasoningTranslationOption) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailAutomatedReasoningTranslationList(s, schemas.GuardrailAutomatedReasoningTranslationOption_translations, v.Translations)
+	if v.Translations != nil {
+		serializeGuardrailAutomatedReasoningTranslationList(s, schemas.GuardrailAutomatedReasoningTranslationOption_translations, v.Translations)
+	}
 }
 func (v *GuardrailAutomatedReasoningTranslationOption) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailAutomatedReasoningTranslationOption, func(s *smithy.Schema) error {
@@ -3277,7 +3331,9 @@ func (v *GuardrailAutomatedReasoningValidFinding) SerializeMembers(s smithy.Shap
 		v.LogicWarning.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGuardrailAutomatedReasoningRuleList(s, schemas.GuardrailAutomatedReasoningValidFinding_supportingRules, v.SupportingRules)
+	if v.SupportingRules != nil {
+		serializeGuardrailAutomatedReasoningRuleList(s, schemas.GuardrailAutomatedReasoningValidFinding_supportingRules, v.SupportingRules)
+	}
 	if v.Translation != nil {
 		s.WriteStruct(schemas.GuardrailAutomatedReasoningValidFinding_translation)
 		v.Translation.SerializeMembers(s)
@@ -3439,7 +3495,9 @@ func (v *GuardrailChecksContentFilterConfig) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GuardrailChecksContentFilterConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksContentFilterCategoryConfigList(s, schemas.GuardrailChecksContentFilterConfig_categories, v.Categories)
+	if v.Categories != nil {
+		serializeGuardrailChecksContentFilterCategoryConfigList(s, schemas.GuardrailChecksContentFilterConfig_categories, v.Categories)
+	}
 }
 func (v *GuardrailChecksContentFilterConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailChecksContentFilterConfig, func(s *smithy.Schema) error {
@@ -3469,7 +3527,9 @@ func (v *GuardrailChecksContentFilterResult) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GuardrailChecksContentFilterResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksContentFilterResultList(s, schemas.GuardrailChecksContentFilterResult_results, v.Results)
+	if v.Results != nil {
+		serializeGuardrailChecksContentFilterResultList(s, schemas.GuardrailChecksContentFilterResult_results, v.Results)
+	}
 }
 func (v *GuardrailChecksContentFilterResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailChecksContentFilterResult, func(s *smithy.Schema) error {
@@ -3587,7 +3647,9 @@ func (v *GuardrailChecksMessage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailChecksMessage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksContentBlockList(s, schemas.GuardrailChecksMessage_content, v.Content)
+	if v.Content != nil {
+		serializeGuardrailChecksContentBlockList(s, schemas.GuardrailChecksMessage_content, v.Content)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.GuardrailChecksMessage_role, string(v.Role))
 	}
@@ -3665,7 +3727,9 @@ func (v *GuardrailChecksPromptAttackConfig) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GuardrailChecksPromptAttackConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksPromptAttackCategoryConfigList(s, schemas.GuardrailChecksPromptAttackConfig_categories, v.Categories)
+	if v.Categories != nil {
+		serializeGuardrailChecksPromptAttackCategoryConfigList(s, schemas.GuardrailChecksPromptAttackConfig_categories, v.Categories)
+	}
 }
 func (v *GuardrailChecksPromptAttackConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailChecksPromptAttackConfig, func(s *smithy.Schema) error {
@@ -3695,7 +3759,9 @@ func (v *GuardrailChecksPromptAttackResult) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *GuardrailChecksPromptAttackResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksPromptAttackResultList(s, schemas.GuardrailChecksPromptAttackResult_results, v.Results)
+	if v.Results != nil {
+		serializeGuardrailChecksPromptAttackResultList(s, schemas.GuardrailChecksPromptAttackResult_results, v.Results)
+	}
 }
 func (v *GuardrailChecksPromptAttackResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailChecksPromptAttackResult, func(s *smithy.Schema) error {
@@ -3863,7 +3929,9 @@ func (v *GuardrailChecksSensitiveInformationConfig) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GuardrailChecksSensitiveInformationConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksSensitiveInformationEntityConfigList(s, schemas.GuardrailChecksSensitiveInformationConfig_entities, v.Entities)
+	if v.Entities != nil {
+		serializeGuardrailChecksSensitiveInformationEntityConfigList(s, schemas.GuardrailChecksSensitiveInformationConfig_entities, v.Entities)
+	}
 }
 func (v *GuardrailChecksSensitiveInformationConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailChecksSensitiveInformationConfig, func(s *smithy.Schema) error {
@@ -3934,7 +4002,9 @@ func (v *GuardrailChecksSensitiveInformationResult) Serialize(s smithy.ShapeSeri
 }
 
 func (v *GuardrailChecksSensitiveInformationResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailChecksSensitiveInformationResultList(s, schemas.GuardrailChecksSensitiveInformationResult_results, v.Results)
+	if v.Results != nil {
+		serializeGuardrailChecksSensitiveInformationResultList(s, schemas.GuardrailChecksSensitiveInformationResult_results, v.Results)
+	}
 	if v.Truncated != nil {
 		s.WriteBool(schemas.GuardrailChecksSensitiveInformationResult_truncated, *v.Truncated)
 	}
@@ -4343,7 +4413,9 @@ func (v *GuardrailContentPolicyAssessment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailContentPolicyAssessment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContentFilterList(s, schemas.GuardrailContentPolicyAssessment_filters, v.Filters)
+	if v.Filters != nil {
+		serializeGuardrailContentFilterList(s, schemas.GuardrailContentPolicyAssessment_filters, v.Filters)
+	}
 }
 func (v *GuardrailContentPolicyAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailContentPolicyAssessment, func(s *smithy.Schema) error {
@@ -4457,7 +4529,9 @@ func (v *GuardrailContextualGroundingPolicyAssessment) Serialize(s smithy.ShapeS
 }
 
 func (v *GuardrailContextualGroundingPolicyAssessment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContextualGroundingFilters(s, schemas.GuardrailContextualGroundingPolicyAssessment_filters, v.Filters)
+	if v.Filters != nil {
+		serializeGuardrailContextualGroundingFilters(s, schemas.GuardrailContextualGroundingPolicyAssessment_filters, v.Filters)
+	}
 }
 func (v *GuardrailContextualGroundingPolicyAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailContextualGroundingPolicyAssessment, func(s *smithy.Schema) error {
@@ -4542,7 +4616,9 @@ func (v *GuardrailConverseImageBlock) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Format != "" {
 		s.WriteString(schemas.GuardrailConverseImageBlock_format, string(v.Format))
 	}
-	serializeGuardrailConverseImageSource(s, schemas.GuardrailConverseImageBlock_source, v.Source)
+	if v.Source != nil {
+		serializeGuardrailConverseImageSource(s, schemas.GuardrailConverseImageBlock_source, v.Source)
+	}
 }
 func (v *GuardrailConverseImageBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailConverseImageBlock, func(s *smithy.Schema) error {
@@ -4609,7 +4685,9 @@ func (v *GuardrailConverseTextBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailConverseTextBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailConverseContentQualifierList(s, schemas.GuardrailConverseTextBlock_qualifiers, v.Qualifiers)
+	if v.Qualifiers != nil {
+		serializeGuardrailConverseContentQualifierList(s, schemas.GuardrailConverseTextBlock_qualifiers, v.Qualifiers)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.GuardrailConverseTextBlock_text, *v.Text)
 	}
@@ -4757,7 +4835,9 @@ func (v *GuardrailImageBlock) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.GuardrailImageBlock_format, string(v.Format))
 	}
-	serializeGuardrailImageSource(s, schemas.GuardrailImageBlock_source, v.Source)
+	if v.Source != nil {
+		serializeGuardrailImageSource(s, schemas.GuardrailImageBlock_source, v.Source)
+	}
 }
 func (v *GuardrailImageBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailImageBlock, func(s *smithy.Schema) error {
@@ -5169,8 +5249,12 @@ func (v *GuardrailSensitiveInformationPolicyAssessment) Serialize(s smithy.Shape
 }
 
 func (v *GuardrailSensitiveInformationPolicyAssessment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailPiiEntityFilterList(s, schemas.GuardrailSensitiveInformationPolicyAssessment_piiEntities, v.PiiEntities)
-	serializeGuardrailRegexFilterList(s, schemas.GuardrailSensitiveInformationPolicyAssessment_regexes, v.Regexes)
+	if v.PiiEntities != nil {
+		serializeGuardrailPiiEntityFilterList(s, schemas.GuardrailSensitiveInformationPolicyAssessment_piiEntities, v.PiiEntities)
+	}
+	if v.Regexes != nil {
+		serializeGuardrailRegexFilterList(s, schemas.GuardrailSensitiveInformationPolicyAssessment_regexes, v.Regexes)
+	}
 }
 func (v *GuardrailSensitiveInformationPolicyAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailSensitiveInformationPolicyAssessment, func(s *smithy.Schema) error {
@@ -5276,7 +5360,9 @@ func (v *GuardrailTextBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailTextBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailContentQualifierList(s, schemas.GuardrailTextBlock_qualifiers, v.Qualifiers)
+	if v.Qualifiers != nil {
+		serializeGuardrailContentQualifierList(s, schemas.GuardrailTextBlock_qualifiers, v.Qualifiers)
+	}
 	if v.Text != nil {
 		s.WriteString(schemas.GuardrailTextBlock_text, *v.Text)
 	}
@@ -5426,7 +5512,9 @@ func (v *GuardrailTopicPolicyAssessment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailTopicPolicyAssessment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailTopicList(s, schemas.GuardrailTopicPolicyAssessment_topics, v.Topics)
+	if v.Topics != nil {
+		serializeGuardrailTopicList(s, schemas.GuardrailTopicPolicyAssessment_topics, v.Topics)
+	}
 }
 func (v *GuardrailTopicPolicyAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailTopicPolicyAssessment, func(s *smithy.Schema) error {
@@ -5468,9 +5556,15 @@ func (v *GuardrailTraceAssessment) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionReason != nil {
 		s.WriteString(schemas.GuardrailTraceAssessment_actionReason, *v.ActionReason)
 	}
-	serializeGuardrailAssessmentMap(s, schemas.GuardrailTraceAssessment_inputAssessment, v.InputAssessment)
-	serializeModelOutputs(s, schemas.GuardrailTraceAssessment_modelOutput, v.ModelOutput)
-	serializeGuardrailAssessmentListMap(s, schemas.GuardrailTraceAssessment_outputAssessments, v.OutputAssessments)
+	if v.InputAssessment != nil {
+		serializeGuardrailAssessmentMap(s, schemas.GuardrailTraceAssessment_inputAssessment, v.InputAssessment)
+	}
+	if v.ModelOutput != nil {
+		serializeModelOutputs(s, schemas.GuardrailTraceAssessment_modelOutput, v.ModelOutput)
+	}
+	if v.OutputAssessments != nil {
+		serializeGuardrailAssessmentListMap(s, schemas.GuardrailTraceAssessment_outputAssessments, v.OutputAssessments)
+	}
 }
 func (v *GuardrailTraceAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailTraceAssessment, func(s *smithy.Schema) error {
@@ -5628,8 +5722,12 @@ func (v *GuardrailWordPolicyAssessment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GuardrailWordPolicyAssessment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGuardrailCustomWordList(s, schemas.GuardrailWordPolicyAssessment_customWords, v.CustomWords)
-	serializeGuardrailManagedWordList(s, schemas.GuardrailWordPolicyAssessment_managedWordLists, v.ManagedWordLists)
+	if v.CustomWords != nil {
+		serializeGuardrailCustomWordList(s, schemas.GuardrailWordPolicyAssessment_customWords, v.CustomWords)
+	}
+	if v.ManagedWordLists != nil {
+		serializeGuardrailManagedWordList(s, schemas.GuardrailWordPolicyAssessment_managedWordLists, v.ManagedWordLists)
+	}
 }
 func (v *GuardrailWordPolicyAssessment) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GuardrailWordPolicyAssessment, func(s *smithy.Schema) error {
@@ -5678,7 +5776,9 @@ func (v *ImageBlock) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.ImageBlock_format, string(v.Format))
 	}
-	serializeImageSource(s, schemas.ImageBlock_source, v.Source)
+	if v.Source != nil {
+		serializeImageSource(s, schemas.ImageBlock_source, v.Source)
+	}
 }
 func (v *ImageBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageBlock, func(s *smithy.Schema) error {
@@ -5725,7 +5825,9 @@ func (v *ImageBlockDelta) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Error.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeImageSource(s, schemas.ImageBlockDelta_source, v.Source)
+	if v.Source != nil {
+		serializeImageSource(s, schemas.ImageBlockDelta_source, v.Source)
+	}
 }
 func (v *ImageBlockDelta) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ImageBlockDelta, func(s *smithy.Schema) error {
@@ -5883,7 +5985,9 @@ func (v *InferenceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxTokens != nil {
 		s.WriteInt32(schemas.InferenceConfiguration_maxTokens, *v.MaxTokens)
 	}
-	serializeNonEmptyStringList(s, schemas.InferenceConfiguration_stopSequences, v.StopSequences)
+	if v.StopSequences != nil {
+		serializeNonEmptyStringList(s, schemas.InferenceConfiguration_stopSequences, v.StopSequences)
+	}
 	if v.Temperature != nil {
 		s.WriteFloat32(schemas.InferenceConfiguration_temperature, *v.Temperature)
 	}
@@ -6093,7 +6197,9 @@ func (v *Message) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeContentBlocks(s, schemas.Message_content, v.Content)
+	if v.Content != nil {
+		serializeContentBlocks(s, schemas.Message_content, v.Content)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.Message_role, string(v.Role))
 	}
@@ -6277,7 +6383,9 @@ func (v *OutputFormat) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OutputFormat) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOutputFormatStructure(s, schemas.OutputFormat_structure, v.Structure)
+	if v.Structure != nil {
+		serializeOutputFormatStructure(s, schemas.OutputFormat_structure, v.Structure)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.OutputFormat_type, string(v.Type))
 	}
@@ -6709,7 +6817,9 @@ func (v *SearchResultBlock) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Citations.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSearchResultContentBlocks(s, schemas.SearchResultBlock_content, v.Content)
+	if v.Content != nil {
+		serializeSearchResultContentBlocks(s, schemas.SearchResultBlock_content, v.Content)
+	}
 	if v.Source != nil {
 		s.WriteString(schemas.SearchResultBlock_source, *v.Source)
 	}
@@ -7078,7 +7188,9 @@ func (v *TokenUsage) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TokenUsage) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCacheDetailsList(s, schemas.TokenUsage_cacheDetails, v.CacheDetails)
+	if v.CacheDetails != nil {
+		serializeCacheDetailsList(s, schemas.TokenUsage_cacheDetails, v.CacheDetails)
+	}
 	if v.CacheReadInputTokens != nil {
 		s.WriteInt32(schemas.TokenUsage_cacheReadInputTokens, *v.CacheReadInputTokens)
 	}
@@ -7314,8 +7426,12 @@ func (v *ToolConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ToolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeToolChoice(s, schemas.ToolConfiguration_toolChoice, v.ToolChoice)
-	serializeTools(s, schemas.ToolConfiguration_tools, v.Tools)
+	if v.ToolChoice != nil {
+		serializeToolChoice(s, schemas.ToolConfiguration_toolChoice, v.ToolChoice)
+	}
+	if v.Tools != nil {
+		serializeTools(s, schemas.ToolConfiguration_tools, v.Tools)
+	}
 }
 func (v *ToolConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ToolConfiguration, func(s *smithy.Schema) error {
@@ -7489,7 +7605,9 @@ func (v *ToolResultBlock) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ToolResultBlock) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeToolResultContentBlocks(s, schemas.ToolResultBlock_content, v.Content)
+	if v.Content != nil {
+		serializeToolResultContentBlocks(s, schemas.ToolResultBlock_content, v.Content)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.ToolResultBlock_status, string(v.Status))
 	}
@@ -7791,7 +7909,9 @@ func (v *ToolSpecification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Description != nil {
 		s.WriteString(schemas.ToolSpecification_description, *v.Description)
 	}
-	serializeToolInputSchema(s, schemas.ToolSpecification_inputSchema, v.InputSchema)
+	if v.InputSchema != nil {
+		serializeToolInputSchema(s, schemas.ToolSpecification_inputSchema, v.InputSchema)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.ToolSpecification_name, *v.Name)
 	}
@@ -8015,7 +8135,9 @@ func (v *VideoBlock) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Format != "" {
 		s.WriteString(schemas.VideoBlock_format, string(v.Format))
 	}
-	serializeVideoSource(s, schemas.VideoBlock_source, v.Source)
+	if v.Source != nil {
+		serializeVideoSource(s, schemas.VideoBlock_source, v.Source)
+	}
 }
 func (v *VideoBlock) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.VideoBlock, func(s *smithy.Schema) error {

@@ -183,7 +183,9 @@ func (v *DescribeBatchPredictionsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeBatchPredictionsOutput_NextToken, *v.NextToken)
 	}
-	serializeBatchPredictions(s, schemas.DescribeBatchPredictionsOutput_Results, v.Results)
+	if v.Results != nil {
+		serializeBatchPredictions(s, schemas.DescribeBatchPredictionsOutput_Results, v.Results)
+	}
 }
 func (v *DescribeBatchPredictionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeBatchPredictionsOutput, func(s *smithy.Schema) error {

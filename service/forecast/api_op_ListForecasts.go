@@ -72,7 +72,9 @@ func (v *ListForecastsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListForecastsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilters(s, schemas.ListForecastsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilters(s, schemas.ListForecastsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListForecastsRequest_MaxResults, *v.MaxResults)
 	}
@@ -103,7 +105,9 @@ func (v *ListForecastsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListForecastsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeForecasts(s, schemas.ListForecastsResponse_Forecasts, v.Forecasts)
+	if v.Forecasts != nil {
+		serializeForecasts(s, schemas.ListForecastsResponse_Forecasts, v.Forecasts)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListForecastsResponse_NextToken, *v.NextToken)
 	}

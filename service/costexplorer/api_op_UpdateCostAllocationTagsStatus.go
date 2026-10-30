@@ -47,7 +47,9 @@ func (v *UpdateCostAllocationTagsStatusInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateCostAllocationTagsStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostAllocationTagStatusList(s, schemas.UpdateCostAllocationTagsStatusRequest_CostAllocationTagsStatus, v.CostAllocationTagsStatus)
+	if v.CostAllocationTagsStatus != nil {
+		serializeCostAllocationTagStatusList(s, schemas.UpdateCostAllocationTagsStatusRequest_CostAllocationTagsStatus, v.CostAllocationTagsStatus)
+	}
 }
 
 type UpdateCostAllocationTagsStatusOutput struct {
@@ -70,7 +72,9 @@ func (v *UpdateCostAllocationTagsStatusOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *UpdateCostAllocationTagsStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUpdateCostAllocationTagsStatusErrors(s, schemas.UpdateCostAllocationTagsStatusResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeUpdateCostAllocationTagsStatusErrors(s, schemas.UpdateCostAllocationTagsStatusResponse_Errors, v.Errors)
+	}
 }
 func (v *UpdateCostAllocationTagsStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateCostAllocationTagsStatusResponse, func(s *smithy.Schema) error {

@@ -122,7 +122,9 @@ func (v *GetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.AggregatedMetrics.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeDataQualityAnalyzerResults(s, schemas.GetDataQualityResultResponse_AnalyzerResults, v.AnalyzerResults)
+	if v.AnalyzerResults != nil {
+		serializeDataQualityAnalyzerResults(s, schemas.GetDataQualityResultResponse_AnalyzerResults, v.AnalyzerResults)
+	}
 	if v.CompletedOn != nil {
 		s.WriteTime(schemas.GetDataQualityResultResponse_CompletedOn, *v.CompletedOn)
 	}
@@ -140,14 +142,18 @@ func (v *GetDataQualityResultOutput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.JobRunId != nil {
 		s.WriteString(schemas.GetDataQualityResultResponse_JobRunId, *v.JobRunId)
 	}
-	serializeDataQualityObservations(s, schemas.GetDataQualityResultResponse_Observations, v.Observations)
+	if v.Observations != nil {
+		serializeDataQualityObservations(s, schemas.GetDataQualityResultResponse_Observations, v.Observations)
+	}
 	if v.ProfileId != nil {
 		s.WriteString(schemas.GetDataQualityResultResponse_ProfileId, *v.ProfileId)
 	}
 	if v.ResultId != nil {
 		s.WriteString(schemas.GetDataQualityResultResponse_ResultId, *v.ResultId)
 	}
-	serializeDataQualityRuleResults(s, schemas.GetDataQualityResultResponse_RuleResults, v.RuleResults)
+	if v.RuleResults != nil {
+		serializeDataQualityRuleResults(s, schemas.GetDataQualityResultResponse_RuleResults, v.RuleResults)
+	}
 	if v.RulesetEvaluationRunId != nil {
 		s.WriteString(schemas.GetDataQualityResultResponse_RulesetEvaluationRunId, *v.RulesetEvaluationRunId)
 	}

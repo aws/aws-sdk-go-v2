@@ -89,7 +89,9 @@ func (v *ListDbInstancesForClusterOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDbInstancesForClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDbInstanceForClusterSummaryList(s, schemas.ListDbInstancesForClusterOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDbInstanceForClusterSummaryList(s, schemas.ListDbInstancesForClusterOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDbInstancesForClusterOutput_nextToken, *v.NextToken)
 	}

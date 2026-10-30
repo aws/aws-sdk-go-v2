@@ -76,7 +76,9 @@ func (v *DeleteCertificateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteCertificateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeOperationList(s, schemas.DeleteCertificateResult_operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationList(s, schemas.DeleteCertificateResult_operations, v.Operations)
+	}
 }
 func (v *DeleteCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteCertificateResult, func(s *smithy.Schema) error {

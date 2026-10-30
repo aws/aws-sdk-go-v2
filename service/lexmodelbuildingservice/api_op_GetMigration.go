@@ -117,7 +117,9 @@ func (v *GetMigrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMigrationAlerts(s, schemas.GetMigrationResponse_alerts, v.Alerts)
+	if v.Alerts != nil {
+		serializeMigrationAlerts(s, schemas.GetMigrationResponse_alerts, v.Alerts)
+	}
 	if v.MigrationId != nil {
 		s.WriteString(schemas.GetMigrationResponse_migrationId, *v.MigrationId)
 	}

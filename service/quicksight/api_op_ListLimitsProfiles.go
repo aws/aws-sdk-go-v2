@@ -99,7 +99,9 @@ func (v *ListLimitsProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLimitsProfilesResponse_nextToken, *v.NextToken)
 	}
-	serializeLimitsProfileList(s, schemas.ListLimitsProfilesResponse_profiles, v.Profiles)
+	if v.Profiles != nil {
+		serializeLimitsProfileList(s, schemas.ListLimitsProfilesResponse_profiles, v.Profiles)
+	}
 }
 func (v *ListLimitsProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLimitsProfilesResponse, func(s *smithy.Schema) error {

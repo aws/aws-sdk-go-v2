@@ -53,7 +53,9 @@ func (v *PutProfileOutboundRequestBatchInput) SerializeMembers(s smithy.ShapeSer
 	if v.Id != nil {
 		s.WriteString(schemas.PutProfileOutboundRequestBatchRequest_id, *v.Id)
 	}
-	serializeProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchRequest_profileOutboundRequests, v.ProfileOutboundRequests)
+	if v.ProfileOutboundRequests != nil {
+		serializeProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchRequest_profileOutboundRequests, v.ProfileOutboundRequests)
+	}
 }
 
 // The response for PutProfileOutboundRequestBatch API
@@ -78,8 +80,12 @@ func (v *PutProfileOutboundRequestBatchOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *PutProfileOutboundRequestBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailedProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchResponse_failedRequests, v.FailedRequests)
-	serializeSuccessfulProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchResponse_successfulRequests, v.SuccessfulRequests)
+	if v.FailedRequests != nil {
+		serializeFailedProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchResponse_failedRequests, v.FailedRequests)
+	}
+	if v.SuccessfulRequests != nil {
+		serializeSuccessfulProfileOutboundRequestList(s, schemas.PutProfileOutboundRequestBatchResponse_successfulRequests, v.SuccessfulRequests)
+	}
 }
 func (v *PutProfileOutboundRequestBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PutProfileOutboundRequestBatchResponse, func(s *smithy.Schema) error {

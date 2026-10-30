@@ -89,7 +89,9 @@ func (v *DescribeMappedResourceConfigurationOutput) Serialize(s smithy.ShapeSeri
 }
 
 func (v *DescribeMappedResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMappedResourceConfigurationList(s, schemas.DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList, v.MappedResourceConfigurationList)
+	if v.MappedResourceConfigurationList != nil {
+		serializeMappedResourceConfigurationList(s, schemas.DescribeMappedResourceConfigurationOutput_MappedResourceConfigurationList, v.MappedResourceConfigurationList)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeMappedResourceConfigurationOutput_NextToken, *v.NextToken)
 	}

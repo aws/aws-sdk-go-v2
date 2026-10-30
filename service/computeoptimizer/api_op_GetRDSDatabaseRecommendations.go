@@ -84,8 +84,12 @@ func (v *GetRDSDatabaseRecommendationsInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *GetRDSDatabaseRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.GetRDSDatabaseRecommendationsRequest_accountIds, v.AccountIds)
-	serializeRDSDBRecommendationFilters(s, schemas.GetRDSDatabaseRecommendationsRequest_filters, v.Filters)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.GetRDSDatabaseRecommendationsRequest_accountIds, v.AccountIds)
+	}
+	if v.Filters != nil {
+		serializeRDSDBRecommendationFilters(s, schemas.GetRDSDatabaseRecommendationsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.GetRDSDatabaseRecommendationsRequest_maxResults, *v.MaxResults)
 	}
@@ -97,7 +101,9 @@ func (v *GetRDSDatabaseRecommendationsInput) SerializeMembers(s smithy.ShapeSeri
 		v.RecommendationPreferences.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeResourceArns(s, schemas.GetRDSDatabaseRecommendationsRequest_resourceArns, v.ResourceArns)
+	if v.ResourceArns != nil {
+		serializeResourceArns(s, schemas.GetRDSDatabaseRecommendationsRequest_resourceArns, v.ResourceArns)
+	}
 }
 
 type GetRDSDatabaseRecommendationsOutput struct {
@@ -126,11 +132,15 @@ func (v *GetRDSDatabaseRecommendationsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *GetRDSDatabaseRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGetRecommendationErrors(s, schemas.GetRDSDatabaseRecommendationsResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeGetRecommendationErrors(s, schemas.GetRDSDatabaseRecommendationsResponse_errors, v.Errors)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetRDSDatabaseRecommendationsResponse_nextToken, *v.NextToken)
 	}
-	serializeRDSDBRecommendations(s, schemas.GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations, v.RdsDBRecommendations)
+	if v.RdsDBRecommendations != nil {
+		serializeRDSDBRecommendations(s, schemas.GetRDSDatabaseRecommendationsResponse_rdsDBRecommendations, v.RdsDBRecommendations)
+	}
 }
 func (v *GetRDSDatabaseRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetRDSDatabaseRecommendationsResponse, func(s *smithy.Schema) error {

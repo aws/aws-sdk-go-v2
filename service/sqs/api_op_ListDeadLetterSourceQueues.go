@@ -107,7 +107,9 @@ func (v *ListDeadLetterSourceQueuesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDeadLetterSourceQueuesResult_NextToken, *v.NextToken)
 	}
-	serializeQueueUrlList(s, schemas.ListDeadLetterSourceQueuesResult_queueUrls, v.QueueUrls)
+	if v.QueueUrls != nil {
+		serializeQueueUrlList(s, schemas.ListDeadLetterSourceQueuesResult_queueUrls, v.QueueUrls)
+	}
 }
 func (v *ListDeadLetterSourceQueuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListDeadLetterSourceQueuesResult, func(s *smithy.Schema) error {

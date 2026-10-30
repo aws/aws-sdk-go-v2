@@ -86,7 +86,9 @@ func (v *CreateCommitInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CommitMessage != nil {
 		s.WriteString(schemas.CreateCommitInput_commitMessage, *v.CommitMessage)
 	}
-	serializeDeleteFileEntries(s, schemas.CreateCommitInput_deleteFiles, v.DeleteFiles)
+	if v.DeleteFiles != nil {
+		serializeDeleteFileEntries(s, schemas.CreateCommitInput_deleteFiles, v.DeleteFiles)
+	}
 	if v.Email != nil {
 		s.WriteString(schemas.CreateCommitInput_email, *v.Email)
 	}
@@ -96,11 +98,15 @@ func (v *CreateCommitInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ParentCommitId != nil {
 		s.WriteString(schemas.CreateCommitInput_parentCommitId, *v.ParentCommitId)
 	}
-	serializePutFileEntries(s, schemas.CreateCommitInput_putFiles, v.PutFiles)
+	if v.PutFiles != nil {
+		serializePutFileEntries(s, schemas.CreateCommitInput_putFiles, v.PutFiles)
+	}
 	if v.RepositoryName != nil {
 		s.WriteString(schemas.CreateCommitInput_repositoryName, *v.RepositoryName)
 	}
-	serializeSetFileModeEntries(s, schemas.CreateCommitInput_setFileModes, v.SetFileModes)
+	if v.SetFileModes != nil {
+		serializeSetFileModeEntries(s, schemas.CreateCommitInput_setFileModes, v.SetFileModes)
+	}
 }
 
 type CreateCommitOutput struct {
@@ -137,9 +143,15 @@ func (v *CreateCommitOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CommitId != nil {
 		s.WriteString(schemas.CreateCommitOutput_commitId, *v.CommitId)
 	}
-	serializeFilesMetadata(s, schemas.CreateCommitOutput_filesAdded, v.FilesAdded)
-	serializeFilesMetadata(s, schemas.CreateCommitOutput_filesDeleted, v.FilesDeleted)
-	serializeFilesMetadata(s, schemas.CreateCommitOutput_filesUpdated, v.FilesUpdated)
+	if v.FilesAdded != nil {
+		serializeFilesMetadata(s, schemas.CreateCommitOutput_filesAdded, v.FilesAdded)
+	}
+	if v.FilesDeleted != nil {
+		serializeFilesMetadata(s, schemas.CreateCommitOutput_filesDeleted, v.FilesDeleted)
+	}
+	if v.FilesUpdated != nil {
+		serializeFilesMetadata(s, schemas.CreateCommitOutput_filesUpdated, v.FilesUpdated)
+	}
 	if v.TreeId != nil {
 		s.WriteString(schemas.CreateCommitOutput_treeId, *v.TreeId)
 	}

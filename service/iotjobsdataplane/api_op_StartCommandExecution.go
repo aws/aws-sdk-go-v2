@@ -79,7 +79,9 @@ func (v *StartCommandExecutionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ExecutionTimeoutSeconds != nil {
 		s.WriteInt64(schemas.StartCommandExecutionRequest_executionTimeoutSeconds, *v.ExecutionTimeoutSeconds)
 	}
-	serializeCommandExecutionParameterMap(s, schemas.StartCommandExecutionRequest_parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeCommandExecutionParameterMap(s, schemas.StartCommandExecutionRequest_parameters, v.Parameters)
+	}
 	if v.TargetArn != nil {
 		s.WriteString(schemas.StartCommandExecutionRequest_targetArn, *v.TargetArn)
 	}

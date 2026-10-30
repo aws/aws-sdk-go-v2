@@ -118,7 +118,9 @@ func (v *ListWorkflowStepExecutionsOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.RequestId != nil {
 		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_requestId, *v.RequestId)
 	}
-	serializeWorkflowStepExecutionsList(s, schemas.ListWorkflowStepExecutionsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeWorkflowStepExecutionsList(s, schemas.ListWorkflowStepExecutionsResponse_steps, v.Steps)
+	}
 	if v.WorkflowBuildVersionArn != nil {
 		s.WriteString(schemas.ListWorkflowStepExecutionsResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
 	}

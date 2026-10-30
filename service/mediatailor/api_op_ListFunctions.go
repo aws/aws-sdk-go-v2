@@ -99,7 +99,9 @@ func (v *ListFunctionsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFunctionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfFunctionsResponse(s, schemas.ListFunctionsResponse_Items, v.Items)
+	if v.Items != nil {
+		serialize__listOfFunctionsResponse(s, schemas.ListFunctionsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFunctionsResponse_NextToken, *v.NextToken)
 	}

@@ -95,7 +95,9 @@ func (v *ListAgentRuntimeVersionsByCapacityProviderOutput) Serialize(s smithy.Sh
 }
 
 func (v *ListAgentRuntimeVersionsByCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAgentRuntimeVersionSummaryList(s, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_agentRuntimes, v.AgentRuntimes)
+	if v.AgentRuntimes != nil {
+		serializeAgentRuntimeVersionSummaryList(s, schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_agentRuntimes, v.AgentRuntimes)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAgentRuntimeVersionsByCapacityProviderOutput_nextToken, *v.NextToken)
 	}

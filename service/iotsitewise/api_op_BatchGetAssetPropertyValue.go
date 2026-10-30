@@ -52,7 +52,9 @@ func (v *BatchGetAssetPropertyValueInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetAssetPropertyValueInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyValueEntries(s, schemas.BatchGetAssetPropertyValueRequest_entries, v.Entries)
+	if v.Entries != nil {
+		serializeBatchGetAssetPropertyValueEntries(s, schemas.BatchGetAssetPropertyValueRequest_entries, v.Entries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyValueRequest_nextToken, *v.NextToken)
 	}
@@ -97,12 +99,18 @@ func (v *BatchGetAssetPropertyValueOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetAssetPropertyValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchGetAssetPropertyValueErrorEntries(s, schemas.BatchGetAssetPropertyValueResponse_errorEntries, v.ErrorEntries)
+	if v.ErrorEntries != nil {
+		serializeBatchGetAssetPropertyValueErrorEntries(s, schemas.BatchGetAssetPropertyValueResponse_errorEntries, v.ErrorEntries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.BatchGetAssetPropertyValueResponse_nextToken, *v.NextToken)
 	}
-	serializeBatchGetAssetPropertyValueSkippedEntries(s, schemas.BatchGetAssetPropertyValueResponse_skippedEntries, v.SkippedEntries)
-	serializeBatchGetAssetPropertyValueSuccessEntries(s, schemas.BatchGetAssetPropertyValueResponse_successEntries, v.SuccessEntries)
+	if v.SkippedEntries != nil {
+		serializeBatchGetAssetPropertyValueSkippedEntries(s, schemas.BatchGetAssetPropertyValueResponse_skippedEntries, v.SkippedEntries)
+	}
+	if v.SuccessEntries != nil {
+		serializeBatchGetAssetPropertyValueSuccessEntries(s, schemas.BatchGetAssetPropertyValueResponse_successEntries, v.SuccessEntries)
+	}
 }
 func (v *BatchGetAssetPropertyValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetAssetPropertyValueResponse, func(s *smithy.Schema) error {

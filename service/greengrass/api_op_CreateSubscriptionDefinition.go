@@ -63,7 +63,9 @@ func (v *CreateSubscriptionDefinitionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.Name != nil {
 		s.WriteString(schemas.CreateSubscriptionDefinitionRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateSubscriptionDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateSubscriptionDefinitionRequest_tags, v.Tags)
+	}
 }
 
 type CreateSubscriptionDefinitionOutput struct {

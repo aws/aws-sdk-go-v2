@@ -64,14 +64,18 @@ func (v *CreateAssessmentFrameworkInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ComplianceType != nil {
 		s.WriteString(schemas.CreateAssessmentFrameworkRequest_complianceType, *v.ComplianceType)
 	}
-	serializeCreateAssessmentFrameworkControlSets(s, schemas.CreateAssessmentFrameworkRequest_controlSets, v.ControlSets)
+	if v.ControlSets != nil {
+		serializeCreateAssessmentFrameworkControlSets(s, schemas.CreateAssessmentFrameworkRequest_controlSets, v.ControlSets)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateAssessmentFrameworkRequest_description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateAssessmentFrameworkRequest_name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateAssessmentFrameworkRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateAssessmentFrameworkRequest_tags, v.Tags)
+	}
 }
 
 type CreateAssessmentFrameworkOutput struct {

@@ -99,8 +99,12 @@ func (v *StartMultiplexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.StartMultiplexResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.StartMultiplexResponse_AvailabilityZones, v.AvailabilityZones)
-	serialize__listOfMultiplexOutputDestination(s, schemas.StartMultiplexResponse_Destinations, v.Destinations)
+	if v.AvailabilityZones != nil {
+		serialize__listOf__string(s, schemas.StartMultiplexResponse_AvailabilityZones, v.AvailabilityZones)
+	}
+	if v.Destinations != nil {
+		serialize__listOfMultiplexOutputDestination(s, schemas.StartMultiplexResponse_Destinations, v.Destinations)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.StartMultiplexResponse_Id, *v.Id)
 	}
@@ -121,7 +125,9 @@ func (v *StartMultiplexOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.State != "" {
 		s.WriteString(schemas.StartMultiplexResponse_State, string(v.State))
 	}
-	serializeTags(s, schemas.StartMultiplexResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.StartMultiplexResponse_Tags, v.Tags)
+	}
 }
 func (v *StartMultiplexOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StartMultiplexResponse, func(s *smithy.Schema) error {

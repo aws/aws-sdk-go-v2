@@ -63,7 +63,9 @@ func (v *BatchPutAttributesMetadataInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutAttributesMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributes(s, schemas.BatchPutAttributesMetadataInput_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributes(s, schemas.BatchPutAttributesMetadataInput_attributes, v.Attributes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchPutAttributesMetadataInput_clientToken, *v.ClientToken)
 	}
@@ -99,8 +101,12 @@ func (v *BatchPutAttributesMetadataOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutAttributesMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutAttributeItems(s, schemas.BatchPutAttributesMetadataOutput_attributes, v.Attributes)
-	serializeAttributesErrors(s, schemas.BatchPutAttributesMetadataOutput_errors, v.Errors)
+	if v.Attributes != nil {
+		serializeBatchPutAttributeItems(s, schemas.BatchPutAttributesMetadataOutput_attributes, v.Attributes)
+	}
+	if v.Errors != nil {
+		serializeAttributesErrors(s, schemas.BatchPutAttributesMetadataOutput_errors, v.Errors)
+	}
 }
 func (v *BatchPutAttributesMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchPutAttributesMetadataOutput, func(s *smithy.Schema) error {

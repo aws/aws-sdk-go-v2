@@ -91,7 +91,9 @@ func (v *CreateMedicalVocabularyInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.CreateMedicalVocabularyRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeTagList(s, schemas.CreateMedicalVocabularyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMedicalVocabularyRequest_Tags, v.Tags)
+	}
 	if v.VocabularyFileUri != nil {
 		s.WriteString(schemas.CreateMedicalVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
 	}

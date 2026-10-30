@@ -53,7 +53,9 @@ func (v *IncreaseReplicationFactorInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IncreaseReplicationFactorInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAvailabilityZoneList(s, schemas.IncreaseReplicationFactorRequest_AvailabilityZones, v.AvailabilityZones)
+	if v.AvailabilityZones != nil {
+		serializeAvailabilityZoneList(s, schemas.IncreaseReplicationFactorRequest_AvailabilityZones, v.AvailabilityZones)
+	}
 	if v.ClusterName != nil {
 		s.WriteString(schemas.IncreaseReplicationFactorRequest_ClusterName, *v.ClusterName)
 	}

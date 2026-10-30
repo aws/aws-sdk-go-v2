@@ -76,7 +76,9 @@ func (v *ListIpAccessSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListIpAccessSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpAccessSettingsList(s, schemas.ListIpAccessSettingsResponse_ipAccessSettings, v.IpAccessSettings)
+	if v.IpAccessSettings != nil {
+		serializeIpAccessSettingsList(s, schemas.ListIpAccessSettingsResponse_ipAccessSettings, v.IpAccessSettings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListIpAccessSettingsResponse_nextToken, *v.NextToken)
 	}

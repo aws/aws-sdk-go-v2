@@ -95,7 +95,9 @@ func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Action != "" {
 		s.WriteString(schemas.ListRulesInput_action, string(v.Action))
 	}
-	serializeAssetTypeIdentifiers(s, schemas.ListRulesInput_assetTypes, v.AssetTypes)
+	if v.AssetTypes != nil {
+		serializeAssetTypeIdentifiers(s, schemas.ListRulesInput_assetTypes, v.AssetTypes)
+	}
 	if v.DataProduct != nil {
 		s.WriteBool(schemas.ListRulesInput_dataProduct, *v.DataProduct)
 	}
@@ -111,7 +113,9 @@ func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRulesInput_nextToken, *v.NextToken)
 	}
-	serializeProjectIds(s, schemas.ListRulesInput_projectIds, v.ProjectIds)
+	if v.ProjectIds != nil {
+		serializeProjectIds(s, schemas.ListRulesInput_projectIds, v.ProjectIds)
+	}
 	if v.RuleType != "" {
 		s.WriteString(schemas.ListRulesInput_ruleType, string(v.RuleType))
 	}
@@ -150,7 +154,9 @@ func (v *ListRulesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRuleSummaries(s, schemas.ListRulesOutput_items, v.Items)
+	if v.Items != nil {
+		serializeRuleSummaries(s, schemas.ListRulesOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRulesOutput_nextToken, *v.NextToken)
 	}

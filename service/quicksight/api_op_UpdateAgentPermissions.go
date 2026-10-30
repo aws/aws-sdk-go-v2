@@ -60,8 +60,12 @@ func (v *UpdateAgentPermissionsInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.UpdateAgentPermissionsRequest_AwsAccountId, *v.AwsAccountId)
 	}
-	serializeUpdateAgentPermissionsRequestGrantPermissionsList(s, schemas.UpdateAgentPermissionsRequest_GrantPermissions, v.GrantPermissions)
-	serializeUpdateAgentPermissionsRequestRevokePermissionsList(s, schemas.UpdateAgentPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	if v.GrantPermissions != nil {
+		serializeUpdateAgentPermissionsRequestGrantPermissionsList(s, schemas.UpdateAgentPermissionsRequest_GrantPermissions, v.GrantPermissions)
+	}
+	if v.RevokePermissions != nil {
+		serializeUpdateAgentPermissionsRequestRevokePermissionsList(s, schemas.UpdateAgentPermissionsRequest_RevokePermissions, v.RevokePermissions)
+	}
 }
 
 type UpdateAgentPermissionsOutput struct {
@@ -101,7 +105,9 @@ func (v *UpdateAgentPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.Arn != nil {
 		s.WriteString(schemas.UpdateAgentPermissionsResponse_Arn, *v.Arn)
 	}
-	serializeResourcePermissionList(s, schemas.UpdateAgentPermissionsResponse_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.UpdateAgentPermissionsResponse_Permissions, v.Permissions)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.UpdateAgentPermissionsResponse_RequestId, *v.RequestId)
 	}

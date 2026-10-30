@@ -162,7 +162,9 @@ func (v *GetDocumentAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AnalyzeDocumentModelVersion != nil {
 		s.WriteString(schemas.GetDocumentAnalysisResponse_AnalyzeDocumentModelVersion, *v.AnalyzeDocumentModelVersion)
 	}
-	serializeBlockList(s, schemas.GetDocumentAnalysisResponse_Blocks, v.Blocks)
+	if v.Blocks != nil {
+		serializeBlockList(s, schemas.GetDocumentAnalysisResponse_Blocks, v.Blocks)
+	}
 	if v.DocumentMetadata != nil {
 		s.WriteStruct(schemas.GetDocumentAnalysisResponse_DocumentMetadata)
 		v.DocumentMetadata.SerializeMembers(s)
@@ -177,7 +179,9 @@ func (v *GetDocumentAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StatusMessage != nil {
 		s.WriteString(schemas.GetDocumentAnalysisResponse_StatusMessage, *v.StatusMessage)
 	}
-	serializeWarnings(s, schemas.GetDocumentAnalysisResponse_Warnings, v.Warnings)
+	if v.Warnings != nil {
+		serializeWarnings(s, schemas.GetDocumentAnalysisResponse_Warnings, v.Warnings)
+	}
 }
 func (v *GetDocumentAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDocumentAnalysisResponse, func(s *smithy.Schema) error {

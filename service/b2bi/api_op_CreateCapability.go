@@ -73,12 +73,18 @@ func (v *CreateCapabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateCapabilityRequest_clientToken, *v.ClientToken)
 	}
-	serializeCapabilityConfiguration(s, schemas.CreateCapabilityRequest_configuration, v.Configuration)
-	serializeInstructionsDocuments(s, schemas.CreateCapabilityRequest_instructionsDocuments, v.InstructionsDocuments)
+	if v.Configuration != nil {
+		serializeCapabilityConfiguration(s, schemas.CreateCapabilityRequest_configuration, v.Configuration)
+	}
+	if v.InstructionsDocuments != nil {
+		serializeInstructionsDocuments(s, schemas.CreateCapabilityRequest_instructionsDocuments, v.InstructionsDocuments)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCapabilityRequest_name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateCapabilityRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCapabilityRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateCapabilityRequest_type, string(v.Type))
 	}
@@ -141,11 +147,15 @@ func (v *CreateCapabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CapabilityId != nil {
 		s.WriteString(schemas.CreateCapabilityResponse_capabilityId, *v.CapabilityId)
 	}
-	serializeCapabilityConfiguration(s, schemas.CreateCapabilityResponse_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeCapabilityConfiguration(s, schemas.CreateCapabilityResponse_configuration, v.Configuration)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateCapabilityResponse_createdAt, *v.CreatedAt)
 	}
-	serializeInstructionsDocuments(s, schemas.CreateCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	if v.InstructionsDocuments != nil {
+		serializeInstructionsDocuments(s, schemas.CreateCapabilityResponse_instructionsDocuments, v.InstructionsDocuments)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCapabilityResponse_name, *v.Name)
 	}

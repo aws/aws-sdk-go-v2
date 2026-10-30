@@ -88,7 +88,9 @@ func (v *ListTrafficDistributionGroupUsersOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTrafficDistributionGroupUsersResponse_NextToken, *v.NextToken)
 	}
-	serializeTrafficDistributionGroupUserSummaryList(s, schemas.ListTrafficDistributionGroupUsersResponse_TrafficDistributionGroupUserSummaryList, v.TrafficDistributionGroupUserSummaryList)
+	if v.TrafficDistributionGroupUserSummaryList != nil {
+		serializeTrafficDistributionGroupUserSummaryList(s, schemas.ListTrafficDistributionGroupUsersResponse_TrafficDistributionGroupUserSummaryList, v.TrafficDistributionGroupUserSummaryList)
+	}
 }
 func (v *ListTrafficDistributionGroupUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTrafficDistributionGroupUsersResponse, func(s *smithy.Schema) error {

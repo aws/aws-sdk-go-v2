@@ -48,7 +48,9 @@ func (v *DescribeIpGroupsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeIpGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIpGroupIdList(s, schemas.DescribeIpGroupsRequest_GroupIds, v.GroupIds)
+	if v.GroupIds != nil {
+		serializeIpGroupIdList(s, schemas.DescribeIpGroupsRequest_GroupIds, v.GroupIds)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeIpGroupsRequest_MaxResults, *v.MaxResults)
 	}
@@ -82,7 +84,9 @@ func (v *DescribeIpGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeIpGroupsResult_NextToken, *v.NextToken)
 	}
-	serializeWorkspacesIpGroupsList(s, schemas.DescribeIpGroupsResult_Result, v.Result)
+	if v.Result != nil {
+		serializeWorkspacesIpGroupsList(s, schemas.DescribeIpGroupsResult_Result, v.Result)
+	}
 }
 func (v *DescribeIpGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeIpGroupsResult, func(s *smithy.Schema) error {

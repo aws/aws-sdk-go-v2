@@ -77,7 +77,9 @@ func (v *GetVpcLinksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetVpcLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeListOfVpcLink(s, schemas.VpcLinks_items, v.Items)
+	if v.Items != nil {
+		serializeListOfVpcLink(s, schemas.VpcLinks_items, v.Items)
+	}
 	if v.Position != nil {
 		s.WriteString(schemas.VpcLinks_position, *v.Position)
 	}

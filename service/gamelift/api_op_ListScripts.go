@@ -96,7 +96,9 @@ func (v *ListScriptsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListScriptsOutput_NextToken, *v.NextToken)
 	}
-	serializeScriptList(s, schemas.ListScriptsOutput_Scripts, v.Scripts)
+	if v.Scripts != nil {
+		serializeScriptList(s, schemas.ListScriptsOutput_Scripts, v.Scripts)
+	}
 }
 func (v *ListScriptsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListScriptsOutput, func(s *smithy.Schema) error {

@@ -4345,7 +4345,9 @@ func (v *OpsItemInvalidParameterException) SerializeMembers(s smithy.ShapeSerial
 	if v.Message != nil {
 		s.WriteString(schemas.OpsItemInvalidParameterException_Message, *v.Message)
 	}
-	serializeOpsItemParameterNamesList(s, schemas.OpsItemInvalidParameterException_ParameterNames, v.ParameterNames)
+	if v.ParameterNames != nil {
+		serializeOpsItemParameterNamesList(s, schemas.OpsItemInvalidParameterException_ParameterNames, v.ParameterNames)
+	}
 }
 func (v *OpsItemInvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpsItemInvalidParameterException, func(s *smithy.Schema) error {
@@ -4405,7 +4407,9 @@ func (v *OpsItemLimitExceededException) SerializeMembers(s smithy.ShapeSerialize
 	if v.Message != nil {
 		s.WriteString(schemas.OpsItemLimitExceededException_Message, *v.Message)
 	}
-	serializeOpsItemParameterNamesList(s, schemas.OpsItemLimitExceededException_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeOpsItemParameterNamesList(s, schemas.OpsItemLimitExceededException_ResourceTypes, v.ResourceTypes)
+	}
 }
 func (v *OpsItemLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpsItemLimitExceededException, func(s *smithy.Schema) error {
@@ -5778,7 +5782,9 @@ func (v *ResourcePolicyInvalidParameterException) SerializeMembers(s smithy.Shap
 	if v.Message != nil {
 		s.WriteString(schemas.ResourcePolicyInvalidParameterException_Message, *v.Message)
 	}
-	serializeResourcePolicyParameterNamesList(s, schemas.ResourcePolicyInvalidParameterException_ParameterNames, v.ParameterNames)
+	if v.ParameterNames != nil {
+		serializeResourcePolicyParameterNamesList(s, schemas.ResourcePolicyInvalidParameterException_ParameterNames, v.ParameterNames)
+	}
 }
 func (v *ResourcePolicyInvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourcePolicyInvalidParameterException, func(s *smithy.Schema) error {

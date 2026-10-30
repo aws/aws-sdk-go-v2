@@ -74,7 +74,9 @@ func (v *PutAccountDetailsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutAccountDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalContactEmailAddresses(s, schemas.PutAccountDetailsRequest_AdditionalContactEmailAddresses, v.AdditionalContactEmailAddresses)
+	if v.AdditionalContactEmailAddresses != nil {
+		serializeAdditionalContactEmailAddresses(s, schemas.PutAccountDetailsRequest_AdditionalContactEmailAddresses, v.AdditionalContactEmailAddresses)
+	}
 	if v.ContactLanguage != "" {
 		s.WriteString(schemas.PutAccountDetailsRequest_ContactLanguage, string(v.ContactLanguage))
 	}

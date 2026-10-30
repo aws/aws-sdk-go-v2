@@ -68,7 +68,9 @@ func (v *SetUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AccessToken != nil {
 		s.WriteString(schemas.SetUserSettingsRequest_AccessToken, *v.AccessToken)
 	}
-	serializeMFAOptionListType(s, schemas.SetUserSettingsRequest_MFAOptions, v.MFAOptions)
+	if v.MFAOptions != nil {
+		serializeMFAOptionListType(s, schemas.SetUserSettingsRequest_MFAOptions, v.MFAOptions)
+	}
 }
 
 // The response from the server for a set user settings request.

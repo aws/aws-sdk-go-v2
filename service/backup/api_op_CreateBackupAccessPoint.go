@@ -80,7 +80,9 @@ func (v *CreateBackupAccessPointInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateBackupAccessPointInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPointMetadataMap(s, schemas.CreateBackupAccessPointRequest_AccessPointMetadata, v.AccessPointMetadata)
+	if v.AccessPointMetadata != nil {
+		serializeAccessPointMetadataMap(s, schemas.CreateBackupAccessPointRequest_AccessPointMetadata, v.AccessPointMetadata)
+	}
 	if v.AccessPointPolicy != nil {
 		s.WriteString(schemas.CreateBackupAccessPointRequest_AccessPointPolicy, *v.AccessPointPolicy)
 	}
@@ -90,7 +92,9 @@ func (v *CreateBackupAccessPointInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.RecoveryPointArn != nil {
 		s.WriteString(schemas.CreateBackupAccessPointRequest_RecoveryPointArn, *v.RecoveryPointArn)
 	}
-	serializeTagMap(s, schemas.CreateBackupAccessPointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateBackupAccessPointRequest_Tags, v.Tags)
+	}
 }
 
 type CreateBackupAccessPointOutput struct {

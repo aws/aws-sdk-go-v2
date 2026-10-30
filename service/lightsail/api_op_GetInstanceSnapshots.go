@@ -77,7 +77,9 @@ func (v *GetInstanceSnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetInstanceSnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInstanceSnapshotList(s, schemas.GetInstanceSnapshotsResult_instanceSnapshots, v.InstanceSnapshots)
+	if v.InstanceSnapshots != nil {
+		serializeInstanceSnapshotList(s, schemas.GetInstanceSnapshotsResult_instanceSnapshots, v.InstanceSnapshots)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetInstanceSnapshotsResult_nextPageToken, *v.NextPageToken)
 	}

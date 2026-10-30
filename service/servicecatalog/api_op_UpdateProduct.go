@@ -90,7 +90,9 @@ func (v *UpdateProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.AcceptLanguage != nil {
 		s.WriteString(schemas.UpdateProductInput_AcceptLanguage, *v.AcceptLanguage)
 	}
-	serializeAddTags(s, schemas.UpdateProductInput_AddTags, v.AddTags)
+	if v.AddTags != nil {
+		serializeAddTags(s, schemas.UpdateProductInput_AddTags, v.AddTags)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateProductInput_Description, *v.Description)
 	}
@@ -106,7 +108,9 @@ func (v *UpdateProductInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Owner != nil {
 		s.WriteString(schemas.UpdateProductInput_Owner, *v.Owner)
 	}
-	serializeTagKeys(s, schemas.UpdateProductInput_RemoveTags, v.RemoveTags)
+	if v.RemoveTags != nil {
+		serializeTagKeys(s, schemas.UpdateProductInput_RemoveTags, v.RemoveTags)
+	}
 	if v.SourceConnection != nil {
 		s.WriteStruct(schemas.UpdateProductInput_SourceConnection)
 		v.SourceConnection.SerializeMembers(s)
@@ -149,7 +153,9 @@ func (v *UpdateProductOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ProductViewDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.UpdateProductOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.UpdateProductOutput_Tags, v.Tags)
+	}
 }
 func (v *UpdateProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateProductOutput, func(s *smithy.Schema) error {

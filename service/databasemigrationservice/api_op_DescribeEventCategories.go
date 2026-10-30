@@ -50,7 +50,9 @@ func (v *DescribeEventCategoriesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeEventCategoriesMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeEventCategoriesMessage_Filters, v.Filters)
+	}
 	if v.SourceType != nil {
 		s.WriteString(schemas.DescribeEventCategoriesMessage_SourceType, *v.SourceType)
 	}
@@ -74,7 +76,9 @@ func (v *DescribeEventCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEventCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEventCategoryGroupList(s, schemas.DescribeEventCategoriesResponse_EventCategoryGroupList, v.EventCategoryGroupList)
+	if v.EventCategoryGroupList != nil {
+		serializeEventCategoryGroupList(s, schemas.DescribeEventCategoriesResponse_EventCategoryGroupList, v.EventCategoryGroupList)
+	}
 }
 func (v *DescribeEventCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEventCategoriesResponse, func(s *smithy.Schema) error {

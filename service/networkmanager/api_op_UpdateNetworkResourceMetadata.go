@@ -55,7 +55,9 @@ func (v *UpdateNetworkResourceMetadataInput) SerializeMembers(s smithy.ShapeSeri
 	if v.GlobalNetworkId != nil {
 		s.WriteString(schemas.UpdateNetworkResourceMetadataRequest_GlobalNetworkId, *v.GlobalNetworkId)
 	}
-	serializeNetworkResourceMetadataMap(s, schemas.UpdateNetworkResourceMetadataRequest_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeNetworkResourceMetadataMap(s, schemas.UpdateNetworkResourceMetadataRequest_Metadata, v.Metadata)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateNetworkResourceMetadataRequest_ResourceArn, *v.ResourceArn)
 	}
@@ -82,7 +84,9 @@ func (v *UpdateNetworkResourceMetadataOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateNetworkResourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkResourceMetadataMap(s, schemas.UpdateNetworkResourceMetadataResponse_Metadata, v.Metadata)
+	if v.Metadata != nil {
+		serializeNetworkResourceMetadataMap(s, schemas.UpdateNetworkResourceMetadataResponse_Metadata, v.Metadata)
+	}
 	if v.ResourceArn != nil {
 		s.WriteString(schemas.UpdateNetworkResourceMetadataResponse_ResourceArn, *v.ResourceArn)
 	}

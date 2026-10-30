@@ -91,7 +91,9 @@ func (v *ListFlowAliasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFlowAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFlowAliasSummaries(s, schemas.ListFlowAliasesResponse_flowAliasSummaries, v.FlowAliasSummaries)
+	if v.FlowAliasSummaries != nil {
+		serializeFlowAliasSummaries(s, schemas.ListFlowAliasesResponse_flowAliasSummaries, v.FlowAliasSummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFlowAliasesResponse_nextToken, *v.NextToken)
 	}

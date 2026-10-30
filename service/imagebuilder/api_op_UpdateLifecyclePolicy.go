@@ -101,7 +101,9 @@ func (v *UpdateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.LifecyclePolicyArn != nil {
 		s.WriteString(schemas.UpdateLifecyclePolicyRequest_lifecyclePolicyArn, *v.LifecyclePolicyArn)
 	}
-	serializeLifecyclePolicyDetails(s, schemas.UpdateLifecyclePolicyRequest_policyDetails, v.PolicyDetails)
+	if v.PolicyDetails != nil {
+		serializeLifecyclePolicyDetails(s, schemas.UpdateLifecyclePolicyRequest_policyDetails, v.PolicyDetails)
+	}
 	if v.ResourceSelection != nil {
 		s.WriteStruct(schemas.UpdateLifecyclePolicyRequest_resourceSelection)
 		v.ResourceSelection.SerializeMembers(s)

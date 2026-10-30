@@ -57,7 +57,9 @@ func (v *InvokeGuardrailChecksInput) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Checks.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeGuardrailChecksMessageList(s, schemas.InvokeGuardrailChecksRequest_messages, v.Messages)
+	if v.Messages != nil {
+		serializeGuardrailChecksMessageList(s, schemas.InvokeGuardrailChecksRequest_messages, v.Messages)
+	}
 }
 
 type InvokeGuardrailChecksOutput struct {

@@ -91,7 +91,9 @@ func (v *DescribeLDAPSSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeLDAPSSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLDAPSSettingsInfo(s, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, v.LDAPSSettingsInfo)
+	if v.LDAPSSettingsInfo != nil {
+		serializeLDAPSSettingsInfo(s, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, v.LDAPSSettingsInfo)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeLDAPSSettingsResult_NextToken, *v.NextToken)
 	}

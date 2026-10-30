@@ -93,7 +93,9 @@ func (v *GetComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RecipeOutputFormat != "" {
 		s.WriteString(schemas.GetComponentResponse_recipeOutputFormat, string(v.RecipeOutputFormat))
 	}
-	serializeTagMap(s, schemas.GetComponentResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetComponentResponse_tags, v.Tags)
+	}
 }
 func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetComponentResponse, func(s *smithy.Schema) error {

@@ -217,7 +217,9 @@ func (v *StartWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.LambdaRole != nil {
 		s.WriteString(schemas.StartWorkflowExecutionInput_lambdaRole, *v.LambdaRole)
 	}
-	serializeTagList(s, schemas.StartWorkflowExecutionInput_tagList, v.TagList)
+	if v.TagList != nil {
+		serializeTagList(s, schemas.StartWorkflowExecutionInput_tagList, v.TagList)
+	}
 	if v.TaskList != nil {
 		s.WriteStruct(schemas.StartWorkflowExecutionInput_taskList)
 		v.TaskList.SerializeMembers(s)

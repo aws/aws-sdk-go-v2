@@ -805,7 +805,9 @@ func (v *MLModel) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TrainingDataSourceId != nil {
 		s.WriteString(schemas.MLModel_TrainingDataSourceId, *v.TrainingDataSourceId)
 	}
-	serializeTrainingParameters(s, schemas.MLModel_TrainingParameters, v.TrainingParameters)
+	if v.TrainingParameters != nil {
+		serializeTrainingParameters(s, schemas.MLModel_TrainingParameters, v.TrainingParameters)
+	}
 }
 func (v *MLModel) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.MLModel, func(s *smithy.Schema) error {
@@ -912,7 +914,9 @@ func (v *PerformanceMetrics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PerformanceMetrics) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePerformanceMetricsProperties(s, schemas.PerformanceMetrics_Properties, v.Properties)
+	if v.Properties != nil {
+		serializePerformanceMetricsProperties(s, schemas.PerformanceMetrics_Properties, v.Properties)
+	}
 }
 func (v *PerformanceMetrics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PerformanceMetrics, func(s *smithy.Schema) error {
@@ -960,11 +964,15 @@ func (v *Prediction) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Prediction) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetailsMap(s, schemas.Prediction_details, v.Details)
+	if v.Details != nil {
+		serializeDetailsMap(s, schemas.Prediction_details, v.Details)
+	}
 	if v.PredictedLabel != nil {
 		s.WriteString(schemas.Prediction_predictedLabel, *v.PredictedLabel)
 	}
-	serializeScoreValuePerLabelMap(s, schemas.Prediction_predictedScores, v.PredictedScores)
+	if v.PredictedScores != nil {
+		serializeScoreValuePerLabelMap(s, schemas.Prediction_predictedScores, v.PredictedScores)
+	}
 	if v.PredictedValue != nil {
 		s.WriteFloat32(schemas.Prediction_predictedValue, *v.PredictedValue)
 	}
@@ -1292,7 +1300,9 @@ func (v *RDSDataSpec) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.S3StagingLocation != nil {
 		s.WriteString(schemas.RDSDataSpec_S3StagingLocation, *v.S3StagingLocation)
 	}
-	serializeEDPSecurityGroupIds(s, schemas.RDSDataSpec_SecurityGroupIds, v.SecurityGroupIds)
+	if v.SecurityGroupIds != nil {
+		serializeEDPSecurityGroupIds(s, schemas.RDSDataSpec_SecurityGroupIds, v.SecurityGroupIds)
+	}
 	if v.SelectSqlQuery != nil {
 		s.WriteString(schemas.RDSDataSpec_SelectSqlQuery, *v.SelectSqlQuery)
 	}

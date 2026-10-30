@@ -96,7 +96,9 @@ func (v *UpdateMicrovmImageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMicrovmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityList(s, schemas.UpdateMicrovmImageRequest_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	if v.AdditionalOsCapabilities != nil {
+		serializeCapabilityList(s, schemas.UpdateMicrovmImageRequest_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	}
 	if v.BaseImageArn != nil {
 		s.WriteString(schemas.UpdateMicrovmImageRequest_baseImageArn, *v.BaseImageArn)
 	}
@@ -109,13 +111,21 @@ func (v *UpdateMicrovmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.UpdateMicrovmImageRequest_clientToken, *v.ClientToken)
 	}
-	serializeCodeArtifact(s, schemas.UpdateMicrovmImageRequest_codeArtifact, v.CodeArtifact)
-	serializeCpuConfigurationList(s, schemas.UpdateMicrovmImageRequest_cpuConfigurations, v.CpuConfigurations)
+	if v.CodeArtifact != nil {
+		serializeCodeArtifact(s, schemas.UpdateMicrovmImageRequest_codeArtifact, v.CodeArtifact)
+	}
+	if v.CpuConfigurations != nil {
+		serializeCpuConfigurationList(s, schemas.UpdateMicrovmImageRequest_cpuConfigurations, v.CpuConfigurations)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateMicrovmImageRequest_description, *v.Description)
 	}
-	serializeNetworkConnectorList(s, schemas.UpdateMicrovmImageRequest_egressNetworkConnectors, v.EgressNetworkConnectors)
-	serializeEnvironmentVariableMap(s, schemas.UpdateMicrovmImageRequest_environmentVariables, v.EnvironmentVariables)
+	if v.EgressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.UpdateMicrovmImageRequest_egressNetworkConnectors, v.EgressNetworkConnectors)
+	}
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariableMap(s, schemas.UpdateMicrovmImageRequest_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Hooks != nil {
 		s.WriteStruct(schemas.UpdateMicrovmImageRequest_hooks)
 		v.Hooks.SerializeMembers(s)
@@ -124,8 +134,12 @@ func (v *UpdateMicrovmImageInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ImageIdentifier != nil {
 		s.WriteString(schemas.UpdateMicrovmImageRequest_imageIdentifier, *v.ImageIdentifier)
 	}
-	serializeLogging(s, schemas.UpdateMicrovmImageRequest_logging, v.Logging)
-	serializeResourcesList(s, schemas.UpdateMicrovmImageRequest_resources, v.Resources)
+	if v.Logging != nil {
+		serializeLogging(s, schemas.UpdateMicrovmImageRequest_logging, v.Logging)
+	}
+	if v.Resources != nil {
+		serializeResourcesList(s, schemas.UpdateMicrovmImageRequest_resources, v.Resources)
+	}
 }
 
 type UpdateMicrovmImageOutput struct {
@@ -224,7 +238,9 @@ func (v *UpdateMicrovmImageOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapabilityList(s, schemas.UpdateMicrovmImageResponse_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	if v.AdditionalOsCapabilities != nil {
+		serializeCapabilityList(s, schemas.UpdateMicrovmImageResponse_additionalOsCapabilities, v.AdditionalOsCapabilities)
+	}
 	if v.BaseImageArn != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_baseImageArn, *v.BaseImageArn)
 	}
@@ -234,16 +250,24 @@ func (v *UpdateMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BuildRoleArn != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_buildRoleArn, *v.BuildRoleArn)
 	}
-	serializeCodeArtifact(s, schemas.UpdateMicrovmImageResponse_codeArtifact, v.CodeArtifact)
-	serializeCpuConfigurationList(s, schemas.UpdateMicrovmImageResponse_cpuConfigurations, v.CpuConfigurations)
+	if v.CodeArtifact != nil {
+		serializeCodeArtifact(s, schemas.UpdateMicrovmImageResponse_codeArtifact, v.CodeArtifact)
+	}
+	if v.CpuConfigurations != nil {
+		serializeCpuConfigurationList(s, schemas.UpdateMicrovmImageResponse_cpuConfigurations, v.CpuConfigurations)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.UpdateMicrovmImageResponse_createdAt, *v.CreatedAt)
 	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_description, *v.Description)
 	}
-	serializeNetworkConnectorList(s, schemas.UpdateMicrovmImageResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
-	serializeEnvironmentVariableMap(s, schemas.UpdateMicrovmImageResponse_environmentVariables, v.EnvironmentVariables)
+	if v.EgressNetworkConnectors != nil {
+		serializeNetworkConnectorList(s, schemas.UpdateMicrovmImageResponse_egressNetworkConnectors, v.EgressNetworkConnectors)
+	}
+	if v.EnvironmentVariables != nil {
+		serializeEnvironmentVariableMap(s, schemas.UpdateMicrovmImageResponse_environmentVariables, v.EnvironmentVariables)
+	}
 	if v.Hooks != nil {
 		s.WriteStruct(schemas.UpdateMicrovmImageResponse_hooks)
 		v.Hooks.SerializeMembers(s)
@@ -261,11 +285,15 @@ func (v *UpdateMicrovmImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LatestFailedImageVersion != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_latestFailedImageVersion, *v.LatestFailedImageVersion)
 	}
-	serializeLogging(s, schemas.UpdateMicrovmImageResponse_logging, v.Logging)
+	if v.Logging != nil {
+		serializeLogging(s, schemas.UpdateMicrovmImageResponse_logging, v.Logging)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_name, *v.Name)
 	}
-	serializeResourcesList(s, schemas.UpdateMicrovmImageResponse_resources, v.Resources)
+	if v.Resources != nil {
+		serializeResourcesList(s, schemas.UpdateMicrovmImageResponse_resources, v.Resources)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.UpdateMicrovmImageResponse_state, string(v.State))
 	}

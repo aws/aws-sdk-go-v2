@@ -107,7 +107,9 @@ func (v *ListTypesByAssociationOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTypesByAssociationResponse_nextToken, *v.NextToken)
 	}
-	serializeTypeList(s, schemas.ListTypesByAssociationResponse_types, v.Types)
+	if v.Types != nil {
+		serializeTypeList(s, schemas.ListTypesByAssociationResponse_types, v.Types)
+	}
 }
 func (v *ListTypesByAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTypesByAssociationResponse, func(s *smithy.Schema) error {

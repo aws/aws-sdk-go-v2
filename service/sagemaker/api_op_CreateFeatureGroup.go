@@ -178,7 +178,9 @@ func (v *CreateFeatureGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EventTimeFeatureName != nil {
 		s.WriteString(schemas.CreateFeatureGroupRequest_EventTimeFeatureName, *v.EventTimeFeatureName)
 	}
-	serializeFeatureDefinitions(s, schemas.CreateFeatureGroupRequest_FeatureDefinitions, v.FeatureDefinitions)
+	if v.FeatureDefinitions != nil {
+		serializeFeatureDefinitions(s, schemas.CreateFeatureGroupRequest_FeatureDefinitions, v.FeatureDefinitions)
+	}
 	if v.FeatureGroupName != nil {
 		s.WriteString(schemas.CreateFeatureGroupRequest_FeatureGroupName, *v.FeatureGroupName)
 	}
@@ -198,7 +200,9 @@ func (v *CreateFeatureGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RoleArn != nil {
 		s.WriteString(schemas.CreateFeatureGroupRequest_RoleArn, *v.RoleArn)
 	}
-	serializeTagList(s, schemas.CreateFeatureGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateFeatureGroupRequest_Tags, v.Tags)
+	}
 	if v.ThroughputConfig != nil {
 		s.WriteStruct(schemas.CreateFeatureGroupRequest_ThroughputConfig)
 		v.ThroughputConfig.SerializeMembers(s)

@@ -105,7 +105,9 @@ func (v *ListDomainUnitsForParentOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListDomainUnitsForParentOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDomainUnitSummaries(s, schemas.ListDomainUnitsForParentOutput_items, v.Items)
+	if v.Items != nil {
+		serializeDomainUnitSummaries(s, schemas.ListDomainUnitsForParentOutput_items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListDomainUnitsForParentOutput_nextToken, *v.NextToken)
 	}

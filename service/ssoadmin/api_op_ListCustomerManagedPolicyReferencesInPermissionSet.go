@@ -94,7 +94,9 @@ func (v *ListCustomerManagedPolicyReferencesInPermissionSetOutput) Serialize(s s
 }
 
 func (v *ListCustomerManagedPolicyReferencesInPermissionSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerManagedPolicyReferenceList(s, schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_CustomerManagedPolicyReferences, v.CustomerManagedPolicyReferences)
+	if v.CustomerManagedPolicyReferences != nil {
+		serializeCustomerManagedPolicyReferenceList(s, schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_CustomerManagedPolicyReferences, v.CustomerManagedPolicyReferences)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCustomerManagedPolicyReferencesInPermissionSetResponse_NextToken, *v.NextToken)
 	}

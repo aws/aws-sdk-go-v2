@@ -74,7 +74,9 @@ func (v *ImportDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceDatasetArn != nil {
 		s.WriteString(schemas.ImportDatasetRequest_SourceDatasetArn, *v.SourceDatasetArn)
 	}
-	serializeTagList(s, schemas.ImportDatasetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.ImportDatasetRequest_Tags, v.Tags)
+	}
 }
 
 type ImportDatasetOutput struct {

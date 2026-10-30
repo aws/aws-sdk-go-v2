@@ -117,7 +117,9 @@ func (v *GetDurableExecutionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetDurableExecutionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEvents(s, schemas.GetDurableExecutionHistoryResponse_Events, v.Events)
+	if v.Events != nil {
+		serializeEvents(s, schemas.GetDurableExecutionHistoryResponse_Events, v.Events)
+	}
 	if v.NextMarker != nil {
 		s.WriteString(schemas.GetDurableExecutionHistoryResponse_NextMarker, *v.NextMarker)
 	}

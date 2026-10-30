@@ -228,7 +228,9 @@ func (v *PutLogAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionsEnabled != nil {
 		s.WriteBool(schemas.PutLogAlarmInput_ActionsEnabled, *v.ActionsEnabled)
 	}
-	serializeResourceList(s, schemas.PutLogAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmActions != nil {
+		serializeResourceList(s, schemas.PutLogAlarmInput_AlarmActions, v.AlarmActions)
+	}
 	if v.AlarmDescription != nil {
 		s.WriteString(schemas.PutLogAlarmInput_AlarmDescription, *v.AlarmDescription)
 	}
@@ -238,8 +240,12 @@ func (v *PutLogAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ComparisonOperator != "" {
 		s.WriteString(schemas.PutLogAlarmInput_ComparisonOperator, string(v.ComparisonOperator))
 	}
-	serializeResourceList(s, schemas.PutLogAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
-	serializeResourceList(s, schemas.PutLogAlarmInput_OKActions, v.OKActions)
+	if v.InsufficientDataActions != nil {
+		serializeResourceList(s, schemas.PutLogAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	}
+	if v.OKActions != nil {
+		serializeResourceList(s, schemas.PutLogAlarmInput_OKActions, v.OKActions)
+	}
 	if v.QueryResultsToAlarm != nil {
 		s.WriteInt32(schemas.PutLogAlarmInput_QueryResultsToAlarm, *v.QueryResultsToAlarm)
 	}
@@ -251,7 +257,9 @@ func (v *PutLogAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.ScheduledQueryConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.PutLogAlarmInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.PutLogAlarmInput_Tags, v.Tags)
+	}
 	if v.Threshold != nil {
 		s.WriteFloat64(schemas.PutLogAlarmInput_Threshold, *v.Threshold)
 	}

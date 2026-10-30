@@ -93,7 +93,9 @@ func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateRuleGroupRequest_Name, *v.Name)
 	}
-	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	}
 }
 
 type CreateRuleGroupOutput struct {

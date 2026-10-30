@@ -95,7 +95,9 @@ func (v *GetContactMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceId != nil {
 		s.WriteString(schemas.GetContactMetricsRequest_InstanceId, *v.InstanceId)
 	}
-	serializeContactMetrics(s, schemas.GetContactMetricsRequest_Metrics, v.Metrics)
+	if v.Metrics != nil {
+		serializeContactMetrics(s, schemas.GetContactMetricsRequest_Metrics, v.Metrics)
+	}
 }
 
 type GetContactMetricsOutput struct {
@@ -133,7 +135,9 @@ func (v *GetContactMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.GetContactMetricsResponse_Id, *v.Id)
 	}
-	serializeContactMetricResults(s, schemas.GetContactMetricsResponse_MetricResults, v.MetricResults)
+	if v.MetricResults != nil {
+		serializeContactMetricResults(s, schemas.GetContactMetricsResponse_MetricResults, v.MetricResults)
+	}
 }
 func (v *GetContactMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetContactMetricsResponse, func(s *smithy.Schema) error {

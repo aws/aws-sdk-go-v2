@@ -92,7 +92,9 @@ func (v *GetHypervisorPropertyMappingsOutput) SerializeMembers(s smithy.ShapeSer
 	if v.IamRoleArn != nil {
 		s.WriteString(schemas.GetHypervisorPropertyMappingsOutput_IamRoleArn, *v.IamRoleArn)
 	}
-	serializeVmwareToAwsTagMappings(s, schemas.GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings, v.VmwareToAwsTagMappings)
+	if v.VmwareToAwsTagMappings != nil {
+		serializeVmwareToAwsTagMappings(s, schemas.GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings, v.VmwareToAwsTagMappings)
+	}
 }
 func (v *GetHypervisorPropertyMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetHypervisorPropertyMappingsOutput, func(s *smithy.Schema) error {

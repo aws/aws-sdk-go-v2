@@ -77,7 +77,9 @@ func (v *CreateCertificateProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCertificateProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCertificateProviderAccountDefaultForOperations(s, schemas.CreateCertificateProviderRequest_accountDefaultForOperations, v.AccountDefaultForOperations)
+	if v.AccountDefaultForOperations != nil {
+		serializeCertificateProviderAccountDefaultForOperations(s, schemas.CreateCertificateProviderRequest_accountDefaultForOperations, v.AccountDefaultForOperations)
+	}
 	if v.CertificateProviderName != nil {
 		s.WriteString(schemas.CreateCertificateProviderRequest_certificateProviderName, *v.CertificateProviderName)
 	}
@@ -87,7 +89,9 @@ func (v *CreateCertificateProviderInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.LambdaFunctionArn != nil {
 		s.WriteString(schemas.CreateCertificateProviderRequest_lambdaFunctionArn, *v.LambdaFunctionArn)
 	}
-	serializeTagList(s, schemas.CreateCertificateProviderRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateCertificateProviderRequest_tags, v.Tags)
+	}
 }
 
 type CreateCertificateProviderOutput struct {

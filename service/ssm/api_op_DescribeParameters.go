@@ -89,14 +89,18 @@ func (v *DescribeParametersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParametersFilterList(s, schemas.DescribeParametersRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeParametersFilterList(s, schemas.DescribeParametersRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.DescribeParametersRequest_MaxResults, *v.MaxResults)
 	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeParametersRequest_NextToken, *v.NextToken)
 	}
-	serializeParameterStringFilterList(s, schemas.DescribeParametersRequest_ParameterFilters, v.ParameterFilters)
+	if v.ParameterFilters != nil {
+		serializeParameterStringFilterList(s, schemas.DescribeParametersRequest_ParameterFilters, v.ParameterFilters)
+	}
 	if v.Shared != nil {
 		s.WriteBool(schemas.DescribeParametersRequest_Shared, *v.Shared)
 	}
@@ -126,7 +130,9 @@ func (v *DescribeParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeParametersResult_NextToken, *v.NextToken)
 	}
-	serializeParameterMetadataList(s, schemas.DescribeParametersResult_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterMetadataList(s, schemas.DescribeParametersResult_Parameters, v.Parameters)
+	}
 }
 func (v *DescribeParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeParametersResult, func(s *smithy.Schema) error {

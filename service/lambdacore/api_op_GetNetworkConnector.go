@@ -151,7 +151,9 @@ func (v *GetNetworkConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetNetworkConnectorResponse_Arn, *v.Arn)
 	}
-	serializeNetworkConnectorConfiguration(s, schemas.GetNetworkConnectorResponse_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeNetworkConnectorConfiguration(s, schemas.GetNetworkConnectorResponse_Configuration, v.Configuration)
+	}
 	if v.Id != nil {
 		s.WriteString(schemas.GetNetworkConnectorResponse_Id, *v.Id)
 	}

@@ -96,7 +96,9 @@ func (v *GetFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindings(s, schemas.GetFindingsResponse_findings, v.Findings)
+	if v.Findings != nil {
+		serializeFindings(s, schemas.GetFindingsResponse_findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetFindingsResponse_nextToken, *v.NextToken)
 	}

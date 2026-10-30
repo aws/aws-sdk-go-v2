@@ -83,8 +83,12 @@ func (v *CreateAssessmentTemplateInput) SerializeMembers(s smithy.ShapeSerialize
 	if v.DurationInSeconds != nil {
 		s.WriteInt32(schemas.CreateAssessmentTemplateRequest_durationInSeconds, *v.DurationInSeconds)
 	}
-	serializeAssessmentTemplateRulesPackageArnList(s, schemas.CreateAssessmentTemplateRequest_rulesPackageArns, v.RulesPackageArns)
-	serializeUserAttributeList(s, schemas.CreateAssessmentTemplateRequest_userAttributesForFindings, v.UserAttributesForFindings)
+	if v.RulesPackageArns != nil {
+		serializeAssessmentTemplateRulesPackageArnList(s, schemas.CreateAssessmentTemplateRequest_rulesPackageArns, v.RulesPackageArns)
+	}
+	if v.UserAttributesForFindings != nil {
+		serializeUserAttributeList(s, schemas.CreateAssessmentTemplateRequest_userAttributesForFindings, v.UserAttributesForFindings)
+	}
 }
 
 type CreateAssessmentTemplateOutput struct {

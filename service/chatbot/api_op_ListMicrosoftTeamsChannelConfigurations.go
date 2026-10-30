@@ -96,7 +96,9 @@ func (v *ListMicrosoftTeamsChannelConfigurationsOutput) SerializeMembers(s smith
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTeamsChannelConfigurationsResult_NextToken, *v.NextToken)
 	}
-	serializeTeamChannelConfigurationsList(s, schemas.ListTeamsChannelConfigurationsResult_TeamChannelConfigurations, v.TeamChannelConfigurations)
+	if v.TeamChannelConfigurations != nil {
+		serializeTeamChannelConfigurationsList(s, schemas.ListTeamsChannelConfigurationsResult_TeamChannelConfigurations, v.TeamChannelConfigurations)
+	}
 }
 func (v *ListMicrosoftTeamsChannelConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTeamsChannelConfigurationsResult, func(s *smithy.Schema) error {

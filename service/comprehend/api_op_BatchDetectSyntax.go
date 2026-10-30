@@ -59,7 +59,9 @@ func (v *BatchDetectSyntaxInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.BatchDetectSyntaxRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeCustomerInputStringList(s, schemas.BatchDetectSyntaxRequest_TextList, v.TextList)
+	if v.TextList != nil {
+		serializeCustomerInputStringList(s, schemas.BatchDetectSyntaxRequest_TextList, v.TextList)
+	}
 }
 
 type BatchDetectSyntaxOutput struct {
@@ -93,8 +95,12 @@ func (v *BatchDetectSyntaxOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDetectSyntaxOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchItemErrorList(s, schemas.BatchDetectSyntaxResponse_ErrorList, v.ErrorList)
-	serializeListOfDetectSyntaxResult(s, schemas.BatchDetectSyntaxResponse_ResultList, v.ResultList)
+	if v.ErrorList != nil {
+		serializeBatchItemErrorList(s, schemas.BatchDetectSyntaxResponse_ErrorList, v.ErrorList)
+	}
+	if v.ResultList != nil {
+		serializeListOfDetectSyntaxResult(s, schemas.BatchDetectSyntaxResponse_ResultList, v.ResultList)
+	}
 }
 func (v *BatchDetectSyntaxOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDetectSyntaxResponse, func(s *smithy.Schema) error {

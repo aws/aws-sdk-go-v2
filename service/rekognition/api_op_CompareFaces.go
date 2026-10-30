@@ -208,7 +208,9 @@ func (v *CompareFacesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CompareFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCompareFacesMatchList(s, schemas.CompareFacesResponse_FaceMatches, v.FaceMatches)
+	if v.FaceMatches != nil {
+		serializeCompareFacesMatchList(s, schemas.CompareFacesResponse_FaceMatches, v.FaceMatches)
+	}
 	if v.SourceImageFace != nil {
 		s.WriteStruct(schemas.CompareFacesResponse_SourceImageFace)
 		v.SourceImageFace.SerializeMembers(s)
@@ -220,7 +222,9 @@ func (v *CompareFacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TargetImageOrientationCorrection != "" {
 		s.WriteString(schemas.CompareFacesResponse_TargetImageOrientationCorrection, string(v.TargetImageOrientationCorrection))
 	}
-	serializeCompareFacesUnmatchList(s, schemas.CompareFacesResponse_UnmatchedFaces, v.UnmatchedFaces)
+	if v.UnmatchedFaces != nil {
+		serializeCompareFacesUnmatchList(s, schemas.CompareFacesResponse_UnmatchedFaces, v.UnmatchedFaces)
+	}
 }
 func (v *CompareFacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CompareFacesResponse, func(s *smithy.Schema) error {

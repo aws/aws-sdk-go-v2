@@ -117,7 +117,9 @@ func (v *ListVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Marker != nil {
 		s.WriteString(schemas.ListVolumesOutput_Marker, *v.Marker)
 	}
-	serializeVolumeInfos(s, schemas.ListVolumesOutput_VolumeInfos, v.VolumeInfos)
+	if v.VolumeInfos != nil {
+		serializeVolumeInfos(s, schemas.ListVolumesOutput_VolumeInfos, v.VolumeInfos)
+	}
 }
 func (v *ListVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVolumesOutput, func(s *smithy.Schema) error {

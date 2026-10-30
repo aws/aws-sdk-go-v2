@@ -93,7 +93,9 @@ func (v *ListGatewayRateLimitsOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayRateLimitsResponse_nextToken, *v.NextToken)
 	}
-	serializeGatewayRateLimits(s, schemas.ListGatewayRateLimitsResponse_rateLimits, v.RateLimits)
+	if v.RateLimits != nil {
+		serializeGatewayRateLimits(s, schemas.ListGatewayRateLimitsResponse_rateLimits, v.RateLimits)
+	}
 }
 func (v *ListGatewayRateLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListGatewayRateLimitsResponse, func(s *smithy.Schema) error {

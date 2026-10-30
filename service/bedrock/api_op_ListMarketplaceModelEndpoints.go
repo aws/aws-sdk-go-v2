@@ -84,7 +84,9 @@ func (v *ListMarketplaceModelEndpointsOutput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *ListMarketplaceModelEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMarketplaceModelEndpointSummaries(s, schemas.ListMarketplaceModelEndpointsResponse_marketplaceModelEndpoints, v.MarketplaceModelEndpoints)
+	if v.MarketplaceModelEndpoints != nil {
+		serializeMarketplaceModelEndpointSummaries(s, schemas.ListMarketplaceModelEndpointsResponse_marketplaceModelEndpoints, v.MarketplaceModelEndpoints)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMarketplaceModelEndpointsResponse_nextToken, *v.NextToken)
 	}

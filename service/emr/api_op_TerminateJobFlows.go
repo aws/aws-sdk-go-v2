@@ -51,7 +51,9 @@ func (v *TerminateJobFlowsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TerminateJobFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeXmlStringList(s, schemas.TerminateJobFlowsInput_JobFlowIds, v.JobFlowIds)
+	if v.JobFlowIds != nil {
+		serializeXmlStringList(s, schemas.TerminateJobFlowsInput_JobFlowIds, v.JobFlowIds)
+	}
 }
 
 type TerminateJobFlowsOutput struct {

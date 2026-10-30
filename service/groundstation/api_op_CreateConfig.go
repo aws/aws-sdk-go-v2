@@ -54,11 +54,15 @@ func (v *CreateConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigTypeData(s, schemas.CreateConfigRequest_configData, v.ConfigData)
+	if v.ConfigData != nil {
+		serializeConfigTypeData(s, schemas.CreateConfigRequest_configData, v.ConfigData)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConfigRequest_name, *v.Name)
 	}
-	serializeTagsMap(s, schemas.CreateConfigRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.CreateConfigRequest_tags, v.Tags)
+	}
 }
 
 // Response containing the ARN, ID, and type of a Config .

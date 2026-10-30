@@ -68,8 +68,12 @@ func (v *CreateArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KmsKeyArn != nil {
 		s.WriteString(schemas.CreateArchiveRequest_KmsKeyArn, *v.KmsKeyArn)
 	}
-	serializeArchiveRetention(s, schemas.CreateArchiveRequest_Retention, v.Retention)
-	serializeTagList(s, schemas.CreateArchiveRequest_Tags, v.Tags)
+	if v.Retention != nil {
+		serializeArchiveRetention(s, schemas.CreateArchiveRequest_Retention, v.Retention)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateArchiveRequest_Tags, v.Tags)
+	}
 }
 
 // The response from creating a new email archive.

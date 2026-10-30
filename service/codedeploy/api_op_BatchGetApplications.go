@@ -46,7 +46,9 @@ func (v *BatchGetApplicationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationsList(s, schemas.BatchGetApplicationsInput_applicationNames, v.ApplicationNames)
+	if v.ApplicationNames != nil {
+		serializeApplicationsList(s, schemas.BatchGetApplicationsInput_applicationNames, v.ApplicationNames)
+	}
 }
 
 // Represents the output of a BatchGetApplications operation.
@@ -68,7 +70,9 @@ func (v *BatchGetApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApplicationsInfoList(s, schemas.BatchGetApplicationsOutput_applicationsInfo, v.ApplicationsInfo)
+	if v.ApplicationsInfo != nil {
+		serializeApplicationsInfoList(s, schemas.BatchGetApplicationsOutput_applicationsInfo, v.ApplicationsInfo)
+	}
 }
 func (v *BatchGetApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetApplicationsOutput, func(s *smithy.Schema) error {

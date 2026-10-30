@@ -127,8 +127,12 @@ func (v *GetDevicePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeviceId != nil {
 		s.WriteString(schemas.GetDevicePositionResponse_DeviceId, *v.DeviceId)
 	}
-	serializePosition(s, schemas.GetDevicePositionResponse_Position, v.Position)
-	serializePositionPropertyMap(s, schemas.GetDevicePositionResponse_PositionProperties, v.PositionProperties)
+	if v.Position != nil {
+		serializePosition(s, schemas.GetDevicePositionResponse_Position, v.Position)
+	}
+	if v.PositionProperties != nil {
+		serializePositionPropertyMap(s, schemas.GetDevicePositionResponse_PositionProperties, v.PositionProperties)
+	}
 	if v.ReceivedTime != nil {
 		s.WriteTime(schemas.GetDevicePositionResponse_ReceivedTime, *v.ReceivedTime)
 	}

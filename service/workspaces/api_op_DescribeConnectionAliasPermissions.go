@@ -93,7 +93,9 @@ func (v *DescribeConnectionAliasPermissionsOutput) SerializeMembers(s smithy.Sha
 	if v.AliasId != nil {
 		s.WriteString(schemas.DescribeConnectionAliasPermissionsResult_AliasId, *v.AliasId)
 	}
-	serializeConnectionAliasPermissions(s, schemas.DescribeConnectionAliasPermissionsResult_ConnectionAliasPermissions, v.ConnectionAliasPermissions)
+	if v.ConnectionAliasPermissions != nil {
+		serializeConnectionAliasPermissions(s, schemas.DescribeConnectionAliasPermissionsResult_ConnectionAliasPermissions, v.ConnectionAliasPermissions)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeConnectionAliasPermissionsResult_NextToken, *v.NextToken)
 	}

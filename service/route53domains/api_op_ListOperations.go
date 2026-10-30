@@ -87,11 +87,15 @@ func (v *ListOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SortOrder != "" {
 		s.WriteString(schemas.ListOperationsRequest_SortOrder, string(v.SortOrder))
 	}
-	serializeOperationStatusList(s, schemas.ListOperationsRequest_Status, v.Status)
+	if v.Status != nil {
+		serializeOperationStatusList(s, schemas.ListOperationsRequest_Status, v.Status)
+	}
 	if v.SubmittedSince != nil {
 		s.WriteTime(schemas.ListOperationsRequest_SubmittedSince, *v.SubmittedSince)
 	}
-	serializeOperationTypeList(s, schemas.ListOperationsRequest_Type, v.Type)
+	if v.Type != nil {
+		serializeOperationTypeList(s, schemas.ListOperationsRequest_Type, v.Type)
+	}
 }
 
 // The ListOperations response includes the following elements.
@@ -121,7 +125,9 @@ func (v *ListOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextPageMarker != nil {
 		s.WriteString(schemas.ListOperationsResponse_NextPageMarker, *v.NextPageMarker)
 	}
-	serializeOperationSummaryList(s, schemas.ListOperationsResponse_Operations, v.Operations)
+	if v.Operations != nil {
+		serializeOperationSummaryList(s, schemas.ListOperationsResponse_Operations, v.Operations)
+	}
 }
 func (v *ListOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListOperationsResponse, func(s *smithy.Schema) error {

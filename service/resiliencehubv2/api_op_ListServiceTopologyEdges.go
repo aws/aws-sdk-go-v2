@@ -85,7 +85,9 @@ func (v *ListServiceTopologyEdgesOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceTopologyEdgesResponse_nextToken, *v.NextToken)
 	}
-	serializeServiceTopologyEdgeSummaryList(s, schemas.ListServiceTopologyEdgesResponse_serviceTopologyEdgeSummaries, v.ServiceTopologyEdgeSummaries)
+	if v.ServiceTopologyEdgeSummaries != nil {
+		serializeServiceTopologyEdgeSummaryList(s, schemas.ListServiceTopologyEdgesResponse_serviceTopologyEdgeSummaries, v.ServiceTopologyEdgeSummaries)
+	}
 }
 func (v *ListServiceTopologyEdgesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceTopologyEdgesResponse, func(s *smithy.Schema) error {

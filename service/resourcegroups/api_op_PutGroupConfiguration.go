@@ -63,7 +63,9 @@ func (v *PutGroupConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutGroupConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupConfigurationList(s, schemas.PutGroupConfigurationInput_Configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeGroupConfigurationList(s, schemas.PutGroupConfigurationInput_Configuration, v.Configuration)
+	}
 	if v.Group != nil {
 		s.WriteString(schemas.PutGroupConfigurationInput_Group, *v.Group)
 	}

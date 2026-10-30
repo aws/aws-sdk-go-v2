@@ -39,7 +39,9 @@ func (v *QueryPrecedenceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *QueryPrecedenceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.QueryPrecedenceInput_baz, v.Baz)
+	if v.Baz != nil {
+		serializeStringMap(s, schemas.QueryPrecedenceInput_baz, v.Baz)
+	}
 	if v.Foo != nil {
 		s.WriteString(schemas.QueryPrecedenceInput_foo, *v.Foo)
 	}

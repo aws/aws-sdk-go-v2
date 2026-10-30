@@ -66,7 +66,9 @@ func (v *CreateConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ConfigurationSetName != nil {
 		s.WriteString(schemas.CreateConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
 	}
-	serializeTagList(s, schemas.CreateConfigurationSetRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConfigurationSetRequest_Tags, v.Tags)
+	}
 }
 
 type CreateConfigurationSetOutput struct {
@@ -108,7 +110,9 @@ func (v *CreateConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.CreateConfigurationSetResult_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	serializeTagList(s, schemas.CreateConfigurationSetResult_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateConfigurationSetResult_Tags, v.Tags)
+	}
 }
 func (v *CreateConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateConfigurationSetResult, func(s *smithy.Schema) error {

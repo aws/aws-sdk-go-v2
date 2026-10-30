@@ -84,7 +84,9 @@ func (v *StartContactConversationalAnalyticsJobInput) SerializeMembers(s smithy.
 		v.AnalyticsConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeAnalyticsModes(s, schemas.StartContactConversationalAnalyticsJobRequest_AnalyticsModes, v.AnalyticsModes)
+	if v.AnalyticsModes != nil {
+		serializeAnalyticsModes(s, schemas.StartContactConversationalAnalyticsJobRequest_AnalyticsModes, v.AnalyticsModes)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartContactConversationalAnalyticsJobRequest_ClientToken, *v.ClientToken)
 	}

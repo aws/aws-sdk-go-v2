@@ -119,7 +119,9 @@ func (v *ListRegistryRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListRegistryRecordsResponse_nextToken, *v.NextToken)
 	}
-	serializeRegistryRecordSummaryList(s, schemas.ListRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	if v.RegistryRecords != nil {
+		serializeRegistryRecordSummaryList(s, schemas.ListRegistryRecordsResponse_registryRecords, v.RegistryRecords)
+	}
 }
 func (v *ListRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListRegistryRecordsResponse, func(s *smithy.Schema) error {

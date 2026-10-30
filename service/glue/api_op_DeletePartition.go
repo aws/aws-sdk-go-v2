@@ -62,7 +62,9 @@ func (v *DeletePartitionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.DeletePartitionRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeValueStringList(s, schemas.DeletePartitionRequest_PartitionValues, v.PartitionValues)
+	if v.PartitionValues != nil {
+		serializeValueStringList(s, schemas.DeletePartitionRequest_PartitionValues, v.PartitionValues)
+	}
 	if v.TableName != nil {
 		s.WriteString(schemas.DeletePartitionRequest_TableName, *v.TableName)
 	}

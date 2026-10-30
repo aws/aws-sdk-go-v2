@@ -52,7 +52,9 @@ func (v *SetLogDeliveryConfigurationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SetLogDeliveryConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLogConfigurationListType(s, schemas.SetLogDeliveryConfigurationRequest_LogConfigurations, v.LogConfigurations)
+	if v.LogConfigurations != nil {
+		serializeLogConfigurationListType(s, schemas.SetLogDeliveryConfigurationRequest_LogConfigurations, v.LogConfigurations)
+	}
 	if v.UserPoolId != nil {
 		s.WriteString(schemas.SetLogDeliveryConfigurationRequest_UserPoolId, *v.UserPoolId)
 	}

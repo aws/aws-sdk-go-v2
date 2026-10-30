@@ -205,7 +205,9 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Environment.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProjectFileSystemLocations(s, schemas.CreateProjectInput_fileSystemLocations, v.FileSystemLocations)
+	if v.FileSystemLocations != nil {
+		serializeProjectFileSystemLocations(s, schemas.CreateProjectInput_fileSystemLocations, v.FileSystemLocations)
+	}
 	if v.LogsConfig != nil {
 		s.WriteStruct(schemas.CreateProjectInput_logsConfig)
 		v.LogsConfig.SerializeMembers(s)
@@ -217,9 +219,15 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueuedTimeoutInMinutes != nil {
 		s.WriteInt32(schemas.CreateProjectInput_queuedTimeoutInMinutes, *v.QueuedTimeoutInMinutes)
 	}
-	serializeProjectArtifactsList(s, schemas.CreateProjectInput_secondaryArtifacts, v.SecondaryArtifacts)
-	serializeProjectSecondarySourceVersions(s, schemas.CreateProjectInput_secondarySourceVersions, v.SecondarySourceVersions)
-	serializeProjectSources(s, schemas.CreateProjectInput_secondarySources, v.SecondarySources)
+	if v.SecondaryArtifacts != nil {
+		serializeProjectArtifactsList(s, schemas.CreateProjectInput_secondaryArtifacts, v.SecondaryArtifacts)
+	}
+	if v.SecondarySourceVersions != nil {
+		serializeProjectSecondarySourceVersions(s, schemas.CreateProjectInput_secondarySourceVersions, v.SecondarySourceVersions)
+	}
+	if v.SecondarySources != nil {
+		serializeProjectSources(s, schemas.CreateProjectInput_secondarySources, v.SecondarySources)
+	}
 	if v.ServiceRole != nil {
 		s.WriteString(schemas.CreateProjectInput_serviceRole, *v.ServiceRole)
 	}
@@ -231,7 +239,9 @@ func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SourceVersion != nil {
 		s.WriteString(schemas.CreateProjectInput_sourceVersion, *v.SourceVersion)
 	}
-	serializeTagList(s, schemas.CreateProjectInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateProjectInput_tags, v.Tags)
+	}
 	if v.TimeoutInMinutes != nil {
 		s.WriteInt32(schemas.CreateProjectInput_timeoutInMinutes, *v.TimeoutInMinutes)
 	}

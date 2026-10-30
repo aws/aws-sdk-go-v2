@@ -111,7 +111,9 @@ func (v *GetReportGroupTrendOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetReportGroupTrendOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeReportGroupTrendRawDataList(s, schemas.GetReportGroupTrendOutput_rawData, v.RawData)
+	if v.RawData != nil {
+		serializeReportGroupTrendRawDataList(s, schemas.GetReportGroupTrendOutput_rawData, v.RawData)
+	}
 	if v.Stats != nil {
 		s.WriteStruct(schemas.GetReportGroupTrendOutput_stats)
 		v.Stats.SerializeMembers(s)

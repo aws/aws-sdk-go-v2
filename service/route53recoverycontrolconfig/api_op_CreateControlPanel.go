@@ -70,7 +70,9 @@ func (v *CreateControlPanelInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ControlPanelName != nil {
 		s.WriteString(schemas.CreateControlPanelRequest_ControlPanelName, *v.ControlPanelName)
 	}
-	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateControlPanelRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateControlPanelRequest_Tags, v.Tags)
+	}
 }
 
 type CreateControlPanelOutput struct {

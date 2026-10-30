@@ -265,10 +265,18 @@ func (v *PutItemInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ConditionalOperator != "" {
 		s.WriteString(schemas.PutItemInput_ConditionalOperator, string(v.ConditionalOperator))
 	}
-	serializeExpectedAttributeMap(s, schemas.PutItemInput_Expected, v.Expected)
-	serializeExpressionAttributeNameMap(s, schemas.PutItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
-	serializeExpressionAttributeValueMap(s, schemas.PutItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
-	serializePutItemInputAttributeMap(s, schemas.PutItemInput_Item, v.Item)
+	if v.Expected != nil {
+		serializeExpectedAttributeMap(s, schemas.PutItemInput_Expected, v.Expected)
+	}
+	if v.ExpressionAttributeNames != nil {
+		serializeExpressionAttributeNameMap(s, schemas.PutItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	}
+	if v.ExpressionAttributeValues != nil {
+		serializeExpressionAttributeValueMap(s, schemas.PutItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	}
+	if v.Item != nil {
+		serializePutItemInputAttributeMap(s, schemas.PutItemInput_Item, v.Item)
+	}
 	if v.ReturnConsumedCapacity != "" {
 		s.WriteString(schemas.PutItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
 	}
@@ -345,7 +353,9 @@ func (v *PutItemOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PutItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAttributeMap(s, schemas.PutItemOutput_Attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeAttributeMap(s, schemas.PutItemOutput_Attributes, v.Attributes)
+	}
 	if v.ConsumedCapacity != nil {
 		s.WriteStruct(schemas.PutItemOutput_ConsumedCapacity)
 		v.ConsumedCapacity.SerializeMembers(s)

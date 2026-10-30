@@ -60,7 +60,9 @@ func (v *CreateScheduledReportInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateScheduledReportRequest_clientToken, *v.ClientToken)
 	}
-	serializeResourceTagList(s, schemas.CreateScheduledReportRequest_resourceTags, v.ResourceTags)
+	if v.ResourceTags != nil {
+		serializeResourceTagList(s, schemas.CreateScheduledReportRequest_resourceTags, v.ResourceTags)
+	}
 	if v.ScheduledReport != nil {
 		s.WriteStruct(schemas.CreateScheduledReportRequest_scheduledReport)
 		v.ScheduledReport.SerializeMembers(s)

@@ -100,7 +100,9 @@ func (v *Account) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Account_Name, *v.Name)
 	}
-	serializePaths(s, schemas.Account_Paths, v.Paths)
+	if v.Paths != nil {
+		serializePaths(s, schemas.Account_Paths, v.Paths)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.Account_State, string(v.State))
 	}
@@ -638,7 +640,9 @@ func (v *EffectivePolicyValidationError) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EffectivePolicyValidationError) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicyIds(s, schemas.EffectivePolicyValidationError_ContributingPolicies, v.ContributingPolicies)
+	if v.ContributingPolicies != nil {
+		serializePolicyIds(s, schemas.EffectivePolicyValidationError_ContributingPolicies, v.ContributingPolicies)
+	}
 	if v.ErrorCode != nil {
 		s.WriteString(schemas.EffectivePolicyValidationError_ErrorCode, *v.ErrorCode)
 	}
@@ -802,11 +806,15 @@ func (v *Handshake) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Id != nil {
 		s.WriteString(schemas.Handshake_Id, *v.Id)
 	}
-	serializeHandshakeParties(s, schemas.Handshake_Parties, v.Parties)
+	if v.Parties != nil {
+		serializeHandshakeParties(s, schemas.Handshake_Parties, v.Parties)
+	}
 	if v.RequestedTimestamp != nil {
 		s.WriteTime(schemas.Handshake_RequestedTimestamp, *v.RequestedTimestamp)
 	}
-	serializeHandshakeResources(s, schemas.Handshake_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeHandshakeResources(s, schemas.Handshake_Resources, v.Resources)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.Handshake_State, string(v.State))
 	}
@@ -997,7 +1005,9 @@ func (v *HandshakeResource) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HandshakeResource) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeHandshakeResources(s, schemas.HandshakeResource_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeHandshakeResources(s, schemas.HandshakeResource_Resources, v.Resources)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.HandshakeResource_Type, string(v.Type))
 	}
@@ -1096,7 +1106,9 @@ func (v *Organization) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.Organization_Arn, *v.Arn)
 	}
-	serializePolicyTypes(s, schemas.Organization_AvailablePolicyTypes, v.AvailablePolicyTypes)
+	if v.AvailablePolicyTypes != nil {
+		serializePolicyTypes(s, schemas.Organization_AvailablePolicyTypes, v.AvailablePolicyTypes)
+	}
 	if v.FeatureSet != "" {
 		s.WriteString(schemas.Organization_FeatureSet, string(v.FeatureSet))
 	}
@@ -1825,7 +1837,9 @@ func (v *Root) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.Root_Name, *v.Name)
 	}
-	serializePolicyTypes(s, schemas.Root_PolicyTypes, v.PolicyTypes)
+	if v.PolicyTypes != nil {
+		serializePolicyTypes(s, schemas.Root_PolicyTypes, v.PolicyTypes)
+	}
 }
 func (v *Root) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Root, func(s *smithy.Schema) error {

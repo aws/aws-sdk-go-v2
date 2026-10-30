@@ -33,7 +33,9 @@ func (v *AssetSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AssetSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssetHashes(s, schemas.AssetSummary_hashes, v.Hashes)
+	if v.Hashes != nil {
+		serializeAssetHashes(s, schemas.AssetSummary_hashes, v.Hashes)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.AssetSummary_name, *v.Name)
 	}
@@ -757,7 +759,9 @@ func (v *PackageGroupOriginConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PackageGroupOriginConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePackageGroupOriginRestrictions(s, schemas.PackageGroupOriginConfiguration_restrictions, v.Restrictions)
+	if v.Restrictions != nil {
+		serializePackageGroupOriginRestrictions(s, schemas.PackageGroupOriginConfiguration_restrictions, v.Restrictions)
+	}
 }
 func (v *PackageGroupOriginConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PackageGroupOriginConfiguration, func(s *smithy.Schema) error {
@@ -1247,7 +1251,9 @@ func (v *PackageVersionDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.HomePage != nil {
 		s.WriteString(schemas.PackageVersionDescription_homePage, *v.HomePage)
 	}
-	serializeLicenseInfoList(s, schemas.PackageVersionDescription_licenses, v.Licenses)
+	if v.Licenses != nil {
+		serializeLicenseInfoList(s, schemas.PackageVersionDescription_licenses, v.Licenses)
+	}
 	if v.Namespace != nil {
 		s.WriteString(schemas.PackageVersionDescription_namespace, *v.Namespace)
 	}
@@ -1586,11 +1592,15 @@ func (v *RepositoryDescription) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainOwner != nil {
 		s.WriteString(schemas.RepositoryDescription_domainOwner, *v.DomainOwner)
 	}
-	serializeRepositoryExternalConnectionInfoList(s, schemas.RepositoryDescription_externalConnections, v.ExternalConnections)
+	if v.ExternalConnections != nil {
+		serializeRepositoryExternalConnectionInfoList(s, schemas.RepositoryDescription_externalConnections, v.ExternalConnections)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.RepositoryDescription_name, *v.Name)
 	}
-	serializeUpstreamRepositoryInfoList(s, schemas.RepositoryDescription_upstreams, v.Upstreams)
+	if v.Upstreams != nil {
+		serializeUpstreamRepositoryInfoList(s, schemas.RepositoryDescription_upstreams, v.Upstreams)
+	}
 }
 func (v *RepositoryDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RepositoryDescription, func(s *smithy.Schema) error {

@@ -144,7 +144,9 @@ func (v *UpdateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InitialResponseSetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputContextsList(s, schemas.UpdateIntentRequest_inputContexts, v.InputContexts)
+	if v.InputContexts != nil {
+		serializeInputContextsList(s, schemas.UpdateIntentRequest_inputContexts, v.InputContexts)
+	}
 	if v.IntentClosingSetting != nil {
 		s.WriteStruct(schemas.UpdateIntentRequest_intentClosingSetting)
 		v.IntentClosingSetting.SerializeMembers(s)
@@ -172,7 +174,9 @@ func (v *UpdateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.UpdateIntentRequest_localeId, *v.LocaleId)
 	}
-	serializeOutputContextsList(s, schemas.UpdateIntentRequest_outputContexts, v.OutputContexts)
+	if v.OutputContexts != nil {
+		serializeOutputContextsList(s, schemas.UpdateIntentRequest_outputContexts, v.OutputContexts)
+	}
 	if v.ParentIntentSignature != nil {
 		s.WriteString(schemas.UpdateIntentRequest_parentIntentSignature, *v.ParentIntentSignature)
 	}
@@ -186,8 +190,12 @@ func (v *UpdateIntentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QnAIntentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSampleUtterancesList(s, schemas.UpdateIntentRequest_sampleUtterances, v.SampleUtterances)
-	serializeSlotPrioritiesList(s, schemas.UpdateIntentRequest_slotPriorities, v.SlotPriorities)
+	if v.SampleUtterances != nil {
+		serializeSampleUtterancesList(s, schemas.UpdateIntentRequest_sampleUtterances, v.SampleUtterances)
+	}
+	if v.SlotPriorities != nil {
+		serializeSlotPrioritiesList(s, schemas.UpdateIntentRequest_slotPriorities, v.SlotPriorities)
+	}
 }
 
 type UpdateIntentOutput struct {
@@ -305,7 +313,9 @@ func (v *UpdateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.InitialResponseSetting.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeInputContextsList(s, schemas.UpdateIntentResponse_inputContexts, v.InputContexts)
+	if v.InputContexts != nil {
+		serializeInputContextsList(s, schemas.UpdateIntentResponse_inputContexts, v.InputContexts)
+	}
 	if v.IntentClosingSetting != nil {
 		s.WriteStruct(schemas.UpdateIntentResponse_intentClosingSetting)
 		v.IntentClosingSetting.SerializeMembers(s)
@@ -336,7 +346,9 @@ func (v *UpdateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LocaleId != nil {
 		s.WriteString(schemas.UpdateIntentResponse_localeId, *v.LocaleId)
 	}
-	serializeOutputContextsList(s, schemas.UpdateIntentResponse_outputContexts, v.OutputContexts)
+	if v.OutputContexts != nil {
+		serializeOutputContextsList(s, schemas.UpdateIntentResponse_outputContexts, v.OutputContexts)
+	}
 	if v.ParentIntentSignature != nil {
 		s.WriteString(schemas.UpdateIntentResponse_parentIntentSignature, *v.ParentIntentSignature)
 	}
@@ -350,8 +362,12 @@ func (v *UpdateIntentOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.QnAIntentConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeSampleUtterancesList(s, schemas.UpdateIntentResponse_sampleUtterances, v.SampleUtterances)
-	serializeSlotPrioritiesList(s, schemas.UpdateIntentResponse_slotPriorities, v.SlotPriorities)
+	if v.SampleUtterances != nil {
+		serializeSampleUtterancesList(s, schemas.UpdateIntentResponse_sampleUtterances, v.SampleUtterances)
+	}
+	if v.SlotPriorities != nil {
+		serializeSlotPrioritiesList(s, schemas.UpdateIntentResponse_slotPriorities, v.SlotPriorities)
+	}
 }
 func (v *UpdateIntentOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateIntentResponse, func(s *smithy.Schema) error {

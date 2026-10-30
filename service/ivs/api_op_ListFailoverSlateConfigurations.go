@@ -80,7 +80,9 @@ func (v *ListFailoverSlateConfigurationsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *ListFailoverSlateConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailoverSlateConfigurationList(s, schemas.ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations, v.FailoverSlateConfigurations)
+	if v.FailoverSlateConfigurations != nil {
+		serializeFailoverSlateConfigurationList(s, schemas.ListFailoverSlateConfigurationsResponse_failoverSlateConfigurations, v.FailoverSlateConfigurations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFailoverSlateConfigurationsResponse_nextToken, *v.NextToken)
 	}

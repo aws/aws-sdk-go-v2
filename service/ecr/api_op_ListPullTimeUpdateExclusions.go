@@ -94,7 +94,9 @@ func (v *ListPullTimeUpdateExclusionsOutput) SerializeMembers(s smithy.ShapeSeri
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPullTimeUpdateExclusionsResponse_nextToken, *v.NextToken)
 	}
-	serializePullTimeUpdateExclusionList(s, schemas.ListPullTimeUpdateExclusionsResponse_pullTimeUpdateExclusions, v.PullTimeUpdateExclusions)
+	if v.PullTimeUpdateExclusions != nil {
+		serializePullTimeUpdateExclusionList(s, schemas.ListPullTimeUpdateExclusionsResponse_pullTimeUpdateExclusions, v.PullTimeUpdateExclusions)
+	}
 }
 func (v *ListPullTimeUpdateExclusionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPullTimeUpdateExclusionsResponse, func(s *smithy.Schema) error {

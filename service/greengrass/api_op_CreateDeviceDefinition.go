@@ -62,7 +62,9 @@ func (v *CreateDeviceDefinitionInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDeviceDefinitionRequest_Name, *v.Name)
 	}
-	serializeTags(s, schemas.CreateDeviceDefinitionRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateDeviceDefinitionRequest_tags, v.Tags)
+	}
 }
 
 type CreateDeviceDefinitionOutput struct {

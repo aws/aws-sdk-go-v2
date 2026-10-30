@@ -71,14 +71,18 @@ func (v *CreateNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNodeRequest_Name, *v.Name)
 	}
-	serialize__listOfNodeInterfaceMappingCreateRequest(s, schemas.CreateNodeRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.NodeInterfaceMappings != nil {
+		serialize__listOfNodeInterfaceMappingCreateRequest(s, schemas.CreateNodeRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.CreateNodeRequest_RequestId, *v.RequestId)
 	}
 	if v.Role != "" {
 		s.WriteString(schemas.CreateNodeRequest_Role, string(v.Role))
 	}
-	serializeTags(s, schemas.CreateNodeRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateNodeRequest_Tags, v.Tags)
+	}
 }
 
 // Placeholder documentation for CreateNodeResponse
@@ -138,7 +142,9 @@ func (v *CreateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateNodeResponse_Arn, *v.Arn)
 	}
-	serialize__listOf__string(s, schemas.CreateNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ChannelPlacementGroups != nil {
+		serialize__listOf__string(s, schemas.CreateNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	}
 	if v.ClusterId != nil {
 		s.WriteString(schemas.CreateNodeResponse_ClusterId, *v.ClusterId)
 	}
@@ -154,11 +160,15 @@ func (v *CreateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateNodeResponse_Name, *v.Name)
 	}
-	serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.NodeInterfaceMappings != nil {
+		serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	}
 	if v.Role != "" {
 		s.WriteString(schemas.CreateNodeResponse_Role, string(v.Role))
 	}
-	serializeSdiSourceMappings(s, schemas.CreateNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	if v.SdiSourceMappings != nil {
+		serializeSdiSourceMappings(s, schemas.CreateNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	}
 	if v.State != "" {
 		s.WriteString(schemas.CreateNodeResponse_State, string(v.State))
 	}

@@ -145,14 +145,18 @@ func (v *CreateVocabularyFilterInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.LanguageCode != "" {
 		s.WriteString(schemas.CreateVocabularyFilterRequest_LanguageCode, string(v.LanguageCode))
 	}
-	serializeTagList(s, schemas.CreateVocabularyFilterRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateVocabularyFilterRequest_Tags, v.Tags)
+	}
 	if v.VocabularyFilterFileUri != nil {
 		s.WriteString(schemas.CreateVocabularyFilterRequest_VocabularyFilterFileUri, *v.VocabularyFilterFileUri)
 	}
 	if v.VocabularyFilterName != nil {
 		s.WriteString(schemas.CreateVocabularyFilterRequest_VocabularyFilterName, *v.VocabularyFilterName)
 	}
-	serializeWords(s, schemas.CreateVocabularyFilterRequest_Words, v.Words)
+	if v.Words != nil {
+		serializeWords(s, schemas.CreateVocabularyFilterRequest_Words, v.Words)
+	}
 }
 
 type CreateVocabularyFilterOutput struct {

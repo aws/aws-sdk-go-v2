@@ -69,7 +69,9 @@ func (v *ListLinuxSubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListLinuxSubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.ListLinuxSubscriptionsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.ListLinuxSubscriptionsRequest_Filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListLinuxSubscriptionsRequest_MaxResults, *v.MaxResults)
 	}
@@ -119,7 +121,9 @@ func (v *ListLinuxSubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListLinuxSubscriptionsResponse_NextToken, *v.NextToken)
 	}
-	serializeSubscriptionList(s, schemas.ListLinuxSubscriptionsResponse_Subscriptions, v.Subscriptions)
+	if v.Subscriptions != nil {
+		serializeSubscriptionList(s, schemas.ListLinuxSubscriptionsResponse_Subscriptions, v.Subscriptions)
+	}
 }
 func (v *ListLinuxSubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListLinuxSubscriptionsResponse, func(s *smithy.Schema) error {

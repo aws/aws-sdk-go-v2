@@ -134,7 +134,9 @@ func (v *UpdateProfileJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timeout != 0 {
 		s.WriteInt32(schemas.UpdateProfileJobRequest_Timeout, v.Timeout)
 	}
-	serializeValidationConfigurationList(s, schemas.UpdateProfileJobRequest_ValidationConfigurations, v.ValidationConfigurations)
+	if v.ValidationConfigurations != nil {
+		serializeValidationConfigurationList(s, schemas.UpdateProfileJobRequest_ValidationConfigurations, v.ValidationConfigurations)
+	}
 }
 
 type UpdateProfileJobOutput struct {

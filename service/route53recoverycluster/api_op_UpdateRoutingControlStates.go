@@ -85,8 +85,12 @@ func (v *UpdateRoutingControlStatesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateRoutingControlStatesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArns(s, schemas.UpdateRoutingControlStatesRequest_SafetyRulesToOverride, v.SafetyRulesToOverride)
-	serializeUpdateRoutingControlStateEntries(s, schemas.UpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries, v.UpdateRoutingControlStateEntries)
+	if v.SafetyRulesToOverride != nil {
+		serializeArns(s, schemas.UpdateRoutingControlStatesRequest_SafetyRulesToOverride, v.SafetyRulesToOverride)
+	}
+	if v.UpdateRoutingControlStateEntries != nil {
+		serializeUpdateRoutingControlStateEntries(s, schemas.UpdateRoutingControlStatesRequest_UpdateRoutingControlStateEntries, v.UpdateRoutingControlStateEntries)
+	}
 }
 
 type UpdateRoutingControlStatesOutput struct {

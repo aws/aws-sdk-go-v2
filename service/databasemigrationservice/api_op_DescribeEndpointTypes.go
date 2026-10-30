@@ -58,7 +58,9 @@ func (v *DescribeEndpointTypesInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEndpointTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeEndpointTypesMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeEndpointTypesMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeEndpointTypesMessage_Marker, *v.Marker)
 	}
@@ -93,7 +95,9 @@ func (v *DescribeEndpointTypesOutput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeEndpointTypesResponse_Marker, *v.Marker)
 	}
-	serializeSupportedEndpointTypeList(s, schemas.DescribeEndpointTypesResponse_SupportedEndpointTypes, v.SupportedEndpointTypes)
+	if v.SupportedEndpointTypes != nil {
+		serializeSupportedEndpointTypeList(s, schemas.DescribeEndpointTypesResponse_SupportedEndpointTypes, v.SupportedEndpointTypes)
+	}
 }
 func (v *DescribeEndpointTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeEndpointTypesResponse, func(s *smithy.Schema) error {

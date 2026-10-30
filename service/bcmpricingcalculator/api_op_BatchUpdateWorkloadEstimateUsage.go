@@ -56,7 +56,9 @@ func (v *BatchUpdateWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *BatchUpdateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateWorkloadEstimateUsageEntries(s, schemas.BatchUpdateWorkloadEstimateUsageRequest_usage, v.Usage)
+	if v.Usage != nil {
+		serializeBatchUpdateWorkloadEstimateUsageEntries(s, schemas.BatchUpdateWorkloadEstimateUsageRequest_usage, v.Usage)
+	}
 	if v.WorkloadEstimateId != nil {
 		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
 	}
@@ -85,8 +87,12 @@ func (v *BatchUpdateWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *BatchUpdateWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchUpdateWorkloadEstimateUsageErrors(s, schemas.BatchUpdateWorkloadEstimateUsageResponse_errors, v.Errors)
-	serializeWorkloadEstimateUsageItems(s, schemas.BatchUpdateWorkloadEstimateUsageResponse_items, v.Items)
+	if v.Errors != nil {
+		serializeBatchUpdateWorkloadEstimateUsageErrors(s, schemas.BatchUpdateWorkloadEstimateUsageResponse_errors, v.Errors)
+	}
+	if v.Items != nil {
+		serializeWorkloadEstimateUsageItems(s, schemas.BatchUpdateWorkloadEstimateUsageResponse_items, v.Items)
+	}
 }
 func (v *BatchUpdateWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchUpdateWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {

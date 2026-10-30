@@ -118,13 +118,17 @@ func (v *CreateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateTemplateRequest_Name, *v.Name)
 	}
-	serializeResourcePermissionList(s, schemas.CreateTemplateRequest_Permissions, v.Permissions)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateTemplateRequest_Permissions, v.Permissions)
+	}
 	if v.SourceEntity != nil {
 		s.WriteStruct(schemas.CreateTemplateRequest_SourceEntity)
 		v.SourceEntity.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateTemplateRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateTemplateRequest_Tags, v.Tags)
+	}
 	if v.TemplateId != nil {
 		s.WriteString(schemas.CreateTemplateRequest_TemplateId, *v.TemplateId)
 	}

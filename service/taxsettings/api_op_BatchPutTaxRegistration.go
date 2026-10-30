@@ -278,7 +278,9 @@ func (v *BatchPutTaxRegistrationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutTaxRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccountIds(s, schemas.BatchPutTaxRegistrationRequest_accountIds, v.AccountIds)
+	if v.AccountIds != nil {
+		serializeAccountIds(s, schemas.BatchPutTaxRegistrationRequest_accountIds, v.AccountIds)
+	}
 	if v.TaxRegistrationEntry != nil {
 		s.WriteStruct(schemas.BatchPutTaxRegistrationRequest_taxRegistrationEntry)
 		v.TaxRegistrationEntry.SerializeMembers(s)
@@ -312,7 +314,9 @@ func (v *BatchPutTaxRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchPutTaxRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchPutTaxRegistrationErrors(s, schemas.BatchPutTaxRegistrationResponse_errors, v.Errors)
+	if v.Errors != nil {
+		serializeBatchPutTaxRegistrationErrors(s, schemas.BatchPutTaxRegistrationResponse_errors, v.Errors)
+	}
 	if v.Status != "" {
 		s.WriteString(schemas.BatchPutTaxRegistrationResponse_status, string(v.Status))
 	}

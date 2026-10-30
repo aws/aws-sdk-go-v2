@@ -105,7 +105,9 @@ func (v *ListServiceQuotaIncreaseRequestsInTemplateOutput) SerializeMembers(s sm
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken, *v.NextToken)
 	}
-	serializeServiceQuotaIncreaseRequestInTemplateList(s, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList, v.ServiceQuotaIncreaseRequestInTemplateList)
+	if v.ServiceQuotaIncreaseRequestInTemplateList != nil {
+		serializeServiceQuotaIncreaseRequestInTemplateList(s, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList, v.ServiceQuotaIncreaseRequestInTemplateList)
+	}
 }
 func (v *ListServiceQuotaIncreaseRequestsInTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse, func(s *smithy.Schema) error {

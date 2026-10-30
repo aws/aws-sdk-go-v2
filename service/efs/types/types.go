@@ -86,7 +86,9 @@ func (v *AccessPointDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.RootDirectory.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.AccessPointDescription_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.AccessPointDescription_Tags, v.Tags)
+	}
 }
 func (v *AccessPointDescription) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccessPointDescription, func(s *smithy.Schema) error {
@@ -649,7 +651,9 @@ func (v *FileSystemDescription) SerializeMembers(s smithy.ShapeSerializer) {
 		v.SizeInBytes.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.FileSystemDescription_Tags, v.Tags)
+	}
 	if v.ThroughputMode != "" {
 		s.WriteString(schemas.FileSystemDescription_ThroughputMode, string(v.ThroughputMode))
 	}
@@ -1104,7 +1108,9 @@ func (v *PosixUser) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Gid != nil {
 		s.WriteInt64(schemas.PosixUser_Gid, *v.Gid)
 	}
-	serializeSecondaryGids(s, schemas.PosixUser_SecondaryGids, v.SecondaryGids)
+	if v.SecondaryGids != nil {
+		serializeSecondaryGids(s, schemas.PosixUser_SecondaryGids, v.SecondaryGids)
+	}
 	if v.Uid != nil {
 		s.WriteInt64(schemas.PosixUser_Uid, *v.Uid)
 	}
@@ -1176,7 +1182,9 @@ func (v *ReplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSer
 	if v.CreationTime != nil {
 		s.WriteTime(schemas.ReplicationConfigurationDescription_CreationTime, *v.CreationTime)
 	}
-	serializeDestinations(s, schemas.ReplicationConfigurationDescription_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeDestinations(s, schemas.ReplicationConfigurationDescription_Destinations, v.Destinations)
+	}
 	if v.OriginalSourceFileSystemArn != nil {
 		s.WriteString(schemas.ReplicationConfigurationDescription_OriginalSourceFileSystemArn, *v.OriginalSourceFileSystemArn)
 	}
@@ -1246,7 +1254,9 @@ func (v *ResourceIdPreference) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ResourceIdType != "" {
 		s.WriteString(schemas.ResourceIdPreference_ResourceIdType, string(v.ResourceIdType))
 	}
-	serializeResources(s, schemas.ResourceIdPreference_Resources, v.Resources)
+	if v.Resources != nil {
+		serializeResources(s, schemas.ResourceIdPreference_Resources, v.Resources)
+	}
 }
 func (v *ResourceIdPreference) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResourceIdPreference, func(s *smithy.Schema) error {

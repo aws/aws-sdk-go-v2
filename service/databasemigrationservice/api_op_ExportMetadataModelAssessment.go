@@ -71,7 +71,9 @@ func (v *ExportMetadataModelAssessmentInput) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *ExportMetadataModelAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAssessmentReportTypesList(s, schemas.ExportMetadataModelAssessmentMessage_AssessmentReportTypes, v.AssessmentReportTypes)
+	if v.AssessmentReportTypes != nil {
+		serializeAssessmentReportTypesList(s, schemas.ExportMetadataModelAssessmentMessage_AssessmentReportTypes, v.AssessmentReportTypes)
+	}
 	if v.FileName != nil {
 		s.WriteString(schemas.ExportMetadataModelAssessmentMessage_FileName, *v.FileName)
 	}

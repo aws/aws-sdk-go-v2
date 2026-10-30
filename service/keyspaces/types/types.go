@@ -416,7 +416,9 @@ func (v *CdcSpecification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Status != "" {
 		s.WriteString(schemas.CdcSpecification_status, string(v.Status))
 	}
-	serializeTagList(s, schemas.CdcSpecification_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CdcSpecification_tags, v.Tags)
+	}
 	if v.ViewType != "" {
 		s.WriteString(schemas.CdcSpecification_viewType, string(v.ViewType))
 	}
@@ -853,7 +855,9 @@ func (v *KeyspaceSummary) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.KeyspaceName != nil {
 		s.WriteString(schemas.KeyspaceSummary_keyspaceName, *v.KeyspaceName)
 	}
-	serializeRegionList(s, schemas.KeyspaceSummary_replicationRegions, v.ReplicationRegions)
+	if v.ReplicationRegions != nil {
+		serializeRegionList(s, schemas.KeyspaceSummary_replicationRegions, v.ReplicationRegions)
+	}
 	if v.ReplicationStrategy != "" {
 		s.WriteString(schemas.KeyspaceSummary_replicationStrategy, string(v.ReplicationStrategy))
 	}
@@ -1296,7 +1300,9 @@ func (v *ReplicationSpecification) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ReplicationSpecification) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRegionList(s, schemas.ReplicationSpecification_regionList, v.RegionList)
+	if v.RegionList != nil {
+		serializeRegionList(s, schemas.ReplicationSpecification_regionList, v.RegionList)
+	}
 	if v.ReplicationStrategy != "" {
 		s.WriteString(schemas.ReplicationSpecification_replicationStrategy, string(v.ReplicationStrategy))
 	}
@@ -1348,10 +1354,18 @@ func (v *SchemaDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SchemaDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeColumnDefinitionList(s, schemas.SchemaDefinition_allColumns, v.AllColumns)
-	serializeClusteringKeyList(s, schemas.SchemaDefinition_clusteringKeys, v.ClusteringKeys)
-	serializePartitionKeyList(s, schemas.SchemaDefinition_partitionKeys, v.PartitionKeys)
-	serializeStaticColumnList(s, schemas.SchemaDefinition_staticColumns, v.StaticColumns)
+	if v.AllColumns != nil {
+		serializeColumnDefinitionList(s, schemas.SchemaDefinition_allColumns, v.AllColumns)
+	}
+	if v.ClusteringKeys != nil {
+		serializeClusteringKeyList(s, schemas.SchemaDefinition_clusteringKeys, v.ClusteringKeys)
+	}
+	if v.PartitionKeys != nil {
+		serializePartitionKeyList(s, schemas.SchemaDefinition_partitionKeys, v.PartitionKeys)
+	}
+	if v.StaticColumns != nil {
+		serializeStaticColumnList(s, schemas.SchemaDefinition_staticColumns, v.StaticColumns)
+	}
 }
 func (v *SchemaDefinition) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SchemaDefinition, func(s *smithy.Schema) error {

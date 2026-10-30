@@ -72,7 +72,9 @@ func (v *GetFindingStatisticsV2Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingStatisticsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupByRules(s, schemas.GetFindingStatisticsV2Request_GroupByRules, v.GroupByRules)
+	if v.GroupByRules != nil {
+		serializeGroupByRules(s, schemas.GetFindingStatisticsV2Request_GroupByRules, v.GroupByRules)
+	}
 	if v.MaxStatisticResults != nil {
 		s.WriteInt32(schemas.GetFindingStatisticsV2Request_MaxStatisticResults, *v.MaxStatisticResults)
 	}
@@ -105,7 +107,9 @@ func (v *GetFindingStatisticsV2Output) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetFindingStatisticsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGroupByResults(s, schemas.GetFindingStatisticsV2Response_GroupByResults, v.GroupByResults)
+	if v.GroupByResults != nil {
+		serializeGroupByResults(s, schemas.GetFindingStatisticsV2Response_GroupByResults, v.GroupByResults)
+	}
 }
 func (v *GetFindingStatisticsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetFindingStatisticsV2Response, func(s *smithy.Schema) error {

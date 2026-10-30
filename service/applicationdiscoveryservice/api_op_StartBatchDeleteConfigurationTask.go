@@ -51,7 +51,9 @@ func (v *StartBatchDeleteConfigurationTaskInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *StartBatchDeleteConfigurationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationIdList(s, schemas.StartBatchDeleteConfigurationTaskRequest_configurationIds, v.ConfigurationIds)
+	if v.ConfigurationIds != nil {
+		serializeConfigurationIdList(s, schemas.StartBatchDeleteConfigurationTaskRequest_configurationIds, v.ConfigurationIds)
+	}
 	if v.ConfigurationType != "" {
 		s.WriteString(schemas.StartBatchDeleteConfigurationTaskRequest_configurationType, string(v.ConfigurationType))
 	}

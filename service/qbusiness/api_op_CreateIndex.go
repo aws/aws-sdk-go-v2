@@ -100,7 +100,9 @@ func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DisplayName != nil {
 		s.WriteString(schemas.CreateIndexRequest_displayName, *v.DisplayName)
 	}
-	serializeTags(s, schemas.CreateIndexRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateIndexRequest_tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateIndexRequest_type, string(v.Type))
 	}

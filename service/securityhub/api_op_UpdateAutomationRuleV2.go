@@ -61,8 +61,12 @@ func (v *UpdateAutomationRuleV2Input) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateAutomationRuleV2Input) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAutomationRulesActionListV2(s, schemas.UpdateAutomationRuleV2Request_Actions, v.Actions)
-	serializeCriteria(s, schemas.UpdateAutomationRuleV2Request_Criteria, v.Criteria)
+	if v.Actions != nil {
+		serializeAutomationRulesActionListV2(s, schemas.UpdateAutomationRuleV2Request_Actions, v.Actions)
+	}
+	if v.Criteria != nil {
+		serializeCriteria(s, schemas.UpdateAutomationRuleV2Request_Criteria, v.Criteria)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAutomationRuleV2Request_Description, *v.Description)
 	}

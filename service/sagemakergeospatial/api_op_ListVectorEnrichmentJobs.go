@@ -126,7 +126,9 @@ func (v *ListVectorEnrichmentJobsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVectorEnrichmentJobOutput_NextToken, *v.NextToken)
 	}
-	serializeVectorEnrichmentJobList(s, schemas.ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries, v.VectorEnrichmentJobSummaries)
+	if v.VectorEnrichmentJobSummaries != nil {
+		serializeVectorEnrichmentJobList(s, schemas.ListVectorEnrichmentJobOutput_VectorEnrichmentJobSummaries, v.VectorEnrichmentJobSummaries)
+	}
 }
 func (v *ListVectorEnrichmentJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListVectorEnrichmentJobOutput, func(s *smithy.Schema) error {

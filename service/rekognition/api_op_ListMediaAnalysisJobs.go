@@ -87,7 +87,9 @@ func (v *ListMediaAnalysisJobsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListMediaAnalysisJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeMediaAnalysisJobDescriptions(s, schemas.ListMediaAnalysisJobsResponse_MediaAnalysisJobs, v.MediaAnalysisJobs)
+	if v.MediaAnalysisJobs != nil {
+		serializeMediaAnalysisJobDescriptions(s, schemas.ListMediaAnalysisJobsResponse_MediaAnalysisJobs, v.MediaAnalysisJobs)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListMediaAnalysisJobsResponse_NextToken, *v.NextToken)
 	}

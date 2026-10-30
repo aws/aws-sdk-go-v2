@@ -224,7 +224,9 @@ func (v *DeriveSharedSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DryRun != nil {
 		s.WriteBool(schemas.DeriveSharedSecretRequest_DryRun, *v.DryRun)
 	}
-	serializeGrantTokenList(s, schemas.DeriveSharedSecretRequest_GrantTokens, v.GrantTokens)
+	if v.GrantTokens != nil {
+		serializeGrantTokenList(s, schemas.DeriveSharedSecretRequest_GrantTokens, v.GrantTokens)
+	}
 	if v.KeyAgreementAlgorithm != "" {
 		s.WriteString(schemas.DeriveSharedSecretRequest_KeyAgreementAlgorithm, string(v.KeyAgreementAlgorithm))
 	}

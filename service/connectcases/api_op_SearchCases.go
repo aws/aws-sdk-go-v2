@@ -73,8 +73,12 @@ func (v *SearchCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DomainId != nil {
 		s.WriteString(schemas.SearchCasesRequest_domainId, *v.DomainId)
 	}
-	serializeFieldIdentifierList(s, schemas.SearchCasesRequest_fields, v.Fields)
-	serializeCaseFilter(s, schemas.SearchCasesRequest_filter, v.Filter)
+	if v.Fields != nil {
+		serializeFieldIdentifierList(s, schemas.SearchCasesRequest_fields, v.Fields)
+	}
+	if v.Filter != nil {
+		serializeCaseFilter(s, schemas.SearchCasesRequest_filter, v.Filter)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.SearchCasesRequest_maxResults, *v.MaxResults)
 	}
@@ -84,7 +88,9 @@ func (v *SearchCasesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SearchTerm != nil {
 		s.WriteString(schemas.SearchCasesRequest_searchTerm, *v.SearchTerm)
 	}
-	serializeSortList(s, schemas.SearchCasesRequest_sorts, v.Sorts)
+	if v.Sorts != nil {
+		serializeSortList(s, schemas.SearchCasesRequest_sorts, v.Sorts)
+	}
 }
 func (v *SearchCasesInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchCasesRequest, func(s *smithy.Schema) error {
@@ -140,7 +146,9 @@ func (v *SearchCasesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SearchCasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSearchCasesResponseItemList(s, schemas.SearchCasesResponse_cases, v.Cases)
+	if v.Cases != nil {
+		serializeSearchCasesResponseItemList(s, schemas.SearchCasesResponse_cases, v.Cases)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchCasesResponse_nextToken, *v.NextToken)
 	}

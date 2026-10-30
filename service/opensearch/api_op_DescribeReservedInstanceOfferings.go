@@ -96,7 +96,9 @@ func (v *DescribeReservedInstanceOfferingsOutput) SerializeMembers(s smithy.Shap
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeReservedInstanceOfferingsResponse_NextToken, *v.NextToken)
 	}
-	serializeReservedInstanceOfferingList(s, schemas.DescribeReservedInstanceOfferingsResponse_ReservedInstanceOfferings, v.ReservedInstanceOfferings)
+	if v.ReservedInstanceOfferings != nil {
+		serializeReservedInstanceOfferingList(s, schemas.DescribeReservedInstanceOfferingsResponse_ReservedInstanceOfferings, v.ReservedInstanceOfferings)
+	}
 }
 func (v *DescribeReservedInstanceOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReservedInstanceOfferingsResponse, func(s *smithy.Schema) error {

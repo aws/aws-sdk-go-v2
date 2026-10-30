@@ -94,7 +94,9 @@ func (v *ListThingPrincipalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListThingPrincipalsResponse_nextToken, *v.NextToken)
 	}
-	serializePrincipals(s, schemas.ListThingPrincipalsResponse_principals, v.Principals)
+	if v.Principals != nil {
+		serializePrincipals(s, schemas.ListThingPrincipalsResponse_principals, v.Principals)
+	}
 }
 func (v *ListThingPrincipalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListThingPrincipalsResponse, func(s *smithy.Schema) error {

@@ -102,8 +102,12 @@ func (v *CreateActionConnectorInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateActionConnectorRequest_Name, *v.Name)
 	}
-	serializeResourcePermissionList(s, schemas.CreateActionConnectorRequest_Permissions, v.Permissions)
-	serializeTagList(s, schemas.CreateActionConnectorRequest_Tags, v.Tags)
+	if v.Permissions != nil {
+		serializeResourcePermissionList(s, schemas.CreateActionConnectorRequest_Permissions, v.Permissions)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateActionConnectorRequest_Tags, v.Tags)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.CreateActionConnectorRequest_Type, string(v.Type))
 	}

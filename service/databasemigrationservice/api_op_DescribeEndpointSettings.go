@@ -90,7 +90,9 @@ func (v *DescribeEndpointSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeEndpointSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEndpointSettingsList(s, schemas.DescribeEndpointSettingsResponse_EndpointSettings, v.EndpointSettings)
+	if v.EndpointSettings != nil {
+		serializeEndpointSettingsList(s, schemas.DescribeEndpointSettingsResponse_EndpointSettings, v.EndpointSettings)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeEndpointSettingsResponse_Marker, *v.Marker)
 	}

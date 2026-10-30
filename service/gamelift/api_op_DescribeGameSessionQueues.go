@@ -66,7 +66,9 @@ func (v *DescribeGameSessionQueuesInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Limit != nil {
 		s.WriteInt32(schemas.DescribeGameSessionQueuesInput_Limit, *v.Limit)
 	}
-	serializeGameSessionQueueNameOrArnList(s, schemas.DescribeGameSessionQueuesInput_Names, v.Names)
+	if v.Names != nil {
+		serializeGameSessionQueueNameOrArnList(s, schemas.DescribeGameSessionQueuesInput_Names, v.Names)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeGameSessionQueuesInput_NextToken, *v.NextToken)
 	}
@@ -95,7 +97,9 @@ func (v *DescribeGameSessionQueuesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeGameSessionQueuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGameSessionQueueList(s, schemas.DescribeGameSessionQueuesOutput_GameSessionQueues, v.GameSessionQueues)
+	if v.GameSessionQueues != nil {
+		serializeGameSessionQueueList(s, schemas.DescribeGameSessionQueuesOutput_GameSessionQueues, v.GameSessionQueues)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeGameSessionQueuesOutput_NextToken, *v.NextToken)
 	}

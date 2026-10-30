@@ -105,7 +105,9 @@ func (v *ListVirtualInterfaceRoutesOutput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListVirtualInterfaceRoutesResponse_nextToken, *v.NextToken)
 	}
-	serializeRouteList(s, schemas.ListVirtualInterfaceRoutesResponse_routes, v.Routes)
+	if v.Routes != nil {
+		serializeRouteList(s, schemas.ListVirtualInterfaceRoutesResponse_routes, v.Routes)
+	}
 	if v.VirtualInterfaceId != nil {
 		s.WriteString(schemas.ListVirtualInterfaceRoutesResponse_virtualInterfaceId, *v.VirtualInterfaceId)
 	}

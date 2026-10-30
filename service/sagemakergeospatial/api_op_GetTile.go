@@ -94,7 +94,9 @@ func (v *GetTileInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ExecutionRoleArn != nil {
 		s.WriteString(schemas.GetTileInput_ExecutionRoleArn, *v.ExecutionRoleArn)
 	}
-	serializeStringListInput(s, schemas.GetTileInput_ImageAssets, v.ImageAssets)
+	if v.ImageAssets != nil {
+		serializeStringListInput(s, schemas.GetTileInput_ImageAssets, v.ImageAssets)
+	}
 	if v.ImageMask != nil {
 		s.WriteBool(schemas.GetTileInput_ImageMask, *v.ImageMask)
 	}

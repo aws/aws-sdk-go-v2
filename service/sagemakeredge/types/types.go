@@ -257,7 +257,9 @@ func (v *DeploymentResult) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeploymentEndTime != nil {
 		s.WriteTime(schemas.DeploymentResult_DeploymentEndTime, *v.DeploymentEndTime)
 	}
-	serializeDeploymentModels(s, schemas.DeploymentResult_DeploymentModels, v.DeploymentModels)
+	if v.DeploymentModels != nil {
+		serializeDeploymentModels(s, schemas.DeploymentResult_DeploymentModels, v.DeploymentModels)
+	}
 	if v.DeploymentName != nil {
 		s.WriteString(schemas.DeploymentResult_DeploymentName, *v.DeploymentName)
 	}
@@ -322,7 +324,9 @@ func (v *EdgeDeployment) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EdgeDeployment) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDefinitions(s, schemas.EdgeDeployment_Definitions, v.Definitions)
+	if v.Definitions != nil {
+		serializeDefinitions(s, schemas.EdgeDeployment_Definitions, v.Definitions)
+	}
 	if v.DeploymentName != nil {
 		s.WriteString(schemas.EdgeDeployment_DeploymentName, *v.DeploymentName)
 	}
@@ -453,7 +457,9 @@ func (v *Model) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LatestSampleTime != nil {
 		s.WriteTime(schemas.Model_LatestSampleTime, *v.LatestSampleTime)
 	}
-	serializeEdgeMetrics(s, schemas.Model_ModelMetrics, v.ModelMetrics)
+	if v.ModelMetrics != nil {
+		serializeEdgeMetrics(s, schemas.Model_ModelMetrics, v.ModelMetrics)
+	}
 	if v.ModelName != nil {
 		s.WriteString(schemas.Model_ModelName, *v.ModelName)
 	}

@@ -155,7 +155,9 @@ func (v *GetBlobDifferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BeforeBlobSize != 0 {
 		s.WriteInt64(schemas.GetBlobDifferencesOutput_beforeBlobSize, v.BeforeBlobSize)
 	}
-	serializeDiffHunkList(s, schemas.GetBlobDifferencesOutput_hunks, v.Hunks)
+	if v.Hunks != nil {
+		serializeDiffHunkList(s, schemas.GetBlobDifferencesOutput_hunks, v.Hunks)
+	}
 	if v.IsBinary != nil {
 		s.WriteBool(schemas.GetBlobDifferencesOutput_isBinary, *v.IsBinary)
 	}

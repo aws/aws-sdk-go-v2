@@ -61,7 +61,9 @@ func (v *CreateAddonSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateAddonSubscriptionRequest_ClientToken, *v.ClientToken)
 	}
-	serializeTagList(s, schemas.CreateAddonSubscriptionRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateAddonSubscriptionRequest_Tags, v.Tags)
+	}
 }
 
 type CreateAddonSubscriptionOutput struct {

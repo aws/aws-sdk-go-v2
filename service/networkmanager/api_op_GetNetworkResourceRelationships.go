@@ -161,7 +161,9 @@ func (v *GetNetworkResourceRelationshipsOutput) SerializeMembers(s smithy.ShapeS
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetNetworkResourceRelationshipsResponse_NextToken, *v.NextToken)
 	}
-	serializeRelationshipList(s, schemas.GetNetworkResourceRelationshipsResponse_Relationships, v.Relationships)
+	if v.Relationships != nil {
+		serializeRelationshipList(s, schemas.GetNetworkResourceRelationshipsResponse_Relationships, v.Relationships)
+	}
 }
 func (v *GetNetworkResourceRelationshipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetNetworkResourceRelationshipsResponse, func(s *smithy.Schema) error {

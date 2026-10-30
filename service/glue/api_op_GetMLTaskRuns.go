@@ -107,7 +107,9 @@ func (v *GetMLTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetMLTaskRunsResponse_NextToken, *v.NextToken)
 	}
-	serializeTaskRunList(s, schemas.GetMLTaskRunsResponse_TaskRuns, v.TaskRuns)
+	if v.TaskRuns != nil {
+		serializeTaskRunList(s, schemas.GetMLTaskRunsResponse_TaskRuns, v.TaskRuns)
+	}
 }
 func (v *GetMLTaskRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetMLTaskRunsResponse, func(s *smithy.Schema) error {

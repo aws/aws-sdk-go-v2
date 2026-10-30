@@ -59,7 +59,9 @@ func (v *DescribeReplicationTaskIndividualAssessmentsInput) Serialize(s smithy.S
 }
 
 func (v *DescribeReplicationTaskIndividualAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeReplicationTaskIndividualAssessmentsMessage_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeReplicationTaskIndividualAssessmentsMessage_Filters, v.Filters)
+	}
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationTaskIndividualAssessmentsMessage_Marker, *v.Marker)
 	}
@@ -95,7 +97,9 @@ func (v *DescribeReplicationTaskIndividualAssessmentsOutput) SerializeMembers(s 
 	if v.Marker != nil {
 		s.WriteString(schemas.DescribeReplicationTaskIndividualAssessmentsResponse_Marker, *v.Marker)
 	}
-	serializeReplicationTaskIndividualAssessmentList(s, schemas.DescribeReplicationTaskIndividualAssessmentsResponse_ReplicationTaskIndividualAssessments, v.ReplicationTaskIndividualAssessments)
+	if v.ReplicationTaskIndividualAssessments != nil {
+		serializeReplicationTaskIndividualAssessmentList(s, schemas.DescribeReplicationTaskIndividualAssessmentsResponse_ReplicationTaskIndividualAssessments, v.ReplicationTaskIndividualAssessments)
+	}
 }
 func (v *DescribeReplicationTaskIndividualAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeReplicationTaskIndividualAssessmentsResponse, func(s *smithy.Schema) error {

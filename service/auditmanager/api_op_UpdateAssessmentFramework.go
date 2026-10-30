@@ -66,7 +66,9 @@ func (v *UpdateAssessmentFrameworkInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.ComplianceType != nil {
 		s.WriteString(schemas.UpdateAssessmentFrameworkRequest_complianceType, *v.ComplianceType)
 	}
-	serializeUpdateAssessmentFrameworkControlSets(s, schemas.UpdateAssessmentFrameworkRequest_controlSets, v.ControlSets)
+	if v.ControlSets != nil {
+		serializeUpdateAssessmentFrameworkControlSets(s, schemas.UpdateAssessmentFrameworkRequest_controlSets, v.ControlSets)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.UpdateAssessmentFrameworkRequest_description, *v.Description)
 	}

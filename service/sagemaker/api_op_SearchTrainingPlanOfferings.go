@@ -120,7 +120,9 @@ func (v *SearchTrainingPlanOfferingsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.StartTimeAfter != nil {
 		s.WriteTime(schemas.SearchTrainingPlanOfferingsRequest_StartTimeAfter, *v.StartTimeAfter)
 	}
-	serializeSageMakerResourceNames(s, schemas.SearchTrainingPlanOfferingsRequest_TargetResources, v.TargetResources)
+	if v.TargetResources != nil {
+		serializeSageMakerResourceNames(s, schemas.SearchTrainingPlanOfferingsRequest_TargetResources, v.TargetResources)
+	}
 	if v.TrainingPlanArn != nil {
 		s.WriteString(schemas.SearchTrainingPlanOfferingsRequest_TrainingPlanArn, *v.TrainingPlanArn)
 	}
@@ -158,8 +160,12 @@ func (v *SearchTrainingPlanOfferingsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *SearchTrainingPlanOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTrainingPlanExtensionOfferings(s, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanExtensionOfferings, v.TrainingPlanExtensionOfferings)
-	serializeTrainingPlanOfferings(s, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanOfferings, v.TrainingPlanOfferings)
+	if v.TrainingPlanExtensionOfferings != nil {
+		serializeTrainingPlanExtensionOfferings(s, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanExtensionOfferings, v.TrainingPlanExtensionOfferings)
+	}
+	if v.TrainingPlanOfferings != nil {
+		serializeTrainingPlanOfferings(s, schemas.SearchTrainingPlanOfferingsResponse_TrainingPlanOfferings, v.TrainingPlanOfferings)
+	}
 }
 func (v *SearchTrainingPlanOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchTrainingPlanOfferingsResponse, func(s *smithy.Schema) error {

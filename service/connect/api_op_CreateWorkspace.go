@@ -75,7 +75,9 @@ func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateWorkspaceRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateWorkspaceRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateWorkspaceRequest_Tags, v.Tags)
+	}
 	if v.Theme != nil {
 		s.WriteStruct(schemas.CreateWorkspaceRequest_Theme)
 		v.Theme.SerializeMembers(s)

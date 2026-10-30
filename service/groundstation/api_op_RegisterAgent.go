@@ -63,7 +63,9 @@ func (v *RegisterAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DiscoveryData.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagsMap(s, schemas.RegisterAgentRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsMap(s, schemas.RegisterAgentRequest_tags, v.Tags)
+	}
 }
 
 type RegisterAgentOutput struct {

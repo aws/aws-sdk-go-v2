@@ -127,7 +127,9 @@ func (v *PutSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Accept != nil {
 		s.WriteString(schemas.PutSessionRequest_accept, *v.Accept)
 	}
-	serializeActiveContextsList(s, schemas.PutSessionRequest_activeContexts, v.ActiveContexts)
+	if v.ActiveContexts != nil {
+		serializeActiveContextsList(s, schemas.PutSessionRequest_activeContexts, v.ActiveContexts)
+	}
 	if v.BotAlias != nil {
 		s.WriteString(schemas.PutSessionRequest_botAlias, *v.BotAlias)
 	}
@@ -139,8 +141,12 @@ func (v *PutSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.DialogAction.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeIntentSummaryList(s, schemas.PutSessionRequest_recentIntentSummaryView, v.RecentIntentSummaryView)
-	serializeStringMap(s, schemas.PutSessionRequest_sessionAttributes, v.SessionAttributes)
+	if v.RecentIntentSummaryView != nil {
+		serializeIntentSummaryList(s, schemas.PutSessionRequest_recentIntentSummaryView, v.RecentIntentSummaryView)
+	}
+	if v.SessionAttributes != nil {
+		serializeStringMap(s, schemas.PutSessionRequest_sessionAttributes, v.SessionAttributes)
+	}
 	if v.UserId != nil {
 		s.WriteString(schemas.PutSessionRequest_userId, *v.UserId)
 	}

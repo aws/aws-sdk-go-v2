@@ -58,7 +58,9 @@ func (v *RegisterIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RegisterIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityProvider(s, schemas.RegisterIdentityProviderRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProvider != nil {
+		serializeIdentityProvider(s, schemas.RegisterIdentityProviderRequest_IdentityProvider, v.IdentityProvider)
+	}
 	if v.Product != nil {
 		s.WriteString(schemas.RegisterIdentityProviderRequest_Product, *v.Product)
 	}
@@ -67,7 +69,9 @@ func (v *RegisterIdentityProviderInput) SerializeMembers(s smithy.ShapeSerialize
 		v.Settings.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTags(s, schemas.RegisterIdentityProviderRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RegisterIdentityProviderRequest_Tags, v.Tags)
+	}
 }
 
 type RegisterIdentityProviderOutput struct {

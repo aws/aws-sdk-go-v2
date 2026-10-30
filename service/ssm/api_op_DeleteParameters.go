@@ -47,7 +47,9 @@ func (v *DeleteParametersInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterNameList(s, schemas.DeleteParametersRequest_Names, v.Names)
+	if v.Names != nil {
+		serializeParameterNameList(s, schemas.DeleteParametersRequest_Names, v.Names)
+	}
 }
 
 type DeleteParametersOutput struct {
@@ -72,8 +74,12 @@ func (v *DeleteParametersOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DeleteParametersOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeParameterNameList(s, schemas.DeleteParametersResult_DeletedParameters, v.DeletedParameters)
-	serializeParameterNameList(s, schemas.DeleteParametersResult_InvalidParameters, v.InvalidParameters)
+	if v.DeletedParameters != nil {
+		serializeParameterNameList(s, schemas.DeleteParametersResult_DeletedParameters, v.DeletedParameters)
+	}
+	if v.InvalidParameters != nil {
+		serializeParameterNameList(s, schemas.DeleteParametersResult_InvalidParameters, v.InvalidParameters)
+	}
 }
 func (v *DeleteParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DeleteParametersResult, func(s *smithy.Schema) error {

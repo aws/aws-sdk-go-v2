@@ -88,7 +88,9 @@ func (v *ListTextTranslationJobsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListTextTranslationJobsResponse_NextToken, *v.NextToken)
 	}
-	serializeTextTranslationJobPropertiesList(s, schemas.ListTextTranslationJobsResponse_TextTranslationJobPropertiesList, v.TextTranslationJobPropertiesList)
+	if v.TextTranslationJobPropertiesList != nil {
+		serializeTextTranslationJobPropertiesList(s, schemas.ListTextTranslationJobsResponse_TextTranslationJobPropertiesList, v.TextTranslationJobPropertiesList)
+	}
 }
 func (v *ListTextTranslationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListTextTranslationJobsResponse, func(s *smithy.Schema) error {

@@ -106,15 +106,23 @@ func (v *DescribeProductAsAdminOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeProductAsAdminOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBudgets(s, schemas.DescribeProductAsAdminOutput_Budgets, v.Budgets)
+	if v.Budgets != nil {
+		serializeBudgets(s, schemas.DescribeProductAsAdminOutput_Budgets, v.Budgets)
+	}
 	if v.ProductViewDetail != nil {
 		s.WriteStruct(schemas.DescribeProductAsAdminOutput_ProductViewDetail)
 		v.ProductViewDetail.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProvisioningArtifactSummaries(s, schemas.DescribeProductAsAdminOutput_ProvisioningArtifactSummaries, v.ProvisioningArtifactSummaries)
-	serializeTagOptionDetails(s, schemas.DescribeProductAsAdminOutput_TagOptions, v.TagOptions)
-	serializeTags(s, schemas.DescribeProductAsAdminOutput_Tags, v.Tags)
+	if v.ProvisioningArtifactSummaries != nil {
+		serializeProvisioningArtifactSummaries(s, schemas.DescribeProductAsAdminOutput_ProvisioningArtifactSummaries, v.ProvisioningArtifactSummaries)
+	}
+	if v.TagOptions != nil {
+		serializeTagOptionDetails(s, schemas.DescribeProductAsAdminOutput_TagOptions, v.TagOptions)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.DescribeProductAsAdminOutput_Tags, v.Tags)
+	}
 }
 func (v *DescribeProductAsAdminOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeProductAsAdminOutput, func(s *smithy.Schema) error {

@@ -73,7 +73,9 @@ func (v *CreateDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AppId != nil {
 		s.WriteString(schemas.CreateDomainAssociationRequest_appId, *v.AppId)
 	}
-	serializeAutoSubDomainCreationPatterns(s, schemas.CreateDomainAssociationRequest_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	if v.AutoSubDomainCreationPatterns != nil {
+		serializeAutoSubDomainCreationPatterns(s, schemas.CreateDomainAssociationRequest_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	}
 	if v.AutoSubDomainIAMRole != nil {
 		s.WriteString(schemas.CreateDomainAssociationRequest_autoSubDomainIAMRole, *v.AutoSubDomainIAMRole)
 	}
@@ -88,7 +90,9 @@ func (v *CreateDomainAssociationInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.EnableAutoSubDomain != nil {
 		s.WriteBool(schemas.CreateDomainAssociationRequest_enableAutoSubDomain, *v.EnableAutoSubDomain)
 	}
-	serializeSubDomainSettings(s, schemas.CreateDomainAssociationRequest_subDomainSettings, v.SubDomainSettings)
+	if v.SubDomainSettings != nil {
+		serializeSubDomainSettings(s, schemas.CreateDomainAssociationRequest_subDomainSettings, v.SubDomainSettings)
+	}
 }
 
 // The result structure for the create domain association request.

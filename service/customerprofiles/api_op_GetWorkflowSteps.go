@@ -96,7 +96,9 @@ func (v *GetWorkflowStepsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetWorkflowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkflowStepsList(s, schemas.GetWorkflowStepsResponse_Items, v.Items)
+	if v.Items != nil {
+		serializeWorkflowStepsList(s, schemas.GetWorkflowStepsResponse_Items, v.Items)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetWorkflowStepsResponse_NextToken, *v.NextToken)
 	}

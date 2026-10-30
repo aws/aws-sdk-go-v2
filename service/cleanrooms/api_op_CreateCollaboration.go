@@ -120,11 +120,15 @@ func (v *CreateCollaborationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedResultRegions(s, schemas.CreateCollaborationInput_allowedResultRegions, v.AllowedResultRegions)
+	if v.AllowedResultRegions != nil {
+		serializeAllowedResultRegions(s, schemas.CreateCollaborationInput_allowedResultRegions, v.AllowedResultRegions)
+	}
 	if v.AnalyticsEngine != "" {
 		s.WriteString(schemas.CreateCollaborationInput_analyticsEngine, string(v.AnalyticsEngine))
 	}
-	serializeAutoApprovedChangeTypeList(s, schemas.CreateCollaborationInput_autoApprovedChangeRequestTypes, v.AutoApprovedChangeRequestTypes)
+	if v.AutoApprovedChangeRequestTypes != nil {
+		serializeAutoApprovedChangeTypeList(s, schemas.CreateCollaborationInput_autoApprovedChangeRequestTypes, v.AutoApprovedChangeRequestTypes)
+	}
 	if v.CreatorDisplayName != nil {
 		s.WriteString(schemas.CreateCollaborationInput_creatorDisplayName, *v.CreatorDisplayName)
 	}
@@ -133,7 +137,9 @@ func (v *CreateCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.CreatorMLMemberAbilities.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeMemberAbilities(s, schemas.CreateCollaborationInput_creatorMemberAbilities, v.CreatorMemberAbilities)
+	if v.CreatorMemberAbilities != nil {
+		serializeMemberAbilities(s, schemas.CreateCollaborationInput_creatorMemberAbilities, v.CreatorMemberAbilities)
+	}
 	if v.CreatorPaymentConfiguration != nil {
 		s.WriteStruct(schemas.CreateCollaborationInput_creatorPaymentConfiguration)
 		v.CreatorPaymentConfiguration.SerializeMembers(s)
@@ -153,14 +159,18 @@ func (v *CreateCollaborationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.JobLogStatus != "" {
 		s.WriteString(schemas.CreateCollaborationInput_jobLogStatus, string(v.JobLogStatus))
 	}
-	serializeMemberList(s, schemas.CreateCollaborationInput_members, v.Members)
+	if v.Members != nil {
+		serializeMemberList(s, schemas.CreateCollaborationInput_members, v.Members)
+	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateCollaborationInput_name, *v.Name)
 	}
 	if v.QueryLogStatus != "" {
 		s.WriteString(schemas.CreateCollaborationInput_queryLogStatus, string(v.QueryLogStatus))
 	}
-	serializeTagMap(s, schemas.CreateCollaborationInput_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateCollaborationInput_tags, v.Tags)
+	}
 }
 func (v *CreateCollaborationInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateCollaborationInput, func(s *smithy.Schema) error {

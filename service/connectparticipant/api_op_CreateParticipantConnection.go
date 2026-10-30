@@ -132,7 +132,9 @@ func (v *CreateParticipantConnectionInput) SerializeMembers(s smithy.ShapeSerial
 	if v.ParticipantToken != nil {
 		s.WriteString(schemas.CreateParticipantConnectionRequest_ParticipantToken, *v.ParticipantToken)
 	}
-	serializeConnectionTypeList(s, schemas.CreateParticipantConnectionRequest_Type, v.Type)
+	if v.Type != nil {
+		serializeConnectionTypeList(s, schemas.CreateParticipantConnectionRequest_Type, v.Type)
+	}
 }
 
 type CreateParticipantConnectionOutput struct {

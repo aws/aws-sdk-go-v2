@@ -60,7 +60,9 @@ func (v *DescribeParameterGroupsInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeParameterGroupsRequest_NextToken, *v.NextToken)
 	}
-	serializeParameterGroupNameList(s, schemas.DescribeParameterGroupsRequest_ParameterGroupNames, v.ParameterGroupNames)
+	if v.ParameterGroupNames != nil {
+		serializeParameterGroupNameList(s, schemas.DescribeParameterGroupsRequest_ParameterGroupNames, v.ParameterGroupNames)
+	}
 }
 
 type DescribeParameterGroupsOutput struct {
@@ -88,7 +90,9 @@ func (v *DescribeParameterGroupsOutput) SerializeMembers(s smithy.ShapeSerialize
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeParameterGroupsResponse_NextToken, *v.NextToken)
 	}
-	serializeParameterGroupList(s, schemas.DescribeParameterGroupsResponse_ParameterGroups, v.ParameterGroups)
+	if v.ParameterGroups != nil {
+		serializeParameterGroupList(s, schemas.DescribeParameterGroupsResponse_ParameterGroups, v.ParameterGroups)
+	}
 }
 func (v *DescribeParameterGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.DescribeParameterGroupsResponse, func(s *smithy.Schema) error {

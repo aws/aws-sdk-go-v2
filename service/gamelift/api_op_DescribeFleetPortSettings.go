@@ -123,7 +123,9 @@ func (v *DescribeFleetPortSettingsOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.FleetId != nil {
 		s.WriteString(schemas.DescribeFleetPortSettingsOutput_FleetId, *v.FleetId)
 	}
-	serializeIpPermissionsList(s, schemas.DescribeFleetPortSettingsOutput_InboundPermissions, v.InboundPermissions)
+	if v.InboundPermissions != nil {
+		serializeIpPermissionsList(s, schemas.DescribeFleetPortSettingsOutput_InboundPermissions, v.InboundPermissions)
+	}
 	if v.Location != nil {
 		s.WriteString(schemas.DescribeFleetPortSettingsOutput_Location, *v.Location)
 	}

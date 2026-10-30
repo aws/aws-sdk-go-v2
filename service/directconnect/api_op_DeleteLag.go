@@ -195,7 +195,9 @@ func (v *DeleteLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BillingMode != "" {
 		s.WriteString(schemas.Lag_billingMode, string(v.BillingMode))
 	}
-	serializeConnectionList(s, schemas.Lag_connections, v.Connections)
+	if v.Connections != nil {
+		serializeConnectionList(s, schemas.Lag_connections, v.Connections)
+	}
 	if v.ConnectionsBandwidth != nil {
 		s.WriteString(schemas.Lag_connectionsBandwidth, *v.ConnectionsBandwidth)
 	}
@@ -223,7 +225,9 @@ func (v *DeleteLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MacSecCapable != nil {
 		s.WriteBool(schemas.Lag_macSecCapable, *v.MacSecCapable)
 	}
-	serializeMacSecKeyList(s, schemas.Lag_macSecKeys, v.MacSecKeys)
+	if v.MacSecKeys != nil {
+		serializeMacSecKeyList(s, schemas.Lag_macSecKeys, v.MacSecKeys)
+	}
 	if v.MinimumLinks != 0 {
 		s.WriteInt32(schemas.Lag_minimumLinks, v.MinimumLinks)
 	}
@@ -256,7 +260,9 @@ func (v *DeleteLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Region != nil {
 		s.WriteString(schemas.Lag_region, *v.Region)
 	}
-	serializeTagList(s, schemas.Lag_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.Lag_tags, v.Tags)
+	}
 }
 func (v *DeleteLagOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Lag, func(s *smithy.Schema) error {

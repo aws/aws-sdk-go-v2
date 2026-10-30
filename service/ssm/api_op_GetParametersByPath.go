@@ -96,7 +96,9 @@ func (v *GetParametersByPathInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetParametersByPathRequest_NextToken, *v.NextToken)
 	}
-	serializeParameterStringFilterList(s, schemas.GetParametersByPathRequest_ParameterFilters, v.ParameterFilters)
+	if v.ParameterFilters != nil {
+		serializeParameterStringFilterList(s, schemas.GetParametersByPathRequest_ParameterFilters, v.ParameterFilters)
+	}
 	if v.Path != nil {
 		s.WriteString(schemas.GetParametersByPathRequest_Path, *v.Path)
 	}
@@ -133,7 +135,9 @@ func (v *GetParametersByPathOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.GetParametersByPathResult_NextToken, *v.NextToken)
 	}
-	serializeParameterList(s, schemas.GetParametersByPathResult_Parameters, v.Parameters)
+	if v.Parameters != nil {
+		serializeParameterList(s, schemas.GetParametersByPathResult_Parameters, v.Parameters)
+	}
 }
 func (v *GetParametersByPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetParametersByPathResult, func(s *smithy.Schema) error {

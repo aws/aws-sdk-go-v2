@@ -8,9 +8,6 @@ import (
 )
 
 func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.Tag) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -21,9 +18,6 @@ func serializeTagList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types
 }
 
 func serializeUsageAllocations(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UsageAllocation) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -34,9 +28,6 @@ func serializeUsageAllocations(s smithy.ShapeSerializer, schema *smithy.Schema, 
 }
 
 func serializeUsageRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UsageRecord) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())
@@ -47,9 +38,6 @@ func serializeUsageRecordList(s smithy.ShapeSerializer, schema *smithy.Schema, v
 }
 
 func serializeUsageRecordResultList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.UsageRecordResult) {
-	if v == nil {
-		return
-	}
 	s.WriteList(schema)
 	for _, vv := range v {
 		s.WriteStruct(schema.ListMember())

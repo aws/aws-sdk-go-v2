@@ -78,7 +78,9 @@ func (v *ListApprovalRuleTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListApprovalRuleTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalRuleTemplateNameList(s, schemas.ListApprovalRuleTemplatesOutput_approvalRuleTemplateNames, v.ApprovalRuleTemplateNames)
+	if v.ApprovalRuleTemplateNames != nil {
+		serializeApprovalRuleTemplateNameList(s, schemas.ListApprovalRuleTemplatesOutput_approvalRuleTemplateNames, v.ApprovalRuleTemplateNames)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListApprovalRuleTemplatesOutput_nextToken, *v.NextToken)
 	}

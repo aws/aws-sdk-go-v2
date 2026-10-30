@@ -93,8 +93,12 @@ func (v *CreateApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeApprovalStrategy(s, schemas.CreateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
-	serializeApprovalTeamRequestApprovers(s, schemas.CreateApprovalTeamRequest_Approvers, v.Approvers)
+	if v.ApprovalStrategy != nil {
+		serializeApprovalStrategy(s, schemas.CreateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
+	}
+	if v.Approvers != nil {
+		serializeApprovalTeamRequestApprovers(s, schemas.CreateApprovalTeamRequest_Approvers, v.Approvers)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateApprovalTeamRequest_ClientToken, *v.ClientToken)
 	}
@@ -104,8 +108,12 @@ func (v *CreateApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Name != nil {
 		s.WriteString(schemas.CreateApprovalTeamRequest_Name, *v.Name)
 	}
-	serializePoliciesReferences(s, schemas.CreateApprovalTeamRequest_Policies, v.Policies)
-	serializeTags(s, schemas.CreateApprovalTeamRequest_Tags, v.Tags)
+	if v.Policies != nil {
+		serializePoliciesReferences(s, schemas.CreateApprovalTeamRequest_Policies, v.Policies)
+	}
+	if v.Tags != nil {
+		serializeTags(s, schemas.CreateApprovalTeamRequest_Tags, v.Tags)
+	}
 }
 
 type CreateApprovalTeamOutput struct {

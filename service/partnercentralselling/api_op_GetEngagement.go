@@ -119,7 +119,9 @@ func (v *GetEngagementOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Arn != nil {
 		s.WriteString(schemas.GetEngagementResponse_Arn, *v.Arn)
 	}
-	serializeEngagementContexts(s, schemas.GetEngagementResponse_Contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializeEngagementContexts(s, schemas.GetEngagementResponse_Contexts, v.Contexts)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetEngagementResponse_CreatedAt, *v.CreatedAt)
 	}

@@ -60,7 +60,9 @@ func (v *BatchResetDevicesForUserInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchResetDevicesForUserInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAppIds(s, schemas.BatchResetDevicesForUserRequest_appIds, v.AppIds)
+	if v.AppIds != nil {
+		serializeAppIds(s, schemas.BatchResetDevicesForUserRequest_appIds, v.AppIds)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.BatchResetDevicesForUserRequest_clientToken, *v.ClientToken)
 	}
@@ -97,11 +99,15 @@ func (v *BatchResetDevicesForUserOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchResetDevicesForUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchDeviceErrorResponseItems(s, schemas.BatchResetDevicesForUserResponse_failed, v.Failed)
+	if v.Failed != nil {
+		serializeBatchDeviceErrorResponseItems(s, schemas.BatchResetDevicesForUserResponse_failed, v.Failed)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.BatchResetDevicesForUserResponse_message, *v.Message)
 	}
-	serializeBatchDeviceSuccessResponseItems(s, schemas.BatchResetDevicesForUserResponse_successful, v.Successful)
+	if v.Successful != nil {
+		serializeBatchDeviceSuccessResponseItems(s, schemas.BatchResetDevicesForUserResponse_successful, v.Successful)
+	}
 }
 func (v *BatchResetDevicesForUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchResetDevicesForUserResponse, func(s *smithy.Schema) error {

@@ -84,7 +84,9 @@ func (v *CreateEngagementInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateEngagementRequest_ClientToken, *v.ClientToken)
 	}
-	serializeEngagementContexts(s, schemas.CreateEngagementRequest_Contexts, v.Contexts)
+	if v.Contexts != nil {
+		serializeEngagementContexts(s, schemas.CreateEngagementRequest_Contexts, v.Contexts)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateEngagementRequest_Description, *v.Description)
 	}

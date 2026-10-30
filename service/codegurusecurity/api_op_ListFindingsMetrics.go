@@ -102,7 +102,9 @@ func (v *ListFindingsMetricsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListFindingsMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFindingsMetricList(s, schemas.ListFindingsMetricsResponse_findingsMetrics, v.FindingsMetrics)
+	if v.FindingsMetrics != nil {
+		serializeFindingsMetricList(s, schemas.ListFindingsMetricsResponse_findingsMetrics, v.FindingsMetrics)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListFindingsMetricsResponse_nextToken, *v.NextToken)
 	}

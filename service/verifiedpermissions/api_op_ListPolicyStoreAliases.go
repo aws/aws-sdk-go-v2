@@ -106,7 +106,9 @@ func (v *ListPolicyStoreAliasesOutput) SerializeMembers(s smithy.ShapeSerializer
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListPolicyStoreAliasesOutput_nextToken, *v.NextToken)
 	}
-	serializePolicyStoreAliasList(s, schemas.ListPolicyStoreAliasesOutput_policyStoreAliases, v.PolicyStoreAliases)
+	if v.PolicyStoreAliases != nil {
+		serializePolicyStoreAliasList(s, schemas.ListPolicyStoreAliasesOutput_policyStoreAliases, v.PolicyStoreAliases)
+	}
 }
 func (v *ListPolicyStoreAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListPolicyStoreAliasesOutput, func(s *smithy.Schema) error {

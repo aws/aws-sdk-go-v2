@@ -156,7 +156,9 @@ func (v *GetFindingV2Output) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Error != nil {
 		s.WriteString(schemas.GetFindingV2Response_error, *v.Error)
 	}
-	serializeFindingDetailsList(s, schemas.GetFindingV2Response_findingDetails, v.FindingDetails)
+	if v.FindingDetails != nil {
+		serializeFindingDetailsList(s, schemas.GetFindingV2Response_findingDetails, v.FindingDetails)
+	}
 	if v.FindingType != "" {
 		s.WriteString(schemas.GetFindingV2Response_findingType, string(v.FindingType))
 	}

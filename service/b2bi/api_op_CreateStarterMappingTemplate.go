@@ -76,7 +76,9 @@ func (v *CreateStarterMappingTemplateInput) SerializeMembers(s smithy.ShapeSeria
 		v.OutputSampleLocation.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTemplateDetails(s, schemas.CreateStarterMappingTemplateRequest_templateDetails, v.TemplateDetails)
+	if v.TemplateDetails != nil {
+		serializeTemplateDetails(s, schemas.CreateStarterMappingTemplateRequest_templateDetails, v.TemplateDetails)
+	}
 }
 
 type CreateStarterMappingTemplateOutput struct {

@@ -158,13 +158,21 @@ func (v *GetBrowserSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BrowserIdentifier != nil {
 		s.WriteString(schemas.GetBrowserSessionResponse_browserIdentifier, *v.BrowserIdentifier)
 	}
-	serializeCertificates(s, schemas.GetBrowserSessionResponse_certificates, v.Certificates)
+	if v.Certificates != nil {
+		serializeCertificates(s, schemas.GetBrowserSessionResponse_certificates, v.Certificates)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.GetBrowserSessionResponse_createdAt, *v.CreatedAt)
 	}
-	serializeBrowserEnterprisePolicies(s, schemas.GetBrowserSessionResponse_enterprisePolicies, v.EnterprisePolicies)
-	serializeBrowserExtensions(s, schemas.GetBrowserSessionResponse_extensions, v.Extensions)
-	serializeToolsFileSystemConfigurations(s, schemas.GetBrowserSessionResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.EnterprisePolicies != nil {
+		serializeBrowserEnterprisePolicies(s, schemas.GetBrowserSessionResponse_enterprisePolicies, v.EnterprisePolicies)
+	}
+	if v.Extensions != nil {
+		serializeBrowserExtensions(s, schemas.GetBrowserSessionResponse_extensions, v.Extensions)
+	}
+	if v.FilesystemConfigurations != nil {
+		serializeToolsFileSystemConfigurations(s, schemas.GetBrowserSessionResponse_filesystemConfigurations, v.FilesystemConfigurations)
+	}
 	if v.LastUpdatedAt != nil {
 		s.WriteTime(schemas.GetBrowserSessionResponse_lastUpdatedAt, *v.LastUpdatedAt)
 	}

@@ -304,7 +304,9 @@ func (v *RunTaskInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RunTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCapacityProviderStrategy(s, schemas.RunTaskRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	if v.CapacityProviderStrategy != nil {
+		serializeCapacityProviderStrategy(s, schemas.RunTaskRequest_capacityProviderStrategy, v.CapacityProviderStrategy)
+	}
 	if v.ClientToken != nil {
 		s.WriteString(schemas.RunTaskRequest_clientToken, *v.ClientToken)
 	}
@@ -336,8 +338,12 @@ func (v *RunTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Overrides.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializePlacementConstraints(s, schemas.RunTaskRequest_placementConstraints, v.PlacementConstraints)
-	serializePlacementStrategies(s, schemas.RunTaskRequest_placementStrategy, v.PlacementStrategy)
+	if v.PlacementConstraints != nil {
+		serializePlacementConstraints(s, schemas.RunTaskRequest_placementConstraints, v.PlacementConstraints)
+	}
+	if v.PlacementStrategy != nil {
+		serializePlacementStrategies(s, schemas.RunTaskRequest_placementStrategy, v.PlacementStrategy)
+	}
 	if v.PlatformVersion != nil {
 		s.WriteString(schemas.RunTaskRequest_platformVersion, *v.PlatformVersion)
 	}
@@ -350,11 +356,15 @@ func (v *RunTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.StartedBy != nil {
 		s.WriteString(schemas.RunTaskRequest_startedBy, *v.StartedBy)
 	}
-	serializeTags(s, schemas.RunTaskRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTags(s, schemas.RunTaskRequest_tags, v.Tags)
+	}
 	if v.TaskDefinition != nil {
 		s.WriteString(schemas.RunTaskRequest_taskDefinition, *v.TaskDefinition)
 	}
-	serializeTaskVolumeConfigurations(s, schemas.RunTaskRequest_volumeConfigurations, v.VolumeConfigurations)
+	if v.VolumeConfigurations != nil {
+		serializeTaskVolumeConfigurations(s, schemas.RunTaskRequest_volumeConfigurations, v.VolumeConfigurations)
+	}
 }
 
 type RunTaskOutput struct {
@@ -385,8 +395,12 @@ func (v *RunTaskOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RunTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFailures(s, schemas.RunTaskResponse_failures, v.Failures)
-	serializeTasks(s, schemas.RunTaskResponse_tasks, v.Tasks)
+	if v.Failures != nil {
+		serializeFailures(s, schemas.RunTaskResponse_failures, v.Failures)
+	}
+	if v.Tasks != nil {
+		serializeTasks(s, schemas.RunTaskResponse_tasks, v.Tasks)
+	}
 }
 func (v *RunTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RunTaskResponse, func(s *smithy.Schema) error {

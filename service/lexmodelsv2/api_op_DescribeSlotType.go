@@ -169,7 +169,9 @@ func (v *DescribeSlotTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.SlotTypeName != nil {
 		s.WriteString(schemas.DescribeSlotTypeResponse_slotTypeName, *v.SlotTypeName)
 	}
-	serializeSlotTypeValues(s, schemas.DescribeSlotTypeResponse_slotTypeValues, v.SlotTypeValues)
+	if v.SlotTypeValues != nil {
+		serializeSlotTypeValues(s, schemas.DescribeSlotTypeResponse_slotTypeValues, v.SlotTypeValues)
+	}
 	if v.ValueSelectionSetting != nil {
 		s.WriteStruct(schemas.DescribeSlotTypeResponse_valueSelectionSetting)
 		v.ValueSelectionSetting.SerializeMembers(s)

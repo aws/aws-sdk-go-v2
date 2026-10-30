@@ -98,11 +98,15 @@ func (v *CreateAppVersionResourceInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateAppVersionResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalInfoMap(s, schemas.CreateAppVersionResourceRequest_additionalInfo, v.AdditionalInfo)
+	if v.AdditionalInfo != nil {
+		serializeAdditionalInfoMap(s, schemas.CreateAppVersionResourceRequest_additionalInfo, v.AdditionalInfo)
+	}
 	if v.AppArn != nil {
 		s.WriteString(schemas.CreateAppVersionResourceRequest_appArn, *v.AppArn)
 	}
-	serializeAppComponentNameList(s, schemas.CreateAppVersionResourceRequest_appComponents, v.AppComponents)
+	if v.AppComponents != nil {
+		serializeAppComponentNameList(s, schemas.CreateAppVersionResourceRequest_appComponents, v.AppComponents)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.CreateAppVersionResourceRequest_awsAccountId, *v.AwsAccountId)
 	}

@@ -72,7 +72,9 @@ func (v *BatchDeleteTableInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DatabaseName != nil {
 		s.WriteString(schemas.BatchDeleteTableRequest_DatabaseName, *v.DatabaseName)
 	}
-	serializeBatchDeleteTableNameList(s, schemas.BatchDeleteTableRequest_TablesToDelete, v.TablesToDelete)
+	if v.TablesToDelete != nil {
+		serializeBatchDeleteTableNameList(s, schemas.BatchDeleteTableRequest_TablesToDelete, v.TablesToDelete)
+	}
 	if v.TransactionId != nil {
 		s.WriteString(schemas.BatchDeleteTableRequest_TransactionId, *v.TransactionId)
 	}
@@ -96,7 +98,9 @@ func (v *BatchDeleteTableOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDeleteTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTableErrors(s, schemas.BatchDeleteTableResponse_Errors, v.Errors)
+	if v.Errors != nil {
+		serializeTableErrors(s, schemas.BatchDeleteTableResponse_Errors, v.Errors)
+	}
 }
 func (v *BatchDeleteTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDeleteTableResponse, func(s *smithy.Schema) error {

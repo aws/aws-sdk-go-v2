@@ -104,10 +104,18 @@ func (v *UpdateSecurityProfileInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSecurityProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalMetricsToRetainList(s, schemas.UpdateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
-	serializeAdditionalMetricsToRetainV2List(s, schemas.UpdateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
-	serializeAlertTargets(s, schemas.UpdateSecurityProfileRequest_alertTargets, v.AlertTargets)
-	serializeBehaviors(s, schemas.UpdateSecurityProfileRequest_behaviors, v.Behaviors)
+	if v.AdditionalMetricsToRetain != nil {
+		serializeAdditionalMetricsToRetainList(s, schemas.UpdateSecurityProfileRequest_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	}
+	if v.AdditionalMetricsToRetainV2 != nil {
+		serializeAdditionalMetricsToRetainV2List(s, schemas.UpdateSecurityProfileRequest_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	}
+	if v.AlertTargets != nil {
+		serializeAlertTargets(s, schemas.UpdateSecurityProfileRequest_alertTargets, v.AlertTargets)
+	}
+	if v.Behaviors != nil {
+		serializeBehaviors(s, schemas.UpdateSecurityProfileRequest_behaviors, v.Behaviors)
+	}
 	if v.DeleteAdditionalMetricsToRetain != false {
 		s.WriteBool(schemas.UpdateSecurityProfileRequest_deleteAdditionalMetricsToRetain, v.DeleteAdditionalMetricsToRetain)
 	}
@@ -193,10 +201,18 @@ func (v *UpdateSecurityProfileOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateSecurityProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAdditionalMetricsToRetainList(s, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
-	serializeAdditionalMetricsToRetainV2List(s, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
-	serializeAlertTargets(s, schemas.UpdateSecurityProfileResponse_alertTargets, v.AlertTargets)
-	serializeBehaviors(s, schemas.UpdateSecurityProfileResponse_behaviors, v.Behaviors)
+	if v.AdditionalMetricsToRetain != nil {
+		serializeAdditionalMetricsToRetainList(s, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetain, v.AdditionalMetricsToRetain)
+	}
+	if v.AdditionalMetricsToRetainV2 != nil {
+		serializeAdditionalMetricsToRetainV2List(s, schemas.UpdateSecurityProfileResponse_additionalMetricsToRetainV2, v.AdditionalMetricsToRetainV2)
+	}
+	if v.AlertTargets != nil {
+		serializeAlertTargets(s, schemas.UpdateSecurityProfileResponse_alertTargets, v.AlertTargets)
+	}
+	if v.Behaviors != nil {
+		serializeBehaviors(s, schemas.UpdateSecurityProfileResponse_behaviors, v.Behaviors)
+	}
 	if v.CreationDate != nil {
 		s.WriteTime(schemas.UpdateSecurityProfileResponse_creationDate, *v.CreationDate)
 	}

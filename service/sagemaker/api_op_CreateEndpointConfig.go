@@ -198,9 +198,15 @@ func (v *CreateEndpointConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.MetricsConfig.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ProductionVariants, v.ProductionVariants)
-	serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ShadowProductionVariants, v.ShadowProductionVariants)
-	serializeTagList(s, schemas.CreateEndpointConfigInput_Tags, v.Tags)
+	if v.ProductionVariants != nil {
+		serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ProductionVariants, v.ProductionVariants)
+	}
+	if v.ShadowProductionVariants != nil {
+		serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ShadowProductionVariants, v.ShadowProductionVariants)
+	}
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateEndpointConfigInput_Tags, v.Tags)
+	}
 	if v.VpcConfig != nil {
 		s.WriteStruct(schemas.CreateEndpointConfigInput_VpcConfig)
 		v.VpcConfig.SerializeMembers(s)

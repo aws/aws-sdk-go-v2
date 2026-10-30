@@ -57,7 +57,9 @@ func (v *GetTaxExemptionTypesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetTaxExemptionTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTaxExemptionTypes(s, schemas.GetTaxExemptionTypesResponse_taxExemptionTypes, v.TaxExemptionTypes)
+	if v.TaxExemptionTypes != nil {
+		serializeTaxExemptionTypes(s, schemas.GetTaxExemptionTypesResponse_taxExemptionTypes, v.TaxExemptionTypes)
+	}
 }
 func (v *GetTaxExemptionTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetTaxExemptionTypesResponse, func(s *smithy.Schema) error {

@@ -188,7 +188,9 @@ func (v *DetectLabelsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DetectLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDetectLabelsFeatureList(s, schemas.DetectLabelsRequest_Features, v.Features)
+	if v.Features != nil {
+		serializeDetectLabelsFeatureList(s, schemas.DetectLabelsRequest_Features, v.Features)
+	}
 	if v.Image != nil {
 		s.WriteStruct(schemas.DetectLabelsRequest_Image)
 		v.Image.SerializeMembers(s)
@@ -255,7 +257,9 @@ func (v *DetectLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.LabelModelVersion != nil {
 		s.WriteString(schemas.DetectLabelsResponse_LabelModelVersion, *v.LabelModelVersion)
 	}
-	serializeLabels(s, schemas.DetectLabelsResponse_Labels, v.Labels)
+	if v.Labels != nil {
+		serializeLabels(s, schemas.DetectLabelsResponse_Labels, v.Labels)
+	}
 	if v.OrientationCorrection != "" {
 		s.WriteString(schemas.DetectLabelsResponse_OrientationCorrection, string(v.OrientationCorrection))
 	}

@@ -70,14 +70,18 @@ func (v *CreateConfigurationPolicyInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateConfigurationPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializePolicy(s, schemas.CreateConfigurationPolicyRequest_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.ConfigurationPolicy != nil {
+		serializePolicy(s, schemas.CreateConfigurationPolicyRequest_ConfigurationPolicy, v.ConfigurationPolicy)
+	}
 	if v.Description != nil {
 		s.WriteString(schemas.CreateConfigurationPolicyRequest_Description, *v.Description)
 	}
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConfigurationPolicyRequest_Name, *v.Name)
 	}
-	serializeTagMap(s, schemas.CreateConfigurationPolicyRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfigurationPolicyRequest_Tags, v.Tags)
+	}
 }
 
 type CreateConfigurationPolicyOutput struct {
@@ -129,7 +133,9 @@ func (v *CreateConfigurationPolicyOutput) SerializeMembers(s smithy.ShapeSeriali
 	if v.Arn != nil {
 		s.WriteString(schemas.CreateConfigurationPolicyResponse_Arn, *v.Arn)
 	}
-	serializePolicy(s, schemas.CreateConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	if v.ConfigurationPolicy != nil {
+		serializePolicy(s, schemas.CreateConfigurationPolicyResponse_ConfigurationPolicy, v.ConfigurationPolicy)
+	}
 	if v.CreatedAt != nil {
 		s.WriteTime(schemas.CreateConfigurationPolicyResponse_CreatedAt, *v.CreatedAt)
 	}

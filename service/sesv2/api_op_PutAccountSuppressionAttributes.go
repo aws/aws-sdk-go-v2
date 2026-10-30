@@ -53,7 +53,9 @@ func (v *PutAccountSuppressionAttributesInput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *PutAccountSuppressionAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeSuppressionListReasons(s, schemas.PutAccountSuppressionAttributesRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.SuppressedReasons != nil {
+		serializeSuppressionListReasons(s, schemas.PutAccountSuppressionAttributesRequest_SuppressedReasons, v.SuppressedReasons)
+	}
 	if v.ValidationAttributes != nil {
 		s.WriteStruct(schemas.PutAccountSuppressionAttributesRequest_ValidationAttributes)
 		v.ValidationAttributes.SerializeMembers(s)

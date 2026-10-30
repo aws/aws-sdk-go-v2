@@ -374,7 +374,9 @@ func (v *Record) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *Record) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRow(s, schemas.Record_values, v.Values)
+	if v.Values != nil {
+		serializeRow(s, schemas.Record_values, v.Values)
+	}
 }
 func (v *Record) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Record, func(s *smithy.Schema) error {
@@ -408,7 +410,9 @@ func (v *ResultFrame) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ResultFrame) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRecords(s, schemas.ResultFrame_records, v.Records)
+	if v.Records != nil {
+		serializeRecords(s, schemas.ResultFrame_records, v.Records)
+	}
 	if v.ResultSetMetadata != nil {
 		s.WriteStruct(schemas.ResultFrame_resultSetMetadata)
 		v.ResultSetMetadata.SerializeMembers(s)
@@ -450,7 +454,9 @@ func (v *ResultSetMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ColumnCount != 0 {
 		s.WriteInt64(schemas.ResultSetMetadata_columnCount, v.ColumnCount)
 	}
-	serializeMetadata(s, schemas.ResultSetMetadata_columnMetadata, v.ColumnMetadata)
+	if v.ColumnMetadata != nil {
+		serializeMetadata(s, schemas.ResultSetMetadata_columnMetadata, v.ColumnMetadata)
+	}
 }
 func (v *ResultSetMetadata) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ResultSetMetadata, func(s *smithy.Schema) error {
@@ -569,7 +575,9 @@ func (v *SqlParameter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TypeHint != "" {
 		s.WriteString(schemas.SqlParameter_typeHint, string(v.TypeHint))
 	}
-	serializeField(s, schemas.SqlParameter_value, v.Value)
+	if v.Value != nil {
+		serializeField(s, schemas.SqlParameter_value, v.Value)
+	}
 }
 func (v *SqlParameter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SqlParameter, func(s *smithy.Schema) error {
@@ -654,7 +662,9 @@ func (v *StructValue) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *StructValue) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeArrayValueList(s, schemas.StructValue_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeArrayValueList(s, schemas.StructValue_attributes, v.Attributes)
+	}
 }
 func (v *StructValue) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.StructValue, func(s *smithy.Schema) error {
@@ -682,7 +692,9 @@ func (v *UpdateResult) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateResult) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFieldList(s, schemas.UpdateResult_generatedFields, v.GeneratedFields)
+	if v.GeneratedFields != nil {
+		serializeFieldList(s, schemas.UpdateResult_generatedFields, v.GeneratedFields)
+	}
 }
 func (v *UpdateResult) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateResult, func(s *smithy.Schema) error {

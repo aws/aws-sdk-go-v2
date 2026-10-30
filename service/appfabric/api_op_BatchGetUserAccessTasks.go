@@ -55,7 +55,9 @@ func (v *BatchGetUserAccessTasksInput) SerializeMembers(s smithy.ShapeSerializer
 	if v.AppBundleIdentifier != nil {
 		s.WriteString(schemas.BatchGetUserAccessTasksRequest_appBundleIdentifier, *v.AppBundleIdentifier)
 	}
-	serializeTaskIdList(s, schemas.BatchGetUserAccessTasksRequest_taskIdList, v.TaskIdList)
+	if v.TaskIdList != nil {
+		serializeTaskIdList(s, schemas.BatchGetUserAccessTasksRequest_taskIdList, v.TaskIdList)
+	}
 }
 
 type BatchGetUserAccessTasksOutput struct {
@@ -76,7 +78,9 @@ func (v *BatchGetUserAccessTasksOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchGetUserAccessTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeUserAccessResultsList(s, schemas.BatchGetUserAccessTasksResponse_userAccessResultsList, v.UserAccessResultsList)
+	if v.UserAccessResultsList != nil {
+		serializeUserAccessResultsList(s, schemas.BatchGetUserAccessTasksResponse_userAccessResultsList, v.UserAccessResultsList)
+	}
 }
 func (v *BatchGetUserAccessTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchGetUserAccessTasksResponse, func(s *smithy.Schema) error {

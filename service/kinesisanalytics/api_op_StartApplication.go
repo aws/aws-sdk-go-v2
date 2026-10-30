@@ -74,7 +74,9 @@ func (v *StartApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ApplicationName != nil {
 		s.WriteString(schemas.StartApplicationRequest_ApplicationName, *v.ApplicationName)
 	}
-	serializeInputConfigurations(s, schemas.StartApplicationRequest_InputConfigurations, v.InputConfigurations)
+	if v.InputConfigurations != nil {
+		serializeInputConfigurations(s, schemas.StartApplicationRequest_InputConfigurations, v.InputConfigurations)
+	}
 }
 
 type StartApplicationOutput struct {

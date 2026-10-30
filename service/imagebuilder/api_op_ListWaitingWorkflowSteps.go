@@ -84,7 +84,9 @@ func (v *ListWaitingWorkflowStepsOutput) SerializeMembers(s smithy.ShapeSerializ
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListWaitingWorkflowStepsResponse_nextToken, *v.NextToken)
 	}
-	serializeWorkflowStepExecutionList(s, schemas.ListWaitingWorkflowStepsResponse_steps, v.Steps)
+	if v.Steps != nil {
+		serializeWorkflowStepExecutionList(s, schemas.ListWaitingWorkflowStepsResponse_steps, v.Steps)
+	}
 }
 func (v *ListWaitingWorkflowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ListWaitingWorkflowStepsResponse, func(s *smithy.Schema) error {

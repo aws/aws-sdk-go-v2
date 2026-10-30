@@ -93,7 +93,9 @@ func (v *ListEmailIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListEmailIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeIdentityInfoList(s, schemas.ListEmailIdentitiesResponse_EmailIdentities, v.EmailIdentities)
+	if v.EmailIdentities != nil {
+		serializeIdentityInfoList(s, schemas.ListEmailIdentitiesResponse_EmailIdentities, v.EmailIdentities)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListEmailIdentitiesResponse_NextToken, *v.NextToken)
 	}

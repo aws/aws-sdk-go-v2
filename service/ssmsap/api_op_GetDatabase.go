@@ -111,7 +111,9 @@ func (v *GetDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.Database.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagMap(s, schemas.GetDatabaseOutput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.GetDatabaseOutput_Tags, v.Tags)
+	}
 }
 func (v *GetDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.GetDatabaseOutput, func(s *smithy.Schema) error {

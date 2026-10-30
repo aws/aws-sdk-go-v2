@@ -64,8 +64,12 @@ func (v *CreateConditionalForwarderInput) SerializeMembers(s smithy.ShapeSeriali
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.CreateConditionalForwarderRequest_DirectoryId, *v.DirectoryId)
 	}
-	serializeDnsIpAddrs(s, schemas.CreateConditionalForwarderRequest_DnsIpAddrs, v.DnsIpAddrs)
-	serializeDnsIpv6Addrs(s, schemas.CreateConditionalForwarderRequest_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	if v.DnsIpAddrs != nil {
+		serializeDnsIpAddrs(s, schemas.CreateConditionalForwarderRequest_DnsIpAddrs, v.DnsIpAddrs)
+	}
+	if v.DnsIpv6Addrs != nil {
+		serializeDnsIpv6Addrs(s, schemas.CreateConditionalForwarderRequest_DnsIpv6Addrs, v.DnsIpv6Addrs)
+	}
 	if v.RemoteDomainName != nil {
 		s.WriteString(schemas.CreateConditionalForwarderRequest_RemoteDomainName, *v.RemoteDomainName)
 	}

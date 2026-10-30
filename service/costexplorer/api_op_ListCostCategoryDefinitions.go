@@ -73,7 +73,9 @@ func (v *ListCostCategoryDefinitionsInput) SerializeMembers(s smithy.ShapeSerial
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCostCategoryDefinitionsRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceTypesFilterInput(s, schemas.ListCostCategoryDefinitionsRequest_SupportedResourceTypes, v.SupportedResourceTypes)
+	if v.SupportedResourceTypes != nil {
+		serializeResourceTypesFilterInput(s, schemas.ListCostCategoryDefinitionsRequest_SupportedResourceTypes, v.SupportedResourceTypes)
+	}
 }
 
 type ListCostCategoryDefinitionsOutput struct {
@@ -100,7 +102,9 @@ func (v *ListCostCategoryDefinitionsOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *ListCostCategoryDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCostCategoryReferencesList(s, schemas.ListCostCategoryDefinitionsResponse_CostCategoryReferences, v.CostCategoryReferences)
+	if v.CostCategoryReferences != nil {
+		serializeCostCategoryReferencesList(s, schemas.ListCostCategoryDefinitionsResponse_CostCategoryReferences, v.CostCategoryReferences)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListCostCategoryDefinitionsResponse_NextToken, *v.NextToken)
 	}

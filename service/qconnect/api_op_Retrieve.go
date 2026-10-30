@@ -93,8 +93,12 @@ func (v *RetrieveOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RetrieveOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRetrieveErrorList(s, schemas.RetrieveResponse_errors, v.Errors)
-	serializeRetrieveResultList(s, schemas.RetrieveResponse_results, v.Results)
+	if v.Errors != nil {
+		serializeRetrieveErrorList(s, schemas.RetrieveResponse_errors, v.Errors)
+	}
+	if v.Results != nil {
+		serializeRetrieveResultList(s, schemas.RetrieveResponse_results, v.Results)
+	}
 }
 func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RetrieveResponse, func(s *smithy.Schema) error {

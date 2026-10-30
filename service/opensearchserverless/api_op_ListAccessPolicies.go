@@ -62,7 +62,9 @@ func (v *ListAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessPoliciesRequest_nextToken, *v.NextToken)
 	}
-	serializeResourceFilter(s, schemas.ListAccessPoliciesRequest_resource, v.Resource)
+	if v.Resource != nil {
+		serializeResourceFilter(s, schemas.ListAccessPoliciesRequest_resource, v.Resource)
+	}
 	if v.Type != "" {
 		s.WriteString(schemas.ListAccessPoliciesRequest_type, string(v.Type))
 	}
@@ -113,7 +115,9 @@ func (v *ListAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAccessPolicySummaries(s, schemas.ListAccessPoliciesResponse_accessPolicySummaries, v.AccessPolicySummaries)
+	if v.AccessPolicySummaries != nil {
+		serializeAccessPolicySummaries(s, schemas.ListAccessPoliciesResponse_accessPolicySummaries, v.AccessPolicySummaries)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListAccessPoliciesResponse_nextToken, *v.NextToken)
 	}

@@ -267,7 +267,9 @@ func (v *CreateLabelingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
 		v.StoppingConditions.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateLabelingJobRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateLabelingJobRequest_Tags, v.Tags)
+	}
 }
 
 type CreateLabelingJobOutput struct {

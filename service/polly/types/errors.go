@@ -1034,7 +1034,9 @@ func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ThrottlingException_message, *v.Message)
 	}
-	serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+	if v.ThrottlingReasons != nil {
+		serializeThrottlingReasonList(s, schemas.ThrottlingException_throttlingReasons, v.ThrottlingReasons)
+	}
 }
 func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
@@ -1184,7 +1186,9 @@ func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeValidationExceptionFieldList(s, schemas.ValidationException_fields, v.Fields)
+	if v.Fields != nil {
+		serializeValidationExceptionFieldList(s, schemas.ValidationException_fields, v.Fields)
+	}
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}

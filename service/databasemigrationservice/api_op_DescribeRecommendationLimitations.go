@@ -68,7 +68,9 @@ func (v *DescribeRecommendationLimitationsInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *DescribeRecommendationLimitationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeFilterList(s, schemas.DescribeRecommendationLimitationsRequest_Filters, v.Filters)
+	if v.Filters != nil {
+		serializeFilterList(s, schemas.DescribeRecommendationLimitationsRequest_Filters, v.Filters)
+	}
 	if v.MaxRecords != nil {
 		s.WriteInt32(schemas.DescribeRecommendationLimitationsRequest_MaxRecords, *v.MaxRecords)
 	}
@@ -102,7 +104,9 @@ func (v *DescribeRecommendationLimitationsOutput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *DescribeRecommendationLimitationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeLimitationList(s, schemas.DescribeRecommendationLimitationsResponse_Limitations, v.Limitations)
+	if v.Limitations != nil {
+		serializeLimitationList(s, schemas.DescribeRecommendationLimitationsResponse_Limitations, v.Limitations)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeRecommendationLimitationsResponse_NextToken, *v.NextToken)
 	}

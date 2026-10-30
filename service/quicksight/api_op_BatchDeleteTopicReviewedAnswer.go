@@ -53,7 +53,9 @@ func (v *BatchDeleteTopicReviewedAnswerInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *BatchDeleteTopicReviewedAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAnswerIds(s, schemas.BatchDeleteTopicReviewedAnswerRequest_AnswerIds, v.AnswerIds)
+	if v.AnswerIds != nil {
+		serializeAnswerIds(s, schemas.BatchDeleteTopicReviewedAnswerRequest_AnswerIds, v.AnswerIds)
+	}
 	if v.AwsAccountId != nil {
 		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerRequest_AwsAccountId, *v.AwsAccountId)
 	}
@@ -96,14 +98,18 @@ func (v *BatchDeleteTopicReviewedAnswerOutput) Serialize(s smithy.ShapeSerialize
 }
 
 func (v *BatchDeleteTopicReviewedAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeInvalidTopicReviewedAnswers(s, schemas.BatchDeleteTopicReviewedAnswerResponse_InvalidAnswers, v.InvalidAnswers)
+	if v.InvalidAnswers != nil {
+		serializeInvalidTopicReviewedAnswers(s, schemas.BatchDeleteTopicReviewedAnswerResponse_InvalidAnswers, v.InvalidAnswers)
+	}
 	if v.RequestId != nil {
 		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerResponse_RequestId, *v.RequestId)
 	}
 	if v.Status != 0 {
 		s.WriteInt32(schemas.BatchDeleteTopicReviewedAnswerResponse_Status, v.Status)
 	}
-	serializeSucceededTopicReviewedAnswers(s, schemas.BatchDeleteTopicReviewedAnswerResponse_SucceededAnswers, v.SucceededAnswers)
+	if v.SucceededAnswers != nil {
+		serializeSucceededTopicReviewedAnswers(s, schemas.BatchDeleteTopicReviewedAnswerResponse_SucceededAnswers, v.SucceededAnswers)
+	}
 	if v.TopicArn != nil {
 		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerResponse_TopicArn, *v.TopicArn)
 	}

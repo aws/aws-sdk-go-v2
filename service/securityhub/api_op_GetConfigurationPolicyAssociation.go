@@ -49,7 +49,9 @@ func (v *GetConfigurationPolicyAssociationInput) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *GetConfigurationPolicyAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeTarget(s, schemas.GetConfigurationPolicyAssociationRequest_Target, v.Target)
+	if v.Target != nil {
+		serializeTarget(s, schemas.GetConfigurationPolicyAssociationRequest_Target, v.Target)
+	}
 }
 
 type GetConfigurationPolicyAssociationOutput struct {

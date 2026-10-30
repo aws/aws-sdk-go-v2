@@ -76,8 +76,12 @@ func (v *CreateDataIntegrationFlowInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.Name != nil {
 		s.WriteString(schemas.CreateDataIntegrationFlowRequest_name, *v.Name)
 	}
-	serializeDataIntegrationFlowSourceList(s, schemas.CreateDataIntegrationFlowRequest_sources, v.Sources)
-	serializeTagMap(s, schemas.CreateDataIntegrationFlowRequest_tags, v.Tags)
+	if v.Sources != nil {
+		serializeDataIntegrationFlowSourceList(s, schemas.CreateDataIntegrationFlowRequest_sources, v.Sources)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateDataIntegrationFlowRequest_tags, v.Tags)
+	}
 	if v.Target != nil {
 		s.WriteStruct(schemas.CreateDataIntegrationFlowRequest_target)
 		v.Target.SerializeMembers(s)

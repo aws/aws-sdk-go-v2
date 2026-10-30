@@ -61,7 +61,9 @@ func (v *UpdatePackageScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageID != nil {
 		s.WriteString(schemas.UpdatePackageScopeRequest_PackageID, *v.PackageID)
 	}
-	serializePackageUserList(s, schemas.UpdatePackageScopeRequest_PackageUserList, v.PackageUserList)
+	if v.PackageUserList != nil {
+		serializePackageUserList(s, schemas.UpdatePackageScopeRequest_PackageUserList, v.PackageUserList)
+	}
 }
 
 type UpdatePackageScopeOutput struct {
@@ -94,7 +96,9 @@ func (v *UpdatePackageScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PackageID != nil {
 		s.WriteString(schemas.UpdatePackageScopeResponse_PackageID, *v.PackageID)
 	}
-	serializePackageUserList(s, schemas.UpdatePackageScopeResponse_PackageUserList, v.PackageUserList)
+	if v.PackageUserList != nil {
+		serializePackageUserList(s, schemas.UpdatePackageScopeResponse_PackageUserList, v.PackageUserList)
+	}
 }
 func (v *UpdatePackageScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdatePackageScopeResponse, func(s *smithy.Schema) error {

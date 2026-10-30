@@ -62,8 +62,12 @@ func (v *DescribeApplicationsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkSpaceApplicationIdList(s, schemas.DescribeApplicationsRequest_ApplicationIds, v.ApplicationIds)
-	serializeComputeList(s, schemas.DescribeApplicationsRequest_ComputeTypeNames, v.ComputeTypeNames)
+	if v.ApplicationIds != nil {
+		serializeWorkSpaceApplicationIdList(s, schemas.DescribeApplicationsRequest_ApplicationIds, v.ApplicationIds)
+	}
+	if v.ComputeTypeNames != nil {
+		serializeComputeList(s, schemas.DescribeApplicationsRequest_ComputeTypeNames, v.ComputeTypeNames)
+	}
 	if v.LicenseType != "" {
 		s.WriteString(schemas.DescribeApplicationsRequest_LicenseType, string(v.LicenseType))
 	}
@@ -73,7 +77,9 @@ func (v *DescribeApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeApplicationsRequest_NextToken, *v.NextToken)
 	}
-	serializeOperatingSystemNameList(s, schemas.DescribeApplicationsRequest_OperatingSystemNames, v.OperatingSystemNames)
+	if v.OperatingSystemNames != nil {
+		serializeOperatingSystemNameList(s, schemas.DescribeApplicationsRequest_OperatingSystemNames, v.OperatingSystemNames)
+	}
 	if v.Owner != nil {
 		s.WriteString(schemas.DescribeApplicationsRequest_Owner, *v.Owner)
 	}
@@ -101,7 +107,9 @@ func (v *DescribeApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribeApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeWorkSpaceApplicationList(s, schemas.DescribeApplicationsResult_Applications, v.Applications)
+	if v.Applications != nil {
+		serializeWorkSpaceApplicationList(s, schemas.DescribeApplicationsResult_Applications, v.Applications)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.DescribeApplicationsResult_NextToken, *v.NextToken)
 	}

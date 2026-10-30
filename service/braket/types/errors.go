@@ -422,7 +422,9 @@ func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Message != nil {
 		s.WriteString(schemas.ValidationException_message, *v.Message)
 	}
-	serializeProgramSetValidationFailuresList(s, schemas.ValidationException_programSetValidationFailures, v.ProgramSetValidationFailures)
+	if v.ProgramSetValidationFailures != nil {
+		serializeProgramSetValidationFailuresList(s, schemas.ValidationException_programSetValidationFailures, v.ProgramSetValidationFailures)
+	}
 	if v.Reason != "" {
 		s.WriteString(schemas.ValidationException_reason, string(v.Reason))
 	}

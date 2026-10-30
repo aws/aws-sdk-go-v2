@@ -79,7 +79,9 @@ func (v *CreateConfiguredTableInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAllowedColumnList(s, schemas.CreateConfiguredTableInput_allowedColumns, v.AllowedColumns)
+	if v.AllowedColumns != nil {
+		serializeAllowedColumnList(s, schemas.CreateConfiguredTableInput_allowedColumns, v.AllowedColumns)
+	}
 	if v.AnalysisMethod != "" {
 		s.WriteString(schemas.CreateConfiguredTableInput_analysisMethod, string(v.AnalysisMethod))
 	}
@@ -89,9 +91,15 @@ func (v *CreateConfiguredTableInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Name != nil {
 		s.WriteString(schemas.CreateConfiguredTableInput_name, *v.Name)
 	}
-	serializeSelectedAnalysisMethods(s, schemas.CreateConfiguredTableInput_selectedAnalysisMethods, v.SelectedAnalysisMethods)
-	serializeTableReference(s, schemas.CreateConfiguredTableInput_tableReference, v.TableReference)
-	serializeTagMap(s, schemas.CreateConfiguredTableInput_tags, v.Tags)
+	if v.SelectedAnalysisMethods != nil {
+		serializeSelectedAnalysisMethods(s, schemas.CreateConfiguredTableInput_selectedAnalysisMethods, v.SelectedAnalysisMethods)
+	}
+	if v.TableReference != nil {
+		serializeTableReference(s, schemas.CreateConfiguredTableInput_tableReference, v.TableReference)
+	}
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateConfiguredTableInput_tags, v.Tags)
+	}
 }
 func (v *CreateConfiguredTableInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CreateConfiguredTableInput, func(s *smithy.Schema) error {

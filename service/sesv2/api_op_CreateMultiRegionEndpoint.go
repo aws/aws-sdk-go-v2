@@ -67,7 +67,9 @@ func (v *CreateMultiRegionEndpointInput) SerializeMembers(s smithy.ShapeSerializ
 	if v.EndpointName != nil {
 		s.WriteString(schemas.CreateMultiRegionEndpointRequest_EndpointName, *v.EndpointName)
 	}
-	serializeTagList(s, schemas.CreateMultiRegionEndpointRequest_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateMultiRegionEndpointRequest_Tags, v.Tags)
+	}
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the

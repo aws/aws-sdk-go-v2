@@ -64,14 +64,18 @@ func (v *CreateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateTemplateRequest_clientToken, *v.ClientToken)
 	}
-	serializeTagMap(s, schemas.CreateTemplateRequest_tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagMap(s, schemas.CreateTemplateRequest_tags, v.Tags)
+	}
 	if v.TemplateDescription != nil {
 		s.WriteString(schemas.CreateTemplateRequest_templateDescription, *v.TemplateDescription)
 	}
 	if v.TemplateName != nil {
 		s.WriteString(schemas.CreateTemplateRequest_templateName, *v.TemplateName)
 	}
-	serializeTemplateSource(s, schemas.CreateTemplateRequest_templateSource, v.TemplateSource)
+	if v.TemplateSource != nil {
+		serializeTemplateSource(s, schemas.CreateTemplateRequest_templateSource, v.TemplateSource)
+	}
 }
 
 type CreateTemplateOutput struct {
@@ -103,7 +107,9 @@ func (v *CreateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeStringMap(s, schemas.CreateTemplateResponse_tags, v.Tags)
+	if v.Tags != nil {
+		serializeStringMap(s, schemas.CreateTemplateResponse_tags, v.Tags)
+	}
 	if v.TemplateArn != nil {
 		s.WriteString(schemas.CreateTemplateResponse_templateArn, *v.TemplateArn)
 	}

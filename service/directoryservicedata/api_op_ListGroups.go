@@ -113,7 +113,9 @@ func (v *ListGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryId != nil {
 		s.WriteString(schemas.ListGroupsResult_DirectoryId, *v.DirectoryId)
 	}
-	serializeGroupSummaryList(s, schemas.ListGroupsResult_Groups, v.Groups)
+	if v.Groups != nil {
+		serializeGroupSummaryList(s, schemas.ListGroupsResult_Groups, v.Groups)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGroupsResult_NextToken, *v.NextToken)
 	}

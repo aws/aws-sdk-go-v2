@@ -76,7 +76,9 @@ func (v *ListNetworkSettingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListNetworkSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeNetworkSettingsList(s, schemas.ListNetworkSettingsResponse_networkSettings, v.NetworkSettings)
+	if v.NetworkSettings != nil {
+		serializeNetworkSettingsList(s, schemas.ListNetworkSettingsResponse_networkSettings, v.NetworkSettings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListNetworkSettingsResponse_nextToken, *v.NextToken)
 	}

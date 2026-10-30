@@ -94,7 +94,9 @@ func (v *SearchResourceTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchResourceTagsRequest_NextToken, *v.NextToken)
 	}
-	serializeResourceTypeList(s, schemas.SearchResourceTagsRequest_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.SearchResourceTagsRequest_ResourceTypes, v.ResourceTypes)
+	}
 	if v.SearchCriteria != nil {
 		s.WriteStruct(schemas.SearchResourceTagsRequest_SearchCriteria)
 		v.SearchCriteria.SerializeMembers(s)
@@ -126,7 +128,9 @@ func (v *SearchResourceTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NextToken != nil {
 		s.WriteString(schemas.SearchResourceTagsResponse_NextToken, *v.NextToken)
 	}
-	serializeTagsList(s, schemas.SearchResourceTagsResponse_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagsList(s, schemas.SearchResourceTagsResponse_Tags, v.Tags)
+	}
 }
 func (v *SearchResourceTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SearchResourceTagsResponse, func(s *smithy.Schema) error {

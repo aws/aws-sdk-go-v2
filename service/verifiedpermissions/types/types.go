@@ -462,7 +462,9 @@ func (v *BatchGetPolicyOutputItem) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.BatchGetPolicyOutputItem_createdDate, *v.CreatedDate)
 	}
-	serializePolicyDefinitionDetail(s, schemas.BatchGetPolicyOutputItem_definition, v.Definition)
+	if v.Definition != nil {
+		serializePolicyDefinitionDetail(s, schemas.BatchGetPolicyOutputItem_definition, v.Definition)
+	}
 	if v.LastUpdatedDate != nil {
 		s.WriteTime(schemas.BatchGetPolicyOutputItem_lastUpdatedDate, *v.LastUpdatedDate)
 	}
@@ -544,7 +546,9 @@ func (v *BatchIsAuthorizedInputItem) SerializeMembers(s smithy.ShapeSerializer) 
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContextDefinition(s, schemas.BatchIsAuthorizedInputItem_context, v.Context)
+	if v.Context != nil {
+		serializeContextDefinition(s, schemas.BatchIsAuthorizedInputItem_context, v.Context)
+	}
 	if v.Principal != nil {
 		s.WriteStruct(schemas.BatchIsAuthorizedInputItem_principal)
 		v.Principal.SerializeMembers(s)
@@ -619,8 +623,12 @@ func (v *BatchIsAuthorizedOutputItem) SerializeMembers(s smithy.ShapeSerializer)
 	if v.Decision != "" {
 		s.WriteString(schemas.BatchIsAuthorizedOutputItem_decision, string(v.Decision))
 	}
-	serializeDeterminingPolicyList(s, schemas.BatchIsAuthorizedOutputItem_determiningPolicies, v.DeterminingPolicies)
-	serializeEvaluationErrorList(s, schemas.BatchIsAuthorizedOutputItem_errors, v.Errors)
+	if v.DeterminingPolicies != nil {
+		serializeDeterminingPolicyList(s, schemas.BatchIsAuthorizedOutputItem_determiningPolicies, v.DeterminingPolicies)
+	}
+	if v.Errors != nil {
+		serializeEvaluationErrorList(s, schemas.BatchIsAuthorizedOutputItem_errors, v.Errors)
+	}
 	if v.Request != nil {
 		s.WriteStruct(schemas.BatchIsAuthorizedOutputItem_request)
 		v.Request.SerializeMembers(s)
@@ -680,7 +688,9 @@ func (v *BatchIsAuthorizedWithTokenInputItem) SerializeMembers(s smithy.ShapeSer
 		v.Action.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeContextDefinition(s, schemas.BatchIsAuthorizedWithTokenInputItem_context, v.Context)
+	if v.Context != nil {
+		serializeContextDefinition(s, schemas.BatchIsAuthorizedWithTokenInputItem_context, v.Context)
+	}
 	if v.Resource != nil {
 		s.WriteStruct(schemas.BatchIsAuthorizedWithTokenInputItem_resource)
 		v.Resource.SerializeMembers(s)
@@ -747,8 +757,12 @@ func (v *BatchIsAuthorizedWithTokenOutputItem) SerializeMembers(s smithy.ShapeSe
 	if v.Decision != "" {
 		s.WriteString(schemas.BatchIsAuthorizedWithTokenOutputItem_decision, string(v.Decision))
 	}
-	serializeDeterminingPolicyList(s, schemas.BatchIsAuthorizedWithTokenOutputItem_determiningPolicies, v.DeterminingPolicies)
-	serializeEvaluationErrorList(s, schemas.BatchIsAuthorizedWithTokenOutputItem_errors, v.Errors)
+	if v.DeterminingPolicies != nil {
+		serializeDeterminingPolicyList(s, schemas.BatchIsAuthorizedWithTokenOutputItem_determiningPolicies, v.DeterminingPolicies)
+	}
+	if v.Errors != nil {
+		serializeEvaluationErrorList(s, schemas.BatchIsAuthorizedWithTokenOutputItem_errors, v.Errors)
+	}
 	if v.Request != nil {
 		s.WriteStruct(schemas.BatchIsAuthorizedWithTokenOutputItem_request)
 		v.Request.SerializeMembers(s)
@@ -1157,7 +1171,9 @@ func (v *CognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CognitoUserPoolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.CognitoUserPoolConfiguration_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.CognitoUserPoolConfiguration_clientIds, v.ClientIds)
+	}
 	if v.GroupConfiguration != nil {
 		s.WriteStruct(schemas.CognitoUserPoolConfiguration_groupConfiguration)
 		v.GroupConfiguration.SerializeMembers(s)
@@ -1240,7 +1256,9 @@ func (v *CognitoUserPoolConfigurationDetail) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *CognitoUserPoolConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.CognitoUserPoolConfigurationDetail_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.CognitoUserPoolConfigurationDetail_clientIds, v.ClientIds)
+	}
 	if v.GroupConfiguration != nil {
 		s.WriteStruct(schemas.CognitoUserPoolConfigurationDetail_groupConfiguration)
 		v.GroupConfiguration.SerializeMembers(s)
@@ -1329,7 +1347,9 @@ func (v *CognitoUserPoolConfigurationItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CognitoUserPoolConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.CognitoUserPoolConfigurationItem_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.CognitoUserPoolConfigurationItem_clientIds, v.ClientIds)
+	}
 	if v.GroupConfiguration != nil {
 		s.WriteStruct(schemas.CognitoUserPoolConfigurationItem_groupConfiguration)
 		v.GroupConfiguration.SerializeMembers(s)
@@ -1920,14 +1940,20 @@ func (v *EntityItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EntityItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEntityAttributes(s, schemas.EntityItem_attributes, v.Attributes)
+	if v.Attributes != nil {
+		serializeEntityAttributes(s, schemas.EntityItem_attributes, v.Attributes)
+	}
 	if v.Identifier != nil {
 		s.WriteStruct(schemas.EntityItem_identifier)
 		v.Identifier.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeParentList(s, schemas.EntityItem_parents, v.Parents)
-	serializeEntityCedarTags(s, schemas.EntityItem_tags, v.Tags)
+	if v.Parents != nil {
+		serializeParentList(s, schemas.EntityItem_parents, v.Parents)
+	}
+	if v.Tags != nil {
+		serializeEntityCedarTags(s, schemas.EntityItem_tags, v.Tags)
+	}
 }
 func (v *EntityItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.EntityItem, func(s *smithy.Schema) error {
@@ -2090,7 +2116,9 @@ func (v *IdentitySourceDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentitySourceDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.IdentitySourceDetails_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.IdentitySourceDetails_clientIds, v.ClientIds)
+	}
 	if v.DiscoveryUrl != nil {
 		s.WriteString(schemas.IdentitySourceDetails_discoveryUrl, *v.DiscoveryUrl)
 	}
@@ -2213,7 +2241,9 @@ func (v *IdentitySourceItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentitySourceItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeConfigurationItem(s, schemas.IdentitySourceItem_configuration, v.Configuration)
+	if v.Configuration != nil {
+		serializeConfigurationItem(s, schemas.IdentitySourceItem_configuration, v.Configuration)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.IdentitySourceItem_createdDate, *v.CreatedDate)
 	}
@@ -2314,7 +2344,9 @@ func (v *IdentitySourceItemDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IdentitySourceItemDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.IdentitySourceItemDetails_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.IdentitySourceItemDetails_clientIds, v.ClientIds)
+	}
 	if v.DiscoveryUrl != nil {
 		s.WriteString(schemas.IdentitySourceItemDetails_discoveryUrl, *v.DiscoveryUrl)
 	}
@@ -2382,7 +2414,9 @@ func (v *KmsEncryptionSettings) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KmsEncryptionSettings) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContext(s, schemas.KmsEncryptionSettings_encryptionContext, v.EncryptionContext)
+	if v.EncryptionContext != nil {
+		serializeEncryptionContext(s, schemas.KmsEncryptionSettings_encryptionContext, v.EncryptionContext)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.KmsEncryptionSettings_key, *v.Key)
 	}
@@ -2432,7 +2466,9 @@ func (v *KmsEncryptionState) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *KmsEncryptionState) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeEncryptionContext(s, schemas.KmsEncryptionState_encryptionContext, v.EncryptionContext)
+	if v.EncryptionContext != nil {
+		serializeEncryptionContext(s, schemas.KmsEncryptionState_encryptionContext, v.EncryptionContext)
+	}
 	if v.Key != nil {
 		s.WriteString(schemas.KmsEncryptionState_key, *v.Key)
 	}
@@ -2478,7 +2514,9 @@ func (v *OpenIdConnectAccessTokenConfiguration) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *OpenIdConnectAccessTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfiguration_audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfiguration_audiences, v.Audiences)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.OpenIdConnectAccessTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -2524,7 +2562,9 @@ func (v *OpenIdConnectAccessTokenConfigurationDetail) Serialize(s smithy.ShapeSe
 }
 
 func (v *OpenIdConnectAccessTokenConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfigurationDetail_audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfigurationDetail_audiences, v.Audiences)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.OpenIdConnectAccessTokenConfigurationDetail_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -2570,7 +2610,9 @@ func (v *OpenIdConnectAccessTokenConfigurationItem) Serialize(s smithy.ShapeSeri
 }
 
 func (v *OpenIdConnectAccessTokenConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfigurationItem_audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.OpenIdConnectAccessTokenConfigurationItem_audiences, v.Audiences)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.OpenIdConnectAccessTokenConfigurationItem_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -2644,7 +2686,9 @@ func (v *OpenIdConnectConfiguration) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.Issuer != nil {
 		s.WriteString(schemas.OpenIdConnectConfiguration_issuer, *v.Issuer)
 	}
-	serializeOpenIdConnectTokenSelection(s, schemas.OpenIdConnectConfiguration_tokenSelection, v.TokenSelection)
+	if v.TokenSelection != nil {
+		serializeOpenIdConnectTokenSelection(s, schemas.OpenIdConnectConfiguration_tokenSelection, v.TokenSelection)
+	}
 }
 func (v *OpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenIdConnectConfiguration, func(s *smithy.Schema) error {
@@ -2721,7 +2765,9 @@ func (v *OpenIdConnectConfigurationDetail) SerializeMembers(s smithy.ShapeSerial
 	if v.Issuer != nil {
 		s.WriteString(schemas.OpenIdConnectConfigurationDetail_issuer, *v.Issuer)
 	}
-	serializeOpenIdConnectTokenSelectionDetail(s, schemas.OpenIdConnectConfigurationDetail_tokenSelection, v.TokenSelection)
+	if v.TokenSelection != nil {
+		serializeOpenIdConnectTokenSelectionDetail(s, schemas.OpenIdConnectConfigurationDetail_tokenSelection, v.TokenSelection)
+	}
 }
 func (v *OpenIdConnectConfigurationDetail) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenIdConnectConfigurationDetail, func(s *smithy.Schema) error {
@@ -2798,7 +2844,9 @@ func (v *OpenIdConnectConfigurationItem) SerializeMembers(s smithy.ShapeSerializ
 	if v.Issuer != nil {
 		s.WriteString(schemas.OpenIdConnectConfigurationItem_issuer, *v.Issuer)
 	}
-	serializeOpenIdConnectTokenSelectionItem(s, schemas.OpenIdConnectConfigurationItem_tokenSelection, v.TokenSelection)
+	if v.TokenSelection != nil {
+		serializeOpenIdConnectTokenSelectionItem(s, schemas.OpenIdConnectConfigurationItem_tokenSelection, v.TokenSelection)
+	}
 }
 func (v *OpenIdConnectConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.OpenIdConnectConfigurationItem, func(s *smithy.Schema) error {
@@ -3010,7 +3058,9 @@ func (v *OpenIdConnectIdentityTokenConfiguration) Serialize(s smithy.ShapeSerial
 }
 
 func (v *OpenIdConnectIdentityTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfiguration_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfiguration_clientIds, v.ClientIds)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.OpenIdConnectIdentityTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -3057,7 +3107,9 @@ func (v *OpenIdConnectIdentityTokenConfigurationDetail) Serialize(s smithy.Shape
 }
 
 func (v *OpenIdConnectIdentityTokenConfigurationDetail) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfigurationDetail_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfigurationDetail_clientIds, v.ClientIds)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.OpenIdConnectIdentityTokenConfigurationDetail_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -3104,7 +3156,9 @@ func (v *OpenIdConnectIdentityTokenConfigurationItem) Serialize(s smithy.ShapeSe
 }
 
 func (v *OpenIdConnectIdentityTokenConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfigurationItem_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.OpenIdConnectIdentityTokenConfigurationItem_clientIds, v.ClientIds)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.OpenIdConnectIdentityTokenConfigurationItem_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -3484,8 +3538,12 @@ func (v *PolicyFilter) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PolicyType != "" {
 		s.WriteString(schemas.PolicyFilter_policyType, string(v.PolicyType))
 	}
-	serializeEntityReference(s, schemas.PolicyFilter_principal, v.Principal)
-	serializeEntityReference(s, schemas.PolicyFilter_resource, v.Resource)
+	if v.Principal != nil {
+		serializeEntityReference(s, schemas.PolicyFilter_principal, v.Principal)
+	}
+	if v.Resource != nil {
+		serializeEntityReference(s, schemas.PolicyFilter_resource, v.Resource)
+	}
 }
 func (v *PolicyFilter) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PolicyFilter, func(s *smithy.Schema) error {
@@ -3580,11 +3638,15 @@ func (v *PolicyItem) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PolicyItem) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeActionIdentifierList(s, schemas.PolicyItem_actions, v.Actions)
+	if v.Actions != nil {
+		serializeActionIdentifierList(s, schemas.PolicyItem_actions, v.Actions)
+	}
 	if v.CreatedDate != nil {
 		s.WriteTime(schemas.PolicyItem_createdDate, *v.CreatedDate)
 	}
-	serializePolicyDefinitionItem(s, schemas.PolicyItem_definition, v.Definition)
+	if v.Definition != nil {
+		serializePolicyDefinitionItem(s, schemas.PolicyItem_definition, v.Definition)
+	}
 	if v.Effect != "" {
 		s.WriteString(schemas.PolicyItem_effect, string(v.Effect))
 	}
@@ -4403,7 +4465,9 @@ func (v *UpdateCognitoUserPoolConfiguration) Serialize(s smithy.ShapeSerializer)
 }
 
 func (v *UpdateCognitoUserPoolConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.UpdateCognitoUserPoolConfiguration_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.UpdateCognitoUserPoolConfiguration_clientIds, v.ClientIds)
+	}
 	if v.GroupConfiguration != nil {
 		s.WriteStruct(schemas.UpdateCognitoUserPoolConfiguration_groupConfiguration)
 		v.GroupConfiguration.SerializeMembers(s)
@@ -4504,7 +4568,9 @@ func (v *UpdateOpenIdConnectAccessTokenConfiguration) Serialize(s smithy.ShapeSe
 }
 
 func (v *UpdateOpenIdConnectAccessTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAudiences(s, schemas.UpdateOpenIdConnectAccessTokenConfiguration_audiences, v.Audiences)
+	if v.Audiences != nil {
+		serializeAudiences(s, schemas.UpdateOpenIdConnectAccessTokenConfiguration_audiences, v.Audiences)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.UpdateOpenIdConnectAccessTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
 	}
@@ -4578,7 +4644,9 @@ func (v *UpdateOpenIdConnectConfiguration) SerializeMembers(s smithy.ShapeSerial
 	if v.Issuer != nil {
 		s.WriteString(schemas.UpdateOpenIdConnectConfiguration_issuer, *v.Issuer)
 	}
-	serializeUpdateOpenIdConnectTokenSelection(s, schemas.UpdateOpenIdConnectConfiguration_tokenSelection, v.TokenSelection)
+	if v.TokenSelection != nil {
+		serializeUpdateOpenIdConnectTokenSelection(s, schemas.UpdateOpenIdConnectConfiguration_tokenSelection, v.TokenSelection)
+	}
 }
 func (v *UpdateOpenIdConnectConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.UpdateOpenIdConnectConfiguration, func(s *smithy.Schema) error {
@@ -4682,7 +4750,9 @@ func (v *UpdateOpenIdConnectIdentityTokenConfiguration) Serialize(s smithy.Shape
 }
 
 func (v *UpdateOpenIdConnectIdentityTokenConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeClientIds(s, schemas.UpdateOpenIdConnectIdentityTokenConfiguration_clientIds, v.ClientIds)
+	if v.ClientIds != nil {
+		serializeClientIds(s, schemas.UpdateOpenIdConnectIdentityTokenConfiguration_clientIds, v.ClientIds)
+	}
 	if v.PrincipalIdClaim != nil {
 		s.WriteString(schemas.UpdateOpenIdConnectIdentityTokenConfiguration_principalIdClaim, *v.PrincipalIdClaim)
 	}

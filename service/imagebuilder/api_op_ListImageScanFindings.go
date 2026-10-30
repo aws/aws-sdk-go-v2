@@ -63,7 +63,9 @@ func (v *ListImageScanFindingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImageScanFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageScanFindingsFilterList(s, schemas.ListImageScanFindingsRequest_filters, v.Filters)
+	if v.Filters != nil {
+		serializeImageScanFindingsFilterList(s, schemas.ListImageScanFindingsRequest_filters, v.Filters)
+	}
 	if v.MaxResults != nil {
 		s.WriteInt32(schemas.ListImageScanFindingsRequest_maxResults, *v.MaxResults)
 	}
@@ -98,7 +100,9 @@ func (v *ListImageScanFindingsOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListImageScanFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeImageScanFindingsList(s, schemas.ListImageScanFindingsResponse_findings, v.Findings)
+	if v.Findings != nil {
+		serializeImageScanFindingsList(s, schemas.ListImageScanFindingsResponse_findings, v.Findings)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListImageScanFindingsResponse_nextToken, *v.NextToken)
 	}

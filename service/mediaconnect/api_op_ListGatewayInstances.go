@@ -104,7 +104,9 @@ func (v *ListGatewayInstancesOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ListGatewayInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serialize__listOfListedGatewayInstance(s, schemas.ListGatewayInstancesResponse_Instances, v.Instances)
+	if v.Instances != nil {
+		serialize__listOfListedGatewayInstance(s, schemas.ListGatewayInstancesResponse_Instances, v.Instances)
+	}
 	if v.NextToken != nil {
 		s.WriteString(schemas.ListGatewayInstancesResponse_NextToken, *v.NextToken)
 	}

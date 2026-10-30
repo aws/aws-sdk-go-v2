@@ -54,7 +54,9 @@ func (v *UpdateEndpointWeightsAndCapacitiesInput) Serialize(s smithy.ShapeSerial
 }
 
 func (v *UpdateEndpointWeightsAndCapacitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeDesiredWeightAndCapacityList(s, schemas.UpdateEndpointWeightsAndCapacitiesInput_DesiredWeightsAndCapacities, v.DesiredWeightsAndCapacities)
+	if v.DesiredWeightsAndCapacities != nil {
+		serializeDesiredWeightAndCapacityList(s, schemas.UpdateEndpointWeightsAndCapacitiesInput_DesiredWeightsAndCapacities, v.DesiredWeightsAndCapacities)
+	}
 	if v.EndpointName != nil {
 		s.WriteString(schemas.UpdateEndpointWeightsAndCapacitiesInput_EndpointName, *v.EndpointName)
 	}

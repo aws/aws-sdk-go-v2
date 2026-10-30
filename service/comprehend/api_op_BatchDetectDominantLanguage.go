@@ -48,7 +48,9 @@ func (v *BatchDetectDominantLanguageInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BatchDetectDominantLanguageInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeCustomerInputStringList(s, schemas.BatchDetectDominantLanguageRequest_TextList, v.TextList)
+	if v.TextList != nil {
+		serializeCustomerInputStringList(s, schemas.BatchDetectDominantLanguageRequest_TextList, v.TextList)
+	}
 }
 
 type BatchDetectDominantLanguageOutput struct {
@@ -82,8 +84,12 @@ func (v *BatchDetectDominantLanguageOutput) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *BatchDetectDominantLanguageOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeBatchItemErrorList(s, schemas.BatchDetectDominantLanguageResponse_ErrorList, v.ErrorList)
-	serializeListOfDetectDominantLanguageResult(s, schemas.BatchDetectDominantLanguageResponse_ResultList, v.ResultList)
+	if v.ErrorList != nil {
+		serializeBatchItemErrorList(s, schemas.BatchDetectDominantLanguageResponse_ErrorList, v.ErrorList)
+	}
+	if v.ResultList != nil {
+		serializeListOfDetectDominantLanguageResult(s, schemas.BatchDetectDominantLanguageResponse_ResultList, v.ResultList)
+	}
 }
 func (v *BatchDetectDominantLanguageOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BatchDetectDominantLanguageResponse, func(s *smithy.Schema) error {

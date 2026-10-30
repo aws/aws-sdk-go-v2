@@ -54,7 +54,9 @@ func (v *UpdateGlobalSettingsInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *UpdateGlobalSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeGlobalSettings(s, schemas.UpdateGlobalSettingsInput_GlobalSettings, v.GlobalSettings)
+	if v.GlobalSettings != nil {
+		serializeGlobalSettings(s, schemas.UpdateGlobalSettingsInput_GlobalSettings, v.GlobalSettings)
+	}
 }
 
 type UpdateGlobalSettingsOutput struct {

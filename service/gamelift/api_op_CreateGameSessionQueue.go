@@ -172,7 +172,9 @@ func (v *CreateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.CustomEventData != nil {
 		s.WriteString(schemas.CreateGameSessionQueueInput_CustomEventData, *v.CustomEventData)
 	}
-	serializeGameSessionQueueDestinationList(s, schemas.CreateGameSessionQueueInput_Destinations, v.Destinations)
+	if v.Destinations != nil {
+		serializeGameSessionQueueDestinationList(s, schemas.CreateGameSessionQueueInput_Destinations, v.Destinations)
+	}
 	if v.FilterConfiguration != nil {
 		s.WriteStruct(schemas.CreateGameSessionQueueInput_FilterConfiguration)
 		v.FilterConfiguration.SerializeMembers(s)
@@ -184,13 +186,17 @@ func (v *CreateGameSessionQueueInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.NotificationTarget != nil {
 		s.WriteString(schemas.CreateGameSessionQueueInput_NotificationTarget, *v.NotificationTarget)
 	}
-	serializePlayerLatencyPolicyList(s, schemas.CreateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	if v.PlayerLatencyPolicies != nil {
+		serializePlayerLatencyPolicyList(s, schemas.CreateGameSessionQueueInput_PlayerLatencyPolicies, v.PlayerLatencyPolicies)
+	}
 	if v.PriorityConfiguration != nil {
 		s.WriteStruct(schemas.CreateGameSessionQueueInput_PriorityConfiguration)
 		v.PriorityConfiguration.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	serializeTagList(s, schemas.CreateGameSessionQueueInput_Tags, v.Tags)
+	if v.Tags != nil {
+		serializeTagList(s, schemas.CreateGameSessionQueueInput_Tags, v.Tags)
+	}
 	if v.TimeoutInSeconds != nil {
 		s.WriteInt32(schemas.CreateGameSessionQueueInput_TimeoutInSeconds, *v.TimeoutInSeconds)
 	}

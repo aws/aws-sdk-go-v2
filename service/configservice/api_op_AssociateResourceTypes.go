@@ -60,7 +60,9 @@ func (v *AssociateResourceTypesInput) SerializeMembers(s smithy.ShapeSerializer)
 	if v.ConfigurationRecorderArn != nil {
 		s.WriteString(schemas.AssociateResourceTypesRequest_ConfigurationRecorderArn, *v.ConfigurationRecorderArn)
 	}
-	serializeResourceTypeList(s, schemas.AssociateResourceTypesRequest_ResourceTypes, v.ResourceTypes)
+	if v.ResourceTypes != nil {
+		serializeResourceTypeList(s, schemas.AssociateResourceTypesRequest_ResourceTypes, v.ResourceTypes)
+	}
 }
 
 type AssociateResourceTypesOutput struct {

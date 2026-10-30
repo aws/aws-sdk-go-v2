@@ -81,7 +81,9 @@ func (v *GetRelationalDatabaseBlueprintsOutput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *GetRelationalDatabaseBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeRelationalDatabaseBlueprintList(s, schemas.GetRelationalDatabaseBlueprintsResult_blueprints, v.Blueprints)
+	if v.Blueprints != nil {
+		serializeRelationalDatabaseBlueprintList(s, schemas.GetRelationalDatabaseBlueprintsResult_blueprints, v.Blueprints)
+	}
 	if v.NextPageToken != nil {
 		s.WriteString(schemas.GetRelationalDatabaseBlueprintsResult_nextPageToken, *v.NextPageToken)
 	}

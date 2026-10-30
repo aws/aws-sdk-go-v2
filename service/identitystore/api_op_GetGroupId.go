@@ -60,7 +60,9 @@ func (v *GetGroupIdInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *GetGroupIdInput) SerializeMembers(s smithy.ShapeSerializer) {
-	serializeAlternateIdentifier(s, schemas.GetGroupIdRequest_AlternateIdentifier, v.AlternateIdentifier)
+	if v.AlternateIdentifier != nil {
+		serializeAlternateIdentifier(s, schemas.GetGroupIdRequest_AlternateIdentifier, v.AlternateIdentifier)
+	}
 	if v.IdentityStoreId != nil {
 		s.WriteString(schemas.GetGroupIdRequest_IdentityStoreId, *v.IdentityStoreId)
 	}
