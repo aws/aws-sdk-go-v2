@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/smithy-go"
 )
 
 type mockTemporaryError struct{ b bool }
@@ -68,6 +69,21 @@ func (m *mockErrorCodeError) Error() string {
 func (m *mockErrorCodeError) Unwrap() error {
 	return m.err
 }
+
+// mockModeledAPIError stands in for an error that deserialized to a modeled
+// error type of a service client.
+type mockModeledAPIError struct {
+	code string
+	err  error
+}
+
+func (m *mockModeledAPIError) ErrorCode() string             { return m.code }
+func (m *mockModeledAPIError) ErrorMessage() string          { return m.code }
+func (m *mockModeledAPIError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (m *mockModeledAPIError) Error() string {
+	return fmt.Sprintf("%v: mock modeled error", m.code)
+}
+func (m *mockModeledAPIError) Unwrap() error { return m.err }
 
 func TestRetryConnectionErrors(t *testing.T) {
 	cases := map[string]struct {
@@ -310,3 +326,150 @@ func TestDNSError(t *testing.T) {
 		})
 	}
 }
+
+func TestDefaultRetryables_HTTPStatusCode429(t *testing.T) {
+	cases := map[string]struct {
+		Err    error
+		Expect aws.Ternary
+	}{
+		"429": {
+			Err:    &mockStatusCodeError{code: 429},
+			Expect: aws.TrueTernary,
+		},
+		"429 with unknown code": {
+			Err: &mockErrorCodeError{
+				code: "SomeUnmodeledError",
+				err:  &mockStatusCodeError{code: 429},
+			},
+			Expect: aws.TrueTernary,
+		},
+		"429 explicitly not retryable": {
+			Err: &mockExplicitRetryableError{
+				err:       &mockStatusCodeError{code: 429},
+				retryable: false,
+			},
+			Expect: aws.FalseTernary,
+		},
+		"429 generic API error": {
+			Err: fmt.Errorf("some error, %w", &mockGenericAPIErrorWrapper{
+				status: 429,
+				err:    &smithy.GenericAPIError{Code: "SomeUnmodeledError"},
+			}),
+			Expect: aws.TrueTernary,
+		},
+		"429 modeled error": {
+			Err: &mockModeledAPIError{
+				code: "ConcurrentResourcesLimitExceededException",
+				err:  &mockStatusCodeError{code: 429},
+			},
+			Expect: aws.UnknownTernary,
+		},
+		"429 modeled error explicitly retryable": {
+			Err: &mockExplicitRetryableError{
+				err: &mockModeledAPIError{
+					code: "ModeledRetryableException",
+					err:  &mockStatusCodeError{code: 429},
+				},
+				retryable: true,
+			},
+			Expect: aws.TrueTernary,
+		},
+		"429 modeled throttle error code": {
+			Err: &mockModeledAPIError{
+				code: "TooManyRequestsException",
+				err:  &mockStatusCodeError{code: 429},
+			},
+			Expect: aws.TrueTernary,
+		},
+		"500 modeled error": {
+			Err: &mockModeledAPIError{
+				code: "InternalServerException",
+				err:  &mockStatusCodeError{code: 500},
+			},
+			Expect: aws.TrueTernary,
+		},
+		"400": {
+			Err:    &mockStatusCodeError{code: 400},
+			Expect: aws.UnknownTernary,
+		},
+	}
+
+	r := IsErrorRetryables(DefaultRetryables)
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			if e, a := c.Expect, r.IsErrorRetryable(c.Err); e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+		})
+	}
+}
+
+func TestDefaultThrottles_HTTPStatusCode429(t *testing.T) {
+	cases := map[string]struct {
+		Err    error
+		Expect aws.Ternary
+	}{
+		"429": {
+			Err:    &mockStatusCodeError{code: 429},
+			Expect: aws.TrueTernary,
+		},
+		"nested 429 with unknown code": {
+			Err: fmt.Errorf("some error, %w", &mockErrorCodeError{
+				code: "SomeUnmodeledError",
+				err:  &mockStatusCodeError{code: 429},
+			}),
+			Expect: aws.TrueTernary,
+		},
+		"429 generic API error": {
+			Err: &mockGenericAPIErrorWrapper{
+				status: 429,
+				err:    &smithy.GenericAPIError{Code: "SomeUnmodeledError"},
+			},
+			Expect: aws.TrueTernary,
+		},
+		"429 modeled error": {
+			Err: &mockModeledAPIError{
+				code: "TooManyLabelsException",
+				err:  &mockStatusCodeError{code: 429},
+			},
+			Expect: aws.UnknownTernary,
+		},
+		"429 modeled throttle error code": {
+			Err: &mockModeledAPIError{
+				code: "ThrottlingException",
+				err:  &mockStatusCodeError{code: 429},
+			},
+			Expect: aws.TrueTernary,
+		},
+		"500": {
+			Err:    &mockStatusCodeError{code: 500},
+			Expect: aws.UnknownTernary,
+		},
+		"other error": {
+			Err:    fmt.Errorf("some other error"),
+			Expect: aws.UnknownTernary,
+		},
+	}
+
+	r := IsErrorThrottles(DefaultThrottles)
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			if e, a := c.Expect, r.IsErrorThrottle(c.Err); e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+		})
+	}
+}
+
+// mockGenericAPIErrorWrapper carries an HTTP status code and wraps the API
+// error that the response deserialized to, like smithyhttp.ResponseError.
+type mockGenericAPIErrorWrapper struct {
+	status int
+	err    error
+}
+
+func (m *mockGenericAPIErrorWrapper) HTTPStatusCode() int { return m.status }
+func (m *mockGenericAPIErrorWrapper) Error() string {
+	return fmt.Sprintf("status %d: %v", m.status, m.err)
+}
+func (m *mockGenericAPIErrorWrapper) Unwrap() error { return m.err }

@@ -1,6 +1,7 @@
 ReceiveMessage
 	Initialize stack step
 		SQSValidateMessageChecksum
+		SetLongPollingContext
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput

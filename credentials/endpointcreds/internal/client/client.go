@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"time"
@@ -63,14 +64,12 @@ func New(options Options, optFns ...func(*Options)) *Client {
 
 	if options.Retryer == nil {
 		// Amazon-owned implementations of this endpoint are known to sometimes
-		// return plaintext responses (i.e. no Code) like normal, add a few
-		// additional status codes
+		// return plaintext responses (i.e. no Code) like normal, so retry an
+		// HTTP 429 response. EndpointError is not a modeled error type, so
+		// the check doesn't rely on retry.RetryableHTTPStatusCode, which
+		// leaves a 429 to an API error's own retry rules.
 		options.Retryer = retry.NewStandard(func(o *retry.StandardOptions) {
-			o.Retryables = append(o.Retryables, retry.RetryableHTTPStatusCode{
-				Codes: map[int]struct{}{
-					http.StatusTooManyRequests: {},
-				},
-			})
+			o.Retryables = append(o.Retryables, retry.IsErrorRetryableFunc(retryTooManyRequests))
 		})
 	}
 
@@ -127,6 +126,16 @@ type GetCredentialsOutput struct {
 	SecretAccessKey string
 	Token           string
 	AccountID       string
+}
+
+// retryTooManyRequests returns true if the error is an EndpointError for an
+// HTTP 429 response.
+func retryTooManyRequests(err error) aws.Ternary {
+	var v *EndpointError
+	if errors.As(err, &v) && v.HTTPStatusCode() == http.StatusTooManyRequests {
+		return aws.TrueTernary
+	}
+	return aws.UnknownTernary
 }
 
 // EndpointError is an error returned from the endpoint service

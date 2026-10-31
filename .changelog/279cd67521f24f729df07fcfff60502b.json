@@ -1,0 +1,14 @@
+{
+    "id": "279cd675-21f2-4f72-9df0-7fcfff60502b",
+    "type": "feature",
+    "description": "Make Retry Behavior 2.1 the default for standard and adaptive retry modes and remove the AWS_NEW_RETRIES_2026 flag. HTTP 429 is now retried as a throttling error when the response does not deserialize to a modeled error type. Custom BackoffDelayer and Retryer.RetryDelay implementations now receive a 0-based retry index (the first retry is 0). An explicitly configured NewExponentialJitterBackoff keeps its previous delays.",
+    "modules": [
+        ".",
+        "credentials",
+        "service/dynamodb",
+        "service/dynamodbstreams",
+        "service/sfn",
+        "service/sqs",
+        "service/swf"
+    ]
+}
