@@ -35,8 +35,8 @@ func TestClient_resolveRetryOptions(t *testing.T) {
 		"defaults": {
 			defaultsMode:            aws.DefaultsModeStandard,
 			expectClientRetryMode:   aws.RetryModeStandard,
-			expectClientMaxAttempts: 3,
-			expectOpMaxAttempts:     3,
+			expectClientMaxAttempts: 4,
+			expectOpMaxAttempts:     4,
 		},
 		"custom default retry": {
 			retryMode:               aws.RetryModeAdaptive,

@@ -90,11 +90,8 @@ public class LongPollingRetryIntegration implements GoIntegration {
 
     private void writeSetLongPollingContext(GoWriter writer) {
         writer.write(goTemplate("""
-                $os:D $internalcontext:D $middleware:D
+                $internalcontext:D $middleware:D
                 func addSetLongPollingContext(stack *middleware.Stack, options Options) error {
-                    if os.Getenv("AWS_NEW_RETRIES_2026") != "true" {
-                        return nil
-                    }
                     return stack.Initialize.Add(&setLongPollingContextMiddleware{}, middleware.Before)
                 }
 
@@ -110,8 +107,7 @@ public class LongPollingRetryIntegration implements GoIntegration {
                 }
                 """, Map.of(
                 "internalcontext", AwsGoDependency.INTERNAL_CONTEXT,
-                "middleware", SmithyGoDependency.SMITHY_MIDDLEWARE,
-                "os", SmithyGoDependency.OS
+                "middleware", SmithyGoDependency.SMITHY_MIDDLEWARE
         )));
     }
 
